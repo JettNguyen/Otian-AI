@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
@@ -54,6 +55,154 @@
         <span class="section-label fade-up">The Process</span>
         <h1 class="fade-up delay-1">How It Works</h1>
         <p class="fade-up delay-2">From your first question to a running AI assistant. Here is the full picture.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Architecture Diagram
+         ============================== -->
+    <section class="section section-alt arch-section" aria-labelledby="arch-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Under the Hood</span>
+          <h2 id="arch-heading" class="fade-up delay-1">How It All Connects</h2>
+          <p class="fade-up delay-2">A few components working together behind the scenes. You just send a message.</p>
+        </div>
+
+        <div class="arch-diagram fade-up delay-1" role="img" aria-label="Diagram: you send a message to a Mac Mini running OpenClaw and an AI model, which takes actions on your apps and replies to you">
+
+          <!-- Panel 1: You -->
+          <div class="arch-panel arch-panel--you">
+            <strong class="arch-panel-title">You</strong>
+            <p class="arch-panel-desc">Message your assistant from any of these</p>
+            <div class="arch-logo-grid">
+              <div class="arch-logo-item">
+                <i class="fa-brands fa-whatsapp" style="color:#25D366" aria-hidden="true"></i>
+                <span>WhatsApp</span>
+              </div>
+              <div class="arch-logo-item">
+                <i class="fa-brands fa-telegram" style="color:#26A5E4" aria-hidden="true"></i>
+                <span>Telegram</span>
+              </div>
+              <div class="arch-logo-item">
+                <i class="fa-regular fa-envelope" style="color:#EA4335" aria-hidden="true"></i>
+                <span>Email</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 1: You <-> Mac Mini -->
+          <div class="arch-flow" aria-hidden="true">
+            <span class="arch-flow-label">message</span>
+            <div class="arch-flow-track">
+              <div class="arch-flow-line"></div>
+              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M0 0l7 5-7 5z"/></svg>
+            </div>
+            <div class="arch-flow-track arch-flow-track--rev">
+              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M7 0L0 5l7 5z"/></svg>
+              <div class="arch-flow-line"></div>
+            </div>
+            <span class="arch-flow-label">response</span>
+          </div>
+
+          <!-- Panel 2: Mac Mini (hardware container) -->
+          <div class="arch-hardware">
+            <div class="arch-hardware-label" aria-hidden="true">
+              <i class="fa-brands fa-apple arch-apple-icon" aria-hidden="true"></i>
+              Mac Mini, always on
+            </div>
+
+            <div class="arch-panel arch-panel--agent">
+              <div class="arch-panel-icon arch-panel-icon--accent">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+                </svg>
+              </div>
+              <strong class="arch-panel-title arch-panel-title--accent">OpenClaw Agent</strong>
+              <p class="arch-panel-desc">Receives your message, decides what to do, and executes it</p>
+            </div>
+
+            <div class="arch-internal-flow" aria-hidden="true">
+              <span class="arch-internal-label">API call</span>
+              <div class="arch-internal-tracks">
+                <div class="arch-flow-track arch-flow-track--down">
+                  <div class="arch-flow-line arch-flow-line--v"></div>
+                  <svg class="arch-flow-head" viewBox="0 0 10 7" fill="currentColor"><path d="M0 0l5 7 5-7z"/></svg>
+                </div>
+                <div class="arch-flow-track arch-flow-track--up">
+                  <svg class="arch-flow-head" viewBox="0 0 10 7" fill="currentColor"><path d="M0 7l5-7 5 7z"/></svg>
+                  <div class="arch-flow-line arch-flow-line--v"></div>
+                </div>
+              </div>
+              <span class="arch-internal-label">decision</span>
+            </div>
+
+            <div class="arch-panel arch-panel--model">
+              <strong class="arch-panel-title">AI Model</strong>
+              <p class="arch-panel-desc">The reasoning engine. Understands language and figures out what to do.</p>
+              <div class="arch-logo-grid">
+                <div class="arch-logo-item">
+                  <img src="https://www.google.com/s2/favicons?domain=claude.ai&sz=64" alt="Claude" />
+                  <span>Claude</span>
+                </div>
+                <div class="arch-logo-item">
+                  <img src="https://www.google.com/s2/favicons?domain=chatgpt.com&sz=64" alt="ChatGPT" />
+                  <span>ChatGPT</span>
+                </div>
+                <div class="arch-logo-item">
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="#8E75B2" d="M12 2L13.5 10.5L22 12L13.5 13.5L12 22L10.5 13.5L2 12L10.5 10.5Z"/>
+                  </svg>
+                  <span>Gemini</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 2: Mac Mini <-> Your Apps -->
+          <div class="arch-flow arch-flow--accent" aria-hidden="true">
+            <span class="arch-flow-label">action</span>
+            <div class="arch-flow-track">
+              <div class="arch-flow-line"></div>
+              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M0 0l7 5-7 5z"/></svg>
+            </div>
+            <div class="arch-flow-track arch-flow-track--rev">
+              <svg class="arch-flow-head" viewBox="0 0 7 10" fill="currentColor"><path d="M7 0L0 5l7 5z"/></svg>
+              <div class="arch-flow-line"></div>
+            </div>
+            <span class="arch-flow-label">result</span>
+          </div>
+
+          <!-- Panel 3: Your Apps -->
+          <div class="arch-panel arch-panel--apps">
+            <strong class="arch-panel-title">Your Apps</strong>
+            <p class="arch-panel-desc">What gets done on your behalf</p>
+            <ul class="arch-apps-list">
+              <li>
+                <i class="fa-regular fa-envelope" style="color:#EA4335" aria-hidden="true"></i>
+                Email
+              </li>
+              <li>
+                <i class="fa-regular fa-calendar" style="color:#4285F4" aria-hidden="true"></i>
+                Calendar
+              </li>
+              <li>
+                <i class="fa-brands fa-google" style="color:#FBBC04" aria-hidden="true"></i>
+                Web Search
+              </li>
+              <li>
+                <i class="fa-brands fa-google-drive" style="color:#34A853" aria-hidden="true"></i>
+                Files
+              </li>
+              <li>
+                <img src="https://www.google.com/s2/favicons?domain=notion.so&sz=64" alt="" />
+                Notes
+              </li>
+            </ul>
+          </div>
+
+        </div><!-- /.arch-diagram -->
       </div>
     </section>
 

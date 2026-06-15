@@ -11,9 +11,9 @@
   --bg-primary: #0d0d0d;
   --bg-secondary: #141414;
   --bg-card: #1a1a1a;
-  --accent: #c0392b;
+  --accent: #e04040;
   --accent-hover: #e74c3c;
-  --accent-subtle: rgba(192, 57, 43, 0.12);
+  --accent-subtle: rgba(224, 64, 64, 0.12);
   --text-primary: #f0f0f0;
   --text-secondary: #a0a0a0;
   --text-muted: #606060;
@@ -392,7 +392,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 .btn-primary:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(192, 57, 43, 0.35);
+  box-shadow: 0 4px 20px rgba(224, 64, 64, 0.35);
 }
 
 .btn-secondary {
@@ -521,7 +521,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   transform: translateX(-50%);
   width: 900px;
   height: 700px;
-  background: radial-gradient(ellipse at 50% 30%, rgba(192, 57, 43, 0.13) 0%, transparent 65%);
+  background: radial-gradient(ellipse at 50% 30%, rgba(224, 64, 64, 0.13) 0%, transparent 65%);
   pointer-events: none;
   z-index: 0;
 }
@@ -718,7 +718,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 
 .use-case-item:hover {
   background: var(--accent-subtle);
-  border-color: rgba(192, 57, 43, 0.22);
+  border-color: rgba(224, 64, 64, 0.22);
 }
 
 .use-case-item svg {
@@ -790,7 +790,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
    14. CTA Banner
    ======================================== */
 .cta-banner {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(192, 57, 43, 0.07) 100%);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, rgba(224, 64, 64, 0.07) 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 72px 48px;
@@ -960,7 +960,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 }
 
 .accordion-item.open {
-  border-color: rgba(192, 57, 43, 0.3);
+  border-color: rgba(224, 64, 64, 0.3);
 }
 
 .accordion-trigger {
@@ -1007,7 +1007,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 }
 
 .accordion-body-inner {
-  padding: 0 28px 24px;
+  padding: 14px 28px 24px;
   color: var(--text-secondary);
   font-size: 0.9375rem;
   line-height: 1.85;
@@ -1056,7 +1056,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 .form-input:focus,
 .form-textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.14);
+  box-shadow: 0 0 0 3px rgba(224, 64, 64, 0.14);
 }
 
 .form-input::placeholder,
@@ -1219,7 +1219,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 /* Inline note box */
 .inline-note {
   background: var(--accent-subtle);
-  border: 1px solid rgba(192, 57, 43, 0.18);
+  border: 1px solid rgba(224, 64, 64, 0.18);
   border-radius: var(--radius-sm);
   padding: 16px 20px;
   margin-bottom: 28px;
@@ -1477,8 +1477,8 @@ fieldset .checkbox-group {
 .team-avatar {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, rgba(192, 57, 43, 0.6) 0%, var(--bg-card) 100%);
-  border: 2px solid rgba(192, 57, 43, 0.3);
+  background: linear-gradient(135deg, rgba(224, 64, 64, 0.6) 0%, var(--bg-card) 100%);
+  border: 2px solid rgba(224, 64, 64, 0.3);
   border-radius: 50%;
   margin: 0 auto 20px;
   display: flex;
@@ -1676,7 +1676,411 @@ fieldset .checkbox-group {
 }
 
 /* ========================================
-   23. Fade-up Animation (IntersectionObserver)
+   23. Architecture Diagram (How It Works)
+   ======================================== */
+
+/* 5-column grid: panel | flow | hardware | flow | panel */
+.arch-diagram {
+  display: grid;
+  grid-template-columns: 1fr 68px 1.5fr 68px 1fr;
+  align-items: center;
+  gap: 0;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Diagram section: darker background so panels stand out */
+.arch-section {
+  background: var(--bg-primary);
+}
+
+/* Panels */
+.arch-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.arch-panel-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.arch-panel-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.arch-panel-icon--accent {
+  background: var(--accent-subtle);
+  border-color: rgba(224, 64, 64, 0.3);
+  color: var(--accent);
+}
+
+.arch-panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.arch-panel-title--accent {
+  color: var(--accent);
+}
+
+.arch-panel-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Pills (WhatsApp, Claude, etc.) */
+.arch-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.arch-pill {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 3px 10px;
+}
+
+.arch-pill--dim {
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Apps list */
+.arch-apps-list {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.arch-apps-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.arch-app-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* Hardware container (Mac Mini dashed box) */
+.arch-hardware {
+  border: 1.5px dashed rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius);
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.03);
+  position: relative;
+}
+
+.arch-hardware-label {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  padding: 2px 12px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.arch-apple-icon {
+  font-size: 15px;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.arch-panel--agent {
+  border-color: rgba(224, 64, 64, 0.22);
+  background: rgba(224, 64, 64, 0.03);
+  width: 100%;
+}
+
+.arch-panel--model {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* Internal flow: OpenClaw <-> AI Model (vertical) */
+.arch-internal-flow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0 12px 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.arch-internal-label {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.arch-internal-tracks {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  height: 32px;
+}
+
+/* Flow connectors (horizontal, between main panels) */
+.arch-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0 6px;
+}
+
+.arch-flow-label {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.arch-flow--accent .arch-flow-label {
+  color: rgba(224, 64, 64, 0.65);
+}
+
+/* Arrow tracks (horizontal lines with arrowheads) */
+.arch-flow-track {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+
+/* .arch-flow-track--rev: arrowhead is first in DOM, line second — no flex reversal needed */
+
+.arch-flow-line {
+  flex: 1;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.arch-flow--accent .arch-flow-line {
+  background: rgba(224, 64, 64, 0.35);
+}
+
+/* Vertical lines (inside hardware container) */
+.arch-flow-line--v {
+  flex: none;
+  width: 1.5px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.arch-flow-head {
+  width: 7px;
+  height: 10px;
+  color: rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+}
+
+.arch-flow--accent .arch-flow-head {
+  color: rgba(224, 64, 64, 0.5);
+}
+
+/* Vertical arrow tracks (inside arch-internal-tracks) */
+.arch-flow-track--down,
+.arch-flow-track--up {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 0;
+}
+
+.arch-flow-track--down .arch-flow-head,
+.arch-flow-track--up .arch-flow-head {
+  width: 10px;
+  height: 7px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile: vertical stack */
+@media (max-width: 768px) {
+  .arch-diagram {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+
+  .arch-hardware {
+    width: 100%;
+  }
+
+  .arch-flow {
+    flex-direction: row;
+    width: 100%;
+    padding: 12px 16px;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .internal-flow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Only outer connector tracks go vertical on mobile — internal --down/--up tracks stay as-is */
+  .arch-flow .arch-flow-track {
+    flex-direction: column;
+    width: auto;
+    height: 40px;
+  }
+
+  .arch-flow .arch-flow-line {
+    flex: 1;
+    width: 1.5px;
+    height: auto;
+  }
+
+  /* Rotate outer connector arrowheads for vertical flow on mobile */
+  .arch-flow-head {
+    width: 10px;
+    height: 7px;
+  }
+
+  .arch-flow .arch-flow-track:not(.arch-flow-track--rev) .arch-flow-head {
+    transform: rotate(90deg); /* ► → ▼ */
+  }
+
+  .arch-flow .arch-flow-track--rev .arch-flow-head {
+    transform: rotate(90deg); /* ◄ → ▲ */
+  }
+
+  .arch-flow--accent .arch-flow-line {
+    background: rgba(224, 64, 64, 0.35);
+  }
+}
+
+/* Logo grids inside arch panels */
+.arch-logo-grid {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.arch-logo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.arch-logo-item img,
+.arch-logo-item svg,
+.arch-logo-item i {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.arch-logo-item img {
+  object-fit: contain;
+}
+
+/* Font Awesome icon sizing inside logo boxes */
+.arch-logo-item i {
+  font-size: 20px;
+  line-height: 38px;
+  text-align: center;
+}
+
+.arch-logo-item span {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* App list icons */
+.arch-apps-list img,
+.arch-apps-list li svg,
+.arch-apps-list li i {
+  width: 18px;
+  font-size: 13px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.arch-apps-list img {
+  object-fit: contain;
+  height: 18px;
+  border-radius: 4px;
+}
+
+/* ========================================
+   24. Fade-up Animation (IntersectionObserver)
    ======================================== */
 .fade-up {
   opacity: 0;
@@ -1697,7 +2101,7 @@ fieldset .checkbox-group {
 .delay-6 { transition-delay: 0.6s; }
 
 /* ========================================
-   24. Responsive, max-width 1024px
+   25. Responsive, max-width 1024px
    ======================================== */
 @media (max-width: 1024px) {
   .feature-grid {
@@ -1719,7 +2123,7 @@ fieldset .checkbox-group {
 }
 
 /* ========================================
-   25. Responsive, max-width 768px
+   26. Responsive, max-width 768px
    ======================================== */
 @media (max-width: 768px) {
   :root {
@@ -1890,7 +2294,7 @@ fieldset .checkbox-group {
 }
 
 /* ========================================
-   26. Touch / Pointer Interaction
+   27. Touch / Pointer Interaction
    Hover transforms only on true pointer
    devices (mouse). Touch screens use
    :active states for tap feedback instead.
@@ -1926,7 +2330,7 @@ fieldset .checkbox-group {
 
   .team-card:active,
   .value-card:active {
-    border-color: rgba(192, 57, 43, 0.3);
+    border-color: rgba(224, 64, 64, 0.3);
   }
 
   .rating-option:active span {

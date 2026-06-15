@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions — Shared Styles
+   N&R AI Solutions | Shared Styles
    css/styles.css
    ======================================== */
 
@@ -506,7 +506,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 }
 
 /* ========================================
-   8. Hero — Home
+   8. Hero, Home
    ======================================== */
 .hero {
   min-height: 100vh;
@@ -671,10 +671,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-}
+/* feature-card hover: pointer devices only, see section 26 */
 
 .feature-icon {
   width: 48px;
@@ -1234,10 +1231,110 @@ p { color: var(--text-secondary); line-height: 1.8; }
   line-height: 1.75;
 }
 
-/* Fieldset option groups — add spacing after legend */
+/* Fieldset option groups, add spacing after legend */
 fieldset .radio-group,
 fieldset .checkbox-group {
   margin-top: 8px;
+}
+
+/* Welcome content block (Section 2 of intake form) */
+.welcome-content {
+  margin-bottom: 40px;
+}
+
+.welcome-content h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-top: 28px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.welcome-content h3:first-child {
+  margin-top: 0;
+}
+
+.welcome-content p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.welcome-content ul {
+  margin: 0 0 16px 0;
+  padding-left: 24px;
+}
+
+.welcome-content li {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+/* Rating scale (1-10) */
+.rating-scale {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.rating-label {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rating-options {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.rating-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.rating-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.rating-option span {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+  cursor: pointer;
+}
+
+.rating-option input[type="radio"]:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.rating-option input[type="radio"]:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* Conditional sub-field */
@@ -1378,10 +1475,7 @@ fieldset .checkbox-group {
   transition: transform var(--transition), border-color var(--transition);
 }
 
-.team-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.12);
-}
+/* team-card hover: pointer devices only, see section 26 */
 
 .team-avatar {
   width: 80px;
@@ -1432,10 +1526,7 @@ fieldset .checkbox-group {
   transition: transform var(--transition), border-color var(--transition);
 }
 
-.value-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.12);
-}
+/* value-card hover: pointer devices only, see section 26 */
 
 .value-icon {
   width: 56px;
@@ -1609,7 +1700,7 @@ fieldset .checkbox-group {
 .delay-6 { transition-delay: 0.6s; }
 
 /* ========================================
-   24. Responsive — ≤1024px
+   24. Responsive, max-width 1024px
    ======================================== */
 @media (max-width: 1024px) {
   .feature-grid {
@@ -1631,7 +1722,7 @@ fieldset .checkbox-group {
 }
 
 /* ========================================
-   25. Responsive — ≤768px
+   25. Responsive, max-width 768px
    ======================================== */
 @media (max-width: 768px) {
   :root {
@@ -1779,5 +1870,75 @@ fieldset .checkbox-group {
   .form-container {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  /* Rating scale: tighter on small screens */
+  .rating-scale {
+    gap: 8px;
+  }
+
+  .rating-options {
+    gap: 4px;
+  }
+
+  .rating-option span {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8125rem;
+  }
+
+  .rating-label {
+    font-size: 0.75rem;
+  }
+}
+
+/* ========================================
+   26. Touch / Pointer Interaction
+   Hover transforms only on true pointer
+   devices (mouse). Touch screens use
+   :active states for tap feedback instead.
+   ======================================== */
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .team-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .value-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .rating-option:hover span {
+    border-color: var(--accent);
+    color: var(--text-primary);
+    background: var(--accent-subtle);
+  }
+}
+
+/* Tap feedback for touch devices */
+@media (hover: none) {
+  .feature-card:active {
+    transform: scale(0.98);
+  }
+
+  .team-card:active,
+  .value-card:active {
+    border-color: rgba(192, 57, 43, 0.3);
+  }
+
+  .rating-option:active span {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+  }
+
+  .checkbox-option:active .checkbox-custom,
+  .radio-option:active .radio-custom {
+    border-color: var(--accent);
   }
 }

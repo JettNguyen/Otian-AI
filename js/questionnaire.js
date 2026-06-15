@@ -1,20 +1,21 @@
 /* ========================================
-   N&R AI Solutions — Questionnaire Form
+   N&R AI Solutions | Questionnaire Form
    js/questionnaire.js
    ======================================== */
 
 (function () {
   'use strict';
 
-  const TOTAL_STEPS = 6;
+  const TOTAL_STEPS = 7;
 
   const stepLabels = [
+    'Introduction',
+    'Welcome',
     'About You',
     'What You Want Help With',
-    'How Hands-On You Want to Be',
-    'Your Comfort Level',
-    'Powering Your Assistant',
-    'Anything Else'
+    'How Hands-On',
+    'Comfort Level',
+    'Closing'
   ];
 
   let currentStep = 0;
@@ -33,19 +34,18 @@
     const pct = Math.round(((currentStep + 1) / TOTAL_STEPS) * 100);
     if (progressFill)  progressFill.style.width = pct + '%';
     if (progressLabel) progressLabel.textContent = stepLabels[currentStep];
-    if (progressCount) progressCount.textContent = 'Step ' + (currentStep + 1) + ' of ' + TOTAL_STEPS;
+    if (progressCount) progressCount.textContent = 'Section ' + (currentStep + 1) + ' of ' + TOTAL_STEPS;
   }
 
   /* ── Show a specific step ── */
-  function showStep(index) {
+  function showStep(index, skipScroll) {
     steps.forEach(function (step, i) {
       step.classList.toggle('active', i === index);
     });
     currentStep = index;
     updateProgress();
 
-    /* Scroll to top of form area */
-    if (progressWrap) {
+    if (!skipScroll && progressWrap) {
       window.scrollTo({ top: progressWrap.offsetTop - 20, behavior: 'smooth' });
     }
   }
@@ -85,7 +85,6 @@
     clearAllErrors(stepEl);
     let valid = true;
 
-    /* Helper to mark a text/email/tel input as required */
     function requireInput(id, msg) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -96,8 +95,12 @@
     }
 
     switch (stepIndex) {
-      case 0: /* About You */
-        requireInput('fullName', 'Please enter your full name.');
+      case 0: /* Introduction, no required fields */
+      case 1: /* Welcome, no required fields */
+        break;
+
+      case 2: /* About You */
+        requireInput('fullName', 'Please enter your name.');
         var emailEl = document.getElementById('emailAddress');
         if (emailEl) {
           if (!emailEl.value.trim()) {
@@ -108,12 +111,11 @@
             valid = false;
           }
         }
-        requireInput('yourWorld', 'Please tell us a bit about your world.');
+        requireInput('profession', 'Please tell us your profession or line of work.');
         break;
 
-      case 1: /* What You Want Help With */
+      case 3: /* What You Want Help With */
         requireInput('handOffTask', 'Please describe the task you\'d like to hand off.');
-        /* At least one checkbox in helpOptions */
         var checkboxes = document.querySelectorAll('input[name="helpOptions"]');
         var anyChecked = false;
         checkboxes.forEach(function (cb) { if (cb.checked) anyChecked = true; });
@@ -122,23 +124,19 @@
           if (groupErr) groupErr.classList.add('visible');
           valid = false;
         }
-        /* Time radio */
-        var timeChecked = document.querySelector('input[name="timeSpent"]:checked');
-        if (!timeChecked) {
+        if (!document.querySelector('input[name="timeSpent"]:checked')) {
           var timeErr = document.getElementById('timeSpentError');
           if (timeErr) timeErr.classList.add('visible');
           valid = false;
         }
-        /* Messaging radio */
-        var msgChecked = document.querySelector('input[name="messagingPref"]:checked');
-        if (!msgChecked) {
+        if (!document.querySelector('input[name="messagingPref"]:checked')) {
           var msgErr = document.getElementById('messagingPrefError');
           if (msgErr) msgErr.classList.add('visible');
           valid = false;
         }
         break;
 
-      case 2: /* Hands-On */
+      case 4: /* How Hands-On */
         if (!document.querySelector('input[name="taskApproval"]:checked')) {
           var taErr = document.getElementById('taskApprovalError');
           if (taErr) taErr.classList.add('visible');
@@ -156,10 +154,10 @@
         }
         break;
 
-      case 3: /* Comfort Level */
-        if (!document.querySelector('input[name="techExperience"]:checked')) {
-          var teErr = document.getElementById('techExperienceError');
-          if (teErr) teErr.classList.add('visible');
+      case 5: /* Comfort Level */
+        if (!document.querySelector('input[name="techRating"]:checked')) {
+          var trErr = document.getElementById('techRatingError');
+          if (trErr) trErr.classList.add('visible');
           valid = false;
         }
         if (!document.querySelector('input[name="aiExperience"]:checked')) {
@@ -174,8 +172,7 @@
         }
         break;
 
-      case 4: /* Powering */
-        /* At least one AI checkbox */
+      case 6: /* Closing */
         var aiCBs = document.querySelectorAll('input[name="aiTools"]');
         var aiAny = false;
         aiCBs.forEach(function (cb) { if (cb.checked) aiAny = true; });
@@ -184,9 +181,6 @@
           if (aiErr) aiErr.classList.add('visible');
           valid = false;
         }
-        break;
-
-      case 5: /* Anything Else — no required fields */
         break;
     }
 
@@ -220,26 +214,55 @@
     });
   });
 
-  /* ── "Something else" checkbox → reveal text input ── */
-  var somethingElseCB   = document.getElementById('helpOther');
-  var somethingElseText = document.getElementById('somethingElseField');
-  if (somethingElseCB && somethingElseText) {
-    somethingElseCB.addEventListener('change', function () {
-      somethingElseText.classList.toggle('visible', somethingElseCB.checked);
+  /* ── helpOptions: max 3 selections ── */
+  function updateHelpOptionsState() {
+    var checked = document.querySelectorAll('input[name="helpOptions"]:checked');
+    var allCBs  = document.querySelectorAll('input[name="helpOptions"]');
+    var atMax   = checked.length >= 3;
+    allCBs.forEach(function (cb) {
+      if (!cb.checked) {
+        cb.disabled = atMax;
+        var opt = cb.closest('.checkbox-option');
+        if (opt) opt.style.opacity = atMax ? '0.4' : '';
+      }
     });
   }
 
-  /* ── Summary frequency → reveal preferred time ── */
-  var summaryRadios  = document.querySelectorAll('input[name="summaryFreq"]');
-  var summaryTimeRow = document.getElementById('summaryTimeRow');
+  document.querySelectorAll('input[name="helpOptions"]').forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      updateHelpOptionsState();
+    });
+  });
+
+  /* ── helpOptions "Other:" checkbox reveals text input ── */
+  var helpOtherCB   = document.getElementById('helpOther');
+  var helpOtherField = document.getElementById('somethingElseField');
+  if (helpOtherCB && helpOtherField) {
+    helpOtherCB.addEventListener('change', function () {
+      helpOtherField.classList.toggle('visible', helpOtherCB.checked);
+    });
+  }
+
+  /* ── summaryFreq "Other:" radio reveals text input ── */
+  var summaryRadios     = document.querySelectorAll('input[name="summaryFreq"]');
+  var summaryOtherField = document.getElementById('summaryOtherField');
   summaryRadios.forEach(function (radio) {
     radio.addEventListener('change', function () {
       var val = document.querySelector('input[name="summaryFreq"]:checked');
-      if (summaryTimeRow) {
-        summaryTimeRow.classList.toggle('visible', val && val.value !== 'none');
+      if (summaryOtherField) {
+        summaryOtherField.classList.toggle('visible', val && val.value === 'other');
       }
     });
   });
+
+  /* ── aiTools "Other:" checkbox reveals text input ── */
+  var aiToolsOtherCB    = document.getElementById('aiToolsOther');
+  var aiToolsOtherField = document.getElementById('aiToolsOtherField');
+  if (aiToolsOtherCB && aiToolsOtherField) {
+    aiToolsOtherCB.addEventListener('change', function () {
+      aiToolsOtherField.classList.toggle('visible', aiToolsOtherCB.checked);
+    });
+  }
 
   /* ── Submit handler ── */
   var submitBtn = document.getElementById('submitBtn');
@@ -248,12 +271,10 @@
       e.preventDefault();
       if (!validateStep(currentStep)) return;
 
-      /* Get first name for personalised thank-you */
       var fullName  = (document.getElementById('fullName') || {}).value || '';
       var firstName = fullName.trim().split(' ')[0] || 'there';
 
-      /* Show thank-you screen */
-      if (formEl)   formEl.style.display = 'none';
+      if (formEl)       formEl.style.display = 'none';
       if (progressWrap) progressWrap.style.display = 'none';
       if (thankyou) {
         thankyou.classList.add('visible');
@@ -266,5 +287,5 @@
   }
 
   /* ── Init ── */
-  showStep(0);
+  showStep(0, true);
 })();

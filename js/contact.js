@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions — Contact Form
+   N&R AI Solutions | Contact Form
    js/contact.js
    ======================================== */
 

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Started — N&amp;R AI Solutions</title>
+  <meta name="description" content="Tell us what you need. Fill out our short intake form and we'll build an AI assistant around your life." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">N<span class="logo-amp">&amp;</span>R AI Solutions</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/about">About</a>
+        <a href="/faq">FAQ</a>
+      </div>
+      <a href="/questionnaire" class="btn btn-primary btn-sm nav-cta active">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="/">Home</a>
+    <a href="/how-it-works">How It Works</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/about">About</a>
+    <a href="/faq">FAQ</a>
+    <a href="/contact">Contact</a>
+    <a href="/questionnaire" class="btn btn-primary nav-drawer-cta active">Get Started</a>
+  </nav>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Intake Form</span>
+        <h1 class="fade-up delay-1">Let's Get to Know You</h1>
+        <p class="fade-up delay-2">Answer a few short questions and we'll build something tailored to your life. Takes about five minutes.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Progress Bar
+         ============================== -->
+    <div class="progress-wrap" id="progressWrap" role="progressbar" aria-label="Form progress">
+      <div class="progress-wrap-inner">
+        <div class="progress-meta">
+          <span class="progress-step-label" id="progressLabel">About You</span>
+          <span class="progress-step-count" id="progressCount">Step 1 of 6</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==============================
+         Form
+         ============================== -->
+    <form id="questionnaireForm" novalidate aria-label="Intake questionnaire">
+      <div class="form-container">
+
+        <!-- ── Step 1: About You ── -->
+        <div class="form-step active" id="step-1" aria-label="Step 1: About You">
+          <h2 class="step-heading">About You</h2>
+          <p class="step-subheading">Let's start with the basics so we know who we're talking to.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full Name<span class="required-star" aria-hidden="true">*</span></label>
+            <input class="form-input" type="text" id="fullName" name="fullName" placeholder="Jane Smith" autocomplete="name" required />
+            <span class="form-error-msg" id="fullNameError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="emailAddress">Email Address<span class="required-star" aria-hidden="true">*</span></label>
+            <input class="form-input" type="email" id="emailAddress" name="emailAddress" placeholder="jane@example.com" autocomplete="email" required />
+            <span class="form-error-msg" id="emailAddressError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="phoneNumber">Phone Number</label>
+            <input class="form-input" type="tel" id="phoneNumber" name="phoneNumber" placeholder="(555) 123-4567" autocomplete="tel" />
+            <span class="form-hint">Optional — we'll use email as the primary way to reach you.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="yourWorld">Tell us a bit about your world.<span class="required-star" aria-hidden="true">*</span></label>
+            <textarea class="form-textarea" id="yourWorld" name="yourWorld" rows="5"
+              placeholder="e.g. I run a small photography business from home. Most of my week is spent on client emails, editing, and trying to keep up with invoices. My schedule changes a lot and I often miss follow-ups."></textarea>
+            <span class="form-error-msg" id="yourWorldError" role="alert"></span>
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left"></div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary btn-next">Next: What You Need →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 2: What You Want Help With ── -->
+        <div class="form-step" id="step-2" aria-label="Step 2: What You Want Help With">
+          <h2 class="step-heading">What You Want Help With</h2>
+          <p class="step-subheading">Tell us about the tasks that take up the most time or energy.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="handOffTask">If your AI assistant worked perfectly, what is one task you would love to hand off and never do again?<span class="required-star" aria-hidden="true">*</span></label>
+            <textarea class="form-textarea" id="handOffTask" name="handOffTask" rows="4"
+              placeholder="e.g. Going through my inbox every morning. There are so many emails and most of them don't need my attention — I just want to see what actually matters."></textarea>
+            <span class="form-error-msg" id="handOffTaskError" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Which of these would help you most? Select all that apply.<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="checkbox-group">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="email" />
+                  <span>Sorting and replying to email</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="calendar" />
+                  <span>Calendar, scheduling, and reminders</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="research" />
+                  <span>Research and looking things up</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="files" />
+                  <span>Organizing files</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="customers" />
+                  <span>Customer questions for my business</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="bills" />
+                  <span>Bill reminders and spending summaries</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="contacts" />
+                  <span>Staying in touch with people</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="helpOptions" value="other" id="helpOther" />
+                  <span>Something else</span>
+                </label>
+              </div>
+              <div class="conditional-field" id="somethingElseField">
+                <input class="form-input" type="text" id="helpOtherText" name="helpOtherText" placeholder="Describe it briefly…" />
+              </div>
+              <span class="form-error-msg" id="helpOptionsError" role="alert">Please select at least one option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Roughly how much time per week do you spend on tasks like that?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="timeSpent" value="under-2" />
+                  <span>Under 2 hours</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="timeSpent" value="2-5" />
+                  <span>2 to 5 hours</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="timeSpent" value="5-10" />
+                  <span>5 to 10 hours</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="timeSpent" value="10-plus" />
+                  <span>10+ hours</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="timeSpentError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">How would you like to message your assistant?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="messagingPref" value="whatsapp" />
+                  <span>WhatsApp</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="messagingPref" value="telegram" />
+                  <span>Telegram</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="messagingPref" value="email" />
+                  <span>Email</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="messagingPref" value="recommend" />
+                  <span>Not sure — recommend something</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="messagingPrefError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left">
+              <button type="button" class="btn btn-secondary btn-back">← Back</button>
+            </div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary btn-next">Next: How Hands-On →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 3: How Hands-On You Want to Be ── -->
+        <div class="form-step" id="step-3" aria-label="Step 3: How Hands-On You Want to Be">
+          <h2 class="step-heading">How Hands-On You Want to Be</h2>
+          <p class="step-subheading">This helps us set the right level of autonomy for your assistant from day one.</p>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">For routine, low-risk tasks — should your assistant just do it and tell you after, or check with you first?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="taskApproval" value="just-do" />
+                  <span>Just do it and tell me after</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="taskApproval" value="always-ask" />
+                  <span>Always ask me first</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="taskApproval" value="discuss" />
+                  <span>Depends on the task — let's discuss</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="taskApprovalError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="alwaysCheck">Is there anything you would always want it to check with you before doing?</label>
+            <textarea class="form-textarea" id="alwaysCheck" name="alwaysCheck" rows="3"
+              placeholder="e.g. Never send an email on my behalf without showing it to me first. Never schedule anything on Fridays."></textarea>
+            <span class="form-hint">Optional</span>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">If it spots something time-sensitive, how should it let you know?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="urgentNotify" value="daily-summary" />
+                  <span>Save it for my daily summary</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="urgentNotify" value="right-away" />
+                  <span>Message me right away</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="urgentNotify" value="depends" />
+                  <span>Depends on how serious — use your judgment</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="urgentNotifyError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Would you like a regular summary of what your assistant has been up to?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="summaryFreq" value="daily" />
+                  <span>Daily</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="summaryFreq" value="weekly" />
+                  <span>Weekly</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="summaryFreq" value="both" />
+                  <span>Both</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="summaryFreq" value="none" />
+                  <span>None for now</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="summaryFreqError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group conditional-field" id="summaryTimeRow">
+            <label class="form-label" for="summaryTime">What time works best for your summary?</label>
+            <input class="form-input" type="text" id="summaryTime" name="summaryTime" placeholder="e.g. 8:00 AM, end of day, after lunch…" />
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left">
+              <button type="button" class="btn btn-secondary btn-back">← Back</button>
+            </div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary btn-next">Next: Comfort Level →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 4: Your Comfort Level ── -->
+        <div class="form-step" id="step-4" aria-label="Step 4: Your Comfort Level">
+          <h2 class="step-heading">Your Comfort Level</h2>
+          <p class="step-subheading">There's no wrong answer here — this helps us communicate with you in the right way.</p>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">How would you describe your experience with computers?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="techExperience" value="beginner" />
+                  <span>Beginner — I use the basics and that's about it</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="techExperience" value="comfortable" />
+                  <span>Comfortable — I get things done without too much trouble</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="techExperience" value="confident" />
+                  <span>Confident — I'm pretty good with technology</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="techExperienceError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Have you used AI tools before, like ChatGPT?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="aiExperience" value="yes" />
+                  <span>Yes</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="aiExperience" value="no" />
+                  <span>No</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="aiExperience" value="unsure" />
+                  <span>Not sure what that is</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="aiExperienceError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Would you prefer we fully manage everything, or would you like to learn how it works?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="managePref" value="fully-managed" />
+                  <span>Fully managed — just make it work, I don't need the details</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="managePref" value="teach-me" />
+                  <span>Teach me — I'd like to understand how it works</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="managePref" value="mix" />
+                  <span>A mix of both</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="managePrefError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left">
+              <button type="button" class="btn btn-secondary btn-back">← Back</button>
+            </div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary btn-next">Next: Powering Your Assistant →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 5: Powering Your Assistant ── -->
+        <div class="form-step" id="step-5" aria-label="Step 5: Powering Your Assistant">
+          <h2 class="step-heading">Powering Your Assistant</h2>
+          <p class="step-subheading">A quick note about how AI models work.</p>
+
+          <div class="inline-note">
+            <strong>A quick note on AI models:</strong> Your assistant runs on an AI model like Claude or ChatGPT. These models are provided by separate companies and have their own small monthly subscription — typically around $20/month. We'll help you choose the right one and walk you through setting it up. This is separate from our service fee.
+          </div>
+
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Do you already pay for any of these?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="checkbox-group">
+                <label class="checkbox-option">
+                  <input type="checkbox" name="aiTools" value="claude" />
+                  <span>Claude (by Anthropic)</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="aiTools" value="chatgpt" />
+                  <span>ChatGPT (by OpenAI)</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="aiTools" value="gemini" />
+                  <span>Gemini (by Google)</span>
+                </label>
+                <label class="checkbox-option">
+                  <input type="checkbox" name="aiTools" value="none" />
+                  <span>None — please recommend one</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="aiToolsError" role="alert">Please select at least one option.</span>
+            </fieldset>
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left">
+              <button type="button" class="btn btn-secondary btn-back">← Back</button>
+            </div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary btn-next">Next: Final Step →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Step 6: Anything Else ── -->
+        <div class="form-step" id="step-6" aria-label="Step 6: Anything Else">
+          <h2 class="step-heading">Anything Else?</h2>
+          <p class="step-subheading">Almost done. This is a good place to mention anything that didn't fit the earlier questions.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="anythingElse">Is there anything else you'd like us to know?</label>
+            <textarea class="form-textarea" id="anythingElse" name="anythingElse" rows="6"
+              placeholder="e.g. I travel frequently and work across two time zones. I have an existing Google Workspace account. I tried an AI tool once and found it confusing — I'm hoping this is different."></textarea>
+            <span class="form-hint">Optional — but always appreciated.</span>
+          </div>
+
+          <div class="step-nav">
+            <div class="step-nav-left">
+              <button type="button" class="btn btn-secondary btn-back">← Back</button>
+            </div>
+            <div class="step-nav-right">
+              <button type="button" class="btn btn-primary" id="submitBtn">Submit →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.form-container -->
+    </form>
+
+    <!-- ==============================
+         Thank-You Screen
+         ============================== -->
+    <div class="thankyou-screen" id="thankyouScreen" role="status" aria-live="polite">
+      <div class="thankyou-icon" aria-hidden="true">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h2>Thanks, <span id="thankyouName">there</span>.</h2>
+      <p>We've received your answers and will be in touch shortly to schedule your setup call.</p>
+      <a href="/" class="btn btn-secondary">← Back to Home</a>
+    </div>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">N<span class="logo-amp">&amp;</span>R AI Solutions</div>
+          <p class="footer-tagline">AI assistants built for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="/">Home</a>
+            <a href="/how-it-works">How It Works</a>
+            <a href="/pricing">Pricing</a>
+            <a href="/about">About</a>
+            <a href="/faq">FAQ</a>
+            <a href="/contact">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:hello@nrandsolutions.com" class="footer-contact-email">hello@nrandsolutions.com</a>
+          <a href="/questionnaire" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 N&amp;R AI Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/nav.js"></script>
+  <script src="/js/questionnaire.js"></script>
+</body>
+</html>

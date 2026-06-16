@@ -22,6 +22,51 @@
     } catch (e) { /* skip non-navigable hrefs */ }
   });
 
+  var moreContainer = document.getElementById('navMore');
+  var moreToggle = document.getElementById('navMoreToggle');
+  var moreMenu = document.getElementById('navMoreMenu');
+
+  if (moreContainer && moreToggle && moreMenu) {
+    var hasActiveMoreLink = !!moreMenu.querySelector('a.active');
+    if (hasActiveMoreLink) {
+      moreToggle.classList.add('active');
+    }
+
+    function openMoreMenu() {
+      moreContainer.classList.add('open');
+      moreToggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMoreMenu() {
+      moreContainer.classList.remove('open');
+      moreToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    moreToggle.addEventListener('click', function () {
+      if (moreContainer.classList.contains('open')) {
+        closeMoreMenu();
+      } else {
+        openMoreMenu();
+      }
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!moreContainer.contains(event.target)) {
+        closeMoreMenu();
+      }
+    });
+
+    moreMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', closeMoreMenu);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeMoreMenu();
+      }
+    });
+  }
+
   /* ── Scroll: nav opacity ── */
   const nav = document.getElementById('nav');
   if (nav) {

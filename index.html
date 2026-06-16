@@ -20,11 +20,20 @@
     <div class="nav-inner">
       <a href="./" class="nav-logo"><img src="assets/icon-1024.png" alt="N&amp;R AI Solutions" /></a>
       <div class="nav-links">
-        <a href="./" class="active">Home</a>
+        <a href="./">Home</a>
         <a href="how-it-works/">How It Works</a>
         <a href="pricing/">Pricing</a>
-        <a href="about/">About</a>
-        <a href="faq/">FAQ</a>
+        <div class="nav-more" id="navMore">
+          <button class="nav-more-toggle" id="navMoreToggle" aria-expanded="false" aria-controls="navMoreMenu" type="button">
+            More
+          </button>
+          <div class="nav-more-menu" id="navMoreMenu" role="menu" aria-label="More pages">
+            <a href="about/" role="menuitem">About</a>
+            <a href="ai-explained/" role="menuitem">AI Explained</a>
+            <a href="contact/" role="menuitem">Contact</a>
+            <a href="faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
       </div>
       <a href="questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
       <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
@@ -40,6 +49,7 @@
     <a href="pricing/">Pricing</a>
     <a href="about/">About</a>
     <a href="faq/">FAQ</a>
+    <a href="ai-explained/">AI Explained</a>
     <a href="contact/">Contact</a>
     <a href="questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
   </nav>
@@ -53,10 +63,10 @@
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-inner">
         <div class="hero-content">
-          <span class="section-label fade-up">Remote AI Setup, Available Anywhere</span>
+          <span class="section-label fade-up">Done-for-You Setup. Managed Ongoing. Anywhere in the US.</span>
           <h1 class="fade-up delay-1">Your Personal AI&nbsp;Assistant.<br><em>Set Up For&nbsp;You.</em></h1>
           <p class="hero-subtitle fade-up delay-2">
-            We build and manage AI assistants that handle your everyday tasks so you can focus on what matters.
+            We set up and run a personal AI assistant for you - no apps to learn, no settings to manage. You message it like a coworker, and it gets things done.
           </p>
           <div class="hero-actions fade-up delay-3">
             <a href="questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
@@ -73,7 +83,7 @@
       <div class="proof-bar-inner">
         <span class="proof-label">Fully remote. We work with clients across the US.</span>
         <div class="proof-chips">
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>10+ Hours Saved Per Week</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Typically Saves 10+ Hours a Week</span>
           <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Setup in Days, Not Months</span>
           <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Always Human-Approved</span>
         </div>
@@ -88,11 +98,22 @@
         <div class="section-header">
           <span class="section-label fade-up">What We Do</span>
           <h2 id="what-heading" class="fade-up delay-1">What is a Personal AI Assistant?</h2>
-          <p class="fade-up delay-2">Not a chatbot. Not a gimmick. A real, working assistant that you message like a person. It gets things done.</p>
+          <p class="fade-up delay-2">Think of it like hiring a remote assistant who happens to be powered by AI. You text or email it tasks - "reply to this client," "find me a flight," "sort these files" - and it does the work, then checks in with you when needed.</p>
         </div>
         <div class="feature-grid">
 
           <article class="feature-card fade-up delay-1">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <h3>Always in Your Control</h3>
+            <p>Nothing happens without your approval. You decide what your assistant can and can't do. You can change that anytime.</p>
+          </article>
+
+          <article class="feature-card fade-up delay-2">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10"/>
@@ -103,7 +124,7 @@
             <p>Your assistant never sleeps. It quietly handles tasks in the background while you are busy or asleep, and fills you in when it is done.</p>
           </article>
 
-          <article class="feature-card fade-up delay-2">
+          <article class="feature-card fade-up delay-3">
             <div class="feature-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -113,17 +134,6 @@
             </div>
             <h3>No Tech Experience Needed</h3>
             <p>We handle every bit of setup and configuration so you never have to touch a settings menu or read a manual. You just use it.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-3">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <polyline points="9 12 11 14 15 10"/>
-              </svg>
-            </div>
-            <h3>Always in Your Control</h3>
-            <p>Nothing happens without your approval. You decide what your assistant can and can't do. You can change that anytime.</p>
           </article>
 
         </div>
@@ -138,7 +148,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Capabilities</span>
           <h2 id="help-heading" class="fade-up delay-1">What It Can Help With</h2>
-          <p class="fade-up delay-2">Your assistant can be configured for just about any routine task. Here are the most common ones.</p>
+          <p class="fade-up delay-2">Your assistant can take on almost any routine task - here are the ones people ask for most.</p>
         </div>
         <div class="use-cases-grid fade-up delay-1">
 
@@ -149,7 +159,7 @@
               <path d="M6 12h4"/>
               <path d="M6 16h2"/>
             </svg>
-            <span>Email &amp; Inbox</span>
+            <span class="use-case-text"><strong>Email &amp; Inbox</strong><span class="use-case-detail">Drafts replies, flags what needs you</span></span>
           </div>
 
           <div class="use-case-item">
@@ -159,7 +169,7 @@
               <line x1="8" y1="2" x2="8" y2="6"/>
               <line x1="3" y1="10" x2="21" y2="10"/>
             </svg>
-            <span>Scheduling &amp; Reminders</span>
+            <span class="use-case-text"><strong>Scheduling &amp; Reminders</strong><span class="use-case-detail">Books meetings, sends reminders</span></span>
           </div>
 
           <div class="use-case-item">
@@ -167,21 +177,31 @@
               <circle cx="11" cy="11" r="8"/>
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-            <span>Research &amp; Lookups</span>
+            <span class="use-case-text"><strong>Research &amp; Lookups</strong><span class="use-case-detail">Finds answers, compares options</span></span>
           </div>
 
           <div class="use-case-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
             </svg>
-            <span>File Organization</span>
+            <span class="use-case-text"><strong>File Organization</strong><span class="use-case-detail">Sorts, renames, files away</span></span>
           </div>
 
           <div class="use-case-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
-            <span>Customer Replies</span>
+            <span class="use-case-text"><strong>Customer Replies</strong><span class="use-case-detail">Answers common questions for you</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              <circle cx="9" cy="10" r="1"/>
+              <circle cx="15" cy="10" r="1"/>
+              <path d="M7 14c1.2 1 2.6 1.5 5 1.5s3.8-.5 5-1.5"/>
+            </svg>
+            <span class="use-case-text"><strong>Personal CRM</strong><span class="use-case-detail">Remembers your contacts, past conversations, and what's next</span></span>
           </div>
 
           <div class="use-case-item">
@@ -189,7 +209,7 @@
               <line x1="12" y1="1" x2="12" y2="23"/>
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
             </svg>
-            <span>Bill &amp; Budget Tracking</span>
+            <span class="use-case-text"><strong>Bill &amp; Budget Tracking</strong><span class="use-case-detail">Logs expenses, flags upcoming bills</span></span>
           </div>
 
           <div class="use-case-item">
@@ -199,7 +219,7 @@
               <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
               <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
             </svg>
-            <span>Following Up with Contacts</span>
+            <span class="use-case-text"><strong>Following Up with Contacts</strong><span class="use-case-detail">Sends reminders, drafts check-ins</span></span>
           </div>
 
         </div>
@@ -226,7 +246,7 @@
           <div class="step-item fade-up delay-2">
             <div class="step-number" aria-hidden="true">2</div>
             <h3>We Build and Set It Up</h3>
-            <p>We configure your assistant around your life. No tech skills required from you.</p>
+            <p>We configure your assistant around your life - for example, checking your inbox each morning and drafting replies to routine emails. No tech skills required from you.</p>
           </div>
           <div class="step-item fade-up delay-3">
             <div class="step-number" aria-hidden="true">3</div>
@@ -246,10 +266,12 @@
          ============================== -->
     <section class="section section-alt" aria-label="Call to action">
       <div class="container">
+        <p class="text-center mb-24">Built by Jett Nguyen and Jack Raney, based in Florida and Texas - we set up and personally manage every assistant ourselves.</p>
         <div class="cta-banner fade-up">
           <h2>Ready to get your time back?</h2>
           <p>Fill out our short form and we'll reach out to build something around your life. No obligation, no tech knowledge required.</p>
-          <a href="questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+          <p>Free setup call - no commitment, no contracts.</p>
+          <a href="questionnaire/" class="btn btn-primary btn-lg">Start My Free Setup Call</a>
         </div>
       </div>
     </section>
@@ -274,6 +296,7 @@
             <a href="pricing/">Pricing</a>
             <a href="about/">About</a>
             <a href="faq/">FAQ</a>
+            <a href="ai-explained/">AI Explained</a>
             <a href="contact/">Contact</a>
           </nav>
         </div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Explained | N&amp;R AI Solutions</title>
+  <meta name="description" content="Plain-English AI terms to help you understand assistants, automation, and how modern AI tools work." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024.png" type="image/png" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024.png" alt="N&amp;R AI Solutions" /></a>
+      <div class="nav-links">
+        <a href="../">Home</a>
+        <a href="../how-it-works/">How It Works</a>
+        <a href="../pricing/">Pricing</a>
+        <div class="nav-more" id="navMore">
+          <button class="nav-more-toggle" id="navMoreToggle" aria-expanded="false" aria-controls="navMoreMenu" type="button">
+            More
+          </button>
+          <div class="nav-more-menu" id="navMoreMenu" role="menu" aria-label="More pages">
+            <a href="../about/" role="menuitem">About</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <a href="../">Home</a>
+    <a href="../how-it-works/">How It Works</a>
+    <a href="../pricing/">Pricing</a>
+    <a href="../about/">About</a>
+    <a href="../faq/">FAQ</a>
+    <a href="../ai-explained/" class="active">AI Explained</a>
+    <a href="../contact/">Contact</a>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <main>
+    <section class="page-hero resource-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Free Resource</span>
+        <h1 class="fade-up delay-1">AI Terms, Explained</h1>
+        <p class="fade-up delay-2">A practical glossary in plain language. Built to help you understand what matters without the hype.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="glossary-heading">
+      <div class="container glossary-layout">
+        <div class="glossary-toolbar fade-up">
+          <h2 id="glossary-heading">Glossary</h2>
+          <p>Showing <span id="glossaryCount">0</span> entries</p>
+          <input id="glossarySearch" class="form-input" type="search" placeholder="Search terms, definitions, or examples" aria-label="Search glossary" />
+          <div id="azJumpNav" class="az-jump-nav" aria-label="Jump to letter"></div>
+        </div>
+
+        <aside class="glossary-side fade-up delay-1" aria-label="Curated sections">
+          <div class="glossary-side-card">
+            <h3>Start Here</h3>
+            <p>The core terms most relevant to using an AI assistant day to day.</p>
+            <div id="startHereList" class="start-here-list"></div>
+          </div>
+
+          <div class="glossary-side-card">
+            <h3>Big Picture</h3>
+            <p>Broader AI-in-the-news concepts for context.</p>
+            <div id="bigPictureList" class="big-picture-list"></div>
+          </div>
+        </aside>
+
+        <div id="glossaryEntries" class="glossary-entries fade-up delay-2" role="list"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>Want help applying this to your day-to-day?</h2>
+          <p>We can set up a personal AI assistant around your inbox, calendar, and workflows so you can delegate routine tasks with confidence.</p>
+          <a href="../questionnaire/" class="btn btn-primary btn-lg">Start My Free Setup Call</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/logo-1024-full.png" alt="N&amp;R AI Solutions" /></div>
+          <p class="footer-tagline">AI assistants built for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../pricing/">Pricing</a>
+            <a href="../about/">About</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@nrsolveai.com" class="footer-contact-email">questions@nrsolveai.com</a>
+          <a href="../questionnaire/" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 N&amp;R AI Solutions. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/glossary.js"></script>
+</body>
+</html>

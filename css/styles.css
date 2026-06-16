@@ -259,6 +259,90 @@ p { color: var(--text-secondary); line-height: 1.8; }
   color: var(--accent);
 }
 
+.nav-more {
+  position: relative;
+}
+
+.nav-more-toggle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-more-toggle::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+}
+
+.nav-more-toggle:hover,
+.nav-more-toggle.active {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-more.open .nav-more-toggle,
+.nav-more:focus-within .nav-more-toggle {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-more.open .nav-more-toggle::after,
+.nav-more:focus-within .nav-more-toggle::after {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  display: none;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  z-index: 1001;
+}
+
+.nav-more.open .nav-more-menu,
+.nav-more:focus-within .nav-more-menu {
+  display: flex;
+}
+
+.nav-more-menu a {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--transition), background var(--transition);
+}
+
+.nav-more-menu a:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-more-menu a.active {
+  color: var(--accent);
+}
+
 .nav-cta {
   flex-shrink: 0;
 }
@@ -731,6 +815,22 @@ p { color: var(--text-secondary); line-height: 1.8; }
 .use-case-item span {
   font-size: 0.875rem;
   font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.use-case-text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.use-case-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.use-case-detail {
+  font-weight: 400;
   color: var(--text-secondary);
 }
 
@@ -1922,6 +2022,7 @@ fieldset .checkbox-group {
   display: flex;
   align-items: center;
   gap: 5px;
+  border-radius: var(--radius);
 }
 
 .arch-apple-icon {
@@ -2164,6 +2265,201 @@ fieldset .checkbox-group {
 }
 
 /* ========================================
+   24.5 Glossary (AI Explained)
+   ======================================== */
+.resource-hero {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(224, 64, 64, 0.16), transparent 44%),
+    radial-gradient(circle at 80% 28%, rgba(224, 64, 64, 0.12), transparent 36%);
+}
+
+.glossary-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.glossary-toolbar {
+  grid-column: 1 / -1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+.glossary-toolbar h2 {
+  margin-bottom: 6px;
+}
+
+.glossary-toolbar p {
+  font-size: 0.875rem;
+  margin-bottom: 16px;
+}
+
+.az-jump-nav {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.az-letter {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+}
+
+.az-letter:hover {
+  color: var(--text-primary);
+  border-color: rgba(224, 64, 64, 0.4);
+}
+
+.az-letter.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.glossary-side {
+  position: sticky;
+  top: calc(var(--nav-height) + 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.glossary-side-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.glossary-side-card h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.glossary-side-card p {
+  font-size: 0.875rem;
+  margin-bottom: 14px;
+  line-height: 1.7;
+}
+
+.start-here-list,
+.big-picture-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.start-here-pill,
+.big-picture-link {
+  padding: 7px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+.start-here-pill:hover,
+.big-picture-link:hover {
+  color: var(--text-primary);
+  border-color: rgba(224, 64, 64, 0.4);
+  background: var(--accent-subtle);
+}
+
+.glossary-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.glossary-entry {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  scroll-margin-top: calc(var(--nav-height) + 18px);
+}
+
+.glossary-entry.open {
+  border-color: rgba(224, 64, 64, 0.35);
+}
+
+.glossary-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 22px;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.glossary-plus {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+  line-height: 1;
+}
+
+.glossary-entry.open .glossary-plus {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+
+.glossary-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.glossary-body p {
+  padding: 0 22px;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.glossary-body p:first-child {
+  padding-top: 0;
+}
+
+.glossary-body p:last-child {
+  padding-bottom: 20px;
+}
+
+.glossary-entry-redirect {
+  padding: 18px 22px;
+}
+
+.glossary-entry-redirect h3 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.glossary-entry-redirect p {
+  font-size: 0.875rem;
+}
+
+.glossary-entry-redirect a {
+  color: var(--accent);
+}
+
+/* ========================================
    24. Fade-up Animation (IntersectionObserver)
    ======================================== */
 .fade-up {
@@ -2203,6 +2499,14 @@ fieldset .checkbox-group {
 
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .glossary-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .glossary-side {
+    position: static;
   }
 }
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Equipment Needed | N&amp;R AI Solutions</title>
-  <meta name="description" content="Recommended hardware and software to run your N&amp;R AI Solutions assistant smoothly." />
+  <meta name="description" content="Interactive checklist of the hardware and software needed to run your N&amp;R AI Solutions assistant - what's required and what's optional." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -60,67 +60,155 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">Setup Checklist</span>
         <h1 class="fade-up delay-1">Equipment Needed</h1>
-        <p class="fade-up delay-2">The hardware and software we recommend so your personal AI assistant runs reliably.</p>
+        <p class="fade-up delay-2">Check off what you already have. Required items are needed for any assistant - optional items only matter if you want your assistant doing that job.</p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="hardware-heading">
+    <section class="checklist-progress-section" aria-label="Checklist progress">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Hardware</span>
-          <h2 id="hardware-heading" class="fade-up delay-1">Required Hardware</h2>
-          <p class="fade-up delay-2">Start here. This is the minimum setup we recommend for most clients.</p>
-        </div>
-
-        <div class="included-grid fade-up delay-1">
-          <div class="included-item">
-            <span><strong>Mac mini (Apple Silicon)</strong> - Dedicated always-on machine for your assistant workflows.</span>
+        <div class="checklist-progress fade-up">
+          <div class="checklist-progress-top">
+            <span class="checklist-progress-label" id="checklistProgressLabel">0 of 8 ready</span>
+            <button type="button" class="checklist-reset-btn" id="checklistReset">Reset checklist</button>
           </div>
-          <div class="included-item">
-            <span><strong>Reliable Internet</strong> - Stable broadband connection for sync, updates, and integrations.</span>
-          </div>
-          <div class="included-item">
-            <span><strong>Backup Power (UPS)</strong> - Keeps automations alive through short power interruptions.</span>
-          </div>
-        </div>
-
-        <div class="story-text fade-up delay-2">
-          <p><strong>Recommended links:</strong></p>
-          <div class="resource-links" aria-label="Hardware resources">
-            <a class="resource-link" href="https://www.apple.com/mac-mini/" target="_blank" rel="noopener noreferrer">Apple Mac mini product page</a>
-            <a class="resource-link" href="https://www.apple.com/shop/buy-mac/mac-mini" target="_blank" rel="noopener noreferrer">Buy Mac mini</a>
-            <a class="resource-link" href="https://www.apc.com/us/en/product-category/88988-back-ups-battery-backup/" target="_blank" rel="noopener noreferrer">APC UPS battery backup options</a>
-          </div>
+          <div class="progress-track"><div class="progress-fill" id="checklistProgressFill" style="width: 0%"></div></div>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="software-heading">
+    <section class="section" aria-labelledby="checklist-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Software</span>
-          <h2 id="software-heading" class="fade-up delay-1">Required Accounts &amp; Software</h2>
-          <p class="fade-up delay-2">These are the services we most commonly connect to get your assistant useful quickly.</p>
+          <span class="section-label fade-up">Setup Checklist</span>
+          <h2 id="checklist-heading" class="fade-up delay-1">Everything You Need</h2>
+          <p class="fade-up delay-2">Required items apply to every assistant. Optional items only matter if you want your assistant doing that job.</p>
         </div>
 
-        <div class="included-grid fade-up delay-1">
-          <div class="included-item"><span><strong>AI Model Subscription</strong> - ChatGPT, Claude, or Gemini account.</span></div>
-          <div class="included-item"><span><strong>Email &amp; Calendar</strong> - Google Workspace or Microsoft 365 account.</span></div>
-          <div class="included-item"><span><strong>Messaging Channel</strong> - Telegram for daily assistant communication.</span></div>
-          <div class="included-item"><span><strong>Video Meetings</strong> - Zoom account for onboarding and support sessions.</span></div>
-        </div>
+        <div class="checklist-group fade-up delay-1">
 
-        <div class="story-text fade-up delay-2">
-          <p><strong>Recommended links:</strong></p>
-          <div class="resource-links" aria-label="Software resources">
-            <a class="resource-link" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>
-            <a class="resource-link" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a>
-            <a class="resource-link" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini</a>
-            <a class="resource-link" href="https://workspace.google.com/" target="_blank" rel="noopener noreferrer">Google Workspace</a>
-            <a class="resource-link" href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener noreferrer">Microsoft 365</a>
-            <a class="resource-link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">Telegram</a>
-            <a class="resource-link" href="https://zoom.us/" target="_blank" rel="noopener noreferrer">Zoom</a>
-          </div>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="mac-mini" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Mac mini (or another always-on computer)</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">A dedicated machine that stays powered on so your assistant can run and respond around the clock. We default to a Mac mini, but any always-on computer works.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://www.apple.com/mac-mini/" target="_blank" rel="noopener noreferrer">Apple Mac mini</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="internet" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Reliable Internet</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">A stable broadband connection keeps your assistant synced, your integrations connected, and your automations running without interruption.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://www.speedtest.net/" target="_blank" rel="noopener noreferrer">Test your internet speed</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="ups" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Backup Power (UPS)</span>
+                <span class="checklist-badge checklist-badge-optional">Optional</span>
+              </div>
+              <p class="checklist-item-desc">Keeps your assistant alive through short power interruptions so nothing drops mid-task. Not required, but recommended for peace of mind.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://www.apc.com/us/en/product-category/88988-back-ups-battery-backup/" target="_blank" rel="noopener noreferrer">APC UPS battery backup</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="openclaw" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">OpenClaw</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">The platform that runs and orchestrates your assistant's workflows on your machine.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://openclaw.ai/" target="_blank" rel="noopener noreferrer">OpenClaw</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="ai-model" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">AI Model Subscription or API Access</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">An account with an AI provider, or API access of your own, so your assistant has a model to think and respond with. A consumer subscription works, or you can bring your own API key.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://chat.openai.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>
+                <a class="resource-link" href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude</a>
+                <a class="resource-link" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini</a>
+                <a class="resource-link" href="https://platform.openai.com/" target="_blank" rel="noopener noreferrer">OpenAI API</a>
+                <a class="resource-link" href="https://console.anthropic.com/" target="_blank" rel="noopener noreferrer">Anthropic API</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="messaging" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Messaging Channel</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">This is how you will talk to your AI agent day-to-day. Openclaw supports Telegram, WhatsApp, Discord, Google Chat, Slack, Signal, and Nostr - we recommend Telegram.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://telegram.org/" target="_blank" rel="noopener noreferrer">Telegram (recommended)</a>
+                <a class="resource-link" href="https://www.whatsapp.com/" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a class="resource-link" href="https://discord.com/" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a class="resource-link" href="https://chat.google.com/" target="_blank" rel="noopener noreferrer">Google Chat</a>
+                <a class="resource-link" href="https://slack.com/" target="_blank" rel="noopener noreferrer">Slack</a>
+                <a class="resource-link" href="https://signal.org/" target="_blank" rel="noopener noreferrer">Signal</a>
+                <a class="resource-link" href="https://nostr.com/" target="_blank" rel="noopener noreferrer">Nostr</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="video-meetings" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Video Meetings</span>
+                <span class="checklist-badge checklist-badge-required">Required</span>
+              </div>
+              <p class="checklist-item-desc">Needed so our team can video chat and share screens with you on Zoom.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://zoom.us/" target="_blank" rel="noopener noreferrer">Zoom</a>
+              </div>
+            </div>
+          </label>
+
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox" data-key="email-calendar" />
+            <div class="checklist-item-content">
+              <div class="checklist-item-head">
+                <span class="checklist-item-title">Email &amp; Calendar</span>
+                <span class="checklist-badge checklist-badge-optional">Optional</span>
+              </div>
+              <p class="checklist-item-desc">Needed only if you want your assistant reading, drafting, or organizing email and calendar events. Some clients prefer to keep their assistant out of their inbox entirely - that's a fine choice too.</p>
+              <div class="checklist-item-links">
+                <a class="resource-link" href="https://workspace.google.com/" target="_blank" rel="noopener noreferrer">Google Workspace</a>
+                <a class="resource-link" href="https://www.microsoft.com/microsoft-365" target="_blank" rel="noopener noreferrer">Microsoft 365</a>
+              </div>
+            </div>
+          </label>
+
         </div>
       </div>
     </section>
@@ -170,5 +258,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/equipment.js"></script>
 </body>
 </html>

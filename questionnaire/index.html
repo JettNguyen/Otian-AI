@@ -424,6 +424,31 @@
 
           <div class="form-group">
             <fieldset>
+              <legend class="form-label">How familiar are you with AI agents specifically (not AI in general, and not just tools like ChatGPT)?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="aiAgentAwareness" value="never-heard" />
+                  <span>I have never heard of AI agents before</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="aiAgentAwareness" value="heard-term" />
+                  <span>I have heard the term, but I am not sure what it means</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="aiAgentAwareness" value="basic-understanding" />
+                  <span>I have a basic understanding of what AI agents are</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="aiAgentAwareness" value="used-agent" />
+                  <span>I have used an AI agent before</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="aiAgentAwarenessError" role="alert">Please select an option.</span>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <fieldset>
               <legend class="form-label">Would you prefer we fully manage everything, teach you to manage it, or a mix?<span class="required-star" aria-hidden="true">*</span></legend>
               <div class="radio-group">
                 <label class="radio-option">

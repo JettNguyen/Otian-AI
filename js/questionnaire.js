@@ -165,6 +165,11 @@
           if (aeErr) aeErr.classList.add('visible');
           valid = false;
         }
+        if (!document.querySelector('input[name="aiAgentAwareness"]:checked')) {
+          var aaaErr = document.getElementById('aiAgentAwarenessError');
+          if (aaaErr) aaaErr.classList.add('visible');
+          valid = false;
+        }
         if (!document.querySelector('input[name="managePref"]:checked')) {
           var mpErr = document.getElementById('managePrefError');
           if (mpErr) mpErr.classList.add('visible');

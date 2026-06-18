@@ -1828,6 +1828,56 @@ fieldset .checkbox-group {
   font-style: italic;
 }
 
+.availability-card {
+  margin-top: 8px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.availability-note {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.availability-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.availability-row {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.availability-day {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.availability-time {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.availability-updated {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
 .contact-upsell {
   margin-top: 40px;
   padding-top: 32px;
@@ -2674,6 +2724,11 @@ fieldset .checkbox-group {
   /* Form */
   .contact-form-card {
     padding: 28px 20px;
+  }
+
+  .availability-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .two-col-card {

@@ -107,7 +107,7 @@
      like "../about/" work correctly from any directory depth.        */
   var currentNorm = window.location.pathname.replace(/\/+$/, '') || '/';
 
-  document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(function (link) {
+  document.querySelectorAll('.nav-links a, .nav-drawer a, .nav-drawer-flyout a').forEach(function (link) {
     try {
       var linkNorm = new URL(link.href).pathname.replace(/\/+$/, '') || '/';
       if (linkNorm === currentNorm) {
@@ -118,50 +118,60 @@
     } catch (e) { /* skip non-navigable hrefs */ }
   });
 
-  var moreContainer = document.getElementById('navMore');
-  var moreToggle = document.getElementById('navMoreToggle');
-  var moreMenu = document.getElementById('navMoreMenu');
+  var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.nav-more'));
 
-  if (moreContainer && moreToggle && moreMenu) {
-    var hasActiveMoreLink = !!moreMenu.querySelector('a.active');
-    if (hasActiveMoreLink) {
-      moreToggle.classList.add('active');
+  dropdowns.forEach(function (container) {
+    var toggle = container.querySelector('.nav-more-toggle');
+    var menu = container.querySelector('.nav-more-menu');
+    if (!toggle || !menu) return;
+
+    if (menu.querySelector('a.active')) {
+      toggle.classList.add('active');
     }
 
-    function openMoreMenu() {
-      moreContainer.classList.add('open');
-      moreToggle.setAttribute('aria-expanded', 'true');
+    function open() {
+      dropdowns.forEach(function (other) {
+        if (other !== container) closeDropdown(other);
+      });
+      container.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
     }
 
-    function closeMoreMenu() {
-      moreContainer.classList.remove('open');
-      moreToggle.setAttribute('aria-expanded', 'false');
+    function close() {
+      container.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
     }
 
-    moreToggle.addEventListener('click', function () {
-      if (moreContainer.classList.contains('open')) {
-        closeMoreMenu();
+    container._closeNavMore = close;
+
+    toggle.addEventListener('click', function () {
+      if (container.classList.contains('open')) {
+        close();
       } else {
-        openMoreMenu();
+        open();
       }
     });
 
-    document.addEventListener('click', function (event) {
-      if (!moreContainer.contains(event.target)) {
-        closeMoreMenu();
-      }
+    menu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', close);
     });
+  });
 
-    moreMenu.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', closeMoreMenu);
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        closeMoreMenu();
-      }
-    });
+  function closeDropdown(container) {
+    if (container._closeNavMore) container._closeNavMore();
   }
+
+  document.addEventListener('click', function (event) {
+    dropdowns.forEach(function (container) {
+      if (!container.contains(event.target)) closeDropdown(container);
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      dropdowns.forEach(closeDropdown);
+    }
+  });
 
   /* ── Scroll: nav opacity ── */
   const nav = document.getElementById('nav');
@@ -173,6 +183,65 @@
         nav.classList.remove('scrolled');
       }
     }, { passive: true });
+  }
+
+  /* ── Drawer flyout: Services / Learn / Company pop out beside the drawer ── */
+  const drawerFlyout = document.getElementById('navDrawerFlyout');
+  let resetDrawerPanels = function () {};
+
+  if (drawerFlyout) {
+    const catButtons = Array.prototype.slice.call(document.querySelectorAll('.nav-drawer-cat'));
+    const linkGroups = Array.prototype.slice.call(drawerFlyout.querySelectorAll('.nav-drawer-flyout-links'));
+    const flyoutTitle = document.getElementById('navDrawerFlyoutTitle');
+    const closeBtn = drawerFlyout.querySelector('.nav-drawer-back');
+    const canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    catButtons.forEach(function (btn) {
+      const group = document.getElementById(btn.dataset.drawerTarget || '');
+      if (group && group.querySelector('a.active')) {
+        btn.classList.add('active');
+      }
+    });
+
+    function openFlyout(targetId, label) {
+      linkGroups.forEach(function (group) {
+        group.classList.toggle('is-active', group.id === targetId);
+      });
+      if (flyoutTitle) flyoutTitle.textContent = label;
+      drawerFlyout.classList.add('open');
+      drawerFlyout.setAttribute('aria-hidden', 'false');
+      catButtons.forEach(function (btn) {
+        const isTarget = btn.dataset.drawerTarget === targetId;
+        btn.setAttribute('aria-expanded', String(isTarget));
+        btn.classList.toggle('open', isTarget);
+      });
+    }
+
+    resetDrawerPanels = function () {
+      drawerFlyout.classList.remove('open');
+      drawerFlyout.setAttribute('aria-hidden', 'true');
+      catButtons.forEach(function (btn) {
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('open');
+      });
+    };
+
+    catButtons.forEach(function (btn) {
+      const targetId = btn.dataset.drawerTarget;
+      const label = btn.textContent.trim();
+      btn.addEventListener('click', function () {
+        openFlyout(targetId, label);
+      });
+      if (canHover) {
+        btn.addEventListener('mouseenter', function () {
+          openFlyout(targetId, label);
+        });
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', resetDrawerPanels);
+    }
   }
 
   /* ── Hamburger / Drawer ── */
@@ -196,6 +265,7 @@
     hamburger.setAttribute('aria-expanded', 'false');
     drawer.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    resetDrawerPanels();
   }
 
   if (hamburger) {

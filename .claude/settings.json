@@ -21,7 +21,32 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8731/assets/favicon.svg)",
       "Bash(cd \"/c/Users/Jett/NR-AI-Solutions\" && ls -la assets/ | grep -i svg)",
       "Read(//c/c/Users/Jett/NR-AI-Solutions/**)",
-      "Bash(node debug_404.js)"
+      "Bash(node debug_404.js)",
+      "Bash(npx --version)",
+      "Bash(npm ls *)",
+      "Bash(node verify.mjs)",
+      "Bash(pkill -f \"http.server 8088\")",
+      "Bash(node verify2.mjs)",
+      "Bash(node colorcheck.mjs)",
+      "Bash(node colorcheck2.mjs)",
+      "Bash(pkill -f \"http.server 8089\")",
+      "Bash(node verify3.mjs)",
+      "Bash(pkill -f \"http.server 8090\")",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)",
+      "Bash(node glossarycheck.mjs)",
+      "Bash(pkill -f \"http.server 8095\")",
+      "Bash(node glossarycheck-file.mjs)",
+      "Bash(node finalcheck.mjs)",
+      "Bash(pkill -f \"http.server 8096\")",
+      "Bash(node verify4.mjs)",
+      "Bash(pkill -f \"http.server 8097\")",
+      "Bash(node verify5.mjs)",
+      "Bash(pkill -f \"http.server 8098\")",
+      "Bash(node darkcheck.mjs)",
+      "Bash(node chevroncheck.mjs)",
+      "Bash(pkill -f \"http.server 8099\")",
+      "Bash(node chevroncheck2.mjs)"
     ]
   }
 }

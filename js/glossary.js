@@ -274,18 +274,27 @@
     countEl.textContent = String(entries.length);
   }
 
-  fetch(DATA_PATH)
-    .then(function (res) {
-      if (!res.ok) {
-        throw new Error('Failed to load glossary markdown');
-      }
-      return res.text();
-    })
-    .then(function (markdown) {
-      var entries = dedupeEntries(parseGlossaryMarkdown(markdown));
-      init(entries);
-    })
-    .catch(function () {
-      entriesWrap.innerHTML = '<p>Unable to load glossary entries right now.</p>';
+  function loadGlossary() {
+    return fetch(DATA_PATH, { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error('Failed to load glossary markdown');
+        }
+        return res.text();
+      })
+      .then(function (markdown) {
+        var entries = dedupeEntries(parseGlossaryMarkdown(markdown));
+        if (!entries.length) {
+          throw new Error('No glossary entries parsed');
+        }
+        init(entries);
+      });
+  }
+
+  loadGlossary().catch(function () {
+    /* One retry covers a flaky first load (e.g. a stale cached response); only show the error after that fails too. */
+    loadGlossary().catch(function () {
+      entriesWrap.innerHTML = '<p>Unable to load glossary entries right now. Please refresh the page.</p>';
     });
+  });
 })();

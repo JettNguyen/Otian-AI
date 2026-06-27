@@ -64,7 +64,8 @@
       "Bash(sed -i '83{/^  <\\\\/nav>$/d}' resources/ai-built-my-workout-program/index.html)",
       "Bash(sed -i '83{/^  <\\\\/nav>$/d}' resources/socially-engineered-google-call/index.html)",
       "Bash(node finalsanity.mjs)",
-      "Bash(pkill -f \"http.server 8103\")"
+      "Bash(pkill -f \"http.server 8103\")",
+      "Bash(pkill -f \"http.server 8104\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

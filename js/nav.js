@@ -140,6 +140,12 @@
     function close() {
       container.classList.remove('open');
       toggle.setAttribute('aria-expanded', 'false');
+      /* :focus-within on the container also drives the open visual state (for
+         keyboard nav), so if the toggle or a menu link still has focus after
+         this click, the CSS would keep showing it as open. Blur to match. */
+      if (container.contains(document.activeElement)) {
+        document.activeElement.blur();
+      }
     }
 
     container._closeNavMore = close;
@@ -241,6 +247,20 @@
 
     if (closeBtn) {
       closeBtn.addEventListener('click', resetDrawerPanels);
+    }
+
+    /* Flyout should only stay expanded while hovering its own trigger or the
+       flyout itself - hovering anything else in the drawer (e.g. "How It
+       Works") collapses it. */
+    if (canHover) {
+      const drawerEl = document.getElementById('navDrawer');
+      if (drawerEl) {
+        Array.prototype.slice.call(drawerEl.children).forEach(function (child) {
+          if (!child.classList.contains('nav-drawer-cat')) {
+            child.addEventListener('mouseenter', resetDrawerPanels);
+          }
+        });
+      }
     }
   }
 

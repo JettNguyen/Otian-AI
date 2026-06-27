@@ -373,6 +373,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg) translateY(-1px);
+  transition: transform var(--transition);
 }
 
 .nav-more-toggle:hover,
@@ -401,15 +402,22 @@ p { color: var(--text-secondary); line-height: 1.8; }
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 6px;
-  display: none;
+  display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-md);
   z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px) scale(0.98);
+  transform-origin: top right;
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
 }
 
 .nav-more.open .nav-more-menu,
 .nav-more:focus-within .nav-more-menu {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
 }
 
 .nav-more-menu a {
@@ -687,30 +695,34 @@ html[data-theme="dark"] .theme-toggle-thumb {
 .nav-drawer-back {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   background: none;
   border: none;
+  border-bottom: 1px solid var(--border);
   cursor: pointer;
-  padding: 14px 12px;
-  margin-bottom: 4px;
-  border-radius: var(--radius-sm);
-  min-height: 44px;
-  transition: color var(--transition), background var(--transition);
+  padding: 8px 2px 14px;
+  margin-bottom: 10px;
+  border-radius: 0;
+  min-height: 36px;
+  transition: color var(--transition), border-color var(--transition);
 }
 
 .nav-drawer-back:hover,
 .nav-drawer-back:focus-visible {
-  color: var(--text-primary);
-  background: var(--surface-hover);
+  color: var(--accent);
+  background: none;
+  border-color: var(--field-border-strong);
 }
 
 .nav-drawer-back-icon {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   flex-shrink: 0;
   transform: rotate(180deg);
   transition: transform var(--transition);
@@ -720,10 +732,11 @@ html[data-theme="dark"] .theme-toggle-thumb {
   transform: rotate(180deg) translateX(-2px);
 }
 
-.nav-drawer-cta {
+.nav-drawer a.nav-drawer-cta {
   margin-top: 12px;
   text-align: center;
   justify-content: center;
+  color: var(--text-on-accent);
 }
 
 /* ========================================

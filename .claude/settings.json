@@ -46,7 +46,28 @@
       "Bash(node darkcheck.mjs)",
       "Bash(node chevroncheck.mjs)",
       "Bash(pkill -f \"http.server 8099\")",
-      "Bash(node chevroncheck2.mjs)"
+      "Bash(node chevroncheck2.mjs)",
+      "Bash(node backbtncheck.mjs)",
+      "Bash(node ctacheck.mjs)",
+      "Bash(node ctacheck2.mjs)",
+      "Bash(node desktopdropdown.mjs)",
+      "Bash(node chevronvisual.mjs)",
+      "Bash(pkill -f \"http.server 8100\")",
+      "Bash(node menuanim.mjs)",
+      "Bash(node menuanimvisual.mjs)",
+      "Bash(pkill -f \"http.server 8101\")",
+      "Bash(node hovercollapse.mjs)",
+      "Bash(pkill -f \"http.server 8102\")",
+      "Bash(sed -i '86{/^  <\\\\/nav>$/d}' business/index.html)",
+      "Bash(sed -i '86{/^  <\\\\/nav>$/d}' individuals/index.html)",
+      "Bash(sed -i '97{/^  <\\\\/nav>$/d}' questionnaire/index.html)",
+      "Bash(sed -i '83{/^  <\\\\/nav>$/d}' resources/ai-built-my-workout-program/index.html)",
+      "Bash(sed -i '83{/^  <\\\\/nav>$/d}' resources/socially-engineered-google-call/index.html)",
+      "Bash(node finalsanity.mjs)",
+      "Bash(pkill -f \"http.server 8103\")"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"
     ]
   }
 }

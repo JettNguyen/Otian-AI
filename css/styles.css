@@ -919,10 +919,28 @@ html[data-theme="dark"] .theme-toggle-thumb {
   width: 100%;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
 }
 
 .hero-content {
-  max-width: 740px;
+  max-width: 620px;
+}
+
+.hero-visual {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-visual-img {
+  width: 300px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.25));
 }
 
 .hero h1 {
@@ -3197,6 +3215,24 @@ html[data-theme="dark"] .availability-widget iframe {
   /* Hero */
   .hero p {
     font-size: 1.05rem;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-visual-img {
+    width: 220px;
   }
 
   .hero-actions {

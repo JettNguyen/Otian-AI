@@ -4099,6 +4099,111 @@ html[data-theme="dark"] .booking-container iframe {
   margin: 0;
 }
 
+/* ========================================
+   32. Price Cards (Home)
+   ======================================== */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.price-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+}
+
+.price-card-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.price-card-amount {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.price-card-amount span {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.price-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ========================================
+   33. Before / After (Home)
+   ======================================== */
+.before-after-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.before-after-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  background: var(--bg-card);
+}
+
+.before-after-card.is-after {
+  border-color: rgba(164, 127, 209, 0.45);
+  background: var(--accent-subtle);
+}
+
+.before-after-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.before-after-card.is-after .before-after-label {
+  color: var(--accent);
+}
+
+.before-after-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.before-after-item {
+  display: flex;
+  gap: 14px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.before-after-time {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 68px;
+}
+
 @media (max-width: 1000px) {
   .cost-why-inner {
     grid-template-columns: 1fr;
@@ -4142,5 +4247,10 @@ html[data-theme="dark"] .booking-container iframe {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
+  }
+
+  .price-grid,
+  .before-after-grid {
+    grid-template-columns: 1fr;
   }
 }

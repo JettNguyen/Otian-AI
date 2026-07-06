@@ -85,7 +85,19 @@
       "Bash(node shot3.js)",
       "Bash(git fetch *)",
       "Bash(git merge *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(grep -n \"pricing\\\\|Pricing\\\\|\\\\$100\\\\|session\\\\|consultation\\\\|Consultation\" \"c:\\\\Users\\\\Jett\\\\NR-AI-Solutions\\\\individuals\\\\index.html\")",
+      "Bash(grep -n \"pricing\\\\|Pricing\\\\|\\\\$100\\\\|session\\\\|consultation\\\\|Consultation\\\\|custom quote\\\\|Custom Quote\\\\|scope\" \"c:\\\\Users\\\\Jett\\\\NR-AI-Solutions\\\\business\\\\index.html\")",
+      "Read(//c//**)",
+      "Read(//c/Users/Jett/.claude/**)",
+      "Bash(command -v npx)",
+      "Read(//c/Users/Jett/**)",
+      "Bash(kill %1)",
+      "Bash(jobs)",
+      "Bash(curl -s http://localhost:8642/index.html)",
+      "Bash(pkill -f \"python -m http.server 8642\")",
+      "Bash(python3 -)",
+      "Bash(pkill -f \"python -m http.server 8643\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

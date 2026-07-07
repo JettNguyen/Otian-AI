@@ -19,9 +19,16 @@
        ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-text"> | <strong>N&amp;R</strong> AI Solutions</span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>N&amp;R</strong> AI Solutions</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
       <div class="nav-links">
-        <a href="../how-it-works/">How It Works</a>
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
         <div class="nav-more" id="navServices">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
           <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
@@ -32,6 +39,7 @@
         <div class="nav-more" id="navLearn">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
           <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
             <a href="../equipment/" role="menuitem">Equipment Needed</a>
@@ -56,7 +64,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../how-it-works/">How It Works</a>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -68,11 +76,17 @@
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
       <a href="../individuals/">For Individuals</a>
       <a href="../business/">For Business</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
       <a href="../equipment/">Equipment Needed</a>
@@ -420,6 +434,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
             <a href="../how-it-works/">How It Works</a>
+            <a href="../skills-marketplace/browse/">Skills Marketplace</a>
             <a href="../individuals/">For Individuals</a>
             <a href="../business/">For Business</a>
             <a href="../about/">About</a>

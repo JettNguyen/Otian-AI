@@ -301,16 +301,39 @@ p { color: var(--text-secondary); line-height: 1.8; }
   margin-right: -8px;
 }
 
+.nav-logo-divider {
+  width: 2px;
+  height: 30px;
+  background: var(--text-primary);
+  opacity: 0.5;
+  margin: 0 8px 0 10px;
+  flex-shrink: 0;
+}
+
 .nav-logo-text {
-  margin-left: 10px;
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   white-space: nowrap;
 }
 
-.nav-logo-text strong {
+.nav-logo-title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.nav-logo-title strong {
   font-weight: 800;
+}
+
+.nav-logo-subtitle {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 1px;
 }
 
 @media (max-width: 480px) {
@@ -4315,4 +4338,133 @@ html[data-theme="dark"] .booking-container iframe {
   .before-after-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ========================================
+   34. Skills Marketplace Page
+   ======================================== */
+.marketplace-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--accent-subtle);
+  color: var(--accent-hover);
+  margin-bottom: 16px;
+}
+
+.marketplace-status-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.marketplace-category-count {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+.marketplace-split-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -8px;
+}
+
+.marketplace-text-link {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.marketplace-text-link:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
+.marketplace-search-bar {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto 24px;
+}
+
+.marketplace-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.marketplace-search-input {
+  width: 100%;
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 12px 16px 12px 44px;
+  transition: border-color var(--transition);
+}
+
+.marketplace-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.marketplace-search-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.marketplace-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.marketplace-filter-pill {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+}
+
+.marketplace-filter-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.marketplace-filter-pill.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.marketplace-category-grid [hidden] {
+  display: none;
+}
+
+.marketplace-filter-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  padding: 32px 0 0;
 }

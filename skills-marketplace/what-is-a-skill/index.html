@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Business Agent Drafted a Fake Client Plan. Here's Exactly Why That Happened. | N&amp;R AI Solutions</title>
-  <meta name="description" content="The agent produced a professional email with a detailed action plan. It was also completely made up. Here's what was missing, why the model filled in the gaps, and how we fixed it." />
+<title>What Is a Skill? | N&amp;R AI Solutions</title>
+  <meta name="description" content="A skill is how your Archie assistant learns a new task &mdash; a small add-on that shows it how to work with something specific, like your fitness app, email, or calendar." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- ==============================
+       Navigation
+       ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>N&amp;R</strong> AI Solutions</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
@@ -96,87 +99,153 @@
   </div>
 
   <main>
-    <section class="page-hero article-hero" aria-label="Article introduction">
-      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
-        <div class="breadcrumb-bar-inner">
-          <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</li>
-          </ol>
-        </div>
-      </nav>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Team Story</span>
-        <h1 class="fade-up delay-1">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</h1>
-        <div class="article-byline fade-up delay-2">
-          <strong>Jett Nguyen</strong>
-          <span>&middot;</span>
-          <span>June 30, 2026</span>
-          <span>&middot;</span>
-          <span>5 min read</span>
-        </div>
+        <span class="section-label fade-up">The Basics</span>
+        <h1 class="fade-up delay-1">What Is a Skill?</h1>
+        <p class="fade-up delay-2">The short version: it's how your Archie assistant learns to do something new.</p>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ==============================
+         Why This Exists
+         ============================== -->
+    <section class="section" aria-labelledby="statement-heading">
       <div class="container">
-        <article class="article-body fade-up delay-1">
-
-          <p>I was testing the business agent I built for N&amp;R on something real: drafting an email with an agenda and action items for a client. The agent came back almost immediately. Professional tone, clear structure, specific-sounding deliverables. It looked great.</p>
-
-          <p>It was also completely made up.</p>
-
-          <p>The action plan it wrote wasn&rsquo;t for that client. It wasn&rsquo;t even close. The agent had invented a generic, plausible-sounding plan and presented it with total confidence, as if it had known the client for months.</p>
-
-          <h2>What Actually Happened</h2>
-          <p>An AI agent doesn&rsquo;t store knowledge the way you do. It doesn&rsquo;t remember your clients between sessions or carry context in its head. Every time an agent runs, it starts from scratch. What it knows depends entirely on what information it loads at the start.</p>
-
-          <p>Those startup files are called bootstrap files. Think of them as the agent&rsquo;s briefing document: who the client is, what the project involves, what&rsquo;s already been decided, what&rsquo;s still open. Before the agent does anything, it reads those files and builds a working picture of the situation.</p>
-
-          <p>The routing is what tells the agent which files to load and when.</p>
-
-          <p>On that test run, the routing had a gap. The bootstrap files for that client either weren&rsquo;t loaded or were skipped entirely. So when the agent went to write the email, it had nothing real to work from: no client name, no project context, no actual action items. Just a prompt asking it to draft something professional.</p>
-
-          <p>So it did what language models do when they don&rsquo;t have what they need: they fill in the gaps. Confidently.</p>
-
-          <blockquote class="article-pullquote">The agent wasn&rsquo;t lying. It genuinely didn&rsquo;t know it didn&rsquo;t know.</blockquote>
-
-          <h2>The Confidence Is the Dangerous Part</h2>
-          <p>This is what makes hallucination actually tricky. If the agent had said &ldquo;I don&rsquo;t have enough information to write this,&rdquo; you&rsquo;d fix the problem. But it didn&rsquo;t. It produced something that looked completely real: professional formatting, specific language, the right structure. Nothing in the output signaled that any of it was invented.</p>
-
-          <p>That&rsquo;s the nature of how these models work. They don&rsquo;t experience uncertainty the way you do. They reason from what&rsquo;s in front of them, and if what&rsquo;s in front of them is incomplete, they complete the picture themselves. The output quality doesn&rsquo;t drop. The confidence doesn&rsquo;t waver. It just makes something up.</p>
-
-          <h2>What This Taught Me About Building Agents</h2>
-          <p>After that draft, I went back and tightened the routing. Every client context, every project file, every relevant document loads before the agent touches anything else. The agent doesn&rsquo;t get to write a single word until it&rsquo;s been properly briefed.</p>
-
-          <p>But the deeper lesson was this: the decision the agent made wasn&rsquo;t wrong. Given what it had, it did exactly what it was supposed to do: write a professional email with an agenda and action items. The inputs were broken. The decision was technically correct.</p>
-
-          <blockquote class="article-pullquote">Building a good agent is mostly about getting the inputs right. The model will handle the rest, for better or worse.</blockquote>
-
-          <p>Most people think about agents in terms of outputs: did it do what I asked? The real question is: did it have what it needed to do it correctly? That&rsquo;s the part you build. That&rsquo;s the part that determines whether you get a real plan or a convincing fiction.</p>
-
-          <h2>This Is Why We Don&rsquo;t Set It and Forget It</h2>
-          <p>At N&amp;R, we don&rsquo;t hand someone an agent and walk away. We build the context architecture: the bootstrap files, the routing logic, the information the agent has access to. We keep refining it as the picture of your work gets clearer. An agent that knows everything it needs to know is almost never wrong. An agent running on incomplete context is almost always confidently wrong.</p>
-
-          <p>The difference isn&rsquo;t the model. It&rsquo;s the setup.</p>
-
-          <p>If you&rsquo;ve ever tried an AI tool that seemed to just make things up, that&rsquo;s almost certainly what happened. And it&rsquo;s fixable, but you have to know what to fix.</p>
-
-        </article>
-
-        <div class="cta-banner fade-up article-cta">
-          <h2>Reach out to N&amp;R AI Solutions</h2>
-          <p>We build and maintain agents that are grounded in your actual context, not general guesses. Tell us what you&rsquo;re trying to automate.</p>
-          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
-        </div>
-
-        <div class="text-center mt-40">
-          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        <div class="section-header">
+          <span class="section-label fade-up">Why This Exists</span>
+          <h2 id="statement-heading" class="fade-up delay-1">You're Not Doing This Alone</h2>
+          <p class="fade-up delay-2">Job searching. Meal prepping. Learning to budget. Figuring out a workout routine that actually sticks. Most people are working through the hard stuff solo, with no one really in their corner.</p>
+          <p class="fade-up delay-3">A skill is a little bit of backup for exactly that &mdash; quietly watching the details, keeping track of what you'd otherwise forget, so you don't have to be "on" all the time. Just steady support for the parts of life nobody hands you a manual for.</p>
         </div>
       </div>
     </section>
+
+    <!-- ==============================
+         What's a Skill
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="what-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Basics</span>
+          <h2 id="what-heading" class="fade-up delay-1">Think of It Like Onboarding</h2>
+          <p class="fade-up delay-2">Think of your assistant like a new hire on their first day. They're smart and capable, but they don't yet know your tools, your accounts, or how you like things done.</p>
+          <p class="fade-up delay-3">A skill is how your assistant learns a new task. It's a small add-on that shows your assistant how to work with something specific &mdash; your fitness app, your email, your calendar, your files.</p>
+        </div>
+
+        <div class="feature-grid fade-up delay-1">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3>Add It Yourself, or Let Us</h3>
+            <p>Browse the marketplace and add a skill yourself, or tell us what you want during a setup session and we'll add it for you. Either way, there's nothing technical to configure.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Matched to How You Actually Work</h3>
+            <p>Track workouts, manage your inbox, keep your files organized &mdash; whatever fits your day, there's likely a skill for it.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <h3>Always in Your Control</h3>
+            <p>You decide which skills your assistant uses, and you can add or remove them anytime.</p>
+          </article>
+        </div>
+
+        <div class="section-header" style="margin-top: 56px;">
+          <span class="section-label fade-up">In Practice</span>
+          <h3 class="fade-up delay-1">How It Actually Works</h3>
+          <p class="fade-up delay-2">Say you use Hevy to track your workouts. Without a skill, you'd open the app, tap through menus, and log everything by hand.</p>
+        </div>
+
+        <div class="before-after-grid fade-up delay-1">
+          <div class="before-after-card">
+            <span class="before-after-label">Without a Skill</span>
+            <p>You open Hevy, tap through menus, and log every set by hand &mdash; sets, reps, weight, rest, repeat.</p>
+          </div>
+          <div class="before-after-card is-after">
+            <span class="before-after-label">With a Skill</span>
+            <p>You tell your assistant, &ldquo;I did 3 sets of squats at 135 lbs,&rdquo; and it handles the rest. No app-switching, no manual entry.</p>
+          </div>
+        </div>
+        <p class="marketplace-split-note fade-up delay-2">That's the whole idea: one conversation, instead of five different apps.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         A Few Examples
+         ============================== -->
+    <section class="section" aria-labelledby="examples-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">A Few Examples</span>
+          <h2 id="examples-heading" class="fade-up delay-1">What This Looks Like Day to Day</h2>
+        </div>
+
+        <div class="feature-grid feature-grid-4 fade-up delay-1">
+          <article class="feature-card">
+            <h3>Health &amp; Fitness</h3>
+            <p>Log workouts, track meals, follow up on sleep and habits.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Money &amp; Finance</h3>
+            <p>Watch spending, flag bills, keep an eye on your budget.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Home &amp; Life Admin</h3>
+            <p>Sort files, track packages, plan trips.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Work &amp; Career</h3>
+            <p>Draft replies, prep meeting notes, follow up with contacts.</p>
+          </article>
+        </div>
+
+        <p class="fade-up delay-2" style="text-align: center; margin-top: 32px;"><a class="marketplace-text-link" href="../browse/">See All Skills in the Marketplace &rarr;</a></p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         CTA
+         ============================== -->
+    <section class="section section-alt" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>Ready to see what's available?</h2>
+          <p>Browse skills by category, or find out what it takes to build and sell your own.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="../browse/" class="btn btn-primary btn-lg">Browse the Marketplace</a>
+            <a href="../for-developers/" class="btn btn-secondary btn-lg">For Developers</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ==============================
+       Footer
+       ============================== -->
   <footer class="footer" aria-label="Site footer">
     <div class="footer-inner">
       <div class="footer-grid">

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Business Agent Drafted a Fake Client Plan. Here's Exactly Why That Happened. | N&amp;R AI Solutions</title>
-  <meta name="description" content="The agent produced a professional email with a detailed action plan. It was also completely made up. Here's what was missing, why the model filled in the gaps, and how we fixed it." />
+<title>For Developers | N&amp;R AI Solutions</title>
+  <meta name="description" content="Build a skill for Archie once, list it on the marketplace, and get paid every time it sells. A decentralized marketplace open to any developer." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -13,6 +13,9 @@
 </head>
 <body>
 
+  <!-- ==============================
+       Navigation
+       ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="N&amp;R AI Solutions" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>N&amp;R</strong> AI Solutions</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
@@ -96,87 +99,106 @@
   </div>
 
   <main>
-    <section class="page-hero article-hero" aria-label="Article introduction">
-      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
-        <div class="breadcrumb-bar-inner">
-          <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</li>
-          </ol>
-        </div>
-      </nav>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Team Story</span>
-        <h1 class="fade-up delay-1">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</h1>
-        <div class="article-byline fade-up delay-2">
-          <strong>Jett Nguyen</strong>
-          <span>&middot;</span>
-          <span>June 30, 2026</span>
-          <span>&middot;</span>
-          <span>5 min read</span>
-        </div>
+        <span class="marketplace-status-badge fade-up">In Development</span>
+        <span class="section-label fade-up">For Developers</span>
+        <h1 class="fade-up delay-1">Build a Skill, Get Paid Every Time It Sells</h1>
+        <p class="fade-up delay-2">The marketplace is decentralized: anyone who can build a skill can list one. We handle distribution, payments, and syncing &mdash; you focus on the skill itself.</p>
       </div>
     </section>
 
-    <section class="section">
+    <!-- ==============================
+         Pricing
+         ============================== -->
+    <section class="section" aria-labelledby="pricing-heading">
       <div class="container">
-        <article class="article-body fade-up delay-1">
-
-          <p>I was testing the business agent I built for N&amp;R on something real: drafting an email with an agenda and action items for a client. The agent came back almost immediately. Professional tone, clear structure, specific-sounding deliverables. It looked great.</p>
-
-          <p>It was also completely made up.</p>
-
-          <p>The action plan it wrote wasn&rsquo;t for that client. It wasn&rsquo;t even close. The agent had invented a generic, plausible-sounding plan and presented it with total confidence, as if it had known the client for months.</p>
-
-          <h2>What Actually Happened</h2>
-          <p>An AI agent doesn&rsquo;t store knowledge the way you do. It doesn&rsquo;t remember your clients between sessions or carry context in its head. Every time an agent runs, it starts from scratch. What it knows depends entirely on what information it loads at the start.</p>
-
-          <p>Those startup files are called bootstrap files. Think of them as the agent&rsquo;s briefing document: who the client is, what the project involves, what&rsquo;s already been decided, what&rsquo;s still open. Before the agent does anything, it reads those files and builds a working picture of the situation.</p>
-
-          <p>The routing is what tells the agent which files to load and when.</p>
-
-          <p>On that test run, the routing had a gap. The bootstrap files for that client either weren&rsquo;t loaded or were skipped entirely. So when the agent went to write the email, it had nothing real to work from: no client name, no project context, no actual action items. Just a prompt asking it to draft something professional.</p>
-
-          <p>So it did what language models do when they don&rsquo;t have what they need: they fill in the gaps. Confidently.</p>
-
-          <blockquote class="article-pullquote">The agent wasn&rsquo;t lying. It genuinely didn&rsquo;t know it didn&rsquo;t know.</blockquote>
-
-          <h2>The Confidence Is the Dangerous Part</h2>
-          <p>This is what makes hallucination actually tricky. If the agent had said &ldquo;I don&rsquo;t have enough information to write this,&rdquo; you&rsquo;d fix the problem. But it didn&rsquo;t. It produced something that looked completely real: professional formatting, specific language, the right structure. Nothing in the output signaled that any of it was invented.</p>
-
-          <p>That&rsquo;s the nature of how these models work. They don&rsquo;t experience uncertainty the way you do. They reason from what&rsquo;s in front of them, and if what&rsquo;s in front of them is incomplete, they complete the picture themselves. The output quality doesn&rsquo;t drop. The confidence doesn&rsquo;t waver. It just makes something up.</p>
-
-          <h2>What This Taught Me About Building Agents</h2>
-          <p>After that draft, I went back and tightened the routing. Every client context, every project file, every relevant document loads before the agent touches anything else. The agent doesn&rsquo;t get to write a single word until it&rsquo;s been properly briefed.</p>
-
-          <p>But the deeper lesson was this: the decision the agent made wasn&rsquo;t wrong. Given what it had, it did exactly what it was supposed to do: write a professional email with an agenda and action items. The inputs were broken. The decision was technically correct.</p>
-
-          <blockquote class="article-pullquote">Building a good agent is mostly about getting the inputs right. The model will handle the rest, for better or worse.</blockquote>
-
-          <p>Most people think about agents in terms of outputs: did it do what I asked? The real question is: did it have what it needed to do it correctly? That&rsquo;s the part you build. That&rsquo;s the part that determines whether you get a real plan or a convincing fiction.</p>
-
-          <h2>This Is Why We Don&rsquo;t Set It and Forget It</h2>
-          <p>At N&amp;R, we don&rsquo;t hand someone an agent and walk away. We build the context architecture: the bootstrap files, the routing logic, the information the agent has access to. We keep refining it as the picture of your work gets clearer. An agent that knows everything it needs to know is almost never wrong. An agent running on incomplete context is almost always confidently wrong.</p>
-
-          <p>The difference isn&rsquo;t the model. It&rsquo;s the setup.</p>
-
-          <p>If you&rsquo;ve ever tried an AI tool that seemed to just make things up, that&rsquo;s almost certainly what happened. And it&rsquo;s fixable, but you have to know what to fix.</p>
-
-        </article>
-
-        <div class="cta-banner fade-up article-cta">
-          <h2>Reach out to N&amp;R AI Solutions</h2>
-          <p>We build and maintain agents that are grounded in your actual context, not general guesses. Tell us what you&rsquo;re trying to automate.</p>
-          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        <div class="section-header">
+          <span class="section-label fade-up">Simple, Transparent Pricing</span>
+          <h2 id="pricing-heading" class="fade-up delay-1">What It Costs to Sell</h2>
+          <p class="fade-up delay-2">No subscriptions, no hidden cuts. Two numbers to remember.</p>
         </div>
 
-        <div class="text-center mt-40">
-          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        <div class="price-grid fade-up delay-1">
+          <div class="price-card">
+            <span class="price-card-label">To List a Skill</span>
+            <div class="price-card-amount">$5<span>one-time</span></div>
+            <p>A flat listing fee to publish a skill to the marketplace, covering review and hosting.</p>
+          </div>
+          <div class="price-card">
+            <span class="price-card-label">Per Sale</span>
+            <div class="price-card-amount">$1<span>platform fee</span></div>
+            <p>We take $1 from each sale to cover payments and delivery. The rest is yours.</p>
+          </div>
+        </div>
+        <p class="marketplace-split-note fade-up delay-2">Planned pricing for the initial launch &mdash; subject to change as we build out the platform.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         How to List
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="how-to-list-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Getting Started</span>
+          <h2 id="how-to-list-heading" class="fade-up delay-1">From Idea to Listed</h2>
+          <p class="fade-up delay-2">Three steps, once the marketplace opens for submissions.</p>
+        </div>
+
+        <div class="timeline" role="list">
+          <div class="timeline-item fade-up" role="listitem">
+            <div class="timeline-side left empty" aria-hidden="true"></div>
+            <div class="timeline-dot" aria-hidden="true">01</div>
+            <div class="timeline-side right">
+              <h3>Build Your Skill</h3>
+              <p>Package the task you want your assistant to learn &mdash; a connection to an app, a workflow, a specific capability. We'll publish the developer spec once the marketplace opens.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item fade-up" role="listitem">
+            <div class="timeline-side left">
+              <h3>Submit for Review</h3>
+              <p>Pay the $5 listing fee and submit your skill for review. We check that it works as described and is safe to run before it goes live.</p>
+            </div>
+            <div class="timeline-dot" aria-hidden="true">02</div>
+            <div class="timeline-side right empty" aria-hidden="true"></div>
+          </div>
+
+          <div class="timeline-item fade-up" role="listitem">
+            <div class="timeline-side left empty" aria-hidden="true"></div>
+            <div class="timeline-dot" aria-hidden="true">03</div>
+            <div class="timeline-side right">
+              <h3>Get Paid Per Sale</h3>
+              <p>Your skill goes live in the marketplace, buyable from the website or from inside Archie. You get paid for every sale, minus the $1 platform fee.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- ==============================
+         CTA
+         ============================== -->
+    <section class="section" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>Want in early?</h2>
+          <p>The marketplace is still being built. Join the waitlist as a developer and we'll reach out when submissions open.</p>
+          <a href="../browse/#waitlist-heading" class="btn btn-primary btn-lg">Join the Waitlist</a>
+        </div>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ==============================
+       Footer
+       ============================== -->
   <footer class="footer" aria-label="Site footer">
     <div class="footer-inner">
       <div class="footer-grid">

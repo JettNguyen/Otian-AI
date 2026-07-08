@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Skills Marketplace Waitlist
+   Otian AI | Skills Marketplace Waitlist
    js/marketplace.js
    ======================================== */
 

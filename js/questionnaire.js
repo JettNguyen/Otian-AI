@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Questionnaire Form
+   Otian AI | Questionnaire Form
    js/questionnaire.js
    ======================================== */
 

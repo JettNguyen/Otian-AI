@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Equipment Checklist
+   Otian AI | Equipment Checklist
    js/equipment.js
    ======================================== */
 

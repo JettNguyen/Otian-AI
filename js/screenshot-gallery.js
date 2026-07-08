@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Screenshot Gallery
+   Otian AI | Screenshot Gallery
    js/screenshot-gallery.js
 
    Duplicates each track's items once so the CSS marquee

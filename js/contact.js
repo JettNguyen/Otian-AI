@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Contact Form
+   Otian AI | Contact Form
    js/contact.js
    ======================================== */
 

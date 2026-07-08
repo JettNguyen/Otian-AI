@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Shared Navigation
+   Otian AI | Shared Navigation
    js/nav.js
    ======================================== */
 

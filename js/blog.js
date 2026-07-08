@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Blog Page
+   Otian AI | Blog Page
    js/blog.js
    ======================================== */
 
@@ -132,7 +132,7 @@
       featuredEl.innerHTML = [
         '<span class="resource-featured-label">No Posts Yet</span>',
         '<h3>New articles are on the way.</h3>',
-        '<p>Check back soon for AI notes and call recaps from the N&amp;R AI Solutions team.</p>'
+        '<p>Check back soon for AI notes and call recaps from the Otian AI team.</p>'
       ].join('');
       gridEl.innerHTML = '';
       countEl.textContent = 'No published posts yet.';

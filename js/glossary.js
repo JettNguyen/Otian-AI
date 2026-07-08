@@ -1,5 +1,5 @@
 /* ========================================
-   N&R AI Solutions | Glossary Page
+   Otian AI | Glossary Page
    js/glossary.js
    ======================================== */
 

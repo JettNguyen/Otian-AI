@@ -355,7 +355,7 @@
       .catch(function () {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit';
-        alert('Something went wrong. Please try again or email us at questions@nrsolveai.com');
+        alert('Something went wrong. Please try again or email us at questions@otianai.com');
       });
     });
   }

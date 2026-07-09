@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How My Agent Caught What a Silent Outage Left Behind | Otian AI</title>
+  <meta name="description" content="A minor complaint about a follow-up feature that never fired turned into a two-hour investigation: an expired credential nobody noticed, a hung daemon behind it, an appointment displayed two hours off, and a date parser that had never worked. Four bugs, all silent until someone kept asking." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">How My Agent Caught What a Silent Outage Left Behind</li>
+          </ol>
+        </div>
+      </nav>
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Team Story</span>
+        <h1 class="fade-up delay-1">How My Agent Caught What a Silent Outage Left Behind</h1>
+        <div class="article-byline fade-up delay-2">
+          <strong>Jack Raney</strong>
+          <span>&middot;</span>
+          <span>July 9, 2026</span>
+          <span>&middot;</span>
+          <span>9 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="article-body fade-up delay-1">
+
+<p>It started with a complaint, not a crisis. I told my agent that the skill which tracks email follow-ups for me hadn't fired. Not "hasn't fired recently." Not once, ever, as far as I could remember. No urgency to it — more the mild annoyance of a feature you assume is running quietly in the background until you notice it never actually announced anything.</p>
+
+<p>I expected a quick answer. I got a two-hour investigation that turned up three separate bugs, one of which would have sent me to the wrong place at the wrong hour for a standing personal appointment.</p>
+
+<h2>The Feature That Never Ran</h2>
+
+<p>The first problem was figuring out what "the follow-up skill" even was. It isn't a single toggle — it's a small daemon (a background process that just keeps running, checking your inbox on a timer, the way a thermostat keeps checking the temperature) that reads new email and tries to infer commitments: promises, asks, things a reasonable person would follow up on. When it finds one, it's supposed to surface it.</p>
+
+<p>My agent didn't take my framing at face value. Instead of assuming the feature was misconfigured, it went looking for where the feature actually lived, traced it to the daemon, and checked its output directly: a store of "inferred follow-up commitments," queried with a single command.</p>
+
+<p>The count was zero. Not "zero pending" — zero, total, ever. Nothing had ever been written to it.</p>
+
+<p>That's the kind of result that tells you the problem isn't the feature's logic. If the logic were wrong, you'd expect some garbage in there — bad inferences, duplicates, something. Zero, forever, means the feature never got a single email to look at in the first place.</p>
+
+<h2>Two Thousand, Four Hundred, and Ninety-Seven Identical Lines</h2>
+
+<p>The daemon's log confirmed it. Every sixty seconds, it tried to check my inbox. Every sixty seconds, for what turned out to be days, it failed with the exact same error: invalid_grant: Token has been expired or revoked.</p>
+
+<p>Gmail access for an automated process works through OAuth (the login handshake that lets an app act on your behalf without ever seeing your password) and a refresh token — a long-lived credential that lets the process quietly renew its short-term access every hour without bothering you. That part had been working fine for weeks; the daemon refreshed itself automatically and I never noticed. What died wasn't the hourly refresh. It was the refresh token itself — the thing underneath the thing that renews. Once that's gone, no amount of automatic retrying fixes it. You need a human to sit through a login flow again.</p>
+
+<p>Nobody had. There was no error to click through, no notification, nothing. Just a log file, growing quietly, that nobody was reading.</p>
+
+<p>My agent ran the re-authorization flow, got a fresh token, and confirmed — by hand, hitting the Gmail API directly — that it worked.</p>
+
+<p>And the daemon still didn't recover.</p>
+
+<h2>The Bug Behind the Bug</h2>
+
+<p>This is the part I'd have stopped at, if I'd been doing this myself. Token's fixed, ticket's closed, move on. My agent didn't move on, because the daemon's own log had gone completely silent — no errors, but also no successes. A process that's supposed to check something every sixty seconds should be saying something every sixty seconds, even if that something is "nothing new."</p>
+
+<p>It checked the process directly: still running, using zero CPU, doing nothing. Not crashed — worse, in a way. A crashed process at least tells you it's dead. This one just sat there, holding a working credential it had stopped trying to use, hung on some earlier connection that never came back.</p>
+
+<p>The fix was almost anticlimactic: restart it. Once it came back up with a clean connection and the valid token, it immediately found something real — a missed reminder from days earlier — and handled it correctly within seconds.</p>
+
+<p>Two separate failures, stacked on top of each other, and the second one was only visible because nobody stopped at "the token's fixed now."</p>
+
+<h2>Why Does This Keep Happening?</h2>
+
+<p>I asked the obvious next question: why did the credential die in the first place, and how do I stop it happening again?</p>
+
+<p>The honest answer is I still don't have full certainty — that requires checking a setting in Google's developer console that isn't reachable from a terminal. But the investigation surfaced something I hadn't known: there were two different sets of credentials sitting in the same config directory, created weeks apart, for the same project. Which means this had already happened once before. Someone's response to it back then — me, presumably, or an earlier version of this same automation — wasn't to diagnose the failure. It was to just generate a new credential and move on, the way you'd get a new key cut instead of asking why the old lock keeps jamming.</p>
+
+<p>That's the real finding, more than the specific OAuth theory. A recurring failure that gets patched instead of understood just goes quiet again. So instead of only fixing the token, my agent added something that hadn't existed before: if the daemon fails five times in a row — a few minutes of real trouble, not a network blip — it now sends me an actual alert. Not a line in a log file nobody tails. A message. And when it recovers, it tells me that too. The next time this credential dies, however it dies, I'll know within five minutes instead of finding out weeks later by noticing a suspiciously empty list.</p>
+
+<h2>The Appointment That Would Have Been Two Hours Wrong</h2>
+
+<p>While all this was still being sorted out, a message came through from the same system, working exactly as intended: a recurring personal appointment detected from an email, a calendar event proposed automatically, a reminder set for the drive.</p>
+
+<blockquote class="article-pullquote">Appointment detected — [contact] — Jul 9 at 7:00 PM. In-person (50 min).</blockquote>
+
+<p>Something about it read wrong. Not obviously wrong — just a nagging sense that the time didn't match what I expected. I asked my agent to check.</p>
+
+<p>The actual calendar event, it turned out, was correct: 5:00 PM, in the time zone that matched where the appointment actually was. The message describing it said 7:00 PM. Same appointment, same underlying data, two different times, two hours apart — because the code that generates the human-readable text had been hardcoded to describe every appointment in my home time zone, regardless of where the appointment actually was. When an earlier version of the automation added a special case for "if I'm physically somewhere else, book this in person instead of over video," someone updated the calendar event to use the correct time zone and simply forgot to update the sentence describing it to match.</p>
+
+<p>The event itself was never wrong. If I'd tapped confirm, my calendar would have shown the correct time. But I don't check the invite twice — I read the message, I show up. If that message had gone unquestioned, I'd have shown up two hours off from the actual appointment time.</p>
+
+<p>The instructive part isn't the two-hour gap. It's why it existed: two pieces of information that should never be able to disagree were being computed by two completely separate lines of code, in two different places, written at two different times. Nothing was stopping them from drifting apart — and eventually, quietly, they had.</p>
+
+<p>The fix wasn't just correcting the displayed time. It was removing the possibility of this happening again: instead of the message and the calendar event each doing their own time zone math, both now pull from a single shared calculation. There is no longer a version of this bug where they can disagree, because there's only one place left where the time gets decided at all.</p>
+
+<h2>The Detail I Only Noticed Because I Was Already Looking</h2>
+
+<p>With the time zone fixed, I asked one more question, mostly out of curiosity: did this appointment even follow the format I'd specified for how my calendar titles should look?</p>
+
+<p>It didn't. I have a documented standard for exactly how these should read — a specific word order for how a contact's name and the venue relate to each other — and the automated version had it backwards. Not broken, not confusing, just not what I'd actually specified. The kind of small inconsistency that's easy to live with indefinitely because it never causes a visible problem, only a quiet gap between what you asked for and what you're getting.</p>
+
+<p>That one wasn't hiding behind an error message. It was hiding behind the fact that nobody had ever put the actual rule next to the actual code and compared them line by line. Once that comparison happened, the mismatch took seconds to find and seconds to fix.</p>
+
+<h2>Trying to Break It on Purpose</h2>
+
+<p>By this point I'd found three unrelated bugs while chasing one complaint about a missing feature. That pattern — a small question keeps leading somewhere else — is usually a sign there's more to find, not less. So rather than call it done, I asked for a stress test: don't just tell me it's fixed, prove it.</p>
+
+<p>My agent built a harness that imported the actual code and ran it against a battery of fabricated scenarios — different date formats real emails might use, a version of the appointment logic run with location flipped both ways, a duplicate reminder for an appointment that already exists, a deliberately garbled email with no usable date in it at all — all without sending a single real message or touching a single real file. Forty-three checks in total.</p>
+
+<p>Two failed on the first run. One was a flaw in the test itself, not the code — a shortcut that reset state between calls in a way the real daemon never does, quickly fixed by testing it the same continuous way it actually runs. The other wasn't a flaw in the test. It was a fourth bug: a date format the code claimed to support, using its own documented example as the test case, that had never actually been parseable. A missing comma, silently swallowed by an error handler that was written to fail quietly rather than loudly. There's no way to know how long that path had been dead, because nothing had ever needed it to notice.</p>
+
+<blockquote class="article-pullquote">Forty-three checks, four real bugs found across the whole session, and every one of them was invisible until something insisted on being wrong out loud instead of failing silently.</blockquote>
+
+<h2>What Actually Happened Here</h2>
+
+<p>None of these bugs were dramatic. Nothing was hacked, nothing was stolen, nobody was locked out of anything. The worst-case outcome, if none of this had surfaced, was closer to quietly annoying than dangerous: a feature that never did anything, an appointment I might have shown up to two hours off, a calendar that didn't quite match my own stated preferences, and a code path that had apparently never worked and never would have been missed.</p>
+
+<p>But that's exactly the shape most real problems take. They don't announce themselves. They sit in a log file nobody's tailing, or a display string that quietly stopped matching the thing it was describing, or an error handler that was written to fail politely instead of loudly. Nobody sits down and audits their automation for its own sake. You notice when something's a little off, you ask, and then the question either stops at the first plausible answer or it doesn't.</p>
+
+<p>What mattered here wasn't any single fix. It was that the investigation didn't stop once the original complaint was technically resolved. Token fixed, but the process is still silent — check why. Time is fixed, but does it match the format I asked for — check that too. Everything looks fine now — prove it, instead of assuming it.</p>
+
+<h2>Want an Agent Like This?</h2>
+
+<p>What caught these wasn't a bug tracker or a linter. It was an agent that treats "it's fixed" as the start of the next question, not the end of the conversation.</p>
+
+<p>That's what we build at Otian AI: personal AI agents designed around how you actually live and work, not a chatbot that answers what you ask and stops there. An agent that knows your systems, your standards, and keeps looking past the first plausible explanation.</p>
+
+<p>If this made you wonder what's quietly gone wrong in your own life that nobody's caught yet, reach out. That's exactly the gap we close.</p>
+
+        </article>
+
+        <div class="cta-banner fade-up article-cta">
+          <h2>Reach out to Otian AI</h2>
+          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+
+        <div class="text-center mt-40">
+          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

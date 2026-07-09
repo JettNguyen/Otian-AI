@@ -1,12 +1,30 @@
 [
   {
+    "title": "How My Agent Caught What a Silent Outage Left Behind",
+    "summary": "A minor complaint about a follow-up feature that never fired turned into a two-hour investigation: an expired credential nobody noticed, a hung daemon behind it, an appointment displayed two hours off, and a date parser that had never worked. Four bugs, all silent until someone kept asking.",
+    "author": "Jack Raney",
+    "date": "2026-07-09",
+    "readTime": "9 min read",
+    "category": "Team Stories",
+    "tags": [
+      "AI Agents",
+      "Automation",
+      "Incident Response"
+    ],
+    "url": "how-my-agent-caught-what-a-silent-outage-left-behind/"
+  },
+  {
     "title": "Everyone Is Either Scared of AI Agents or Ignoring Them. Both Are Wrong.",
-    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing — and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
+    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing \u2014 and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
     "author": "Jett Nguyen",
     "date": "2026-07-05",
     "readTime": "5 min read",
     "category": "Team Stories",
-    "tags": ["AI Agents", "Future of Work", "Productivity"],
+    "tags": [
+      "AI Agents",
+      "Future of Work",
+      "Productivity"
+    ],
     "url": "ai-agents-underrated/"
   },
   {
@@ -16,7 +34,11 @@
     "date": "2026-06-30",
     "readTime": "5 min read",
     "category": "Team Stories",
-    "tags": ["AI Agents", "Building AI", "Automation"],
+    "tags": [
+      "AI Agents",
+      "Building AI",
+      "Automation"
+    ],
     "url": "agent-hallucination-context/"
   },
   {
@@ -26,7 +48,11 @@
     "date": "2026-06-25",
     "readTime": "4 min read",
     "category": "Team Stories",
-    "tags": ["Personal Automation", "Workflow Automation", "Fitness"],
+    "tags": [
+      "Personal Automation",
+      "Workflow Automation",
+      "Fitness"
+    ],
     "url": "ai-built-my-workout-program/"
   },
   {
@@ -36,7 +62,11 @@
     "date": "2026-06-23",
     "readTime": "9 min read",
     "category": "Team Stories",
-    "tags": ["Security", "Account Recovery", "Incident Response"],
+    "tags": [
+      "Security",
+      "Account Recovery",
+      "Incident Response"
+    ],
     "url": "socially-engineered-google-call/"
   }
 ]

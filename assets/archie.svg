@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  
+  <!-- Main large triangle with:
+       - Inner transparent cutout
+       - Short, very obtuse (wide) transparent triangle cutout at the base -->
+  <path 
+    d="M 512,85 L 200,850 L 824,850 Z 
+       M 512,300 L 400,600 L 624,600Z 
+       M 200,850 L 824,850 L 512,725 Z" 
+    fill="#E08A5E" 
+    fill-rule="evenodd" />
+
+  <!-- Thinner bottom base triangle pointing upward, aligned to the vertex of the base cutout -->
+  <polygon 
+    points="290,890 512,725 734,890" 
+    fill="#E08A5E" />
+
+</svg>

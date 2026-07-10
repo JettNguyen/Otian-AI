@@ -21,9 +21,9 @@
       <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
-            <a href="skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+            <a href="skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
             <a href="skills-marketplace/browse/" role="menuitem">The Marketplace</a>
             <a href="skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
@@ -63,7 +63,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -76,7 +76,7 @@
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
-      <a href="skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="skills-marketplace/browse/">The Marketplace</a>
       <a href="skills-marketplace/for-developers/">For Developers</a>
     </div>
@@ -154,6 +154,101 @@
           <h2 id="what-heading" class="fade-up delay-1">What is a Personal AI Assistant?</h2>
           <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Text or email it tasks - "reply to this client," "find me a flight," "sort these files" - and it gets to work, then checks in when needed.</p>
         </div>
+        <figure class="explain-figure fade-up delay-1">
+          <svg viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+            <title id="dl-t">The delegation loop: you send a task by text or email, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
+            <style>
+              .dl-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+              .dl-a{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+              .dl-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
+              .dl-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+              .dl-dot{fill:var(--accent)}
+              .dl-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
+              .dl-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
+              .dl-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .dl-alabel{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle;opacity:.72}
+              .dl-run{fill:var(--accent)}
+              @media (prefers-reduced-motion:no-preference){
+                .dl-grp{animation:dlIn .7s cubic-bezier(.22,1,.36,1) both}
+                .dg1{animation-delay:.06s}.dg2{animation-delay:.2s}.dg3{animation-delay:.34s}.dg4{animation-delay:.48s}
+                @keyframes dlIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+                .dl-r-top{animation:dlTop 3s linear infinite}
+                @keyframes dlTop{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(212px)}}
+                .dl-r-right{animation:dlRight 1.3s linear infinite}
+                @keyframes dlRight{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(86px)}}
+                .dl-r-bottom{animation:dlBottom 3s linear infinite}
+                @keyframes dlBottom{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(-212px)}}
+                .dl-r-left{animation:dlLeft 1.3s linear infinite}
+                @keyframes dlLeft{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(-86px)}}
+              }
+            </style>
+
+            <!-- loop flow arrows (clockwise) -->
+            <line class="dl-flow" x1="132" y1="75" x2="344" y2="75"/>
+            <path class="dl-flow" d="M336 70 L344 75 L336 80"/>
+            <line class="dl-flow" x1="392" y1="110" x2="392" y2="196"/>
+            <path class="dl-flow" d="M387 188 L392 196 L397 188"/>
+            <line class="dl-flow" x1="344" y1="231" x2="132" y2="231"/>
+            <path class="dl-flow" d="M140 226 L132 231 L140 236"/>
+            <line class="dl-flow" x1="84" y1="196" x2="84" y2="110"/>
+            <path class="dl-flow" d="M79 118 L84 110 L89 118"/>
+
+            <!-- circulating dots -->
+            <circle class="dl-run dl-r-top" cx="132" cy="75" r="3"/>
+            <circle class="dl-run dl-r-right" cx="392" cy="110" r="3"/>
+            <circle class="dl-run dl-r-bottom" cx="344" cy="231" r="3"/>
+            <circle class="dl-run dl-r-left" cx="84" cy="196" r="3"/>
+
+            <!-- arrow labels -->
+            <text class="dl-alabel" x="238" y="93">text or email</text>
+            <text class="dl-alabel" x="238" y="216">it acts on your OK</text>
+
+            <!-- assistant core -->
+            <circle class="dl-ring" cx="238" cy="153" r="46"/>
+            <path class="dl-a" d="M221 178 L238 126 L255 178"/>
+            <path class="dl-a" d="M227 160 L249 160"/>
+
+            <!-- You -->
+            <g class="dl-grp dg1">
+              <rect class="dl-tile" x="36" y="40" width="96" height="70" rx="14"/>
+              <circle class="dl-glyph" cx="84" cy="58" r="5.5"/>
+              <path class="dl-glyph" d="M74 74 a10 9 0 0 1 20 0"/>
+              <text class="dl-name" x="84" y="91">You</text>
+              <text class="dl-sub" x="84" y="104">delegate a task</text>
+            </g>
+
+            <!-- Working -->
+            <g class="dl-grp dg2">
+              <rect class="dl-tile" x="344" y="40" width="96" height="70" rx="14"/>
+              <circle class="dl-dot" cx="383" cy="58" r="2.6"/>
+              <circle class="dl-dot" cx="392" cy="58" r="2.6"/>
+              <circle class="dl-dot" cx="401" cy="58" r="2.6"/>
+              <text class="dl-name" x="392" y="91">Working</text>
+              <text class="dl-sub" x="392" y="104">in the background</text>
+            </g>
+
+            <!-- Checks in (approval gate) -->
+            <g class="dl-grp dg3">
+              <rect class="dl-tile" x="344" y="196" width="96" height="70" rx="14"/>
+              <rect class="dl-glyph" x="380" y="205" width="24" height="16" rx="5"/>
+              <path class="dl-glyph" d="M386 221 l-1 5 5-4"/>
+              <path class="dl-glyph" d="M385 212 l3 3 6-6"/>
+              <text class="dl-name" x="392" y="247">Checks in</text>
+              <text class="dl-sub" x="392" y="260">for your approval</text>
+            </g>
+
+            <!-- Done -->
+            <g class="dl-grp dg4">
+              <rect class="dl-tile" x="36" y="196" width="96" height="70" rx="14"/>
+              <circle class="dl-glyph" cx="84" cy="212" r="10"/>
+              <path class="dl-glyph" d="M79 212 l3.5 4 7-8"/>
+              <text class="dl-name" x="84" y="247">Done</text>
+              <text class="dl-sub" x="84" y="260">handled for you</text>
+            </g>
+          </svg>
+          <figcaption>You send a task; it works in the background, checks in for your approval, then acts — nothing sends without your OK.</figcaption>
+        </figure>
+
         <div class="feature-grid">
 
           <article class="feature-card fade-up delay-1">
@@ -488,7 +583,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="./">Home</a>
             <a href="how-it-works/">How It Works</a>
-            <a href="skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="skills-marketplace/browse/">Marketplace</a>
             <a href="individuals/">For Individuals</a>
             <a href="business/">For Business</a>
             <a href="about/">About</a>

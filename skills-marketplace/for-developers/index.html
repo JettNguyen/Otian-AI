@@ -21,9 +21,9 @@
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
-            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
             <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
             <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
@@ -63,7 +63,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -76,7 +76,7 @@
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
-      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="../../skills-marketplace/browse/">The Marketplace</a>
       <a href="../../skills-marketplace/for-developers/">For Developers</a>
     </div>
@@ -122,6 +122,103 @@
           <h2 id="how-to-list-heading" class="fade-up delay-1">From Idea to Listed</h2>
           <p class="fade-up delay-2">Three steps, once the marketplace opens for submissions.</p>
         </div>
+        <figure class="explain-figure fade-up delay-1">
+          <svg viewBox="0 0 560 205" role="img" aria-labelledby="dev-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+            <title id="dev-t">A pipeline from building a skill to earning: build it, submit it for review, Otian distributes and syncs it out to users on the website and inside Archie, and you get paid on every sale.</title>
+            <style>
+              .dev-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
+              .dev-node--pay{fill:rgba(224,138,91,.14)}
+              .dev-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+              .dev-badge{fill:var(--accent)}
+              .dev-num{fill:var(--text-on-accent);font-size:12px;font-weight:700;text-anchor:middle}
+              .dev-name{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
+              .dev-sub{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
+              .dev-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
+              .dev-wire{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.3;stroke-linecap:round}
+              .dev-dglyph{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+              .dev-dlbl{fill:currentColor;opacity:.6;font-size:9px;text-anchor:middle}
+              .dev-port{fill:var(--accent)}
+              .dev-run{fill:var(--accent);opacity:0}
+              .dev-sale{fill:var(--accent);opacity:0}
+              @media (prefers-reduced-motion:no-preference){
+                .dev-r1{animation:devRun 2.8s linear infinite}
+                .dev-r2{animation:devRun 2.8s linear infinite .93s}
+                .dev-r3{animation:devRun 2.8s linear infinite 1.86s}
+                @keyframes devRun{0%{opacity:0;transform:translateX(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateX(76px)}}
+                .dev-s1{animation:devSaleA 3s ease-in-out infinite .4s}
+                .dev-s2{animation:devSaleB 3s ease-in-out infinite 1.7s}
+                @keyframes devSaleA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(22px,-60px)}100%{opacity:0;transform:translate(22px,-60px)}}
+                @keyframes devSaleB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-22px,-60px)}100%{opacity:0;transform:translate(-22px,-60px)}}
+                .dev-coin{animation:devPulse 3.4s ease-in-out infinite}
+                @keyframes devPulse{0%,100%{opacity:1}50%{opacity:.62}}
+              }
+            </style>
+
+            <!-- spine connectors -->
+            <path class="dev-arrow" d="M92 64 L168 64 M160 58 L168 64 L160 70"/>
+            <path class="dev-arrow" d="M224 64 L300 64 M292 58 L300 64 L292 70"/>
+            <path class="dev-arrow" d="M356 64 L432 64 M424 58 L432 64 L424 70"/>
+            <circle class="dev-run dev-r1" cx="92" cy="64" r="3.5"/>
+            <circle class="dev-run dev-r2" cx="224" cy="64" r="3.5"/>
+            <circle class="dev-run dev-r3" cx="356" cy="64" r="3.5"/>
+
+            <!-- 1 · Build -->
+            <rect class="dev-node" x="36" y="36" width="56" height="56" rx="16"/>
+            <path class="dev-glyph" d="M57 56 L51 64 L57 72"/>
+            <path class="dev-glyph" d="M71 56 L77 64 L71 72"/>
+            <path class="dev-glyph" d="M67 55 L61 73"/>
+            <circle class="dev-badge" cx="36" cy="36" r="11"/><text class="dev-num" x="36" y="40">1</text>
+            <text class="dev-name" x="64" y="120">Build</text>
+            <text class="dev-sub" x="64" y="136">package the task</text>
+
+            <!-- 2 · Submit -->
+            <rect class="dev-node" x="168" y="36" width="56" height="56" rx="16"/>
+            <path class="dev-glyph" d="M196 71 L196 55"/>
+            <path class="dev-glyph" d="M189 62 L196 54 L203 62"/>
+            <path class="dev-glyph" d="M184 74 L208 74"/>
+            <circle class="dev-badge" cx="168" cy="36" r="11"/><text class="dev-num" x="168" y="40">2</text>
+            <text class="dev-name" x="196" y="120">Submit</text>
+            <text class="dev-sub" x="196" y="136">we review it</text>
+
+            <!-- 3 · List / distribute -->
+            <rect class="dev-node" x="300" y="36" width="56" height="56" rx="16"/>
+            <circle class="dev-port" cx="321" cy="64" r="3"/>
+            <path class="dev-glyph" d="M329 57 A9 9 0 0 1 329 71"/>
+            <path class="dev-glyph" d="M335 52 A15 15 0 0 1 335 76"/>
+            <circle class="dev-badge" cx="300" cy="36" r="11"/><text class="dev-num" x="300" y="40">3</text>
+            <text class="dev-name" x="328" y="120">List</text>
+            <text class="dev-sub" x="328" y="136">we distribute &amp; sync</text>
+
+            <!-- 4 · Earn -->
+            <rect class="dev-node dev-node--pay" x="432" y="36" width="56" height="56" rx="16"/>
+            <g class="dev-coin">
+              <circle class="dev-glyph" cx="460" cy="62" r="10"/>
+              <path class="dev-glyph" d="M460 55 L460 69"/>
+              <path class="dev-glyph" d="M464 58 C464 55 456 55 456 58.5 C456 62 464 61.5 464 65 C464 68.5 456 68.5 456 65"/>
+            </g>
+            <circle class="dev-badge" cx="432" cy="36" r="11"/><text class="dev-num" x="432" y="40">4</text>
+            <text class="dev-name" x="460" y="120">Earn</text>
+            <text class="dev-sub" x="460" y="136">paid on each sale</text>
+
+            <!-- reach: it sells on the Website and inside Archie, revenue flows up into Earn -->
+            <path class="dev-wire" d="M424 152 L446 92"/>
+            <path class="dev-wire" d="M496 152 L474 92"/>
+            <circle class="dev-port" cx="446" cy="92" r="2.5"/>
+            <circle class="dev-port" cx="474" cy="92" r="2.5"/>
+            <circle class="dev-sale dev-s1" cx="424" cy="152" r="3"/>
+            <circle class="dev-sale dev-s2" cx="496" cy="152" r="3"/>
+
+            <rect class="dev-dglyph" x="413" y="155" width="22" height="15" rx="3"/>
+            <path class="dev-dglyph" d="M424 170 L424 174 M417 174 L431 174"/>
+            <text class="dev-dlbl" x="424" y="190">Website</text>
+
+            <path class="dev-dglyph" d="M488 173 L496 154 L504 173"/>
+            <path class="dev-dglyph" d="M491.5 166 L500.5 166"/>
+            <text class="dev-dlbl" x="496" y="190">in Archie</text>
+          </svg>
+          <figcaption>You build and submit; Otian distributes and syncs it out to the website and inside Archie, and pays you on every sale.</figcaption>
+        </figure>
+
 
         <div class="timeline" role="list">
           <div class="timeline-item fade-up" role="listitem">
@@ -184,7 +281,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../../">Home</a>
             <a href="../../how-it-works/">How It Works</a>
-            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../skills-marketplace/browse/">Marketplace</a>
             <a href="../../individuals/">For Individuals</a>
             <a href="../../business/">For Business</a>
             <a href="../../about/">About</a>

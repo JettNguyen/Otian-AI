@@ -18,9 +18,9 @@
       <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
-            <a href="../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
             <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
@@ -60,7 +60,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -73,7 +73,7 @@
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
-      <a href="../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="../skills-marketplace/browse/">The Marketplace</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
     </div>
@@ -103,6 +103,131 @@
         <p class="fade-up delay-2">A practical glossary in plain language. Built to help you understand what matters without the hype.</p>
       </div>
     </section>
+
+    <section class="section" aria-label="How an AI assistant works">
+      <div class="container">
+        <figure class="explain-figure fade-up delay-1">
+          <svg viewBox="0 0 640 300" role="img" aria-labelledby="aip-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+            <title id="aip-t">How an assistant turns a request into an action: you send a prompt to an AI assistant, which reads its context window, becomes an agent that takes an action in your tools, and returns through a human-in-the-loop check as an automation.</title>
+            <style>
+              .aip-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
+              .aip-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+              .aip-panel{fill:rgba(224,138,91,.05);stroke:var(--accent);stroke-width:1.3}
+              .aip-a{fill:none;stroke:var(--accent);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+              .aip-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+              .aip-fill{fill:var(--accent)}
+              .aip-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.3;stroke-linecap:round}
+              .aip-arrow{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+              .aip-port{fill:var(--accent)}
+              .aip-loop{fill:none;stroke:var(--accent);stroke-width:1.6;opacity:.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:4 8}
+              .aip-ctx{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3;stroke-linecap:round}
+              .aip-ctx-hi{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.6;stroke-linecap:round}
+              .aip-gate{fill:var(--bg-primary);stroke:var(--accent);stroke-width:1.4}
+              .aip-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
+              .aip-node{fill:currentColor;font-size:11.5px;font-weight:700;text-anchor:middle}
+              .aip-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .aip-wlbl{fill:var(--accent);font-size:10px;font-weight:600;text-anchor:middle}
+              .aip-cap{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
+              @media (prefers-reduced-motion:no-preference){
+                .aip-stage{animation:aipIn .7s cubic-bezier(.22,1,.36,1) both}
+                .as1{animation-delay:.05s}.as2{animation-delay:.2s}.as3{animation-delay:.35s}.as4{animation-delay:.5s}
+                @keyframes aipIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+                .aip-loop{animation:aipFlow 1.6s linear infinite}
+                @keyframes aipFlow{to{stroke-dashoffset:-24}}
+              }
+            </style>
+
+            <!-- ===== static connectors ===== -->
+            <!-- return loop (automation) -->
+            <path class="aip-loop" d="M568 184 L568 244 Q568 254 558 254 L128 254 Q108 254 96 238 L76 171"/>
+            <path class="aip-arrow" d="M70 178 L76 170 L82 178"/>
+
+            <!-- prompt wire: you -> assistant -->
+            <circle class="aip-port" cx="86" cy="150" r="3"/>
+            <line class="aip-wire" x1="88" y1="150" x2="145" y2="150"/>
+            <path class="aip-arrow" d="M141 146 L147 150 L141 154"/>
+            <!-- assistant -> agent -->
+            <circle class="aip-port" cx="270" cy="150" r="3"/>
+            <line class="aip-wire" x1="272" y1="150" x2="335" y2="150"/>
+            <path class="aip-arrow" d="M331 146 L337 150 L331 154"/>
+            <!-- action wire: agent -> tools -->
+            <circle class="aip-port" cx="456" cy="150" r="3"/>
+            <line class="aip-wire" x1="458" y1="150" x2="515" y2="150"/>
+            <path class="aip-arrow" d="M511 146 L517 150 L511 154"/>
+            <!-- context feed: window -> assistant -->
+            <circle class="aip-port" cx="210" cy="86" r="3"/>
+            <line class="aip-wire" x1="210" y1="88" x2="210" y2="103"/>
+            <path class="aip-arrow" d="M205 99 L210 105 L215 99"/>
+
+            <!-- wire labels -->
+            <text class="aip-wlbl" x="117" y="139">Prompt</text>
+            <text class="aip-wlbl" x="487" y="139">Action</text>
+
+            <!-- ===== stage 1: You ===== -->
+            <g class="aip-stage as1">
+              <circle class="aip-ring" cx="56" cy="150" r="30"/>
+              <circle class="aip-glyph" cx="56" cy="142" r="7.5"/>
+              <path class="aip-glyph" d="M41 169 Q56 150 71 169"/>
+              <text class="aip-node" x="56" y="208">You</text>
+            </g>
+
+            <!-- ===== stage 2: Context Window + AI Assistant ===== -->
+            <g class="aip-stage as2">
+              <text class="aip-cap" x="210" y="16">Context Window</text>
+              <rect class="aip-panel" x="156" y="24" width="108" height="62" rx="10"/>
+              <circle class="aip-fill" cx="167" cy="34" r="1.6"/>
+              <circle class="aip-fill" cx="174" cy="34" r="1.6"/>
+              <circle class="aip-fill" cx="181" cy="34" r="1.6"/>
+              <line class="aip-ctx" x1="164" y1="43" x2="256" y2="43"/>
+              <line class="aip-ctx" x1="172" y1="55" x2="248" y2="55"/>
+              <line class="aip-ctx" x1="172" y1="64" x2="230" y2="64"/>
+              <line class="aip-ctx-hi" x1="172" y1="73" x2="218" y2="73"/>
+
+              <rect class="aip-tile" x="150" y="104" width="120" height="92" rx="16"/>
+              <path class="aip-a" d="M192 160 L210 120 L228 160"/>
+              <path class="aip-a" d="M199 146 L221 146"/>
+              <text class="aip-name" x="210" y="176">AI Assistant</text>
+              <text class="aip-sub" x="210" y="188">the model</text>
+            </g>
+
+            <!-- ===== stage 3: AI Agent ===== -->
+            <g class="aip-stage as3">
+              <rect class="aip-tile" x="340" y="104" width="116" height="92" rx="16"/>
+              <circle class="aip-fill" cx="398" cy="134" r="4"/>
+              <line class="aip-glyph" x1="398" y1="134" x2="380" y2="122"/>
+              <line class="aip-glyph" x1="398" y1="134" x2="416" y2="122"/>
+              <line class="aip-glyph" x1="398" y1="134" x2="398" y2="118"/>
+              <circle class="aip-fill" cx="380" cy="122" r="2.6"/>
+              <circle class="aip-fill" cx="416" cy="122" r="2.6"/>
+              <circle class="aip-fill" cx="398" cy="118" r="2.6"/>
+              <text class="aip-name" x="398" y="176">AI Agent</text>
+              <text class="aip-sub" x="398" y="188">it can act</text>
+            </g>
+
+            <!-- ===== stage 4: Tools, human-in-the-loop, automation ===== -->
+            <g class="aip-stage as4">
+              <rect class="aip-tile" x="520" y="116" width="96" height="68" rx="14"/>
+              <rect class="aip-ctx" x="532" y="124" width="72" height="34" rx="7"/>
+              <line class="aip-ctx" x1="544" y1="132" x2="576" y2="132"/>
+              <path class="aip-glyph" d="M545 149 L552 156 L567 140"/>
+              <text class="aip-node" x="568" y="176">Your tools</text>
+
+              <!-- human-in-the-loop gate on the loop -->
+              <rect class="aip-gate" x="366" y="238" width="68" height="30" rx="15"/>
+              <path class="aip-glyph" d="M388 253 L393 259 L405 245"/>
+              <text class="aip-cap" x="400" y="285">Human-in-the-Loop</text>
+
+              <!-- automation marker on the loop -->
+              <path class="aip-glyph" d="M203 242 A9 9 0 1 1 197 242"/>
+              <path class="aip-arrow" d="M203 237 L205 243 L199 244"/>
+              <text class="aip-cap" x="200" y="285">Automation</text>
+            </g>
+          </svg>
+          <figcaption>How a request becomes an action — and every loop passes back through you.</figcaption>
+        </figure>
+      </div>
+    </section>
+
 
     <section class="section" aria-labelledby="glossary-heading">
       <div class="container glossary-layout">
@@ -155,7 +280,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../">Home</a>
             <a href="../how-it-works/">How It Works</a>
-            <a href="../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../skills-marketplace/browse/">Marketplace</a>
             <a href="../individuals/">For Individuals</a>
             <a href="../business/">For Business</a>
             <a href="../about/">About</a>

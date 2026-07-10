@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What's an Add-on? | Otian AI</title>
+  <meta name="description" content="An add-on is anything you add to your Archie assistant to make it more yours — a new skill, a friendlier voice, a task it handles on its own, or an extra helper. Archie is still in development." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="marketplace-status-badge fade-up">In Development</span>
+        <span class="section-label fade-up">The Basics</span>
+        <h1 class="fade-up delay-1">What's an Add-on?</h1>
+        <p class="fade-up delay-2">The short version: it's anything you add to your assistant to make it more yours.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Core diagram
+         ============================== -->
+    <section class="section" aria-labelledby="core-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Idea</span>
+          <h2 id="core-heading" class="fade-up delay-1">Your Assistant, and Everything You Plug Into It</h2>
+          <p class="fade-up delay-2">Archie arrives smart and capable on its own. Add-ons are how you shape it around your life &mdash; each one plugs in and stays there, quietly doing its part.</p>
+        </div>
+
+        <figure class="explain-figure explain-figure--band fade-up delay-1">
+          <svg viewBox="0 0 380 300" role="img" aria-labelledby="core-t" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;font-family:inherit">
+            <title id="core-t">Your assistant at the center, with four add-ons plugging in around it</title>
+            <style>
+              .core-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+              .core-a{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+              .core-tile{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.4}
+              .core-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+              .core-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32}
+              .core-port{fill:var(--accent)}
+              .core-lbl{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
+              @media (prefers-reduced-motion:no-preference){
+                .core-dock{animation:coreIn .8s cubic-bezier(.22,1,.36,1) both}
+                .cd1{animation-delay:.05s}.cd2{animation-delay:.18s}.cd3{animation-delay:.31s}.cd4{animation-delay:.44s}
+                @keyframes coreIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+              }
+            </style>
+            <circle class="core-ring" cx="190" cy="150" r="54"/>
+            <path class="core-a" d="M168 176 L190 120 L212 176"/>
+            <path class="core-a" d="M177 152 L203 152"/>
+            <g class="core-dock cd1">
+              <line class="core-wire" x1="104" y1="96" x2="145" y2="120"/>
+              <circle class="core-port" cx="145" cy="120" r="3"/>
+              <rect class="core-tile" x="36" y="44" width="68" height="52" rx="12"/>
+              <path class="core-glyph" d="M62 71 L68 77 L79 63"/>
+              <text class="core-lbl" x="70" y="112">Skill</text>
+            </g>
+            <g class="core-dock cd2">
+              <line class="core-wire" x1="276" y1="96" x2="235" y2="120"/>
+              <circle class="core-port" cx="235" cy="120" r="3"/>
+              <rect class="core-tile" x="276" y="44" width="68" height="52" rx="12"/>
+              <rect class="core-glyph" x="298" y="60" width="24" height="16" rx="5"/>
+              <path class="core-glyph" d="M305 76 L303 82 L310 76"/>
+              <text class="core-lbl" x="310" y="112">Personality</text>
+            </g>
+            <g class="core-dock cd3">
+              <line class="core-wire" x1="104" y1="204" x2="145" y2="180"/>
+              <circle class="core-port" cx="145" cy="180" r="3"/>
+              <rect class="core-tile" x="36" y="204" width="68" height="52" rx="12"/>
+              <circle class="core-glyph" cx="70" cy="230" r="9"/>
+              <path class="core-glyph" d="M70 230 L70 224 M70 230 L75 231"/>
+              <text class="core-lbl" x="70" y="272">Routine</text>
+            </g>
+            <g class="core-dock cd4">
+              <line class="core-wire" x1="276" y1="204" x2="235" y2="180"/>
+              <circle class="core-port" cx="235" cy="180" r="3"/>
+              <rect class="core-tile" x="276" y="204" width="68" height="52" rx="12"/>
+              <circle class="core-glyph" cx="310" cy="223" r="4"/>
+              <path class="core-glyph" d="M302 237 A9 8 0 0 1 318 237"/>
+              <text class="core-lbl" x="310" y="272">Worker</text>
+            </g>
+          </svg>
+          <figcaption>Archie sits at the center. Every add-on docks into it.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Why This Exists
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="statement-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Why This Exists</span>
+          <h2 id="statement-heading" class="fade-up delay-1">You're Not Doing This Alone</h2>
+          <p class="fade-up delay-2">Job searching. Meal prepping. Learning to budget. Figuring out a workout routine that actually sticks. Most people are working through the hard stuff solo, with no one really in their corner.</p>
+          <p class="fade-up delay-3">An add-on is a little bit of backup for exactly that &mdash; quietly watching the details, keeping track of what you'd otherwise forget, so you don't have to be "on" all the time. Just steady support for the parts of life nobody hands you a manual for.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Four Kinds
+         ============================== -->
+    <section class="section" aria-labelledby="kinds-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Four Kinds</span>
+          <h2 id="kinds-heading" class="fade-up delay-1">Four Kinds of Add-on</h2>
+          <p class="fade-up delay-2">"Add-on" is the umbrella. Underneath it are four kinds, and they answer four different questions: what can it do, how does it talk, when does it act, and who helps it.</p>
+        </div>
+
+        <figure class="explain-figure fade-up delay-1">
+          <svg viewBox="0 0 480 210" role="img" aria-labelledby="tax-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="tax-t">One add-on, four kinds: Skill, Personality, Routine, and Worker</title>
+            <style>
+              .tax-bus{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3}
+              .tax-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.3}
+              .tax-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+              .tax-name{fill:currentColor;font-size:12px;font-weight:600;text-anchor:middle}
+              .tax-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+            </style>
+            <rect x="168" y="16" width="144" height="42" rx="21" fill="var(--accent)"/>
+            <text x="240" y="43" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text-on-accent)">Add-on</text>
+            <path class="tax-bus" d="M240 58 L240 82 M60 82 L420 82 M60 82 L60 108 M180 82 L180 108 M300 82 L300 108 M420 82 L420 108"/>
+            <rect class="tax-chip" x="8" y="108" width="104" height="72" rx="14"/>
+            <path class="tax-glyph" d="M52 128 L58 135 L69 121"/>
+            <text class="tax-name" x="60" y="158">Skill</text>
+            <text class="tax-sub" x="60" y="172">a capability</text>
+            <rect class="tax-chip" x="128" y="108" width="104" height="72" rx="14"/>
+            <rect class="tax-glyph" x="168" y="120" width="24" height="16" rx="5"/>
+            <path class="tax-glyph" d="M175 136 L173 142 L180 136"/>
+            <text class="tax-name" x="180" y="158">Personality</text>
+            <text class="tax-sub" x="180" y="172">a voice &amp; tone</text>
+            <rect class="tax-chip" x="248" y="108" width="104" height="72" rx="14"/>
+            <circle class="tax-glyph" cx="300" cy="128" r="9"/>
+            <path class="tax-glyph" d="M300 128 L300 122 M300 128 L305 129"/>
+            <text class="tax-name" x="300" y="158">Routine</text>
+            <text class="tax-sub" x="300" y="172">a schedule</text>
+            <rect class="tax-chip" x="368" y="108" width="104" height="72" rx="14"/>
+            <circle class="tax-glyph" cx="420" cy="122" r="4.5"/>
+            <path class="tax-glyph" d="M411 137 A9 8 0 0 1 429 137"/>
+            <text class="tax-name" x="420" y="158">Worker</text>
+            <text class="tax-sub" x="420" y="172">a helper</text>
+          </svg>
+        </figure>
+
+        <div class="feature-grid feature-grid-4 fade-up delay-2" style="margin-top: 48px;">
+          <article class="feature-card">
+            <h3>Skills</h3>
+            <p>Something new your assistant can <em>do</em> &mdash; manage your calendar, sort your files, triage your inbox.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Personalities</h3>
+            <p>How your assistant <em>talks</em> to you. Warm and chatty, or brief and to the point.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Routines</h3>
+            <p>Something it does <em>on its own</em>, on a schedule &mdash; like a summary of your day, every morning.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Workers</h3>
+            <p>A specialist your assistant can <em>hand work to</em>, like a researcher or a writer.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Basics / anatomy
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="what-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Basics</span>
+          <h2 id="what-heading" class="fade-up delay-1">Think of It Like Onboarding</h2>
+          <p class="fade-up delay-2">Think of your assistant like a new hire on their first day. They're smart and capable, but they don't yet know your tools, your accounts, or how you like things done.</p>
+          <p class="fade-up delay-3">An add-on is how your assistant learns. It's a small piece that shows it how to work with something specific &mdash; your fitness app, your email, your calendar, your files.</p>
+        </div>
+
+        <figure class="explain-figure fade-up delay-1" style="margin-bottom: 56px;">
+          <svg viewBox="0 0 440 250" role="img" aria-labelledby="an-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="an-t">Anatomy of an add-on: an icon, a plain name, what it connects to, and a simple on/off</title>
+            <style>
+              .an-card{fill:rgba(224,138,91,.04);stroke:var(--accent);stroke-width:1.5}
+              .an-slot{fill:rgba(224,138,91,.12);stroke:var(--accent);stroke-width:1.3}
+              .an-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+              .an-bar{fill:currentColor}
+              .an-chip{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.4}
+              .an-lead{fill:none;stroke:currentColor;stroke-width:1.2;opacity:.35}
+              .an-pin{fill:var(--accent)}
+              .an-txt{fill:currentColor;font-size:11.5px}
+            </style>
+            <rect class="an-card" x="34" y="46" width="176" height="164" rx="16"/>
+            <rect class="an-slot" x="54" y="66" width="36" height="36" rx="9"/>
+            <path class="an-glyph" d="M64 84 L70 90 L81 76"/>
+            <rect class="an-bar" x="100" y="72" width="86" height="10" rx="5" opacity=".2"/>
+            <rect class="an-bar" x="100" y="88" width="58" height="8" rx="4" opacity=".12"/>
+            <rect class="an-chip" x="54" y="120" width="132" height="30" rx="8"/>
+            <path class="an-glyph" d="M68 135 h8 M76 130 v10 M64 133 h4 v4 h-4 z"/>
+            <rect class="an-bar" x="92" y="131" width="78" height="8" rx="4" opacity=".16"/>
+            <rect x="54" y="168" width="48" height="24" rx="12" fill="var(--accent)"/>
+            <circle cx="90" cy="180" r="9" fill="var(--bg-primary)"/>
+            <rect class="an-bar" x="112" y="176" width="66" height="8" rx="4" opacity=".16"/>
+            <path class="an-lead" d="M92 84 L250 78"/><circle class="an-pin" cx="92" cy="84" r="2.5"/>
+            <text class="an-txt" x="258" y="76"><tspan font-weight="700">An icon</tspan><tspan x="258" dy="15">so you can spot it fast</tspan></text>
+            <path class="an-lead" d="M188 88 L250 122"/><circle class="an-pin" cx="188" cy="88" r="2.5"/>
+            <text class="an-txt" x="258" y="120"><tspan font-weight="700">A plain-language name</tspan><tspan x="258" dy="15">no codes, no jargon</tspan></text>
+            <path class="an-lead" d="M188 135 L250 166"/><circle class="an-pin" cx="188" cy="135" r="2.5"/>
+            <text class="an-txt" x="258" y="164"><tspan font-weight="700">What it plugs into</tspan><tspan x="258" dy="15">your calendar, email, files</tspan></text>
+            <path class="an-lead" d="M104 180 L250 200"/><circle class="an-pin" cx="104" cy="180" r="2.5"/>
+            <text class="an-txt" x="258" y="198"><tspan font-weight="700">A simple on/off</tspan><tspan x="258" dy="15">you're always in control</tspan></text>
+          </svg>
+          <figcaption>That's the whole of it. No configuration, no setup files.</figcaption>
+        </figure>
+
+        <div class="feature-grid fade-up delay-1">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3>Get Them Yourself, or Let Us</h3>
+            <p>Browse the marketplace and pick one up yourself, or tell us what you want during a setup session and we'll handle it. Either way, there's nothing technical to configure.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3>Matched to How You Actually Work</h3>
+            <p>Track workouts, manage your inbox, keep your files organized &mdash; whatever fits your day, there's likely an add-on for it.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <h3>Always in Your Control</h3>
+            <p>You decide which add-ons your assistant uses, and you can turn them on or off anytime.</p>
+          </article>
+        </div>
+
+        <div class="section-header" style="margin-top: 64px; margin-bottom: 40px;">
+          <span class="section-label fade-up">In Practice</span>
+          <h3 class="fade-up delay-1">How It Actually Works</h3>
+          <p class="fade-up delay-2">Say you use Hevy to track your workouts. Without an add-on, you'd open the app, tap through menus, and log everything by hand.</p>
+        </div>
+
+        <figure class="explain-figure fade-up delay-1" style="margin-bottom: 40px;">
+          <svg viewBox="0 0 440 210" role="img" aria-labelledby="ba-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="ba-t">Without an add-on, scattered apps and manual effort; with one, a single calm conversation</title>
+            <style>
+              .ba-cap{font-size:10px;font-weight:700;letter-spacing:.09em;text-anchor:middle}
+              .ba-app{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.42}
+              .ba-dot{fill:currentColor;opacity:.32}
+              .ba-mess{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.28;stroke-linecap:round}
+              .ba-div{stroke:currentColor;stroke-width:1.2;opacity:.25;stroke-dasharray:3 5}
+              .ba-bubble{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.75}
+              .ba-mark{fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+              .ba-line{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;opacity:.55}
+            </style>
+            <text class="ba-cap" x="110" y="24" fill="currentColor" opacity=".55">WITHOUT AN ADD-ON</text>
+            <text class="ba-cap" x="330" y="24" fill="var(--accent)">WITH AN ADD-ON</text>
+            <line class="ba-div" x1="220" y1="42" x2="220" y2="188"/>
+            <path class="ba-mess" d="M60 96 C100 60 140 130 96 150 C70 162 150 150 168 108"/>
+            <g>
+              <rect class="ba-app" x="40" y="64" width="26" height="26" rx="6"/><circle class="ba-dot" cx="53" cy="77" r="2.5"/>
+              <rect class="ba-app" x="96" y="52" width="26" height="26" rx="6"/><circle class="ba-dot" cx="109" cy="65" r="2.5"/>
+              <rect class="ba-app" x="150" y="78" width="26" height="26" rx="6"/><circle class="ba-dot" cx="163" cy="91" r="2.5"/>
+              <rect class="ba-app" x="58" y="120" width="26" height="26" rx="6"/><circle class="ba-dot" cx="71" cy="133" r="2.5"/>
+              <rect class="ba-app" x="116" y="132" width="26" height="26" rx="6"/><circle class="ba-dot" cx="129" cy="145" r="2.5"/>
+              <rect class="ba-app" x="168" y="126" width="26" height="26" rx="6"/><circle class="ba-dot" cx="181" cy="139" r="2.5"/>
+            </g>
+            <rect class="ba-bubble" x="266" y="72" width="130" height="70" rx="18"/>
+            <path class="ba-mark" d="M296 108 L305 117 L322 98"/>
+            <line class="ba-line" x1="332" y1="112" x2="380" y2="112"/>
+          </svg>
+        </figure>
+
+        <div class="before-after-grid fade-up delay-1">
+          <div class="before-after-card">
+            <span class="before-after-label">Without an Add-on</span>
+            <p>You open Hevy, tap through menus, and log every set by hand &mdash; sets, reps, weight, rest, repeat.</p>
+          </div>
+          <div class="before-after-card is-after">
+            <span class="before-after-label">With an Add-on</span>
+            <p>You tell your assistant, &ldquo;I did 3 sets of squats at 135 lbs,&rdquo; and it handles the rest. No app-switching, no manual entry.</p>
+          </div>
+        </div>
+        <p class="marketplace-split-note fade-up delay-2">That's the whole idea: one conversation, instead of five different apps.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         A Few Examples
+         ============================== -->
+    <section class="section" aria-labelledby="examples-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">A Few Examples</span>
+          <h2 id="examples-heading" class="fade-up delay-1">What This Looks Like Day to Day</h2>
+        </div>
+
+        <div class="feature-grid feature-grid-4 fade-up delay-1">
+          <article class="feature-card">
+            <h3>Health &amp; Fitness</h3>
+            <p>Log workouts, track meals, follow up on sleep and habits.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Money &amp; Finance</h3>
+            <p>Watch spending, flag bills, keep an eye on your budget.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Home &amp; Life Admin</h3>
+            <p>Sort files, track packages, plan trips.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Work &amp; Career</h3>
+            <p>Draft replies, prep meeting notes, follow up with contacts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         How you'll get one
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="flow-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">How You'll Get One</span>
+          <h2 id="flow-heading" class="fade-up delay-1">Three Steps, and the Third Isn't Yours</h2>
+          <p class="fade-up delay-2">Once Archie is out, this is the whole process.</p>
+        </div>
+
+        <figure class="explain-figure fade-up delay-1">
+          <svg viewBox="0 0 480 158" role="img" aria-labelledby="fl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:620px;font-family:inherit">
+            <title id="fl-t">Three steps: browse, get it, and it just works</title>
+            <style>
+              .fl-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
+              .fl-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+              .fl-badge{fill:var(--accent)}
+              .fl-num{fill:var(--text-on-accent);font-size:12px;font-weight:700;text-anchor:middle}
+              .fl-name{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
+              .fl-sub{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
+              .fl-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
+              .fl-run{fill:var(--accent);opacity:0}
+              @media (prefers-reduced-motion:no-preference){
+                .fl-r1{animation:flRun 2.6s linear infinite}
+                .fl-r2{animation:flRun 2.6s linear infinite 1.3s}
+                @keyframes flRun{0%{opacity:0;transform:translateX(0)}12%{opacity:1}88%{opacity:1}100%{opacity:0;transform:translateX(88px)}}
+              }
+            </style>
+            <path class="fl-arrow" d="M116 62 L196 62 M188 56 L196 62 L188 68"/>
+            <path class="fl-arrow" d="M284 62 L364 62 M356 56 L364 62 L356 68"/>
+            <circle class="fl-run fl-r1" cx="116" cy="62" r="3.5"/>
+            <circle class="fl-run fl-r2" cx="284" cy="62" r="3.5"/>
+            <rect class="fl-node" x="52" y="34" width="56" height="56" rx="16"/>
+            <circle class="fl-glyph" cx="76" cy="58" r="9"/>
+            <line class="fl-glyph" x1="83" y1="65" x2="90" y2="72"/>
+            <circle class="fl-badge" cx="52" cy="34" r="12"/><text class="fl-num" x="52" y="38">1</text>
+            <text class="fl-name" x="80" y="118">Browse</text>
+            <text class="fl-sub" x="80" y="134">find one you like</text>
+            <rect class="fl-node" x="212" y="34" width="56" height="56" rx="16"/>
+            <path class="fl-glyph" d="M240 48 v20 M230 58 h20"/>
+            <circle class="fl-badge" cx="212" cy="34" r="12"/><text class="fl-num" x="212" y="38">2</text>
+            <text class="fl-name" x="240" y="118">Get it</text>
+            <text class="fl-sub" x="240" y="134">one tap, nothing to set up</text>
+            <rect class="fl-node" x="372" y="34" width="56" height="56" rx="16"/>
+            <path class="fl-glyph" d="M400 45 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+            <circle class="fl-badge" cx="372" cy="34" r="12"/><text class="fl-num" x="372" y="38">3</text>
+            <text class="fl-name" x="400" y="118">It just works</text>
+            <text class="fl-sub" x="400" y="134">just talk to your assistant</text>
+          </svg>
+        </figure>
+
+        <div class="prerelease-banner fade-up delay-2" style="margin-top: 56px;">
+          <svg class="prerelease-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <p><strong>None of this is live yet.</strong> Archie is still in active development, and so are the add-ons built for it. You can browse the marketplace to see what's coming, but nothing is installable today. <a href="../browse/#waitlist-heading">Join the waitlist</a> and we'll tell you the moment it opens.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         CTA
+         ============================== -->
+    <section class="section" aria-label="Call to action">
+      <div class="container">
+        <div class="cta-banner fade-up">
+          <h2>Ready to see what's coming?</h2>
+          <p>Browse add-ons by category, or find out what it takes to build and sell your own.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="../browse/" class="btn btn-primary btn-lg">Browse the Marketplace</a>
+            <a href="../for-developers/" class="btn btn-secondary btn-lg">For Developers</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

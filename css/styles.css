@@ -217,6 +217,10 @@ p { color: var(--text-secondary); line-height: 1.8; }
   font-size: 1.0625rem;
 }
 
+.section-header p + p {
+  margin-top: 14px;
+}
+
 .section-label {
   display: inline-block;
   font-size: 0.75rem;
@@ -4398,7 +4402,10 @@ html[data-theme="dark"] .booking-container iframe {
    34. Skills Marketplace Page
    ======================================== */
 .marketplace-status-badge {
-  display: inline-flex;
+  /* Block-level so it sits on its own line above the eyebrow label, but
+     width:fit-content + auto side-margins keep it pill-shaped and centered. */
+  display: flex;
+  width: fit-content;
   align-items: center;
   gap: 6px;
   font-size: 0.6875rem;
@@ -4409,7 +4416,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 999px;
   background: var(--accent-subtle);
   color: var(--accent-hover);
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
 }
 
 .marketplace-status-badge::before {
@@ -4418,6 +4425,110 @@ html[data-theme="dark"] .booking-container iframe {
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
+}
+
+/* Lets a .section stand in for .page-hero as the first element in <main>,
+   clearing the fixed nav without inheriting the hero's centered-copy layout. */
+.section--top {
+  padding-top: calc(var(--nav-height) + 72px);
+}
+
+.section-header h1 {
+  margin-bottom: 16px;
+}
+
+/* Pre-release notice — Archie has not shipped, so nothing here is installable yet. */
+.prerelease-banner {
+  max-width: 780px;
+  margin: 32px auto 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 22px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent-subtle);
+  text-align: left;
+}
+
+.prerelease-banner-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  color: var(--accent-hover);
+}
+
+.prerelease-banner p {
+  max-width: none;
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.prerelease-banner a {
+  color: var(--accent-hover);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .prerelease-banner {
+    padding: 16px 18px;
+    gap: 12px;
+  }
+}
+
+/* Archie product wordmark lockup — used where Archie the app is introduced. */
+.archie-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 8px auto 4px;
+}
+
+.archie-lockup img {
+  width: auto;
+  height: 64px;
+  max-width: 100%;
+}
+
+.archie-lockup .archie-lockup-note {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Explainer diagrams. SVGs inherit `color` for their neutral ink and read
+   var(--accent) for terracotta, so both themes work from one markup. */
+.explain-figure {
+  margin: 0 auto;
+  max-width: 720px;
+  color: var(--text-primary);
+}
+
+.explain-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.explain-figure figcaption {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.explain-figure--band {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .marketplace-category-count {
@@ -5010,3 +5121,4 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-back-link:hover {
   color: var(--accent);
 }
+

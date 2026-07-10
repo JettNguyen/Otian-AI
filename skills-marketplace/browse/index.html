@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Product Marketplace | Otian AI</title>
-  <meta name="description" content="Browse skills, personalities, routines, and workers for your Archie assistant. Built by developers, ready to install in one click." />
+<title>Add-on Marketplace | Otian AI</title>
+  <meta name="description" content="Preview the skills, personalities, routines, and workers coming to your Archie assistant. Archie is still in development — join the waitlist to hear when the marketplace opens." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -21,9 +21,9 @@
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
-            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
             <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
             <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
           </div>
@@ -63,7 +63,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -76,7 +76,7 @@
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
-      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="../../skills-marketplace/browse/">The Marketplace</a>
       <a href="../../skills-marketplace/for-developers/">For Developers</a>
     </div>
@@ -101,26 +101,24 @@
   <main>
 
     <!-- ==============================
-         Page Hero
+         Add-ons
          ============================== -->
-    <section class="page-hero" aria-label="Page introduction">
-      <div class="page-hero-inner">
-        <span class="marketplace-status-badge fade-up">Browse &amp; Install</span>
-        <span class="section-label fade-up">Browse Products</span>
-        <h1 class="fade-up delay-1">The Product Marketplace</h1>
-        <p class="fade-up delay-2">Browse skills, personalities, routines, and workers for your Archie assistant. Built by developers, ready to install in one click.</p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Products
-         ============================== -->
-    <section class="section" aria-labelledby="products-heading">
+    <section class="section section--top" aria-labelledby="products-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Browse Products</span>
-          <h2 id="products-heading" class="fade-up delay-1">Everything Your Agent Needs</h2>
-          <p class="fade-up delay-2">Skills, personalities, routines, and workers &mdash; all in one place. Search, filter, and find exactly what you're looking for.</p>
+          <span class="marketplace-status-badge fade-up">In Development</span>
+          <span class="section-label fade-up">Browse Add-ons</span>
+          <h1 id="products-heading" class="fade-up delay-1">Everything Your Agent Needs</h1>
+          <p class="fade-up delay-2">Skills, personalities, routines, and workers &mdash; four kinds of add-on, all in one place. Search, filter, and find exactly what you're looking for.</p>
+
+          <div class="prerelease-banner fade-up delay-2">
+            <svg class="prerelease-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p><strong>Archie hasn't launched yet.</strong> It's still in active development, so nothing below is installable today &mdash; this is a preview of what the marketplace will offer at release. <a href="#waitlist-heading">Join the waitlist</a> and we'll tell you the moment it opens.</p>
+          </div>
         </div>
 
         <div class="marketplace-search-bar fade-up delay-1">
@@ -128,10 +126,10 @@
             <circle cx="11" cy="11" r="8"/>
             <line x1="21" y1="21" x2="16.65" y2="16.65"/>
           </svg>
-          <input type="search" id="marketplaceSearchInput" class="marketplace-search-input" placeholder="Search products&hellip;" aria-label="Search products" />
+          <input type="search" id="marketplaceSearchInput" class="marketplace-search-input" placeholder="Search add-ons&hellip;" aria-label="Search add-ons" />
         </div>
 
-        <div class="mp-type-tabs fade-up delay-1" id="mpTypeTabs" role="group" aria-label="Filter by product type">
+        <div class="mp-type-tabs fade-up delay-1" id="mpTypeTabs" role="group" aria-label="Filter by add-on type">
           <button type="button" class="mp-type-tab is-active" data-type="all">All (17)</button>
           <button type="button" class="mp-type-tab" data-type="skill">Skills (4)</button>
           <button type="button" class="mp-type-tab" data-type="personality">Personalities (6)</button>
@@ -169,7 +167,7 @@
             <p class="mp-card-author">by Archie (built-in)</p>
             <p class="mp-card-desc">Full Google Calendar management — create, read, update, and delete events via natural language.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="skills/calendar-management/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -225,7 +223,7 @@
             <p class="mp-card-tagline">Boardroom-ready precision</p>
             <p class="mp-card-desc">A polished, executive-level assistant voice. Clear, concise, and confident — ideal for business communication and scheduling.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="personalities/professional/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -240,7 +238,7 @@
             <p class="mp-card-tagline">Warm, helpful, and approachable</p>
             <p class="mp-card-desc">A warm and conversational assistant that feels like chatting with a capable friend. Helpful without being stiff.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="personalities/friendly/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -255,7 +253,7 @@
             <p class="mp-card-tagline">Maximum signal, minimum words</p>
             <p class="mp-card-desc">A no-nonsense assistant that gets straight to the point. Every word earns its place. Perfect for power users who know what they want.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="personalities/concise/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -313,7 +311,7 @@
             <p class="mp-card-author">by Otian AI</p>
             <p class="mp-card-desc">A morning summary of today's calendar events sent to Telegram. Start every day informed.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="routines/daily-briefing/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -355,7 +353,7 @@
             <p class="mp-card-author">by Otian AI</p>
             <p class="mp-card-desc">A dedicated research worker that digs into topics, summarizes findings, and presents structured answers.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="workers/researcher/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -369,7 +367,7 @@
             <p class="mp-card-author">by Otian AI</p>
             <p class="mp-card-desc">A writing specialist that drafts, edits, and polishes text — emails, posts, summaries, and more.</p>
             <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free</span>
+              <span class="mp-price-badge is-free">Free at launch</span>
               <a href="workers/writer/" class="mp-card-link">View Details &rarr;</a>
             </div>
           </article>
@@ -402,7 +400,7 @@
 
         </div>
 
-        <p class="marketplace-filter-empty" id="marketplaceFilterEmpty" hidden>No products match your filters. Try adjusting your search or <a href="#waitlist-heading">join the waitlist</a> to hear about new releases.</p>
+        <p class="marketplace-filter-empty" id="marketplaceFilterEmpty" hidden>No add-ons match your filters. Try adjusting your search or <a href="#waitlist-heading">join the waitlist</a> to hear about new releases.</p>
       </div>
     </section>
 
@@ -412,17 +410,23 @@
     <section class="section section-alt" aria-labelledby="archie-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">How Buying Works</span>
+          <span class="section-label fade-up">How Buying Will Work</span>
           <h2 id="archie-heading" class="fade-up delay-1">Built Around Archie</h2>
-          <p class="fade-up delay-2">Archie is our desktop app &mdash; the same OpenClaw-powered assistant you already know, minus needing VS Code to run it. A proper interface for starting conversations, reviewing what your assistant did, and managing skills.</p>
+          <p class="fade-up delay-2">Archie is the desktop app we're building &mdash; the same OpenClaw-powered assistant you already know, minus needing VS Code to run it. A proper interface for starting conversations, reviewing what your assistant did, and managing skills.</p>
+          <p class="fade-up delay-2">It isn't released yet. Here's how the marketplace will work once it is.</p>
         </div>
 
-        <div class="two-col fade-up delay-1">
+        <div class="archie-lockup fade-up delay-1">
+          <img src="../../assets/archie-text.svg" alt="Archie" />
+          <span class="archie-lockup-note">In development</span>
+        </div>
+
+        <div class="two-col fade-up delay-1" style="margin-top: 40px;">
           <div class="two-col-card">
             <h3>Buy a Skill Once</h3>
             <ul class="two-col-card-list">
-              <li>Browse and buy from this site or from inside Archie</li>
-              <li>Your account keeps track of everything you own</li>
+              <li>You'll browse and buy from this site or from inside Archie</li>
+              <li>Your account will keep track of everything you own</li>
               <li>Skills sync automatically &mdash; no reinstalling per device</li>
               <li>New skill versions update in place</li>
             </ul>
@@ -530,7 +534,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="../../">Home</a>
             <a href="../../how-it-works/">How It Works</a>
-            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../skills-marketplace/browse/">Marketplace</a>
             <a href="../../individuals/">For Individuals</a>
             <a href="../../business/">For Business</a>
             <a href="../../about/">About</a>

@@ -21,8 +21,9 @@
       <a href="./" class="nav-logo"><img src="assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navMarketplace">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Marketplace</button>
-          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Marketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+            <a href="archie/" role="menuitem">What Is Archie?</a>
             <a href="skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
             <a href="skills-marketplace/browse/" role="menuitem">The Marketplace</a>
             <a href="skills-marketplace/for-developers/" role="menuitem">For Developers</a>
@@ -63,7 +64,7 @@
 
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
@@ -76,6 +77,7 @@
       <span id="navDrawerFlyoutTitle">Services</span>
     </button>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="archie/">What Is Archie?</a>
       <a href="skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="skills-marketplace/browse/">The Marketplace</a>
       <a href="skills-marketplace/for-developers/">For Developers</a>
@@ -152,11 +154,11 @@
         <div class="section-header">
           <span class="section-label fade-up">What We Do</span>
           <h2 id="what-heading" class="fade-up delay-1">What is a Personal AI Assistant?</h2>
-          <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Text or email it tasks - "reply to this client," "find me a flight," "sort these files" - and it gets to work, then checks in when needed.</p>
+          <p class="fade-up delay-2">Think of it as a remote assistant powered by AI. Message it tasks - "reply to this client," "find me a flight," "sort these files" - and it gets to work, then checks in when needed.</p>
         </div>
         <figure class="explain-figure fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
-            <title id="dl-t">The delegation loop: you send a task by text or email, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
+            <title id="dl-t">The delegation loop: you send a task to your agent, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
             <style>
               .dl-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
               .dl-a{fill:var(--accent)}
@@ -200,7 +202,7 @@
             <circle class="dl-run dl-r-left" cx="84" cy="196" r="3"/>
 
             <!-- arrow labels -->
-            <text class="dl-alabel" x="238" y="93">text or email</text>
+            <text class="dl-alabel" x="238" y="93">message</text>
             <text class="dl-alabel" x="238" y="216">it acts on your OK</text>
 
             <!-- assistant core -->
@@ -215,8 +217,8 @@
               <rect class="dl-tile" x="36" y="40" width="96" height="70" rx="14"/>
               <circle class="dl-glyph" cx="84" cy="58" r="5.5"/>
               <path class="dl-glyph" d="M74 74 a10 9 0 0 1 20 0"/>
-              <text class="dl-name" x="84" y="91">You</text>
-              <text class="dl-sub" x="84" y="104">delegate a task</text>
+              <text class="dl-name" x="84" y="89">You</text>
+              <text class="dl-sub" x="84" y="102">delegate a task</text>
             </g>
 
             <!-- Working -->
@@ -225,31 +227,31 @@
               <circle class="dl-dot" cx="383" cy="64" r="2.6"/>
               <circle class="dl-dot" cx="392" cy="64" r="2.6"/>
               <circle class="dl-dot" cx="401" cy="64" r="2.6"/>
-              <text class="dl-name" x="392" y="91">Working</text>
-              <text class="dl-sub" x="392" y="104">in the background</text>
+              <text class="dl-name" x="392" y="89">Working</text>
+              <text class="dl-sub" x="392" y="102">in the background</text>
             </g>
 
             <!-- Checks in (approval gate) -->
             <g class="dl-grp dg3">
               <rect class="dl-tile" x="344" y="196" width="96" height="70" rx="14"/>
-              <rect class="dl-glyph" x="380" y="207" width="24" height="16" rx="5"/>
-              <path class="dl-glyph" d="M386 223 l-1 5 5-4"/>
-              <path class="dl-glyph" d="M386 215 l3 3 6-6"/>
-              <text class="dl-name" x="392" y="247">Checks in</text>
-              <text class="dl-sub" x="392" y="260">for your approval</text>
+              <rect class="dl-glyph" x="380" y="209" width="24" height="16" rx="5"/>
+              <path class="dl-glyph" d="M384 225 l-1 5 5-4"/>
+              <path class="dl-glyph" d="M386 217 l3 3 6-6"/>
+              <text class="dl-name" x="392" y="245">Checks in</text>
+              <text class="dl-sub" x="392" y="258">for your approval</text>
             </g>
 
             <!-- Done -->
             <g class="dl-grp dg4">
               <rect class="dl-tile" x="36" y="196" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="215" r="10"/>
-              <path class="dl-glyph" d="M79 215 l3.5 4 7-8"/>
-              <text class="dl-name" x="84" y="247">Done</text>
-              <text class="dl-sub" x="84" y="260">handled for you</text>
+              <circle class="dl-glyph" cx="84" cy="217" r="10"/>
+              <path class="dl-glyph" d="M79 218 l3.5 4 7-8"/>
+              <text class="dl-name" x="84" y="245">Done</text>
+              <text class="dl-sub" x="84" y="258">handled for you</text>
             </g>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 464" role="img" aria-labelledby="dlm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:340px;font-family:inherit">
-  <title id="dlm-t">The delegation loop: you send a task by text or email, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
+  <title id="dlm-t">The delegation loop: you send a task to your agent, the assistant works in the background, checks in for your approval, then acts and reports back — a continuous cycle around the assistant.</title>
   <style>
     .dlm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
     .dlm-a{fill:var(--accent)}
@@ -294,7 +296,7 @@
   <circle class="dlm-run dlm-r-up" cx="324" cy="413" r="3"/>
 
   <!-- arrow labels -->
-  <text class="dlm-alabel" x="110" y="117">text or email</text>
+  <text class="dlm-alabel" x="110" y="117">message</text>
   <text class="dlm-alabel" x="110" y="355">it acts on your OK</text>
 
   <!-- assistant core, enclosed by the loop -->
@@ -307,39 +309,39 @@
   <!-- You -->
   <g class="dlm-grp dlm-g1">
     <rect class="dlm-tile" x="16" y="16" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="34" r="5.5"/>
-    <path class="dlm-glyph" d="M86 50 a10 9 0 0 1 20 0"/>
-    <text class="dlm-name" x="96" y="67">You</text>
-    <text class="dlm-sub" x="96" y="80">delegate a task</text>
+    <circle class="dlm-glyph" cx="96" cy="32" r="5.5"/>
+    <path class="dlm-glyph" d="M86 48 a10 9 0 0 1 20 0"/>
+    <text class="dlm-name" x="96" y="63">You</text>
+    <text class="dlm-sub" x="96" y="76">delegate a task</text>
   </g>
 
   <!-- Working -->
   <g class="dlm-grp dlm-g2">
     <rect class="dlm-tile" x="16" y="140" width="160" height="70" rx="14"/>
-    <circle class="dlm-dot" cx="87" cy="158" r="2.6"/>
-    <circle class="dlm-dot" cx="96" cy="158" r="2.6"/>
-    <circle class="dlm-dot" cx="105" cy="158" r="2.6"/>
-    <text class="dlm-name" x="96" y="191">Working</text>
-    <text class="dlm-sub" x="96" y="204">in the background</text>
+    <circle class="dlm-dot" cx="87" cy="161" r="2.6"/>
+    <circle class="dlm-dot" cx="96" cy="161" r="2.6"/>
+    <circle class="dlm-dot" cx="105" cy="161" r="2.6"/>
+    <text class="dlm-name" x="96" y="187">Working</text>
+    <text class="dlm-sub" x="96" y="200">in the background</text>
   </g>
 
   <!-- Checks in (approval gate) -->
   <g class="dlm-grp dlm-g3">
     <rect class="dlm-tile" x="16" y="254" width="160" height="70" rx="14"/>
-    <rect class="dlm-glyph" x="84" y="263" width="24" height="16" rx="5"/>
-    <path class="dlm-glyph" d="M90 279 l-1 5 5-4"/>
-    <path class="dlm-glyph" d="M89 270 l3 3 6-6"/>
-    <text class="dlm-name" x="96" y="305">Checks in</text>
-    <text class="dlm-sub" x="96" y="318">for your approval</text>
+    <rect class="dlm-glyph" x="84" y="262" width="24" height="16" rx="5"/>
+    <path class="dlm-glyph" d="M88 279 l-1 5 5-4"/>
+    <path class="dlm-glyph" d="M91 270 l3 3 6-6"/>
+    <text class="dlm-name" x="96" y="301">Checks in</text>
+    <text class="dlm-sub" x="96" y="314">for your approval</text>
   </g>
 
   <!-- Done -->
   <g class="dlm-grp dlm-g4">
     <rect class="dlm-tile" x="16" y="378" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="394" r="10"/>
-    <path class="dlm-glyph" d="M91 394 l3.5 4 7-8"/>
-    <text class="dlm-name" x="96" y="429">Done</text>
-    <text class="dlm-sub" x="96" y="442">handled for you</text>
+    <circle class="dlm-glyph" cx="96" cy="397" r="10"/>
+    <path class="dlm-glyph" d="M91 397 l3.5 4 7-8"/>
+    <text class="dlm-name" x="96" y="425">Done</text>
+    <text class="dlm-sub" x="96" y="438">handled for you</text>
   </g>
 </svg>
           <figcaption>You send a task; it works in the background, checks in for your approval, then acts — nothing sends without your OK.</figcaption>
@@ -704,6 +706,7 @@
           <nav class="footer-nav-links" aria-label="Footer navigation">
             <a href="./">Home</a>
             <a href="how-it-works/">How It Works</a>
+            <a href="archie/">Archie</a>
             <a href="skills-marketplace/browse/">Marketplace</a>
             <a href="individuals/">For Individuals</a>
             <a href="business/">For Business</a>

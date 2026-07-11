@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>What Is Archie? | Otian AI</title>
+  <meta name="description" content="Archie is the desktop app we're building — a personal AI assistant that runs on your own Mac, shaped by you and owned by you. Here's what's coming." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Guided AI Assistants</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Archie">
+            <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../individuals/" role="menuitem">For Individuals</a>
+            <a href="../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../about/" role="menuitem">About</a>
+            <a href="../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutMarketplace">
+      <a href="../archie/">What Is Archie?</a>
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
+      <a href="../individuals/">For Individuals</a>
+      <a href="../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
+      <a href="../ai-explained/">AI Explained</a>
+      <a href="../blog/">Blog</a>
+      <a href="../equipment/">Equipment Needed</a>
+      <a href="../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../about/">About</a>
+      <a href="../testimonials/">Agent Successes</a>
+      <a href="../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==============================
+         Page Hero
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <img src="../assets/archie.svg" alt="Archie" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
+        <span class="section-label fade-up delay-1">In Development</span>
+        <h1 class="fade-up delay-1">Meet Archie</h1>
+        <p class="fade-up delay-2">The desktop app we&rsquo;re building to put a personal AI assistant on your own computer &mdash; one you shape, name, and truly own. No terminals, no code, nothing leaving your Mac.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Idea
+         ============================== -->
+    <section class="section" aria-labelledby="idea-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Idea</span>
+          <h2 id="idea-heading" class="fade-up delay-1">Your Own Assistant, Living on Your Mac</h2>
+          <p class="fade-up delay-2">Archie is a Mac app that runs your own AI assistant, right on your computer. You talk to it the way you&rsquo;d text a friend, and it actually gets things done &mdash; keeping your calendar straight, staying on top of your inbox, running research, and handling the busywork you&rsquo;d rather not.</p>
+          <p class="fade-up delay-2">What makes it different is where it lives. Your assistant, its memory, and everything it touches stay on your machine &mdash; not on someone else&rsquo;s servers. You&rsquo;re not renting a sliver of a company&rsquo;s cloud. You own the whole thing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         What You Can Build
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="build-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What You Can Build</span>
+          <h2 id="build-heading" class="fade-up delay-1">Shape It Piece by Piece</h2>
+          <p class="fade-up delay-2">Archie is modular. You start with a blank assistant and build it up with the pieces you want &mdash; so no two assistants are ever quite the same.</p>
+        </div>
+
+        <div class="feature-grid fade-up delay-1" style="margin-top: 48px;">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </div>
+            <h3>Personality</h3>
+            <p>How your assistant talks to you. Warm and chatty or brief and to the point &mdash; you set the voice and the vibe.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h3>Skills &amp; Add-ons</h3>
+            <p>The things it can do. Add new abilities in a click from the built-in marketplace &mdash; calendar management, inbox triage, and more.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3>Workers</h3>
+            <p>Specialists your assistant can hand work to &mdash; a researcher, a writer &mdash; each focused on doing one thing well.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+            </div>
+            <h3>Routines</h3>
+            <p>Things it does on its own, on a schedule. A briefing every morning, a report every Friday &mdash; without being asked.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <h3>Knowledge Base</h3>
+            <p>Give it your files &mdash; notes, PDFs, documents &mdash; so it answers from what <em>you</em> know, not just what it was trained on.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+              </svg>
+            </div>
+            <h3>Connections</h3>
+            <p>Link the tools you already use, like Gmail and Google Calendar &mdash; only ever when you say so.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Yours Alone (privacy)
+         ============================== -->
+    <section class="section" aria-labelledby="private-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Yours Alone</span>
+          <h2 id="private-heading" class="fade-up delay-1">Everything Stays on Your Computer</h2>
+          <p class="fade-up delay-2">Your assistant runs entirely on your Mac. Its instructions, your files, your chat history, and your keys stay on your device &mdash; kept in your Mac&rsquo;s secure storage, never on our servers. It talks to the AI through your own account, so your conversations never pass through us.</p>
+        </div>
+
+        <div class="two-col fade-up delay-1" style="margin-top: 40px;">
+          <div class="two-col-card">
+            <h3>What lives on your Mac</h3>
+            <ul class="two-col-card-list">
+              <li>Your assistant and everything it knows</li>
+              <li>Your files, notes, and its memory</li>
+              <li>Your connected accounts and API keys</li>
+              <li>Every message you exchange</li>
+            </ul>
+          </div>
+          <div class="two-col-card">
+            <h3>What Otian can see</h3>
+            <ul class="two-col-card-list">
+              <li>Only whether your subscription is active</li>
+              <li>Never your chats, files, or accounts</li>
+              <li>No central copy of your data to breach</li>
+              <li>You can pull the plug anytime</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Built for People
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="easy-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">No Setup Headaches</span>
+          <h2 id="easy-heading" class="fade-up delay-1">Built for People, Not Programmers</h2>
+          <p class="fade-up delay-2">Running your own AI assistant used to mean terminals, config files, and copying secret keys between windows. Archie tucks all of that behind a friendly app. If you can send a text and click a button, you can run it &mdash; and when you&rsquo;d like a hand getting started, our guided setup is one message away.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Coming Soon CTA
+         ============================== -->
+    <section class="section" aria-labelledby="coming-heading">
+      <div class="container">
+        <div class="archie-lockup fade-up">
+          <img src="../assets/archie-text.svg" alt="Archie" />
+          <span class="archie-lockup-note">In development</span>
+        </div>
+        <div class="cta-banner fade-up delay-1" style="margin-top: 32px;">
+          <h2 id="coming-heading">Archie is on the way</h2>
+          <p>We&rsquo;re putting the finishing touches on it. Want a head start? Our guided service can set you up with the same kind of assistant today &mdash; and you&rsquo;ll be first in line when the app arrives.</p>
+          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+            <a href="../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="../skills-marketplace/browse/" class="btn btn-secondary btn-lg">Browse the Marketplace</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../archie/">Archie</a>
+            <a href="../skills-marketplace/browse/">Marketplace</a>
+            <a href="../individuals/">For Individuals</a>
+            <a href="../business/">For Business</a>
+            <a href="../about/">About</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../equipment/">Equipment Needed</a>
+            <a href="../testimonials/">Agent Successes</a>
+            <a href="../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+</body>
+</html>

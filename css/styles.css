@@ -1525,6 +1525,32 @@ html[data-theme="dark"] .theme-toggle-thumb {
   line-height: 1.85;
 }
 
+/* FAQ section groups (subheadings) */
+.faq-group {
+  max-width: 740px;
+  margin: 0 auto;
+}
+
+.faq-group + .faq-group {
+  margin-top: 44px;
+}
+
+.faq-group .accordion {
+  max-width: none;
+  margin: 0;
+}
+
+.faq-group-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
 /* ========================================
    18. Form Base
    ======================================== */

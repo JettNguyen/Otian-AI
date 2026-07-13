@@ -3464,8 +3464,12 @@ html[data-theme="dark"] .availability-widget iframe {
     width: 100%;
   }
 
+  /* The hero eyebrow carries the app name ("Otian AI") and must stay visible at
+     every width — Google OAuth verification requires the app name to be
+     displayed on the home page. */
   .hero .section-label {
-    display: none;
+    display: inline-block;
+    margin-bottom: 8px;
   }
 
   .hero-title-full {

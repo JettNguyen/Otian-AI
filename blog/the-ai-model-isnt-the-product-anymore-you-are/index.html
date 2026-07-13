@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The AI Model Isn't the Product Anymore. You Are. | Otian AI</title>
+  <meta name="description" content="A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator — the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">The AI Model Isn't the Product Anymore. You Are.</li>
+          </ol>
+        </div>
+      </nav>
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Team Story</span>
+        <h1 class="fade-up delay-1">The AI Model Isn't the Product Anymore. You Are.</h1>
+        <div class="article-byline fade-up delay-2">
+          <strong>Jack Raney</strong>
+          <span>&middot;</span>
+          <span>July 12, 2026</span>
+          <span>&middot;</span>
+          <span>6 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="article-body fade-up delay-1">
+
+<p>A year ago, most conversations about AI were centered around one question: which model is the smartest?</p>
+
+<p>People compared ChatGPT, Claude, Gemini, and every new model release that came out. Which one writes better? Which one codes better? Which one reasons better?</p>
+
+<p>That question made sense because the models were the product.</p>
+
+<p>I think that's starting to change.</p>
+
+<p>The next phase of AI will not be defined only by who has the most intelligent model. It will be defined by who can build the most useful relationship between a person and AI.</p>
+
+<p>Because intelligence alone is not enough.</p>
+
+<p>The most powerful AI system in the world is still limited if it does not understand the person using it.</p>
+
+<h2>The Model Is Becoming Infrastructure</h2>
+
+<p>The pace of AI development is moving faster than almost any technology we've seen before. Models that were considered state-of-the-art a year ago are quickly becoming outdated. New systems continue to improve at reasoning, writing, coding, research, and problem-solving.</p>
+
+<p>Those improvements matter, but they also create an interesting shift.</p>
+
+<p>When every major AI company has access to extremely capable models, the underlying intelligence starts becoming less of a differentiator.</p>
+
+<p>A similar thing happened with computers. The average person does not choose their laptop because they know the technical specifications of every component inside it. They choose it because it helps them accomplish what they want to accomplish.</p>
+
+<p>The hardware matters, but the experience matters more.</p>
+
+<p>AI is moving in the same direction.</p>
+
+<p>The model is the engine. The real value will come from everything built around it.</p>
+
+<h2>The Missing Ingredient Is Context</h2>
+
+<p>The difference between a generic AI assistant and a truly useful AI assistant comes down to one thing: context.</p>
+
+<p>A general AI knows a lot about the world.</p>
+
+<p>A personal AI knows a lot about you.</p>
+
+<p>It understands your goals, your preferences, your habits, your communication style, the tools you use, the people you interact with, and the decisions you make repeatedly throughout your life.</p>
+
+<p>That distinction changes everything.</p>
+
+<p>Imagine asking an AI to plan a trip.</p>
+
+<p>A basic assistant can find flights and hotels.</p>
+
+<p>A personalized assistant knows that you prefer early flights, that you hate long layovers, that you usually stay at Marriott properties, that you have a golf round scheduled the day after you arrive, and that you prefer to keep your mornings open before important meetings.</p>
+
+<p>The task itself is not difficult.</p>
+
+<p>The value comes from knowing how you think.</p>
+
+<h2>This Is Why Agents Matter</h2>
+
+<p>When people talk about AI agents today, they often focus on the automation side of things.</p>
+
+<p>An AI that can browse the internet.</p>
+
+<p>An AI that can click buttons.</p>
+
+<p>An AI that can fill out forms.</p>
+
+<p>Those capabilities are impressive, but they are not the end goal.</p>
+
+<p>The browser is just a tool.</p>
+
+<p>The real breakthrough happens when an AI understands what needs to happen and why.</p>
+
+<p>Booking a flight is easy.</p>
+
+<p>Knowing which flight you would choose, understanding why you would choose it, making sure it fits your schedule, updating your calendar, preparing the necessary documents, and handling everything around that decision is where the value comes from.</p>
+
+<p>A truly useful agent is not just completing tasks.</p>
+
+<p>It is making decisions within the context of your life.</p>
+
+<h2>The Problem With Today's AI</h2>
+
+<p>The biggest limitation with AI today is that every interaction still starts too much from the beginning.</p>
+
+<p>You open a new chat.</p>
+
+<p>You explain what you need.</p>
+
+<p>You provide context.</p>
+
+<p>You remind it how you like things done.</p>
+
+<p>Then you repeat the process again later.</p>
+
+<p>That is not how relationships work.</p>
+
+<p>If you hired an assistant and had to reintroduce yourself every morning, explain your priorities every afternoon, and remind them how you prefer things done every week, they would not be very useful.</p>
+
+<p>The value of a great assistant comes from accumulated knowledge. They get better because they understand you better over time.</p>
+
+<p>AI should work the same way.</p>
+
+<h2>The Future Is Not One AI Model</h2>
+
+<p>One of the most interesting questions about the future of AI is whether one company will become the single winner.</p>
+
+<p>Will it be OpenAI?</p>
+
+<p>Anthropic?</p>
+
+<p>Google?</p>
+
+<p>Something else?</p>
+
+<p>I think the future is probably more complicated.</p>
+
+<p>Different models will have different strengths. One may be better at writing, another at coding, another at research, and another at specialized tasks.</p>
+
+<p>The user should not have to think about which model is running in the background.</p>
+
+<p>Just like you do not think about which search algorithm answers your Google query, you should not have to think about which AI model handles a specific task.</p>
+
+<p>The system should simply know.</p>
+
+<p>The future may not belong to the best individual model.</p>
+
+<p>It may belong to the best system built around those models.</p>
+
+<h2>This Is Why We Built Otian AI</h2>
+
+<p>This is the idea behind Otian AI.</p>
+
+<p>We do not think the future is another chatbot that waits for you to ask the right question.</p>
+
+<p>We think the future is a personalized AI assistant that understands how you live and work, then helps you accomplish more with less friction.</p>
+
+<p>Everyone's life is different.</p>
+
+<p>Your schedule is different. Your goals are different. Your business is different. Your habits are different. The tools you use every day are different.</p>
+
+<p>A generic AI experience cannot fully account for that.</p>
+
+<p>At Otian AI, we build custom AI agents designed around the individual. Not templates. Not one-size-fits-all chatbots. Systems that understand your unique workflows, connect to the tools you already use, and help handle the decisions that consume your attention every day.</p>
+
+<p>For one person, that might mean managing a business, organizing projects, and keeping communication organized.</p>
+
+<p>For another, it might mean optimizing health, planning travel, managing finances, or staying focused on long-term goals.</p>
+
+<p>The technology is the same.</p>
+
+<p>The application is completely personal.</p>
+
+<h2>The Future of AI Is Personal</h2>
+
+<p>The companies building the smartest models will continue pushing the boundaries of what AI can do.</p>
+
+<p>But intelligence alone does not create usefulness.</p>
+
+<p>The most valuable AI will not just know more about the world.</p>
+
+<p>It will know more about you.</p>
+
+<p>Because the ultimate goal is not having a smarter chatbot.</p>
+
+<p>It is having an assistant that understands what you are trying to accomplish, knows how you operate, and helps you get there without requiring you to manage every detail yourself.</p>
+
+<p>The future is not opening an AI every time you need help.</p>
+
+<p>The future is having one that already knows how to help.</p>
+
+        </article>
+
+        <div class="cta-banner fade-up article-cta">
+          <h2>Reach out to Otian AI</h2>
+          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+
+        <div class="text-center mt-40">
+          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

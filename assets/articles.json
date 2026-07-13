@@ -1,5 +1,19 @@
 [
   {
+    "title": "The AI Model Isn't the Product Anymore. You Are.",
+    "summary": "A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator \u2014 the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful.",
+    "author": "Jack Raney",
+    "date": "2026-07-12",
+    "readTime": "6 min read",
+    "category": "Team Stories",
+    "tags": [
+      "AI Agents",
+      "Personal AI",
+      "Future of Work"
+    ],
+    "url": "the-ai-model-isnt-the-product-anymore-you-are/"
+  },
+  {
     "title": "How My Agent Caught What a Silent Outage Left Behind",
     "summary": "A minor complaint about a follow-up feature that never fired turned into a two-hour investigation: an expired credential nobody noticed, a hung daemon behind it, an appointment displayed two hours off, and a date parser that had never worked. Four bugs, all silent until someone kept asking.",
     "author": "Jack Raney",

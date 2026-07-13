@@ -1,4 +1,8 @@
 rules_version = '2';
+// SOURCE OF TRUTH: this file (Archie repo). The otianai.com repo keeps a byte-identical copy
+// because BOTH repos have a CI job that deploys `--only firestore` to archie-77170 — whichever
+// pushes last wins, so a drift here silently breaks the marketplace or submissions. Edit both, or
+// (better) consolidate the two deploy workflows into one. See project_firebase_database_plan.
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -18,10 +22,73 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
-    // Marketplace: no longer used (items are bundled in the app).
-    match /marketplace/{collection}/{docId} {
+    // One-time purchases, written ONLY by the Stripe webhook (Render, Admin SDK — bypasses
+    // rules). Users can read their own purchase records; nobody can write client-side, so a
+    // purchase can't be forged from the app.
+    match /users/{uid}/purchases/{itemId} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Marketplace: public read-only catalog, seeded from data/marketplace/ by CI (Admin SDK,
+    // bypasses rules).
+    //
+    // The path here has to be a recursive wildcard, and getting it wrong was silently fatal: the
+    // documents live at `marketplace/{collection}/items/{docId}` (four segments — seed.js writes
+    // an `items` SUBCOLLECTION), but this rule used to match `marketplace/{collection}/{docId}`
+    // (three). No rule matched, so Firestore default-denied, and every catalog read in every
+    // shipped build came back 403. The app swallows that error and falls back to built-ins, so the
+    // remote marketplace appeared to "work" while being completely dead.
+    match /marketplace/{document=**} {
       allow read: if true;
       allow write: if false;
+    }
+
+    // Paid item bodies (a skill's SKILL.md, a personality's system prompt): readable only by
+    // someone who OWNS the item, or by an admin. This is the server-enforced half of the paywall —
+    // the public catalog doc above carries only the storefront metadata, never the thing being
+    // sold. Free/built-in items ship their bodies inside the app and never touch this collection.
+    //
+    // The admin arm is what lets the owner and staff install paid items without paying: the app's
+    // own check can be patched out of a local binary, but this cannot — the tier is read from the
+    // user's Firestore doc, which no client can write (see /users above).
+    match /marketplace_templates/{itemId} {
+      allow read: if request.auth != null && (
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)/purchases/$(itemId))
+        || isAdmin()
+      );
+      allow write: if false;
+    }
+
+    function isAdmin() {
+      return request.auth != null
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.access_tier == 'admin';
+    }
+
+    // Third-party add-on submissions from the website form (skill / worker / routine /
+    // personality — one type-specific page each, all writing here). Signed-in users can create one
+    // document per submission; nobody can read/update/delete client-side (review happens in the
+    // Firebase console → approved items are copied into the repo's data/marketplace/, making git the
+    // review record and CI the publisher). Field checks keep spam bounded.
+    //
+    // `screenshot_url` is required: every submission must carry proof it actually runs (the image is
+    // uploaded to Storage first — see storage.rules — and its download URL recorded here). `type`
+    // must be one of the four add-on kinds so review can route it.
+    match /submissions/{submissionId} {
+      allow read, update, delete: if false;
+      allow create: if request.auth != null
+        && request.resource.data.submitter_uid == request.auth.uid
+        && request.resource.data.type in ['skill', 'worker', 'routine', 'personality']
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1 && request.resource.data.name.size() <= 64
+        && request.resource.data.description is string
+        && request.resource.data.description.size() >= 1 && request.resource.data.description.size() <= 280
+        && request.resource.data.template_md is string
+        && request.resource.data.template_md.size() >= 1 && request.resource.data.template_md.size() <= 20000
+        && request.resource.data.screenshot_url is string
+        && request.resource.data.screenshot_url.matches('https://.*')
+        && request.resource.data.license_granted == true;
     }
   }
 }

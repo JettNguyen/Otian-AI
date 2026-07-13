@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1128px; height:191px; }
+  .banner {
+    position:relative; width:1128px; height:191px; overflow:hidden;
+    background:
+      radial-gradient(circle at 86% 8%, rgba(224,138,91,0.24), transparent 55%),
+      linear-gradient(100deg, #FBF8F4 0%, #FAF0E6 58%, #F4E0CF 100%);
+    font-family:'Inter', system-ui, sans-serif;
+  }
+  .motif { left: 500px; top: 0; position:absolute; }
+  /* text block — clears the bottom-left logo safe zone */
+  .content {
+    height:191px; width:700px; left:420px; top:0; position:absolute;
+    display:flex; flex-direction:column; justify-content:center; gap:9px;
+  }
+  .wordmark {
+    font-family:Georgia,'Times New Roman',serif; font-weight:700;
+    font-size:47px; line-height:1; letter-spacing:-0.005em; color:#3D3128;
+  }
+  .wordmark .ai { color:#CC7647; font-weight:400; }
+  .tag {
+    font-size:20px; font-weight:600; color:#574F46; letter-spacing:0.005em;
+  }
+  .tag .accent { color:#CC7647; }
+  .sub {
+    font-size:15.5px; font-weight:500; color:#A0938A; letter-spacing:0.01em;
+  }
+  .sub .url { color:#4A423A; font-weight:600; }
+  .sub .sep { color:#DAC7B6; padding:0 7px; }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <!-- brand watermark: Otian mark inside the delegation-loop rings -->
+    <svg class="motif" width="430" height="191" viewBox="0 0 430 191" fill="none" aria-hidden="true">
+      <!-- Otian mark (Georgia O + checkmark), centered -->
+      <g transform="translate(300,96) scale(0.66) translate(-129,-126)" opacity="0.52">
+        <text x="16" y="225" font-family="Georgia,'Times New Roman',serif" font-size="290" font-weight="500" letter-spacing="1" fill="#3D3128">O</text>
+        <path d="M80 135 L110 180 L160 75" fill="none" stroke="#B5652E" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </svg>
+
+    <div class="content">
+      <div class="wordmark" style="justify-self: center;">Otian <span class="ai">AI</span></div>
+      <div class="tag">Making Agentic AI <span class="accent">Accessible.</span></div>
+      <div class="sub">Personal AI that's built for how you work</div>
+    </div>
+  </div>
+</body>
+</html>

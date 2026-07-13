@@ -236,9 +236,31 @@
     setStatus("Signing you in…");
     try {
       const idToken = await user.getIdToken(true);
-      const redirect = `${callbackUrl}?id_token=${encodeURIComponent(idToken)}&refresh_token=${encodeURIComponent(user.refreshToken)}&email=${encodeURIComponent(user.email || "")}&uid=${encodeURIComponent(user.uid)}&state=${encodeURIComponent(appState)}`;
       setStatus("Returning to Archie…");
-      window.location.href = redirect;
+      // Deliver the tokens to Archie's loopback by POSTing a form — NOT a GET redirect. A GET would
+      // put the long-lived refresh token in the URL, where it is written to the browser's history
+      // and recoverable long after. A form POST carries the tokens in the request body instead, so
+      // nothing sensitive appears in the address bar or history. Values are set raw; the browser
+      // form-encodes them once on submit and Archie decodes them once.
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = callbackUrl;
+      const fields = {
+        id_token: idToken,
+        refresh_token: user.refreshToken,
+        email: user.email || "",
+        uid: user.uid,
+        state: appState,
+      };
+      for (const [name, value] of Object.entries(fields)) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+      }
+      document.body.appendChild(form);
+      form.submit();
     } catch (e) {
       setStatus("Error: " + e.message, "error");
     }

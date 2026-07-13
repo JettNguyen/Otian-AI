@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Briefing | Add-on Marketplace | Otian AI</title>
-  <meta name="description" content="A morning summary of today's calendar events sent to Telegram. Coming to the Archie marketplace." />
+  <title>Meeting Notes | Add-on Marketplace | Otian AI</title>
+  <meta name="description" content="Recaps, decisions, and action items from your meetings — your agent reads your Fireflies transcripts and remembers who said what. Coming to the Archie marketplace." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -104,44 +104,98 @@
         <nav class="mp-breadcrumb" aria-label="Breadcrumb">
           <a href="../../../../skills-marketplace/browse/">Marketplace</a>
           <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
-          <a href="../../../../skills-marketplace/browse/">Routines</a>
+          <a href="../../../../skills-marketplace/browse/">Skills</a>
           <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
-          <span>Daily Briefing</span>
+          <span>Meeting Notes</span>
         </nav>
 
         <div class="mp-detail-badges">
-          <span class="mp-type-badge mp-type-badge--routine">Routine</span>
+          <span class="mp-type-badge">Skill</span>
           <span class="mp-category-badge">productivity</span>
         </div>
 
-        <h1 class="mp-detail-title">Daily Briefing</h1>
+        <h1 class="mp-detail-title">Meeting Notes</h1>
 
         <div class="mp-detail-meta">
           <span>by Otian AI</span>
-          <span>v1.0.0</span>
-          <span class="mp-price-badge is-free">Free</span>
+          <span>v1.4.0</span>
+          <span class="mp-price-badge is-premium">$15 &middot; one-time</span>
         </div>
 
-        <p class="mp-detail-desc">Start every day informed. The Daily Briefing routine checks your Google Calendar each morning and sends a concise summary of the day's events to your Telegram chat. Includes meeting times, titles, and any preparation notes.</p>
-
-        <div class="mp-callout">Requires: Calendar Management skill</div>
+        <p class="mp-detail-desc">Connect your Fireflies account and your agent quietly builds a memory of every meeting you have. It pulls new transcripts, works out which speaker is which person, writes a summary with the decisions and action items, and files it away. Then you can just ask: what have Sarah and I talked about recently? What did we decide about pricing? What did I commit to on Tuesday's call? When a transcript comes back with anonymous "Speaker 1" labels &mdash; which Fireflies does for uploads, Teams, and phone calls &mdash; the agent infers who's who from the transcript and the invite, shows you its guess, and remembers your correction for good.</p>
 
         <div class="mp-detail-section">
-          <h3>Trigger Schedule</h3>
-          <div class="mp-highlight-box">Runs daily at 08:00 UTC</div>
+          <h3>Required Integrations</h3>
+          <div class="mp-tags">
+            <span class="mp-tag">Fireflies</span>
+          </div>
         </div>
 
         <div class="mp-detail-section">
-          <h3>Action</h3>
-          <div class="mp-highlight-box">Prompts the Calendar Management skill: &ldquo;Give me a complete summary of today&rsquo;s calendar. Include event times, titles, locations, and any preparation I should do.&rdquo; Delivered via Telegram notification.</div>
+          <h3>Trigger Keywords</h3>
+          <div class="mp-tags">
+            <span class="mp-tag">meeting notes</span>
+            <span class="mp-tag">transcript</span>
+            <span class="mp-tag">meeting recap</span>
+            <span class="mp-tag">call notes</span>
+            <span class="mp-tag">action items</span>
+            <span class="mp-tag">recap</span>
+            <span class="mp-tag">what did we discuss</span>
+            <span class="mp-tag">what did we decide</span>
+            <span class="mp-tag">talked about</span>
+            <span class="mp-tag">discussed with</span>
+            <span class="mp-tag">who said</span>
+            <span class="mp-tag">last call</span>
+            <span class="mp-tag">catch me up</span>
+            <span class="mp-tag">follow-ups</span>
+            <span class="mp-tag">participants</span>
+            <span class="mp-tag">fireflies</span>
+          </div>
         </div>
 
         <div class="mp-detail-section">
           <h3>Setup Steps</h3>
           <ol class="mp-numbered-list">
-            <li>Install the Calendar Management skill and connect Google Calendar first.</li>
-            <li>Set your preferred briefing time (UTC).</li>
+            <li>Requires a Fireflies account &mdash; this skill reads the transcripts Fireflies records for you.</li>
+            <li>In Fireflies, go to Settings &rarr; MCP &amp; Dev Tools &rarr; Developer Settings and copy your API Key.</li>
+            <li>Paste the key below, then set your timezone so meeting times display correctly.</li>
+            <li>Ask the agent to sync your meetings, or install the Meeting Sync routine to keep it up to date automatically.</li>
           </ol>
+        </div>
+
+        <div class="mp-detail-section">
+          <h3>Configurable Variables</h3>
+          <table class="mp-var-table">
+            <thead>
+              <tr>
+                <th>Variable</th>
+                <th>Label</th>
+                <th>Help</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>TIMEZONE</code></td>
+                <td>Your timezone</td>
+                <td>IANA timezone (e.g. America/Los_Angeles, Europe/London). Used to show meeting times.</td>
+              </tr>
+              <tr>
+                <td><code>DEFAULT_LOOKBACK_DAYS</code></td>
+                <td>How far back "recent" means (days)</td>
+                <td>When you ask about recent meetings without giving dates, the agent looks back this far.</td>
+              </tr>
+              <tr>
+                <td><code>MEETING_FOCUS</code></td>
+                <td>What matters most in your meetings</td>
+                <td>Shapes what the agent pulls out of a transcript.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mp-detail-section">
+          <h3>Model Tier</h3>
+          <span class="mp-tier-badge">Balanced</span>
         </div>
 
         <div class="mp-detail-cta">

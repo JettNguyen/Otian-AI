@@ -36,6 +36,15 @@
   --bg-wash-one: rgba(251, 228, 211, 0.42);
   --bg-wash-two: rgba(240, 184, 168, 0.24);
 
+  /* Add-on type accents — mirror the Archie app so a Worker, Routine, and
+     Personality read as blue/teal/plum; Skills use the brand accent above. */
+  --c-blue: #5988CB;
+  --c-blue-subtle: rgba(89, 136, 203, 0.13);
+  --c-teal: #3E9A92;
+  --c-teal-subtle: rgba(62, 154, 146, 0.13);
+  --c-plum: #996FBE;
+  --c-plum-subtle: rgba(153, 111, 190, 0.13);
+
   /* Layout */
   --radius: 12px;
   --radius-sm: 8px;
@@ -78,6 +87,12 @@
   --text-on-accent: #2A2521;
   --bg-wash-one: rgba(76, 65, 54, 0.35);
   --bg-wash-two: rgba(239, 199, 119, 0.14);
+  --c-blue: #86AEE4;
+  --c-blue-subtle: rgba(134, 174, 228, 0.16);
+  --c-teal: #6FC4BC;
+  --c-teal-subtle: rgba(111, 196, 188, 0.16);
+  --c-plum: #BE9BDD;
+  --c-plum-subtle: rgba(190, 155, 221, 0.16);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
@@ -4711,7 +4726,7 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-type-tab {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--tab-color, var(--text-secondary));
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -4719,14 +4734,21 @@ html[data-theme="dark"] .booking-container iframe {
   transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
+/* Each type tab carries its add-on color (matching the badges) — as text at rest and a
+   solid fill when active. The All tab sets no --tab-color and falls back to the brand accent. */
+.mp-type-tab[data-type="skill"]       { --tab-color: var(--accent); }
+.mp-type-tab[data-type="worker"]      { --tab-color: var(--c-blue); }
+.mp-type-tab[data-type="routine"]     { --tab-color: var(--c-teal); }
+.mp-type-tab[data-type="personality"] { --tab-color: var(--c-plum); }
+
 .mp-type-tab:hover {
-  color: var(--text-primary);
-  border-color: var(--accent);
+  color: var(--tab-color, var(--text-primary));
+  border-color: var(--tab-color, var(--accent));
 }
 
 .mp-type-tab.is-active {
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--tab-color, var(--accent));
+  border-color: var(--tab-color, var(--accent));
   color: #fff;
 }
 
@@ -4744,14 +4766,15 @@ html[data-theme="dark"] .booking-container iframe {
   margin-bottom: 0;
 }
 
-/* Price toggle group */
+/* Price toggle group — a recessed segmented switch (inset track + raised active chip) so it
+   reads as one control, distinct from the flat category filter pills beside it. */
 .mp-price-toggle {
   display: flex;
   gap: 4px;
-  background: var(--bg-card);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 3px;
+  padding: 4px;
 }
 
 .mp-price-btn {
@@ -4771,8 +4794,10 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .mp-price-btn.is-active {
-  background: var(--accent);
-  color: #fff;
+  background: var(--bg-card);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 /* Product grid */
@@ -4823,6 +4848,27 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-type-badge {
   background: var(--accent-subtle);
   color: var(--accent-hover);
+}
+
+/* Color-code the type badge per add-on kind, matching the Archie app. Skills keep
+   the brand accent (default above); the grid colors by data-type so cards need no
+   extra class, and detail pages opt in with an explicit modifier class. */
+.mp-product-card[data-type="worker"] .mp-type-badge,
+.mp-type-badge--worker {
+  background: var(--c-blue-subtle);
+  color: var(--c-blue);
+}
+
+.mp-product-card[data-type="routine"] .mp-type-badge,
+.mp-type-badge--routine {
+  background: var(--c-teal-subtle);
+  color: var(--c-teal);
+}
+
+.mp-product-card[data-type="personality"] .mp-type-badge,
+.mp-type-badge--personality {
+  background: var(--c-plum-subtle);
+  color: var(--c-plum);
 }
 
 .mp-category-badge {

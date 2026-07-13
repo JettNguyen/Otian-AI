@@ -22,6 +22,8 @@ import {
 import {
   getFirestore,
   collection,
+  doc,
+  getDoc,
   addDoc,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -56,6 +58,47 @@ const done = document.getElementById("doneBanner");
 const signinError = document.getElementById("signinError");
 const formError = document.getElementById("formError");
 
+// Panel shown to a signed-in account that isn't an active Archie user. Submissions require an active
+// subscription — we only list add-ons that were built and tested inside the app, and you can't do
+// that without one. The server-side gate is the Firestore /submissions rule and the Storage rule;
+// this is only the friendly front door so a non-subscriber sees WHY up front instead of filling out
+// the whole form and hitting a permission error at submit. Built in JS so all four submit pages
+// inherit it without editing their HTML.
+const subGate = document.createElement("div");
+subGate.className = "cta-banner fade-up";
+subGate.style.display = "none";
+subGate.innerHTML =
+  "<h2>You need an active Archie subscription to submit</h2>" +
+  "<p>Add-ons are only listed once they've been built and tested inside Archie, so submitting one " +
+  'requires an active account. Signed in as <strong id="subGateEmail"></strong>.</p>' +
+  '<a href="../../../questionnaire/" class="btn btn-primary btn-lg">Get Archie</a>' +
+  '<p style="margin-top:0.9rem; font-size:0.9rem;"><a href="#" id="subGateSignOut">Use a different account</a></p>';
+form.parentNode.insertBefore(subGate, form);
+subGate.querySelector("#subGateSignOut").addEventListener("click", (e) => {
+  e.preventDefault();
+  signOut(auth);
+});
+
+// Whether the signed-in account may submit: the same "active Archie account" the app and the
+// security rules require (admin / client / active subscriber). Reads the caller's own user doc,
+// which the Firestore rules allow. Fails OPEN on a read error — a network blip shouldn't lock out a
+// real subscriber, and the /submissions rule still blocks the actual write for anyone who isn't.
+async function isEntitledUser(user) {
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (!snap.exists()) return false;
+    const d = snap.data();
+    const tier = d.access_tier || "none";
+    return (
+      tier === "admin" ||
+      tier === "client" ||
+      (tier === "subscriber" && d.subscription_status === "active")
+    );
+  } catch (e) {
+    return true;
+  }
+}
+
 function showSigninError(msg) {
   signinError.textContent = msg;
   signinError.style.display = "";
@@ -74,14 +117,29 @@ if (customToken) {
   window.history.replaceState({}, document.title, clean);
 }
 
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    gate.style.display = "none";
-    form.style.display = "";
-    document.getElementById("signedInAs").textContent = user.email || user.displayName || "your account";
-  } else {
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    gate.querySelector("h2").textContent = "Sign in to submit";
     gate.style.display = "";
     form.style.display = "none";
+    subGate.style.display = "none";
+    return;
+  }
+  const who = user.email || user.displayName || "your account";
+  // Keep the gate visible with a "checking" note during the entitlement read, so there's no flash of
+  // empty page between sign-in and whichever panel (form vs. subscribe) we end up showing.
+  gate.querySelector("h2").textContent = "Checking your account…";
+  gate.style.display = "";
+  const entitled = await isEntitledUser(user);
+  gate.style.display = "none";
+  if (entitled) {
+    subGate.style.display = "none";
+    form.style.display = "";
+    document.getElementById("signedInAs").textContent = who;
+  } else {
+    form.style.display = "none";
+    subGate.style.display = "";
+    subGate.querySelector("#subGateEmail").textContent = who;
   }
 });
 

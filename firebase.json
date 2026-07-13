@@ -1,23 +1,12 @@
 {
+  "//": "This repo is the marketing website only. It does NOT own any Firebase backend. All Firestore/Storage rules, indexes, and marketplace seeding live in the Archie app repo (single source of truth, deployed by its firebase-deploy.yml). The pages here use Firebase only at runtime via the client SDK (auth, Firestore reads, submission uploads) — nothing to deploy. The site itself ships via GitHub Pages (see .github/workflows/deploy.yml), so this hosting block is only for local `firebase serve`.",
   "hosting": {
     "public": ".",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "functions/**",
       "data/**"
     ]
-  },
-  "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "functions": [
-    {
-      "source": "functions",
-      "codebase": "default",
-      "runtime": "nodejs20"
-    }
-  ]
+  }
 }

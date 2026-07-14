@@ -103,19 +103,41 @@
 
   /* ── Active page link ──
      Use link.href (browser-resolved absolute URL) so relative hrefs
-     like "../about/" work correctly from any directory depth.        */
+     like "../about/" work correctly from any directory depth.
+
+     Most specific link wins. A link also matches as an ancestor of the current page, so that
+     /skills-marketplace/browse/skills/calendar-management/ still lights "Browse" — but only the
+     LONGEST match is highlighted. Without that, /archie/ ("What Is Archie?") is a prefix of
+     /archie/see-it-work/ and would light up alongside "See It Work"; those two are siblings in
+     the dropdown, not parent and child. Every link tied at the longest match lights up, which is
+     what keeps the nav, drawer, and flyout copies of the same href in sync.                */
   var currentNorm = window.location.pathname.replace(/\/+$/, '') || '/';
 
-  document.querySelectorAll('.nav-links a, .nav-drawer a, .nav-drawer-flyout a').forEach(function (link) {
+  var links = document.querySelectorAll('.nav-links a, .nav-drawer a, .nav-drawer-flyout a');
+  var best = '';
+
+  var pathOf = function (link) {
     try {
-      var linkNorm = new URL(link.href).pathname.replace(/\/+$/, '') || '/';
-      if (linkNorm === currentNorm) {
-        link.classList.add('active');
-      } else if (linkNorm !== '/' && currentNorm.startsWith(linkNorm + '/')) {
-        link.classList.add('active');
-      }
-    } catch (e) { /* skip non-navigable hrefs */ }
+      return new URL(link.href).pathname.replace(/\/+$/, '') || '/';
+    } catch (e) {
+      return null; /* non-navigable href */
+    }
+  };
+
+  links.forEach(function (link) {
+    var linkNorm = pathOf(link);
+    if (linkNorm === null) return;
+    var matches =
+      linkNorm === currentNorm ||
+      (linkNorm !== '/' && currentNorm.startsWith(linkNorm + '/'));
+    if (matches && linkNorm.length > best.length) best = linkNorm;
   });
+
+  if (best) {
+    links.forEach(function (link) {
+      if (pathOf(link) === best) link.classList.add('active');
+    });
+  }
 
   var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.nav-more'));
 

@@ -3504,87 +3504,74 @@ html[data-theme="dark"] .availability-widget iframe {
      interior: cream on a cream page, landing within ~4 levels of the background the whole way
      down instead of 200. */
   .demo-player--hero .demo-player-video {
+    --hero-zoom: 1.08;
     object-position: top center;
-    transform: scale(1.08);
+    transform: scale(var(--hero-zoom));
     transform-origin: top center;
   }
 
   /* The recording dissolves downward into the page, and the headline rises into what it
      leaves behind. Two things this gradient has to get right:
 
-     It holds its shape past the halfway mark — fade any earlier and the app is a smudge,
-     because the UI is cream-on-cream against this background.
+     It holds full opacity to two-thirds down — fade any earlier and the app is a smudge, because
+     the UI is cream-on-cream against this background, and the whole point of leading with the
+     recording is that you can see it.
 
      And it eases to fully transparent exactly at the bottom edge (100%, not 96%). A plain
      two-stop ramp lands on zero early and stops, and the eye reads that as an edge; the
      extra stops bend it into a curve that arrives at nothing right as the frame ends.
 
-     The mask is on the video, not the frame, so the pause control stays solid — WCAG 2.2.2
-     still needs a way to stop motion that starts on its own. */
+     Every stop is divided by --hero-zoom because the mask rides along with the transform above:
+     it is painted in the video's own box, which the scale then blows up past the frame. Left at
+     plain percentages, the "transparent 100%" stop lands 8% below the frame's bottom edge, where
+     overflow clips it — so the video gets cut off while still ~40% opaque. Cream-on-cream that
+     hides; on the dark theme it is a bright band guillotined against a dark page. Dividing pulls
+     each stop back into frame coordinates, so the ramp still arrives at nothing exactly at the
+     edge you can see. */
   .demo-player--hero .demo-player-video {
     -webkit-mask-image: linear-gradient(
       to bottom,
       #000 0%,
-      #000 52%,
-      rgba(0, 0, 0, 0.92) 62%,
-      rgba(0, 0, 0, 0.72) 72%,
-      rgba(0, 0, 0, 0.45) 82%,
-      rgba(0, 0, 0, 0.2) 91%,
-      rgba(0, 0, 0, 0.06) 97%,
-      transparent 100%
+      #000 calc(68% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.9) calc(76% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.68) calc(84% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.4) calc(90% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.18) calc(95% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.05) calc(98% / var(--hero-zoom)),
+      transparent calc(100% / var(--hero-zoom))
     );
     mask-image: linear-gradient(
       to bottom,
       #000 0%,
-      #000 52%,
-      rgba(0, 0, 0, 0.92) 62%,
-      rgba(0, 0, 0, 0.72) 72%,
-      rgba(0, 0, 0, 0.45) 82%,
-      rgba(0, 0, 0, 0.2) 91%,
-      rgba(0, 0, 0, 0.06) 97%,
-      transparent 100%
+      #000 calc(68% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.9) calc(76% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.68) calc(84% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.4) calc(90% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.18) calc(95% / var(--hero-zoom)),
+      rgba(0, 0, 0, 0.05) calc(98% / var(--hero-zoom)),
+      transparent calc(100% / var(--hero-zoom))
     );
   }
 
-  /* Alpha alone can't hide the bottom of the recording, because what's down there is a hard
-     line: the Archie window's own crisp bottom border and rounded corners. Fading a crisp
-     line just leaves a faint crisp line. So the tail gets blurred as well as faded — two
-     stacked backdrop layers ramp the blur up toward the edge, dissolving the window's border
-     into mush before the alpha above ever reaches zero. */
-  .demo-player--hero .demo-player-frame::before,
-  .demo-player--hero .demo-player-frame::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    pointer-events: none;
-  }
+  /* No backdrop-filter blur down here, deliberately — it was tried and it made things worse.
+     Two reasons, and they compound. It can't help: backdrop-filter blurs the backdrop, but in
+     the fade zone the mask above has already taken the video away, so the backdrop IS the page
+     background and there is nothing left to blur. And it actively hurts: the filter clamps at
+     its own bottom edge, so it drags bright pixels down from where the video is still opaque
+     into rows that should be empty, repainting them right up to the frame's edge, where
+     overflow: hidden then guillotines them. That is a hard line — measured, it tripled the
+     brightness step at the boundary. The crop above is what removes the line; the alpha ramp
+     is what makes it smooth. */
 
-  .demo-player--hero .demo-player-frame::before {
-    height: 52%;
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 72%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 72%);
-  }
-
-  .demo-player--hero .demo-player-frame::after {
-    height: 28%;
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 68%);
-    mask-image: linear-gradient(to bottom, transparent 0%, #000 68%);
-  }
-
-  /* Ride the headline up onto the faded tail of the video — just its first line, and only
-     into the part that has already mostly dissolved. Both the video's height and this pull
-     scale with the viewport, so the overlap looks the same at 360px and 850px. */
+  /* Ride the headline up onto the faded tail of the video — just the cap-line of its first row,
+     and only into the part that has already mostly dissolved. Kept shallow on purpose: the
+     recording is the pitch, so the copy leans on it rather than sitting over it. In vw, not px,
+     so the overlap holds its proportions from 360px up to 850px. */
   .hero-content {
     position: relative;
     z-index: 2;
     max-width: 100%;
-    margin-top: -10vw;
+    margin-top: -5vw;
   }
 
   /* Dropped here: the nav wordmark carries the company name at these widths instead
@@ -5601,4 +5588,292 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 18px;
   font-size: 0.95rem;
   color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Trust Page
+   The privacy/verification page. Its whole job is to look like a document you
+   can check rather than a pitch you should believe, so: real tables, plain
+   type, and a limits section styled with the same weight as the good news.
+   ========================================================================== */
+
+.container-narrow {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── Prose blocks ── */
+.trust-prose p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+.trust-prose p strong { color: var(--text-primary); }
+.trust-prose p:last-child { margin-bottom: 0; }
+
+/* An aside is the "you didn't ask, but you'd have found out" voice — set apart
+   so it reads as volunteered rather than buried. */
+.trust-aside {
+  border-left: 3px solid var(--accent);
+  background: var(--surface-soft);
+  padding: 18px 22px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.98rem !important;
+  margin-top: 32px !important;
+}
+
+/* ── The three answers ── */
+.trust-answers {
+  display: grid;
+  gap: 24px;
+  margin: 40px 0;
+}
+.trust-answer {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.trust-answer-num {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  color: var(--accent-hover);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.trust-answer h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.trust-answer p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+/* ── The egress table ──
+   Deliberately a real <table>: it is the most boring, most checkable way to
+   present this, and boring is the point. Collapses to stacked cards under
+   760px rather than scrolling sideways. */
+.trust-table-wrap { margin-top: 40px; }
+
+.trust-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.trust-table th,
+.trust-table td {
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+.trust-table th {
+  background: var(--surface-soft-alt);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.trust-table td { color: var(--text-secondary); }
+.trust-table td strong { color: var(--text-primary); }
+.trust-table tbody tr:last-child td { border-bottom: none; }
+
+/* The row that carries actual user content is the one people came to find.
+   Don't hide it — mark it. */
+.trust-table tr.is-content td { background: var(--accent-subtle); }
+.trust-table tr.is-content td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.trust-table tr.is-none td { background: var(--c-teal-subtle); }
+
+.trust-flag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.trust-flag--yes  { background: var(--accent); color: var(--text-on-accent); }
+.trust-flag--no   { background: var(--surface-soft-strong); color: var(--text-secondary); }
+.trust-flag--none { background: var(--c-teal); color: #fff; }
+
+.trust-table-note {
+  margin-top: 24px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.trust-table-note strong { color: var(--text-primary); }
+
+/* ── The limits section ── */
+.trust-limits {
+  display: grid;
+  gap: 20px;
+  margin-top: 40px;
+}
+.trust-limit {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 26px 28px;
+}
+.trust-limit h3 {
+  font-size: 1.12rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+.trust-limit p {
+  color: var(--text-secondary);
+  line-height: 1.72;
+  font-size: 0.98rem;
+  margin-bottom: 12px;
+}
+.trust-limit p:last-child { margin-bottom: 0; }
+.trust-limit p strong { color: var(--text-primary); }
+
+.trust-limit-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem !important;
+  color: var(--text-muted) !important;
+}
+.trust-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.trust-status--building { background: var(--c-blue-subtle); color: var(--c-blue); }
+
+/* ── Verify-it-yourself steps ── */
+.trust-steps {
+  display: grid;
+  gap: 28px;
+  margin-top: 40px;
+}
+.trust-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.trust-step-num {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.trust-step h3 {
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.trust-step p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+.trust-step p strong { color: var(--text-primary); }
+
+.trust-hosts {
+  list-style: none;
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+.trust-hosts li {
+  padding: 12px 16px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.trust-hosts code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.88em;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.trust-hosts span { color: var(--text-muted); }
+.trust-hosts-plus { color: var(--text-primary) !important; font-weight: 600; }
+
+/* ── Responsive ──
+   The table stacks; it never scrolls sideways. */
+@media (max-width: 760px) {
+  .trust-table,
+  .trust-table tbody,
+  .trust-table tr,
+  .trust-table td { display: block; width: 100%; }
+
+  .trust-table thead { display: none; }
+
+  .trust-table tr {
+    border-bottom: 1px solid var(--border);
+    padding: 6px 0;
+  }
+  .trust-table tr:last-child { border-bottom: none; }
+
+  .trust-table td {
+    border-bottom: none;
+    padding: 10px 18px;
+  }
+  /* The header text moves into each cell, so a stacked row still says what
+     each value means. */
+  .trust-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .trust-table tr.is-content td:first-child { box-shadow: none; }
+  .trust-table tr.is-content,
+  .trust-table tr.is-none { border-radius: 8px; margin-bottom: 6px; }
+  .trust-table tr.is-content { background: var(--accent-subtle); }
+  .trust-table tr.is-none { background: var(--c-teal-subtle); }
+  .trust-table tr.is-content td,
+  .trust-table tr.is-none td { background: transparent; }
+
+  .trust-answer,
+  .trust-limit { padding: 22px 20px; }
+
+  .trust-answer,
+  .trust-step { gap: 14px; }
 }

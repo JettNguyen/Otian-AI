@@ -52,6 +52,7 @@
             <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../blog/" role="menuitem">Blog</a>
             <a href="../faq/" role="menuitem">FAQ</a>
+            <a href="../trust/" role="menuitem">Trust</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
@@ -106,6 +107,7 @@
       <a href="../ai-explained/">AI Explained</a>
       <a href="../blog/">Blog</a>
       <a href="../faq/">FAQ</a>
+      <a href="../trust/">Trust</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
       <a href="../our-story/">Our Story</a>
@@ -124,7 +126,7 @@
         <span class="section-label fade-up">Legal</span>
         <h1 class="fade-up delay-1">Privacy Policy</h1>
         <div class="article-byline fade-up delay-2">
-          <span>Last updated: July 7, 2026</span>
+          <span>Last updated: July 14, 2026</span>
         </div>
       </div>
     </section>
@@ -138,7 +140,38 @@
 
         <article class="article-body fade-up delay-1">
 
-          <p>Otian AI ("we," "us," or "our") helps clients set up and configure personal AI agents on their own computers. This policy explains what information we collect, how we use it, and the choices you have. It applies to our website and to the guided sessions, calls, and communications that are part of our services.</p>
+          <p>Otian AI ("we," "us," or "our") makes <strong>Archie</strong>, a desktop app for building personal AI agents that run on your own computer, and offers guided sessions to help people set them up. This policy explains what information we collect, how we use it, and the choices you have.</p>
+
+          <p>It covers three things, and they are quite different from one another: <strong>the Archie app</strong>, <strong>this website</strong>, and <strong>our guided services</strong>. The app is where most people's questions are, so it comes first. A plain-English version of this section, with the full list of every connection Archie makes, is on our <a href="../trust/">Trust page</a>.</p>
+
+          <h2>The Archie App</h2>
+
+          <h3>What the app sends to us</h3>
+          <p>Archie's servers receive three things about you, and nothing else:</p>
+          <ul>
+            <li><strong>Your email address</strong>, so you can sign in. It is held in our account system (Google Firebase).</li>
+            <li><strong>Whether your subscription is active</strong>, so the app can let you in. Payments are processed by Stripe; we never receive or store your card details.</li>
+            <li><strong>Which paid add-ons you have bought.</strong> Each purchase creates a permanent record &mdash; the add-on, the amount, and the date &mdash; so that you can re-install what you have paid for. This means we know which <em>paid</em> add-ons you own. Installing a <em>free</em> add-on makes no network request at all, so we have no record of it.</li>
+          </ul>
+          <p>Archie also checks our website for a new version. That request carries no version number, no device identifier, and no account information; our server records only the originating IP address and a timestamp, as any web server does.</p>
+
+          <h3>What stays on your computer</h3>
+          <p>Your agent's instructions, the files and notes you give it, everything it remembers, and your entire conversation history are stored on your own device, in Archie's application folder. <strong>We do not receive, store, or have any means of accessing them.</strong> There is no Otian server that these are sent to. If you delete the app, that data goes with it.</p>
+          <p>The app contains <strong>no analytics, telemetry, or tracking software of any kind</strong> &mdash; not disabled by default, but absent. If Archie crashes, it writes a diagnostic log to your own disk; the app has no ability to upload it, and it reaches us only if you choose to send it to us yourself.</p>
+
+          <h3>Your AI provider</h3>
+          <p>To think, your agent must send your request to an AI model. Archie connects <strong>directly from your computer</strong> to the provider you chose &mdash; Anthropic (Claude) or OpenAI (ChatGPT) &mdash; using your own account and your own API key. That traffic does not pass through us, is not relayed or proxied by us, and we keep no copy of it. It is governed by your agreement with that provider, not with us, and we encourage you to read their terms. If your agent searches the web, that search runs on the provider's infrastructure and is billed to your account.</p>
+          <p>Your API key is stored in your operating system's Keychain. It is transmitted only to the AI provider itself, and we have no means of reading it.</p>
+
+          <h3>Accounts you connect</h3>
+          <p>You may connect accounts you already use &mdash; Google (Gmail and Calendar), Slack, Telegram, Discord, or Fireflies. Archie talks to those services <strong>directly from your computer</strong>, using access tokens issued to you and stored in your operating system's Keychain. The contents of those accounts are not sent to us, and we have no ability to access them. You can disconnect any of them at any time from within the app.</p>
+
+          <h3>What your agent can and cannot do on its own</h3>
+          <p>We think you should know this before you connect anything, so we state it plainly. Archie <strong>cannot send email and cannot make purchases</strong> &mdash; those abilities do not exist in the app. Your agent can only communicate in the chats you have connected it to, with people you have approved; it has no way to contact anyone else.</p>
+          <p>What your agent <em>can</em> do on its own today, without asking you first, is <strong>read and change a calendar you have connected</strong>, including deleting events. We are building a feature that will require your explicit approval before any such change is made. Until it ships, we would rather you knew. The current status is always on our <a href="../trust/">Trust page</a>.</p>
+
+          <h2>Our Website and Guided Services</h2>
+          <p>The rest of this policy concerns our website and the guided sessions, calls, and communications that are part of our services &mdash; not the app.</p>
 
           <h2>Information We Collect</h2>
           <p>We collect information you choose to give us, including:</p>
@@ -216,6 +249,7 @@
             <a href="../ai-explained/">AI Explained</a>
             <a href="../blog/">Blog</a>
             <a href="../faq/">FAQ</a>
+            <a href="../trust/">Trust</a>
             <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Agent Successes</a>
             <a href="../contact/">Contact</a>

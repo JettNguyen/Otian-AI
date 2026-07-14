@@ -102,6 +102,7 @@
             <a href="../../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../../blog/" role="menuitem">Blog</a>
             <a href="../../faq/" role="menuitem">FAQ</a>
+            <a href="../../trust/" role="menuitem">Trust</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
@@ -155,6 +156,7 @@
       <a href="../../ai-explained/">AI Explained</a>
       <a href="../../blog/">Blog</a>
       <a href="../../faq/">FAQ</a>
+      <a href="../../trust/">Trust</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
       <a href="../../our-story/">Our Story</a>
@@ -187,11 +189,23 @@
                  playback only once the figure scrolls into view, so the recording is never
                  fetched by someone who never reaches it — and never at all if the visitor has
                  asked for reduced motion, who gets the poster instead. -->
-            <video class="demo-player-video" poster="../../assets/archie-demo-poster.jpg"
-                   data-src="../../assets/archie-demo.mp4" preload="none"
+            <video class="demo-player-video" preload="none"
+                   poster="../../assets/archie-demo-light-poster.jpg"
+                   data-poster-light="../../assets/archie-demo-light-poster.jpg"
+                   data-poster-dark="../../assets/archie-demo-dark-poster.jpg"
                    muted loop playsinline disablepictureinpicture
                    aria-label="A one-minute silent screen recording of Archie: creating an agent called Archibald, installing the Calendar Management skill and a personality from the marketplace, connecting Telegram and an AI provider, then messaging the agent from a phone to ask what is on the calendar and to move a meeting.">
-              <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo.mp4">Download it instead.</a></p>
+              <!-- No 2560 line here, unlike the hero: this player is capped at 760px, so 1600 already
+                   covers a 2x display at 1:1 and anything larger would be bytes nobody can see.
+                   Same files the homepage hero uses, so one of the two is usually already cached. -->
+              <source data-theme="light" data-src="../../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
+              <source data-theme="light" data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
+              <source data-theme="light" data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
+
+              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1600.av1.mp4"   type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
+              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1600.hevc.mp4"  type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
+              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1280.h264.mp4"  type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
+              <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
             </video>
             <button class="demo-player-toggle" type="button" aria-label="Pause the demo">
               <svg class="demo-player-icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></svg>
@@ -275,6 +289,7 @@
             <a href="../../ai-explained/">AI Explained</a>
             <a href="../../blog/">Blog</a>
             <a href="../../faq/">FAQ</a>
+            <a href="../../trust/">Trust</a>
             <a href="../../our-story/">Our Story</a>
             <a href="../../testimonials/">Agent Successes</a>
             <a href="../../contact/">Contact</a>

@@ -1,0 +1,330 @@
+# TRUST.md — What Otian AI Is Allowed To Claim
+
+Trust is the product. This file is the contract that keeps it true.
+
+Every privacy or safety claim on otianai.com must appear below, in approved wording,
+with a pointer to the code that makes it true. If a claim isn't here, it doesn't ship.
+
+**Owner: Jett.** Jett owns technical processes; Jack owns business ops and marketing.
+
+That split is the point. The person who knows what the code actually does holds a **veto** over
+the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
+true, it doesn't ship, and there is no appeal to how good it sounds.
+
+**Last verified against the Archie source:** 2026-07-14 (full egress audit, `Archie@main`)
+
+---
+
+## The Test
+
+> Could I defend this exact sentence to a hostile engineer with a packet sniffer,
+> using only what ships today?
+
+If no, it does not ship. Not "we're building it," not "it's basically true,"
+not "the spirit is right." No.
+
+**Corollary — the tense rule:** no claim describes an unshipped feature in the present
+tense. Roadmap items are labelled as roadmap, with a date, or they are absent.
+
+**Corollary — the volunteer rule:** when a fact is unflattering and we could have
+omitted it, we state it anyway. The unflattering item you volunteer buys more belief
+than the flattering one you argue for. Every gap in a disclosure reads as concealment.
+
+---
+
+## Canonical Claims — verified, safe to ship
+
+Each is stated in the strongest form the code supports, and no stronger.
+
+### ✅ Your prompts never touch an Otian server
+
+**Approved wording:** "When your agent thinks, it talks to Anthropic or OpenAI directly
+from your machine, on your account, with your key. We are not in the middle of it, and we
+keep no copy."
+
+**Why it's true:** Provider base URLs are hard-coded constants
+(`crates/archie-net/src/llm.rs:16,18`) — no env var, setting, or flag can redirect them.
+The HTTP client is built with no proxy (`crates/archie-net/src/lib.rs:41-48`). The agent
+runtime crate contains zero Otian hosts. The webview's CSP (`src-tauri/tauri.conf.json:24`)
+forbids the frontend from reaching any host at all.
+
+**Required clause — do not drop it:** web search runs on the *provider's* infrastructure
+and is billed to the user's key (`llm.rs:580-605`). Still not us, but the search query does
+reach the provider's search backend. Say so.
+
+### ✅ We ship no telemetry and no analytics
+
+**Approved wording:** "Archie contains no analytics, no telemetry, and no tracking of any
+kind. Not opt-out — absent."
+
+**Why it's true:** No Sentry, PostHog, Amplitude, Mixpanel, Segment, or GA in `Cargo.lock`
+or `package-lock.json`. The Tauri log plugin is a no-op stub (`src-tauri/src/lib.rs:276-278`).
+The webview CSP makes frontend network calls impossible.
+
+### ✅ Crash logs never leave your machine
+
+**Approved wording:** "If Archie crashes, it writes a log to your own disk. There is no
+upload path. It reaches us only if you attach it to an email yourself."
+
+**Why it's true:** `install_crash_logger` (`src-tauri/src/lib.rs:22-49`) appends to
+`~/Library/Application Support/com.archie.app/crash.log`. Nothing in the codebase reads
+that file or transmits it.
+
+### ✅ The update check tells us nothing about you
+
+**Approved wording:** "Archie checks for updates with a plain request that carries no
+version number, no machine ID, and no account. Our server sees an IP address and a timestamp."
+
+**Why it's true:** `src-tauri/tauri.conf.json:45` has no substitution placeholders, so the
+updater plugin sends a bare GET. Version comparison happens client-side.
+
+### ✅ Your API key stays in the Keychain
+
+**Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to
+Anthropic or OpenAI and nowhere else — we have no way to read it."
+
+**Why it's true:** `KeychainStore` is the only store compiled into a release build
+(`src-tauri/src/lib.rs:100-103`); the plaintext dev store is `#[cfg(debug_assertions)]`
+(`crates/archie-core/src/secrets.rs:210`) and is **not in the release binary**, so no flag
+can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer to OpenAI.
+
+**Nuance — do not overclaim:** the key is necessarily held in process memory while in use
+(`secrets.rs:62-67`, `gateway.rs:46`). Never imply it isn't. "We have no way to read it" is
+true and sufficient.
+
+### ✅ We cannot see which free add-ons you install
+
+**Approved wording:** "Installing a free add-on makes no network call at all. We don't know
+you did it."
+
+**Why it's true:** `require_owned_if_paid` returns early when `price_cents == 0`
+(`src-tauri/src/commands.rs:1112`); the template is served from the binary or the
+already-cached catalog. Zero requests.
+
+### ✅ Add-ons are data, not code
+
+**Approved wording:** "An add-on is a text file, not a program. A Skill is markdown plus
+settings. It cannot run code on your computer, because Archie has nowhere to run it."
+
+**Why it's true:** No `std::process::Command`, no shell, no `dlopen`/`libloading`, no WASM,
+no JS `eval` anywhere in `crates/` or `src-tauri/`. Tauri capabilities are deny-by-default
+(`src-tauri/gen/schemas/capabilities.json`) and expose no shell, fs, or http permission to
+the webview.
+
+---
+
+## What We Hold — state all three, always
+
+**Approved wording:** "Our servers know three things about you: your email address, whether
+your subscription is active, and which **paid** add-ons you've bought. Not your prompts, not
+your files, not your calendar, not a single conversation. Free add-ons we can't see at all."
+
+**Why all three:** Firebase Auth + the Firestore user doc hold email, uid, `access_tier`,
+`subscription_status`, `stripe_customer_id` (`crates/archie-core/src/auth.rs:237-244`). The
+Stripe webhook writes a permanent purchase record per paid item — item id, amount, session
+id, timestamp (`stripe-webhook/index.js` → `users/{uid}/purchases/{item_id}`).
+
+⛔ **The claim "the only thing our servers know about you is whether your subscription is
+active" is FALSE.** It is currently live on `index.html:542`, `archie/index.html:271`,
+`archie/install/index.html:184`, `faq/index.html:302`, and `business/index.html:220`.
+It must be replaced with the wording above.
+
+---
+
+## ⛔ Claims That Are FALSE Today — must not ship
+
+### ⛔ "Approval Required for Sends and Purchases"
+
+**Status: FALSE. Live on the site as of 2026-07-14. Being fixed by building the feature.**
+
+There is no approval gate anywhere in the tool-execution loop. The dispatcher
+(`crates/archie-runtime/src/gateway.rs:2450-2467`) executes every tool the model emits,
+immediately — on both the chat path (`handle_message`) and the unattended routine path
+(`handle_routine_message`).
+
+**What is actually ungated, precisely** (narrower than first believed — verify before writing copy):
+
+- **Calendar create / update / DELETE** (`gateway.rs:1583,1605,1617`). This is the real exposure.
+  A 3am routine can delete an event with no human in the loop.
+- **`remember`** — a local write. This is how an injected instruction would *persist across sessions*.
+
+**What is NOT a risk, despite what our copy implies:**
+- **The agent cannot message anyone but you.** `Channel::send` is only ever called with the owner's
+  own chat. It cannot post into a team's Slack channel or contact a third party.
+- **The agent cannot send email.** No email-send code path exists; the Gmail integration is
+  read-only. ⚠️ *But Archie still requests the `gmail.compose` scope* (`automation.rs:16`), so
+  Google's consent screen tells users otherwise. **Fix the scope or expect the question.**
+- **The agent cannot buy anything.** `archie-runtime` cannot even see `archie-core::purchases`.
+  Purchases require a human in Stripe Checkout.
+
+The only thing in the codebase named "approve" is the inbound access roster
+(`gateway.rs:3255-3300`, `access.rs`) — approving *who may talk to your agent*. That is the
+opposite of approving what your agent *does*.
+
+**Gate scope (verified against the code):** one choke point, ~35 engineer-days total.
+Phase 1 (deny-by-default + in-app approval queue) ≈ **15 engineer-days / 2 calendar weeks**
+for two people.
+
+**What becomes true, and when:**
+
+| Claim | Defensible after |
+|---|---|
+| "Archie asks before it changes anything in your calendar." | **Phase 1** |
+| "Archie cannot spend your money." | True today; Phase 1 makes it an *enforced* boundary rather than an accident |
+| "Archie only ever messages you — it has no way to message anyone else." | **True today.** Use this instead of the false claim. |
+| "Works while you sleep. Checks in before it acts." (the delegation-loop diagram) | **Phase 2** |
+| "Every Skill tells you what it can do before you install it — including what it can delete." | **Phase 3** |
+| **"Nothing sends without your OK"** | ⛔ **Never.** There is no outbound *send* capability to gate. **Delete this line — do not defend it.** |
+
+**Live-copy locations to fix:** `index.html:7,11,178,382,395`;
+`business/index.html:224-225`; `faq/index.html:276`; `how-it-works/index.html:279,367`.
+Plus four SVG diagram variants encoding an "approval gate" node (`index.html` `dl-*`/`dlm-*`,
+`individuals/index.html` `ind-*`/`indm-*`) — these describe the Phase 2 product and can stay
+*if* the surrounding present-tense claims come down.
+
+### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
+
+Planned: group-chat messaging, and a UI for adding user IDs to a permitted-to-message list.
+**Neither exists today.** Today the agent replies in the chat it was addressed in (the owner's
+chat, or the learned primary chat); the only roster that exists governs who may talk **to** it
+(`crates/archie-runtime/src/access.rs`), not who it may talk **to**.
+
+✅ **The current copy is safe for both** — *"It speaks only in the chats you connect it to, to
+people you've approved"* is true today and stays true after the UI lands. Do not upgrade it to
+anything more specific until the UI exists.
+
+### 🚧 Email send with click-to-approve — ROADMAP, NOT SHIPPED
+
+**Do not describe this in the present tense. It does not exist.**
+
+This is an intended feature and a good one: the agent drafts an email, you review or edit it in
+chat, you click send. It is a genuine selling point *once it is real*. It is not real.
+
+**Verified 2026-07-14.** The complete list of tools Archie's model can call is eleven:
+`calendar_create_event`, `calendar_delete_event`, `calendar_list_events`,
+`calendar_update_event`, `delegate_to_worker`, `meetings_read`, `meetings_search`,
+`meetings_set_speakers`, `meetings_sync`, `read_knowledge_file`, `remember`.
+**None sends email.** `crates/archie-net/src/google.rs` exposes only `gmail_profile` and
+`gmail_added_message_ids` — both read-only — and no code anywhere calls a Gmail send or draft
+endpoint. There are also **zero interactive buttons or callbacks in any chat adapter**, so the
+"click send in chat" flow has no mechanism behind it. Single branch; no unmerged work.
+
+`SCOPE_GMAIL_COMPOSE` (`crates/archie-domain/src/automation.rs:16`) is declared and asserted in
+a test but **never used by any code**. It is the fossil of the intent — and it is why Google's
+consent screen currently tells users Archie can draft their email when it cannot.
+**Drop the scope until send actually ships.**
+
+**⚠️ Sequencing constraint — this is the important part.** Today the approval gate protects a
+calendar. The moment an email-send tool exists, the gate is the only thing standing between a
+prompt-injected meeting transcript and an email sent as you, to your customers.
+**The gate must land, fail-closed, BEFORE the send tool does.** Not the same release — before.
+If send ships first, every risk on this page gets an order of magnitude worse.
+
+### ⛔ The gate does not stop exfiltration — never imply it does
+
+The gate stops **mutation**, not **leakage**. A prompt injection can still make the model issue
+an Anthropic server-side web search (`gateway.rs:2263`) or a `delegate_to_worker` web-search call
+(`gateway.rs:1395-1418`) with an attacker-chosen query carrying data from the user's context.
+Neither is gateable at the choke point, because the search never becomes a client tool call.
+
+**This must not be swept under a "nothing happens without your OK" umbrella.** Say so plainly on
+the Trust page; we already do.
+
+---
+
+## Known Weaknesses — disclose, don't hide
+
+These are true and unflattering. They go on the Trust page anyway.
+
+### The subscription gate is fail-open — and this cuts both ways
+
+The license check reads a cached Keychain value and **only writes on success**
+(`src-tauri/src/auth.rs:147-198`). If the server is unreachable, the last known-good answer
+stands — **with no TTL, no expiry, and no grace-period counter**.
+
+Two consequences, and they pull in opposite directions:
+
+1. ✅ **If Otian dies, existing installs keep working.** The check fails, the cache persists,
+   the app runs indefinitely. This is what we want, and it is what the code does today.
+2. ⚠️ **It is also a piracy hole.** Blocking `firestore.googleapis.com` after one successful
+   sign-in yields permanent free access.
+
+Cancellation still works as intended: Stripe → Firestore `access_tier` → the next *successful*
+check flips the flag and the app stops. The gate only fails open when the **server** is
+unreachable, not when the answer is "no".
+
+⚠️ **The trap:** closing the piracy hole with a TTL would silently break consequence (1) — the
+"if we vanish, your agent survives" promise. **So do not rely on the accident.** We have made it
+a **contractual commitment** instead (Terms of Service → "Subscription, cancellation, and what
+happens if we go away"): *if Otian ceases operations, we publish a final build requiring no
+subscription check, within 30 days.* That promise survives any change to the license mechanism,
+which means the piracy hole can now be fixed freely without touching the claim.
+
+⛔ **Never claim a "30-day grace period" for an unreachable server.** No such timer exists.
+✅ **Do claim:** "If you leave, the app stops. If we disappear, it doesn't." Backed by the Terms.
+
+### Prompt injection reaches ungated tools
+
+Chat attachments (`discord.rs:377`, `slack.rs:334`), Fireflies meeting transcripts, and
+provider web-search results all enter the model's context **unsanitized**. Combined with the
+missing approval gate, a hostile input can reach `calendar_delete_event`. This is a real
+exploit chain, not a hypothetical. It is the reason the gate is being built.
+
+---
+
+## Banned Phrasings — never ship these
+
+| Banned | Why |
+|---|---|
+| "Your data never leaves your device" | **False.** Your prompts go to Anthropic/OpenAI. The true claim is that *we* never see them. |
+| "The only thing our servers know is whether your subscription is active" | **False.** Also your email and every paid add-on you own. |
+| "Fully private" / "completely private" / "100% private" | Unfalsifiable. Means nothing. Say what we hold and what we don't. |
+| "Zero data collection" | **False.** We collect your email. |
+| "Bank-grade" / "military-grade" encryption | Meaningless. We use the OS Keychain and TLS. Say that. |
+| "We can't see anything" | Overbroad. We can see three things. Name them. |
+| "Nothing sends without your OK" | **False today.** See the approval-gate section. |
+| "Sandboxed add-ons" | Misleading. Add-ons are data, not code — there is nothing to sandbox. The true claim is *stronger*; make it instead. |
+
+---
+
+## Settled Decisions
+
+### Business Tier — what an admin can see
+
+**Decided 2026-07-14. Binding on the build. Not to be published until the tier ships.**
+
+An admin sees exactly three things: **which teammates have an agent, which add-ons are
+installed, and what it costs** — plus the ability to revoke a seat.
+
+An admin sees **zero content**: not what was asked, not what was read, written, or sent.
+
+This must be enforced by architecture, not by a policy toggle — because a toggle can be
+flipped, and a promise not to look is worth nothing. The published sentence, when it ships:
+
+> Your manager can see that you have an agent, which add-ons it has, and what it costs.
+> Your manager cannot see what you asked it, what it read, what it wrote, or what it did —
+> not because we choose not to show them, but because that never leaves your machine.
+> We don't have it to show.
+
+**Corollaries:**
+- Every employee gets a **"what your admin sees"** screen showing the exact payload their
+  machine reports. This is what stops a business rollout dying from the bottom up.
+- This **kills the usage/savings dashboard** as specced. Hours-saved-per-employee is derived
+  from activity; if we can't see activity, we can't compute it honestly. Do not build it.
+
+### Subscription gating
+
+Archie is gated by payment; we do not pretend otherwise. We do not market "runs forever"
+and we do not claim a grace period. If the gate is ever made to fail *closed*, this section
+gets rewritten and the Trust page's honest-limits section updated the same day.
+
+---
+
+## Change Process
+
+1. A new claim requires a pointer to the code path that makes it true. No pointer, no claim.
+2. A claim whose code path is deleted or changed is **dead** until re-verified. Ripping out a
+   feature means ripping out its copy in the same PR.
+3. Re-run the full egress audit before any launch, funding round, or press push. The audit is
+   the only thing standing between us and a claim that quietly went stale.
+4. The owner named at the top has veto. Not consensus — veto.

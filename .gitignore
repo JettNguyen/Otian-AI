@@ -1,4 +1,6 @@
 clients/
 engineer-curriculum.md
+# Internal planning docs — never deploy to the public site.
+PRICING-ONETIME-MIGRATION.md
 # Video masters — keep the full-res original on disk, ship only the optimized web encode.
 assets/*.master.mp4

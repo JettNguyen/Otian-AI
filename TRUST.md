@@ -101,6 +101,22 @@ you did it."
 (`src-tauri/src/commands.rs:1112`); the template is served from the binary or the
 already-cached catalog. Zero requests.
 
+### ✅ It works while you sleep
+
+**Approved wording:** "It Works While You Sleep" / "works in the background while you sleep."
+Used as a homepage proof chip and in the homepage meta description.
+
+**Why it's true:** Routines fire on a schedule, unattended, and deliver their result to the
+connected chat (`crates/archie-domain/src/routine.rs:70-100`); Telegram is the default delivery.
+The agent genuinely runs and reports without the user present.
+
+**⚠️ Scope guard — do not extend this into a Phase 2 claim.** "Works while you sleep" (background
+execution) is true today. "Works while you sleep **and checks in for your approval before it
+acts**" is NOT — that is the approval gate, which does not exist. The chip must stay a pure
+capability claim. And note the honest tension: the unattended path is exactly where an ungated
+agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
+implies is the reason the gate is being built.
+
 ### ✅ Add-ons are data, not code
 
 **Approved wording:** "An add-on is a text file, not a program. A Skill is markdown plus

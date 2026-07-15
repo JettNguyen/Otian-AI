@@ -11,7 +11,19 @@ That split is the point. The person who knows what the code actually does holds 
 the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
 true, it doesn't ship, and there is no appeal to how good it sounds.
 
-**Last verified against the Archie source:** 2026-07-14 (full egress audit, `Archie@main`)
+**Last verified against the Archie source:** 2026-07-15 (site + code reconciliation, `Archie@main`)
+
+**Reconciliation — 2026-07-15.** The site was audited against this file and brought into
+compliance since the 07-14 pass. Verified fixed and now live in approved wording: the
+three-things disclosure (was the ⛔ "subscription active" falsehood); removal of the
+"Approval Required for Sends and Purchases" claim and every "nothing sends without your OK"
+variant; the required web-search egress clause (`trust/index.html:179`); the volunteered
+calendar-delete disclosure; and — in code — the `gmail.compose` scope, no longer requested
+(`src-tauri/src/commands.rs:2338`, guarded by test `gmail_requests_readonly_only`).
+**Still unbuilt (verified in code, not just copy):** the action approval gate — `calendar_delete_event`
+still dispatches immediately (`gateway.rs:1738`); the only `Gate` type is the inbound access
+roster (`access.rs`), which governs who may talk *to* the agent, not what it does. The claims
+came down; the feature has not gone up. Do not let the claims return.
 
 ---
 
@@ -140,10 +152,12 @@ your files, not your calendar, not a single conversation. Free add-ons we can't 
 Stripe webhook writes a permanent purchase record per paid item — item id, amount, session
 id, timestamp (`stripe-webhook/index.js` → `users/{uid}/purchases/{item_id}`).
 
-⛔ **The claim "the only thing our servers know about you is whether your subscription is
-active" is FALSE.** It is currently live on `index.html:542`, `archie/index.html:271`,
-`archie/install/index.html:184`, `faq/index.html:302`, and `business/index.html:220`.
-It must be replaced with the wording above.
+✅ **Resolved 2026-07-15.** The old falsehood ("the only thing our servers know is whether
+your subscription is active") has been removed everywhere and replaced with the three-things
+wording above. Now live correctly at `index.html:573`, `archie/index.html:275`,
+`archie/install/index.html:186`, `faq/index.html:306`, `business/index.html:223`,
+`privacy-policy/index.html:154`, `trust/index.html:296`. **Do not let the shorter,
+false form return** — "email + subscription + paid add-ons" is the floor; never fewer.
 
 ---
 
@@ -151,7 +165,9 @@ It must be replaced with the wording above.
 
 ### ⛔ "Approval Required for Sends and Purchases"
 
-**Status: FALSE. Live on the site as of 2026-07-14. Being fixed by building the feature.**
+**Status: the CLAIM is FALSE and has been removed from the site (verified 2026-07-15 — no
+"Approval Required" chip, no "nothing sends without your OK" variant remains). The FEATURE
+is still not built. The claim must not return until it is.**
 
 There is no approval gate anywhere in the tool-execution loop. The dispatcher
 (`crates/archie-runtime/src/gateway.rs:2450-2467`) executes every tool the model emits,
@@ -168,8 +184,10 @@ immediately — on both the chat path (`handle_message`) and the unattended rout
 - **The agent cannot message anyone but you.** `Channel::send` is only ever called with the owner's
   own chat. It cannot post into a team's Slack channel or contact a third party.
 - **The agent cannot send email.** No email-send code path exists; the Gmail integration is
-  read-only. ⚠️ *But Archie still requests the `gmail.compose` scope* (`automation.rs:16`), so
-  Google's consent screen tells users otherwise. **Fix the scope or expect the question.**
+  read-only. ✅ *Fixed 2026-07-15:* the connect flow now requests only
+  `[SCOPE_GMAIL_READONLY, SCOPE_CALENDAR_EVENTS]` (`src-tauri/src/commands.rs:2338`), guarded by
+  test `gmail_requests_readonly_only` (`builtins.rs:608`). Google's consent screen no longer
+  tells users Archie can compose. The claim and the consent screen now agree.
 - **The agent cannot buy anything.** `archie-runtime` cannot even see `archie-core::purchases`.
   Purchases require a human in Stripe Checkout.
 
@@ -192,11 +210,15 @@ for two people.
 | "Every Skill tells you what it can do before you install it — including what it can delete." | **Phase 3** |
 | **"Nothing sends without your OK"** | ⛔ **Never.** There is no outbound *send* capability to gate. **Delete this line — do not defend it.** |
 
-**Live-copy locations to fix:** `index.html:7,11,178,382,395`;
-`business/index.html:224-225`; `faq/index.html:276`; `how-it-works/index.html:279,367`.
-Plus four SVG diagram variants encoding an "approval gate" node (`index.html` `dl-*`/`dlm-*`,
-`individuals/index.html` `ind-*`/`indm-*`) — these describe the Phase 2 product and can stay
-*if* the surrounding present-tense claims come down.
+**Live-copy locations — fixed 2026-07-15.** The present-tense send/approval claims at
+`index.html:7,11,178,382,395`, `business/index.html:224-225`, `faq/index.html:276`, and
+`how-it-works/index.html:279,367` have come down; the surviving copy (e.g. `index.html:426`,
+`business/index.html:228`, `faq/index.html:280`, `trust/index.html:332`) now discloses the
+calendar-delete exposure and labels the gate as in-progress. The four SVG diagram variants
+(`index.html` `dl-*`/`dlm-*`, `individuals/index.html` `ind-*`/`indm-*`) survive and are now
+compliant: their visible labels read "Checks in / with what it found" — a true reporting
+claim, not an approval claim. (The string "approval gate" remains only in an invisible HTML
+comment; harmless, tidy up when convenient.) **Re-verify before any Phase-1 launch push.**
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
@@ -225,10 +247,11 @@ chat, you click send. It is a genuine selling point *once it is real*. It is not
 endpoint. There are also **zero interactive buttons or callbacks in any chat adapter**, so the
 "click send in chat" flow has no mechanism behind it. Single branch; no unmerged work.
 
-`SCOPE_GMAIL_COMPOSE` (`crates/archie-domain/src/automation.rs:16`) is declared and asserted in
-a test but **never used by any code**. It is the fossil of the intent — and it is why Google's
-consent screen currently tells users Archie can draft their email when it cannot.
-**Drop the scope until send actually ships.**
+`SCOPE_GMAIL_COMPOSE` (`crates/archie-domain/src/automation.rs:20`) still exists as a constant
+but is **no longer requested** — the connect flow hard-codes readonly + calendar only
+(`commands.rs:2338`), and test `gmail_requests_readonly_only` fails the build if compose ever
+creeps back into the Gmail scope set. ✅ The consent-screen contradiction is closed. The
+constant is now a guarded fossil; leave it until an email-send capability genuinely needs it.
 
 **⚠️ Sequencing constraint — this is the important part.** Today the approval gate protects a
 calendar. The moment an email-send tool exists, the gate is the only thing standing between a

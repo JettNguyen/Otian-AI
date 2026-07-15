@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="900" viewBox="0 0 2300 900">
-  <!-- Logo group (positioned on the left) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="900" viewBox="0 0 2300 900" role="img" aria-label="Archie">
+  <defs>
+    <linearGradient id="markGrad" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888">
+      <stop offset="0" stop-color="#F0AB80"/>
+      <stop offset="0.55" stop-color="#E28D5E"/>
+      <stop offset="1" stop-color="#C36A3D"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EFA97E"/>
+      <stop offset="1" stop-color="#C36A3D"/>
+    </linearGradient>
+  </defs>
+  <!-- Arrowhead / "A" mark on the left -->
   <g transform="translate(-190, -35)">
-    <!-- Main large triangle with cutouts -->
-    <path d="M 512,85 L 200,850 L 824,850 Z 
-         M 512,300 L 400,600 L 624,600 Z 
-         M 200,850 L 824,850 L 512,725 Z" fill="#E08A5E" fill-rule="evenodd"/>
-    <!-- Bottom base triangle -->
-    <polygon points="290,890 512,725 734,890" fill="#E08A5E"/>
+    <polygon fill="url(#markGrad)" stroke="url(#markGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/>
+    <path fill="url(#markGrad)" stroke="url(#markGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
   </g>
-  <!-- Text "rchie" on the right in Georgia font -->
-  <text x="690" y="700" font-family="Georgia, serif" font-size="590" font-weight="bold" fill="#E08A5E" dominant-baseline="middle">rchie</text>
+  <!-- "rchie" wordmark -->
+  <text x="690" y="690" font-family="Georgia, serif" font-size="590" font-weight="bold" fill="url(#textGrad)" dominant-baseline="middle">rchie</text>
 </svg>

@@ -1364,6 +1364,12 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   margin-top: 0;
 }
 
+/* Buttons inside a CTA banner are always centered — .hero-actions is a flex
+   row (left-aligned by default), which text-align:center can't correct. */
+.cta-banner .hero-actions {
+  justify-content: center;
+}
+
 /* ========================================
    15. Timeline (How It Works)
    ======================================== */

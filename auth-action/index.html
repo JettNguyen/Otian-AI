@@ -264,6 +264,23 @@
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
 
+  <!-- Bulletproof safety net: a classic (non-module) script, so it runs even if the Firebase
+       module below fails to load or stalls. If the handler hasn't resolved the page in 8s, it
+       replaces the endless spinner with a way forward — no Firebase involved, so it cannot hang. -->
+  <script>
+    (function () {
+      setTimeout(function () {
+        var load = document.getElementById("action-loading");
+        if (!load || load.classList.contains("auth-hidden")) return; // the handler already resolved
+        load.innerHTML =
+          '<div style="font-size:1.1rem;font-weight:600;color:var(--text-primary);margin-bottom:8px">This is taking a moment</div>' +
+          '<p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.55;margin:0 0 16px">Your email may already be confirmed. Go to your account to check &mdash; or reopen the link from your email.</p>' +
+          '<a href="/account/" style="display:inline-block;padding:0.7rem 1.4rem;border-radius:12px;background:var(--accent);color:var(--text-on-accent);font-weight:600;font-size:0.875rem;text-decoration:none">Go to your account</a>';
+        var h1 = document.querySelector(".page-hero h1"); if (h1) h1.textContent = "Almost there";
+      }, 8000);
+    })();
+  </script>
+
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import {

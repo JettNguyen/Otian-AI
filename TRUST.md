@@ -48,6 +48,38 @@ than the flattering one you argue for. Every gap in a disclosure reads as concea
 
 Each is stated in the strongest form the code supports, and no stronger.
 
+### ✅ No Otian custodian — no server of ours holds your content
+
+**Approved wording (positioning):** "Otian isn't a custodian of your data. Your
+conversations, your files, your calendar live on your own computer and go straight to your
+AI provider on your own account — they never pass through an Otian server, so there's
+nothing on our side to breach, subpoena, or sell. A legal demand to us can only produce
+what we actually hold: your email, whether you own a license, and which paid add-ons you
+bought."
+
+**Why it's true:** a synthesis of three already-verified claims below — "Your prompts never
+touch an Otian server" (`llm.rs:16,18`, `lib.rs:41-48`), "What We Hold — three things"
+(`auth.rs:237-244`, `stripe-webhook`), and "We ship no telemetry and no analytics." There is
+no Otian datastore of user content for a breach or subpoena to reach.
+
+**Boundaries — do not cross:**
+- ❌ Never "no third party ever holds/sees your data." Prompts still go to Anthropic/OpenAI
+  (a third party) for inference. This claim is about **Otian** custody, not the provider. Keep
+  the provider-egress clause visible wherever this appears.
+- ❌ Never say "your data" unscoped — we **do** hold email + license status + paid add-ons.
+  Scope it to content: "conversations, files, calendar." The three-things disclosure is the floor.
+- ❌ Never "nothing to subpoena." A subpoena to us yields email + license status + paid add-ons.
+  The true strong form is "your *content* can't be produced from us — we don't have it."
+- ❌ NOT a compliance certification. It does not make Archie "HIPAA-compliant" or
+  "GDPR-compliant" — content still flows to a cloud AI provider under the user's own account.
+  No regulated-vertical badge without separately verifying the provider data path for that rule.
+- Any contrast with a named competitor is a claim about **them** — verify and attribute before printing.
+
+**Positioning note:** this is the one claim a cloud-hosted competitor structurally cannot match.
+It's about custody and legal exposure, not secrecy. Lead with "no custodian," never "more private" —
+local-model tools that keep the model on-device are genuinely more private on inference; we compete
+on custody, not privacy maximalism.
+
 ### ✅ Your prompts never touch an Otian server
 
 **Approved wording:** "When your agent thinks, it talks to Anthropic or OpenAI directly

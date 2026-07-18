@@ -139,6 +139,19 @@
     });
   }
 
+  /* Account & auth pages aren't in the menus — they hang off the avatar. Light the avatar button
+     when you're on one, so the nav still shows where you are. (account-nav.js marks the matching
+     item inside the dropdown itself.) */
+  var accountPaths = ['/login', '/account', '/activity', '/billing', '/auth-action', '/app-auth', '/app-security'];
+  var onAccountPage = accountPaths.some(function (p) {
+    return currentNorm === p || currentNorm.indexOf(p + '/') === 0;
+  });
+  if (onAccountPage) {
+    document.querySelectorAll('.nav-account-btn').forEach(function (btn) {
+      btn.classList.add('active');
+    });
+  }
+
   var dropdowns = Array.prototype.slice.call(document.querySelectorAll('.nav-more'));
 
   dropdowns.forEach(function (container) {

@@ -34,6 +34,13 @@ if (root) {
   const escapeHtml = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
+  // Mark the dropdown item for the page you're currently on.
+  const CURRENT_PATH = (location.pathname || "/").replace(/\/+$/, "") || "/";
+  const activeAttr = (href) => {
+    const p = href.split("?")[0].replace(/\/+$/, "") || "/";
+    return p === CURRENT_PATH ? ' class="active"' : "";
+  };
+
   function openMenu() { root.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
   function closeMenu() { root.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
 
@@ -50,7 +57,7 @@ if (root) {
     avatar.textContent = "";
     avatar.innerHTML = USER_GLYPH;
     menu.innerHTML =
-      '<a role="menuitem" href="/login/">Log in</a>' +
+      '<a role="menuitem" href="/login/"' + activeAttr("/login/") + ">Log in</a>" +
       '<a role="menuitem" href="/login/?mode=signup">Sign up</a>';
   }
 
@@ -67,8 +74,8 @@ if (root) {
       : escapeHtml(email || "Signed in");
     menu.innerHTML =
       '<div class="nav-account-menu-label">' + label + "</div>" +
-      '<a role="menuitem" href="/account/">Manage account</a>' +
-      '<a role="menuitem" href="/activity/">Account activity</a>' +
+      '<a role="menuitem" href="/account/"' + activeAttr("/account/") + ">Manage account</a>" +
+      '<a role="menuitem" href="/activity/"' + activeAttr("/activity/") + ">Account activity</a>" +
       '<div class="nav-account-divider"></div>' +
       '<button role="menuitem" type="button" id="navAccountSignout">Sign out</button>';
     const out = document.getElementById("navAccountSignout");

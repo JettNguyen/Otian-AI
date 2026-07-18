@@ -613,6 +613,11 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 .nav-account-btn.is-authed:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--text-on-accent); }
 
+/* Active: you're on an account/auth page. An accent ring marks the avatar as "current",
+   the same way a menu link goes accent on its own page. */
+.nav-account-btn.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+.nav-account-btn.active:not(.is-authed) { color: var(--accent); }
+
 .nav-account-avatar {
   display: inline-flex;
   align-items: center;
@@ -681,6 +686,9 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   background: var(--surface-hover);
   color: var(--accent-hover);
 }
+
+/* The dropdown item for the page you're on */
+.nav-account-menu a.active { color: var(--accent); font-weight: 600; }
 
 .nav-account-divider {
   height: 1px;

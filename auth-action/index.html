@@ -32,10 +32,22 @@
     .auth-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
     .auth-btns { display: flex; flex-direction: column; gap: 10px; }
     .auth-btns .btn { width: 100%; }
-    #action-status { font-size: 0.82rem; min-height: 1.2em; margin-top: 14px; color: var(--text-secondary); }
-    #action-status.error { color: #c0392b; }
-    [data-theme="dark"] #action-status.error { color: #e77; }
-    #action-status.ok { color: var(--c-teal); }
+    #action-status { font-size: 0.85rem; min-height: 1.2em; margin-top: 14px; color: var(--text-secondary); text-align: center; }
+    /* Errors and confirmations render as a prominent banner so they can't be missed. */
+    #action-status.error, #action-status.ok {
+      text-align: left; font-weight: 600; font-size: 0.92rem; line-height: 1.5; min-height: 0;
+      padding: 13px 15px 13px 46px; border-radius: var(--radius-sm); position: relative;
+    }
+    #action-status.error { color: #b3261e; background: rgba(224, 49, 49, 0.10); border: 1px solid rgba(224, 49, 49, 0.42); }
+    [data-theme="dark"] #action-status.error { color: #ff9f97; background: rgba(224, 49, 49, 0.16); border-color: rgba(224, 49, 49, 0.48); }
+    #action-status.ok { color: #1f7a54; background: rgba(62, 154, 146, 0.12); border: 1px solid rgba(62, 154, 146, 0.42); }
+    [data-theme="dark"] #action-status.ok { color: var(--c-teal); background: rgba(62, 154, 146, 0.16); }
+    #action-status.error::before, #action-status.ok::before {
+      content: ""; position: absolute; left: 15px; top: 12px; width: 20px; height: 20px;
+      background-repeat: no-repeat; background-position: center; background-size: 20px 20px;
+    }
+    #action-status.error::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3261e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E"); }
+    #action-status.ok::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f7a54' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E"); }
     .auth-hidden { display: none !important; }
     .auth-spinner {
       width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
@@ -311,7 +323,11 @@
 
     const $ = (id) => document.getElementById(id);
     const statusEl = $("action-status");
-    function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
+    function setStatus(msg, type = "") {
+      statusEl.textContent = msg || "";
+      statusEl.className = msg ? type : "";
+      if (msg && type === "error") { try { statusEl.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e) {} }
+    }
     function onlyCard(id) { ["action-loading", "action-result", "action-reset"].forEach((c) => $(c).classList.toggle("auth-hidden", c !== id)); }
 
     const params = new URLSearchParams(window.location.search);

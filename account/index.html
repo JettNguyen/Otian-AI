@@ -85,6 +85,13 @@
     @keyframes acctspin { to { transform: rotate(360deg); } }
     .acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
     .acct-foot-note a { color: var(--text-secondary); }
+
+    /* Danger zone (delete account) */
+    .acct-danger { border-color: rgba(224, 49, 49, 0.35); }
+    .acct-danger .acct-section-title { color: #b3261e; }
+    [data-theme="dark"] .acct-danger .acct-section-title { color: #ff9f97; }
+    .btn.btn-danger { background: #c0392b; color: #fff; }
+    .btn.btn-danger:hover { background: #a5311f; }
   </style>
 </head>
 <body>
@@ -295,6 +302,35 @@
                 <button class="btn btn-primary btn-mini" id="btn-buy-archie">Buy Archie &mdash; $149</button>
               </div>
             </div>
+
+            <!-- Activity + billing -->
+            <div class="acct-section" id="sec-links">
+              <div class="acct-section-title">Activity &amp; billing</div>
+              <div class="acct-section-body">Review your purchases and payments &mdash; and, for guided-session clients, pay your balance.</div>
+              <div class="acct-row">
+                <a class="btn btn-secondary btn-mini" href="/activity/">Account activity</a>
+                <a class="btn btn-secondary btn-mini acct-hidden" id="link-billing" href="/billing/">Session billing</a>
+              </div>
+            </div>
+
+            <!-- Danger zone: delete account -->
+            <div class="acct-section acct-danger" id="sec-danger">
+              <div class="acct-section-title">Delete account</div>
+              <div class="acct-section-body">Permanently delete your Otian AI account and all associated data &mdash; sign-in, purchases, and session records. This can&rsquo;t be undone.</div>
+              <div class="acct-row">
+                <button class="btn btn-secondary btn-mini" id="btn-delete">Delete my account</button>
+              </div>
+              <div class="acct-hidden" id="delete-confirm" style="margin-top:14px;">
+                <div class="acct-section-body">To confirm, type your email address (<span class="acct-email" id="delete-email-hint">your email</span>):</div>
+                <div class="acct-fields" style="margin-top:8px;">
+                  <input type="email" id="delete-email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="your email address" />
+                </div>
+                <div class="acct-row">
+                  <button class="btn btn-danger btn-mini" id="btn-delete-confirm">Permanently delete</button>
+                  <button class="btn btn-secondary btn-mini" id="btn-delete-cancel">Cancel</button>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div id="acct-status" role="status" aria-live="polite"></div>
@@ -501,6 +537,8 @@
         body.textContent = "Couldn't check your purchases right now. Reload to try again.";
         return;
       }
+      // Session billing is only for managed clients.
+      show("link-billing", tier === "client");
       const owned = tier === "admin" || tier === "client" || tier === "lifetime"
         || (tier === "subscriber" && subStatus === "active");
       if (owned) {
@@ -533,6 +571,34 @@
       window.location.href = "/login/";
       await new Promise(() => {});
     }));
+
+    // ── Delete account (right-to-erasure) ──
+    $("btn-delete").addEventListener("click", () => {
+      $("delete-email-hint").textContent = auth.currentUser?.email || "your email";
+      show("delete-confirm", true);
+      $("delete-email").value = "";
+      $("delete-email").focus();
+      setStatus("");
+    });
+    $("btn-delete-cancel").addEventListener("click", () => { show("delete-confirm", false); setStatus(""); });
+    $("btn-delete-confirm").addEventListener("click", () => busy($("btn-delete-confirm"), async () => {
+      const user = auth.currentUser; if (!user) return;
+      const typed = ($("delete-email").value || "").trim().toLowerCase();
+      const actual = (user.email || "").trim().toLowerCase();
+      if (!typed || typed !== actual) { setStatus("That doesn't match your email — type it exactly to confirm.", "error"); return; }
+      setStatus("Deleting your account…");
+      try {
+        await mfaApi("/account/delete"); // reuses the timeout + id-token helper (posts to /account/*)
+        // On success the server has removed the auth user; sign out locally and say goodbye.
+        try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {}
+        try { await signOut(auth); } catch (e) {}
+        window.location.href = "/?deleted=1";
+        await new Promise(() => {});
+      } catch (e) {
+        setStatus(prettyMfaError(e), "error");
+      }
+    }));
+    $("delete-email").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-delete-confirm").click(); });
 
     // ── Authenticator app status (custom TOTP, verified by our service) ──
     // Also surfaces any leftover LEGACY Firebase-native enrollment so it can be turned off and

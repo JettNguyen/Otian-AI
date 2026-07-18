@@ -1030,7 +1030,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1.2fr;
+  grid-template-columns: 1.4fr 1.7fr 1.1fr;
   gap: 48px;
   padding-bottom: 52px;
 }
@@ -1060,12 +1060,15 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .footer-nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  /* Two balanced columns so the ~18 links stay half as tall. */
+  columns: 2;
+  column-gap: 36px;
 }
 
 .footer-nav-links a {
+  display: block;
+  margin-bottom: 10px;
+  break-inside: avoid;
   font-size: 0.875rem;
   color: var(--text-secondary);
   transition: color var(--transition);
@@ -6099,4 +6102,36 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 480px) {
   .site-banner-inner { padding: 10px 16px; gap: 12px; }
   .site-banner-text { font-size: 0.84rem; }
+}
+
+/* ── Accepted payment methods (checkout-adjacent) ───────────────────────── */
+.pay-methods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 44px;
+}
+.pay-methods-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+.pay-methods-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.pay-methods-list li { display: flex; }
+.pay-methods-list svg {
+  display: block;
+  height: 30px;
+  width: auto;
+  border-radius: 5px;
+  box-shadow: 0 1px 2px rgba(74, 66, 58, 0.12);
 }

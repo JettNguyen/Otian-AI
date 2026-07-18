@@ -543,7 +543,12 @@
     // ── What happens after a successful password/Google sign-in ──────────────
     async function handleUser(user) {
       if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
-      if (!twoFactorCleared(user)) { await startTwoFactor(user); return; }
+      // The real second factor (authenticator/TOTP) is enforced by Firebase itself: an enrolled
+      // account throws auth/multi-factor-auth-required DURING sign-in — caught by handleMaybeMfa and
+      // resolved through the native challenge below — and never reaches here with usable tokens.
+      // So there is no client-side gate to apply. A post-authentication check (the old emailed-code
+      // step) would be security theatre: the tokens already exist by then and a direct SDK sign-in
+      // would skip it entirely. Real protection = enrolling TOTP on the security page.
       await proceed(user);
     }
     async function proceed(user) {
@@ -622,11 +627,10 @@
         initialResolved = true;
         $("auth-heading").textContent = mode === "signup" ? "Create Account" : "Sign In";
         if (user) {
-          // Already signed into Firebase in this browser. Still require the second factor unless this
-          // session already cleared it (or it's the first entry) — otherwise a password alone would
-          // sail straight through to the account/app.
+          // Already signed into Firebase in this browser. A native second factor was already
+          // enforced by Firebase when this session was established (it can't exist otherwise), so
+          // there is nothing further to gate here — go straight on.
           if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
-          if (!twoFactorCleared(user)) { startTwoFactor(user); return; }
           if (callbackUrl) { showContinue(user); }
           else { window.location.href = nextDest(); }
         } else {
@@ -658,11 +662,13 @@
       setStatus("");
     });
 
-    // ── Two-step challenge: authenticator app ────────────────────────────────
-    // The app code is verified by our own service (/mfa/totp/verify) so it can sit on the same screen
-    // as the emailed code and the user can pick either. LEGACY: some accounts may still carry a native
-    // Firebase MFA enrollment from before this change — those throw auth/multi-factor-auth-required at
-    // sign-in and are resolved with the Firebase resolver instead (mfaMode "native").
+    // ── Two-step challenge: authenticator app (native Firebase MFA) ──────────
+    // This is THE real second factor. An account with an authenticator enrolled (via the security
+    // page's native multiFactor().enroll) makes Firebase throw auth/multi-factor-auth-required during
+    // sign-in — no usable tokens are issued until it's resolved here with the Firebase resolver
+    // (mfaMode "native"). The old custom path (mfaMode "totp", verified post-sign-in by our own
+    // service) is retained only to not break any account mid-migration; native is the path that
+    // actually withholds tokens.
     let mfaResolver = null;
     let mfaTotpHint = null;
 

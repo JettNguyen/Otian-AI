@@ -127,7 +127,7 @@
           <div class="section-title">Authenticator app</div>
           <span class="pill" id="totp-pill">—</span>
         </div>
-        <div class="section-body" id="totp-body">A 6-digit code from an app like Google Authenticator or 1Password, asked for at sign-in.</div>
+        <div class="section-body" id="totp-body">Your second factor: a 6-digit code from an app like Google Authenticator or 1Password, required at every sign-in. Turn this on to protect your account even if your password is stolen.</div>
         <div class="stack" id="totp-actions" style="margin-top:10px;">
           <button class="btn btn-secondary mini" id="btn-totp-start">Set up</button>
           <button class="btn btn-secondary mini hidden" id="btn-totp-remove">Turn off</button>
@@ -144,8 +144,10 @@
         </div>
       </div>
 
-      <!-- Email login code (custom; activates with Phase 2 email delivery) -->
-      <div class="section">
+      <!-- Email login code — RETIRED as a second factor. It can't withhold Firebase tokens (the
+           email check happened after sign-in), so it was security theatre sitting in front of the
+           real native-TOTP factor. Hidden; the authenticator above is the real second factor. -->
+      <div class="section hidden" id="emailcode-section">
         <div class="section-head">
           <div class="section-title">Email a code at login</div>
           <span class="pill" id="emailcode-pill">—</span>
@@ -249,8 +251,7 @@
     show("totp-enroll", false);
     $("btn-totp-remove").dataset.uid = enrolledTotp ? enrolledTotp.uid : "";
 
-    // Email login code (state comes from the Render service).
-    renderEmailCode(user);
+    // Email login code is retired as a second factor (see #emailcode-section) — not rendered.
   }
 
   async function renderEmailCode(user) {

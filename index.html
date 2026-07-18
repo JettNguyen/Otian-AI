@@ -131,6 +131,14 @@
 
   <main>
 
+    <!-- Shown only after an account deletion redirects here with ?deleted=1 -->
+    <div class="site-banner" id="deletedBanner" role="status" hidden>
+      <div class="site-banner-inner">
+        <span class="site-banner-text">Your Otian AI account and its data have been deleted. Sorry to see you go &mdash; you&rsquo;re welcome back anytime.</span>
+        <button type="button" class="site-banner-close" id="deletedBannerClose" aria-label="Dismiss">&times;</button>
+      </div>
+    </div>
+
     <!-- ==============================
          Hero — the Archie demo leads
          ============================== -->
@@ -751,5 +759,23 @@
   <script src="js/nav.js"></script>
   <script type="module" src="js/account-nav.js"></script>
   <script src="js/demo-player.js"></script>
+  <script>
+    // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
+    (function () {
+      var params = new URLSearchParams(window.location.search || "");
+      if (params.get("deleted") !== "1") return;
+      var banner = document.getElementById("deletedBanner");
+      if (!banner) return;
+      banner.hidden = false;
+      function dismiss() {
+        banner.hidden = true;
+        params.delete("deleted");
+        var qs = params.toString();
+        history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : "") + window.location.hash);
+      }
+      var close = document.getElementById("deletedBannerClose");
+      if (close) close.addEventListener("click", dismiss);
+    })();
+  </script>
 </body>
 </html>

@@ -68,6 +68,7 @@ if (root) {
     menu.innerHTML =
       '<div class="nav-account-menu-label">' + label + "</div>" +
       '<a role="menuitem" href="/account/">Manage account</a>' +
+      '<a role="menuitem" href="/activity/">Account activity</a>' +
       '<div class="nav-account-divider"></div>' +
       '<button role="menuitem" type="button" id="navAccountSignout">Sign out</button>';
     const out = document.getElementById("navAccountSignout");

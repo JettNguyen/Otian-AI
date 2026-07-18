@@ -86,10 +86,12 @@
     .acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
     .acct-foot-note a { color: var(--text-secondary); }
 
-    /* Danger zone (delete account) */
-    .acct-danger { border-color: rgba(224, 49, 49, 0.35); }
-    .acct-danger .acct-section-title { color: #b3261e; }
-    [data-theme="dark"] .acct-danger .acct-section-title { color: #ff9f97; }
+    /* Delete account — an understated link that expands to a small confirm box */
+    .acct-delete { text-align: center; margin-top: 20px; }
+    .acct-delete-link { background: none; border: none; font-family: inherit; font-size: 0.78rem; color: var(--text-muted); cursor: pointer; text-decoration: underline; padding: 4px; }
+    .acct-delete-link:hover { color: #b3261e; }
+    [data-theme="dark"] .acct-delete-link:hover { color: #ff9f97; }
+    .acct-delete-confirm { max-width: 400px; margin: 12px auto 0; text-align: left; border: 1px solid rgba(224, 49, 49, 0.35); border-radius: var(--radius); padding: 16px 18px; background: var(--surface-soft); }
     .btn.btn-danger { background: #c0392b; color: #fff; }
     .btn.btn-danger:hover { background: #a5311f; }
   </style>
@@ -303,29 +305,24 @@
               </div>
             </div>
 
-            <!-- Activity + billing -->
-            <div class="acct-section" id="sec-links">
-              <div class="acct-section-title">Activity &amp; billing</div>
-              <div class="acct-section-body">Review your purchases and payments &mdash; and, for guided-session clients, pay your balance.</div>
+            <!-- Session billing (guided-session clients only) -->
+            <div class="acct-section acct-hidden" id="sec-billing">
+              <div class="acct-section-title">Session billing</div>
+              <div class="acct-section-body">Review and pay your guided-session invoices.</div>
               <div class="acct-row">
-                <a class="btn btn-secondary btn-mini" href="/activity/">Account activity</a>
-                <a class="btn btn-secondary btn-mini acct-hidden" id="link-billing" href="/billing/">Session billing</a>
+                <a class="btn btn-secondary btn-mini" href="/billing/">Open session billing</a>
               </div>
             </div>
 
-            <!-- Danger zone: delete account -->
-            <div class="acct-section acct-danger" id="sec-danger">
-              <div class="acct-section-title">Delete account</div>
-              <div class="acct-section-body">Permanently delete your Otian AI account and all associated data &mdash; sign-in, purchases, and session records. This can&rsquo;t be undone.</div>
-              <div class="acct-row">
-                <button class="btn btn-secondary btn-mini" id="btn-delete">Delete my account</button>
-              </div>
-              <div class="acct-hidden" id="delete-confirm" style="margin-top:14px;">
-                <div class="acct-section-body">To confirm, type your email address (<span class="acct-email" id="delete-email-hint">your email</span>):</div>
-                <div class="acct-fields" style="margin-top:8px;">
+            <!-- Delete account — deliberately understated; not an everyday action -->
+            <div class="acct-delete" id="sec-delete">
+              <button class="acct-delete-link" id="btn-delete">Delete account</button>
+              <div class="acct-hidden acct-delete-confirm" id="delete-confirm">
+                <div class="acct-section-body" style="margin-bottom:8px;">Permanently delete your account and all associated data. To confirm, type your email (<span class="acct-email" id="delete-email-hint">your email</span>):</div>
+                <div class="acct-fields">
                   <input type="email" id="delete-email" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="your email address" />
                 </div>
-                <div class="acct-row">
+                <div class="acct-row" style="margin-top:10px;">
                   <button class="btn btn-danger btn-mini" id="btn-delete-confirm">Permanently delete</button>
                   <button class="btn btn-secondary btn-mini" id="btn-delete-cancel">Cancel</button>
                 </div>
@@ -538,7 +535,7 @@
         return;
       }
       // Session billing is only for managed clients.
-      show("link-billing", tier === "client");
+      show("sec-billing", tier === "client");
       const owned = tier === "admin" || tier === "client" || tier === "lifetime"
         || (tier === "subscriber" && subStatus === "active");
       if (owned) {

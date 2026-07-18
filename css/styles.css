@@ -371,13 +371,6 @@ p { color: var(--text-secondary); line-height: 1.8; }
   }
 }
 
-@media (max-width: 1025px) and (min-width: 1000px) {
-  .nav-logo-divider,
-  .nav-logo-text {
-    display: none;
-  }
-}
-
 /* Desktop links */
 .nav-links {
   display: flex;
@@ -397,6 +390,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
@@ -423,6 +417,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap; /* a multi-word label ("Work With Us") must never wrap to two lines */
 }
 
 .nav-more-toggle::after {
@@ -691,6 +686,30 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   height: 1px;
   background: var(--border);
   margin: 6px 4px;
+}
+
+/* ── Nav responsive ──────────────────────────────────────────────────────────
+   One clean switch, no in-between cramping. Above 1100px the whole row (logo +
+   links + theme toggle + Get Started + avatar) fits comfortably. At/below 1100px
+   the links and CTA move into the drawer, the hamburger appears, and the right-
+   hand controls (theme toggle + avatar + hamburger) group into one tidy cluster
+   instead of floating apart. Elements only ever disappear as the screen narrows —
+   never disappear-then-reappear. */
+@media (max-width: 1100px) {
+  /* Qualified with .nav so display:none beats the base .btn rule on .nav-cta
+     regardless of source order. */
+  .nav .nav-links,
+  .nav .nav-cta { display: none; }
+
+  .nav .nav-hamburger { display: flex; }
+
+  /* Logo pinned left; the controls sit together on the right. */
+  .nav .nav-inner { justify-content: flex-start; gap: 10px; }
+  .nav .nav-logo { margin-right: auto; }
+}
+
+@media (max-width: 480px) {
+  .nav-inner { padding: 0 16px; gap: 8px; }
 }
 
 /* Overlay */
@@ -3764,20 +3783,6 @@ html[data-theme="dark"] .availability-widget iframe {
   :root {
     --section-padding: 64px 20px;
   }
-
-  /* Nav */
-  .nav-links,
-  .nav-cta {
-    display: none;
-  }
-
-  .nav-hamburger {
-    display: flex;
-  }
-
-  /* Tighten the right-hand cluster (theme toggle + account avatar + hamburger)
-     now that the account avatar shares the top bar on mobile. */
-  .nav-inner { gap: 10px; }
 
   .screenshot-gallery.hero-gallery {
     width: 100%;

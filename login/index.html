@@ -50,8 +50,8 @@
     #auth-status.ok { color: var(--c-teal); }
     .auth-hidden { display: none !important; }
     .auth-spinner {
-      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
-      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
+      border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
       animation: authspin 0.7s linear infinite;
     }
     @keyframes authspin { to { transform: rotate(360deg); } }
@@ -400,6 +400,16 @@
     const statusEl = $("auth-status");
     function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
     function show(id, on) { $(id).classList.toggle("auth-hidden", !on); }
+
+    // Run an async button action with a visible in-button spinner, and always re-enable it after —
+    // so a working button clearly reads as "in progress", and a failed one clearly comes back to life.
+    async function busy(btn, fn) {
+      if (!btn) return fn();
+      const wasDisabled = btn.disabled;
+      btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true"); btn.disabled = true;
+      try { return await fn(); }
+      finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
+    }
     function onlyCard(id) {
       ["auth-loading", "auth-card", "auth-verify", "auth-mfa", "auth-emfa", "auth-continue"].forEach((c) => show(c, c === id));
     }
@@ -592,7 +602,7 @@
       return false;
     }
 
-    $("btn-mfa-verify").addEventListener("click", async () => {
+    $("btn-mfa-verify").addEventListener("click", () => busy($("btn-mfa-verify"), async () => {
       if (!mfaResolver || !mfaTotpHint) return;
       const code = $("mfa-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
@@ -606,12 +616,12 @@
       } catch (e) {
         setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
       }
-    });
+    }));
     $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
     $("btn-mfa-cancel").addEventListener("click", () => { mfaResolver = null; mfaTotpHint = null; setStatus(""); showAuthCard(); });
 
     // ── Google ───────────────────────────────────────────────────────────────
-    $("btn-google").addEventListener("click", async () => {
+    $("btn-google").addEventListener("click", () => busy($("btn-google"), async () => {
       setStatus("Opening Google…");
       try {
         const result = await signInWithPopup(auth, new GoogleAuthProvider());
@@ -621,10 +631,10 @@
         if (handleMaybeMfa(e)) return;
         if (e.code !== "auth/popup-closed-by-user") setStatus(prettyAuthError(e), "error");
       }
-    });
+    }));
 
     // ── Email + password ─────────────────────────────────────────────────────
-    $("btn-primary-auth").addEventListener("click", async () => {
+    $("btn-primary-auth").addEventListener("click", () => busy($("btn-primary-auth"), async () => {
       const email = $("auth-email").value.trim();
       const password = $("auth-pass").value;
       if (!email || !password) { setStatus("Enter your email and password.", "error"); return; }
@@ -661,20 +671,20 @@
           await handleUser(cred.user);
         } catch (e) { if (!handleMaybeMfa(e)) setStatus(prettyAuthError(e), "error"); }
       }
-    });
+    }));
     $("auth-pass").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-primary-auth").click(); });
 
     // ── Forgot password ──────────────────────────────────────────────────────
-    $("btn-forgot").addEventListener("click", async () => {
+    $("btn-forgot").addEventListener("click", () => busy($("btn-forgot"), async () => {
       const email = $("auth-email").value.trim();
       if (!email) { setStatus("Enter your email above first, then tap Forgot password.", "error"); return; }
       setStatus("Sending reset email…");
       try { await sendResetEmail(email); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
-    });
+    }));
 
     // ── Passwordless email sign-in link ──────────────────────────────────────
-    $("btn-link").addEventListener("click", async () => {
+    $("btn-link").addEventListener("click", () => busy($("btn-link"), async () => {
       const email = $("auth-email").value.trim();
       if (!email) { setStatus("Enter your email above first.", "error"); return; }
       setStatus("Sending sign-in link…");
@@ -685,10 +695,10 @@
         window.localStorage.setItem("otianEmailForSignIn", email);
         setStatus("Sign-in link sent — open it in this browser to finish.", "ok");
       } catch (e) { setStatus(prettyAuthError(e), "error"); }
-    });
+    }));
 
     // ── Verify gate ──────────────────────────────────────────────────────────
-    $("btn-verified").addEventListener("click", async () => {
+    $("btn-verified").addEventListener("click", () => busy($("btn-verified"), async () => {
       if (!pendingVerifyUser) return;
       setStatus("Checking…");
       try {
@@ -696,13 +706,13 @@
         if (pendingVerifyUser.emailVerified) { setStatus(""); await handleUser(pendingVerifyUser); }
         else { setStatus("Not verified yet — click the link in your email, then try again.", "error"); }
       } catch (e) { setStatus(prettyAuthError(e), "error"); }
-    });
-    $("btn-resend").addEventListener("click", async () => {
+    }));
+    $("btn-resend").addEventListener("click", () => busy($("btn-resend"), async () => {
       if (!pendingVerifyUser) return;
       setStatus("Resending…");
       try { await sendVerificationEmail(pendingVerifyUser); setStatus("Sent — check your inbox (and spam).", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
-    });
+    }));
     $("btn-verify-back").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
 
     // ── Continue card (already signed in, app flow) ──────────────────────────
@@ -710,7 +720,7 @@
     $("btn-switch").addEventListener("click", async () => { try { await signOut(auth); } catch (e) {} setStatus(""); });
 
     // ── Emailed-code challenge card ──────────────────────────────────────────
-    $("btn-emfa-verify").addEventListener("click", async () => {
+    $("btn-emfa-verify").addEventListener("click", () => busy($("btn-emfa-verify"), async () => {
       const user = auth.currentUser; if (!user) return;
       const code = $("emfa-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
@@ -726,8 +736,8 @@
         setStatus("");
         await handleUser(user); // now clears the gate and proceeds
       } catch (e) { setStatus((e && e.message) || "That code didn't match.", "error"); }
-    });
-    $("btn-emfa-resend").addEventListener("click", async () => {
+    }));
+    $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
       const user = auth.currentUser; if (!user) return;
       setStatus("Resending…");
       try {
@@ -735,7 +745,7 @@
         await fetch(BILLING_API + "/mfa/send-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id_token: idToken }) });
         setStatus("Sent — check your inbox.", "ok");
       } catch (e) { setStatus("Couldn't resend. Try again.", "error"); }
-    });
+    }));
     $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
     $("btn-emfa-back").addEventListener("click", async () => { emailMfaPassed = false; try { await signOut(auth); } catch (e) {} setStatus(""); });
 

@@ -38,8 +38,8 @@
     #action-status.ok { color: var(--c-teal); }
     .auth-hidden { display: none !important; }
     .auth-spinner {
-      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
-      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
+      border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
       animation: authspin 0.7s linear infinite;
     }
     @keyframes authspin { to { transform: rotate(360deg); } }
@@ -175,7 +175,7 @@
           <!-- Working -->
           <div id="action-loading" class="auth-card">
             <div class="auth-spinner" aria-hidden="true"></div>
-            <p class="auth-lead" style="margin:0;">One moment&hellip;</p>
+            <p class="auth-lead" style="margin:0;">Confirming your email &mdash; this only takes a second&hellip;</p>
           </div>
 
           <!-- Result (verify / recover / change) -->
@@ -277,7 +277,7 @@
           '<p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.55;margin:0 0 16px">Your email may already be confirmed. Go to your account to check &mdash; or reopen the link from your email.</p>' +
           '<a href="/account/" style="display:inline-block;padding:0.7rem 1.4rem;border-radius:12px;background:var(--accent);color:var(--text-on-accent);font-weight:600;font-size:0.875rem;text-decoration:none">Go to your account</a>';
         var h1 = document.querySelector(".page-hero h1"); if (h1) h1.textContent = "Almost there";
-      }, 8000);
+      }, 14000);
     })();
   </script>
 
@@ -288,9 +288,22 @@
     // public web key: it identifies the project for the API, it is not a secret.
     const API_KEY = "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M";
     async function itk(method, body) {
-      const r = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:" + method + "?key=" + API_KEY, {
-        method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
-      });
+      // Bound the request: a stalled network becomes a visible "timed out" error, never an
+      // endless spinner. AbortController fires after 12s.
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 12000);
+      let r;
+      try {
+        r = await fetch("https://identitytoolkit.googleapis.com/v1/accounts:" + method + "?key=" + API_KEY, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body), signal: ctrl.signal,
+        });
+      } catch (err) {
+        const e = new Error(err && err.name === "AbortError" ? "TIMEOUT" : "NETWORK");
+        e.itk = e.message; throw e;
+      } finally {
+        clearTimeout(timer);
+      }
       const data = await r.json().catch(() => ({}));
       if (!r.ok) { const msg = (data.error && data.error.message) || ("HTTP " + r.status); const e = new Error(msg); e.itk = msg; throw e; }
       return data;
@@ -367,20 +380,33 @@
           showResult({ ok: false, title: "Unsupported link", body: "We couldn&rsquo;t recognise this request.", ctaText: "Go to sign in", ctaHref: "/login/" });
         }
       } catch (e) {
-        const bad = /OOB_CODE|EXPIRED/.test(e.itk || "");
+        const tag = e.itk || "";
+        const bad = /OOB_CODE|EXPIRED/.test(tag);
+        const offline = /TIMEOUT|NETWORK/.test(tag);
         showResult({
           ok: false,
-          title: bad ? "Link expired" : "Something went wrong",
+          title: bad ? "Link expired" : offline ? "Couldn’t reach the server" : "Something went wrong",
           body: bad
             ? "This link has already been used or has expired. Request a fresh one and try again."
-            : prettyErr(e),
-          ctaText: "Go to sign in",
-          ctaHref: "/login/",
+            : offline
+              ? "We couldn’t confirm your email just now — check your connection and reopen the link from your email."
+              : prettyErr(e),
+          ctaText: bad || offline ? "Go to sign in" : "Go to your account",
+          ctaHref: bad || offline ? "/login/" : "/account/",
         });
       }
     }
 
-    $("btn-reset").addEventListener("click", async () => {
+    // Run an async button action with a visible busy spinner + guaranteed re-enable.
+    async function busy(btn, fn) {
+      if (!btn) return fn();
+      const wasDisabled = btn.disabled;
+      btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true"); btn.disabled = true;
+      try { return await fn(); }
+      finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
+    }
+
+    $("btn-reset").addEventListener("click", () => busy($("btn-reset"), async () => {
       const p1 = $("reset-pass").value, p2 = $("reset-pass2").value;
       if (p1.length < 6) { setStatus("Choose a password of at least 6 characters.", "error"); return; }
       if (p1 !== p2) { setStatus("Those passwords don't match.", "error"); return; }
@@ -389,9 +415,13 @@
         await itk("resetPassword", { oobCode, newPassword: p1 });
         showResult({ ok: true, title: "Password changed", body: "Your new password is set. Sign in with it now.", ctaText: "Go to sign in", ctaHref: "/login/" });
       } catch (e) {
-        setStatus(/WEAK_PASSWORD/.test(e.itk || "") ? "Choose a stronger password (at least 6 characters)." : prettyErr(e), "error");
+        const tag = e.itk || "";
+        setStatus(
+          /WEAK_PASSWORD/.test(tag) ? "Choose a stronger password (at least 6 characters)."
+          : /TIMEOUT|NETWORK/.test(tag) ? "Couldn’t reach the server — check your connection and try again."
+          : prettyErr(e), "error");
       }
-    });
+    }));
     $("reset-pass2").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-reset").click(); });
 
     function prettyErr(e) { return (e && e.message) || "Something went wrong."; }

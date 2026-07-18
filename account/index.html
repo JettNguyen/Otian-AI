@@ -66,8 +66,8 @@
 
     .acct-hidden { display: none !important; }
     .acct-spinner {
-      width: 26px; height: 26px; margin: 8px auto; border-radius: 50%;
-      border: 2.5px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
+      border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
       animation: acctspin 0.7s linear infinite;
     }
     @keyframes acctspin { to { transform: rotate(360deg); } }
@@ -417,6 +417,16 @@
     function setStatus(msg, type = "") { statusEl.textContent = msg || ""; statusEl.className = type; }
     function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
 
+    // Run an async button action with a visible in-button spinner, always re-enabling after — so
+    // it's obvious when a button is working versus stuck.
+    async function busy(btn, fn) {
+      if (!btn) return fn();
+      const wasDisabled = btn.disabled;
+      btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true"); btn.disabled = true;
+      try { return await fn(); }
+      finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
+    }
+
     let totpSecret = null; // held between "Set up" and "Confirm"
 
     // ── This page is signed-in only. No session → go to /login/ and come back here. ──
@@ -492,20 +502,24 @@
       }
     }
 
-    $("btn-buy-archie").addEventListener("click", () => {
+    $("btn-buy-archie").addEventListener("click", () => busy($("btn-buy-archie"), async () => {
       const user = auth.currentUser;
       if (!user) return;
+      setStatus("Opening secure checkout…");
       // client_reference_id ties the payment to this account so the webhook grants it access.
       const url = STRIPE_CHECKOUT_URL
         + (STRIPE_CHECKOUT_URL.includes("?") ? "&" : "?")
         + "client_reference_id=" + encodeURIComponent(user.uid);
       window.location.href = url;
-    });
+      // Keep the spinner up until the browser navigates (never re-enable to an idle state here).
+      await new Promise(() => {});
+    }));
 
-    $("btn-signout").addEventListener("click", async () => {
+    $("btn-signout").addEventListener("click", () => busy($("btn-signout"), async () => {
       try { await signOut(auth); } catch (e) {}
       window.location.href = "/login/";
-    });
+      await new Promise(() => {});
+    }));
 
     // ── Email a code at sign-in (custom email MFA) ──
     async function refreshEmailMfa() {
@@ -524,7 +538,7 @@
         $("emfa-body").textContent = "Couldn't check this right now — reload to try again.";
       }
     }
-    $("btn-emfa-start").addEventListener("click", async () => {
+    $("btn-emfa-start").addEventListener("click", () => busy($("btn-emfa-start"), async () => {
       setStatus("Emailing a code…");
       try {
         await mfaApi("/mfa/send-code");
@@ -533,13 +547,13 @@
         $("emfa-code").focus();
         setStatus("Code sent — check your inbox (and spam).", "ok");
       } catch (e) { setStatus(prettyMfaError(e), "error"); }
-    });
-    $("btn-emfa-resend").addEventListener("click", async () => {
+    }));
+    $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
       setStatus("Resending…");
       try { await mfaApi("/mfa/send-code"); setStatus("Sent — check your inbox.", "ok"); }
       catch (e) { setStatus(prettyMfaError(e), "error"); }
-    });
-    $("btn-emfa-confirm").addEventListener("click", async () => {
+    }));
+    $("btn-emfa-confirm").addEventListener("click", () => busy($("btn-emfa-confirm"), async () => {
       const code = $("emfa-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
       setStatus("Turning on…");
@@ -549,13 +563,13 @@
         await refreshEmailMfa();
         setStatus("Email codes turned on.", "ok");
       } catch (e) { setStatus(prettyMfaError(e), "error"); }
-    });
+    }));
     $("btn-emfa-cancel").addEventListener("click", () => { show("emfa-enroll", false); setStatus(""); });
-    $("btn-emfa-off").addEventListener("click", async () => {
+    $("btn-emfa-off").addEventListener("click", () => busy($("btn-emfa-off"), async () => {
       setStatus("Turning off…");
       try { await mfaApi("/mfa/email/disable"); await refreshEmailMfa(); setStatus("Email codes turned off.", "ok"); }
       catch (e) { setStatus(prettyMfaError(e), "error"); }
-    });
+    }));
     function prettyMfaError(e) {
       const m = (e && e.message) || "";
       if (/not configured/.test(m)) return "Email codes aren't available right now.";
@@ -587,7 +601,7 @@
     // into the authenticator app instead. On desktop, show the QR to scan with a phone.
     const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 
-    $("btn-totp-start").addEventListener("click", async () => {
+    $("btn-totp-start").addEventListener("click", () => busy($("btn-totp-start"), async () => {
       const user = auth.currentUser; if (!user) return;
       setStatus("Preparing…");
       try {
@@ -616,8 +630,8 @@
           setStatus("For security, sign out and back in, then try again.", "error");
         } else { setStatus(prettyAuthError(e), "error"); }
       }
-    });
-    $("btn-totp-confirm").addEventListener("click", async () => {
+    }));
+    $("btn-totp-confirm").addEventListener("click", () => busy($("btn-totp-confirm"), async () => {
       const user = auth.currentUser; if (!user || !totpSecret) return;
       const code = $("totp-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
@@ -632,15 +646,15 @@
       } catch (e) {
         setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
       }
-    });
+    }));
     $("btn-totp-cancel").addEventListener("click", () => { totpSecret = null; show("totp-enroll", false); setStatus(""); });
-    $("btn-totp-remove").addEventListener("click", async (ev) => {
-      const user = auth.currentUser; const uid = ev.currentTarget.dataset.uid;
+    $("btn-totp-remove").addEventListener("click", (ev) => busy(ev.currentTarget, async () => {
+      const user = auth.currentUser; const uid = $("btn-totp-remove").dataset.uid;
       if (!user || !uid) return;
       setStatus("Removing…");
       try { await multiFactor(user).unenroll(uid); renderDashboard(auth.currentUser); setStatus("Authenticator app turned off.", "ok"); }
       catch (e) { setStatus(e.code === "auth/requires-recent-login" ? "Sign out and back in, then try again." : prettyAuthError(e), "error"); }
-    });
+    }));
 
     function prettyAuthError(e) {
       const map = {

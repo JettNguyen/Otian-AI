@@ -948,6 +948,34 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   font-size: 0.875rem;
 }
 
+/* Busy state: swap the label for a spinner, lock size, and block further clicks.
+   Used by the auth/account pages so a working button is unmistakably "in progress"
+   (not frozen or crashed). Pair with disabled/aria-busy in JS. */
+@keyframes otian-spin { to { transform: rotate(360deg); } }
+.btn.is-busy {
+  color: transparent !important;
+  pointer-events: none;
+  position: relative;
+}
+.btn.is-busy::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 1.1em; height: 1.1em;
+  margin: -0.55em 0 0 -0.55em;
+  border-radius: 50%;
+  border: 2px solid var(--text-on-accent);
+  border-right-color: transparent;
+  animation: otian-spin 0.6s linear infinite;
+}
+.btn-secondary.is-busy::after { border-color: var(--text-primary); border-right-color: transparent; }
+/* A standalone inline spinner (e.g. next to status text) */
+.otian-spinner-inline {
+  display: inline-block; width: 1em; height: 1em; vertical-align: -0.15em;
+  border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent;
+  animation: otian-spin 0.6s linear infinite;
+}
+
 /* ========================================
    7. Footer
    ======================================== */

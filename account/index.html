@@ -232,30 +232,13 @@
               </div>
             </div>
 
-            <!-- Email a code at sign-in (custom email MFA via the Render mailer) -->
+            <!-- Emailed code at sign-in — always on for every account, no setup -->
             <div class="acct-section" id="sec-emfa">
               <div class="acct-section-head">
-                <div class="acct-section-title">Email a code at sign-in</div>
-                <span class="pill" id="emfa-pill">&mdash;</span>
+                <div class="acct-section-title">Emailed code at sign-in</div>
+                <span class="pill pill-on">On</span>
               </div>
-              <div class="acct-section-body" id="emfa-body">We&rsquo;ll email a 6-digit code to confirm each new sign-in.</div>
-              <div class="acct-row" id="emfa-actions">
-                <button class="btn btn-primary btn-mini" id="btn-emfa-start">Set up</button>
-                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-emfa-off">Turn off</button>
-                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-emfa-retry">Try again</button>
-              </div>
-              <!-- Enable sub-flow: prove you can receive a code before it's turned on -->
-              <div class="acct-hidden" id="emfa-enroll" style="margin-top:14px;">
-                <div class="acct-section-body">We emailed a 6-digit code to <span id="emfa-email">your inbox</span>. Enter it to turn this on:</div>
-                <div class="acct-fields" style="margin-top:8px;">
-                  <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
-                </div>
-                <div class="acct-row">
-                  <button class="btn btn-primary btn-mini" id="btn-emfa-confirm">Confirm</button>
-                  <button class="btn btn-secondary btn-mini" id="btn-emfa-resend">Resend</button>
-                  <button class="btn btn-secondary btn-mini" id="btn-emfa-cancel">Cancel</button>
-                </div>
-              </div>
+              <div class="acct-section-body">On by default for every account. Each time you sign in, we email a 6-digit code to <span class="acct-email" id="emfa-email-who">your inbox</span> to confirm it&rsquo;s you &mdash; so a leaked password alone can&rsquo;t get in. This baseline stays on; add the authenticator app below if you&rsquo;d also like the option of an app code.</div>
             </div>
 
             <!-- Authenticator app (TOTP MFA) -->
@@ -268,6 +251,7 @@
               <div class="acct-row" id="totp-actions">
                 <button class="btn btn-primary btn-mini" id="btn-totp-start">Set up</button>
                 <button class="btn btn-secondary btn-mini acct-hidden" id="btn-totp-remove">Turn off</button>
+                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-totp-retry">Try again</button>
               </div>
               <!-- Enrollment sub-flow -->
               <div class="acct-hidden" id="totp-enroll" style="margin-top:14px;">
@@ -457,11 +441,24 @@
       finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
     }
 
-    let totpSecret = null; // held between "Set up" and "Confirm"
+    // A sign-in only counts as "cleared" for the second factor if it happened this browser session
+    // (login sets this) or it's the very first entry right after signup. Mirrors the login page, so a
+    // password alone can't reach this dashboard by navigating here directly.
+    function isFirstEntry(user) {
+      const c = Date.parse((user.metadata && user.metadata.creationTime) || "");
+      const l = Date.parse((user.metadata && user.metadata.lastSignInTime) || "");
+      if (Number.isNaN(c) || Number.isNaN(l)) return false;
+      return Math.abs(l - c) < 10000;
+    }
+    function twoFactorCleared(user) {
+      try { if (sessionStorage.getItem("otian_2fa_ok") === user.uid) return true; } catch (e) {}
+      return isFirstEntry(user);
+    }
 
-    // ── This page is signed-in only. No session → go to /login/ and come back here. ──
+    // ── This page is signed-in AND second-factor-cleared only. Otherwise → /login/ and come back. ──
     onAuthStateChanged(auth, (user) => {
       if (!user) { window.location.replace("/login/?next=/account/"); return; }
+      if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/account/"); return; }
       show("acct-loading", false);
       show("acct-signedin", true);
       setStatus("");
@@ -472,24 +469,9 @@
       const name = (user.displayName || "").trim();
       $("acct-name").textContent = name || "Signed in";
       $("acct-who").textContent = user.email || user.uid;
+      $("emfa-email-who").textContent = user.email || "your inbox";
 
-      // Email-code MFA status (from the Render service).
-      refreshEmailMfa();
-
-      // Authenticator app (TOTP MFA).
-      let enrolled = null;
-      try { enrolled = (multiFactor(user).enrolledFactors || []).find((f) => f.factorId === "totp") || null; }
-      catch { enrolled = null; }
-      const on = !!enrolled;
-      setPill("totp-pill", on ? "On" : "Off", on);
-      $("totp-body").textContent = on
-        ? "Two-step verification is on. You'll enter a 6-digit code from your authenticator app when you sign in."
-        : "Add a 6-digit code from an app like Google Authenticator or 1Password, asked for when you sign in.";
-      show("btn-totp-start", !on);
-      show("btn-totp-remove", on);
-      show("totp-enroll", false);
-      $("btn-totp-remove").dataset.uid = enrolled ? enrolled.uid : "";
-
+      refreshTotp(user);   // authenticator status (custom) + any legacy Firebase enrollment
       renderArchie(user);
     }
 
@@ -546,81 +528,58 @@
     }));
 
     $("btn-signout").addEventListener("click", () => busy($("btn-signout"), async () => {
+      try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // re-challenge on next sign-in
       try { await signOut(auth); } catch (e) {}
       window.location.href = "/login/";
       await new Promise(() => {});
     }));
 
-    // ── Email a code at sign-in (custom email MFA) ──
-    async function refreshEmailMfa(attempt = 0) {
+    // ── Authenticator app status (custom TOTP, verified by our service) ──
+    // Also surfaces any leftover LEGACY Firebase-native enrollment so it can be turned off and
+    // re-added under the new system (which is what lets an emailed code stand in for the app code).
+    async function refreshTotp(user, attempt = 0) {
+      let legacyFactor = null;
+      try { legacyFactor = (multiFactor(user).enrolledFactors || []).find((f) => f.factorId === "totp") || null; } catch (e) {}
+      let customOn = false;
       try {
         const d = await mfaApi("/mfa/status");
-        const on = !!d.email_enabled;
-        setPill("emfa-pill", on ? "On" : "Off", on);
-        $("emfa-body").textContent = on
-          ? "On. We'll email a 6-digit code to confirm each new sign-in."
-          : "We'll email a 6-digit code to confirm each new sign-in.";
-        show("btn-emfa-start", !on);
-        show("btn-emfa-off", on);
-        show("emfa-enroll", false);
-        show("btn-emfa-retry", false);
+        customOn = !!d.totp_enabled;
       } catch (e) {
-        // Cold start / transient network: keep waiting through the wake (up to 3 tries) instead of
-        // failing on the first stalled request.
         if (e.kind === "network" && attempt < 2) {
-          setPill("emfa-pill", "…", false);
-          $("emfa-body").textContent = "Waking the security service — this can take up to a minute on the first load…";
-          show("btn-emfa-start", false); show("btn-emfa-off", false); show("btn-emfa-retry", false);
+          setPill("totp-pill", "…", false);
+          $("totp-body").textContent = "Waking the security service — this can take up to a minute on the first load…";
+          show("btn-totp-start", false); show("btn-totp-remove", false); show("btn-totp-retry", false);
           await new Promise((r) => setTimeout(r, 2500));
-          return refreshEmailMfa(attempt + 1);
+          return refreshTotp(user, attempt + 1);
         }
-        setPill("emfa-pill", "—", false);
-        $("emfa-body").textContent = e.kind === "network"
+        setPill("totp-pill", "—", false);
+        $("totp-body").textContent = e.kind === "network"
           ? "Couldn't reach the security service — it may still be waking up. Give it a moment, then try again."
           : "Couldn't check this right now: " + ((e && e.message) || "unknown error") + ".";
-        show("btn-emfa-start", false); show("btn-emfa-off", false);
-        show("btn-emfa-retry", true);
+        show("btn-totp-start", false); show("btn-totp-remove", false); show("btn-totp-retry", true);
+        return;
       }
+      const on = customOn || !!legacyFactor;
+      setPill("totp-pill", on ? "On" : "Off", on);
+      $("totp-body").textContent = !on
+        ? "Optional. Add a 6-digit code from an app like Google Authenticator or 1Password — then at sign-in you can use either the app code or an emailed code."
+        : (legacyFactor && !customOn
+            ? "On, but set up with our previous system. Turn it off and set it up again to also be able to fall back to an emailed code at sign-in."
+            : "On. At sign-in you can enter a code from your authenticator app — or choose an emailed code instead.");
+      show("btn-totp-start", !on);
+      show("btn-totp-remove", on);
+      show("btn-totp-retry", false);
+      show("totp-enroll", false);
+      $("btn-totp-remove").dataset.legacyUid = legacyFactor ? legacyFactor.uid : "";
+      $("btn-totp-remove").dataset.custom = customOn ? "1" : "";
     }
-    $("btn-emfa-start").addEventListener("click", () => busy($("btn-emfa-start"), async () => {
-      setStatus("Emailing a code…");
-      try {
-        await mfaApi("/mfa/send-code");
-        $("emfa-email").textContent = auth.currentUser.email || "your inbox";
-        show("emfa-enroll", true);
-        $("emfa-code").focus();
-        setStatus("Code sent — check your inbox (and spam).", "ok");
-      } catch (e) { setStatus(prettyMfaError(e), "error"); }
-    }));
-    $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
-      setStatus("Resending…");
-      try { await mfaApi("/mfa/send-code"); setStatus("Sent — check your inbox.", "ok"); }
-      catch (e) { setStatus(prettyMfaError(e), "error"); }
-    }));
-    $("btn-emfa-confirm").addEventListener("click", () => busy($("btn-emfa-confirm"), async () => {
-      const code = $("emfa-code").value.trim();
-      if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
-      setStatus("Turning on…");
-      try {
-        await mfaApi("/mfa/email/enable", { code });
-        $("emfa-code").value = "";
-        await refreshEmailMfa();
-        setStatus("Email codes turned on.", "ok");
-      } catch (e) { setStatus(prettyMfaError(e), "error"); }
-    }));
-    $("btn-emfa-cancel").addEventListener("click", () => { show("emfa-enroll", false); setStatus(""); });
-    $("btn-emfa-retry").addEventListener("click", () => busy($("btn-emfa-retry"), () => refreshEmailMfa(0)));
-    $("btn-emfa-off").addEventListener("click", () => busy($("btn-emfa-off"), async () => {
-      setStatus("Turning off…");
-      try { await mfaApi("/mfa/email/disable"); await refreshEmailMfa(); setStatus("Email codes turned off.", "ok"); }
-      catch (e) { setStatus(prettyMfaError(e), "error"); }
-    }));
+    $("btn-totp-retry").addEventListener("click", () => busy($("btn-totp-retry"), () => refreshTotp(auth.currentUser, 0)));
     function prettyMfaError(e) {
       const m = (e && e.message) || "";
-      if (/not configured/.test(m)) return "Email codes aren't available right now.";
+      if (/not configured/.test(m)) return "That isn't available right now.";
+      if (e && e.kind === "network") return "Couldn't reach the security service — try again in a moment.";
       return m || "Something went wrong.";
     }
-    $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-confirm").click(); });
 
     // Authenticator app (TOTP)
     // Render an otpauth:// string to a QR code as inline SVG — dark modules on a forced-white
@@ -650,11 +609,12 @@
       const user = auth.currentUser; if (!user) return;
       setStatus("Preparing…");
       try {
-        const session = await multiFactor(user).getSession();
-        totpSecret = await TotpMultiFactorGenerator.generateSecret(session);
-        $("totp-secret").textContent = totpSecret.secretKey;
-
-        const otpUrl = totpSecret.generateQrCodeUrl(user.email || "Archie account", "Otian AI");
+        // Our service mints the secret (held "pending" until a code proves it) and returns the
+        // otpauth:// string; we render the QR entirely in-browser, so the secret only ever travels
+        // between this page and our own service.
+        const d = await mfaApi("/mfa/totp/setup");
+        $("totp-secret").textContent = d.secret_base32;
+        const otpUrl = d.otpauth_url;
         if (isTouchDevice) {
           $("btn-totp-open").setAttribute("href", otpUrl);
           show("totp-open-wrap", true);
@@ -664,41 +624,38 @@
           show("totp-qr-wrap", true);
           show("totp-open-wrap", false);
         }
-
         show("totp-enroll", true);
         $("totp-code").focus();
         setStatus("");
-      } catch (e) {
-        if (e.code === "auth/operation-not-allowed" || /identity|mfa|multi-factor|not.*enabled/i.test(e.message || "")) {
-          setStatus("Authenticator two-step isn't enabled on this project yet. It turns on once Multi-factor Authentication is enabled in Firebase.", "error");
-        } else if (e.code === "auth/requires-recent-login") {
-          setStatus("For security, sign out and back in, then try again.", "error");
-        } else { setStatus(prettyAuthError(e), "error"); }
-      }
+      } catch (e) { setStatus(prettyMfaError(e), "error"); }
     }));
     $("btn-totp-confirm").addEventListener("click", () => busy($("btn-totp-confirm"), async () => {
-      const user = auth.currentUser; if (!user || !totpSecret) return;
+      const user = auth.currentUser; if (!user) return;
       const code = $("totp-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
       setStatus("Verifying…");
       try {
-        const assertion = TotpMultiFactorGenerator.assertionForEnrollment(totpSecret, code);
-        await multiFactor(user).enroll(assertion, "Authenticator app");
-        totpSecret = null;
+        await mfaApi("/mfa/totp/enable", { code });
         $("totp-code").value = "";
-        renderDashboard(auth.currentUser);
+        await refreshTotp(auth.currentUser);
         setStatus("Authenticator app turned on.", "ok");
-      } catch (e) {
-        setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
-      }
+      } catch (e) { setStatus(prettyMfaError(e), "error"); }
     }));
-    $("btn-totp-cancel").addEventListener("click", () => { totpSecret = null; show("totp-enroll", false); setStatus(""); });
+    $("btn-totp-cancel").addEventListener("click", () => { show("totp-enroll", false); setStatus(""); });
     $("btn-totp-remove").addEventListener("click", (ev) => busy(ev.currentTarget, async () => {
-      const user = auth.currentUser; const uid = $("btn-totp-remove").dataset.uid;
-      if (!user || !uid) return;
-      setStatus("Removing…");
-      try { await multiFactor(user).unenroll(uid); renderDashboard(auth.currentUser); setStatus("Authenticator app turned off.", "ok"); }
-      catch (e) { setStatus(e.code === "auth/requires-recent-login" ? "Sign out and back in, then try again." : prettyAuthError(e), "error"); }
+      const user = auth.currentUser; if (!user) return;
+      setStatus("Turning off…");
+      const legacyUid = $("btn-totp-remove").dataset.legacyUid;
+      const isCustom = $("btn-totp-remove").dataset.custom === "1";
+      try {
+        if (isCustom) await mfaApi("/mfa/totp/disable");
+        if (legacyUid) {
+          try { await multiFactor(user).unenroll(legacyUid); }
+          catch (e) { if (e.code === "auth/requires-recent-login") { setStatus("To remove the old authenticator, sign out and back in, then try again.", "error"); return; } throw e; }
+        }
+        await refreshTotp(auth.currentUser);
+        setStatus("Authenticator app turned off.", "ok");
+      } catch (e) { setStatus(prettyMfaError(e), "error"); }
     }));
 
     function prettyAuthError(e) {

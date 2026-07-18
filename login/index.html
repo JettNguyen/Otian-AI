@@ -243,8 +243,9 @@
             </div>
           </div>
 
-          <!-- Two-step challenge (shown when the account has an authenticator app enrolled) -->
+          <!-- Two-step challenge: authenticator app code -->
           <div id="auth-mfa" class="auth-card auth-hidden">
+            <h1 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Confirm it&rsquo;s you</h1>
             <p class="auth-lead">Enter the 6-digit code from your authenticator app to finish signing in.</p>
             <div class="auth-fields">
               <input type="text" id="mfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
@@ -252,6 +253,9 @@
             <div class="auth-btns">
               <button class="btn btn-primary" id="btn-mfa-verify">Verify</button>
               <button class="btn btn-secondary" id="btn-mfa-cancel">Back</button>
+            </div>
+            <div class="auth-textrow">
+              <button class="auth-textlink" id="btn-mfa-use-email">Email me a code instead</button>
             </div>
           </div>
 
@@ -264,8 +268,9 @@
             </div>
           </div>
 
-          <!-- Emailed-code challenge (accounts with "Email a code at sign-in" turned on) -->
+          <!-- Two-step challenge: emailed code (the always-on baseline for every account) -->
           <div id="auth-emfa" class="auth-card auth-hidden">
+            <h1 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Confirm it&rsquo;s you</h1>
             <p class="auth-lead">We emailed a 6-digit code to <span class="auth-email" id="auth-emfa-email">your inbox</span> to confirm this sign-in. Enter it below.</p>
             <div class="auth-fields">
               <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
@@ -275,6 +280,7 @@
               <button class="btn btn-secondary" id="btn-emfa-resend">Resend code</button>
             </div>
             <div class="auth-textrow">
+              <button class="auth-textlink auth-hidden" id="btn-emfa-use-app">Use my authenticator app instead</button>
               <button class="auth-textlink" id="btn-emfa-back">Use a different account</button>
             </div>
           </div>
@@ -447,11 +453,8 @@
 
     let pendingVerifyUser = null;
     let initialResolved = false;
-    let emailMfaPassed = false; // set once the emailed-code challenge is cleared this session
+    let mfaMode = null; // "totp" (authenticator, custom) or "native" (legacy Firebase MFA) during a challenge
 
-    // ── Emailed-code 2FA (custom, via the Render service) ────────────────────
-    // Accounts can turn on "Email a code at sign-in" from /account/. When on, a code must be
-    // entered before a sign-in completes. If the status check fails we don't lock the user out.
     // POST to the Render mailer/MFA service with a bounded timeout (its free tier sleeps and can take
     // ~a minute to wake). Throws with kind:"network" on timeout/connection failure so callers can
     // retry through a cold start.
@@ -468,49 +471,85 @@
       } finally { clearTimeout(timer); }
     }
 
-    async function emailMfaRequired(user) {
-      if (emailMfaPassed) return false;
+    // ── Second factor ────────────────────────────────────────────────────────
+    // Every account gets an emailed 6-digit code at sign-in by default — no setup. If the account
+    // also has an authenticator app, the user can choose either at sign-in. The ONLY entry that
+    // skips the second step is the very first one right after signup (confirming the email already
+    // proved control). Clearance is per browser session (sessionStorage), so a fresh tab re-checks.
+    function isFirstEntry(user) {
+      const c = Date.parse((user.metadata && user.metadata.creationTime) || "");
+      const l = Date.parse((user.metadata && user.metadata.lastSignInTime) || "");
+      if (Number.isNaN(c) || Number.isNaN(l)) return false;
+      return Math.abs(l - c) < 10000; // creation ≈ first sign-in
+    }
+    function twoFactorCleared(user) {
+      try { if (sessionStorage.getItem("otian_2fa_ok") === user.uid) return true; } catch (e) {}
+      return isFirstEntry(user);
+    }
+    function markTwoFactorCleared(user) { try { sessionStorage.setItem("otian_2fa_ok", user.uid); } catch (e) {} }
+
+    // Ask the service which factors this account has, riding out a cold start. Email is always on.
+    async function fetchMfaStatus(user) {
       const idToken = await user.getIdToken();
-      // Retry through a cold start so email-2FA is never skipped just because the service was asleep.
       for (let attempt = 0; attempt < 3; attempt++) {
         try {
           const r = await billingPost("/mfa/status", { id_token: idToken });
-          if (!r.ok) return false; // a real answer (e.g. 401) — don't block sign-in
+          if (!r.ok) return { email: true, totp: false };
           const d = await r.json();
-          return !!d.email_enabled;
+          return { email: true, totp: !!d.totp_enabled };
         } catch (e) {
-          if (e.kind === "network" && attempt < 2) { setStatus("Checking your security settings…"); await new Promise((r) => setTimeout(r, 2000)); continue; }
-          return false; // give up → fail open so a person is never locked out by an outage
+          if (e.kind === "network" && attempt < 2) { setStatus("Waking the security service…"); await new Promise((r) => setTimeout(r, 2000)); continue; }
+          return { email: true, totp: false }; // fall back to the always-on email code
         }
       }
-      return false;
+      return { email: true, totp: false };
     }
-    async function startEmailMfa(user) {
+
+    // Begin the challenge: default to the authenticator when the account has one (with an "email me
+    // instead" escape hatch), otherwise email a code straight away.
+    async function startTwoFactor(user) {
+      setStatus("Checking your sign-in options…");
+      const st = await fetchMfaStatus(user);
+      setStatus("");
+      show("btn-emfa-use-app", st.totp); // only offer switching back to the app if there is one
+      if (st.totp) { showAppChallenge(); }
+      else { await sendEmailChallenge(user); }
+    }
+    function showAppChallenge() {
+      mfaMode = "totp";
+      show("btn-mfa-use-email", true); // custom flow can hand off to an emailed code
+      onlyCard("auth-mfa");
+      setStatus("");
+      $("mfa-code").value = "";
+      $("mfa-code").focus();
+    }
+    async function sendEmailChallenge(user) {
       setStatus("Emailing a code…");
+      $("auth-emfa-email").textContent = user.email || "your inbox";
       try {
         const idToken = await user.getIdToken();
-        const r = await fetch(BILLING_API + "/mfa/send-code", {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id_token: idToken }),
-        });
-        if (!r.ok) throw new Error("send failed");
-        $("auth-emfa-email").textContent = user.email || "your inbox";
+        const r = await billingPost("/mfa/send-code", { id_token: idToken });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't send a code"); }
         onlyCard("auth-emfa");
         setStatus("");
         $("emfa-code").value = "";
         $("emfa-code").focus();
-      } catch (e) { setStatus("Couldn't email a code. Try again in a moment.", "error"); }
+      } catch (e) {
+        onlyCard("auth-emfa"); // still show the card so they can Resend
+        setStatus(e.kind === "network" ? "Couldn't reach the security service — try Resend in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
+      }
     }
 
-    // ── What happens after a successful sign-in ──────────────────────────────
+    // ── What happens after a successful password/Google sign-in ──────────────
     async function handleUser(user) {
-      // Emailed-code 2FA gate first (if the account has it on).
-      if (await emailMfaRequired(user)) { await startEmailMfa(user); return; }
-      if (callbackUrl) {
-        if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
-        await deliverToApp(user);
-        return;
-      }
+      if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
+      if (!twoFactorCleared(user)) { await startTwoFactor(user); return; }
+      await proceed(user);
+    }
+    async function proceed(user) {
+      stopVerifyPolling();
+      markTwoFactorCleared(user);
+      if (callbackUrl) { await deliverToApp(user); return; }
       window.location.href = nextDest();
     }
 
@@ -583,7 +622,11 @@
         initialResolved = true;
         $("auth-heading").textContent = mode === "signup" ? "Create Account" : "Sign In";
         if (user) {
-          // Already signed in: in the app flow, offer to continue; otherwise go to the dashboard.
+          // Already signed into Firebase in this browser. Still require the second factor unless this
+          // session already cleared it (or it's the first entry) — otherwise a password alone would
+          // sail straight through to the account/app.
+          if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
+          if (!twoFactorCleared(user)) { startTwoFactor(user); return; }
           if (callbackUrl) { showContinue(user); }
           else { window.location.href = nextDest(); }
         } else {
@@ -592,7 +635,11 @@
         return;
       }
       // Later changes only matter when the user signs out from a continue/verify card.
-      if (!user) { pendingVerifyUser = null; showAuthCard(); }
+      if (!user) {
+        pendingVerifyUser = null; mfaMode = null;
+        try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // re-challenge on next sign-in
+        showAuthCard();
+      }
     });
 
     // ── Mode (sign in / create account) ──────────────────────────────────────
@@ -611,10 +658,11 @@
       setStatus("");
     });
 
-    // ── Two-step (MFA) challenge ─────────────────────────────────────────────
-    // Firebase throws auth/multi-factor-auth-required when the account has an authenticator app
-    // enrolled (which users can now turn on from /account/). We resolve the TOTP factor here so
-    // enabling 2-step never locks anyone out of web — or, via the same page, the desktop app.
+    // ── Two-step challenge: authenticator app ────────────────────────────────
+    // The app code is verified by our own service (/mfa/totp/verify) so it can sit on the same screen
+    // as the emailed code and the user can pick either. LEGACY: some accounts may still carry a native
+    // Firebase MFA enrollment from before this change — those throw auth/multi-factor-auth-required at
+    // sign-in and are resolved with the Firebase resolver instead (mfaMode "native").
     let mfaResolver = null;
     let mfaTotpHint = null;
 
@@ -627,35 +675,64 @@
         setStatus("This account needs a second factor we don't support here yet.", "error");
         return;
       }
+      mfaMode = "native";
+      show("btn-mfa-use-email", false); // legacy native can't hand off to email (not signed in yet)
       onlyCard("auth-mfa");
       setStatus("");
       $("mfa-code").value = "";
       $("mfa-code").focus();
     }
 
-    // Returns true if it handled an MFA-required error (and started the challenge).
+    // Returns true if it handled a legacy native-MFA-required error (and started the challenge).
     function handleMaybeMfa(e) {
       if (e && e.code === "auth/multi-factor-auth-required") { startMfaChallenge(e); return true; }
       return false;
     }
 
     $("btn-mfa-verify").addEventListener("click", () => busy($("btn-mfa-verify"), async () => {
-      if (!mfaResolver || !mfaTotpHint) return;
       const code = $("mfa-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code from your app.", "error"); return; }
       setStatus("Verifying…");
+      if (mfaMode === "native") {
+        // Legacy Firebase-native TOTP: resolve with the Firebase resolver (not signed in yet).
+        try {
+          const assertion = TotpMultiFactorGenerator.assertionForSignIn(mfaTotpHint.uid, code);
+          const cred = await mfaResolver.resolveSignIn(assertion);
+          mfaResolver = null; mfaTotpHint = null; mfaMode = null;
+          markTwoFactorCleared(cred.user);
+          setStatus("");
+          await proceed(cred.user);
+        } catch (e) {
+          setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
+        }
+        return;
+      }
+      // Custom authenticator: the user already holds a Firebase session, so verify via our service.
+      const user = auth.currentUser; if (!user) { showAuthCard(); return; }
       try {
-        const assertion = TotpMultiFactorGenerator.assertionForSignIn(mfaTotpHint.uid, code);
-        const cred = await mfaResolver.resolveSignIn(assertion);
-        mfaResolver = null; mfaTotpHint = null;
+        const idToken = await user.getIdToken();
+        const r = await billingPost("/mfa/totp/verify", { id_token: idToken, code });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
+        mfaMode = null;
+        markTwoFactorCleared(user);
         setStatus("");
-        await handleUser(cred.user);
+        await proceed(user);
       } catch (e) {
-        setStatus(e.code === "auth/invalid-verification-code" ? "That code didn't match — try the current one." : prettyAuthError(e), "error");
+        setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error");
       }
     }));
     $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
-    $("btn-mfa-cancel").addEventListener("click", () => { mfaResolver = null; mfaTotpHint = null; setStatus(""); showAuthCard(); });
+    $("btn-mfa-cancel").addEventListener("click", async () => {
+      mfaResolver = null; mfaTotpHint = null; mfaMode = null; setStatus("");
+      // For the custom flow the user is signed into Firebase — sign out so they aren't left half-in.
+      if (auth.currentUser) { try { await signOut(auth); } catch (e) {} } else { showAuthCard(); }
+    });
+    // Switch from the authenticator to an emailed code.
+    $("btn-mfa-use-email").addEventListener("click", () => busy($("btn-mfa-use-email"), async () => {
+      const user = auth.currentUser;
+      if (!user) { setStatus("Your authenticator is the only option for this sign-in.", "error"); return; }
+      await sendEmailChallenge(user);
+    }));
 
     // ── Google ───────────────────────────────────────────────────────────────
     $("btn-google").addEventListener("click", () => busy($("btn-google"), async () => {
@@ -764,27 +841,28 @@
       setStatus("Verifying…");
       try {
         const idToken = await user.getIdToken();
-        const r = await fetch(BILLING_API + "/mfa/verify-code", {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ id_token: idToken, code }),
-        });
+        const r = await billingPost("/mfa/verify-code", { id_token: idToken, code });
         if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
-        emailMfaPassed = true;
+        mfaMode = null;
+        markTwoFactorCleared(user);
         setStatus("");
-        await handleUser(user); // now clears the gate and proceeds
-      } catch (e) { setStatus((e && e.message) || "That code didn't match.", "error"); }
+        await proceed(user);
+      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error"); }
     }));
     $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
       const user = auth.currentUser; if (!user) return;
       setStatus("Resending…");
       try {
         const idToken = await user.getIdToken();
-        await fetch(BILLING_API + "/mfa/send-code", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id_token: idToken }) });
-        setStatus("Sent — check your inbox.", "ok");
-      } catch (e) { setStatus("Couldn't resend. Try again.", "error"); }
+        const r = await billingPost("/mfa/send-code", { id_token: idToken });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't resend"); }
+        setStatus("Sent — check your inbox (and spam).", "ok");
+      } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : "Couldn't resend. Try again.", "error"); }
     }));
     $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
-    $("btn-emfa-back").addEventListener("click", async () => { emailMfaPassed = false; try { await signOut(auth); } catch (e) {} setStatus(""); });
+    // Switch from the emailed code back to the authenticator app.
+    $("btn-emfa-use-app").addEventListener("click", () => { setStatus(""); showAppChallenge(); });
+    $("btn-emfa-back").addEventListener("click", async () => { mfaMode = null; try { await signOut(auth); } catch (e) {} setStatus(""); });
 
     // ── Finish an email-link sign-in if we arrived via one ───────────────────
     if (isSignInWithEmailLink(auth, window.location.href)) {

@@ -73,6 +73,7 @@ if (root) {
     const out = document.getElementById("navAccountSignout");
     out.addEventListener("click", async () => {
       closeMenu();
+      try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // clear this session's 2FA clearance
       try { await signOut(auth); } catch (e) { /* ignore */ }
       // If we're on a signed-in-only page, get out of it.
       if (location.pathname.replace(/\/+$/, "").endsWith("/account")) location.href = "/login/";

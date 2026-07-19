@@ -727,6 +727,15 @@
         gAccess = gAccess || tr.oauthAccessToken || tr.accessToken || null;
         if (gId || gAccess) fallbackGoogle = { idToken: gId, accessToken: gAccess };
       } catch (e) {}
+      // Diagnostic while we confirm Google-token extraction across environments (harmless; remove later).
+      if (!fallbackGoogle) {
+        try {
+          const tr = (error && error.customData && error.customData._tokenResponse) || null;
+          console.warn("[mfa-fallback] no Google token extracted.",
+            "cred:", !!GoogleAuthProvider.credentialFromError(error),
+            "_tokenResponse keys:", tr ? Object.keys(tr) : "(none)");
+        } catch (e) {}
+      }
       // Always offer the fallback on the authenticator screen. The security control on it is the
       // alert email it triggers, not hiding the link.
       show("btn-mfa-use-email", true);

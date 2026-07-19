@@ -696,7 +696,7 @@
           // there is nothing further to gate here — go straight on.
           if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
           if (callbackUrl) { showContinue(user); }
-          else { window.location.href = nextDest(); }
+          else { proceed(user); } // proceed() stamps the per-session 2FA-cleared flag /account/ reads, then navigates — otherwise the two pages ping-pong forever
         } else {
           showAuthCard();
         }

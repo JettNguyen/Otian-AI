@@ -711,13 +711,9 @@
       // can't reach their authenticator — password sign-ins only (Google has no password to re-check).
       fallbackEmail = $("auth-email").value.trim();
       fallbackPass = $("auth-pass").value;
-      show("btn-mfa-use-email", false);
-      if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
-      if (fallbackEmail && fallbackPass) {
-        // A short delay keeps the authenticator the default; the fallback surfaces only if the app
-        // truly isn't to hand.
-        fallbackRevealTimer = setTimeout(() => { if (mfaMode === "native") show("btn-mfa-use-email", true); }, FALLBACK_REVEAL_MS);
-      }
+      // Offer the fallback right away for password sign-ins. The security control on it is the alert
+      // email it triggers, not hiding the link.
+      show("btn-mfa-use-email", !!(fallbackEmail && fallbackPass));
       onlyCard("auth-mfa");
       setStatus("");
       $("mfa-code").value = "";

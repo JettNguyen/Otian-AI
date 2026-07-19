@@ -358,7 +358,7 @@
     import {
       getAuth, onAuthStateChanged, signOut, updateProfile,
       GoogleAuthProvider, signInWithPopup,
-      signInWithEmailAndPassword, createUserWithEmailAndPassword,
+      signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithCustomToken,
       sendPasswordResetEmail, sendEmailVerification,
       sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink,
       getMultiFactorResolver, TotpMultiFactorGenerator,
@@ -454,6 +454,11 @@
     let pendingVerifyUser = null;
     let initialResolved = false;
     let mfaMode = null; // "totp" (authenticator, custom) or "native" (legacy Firebase MFA) during a challenge
+    let emfaMode = null;       // "session" (legacy) or "fallback" (native-MFA email escape) on the emailed-code card
+    let fallbackEmail = null;  // credentials captured at the native-MFA wall, used only for the email fallback
+    let fallbackPass = null;
+    let fallbackRevealTimer = null;
+    const FALLBACK_REVEAL_MS = 15000; // keep the authenticator the default; reveal "email me a code" after a beat
 
     // POST to the Render mailer/MFA service with a bounded timeout (its free tier sleeps and can take
     // ~a minute to wake). Throws with kind:"network" on timeout/connection failure so callers can
@@ -524,6 +529,7 @@
       $("mfa-code").focus();
     }
     async function sendEmailChallenge(user) {
+      emfaMode = "session";
       setStatus("Emailing a code…");
       $("auth-emfa-email").textContent = user.email || "your inbox";
       try {
@@ -537,6 +543,25 @@
       } catch (e) {
         onlyCard("auth-emfa"); // still show the card so they can Resend
         setStatus(e.kind === "network" ? "Couldn't reach the security service — try Resend in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
+      }
+    }
+
+    // Native-MFA email fallback: re-verify the password server-side, then email a code. Unlike the
+    // legacy path there is no Firebase session yet — /mfa/email-fallback/verify returns a custom token.
+    async function startEmailFallback() {
+      setStatus("Checking your password and emailing a code…");
+      $("auth-emfa-email").textContent = fallbackEmail || "your inbox";
+      try {
+        const r = await billingPost("/mfa/email-fallback/start", { email: fallbackEmail, password: fallbackPass });
+        if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't send a code"); }
+        emfaMode = "fallback";
+        show("btn-emfa-use-app", true); // let them jump back to the authenticator
+        onlyCard("auth-emfa");
+        setStatus("");
+        $("emfa-code").value = "";
+        $("emfa-code").focus();
+      } catch (e) {
+        setStatus(e.kind === "network" ? "Couldn't reach the security service — try again in a moment." : ((e && e.message) || "Couldn't email a code."), "error");
       }
     }
 
@@ -682,7 +707,17 @@
         return;
       }
       mfaMode = "native";
-      show("btn-mfa-use-email", false); // legacy native can't hand off to email (not signed in yet)
+      // Capture the just-entered credentials so we can offer an emailed-code fallback if the user
+      // can't reach their authenticator — password sign-ins only (Google has no password to re-check).
+      fallbackEmail = $("auth-email").value.trim();
+      fallbackPass = $("auth-pass").value;
+      show("btn-mfa-use-email", false);
+      if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
+      if (fallbackEmail && fallbackPass) {
+        // A short delay keeps the authenticator the default; the fallback surfaces only if the app
+        // truly isn't to hand.
+        fallbackRevealTimer = setTimeout(() => { if (mfaMode === "native") show("btn-mfa-use-email", true); }, FALLBACK_REVEAL_MS);
+      }
       onlyCard("auth-mfa");
       setStatus("");
       $("mfa-code").value = "";
@@ -729,12 +764,22 @@
     }));
     $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
     $("btn-mfa-cancel").addEventListener("click", async () => {
-      mfaResolver = null; mfaTotpHint = null; mfaMode = null; setStatus("");
+      mfaResolver = null; mfaTotpHint = null; mfaMode = null; emfaMode = null;
+      fallbackEmail = null; fallbackPass = null;
+      if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
+      setStatus("");
       // For the custom flow the user is signed into Firebase — sign out so they aren't left half-in.
       if (auth.currentUser) { try { await signOut(auth); } catch (e) {} } else { showAuthCard(); }
     });
     // Switch from the authenticator to an emailed code.
     $("btn-mfa-use-email").addEventListener("click", () => busy($("btn-mfa-use-email"), async () => {
+      if (mfaMode === "native") {
+        // Native-MFA wall: no session yet — re-verify the password server-side and email a code.
+        if (!fallbackEmail || !fallbackPass) { setStatus("Your authenticator is the only option for this sign-in.", "error"); return; }
+        await startEmailFallback();
+        return;
+      }
+      // Legacy custom path: the user already holds a Firebase session.
       const user = auth.currentUser;
       if (!user) { setStatus("Your authenticator is the only option for this sign-in.", "error"); return; }
       await sendEmailChallenge(user);
@@ -841,23 +886,48 @@
 
     // ── Emailed-code challenge card ──────────────────────────────────────────
     $("btn-emfa-verify").addEventListener("click", () => busy($("btn-emfa-verify"), async () => {
-      const user = auth.currentUser; if (!user) return;
       const code = $("emfa-code").value.trim();
       if (!/^\d{6}$/.test(code)) { setStatus("Enter the 6-digit code we emailed you.", "error"); return; }
       setStatus("Verifying…");
+      if (emfaMode === "fallback") {
+        // Native-MFA escape: verify the code, receive a custom token, and complete sign-in with it.
+        try {
+          const r = await billingPost("/mfa/email-fallback/verify", { email: fallbackEmail, code });
+          if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
+          const { custom_token } = await r.json();
+          const cred = await signInWithCustomToken(auth, custom_token);
+          fallbackEmail = null; fallbackPass = null; emfaMode = null; mfaMode = null;
+          mfaResolver = null; mfaTotpHint = null;
+          if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
+          markTwoFactorCleared(cred.user);
+          setStatus("");
+          await proceed(cred.user);
+        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error"); }
+        return;
+      }
+      // Legacy path: the user already holds a Firebase session; verify against it.
+      const user = auth.currentUser; if (!user) return;
       try {
         const idToken = await user.getIdToken();
         const r = await billingPost("/mfa/verify-code", { id_token: idToken, code });
         if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
-        mfaMode = null;
+        mfaMode = null; emfaMode = null;
         markTwoFactorCleared(user);
         setStatus("");
         await proceed(user);
       } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "That code didn't match."), "error"); }
     }));
     $("btn-emfa-resend").addEventListener("click", () => busy($("btn-emfa-resend"), async () => {
-      const user = auth.currentUser; if (!user) return;
       setStatus("Resending…");
+      if (emfaMode === "fallback") {
+        try {
+          const r = await billingPost("/mfa/email-fallback/start", { email: fallbackEmail, password: fallbackPass });
+          if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't resend"); }
+          setStatus("Sent — check your inbox (and spam).", "ok");
+        } catch (e) { setStatus(e.kind === "network" ? "Couldn't reach the security service — try again." : ((e && e.message) || "Couldn't resend."), "error"); }
+        return;
+      }
+      const user = auth.currentUser; if (!user) return;
       try {
         const idToken = await user.getIdToken();
         const r = await billingPost("/mfa/send-code", { id_token: idToken });
@@ -867,8 +937,25 @@
     }));
     $("emfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-emfa-verify").click(); });
     // Switch from the emailed code back to the authenticator app.
-    $("btn-emfa-use-app").addEventListener("click", () => { setStatus(""); showAppChallenge(); });
-    $("btn-emfa-back").addEventListener("click", async () => { mfaMode = null; try { await signOut(auth); } catch (e) {} setStatus(""); });
+    $("btn-emfa-use-app").addEventListener("click", () => {
+      setStatus(""); emfaMode = null;
+      if (mfaResolver) {
+        // Native fallback → return to the native authenticator challenge (resolver still valid).
+        mfaMode = "native";
+        onlyCard("auth-mfa");
+        show("btn-mfa-use-email", true); // they came from email; offer it again right away
+        $("mfa-code").value = ""; $("mfa-code").focus();
+      } else {
+        showAppChallenge(); // legacy custom path
+      }
+    });
+    $("btn-emfa-back").addEventListener("click", async () => {
+      mfaMode = null; emfaMode = null; fallbackEmail = null; fallbackPass = null;
+      mfaResolver = null; mfaTotpHint = null;
+      if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
+      if (auth.currentUser) { try { await signOut(auth); } catch (e) {} } else { showAuthCard(); }
+      setStatus("");
+    });
 
     // ── Finish an email-link sign-in if we arrived via one ───────────────────
     if (isSignInWithEmailLink(auth, window.location.href)) {

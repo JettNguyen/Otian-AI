@@ -722,15 +722,14 @@
         const gcred = GoogleAuthProvider.credentialFromError(error);
         let gId = gcred ? (gcred.idToken || null) : null;
         let gAccess = gcred ? (gcred.accessToken || null) : null;
-        if (!gId && !gAccess) {
-          const tr = error && error.customData && error.customData._tokenResponse;
-          if (tr) { gId = tr.oauthIdToken || null; gAccess = tr.oauthAccessToken || null; }
-        }
+        const tr = (error && error.customData && error.customData._tokenResponse) || {};
+        gId = gId || tr.oauthIdToken || tr.idToken || null;
+        gAccess = gAccess || tr.oauthAccessToken || tr.accessToken || null;
         if (gId || gAccess) fallbackGoogle = { idToken: gId, accessToken: gAccess };
       } catch (e) {}
-      // Offer the fallback right away when we can prove a first factor. The security control on it is
-      // the alert email it triggers, not hiding the link.
-      show("btn-mfa-use-email", !!(fallbackEmail && fallbackPass) || !!fallbackGoogle);
+      // Always offer the fallback on the authenticator screen. The security control on it is the
+      // alert email it triggers, not hiding the link.
+      show("btn-mfa-use-email", true);
       onlyCard("auth-mfa");
       setStatus("");
       $("mfa-code").value = "";
@@ -787,9 +786,9 @@
     // Switch from the authenticator to an emailed code.
     $("btn-mfa-use-email").addEventListener("click", () => busy($("btn-mfa-use-email"), async () => {
       if (mfaMode === "native") {
-        // Native-MFA wall: no session yet — re-verify the password server-side and email a code.
-        if (!fallbackEmail || !fallbackPass) { setStatus("Your authenticator is the only option for this sign-in.", "error"); return; }
-        await startEmailFallback();
+        // Native-MFA wall: no session yet — re-verify the first factor (password or Google) and email a code.
+        if ((fallbackEmail && fallbackPass) || fallbackGoogle) { await startEmailFallback(); return; }
+        setStatus("We couldn't read your sign-in to email a code — start over and sign in again.", "error");
         return;
       }
       // Legacy custom path: the user already holds a Firebase session.

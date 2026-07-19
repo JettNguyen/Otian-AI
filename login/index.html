@@ -459,6 +459,8 @@
 
     let pendingVerifyUser = null;
     let initialResolved = false;
+    let routedUser = false;    // have we already sent a signed-in user onward (continue/verify/proceed)?
+    let explicitAuth = false;  // a form/Google sign-in is in flight and owns its own routing — auth-state observer stands down
     let mfaMode = null; // "totp" (authenticator, custom) or "native" (legacy Firebase MFA) during a challenge
     let emfaMode = null;       // "session" (legacy) or "fallback" (native-MFA email escape) on the emailed-code card
     let fallbackEmail = null;  // credentials captured at the native-MFA wall, used only for the email fallback
@@ -686,28 +688,39 @@
     }
 
     // ── Initial state ────────────────────────────────────────────────────────
+    // Send a signed-in user onward. A live Firebase session can't exist without having already
+    // cleared any native second factor when it was established, so there's nothing further to gate.
+    function routeSignedIn(user) {
+      routedUser = true;
+      $("auth-heading").textContent = mode === "signup" ? "Create Account" : "Sign In";
+      if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
+      if (callbackUrl) { showContinue(user); }               // desktop app flow: confirm before handing tokens back
+      else { proceed(user); }                                // website: proceed() stamps the per-session 2FA-cleared flag /account/ reads, then navigates
+    }
+    // Firebase usually delivers the restored session on the very FIRST callback — but a cold tab
+    // (notably the desktop app opening a fresh browser window) can fire `null` first and only surface
+    // the signed-in user a beat later. So route the first time a user actually APPEARS, not merely on
+    // the first callback; otherwise a logged-in person is stranded on the sign-in form ("it keeps
+    // asking me to sign in"). An in-flight explicit sign-in owns its own routing, so we stand down.
     onAuthStateChanged(auth, (user) => {
+      if (user) {
+        initialResolved = true;
+        if (!routedUser && !explicitAuth) routeSignedIn(user);
+        else routedUser = true;
+        return;
+      }
+      // user === null
       if (!initialResolved) {
         initialResolved = true;
         $("auth-heading").textContent = mode === "signup" ? "Create Account" : "Sign In";
-        if (user) {
-          // Already signed into Firebase in this browser. A native second factor was already
-          // enforced by Firebase when this session was established (it can't exist otherwise), so
-          // there is nothing further to gate here — go straight on.
-          if (!user.emailVerified && accountIsNew(user)) { showVerifyGate(user); return; }
-          if (callbackUrl) { showContinue(user); }
-          else { proceed(user); } // proceed() stamps the per-session 2FA-cleared flag /account/ reads, then navigates — otherwise the two pages ping-pong forever
-        } else {
-          showAuthCard();
-        }
+        showAuthCard();
         return;
       }
-      // Later changes only matter when the user signs out from a continue/verify card.
-      if (!user) {
-        pendingVerifyUser = null; mfaMode = null;
-        try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // re-challenge on next sign-in
-        showAuthCard();
-      }
+      // Signed out later (from a continue/verify card, or an explicit sign-out): re-arm and show the form.
+      routedUser = false; explicitAuth = false;
+      pendingVerifyUser = null; mfaMode = null;
+      try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // re-challenge on next sign-in
+      showAuthCard();
     });
 
     // ── Mode (sign in / create account) ──────────────────────────────────────
@@ -828,12 +841,14 @@
     // ── Google ───────────────────────────────────────────────────────────────
     $("btn-google").addEventListener("click", () => busy($("btn-google"), async () => {
       setStatus("Opening Google…");
+      explicitAuth = true; // this click owns routing; keep the auth-state observer from double-handling
       try {
         const result = await signInWithPopup(auth, new GoogleAuthProvider());
         setStatus("");
         await handleUser(result.user);
       } catch (e) {
-        if (handleMaybeMfa(e)) return;
+        if (handleMaybeMfa(e)) return; // MFA challenge is now in flight — stay armed
+        explicitAuth = false;
         if (e.code !== "auth/popup-closed-by-user") setStatus(prettyAuthError(e), "error");
       }
     }));
@@ -847,6 +862,7 @@
         const name = $("auth-name").value.trim();
         if (!name) { setStatus("Enter your name.", "error"); $("auth-name").focus(); return; }
         setStatus("Creating your account…");
+        explicitAuth = true; // this click owns routing; keep the auth-state observer from double-handling
         try {
           const cred = await createUserWithEmailAndPassword(auth, email, password);
           // Name lives in two places: the Firebase Auth profile (rides in the ID token's `name`
@@ -867,14 +883,15 @@
           await sendVerificationEmail(cred.user, name);
           showVerifyGate(cred.user);
           setStatus("Account created — confirm your email to finish.", "ok");
-        } catch (e) { setStatus(prettyAuthError(e), "error"); }
+        } catch (e) { explicitAuth = false; setStatus(prettyAuthError(e), "error"); }
       } else {
         setStatus("Signing in…");
+        explicitAuth = true; // this click owns routing; keep the auth-state observer from double-handling
         try {
           const cred = await signInWithEmailAndPassword(auth, email, password);
           setStatus("");
           await handleUser(cred.user);
-        } catch (e) { if (!handleMaybeMfa(e)) setStatus(prettyAuthError(e), "error"); }
+        } catch (e) { if (!handleMaybeMfa(e)) { explicitAuth = false; setStatus(prettyAuthError(e), "error"); } }
       }
     }));
     $("auth-pass").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-primary-auth").click(); });

@@ -457,6 +457,7 @@
     let fallbackEmail = null;  // credentials captured at the native-MFA wall, used only for the email fallback
     let fallbackPass = null;
     let fallbackGoogle = null;  // Google credential from an interrupted popup, for the Google fallback path
+    let lastMfaError = null;    // the raw multi-factor-auth-required error, kept for credential extraction/diagnostics
     let fallbackRevealTimer = null;
     const FALLBACK_REVEAL_MS = 15000; // keep the authenticator the default; reveal "email me a code" after a beat
 
@@ -704,6 +705,7 @@
     let mfaTotpHint = null;
 
     function startMfaChallenge(error) {
+      lastMfaError = error;
       try {
         mfaResolver = getMultiFactorResolver(auth, error);
         mfaTotpHint = (mfaResolver.hints || []).find((h) => h.factorId === "totp") || null;
@@ -797,7 +799,12 @@
       if (mfaMode === "native") {
         // Native-MFA wall: no session yet — re-verify the first factor (password or Google) and email a code.
         if ((fallbackEmail && fallbackPass) || fallbackGoogle) { await startEmailFallback(); return; }
-        setStatus("We couldn't read your sign-in to email a code — start over and sign in again.", "error");
+        let dbg = "";
+        try {
+          const tr = (lastMfaError && lastMfaError.customData && lastMfaError.customData._tokenResponse) || null;
+          dbg = " [debug — cred:" + (!!GoogleAuthProvider.credentialFromError(lastMfaError)) + " keys:" + (tr ? Object.keys(tr).join(",") : "none") + "]";
+        } catch (e) {}
+        setStatus("We couldn't read your sign-in to email a code — start over and sign in again." + dbg, "error");
         return;
       }
       // Legacy custom path: the user already holds a Firebase session.

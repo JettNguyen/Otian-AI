@@ -223,7 +223,6 @@
               <button class="btn btn-secondary" id="btn-toggle-mode">Create an account instead</button>
             </div>
             <div class="auth-textrow">
-              <button class="auth-textlink" id="btn-link">Email me a sign-in link</button>
               <button class="auth-textlink" id="btn-forgot">Forgot password?</button>
             </div>
           </div>
@@ -860,20 +859,6 @@
       setStatus("Sending reset email…");
       try { await sendResetEmail(email); setStatus("Reset email sent — check your inbox, then sign in.", "ok"); }
       catch (e) { setStatus(prettyAuthError(e), "error"); }
-    }));
-
-    // ── Passwordless email sign-in link ──────────────────────────────────────
-    $("btn-link").addEventListener("click", () => busy($("btn-link"), async () => {
-      const email = $("auth-email").value.trim();
-      if (!email) { setStatus("Enter your email above first.", "error"); return; }
-      setStatus("Sending sign-in link…");
-      try {
-        // Carry the current query (callback/state/next/mode) so the link resumes the same flow.
-        const url = window.location.origin + window.location.pathname + window.location.search;
-        await sendSignInLinkToEmail(auth, email, { url, handleCodeInApp: true });
-        window.localStorage.setItem("otianEmailForSignIn", email);
-        setStatus("Sign-in link sent — open it in this browser to finish.", "ok");
-      } catch (e) { setStatus(prettyAuthError(e), "error"); }
     }));
 
     // ── Verify gate ──────────────────────────────────────────────────────────

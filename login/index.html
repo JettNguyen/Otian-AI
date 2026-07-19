@@ -457,6 +457,7 @@
     let emfaMode = null;       // "session" (legacy) or "fallback" (native-MFA email escape) on the emailed-code card
     let fallbackEmail = null;  // credentials captured at the native-MFA wall, used only for the email fallback
     let fallbackPass = null;
+    let fallbackGoogle = null;  // Google credential from an interrupted popup, for the Google fallback path
     let fallbackRevealTimer = null;
     const FALLBACK_REVEAL_MS = 15000; // keep the authenticator the default; reveal "email me a code" after a beat
 
@@ -549,12 +550,18 @@
     // Native-MFA email fallback: re-verify the password server-side, then email a code. Unlike the
     // legacy path there is no Firebase session yet — /mfa/email-fallback/verify returns a custom token.
     async function startEmailFallback() {
-      setStatus("Checking your password and emailing a code…");
+      setStatus(fallbackGoogle ? "Verifying your Google sign-in and emailing a code…" : "Checking your password and emailing a code…");
       $("auth-emfa-email").textContent = fallbackEmail || "your inbox";
       try {
-        const r = await billingPost("/mfa/email-fallback/start", { email: fallbackEmail, password: fallbackPass });
+        const payload = fallbackGoogle
+          ? { google_id_token: fallbackGoogle.idToken, google_access_token: fallbackGoogle.accessToken }
+          : { email: fallbackEmail, password: fallbackPass };
+        const r = await billingPost("/mfa/email-fallback/start", payload);
         if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "couldn't send a code"); }
+        const d = await r.json().catch(() => ({}));
+        if (d.email) fallbackEmail = d.email; // identifies the account at /verify (needed for Google)
         emfaMode = "fallback";
+        $("auth-emfa-email").textContent = fallbackEmail || "your inbox";
         show("btn-emfa-use-app", true); // let them jump back to the authenticator
         onlyCard("auth-emfa");
         setStatus("");
@@ -707,13 +714,24 @@
         return;
       }
       mfaMode = "native";
-      // Capture the just-entered credentials so we can offer an emailed-code fallback if the user
-      // can't reach their authenticator — password sign-ins only (Google has no password to re-check).
+      // Capture whatever proves the first factor so we can offer an emailed-code fallback if the user
+      // can't reach their authenticator: the typed password, or the Google credential from the popup.
       fallbackEmail = $("auth-email").value.trim();
       fallbackPass = $("auth-pass").value;
-      // Offer the fallback right away for password sign-ins. The security control on it is the alert
-      // email it triggers, not hiding the link.
-      show("btn-mfa-use-email", !!(fallbackEmail && fallbackPass));
+      fallbackGoogle = null;
+      try {
+        const gcred = GoogleAuthProvider.credentialFromError(error);
+        let gId = gcred ? (gcred.idToken || null) : null;
+        let gAccess = gcred ? (gcred.accessToken || null) : null;
+        if (!gId && !gAccess) {
+          const tr = error && error.customData && error.customData._tokenResponse;
+          if (tr) { gId = tr.oauthIdToken || null; gAccess = tr.oauthAccessToken || null; }
+        }
+        if (gId || gAccess) fallbackGoogle = { idToken: gId, accessToken: gAccess };
+      } catch (e) {}
+      // Offer the fallback right away when we can prove a first factor. The security control on it is
+      // the alert email it triggers, not hiding the link.
+      show("btn-mfa-use-email", !!(fallbackEmail && fallbackPass) || !!fallbackGoogle);
       onlyCard("auth-mfa");
       setStatus("");
       $("mfa-code").value = "";
@@ -761,7 +779,7 @@
     $("mfa-code").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-mfa-verify").click(); });
     $("btn-mfa-cancel").addEventListener("click", async () => {
       mfaResolver = null; mfaTotpHint = null; mfaMode = null; emfaMode = null;
-      fallbackEmail = null; fallbackPass = null;
+      fallbackEmail = null; fallbackPass = null; fallbackGoogle = null;
       if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
       setStatus("");
       // For the custom flow the user is signed into Firebase — sign out so they aren't left half-in.
@@ -892,7 +910,7 @@
           if (!r.ok) { const d = await r.json().catch(() => ({})); throw new Error(d.error || "That code didn't match."); }
           const { custom_token } = await r.json();
           const cred = await signInWithCustomToken(auth, custom_token);
-          fallbackEmail = null; fallbackPass = null; emfaMode = null; mfaMode = null;
+          fallbackEmail = null; fallbackPass = null; fallbackGoogle = null; emfaMode = null; mfaMode = null;
           mfaResolver = null; mfaTotpHint = null;
           if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
           markTwoFactorCleared(cred.user);
@@ -946,7 +964,7 @@
       }
     });
     $("btn-emfa-back").addEventListener("click", async () => {
-      mfaMode = null; emfaMode = null; fallbackEmail = null; fallbackPass = null;
+      mfaMode = null; emfaMode = null; fallbackEmail = null; fallbackPass = null; fallbackGoogle = null;
       mfaResolver = null; mfaTotpHint = null;
       if (fallbackRevealTimer) { clearTimeout(fallbackRevealTimer); fallbackRevealTimer = null; }
       if (auth.currentUser) { try { await signOut(auth); } catch (e) {} } else { showAuthCard(); }

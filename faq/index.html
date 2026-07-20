@@ -27,6 +27,8 @@
             <a href="../archie/" role="menuitem">What Is Archie?</a>
             <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../business/" role="menuitem">For Business</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -36,14 +38,6 @@
             <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
             <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
             <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
-          </div>
-        </div>
-        <div class="nav-more" id="navWork">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navWorkMenu" type="button">Work With Us</button>
-          <div class="nav-more-menu" id="navWorkMenu" role="menu" aria-label="Work With Us">
-            <a href="../individuals/" role="menuitem">Guided Setup</a>
-            <a href="../business/" role="menuitem">For Business</a>
-            <a href="../what-you-need/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navLearn">
@@ -59,7 +53,7 @@
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
             <a href="../our-story/" role="menuitem">Our Story</a>
-            <a href="../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../testimonials/" role="menuitem">Reviews</a>
             <a href="../contact/" role="menuitem">Contact</a>
             <a href="../trust/" role="menuitem">Trust</a>
           </div>
@@ -82,7 +76,6 @@
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutWork" aria-expanded="false" aria-controls="navDrawerFlyout">Work With Us</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -97,17 +90,14 @@
       <a href="../archie/">What Is Archie?</a>
       <a href="../archie/see-it-work/">See It Work</a>
       <a href="../archie/pricing/">Pricing</a>
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
       <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
       <a href="../skills-marketplace/commission/">Commission One</a>
       <a href="../skills-marketplace/for-developers/">For Developers</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutWork">
-      <a href="../individuals/">Guided Setup</a>
-      <a href="../business/">For Business</a>
-      <a href="../what-you-need/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../how-it-works/">How It Works</a>
@@ -117,7 +107,7 @@
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
       <a href="../our-story/">Our Story</a>
-      <a href="../testimonials/">Agent Successes</a>
+      <a href="../testimonials/">Reviews</a>
       <a href="../contact/">Contact</a>
       <a href="../trust/">Trust</a>
     </div>
@@ -251,7 +241,25 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  They&rsquo;re two different products from the same company. A Claude or ChatGPT subscription only works on that company&rsquo;s own website and app &mdash; it can&rsquo;t be used by other programs. Your Archie agent runs on <strong>your own computer</strong>, so it connects to the AI through a separate doorway called an <em>API</em>, which bills on its own based on actual use. The upside: for most people the API costs <strong>less</strong> than a monthly subscription, because you only pay for the messages your agent actually sends &mdash; often just a few dollars a month &mdash; and you stay in full control of the account and the spending. Your existing Claude Pro or ChatGPT Plus plan keeps working as normal; the API is simply what lets a program you own talk to the AI on your behalf.
+                  They&rsquo;re two different products from the same company. A Claude or ChatGPT subscription only works on that company&rsquo;s own website and app &mdash; it can&rsquo;t be used by other programs. Your Archie agent runs on <strong>your own computer</strong>, so it connects to the AI through a separate doorway called an <em>API</em>, which bills on its own based on actual use. The upside: for most people the API costs <strong>less</strong> than a monthly subscription, because you only pay for the messages your agent actually sends &mdash; often just a few dollars a month &mdash; and you stay in full control of the account and the spending. Your existing Claude Pro or ChatGPT Plus plan keeps working as normal; the API is simply what lets a program you own talk to the AI on your behalf. And it&rsquo;s not merely a workaround &mdash; using your own key is genuinely better for you in a few ways, starting with the fact that your conversations aren&rsquo;t used to train the AI. <a href="#faq-api-key-benefits">Here&rsquo;s the full list of perks.</a>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" role="listitem" id="faq-api-key-benefits">
+              <button class="accordion-trigger" aria-expanded="false">
+                What are the perks of using my own API key?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  This isn&rsquo;t an either/or &mdash; your own key works <em>alongside</em> a Claude or ChatGPT subscription, not instead of it, and you can keep both. But the key isn&rsquo;t just a hoop to jump through; it brings a few real perks of its own:<br /><br />
+                  <strong>Your conversations aren&rsquo;t used to train the AI.</strong> On the pay-as-you-go plans your key uses, the AI company does not train its models on what you send &mdash; that&rsquo;s the default for these business-grade accounts. On the ordinary consumer subscriptions (Claude Pro, ChatGPT Plus), your chats <em>can</em> be used to improve the AI unless you go digging in the settings to opt out. For an agent that helps with your email and calendar, that difference is worth having.<br /><br />
+                  <strong>No daily limits or &ldquo;come back later.&rdquo;</strong> Subscriptions cap how much you can use in a stretch and make you wait once you hit the wall. A pay-as-you-go key simply keeps working &mdash; which matters for an agent that quietly runs tasks in the background.<br /><br />
+                  <strong>You pay only for what you actually use.</strong> No flat monthly fee whether you touch it or not &mdash; a light personal agent often runs just a few dollars a month, and you set a hard spending cap yourself on the provider&rsquo;s website.<br /><br />
+                  <strong>You own the account outright.</strong> The relationship is directly between you and the AI company, on your key &mdash; you see every cent spent, and Otian is never in the middle. We can&rsquo;t see your key, and your conversations never pass through us.<br /><br />
+                  Your existing Claude Pro or ChatGPT Plus plan keeps working as normal on its own site; your API key is just the better-behaved doorway for a program you own to use the AI on your behalf.
                 </div>
               </div>
             </div>
@@ -475,7 +483,7 @@
             <a href="../faq/">FAQ</a>
             <a href="../trust/">Trust</a>
             <a href="../our-story/">Our Story</a>
-            <a href="../testimonials/">Agent Successes</a>
+            <a href="../testimonials/">Reviews</a>
             <a href="../contact/">Contact</a>
             <a href="../account/">Account</a>
           </nav>

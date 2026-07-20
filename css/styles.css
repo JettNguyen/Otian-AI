@@ -6141,3 +6141,24 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 5px;
   box-shadow: 0 1px 2px rgba(74, 66, 58, 0.12);
 }
+
+/* ==============================
+   37. Reviews
+   ============================== */
+
+.review-card blockquote {
+  margin: 0;
+}
+
+.review-card blockquote p {
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.review-attrib {
+  margin-top: 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}

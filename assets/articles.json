@@ -1,15 +1,15 @@
 [
   {
     "title": "You're Not Giving the AI Instructions. You're Setting the Odds.",
-    "summary": "Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. Here is the mechanism.",
+    "summary": "Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. Here is the mechanism, and why owning the agent lets you keep the phrasing that works.",
     "author": "Jett Nguyen",
     "date": "2026-07-20",
-    "readTime": "5 min read",
+    "readTime": "4 min read",
     "category": "Team Stories",
     "tags": [
-      "prompting",
-      "how ai works",
-      "ai agents"
+      "prompt engineering",
+      "ai agents",
+      "archie"
     ],
     "url": "youre-not-giving-ai-instructions-setting-the-odds/"
   },

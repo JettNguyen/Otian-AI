@@ -382,7 +382,7 @@
       getAuth, onAuthStateChanged, signOut,
       multiFactor, TotpMultiFactorGenerator,
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     // Same Firebase project as the Archie desktop app and the marketplace pages. (archie-77170)
     const firebaseConfig = {
@@ -504,13 +504,24 @@
       body.textContent = "Checking your purchases…";
       let tier = "none", subStatus = "";
       try {
-        // A user may read their own users/{uid} doc (Firestore rules). A brand-new web account may
-        // not have a doc yet — that's fine, it just means nothing bought yet.
-        const snap = await getDoc(doc(db, "users", user.uid));
+        // A user may read their own users/{uid} doc (Firestore rules). A missing doc just means
+        // nothing bought yet — but backfill it here (fire-and-forget; rules only allow create,
+        // never update, so an existing doc is untouchable) so accounts that predate the login
+        // page's ensureUserDoc(), e.g. old Google sign-ups, get their row without re-signing-in.
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
         if (snap.exists()) {
           const d = snap.data() || {};
           tier = d.access_tier || "none";
           subStatus = d.subscription_status || "";
+        } else {
+          setDoc(ref, {
+            email: user.email || "",
+            name: user.displayName || "",
+            access_tier: "none",
+            subscription_status: null,
+            stripe_customer_id: null,
+          }).catch(() => {});
         }
       } catch (e) {
         body.textContent = "Couldn't check your purchases right now. Reload to try again.";

@@ -344,7 +344,7 @@
       sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink,
       getMultiFactorResolver, TotpMultiFactorGenerator,
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -587,9 +587,31 @@
       // would skip it entirely. Real protection = enrolling TOTP on the security page.
       await proceed(user);
     }
+    // Every completed sign-in funnels through proceed(), so this is where we guarantee the
+    // users/{uid} doc exists — the Google/OAuth path has no signup branch, so without this a
+    // Google account exists in Auth but never gets a Firestore row until first app launch.
+    // Read-then-create, not a blind set: rules deny updates today, and a blind set would clobber
+    // admin-granted tiers if that ever loosened. Raced against a 5s cap so a blocked or slow
+    // Firestore (ad blockers) can never stall sign-in; best-effort — the app's verify_access
+    // also creates the doc on first launch, so a miss here strands nobody.
+    async function ensureUserDoc(user) {
+      const write = (async () => {
+        const ref = doc(db, "users", user.uid);
+        if ((await getDoc(ref)).exists()) return;
+        await setDoc(ref, {
+          email: user.email || "",
+          name: user.displayName || "",
+          access_tier: "none",
+          subscription_status: null,
+          stripe_customer_id: null,
+        });
+      })().catch(() => {});
+      await Promise.race([write, new Promise((r) => setTimeout(r, 5000))]);
+    }
     async function proceed(user) {
       stopVerifyPolling();
       markTwoFactorCleared(user);
+      await ensureUserDoc(user);
       if (callbackUrl) { await deliverToApp(user); return; }
       window.location.href = nextDest();
     }

@@ -44,22 +44,6 @@
     .auth-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
     .btn.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
     .auth-email { font-weight: 600; color: var(--text-primary); word-break: break-all; }
-    #auth-status { text-align: center; font-size: 0.85rem; min-height: 1.2em; margin-top: 18px; color: var(--text-secondary); }
-    /* Errors and confirmations render as a prominent banner so they can't be missed. */
-    #auth-status.error, #auth-status.ok {
-      text-align: left; font-weight: 600; font-size: 0.92rem; line-height: 1.5; min-height: 0;
-      padding: 13px 15px 13px 46px; border-radius: var(--radius-sm); position: relative;
-    }
-    #auth-status.error { color: #b3261e; background: rgba(224, 49, 49, 0.10); border: 1px solid rgba(224, 49, 49, 0.42); }
-    [data-theme="dark"] #auth-status.error { color: #ff9f97; background: rgba(224, 49, 49, 0.16); border-color: rgba(224, 49, 49, 0.48); }
-    #auth-status.ok { color: #1f7a54; background: rgba(62, 154, 146, 0.12); border: 1px solid rgba(62, 154, 146, 0.42); }
-    [data-theme="dark"] #auth-status.ok { color: var(--c-teal); background: rgba(62, 154, 146, 0.16); }
-    #auth-status.error::before, #auth-status.ok::before {
-      content: ""; position: absolute; left: 15px; top: 12px; width: 20px; height: 20px;
-      background-repeat: no-repeat; background-position: center; background-size: 20px 20px;
-    }
-    #auth-status.error::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3261e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E"); }
-    #auth-status.ok::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f7a54' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E"); }
     .auth-hidden { display: none !important; }
     .auth-spinner {
       width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
@@ -351,6 +335,7 @@
 
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { bindStatusToast } from "../js/status-toast.js";
     import {
       getAuth, onAuthStateChanged, signOut, updateProfile,
       GoogleAuthProvider, signInWithPopup,
@@ -412,12 +397,7 @@
 
     const $ = (id) => document.getElementById(id);
     const statusEl = $("auth-status");
-    function setStatus(msg, type = "") {
-      statusEl.textContent = msg || "";
-      statusEl.className = msg ? type : "";
-      // Errors are the thing people miss — pull the banner into view so it's never off-screen.
-      if (msg && type === "error") { try { statusEl.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e) {} }
-    }
+    const setStatus = bindStatusToast(statusEl);
     function show(id, on) { $(id).classList.toggle("auth-hidden", !on); }
 
     // Run an async button action with a visible in-button spinner, and always re-enable it after —

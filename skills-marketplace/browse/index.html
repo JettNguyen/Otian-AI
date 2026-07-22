@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Add-on Marketplace | Otian AI</title>
-  <meta name="description" content="Preview the skills, personalities, routines, and workers coming to your Archie agent. Join the waitlist to hear when the marketplace opens." />
+  <meta name="description" content="Browse the personalities, skills, workers, and routines for your Archie agent. Join the waitlist to hear when the marketplace opens." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -124,7 +124,7 @@
           <a class="marketplace-status-badge fade-up" href="../../archie/#status">In Testing: See Status</a>
           <span class="section-label fade-up">Browse Add-ons</span>
           <h1 id="products-heading" class="fade-up delay-1">Everything Your Agent Needs</h1>
-          <p class="fade-up delay-2">Skills, personalities, routines, and workers: four kinds of add-on, all in one place. Search, filter, and find exactly what you're looking for.</p>
+          <p class="fade-up delay-2">Personalities, skills, workers, and routines: four kinds of add-on, all in one place. Search, filter, and find exactly what you're looking for.</p>
 
           <div class="prerelease-banner fade-up delay-2">
             <svg class="prerelease-banner-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -144,23 +144,20 @@
           <input type="search" id="marketplaceSearchInput" class="marketplace-search-input" placeholder="Search add-ons&hellip;" aria-label="Search add-ons" />
         </div>
 
+        <!-- Type tabs, category pills, and the grids below are populated live from the Firestore
+             catalog by js/marketplace.js — a Starter Packs view first, then Personalities, Skills,
+             Workers, Routines (in that order), plus an Exclusive tab that appears only when a
+             signed-in account has private add-ons shared with it. -->
         <div class="mp-type-tabs fade-up delay-1" id="mpTypeTabs" role="group" aria-label="Filter by add-on type">
-          <button type="button" class="mp-type-tab is-active" data-type="all">All (18)</button>
-          <button type="button" class="mp-type-tab" data-type="skill">Skills (5)</button>
-          <button type="button" class="mp-type-tab" data-type="personality">Personalities (6)</button>
-          <button type="button" class="mp-type-tab" data-type="routine">Routines (3)</button>
-          <button type="button" class="mp-type-tab" data-type="worker">Workers (4)</button>
+          <button type="button" class="mp-type-tab mp-type-tab--packs is-active" data-type="packs">Starter Packs</button>
         </div>
 
-        <div class="mp-controls-row fade-up delay-1" id="mpControlsRow">
+        <!-- Starter Packs view (default). Curated bundles resolved against the live catalog. -->
+        <div class="mp-product-grid mp-pack-grid fade-up delay-2" id="mpPackGrid"></div>
+
+        <div class="mp-controls-row fade-up delay-1" id="mpControlsRow" hidden>
           <div class="marketplace-filter-bar" id="marketplaceFilterBar" role="group" aria-label="Filter by category">
             <button type="button" class="marketplace-filter-pill is-active" data-filter="all">All</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="productivity">Productivity</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="communication">Communication</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="finance">Finance</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="research">Research</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="operations">Operations</button>
-            <button type="button" class="marketplace-filter-pill" data-filter="personal">Personal</button>
           </div>
           <div class="mp-price-toggle" id="mpPriceToggle" role="group" aria-label="Filter by price">
             <button type="button" class="mp-price-btn is-active" data-price="all">All Prices</button>
@@ -169,264 +166,9 @@
           </div>
         </div>
 
+        <p class="mp-grid-status" id="mpGridStatus" role="status" aria-live="polite" hidden></p>
+
         <div class="mp-product-grid fade-up delay-2" id="mpProductGrid">
-
-          <!-- ===== SKILLS ===== -->
-
-          <article class="mp-product-card" data-type="skill" data-category="productivity" data-price="free" data-name="calendar management" data-desc="full google calendar management: create, read, update, and delete events via natural language.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Skill</span>
-              <span class="mp-category-badge">productivity</span>
-            </div>
-            <h3>Calendar Management</h3>
-            <p class="mp-card-author">by Otian AI (built-in)</p>
-            <p class="mp-card-desc">Full Google Calendar management: create, read, update, and delete events via natural language.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="skills/calendar-management/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card" data-type="skill" data-category="productivity" data-price="premium" data-name="meeting notes" data-desc="recaps, decisions, action items, and answers to 'what did we discuss?'; it reads the transcripts from your fireflies account.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Skill</span>
-              <span class="mp-category-badge">productivity</span>
-            </div>
-            <h3>Meeting Notes</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Recaps, decisions, action items, and answers to "what did we discuss?" It reads the transcripts from your Fireflies account.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-premium">$15 &middot; one-time</span>
-              <a href="skills/meeting-notes/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="communication" data-price="premium" data-name="inbox pilot" data-desc="ai-powered email triage: flags urgent mail, drafts replies, and summarizes threads.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Skill</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Inbox Pilot</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">AI-powered email triage: flags urgent mail, drafts replies, and summarizes threads.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="finance" data-price="premium" data-name="revenue steward" data-desc="track revenue, flag anomalies, and get daily financial snapshots.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Skill</span>
-              <span class="mp-category-badge">finance</span>
-            </div>
-            <h3>Revenue Steward</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Track revenue, flag anomalies, and get daily financial snapshots.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="skill" data-category="operations" data-price="premium" data-name="ops sentinel" data-desc="monitor systems, surface alerts, and auto-escalate critical issues.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Skill</span>
-              <span class="mp-category-badge">operations</span>
-            </div>
-            <h3>Ops Sentinel</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Monitor systems, surface alerts, and auto-escalate critical issues.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <!-- ===== PERSONALITIES ===== -->
-
-          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="professional" data-desc="a polished, executive-level agent voice. clear, concise, and confident, ideal for business communication and scheduling.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Professional</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Boardroom-ready precision</p>
-            <p class="mp-card-desc">A polished, executive-level agent voice. Clear, concise, and confident, ideal for business communication and scheduling.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="personalities/professional/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="friendly" data-desc="a warm and conversational agent that feels like chatting with a capable friend. helpful without being stiff.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Friendly</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Warm, helpful, and approachable</p>
-            <p class="mp-card-desc">A warm and conversational agent that feels like chatting with a capable friend. Helpful without being stiff.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="personalities/friendly/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card" data-type="personality" data-category="communication" data-price="free" data-name="concise" data-desc="a no-nonsense agent that gets straight to the point. every word earns its place. perfect for power users who know what they want.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Concise</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Maximum signal, minimum words</p>
-            <p class="mp-card-desc">A no-nonsense agent that gets straight to the point. Every word earns its place. Perfect for power users who know what they want.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="personalities/concise/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="personal" data-price="premium" data-name="motivational coach" data-desc="encouraging, goal-oriented, celebrates wins.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">personal</span>
-            </div>
-            <h3>Motivational Coach</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Encouraging, goal-oriented, celebrates wins</p>
-            <p class="mp-card-desc">An encouraging personality that keeps you focused on goals, celebrates your wins, and nudges you forward when motivation dips.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="communication" data-price="premium" data-name="corporate diplomat" data-desc="polished stakeholder communication.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Corporate Diplomat</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Polished stakeholder communication</p>
-            <p class="mp-card-desc">A diplomatic voice built for navigating complex stakeholder relationships and corporate communication with finesse.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="personality" data-category="personal" data-price="premium" data-name="tech bro" data-desc="casual silicon valley energy.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Personality</span>
-              <span class="mp-category-badge">personal</span>
-            </div>
-            <h3>Tech Bro</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-tagline">Casual Silicon Valley energy</p>
-            <p class="mp-card-desc">A casual, high-energy personality inspired by startup culture. Thinks big, talks fast, and is always shipping.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <!-- ===== ROUTINES ===== -->
-
-          <article class="mp-product-card" data-type="routine" data-category="productivity" data-price="free" data-name="daily briefing" data-desc="a morning summary of today's calendar events sent to telegram.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Routine</span>
-              <span class="mp-category-badge">productivity</span>
-            </div>
-            <h3>Daily Briefing</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">A morning summary of today's calendar events sent to Telegram. Start every day informed.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="routines/daily-briefing/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="routine" data-category="productivity" data-price="premium" data-name="weekly report" data-desc="auto-generate a weekly summary every monday.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Routine</span>
-              <span class="mp-category-badge">productivity</span>
-            </div>
-            <h3>Weekly Report</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Auto-generate a weekly summary every Monday. Stay on top of what happened without lifting a finger.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="routine" data-category="productivity" data-price="premium" data-name="stand-up prep" data-desc="daily standup notes pulled from calendar + tasks.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Routine</span>
-              <span class="mp-category-badge">productivity</span>
-            </div>
-            <h3>Stand-up Prep</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Daily standup notes pulled from calendar and tasks. Walk into every standup prepared.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <!-- ===== WORKERS ===== -->
-
-          <article class="mp-product-card" data-type="worker" data-category="research" data-price="free" data-name="researcher" data-desc="a dedicated research worker that digs into topics, summarizes findings, and presents structured answers.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Worker</span>
-              <span class="mp-category-badge">research</span>
-            </div>
-            <h3>Researcher</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">A dedicated research worker that digs into topics, summarizes findings, and presents structured answers.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="workers/researcher/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card" data-type="worker" data-category="communication" data-price="free" data-name="writer" data-desc="a writing specialist that drafts, edits, and polishes text: emails, posts, summaries, and more.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Worker</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Writer</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">A writing specialist that drafts, edits, and polishes text: emails, posts, summaries, and more.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-free">Free at launch</span>
-              <a href="workers/writer/" class="mp-card-link">View Details &rarr;</a>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="worker" data-category="research" data-price="premium" data-name="data analyst" data-desc="crunch numbers, build reports, spot trends.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Worker</span>
-              <span class="mp-category-badge">research</span>
-            </div>
-            <h3>Data Analyst</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Crunch numbers, build reports, and spot trends. Your agent's dedicated data specialist.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
-          <article class="mp-product-card is-coming-soon" data-type="worker" data-category="communication" data-price="premium" data-name="customer success agent" data-desc="handle customer inquiries with empathy and precision.">
-            <div class="mp-card-badges">
-              <span class="mp-type-badge">Worker</span>
-              <span class="mp-category-badge">communication</span>
-            </div>
-            <h3>Customer Success Agent</h3>
-            <p class="mp-card-author">by Otian AI</p>
-            <p class="mp-card-desc">Handle customer inquiries with empathy and precision. A dedicated support specialist for your agent.</p>
-            <div class="mp-card-bottom">
-              <span class="mp-price-badge is-coming-soon">Coming soon</span>
-            </div>
-          </article>
-
         </div>
 
         <p class="marketplace-filter-empty" id="marketplaceFilterEmpty" hidden>No add-ons match your filters. Try adjusting your search, or if Archie can&rsquo;t do it yet, <a class="marketplace-text-link" href="../commission/">tell us and we&rsquo;ll build the add-on</a>.</p>
@@ -608,6 +350,6 @@
 
   <script src="../../js/nav.js"></script>
   <script type="module" src="../../js/account-nav.js"></script>
-  <script src="../../js/marketplace.js"></script>
+  <script type="module" src="../../js/marketplace.js"></script>
 </body>
 </html>

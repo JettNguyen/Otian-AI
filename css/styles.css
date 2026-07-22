@@ -5210,6 +5210,257 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--accent-hover);
 }
 
+/* ── Dynamic browse grid: status, exclusive, expandable detail ── */
+
+/* Loading / error line, centered across the whole grid. */
+.mp-grid-status {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  padding: 32px 0;
+}
+
+/* Small count shown after each type-tab label, e.g. "Skills (42)". */
+.mp-card-count {
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+/* Exclusive (private) add-ons — account-only. Gold, matching the Archie app's treatment. */
+.mp-type-tab[data-type="exclusive"] { --tab-color: #b58a2e; }
+[data-theme="dark"] .mp-type-tab[data-type="exclusive"] { --tab-color: #d8b45a; }
+
+.mp-exclusive-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(181, 138, 46, 0.14);
+  color: #8a6a1e;
+}
+
+[data-theme="dark"] .mp-exclusive-badge {
+  background: rgba(216, 180, 90, 0.18);
+  color: #e0c063;
+}
+
+/* Expand toggle reuses .mp-card-link's look but is a <button>. */
+.mp-card-expand {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* Inline expandable detail region within a card. */
+.mp-card-detail {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mp-card-detail[hidden] { display: none; }
+
+.mp-card-detail p {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.mp-card-detail h4 {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.mp-card-detail ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.mp-card-detail ol li {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.mp-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mp-chip {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface-soft-strong);
+  color: var(--text-secondary);
+}
+
+/* Personality sample-conversation bubbles. */
+.mp-card-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mp-card-chat .bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.mp-card-chat .bubble.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.mp-card-chat .bubble.bot {
+  align-self: flex-start;
+  background: var(--surface-soft-strong);
+  color: var(--text-primary);
+  border-bottom-left-radius: 4px;
+  white-space: pre-line;
+}
+
+/* ── Starter Packs ── */
+
+/* .mp-product-grid / .mp-controls-row set `display`, which overrides the UA [hidden] rule, so the
+   view switcher can't hide them without an explicit guard. */
+.mp-product-grid[hidden],
+.mp-controls-row[hidden] {
+  display: none;
+}
+
+.mp-type-tab[data-type="packs"] { --tab-color: var(--accent); }
+
+/* Pack accent tokens — mapped to the site's available color set; gold and green are literal since
+   the site doesn't define those tokens. */
+.mp-pack-card--accent { --pack-base: var(--accent);  --pack-subtle: var(--accent-subtle); }
+.mp-pack-card--blue   { --pack-base: var(--c-blue);  --pack-subtle: var(--c-blue-subtle); }
+.mp-pack-card--teal   { --pack-base: var(--c-teal);  --pack-subtle: var(--c-teal-subtle); }
+.mp-pack-card--plum   { --pack-base: var(--c-plum);  --pack-subtle: var(--c-plum-subtle); }
+.mp-pack-card--gold   { --pack-base: #b58a2e; --pack-subtle: rgba(181, 138, 46, 0.13); }
+.mp-pack-card--green  { --pack-base: #3f9a5c; --pack-subtle: rgba(76, 175, 80, 0.13); }
+[data-theme="dark"] .mp-pack-card--gold  { --pack-base: #d8b45a; }
+[data-theme="dark"] .mp-pack-card--green { --pack-base: #6fbf86; }
+
+.mp-pack-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--pack-base);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.mp-pack-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.mp-pack-ribbon {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--pack-base);
+  color: #fff;
+}
+
+.mp-pack-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 4px;
+}
+
+.mp-pack-ribbon ~ h3 {
+  padding-right: 96px;
+}
+
+.mp-pack-tagline {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--pack-base);
+  margin-bottom: 12px;
+}
+
+.mp-pack-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.mp-pack-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.mp-pack-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--pack-subtle);
+  color: var(--pack-base);
+}
+
+.mp-pack-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mp-pack-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mp-pack-item-name {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.mp-pack-note {
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
 /* ── Product Detail Pages ── */
 
 .mp-detail {

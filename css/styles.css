@@ -4871,6 +4871,11 @@ html[data-theme="dark"] .booking-container iframe {
 .marketplace-split-note + .marketplace-split-note {
   margin-top: 16px;
 }
+/* Following a feature grid, the note must clear the cards, not tuck up under them
+   (the base rule's negative top margin is for the marketplace split layout). */
+.feature-grid + .marketplace-split-note {
+  margin-top: 28px;
+}
 
 .marketplace-text-link {
   color: var(--accent);

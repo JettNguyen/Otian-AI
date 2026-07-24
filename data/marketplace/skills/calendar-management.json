@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "author": "Archie (built-in)",
   "price_cents": 0,
-  "description": "Full Google Calendar management — create, read, update, and delete events via natural language.",
+  "description": "Full Google Calendar management: create, read, update, and delete events via natural language.",
   "long_description": "Give your agent the ability to fully manage a Google Calendar. It can check availability, create events, reschedule meetings, set reminders, find free slots, and summarize upcoming schedules. All changes require confirmation before executing. Requires a connected Google account with calendar access.",
   "category": "productivity",
   "required_variables": [

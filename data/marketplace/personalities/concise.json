@@ -11,7 +11,7 @@
   "preview_exchanges": [
     {
       "user": "What's tomorrow look like?",
-      "bot": "3 meetings:\n• 9:00 — Standup (30m)\n• 11:00 — Client review (1h)\n• 12:30 — Team lunch"
+      "bot": "3 meetings:\n• 9:00, Standup (30m)\n• 11:00, Client review (1h)\n• 12:30, Team lunch"
     }
   ],
   "style_guidelines": [

@@ -12,6 +12,6 @@
   "model": {
     "tier": "balanced"
   },
-  "setup_steps": ["Install the worker — no configuration needed."],
+  "setup_steps": ["Install the worker: no configuration needed."],
   "builtin": true
 }

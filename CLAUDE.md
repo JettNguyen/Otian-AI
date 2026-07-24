@@ -1,10 +1,10 @@
-# Otian AI — marketing site
+# Otian AI: marketing site
 
 Static site. Hand-written HTML per page, one shared `css/styles.css`, one shared `js/nav.js`.
-There is no build step and no templating: the nav is duplicated in every page (two copies —
+There is no build step and no templating: the nav is duplicated in every page (two copies:
 desktop nav and mobile drawer), so nav changes must be scripted across all pages.
 
-## Trust claims — read TRUST.md before writing copy
+## Trust claims: read TRUST.md before writing copy
 
 **This site's product is trust. Privacy and safety claims are load-bearing, and a false one
 costs more than every feature on the site combined.**
@@ -16,7 +16,7 @@ handling, or what the agent will and won't do without asking:
    wording, each with a pointer to the code in the Archie repo that makes it true.
 2. **Apply the test:** *could I defend this exact sentence to a hostile engineer with a packet
    sniffer, using only what ships today?* If no, it does not ship.
-3. **If the claim is not in TRUST.md, you may not make it** — no matter how obviously true it
+3. **If the claim is not in TRUST.md, you may not make it**, no matter how obviously true it
    seems. Verify it against the Archie source at `/Users/Games/Desktop/Code/Archie`, add it to
    TRUST.md with its code pointer, then use it.
 4. **Never describe an unshipped feature in the present tense.** Roadmap items are labelled as
@@ -30,9 +30,15 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
 
 ## Copy conventions
 
+- **No em dashes anywhere in site content.** Never use the `—` character (U+2014) or the
+  `&mdash;`/`&#8212;`/`&#x2014;` entity in any served file: HTML copy, CSS/JS comments and
+  strings, the marketplace `data/**/*.json` catalog, and glossary/blog markdown. Restructure
+  with a colon, comma, semicolon, period, or parentheses so the sentence still reads well.
+  En dashes (`–`) and hyphens (`-`) are fine. The site was swept to zero on 2026-07-24; keep
+  it that way, and grep new copy before committing (`git grep '—\|mdash'`).
 - The marketplace umbrella noun is **"Add-on"**; Skills, Workers, Routines, and Personalities
   are its kinds. Never "add an add-on".
-- Guided sessions are **$100/hour**, one hour per session — "$100/session" and "$100/hour" are
+- Guided sessions are **$100/hour**, one hour per session; "$100/session" and "$100/hour" are
   the same claim, not a contradiction.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally.

@@ -5231,7 +5231,7 @@ html[data-theme="dark"] .booking-container iframe {
   opacity: 0.7;
 }
 
-/* Exclusive (private) add-ons — account-only. Gold, matching the Archie app's treatment. */
+/* Exclusive (private) add-ons, account-only. Gold, matching the Archie app's treatment. */
 .mp-type-tab[data-type="exclusive"] { --tab-color: #b58a2e; }
 [data-theme="dark"] .mp-type-tab[data-type="exclusive"] { --tab-color: #d8b45a; }
 
@@ -5357,7 +5357,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .mp-type-tab[data-type="packs"] { --tab-color: var(--accent); }
 
-/* Pack accent tokens — mapped to the site's available color set; gold and green are literal since
+/* Pack accent tokens, mapped to the site's available color set; gold and green are literal since
    the site doesn't define those tokens. */
 .mp-pack-card--accent { --pack-base: var(--accent);  --pack-subtle: var(--accent-subtle); }
 .mp-pack-card--blue   { --pack-base: var(--c-blue);  --pack-subtle: var(--c-blue-subtle); }

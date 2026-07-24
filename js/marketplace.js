@@ -5,10 +5,10 @@
    Renders the browse grid LIVE from the Archie marketplace catalog in Firestore
    (project archie-77170), the same store the desktop app reads. Public add-ons show
    for everyone; a signed-in user also sees the private/"Exclusive" add-ons shared with
-   their account. No placeholders — what's in the DB is what shows.
+   their account. No placeholders: what's in the DB is what shows.
 
-   Visibility model (see Archie firestore.rules): rules are NOT filters — a query that
-   returns any unreadable doc is rejected wholesale — so we run two scoped queries and
+   Visibility model (see Archie firestore.rules): rules are NOT filters (a query that
+   returns any unreadable doc is rejected wholesale), so we run two scoped queries and
    merge: the public store (where visibility == "public") and, when signed in, the
    user's private items (where audience_uids array-contains uid). Never an unfiltered read.
    ======================================== */
@@ -45,20 +45,20 @@ function kindLabel(kind) {
   return c ? c.label : kind;
 }
 
-/* Featured Starter Packs — curated bundles of add-ons that already exist in the catalog, referenced
+/* Featured Starter Packs: curated bundles of add-ons that already exist in the catalog, referenced
    by kind + id (mirrors Archie's src/app/packs.ts). A pack carries no logic of its own: the page
    resolves each item against the loaded catalog, so a private item a visitor can't see simply
    doesn't appear in that pack (and is counted as "shared with select accounts" instead). Keep the
    ids in sync with data/marketplace/<kind>/ in the Archie repo. */
 var PACKS = [
   { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A great all-rounder to start with", accent: "accent", recommended: true,
-    description: "The best first pack for anyone. Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice — useful from the first message, nothing to set up.",
+    description: "The best first pack for anyone. Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, nothing to set up.",
     items: [["skill","task-manager"],["skill","personal-journal"],["worker","researcher"],["personality","friendly"]] },
   { id: "personal-organizer", name: "Personal Organizer", tagline: "Stay on top of tasks and habits", accent: "blue",
     description: "Turn your agent into the thing that keeps your life on track: a real task list and habit tracker, plus a morning digest of what's due and a Sunday review of the week. It nudges you so you don't have to remember to check.",
     items: [["skill","task-manager"],["skill","habit-tracker"],["routine","daily-task-digest"],["routine","weekly-review"]] },
   { id: "mind-wellness", name: "Mind & Wellness", tagline: "Reflect, and build good habits", accent: "teal",
-    description: "A calmer corner of your day. Keep a private journal, note your mood, log a daily gratitude, and track the habits you're building — with gentle evening and check-in nudges, all in an unhurried, grounding voice.",
+    description: "A calmer corner of your day. Keep a private journal, note your mood, log a daily gratitude, and track the habits you're building, with gentle evening and check-in nudges, all in an unhurried, grounding voice.",
     items: [["skill","personal-journal"],["skill","mood-tracker"],["skill","gratitude"],["skill","habit-tracker"],["routine","evening-journal"],["routine","mood-check-in"],["routine","gratitude-wind-down"],["routine","habit-check-in"],["personality","calm-anchor"]] },
   { id: "creators-desk", name: "Creator's Desk", tagline: "Write, learn, and stay inspired", accent: "plum",
     description: "For making things. A writing worker that drafts and sharpens your words, a learning coach to skill up, a saved reading list for inspiration, and a bright, imaginative voice to bounce ideas off.",
@@ -67,25 +67,25 @@ var PACKS = [
     description: "A study partner that sticks. The learning coach makes flashcards and quizzes you with spaced repetition, the researcher digs up sources on the live web, and the study-partner voice keeps you focused and encouraged.",
     items: [["skill","learning-coach"],["worker","researcher"],["personality","study-partner"]] },
   { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, trips, and reading", accent: "green",
-    description: "The everyday-life bundle. Plan meals around your tastes (or around what's already in your fridge), track spending, set savings goals, plan trips, and keep one list of everything you want to read — saved tools your agent remembers between chats.",
+    description: "The everyday-life bundle. Plan meals around your tastes (or around what's already in your fridge), track spending, set savings goals, plan trips, and keep one list of everything you want to read: saved tools your agent remembers between chats.",
     items: [["skill","meal-planner"],["skill","fridge-dinner"],["skill","expense-tracker"],["skill","savings-goals"],["skill","trip-planner"],["skill","reading-list"]] },
   { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already caught up", accent: "blue",
-    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores — gathered on the live web by a research worker and delivered in a crisp, no-fluff voice.",
+    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered on the live web by a research worker and delivered in a crisp, no-fluff voice.",
     items: [["worker","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"],["personality","concise"]] },
   { id: "home-errands", name: "Home & Errands", tagline: "The household admin, off your plate", accent: "gold",
-    description: "The stuff that's easy to forget. Track bills, home upkeep, your car, warranties and returns, and your plants and pets — each with a timely reminder — plus a watch on prices for things you're waiting to buy, all run by an unflappable concierge.",
+    description: "The stuff that's easy to forget. Track bills, home upkeep, your car, warranties and returns, and your plants and pets (each with a timely reminder), plus a watch on prices for things you're waiting to buy, all run by an unflappable concierge.",
     items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["personality","exec-concierge"]] },
   { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Never miss a moment that matters", accent: "plum",
-    description: "Be the person who always remembers. Your agent keeps birthdays and the people you mean to stay in touch with, nudges you before it's too late, and helps you write the card, note, or reply — in a warm, personal voice.",
+    description: "Be the person who always remembers. Your agent keeps birthdays and the people you mean to stay in touch with, nudges you before it's too late, and helps you write the card, note, or reply, in a warm, personal voice.",
     items: [["skill","birthday-keeper"],["skill","stay-in-touch"],["skill","card-note-writer"],["skill","reply-helper"],["routine","birthday-heads-up"],["routine","stay-in-touch-nudge"],["personality","warm-companion"]] },
   { id: "healthy-active", name: "Healthy & Active", tagline: "Move more, stay on top of your health", accent: "green",
-    description: "A pocket coach for body and routine. Get home workouts you can do anywhere with a nudge to actually do them, and keep your medications on schedule with a daily reminder — all in an upbeat, motivating voice.",
+    description: "A pocket coach for body and routine. Get home workouts you can do anywhere with a nudge to actually do them, and keep your medications on schedule with a daily reminder, all in an upbeat, motivating voice.",
     items: [["skill","home-workout"],["skill","medication-reminder"],["routine","workout-nudge"],["routine","med-reminders"],["personality","hype-coach"]] },
   { id: "fun-curious", name: "Fun & Curious", tagline: "A little delight, every day", accent: "accent",
-    description: "For the fun of it. Learn a new word and a piece of trivia each day, and get a spot-on pick for what to watch tonight — a light, playful sidekick that makes your agent enjoyable to open, not just useful.",
+    description: "For the fun of it. Learn a new word and a piece of trivia each day, and get a spot-on pick for what to watch tonight: a light, playful sidekick that makes your agent enjoyable to open, not just useful.",
     items: [["skill","word-of-the-day"],["skill","daily-trivia"],["skill","watch-tonight"],["routine","daily-word"],["routine","trivia-time"],["personality","playful-sidekick"]] },
   { id: "sales-business", name: "Sales & Business", tagline: "For teams working a pipeline", accent: "accent",
-    description: "The lead-gen toolkit. A shared client memory, a strategist that reasons about your next move, and a deal desk that matches buyers to suppliers — plus engagement scoring, outreach drafting, a lead-gen playbook, a prospecting worker, pipeline reports, a weekly strategy note, and a closer's voice. Built for sales teams.",
+    description: "The lead-gen toolkit. A shared client memory, a strategist that reasons about your next move, and a deal desk that matches buyers to suppliers, plus engagement scoring, outreach drafting, a lead-gen playbook, a prospecting worker, pipeline reports, a weekly strategy note, and a closer's voice. Built for sales teams.",
     items: [["skill","client-brain"],["skill","strategist"],["skill","deal-desk"],["skill","engagement-scoring"],["skill","outreach-studio"],["skill","lead-gen-playbook"],["worker","prospector"],["routine","daily-pipeline-report"],["routine","weekly-pipeline-review"],["routine","weekly-strategy"],["personality","deal-closer"]] },
 ];
 
@@ -136,7 +136,7 @@ function normalize(kind, id, data) {
   };
 }
 
-/* Public catalog — everyone sees it. */
+/* Public catalog: everyone sees it. */
 function fetchPublic() {
   return Promise.all(COLLECTIONS.map(function (c) {
     return itemsQuery(c.coll, where("visibility", "==", "public")).then(function (snap) {
@@ -315,7 +315,7 @@ function renderTabs(items) {
       '" data-type="' + t.type + '">' + t.label +
       ' <span class="mp-card-count">(' + counts[t.type] + ")</span></button>";
   }).join("");
-  // Exclusive tab — only when the signed-in account actually has private add-ons.
+  // Exclusive tab, only when the signed-in account actually has private add-ons.
   if (counts.exclusive > 0) {
     html += '<button type="button" class="mp-type-tab' + (activeType === "exclusive" ? " is-active" : "") +
       '" data-type="exclusive">Exclusive <span class="mp-card-count">(' + counts.exclusive + ")</span></button>";
@@ -464,7 +464,7 @@ if (priceToggle) {
 }
 if (searchInput) {
   searchInput.addEventListener("input", function () {
-    // A search spans every add-on, so it can't stay on the packs view — drop into the add-on grid
+    // A search spans every add-on, so it can't stay on the packs view, so drop into the add-on grid
     // and move the highlight to "All" the moment the user types.
     if (searchInput.value.trim() && activeType === "packs") {
       activeType = "all";

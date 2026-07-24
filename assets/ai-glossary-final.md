@@ -6,7 +6,7 @@ Example: Data centers running AI assistants rely on accelerators so they can res
 
 **AGI (Artificial General Intelligence)** – The concept of an AI that could perform any intellectual task a human can, not just one narrow specialty. Nothing on the market today actually works this way.
 
-Example: When a headline asks whether AGI is near, it's discussing this future possibility — not describing the AI assistants people use right now.
+Example: When a headline asks whether AGI is near, it's discussing this future possibility, not describing the AI assistants people use right now.
 
 **AI Agent** – An AI system that completes multi-step tasks on its own, rather than just answering a question, looping you in along the way.
 
@@ -26,7 +26,7 @@ Example: This is part of why AI companies test new models for safety before rele
 
 **Anthropomorphism** – The tendency to treat AI as though it has human feelings or awareness, just because it communicates in a human-like way.
 
-Example: A short reply from an AI assistant might feel "cold," but the AI isn't actually moody — it's simply a tool responding to a request.
+Example: A short reply from an AI assistant might feel "cold," but the AI isn't actually moody; it's simply a tool responding to a request.
 
 **Anthropic** – A company known for developing Claude, an AI model built with a strong focus on safety.
 
@@ -36,7 +36,7 @@ Example: Some AI assistant products are built using models from companies such a
 
 Example: An API connection lets your AI assistant add a new appointment to your calendar without ever needing your login credentials.
 
-**API Key** – A unique code that acts like a password, letting one piece of software connect to another — for instance, an AI assistant linking to your inbox.
+**API Key** – A unique code that acts like a password, letting one piece of software connect to another, for instance, an AI assistant linking to your inbox.
 
 Example: Because anyone holding an API key could access the connected account, it should be guarded as carefully as a password.
 
@@ -48,7 +48,7 @@ Example: ASI comes up often in films and futurist discussions, but it has no bea
 
 Example: When condensing a long email chain, attention helps the AI zero in on the actual request rather than the greetings and sign-offs.
 
-**Augmented Intelligence** – A framing where AI and humans split the work — AI processes large volumes of information, while people make the final calls.
+**Augmented Intelligence** – A framing where AI and humans split the work: AI processes large volumes of information, while people make the final calls.
 
 Example: An AI assistant might pull together research on a topic, but you're the one who decides what to do with it.
 
@@ -70,7 +70,7 @@ Example: Given a budgeting question, an AI using chain of thought might list eac
 
 **ChatGPT** – A widely-used AI chatbot from OpenAI, built primarily for conversation and Q&A within its own interface.
 
-Example: ChatGPT can help draft a message you then copy elsewhere, but it can't log into your inbox and send it — that's the kind of task a personal AI assistant handles.
+Example: ChatGPT can help draft a message you then copy elsewhere, but it can't log into your inbox and send it. That's the kind of task a personal AI assistant handles.
 
 **Chatbot** – Software built mainly to answer questions or chat, typically confined to one app or website.
 
@@ -90,7 +90,7 @@ Example: Analyzing a lengthy document takes more compute than generating a short
 
 **Context Window** – The amount of conversation and content an AI can hold in mind at one time, including prior messages and any attached files.
 
-Example: In a very long exchange, an AI with a limited context window may start losing track of earlier details — similar to forgetting how a long meeting began.
+Example: In a very long exchange, an AI with a limited context window may start losing track of earlier details, similar to forgetting how a long meeting began.
 
 **Conversational AI** – AI you communicate with through natural, everyday language rather than fixed commands or search terms.
 
@@ -136,7 +136,7 @@ Example: A discriminator might be shown a mix of real and AI-made photos and has
 
 Example: This is a research-level phenomenon and doesn't change how AI tools function in everyday use.
 
-**Embedding** – A numerical representation of data — words, images, and so on — designed so that items with similar meaning end up with similar numbers.
+**Embedding** – A numerical representation of data (words, images, and so on) designed so that items with similar meaning end up with similar numbers.
 
 Example: Embeddings let an AI assistant connect a search for "checking in with customers" to a document about "client follow-up," because the underlying meanings line up.
 
@@ -176,7 +176,7 @@ Example: Every time you send a message to an AI assistant and receive a reply, f
 
 Example: Most AI assistants and chatbots are built on top of a foundation model rather than being trained completely from the ground up.
 
-**Function Calling** – The capability that lets an AI reach out to external tools and data — like your email or calendar — rather than relying solely on its built-in knowledge.
+**Function Calling** – The capability that lets an AI reach out to external tools and data (like your email or calendar) rather than relying solely on its built-in knowledge.
 
 Example: Function calling is what enables an AI assistant to actually check tomorrow's forecast or pull up a contact, instead of making something up.
 
@@ -184,7 +184,7 @@ Example: Function calling is what enables an AI assistant to actually check tomo
 
 Example: Early AI-generated faces were often produced this way, with one model creating faces and the other judging how convincing they looked.
 
-**Generative AI** – AI focused on producing new material — text, images, audio, or video — rather than only analyzing existing content.
+**Generative AI** – AI focused on producing new material (text, images, audio, or video) rather than only analyzing existing content.
 
 Example: When an AI assistant drafts an email or summarizes a document, it's using generative AI.
 
@@ -206,19 +206,19 @@ Example: Training large AI models depends heavily on GPUs to manage the enormous
 
 **Gradient Descent** – The technique an AI model uses during training to improve gradually by making small corrections that reduce its errors.
 
-Example: It works a bit like walking downhill in heavy fog — feeling for the downward slope and taking small steps toward it until you reach the bottom.
+Example: It works a bit like walking downhill in heavy fog, feeling for the downward slope and taking small steps toward it until you reach the bottom.
 
-**Grounding** – Tying an AI's responses to real, checkable information — such as your own files — rather than vague or generic statements.
+**Grounding** – Tying an AI's responses to real, checkable information (such as your own files) rather than vague or generic statements.
 
 Example: A grounded AI assistant might consult your actual calendar before proposing meeting times, rather than guessing your availability.
 
 **Hallucination** – When an AI states something false or invented with apparent confidence, so it sounds plausible despite being wrong.
 
-Example: An AI might invent a phone number that sounds real but doesn't exist — a reason having a person check important outputs matters.
+Example: An AI might invent a phone number that sounds real but doesn't exist, a reason having a person check important outputs matters.
 
 **Hidden Layer** – The internal processing stages of an AI model that sit between its input and final output, working behind the scenes.
 
-Example: Much like the gears inside a watch, hidden layers aren't visible to you — you only see what goes in and what comes out.
+Example: Much like the gears inside a watch, hidden layers aren't visible to you; you only see what goes in and what comes out.
 
 **Human-in-the-Loop** – Any AI arrangement where a person checks and approves the AI's output before it's finalized, rather than letting the AI act fully independently.
 
@@ -230,11 +230,11 @@ Example: This is comparable to setting your oven's temperature and timer before 
 
 **IDE (Integrated Development Environment)** – An application developers use to write, test, and manage code, bundling tools like an editor and debugger together.
 
-Example: VS Code (below) is a popular IDE — the kind of program a developer might use to fine-tune an AI agent's underlying setup.
+Example: VS Code (below) is a popular IDE, the kind of program a developer might use to fine-tune an AI agent's underlying setup.
 
 **Inference** – The stage where an already-trained AI model is put to use to generate a response, distinct from training, which happens earlier.
 
-Example: When you ask an AI assistant something and it answers, that's inference — the training already took place when the model was built.
+Example: When you ask an AI assistant something and it answers, that's inference; the training already took place when the model was built.
 
 **Instruction Tuning** – Extra training that teaches an AI model to follow directions well, such as "summarize this" or "reply politely."
 
@@ -250,7 +250,7 @@ Example: When an AI assistant writes an email draft or answers a question in pla
 
 **Latency** – The amount of time an AI takes to respond after receiving a request.
 
-Example: A short, simple reply might come back in seconds, while a more involved multi-step task naturally takes a bit longer — just as it would for a human assistant.
+Example: A short, simple reply might come back in seconds, while a more involved multi-step task naturally takes a bit longer, just as it would for a human assistant.
 
 **Latent Space** – An internal organizational structure an AI model builds, where concepts with similar meaning end up positioned close together.
 
@@ -270,7 +270,7 @@ Example: A system prompt might tell an AI assistant to always confirm before sen
 
 **Mixture of Experts** – An AI architecture made up of several smaller, specialized models, with a routing system deciding which one (or ones) should handle a given input.
 
-Example: It works a bit like a general practitioner referring you to the right specialist — except the AI does this instantly and internally.
+Example: It works a bit like a general practitioner referring you to the right specialist, except the AI does this instantly and internally.
 
 **Model** – A program trained to detect patterns in data, essentially a mathematical stand-in for some real-world process.
 
@@ -278,7 +278,7 @@ Example: A weather-prediction system, a translation tool, and the language engin
 
 **Multi-Agent Orchestration** – Several AI agents collaborating on different parts of one larger task, working as a coordinated team.
 
-Example: One agent might gather research, another draft a summary, and a third review the result — all coordinated automatically.
+Example: One agent might gather research, another draft a summary, and a third review the result, all coordinated automatically.
 
 **Multimodal Model** – An AI capable of handling more than one kind of input at once, such as text and images together.
 
@@ -300,11 +300,11 @@ Example: Neural networks form the underlying architecture of language models and
 
 Example: Setting up an AI agent framework, a developer might use npm to install it and its required components with one command.
 
-**Objective Function** – The target an AI model works to maximize or minimize during training — essentially, its goal.
+**Objective Function** – The target an AI model works to maximize or minimize during training: essentially, its goal.
 
-Example: This is closely related to a loss function — both describe what the training process is aiming for, just framed as something to push up or down.
+Example: This is closely related to a loss function: both describe what the training process is aiming for, just framed as something to push up or down.
 
-**OpenClaw** – An open-source framework for building AI agents capable of taking real action on a computer — like handling files or sending messages — rather than just chatting.
+**OpenClaw** – An open-source framework for building AI agents capable of taking real action on a computer (like handling files or sending messages) rather than just chatting.
 
 Example: A framework such as OpenClaw serves as the "engine" for some AI assistant products; how it's set up and secured determines whether it's safe and reliable day to day.
 
@@ -318,13 +318,13 @@ Example: It's similar to a student who memorizes specific practice questions ins
 
 **Parameters** – The internal values an AI model adjusts as it learns, comparable to countless small dials calibrated during training.
 
-Example: When a model's size is described as "70 billion parameters," this is what's being counted — a rough gauge of its scale.
+Example: When a model's size is described as "70 billion parameters," this is what's being counted, a rough gauge of its scale.
 
 **Personal CRM** – A tool that keeps track of your contacts, past conversations, and any pending follow-ups for each relationship.
 
 Example: A personal CRM might prompt you to follow up with a client next week, even if you never set a reminder yourself.
 
-**Personalized / Custom AI** – An AI assistant tailored to your specific situation — your inbox, schedule, and contacts — instead of a generic, one-size-fits-all tool.
+**Personalized / Custom AI** – An AI assistant tailored to your specific situation (your inbox, schedule, and contacts) instead of a generic, one-size-fits-all tool.
 
 Example: A personalized AI assistant might recognize which clients are top priority and handle their messages differently from routine inquiries.
 
@@ -332,11 +332,11 @@ Example: A personalized AI assistant might recognize which clients are top prior
 
 **Pre-training** – The initial, broad phase of training an AI model on large amounts of general data, before any task-specific fine-tuning happens.
 
-Example: This resembles general schooling before specializing in a career — building a wide foundation of knowledge first.
+Example: This resembles general schooling before specializing in a career, building a wide foundation of knowledge first.
 
 **Prompt** – The request or instruction you give an AI, such as "summarize this document" or "find three flights to Chicago."
 
-Example: With a well-configured AI assistant, there's no need for special phrasing — you can ask the way you'd ask a colleague.
+Example: With a well-configured AI assistant, there's no need for special phrasing; you can ask the way you'd ask a colleague.
 
 **Prompt Defense** – Built-in protections that stop an AI from being manipulated into producing harmful, false, or off-brand content.
 
@@ -364,7 +364,7 @@ Example: It's like advising a student to understand the concept rather than memo
 
 **Reinforcement Learning** – A training method where an AI improves through trial and error, earning rewards for good results and corrections for poor ones.
 
-Example: It works much like training a pet with treats — through repeated attempts, the AI learns which actions lead to better outcomes.
+Example: It works much like training a pet with treats: through repeated attempts, the AI learns which actions lead to better outcomes.
 
 **Repository (Repo)** – A storage space for a project's code and files, often managed with Git, that can be shared or worked on collaboratively.
 
@@ -404,7 +404,7 @@ Example: This approach is mostly of historical interest now, though some modern 
 
 **Telegram** – A messaging app, similar to WhatsApp or standard texting, that some AI assistants use as a channel for direct communication with users.
 
-Example: If your assistant operates this way, Telegram is just the "front door" you use to talk to it — the AI isn't part of Telegram itself.
+Example: If your assistant operates this way, Telegram is just the "front door" you use to talk to it; the AI isn't part of Telegram itself.
 
 **Temperature (AI Temperature)** – A setting that adjusts how predictable versus creative an AI's output tends to be.
 
@@ -416,11 +416,11 @@ Example: This is a behind-the-scenes tool for AI builders, much like how you don
 
 **Terminal / Command Line** – A text-based interface for instructing a computer by typing commands instead of clicking through menus.
 
-Example: A developer might use the terminal to launch an AI agent on a server — a step a non-technical user would never need to perform themselves.
+Example: A developer might use the terminal to launch an AI agent on a server, a step a non-technical user would never need to perform themselves.
 
 **Token** – The basic unit of text an AI processes, roughly equal to three-quarters of a word on average.
 
-Example: A longer word like "understanding" might be broken into a couple of tokens — relevant mainly for context window limits and AI service pricing, not daily use.
+Example: A longer word like "understanding" might be broken into a couple of tokens, relevant mainly for context window limits and AI service pricing, not daily use.
 
 **Toxicity** *(see AI Toxicity)*
 
@@ -430,7 +430,7 @@ Example: TPUs are infrastructure used behind the scenes by companies running AI 
 
 **Training Data** – The set of examples an AI model learns from during its training process.
 
-Example: This is akin to the textbooks and practice problems a student studies before an exam — better quality data tends to mean better performance.
+Example: This is akin to the textbooks and practice problems a student studies before an exam: better quality data tends to mean better performance.
 
 **Transfer Learning** – When skills an AI model picked up from one task carry over as a head start on a different, related task.
 
@@ -438,7 +438,7 @@ Example: It's similar to how learning one musical instrument makes picking up a 
 
 **Transformer** – A model architecture introduced in 2017 that's particularly effective at understanding language by weighing how words in a sentence relate to one another.
 
-Example: The transformer is the design underlying GPT and most current AI language tools — essentially their shared blueprint.
+Example: The transformer is the design underlying GPT and most current AI language tools, essentially their shared blueprint.
 
 **Transparency** – Being open about how an AI system operates, what data it relies on, and making clear to users when they're interacting with AI.
 
@@ -468,7 +468,7 @@ Example: A webhook could alert your AI assistant the instant a new form is submi
 
 Example: An AI assistant's workflow for a new customer inquiry might be: read the message, check for similar past cases, draft a reply, then flag it for your approval.
 
-**Zero Data Retention** – A policy where information shared with an AI isn't stored afterward — it's used to produce a response, then discarded.
+**Zero Data Retention** – A policy where information shared with an AI isn't stored afterward: it's used to produce a response, then discarded.
 
 Example: This is especially relevant when an AI assistant handles sensitive details like emails or financial information, since it limits how long that data exists anywhere.
 

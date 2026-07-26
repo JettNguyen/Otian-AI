@@ -151,9 +151,10 @@
                makes a demo read as "an embedded video" rather than as the product itself. -->
           <figure class="demo-player demo-player--hero">
             <div class="demo-player-frame">
-              <!-- No src on the <video> and no src on the <source>s on purpose, only data-src. The
-                   browser therefore fetches nothing here but the poster. js/demo-player.js picks ONE
-                   of the candidates below and starts it when the hero scrolls into view.
+              <!-- No src on the <video> and no src on the <source>s on purpose, only data-src, and no
+                   poster: the browser fetches nothing here at all. Until js/demo-player.js picks ONE of
+                   the candidates below and starts it (when the hero scrolls into view), the frame shows
+                   its CSS placeholder, the Otian mark on the brand surface (see .demo-player--hero).
 
                    It picks on decode cost, not just codec support, because those are different
                    questions: an older laptop will happily report that it "supports" AV1 and then
@@ -165,28 +166,22 @@
                    to resolve it. Only that top file is gated on width; the 1600 line carries no media
                    query so it can also catch a wide screen whose decoder just turned down the 2560.
 
-                   And two themes: Archie itself is themed, so a light recording on a dark page would
-                   read as a bug. The two builds are the same take frame for frame, which is what lets
-                   the player carry currentTime across a theme flip instead of restarting.
+                   One recording, both themes: this is a light capture, offered theme-agnostically (no
+                   data-theme), so the same files serve a dark page too. If Archie's dark UI is ever
+                   recorded, it can come back as a parallel data-theme="dark" set (js/demo-player.js
+                   already filters by data-theme); until then a second, byte-identical dark copy was
+                   just wasted bytes and a needless refetch on every theme toggle.
 
-                   This is the whole demo, not an excerpt, and it loops on its own: the recording was
-                   cut so its last frame IS its first. Same file /archie/see-it-work/ plays, so going
-                   there next costs nothing. -->
+                   This is the whole demo, not an excerpt: it plays start to finish (through the closing
+                   Archie card) and then loops. Same file /archie/see-it-work/ plays, so going there
+                   next costs nothing. -->
               <video class="demo-player-video" preload="none"
-                     poster="assets/archie-demo-light-poster.jpg"
-                     data-poster-light="assets/archie-demo-light-poster.jpg"
-                     data-poster-dark="assets/archie-demo-dark-poster.jpg"
                      muted loop playsinline disablepictureinpicture
                      aria-label="A silent, looping screen recording of Archie: creating an agent called Archibald, installing a calendar skill and a personality from the marketplace, connecting Telegram and an AI provider, then messaging the agent from a phone to ask about the day's calendar and move a meeting.">
-                <source data-theme="light" data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1804" />
-                <source data-theme="light" data-src="assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
-                <source data-theme="light" data-src="assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
-                <source data-theme="light" data-src="assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
-
-                <source data-theme="dark"  data-src="assets/archie-demo-dark-2560.av1.mp4"   type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1804" />
-                <source data-theme="dark"  data-src="assets/archie-demo-dark-1600.av1.mp4"   type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
-                <source data-theme="dark"  data-src="assets/archie-demo-dark-1600.hevc.mp4"  type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
-                <source data-theme="dark"  data-src="assets/archie-demo-dark-1280.h264.mp4"  type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
+                <source data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1508" />
+                <source data-src="assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="942" />
+                <source data-src="assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="942" />
+                <source data-src="assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="754" />
                 <p>Your browser can&rsquo;t play this video. <a href="archie/see-it-work/">Watch the full demo instead.</a></p>
               </video>
               <!-- No pause control here on purpose. This loop is ambient wallpaper, not something to

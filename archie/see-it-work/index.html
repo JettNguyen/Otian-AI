@@ -168,7 +168,7 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <span class="section-label fade-up">See It Work</span>
-        <h1 class="fade-up delay-1">One Minute to Build It. Then It&rsquo;s Just Texting.</h1>
+        <h1 class="fade-up delay-1">Built in Minutes. Then It&rsquo;s Just Texting.</h1>
         <p class="fade-up delay-2">Two recordings, no narration. The first is the whole build. The second is what it&rsquo;s like to actually live with one.</p>
       </div>
     </section>
@@ -189,20 +189,15 @@
                  asked for reduced motion, who gets the poster instead. -->
             <video class="demo-player-video" preload="none"
                    poster="../../assets/archie-demo-light-poster.jpg"
-                   data-poster-light="../../assets/archie-demo-light-poster.jpg"
-                   data-poster-dark="../../assets/archie-demo-dark-poster.jpg"
                    muted loop playsinline disablepictureinpicture
-                   aria-label="A one-minute silent screen recording of Archie: creating an agent called Archibald, installing the Calendar Management skill and a personality from the marketplace, connecting Telegram and an AI provider, then messaging the agent from a phone to ask what is on the calendar and to move a meeting.">
+                   aria-label="A silent screen recording of Archie: creating an agent, installing the Calendar Management skill and a personality from the marketplace, connecting Telegram and an AI provider, then messaging the agent from a phone to ask what is on the calendar and to move a meeting.">
               <!-- No 2560 line here, unlike the hero: this player is capped at 760px, so 1600 already
-                   covers a 2x display at 1:1 and anything larger would be bytes nobody can see.
-                   Same files the homepage hero uses, so one of the two is usually already cached. -->
-              <source data-theme="light" data-src="../../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
-              <source data-theme="light" data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
-              <source data-theme="light" data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
-
-              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1600.av1.mp4"   type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="1128" />
-              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1600.hevc.mp4"  type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="1128" />
-              <source data-theme="dark"  data-src="../../assets/archie-demo-dark-1280.h264.mp4"  type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="902" />
+                   covers a 2x display at 1:1 and anything larger would be bytes nobody can see. Same
+                   files the homepage hero uses, so they're usually already cached. One light capture,
+                   offered theme-agnostically (no data-theme), serves both themes; see the hero note. -->
+              <source data-src="../../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.08M.08"'    data-w="1600" data-h="942" />
+              <source data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L120.90"' data-w="1600" data-h="942" />
+              <source data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="754" />
               <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
             </video>
             <!-- No pause control: the recording runs on its own as ambient motion. Anyone who has

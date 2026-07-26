@@ -1248,6 +1248,12 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border: 0;
   border-radius: var(--radius) 0 0 var(--radius);
   box-shadow: -28px 34px 74px -34px rgba(74, 66, 58, 0.42);
+  /* Placeholder shown while the recording is still loading, and left in place if it ever
+     fails to load: the Otian mark centered on the brand surface, instead of the base
+     frame's near-black fill. --bg-secondary carries the theme, so the card is cream in
+     light and warm-dark in dark. The video is object-fit:cover at the same 1.698 aspect,
+     so it covers this completely the instant it paints. */
+  background: var(--bg-secondary) url("../assets/otian-icon-rounded.svg") center / clamp(160px, 30%, 300px) no-repeat;
 }
 
 html[data-theme="dark"] .demo-player--hero .demo-player-frame {
@@ -3669,11 +3675,11 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 /* ========================================
-   25b. Home hero, max-width 850px
-   Below 850px the demo leads: the landscape player stacks first as a
+   25b. Home hero, max-width 1000px
+   Below 1000px the demo leads: the landscape player stacks first as a
    clean card, and the copy follows in normal flow.
    ======================================== */
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .hero {
     padding-top: calc(var(--nav-height) + 0px);
   }
@@ -3704,21 +3710,17 @@ html[data-theme="dark"] .availability-widget iframe {
     display: none;
   }
 
-  /* Crop the recording to the Archie window by SHAPE, not by transform. The frame is set a touch
-     narrower than the recording's own 1.42 aspect, so object-fit: cover trims a sliver off each
-     side, enough to carry the dark desktop wallpaper that flanks the window off the screen edges,
-     keeping the bleed clean, while showing the FULL height. Full height is the whole point: it
-     leaves the top strip of desktop above the window in view (that's intended), and it stops
-     cropping the bottom, which is what used to shove the closing logo card's tagline down under
-     the fade. Nothing vertical is cropped, so the card sits exactly as it does in the recording,
-     with real air beneath the tagline. No transform, so the mask is plain frame percentages and
-     the two vendor gradients can't drift apart. */
+  /* Native aspect (1.698). The recording fills its own width: the app UI reaches the edges on the
+     build screens, so unlike the old cut there's no wallpaper margin worth cropping away. Show it
+     whole and let the bottom fade below melt it into the page. Nothing vertical is cropped, so the
+     mask is plain frame percentages and the two vendor gradients can't drift apart. */
   .demo-player--hero .demo-player-frame {
-    aspect-ratio: 1280 / 985;
+    aspect-ratio: 1280 / 754;
     border-radius: 0;
     box-shadow: none;
-    /* The frame's dark backdrop would survive the video fading out above it, leaving a
-       rectangle behind. Nothing to show once the video is gone. */
+    /* Transparent on purpose, overriding the desktop hero's Otian-mark placeholder: the
+       video fades out across its bottom third here, so any frame backdrop (mark or fill)
+       would show through that fade as a rectangle. Nothing behind the video once it's gone. */
     background: transparent;
   }
 
@@ -3753,7 +3755,7 @@ html[data-theme="dark"] .availability-widget iframe {
      frame, so the whole bottom third is a soft ramp; the headline sits low in that ramp, covering
      little of the live picture and resting on pixels that are mostly gone. A small pull, so the
      line kisses the fade rather than climbing into the app. In vw, not px, so the overlap holds
-     its proportions from 360px up to 850px. */
+     its proportions from 360px up to 1000px. */
   .hero-content {
     position: relative;
     z-index: 2;
@@ -5830,8 +5832,9 @@ html[data-theme="dark"] .booking-container iframe {
 
 .demo-player-frame {
   position: relative;
-  /* Hold the box before the poster lands so nothing below it jumps. */
-  aspect-ratio: 1280 / 902;
+  /* Hold the box before the poster lands so nothing below it jumps.
+     Native aspect of the recording (3668x2160 = 1.698). */
+  aspect-ratio: 1280 / 754;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--panel-border-strong);

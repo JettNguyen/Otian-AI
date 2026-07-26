@@ -11,7 +11,18 @@ That split is the point. The person who knows what the code actually does holds 
 the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
 true, it doesn't ship, and there is no appeal to how good it sounds.
 
-**Last verified against the Archie source:** 2026-07-20 (site + code reconciliation, `Archie@main`)
+**Last verified against the Archie source:** 2026-07-26 (site + code reconciliation, `Archie@main`)
+
+**Reconciliation — 2026-07-26.** The **one-time license migration has SHIPPED**; this file and
+`PRICING-ONETIME-MIGRATION.md` were the stale artifacts, not the copy. Verified in code:
+Stripe Checkout is `mode: "payment"`, not a recurring subscription
+(`stripe-webhook/index.js:199,1777`), and the entitlement is an `access_tiers` array where
+**`lifetime` is the one-time $149 purchase, permanent, with no subscription to check**;
+`subscriber` is named in-code as the *legacy* recurring tier and is the only tier that still
+consults `subscription_status` (`crates/archie-core/src/auth.rs:238-267`). The
+"What We Hold" wording below has been updated from "whether your subscription is active" to
+ownership; site copy already saying "whether you own Archie" (`index.html`, `archie/pricing/`)
+is therefore **true and stays**. Pricing is settled at $149 one-time (Jett, 2026-07-26).
 
 **Reconciliation — 2026-07-20.** The two Phase-1 features this file tracked as unbuilt have
 **shipped** and were re-verified in code today; their ⛔/🚧 sections below have moved to ✅ with
@@ -193,11 +204,14 @@ the webview.
 ## What We Hold — state all three, always
 
 **Approved wording:** "Our servers know three things about you: your email address, whether
-your subscription is active, and which **paid** add-ons you've bought. Not your prompts, not
+you own Archie, and which **paid** add-ons you've bought. Not your prompts, not
 your files, not your calendar, not a single conversation. Free add-ons we can't see at all."
 
-**Why all three:** Firebase Auth + the Firestore user doc hold email, uid, `access_tier`,
-`subscription_status`, `stripe_customer_id` (`crates/archie-core/src/auth.rs:237-244`). The
+*(Updated 2026-07-26: was "whether your subscription is active" — false since the one-time
+license shipped. Ownership is the `lifetime` tier, checked with no subscription lookup.)*
+
+**Why all three:** Firebase Auth + the Firestore user doc hold email, uid, `access_tiers`,
+`subscription_status`, `stripe_customer_id` (`crates/archie-core/src/auth.rs:238-267`). The
 Stripe webhook writes a permanent purchase record per paid item — item id, amount, session
 id, timestamp (`stripe-webhook/index.js` → `users/{uid}/purchases/{item_id}`).
 

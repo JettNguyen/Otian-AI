@@ -5979,6 +5979,25 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--accent);
 }
 
+/* Availability notice under the hero CTA. The facts themselves live in one place
+   only (archie/#status); this states the status and links there, never restates
+   platform detail. */
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 28px;
+  padding: 12px 18px;
+  background: var(--accent-subtle);
+  border: 1px solid rgba(224, 138, 91, 0.45);
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+}
+
+.hero-status strong { font-weight: 600; }
+
 .addon-promise {
   max-width: 620px;
   margin: 48px auto 0;

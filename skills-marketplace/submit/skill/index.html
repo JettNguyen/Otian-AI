@@ -128,11 +128,11 @@
           <h2>Sign in to submit</h2>
           <p>Submissions are linked to your account so we can credit you and follow up during review.</p>
           <button id="btnSignIn" class="btn btn-primary btn-lg" type="button">Sign in with Google</button>
-          <p id="signinError" style="display:none; color:#b00020; margin-top:0.75rem;"></p>
+          <p id="signinError" style="display:none; color:var(--danger); margin-top:0.75rem;"></p>
         </div>
 
         <form id="skillForm" data-addon-type="skill" style="display:none;" novalidate>
-          <p style="margin-bottom:1.5rem; color:var(--color-text-muted, #666);">
+          <p style="margin-bottom:1.5rem; color:var(--text-muted);">
             Signed in as <strong id="signedInAs"></strong> &middot; <a href="#" id="btnSignOut">sign out</a>
           </p>
 
@@ -188,12 +188,12 @@ Never:
 - Never say a job finished before it has.
 
 How it should sound: one line."></textarea>
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               This is the prompt your skill runs on. Use <code>{{VARIABLE}}</code> for anything the user
               configures &mdash; each one becomes a field they fill in.
-              <button type="button" id="btnUseTemplate" style="background:none; border:none; padding:0; color:var(--color-accent, #4f46e5); cursor:pointer; text-decoration:underline; font:inherit;">Start from the template</button>
+              <button type="button" id="btnUseTemplate" style="background:none; border:none; padding:0; color:var(--accent); cursor:pointer; text-decoration:underline; font:inherit;">Start from the template</button>
             </p>
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               The last two parts are the ones reviewers check hardest: a rule for when something the
               skill needs is missing (it must <em>ask</em>, never guess), and a &ldquo;never&rdquo; list naming
               the specific thing this skill would be tempted to make up.
@@ -204,7 +204,7 @@ How it should sound: one line."></textarea>
             <label class="form-label" for="skillNeedsAddon">Does it need another add-on?</label>
             <input class="form-input" type="text" id="skillNeedsAddon"
               placeholder="e.g. Researcher worker &mdash; so it can check live scores on the web" />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               If your prompt hands work to a worker or reads another skill&rsquo;s data, name it here and say
               why. Archie shows this on the card and offers to install it in one tap &mdash; left unsaid, the
               skill installs looking fine and quietly does nothing on first use.
@@ -215,7 +215,7 @@ How it should sound: one line."></textarea>
             <label class="form-label" for="skillUsageHint">How does someone use it?</label>
             <input class="form-input" type="text" id="skillUsageHint" maxlength="280"
               placeholder="e.g. Add a team or two, then just ask &quot;how did my teams do.&quot;" />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               One sentence, shown once setup is done. This is what someone types to get value out of it &mdash;
               not a setup step.
             </p>
@@ -224,7 +224,7 @@ How it should sound: one line."></textarea>
           <div class="form-group">
             <label class="form-label" for="proofShot">Screenshot proof it works<span class="required-star" aria-hidden="true">*</span></label>
             <input class="form-input" type="file" id="proofShot" accept="image/png,image/jpeg,image/webp" required />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               A screenshot of your skill running correctly inside Archie. PNG, JPG, or WebP, up to 8&nbsp;MB.
               This is required; we don't list anything we haven't seen work.
             </p>
@@ -239,7 +239,7 @@ How it should sound: one line."></textarea>
             </label>
           </div>
 
-          <p id="formError" style="display:none; color:#b00020;"></p>
+          <p id="formError" style="display:none; color:var(--danger);"></p>
 
           <button id="btnSubmit" class="btn btn-primary btn-lg" type="submit">Submit for review</button>
         </form>

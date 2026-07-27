@@ -128,11 +128,11 @@
           <h2>Sign in to submit</h2>
           <p>Submissions are linked to your account so we can credit you and follow up during review.</p>
           <button id="btnSignIn" class="btn btn-primary btn-lg" type="button">Sign in with Google</button>
-          <p id="signinError" style="display:none; color:#b00020; margin-top:0.75rem;"></p>
+          <p id="signinError" style="display:none; color:var(--danger); margin-top:0.75rem;"></p>
         </div>
 
         <form id="skillForm" data-addon-type="routine" style="display:none;" novalidate>
-          <p style="margin-bottom:1.5rem; color:var(--color-text-muted, #666);">
+          <p style="margin-bottom:1.5rem; color:var(--text-muted);">
             Signed in as <strong id="signedInAs"></strong> &middot; <a href="#" id="btnSignOut">sign out</a>
           </p>
 
@@ -169,25 +169,25 @@
             <label class="form-label" for="skillTemplate">Routine prompt<span class="required-star" aria-hidden="true">*</span></label>
             <textarea class="form-textarea" id="skillTemplate" rows="14" maxlength="20000" required
               placeholder="The prompt the routine sends on its schedule, plus how often it should run and which skill it drives. Tell us the cadence (e.g. daily at 08:00) and what a good result looks like."></textarea>
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">This is the message the routine fires on schedule. Include the cadence and which skill it should drive.</p>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">This is the message the routine fires on schedule. Include the cadence and which skill it should drive.</p>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="skillNeedsAddon">Does it need another add-on?</label>
             <input class="form-input" type="text" id="skillNeedsAddon" placeholder="e.g. Sports Follow skill &mdash; it's what this routine runs" />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">A routine fires a skill, so name that skill. If it also reads data another skill produces, name that too &mdash; Archie checks both are installed before it lets the routine run.</p>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">A routine fires a skill, so name that skill. If it also reads data another skill produces, name that too &mdash; Archie checks both are installed before it lets the routine run.</p>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="skillUsageHint">What arrives, and when?</label>
             <input class="form-input" type="text" id="skillUsageHint" maxlength="280" placeholder="e.g. One line per team, in your chat, every morning at 8:15" />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">One sentence describing what lands in the user&rsquo;s chat. Skip it if your description already says.</p>
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">One sentence describing what lands in the user&rsquo;s chat. Skip it if your description already says.</p>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="proofShot">Screenshot proof it works<span class="required-star" aria-hidden="true">*</span></label>
             <input class="form-input" type="file" id="proofShot" accept="image/png,image/jpeg,image/webp" required />
-            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">
+            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               A screenshot of your routine running correctly inside Archie. PNG, JPG, or WebP, up to 8&nbsp;MB.
               This is required; we don't list anything we haven't seen work.
             </p>
@@ -202,7 +202,7 @@
             </label>
           </div>
 
-          <p id="formError" style="display:none; color:#b00020;"></p>
+          <p id="formError" style="display:none; color:var(--danger);"></p>
 
           <button id="btnSubmit" class="btn btn-primary btn-lg" type="submit">Submit for review</button>
         </form>

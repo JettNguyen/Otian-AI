@@ -14,6 +14,7 @@
   --accent: #E08A5B;
   --accent-hover: #CC7647;
   --accent-subtle: #FBE4D3;
+  --accent-line: rgba(224, 138, 91, 0.4);
   /* Darkened accent for TEXT sitting on --accent-subtle. The bright accent above is tuned for
      fills and borders; as text on its own tint it lands at 2.15:1, which fails WCAG AA. */
   --accent-ink: #8F5233;
@@ -51,6 +52,12 @@
   --c-teal-subtle: rgba(62, 154, 146, 0.13);
   --c-plum: #996FBE;
   --c-plum-subtle: rgba(153, 111, 190, 0.13);
+  --c-green: #679B55;
+  --c-green-subtle: rgba(103, 155, 85, 0.14);
+  --c-green-ink: #4E7D3F;
+  --c-gold: #BB8C33;
+  --c-gold-subtle: rgba(187, 140, 51, 0.14);
+  --c-gold-ink: #8C6820;
 
   /* Layout */
   --radius: 12px;
@@ -73,6 +80,7 @@
   --accent: #EDA277;
   --accent-hover: #F2B58F;
   --accent-subtle: #4A392C;
+  --accent-line: rgba(237, 162, 119, 0.45);
   /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
   --accent-ink: #EDA277;
   --danger: #FF9F97;
@@ -104,6 +112,12 @@
   --c-teal-subtle: rgba(111, 196, 188, 0.16);
   --c-plum: #BE9BDD;
   --c-plum-subtle: rgba(190, 155, 221, 0.16);
+  --c-green: #8FBF7C;
+  --c-green-subtle: rgba(143, 191, 124, 0.16);
+  --c-green-ink: #8FBF7C;
+  --c-gold: #DCAF57;
+  --c-gold-subtle: rgba(220, 175, 87, 0.16);
+  --c-gold-ink: #DCAF57;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
@@ -246,6 +260,18 @@ p { color: var(--text-secondary); line-height: 1.8; }
 .section-header p + p {
   margin-top: 14px;
 }
+
+/* Spacer + row utilities: these exact values were pasted as style= attributes across a
+   dozen pages; a class keeps them one decision. */
+.mt-40 { margin-top: 40px; }
+.mt-48 { margin-top: 48px; }
+.btn-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.explain-svg--mobile { max-width: 340px; font-family: inherit; }
 
 .section-label {
   display: inline-block;
@@ -1198,7 +1224,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   justify-content: center;
   width: 38px;
   height: 38px;
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   color: var(--text-secondary);
   transition: color var(--transition), border-color var(--transition), background var(--transition);
@@ -1342,11 +1368,6 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   color: var(--text-secondary);
 }
 
-.hero-pronunciation {
-  font-style: italic;
-  color: var(--text-muted);
-}
-
 .hero-actions {
   display: flex;
   gap: 16px;
@@ -1427,7 +1448,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   gap: 8px;
   padding: 7px 14px;
   background: var(--bg-card);
-  border-radius: 100px;
+  border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-secondary);
@@ -1479,7 +1500,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   width: 48px;
   height: 48px;
   background: var(--accent-subtle);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2167,14 +2188,14 @@ fieldset legend + * {
 .progress-track {
   height: 4px;
   background: var(--surface-hover-strong);
-  border-radius: 100px;
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
   background: var(--accent);
-  border-radius: 100px;
+  border-radius: 999px;
   transition: width 0.4s ease;
 }
 
@@ -2334,7 +2355,7 @@ fieldset .checkbox-group {
 .rating-option input[type="radio"]:checked + span {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
   font-weight: 600;
 }
 
@@ -2486,7 +2507,7 @@ fieldset .checkbox-group {
 
 .resource-link:hover {
   color: var(--text-primary);
-  border-color: rgba(224, 138, 91, 0.45);
+  border-color: var(--accent-line);
   background: var(--accent-subtle);
 }
 
@@ -2620,7 +2641,7 @@ fieldset .checkbox-group {
   width: 42px;
   height: 42px;
   background: var(--accent-subtle);
-  border-radius: 9px;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2927,7 +2948,7 @@ html[data-theme="dark"] .availability-widget iframe {
   font-weight: 500;
   color: var(--text-secondary);
   background: var(--surface-hover);
-  border-radius: 100px;
+  border-radius: 999px;
   padding: 3px 10px;
 }
 
@@ -3200,7 +3221,7 @@ html[data-theme="dark"] .availability-widget iframe {
 .arch-logo-item i {
   width: 38px;
   height: 38px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--field-border);
   background: var(--surface-hover);
   overflow: hidden;
@@ -3241,7 +3262,7 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 /* ========================================
-   24.5 Glossary (AI Explained)
+   23b. Glossary (AI Explained)
    ======================================== */
 .resource-hero {
   background:
@@ -3296,7 +3317,7 @@ html[data-theme="dark"] .availability-widget iframe {
 
 .az-letter:hover {
   color: var(--text-primary);
-  border-color: rgba(224, 138, 91, 0.4);
+  border-color: var(--accent-line);
 }
 
 .az-letter.disabled {
@@ -3370,7 +3391,7 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 .glossary-entry.open {
-  border-color: rgba(224, 138, 91, 0.35);
+  border-color: var(--accent-line);
 }
 
 .glossary-trigger {
@@ -3436,7 +3457,7 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 /* ========================================
-   24.6 Blog
+   23c. Blog
    ======================================== */
 .blog-hero {
   background:
@@ -3479,7 +3500,7 @@ html[data-theme="dark"] .availability-widget iframe {
   color: var(--text-secondary);
   border-radius: 999px;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 500;
   padding: 7px 11px;
   transition: border-color var(--transition), color var(--transition), background var(--transition);
 }
@@ -3487,7 +3508,7 @@ html[data-theme="dark"] .availability-widget iframe {
 .resource-filter:hover,
 .resource-filter.is-active {
   color: var(--text-primary);
-  border-color: rgba(224, 138, 91, 0.4);
+  border-color: var(--accent-line);
   background: var(--accent-subtle);
 }
 
@@ -3506,7 +3527,7 @@ html[data-theme="dark"] .availability-widget iframe {
 
 .resource-featured {
   padding: 22px;
-  border-color: rgba(224, 138, 91, 0.35);
+  border-color: var(--accent-line);
 }
 
 .resource-featured-label {
@@ -3585,7 +3606,7 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 /* ========================================
-   Article Page
+   23d. Article Page
    ======================================== */
 .article-byline {
   display: flex;
@@ -4164,134 +4185,6 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 
 /* ========================================
-   28. Success Stories Accordion
-   ======================================== */
-.success-accordion {
-  max-width: 860px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.success-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color var(--transition), box-shadow var(--transition);
-}
-
-.success-item.open {
-  border-color: rgba(224, 138, 91, 0.35);
-  box-shadow: 0 4px 16px rgba(224, 138, 91, 0.1);
-}
-
-.success-trigger {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 28px;
-  text-align: left;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  min-height: 44px;
-  transition: background var(--transition);
-  gap: 16px;
-}
-
-.success-trigger:hover {
-  background: var(--surface-soft);
-}
-
-.success-trigger-text {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.success-trigger h3 {
-  font-size: 1.0625rem;
-  margin: 0;
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.success-brief {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
-
-.success-icon {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  color: var(--text-muted);
-  transition: transform var(--transition), color var(--transition);
-}
-
-.success-item.open .success-icon {
-  transform: rotate(45deg);
-  color: var(--accent);
-}
-
-.success-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
-}
-
-.success-body-inner {
-  padding: 0 28px 24px;
-}
-
-.success-content {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding-top: 10px;
-}
-
-.success-content p {
-  font-size: 0.9375rem;
-  line-height: 1.8;
-  margin: 0;
-}
-
-.success-content strong {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.success-graphic {
-  margin-top: 4px;
-}
-
-.success-graphic img {
-  display: block;
-  width: 100%;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-}
-
-.graphic-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 120px;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
-  font-size: 0.875rem;
-}
-
-
-/* ========================================
    29. Calendar Booking Section (Questionnaire)
    ======================================== */
 .booking-section {
@@ -4378,27 +4271,6 @@ html[data-theme="dark"] .booking-container iframe {
 
   .booking-container iframe {
     height: 500px;
-  }
-}
-
-/* ========================================
-   28b. Responsive Accordion
-   ======================================== */
-@media (max-width: 1000px) {
-  .success-trigger {
-    padding: 20px 20px;
-  }
-
-  .success-trigger-text {
-    gap: 4px;
-  }
-
-  .success-trigger h3 {
-    font-size: 1rem;
-  }
-
-  .success-brief {
-    font-size: 0.8125rem;
   }
 }
 
@@ -4581,125 +4453,6 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ========================================
-   31. Cost & Why (Home)
-   ======================================== */
-.cost-why-inner {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 48px;
-  align-items: center;
-}
-
-.cost-why-table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: separate;
-  border-spacing: 0 14px;
-  margin-top: 24px;
-}
-
-.cost-why-table td {
-  width: 50%;
-  vertical-align: top;
-  font-size: 0.9375rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  padding-right: 20px;
-}
-
-.cost-why-table-point {
-  position: relative;
-  padding-left: 30px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.cost-why-table-point::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 3px;
-  width: 18px;
-  height: 18px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Ccircle cx='10' cy='10' r='9' stroke='%23E08A5B' stroke-width='1.5'/%3E%3Cpath d='M6.5 10.5l2.5 2.5 4.5-5' stroke='%23E08A5B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.cost-why-visual {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.screenshot-gallery {
-  position: relative;
-  height: 380px;
-  overflow: hidden;
-  border-radius: var(--radius);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-.screenshot-gallery-track {
-  display: flex;
-  flex-direction: row;
-  width: max-content;
-  height: 100%;
-  gap: 16px;
-  animation: screenshot-gallery-scroll 8s linear infinite;
-  animation-play-state: paused;
-}
-
-.screenshot-gallery-track.is-ready {
-  animation-play-state: running;
-}
-
-.screenshot-gallery-item {
-  flex-shrink: 0;
-  height: 100%;
-}
-
-.screenshot-gallery:hover .screenshot-gallery-track {
-  animation-play-state: paused;
-}
-
-@keyframes screenshot-gallery-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .screenshot-gallery-track {
-    animation: none;
-  }
-}
-
-.cost-why-screenshot {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--bg-card);
-}
-
-.cost-why-screenshot img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.cost-why-caption {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  text-align: center;
-  margin: 0;
-}
-
-/* ========================================
    32. Price Cards (Home)
    ======================================== */
 .price-grid {
@@ -4765,7 +4518,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .before-after-card.is-after {
-  border-color: rgba(224, 138, 91, 0.45);
+  border-color: var(--accent-line);
   background: var(--accent-subtle);
 }
 
@@ -4805,37 +4558,8 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 @media (max-width: 1000px) {
-  .cost-why-inner {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .cost-why-visual {
-    order: -1;
-  }
-
   .screenshot-gallery {
     height: 280px;
-  }
-
-  .cost-why-table,
-  .cost-why-table tbody,
-  .cost-why-table tr,
-  .cost-why-table td {
-    display: block;
-    width: 100%;
-  }
-
-  .cost-why-table tr {
-    margin-bottom: 14px;
-  }
-
-  .cost-why-table td {
-    padding-right: 0;
-  }
-
-  .cost-why-table-point {
-    margin-bottom: 4px;
   }
 
   .checklist-item {
@@ -5093,7 +4817,7 @@ html[data-theme="dark"] .booking-container iframe {
 .marketplace-filter-pill.is-active {
   background: var(--accent);
   border-color: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 .marketplace-category-grid [hidden] {
@@ -5144,7 +4868,7 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-type-tab.is-active {
   background: var(--tab-color, var(--accent));
   border-color: var(--tab-color, var(--accent));
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 /* Controls row (category pills + price toggle) */
@@ -5324,13 +5048,8 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .mp-price-badge.is-free {
-  background: rgba(76, 175, 80, 0.12);
-  color: #2e7d32;
-}
-
-[data-theme="dark"] .mp-price-badge.is-free {
-  background: rgba(76, 175, 80, 0.2);
-  color: #81c784;
+  background: var(--c-green-subtle);
+  color: var(--c-green-ink);
 }
 
 .mp-price-badge.is-premium {
@@ -5373,8 +5092,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* Exclusive (private) add-ons, account-only. Gold, matching the Archie app's treatment. */
-.mp-type-tab[data-type="exclusive"] { --tab-color: #b58a2e; }
-[data-theme="dark"] .mp-type-tab[data-type="exclusive"] { --tab-color: #d8b45a; }
+.mp-type-tab[data-type="exclusive"] { --tab-color: var(--c-gold); }
 
 .mp-exclusive-badge {
   display: inline-flex;
@@ -5386,13 +5104,8 @@ html[data-theme="dark"] .booking-container iframe {
   text-transform: uppercase;
   padding: 3px 10px;
   border-radius: 999px;
-  background: rgba(181, 138, 46, 0.14);
-  color: #8a6a1e;
-}
-
-[data-theme="dark"] .mp-exclusive-badge {
-  background: rgba(216, 180, 90, 0.18);
-  color: #e0c063;
+  background: var(--c-gold-subtle);
+  color: var(--c-gold-ink);
 }
 
 /* Expand toggle reuses .mp-card-link's look but is a <button>. */
@@ -5467,7 +5180,7 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-card-chat .bubble {
   max-width: 85%;
   padding: 10px 14px;
-  border-radius: 14px;
+  border-radius: var(--radius);
   font-size: 0.8125rem;
   line-height: 1.5;
 }
@@ -5475,7 +5188,7 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-card-chat .bubble.user {
   align-self: flex-end;
   background: var(--accent);
-  color: #fff;
+  color: var(--text-on-accent);
   border-bottom-right-radius: 4px;
 }
 
@@ -5504,10 +5217,8 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-pack-card--blue   { --pack-base: var(--c-blue);  --pack-subtle: var(--c-blue-subtle); }
 .mp-pack-card--teal   { --pack-base: var(--c-teal);  --pack-subtle: var(--c-teal-subtle); }
 .mp-pack-card--plum   { --pack-base: var(--c-plum);  --pack-subtle: var(--c-plum-subtle); }
-.mp-pack-card--gold   { --pack-base: #b58a2e; --pack-subtle: rgba(181, 138, 46, 0.13); }
-.mp-pack-card--green  { --pack-base: #3f9a5c; --pack-subtle: rgba(76, 175, 80, 0.13); }
-[data-theme="dark"] .mp-pack-card--gold  { --pack-base: #d8b45a; }
-[data-theme="dark"] .mp-pack-card--green { --pack-base: #6fbf86; }
+.mp-pack-card--gold   { --pack-base: var(--c-gold);  --pack-subtle: var(--c-gold-subtle); }
+.mp-pack-card--green  { --pack-base: var(--c-green); --pack-subtle: var(--c-green-subtle); }
 
 .mp-pack-card {
   position: relative;
@@ -5534,7 +5245,7 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 3px 10px;
   border-radius: 999px;
   background: var(--pack-base);
-  color: #fff;
+  color: var(--text-on-accent);
 }
 
 .mp-pack-card h3 {
@@ -5958,7 +5669,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 
 /* ==========================================================================
-   Demo player: the Archie product recording
+   35b. Demo player: the Archie product recording
    Plays itself, silently, on a loop. Lazy-loaded and pause-able; see js/demo-player.js.
    ========================================================================== */
 .demo-player {
@@ -6211,7 +5922,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ==========================================================================
-   Trust Page
+   36b. Trust Page
    The privacy/verification page. Its whole job is to look like a document you
    can check rather than a pitch you should believe, so: real tables, plain
    type, and a limits section styled with the same weight as the good news.
@@ -6235,13 +5946,14 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* An aside is the "you didn't ask, but you'd have found out" voice, set apart
    so it reads as volunteered rather than buried. */
+.trust-prose p.trust-aside,
 .trust-aside {
   border-left: 3px solid var(--accent);
   background: var(--surface-soft);
   padding: 18px 22px;
   border-radius: 0 var(--radius) var(--radius) 0;
-  font-size: 0.98rem !important;
-  margin-top: 32px !important;
+  font-size: 0.9375rem;
+  margin-top: 32px;
 }
 
 /* ── The three answers ── */
@@ -6269,7 +5981,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--accent-subtle);
   color: var(--accent-hover);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
 }
 .trust-answer h3 {
   font-size: 1.1rem;
@@ -6279,7 +5991,7 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-answer p {
   color: var(--text-secondary);
   line-height: 1.7;
-  font-size: 0.98rem;
+  font-size: 0.9375rem;
 }
 
 /* ── The egress table ──
@@ -6302,7 +6014,7 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: left;
   vertical-align: top;
   border-bottom: 1px solid var(--border);
-  font-size: 0.94rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 .trust-table th {
@@ -6327,18 +6039,18 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-flag {
   display: inline-block;
   padding: 3px 10px;
-  border-radius: 100px;
+  border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
 }
 .trust-flag--yes  { background: var(--accent); color: var(--text-on-accent); }
 .trust-flag--no   { background: var(--surface-soft-strong); color: var(--text-secondary); }
-.trust-flag--none { background: var(--c-teal); color: #fff; }
+.trust-flag--none { background: var(--c-teal); color: var(--text-on-accent); }
 
 .trust-table-note {
   margin-top: 24px;
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
   color: var(--text-muted);
   line-height: 1.7;
 }
@@ -6365,12 +6077,13 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-limit p {
   color: var(--text-secondary);
   line-height: 1.72;
-  font-size: 0.98rem;
+  font-size: 0.9375rem;
   margin-bottom: 12px;
 }
 .trust-limit p:last-child { margin-bottom: 0; }
 .trust-limit p strong { color: var(--text-primary); }
 
+.trust-limit .trust-limit-status,
 .trust-limit-status {
   display: flex;
   align-items: center;
@@ -6378,13 +6091,13 @@ html[data-theme="dark"] .booking-container iframe {
   flex-wrap: wrap;
   padding-top: 14px;
   border-top: 1px solid var(--border);
-  font-size: 0.9rem !important;
-  color: var(--text-muted) !important;
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 .trust-status {
   display: inline-block;
   padding: 3px 10px;
-  border-radius: 100px;
+  border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -6423,7 +6136,7 @@ html[data-theme="dark"] .booking-container iframe {
 .trust-step p {
   color: var(--text-secondary);
   line-height: 1.7;
-  font-size: 0.98rem;
+  font-size: 0.9375rem;
 }
 .trust-step p strong { color: var(--text-primary); }
 
@@ -6449,7 +6162,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-weight: 600;
 }
 .trust-hosts span { color: var(--text-muted); }
-.trust-hosts-plus { color: var(--text-primary) !important; font-weight: 600; }
+.trust-hosts span.trust-hosts-plus { color: var(--text-primary); font-weight: 600; }
 
 /* ── Responsive ──
    The table stacks; it never scrolls sideways. */
@@ -6757,3 +6470,78 @@ html[data-theme="dark"] .booking-container iframe {
     transition: opacity 0.2s ease;
   }
 }
+
+/* ==============================
+   40. Account family
+   Shared by account/, billing/, and activity/ - these pages carried three
+   byte-identical copies of this block in their own <style> tags, which had
+   already started to drift. Page-unique rules (the delete-account flow) stay
+   on their page.
+   ============================== */
+/* ── Account page (page-scoped), reuses global tokens so it themes light/dark ── */
+.acct-wrap { max-width: 460px; margin: 0 auto; }
+.acct-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
+}
+.acct-lead { text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin: 0; }
+.acct-fields { display: flex; flex-direction: column; gap: 10px; }
+.acct-fields input {
+  width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--field-border); background: var(--bg-secondary);
+  color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.acct-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+
+/* Dashboard sections */
+.acct-section {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 20px; background: var(--surface-soft);
+}
+.acct-section + .acct-section { margin-top: 14px; }
+.acct-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.acct-section-title { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); }
+.acct-section-body { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-top: 6px; }
+.acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+.acct-row .btn { flex: 0 0 auto; }
+.acct-email { font-size: 0.82rem; color: var(--text-secondary); word-break: break-all; }
+
+.pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+.pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
+.pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
+
+.code {
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.85rem; letter-spacing: 0.06em;
+  background: var(--surface-soft-strong); border-radius: var(--radius-sm);
+  padding: 10px 12px; word-break: break-all; user-select: all; color: var(--text-primary);
+}
+/* QR stays dark-on-white in both themes so authenticator apps scan it reliably. */
+.qr-box { width: max-content; margin: 10px auto 0; padding: 14px; background: #ffffff; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.qr-box svg { display: block; width: auto; height: auto; max-width: 100%; }
+.totp-manual { margin-top: 12px; }
+.totp-manual > summary { font-size: 0.8rem; color: var(--text-secondary); cursor: pointer; list-style: revert; }
+.totp-manual > summary:hover { color: var(--accent); }
+
+
+.acct-hidden { display: none !important; }
+.acct-spinner {
+  width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
+  border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
+  animation: acctspin 0.7s linear infinite;
+}
+@keyframes acctspin { to { transform: rotate(360deg); } }
+.acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
+.acct-foot-note a { color: var(--text-secondary); }
+
+.act-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
+.act-row:first-child { border-top: none; }
+.act-main { min-width: 0; }
+.act-title { font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
+.act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.act-note { font-size: 0.78rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.45; }
+.act-amount { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+.act-amount.owed { color: var(--accent); }
+.act-empty { font-size: 0.85rem; color: var(--text-muted); padding: 6px 0; }
+.bal-big { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
+.danger-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }

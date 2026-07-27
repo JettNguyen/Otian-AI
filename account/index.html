@@ -215,6 +215,37 @@
               </div>
             </div>
 
+            <!--
+              Change email. Firebase does the hard half: verifyBeforeUpdateEmail sends a link to the
+              NEW address and changes nothing until it is clicked, then mails the OLD address a
+              revoke link of its own. So a stolen session cannot quietly move an account: the thief
+              needs the new inbox, and the real owner is told either way. Both of those links land on
+              /auth-action/, which already handles them (verifyAndChangeEmail, recoverEmail).
+
+              Google accounts are deliberately excluded rather than half-supported: their address
+              belongs to Google, and changing it here would leave the two out of step until the next
+              sign-in silently undid it.
+            -->
+            <div class="acct-section" id="sec-email">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Email address</div>
+                <button class="btn btn-secondary btn-mini" id="btn-email-start">Change</button>
+              </div>
+              <div class="acct-section-body" id="email-body">Where we send your sign-in codes and your receipts.</div>
+
+              <div class="acct-hidden" id="email-form" style="margin-top:14px;">
+                <div class="acct-section-body">Your new address has to confirm before anything changes, and we let your current address know either way.</div>
+                <div class="acct-fields" style="margin-top:8px;">
+                  <input type="email" id="email-new" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="new@example.com" />
+                  <input type="password" id="email-pass" autocomplete="current-password" placeholder="Your password" />
+                </div>
+                <div class="acct-row" style="margin-top:10px;">
+                  <button class="btn btn-primary btn-mini" id="btn-email-confirm">Send the confirmation</button>
+                  <button class="btn btn-secondary btn-mini" id="btn-email-cancel">Cancel</button>
+                </div>
+              </div>
+            </div>
+
             <!-- Emailed code at sign-in: always on for every account, no setup -->
             <div class="acct-section" id="sec-emfa">
               <div class="acct-section-head">
@@ -381,6 +412,7 @@
     import {
       getAuth, onAuthStateChanged, signOut,
       multiFactor, TotpMultiFactorGenerator,
+      EmailAuthProvider, reauthenticateWithCredential, verifyBeforeUpdateEmail,
     } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -486,6 +518,7 @@
       $("acct-who").textContent = user.email || user.uid;
       $("emfa-email-who").textContent = user.email || "your inbox";
 
+      renderEmailSection(user);
       refreshTotp(user);   // authenticator status (custom) + any legacy Firebase enrollment
       renderArchie(user);
     }
@@ -561,6 +594,80 @@
       window.location.href = "/login/";
       await new Promise(() => {});
     }));
+
+    // ── Change email ──
+    // Only for accounts that actually own a password here. A Google account's address is Google's;
+    // offering to change it would either fail or succeed and then be undone at the next sign-in,
+    // and a control that quietly reverts is worse than one that isn't there.
+    function renderEmailSection(user) {
+      const hasPassword = (user.providerData || []).some((p) => p.providerId === "password");
+      show("btn-email-start", hasPassword);
+      $("email-body").textContent = hasPassword
+        ? "Where we send your sign-in codes and your receipts."
+        : "You sign in with Google, so this address comes from your Google account. Change it there and it follows here.";
+    }
+
+    $("btn-email-start").addEventListener("click", () => {
+      show("email-form", true);
+      $("email-new").value = "";
+      $("email-pass").value = "";
+      $("email-new").focus();
+      setStatus("");
+    });
+    $("btn-email-cancel").addEventListener("click", () => { show("email-form", false); setStatus(""); });
+
+    $("btn-email-confirm").addEventListener("click", () => busy($("btn-email-confirm"), async () => {
+      const user = auth.currentUser; if (!user) return;
+      const next = ($("email-new").value || "").trim();
+      const pass = $("email-pass").value || "";
+      if (!next || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(next)) {
+        setStatus("That doesn't look like an email address.", "error"); return;
+      }
+      if (next.toLowerCase() === (user.email || "").toLowerCase()) {
+        setStatus("That's already your address.", "error"); return;
+      }
+      if (!pass) { setStatus("Enter your password to confirm it's you.", "error"); return; }
+
+      setStatus("Checking your password…");
+      try {
+        // Firebase requires a recent sign-in before it will touch an account's identity. Asking for
+        // the password here is that proof, and it also means a session left open on a shared
+        // machine cannot be used to walk off with the account.
+        await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, pass));
+      } catch (e) {
+        const code = (e && e.code) || "";
+        setStatus(
+          /wrong-password|invalid-credential/.test(code)
+            ? "That password isn't right."
+            : /too-many-requests/.test(code)
+              ? "Too many tries. Wait a few minutes and try again."
+              : prettyMfaError(e),
+          "error",
+        );
+        return;
+      }
+
+      setStatus("Sending the confirmation…");
+      try {
+        await verifyBeforeUpdateEmail(user, next);
+      } catch (e) {
+        const code = (e && e.code) || "";
+        setStatus(
+          /email-already-in-use/.test(code)
+            ? "Another account already uses that address."
+            : /invalid-email/.test(code)
+              ? "That doesn't look like an email address."
+              : prettyMfaError(e),
+          "error",
+        );
+        return;
+      }
+      show("email-form", false);
+      // Says which inbox, because the confirmation goes to the NEW address and looking in the old
+      // one and finding nothing is exactly how this flow gets abandoned half-done.
+      setStatus("Check " + next + " and click the link. Nothing changes until you do.", "ok");
+    }));
+    $("email-pass").addEventListener("keydown", (e) => { if (e.key === "Enter") $("btn-email-confirm").click(); });
 
     // ── Delete account (right-to-erasure) ──
     $("btn-delete").addEventListener("click", () => {

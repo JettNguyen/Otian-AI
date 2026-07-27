@@ -213,8 +213,8 @@
             <div class="acct-section">
               <div class="acct-section-title">New invoice</div>
               <div class="acct-fields" style="margin-top:12px;">
-                <label class="acct-field-label" for="adm-email">Client email</label>
-                <input type="email" id="adm-email" placeholder="client@example.com" autocomplete="off" />
+                <label class="acct-field-label" for="adm-email">Client</label>
+                <input type="text" id="adm-email" placeholder="Search by name or email&hellip;" autocomplete="off" />
                 <label class="acct-field-label" for="adm-amount">Amount</label>
                 <div class="adm-amount-wrap">
                   <input type="number" id="adm-amount" value="100" min="1" step="0.01" inputmode="decimal" />
@@ -315,6 +315,7 @@
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { bindStatusToast } from "../../js/status-toast.js";
+    import { attachPersonSearch } from "../../js/admin-search.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     const firebaseConfig = {
@@ -444,9 +445,20 @@
       return d;
     }
 
+    // Same type-ahead as /admin/tiers/. Invoicing needs an address you have typed correctly, and
+    // a client's name is far easier to remember than which of their addresses they signed up with.
+    attachPersonSearch($("adm-email"), {
+      api,
+      onPick(m) {
+        if (m.pending) { show("adm-client", false); setStatus("No account for " + m.email + " yet. You can still invoice them.", "ok"); return; }
+        setStatus("Looking up…");
+        lookup(m.email).then(() => setStatus("")).catch((e) => { show("adm-client", false); setStatus(e.message, "error"); });
+      },
+    });
+
     $("btn-lookup").addEventListener("click", () => busy($("btn-lookup"), async () => {
       const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the client's email first.", "error"); return; }
+      if (!email) { setStatus("Search for the client first.", "error"); return; }
       setStatus("Looking up…");
       try { await lookup(email); setStatus(""); }
       catch (e) { show("adm-client", false); setStatus(e.message, "error"); }

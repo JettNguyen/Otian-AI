@@ -198,9 +198,10 @@
             <div class="acct-section">
               <div class="acct-section-title">Account</div>
               <div class="acct-fields" style="margin-top:12px;">
-                <label class="acct-field-label" for="adm-email">Account email</label>
-                <input type="email" id="adm-email" placeholder="person@example.com" autocomplete="off" />
+                <label class="acct-field-label" for="adm-email">Find someone</label>
+                <input type="text" id="adm-email" placeholder="Search by name or email&hellip;" autocomplete="off" />
               </div>
+              <p class="act-sub" style="margin-top:6px;">Start typing a name or an email; matches appear as you go. You do not need the whole address.</p>
               <div class="acct-row">
                 <button class="btn btn-secondary btn-mini" id="btn-lookup">Look up</button>
               </div>
@@ -304,6 +305,7 @@
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { bindStatusToast } from "../../js/status-toast.js";
+    import { attachPersonSearch } from "../../js/admin-search.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     const firebaseConfig = {
@@ -402,7 +404,7 @@
     }
 
     function renderAccount(d) {
-      $("adm-account-title").textContent = d.email;
+      $("adm-account-title").textContent = d.name ? d.name + " (" + d.email + ")" : d.email;
       const pill = $("adm-account-pill");
       pill.textContent = "Active"; pill.className = "pill pill-on";
       const held = d.tiers || [];
@@ -441,9 +443,25 @@
       lastLookupEmail = email.toLowerCase();
     }
 
+    // Type-ahead. Picking a row is a complete lookup on its own: the search already returns the
+    // tier set, so there is nothing left to fetch and the Apply guard below is satisfied (we have
+    // shown what they hold before offering to replace it). Attached before the Enter binding below
+    // so choosing a highlighted row does not also fire a lookup on the half-typed fragment.
+    attachPersonSearch($("adm-email"), {
+      api,
+      onPick(m) {
+        selected = new Set(m.tiers || []);
+        if (m.pending) renderNoAccount(m.email, { pending_tiers: m.tiers });
+        else renderAccount(m);
+        syncToggles();
+        lastLookupEmail = (m.email || "").toLowerCase();
+        setStatus("");
+      },
+    });
+
     $("btn-lookup").addEventListener("click", () => busy($("btn-lookup"), async () => {
       const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the account email first.", "error"); return; }
+      if (!email) { setStatus("Search for the account first.", "error"); return; }
       setStatus("Looking up…");
       try { await lookup(email); setStatus(""); }
       catch (e) { show("adm-account", false); setStatus(e.message, "error"); }
@@ -452,7 +470,7 @@
 
     $("btn-apply").addEventListener("click", () => busy($("btn-apply"), async () => {
       const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the account email first.", "error"); return; }
+      if (!email) { setStatus("Search for the account first.", "error"); return; }
       // The grant REPLACES the account's whole tier set, so never apply to an account whose
       // current set hasn't been shown: first Apply on a fresh email loads it instead.
       if (email.toLowerCase() !== lastLookupEmail) {

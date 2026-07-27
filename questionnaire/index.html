@@ -747,6 +747,13 @@
     </div>
   </footer>
 
+  <!-- Failure messages land here as the same branded toast the account pages use;
+       questionnaire.js falls back to alert() only if this module never loads. -->
+  <div id="q-status" role="status" aria-live="polite"></div>
+  <script type="module">
+    import { bindStatusToast } from "../js/status-toast.js";
+    window.otianQuestionnaireStatus = bindStatusToast(document.getElementById("q-status"));
+  </script>
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
   <script src="../js/questionnaire.js"></script>

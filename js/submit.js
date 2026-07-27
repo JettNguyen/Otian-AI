@@ -197,6 +197,7 @@ form.addEventListener("submit", async (e) => {
 
   const btn = document.getElementById("btnSubmit");
   btn.disabled = true;
+  btn.classList.add("is-busy");
   btn.textContent = "Uploading…";
   try {
     // Upload the proof screenshot first: a submission with no proof is worthless, so we don't want
@@ -242,6 +243,7 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     fail("Submission failed: " + (err.message || err));
     btn.disabled = false;
+    btn.classList.remove("is-busy");
     btn.textContent = "Submit for review";
   }
 

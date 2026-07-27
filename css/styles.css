@@ -17,6 +17,10 @@
   /* Darkened accent for TEXT sitting on --accent-subtle. The bright accent above is tuned for
      fills and borders; as text on its own tint it lands at 2.15:1, which fails WCAG AA. */
   --accent-ink: #8F5233;
+  /* Danger, distinct from the brand accent so an invalid field never dresses like a focused one.
+     Same palette the status toast already uses. */
+  --danger: #B3261E;
+  --danger-ring: rgba(224, 49, 49, 0.12);
   --text-primary: #4A423A;
   --text-secondary: #8C8177;
   --text-muted: #A09489;
@@ -71,6 +75,8 @@
   --accent-subtle: #4A392C;
   /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
   --accent-ink: #EDA277;
+  --danger: #FF9F97;
+  --danger-ring: rgba(255, 159, 151, 0.16);
   --text-primary: #F5EFE6;
   --text-secondary: #B7AA9B;
   --text-muted: #9D8F82;
@@ -960,10 +966,10 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-on-accent);
 }
 
+/* Color responds everywhere; the lift lives in section 27, gated to real pointers,
+   so a tapped button never sticks mid-hover on touch. */
 .btn-primary:hover {
   background: var(--accent-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(224, 138, 91, 0.35);
 }
 
 .btn-secondary {
@@ -975,7 +981,35 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .btn-secondary:hover {
   border-color: var(--field-border-strong);
   background: var(--surface-hover);
-  transform: translateY(-1px);
+}
+
+/* The full state set every button owes its user: keyboard focus gets the same ring the
+   theme toggle and drawer already use; press cancels the hover lift; disabled means
+   visually off and inert (mirrors .btn-disabled, which HTML "disabled" never picked up). */
+.btn:focus-visible,
+.nav-links a:focus-visible,
+.nav-more-toggle:focus-visible,
+.nav-more-menu a:focus-visible,
+.accordion-trigger:focus-visible,
+.footer-nav-links a:focus-visible,
+.footer-legal-links a:focus-visible,
+.faq-jump a:focus-visible,
+.marketplace-filter-pill:focus-visible,
+.mp-type-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-lg {
@@ -986,6 +1020,11 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .btn-sm {
   padding: 9px 20px;
   font-size: 0.875rem;
+}
+
+.btn-mini {
+  padding: 8px 14px;
+  font-size: 0.8rem;
 }
 
 /* Busy state: swap the label for a spinner, lock size, and block further clicks.
@@ -1915,17 +1954,17 @@ fieldset legend + * {
 }
 
 .form-container .form-group.error-flash {
-  border-color: rgba(224, 138, 91, 0.75);
-  box-shadow: 0 0 0 3px rgba(224, 138, 91, 0.16);
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-ring);
   animation: errorFlashPulse 1.2s ease-out;
 }
 
 @keyframes errorFlashPulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(224, 138, 91, 0.38);
+    box-shadow: 0 0 0 0 rgba(224, 49, 49, 0.3);
   }
   100% {
-    box-shadow: 0 0 0 12px rgba(224, 138, 91, 0);
+    box-shadow: 0 0 0 12px rgba(224, 49, 49, 0);
   }
 }
 
@@ -1973,9 +2012,12 @@ fieldset legend + * {
   color: var(--text-muted);
 }
 
+/* Invalid is danger, not accent - a field that failed validation must not dress like a
+   focused one. */
 .form-input.field-error,
 .form-textarea.field-error {
-  border-color: var(--accent);
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px var(--danger-ring);
 }
 
 .form-textarea {
@@ -1987,7 +2029,7 @@ fieldset legend + * {
 .form-error-msg {
   display: none;
   font-size: 0.8rem;
-  color: var(--accent);
+  color: var(--danger);
   margin-top: 6px;
   font-weight: 500;
 }
@@ -2446,7 +2488,6 @@ fieldset .checkbox-group {
   color: var(--text-primary);
   border-color: rgba(224, 138, 91, 0.45);
   background: var(--accent-subtle);
-  transform: translateY(-1px);
 }
 
 .team-grid {
@@ -3611,6 +3652,10 @@ html[data-theme="dark"] .availability-widget iframe {
   text-decoration: underline;
 }
 
+.article-body a:hover {
+  color: var(--accent-hover);
+}
+
 .article-pullquote {
   margin: 36px 0;
   padding-left: 24px;
@@ -4072,6 +4117,24 @@ html[data-theme="dark"] .availability-widget iframe {
     transform: none;
     box-shadow: none;
   }
+
+  .mp-pack-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(224, 138, 91, 0.35);
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .resource-link:hover {
+    transform: translateY(-1px);
+  }
 }
 
 /* Tap feedback for touch devices */
@@ -4093,6 +4156,10 @@ html[data-theme="dark"] .availability-widget iframe {
   .checkbox-option:active input[type="checkbox"],
   .radio-option:active input[type="radio"] {
     border-color: var(--accent);
+  }
+
+  .btn:active {
+    transform: scale(0.98);
   }
 }
 
@@ -4996,6 +5063,7 @@ html[data-theme="dark"] .booking-container iframe {
 .marketplace-search-input:focus {
   outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(224, 138, 91, 0.14);
 }
 
 .marketplace-filter-bar {
@@ -5453,10 +5521,7 @@ html[data-theme="dark"] .booking-container iframe {
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.mp-pack-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
+/* Hover lift for this card lives in section 27, gated to real pointers. */
 
 .mp-pack-ribbon {
   position: absolute;

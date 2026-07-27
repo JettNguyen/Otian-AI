@@ -360,6 +360,7 @@
       }
 
       submitBtn.disabled = true;
+      submitBtn.classList.add('is-busy');
       submitBtn.textContent = 'Sending…';
 
       fetch('https://formspree.io/f/' + FORMSPREE_ID, {
@@ -378,8 +379,13 @@
       })
       .catch(function () {
         submitBtn.disabled = false;
+        submitBtn.classList.remove('is-busy');
         submitBtn.textContent = idleLabel;
-        alert('Something went wrong. Please try again or email us at questions@otianai.com');
+        var msg = 'Something went wrong. Please try again or email us at questions@otianai.com';
+        // The page binds the shared status toast (see questionnaire/index.html); the alert is
+        // only the fallback for the module never having loaded.
+        if (window.otianQuestionnaireStatus) window.otianQuestionnaireStatus(msg, 'error');
+        else alert(msg);
       });
     });
   });

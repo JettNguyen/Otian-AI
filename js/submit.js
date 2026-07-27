@@ -157,6 +157,18 @@ document.getElementById("btnSignOut").addEventListener("click", (e) => {
   signOut(auth);
 });
 
+// Fill the template box from its own placeholder, so the scaffold lives in exactly one place
+// (the HTML) and this can't drift from it.
+const btnUseTemplate = document.getElementById("btnUseTemplate");
+if (btnUseTemplate) {
+  btnUseTemplate.addEventListener("click", () => {
+    const box = document.getElementById("skillTemplate");
+    if (!box || box.value.trim()) return; // never clobber work in progress
+    box.value = box.placeholder;
+    box.focus();
+  });
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   formError.style.display = "none";
@@ -210,6 +222,15 @@ form.addEventListener("submit", async (e) => {
       triggers: (document.getElementById("skillTriggers")?.value || "")
         .split(",").map((t) => t.trim()).filter(Boolean),
       suggested_price_usd: Number(document.getElementById("skillPrice").value) || 0,
+      // Declarations the app needs but the old form never asked for. A skill whose prompt hands
+      // work to a worker installs looking healthy and does nothing on first use unless that
+      // dependency is declared — so review has to know about it, and the only person who does is
+      // the author. Free text on purpose: the reviewer turns it into a `required_addons` entry,
+      // and asking a submitter to hand-write JSON for it would lose more submissions than it saves.
+      needs_addon: (document.getElementById("skillNeedsAddon")?.value || "").trim(),
+      // The line shown after setup, telling someone what to type. Kept separate from setup_steps
+      // so it can't end up numbered among chores the user doesn't have.
+      usage_hint: (document.getElementById("skillUsageHint")?.value || "").trim(),
       template_md,
       screenshot_url,
       license_granted: true,

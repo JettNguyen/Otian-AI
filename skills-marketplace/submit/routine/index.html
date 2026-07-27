@@ -173,6 +173,18 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label" for="skillNeedsAddon">Does it need another add-on?</label>
+            <input class="form-input" type="text" id="skillNeedsAddon" placeholder="e.g. Sports Follow skill &mdash; it's what this routine runs" />
+            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">A routine fires a skill, so name that skill. If it also reads data another skill produces, name that too &mdash; Archie checks both are installed before it lets the routine run.</p>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="skillUsageHint">What arrives, and when?</label>
+            <input class="form-input" type="text" id="skillUsageHint" maxlength="280" placeholder="e.g. One line per team, in your chat, every morning at 8:15" />
+            <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">One sentence describing what lands in the user&rsquo;s chat. Skip it if your description already says.</p>
+          </div>
+
+          <div class="form-group">
             <label class="form-label" for="proofShot">Screenshot proof it works<span class="required-star" aria-hidden="true">*</span></label>
             <input class="form-input" type="file" id="proofShot" accept="image/png,image/jpeg,image/webp" required />
             <p style="font-size:0.82rem; color:var(--color-text-muted, #888); margin-top:0.4rem;">

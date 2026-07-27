@@ -14,6 +14,9 @@
   --accent: #E08A5B;
   --accent-hover: #CC7647;
   --accent-subtle: #FBE4D3;
+  /* Darkened accent for TEXT sitting on --accent-subtle. The bright accent above is tuned for
+     fills and borders; as text on its own tint it lands at 2.15:1, which fails WCAG AA. */
+  --accent-ink: #8F5233;
   --text-primary: #4A423A;
   --text-secondary: #8C8177;
   --text-muted: #A09489;
@@ -66,6 +69,8 @@
   --accent: #EDA277;
   --accent-hover: #F2B58F;
   --accent-subtle: #4A392C;
+  /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
+  --accent-ink: #EDA277;
   --text-primary: #F5EFE6;
   --text-secondary: #B7AA9B;
   --text-muted: #9D8F82;
@@ -1817,6 +1822,62 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   margin: 0 0 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
+}
+
+/* Jump links under the FAQ heading. Six categories and two dozen questions is more than a phone
+   screen can survey, so the page opens by showing what is on it. */
+.faq-jump {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.faq-jump a {
+  padding: 7px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.faq-jump a:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: var(--surface-soft);
+}
+
+/* The nav is sticky, so a jump would otherwise land with the heading tucked underneath it. */
+.faq-group {
+  scroll-margin-top: calc(var(--nav-height) + 24px);
+}
+
+/* Marks the questions that only apply to guided setup, so a self-serve reader can skip them
+   instead of working out which half of the page is addressed to them. */
+.faq-tag {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+
+/* Holds the tag and the question together as one flex item, so space-between separates the
+   question from the +/- icon rather than the tag from its own question. */
+.accordion-title {
+  flex: 1;
 }
 
 /* ========================================

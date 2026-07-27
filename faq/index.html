@@ -123,6 +123,14 @@
         <span class="section-label fade-up">Help</span>
         <h1 class="fade-up delay-1">Frequently Asked Questions</h1>
         <p class="fade-up delay-2">Answers to the things people wonder about most.</p>
+        <nav class="faq-jump fade-up delay-3" aria-label="Jump to a section">
+          <a href="#faq-basics">The Basics</a>
+          <a href="#faq-add-ons">Add-ons</a>
+          <a href="#faq-cost">Cost &amp; Billing</a>
+          <a href="#faq-safety">Safety &amp; Privacy</a>
+          <a href="#faq-timeline">Timeline &amp; What to Expect</a>
+          <a href="#faq-practical">Practical Details</a>
+        </nav>
       </div>
     </section>
 
@@ -133,7 +141,7 @@
       <div class="container">
         <h2 class="sr-only" id="faq-heading">All frequently asked questions</h2>
 
-        <div class="faq-group fade-up">
+        <div class="faq-group fade-up" id="faq-basics">
           <h3 class="faq-group-title">The Basics</h3>
           <div class="accordion" role="list">
             <div class="accordion-item" role="listitem">
@@ -164,14 +172,14 @@
             </div>
             <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
-                Will I actually understand my agent, or am I just handing it off to someone else?
+                <span class="accordion-title"><span class="faq-tag">Guided Setup</span>Will I actually understand my agent, or am I just handing it off to someone else?</span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  This is something we lead with, not something that happens by accident. Setup isn&rsquo;t just us installing software and handing you a finished product; it&rsquo;s a real back-and-forth where we walk you through what the technology can and can&rsquo;t do, and why we&rsquo;re making each choice. You don&rsquo;t need to become technical, but you should walk away understanding your own agent, not just using it. The best results come when a client understands the tool well enough to keep imagining new things for it to do, so before we build anything, we sit down together and shape a vision for what your agent should become. The scope of work comes out of that conversation, not the other way around.
+                  You&rsquo;ll understand it. That&rsquo;s the point of guided setup: a real back-and-forth, not an install-and-goodbye. We walk through what the technology can and can&rsquo;t do and why we make each choice, in plain language. You don&rsquo;t need to become technical; you just walk away knowing your own agent well enough to keep imagining new things for it to do.
                 </div>
               </div>
             </div>
@@ -188,9 +196,22 @@
                 </div>
               </div>
             </div>
+            <div class="accordion-item" role="listitem" id="faq-why-change-setup">
+              <button class="accordion-trigger" aria-expanded="false">
+                I already have a task manager, calendar, and other apps. Why would I change my setup?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  You wouldn&rsquo;t. Keep the apps you like. An agent adds a layer of intelligence on top: an assistant that&rsquo;s constantly looking out for you, so you don&rsquo;t have to monitor everything yourself. Right now your apps only work when you check them, which is why the average worker bounces between 9 apps a day and toggles between them nearly 1,200 times, losing almost 4 hours a week just reorienting. Here&rsquo;s what that looks like in practice: your car registration renewal sits in an email you skimmed three weeks ago. Your old setup waits for you to remember it. Your agent doesn&rsquo;t. It catches the deadline, adds it to your list, and messages you before it lapses. Nothing you love changes. Your setup just gets a mind of its own.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-group fade-up">
+        <div class="faq-group fade-up" id="faq-add-ons">
           <h3 class="faq-group-title">Add-ons</h3>
           <div class="accordion" role="list">
             <div class="accordion-item" role="listitem" id="faq-addons-together">
@@ -219,123 +240,82 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="faq-group fade-up">
-          <h3 class="faq-group-title">Cost &amp; Billing</h3>
-          <div class="accordion" role="list">
-            <div class="accordion-item" role="listitem">
+            <div class="accordion-item" role="listitem" id="faq-addon-selection">
               <button class="accordion-trigger" aria-expanded="false">
-                What does it cost?
+                How does my agent know which add-on to use?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Guided sessions are $100 each, and a session runs an hour. The rate never goes up because a setup is complicated; a bigger setup just takes more than one session, and we tell you which on the free discovery call. That first call is a free 30-minute discovery call: we&rsquo;ll talk through your goals, what your agent should look like, and a rough timeline. No cost, no obligation. The Archie app itself is a one-time $149 license when it ships, a separate cost from guided sessions, not a subscription.
+                  Each add-on carries a short description of what it&rsquo;s for. When you hand your agent a task, it scans those descriptions, picks the one that fits, and only then loads the full instructions. That&rsquo;s why focused add-ons matter: clear, narrow descriptions make the right pick obvious.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="faq-group fade-up" id="faq-cost">
+          <h3 class="faq-group-title">Cost &amp; Billing</h3>
+          <div class="accordion" role="list">
+            <div class="accordion-item" role="listitem" id="faq-cost-to-start">
+              <button class="accordion-trigger" aria-expanded="false">
+                <span class="accordion-title"><span class="faq-tag">Guided Setup</span>What does it cost to get started?</span>
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Getting started has three simple pieces, with no subscriptions anywhere:<br /><br />
+                  <strong>Discovery call: free.</strong> 30 minutes covering your goals, what your agent should look like, and a rough timeline. No obligation.<br /><br />
+                  <strong>Guided sessions: $100 an hour.</strong> The rate never rises with complexity; a bigger setup just takes more sessions, and we tell you how many on the free call.<br /><br />
+                  <strong>Archie app: $149 once (at launch).</strong> A one-time license, yours forever. Sold separately from sessions.
                 </div>
               </div>
             </div>
             <div class="accordion-item" role="listitem" id="faq-clients-archie">
               <button class="accordion-trigger" aria-expanded="false">
-                Do clients pay for Archie?
+                <span class="accordion-title"><span class="faq-tag">Guided Setup</span>If I do guided setup, is the Archie app included?</span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Yes. Archie is a one-time $149 license (at launch), and guided-setup clients buy it just like everyone else. It&rsquo;s a separate cost from your sessions, which cover our time building your agent with you. Either way there&rsquo;s no subscription: once you buy Archie, you own it.
+                  The app is a separate one-time $149 license (at launch); guided sessions cover our time building your agent with you. Either way there&rsquo;s no subscription: once you buy Archie, you own it.
                 </div>
               </div>
             </div>
             <div class="accordion-item" role="listitem" id="faq-api-costs">
               <button class="accordion-trigger" aria-expanded="false">
-                Is there a separate cost for the AI itself, and how does its billing work?
+                Is there a separate cost for the AI itself?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Yes, and it&rsquo;s small and separate from our service fee, though how it works depends on which path you&rsquo;re on. If we&rsquo;re setting up your agent together through our guided service, you&rsquo;ll want a standard AI subscription (like Claude Pro or ChatGPT Plus, usually around $20 per month) to work with during the build. If you&rsquo;re using the Archie app, it connects to the AI through your own API key instead: a pay-as-you-go account where you only pay for what your agent actually does. Each message costs anywhere from a fraction of a cent to a few cents, so a typical personal agent runs just a few dollars a month. Work it hard (long research, big documents, all-day back-and-forth) and it climbs into the tens of dollars, still a fraction of what a person doing the same job would cost. You add a little credit up front (say $5&ndash;$20), it draws down slowly, and you can set a hard spending cap on the provider&rsquo;s website. Inside Archie you can also dial each agent between <strong>Economy, Balanced, and Best</strong> models, so you decide the balance of cost and quality.
+                  Yes, and it&rsquo;s small. Archie connects to the AI (Claude, ChatGPT, Gemini, or Grok) through your own pay-as-you-go account, so you only pay for what your agent actually does: typically a few dollars a month for a personal agent. You add a small amount of credit up front and can set a hard spending cap on the provider&rsquo;s website. During guided setup, we work with a standard AI subscription (like Claude Pro, around $20 a month) while we build; once you&rsquo;re running Archie, the pay-as-you-go account takes over. Full breakdown on our <a href="../archie/pricing/">Pricing page</a>.
                 </div>
               </div>
             </div>
             <div class="accordion-item" role="listitem" id="faq-subscription-vs-api">
               <button class="accordion-trigger" aria-expanded="false">
-                I already pay for Claude (or ChatGPT). Why do I need to connect an API key too?
+                I already pay for Claude or ChatGPT. Why does Archie need its own connection?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  They&rsquo;re two different products from the same company. A Claude or ChatGPT subscription only works on that company&rsquo;s own website and app, so it can&rsquo;t be used by other programs. Your Archie agent runs on <strong>your own computer</strong>, so it connects to the AI through a separate doorway called an <em>API</em>, which bills on its own based on actual use. The upside: for most people the API costs <strong>less</strong> than a monthly subscription, because you only pay for the messages your agent actually sends (often just a few dollars a month) and you stay in full control of the account and the spending. Your existing Claude Pro or ChatGPT Plus plan keeps working as normal; the API is simply what lets a program you own talk to the AI on your behalf. And it&rsquo;s not merely a workaround: using your own key is genuinely better for you in a few ways, starting with the fact that your conversations aren&rsquo;t used to train the AI. <a href="#faq-api-key-benefits">Here&rsquo;s the full list of perks.</a>
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item" role="listitem" id="faq-api-key-benefits">
-              <button class="accordion-trigger" aria-expanded="false">
-                What are the perks of using my own API key?
-                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-              </button>
-              <div class="accordion-body">
-                <div class="accordion-body-inner">
-                  This isn&rsquo;t an either/or: your own key works <em>alongside</em> a Claude or ChatGPT subscription, not instead of it, and you can keep both. But the key isn&rsquo;t just a hoop to jump through; it brings a few real perks of its own:<br /><br />
-                  <strong>Your conversations aren&rsquo;t used to train the AI.</strong> On the pay-as-you-go plans your key uses, the AI company does not train its models on what you send; that&rsquo;s the default for these business-grade accounts. On the ordinary consumer subscriptions (Claude Pro, ChatGPT Plus), your chats <em>can</em> be used to improve the AI unless you go digging in the settings to opt out. For an agent that helps with your email and calendar, that difference is worth having.<br /><br />
-                  <strong>No daily limits or &ldquo;come back later.&rdquo;</strong> Subscriptions cap how much you can use in a stretch and make you wait once you hit the wall. A pay-as-you-go key simply keeps working, which matters for an agent that quietly runs tasks in the background.<br /><br />
-                  <strong>You pay only for what you actually use.</strong> No flat monthly fee whether you touch it or not: a light personal agent often runs just a few dollars a month, and you set a hard spending cap yourself on the provider&rsquo;s website.<br /><br />
-                  <strong>You own the account outright.</strong> The relationship is directly between you and the AI company, on your key, so you see every cent spent, and Otian is never in the middle. We can&rsquo;t see your key, and your conversations never pass through us.<br /><br />
-                  Your existing Claude Pro or ChatGPT Plus plan keeps working as normal on its own site; your API key is just the better-behaved doorway for a program you own to use the AI on your behalf.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item" role="listitem" id="faq-what-is-api-key">
-              <button class="accordion-trigger" aria-expanded="false">
-                What is an API key, and why does Archie need one?
-                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-              </button>
-              <div class="accordion-body">
-                <div class="accordion-body-inner">
-                  An API key is like a password that lets your agent use the AI on your behalf. Because your agent lives on your computer, not on our servers, it talks to the AI company <strong>directly, with your key</strong>. That means you always own the account, you see exactly what&rsquo;s spent, and your conversations never pass through us. Getting a key takes about two minutes, and the app walks you through every step in plain language.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item" role="listitem" id="faq-choose-ai-brain">
-              <button class="accordion-trigger" aria-expanded="false">
-                Which AI should I pick: Claude, ChatGPT, or another?
-                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-              </button>
-              <div class="accordion-body">
-                <div class="accordion-body-inner">
-                  Any of them works, and you can switch anytime, so this isn&rsquo;t a decision you can get wrong. In the app you can connect <strong>Anthropic (Claude)</strong>, <strong>OpenAI (ChatGPT)</strong>, <strong>Google (Gemini)</strong>, or <strong>xAI (Grok)</strong>, each with your own key. If you&rsquo;re unsure, <strong>Claude is a great default</strong>: it&rsquo;s what we build and test on, and it&rsquo;s especially strong at the careful, multi-step work an agent does. Want to try before adding any billing? <strong>Groq</strong> has a free tier that needs no card to start. Whichever you choose, your agent behaves the same way; the difference is mostly the AI&rsquo;s own personality and pricing, and changing later is simply picking a different one from the list.
-                </div>
-              </div>
-            </div>
-            <div class="accordion-item" role="listitem" id="faq-response-quality">
-              <button class="accordion-trigger" aria-expanded="false">
-                Economy, Balanced, or Best: which response quality should I choose?
-                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                </svg>
-              </button>
-              <div class="accordion-body">
-                <div class="accordion-body-inner">
-                  This dial trades cost against brainpower, and you can change it whenever you like. <strong>Economy</strong> is quick and cheapest, great for everyday messages and simple tasks. <strong>Balanced</strong> is the sweet spot for most people: noticeably smarter at a moderate cost, and a fine default. <strong>Best</strong> uses the most capable model for tricky, detailed, or high-stakes work, at the highest cost per message. You set one level for the whole agent, and some skills can pick their own when they genuinely need more (a deep-research skill might insist on Best, for example). If in doubt, start on <strong>Balanced</strong> and only move up when a task really calls for it.
+                  Your subscription only works inside that company&rsquo;s own app; it can&rsquo;t be used by programs you own. Archie talks to the AI through your own API key, a two-minute setup the app walks you through. It&rsquo;s the better deal anyway: you only pay for what you use (often less than a subscription), your conversations aren&rsquo;t used to train the AI, there are no daily usage caps, and the account is entirely yours. We never see it. Your existing subscription keeps working as normal. <a href="../how-it-works/">How it works</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="faq-group fade-up">
+        <div class="faq-group fade-up" id="faq-safety">
           <h3 class="faq-group-title">Safety &amp; Privacy</h3>
           <div class="accordion" role="list">
             <div class="accordion-item" role="listitem">
@@ -391,14 +371,27 @@
                 </div>
               </div>
             </div>
+            <div class="accordion-item" role="listitem" id="faq-lost-computer">
+              <button class="accordion-trigger" aria-expanded="false">
+                What happens to my data if my computer crashes or is stolen?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Your agent&rsquo;s data lives in a folder on your computer, protected by your computer&rsquo;s own login and disk encryption, and your API key sits in the system keychain rather than in a file. If the machine is lost, revoking access takes minutes: reset your key on the provider&rsquo;s website and disconnect any linked accounts. Because nothing is copied to our servers, your own backup is what would restore it, so an agent you rely on is worth including in whatever backup you already run.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="faq-group fade-up">
+        <div class="faq-group fade-up" id="faq-timeline">
           <h3 class="faq-group-title">Timeline &amp; What to Expect</h3>
           <div class="accordion" role="list">
             <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
-                How long does setup take, and how soon will I see results?
+                <span class="accordion-title"><span class="faq-tag">Guided Setup</span>How long does setup take, and how soon will I see results?</span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
@@ -424,14 +417,14 @@
             </div>
             <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
-                What's actually possible, and what does it look like day to day?
+                What&rsquo;s actually possible, and what does it look like day to day?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  There&rsquo;s no real ceiling: if it can be done on a computer or through an app, your agent can probably learn to do it. Inbox and calendar, sure, but also research, bookkeeping, travel, scheduling, smart-home control, health tracking, customer follow-ups, even building you a small tool or website. Day to day it looks different for everyone: for some it&rsquo;s a morning briefing and an inbox that stays clean; for others it&rsquo;s quietly running parts of a business: fielding customer messages, managing schedules, keeping projects moving. Some people talk to theirs constantly; others let it work in the background and check in occasionally. The real question isn&rsquo;t &ldquo;can it do X,&rdquo; it&rsquo;s &ldquo;what would make your life or business easier&rdquo;, and from there, almost anything is on the table.
+                  If it can be done on a computer, your agent can probably learn to do it: inbox and calendar, research, bookkeeping, travel, health tracking, customer follow-ups, even building you a small tool. Day to day, some people get a morning briefing and a clean inbox; others let it quietly run parts of a business. The real question isn&rsquo;t &ldquo;can it do X&rdquo;, it&rsquo;s &ldquo;what would make your life easier?&rdquo; <a href="../archie/see-it-work/">See it work</a>
                 </div>
               </div>
             </div>
@@ -450,7 +443,7 @@
             </div>
             <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
-                How much attention does it need, and are you still available after setup?
+                <span class="accordion-title"><span class="faq-tag">Guided Setup</span>How much attention does it need, and are you still available after setup?</span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
@@ -463,7 +456,7 @@
             </div>
           </div>
         </div>
-        <div class="faq-group fade-up">
+        <div class="faq-group fade-up" id="faq-practical">
           <h3 class="faq-group-title">Practical Details</h3>
           <div class="accordion" role="list">
             <div class="accordion-item" role="listitem" id="faq-mac-mini">
@@ -492,7 +485,7 @@
                 </div>
               </div>
             </div>
-            <div class="accordion-item" role="listitem" id="faq-choose-messaging-app">
+            <div class="accordion-item" role="listitem">
               <button class="accordion-trigger" aria-expanded="false">
                 Which chat app should I use to talk to my agent?
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -501,7 +494,46 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Whichever you already use, your agent listens and replies right inside that app, and you can switch or add more later. Archie works with <strong>Telegram</strong>, <strong>Discord</strong>, and <strong>Slack</strong> today, with <strong>Signal</strong> coming soon. New to this? <strong>Telegram is the easiest to set up</strong> (a quick, free bot, and the app hands you each step). <strong>Discord</strong> and <strong>Slack</strong> are handy if you already live in a server or a workspace. <strong>Signal</strong> is on the way, and it&rsquo;ll be the most private option: rather than a bot, it links to your own Signal account and answers in your <em>Note to Self</em> chat, so it only ever talks to you and never touches your other conversations. There&rsquo;s no wrong pick, so go with the app that&rsquo;s already open on your phone.
+                  Whichever you already use: your agent replies right inside it, and you can switch or add more later. Archie works with Telegram, Discord, and Slack today (Telegram is the easiest to start), with Signal coming as the most private option. There&rsquo;s no wrong pick, so go with the app that&rsquo;s already open on your phone.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" role="listitem" id="faq-choose-ai-brain">
+              <button class="accordion-trigger" aria-expanded="false">
+                Which AI should I pick: Claude, ChatGPT, or another?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Any of them works, and you can switch anytime, so this isn&rsquo;t a decision you can get wrong. Archie connects to <strong>Anthropic (Claude)</strong>, <strong>OpenAI (ChatGPT)</strong>, <strong>Google (Gemini)</strong>, or <strong>xAI (Grok)</strong>. If you&rsquo;re unsure, Claude is a great default: it&rsquo;s what we build and test on. Want to try before adding billing? <strong>Groq</strong> has a free tier with no card required.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" role="listitem" id="faq-response-quality">
+              <button class="accordion-trigger" aria-expanded="false">
+                Economy, Balanced, or Best: which response quality should I choose?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Start on <strong>Balanced</strong>: it&rsquo;s the sweet spot of cost and smarts for most people. <strong>Economy</strong> is quick and cheapest for simple tasks; <strong>Best</strong> uses the most capable model for high-stakes work at a higher cost per message. You can change the dial anytime, and some add-ons pick their own level when a task genuinely needs more.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item" role="listitem" id="faq-computer-on">
+              <button class="accordion-trigger" aria-expanded="false">
+                Does my computer have to stay on for my agent to work?
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+              <div class="accordion-body">
+                <div class="accordion-body-inner">
+                  Yes. Your agent lives on your computer, so it works whenever the machine is on, and a laptop that stays plugged in counts. If the computer is off or asleep, your agent pauses and picks back up when it wakes.
                 </div>
               </div>
             </div>

@@ -547,30 +547,6 @@
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
   <script src="../js/screenshot-gallery.js"></script>
-  <script>
-    /* ── Accordion ── */
-    document.querySelectorAll('.accordion-trigger').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var item   = btn.closest('.accordion-item');
-        var body   = item.querySelector('.accordion-body');
-        var isOpen = item.classList.contains('open');
-
-        /* Close all */
-        document.querySelectorAll('.accordion-item').forEach(function (el) {
-          el.classList.remove('open');
-          el.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-          el.querySelector('.accordion-body').style.maxHeight = null;
-        });
-
-        /* Open clicked if it was closed */
-        if (!isOpen) {
-          item.classList.add('open');
-          btn.setAttribute('aria-expanded', 'true');
-          body.style.maxHeight = body.scrollHeight + 'px';
-        }
-      });
-    });
-  </script>
 </body>
 </html>
 

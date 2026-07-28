@@ -4604,6 +4604,57 @@ html[data-theme="dark"] .booking-container iframe {
   min-width: 68px;
 }
 
+/* The how-it-works hero marquee. js/screenshot-gallery.js clones the items once,
+   measures the track, and sets animation-duration so the speed stays constant however
+   many screenshots are in it - so the track must be a max-content flex row animating to
+   -50%, and it starts paused until that measurement lands. */
+.screenshot-gallery {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.screenshot-gallery-track {
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+  height: 100%;
+  gap: 16px;
+  animation: screenshot-gallery-scroll 8s linear infinite;
+  animation-play-state: paused;
+}
+
+.screenshot-gallery-track.is-ready {
+  animation-play-state: running;
+}
+
+.screenshot-gallery-item {
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.screenshot-gallery:hover .screenshot-gallery-track {
+  animation-play-state: paused;
+}
+
+@keyframes screenshot-gallery-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .screenshot-gallery-track {
+    animation: none;
+  }
+}
+
 @media (max-width: 1000px) {
   .screenshot-gallery {
     height: 280px;

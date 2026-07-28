@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign in to Archie | Otian AI</title>
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
   <meta name="robots" content="noindex" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <!-- /app-auth is retired. Sign-in (with the account's second factor) lives on /login. The Archie
@@ -16,6 +18,17 @@
       var qs = window.location.search || "";
       var hash = window.location.hash || "";
       window.location.replace("/login/" + qs + hash);
+    })();
+  </script>
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
     })();
   </script>
   <link rel="stylesheet" href="../css/styles.css" />

@@ -15,6 +15,7 @@
   --accent-hover: #CC7647;
   --accent-subtle: #FBE4D3;
   --accent-line: rgba(224, 138, 91, 0.4);
+  --scrollbar-thumb: rgba(74, 66, 58, 0.28);
   /* Darkened accent for TEXT sitting on --accent-subtle. The bright accent above is tuned for
      fills and borders; as text on its own tint it lands at 2.15:1, which fails WCAG AA. */
   --accent-ink: #8F5233;
@@ -81,6 +82,7 @@
   --accent-hover: #F2B58F;
   --accent-subtle: #4A392C;
   --accent-line: rgba(237, 162, 119, 0.45);
+  --scrollbar-thumb: rgba(245, 239, 230, 0.24);
   /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
   --accent-ink: #EDA277;
   --danger: #FF9F97;
@@ -121,6 +123,48 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* Skip link: hidden until keyboard focus, then a small pinned card over the nav. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 300;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+::selection {
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+
+/* Thin, muted scrollbars everywhere (drawer, flyout, the page itself) - mirrors the app. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb, rgba(74, 66, 58, 0.28)) transparent;
+}
+
+/* Chrome autofill paints fields white or pale yellow; repaint with the theme's own field colors. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-secondary) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
+  transition: background-color 9999s ease-out;
+}
+
+.skip-link:focus-visible {
+  top: 12px;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* ========================================
@@ -1049,7 +1093,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .btn-mini {
-  padding: 8px 14px;
+  padding: 10px 16px;
   font-size: 0.8rem;
 }
 
@@ -1222,8 +1266,8 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   color: var(--text-secondary);
@@ -1895,6 +1939,9 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 }
 
 .faq-jump a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   padding: 7px 14px;
   border: 1px solid var(--border);
   border-radius: 999px;
@@ -6398,8 +6445,8 @@ html[data-theme="dark"] .booking-container iframe {
 
 .status-toast-x {
   flex: 0 0 auto;
-  margin: -4px -6px -4px 0;
-  padding: 2px 8px;
+  margin: -10px -12px -10px 0;
+  padding: 10px 12px;
   border: none;
   background: none;
   color: inherit;
@@ -6460,6 +6507,8 @@ html[data-theme="dark"] .booking-container iframe {
 
 .status-toast.error::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b3261e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E"); }
 .status-toast.ok::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f7a54' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E"); }
+[data-theme="dark"] .status-toast.error::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff9f97' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='12' y1='8' x2='12' y2='12'/%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'/%3E%3C/svg%3E"); }
+[data-theme="dark"] .status-toast.ok::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236fc4bc' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 11.08V12a10 10 0 1 1-5.93-9.14'/%3E%3Cpolyline points='22 4 12 14.01 9 11.01'/%3E%3C/svg%3E"); }
 
 @media (prefers-reduced-motion: reduce) {
   .status-toast {
@@ -6540,8 +6589,50 @@ html[data-theme="dark"] .booking-container iframe {
 .act-title { font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
 .act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
 .act-note { font-size: 0.78rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.45; }
-.act-amount { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; white-space: nowrap; }
+.act-amount { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .act-amount.owed { color: var(--accent); }
 .act-empty { font-size: 0.85rem; color: var(--text-muted); padding: 6px 0; }
-.bal-big { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); }
+.bal-big { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
 .danger-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+
+/* ==============================
+   41. Reduced motion & print
+   ============================== */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+    opacity: 1;
+  }
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
+  .nav,
+  .nav-drawer,
+  .nav-drawer-flyout,
+  .nav-overlay,
+  .footer,
+  .cta-banner,
+  .theme-toggle,
+  .skip-link {
+    display: none;
+  }
+  body {
+    animation: none;
+    opacity: 1;
+  }
+  body::before {
+    display: none;
+  }
+  .fade-up {
+    opacity: 1;
+    transform: none;
+  }
+  .article-body {
+    max-width: none;
+  }
+}

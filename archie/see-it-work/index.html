@@ -5,11 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>See Archie Work | Otian AI</title>
   <meta name="description" content="Two silent recordings: building a personal AI agent in Archie from scratch, and living with one: a morning briefing arriving over Telegram, unprompted." />
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
   <link rel="stylesheet" href="../../css/styles.css" />
   <style>
     /* Page-scoped: the phone recording is portrait (444x960), so it needs its own
@@ -67,6 +80,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
@@ -163,7 +177,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
 
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">

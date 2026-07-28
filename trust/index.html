@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Trust | Otian AI</title>
   <meta name="description" content="Every single thing Archie sends anywhere, who receives it, and what's in it, plus the parts that don't flatter us. Then: how to verify all of it yourself with a network monitor, in ten minutes." />
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
   <meta property="og:title" content="Trust | Otian AI" />
   <meta property="og:description" content="Every single thing Archie sends anywhere, who receives it, and what's in it, plus the parts that don't flatter us. Then: how to verify all of it yourself, in ten minutes." />
   <meta property="og:type" content="website" />
@@ -13,9 +15,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
   <link rel="stylesheet" href="../css/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ==============================
        Navigation
@@ -116,7 +130,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
 
     <!-- ==============================
          Page Hero

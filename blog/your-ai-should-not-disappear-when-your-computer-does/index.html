@@ -5,14 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your AI Should Not Disappear When Your Computer Does | Otian AI</title>
   <meta name="description" content="When your computer breaks, your photos and files survive, but the context your AI has built about how you work usually doesn't. That accumulated history is becoming one of the most valuable parts of a personal AI, and it shouldn't be tied to one device. How Archie keeps your agent's memory of you portable." />
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
   <link rel="stylesheet" href="../../css/styles.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
@@ -110,7 +124,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main">
     <section class="page-hero article-hero" aria-label="Article introduction">
       <nav class="breadcrumb-bar" aria-label="Breadcrumb">
         <div class="breadcrumb-bar-inner">

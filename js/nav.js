@@ -99,7 +99,7 @@
   }
 
   mountThemeToggles();
-  applyTheme(getStoredTheme() || 'light', false);
+  applyTheme(getStoredTheme() || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'), false);
 
   /* ── Active page link ──
      Use link.href (browser-resolved absolute URL) so relative hrefs

@@ -225,7 +225,7 @@ form.addEventListener("submit", async (e) => {
       suggested_price_usd: Number(document.getElementById("skillPrice").value) || 0,
       // Declarations the app needs but the old form never asked for. A skill whose prompt hands
       // work to a worker installs looking healthy and does nothing on first use unless that
-      // dependency is declared — so review has to know about it, and the only person who does is
+      // dependency is declared, so review has to know about it, and the only person who does is
       // the author. Free text on purpose: the reviewer turns it into a `required_addons` entry,
       // and asking a submitter to hand-write JSON for it would lose more submissions than it saves.
       needs_addon: (document.getElementById("skillNeedsAddon")?.value || "").trim(),

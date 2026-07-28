@@ -187,7 +187,7 @@
           <div class="form-group">
             <label class="form-label" for="skillTemplate">SKILL.md template<span class="required-star" aria-hidden="true">*</span></label>
             <textarea class="form-textarea" id="skillTemplate" rows="16" maxlength="20000" required
-              placeholder="What this does — one line, in your own words.
+              placeholder="What this does, in one line, in your own words.
 
 Tools:
 - Name each tool it should use, and when to reach for it.
@@ -204,7 +204,7 @@ Never:
 How it should sound: one line."></textarea>
             <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               This is the prompt your skill runs on. Use <code>{{VARIABLE}}</code> for anything the user
-              configures &mdash; each one becomes a field they fill in.
+              configures. Each one becomes a field they fill in.
               <button type="button" id="btnUseTemplate" style="background:none; border:none; padding:0; color:var(--accent); cursor:pointer; text-decoration:underline; font:inherit;">Start from the template</button>
             </p>
             <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
@@ -217,10 +217,10 @@ How it should sound: one line."></textarea>
           <div class="form-group">
             <label class="form-label" for="skillNeedsAddon">Does it need another add-on?</label>
             <input class="form-input" type="text" id="skillNeedsAddon"
-              placeholder="e.g. Researcher worker &mdash; so it can check live scores on the web" />
+              placeholder="e.g. Researcher worker, so it can check live scores on the web" />
             <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
               If your prompt hands work to a worker or reads another skill&rsquo;s data, name it here and say
-              why. Archie shows this on the card and offers to install it in one tap &mdash; left unsaid, the
+              why. Archie shows this on the card and offers to install it in one tap. Left unsaid, the
               skill installs looking fine and quietly does nothing on first use.
             </p>
           </div>
@@ -230,7 +230,7 @@ How it should sound: one line."></textarea>
             <input class="form-input" type="text" id="skillUsageHint" maxlength="280"
               placeholder="e.g. Add a team or two, then just ask &quot;how did my teams do.&quot;" />
             <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
-              One sentence, shown once setup is done. This is what someone types to get value out of it &mdash;
+              One sentence, shown once setup is done. This is what someone types to get value out of it,
               not a setup step.
             </p>
           </div>

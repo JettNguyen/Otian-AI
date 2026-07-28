@@ -222,7 +222,232 @@
           <p>Archie is our desktop app for building personal AI agents. In a business, that means each person gets an agent shaped to their role, not one shared bot in somebody else&rsquo;s cloud.</p>
         </div>
 
-        <div class="feature-grid">
+        <figure class="explain-figure fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 316" role="img" aria-labelledby="biz-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+            <title id="biz-t">Three teammates, each with their own agent running on their own machine. A line runs beneath them: Otian&rsquo;s servers and your money sit on the far side and nothing reaches them, while email and calendar changes cross only after you approve them.</title>
+            <style>
+              .biz-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
+              .biz-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.5}
+              .biz-a{fill:var(--accent)}
+              .biz-stand{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
+              .biz-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
+              .biz-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .biz-lane{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.3;stroke-linecap:round}
+              .biz-ghost{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.16;stroke-dasharray:3 5;stroke-linecap:round}
+              .biz-line{fill:none;stroke:currentColor;stroke-width:2;opacity:.5;stroke-linecap:round}
+              .biz-edge{fill:currentColor;opacity:.55;font-size:10px;font-weight:600}
+              .biz-stop{fill:var(--bg-card);stroke:var(--text-muted);stroke-width:1.5}
+              .biz-slash{fill:none;stroke:var(--text-muted);stroke-width:1.7;stroke-linecap:round}
+              .biz-gate{fill:var(--accent)}
+              .biz-check{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+              .biz-pulse{fill:none;stroke:var(--accent);stroke-width:1.5;transform-box:fill-box;transform-origin:center}
+              .biz-out{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.3;stroke-dasharray:5 5}
+              .biz-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
+              .biz-off{fill:currentColor;opacity:.55;font-size:11.5px;font-weight:700;text-anchor:middle}
+              .biz-offsub{fill:currentColor;opacity:.42;font-size:9.5px;text-anchor:middle}
+              .biz-on{fill:currentColor;font-size:11.5px;font-weight:700;text-anchor:middle}
+              .biz-onsub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .biz-dot{fill:var(--accent)}
+              @media (prefers-reduced-motion:no-preference){
+                .biz-grp{animation:bizIn .7s cubic-bezier(.22,1,.36,1) both}
+                .bz1{animation-delay:.06s}.bz2{animation-delay:.18s}.bz3{animation-delay:.3s}
+                @keyframes bizIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+                .biz-halt{animation:bizHalt 3.6s ease-in infinite}
+                .bd1{animation-delay:.4s}.bd3{animation-delay:1.9s}
+                @keyframes bizHalt{0%{opacity:0;transform:translateY(0)}12%{opacity:1}62%{opacity:1;transform:translateY(46px)}76%,100%{opacity:0;transform:translateY(53px)}}
+                .biz-pass{animation:bizPass 3.6s linear infinite}
+                @keyframes bizPass{0%{opacity:0;transform:translateY(0)}10%{opacity:1}38%{transform:translateY(53px)}56%{transform:translateY(53px)}92%{opacity:1}100%{opacity:0;transform:translateY(104px)}}
+                .biz-pulse{animation:bizPulse 3.6s ease-out infinite}
+                @keyframes bizPulse{0%,44%{transform:scale(1);opacity:.55}80%,100%{transform:scale(1.85);opacity:0}}
+              }
+            </style>
+
+            <!-- lanes down from each machine to the line -->
+            <line class="biz-lane" x1="104" y1="128" x2="104" y2="183"/>
+            <line class="biz-lane" x1="320" y1="128" x2="320" y2="232"/>
+            <line class="biz-lane" x1="536" y1="128" x2="536" y2="183"/>
+            <line class="biz-ghost" x1="104" y1="209" x2="104" y2="232"/>
+            <line class="biz-ghost" x1="536" y1="209" x2="536" y2="232"/>
+
+            <!-- the boundary -->
+            <line class="biz-line" x1="8" y1="196" x2="632" y2="196"/>
+            <text class="biz-edge" x="8" y="188">on your machine</text>
+            <text class="biz-edge" x="8" y="214">the other side</text>
+
+            <!-- travelling dots: two stop at the line, one crosses through you -->
+            <circle class="biz-dot biz-halt bd1" cx="104" cy="128" r="3"/>
+            <circle class="biz-dot biz-pass" cx="320" cy="128" r="3"/>
+            <circle class="biz-dot biz-halt bd3" cx="536" cy="128" r="3"/>
+
+            <circle class="biz-stop" cx="104" cy="196" r="13"/>
+            <line class="biz-slash" x1="97.6" y1="202.4" x2="110.4" y2="189.6"/>
+            <circle class="biz-stop" cx="536" cy="196" r="13"/>
+            <line class="biz-slash" x1="529.6" y1="202.4" x2="542.4" y2="189.6"/>
+
+            <circle class="biz-pulse" cx="320" cy="196" r="15"/>
+            <circle class="biz-gate" cx="320" cy="196" r="15"/>
+            <path class="biz-check" d="M310 197 L317 204 L328 189"/>
+
+            <!-- one agent per teammate, each boxed on its own machine -->
+            <g class="biz-grp bz1">
+              <rect class="biz-card" x="8" y="8" width="192" height="120" rx="16"/>
+              <text class="biz-name" x="104" y="32">Support</text>
+              <rect class="biz-screen" x="72" y="44" width="64" height="44" rx="6"/>
+              <g class="biz-a" transform="translate(88.64,51.42) scale(0.03)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="biz-stand" d="M104 88 V96 M90 96 H118"/>
+              <text class="biz-sub" x="104" y="114">inbox triage</text>
+            </g>
+            <g class="biz-grp bz2">
+              <rect class="biz-card" x="224" y="8" width="192" height="120" rx="16"/>
+              <text class="biz-name" x="320" y="32">Owner</text>
+              <rect class="biz-screen" x="288" y="44" width="64" height="44" rx="6"/>
+              <g class="biz-a" transform="translate(304.64,51.42) scale(0.03)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="biz-stand" d="M320 88 V96 M306 96 H334"/>
+              <text class="biz-sub" x="320" y="114">follow-ups</text>
+            </g>
+            <g class="biz-grp bz3">
+              <rect class="biz-card" x="440" y="8" width="192" height="120" rx="16"/>
+              <text class="biz-name" x="536" y="32">Ops</text>
+              <rect class="biz-screen" x="504" y="44" width="64" height="44" rx="6"/>
+              <g class="biz-a" transform="translate(520.64,51.42) scale(0.03)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="biz-stand" d="M536 88 V96 M522 96 H550"/>
+              <text class="biz-sub" x="536" y="114">weekly numbers</text>
+            </g>
+
+            <!-- what sits on the far side of the line -->
+            <rect class="biz-out" x="8" y="232" width="192" height="72" rx="14"/>
+            <text class="biz-off" x="104" y="262">Otian&rsquo;s servers</text>
+            <text class="biz-offsub" x="104" y="282">your work never passes through</text>
+
+            <rect class="biz-in" x="224" y="232" width="192" height="72" rx="14"/>
+            <text class="biz-on" x="320" y="262">Email &amp; calendar</text>
+            <text class="biz-onsub" x="320" y="282">only after you approve</text>
+
+            <rect class="biz-out" x="440" y="232" width="192" height="72" rx="14"/>
+            <text class="biz-off" x="536" y="262">Your money</text>
+            <text class="biz-offsub" x="536" y="282">no way to spend it</text>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 258" role="img" aria-labelledby="bizm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="bizm-t">Three teammates, each with their own agent running on their own machine. A line runs beneath them: Otian&rsquo;s servers and your money sit on the far side and nothing reaches them, while email and calendar changes cross only after you approve them.</title>
+            <style>
+              .bizm-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
+              .bizm-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.4}
+              .bizm-a{fill:var(--accent)}
+              .bizm-stand{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round}
+              .bizm-name{fill:currentColor;font-size:10.5px;font-weight:700;text-anchor:middle}
+              .bizm-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .bizm-lane{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3;stroke-linecap:round}
+              .bizm-ghost{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.16;stroke-dasharray:3 5;stroke-linecap:round}
+              .bizm-line{fill:none;stroke:currentColor;stroke-width:2;opacity:.5;stroke-linecap:round}
+              .bizm-stop{fill:var(--bg-card);stroke:var(--text-muted);stroke-width:1.4}
+              .bizm-slash{fill:none;stroke:var(--text-muted);stroke-width:1.6;stroke-linecap:round}
+              .bizm-gate{fill:var(--accent)}
+              .bizm-check{fill:none;stroke:var(--text-on-accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+              .bizm-pulse{fill:none;stroke:var(--accent);stroke-width:1.4;transform-box:fill-box;transform-origin:center}
+              .bizm-out{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.3;stroke-dasharray:5 5}
+              .bizm-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
+              .bizm-off{fill:currentColor;opacity:.55;font-size:10px;font-weight:700;text-anchor:middle}
+              .bizm-offsub{fill:currentColor;opacity:.42;font-size:9.5px;text-anchor:middle}
+              .bizm-on{fill:currentColor;font-size:10px;font-weight:700;text-anchor:middle}
+              .bizm-onsub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .bizm-dot{fill:var(--accent)}
+              @media (prefers-reduced-motion:no-preference){
+                .bizm-grp{animation:bizmIn .7s cubic-bezier(.22,1,.36,1) both}
+                .bzm1{animation-delay:.06s}.bzm2{animation-delay:.18s}.bzm3{animation-delay:.3s}
+                @keyframes bizmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+                .bizm-halt{animation:bizmHalt 3.6s ease-in infinite}
+                .bdm1{animation-delay:.4s}.bdm3{animation-delay:1.9s}
+                @keyframes bizmHalt{0%{opacity:0;transform:translateY(0)}12%{opacity:1}62%{opacity:1;transform:translateY(24px)}76%,100%{opacity:0;transform:translateY(29px)}}
+                .bizm-pass{animation:bizmPass 3.6s linear infinite}
+                @keyframes bizmPass{0%{opacity:0;transform:translateY(0)}10%{opacity:1}38%{transform:translateY(27px)}56%{transform:translateY(27px)}92%{opacity:1}100%{opacity:0;transform:translateY(64px)}}
+                .bizm-pulse{animation:bizmPulse 3.6s ease-out infinite}
+                @keyframes bizmPulse{0%,44%{transform:scale(1);opacity:.55}80%,100%{transform:scale(1.85);opacity:0}}
+              }
+            </style>
+
+            <line class="bizm-lane" x1="58" y1="102" x2="58" y2="131"/>
+            <line class="bizm-lane" x1="170" y1="102" x2="170" y2="166"/>
+            <line class="bizm-lane" x1="282" y1="102" x2="282" y2="131"/>
+            <line class="bizm-ghost" x1="58" y1="153" x2="58" y2="166"/>
+            <line class="bizm-ghost" x1="282" y1="153" x2="282" y2="166"/>
+
+            <line class="bizm-line" x1="6" y1="142" x2="334" y2="142"/>
+
+            <circle class="bizm-dot bizm-halt bdm1" cx="58" cy="102" r="3"/>
+            <circle class="bizm-dot bizm-pass" cx="170" cy="102" r="3"/>
+            <circle class="bizm-dot bizm-halt bdm3" cx="282" cy="102" r="3"/>
+
+            <circle class="bizm-stop" cx="58" cy="142" r="11"/>
+            <line class="bizm-slash" x1="52.5" y1="147.5" x2="63.5" y2="136.5"/>
+            <circle class="bizm-stop" cx="282" cy="142" r="11"/>
+            <line class="bizm-slash" x1="276.5" y1="147.5" x2="287.5" y2="136.5"/>
+
+            <circle class="bizm-pulse" cx="170" cy="142" r="13"/>
+            <circle class="bizm-gate" cx="170" cy="142" r="13"/>
+            <path class="bizm-check" d="M162 143 L168 149 L178 136"/>
+
+            <g class="bizm-grp bzm1">
+              <rect class="bizm-card" x="6" y="6" width="104" height="96" rx="14"/>
+              <text class="bizm-name" x="58" y="24">Support</text>
+              <rect class="bizm-screen" x="38" y="34" width="40" height="32" rx="5"/>
+              <g class="bizm-a" transform="translate(46.53,39.12) scale(0.0224)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="bizm-stand" d="M58 66 V72 M48 72 H68"/>
+              <text class="bizm-sub" x="58" y="88">inbox triage</text>
+            </g>
+            <g class="bizm-grp bzm2">
+              <rect class="bizm-card" x="118" y="6" width="104" height="96" rx="14"/>
+              <text class="bizm-name" x="170" y="24">Owner</text>
+              <rect class="bizm-screen" x="150" y="34" width="40" height="32" rx="5"/>
+              <g class="bizm-a" transform="translate(158.53,39.12) scale(0.0224)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="bizm-stand" d="M170 66 V72 M160 72 H180"/>
+              <text class="bizm-sub" x="170" y="88">follow-ups</text>
+            </g>
+            <g class="bizm-grp bzm3">
+              <rect class="bizm-card" x="230" y="6" width="104" height="96" rx="14"/>
+              <text class="bizm-name" x="282" y="24">Ops</text>
+              <rect class="bizm-screen" x="262" y="34" width="40" height="32" rx="5"/>
+              <g class="bizm-a" transform="translate(270.53,39.12) scale(0.0224)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+              <path class="bizm-stand" d="M282 66 V72 M272 72 H292"/>
+              <text class="bizm-sub" x="282" y="88">weekly numbers</text>
+            </g>
+
+            <rect class="bizm-out" x="6" y="166" width="104" height="80" rx="12"/>
+            <text class="bizm-off" x="58" y="192">Otian&rsquo;s servers</text>
+            <text class="bizm-offsub" x="58" y="210">your work never</text>
+            <text class="bizm-offsub" x="58" y="223">passes through</text>
+
+            <rect class="bizm-in" x="118" y="166" width="104" height="80" rx="12"/>
+            <text class="bizm-on" x="170" y="192">Email &amp; calendar</text>
+            <text class="bizm-onsub" x="170" y="210">only after</text>
+            <text class="bizm-onsub" x="170" y="223">you approve</text>
+
+            <rect class="bizm-out" x="230" y="166" width="104" height="80" rx="12"/>
+            <text class="bizm-off" x="282" y="192">Your money</text>
+            <text class="bizm-offsub" x="282" y="210">no way to</text>
+            <text class="bizm-offsub" x="282" y="223">spend it</text>
+          </svg>
+          <figcaption>One agent per teammate, each on its owner&rsquo;s own machine. Otian&rsquo;s servers and your money sit past the line and stay there; email and calendar changes cross only when you approve them.</figcaption>
+        </figure>
+
+        <div class="feature-grid mt-48">
           <article class="feature-card fade-up delay-1">
             <h3>Shaped to Each Role</h3>
             <p>The person on support gets an agent that triages the inbox and drafts replies. The owner gets one that chases follow-ups and preps the weekly numbers. Same app, different agents: each running on its owner&rsquo;s computer.</p>

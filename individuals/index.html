@@ -24,6 +24,83 @@
     })();
   </script>
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* individuals: hero agent line. One restrained beat above the fold, the agent mark
+       breathing while the small jobs roll past. The funnel figure further down carries
+       this page's illustration weight, so this stays a single line and nothing more. */
+    .ihx-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 100%;
+      padding: 10px 20px 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .ihx-mark {
+      flex: none;
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+    .ihx-mark svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .ihx-a { fill: var(--accent); }
+    .ihx-ring {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.4;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .ihx-quiet { color: var(--text-secondary); }
+    .ihx-cycle {
+      display: block;
+      width: 11em;
+      height: 1.5em;
+      overflow: hidden;
+      text-align: left;
+    }
+    .ihx-track { display: block; }
+    .ihx-track span {
+      display: block;
+      height: 1.5em;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .ihx-ring { animation: ihxBreathe 3.2s ease-out infinite; }
+      @keyframes ihxBreathe {
+        0% { transform: scale(0.5); opacity: 0.5; }
+        70%, 100% { transform: scale(1.12); opacity: 0; }
+      }
+      .ihx-track { animation: ihxRoll 11.2s cubic-bezier(0.66, 0, 0.2, 1) infinite; }
+      @keyframes ihxRoll {
+        0%, 18% { transform: translateY(0); }
+        25%, 43% { transform: translateY(-1.5em); }
+        50%, 68% { transform: translateY(-3em); }
+        75%, 93% { transform: translateY(-4.5em); }
+        100% { transform: translateY(-6em); }
+      }
+    }
+    @media (max-width: 480px) {
+      .ihx-line { font-size: 0.875rem; gap: 9px; padding: 9px 16px 9px 11px; }
+      .ihx-mark { width: 26px; height: 26px; }
+    }
+    @media (max-width: 360px) {
+      .ihx-line { font-size: 0.8125rem; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -137,6 +214,27 @@
         <span class="section-label fade-up">Guided Setup</span>
         <h1 class="fade-up delay-1">What It&rsquo;s Like to Have Your Own Agent</h1>
         <p>One agent, on your own computer, quietly working through the inbox, the calendar, the errands, and the research you never get to.</p>
+        <span class="ihx-line fade-up delay-2" role="img" aria-label="Quietly sorting the inbox, checking the calendar, drafting a reply, and gathering research.">
+          <span class="ihx-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <circle class="ihx-ring" cx="16" cy="16" r="13"/>
+              <g class="ihx-a" transform="translate(4.51,5.11) scale(0.0224)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+            </svg>
+          </span>
+          <span class="ihx-quiet" aria-hidden="true">Quietly</span>
+          <span class="ihx-cycle" aria-hidden="true">
+            <span class="ihx-track">
+              <span>sorting the inbox</span>
+              <span>checking the calendar</span>
+              <span>drafting a reply</span>
+              <span>gathering research</span>
+              <span>sorting the inbox</span>
+            </span>
+          </span>
+        </span>
       </div>
     </section>
 

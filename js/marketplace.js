@@ -213,7 +213,7 @@ function detailHtml(item) {
 
 function cardHtml(item) {
   var kindLabel = COLLECTIONS.filter(function (c) { return c.kind === item.kind; })[0].label;
-  var price = priceLabel(item.price_cents);
+  var price = item.price_cents ? priceLabel(item.price_cents) : null;
   var isPrivate = item.visibility === "private";
   var searchBlob = [item.name, item.description, item.long_description, item.tagline, item.category,
     item.role, item.tone].concat(item.triggers).join(" ").toLowerCase();
@@ -241,7 +241,7 @@ function cardHtml(item) {
   if (detail) html += '<div class="mp-card-detail" hidden>' + detail + "</div>";
 
   html += '<div class="mp-card-bottom">';
-  html += '<span class="mp-price-badge ' + price.cls + '">' + price.text + "</span>";
+  if (price) html += '<span class="mp-price-badge ' + price.cls + '">' + price.text + "</span>";
   if (isPrivate) {
     html += '<span class="mp-exclusive-badge" title="Shared privately with your account">' +
       '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' +
@@ -501,6 +501,10 @@ if (grid) {
     state.publicItems = items;
     state.loaded = true;
     setStatus("");
+    if (priceToggle) {
+      var anyPremium = allItems().some(function (it) { return it.price_cents > 0; });
+      priceToggle.style.display = anyPremium ? "" : "none";
+    }
     rerender();
   }).catch(function () {
     setStatus("Couldn't load the marketplace right now. Please refresh in a moment.");

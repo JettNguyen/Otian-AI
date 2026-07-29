@@ -13,6 +13,19 @@ true, it doesn't ship, and there is no appeal to how good it sounds.
 
 **Last verified against the Archie source:** 2026-07-26 (site + code reconciliation, `Archie@main`)
 
+**Reconciliation — 2026-07-29.** An egress audit during the Bo competitive-response work found the
+**free-add-on install ping** contradicts the retired "zero network calls" claim: *every* install,
+free ones included, fires a best-effort `report_install` POST carrying the user's Firebase ID token
++ item type + item id, and the server bumps a global `install_count` (+ `last_installed_at`) with
+**no per-user record** (`crates/archie-core/src/purchases.rs:111-130`; unconditional spawn at
+`src-tauri/src/commands.rs:1418`, `1723-1734`; server at `stripe-webhook/index.js:290-294`).
+Decision (Jett): **copy-fix, not code-fix** — keep counting free installs; retire the false "makes
+no network call at all / we don't know you did it" wording and replace it with the retention-scoped
+claim ("we keep only the running total, no per-person list"). Fixed in this file (the free-add-on
+section + the three-things line) and on the site (`trust/`, `index.html`, `faq/`,
+`privacy-policy/`). Also corrects a stale pointer: `require_owned_if_paid` now lives at
+`commands.rs:1744`, not `:1112`.
+
 **Reconciliation — 2026-07-26.** The **one-time license migration has SHIPPED**; this file and
 `PRICING-ONETIME-MIGRATION.md` were the stale artifacts, not the copy. Verified in code:
 Stripe Checkout is `mode: "payment"`, not a recurring subscription
@@ -164,14 +177,28 @@ can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer t
 (`secrets.rs:62-67`, `gateway.rs:46`). Never imply it isn't. "We have no way to read it" is
 true and sufficient.
 
-### ✅ We cannot see which free add-ons you install
+### ✅ We keep no per-person record of the free add-ons you install
 
-**Approved wording:** "Installing a free add-on makes no network call at all. We don't know
-you did it."
+**Approved wording:** "When you add a free add-on, Archie bumps its public popularity count by
+one. That request is signed in as you, so the number can't be faked, but all we ever keep is the
+running total. We hold no list of which free add-ons are yours."
 
-**Why it's true:** `require_owned_if_paid` returns early when `price_cents == 0`
-(`src-tauri/src/commands.rs:1112`); the template is served from the binary or the
-already-cached catalog. Zero requests.
+**Why it's true:** installing *any* add-on fires a best-effort `report_install` POST to the
+billing service (`crates/archie-core/src/purchases.rs:111-130`), carrying the caller's Firebase
+ID token + item type + item id; the call is unconditional, not gated on price
+(`src-tauri/src/commands.rs:1418`; spawner `1723-1734`). The server verifies the token and
+increments a single global `install_count` (+ `last_installed_at`) on the catalog doc through the
+Admin SDK, writing **no per-user record** of who installed what
+(`stripe-webhook/index.js:290-294`). Identity is transmitted (authenticated, to stop
+count-stuffing) but never retained: there is no `users/{uid}` free-install list anywhere.
+
+**Boundaries — do not overclaim:**
+- ⛔ **Retired 2026-07-29:** "Installing a free add-on makes no network call at all / we don't
+  know you did it." **False** — the popularity ping fires for free installs too and is signed in
+  as you. Caught in the egress audit during the Bo competitive-response work. Do not let it return.
+- The honest strong form is about **retention**, not silence: a request goes out, but we keep
+  only the aggregate. Never phrase it as "nothing leaves" or "zero network calls."
+- ❌ Never imply the ping is anonymous. It carries your ID token by design.
 
 ### ✅ It works while you sleep
 
@@ -205,7 +232,8 @@ the webview.
 
 **Approved wording:** "Our servers know three things about you: your email address, whether
 you own Archie, and which **paid** add-ons you've bought. Not your prompts, not
-your files, not your calendar, not a single conversation. Free add-ons we can't see at all."
+your files, not your calendar, not a single conversation. We keep no per-person record of the
+free add-ons you install."
 
 *(Updated 2026-07-26: was "whether your subscription is active" — false since the one-time
 license shipped. Ownership is the `lifetime` tier, checked with no subscription lookup.)*

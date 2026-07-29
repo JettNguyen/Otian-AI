@@ -42,3 +42,12 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   the same claim, not a contradiction.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally.
+- **Plain words, and never talk down.** (Mirrors the Archie repo's plain-words rule.) Write so a
+  first-time, non-technical reader understands, without making them feel stupid. Define a term the
+  first time it appears rather than in a glossary, keep **one name per concept** across the whole
+  site (an "agent" is not also a "bot" or an "assistant" three sentences later), and never state a
+  problem without the next step. Simplicity and ease are the point, but you *show* ease by being
+  clear, you don't *assert* it: cut "it's so easy!", "don't worry", "as simple as that", baby-talk
+  analogies, and over-explaining the obvious, all of which imply the reader might not keep up. The
+  opposite failure counts too: unexplained jargon (API key, keychain, provider) that assumes the
+  reader already knows. Respect the reader as capable but new.

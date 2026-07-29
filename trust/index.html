@@ -164,7 +164,7 @@
             <span class="trust-answer-num">1</span>
             <div>
               <h3>It goes under <em>your</em> account, on <em>your</em> key.</h3>
-              <p>You bring your own API key from Anthropic or OpenAI. The agent&rsquo;s requests are billed to you and governed by your agreement with them, not ours. You are their customer, not our product.</p>
+              <p>You bring your own API key: a private access code from Anthropic or OpenAI that lets Archie connect on your account. The agent&rsquo;s requests are billed to you and governed by your agreement with them, not ours. You are their customer, not our product.</p>
             </div>
           </div>
           <div class="trust-answer">
@@ -256,11 +256,11 @@
                 <td data-label="What's actually in it">Your account ID and which add-on you&rsquo;re installing. <strong>So yes, we can see which paid add-ons you own.</strong></td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
-              <tr class="is-none">
+              <tr>
                 <td data-label="What">Installing a <em>free</em> add-on</td>
-                <td data-label="Where it goes"><strong>Nowhere.</strong></td>
-                <td data-label="What's actually in it">Zero network calls. We do not know you did it.</td>
-                <td data-label="Your content?"><span class="trust-flag trust-flag--none">None</span></td>
+                <td data-label="Where it goes">Our count server</td>
+                <td data-label="What's actually in it">Which add-on, and your sign-in token so the count can&rsquo;t be faked. We add one to that add-on&rsquo;s public install total and keep no record of who you are.</td>
+                <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
               <tr>
                 <td data-label="What">Your connected accounts</td>
@@ -315,7 +315,7 @@
               <li>Everything your agent remembers</li>
               <li>Your calendar, emails, and messages</li>
               <li>Your API keys</li>
-              <li>Which <em>free</em> add-ons you use</li>
+              <li>A record of which <em>free</em> add-ons you use</li>
             </ul>
           </div>
         </div>
@@ -361,7 +361,7 @@
           <div class="trust-limit">
             <h3>We keep a receipt for every paid add-on.</h3>
             <p>Buy a paid add-on and we store a permanent record: which one, how much, and when. It&rsquo;s how we know to let you re-install it on a new machine. But it does mean <strong>we know which paid add-ons you own</strong>.</p>
-            <p>Free add-ons genuinely make no network call at all, so those we cannot see.</p>
+            <p>A free add-on leaves no receipt. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, but we keep no record of which free add-ons are yours.</p>
           </div>
 
           <div class="trust-limit">

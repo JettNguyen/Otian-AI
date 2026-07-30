@@ -130,7 +130,7 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">For Developers</span>
         <h1 class="fade-up delay-1">Submit a Routine</h1>
-        <p>A routine runs a task on a schedule: a morning briefing, a periodic sync, a weekly report. Describe it, paste the prompt it runs, show it working, and submit for review.</p>
+        <p>A routine runs a task on a schedule: a morning briefing, a periodic sync, a weekly report. Fill in the form, show it working, and submit for review.</p>
         <p class="" style="margin-top:0.6rem;font-size:0.9rem;"><a href="../">Submitting something else?</a></p>
       </div>
     </section>
@@ -145,78 +145,18 @@
           <p id="signinError" style="display:none; color:var(--danger); margin-top:0.75rem;"></p>
         </div>
 
+        <!-- The fields are not written here. js/submit.js builds them from js/addon-fields.js,
+             which is generated from the same table Archie's installer reads its character caps
+             from, so this form and the app can never drift apart. All four submit pages are this
+             same shell; only the hero copy and data-addon-type differ. -->
         <form id="skillForm" data-addon-type="routine" style="display:none;" novalidate>
           <p style="margin-bottom:1.5rem; color:var(--text-muted);">
             Signed in as <strong id="signedInAs"></strong> &middot; <a href="#" id="btnSignOut">sign out</a>
           </p>
 
-          <div class="form-group">
-            <label class="form-label" for="skillName">Routine name<span class="required-star" aria-hidden="true">*</span></label>
-            <input class="form-input" type="text" id="skillName" maxlength="64" placeholder="e.g. Weekly Report" required />
-          </div>
+          <div id="specFields"></div>
 
-          <div class="form-group">
-            <label class="form-label" for="skillDescription">Short description<span class="required-star" aria-hidden="true">*</span></label>
-            <input class="form-input" type="text" id="skillDescription" maxlength="280" placeholder="One sentence: what does it let an agent do?" required />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="skillCategory">Category</label>
-            <select class="form-input" id="skillCategory">
-              <option value="productivity">Productivity</option>
-              <option value="communication">Communication</option>
-              <option value="finance">Finance</option>
-              <option value="research">Research</option>
-              <option value="sales">Sales</option>
-              <option value="operations">Operations</option>
-              <option value="personal">Personal</option>
-              <option value="custom">Other</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="skillPrice">Suggested price (USD)</label>
-            <input class="form-input" type="number" id="skillPrice" min="0" max="50" step="1" placeholder="e.g. 8. Final pricing is set together during review" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="skillTemplate">Routine prompt<span class="required-star" aria-hidden="true">*</span></label>
-            <textarea class="form-textarea" id="skillTemplate" rows="14" maxlength="20000" required
-              placeholder="The prompt the routine sends on its schedule, plus how often it should run and which skill it drives. Tell us the cadence (e.g. daily at 08:00) and what a good result looks like."></textarea>
-            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">This is the message the routine fires on schedule. Include the cadence and which skill it should drive.</p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="skillNeedsAddon">Does it need another add-on?</label>
-            <input class="form-input" type="text" id="skillNeedsAddon" placeholder="e.g. Sports Follow skill, which is what this routine runs" />
-            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">A routine fires a skill, so name that skill. If it also reads data another skill produces, name that too. Archie checks both are installed before it lets the routine run.</p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="skillUsageHint">What arrives, and when?</label>
-            <input class="form-input" type="text" id="skillUsageHint" maxlength="280" placeholder="e.g. One line per team, in your chat, every morning at 8:15" />
-            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">One sentence describing what lands in the user&rsquo;s chat. Skip it if your description already says.</p>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="proofShot">Screenshot proof it works<span class="required-star" aria-hidden="true">*</span></label>
-            <input class="form-input" type="file" id="proofShot" accept="image/png,image/jpeg,image/webp" required />
-            <p style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">
-              A screenshot of your routine running correctly inside Archie. PNG, JPG, or WebP, up to 8&nbsp;MB.
-              This is required; we don't list anything we haven't seen work.
-            </p>
-          </div>
-
-          <div class="form-group">
-            <label style="display:flex; gap:0.6rem; align-items:flex-start; font-size:0.9rem; line-height:1.5;">
-              <input type="checkbox" id="licenseGranted" style="margin-top:0.25rem;" required />
-              <span>I built this (or have the rights to it) and grant Otian AI a license to review,
-              adapt, and publish it on the Archie marketplace. I understand listing and pricing are
-              finalized together during review.<span class="required-star" aria-hidden="true">*</span></span>
-            </label>
-          </div>
-
-          <p id="formError" style="display:none; color:var(--danger);"></p>
+          <p id="formError" style="display:none; color:var(--danger); margin-bottom:1rem;"></p>
 
           <button id="btnSubmit" class="btn btn-primary btn-lg" type="submit">Submit for review</button>
         </form>

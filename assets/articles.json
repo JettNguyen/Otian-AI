@@ -1,5 +1,33 @@
 [
   {
+    "title": "The Best Reason to Run AI Locally Has Nothing to Do With Privacy",
+    "summary": "Everyone sells local AI on privacy. That's the defensive reason. The real one is access: an agent that can reach your actual files and act.",
+    "author": "Jett Nguyen",
+    "date": "2026-07-31",
+    "readTime": "5 min read",
+    "category": "Team Stories",
+    "tags": [
+      "Local AI",
+      "AI Agents",
+      "Privacy"
+    ],
+    "url": "the-best-reason-to-run-ai-locally-has-nothing-to-do-with-pri/"
+  },
+  {
+    "title": "Your AI Agent Should Bother You More, Not Less",
+    "summary": "The frictionless agent that never asks is a liability. The interruptions are the product, and on your own machine you get to draw the line.",
+    "author": "Jett Nguyen",
+    "date": "2026-07-30",
+    "readTime": "5 min read",
+    "category": "Team Stories",
+    "tags": [
+      "AI agents",
+      "human-in-the-loop",
+      "ownership"
+    ],
+    "url": "your-ai-agent-should-bother-you-more-not-less/"
+  },
+  {
     "title": "You're Not Giving the AI Instructions. You're Setting the Odds.",
     "summary": "Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. Here is the mechanism, and why owning the agent lets you keep the phrasing that works.",
     "author": "Jett Nguyen",

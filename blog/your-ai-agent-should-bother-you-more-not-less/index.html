@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your AI Agent Should Bother You More, Not Less | Otian AI</title>
+  <meta name="description" content="The frictionless agent that never asks is a liability. The interruptions are the product, and on your own machine you get to draw the line." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Consulting &amp; Development</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Your AI Agent Should Bother You More, Not Less</li>
+          </ol>
+        </div>
+      </nav>
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Team Story</span>
+        <h1 class="fade-up delay-1">Your AI Agent Should Bother You More, Not Less</h1>
+        <div class="article-byline fade-up delay-2">
+          <strong>Jett Nguyen</strong>
+          <span>&middot;</span>
+          <span>July 30, 2026</span>
+          <span>&middot;</span>
+          <span>5 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="article-body fade-up delay-1">
+
+<h2>Your AI Agent Should Bother You More, Not Less</h2>
+
+<p>_The frictionless agent that never asks is a liability. The interruptions are the product, and on your own machine you get to draw the line._</p>
+
+<p><strong>By Jett Nguyen · 5 min read · Team Stories · tags: AI agents, human-in-the-loop, ownership</strong></p>
+
+<p>The demos always sell the same fantasy. You type one sentence, close the laptop, and come back to a finished task. Nobody in those demos ever gets asked a question. The agent just handles it.</p>
+
+<p>I wanted that too, for about a month. Then I built an agent that actually did it, handed it a real errand, and watched it execute with total confidence. It was wrong, and it never paused to check. That was the day I decided I had the goal backwards.</p>
+
+<p>I don't want an agent that never interrupts me. I want one that interrupts me at exactly the right moments and stays quiet the rest of the time. The interruptions are not friction getting in the way of the product. They are the product.</p>
+
+<h2>The frictionless demo is selling you a liability</h2>
+
+<p>Watch any agent demo and count the questions the agent asks. It's usually zero. The whole pitch is that it doesn't need you. You delegate, it executes, you're free.</p>
+
+<p>That works great when the task is reversible. It falls apart the second the task isn't. There is a category difference between "draft a reply to this email" and "send this reply to this email." One of those you can throw away. The other lands in someone else's inbox and stays there. A frictionless agent treats both the same, because from the inside they are just two tool calls. The confidence is identical. The consequences are not.</p>
+
+<p>So the frictionless agent isn't smart. It's a fast, tireless worker with no sense of which mistakes it can take back. That's not an assistant. That's a liability you happen to own.</p>
+
+<blockquote class="article-pullquote">An agent that never asks is not smarter. It is just more confident about the things it gets wrong.</blockquote>
+
+<h2>Reversible or not is the only line that matters</h2>
+
+<p>Once you stop chasing zero interruptions, the design problem gets concrete. Every action an agent can take falls on one side of a line: can this be undone cheaply, or not?</p>
+
+<p>Drafting is reversible. Renaming a file is basically reversible. Adding a calendar hold you can delete is reversible. Sending an email is not. Paying an invoice is not. Deleting the only copy of something is not. Replying to forty people at once is very much not.</p>
+
+<p>The valuable agent acts freely on the reversible side and stops on the other side. Not because it's timid, but because reversibility is the actual signal for when a human should look. You don't need to supervise something you can trivially undo. You badly want to supervise the one step that commits.</p>
+
+<p>This is also why "just review everything it did afterward" doesn't scale. If the agent already sent the email, your review is an autopsy. You are reading the record of a decision that is already out in the world. Move the checkpoint to the moment before the irreversible step and you review one thing, at the one time your judgment can still change the outcome.</p>
+
+<h2>The interrupt carries more information than the result</h2>
+
+<p>Here is the part people miss. When a well-built agent stops and asks, it isn't just asking permission. It's handing you a compressed view of its plan at the exact point that plan becomes real.</p>
+
+<p>Say you ask it to clean up a folder of files. A frictionless agent deletes what it thinks is junk and reports "done." A good one comes back with: "I'm about to delete these nine files, keep these four, and here's why." That pause is worth more than the cleanup. In one glance you catch the single file it misread, before it's gone. You didn't have to audit all thirteen. You had to look at one decision, framed by the agent, at the moment it mattered.</p>
+
+<p>That's a different relationship than autocomplete. Autocomplete guesses and you fix it later. A good agent proposes, shows its reasoning at the commit point, and lets you veto. The interruption is the agent being legible instead of just being fast.</p>
+
+<blockquote class="article-pullquote">The interruption is not the tax you pay for automation. It is the automation showing you the one decision that actually matters.</blockquote>
+
+<p>The quiet matters just as much. An agent that asks about everything is as useless as one that asks about nothing, because you learn to click "yes" without reading, and now the confirmation is theater. The skill is calibration: silent on the reversible ninety percent, loud on the ten percent that commits. Get that ratio right and the interruptions stay meaningful, because they are rare and they are always about something you can't take back.</p>
+
+<h2>Whose line is it, anyway?</h2>
+
+<p>Here is where it stops being a general design essay and starts being about who you trust to draw that line.</p>
+
+<p>Where the "ask me first" boundary sits is a judgment call, and it's specific to you. Maybe you're happy to let an agent send routine replies but never touch money. Maybe it's the opposite. A cloud agent run by a vendor has to pick one boundary for millions of people, which means it defaults to the most cautious lowest common denominator, or the most reckless, and either way it isn't your line. And it is drawing that line around actions that touch your inbox, your files, and your accounts, using your credentials, on someone else's infrastructure.</p>
+
+<p>This is the part I care about at Otian. Archie runs on your own computer, on your own Anthropic or OpenAI account, with your files and your memory staying on your machine. So when it pauses before an irreversible step, it's pausing over your actual stuff, and the rule for when it pauses is one you set, not one a vendor set for the average user.</p>
+
+<p>You shape that with add-ons. A skill isn't just a new capability; it carries its own sense of what's safe to do on its own and what should stop and check with you. A routine that runs on a schedule can be trusted to gather and draft all day, and still be built to never send or spend without a human in the loop. You aren't only teaching the agent what to do. You're teaching it where to stop.</p>
+
+<p>That's the version of "your own agent" that actually means something. Not one that never bothers you, and not one that acts without asking. One whose interruptions you designed, running on hardware you own, drawing a line you would stand behind. The goal was never an agent that needs you less. It was an agent that needs you at exactly the right moments, and leaves you alone the rest of the time.</p>
+
+        </article>
+
+        <div class="cta-banner fade-up article-cta">
+          <h2>Reach out to Otian AI</h2>
+          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+
+        <div class="text-center mt-40">
+          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

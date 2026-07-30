@@ -241,7 +241,7 @@
         <div class="section-header">
           <span class="section-label fade-up">The Third Cost, In Numbers</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">What Running the AI Actually Costs</h2>
-          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague about the number. Here is what one agent costs to run for a month, its scheduled reports included.</p>
+          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs to run for a month, scheduled reports included.</p>
         </div>
 
         <div class="cost-table-wrap fade-up delay-2">
@@ -252,8 +252,8 @@
                 <th scope="col">How hard you work it</th>
                 <th scope="col">What it&rsquo;s connected to</th>
                 <th scope="col">Messages a day</th>
-                <th scope="col">Per message</th>
-                <th scope="col">Per month</th>
+                <th scope="col">Per message you send</th>
+                <th scope="col">Per month, all in</th>
               </tr>
             </thead>
             <tbody>
@@ -261,29 +261,29 @@
                 <td data-label="How hard you work it"><span class="cost-use">Light</span></td>
                 <td data-label="What it's connected to">A calendar and a folder of documents</td>
                 <td data-label="Messages a day"><span class="cost-num">about 6</span></td>
-                <td data-label="Per message"><span class="cost-num">2.0&cent;</span></td>
-                <td data-label="Per month"><span class="cost-num cost-num--total">about $4.40</span></td>
+                <td data-label="Per message you send"><span class="cost-num">2.0&cent;</span></td>
+                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $4.40</span><span class="cost-split">$3.60 of messages, plus 80&cent; of scheduled reports</span></td>
               </tr>
               <tr>
                 <td data-label="How hard you work it"><span class="cost-use">Moderate</span></td>
-                <td data-label="What it's connected to">Calendar, email, a database, and a task list</td>
+                <td data-label="What it's connected to">Calendar, email, a to-do list, and its own lists of people and projects</td>
                 <td data-label="Messages a day"><span class="cost-num">about 25</span></td>
-                <td data-label="Per message"><span class="cost-num">3.6&cent;</span></td>
-                <td data-label="Per month"><span class="cost-num cost-num--total">about $32</span></td>
+                <td data-label="Per message you send"><span class="cost-num">3.6&cent;</span></td>
+                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $32</span><span class="cost-split">$27 of messages, plus $5 of scheduled reports</span></td>
               </tr>
               <tr>
                 <td data-label="How hard you work it"><span class="cost-use">Heavy</span></td>
-                <td data-label="What it's connected to">All of those, plus customer records and a meeting archive</td>
+                <td data-label="What it's connected to">All of those, plus about as many connections again</td>
                 <td data-label="Messages a day"><span class="cost-num">about 70</span></td>
-                <td data-label="Per message"><span class="cost-num">5.6&cent;</span></td>
-                <td data-label="Per month"><span class="cost-num cost-num--total">about $137</span></td>
+                <td data-label="Per message you send"><span class="cost-num">5.6&cent;</span></td>
+                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $137</span><span class="cost-split">$118 of messages, plus $19 of scheduled reports</span></td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>The per-message figure is the one that scales, and it&rsquo;s a few cents.</strong> An agent gets expensive through steady use across a month, not because any single question is costly. Worked hard and connected to everything, though, it can cost more per month than most software you subscribe to. If that&rsquo;s going to be your pattern, plan for it, and read the third card below.</p>
-        <p class="cost-note">Modelled from measured component sizes and the providers&rsquo; published prices in July 2026, for one agent running on Claude Sonnet at the Balanced response quality. A scheduled report is priced like a short conversation, so a morning briefing and a Friday report together add a few dollars a month.</p>
+        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one. The rate is the number that scales, and at a few cents an agent gets expensive through steady use rather than through any one costly question. Worked hard, it can pass most software subscriptions, and the third card below is the dial for that.</p>
+        <p class="cost-note">Modelled from measured component sizes and the providers&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month.</p>
 
         <div class="mt-48 feature-grid cost-drivers fade-up delay-2">
           <article class="feature-card">
@@ -293,7 +293,7 @@
               </svg>
             </div>
             <h3>It&rsquo;s the passes that add up</h3>
-            <p>Your agent has no memory of its own. Every reply hands it the whole picture again: who it is, who you are, what it&rsquo;s allowed to do, and the conversation so far. A question it can answer from what it already knows takes one pass. A question that makes it look something up, read the answer, then look up something else takes three or four, and each pass pays for that whole picture again. The number of passes, not the length of your question, is what multiplies the bill.</p>
+            <p>Your agent has no memory of its own, so every reply starts by handing it a fresh briefing: who it is, who you are, what it&rsquo;s allowed to do, and the conversation so far. A question it can answer from that briefing alone takes one pass. One that makes it look something up, read the answer, then look up something else takes three or four, each re-sending the whole briefing. Passes are what multiply the bill, not the length of your question.</p>
           </article>
 
           <article class="feature-card">
@@ -304,7 +304,7 @@
               </svg>
             </div>
             <h3>Cost follows what you connect</h3>
-            <p>Each service has to be described to your agent before it can use it, so the picture gets longer with every one you add. A calendar-only agent carries a short picture. An agent with a calendar, an inbox, a database, a task list, customer records, and a meeting archive carries one about four and a half times longer, and pays roughly 2.8 times per message for the identical question. The capability is real, so this isn&rsquo;t waste, but it&rsquo;s worth knowing before you connect everything you own.</p>
+            <p>Every service has to be described in that briefing before your agent can use it. A calendar-only agent carries a short one. Wire in an inbox, a to-do list, its own lists, and a few other services and the briefing runs about four and a half times longer, so the identical question costs roughly 2.8 times as much. The capability is real, so this isn&rsquo;t waste. It&rsquo;s worth knowing before you connect everything you own.</p>
           </article>
 
           <article class="feature-card">
@@ -315,7 +315,7 @@
               </svg>
             </div>
             <h3>Response quality is the dial you hold</h3>
-            <p>Economy, Balanced, and Best cost very different amounts per message, and every figure in the table above is Balanced, the default. Running that same heavy agent entirely on Economy takes roughly two thirds off it. That trades against how good the answers are, which is exactly why it&rsquo;s a switch you hold rather than a default we pick for you. You can change it whenever you like, and some add-ons ask for more when a task genuinely needs it.</p>
+            <p>Economy, Balanced, and Best cost very different amounts per message, and every figure above is Balanced, the default. Running that heavy agent entirely on Economy takes roughly two thirds off it. That trades against how good the answers are, which is why it&rsquo;s your switch rather than our default. Change it whenever you like.</p>
           </article>
 
           <article class="feature-card">
@@ -325,26 +325,26 @@
               </svg>
             </div>
             <h3>Archie takes the cheap route when there is one</h3>
-            <p>Providers let you park a copy of that picture on their side, so the next pass can point at it instead of sending it again. Reading the copy back costs about a tenth of the usual price, but making it costs about a quarter more than simply sending the text, so it&rsquo;s a bet rather than a saving. Archie places that bet one reply at a time: it keeps a copy when this reply is going to read it back, or when another message looks likely soon, and skips it when neither is true. There&rsquo;s nothing to set up, and it applies to every agent.</p>
+            <p>Providers let you park a copy of the briefing on their side, so the next pass points at it instead of sending it again. Reading that copy costs about a tenth of the usual price, but making it costs about a quarter more, so it&rsquo;s a bet rather than a saving. Archie places it one reply at a time: keep a copy when this reply will read it back or another message looks likely soon, skip it otherwise. It runs on every agent with nothing to set up.</p>
           </article>
         </div>
 
         <div class="cost-trust fade-up delay-2">
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The size of the picture your agent carries, the providers&rsquo; published prices, and how many passes an ordinary message takes. These come from counting the real thing, several of them against agents that have been running for weeks.</p>
+            <p>The size of the briefing, the providers&rsquo; published prices, and how many passes an ordinary message takes. Counted from the real thing, several of them against agents that have been running for weeks.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--estimated">Estimated</span>
-            <p>How much the model works a problem through before it answers. That working is billed at five times the rate of reading, and it varies with the question, which makes it the widest unknown here: <strong>a heavy agent could land anywhere from about $118 to about $301 a month</strong>. The table uses the middle of that range.</p>
+            <p>How much the model works a problem through before answering. That working bills at five times the rate of reading and varies with the question, so it&rsquo;s the widest unknown here: <strong>a heavy agent could land anywhere from about $118 to about $301 a month</strong>. The table uses the middle.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-            <p>How people space their messages out across a day, which is what the copy-keeping decision above turns on. We&rsquo;ve used reasonable patterns rather than measured ones.</p>
+            <p>How people space their messages out across a day, which is what the copy-keeping decision turns on. Reasonable patterns rather than measured ones.</p>
           </div>
         </div>
 
-        <p class="cost-note cost-note--lead">None of this asks you to take our word for it. <strong>Archie keeps its own running total.</strong> The Account screen shows what you&rsquo;ve spent this month and all time, broken down by provider and by agent, counted from what every reply hands back. That figure is an estimate from a price table inside the app rather than the provider&rsquo;s invoice, and it says so on the screen. The authoritative bill is on the provider&rsquo;s own dashboard, where you can also set a hard spending cap, because the account is yours and not ours.</p>
+        <p class="cost-note cost-note--lead">None of this asks you to take our word for it. <strong>Archie keeps its own running total</strong> on the Account screen, this month and all time, by provider and by agent. It&rsquo;s an estimate from a price table inside the app rather than the provider&rsquo;s invoice, and it says so on screen. The real bill is on the provider&rsquo;s dashboard, where you can also set a hard spending cap, because the account is yours and not ours.</p>
       </div>
     </section>
 

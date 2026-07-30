@@ -6744,6 +6744,18 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 1.0625rem;
 }
 
+/* The monthly total covers scheduled routines as well as the messages you send,
+   so per-message times thirty doesn't reach it. Anyone who checks our arithmetic
+   deserves to find the answer in the cell, not in a footnote. */
+.cost-split {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
 .cost-note {
   max-width: 780px;
   margin: 24px auto 0;

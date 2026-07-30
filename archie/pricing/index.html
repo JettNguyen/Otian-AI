@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Archie Pricing | Otian AI</title>
-  <meta name="description" content="What Archie will cost: a one-time $149 license for the app, free built-in add-ons, and pay-as-you-go AI billed straight to your own provider account. Guided setup is $100 an hour-long session." />
+  <meta name="description" content="What Archie will cost: a one-time $149 license for the app, free built-in add-ons, and pay-as-you-go AI billed straight to your own provider account, worked out at about $4.40, $32, or $137 a month depending on how hard you work your agent. Guided setup is $100 an hour-long session." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -208,10 +208,11 @@
             <span class="price-card-label">The AI Itself</span>
             <div class="price-card-amount price-card-amount--words">Pay as you go</div>
             <p>Your own account with Anthropic or OpenAI. It bills you directly, and the money never passes through us.</p>
+            <a href="#ai-cost" class="price-card-link">What that comes to &rarr;</a>
           </article>
         </div>
 
-        <p class="price-note"><strong>What the AI costs is genuinely up to you</strong>, because it depends on how hard you work your agent. Ask it a handful of things a day and it&rsquo;s a few dollars a month. Lean on it constantly (long research, big documents, all-day back-and-forth) and it climbs into the tens of dollars. You can watch the meter in real time on the provider&rsquo;s own dashboard, because the account is yours, not ours.</p>
+        <p class="price-note"><strong>The first two costs are fixed and the third isn&rsquo;t</strong>, because it depends on how hard you work your agent. It&rsquo;s the one number on this page we can only estimate, so rather than wave at a range, <a href="#ai-cost">we&rsquo;ve worked it out for three levels of use</a>.</p>
         <p class="price-note">A few add-ons reach out to services that charge their own fees. When one does, <strong>it tells you before you install it</strong>, so the number you expect is the number you pay.</p>
         <p class="price-note">And if Archie can&rsquo;t do something you need, <a href="../../skills-marketplace/commission/">we&rsquo;ll build the add-on</a>. That&rsquo;s quoted per job, scoped and priced before any work starts, and you earn 25% of the proceeds from every future sale of it.</p>
 
@@ -226,7 +227,128 @@
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="guided-heading">
+    <!-- ==============================
+         What running the AI costs.
+         The one cost on this page we don't set. A reader is here to decide
+         whether to start, and "a few dollars, or maybe tens" doesn't help
+         them do that, so: real figures, the three things that move them, and
+         a plain statement of which figures are counted and which are
+         modelled. Numbers come from the cost model in the Archie repo
+         (docs/cost-of-running-an-agent.md); update both together.
+         ============================== -->
+    <section class="section section-alt" id="ai-cost" aria-labelledby="ai-cost-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The Third Cost, In Numbers</span>
+          <h2 id="ai-cost-heading" class="fade-up delay-1">What Running the AI Actually Costs</h2>
+          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague about the number. Here is what one agent costs to run for a month, its scheduled reports included.</p>
+        </div>
+
+        <div class="cost-table-wrap fade-up delay-2">
+          <table class="cost-table">
+            <caption class="sr-only">Estimated monthly AI cost for one agent, at three levels of use.</caption>
+            <thead>
+              <tr>
+                <th scope="col">How hard you work it</th>
+                <th scope="col">What it&rsquo;s connected to</th>
+                <th scope="col">Messages a day</th>
+                <th scope="col">Per message</th>
+                <th scope="col">Per month</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="How hard you work it"><span class="cost-use">Light</span></td>
+                <td data-label="What it's connected to">A calendar and a folder of documents</td>
+                <td data-label="Messages a day"><span class="cost-num">about 6</span></td>
+                <td data-label="Per message"><span class="cost-num">2.0&cent;</span></td>
+                <td data-label="Per month"><span class="cost-num cost-num--total">about $4.40</span></td>
+              </tr>
+              <tr>
+                <td data-label="How hard you work it"><span class="cost-use">Moderate</span></td>
+                <td data-label="What it's connected to">Calendar, email, a database, and a task list</td>
+                <td data-label="Messages a day"><span class="cost-num">about 25</span></td>
+                <td data-label="Per message"><span class="cost-num">3.6&cent;</span></td>
+                <td data-label="Per month"><span class="cost-num cost-num--total">about $32</span></td>
+              </tr>
+              <tr>
+                <td data-label="How hard you work it"><span class="cost-use">Heavy</span></td>
+                <td data-label="What it's connected to">All of those, plus customer records and a meeting archive</td>
+                <td data-label="Messages a day"><span class="cost-num">about 70</span></td>
+                <td data-label="Per message"><span class="cost-num">5.6&cent;</span></td>
+                <td data-label="Per month"><span class="cost-num cost-num--total">about $137</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="cost-note cost-note--lead"><strong>The per-message figure is the one that scales, and it&rsquo;s a few cents.</strong> An agent gets expensive through steady use across a month, not because any single question is costly. Worked hard and connected to everything, though, it can cost more per month than most software you subscribe to. If that&rsquo;s going to be your pattern, plan for it, and read the third card below.</p>
+        <p class="cost-note">Modelled from measured component sizes and the providers&rsquo; published prices in July 2026, for one agent running on Claude Sonnet at the Balanced response quality. A scheduled report is priced like a short conversation, so a morning briefing and a Friday report together add a few dollars a month.</p>
+
+        <div class="mt-48 feature-grid cost-drivers fade-up delay-2">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+              </svg>
+            </div>
+            <h3>It&rsquo;s the passes that add up</h3>
+            <p>Your agent has no memory of its own. Every reply hands it the whole picture again: who it is, who you are, what it&rsquo;s allowed to do, and the conversation so far. A question it can answer from what it already knows takes one pass. A question that makes it look something up, read the answer, then look up something else takes three or four, and each pass pays for that whole picture again. The number of passes, not the length of your question, is what multiplies the bill.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/>
+                <line x1="6.4" y1="6.4" x2="9.9" y2="9.9"/><line x1="17.6" y1="6.4" x2="14.1" y2="9.9"/><line x1="6.4" y1="17.6" x2="9.9" y2="14.1"/><line x1="17.6" y1="17.6" x2="14.1" y2="14.1"/>
+              </svg>
+            </div>
+            <h3>Cost follows what you connect</h3>
+            <p>Each service has to be described to your agent before it can use it, so the picture gets longer with every one you add. A calendar-only agent carries a short picture. An agent with a calendar, an inbox, a database, a task list, customer records, and a meeting archive carries one about four and a half times longer, and pays roughly 2.8 times per message for the identical question. The capability is real, so this isn&rsquo;t waste, but it&rsquo;s worth knowing before you connect everything you own.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/>
+                <line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>
+              </svg>
+            </div>
+            <h3>Response quality is the dial you hold</h3>
+            <p>Economy, Balanced, and Best cost very different amounts per message, and every figure in the table above is Balanced, the default. Running that same heavy agent entirely on Economy takes roughly two thirds off it. That trades against how good the answers are, which is exactly why it&rsquo;s a switch you hold rather than a default we pick for you. You can change it whenever you like, and some add-ons ask for more when a task genuinely needs it.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>
+              </svg>
+            </div>
+            <h3>Archie takes the cheap route when there is one</h3>
+            <p>Providers let you park a copy of that picture on their side, so the next pass can point at it instead of sending it again. Reading the copy back costs about a tenth of the usual price, but making it costs about a quarter more than simply sending the text, so it&rsquo;s a bet rather than a saving. Archie places that bet one reply at a time: it keeps a copy when this reply is going to read it back, or when another message looks likely soon, and skips it when neither is true. There&rsquo;s nothing to set up, and it applies to every agent.</p>
+          </article>
+        </div>
+
+        <div class="cost-trust fade-up delay-2">
+          <div class="cost-trust-row">
+            <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+            <p>The size of the picture your agent carries, the providers&rsquo; published prices, and how many passes an ordinary message takes. These come from counting the real thing, several of them against agents that have been running for weeks.</p>
+          </div>
+          <div class="cost-trust-row">
+            <span class="cost-trust-tag cost-trust-tag--estimated">Estimated</span>
+            <p>How much the model works a problem through before it answers. That working is billed at five times the rate of reading, and it varies with the question, which makes it the widest unknown here: <strong>a heavy agent could land anywhere from about $118 to about $301 a month</strong>. The table uses the middle of that range.</p>
+          </div>
+          <div class="cost-trust-row">
+            <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
+            <p>How people space their messages out across a day, which is what the copy-keeping decision above turns on. We&rsquo;ve used reasonable patterns rather than measured ones.</p>
+          </div>
+        </div>
+
+        <p class="cost-note cost-note--lead">None of this asks you to take our word for it. <strong>Archie keeps its own running total.</strong> The Account screen shows what you&rsquo;ve spent this month and all time, broken down by provider and by agent, counted from what every reply hands back. That figure is an estimate from a price table inside the app rather than the provider&rsquo;s invoice, and it says so on the screen. The authoritative bill is on the provider&rsquo;s own dashboard, where you can also set a hard spending cap, because the account is yours and not ours.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="guided-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Rather Not Do It Alone?</span>
@@ -253,7 +375,7 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="worth-heading">
+    <section class="section section-alt" aria-labelledby="worth-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">What It&rsquo;s Worth</span>
@@ -264,12 +386,12 @@
           <p>The job you&rsquo;re handing your agent (the inbox, the calendar, the follow-ups, the research, the small things that eat a week) is the job you&rsquo;d otherwise hand a person.</p>
           <p><strong>A part-time personal assistant can run thousands of dollars a year.</strong> They also go home at five, take holidays, and have to be told the same thing twice.</p>
           <p>Your agent doesn&rsquo;t. It&rsquo;s there at six in the morning when you want the day laid out, and at eleven at night when you remember the thing you forgot, for as long as your computer is on and Archie is running.</p>
-          <p class="compare-kicker">That&rsquo;s the trade: tens of dollars a month, for help that never clocks out.</p>
+          <p class="compare-kicker">That&rsquo;s the trade: tens of dollars a month rather than thousands a year, for help that never clocks out.</p>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" aria-label="Call to action">
+    <section class="section" aria-label="Call to action">
       <div class="container">
         <div class="cta-banner fade-up">
           <h2>No surprises, and nothing to pay yet.</h2>

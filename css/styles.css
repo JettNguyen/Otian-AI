@@ -6646,6 +6646,206 @@ html[data-theme="dark"] .booking-container iframe {
 .bal-big { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
 .danger-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
 
+/* ==========================================================================
+   40b. Pricing Page: what running the AI costs
+   The AI account is the one cost on that page we don't set, and a vague range
+   is worse than useless to someone deciding whether to start. So this block
+   presents real figures the plainest way there is: a checkable table, then a
+   labelled admission of which figures are counted and which are modelled.
+   Same reasoning as the trust table, and it stacks on a phone rather than
+   scrolling sideways.
+
+   Also fills in four classes the pricing page has always used and the
+   stylesheet never defined (.price-grid--three, .price-note, .compare-panel,
+   .compare-kicker), which is why the three cost cards used to wrap 2 + 1.
+   ========================================================================== */
+
+.price-grid--three { grid-template-columns: repeat(3, 1fr); }
+
+.price-note {
+  max-width: 780px;
+  margin: 0 auto 16px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.price-note strong { color: var(--text-primary); }
+
+.compare-panel {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 36px 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.compare-panel p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+.compare-panel p:last-child { margin-bottom: 0; }
+.compare-panel strong { color: var(--text-primary); }
+
+.compare-kicker {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ── The figures table ── */
+.cost-table-wrap { margin-top: 40px; }
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.cost-table th,
+.cost-table td {
+  padding: 16px 18px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+.cost-table th {
+  background: var(--surface-soft-alt);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.cost-table td { color: var(--text-secondary); }
+.cost-table tbody tr:last-child td { border-bottom: none; }
+
+.cost-use {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Figures sit in columns, so they get tabular digits and never wrap. */
+.cost-num {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--text-primary);
+}
+.cost-num--total {
+  font-weight: 700;
+  font-size: 1.0625rem;
+}
+
+.cost-note {
+  max-width: 780px;
+  margin: 24px auto 0;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+.cost-note strong { color: var(--text-primary); }
+
+/* Two of the three notes in this section are the reader's actual takeaway, not
+   provenance, so they get body weight instead of fine-print grey. */
+.cost-note--lead {
+  margin-top: 32px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+/* ── Which figures we counted and which we guessed ──
+   Saying so is what makes the table above usable, so it gets rows of its own
+   rather than a footnote nobody reads. */
+.cost-drivers { grid-template-columns: repeat(2, 1fr); }
+
+.cost-trust {
+  display: grid;
+  gap: 14px;
+  margin-top: 48px;
+}
+.cost-trust-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 20px;
+  align-items: start;
+  padding: 20px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.cost-trust-tag {
+  justify-self: start;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.cost-trust-tag--measured  { background: var(--c-green-subtle); color: var(--c-green-ink); }
+.cost-trust-tag--estimated { background: var(--c-gold-subtle);  color: var(--c-gold-ink); }
+.cost-trust-tag--assumed   { background: var(--surface-soft-strong); color: var(--text-secondary); }
+.cost-trust-row p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+.cost-trust-row p strong { color: var(--text-primary); }
+
+/* 1000px is where .price-grid and .feature-grid already drop to one column, so
+   these two match it rather than inventing a second breakpoint. Both selectors
+   have to repeat it: they sit later in the file than those rules and would
+   otherwise win at equal specificity. */
+@media (max-width: 1000px) {
+  .price-grid--three { grid-template-columns: 1fr; }
+  .cost-drivers { grid-template-columns: 1fr; }
+  .compare-panel { padding: 28px 24px; }
+}
+
+@media (max-width: 760px) {
+  .cost-table,
+  .cost-table tbody,
+  .cost-table tr,
+  .cost-table td { display: block; width: 100%; }
+
+  .cost-table thead { display: none; }
+
+  .cost-table tr {
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+  }
+  .cost-table tr:last-child { border-bottom: none; }
+
+  .cost-table td {
+    border-bottom: none;
+    padding: 8px 18px;
+  }
+  /* The column heading moves into each cell, so a stacked row still says
+     what its number means. */
+  .cost-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .cost-trust-row { grid-template-columns: 1fr; gap: 12px; }
+}
+
 /* ==============================
    41. Reduced motion & print
    ============================== */

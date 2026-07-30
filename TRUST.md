@@ -163,6 +163,27 @@ version number, no machine ID, and no account. Our server sees an IP address and
 **Why it's true:** `src-tauri/tauri.conf.json:45` has no substitution placeholders, so the
 updater plugin sends a bare GET. Version comparison happens client-side.
 
+### ✅ The spend meter is local, and it is an estimate
+
+**Approved wording:** "Archie keeps its own running total. The Account screen shows what
+you've spent this month and all time, broken down by provider and by agent, counted from what
+every reply hands back. That figure is an estimate from a price table inside the app rather
+than the provider's invoice, and it says so on the screen. The authoritative bill is on the
+provider's own dashboard."
+
+**Why it's true:** `build_usage_sink` (`src-tauri/src/usage.rs:21-40`) appends one JSONL line
+per LLM call to a per-agent log on local disk: provider, model, fresh input, cached input,
+cache-write, output, and web-search counts. Cost is derived by multiplying those counts by a
+local price table in the same file, which the module's own doc comment calls "an **estimate**;
+the estimate is token-accurate, only the prices are approximate." The `SpendingPanel`
+(`src/app/auth.tsx:76-160`) reads it back for this month / all time, by provider and by agent,
+and renders the total next to the word "estimated" plus the line "Estimated from token usage
+on your own API key, not the provider's bill."
+
+**Required clauses — do not drop them:** say **estimate**, and say the provider's dashboard is
+the real bill. Overstating this one turns a helpful number into a billing promise we cannot
+keep. Never write "Archie tracks your exact spend" or "see your bill in Archie".
+
 ### ✅ Your API key stays in the Keychain
 
 **Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to

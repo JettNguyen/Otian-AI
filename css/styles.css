@@ -6756,6 +6756,20 @@ html[data-theme="dark"] .booking-container iframe {
   font-variant-numeric: tabular-nums;
 }
 
+/* Where the figures came from, set as a caption rather than as prose: it sits
+   against the table's own left edge, a size down and in italic, so it reads as
+   attached to the table instead of as another paragraph to get through. */
+.cost-table-note {
+  /* Capped so it wraps to two predictable lines rather than running the full
+     table width, which is far too long a measure to read at this size. */
+  max-width: 820px;
+  margin: 14px 2px 0;
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
 .cost-note {
   max-width: 780px;
   margin: 24px auto 0;

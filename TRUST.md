@@ -221,6 +221,44 @@ count-stuffing) but never retained: there is no `users/{uid}` free-install list 
   only the aggregate. Never phrase it as "nothing leaves" or "zero network calls."
 - ❌ Never imply the ping is anonymous. It carries your ID token by design.
 
+### 🚧 Archie on your phone: an encrypted mailbox we hold and cannot read (BUILT, NOT YET RELEASED)
+
+**Status 2026-07-31:** the code is written and the tests pass, but nothing is live to users and the
+Firestore rules are not deployed. **Do not put any of this on a public page until it ships**, and
+when it does, the "What We Hold" amendment below must land in the same release.
+
+**Approved wording (once shipped):** "Turn on phone access and your computer starts leaving
+messages for your phone in a mailbox on our servers. Every one of them is sealed with a key your
+computer makes and gives to your phone by scanning a code. The key never passes through us, so what
+we hold is a pile of ciphertext with no way to open it."
+
+**Why it's true:** payloads are sealed with AES-256-GCM before they are written
+(`crates/archie-core/src/phone.rs`, `seal`/`open`; browser side in the website repo's
+`js/phone.js`, same functions, verified against each other by the `opens_an_envelope_sealed_by_the_browser`
+test vector). The key is generated on the desktop, stored in the OS keychain, and delivered to the
+phone in a **URL fragment** (`phone::pair_url`, asserted by
+`the_pairing_key_rides_in_the_fragment_never_the_query`), which browsers do not transmit to servers.
+The relay rules in the Archie repo's `firestore.rules` bound shape and size but grant no read to
+anyone but the account owner, and the seal means owning the row is not reading it.
+
+**Required clauses — do not drop them:**
+- ⚠️ **Say that we hold it.** The claim is about *custody without access*, not about absence. "It
+  never touches our servers" is FALSE here and must never be written: the whole mechanism is that it
+  does touch our servers, sealed.
+- ⚠️ **Three fields are in the clear**, and pretending otherwise is the easy overclaim: a
+  timestamp, the app version, and a command's `pending`/`done`/`failed` status. We can therefore see
+  *that* a phone is managing a computer, and roughly when, but not what it did. Say "we can't read
+  the messages", never "we can't see anything".
+- ⚠️ **Off by default.** With phone access off, nothing about the computer is written at all. That
+  is worth stating, because it is the strongest true form for anyone who does not want the feature.
+
+**Boundaries — do not cross:**
+- ❌ Never "end-to-end encrypted, so nobody can ever see your agent". The desktop is one end and
+  the phone is the other; a person with the computer unlocked has everything, as they always did.
+- ❌ Never imply the encryption protects against a compromised phone. Whoever holds the phone holds
+  the key. That is what the Unpair button and key rotation are for.
+- ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
+
 ### ✅ It works while you sleep
 
 **Approved wording:** "It Works While You Sleep" / "works in the background while you sleep."
@@ -270,6 +308,19 @@ wording above. Now live correctly at `index.html:573`, `archie/index.html:275`,
 `archie/install/index.html:186`, `faq/index.html:306`, `business/index.html:223`,
 `privacy-policy/index.html:154`, `trust/index.html:296`. **Do not let the shorter,
 false form return** — "email + subscription + paid add-ons" is the floor; never fewer.
+
+🚧 **Pending amendment: a fourth thing, when phone access ships.** "Archie on your phone" (see the
+claim above, built 2026-07-31, not yet released) puts a fourth item in our custody: an encrypted
+mailbox between somebody's computer and their phone. We hold it and have no key to it, but we
+**hold** it, and "three things" is a floor claim, not a slogan to defend. The moment that feature
+reaches users, every page in the list above needs the conditional fourth clause:
+
+> Our servers know three things about you: your email address, whether you own Archie, and which
+> **paid** add-ons you've bought. If you turn on phone access, they also hold the messages between
+> your computer and your phone, sealed with a key we never receive.
+
+**Do not ship the feature and the old sentence in the same release.** Shipping them together is
+the exact shape of the 2026-07-15 falsehood: a true sentence that a new feature quietly made false.
 
 ---
 
@@ -428,6 +479,8 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | "Your keys never leave your computer" / "keys stay on your machine" | **False.** The key is sent to Anthropic/OpenAI as a request header on every call (`secrets.rs`, `x-api-key`/bearer). The true claim is storage + custody: "keys sit in your system's keychain, where we have no way to read them." |
 | "We never hold your data" (unscoped) | Unscoped "your data" is false — we hold email + license + paid add-ons. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip. |
 | "It asks before it acts" / "acts only with your approval" (unscoped) | Same umbrella as "nothing sends without your OK": chat replies, provider web search, `remember`, and calendar reads act without asking. Use the scoped Send-tap / calendar-changes forms. |
+| "Your agent's data stays on your computer" (once phone access ships) | **False** with phone access on. Installed add-ons and their settings are mirrored to our servers, encrypted. The true claim is custody without access: "we hold the messages and cannot read them." |
+| "Phone access never touches our servers" | **False**, and backwards. The mechanism *is* our servers, holding sealed messages. Claiming absence throws away the honest, checkable claim in exchange for one that is trivially disprovable. |
 
 ---
 

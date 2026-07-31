@@ -6879,6 +6879,65 @@ html[data-theme="dark"] .booking-container iframe {
   .cost-trust-row { grid-template-columns: 1fr; gap: 12px; }
 }
 
+/* ── Archie on your phone (phone/), on top of the Account family above ──
+   Only the pieces that page genuinely adds. Its shell, cards, section heads and pills are the
+   .acct-* and .pill classes already defined here, so the two screens stay recognisably one app
+   and there is one place to restyle both. */
+.phone-h2 { font-size: 1.05rem; font-weight: 600; margin: 0 0 10px; text-align: center; }
+.phone-steps {
+  margin: 14px 0 0; padding-left: 20px; color: var(--text-secondary);
+  font-size: 0.9rem; line-height: 1.6;
+}
+.phone-steps li { margin-bottom: 8px; }
+.phone-steps li:last-child { margin-bottom: 0; }
+.phone-steps-tight { font-size: 0.85rem; margin-top: 10px; }
+.phone-note {
+  margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--border);
+  color: var(--text-muted); font-size: 0.8rem; line-height: 1.55;
+}
+/* The iOS Share glyph, inline in a sentence. Sized to the text so it reads as the icon the person
+   is about to look for rather than as a bullet. */
+.phone-share-icon {
+  width: 1em; height: 1em; vertical-align: -0.15em; margin: 0 1px;
+}
+.phone-install {
+  background: var(--surface-soft); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
+}
+.phone-install-title { font-size: 0.9rem; font-weight: 600; }
+.phone-install-body { margin: 6px 0 10px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
+/* What an add-on is still waiting on. Tinted, because it is the one thing on the page that asks
+   something of the reader; everything else is just reporting. */
+.phone-needs {
+  margin-top: 14px; border-radius: var(--radius-sm); padding: 12px 14px;
+  background: rgba(224, 149, 49, 0.1); border: 1px solid rgba(224, 149, 49, 0.28);
+}
+.phone-needs-title {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  color: var(--text-secondary); margin-bottom: 8px;
+}
+.phone-need { font-size: 0.85rem; line-height: 1.55; color: var(--text-primary); margin-bottom: 6px; }
+.phone-need:last-child { margin-bottom: 0; }
+.phone-group-title {
+  margin: 18px 0 6px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.phone-list { list-style: none; margin: 0; padding: 0; }
+.phone-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.phone-row:last-child { border-bottom: none; }
+.phone-row-name { flex: 1; font-size: 0.9rem; }
+.phone-row-tag { font-size: 0.72rem; color: var(--text-muted); }
+/* Buttons in a row are the tap targets on a phone, so they get a real minimum height rather than
+   the compact desktop size .btn-mini would otherwise give them. */
+.phone-row .btn-mini { min-height: 36px; }
+.phone-foot {
+  display: flex; justify-content: space-between; gap: 12px;
+  margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+
 /* ==============================
    41. Reduced motion & print
    ============================== */

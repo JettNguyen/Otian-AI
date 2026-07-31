@@ -110,6 +110,10 @@ if (root) {
     menu.innerHTML =
       '<div class="nav-account-menu-label">' + label + "</div>" +
       '<a role="menuitem" href="/account/"' + activeAttr("/account/") + ">Manage account</a>" +
+      // The way people find "Archie on your phone" at all. The site's nav markup is duplicated in
+      // every page (twice: desktop and drawer), so nav changes normally have to be scripted across
+      // all of them. This menu is the exception, because it is built here in JS.
+      '<a role="menuitem" href="/phone/"' + activeAttr("/phone/") + ">Archie on your phone</a>" +
       '<a role="menuitem" href="/activity/"' + activeAttr("/activity/") + ">Account activity</a>" +
       '<a role="menuitem" href="/billing/"' + activeAttr("/billing/") + ' id="navAccountBilling">Billing</a>' +
       '<div class="nav-account-divider"></div>' +

@@ -1,0 +1,25 @@
+{
+  "name": "Archie on your phone",
+  "short_name": "Archie",
+  "description": "Manage the Archie agent running on your computer, from your phone.",
+  "start_url": "/phone/",
+  "scope": "/phone/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#faf7f2",
+  "theme_color": "#faf7f2",
+  "icons": [
+    {
+      "src": "/assets/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Archie on Your Phone | Otian AI</title>
+  <meta name="description" content="Manage the Archie agent running on your computer from your phone: add add-ons, finish their setup, and pause routines while you are away from your desk." />
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
+  <!-- Added to a home screen, this runs without browser chrome. iOS reads the apple- prefixed tag;
+       everything else reads the manifest. -->
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Archie" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../our-story/" role="menuitem">Our Story</a>
+            <a href="../testimonials/" role="menuitem">Reviews</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+            <a href="../trust/" role="menuitem">Trust</a>
+          </div>
+        </div>
+      </div>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../archie/">What Is Archie?</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../skills-marketplace/commission/">Commission One</a>
+      <a href="../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../how-it-works/">How It Works</a>
+      <a href="../ai-explained/">AI Explained</a>
+      <a href="../blog/">Blog</a>
+      <a href="../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../our-story/">Our Story</a>
+      <a href="../testimonials/">Reviews</a>
+      <a href="../contact/">Contact</a>
+      <a href="../trust/">Trust</a>
+    </div>
+  </div>
+  <main id="main">
+
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Archie on Your Phone</span>
+        <h1 class="fade-up delay-1">Your Agent, From Anywhere</h1>
+        <p>Add add-ons, finish their setup, and pause routines without going back to your computer.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Archie on your phone">
+      <div class="container">
+        <div class="acct-wrap">
+
+          <!-- Checking the session. Replaced by exactly one of the panels below. -->
+          <div id="ph-loading" class="acct-card">
+            <div class="acct-spinner" aria-hidden="true"></div>
+            <p class="acct-lead">Checking your session&hellip;</p>
+          </div>
+
+          <!--
+            On a laptop or desktop. Home-screen instructions would be nonsense here, so this branch
+            shows none: it says what the page is for and how to get it onto a phone.
+          -->
+          <div id="ph-desktop" class="acct-card acct-hidden">
+            <h2 class="phone-h2">This page is for your phone</h2>
+            <p class="acct-lead">
+              It manages the Archie running on this computer from somewhere else. On this screen you
+              already have the whole app, so there is nothing here you cannot do better in Archie
+              itself.
+            </p>
+            <p class="acct-lead" style="margin-top:12px;">
+              To set it up: open Archie, go to <strong>Account</strong>, and turn on
+              <strong>Archie on your phone</strong>. Scan the code it shows with your phone&rsquo;s
+              camera.
+            </p>
+          </div>
+
+          <!--
+            Signed in on a phone, but this browser has no pairing key. Every route here ends at the
+            same place, so the instructions are the instructions, not an error.
+          -->
+          <div id="ph-pair" class="acct-card acct-hidden">
+            <h2 class="phone-h2">Pair this phone</h2>
+            <p class="acct-lead">
+              Your agent lives on your computer, and only your computer can let this phone in. This
+              takes about a minute, once.
+            </p>
+            <ol class="phone-steps">
+              <li>On your computer, open Archie.</li>
+              <li>Go to <strong>Account</strong>.</li>
+              <li>Turn on <strong>Archie on your phone</strong>.</li>
+              <li>Point this phone&rsquo;s camera at the code it shows, and tap the link.</li>
+            </ol>
+            <p class="phone-note">
+              The code carries the key that encrypts everything between the two devices. It is the
+              reason we can run this without being able to read any of it.
+            </p>
+          </div>
+
+          <!-- Paired. The dashboard. -->
+          <div id="ph-app" class="acct-hidden">
+
+            <!-- Install prompt: filled in by phone.js, per operating system, and absent entirely
+                 once the page is already on a home screen. -->
+            <div id="ph-install" class="phone-install acct-hidden"></div>
+
+            <!-- Status: is Archie awake, and when did it last say so. -->
+            <div class="acct-section" id="ph-status">
+              <div class="acct-section-head">
+                <div>
+                  <div class="acct-section-title" id="ph-status-title">Looking for your computer&hellip;</div>
+                  <div class="acct-email" id="ph-status-detail">&hellip;</div>
+                </div>
+                <span class="pill" id="ph-status-pill">&hellip;</span>
+              </div>
+              <div class="acct-section-body acct-hidden" id="ph-status-help"></div>
+            </div>
+
+            <!-- One card per agent: what it has, and what it is still waiting on. -->
+            <div id="ph-agents"></div>
+
+            <div class="phone-foot">
+              <button class="btn btn-secondary btn-mini" id="ph-refresh">Refresh</button>
+              <button class="btn btn-secondary btn-mini" id="ph-unpair">Unpair this phone</button>
+            </div>
+          </div>
+
+          <!-- bindStatusToast turns this into the bottom-pinned toast, so it needs no class of
+               its own; the same aria-live element the other account pages use. -->
+          <div id="ph-status-toast" role="status" aria-live="polite"></div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../">Home</a>
+            <a href="../archie/">Archie</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Archie Pricing</a>
+            <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../business/">For Business</a>
+            <a href="../what-you-need/">What You Need</a>
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../faq/">FAQ</a>
+            <a href="../trust/">Trust</a>
+            <a href="../our-story/">Our Story</a>
+            <a href="../testimonials/">Reviews</a>
+            <a href="../contact/">Contact</a>
+            <a href="../account/">Account</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script type="module" src="../js/account-nav.js"></script>
+  <script type="module" src="../js/phone.js"></script>
+</body>
+</html>

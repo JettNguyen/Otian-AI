@@ -6906,6 +6906,18 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .phone-install-title { font-size: 0.9rem; font-weight: 600; }
 .phone-install-body { margin: 6px 0 10px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
+/* "This is not where you chat with your agent." Sits directly under the agent's name, because the
+   question it answers is the first one a person arriving here has, and an answer they find after
+   scrolling is an answer they have already guessed wrong about. Quiet styling: it is a signpost,
+   not a warning. */
+.phone-chat {
+  margin-top: 14px; padding: 12px 14px;
+  border: 1px dashed var(--border); border-radius: var(--radius-sm);
+  background: var(--surface-soft);
+}
+.phone-chat-title { font-size: 0.85rem; font-weight: 600; }
+.phone-chat-body { margin: 5px 0 0; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.55; }
+.phone-chat .btn { margin-top: 10px; }
 /* What an add-on is still waiting on. Tinted, because it is the one thing on the page that asks
    something of the reader; everything else is just reporting. */
 .phone-needs {

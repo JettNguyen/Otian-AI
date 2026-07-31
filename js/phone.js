@@ -369,6 +369,83 @@ function skillWaitingOn(agent, skill) {
   return missing;
 }
 
+/* ── Where you actually talk to your agent ──────────────────────────────────────────────────
+   This page manages an agent. It is not where you chat with one, and the most useful thing it can
+   do about that is say so and point at the app that is.
+
+   Not an accident of scope: a conversation here would be genuinely bad. Commands reach the computer
+   through a polled mailbox (5 seconds while it is being used, 30 once it has gone idle), so every
+   turn would cost a write, a poll to notice it, the model's own thinking time, and another poll for
+   the reply. Meanwhile the agent already answers in a chat app that is on this phone, with push
+   notifications and a real conversation view. Sending people there is the better product, not a
+   consolation.
+
+   Only some platforms can be opened by handle alone. Telegram and Matrix have an address for a
+   conversation; Discord and Slack need workspace and channel ids we do not have here, and Signal
+   has no handle at all (the agent's conversation is its own Note to Self). Where there is no link
+   we name the app and stop, rather than shipping a button that lands somewhere useless. */
+const CHANNELS = {
+  telegram: {
+    label: "Telegram",
+    link: (handle) => "https://t.me/" + String(handle).replace(/^@/, ""),
+  },
+  matrix: {
+    label: "Matrix",
+    // matrix.to carries the identifier readable in the fragment: https://matrix.to/#/@juno:server.
+    // encodeURIComponent would turn that into %40juno%3Aserver, which clients do not resolve. Only
+    // the two characters that would genuinely break a fragment are escaped, and '#' matters because
+    // a room alias starts with one.
+    link: (handle) => "https://matrix.to/#/" + String(handle).replace(/%/g, "%25").replace(/#/g, "%23"),
+  },
+  discord: { label: "Discord", link: () => null },
+  slack: { label: "Slack", link: () => null },
+  signal: {
+    label: "Signal",
+    link: () => null,
+    // Signal's model is the agent messaging its own Note to Self, so there is no handle to search
+    // for and no conversation to link to. Naming the place is the only useful thing to say.
+    where: "in your agent's Note to Self",
+  },
+};
+
+function renderChatCard(agent) {
+  const channel = CHANNELS[agent.channel];
+
+  // No channel connected at all. Say what is missing and where it gets fixed, rather than leaving
+  // an empty space where the answer to "so where do I talk to it?" should be.
+  if (!channel) {
+    return (
+      '<div class="phone-chat">' +
+      '<div class="phone-chat-title">This is not where you chat with your agent</div>' +
+      '<p class="phone-chat-body">Your agent answers in a chat app, and this one has none ' +
+      "connected yet. Open Archie on your computer to connect one, and it will answer you here on " +
+      "your phone from then on.</p>" +
+      "</div>"
+    );
+  }
+
+  const href = agent.channel_handle ? channel.link(agent.channel_handle) : null;
+  // Each channel carries its own preposition, because they do not share one: you talk to an agent
+  // "on Telegram" but "in your agent's Note to Self".
+  const where = channel.where || "on " + channel.label;
+
+  return (
+    '<div class="phone-chat">' +
+    '<div class="phone-chat-title">This is not where you chat with your agent</div>' +
+    '<p class="phone-chat-body">Talk to ' + escapeHtml(agent.name) + " " + escapeHtml(where) +
+    ". This page is for changing what it can do." +
+    (agent.channel_handle && !href
+      ? " It answers to " + escapeHtml(agent.channel_handle) + " there."
+      : "") +
+    "</p>" +
+    (href
+      ? '<a class="btn btn-primary btn-mini" href="' + escapeHtml(href) + '" target="_blank" ' +
+        'rel="noopener">Open ' + escapeHtml(channel.label) + "</a>"
+      : "") +
+    "</div>"
+  );
+}
+
 const INTEGRATION_LABELS = {
   google_calendar: "Google Calendar",
   gmail: "Gmail",
@@ -468,6 +545,7 @@ function renderAgent(agent) {
     '<button class="btn btn-secondary btn-mini" data-agent-run="' + (agent.running ? "stop" : "start") + '" ' +
     'data-ws="' + ws + '" data-agent="' + id + '">' + (agent.running ? "Stop" : "Start") + "</button>" +
     "</div>" +
+    renderChatCard(agent) +
     needs +
     '<div class="phone-group-title">Skills</div>' + skills +
     '<div class="phone-group-title">Routines</div>' + routines +

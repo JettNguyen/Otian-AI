@@ -188,6 +188,25 @@
               <li>Turn on <strong>Archie on your phone</strong>.</li>
               <li>Point this phone&rsquo;s camera at the code it shows, and tap the link.</li>
             </ol>
+            <!--
+              The paste route exists because scanning cannot reach here from a home-screen app. On
+              iPhone and iPad an installed web app gets its own storage, separate from Safari's, and
+              a scanned QR always opens Safari. So a phone that pairs perfectly in the browser opens
+              its home-screen icon and is a stranger again, with no way to fix it: there is no
+              address bar to paste into and the camera opens the wrong app. Archie's Copy the link
+              button plus this box is that way.
+            -->
+            <div class="phone-paste">
+              <label class="phone-paste-label" for="ph-paste">
+                Added this to your home screen? Scanning opens Safari, not this app, so paste the
+                link instead. Tap <strong>Copy the link</strong> in Archie and paste it here.
+              </label>
+              <input type="text" id="ph-paste" inputmode="url" autocomplete="off"
+                     autocapitalize="none" spellcheck="false"
+                     placeholder="https://otianai.com/phone/#k=..." />
+              <button class="btn btn-primary btn-mini" id="ph-paste-go">Pair with this link</button>
+            </div>
+
             <p class="phone-note">
               The code carries the key that encrypts everything between the two devices. It is the
               reason we can run this without being able to read any of it.

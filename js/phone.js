@@ -211,12 +211,19 @@ function renderInstallPrompt() {
   if (isIosSafari) {
     html =
       '<div class="phone-install-title">Keep this on your home screen</div>' +
-      '<p class="phone-install-body">Then it opens like an app, and you stay signed in.</p>' +
+      '<p class="phone-install-body">Then it opens like an app, without Safari around it.</p>' +
       '<ol class="phone-steps phone-steps-tight">' +
       "<li>Tap the Share button " + SHARE_ICON + " at the bottom of Safari.</li>" +
       "<li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>" +
       "<li>Tap <strong>Add</strong>.</li>" +
-      "</ol>";
+      "<li>Open it, sign in, then tap <strong>Copy the link</strong> in Archie and paste it there " +
+      "to pair.</li>" +
+      "</ol>" +
+      // Said before they install, not discovered afterwards. iPhone gives an installed web app its
+      // own separate storage, so the new icon starts out signed out and unpaired even though this
+      // tab is both, and scanning cannot fix it because a QR always opens Safari.
+      '<p class="phone-install-body" style="margin-top:10px;">The home screen version is a separate ' +
+      "app to iPhone, with its own sign-in and its own pairing. Step 4 is not optional.</p>";
   } else if (isIos) {
     // The honest dead-end fix: name the limitation and give the one step out of it.
     html =
@@ -664,6 +671,34 @@ async function refresh() {
   renderAgents(snapshot);
 }
 
+/** Accept a pairing link (or a bare key) pasted by hand, and start over with it.
+ *
+ *  This is the only pairing route a home-screen app has. On iOS an installed web app keeps its own
+ *  storage, separate from Safari's, and a scanned QR always opens Safari, so the app can never
+ *  receive a key by scanning no matter how many times someone tries. Pasting is not a fallback
+ *  here; for that context it is the primary path.
+ *
+ *  Takes the whole link because that is what Archie's Copy button puts on the clipboard, and
+ *  a bare key because that is what someone retyping will produce. */
+function pairFromPastedText(text) {
+  const trimmed = String(text || "").trim();
+  if (!trimmed) return;
+  const fromLink = trimmed.match(/[#&]k=([A-Za-z0-9_-]+)/);
+  const candidate = fromLink ? fromLink[1] : (/^[A-Za-z0-9_-]+$/.test(trimmed) ? trimmed : null);
+  if (!candidate) {
+    setStatus("That does not look like a pairing link. Copy it again from Archie.", "error");
+    return;
+  }
+  keyInMemory = candidate;
+  let persisted = false;
+  try { localStorage.setItem(KEY_STORE, candidate); persisted = true; } catch (e) { /* try session */ }
+  try { sessionStorage.setItem(KEY_STORE, candidate); persisted = true; } catch (e) { /* neither */ }
+  keyIsEphemeral = !persisted;
+  // Reload rather than continuing in place: pairing changes what every part of this page is doing,
+  // and a fresh start is one code path instead of a second, subtly different one.
+  location.reload();
+}
+
 /** Show the pair screen with the reason it is showing.
  *
  *  One function, because the reason has to be set in the same breath as the screen. The version
@@ -675,6 +710,16 @@ function showPairScreen(reason) {
   show("ph-pair", true);
   const lead = $("ph-pair").querySelector(".acct-lead");
   if (lead) lead.innerHTML = escapeHtml(reason);
+
+  // Wired here rather than at startup, because the pair screen is reachable from several places and
+  // this is the one point they all pass through.
+  const go = $("ph-paste-go");
+  const input = $("ph-paste");
+  if (go && input && !go.dataset.wired) {
+    go.dataset.wired = "1";
+    go.addEventListener("click", () => pairFromPastedText(input.value));
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") pairFromPastedText(input.value); });
+  }
 }
 
 function unpair() {

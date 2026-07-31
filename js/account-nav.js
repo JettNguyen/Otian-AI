@@ -24,6 +24,18 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/** A phone or tablet, which is the only place "Archie on your phone" is worth offering.
+ *
+ *  On a laptop the page has nothing to give: the whole Archie app is already on that screen, so the
+ *  link would lead somewhere that exists only to say "go and use your computer". Kept off the menu
+ *  rather than shown-and-explained.
+ *
+ *  The iPadOS arm matters: modern iPads report themselves as "MacIntel" and would otherwise be
+ *  treated as a desktop. Same test as `js/phone.js`; keep the two in step. */
+const IS_MOBILE =
+  /iPad|iPhone|iPod|Android/.test(navigator.userAgent || "") ||
+  (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
 const root = document.getElementById("navAccount");
 if (root) {
   const btn = document.getElementById("navAccountBtn");
@@ -110,10 +122,12 @@ if (root) {
     menu.innerHTML =
       '<div class="nav-account-menu-label">' + label + "</div>" +
       '<a role="menuitem" href="/account/"' + activeAttr("/account/") + ">Manage account</a>" +
-      // The way people find "Archie on your phone" at all. The site's nav markup is duplicated in
+      // "Archie on your phone", on the phones it is for. The site's nav markup is duplicated in
       // every page (twice: desktop and drawer), so nav changes normally have to be scripted across
       // all of them. This menu is the exception, because it is built here in JS.
-      '<a role="menuitem" href="/phone/"' + activeAttr("/phone/") + ">Archie on your phone</a>" +
+      (IS_MOBILE
+        ? '<a role="menuitem" href="/phone/"' + activeAttr("/phone/") + ">Archie on your phone</a>"
+        : "") +
       '<a role="menuitem" href="/activity/"' + activeAttr("/activity/") + ">Account activity</a>" +
       '<a role="menuitem" href="/billing/"' + activeAttr("/billing/") + ' id="navAccountBilling">Billing</a>' +
       '<div class="nav-account-divider"></div>' +

@@ -9,6 +9,20 @@
   var THEME_KEY = 'nr-theme';
   var root = document.documentElement;
 
+  /* Running as the installed "Archie on your phone" app rather than in a browser tab.
+     The app is for managing an agent, so it should not double as a way to wander into the
+     marketing site: someone who tapped an Archie icon on their home screen did not ask for
+     Pricing, the Blog, or Our Story, and in a window with no address bar and no tabs there is no
+     obvious way back. `.is-app` on the root element is what styles.css hangs that on.
+     Marked here, in the nav script every page loads, because the app can legitimately visit
+     /account/, /login/ and /billing/, and each of those has to know too. */
+  try {
+    if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+        window.navigator.standalone === true) {
+      root.classList.add('is-app');
+    }
+  } catch (e) { /* treat as a normal browser tab */ }
+
   function getStoredTheme() {
     try {
       return window.localStorage.getItem(THEME_KEY);

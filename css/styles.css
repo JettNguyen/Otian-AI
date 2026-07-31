@@ -6905,7 +6905,50 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
 }
 .phone-install-title { font-size: 0.9rem; font-weight: 600; }
+/* Pairing by pasted link: the only route a home-screen app has, since a scanned QR always opens
+   Safari and an installed app cannot see Safari's storage. */
+.phone-paste {
+  margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.phone-paste-label {
+  display: block; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.55;
+}
+.phone-paste input {
+  width: 100%; margin-top: 10px; padding: 12px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--field-border); background: var(--bg-secondary);
+  color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+}
+.phone-paste input:focus { border-color: var(--accent); }
+.phone-paste .btn { margin-top: 10px; width: 100%; }
 .phone-install-body { margin: 6px 0 10px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
+/* ── Installed-app chrome (`.is-app`, set by nav.js when running from a home screen) ──
+   The home-screen app is for managing an agent. Someone who tapped an Archie icon did not ask for
+   Pricing, the Blog or Our Story, and in a window with no address bar and no tabs, following one
+   of those links strands them with no obvious way back. So the marketing navigation is not shown
+   there: not the category menus, not the Get Started call to action, not the footer's site index.
+
+   Hidden rather than removed from the markup, because these pages are hand-written per page with
+   no build step, and one CSS rule cannot drift the way twenty duplicated navs would. What stays is
+   what the app is for: the wordmark, the account menu, and the legal links every page needs. */
+.is-app .nav-links,
+.is-app .nav-cta,
+.is-app .nav-hamburger,
+.is-app .nav-drawer,
+.is-app .nav-drawer-flyout,
+.is-app .nav-overlay,
+.is-app .footer-grid,
+.is-app .cta-banner,
+.is-app .page-hero {
+  display: none;
+}
+/* The account menu is the one control that stays, so give it the room the category links left. */
+.is-app .nav-inner { justify-content: space-between; }
+.is-app .footer { padding: 18px 0; }
+.is-app .footer-bottom { border-top: none; margin-top: 0; padding-top: 0; }
+/* iPhone home-screen apps draw under the status bar and the home indicator. */
+.is-app body { padding-top: env(safe-area-inset-top); }
+.is-app .footer-inner { padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+
 /* "This is not where you chat with your agent." Sits directly under the agent's name, because the
    question it answers is the first one a person arriving here has, and an answer they find after
    scrolling is an answer they have already guessed wrong about. Quiet styling: it is a signpost,

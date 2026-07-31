@@ -306,7 +306,7 @@ draft comes to your chat as a card with Send / Edit / Dismiss buttons, and nothi
 Gmail until you tap Send."
 
 **Why it's true:** the model's tool set contains **no email-send tool** (tool definitions in
-`gateway.rs`: calendar, meetings, workers, knowledge, remember — nothing sends).
+`gateway.rs`: calendar, meetings, specialists, knowledge, remember — nothing sends).
 `gmail_send_reply` (`google.rs:279`) has exactly one caller: the "send" branch of the
 button-callback handler, which requires a pending draft in `Pending` status
 (`email/replies.rs:301-307,507`). Draft triage runs with **no tools** and frames the email as
@@ -361,7 +361,7 @@ buttons for exactly this flow (`telegram.rs:672-729,917-925`). The sequencing co
 ### ⛔ The gate does not stop exfiltration — never imply it does
 
 The gate stops **mutation**, not **leakage**. A prompt injection can still make the model issue
-an Anthropic server-side web search (`gateway.rs:2263`) or a `delegate_to_worker` web-search call
+an Anthropic server-side web search (`gateway.rs:2263`) or a `delegate_to_specialist` web-search call
 (`gateway.rs:1395-1418`) with an attacker-chosen query carrying data from the user's context.
 Neither is gateable at the choke point, because the search never becomes a client tool call.
 

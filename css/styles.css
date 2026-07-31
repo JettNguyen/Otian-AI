@@ -45,7 +45,7 @@
   --bg-wash-one: rgba(251, 228, 211, 0.42);
   --bg-wash-two: rgba(240, 184, 168, 0.24);
 
-  /* Add-on type accents: mirror the Archie app so a Worker, Routine, and
+  /* Add-on type accents: mirror the Archie app so a Specialist, Routine, and
      Personality read as blue/teal/plum; Skills use the brand accent above. */
   --c-blue: #5988CB;
   --c-blue-subtle: rgba(89, 136, 203, 0.13);
@@ -4961,7 +4961,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* Each type tab carries its add-on color (matching the badges): as text at rest and a
    solid fill when active. The All tab sets no --tab-color and falls back to the brand accent. */
 .mp-type-tab[data-type="skill"]       { --tab-color: var(--accent); }
-.mp-type-tab[data-type="worker"]      { --tab-color: var(--c-blue); }
+.mp-type-tab[data-type="specialist"]      { --tab-color: var(--c-blue); }
 .mp-type-tab[data-type="routine"]     { --tab-color: var(--c-teal); }
 .mp-type-tab[data-type="personality"] { --tab-color: var(--c-plum); }
 
@@ -5077,8 +5077,8 @@ html[data-theme="dark"] .booking-container iframe {
 /* Color-code the type badge per add-on kind, matching the Archie app. Skills keep
    the brand accent (default above); the grid colors by data-type so cards need no
    extra class, and detail pages opt in with an explicit modifier class. */
-.mp-product-card[data-type="worker"] .mp-type-badge,
-.mp-type-badge--worker {
+.mp-product-card[data-type="specialist"] .mp-type-badge,
+.mp-type-badge--specialist {
   background: var(--c-blue-subtle);
   color: var(--c-blue);
 }

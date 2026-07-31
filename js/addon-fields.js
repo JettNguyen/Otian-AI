@@ -618,9 +618,9 @@ export const ADDON_SPEC = {
         }
       ]
     },
-    "worker": {
-      "blurb": "A worker is a specialist the agent hands a whole task to and waits on: a researcher, a writer, an analyst.",
-      "label": "Worker",
+    "specialist": {
+      "blurb": "A specialist is one job the agent hands off whole and waits on, like the Researcher that looks things up or the Writer that drafts.",
+      "label": "Specialist",
       "sections": [
         {
           "blurb": "What it is, in the store.",
@@ -698,11 +698,11 @@ export const ADDON_SPEC = {
           "title": "Basics"
         },
         {
-          "blurb": "A worker is a specialist the agent hands a whole task to.",
+          "blurb": "A specialist is one job the agent hands off whole and waits on.",
           "fields": [
             {
               "control": "text",
-              "help": "The short label on the worker's row. What it is for, not how it behaves.",
+              "help": "The short label on the specialist's row. What it is for, not how it behaves.",
               "key": "role",
               "label": "Its job, in a few words",
               "max": 500,
@@ -722,7 +722,7 @@ export const ADDON_SPEC = {
               "options": [],
               "placeholder": "",
               "required": true,
-              "scaffold": "You are a <specialty> specialist for this agent.\n\nWhen you are handed <the kind of task this worker is for>:\n1. <What to establish or check first.>\n2. <How to do the work, in order.>\n3. <What to hand back, and in what shape.>\n\nNever:\n- Never state a finding you did not actually look up.\n- Never take an action outside <this worker's job>.\n"
+              "scaffold": "You are a <specialty> specialist for this agent.\n\nWhen you are handed <the kind of task this specialist is for>:\n1. <What to establish or check first.>\n2. <How to do the work, in order.>\n3. <What to hand back, and in what shape.>\n\nNever:\n- Never state a finding you did not actually look up.\n- Never take an action outside <this specialist's job>.\n"
             },
             {
               "control": "toggle",
@@ -754,7 +754,7 @@ export const ADDON_SPEC = {
             },
             {
               "control": "tags",
-              "help": "Only a fallback. The agent already hands work to the right worker on its own.",
+              "help": "Only a fallback. The agent already hands work to the right specialist on its own.",
               "key": "triggers",
               "label": "Backup words",
               "max": 48,
@@ -772,7 +772,7 @@ export const ADDON_SPEC = {
           "fields": [
             {
               "control": "textarea",
-              "help": "Cost, limits, what it is good at. A worker needs no setup, so this is the only note shown after it installs.",
+              "help": "Cost, limits, what it is good at. A specialist needs no setup, so this is the only note shown after it installs.",
               "key": "usage_hint",
               "label": "What its owner should know",
               "max": 400,

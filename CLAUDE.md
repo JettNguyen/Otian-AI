@@ -36,7 +36,7 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   with a colon, comma, semicolon, period, or parentheses so the sentence still reads well.
   En dashes (`–`) and hyphens (`-`) are fine. The site was swept to zero on 2026-07-24; keep
   it that way, and grep new copy before committing (`git grep '—\|mdash'`).
-- The marketplace umbrella noun is **"Add-on"**; Skills, Workers, Routines, and Personalities
+- The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on".
 - Guided sessions are **$100/hour**, one hour per session; "$100/session" and "$100/hour" are
   the same claim, not a contradiction.

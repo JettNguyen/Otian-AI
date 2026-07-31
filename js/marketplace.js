@@ -30,12 +30,12 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* Render order = the order the user asked for: Personalities, Skills, Workers, Routines.
-   `coll` is the Firestore subcollection name; `subagents` is what the app calls a Worker. */
+/* Render order = the order the user asked for: Personalities, Skills, Specialists, Routines.
+   `coll` is the Firestore subcollection name; `subagents` is what the app calls a Specialist. */
 var COLLECTIONS = [
   { coll: "personalities", kind: "personality", label: "Personality", plural: "Personalities" },
   { coll: "skills",        kind: "skill",       label: "Skill",       plural: "Skills" },
-  { coll: "subagents",     kind: "worker",      label: "Worker",      plural: "Workers" },
+  { coll: "subagents",     kind: "specialist",      label: "Specialist",      plural: "Specialists" },
   { coll: "routines",      kind: "routine",     label: "Routine",     plural: "Routines" },
 ];
 var KIND_ORDER = COLLECTIONS.map(function (c) { return c.kind; });
@@ -53,7 +53,7 @@ function kindLabel(kind) {
 var PACKS = [
   { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A great all-rounder to start with", accent: "accent", recommended: true,
     description: "The best first pack for anyone. Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, nothing to set up.",
-    items: [["skill","task-manager"],["skill","personal-journal"],["worker","researcher"],["personality","friendly"]] },
+    items: [["skill","task-manager"],["skill","personal-journal"],["specialist","researcher"],["personality","friendly"]] },
   { id: "personal-organizer", name: "Personal Organizer", tagline: "Stay on top of tasks and habits", accent: "blue",
     description: "Turn your agent into the thing that keeps your life on track: a real task list and habit tracker, plus a morning digest of what's due and a Sunday review of the week. It nudges you so you don't have to remember to check.",
     items: [["skill","task-manager"],["skill","habit-tracker"],["routine","daily-task-digest"],["routine","weekly-review"]] },
@@ -61,17 +61,17 @@ var PACKS = [
     description: "A calmer corner of your day. Keep a private journal, note your mood, log a daily gratitude, and track the habits you're building, with gentle evening and check-in nudges, all in an unhurried, grounding voice.",
     items: [["skill","personal-journal"],["skill","mood-tracker"],["skill","gratitude"],["skill","habit-tracker"],["routine","evening-journal"],["routine","mood-check-in"],["routine","gratitude-wind-down"],["routine","habit-check-in"],["personality","calm-anchor"]] },
   { id: "creators-desk", name: "Creator's Desk", tagline: "Write, learn, and stay inspired", accent: "plum",
-    description: "For making things. A writing worker that drafts and sharpens your words, a learning coach to skill up, a saved reading list for inspiration, and a bright, imaginative voice to bounce ideas off.",
-    items: [["worker","writer"],["skill","learning-coach"],["skill","reading-list"],["personality","creative-muse"]] },
+    description: "For making things. A writing specialist that drafts and sharpens your words, a learning coach to skill up, a saved reading list for inspiration, and a bright, imaginative voice to bounce ideas off.",
+    items: [["specialist","writer"],["skill","learning-coach"],["skill","reading-list"],["personality","creative-muse"]] },
   { id: "student", name: "Student", tagline: "Learn faster, study smarter", accent: "gold",
     description: "A study partner that sticks. The learning coach makes flashcards and quizzes you with spaced repetition, the researcher digs up sources on the live web, and the study-partner voice keeps you focused and encouraged.",
-    items: [["skill","learning-coach"],["worker","researcher"],["personality","study-partner"]] },
+    items: [["skill","learning-coach"],["specialist","researcher"],["personality","study-partner"]] },
   { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, trips, and reading", accent: "green",
     description: "The everyday-life bundle. Plan meals around your tastes (or around what's already in your fridge), track spending, set savings goals, plan trips, and keep one list of everything you want to read: saved tools your agent remembers between chats.",
     items: [["skill","meal-planner"],["skill","fridge-dinner"],["skill","expense-tracker"],["skill","savings-goals"],["skill","trip-planner"],["skill","reading-list"]] },
   { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already caught up", accent: "blue",
-    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered on the live web by a research worker and delivered in a crisp, no-fluff voice.",
-    items: [["worker","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"],["personality","concise"]] },
+    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered on the live web by a research specialist and delivered in a crisp, no-fluff voice.",
+    items: [["specialist","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"],["personality","concise"]] },
   { id: "home-errands", name: "Home & Errands", tagline: "The household admin, off your plate", accent: "gold",
     description: "The stuff that's easy to forget. Track bills, home upkeep, your car, warranties and returns, and your plants and pets (each with a timely reminder), plus a watch on prices for things you're waiting to buy, all run by an unflappable concierge.",
     items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["personality","exec-concierge"]] },
@@ -85,8 +85,8 @@ var PACKS = [
     description: "For the fun of it. Learn a new word and a piece of trivia each day, and get a spot-on pick for what to watch tonight: a light, playful sidekick that makes your agent enjoyable to open, not just useful.",
     items: [["skill","word-of-the-day"],["skill","daily-trivia"],["skill","watch-tonight"],["routine","daily-word"],["routine","trivia-time"],["personality","playful-sidekick"]] },
   { id: "sales-business", name: "Sales & Business", tagline: "For teams working a pipeline", accent: "accent",
-    description: "The lead-gen toolkit. A shared client memory, a strategist that reasons about your next move, and a deal desk that matches buyers to suppliers, plus engagement scoring, outreach drafting, a lead-gen playbook, a prospecting worker, pipeline reports, a weekly strategy note, and a closer's voice. Built for sales teams.",
-    items: [["skill","client-brain"],["skill","strategist"],["skill","deal-desk"],["skill","engagement-scoring"],["skill","outreach-studio"],["skill","lead-gen-playbook"],["worker","prospector"],["routine","daily-pipeline-report"],["routine","weekly-pipeline-review"],["routine","weekly-strategy"],["personality","deal-closer"]] },
+    description: "The lead-gen toolkit. A shared client memory, a strategist that reasons about your next move, and a deal desk that matches buyers to suppliers, plus engagement scoring, outreach drafting, a lead-gen playbook, a prospecting specialist, pipeline reports, a weekly strategy note, and a closer's voice. Built for sales teams.",
+    items: [["skill","client-brain"],["skill","strategist"],["skill","deal-desk"],["skill","engagement-scoring"],["skill","outreach-studio"],["skill","lead-gen-playbook"],["specialist","prospector"],["routine","daily-pipeline-report"],["routine","weekly-pipeline-review"],["routine","weekly-strategy"],["personality","deal-closer"]] },
 ];
 
 /* Friendly names for integration slugs, for the "Works with" hint on a card's detail. */

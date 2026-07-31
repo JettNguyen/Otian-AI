@@ -1,4 +1,4 @@
-// The four add-on submission forms (skill / worker / routine / personality).
+// The four add-on submission forms (skill / specialist / routine / personality).
 //
 // The fields are not written into the four HTML pages any more. They are BUILT from
 // `js/addon-fields.js`, which is generated from `crates/archie-domain/src/addon_fields.rs` in the
@@ -83,7 +83,7 @@ const VARIABLE_TYPES = [
 
 const ADDON_KINDS = [
   ["skill", "Skill"],
-  ["worker", "Worker"],
+  ["specialist", "Specialist"],
   ["routine", "Routine"],
   ["personality", "Personality"],
 ];
@@ -680,7 +680,7 @@ document.getElementById("btnSignOut").addEventListener("click", (e) => {
 /** The manifest key holding this kind's main prompt, whatever the kind calls it. */
 const PROMPT_KEY = {
   skill: "template_md",
-  worker: "instructions",
+  specialist: "instructions",
   routine: "default_action.prompt",
   personality: "system_prompt_template",
 }[addonType];

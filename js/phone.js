@@ -213,9 +213,12 @@ function renderInstallPrompt() {
       '<div class="phone-install-title">Keep this on your home screen</div>' +
       '<p class="phone-install-body">Then it opens like an app, without Safari around it.</p>' +
       '<ol class="phone-steps phone-steps-tight">' +
-      "<li>Tap the Share button " + SHARE_ICON + " at the bottom of Safari.</li>" +
-      "<li>Scroll down and tap <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>" +
-      "<li>Open the new icon and sign in.</li>" +
+      "<li>Tap the <span class=\"phone-nowrap\">Share button " + SHARE_ICON + "</span> in Safari&rsquo;s " +
+      "toolbar. It sits at the bottom, or the top if you moved it there.</li>" +
+      "<li>Scroll down and tap <strong>Add to Home Screen</strong>. On some phones it is under " +
+      "<strong>More</strong> first.</li>" +
+      "<li>Tap <strong>Add</strong> in the top corner.</li>" +
+      "<li>Open the new Archie icon and sign in.</li>" +
       "<li>In Archie, tap <strong>Copy the link</strong>, then <strong>Paste from clipboard</strong> " +
       "in the app.</li>" +
       "</ol>" +
@@ -541,6 +544,20 @@ function renderAgents(snapshot) {
   });
 }
 
+/* An agent has no photo on this screen, so it wears the same line-art face Archie falls back to,
+   set in a circle tinted by a stable colour picked from its id, so a list of agents reads as a set
+   of distinct faces the way it does in the app. */
+const AGENT_GLYPH =
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">' +
+  '<circle cx="12" cy="8.5" r="3.5"/>' +
+  '<path d="M5.5 19c1.3-2.3 3.6-3.5 6.5-3.5s5.2 1.2 6.5 3.5" stroke-linecap="round"/></svg>';
+const AVATAR_HUES = ["accent", "teal", "blue", "plum", "gold"];
+function avatarHue(seed) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return AVATAR_HUES[h % AVATAR_HUES.length];
+}
+
 function renderAgent(agent) {
   const ws = escapeHtml(agent.workspace_id);
   const id = escapeHtml(agent.id);
@@ -573,6 +590,7 @@ function renderAgent(agent) {
     ? '<div class="acct-section-body">No skills yet.</div>'
     : '<ul class="phone-list">' + agent.skills.map((s) =>
         '<li class="phone-row">' +
+        '<span class="phone-dot phone-dot--skill" aria-hidden="true"></span>' +
         '<span class="phone-row-name">' + escapeHtml(s.name) + "</span>" +
         (s.enabled ? "" : '<span class="phone-row-tag">Off</span>') +
         "</li>").join("") + "</ul>";
@@ -581,6 +599,7 @@ function renderAgent(agent) {
     ? '<div class="acct-section-body">No routines yet.</div>'
     : '<ul class="phone-list">' + agent.routines.map((r) =>
         '<li class="phone-row">' +
+        '<span class="phone-dot phone-dot--routine" aria-hidden="true"></span>' +
         '<span class="phone-row-name">' + escapeHtml(r.name) + "</span>" +
         '<button class="btn btn-secondary btn-mini" data-routine="' + escapeHtml(r.slug) + '" ' +
         'data-enable="' + (r.enabled ? "0" : "1") + '" data-ws="' + ws + '" data-agent="' + id + '">' +
@@ -588,11 +607,16 @@ function renderAgent(agent) {
         "</li>").join("") + "</ul>";
 
   return (
-    '<div class="acct-section">' +
+    '<div class="acct-section phone-agent">' +
     '<div class="acct-section-head">' +
+    '<div class="phone-agent-id">' +
+    '<span class="phone-avatar phone-avatar--' + avatarHue(agent.id) + '">' + AGENT_GLYPH +
+    '<span class="phone-avatar-dot' + (agent.running ? " phone-avatar-dot--on" : "") + '"></span>' +
+    "</span>" +
     "<div>" +
-    '<div class="acct-section-title">' + escapeHtml(agent.name) + "</div>" +
-    '<div class="acct-email">' + escapeHtml(agent.purpose || "") + "</div>" +
+    '<div class="phone-agent-name">' + escapeHtml(agent.name) + "</div>" +
+    (agent.purpose ? '<div class="acct-email">' + escapeHtml(agent.purpose) + "</div>" : "") +
+    "</div>" +
     "</div>" +
     '<button class="btn btn-secondary btn-mini" data-agent-run="' + (agent.running ? "stop" : "start") + '" ' +
     'data-ws="' + ws + '" data-agent="' + id + '">' + (agent.running ? "Stop" : "Start") + "</button>" +

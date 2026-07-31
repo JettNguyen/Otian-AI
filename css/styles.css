@@ -6613,6 +6613,12 @@ html[data-theme="dark"] .booking-container iframe {
 .acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
 .acct-row .btn { flex: 0 0 auto; }
 .acct-email { font-size: 0.82rem; color: var(--text-secondary); word-break: break-all; }
+/* In a section header the text column must be free to shrink and wrap at word boundaries, and the
+   badge or button beside it must never be squeezed. Without this the status line broke mid-word
+   next to the Awake pill. */
+.acct-section-head > div { min-width: 0; }
+.acct-section-head .pill,
+.acct-section-head .btn { flex-shrink: 0; }
 
 .pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
 .pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
@@ -6898,8 +6904,9 @@ html[data-theme="dark"] .booking-container iframe {
 /* The iOS Share glyph, inline in a sentence. Sized to the text so it reads as the icon the person
    is about to look for rather than as a bullet. */
 .phone-share-icon {
-  width: 1em; height: 1em; vertical-align: -0.15em; margin: 0 1px;
+  display: inline-block; width: 1em; height: 1em; vertical-align: -0.15em; margin: 0 1px;
 }
+.phone-nowrap { white-space: nowrap; }
 .phone-install {
   background: var(--surface-soft); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px;
@@ -7015,6 +7022,58 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-foot {
   display: flex; justify-content: space-between; gap: 12px;
   margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+/* The agents list is a plain wrapper, so nothing separated it from the status card above it. */
+#ph-agents { margin-top: 14px; }
+/* These reuse .acct-email but hold sentences, not an address, so break at words, not mid-character. */
+#ph-status-detail,
+#ph-agents .acct-email { word-break: normal; overflow-wrap: anywhere; }
+
+/* ── Phone dashboard, dressed to echo the Archie app: warm white cards, an illustrated face on
+   every agent with a lit status dot, a serif name, and the app's quiet tier colours. ── */
+#ph-app .acct-section,
+#ph-install {
+  background: var(--bg-card); border: 1px solid var(--line-soft);
+  border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px 20px;
+}
+#ph-agents > .acct-section + .acct-section { margin-top: 16px; }
+
+/* Agent header: the face leads, name and purpose beside it, Start/Stop held to the right. */
+.phone-agent-id { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.phone-agent-id > div { min-width: 0; }
+.phone-avatar {
+  position: relative; flex-shrink: 0; width: 44px; height: 44px; border-radius: 999px;
+  display: grid; place-items: center; border: 1px solid var(--line-soft);
+  background: var(--accent-subtle); color: var(--accent);
+}
+.phone-avatar > svg { width: 26px; height: 26px; }
+.phone-avatar--accent { background: var(--accent-subtle); color: var(--accent); }
+.phone-avatar--teal { background: var(--c-teal-subtle); color: var(--c-teal); }
+.phone-avatar--blue { background: var(--c-blue-subtle); color: var(--c-blue); }
+.phone-avatar--plum { background: var(--c-plum-subtle); color: var(--c-plum); }
+.phone-avatar--gold { background: var(--c-gold-subtle); color: var(--c-gold); }
+.phone-avatar-dot {
+  position: absolute; right: -1px; top: -1px; width: 12px; height: 12px; border-radius: 999px;
+  border: 2px solid var(--bg-card); background: var(--text-muted);
+}
+/* Running: the same lit-green dot the Archie sidebar uses, so the two read as one product. */
+.phone-avatar-dot--on { background: var(--c-green); box-shadow: 0 0 5px var(--c-green); }
+.phone-agent-name {
+  font-family: Georgia, 'Times New Roman', serif; font-size: 1.15rem; font-weight: 600;
+  color: var(--text-primary); line-height: 1.2;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Tier colour the quiet Archie way: a small leading dot, terracotta for skills, teal for routines. */
+.phone-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 999px; }
+.phone-dot--skill { background: var(--accent); }
+.phone-dot--routine { background: var(--c-teal); }
+
+/* The awake status wears a lit teal dot, matching the agents' lit look. */
+#ph-status .pill-on::before {
+  content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px;
+  border-radius: 999px; background: var(--c-teal); box-shadow: 0 0 5px var(--c-teal);
+  vertical-align: 0.05em;
 }
 
 /* ==============================

@@ -555,18 +555,46 @@ function renderAgent(agent) {
 
 /* ── The page's states ──────────────────────────────────────────────────────────────────────── */
 
+/** Turn a failed read into the sentence that names what actually went wrong.
+ *
+ *  This used to blame a stale pairing for everything, which is the worst possible default: a
+ *  pairing problem is the one cause the reader can "fix" by re-scanning, so a wrong guess sends
+ *  them round that loop forever while the real fault sits untouched. These three causes need three
+ *  different actions, and nothing here guesses between them. */
+function readFailureMessage(e) {
+  const code = (e && e.code) || "";
+  const name = (e && e.name) || "";
+
+  // WebCrypto throws OperationError when the tag does not verify, which for us means exactly one
+  // thing: this phone's key is not the key that sealed the message. That is a genuine re-pair.
+  if (name === "OperationError") {
+    return "This phone's pairing no longer matches your computer. On your computer, open Archie, " +
+      "go to Account, and tap Show a new code, then scan it with this phone.";
+  }
+
+  // The mailbox refused the read. Either the relay's security rules are not deployed yet, or this
+  // account is not entitled. Both are fixed at the source, never by re-scanning a code here.
+  if (code === "permission-denied") {
+    return "Your account cannot open the phone mailbox yet. This is set up on our side, not " +
+      "yours: nothing you do on this phone will change it. If you are testing a new build, the " +
+      "Firestore rules need deploying first.";
+  }
+
+  if (code === "unavailable" || code === "failed-precondition") {
+    return "Cannot reach the network right now. This will work again when you are back online.";
+  }
+
+  return "Could not read from your computer's mailbox" + (code ? " (" + code + ")" : "") + ".";
+}
+
 async function refresh() {
   let snapshot;
   try {
     snapshot = await readSnapshot();
   } catch (e) {
-    // The one error worth naming specifically: a key this computer has since rotated. Everything
-    // else here is a network blip.
-    setStatus(
-      "This phone's pairing no longer matches your computer. Turn on Archie on your phone again " +
-      "in Archie's Account page and scan the new code.",
-      "error",
-    );
+    setStatus(readFailureMessage(e), "error");
+    // Leave the last good render on screen rather than blanking it: a transient failure should not
+    // take away the information the person already had.
     return;
   }
 

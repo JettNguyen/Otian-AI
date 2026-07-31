@@ -1,0 +1,15 @@
+{
+  "version": "0.1.1",
+  "notes": "notes",
+  "pub_date": "2026-07-27T04:22:46Z",
+  "platforms": {
+    "darwin-aarch64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0ZnUxUU1XSUVPQllYL2RZcHd3RXhPQkRnbkZjcHY1T1hpUjArUjZlUEdPY3RUcU00c2pJaExjY0RSclhmL1pPOGowejd5RTNhMWhCbUZubEo5QkZuOUFvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTI1OTkwCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKVmlZM3FQVDNaaW9OTjRTS3RXYlA2d2R4TVA5a0Njd0Q3TmxPWnZQYXRXdFRSOWxBTW9Pdm1MMzJCcDB5TWdaK1hab2cwbUxCcUNSc0VkdjhBWEovQWc9PQo=",
+      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.1/Archie_0.1.1_universal.app.tar.gz"
+    },
+    "darwin-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0ZnUxUU1XSUVPQllYL2RZcHd3RXhPQkRnbkZjcHY1T1hpUjArUjZlUEdPY3RUcU00c2pJaExjY0RSclhmL1pPOGowejd5RTNhMWhCbUZubEo5QkZuOUFvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTI1OTkwCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKVmlZM3FQVDNaaW9OTjRTS3RXYlA2d2R4TVA5a0Njd0Q3TmxPWnZQYXRXdFRSOWxBTW9Pdm1MMzJCcDB5TWdaK1hab2cwbUxCcUNSc0VkdjhBWEovQWc9PQo=",
+      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.1/Archie_0.1.1_universal.app.tar.gz"
+    }
+  }
+}

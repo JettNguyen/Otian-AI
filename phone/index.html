@@ -197,14 +197,19 @@
               button plus this box is that way.
             -->
             <div class="phone-paste">
-              <label class="phone-paste-label" for="ph-paste">
-                Added this to your home screen? Scanning opens Safari, not this app, so paste the
-                link instead. Tap <strong>Copy the link</strong> in Archie and paste it here.
-              </label>
+              <div class="phone-paste-label">
+                On your home screen, a scanned code opens Safari rather than this app, so bring the
+                link across instead. In Archie, under Account, tap <strong>Copy the link</strong>.
+                If your computer is a Mac, that link is already on this phone&rsquo;s clipboard.
+              </div>
+              <button class="btn btn-primary btn-mini" id="ph-paste-clip">Paste from clipboard</button>
+              <!-- The typed route stays for anyone whose phone refuses clipboard access, or who got
+                   the link by message rather than by copying it on a paired Mac. -->
+              <label class="phone-paste-manual" for="ph-paste">Or paste it here yourself:</label>
               <input type="text" id="ph-paste" inputmode="url" autocomplete="off"
                      autocapitalize="none" spellcheck="false"
                      placeholder="https://otianai.com/phone/#k=..." />
-              <button class="btn btn-primary btn-mini" id="ph-paste-go">Pair with this link</button>
+              <button class="btn btn-secondary btn-mini" id="ph-paste-go">Pair with this link</button>
             </div>
 
             <p class="phone-note">

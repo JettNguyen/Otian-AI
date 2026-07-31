@@ -6913,8 +6913,12 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-paste-label {
   display: block; color: var(--text-secondary); font-size: 0.82rem; line-height: 1.55;
 }
+/* The typed route sits below the one-tap one and is quieter, because it is the fallback. */
+.phone-paste-manual {
+  display: block; margin-top: 16px; color: var(--text-muted); font-size: 0.78rem;
+}
 .phone-paste input {
-  width: 100%; margin-top: 10px; padding: 12px 14px; border-radius: var(--radius-sm);
+  width: 100%; margin-top: 8px; padding: 12px 14px; border-radius: var(--radius-sm);
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
 }
@@ -6945,8 +6949,28 @@ html[data-theme="dark"] .booking-container iframe {
 .is-app .nav-inner { justify-content: space-between; }
 .is-app .footer { padding: 18px 0; }
 .is-app .footer-bottom { border-top: none; margin-top: 0; padding-top: 0; }
-/* iPhone home-screen apps draw under the status bar and the home indicator. */
-.is-app body { padding-top: env(safe-area-inset-top); }
+
+/* Zoom off, belt and braces. iOS has ignored `user-scalable=no` in Safari since iOS 10, so the
+   viewport meta nav.js writes cannot be relied on by itself; `touch-action` is the half that
+   actually holds. `pan-x pan-y` keeps scrolling in both directions and drops pinch and
+   double-tap zoom. Confined to `.is-app`: on the website itself, suppressing zoom would be an
+   accessibility failure. */
+.is-app body { touch-action: pan-x pan-y; }
+
+/* A home-screen app draws under the status bar and the home indicator, so the nav has to grow by
+   the inset rather than sit beneath the clock. */
+.is-app .nav {
+  height: calc(var(--nav-height) + env(safe-area-inset-top));
+  padding-top: env(safe-area-inset-top);
+}
+/* And the content has to clear that nav itself.
+   `.nav` is `position: fixed`, so it takes up no space in the layout; on an ordinary page the only
+   thing holding content below it is `.page-hero`'s `calc(var(--nav-height) + 72px)` top padding.
+   Hiding the hero here took that spacer away with it and let the top of every page slide under the
+   nav, which read as broken scrolling. This puts the spacing back where it cannot be hidden. */
+.is-app #main {
+  padding-top: calc(var(--nav-height) + env(safe-area-inset-top) + 20px);
+}
 .is-app .footer-inner { padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
 
 /* "This is not where you chat with your agent." Sits directly under the agent's name, because the

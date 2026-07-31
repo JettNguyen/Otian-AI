@@ -214,16 +214,17 @@ function renderInstallPrompt() {
       '<p class="phone-install-body">Then it opens like an app, without Safari around it.</p>' +
       '<ol class="phone-steps phone-steps-tight">' +
       "<li>Tap the Share button " + SHARE_ICON + " at the bottom of Safari.</li>" +
-      "<li>Scroll down and tap <strong>Add to Home Screen</strong>.</li>" +
-      "<li>Tap <strong>Add</strong>.</li>" +
-      "<li>Open it, sign in, then tap <strong>Copy the link</strong> in Archie and paste it there " +
-      "to pair.</li>" +
+      "<li>Scroll down and tap <strong>Add to Home Screen</strong>, then <strong>Add</strong>.</li>" +
+      "<li>Open the new icon and sign in.</li>" +
+      "<li>In Archie, tap <strong>Copy the link</strong>, then <strong>Paste from clipboard</strong> " +
+      "in the app.</li>" +
       "</ol>" +
-      // Said before they install, not discovered afterwards. iPhone gives an installed web app its
-      // own separate storage, so the new icon starts out signed out and unpaired even though this
+      // Said before they install rather than discovered afterwards. iPhone gives an installed web
+      // app its own storage, so the new icon starts out signed out and unpaired even though this
       // tab is both, and scanning cannot fix it because a QR always opens Safari.
-      '<p class="phone-install-body" style="margin-top:10px;">The home screen version is a separate ' +
-      "app to iPhone, with its own sign-in and its own pairing. Step 4 is not optional.</p>";
+      '<p class="phone-install-body" style="margin-top:10px;">To iPhone the home screen version is ' +
+      "a separate app, with its own sign-in and its own pairing, so the last two steps are not " +
+      "optional. Doing this before you pair here saves pairing twice.</p>";
   } else if (isIos) {
     // The honest dead-end fix: name the limitation and give the one step out of it.
     html =
@@ -715,10 +716,33 @@ function showPairScreen(reason) {
   // this is the one point they all pass through.
   const go = $("ph-paste-go");
   const input = $("ph-paste");
+  const clip = $("ph-paste-clip");
   if (go && input && !go.dataset.wired) {
     go.dataset.wired = "1";
     go.addEventListener("click", () => pairFromPastedText(input.value));
     input.addEventListener("keydown", (e) => { if (e.key === "Enter") pairFromPastedText(input.value); });
+  }
+  if (clip && !clip.dataset.wired) {
+    clip.dataset.wired = "1";
+    // Hidden rather than shown-and-broken where the API does not exist.
+    if (!(navigator.clipboard && navigator.clipboard.readText)) {
+      clip.classList.add("acct-hidden");
+    } else {
+      clip.addEventListener("click", async () => {
+        try {
+          // On iOS this raises the system "Paste" prompt, so the whole transfer is two taps: Copy
+          // on the computer, Paste here. With a Mac and Universal Clipboard the copy has already
+          // crossed on its own, and nothing has to be typed or messaged anywhere.
+          pairFromPastedText(await navigator.clipboard.readText());
+        } catch (e) {
+          setStatus(
+            "This phone did not allow reading the clipboard. Paste the link into the box below " +
+            "instead.",
+            "error",
+          );
+        }
+      });
+    }
   }
 }
 

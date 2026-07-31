@@ -20,6 +20,28 @@
     if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
         window.navigator.standalone === true) {
       root.classList.add('is-app');
+
+      /* The wordmark is a link home on every page of the site, which inside the app is the one
+         door left open into the marketing pages the rest of this hides. Point it at the app's own
+         start instead, so tapping the logo does what it does in any app: go back to the top of
+         this thing, not out of it. Rewritten here rather than per page, because the app can be on
+         /phone/, /account/ or /billing/ and the markup is duplicated in all of them. */
+      var logo = document.querySelector('.nav-logo');
+      if (logo) logo.setAttribute('href', '/phone/');
+
+      /* No pinch or double-tap zoom in the app.
+         Deliberately scoped to standalone and nowhere else: suppressing zoom on a website is an
+         accessibility failure, and the ordinary otianai.com pages keep it. Here the window has no
+         address bar to re-fit a zoomed page with, so an accidental double-tap leaves someone stuck
+         at 2x with no obvious way back, which is the worse outcome. Text still scales with the
+         system font-size setting, which is the accessibility path that matters. */
+      var vp = document.querySelector('meta[name="viewport"]');
+      if (vp) {
+        vp.setAttribute(
+          'content',
+          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
+        );
+      }
     }
   } catch (e) { /* treat as a normal browser tab */ }
 

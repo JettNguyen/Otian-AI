@@ -1520,6 +1520,13 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* Two-up variant for grids of four cards that should read as a 2x2 block
+   (the add-on type picker on the submit page) rather than a 3+1 row.
+   Collapses to a single-column list with the rest of .feature-grid at 1000px. */
+.feature-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 /* Tighter variant for grids of many short cards (the life-domain block on the
    homepage), where the default 24px gap and 32px card padding read as too airy. */
 .feature-grid-compact {

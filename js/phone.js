@@ -224,6 +224,10 @@ function renderInstallPrompt() {
 /* ── Talking to the computer ────────────────────────────────────────────────────────────────── */
 
 let uid = null;
+/** The account this browser is signed in as. Named on screen whenever the mailbox is empty,
+ *  because "signed in as the wrong person" and "phone access is off" are indistinguishable from
+ *  here and only one of them is fixed on the computer. */
+let signedInAs = "";
 
 /** Read and open the snapshot the desktop publishes.
  *
@@ -599,14 +603,24 @@ async function refresh() {
   }
 
   if (!snapshot) {
-    // Paired once, but the computer is publishing nothing: phone access was turned off there.
+    // Paired once, but the computer is publishing nothing. Usually that means phone access was
+    // turned off there; it also looks identical when this browser is signed in as a different
+    // account from the computer, so the address is named here rather than left to be guessed.
     show("ph-app", false);
     show("ph-pair", true);
-    $("ph-pair").querySelector(".acct-lead").textContent =
-      "Phone access is off on your computer, so there is nothing for this phone to manage. Turn it " +
-      "back on in Archie, under Account, and scan the new code.";
+    $("ph-pair").querySelector(".acct-lead").innerHTML =
+      "Nothing is waiting for this phone. Either phone access is off on your computer, or this " +
+      "phone is signed in as a different person. Archie has to be signed in to the same account as " +
+      "<strong>" + escapeHtml(signedInAs) + "</strong>.";
     return;
   }
+
+  // Back to the dashboard. This has to be here, and its absence was a real bug: the branch above
+  // is a state change, not a message, so a refresh that found nothing left the pair screen up and
+  // every later refresh rendered into a hidden #ph-app. The page stayed stuck on "Pair this phone"
+  // forever, no matter what the computer did, and only a hard reload escaped it.
+  show("ph-pair", false);
+  show("ph-app", true);
 
   renderStatus(snapshot);
   renderAgents(snapshot);
@@ -619,6 +633,7 @@ function unpair() {
 
 async function start(user) {
   uid = user.uid;
+  signedInAs = (user.email || "this account").trim();
 
   // A key in the address bar wins: the person has just scanned a fresh code, and it is meant to
   // replace whatever this phone was holding.

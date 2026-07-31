@@ -61,23 +61,63 @@ const escapeHtml = (s) =>
    feature exists to save. Keyed by nothing else, because one phone pairs with one computer. */
 const KEY_STORE = "otian_phone_key";
 
+/** The key for this page load, held in memory.
+ *
+ *  This variable is the fix for a bug that made re-scanning useless. The key used to be read from
+ *  the URL in one place, which stripped the fragment, and read back in another, which relied
+ *  entirely on localStorage having accepted the write in between. When that write failed (Private
+ *  Browsing, storage pressure, Safari refusing the first write after a data clear) the failure was
+ *  swallowed, the fragment was already gone, and the key was destroyed. Scanning again did exactly
+ *  the same thing, forever, with the page insisting the phone was unpaired.
+ *
+ *  So the value is captured once, synchronously, before anything async can run, and memory is the
+ *  first place it is looked for afterwards. */
+let keyInMemory = null;
+
+/** True when the key was captured but nowhere would persist it. Survives this page load only, so
+ *  the page can say so rather than mysteriously forgetting after the next navigation. */
+let keyIsEphemeral = false;
+
 function storedKey() {
-  try { return localStorage.getItem(KEY_STORE); } catch (e) { return null; }
+  // Memory first: it is the only carrier that cannot fail, and after a scan it always holds the
+  // freshest value.
+  if (keyInMemory) return keyInMemory;
+  try {
+    const v = localStorage.getItem(KEY_STORE);
+    if (v) return v;
+  } catch (e) { /* fall through to the session copy */ }
+  // Second carrier. localStorage is the one that should survive, but a sign-in round trip through
+  // /login/ is a same-session navigation, so this is enough to get the key back afterwards even
+  // when the durable write was refused.
+  try { return sessionStorage.getItem(KEY_STORE); } catch (e) { return null; }
 }
 
-/** Take the key out of the address bar and put it in storage.
+/** Take the key out of the address bar, remember it, and try to persist it.
  *
- *  The URL is rewritten immediately afterwards. The fragment never reached a server, but it does
- *  sit in the tab's history and in whatever the user's next screenshot catches, and neither is a
- *  good home for a key. */
+ *  Called once, at module load. The fragment is stripped only after the value is safely in memory:
+ *  it never reached a server, but it does sit in the tab's history and in whatever the next
+ *  screenshot catches, and neither is a good home for a key.
+ *
+ *  Storage failures are recorded rather than swallowed, because "your phone cannot remember this"
+ *  is something the person has to be told; silently forgetting is what made this unfixable from
+ *  the outside. */
 function claimKeyFromUrl() {
   const hash = location.hash || "";
   const match = hash.match(/[#&]k=([A-Za-z0-9_-]+)/);
   if (!match) return null;
-  try { localStorage.setItem(KEY_STORE, match[1]); } catch (e) { /* private mode: session only */ }
+
+  keyInMemory = match[1];
+  let persisted = false;
+  try { localStorage.setItem(KEY_STORE, keyInMemory); persisted = true; } catch (e) { /* try session */ }
+  try { sessionStorage.setItem(KEY_STORE, keyInMemory); persisted = true; } catch (e) { /* neither */ }
+  keyIsEphemeral = !persisted;
+
   history.replaceState(null, "", location.pathname + location.search);
-  return match[1];
+  return keyInMemory;
 }
+
+// Run it now, at module load, before any auth callback or redirect can consume the fragment.
+claimKeyFromUrl();
 
 /* ── The seal ───────────────────────────────────────────────────────────────────────────────
    AES-256-GCM through WebCrypto, matching crates/archie-core/src/phone.rs byte for byte: a fresh
@@ -606,12 +646,10 @@ async function refresh() {
     // Paired once, but the computer is publishing nothing. Usually that means phone access was
     // turned off there; it also looks identical when this browser is signed in as a different
     // account from the computer, so the address is named here rather than left to be guessed.
-    show("ph-app", false);
-    show("ph-pair", true);
-    $("ph-pair").querySelector(".acct-lead").innerHTML =
+    showPairScreen(
       "Nothing is waiting for this phone. Either phone access is off on your computer, or this " +
-      "phone is signed in as a different person. Archie has to be signed in to the same account as " +
-      "<strong>" + escapeHtml(signedInAs) + "</strong>.";
+      "phone is signed in as a different person: Archie has to be signed in as " + signedInAs + ".",
+    );
     return;
   }
 
@@ -626,8 +664,24 @@ async function refresh() {
   renderAgents(snapshot);
 }
 
+/** Show the pair screen with the reason it is showing.
+ *
+ *  One function, because the reason has to be set in the same breath as the screen. The version
+ *  that set them separately is how the page ended up insisting a phone was unpaired without ever
+ *  saying which of the several quite different causes applied. */
+function showPairScreen(reason) {
+  show("ph-loading", false);
+  show("ph-app", false);
+  show("ph-pair", true);
+  const lead = $("ph-pair").querySelector(".acct-lead");
+  if (lead) lead.innerHTML = escapeHtml(reason);
+}
+
 function unpair() {
+  // Every carrier the key could be in, or the reload finds it again and nothing appears to happen.
+  keyInMemory = null;
   try { localStorage.removeItem(KEY_STORE); } catch (e) { /* nothing to remove */ }
+  try { sessionStorage.removeItem(KEY_STORE); } catch (e) { /* nothing to remove */ }
   location.reload();
 }
 
@@ -635,20 +689,35 @@ async function start(user) {
   uid = user.uid;
   signedInAs = (user.email || "this account").trim();
 
-  // A key in the address bar wins: the person has just scanned a fresh code, and it is meant to
-  // replace whatever this phone was holding.
-  const key = claimKeyFromUrl() || storedKey();
+  // Already captured at module load, so this is just "whatever we have", newest first.
+  const key = storedKey();
 
   if (!isMobile) { show("ph-loading", false); show("ph-desktop", true); return; }
-  if (!key) { show("ph-loading", false); show("ph-pair", true); return; }
+  if (!key) {
+    // Say which of the two states this is. "No code yet" and "a code that would not save" look the
+    // same on screen and need completely different things from the reader, and guessing between
+    // them from the outside is slow.
+    showPairScreen(
+      "This phone does not have a pairing code yet. Scan the one in Archie to get one.",
+    );
+    return;
+  }
 
   try {
     cryptoKey = await importKey(key);
   } catch (e) {
-    show("ph-loading", false);
-    show("ph-pair", true);
-    setStatus("That pairing code was not readable. Scan the one in Archie again.", "error");
+    showPairScreen("That pairing code was not readable. Scan the one in Archie again.");
     return;
+  }
+
+  // Captured, usable, and nothing would keep it. Worth saying plainly: it will work now and be
+  // forgotten the moment this tab closes, which otherwise reads as random unpairing later.
+  if (keyIsEphemeral) {
+    setStatus(
+      "This phone cannot save the pairing, so it will be forgotten when you close this tab. " +
+      "Turn off Private Browsing, or free up storage, to keep it.",
+      "error",
+    );
   }
 
   show("ph-loading", false);
@@ -693,8 +762,7 @@ function cameFromLogin() {
 }
 
 onAuthStateChanged(auth, (user) => {
-  // The fragment carries the pairing key, and a redirect would drop it. Stash it before leaving.
-  claimKeyFromUrl();
+  // The key is already captured (module load, above), so a redirect to sign in cannot drop it.
   if (!user) { location.replace("/login/?next=/phone/"); return; }
   if (!twoFactorCleared(user) && !cameFromLogin()) { location.replace("/login/?next=/phone/"); return; }
   void start(user);

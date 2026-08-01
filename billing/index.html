@@ -302,8 +302,8 @@
     onAuthStateChanged(auth, (user) => {
       if (!user) { window.location.replace("/login/?next=/billing/"); return; }
       if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/billing/"); return; }
-      if (params.get("paid") === "1") setStatus("Payment received \u2014 thank you.", "ok");
-      else if (params.get("paid") === "0") setStatus("Payment cancelled \u2014 nothing was charged.", "");
+      if (params.get("paid") === "1") setStatus("Payment received. Thank you.", "ok");
+      else if (params.get("paid") === "0") setStatus("Payment cancelled. Nothing was charged.", "");
       render(user).catch((e) => setStatus((e && e.message) || "Couldn't load your billing.", "error"));
     });
 
@@ -334,7 +334,7 @@
       setPill("bil-pill", balance > 0 ? "Due" : "Paid up", balance === 0);
       $("bil-owed-list").innerHTML = owed.length
         ? owed.map((s) => row(escapeHtml(s.description || "Guided session"), fmtDate(s.session_date) || fmtDate(s.created_at), money(s.amount_cents), true, escapeHtml(s.notes || ""))).join("")
-        : '<div class="act-empty">You\'re all paid up \u2014 no sessions due.</div>';
+        : '<div class="act-empty">You\'re all paid up: no sessions due.</div>';
       show("bil-pay-row", balance > 0);
 
       $("bil-paid-list").innerHTML = paid.length
@@ -356,7 +356,7 @@
         window.location.href = d.url;
         await new Promise(() => {});
       } catch (e) {
-        setStatus(e.kind === "network" ? "Couldn't reach the billing service \u2014 try again in a moment." : ((e && e.message) || "Couldn't start checkout."), "error");
+        setStatus(e.kind === "network" ? "Couldn't reach the billing service. Try again in a moment." : ((e && e.message) || "Couldn't start checkout."), "error");
       }
     }));
 

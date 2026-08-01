@@ -781,7 +781,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    Three tiers, sized to what actually fits:
    • > 1100px          full row: logo (icon + wordmark + tagline), all menus,
                        theme toggle, Get Started, avatar.
-   • 901–1100px        drop the wordmark + tagline to their icon so the full set
+   • 901 to 1100px     drop the wordmark + tagline to their icon so the full set
                        of menus keeps fitting on one line; controls stay put.
    • ≤ 900px           menus + Get Started move into the drawer, hamburger appears,
                        and the wordmark returns (there's room again, and it keeps
@@ -7032,11 +7032,28 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-store-desc { margin-top: 2px; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; }
 .phone-store-note { margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; line-height: 1.45; }
 .phone-store-row .btn-mini { flex-shrink: 0; }
-#ph-store-agent { display: flex; align-items: center; gap: 8px; }
+#ph-store-agent { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 .phone-store-agent-label { color: var(--text-muted); font-size: 0.78rem; }
 #ph-store-agent select {
   padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--field-border);
   background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; font-size: 0.82rem;
+}
+
+/* The two halves of the dashboard, one at a time. A segmented control rather than a bar pinned to
+   the bottom of the screen: in a browser tab this page still has the site's nav above it and the
+   footer below, and a pinned bar would sit on top of that footer. */
+.phone-tabs {
+  display: flex; gap: 4px; margin-top: 16px; padding: 4px;
+  background: var(--bg-secondary); border: 1px solid var(--line-soft); border-radius: 999px;
+}
+.phone-tab {
+  flex: 1; min-height: 40px; padding: 0 12px; border: none; border-radius: 999px;
+  background: transparent; color: var(--text-secondary);
+  font-family: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+.phone-tab.is-active {
+  background: var(--bg-card); color: var(--text-primary); box-shadow: var(--shadow-sm);
 }
 
 .phone-foot {

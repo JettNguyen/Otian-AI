@@ -342,10 +342,18 @@ async function sendCommand(op, args) {
 }
 
 /** Run a command with the button showing its own progress, then reload what changed. */
+/** How many commands are waiting on the computer right now.
+ *
+ *  The background poll redraws the lists, which replaces the very button `act` is holding. Without
+ *  this, a poll landing mid-install swaps the disabled "Adding…" button for a fresh "Add" one while
+ *  the install is still running, and the obvious next move is to tap it again. */
+let commandsInFlight = 0;
+
 async function act(button, label, op, args) {
   const original = button.textContent;
   button.disabled = true;
   button.textContent = label;
+  commandsInFlight++;
   try {
     const answer = await sendCommand(op, args);
     setStatus(answer.message || (answer.ok ? "Done." : "That did not work."), answer.ok ? "ok" : "error");
@@ -353,6 +361,7 @@ async function act(button, label, op, args) {
   } catch (e) {
     setStatus("Something went wrong sending that. Try again.", "error");
   } finally {
+    commandsInFlight--;
     button.disabled = false;
     button.textContent = original;
   }
@@ -669,12 +678,12 @@ async function renderStore(agent) {
   if (!host) return;
 
   if (!catalog) {
-    host.innerHTML = '<div class="acct-section-body">Loading the store&hellip;</div>';
+    host.innerHTML = '<div class="acct-section-body">Loading the marketplace&hellip;</div>';
     try {
       catalog = await loadCatalog(app, uid);
     } catch (e) {
       host.innerHTML =
-        '<div class="acct-section-body">Could not load the store. Pull down to refresh, or try ' +
+        '<div class="acct-section-body">Could not load the marketplace. Pull down to refresh, or try ' +
         "again when you have a better connection.</div>";
       return;
     }
@@ -761,6 +770,38 @@ function storeRow(item, have, agent) {
   );
 }
 
+/* ── The two halves ─────────────────────────────────────────────────────────────────────────
+   "Your agent" is what is already installed and what it is waiting on. "Marketplace" is
+   everything on offer. They were one scroll, which meant reaching the marketplace at all
+   required scrolling past every skill and routine the agent already had, on the device with the
+   least screen to spare.
+
+   The status card sits above both rather than inside either, because "is the computer awake"
+   decides whether anything on either tab will do something when tapped. */
+
+let activeTab = "agents";
+
+/** Whether the marketplace tab is offered at all. It installs into an agent, so with no agent
+ *  there is nothing it could do, and an empty store is a worse answer than no tab. */
+let storeAvailable = false;
+
+function showTab(name) {
+  activeTab = name;
+
+  $("ph-tab-agents").classList.toggle("is-active", name === "agents");
+  $("ph-tab-store").classList.toggle("is-active", name === "store");
+  $("ph-tab-agents").setAttribute("aria-selected", String(name === "agents"));
+  $("ph-tab-store").setAttribute("aria-selected", String(name === "store"));
+
+  show("ph-agents", name === "agents");
+  show("ph-store-section", name === "store" && storeAvailable);
+
+  // The marketplace is drawn only while it is the visible tab, so the every-15-seconds refresh
+  // cannot redraw a list somebody is halfway down reading, and so opening the page does not fetch
+  // a catalog nobody asked to see.
+  if (name === "store" && targetAgent) void renderStore(targetAgent);
+}
+
 /* ── The page's states ──────────────────────────────────────────────────────────────────────── */
 
 /** Turn a failed read into the sentence that names what actually went wrong.
@@ -827,18 +868,27 @@ async function refresh() {
   renderStatus(snapshot);
   renderAgents(snapshot);
 
-  // The store installs into one agent. With several, the first is the default and the picker in the
-  // store header switches it; with one, which is nearly everyone, there is nothing to choose.
+  // The marketplace installs into one agent. With several, the first is the default and the picker
+  // above the list switches it; with one, which is nearly everyone, there is nothing to choose.
   const agents = (snapshot.state && snapshot.state.agents) || [];
-  if (agents.length > 0) {
+  storeAvailable = agents.length > 0;
+  if (storeAvailable) {
     const keep = targetAgent && agents.find((a) => a.id === targetAgent.id);
     targetAgent = keep || agents[0];
-    show("ph-store-section", true);
     renderAgentPicker(agents);
-    void renderStore(targetAgent);
-  } else {
-    show("ph-store-section", false);
   }
+
+  // Plural only when it is. The label is the one place on this page that says how many agents
+  // there are before you have looked.
+  $("ph-tab-agents").textContent = agents.length > 1 ? "Your agents" : "Your agent";
+  show("ph-tab-store", storeAvailable);
+  // Held back until the first snapshot lands, so the bar appears once with the right tabs on it
+  // rather than drawing a second tab a moment later under somebody's thumb. With no agent there is
+  // only one tab, and a control that switches between one thing is furniture.
+  show("ph-tabs", storeAvailable);
+  // An agent removed from the computer while the marketplace tab was open would otherwise leave
+  // a tab selected that is no longer offered, and a blank panel under it.
+  showTab(storeAvailable ? activeTab : "agents");
 }
 
 function renderAgentPicker(agents) {
@@ -983,6 +1033,11 @@ async function start(user) {
   $("ph-refresh").addEventListener("click", () => { void refresh(); });
   $("ph-unpair").addEventListener("click", unpair);
 
+  // Switching tabs returns to the top. Coming back to a half-scrolled list you did not scroll
+  // reads as the page having lost its place.
+  $("ph-tab-agents").addEventListener("click", () => { showTab("agents"); window.scrollTo(0, 0); });
+  $("ph-tab-store").addEventListener("click", () => { showTab("store"); window.scrollTo(0, 0); });
+
   // Filtering is local to the already-loaded catalog, so it stays instant and costs no reads.
   const search = $("ph-store-search");
   if (search) {
@@ -994,7 +1049,9 @@ async function start(user) {
   // Keep the "last heard from" honest while the page sits open, and pick up anything changed at
   // the computer. Paused when the tab is hidden, so a backgrounded home-screen app is not quietly
   // polling all day.
-  setInterval(() => { if (!document.hidden) void refresh(); }, 15_000);
+  setInterval(() => {
+    if (!document.hidden && commandsInFlight === 0) void refresh();
+  }, 15_000);
 }
 
 /* ── The gate ───────────────────────────────────────────────────────────────────────────────

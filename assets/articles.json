@@ -1,19 +1,5 @@
 [
   {
-    "title": "The Agent Demo Works Because Someone Already Picked the Input",
-    "summary": "Agent demos never fail because the input was chosen in advance. Daily use is the inputs nobody screened, and that gap is the whole story.",
-    "author": "Jett Nguyen",
-    "date": "2026-08-01",
-    "readTime": "4 min read",
-    "category": "Team Stories",
-    "tags": [
-      "agents",
-      "reliability",
-      "demos"
-    ],
-    "url": "the-agent-demo-works-because-someone-picked-the-input/"
-  },
-  {
     "title": "The Best Reason to Run AI Locally Has Nothing to Do With Privacy",
     "summary": "Everyone sells local AI on privacy. That's the defensive reason. The real one is access: an agent that can reach your actual files and act.",
     "author": "Jett Nguyen",

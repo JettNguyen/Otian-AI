@@ -240,6 +240,21 @@
             <!-- One card per agent: what it has, and what it is still waiting on. -->
             <div id="ph-agents"></div>
 
+            <!--
+              The store. Same live catalog the desktop app and the marketplace page read, so what is
+              on sale here cannot drift from what is on sale there. Adding sends an encrypted command
+              to the computer, which runs the ordinary install.
+            -->
+            <div class="acct-section acct-hidden" id="ph-store-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Add something</div>
+                <div id="ph-store-agent" class="acct-hidden"></div>
+              </div>
+              <input type="search" id="ph-store-search" class="phone-store-search"
+                     placeholder="Search the store" autocomplete="off" autocapitalize="none" />
+              <div id="ph-store"></div>
+            </div>
+
             <div class="phone-foot">
               <button class="btn btn-secondary btn-mini" id="ph-refresh">Refresh</button>
               <button class="btn btn-secondary btn-mini" id="ph-unpair">Unpair this phone</button>

@@ -7019,6 +7019,26 @@ html[data-theme="dark"] .booking-container iframe {
 /* Buttons in a row are the tap targets on a phone, so they get a real minimum height rather than
    the compact desktop size .btn-mini would otherwise give them. */
 .phone-row .btn-mini { min-height: 36px; }
+/* The store. Rows are taller than the installed lists because each carries a description and
+   sometimes a warning, and the tap target has to stay comfortable next to all that. */
+.phone-store-search {
+  width: 100%; margin: 4px 0 8px; padding: 11px 14px; border-radius: var(--radius-sm);
+  border: 1px solid var(--field-border); background: var(--bg-secondary);
+  color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
+}
+.phone-store-search:focus { border-color: var(--accent); }
+.phone-store-row { align-items: flex-start; gap: 12px; }
+.phone-store-main { flex: 1; min-width: 0; }
+.phone-store-desc { margin-top: 2px; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; }
+.phone-store-note { margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; line-height: 1.45; }
+.phone-store-row .btn-mini { flex-shrink: 0; }
+#ph-store-agent { display: flex; align-items: center; gap: 8px; }
+.phone-store-agent-label { color: var(--text-muted); font-size: 0.78rem; }
+#ph-store-agent select {
+  padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--field-border);
+  background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; font-size: 0.82rem;
+}
+
 .phone-foot {
   display: flex; justify-content: space-between; gap: 12px;
   margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);

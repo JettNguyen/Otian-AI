@@ -33,6 +33,7 @@ import {
   getFirestore, doc, getDoc, setDoc, deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { bindStatusToast } from "./status-toast.js";
+import { COLLECTIONS, loadCatalog } from "./catalog.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -225,7 +226,7 @@ function renderInstallPrompt() {
       // Said before they install rather than discovered afterwards. iPhone gives an installed web
       // app its own storage, so the new icon starts out signed out and unpaired even though this
       // tab is both, and scanning cannot fix it because a QR always opens Safari.
-      '<p class="phone-install-body" style="margin-top:10px;">To iPhone the home screen version is ' +
+      '<p class="phone-install-body" style="margin-top:10px;">To iPhone, the home screen version is ' +
       "a separate app, with its own sign-in and its own pairing, so the last two steps are not " +
       "optional. Doing this before you pair here saves pairing twice.</p>";
   } else if (isIos) {
@@ -577,7 +578,8 @@ function renderAgent(agent) {
           '<div class="phone-need">' +
           "<strong>" + escapeHtml(x.skill.name) + "</strong> needs " +
           x.missing.map(integrationLabel).map(escapeHtml).join(" and ") +
-          " connected. Open Archie on your computer to connect it." +
+          " connected. Open Archie on your computer to connect " +
+          (x.missing.length === 1 ? "it" : "them") + "." +
           "</div>").join("") +
         // Names the agent rather than saying "anything that reads it", which asked the reader to
         // work out what that meant and which of their skills it was about.
@@ -628,6 +630,134 @@ function renderAgent(agent) {
     '<div class="phone-group-title">Skills</div>' + skills +
     '<div class="phone-group-title">Routines</div>' + routines +
     "</div>"
+  );
+}
+
+/* ── The store ──────────────────────────────────────────────────────────────────────────────
+   Browsing and installing, against the same live Firestore catalog the desktop app and the
+   marketplace page read (js/catalog.js). Installing is the one thing here that changes somebody's
+   agent, so it goes the long way round: an encrypted command to the computer, which runs it through
+   `marketplace_install` exactly as the desktop's own Install button does. Nothing about a paid
+   add-on's paywall, its prompt body, or its asset download is reimplemented on this side. */
+
+/** The catalog, fetched once per page load. Small, and it does not change while someone browses. */
+let catalog = null;
+
+/** Which agent the store installs into. Set when the dashboard renders; with one agent, which is
+ *  almost everyone, there is nothing to choose and no chooser is shown. */
+let targetAgent = null;
+
+const KIND_LABEL = {};
+COLLECTIONS.forEach((c) => { KIND_LABEL[c.kind] = c; });
+
+/** What this agent already has, so the store can say "Added" instead of offering it twice. */
+function installedKeys(agent) {
+  const keys = new Set();
+  (agent.skills || []).forEach((s) => keys.add("skill:" + s.slug));
+  (agent.routines || []).forEach((r) => keys.add("routine:" + r.slug));
+  (agent.specialists || []).forEach((s) => keys.add("specialist:" + s.slug));
+  if (agent.personality && agent.personality.id) keys.add("personality:" + agent.personality.id);
+  return keys;
+}
+
+function priceLabel(cents) {
+  return cents ? "$" + (cents / 100).toFixed(2).replace(/\.00$/, "") : "Free";
+}
+
+async function renderStore(agent) {
+  const host = $("ph-store");
+  if (!host) return;
+
+  if (!catalog) {
+    host.innerHTML = '<div class="acct-section-body">Loading the store&hellip;</div>';
+    try {
+      catalog = await loadCatalog(app, uid);
+    } catch (e) {
+      host.innerHTML =
+        '<div class="acct-section-body">Could not load the store. Pull down to refresh, or try ' +
+        "again when you have a better connection.</div>";
+      return;
+    }
+  }
+
+  const have = installedKeys(agent);
+  const term = ($("ph-store-search") ? $("ph-store-search").value : "").trim().toLowerCase();
+  const matches = catalog.filter((item) => {
+    if (!term) return true;
+    return (item.name + " " + item.description + " " + item.category).toLowerCase().includes(term);
+  });
+
+  if (matches.length === 0) {
+    host.innerHTML =
+      '<div class="acct-section-body">Nothing matches &ldquo;' + escapeHtml(term) + "&rdquo;.</div>";
+    return;
+  }
+
+  // Grouped by kind, in the store's own order, so browsing on a phone still has the shape people
+  // know from the desktop rather than one long undifferentiated list.
+  host.innerHTML = COLLECTIONS.map((c) => {
+    const items = matches.filter((i) => i.kind === c.kind);
+    if (items.length === 0) return "";
+    return (
+      '<div class="phone-group-title">' + escapeHtml(c.plural) + "</div>" +
+      '<ul class="phone-list">' + items.map((i) => storeRow(i, have, agent)).join("") + "</ul>"
+    );
+  }).join("");
+
+  host.querySelectorAll("[data-install]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      act(btn, "Adding…", "install_" + btn.dataset.kind, {
+        workspace_id: agent.workspace_id,
+        agent_id: agent.id,
+        id: btn.dataset.install,
+        // The agent's routines are scheduled in whatever timezone it is told about, and the phone
+        // is the device that actually knows where its owner is. Sending it means a routine added
+        // here fires at a sensible local hour instead of at UTC midnight.
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || null,
+      }));
+  });
+  host.querySelectorAll("[data-uninstall]").forEach((btn) => {
+    btn.addEventListener("click", () =>
+      act(btn, "Removing…", "remove_" + btn.dataset.kind, {
+        workspace_id: agent.workspace_id,
+        agent_id: agent.id,
+        slug: btn.dataset.uninstall,
+      }));
+  });
+}
+
+function storeRow(item, have, agent) {
+  const installed = have.has(item.kind + ":" + item.id);
+  const paid = item.price_cents > 0;
+
+  // Paid add-ons are bought on the computer. Saying so beats an Add button that fails, and the
+  // desktop's `marketplace_install` would refuse this anyway (require_owned_if_paid).
+  const action = installed
+    ? '<button class="btn btn-secondary btn-mini" data-uninstall="' + escapeHtml(item.id) +
+      '" data-kind="' + escapeHtml(item.kind) + '">Remove</button>'
+    : paid
+      ? '<span class="phone-row-tag">' + escapeHtml(priceLabel(item.price_cents)) + ", on your computer</span>"
+      : '<button class="btn btn-primary btn-mini" data-install="' + escapeHtml(item.id) +
+        '" data-kind="' + escapeHtml(item.kind) + '">Add</button>';
+
+  // What it will still want after installing, said before the tap rather than discovered after.
+  const needs = (item.required_integrations || [])
+    .filter((id) => ["flights", "video"].indexOf(id) === -1)
+    .filter((id) => (agent.connected || []).indexOf(id) === -1);
+  const needsNote = needs.length
+    ? '<div class="phone-store-note">Needs ' + needs.map(integrationLabel).map(escapeHtml).join(" and ") +
+      " connected on your computer.</div>"
+    : "";
+
+  return (
+    '<li class="phone-row phone-store-row">' +
+    '<div class="phone-store-main">' +
+    '<div class="phone-row-name">' + escapeHtml(item.name) + "</div>" +
+    '<div class="phone-store-desc">' + escapeHtml(item.description) + "</div>" +
+    needsNote +
+    "</div>" +
+    action +
+    "</li>"
   );
 }
 
@@ -696,6 +826,37 @@ async function refresh() {
 
   renderStatus(snapshot);
   renderAgents(snapshot);
+
+  // The store installs into one agent. With several, the first is the default and the picker in the
+  // store header switches it; with one, which is nearly everyone, there is nothing to choose.
+  const agents = (snapshot.state && snapshot.state.agents) || [];
+  if (agents.length > 0) {
+    const keep = targetAgent && agents.find((a) => a.id === targetAgent.id);
+    targetAgent = keep || agents[0];
+    show("ph-store-section", true);
+    renderAgentPicker(agents);
+    void renderStore(targetAgent);
+  } else {
+    show("ph-store-section", false);
+  }
+}
+
+function renderAgentPicker(agents) {
+  const host = $("ph-store-agent");
+  if (!host) return;
+  if (agents.length < 2) { host.classList.add("acct-hidden"); return; }
+  host.classList.remove("acct-hidden");
+  host.innerHTML =
+    '<label class="phone-store-agent-label" for="ph-store-agent-select">Add to</label>' +
+    '<select id="ph-store-agent-select">' +
+    agents.map((a) =>
+      '<option value="' + escapeHtml(a.id) + '"' + (a.id === targetAgent.id ? " selected" : "") +
+      ">" + escapeHtml(a.name) + "</option>").join("") +
+    "</select>";
+  $("ph-store-agent-select").addEventListener("change", (e) => {
+    targetAgent = agents.find((a) => a.id === e.target.value) || agents[0];
+    void renderStore(targetAgent);
+  });
 }
 
 /** Accept a pairing link (or a bare key) pasted by hand, and start over with it.
@@ -821,6 +982,12 @@ async function start(user) {
 
   $("ph-refresh").addEventListener("click", () => { void refresh(); });
   $("ph-unpair").addEventListener("click", unpair);
+
+  // Filtering is local to the already-loaded catalog, so it stays instant and costs no reads.
+  const search = $("ph-store-search");
+  if (search) {
+    search.addEventListener("input", () => { if (targetAgent) void renderStore(targetAgent); });
+  }
 
   await refresh();
 

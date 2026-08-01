@@ -50,10 +50,13 @@ if (root) {
 
   // Mark the dropdown item for the page you're currently on.
   const CURRENT_PATH = (location.pathname || "/").replace(/\/+$/, "") || "/";
-  const activeAttr = (href) => {
-    const p = href.split("?")[0].replace(/\/+$/, "") || "/";
-    return p === CURRENT_PATH ? ' class="active"' : "";
-  };
+  const isActive = (href) => (href.split("?")[0].replace(/\/+$/, "") || "/") === CURRENT_PATH;
+  const activeAttr = (href) => (isActive(href) ? ' class="active"' : "");
+
+  // An admin-only destination. Marked with .is-admin so the stylesheet can colour it gold and
+  // rail it, keeping staff pages visually separate from the pages every customer sees.
+  const adminLink = (href, text) =>
+    '<a role="menuitem" class="is-admin' + (isActive(href) ? " active" : "") + '" href="' + href + '">' + text + "</a>";
 
   function openMenu() { root.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
   function closeMenu() { root.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
@@ -159,11 +162,15 @@ if (root) {
         btn.classList.remove("has-due");
       }
       if (s.isAdmin && billingItem) {
+        // Kept as their own labelled group at the bottom of the list, below a rule, so the
+        // public items above it stay the ones an admin reads as "what my customers see".
         billingItem.insertAdjacentHTML(
           "afterend",
-          '<a role="menuitem" href="/admin/billing/"' + activeAttr("/admin/billing/") + ">Invoice a client</a>" +
-          '<a role="menuitem" href="/admin/tiers/"' + activeAttr("/admin/tiers/") + ">Manage tiers</a>" +
-          '<a role="menuitem" href="/admin/ops/"' + activeAttr("/admin/ops/") + ">Ops console</a>"
+          '<div class="nav-account-divider"></div>' +
+          '<div class="nav-account-menu-section">Admin only</div>' +
+          adminLink("/admin/billing/", "Invoice a client") +
+          adminLink("/admin/tiers/", "Manage tiers") +
+          adminLink("/admin/ops/", "Ops console")
         );
       }
     });

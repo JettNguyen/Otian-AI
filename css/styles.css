@@ -777,6 +777,47 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   margin: 6px 4px;
 }
 
+/* Admin-only destinations in the account dropdown (added by js/account-nav.js for staff).
+   Gold instead of the brand accent, under a labelled heading and behind a gold rail, so an
+   admin can see at a glance which links go to staff pages and which go to the same pages
+   every customer sees. Gold-ink rather than plain gold: the bright token is tuned for fills,
+   and only the ink variant clears AA as text in both themes. */
+.nav-account-menu-section {
+  padding: 8px 10px 4px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-gold-ink);
+}
+
+.nav-account-menu a.is-admin {
+  position: relative;
+  padding-left: 18px;
+  color: var(--c-gold-ink);
+}
+
+.nav-account-menu a.is-admin::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 7px;
+  bottom: 7px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--c-gold);
+}
+
+/* Hover and current-page both stay gold: an admin item never borrows the accent, which on
+   this menu means "a page you're on" for the public items. */
+.nav-account-menu a.is-admin:hover,
+.nav-account-menu a.is-admin.active {
+  background: var(--c-gold-subtle);
+  color: var(--c-gold-ink);
+}
+
+.nav-account-menu a.is-admin.active { font-weight: 600; }
+
 /* ── Nav responsive ──────────────────────────────────────────────────────────
    Three tiers, sized to what actually fits:
    • > 1100px          full row: logo (icon + wordmark + tagline), all menus,

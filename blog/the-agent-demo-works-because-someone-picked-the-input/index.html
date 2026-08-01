@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Agent Demo Works Because Someone Already Picked the Input | Otian AI</title>
+  <meta name="description" content="Agent demos never fail because the input was chosen in advance. Daily use is the inputs nobody screened, and that gap is the whole story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navMarketplace">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navMarketplaceMenu" type="button">Skills Marketplace</button>
+          <div class="nav-more-menu" id="navMarketplaceMenu" role="menu" aria-label="Skills Marketplace">
+            <a href="../../skills-marketplace/what-is-a-skill/" role="menuitem">What Is a Skill?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">The Marketplace</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navServices">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
+          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
+            <a href="../../individuals/" role="menuitem">For Individuals</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../equipment/" role="menuitem">Equipment Needed</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../about/" role="menuitem">About</a>
+            <a href="../../testimonials/" role="menuitem">Agent Successes</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutMarketplace" aria-expanded="false" aria-controls="navDrawerFlyout">Skills Marketplace</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Services</span>
+    </button>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutMarketplace">
+      <a href="../../skills-marketplace/what-is-a-skill/">What Is a Skill?</a>
+      <a href="../../skills-marketplace/browse/">The Marketplace</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutServices">
+      <a href="../../individuals/">For Individuals</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../equipment/">Equipment Needed</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../about/">About</a>
+      <a href="../../testimonials/">Agent Successes</a>
+      <a href="../../contact/">Contact</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero article-hero" aria-label="Article introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">The Agent Demo Works Because Someone Already Picked the Input</li>
+          </ol>
+        </div>
+      </nav>
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Team Story</span>
+        <h1 class="fade-up delay-1">The Agent Demo Works Because Someone Already Picked the Input</h1>
+        <div class="article-byline fade-up delay-2">
+          <strong>Jett Nguyen</strong>
+          <span>&middot;</span>
+          <span>August 1, 2026</span>
+          <span>&middot;</span>
+          <span>4 min read</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <article class="article-body fade-up delay-1">
+
+<p>I have built a lot of agent demos, and I have never shown one that failed. Not because my agents are that good. Because I picked the input.</p>
+
+<p>That is the quiet mechanic behind almost every impressive agent demo you have seen. The task looks hard. The result looks like magic. But somewhere before the recording started, a human chose the one email, the one file, the one request that lands cleanly. The demo is real. The choosing is invisible.</p>
+
+<p>Once you notice this, you cannot unsee it. And it changes what you should trust.</p>
+
+<h2>The happy path is a decision, not a discovery</h2>
+
+<p>When I build a flow for the first time, I try it on an example. If it works, I feel great. But I chose that example. I chose one where the date was formatted normally, the name was spelled the way I expected, the request had exactly one interpretation.</p>
+
+<p>That is not the agent succeeding. That is me pre-filtering reality down to the slice the agent handles well, and then being impressed by the slice.</p>
+
+<p>The model does not know it got the easy version. It has no sense of "this input was hand-picked to make me look good." It just runs. So the confidence you feel watching a clean demo is borrowed. It comes from the curation, and the curation does not ship with the agent.</p>
+
+<blockquote class="article-pullquote">A demo tells you the agent can do the task once. It tells you nothing about what happens when nobody is choosing the task.</blockquote>
+
+<h2>Daily use is the inputs nobody screened</h2>
+
+<p>Day two is different. On day two the agent meets the input you would never have picked.</p>
+
+<p>The email that is actually two requests stapled together. The message where the important instruction is in a postscript. The attachment that is a screenshot of a table instead of the table. The name that matches three people in your contacts. The request that assumes context the sender has and the agent does not.</p>
+
+<p>Nobody screened these. They arrive in whatever shape the world sent them. And this is where the real distribution of your work lives, in the long tail of slightly-wrong, slightly-ambiguous, slightly-malformed inputs that make up most of an actual week.</p>
+
+<p>The demo showed you the mode of the distribution. Daily use is the tail. An agent that nails the mode and falls apart in the tail can still look, on video, like it solved everything.</p>
+
+<h2>What the gap actually costs</h2>
+
+<p>Here is the part that bit me. The failure on a messy input usually does not look like a crash. It looks like a confident answer to a question the agent quietly misread.</p>
+
+<p>The model does not stop when the input is ambiguous. It picks an interpretation and proceeds as if it were obvious. On a demo input there was only one interpretation, so this never showed. On a real input there were three, and the agent committed to one without telling you it chose.</p>
+
+<p>So the cost is not "the agent breaks." The cost is "the agent is wrong in a way that looks exactly like being right," and you find out later, downstream, when the thing it did on the wrong reading has already gone out.</p>
+
+<p>This is why I have stopped trusting how an agent performs on the input I hand it. I only trust how it performs on the input I did not choose, and specifically on the ugly ones. When I evaluate a flow now, I go looking for the malformed cases on purpose. The double request. The missing context. The thing that could be read two ways. If it handles those, or better, if it stops and flags them instead of guessing, I believe it. If it only handles the clean version, I have a demo, not a tool.</p>
+
+<h2>Build for the tail, not the tape</h2>
+
+<p>The practical shift is small and it changes everything. Stop asking "did it work?" Start asking "on what input, and who picked it?"</p>
+
+<p>When you evaluate an agent, feed it the requests you dread, not the ones you would screenshot. Watch what it does when the input is underspecified. The best behavior is not a clever answer. It is the agent noticing it is unsure and asking, because a question on an ambiguous input is worth more than a confident guess you have to catch later.</p>
+
+<p>This is also why it matters that the agent runs somewhere you can actually see it and correct it. On your own machine, the tail is not a support ticket you file with a vendor and wait on. It is a case you watch fail once, understand, and fix. You get to expand the set of inputs it handles well, one real ugly example at a time, until the happy path stops being a path you had to choose and starts being most of the road.</p>
+
+<p>A demo is the agent on its best day, on an input someone loved. The tool is the agent on an ordinary Tuesday, on an input nobody vetted. Only one of those is worth owning, and it is never the one on the tape.</p>
+
+        </article>
+
+        <div class="cta-banner fade-up article-cta">
+          <h2>Reach out to Otian AI</h2>
+          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+
+        <div class="text-center mt-40">
+          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Guided AI assistants for real life</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../skills-marketplace/browse/">Skills Marketplace</a>
+            <a href="../../individuals/">For Individuals</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../about/">About</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../equipment/">Equipment Needed</a>
+            <a href="../../testimonials/">Agent Successes</a>
+            <a href="../../contact/">Contact</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI. All rights reserved.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+</body>
+</html>

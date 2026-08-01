@@ -100,7 +100,13 @@ if (root) {
         getDoc(doc(db, "users", user.uid)),
         getDocs(query(collection(db, "users", user.uid, "sessions"), where("status", "==", "owed"))),
       ]);
-      isAdmin = userSnap.exists() && (userSnap.data() || {}).access_tier === "admin";
+      // A user holds a SET of tiers (access_tiers); the single access_tier string is the legacy
+      // shape kept for docs written before the array existed. Read the array first and fall back,
+      // the same order firestore.rules (acctTiers) and the app (archie-core::auth) use. Reading
+      // only the legacy string would hide every admin link the moment a doc goes array-only.
+      const acct = userSnap.exists() ? userSnap.data() || {} : {};
+      const tiers = acct.access_tiers || (acct.access_tier && acct.access_tier !== "none" ? [acct.access_tier] : []);
+      isAdmin = tiers.includes("admin");
       owedSnap.forEach((d) => { owedCents += Number((d.data() || {}).amount_cents) || 0; });
     } catch (e) { /* signed-in UX only; fail quiet, badge just doesn't show */ }
     const out = { uid: user.uid, owedCents, isAdmin, ts: Date.now() };
@@ -156,7 +162,8 @@ if (root) {
         billingItem.insertAdjacentHTML(
           "afterend",
           '<a role="menuitem" href="/admin/billing/"' + activeAttr("/admin/billing/") + ">Invoice a client</a>" +
-          '<a role="menuitem" href="/admin/tiers/"' + activeAttr("/admin/tiers/") + ">Manage tiers</a>"
+          '<a role="menuitem" href="/admin/tiers/"' + activeAttr("/admin/tiers/") + ">Manage tiers</a>" +
+          '<a role="menuitem" href="/admin/ops/"' + activeAttr("/admin/ops/") + ">Ops console</a>"
         );
       }
     });

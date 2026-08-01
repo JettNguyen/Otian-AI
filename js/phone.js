@@ -579,10 +579,12 @@ function renderAgent(agent) {
           x.missing.map(integrationLabel).map(escapeHtml).join(" and ") +
           " connected. Open Archie on your computer to connect it." +
           "</div>").join("") +
+        // Names the agent rather than saying "anything that reads it", which asked the reader to
+        // work out what that meant and which of their skills it was about.
         emptyLists.map((c) =>
           '<div class="phone-need">' +
-          "<strong>" + escapeHtml(c.name) + "</strong> is empty, so anything that reads it has " +
-          "nothing to report yet." +
+          "<strong>" + escapeHtml(c.name) + "</strong> is empty, so " + escapeHtml(agent.name) +
+          " cannot report on it yet." +
           "</div>").join("") +
         "</div>";
 

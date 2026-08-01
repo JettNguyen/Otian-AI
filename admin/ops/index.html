@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ops Console | Otian AI</title>
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    /* ── Shared admin-page scaffolding (same as /admin/tiers/), wider for tables ── */
+    .acct-wrap { max-width: 720px; margin: 0 auto; }
+    .acct-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
+    }
+    .acct-lead { text-align: center; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.55; margin: 0; }
+    .acct-section {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px 20px; background: var(--surface-soft);
+    }
+    .acct-section + .acct-section { margin-top: 14px; }
+    .acct-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .acct-section-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+    .acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+    .act-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; line-height: 1.5; }
+    .pill { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
+    .pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
+    .pill-warn { background: var(--c-gold-subtle); color: var(--c-gold-ink, var(--c-gold)); }
+    .pill-bad { background: var(--danger-ring); color: var(--danger); }
+    .btn.btn-mini { padding: 8px 14px; font-size: 0.8rem; }
+    .acct-hidden { display: none !important; }
+    .acct-spinner {
+      width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
+      border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
+      animation: acctspin 0.7s linear infinite;
+    }
+    @keyframes acctspin { to { transform: rotate(360deg); } }
+    .acct-foot-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
+    .acct-foot-note a { color: var(--text-secondary); }
+
+    /* ── Ops-specific ── */
+    .ops-fields { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+    .ops-fields label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); }
+    .ops-fields input, .ops-fields textarea, .ops-fields select {
+      width: 100%; padding: 10px 12px; border-radius: var(--radius-sm);
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-primary); font-family: inherit; font-size: 0.88rem; outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .ops-fields input:focus, .ops-fields textarea:focus, .ops-fields select:focus {
+      border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle);
+    }
+    .ops-fields textarea { resize: vertical; min-height: 60px; }
+    .ops-inline { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 560px) { .ops-inline { grid-template-columns: 1fr; } }
+
+    .chan-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .chan-toggle {
+      border: 1px solid var(--field-border); background: var(--bg-secondary);
+      color: var(--text-secondary); font-family: inherit; font-size: 0.82rem; font-weight: 600;
+      text-transform: capitalize; padding: 7px 14px; border-radius: 999px; cursor: pointer;
+      transition: color var(--transition), border-color var(--transition),
+                  background var(--transition), box-shadow var(--transition);
+    }
+    .chan-toggle:hover { border-color: var(--danger); color: var(--text-primary); }
+    .chan-toggle[aria-pressed="true"] { border-color: var(--danger); background: var(--danger-ring); color: var(--danger); }
+
+    .ops-preview {
+      margin-top: 14px; padding: 12px 14px; border-radius: var(--radius-sm);
+      background: var(--accent-subtle); border: 1px solid var(--accent-line);
+      color: var(--accent-ink, var(--text-primary)); font-size: 0.82rem; line-height: 1.6;
+    }
+    .ops-preview strong { font-weight: 700; }
+
+    .ver-row { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+    .ver-label { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; min-width: 64px; }
+    .ver-bar-track { flex: 1; height: 18px; border-radius: 6px; background: var(--surface-soft-strong); overflow: hidden; }
+    .ver-bar { height: 100%; background: var(--accent); border-radius: 6px; min-width: 2px; }
+    .ver-count { font-size: 0.8rem; color: var(--text-secondary); min-width: 90px; text-align: right; }
+
+    .err-item { border-top: 1px solid var(--border); padding: 12px 0; }
+    .err-item:first-child { border-top: none; }
+    .err-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .err-meta { font-size: 0.75rem; color: var(--text-muted); }
+    .err-msg {
+      margin: 8px 0 0; padding: 10px 12px; border-radius: var(--radius-sm);
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem;
+      line-height: 1.5; white-space: pre-wrap; word-break: break-word;
+      max-height: 180px; overflow-y: auto; color: var(--text-secondary);
+    }
+    .rel-notes { margin: 8px 0 0; font-size: 0.82rem; line-height: 1.6; color: var(--text-secondary); white-space: pre-wrap; }
+    details.rel > summary { cursor: pointer; }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../our-story/" role="menuitem">Our Story</a>
+            <a href="../../testimonials/" role="menuitem">Reviews</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+            <a href="../../trust/" role="menuitem">Trust</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../../archie/">What Is Archie?</a>
+      <a href="../../archie/see-it-work/">See It Work</a>
+      <a href="../../archie/pricing/">Pricing</a>
+      <a href="../../individuals/">Guided Setup</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../../skills-marketplace/commission/">Commission One</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../our-story/">Our Story</a>
+      <a href="../../testimonials/">Reviews</a>
+      <a href="../../contact/">Contact</a>
+      <a href="../../trust/">Trust</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Admin</span>
+        <h1 class="fade-up delay-1">Ops Console</h1>
+        <p>How the fleet is doing, and the levers that work without shipping a release.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Ops console">
+      <div class="container">
+        <div class="acct-wrap">
+
+          <div id="adm-loading" class="acct-card">
+            <div class="acct-spinner" aria-hidden="true"></div>
+            <p class="acct-lead">Checking your access&hellip;</p>
+          </div>
+
+          <div id="adm-denied" class="acct-card acct-hidden">
+            <p class="acct-lead">This page is for Otian admins. <a href="../../account/">Back to your account</a></p>
+          </div>
+
+          <div id="adm-content" class="acct-hidden">
+
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Fleet</div>
+                <span class="pill pill-off" id="fleet-total">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">Which app versions are alive, from each copy's daily heartbeat. Copies older than the first heartbeat release never report, so an empty list means "nobody has updated yet", not "nobody is running".</p>
+              <div id="fleet-rows"></div>
+              <div class="act-sub acct-hidden" id="fleet-empty" style="margin-top:10px;">No heartbeats yet.</div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Levers</div>
+                <span class="pill pill-off" id="levers-state">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">The remote controls every copy of Archie obeys within a couple of minutes. Leave a field empty to clear that lever. Nothing here can break a copy that cannot reach us: an unreachable lever restricts nothing.</p>
+              <div class="ops-fields">
+                <div class="ops-inline">
+                  <div>
+                    <label for="lv-min">Minimum app version</label>
+                    <input type="text" id="lv-min" placeholder="e.g. 0.1.2 (empty = no gate)" autocomplete="off" />
+                  </div>
+                  <div>
+                    <label for="lv-level">Notice type</label>
+                    <select id="lv-level">
+                      <option value="info">Info</option>
+                      <option value="warning">Warning</option>
+                    </select>
+                  </div>
+                </div>
+                <label for="lv-update-msg">Update-screen message (optional, shown to gated versions)</label>
+                <textarea id="lv-update-msg" placeholder="Default: &quot;This version of Archie is too old to run your agent safely&hellip;&quot;"></textarea>
+                <label for="lv-notice">Notice shown in every app (empty = no notice)</label>
+                <textarea id="lv-notice" placeholder="e.g. Telegram is having an outage. Messages may be delayed."></textarea>
+                <label for="lv-notice-url">Notice link (optional)</label>
+                <input type="text" id="lv-notice-url" placeholder="https://&hellip;" autocomplete="off" />
+                <label for="lv-addons">Add-ons switched off, one per line, as collection/id</label>
+                <textarea id="lv-addons" placeholder="skills/meeting-notes"></textarea>
+                <label>Channels switched off</label>
+                <div class="chan-row" id="lv-channels"></div>
+              </div>
+              <div class="ops-preview" id="lv-preview"></div>
+              <div class="acct-row">
+                <button class="btn btn-primary btn-mini" id="btn-save-levers">Save levers</button>
+                <button class="btn btn-secondary btn-mini" id="btn-reload-levers">Reload</button>
+              </div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Errors</div>
+                <span class="pill pill-off" id="err-total">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">Crash tails and restart loops, newest first, already stripped of secrets before they left the machine. Resolve deletes the report; that is the whole triage system.</p>
+              <div id="err-rows"></div>
+              <div class="act-sub acct-hidden" id="err-empty" style="margin-top:10px;">Nothing. The good kind of nothing.</div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-title">Releases</div>
+              <p class="act-sub" style="margin-top:6px;">The shipped record, written by the release pipeline. Releases happen in git, not here; this list is the receipt.</p>
+              <div id="rel-rows"></div>
+              <div class="act-sub acct-hidden" id="rel-empty" style="margin-top:10px;">No releases recorded yet (the record starts with the first release shipped through release.sh).</div>
+            </div>
+
+          </div>
+
+          <div id="acct-status" role="status" aria-live="polite"></div>
+
+          <p class="acct-foot-note">
+            Also see <a href="../tiers/">Manage tiers</a> &middot; <a href="../billing/">Invoice a client</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../archie/">Archie</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../trust/">Trust</a>
+            <a href="../../our-story/">Our Story</a>
+            <a href="../../testimonials/">Reviews</a>
+            <a href="../../contact/">Contact</a>
+            <a href="../../account/">Account</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script type="module" src="../../js/account-nav.js"></script>
+
+  <script type="module">
+    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { bindStatusToast } from "../../js/status-toast.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import {
+      getFirestore, doc, getDoc, setDoc, deleteDoc,
+      collection, getDocs, query, orderBy, limit,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
+      authDomain: "archie-77170.firebaseapp.com",
+      projectId: "archie-77170",
+      storageBucket: "archie-77170.firebasestorage.app",
+      messagingSenderId: "516396797258",
+      appId: "1:516396797258:web:362cf2815128f3c82345b3",
+    };
+    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const $ = (id) => document.getElementById(id);
+    const statusEl = $("acct-status");
+    const setStatus = bindStatusToast(statusEl);
+    function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
+    function escapeHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+    function toDate(v) {
+      // Heartbeats/errors carry Firestore timestamps; releases carry an ISO string. Render both.
+      if (v && typeof v.toDate === "function") return v.toDate();
+      const d = new Date(v || 0);
+      return Number.isNaN(d.getTime()) ? null : d;
+    }
+    function ago(date) {
+      if (!date) return "sometime";
+      const mins = Math.floor((Date.now() - date.getTime()) / 60000);
+      if (mins < 60) return mins + "m ago";
+      if (mins < 60 * 48) return Math.floor(mins / 60) + "h ago";
+      return Math.floor(mins / (60 * 24)) + "d ago";
+    }
+
+    // Same second-factor clearance rule as the login/account pages.
+    function isFirstEntry(user) {
+      const c = Date.parse((user.metadata && user.metadata.creationTime) || "");
+      const l = Date.parse((user.metadata && user.metadata.lastSignInTime) || "");
+      if (Number.isNaN(c) || Number.isNaN(l)) return false;
+      return Math.abs(l - c) < 10000;
+    }
+    function twoFactorCleared(user) {
+      try { if (sessionStorage.getItem("otian_2fa_ok") === user.uid) return true; } catch (e) {}
+      return isFirstEntry(user);
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) { window.location.replace("/login/?next=/admin/ops/"); return; }
+      if (!twoFactorCleared(user)) { window.location.replace("/login/?next=/admin/ops/"); return; }
+      // The gate reads the caller's own user doc (allowed by rules); everything below only
+      // works if the rules' isAdmin() agrees, so this check exists to fail politely, not to
+      // protect anything.
+      let tiers = [];
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const d = snap.exists() ? snap.data() || {} : {};
+        tiers = d.access_tiers || (d.access_tier && d.access_tier !== "none" ? [d.access_tier] : []);
+      } catch (e) {}
+      show("adm-loading", false);
+      if (!tiers.includes("admin")) { show("adm-denied", true); return; }
+      show("adm-content", true);
+      loadFleet(); loadLevers(); loadErrors(); loadReleases();
+    });
+
+    // ── Fleet: version histogram from heartbeats ──────────────────────────────────────────
+    async function loadFleet() {
+      try {
+        const snap = await getDocs(collection(db, "heartbeats"));
+        const byVersion = new Map();
+        let live30 = 0;
+        snap.forEach((d) => {
+          const h = d.data() || {};
+          const v = h.app_version || "unknown";
+          const seen = toDate(h.last_seen);
+          const fresh = seen && (Date.now() - seen.getTime()) < 30 * 24 * 3600 * 1000;
+          if (fresh) live30 += 1;
+          const row = byVersion.get(v) || { count: 0, fresh: 0, platforms: new Map() };
+          row.count += 1;
+          if (fresh) row.fresh += 1;
+          row.platforms.set(h.platform || "?", (row.platforms.get(h.platform || "?") || 0) + 1);
+          byVersion.set(v, row);
+        });
+        $("fleet-total").textContent = snap.size + " copies, " + live30 + " seen this month";
+        const rowsEl = $("fleet-rows");
+        rowsEl.innerHTML = "";
+        show("fleet-empty", snap.size === 0);
+        const versions = Array.from(byVersion.entries()).sort((a, b) => b[0].localeCompare(a[0], undefined, { numeric: true }));
+        const max = Math.max(1, ...versions.map(([, r]) => r.count));
+        for (const [version, row] of versions) {
+          const plats = Array.from(row.platforms.entries()).map(([p, n]) => p + " " + n).join(", ");
+          const el = document.createElement("div");
+          el.className = "ver-row";
+          el.innerHTML =
+            '<span class="ver-label">' + escapeHtml(version) + "</span>" +
+            '<div class="ver-bar-track"><div class="ver-bar" style="width:' + Math.round((row.count / max) * 100) + '%"></div></div>' +
+            '<span class="ver-count">' + row.count + " (" + escapeHtml(plats) + ")</span>";
+          rowsEl.appendChild(el);
+        }
+      } catch (e) {
+        setStatus("Couldn't load heartbeats: " + e.message, "error");
+      }
+    }
+
+    // ── Levers: the config/flags doc ──────────────────────────────────────────────────────
+    const CHANNELS = ["telegram", "discord", "slack", "signal", "matrix"];
+    let channelsOff = new Set();
+    let saveArmedAt = 0;
+
+    const chanEl = $("lv-channels");
+    CHANNELS.forEach((c) => {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "chan-toggle"; b.dataset.chan = c;
+      b.setAttribute("aria-pressed", "false"); b.textContent = c;
+      b.addEventListener("click", () => {
+        channelsOff.has(c) ? channelsOff.delete(c) : channelsOff.add(c);
+        syncChannels(); renderPreview(); disarm();
+      });
+      chanEl.appendChild(b);
+    });
+    function syncChannels() {
+      chanEl.querySelectorAll(".chan-toggle").forEach((b) => {
+        const off = channelsOff.has(b.dataset.chan);
+        b.setAttribute("aria-pressed", off ? "true" : "false");
+        b.textContent = (off ? "✕ " : "") + b.dataset.chan;
+      });
+    }
+
+    function formState() {
+      const min = $("lv-min").value.trim();
+      const updateMsg = $("lv-update-msg").value.trim();
+      const noticeText = $("lv-notice").value.trim();
+      const noticeUrl = $("lv-notice-url").value.trim();
+      const addons = $("lv-addons").value.split("\n").map((s) => s.trim()).filter(Boolean);
+      const flags = {};
+      if (min) flags.min_app_version = min;
+      if (updateMsg) flags.update_message = updateMsg;
+      if (noticeText) {
+        flags.notice = { text: noticeText, level: $("lv-level").value };
+        if (noticeUrl) flags.notice.url = noticeUrl;
+      }
+      if (addons.length) flags.disabled_addons = addons;
+      if (channelsOff.size) flags.disabled_channels = Array.from(channelsOff);
+      return flags;
+    }
+
+    function renderPreview() {
+      const f = formState();
+      const lines = [];
+      if (f.min_app_version) {
+        if (!/^\d+\.\d+\.\d+$/.test(f.min_app_version)) {
+          lines.push("<strong>The minimum version \"" + escapeHtml(f.min_app_version) + "\" is not a plain x.y.z, so the app will ignore it</strong> (it fails open on anything it can't parse).");
+        } else {
+          lines.push("Versions below <strong>" + escapeHtml(f.min_app_version) + "</strong> cannot start an agent and see an update screen" + (f.update_message ? " with your message." : " with the standard message."));
+        }
+      }
+      if (f.notice) lines.push("Every app shows a " + f.notice.level + " notice: “" + escapeHtml(f.notice.text) + "”");
+      if (f.disabled_addons) lines.push("Switched off until further notice: <strong>" + f.disabled_addons.map(escapeHtml).join(", ") + "</strong>.");
+      if (f.disabled_channels) lines.push("Agents cannot start on: <strong>" + f.disabled_channels.map(escapeHtml).join(", ") + "</strong>.");
+      if (!lines.length) lines.push("No levers set. Every copy of Archie behaves normally.");
+      $("lv-preview").innerHTML = "What this does: " + lines.join(" ");
+      const any = Object.keys(f).length > 0;
+      const pill = $("levers-state");
+      pill.textContent = any ? "levers set" : "all clear";
+      pill.className = "pill " + (any ? "pill-warn" : "pill-on");
+    }
+
+    function disarm() {
+      saveArmedAt = 0;
+      $("btn-save-levers").textContent = "Save levers";
+    }
+    ["lv-min", "lv-update-msg", "lv-notice", "lv-notice-url", "lv-addons", "lv-level"].forEach((id) => {
+      $(id).addEventListener("input", () => { renderPreview(); disarm(); });
+    });
+
+    async function loadLevers() {
+      try {
+        const snap = await getDoc(doc(db, "config", "flags"));
+        const f = snap.exists() ? snap.data() || {} : {};
+        $("lv-min").value = f.min_app_version || "";
+        $("lv-update-msg").value = f.update_message || "";
+        $("lv-notice").value = (f.notice && f.notice.text) || "";
+        $("lv-notice-url").value = (f.notice && f.notice.url) || "";
+        $("lv-level").value = (f.notice && f.notice.level) === "warning" ? "warning" : "info";
+        channelsOff = new Set(f.disabled_channels || []);
+        $("lv-addons").value = (f.disabled_addons || []).join("\n");
+        syncChannels(); renderPreview(); disarm();
+      } catch (e) {
+        setStatus("Couldn't load the levers: " + e.message, "error");
+      }
+    }
+
+    // Two presses to save: the first shows exactly what users will see, the second makes it
+    // live. Any edit disarms. This is the 2 a.m. page; the confirm step is the seatbelt.
+    $("btn-save-levers").addEventListener("click", async () => {
+      renderPreview();
+      if (!saveArmedAt || Date.now() - saveArmedAt > 15000) {
+        saveArmedAt = Date.now();
+        $("btn-save-levers").textContent = "Press again to make it live";
+        setStatus("Check the “What this does” line above, then press again.", "ok");
+        return;
+      }
+      try {
+        await setDoc(doc(db, "config", "flags"), formState());
+        disarm();
+        setStatus("Saved. Every copy of Archie picks this up within a couple of minutes.", "ok");
+        renderPreview();
+      } catch (e) {
+        setStatus("Couldn't save: " + e.message, "error");
+      }
+    });
+    $("btn-reload-levers").addEventListener("click", () => { loadLevers(); setStatus(""); });
+
+    // ── Errors: crash tails and restart loops ─────────────────────────────────────────────
+    async function loadErrors() {
+      try {
+        const snap = await getDocs(query(collection(db, "error_reports"), orderBy("created_at", "desc"), limit(50)));
+        $("err-total").textContent = snap.size + (snap.size === 50 ? "+" : "") + " open";
+        const rowsEl = $("err-rows");
+        rowsEl.innerHTML = "";
+        show("err-empty", snap.size === 0);
+        snap.forEach((d) => {
+          const r = d.data() || {};
+          const el = document.createElement("div");
+          el.className = "err-item";
+          const kindClass = r.kind === "panic" ? "pill-bad" : "pill-warn";
+          el.innerHTML =
+            '<div class="err-head">' +
+              '<span class="pill ' + kindClass + '">' + escapeHtml(r.kind || "?") + "</span>" +
+              '<span class="err-meta">v' + escapeHtml(r.app_version || "?") + " &middot; " + escapeHtml(r.platform || "?") +
+                " &middot; " + escapeHtml(ago(toDate(r.created_at))) + "</span>" +
+              '<span style="flex:1"></span>' +
+              '<button class="btn btn-secondary btn-mini" type="button">Resolve</button>' +
+            "</div>" +
+            '<pre class="err-msg">' + escapeHtml(r.message || "(empty)") + "</pre>";
+          el.querySelector("button").addEventListener("click", async (ev) => {
+            ev.target.disabled = true;
+            try { await deleteDoc(d.ref); el.remove(); setStatus("Resolved.", "ok"); }
+            catch (e) { ev.target.disabled = false; setStatus("Couldn't resolve: " + e.message, "error"); }
+          });
+          rowsEl.appendChild(el);
+        });
+      } catch (e) {
+        setStatus("Couldn't load error reports: " + e.message, "error");
+      }
+    }
+
+    // ── Releases: the shipped record ──────────────────────────────────────────────────────
+    async function loadReleases() {
+      try {
+        const snap = await getDocs(query(collection(db, "releases"), orderBy("pub_date", "desc"), limit(20)));
+        const rowsEl = $("rel-rows");
+        rowsEl.innerHTML = "";
+        show("rel-empty", snap.size === 0);
+        snap.forEach((d) => {
+          const r = d.data() || {};
+          const date = toDate(r.pub_date);
+          const platforms = Object.keys(r.platforms || {}).sort().join(", ");
+          const el = document.createElement("details");
+          el.className = "rel err-item";
+          el.innerHTML =
+            '<summary class="err-head">' +
+              '<span class="pill pill-on">v' + escapeHtml(r.version || d.id) + "</span>" +
+              '<span class="err-meta">' + (date ? date.toLocaleDateString() : "") +
+                (platforms ? " &middot; " + escapeHtml(platforms) : "") + "</span>" +
+            "</summary>" +
+            '<div class="rel-notes">' + escapeHtml(r.notes_md || "(no notes)") + "</div>";
+          rowsEl.appendChild(el);
+        });
+      } catch (e) {
+        setStatus("Couldn't load releases: " + e.message, "error");
+      }
+    }
+  </script>
+</body>
+</html>

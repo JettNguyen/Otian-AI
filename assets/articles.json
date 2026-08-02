@@ -1,5 +1,19 @@
 [
   {
+    "title": "Your AI Never Sounds Unsure. That's the Problem.",
+    "summary": "Your AI uses the exact same calm, fluent voice whether it knows the answer or is guessing. Here's why, and what actually fixes it.",
+    "author": "Jett Nguyen",
+    "date": "2026-08-02",
+    "readTime": "5 min read",
+    "category": "Team Stories",
+    "tags": [
+      "trust",
+      "accuracy",
+      "grounding"
+    ],
+    "url": "your-ai-never-sounds-unsure/"
+  },
+  {
     "title": "The Best Reason to Run AI Locally Has Nothing to Do With Privacy",
     "summary": "Everyone sells local AI on privacy. That's the defensive reason. The real one is access: an agent that can reach your actual files and act.",
     "author": "Jett Nguyen",

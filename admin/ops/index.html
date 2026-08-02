@@ -599,9 +599,14 @@
           const el = document.createElement("div");
           el.className = "err-item";
           const kindClass = r.kind === "panic" ? "pill-bad" : "pill-warn";
+          // A crash from a debug build is a developer's own machine, and it can happen in code
+          // that a shipped binary does not even contain. Labelled rather than hidden: it is still
+          // a real crash, it just is not a fleet incident.
+          const devPill = r.build === "debug" ? '<span class="pill pill-off">dev build</span>' : "";
           el.innerHTML =
             '<div class="err-head">' +
               '<span class="pill ' + kindClass + '">' + escapeHtml(r.kind || "?") + "</span>" +
+              devPill +
               '<span class="err-meta">v' + escapeHtml(r.app_version || "?") + " &middot; " + escapeHtml(r.platform || "?") +
                 " &middot; " + escapeHtml(ago(toDate(r.created_at))) + "</span>" +
               '<span style="flex:1"></span>' +

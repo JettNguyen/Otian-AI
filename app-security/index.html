@@ -214,8 +214,16 @@
 
   // A one-time custom token can be passed by the desktop app (?token=…) so the page opens already
   // signed in as the same account, the same mechanism the marketplace submit pages use.
+  //
+  // "One-time" describes how we use it, not what it is: a Firebase custom token stays valid for an
+  // hour and can be redeemed repeatedly, so anyone who reads this URL in that window signs in as
+  // this account. Left in the address bar it goes into browser history and into whatever the person
+  // copies when they share the page. So it is consumed once and the URL is rewritten immediately,
+  // the same scrub js/submit.js does with its `ct` parameter. Reading it before the async sign-in
+  // starts means the rewrite cannot race the read.
   const tokenParam = new URLSearchParams(window.location.search).get("token");
   if (tokenParam) {
+    window.history.replaceState({}, document.title, window.location.pathname);
     signInWithCustomToken(auth, tokenParam).catch((e) => setStatus(e.message, "error"));
   }
 

@@ -311,6 +311,9 @@
     }
 
     const $ = (id) => document.getElementById(id);
+    const escapeHtml = (s) =>
+      String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
+        ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
     const statusEl = $("action-status");
     const setStatus = bindStatusToast(statusEl);
     function onlyCard(id) { ["action-loading", "action-result", "action-reset"].forEach((c) => $(c).classList.toggle("auth-hidden", c !== id)); }
@@ -363,7 +366,9 @@
           });
         } else if (mode === "recoverEmail") {
           const d = await itk("update", { oobCode });
-          const restored = d.email || "your original email";
+          // Escaped, not interpolated raw: `body` below is assigned through innerHTML (it carries
+          // markup of its own), and this is the only value on the page that comes off the wire.
+          const restored = escapeHtml(d.email || "your original email");
           showResult({
             ok: true,
             title: "Sign-in email restored",

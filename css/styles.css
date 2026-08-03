@@ -7154,6 +7154,227 @@ html[data-theme="dark"] .booking-container iframe {
   vertical-align: 0.05em;
 }
 
+/* ==========================================================================
+   40b. Calm layout: the density pass
+
+   Why this section exists. The site was carrying ~30 bordered cards on the
+   homepage alone, and a bordered box is a separate object the eye has to
+   triage before it reads a word. Measured against comparable products
+   (Obsidian, Things 3) we were spending 27% more scroll to say the same
+   amount, and the extra length was chrome rather than content.
+
+   So: nothing here hides text. Every rule below removes a container or
+   lowers a heading, so the same words read as one block instead of twelve.
+   The bordered .feature-card is now rationed to the two or three top-level
+   claims per page; examples and supporting detail use .calm-list.
+
+   This section sits after section 35 (responsive overrides for late
+   sections) on purpose: its own small-screen rules live inline with each
+   component, so they win on source order.
+   ========================================================================== */
+
+/* --- Unboxed label + text list --------------------------------------------
+   Replaces small-card grids whose cards were only ever a label and a
+   sentence. Reads as one region with internal structure, which is what the
+   layer-cake scan wants, instead of N competing regions. */
+/* Capped and left-aligned, not centred: a centred block would start ~120px right of the
+   paragraph that introduces it, and the stagger reads as an accident. The cap keeps each
+   column near 65 characters, which is the readable measure. */
+.calm-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 48px;
+  margin-top: 32px;
+  max-width: 940px;
+}
+
+.calm-list--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: none;
+  gap: 32px 40px;
+}
+
+.calm-list-item > p {
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+/* The label carries the same eyebrow treatment the cards used, so nothing
+   about the reading order changes when the border comes off. */
+.calm-list-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+/* A hairline instead of a box: enough to separate, not enough to become an
+   object. It divides the columns rather than wrapping each item, so the
+   first column stays flush with the paragraph that introduces the list. */
+@media (min-width: 721px) {
+  .calm-list--ruled .calm-list-item:nth-child(2n) {
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
+  }
+  .calm-list--3.calm-list--ruled .calm-list-item:nth-child(2n) {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .calm-list--3.calm-list--ruled .calm-list-item:not(:nth-child(3n + 1)) {
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
+  }
+}
+
+@media (max-width: 720px) {
+  .calm-list,
+  .calm-list--3 {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* --- Demoted section heading ----------------------------------------------
+   A page gets three display h2s at most. Everything else that used to be a
+   .section-header becomes this: left-aligned, closer to body size, no
+   centered subtitle underneath. Peaks and valleys instead of eight shouts. */
+.section-header--quiet {
+  text-align: left;
+  margin-bottom: 32px;
+  max-width: 720px;
+}
+
+.section-header--quiet h2,
+.section-header--quiet h3 {
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem);
+  margin-bottom: 10px;
+}
+
+.section-header--quiet p {
+  max-width: 640px;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* A quiet section does not need a full section's worth of air above it. */
+.section--tight {
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+@media (max-width: 1000px) {
+  /* 64px of air under every section heading is a desktop measure. On a phone it is
+     most of a screen spent on nothing, repeated seven times down the page. */
+  .section-header {
+    margin-bottom: 44px;
+  }
+  .section--tight {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+}
+
+/* --- Add-on showcase ------------------------------------------------------
+   Six real add-ons from the live catalog, standing in for the abstract
+   category grid that used to sit here. Following Obsidian's marketplace
+   section: show a handful of actual things with their real names, then link
+   to the rest. Fewer, larger boxes carrying more specific information. */
+.addon-showcase {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.addon-showcase-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.addon-showcase-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.addon-showcase-item h3 {
+  font-size: 1.0625rem;
+  margin: 0;
+}
+
+.addon-showcase-item p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Kind badge. With these on every item, the four kinds stay visible in the
+   sample itself, which is what lets the separate four-card kinds grid come
+   off the page without losing the idea. */
+.addon-kind {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  background: var(--accent-subtle);
+  border-radius: 999px;
+  padding: 4px 10px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1000px) {
+  .addon-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .addon-showcase {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .addon-showcase-item {
+    padding: 20px;
+  }
+}
+
+/* --- Lead-in and follow-on lines ------------------------------------------
+   The centered notes that used to float between grids. Left-aligned and tied
+   to the block they belong to, so they read as connective tissue rather than
+   as another thing to get through. */
+.calm-note {
+  max-width: 720px;
+  margin: 28px 0 0;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+.calm-note--center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.calm-note a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.calm-note a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+}
+
 /* ==============================
    41. Reduced motion & print
    ============================== */
@@ -7195,3 +7416,4 @@ html[data-theme="dark"] .booking-container iframe {
     max-width: none;
   }
 }
+

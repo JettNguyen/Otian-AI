@@ -188,7 +188,17 @@
       "Bash(awk '/trust-table td\\\\[data-label\\\\]|trust-table.*max-width|@media.*720|@media.*640/{print NR\": \"$0}' css/styles.css)",
       "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/heights.mjs http://localhost:8899/trust/)",
       "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/mshot.mjs http://localhost:8899/trust/details/ trustdetails 0)",
-      "Bash(node mshot.mjs http://localhost:8899/trust/details/ trustdetails 0)"
+      "Bash(node mshot.mjs http://localhost:8899/trust/details/ trustdetails 0)",
+      "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/heights.mjs http://localhost:8899/archie/pricing/)",
+      "Bash(grep -vE '^\\\\S+:[0-9]+: *<a href=\"\\\\.\\\\.?/*\\(\\\\.\\\\./\\)*business/\">For Business</a>$')",
+      "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/bench.mjs http://localhost:8899/archie/pricing/)",
+      "Bash(python3 /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/fcb236c7-1293-4d78-b191-5cf462e57a3e/scratchpad/hide_business.py)",
+      "Bash(curl -s http://localhost:8899/archie/pricing/)",
+      "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/bench.mjs http://localhost:8899/ http://localhost:8899/archie/ http://localhost:8899/trust/ http://localhost:8899/trust/details/ http://localhost:8899/archie/pricing/ http://localhost:8899/skills-marketplace/what-is-an-add-on/ http://localhost:8899/business/ http://localhost:8899/how-it-works/ http://localhost:8899/our-story/ http://localhost:8899/what-you-need/ http://localhost:8899/individuals/ http://localhost:8899/faq/)",
+      "Bash(python3 -c \"import yaml,sys; d=yaml.safe_load\\(open\\('.github/workflows/deploy.yml'\\)\\); print\\([s['name'] for s in d['jobs']['deploy']['steps']]\\)\")",
+      "Bash(python3 -c \"import json;print\\(json.load\\(open\\('firebase.json'\\)\\)['hosting']['ignore']\\)\")",
+      "Bash(node lightshot.mjs http://localhost:8899/ light_calm 1250)",
+      "Bash(node lightshot.mjs http://localhost:8899/archie/pricing/ light_pricing 3400)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

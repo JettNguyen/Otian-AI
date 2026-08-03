@@ -198,6 +198,14 @@ can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer t
 (`secrets.rs:62-67`, `gateway.rs:46`). Never imply it isn't. "We have no way to read it" is
 true and sufficient.
 
+**Plain-language form, approved 2026-08-03:** marketing pages may say "your computer's
+built-in password store" instead of "Keychain", with no parenthetical gloss. This is the same
+claim, not a weaker one: the load-bearing half is custody ("where we have no way to read
+them"), which is unchanged. Both `archie/` and `how-it-works/` previously ran the term AND its
+gloss inside one sentence, which is what made those paragraphs unreadable. Use one, and prefer
+the plain one outside this document. Still banned either way: "your keys never leave your
+computer" (see Banned Phrasings).
+
 ### ✅ We keep no per-person record of the free add-ons you install
 
 **Approved wording:** "When you add a free add-on, Archie bumps its public popularity count by
@@ -425,6 +433,14 @@ the Trust page; we already do.
 
 These are true and unflattering. They go on the Trust page anyway.
 
+**Where they live, since 2026-08-03.** The Trust page carries every admission's headline plus
+the substance of it; the full reasoning behind each one lives on `/trust/details/`, linked from
+the summary it belongs to. Nothing is behind a click on `/trust/` itself and nothing is behind
+an accordion anywhere — a reader deciding whether to trust us must not have to interact to find
+out what we admit. When you add or change a weakness, it goes in **both** places: the admission
+on `/trust/`, the argument on `/trust/details/`. If you only have room for one, it goes on
+`/trust/`.
+
 ### The subscription gate is fail-open — and this cuts both ways
 
 The license check reads a cached Keychain value and **only writes on success**
@@ -477,7 +493,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | "Nothing sends without your OK" (unscoped) | Chat replies and provider web-search queries leave without a per-item OK. Use the scoped forms: calendar-confirmation / Send-tap wordings. |
 | "Sandboxed add-ons" | Misleading. Add-ons are data, not code — there is nothing to sandbox. The true claim is *stronger*; make it instead. |
 | "Your keys never leave your computer" / "keys stay on your machine" | **False.** The key is sent to Anthropic/OpenAI as a request header on every call (`secrets.rs`, `x-api-key`/bearer). The true claim is storage + custody: "keys sit in your system's keychain, where we have no way to read them." |
-| "We never hold your data" (unscoped) | Unscoped "your data" is false — we hold email + license + paid add-ons. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip. |
+| "We never hold your data" (unscoped) | Unscoped "your data" is false — we hold email + license + paid add-ons. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip, and again 2026-08-03 as the `business/` feature-card **heading** — the body underneath stated all three things we hold, but a heading is what gets scanned and the correction sat four sentences down. Check headings, not just body copy. |
 | "It asks before it acts" / "acts only with your approval" (unscoped) | Same umbrella as "nothing sends without your OK": chat replies, provider web search, `remember`, and calendar reads act without asking. Use the scoped Send-tap / calendar-changes forms. |
 | "Your agent's data stays on your computer" (once phone access ships) | **False** with phone access on. Installed add-ons and their settings are mirrored to our servers, encrypted. The true claim is custody without access: "we hold the messages and cannot read them." |
 | "Phone access never touches our servers" | **False**, and backwards. The mechanism *is* our servers, holding sealed messages. Claiming absence throws away the honest, checkable claim in exchange for one that is trivially disprovable. |

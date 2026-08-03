@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Archie for Business | Otian AI</title>
   <meta name="description" content="Inbox triage, scheduling, follow-ups, research, reports: agents built with Archie handle a small team&rsquo;s busywork on your own computers, and your team&rsquo;s work never touches our servers." />
-  <!-- Unlinked and unindexed until the Archie business edition is close to ready: the page still
-       resolves by URL, but nothing in the nav or footer points at it. Drop this meta and restore
-       the "For Business" links (nav menu, mobile drawer, footer) when it goes live. -->
+  <!-- Held back until the Archie business edition is close to ready. This whole directory is
+       deleted before the Pages upload (see .github/workflows/deploy.yml) and ignored by local
+       `firebase serve`, so /business/ returns the 404 page. The noindex is belt and braces for
+       anyone who serves the tree straight off disk. To publish: drop the deploy step's rm, drop
+       the firebase.json ignore, drop this meta, and put the "For Business" link back in the nav
+       menu, the mobile drawer and the footer of every page. -->
   <meta name="robots" content="noindex, follow" />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />

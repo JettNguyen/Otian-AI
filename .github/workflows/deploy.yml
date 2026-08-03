@@ -27,6 +27,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Pages written but not published yet. They stay in the repo and out of the upload, so
+      # their URLs return the 404 page. Delete a line here to publish that page.
+      - name: Withhold unpublished pages
+        run: rm -rf business
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:

@@ -1568,16 +1568,6 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Tighter variant for grids of many short cards (the life-domain block on the
-   homepage), where the default 24px gap and 32px card padding read as too airy. */
-.feature-grid-compact {
-  gap: 14px;
-}
-
-.feature-grid-compact .feature-card {
-  padding: 22px;
-}
-
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -6007,31 +5997,6 @@ html[data-theme="dark"] .booking-container iframe {
 .hero-status:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
-}
-
-.addon-promise {
-  max-width: 620px;
-  margin: 48px auto 0;
-  text-align: center;
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.addon-promise a {
-  color: var(--accent);
-}
-
-.addon-promise a:hover {
-  color: var(--accent-hover);
-  text-decoration: underline;
-}
-
-.addon-promise-sub {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 0.875rem;
-  color: var(--text-muted);
 }
 
 /* Doors whose "amount" is a phrase, not a number. The fixed line-height

@@ -135,9 +135,13 @@ starting with a free 30-minute call.
 | **Learn** | [How It Works](https://otianai.com/how-it-works/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [What You Need](https://otianai.com/what-you-need/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
 
-`business/` is written and still deploys, but it is unlinked and `noindex` until the Archie
-business edition is close to ready. Restoring it means putting the "For Business" link back in
-three places per page (nav menu, mobile drawer, footer) and removing the `robots` meta.
+`business/` is written but not published: it is held back until the Archie business edition is
+close to ready, so <https://otianai.com/business/> returns the 404 page. The directory stays in
+the repo and is deleted in the "Withhold unpublished pages" step of
+[`deploy.yml`](.github/workflows/deploy.yml) before the upload, and `firebase.json` ignores it so
+local serving matches. Publishing it means dropping that `rm`, dropping the `firebase.json`
+ignore, dropping the `robots` meta in the page, and putting the "For Business" link back in three
+places per page (nav menu, mobile drawer, footer).
 
 ---
 

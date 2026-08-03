@@ -1,5 +1,19 @@
 [
   {
+    "title": "You Asked for a Small Fix. Your AI Rewrote Everything Around It.",
+    "summary": "You ask your AI to change one line. It changes the line, and quietly redoes four things you never mentioned. Here's why it can't tell the edit from the rewrite.",
+    "author": "Jett Nguyen",
+    "date": "2026-08-03",
+    "readTime": "4 min read",
+    "category": "Team Stories",
+    "tags": [
+      "agents",
+      "scope",
+      "control"
+    ],
+    "url": "you-asked-for-a-small-fix/"
+  },
+  {
     "title": "Your AI Never Sounds Unsure. That's the Problem.",
     "summary": "Your AI uses the exact same calm, fluent voice whether it knows the answer or is guessing. Here's why, and what actually fixes it.",
     "author": "Jett Nguyen",

@@ -130,10 +130,14 @@ starting with a free 30-minute call.
 
 | Section | Pages |
 |---|---|
-| **Archie** | [What Is Archie?](https://otianai.com/archie/) · [See It Work](https://otianai.com/archie/see-it-work/) · [Pricing](https://otianai.com/archie/pricing/) · [Guided Setup](https://otianai.com/individuals/) · [For Business](https://otianai.com/business/) |
+| **Archie** | [What Is Archie?](https://otianai.com/archie/) · [See It Work](https://otianai.com/archie/see-it-work/) · [Pricing](https://otianai.com/archie/pricing/) · [Guided Setup](https://otianai.com/individuals/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [Commission One](https://otianai.com/skills-marketplace/commission/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
 | **Learn** | [How It Works](https://otianai.com/how-it-works/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [What You Need](https://otianai.com/what-you-need/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
+
+`business/` is written and still deploys, but it is unlinked and `noindex` until the Archie
+business edition is close to ready. Restoring it means putting the "For Business" link back in
+three places per page (nav menu, mobile drawer, footer) and removing the `robots` meta.
 
 ---
 

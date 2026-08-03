@@ -380,7 +380,7 @@ export const ADDON_SPEC = {
           "fields": [
             {
               "control": "textarea",
-              "help": "One sentence about what lands in their chat. Skip it when the description already says so; a routine speaks first, so nobody has to know what to type.",
+              "help": "One sentence about what lands in their chat. Skip it when the description already says; a routine speaks first, so nobody has to know what to type.",
               "key": "usage_hint",
               "label": "What arrives, and when",
               "max": 400,

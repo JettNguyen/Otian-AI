@@ -339,23 +339,20 @@
 
           <div class="trust-limit">
             <h3>Your agent asks before it acts, and it only helps if you read before you approve.</h3>
-            <p>When your agent wants to change a calendar you&rsquo;ve connected (create, move, or <strong>delete</strong> an event) or send an email, it doesn&rsquo;t just do it. It proposes the exact action and carries it out only after you approve that specific one, enforced in the app itself rather than by politely instructing the AI. <strong>It proposes; you dispose.</strong></p>
-            <p>Here is the honest limit that remains. The gate stops your agent from doing something you didn&rsquo;t approve. It cannot stop it from proposing the <em>wrong</em> thing: if it misreads what you wanted and you approve without looking, it will carry out the mistake faithfully. Read what it hands you before you say yes, the way you&rsquo;d check a draft before signing it.</p>
-            <p>Two things it still cannot do at all: it <strong>cannot spend money or buy anything</strong> (that ability doesn&rsquo;t exist in the app) and it <strong>can only ever message you</strong>, never your team&rsquo;s channels or anyone else.</p>
+            <p>When your agent wants to change a calendar you&rsquo;ve connected or send an email, it proposes the exact action and carries it out only after you approve that specific one, enforced in the app itself rather than by politely instructing the AI. The gate cannot stop it from proposing the <em>wrong</em> thing: if it misreads you and you approve without looking, it will carry out the mistake faithfully.</p>
+            <p>Two things it cannot do at all: it <strong>cannot spend money or buy anything</strong>, and it <strong>can only ever message you</strong>. <a href="details/#approval-gate">The full version &rarr;</a></p>
           </div>
 
           <div class="trust-limit">
             <h3>Untrusted text can reach your agent, and the gate won&rsquo;t fully fix it.</h3>
-            <p>If your agent reads a Slack attachment, a meeting transcript, or a web page, that text lands in its context, and a hostile message could try to talk your agent into something you never asked for. This is a real class of attack against <em>every</em> AI agent, ours included, and we&rsquo;re not going to pretend we&rsquo;re exempt.</p>
-            <p>The approval gate stops such an attack from <em>changing</em> anything. It does <strong>not</strong> stop it from <em>leaking</em> something: a hostile instruction could still get your agent to run a web search whose query carries information from your conversation. We don&rsquo;t have a complete answer to that yet. Nobody in this industry does. We&rsquo;d rather write that sentence than let you assume we&rsquo;d solved it.</p>
+            <p>If your agent reads a Slack attachment, a meeting transcript or a web page, a hostile message hidden in it could try to talk your agent into something you never asked for. The approval gate stops that from <em>changing</em> anything. It does <strong>not</strong> stop it from <em>leaking</em> something: a hostile instruction could still get your agent to run a web search whose query carries information from your conversation.</p>
+            <p>We don&rsquo;t have a complete answer to that yet. Nobody in this industry does. <a href="details/#untrusted-text">The full version &rarr;</a></p>
           </div>
 
           <div class="trust-limit">
             <h3>Archie checks your license, but you own what you bought.</h3>
-            <p>Archie is a one-time purchase, not a subscription. You buy it once and it&rsquo;s yours: there&rsquo;s nothing to cancel and nothing that lapses. The app does verify your license when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account owns a license, and nothing more.</p>
-            <p>It&rsquo;s worth being precise, because there are two scenarios companies love to blur. <strong>If <em>you</em> stop paying us, nothing happens to Archie: you already own it. If <em>we</em> disappear, it still keeps working.</strong> We&rsquo;ve written it into our <a href="../terms-of-service/">Terms</a>: if Otian ever ceases operations, we publish a final version that needs no license check at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
-            <p>What you&rsquo;d lose if we vanished is updates, the marketplace, and support: the things a living company provides. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
-            <p>That matters more than it sounds. Personal-AI apps get acquired, pivoted, and switched off all the time, and when they go, their users&rsquo; data tends to leave with them. Yours can&rsquo;t: there was never a copy on our side to take, sell, or shut off.</p>
+            <p>The app verifies your license when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account owns a license, and nothing more.</p>
+            <p><strong>If <em>you</em> stop paying us, nothing happens to Archie: you already own it. If <em>we</em> disappear, it still keeps working.</strong> That&rsquo;s written into our <a href="../terms-of-service/">Terms</a>, not promised on a blog. <a href="details/#license-check">The full version &rarr;</a></p>
           </div>
 
           <div class="trust-limit">
@@ -404,14 +401,7 @@
             <span class="trust-step-num">3</span>
             <div>
               <h3>Here is exactly what you should see.</h3>
-              <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
-              <ul class="trust-hosts">
-                <li><code>api.anthropic.com</code><span>, or <code>api.openai.com</code>. Your agent thinking, on your key.</span></li>
-                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and license check. Carries your account ID, nothing else.</span></li>
-                <li><code>otianai.com</code><span>: <strong>once</strong>, checking for an update. Carries nothing about you.</span></li>
-                <li><code>github.com</code><span>: only if an update is downloading.</span></li>
-                <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span><span>: Google, Slack, Telegram, Discord, Fireflies. Directly, on your tokens.</span></li>
-              </ul>
+              <p>Anthropic or OpenAI, on your key. Our sign-in and license check, carrying your account ID. One update check to us, carrying nothing about you. Plus whichever accounts <em>you</em> connected, reached directly. If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way. <a href="details/#expected-hosts">The exact hostnames to expect &rarr;</a></p>
             </div>
           </div>
           <div class="trust-step">
@@ -424,7 +414,7 @@
         </div>
 
         <div class="trust-prose fade-up delay-3">
-          <p class="trust-aside"><strong>Where we think this ends up.</strong> The real answer to &ldquo;why should I believe you&rdquo; is an open-source client, so that none of this rests on our word. We&rsquo;re not there yet, and we&rsquo;re not going to describe a plan as though it were a fact. For now: the monitor, the block list, and a company that would rather be corrected than trusted by default.</p>
+          <p class="trust-aside"><strong>Where we think this ends up.</strong> The real answer to &ldquo;why should I believe you&rdquo; is an open-source client, so that none of this rests on our word. We&rsquo;re not there yet, and we&rsquo;re not going to describe a plan as though it were a fact. <a href="details/">Read the long version of everything on this page &rarr;</a></p>
         </div>
       </div>
     </section>
@@ -441,9 +431,9 @@
         </div>
 
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Archie has nowhere to run code.</strong> A Skill is a markdown file plus some settings. A Personality is a prompt. A Routine is a schedule. There is no scripting engine, no shell, and no way for an add-on to execute a program, so an add-on cannot read files off your disk on its own, and cannot ship your data to a stranger&rsquo;s server. Not because we&rsquo;d catch it. Because there is no mechanism for it to use.</p>
+          <p><strong>Archie has nowhere to run code.</strong> A Skill is a text file plus some settings. A Personality is a set of written instructions. A Routine is a schedule. Nothing in an add-on can run as a program, so it cannot read files off your disk on its own and cannot ship your data to a stranger&rsquo;s server. Not because we&rsquo;d catch it. Because there is no mechanism for it to use.</p>
 
-          <p><strong>What an add-on <em>can</em> do</strong> is tell your agent how to behave, and declare which of your connected accounts it needs. A calendar Skill gets calendar tools. Today that is coarser than we want: declaring &ldquo;calendar&rdquo; grants reading, creating, <em>and deleting</em> together, rather than asking you about each. Splitting those apart, and showing you in plain English what an add-on is asking for before you install it, is part of the same work as the approval gate above.</p>
+          <p>What an add-on <em>can</em> do is tell your agent how to behave and declare which of your connected accounts it needs. Today that is blunter than we want: declaring &ldquo;calendar&rdquo; grants reading, creating <em>and deleting</em> together, rather than asking you about each. <a href="details/#addons-long">How that works, in full &rarr;</a></p>
 
           <p><strong>Every add-on is read by a human before it is listed.</strong> Right now that human is one of the two of us, and we read every line of every submission. That will not scale forever. When it stops being true, this paragraph will change; we won&rsquo;t quietly leave it here.</p>
         </div>

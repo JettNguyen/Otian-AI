@@ -7348,6 +7348,39 @@ html[data-theme="dark"] .booking-container iframe {
   }
 }
 
+/* --- Stacked trust table, tightened ---------------------------------------
+   The "Everything That Leaves Your Machine" table is the centrepiece of the
+   Trust page and none of it may be hidden or truncated. But stacked on a
+   phone it repeated all four column labels on all eleven rows: 44 label
+   lines, about a screen and a half of the page spent saying "WHAT" and
+   "YOUR CONTENT?" over and over.
+
+   Two of the four labels are redundant once the row is stacked. The first
+   cell IS the row's name, so it reads as the heading it already is, and the
+   yes/no flag is self-describing. Keeping the labels on the two cells that
+   genuinely need them ("where it goes", "what's actually in it") preserves
+   every fact and every word. */
+@media (max-width: 760px) {
+  .trust-table td[data-label="What"]::before,
+  .trust-table td[data-label="Your content?"]::before {
+    display: none;
+  }
+  .trust-table td[data-label="What"] {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding-bottom: 2px;
+  }
+  .trust-table td[data-label="What"] strong { font-weight: 600; }
+  .trust-table td[data-label="Your content?"] {
+    padding-top: 2px;
+  }
+  .trust-table td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+}
+
 /* --- Lead-in and follow-on lines ------------------------------------------
    The centered notes that used to float between grids. Left-aligned and tied
    to the block they belong to, so they read as connective tissue rather than
@@ -7416,5 +7449,6 @@ html[data-theme="dark"] .booking-container iframe {
     max-width: none;
   }
 }
+
 
 

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trust: The Long Version | Otian AI</title>
+  <meta name="description" content="The full reasoning behind every claim on the Trust page: the limits of the approval gate, what happens to Archie if Otian disappears, and the ten-minute check you can run yourself." />
+  <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:title" content="Trust: The Long Version | Otian AI" />
+  <meta property="og:description" content="The full reasoning behind every claim on the Trust page." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="../../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../../assets/icon-1024.png" />
+  <script>
+    /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
+       get a cream flash on every page view (nav.js applies the theme too late). */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="../../css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ==============================
+       Navigation
+       ============================== -->
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <div class="nav-links">
+        <div class="nav-more" id="navArchie">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
+          <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
+            <a href="../../archie/" role="menuitem">What Is Archie?</a>
+            <a href="../../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../../archie/pricing/" role="menuitem">Pricing</a>
+            <a href="../../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../../business/" role="menuitem">For Business</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../../skills-marketplace/what-is-an-add-on/" role="menuitem">What's an Add-on?</a>
+            <a href="../../skills-marketplace/browse/" role="menuitem">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/" role="menuitem">Commission One</a>
+            <a href="../../skills-marketplace/for-developers/" role="menuitem">For Developers</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navLearn">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
+          <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
+            <a href="../../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../../ai-explained/" role="menuitem">AI Explained</a>
+            <a href="../../blog/" role="menuitem">Blog</a>
+            <a href="../../faq/" role="menuitem">FAQ</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navCompany">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">Company</button>
+          <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="Company">
+            <a href="../../our-story/" role="menuitem">Our Story</a>
+            <a href="../../testimonials/" role="menuitem">Reviews</a>
+            <a href="../../contact/" role="menuitem">Contact</a>
+            <a href="../../trust/" role="menuitem">Trust</a>
+          </div>
+        </div>
+      </div>
+      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <div class="nav-account" id="navAccount">
+        <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
+          <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
+        </button>
+        <div class="nav-account-menu" id="navAccountMenu" role="menu" aria-label="Account"></div>
+      </div>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="navDrawer">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
+    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">Company</button>
+    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+  </nav>
+
+  <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
+    <button class="nav-drawer-back" type="button">
+      <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+      <span id="navDrawerFlyoutTitle">Archie</span>
+    </button>
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+      <a href="../../archie/">What Is Archie?</a>
+      <a href="../../archie/see-it-work/">See It Work</a>
+      <a href="../../archie/pricing/">Pricing</a>
+      <a href="../../individuals/">Guided Setup</a>
+      <a href="../../business/">For Business</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../../skills-marketplace/what-is-an-add-on/">What's an Add-on?</a>
+      <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+      <a href="../../skills-marketplace/commission/">Commission One</a>
+      <a href="../../skills-marketplace/for-developers/">For Developers</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
+      <a href="../../how-it-works/">How It Works</a>
+      <a href="../../ai-explained/">AI Explained</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../faq/">FAQ</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
+      <a href="../../our-story/">Our Story</a>
+      <a href="../../testimonials/">Reviews</a>
+      <a href="../../contact/">Contact</a>
+      <a href="../../trust/">Trust</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ==============================
+         Page Hero
+
+         This page exists because the Trust page was 2,197 words at 105 words per screen, the
+         densest reading on the site, and a browsing reader met the full argument for every claim
+         whether they wanted it or not. Following 1Password's security page: state the claim and
+         two sentences of substance where the reader lands, and put the reasoning one link away.
+         Nothing was deleted. Every paragraph that came off /trust/ is on this page, whole.
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
+        <span class="section-label fade-up">Trust</span>
+        <h1 class="fade-up delay-1">The Long Version</h1>
+        <p>Every claim on the <a href="../">Trust page</a>, with the full reasoning behind it. If you are checking our work rather than skimming it, this is the page you want.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The limits, in full
+         ============================== -->
+    <section class="section" aria-labelledby="limits-long">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">No Company Publishes This Section</span>
+          <h2 id="limits-long" class="fade-up delay-1">Where We Fall Short</h2>
+          <p>Every privacy page tells you what a company is good at. Here is the other half. If any of this changes, we will change it here on the same day.</p>
+        </div>
+
+        <div class="trust-limits fade-up delay-2">
+
+          <div class="trust-limit" id="approval-gate">
+            <h3>Your agent asks before it acts, and it only helps if you read before you approve.</h3>
+            <p>When your agent wants to change a calendar you&rsquo;ve connected (create, move, or <strong>delete</strong> an event) or send an email, it doesn&rsquo;t just do it. It proposes the exact action and carries it out only after you approve that specific one, enforced in the app itself rather than by politely instructing the AI. <strong>It proposes; you dispose.</strong></p>
+            <p>Here is the honest limit that remains. The gate stops your agent from doing something you didn&rsquo;t approve. It cannot stop it from proposing the <em>wrong</em> thing: if it misreads what you wanted and you approve without looking, it will carry out the mistake faithfully. Read what it hands you before you say yes, the way you&rsquo;d check a draft before signing it.</p>
+            <p>Two things it still cannot do at all: it <strong>cannot spend money or buy anything</strong> (that ability doesn&rsquo;t exist in the app) and it <strong>can only ever message you</strong>, never your team&rsquo;s channels or anyone else.</p>
+          </div>
+
+          <div class="trust-limit" id="untrusted-text">
+            <h3>Untrusted text can reach your agent, and the gate won&rsquo;t fully fix it.</h3>
+            <p>If your agent reads a Slack attachment, a meeting transcript, or a web page, that text lands in front of it, and a hostile message could try to talk your agent into something you never asked for. This is a real class of attack against <em>every</em> AI agent, ours included, and we&rsquo;re not going to pretend we&rsquo;re exempt.</p>
+            <p>The approval gate stops such an attack from <em>changing</em> anything. It does <strong>not</strong> stop it from <em>leaking</em> something: a hostile instruction could still get your agent to run a web search whose query carries information from your conversation. We don&rsquo;t have a complete answer to that yet. Nobody in this industry does. We&rsquo;d rather write that sentence than let you assume we&rsquo;d solved it.</p>
+          </div>
+
+          <div class="trust-limit" id="license-check">
+            <h3>Archie checks your license, but you own what you bought.</h3>
+            <p>Archie is a one-time purchase, not a subscription. You buy it once and it&rsquo;s yours: there&rsquo;s nothing to cancel and nothing that lapses. The app does verify your license when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account owns a license, and nothing more.</p>
+            <p>There are two scenarios companies love to blur. <strong>If <em>you</em> stop paying us, nothing happens to Archie: you already own it. If <em>we</em> disappear, it still keeps working.</strong> We&rsquo;ve written it into our <a href="../../terms-of-service/">Terms</a>: if Otian ever ceases operations, we publish a final version that needs no license check at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
+            <p>What you&rsquo;d lose if we vanished is updates, the marketplace, and support: the things a living company provides. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
+            <p>That matters more than it sounds. Personal-AI apps get acquired, pivoted, and switched off all the time, and when they go, their users&rsquo; data tends to leave with them. Yours can&rsquo;t: there was never a copy on our side to take, sell, or shut off.</p>
+          </div>
+
+          <div class="trust-limit" id="add-on-receipts">
+            <h3>We keep a receipt for every paid add-on.</h3>
+            <p>Buy a paid add-on and we store a permanent record: which one, how much, and when. It&rsquo;s how we know to let you re-install it on a new machine. But it does mean <strong>we know which paid add-ons you own</strong>.</p>
+            <p>A free add-on leaves no receipt. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, but we keep no record of which free add-ons are yours.</p>
+          </div>
+
+          <div class="trust-limit" id="no-audit">
+            <h3>Nobody has audited us but us.</h3>
+            <p>We have no third-party penetration test and no SOC&nbsp;2 report. We&rsquo;re a two-person team, and we&rsquo;re saying so up front: you deserve to know exactly where we stand before you trust us with anything.</p>
+            <p>What we can offer instead is below: don&rsquo;t trust us. Check.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Verify Us Yourself, in full
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="verify-long">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Don&rsquo;t Trust Us</span>
+          <h2 id="verify-long" class="fade-up delay-1">Check For Yourself. It Takes Ten Minutes.</h2>
+          <p>Everything on the Trust page is a claim, and claims are cheap. Here is how to prove or disprove ours without taking our word for a single thing.</p>
+        </div>
+
+        <div class="trust-steps fade-up delay-2">
+          <div class="trust-step">
+            <span class="trust-step-num">1</span>
+            <div>
+              <h3>Install a network monitor.</h3>
+              <p><a href="https://objective-see.org/products/lulu.html" rel="noopener">LuLu</a> is free and open-source. <a href="https://www.obdev.at/products/littlesnitch/" rel="noopener">Little Snitch</a> is paid and friendlier. Either one shows you every connection an app on your Mac tries to make, and lets you block them.</p>
+            </div>
+          </div>
+          <div class="trust-step">
+            <span class="trust-step-num">2</span>
+            <div>
+              <h3>Open Archie and use it properly.</h3>
+              <p>Sign in. Install an add-on. Give your agent a real task: something with a file, or your calendar. Let it run. Then read the list of connections it made.</p>
+            </div>
+          </div>
+          <div class="trust-step" id="expected-hosts">
+            <span class="trust-step-num">3</span>
+            <div>
+              <h3>Here is exactly what you should see.</h3>
+              <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
+              <ul class="trust-hosts">
+                <li><code>api.anthropic.com</code><span>, or <code>api.openai.com</code>. Your agent thinking, on your key.</span></li>
+                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and license check. Carries your account ID, nothing else.</span></li>
+                <li><code>otianai.com</code><span>: <strong>once</strong>, checking for an update. Carries nothing about you.</span></li>
+                <li><code>github.com</code><span>: only if an update is downloading.</span></li>
+                <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span><span>: Google, Slack, Telegram, Discord, Fireflies. Directly, on your tokens.</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="trust-step">
+            <span class="trust-step-num">4</span>
+            <div>
+              <h3>Now block us, and watch nothing happen.</h3>
+              <p>Add <code>otianai.com</code> to your firewall&rsquo;s block list and keep working. <strong>Your agent carries on exactly as before.</strong> That is the entire argument, reduced to something you can test in thirty seconds: we are not in the path, so cutting us out of it changes nothing.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-prose fade-up delay-3">
+          <p class="trust-aside"><strong>Where we think this ends up.</strong> The real answer to &ldquo;why should I believe you&rdquo; is an open-source client, so that none of this rests on our word. We&rsquo;re not there yet, and we&rsquo;re not going to describe a plan as though it were a fact. For now: the monitor, the block list, and a company that would rather be corrected than trusted by default.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Add-ons: the mechanism, in full
+         ============================== -->
+    <section class="section" aria-labelledby="addons-long">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">The Marketplace</span>
+          <h2 id="addons-long" class="fade-up delay-1">Why an Add-on Can&rsquo;t Reach Your Files</h2>
+          <p>The frightening version of a marketplace is: you install a stranger&rsquo;s plugin, and it runs code on your computer, next to your email. That is not what this is, and the reason is structural, not a promise.</p>
+        </div>
+
+        <div class="trust-prose fade-up delay-2">
+          <p><strong>Archie has nowhere to run code.</strong> A Skill is a text file plus some settings. A Personality is a set of written instructions. A Routine is a schedule. Nothing in an add-on can run as a program, so an add-on cannot read files off your disk on its own, and cannot ship your data to a stranger&rsquo;s server. Not because we&rsquo;d catch it. Because there is no mechanism for it to use.</p>
+
+          <p><strong>What an add-on <em>can</em> do</strong> is tell your agent how to behave, and declare which of your connected accounts it needs. A calendar Skill gets calendar tools. Today that is blunter than we want: declaring &ldquo;calendar&rdquo; grants reading, creating, <em>and deleting</em> together, rather than asking you about each. Splitting those apart, and showing you in plain English what an add-on is asking for before you install it, is part of the same work as the approval gate above.</p>
+
+          <p><strong>Every add-on is read by a human before it is listed.</strong> Right now that human is one of the two of us, and we read every line of every submission. That will not scale forever. When it stops being true, this paragraph will change; we won&rsquo;t quietly leave it here.</p>
+        </div>
+
+        <div class="text-center mt-48">
+          <a href="../" class="btn btn-secondary fade-up delay-3">&larr; Back to the Trust page</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       Footer
+       ============================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo"><img src="../../assets/icon-1024-dark.svg" alt="Otian AI" /></div>
+          <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Pages</h4>
+          <nav class="footer-nav-links" aria-label="Footer navigation">
+            <a href="../../">Home</a>
+            <a href="../../archie/">Archie</a>
+            <a href="../../archie/see-it-work/">See It Work</a>
+            <a href="../../archie/pricing/">Archie Pricing</a>
+            <a href="../../skills-marketplace/browse/">Browse the Marketplace</a>
+            <a href="../../skills-marketplace/commission/">Commission an Add-on</a>
+            <a href="../../individuals/">Guided Setup</a>
+            <a href="../../business/">For Business</a>
+            <a href="../../what-you-need/">What You Need</a>
+            <a href="../../how-it-works/">How It Works</a>
+            <a href="../../ai-explained/">AI Explained</a>
+            <a href="../../blog/">Blog</a>
+            <a href="../../faq/">FAQ</a>
+            <a href="../../trust/">Trust</a>
+            <a href="../../our-story/">Our Story</a>
+            <a href="../../testimonials/">Reviews</a>
+            <a href="../../contact/">Contact</a>
+            <a href="../../account/">Account</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Contact</h4>
+          <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
+          <div class="social-links" aria-label="Otian AI on social media">
+            <a href="https://x.com/OtianAI" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on X (Twitter)" title="X (Twitter)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/otian-ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="https://www.instagram.com/otian.ai/" class="social-link" target="_blank" rel="noopener" aria-label="Otian AI on Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="../../privacy-policy/">Privacy Policy</a>
+          <a href="../../terms-of-service/">Terms of Service</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../js/nav.js"></script>
+  <script type="module" src="../../js/account-nav.js"></script>
+</body>
+</html>

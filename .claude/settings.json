@@ -182,7 +182,8 @@
       "Bash(python3 /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/copy.py index.html archie/index.html how-it-works/index.html individuals/index.html business/index.html what-you-need/index.html)",
       "Bash(python3 /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/copy.py trust/index.html archie/pricing/index.html skills-marketplace/what-is-an-add-on/index.html our-story/index.html)",
       "Bash(grep -n \"^h1,\\\\|^h1 {\\\\|^h2 {\\\\|^h3 {\\\\|^h2,\\\\|font-family: var\\(--font-display\\)\\\\|--font-display\\\\|--radius:\\\\|--radius-sm\\\\|--border\\\\b\\\\|--bg-card\\\\|--accent-subtle\\\\|--accent-line\\\\|--text-muted\\\\|--section-padding\" css/styles.css)",
-      "Bash(grep -n '<section\\\\|</section>\\\\|<h2\\\\|</div>$\\\\|<div class=\"container\">' index.html)"
+      "Bash(grep -n '<section\\\\|</section>\\\\|<h2\\\\|</div>$\\\\|<div class=\"container\">' index.html)",
+      "Bash(node /private/tmp/claude-503/-Users-Games-Desktop-Code-Otian-AI/60e26f2e-6303-4e45-b7e9-43800608b51f/scratchpad/bench.mjs http://localhost:8899/archie/ http://localhost:8899/skills-marketplace/what-is-an-add-on/ http://localhost:8899/business/ http://localhost:8899/what-you-need/ http://localhost:8899/our-story/ http://localhost:8899/how-it-works/)"
     ],
     "additionalDirectories": [
       "C:\\Users\\Jett\\AppData\\Local\\Temp\\claude\\c--Users-Jett-NR-AI-Solutions\\ba3104bf-435d-472e-a38f-e5c13fe69523\\scratchpad"

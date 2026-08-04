@@ -174,9 +174,10 @@
           </div>
 
           <div class="trust-limit" id="license-check">
-            <h3>Archie checks your license, but you own what you bought.</h3>
-            <p>Archie is a one-time purchase, not a subscription. You buy it once and it&rsquo;s yours: there&rsquo;s nothing to cancel and nothing that lapses. The app does verify your license when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account owns a license, and nothing more.</p>
-            <p>There are two scenarios companies love to blur. <strong>If <em>you</em> stop paying us, nothing happens to Archie: you already own it. If <em>we</em> disappear, it still keeps working.</strong> We&rsquo;ve written it into our <a href="../../terms-of-service/">Terms</a>: if Otian ever ceases operations, we publish a final version that needs no license check at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
+            <h3>Archie checks your plan, and it tells you exactly what that check sees.</h3>
+            <p>Archie is a plan: $149 a year, or $19 a month. The app checks that plan when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account has a current plan, and nothing more.</p>
+            <p>That means the honest answer to &ldquo;what if I stop paying?&rdquo; is that Archie stops letting you in, at the end of the period you have already paid for. Nothing on your computer is deleted, and starting a plan again puts you back where you were. We used to sell this outright and say so here; we changed it, and this paragraph changed with it rather than being left to age quietly.</p>
+            <p>The other scenario is the one we have committed to in writing. <strong>If <em>we</em> disappear, Archie keeps working.</strong> Our <a href="../../terms-of-service/">Terms</a> require that if Otian ever ceases operations, we publish a final version that needs no sign-in at all, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it.</p>
             <p>What you&rsquo;d lose if we vanished is updates, the marketplace, and support: the things a living company provides. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
             <p>That matters more than it sounds. Personal-AI apps get acquired, pivoted, and switched off all the time, and when they go, their users&rsquo; data tends to leave with them. Yours can&rsquo;t: there was never a copy on our side to take, sell, or shut off.</p>
           </div>
@@ -230,7 +231,7 @@
               <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
               <ul class="trust-hosts">
                 <li><code>api.anthropic.com</code><span>, or <code>api.openai.com</code>. Your agent thinking, on your key.</span></li>
-                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and license check. Carries your account ID, nothing else.</span></li>
+                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and plan check. Carries your account ID, nothing else.</span></li>
                 <li><code>otianai.com</code><span>: <strong>once</strong>, checking for an update. Carries nothing about you.</span></li>
                 <li><code>github.com</code><span>: only if an update is downloading.</span></li>
                 <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span><span>: Google, Slack, Telegram, Discord, Fireflies. Directly, on your tokens.</span></li>

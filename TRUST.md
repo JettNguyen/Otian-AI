@@ -11,7 +11,29 @@ That split is the point. The person who knows what the code actually does holds 
 the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
 true, it doesn't ship, and there is no appeal to how good it sounds.
 
-**Last verified against the Archie source:** 2026-07-26 (site + code reconciliation, `Archie@main`)
+**Last verified against the Archie source:** 2026-08-04 (pricing reconciliation, `Archie@main`)
+
+**Reconciliation — 2026-08-04.** **Pricing changed from a one-time licence to a plan**: $149 a
+year or $19 a month, both Stripe subscriptions granting the `subscriber` tier. Everyone who bought
+the one-time licence keeps the permanent `lifetime` tier and full access, forever
+(`crates/archie-core/src/auth.rs`, `verify_access`). Three consequences for this file, all of them
+copy the change made false and all of them fixed in the same pass as the code:
+
+1. **"Whether you own Archie" is retired** in the What We Hold wording, everywhere. There is no
+   ownership to report any more; the server knows **whether you have a current plan**.
+2. **"If you stop paying us, nothing happens to Archie: you already own it" is now FALSE and is
+   removed** from `trust/`, `trust/details/`, `faq/`, `index.html` and the Terms. The honest
+   replacement, live now: a plan ends at the close of the period already paid for, nothing on the
+   person's computer is deleted, and restarting a plan restores access.
+3. **"If we disappear, it still keeps working" stays, unchanged and still true.** The Terms
+   commitment (a final version needing no sign-in, published within 30 days of ceasing operations)
+   is independent of how the app is sold, and it is now the *only* one of the two scenarios we
+   promise. That makes it more load-bearing than before, not less.
+
+`subscriber` is no longer "the legacy recurring tier": it is what both plans grant, and
+`subscription_status` is consulted on every access check. Access holds through `active`,
+`trialing` and `past_due` (`SUBSCRIPTION_GRANTS_ACCESS`), so a bounced renewal is a retry window
+rather than an instant lockout; it ends when Stripe cancels the subscription.
 
 **Reconciliation — 2026-07-29.** An egress audit during the Bo competitive-response work found the
 **free-add-on install ping** contradicts the retired "zero network calls" claim: *every* install,
@@ -95,7 +117,7 @@ Each is stated in the strongest form the code supports, and no stronger.
 conversations, your files, your calendar live on your own computer and go straight to your
 AI provider on your own account — they never pass through an Otian server, so there's
 nothing on our side to breach, subpoena, or sell. A legal demand to us can only produce
-what we actually hold: your email, whether you own a license, and which paid add-ons you
+what we actually hold: your email, whether you have a current plan, and which paid add-ons you
 bought."
 
 **Why it's true:** a synthesis of three already-verified claims below — "Your prompts never
@@ -298,7 +320,7 @@ the webview.
 ## What We Hold — state all three, always
 
 **Approved wording:** "Our servers know three things about you: your email address, whether
-you own Archie, and which **paid** add-ons you've bought. Not your prompts, not
+you have a current plan, and which **paid** add-ons you've bought. Not your prompts, not
 your files, not your calendar, not a single conversation. We keep no per-person record of the
 free add-ons you install."
 
@@ -323,9 +345,9 @@ mailbox between somebody's computer and their phone. We hold it and have no key 
 **hold** it, and "three things" is a floor claim, not a slogan to defend. The moment that feature
 reaches users, every page in the list above needs the conditional fourth clause:
 
-> Our servers know three things about you: your email address, whether you own Archie, and which
-> **paid** add-ons you've bought. If you turn on phone access, they also hold the messages between
-> your computer and your phone, sealed with a key we never receive.
+> Our servers know three things about you: your email address, whether you have a current plan,
+> and which **paid** add-ons you've bought. If you turn on phone access, they also hold the messages
+> between your computer and your phone, sealed with a key we never receive.
 
 **Do not ship the feature and the old sentence in the same release.** Shipping them together is
 the exact shape of the 2026-07-15 falsehood: a true sentence that a new feature quietly made false.

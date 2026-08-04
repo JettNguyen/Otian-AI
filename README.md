@@ -65,7 +65,7 @@ way around.
 to your AI provider (the AI company, like Anthropic or OpenAI) on your own account, with your own
 key. They never pass through an Otian server, so there is nothing on our side to leak or lose.
 
-**Our servers know three things about you:** your email address, whether you own Archie, and
+**Our servers know three things about you:** your email address, whether you have a current plan, and
 which paid add-ons you've bought. Not your prompts, not your files, not your calendar, not a
 single conversation. We keep no per-person record of the free add-ons you install.
 
@@ -114,9 +114,9 @@ them, and we never take a cut of either.
 
 | | Price | |
 |---|---|---|
-| **The app** | **$149** one-time | Buy Archie once and own it. Not a subscription. |
-| **Add-ons** | **Free** to start | Every kind ships with free built-ins. Premium ones are a one-time purchase. |
-| **The AI itself** | **Pay as you go** | Your own account with Anthropic or OpenAI. It bills you directly. |
+| **The app** | **$149** a year, or **$19** a month | A year is $79 less than twelve months bought one at a time. Change or stop it any time. |
+| **Add-ons** | **Free** to start | Every kind ships with free built-ins. Premium ones are bought once and stay bought. |
+| **The AI itself** | **Pay as you go** | Your own account with Anthropic, OpenAI, Google, Groq or xAI. It bills you directly. |
 
 The third cost is the one that varies, so the [pricing page](https://otianai.com/archie/pricing/)
 works it out for three levels of use, with the modelling shown.

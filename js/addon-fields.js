@@ -44,6 +44,26 @@ export const ADDON_SPEC = {
       "grants": "Read and update contacts, pipelines and conversations in a GoHighLevel account.",
       "id": "gohighlevel",
       "name": "GoHighLevel"
+    },
+    {
+      "grants": "Read and write the Notion pages and databases you share with it.",
+      "id": "notion",
+      "name": "Notion"
+    },
+    {
+      "grants": "Read issues, pull requests and repositories your token covers.",
+      "id": "github",
+      "name": "GitHub"
+    },
+    {
+      "grants": "Read and update issues and projects in your Linear workspace.",
+      "id": "linear",
+      "name": "Linear"
+    },
+    {
+      "grants": "Read and update the Airtable bases your token covers.",
+      "id": "airtable",
+      "name": "Airtable"
     }
   ],
   "kinds": {

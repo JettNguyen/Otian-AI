@@ -7111,6 +7111,25 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 999px; }
 .phone-dot--skill { background: var(--accent); }
 .phone-dot--routine { background: var(--c-teal); }
+/* The journal's dot carries the outcome, so unlike the two above it is not one colour: grey for an
+   ordinary finished job, and a real colour only where something wants reading. */
+.phone-dot--journal { background: var(--border); }
+.phone-dot--working { background: var(--c-teal); }
+.phone-dot--asked { background: var(--c-gold, #E09531); }
+.phone-dot--failed { background: var(--c-red, #BC5145); }
+
+/* The journal itself: what the agent has been DOING, as against what it has. Rows can carry a
+   second line (what a running job is on right now), so unlike the installed lists they align to
+   the top and the name is a block rather than a flex child.
+   Screenshots never reach this page. The sealed snapshot is capped at 100 KB and one screen would
+   eat the whole document, so the phone gets the sentences and says where the pictures are. */
+.phone-row--journal { align-items: flex-start; }
+.phone-row--journal .phone-row-name { display: block; }
+.phone-journal-detail {
+  display: block; margin-top: 3px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted);
+}
+.phone-journal-when { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
+.phone-journal-note { font-size: 0.78rem; line-height: 1.5; color: var(--text-muted); margin-top: 10px; }
 
 /* The awake status wears a lit teal dot, matching the agents' lit look. */
 #ph-status .pill-on::before {

@@ -533,7 +533,12 @@ function renderAgents(snapshot) {
     return;
   }
 
-  host.innerHTML = agents.map(renderAgent).join("");
+  // The journal arrives beside `agents` rather than inside each one, so the computer can compare
+  // the two halves separately and throttle a running job's churn without delaying anything else.
+  // Absent from an older Archie, and from one with the journal switched off: both read as no
+  // journal, which is what an empty block already renders as.
+  const journal = (snapshot.state && snapshot.state.journal) || {};
+  host.innerHTML = agents.map((a) => renderAgent(a, journal[a.id])).join("");
 
   // Wire the buttons after the markup exists. Delegation would avoid this, but there are only a
   // handful of controls per agent and direct handlers keep each one's arguments obvious.
@@ -568,7 +573,65 @@ function avatarHue(seed) {
   return AVATAR_HUES[h % AVATAR_HUES.length];
 }
 
-function renderAgent(agent) {
+/* ── The journal ────────────────────────────────────────────────────────────────────────────
+   What the agent has been DOING, as against what it has. The computer keeps the whole history and
+   every screenshot; what reaches here is the part that fits inside a sealed 100 KB document, which
+   is the sentences. See docs/JOURNAL-ON-PHONE.md in the Archie repo.
+
+   Two states get their own treatment rather than sitting in the list. A job that stopped to ask
+   something joins the existing "Waiting on you" block, because that block already IS the list of
+   things waiting on you and a second one would split the concept. A running job keeps its latest
+   sentence, because "what is it doing right now" is the reason to open this on a bus. */
+
+/** Outcome to the word shown on the row, and the colour of its dot. A finished job wears no tag at
+ *  all: a list where every row shouts is a list nobody reads, and finishing is the ordinary case. */
+const JOURNAL_OUTCOME = {
+  running: { tag: "Working", dot: "phone-dot--working" },
+  finished: { tag: "", dot: "phone-dot--journal" },
+  stopped: { tag: "Stopped", dot: "phone-dot--journal" },
+  failed: { tag: "Failed", dot: "phone-dot--failed" },
+  asked_you: { tag: "Asked you", dot: "phone-dot--asked" },
+};
+
+function outcomeType(entry) {
+  return (entry.outcome && entry.outcome.type) || "finished";
+}
+
+function journalRow(entry) {
+  const look = JOURNAL_OUTCOME[outcomeType(entry)] || JOURNAL_OUTCOME.finished;
+  return (
+    '<li class="phone-row phone-row--journal">' +
+    '<span class="phone-dot ' + look.dot + '" aria-hidden="true"></span>' +
+    '<span class="phone-row-name">' +
+    escapeHtml(entry.title) +
+    (entry.detail ? '<span class="phone-journal-detail">' + escapeHtml(entry.detail) + "</span>" : "") +
+    "</span>" +
+    (look.tag ? '<span class="phone-row-tag">' + look.tag + "</span>" : "") +
+    '<span class="phone-journal-when">' + escapeHtml(ago(new Date(entry.started_at))) + "</span>" +
+    "</li>"
+  );
+}
+
+/** The whole journal group for one agent. Absent entirely when there is nothing in it: an empty
+ *  "Lately" heading on a phone is a row of noise, and the desktop owns the empty case properly. */
+function renderJournal(block) {
+  const entries = (block && block.entries) || [];
+  if (entries.length === 0) return "";
+  const trimmed = (block && block.trimmed) || 0;
+  return (
+    '<div class="phone-group-title">Lately</div>' +
+    '<ul class="phone-list">' + entries.map(journalRow).join("") + "</ul>" +
+    '<div class="phone-journal-note">' +
+    (trimmed
+      ? "Showing the newest " + entries.length + " of " + (entries.length + trimmed) + ". "
+      : "") +
+    "Screens your agent saw stay on your computer. Open Archie there for the whole history, and to " +
+    "take anything back." +
+    "</div>"
+  );
+}
+
+function renderAgent(agent, journal) {
   const ws = escapeHtml(agent.workspace_id);
   const id = escapeHtml(agent.id);
 
@@ -578,11 +641,21 @@ function renderAgent(agent) {
 
   const emptyLists = (agent.collections || []).filter((c) => c.rows === 0);
 
+  // A job that stopped to ask something is the most time-sensitive thing on this screen, so it
+  // joins the block that already means "waiting on you" rather than waiting its turn in the list.
+  const asked = (((journal && journal.entries) || []).filter((e) => outcomeType(e) === "asked_you"));
+
   const needs =
-    waiting.length === 0 && emptyLists.length === 0
+    waiting.length === 0 && emptyLists.length === 0 && asked.length === 0
       ? ""
       : '<div class="phone-needs">' +
         '<div class="phone-needs-title">Waiting on you</div>' +
+        asked.map((e) =>
+          '<div class="phone-need">' +
+          "<strong>" + escapeHtml(e.title) + "</strong> stopped to ask you something" +
+          (e.detail ? ": " + escapeHtml(e.detail) : "") +
+          ". Answer it where you chat with " + escapeHtml(agent.name) + "." +
+          "</div>").join("") +
         waiting.map((x) =>
           '<div class="phone-need">' +
           "<strong>" + escapeHtml(x.skill.name) + "</strong> needs " +
@@ -636,6 +709,9 @@ function renderAgent(agent) {
     "</div>" +
     renderChatCard(agent) +
     needs +
+    // What it has been doing sits above what it has, for the same reason it does in the app: the
+    // lists change on the day you set the agent up, and the journal changes every day after.
+    renderJournal(journal) +
     '<div class="phone-group-title">Skills</div>' + skills +
     '<div class="phone-group-title">Routines</div>' + routines +
     "</div>"

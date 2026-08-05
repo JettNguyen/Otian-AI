@@ -486,6 +486,15 @@
     }
     let mode = params.get("mode") === "signup" ? "signup" : "signin";
 
+    // Which door was pressed in the desktop app, when it came from there. Archie's first screen
+    // offers "Continue with Google" and "Use an email address" as separate buttons, and both open
+    // this page, because Firebase sign-in can only happen in a browser. Without this, the second of
+    // those lands on a card led by a Google button and reads as being asked the same thing twice.
+    // Presentation only: it moves the cursor, and never decides who anybody is. Nothing is hidden,
+    // because a door somebody can see is a door they can change their mind about.
+    const door = params.get("method") === "google" ? "google"
+      : params.get("method") === "email" ? "email" : "";
+
     const $ = (id) => document.getElementById(id);
     const statusEl = $("auth-status");
     const setStatus = bindStatusToast(statusEl);
@@ -729,6 +738,10 @@
       stopVerifyPolling();
       onlyCard("auth-card");
       applyMode();
+      // Focus follows the door. The card is revealed asynchronously, once the auth-state observer
+      // settles, so this cannot be an autofocus attribute in the markup.
+      if (door === "email") $("auth-email").focus();
+      else if (door === "google") $("btn-google").focus();
     }
     function showVerifyGate(user) {
       pendingVerifyUser = user;

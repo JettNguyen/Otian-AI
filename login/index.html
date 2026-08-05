@@ -348,7 +348,7 @@
     import { bindStatusToast } from "../js/status-toast.js";
     import {
       getAuth, onAuthStateChanged, signOut, updateProfile,
-      GoogleAuthProvider, signInWithPopup,
+      GoogleAuthProvider, signInWithPopup, linkWithPopup, linkWithCredential, EmailAuthProvider,
       signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithCustomToken,
       sendPasswordResetEmail, sendEmailVerification,
       sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink,
@@ -432,6 +432,58 @@
     // routes the visitor through the ordinary website sign-in instead of handing tokens anywhere.
     const callbackUrl = loopbackCallback(params.get("callback"));
     const appState = params.get("state") || "";
+
+    // ── Upgrading the account the app already has ─────────────────────────────
+    //
+    // Archie can be installed and used with no account at all: the first run mints an anonymous
+    // Firebase identity so somebody can watch an agent work before being asked for anything. By the
+    // time they arrive here, that account owns real things. Free credits sit on a ledger keyed to
+    // its uid, a phone may be paired to it, and the agent has been told about its owner.
+    //
+    // So signing up has to be an UPGRADE of that account, not a second one created beside it.
+    // Firebase does this with linkWithCredential, which attaches an email or a Google identity to
+    // the account that is currently signed in and keeps its uid. The catch is that "currently
+    // signed in" means in THIS browser, which knows nothing about the desktop app's session. The
+    // app therefore sends a one-time custom token minted for its own uid, and this page signs in
+    // with it first. The token grants nothing: it proves an identity the app already holds a token
+    // for, which is why the endpoint that mints it authenticates with that very token.
+    //
+    // Absent for a website visitor, and absent when the app has no account to upgrade. Everything
+    // below falls back to ordinary sign-up when it is missing or refused, so this can only ever
+    // preserve a uid, never block anyone from getting an account.
+    const linkToken = params.get("link_token") || "";
+
+    /**
+     * Become the anonymous account the app has been using.
+     *
+     * Called from inside a click handler and never on page load, which matters: signing in fires
+     * the auth-state observer, and on load that observer would see a signed-in user, decide the
+     * desktop flow was finished, and offer to hand the anonymous session straight back to the app.
+     * The sign-up would never happen. Inside a handler, `explicitAuth` is already set and the
+     * observer stands down.
+     *
+     * Returns null when there is nothing to upgrade, or when the token is expired or rejected. The
+     * caller then creates an ordinary account: the person still gets what they came for, and the
+     * app notices the uid changed.
+     */
+    async function adoptAppAccount() {
+      if (!linkToken) return null;
+      try {
+        const cred = await signInWithCustomToken(auth, linkToken);
+        // Only an account nobody has signed up for can be linked to. Anything else is already
+        // somebody's, and attaching a second credential to it is not what is being asked for.
+        return cred.user && cred.user.isAnonymous ? cred.user : null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    /** The link failed because that identity is already an Archie account of its own. */
+    function credentialBelongsElsewhere(e) {
+      return e && (e.code === "auth/credential-already-in-use"
+        || e.code === "auth/email-already-in-use"
+        || e.code === "auth/account-exists-with-different-credential");
+    }
     let mode = params.get("mode") === "signup" ? "signup" : "signin";
 
     const $ = (id) => document.getElementById(id);
@@ -874,7 +926,25 @@
       setStatus("Opening Google…");
       explicitAuth = true; // this click owns routing; keep the auth-state observer from double-handling
       try {
-        const result = await signInWithPopup(auth, new GoogleAuthProvider());
+        // Attach Google to the account the app is already using, when there is one, so the uid and
+        // everything keyed to it survive. Anyone signing in from the website, or from an app that
+        // has no account to upgrade, takes the plain path.
+        const anon = await adoptAppAccount();
+        let result;
+        if (anon) {
+          try {
+            result = await linkWithPopup(anon, new GoogleAuthProvider());
+          } catch (linkErr) {
+            // That Google account is already an Archie account. This is the ordinary case for
+            // somebody installing on a second computer: they get an anonymous account on the new
+            // machine, then sign in as themselves. Signing in to the real one is what they meant;
+            // the empty anonymous account is simply abandoned.
+            if (!credentialBelongsElsewhere(linkErr)) throw linkErr;
+            result = await signInWithPopup(auth, new GoogleAuthProvider());
+          }
+        } else {
+          result = await signInWithPopup(auth, new GoogleAuthProvider());
+        }
         setStatus("");
         await handleUser(result.user);
       } catch (e) {
@@ -895,7 +965,27 @@
         setStatus("Creating your account…");
         explicitAuth = true; // this click owns routing; keep the auth-state observer from double-handling
         try {
-          const cred = await createUserWithEmailAndPassword(auth, email, password);
+          // Same upgrade as the Google path: attach the email and password to the account the app
+          // has been running on, so its uid, its free credits, and anything paired to it carry over.
+          const anon = await adoptAppAccount();
+          let cred;
+          if (anon) {
+            try {
+              cred = await linkWithCredential(anon, EmailAuthProvider.credential(email, password));
+            } catch (linkErr) {
+              if (!credentialBelongsElsewhere(linkErr)) throw linkErr;
+              // The email already has an account. Creating a second one is impossible and signing
+              // in silently would be wrong, since we do not have their password confirmed as a
+              // sign-in; send them to the sign-in form with the address kept.
+              explicitAuth = false;
+              mode = "signin";
+              applyMode();
+              setStatus("That email already has an Archie account. Sign in and it will pick up where you left off.", "error");
+              return;
+            }
+          } else {
+            cred = await createUserWithEmailAndPassword(auth, email, password);
+          }
           // Name lives in two places: the Firebase Auth profile (rides in the ID token's `name`
           // claim, which the desktop app reads) and the user's Firestore doc.
           await updateProfile(cred.user, { displayName: name });

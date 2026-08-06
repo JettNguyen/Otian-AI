@@ -301,6 +301,12 @@ p { color: var(--text-secondary); line-height: 1.8; }
   font-size: 1.0625rem;
 }
 
+/* A heading standing on its own, where what follows it is the introduction. Without this
+   the section-header's full 64px sits under a single line of type. */
+.section-header--solo {
+  margin-bottom: 40px;
+}
+
 .section-header p + p {
   margin-top: 14px;
 }
@@ -1488,6 +1494,14 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 
 .page-hero h1 {
   margin-bottom: 16px;
+}
+
+/* A second, quieter paragraph under a page intro, for the disclosure that has to be
+   readable before anything else on the page but must not outshout the h1. */
+.page-hero p.page-hero-note {
+  margin-top: 18px;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
 }
 
 .page-hero p {
@@ -4219,6 +4233,14 @@ html[data-theme="dark"] .availability-widget iframe {
     box-shadow: var(--shadow-md);
   }
 
+  /* The whole card is a link and carries no "learn more" text, so the border
+     picks up the accent to say so on hover. */
+  .why-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent);
+  }
+
   .mp-product-card.is-coming-soon:hover {
     transform: none;
     box-shadow: none;
@@ -4245,7 +4267,8 @@ html[data-theme="dark"] .availability-widget iframe {
 
 /* Tap feedback for touch devices */
 @media (hover: none) {
-  .feature-card:active {
+  .feature-card:active,
+  .why-card:active {
     transform: scale(0.98);
   }
 
@@ -7329,6 +7352,69 @@ html[data-theme="dark"] .booking-container iframe {
   }
   .addon-showcase-item {
     padding: 20px;
+  }
+}
+
+/* --- Why Archie, in three words -------------------------------------------
+   One word per card, so the answer survives a skim. Built on the add-on
+   showcase box above it so the two sections read as one family; the word is
+   sized up as the hook, and the whole box is the link, which is why there is
+   no "learn more" line to click. Three across, then straight to stacked: two
+   columns would leave one card orphaned on its own row. */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* The contrast with a chat window, set after the three words rather than before them: the
+   cards are the answer, and this is for the reader who wants the reasoning behind it. */
+.why-intro {
+  max-width: 640px;
+  margin: 36px auto 0;
+  text-align: center;
+}
+
+.why-intro p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.why-intro p + p {
+  margin-top: 14px;
+}
+
+.why-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.why-card h3 {
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.why-card p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .why-card {
+    padding: 22px 20px;
   }
 }
 

@@ -224,32 +224,69 @@
     </div>
 
     <!-- ==============================
+         Why Archie, in Three Words
+
+         Replaces "Yours in Ways Most AI Isn't", which answered the same question ("why this
+         instead of the chat window I already have?") in three long cards further down the page.
+         The visitors who ask it are new to agents, so the answer has to survive a skim: one
+         word each, and the whole box is a door to the page that proves it. The three-things
+         disclosure that used to close the old section now opens /trust/, where the full list
+         already lives; the guided-setup offer moved down to the closing call to action.
+         ============================== -->
+    <section class="section section-alt section--tight" aria-labelledby="three-words-heading">
+      <div class="container">
+        <div class="section-header section-header--solo">
+          <h2 id="three-words-heading" class="fade-up">Why Archie, in Three Words</h2>
+        </div>
+
+        <div class="why-grid fade-up delay-1">
+
+          <a class="why-card" href="archie/see-it-work/">
+            <h3>Proactive.</h3>
+            <p>Your morning laid out before you ask. The follow-up flagged before you remembered it. The reply drafted, waiting for one tap. You don&rsquo;t open Archie. Archie messages you.</p>
+          </a>
+
+          <a class="why-card" href="how-it-works/">
+            <h3>Effortless.</h3>
+            <p>No terminal. No code. If you can send a message, you can run an agent. And when you want it to do something new, you just tell it.</p>
+          </a>
+
+          <a class="why-card" href="trust/">
+            <h3>Yours.</h3>
+            <p>It runs on your computer, under your accounts. Your conversations never pass through our servers. You pick an AI provider and how hard it thinks: fast and cheap, or deep and thorough.</p>
+          </a>
+
+        </div>
+
+        <div class="why-intro fade-up delay-2">
+          <p><strong>You&rsquo;ve probably seen AI that answers questions.</strong> You open it, type, get an answer, close it. By tomorrow it has forgotten you.</p>
+          <p><strong>Archie works whether you&rsquo;re there or not.</strong> It lives on your computer, keeps an eye on your inbox and calendar, and knocks on your door when something needs attention.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
          Why an AI Agent Is Right for You
          ============================== -->
-    <section class="section section-alt" aria-labelledby="why-heading">
+    <section class="section" aria-labelledby="why-heading">
       <div class="container">
         <div class="section-header">
           <h2 id="why-heading" class="fade-up">Why an AI Agent Is Right for You</h2>
           <p>If your week fills up with scheduling, catching up on meetings, and remembering who&rsquo;s waiting on what, that&rsquo;s exactly the work an agent is built to take on.</p>
         </div>
 
-        <div class="before-after-grid fade-up delay-1">
-          <div class="before-after-card">
-            <span class="before-after-label">A chatbot</span>
-            <p>Answers when you sit down to ask. When you close the tab, the work is still yours to do.</p>
-          </div>
-          <div class="before-after-card is-after">
-            <span class="before-after-label">Your agent</span>
-            <p>Runs on a schedule, remembers what you tell it, and messages you first when it finishes something.</p>
-          </div>
-        </div>
-
+        <!-- The chatbot/agent before-and-after pair used to open this section. It came out when the
+             three words moved above it: that section now makes the same contrast, two screens
+             earlier, in fewer words. Two statements of one idea, a screen apart, read as padding. -->
         <p>Most people don&rsquo;t go looking for an AI agent. They just have a week that looks like this:</p>
 
-        <!-- Unboxed on purpose. These four are examples, not claims, and when they carried the
-             same border and padding as the benefit cards below they read as four more things to
-             get through. Same words, one region instead of four. See .calm-list. -->
-        <div class="calm-list calm-list--ruled fade-up delay-2">
+        <!-- Unboxed on purpose. These are examples, not claims, and when they carried the
+             same border and padding as the benefit cards below they read as more things to
+             get through. Same words, one region instead of three. See .calm-list.
+
+             A fourth ("the thing you swore you'd remember") lives on /how-it-works/ now: it said
+             what the Proactive card above already says, and three examples make the point. -->
+        <div class="calm-list calm-list--3 calm-list--ruled fade-up delay-2">
 
           <div class="calm-list-item">
             <span class="calm-list-label">Monday, 9 a.m.</span>
@@ -266,255 +303,9 @@
             <p>Instead of playing calendar tetris, tell your agent to move it. It proposes the exact change and makes it after you approve.</p>
           </div>
 
-          <div class="calm-list-item">
-            <span class="calm-list-label">The thing you swore you&rsquo;d remember</span>
-            <p>Tell it once: the follow-up on Friday, the detail to check before the call. It holds onto it, and messages you first when the time comes.</p>
-          </div>
-
         </div>
 
         <p class="calm-note calm-note--center">None of it is an emergency. That&rsquo;s the point: it&rsquo;s the small, steady tax on your attention, and an agent is what quietly pays it down. A part-time assistant can run thousands a year and clocks out at five; your agent is there from six in the morning to eleven at night, as long as your computer&rsquo;s on.</p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         What is an AI Agent?
-         ============================== -->
-    <section class="section" aria-labelledby="what-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 id="what-heading" class="fade-up">What Archie Does for You</h2>
-          <p>Think of it as a personal assistant powered by AI. Message it (&ldquo;what&rsquo;s on my calendar?&rdquo; &ldquo;move my 3 o&rsquo;clock,&rdquo; &ldquo;catch me up on today&rsquo;s meetings&rdquo;) and it gets to work, then reports back.</p>
-        </div>
-        <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
-            <title id="dl-t">The delegation loop: you send a task to your agent, the agent works in the background, checks in with what it found, and reports back when it is done, a continuous cycle around the agent.</title>
-            <style>
-              .dl-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-              .dl-a{fill:var(--accent)}
-              .dl-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-              .dl-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-              .dl-dot{fill:var(--accent)}
-              .dl-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
-              .dl-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-              .dl-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .dl-alabel{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle;opacity:.72}
-              .dl-run{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .dl-grp{animation:dlIn .7s cubic-bezier(.22,1,.36,1) both}
-                .dg1{animation-delay:.06s}.dg2{animation-delay:.2s}.dg3{animation-delay:.34s}.dg4{animation-delay:.48s}
-                @keyframes dlIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-                .dl-r-top{animation:dlTop 3s linear infinite}
-                @keyframes dlTop{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(212px)}}
-                .dl-r-right{animation:dlRight 1.3s linear infinite}
-                @keyframes dlRight{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(86px)}}
-                .dl-r-bottom{animation:dlBottom 3s linear infinite}
-                @keyframes dlBottom{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(-212px)}}
-                .dl-r-left{animation:dlLeft 1.3s linear infinite}
-                @keyframes dlLeft{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(-86px)}}
-              }
-            </style>
-
-            <!-- loop flow arrows (clockwise) -->
-            <line class="dl-flow" x1="132" y1="75" x2="344" y2="75"/>
-            <path class="dl-flow" d="M336 70 L344 75 L336 80"/>
-            <line class="dl-flow" x1="392" y1="110" x2="392" y2="196"/>
-            <path class="dl-flow" d="M387 188 L392 196 L397 188"/>
-            <line class="dl-flow" x1="344" y1="231" x2="132" y2="231"/>
-            <path class="dl-flow" d="M140 226 L132 231 L140 236"/>
-            <line class="dl-flow" x1="84" y1="196" x2="84" y2="110"/>
-            <path class="dl-flow" d="M79 118 L84 110 L89 118"/>
-
-            <!-- circulating dots -->
-            <circle class="dl-run dl-r-top" cx="132" cy="75" r="3"/>
-            <circle class="dl-run dl-r-right" cx="392" cy="110" r="3"/>
-            <circle class="dl-run dl-r-bottom" cx="344" cy="231" r="3"/>
-            <circle class="dl-run dl-r-left" cx="84" cy="196" r="3"/>
-
-            <!-- arrow labels -->
-            <text class="dl-alabel" x="238" y="93">message</text>
-            <text class="dl-alabel" x="238" y="216">from anywhere</text>
-
-            <!-- agent core -->
-            <circle class="dl-ring" cx="238" cy="153" r="46"/>
-            <g class="dl-a" transform="translate(201.1,117.9) scale(0.072)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-
-            <!-- You -->
-            <g class="dl-grp dg1">
-              <rect class="dl-tile" x="36" y="40" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="58" r="5.5"/>
-              <path class="dl-glyph" d="M74 74 a10 9 0 0 1 20 0"/>
-              <text class="dl-name" x="84" y="89">You</text>
-              <text class="dl-sub" x="84" y="102">delegate a task</text>
-            </g>
-
-            <!-- Working -->
-            <g class="dl-grp dg2">
-              <rect class="dl-tile" x="344" y="40" width="96" height="70" rx="14"/>
-              <circle class="dl-dot" cx="383" cy="64" r="2.6"/>
-              <circle class="dl-dot" cx="392" cy="64" r="2.6"/>
-              <circle class="dl-dot" cx="401" cy="64" r="2.6"/>
-              <text class="dl-name" x="392" y="89">Working</text>
-              <text class="dl-sub" x="392" y="102">in the background</text>
-            </g>
-
-            <!-- Checks in (approval gate) -->
-            <g class="dl-grp dg3">
-              <rect class="dl-tile" x="344" y="196" width="96" height="70" rx="14"/>
-              <rect class="dl-glyph" x="380" y="209" width="24" height="16" rx="5"/>
-              <path class="dl-glyph" d="M384 225 l-1 5 5-4"/>
-              <path class="dl-glyph" d="M386 217 l3 3 6-6"/>
-              <text class="dl-name" x="392" y="245">Checks in</text>
-              <text class="dl-sub" x="392" y="258">with what it found</text>
-            </g>
-
-            <!-- Done -->
-            <g class="dl-grp dg4">
-              <rect class="dl-tile" x="36" y="196" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="217" r="10"/>
-              <path class="dl-glyph" d="M79 218 l3.5 4 7-8"/>
-              <text class="dl-name" x="84" y="245">Done</text>
-              <text class="dl-sub" x="84" y="258">handled for you</text>
-            </g>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 464" role="img" aria-labelledby="dlm-t" xmlns="http://www.w3.org/2000/svg">
-  <title id="dlm-t">The delegation loop: you send a task to your agent, the agent works in the background, checks in with what it found, and reports back when it is done, a continuous cycle around the agent.</title>
-  <style>
-    .dlm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-    .dlm-a{fill:var(--accent)}
-    .dlm-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-    .dlm-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .dlm-dot{fill:var(--accent)}
-    .dlm-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
-    .dlm-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-    .dlm-sub{fill:currentColor;opacity:.6;font-size:10.5px;text-anchor:middle}
-    .dlm-alabel{fill:currentColor;font-size:10.5px;font-weight:600;text-anchor:start;opacity:.72}
-    .dlm-run{fill:var(--accent)}
-    @media (prefers-reduced-motion:no-preference){
-      .dlm-grp{animation:dlmIn .7s cubic-bezier(.22,1,.36,1) both}
-      .dlm-g1{animation-delay:.06s}.dlm-g2{animation-delay:.2s}.dlm-g3{animation-delay:.34s}.dlm-g4{animation-delay:.48s}
-      @keyframes dlmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-      .dlm-r-d1{animation:dlmDrop54 1.1s linear infinite}
-      .dlm-r-d2{animation:dlmDrop44 .9s linear infinite}
-      .dlm-r-d3{animation:dlmDrop54 1.1s linear infinite}
-      @keyframes dlmDrop54{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(54px)}}
-      @keyframes dlmDrop44{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(44px)}}
-      .dlm-r-up{animation:dlmRise 3.4s linear infinite}
-      @keyframes dlmRise{0%{opacity:0;transform:translateY(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-362px)}}
-    }
-  </style>
-
-  <!-- downward flow arrows between the stacked tiles -->
-  <line class="dlm-flow" x1="96" y1="86" x2="96" y2="140"/>
-  <path class="dlm-flow" d="M91 132 L96 140 L101 132"/>
-  <line class="dlm-flow" x1="96" y1="210" x2="96" y2="254"/>
-  <path class="dlm-flow" d="M91 246 L96 254 L101 246"/>
-  <line class="dlm-flow" x1="96" y1="324" x2="96" y2="378"/>
-  <path class="dlm-flow" d="M91 370 L96 378 L101 370"/>
-
-  <!-- return wire closing the loop up the right side -->
-  <path class="dlm-flow" d="M176 413 H324 V51 H176"/>
-  <path class="dlm-flow" d="M184 46 L176 51 L184 56"/>
-
-  <!-- circulating dots -->
-  <circle class="dlm-run dlm-r-d1" cx="96" cy="86" r="3"/>
-  <circle class="dlm-run dlm-r-d2" cx="96" cy="210" r="3"/>
-  <circle class="dlm-run dlm-r-d3" cx="96" cy="324" r="3"/>
-  <circle class="dlm-run dlm-r-up" cx="324" cy="413" r="3"/>
-
-  <!-- arrow labels -->
-  <text class="dlm-alabel" x="110" y="117">message</text>
-  <text class="dlm-alabel" x="110" y="355">from anywhere</text>
-
-  <!-- agent core, enclosed by the loop -->
-  <circle class="dlm-ring" cx="250" cy="232" r="44"/>
-  <g class="dlm-a" transform="translate(214.7,198.4) scale(0.069)">
-    <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-    <polygon points="328,887 512,727 696,887"/>
-  </g>
-
-  <!-- You -->
-  <g class="dlm-grp dlm-g1">
-    <rect class="dlm-tile" x="16" y="16" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="32" r="5.5"/>
-    <path class="dlm-glyph" d="M86 48 a10 9 0 0 1 20 0"/>
-    <text class="dlm-name" x="96" y="63">You</text>
-    <text class="dlm-sub" x="96" y="76">delegate a task</text>
-  </g>
-
-  <!-- Working -->
-  <g class="dlm-grp dlm-g2">
-    <rect class="dlm-tile" x="16" y="140" width="160" height="70" rx="14"/>
-    <circle class="dlm-dot" cx="87" cy="161" r="2.6"/>
-    <circle class="dlm-dot" cx="96" cy="161" r="2.6"/>
-    <circle class="dlm-dot" cx="105" cy="161" r="2.6"/>
-    <text class="dlm-name" x="96" y="187">Working</text>
-    <text class="dlm-sub" x="96" y="200">in the background</text>
-  </g>
-
-  <!-- Checks in (approval gate) -->
-  <g class="dlm-grp dlm-g3">
-    <rect class="dlm-tile" x="16" y="254" width="160" height="70" rx="14"/>
-    <rect class="dlm-glyph" x="84" y="262" width="24" height="16" rx="5"/>
-    <path class="dlm-glyph" d="M88 279 l-1 5 5-4"/>
-    <path class="dlm-glyph" d="M91 270 l3 3 6-6"/>
-    <text class="dlm-name" x="96" y="301">Checks in</text>
-    <text class="dlm-sub" x="96" y="314">with what it found</text>
-  </g>
-
-  <!-- Done -->
-  <g class="dlm-grp dlm-g4">
-    <rect class="dlm-tile" x="16" y="378" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="397" r="10"/>
-    <path class="dlm-glyph" d="M91 397 l3.5 4 7-8"/>
-    <text class="dlm-name" x="96" y="425">Done</text>
-    <text class="dlm-sub" x="96" y="438">handled for you</text>
-  </g>
-</svg>
-          <figcaption>You send a task; it works in the background, gets it done, and reports back when it&rsquo;s finished.</figcaption>
-        </figure>
-
-        <div class="feature-grid">
-
-          <article class="feature-card fade-up delay-1">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <polyline points="9 12 11 14 15 10"/>
-              </svg>
-            </div>
-            <h3>Always in Your Control</h3>
-            <p>Email waits for your Send tap, calendar changes wait for your OK, and it <em>can&rsquo;t</em> spend money: that ability doesn&rsquo;t exist in the app. The full, honest list is on our <a href="trust/">Trust page</a>.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-2">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polyline points="12 6 12 12 16 14"/>
-              </svg>
-            </div>
-            <h3>Works Around the Clock</h3>
-            <p>It handles tasks in the background while you&rsquo;re busy or asleep, then fills you in.</p>
-          </article>
-
-          <article class="feature-card fade-up delay-3">
-            <div class="feature-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <h3>No Tech Experience Needed</h3>
-            <p>No terminal, no code. Setup takes an afternoon.</p>
-          </article>
-
-        </div>
-
       </div>
     </section>
 
@@ -592,48 +383,6 @@
 
         <p class="calm-note">Every one installs in a click, and each is a starting point rather than a fixed script: tell your agent how you want it to work and it adapts. The marketplace opens with Archie&rsquo;s launch, and if the thing you want isn&rsquo;t there, <a href="skills-marketplace/commission/">tell us and we&rsquo;ll build it</a>, and it joins the marketplace for everyone. <a href="skills-marketplace/browse/">Browse all of them &rarr;</a></p>
 
-      </div>
-    </section>
-
-    <!-- ==============================
-         Why Archie, in Three Words
-
-         Replaces "Yours in Ways Most AI Isn't", which answered the same question ("why this
-         instead of the chat window I already have?") in three long cards further down the page.
-         The visitors who ask it are new to agents, so the answer has to survive a skim: one
-         word each, and the whole box is a door to the page that proves it. The three-things
-         disclosure that used to close the old section now opens /trust/, where the full list
-         already lives; the guided-setup offer moved down to the closing call to action.
-         ============================== -->
-    <section class="section section--tight" aria-labelledby="three-words-heading">
-      <div class="container">
-        <div class="section-header section-header--solo">
-          <h2 id="three-words-heading" class="fade-up">Why Archie, in Three Words</h2>
-        </div>
-
-        <div class="why-grid fade-up delay-1">
-
-          <a class="why-card" href="archie/see-it-work/">
-            <h3>Proactive.</h3>
-            <p>Your morning laid out before you ask. The follow-up flagged before you remembered it. The reply drafted, waiting for one tap. You don&rsquo;t open Archie. Archie messages you.</p>
-          </a>
-
-          <a class="why-card" href="how-it-works/">
-            <h3>Effortless.</h3>
-            <p>No terminal. No code. If you can send a message, you can run an agent. And when you want it to do something new, you just tell it.</p>
-          </a>
-
-          <a class="why-card" href="trust/">
-            <h3>Yours.</h3>
-            <p>It runs on your computer, under your accounts. Your conversations never pass through our servers. You pick an AI provider and how hard it thinks: fast and cheap, or deep and thorough.</p>
-          </a>
-
-        </div>
-
-        <div class="why-intro fade-up delay-2">
-          <p><strong>You&rsquo;ve probably seen AI that answers questions.</strong> You open it, type, get an answer, close it. By tomorrow it has forgotten you.</p>
-          <p><strong>Archie works whether you&rsquo;re there or not.</strong> It lives on your computer, keeps an eye on your inbox and calendar, and knocks on your door when something needs attention.</p>
-        </div>
       </div>
     </section>
 

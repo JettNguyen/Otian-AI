@@ -7393,6 +7393,88 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ==============================
+   40c. Profile links (LinkedIn)
+   ==============================
+   Jett and Jack are named in three kinds of place: the team cards (home and
+   our-story), the contact page's people rows, and every article byline. Each
+   now links to that person. Three rules rather than one because the same link
+   has to sit in three very different surroundings: centred under a portrait,
+   stacked in a left-aligned info row, and inline in a row of byline metadata.
+   All three stay quiet until hover, so a page does not gain two loud links. */
+
+/* Team cards. Sits directly under the role, so name, title and link read as one
+   block of identity before any prose. No margin of its own: .team-role's
+   14px bottom margin already sets the gap, and matching it keeps the home
+   page's cards (no bio) and our-story's (bio below) on the same rhythm. */
+.team-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+/* Only our-story's cards have a bio after the link; it needs the gap back. */
+.team-link + p {
+  margin-top: 14px;
+}
+
+.team-link:hover {
+  color: var(--accent);
+}
+
+.team-link svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Contact page. A third line under the name and role, sibling to
+   .contact-info-value rather than inside it, so it keeps its own size and
+   colour instead of inheriting the value text's. */
+.contact-info-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.contact-info-link:hover {
+  color: var(--accent);
+}
+
+.contact-info-link svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Article byline. The author's name itself is the link, so there is no room
+   for an icon to say so; the underline is what marks it, and colour is held
+   back for hover. Without the underline the name is indistinguishable from the
+   date and read-time sitting beside it, and nobody would ever click it. */
+.byline-author {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--text-muted);
+  transition: color var(--transition), text-decoration-color var(--transition);
+}
+
+.byline-author:hover {
+  color: var(--accent);
+  text-decoration-color: var(--accent);
+}
+
+/* ==============================
    41. Reduced motion & print
    ============================== */
 @media (prefers-reduced-motion: reduce) {

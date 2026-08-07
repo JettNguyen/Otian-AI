@@ -261,8 +261,22 @@
             <div class="acct-section acct-hidden" id="ph-store-section"
                  role="tabpanel" aria-labelledby="ph-tab-store" tabindex="0">
               <div id="ph-store-agent" class="acct-hidden"></div>
-              <input type="search" id="ph-store-search" class="phone-store-search"
-                     placeholder="Search the marketplace" autocomplete="off" autocapitalize="none" />
+              <!--
+                The two ways to narrow the catalog, kept on screen while it is scrolled. Both used
+                to scroll away with it, which meant changing your mind about what you were looking
+                for cost a swipe back up through everything you had just rejected.
+              -->
+              <div class="phone-store-tools">
+                <input type="search" id="ph-store-search" class="phone-store-search"
+                       placeholder="Search the marketplace" autocomplete="off" autocapitalize="none" />
+                <!--
+                  One chip per kind, in the kinds' own colours, each carrying how many it holds
+                  right now. Filled in by renderStoreFilters so the counts follow the search: with
+                  a word typed, this row is the shape of the result before any of it is read.
+                -->
+                <div id="ph-store-filters" class="phone-store-filters" role="group"
+                     aria-label="Filter by kind"></div>
+              </div>
               <div id="ph-store"></div>
             </div>
 

@@ -704,6 +704,29 @@ function renderAgent(agent, journal) {
         (s.enabled ? "" : '<span class="phone-row-tag">Off</span>') +
         "</li>").join("") + "</ul>";
 
+  // Specialists and the personality were in the snapshot and on no screen. The store reads them to
+  // mark what is already installed, so an owner could be shown "Added" against a specialist whose
+  // name appeared nowhere on the page, and the four colours meant nothing while only two of the
+  // four kinds were ever listed. Both sections appear only when there is something in them, the
+  // same rule the app's own tabs follow.
+  const specialists = (agent.specialists || []).length === 0
+    ? ""
+    : kindHeading("specialist", "Specialists", agent.specialists.length) +
+      '<ul class="phone-list">' + agent.specialists.map((s) =>
+        '<li class="phone-row">' +
+        '<span class="phone-dot phone-dot--specialist" aria-hidden="true"></span>' +
+        '<span class="phone-row-name">' + escapeHtml(s.name) + "</span>" +
+        (s.role ? '<span class="phone-row-tag">' + escapeHtml(s.role) + "</span>" : "") +
+        "</li>").join("") + "</ul>";
+
+  const personality = !(agent.personality && agent.personality.name)
+    ? ""
+    : kindHeading("personality", "Personality", 0) +
+      '<ul class="phone-list"><li class="phone-row">' +
+      '<span class="phone-dot phone-dot--personality" aria-hidden="true"></span>' +
+      '<span class="phone-row-name">' + escapeHtml(agent.personality.name) + "</span>" +
+      "</li></ul>";
+
   const routines = (agent.routines || []).length === 0
     ? '<div class="acct-section-body">No routines yet.</div>'
     : '<ul class="phone-list">' + agent.routines.map((r) =>
@@ -726,7 +749,9 @@ function renderAgent(agent, journal) {
     '<div class="phone-agent-name">' + escapeHtml(agent.name) + "</div>" +
     "</div>" +
     "</div>" +
-    '<button class="btn btn-secondary btn-mini" data-agent-run="' + (agent.running ? "stop" : "start") + '" ' +
+    // The app's own green Start and red Stop, not the outlined button everything else here wears.
+    '<button class="btn btn-mini btn-run' + (agent.running ? " btn-run--stop" : "") +
+    '" data-agent-run="' + (agent.running ? "stop" : "start") + '" ' +
     'data-ws="' + ws + '" data-agent="' + id + '">' + (agent.running ? "Stop" : "Start") + "</button>" +
     "</div>" +
     // Under the header rather than in it. Between a 44px face and the Start/Stop button there was
@@ -737,8 +762,24 @@ function renderAgent(agent, journal) {
     // What it has been doing sits above what it has, for the same reason it does in the app: the
     // lists change on the day you set the agent up, and the journal changes every day after.
     renderJournal(journal) +
-    '<div class="phone-group-title">Skills</div>' + skills +
-    '<div class="phone-group-title">Routines</div>' + routines +
+    kindHeading("skill", "Skills", (agent.skills || []).length) + skills +
+    specialists +
+    kindHeading("routine", "Routines", (agent.routines || []).length) + routines +
+    personality +
+    "</div>"
+  );
+}
+
+/** A list heading in its kind's colour, with the count when there is more than a handful.
+ *
+ *  The count is dropped below four, where the list is quicker to count than to read a number
+ *  about, and dropped entirely at zero: "Skills 0" over the words "No skills yet" is the same
+ *  sentence twice, the second time in a way nobody speaks. */
+function kindHeading(kind, label, count) {
+  return (
+    '<div class="phone-group-title phone-group-title--kind" data-kind="' + kind + '">' +
+    escapeHtml(label) +
+    (count > 3 ? '<span class="phone-group-count">' + count + "</span>" : "") +
     "</div>"
   );
 }
@@ -759,6 +800,28 @@ let targetAgent = null;
 
 const KIND_LABEL = {};
 COLLECTIONS.forEach((c) => { KIND_LABEL[c.kind] = c; });
+
+/** The kind chip that is pressed, or "" for all of them. */
+let storeKind = "";
+
+/**
+ * How many of a kind are shown before the rest are held behind a button, while every kind is on
+ * screen at once.
+ *
+ * The store is around a hundred and twenty things. Stacked whole, the four headings sat at roughly
+ * screen 1, screen 5, screen 9 and screen 13 of a phone, which is not a list with sections in it,
+ * it is four lists somebody has to already know the order of. Capped, the headings are all within
+ * a swipe or two of each other, so the shape of the catalog is visible before any of it is read,
+ * and opening one kind is a tap rather than a scroll.
+ *
+ * Five, because four is the number of headings and a group that shows fewer rows than there are
+ * groups reads as a teaser rather than as a list. Picking one kind lifts the cap entirely: that
+ * tap is somebody saying they want to see all of these.
+ */
+const GROUP_PREVIEW = 5;
+
+/** Which groups have been opened out by hand, so re-rendering after a search keeps them open. */
+const storeExpanded = new Set();
 
 /** What this agent already has, so the store can say "Added" instead of offering it twice. */
 function installedKeys(agent) {
@@ -792,14 +855,33 @@ async function renderStore(agent) {
 
   const have = installedKeys(agent);
   const term = ($("ph-store-search") ? $("ph-store-search").value : "").trim().toLowerCase();
-  const matches = catalog.filter((item) => {
-    if (!term) return true;
-    return (item.name + " " + item.description + " " + item.category).toLowerCase().includes(term);
-  });
+  const hits = (item) =>
+    !term || (item.name + " " + item.description + " " + item.category).toLowerCase().includes(term);
+
+  // Searched first, then narrowed by kind, so a chip's count is the number of things that chip
+  // would actually show right now. Counting before the search would put "Skills 47" over a chip
+  // that opens onto two results, which is a number that lies twice: once about the store and once
+  // about the search.
+  const found = catalog.filter(hits);
+  const matches = storeKind ? found.filter((i) => i.kind === storeKind) : found;
+
+  renderStoreFilters(found);
 
   if (matches.length === 0) {
+    // Which of the two filters emptied it, and the one press that undoes that one. A bare "nothing
+    // matches" over a page with a chip pressed leaves somebody searching the whole store from
+    // inside a corner of it.
+    const kindName = storeKind ? (KIND_LABEL[storeKind] || {}).plural || storeKind : "";
     host.innerHTML =
-      '<div class="acct-section-body">Nothing matches &ldquo;' + escapeHtml(term) + "&rdquo;.</div>";
+      '<div class="phone-store-empty">' +
+      (term && storeKind
+        ? "Nothing in " + escapeHtml(kindName.toLowerCase()) + " matches &ldquo;" + escapeHtml(term) +
+          "&rdquo;. <button type=\"button\" data-store-kind=\"\">Search the whole marketplace</button>"
+        : term
+          ? "Nothing matches &ldquo;" + escapeHtml(term) + "&rdquo;."
+          : "Nothing here yet.") +
+      "</div>";
+    bindStoreFilters();
     return;
   }
 
@@ -808,11 +890,29 @@ async function renderStore(agent) {
   host.innerHTML = COLLECTIONS.map((c) => {
     const items = matches.filter((i) => i.kind === c.kind);
     if (items.length === 0) return "";
+    // Every one of them once a kind has been chosen or a group opened out by hand. The cap is for
+    // the view that is showing all four at once, which is the only one it helps.
+    const capped = !storeKind && !storeExpanded.has(c.kind) && items.length > GROUP_PREVIEW;
+    const shown = capped ? items.slice(0, GROUP_PREVIEW) : items;
+    const rest = items.length - shown.length;
     return (
-      '<div class="phone-group-title">' + escapeHtml(c.plural) + "</div>" +
-      '<ul class="phone-list">' + items.map((i) => storeRow(i, have, agent)).join("") + "</ul>"
+      kindHeading(c.kind, c.plural, items.length) +
+      '<ul class="phone-list">' + shown.map((i) => storeRow(i, have, agent)).join("") + "</ul>" +
+      (rest > 0
+        ? '<button type="button" class="phone-store-more" data-kind="' + c.kind +
+          '" data-store-expand="' + c.kind + '">Show the other ' + rest + " " +
+          escapeHtml(rest === 1 ? c.label.toLowerCase() : c.plural.toLowerCase()) + "</button>"
+        : "")
     );
   }).join("");
+
+  bindStoreFilters();
+  host.querySelectorAll("[data-store-expand]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      storeExpanded.add(btn.dataset.storeExpand);
+      void renderStore(agent);
+    });
+  });
 
   host.querySelectorAll("[data-install]").forEach((btn) => {
     btn.addEventListener("click", () =>
@@ -833,6 +933,54 @@ async function renderStore(agent) {
         agent_id: agent.id,
         slug: btn.dataset.uninstall,
       }));
+  });
+}
+
+/**
+ * The kind chips, with what each one holds written on it.
+ *
+ * Counted against what the search has already found rather than against the whole catalog, so the
+ * row doubles as the result of the search: type "calendar" and the chips say how the matches fall
+ * across the four kinds before a single row has been read. A kind with nothing in it is dropped
+ * rather than shown at zero, because a chip that opens onto an empty list is a wasted tap and, at
+ * this width, a wasted tap costs a scroll.
+ */
+function renderStoreFilters(found) {
+  const host = $("ph-store-filters");
+  if (!host) return;
+  const chip = (kind, label, count) =>
+    '<button type="button" class="phone-store-chip' + (storeKind === kind ? " is-active" : "") +
+    '" data-kind="' + kind + '" data-store-kind="' + kind + '"' +
+    (storeKind === kind ? ' aria-pressed="true"' : ' aria-pressed="false"') + ">" +
+    escapeHtml(label) + '<span class="phone-store-chip-count">' + count + "</span></button>";
+
+  host.innerHTML =
+    chip("", "All", found.length) +
+    COLLECTIONS.map((c) => {
+      const n = found.filter((i) => i.kind === c.kind).length;
+      return n === 0 ? "" : chip(c.kind, c.plural, n);
+    }).join("");
+}
+
+/** One handler for the chips and for the way out of an empty result, which is the same action. */
+function bindStoreFilters() {
+  document.querySelectorAll("[data-store-kind]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      storeKind = btn.dataset.storeKind;
+      if (targetAgent) void renderStore(targetAgent);
+      // Back to the top of the list, not to wherever the old one had been scrolled to. Narrowing
+      // while standing halfway down a list lands you halfway down a different, shorter one. To
+      // just under the pinned chips rather than to the top of the window, since the chips are the
+      // thing that was just pressed and the first row belongs directly beneath them. Only when
+      // the list has actually been scrolled past them, so pressing a chip from the top of the
+      // page moves nothing.
+      const list = $("ph-store");
+      const tools = document.querySelector(".phone-store-tools");
+      if (list && tools) {
+        const delta = list.getBoundingClientRect().top - (tools.getBoundingClientRect().bottom + 8);
+        if (delta < -1) window.scrollBy({ top: delta, behavior: "smooth" });
+      }
+    });
   });
 }
 
@@ -867,9 +1015,14 @@ function storeRow(item, have, agent) {
       " connected on your computer.</div>"
     : "";
 
+  const kind = (KIND_LABEL[item.kind] || {}).label || item.kind;
+
   return (
-    '<li class="phone-row phone-store-row">' +
+    '<li class="phone-row phone-store-row" data-kind="' + escapeHtml(item.kind) + '">' +
     '<div class="phone-store-main">' +
+    // Above the name rather than beside it. A row scrolled to on its own has no heading in view,
+    // and what kind of thing this is decides what the Add button is about to do to the agent.
+    '<div class="phone-store-kind">' + escapeHtml(kind) + "</div>" +
     '<div class="phone-row-name">' + escapeHtml(item.name) + "</div>" +
     '<div class="phone-store-desc">' + escapeHtml(item.description) + "</div>" +
     // Price first: what it costs decides whether the rest of the row is worth reading.

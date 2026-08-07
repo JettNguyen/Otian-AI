@@ -53,12 +53,39 @@
   --c-teal-subtle: rgba(62, 154, 146, 0.13);
   --c-plum: #996FBE;
   --c-plum-subtle: rgba(153, 111, 190, 0.13);
+
+  /* The same four kinds again, as text rather than as marks: a darkened ink, and the tint it is
+     meant to be read on. The colours above are pitched for a 7px dot, and none of them is legible
+     as small type (blue reaches 4.2:1 on a white card, plum 3.6:1). Every pair below measures at
+     least 4.5:1 in both themes, which is what lets a chip or a badge carry a word rather than
+     just a hue. Matches --accent-ink above, and --c-green-ink and --c-gold-ink below, which
+     already worked this way. */
+  --c-blue-ink: #3F6DAA;
+  --c-blue-wash: rgba(89, 136, 203, 0.13);
+  --c-teal-ink: #2E7168;
+  --c-teal-wash: rgba(62, 154, 146, 0.13);
+  --c-plum-ink: #7B58A3;
+  --c-plum-wash: rgba(153, 111, 190, 0.13);
   --c-green: #679B55;
   --c-green-subtle: rgba(103, 155, 85, 0.14);
   --c-green-ink: #4E7D3F;
+  --c-red: #BC5145;
+  --c-red-subtle: rgba(188, 81, 69, 0.14);
+  --c-red-ink: #9C3A2F;
   --c-gold: #BB8C33;
   --c-gold-subtle: rgba(187, 140, 51, 0.14);
   --c-gold-ink: #8C6820;
+
+  /* The two solid fills, for a button whose whole job is the colour: Start is green and Stop is
+     red, and both carry white text. Copied value for value from the Archie app, because this is
+     the one control that exists in both places and the phone is often opened next to the computer
+     it is driving. Neither inverts in dark mode there, and neither inverts here: a fill dark
+     enough to hold white text is dark in both themes, and a "light mode" red button on a dark
+     page reads as a different button. */
+  --c-green-fill: #4E7D3F;
+  --c-green-fill-hover: #446E37;
+  --c-red-fill: #BC5145;
+  --c-red-fill-hover: #A84237;
 
   /* Layout */
   --radius: 12px;
@@ -114,9 +141,27 @@
   --c-teal-subtle: rgba(111, 196, 188, 0.16);
   --c-plum: #BE9BDD;
   --c-plum-subtle: rgba(190, 155, 221, 0.16);
+  /* The inks ARE the kind colours here: on a dark card each one already clears 5:1 as text, so
+     darkening them would only make them harder to read. The washes drop to 8%, because a tint is
+     lightening the ground toward the ink's own hue on this side and 16% pulled blue to 4.13:1 and
+     plum to 4.01:1 against the very ink meant to sit on them. 8% measures 4.66:1 at worst. */
+  --c-blue-ink: #86AEE4;
+  --c-blue-wash: rgba(134, 174, 228, 0.08);
+  --c-teal-ink: #6FC4BC;
+  --c-teal-wash: rgba(111, 196, 188, 0.08);
+  --c-plum-ink: #BE9BDD;
+  --c-plum-wash: rgba(190, 155, 221, 0.08);
   --c-green: #8FBF7C;
   --c-green-subtle: rgba(143, 191, 124, 0.16);
   --c-green-ink: #8FBF7C;
+  --c-red: #E89B8E;
+  --c-red-subtle: rgba(232, 155, 142, 0.16);
+  --c-red-ink: #E89B8E;
+  /* The fills lift a shade rather than inverting: see the note beside them in the light block. */
+  --c-green-fill: #4E7440;
+  --c-green-fill-hover: #5C8A4C;
+  --c-red-fill: #B0503F;
+  --c-red-fill-hover: #BD5E4E;
   --c-gold: #DCAF57;
   --c-gold-subtle: rgba(220, 175, 87, 0.16);
   --c-gold-ink: #DCAF57;
@@ -7050,6 +7095,40 @@ html[data-theme="dark"] .booking-container iframe {
   margin: 18px 0 6px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.03em;
   text-transform: uppercase; color: var(--text-muted);
 }
+/* A heading over a list of one kind wears that kind's colour, so the eye can find "the teal block"
+   on a page it has scrolled past twice without reading a single heading. Set through one variable
+   so the dot, the heading, and the badge on every row inside it are provably the same colour. */
+.phone-group-title--kind {
+  display: flex; align-items: center; gap: 7px;
+  /* The ink, not the kind colour. This is 12px uppercase, which is small text and owes 4.5:1, and
+     the kind colours are pitched for the dot beside it rather than for words. */
+  color: var(--kind-ink, var(--text-muted));
+}
+.phone-group-title--kind::before {
+  content: ""; width: 7px; height: 7px; border-radius: 999px;
+  background: var(--kind-color, var(--text-muted));
+}
+.phone-group-count {
+  margin-left: auto; font-weight: 600; color: var(--text-muted);
+  font-variant-numeric: tabular-nums; letter-spacing: 0;
+}
+/* One kind, three values: the colour for a dot or a rule, the tint it sits on, and the ink that
+   stays readable on that tint. The third is why this is a block rather than one variable. The
+   kind colours are pitched for a 7px dot and a 1px line, and at 4.2:1 (blue) and 3.6:1 (plum) on
+   a white card they are not text: a chip filled with plum under dark ink measures 3.88:1, which
+   is the treatment the Browse page's type tabs use and is not one to copy into anything smaller. */
+[data-kind="skill"] {
+  --kind-color: var(--accent); --kind-wash: var(--accent-subtle); --kind-ink: var(--accent-ink);
+}
+[data-kind="specialist"] {
+  --kind-color: var(--c-blue); --kind-wash: var(--c-blue-wash); --kind-ink: var(--c-blue-ink);
+}
+[data-kind="routine"] {
+  --kind-color: var(--c-teal); --kind-wash: var(--c-teal-wash); --kind-ink: var(--c-teal-ink);
+}
+[data-kind="personality"] {
+  --kind-color: var(--c-plum); --kind-wash: var(--c-plum-wash); --kind-ink: var(--c-plum-ink);
+}
 .phone-list { list-style: none; margin: 0; padding: 0; }
 .phone-row {
   display: flex; align-items: center; gap: 10px;
@@ -7069,8 +7148,99 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
 }
 .phone-store-search:focus { border-color: var(--accent); }
+
+/* ── Narrowing a catalog of a hundred-odd things on a phone ────────────────────────────────────
+   Search alone was the whole of it, which works for somebody who already knows the name of the
+   thing they want and does nothing at all for somebody browsing: four kinds stacked into one
+   scroll, no way to see how much was below, and no way to say "just the routines".
+
+   Same three moves the Browse page makes, at phone size. A row of kind chips in the kinds' own
+   colours, each carrying its count so the size of the thing is known before it is opened. Then,
+   while every kind is showing, each group is capped and says how many it is holding back, so the
+   whole store is one screen of headings you can steer by instead of a scroll with no landmarks. */
+/* The search box and the chips, pinned while the catalog scrolls under them.
+   Offset by the nav, which is `position: fixed` and therefore takes no space in the layout: a bar
+   stuck at `top: 0` would pin itself underneath it and be invisible for the whole scroll. The
+   safe-area inset is added for the home-screen app, where the nav grows to clear the clock.
+   Bleeds to the card's edges and puts its own padding back, so a row passing beneath it is covered
+   all the way across rather than sliding through a 20px gutter on each side. */
+.phone-store-tools {
+  position: sticky;
+  top: calc(var(--nav-height) + env(safe-area-inset-top));
+  z-index: 2;
+  background: var(--bg-card);
+  margin-inline: calc(var(--phone-card-pad, 0px) * -1);
+  padding-inline: var(--phone-card-pad, 0px);
+  padding-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.phone-store-filters {
+  display: flex; gap: 7px; overflow-x: auto; margin: 0 0 10px;
+  padding-bottom: 4px; scrollbar-width: none;
+  /* Bleeds to the card's edge so a chip scrolled half off reads as "there is more this way"
+     rather than as a chip that has been cut in half by the layout. */
+  margin-inline: calc(var(--phone-card-pad, 0px) * -1);
+  padding-inline: var(--phone-card-pad, 0px);
+}
+.phone-store-filters::-webkit-scrollbar { display: none; }
+.phone-store-chip {
+  flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+  min-height: 36px; padding: 7px 13px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-card);
+  color: var(--text-secondary);
+  font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.phone-store-chip:hover { border-color: var(--kind-ink, var(--accent-ink)); color: var(--text-primary); }
+/* Chosen: the kind's tint behind its ink, ringed in the kind's own colour. Not the solid fill the
+   Browse page's type tabs use. At 12.8px this is small text, so it owes 4.5:1, and dark ink on a
+   solid plum or blue chip measures 3.9 and 4.2. Ink on tint measures 4.6 at worst, in both
+   themes, and it stays a clearly different thing from an unchosen chip: colour, ring, and fill
+   all change at once. */
+.phone-store-chip.is-active {
+  background: var(--kind-wash, var(--accent-subtle));
+  border-color: var(--kind-color, var(--accent));
+  color: var(--kind-ink, var(--accent-ink));
+  box-shadow: inset 0 0 0 1px var(--kind-color, var(--accent));
+}
+/* The count is a second-order fact on a chip whose word is the point, so it steps back without
+   changing hue. Opacity rather than a lighter colour: it has three different grounds to sit on
+   (card, tint, hover) and one value that works on all of them is worth more than three that are
+   each perfect. Kept at 0.7 so the dimmest case still clears 4.5:1 on its tint. */
+.phone-store-chip-count { font-weight: 600; opacity: 0.7; font-variant-numeric: tabular-nums; }
+
+/* "Show the other 41". A full-width row rather than a link at the end of the list, because on a
+   phone the end of a list is a place your thumb is already resting. */
+.phone-store-more {
+  display: block; width: 100%; margin-top: 8px; padding: 10px;
+  border-radius: var(--radius-sm); border: 1px dashed var(--field-border);
+  background: transparent; color: var(--kind-ink, var(--text-secondary));
+  font-family: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer;
+  transition: border-color var(--transition), background var(--transition);
+}
+.phone-store-more:hover { border-color: var(--kind-color, var(--accent)); background: var(--surface-hover); }
+
+/* Nothing matched. Says which of the two filters is responsible, since a search inside a kind can
+   come up empty while the same words would have found something one chip to the left. */
+.phone-store-empty { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; padding: 14px 0; }
+.phone-store-empty button {
+  background: none; border: none; padding: 0; font: inherit; color: var(--accent);
+  text-decoration: underline; cursor: pointer;
+}
+
 .phone-store-row { align-items: flex-start; gap: 12px; }
 .phone-store-main { flex: 1; min-width: 0; }
+/* The kind, on the row itself. The heading above says it too, but a row read on its own after a
+   scroll has no heading in view, and "is this a routine or a skill" changes what the Add button
+   is about to do. */
+.phone-store-kind {
+  display: inline-block; margin-bottom: 3px; padding: 2px 7px; border-radius: 999px;
+  background: var(--kind-wash, var(--surface-soft-strong));
+  color: var(--kind-ink, var(--text-secondary));
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
+}
 .phone-store-desc { margin-top: 2px; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; }
 .phone-store-note { margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; line-height: 1.45; }
 .phone-store-row .btn-mini { flex-shrink: 0; }
@@ -7124,8 +7294,26 @@ html[data-theme="dark"] .booking-container iframe {
 #ph-install {
   background: var(--bg-card); border: 1px solid var(--line-soft);
   border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px 20px;
+  /* Published so a strip inside the card can undo it and run to the card's own edge. */
+  --phone-card-pad: 20px;
 }
 #ph-agents > .acct-section + .acct-section { margin-top: 16px; }
+
+/* Start and Stop, the same two fills as the app's own switch (see the tokens beside --c-green-fill).
+   These were both an outlined .btn-secondary, so the one control on the page that changes whether
+   the agent is answering looked exactly like Refresh and Unpair. It is also the control most often
+   pressed with the computer in the same room, where the phone saying Start in grey beside a screen
+   saying Start in green is two apps rather than one.
+
+   White text on both, and not --text-on-accent: that token is the app's dark ink for its light
+   terracotta, and these two fills are dark. */
+.btn-run {
+  background: var(--c-green-fill); color: #FFFFFF; border: none;
+}
+.btn-run:hover { background: var(--c-green-fill-hover); }
+.btn-run--stop { background: var(--c-red-fill); }
+.btn-run--stop:hover { background: var(--c-red-fill-hover); }
+.btn-run.is-busy::after { border-color: #FFFFFF; border-right-color: transparent; }
 
 /* Agent header: the face leads, name and purpose beside it, Start/Stop held to the right. */
 .phone-agent-id { display: flex; align-items: center; gap: 14px; min-width: 0; }
@@ -7159,10 +7347,14 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 10px; font-size: 0.82rem; line-height: 1.55; color: var(--text-secondary);
 }
 
-/* Tier colour the quiet Archie way: a small leading dot, terracotta for skills, teal for routines. */
+/* Add-on colour the quiet Archie way: a small leading dot in the kind's own colour. The four are
+   the same four everywhere, which is the whole point of using a colour at all: terracotta skill,
+   blue specialist, teal routine, plum personality, in the app, on the Browse page, and here. */
 .phone-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 999px; }
 .phone-dot--skill { background: var(--accent); }
+.phone-dot--specialist { background: var(--c-blue); }
 .phone-dot--routine { background: var(--c-teal); }
+.phone-dot--personality { background: var(--c-plum); }
 /* The journal's dot carries the outcome, so unlike the two above it is not one colour: grey for an
    ordinary finished job, and a real colour only where something wants reading. */
 .phone-dot--journal { background: var(--border); }

@@ -226,11 +226,15 @@
 
         <div class="mt-48">
           <figure class="explain-figure fade-up delay-3">
-            <svg class="explain-svg--desktop" viewBox="0 0 600 410" role="img" aria-labelledby="wyn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-              <title id="wyn-t">The whole list is four things: a computer you can leave on, an account with an AI company, a chat app so your agent can reach you anywhere, and an Otian account with a plan. Below a divider marked &ldquo;not on the list&rdquo; sit three things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
+            <svg class="explain-svg--desktop" viewBox="0 0 600 446" role="img" aria-labelledby="wyn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+              <title id="wyn-t">The whole list is three things: a computer you can leave on, an account with an AI company, and an Otian account with a plan. Below them, marked as something to add when you want it, sits a chat app, so your agent can reach you anywhere. Below a second divider marked &ldquo;not on the list&rdquo; sit three things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
               <style>
                 .wyn-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.5}
                 .wyn-tickbg{fill:var(--accent)}
+                /* Outlined rather than filled, for the one item that is wanted rather than needed.
+                   Same size and same column as the ticks, so the list still reads as one list. */
+                .wyn-plus-ring{fill:none;stroke:var(--accent);stroke-width:1.6}
+                .wyn-plus{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
                 .wyn-tickmk{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
                 .wyn-brace{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
                 .wyn-big{fill:var(--accent);font-size:46px;font-weight:700;text-anchor:middle}
@@ -259,12 +263,18 @@
                 }
               </style>
 
-              <!-- the list, and how short it is -->
+              <!-- the list, and how short it is.
+
+                   Three, not four. The chat app was inside this brace until 2026-08-06 and stopped
+                   being a requirement when Archie gained a conversation of its own; it sits below
+                   the brace now, with an outlined plus rather than a filled tick, because "you will
+                   want this" and "you cannot start without this" are different promises and a
+                   diagram that draws them identically makes the smaller one into a barrier. -->
               <g class="wyn-row wy0">
-                <text class="wyn-big" x="38" y="140">4</text>
-                <text class="wyn-biglbl" x="38" y="160">THINGS</text>
+                <text class="wyn-big" x="38" y="110">3</text>
+                <text class="wyn-biglbl" x="38" y="130">THINGS</text>
               </g>
-              <path class="wyn-brace" d="M88 14 H80 Q76 14 76 18 V242 Q76 246 80 246 H88"/>
+              <path class="wyn-brace" d="M88 14 H80 Q76 14 76 18 V182 Q76 186 80 186 H88"/>
 
               <g class="wyn-row wy1">
                 <rect class="wyn-in" x="96" y="14" width="488" height="52" rx="12"/>
@@ -288,56 +298,63 @@
 
               <g class="wyn-row wy3">
                 <rect class="wyn-in" x="96" y="134" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="156">A chat app, to be reached anywhere</text>
-                <text class="wyn-sub" x="154" y="172">Telegram, Discord, Slack, Signal or Matrix</text>
+                <text class="wyn-name" x="154" y="156">An Otian account, and a plan</text>
+                <text class="wyn-sub" x="154" y="172">$149 a year, or $19 a month</text>
               </g>
               <g class="wyn-tick wt3">
                 <circle class="wyn-tickbg" cx="124" cy="160" r="14"/>
                 <path class="wyn-tickmk" d="M115.3 160.9 L121.4 167 L131 153.9"/>
               </g>
 
+              <!-- outside the brace: wanted, not required -->
+              <line class="wyn-div" x1="96" y1="212" x2="300" y2="212"/>
+              <line class="wyn-div" x1="380" y1="212" x2="584" y2="212"/>
+              <text class="wyn-divlbl" x="340" y="216">and then, when you want it</text>
+
               <g class="wyn-row wy4">
-                <rect class="wyn-in" x="96" y="194" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="216">An Otian account, and a plan</text>
-                <text class="wyn-sub" x="154" y="232">$149 a year, or $19 a month</text>
+                <rect class="wyn-in" x="96" y="228" width="488" height="52" rx="12"/>
+                <text class="wyn-name" x="154" y="250">A chat app, to be reached anywhere</text>
+                <text class="wyn-sub" x="154" y="266">Telegram, Discord, Slack, Signal or Matrix</text>
               </g>
               <g class="wyn-tick wt4">
-                <circle class="wyn-tickbg" cx="124" cy="220" r="14"/>
-                <path class="wyn-tickmk" d="M115.3 220.9 L121.4 227 L131 213.9"/>
+                <circle class="wyn-plus-ring" cx="124" cy="254" r="13.5"/>
+                <path class="wyn-plus" d="M124 247.5 V260.5 M117.5 254 H130.5"/>
               </g>
 
               <!-- and what conspicuously is not on it -->
-              <line class="wyn-div" x1="96" y1="270" x2="294" y2="270"/>
-              <line class="wyn-div" x1="386" y1="270" x2="584" y2="270"/>
-              <text class="wyn-divlbl" x="340" y="274">not on the list</text>
+              <line class="wyn-div" x1="96" y1="306" x2="294" y2="306"/>
+              <line class="wyn-div" x1="386" y1="306" x2="584" y2="306"/>
+              <text class="wyn-divlbl" x="340" y="310">not on the list</text>
 
               <g class="wyn-off wo1">
-                <rect class="wyn-outbox" x="96" y="286" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="303" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="307.5" x2="128.5" y2="298.5"/>
-                <text class="wyn-offname" x="150" y="307">Anything to install on your phone</text>
-                <text class="wyn-offsub" x="568" y="307">your chat app is already there</text>
+                <rect class="wyn-outbox" x="96" y="322" width="488" height="34" rx="10"/>
+                <circle class="wyn-no" cx="124" cy="339" r="9"/>
+                <line class="wyn-noslash" x1="119.5" y1="343.5" x2="128.5" y2="334.5"/>
+                <text class="wyn-offname" x="150" y="343">Anything to install on your phone</text>
+                <text class="wyn-offsub" x="568" y="343">your chat app is already there</text>
               </g>
               <g class="wyn-off wo2">
-                <rect class="wyn-outbox" x="96" y="324" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="341" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="345.5" x2="128.5" y2="336.5"/>
-                <text class="wyn-offname" x="150" y="345">A new computer</text>
-                <text class="wyn-offsub" x="568" y="345">use the one you have</text>
+                <rect class="wyn-outbox" x="96" y="360" width="488" height="34" rx="10"/>
+                <circle class="wyn-no" cx="124" cy="377" r="9"/>
+                <line class="wyn-noslash" x1="119.5" y1="381.5" x2="128.5" y2="372.5"/>
+                <text class="wyn-offname" x="150" y="381">A new computer</text>
+                <text class="wyn-offsub" x="568" y="381">use the one you have</text>
               </g>
               <g class="wyn-off wo3">
-                <rect class="wyn-outbox" x="96" y="362" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="379" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="383.5" x2="128.5" y2="374.5"/>
-                <text class="wyn-offname" x="150" y="379">A minimum spend</text>
-                <text class="wyn-offsub" x="568" y="379">you pay for what it does</text>
+                <rect class="wyn-outbox" x="96" y="398" width="488" height="34" rx="10"/>
+                <circle class="wyn-no" cx="124" cy="415" r="9"/>
+                <line class="wyn-noslash" x1="119.5" y1="419.5" x2="128.5" y2="410.5"/>
+                <text class="wyn-offname" x="150" y="415">A minimum spend</text>
+                <text class="wyn-offsub" x="568" y="415">you pay for what it does</text>
               </g>
             </svg>
-            <svg class="explain-svg--mobile" viewBox="0 0 340 438" role="img" aria-labelledby="wynm-t" xmlns="http://www.w3.org/2000/svg">
-              <title id="wynm-t">The whole list is four things: a computer you can leave on, an account with an AI company, a chat app so your agent can reach you anywhere, and an Otian account with a plan. Below a divider marked &ldquo;not on the list&rdquo; sit three things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
+            <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="wynm-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="wynm-t">The whole list is three things: a computer you can leave on, an account with an AI company, and an Otian account with a plan. Below them, marked as something to add when you want it, sits a chat app, so your agent can reach you anywhere. Below a second divider marked &ldquo;not on the list&rdquo; sit three things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
               <style>
                 .wynm-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
                 .wynm-tickbg{fill:var(--accent)}
+                .wynm-plus-ring{fill:none;stroke:var(--accent);stroke-width:1.6}
+                .wynm-plus{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
                 .wynm-tickmk{fill:none;stroke:var(--text-on-accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
                 .wynm-brace{fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
                 .wynm-big{fill:var(--accent);font-size:38px;font-weight:700;text-anchor:middle}
@@ -367,10 +384,10 @@
               </style>
 
               <g class="wynm-row wym0">
-                <text class="wynm-big" x="24" y="136">4</text>
-                <text class="wynm-biglbl" x="24" y="156">THINGS</text>
+                <text class="wynm-big" x="24" y="106">3</text>
+                <text class="wynm-biglbl" x="24" y="126">THINGS</text>
               </g>
-              <path class="wynm-brace" d="M60 14 H54 Q48 14 48 20 V242 Q48 248 54 248 H60"/>
+              <path class="wynm-brace" d="M60 14 H54 Q48 14 48 20 V182 Q48 188 54 188 H60"/>
 
               <g class="wynm-row wym1">
                 <rect class="wynm-in" x="64" y="14" width="268" height="54" rx="12"/>
@@ -394,51 +411,56 @@
 
               <g class="wynm-row wym3">
                 <rect class="wynm-in" x="64" y="134" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="156">A chat app, to be reached</text>
-                <text class="wynm-sub" x="110" y="172">Telegram, Discord, Slack, Signal, Matrix</text>
+                <text class="wynm-name" x="110" y="156">An Otian account, and a plan</text>
+                <text class="wynm-sub" x="110" y="172">$149 a year, or $19 a month</text>
               </g>
               <g class="wynm-tick wtm3">
                 <circle class="wynm-tickbg" cx="88" cy="161" r="13"/>
                 <path class="wynm-tickmk" d="M79.9 161.8 L85.6 167.5 L94.5 155.3"/>
               </g>
 
+              <!-- outside the brace: wanted, not required -->
+              <line class="wynm-div" x1="64" y1="212" x2="140" y2="212"/>
+              <line class="wynm-div" x1="256" y1="212" x2="332" y2="212"/>
+              <text class="wynm-divlbl" x="198" y="216">when you want it</text>
+
               <g class="wynm-row wym4">
-                <rect class="wynm-in" x="64" y="194" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="216">An Otian account, and a plan</text>
-                <text class="wynm-sub" x="110" y="232">$149 a year, or $19 a month</text>
+                <rect class="wynm-in" x="64" y="228" width="268" height="54" rx="12"/>
+                <text class="wynm-name" x="110" y="250">A chat app, to be reached</text>
+                <text class="wynm-sub" x="110" y="266">Telegram, Discord, Slack, Signal, Matrix</text>
               </g>
               <g class="wynm-tick wtm4">
-                <circle class="wynm-tickbg" cx="88" cy="221" r="13"/>
-                <path class="wynm-tickmk" d="M79.9 221.8 L85.6 227.5 L94.5 215.3"/>
+                <circle class="wynm-plus-ring" cx="88" cy="255" r="13"/>
+                <path class="wynm-plus" d="M88 248.5 V261.5 M81.5 255 H94.5"/>
               </g>
 
-              <line class="wynm-div" x1="64" y1="270" x2="153" y2="270"/>
-              <line class="wynm-div" x1="243" y1="270" x2="332" y2="270"/>
-              <text class="wynm-divlbl" x="198" y="274">not on the list</text>
+              <line class="wynm-div" x1="64" y1="306" x2="153" y2="306"/>
+              <line class="wynm-div" x1="243" y1="306" x2="332" y2="306"/>
+              <text class="wynm-divlbl" x="198" y="310">not on the list</text>
 
               <g class="wynm-off wom1">
-                <rect class="wynm-outbox" x="64" y="286" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="307" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="311.2" x2="92.2" y2="302.8"/>
-                <text class="wynm-offname" x="110" y="304">Anything to install on your phone</text>
-                <text class="wynm-offsub" x="110" y="318">your chat app is already there</text>
+                <rect class="wynm-outbox" x="64" y="322" width="268" height="42" rx="10"/>
+                <circle class="wynm-no" cx="88" cy="343" r="8.5"/>
+                <line class="wynm-noslash" x1="83.8" y1="347.2" x2="92.2" y2="338.8"/>
+                <text class="wynm-offname" x="110" y="340">Anything to install on your phone</text>
+                <text class="wynm-offsub" x="110" y="354">your chat app is already there</text>
               </g>
               <g class="wynm-off wom2">
-                <rect class="wynm-outbox" x="64" y="334" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="355" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="359.2" x2="92.2" y2="350.8"/>
-                <text class="wynm-offname" x="110" y="352">A new computer</text>
-                <text class="wynm-offsub" x="110" y="366">use the one you have</text>
+                <rect class="wynm-outbox" x="64" y="370" width="268" height="42" rx="10"/>
+                <circle class="wynm-no" cx="88" cy="391" r="8.5"/>
+                <line class="wynm-noslash" x1="83.8" y1="395.2" x2="92.2" y2="386.8"/>
+                <text class="wynm-offname" x="110" y="388">A new computer</text>
+                <text class="wynm-offsub" x="110" y="402">use the one you have</text>
               </g>
               <g class="wynm-off wom3">
-                <rect class="wynm-outbox" x="64" y="382" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="403" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="407.2" x2="92.2" y2="398.8"/>
-                <text class="wynm-offname" x="110" y="400">A minimum spend</text>
-                <text class="wynm-offsub" x="110" y="414">you pay for what it does</text>
+                <rect class="wynm-outbox" x="64" y="418" width="268" height="42" rx="10"/>
+                <circle class="wynm-no" cx="88" cy="439" r="8.5"/>
+                <line class="wynm-noslash" x1="83.8" y1="443.2" x2="92.2" y2="434.8"/>
+                <text class="wynm-offname" x="110" y="436">A minimum spend</text>
+                <text class="wynm-offsub" x="110" y="450">you pay for what it does</text>
               </g>
             </svg>
-            <figcaption>Four things, and then the list stops. Everything under the divider is something people expect to need and don&rsquo;t.</figcaption>
+            <figcaption>Three things, then one worth adding, and then the list stops. Everything under the last divider is something people expect to need and don&rsquo;t.</figcaption>
           </figure>
         </div>
       </div>

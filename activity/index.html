@@ -230,6 +230,7 @@
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { bindStatusToast } from "../js/status-toast.js";
+    import { decideAccess } from "../js/access.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
     import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     const firebaseConfig = {
@@ -299,12 +300,17 @@
 
     async function render(user) {
       // Ownership / subscription from the user doc.
-      let tier = "none", subStatus = "";
+      let account = {};
       try {
         const snap = await getDoc(doc(db, "users", user.uid));
-        if (snap.exists()) { const d = snap.data() || {}; tier = d.access_tier || "none"; subStatus = d.subscription_status || ""; }
+        if (snap.exists()) account = snap.data() || {};
       } catch (e) {}
-      const owns = tier === "admin" || tier === "client" || tier === "lifetime" || (tier === "subscriber" && subStatus === "active");
+      // One decision, mirroring the app's own (see js/access.js). Three things were wrong here at
+      // once: `licence` was ignored, the `access_tiers` array was never read, and only "active"
+      // counted as a live subscription. The last one meant a customer whose card bounced on a
+      // Saturday read "You don't have a plan yet" here, clicked through, and read "Your plan is
+      // active" on the very next page. The app let them in the whole time.
+      const { allowed: owns } = decideAccess(account);
       setPill("own-pill", owns ? "Owned" : "Not yet", owns);
       $("own-body").innerHTML = owns
         ? "You have access to Archie. <a href=\"../archie/install/\">Download it</a> and sign in with this account."

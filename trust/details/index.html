@@ -161,7 +161,7 @@
         <div class="trust-limits fade-up delay-2">
 
           <div class="trust-limit" id="approval-gate">
-            <h3>Your agent asks before it acts, and it only helps if you read before you approve.</h3>
+            <h3>Your agent asks before it changes anything, and that only helps if you read before you approve.</h3>
             <p>When your agent wants to change a calendar you&rsquo;ve connected (create, move, or <strong>delete</strong> an event) or send an email, it doesn&rsquo;t just do it. It proposes the exact action and carries it out only after you approve that specific one, enforced in the app itself rather than by politely instructing the AI. <strong>It proposes; you dispose.</strong></p>
             <p>Here is the honest limit that remains. The gate stops your agent from doing something you didn&rsquo;t approve. It cannot stop it from proposing the <em>wrong</em> thing: if it misreads what you wanted and you approve without looking, it will carry out the mistake faithfully. Read what it hands you before you say yes, the way you&rsquo;d check a draft before signing it.</p>
             <p>Two things it still cannot do at all: it <strong>cannot spend money or buy anything</strong> (that ability doesn&rsquo;t exist in the app) and it <strong>can only ever message you</strong>, never your team&rsquo;s channels or anyone else.</p>
@@ -231,7 +231,8 @@
               <h3>Here is exactly what you should see.</h3>
               <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
               <ul class="trust-hosts">
-                <li><code>api.anthropic.com</code><span>, or <code>api.openai.com</code>. Your agent thinking, on your key.</span></li>
+                <li><code>api.anthropic.com</code>, <code>api.openai.com</code>, <code>api.groq.com</code>,<br /><code>api.x.ai</code>, or <code>generativelanguage.googleapis.com</code><span>: your agent thinking, on your key. Whichever one of the five you connected, and only that one.</span></li>
+                <li><code>archie-4f35.onrender.com</code><span>: our billing service, and the proxy for the free credits you start with. Once your own key is in, your agent stops going near it.</span></li>
                 <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and plan check. Carries your account ID, nothing else.</span></li>
                 <li><code>otianai.com</code><span>: <strong>once</strong>, checking for an update. Carries nothing about you.</span></li>
                 <li><code>github.com</code><span>: only if an update is downloading.</span></li>

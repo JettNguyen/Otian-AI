@@ -115,7 +115,7 @@ them, and we never take a cut of either.
 | | Price | |
 |---|---|---|
 | **The app** | **$149** a year, or **$19** a month | A year is $79 less than twelve months bought one at a time. Change or stop it any time. |
-| **Add-ons** | **Free** to start | Every kind ships with free built-ins. Premium ones are bought once and stay bought. |
+| **Add-ons** | **Free** | Every add-on in the catalog is `price_cents: 0`. The paid path exists (`require_owned_if_paid`) and a purchase would be permanent, but nothing uses it today. |
 | **The AI itself** | **Pay as you go** | Your own account with Anthropic, OpenAI, Google, Groq or xAI. It bills you directly. |
 
 The third cost is the one that varies, so the [pricing page](https://otianai.com/archie/pricing/)

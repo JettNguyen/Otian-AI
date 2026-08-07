@@ -625,8 +625,12 @@ function journalRow(entry) {
     escapeHtml(entry.title) +
     (entry.detail ? '<span class="phone-journal-detail">' + escapeHtml(entry.detail) + "</span>" : "") +
     "</span>" +
+    // Outcome and time travel together on their own line under the title. Beside it they were two
+    // unshrinkable columns squeezing a phone-width row down to a word per line.
+    '<span class="phone-journal-meta">' +
     (look.tag ? '<span class="phone-row-tag">' + look.tag + "</span>" : "") +
     '<span class="phone-journal-when">' + escapeHtml(ago(new Date(entry.started_at))) + "</span>" +
+    "</span>" +
     "</li>"
   );
 }
@@ -720,12 +724,14 @@ function renderAgent(agent, journal) {
     "</span>" +
     "<div>" +
     '<div class="phone-agent-name">' + escapeHtml(agent.name) + "</div>" +
-    (agent.purpose ? '<div class="acct-email">' + escapeHtml(agent.purpose) + "</div>" : "") +
     "</div>" +
     "</div>" +
     '<button class="btn btn-secondary btn-mini" data-agent-run="' + (agent.running ? "stop" : "start") + '" ' +
     'data-ws="' + ws + '" data-agent="' + id + '">' + (agent.running ? "Stop" : "Start") + "</button>" +
     "</div>" +
+    // Under the header rather than in it. Between a 44px face and the Start/Stop button there was
+    // about a third of a phone's width left to wrap a sentence in.
+    (agent.purpose ? '<div class="phone-agent-purpose">' + escapeHtml(agent.purpose) + "</div>" : "") +
     renderChatCard(agent) +
     needs +
     // What it has been doing sits above what it has, for the same reason it does in the app: the
@@ -840,9 +846,17 @@ function storeRow(item, have, agent) {
     ? '<button class="btn btn-secondary btn-mini" data-uninstall="' + escapeHtml(item.id) +
       '" data-kind="' + escapeHtml(item.kind) + '">Remove</button>'
     : paid
-      ? '<span class="phone-row-tag">' + escapeHtml(priceLabel(item.price_cents)) + ", on your computer</span>"
+      ? ""
       : '<button class="btn btn-primary btn-mini" data-install="' + escapeHtml(item.id) +
         '" data-kind="' + escapeHtml(item.kind) + '">Add</button>';
+
+  // The price is a sentence, so it goes under the description with the other sentences rather than
+  // in the column the Add button would have used. Held there it was wider than the button it stood
+  // in for, and it took half the row away from the words explaining what the thing does.
+  const priceNote = !installed && paid
+    ? '<div class="phone-store-note phone-store-price">' + escapeHtml(priceLabel(item.price_cents)) +
+      ". Add this one on your computer.</div>"
+    : "";
 
   // What it will still want after installing, said before the tap rather than discovered after.
   const needs = (item.required_integrations || [])
@@ -858,6 +872,8 @@ function storeRow(item, have, agent) {
     '<div class="phone-store-main">' +
     '<div class="phone-row-name">' + escapeHtml(item.name) + "</div>" +
     '<div class="phone-store-desc">' + escapeHtml(item.description) + "</div>" +
+    // Price first: what it costs decides whether the rest of the row is worth reading.
+    priceNote +
     needsNote +
     "</div>" +
     action +

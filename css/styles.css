@@ -6919,7 +6919,20 @@ html[data-theme="dark"] .booking-container iframe {
    .acct-* and .pill classes already defined here, so the two screens stay recognisably one app
    and there is one place to restyle both. */
 .phone-h2 { font-size: 1.05rem; font-weight: 600; margin: 0 0 10px; text-align: center; }
+/* This page's <section> loses its own side padding, because .container inside it already carries
+   24px and the two together were spending 44px a side. On a 390px phone that left the cards 302px
+   wide, and every row inside them (a name beside a button, a title beside a timestamp) was fighting
+   for the leftovers. Vertical padding is cut with it: the hero above already ends in 72px of space
+   and a rule, so a further 64px was a screenful of nothing before the first card. */
+.section--phone { padding-left: 0; padding-right: 0; }
+@media (max-width: 720px) {
+  .section--phone { padding-top: 32px; }
+}
+/* These are numbered steps, and the order IS the instruction. The reset at the top of this file
+   strips markers from every ul and ol, so without this they render as an unmarked stack of
+   sentences and "do this third" reads exactly like "do this first". */
 .phone-steps {
+  list-style: decimal;
   margin: 14px 0 0; padding-left: 20px; color: var(--text-secondary);
   font-size: 0.9rem; line-height: 1.6;
 }
@@ -7061,6 +7074,10 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-store-desc { margin-top: 2px; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.5; }
 .phone-store-note { margin-top: 4px; color: var(--text-muted); font-size: 0.75rem; line-height: 1.45; }
 .phone-store-row .btn-mini { flex-shrink: 0; }
+/* A paid add-on's price is a sentence, not a button, and held on the right it was taking half the
+   row: "$49, on your computer" is wider than the Add button it replaces, so the description beside
+   it wrapped to four words a line. It reads as the last line of the item instead. */
+.phone-store-price { color: var(--text-secondary); }
 #ph-store-agent { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 .phone-store-agent-label { color: var(--text-muted); font-size: 0.78rem; }
 #ph-store-agent select {
@@ -7089,11 +7106,17 @@ html[data-theme="dark"] .booking-container iframe {
   display: flex; justify-content: space-between; gap: 12px;
   margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--border);
 }
-/* The agents list is a plain wrapper, so nothing separated it from the status card above it. */
-#ph-agents { margin-top: 14px; }
-/* These reuse .acct-email but hold sentences, not an address, so break at words, not mid-character. */
+/* The agents list is a plain wrapper, so nothing separated it from the status card above it. The
+   marketplace panel needs the same, and for the same reason: it is the other half of the same
+   switch, and with no margin of its own it sat flush against the tab bar while the agents list sat
+   14px below it. Switching tabs made the card jump. One number, so it cannot drift again, and 16px
+   to match every other gap in the stack. */
+#ph-agents,
+#ph-store-section { margin-top: 16px; }
+/* .acct-email's break-anywhere is right for an address and wrong for these, which are sentences:
+   break at words, and only break inside one when a word genuinely cannot fit. */
 #ph-status-detail,
-#ph-agents .acct-email { word-break: normal; overflow-wrap: anywhere; }
+.phone-agent-purpose { word-break: normal; overflow-wrap: anywhere; }
 
 /* ── Phone dashboard, dressed to echo the Archie app: warm white cards, an illustrated face on
    every agent with a lit status dot, a serif name, and the app's quiet tier colours. ── */
@@ -7129,6 +7152,12 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-primary); line-height: 1.2;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+/* What the agent is for, under its own header rather than inside it. Beside the face and the
+   Start/Stop button it had about 126px of a 390px phone to wrap in, so a one-line purpose came out
+   six words tall and the card opened with a ribbon of text. Full width, it is one or two lines. */
+.phone-agent-purpose {
+  margin-top: 10px; font-size: 0.82rem; line-height: 1.55; color: var(--text-secondary);
+}
 
 /* Tier colour the quiet Archie way: a small leading dot, terracotta for skills, teal for routines. */
 .phone-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 999px; }
@@ -7141,15 +7170,29 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-dot--asked { background: var(--c-gold, #E09531); }
 .phone-dot--failed { background: var(--c-red, #BC5145); }
 
-/* The journal itself: what the agent has been DOING, as against what it has. Rows can carry a
-   second line (what a running job is on right now), so unlike the installed lists they align to
-   the top and the name is a block rather than a flex child.
+/* The journal itself: what the agent has been DOING, as against what it has. Unlike the installed
+   lists, a row here is a small stacked block rather than one line: a title, then what a running job
+   is on right now, then how it went and when.
    Screenshots never reach this page. The sealed snapshot is capped at 100 KB and one screen would
-   eat the whole document, so the phone gets the sentences and says where the pictures are. */
-.phone-row--journal { align-items: flex-start; }
+   eat the whole document, so the phone gets the sentences and says where the pictures are.
+
+   Two lines, then, not three columns. Held on one row, the outcome word and the time ("Asked you",
+   "26 minutes ago") took ~140px of a phone-width row between them and never shrank, which left the
+   title 82px to wrap in: one word per line, five lines deep, for a sentence that fits on two.
+   Grid puts the title across the row and drops the pair beneath it, where they read as a footnote
+   to the job rather than as competitors for its width. */
+.phone-row--journal {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 10px; align-items: start;
+}
 .phone-row--journal .phone-row-name { display: block; }
+/* The dot is 7px against a ~22px first line, so it needs nudging onto the text's baseline rather
+   than the top of the cell. */
+.phone-row--journal .phone-dot { margin-top: 7px; }
 .phone-journal-detail {
   display: block; margin-top: 3px; font-size: 0.8rem; line-height: 1.5; color: var(--text-muted);
+}
+.phone-journal-meta {
+  grid-column: 2; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 4px;
 }
 .phone-journal-when { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; }
 .phone-journal-note { font-size: 0.78rem; line-height: 1.5; color: var(--text-muted); margin-top: 10px; }

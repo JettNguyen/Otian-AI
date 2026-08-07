@@ -89,11 +89,16 @@ var PACKS = [
     items: [["skill","client-brain"],["skill","strategist"],["skill","deal-desk"],["skill","engagement-scoring"],["skill","outreach-studio"],["skill","lead-gen-playbook"],["specialist","prospector"],["routine","daily-pipeline-report"],["routine","weekly-pipeline-review"],["routine","weekly-strategy"],["personality","deal-closer"]] },
 ];
 
-/* Friendly names for integration slugs, for the "Works with" hint on a card's detail. */
+/* Friendly names for integration slugs, for the "Works with" hint on a card's detail.
+   The two mail slugs are named after Google because Google was the only provider when they were
+   written, and they cannot be renamed now: the slug is in every published add-on. Outlook and
+   Office 365 serve both, so the chip says what is needed rather than whose. Kept in step with
+   `INTEGRATION_LABELS` in the Archie repo's src/app/marketplace.tsx. */
 var INTEGRATION_LABELS = {
   fireflies: "Fireflies",
-  google_calendar: "Google Calendar",
-  gmail: "Gmail",
+  google_calendar: "Google or Outlook calendar",
+  gmail: "Gmail or Outlook",
+  google_tasks: "Google Tasks",
 };
 function formatIntegration(slug) {
   return INTEGRATION_LABELS[slug] ||

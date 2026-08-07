@@ -299,10 +299,17 @@ async function readSnapshot() {
 
 /** How long before a command is treated as unanswered.
  *
- *  The desktop polls every 5 seconds while it is being used and backs off to 30 when it has been
- *  idle, so a first tap after a quiet morning genuinely can take half a minute. This has to clear
- *  that with room to spare, or the page would call a working computer dead. */
-const COMMAND_TIMEOUT_MS = 75_000;
+ *  The desktop polls for commands every 3 seconds while it is being used, 15 seconds shortly after,
+ *  and 2 minutes once it has been quiet for ten. So a first tap after a quiet morning genuinely can
+ *  take a couple of minutes, and this has to clear that with room to spare or the page calls a
+ *  working computer dead.
+ *
+ *  **It used to be 75 seconds, sized against a 30-second idle poll.** That poll slowed to 2 minutes
+ *  when the desktop's cost was cut (one poll is one database read whether or not anything is
+ *  waiting, and the old cadence charged for 2,880 a day to say "nothing happened"), which left this
+ *  page timing out before the computer had even looked. If the desktop's idle cadence changes
+ *  again, this number moves with it: `POLL_IDLE` in `src-tauri/src/phone.rs` in the Archie repo. */
+const COMMAND_TIMEOUT_MS = 165_000;
 
 /** Send one command and wait for the answer.
  *
@@ -381,9 +388,18 @@ function ago(date) {
   return days + (days === 1 ? " day ago" : " days ago");
 }
 
-/** Anything past this and the computer is treated as gone rather than quiet. The desktop
- *  heartbeats once a minute even when nothing changes, so three missed beats is a real absence. */
-const STALE_MS = 3 * 60 * 1000;
+/** Anything past this and the computer is treated as gone rather than quiet.
+ *
+ *  The desktop wants to heartbeat once a minute even when nothing changes, but the heartbeat rides
+ *  the same loop as the command poll, so it can only be as punctual as that loop's slowest tick:
+ *  2 minutes, once the computer has been quiet for ten. Three minutes left barely one tick of
+ *  margin, and a single slow publish would have painted a live computer "Asleep", which is the one
+ *  thing on this page nobody would think to doubt.
+ *
+ *  Five minutes is two full ticks of margin. It costs a longer wait before a genuinely closed
+ *  laptop is called closed, and that is the right side to be wrong on: the page says what to do
+ *  either way, and "Asleep" about a running computer sends somebody to go and check on it. */
+const STALE_MS = 5 * 60 * 1000;
 
 function renderStatus(snapshot) {
   const awake = snapshot.updatedAt && Date.now() - snapshot.updatedAt.getTime() < STALE_MS;
@@ -511,9 +527,12 @@ function renderChatCard(agent) {
   );
 }
 
+// The two mail slugs are named after Google and are served by Outlook too; the slug cannot change
+// (it is in every published add-on) so the label carries the correction. See the same map in the
+// Archie repo's src/app/readiness.ts.
 const INTEGRATION_LABELS = {
-  google_calendar: "Google Calendar",
-  gmail: "Gmail",
+  google_calendar: "Google or Outlook calendar",
+  gmail: "Gmail or Outlook",
   google_tasks: "Google Tasks",
   fireflies: "Fireflies",
   todoist: "Todoist",

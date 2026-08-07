@@ -159,23 +159,35 @@ forbids the frontend from reaching any host at all.
 and is billed to the user's key (`llm.rs:580-605`). Still not us, but the search query does
 reach the provider's search backend. Say so.
 
-### ✅ We ship no telemetry and no analytics
+### ✅ No analytics, and two small things that are not analytics
 
-**Approved wording:** "Archie contains no analytics, no telemetry, and no tracking of any
-kind. Not opt-out — absent."
+> **Corrected 2026-08-06.** This entry said "no telemetry of any kind. Not opt-out, absent",
+> and the one below it said crash logs have no upload path. Both were true when written and
+> stopped being true when `crates/archie-core/src/telemetry.rs` shipped. They were live on
+> `trust/index.html` as two "Nowhere" rows in the table that ends by inviting readers to report
+> anything Archie sends that is not listed. Fixed on the same day the drift was found.
 
-**Why it's true:** No Sentry, PostHog, Amplitude, Mixpanel, Segment, or GA in `Cargo.lock`
-or `package-lock.json`. The Tauri log plugin is a no-op stub (`src-tauri/src/lib.rs:276-278`).
-The webview CSP makes frontend network calls impossible.
+**Approved wording:** "There is no analytics service in Archie: nothing records what you do
+in it, and nothing counts what you use. Two things do go out. Once every six hours Archie
+says which version it is and whether it is on Mac or Windows, so we know what is still
+running before we ever switch a version off. And if it quits unexpectedly, the next launch
+sends the tail of the crash: the error and where in our code it happened. Both carry your
+account ID. Neither carries anything you wrote, received, or asked for."
 
-### ✅ Crash logs never leave your machine
+**Why it's true:** `telemetry.rs` has exactly two entry points. `heartbeat` writes
+`heartbeats/{uid}` with three fields, app version, platform and last seen, at most once per
+six hours per process (`HEARTBEAT_EVERY`), overwriting the same document. `flush` uploads
+queued crash tails to `error_reports` with uid, version, platform, kind, message and build,
+capped at 2000 characters, five reports per launch, and nothing whose `crash.log` is older
+than seven days (`MAX_CRASH_AGE`). Every string passes the same `Redactor` the gateway logs
+use before it is written to disk, so the copy uploaded is the copy the user can read. There
+is still no Sentry, PostHog, Amplitude, Mixpanel, Segment or GA in `Cargo.lock` or
+`package-lock.json`, the Tauri log plugin is a no-op stub, and the webview CSP still makes
+frontend network calls impossible.
 
-**Approved wording:** "If Archie crashes, it writes a log to your own disk. There is no
-upload path. It reaches us only if you attach it to an email yourself."
-
-**Why it's true:** `install_crash_logger` (`src-tauri/src/lib.rs:22-49`) appends to
-`~/Library/Application Support/com.archie.app/crash.log`. Nothing in the codebase reads
-that file or transmits it.
+**Not yet true, so do not say it:** there is no opt-out. `AppSettings.telemetry_opt_in`
+exists as a field and nothing reads it. Do not describe this as optional, off-by-default, or
+anonymous: it carries the account ID.
 
 ### ✅ The update check tells us nothing about you
 
@@ -251,13 +263,13 @@ count-stuffing) but never retained: there is no `users/{uid}` free-install list 
   only the aggregate. Never phrase it as "nothing leaves" or "zero network calls."
 - ❌ Never imply the ping is anonymous. It carries your ID token by design.
 
-### 🚧 Archie on your phone: an encrypted mailbox we hold and cannot read (BUILT, NOT YET RELEASED)
+### ✅ Archie on your phone: an encrypted mailbox we hold and cannot read (SHIPPED)
 
-**Status 2026-07-31:** the code is written and the tests pass, but nothing is live to users and the
-Firestore rules are not deployed. **Do not put any of this on a public page until it ships**, and
-when it does, the "What We Hold" amendment below must land in the same release.
+**Status 2026-08-06:** live. The Firestore rules are deployed, the feature is in the shipped app,
+and the "What We Hold" amendment below has landed on all five pages. It is still off unless somebody
+turns it on, per computer, which is a fact the wording has to keep carrying.
 
-**Approved wording (once shipped):** "Turn on phone access and your computer starts leaving
+**Approved wording:** "Turn on phone access and your computer starts leaving
 messages for your phone in a mailbox on our servers. Every one of them is sealed with a key your
 computer makes and gives to your phone by scanning a code. The key never passes through us, so what
 we hold is a pile of ciphertext with no way to open it."
@@ -339,18 +351,31 @@ wording above. Now live correctly at `index.html:573`, `archie/index.html:275`,
 `privacy-policy/index.html:154`, `trust/index.html:296`. **Do not let the shorter,
 false form return** — "email + subscription + paid add-ons" is the floor; never fewer.
 
-🚧 **Pending amendment: a fourth thing, when phone access ships.** "Archie on your phone" (see the
-claim above, built 2026-07-31, not yet released) puts a fourth item in our custody: an encrypted
-mailbox between somebody's computer and their phone. We hold it and have no key to it, but we
-**hold** it, and "three things" is a floor claim, not a slogan to defend. The moment that feature
-reaches users, every page in the list above needs the conditional fourth clause:
+✅ **Amended 2026-08-06: three became three plus two.** Both of the things this section warned
+about arrived, and the old sentence survived both of them for a while, which is exactly the failure
+mode it names below.
 
-> Our servers know three things about you: your email address, whether you have a current plan,
-> and which **paid** add-ons you've bought. If you turn on phone access, they also hold the messages
-> between your computer and your phone, sealed with a key we never receive.
+- **Phone access shipped.** The sealed mailbox between somebody's computer and their phone is a
+  fourth item in our custody. We have no key to it, and we **hold** it.
+- **Crash reporting and version heartbeats shipped** (`crates/archie-core/src/telemetry.rs`). A
+  record keyed to the account ID, carrying the app version, the platform and a last-seen time, is a
+  fifth. See the telemetry claim above, which was corrected the same day.
 
-**Do not ship the feature and the old sentence in the same release.** Shipping them together is
-the exact shape of the 2026-07-15 falsehood: a true sentence that a new feature quietly made false.
+**Approved wording**, now live on the five pages listed above:
+
+> Our servers hold your email address, whether you have a current plan, and which **paid** add-ons
+> you've bought. Two more only where they apply: which version of Archie you are running, so we
+> know what is still out there before we ever switch one off, and, if you turn on phone access, the
+> messages between your computer and your phone, sealed with a key we never receive.
+
+**"Three things" is retired as a phrase.** It was a floor claim, not a slogan, and it has been
+breached twice; anybody reaching for its punchiness is reaching for a sentence that has already been
+false once. The list is the claim.
+
+**Do not ship a feature and the old sentence in the same release.** Shipping them together is the
+exact shape of the 2026-07-15 falsehood: a true sentence that a new feature quietly made false. It
+happened again on 2026-07-31 and again when telemetry landed, so this is a pattern, not an accident.
+Before shipping anything that writes to Firestore, come back here first.
 
 ---
 

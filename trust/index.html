@@ -138,7 +138,7 @@
         <span class="section-label fade-up">Trust</span>
         <h1 class="fade-up delay-1">The Question You&rsquo;re Actually Asking</h1>
         <p>You read that your data stays on your machine. Then you noticed Archie uses Claude. So, does Anthropic read your email? Here is the whole answer, including the parts that don&rsquo;t flatter us.</p>
-        <p class="page-hero-note">Our servers know three things about you: your email address, whether you have a current plan, and which paid add-ons you&rsquo;ve bought. Not your emails, not your calendar, not a single conversation. We keep no record of the free add-ons you install.</p>
+        <p class="page-hero-note">Our servers hold your email address, whether you have a current plan, and which paid add-ons you&rsquo;ve bought. Two more only where they apply: which version of Archie you are running, so we know what is still out there before we ever switch one off, and, if you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive. Not your emails, not your calendar, not a single conversation. We keep no record of the free add-ons you install.</p>
       </div>
     </section>
 
@@ -267,16 +267,20 @@
                 <td data-label="What's actually in it">Whatever you asked your agent to do there, on your own tokens. It reaches <em>them</em>, the way it would if you did it yourself. It does not reach us.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes, to them</span></td>
               </tr>
-              <tr class="is-none">
+              <!-- These two rows said "Nowhere" and "absent" until 2026-08-06, and both stopped
+                   being true when crash reporting shipped. The page ends by inviting anyone who
+                   finds something Archie sends that is not on this list to call it a bug in our
+                   honesty, so leaving them would have been the worst sentence on the site. -->
+              <tr>
                 <td data-label="What">Crash reports</td>
-                <td data-label="Where it goes"><strong>Nowhere.</strong></td>
-                <td data-label="What's actually in it">If Archie crashes it writes a log to your own disk. There is no upload path in the app. It reaches us only if you email it to us yourself.</td>
+                <td data-label="Where it goes">Our database</td>
+                <td data-label="What's actually in it">If Archie quits unexpectedly it writes what went wrong to your own disk, and the next time you open it, the tail of that file is sent to us: the error and where in our code it happened, with your account ID, the version, and whether you are on Mac or Windows. It is scrubbed for anything secret-shaped before it is written, so the copy we get is the copy you can read yourself. At most five per launch, and nothing older than a week is sent at all.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--none">None</span></td>
               </tr>
-              <tr class="is-none">
-                <td data-label="What">Analytics &amp; telemetry</td>
-                <td data-label="Where it goes"><strong>Nowhere.</strong></td>
-                <td data-label="What's actually in it">There isn&rsquo;t any. Not &ldquo;off by default&rdquo;, not &ldquo;anonymised&rdquo;: <strong>absent</strong>. No analytics service of any kind is built into Archie, and the app is locked down so its interface physically cannot call one.</td>
+              <tr>
+                <td data-label="What">Which version you are running</td>
+                <td data-label="Where it goes">Our database</td>
+                <td data-label="What's actually in it">Once every six hours: your account ID, the version of Archie, whether you are on Mac or Windows, and the time. That is the whole record, and it overwrites itself. It exists so we know which versions are still out there before we ever switch one off. There is no analytics service of any kind in Archie, no record of what you do in it, and no count of anything you use.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--none">None</span></td>
               </tr>
             </tbody>

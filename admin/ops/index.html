@@ -287,7 +287,7 @@
                 <div class="acct-section-title">Errors</div>
                 <span class="pill pill-off" id="err-total">&hellip;</span>
               </div>
-              <p class="act-sub" style="margin-top:6px;">Crash tails and restart loops, newest first, already stripped of secrets before they left the machine. Clear deletes the report; that is the whole triage system.</p>
+              <p class="act-sub" style="margin-top:6px;">Crash tails and restart loops, newest first, already stripped of secrets before they left the computer. Clear deletes the report; that is the whole triage system.</p>
               <div id="err-rows"></div>
               <div class="act-sub acct-hidden" id="err-empty" style="margin-top:10px;">Nothing. The good kind of nothing.</div>
             </div>
@@ -596,7 +596,7 @@
           const el = document.createElement("div");
           el.className = "err-item";
           const kindClass = r.kind === "panic" ? "pill-bad" : "pill-warn";
-          // A crash from a debug build is a developer's own machine, and it can happen in code
+          // A crash from a debug build is a developer's own computer, and it can happen in code
           // that a shipped binary does not even contain. Labelled rather than hidden: it is still
           // a real crash, it just is not a fleet incident.
           const devPill = r.build === "debug" ? '<span class="pill pill-off">dev build</span>' : "";

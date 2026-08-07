@@ -413,9 +413,9 @@
     // who signs in from a link they were sent is the victim, and nothing on screen looks wrong.
     //
     // Scheme, host and port shape are all checked. Plain http is right here and only here: loopback
-    // never leaves the machine, and 127.0.0.1 cannot hold a TLS certificate. `localhost` is allowed
+    // never leaves the computer, and 127.0.0.1 cannot hold a TLS certificate. `localhost` is allowed
     // alongside the literal address because it is what a browser may normalise the app's URL to; both
-    // resolve to the same machine, and neither can be pointed elsewhere by an attacker.
+    // resolve to the same computer, and neither can be pointed elsewhere by an attacker.
     function loopbackCallback(raw) {
       if (!raw) return null;
       let u;
@@ -950,7 +950,7 @@
           } catch (linkErr) {
             // That Google account is already an Archie account. This is the ordinary case for
             // somebody installing on a second computer: they get an anonymous account on the new
-            // machine, then sign in as themselves. Signing in to the real one is what they meant;
+            // computer, then sign in as themselves. Signing in to the real one is what they meant;
             // the empty anonymous account is simply abandoned.
             if (!credentialBelongsElsewhere(linkErr)) throw linkErr;
             result = await signInWithPopup(auth, new GoogleAuthProvider());

@@ -608,7 +608,7 @@
       try {
         // Firebase requires a recent sign-in before it will touch an account's identity. Asking for
         // the password here is that proof, and it also means a session left open on a shared
-        // machine cannot be used to walk off with the account.
+        // computer cannot be used to walk off with the account.
         await reauthenticateWithCredential(user, EmailAuthProvider.credential(user.email, pass));
       } catch (e) {
         const code = (e && e.code) || "";

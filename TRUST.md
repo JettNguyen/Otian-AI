@@ -146,7 +146,7 @@ on custody, not privacy maximalism.
 ### ✅ Your prompts never touch an Otian server
 
 **Approved wording:** "When your agent thinks, it talks to Anthropic or OpenAI directly
-from your machine, on your account, with your key. We are not in the middle of it, and we
+from your computer, on your account, with your key. We are not in the middle of it, and we
 keep no copy."
 
 **Why it's true:** Provider base URLs are hard-coded constants
@@ -256,10 +256,47 @@ provider is a per-agent setting rather than a build-time constant. `TRIAL_MODEL`
 - The five names are a set, not a ranking. Do not imply one is required or recommended
   without saying why, and never imply the others are degraded.
 
+### ✅ The other free trial runs on your own key, so nothing passes through us
+
+**Approved wording:** "The free credits are limited per computer, so if someone has already used
+them on yours, a second account cannot have them. There is another way to try Archie: connect an
+AI account of your own and you get 14 days, on the same terms as everyone else. Because your key
+is paying, your conversations go straight to them, exactly as they do for a paying customer. We
+are never in the middle of them."
+
+**Why it's true:** two facts, and the second is the one that carries the privacy claim.
+
+1. A days-only trial is granted with `kind: "own_key"` and no money in it
+   (`stripe-webhook/index.js`, `/trial/claim`). It is offered only after the credits have been
+   refused for that computer.
+2. **A key of the user's own always wins over the trial credential**, and that is what keeps the
+   proxy out of the path. `src-tauri/src/commands.rs:3975-3989` resolves in a fixed order:
+   Anthropic, OpenAI, Gemini, xAI, Groq, and only then the trial. Anybody on a days-only trial has
+   connected a key by definition (the app checks it works before asking for the trial), so the
+   trial credential is never reached. The ledger is empty as well, so even a call that somehow got
+   there would be refused rather than paid for.
+
+**Boundaries — do not cross:**
+- ❌ Never write it unscoped. Archie still talks to us during these 14 days: it checks what the
+  account can open, it checks for updates, it reads the add-on catalog. What it does not do is send
+  the conversation through us. Scope the sentence to the conversation, every time.
+- ❌ Never let this become the general "your prompts never touch an Otian server" sentence.
+  The **credit** trial does pass through us, that clause is still required, and this one is not a
+  replacement for it. Two trials, two answers, and the difference is who is paying.
+- ❌ Never say the 14 days are "free Archie". The person is paying their own AI bill for them,
+  which is the entire reason we can offer them.
+- ✅ Say "connect an AI account of your own". Do not say "add a key", which reads as a chore, and
+  do not say "bring your own key", which is jargon.
+
 ### ✅ The update check tells us nothing about you
 
 **Approved wording:** "Archie checks for updates with a plain request that carries no
-version number, no machine ID, and no account. Our server sees an IP address and a timestamp."
+version number, nothing identifying your computer, and no account. Our server sees an IP address
+and a timestamp."
+
+(Was "no machine ID" until 2026-08-07. Same claim, said in words a first-time reader has met
+before: "machine ID" is the kind of phrase that makes a plain sentence sound like it is hiding
+something, on a page whose whole job is the opposite.)
 
 **Why it's true:** `src-tauri/tauri.conf.json:45` has no substitution placeholders, so the
 updater plugin sends a bare GET. Version comparison happens client-side.
@@ -452,6 +489,25 @@ switch.** Two things, found while adding the telemetry opt-out.
   it is also a commercial term), `faq/index.html` and `business/index.html`.
 - **Telemetry can be switched off**, and the two rows in the table say so. See the claim above.
 
+✅ **Amended 2026-08-07 (second pass): how a free trial is given out, and the second kind of
+trial.** Found in a security review of the paywall. Two new facts, both commercial rather than
+privacy, and both absent from the Terms.
+
+- **The free credits have conditions, and the Terms described none of them.** They read as
+  something every copy of Archie comes with. They are given per account, need a confirmed email
+  address, are limited per computer, and can be refused. Every one of those is enforced in
+  `stripe-webhook/index.js` (`trialIdentityRefusal`, `TRIAL_GRANTS_PER_DEVICE`,
+  `TRIAL_GRANTS_PER_IP_PER_DAY`, `TRIAL_GRANTS_PER_DAY`). A person who is refused one has been
+  told nothing about why by the Terms, which is the gap.
+- **There is a second trial, and the site does not mention it exists.** Fourteen days on an AI
+  account of your own, offered when the credits have already been claimed on that computer.
+  See the claim below, which is the one with a privacy consequence.
+
+**Do not name the numbers.** The caps are deliberately unnamed on screen (the refusal says
+"claimed here" rather than which limit was hit, so that somebody probing is not told which knob
+to turn) and the Terms should match: say that it is limited, say that it can be refused, and do
+not publish the figures.
+
 Also corrected the same day: `trust/index.html` opened by telling the reader "Archie uses
 Claude" in the hero and again in the section heading, on a product that connects to five AI
 companies of the reader's choosing. Three pages named four providers or two.
@@ -596,6 +652,27 @@ happens if we go away"): *if Otian ceases operations, we publish a final build r
 subscription check, within 30 days.* That promise survives any change to the license mechanism,
 which means the piracy hole can now be fixed freely without touching the claim.
 
+**Updated 2026-08-07: the hole is closed, and the accident with it.** The licence check is now a
+statement signed by the billing service over Ed25519, verified against a public key compiled into
+the app (`crates/archie-core/src/entitlement.rs`, `stripe-webhook/entitlement.js`). Editing the
+Keychain no longer buys anything, because the value that decides is one the computer reading it
+cannot produce. Three consequences for this file:
+
+1. **The piracy sentence above is now historical.** Blocking Firestore no longer yields permanent
+   access; it yields an assertion that goes stale. The remaining route is patching a notarized
+   binary, which is a different order of effort and breaks automatic updates.
+2. **There IS a TTL now, exactly as the trap warned.** An assertion lasts 60 days and is refreshed
+   on every launch that reaches us. Consequence (1), "if Otian dies, existing installs keep
+   working", is therefore no longer true forever. It is true for 60 days.
+3. **Which is why the window is 60 and not 30.** The contractual commitment is a final build within
+   30 days of shutting down. A 30-day assertion would have expired everybody at precisely the
+   moment that build was due, so the promise would have depended on publishing it early. 60 leaves
+   a month of margin, and the commitment is what the claim now rests on entirely.
+
+⛔ **Never claim the app runs indefinitely without us.** It runs for 60 days, and then the Terms
+commitment is the thing that has to hold. That is a stronger promise than the accident was, because
+it is written down, but it is a different one and must not be described as the old one.
+
 ⛔ **Never claim a "30-day grace period" for an unreachable server.** No such timer exists.
 ✅ **Do claim:** "If you leave, the app stops. If we disappear, it doesn't." Backed by the Terms.
 
@@ -623,7 +700,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | "We can't see anything" | Overbroad. We can see three things. Name them. |
 | "Nothing sends without your OK" (unscoped) | Chat replies and provider web-search queries leave without a per-item OK. Use the scoped forms: calendar-confirmation / Send-tap wordings. |
 | "Sandboxed add-ons" | Misleading. Add-ons are data, not code — there is nothing to sandbox. The true claim is *stronger*; make it instead. |
-| "Your keys never leave your computer" / "keys stay on your machine" | **False.** The key is sent to Anthropic/OpenAI as a request header on every call (`secrets.rs`, `x-api-key`/bearer). The true claim is storage + custody: "keys sit in your system's keychain, where we have no way to read them." |
+| "Your keys never leave your computer" / "keys stay on your computer" | **False.** The key is sent to Anthropic/OpenAI as a request header on every call (`secrets.rs`, `x-api-key`/bearer). The true claim is storage + custody: "keys sit in your system's keychain, where we have no way to read them." |
 | "We never hold your data" (unscoped) | Unscoped "your data" is false — we hold email + license + paid add-ons. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip, and again 2026-08-03 as the `business/` feature-card **heading** — the body underneath stated all three things we hold, but a heading is what gets scanned and the correction sat four sentences down. Check headings, not just body copy. |
 | "It asks before it acts" / "acts only with your approval" (unscoped) | Same umbrella as "nothing sends without your OK": chat replies, provider web search, `remember`, and calendar reads act without asking. Use the scoped Send-tap / calendar-changes forms. |
 | "Your agent's data stays on your computer" (once phone access ships) | **False** with phone access on. Installed add-ons and their settings are mirrored to our servers, encrypted. The true claim is custody without access: "we hold the messages and cannot read them." |
@@ -647,12 +724,12 @@ flipped, and a promise not to look is worth nothing. The published sentence, whe
 
 > Your manager can see that you have an agent, which add-ons it has, and what it costs.
 > Your manager cannot see what you asked it, what it read, what it wrote, or what it did —
-> not because we choose not to show them, but because that never leaves your machine.
+> not because we choose not to show them, but because that never leaves your computer.
 > We don't have it to show.
 
 **Corollaries:**
 - Every employee gets a **"what your admin sees"** screen showing the exact payload their
-  machine reports. This is what stops a business rollout dying from the bottom up.
+  computer reports. This is what stops a business rollout dying from the bottom up.
 - This **kills the usage/savings dashboard** as specced. Hours-saved-per-employee is derived
   from activity; if we can't see activity, we can't compute it honestly. Do not build it.
 

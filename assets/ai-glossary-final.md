@@ -80,7 +80,7 @@ Example: A website chatbot might tell you store hours, but it can't go ahead and
 
 Example: This kind of technology is what allows an AI tool to find "pictures of red cars" within a folder of unlabeled photos.
 
-**Cloud (Cloud Computing)** – Accessing computing power and storage over the internet rather than relying on a local machine you own.
+**Cloud (Cloud Computing)** – Accessing computing power and storage over the internet rather than relying on a local computer you own.
 
 Example: An AI assistant described as running "in the cloud" operates on remote servers, so it's reachable from anywhere without you maintaining any equipment.
 
@@ -120,7 +120,7 @@ Example: Deep learning underlies most current AI breakthroughs, including the la
 
 Example: Once an AI assistant has been configured and checked, deployment is the stage where it starts handling real tasks for you.
 
-**Docker** – A tool that bundles software together with everything it needs to run into a portable unit called a container, so it behaves the same on any machine.
+**Docker** – A tool that bundles software together with everything it needs to run into a portable unit called a container, so it behaves the same on any computer.
 
 Example: A developer might use Docker to package an AI agent so it installs cleanly on a server without compatibility headaches.
 

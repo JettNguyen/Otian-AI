@@ -236,6 +236,17 @@
 
             <div class="acct-section">
               <div class="acct-section-head">
+                <div class="acct-section-title">Service</div>
+                <span class="pill pill-off" id="svc-state">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">Whether the billing service is up and whether its configuration actually arrived. Each of these fails quietly when it is missing, which is why they are on a screen: no signing key and the app falls back to a licence check its owner can edit, and nothing else anywhere would say so.</p>
+              <div id="svc-rows"></div>
+              <p class="act-sub" style="margin-top:10px;">Today's trial, against the limits that stop it. Both are circuit breakers, and a breaker with no gauge is one you find out about from a customer.</p>
+              <div id="svc-trial-rows"></div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-head">
                 <div class="acct-section-title">Fleet</div>
                 <span class="pill pill-off" id="fleet-total">&hellip;</span>
               </div>
@@ -432,8 +443,93 @@
       show("adm-loading", false);
       if (!tiers.includes("admin")) { show("adm-denied", true); return; }
       show("adm-content", true);
-      loadFleet(); loadLevers(); loadErrors(); loadReleases();
+      loadService(); loadFleet(); loadLevers(); loadErrors(); loadReleases();
     });
+
+    // ── Service: is it up, did its configuration arrive, and how is today going ───────────
+    //
+    // Two sources, because they answer two different questions. `/health` is the service telling us
+    // what it has, and it is the only thing that can: a missing environment variable leaves no trace
+    // in Firestore, it just changes behaviour. `trial_meta/{today}` is what has actually happened,
+    // read straight from Firestore like every other card here.
+    const BILLING_API = "https://archie-4f35.onrender.com";
+
+    /** The four numbers below live in `stripe-webhook/index.js`. Kept here so the gauge has a scale;
+     *  if you change one there with an environment variable, change it here or the bar lies. */
+    const TRIAL_DAILY_CEILING_MICROS = 50000000;
+    const TRIAL_GRANTS_PER_DAY = 50;
+
+    function svcRow(label, ok, note) {
+      const el = document.createElement("div");
+      el.className = "ver-row";
+      el.innerHTML =
+        '<span class="ver-label">' + escapeHtml(label) + "</span>" +
+        '<span class="pill ' + (ok ? "pill-on" : "pill-bad") + '">' + (ok ? "ready" : "missing") + "</span>" +
+        // flex:1 so the note fills the row the way the bar does on a gauge, and the two kinds of
+        // row line up instead of one being left-packed beside the other.
+        '<span class="ver-count" style="flex:1;min-width:0">' + escapeHtml(note) + "</span>";
+      return el;
+    }
+
+    function gaugeRow(label, used, limit, render) {
+      const pct = Math.min(100, Math.round((used / Math.max(1, limit)) * 100));
+      const el = document.createElement("div");
+      el.className = "ver-row";
+      el.innerHTML =
+        '<span class="ver-label">' + escapeHtml(label) + "</span>" +
+        '<div class="ver-bar-track"><div class="ver-bar" style="width:' + pct + '%"></div></div>' +
+        '<span class="ver-count">' + escapeHtml(render(used) + " of " + render(limit)) + "</span>";
+      return el;
+    }
+
+    async function loadService() {
+      const rows = $("svc-rows");
+      rows.innerHTML = "";
+      try {
+        // No credentials: /health is deliberately unauthenticated and answers booleans only.
+        const h = await fetch(BILLING_API + "/health", { cache: "no-store" }).then((r) => r.json());
+        rows.appendChild(svcRow("Billing service", h.ok === true, "up"));
+        rows.appendChild(svcRow("Admin endpoints", h.admin === true,
+          h.admin ? "ADMIN_SECRET is set" : "ADMIN_SECRET missing, so /admin refuses"));
+        rows.appendChild(svcRow("Free trial", h.trial === true,
+          h.trial ? "key and salt are set" : "no provider key or salt, so every claim answers 503"));
+        rows.appendChild(svcRow("Signed licences", h.entitlement === true,
+          h.entitlement
+            ? "ENTITLEMENT_SIGNING_KEY is set"
+            : "no signing key, so the app falls back to a licence check its owner can edit"));
+        const bad = [h.ok, h.admin, h.trial, h.entitlement].filter((v) => v !== true).length;
+        $("svc-state").textContent = bad === 0 ? "all ready" : bad + (bad === 1 ? " problem" : " problems");
+        $("svc-state").className = "pill " + (bad === 0 ? "pill-on" : "pill-off");
+      } catch (e) {
+        // Unreachable is itself the answer, and the most important one on this card.
+        rows.appendChild(svcRow("Billing service", false, "cannot be reached: " + e.message));
+        $("svc-state").textContent = "unreachable";
+        $("svc-state").className = "pill pill-off";
+      }
+      await loadTrialToday();
+    }
+
+    async function loadTrialToday() {
+      const rows = $("svc-trial-rows");
+      rows.innerHTML = "";
+      const day = new Date().toISOString().slice(0, 10); // UTC, matching dayKey() on the server.
+      try {
+        const snap = await getDoc(doc(db, "trial_meta", day));
+        const d = snap.exists() ? snap.data() || {} : {};
+        const spent = Number(d.spent_micros) || 0;
+        const grants = Number(d.grants) || 0;
+        rows.appendChild(gaugeRow("Spent today", spent, TRIAL_DAILY_CEILING_MICROS,
+          (m) => "$" + (m / 1000000).toFixed(2)));
+        rows.appendChild(gaugeRow("Trials given today", grants, TRIAL_GRANTS_PER_DAY, String));
+        if (spent >= TRIAL_DAILY_CEILING_MICROS) {
+          setStatus("The daily spend ceiling is reached, so free trials are refusing calls until tomorrow.", "error");
+        } else if (grants >= TRIAL_GRANTS_PER_DAY) {
+          setStatus("The daily grant tripwire is reached, so no new trials are being handed out until tomorrow.", "error");
+        }
+      } catch (e) {
+        rows.appendChild(svcRow("Today's trial", false, "could not be read: " + e.message));
+      }
+    }
 
     // ── Fleet: version histogram from heartbeats ──────────────────────────────────────────
     async function loadFleet() {

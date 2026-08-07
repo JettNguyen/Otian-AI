@@ -159,6 +159,36 @@ forbids the frontend from reaching any host at all.
 and is billed to the user's key (`llm.rs:580-605`). Still not us, but the search query does
 reach the provider's search backend. Say so.
 
+**Required clause, added 2026-08-07 — the free trial is the exception, and it is ours.**
+Before anybody connects a key, a new install runs on a gift of Anthropic usage that is paid
+for on **our** account, and those calls go to our billing service, not to Anthropic
+(`llm.rs:44-55`, `TRIAL_PATH_PREFIX`). While somebody is on free credits, their prompts and
+the replies pass through an Otian server. The key cannot ship in the binary, because a key
+compiled into a shipped binary is extractable and the prize for extracting that one is
+unmetered spend on our account, so the proxy is not a choice we get to make differently. The
+app says this on screen. The site did not say it at all until this date, on a page whose
+whole argument is "there is no Otian server in that path", which is the most expensive
+omission this document has ever had to record.
+
+**Approved wording:** "One exception, and it is ours: the free credits you start with are
+paid for on our account, so while you are using them your messages pass through our server
+on the way to Anthropic. The moment you connect a key of your own, that stops, and nothing
+of yours touches us again."
+
+**Boundaries — do not cross:**
+- ❌ Never state the no-Otian-server claim *unscoped* without this clause on the same page.
+  The trial is the first thing a new user does, so the exception applies to everybody at the
+  moment they are most likely to be reading. Two shapes are allowed elsewhere: scope the
+  sentence ("on your own account, with your key, we are never in the middle"), which is true
+  of every path the sentence names, or state it flat and carry the clause. A flat "nothing
+  passes through us" with neither is false for every new install.
+- ✅ It is passed through, not kept. `stripe-webhook/index.js:485-487`: nothing there logs a
+  request body, a response body, a prompt, or a completion; what is logged is the uid, hashes
+  of the device and IP, token counts and amounts. The reply is buffered in memory to read the
+  `usage` block that decides the debit, and that is the whole of it. Say "passes through"
+  rather than "is stored", and never upgrade this to "we cannot see it": a proxy we operate
+  could be changed to log, and the honest claim is that it does not.
+
 ### ✅ No analytics, and two small things that are not analytics
 
 > **Corrected 2026-08-06.** This entry said "no telemetry of any kind. Not opt-out, absent",
@@ -185,9 +215,46 @@ is still no Sentry, PostHog, Amplitude, Mixpanel, Segment or GA in `Cargo.lock` 
 `package-lock.json`, the Tauri log plugin is a no-op stub, and the webview CSP still makes
 frontend network calls impossible.
 
-**Not yet true, so do not say it:** there is no opt-out. `AppSettings.telemetry_opt_in`
-exists as a field and nothing reads it. Do not describe this as optional, off-by-default, or
-anonymous: it carries the account ID.
+**Amended 2026-08-07: there is now an off switch, and it is real.** The app's Account page, under Crash
+reports, carries the switch and the full list of what is in one. Off stops the
+heartbeat, stops the upload, and stops the queue being written at all; anything already
+queued is deleted when the switch is thrown (`telemetry::set_off`, and `is_off` is read at
+all three entry points). It is a marker file in the data directory rather than a setting in
+the database, because a panic hook mid-crash holds a path and nothing else.
+
+**Approved wording for the switch:** "You can turn both off, in the app, under Account. Off
+means nothing further is sent and anything waiting to be sent is deleted."
+
+**Boundaries — do not cross:**
+- ❌ Never "off by default". It sends until somebody turns it off. Say "on until you turn it
+  off", which is the true form and is not worse.
+- ❌ Never "anonymous". Both carry the account ID, which is how a version histogram and a
+  crash report are worth anything. The true claim is that they carry no content, not that
+  they carry nobody.
+- ❌ Never "we receive no personal information" without saying what we do receive. The
+  account ID is personal information; the version, platform and error text are not. The
+  approved shape is the second sentence naming both: "It carries your account ID, the
+  version, and the platform. It carries nothing you wrote, received, or asked for."
+- The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
+  source; if a field is added there, both change or the page is a lie.
+
+### ✅ Which AI company it talks to is your choice, and the trial is Anthropic
+
+**Approved wording:** "Archie runs on an AI account you connect: Anthropic, OpenAI, Google,
+Groq or xAI. You pick, and you can change it later. The free credits you start with run on
+Claude, because that is the account we pay for."
+
+**Why it's true:** `crates/archie-net/src/llm.rs` builds requests for all five, and the
+provider is a per-agent setting rather than a build-time constant. `TRIAL_MODEL` in
+`stripe-webhook/index.js` is an Anthropic model, because the trial spends our Anthropic key.
+
+**Boundaries — do not cross:**
+- ❌ Never write "Archie uses Claude" as a bare statement of what the product is. It was in
+  the trust page's own headline until 2026-08-07, where it made a page about who holds your
+  data say something false about the product in its first sentence.
+- ❌ Never list a provider we have not shipped. Five, and the list is in `llm.rs`.
+- The five names are a set, not a ranking. Do not imply one is required or recommended
+  without saying why, and never imply the others are degraded.
 
 ### ✅ The update check tells us nothing about you
 
@@ -371,6 +438,23 @@ mode it names below.
 **"Three things" is retired as a phrase.** It was a floor claim, not a slogan, and it has been
 breached twice; anybody reaching for its punchiness is reaching for a sentence that has already been
 false once. The list is the claim.
+
+✅ **Amended 2026-08-07: the trial proxy was never disclosed at all, and the list grew a
+switch.** Two things, found while adding the telemetry opt-out.
+
+- **The free trial passes prompts through our server, and the site had never said so.** Not on
+  the trust page, not in the privacy policy, not in the terms. The app has said it on screen
+  since the trial shipped and `llm.rs:44-55` states it in the code, so this was a site-side
+  omission on the one page whose entire argument is that no server of ours is in that path.
+  Now on `trust/index.html` (a paragraph in the opening section and a row of its own in the
+  table), `privacy-policy/index.html` (a paragraph under Your AI provider, cross-linked from
+  What stays on your computer), `terms-of-service/index.html` (a Free Credits section, since
+  it is also a commercial term), `faq/index.html` and `business/index.html`.
+- **Telemetry can be switched off**, and the two rows in the table say so. See the claim above.
+
+Also corrected the same day: `trust/index.html` opened by telling the reader "Archie uses
+Claude" in the hero and again in the section heading, on a product that connects to five AI
+companies of the reader's choosing. Three pages named four providers or two.
 
 **Do not ship a feature and the old sentence in the same release.** Shipping them together is the
 exact shape of the 2026-07-15 falsehood: a true sentence that a new feature quietly made false. It

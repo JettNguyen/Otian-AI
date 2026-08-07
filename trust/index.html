@@ -137,7 +137,7 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">Trust</span>
         <h1 class="fade-up delay-1">The Question You&rsquo;re Actually Asking</h1>
-        <p>You read that your data stays on your machine. Then you noticed Archie uses Claude. So, does Anthropic read your email? Here is the whole answer, including the parts that don&rsquo;t flatter us.</p>
+        <p>You read that your data stays on your machine. Then you noticed your agent thinks by sending your words to an AI company. So, do they read your email? Here is the whole answer, including the parts that don&rsquo;t flatter us.</p>
         <p class="page-hero-note">Our servers hold your email address, whether you have a current plan, and which paid add-ons you&rsquo;ve bought. Two more only where they apply: which version of Archie you are running, so we know what is still out there before we ever switch one off, and, if you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive. Not your emails, not your calendar, not a single conversation. We keep no record of the free add-ons you install.</p>
       </div>
     </section>
@@ -149,7 +149,7 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">The Awkward Part, First</span>
-          <h2 id="the-question" class="fade-up delay-1">&ldquo;You say my data stays with me. But Archie uses Claude. So Anthropic sees my emails.&rdquo;</h2>
+          <h2 id="the-question" class="fade-up delay-1">&ldquo;You say my data stays with me. But my agent sends my email to an AI company, so they see it.&rdquo;</h2>
         </div>
 
         <div class="trust-prose fade-up delay-2">
@@ -163,7 +163,7 @@
             <span class="trust-answer-num">1</span>
             <div>
               <h3>It goes under <em>your</em> account, on <em>your</em> key.</h3>
-              <p>You bring your own API key: a private access code from your AI company (Anthropic, OpenAI, Google, Groq or xAI) that lets Archie connect on your account. The agent&rsquo;s requests are billed to you and governed by your agreement with them, not ours. You are their customer, not our product.</p>
+              <p>You bring your own API key: a private access code from your AI company that lets Archie connect on your account. You pick which company, from Anthropic, OpenAI, Google, Groq or xAI, and you can change it later. The agent&rsquo;s requests are billed to you and governed by your agreement with them, not ours. You are their customer, not our product.</p>
             </div>
           </div>
           <div class="trust-answer">
@@ -183,6 +183,8 @@
         </div>
 
         <div class="trust-prose fade-up delay-4">
+          <p><strong>One exception, and it is ours.</strong> Archie starts you with a small amount of free credits so you can watch an agent work before being asked for an account of your own. Those run on Claude, on <em>our</em> Anthropic account, and that is the one case where your messages pass through a server of ours on the way. It works that way because there is no such thing as a personal key we could hand you: the alternative is our own key sitting inside the app on your laptop, where anyone could take it. Nothing about those messages is written down there. What the server records is how much was spent, so it can stop at the amount you were given. The moment you connect an account of your own, that path is gone and nothing of yours reaches us again.</p>
+
           <p>What running on your own machine actually buys you, then, is this: your life does not <em>also</em> accumulate on a server of ours. There is no Otian archive to be breached, subpoenaed, sold in an acquisition, or quietly repurposed when our business model changes. We didn&rsquo;t promise not to look at your data. We built it so there is nothing to look at.</p>
 
           <p class="trust-aside"><strong>One more thing you didn&rsquo;t ask.</strong> If your agent searches the web, that search runs on the AI company&rsquo;s own servers and is billed to your key, so your search query reaches their search backend, not just their model. Still not us.</p>
@@ -218,6 +220,12 @@
                 <td data-label="Where it goes">Your AI company: <strong>directly, never through us</strong></td>
                 <td data-label="What's actually in it">The real thing: your prompt, the conversation, and whatever file, message, or transcript the agent is working with.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes</span></td>
+              </tr>
+              <tr class="is-content">
+                <td data-label="What"><strong>Your agent thinking, while you are on free credits</strong></td>
+                <td data-label="Where it goes">Our server, then Anthropic</td>
+                <td data-label="What's actually in it">The same thing as the row above, and this is the one case where it passes through us. The free credits you start with are spent on our Anthropic account, so the request goes to our server, which forwards it and subtracts what it cost. Nothing there writes down a message or a reply; what it records is your account ID, how many words went each way, and the amount. It stops the moment you connect an AI account of your own.</td>
+                <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes, in passing</span></td>
               </tr>
               <tr>
                 <td data-label="What">Signing in</td>
@@ -274,13 +282,13 @@
               <tr>
                 <td data-label="What">Crash reports</td>
                 <td data-label="Where it goes">Our database</td>
-                <td data-label="What's actually in it">If Archie quits unexpectedly it writes what went wrong to your own disk, and the next time you open it, the tail of that file is sent to us: the error and where in our code it happened, with your account ID, the version, and whether you are on Mac or Windows. It is scrubbed for anything secret-shaped before it is written, so the copy we get is the copy you can read yourself. At most five per launch, and nothing older than a week is sent at all.</td>
+                <td data-label="What's actually in it">If Archie quits unexpectedly it writes what went wrong to your own disk, and the next time you open it, the tail of that file is sent to us: the error and where in our code it happened, with your account ID, the version, and whether you are on Mac or Windows. It is scrubbed for anything secret-shaped before it is written, so the copy we get is the copy you can read yourself. At most five per launch, and nothing older than a week is sent at all. <strong>You can turn this off</strong> in the app, under Account, where the same list appears in full. Off means nothing further is sent and anything waiting is deleted.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--none">None</span></td>
               </tr>
               <tr>
                 <td data-label="What">Which version you are running</td>
                 <td data-label="Where it goes">Our database</td>
-                <td data-label="What's actually in it">Once every six hours: your account ID, the version of Archie, whether you are on Mac or Windows, and the time. That is the whole record, and it overwrites itself. It exists so we know which versions are still out there before we ever switch one off. There is no analytics service of any kind in Archie, no record of what you do in it, and no count of anything you use.</td>
+                <td data-label="What's actually in it">Once every six hours: your account ID, the version of Archie, whether you are on Mac or Windows, and the time. That is the whole record, and it overwrites itself. It exists so we know which versions are still out there before we ever switch one off. There is no analytics service of any kind in Archie, no record of what you do in it, and no count of anything you use. <strong>You can turn this off</strong> in the app, under Account, with the same switch that stops crash reports.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--none">None</span></td>
               </tr>
             </tbody>
@@ -298,7 +306,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Our Servers</span>
-          <h2 id="what-we-hold" class="fade-up delay-1">Three Things. That&rsquo;s The Whole List.</h2>
+          <h2 id="what-we-hold" class="fade-up delay-1">Everything Our Servers Hold</h2>
         </div>
 
         <div class="mt-40 two-col fade-up delay-1">
@@ -308,22 +316,25 @@
               <li>Your email address, so you can sign in</li>
               <li>Whether you have a current plan</li>
               <li>Which <em>paid</em> add-ons you&rsquo;ve bought</li>
+              <li>Which version of Archie you are running, until you turn that off</li>
+              <li>If you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive</li>
             </ul>
           </div>
           <div class="two-col-card">
             <h3>What we don&rsquo;t</h3>
             <ul class="two-col-card-list">
-              <li>Your prompts and your agent&rsquo;s replies</li>
+              <li>Your prompts and your agent&rsquo;s replies. While you are on free credits they pass through our server on the way to Anthropic, and nothing there writes them down</li>
               <li>Your files, notes, and knowledge base</li>
               <li>Everything your agent remembers</li>
               <li>Your calendar, emails, and messages</li>
               <li>Your API keys</li>
               <li>A record of which <em>free</em> add-ons you use</li>
+              <li>Anything about how you use Archie: what you open, what you run, how often</li>
             </ul>
           </div>
         </div>
 
-        <p class="trust-table-note">Not &ldquo;encrypted and stored&rdquo;. <strong>Not stored.</strong> We have no server that receives any of it, which is a much harder thing to get wrong than a policy about what we promise not to read.</p>
+        <p class="trust-table-note">This list used to be three items long and called itself the whole list. Two of the things on it now arrived afterwards, and the old sentence stayed up for a while, which is how a true claim becomes a false one. The list is the claim, and the day something joins it is the day it appears here.</p>
       </div>
     </section>
 

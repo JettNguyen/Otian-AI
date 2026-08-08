@@ -150,100 +150,146 @@
           <p>Archie arrives smart and capable on its own. Add-ons are how you shape it around your life. Each one plugs in and stays there, quietly doing its part.</p>
         </div>
 
-        <figure class="explain-figure explain-figure--band fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 380 300" role="img" aria-labelledby="core-t" xmlns="http://www.w3.org/2000/svg" style="max-width:520px;font-family:inherit">
-            <title id="core-t">Your agent at the center, with three add-ons plugging in around it</title>
+        <!--
+          The three kinds are peers, not stages: each one docks into the agent on its
+          own and none of them feeds the next. So the picture is three things plugged
+          into one thing, and choosing one only quiets the other two. Nothing here
+          draws an order, a sequence or a cycle, because there is not one.
+
+          Choosing a kind (hover, tap, or keyboard) swaps the caption for the longer
+          sentence about it. Everything is readable without touching it: the short
+          descriptions are on the diagram itself, and the caption starts on the point
+          the picture is making.
+        -->
+        <figure class="explain-figure explain-figure--band explain-pick fade-up delay-1" id="coreFigure">
+          <svg class="explain-svg--desktop" viewBox="0 0 560 330" role="img" aria-labelledby="core-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="core-t">Your agent in the middle, with three add-ons plugged into it: a skill, which is something it can do; a personality, which is how it talks to you; and a routine, which is something it does on its own</title>
             <style>
               .core-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
               .core-a{fill:var(--accent)}
-              .core-tile{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.4}
-              .core-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-              .core-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32}
+              .core-card{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.4}
+              .core-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+              .core-wire{fill:none;stroke:currentColor;stroke-width:1.4}
               .core-port{fill:var(--accent)}
-              .core-lbl{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-              @media (prefers-reduced-motion:no-preference){
-                .core-dock{animation:coreIn .8s cubic-bezier(.22,1,.36,1) both}
-                .cd1{animation-delay:.05s}.cd2{animation-delay:.18s}.cd3{animation-delay:.31s}
-                @keyframes coreIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-              }
+              .core-name{fill:currentColor;font-size:12.5px;font-weight:600;text-anchor:middle}
+              .core-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
             </style>
-            <circle class="core-ring" cx="190" cy="150" r="54"/>
+
+            <circle class="core-ring" cx="280" cy="165" r="56"/>
             <!-- Archie mark (assets/archie.svg geometry), scaled to sit inside the ring -->
-            <g class="core-a" transform="translate(146.5,108.6) scale(0.085)">
+            <g class="core-a" transform="translate(236.5,123.6) scale(0.085)">
               <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
               <polygon points="328,887 512,727 696,887"/>
             </g>
-            <g class="core-dock cd1">
-              <line class="core-wire" x1="104" y1="96" x2="145" y2="120"/>
-              <circle class="core-port" cx="145" cy="120" r="3"/>
-              <rect class="core-tile" x="36" y="44" width="68" height="52" rx="12"/>
-              <path class="core-glyph" d="M62 71 L68 77 L79 63"/>
-              <text class="core-lbl" x="70" y="112">Skill</text>
+
+            <g class="pick-wire" data-wire="skill">
+              <line class="core-wire" x1="170" y1="94" x2="233" y2="135"/>
+              <circle class="core-port" cx="233" cy="135" r="3.2"/>
             </g>
-            <g class="core-dock cd2">
-              <line class="core-wire" x1="276" y1="96" x2="235" y2="120"/>
-              <circle class="core-port" cx="235" cy="120" r="3"/>
-              <rect class="core-tile" x="276" y="44" width="68" height="52" rx="12"/>
-              <rect class="core-glyph" x="298" y="60" width="24" height="16" rx="5"/>
-              <path class="core-glyph" d="M305 76 L303 82 L310 76"/>
-              <text class="core-lbl" x="310" y="112">Personality</text>
+            <g class="pick-wire" data-wire="personality">
+              <line class="core-wire" x1="390" y1="94" x2="327" y2="135"/>
+              <circle class="core-port" cx="327" cy="135" r="3.2"/>
             </g>
-            <g class="core-dock cd3">
-              <line class="core-wire" x1="190" y1="224" x2="190" y2="204"/>
-              <circle class="core-port" cx="190" cy="204" r="3"/>
-              <rect class="core-tile" x="156" y="224" width="68" height="52" rx="12"/>
-              <circle class="core-glyph" cx="190" cy="248" r="9"/>
-              <path class="core-glyph" d="M190 248 L190 242 M190 248 L195 249"/>
-              <text class="core-lbl" x="190" y="290">Routine</text>
+            <g class="pick-wire" data-wire="routine">
+              <line class="core-wire" x1="280" y1="236" x2="280" y2="221"/>
+              <circle class="core-port" cx="280" cy="221" r="3.2"/>
+            </g>
+
+            <g class="pick-node" data-node="skill" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Skill: something your agent can do">
+              <rect class="core-card" x="8" y="10" width="170" height="84" rx="16"/>
+              <path class="core-glyph" d="M84 28 L90 34 L102 20"/>
+              <text class="core-name" x="93" y="50">Skill</text>
+              <text class="core-sub" x="93" y="67">something it can do</text>
+              <text class="core-sub" x="93" y="80">calendar, inbox, the live web</text>
+            </g>
+            <g class="pick-node" data-node="personality" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Personality: how your agent talks to you">
+              <rect class="core-card" x="382" y="10" width="170" height="84" rx="16"/>
+              <rect class="core-glyph" x="455" y="20" width="24" height="16" rx="5"/>
+              <path class="core-glyph" d="M462 36 L460 42 L467 36"/>
+              <text class="core-name" x="467" y="50">Personality</text>
+              <text class="core-sub" x="467" y="67">how it talks to you</text>
+              <text class="core-sub" x="467" y="80">warm, or brief and plain</text>
+            </g>
+            <g class="pick-node" data-node="routine" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Routine: something your agent does on its own">
+              <rect class="core-card" x="195" y="236" width="170" height="84" rx="16"/>
+              <circle class="core-glyph" cx="280" cy="254" r="9"/>
+              <path class="core-glyph" d="M280 254 L280 248 M280 254 L285 255"/>
+              <text class="core-name" x="280" y="276">Routine</text>
+              <text class="core-sub" x="280" y="293">something it does on its own</text>
+              <text class="core-sub" x="280" y="306">a summary every morning</text>
             </g>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 400" role="img" aria-labelledby="corem-t" xmlns="http://www.w3.org/2000/svg">
-  <title id="corem-t">Your agent at the top, with three add-ons plugging in from below</title>
-  <style>
-    .corem-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-    .corem-a{fill:var(--accent)}
-    .corem-tile{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.4}
-    .corem-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .corem-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32}
-    .corem-port{fill:var(--accent)}
-    .corem-lbl{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-    @media (prefers-reduced-motion:no-preference){
-      .corem-dock{animation:coremIn .8s cubic-bezier(.22,1,.36,1) both}
-      .corem-d1{animation-delay:.05s}.corem-d2{animation-delay:.18s}.corem-d3{animation-delay:.31s}
-      @keyframes coremIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-    }
-  </style>
-  <circle class="corem-ring" cx="170" cy="80" r="54"/>
-  <!-- Archie mark (assets/archie.svg geometry), recentered inside the ring at (170,80) -->
-  <g class="corem-a" transform="translate(126.5,38.6) scale(0.085)">
-    <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-    <polygon points="328,887 512,727 696,887"/>
-  </g>
-  <g class="corem-dock corem-d1">
-    <line class="corem-wire" x1="100" y1="200" x2="127" y2="113"/>
-    <circle class="corem-port" cx="127" cy="113" r="3"/>
-    <rect class="corem-tile" x="44" y="200" width="92" height="52" rx="12"/>
-    <path class="corem-glyph" d="M82 227 L88 233 L99 219"/>
-    <text class="corem-lbl" x="90" y="268">Skill</text>
-  </g>
-  <g class="corem-dock corem-d2">
-    <line class="corem-wire" x1="240" y1="200" x2="213" y2="113"/>
-    <circle class="corem-port" cx="213" cy="113" r="3"/>
-    <rect class="corem-tile" x="204" y="200" width="92" height="52" rx="12"/>
-    <rect class="corem-glyph" x="238" y="216" width="24" height="16" rx="5"/>
-    <path class="corem-glyph" d="M245 232 L243 238 L250 232"/>
-    <text class="corem-lbl" x="250" y="268">Personality</text>
-  </g>
-  <g class="corem-dock corem-d3">
-    <line class="corem-wire" x1="170" y1="310" x2="170" y2="134"/>
-    <circle class="corem-port" cx="170" cy="134" r="3"/>
-    <rect class="corem-tile" x="124" y="310" width="92" height="52" rx="12"/>
-    <circle class="corem-glyph" cx="170" cy="336" r="9"/>
-    <path class="corem-glyph" d="M170 336 L170 330 M170 336 L175 337"/>
-    <text class="corem-lbl" x="170" y="378">Routine</text>
-  </g>
-</svg>
-          <figcaption>Archie sits at the center. Every add-on docks into it.</figcaption>
+
+          <svg class="explain-svg--mobile" viewBox="0 0 340 420" role="img" aria-labelledby="corem-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="corem-t">Your agent at the top, with three add-ons plugged into it from below: a skill, which is something it can do; a personality, which is how it talks to you; and a routine, which is something it does on its own</title>
+            <style>
+              .corem-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
+              .corem-a{fill:var(--accent)}
+              .corem-card{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.4}
+              .corem-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+              .corem-wire{fill:none;stroke:currentColor;stroke-width:1.4}
+              .corem-trunk{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3}
+              .corem-port{fill:var(--accent)}
+              .corem-name{fill:currentColor;font-size:13px;font-weight:600}
+              .corem-sub{fill:currentColor;opacity:.6;font-size:9.5px}
+            </style>
+
+            <circle class="corem-ring" cx="170" cy="60" r="48"/>
+            <!-- Archie mark (assets/archie.svg geometry), recentered inside the ring at (170,60) -->
+            <g class="corem-a" transform="translate(131.5,23.2) scale(0.0755)">
+              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+              <polygon points="328,887 512,727 696,887"/>
+            </g>
+            <!-- One trunk out of the agent, three branches off it. A rail rather than three
+                 long wires: on a phone the cards stack, and wires from the third card back up
+                 to the ring would cross the first two. -->
+            <path class="corem-trunk" d="M170 108 L170 118 Q170 126 162 126 L44 126 Q36 126 36 134 L36 356"/>
+
+            <g class="pick-wire" data-wire="skill">
+              <line class="corem-wire" x1="36" y1="176" x2="58" y2="176"/>
+              <circle class="corem-port" cx="58" cy="176" r="3"/>
+            </g>
+            <g class="pick-wire" data-wire="personality">
+              <line class="corem-wire" x1="36" y1="266" x2="58" y2="266"/>
+              <circle class="corem-port" cx="58" cy="266" r="3"/>
+            </g>
+            <g class="pick-wire" data-wire="routine">
+              <line class="corem-wire" x1="36" y1="356" x2="58" y2="356"/>
+              <circle class="corem-port" cx="58" cy="356" r="3"/>
+            </g>
+
+            <g class="pick-node" data-node="skill" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Skill: something your agent can do">
+              <rect class="corem-card" x="58" y="138" width="262" height="76" rx="14"/>
+              <path class="corem-glyph" d="M76 176 L81 181 L91 170"/>
+              <text class="corem-name" x="104" y="165">Skill</text>
+              <text class="corem-sub" x="104" y="182">something it can do: your calendar,</text>
+              <text class="corem-sub" x="104" y="196">your inbox, the live web</text>
+            </g>
+            <g class="pick-node" data-node="personality" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Personality: how your agent talks to you">
+              <rect class="corem-card" x="58" y="228" width="262" height="76" rx="14"/>
+              <rect class="corem-glyph" x="72" y="258" width="22" height="15" rx="5"/>
+              <path class="corem-glyph" d="M78 273 L76 278 L83 273"/>
+              <text class="corem-name" x="104" y="255">Personality</text>
+              <text class="corem-sub" x="104" y="272">how it talks to you: warm and chatty,</text>
+              <text class="corem-sub" x="104" y="286">or brief and to the point</text>
+            </g>
+            <g class="pick-node" data-node="routine" tabindex="0" role="button" aria-pressed="false"
+               aria-label="Routine: something your agent does on its own">
+              <rect class="corem-card" x="58" y="318" width="262" height="76" rx="14"/>
+              <circle class="corem-glyph" cx="83" cy="356" r="8"/>
+              <path class="corem-glyph" d="M83 356 L83 351 M83 356 L87 357"/>
+              <text class="corem-name" x="104" y="345">Routine</text>
+              <text class="corem-sub" x="104" y="362">something it does on its own, on a</text>
+              <text class="corem-sub" x="104" y="376">schedule: a summary every morning</text>
+            </g>
+          </svg>
+
+          <figcaption id="coreCaption" aria-live="polite">Every add-on docks straight into your agent. Each one works on its own, and your agent can carry any mix of the three.</figcaption>
         </figure>
       </div>
     </section>
@@ -263,13 +309,13 @@
     </section>
 
     <!-- ==============================
-         The Four Kinds
+         The Three Kinds
          ============================== -->
     <section class="section" aria-labelledby="kinds-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">The Four Kinds</span>
-          <h2 id="kinds-heading" class="fade-up delay-1">Three Kinds of Add-on</h2>
+          <span class="section-label fade-up">The Three Kinds</span>
+          <h2 id="kinds-heading" class="fade-up delay-1">Three Kinds of Add-ons</h2>
           <p>"Add-on" is the umbrella. Underneath it are three kinds, and they answer three different questions: what can it do, how does it talk, and when does it act.</p>
         </div>
 
@@ -780,5 +826,6 @@
 
   <script src="../../js/nav.js"></script>
   <script type="module" src="../../js/account-nav.js"></script>
+  <script src="../../js/addon-pick.js" defer></script>
 </body>
 </html>

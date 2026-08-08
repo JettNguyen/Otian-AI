@@ -3956,6 +3956,25 @@ html[data-theme="dark"] .availability-widget iframe {
   /* .mp-* small-screen rules live in section 35 (must follow section 34). */
 }
 
+/* Three cards have no honest two-column form: they come out two above one, and an odd
+   card centred under a pair reads as a layout that broke rather than one that was
+   chosen. So for the band where .feature-grid would be two-up, exactly three cards stay
+   three across, and they still collapse to a single column with everything else at
+   1000px.
+
+   Bounded at both ends on purpose. Left open at the bottom this outranks the
+   single-column rule at 1000px (`:nth-child` lends :has() and :not() its own
+   specificity, so this selector is three classes to that rule's one) and the cards would
+   never stack at all. The band is narrow, but 1024px is an iPad in landscape, which is a
+   real screen rather than a gap between two.
+
+   Exactly three: a pair genuinely wants two columns, and four want 2x2. */
+@media (min-width: 1001px) and (max-width: 1024px) {
+  .feature-grid:has(> :nth-child(3)):not(:has(> :nth-child(4))) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* ========================================
    25b. Home hero, max-width 1000px
    Below 1000px the demo leads: the landscape player stacks first as a
@@ -4920,6 +4939,65 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 8px;
   margin-bottom: 8px;
 }
+
+/* ── Pickable explainer diagram (skills-marketplace/what-is-an-add-on/) ───────
+   One diagram, two SVG variants, one set of state hooks. `data-active` on the
+   <figure> is written by js/addon-pick.js and both variants answer to it, so the
+   behaviour is described once rather than twice.
+
+   Deliberately non-directional. The three kinds are peers that each plug into the
+   agent, so choosing one only quiets the other two: nothing moves, nothing is
+   revealed in an order, and there is no path drawn between them, because a picture
+   that implied one would be saying something untrue about the product.
+
+   Everything below only ever quiets what is NOT chosen. Nothing appears on
+   interaction that was not already on the page: with no pointer, no JavaScript and
+   no attribute set, the diagram reads exactly as it does now, which is the only
+   version some people will ever see. */
+.explain-pick .pick-node { cursor: pointer; }
+.explain-pick .pick-node,
+.explain-pick .pick-wire {
+  transition: opacity var(--transition);
+}
+/* The wires sit quiet at rest so the three cards lead. The ink lives on the group
+   rather than on the line and the port dot separately, which is what lets one rule
+   below lift a whole wire from quiet to full. */
+.explain-pick .pick-wire { opacity: 0.42; }
+/* Chosen: the other two cards and the other two wires step back. Quieting the rest
+   beats brightening one, because the accent is already at full strength here and
+   there is nowhere above it to go. */
+.explain-pick[data-active] .pick-node,
+.explain-pick[data-active] .pick-wire { opacity: 0.28; }
+.explain-pick[data-active="skill"] .pick-node[data-node="skill"],
+.explain-pick[data-active="skill"] .pick-wire[data-wire="skill"],
+.explain-pick[data-active="personality"] .pick-node[data-node="personality"],
+.explain-pick[data-active="personality"] .pick-wire[data-wire="personality"],
+.explain-pick[data-active="routine"] .pick-node[data-node="routine"],
+.explain-pick[data-active="routine"] .pick-wire[data-wire="routine"] { opacity: 1; }
+/* The chosen card takes a filled ground, so the diagram still says which one it is
+   in a screenshot, or to anyone who cannot tell 28% from 100%. */
+.explain-pick[data-active="skill"] .pick-node[data-node="skill"] rect:first-of-type,
+.explain-pick[data-active="personality"] .pick-node[data-node="personality"] rect:first-of-type,
+.explain-pick[data-active="routine"] .pick-node[data-node="routine"] rect:first-of-type {
+  fill: var(--accent-subtle);
+  stroke-width: 2;
+}
+/* An SVG group takes no outline of its own, so keyboard focus is drawn on the card:
+   dashed, which no other state uses, so focus is never mistaken for the chosen kind
+   (Tab also previews a kind, and the two would otherwise look identical). */
+.explain-pick .pick-node:focus { outline: none; }
+.explain-pick .pick-node:focus-visible rect:first-of-type {
+  stroke-width: 2.4;
+  stroke-dasharray: 6 4;
+}
+/* Two lines held open, which is what the longest caption takes at desktop widths. A
+   pointer sweeping across the diagram changes this text several times a second, and
+   without the reservation everything below it hops on every one of those. Under
+   640px the captions run to three and four lines and holding all of that open would
+   be a band of nothing at rest; that is also where there is no pointer, so the only
+   thing that changes the caption is a deliberate tap, and growing under a tap is not
+   a jump. */
+.explain-pick figcaption { min-height: 3.25em; }
 
 .marketplace-category-count {
   display: block;

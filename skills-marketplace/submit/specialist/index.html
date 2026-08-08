@@ -6,8 +6,21 @@
   <title>Submit a Skill | Otian AI</title>
   <link rel="canonical" href="https://otianai.com/skills-marketplace/submit/skill/" />
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=../skill/" />
-  <script>window.location.replace("../skill/");</script>
+  <!--
+    There is no specialist form. A skill that searches the live web is submitted as a skill, and
+    the skill form asks whether it searches.
+
+    This file is not a page, it is a bounce, and it exists for one reason: copies of the Archie app
+    that shipped before the button was removed still open this URL. It can be deleted once nobody
+    is running one of those.
+
+    The query string has to come along. The app appends a one-time sign-in token as ?ct=..., so
+    dropping it would land the author on the form as a stranger and make them sign in to Google
+    again. The <noscript> refresh below cannot carry it, which is the documented fallback: the page
+    just asks them to sign in.
+  -->
+  <script>window.location.replace("../skill/" + window.location.search + window.location.hash);</script>
+  <noscript><meta http-equiv="refresh" content="0; url=../skill/" /></noscript>
 </head>
 <body>
   <p>Submit it as a <a href="../skill/">skill</a>. If it searches the live web, say so on the form.</p>

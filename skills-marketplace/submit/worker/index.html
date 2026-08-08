@@ -6,8 +6,13 @@
   <title>Submit a Skill | Otian AI</title>
   <link rel="canonical" href="https://otianai.com/skills-marketplace/submit/skill/" />
   <meta name="robots" content="noindex, follow" />
-  <meta http-equiv="refresh" content="0; url=../skill/" />
-  <script>window.location.replace("../skill/");</script>
+  <!--
+    "Worker" was the slug before "specialist" was, and both now mean skill. Same bounce as the
+    specialist folder next door, and the same reason to keep it: an older copy of the app may still
+    ask for this URL, with its one-time sign-in token in the query string.
+  -->
+  <script>window.location.replace("../skill/" + window.location.search + window.location.hash);</script>
+  <noscript><meta http-equiv="refresh" content="0; url=../skill/" /></noscript>
 </head>
 <body>
   <p>Submit it as a <a href="../skill/">skill</a>. If it searches the live web, say so on the form.</p>

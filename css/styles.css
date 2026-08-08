@@ -45,8 +45,9 @@
   --bg-wash-one: rgba(251, 228, 211, 0.42);
   --bg-wash-two: rgba(240, 184, 168, 0.24);
 
-  /* Add-on type accents: mirror the Archie app so a Specialist, Routine, and
-     Personality read as blue/teal/plum; Skills use the brand accent above. */
+  /* Add-on type accents: mirror the Archie app so a Routine and Personality
+     read as teal/plum; Skills use the brand accent above. --c-blue is kept
+     because other things on the site use it; it is no longer an add-on colour. */
   --c-blue: #5988CB;
   --c-blue-subtle: rgba(89, 136, 203, 0.13);
   --c-teal: #3E9A92;
@@ -5060,7 +5061,6 @@ html[data-theme="dark"] .booking-container iframe {
 /* Each type tab carries its add-on color (matching the badges): as text at rest and a
    solid fill when active. The All tab sets no --tab-color and falls back to the brand accent. */
 .mp-type-tab[data-type="skill"]       { --tab-color: var(--accent); }
-.mp-type-tab[data-type="specialist"]      { --tab-color: var(--c-blue); }
 .mp-type-tab[data-type="routine"]     { --tab-color: var(--c-teal); }
 .mp-type-tab[data-type="personality"] { --tab-color: var(--c-plum); }
 
@@ -5176,12 +5176,6 @@ html[data-theme="dark"] .booking-container iframe {
 /* Color-code the type badge per add-on kind, matching the Archie app. Skills keep
    the brand accent (default above); the grid colors by data-type so cards need no
    extra class, and detail pages opt in with an explicit modifier class. */
-.mp-product-card[data-type="specialist"] .mp-type-badge,
-.mp-type-badge--specialist {
-  background: var(--c-blue-subtle);
-  color: var(--c-blue);
-}
-
 .mp-product-card[data-type="routine"] .mp-type-badge,
 .mp-type-badge--routine {
   background: var(--c-teal-subtle);
@@ -7120,9 +7114,6 @@ html[data-theme="dark"] .booking-container iframe {
 [data-kind="skill"] {
   --kind-color: var(--accent); --kind-wash: var(--accent-subtle); --kind-ink: var(--accent-ink);
 }
-[data-kind="specialist"] {
-  --kind-color: var(--c-blue); --kind-wash: var(--c-blue-wash); --kind-ink: var(--c-blue-ink);
-}
 [data-kind="routine"] {
   --kind-color: var(--c-teal); --kind-wash: var(--c-teal-wash); --kind-ink: var(--c-teal-ink);
 }
@@ -7347,12 +7338,11 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 10px; font-size: 0.82rem; line-height: 1.55; color: var(--text-secondary);
 }
 
-/* Add-on colour the quiet Archie way: a small leading dot in the kind's own colour. The four are
-   the same four everywhere, which is the whole point of using a colour at all: terracotta skill,
-   blue specialist, teal routine, plum personality, in the app, on the Browse page, and here. */
+/* Add-on colour the quiet Archie way: a small leading dot in the kind's own colour. The three are
+   the same three everywhere, which is the whole point of using a colour at all: terracotta skill,
+   teal routine, plum personality, in the app, on the Browse page, and here. */
 .phone-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 999px; }
 .phone-dot--skill { background: var(--accent); }
-.phone-dot--specialist { background: var(--c-blue); }
 .phone-dot--routine { background: var(--c-teal); }
 .phone-dot--personality { background: var(--c-plum); }
 /* The journal's dot carries the outcome, so unlike the two above it is not one colour: grey for an

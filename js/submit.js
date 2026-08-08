@@ -83,7 +83,7 @@ const VARIABLE_TYPES = [
 
 const ADDON_KINDS = [
   ["skill", "Skill"],
-  ["specialist", "Specialist"],
+  ["specialist", "Skill (one that searches the web)"],
   ["routine", "Routine"],
   ["personality", "Personality"],
 ];

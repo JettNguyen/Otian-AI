@@ -30,15 +30,30 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* Render order = the order the user asked for: Personalities, Skills, Specialists, Routines.
-   `coll` is the Firestore subcollection name; `subagents` is what the app calls a Specialist. */
+/* Render order = the order the user asked for: Personalities, Skills, Routines.
+   `coll` is the Firestore subcollection name; `kind` is what the catalog document calls itself.
+
+   `shelf` is what a shopper sees, and it is not always `kind`. The `subagents` collection is
+   shown as a skill: the two differ in how the runtime calls them, which is a fact about our
+   code and never a question to put to somebody at a shelf. The collection, the kind and the
+   install path are all untouched; only the word and the colour collapse. */
 var COLLECTIONS = [
-  { coll: "personalities", kind: "personality", label: "Personality", plural: "Personalities" },
-  { coll: "skills",        kind: "skill",       label: "Skill",       plural: "Skills" },
-  { coll: "subagents",     kind: "specialist",      label: "Specialist",      plural: "Specialists" },
-  { coll: "routines",      kind: "routine",     label: "Routine",     plural: "Routines" },
+  { coll: "personalities", kind: "personality", shelf: "personality", label: "Personality", plural: "Personalities" },
+  { coll: "skills",        kind: "skill",       shelf: "skill",       label: "Skill",       plural: "Skills" },
+  { coll: "subagents",     kind: "specialist",  shelf: "skill",       label: "Skill",       plural: "Skills" },
+  { coll: "routines",      kind: "routine",     shelf: "routine",     label: "Routine",     plural: "Routines" },
 ];
-var KIND_ORDER = COLLECTIONS.map(function (c) { return c.kind; });
+
+/** The shelf a kind sits on. Everything user-visible sorts, counts, filters and colours by this. */
+function shelfKind(kind) {
+  var c = COLLECTIONS.filter(function (x) { return x.kind === kind; })[0];
+  return c ? c.shelf : kind;
+}
+
+/* Shelves in render order, deduped, so two collections sharing one shelf make one tab. */
+var KIND_ORDER = COLLECTIONS.map(function (c) { return c.shelf; }).filter(function (v, i, a) {
+  return a.indexOf(v) === i;
+});
 
 function kindLabel(kind) {
   var c = COLLECTIONS.filter(function (x) { return x.kind === kind; })[0];
@@ -225,7 +240,7 @@ function cardHtml(item) {
   var detail = detailHtml(item);
 
   var html = "";
-  html += '<article class="mp-product-card" data-type="' + item.kind + '"' +
+  html += '<article class="mp-product-card" data-type="' + shelfKind(item.kind) + '"' +
     ' data-category="' + escapeHtml(item.category) + '"' +
     ' data-price="' + (item.price_cents ? "premium" : "free") + '"' +
     ' data-visibility="' + item.visibility + '"' +
@@ -286,7 +301,7 @@ function allItems() {
     if (!seen[key]) { seen[key] = 1; out.push(it); }
   });
   out.sort(function (a, b) {
-    var ka = KIND_ORDER.indexOf(a.kind), kb = KIND_ORDER.indexOf(b.kind);
+    var ka = KIND_ORDER.indexOf(shelfKind(a.kind)), kb = KIND_ORDER.indexOf(shelfKind(b.kind));
     return ka !== kb ? ka - kb : a.name.localeCompare(b.name);
   });
   return out;
@@ -303,17 +318,20 @@ function renderTabs(items) {
   var counts = { all: items.length, exclusive: 0 };
   KIND_ORDER.forEach(function (k) { counts[k] = 0; });
   items.forEach(function (it) {
-    counts[it.kind]++;
+    counts[shelfKind(it.kind)]++;
     if (it.visibility === "private") counts.exclusive++;
   });
 
-  // Starter Packs leads, then All + the four add-on kinds. Packs is its own kind of thing (a
+  // Starter Packs leads, then All + the three add-on kinds. Packs is its own kind of thing (a
   // curated bundle), so it sits first as a distinct entry, mirroring the Archie app.
   var html = '<button type="button" class="mp-type-tab mp-type-tab--packs' +
     (activeType === "packs" ? " is-active" : "") + '" data-type="packs">Starter Packs' +
     ' <span class="mp-card-count">(' + PACKS.length + ")</span></button>";
   var tabs = [{ type: "all", label: "All" }].concat(
-    COLLECTIONS.map(function (c) { return { type: c.kind, label: c.plural }; })
+    KIND_ORDER.map(function (shelf) {
+      var c = COLLECTIONS.filter(function (x) { return x.shelf === shelf; })[0];
+      return { type: shelf, label: c.plural };
+    })
   );
   html += tabs.map(function (t) {
     return '<button type="button" class="mp-type-tab' + (t.type === activeType ? " is-active" : "") +

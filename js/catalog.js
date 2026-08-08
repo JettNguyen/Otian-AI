@@ -23,14 +23,23 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 /** Every collection the store sells from, with the names each side uses.
- *  `coll` is the Firestore subcollection; `kind` is what the app calls it. A Specialist is a
- *  `subagents` document, and that mismatch is historical, not meaningful. */
+ *
+ *  `coll` is the Firestore subcollection; `kind` is what the document calls itself; `shelf` is
+ *  what a shopper sees. A `subagents` document is shown as a skill: it differs from a skill in
+ *  how the runtime calls it, not in what it does for the person buying it, so the store offers
+ *  one word. The collection and the kind are unchanged, because install still needs both. */
 export const COLLECTIONS = [
-  { coll: "personalities", kind: "personality", label: "Personality", plural: "Personalities" },
-  { coll: "skills", kind: "skill", label: "Skill", plural: "Skills" },
-  { coll: "subagents", kind: "specialist", label: "Specialist", plural: "Specialists" },
-  { coll: "routines", kind: "routine", label: "Routine", plural: "Routines" },
+  { coll: "personalities", kind: "personality", shelf: "personality", label: "Personality", plural: "Personalities" },
+  { coll: "skills", kind: "skill", shelf: "skill", label: "Skill", plural: "Skills" },
+  { coll: "subagents", kind: "specialist", shelf: "skill", label: "Skill", plural: "Skills" },
+  { coll: "routines", kind: "routine", shelf: "routine", label: "Routine", plural: "Routines" },
 ];
+
+/** The shelf a kind sits on. Anything a shopper sorts, counts or filters by goes through here. */
+export function shelfKind(kind) {
+  const c = COLLECTIONS.find((x) => x.kind === kind);
+  return c ? c.shelf : kind;
+}
 
 /** One catalog item, with every field defaulted so no caller has to guard. */
 function normalize(kind, id, data) {

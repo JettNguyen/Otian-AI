@@ -33,7 +33,7 @@ import {
   getFirestore, doc, getDoc, setDoc, deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { bindStatusToast } from "./status-toast.js";
-import { COLLECTIONS, loadCatalog } from "./catalog.js";
+import { COLLECTIONS, loadCatalog, shelfKind } from "./catalog.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -695,28 +695,25 @@ function renderAgent(agent, journal) {
           "</div>").join("") +
         "</div>";
 
-  const skills = (agent.skills || []).length === 0
+  // One Skills list, holding both what the snapshot calls skills and what it calls specialists.
+  // They differ in how the runtime calls them, not in what they are to the person reading a phone
+  // screen, and the app and the store both say "skill" for both. A specialist carries a role
+  // rather than an enabled flag, so each row shows whichever of the two it has.
+  const skillRows = (agent.skills || []).map((s) => ({
+    name: s.name,
+    tag: s.enabled === false ? "Off" : "",
+  })).concat((agent.specialists || []).map((s) => ({
+    name: s.name,
+    tag: s.role || "",
+  })));
+
+  const skills = skillRows.length === 0
     ? '<div class="acct-section-body">No skills yet.</div>'
-    : '<ul class="phone-list">' + agent.skills.map((s) =>
+    : '<ul class="phone-list">' + skillRows.map((r) =>
         '<li class="phone-row">' +
         '<span class="phone-dot phone-dot--skill" aria-hidden="true"></span>' +
-        '<span class="phone-row-name">' + escapeHtml(s.name) + "</span>" +
-        (s.enabled ? "" : '<span class="phone-row-tag">Off</span>') +
-        "</li>").join("") + "</ul>";
-
-  // Specialists and the personality were in the snapshot and on no screen. The store reads them to
-  // mark what is already installed, so an owner could be shown "Added" against a specialist whose
-  // name appeared nowhere on the page, and the four colours meant nothing while only two of the
-  // four kinds were ever listed. Both sections appear only when there is something in them, the
-  // same rule the app's own tabs follow.
-  const specialists = (agent.specialists || []).length === 0
-    ? ""
-    : kindHeading("specialist", "Specialists", agent.specialists.length) +
-      '<ul class="phone-list">' + agent.specialists.map((s) =>
-        '<li class="phone-row">' +
-        '<span class="phone-dot phone-dot--specialist" aria-hidden="true"></span>' +
-        '<span class="phone-row-name">' + escapeHtml(s.name) + "</span>" +
-        (s.role ? '<span class="phone-row-tag">' + escapeHtml(s.role) + "</span>" : "") +
+        '<span class="phone-row-name">' + escapeHtml(r.name) + "</span>" +
+        (r.tag ? '<span class="phone-row-tag">' + escapeHtml(r.tag) + "</span>" : "") +
         "</li>").join("") + "</ul>";
 
   const personality = !(agent.personality && agent.personality.name)
@@ -762,8 +759,7 @@ function renderAgent(agent, journal) {
     // What it has been doing sits above what it has, for the same reason it does in the app: the
     // lists change on the day you set the agent up, and the journal changes every day after.
     renderJournal(journal) +
-    kindHeading("skill", "Skills", (agent.skills || []).length) + skills +
-    specialists +
+    kindHeading("skill", "Skills", skillRows.length) + skills +
     kindHeading("routine", "Routines", (agent.routines || []).length) + routines +
     personality +
     "</div>"
@@ -800,6 +796,12 @@ let targetAgent = null;
 
 const KIND_LABEL = {};
 COLLECTIONS.forEach((c) => { KIND_LABEL[c.kind] = c; });
+
+/** The shelves a shopper browses, in the store's order, one entry per shelf rather than per
+ *  collection. Two collections share the skill shelf, so iterating COLLECTIONS here would draw
+ *  the heading "Skills" twice with the list split arbitrarily between them. */
+const SHELVES = COLLECTIONS.filter((c, i) => COLLECTIONS.findIndex((x) => x.shelf === c.shelf) === i)
+  .map((c) => ({ shelf: c.shelf, label: c.label, plural: c.plural }));
 
 /** The kind chip that is pressed, or "" for all of them. */
 let storeKind = "";
@@ -863,7 +865,9 @@ async function renderStore(agent) {
   // that opens onto two results, which is a number that lies twice: once about the store and once
   // about the search.
   const found = catalog.filter(hits);
-  const matches = storeKind ? found.filter((i) => i.kind === storeKind) : found;
+  // `storeKind` holds a shelf, not a kind: the chips are shelves now, so the two collections that
+  // share the skill shelf must both survive this filter.
+  const matches = storeKind ? found.filter((i) => shelfKind(i.kind) === storeKind) : found;
 
   renderStoreFilters(found);
 
@@ -871,7 +875,9 @@ async function renderStore(agent) {
     // Which of the two filters emptied it, and the one press that undoes that one. A bare "nothing
     // matches" over a page with a chip pressed leaves somebody searching the whole store from
     // inside a corner of it.
-    const kindName = storeKind ? (KIND_LABEL[storeKind] || {}).plural || storeKind : "";
+    const kindName = storeKind
+      ? (SHELVES.find((c) => c.shelf === storeKind) || {}).plural || storeKind
+      : "";
     host.innerHTML =
       '<div class="phone-store-empty">' +
       (term && storeKind
@@ -887,20 +893,20 @@ async function renderStore(agent) {
 
   // Grouped by kind, in the store's own order, so browsing on a phone still has the shape people
   // know from the desktop rather than one long undifferentiated list.
-  host.innerHTML = COLLECTIONS.map((c) => {
-    const items = matches.filter((i) => i.kind === c.kind);
+  host.innerHTML = SHELVES.map((c) => {
+    const items = matches.filter((i) => shelfKind(i.kind) === c.shelf);
     if (items.length === 0) return "";
     // Every one of them once a kind has been chosen or a group opened out by hand. The cap is for
-    // the view that is showing all four at once, which is the only one it helps.
-    const capped = !storeKind && !storeExpanded.has(c.kind) && items.length > GROUP_PREVIEW;
+    // the view that is showing all three at once, which is the only one it helps.
+    const capped = !storeKind && !storeExpanded.has(c.shelf) && items.length > GROUP_PREVIEW;
     const shown = capped ? items.slice(0, GROUP_PREVIEW) : items;
     const rest = items.length - shown.length;
     return (
-      kindHeading(c.kind, c.plural, items.length) +
+      kindHeading(c.shelf, c.plural, items.length) +
       '<ul class="phone-list">' + shown.map((i) => storeRow(i, have, agent)).join("") + "</ul>" +
       (rest > 0
-        ? '<button type="button" class="phone-store-more" data-kind="' + c.kind +
-          '" data-store-expand="' + c.kind + '">Show the other ' + rest + " " +
+        ? '<button type="button" class="phone-store-more" data-kind="' + c.shelf +
+          '" data-store-expand="' + c.shelf + '">Show the other ' + rest + " " +
           escapeHtml(rest === 1 ? c.label.toLowerCase() : c.plural.toLowerCase()) + "</button>"
         : "")
     );
@@ -956,9 +962,9 @@ function renderStoreFilters(found) {
 
   host.innerHTML =
     chip("", "All", found.length) +
-    COLLECTIONS.map((c) => {
-      const n = found.filter((i) => i.kind === c.kind).length;
-      return n === 0 ? "" : chip(c.kind, c.plural, n);
+    SHELVES.map((c) => {
+      const n = found.filter((i) => shelfKind(i.kind) === c.shelf).length;
+      return n === 0 ? "" : chip(c.shelf, c.plural, n);
     }).join("");
 }
 

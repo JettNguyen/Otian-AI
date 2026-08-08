@@ -62,7 +62,37 @@ const MAX_SHOT_BYTES = 8 * 1024 * 1024; // 8 MB, matches the copy and the Storag
 
 const form = document.getElementById("skillForm");
 const addonType = form.dataset.addonType || "skill";
-const KIND = ADDON_SPEC.kinds[addonType];
+
+/**
+ * The kind being submitted, as an author sees it. Three: skill, routine, personality.
+ *
+ * The field table still describes four, because the Archie app writes all four and its own
+ * "write your own" forms are built from the same table. A submission is a different thing: it is
+ * reviewed by hand and filed into the repo by a person, so what the form has to collect is the
+ * answers, not the collection name. Asking an author to choose between "skill" and "specialist"
+ * was asking them which of our code paths they wanted.
+ *
+ * So the skill form carries the one question that actually separates the two, "can it search the
+ * live web", taken from the specialist spec rather than restated here so the caps and help text
+ * cannot drift from the app's. Whoever reviews the submission reads that answer and files it into
+ * `subagents` or `skills` accordingly.
+ */
+const KIND = (() => {
+  const base = ADDON_SPEC.kinds[addonType];
+  if (addonType !== "skill") return base;
+  const searching = ADDON_SPEC.kinds.specialist;
+  if (!searching) return base;
+  const extra = searching.sections
+    .flatMap((sec) => sec.fields)
+    .filter((f) => f.key === "web_search" || f.key === "max_searches");
+  if (extra.length === 0) return base;
+  return {
+    ...base,
+    sections: base.sections.map((sec) =>
+      sec.title === "What it does" ? { ...sec, fields: sec.fields.concat(extra) } : sec,
+    ),
+  };
+})();
 
 const gate = document.getElementById("signinGate");
 const done = document.getElementById("doneBanner");

@@ -1,4 +1,4 @@
-// The four add-on submission forms (skill / specialist / routine / personality).
+// The three add-on submission forms (skill / routine / personality).
 //
 // The fields are not written into the four HTML pages any more. They are BUILT from
 // `js/addon-fields.js`, which is generated from `crates/archie-domain/src/addon_fields.rs` in the

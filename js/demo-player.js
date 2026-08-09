@@ -91,7 +91,11 @@
             width: parseInt(s.getAttribute('data-w'), 10),
             height: parseInt(s.getAttribute('data-h'), 10),
             bitrate: 2000000,
-            framerate: 30
+            // Per-source, because the tiers no longer share a frame rate: the AV1 and HEVC
+            // builds are 60fps and the H.264 fallback is 30. Asking about the wrong one is
+            // asking the wrong question, and 60 is twice the decode work of 30, which is
+            // exactly the difference this whole check exists to catch.
+            framerate: parseInt(s.getAttribute('data-fps'), 10) || 30
           }
         })
         .catch(function () {

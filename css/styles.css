@@ -1458,7 +1458,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   /* Placeholder shown while the recording is still loading, and left in place if it ever
      fails to load: the Otian mark centered on the brand surface, instead of the base
      frame's near-black fill. --bg-secondary carries the theme, so the card is cream in
-     light and warm-dark in dark. The video is object-fit:cover at the same 1.698 aspect,
+     light and warm-dark in dark. The video is object-fit:cover at the same 1.553 aspect,
      so it covers this completely the instant it paints. */
   background: var(--bg-secondary) url("../assets/otian-icon-rounded.svg") center / clamp(160px, 30%, 300px) no-repeat;
 }
@@ -4011,12 +4011,13 @@ html[data-theme="dark"] .availability-widget iframe {
     display: none;
   }
 
-  /* Native aspect (1.698). The recording fills its own width: the app UI reaches the edges on the
-     build screens, so unlike the old cut there's no wallpaper margin worth cropping away. Show it
-     whole and let the bottom fade below melt it into the page. Nothing vertical is cropped, so the
-     mask is plain frame percentages and the two vendor gradients can't drift apart. */
+  /* Native aspect (1.553). The recording fills its own width: it is zoomed into the app for all
+     but its opening seconds, so the UI reaches the edges and there's no wallpaper margin worth
+     cropping away. Show it whole and let the bottom fade below melt it into the page. Nothing
+     vertical is cropped, so the mask is plain frame percentages and the two vendor gradients
+     can't drift apart. */
   .demo-player--hero .demo-player-frame {
-    aspect-ratio: 1280 / 754;
+    aspect-ratio: 1280 / 824;
     border-radius: 0;
     box-shadow: none;
     /* Transparent on purpose, overriding the desktop hero's Otian-mark placeholder: the
@@ -5956,8 +5957,8 @@ html[data-theme="dark"] .booking-container iframe {
 .demo-player-frame {
   position: relative;
   /* Hold the box before the poster lands so nothing below it jumps.
-     Native aspect of the recording (3668x2160 = 1.698). */
-  aspect-ratio: 1280 / 754;
+     Native aspect of the recording (3356x2160 = 1.553). */
+  aspect-ratio: 1280 / 824;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--panel-border-strong);

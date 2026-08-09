@@ -182,6 +182,14 @@ of yours touches us again."
   sentence ("on your own account, with your key, we are never in the middle"), which is true
   of every path the sentence names, or state it flat and carry the clause. A flat "nothing
   passes through us" with neither is false for every new install.
+- ❌ The "block us and watch nothing happen" test may not name `otianai.com` alone. Corrected
+  2026-08-09: the proxy answers on `archie-4f35.onrender.com`, so blocking the marketing domain
+  leaves a free-credits agent thinking happily through a server of ours while the page tells the
+  reader that proves we are not in the path. Both hosts are named now, and the promise is scoped
+  to "once your own key is in". A test a reader can pass while the thing it disproves is still
+  running is worse than no test. Same fix on `trust/index.html` step 4 and `trust/details/` step 4;
+  step 3 on `trust/index.html` also had to name the proxy, because the paragraph invites readers
+  to report any other host carrying their content and the details page's list already named it.
 - ✅ It is passed through, not kept. `stripe-webhook/index.js:485-487`: nothing there logs a
   request body, a response body, a prompt, or a completion; what is logged is the uid, hashes
   of the device and IP, token counts and amounts. The reply is buffered in memory to read the

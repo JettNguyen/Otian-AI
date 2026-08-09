@@ -455,7 +455,8 @@ function skillWaitingOn(agent, skill) {
    do about that is say so and point at the app that is.
 
    Not an accident of scope: a conversation here would be genuinely bad. Commands reach the computer
-   through a polled mailbox (5 seconds while it is being used, 30 once it has gone idle), so every
+   through a polled mailbox (3 seconds while it is being used, 15 shortly after, 2 minutes once it
+   has gone idle), so every
    turn would cost a write, a poll to notice it, the model's own thinking time, and another poll for
    the reply. Meanwhile the agent already answers in a chat app that is on this phone, with push
    notifications and a real conversation view. Sending people there is the better product, not a

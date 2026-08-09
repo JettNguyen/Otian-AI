@@ -4,37 +4,111 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign-in & security: Archie</title>
+  <script>
+    /* Theme before first paint, resolved exactly the way every other page does it (saved choice,
+       else the computer's own setting). This page carries its own styles rather than loading
+       css/styles.css, so without this block it stayed cream for a dark-mode visitor. There is no
+       toggle here because there is no nav to hold one: the choice is made on the main site and
+       read back here. */
+    (function () {
+      try {
+        var t = localStorage.getItem("nr-theme");
+        if (t !== "dark" && t !== "light") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        if (t === "dark") document.documentElement.setAttribute("data-theme", "dark");
+      } catch (e) { /* default light */ }
+    })();
+  </script>
   <style>
+    /* The palette, in both themes. Values match the tokens of the same name in css/styles.css so
+       this page reads as the same product as the page the visitor arrived from. */
+    :root {
+      color-scheme: light;
+      --bg-primary: #FBF8F4;
+      --bg-card: rgba(255,255,255,0.94);
+      --bg-input: #FFFFFF;
+      --text-primary: #4A423A;
+      --text-secondary: #8C8177;
+      --text-muted: #A09489;
+      --accent: #E08A5B;
+      --accent-ink: #B56A3C;
+      --accent-subtle: rgba(224,138,91,0.14);
+      --accent-ring: rgba(224,138,91,0.15);
+      --text-on-accent: #2A2521;
+      --card-border: rgba(74,66,58,0.14);
+      --line: rgba(74,66,58,0.12);
+      --field-border: rgba(74,66,58,0.18);
+      --surface-btn: rgba(74,66,58,0.07);
+      --surface-soft: rgba(74,66,58,0.06);
+      --surface-pill: rgba(74,66,58,0.08);
+      --ok-ink: #3F7A4F;
+      --ok-subtle: rgba(74,140,90,0.14);
+      --danger: #B3261E;
+      --shadow-card: 0 16px 36px rgba(74,66,58,0.10);
+      --glow-opacity: 0.06;
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --bg-primary: #2A2521;
+      --bg-card: #3A3229;
+      /* A shade below the card, so a field still reads as inset rather than as another panel. */
+      --bg-input: #2A2521;
+      --text-primary: #F5EFE6;
+      --text-secondary: #B7AA9B;
+      --text-muted: #9D8F82;
+      --accent: #EDA277;
+      /* Already light on dark, so the accent needs no darkening to stay legible as text. */
+      --accent-ink: #EDA277;
+      --accent-subtle: rgba(237,162,119,0.16);
+      --accent-ring: rgba(237,162,119,0.22);
+      --text-on-accent: #2A2521;
+      --card-border: rgba(245,239,230,0.16);
+      --line: rgba(245,239,230,0.16);
+      --field-border: rgba(245,239,230,0.16);
+      /* Lifted from the light theme's 0.07: a white veil at that strength is invisible on a dark
+         card, and a button nobody can see is a button nobody presses. */
+      --surface-btn: rgba(245,239,230,0.10);
+      --surface-soft: rgba(245,239,230,0.05);
+      --surface-pill: rgba(245,239,230,0.08);
+      --ok-ink: #8FBF7C;
+      --ok-subtle: rgba(143,191,124,0.16);
+      --danger: #FF9F97;
+      --shadow-card: 0 16px 36px rgba(0,0,0,0.5);
+      /* The wash has less contrast to work with against a dark ground, so it is given more. */
+      --glow-opacity: 0.10;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #FBF8F4;
+      background: var(--bg-primary);
       font-family: 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
-      color: #4A423A;
+      color: var(--text-primary);
       padding: 2rem 1rem;
     }
     .glow {
       position: fixed; top: 20%; left: 50%;
       transform: translate(-50%, -50%);
       width: 480px; height: 480px; border-radius: 50%;
-      background: #E08A5B; opacity: 0.06; filter: blur(140px); pointer-events: none;
+      background: var(--accent); opacity: var(--glow-opacity); filter: blur(140px); pointer-events: none;
     }
     .card {
       position: relative; width: 420px; max-width: 100%;
       display: flex; flex-direction: column; gap: 20px;
-      background: rgba(255,255,255,0.94);
-      border: 1px solid rgba(74,66,58,0.14);
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
       border-radius: 24px; padding: 2rem;
-      box-shadow: 0 16px 36px rgba(74,66,58,0.10);
+      box-shadow: var(--shadow-card);
     }
     .head { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    .byline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #A09489; }
+    .byline { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
     h1 { font-size: 16px; font-weight: 600; }
-    .sub { font-size: 13px; color: #8C8177; line-height: 1.5; }
-    .divider { width: 100%; height: 1px; background: rgba(74,66,58,0.12); }
+    .sub { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
+    .divider { width: 100%; height: 1px; background: var(--line); }
     .btn {
       width: 100%; padding: 0.7rem 1rem; border-radius: 12px; border: none;
       font-size: 0.875rem; font-weight: 600; cursor: pointer;
@@ -43,33 +117,33 @@
     }
     .btn:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .btn-primary { background: #E08A5B; color: #2A2521; }
-    .btn-secondary { background: rgba(74,66,58,0.07); color: #4A423A; }
+    .btn-primary { background: var(--accent); color: var(--text-on-accent); }
+    .btn-secondary { background: var(--surface-btn); color: var(--text-primary); }
     input {
       width: 100%; padding: 0.6rem 0.8rem; border-radius: 10px;
-      border: 1px solid rgba(74,66,58,0.18); background: #fff; color: #4A423A;
+      border: 1px solid var(--field-border); background: var(--bg-input); color: var(--text-primary);
       font-size: 0.875rem; font-family: inherit; outline: none;
     }
-    input:focus { border-color: #E08A5B; box-shadow: 0 0 0 3px rgba(224,138,91,0.15); }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-ring); }
     .fields { display: flex; flex-direction: column; gap: 8px; }
-    .section { border: 1px solid rgba(74,66,58,0.12); border-radius: 14px; padding: 1rem; }
+    .section { border: 1px solid var(--line); border-radius: 14px; padding: 1rem; }
     .section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .section-title { font-size: 13px; font-weight: 600; }
-    .section-body { font-size: 12px; color: #8C8177; line-height: 1.5; margin-top: 6px; }
+    .section-body { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-top: 6px; }
     .pill { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px; white-space: nowrap; }
-    .pill-on { background: rgba(74,140,90,0.14); color: #3f7a4f; }
-    .pill-off { background: rgba(74,66,58,0.08); color: #8C8177; }
-    .pill-soon { background: rgba(224,138,91,0.14); color: #b56a3c; }
-    .link { background: none; border: none; padding: 0; font-family: inherit; font-size: 12px; color: #8C8177; cursor: pointer; }
+    .pill-on { background: var(--ok-subtle); color: var(--ok-ink); }
+    .pill-off { background: var(--surface-pill); color: var(--text-secondary); }
+    .pill-soon { background: var(--accent-subtle); color: var(--accent-ink); }
+    .link { background: none; border: none; padding: 0; font-family: inherit; font-size: 12px; color: var(--text-secondary); cursor: pointer; }
     .link:hover { text-decoration: underline; }
     .mini { padding: 0.45rem 0.8rem; width: auto; font-size: 12px; border-radius: 10px; }
     .code {
       font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; letter-spacing: 0.08em;
-      background: rgba(74,66,58,0.06); border-radius: 8px; padding: 8px 10px; word-break: break-all; user-select: all;
+      background: var(--surface-soft); border-radius: 8px; padding: 8px 10px; word-break: break-all; user-select: all;
     }
-    #status { font-size: 12px; min-height: 1.1em; color: #8C8177; text-align: center; }
-    #status.error { color: #c0392b; }
-    #status.ok { color: #3f7a4f; }
+    #status { font-size: 12px; min-height: 1.1em; color: var(--text-secondary); text-align: center; }
+    #status.error { color: var(--danger); }
+    #status.ok { color: var(--ok-ink); }
     .hidden { display: none !important; }
     .stack { display: flex; flex-direction: column; gap: 8px; }
     .row { display: flex; gap: 8px; }
@@ -169,7 +243,7 @@
     </div>
 
     <div id="status"></div>
-    <p style="font-size:11px;color:#A09489;text-align:center;line-height:1.5;">&copy; 2026 Otian AI LLC</p>
+    <p style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5;">&copy; 2026 Otian AI LLC</p>
   </div>
 
 <script type="module">

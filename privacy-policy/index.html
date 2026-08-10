@@ -178,16 +178,28 @@
           <h3>Accounts you connect</h3>
           <p>You may connect accounts you already use: Google (Gmail, Calendar and Tasks), Microsoft (Outlook mail and calendar, including Office 365), Telegram, Discord, Slack, Signal, Matrix, Todoist, Fireflies, GoHighLevel, and any other service you connect with a key of your own. Archie talks to those services <strong>directly from your computer</strong>, using access tokens issued to you and stored in your operating system's Keychain. The contents of those accounts are not sent to us, and we have no ability to access them. You can disconnect any of them at any time from within the app.</p>
 
-          <h3>Google user data (Gmail and Calendar)</h3>
-          <p>When you connect Google, Archie requests read access to your Gmail and the ability to manage events on your Google Calendar, so it can help you with email and scheduling. This Google user data is handled under Google's rules for apps that use its APIs:</p>
-          <p><strong>Archie's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements.</strong> Concretely, your Gmail and Calendar data is:</p>
+          <h3>Google user data (Gmail, Calendar and Tasks)</h3>
+          <p>When you connect Google, Archie asks only for the permissions you tick on the connect screen. Each is a separate permission and one you do not tick is never requested:</p>
           <ul>
-            <li>used only to provide and improve the email and calendar features you see in the app, and for no other purpose;</li>
-            <li>processed <strong>directly between your computer and Google</strong>: it is never sent to, stored on, or accessible by Otian's servers;</li>
+            <li><strong>Read your mail</strong>, so it can tell you what needs a reply and find what you ask it for.</li>
+            <li><strong>Send a reply</strong>, which it only ever does after showing you the exact text and waiting for you to press Send.</li>
+            <li><strong>File mail out of your inbox</strong>, which is a label change. It never deletes an email, and anything it files is still in All Mail.</li>
+            <li><strong>See your calendar</strong>, so it can tell you what your week looks like and find you a free hour.</li>
+            <li><strong>Change your calendar</strong>, which again waits for you to approve the specific change first.</li>
+            <li><strong>Your Google Tasks</strong>, so it can add and complete items on your list.</li>
+            <li><strong>Your email address</strong>, so the app can show you which account you connected.</li>
+          </ul>
+          <p>This Google user data is handled under Google's rules for apps that use its APIs:</p>
+          <p><strong>Archie's use and transfer of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including its Limited Use requirements.</strong> Concretely, your Google data is:</p>
+          <ul>
+            <li>used only to provide and improve the email, calendar and task features you see in the app, and for no other purpose;</li>
+            <li>fetched <strong>directly between your computer and Google</strong>: it is never sent to, stored on, or accessible by Otian's servers;</li>
+            <li>sent to <strong>the AI account you connected</strong>, and only so it can answer you. Reading an inbox means giving a model something to read, so the message text goes to Anthropic, OpenAI, Google, Groq or xAI, on your account and your key, directly from your computer. We are not in the middle of it and we keep no copy;</li>
             <li><strong>never used to train any generalized or artificial-intelligence model</strong>, ours or anyone else's;</li>
-            <li>never sold, and never transferred to others except as needed to provide the feature at your direction, to comply with the law, or in connection with a merger of which you are notified;</li>
+            <li>never sold, and never transferred to anyone besides the AI account above except to comply with the law or in connection with a merger of which you are notified;</li>
             <li>never read by a human except with your explicit consent (for example, to troubleshoot a problem you report to us), where required for security, or to comply with the law.</li>
           </ul>
+          <p>The only thing Archie keeps on your computer between sessions is a marker of where it last read up to, so it does not re-read the same mail twice. Message contents are read to answer you and are not stored, beyond whatever ends up in the conversation you can see and delete.</p>
 
           <h3>Microsoft account data (Outlook mail and calendar)</h3>
           <p>Outlook and Office 365 accounts work the same way and are treated the same way. When you connect one, Archie asks only for the permissions you tick on the connect screen: reading your mail, sending a reply, moving mail out of your inbox, and managing events on your calendar are four separate permissions, and one you do not tick is never requested. Everything above about your Google data is equally true of your Microsoft data: it is used only for the email and calendar features you can see, it moves directly between your computer and Microsoft, it never reaches our servers, it is never used to train any model, and it is never sold. Access tokens are stored in your operating system's Keychain, and you can disconnect the account at any time from within the app, or revoke it yourself at myaccount.microsoft.com.</p>

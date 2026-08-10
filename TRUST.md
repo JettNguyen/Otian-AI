@@ -330,6 +330,29 @@ on your own API key, not the provider's bill."
 the real bill. Overstating this one turns a helpful number into a billing promise we cannot
 keep. Never write "Archie tracks your exact spend" or "see your bill in Archie".
 
+### ✅ The quality dial is a default, and the checkbox under it is the override
+
+**Approved wording:** "An add-on can pick its own response quality and ignore the dial, and many
+do, so on an agent with several add-ons installed the dial alone barely changes the bill. The
+checkbox under it, 'Use this for every skill', overrides them. Measured in August 2026 on an agent
+with twelve add-ons, that checkbox took about four fifths off the monthly cost."
+
+**Why it's true:** `resolve_for` (`crates/archie-runtime/src/gateway.rs:711-718`) is the single
+place the model is chosen for a reply. With the flag off it calls `resolve_model`, which lets a
+skill's own declared tier win; with it on it calls `resolve_model_forced`, which uses the agent's
+dial for every target. The flag is `AgentBundleManifest::force_model_tier`, written by
+`agent_set_force_tier` (`src-tauri/src/commands.rs:622`) from the "Use this for every skill"
+checkbox in `src/app/agent-detail.tsx`. Web search is bumped to Balanced rather than broken
+(`resolve_model_forced`, same file line 699).
+
+**The four fifths is measured, not modelled:** `crates/archie-runtime/examples/cost_bench.rs`
+run with `--live --force-fast` against a twelve-skill agent on 2026-08-10. Forced Economy came to
+18% of forced Balanced on a warm turn and 21% on a cold one. The unforced dial on the same agent
+saved 4% to 7%. Figures and the full dataset: `docs/COST-MEASURED.md` in the Archie repo.
+
+**Required clause, do not drop it:** say that the checkbox also takes the add-ons off the level
+they chose. A saving quoted without its trade is a claim we cannot defend.
+
 ### ✅ Your API key stays in the Keychain
 
 **Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to

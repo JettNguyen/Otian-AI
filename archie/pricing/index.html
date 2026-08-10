@@ -281,7 +281,8 @@
           <p class="cost-table-note">Modelled from measured component sizes and the AI companies&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month. In August 2026 we checked the light row against a real agent, message by message, and it held: measured, a message on a lightly connected agent costs between 1.2&cent; and 2.0&cent;, depending on whether you are mid-conversation or starting one.</p>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one. An agent gets expensive through steady use rather than through any one costly question, and worked hard it can pass most software subscriptions. The third driver below is the dial for that.</p>
+        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one. An agent gets expensive through steady use rather than through any one costly question, and worked hard it can pass most software subscriptions.</p>
+        <p class="cost-note"><strong>The scheduled half is easy to underestimate, so here is what it really looks like.</strong> We built an agent with twelve add-ons and kept the routines that arrived with them, which is what the app itself suggests. Its schedule fires about 320 times a month: eight things every morning, three every week, and one before every meeting on the calendar. Measured, that came to about a third of its entire bill, spent before anybody typed anything. Each scheduled run also pays full price for its briefing, because it runs on its own and there is no conversation beside it to share a parked copy with. The heavy row above assumes a lighter schedule than that; with 320 runs it lands nearer $165.</p>
         <!-- Unboxed. These four are the mechanics behind the table above, and four bordered
              cards of 80-word prose read as four more things to get through before you learn
              what it costs. The numbers are the claim; these are the reasoning. -->
@@ -297,8 +298,9 @@
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Response quality is the dial you hold</span>
-            <p>Economy, Balanced and Best cost very different amounts per message, and every figure above is Balanced, the default. Running that heavy agent entirely on Economy takes roughly two thirds off it. That trades against how good the answers are, which is why it&rsquo;s your switch and not our default.</p>
+            <span class="calm-list-label">Response quality is the dial you hold, and the box under it is the one that bites</span>
+            <p>Economy, Balanced and Best cost very different amounts per message, and every figure above is Balanced, the default. There is a catch worth knowing before you go and move it: <strong>an add-on can pick its own quality and ignore the dial</strong>, and most of the useful ones do. So on an agent with a few add-ons installed, moving the dial to Economy changes almost nothing. We measured 4% to 7% on an agent with twelve.</p>
+            <p>Underneath the dial is a checkbox reading &ldquo;Use this for every skill&rdquo;. That one overrides the add-ons, and it is where the saving actually lives: measured on that same twelve-add-on agent, forced Economy costs <strong>about a fifth</strong> of Balanced, taking a heavy month from roughly $140 to roughly $30. It trades against how good the answers are, which is why it&rsquo;s your switch and not our default.</p>
           </div>
 
           <div class="calm-list-item">
@@ -310,7 +312,7 @@
         <div class="cost-trust fade-up delay-2">
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The size of the briefing, the AI companies&rsquo; published prices, how many passes an ordinary message takes, and, since August 2026, the whole light row: we ran a real agent through a real conversation and read the bill for every call it made. It landed inside the figure above.</p>
+            <p>The size of the briefing, the AI companies&rsquo; published prices, how many passes an ordinary message takes, and, since August 2026, all three rows: we ran real agents through real conversations and read the bill for every call each one made. Every published total landed inside what we measured. Searching the web is charged per search rather than by the word, at about a penny a time, and none of these figures counts it.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
@@ -318,11 +320,11 @@
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-            <p>How you space your messages out, which is now the only large unknown and is a fact about you rather than about the software. A message sent while you are mid-conversation can reuse the copy of the briefing, and one sent hours later cannot. Measured, that is the difference between 1.2&cent; and 3.4&cent; for the same message. The figures above assume a reasonable mix.</p>
+            <p>How you space your messages out. This is a fact about you rather than about the software, and it turned out to be the biggest single number in all of it. A message sent while you are mid-conversation can reuse the parked copy of the briefing; one sent hours later cannot, and neither can anything on a schedule. Measured across every agent we tried, <strong>the second kind costs about six times the first</strong>. That is more than the quality setting moves, more than the connections move, and more than the message count moves. The figures above assume a reasonable mix of the two.</p>
           </div>
           <div class="cost-trust-row">
-            <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-            <p>The moderate and heavy rows. Those are the light row&rsquo;s arithmetic carried up a longer briefing, and we have not yet run an agent with that much connected to check them. Searching the web is also charged per search rather than by the word, at about a penny a time, and none of these figures counts them.</p>
+            <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+            <p>The moderate and heavy rows, as of August 2026. We built agents at both shapes, connected a real calendar and a real inbox to each, and ran them: four add-ons for the moderate row, twelve add-ons with their own records and documents for the heavy one. Both published totals landed inside what we measured. What we still have not measured is how many messages a day a real person sends, which is the one assumption left in the table.</p>
           </div>
         </div>
 

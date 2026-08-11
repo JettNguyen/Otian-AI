@@ -6,3 +6,10 @@ PRICING-ONETIME-MIGRATION.md
 assets/*.master.mp4
 # macOS folder metadata — never track.
 .DS_Store
+# Headless-browser profiles. Chrome writes these into the working directory when it is run
+# without --user-data-dir, and the Pages workflow uploads the repo root verbatim, so a stray
+# profile gets served from otianai.com. 44 MB of them shipped on 2026-08-11.
+cp[0-9]*/
+# Firebase deploy caches and logs. Regenerated on every deploy, machine-local, never shipped.
+.firebase/
+firebase-debug.log

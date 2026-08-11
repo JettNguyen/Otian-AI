@@ -1,13 +1,12 @@
 {
-  "//": "This repo is the marketing website only. It does NOT own any Firebase backend. All Firestore/Storage rules, indexes, and marketplace seeding live in the Archie app repo (single source of truth, deployed by its firebase-deploy.yml). The pages here use Firebase only at runtime via the client SDK (auth, Firestore reads, submission uploads) — nothing to deploy. The site itself ships via GitHub Pages (see .github/workflows/deploy.yml), so this hosting block is only for local `firebase serve`.",
+  "//": "This repo is the marketing website only. It does NOT own any Firebase backend. All Firestore/Storage rules, indexes, and marketplace seeding live in the Archie app repo (single source of truth, deployed by its firebase-deploy.yml). The pages here use Firebase only at runtime via the client SDK (auth, Firestore reads, submission uploads), so there is nothing to deploy. The site itself ships via GitHub Pages (see .github/workflows/deploy.yml).",
+  "//hosting": "Firebase Hosting exists here for one reason: archie-77170.firebaseapp.com is Firebase Auth's authDomain (js/*.js), which makes it an Authorized domain on the Google OAuth consent screen, so a verification reviewer can open it. It must never serve a second copy of the marketing site. A snapshot deployed 2026-07-09 sat there until 2026-08-11 calling Otian AI a service that 'teaches and guides clients', while otianai.com called it a desktop app, and Google's OAuth verification flagged the two domains as inconsistent. Everything now redirects to otianai.com. Firebase serves its reserved /__/* paths (the auth handler that signs people in, init.json) ahead of these rules, so sign-in is untouched: verify that on a preview channel before every deploy, because it is the whole risk of this file.",
   "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**",
-      "data/**",
-      "business/**"
+    "public": "firebase-hosting",
+    "ignore": ["**/.*"],
+    "redirects": [
+      { "source": "/", "destination": "https://otianai.com/", "type": 301 },
+      { "source": "**", "destination": "https://otianai.com/", "type": 301 }
     ]
   }
 }

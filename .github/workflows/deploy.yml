@@ -29,8 +29,12 @@ jobs:
 
       # Pages written but not published yet. They stay in the repo and out of the upload, so
       # their URLs return the 404 page. Delete a line here to publish that page.
+      #
+      # firebase-hosting/ is not one of those: it is the redirect stub Firebase Hosting serves on
+      # archie-77170.firebaseapp.com (see firebase.json), and it has no business answering on
+      # otianai.com as well.
       - name: Withhold unpublished pages
-        run: rm -rf business
+        run: rm -rf business firebase-hosting
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

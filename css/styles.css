@@ -239,8 +239,13 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  opacity: 0;
-  animation: pageLoad 0.4s ease forwards;
+  /* Visible by default, with the animation fading in on top. The reverse (opacity: 0 held visible
+     by `forwards`) made the whole page's visibility depend on an animation running to completion,
+     so any renderer that skips CSS animations would get a blank page out of a healthy 200. Chrome
+     renders both forms fine, so this is defence in depth rather than a fix for an observed bug,
+     but nothing is gained by having "can you see the site at all" rest on an animation. */
+  opacity: 1;
+  animation: pageLoad 0.4s ease;
 }
 
 body::before {
@@ -258,7 +263,8 @@ body::before {
 }
 
 @keyframes pageLoad {
-  to { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 img,

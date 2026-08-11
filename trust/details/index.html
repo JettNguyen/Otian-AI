@@ -19,6 +19,8 @@
     /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
        get a cream flash on every page view (nav.js applies the theme too late). */
     (function () {
+      /* Script is running, so .fade-up may safely start hidden (see html.js in css/styles.css). */
+      document.documentElement.classList.add("js");
       try {
         var t = localStorage.getItem("nr-theme");
         if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";

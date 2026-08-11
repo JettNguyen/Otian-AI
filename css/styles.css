@@ -3912,10 +3912,26 @@ html[data-theme="dark"] .availability-widget iframe {
 /* ========================================
    24. Fade-up Animation (IntersectionObserver)
    ======================================== */
+/* The scroll-in animation, in two halves. The transition is unconditional; the hidden state it
+   animates out of is gated behind html.js, because the class that clears it (.visible) is added by
+   script. Ungated, `opacity: 0` here means anything that does not run our JavaScript is served a
+   page with the headline, the hero visual (and so the demo poster inside it) and every section
+   below all missing, out of a healthy 200 response. Google's renderer returns exactly that, and an
+   OAuth reviewer called it an unresponsive home page. Gated, a renderer without JS gets the
+   finished state directly and simply does not animate, which is the right thing to lose.
+
+   Same reasoning as body's opacity in c8f91ca, one layer down: nothing that decides whether text
+   is on the page at all should depend on script having run.
+
+   :not(.visible) rather than a plain `html.js .fade-up`, because that selector (0,2,1) would
+   outrank .fade-up.visible (0,2,0) and pin every element at opacity 0 forever. */
 .fade-up {
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+html.js .fade-up:not(.visible) {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
 }
 
 .fade-up.visible {

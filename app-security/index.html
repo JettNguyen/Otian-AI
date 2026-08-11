@@ -11,6 +11,8 @@
        toggle here because there is no nav to hold one: the choice is made on the main site and
        read back here. */
     (function () {
+      /* Script is running, so .fade-up may safely start hidden (see html.js in css/styles.css). */
+      document.documentElement.classList.add("js");
       try {
         var t = localStorage.getItem("nr-theme");
         if (t !== "dark" && t !== "light") {

@@ -7,6 +7,17 @@
   <meta name="description" content="Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
+  <!-- This page is the Application home page on the Google OAuth consent screen, where the app
+       name is "Archie". The branding check compares that name against the one this page declares,
+       so every name here has to be Archie rather than Otian AI (the publisher, which the title
+       still carries after the colon). Root index.html declares Otian AI in these same three tags
+       for the same reason: it is the home page of the company, this is the home page of the app. -->
+  <meta name="application-name" content="Archie" />
+  <meta property="og:site_name" content="Archie" />
+  <meta property="og:title" content="Archie: Build Personal AI Agents on Your Own Computer | Otian AI" />
+  <meta property="og:description" content="Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now." />
+  <meta property="og:url" content="https://otianai.com/archie/" />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,6 +27,8 @@
     /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
        get a cream flash on every page view (nav.js applies the theme too late). */
     (function () {
+      /* Script is running, so .fade-up may safely start hidden (see html.js in css/styles.css). */
+      document.documentElement.classList.add("js");
       try {
         var t = localStorage.getItem("nr-theme");
         if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";

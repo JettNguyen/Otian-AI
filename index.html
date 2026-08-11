@@ -22,6 +22,8 @@
     /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
        get a cream flash on every page view (nav.js applies the theme too late). */
     (function () {
+      /* Script is running, so .fade-up may safely start hidden (see html.js in css/styles.css). */
+      document.documentElement.classList.add("js");
       try {
         var t = localStorage.getItem("nr-theme");
         if (!t) t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -164,10 +166,17 @@
                makes a demo read as "an embedded video" rather than as the product itself. -->
           <figure class="demo-player demo-player--hero">
             <div class="demo-player-frame">
-              <!-- No src on the <video> and no src on the <source>s on purpose, only data-src, and no
-                   poster: the browser fetches nothing here at all. Until js/demo-player.js picks ONE of
-                   the candidates below and starts it (when the hero scrolls into view), the frame shows
-                   its CSS placeholder, the Otian mark on the brand surface (see .demo-player--hero).
+              <!-- No src on the <video> and no src on the <source>s on purpose, only data-src: the
+                   browser fetches the poster and nothing else. Until js/demo-player.js picks ONE of
+                   the candidates below and starts it (when the hero scrolls into view), the frame
+                   shows that poster, which is the recording's own opening frame.
+
+                   The poster is what anything that does not run our JavaScript gets, and that is the
+                   whole reason it is here. Without it the frame is an empty transparent box on a
+                   cream ground, so a crawler, a link preview, or a visitor whose OS asks for reduced
+                   motion is served a blank hero out of a healthy 200. Google's renderer returns
+                   exactly that: the nav bar, then nothing, which is what an OAuth reviewer called an
+                   unresponsive home page. One 85KB fetch buys a first paint that shows the product.
 
                    It picks on decode cost, not just codec support, because those are different
                    questions: an older laptop will happily report that it "supports" AV1 and then
@@ -189,6 +198,7 @@
                    Archie card) and then loops. Same file /archie/see-it-work/ plays, so going there
                    next costs nothing. -->
               <video class="demo-player-video" preload="none"
+                     poster="assets/archie-demo-light-poster.jpg"
                      muted loop playsinline disablepictureinpicture
                      aria-label="A silent, looping screen recording of Archie: opening the app, pointing a new agent called Archibald at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then texting it from a phone about a double-booked afternoon and confirming the fix.">
                 <source data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1648" data-fps="60" />

@@ -130,6 +130,45 @@
     .ask-otian-send svg { width: 20px; height: 20px; }
     .ask-otian.is-pending .ask-otian-send,
     .ask-otian-input:disabled { opacity: 0.55; cursor: default; }
+    .ask-otian-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+    }
+    .ask-otian-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .ask-otian-badge-dot {
+      width: 7px; height: 7px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .ask-otian-human { color: var(--accent); text-decoration: underline; white-space: nowrap; }
+    .ask-otian-note {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 4px 12px;
+      padding: 8px 16px 12px;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+    .ask-otian-note > span:first-child { flex: 1 1 auto; }
+    .ask-otian-note a { color: var(--accent); text-decoration: underline; }
+    .ask-otian-count { flex: none; font-variant-numeric: tabular-nums; }
+    .ask-otian-count.is-warn { color: var(--accent); font-weight: 600; }
     .ask-otian-foot {
       margin: 14px auto 0;
       max-width: 640px;
@@ -275,14 +314,22 @@
           <p>Our AI assistant answers from this site: what Archie does, pricing, and how your data is handled. It only knows what&rsquo;s published here. Or browse the common questions below.</p>
         </div>
         <div class="ask-otian" id="askOtian" data-endpoint="https://chat.otianai.com/ask">
+          <div class="ask-otian-head">
+            <span class="ask-otian-badge"><span class="ask-otian-badge-dot" aria-hidden="true"></span>Automated assistant</span>
+            <a class="ask-otian-human" href="mailto:questions@otianai.com">Reach a person</a>
+          </div>
           <div class="ask-otian-log" id="askOtianLog" role="log" aria-live="polite" aria-label="Conversation with Otian's assistant"></div>
           <form class="ask-otian-form" id="askOtianForm">
             <label class="sr-only" for="askOtianInput">Type your question</label>
-            <textarea id="askOtianInput" class="ask-otian-input" rows="1" placeholder="Ask a question" autocomplete="off"></textarea>
+            <textarea id="askOtianInput" class="ask-otian-input" rows="1" maxlength="4000" placeholder="Ask a question" autocomplete="off"></textarea>
             <button type="submit" class="ask-otian-send" id="askOtianSend" aria-label="Send question">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
             </button>
           </form>
+          <div class="ask-otian-note">
+            <span>Please don&rsquo;t share personal or account details. See our <a href="../privacy-policy/">Privacy Policy</a>.</span>
+            <span id="askOtianCount" class="ask-otian-count" aria-hidden="true"></span>
+          </div>
         </div>
         <p class="ask-otian-foot">Answers can be imperfect. For anything important, <a href="../contact/">get in touch</a> or email <a href="mailto:questions@otianai.com">questions@otianai.com</a>.</p>
       </div>

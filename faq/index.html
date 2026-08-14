@@ -46,8 +46,13 @@
       max-height: 380px;
       overflow-y: auto;
       overscroll-behavior: contain;
+      scroll-behavior: smooth;
     }
-    .ask-otian-msg { display: flex; }
+    @keyframes askOtianIn {
+      from { opacity: 0; transform: translateY(10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .ask-otian-msg { display: flex; animation: askOtianIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
     .ask-otian-msg--user { justify-content: flex-end; }
     .ask-otian-msg--bot { justify-content: flex-start; }
     .ask-otian-bubble {
@@ -80,6 +85,9 @@
     @keyframes askOtianBlink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
     @media (prefers-reduced-motion: reduce) {
       .ask-otian-dot { animation: none; opacity: 0.6; }
+      .ask-otian-msg { animation: none; }
+      .ask-otian-log { scroll-behavior: auto; }
+      .ask-otian-send:active { transform: none; }
     }
     .ask-otian-form {
       display: flex;
@@ -100,6 +108,7 @@
       font-size: 0.95rem;
       line-height: 1.4;
       max-height: 140px;
+      transition: opacity var(--transition), border-color var(--transition);
     }
     .ask-otian-input:focus-visible {
       outline: 2px solid var(--accent);
@@ -114,9 +123,10 @@
       background: var(--accent);
       color: var(--text-on-accent);
       cursor: pointer;
-      transition: background var(--transition);
+      transition: background var(--transition), transform 0.12s ease, opacity var(--transition);
     }
     .ask-otian-send:hover { background: var(--accent-hover); }
+    .ask-otian-send:active { transform: scale(0.94); }
     .ask-otian-send svg { width: 20px; height: 20px; }
     .ask-otian.is-pending .ask-otian-send,
     .ask-otian-input:disabled { opacity: 0.55; cursor: default; }

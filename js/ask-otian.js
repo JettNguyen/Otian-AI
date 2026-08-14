@@ -45,9 +45,15 @@
   }
 
   var pending = false; // one question in flight at a time
+  var reduceMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function scrollDown() {
-    log.scrollTop = log.scrollHeight;
+    if (log.scrollTo) {
+      log.scrollTo({ top: log.scrollHeight, behavior: reduceMotion ? "auto" : "smooth" });
+    } else {
+      log.scrollTop = log.scrollHeight;
+    }
   }
 
   // Text only, inserted as textContent, never innerHTML: the reply is untrusted (it is model

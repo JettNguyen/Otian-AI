@@ -128,6 +128,10 @@
       text-align: center;
     }
     .ask-otian-foot a { color: var(--accent); text-decoration: underline; }
+    .ask-otian-section { padding-top: 20px; }
+    .ask-otian-lead { text-align: center; max-width: 640px; margin: 0 auto; }
+    .ask-otian-lead h2 { margin-bottom: 10px; }
+    .ask-otian-lead p { color: var(--text-secondary); }
   </style>
 </head>
 <body>
@@ -248,6 +252,29 @@
           <a href="#faq-timeline">Timeline &amp; What to Expect</a>
           <a href="#faq-practical">Practical Details</a>
         </nav>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Ask Otian (chat, at the top)
+         ============================== -->
+    <section class="section ask-otian-section" aria-label="Ask Otian">
+      <div class="container">
+        <div class="ask-otian-lead fade-up">
+          <h2>Ask Otian</h2>
+          <p>Our AI assistant answers from this site: what Archie does, pricing, and how your data is handled. It only knows what&rsquo;s published here. Or browse the common questions below.</p>
+        </div>
+        <div class="ask-otian" id="askOtian" data-endpoint="https://chat.otianai.com/ask">
+          <div class="ask-otian-log" id="askOtianLog" role="log" aria-live="polite" aria-label="Conversation with Otian's assistant"></div>
+          <form class="ask-otian-form" id="askOtianForm">
+            <label class="sr-only" for="askOtianInput">Type your question</label>
+            <textarea id="askOtianInput" class="ask-otian-input" rows="1" placeholder="Ask a question" autocomplete="off"></textarea>
+            <button type="submit" class="ask-otian-send" id="askOtianSend" aria-label="Send question">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+            </button>
+          </form>
+        </div>
+        <p class="ask-otian-foot">Answers can be imperfect. For anything important, <a href="../contact/">get in touch</a> or email <a href="mailto:questions@otianai.com">questions@otianai.com</a>.</p>
       </div>
     </section>
 
@@ -714,19 +741,8 @@
       <div class="container">
         <div class="cta-banner fade-up">
           <h2>Still have questions?</h2>
-          <p>Ask Otian, our AI assistant. It answers from this site: what Archie does, pricing, and how your data is handled. It only knows what's published here.</p>
-
-          <div class="ask-otian" id="askOtian" data-endpoint="https://chat.otianai.com/ask">
-            <div class="ask-otian-log" id="askOtianLog" role="log" aria-live="polite" aria-label="Conversation with Otian's assistant"></div>
-            <form class="ask-otian-form" id="askOtianForm">
-              <label class="sr-only" for="askOtianInput">Type your question</label>
-              <textarea id="askOtianInput" class="ask-otian-input" rows="1" placeholder="Ask a question" autocomplete="off"></textarea>
-              <button type="submit" class="ask-otian-send" id="askOtianSend" aria-label="Send question">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-              </button>
-            </form>
-          </div>
-          <p class="ask-otian-foot">Answers can be imperfect. For anything important, <a href="../contact/">get in touch</a> or email <a href="mailto:questions@otianai.com">questions@otianai.com</a>.</p>
+          <p>Ask Otian at the top of this page, or reach a person: we&rsquo;re happy to answer anything before you decide.</p>
+          <a href="../contact/" class="btn btn-primary btn-lg">Get in Touch</a>
         </div>
       </div>
     </section>

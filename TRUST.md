@@ -770,6 +770,28 @@ Archie is gated by payment; we do not pretend otherwise. We do not market "runs 
 and we do not claim a grace period. If the gate is ever made to fail *closed*, this section
 gets rewritten and the Trust page's honest-limits section updated the same day.
 
+### ✅ What the AI providers say about training on API traffic (third-party, sourced)
+
+**Approved wording:** the "In their own words" block on the Trust page, quoting or citing each
+provider Archie connects to on whether it trains on API data.
+
+**Why it's true / source:** these are NOT Otian claims and have no Archie code path. Each is a
+citation of the provider's own current policy, linked inline. Verification status (checked
+2026-08-14):
+- Anthropic, Google (paid tier), Groq: **verbatim**, pulled directly from the linked policy pages.
+- OpenAI, xAI: **accurate summary, not verbatim.** Their sites block automated fetching, so the
+  wording is a paraphrase with the source linked; upgrade to a direct quote once the exact
+  sentence is confirmed from the source.
+
+**Boundaries — do not cross:**
+- ❌ Never state or imply that *all five* providers commit to not training. xAI is the exception:
+  its consumer Grok trains by default, and a self-serve API key's status is not clearly its
+  enterprise no-train terms. Keep the xAI entry candid.
+- ❌ Never drop Google's paid-vs-free caveat: the no-train line is the paid tier only, which is
+  what a user's own key uses.
+- Provider policies change. Re-verify all five, and re-pull the verbatim ones, before any launch
+  or press push, and update the "checked" date. A stale quote here is a false claim.
+
 ---
 
 ## Change Process

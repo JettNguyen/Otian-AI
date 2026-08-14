@@ -29,6 +29,32 @@
     })();
   </script>
   <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
+    .trust-quotes { margin-top: 52px; }
+    .trust-quotes > h3 { font-size: 1.5rem; margin-bottom: 12px; }
+    .trust-quotes > .trust-quotes-lead { color: var(--text-secondary); max-width: 70ch; margin-bottom: 28px; }
+    .trust-quote-list { list-style: none; display: grid; gap: 16px; padding: 0; margin: 0; }
+    .trust-quote-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+    }
+    .trust-quote-co { display: block; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+    .trust-quote-item blockquote {
+      margin: 0;
+      padding-left: 14px;
+      border-left: 3px solid var(--accent);
+      color: var(--text-primary);
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+    .trust-quote-item .trust-quote-para { margin: 0; color: var(--text-primary); line-height: 1.55; }
+    .trust-quote-note { display: block; font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; }
+    .trust-quote-src { display: block; font-size: 0.85rem; color: var(--text-secondary); margin-top: 10px; }
+    .trust-quote-src a { color: var(--accent); text-decoration: underline; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -179,7 +205,7 @@
             <span class="trust-answer-num">3</span>
             <div>
               <h3>They don&rsquo;t train on it.</h3>
-              <p>Anthropic and OpenAI both state that they do not train their models on commercial API traffic. That is <em>their</em> commitment, not ours to make on their behalf, so don&rsquo;t take our word for it. Read <a href="https://www.anthropic.com/legal/commercial-terms" rel="noopener">Anthropic&rsquo;s commercial terms</a> and <a href="https://openai.com/policies/api-data-usage-policies" rel="noopener">OpenAI&rsquo;s API data policy</a>.</p>
+              <p>Most of the AI companies Archie connects to state plainly that they do not train their models on API traffic. That is <em>their</em> commitment, not ours to make on their behalf, so don&rsquo;t take our word for it. Each provider&rsquo;s own words, the exceptions included, and a link to its source, are further down this page.</p>
             </div>
           </div>
         </div>
@@ -190,6 +216,39 @@
           <p>What running on your own computer actually buys you, then, is this: your life does not <em>also</em> accumulate on a server of ours. There is no Otian archive to be breached, subpoenaed, sold in an acquisition, or quietly repurposed when our business model changes. We didn&rsquo;t promise not to look at your data. We built it so there is nothing to look at.</p>
 
           <p class="trust-aside"><strong>One more thing you didn&rsquo;t ask.</strong> If your agent searches the web, that search runs on the AI company&rsquo;s own servers and is billed to your key, so your search query reaches their search backend, not just their model. Still not us.</p>
+        </div>
+
+        <div class="trust-quotes fade-up">
+          <h3>In their own words</h3>
+          <p class="trust-quotes-lead">The one part of this that isn&rsquo;t in our hands is what your AI company does with what you send it. So here is each provider Archie can connect to, on the record about training on API traffic. We quote the exact line where the provider lets us pull it, and link you straight to the source where it doesn&rsquo;t. Every entry links out, and all were checked in August 2026.</p>
+          <ul class="trust-quote-list">
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">Anthropic (Claude)</span>
+              <blockquote>&ldquo;Anthropic may not train models on Customer Content from Services.&rdquo;</blockquote>
+              <span class="trust-quote-src"><a href="https://www.anthropic.com/legal/commercial-terms" rel="noopener">Commercial Terms of Service</a></span>
+            </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">OpenAI (ChatGPT)</span>
+              <p class="trust-quote-para">OpenAI&rsquo;s API data usage policy states that content sent through its API is not used to train its models by default, and is retained for up to 30 days.</p>
+              <span class="trust-quote-src">Read it directly: <a href="https://openai.com/policies/api-data-usage-policies/" rel="noopener">OpenAI API data usage policies</a></span>
+            </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">Google (Gemini)</span>
+              <blockquote>&ldquo;Google doesn&rsquo;t use your prompts (including associated system instructions, cached content, and files such as images, videos, or documents) or responses to improve our products.&rdquo;</blockquote>
+              <span class="trust-quote-note">This is the paid tier, which is what your own API key uses. Google&rsquo;s free tier does train on what you send.</span>
+              <span class="trust-quote-src"><a href="https://ai.google.dev/gemini-api/terms" rel="noopener">Gemini API Additional Terms of Service</a></span>
+            </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">Groq</span>
+              <blockquote>&ldquo;Groq is not permitted to use Inputs or Outputs for training or fine-tuning any AI Model Services or other models, unless explicitly granted permission or instructed by Customer.&rdquo;</blockquote>
+              <span class="trust-quote-src"><a href="https://console.groq.com/docs/legal/services-agreement" rel="noopener">Groq Services Agreement</a></span>
+            </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">xAI (Grok)</span>
+              <p class="trust-quote-para">xAI is the one to check for yourself. Its enterprise terms commit not to train on customer content, but the consumer Grok app trains on conversations by default, so which set of terms applies depends on how your account is set up.</p>
+              <span class="trust-quote-src">Read it directly: <a href="https://x.ai/legal/privacy-policy" rel="noopener">xAI Privacy Policy</a> and <a href="https://x.ai/legal/terms-of-service-enterprise" rel="noopener">Enterprise Terms</a></span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

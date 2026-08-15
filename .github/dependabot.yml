@@ -1,0 +1,18 @@
+# This repo has no package.json and no lockfile: the site is hand-written HTML, one stylesheet and
+# a folder of plain JS with no build step, which is why there is only one ecosystem here.
+#
+# GitHub Actions is still a dependency tree. deploy.yml runs third-party actions with a token that
+# can publish to Pages, so a compromised or abandoned action is the one supply-chain route into
+# this repo. That is what this watches.
+#
+# The one vendored third-party file, js/qrcode.min.js, is not covered by anything here because it
+# was copied in rather than installed. If more of those appear, they need a real dependency
+# manifest rather than another comment.
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday

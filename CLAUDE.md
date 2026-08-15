@@ -35,7 +35,14 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   strings, the marketplace `data/**/*.json` catalog, and glossary/blog markdown. Restructure
   with a colon, comma, semicolon, period, or parentheses so the sentence still reads well.
   En dashes (`–`) and hyphens (`-`) are fine. The site was swept to zero on 2026-07-24; keep
-  it that way, and grep new copy before committing (`git grep '—\|mdash'`).
+  it that way, and run `python3 scripts/check-facts.py` before committing (it checks this and
+  the figures rule below in one pass).
+- **Every money figure on the site must be listed in [FACTS.md](FACTS.md)**, with where it
+  comes from. There is no build step, so the same price is typed into eleven files; this list
+  plus `scripts/check-facts.py` is the only thing stopping the drift that has a competitor
+  saying 60 seconds on one page and 2 minutes on three others. Adding a figure to a page means
+  adding it to FACTS.md first. If you cannot say where a number comes from, it is not a fact.
+  FACTS.md also records the figures we deliberately do **not** publish and why.
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on".
 - Guided sessions are **$100/hour**, one hour per session; "$100/session" and "$100/hour" are

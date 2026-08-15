@@ -297,8 +297,8 @@
   // not a person: given before the first exchange, not only when the visitor thinks to ask.
   addMessage(
     "bot",
-    "Hi, I'm Otian's assistant, an automated helper, not a person. I answer only from what's " +
-      "published on this site: what Archie does, pricing, and how your data is handled. For anything " +
-      "sensitive or account-specific, email " + HUMAN + "."
+    "Hi, I'm Otian's assistant, an automated helper, not a person. Ask me about Archie, pricing, or " +
+      "how your data is handled. Answers can be imperfect, so for anything sensitive or account-specific, " +
+      "email " + HUMAN + "."
   );
 })();

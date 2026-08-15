@@ -51,12 +51,17 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | 30 days | Our commitment to publish a final no-sign-in build if we cease operations | Terms of Service |
 | 6 hours | How often the version heartbeat goes out, at most | `crates/archie-core/src/telemetry.rs`, `HEARTBEAT_EVERY` |
 | 25% | An add-on commissioner's share of future sales | `skills-marketplace/commission/` |
-| 5 providers | Anthropic, OpenAI, Google, Groq, xAI | `crates/archie-net/src/llm.rs` |
+| 5 providers | Anthropic, OpenAI, Google, Groq, xAI | `crates/archie-net/src/llm.rs`. Google's entry is shown as Gemini on the site, the product's own name (`providers.rs` `display_name()`) |
+| 22 apps and services | The works-with band: 4 chat apps + 13 accounts and devices + 5 AI companies | `index.html` band; every name verified in the Archie source 2026-08-15, artwork sourcing documented above `.ww-mark` in `css/styles.css` |
+| 10 minutes | How long the self-check on /trust/ takes with a network monitor | The walkthrough on `trust/index.html` itself; the figure is the length of that procedure, not a benchmark |
+| 5x | What a thought-through ("working") token bills against a read token | The providers' published output-to-input price ratio, used on `archie/pricing/` |
+| 100 words | Roughly how much working a default reply carries | Archie repo, `docs/COST-MEASURED.md`, same measurement as the $140/$30 rows |
 
 ## The stat rows
 
-`index.html` (add-ons section) and `skills-marketplace/browse/` both print the same three
-counts: **140 add-ons, 4 chat apps, 5 AI companies**.
+`index.html` (the works-with band under the hero, moved there 2026-08-15) and
+`skills-marketplace/browse/` both print the same three counts: **140 add-ons, 4 chat apps,
+5 AI companies**. The band's note also counts **all 22** names the band shows.
 
 **No "+" on any of them, deliberately.** A "+" turns a count into a claim that there is more
 than stated, and soft rounding is how a site ends up saying 18 curated skills in a stat bar and

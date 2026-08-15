@@ -2177,7 +2177,11 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   to { transform: translateX(-50%); }
 }
 
-.ww-band .works-with-note { margin-top: 18px; }
+.ww-band .stat-row {
+  margin: 22px 0 0;
+}
+
+.ww-band .works-with-note { margin-top: 14px; }
 
 @media (prefers-reduced-motion: reduce) {
   .ww-track { animation: none; width: auto; }

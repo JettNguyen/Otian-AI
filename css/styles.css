@@ -2123,31 +2123,34 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   color: var(--text-primary);
 }
 
-/* A registry with a monogram fallback, copied wholesale from the same pattern in the Archie
-   app's Connect screen, so the product and the site agree about what a service looks like.
+/* Brand marks for the works-with row. Every one of the 22 is the company's own artwork, and
+   each traces to a source that can be named:
 
-   17 of the 23 carry the company's own artwork. Seven come from `SERVICE_MARK` in the app's
-   src/app/connect.tsx; ten more were pulled from Simple Icons, which is verifiably the same
-   source the app used (its notion.svg is byte-identical to the path already in connect.tsx).
+   - Seven come from `SERVICE_MARK` and `OutlookMark` in the Archie app's src/app/connect.tsx,
+     so the product and the site agree about what a service looks like.
+   - Ten came from Simple Icons, verifiably the same source the app used (its notion.svg is
+     byte-identical to the path already in connect.tsx).
+   - Slack, OpenAI, xAI, and the 2026 Google set (Gmail, Calendar, Tasks) and 2025 Gemini
+     sparkle are the official artwork via Wikimedia Commons, each file's source page checked:
+     Tasks is credited to workspace.google.com directly, Gemini was extracted from Google's
+     own About Gemini page, Slack from Slack's brandfolder, and the Gmail/Calendar 2026 files
+     share the exact palette and May 19, 2026 redesign date with the Google-credited Tasks
+     file. Groq is the bolt from groq.com/favicon.svg and Fireflies the logo served by
+     fireflies.ai, both fetched from the companies themselves on 2026-08-15.
 
-   THE OTHER SIX ARE ABSENT FROM THAT SET, WHICH IS A FINDING RATHER THAN A TODO. Slack,
-   OpenAI, Outlook, Groq, xAI and Fireflies are all missing from Simple Icons: not 404s on a
-   guessed filename, but absent from its canonical slug list, checked one by one. The only
-   OpenAI entry there is "OpenAI Gym", a different product. That set documents a process for
-   brands to request removal, so for the larger names absence may well be the brand's own
-   wish, and either way it is not an invitation to draw one from memory: the Archie repo did
-   exactly that this morning and undid it a few commits later ("service marks are the
-   companies' own artwork now, not my recollection of it"). Those six take two letters until
-   somebody has official artwork, which is the entire point of the fallback: a service with no
-   mark looks deliberate rather than broken, and a real one drops into the same 18px slot.
+   Gradient, mask and filter ids inside these inline SVGs are namespaced per brand (wwsl-,
+   wwgm-, ...) because inline SVG ids share one document: two marks both defining id="a"
+   would silently take the first one's gradient.
 
    Colour follows the brand rather than us, which is the app's rule and its reasoning: a
    chromatic mark keeps its colour, because the colour is half the recognition (Telegram's
-   blue, Discord's blurple, Gmail's red, Airtable's three). An achromatic one takes
-   currentColor, which is what those brands specify, since they publish black on light grounds
-   and white on dark, and it is the only version that survives dark mode (Notion, GitHub,
-   Linear, LIFX, Matrix, Anthropic). Hex values are the brand's own, from the same data file
-   as the shapes. */
+   blue, Discord's blurple, Linear's purple, Airtable's three). An achromatic one takes
+   currentColor, which is what those brands specify, since they publish black on light
+   grounds and white on dark, and it is the only version that survives dark mode (Notion,
+   GitHub, Matrix, Anthropic, OpenAI, xAI, LIFX).
+
+   .ww-mark--mono is the two-letter fallback for any future service that arrives before its
+   artwork does; nothing uses it today. */
 .ww-mark {
   flex: none;
   display: inline-flex;

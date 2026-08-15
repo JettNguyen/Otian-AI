@@ -44,7 +44,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | Figure | What it is | Where it comes from |
 |---|---|---|
 | 140 add-ons | 38 personalities, 59 skills, 4 specialists, 39 routines | Archie repo `data/marketplace/**`, counted 2026-08-15. `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
-| 5 chat apps | Telegram, Discord, Slack, Signal, Matrix | `crates/archie-net/src/{telegram,discord,slack,signal,matrix}.rs`, all five exported from `lib.rs` and offered in the app's connect screen |
+| 4 chat apps | Telegram, Discord, Slack, Matrix | `crates/archie-net/src/{telegram,discord,slack,matrix}.rs`. A fifth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
 | 14 days | Money-back guarantee on a plan | Terms of Service |
 | 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
 | 60 days | How long a signed entitlement lasts before it needs refreshing | `crates/archie-core/src/entitlement.rs`; TRUST.md 2026-08-07 |
@@ -56,7 +56,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 ## The stat rows
 
 `index.html` (add-ons section) and `skills-marketplace/browse/` both print the same three
-counts: **140 add-ons, 5 chat apps, 5 AI companies**.
+counts: **140 add-ons, 4 chat apps, 5 AI companies**.
 
 **No "+" on any of them, deliberately.** A "+" turns a count into a claim that there is more
 than stated, and soft rounding is how a site ends up saying 18 curated skills in a stat bar and

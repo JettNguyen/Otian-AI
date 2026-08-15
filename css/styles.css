@@ -2048,6 +2048,61 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   }
 }
 
+/* ── Works-with: the names a reader already knows ────────────────────────────
+   Three columns because the reader has three questions, not because three fits. Names are
+   set as chips rather than a comma list so the eye can land on one it recognises without
+   reading the sentence, which is the entire job of this section.
+
+   Each chip is sized to take a 16px mark to the left of its label without reflowing, for
+   when official vendor SVGs exist. See the note on the section in index.html for why they
+   are absent rather than pending. */
+.works-with {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 32px 40px;
+  margin-top: 8px;
+}
+
+.works-with-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.works-with-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.works-with-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.works-with-note {
+  max-width: 720px;
+  margin: 32px 0 0;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
 /* Objection answers under a step, not a second description of it. Deliberately quieter than
    the proof chips on the homepage: those are the argument, these are the small print somebody
    would otherwise have to ask for. Quiet enough to skip, present enough to answer "how long,

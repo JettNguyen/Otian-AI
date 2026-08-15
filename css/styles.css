@@ -4756,6 +4756,17 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: center;
 }
 
+/* A price card carrying two or three paragraphs is a different object from one carrying a
+   single line of terms. Centred ragged text stops working past a sentence or two, and with
+   no gap the paragraphs read as one block. Used by the trial cards on /archie/pricing/. */
+.price-card--prose p {
+  text-align: left;
+}
+
+.price-card--prose p + p {
+  margin-top: 12px;
+}
+
 .price-card-label {
   display: block;
   font-size: 0.75rem;

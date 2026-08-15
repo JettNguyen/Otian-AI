@@ -335,7 +335,7 @@ keep. Never write "Archie tracks your exact spend" or "see your bill in Archie".
 **Approved wording:** "An add-on can pick its own response quality and ignore the dial, and many
 do, so on an agent with several add-ons installed the dial alone barely changes the bill. The
 checkbox under it, 'Use this for every skill', overrides them. Measured in August 2026 on an agent
-with twelve add-ons, that checkbox took about four fifths off the monthly cost."
+with 12 add-ons, that checkbox took about four fifths off the monthly cost."
 
 **Why it's true:** `resolve_for` (`crates/archie-runtime/src/gateway.rs:711-718`) is the single
 place the model is chosen for a reply. With the flag off it calls `resolve_model`, which lets a

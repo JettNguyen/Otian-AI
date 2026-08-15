@@ -2076,28 +2076,121 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   }
 }
 
-/* ── Works-with: the names a reader already knows ────────────────────────────
-   Three columns because the reader has three questions, not because three fits. Names are
-   set as chips rather than a comma list so the eye can land on one it recognises without
-   reading the sentence, which is the entire job of this section.
+/* ── Works-with: the river band under the hero ───────────────────────────────
+   One dense strip of the 22 names, two rows drifting opposite ways. Chips rather than a
+   comma list so the eye lands on a mark it recognises without reading anything, which is
+   the entire job: this sits directly under the hero, before a visitor has read a word.
 
-   Each chip is sized to take a 16px mark to the left of its label without reflowing, for
-   when official vendor SVGs exist. See the note on the section in index.html for why they
-   are absent rather than pending. */
-.works-with {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 32px 40px;
-  margin-top: 8px;
+   The motion contract, so nobody "fixes" half of it:
+   - .ww-track is six identical lists and the keyframe translates -50%, so the landing
+     frame is pixel-identical to the start. Uniform spacing comes from padding-right on
+     each list, NOT gap on the track: a track gap leaves half a gap at the -50% point and
+     the loop visibly jumps.
+   - 96s is not a taste choice on its own: half a track is roughly 3900px, and 3900/96 is
+     about 40px/s, slow enough to read a name mid-drift. Change duration and width
+     together or the speed changes.
+   - Hover pauses the row under the cursor; the checkbox in the section markup pauses
+     both rows without a pointer, which is what WCAG 2.2.2 actually asks for; and
+     reduced-motion replaces the whole mechanism with a static wrapped row. */
+.ww-band {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 30px 0 32px;
 }
 
-.works-with-title {
+.ww-band-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.ww-band-head .section-label {
+  margin-bottom: 0;
+}
+
+.ww-band-line {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.ww-pause-label {
+  margin-left: auto;
   font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 14px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 12px;
+  background: var(--bg-card);
+}
+
+.ww-pause-label:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.ww-pause-label:active {
+  background: var(--surface-hover-strong);
+}
+
+.ww-pause-box:focus-visible ~ .container .ww-pause-label {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.ww-pause-on { display: none; }
+.ww-pause-box:checked ~ .container .ww-pause-on { display: inline; }
+.ww-pause-box:checked ~ .container .ww-pause-off { display: none; }
+
+.ww-mq {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.ww-mq + .ww-mq { margin-top: 10px; }
+
+.ww-track {
+  display: flex;
+  width: max-content;
+  animation: ww-drift 96s linear infinite;
+}
+
+.ww-mq--rev .ww-track { animation-direction: reverse; }
+
+.ww-mq:hover .ww-track,
+.ww-pause-box:checked ~ .ww-mq .ww-track {
+  animation-play-state: paused;
+}
+
+.ww-run {
+  flex-wrap: nowrap;
+  padding-right: 8px;
+}
+
+@keyframes ww-drift {
+  to { transform: translateX(-50%); }
+}
+
+.ww-band .works-with-note { margin-top: 18px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ww-track { animation: none; width: auto; }
+  .ww-mq {
+    -webkit-mask-image: none;
+    mask-image: none;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ww-track > [aria-hidden="true"] { display: none; }
+  .ww-run { flex-wrap: wrap; }
+  .ww-pause-label { display: none; }
 }
 
 .works-with-list {

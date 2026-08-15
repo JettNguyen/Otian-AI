@@ -1547,19 +1547,28 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--accent);
 }
 
+/* Three stacked centered rows at every width: copyright, the third-party marks note,
+   then the legal links. It was flex-plus-absolutely-positioned-links, and the note's
+   arrival made the links collide with whichever line wrapped near them. */
 .footer-bottom {
   border-top: 1px solid var(--border);
   padding: 20px 0;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-items: center;
   gap: 10px;
 }
 
 .footer-bottom p {
   font-size: 0.8rem;
   color: var(--text-muted);
+}
+
+/* The third-party marks line is its own row: as one sentence with the copyright it wrapped
+   under the absolutely-positioned legal links and collided with them. */
+.footer-marks-note {
+  font-size: 0.75rem;
+  max-width: 760px;
 }
 
 .footer-legal-links {
@@ -1578,14 +1587,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 @media (min-width: 640px) {
   .footer-bottom {
-    flex-direction: row;
-    justify-content: center;
-    position: relative;
-  }
-
-  .footer-legal-links {
-    position: absolute;
-    right: 0;
+    row-gap: 8px;
   }
 }
 

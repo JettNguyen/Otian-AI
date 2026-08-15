@@ -1808,6 +1808,30 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   font-size: 0.875rem;
 }
 
+/* Objection answers under a step, not a second description of it. Deliberately quieter than
+   the proof chips on the homepage: those are the argument, these are the small print somebody
+   would otherwise have to ask for. Quiet enough to skip, present enough to answer "how long,
+   how much, what am I committing to" without the paragraph above getting defensive. */
+.step-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step-chip {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-soft-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
 /* ========================================
    14. CTA Banner
    ======================================== */
@@ -6953,6 +6977,19 @@ html[data-theme="dark"] .booking-container iframe {
   line-height: 1.8;
 }
 .price-note strong { color: var(--text-primary); }
+
+/* The centred default is right under a centred price grid and wrong under a left-aligned
+   .calm-list, where it starts halfway across and reads as belonging to the second column.
+   Used by the free-call deliverables on /individuals/.
+
+   Carries its own top margin rather than taking .mt-40: .price-note sets `margin` as a
+   shorthand and is declared later in this file, so the utility class loses and the note
+   ends up flush against the last list item. */
+.price-note--flush {
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 40px;
+}
 
 .compare-panel {
   max-width: 780px;

@@ -2254,7 +2254,9 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
    blue, Discord's blurple, Linear's purple, Airtable's three). An achromatic one takes
    currentColor, which is what those brands specify, since they publish black on light
    grounds and white on dark, and it is the only version that survives dark mode (Notion,
-   GitHub, Matrix, Anthropic, OpenAI, xAI, LIFX).
+   GitHub, Matrix, OpenAI, xAI, LIFX). Anthropic's tile wears Claude's splotch in Claude's
+   own coral rather than the corporate A, matching the app: the label names the company, and
+   the mark somebody has actually seen is the one on the product they used.
 
    .ww-mark--mono is the two-letter fallback for any future service that arrives before its
    artwork does; nothing uses it today. */

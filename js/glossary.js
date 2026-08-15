@@ -7,6 +7,18 @@
   'use strict';
 
   var DATA_PATH = '../assets/ai-glossary-final.md';
+
+  /* Everything parsed out of the markdown is interpolated into strings that become innerHTML, so
+     it goes through here first. assets/ai-glossary-final.md is committed and hand-authored, so
+     nothing in it is attacker-controlled and none of this is load-bearing today. It is here
+     because that is a fact about where the file comes from rather than a property of this code:
+     point the fetch at anything user-supplied and every site below turns into an XSS sink without
+     a line of this file changing. Same helper as js/blog.js, js/phone.js and js/marketplace.js. */
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
   var START_HERE_TERMS = [
     'AI Assistant',
     'AI Agent',
@@ -105,14 +117,14 @@
 
   function makeEntryCard(entry) {
     return [
-      '<article class="glossary-entry" id="' + entry.slug + '" data-term="' + entry.term.toLowerCase() + '">',
+      '<article class="glossary-entry" id="' + escapeHtml(entry.slug) + '" data-term="' + escapeHtml(entry.term.toLowerCase()) + '">',
       '<button class="glossary-trigger" aria-expanded="false">',
-      '<span>' + entry.term + '</span>',
+      '<span>' + escapeHtml(entry.term) + '</span>',
       '<span class="glossary-plus" aria-hidden="true">+</span>',
       '</button>',
       '<div class="glossary-body">',
-      '<p>' + entry.definition + '</p>',
-      (entry.example ? '<p><strong>Example:</strong> ' + entry.example + '</p>' : ''),
+      '<p>' + escapeHtml(entry.definition) + '</p>',
+      (entry.example ? '<p><strong>Example:</strong> ' + escapeHtml(entry.example) + '</p>' : ''),
       '</div>',
       '</article>'
     ].join('');
@@ -129,7 +141,7 @@
     var html = START_HERE_TERMS
       .map(function (term) {
         if (!byTerm[term]) return '';
-        return '<a href="#' + byTerm[term].slug + '" class="start-here-pill">' + term + '</a>';
+        return '<a href="#' + escapeHtml(byTerm[term].slug) + '" class="start-here-pill">' + escapeHtml(term) + '</a>';
       })
       .filter(Boolean)
       .join('');
@@ -148,7 +160,7 @@
     var html = BIG_PICTURE_TERMS
       .map(function (term) {
         if (!byTerm[term]) return '';
-        return '<a href="#' + byTerm[term].slug + '" class="big-picture-link">' + term + '</a>';
+        return '<a href="#' + escapeHtml(byTerm[term].slug) + '" class="big-picture-link">' + escapeHtml(term) + '</a>';
       })
       .filter(Boolean)
       .join('');
@@ -171,7 +183,7 @@
       if (!letters[letter]) {
         return '<span class="az-letter disabled">' + letter + '</span>';
       }
-      return '<a class="az-letter" href="#' + letters[letter] + '">' + letter + '</a>';
+      return '<a class="az-letter" href="#' + escapeHtml(letters[letter]) + '">' + letter + '</a>';
     }).join('');
   }
 

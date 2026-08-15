@@ -1632,6 +1632,21 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   flex-shrink: 0;
 }
 
+/* The one chip that goes somewhere. It sits last in the row and takes the reader to the page
+   that backs up the five before it, which is the only claim here a competitor cannot copy by
+   typing it. Accent-ink rather than accent: accent is tuned for fills and fails AA as text. */
+.proof-chip--link {
+  color: var(--accent-ink);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.proof-chip--link:hover,
+.proof-chip--link:focus-visible {
+  background: var(--accent-subtle);
+}
+
 /* ========================================
    11. Feature Cards Grid
    ======================================== */
@@ -4322,13 +4337,20 @@ html.js .fade-up:not(.visible) {
     grid-template-columns: 1fr;
   }
 
+  /* One chip per line under 480px, which is right for reading and wrong for six of them:
+     stacked at the full desktop metrics they took a third of the screen before the first
+     section. Tighter gap and padding puts the row back to roughly the height four chips
+     used to occupy, without dropping any of them. A claim we would hide on a phone is a
+     claim that should not be in the row. */
   .proof-chips {
     flex-direction: column;
     width: 100%;
+    gap: 6px;
   }
 
   .proof-chip {
     justify-content: center;
+    padding: 6px 12px;
   }
 
   .form-container {

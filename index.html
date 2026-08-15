@@ -220,15 +220,39 @@
 
     <!-- ==============================
          Social Proof Bar
+
+         Every chip here is a sentence from TRUST.md, in its approved wording, because a chip
+         is a heading: it gets scanned on its own, with none of the qualifying paragraph that
+         normally sits under a claim. Two came out on 2026-08-15:
+
+         "No Usage Data Sent" was true when it was written and stopped being true when
+         telemetry shipped (crates/archie-core/src/telemetry.rs). Archie sends a version
+         heartbeat every six hours and a crash tail after an unexpected quit, both carrying the
+         account ID. The approved claim is the narrower one: there is no analytics service.
+
+         "Clients Report Hours Back Every Week" had nothing published behind it. /testimonials/
+         says in as many words that we are still collecting reviews, so the chip was asking for
+         belief the next page down declines to ask for.
+
+         Nothing goes in this row that cannot be defended standing alone.
+
+         On the add-on chip: state the consequence, not the file format. "Add-ons are text
+         files, not programs" is the same fact and reads as a limitation, as though the
+         marketplace were thin. What a reader is owed is what that buys them, which is that
+         nothing they install can run code on their machine, because Archie has nowhere to
+         run it. Same claim, and it is the strong one. (TRUST.md bans "sandboxed add-ons"
+         for the same reason: there is nothing to sandbox, and saying so undersells it.)
          ============================== -->
     <div class="proof-bar" aria-label="Key facts">
       <div class="proof-bar-inner">
         <span class="proof-label">Runs on your own computer, under your own accounts.</span>
         <div class="proof-chips">
           <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>We Never Hold Your Conversations</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>No Usage Data Sent</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Your Own AI Account, Your Own Key</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>No Analytics Service in the App</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Add-ons Can&rsquo;t Run Code on Your Computer</span>
           <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>It Works While You Sleep</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Clients Report Hours Back Every Week</span>
+          <a class="proof-chip proof-chip--link" href="trust/"><span class="proof-chip-dot" aria-hidden="true"></span>Check It Yourself in Ten Minutes &rarr;</a>
         </div>
       </div>
     </div>

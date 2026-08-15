@@ -1183,13 +1183,201 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .footer-legal-links a:focus-visible,
 .faq-jump a:focus-visible,
 .marketplace-filter-pill:focus-visible,
-.mp-type-tab:focus-visible {
+.mp-type-tab:focus-visible,
+/* Added 2026-08-15 with the pressed-state audit. Same reasoning: these all reacted to a
+   mouse and not to a keyboard, so tabbing through a page left you guessing where you were.
+   The list below is every remaining thing that sits on an <a> or a <button>. */
+.social-link:focus-visible,
+.nav-logo:focus-visible,
+.nav-hamburger:focus-visible,
+.glossary-trigger:focus-visible,
+.marketplace-status-badge:focus-visible,
+.marketplace-text-link:focus-visible,
+.mp-back-link:focus-visible,
+.mp-price-btn:focus-visible,
+.mp-card-link:focus-visible,
+.mp-card-expand:focus-visible,
+.mp-pack-card:focus-visible,
+.mp-product-card:focus-visible,
+.price-card-link:focus-visible,
+.resource-filter:focus-visible,
+.resource-link:focus-visible,
+.resource-read-more:focus-visible,
+.start-here-pill:focus-visible,
+.big-picture-link:focus-visible,
+.az-letter:focus-visible,
+.contact-info-link:focus-visible,
+.team-link:focus-visible,
+.byline-author:focus-visible,
+.footer-contact-email:focus-visible,
+.auth-textlink:focus-visible,
+.acct-delete-link:focus-visible,
+.act-remove:focus-visible,
+.phone-store-chip:focus-visible,
+.phone-store-more:focus-visible,
+.phone-tab:focus-visible,
+.site-banner-close:focus-visible,
+.status-toast-x:focus-visible,
+.checklist-item:focus-visible,
+.checklist-reset-btn:focus-visible,
+.demo-player-toggle:focus-visible,
+.btn-run:focus-visible,
+.use-case-item:focus-visible,
+.hero-status:focus-visible,
+.feature-card:focus-visible,
+.why-card:focus-visible,
+.team-card:focus-visible,
+.value-card:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 .btn:active {
   transform: translateY(0);
+}
+
+/* ── Interactive states, everywhere ────────────────────────────────────────────
+   Audited 2026-08-15 by pulling every class that sits on an <a> or a <button> in the
+   markup (and in the JS that builds markup) and checking it against this stylesheet.
+   Result: .btn and five card types were complete; roughly forty other clickable things
+   had a hover and nothing else. A control that lights up on hover and then does nothing
+   when you press it reads as broken on a touchscreen, where there is no hover at all and
+   the press IS the only feedback.
+
+   Done as three shared rules rather than forty bespoke ones, because forty bespoke ones
+   drift. Two lists, split by a CSS fact rather than by taste: `transform` does nothing on
+   a non-replaced inline element, so an inline text link cannot be scaled and gets a fade
+   instead. Anything that is its own box gets the press.
+
+   The press is deliberately smaller than a hover. Hover says "this is a thing"; the press
+   only has to confirm the tap landed. */
+
+/* 1. Boxes: buttons, chips, pills, tabs, icon buttons, whole clickable cards. */
+.social-link:active,
+.nav-logo:active,
+.nav-hamburger:active,
+.nav-account-btn:active,
+.nav-more-toggle:active,
+.nav-drawer-cat:active,
+.nav-drawer-back:active,
+.theme-toggle:active,
+.accordion-trigger:active,
+.glossary-trigger:active,
+.marketplace-filter-pill:active,
+.marketplace-status-badge:active,
+.mp-type-tab:active,
+.mp-back-link:active,
+.mp-price-btn:active,
+.mp-card-link:active,
+.mp-pack-card:active,
+.mp-product-card:active,
+.resource-filter:active,
+.start-here-pill:active,
+.az-letter:active,
+.phone-store-chip:active,
+.phone-store-more:active,
+.phone-tab:active,
+.site-banner-close:active,
+.status-toast-x:active,
+.checklist-item:active,
+.checklist-reset-btn:active,
+.demo-player-toggle:active,
+.btn-run:active,
+.use-case-item:active,
+.hero-status:active,
+.proof-chip--link:active {
+  transform: scale(0.97);
+}
+
+/* 2. Inline text links, where transform is a no-op. */
+.marketplace-text-link:active,
+.price-card-link:active,
+.resource-read-more:active,
+.resource-link:active,
+.big-picture-link:active,
+.contact-info-link:active,
+.team-link:active,
+.byline-author:active,
+.footer-contact-email:active,
+.auth-textlink:active,
+.acct-delete-link:active,
+.mp-card-expand:active,
+.act-remove:active {
+  opacity: 0.65;
+}
+
+/* A press is not an animation anybody asked for; honour the setting that says so. */
+@media (prefers-reduced-motion: reduce) {
+  .social-link:active,
+  .nav-logo:active,
+  .nav-hamburger:active,
+  .nav-account-btn:active,
+  .nav-more-toggle:active,
+  .nav-drawer-cat:active,
+  .nav-drawer-back:active,
+  .theme-toggle:active,
+  .accordion-trigger:active,
+  .glossary-trigger:active,
+  .marketplace-filter-pill:active,
+  .marketplace-status-badge:active,
+  .mp-type-tab:active,
+  .mp-back-link:active,
+  .mp-price-btn:active,
+  .mp-card-link:active,
+  .mp-pack-card:active,
+  .mp-product-card:active,
+  .resource-filter:active,
+  .start-here-pill:active,
+  .az-letter:active,
+  .phone-store-chip:active,
+  .phone-store-more:active,
+  .phone-tab:active,
+  .site-banner-close:active,
+  .status-toast-x:active,
+  .checklist-item:active,
+  .checklist-reset-btn:active,
+  .demo-player-toggle:active,
+  .btn-run:active,
+  .use-case-item:active,
+  .hero-status:active,
+  .proof-chip--link:active {
+    transform: none;
+    opacity: 0.75;
+  }
+}
+
+/* 3. The two that had no hover at all. The rest of the nav lights up on hover and these
+   two did not, which made the logo and the hamburger read as decoration rather than as
+   the way home and the way in. */
+.nav-logo:hover .nav-logo-title,
+.nav-logo:focus-visible .nav-logo-title {
+  color: var(--accent);
+}
+
+.nav-hamburger:hover span,
+.nav-hamburger:focus-visible span {
+  background: var(--accent);
+}
+
+.glossary-trigger:hover {
+  color: var(--accent);
+}
+
+/* Three more with no hover at all. .act-remove, .acct-delete-link and .auth-textlink looked
+   like the same gap and are not: those three carry hovers in their own pages' <style> blocks,
+   which a sweep of this file cannot see. Checked before adding anything here. */
+.marketplace-status-badge:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.phone-tab:hover:not(.is-active) {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.mp-card-expand:hover {
+  color: var(--accent-ink);
 }
 
 .btn:disabled {

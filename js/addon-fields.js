@@ -64,6 +64,26 @@ export const ADDON_SPEC = {
       "grants": "Read and update the Airtable bases your token covers.",
       "id": "airtable",
       "name": "Airtable"
+    },
+    {
+      "grants": "See every device and sensor in the house, switch lights, plugs and scenes, and propose anything bigger.",
+      "id": "home_assistant",
+      "name": "Home Assistant"
+    },
+    {
+      "grants": "See Govee lights and plugs and control them.",
+      "id": "govee",
+      "name": "Govee"
+    },
+    {
+      "grants": "See LIFX lights and control them.",
+      "id": "lifx",
+      "name": "LIFX"
+    },
+    {
+      "grants": "Switch the lights and plugs you added from your own wifi, directly, no cloud.",
+      "id": "local_devices",
+      "name": "Home devices"
     }
   ],
   "kinds": {

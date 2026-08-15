@@ -2178,22 +2178,26 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   animation-play-state: paused;
 }
 
-.ww-run {
+/* Doubled selector on purpose: .works-with-list's own margin/padding/gap rule sits later
+   in this file and wins a specificity tie, which is how the seam between list copies
+   shipped with zero gap (its padding: 0 beat the padding-right here). The padding-right
+   must always equal the in-list gap: it is the spacing at the -50% loop seam, and any
+   mismatch shows as a hitch between the last pill and the first. */
+.works-with-list.ww-run {
   flex-wrap: nowrap;
-  padding-right: 8px;
+  gap: 10px;
+  padding-right: 10px;
 }
 
-/* Each pill takes a light wash of its brand's own colour, the same hex its mark already
-   carries, so the tint is sourced exactly like the shape. Brands whose mark is achromatic
-   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) fall back to the neutral
-   below, which reads as "this brand's colour is ink" rather than as a missing tint. The
-   mixes are gentle on purpose: at 9% the text keeps its contrast in both themes, and
-   browsers without color-mix simply keep the plain card pill underneath. */
-/* .works-with-list.ww-run rather than .ww-run: the base pill rule (.works-with-list li)
-   sits LATER in this file and at equal specificity would win, which is exactly what
-   happened on 2026-08-15 and shipped tintless pills. The double class outranks it. */
-.works-with-list.ww-run li {
-  --ww-tint: var(--text-muted);
+/* Each chromatic pill takes a light wash of its brand's own colour, the same hex its
+   mark already carries, so the tint is sourced exactly like the shape. Achromatic brands
+   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) publish ink-on-white and
+   deliberately keep the plain white card pill: an earlier neutral-grey fallback made them
+   look disabled next to the coloured rows. The attribute selector is the gate, because
+   only tinted pills carry the inline --ww-tint; and the doubled class outranks the base
+   pill rule that sits later in this file (equal specificity shipped tintless pills once
+   already). Browsers without color-mix keep the plain card pill. */
+.works-with-list.ww-run li[style*="--ww-tint"] {
   background: color-mix(in srgb, var(--ww-tint) 12%, var(--bg-card));
   border-color: color-mix(in srgb, var(--ww-tint) 32%, var(--border));
 }

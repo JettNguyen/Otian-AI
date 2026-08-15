@@ -1808,6 +1808,58 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   font-size: 0.875rem;
 }
 
+/* A stat row: three counts, no adjectives. Deliberately has no "+" on any of them. A "+"
+   turns a count into a claim that there are more than stated, which is the soft rounding
+   that lets 18 and 200+ describe the same catalog on the same site. Every figure here is
+   exact, dated in FACTS.md, and re-counted by scripts/check-facts.py. */
+.stat-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px 56px;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Under a .section-header--quiet, which is left-aligned, a centred row reads as belonging to
+   something else on the page. Follow the heading it sits under. */
+.stat-row--left {
+  justify-content: flex-start;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  display: block;
+  /* The same serif the headings use, spelled out because this stylesheet has no display-font
+     token: h2-h6 carry the stack literally. A stat is a small heading made of digits. */
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@media (max-width: 480px) {
+  .stat-row {
+    gap: 18px 32px;
+  }
+}
+
 /* Objection answers under a step, not a second description of it. Deliberately quieter than
    the proof chips on the homepage: those are the argument, these are the small print somebody
    would otherwise have to ask for. Quiet enough to skip, present enough to answer "how long,

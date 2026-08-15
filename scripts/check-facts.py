@@ -74,6 +74,48 @@ def served_files():
                 yield rel, False
 
 
+# The four collections the store sells from, per COLLECTIONS in js/catalog.js. `resources` and
+# `assets` live alongside them in the Archie repo and are not add-ons, so they are not counted.
+SOLD_COLLECTIONS = ("personalities", "skills", "subagents", "routines")
+
+# Where the catalog is authored. CI seeds these files into the Firestore collections the site
+# reads, so this directory is the number, and the site's stat rows have to match it.
+ARCHIE_CATALOG = os.path.join(
+    os.path.dirname(ROOT), "Archie", "data", "marketplace"
+)
+
+STAT_NUM = re.compile(r'<span class="stat-num">([\d,]+)</span>\s*<span class="stat-label">([^<]+)</span>', re.S)
+
+
+def catalog_count():
+    """How many add-ons the store actually has, or None if the Archie repo isn't here."""
+    if not os.path.isdir(ARCHIE_CATALOG):
+        return None
+    total = 0
+    for coll in SOLD_COLLECTIONS:
+        path = os.path.join(ARCHIE_CATALOG, coll)
+        if not os.path.isdir(path):
+            return None
+        total += len([f for f in os.listdir(path) if f.endswith(".json")])
+    return total
+
+
+def check_stat_rows(actual):
+    """Every printed add-on stat must equal the real catalog count."""
+    wrong = []
+    for rel, _ in served_files():
+        if not rel.endswith(".html"):
+            continue
+        with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as fh:
+            body = fh.read()
+        for num, label in STAT_NUM.findall(body):
+            if label.strip().lower() == "add-ons":
+                printed = int(num.replace(",", ""))
+                if printed != actual:
+                    wrong.append((rel, printed))
+    return wrong
+
+
 def main():
     facts_path = os.path.join(ROOT, "FACTS.md")
     if not os.path.exists(facts_path):
@@ -115,10 +157,21 @@ def main():
             print("      %s" % ctx)
         print("\nRestructure with a colon, comma, semicolon, period, or parentheses.\n")
 
-    if unknown or dashes:
+    actual = catalog_count()
+    stale = check_stat_rows(actual) if actual is not None else []
+
+    if stale:
+        print("Add-on stat rows disagree with the catalog (%d real add-ons):\n" % actual)
+        for rel, printed in stale:
+            print("  %s prints %d" % (rel, printed))
+        print("\nUpdate the pages and the count in FACTS.md together.\n")
+
+    if unknown or dashes or stale:
         return 1
 
-    print("check-facts: clean. %d files scanned, %d figures allowed." % (scanned, len(figures)))
+    counted = "catalog re-counted: %d add-ons" % actual if actual is not None else \
+        "catalog not re-counted (Archie repo not checked out beside this one)"
+    print("check-facts: clean. %d files scanned, %d figures allowed, %s." % (scanned, len(figures), counted))
     return 0
 
 

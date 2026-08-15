@@ -203,9 +203,9 @@
             <div class="auth-or">or</div>
 
             <div class="auth-fields">
-              <input type="text" id="auth-name" class="auth-hidden" placeholder="Full name" autocomplete="name" />
-              <input type="email" id="auth-email" placeholder="Email address" autocomplete="email" />
-              <input type="password" id="auth-pass" placeholder="Password" autocomplete="current-password" />
+              <input type="text" id="auth-name" aria-label="Full name" class="auth-hidden" placeholder="Full name" autocomplete="name" />
+              <input type="email" id="auth-email" aria-label="Email address" placeholder="Email address" autocomplete="email" />
+              <input type="password" id="auth-pass" aria-label="Password" placeholder="Password" autocomplete="current-password" />
             </div>
             <div class="auth-btns">
               <button class="btn btn-primary" id="btn-primary-auth">Sign in</button>
@@ -236,7 +236,7 @@
             <h1 style="text-align:center;font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:6px;">Confirm it&rsquo;s you</h1>
             <p class="auth-lead">Enter the 6-digit code from your authenticator app to finish signing in.</p>
             <div class="auth-fields">
-              <input type="text" id="mfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+              <input type="text" id="mfa-code" aria-label="Six-digit code from your authenticator app" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
             </div>
             <div class="auth-btns">
               <button class="btn btn-primary" id="btn-mfa-verify">Verify</button>
@@ -262,13 +262,13 @@
             <p class="auth-lead auth-hidden" id="emfa-ask-lead">Enter your account email and we&rsquo;ll send you a sign-in code.</p>
             <p class="auth-lead" id="emfa-code-lead">We emailed a 6-digit code to <span class="auth-email" id="auth-emfa-email">your inbox</span> to confirm this sign-in. Enter it below.</p>
             <div class="auth-fields auth-hidden" id="emfa-email-row">
-              <input type="email" id="emfa-email" autocomplete="email" placeholder="Email address" />
+              <input type="email" id="emfa-email" aria-label="Email address" autocomplete="email" placeholder="Email address" />
             </div>
             <div class="auth-btns auth-hidden" id="emfa-send-btns">
               <button class="btn btn-primary" id="btn-emfa-send">Send code</button>
             </div>
             <div class="auth-fields" id="emfa-code-row">
-              <input type="text" id="emfa-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+              <input type="text" id="emfa-code" aria-label="Six-digit code we emailed you" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
             </div>
             <div class="auth-btns" id="emfa-code-btns">
               <button class="btn btn-primary" id="btn-emfa-verify">Verify</button>

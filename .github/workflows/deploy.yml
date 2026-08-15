@@ -27,6 +27,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # This workflow is the only door between an edit and otianai.com: it runs on a push to main
+      # and deploys, with no review in between. So the accessibility checks run here rather than in
+      # a PR workflow nobody opens.
+      #
+      # Colour first, because it is the one that shipped broken for months without anybody
+      # noticing: the focus ring measured 2.38 to 2.64:1 and field borders 1.36:1, which is a site
+      # you cannot navigate by keyboard and forms whose boxes have no visible edge. The script
+      # reads the real values out of css/styles.css, so nudging a token to taste fails here.
+      - name: Check colour contrast
+        run: node scripts/check-contrast.mjs
+
+      # Every text box has to say what it is to something other than an eye. A placeholder is not a
+      # name: it disappears on the first keystroke, and the pages this matters most on are the ones
+      # people cannot skip, which is sign-in, password reset, and the account and security screens.
+      - name: Check every input has an accessible name
+        run: node scripts/check-input-labels.mjs
+
       # Pages written but not published yet. They stay in the repo and out of the upload, so
       # their URLs return the 404 page. Delete a line here to publish that page.
       #

@@ -156,7 +156,7 @@
 </head>
 <body>
   <div class="glow"></div>
-  <div class="card">
+  <main class="card" id="main">
     <div class="head">
       <span class="byline">Archie · by Otian AI</span>
       <h1>Sign-in &amp; security</h1>
@@ -168,8 +168,8 @@
       <p class="sub">Sign in to manage your security settings.</p>
       <button class="btn btn-primary" id="btn-google">Continue with Google</button>
       <div class="fields">
-        <input type="email" id="email" placeholder="Email address" autocomplete="email" />
-        <input type="password" id="password" placeholder="Password" autocomplete="current-password" />
+        <input type="email" id="email" aria-label="Email address" placeholder="Email address" autocomplete="email" />
+        <input type="password" id="password" aria-label="Password" placeholder="Password" autocomplete="current-password" />
       </div>
       <button class="btn btn-secondary" id="btn-signin">Sign in</button>
     </div>
@@ -214,7 +214,7 @@
         <div class="stack hidden" id="totp-enroll" style="margin-top:12px;">
           <div class="section-body">In your authenticator app, add an account by <b>entering a setup key</b>, paste this key, then type the 6-digit code it shows:</div>
           <div class="code" id="totp-secret">–</div>
-          <input type="text" id="totp-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+          <input type="text" id="totp-code" aria-label="Six-digit code from your authenticator app" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
           <div class="row">
             <button class="btn btn-primary mini grow" id="btn-totp-confirm">Confirm</button>
             <button class="btn btn-secondary mini" id="btn-totp-cancel">Cancel</button>
@@ -237,7 +237,7 @@
         </div>
         <div class="stack hidden" id="emailcode-enroll" style="margin-top:12px;">
           <div class="section-body">We emailed a code to your address. Enter it to turn this on:</div>
-          <input type="text" id="emailcode-code" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
+          <input type="text" id="emailcode-code" aria-label="Six-digit code we emailed you" inputmode="numeric" autocomplete="one-time-code" placeholder="6-digit code" />
           <div class="row">
             <button class="btn btn-primary mini grow" id="btn-emailcode-confirm">Confirm</button>
             <button class="btn btn-secondary mini" id="btn-emailcode-cancel">Cancel</button>
@@ -248,7 +248,7 @@
 
     <div id="status"></div>
     <p style="font-size:11px;color:var(--text-muted);text-align:center;line-height:1.5;">&copy; 2026 Otian AI LLC</p>
-  </div>
+  </main>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";

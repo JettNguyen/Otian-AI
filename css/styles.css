@@ -8,14 +8,24 @@
    ======================================== */
 :root {
   /* Colors */
-  --bg-primary: #FBF8F4;
-  --bg-secondary: #F7EFE4;
+  --bg-primary: #FCFAF8;
+  --bg-secondary: #F5F3EF;
   --bg-card: #FFFFFF;
   --accent: #E08A5B;
   --accent-hover: #CC7647;
   --accent-subtle: #FBE4D3;
   --accent-line: rgba(224, 138, 91, 0.4);
-  --scrollbar-thumb: rgba(74, 66, 58, 0.28);
+  /* The keyboard focus ring, and a THIRD terracotta rather than --accent, which is what every
+     focus rule on this site used to name. --accent is tuned for fills, and as a 2px line it
+     measures 2.64:1 on a white card, 2.54:1 on --bg-primary and 2.38:1 on --bg-secondary. A focus
+     indicator owes 3:1 against what is next to it (WCAG 2.2 SC 1.4.11 and SC 2.4.13), so a
+     keyboard user could not see where they were on any page. Deepened until it clears that bar on
+     every ground here: 4.41:1, 4.23:1 and 3.98:1 respectively, and 3.60:1 on --accent-subtle,
+     which is what the pale halos on the form fields are painted in. Still plainly the accent,
+     because a focus ring in some other colour reads as an error state. Same value and same
+     reasoning as the app's --focus-ring; see src/styles/globals.css in the Archie repo. */
+  --focus-ring: #B4632F;
+  --scrollbar-thumb: rgba(68, 64, 59, 0.28);
   /* Darkened accent for TEXT sitting on --accent-subtle. The bright accent above is tuned for
      fills and borders; as text on its own tint it lands at 2.15:1, which fails WCAG AA. */
   --accent-ink: #8F5233;
@@ -23,23 +33,34 @@
      Same palette the status toast already uses. */
   --danger: #B3261E;
   --danger-ring: rgba(224, 49, 49, 0.12);
-  --text-primary: #4A423A;
-  --text-secondary: #8C8177;
-  --text-muted: #A09489;
-  --border: #EFE4D6;
-  --nav-glass: rgba(251, 248, 244, 0.82);
-  --nav-glass-scrolled: rgba(251, 248, 244, 0.95);
-  --surface-hover: rgba(74, 66, 58, 0.07);
-  --surface-hover-strong: rgba(74, 66, 58, 0.12);
-  --surface-soft: rgba(74, 66, 58, 0.025);
-  --surface-soft-alt: rgba(74, 66, 58, 0.04);
-  --surface-soft-strong: rgba(74, 66, 58, 0.08);
-  --field-border: rgba(74, 66, 58, 0.18);
-  --field-border-strong: rgba(74, 66, 58, 0.24);
-  --panel-border-strong: rgba(74, 66, 58, 0.2);
-  --dashed-border: rgba(74, 66, 58, 0.28);
-  --line-soft: rgba(74, 66, 58, 0.16);
-  --line-muted: rgba(74, 66, 58, 0.24);
+  --text-primary: #44403B;
+  --text-secondary: #69645D;
+  --text-muted: #777069;
+  --border: #EAE6E1;
+  --nav-glass: rgba(252, 250, 248, 0.82);
+  --nav-glass-scrolled: rgba(252, 250, 248, 0.95);
+  --surface-hover: rgba(68, 64, 59, 0.07);
+  --surface-hover-strong: rgba(68, 64, 59, 0.12);
+  --surface-soft: rgba(68, 64, 59, 0.025);
+  --surface-soft-alt: rgba(68, 64, 59, 0.04);
+  --surface-soft-strong: rgba(68, 64, 59, 0.08);
+  /* The line that says "this is a control", and deliberately much stronger than the dividers
+     below it. It was 0.18, which is 1.36:1 against a white card. A text field on this site is
+     --bg-secondary or --bg-card on a page of nearly the same value, so the border is the ONLY
+     thing separating the field from the page, and at 1.36:1 it separated nothing. WCAG 2.2
+     SC 1.4.11 asks 3:1 of exactly this line for exactly this reason. 0.62 clears it on all three
+     grounds (3.49:1 on a card, 3.43:1 on --bg-primary, 3.36:1 on --bg-secondary).
+
+     The dividers (--border, --line-soft, --line-muted) were left alone on purpose, and the
+     difference is not aesthetic: a rule between two rows is decoration, so nothing is lost if it
+     is not seen and 1.4.11 does not reach it. A field's edge is the field. Anyone tempted to make
+     the lines consistent again is about to undo this. */
+  --field-border: rgba(68, 64, 59, 0.62);
+  --field-border-strong: rgba(68, 64, 59, 0.74);
+  --panel-border-strong: rgba(68, 64, 59, 0.2);
+  --dashed-border: rgba(68, 64, 59, 0.28);
+  --line-soft: rgba(68, 64, 59, 0.16);
+  --line-muted: rgba(68, 64, 59, 0.24);
   --overlay-bg: rgba(42, 37, 33, 0.18);
   --text-on-accent: #2A2521;
   --bg-wash-one: rgba(251, 228, 211, 0.42);
@@ -97,43 +118,50 @@
   --nav-height: 72px;
 
   /* Shadows */
-  --shadow-sm: 0 8px 22px rgba(74, 66, 58, 0.08);
-  --shadow-md: 0 16px 36px rgba(74, 66, 58, 0.12);
-  --shadow-lg: 0 28px 60px rgba(74, 66, 58, 0.18);
+  --shadow-sm: 0 8px 22px rgba(68, 64, 59, 0.08);
+  --shadow-md: 0 16px 36px rgba(68, 64, 59, 0.12);
+  --shadow-lg: 0 28px 60px rgba(68, 64, 59, 0.18);
 }
 
 [data-theme="dark"] {
-  --bg-primary: #2A2521;
-  --bg-secondary: #332C26;
-  --bg-card: #3A3229;
+  --bg-primary: #292624;
+  --bg-secondary: #312D2A;
+  --bg-card: #38332E;
   --accent: #EDA277;
+  /* Dark needs no third colour. Light had to deepen the accent to clear 3:1 on a cream page; here
+     the accent is already the light thing on a dark one, at 5.97:1 on a card and 7.18:1 on the
+     page. */
+  --focus-ring: #EDA277;
   --accent-hover: #F2B58F;
   --accent-subtle: #4A392C;
   --accent-line: rgba(237, 162, 119, 0.45);
-  --scrollbar-thumb: rgba(245, 239, 230, 0.24);
+  --scrollbar-thumb: rgba(243, 240, 237, 0.24);
   /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
   --accent-ink: #EDA277;
   --danger: #FF9F97;
   --danger-ring: rgba(255, 159, 151, 0.16);
-  --text-primary: #F5EFE6;
-  --text-secondary: #B7AA9B;
-  --text-muted: #9D8F82;
-  --border: #4C4136;
-  --nav-glass: rgba(42, 37, 33, 0.74);
-  --nav-glass-scrolled: rgba(42, 37, 33, 0.94);
-  --surface-hover: rgba(245, 239, 230, 0.06);
-  --surface-hover-strong: rgba(245, 239, 230, 0.14);
-  --surface-soft: rgba(245, 239, 230, 0.03);
-  --surface-soft-alt: rgba(245, 239, 230, 0.05);
-  --surface-soft-strong: rgba(245, 239, 230, 0.1);
-  --field-border: rgba(245, 239, 230, 0.16);
-  --field-border-strong: rgba(245, 239, 230, 0.24);
-  --panel-border-strong: rgba(245, 239, 230, 0.2);
+  --text-primary: #F3F0ED;
+  --text-secondary: #B3ACA4;
+  --text-muted: #A69F97;
+  --border: #48423C;
+  --nav-glass: rgba(41, 38, 36, 0.74);
+  --nav-glass-scrolled: rgba(41, 38, 36, 0.94);
+  --surface-hover: rgba(243, 240, 237, 0.06);
+  --surface-hover-strong: rgba(243, 240, 237, 0.14);
+  --surface-soft: rgba(243, 240, 237, 0.03);
+  --surface-soft-alt: rgba(243, 240, 237, 0.05);
+  --surface-soft-strong: rgba(243, 240, 237, 0.1);
+  /* Same reasoning as the light block, different arithmetic: a light ink on a dark ground reaches
+     3:1 sooner, so 0.44 does here what 0.62 does there (3.46:1 on a card, 3.62:1 on
+     --bg-secondary, 3.78:1 on --bg-primary). Was 0.16, which measured 1.59:1. */
+  --field-border: rgba(243, 240, 237, 0.44);
+  --field-border-strong: rgba(243, 240, 237, 0.56);
+  --panel-border-strong: rgba(243, 240, 237, 0.2);
   --dashed-border: rgba(239, 199, 119, 0.4);
-  --line-soft: rgba(245, 239, 230, 0.16);
-  --line-muted: rgba(245, 239, 230, 0.28);
+  --line-soft: rgba(243, 240, 237, 0.16);
+  --line-muted: rgba(243, 240, 237, 0.28);
   --overlay-bg: rgba(14, 12, 10, 0.62);
-  --text-on-accent: #2A2521;
+  --text-on-accent: #292624;
   --bg-wash-one: rgba(76, 65, 54, 0.35);
   --bg-wash-two: rgba(239, 199, 119, 0.14);
   --c-blue: #86AEE4;
@@ -194,7 +222,7 @@
 /* Thin, muted scrollbars everywhere (drawer, flyout, the page itself) - mirrors the app. */
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-thumb, rgba(74, 66, 58, 0.28)) transparent;
+  scrollbar-color: var(--scrollbar-thumb, rgba(68, 64, 59, 0.28)) transparent;
 }
 
 /* Chrome autofill paints fields white or pale yellow; repaint with the theme's own field colors. */
@@ -209,7 +237,7 @@ input:-webkit-autofill:focus {
 
 .skip-link:focus-visible {
   top: 12px;
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -682,7 +710,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
 }
 
 .theme-toggle:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -759,7 +787,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .nav-account-btn:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -1228,7 +1256,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .why-card:focus-visible,
 .team-card:focus-visible,
 .value-card:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -1667,7 +1695,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .demo-player--hero .demo-player-frame {
   border: 0;
   border-radius: var(--radius) 0 0 var(--radius);
-  box-shadow: -28px 34px 74px -34px rgba(74, 66, 58, 0.42);
+  box-shadow: -28px 34px 74px -34px rgba(68, 64, 59, 0.42);
   /* Placeholder shown while the recording is still loading, and left in place if it ever
      fails to load: the Otian mark centered on the brand surface, instead of the base
      frame's near-black fill. --bg-secondary carries the theme, so the card is cream in
@@ -2578,8 +2606,17 @@ fieldset legend + * {
 
 .form-input:focus,
 .form-textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--focus-ring);
   box-shadow: 0 0 0 3px rgba(224, 138, 91, 0.14);
+  /* Two rings, and the second one is the one that has to be there. The halo alone was the whole
+     indicator, and a wash at this strength is 1.2:1 against the field behind it: visible if you
+     already knew where to look, and nothing at all otherwise. `outline` rather than a second
+     box-shadow, for the one property box-shadow does not have: `outline-offset`. 3px is exactly
+     the halo's spread, so the ring's inner edge meets the halo's outer edge with no seam, and its
+     neighbours are the halo inside and the page outside. Both clear 3:1. Neither ring is in flow,
+     so nothing moves by a pixel when a field takes focus. */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 .form-input::placeholder,
@@ -2665,7 +2702,7 @@ fieldset legend + * {
 }
 
 .radio-option input[type="radio"]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -2693,7 +2730,7 @@ fieldset legend + * {
 }
 
 .checkbox-option input[type="checkbox"]:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -2914,7 +2951,7 @@ fieldset .checkbox-group {
 }
 
 .rating-option input[type="radio"]:focus-visible + span {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -5036,7 +5073,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .checklist-checkbox:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -5561,9 +5598,17 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .marketplace-search-input:focus {
-  outline: none;
-  border-color: var(--accent);
+  border-color: var(--focus-ring);
   box-shadow: 0 0 0 3px rgba(224, 138, 91, 0.14);
+  /* Two rings, and the second one is the one that has to be there. The halo alone was the whole
+     indicator, and a wash at this strength is 1.2:1 against the field behind it: visible if you
+     already knew where to look, and nothing at all otherwise. `outline` rather than a second
+     box-shadow, for the one property box-shadow does not have: `outline-offset`. 3px is exactly
+     the halo's spread, so the ring's inner edge meets the halo's outer edge with no seam, and its
+     neighbours are the halo inside and the page outside. Both clear 3:1. Neither ring is in flow,
+     so nothing moves by a pixel when a field takes focus. */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 .marketplace-filter-bar {
@@ -6499,7 +6544,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .demo-player-toggle:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--focus-ring);
   outline-offset: 3px;
 }
 
@@ -6628,7 +6673,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .hero-status:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -7026,7 +7071,7 @@ html[data-theme="dark"] .booking-container iframe {
   height: 30px;
   width: auto;
   border-radius: 5px;
-  box-shadow: 0 1px 2px rgba(74, 66, 58, 0.12);
+  box-shadow: 0 1px 2px rgba(68, 64, 59, 0.12);
 }
 
 /* ==============================
@@ -7238,7 +7283,19 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
-.acct-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
+.acct-fields input:focus {
+  border-color: var(--focus-ring);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+  /* Two rings, and the second one is the one that has to be there. The halo alone was the whole
+     indicator, and a wash at this strength is 1.2:1 against the field behind it: visible if you
+     already knew where to look, and nothing at all otherwise. `outline` rather than a second
+     box-shadow, for the one property box-shadow does not have: `outline-offset`. 3px is exactly
+     the halo's spread, so the ring's inner edge meets the halo's outer edge with no seam, and its
+     neighbours are the halo inside and the page outside. Both clear 3:1. Neither ring is in flow,
+     so nothing moves by a pixel when a field takes focus. */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
 
 /* Dashboard sections */
 .acct-section {
@@ -7594,7 +7651,18 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
 }
-.phone-paste input:focus { border-color: var(--accent); }
+.phone-paste input:focus {
+  border-color: var(--focus-ring);
+  /* Two rings, and the second one is the one that has to be there. The halo alone was the whole
+     indicator, and a wash at this strength is 1.2:1 against the field behind it: visible if you
+     already knew where to look, and nothing at all otherwise. `outline` rather than a second
+     box-shadow, for the one property box-shadow does not have: `outline-offset`. 3px is exactly
+     the halo's spread, so the ring's inner edge meets the halo's outer edge with no seam, and its
+     neighbours are the halo inside and the page outside. Both clear 3:1. Neither ring is in flow,
+     so nothing moves by a pixel when a field takes focus. */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
 .phone-paste .btn { margin-top: 10px; width: 100%; }
 .phone-install-body { margin: 6px 0 10px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.55; }
 /* ── Installed-app chrome (`.is-app`, set by nav.js when running from a home screen) ──
@@ -7722,7 +7790,18 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: 0.9rem; outline: none;
 }
-.phone-store-search:focus { border-color: var(--accent); }
+.phone-store-search:focus {
+  border-color: var(--focus-ring);
+  /* Two rings, and the second one is the one that has to be there. The halo alone was the whole
+     indicator, and a wash at this strength is 1.2:1 against the field behind it: visible if you
+     already knew where to look, and nothing at all otherwise. `outline` rather than a second
+     box-shadow, for the one property box-shadow does not have: `outline-offset`. 3px is exactly
+     the halo's spread, so the ring's inner edge meets the halo's outer edge with no seam, and its
+     neighbours are the halo inside and the page outside. Both clear 3:1. Neither ring is in flow,
+     so nothing moves by a pixel when a field takes focus. */
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
 
 /* ── Narrowing a catalog of a hundred-odd things on a phone ────────────────────────────────────
    Search alone was the whole of it, which works for somebody who already knows the name of the
@@ -8142,7 +8221,7 @@ html[data-theme="dark"] .booking-container iframe {
 
    Checked rather than assumed, because the [data-kind] block warns that these colours are
    pitched for a 7px dot and a 1px line and that a filled chip is not a treatment to copy into
-   anything smaller. That warning is about the solid fill; ink on the 13% wash is a different
+   anything smaller. That warning is about the solid fill; ink on the 13%% wash is a different
    measurement. On --bg-card, which is what .addon-showcase-item uses, the six combinations run
    4.61:1 to 5.25:1, so all of them clear AA at this size in both themes. They would NOT clear
    it on --bg-secondary (teal 4.41, plum 4.26), so do not lift this badge onto a bare section. */

@@ -2086,7 +2086,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
      frame is pixel-identical to the start. Uniform spacing comes from padding-right on
      each list, NOT gap on the track: a track gap leaves half a gap at the -50% point and
      the loop visibly jumps.
-   - 96s is not a taste choice on its own: half a track is roughly 3900px, and 3900/96 is
+   - 112s is not a taste choice on its own: half a track is roughly 4500px, and 4500/112 is
      about 40px/s, slow enough to read a name mid-drift. Change duration and width
      together or the speed changes.
    - Hover pauses the row under the cursor; the checkbox in the section markup pauses
@@ -2168,7 +2168,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 .ww-track {
   display: flex;
   width: max-content;
-  animation: ww-drift 96s linear infinite;
+  animation: ww-drift 112s linear infinite;
 }
 
 .ww-mq--rev .ww-track { animation-direction: reverse; }

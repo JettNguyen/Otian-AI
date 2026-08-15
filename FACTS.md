@@ -51,8 +51,8 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | 30 days | Our commitment to publish a final no-sign-in build if we cease operations | Terms of Service |
 | 6 hours | How often the version heartbeat goes out, at most | `crates/archie-core/src/telemetry.rs`, `HEARTBEAT_EVERY` |
 | 25% | An add-on commissioner's share of future sales | `skills-marketplace/commission/` |
-| 5 providers | Anthropic, OpenAI, Google, Groq, xAI | `crates/archie-net/src/llm.rs`. Google's entry is shown as Gemini on the site, the product's own name (`providers.rs` `display_name()`) |
-| 22 apps and services | The works-with band: 4 chat apps + 13 accounts and devices + 5 AI companies | `index.html` band; every name verified in the Archie source 2026-08-15, artwork sourcing documented above `.ww-mark` in `css/styles.css` |
+| 7 providers | Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, Mistral | `crates/archie-net/src/providers.rs`, counted 2026-08-15 after DeepSeek and Mistral landed (Archie 9ceb303). Google's entry is shown as Gemini on the site, the product's own name (`display_name()`). An eighth option, "Another provider", is any OpenAI-format endpoint the user names; it is a door rather than a company and is not counted |
+| 37 apps and services | The works-with band: 4 chat apps + 26 accounts and devices + 7 AI companies | `index.html` band; every name verified in the Archie source 2026-08-15 (connectors in `crates/archie-domain/src/connectors.rs`), marks taken from the app's `BRAND_MARK` table in `src/app/connect.tsx`, which names the site as its reference copy. NOTE: 13 of the 26 connectors (Stripe, YNAB, Lunch Money, Mercury, Splitwise, Raindrop, Readwise, Calendly, Zotero, Mastodon, AfterShip, GitLab, Cloudflare) shipped from provider documentation and have not yet been exercised with a live key; Archie's docs/OPEN-THREADS.md tracks this. They are in the app's picker today, which is what the band claims |
 | 10 minutes | How long the self-check on /trust/ takes with a network monitor | The walkthrough on `trust/index.html` itself; the figure is the length of that procedure, not a benchmark |
 | 5x | What a thought-through ("working") token bills against a read token | The providers' published output-to-input price ratio, used on `archie/pricing/` |
 | 100 words | Roughly how much working a default reply carries | Archie repo, `docs/COST-MEASURED.md`, same measurement as the $140/$30 rows |
@@ -61,8 +61,8 @@ say where a number comes from, it is not a fact and it does not go on the site.
 
 `index.html` (the works-with band under the hero, moved there 2026-08-15) and
 `skills-marketplace/browse/` both print the same three counts: **140 verified add-ons, 4 chat apps,
-5 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
-page: "we check that it works as described and is safe to run before it goes live"). The band's note also counts **all 22** names the band shows.
+7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
+page: "we check that it works as described and is safe to run before it goes live"). The band's note also counts **all 37** names the band shows.
 
 **No "+" on any of them, deliberately.** A "+" turns a count into a claim that there is more
 than stated, and soft rounding is how a site ends up saying 18 curated skills in a stat bar and

@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # This workflow is the only door between an edit and otianai.com: it runs on a push to main
       # and deploys, with no review in between. So the accessibility checks run here rather than in

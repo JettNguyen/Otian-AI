@@ -7842,14 +7842,25 @@ html[data-theme="dark"] .booking-container iframe {
 /* Kind badge. With these on every item, the four kinds stay visible in the
    sample itself, which is what lets the separate four-card kinds grid come
    off the page without losing the idea. */
+/* Takes the same three kind colours the rest of the site uses (see the [data-kind] block:
+   skill accent, routine teal, personality plum), so a Routine on the homepage is the colour a
+   Routine is everywhere else. Without a data-kind attribute it falls back to accent, which is
+   what every one of these badges rendered as before.
+
+   Checked rather than assumed, because the [data-kind] block warns that these colours are
+   pitched for a 7px dot and a 1px line and that a filled chip is not a treatment to copy into
+   anything smaller. That warning is about the solid fill; ink on the 13% wash is a different
+   measurement. On --bg-card, which is what .addon-showcase-item uses, the six combinations run
+   4.61:1 to 5.25:1, so all of them clear AA at this size in both themes. They would NOT clear
+   it on --bg-secondary (teal 4.41, plum 4.26), so do not lift this badge onto a bare section. */
 .addon-kind {
   flex-shrink: 0;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--accent-ink);
-  background: var(--accent-subtle);
+  color: var(--kind-ink, var(--accent-ink));
+  background: var(--kind-wash, var(--accent-subtle));
   border-radius: 999px;
   padding: 4px 10px;
   line-height: 1.4;

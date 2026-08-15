@@ -5,7 +5,7 @@
     "author": "Jack Raney",
     "date": "2026-08-06",
     "readTime": "4 min read",
-    "category": "Team Stories",
+    "category": "Trusting an Agent",
     "tags": [
       "verification",
       "trust",
@@ -19,7 +19,7 @@
     "author": "Jack Raney",
     "date": "2026-08-04",
     "readTime": "4 min read",
-    "category": "Team Stories",
+    "category": "How Agents Fail",
     "tags": [
       "agents",
       "reliability",
@@ -33,7 +33,7 @@
     "author": "Jack Raney",
     "date": "2026-08-03",
     "readTime": "4 min read",
-    "category": "Team Stories",
+    "category": "How Agents Fail",
     "tags": [
       "agents",
       "scope",
@@ -47,7 +47,7 @@
     "author": "Jett Nguyen",
     "date": "2026-08-02",
     "readTime": "5 min read",
-    "category": "Team Stories",
+    "category": "How Agents Fail",
     "tags": [
       "trust",
       "accuracy",
@@ -61,7 +61,7 @@
     "author": "Jett Nguyen",
     "date": "2026-07-31",
     "readTime": "5 min read",
-    "category": "Team Stories",
+    "category": "Running AI Locally",
     "tags": [
       "Local AI",
       "AI Agents",
@@ -75,7 +75,7 @@
     "author": "Jett Nguyen",
     "date": "2026-07-30",
     "readTime": "5 min read",
-    "category": "Team Stories",
+    "category": "Trusting an Agent",
     "tags": [
       "AI agents",
       "human-in-the-loop",
@@ -89,7 +89,7 @@
     "author": "Jett Nguyen",
     "date": "2026-07-20",
     "readTime": "4 min read",
-    "category": "Team Stories",
+    "category": "How Agents Fail",
     "tags": [
       "prompt engineering",
       "ai agents",
@@ -99,11 +99,11 @@
   },
   {
     "title": "Your AI Should Not Disappear When Your Computer Does",
-    "summary": "When your computer breaks, your photos and files survive \u2014 but the context your AI has built about how you work usually doesn't. That accumulated history is becoming one of the most valuable parts of a personal AI, and it shouldn't be tied to one device. How Archie keeps your assistant's memory of you portable.",
+    "summary": "When your computer breaks, your photos and files survive, but the context your AI has built about how you work usually doesn't. That accumulated history is becoming one of the most valuable parts of a personal AI, and it shouldn't be tied to one device. How Archie keeps your assistant's memory of you portable.",
     "author": "Jack Raney",
     "date": "2026-07-12",
     "readTime": "2 min read",
-    "category": "Team Stories",
+    "category": "Running AI Locally",
     "tags": [
       "AI Agents",
       "Personal AI",
@@ -113,11 +113,11 @@
   },
   {
     "title": "The AI Model Isn't the Product Anymore. You Are.",
-    "summary": "A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator \u2014 the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful.",
+    "summary": "A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator: the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful.",
     "author": "Jack Raney",
     "date": "2026-07-12",
     "readTime": "6 min read",
-    "category": "Team Stories",
+    "category": "Running AI Locally",
     "tags": [
       "AI Agents",
       "Personal AI",
@@ -131,7 +131,7 @@
     "author": "Jack Raney",
     "date": "2026-07-09",
     "readTime": "9 min read",
-    "category": "Team Stories",
+    "category": "Field Notes",
     "tags": [
       "AI Agents",
       "Automation",
@@ -141,11 +141,11 @@
   },
   {
     "title": "Everyone Is Either Scared of AI Agents or Ignoring Them. Both Are Wrong.",
-    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing \u2014 and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
+    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing, and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
     "author": "Jett Nguyen",
     "date": "2026-07-05",
     "readTime": "5 min read",
-    "category": "Team Stories",
+    "category": "Trusting an Agent",
     "tags": [
       "AI Agents",
       "Future of Work",
@@ -159,7 +159,7 @@
     "author": "Jett Nguyen",
     "date": "2026-06-30",
     "readTime": "5 min read",
-    "category": "Team Stories",
+    "category": "Field Notes",
     "tags": [
       "AI Agents",
       "Building AI",
@@ -173,7 +173,7 @@
     "author": "Jack Raney",
     "date": "2026-06-25",
     "readTime": "4 min read",
-    "category": "Team Stories",
+    "category": "Field Notes",
     "tags": [
       "Personal Automation",
       "Workflow Automation",
@@ -187,7 +187,7 @@
     "author": "Jack Raney",
     "date": "2026-06-23",
     "readTime": "9 min read",
-    "category": "Team Stories",
+    "category": "Field Notes",
     "tags": [
       "Security",
       "Account Recovery",

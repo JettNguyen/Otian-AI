@@ -2086,13 +2086,52 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   align-items: center;
   gap: 8px;
   min-height: 30px;
-  padding: 5px 12px;
+  padding: 5px 12px 5px 8px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-primary);
+}
+
+/* A registry with a monogram fallback, copied wholesale from the same pattern in the Archie
+   app's Connect screen, so the product and the site agree about what a service looks like.
+
+   The marks are the companies' own published artwork, lifted from `SERVICE_MARK` in
+   src/app/connect.tsx rather than redrawn. Eight of the twenty-two have one. The other
+   fourteen get two letters, and that is the whole point of the pattern: a service without
+   artwork looks deliberate instead of broken, and a real mark drops into the same slot the
+   day somebody has one. Do not fill the gap from memory. The Archie repo did exactly that
+   and then undid it ("service marks are the companies' own artwork now, not my recollection
+   of it"), which is also the difference between naming a mark and misusing one.
+
+   Colour follows the brand rather than us: a chromatic mark keeps its colours (Airtable,
+   Home Assistant, Govee, Google's four-colour G) and an achromatic one takes currentColor,
+   which is what those brands specify and the only version that survives dark mode. */
+.ww-mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--text-primary);
+}
+
+.ww-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ww-mark--mono {
+  border-radius: 5px;
+  background: var(--surface-soft-strong);
+  color: var(--text-muted);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .works-with-note {

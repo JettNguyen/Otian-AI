@@ -2183,6 +2183,18 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   padding-right: 8px;
 }
 
+/* Each pill takes a light wash of its brand's own colour, the same hex its mark already
+   carries, so the tint is sourced exactly like the shape. Brands whose mark is achromatic
+   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) fall back to the neutral
+   below, which reads as "this brand's colour is ink" rather than as a missing tint. The
+   mixes are gentle on purpose: at 9% the text keeps its contrast in both themes, and
+   browsers without color-mix simply keep the plain card pill underneath. */
+.ww-run li {
+  --ww-tint: var(--text-muted);
+  background: color-mix(in srgb, var(--ww-tint) 9%, var(--bg-card));
+  border-color: color-mix(in srgb, var(--ww-tint) 26%, var(--border));
+}
+
 @keyframes ww-drift {
   to { transform: translateX(-50%); }
 }

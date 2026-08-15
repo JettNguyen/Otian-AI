@@ -557,6 +557,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   align-items: center;
   gap: 6px;
   white-space: nowrap; /* a multi-word label ("Work With Us") must never wrap to two lines */
+  position: relative; /* anchors the current-section underline marker */
 }
 
 .nav-more-toggle::after {
@@ -569,16 +570,34 @@ p { color: var(--text-secondary); line-height: 1.8; }
   transition: transform var(--transition);
 }
 
+/* Interaction state: hovering a tab, or its dropdown is open. A neutral surface highlight. */
 .nav-more-toggle:hover,
-.nav-more-toggle.active {
-  color: var(--text-primary);
-  background: var(--surface-hover);
-}
-
 .nav-more.open .nav-more-toggle,
 .nav-more:focus-within .nav-more-toggle {
   color: var(--text-primary);
   background: var(--surface-hover);
+}
+
+/* Current-section state: the page you are on lives under this tab. An accent label plus a
+   persistent underline, deliberately different from the hover/open highlight above, so
+   "you are here" never looks the same as "this menu is open". */
+.nav-more-toggle.active {
+  color: var(--accent);
+  background: transparent;
+}
+.nav-more-toggle.active:hover,
+.nav-more.open .nav-more-toggle.active {
+  color: var(--accent); /* keep the current-section accent even while hovering or open */
+}
+.nav-more-toggle.active::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
 }
 
 .nav-more.open .nav-more-toggle::after,
@@ -2726,6 +2745,55 @@ fieldset .checkbox-group {
 .team-card p {
   font-size: 0.875rem;
   line-height: 1.75;
+}
+
+/* Strategic advisor: deliberately set apart from the two founder cards above. A single
+   horizontal card on a tinted surface reads as a different tier, not a third co-founder. */
+.advisor {
+  max-width: 680px;
+  margin: 44px auto 0;
+}
+.advisor-eyebrow {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.advisor-intro {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 24px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.advisor-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.advisor-photo-wrap { width: 104px; height: 104px; flex: none; }
+.advisor-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 4px solid rgba(224, 138, 91, 0.3);
+}
+.advisor-body { min-width: 0; }
+.advisor-body h3 { font-size: 1.125rem; margin-bottom: 4px; }
+.advisor-body .team-role { margin-bottom: 12px; }
+.advisor-body > p:last-child { font-size: 0.875rem; line-height: 1.7; }
+@media (max-width: 540px) {
+  .advisor-card { flex-direction: column; text-align: center; gap: 16px; padding: 24px; }
 }
 
 .values-grid {

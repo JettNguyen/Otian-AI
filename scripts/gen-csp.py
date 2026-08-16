@@ -55,7 +55,11 @@ SOURCES = {
     # The Firebase SDK is imported as ES modules straight from gstatic (firebase-app, -auth,
     # -firestore, -storage @ 10.12.0) by js/marketplace.js, js/phone.js, js/account-nav.js and
     # js/submit.js. Without this, sign-in and the marketplace do not load at all.
-    "script-src": ["'self'", "https://www.gstatic.com"],
+    # apis.google.com is the second half of sign-in with Google: the SDK's popup flow loads
+    # gapi's iframe helper (apis.google.com/js/api.js) on the sign-in click, then embeds the
+    # authDomain iframe allowed under frame-src. Blocking either one is the same
+    # auth/internal-error.
+    "script-src": ["'self'", "https://www.gstatic.com", "https://apis.google.com"],
     "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
     "font-src": ["'self'", "https://fonts.gstatic.com"],
     # data: covers inline SVG-as-image and the QR code canvas export on the phone page.

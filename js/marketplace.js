@@ -583,7 +583,42 @@ if (grid) {
     if (interestEl && !interestEl.value) { showError(interestEl, "Please choose an option."); valid = false; }
     if (!valid) return;
 
-    form.style.display = "none";
-    if (confirmation) confirmation.classList.add("visible");
+    // This used to hide the form and thank the reader without posting anything anywhere.
+    // Same Formspree inbox as the questionnaire, tagged with its source.
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var idleLabel = submitBtn ? submitBtn.textContent : "";
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Joining\u2026";
+    }
+
+    var data = new FormData(form);
+    data.append("form", "marketplace-waitlist");
+
+    fetch("https://formspree.io/f/mgobddpy", {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error("send failed");
+      form.style.display = "none";
+      if (confirmation) confirmation.classList.add("visible");
+    })
+    .catch(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = idleLabel;
+      }
+      var el = form.querySelector(".form-error-msg--form");
+      if (!el) {
+        el = document.createElement("p");
+        el.className = "form-error-msg form-error-msg--form visible";
+        el.setAttribute("role", "alert");
+        form.insertBefore(el, form.querySelector('button[type="submit"]'));
+      }
+      el.textContent = "Something went wrong and you were not added. Please try again, or email us at questions@otianai.com.";
+      el.classList.add("visible");
+    });
   });
 })();

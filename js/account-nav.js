@@ -10,6 +10,21 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { bindStatusToast } from "./status-toast.js";
+
+// A toast of the nav's own, since most pages carry no status element: created on first use,
+// then reused. bindStatusToast upgrades it into the shared bottom toast (styles.css section 39).
+let navStatusFn = null;
+function navStatus() {
+  if (!navStatusFn) {
+    const el = document.createElement("div");
+    el.setAttribute("role", "status");
+    el.setAttribute("aria-live", "polite");
+    document.body.appendChild(el);
+    navStatusFn = bindStatusToast(el);
+  }
+  return navStatusFn;
+}
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -148,7 +163,10 @@ if (root) {
       try { sessionStorage.removeItem(BILL_CACHE_KEY); } catch (e) {}
       try { await signOut(auth); } catch (e) { /* ignore */ }
       // If we're on a signed-in-only page, get out of it.
-      if (location.pathname.replace(/\/+$/, "").endsWith("/account")) location.href = "/login/";
+      if (location.pathname.replace(/\/+$/, "").endsWith("/account")) { location.href = "/login/"; return; }
+      // Everywhere else the page stays put, so the only visible change was an avatar quietly
+      // disappearing; say what happened.
+      navStatus()("Signed out.", "ok");
     });
 
     billingStatus(user).then((s) => {

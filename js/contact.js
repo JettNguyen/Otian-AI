@@ -67,10 +67,50 @@
 
     if (!valid) return;
 
-    /* Show confirmation inline */
-    form.style.display = 'none';
-    if (confirmation) {
-      confirmation.classList.add('visible');
+    /* Actually send it. This handler used to hide the form and show the confirmation without
+       posting anything anywhere: a reader was thanked for a message nobody received. Same
+       Formspree inbox as the questionnaire, with a source field to tell the two apart. */
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var idleLabel = submitBtn ? submitBtn.textContent : '';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending\u2026';
     }
+
+    var data = new FormData(form);
+    data.append('form', 'contact');
+
+    fetch('https://formspree.io/f/mgobddpy', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      if (!res.ok) throw new Error('send failed');
+      form.style.display = 'none';
+      if (confirmation) confirmation.classList.add('visible');
+    })
+    .catch(function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = idleLabel;
+      }
+      showFormError('Something went wrong and your message was not sent. Please try again, or email us at questions@otianai.com.');
+    });
   });
+
+  /* One form-level error line above the submit button, for failures that belong to the whole
+     form rather than one field. Created on first use; announced via role="alert". */
+  function showFormError(msg) {
+    var el = form.querySelector('.form-error-msg--form');
+    if (!el) {
+      el = document.createElement('p');
+      el.className = 'form-error-msg form-error-msg--form visible';
+      el.setAttribute('role', 'alert');
+      var btn = form.querySelector('button[type="submit"]');
+      form.insertBefore(el, btn);
+    }
+    el.textContent = msg;
+    el.classList.add('visible');
+  }
 })();

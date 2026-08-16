@@ -69,8 +69,12 @@ SOURCES = {
         "https://archie-4f35.onrender.com",
         "https://formspree.io",
     ],
-    # The booking widget on /contact/ and /questionnaire/.
-    "frame-src": ["https://calendar.google.com"],
+    # The booking widget on /contact/ and /questionnaire/, and the Firebase Auth helper
+    # iframe (authDomain in js/account-nav.js and friends), which signInWithPopup embeds on
+    # the sign-in click. The page-load CSP sweep can never see that one: it only exists
+    # after a user gesture, which is how blocking it shipped as auth/internal-error on
+    # "Continue with Google" (found live 2026-08-16).
+    "frame-src": ["https://calendar.google.com", "https://archie-77170.firebaseapp.com"],
     "form-action": ["'self'", "https://formspree.io"],
     # Nothing on this site embeds a plugin or needs to rewrite its own base URL, and both are
     # standard injection footholds.

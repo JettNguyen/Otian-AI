@@ -1253,7 +1253,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .use-case-item:focus-visible,
 .hero-status:focus-visible,
 .feature-card:focus-visible,
-.why-card:focus-visible,
 .team-card:focus-visible,
 .value-card:focus-visible {
   outline: 2px solid var(--focus-ring);
@@ -1798,38 +1797,8 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 }
 
 /* ========================================
-   10. Proof Bar
+   10. Proof Chips
    ======================================== */
-.proof-bar {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 24px;
-}
-
-.proof-bar-inner {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.proof-label {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.proof-chips {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .proof-chip {
   display: inline-flex;
   align-items: center;
@@ -4845,12 +4814,6 @@ html.js .fade-up:not(.visible) {
     text-align: left !important;
   }
 
-  /* proof bar */
-  .proof-bar-inner {
-    flex-direction: column;
-    gap: 14px;
-  }
-
   /* Form */
   .contact-form-card {
     padding: 28px 20px;
@@ -4876,12 +4839,11 @@ html.js .fade-up:not(.visible) {
     grid-template-columns: 1fr;
   }
 
-  /* One chip per line under 480px, which is right for reading and wrong for six of them:
-     stacked at the full desktop metrics they took a third of the screen before the first
-     section. Tighter gap and padding puts the row back to roughly the height four chips
-     used to occupy, without dropping any of them. A claim we would hide on a phone is a
-     claim that should not be in the row. */
-  .proof-chips {
+  /* One chip per line under 480px, which is right for reading and wrong for a row of
+     them at full desktop metrics. Tighter gap and padding keeps the stack short, without
+     dropping any of them. A claim we would hide on a phone is a claim that should not be
+     in the row. */
+  .story-chips {
     flex-direction: column;
     width: 100%;
     gap: 6px;
@@ -4950,14 +4912,6 @@ html.js .fade-up:not(.visible) {
     box-shadow: var(--shadow-md);
   }
 
-  /* The whole card is a link and carries no "learn more" text, so the border
-     picks up the accent to say so on hover. */
-  .why-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent);
-  }
-
   .mp-product-card.is-coming-soon:hover {
     transform: none;
     box-shadow: none;
@@ -4984,8 +4938,7 @@ html.js .fade-up:not(.visible) {
 
 /* Tap feedback for touch devices */
 @media (hover: none) {
-  .feature-card:active,
-  .why-card:active {
+  .feature-card:active {
     transform: scale(0.98);
   }
 
@@ -6605,12 +6558,6 @@ html[data-theme="dark"] .booking-container iframe {
   }
 }
 
-@media (max-width: 360px) {
-  .proof-label {
-    white-space: normal;
-    text-align: center;
-  }
-}
 
 
 
@@ -8305,48 +8252,6 @@ html[data-theme="dark"] .booking-container iframe {
   }
 }
 
-/* --- Add-on showcase ------------------------------------------------------
-   Six real add-ons from the live catalog, standing in for the abstract
-   category grid that used to sit here. Following Obsidian's marketplace
-   section: show a handful of actual things with their real names, then link
-   to the rest. Fewer, larger boxes carrying more specific information. */
-.addon-showcase {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-  margin-top: 36px;
-}
-
-.addon-showcase-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.addon-showcase-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.addon-showcase-item h3 {
-  font-size: 1.0625rem;
-  margin: 0;
-}
-
-.addon-showcase-item p {
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-/* Kind badge. With these on every item, the four kinds stay visible in the
-   sample itself, which is what lets the separate four-card kinds grid come
-   off the page without losing the idea. */
 /* Takes the same three kind colours the rest of the site uses (see the [data-kind] block:
    skill accent, routine teal, personality plum), so a Routine on the homepage is the colour a
    Routine is everywhere else. Without a data-kind attribute it falls back to accent, which is
@@ -8355,7 +8260,8 @@ html[data-theme="dark"] .booking-container iframe {
    Checked rather than assumed, because the [data-kind] block warns that these colours are
    pitched for a 7px dot and a 1px line and that a filled chip is not a treatment to copy into
    anything smaller. That warning is about the solid fill; ink on the 13%% wash is a different
-   measurement. On --bg-card, which is what .addon-showcase-item uses, the six combinations run
+   measurement. On --bg-card, which is the ground the add-on ledger panel and the routine
+   chip both give it, the six combinations run
    4.61:1 to 5.25:1, so all of them clear AA at this size in both themes. They would NOT clear
    it on --bg-secondary (teal 4.41, plum 4.26), so do not lift this badge onto a bare section. */
 .addon-kind {
@@ -8369,85 +8275,6 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 999px;
   padding: 4px 10px;
   line-height: 1.4;
-}
-
-@media (max-width: 1000px) {
-  .addon-showcase {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 640px) {
-  .addon-showcase {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .addon-showcase-item {
-    padding: 20px;
-  }
-}
-
-/* --- Why Archie, in three words -------------------------------------------
-   One word per card, so the answer survives a skim. Built on the add-on
-   showcase box above it so the two sections read as one family; the word is
-   sized up as the hook, and the whole box is the link, which is why there is
-   no "learn more" line to click. Three across, then straight to stacked: two
-   columns would leave one card orphaned on its own row. */
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
-/* The contrast with a chat window, set after the three words rather than before them: the
-   cards are the answer, and this is for the reader who wants the reasoning behind it. */
-.why-intro {
-  max-width: 640px;
-  margin: 36px auto 0;
-  text-align: center;
-}
-
-.why-intro p {
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.why-intro p + p {
-  margin-top: 14px;
-}
-
-.why-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  color: inherit;
-  text-decoration: none;
-  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-}
-
-.why-card h3 {
-  font-size: 1.5rem;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.why-card p {
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-@media (max-width: 900px) {
-  .why-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .why-card {
-    padding: 22px 20px;
-  }
 }
 
 /* --- Stacked trust table, tightened ---------------------------------------
@@ -8634,5 +8461,539 @@ html[data-theme="dark"] .booking-container iframe {
   }
 }
 
+/* ========================================
+   42. Home: the day arc
+   One visual form per story beat, so the homepage reads as a journey rather
+   than the same card four times: a phone at 7:00 am, the email draft card and
+   the numbered approval sequence at midday, a sentence becoming a routine in
+   the evening, and the custody diagram underneath it all. Everything here is
+   an illustration drawn in the site's own tokens, never a claimed screenshot;
+   the calm-note under the Careful pair says so on the page.
+   ======================================== */
+.story-time {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-left: 10px;
+}
 
+.story-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 64px;
+  align-items: center;
+}
 
+.story-copy h2 {
+  margin: 10px 0 16px;
+}
+
+.story-copy p {
+  max-width: 52ch;
+}
+
+.story-more {
+  display: inline-block;
+  margin-top: 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.story-more:hover {
+  text-decoration: underline;
+}
+
+.story-band .story-copy {
+  max-width: 640px;
+}
+
+.story-band-visuals {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 44px;
+  margin-top: 44px;
+  align-items: start;
+}
+
+.story-band .story-foot {
+  margin-top: 52px;
+}
+
+/* The phone: the only chat chrome on the page. */
+.vg {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  padding: 18px;
+  max-width: 460px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.vg--phone {
+  max-width: 340px;
+  border-radius: 30px;
+  padding: 16px 14px;
+  border-color: var(--panel-border-strong);
+  box-shadow: var(--shadow-lg);
+}
+
+.vg-head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 2px 4px 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.vg-avatar {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.vg-name {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vg-sub {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.vg-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.vg-msg {
+  max-width: 92%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.vg-msg--agent {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+}
+
+.vg-msg--user {
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+}
+
+.vg-time {
+  display: block;
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.vg-msg--user .vg-time {
+  color: inherit;
+  opacity: 0.7;
+}
+
+.vg-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 6px 0;
+}
+
+.vg-lines span {
+  display: flex;
+  gap: 8px;
+}
+
+.vg-lines b {
+  min-width: 40px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The draft card, standing alone at close range. The kicker, the italic
+   summary, the "Draft reply (to ...)" line and the three buttons mirror
+   render_card and pending_buttons in the Archie source. */
+.vg-solo {
+  margin: 0;
+}
+
+.vg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.vg-card--solo {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 18px 20px;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-md);
+  gap: 8px;
+}
+
+.vg-card-summary {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.vg-card-body {
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.vg-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.vg-btn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--field-border);
+  color: var(--text-primary);
+}
+
+.vg-btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--text-on-accent);
+}
+
+.vg-caption {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* The approval sequence: numbered because the order is the claim. A change
+   cannot be applied on the turn that proposed it, so 1-2-3 is the mechanism,
+   not decoration. */
+.seq {
+  max-width: 430px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.seq-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+
+.seq-step + .seq-step {
+  border-top: 1px dashed var(--line-soft);
+}
+
+.seq-num {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent-ink);
+  background: var(--bg-card);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+.seq-step b {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.seq-quote {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.seq-bubble {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 5px 14px;
+  border-radius: 12px;
+  border-bottom-right-radius: 4px;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+  font-size: 0.82rem;
+}
+
+/* A sentence becomes a routine. */
+.story-teach-head {
+  max-width: 640px;
+}
+
+.story-teach-head h2 {
+  margin: 10px 0 16px;
+}
+
+.teach {
+  margin-top: 44px;
+}
+
+.teach-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.teach-bubble {
+  max-width: 400px;
+  padding: 18px 24px;
+  border-radius: 20px;
+  border-bottom-right-radius: 6px;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.teach-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--accent);
+}
+
+.teach-arrow small {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+}
+
+/* --bg-card under the badge on purpose; see the .addon-kind contrast note. */
+.teach-chip {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+
+.teach-chip b {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.teach-chip > span:last-child {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* The custody diagram, wide and quiet, with the proof chips folded in under
+   the argument they summarize. */
+.story-custody .story-teach-head p {
+  max-width: 62ch;
+}
+
+.custody--wide {
+  max-width: 760px;
+  margin: 44px auto 0;
+}
+
+.custody-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.custody-box {
+  flex: 1;
+  border: 1.5px solid var(--line-muted);
+  border-radius: 12px;
+  padding: 16px 14px;
+  text-align: center;
+  background: transparent;
+}
+
+.custody-box b {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.custody-box span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.custody-box--accent {
+  border-color: var(--accent);
+}
+
+.custody-box--accent b {
+  color: var(--accent-ink);
+}
+
+.custody-arrow {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--accent);
+}
+
+.custody-arrow small {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+  margin-top: 3px;
+  max-width: 16ch;
+  text-align: center;
+}
+
+.custody-aside {
+  margin-top: 16px;
+  border: 1.5px dashed var(--dashed-border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.story-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+/* Add-ons as one ledger panel rather than six cards. The panel is --bg-card
+   on purpose: the .addon-kind contrast note above measured the badge inks on
+   a card ground and warns against a bare section behind them. */
+.addon-ledger {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 22px;
+  margin-top: 36px;
+}
+
+.addon-ledger-row {
+  display: grid;
+  grid-template-columns: 180px 118px 1fr;
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: baseline;
+}
+
+.addon-ledger-row:last-child {
+  border-bottom: none;
+}
+
+.addon-ledger-row b {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.addon-ledger-row .addon-kind {
+  justify-self: start;
+}
+
+.addon-ledger-row p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .story-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .story-band-visuals {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .teach-inner {
+    flex-direction: column;
+    gap: 14px;
+  }
+  .teach-arrow svg {
+    transform: rotate(45deg);
+  }
+  .addon-ledger {
+    padding: 2px 18px;
+  }
+  .addon-ledger-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .addon-ledger-row .addon-kind {
+    order: -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .custody-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .custody-arrow {
+    transform: rotate(90deg);
+    margin: 14px 0;
+  }
+  .custody-arrow small {
+    transform: rotate(-90deg) translateX(-4px);
+    white-space: nowrap;
+  }
+}

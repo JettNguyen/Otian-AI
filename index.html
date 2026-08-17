@@ -221,58 +221,6 @@
     </section>
 
     <!-- ==============================
-         Social Proof Bar
-
-         Every chip here is a sentence from TRUST.md, in its approved wording, because a chip
-         is a heading: it gets scanned on its own, with none of the qualifying paragraph that
-         normally sits under a claim. Two came out on 2026-08-15:
-
-         "No Usage Data Sent" was true when it was written and stopped being true when
-         telemetry shipped (crates/archie-core/src/telemetry.rs). Archie sends a version
-         heartbeat every six hours and a crash tail after an unexpected quit, both carrying the
-         account ID. The approved claim is the narrower one: there is no analytics service.
-
-         "Clients Report Hours Back Every Week" had nothing published behind it. /testimonials/
-         says in as many words that we are still collecting reviews, so the chip was asking for
-         belief the next page down declines to ask for.
-
-         Nothing goes in this row that cannot be defended standing alone.
-
-         Every chip also has to make sense to somebody who has been on the site for four
-         seconds. That rules out the add-on claim, however good it is: a row this high on the
-         page cannot spend a slot explaining what an add-on is first. It has its own section
-         on /trust/ and the marketplace, where the reader already has the context.
-
-         The same slot ruled out two more before it landed. "It Can't Spend Your Money" is
-         true in the code and has a hole a reader finds on their own: the agent does spend
-         money, on the AI account this page tells them to connect. And "If You Leave, It
-         Stops. If We Do, It Doesn't." is TRUST.md's own sentence, but it is a conditional
-         about us going out of business, which makes a reader stop and work out whether that
-         is good news. Every chip in this row should be wanted on sight.
-
-         So the rule this slot ended up proving: positive, instant, and not already said in
-         the hero two hundred pixels above. That last part is what rules out the otherwise
-         obvious ones. The hero already promises the chat apps you use, no terminal and no
-         code. What it never mentions is that the AI company is a setting: you pick one of
-         seven and can change your mind later (llm.rs builds requests for all seven, and the
-         provider is a per-agent setting rather than a build-time constant). Nobody has to
-         decide whether not being locked in is a good thing.
-         ============================== -->
-    <div class="proof-bar" aria-label="Key facts">
-      <div class="proof-bar-inner">
-        <span class="proof-label">Runs on your own computer, under your own accounts.</span>
-        <div class="proof-chips">
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>We Never Hold Your Conversations</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Your Own AI Account, Your Own Key</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>No Analytics Service in the App</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>Switch AI Companies Any Time</span>
-          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>It Works While You Sleep</span>
-          <a class="proof-chip proof-chip--link" href="trust/"><span class="proof-chip-dot" aria-hidden="true"></span>Check It Yourself in 10 Minutes &rarr;</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==============================
          Works With: the river band
 
          Moved from fifth position to directly under the hero on 2026-08-15. Recognition
@@ -389,92 +337,151 @@
     </section>
 
     <!-- ==============================
-         Why Archie, in 3 Words
+         The day arc: Proactive / Careful / Effortless / Yours
 
-         Replaces "Yours in Ways Most AI Isn't", which answered the same question ("why this
-         instead of the chat window I already have?") in three long cards further down the page.
-         The visitors who ask it are new to agents, so the answer has to survive a skim: one
-         word each, and the whole box is a door to the page that proves it. The three-things
-         disclosure that used to close the old section now opens /trust/, where the full list
-         already lives; the guided-setup offer moved down to the closing call to action.
+         Replaces "Why Archie, in 3 Words" and "Why an AI Agent Is Right for
+         You", which said the same things as same-sized text cards. One visual
+         form per beat, in day order, so the page reads as a journey rather
+         than the same card four times: a phone at 7:00 am, the draft card and
+         the approval sequence at midday, a sentence becoming a routine in the
+         evening, and the custody diagram underneath it all.
+
+         Every visual is an illustration drawn in the site's own style, never
+         a claimed screenshot, and the note under the Careful pair says so.
+         The interaction shapes are verified against the Archie source: the
+         email card and its three buttons are render_card / pending_buttons
+         (crates/archie-runtime/src/email/replies/card.rs), calendar approval
+         is the two-turn propose-then-yes flow with no card UI of its own
+         (gateway/tools_calendar.rs), and the Morning Brief contents match the
+         catalog entry (data/marketplace/routines/morning-brief.json).
          ============================== -->
-    <section class="section section-alt section--tight" aria-labelledby="three-words-heading">
-      <div class="container">
-        <div class="section-header section-header--solo">
-          <span class="section-label fade-up">The Short Version</span>
-          <h2 id="three-words-heading" class="fade-up">Why Archie, in 3 Words</h2>
+    <section class="section story-row" aria-labelledby="proactive-heading">
+      <div class="container story-inner">
+        <div class="story-copy">
+          <span class="section-label fade-up">Proactive <em class="story-time">7:00 am</em></span>
+          <h2 id="proactive-heading" class="fade-up">You don&rsquo;t open Archie. Archie messages you.</h2>
+          <p class="fade-up delay-1">Your morning laid out before you ask. The follow-up flagged before you remembered it. Archie lives on your computer, keeps an eye on your inbox and calendar, and knocks on your door when something needs attention.</p>
+          <a class="story-more fade-up delay-1" href="archie/see-it-work/">See it work &rarr;</a>
         </div>
-
-        <div class="why-grid fade-up delay-1">
-
-          <a class="why-card" href="archie/see-it-work/">
-            <h3>Proactive.</h3>
-            <p>Your morning laid out before you ask. The follow-up flagged before you remembered it. The reply drafted, waiting for one tap. You don&rsquo;t open Archie. Archie messages you.</p>
-          </a>
-
-          <a class="why-card" href="how-it-works/">
-            <h3>Effortless.</h3>
-            <p>No terminal. No code. If you can send a message, you can run an agent. And when you want it to do something new, you just tell it.</p>
-          </a>
-
-          <a class="why-card" href="trust/">
-            <h3>Yours.</h3>
-            <p>It runs on your computer, under your accounts. Once your own AI key is connected, your conversations go straight to the AI company and never pass through our servers. You pick an AI provider and how hard it thinks: fast and cheap, or deep and thorough.</p>
-          </a>
-
-        </div>
-
-        <div class="why-intro fade-up delay-2">
-          <p><strong>You&rsquo;ve probably seen AI that answers questions.</strong> You open it, type, get an answer, close it. By tomorrow it has forgotten you.</p>
-          <p><strong>Archie works whether you&rsquo;re there or not.</strong> It lives on your computer, keeps an eye on your inbox and calendar, and knocks on your door when something needs attention.</p>
+        <div class="story-visual fade-up delay-2">
+          <figure class="vg vg--phone" role="img" aria-label="An illustration of a phone showing a Telegram chat. The agent sends a morning brief: three calendar events, a bill due Thursday, a birthday Saturday, a package arriving today. Asked what the 11:30 needs, it answers from last night's agenda.">
+            <div aria-hidden="true">
+            <div class="vg-head">
+              <span class="vg-avatar">A</span>
+              <span><span class="vg-name">Archibald</span><span class="vg-sub">Telegram &middot; Morning Brief</span></span>
+            </div>
+            <div class="vg-chat">
+              <div class="vg-msg vg-msg--agent"><strong>Good morning. Tuesday, in one glance:</strong>
+                <span class="vg-lines">
+                  <span><b>9:00</b>Standup, video call</span>
+                  <span><b>11:30</b>Maria, Q3 kickoff prep</span>
+                  <span><b>3:00</b>Design review</span>
+                </span>
+                Internet bill is due Thursday. Dad&rsquo;s birthday is Saturday. Your package arrives today.<span class="vg-time">7:00 am</span></div>
+              <div class="vg-msg vg-msg--user">What do I need for the 11:30?<span class="vg-time">7:04 am</span></div>
+              <div class="vg-msg vg-msg--agent">Maria sent the agenda last night: budget first, then hiring. Your action item was the vendor shortlist.<span class="vg-time">7:04 am</span></div>
+            </div>
+            </div>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- ==============================
-         Why an AI Agent Is Right for You
-         ============================== -->
-    <section class="section" aria-labelledby="why-heading">
+    <section class="section section-alt story-row story-band" aria-labelledby="careful-heading">
       <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Your Week</span>
-          <h2 id="why-heading" class="fade-up">Why an AI Agent Is Right for You</h2>
-          <p>If your week fills up with scheduling, catching up on meetings, and remembering who&rsquo;s waiting on what, that&rsquo;s exactly the work an agent is built to take on.</p>
+        <div class="story-copy">
+          <span class="section-label fade-up">Careful <em class="story-time">1:28 pm</em></span>
+          <h2 id="careful-heading" class="fade-up">Drafts wait for your tap. Changes wait for your yes.</h2>
+          <p class="fade-up delay-1">Archie can draft email replies, but it cannot send one on its own: the draft arrives as a card with Send, Edit and Dismiss buttons, and nothing reaches Gmail until you tap Send. Calendar changes work the same way. It proposes the exact change and makes it after you approve.</p>
+          <a class="story-more fade-up delay-1" href="trust/">What it will and won&rsquo;t do &rarr;</a>
         </div>
-
-        <!-- The chatbot/agent before-and-after pair used to open this section. It came out when the
-             three words moved above it: that section now makes the same contrast, two screens
-             earlier, in fewer words. Two statements of one idea, a screen apart, read as padding. -->
-        <p>Most people don&rsquo;t go looking for an AI agent. They just have a week that looks like this:</p>
-
-        <!-- Unboxed on purpose. These are examples, not claims, and when they carried the
-             same border and padding as the benefit cards below they read as more things to
-             get through. Same words, one region instead of three. See .calm-list.
-
-             A fourth ("the thing you swore you'd remember") lives on /how-it-works/ now: it said
-             what the Proactive card above already says, and three examples make the point. -->
-        <div class="calm-list calm-list--3 calm-list--ruled fade-up delay-2">
-
-          <div class="calm-list-item">
-            <span class="calm-list-label">Monday, 9 a.m.</span>
-            <p>Half an hour disappears reconstructing last week before the new one starts. Ask your agent to catch you up on your meetings and it reads back the transcripts while you pour your coffee.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label">The reply you keep meaning to send</span>
-            <p>That email has sat in the back of your head for three days. Your agent writes the draft and drops it in your chat with a Send button, so you tap once, when you&rsquo;re ready.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label">The 3 o&rsquo;clock that has to move</span>
-            <p>Instead of playing calendar tetris, tell your agent to move it. It proposes the exact change and makes it after you approve.</p>
-          </div>
-
+        <div class="story-band-visuals fade-up delay-2">
+          <figure class="vg-solo" role="img" aria-label="An illustration of the email draft card: reply to Sam, a one-line summary of his email, the drafted reply, and three buttons labeled Send, Edit, and Dismiss.">
+            <div class="vg-card vg-card--solo" aria-hidden="true">
+              <span class="vg-card-kicker">&#9997;&#65039; <strong>Reply to</strong> Sam</span>
+              <span class="vg-card-summary">Venue for the offsite: he needs an answer on the two options.</span>
+              <span class="vg-card-draft"><strong>Draft reply</strong> (to Sam):</span>
+              <span class="vg-card-body">Hi Sam, sorry for the slow reply. The second option works for us. Can you hold October 12?</span>
+              <span class="vg-buttons"><span class="vg-btn vg-btn--primary">&#9989; Send</span><span class="vg-btn">&#9999;&#65039; Edit</span><span class="vg-btn">&#10005; Dismiss</span></span>
+            </div>
+            <figcaption class="vg-caption">The email card, as it lands in your chat.</figcaption>
+          </figure>
+          <figure class="vg-solo" role="img" aria-label="A three step sequence for calendar changes. One: it proposes the exact change, moving the design review from 3:00 to 4:30 pm. Two: you approve in your next message. Three: only then is the change made.">
+            <div class="seq" aria-hidden="true">
+              <div class="seq-step">
+                <span class="seq-num">1</span>
+                <div><b>It proposes the exact change</b><span class="seq-quote">&ldquo;Design review: 3:00 pm to 4:30 pm. Nothing else touched. Approve?&rdquo;</span></div>
+              </div>
+              <div class="seq-step">
+                <span class="seq-num">2</span>
+                <div><b>You answer in your own words</b><span class="seq-bubble">Yes.</span></div>
+              </div>
+              <div class="seq-step">
+                <span class="seq-num">3</span>
+                <div><b>Only then does it happen</b><span class="seq-quote">&ldquo;Done. Moved to 4:30 pm.&rdquo;</span></div>
+              </div>
+            </div>
+            <figcaption class="vg-caption">Calendar changes: a proposal, your yes, then the change.</figcaption>
+          </figure>
         </div>
-
-        <p class="calm-note calm-note--center">None of it is an emergency. That&rsquo;s the point: it&rsquo;s the small, steady tax on your attention, and an agent is what quietly pays it down. A part-time assistant can run thousands a year and clocks out at five; your agent is there from six in the morning to eleven at night, as long as your computer&rsquo;s on.</p>
+        <p class="calm-note calm-note--center story-foot fade-up delay-3">The conversations on this page are illustrations, drawn in our style rather than screenshots. The buttons and the approval steps are the real ones.</p>
       </div>
     </section>
+
+    <section class="section story-row story-teach" aria-labelledby="effortless-heading">
+      <div class="container">
+        <div class="story-teach-head">
+          <span class="section-label fade-up">Effortless <em class="story-time">6:12 pm</em></span>
+          <h2 id="effortless-heading" class="fade-up">If you can send a message, you can run an agent.</h2>
+          <p class="fade-up delay-1">No terminal and no code. When you want Archie to do something new, you just tell it. One sentence, sent from your own chat, becomes a standing routine.</p>
+        </div>
+        <div class="teach fade-up delay-2" role="img" aria-label="An illustration. The sentence, every Sunday at 6 send me the week ahead, becomes a routine named Week Ahead that runs Sundays at 6:00 pm and delivers to your chat.">
+          <div aria-hidden="true" class="teach-inner">
+            <span class="teach-bubble">&ldquo;Every Sunday at 6, send me the week ahead. Meetings, deadlines, anything due.&rdquo;</span>
+            <span class="teach-arrow"><svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 10c14 2 26 10 30 26"/><path d="M28 32l8 5 2-9"/></svg><small>becomes</small></span>
+            <span class="teach-chip">
+              <span class="addon-kind" data-kind="routine">Routine</span>
+              <b>Week Ahead</b>
+              <span>Sundays &middot; 6:00 pm &middot; delivered to your chat</span>
+            </span>
+          </div>
+        </div>
+        <p class="calm-note calm-note--center fade-up delay-3"><a href="how-it-works/">How it works &rarr;</a></p>
+      </div>
+    </section>
+
+    <section class="section section-alt story-row story-custody" aria-labelledby="yours-heading">
+      <div class="container">
+        <div class="story-teach-head">
+          <span class="section-label fade-up">Yours <em class="story-time">all day, every day</em></span>
+          <h2 id="yours-heading" class="fade-up">Your conversations go to your AI company. Not to us.</h2>
+          <p class="fade-up delay-1">Archie runs on your computer, under your accounts, on an AI account you connect: pick from 7 companies and switch any time. Once your own AI key is connected, your conversations go straight to that company and never pass through our servers.</p>
+        </div>
+        <figure class="custody custody--wide fade-up delay-2" role="img" aria-label="A diagram. Your computer, holding Archie, your files and your keys, connects directly to your AI company on your own account. Otian servers sit off to the side holding only your email address, whether you have a current plan, and your paid add-ons.">
+          <div aria-hidden="true">
+          <div class="custody-row">
+            <span class="custody-box custody-box--accent"><b>Your computer</b><span>Archie, your files, your keys</span></span>
+            <span class="custody-arrow"><svg width="110" height="14" viewBox="0 0 110 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h102"/><path d="M98 2l6 5-6 5"/></svg><small>direct, on your own account</small></span>
+            <span class="custody-box"><b>Your AI company</b><span>your pick of 7, switch any time</span></span>
+          </div>
+          <div class="custody-aside"><b>Otian servers, off to the side:</b> your email address, whether you have a current plan, and your paid add-ons. Not your prompts, not your files, not your calendar, not a single conversation.</div>
+          </div>
+        </figure>
+        <!-- The chips that used to be the proof bar under the hero, kept to the ones that
+             stand alone without the paragraph above (the same test the bar itself used:
+             nothing goes here that cannot be defended standing alone, in TRUST.md wording).
+             They sit under the custody diagram now so they land beside the argument they
+             summarize instead of being a strip of unearned claims at the top of the page. -->
+        <div class="story-chips fade-up delay-3">
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>We Never Hold Your Conversations</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>No Analytics Service in the App</span>
+          <span class="proof-chip"><span class="proof-chip-dot" aria-hidden="true"></span>It Works While You Sleep</span>
+          <a class="proof-chip proof-chip--link" href="trust/"><span class="proof-chip-dot" aria-hidden="true"></span>Check It Yourself in 10 Minutes &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+
 
     <!-- ==============================
          Add-ons: six real ones, not eight abstract categories
@@ -489,7 +496,7 @@
          multi-step autonomous work, composition between add-ons, and personality as a function
          rather than decoration. All six are public and free in the live catalog.
          ============================== -->
-    <section class="section section-alt section--tight" aria-labelledby="addons-heading">
+    <section class="section section--tight" aria-labelledby="addons-heading">
       <div class="container">
         <div class="section-header section-header--quiet">
           <span class="section-label fade-up">Add-ons</span>
@@ -498,58 +505,14 @@
         </div>
 
 
-        <div class="addon-showcase fade-up delay-1">
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>The Honest Week</h3>
-              <span class="addon-kind" data-kind="skill">Skill</span>
-            </div>
-            <p>Adds up next week&rsquo;s meetings against the hours actually in it, then tells you plainly what will not fit and what to move, with the changes staged for your approval.</p>
-          </article>
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>Waiting On</h3>
-              <span class="addon-kind" data-kind="skill">Skill</span>
-            </div>
-            <p>Reads your sent mail, spots the asks that never got an answer, and tells you who has gone quiet and for how long, with a follow-up already drafted.</p>
-          </article>
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>The Handover</h3>
-              <span class="addon-kind" data-kind="skill">Skill</span>
-            </div>
-            <p>Going away? It writes the whole &ldquo;how this house works&rdquo; note for whoever is covering: the pets, the plants, the bins, the bills that will charge while you&rsquo;re gone.</p>
-          </article>
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>Morning Brief</h3>
-              <span class="addon-kind" data-kind="routine">Routine</span>
-            </div>
-            <p>Your whole morning in one message: today&rsquo;s calendar, what&rsquo;s due, birthdays coming, bills, packages, plus your news and teams. One glance instead of six pings.</p>
-          </article>
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>Deep Research</h3>
-              <span class="addon-kind" data-kind="skill">Skill</span>
-            </div>
-            <p>Ask a real question and get a proper written answer: many searches across different angles, sources it actually opened and read, and a plain verdict at the end.</p>
-          </article>
-
-          <article class="addon-showcase-item">
-            <div class="addon-showcase-head">
-              <h3>Plain and Patient</h3>
-              <span class="addon-kind" data-kind="personality">Personality</span>
-            </div>
-            <p>For an agent a grown child sets up for a parent. One idea per sentence, any hard word explained the moment it appears, and the time or the dose repeated at the end.</p>
-          </article>
-
+        <div class="addon-ledger fade-up delay-1">
+          <div class="addon-ledger-row"><b>The Honest Week</b><span class="addon-kind" data-kind="skill">Skill</span><p>Adds up next week&rsquo;s meetings against the hours actually in it, then says plainly what will not fit and what to move, with the changes staged for your approval.</p></div>
+          <div class="addon-ledger-row"><b>Waiting On</b><span class="addon-kind" data-kind="skill">Skill</span><p>Reads your sent mail, spots the asks that never got an answer, and tells you who has gone quiet and for how long, with a follow-up already drafted.</p></div>
+          <div class="addon-ledger-row"><b>The Handover</b><span class="addon-kind" data-kind="skill">Skill</span><p>Going away? It writes the whole &ldquo;how this house works&rdquo; note for whoever is covering: the pets, the plants, the bins, the bills.</p></div>
+          <div class="addon-ledger-row"><b>Morning Brief</b><span class="addon-kind" data-kind="routine">Routine</span><p>Your whole morning in one message: today&rsquo;s calendar, what&rsquo;s due, birthdays coming, bills, packages, plus your news and teams.</p></div>
+          <div class="addon-ledger-row"><b>Deep Research</b><span class="addon-kind" data-kind="skill">Skill</span><p>Ask a real question and get a proper written answer: many searches across different angles, sources it actually opened and read, and a plain verdict.</p></div>
+          <div class="addon-ledger-row"><b>Plain and Patient</b><span class="addon-kind" data-kind="personality">Personality</span><p>For an agent a grown child sets up for a parent. One idea per sentence, any hard word explained the moment it appears.</p></div>
         </div>
-
         <p class="calm-note">Every one installs in a click, and each is a starting point rather than a fixed script: tell your agent how you want it to work and it adapts. The marketplace opens with Archie&rsquo;s launch, and if the thing you want isn&rsquo;t there, <a href="skills-marketplace/commission/">tell us and we&rsquo;ll build it</a>, and it joins the marketplace for everyone. <a href="skills-marketplace/browse/">Browse all of them &rarr;</a></p>
 
       </div>
@@ -562,7 +525,7 @@
          Quiet heading, not a display one. A page gets three display h2s; this is the fifth
          section, and the numbered steps below already announce what it is.
          ============================== -->
-    <section class="section section--tight" aria-labelledby="need-heading">
+    <section class="section section-alt section--tight" aria-labelledby="need-heading">
       <div class="container">
         <div class="section-header section-header--quiet">
           <span class="section-label fade-up">What You Need</span>
@@ -597,7 +560,7 @@
     <!-- ==============================
          Who's Behind It
          ============================== -->
-    <section class="section section-alt section--tight" aria-labelledby="team-heading">
+    <section class="section section--tight" aria-labelledby="team-heading">
       <div class="container">
         <div class="section-header section-header--quiet">
           <span class="section-label fade-up">Who Builds It</span>

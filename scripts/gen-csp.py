@@ -86,6 +86,33 @@ SOURCES = {
     "base-uri": ["'none'"],
 }
 
+# Extra sources for ONE page each, merged onto SOURCES above. A directive that only one page
+# needs is a directive the other seventy should not carry: the whole value of this policy is
+# that it says no by default.
+#
+# Keys are repo-relative paths with forward slashes.
+PAGE_SOURCES = {
+    # Signing in from the desktop app. Archie opens /login?callback=http://127.0.0.1:{port}
+    # (archie-core::auth::signin_loopback binds 127.0.0.1:0, so the port is different every
+    # launch) and waits for the browser to POST the tokens back to it. deliverToApp() submits a
+    # real form to that address, which is a cross-origin form submission, which form-action
+    # governs. Without this the browser refuses the submission, the page sits on "Returning to
+    # Archie...", and the app waits for a POST that was never allowed to leave: sign-in from the
+    # app was broken for every user on every platform from the day the policy shipped
+    # (2026-08-15) until this line was added. Verified in a browser, not reasoned about: the
+    # console says "Sending form data to 'http://127.0.0.1:PORT/' violates the following Content
+    # Security Policy directive".
+    #
+    # Only the port varies, so the wildcard is on the port and nothing else, and only this page
+    # gets it. The address is the visitor's own computer: nothing reachable from here is ours,
+    # and nothing that leaves goes further than the machine the person is sitting at. localhost
+    # is listed beside the literal address because a browser may normalise one to the other, the
+    # same pair /login's own loopbackCallback() accepts before it will use the value at all.
+    "login/index.html": {
+        "form-action": ["http://127.0.0.1:*", "http://localhost:*"],
+    },
+}
+
 
 def page_files():
     for dirpath, dirnames, filenames in os.walk(ROOT):
@@ -107,13 +134,16 @@ def script_hashes():
     return sorted(digests)
 
 
-def policy():
+def policy(rel=None):
+    """The policy for one page. `rel` selects that page's PAGE_SOURCES entry, if it has one."""
     hashes = script_hashes()
+    extra = PAGE_SOURCES.get(rel.replace(os.sep, "/"), {}) if rel else {}
     parts = []
     parts.append("default-src 'self'")
     for name, values in SOURCES.items():
         if name == "script-src":
             values = values + hashes
+        values = values + [v for v in extra.get(name, []) if v not in values]
         parts.append(name + " " + " ".join(values))
     return "; ".join(parts)
 
@@ -126,12 +156,19 @@ def tag_for(policy_text):
 
 
 def apply(check_only):
-    text = policy()
-    tag = tag_for(text)
     changed, missing = [], []
+
+    # A typo'd key in PAGE_SOURCES would silently grant nothing, and the symptom of that is a
+    # blocked flow nobody connects back to this file. Fail loudly instead.
+    pages = {os.path.relpath(p, ROOT).replace(os.sep, "/") for p in page_files()}
+    for key in PAGE_SOURCES:
+        if key not in pages:
+            print("  PAGE_SOURCES names a page that does not exist: %s" % key)
+            return 1
 
     for path in page_files():
         rel = os.path.relpath(path, ROOT)
+        tag = tag_for(policy(rel))
         with open(path, encoding="utf-8") as fh:
             body = fh.read()
 

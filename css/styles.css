@@ -8684,6 +8684,7 @@ html[data-theme="dark"] .booking-container iframe {
   width: 16px;
   height: 16px;
   background: var(--bg-card);
+  border-bottom-left-radius: 5px;
 }
 
 .vg-msg--agent::after {
@@ -8713,6 +8714,7 @@ html[data-theme="dark"] .booking-container iframe {
   width: 16px;
   height: 16px;
   background: var(--accent-subtle);
+  border-bottom-right-radius: 5px;
 }
 
 .vg-msg--user::after,
@@ -8956,6 +8958,7 @@ html[data-theme="dark"] .booking-container iframe {
   width: 18px;
   height: 18px;
   background: var(--accent-subtle);
+  border-bottom-right-radius: 6px;
 }
 
 .teach-bubble::after {

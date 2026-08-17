@@ -43,7 +43,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| 140 add-ons | 38 personalities, 59 skills, 4 specialists, 39 routines | Archie repo `data/marketplace/**`, counted 2026-08-15. `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
+| 142 add-ons | 38 personalities, 60 skills, 4 specialists, 40 routines | Archie repo `data/marketplace/**`, counted 2026-08-16. `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
 | 4 chat apps | Telegram, Discord, Slack, Matrix | `crates/archie-net/src/{telegram,discord,slack,matrix}.rs`. A fifth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
 | 14 days | Money-back guarantee on a plan | Terms of Service |
 | 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
@@ -60,7 +60,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 ## The stat rows
 
 `index.html` (the works-with band under the hero, moved there 2026-08-15) and
-`skills-marketplace/browse/` both print the same three counts: **140 verified add-ons, 4 chat apps,
+`skills-marketplace/browse/` both print the same three counts: **142 verified add-ons, 4 chat apps,
 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The band's note also counts **all 37** names the band shows.
 

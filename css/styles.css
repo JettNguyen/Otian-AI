@@ -8575,13 +8575,22 @@ html[data-theme="dark"] .booking-container iframe {
   display: block;
 }
 
+/* One wallpaper for both phone surfaces, a step darker than the section
+   grounds. --bg-secondary looked right on the cream page but is also the
+   Careful band's own background, so the zoom fragment melted into it there;
+   a colour of its own reads as a screen on either ground. Literal hex on
+   purpose: no site token sits between --bg-secondary and --bg-primary. */
 .vgp-thread {
-  --vg-wall: var(--bg-secondary);
+  --vg-wall: #EDE9E1;
   display: flex;
   flex-direction: column;
   gap: 8px;
   background: var(--vg-wall);
   padding: 12px 12px 14px;
+}
+
+[data-theme="dark"] .vgp-thread {
+  --vg-wall: #2C2825;
 }
 
 .vgp-input {
@@ -8633,7 +8642,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .vg-zoom {
-  --vg-wall: var(--bg-secondary);
+  --vg-wall: #EDE9E1;
   max-width: 430px;
   margin: 0 auto;
   display: flex;
@@ -8646,6 +8655,10 @@ html[data-theme="dark"] .booking-container iframe {
   overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+}
+
+[data-theme="dark"] .vg-zoom {
+  --vg-wall: #2C2825;
 }
 
 .vg-day {

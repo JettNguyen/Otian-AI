@@ -8704,7 +8704,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .vg-msg--user {
   background: var(--accent-subtle);
-  color: var(--accent-ink);
+  color: var(--text-primary);
   align-self: flex-end;
 }
 
@@ -8742,7 +8742,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .vg-msg--user .vg-time {
   color: inherit;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .vg-msg--user .vg-time::after {
@@ -8873,7 +8873,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 12px;
   border-bottom-right-radius: 4px;
   background: var(--accent-subtle);
-  color: var(--accent-ink);
+  color: var(--text-primary);
   font-size: 0.82rem;
 }
 
@@ -8904,7 +8904,7 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 18px 24px;
   border-radius: 20px;
   background: var(--accent-subtle);
-  color: var(--accent-ink);
+  color: var(--text-primary);
   font-size: 1.1rem;
   line-height: 1.5;
 }

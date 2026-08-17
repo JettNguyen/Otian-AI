@@ -8556,13 +8556,7 @@ html[data-theme="dark"] .booking-container iframe {
   height: 27px;
   border-radius: 50%;
   flex: none;
-  background: var(--accent-subtle);
-  color: var(--accent-ink);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
+  display: block;
 }
 
 .vg-name {
@@ -8579,45 +8573,117 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .vg-chat {
+  --vg-wall: var(--bg-secondary);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 10px;
+  background: var(--vg-wall);
+  border-radius: 18px;
+  padding: 12px 12px 10px;
+  margin-top: 10px;
+}
+
+.vg-chat--solo {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.vg-day {
+  align-self: center;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--surface-hover);
+  padding: 3px 10px;
+  border-radius: 999px;
 }
 
 .vg-msg {
+  position: relative;
   max-width: 92%;
-  padding: 9px 13px;
-  border-radius: 14px;
+  padding: 8px 12px;
+  border-radius: 16px;
   font-size: 0.85rem;
   line-height: 1.5;
   color: var(--text-primary);
 }
 
 .vg-msg--agent {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-bottom-left-radius: 4px;
+  background: var(--bg-card);
+  box-shadow: 0 1px 2px rgba(68, 64, 59, 0.1);
   align-self: flex-start;
+}
+
+.vg-msg--agent::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  background: var(--bg-card);
+  border-bottom-right-radius: 14px;
+}
+
+.vg-msg--agent::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -7px;
+  width: 7px;
+  height: 16px;
+  background: var(--vg-wall, var(--bg-secondary));
+  border-bottom-right-radius: 12px;
 }
 
 .vg-msg--user {
   background: var(--accent-subtle);
   color: var(--accent-ink);
-  border-bottom-right-radius: 4px;
   align-self: flex-end;
 }
 
+.vg-msg--user::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -7px;
+  width: 14px;
+  height: 14px;
+  background: var(--accent-subtle);
+  border-bottom-left-radius: 14px;
+}
+
+.vg-msg--user::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -7px;
+  width: 7px;
+  height: 16px;
+  background: var(--vg-wall, var(--bg-secondary));
+  border-bottom-left-radius: 12px;
+}
+
+/* Time sits inside the bubble, bottom right, the way the chat apps set it;
+   outgoing messages carry the read ticks. */
 .vg-time {
   display: block;
+  text-align: right;
   font-size: 0.62rem;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 .vg-msg--user .vg-time {
   color: inherit;
   opacity: 0.7;
+}
+
+.vg-msg--user .vg-time::after {
+  content: " \2713\2713";
+  letter-spacing: -0.18em;
+  margin-right: 0.18em;
 }
 
 .vg-lines {
@@ -8639,65 +8705,43 @@ html[data-theme="dark"] .booking-container iframe {
   font-variant-numeric: tabular-nums;
 }
 
-/* The draft card, standing alone at close range. The kicker, the italic
-   summary, the "Draft reply (to ...)" line and the three buttons mirror
-   render_card and pending_buttons in the Archie source. */
+/* The draft, standing alone at close range: one agent bubble whose lines
+   mirror render_card in the Archie source, with the inline buttons attached
+   below the message the way the chat apps lay an inline keyboard. */
 .vg-solo {
   margin: 0;
 }
 
-.vg-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 10px;
-  padding: 12px 14px;
+.vg-msg--draft {
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  font-size: 0.85rem;
-  color: var(--text-primary);
+  gap: 7px;
+  font-size: 0.9rem;
+  padding: 12px 14px 8px;
 }
 
-.vg-card--solo {
-  max-width: 430px;
-  margin: 0 auto;
-  padding: 18px 20px;
-  font-size: 0.95rem;
-  box-shadow: var(--shadow-md);
-  gap: 8px;
-}
-
-.vg-card-summary {
+.vg-draft-summary {
   font-style: italic;
   color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
-.vg-card-body {
-  color: var(--text-secondary);
-  line-height: 1.55;
-}
-
-.vg-buttons {
+.vg-ik {
   display: flex;
-  gap: 8px;
-  margin-top: 6px;
-  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
 }
 
-.vg-btn {
-  font-size: 0.78rem;
+.vg-ik-btn {
+  flex: 1;
+  text-align: center;
+  background: var(--surface-hover);
+  color: var(--accent-ink);
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--field-border);
-  color: var(--text-primary);
-}
-
-.vg-btn--primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--text-on-accent);
+  padding: 8px 6px;
+  border-radius: 8px;
 }
 
 .vg-caption {
@@ -8790,14 +8834,36 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .teach-bubble {
+  position: relative;
   max-width: 400px;
   padding: 18px 24px;
   border-radius: 20px;
-  border-bottom-right-radius: 6px;
   background: var(--accent-subtle);
   color: var(--accent-ink);
   font-size: 1.1rem;
   line-height: 1.5;
+}
+
+.teach-bubble::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  background: var(--accent-subtle);
+  border-bottom-left-radius: 16px;
+}
+
+.teach-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 8px;
+  height: 18px;
+  background: var(--bg-primary);
+  border-bottom-left-radius: 14px;
 }
 
 .teach-arrow {

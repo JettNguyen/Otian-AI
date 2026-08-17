@@ -8523,32 +8523,48 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 52px;
 }
 
-/* The phone: the only chat chrome on the page. */
-.vg {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
-  padding: 18px;
-  max-width: 460px;
-  width: 100%;
+/* The phone: the only chat chrome on the page, drawn as a device. The bezel
+   stays near-black in both themes, because a phone's edge does not change
+   colour with the site; everything inside it runs on tokens as usual. */
+.vgp {
+  max-width: 300px;
   margin: 0 auto;
 }
 
-.vg--phone {
-  max-width: 340px;
-  border-radius: 30px;
-  padding: 16px 14px;
-  border-color: var(--panel-border-strong);
+.vgp-screen {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 8px solid #1C1916;
+  border-radius: 40px;
+  overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
 
-.vg-head {
+.vgp-status {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 2px 4px 10px;
+  justify-content: space-between;
+  padding: 12px 20px 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.vgp-chathead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 10px;
   border-bottom: 1px solid var(--line-soft);
+}
+
+.vgp-back {
+  width: 17px;
+  height: 17px;
+  color: var(--text-muted);
+  flex: none;
 }
 
 .vg-avatar {
@@ -8557,6 +8573,57 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 50%;
   flex: none;
   display: block;
+}
+
+.vgp-thread {
+  --vg-wall: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--vg-wall);
+  padding: 12px 12px 14px;
+}
+
+.vgp-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px 6px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.vgp-field {
+  flex: 1;
+  background: var(--bg-secondary);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.vgp-send {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vgp-send svg {
+  width: 14px;
+  height: 14px;
+}
+
+.vgp-home {
+  width: 92px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line-muted);
+  margin: 4px auto 8px;
 }
 
 .vg-name {
@@ -8572,20 +8639,23 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
 }
 
-.vg-chat {
+.vg-zoom {
   --vg-wall: var(--bg-secondary);
+  max-width: 430px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
   background: var(--vg-wall);
-  border-radius: 18px;
-  padding: 12px 12px 10px;
-  margin-top: 10px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0 14px 14px;
+  overflow: hidden;
 }
 
-.vg-chat--solo {
-  max-width: 430px;
-  margin: 0 auto;
+.vg-clip {
+  margin-top: -12px;
+  opacity: 0.55;
 }
 
 .vg-day {
@@ -8717,8 +8787,8 @@ html[data-theme="dark"] .booking-container iframe {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  font-size: 0.9rem;
-  padding: 12px 14px 8px;
+  font-size: 0.95rem;
+  padding: 13px 15px 9px;
 }
 
 .vg-draft-summary {
@@ -8738,9 +8808,9 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: center;
   background: var(--surface-hover);
   color: var(--accent-ink);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 8px 6px;
+  padding: 9px 6px;
   border-radius: 8px;
 }
 

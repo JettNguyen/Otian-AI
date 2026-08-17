@@ -364,24 +364,34 @@
           <a class="story-more fade-up delay-1" href="archie/see-it-work/">See it work &rarr;</a>
         </div>
         <div class="story-visual fade-up delay-2">
-          <figure class="vg vg--phone" role="img" aria-label="An illustration of a phone showing a Telegram chat. The agent sends a morning brief: three calendar events, a bill due Thursday, a birthday Saturday, a package arriving today. Asked what the 11:30 needs, it answers from last night's agenda. A caption notes it is the Morning Brief routine, delivered to Telegram.">
-            <div aria-hidden="true">
-            <div class="vg-head">
-              <img class="vg-avatar" src="assets/archibald-avatar.png" alt="" />
-              <span><span class="vg-name">Archibald</span><span class="vg-sub">online</span></span>
-            </div>
-            <div class="vg-chat">
-              <span class="vg-day">Tuesday</span>
-              <div class="vg-msg vg-msg--agent"><strong>Good morning. Tuesday, in one glance:</strong>
-                <span class="vg-lines">
-                  <span><b>9:00</b>Standup, video call</span>
-                  <span><b>11:30</b>Maria, Q3 kickoff prep</span>
-                  <span><b>3:00</b>Design review</span>
-                </span>
-                Internet bill is due Thursday. Dad&rsquo;s birthday is Saturday. Your package arrives today.<span class="vg-time">7:00 am</span></div>
-              <div class="vg-msg vg-msg--user">What do I need for the 11:30?<span class="vg-time">7:04 am</span></div>
-              <div class="vg-msg vg-msg--agent">Maria sent the agenda last night: budget first, then hiring. Your action item was the vendor shortlist.<span class="vg-time">7:04 am</span></div>
-            </div>
+          <figure class="vgp" role="img" aria-label="An illustration of a phone showing a chat. The agent sends a morning brief: three calendar events, a bill due Thursday, a birthday Saturday, a package arriving today. Asked what the 11:30 needs, it answers from last night's agenda. A caption notes it is the Morning Brief routine, delivered to Telegram.">
+            <div class="vgp-screen" aria-hidden="true">
+              <div class="vgp-status">
+                <span>7:04</span>
+                <svg width="34" height="10" viewBox="0 0 34 10" fill="currentColor" aria-hidden="true" focusable="false"><rect x="0" y="6" width="2" height="4" rx="0.5"/><rect x="3.5" y="4" width="2" height="6" rx="0.5"/><rect x="7" y="2" width="2" height="8" rx="0.5"/><rect x="10.5" y="0" width="2" height="10" rx="0.5"/><rect x="17" y="1" width="14" height="8" rx="2.5" fill="none" stroke="currentColor"/><rect x="19" y="3" width="8" height="4" rx="1"/><rect x="32" y="3.5" width="2" height="3" rx="1"/></svg>
+              </div>
+              <div class="vgp-chathead">
+                <svg class="vgp-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="15 18 9 12 15 6"/></svg>
+                <img class="vg-avatar" src="assets/archibald-avatar.png" alt="" />
+                <span><span class="vg-name">Archibald</span><span class="vg-sub">online</span></span>
+              </div>
+              <div class="vgp-thread">
+                <span class="vg-day">Tuesday</span>
+                <div class="vg-msg vg-msg--agent"><strong>Good morning. Tuesday, in one glance:</strong>
+                  <span class="vg-lines">
+                    <span><b>9:00</b>Standup, video call</span>
+                    <span><b>11:30</b>Maria, Q3 kickoff prep</span>
+                    <span><b>3:00</b>Design review</span>
+                  </span>
+                  Internet bill is due Thursday. Dad&rsquo;s birthday is Saturday. Your package arrives today.<span class="vg-time">7:00 am</span></div>
+                <div class="vg-msg vg-msg--user">What do I need for the 11:30?<span class="vg-time">7:04 am</span></div>
+                <div class="vg-msg vg-msg--agent">Maria sent the agenda last night: budget first, then hiring. Your action item was the vendor shortlist.<span class="vg-time">7:04 am</span></div>
+              </div>
+              <div class="vgp-input">
+                <span class="vgp-field">Message</span>
+                <span class="vgp-send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg></span>
+              </div>
+              <div class="vgp-home"></div>
             </div>
             <figcaption class="vg-caption">The Morning Brief routine, delivered to your Telegram at 7:00 am.</figcaption>
           </figure>
@@ -399,7 +409,8 @@
         </div>
         <div class="story-band-visuals fade-up delay-2">
           <figure class="vg-solo" role="img" aria-label="An illustration of the email draft as a chat message: reply to Sam, a one-line summary of his email, and the drafted reply, with three buttons attached below the message labeled Send, Edit, and Dismiss.">
-            <div class="vg-chat vg-chat--solo" aria-hidden="true">
+            <div class="vg-zoom" aria-hidden="true">
+              <div class="vg-msg vg-msg--agent vg-clip">Sam&rsquo;s email about the venue has been waiting three days. Here&rsquo;s a reply:</div>
               <div class="vg-msg vg-msg--agent vg-msg--draft">
                 <span>&#9997;&#65039; <strong>Reply to</strong> Sam</span>
                 <span class="vg-draft-summary">Venue for the offsite: he needs an answer on the two options.</span>
@@ -408,7 +419,7 @@
               </div>
               <div class="vg-ik"><span class="vg-ik-btn">&#9989; Send</span><span class="vg-ik-btn">&#9999;&#65039; Edit</span><span class="vg-ik-btn">&#10005; Dismiss</span></div>
             </div>
-            <figcaption class="vg-caption">The draft, as it lands in your chat: a message, with the buttons under it.</figcaption>
+            <figcaption class="vg-caption">Zoomed in on the message: the draft, with the buttons under it.</figcaption>
           </figure>
           <figure class="vg-solo" role="img" aria-label="A three step sequence for calendar changes. One: it proposes the exact change, moving the design review from 3:00 to 4:30 pm. Two: you approve in your next message. Three: only then is the change made.">
             <div class="seq" aria-hidden="true">

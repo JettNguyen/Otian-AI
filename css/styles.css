@@ -113,6 +113,12 @@
   --radius: 12px;
   --radius-sm: 8px;
   --transition: 0.25s ease;
+  /* For hovers that only recolour: text links, icon buttons, a word changing
+     colour under the cursor. Quicker than --transition on purpose. A quarter
+     second is right for something that moves or resizes and reads as lag on
+     something that just lights up, and these fire on every pointer crossing.
+     Anything that also moves keeps --transition. */
+  --transition-quick: 0.15s ease;
   --max-width: 1200px;
   --section-padding: 96px 24px;
   --nav-height: 72px;
@@ -514,6 +520,7 @@ p { color: var(--text-secondary); line-height: 1.8; }
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-primary);
+  transition: color var(--transition-quick);
 }
 
 .nav-logo-title strong {
@@ -746,7 +753,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   height: 2px;
   background: var(--text-primary);
   border-radius: 2px;
-  transition: transform var(--transition), opacity var(--transition);
+  transition: transform var(--transition), opacity var(--transition), background var(--transition-quick);
 }
 
 .nav-hamburger.open span:nth-child(1) {
@@ -865,6 +872,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-primary);
   cursor: pointer;
   text-decoration: none;
+  transition: background var(--transition-quick), color var(--transition-quick);
 }
 
 .nav-account-menu a:hover,
@@ -2101,6 +2109,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   background: var(--bg-card);
   color: var(--text-muted);
   cursor: pointer;
+  transition: background var(--transition-quick), color var(--transition-quick);
 }
 
 .ww-pause-btn:hover {
@@ -4148,6 +4157,7 @@ html[data-theme="dark"] .availability-widget iframe {
   font-size: 0.9375rem;
   font-weight: 600;
   text-align: left;
+  transition: color var(--transition-quick);
 }
 
 .glossary-plus {
@@ -4342,6 +4352,7 @@ html[data-theme="dark"] .availability-widget iframe {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--accent);
+  transition: color var(--transition-quick);
 }
 
 .resource-read-more:hover {
@@ -5439,6 +5450,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--accent-subtle);
   color: var(--accent-hover);
   margin: 0 auto 16px;
+  transition: border-color var(--transition-quick), color var(--transition-quick);
 }
 
 .marketplace-status-badge::before {
@@ -5645,6 +5657,7 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--accent);
   font-weight: 600;
   font-size: 0.9375rem;
+  transition: color var(--transition-quick);
 }
 
 .marketplace-text-link:hover {
@@ -6016,6 +6029,7 @@ html[data-theme="dark"] .booking-container iframe {
   cursor: pointer;
   padding: 0;
   font-family: inherit;
+  transition: color var(--transition-quick);
 }
 
 /* Inline expandable detail region within a card. */
@@ -6779,6 +6793,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent);
+  transition: color var(--transition-quick);
 }
 
 .price-card-link:hover {
@@ -7278,6 +7293,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 1.15rem;
   line-height: 1.2;
   cursor: pointer;
+  transition: opacity var(--transition-quick);
 }
 
 .status-toast-x:hover {
@@ -7410,7 +7426,7 @@ html[data-theme="dark"] .booking-container iframe {
 .qr-box { width: max-content; margin: 10px auto 0; padding: 14px; background: #ffffff; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
 .qr-box svg { display: block; width: auto; height: auto; max-width: 100%; }
 .totp-manual { margin-top: 12px; }
-.totp-manual > summary { font-size: 0.8rem; color: var(--text-secondary); cursor: pointer; list-style: revert; }
+.totp-manual > summary { font-size: 0.8rem; color: var(--text-secondary); cursor: pointer; list-style: revert; transition: color var(--transition-quick); }
 .totp-manual > summary:hover { color: var(--accent); }
 
 
@@ -8044,6 +8060,7 @@ html[data-theme="dark"] .booking-container iframe {
    terracotta, and these two fills are dark. */
 .btn-run {
   background: var(--c-green-fill); color: #FFFFFF; border: none;
+  transition: background var(--transition-quick);
 }
 .btn-run:hover { background: var(--c-green-fill-hover); }
 .btn-run--stop { background: var(--c-red-fill); }

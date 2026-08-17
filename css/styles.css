@@ -8861,6 +8861,22 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-secondary);
 }
 
+.seq-ik {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.seq-ik span {
+  background: var(--surface-hover);
+  color: var(--accent-ink);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 6px;
+}
+
 .seq-bubble {
   display: inline-block;
   margin-top: 6px;

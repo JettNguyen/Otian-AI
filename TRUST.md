@@ -568,6 +568,17 @@ that proposed it (`gateway.rs:1963-1979`; snapshot rule documented at `gateway.r
 `blocked_needs_user_confirmation` (`gateway.rs:2041-2047`) — the 3am-delete exploit chain this
 file used to document is closed. Guarded by test (`gateway.rs:4617-4626`).
 
+**Amended 2026-08-16: the proposal carries buttons, and a tap counts as your later message.**
+Approved wording: "the proposal arrives with Confirm, Change something, and Cancel buttons; a
+tap sends the words on your behalf, so tap or typed, the approval is still a separate, later
+message from you." Why it's true: a decision button is a **synthetic user message**, not a new
+execution path; tapping Confirm delivers "Yes, go ahead and apply the ... you proposed" through
+the same chat route and the same approval gate (`crates/archie-runtime/src/decide.rs`, module
+doc and `approval_choices`; buttons attach automatically when a turn ends with a staged write).
+The module doc states the invariant plainly: a button that applied a change directly would
+delete the two-turn property, and a button that sends "yes" preserves it exactly. Do not write
+"the button applies the change"; the button answers, the model applies.
+
 **Boundaries — do not overclaim:**
 - The code enforces the **two-turn shape**: no same-turn apply, verbatim change only, no
   unattended writes. It does **not** semantically verify that your later message was a "yes" —

@@ -582,6 +582,23 @@ file used to document is closed. Guarded by test (`gateway.rs:4617-4626`).
 draft comes to your chat as a card with Send / Edit / Dismiss buttons, and nothing reaches
 Gmail until you tap Send."
 
+**Amended 2026-08-16: Outlook rides the same gate, and the wording may now name it.** Approved
+form: "nothing reaches Gmail or Outlook until you tap Send", and "Gmail and Outlook stay
+read-only unless you turn replies on". Why it's true: the send path is provider-generic behind
+one trait, and the Send button's handler is still the only caller of `send_reply`
+(`crates/archie-runtime/src/email/replies/actions.rs:404`, dispatched from the tap at `:68`).
+`open_mail_with` selects the provider (`crates/archie-runtime/src/email/mod.rs`, the match on
+`MailProviderId`: Google, Microsoft), and `MicrosoftMail` implements the send
+(`crates/archie-net/src/mail/microsoft.rs`, `impl MailProvider`, `send_reply`). The send
+permission is opt-in at connect time on the Microsoft side exactly as on the Google side:
+`Mail.Send` is requested only when send is ticked (`crates/archie-net/src/microsoft.rs`,
+`scopes_for`, whose comment says "matching the Google side and for the same reasons"), and a
+connection made without it is refused before any send by the `capabilities().send` check in
+`send_reply` (defence in depth; capabilities are computed from granted scopes, guarded by test
+`capabilities_follow_what_was_granted_rather_than_what_was_asked`). Pointer refresh from 07-20:
+`email/replies.rs` became the `email/replies/` module and `gmail_send_reply` became the trait
+method `send_reply`; the single-caller shape is unchanged.
+
 **Why it's true:** the model's tool set contains **no email-send tool** (tool definitions in
 `gateway.rs`: calendar, meetings, specialists, knowledge, remember — nothing sends).
 `gmail_send_reply` (`google.rs:279`) has exactly one caller: the "send" branch of the

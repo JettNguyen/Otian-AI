@@ -8647,10 +8647,12 @@ html[data-theme="dark"] .booking-container iframe {
   flex-direction: column;
   gap: 8px;
   background: var(--vg-wall);
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  border-left: 8px solid #1C1916;
+  border-right: 8px solid #1C1916;
+  border-radius: 6px;
   padding: 0 14px 14px;
   overflow: hidden;
+  box-shadow: var(--shadow-md);
 }
 
 .vg-clip {

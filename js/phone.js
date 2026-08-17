@@ -488,6 +488,13 @@ const CHANNELS = {
     // for and no conversation to link to. Naming the place is the only useful thing to say.
     where: "in your agent's Note to Self",
   },
+  imessage: {
+    label: "iMessage",
+    link: () => null,
+    // Same shape as Signal: the agent lives in the owner's own thread with themselves, so there
+    // is nothing to link to and the place is the useful thing to name.
+    where: "in the conversation you have with yourself",
+  },
 };
 
 function renderChatCard(agent) {

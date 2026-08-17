@@ -8640,17 +8640,12 @@ html[data-theme="dark"] .booking-container iframe {
   flex-direction: column;
   gap: 8px;
   background: var(--vg-wall);
-  border-left: 8px solid #1C1916;
-  border-right: 8px solid #1C1916;
-  padding: 0 14px 44px;
+  border-left: 12px solid #1C1916;
+  border-right: 12px solid #1C1916;
+  padding: 34px 16px 48px;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 13%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 13%, #000 86%, transparent 100%);
-}
-
-.vg-clip {
-  margin-top: -12px;
-  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
 }
 
 .vg-day {
@@ -8782,8 +8777,8 @@ html[data-theme="dark"] .booking-container iframe {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  font-size: 0.95rem;
-  padding: 13px 15px 9px;
+  font-size: 1rem;
+  padding: 14px 16px 10px;
 }
 
 .vg-draft-summary {
@@ -8803,9 +8798,9 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: center;
   background: var(--surface-hover);
   color: var(--accent-ink);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: 9px 6px;
+  padding: 10px 6px;
   border-radius: 8px;
 }
 

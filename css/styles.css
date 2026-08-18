@@ -9363,7 +9363,12 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* Connections band: the river band restyled to the quiet grammar */
 .ww-band--home { background: var(--bg-secondary); border-bottom: 0; padding: 96px 0; }
-.ww-band--home .ww-band-head { flex-direction: column; align-items: center; text-align: center; gap: 0; margin-bottom: 44px; }
+/* Label on its own line, then the headline and the pause control share a row:
+   the button belongs to the marquee's motion, so it sits beside the sentence
+   that names the marquee instead of dangling under it. */
+.ww-band--home .ww-band-head { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; text-align: center; gap: 4px 14px; margin-bottom: 44px; }
+.ww-band--home .ww-band-head .section-label { flex-basis: 100%; }
+.ww-band--home .ww-pause-btn { margin-left: 0; }
 .ww-band--home .works-with-list li,
 .ww-band--home .works-with-list.ww-run li[style*="--ww-tint"] { background: transparent; border: 0; box-shadow: none; font-weight: 600; }
 .ww-band--home .ww-band-line { font-size: clamp(1.85rem, 3.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.18; }
@@ -9496,7 +9501,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-flow-arrow { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--accent); }
 .hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); }
 .hm-aside { font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 48px; }
-.hm-aside b { color: var(--c-blue-ink); font-weight: 600; }
+.hm-aside b { color: var(--text-primary); font-weight: 600; }
 /* A quiet checklist, deliberately not cards: the two cards above it are the
    diagram, and the claims should read as a different kind of thing. */
 .hm-claims {
@@ -9529,7 +9534,8 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 14px 20px; font-size: 0.9rem; font-weight: 550;
 }
 .hm-need svg { color: var(--accent); flex-shrink: 0; }
-.hm-need--done svg { color: var(--c-blue); }
+/* Ember like every other check glyph on the site (see the color rule in RESTYLE.md). */
+.hm-need--done svg { color: var(--accent); }
 .hm-need span { color: var(--text-secondary); font-weight: 450; }
 
 /* Who builds it */

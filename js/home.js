@@ -40,20 +40,22 @@
        jumping. A slow scroll keeps the tip pinned about two thirds down the
        viewport; a fast flick leaves the line behind for a beat and you watch
        it glide to catch up. */
-    var target = 0;
-    var cur = 0;
-    var raf = null;
+    /* Named spTarget/spCur on purpose: everything in this file shares one
+       function scope, and the carousel below also hoists a `cur`. */
+    var spTarget = 0;
+    var spCur = 0;
+    var spRaf = null;
     var settle = function () {
-      raf = null;
-      cur += (target - cur) * 0.14;
-      if (Math.abs(target - cur) < 0.002) cur = target;
-      spine.style.setProperty('--hm-draw', cur);
-      if (cur !== target) raf = requestAnimationFrame(settle);
+      spRaf = null;
+      spCur += (spTarget - spCur) * 0.14;
+      if (Math.abs(spTarget - spCur) < 0.002) spCur = spTarget;
+      spine.style.setProperty('--hm-draw', spCur);
+      if (spCur !== spTarget) spRaf = requestAnimationFrame(settle);
     };
     var measure = function () {
       var r = spine.getBoundingClientRect();
-      target = Math.max(0, Math.min(1, (window.innerHeight * 0.66 - r.top) / (r.height * 0.96)));
-      if (!raf) raf = requestAnimationFrame(settle);
+      spTarget = Math.max(0, Math.min(1, (window.innerHeight * 0.66 - r.top) / (r.height * 0.96)));
+      if (!spRaf) spRaf = requestAnimationFrame(settle);
     };
     window.addEventListener('scroll', measure, { passive: true });
     measure();

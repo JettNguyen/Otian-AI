@@ -59,10 +59,12 @@ say where a number comes from, it is not a fact and it does not go on the site.
 
 ## The stat rows
 
-`index.html` (the works-with band under the hero, moved there 2026-08-15) and
-`skills-marketplace/browse/` both print the same three counts: **142 verified add-ons, 5 chat apps,
+`index.html` (its own numbers band under the hero since the 2026-08-18 quiet-spine rebuild) prints
+four counts: **142 verified add-ons, 38 apps and services, 7 AI companies, 5 chat apps**.
+`skills-marketplace/browse/` prints three of the same: **142 verified add-ons, 5 chat apps,
 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
-page: "we check that it works as described and is safe to run before it goes live"). The band's note also counts **all 38** names the band shows.
+page: "we check that it works as described and is safe to run before it goes live"). The
+connections band's note also counts **all 38** names the band shows.
 
 **No "+" on any of them, deliberately.** A "+" turns a count into a claim that there is more
 than stated, and soft rounding is how a site ends up saying 18 curated skills in a stat bar and

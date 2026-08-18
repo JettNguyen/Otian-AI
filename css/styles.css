@@ -9243,18 +9243,19 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-lede strong { color: var(--text-primary); font-weight: 600; }
 /* The three steps that are left after the download. Kept short on purpose: the length
    of this line is the claim, so it never grows into a sentence. */
-.hm-kicker { margin: 18px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-primary); }
-.hm-kicker em { font-style: normal; color: var(--accent); }
+.hm-kicker { margin: 18px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-secondary); }
 .hm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
 .hm-hero-micro { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 16px 0 0; font-size: 0.82rem; color: var(--text-muted); }
-.hm-hero-micro svg { color: var(--c-blue); flex-shrink: 0; }
+.hm-hero-micro svg { color: var(--accent); flex-shrink: 0; }
 .hm-pill {
   display: inline-flex; gap: 8px; align-items: center;
   margin-top: 22px; padding: 8px 16px;
-  border: 1px solid var(--c-blue-subtle); border-radius: 999px;
+  border: 1px solid var(--accent-subtle); border-radius: 999px;
   font-size: 0.85rem; color: var(--text-secondary); background: var(--bg-card);
 }
-.hm-pill b { color: var(--c-blue-ink); font-weight: 600; }
+/* accent-ink, not accent: this text sits on --bg-card, where the bright accent is
+   tuned for fills rather than for reading (see the contrast note at the tokens). */
+.hm-pill b { color: var(--accent-ink); font-weight: 600; }
 .hm-demo { max-width: 1000px; margin: 64px auto 0; }
 .hm-demo-cap { margin-top: 14px; text-align: center; }
 

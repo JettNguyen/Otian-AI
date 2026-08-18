@@ -423,6 +423,11 @@ p { color: var(--text-secondary); line-height: 1.8; }
   margin-bottom: 12px;
 }
 
+/* Two accents, split by meaning: ember is Archie acting, blue is you verifying. A section
+   about what the agent does keeps the ember label; a section whose job is reassurance
+   (custody, approvals, guarantees, the whole trust page) carries the blue one. */
+.section-label--trust { color: var(--c-blue-ink); }
+
 .text-center { text-align: center; }
 
 /* Screen-reader only */

@@ -55,6 +55,11 @@ One scale each, and a component is either on the scale or it is a documented exc
   "Archie is in testing and not for sale yet." followed by a "See where it stands"
   link to `archie/#status`, which stays the single home of the underlying facts. No page
   restates platform detail, and no page invents a variant phrasing.
+- **Closing CTA.** Every page closes on the quiet `hm-cta` band
+  (`.hm-wrap.hm-head.hm-cta`: serif h2, button or `.hm-actions` pair, `.hm-micro` line),
+  never the old `.cta-banner` card. The one place `.cta-banner` legitimately survives is
+  as a functional mid-page card (the submit pages' sign-in gate and done banner, and the
+  blog posts, which keep their own frame for now).
 
 ## Rollout order
 
@@ -73,21 +78,26 @@ check-facts, commit ("one page per commit" keeps review sane).
       ledger (the six real catalog items that came off the homepage move here); where
       it runs and what it needs, briefly; and the testing status section (`#status`,
       which the homepage pill links to). Heavy trim of everything else.
-- [ ] `archie/pricing/`. The 3-costs story as three bands; price cards keep FACTS.md
-      figures exactly.
-- [ ] `archie/see-it-work/`. Mostly the recording; light touch, header grammar and captions.
-- [ ] `skills-marketplace/browse/` (+ the product detail template). Align headers, stat
-      row, alternation; the catalog grid already reads as product objects.
-- [ ] `what-you-need/` and `how-it-works/`. Chips and steps; both trim well.
-- [ ] `individuals/` and `questionnaire/`. Conversion pages; short bands, one CTA each.
+- [x] `archie/pricing/` (2026-08-17). Sentence-case pass, each price said once, quiet
+      CTA band; FACTS.md figures untouched.
+- [x] `archie/see-it-work/` (2026-08-17). Header grammar and the quiet CTA band.
+- [x] `skills-marketplace/browse/` (2026-08-18). Headers, casing, quiet CTA band; the
+      hero stops counting kinds (the tabs show what there is). Product detail template
+      still pending.
+- [x] `what-you-need/` and `how-it-works/` (2026-08-17). Trimmed, cased, quiet CTA bands.
+- [x] `individuals/` (2026-08-17) and `questionnaire/` (2026-08-18). Trimmed and cased;
+      the intake form's step headings (and their JS labels) dropped title case.
 
 ### Phase 2: story and support
-- [ ] `our-story/`. Team layout matches home: Jett and Jack on the top row, Jeff beneath.
-- [ ] `testimonials/`, `faq/`, `contact/`.
-- [ ] `ai-explained/`, `skills-marketplace/what-is-an-add-on/`, `what-is-a-skill/`,
-      `for-developers/`, `commission/`, `submit/*`.
-- [ ] `blog/` index and the post template. Typography and header grammar only; posts keep
-      their voice and length.
+- [x] `our-story/` (2026-08-17). Cased, quiet CTA band. Team layout already matched home.
+- [x] `testimonials/`, `faq/`, `contact/` (2026-08-18). FAQ keeps its depth by design
+      (answers are collapsed); only the frame joined the voice.
+- [x] `ai-explained/`, `skills-marketplace/what-is-an-add-on/`, `for-developers/`,
+      `commission/`, `submit/*` (2026-08-18). The glossary keeps its depth by design;
+      `what-is-a-skill/` is already a redirect stub. Commission's "Four Kinds" heading
+      sat over three cards and went numberless.
+- [x] `blog/` index (2026-08-18): header grammar. Posts keep their voice, length, and
+      frame; the post template is untouched.
 
 ### Phase 3: shell and utility
 - [x] `about/`: folded into `our-story/`. Already a meta-refresh redirect with a

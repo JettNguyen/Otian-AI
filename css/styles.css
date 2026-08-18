@@ -9589,7 +9589,6 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* Hero load-in: one orchestrated stagger, off under reduced motion */
 @keyframes hm-fade-up-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-.hm-hero .hm-hero-greeter { animation: hm-fade-up-in 0.6s ease 0.05s backwards; }
 .hm-hero .section-label { animation: hm-fade-up-in 0.6s ease 0.05s backwards; }
 .hm-hero h1 { animation: hm-fade-up-in 0.6s ease 0.12s backwards; }
 .hm-hero .hm-lede { animation: hm-fade-up-in 0.6s ease 0.2s backwards; }
@@ -9599,7 +9598,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero .hm-pill { animation: hm-fade-up-in 0.6s ease 0.4s backwards; }
 .hm-hero .hm-demo { animation: hm-fade-up-in 0.7s ease 0.48s backwards; }
 @media (prefers-reduced-motion: reduce) {
-  .hm-hero .hm-hero-greeter, .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede, .hm-hero .hm-kicker,
+  .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede, .hm-hero .hm-kicker,
   .hm-hero .hm-actions, .hm-hero .hm-hero-micro, .hm-hero .hm-pill,
   .hm-hero .hm-demo { animation: none; }
   .hm-spine::before { height: calc(100% - 12px); }
@@ -9736,24 +9735,6 @@ html[data-theme="dark"] .booking-container iframe {
   100% { transform: none; }
 }
 
-/* Above the hero label, at the top of the home page: the product's face, watching the reader
-   read. The hero is `text-align: center`, and a flex row inherits none of that, so this centers
-   itself or Ember sits hard against the left edge of a centered column. */
-.hm-hero-greeter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.hm-hero-greeter .ember { width: 76px; height: 76px; cursor: pointer; }
-.hm-hero-greeter .section-label { margin: 0; }
-/* The wrapper carries the hero's entrance now, so the label must not also run it: nested, the two
-   translates add up and the label arrives from twice as far down as everything beside it. */
-.hm-hero .hm-hero-greeter .section-label { animation: none; }
-@media (max-width: 640px) {
-  .hm-hero-greeter .ember { width: 62px; height: 62px; }
-}
 
 /* The 404, where he is the apology. */
 .nf-card .ember { width: 96px; height: 96px; margin: 0 auto 10px; }

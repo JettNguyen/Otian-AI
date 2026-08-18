@@ -170,9 +170,66 @@
 
   var rigs = [];
   var pointer = { x: 0, y: 0, moved: 0 };
+  /* Somewhere more interesting than the pointer, for as long as `until` says. Set when the reader
+     hovers a button: Ember looks at what they are about to press, which is the cheapest possible
+     way to make a static page feel like it noticed you. */
+  var attend = { x: 0, y: 0, until: 0 };
+  var scrollVel = 0;
+  var lastScrollY = 0;
   var raf = 0;
   var last = 0;
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var STATE_CLASS = { idle: "", working: "st-working", done: "st-done", oops: "st-oops", sleep: "st-sleep" };
+
+  /* What he might do when pressed. Random rather than a cycle, because a cycle is learnable in
+     three clicks and then it is a list rather than a reaction; and never the same one twice
+     running, because a genuine random repeat reads as the click not having registered. Durations
+     match the keyframes in styles.css, so the class comes off as the animation ends. */
+  var ACTS = [
+    { cls: "st-act-hop", ms: 900 },
+    { cls: "st-act-wiggle", ms: 700 },
+    { cls: "st-act-spin", ms: 850 },
+    { cls: "st-act-squish", ms: 600 },
+    { cls: "st-act-nod", ms: 750 }
+  ];
+
+  /* The app's own celebration palette, so a spark off Ember here is the same color as a spark off
+     Ember in the app. Red is absent on purpose: it means "something is wrong" everywhere else. */
+  var SPARK_COLORS = ["#E08A5B", "#679B55", "#BB8C33", "#996FBE", "#3E9A92"];
+
+  /* Little things flying off him. Appended to the host and removed when they land, so nothing
+     accumulates on a page somebody leaves open. Skipped entirely under reduced motion. */
+  function sparks(host, count) {
+    if (REDUCED) return;
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement("span");
+      s.className = "ember-spark";
+      s.style.background = SPARK_COLORS[i % SPARK_COLORS.length];
+      var angle = (i / count) * Math.PI * 2 + Math.random() * 0.6;
+      var dist = 34 + Math.random() * 30;
+      s.style.setProperty("--dx", (Math.cos(angle) * dist).toFixed(0) + "px");
+      s.style.setProperty("--dy", (Math.sin(angle) * dist - 16).toFixed(0) + "px");
+      s.style.setProperty("--rr", ((Math.random() * 2 - 1) * 220).toFixed(0) + "deg");
+      s.style.animationDelay = (i * 18) + "ms";
+      host.appendChild(s);
+      (function (el) { setTimeout(function () { el.remove(); }, 900 + i * 18); })(s);
+    }
+  }
+
+  function actOnce(rig) {
+    if (REDUCED || rig.acting || rig.state !== "idle") return;
+    var i = Math.floor(Math.random() * ACTS.length);
+    if (i === rig.lastAct) i = (i + 1 + Math.floor(Math.random() * (ACTS.length - 1))) % ACTS.length;
+    rig.lastAct = i;
+    var act = ACTS[i];
+    rig.acting = true;
+    rig.svg.classList.add(act.cls);
+    sparks(rig.host, 7);
+    setTimeout(function () {
+      rig.svg.classList.remove(act.cls);
+      rig.acting = false;
+    }, act.ms);
+  }
 
   function onMove(e) {
     pointer.x = e.clientX;
@@ -180,9 +237,30 @@
     pointer.moved = performance.now();
   }
 
+  /* How fast the page is moving, so Ember can lean into a scroll and settle out of it. Read in
+     the loop rather than acted on here, so a fast flick is one number rather than a burst of work. */
+  function onScroll() {
+    var y = window.scrollY || window.pageYOffset || 0;
+    scrollVel = y - lastScrollY;
+    lastScrollY = y;
+  }
+
+  /* Anything the reader could press. Hovering one turns every Ember on the page toward it. */
+  function onOver(e) {
+    var el = e.target && e.target.closest && e.target.closest("a, button, .btn, .radio-option, summary");
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    attend.x = r.left + r.width / 2;
+    attend.y = r.top + r.height / 2;
+    attend.until = performance.now() + 1400;
+  }
+
   function start() {
     if (raf) return;
     window.addEventListener("pointermove", onMove, { passive: true });
+    window.addEventListener("pointerover", onOver, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    lastScrollY = window.scrollY || window.pageYOffset || 0;
     last = performance.now();
     raf = requestAnimationFrame(frame);
   }
@@ -190,12 +268,15 @@
   function frame(now) {
     var dt = Math.min(0.05, (now - last) / 1000);
     last = now;
+    scrollVel *= Math.exp(-dt * 6);
     for (var i = 0; i < rigs.length; i++) update(rigs[i], now, dt);
     if (rigs.length) {
       raf = requestAnimationFrame(frame);
     } else {
       raf = 0;
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerover", onOver);
+      window.removeEventListener("scroll", onScroll);
     }
   }
 
@@ -234,6 +315,8 @@
     var tx, ty;
     if (rig.state === "sleep") {
       tx = cx; ty = cy + 60;
+    } else if (now < attend.until) {
+      tx = attend.x; ty = attend.y;
     } else if (!pointer.moved || now - pointer.moved > 4000) {
       if (now > rig.wander.next) {
         rig.wander.next = now + 1400 + Math.random() * 1800;
@@ -260,7 +343,19 @@
     rig.lid += (lidTarget - rig.lid) * (1 - Math.exp(-dt * 14));
     var open = Math.max(0.06, rig.lid * blink);
 
-    if (rig.lean) rig.lean.style.transform = "rotate(" + ((dx / len) * reach * 3).toFixed(2) + "deg)";
+    /* The lean is the gaze plus the page's own movement, so a scroll tips him and settles him
+       rather than leaving him rigid while everything around him travels. Capped, or a trackpad
+       flick spins him. */
+    var tilt = (dx / len) * reach * 3 + Math.max(-7, Math.min(7, scrollVel * 0.22));
+    if (rig.lean) rig.lean.style.transform = "rotate(" + tilt.toFixed(2) + "deg)";
+
+    /* Every so often, unprompted, he does something. Only while idle and only when the reader can
+       see him, so nothing plays to an empty screen or interrupts a state that means something. */
+    if (!REDUCED && rig.state === "idle" && now > rig.flourish) {
+      rig.flourish = now + 14000 + Math.random() * 16000;
+      if (rig.seen) actOnce(rig);
+    }
+    rig.seen = true;
     for (var i = 0; i < rig.eyes.length; i++) {
       var e = rig.eyes[i];
       e.g.style.transform = "translate(" + (e.bx + rig.gx) + "px," + (e.by + rig.gy) + "px)";
@@ -278,12 +373,18 @@
     var eyeEls = svg.querySelectorAll(".eye");
     var rig = {
       svg: svg,
+      host: host,
       lean: svg.querySelector(".lean"),
       eyes: [],
       state: "idle",
       gx: 0, gy: 0, lid: 1, blinkT: -1,
       nextBlink: performance.now() + 1200 + Math.random() * 3200,
       wander: { x: 0, y: 0, next: 0 },
+      flourish: performance.now() + 9000 + Math.random() * 12000,
+      seen: false,
+      acting: false,
+      lastAct: -1,
+      giggle: 0,
       rect: null, rectAt: -1e9
     };
     for (var i = 0; i < eyeEls.length; i++) {
@@ -303,14 +404,28 @@
       setTimeout(function () { setState(rig, "idle"); }, 1700);
     } else {
       setState(rig, opts.state || "idle");
+      /* Arriving. A character who is simply present when the page paints reads as an image of a
+         character; one who lands reads as having turned up. After the hero's own entrance, so the
+         two do not fight. */
+      if (!REDUCED && (opts.state || "idle") === "idle") {
+        setTimeout(function () { actOnce(rig); }, 520);
+      }
     }
     start();
 
-    /* Clicking him is the one interaction people try, so it answers: a hop, then back to idle. */
-    host.addEventListener("click", function () {
-      if (rig.state !== "idle") return;
-      setState(rig, "done");
-      setTimeout(function () { setState(rig, "idle"); }, 1700);
+    /* Clicking him is the one interaction people try, so it answers, and answers differently
+       each time. Hovering is answered by the sway in styles.css, which needs a class rather than
+       `:hover` so it can be kept off under reduced motion in one place. */
+    host.addEventListener("click", function () { actOnce(rig); });
+    host.addEventListener("pointerenter", function () {
+      host.classList.add("is-hovered");
+      if (rig.giggle) return;
+      rig.giggle = setInterval(function () { sparks(host, 2); }, 420);
+    });
+    host.addEventListener("pointerleave", function () {
+      host.classList.remove("is-hovered");
+      clearInterval(rig.giggle);
+      rig.giggle = 0;
     });
     return {
       element: host,
@@ -339,11 +454,49 @@
     return made;
   }
 
-  window.Ember = { mount: mount, auto: auto, lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor };
+  /* Every mounted Ember reacts at once, which is what `reactEmber` does inside the app. Used by
+     the form wiring below and available to any page that wants to mark something happening. */
+  function react(state, ms) {
+    for (var i = 0; i < rigs.length; i++) {
+      (function (rig) {
+        setState(rig, state);
+        setTimeout(function () { if (rig.state === state) setState(rig, "idle"); }, ms || 1500);
+      })(rigs[i]);
+    }
+  }
+
+  window.Ember = {
+    mount: mount, auto: auto, react: react,
+    lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor
+  };
+
+  /* The one page with a form worth reacting to. Taking an option is progress and gets the hop; a
+     validation message appearing is the form saying no, and he winces with it rather than leaving
+     the red text to carry the whole moment. Bound generically (any radio, any `.form-error-msg`
+     becoming visible) so the questionnaire can grow steps without this needing to know. */
+  function wireForm() {
+    var form = document.querySelector(".form-container");
+    if (!form) return;
+    form.addEventListener("change", function (e) {
+      if (e.target && e.target.type === "radio") react("done", 1100);
+    });
+    var errors = form.querySelectorAll(".form-error-msg");
+    if (!errors.length || !window.MutationObserver) return;
+    var watcher = new MutationObserver(function (records) {
+      for (var i = 0; i < records.length; i++) {
+        var el = records[i].target;
+        if (el.textContent && getComputedStyle(el).display !== "none") { react("oops", 900); return; }
+      }
+    });
+    for (var i = 0; i < errors.length; i++) {
+      watcher.observe(errors[i], { attributes: true, childList: true, characterData: true, subtree: true });
+    }
+  }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { auto(); });
+    document.addEventListener("DOMContentLoaded", function () { auto(); wireForm(); });
   } else {
     auto();
+    wireForm();
   }
 })();

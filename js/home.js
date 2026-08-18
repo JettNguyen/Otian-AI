@@ -36,19 +36,27 @@
   var spine = document.querySelector('.hm-spine');
   if (spine && !still) {
     spine.style.setProperty('--hm-draw', 0);
-    var ticking = false;
-    var draw = function () {
-      ticking = false;
-      var r = spine.getBoundingClientRect();
-      /* The tip sits about three quarters down the viewport, so the growth is
-         actually visible on screen instead of finishing below the fold. */
-      var p = (window.innerHeight * 0.78 - r.top) / (r.height * 0.96);
-      spine.style.setProperty('--hm-draw', Math.max(0, Math.min(1, p)));
+    /* Scroll sets a target; the line eases toward it each frame instead of
+       jumping. A slow scroll keeps the tip pinned about two thirds down the
+       viewport; a fast flick leaves the line behind for a beat and you watch
+       it glide to catch up. */
+    var target = 0;
+    var cur = 0;
+    var raf = null;
+    var settle = function () {
+      raf = null;
+      cur += (target - cur) * 0.14;
+      if (Math.abs(target - cur) < 0.002) cur = target;
+      spine.style.setProperty('--hm-draw', cur);
+      if (cur !== target) raf = requestAnimationFrame(settle);
     };
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(draw); }
-    }, { passive: true });
-    draw();
+    var measure = function () {
+      var r = spine.getBoundingClientRect();
+      target = Math.max(0, Math.min(1, (window.innerHeight * 0.66 - r.top) / (r.height * 0.96)));
+      if (!raf) raf = requestAnimationFrame(settle);
+    };
+    window.addEventListener('scroll', measure, { passive: true });
+    measure();
   }
 
   /* Screenshot carousel: advance every 5 seconds; a click holds the chosen

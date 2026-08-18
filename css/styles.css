@@ -9222,7 +9222,6 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-wrap { max-width: 680px; margin: 0 auto; text-align: center; }
 .hm-wrap--wide { max-width: 880px; }
 .hm-head h2 { font-size: clamp(1.85rem, 3.2vw, 2.5rem); line-height: 1.18; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
-.hm-orn { display: flex; justify-content: center; margin-top: 20px; color: var(--accent); opacity: 0.85; }
 .hm-micro { font-size: 0.82rem; color: var(--text-muted); }
 
 /* Hero */
@@ -9278,7 +9277,9 @@ html[data-theme="dark"] .booking-container iframe {
   content: ""; position: absolute; left: 50%; top: 6px;
   height: calc((100% - 12px) * var(--hm-draw, 1));
   width: 1.5px; transform: translateX(-50%);
-  background: linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 55%, var(--border)) 36px, var(--accent));
+  background: linear-gradient(to bottom, transparent,
+    color-mix(in srgb, var(--accent) 55%, var(--border)) 36px,
+    var(--accent) calc(100% - 90px), transparent);
 }
 .hm-stop { position: relative; padding: 0 0 72px; text-align: center; }
 .hm-stop:last-child { padding-bottom: 0; }

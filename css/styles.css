@@ -9464,6 +9464,10 @@ html[data-theme="dark"] .booking-container iframe {
 /* CTA */
 .hm-cta { text-align: center; }
 .hm-cta .btn { margin-top: 30px; }
+/* Paired buttons ride inside .hm-actions, which already carries the 34px gap;
+   without this, each button adds its own 30px on top and the row sits too low. */
+.hm-cta .hm-actions { margin-top: 30px; }
+.hm-cta .hm-actions .btn { margin-top: 0; }
 .hm-cta .hm-micro { margin-top: 14px; }
 
 /* Hero load-in: one orchestrated stagger, off under reduced motion */

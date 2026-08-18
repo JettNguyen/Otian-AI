@@ -36,6 +36,26 @@ The `hm-` classes in styles.css section 43 are the shared band system, not homep
 reuse them rather than minting parallel ones. If a page needs a new component, add it to
 section 43 with the same naming.
 
+## Structure tokens (no mixing)
+
+One scale each, and a component is either on the scale or it is a documented exception:
+
+- **Color.** Only tokens, never new hexes in a page or component. The blue is structural,
+  not sprinkle: it appears in exactly four roles: assurance section labels
+  (`.section-label--trust`), assurance glyphs (claim checks, reassurance checkmarks,
+  done-states), the advisor ring, and the status/testing pill. Everything clickable and
+  every action stays ember. If a use doesn't fit one of the four roles, it doesn't get blue.
+- **Radius.** `999px` for pills and tabs; `--radius` (12px) for cards, frames, nodes, and
+  chips; `--radius-sm` (8px) for small controls. One exception, documented at its
+  definition: chat bubbles are 16px with a 5px tail corner, because that is the messaging
+  idiom and the card radius would make them read as cards.
+- **Type roles.** Georgia serif for display headings and stat numerals; Inter for
+  everything else; uppercase 650-weight letterspaced for labels and stamps. No new pairings.
+- **Availability wording.** The canonical sentence is
+  "Archie is in testing and not for sale yet." followed by a "See where it stands"
+  link to `archie/#status`, which stays the single home of the underlying facts. No page
+  restates platform detail, and no page invents a variant phrasing.
+
 ## Rollout order
 
 Each page: restructure to bands, trim copy, verify dark + light + 390px mobile, run

@@ -9349,6 +9349,9 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: left; font-size: 0.88rem;
   display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
 }
+/* Chat bubbles are the one shape off the radius scale on purpose: 16px with one
+   5px corner is the messaging idiom, and rounding it down to the card radius
+   makes it read as a card. Everything else sits on --radius / --radius-sm / 999. */
 .hm-bubble {
   width: fit-content; max-width: 340px;
   background: var(--bg-card); border: 1px solid var(--border);
@@ -9363,7 +9366,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-msg-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; max-width: 340px; }
 .hm-msg-btn {
   text-align: center; font-size: 0.78rem; font-weight: 600;
-  padding: 8px 0; border-radius: 9px;
+  padding: 8px 0; border-radius: var(--radius-sm);
   border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-card);
   box-shadow: 0 1px 2px rgba(42, 37, 33, 0.1);
 }
@@ -9375,7 +9378,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-mini {
   position: relative; z-index: 1;
   max-width: 420px; margin: 0 auto; text-align: left;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 16px 18px; box-shadow: var(--shadow-sm); font-size: 0.88rem;
 }
 .hm-chipline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -9395,7 +9398,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-shot.is-on { display: block; }
 .hm-shot-frame {
   aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 16px; border: 1.5px dashed var(--border); border-radius: 14px;
+  text-align: center; padding: 16px; border: 1.5px dashed var(--border); border-radius: var(--radius);
   background: var(--bg-card); color: var(--text-muted); font-size: 0.9rem; font-weight: 600;
   box-shadow: var(--shadow-sm);
 }
@@ -9403,7 +9406,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* Where your words go */
 .hm-flow { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 48px 0 12px; }
 .hm-node {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 14px 22px; text-align: center; box-shadow: var(--shadow-sm);
 }
 .hm-node--you { border-color: var(--accent); }
@@ -9439,7 +9442,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-needs { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
 .hm-need {
   display: flex; align-items: center; gap: 12px;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 14px 20px; font-size: 0.9rem; font-weight: 550;
 }
 .hm-need svg { color: var(--accent); flex-shrink: 0; }

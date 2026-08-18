@@ -189,6 +189,9 @@
 
         <!-- ── Step: Get Started (fork) ── -->
         <div class="form-step active" id="step-intent" aria-label="Get started">
+          <!-- The form's first screen is the one that asks a stranger for something, so the
+               thing they are signing up to meet is on it. -->
+          <span data-ember="terracotta.peak.pill.none" class="step-ember"></span>
           <h2 class="step-heading">Get started</h2>
           <p class="step-subheading">Two ways to start. Pick the one that fits and we&rsquo;ll keep this short.</p>
 
@@ -771,6 +774,7 @@
     window.otianQuestionnaireStatus = bindStatusToast(document.getElementById("q-status"));
   </script>
   <script src="../js/nav.js"></script>
+  <script src="../js/ember.js" defer></script>
   <script type="module" src="../js/account-nav.js"></script>
   <script src="../js/questionnaire.js"></script>
 </body>

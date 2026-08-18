@@ -9553,6 +9553,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* Hero load-in: one orchestrated stagger, off under reduced motion */
 @keyframes hm-fade-up-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.hm-hero .hm-hero-greeter { animation: hm-fade-up-in 0.6s ease 0.05s backwards; }
 .hm-hero .section-label { animation: hm-fade-up-in 0.6s ease 0.05s backwards; }
 .hm-hero h1 { animation: hm-fade-up-in 0.6s ease 0.12s backwards; }
 .hm-hero .hm-lede { animation: hm-fade-up-in 0.6s ease 0.2s backwards; }
@@ -9562,7 +9563,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero .hm-pill { animation: hm-fade-up-in 0.6s ease 0.4s backwards; }
 .hm-hero .hm-demo { animation: hm-fade-up-in 0.7s ease 0.48s backwards; }
 @media (prefers-reduced-motion: reduce) {
-  .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede, .hm-hero .hm-kicker,
+  .hm-hero .hm-hero-greeter, .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede, .hm-hero .hm-kicker,
   .hm-hero .hm-actions, .hm-hero .hm-hero-micro, .hm-hero .hm-pill,
   .hm-hero .hm-demo { animation: none; }
   .hm-spine::before { height: calc(100% - 12px); }
@@ -9579,7 +9580,9 @@ html[data-theme="dark"] .booking-container iframe {
 .ember { display: inline-block; line-height: 0; }
 .ember svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .ember .anim,
-.ember .lean { transform-box: view-box; transform-origin: 100px 176px; }
+/* 163, not 176: `transform-box: view-box` measures from the view box's top-left corner, which is
+   at y=13 (the viewBox is offset so Ember sits centered with or without a hat). Still his feet. */
+.ember .lean { transform-box: view-box; transform-origin: 100px 163px; }
 .ember .eye { will-change: transform; }
 .ember .eye-open { transform-box: fill-box; transform-origin: 50% 50%; }
 
@@ -9612,18 +9615,23 @@ html[data-theme="dark"] .booking-container iframe {
   100% { transform: none; }
 }
 
-/* Beside the hero label, at the top of the home page: the product's face, watching the reader
-   read. Sized to the label's own line so it sits in the row rather than pushing it apart. */
+/* Above the hero label, at the top of the home page: the product's face, watching the reader
+   read. The hero is `text-align: center`, and a flex row inherits none of that, so this centers
+   itself or Ember sits hard against the left edge of a centered column. */
 .hm-hero-greeter {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
-.hm-hero-greeter .ember { width: 54px; height: 54px; cursor: pointer; }
+.hm-hero-greeter .ember { width: 76px; height: 76px; cursor: pointer; }
 .hm-hero-greeter .section-label { margin: 0; }
+/* The wrapper carries the hero's entrance now, so the label must not also run it: nested, the two
+   translates add up and the label arrives from twice as far down as everything beside it. */
+.hm-hero .hm-hero-greeter .section-label { animation: none; }
 @media (max-width: 640px) {
-  .hm-hero-greeter .ember { width: 44px; height: 44px; }
+  .hm-hero-greeter .ember { width: 62px; height: 62px; }
 }
 
 /* The 404, where he is the apology. */
@@ -9633,4 +9641,37 @@ html[data-theme="dark"] .booking-container iframe {
   .ember svg.st-working .anim,
   .ember svg.st-done .anim,
   .ember svg.st-oops .anim { animation: none; }
+}
+
+/* Ember standing over a page hero, where the wordmark used to. */
+.page-hero-ember {
+  width: 88px;
+  height: 88px;
+  display: block;
+  margin: 0 auto 22px;
+  cursor: pointer;
+}
+
+/* Ember inline with a heading, sized to the type so it sits on the line rather than beside it. */
+.heading-ember {
+  width: 1.15em;
+  height: 1.15em;
+  display: inline-block;
+  vertical-align: -0.22em;
+  margin-right: 0.4em;
+  cursor: pointer;
+}
+
+/* Over the first step of the waitlist form. */
+.step-ember {
+  width: 64px;
+  height: 64px;
+  display: block;
+  margin: 0 auto 14px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .page-hero-ember { width: 72px; height: 72px; }
+  .step-ember { width: 54px; height: 54px; }
 }

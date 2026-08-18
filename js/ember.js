@@ -94,9 +94,12 @@
         '<circle cx="56" cy="130" r="2.6"/><circle cx="140" cy="118" r="2.6"/>' +
         '<circle cx="132" cy="126" r="2.6"/><circle cx="144" cy="130" r="2.6"/></g>';
     },
+    /* Cream, not the body's own dark: as `hue.dark` it read as a shadow across the body rather
+       than as something worn. The hairline keeps the cream from floating on a pale hue. */
     scarf: function (d) {
-      return '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="' + d + '"/>' +
-        '<path d="M128 156 l10 22 q-7 3 -13 1 l-6 -19 Z" fill="' + d + '"/>';
+      return '<g stroke="' + d + '" stroke-width="2.2" stroke-linejoin="round">' +
+        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="#FBF1E4"/>' +
+        '<path d="M128 156 l10 22 q-7 3 -13 1 l-6 -19 Z" fill="#F2E2CE"/></g>';
     }
   };
   var EXTRA_IDS = ["none", "glasses", "freckles", "scarf"];
@@ -141,7 +144,7 @@
     var hue = HUES[look.hue] || HUES.terracotta;
     var uid = "e" + (uidCounter += 1);
     var eyes = EYES[look.eyes] || EYES.pill;
-    return '<svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">' +
+    return '<svg viewBox="0 13 200 200" aria-hidden="true" focusable="false">' +
       '<defs><linearGradient id="ember-' + uid + '" x1="0" y1="0.18" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
       '<stop offset="0.55" stop-color="' + hue.mid + '"/>' +

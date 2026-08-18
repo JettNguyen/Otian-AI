@@ -17,12 +17,12 @@
   };
 
   const stepLabels = {
-    'step-intent':   'Get Started',
-    'step-waitlist': 'Join the Waitlist',
-    'step-about':    'About You',
-    'step-help':     'What You Want Help With',
-    'step-handson':  'How Hands-On',
-    'step-comfort':  'Comfort Level',
+    'step-intent':   'Get started',
+    'step-waitlist': 'Join the waitlist',
+    'step-about':    'About you',
+    'step-help':     'What you want help with',
+    'step-handson':  'How hands-on',
+    'step-comfort':  'Comfort level',
     'step-closing':  'Closing'
   };
 

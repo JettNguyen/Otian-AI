@@ -9509,8 +9509,10 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
 }
 .hm-claims li:nth-last-child(-n+2) { border-bottom: 0; }
-.hm-claims svg { flex-shrink: 0; color: var(--c-blue); }
-.hm-trust-link { display: inline-block; margin-top: 28px; font-weight: 600; color: var(--c-blue-ink); }
+/* Ember, not blue: every check glyph on the site is ember (the custody cards, the setup
+   lists), and links act, and action is ember. Blue stays on the label above. */
+.hm-claims svg { flex-shrink: 0; color: var(--accent); }
+.hm-trust-link { display: inline-block; margin-top: 28px; font-weight: 600; color: var(--accent-ink); }
 @media (max-width: 620px) {
   .hm-claims { grid-template-columns: 1fr; }
   .hm-claims li:nth-last-child(-n+2) { border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }
@@ -9577,7 +9579,27 @@ html[data-theme="dark"] .booking-container iframe {
    view-box` puts the origin and the percentage travel in the SVG's own 200-unit space, so one set
    of keyframes works at every size Ember is placed at. The origin is the spot between his feet: a
    hop that scales about its center lifts the feet through the floor. */
-.ember { display: inline-block; line-height: 0; }
+.ember {
+  display: inline-block;
+  line-height: 0;
+  transition: transform 220ms cubic-bezier(0.34, 1.4, 0.44, 1);
+}
+/* He notices being pointed at, everywhere he is pressable. Listed rather than written as
+   `.ember:hover`, because the placements are the four that carry `cursor: pointer` and a fifth
+   added later should opt in on purpose rather than inherit a grow it was not designed for. */
+.page-hero-ember:hover,
+.hm-hero-greeter .ember:hover,
+.heading-ember:hover,
+.step-ember:hover,
+.nf-card .ember:hover { transform: scale(1.07); }
+@media (prefers-reduced-motion: reduce) {
+  .ember { transition: none; }
+  .page-hero-ember:hover,
+  .hm-hero-greeter .ember:hover,
+  .heading-ember:hover,
+  .step-ember:hover,
+  .nf-card .ember:hover { transform: none; }
+}
 .ember svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .ember .anim,
 /* 163, not 176: `transform-box: view-box` measures from the view box's top-left corner, which is

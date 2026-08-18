@@ -41,10 +41,12 @@ section 43 with the same naming.
 One scale each, and a component is either on the scale or it is a documented exception:
 
 - **Color.** Only tokens, never new hexes in a page or component. The blue is structural,
-  not sprinkle: it appears in exactly four roles: assurance section labels
-  (`.section-label--trust`), assurance glyphs (claim checks, reassurance checkmarks,
-  done-states), the advisor ring, and the status/testing pill. Everything clickable and
-  every action stays ember. If a use doesn't fit one of the four roles, it doesn't get blue.
+  not sprinkle: it appears in exactly three roles: assurance section labels
+  (`.section-label--trust`, on sections about custody, approvals, and guarantees), the
+  advisor ring, and the status/testing pill. Check glyphs are always ember, everywhere
+  (decided 2026-08-18: the homepage claim checks went back to ember), and everything
+  clickable and every action stays ember. If a use doesn't fit one of the three roles,
+  it doesn't get blue.
 - **Radius.** `999px` for pills and tabs; `--radius` (12px) for cards, frames, nodes, and
   chips; `--radius-sm` (8px) for small controls. One exception, documented at its
   definition: chat bubbles are 16px with a 5px tail corner, because that is the messaging

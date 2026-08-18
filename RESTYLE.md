@@ -42,13 +42,17 @@ Each page: restructure to bands, trim copy, verify dark + light + 390px mobile, 
 check-facts, commit ("one page per commit" keeps review sane).
 
 ### Phase 1: the funnel
-- [ ] `trust/` and `trust/details/`. The densest pages on the site and the most
-      claim-sensitive: restructure into bands (the question, the custody diagram via
-      `.hm-flow`, the claims checklist, provider quotes, the off-switches, check-it-yourself).
-      Trims rearrange TRUST.md-approved sentences; they never reword them.
-- [ ] `archie/`. The product tour. The day arc now lives on the homepage, so this page
-      goes deeper instead of repeating it: what an agent is, the Work board, add-ons,
-      status. Heavy trim.
+- [x] `trust/` and `trust/details/` (2026-08-18). Sentence-case serif headings, the
+      hero&rsquo;s duplicate servers paragraph cut (the &ldquo;Our servers&rdquo; section
+      is the single home of that list now), CTA converted to the quiet band. The
+      receipts stayed: the outbound-connections table, the limits, and the provider
+      quotes are the product, not filler.
+- [ ] `archie/`. The product tour, one level deeper than the homepage (which now owns
+      the day arc). Its bands: what an agent actually is and how that differs from a
+      chat window; the Work board (Scheduled / doing / needs you / done); the add-on
+      ledger (the six real catalog items that came off the homepage move here); where
+      it runs and what it needs, briefly; and the testing status section (`#status`,
+      which the homepage pill links to). Heavy trim of everything else.
 - [ ] `archie/pricing/`. The 3-costs story as three bands; price cards keep FACTS.md
       figures exactly.
 - [ ] `archie/see-it-work/`. Mostly the recording; light touch, header grammar and captions.
@@ -66,7 +70,8 @@ check-facts, commit ("one page per commit" keeps review sane).
       their voice and length.
 
 ### Phase 3: shell and utility
-- [ ] `about/` (fold into `our-story/` or redirect; decide with Jett).
+- [x] `about/`: folded into `our-story/`. Already a meta-refresh redirect with a
+      canonical, and nothing links to it; no further work.
 - [ ] Account-adjacent pages (`account/`, `login/`, `billing/`, `activity/`, `phone/`,
       `equipment/`, `app-auth/`): they inherit the tokens already; verify grounds and
       labels, nothing structural.

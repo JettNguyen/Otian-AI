@@ -9243,7 +9243,9 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-lede strong { color: var(--text-primary); font-weight: 600; }
 /* The three steps that are left after the download. Kept short on purpose: the length
    of this line is the claim, so it never grows into a sentence. */
-.hm-kicker { margin: 18px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text-secondary); }
+/* c-blue-ink, not c-blue: the bright blue is a fill and a stroke colour, and this is
+   0.02em-tracked text on the page ground. */
+.hm-kicker { margin: 18px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; color: var(--c-blue-ink); }
 .hm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
 .hm-hero-micro { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 16px 0 0; font-size: 0.82rem; color: var(--text-muted); }
 .hm-hero-micro svg { color: var(--accent); flex-shrink: 0; }

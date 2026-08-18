@@ -153,7 +153,14 @@
          ============================== -->
     <section class="hm-hero" aria-label="Hero">
       <div class="hm-hero-inner">
-        <span class="section-label">Otian AI &middot; Meet Archie</span>
+        <!-- Ember, the character Archie's agents wear (js/ember.js). "Meet Archie" is the label
+             beside him, and until now the meeting was with a line of type. He watches the pointer
+             and hops when clicked, which is the same thing he does inside the app, so the first
+             thing the page shows is a real piece of the product rather than a picture of one. -->
+        <div class="hm-hero-greeter">
+          <span data-ember="terracotta.peak.pill.none" title="This is Ember. Say hello."></span>
+          <span class="section-label">Otian AI &middot; Meet Archie</span>
+        </div>
         <h1>Nothing to figure out. No code. <em>Your time back</em>, starting today.</h1>
         <p class="hm-lede"><strong>Yours the first time you open it, and yours to shape: plug in add-ons, or tell it what to change.</strong> Archie runs your own AI agent on your own computer, handling the busywork in your inbox and calendar from the chat apps you already use.</p>
         <p class="hm-kicker">Name it. Shape it. Text it.</p>
@@ -548,6 +555,7 @@
   </footer>
 
   <script src="js/nav.js"></script>
+  <script src="js/ember.js" defer></script>
   <script type="module" src="js/account-nav.js"></script>
   <script src="js/demo-player.js"></script>
   <script src="js/home.js" defer></script>

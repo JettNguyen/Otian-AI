@@ -9567,3 +9567,70 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-hero .hm-demo { animation: none; }
   .hm-spine::before { height: calc(100% - 12px); }
 }
+
+/* ── Ember, the Archie character (js/ember.js) ──────────────────────────────────────────────────
+
+   The body's motion is here so the reduced-motion block at the bottom can reach it; the eyes and
+   the blink are JS transforms in ember.js, and they stay under reduced motion because the gaze
+   answers the reader's own pointer and a blink is smaller than a text caret. `transform-box:
+   view-box` puts the origin and the percentage travel in the SVG's own 200-unit space, so one set
+   of keyframes works at every size Ember is placed at. The origin is the spot between his feet: a
+   hop that scales about its center lifts the feet through the floor. */
+.ember { display: inline-block; line-height: 0; }
+.ember svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.ember .anim,
+.ember .lean { transform-box: view-box; transform-origin: 100px 176px; }
+.ember .eye { will-change: transform; }
+.ember .eye-open { transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* The face swaps are opacity, not animation, so every state still reads under reduced motion. */
+.ember svg.st-done .pill,
+.ember svg.st-done .glint { opacity: 0; }
+.ember svg.st-done .happy { opacity: 1; }
+.ember svg.st-oops .mouth-smile { opacity: 0; }
+.ember svg.st-oops .mouth-flat { opacity: 1; }
+
+.ember svg.st-working .anim { animation: ember-bob 2.1s ease-in-out infinite; }
+.ember svg.st-done .anim { animation: ember-hop 0.9s cubic-bezier(0.34, 1.4, 0.44, 1) 1; }
+.ember svg.st-oops .anim { animation: ember-shake 0.55s ease 1; }
+
+@keyframes ember-bob { 50% { transform: translateY(-3%) scale(1.01, 0.99); } }
+@keyframes ember-hop {
+  0% { transform: none; }
+  16% { transform: translateY(2.5%) scale(1.07, 0.9); }
+  42% { transform: translateY(-14%) scale(0.95, 1.07); }
+  66% { transform: translateY(0) scale(1.06, 0.92); }
+  82% { transform: translateY(-4%); }
+  100% { transform: none; }
+}
+@keyframes ember-shake {
+  0% { transform: none; }
+  20% { transform: translateX(-3%) rotate(-2deg); }
+  40% { transform: translateX(3%) rotate(2deg); }
+  60% { transform: translateX(-2%) rotate(-1.2deg); }
+  80% { transform: translateX(2%) rotate(1deg); }
+  100% { transform: none; }
+}
+
+/* Beside the hero label, at the top of the home page: the product's face, watching the reader
+   read. Sized to the label's own line so it sits in the row rather than pushing it apart. */
+.hm-hero-greeter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.hm-hero-greeter .ember { width: 54px; height: 54px; cursor: pointer; }
+.hm-hero-greeter .section-label { margin: 0; }
+@media (max-width: 640px) {
+  .hm-hero-greeter .ember { width: 44px; height: 44px; }
+}
+
+/* The 404, where he is the apology. */
+.nf-card .ember { width: 96px; height: 96px; margin: 0 auto 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ember svg.st-working .anim,
+  .ember svg.st-done .anim,
+  .ember svg.st-oops .anim { animation: none; }
+}

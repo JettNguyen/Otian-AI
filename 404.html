@@ -62,7 +62,11 @@
 <body>
   <main class="nf-wrap" id="main">
     <div class="nf-card">
-      <img src="/assets/icon-1024-dark.svg" alt="Otian AI" />
+      <!-- Ember (js/ember.js) rather than the app icon. A 404 is the one page whose whole job is
+           to be a small apology, and a character who winces once and then looks at you does that
+           better than a logo can. He is decoration: the heading below carries the message, and the
+           page reads the same with the script blocked. -->
+      <span data-ember="terracotta.peak.pill.none" data-ember-play="oops"></span>
       <div class="nf-code">404</div>
       <h1>That page isn't here</h1>
       <p>
@@ -75,5 +79,6 @@
       </div>
     </div>
   </main>
+  <script src="/js/ember.js" defer></script>
 </body>
 </html>

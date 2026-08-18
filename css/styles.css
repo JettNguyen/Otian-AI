@@ -130,16 +130,18 @@
 }
 
 [data-theme="dark"] {
-  --bg-primary: #292624;
-  --bg-secondary: #312D2A;
-  --bg-card: #38332E;
+  /* Neutral stone grounds, not warm brown: the page keeps its warmth in the accent and the
+     content, and the dark ground stays close to hueless so nothing reads red at night. */
+  --bg-primary: #1A1A19;
+  --bg-secondary: #222221;
+  --bg-card: #2B2B29;
   --accent: #EDA277;
   /* Dark needs no third colour. Light had to deepen the accent to clear 3:1 on a cream page; here
-     the accent is already the light thing on a dark one, at 5.97:1 on a card and 7.18:1 on the
+     the accent is already the light thing on a dark one, at 6.78:1 on a card and 8.32:1 on the
      page. */
   --focus-ring: #EDA277;
   --accent-hover: #F2B58F;
-  --accent-subtle: #4A392C;
+  --accent-subtle: #453629;
   --accent-line: rgba(237, 162, 119, 0.45);
   --scrollbar-thumb: rgba(243, 240, 237, 0.24);
   /* Already light-on-dark here, so it clears AA (5.25:1) unchanged. */
@@ -147,29 +149,31 @@
   --danger: #FF9F97;
   --danger-ring: rgba(255, 159, 151, 0.16);
   --text-primary: #F3F0ED;
-  --text-secondary: #B3ACA4;
-  --text-muted: #A69F97;
-  --border: #48423C;
-  --nav-glass: rgba(41, 38, 36, 0.74);
-  --nav-glass-scrolled: rgba(41, 38, 36, 0.94);
+  --text-secondary: #AEACA6;
+  --text-muted: #A6A29C;
+  --border: #3F3E3A;
+  --nav-glass: rgba(26, 26, 25, 0.74);
+  --nav-glass-scrolled: rgba(26, 26, 25, 0.94);
   --surface-hover: rgba(243, 240, 237, 0.06);
   --surface-hover-strong: rgba(243, 240, 237, 0.14);
   --surface-soft: rgba(243, 240, 237, 0.03);
   --surface-soft-alt: rgba(243, 240, 237, 0.05);
   --surface-soft-strong: rgba(243, 240, 237, 0.1);
   /* Same reasoning as the light block, different arithmetic: a light ink on a dark ground reaches
-     3:1 sooner, so 0.44 does here what 0.62 does there (3.46:1 on a card, 3.62:1 on
-     --bg-secondary, 3.78:1 on --bg-primary). Was 0.16, which measured 1.59:1. */
+     3:1 sooner, so 0.44 does here what 0.62 does there (3.69:1 on a card, 3.87:1 on
+     --bg-secondary, 3.95:1 on --bg-primary). Was 0.16, which measured 1.59:1. */
   --field-border: rgba(243, 240, 237, 0.44);
   --field-border-strong: rgba(243, 240, 237, 0.56);
   --panel-border-strong: rgba(243, 240, 237, 0.2);
   --dashed-border: rgba(239, 199, 119, 0.4);
   --line-soft: rgba(243, 240, 237, 0.16);
   --line-muted: rgba(243, 240, 237, 0.28);
-  --overlay-bg: rgba(14, 12, 10, 0.62);
+  --overlay-bg: rgba(12, 12, 11, 0.62);
   --text-on-accent: #292624;
-  --bg-wash-one: rgba(76, 65, 54, 0.35);
-  --bg-wash-two: rgba(239, 199, 119, 0.14);
+  --bg-wash-one: rgba(64, 63, 59, 0.35);
+  /* Was 0.14 gold: over a whole hero that much warmth pulled the neutral ground back toward
+     brown. A 5% breath of it keeps the corner glow without recolouring the page. */
+  --bg-wash-two: rgba(239, 199, 119, 0.05);
   --c-blue: #86AEE4;
   --c-blue-subtle: rgba(134, 174, 228, 0.16);
   --c-teal: #6FC4BC;

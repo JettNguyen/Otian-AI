@@ -187,6 +187,75 @@
       </div>
     </section>
 
+    <!-- ==============================
+         The plans, above the cost breakdown.
+
+         Shaped like a tier table because that is what somebody comparing tools comes here
+         to find, but the contents are only what the code can back. Archie runs on the
+         buyer's own computer, on their own AI account, so there is nothing on our side to
+         meter: no seat counts, no credit tiers, no retention windows, no hosted instance.
+         Access in the app is binary (archie-core/src/auth.rs, verify_access), and the one
+         quota that exists anywhere is the free-credit trial and its fortnight
+         (archie-core/src/credits.rs, entitlement.rs). That trial is the first card.
+
+         No "most popular" badge on the middle card, deliberately. We have no sales to count
+         and /testimonials/ says we are still collecting reviews, so a popularity claim would
+         be the single unverifiable sentence on a page whose whole job is to be checkable.
+         The card leads on a border instead.
+
+         Business is a roadmap card and is bound by TRUST.md's tense rule: no price, no date,
+         no feature list, and a verb that says it is being built rather than sold.
+         ============================== -->
+    <section class="section" aria-labelledby="plans-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Plans</span>
+          <h2 id="plans-heading" class="fade-up delay-1">Try it free, then one plan.</h2>
+          <p>Nothing is held back for a higher tier: the plan is the whole app.</p>
+        </div>
+
+        <div class="mt-48 plan-grid fade-up delay-1">
+          <article class="plan-card">
+            <span class="price-card-label">Free to try</span>
+            <div class="price-card-amount price-card-amount--words">Free<span>no card</span></div>
+            <p class="plan-card-line">Two ways in, and both of them end.</p>
+            <ul class="plan-list">
+              <li>Free credits on our account, so your agent works before you have connected anything of your own</li>
+              <li>Or 14 days on an AI account of your own</li>
+              <li>The whole app either way: every add-on, every chat app</li>
+              <li>The credits are limited per computer and can be refused</li>
+              <li>Which of the two you are on is shown on screen in the app</li>
+            </ul>
+            <a class="btn btn-secondary plan-cta" href="#try-heading">How the trials work</a>
+          </article>
+
+          <article class="plan-card plan-card--lead">
+            <span class="price-card-label">Personal</span>
+            <div class="price-card-amount">$149<span>a year</span></div>
+            <p class="plan-card-line">Or $19 a month. A year works out at $12.42 a month, which is $79 less than paying month by month.</p>
+            <ul class="plan-list">
+              <li>Archie on your own computer, for one person</li>
+              <li>Your own AI account, which bills you directly: the money never passes through us</li>
+              <li>Every add-on in the store: skills, routines, specialists and personalities</li>
+              <li>All 5 chat apps: Telegram, Discord, Slack, Matrix, and iMessage on a Mac</li>
+              <li>Any of 7 AI companies, or any endpoint you name yourself</li>
+              <li>14 days to change your mind, and you can stop the plan whenever you like</li>
+            </ul>
+            <a class="btn btn-primary plan-cta" href="../../questionnaire/">Get Started</a>
+          </article>
+
+          <article class="plan-card">
+            <span class="price-card-label">Business edition</span>
+            <div class="price-card-amount price-card-amount--words">In development</div>
+            <p class="plan-card-line">For teams who want to run this together, rather than one person at a time.</p>
+            <p class="plan-note">It has no price and no date yet, and nothing about it is on sale. What your team tells us it needs is what shapes it, so the useful thing you can do here is write to us.</p>
+            <p class="plan-note"><a href="../../business/">How teams use Archie today &rarr;</a></p>
+            <a class="btn btn-secondary plan-cta" href="mailto:questions@otianai.com?subject=Business%20edition">Tell us what you need</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section" aria-labelledby="run-heading">
       <div class="container">
         <div class="section-header">
@@ -199,7 +268,7 @@
           <article class="price-card">
             <span class="price-card-label">The App</span>
             <div class="price-card-amount">$149<span>a year</span></div>
-            <p>Or $19 a month if you would rather not commit a year. A year works out at $12.42 a month, which is $79 less than paying month by month. Change or stop your plan whenever you like.</p>
+            <p>Or $19 a month. That is the Personal plan above, and it is the one cost on this list that comes to us. Change it or stop it whenever you like.</p>
           </article>
           <article class="price-card">
             <span class="price-card-label">Add-ons</span>

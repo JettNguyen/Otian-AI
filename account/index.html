@@ -529,12 +529,12 @@
         return;
       }
       // One decision, mirroring the app's own (see js/access.js). This page used to read
-      // `access_tier` alone, which ignored both the `access_tiers` array and the `licence` that
+      // `access_tier` alone, which ignored both the `access_tiers` array and the `license` that
       // supersedes them, so a comped tester was told to start a plan they already had.
-      const { allowed: owned, licence, tiers } = decideAccess(account);
-      // Session billing is only for managed clients: "granted" is what a client's licence reads,
+      const { allowed: owned, license, tiers } = decideAccess(account);
+      // Session billing is only for managed clients: "granted" is what a client's license reads,
       // and the old tier is still checked for a document the backfill has not reached.
-      show("sec-billing", licence === "granted" || tiers.includes("client"));
+      show("sec-billing", license === "granted" || tiers.includes("client"));
       if (owned) {
         setPill("archie-pill", "Active", true);
         body.innerHTML = "Your plan is active. <a href=\"../archie/install/\">Download and install Archie</a> on your Mac, then sign in with this account.";

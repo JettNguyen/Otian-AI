@@ -40,7 +40,9 @@
     var draw = function () {
       ticking = false;
       var r = spine.getBoundingClientRect();
-      var p = (window.innerHeight * 0.92 - r.top) / (r.height * 0.9);
+      /* The tip sits about three quarters down the viewport, so the growth is
+         actually visible on screen instead of finishing below the fold. */
+      var p = (window.innerHeight * 0.78 - r.top) / (r.height * 0.96);
       spine.style.setProperty('--hm-draw', Math.max(0, Math.min(1, p)));
     };
     window.addEventListener('scroll', function () {

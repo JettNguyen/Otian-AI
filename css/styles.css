@@ -467,8 +467,8 @@ p { color: var(--text-secondary); line-height: 1.8; }
   display: flex;
   align-items: center;
   background: var(--nav-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
   border-bottom: 1px solid var(--border);
   border-radius: 0 0 14px 14px;
   transition: background var(--transition);
@@ -9223,11 +9223,10 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-wrap--wide { max-width: 880px; }
 .hm-head h2 { font-size: clamp(1.85rem, 3.2vw, 2.5rem); line-height: 1.18; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .hm-orn { display: flex; justify-content: center; margin-top: 20px; color: var(--accent); opacity: 0.85; }
-.hm-orn--sure { color: var(--c-blue); }
 .hm-micro { font-size: 0.82rem; color: var(--text-muted); }
 
 /* Hero */
-.hm-hero { padding: 72px 24px 64px; text-align: center; }
+.hm-hero { padding: calc(var(--nav-height) + 56px) 24px 64px; text-align: center; }
 .hm-hero-inner { max-width: 780px; margin: 0 auto; }
 .hm-hero h1 { font-size: clamp(2.5rem, 5.6vw, 3.9rem); line-height: 1.08; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .hm-hero h1 em { font-style: italic; color: var(--accent-ink); }
@@ -9391,19 +9390,27 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); }
 .hm-aside { font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 48px; }
 .hm-aside b { color: var(--c-blue-ink); font-weight: 600; }
+/* A quiet checklist, deliberately not cards: the two cards above it are the
+   diagram, and the claims should read as a different kind of thing. */
 .hm-claims {
-  list-style: none; margin: 0 auto; padding: 0; max-width: 760px;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: left;
+  list-style: none; margin: 0 auto; padding: 0; max-width: 720px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 40px; text-align: left;
 }
 .hm-claims li {
-  display: flex; align-items: center; gap: 11px;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
-  padding: 13px 16px; font-size: 0.86rem; font-weight: 550; color: var(--text-primary);
+  display: flex; align-items: center; gap: 12px;
+  padding: 9px 4px; font-size: 0.9rem; font-weight: 550; color: var(--text-primary);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
 }
+.hm-claims li:nth-last-child(-n+2) { border-bottom: 0; }
 .hm-claims svg { flex-shrink: 0; color: var(--c-blue); }
 .hm-trust-link { display: inline-block; margin-top: 28px; font-weight: 600; color: var(--c-blue-ink); }
-@media (max-width: 760px) { .hm-claims { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 520px) { .hm-claims { grid-template-columns: 1fr; } .hm-flow { flex-direction: column; } .hm-flow-arrow svg { transform: rotate(90deg); } }
+@media (max-width: 620px) {
+  .hm-claims { grid-template-columns: 1fr; }
+  .hm-claims li:nth-last-child(-n+2) { border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }
+  .hm-claims li:last-child { border-bottom: 0; }
+  .hm-flow { flex-direction: column; }
+  .hm-flow-arrow svg { transform: rotate(90deg); }
+}
 
 /* Setup */
 .hm-needs { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
@@ -9422,7 +9429,7 @@ html[data-theme="dark"] .booking-container iframe {
   justify-content: center; gap: 34px 44px; margin: 40px 0 26px;
 }
 .hm-person { text-align: center; }
-.hm-person img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+.hm-person img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); margin: 0 auto; }
 .hm-person--adv { grid-column: 1 / -1; justify-self: center; }
 .hm-person--adv img { border-color: var(--c-blue); }
 .hm-person b { display: block; font-weight: 650; margin-top: 10px; }

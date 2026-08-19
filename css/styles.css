@@ -423,10 +423,9 @@ p { color: var(--text-secondary); line-height: 1.8; }
   margin-bottom: 12px;
 }
 
-/* Two accents, split by meaning: ember is Archie acting, blue is you verifying. A section
-   about what the agent does keeps the ember label; a section whose job is reassurance
-   (custody, approvals, guarantees, the whole trust page) carries the blue one. */
-.section-label--trust { color: var(--c-blue-ink); }
+/* Every eyebrow label is ember (2026-08-19): blue moved down a level, to the
+   supporting layer inside sections (text links, checkmarks, small component
+   headers, diagram details), where it seasons instead of competing. */
 
 .text-center { text-align: center; }
 
@@ -641,7 +640,8 @@ p { color: var(--text-secondary); line-height: 1.8; }
   bottom: 5px;
   height: 2px;
   border-radius: 2px;
-  background: var(--accent);
+  /* Blue, not ember: the underline is wayfinding, not an action. */
+  background: var(--c-blue);
 }
 
 .nav-more.open .nav-more-toggle::after,
@@ -5743,15 +5743,18 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 28px;
 }
 
+/* Text links inside body and subtext are blue; ember is reserved for buttons and
+   labels. font-size inherits so a link never sits a step larger than the sentence
+   it lives in (the old fixed 0.9375rem looked off-balance inside 0.82rem notes). */
 .marketplace-text-link {
-  color: var(--accent);
+  color: var(--c-blue-ink);
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: inherit;
   transition: color var(--transition-quick);
 }
 
 .marketplace-text-link:hover {
-  color: var(--accent-hover);
+  color: var(--c-blue);
   text-decoration: underline;
 }
 
@@ -8436,12 +8439,12 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .calm-note a {
-  color: var(--accent);
+  color: var(--c-blue-ink);
   font-weight: 600;
 }
 
 .calm-note a:hover {
-  color: var(--accent-hover);
+  color: var(--c-blue);
   text-decoration: underline;
 }
 
@@ -9296,14 +9299,17 @@ html[data-theme="dark"] .booking-container iframe {
    The homepage rebuilt to the concept mock: every section is a short centered
    band with one uniform header grammar (label, serif heading, cairn ornament),
    backgrounds alternate strictly, and the product story is a literal day
-   timeline drawn down a center spine. Ember stays the acting accent; the blue
-   from section-label--trust marks the assurance moments. The chat mocks sit
+   timeline drawn down a center spine. Ember owns the labels, buttons, and
+   headline accents; blue is the supporting layer (text links, time dots,
+   diagram captions, checkmarks on other pages). The chat mocks sit
    inside phone zoom-ins: side bezels, wallpaper, top and bottom faded out.
    ======================================== */
 .hm-wrap { max-width: 680px; margin: 0 auto; text-align: center; }
 .hm-wrap--wide { max-width: 880px; }
 .hm-head h2 { font-size: clamp(1.85rem, 3.2vw, 2.5rem); line-height: 1.18; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .hm-micro { font-size: 0.82rem; color: var(--text-muted); }
+.hm-micro a, .hm-hero-micro a { color: var(--c-blue-ink); font-weight: 600; }
+.hm-micro a:hover, .hm-hero-micro a:hover { color: var(--c-blue); text-decoration: underline; }
 
 /* Hero */
 .hm-hero { padding: calc(var(--nav-height) + 56px) 24px 64px; text-align: center; }
@@ -9398,7 +9404,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 0.74rem; font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--text-secondary); font-variant-numeric: tabular-nums;
 }
-.hm-stamp i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+.hm-stamp i { width: 7px; height: 7px; border-radius: 50%; background: var(--c-blue); }
 .hm-stop h3 {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: 1.22rem; font-weight: 750; letter-spacing: -0.01em;
@@ -9444,7 +9450,7 @@ html[data-theme="dark"] .booking-container iframe {
    carry one, and the vg bubbles already ship on shadow alone. */
 .hm-bubble {
   position: relative;
-  width: fit-content; max-width: 340px;
+  width: fit-content; max-width: 264px;
   background: var(--bg-card);
   border-radius: 16px; border-bottom-left-radius: 0;
   padding: 12px 16px; box-shadow: 0 1px 2px rgba(42, 37, 33, 0.1);
@@ -9527,7 +9533,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-node b { display: block; font-weight: 650; font-size: 0.95rem; }
 .hm-node span { font-size: 0.76rem; color: var(--text-secondary); }
 .hm-flow-arrow { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--accent); }
-.hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); }
+.hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-blue-ink); }
 .hm-aside { font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 48px; }
 .hm-aside b { color: var(--text-primary); font-weight: 600; }
 /* A quiet checklist, deliberately not cards: the two cards above it are the
@@ -9542,10 +9548,9 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
 }
 .hm-claims li:nth-last-child(-n+2) { border-bottom: 0; }
-/* Ember, not blue: every check glyph on the site is ember (the custody cards, the setup
-   lists), and links act, and action is ember. Blue stays on the label above. */
+/* Ember on purpose (2026-08-19): these six are the argument, not supporting UI. */
 .hm-claims svg { flex-shrink: 0; color: var(--accent); }
-.hm-trust-link { display: inline-block; margin-top: 28px; font-weight: 600; color: var(--accent-ink); }
+.hm-trust-link { display: inline-block; margin-top: 28px; font-weight: 600; color: var(--c-blue-ink); }
 @media (max-width: 620px) {
   .hm-claims { grid-template-columns: 1fr; }
   .hm-claims li:nth-last-child(-n+2) { border-bottom: 1px solid color-mix(in srgb, var(--border) 55%, transparent); }

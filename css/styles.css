@@ -9591,9 +9591,10 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-shots-tab:hover { border-color: var(--accent); color: var(--text-primary); }
 .hm-shots-tab.is-on { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-/* The shots are cut out (transparent around the window), so the stage paints nothing
-   behind them: no frame, no card, no border. They are stacked in one grid cell and
-   crossfaded, which keeps the stage height steady instead of jumping between slides. */
+/* Each shot is a plain rectangle of the app window, so the rounding and the shadow are
+   the page's job, not the file's: one radius and one shadow for all three. They are
+   stacked in one grid cell and crossfaded, which keeps the stage height steady instead
+   of jumping between slides. */
 .hm-shots-stage { max-width: 860px; margin: 0 auto; display: grid; }
 .hm-shot {
   grid-area: 1 / 1; margin: 0;
@@ -9607,9 +9608,18 @@ html[data-theme="dark"] .booking-container iframe {
   opacity: 1; visibility: visible; transform: none;
   transition-delay: 0s, 0s, 0s;
 }
-/* No CSS shadow: each shot carries its own, baked around the cut-out window at the
-   same blur and offset, so the three sit on the page identically. */
-.hm-shot img { width: 100%; height: auto; }
+.hm-shot img {
+  width: 100%; height: auto; display: block;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
+}
+/* The chat shot is a phone standing in front of the window, so it is cut out rather than
+   rectangular: the shadow has to follow the silhouette, and a radius would round the box
+   around both of them. */
+.hm-shot--cut img {
+  border-radius: 0; box-shadow: none;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.34));
+}
 @media (prefers-reduced-motion: reduce) {
   .hm-shot { transition: opacity 1ms linear, visibility 0s linear 1ms; transform: none; }
 }

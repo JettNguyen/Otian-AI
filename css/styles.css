@@ -5555,7 +5555,11 @@ html[data-theme="dark"] .booking-container iframe {
    line up whatever the lists do. */
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, 1fr), not 1fr: a bare 1fr track refuses to shrink below its contents' minimum,
+     so at 320px the single stacked card measured 309px inside a 272px column and pushed the
+     whole page 13px sideways. The rest of this file already uses minmax(0, 1fr) for exactly
+     this reason. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
   align-items: stretch;
   margin-bottom: 48px;
@@ -5653,7 +5657,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 @media (max-width: 1000px) {
-  .plan-grid { grid-template-columns: 1fr; }
+  .plan-grid { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ========================================
@@ -9665,8 +9669,12 @@ html[data-theme="dark"] .booking-container iframe {
    0.02em-tracked text on the page ground. */
 .hm-kicker { margin: 18px 0 0; font-size: clamp(0.9rem, 0.83rem + 0.36vw, 1.1rem); font-weight: 600; letter-spacing: 0.02em; color: var(--c-blue-ink); }
 .hm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
-.hm-hero-micro { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 16px 0 0; font-size: 0.82rem; color: var(--text-muted); }
-.hm-hero-micro svg { color: var(--accent); flex-shrink: 0; }
+/* Not flex. As a flex row the sentence and the link beside it become two flex items, so on a
+   narrow screen they stop being one line of prose and lay out as two columns, each wrapping
+   inside its own half: "Archie is in testing / and not for sale yet." next to "See where / it
+   stands". It is a sentence, so it flows as one. */
+.hm-hero-micro { margin: 16px 0 0; font-size: 0.82rem; color: var(--text-muted); }
+.hm-hero-micro svg { display: inline-block; color: var(--accent); vertical-align: -0.15em; }
 .hm-pill {
   display: inline-flex; gap: 8px; align-items: center;
   margin-top: 22px; padding: 8px 16px;

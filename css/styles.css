@@ -4680,7 +4680,11 @@ html[data-theme="dark"] .availability-widget iframe {
    left every deep page on a phone with no way back up except the browser's own button. The
    .page-back link is that missing half, and it appears exactly where the bar does not. */
 .page-back {
-  display: inline-flex;
+  /* flex, not inline-flex: the eyebrow label that follows is inline, so an inline back link
+     shares its line and reads as part of the label ("Compare COMPARE"). This takes a line of
+     its own and centres in the band like everything else in these heroes. */
+  display: flex;
+  justify-content: center;
   align-items: center;
   gap: 7px;
   margin-bottom: 20px;
@@ -5816,6 +5820,10 @@ html[data-theme="dark"] .booking-container iframe {
    clearing the fixed nav without inheriting the hero's centered-copy layout. */
 .section--top {
   padding-top: calc(var(--nav-height) + 72px);
+  /* The breadcrumb bar pins itself under the nav with position: absolute, so whichever block
+     opens the page has to be its containing block. .page-hero already is; this is the one page
+     (archie/install/) that opens on a plain section instead. */
+  position: relative;
 }
 
 .section-header h1 {

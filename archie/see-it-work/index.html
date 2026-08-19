@@ -27,7 +27,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260819-2" />
   <style>
     /* Page-scoped: the phone recording is portrait (444x960), so it needs its own
        aspect ratio and a much narrower cap than the landscape desktop demo. */
@@ -184,7 +184,16 @@
   <main id="main">
 
     <section class="page-hero" aria-label="Page introduction">
+      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+        <div class="breadcrumb-bar-inner">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="../">What Is Archie?</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">See It Work</li>
+          </ol>
+        </div>
+      </nav>
       <div class="page-hero-inner">
+        <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Archie</a>
         <span class="section-label fade-up">See it work</span>
         <h1 class="fade-up delay-1">Built in minutes. Then it&rsquo;s just texting.</h1>
         <p>2 recordings, no narration. The first is the whole build. The second is what it&rsquo;s like to actually live with one.</p>

@@ -20,6 +20,7 @@ Usage:  python3 scripts/check-facts.py
 Exit 0 when clean, 1 with a report otherwise.
 """
 
+import datetime
 import os
 import re
 import sys
@@ -204,7 +205,15 @@ def main():
             print("  %s prints %d" % (rel, printed))
         print("\nUpdate the pages and the count in FACTS.md together.\n")
 
-    if unknown or dashes or stale:
+    cold = stale_competitor_claims(datetime.date.today())
+    if cold:
+        print("Claims about other companies whose source has not been re-read (%d):\n" % len(cold))
+        for name, lineno, why, ctx in cold:
+            print("  %s:%d  (%s)" % (name, lineno, why))
+            print("      %s" % ctx)
+        print("\nRe-read the source page, update the date, or take the claim off the site.\n")
+
+    if unknown or dashes or stale or cold:
         return 1
 
     counted = "catalog re-counted: %d add-ons" % actual if actual is not None else \

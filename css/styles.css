@@ -2560,6 +2560,20 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   margin-top: 2px;
 }
 
+/* A ticked list is an endorsement, which is wrong for the half of a comparison that lists what
+   the other option does better: ticking a competitor's advantages in our own accent reads as
+   sarcasm at best. The plain variant states them without scoring them. */
+.two-col-card-list--plain li::before {
+  background: var(--text-muted);
+  -webkit-mask-image: none;
+  mask-image: none;
+  width: 12px;
+  height: 1.5px;
+  margin-top: 11px;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
 /* ========================================
    17. Accordion (FAQ)
    ======================================== */
@@ -7767,9 +7781,16 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ── The figures table ── */
-.cost-table-wrap { margin-top: 40px; }
+/* .cmp-table (the /compare/ pages) rides on these rules rather than getting a copy of them.
+   This file already carries two near-identical stacked tables, .trust-table and .cost-table,
+   and a third copy is exactly the drift FACTS.md exists to prevent. .cost-table is the base
+   rather than .trust-table because .trust-table's mobile polish is keyed to its literal column
+   names ("What", "Your content?"), which a different table silently loses. */
+.cost-table-wrap,
+.cmp-table-wrap { margin-top: 40px; }
 
-.cost-table {
+.cost-table,
+.cmp-table {
   width: 100%;
   border-collapse: collapse;
   background: var(--bg-card);
@@ -7778,7 +7799,9 @@ html[data-theme="dark"] .booking-container iframe {
   overflow: hidden;
 }
 .cost-table th,
-.cost-table td {
+.cost-table td,
+.cmp-table th,
+.cmp-table td {
   padding: 16px 18px;
   text-align: left;
   vertical-align: top;
@@ -7786,7 +7809,8 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 0.9375rem;
   line-height: 1.6;
 }
-.cost-table th {
+.cost-table th,
+.cmp-table th {
   background: var(--surface-soft-alt);
   color: var(--text-primary);
   font-weight: 600;
@@ -7794,8 +7818,20 @@ html[data-theme="dark"] .booking-container iframe {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.cost-table td { color: var(--text-secondary); }
-.cost-table tbody tr:last-child td { border-bottom: none; }
+.cost-table td,
+.cmp-table td { color: var(--text-secondary); }
+.cost-table tbody tr:last-child td,
+.cmp-table tbody tr:last-child td { border-bottom: none; }
+
+/* A comparison row's first cell names what is being compared, so it carries the row the way a
+   <th scope="row"> would. The column being argued for is tinted, which is the same device
+   .trust-table uses for its content rows. */
+.cmp-table td:first-child {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.cmp-table th.is-archie,
+.cmp-table td.is-archie { background: var(--accent-subtle); }
 
 .cost-use {
   font-weight: 600;
@@ -7911,23 +7947,32 @@ html[data-theme="dark"] .booking-container iframe {
   .cost-table,
   .cost-table tbody,
   .cost-table tr,
-  .cost-table td { display: block; width: 100%; }
+  .cost-table td,
+  .cmp-table,
+  .cmp-table tbody,
+  .cmp-table tr,
+  .cmp-table td { display: block; width: 100%; }
 
-  .cost-table thead { display: none; }
+  .cost-table thead,
+  .cmp-table thead { display: none; }
 
-  .cost-table tr {
+  .cost-table tr,
+  .cmp-table tr {
     border-bottom: 1px solid var(--border);
     padding: 8px 0;
   }
-  .cost-table tr:last-child { border-bottom: none; }
+  .cost-table tr:last-child,
+  .cmp-table tr:last-child { border-bottom: none; }
 
-  .cost-table td {
+  .cost-table td,
+  .cmp-table td {
     border-bottom: none;
     padding: 8px 18px;
   }
   /* The column heading moves into each cell, so a stacked row still says
      what its number means. */
-  .cost-table td::before {
+  .cost-table td::before,
+  .cmp-table td::before {
     content: attr(data-label);
     display: block;
     font-size: 0.72rem;
@@ -7939,6 +7984,15 @@ html[data-theme="dark"] .booking-container iframe {
   }
 
   .cost-trust-row { grid-template-columns: 1fr; gap: 12px; }
+
+  /* Stacked, the first cell already reads as the row's heading, so printing its column name
+     above it says the same thing twice. Keyed to the cell's position rather than to a literal
+     column name, so this keeps working when the columns change. */
+  .cmp-table td:first-child::before { display: none; }
+  .cmp-table td:first-child {
+    font-size: 1rem;
+    padding-top: 14px;
+  }
 }
 
 /* ── Archie on your phone (phone/), on top of the Account family above ──

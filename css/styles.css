@@ -352,7 +352,7 @@ h6 {
   color: var(--text-primary);
 }
 
-h1 { font-size: clamp(2.25rem, 5vw, 4rem); }
+h1 { font-size: clamp(2.6rem, 5vw, 4rem); }
 h2 { font-size: clamp(1.75rem, 3.5vw, 2.75rem); }
 h3 { font-size: clamp(1.125rem, 2vw, 1.5rem); }
 h4 { font-size: 1.125rem; }
@@ -9332,10 +9332,16 @@ html[data-theme="dark"] .booking-container iframe {
 /* Sized so the three beats land two-per-line at desktop ("Nothing to figure out. No code." /
    "Your time back, starting today.") instead of breaking mid-beat. A larger scale is only
    available to a shorter headline; this one is three sentences. */
-.hm-hero h1 { font-size: clamp(2.05rem, 4.4vw, 3.15rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0 auto; max-width: 900px; text-wrap: balance; }
+.hm-hero h1 { font-size: clamp(2.35rem, 4.4vw, 3.15rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0 auto; max-width: 900px; text-wrap: balance; }
 /* nowrap because balance otherwise breaks the accent phrase mid-way ("Your time /
    back"), which reads as a typo in a second colour. It fits on one line down to 320px. */
 .hm-hero h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }
+/* The nowrap phrase measures 290px at the 2.35rem floor, and a 320px screen only offers
+   272px between the paddings, so the floor steps back down below 360px. Every phone at
+   360px and up (390, 393, 414) keeps the larger minimum. */
+@media (max-width: 359px) {
+  .hm-hero h1 { font-size: 2.05rem; }
+}
 .hm-lede { font-size: 1.1rem; color: var(--text-secondary); max-width: 34em; margin: 20px auto 0; }
 /* The lede opens on the claim the headline earns (it is yours, and it keeps changing),
    so that sentence carries the primary ink and the rest of the paragraph explains. */
@@ -9545,7 +9551,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-node b { display: block; font-weight: 650; font-size: 0.95rem; }
 .hm-node span { font-size: 0.76rem; color: var(--text-secondary); }
 .hm-flow-arrow { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--accent); }
-.hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-blue-ink); }
+.hm-flow-arrow em { font-style: normal; font-size: 0.72rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
 .hm-aside { font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 48px; }
 .hm-aside b { color: var(--text-primary); font-weight: 600; }
 /* A quiet checklist, deliberately not cards: the two cards above it are the

@@ -4512,6 +4512,82 @@ html[data-theme="dark"] .availability-widget iframe {
   color: var(--accent-hover);
 }
 
+/* A card whose whole face is the link. The <h3><a> stays the only real link, so the heading
+   is still a heading and a screen reader still gets one target per card; the pseudo-element
+   just stretches that link's hit area over the card. The read-more line underneath is
+   decorative once the card itself is clickable, so it is a <span> rather than a second link
+   to the same place. */
+.resource-card--linked {
+  position: relative;
+  transition: border-color var(--transition), transform var(--transition);
+}
+.resource-card--linked h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+.resource-card--linked:hover { border-color: var(--accent-line); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .resource-card--linked:hover { transform: translateY(-2px); }
+}
+.resource-card--linked:focus-within {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.resource-card--linked h3 a:focus-visible { outline: none; }
+
+/* The wordmark standing in for the word "Archie" in a comparison headline: the mark and the
+   letters are one asset (assets/archie-text.svg), so it is set as an inline image sized in em
+   and sitting on the text baseline. Its colours are baked into the file and read on either
+   ground, which is why it needs no theme handling. */
+/* The mark and the "vs" ride together: text-wrap: balance was happy to put the wordmark alone
+   on the first line, which reads as a logo stranded above a headline rather than as its
+   opening word. */
+.cmp-vs { white-space: nowrap; }
+
+/* A comparison title is two names and a hinge, and setting all three in one colour makes the
+   reader parse the sentence to find out which side is which. Archie takes the ember it takes
+   everywhere as the subject; the other option keeps the heading's own ink; "vs" drops to a
+   small muted hinge so it reads as punctuation rather than as a word in the title. */
+.cmp-us { color: var(--accent-ink); }
+.cmp-them { color: var(--text-primary); }
+.cmp-v {
+  display: inline-block;
+  margin: 0 0.4em;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.66em;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  vertical-align: 0.08em;
+}
+
+.cmp-wordmark {
+  /* display, before anything else: the global reset at the top of this file sets
+     `img, svg { display: block }`, so without this the wordmark takes a line of its own and
+     the headline reads as a logo stranded above a sentence. */
+  display: inline-block;
+  /* 1.02em, not the ~0.7em a cap-height match would suggest: the asset's ink fills 93% of its
+     box and the "A" mark is taller than the letters, so matching cap heights leaves the word
+     visibly smaller than the type beside it. Sized by eye against the h1 at 1280px. */
+  height: 1.02em;
+  width: auto;
+  vertical-align: -0.16em;
+  margin-right: 0.02em;
+}
+
+/* The hub's router asks the reader's own question back to them, so those labels are the
+   headline of their row rather than a component header, and they take the top-layer ember. */
+.calm-list--ask .calm-list-label { color: var(--accent-ink); }
+
+/* Under a button row the availability line needs its own air, or it reads as a caption on the
+   buttons rather than as the page's own footnote. */
+.hm-micro--airy { margin-top: 28px; }
+
 /* ========================================
    23d. Article Page
    ======================================== */

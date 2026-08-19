@@ -1885,13 +1885,13 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 .feature-icon {
   width: 48px;
   height: 48px;
-  background: var(--accent-subtle);
+  background: var(--c-blue-subtle);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
-  color: var(--accent);
+  color: var(--c-blue);
 }
 
 .feature-icon svg {
@@ -1903,6 +1903,13 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   font-size: 1.0625rem;
   margin-bottom: 10px;
 }
+
+/* Kind-coded cards (the three kinds on the explainer and commission pages) take
+   their kind's ink on the title, matching the app: skills ember, personalities
+   plum, routines teal. */
+.feature-card--skill h3 { color: var(--accent-ink); }
+.feature-card--personality h3 { color: var(--c-plum-ink); }
+.feature-card--routine h3 { color: var(--c-teal-ink); }
 
 .feature-card p {
   font-size: 0.9rem;

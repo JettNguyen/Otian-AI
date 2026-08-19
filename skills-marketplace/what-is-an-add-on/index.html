@@ -177,6 +177,14 @@
               .core-port{fill:var(--accent)}
               .core-name{fill:currentColor;font-size:12.5px;font-weight:600;text-anchor:middle}
               .core-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              /* Kind colors, matching the app and the marketplace chips: skills ember,
+                 personalities plum, routines teal. */
+              .pick-node[data-node=personality] .core-card{stroke:var(--c-plum);fill:color-mix(in srgb, var(--c-plum) 8%, transparent)}
+              .pick-node[data-node=personality] .core-glyph{stroke:var(--c-plum)}
+              .pick-wire[data-wire=personality] .core-port{fill:var(--c-plum)}
+              .pick-node[data-node=routine] .core-card{stroke:var(--c-teal);fill:color-mix(in srgb, var(--c-teal) 8%, transparent)}
+              .pick-node[data-node=routine] .core-glyph{stroke:var(--c-teal)}
+              .pick-wire[data-wire=routine] .core-port{fill:var(--c-teal)}
             </style>
 
             <circle class="core-ring" cx="280" cy="165" r="56"/>
@@ -239,6 +247,12 @@
               .corem-port{fill:var(--accent)}
               .corem-name{fill:currentColor;font-size:13px;font-weight:600}
               .corem-sub{fill:currentColor;opacity:.6;font-size:9.5px}
+              .pick-node[data-node=personality] .corem-card{stroke:var(--c-plum);fill:color-mix(in srgb, var(--c-plum) 8%, transparent)}
+              .pick-node[data-node=personality] .corem-glyph{stroke:var(--c-plum)}
+              .pick-wire[data-wire=personality] .corem-port{fill:var(--c-plum)}
+              .pick-node[data-node=routine] .corem-card{stroke:var(--c-teal);fill:color-mix(in srgb, var(--c-teal) 8%, transparent)}
+              .pick-node[data-node=routine] .corem-glyph{stroke:var(--c-teal)}
+              .pick-wire[data-wire=routine] .corem-port{fill:var(--c-teal)}
             </style>
 
             <circle class="corem-ring" cx="170" cy="60" r="48"/>
@@ -332,6 +346,10 @@
               .tax-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
               .tax-name{fill:currentColor;font-size:12px;font-weight:600;text-anchor:middle}
               .tax-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .tax-kind-personality .tax-chip{stroke:var(--c-plum);fill:color-mix(in srgb, var(--c-plum) 6%, transparent)}
+              .tax-kind-personality .tax-glyph{stroke:var(--c-plum)}
+              .tax-kind-routine .tax-chip{stroke:var(--c-teal);fill:color-mix(in srgb, var(--c-teal) 6%, transparent)}
+              .tax-kind-routine .tax-glyph{stroke:var(--c-teal)}
             </style>
             <rect x="168" y="16" width="144" height="42" rx="21" fill="var(--accent)"/>
             <text x="240" y="43" text-anchor="middle" font-size="15" font-weight="700" fill="var(--text-on-accent)">Add-on</text>
@@ -340,16 +358,20 @@
             <path class="tax-glyph" d="M112 128 L118 135 L129 121"/>
             <text class="tax-name" x="120" y="158">Skill</text>
             <text class="tax-sub" x="120" y="172">a capability</text>
-            <rect class="tax-chip" x="188" y="108" width="104" height="72" rx="14"/>
-            <rect class="tax-glyph" x="228" y="120" width="24" height="16" rx="5"/>
-            <path class="tax-glyph" d="M235 136 L233 142 L240 136"/>
-            <text class="tax-name" x="240" y="158">Personality</text>
-            <text class="tax-sub" x="240" y="172">a voice &amp; tone</text>
-            <rect class="tax-chip" x="308" y="108" width="104" height="72" rx="14"/>
-            <circle class="tax-glyph" cx="360" cy="128" r="9"/>
-            <path class="tax-glyph" d="M360 128 L360 122 M360 128 L365 129"/>
-            <text class="tax-name" x="360" y="158">Routine</text>
-            <text class="tax-sub" x="360" y="172">a schedule</text>
+            <g class="tax-kind-personality">
+              <rect class="tax-chip" x="188" y="108" width="104" height="72" rx="14"/>
+              <rect class="tax-glyph" x="228" y="120" width="24" height="16" rx="5"/>
+              <path class="tax-glyph" d="M235 136 L233 142 L240 136"/>
+              <text class="tax-name" x="240" y="158">Personality</text>
+              <text class="tax-sub" x="240" y="172">a voice &amp; tone</text>
+            </g>
+            <g class="tax-kind-routine">
+              <rect class="tax-chip" x="308" y="108" width="104" height="72" rx="14"/>
+              <circle class="tax-glyph" cx="360" cy="128" r="9"/>
+              <path class="tax-glyph" d="M360 128 L360 122 M360 128 L365 129"/>
+              <text class="tax-name" x="360" y="158">Routine</text>
+              <text class="tax-sub" x="360" y="172">a schedule</text>
+            </g>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 300" role="img" aria-labelledby="taxm-t" xmlns="http://www.w3.org/2000/svg">
   <title id="taxm-t">One add-on, three kinds: Skill, Personality, and Routine</title>
@@ -359,6 +381,10 @@
     .taxm-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     .taxm-name{fill:currentColor;font-size:12px;font-weight:600;text-anchor:middle}
     .taxm-sub{fill:currentColor;opacity:.6;font-size:10.5px;text-anchor:middle}
+    .taxm-k2 .taxm-chip{stroke:var(--c-plum);fill:color-mix(in srgb, var(--c-plum) 6%, transparent)}
+    .taxm-k2 .taxm-glyph{stroke:var(--c-plum)}
+    .taxm-k3 .taxm-chip{stroke:var(--c-teal);fill:color-mix(in srgb, var(--c-teal) 6%, transparent)}
+    .taxm-k3 .taxm-glyph{stroke:var(--c-teal)}
     @media (prefers-reduced-motion:no-preference){
       .taxm-k{animation:taxmIn .8s cubic-bezier(.22,1,.36,1) both}
       .taxm-k1{animation-delay:.05s}.taxm-k2{animation-delay:.18s}.taxm-k3{animation-delay:.31s}
@@ -392,15 +418,15 @@
         </figure>
 
         <div class="mt-48 feature-grid fade-up delay-2">
-          <article class="feature-card">
+          <article class="feature-card feature-card--skill">
             <h3>Skills</h3>
             <p>Something new your agent can <em>do</em>: manage your calendar, sort your files, triage your inbox, research a question on the live web.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card feature-card--personality">
             <h3>Personalities</h3>
             <p>How your agent <em>talks</em> to you. Warm and chatty, or brief and to the point.</p>
           </article>
-          <article class="feature-card">
+          <article class="feature-card feature-card--routine">
             <h3>Routines</h3>
             <p>Something it does <em>on its own</em>, on a schedule: like a summary of your day, every morning.</p>
           </article>

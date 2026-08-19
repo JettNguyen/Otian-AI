@@ -20,9 +20,10 @@ say where a number comes from, it is not a fact and it does not go on the site.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| `$299` | Archie, billed yearly | Stripe subscription price. Repriced 2026-08-19 from $149; the app's own copy derives from `src/app/pricing.ts` in the Archie repo, which was moved in the same pass |
-| `$30` | Archie, billed monthly | Same. Also the measured cost of a heavy month with "Use this for every skill" on, which is a different claim that happens to land on the same number |
+| `$30` | Archie, billed monthly. **The headline price**: the month leads on every page and the year follows it as the cheaper option, so a card showing $299 first is out of step | Stripe subscription price. Repriced 2026-08-19 from $19 |
+| `$299` | Archie, billed yearly | Same, repriced from $149. The app's copy derives from `src/app/pricing.ts` in the Archie repo, moved in the same pass |
 | `$24.92` | What the yearly plan works out to per month | 299 / 12 |
+| `$30` | Also the measured cost of a heavy month with "Use this for every skill" on | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled. Same number as the monthly plan by coincidence, and a different claim |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
 | `$19` | The scheduled-reports share of the heavy AI month | Archie repo, `docs/cost-of-running-an-agent.md`. No longer a plan price: it was the monthly plan until 2026-08-19 |
 | `$100` | One guided session, one hour | Set by us. "$100/session" and "$100/hour" are the same claim |

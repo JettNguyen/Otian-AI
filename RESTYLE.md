@@ -40,13 +40,21 @@ section 43 with the same naming.
 
 One scale each, and a component is either on the scale or it is a documented exception:
 
-- **Color.** Only tokens, never new hexes in a page or component. The blue is structural,
-  not sprinkle: it appears in exactly three roles: assurance section labels
-  (`.section-label--trust`, on sections about custody, approvals, and guarantees), the
-  advisor ring, and the status/testing pill. Check glyphs are always ember, everywhere
-  (decided 2026-08-18: the homepage claim checks went back to ember), and everything
-  clickable and every action stays ember. If a use doesn't fit one of the three roles,
-  it doesn't get blue.
+- **Color.** Only tokens, never new hexes in a page or component. Two layers, split by
+  altitude (decided 2026-08-19, replacing the label-based split):
+  - **Ember is the top layer**: every eyebrow label, every button and CTA, headline
+    accents, and the primary subject of a diagram (Archie, the agent, the action).
+    `.section-label--trust` is gone; no label is ever blue.
+  - **Blue is the supporting layer**: text links inside body and subtext (`.hm-micro a`,
+    `.marketplace-text-link`, `.calm-note a`, `.price-card-link`), checkmarks and list
+    ticks (`.two-col-card-list`, `.plan-list`), small uppercase component headers
+    (`.calm-list-label`, `.price-card-label`, `.faq-group-title`), supporting icons
+    (`.feature-icon`, `.value-icon`, `.use-case-item svg`), diagram wayfinding (step
+    badges, wire captions, time dots), the nav's current-section underline, the advisor
+    ring, and the status pill. One deliberate exception: the six custody glyphs on the
+    homepage stay ember, because there they are the argument, not support.
+  - **Kind colors** appear on kind chips and anywhere the three kinds are compared:
+    skills ember, personalities plum, routines teal (matching the app).
 - **Radius.** `999px` for pills and tabs; `--radius` (12px) for cards, frames, nodes, and
   chips; `--radius-sm` (8px) for small controls. One exception, documented at its
   definition: chat bubbles are 16px with a 5px tail corner, because that is the messaging

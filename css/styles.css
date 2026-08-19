@@ -9431,7 +9431,9 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }
 .hm-lede { font-size: clamp(0.94rem, 0.87rem + 0.36vw, 1.1rem); color: var(--text-secondary); max-width: 34em; margin: 20px auto 0; }
 /* The lede opens on the claim the headline earns (it is yours, and it keeps changing),
-   so that sentence carries the primary ink and the rest of the paragraph explains. */
+   so that sentence carries the primary ink and the rest of the paragraph explains. It has
+   to name its subject before it claims anything about it: the headline never says what the
+   thing is, so a lede starting on "Yours" leaves the reader owning an unnamed it. */
 .hm-lede strong { color: var(--text-primary); font-weight: 600; }
 /* The three steps that are left after the download. Kept short on purpose: the length
    of this line is the claim, so it never grows into a sentence. */

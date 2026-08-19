@@ -119,6 +119,26 @@ check-facts, commit ("one page per commit" keeps review sane).
 - [ ] `admin/*`: internal; tokens only, skip the restyle.
 - [ ] `app-security/`: stays mirroring the Archie app's own palette, documented exception.
 
+### The comparison section (2026-08-19)
+
+`compare/` and its four pages are new rather than restyled, and they inherit the grammar
+above with one addition of their own. **A comparison page is a set of claims about somebody
+else's company**, so TRUST.md's "Competitor claims" section governs it: every third-party
+sentence needs a row there, every price is read from that company's own page and dated,
+`scripts/check-facts.py` fails when a date goes past 90 days, and each page carries a
+**"where the other option wins"** band plus a `Sources` fold. A comparison with no losses in
+it is an advertisement and reads as one.
+
+Band order, repeated on all four: hero (with the availability line and a visible checked
+date), the short answer, the side-by-side `.cmp-table`, where the alternative wins, a
+"worth saying" band that concedes the overlap, the `Sources` fold, the quiet CTA.
+
+Two components were added rather than duplicated. `.cmp-table` rides on `.cost-table`'s
+rules instead of becoming this file's third copy of the same stacked table, and its
+mobile treatment is keyed to `td:first-child` rather than to literal column names, which is
+what makes `.trust-table` unreusable. `.two-col-card-list--plain` swaps the blue tick for a
+dash: ticking a competitor's advantages in our own accent reads as sarcasm.
+
 ### Global, after the pages
 - [ ] Footer: same quiet grammar (it already alternates correctly; check column noise).
 - [ ] Nav: unchanged for now; any slimming is its own scripted change across all pages

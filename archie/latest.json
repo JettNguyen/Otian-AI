@@ -1,15 +1,19 @@
 {
-  "version": "0.1.1",
-  "notes": "notes",
-  "pub_date": "2026-07-27T04:22:46Z",
+  "version": "0.1.3",
+  "notes": "- You can try Archie before paying for it. A new account gets free credits that run an agent on\n  our AI account, or fourteen days on an AI account of your own.\n- Your agent answers on iMessage, on a Mac. That makes six chat apps, alongside Telegram,\n  Discord, Slack, Signal and Matrix.\n- You can talk to your agent in Archie's own window. It is one conversation, so a question you\n  start in your chat app can be finished here.\n- Send it a photo and it looks at the photo. It can make pictures too. Send a voice note instead\n  of typing, and have replies read out loud.\n- Your agent can use a website itself, the same way you would, when there is no direct\n  connection to it.\n- Outlook and Microsoft calendars work the way Google's do. Sign in once and your agent can read\n  the mail and the diary.\n- \"Remind me to pay the water bill tomorrow at 10am\" now sets a reminder.\n- Your agent can learn how you write from what you have already sent, and draft in your voice.\n- The store has shelves, packs and a cart, so a set of add-ons installs in one go.\n- Archie has a face. Ember is the app's own character, and every agent gets its own version of\n  him.\n- Dark mode is stone rather than brown, and every color in the app was measured against its\n  background so nothing is left faint.\n- On Windows: the media tools (transcription, video) install on Windows now, and this is the\n  first version Windows can update itself from.\n- Fixed: sixteen routines woke up every morning to work out whether it was their day. They run\n  on the day they mean now.\n- Fixed: a restart could overwrite your agent's first message, and a long reply stopped one\n  message short of the bottom of the window.",
+  "pub_date": "2026-08-19T23:30:28Z",
   "platforms": {
     "darwin-aarch64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0ZnUxUU1XSUVPQllYL2RZcHd3RXhPQkRnbkZjcHY1T1hpUjArUjZlUEdPY3RUcU00c2pJaExjY0RSclhmL1pPOGowejd5RTNhMWhCbUZubEo5QkZuOUFvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTI1OTkwCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKVmlZM3FQVDNaaW9OTjRTS3RXYlA2d2R4TVA5a0Njd0Q3TmxPWnZQYXRXdFRSOWxBTW9Pdm1MMzJCcDB5TWdaK1hab2cwbUxCcUNSc0VkdjhBWEovQWc9PQo=",
-      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.1/Archie_0.1.1_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0Zms2YmttYVBvc1Qvd2gxNU5uYlBzY2NUemRLZnMwdDdmYjZIS1NMNmZONU5XTVhQZ0hXOFFtamYwZVBNQmdOQUpLUnFjNUZEdE9WYTlIRlQxSEltRHdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg3MTgyMTUyCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKTzk0UmozNGgxSDViQUE5Z0JwQ1RtdzI3ODZlM2hpUXFqcHBiZ0FIU3c3eVNoQmFuUmhXT2lMVzBPekwvSVFwTUxjQlQwTUNTZGxTak1XT0NpSE8xREE9PQo=",
+      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.3/Archie_0.1.3_universal.app.tar.gz"
     },
     "darwin-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0ZnUxUU1XSUVPQllYL2RZcHd3RXhPQkRnbkZjcHY1T1hpUjArUjZlUEdPY3RUcU00c2pJaExjY0RSclhmL1pPOGowejd5RTNhMWhCbUZubEo5QkZuOUFvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTI1OTkwCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKVmlZM3FQVDNaaW9OTjRTS3RXYlA2d2R4TVA5a0Njd0Q3TmxPWnZQYXRXdFRSOWxBTW9Pdm1MMzJCcDB5TWdaK1hab2cwbUxCcUNSc0VkdjhBWEovQWc9PQo=",
-      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.1/Archie_0.1.1_universal.app.tar.gz"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0Zms2YmttYVBvc1Qvd2gxNU5uYlBzY2NUemRLZnMwdDdmYjZIS1NMNmZONU5XTVhQZ0hXOFFtamYwZVBNQmdOQUpLUnFjNUZEdE9WYTlIRlQxSEltRHdZPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg3MTgyMTUyCWZpbGU6QXJjaGllLmFwcC50YXIuZ3oKTzk0UmozNGgxSDViQUE5Z0JwQ1RtdzI3ODZlM2hpUXFqcHBiZ0FIU3c3eVNoQmFuUmhXT2lMVzBPekwvSVFwTUxjQlQwTUNTZGxTak1XT0NpSE8xREE9PQo=",
+      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.3/Archie_0.1.3_universal.app.tar.gz"
+    },
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVRZHAyY2hJWHA0Zmk5MFZONWZ1czM1MFBGL3V2UDRLaitSR3pxdlNoSmxPcW1vbHdRRnFUcncxbm9PKzdaNnFNV014Q0ZzbWxsMnZjeGlXc09DOE1YOERUeTZHWDFOV2dNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg3MTc5MDYzCWZpbGU6QXJjaGllXzAuMS4zX3g2NC1zZXR1cC5leGUKTVRCT1JTbW9yUlQvTlJnVWt4U2ZIRFFFQnJhdXoycXZCZnJnNE1mRnA0TndDcU4xUlFtUDNHbnc1ZWtDNmZUK0lFUVc3WXRHZDI5RnJ0cDNDd0xXRGc9PQo=",
+      "url": "https://github.com/JettNguyen/archie-releases/releases/download/v0.1.3/Archie_0.1.3_x64-setup.exe"
     }
   }
 }

@@ -120,17 +120,22 @@
   }
 
   function mountThemeToggles() {
-    // Main nav only; the toggle stays visible at every width, so the
-    // mobile drawer doesn't need (or get) its own copy.
-    var navInner = document.querySelector('.nav-inner');
-    if (navInner && !navInner.querySelector('.theme-toggle')) {
-      var desktopToggle = createThemeToggle('theme-toggle--nav');
-      var navCta = navInner.querySelector('.nav-cta');
-      if (navCta) {
-        navInner.insertBefore(desktopToggle, navCta);
-      } else {
-        navInner.appendChild(desktopToggle);
-      }
+    // A floating control rather than a nav item (2026-08-19). Changing theme is a
+    // once-a-session preference, and it was taking a permanent seat in the nav next
+    // to the things people actually came to click. Fixed to the corner, it follows
+    // the reader down the page and stays out of the way of the header.
+    if (document.querySelector('.theme-toggle--float')) return;
+    var floatToggle = createThemeToggle('theme-toggle--float');
+    document.body.appendChild(floatToggle);
+
+    // It hides while the footer is on screen, where it would otherwise sit on top of
+    // the legal links, and comes back the moment the reader scrolls up. Without
+    // IntersectionObserver it simply stays put, which is the safe failure.
+    var footer = document.querySelector('.footer');
+    if (footer && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        floatToggle.classList.toggle('is-tucked', entries[0].isIntersecting);
+      }, { rootMargin: '0px 0px -40px 0px' }).observe(footer);
     }
   }
 

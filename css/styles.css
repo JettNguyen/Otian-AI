@@ -736,6 +736,47 @@ p { color: var(--text-secondary); line-height: 1.8; }
   display: block;
 }
 
+/* The floating variant (nav.js mounts one per page, on the body). Bottom right,
+   above the safe-area inset so it clears the home indicator on a phone. Quiet by
+   default and fully opaque on hover or focus, because it is a preference, not an
+   action anyone came here to take. */
+.theme-toggle--float {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 60;
+  width: 40px;
+  min-height: 40px;
+  opacity: 0.72;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(7px);
+  transition: opacity var(--transition), transform var(--transition),
+              border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.theme-toggle--float:hover,
+.theme-toggle--float:focus-visible {
+  opacity: 1;
+}
+
+/* Tucked away while the footer is on screen: it would otherwise sit on the legal links. */
+.theme-toggle--float.is-tucked {
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  pointer-events: none;
+}
+
+.theme-toggle--float .theme-toggle-icon {
+  width: 18px;
+  height: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle--float { transition: opacity var(--transition); }
+  .theme-toggle--float.is-tucked { transform: none; }
+}
+
 /* Only the active theme's icon is present to the eye. */
 .theme-toggle-icon--moon { display: none; }
 html[data-theme="dark"] .theme-toggle-icon--sun { display: none; }
@@ -1490,14 +1531,21 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   padding: 0 24px;
 }
 
+/* The brand block, then one column per nav menu, in nav order. The footer is the
+   nav laid flat, so a reader who knows one knows the other. */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1.7fr 1.1fr;
-  gap: 48px;
+  grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
+  gap: 48px 36px;
   padding-bottom: 52px;
 }
 
+.footer-brand .footer-contact-email { margin-top: 20px; }
+
+/* An <a> since 2026-08-19 (the footer's Home link), so it needs to be a block to
+   keep its own margin. */
 .footer-logo {
+  display: inline-block;
   margin-bottom: 12px;
 }
 
@@ -1522,9 +1570,8 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .footer-nav-links {
-  /* Two balanced columns so the ~18 links stay half as tall. */
-  columns: 2;
-  column-gap: 36px;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer-nav-links a {
@@ -4578,6 +4625,7 @@ html.js .fade-up:not(.visible) {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* Brand across the top, the four menus two-by-two beneath it. */
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 36px;
@@ -4804,12 +4852,8 @@ html.js .fade-up:not(.visible) {
   }
 
   .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .footer-grid > :first-child {
-    grid-column: auto;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
   }
 
   .cta-banner {

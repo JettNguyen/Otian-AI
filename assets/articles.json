@@ -1,5 +1,19 @@
 [
   {
+    "title": "Say \"Maybe\" to Your AI and It Hears \"Do It.\"",
+    "summary": "You float a half-formed idea to your AI the way you would to a colleague. It doesn't wait for you to decide. It just does the thing.",
+    "author": "Jett Nguyen",
+    "date": "2026-08-19",
+    "readTime": "4 min read",
+    "category": "Team Stories",
+    "tags": [
+      "agents",
+      "intent",
+      "control"
+    ],
+    "url": "say-maybe-to-your-ai-and-it-hears-do-it/"
+  },
+  {
     "title": "You Trust Your AI Most on the Work You'll Check Least",
     "summary": "You check the AI hardest on work you could do yourself, and least on the work you handed off because you couldn't. That's backwards.",
     "author": "Jack Raney",

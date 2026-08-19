@@ -43,6 +43,13 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   saying 60 seconds on one page and 2 minutes on three others. Adding a figure to a page means
   adding it to FACTS.md first. If you cannot say where a number comes from, it is not a fact.
   FACTS.md also records the figures we deliberately do **not** publish and why.
+- **Bump the stylesheet version when you change `css/styles.css`.** Every page links it as
+  `css/styles.css?v=YYYYMMDD-N`. GitHub Pages serves the file with `max-age=14400`, so without
+  a new URL a returning visitor gets today's HTML against a stylesheet up to four hours old,
+  which looks exactly like the site is broken rather than cached, and a hard refresh does not
+  fix it because the cache is at the CDN edge, not in the browser. Changing the query string
+  is the only thing that reliably busts it. One scripted find-and-replace across every page.
+
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on".
 - Guided sessions are **$250/hour**, one hour per session; "$250/session" and "$250/hour" are

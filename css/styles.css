@@ -5525,6 +5525,16 @@ html[data-theme="dark"] .booking-container iframe {
   margin: 0 0 16px;
 }
 
+/* The terms attached to an offer, set as fine print: the conditions on the free credits, and
+   what canceling a plan actually does. Sits above the button rather than below it, so the three
+   cards' buttons still line up on the same baseline. */
+.plan-fine {
+  margin: 0 0 20px;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
 .plan-cta {
   margin-top: auto;
   align-self: flex-start;

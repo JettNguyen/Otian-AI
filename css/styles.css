@@ -8386,6 +8386,22 @@ html[data-theme="dark"] .booking-container iframe {
   margin-bottom: 10px;
 }
 
+/* A label may carry the app's own glyph for the part it names. The label stays blue,
+   because that is what a small uppercase component header is everywhere on this site;
+   the glyph is what takes the kind colour, so the three add-on kinds are legible as
+   kinds without three of five labels changing colour and demoting the other two. */
+.calm-list-label:has(svg) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.calm-list-label svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  color: var(--kind-ink, var(--c-blue-ink));
+}
+
 /* A hairline instead of a box: enough to separate, not enough to become an
    object. It divides the columns rather than wrapping each item, so the
    first column stays flush with the paragraph that introduces the list. */

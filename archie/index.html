@@ -571,32 +571,50 @@
           <p>Archie is modular. You start with a blank agent and build it up with the pieces you want.</p>
         </div>
 
-        <!-- Unboxed. These six are the parts list, one label and one sentence each, which is
-             exactly what .calm-list is for: six bordered cards with icons made the parts read
-             as six products rather than as the pieces of one. -->
+        <!-- Unboxed. These five are the parts list, one label and one sentence each, which is
+             exactly what .calm-list is for: bordered cards made the parts read as five products
+             rather than as the pieces of one. The glyphs are the ones the app itself uses in its
+             sidebar, so the part you read about here is the part you click there, and the three
+             that are also add-on kinds carry their kind colour (skill ember, personality plum,
+             routine teal). Knowledge Base and Connections stay blue: they are not kinds. -->
         <div class="calm-list calm-list--3 calm-list--ruled mt-48 fade-up delay-1">
           <div class="calm-list-item">
-            <span class="calm-list-label">Personality</span>
+            <span class="calm-list-label" data-kind="personality">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" /><path d="M9 9.5v.5" /><path d="M15 9.5v.5" /></svg>
+              Personality
+            </span>
             <p>How your agent talks to you. Warm and chatty or brief and to the point.</p>
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Skills</span>
+            <span class="calm-list-label" data-kind="skill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2" /><rect x="13.5" y="3.5" width="7" height="7" rx="2" /><rect x="3.5" y="13.5" width="7" height="7" rx="2" /><rect x="13.5" y="13.5" width="7" height="7" rx="2" /></svg>
+              Skills
+            </span>
             <p>The things it can do. Add new abilities in a click from the built-in marketplace: calendar management, inbox triage, research on the live web, and more.</p>
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Routines</span>
+            <span class="calm-list-label" data-kind="routine">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
+              Routines
+            </span>
             <p>Things it does on its own, on a schedule. A briefing every morning, a report every Friday, without being asked.</p>
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Knowledge Base</span>
+            <span class="calm-list-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5v13" /><path d="M3.5 18.5a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1H8a4 4 0 0 1 4 4 4 4 0 0 1 4-4h4.5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H15a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z" /></svg>
+              Knowledge Base
+            </span>
             <p>Give it your files (notes, PDFs, documents) so it answers from what <em>you</em> know, not just what it was trained on.</p>
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Connections</span>
+            <span class="calm-list-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v5" /><path d="M15 3v5" /><path d="M6 8h12v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6Z" /><path d="M12 19v2.5" /></svg>
+              Connections
+            </span>
             <p>Link the tools you already use, like Gmail, Outlook and your calendar, only ever when you say so.</p>
           </div>
         </div>
@@ -676,7 +694,7 @@
     <!-- ==============================
          Pricing
          ============================== -->
-    <section class="section section--tight" aria-labelledby="next-heading">
+    <section class="section section-alt section--tight" aria-labelledby="next-heading">
       <div class="container">
         <div class="section-header section-header--quiet">
           <span class="section-label fade-up">Before you start</span>
@@ -706,7 +724,7 @@
     <!-- ==============================
          Closing CTA
          ============================== -->
-    <section class="section section-alt" aria-labelledby="coming-heading">
+    <section class="section" aria-labelledby="coming-heading">
       <div class="container">
         <div class="archie-lockup fade-up">
           <img src="../assets/archie-text.svg" alt="Archie" />

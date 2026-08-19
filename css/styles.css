@@ -9591,14 +9591,30 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-shots-tab:hover { border-color: var(--accent); color: var(--text-primary); }
 .hm-shots-tab.is-on { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-.hm-shots-stage { max-width: 860px; margin: 0 auto; }
-.hm-shot { display: none; margin: 0; }
-.hm-shot.is-on { display: block; }
-.hm-shot-frame {
-  aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 16px; border: 1.5px dashed var(--border); border-radius: var(--radius);
-  background: var(--bg-card); color: var(--text-muted); font-size: 0.9rem; font-weight: 600;
-  box-shadow: var(--shadow-sm);
+/* The shots are cut out (transparent around the window), so the stage paints nothing
+   behind them: no frame, no card, no border. They are stacked in one grid cell and
+   crossfaded, which keeps the stage height steady instead of jumping between slides. */
+.hm-shots-stage { max-width: 860px; margin: 0 auto; display: grid; }
+.hm-shot {
+  grid-area: 1 / 1; margin: 0;
+  opacity: 0; visibility: hidden;
+  transform: scale(0.985);
+  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+              visibility 0s linear 420ms;
+}
+.hm-shot.is-on {
+  opacity: 1; visibility: visible; transform: none;
+  transition-delay: 0s, 0s, 0s;
+}
+.hm-shot img {
+  width: 100%; height: auto;
+  /* The window carries its own shadow in the artwork; this is the ground shadow that
+     sits it on the page, shaped to the cut-out rather than to a box. */
+  filter: drop-shadow(0 18px 34px rgba(20, 16, 12, 0.28));
+}
+@media (prefers-reduced-motion: reduce) {
+  .hm-shot { transition: opacity 1ms linear, visibility 0s linear 1ms; transform: none; }
 }
 
 /* Where your words go */

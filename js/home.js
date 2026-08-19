@@ -61,8 +61,10 @@
     measure();
   }
 
-  /* Screenshot carousel: advance every 5 seconds; a click holds the chosen
-     slide for 15 before autoplay resumes. No autoplay under reduced motion. */
+  /* Screenshot carousel: advance every 3 seconds (the slides are one app in three
+     states, so they read at a glance and a slow rotation just feels stalled); a click
+     holds the chosen slide for 12 before autoplay resumes. The crossfade itself is
+     CSS. No autoplay under reduced motion. */
   var shots = document.querySelectorAll('.hm-shot');
   var tabs = document.querySelectorAll('.hm-shots-tab');
   if (shots.length && tabs.length) {
@@ -81,11 +83,11 @@
     };
     var schedule = function (ms) {
       clearTimeout(timer);
-      timer = setTimeout(function () { show((cur() + 1) % shots.length); schedule(5000); }, ms);
+      timer = setTimeout(function () { show((cur() + 1) % shots.length); schedule(3000); }, ms);
     };
     tabs.forEach(function (b, i) {
-      b.addEventListener('click', function () { show(i); if (!still) schedule(15000); });
+      b.addEventListener('click', function () { show(i); if (!still) schedule(12000); });
     });
-    if (!still) schedule(5000);
+    if (!still) schedule(3000);
   }
 })();

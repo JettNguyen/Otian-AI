@@ -67,9 +67,9 @@ four counts: **142 verified add-ons, 38 apps and services, 7 AI companies, 5 cha
 page: "we check that it works as described and is safe to run before it goes live"). The
 connections band's note also counts **all 38** names the band shows.
 
-The **Personal** plan card on `archie/pricing/` prints two of the same counts in prose ("all 5
-chat apps", "any of 7 AI companies"), so a channel or a provider shipping now moves three pages,
-not two. Added 2026-08-18 with the plans grid.
+The **Personal / Small business** plan card on `archie/pricing/` prints two of the same counts in
+prose ("all 5 chat apps", "any of 7 AI companies"), so a channel or a provider shipping now moves
+three pages, not two. Added 2026-08-18 with the plans grid.
 
 **No "+" on any of them, deliberately.** A "+" turns a count into a claim that there is more
 than stated, and soft rounding is how a site ends up saying 18 curated skills in a stat bar and

@@ -266,8 +266,8 @@
               </div>
               <div class="acct-section-body" id="archie-body">Checking your purchases&hellip;</div>
               <div class="acct-row acct-hidden" id="archie-actions">
-                <button class="btn btn-primary btn-mini" data-plan="yearly">$149 a year</button>
-                <button class="btn btn-mini" data-plan="monthly">$19 a month</button>
+                <button class="btn btn-primary btn-mini" data-plan="yearly">$299 a year</button>
+                <button class="btn btn-mini" data-plan="monthly">$30 a month</button>
               </div>
             </div>
 
@@ -407,7 +407,7 @@
     // Payment Links the app uses (ARCHIE_STRIPE_CHECKOUT_URL_YEARLY / _MONTHLY in its .env).
     //
     // A link left as REPLACE_ME disables its button and says why, rather than sending someone to
-    // a dead page or, worse, to the retired one-time link: taking $149 once for a plan is a
+    // a dead page or, worse, to the retired one-time link: taking a year's money once for a plan is a
     // mistake nobody discovers until they look at a statement.
     const PLAN_LINKS = {
       yearly: "REPLACE_ME_YEARLY_PAYMENT_LINK",
@@ -554,7 +554,7 @@
         show("archie-actions", false);
       } else {
         setPill("archie-pill", "Not yet", false);
-        body.textContent = "Start a plan to use Archie: $149 a year, or $19 a month. A year costs $79 less than twelve months bought one at a time, and you can change or stop either one whenever you like.";
+        body.textContent = "Start a plan to use Archie: $299 a year, or $30 a month. A year costs $61 less than twelve months bought one at a time, and you can change or stop either one whenever you like.";
         show("archie-actions", true);
       }
     }

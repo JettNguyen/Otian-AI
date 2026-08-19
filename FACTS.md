@@ -12,7 +12,7 @@ fails on any money figure that does not appear below.
 Adding a figure to a page means adding it here first, with where it comes from. If you cannot
 say where a number comes from, it is not a fact and it does not go on the site.
 
-**Last reconciled against the pages:** 2026-08-17
+**Last reconciled against the pages:** 2026-08-19
 
 ---
 
@@ -20,10 +20,11 @@ say where a number comes from, it is not a fact and it does not go on the site.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| `$149` | Archie, billed yearly | Stripe subscription price; TRUST.md 2026-08-04 reconciliation |
-| `$19` | Archie, billed monthly | Same. Also appears as the scheduled-reports share of the heavy AI month |
-| `$12.42` | What the yearly plan works out to per month | 149 / 12 |
-| `$79` | What a year saves against paying monthly | (19 x 12) - 149 |
+| `$299` | Archie, billed yearly | Stripe subscription price. Repriced 2026-08-19 from $149; the app's own copy derives from `src/app/pricing.ts` in the Archie repo, which was moved in the same pass |
+| `$30` | Archie, billed monthly | Same. Also the measured cost of a heavy month with "Use this for every skill" on, which is a different claim that happens to land on the same number |
+| `$24.92` | What the yearly plan works out to per month | 299 / 12 |
+| `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
+| `$19` | The scheduled-reports share of the heavy AI month | Archie repo, `docs/cost-of-running-an-agent.md`. No longer a plan price: it was the monthly plan until 2026-08-19 |
 | `$100` | One guided session, one hour | Set by us. "$100/session" and "$100/hour" are the same claim |
 | `$4.40` | Light use: what the AI costs to run for a month | Archie repo, `docs/cost-of-running-an-agent.md` |
 | `$3.60` | The messages half of the light month | Same |
@@ -34,7 +35,6 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$118` | The messages half of the heavy month | Same |
 | `$165` | Heavy use on a busier schedule (320 runs) | Same |
 | `$140` | A heavy month on Balanced, before the quality checkbox | Archie repo, `docs/COST-MEASURED.md` |
-| `$30` | The same month with "Use this for every skill" on | Same. Measured 2026-08-10, not modelled |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | Example price badge on a paid add-on | Illustrative, marketplace UI only |
 | `$0` | Admin balance placeholder | Not customer-facing copy |

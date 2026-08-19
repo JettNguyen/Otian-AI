@@ -114,7 +114,7 @@ them, and we never take a cut of either.
 
 | | Price | |
 |---|---|---|
-| **The app** | **$149** a year, or **$19** a month | A year is $79 less than twelve months bought one at a time. Change or stop it any time. |
+| **The app** | **$299** a year, or **$30** a month | A year is $61 less than twelve months bought one at a time. Change or stop it any time. |
 | **Add-ons** | **Free** | Every add-on in the catalog is `price_cents: 0`. The paid path exists (`require_owned_if_paid`) and a purchase would be permanent, but nothing uses it today. |
 | **The AI itself** | **Pay as you go** | Your own account with Anthropic, OpenAI, Google, Groq or xAI. It bills you directly. |
 

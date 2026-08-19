@@ -243,9 +243,66 @@
     </section>
 
     <!-- ==============================
+         Guided sessions. First band on the page: this is the guided-setup page, so the
+         three steps and what they cost are what the reader came for, not the last thing
+         they scroll to.
+         ============================== -->
+    <section class="section" aria-labelledby="guided-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Guided sessions</span>
+          <h2 id="guided-heading" class="fade-up">Rather do it together?</h2>
+          <p>Most tools hand you a download and wish you luck. We set your first agent up with you.</p>
+        </div>
+
+        <!-- The chips under each step are objection answers, not descriptions. A step title is
+             generic on its own ("We Set It Up With You" could mean anything and could cost
+             anything); three words underneath saying how long, what it costs, and what you are
+             not committing to is what makes the row read as low-risk instead of vague. Each one
+             is a fact stated elsewhere on this page, put where the hesitation actually happens. -->
+        <div class="steps-row">
+          <div class="step-item fade-up delay-1">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>Tell us what you need</h3>
+            <p>Fill out the short intake form. The discovery call is free.</p>
+            <ul class="step-chips">
+              <li class="step-chip">About 5 minutes</li>
+              <li class="step-chip">Nothing to install yet</li>
+              <li class="step-chip">Free, no card</li>
+            </ul>
+          </div>
+          <div class="step-item fade-up delay-2">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>We set it up with you</h3>
+            <p>Over Zoom, on your own computer. We teach you every step, so you can run it (and change it) yourself.</p>
+            <ul class="step-chips">
+              <li class="step-chip">1 hour a session</li>
+              <li class="step-chip">$100, told up front</li>
+              <li class="step-chip">On your machine, not ours</li>
+            </ul>
+          </div>
+          <div class="step-item fade-up delay-3">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>Your agent gets to work</h3>
+            <p>Delegate tasks and get your time back. Archie writes the draft; sending it stays with you.</p>
+            <ul class="step-chips">
+              <li class="step-chip">Change it yourself</li>
+              <li class="step-chip">No session needed to keep going</li>
+              <li class="step-chip">Stop your plan any time</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="text-center mt-48">
+          <a href="../how-it-works/" class="btn btn-secondary fade-up delay-4">See the Full Process &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
          Day to Day
          ============================== -->
-    <section class="section" aria-labelledby="uses-heading">
+    <section class="section section-alt" aria-labelledby="uses-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">What it takes on</span>
@@ -510,7 +567,7 @@
     <!-- ==============================
          Archie Is How You Get One
          ============================== -->
-    <section class="section section-alt" aria-labelledby="archie-heading">
+    <section class="section" aria-labelledby="archie-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The product</span>
@@ -528,58 +585,6 @@
     <!-- ==============================
          The Guided Door
          ============================== -->
-    <section class="section" aria-labelledby="guided-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Guided sessions</span>
-          <h2 id="guided-heading" class="fade-up">Rather do it together?</h2>
-          <p>Most tools hand you a download and wish you luck. We set your first agent up with you.</p>
-        </div>
-
-        <!-- The chips under each step are objection answers, not descriptions. A step title is
-             generic on its own ("We Set It Up With You" could mean anything and could cost
-             anything); three words underneath saying how long, what it costs, and what you are
-             not committing to is what makes the row read as low-risk instead of vague. Each one
-             is a fact stated elsewhere on this page, put where the hesitation actually happens. -->
-        <div class="steps-row">
-          <div class="step-item fade-up delay-1">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3>Tell us what you need</h3>
-            <p>Fill out the short intake form. The discovery call is free.</p>
-            <ul class="step-chips">
-              <li class="step-chip">About 5 minutes</li>
-              <li class="step-chip">Nothing to install yet</li>
-              <li class="step-chip">Free, no card</li>
-            </ul>
-          </div>
-          <div class="step-item fade-up delay-2">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3>We set it up with you</h3>
-            <p>Over Zoom, on your own computer. We teach you every step, so you can run it (and change it) yourself.</p>
-            <ul class="step-chips">
-              <li class="step-chip">1 hour a session</li>
-              <li class="step-chip">$100, told up front</li>
-              <li class="step-chip">On your machine, not ours</li>
-            </ul>
-          </div>
-          <div class="step-item fade-up delay-3">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3>Your agent gets to work</h3>
-            <p>Delegate tasks and get your time back. Archie writes the draft; sending it stays with you.</p>
-            <ul class="step-chips">
-              <li class="step-chip">Change it yourself</li>
-              <li class="step-chip">No session needed to keep going</li>
-              <li class="step-chip">Stop your plan any time</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="text-center mt-48">
-          <a href="../how-it-works/" class="btn btn-secondary fade-up delay-4">See the Full Process &rarr;</a>
-        </div>
-      </div>
-    </section>
-
     <!-- ==============================
          Pricing
          ============================== -->
@@ -595,7 +600,7 @@
             $100 a session. Each session runs an hour. The rate never goes up because your setup is complicated, but a bigger setup can take more than one session. We&rsquo;ll tell you how many on the free call, before you book anything.
           </p>
           <p>
-            Archie itself is $149 a year or $19 a month when it ships, a separate cost from your sessions.
+            Archie itself is $299 a year or $30 a month when it ships, a separate cost from your sessions.
           </p>
           <p>
             The AI itself bills you directly, never through us. While we build together that&rsquo;s a standard subscription like Claude Pro, around $20 a month. After that it&rsquo;s your own pay-as-you-go account. <a href="../archie/pricing/#ai-cost">What that runs to</a> is on the pricing page.

@@ -359,6 +359,23 @@ h4 { font-size: 1.125rem; }
 
 p { color: var(--text-secondary); line-height: 1.8; }
 
+/* Line breaking. The browser's default fills each line to the measure and leaves
+   whatever is left on the last one, which is invisible in a left-aligned column and
+   glaring in a centered one: a three-line block ends on a single word and the whole
+   thing looks lopsided. `balance` evens the line lengths (Chromium applies it up to
+   six lines, then falls back); `pretty` is the cheaper cousin that only refuses to
+   leave an orphan, so it is safe on long body copy where balance would give up.
+   Headings are always short enough to balance. */
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
+
+/* Centered prose gets the stronger treatment, band by band. */
+.hm-wrap p, .hm-hero p, .hm-cta p, .page-hero p, .cta-banner p, .text-center p,
+.hm-lede, .hm-micro, .hm-hero-micro, .hero-subtitle, .calm-note--center,
+.works-with-note, .acct-lead, .acct-foot-note, .booking-note,
+.marketplace-split-note, .demo-player-caption, .vg-caption,
+.explain-figure figcaption { text-wrap: balance; }
+
 /* ========================================
    4. Layout Utilities
    ======================================== */

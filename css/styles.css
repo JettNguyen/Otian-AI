@@ -1934,7 +1934,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 .use-case-item svg {
   width: 20px;
   height: 20px;
-  color: var(--accent);
+  color: var(--c-blue);
   flex-shrink: 0;
 }
 
@@ -9627,28 +9627,36 @@ html[data-theme="dark"] .booking-container iframe {
    sway would be a character swaying; being tickled is a squirm, so the steps are deliberately
    uneven in both time and angle. Nothing here is on a regular beat, which is the whole difference
    between squirming and rocking. The eyes go to the happy arcs at the same time, because the
-   giggle is what says he is enjoying it rather than being shaken. */
-.ember.is-hovered .anim { animation: ember-tickle 0.62s ease-in-out infinite; }
+   giggle is what says he is enjoying it rather than being shaken.
+
+   **Small on purpose, and it was not at first.** The first version traveled 4% and rotated 5deg at
+   0.62s, which reads as a body being shaken rather than one squirming: past about 2 degrees the
+   head swings far enough that the eyes stop being what you are watching. Roughly a third of the
+   travel over half again the time keeps the unevenness and lets the happy arcs read, which are the
+   part that says he likes it. Same numbers as the app's `archieEmberTickle` in globals.css. */
+.ember.is-hovered .anim { animation: ember-tickle 0.9s ease-in-out infinite; }
 .ember.is-hovered .pill,
 .ember.is-hovered .glint { opacity: 0; }
 .ember.is-hovered .happy { opacity: 1; }
 @keyframes ember-tickle {
   0%   { transform: translate(0, 0) rotate(0deg) scale(1, 1); }
-  12%  { transform: translate(-2%, -1%) rotate(-4deg) scale(1.03, 0.97); }
-  27%  { transform: translate(2%, -3%) rotate(3.5deg) scale(0.98, 1.03); }
-  38%  { transform: translate(-1%, -1%) rotate(-2deg) scale(1.02, 0.98); }
-  55%  { transform: translate(3%, -4%) rotate(5deg) scale(1.01, 1.01); }
-  68%  { transform: translate(-2%, -2%) rotate(-3deg) scale(1.03, 0.97); }
-  84%  { transform: translate(1%, -1%) rotate(2deg) scale(0.99, 1.02); }
+  14%  { transform: translate(-0.8%, -0.4%) rotate(-1.5deg) scale(1.012, 0.99); }
+  30%  { transform: translate(1%, -1.1%) rotate(1.3deg) scale(0.993, 1.01); }
+  44%  { transform: translate(-0.5%, -0.3%) rotate(-0.7deg) scale(1.008, 0.994); }
+  61%  { transform: translate(1.2%, -1.5%) rotate(1.9deg) scale(1.004, 1.004); }
+  76%  { transform: translate(-0.9%, -0.7%) rotate(-1.1deg) scale(1.011, 0.991); }
+  90%  { transform: translate(0.5%, -0.4%) rotate(0.7deg) scale(0.996, 1.007); }
   100% { transform: translate(0, 0) rotate(0deg) scale(1, 1); }
 }
 
-/* Little things flying off him, spawned by ember.js and removed when they land. Positioned from
-   his middle rather than the element's, since the body sits slightly above centre in its box. */
+/* Little things flying off him, spawned by ember.js and removed when they land. Only the hop
+   throws any, and only four of them: see the `sparks` field on ACTS in ember.js for why every
+   reaction having a burst meant none of them read as one. Positioned from his own middle, which
+   with the viewBox offset is very near the element's. */
 .ember-spark {
   position: absolute;
   left: 50%;
-  top: 46%;
+  top: 50%;
   width: 6px;
   height: 6px;
   border-radius: 2px;
@@ -9667,9 +9675,10 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .ember svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .ember .anim,
-/* 163, not 176: `transform-box: view-box` measures from the view box's top-left corner, which is
-   at y=13 (the viewBox is offset so Ember sits centered with or without a hat). Still his feet. */
-.ember .lean { transform-box: view-box; transform-origin: 100px 163px; }
+/* 170, not 176: `transform-box: view-box` measures from the view box's top-left corner, which is
+   at y=6 (the viewBox is offset so Ember stands low enough in his box, hat or no hat). Still the
+   ground between his feet, and moving that viewBox without moving this tilts him about his shins. */
+.ember .lean { transform-box: view-box; transform-origin: 100px 170px; }
 .ember .eye { will-change: transform; }
 .ember .eye-open { transform-box: fill-box; transform-origin: 50% 50%; }
 

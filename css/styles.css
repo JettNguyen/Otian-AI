@@ -4675,6 +4675,24 @@ html[data-theme="dark"] .availability-widget iframe {
   margin-top: 56px;
 }
 
+/* The trail up, in two halves that never both show. The bar below is a wide-screen device: it
+   is absolutely positioned under the fixed nav and hides under 768px, which for a long time
+   left every deep page on a phone with no way back up except the browser's own button. The
+   .page-back link is that missing half, and it appears exactly where the bar does not. */
+.page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+.page-back:hover { color: var(--text-primary); }
+.page-back svg { width: 15px; height: 15px; flex-shrink: 0; }
+@media (min-width: 768px) { .page-back { display: none; } }
+
 .breadcrumb-bar {
   display: none;
 }

@@ -144,7 +144,11 @@
     var hue = HUES[look.hue] || HUES.terracotta;
     var uid = "e" + (uidCounter += 1);
     var eyes = EYES[look.eyes] || EYES.pill;
-    return '<svg viewBox="0 13 200 200" aria-hidden="true" focusable="false">' +
+    /* The viewBox starts at y=6, not y=0: that is the whole of Ember's framing, and it is a window
+       offset rather than moved coordinates so every part above stays positioned against the body.
+       `.ember`'s transform-origin in styles.css is measured from this corner, so the two move
+       together (this y plus that origin's 170 is 176, the ground between his feet). */
+    return '<svg viewBox="0 6 200 200" aria-hidden="true" focusable="false">' +
       '<defs><linearGradient id="ember-' + uid + '" x1="0" y1="0.18" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
       '<stop offset="0.55" stop-color="' + hue.mid + '"/>' +
@@ -184,13 +188,19 @@
   /* What he might do when pressed. Random rather than a cycle, because a cycle is learnable in
      three clicks and then it is a list rather than a reaction; and never the same one twice
      running, because a genuine random repeat reads as the click not having registered. Durations
-     match the keyframes in styles.css, so the class comes off as the animation ends. */
+     match the keyframes in styles.css, so the class comes off as the animation ends.
+
+     `sparks` is per act, and it is zero for four of the five. Throwing them on every reaction is
+     what the first version did, and it made the sparks the reaction: the same burst after a nod as
+     after a leap says the page has one exclamation mark and uses it for everything. Only the hop
+     leaves the ground hard enough to shake something loose, so only the hop does, and a spark
+     becomes the rare one in five rather than the thing you stop noticing. */
   var ACTS = [
-    { cls: "st-act-hop", ms: 900 },
-    { cls: "st-act-wiggle", ms: 700 },
-    { cls: "st-act-spin", ms: 850 },
-    { cls: "st-act-squish", ms: 600 },
-    { cls: "st-act-nod", ms: 750 }
+    { cls: "st-act-hop", ms: 900, sparks: 4 },
+    { cls: "st-act-wiggle", ms: 700, sparks: 0 },
+    { cls: "st-act-spin", ms: 850, sparks: 0 },
+    { cls: "st-act-squish", ms: 600, sparks: 0 },
+    { cls: "st-act-nod", ms: 750, sparks: 0 }
   ];
 
   /* The app's own celebration palette, so a spark off Ember here is the same color as a spark off
@@ -200,7 +210,7 @@
   /* Little things flying off him. Appended to the host and removed when they land, so nothing
      accumulates on a page somebody leaves open. Skipped entirely under reduced motion. */
   function sparks(host, count) {
-    if (REDUCED) return;
+    if (REDUCED || !count) return;
     for (var i = 0; i < count; i++) {
       var s = document.createElement("span");
       s.className = "ember-spark";
@@ -224,7 +234,7 @@
     var act = ACTS[i];
     rig.acting = true;
     rig.svg.classList.add(act.cls);
-    sparks(rig.host, 7);
+    sparks(rig.host, act.sparks);
     setTimeout(function () {
       rig.svg.classList.remove(act.cls);
       rig.acting = false;
@@ -384,7 +394,6 @@
       seen: false,
       acting: false,
       lastAct: -1,
-      giggle: 0,
       rect: null, rectAt: -1e9
     };
     for (var i = 0; i < eyeEls.length; i++) {
@@ -414,19 +423,16 @@
     start();
 
     /* Clicking him is the one interaction people try, so it answers, and answers differently
-       each time. Hovering is answered by the sway in styles.css, which needs a class rather than
-       `:hover` so it can be kept off under reduced motion in one place. */
+       each time. Hovering is answered by the squirm in styles.css, which needs a class rather than
+       `:hover` so it can be kept off under reduced motion in one place.
+
+       No sparks on hover, and there were: a burst every 420ms for as long as the pointer sat on
+       him, which on a page you read with the cursor parked anywhere near him is a permanent
+       fountain. Being tickled shows in his face and his body, which is where a person would look
+       for it; the sparks were the page shouting over both of them. */
     host.addEventListener("click", function () { actOnce(rig); });
-    host.addEventListener("pointerenter", function () {
-      host.classList.add("is-hovered");
-      if (rig.giggle) return;
-      rig.giggle = setInterval(function () { sparks(host, 2); }, 420);
-    });
-    host.addEventListener("pointerleave", function () {
-      host.classList.remove("is-hovered");
-      clearInterval(rig.giggle);
-      rig.giggle = 0;
-    });
+    host.addEventListener("pointerenter", function () { host.classList.add("is-hovered"); });
+    host.addEventListener("pointerleave", function () { host.classList.remove("is-hovered"); });
     return {
       element: host,
       set: function (state) { setState(rig, state); },

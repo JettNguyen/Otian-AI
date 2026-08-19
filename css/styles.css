@@ -5391,7 +5391,11 @@ html[data-theme="dark"] .booking-container iframe {
    have, and /testimonials/ says so on its own page. */
 .plan-card--lead { border-color: var(--accent-line); }
 
+/* baseline, not the inherited centre: the shared --words rule centres its flex children, which
+   floats the small qualifier halfway up the big word. Next to it, "$149 a year" sets the
+   qualifier on the baseline, and two cards in a row cannot hang the same phrase differently. */
 .plan-card .price-card-amount--words {
+  align-items: baseline;
   justify-content: flex-start;
   min-height: 0;
   margin-bottom: 14px;

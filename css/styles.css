@@ -2633,6 +2633,60 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   line-height: 1.85;
 }
 
+/* Fold: the accordion's look on a native <details>, for a page that needs one collapsed
+   block rather than a list of questions. No script to duplicate, and the browser's own
+   find-in-page opens it. Use it where the reasoning behind a figure is worth keeping in
+   full but should not stand between the reader and the figure itself: the receipts are
+   still on the page, still complete, just not in the way. */
+.fold {
+  max-width: 940px;
+  margin: 40px auto 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.fold[open] { border-color: rgba(224, 138, 91, 0.3); }
+.fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 28px;
+  min-height: 44px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: background var(--transition);
+}
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary:hover { background: var(--surface-soft); }
+.fold > summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform var(--transition), border-color var(--transition);
+}
+.fold[open] > summary::after {
+  transform: translateY(2px) rotate(225deg);
+  border-color: var(--accent);
+}
+.fold-body { padding: 2px 28px 28px; }
+.fold-body > :first-child { margin-top: 0; }
+
+@media (max-width: 640px) {
+  .fold > summary { padding: 18px 20px; }
+  .fold-body { padding: 2px 20px 22px; }
+}
+
 /* FAQ section groups (subheadings) */
 .faq-group {
   max-width: 740px;
@@ -5736,8 +5790,12 @@ html[data-theme="dark"] .booking-container iframe {
   display: none;
 }
 
+/* The caption belongs to the diagram above it, so it sits close to the drawing and keeps
+   a clear gap below: without the second margin it lands as near the next block as it does
+   the figure it describes, and reads as that block's opening line. */
 .explain-figure figcaption {
   margin-top: 18px;
+  margin-bottom: 40px;
   text-align: center;
   font-size: 0.875rem;
   color: var(--text-muted);

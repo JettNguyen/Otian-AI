@@ -334,16 +334,16 @@
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Our Account</span>
             <div class="price-card-amount price-card-amount--words">Free credits<span>to start</span></div>
-            <p>A new install arrives with a gift of AI usage that we pay for, so your agent works before you have connected anything of your own. It runs on Claude, because that is the account the credits spend from.</p>
-            <p><strong>We are paying, so we are in the path.</strong> While you are on the credits, your messages pass through our server on the way to Anthropic. We keep no copy of them, and the moment you connect an AI account of your own it stops and nothing of yours touches us again.</p>
+            <p>A new install arrives with a gift of AI usage we pay for, so your agent works before you connect anything of your own. It runs on Claude, the account the credits spend from.</p>
+            <p><strong>We are paying, so we are in the path.</strong> While you are on the credits, your messages pass through our server on the way to Anthropic. We keep no copy of them, and the moment you connect an AI account of your own it stops.</p>
             <p>The credits are given per account, need a confirmed email address, are limited per computer, and can be refused.</p>
           </article>
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Your Own Account</span>
             <div class="price-card-amount">14 days<span>on your key</span></div>
-            <p>If the credits have already been claimed on your computer, there is still a full trial. Connect an AI account of your own and Archie runs for a fortnight, on the same terms as everyone else.</p>
-            <p><strong>Your key is paying, so we are not in the path at all.</strong> Your conversations go straight to the AI company you picked, exactly as they do for a paying customer. We are never in the middle of them.</p>
-            <p>You are covering your own AI bill for those two weeks, which is the reason we can offer them. On the usage in the next section, that is a few dollars.</p>
+            <p>If the credits have already been claimed on your computer, there is still a full trial. Connect an AI account of your own and Archie runs for a fortnight.</p>
+            <p><strong>Your key is paying, so we are not in the path at all.</strong> Your conversations go straight to the AI company you picked. We are never in the middle of them.</p>
+            <p>You are covering your own AI bill for those two weeks, which is why we can offer them. On the usage in the next section, that is a few dollars.</p>
           </article>
         </div>
 
@@ -404,56 +404,67 @@
               </tr>
             </tbody>
           </table>
-          <p class="cost-table-note">Modelled from measured component sizes and the AI companies&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month. In August 2026 we checked the light row against a real agent, message by message, and it held: measured, a message on a lightly connected agent costs between 1.2&cent; and 2.0&cent;, depending on whether you are mid-conversation or starting one.</p>
+          <p class="cost-table-note">Modelled from measured component sizes and the AI companies&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month. In August 2026 we checked the light row against a real agent, message by message, and it held.</p>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one.</p>
-        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> An agent we built with twelve add-ons, keeping the routines they arrived with, fired its schedule about 320 times a month, and that came to about a third of its entire bill, spent before anybody typed anything. The heavy row assumes a lighter schedule; with 320 runs it lands nearer $165.</p>
-        <!-- Unboxed. These four are the mechanics behind the table above, and four bordered
-             cards of 80-word prose read as four more things to get through before you learn
-             what it costs. The numbers are the claim; these are the reasoning. -->
-        <div class="calm-list calm-list--ruled mt-48 fade-up delay-2">
-          <div class="calm-list-item">
-            <span class="calm-list-label">It&rsquo;s the passes that add up</span>
-            <p>Every reply starts by handing your agent a fresh briefing: everything it needs to know about you and the job. A question it can answer from that briefing takes one pass; one that has to look things up takes three or four, each re-sending the whole briefing. Passes multiply the bill, not the length of your question.</p>
-          </div>
+        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts what you send; the total also covers what your agent does on its own schedule.</p>
+        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> One agent we built fired its schedule about 320 times a month, roughly a third of its whole bill, spent before anybody typed anything. At that rate the heavy row lands nearer $165.</p>
 
-          <div class="calm-list-item">
-            <span class="calm-list-label">Cost follows what you connect</span>
-            <p>Every service you connect has to be described in that briefing. A calendar-only agent carries a short one; wire in an inbox, a to-do list and a few more services, and the identical question costs roughly 2.8 times as much. Add-ons work the same way. Worth knowing before you connect everything you own.</p>
-          </div>
+        <!-- Folded, not cut. The table is the claim and these are the reasoning behind it,
+             which used to sit between the reader and the number: eight blocks of prose to
+             get through after the answer had already been given. Every word is still here,
+             and the browser's find-in-page still reaches it. -->
+        <details class="fold fade-up delay-2">
+          <summary>Why it costs what it costs, and how we know</summary>
+          <div class="fold-body">
+            <div class="calm-list calm-list--ruled">
+              <div class="calm-list-item">
+                <span class="calm-list-label">It&rsquo;s the passes that add up</span>
+                <p>Every reply hands your agent a fresh briefing. Answering from it takes one pass; looking something up takes three or four, each re-sending the whole briefing. Passes multiply the bill, not the length of your question.</p>
+              </div>
 
-          <div class="calm-list-item">
-            <span class="calm-list-label">Response quality is the dial you hold</span>
-            <p>Every figure above is Balanced, the default. <strong>An add-on can pick its own quality and ignore the dial</strong>, and most useful ones do: moving the dial alone changed our bill by 4% to 7%. The checkbox under it, &ldquo;Use this for every skill&rdquo;, overrides them, and that is where the saving lives: forced Economy costs <strong>about a fifth</strong> of Balanced, taking a heavy month from roughly $140 to roughly $30, traded against how good the answers are.</p>
-          </div>
+              <div class="calm-list-item">
+                <span class="calm-list-label">Cost follows what you connect</span>
+                <p>Every service you connect is described in that briefing. Wire in an inbox, a to-do list and a few more, and the identical question costs roughly 2.8 times as much. Add-ons work the same way.</p>
+              </div>
 
-          <div class="calm-list-item">
-            <span class="calm-list-label">Archie takes the cheap route when there is one</span>
-            <p>The AI companies let you park a copy of the briefing on their side, and reading that copy costs about a tenth of the usual price. Archie does this on every agent with nothing to set up. Measured over a real conversation, about three quarters of everything the agent read came from a parked copy.</p>
-          </div>
-        </div>
+              <div class="calm-list-item">
+                <span class="calm-list-label">Response quality is the dial you hold</span>
+                <p>Every figure above is Balanced, the default. <strong>An add-on can pick its own quality and ignore the dial</strong>, and most useful ones do. The checkbox under it, &ldquo;Use this for every skill&rdquo;, overrides them, and that is where the saving lives: forced Economy costs <strong>about a fifth</strong> of Balanced, roughly $30 instead of $140 on a heavy month, traded against how good the answers are.</p>
+              </div>
 
-        <div class="cost-trust fade-up delay-2">
-          <div class="cost-trust-row">
-            <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The briefing sizes, the published prices, the passes an ordinary message takes, and all three rows: we ran real agents through real conversations and read the bill for every call. Every published total landed inside what we measured. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
-          </div>
-          <div class="cost-trust-row">
-            <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>How much the model works a problem through before answering, which bills at 5x the rate of reading. Measured, that is between a seventh and a quarter of the bill at the default setting; set it to think harder and it goes up.</p>
-          </div>
-          <div class="cost-trust-row">
-            <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-            <p>How you space your messages out, which turned out to be the biggest single number in all of it. A message sent mid-conversation reuses the parked briefing; one sent hours later cannot, and <strong>the second kind costs about six times the first</strong>. The figures above assume a reasonable mix of the two.</p>
-          </div>
-          <div class="cost-trust-row">
-            <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The moderate and heavy rows: we built agents at both shapes, connected a real calendar and inbox, and ran them. Both totals landed inside what we measured. The one assumption left is how many messages a day a real person sends.</p>
-          </div>
-        </div>
+              <div class="calm-list-item">
+                <span class="calm-list-label">Archie takes the cheap route when there is one</span>
+                <p>The AI companies let you park a copy of the briefing on their side, where reading it costs about a tenth of the usual price. Archie does this on every agent with nothing to set up. Measured, about three quarters of what an agent read came from a parked copy.</p>
+              </div>
+            </div>
 
-        <p class="cost-note cost-note--lead">None of this asks you to take our word for it. <strong>Archie keeps its own running total</strong> on the Account screen, this month and all time, by AI company and by agent. It&rsquo;s an estimate from a price table inside the app, not the AI company&rsquo;s invoice, and it says so on screen. The real bill is on the AI company&rsquo;s dashboard, where you can also set a hard spending cap.</p>
+            <div class="cost-trust">
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+                <p>The briefing sizes, the published prices, the passes a message takes, and all three rows: we ran real agents and read the bill for every call. Every total landed inside what we measured. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
+              </div>
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+                <p>A message on a lightly connected agent costs between 1.2&cent; and 2.0&cent;, depending on whether you are mid-conversation or starting one.</p>
+              </div>
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+                <p>How much the model works a problem through before answering, which bills at 5x the rate of reading. That is a seventh to a quarter of the bill at the default setting; set it to think harder and it goes up.</p>
+              </div>
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
+                <p>How you space your messages out, the biggest single number in all of it. A message sent mid-conversation reuses the parked briefing; one sent hours later cannot, and <strong>the second kind costs about six times the first</strong>. The figures above assume a reasonable mix.</p>
+              </div>
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
+                <p>The moderate and heavy rows: we built agents at both shapes, connected a real calendar and inbox, and ran them. Both totals landed inside what we measured. The one assumption left is how many messages a day a real person sends.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <p class="cost-note cost-note--lead"><strong>Archie keeps its own running total</strong> on the Account screen, by AI company and by agent. It&rsquo;s an estimate, not the AI company&rsquo;s invoice, and it says so on screen. The real bill is on their dashboard, where you can also set a hard spending cap.</p>
       </div>
     </section>
 

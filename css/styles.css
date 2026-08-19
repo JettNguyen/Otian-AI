@@ -5391,6 +5391,18 @@ html[data-theme="dark"] .booking-container iframe {
    have, and /testimonials/ says so on its own page. */
 .plan-card--lead { border-color: var(--accent-line); }
 
+/* One size for all three amounts, whether the amount is a price or a word: at different sizes
+   the label above and the list below start at different heights, and three columns that do not
+   line up read as three unrelated cards. The clamp plus nowrap is what keeps that true at every
+   width: "In development" is the longest of the three, and if it wrapped at a middle width the
+   cards would fall out of step again in a way a desktop screenshot would never show. */
+.plan-card .price-card-amount,
+.plan-card .price-card-amount--words {
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
 /* baseline, not the inherited centre: the shared --words rule centres its flex children, which
    floats the small qualifier halfway up the big word. Next to it, "$149 a year" sets the
    qualifier on the baseline, and two cards in a row cannot hang the same phrase differently. */

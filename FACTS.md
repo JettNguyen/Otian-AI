@@ -76,6 +76,8 @@ after reading it on the source page, with the date.
 |---|---|---|
 | 142 add-ons | 38 personalities, 60 skills, 4 specialists, 40 routines | Archie repo `data/marketplace/**`, counted 2026-08-16. `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
+| 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
+| 10 agents | What a plan runs | Same file, `PLAN_AGENTS`. Staff accounts are the only unlimited ones, and the Business edition has no license of its own yet, so **no page may say "unlimited"** about it |
 | 14 days | Money-back guarantee on a plan | Terms of Service |
 | 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
 | 60 days | How long a signed entitlement lasts before it needs refreshing | `crates/archie-core/src/entitlement.rs`; TRUST.md 2026-08-07 |

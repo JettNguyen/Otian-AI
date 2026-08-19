@@ -2589,7 +2589,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--c-blue-ink);
   margin: 0 0 16px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
@@ -2638,8 +2638,8 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   margin-left: 10px;
   padding: 3px 9px;
   border-radius: 999px;
-  background: var(--accent-subtle);
-  color: var(--accent-ink);
+  background: var(--c-blue-subtle);
+  color: var(--c-blue-ink);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -3369,13 +3369,13 @@ fieldset .checkbox-group {
 .value-icon {
   width: 56px;
   height: 56px;
-  background: var(--accent-subtle);
+  background: var(--c-blue-subtle);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  color: var(--accent);
+  color: var(--c-blue);
 }
 
 .value-icon svg {
@@ -4115,6 +4115,7 @@ html[data-theme="dark"] .availability-widget iframe {
 .glossary-side-card h3 {
   font-size: 1rem;
   margin-bottom: 8px;
+  color: var(--c-blue-ink);
 }
 
 .glossary-side-card p {
@@ -4280,9 +4281,9 @@ html[data-theme="dark"] .availability-widget iframe {
 
 .resource-filter:hover,
 .resource-filter.is-active {
-  color: var(--text-primary);
-  border-color: var(--accent-line);
-  background: var(--accent-subtle);
+  color: var(--c-blue-ink);
+  border-color: var(--c-blue);
+  background: var(--c-blue-subtle);
 }
 
 .resource-featured,
@@ -8489,7 +8490,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .team-link:hover {
-  color: var(--accent);
+  color: var(--c-blue-ink);
 }
 
 .team-link svg {

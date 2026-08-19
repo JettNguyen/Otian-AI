@@ -5290,7 +5290,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--c-blue-ink);
   margin-bottom: 12px;
 }
 
@@ -5375,8 +5375,8 @@ html[data-theme="dark"] .booking-container iframe {
   top: 0.35em;
   width: 10px;
   height: 5px;
-  border-left: 2px solid var(--accent);
-  border-bottom: 2px solid var(--accent);
+  border-left: 2px solid var(--c-blue);
+  border-bottom: 2px solid var(--c-blue);
   transform: rotate(-45deg);
 }
 
@@ -7646,7 +7646,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .cost-use {
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--c-blue-ink);
 }
 
 /* Figures sit in columns, so they get tabular digits and never wrap. */

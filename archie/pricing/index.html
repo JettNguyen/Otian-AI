@@ -407,50 +407,49 @@
           <p class="cost-table-note">Modelled from measured component sizes and the AI companies&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month. In August 2026 we checked the light row against a real agent, message by message, and it held: measured, a message on a lightly connected agent costs between 1.2&cent; and 2.0&cent;, depending on whether you are mid-conversation or starting one.</p>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one. An agent gets expensive through steady use rather than through any one costly question, and worked hard it can pass most software subscriptions.</p>
-        <p class="cost-note"><strong>The scheduled half is easy to underestimate, so here is what it really looks like.</strong> We built an agent with twelve add-ons and kept the routines that arrived with them, which is what the app itself suggests. Its schedule fires about 320 times a month: eight things every morning, three every week, and one before every meeting on the calendar. Measured, that came to about a third of its entire bill, spent before anybody typed anything. Each scheduled run also pays full price for its briefing, because it runs on its own and there is no conversation beside it to share a parked copy with. The heavy row above assumes a lighter schedule than that; with 320 runs it lands nearer $165.</p>
+        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts only the messages you send; the total also covers what your agent does on its own schedule, which is the split beside each one.</p>
+        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> An agent we built with twelve add-ons, keeping the routines they arrived with, fired its schedule about 320 times a month, and that came to about a third of its entire bill, spent before anybody typed anything. The heavy row assumes a lighter schedule; with 320 runs it lands nearer $165.</p>
         <!-- Unboxed. These four are the mechanics behind the table above, and four bordered
              cards of 80-word prose read as four more things to get through before you learn
              what it costs. The numbers are the claim; these are the reasoning. -->
         <div class="calm-list calm-list--ruled mt-48 fade-up delay-2">
           <div class="calm-list-item">
             <span class="calm-list-label">It&rsquo;s the passes that add up</span>
-            <p>Your agent has no memory of its own, so every reply starts by handing it a fresh briefing: everything it needs to know about you and the job, plus the conversation so far. A question it can answer from that briefing alone takes one pass. One that makes it look something up, read the answer, then look up something else takes three or four, each re-sending the whole briefing. Passes multiply the bill, not the length of your question. There is also a small pass in front of every reply, where your agent works out which of its add-ons you are asking for. It always runs on the cheapest model, so it costs very little, but it is never nothing: the shortest possible exchange is two passes rather than one.</p>
+            <p>Every reply starts by handing your agent a fresh briefing: everything it needs to know about you and the job. A question it can answer from that briefing takes one pass; one that has to look things up takes three or four, each re-sending the whole briefing. Passes multiply the bill, not the length of your question.</p>
           </div>
 
           <div class="calm-list-item">
             <span class="calm-list-label">Cost follows what you connect</span>
-            <p>Every service has to be described in that briefing before your agent can use it. A calendar-only agent carries a short one. Wire in an inbox, a to-do list, its own lists and a few other services, and the briefing runs about four and a half times longer, so the identical question costs roughly 2.8 times as much. It works the same way for add-ons: each one puts its instructions at the front of the briefing. That also makes the saving below less reliable, because a conversation that moves from one add-on to another cannot reuse the copy it just paid for. Worth knowing before you connect everything you own.</p>
+            <p>Every service you connect has to be described in that briefing. A calendar-only agent carries a short one; wire in an inbox, a to-do list and a few more services, and the identical question costs roughly 2.8 times as much. Add-ons work the same way. Worth knowing before you connect everything you own.</p>
           </div>
 
           <div class="calm-list-item">
-            <span class="calm-list-label">Response quality is the dial you hold, and the box under it is the one that bites</span>
-            <p>Economy, Balanced and Best cost very different amounts per message, and every figure above is Balanced, the default. There is a catch worth knowing before you go and move it: <strong>an add-on can pick its own quality and ignore the dial</strong>, and most of the useful ones do. So on an agent with a few add-ons installed, moving the dial to Economy changes almost nothing. We measured 4% to 7% on an agent with twelve.</p>
-            <p>Underneath the dial is a checkbox reading &ldquo;Use this for every skill&rdquo;. That one overrides the add-ons, and it is where the saving actually lives: measured on that same twelve-add-on agent, forced Economy costs <strong>about a fifth</strong> of Balanced, taking a heavy month from roughly $140 to roughly $30. It trades against how good the answers are, which is why it&rsquo;s your switch and not our default.</p>
+            <span class="calm-list-label">Response quality is the dial you hold</span>
+            <p>Every figure above is Balanced, the default. <strong>An add-on can pick its own quality and ignore the dial</strong>, and most useful ones do: moving the dial alone changed our bill by 4% to 7%. The checkbox under it, &ldquo;Use this for every skill&rdquo;, overrides them, and that is where the saving lives: forced Economy costs <strong>about a fifth</strong> of Balanced, taking a heavy month from roughly $140 to roughly $30, traded against how good the answers are.</p>
           </div>
 
           <div class="calm-list-item">
             <span class="calm-list-label">Archie takes the cheap route when there is one</span>
-            <p>The AI companies let you park a copy of the briefing on their side, so the next pass points at it instead of sending it again. Reading that copy costs about a tenth of the usual price, but making it costs about a quarter more, so it&rsquo;s a bet rather than a saving. Archie makes that bet one reply at a time, on every agent, with nothing to set up. Measured over a real conversation in August 2026, about three quarters of everything the agent read came from a copy rather than being sent fresh, so the bet pays.</p>
+            <p>The AI companies let you park a copy of the briefing on their side, and reading that copy costs about a tenth of the usual price. Archie does this on every agent with nothing to set up. Measured over a real conversation, about three quarters of everything the agent read came from a parked copy.</p>
           </div>
         </div>
 
         <div class="cost-trust fade-up delay-2">
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The size of the briefing, the AI companies&rsquo; published prices, how many passes an ordinary message takes, and, since August 2026, all three rows: we ran real agents through real conversations and read the bill for every call each one made. Every published total landed inside what we measured. Searching the web is charged per search rather than by the word, at about a penny a time, and none of these figures counts it.</p>
+            <p>The briefing sizes, the published prices, the passes an ordinary message takes, and all three rows: we ran real agents through real conversations and read the bill for every call. Every published total landed inside what we measured. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>How much the model works a problem through before answering, which bills at 5x the rate of reading. This used to be the widest unknown here. Measured, a reply comes to roughly 100 words of working, which is between a seventh and a quarter of the bill. That holds at the default, where your agent answers rather than reasoning at length first; set it to think harder and this goes up.</p>
+            <p>How much the model works a problem through before answering, which bills at 5x the rate of reading. Measured, that is between a seventh and a quarter of the bill at the default setting; set it to think harder and it goes up.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-            <p>How you space your messages out. This is a fact about you rather than about the software, and it turned out to be the biggest single number in all of it. A message sent while you are mid-conversation can reuse the parked copy of the briefing; one sent hours later cannot, and neither can anything on a schedule. Measured across every agent we tried, <strong>the second kind costs about six times the first</strong>. That is more than the quality setting moves, more than the connections move, and more than the message count moves. The figures above assume a reasonable mix of the two.</p>
+            <p>How you space your messages out, which turned out to be the biggest single number in all of it. A message sent mid-conversation reuses the parked briefing; one sent hours later cannot, and <strong>the second kind costs about six times the first</strong>. The figures above assume a reasonable mix of the two.</p>
           </div>
           <div class="cost-trust-row">
             <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-            <p>The moderate and heavy rows, as of August 2026. We built agents at both shapes, connected a real calendar and a real inbox to each, and ran them: four add-ons for the moderate row, twelve add-ons with their own records and documents for the heavy one. Both published totals landed inside what we measured. What we still have not measured is how many messages a day a real person sends, which is the one assumption left in the table.</p>
+            <p>The moderate and heavy rows: we built agents at both shapes, connected a real calendar and inbox, and ran them. Both totals landed inside what we measured. The one assumption left is how many messages a day a real person sends.</p>
           </div>
         </div>
 

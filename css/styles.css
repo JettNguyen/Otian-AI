@@ -9386,7 +9386,7 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 359px) {
   .hm-hero h1 { font-size: 2.05rem; }
 }
-.hm-lede { font-size: 1.1rem; color: var(--text-secondary); max-width: 34em; margin: 20px auto 0; }
+.hm-lede { font-size: clamp(1rem, 0.92rem + 0.42vw, 1.2rem); color: var(--text-secondary); max-width: 34em; margin: 20px auto 0; }
 /* The lede opens on the claim the headline earns (it is yours, and it keeps changing),
    so that sentence carries the primary ink and the rest of the paragraph explains. */
 .hm-lede strong { color: var(--text-primary); font-weight: 600; }
@@ -9394,7 +9394,7 @@ html[data-theme="dark"] .booking-container iframe {
    of this line is the claim, so it never grows into a sentence. */
 /* c-blue-ink, not c-blue: the bright blue is a fill and a stroke colour, and this is
    0.02em-tracked text on the page ground. */
-.hm-kicker { margin: 18px 0 0; font-size: 1rem; font-weight: 600; letter-spacing: 0.02em; color: var(--c-blue-ink); }
+.hm-kicker { margin: 18px 0 0; font-size: clamp(0.9rem, 0.83rem + 0.36vw, 1.1rem); font-weight: 600; letter-spacing: 0.02em; color: var(--c-blue-ink); }
 .hm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
 .hm-hero-micro { display: flex; justify-content: center; align-items: center; gap: 7px; margin: 16px 0 0; font-size: 0.82rem; color: var(--text-muted); }
 .hm-hero-micro svg { color: var(--accent); flex-shrink: 0; }

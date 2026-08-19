@@ -121,7 +121,7 @@ them, and we never take a cut of either.
 The third cost is the one that varies, so the [pricing page](https://otianai.com/archie/pricing/)
 works it out for three levels of use, with the modelling shown.
 
-**Guided setup** is there if you would rather not do it alone: $100 a session, one hour each,
+**Guided setup** is there if you would rather not do it alone: $250 a session, one hour each,
 starting with a free 30-minute call.
 
 ---

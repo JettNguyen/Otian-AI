@@ -26,7 +26,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$30` | Also the measured cost of a heavy month with "Use this for every skill" on | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled. Same number as the monthly plan by coincidence, and a different claim |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
 | `$19` | The scheduled-reports share of the heavy AI month | Archie repo, `docs/cost-of-running-an-agent.md`. No longer a plan price: it was the monthly plan until 2026-08-19 |
-| `$100` | One guided session, one hour | Set by us. "$100/session" and "$100/hour" are the same claim |
+| `$250` | One guided session, one hour | Set by us, repriced 2026-08-19 from $100. "$250/session" and "$250/hour" are the same claim, not a contradiction |
 | `$4.40` | Light use: what the AI costs to run for a month | Archie repo, `docs/cost-of-running-an-agent.md` |
 | `$3.60` | The messages half of the light month | Same |
 | `$32` | Moderate use, per month | Same |
@@ -39,6 +39,36 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | Example price badge on a paid add-on | Illustrative, marketplace UI only |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
+
+## Other companies' prices
+
+These drift without telling us, so each row carries the date it was last read off the
+company's own public pricing page. **Checked dates older than 90 days fail
+`scripts/check-facts.py`**: a comparison page quoting last year's price is a false statement
+about a third party, which is the one kind of error TRUST.md treats as worse than a mistake
+about ourselves. Re-read the source, update the date, or take the figure off the page.
+
+Currencies are printed as the company prints them. A converted figure is not a fact.
+
+| Figure | What it is | Source | Checked |
+|---|---|---|---|
+| `$20` | Claude Pro, billed monthly | `https://claude.com/pricing`, "$20" on the Pro card | Checked: 2026-08-19 |
+| `$17` | Claude Pro, billed annually | Same page, "$17" per month with the annual subscription | Checked: 2026-08-19 |
+| `$100` | Claude Max, the entry tier | Same page, "From $100" | Checked: 2026-08-19 |
+| `$29.99` | Zapier Professional, billed monthly, at 750 tasks | `https://zapier.com/pricing` | Checked: 2026-08-19 |
+| `$19.99` | Zapier Professional, billed annually, at 750 tasks | Same page | Checked: 2026-08-19 |
+| `$12` | Make Core, at 10,000 credits a month | `https://www.make.com/en/pricing`, "$12/mo" | Checked: 2026-08-19 |
+| `$21` | Make Pro, at 10,000 credits a month | Same page, "$21/mo" | Checked: 2026-08-19 |
+| `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
+| `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
+
+**Deliberately not published.** ChatGPT's subscription prices, and any wage figure for a
+personal or executive assistant. Both were wanted for the comparison pages and neither could
+be read at its source: `openai.com`, `chatgpt.com` and `bls.gov` all refuse automated
+requests, and a price copied out of a search result or an aggregator is not verification. The
+comparison pages therefore name ChatGPT without pricing it, and argue the assistant
+comparison on what the work looks like rather than on a salary. Add either figure here only
+after reading it on the source page, with the date.
 
 ## Counts and durations
 

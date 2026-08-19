@@ -45,7 +45,7 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   FACTS.md also records the figures we deliberately do **not** publish and why.
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on".
-- Guided sessions are **$100/hour**, one hour per session; "$100/session" and "$100/hour" are
+- Guided sessions are **$250/hour**, one hour per session; "$250/session" and "$250/hour" are
   the same claim, not a contradiction.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally.

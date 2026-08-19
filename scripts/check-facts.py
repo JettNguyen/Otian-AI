@@ -55,6 +55,44 @@ def allowed_figures(facts_path):
     return figures
 
 
+# A "Checked: 2026-08-19" stamp on a row in FACTS.md's "Other companies' prices" table, or a
+# bare date in the last cell of a TRUST.md competitor-claim row.
+CHECKED = re.compile(r"Checked:\s*(\d{4})-(\d{2})-(\d{2})")
+TRUST_CLAIM_ROW = re.compile(r"^\|.*\|\s*`?https?://[^`|]+`?\s*\|\s*(\d{4})-(\d{2})-(\d{2})\s*\|")
+STALE_AFTER_DAYS = 90
+
+
+def stale_competitor_claims(today):
+    """Rows about other companies whose source was last read too long ago.
+
+    Our own prices change when we change them, so FACTS.md's file-level "last reconciled" line
+    is enough for those. Another company's price changes without telling us, and a comparison
+    page quoting last year's number is a false public statement about a third party, which
+    TRUST.md treats as worse than a mistake about ourselves. So those rows date themselves and
+    this check fails when the date goes cold.
+    """
+    stale = []
+    for name in ("FACTS.md", "TRUST.md"):
+        path = os.path.join(ROOT, name)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as fh:
+            for lineno, line in enumerate(fh, 1):
+                match = CHECKED.search(line) or TRUST_CLAIM_ROW.match(line)
+                if not match:
+                    continue
+                y, m, d = (int(part) for part in match.groups()[:3])
+                try:
+                    checked = datetime.date(y, m, d)
+                except ValueError:
+                    stale.append((name, lineno, "not a real date", line.strip()[:90]))
+                    continue
+                age = (today - checked).days
+                if age > STALE_AFTER_DAYS:
+                    stale.append((name, lineno, "%d days old" % age, line.strip()[:90]))
+    return stale
+
+
 def served_files():
     """(relative path, checked_for_money) for everything a visitor can read."""
     for dirpath, dirnames, filenames in os.walk(ROOT):

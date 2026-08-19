@@ -822,6 +822,65 @@ citation of the provider's own current policy, linked inline. Verification statu
 
 ---
 
+## Competitor claims — the `/compare/` pages
+
+Every other section of this file governs claims about **us**, where the worst case is that we
+overstate our own product. This section governs claims about **other companies**, where the
+worst case is a false public statement about a third party. That is the one kind of error that
+is both a trust failure and a legal one, so the bar is higher, not lower.
+
+**The rule: no sentence about a named third party ships without a row in the table below.** A
+row needs the company's own public page as its source, not a search result, not an aggregator,
+not a summary of one, and not this model's memory. Money figures additionally need a row in
+FACTS.md under "Other companies' prices" with its own `Checked:` date.
+
+### Structural rules for every comparison page
+
+- **Lead on custody, never on privacy.** The positioning note under "No Otian custodian"
+  applies with full force here: local-model tools are genuinely more private on inference, so
+  "more private than X" is both false against some competitors and unfalsifiable against the
+  rest. The claim is that no server of ours holds your content.
+- **Every page carries a section where the alternative wins**, named and specific. This is the
+  disclosure principle from "The Test" applied to comparison: the unflattering item you
+  volunteer buys more belief than the flattering one you argue for. A comparison page with no
+  losses reads as an advertisement and is treated as one.
+- **Category claims and company claims are different things.** "A chat app answers when you
+  open it and ask" describes the category and needs no citation. "ChatGPT costs $X" or
+  "Zapier cannot do Y" is a claim about a company and needs a row.
+- **No absolutes.** "Zero maintenance", "no risk", "never breaks" are the banned-phrasings
+  category by another name. If it cannot be falsified, it does not ship.
+- **Date the page.** Each comparison page prints a visible "Checked" date and carries a
+  `Sources` fold listing every third-party claim with its link. A reader who wants to audit
+  the page must be able to.
+- The availability sentence and the `archie/#status` link appear on every one of these pages,
+  same as everywhere else.
+
+### The table
+
+| Claim as printed | About | Source | Checked |
+|---|---|---|---|
+| Claude Pro is $20 a month, or $17 on the annual plan | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
+| Claude Max starts at $100 a month | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
+| Zapier's free tier includes 100 tasks a month | Zapier | `https://zapier.com/pricing` | 2026-08-19 |
+| Zapier Professional starts at $29.99 a month, or $19.99 billed annually, for 750 tasks | Zapier | `https://zapier.com/pricing` | 2026-08-19 |
+| Make's free tier includes up to 1,000 credits a month | Make | `https://www.make.com/en/pricing` | 2026-08-19 |
+| Make Core is $12 a month and Pro is $21 a month, each at 10,000 credits | Make | `https://www.make.com/en/pricing` | 2026-08-19 |
+| n8n Starter is 20€ a month billed annually, Pro 50€ | n8n | `https://n8n.io/pricing/` | 2026-08-19 |
+| n8n publishes a self-hostable Community edition on GitHub under its Fair-code licence | n8n | `https://n8n.io/pricing/` | 2026-08-19 |
+
+**Boundaries — do not cross:**
+- ❌ Never print a ChatGPT subscription price. `openai.com` and `chatgpt.com` refuse automated
+  requests, so no figure here has been read at its source. Name the product, do not price it.
+  (Same constraint that keeps the OpenAI entry in the provider-training block a paraphrase.)
+- ❌ Never print a salary figure for an assistant. `bls.gov` also refuses automated requests.
+  The comparison argues on what the work looks like, not on a wage.
+- ❌ Never claim a competitor *cannot* do something on the basis that their marketing page did
+  not mention it. Absence from a pricing page is not absence from the product.
+- Re-read every source before any launch or press push, and update the dates. A stale
+  comparison is a false claim about somebody else's company.
+
+---
+
 ## Change Process
 
 1. A new claim requires a pointer to the code path that makes it true. No pointer, no claim.

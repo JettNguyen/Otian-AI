@@ -123,7 +123,15 @@ ARCHIE_CATALOG = os.path.join(
     os.path.dirname(ROOT), "Archie", "data", "marketplace"
 )
 
-STAT_NUM = re.compile(r'<span class="stat-num">([\d,]+)</span>\s*<span class="stat-label">([^<]+)</span>', re.S)
+# Two markup shapes print these counts and both have to be read. .stat-row (the marketplace
+# and the compare hub) pairs .stat-num with .stat-label; .hm-numbers (the homepage band) puts
+# the figure in a <b> inside .hm-num-top and labels it with .hm-num-label. Matching only the
+# first meant the homepage's count was never checked at all.
+STAT_NUM = re.compile(
+    r'<span class="stat-num">([\d,]+)</span>\s*<span class="stat-label">([^<]+)</span>'
+    r'|<b>([\d,]+)</b></span>\s*<span class="hm-num-label">([^<]+)</span>',
+    re.S,
+)
 
 
 def catalog_count():
@@ -147,8 +155,12 @@ def check_stat_rows(actual):
             continue
         with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as fh:
             body = fh.read()
-        for num, label in STAT_NUM.findall(body):
-            if label.strip().lower() == "add-ons":
+        for a_num, a_label, b_num, b_label in STAT_NUM.findall(body):
+            num, label = (a_num, a_label) if a_num else (b_num, b_label)
+            # endswith, not ==: every one of these labels is actually "Verified Add-ons", so an
+            # equality test against "add-ons" matched nothing and the check reported clean for
+            # as long as it has existed.
+            if label.strip().lower().endswith("add-ons"):
                 printed = int(num.replace(",", ""))
                 if printed != actual:
                     wrong.append((rel, printed))

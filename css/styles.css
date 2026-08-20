@@ -1608,6 +1608,37 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-primary);
 }
 
+/* Everything the nav does not have a tab for, in a strip under the columns rather than as more
+   columns. The four columns above mirror the four nav menus exactly, link for link, so a reader
+   who learns the nav already knows the footer. Learn and What You Need sat in that grid and
+   quietly broke the rule: a fifth column looks like a fifth menu, and "What You Need" under the
+   Archie heading claimed to be somewhere the Archie tab would take you. Below the rule they are
+   plainly what they are, which is the rest of the site.
+
+   No rule above it and no ground of its own: it is the same block as the columns, just the part
+   that is not a menu. Laid out as rows of links rather than stacks, which is what separates it
+   from the grid without a divider doing the work and without it reading as a short column that
+   ran out of items. */
+.footer-extra {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 64px;
+  padding: 0 0 34px;
+}
+.footer-extra-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+}
+.footer-extra .footer-col-title { margin-bottom: 0; }
+.footer-extra .footer-nav-links {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0 20px;
+}
+.footer-extra .footer-nav-links a { margin-bottom: 0; }
+
 .footer-contact-col {
   display: flex;
   flex-direction: column;
@@ -8255,6 +8286,7 @@ html[data-theme="dark"] .booking-container iframe {
 .is-app .nav-drawer-flyout,
 .is-app .nav-overlay,
 .is-app .footer-grid,
+.is-app .footer-learn,
 .is-app .cta-banner,
 .is-app .page-hero {
   display: none;

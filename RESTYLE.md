@@ -151,7 +151,14 @@ what makes `.trust-table` unreusable. `.two-col-card-list--plain` swaps the blue
 dash: ticking a competitor's advantages in our own accent reads as sarcasm.
 
 ### Global, after the pages
-- [ ] Footer: same quiet grammar (it already alternates correctly; check column noise).
+- [x] Footer (2026-08-19). **The four columns now mirror the four nav menus exactly, link for
+      link**, so the footer teaches nothing the nav contradicts: Archie, Add-ons, Compare,
+      Company. Everything with no tab of its own (How It Works, AI Explained, Blog, FAQ, What
+      You Need, Account) moved to a `.footer-extra` row of inline links under the columns, with
+      no rule and no ground of its own, because a fifth column reads as a fifth menu. All 63
+      footers are now generated from one template with a per-file relative prefix and a
+      per-link assertion that the target exists; one blog post was still carrying a single
+      "Pages" column from before the grid and is now in line with the rest.
 - [ ] Nav: unchanged for now; any slimming is its own scripted change across all pages
       (the nav is duplicated per page, twice).
 - [ ] 404 page, if present, gets the shell.

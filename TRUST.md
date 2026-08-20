@@ -895,10 +895,9 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Claude Cowork is Anthropic's knowledge work agent, included on paid Claude plans from Pro up ("Includes Claude Cowork" on the Pro card) | Anthropic | `https://claude.com/pricing` | 2026-08-20 |
 | Cowork's work "runs on Anthropic's servers, in an isolated environment, and your sessions and files are saved to your Claude account" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
 | Cowork has three permission modes; in Skip mode "Claude doesn't pause to ask and nothing checks its actions automatically" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
-| Gemini Spark "works in the background 24/7, even if your phone and laptop are turned off" | Google | `https://gemini.google/overview/agent/spark/` | 2026-08-20 |
-| Spark is for Google AI Ultra subscribers (and select business users) in select countries; app connections are off by default; it is "designed to check with you before taking major actions" | Google | `https://gemini.google/overview/agent/spark/` | 2026-08-20 |
 | Grok Bot is in beta for SuperGrok Heavy, Cursor Ultra and Cursor Teams Premium subscribers, on desktop and iOS | xAI | `https://x.ai/news/introducing-grok-bot` | 2026-08-20 |
 | Each Grok Bot "runs on a persistent cloud VM with a browser, filesystem, and terminal" and signs in to your tools there; it comes back "when something needs your approval" | xAI | `https://x.ai/news/introducing-grok-bot`, `https://docs.x.ai/grok-bot/overview` | 2026-08-20 |
+| Grok Bot comes with SuperGrok Heavy at $300 a month or Cursor Ultra at $200 a month (Cursor Teams Premium at $120 a seat also carries it); plan cards read in a browser, since xAI refuses fetches | xAI, Cursor | `https://x.ai/bot` | 2026-08-20 |
 
 **Boundaries — do not cross:**
 - ⚠️ ChatGPT's prices are in the table above as of 2026-08-19, read off the pricing page in a

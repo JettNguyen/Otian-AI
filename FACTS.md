@@ -58,6 +58,9 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$20` | ChatGPT Plus, billed monthly | `https://chatgpt.com/pricing`, "$20 / month" on the Plus card. Read in a browser, not fetched: see the note below | Checked: 2026-08-19 |
 | `$8` | ChatGPT Go, billed monthly | Same page, "$8 / month". Same caveat | Checked: 2026-08-19 |
 | `$100` | ChatGPT Pro, the entry tier | Same page, "From $100 / month". Same caveat | Checked: 2026-08-19 |
+| `$300` | SuperGrok Heavy, billed monthly. The xAI plan that carries Grok Bot | Grok Bot plan cards, "$300 / month". Read in a browser: `x.ai` refuses fetches. See the note below | Checked: 2026-08-20 |
+| `$200` | Cursor Ultra, billed monthly. The Cursor plan that carries Grok Bot | Same cards, "$200 / month". Same caveat | Checked: 2026-08-20 |
+| `$120` | Cursor Teams Premium, per seat, billed monthly. Also carries Grok Bot; printed only in the sources fold | Same cards, "$120 / seat / month". Same caveat | Checked: 2026-08-20 |
 | `$29.99` | Zapier Professional, billed monthly, at 750 tasks | `https://zapier.com/pricing` | Checked: 2026-08-19 |
 | `$19.99` | Zapier Professional, billed annually, at 750 tasks | Same page | Checked: 2026-08-19 |
 | `$12` | Make Core, at 10,000 credits a month | `https://www.make.com/en/pricing`, "$12/mo" | Checked: 2026-08-19 |
@@ -73,13 +76,15 @@ is still the company's own page rather than a search result or an aggregator, an
 can open the same URL and see the same cards. When the date comes due, someone opens the page
 again. A fetch that fails must not quietly become a figure that rots.
 
-**Also deliberately not published.** Prices for Gemini Spark and Grok Bot, on the cloud-agents
-comparison. Spark rides Google AI subscriptions whose page renders prices dynamically per
-region, so a fetch reads "/mo" with no number; Grok Bot rides SuperGrok Heavy and Cursor
-plans, and `x.ai`'s pricing pages refuse automated requests. Both are named and their plan
-tiers stated, without figures. Claude Cowork needs no new figure: it is included on the Claude
-plans already priced above. If a figure is wanted, read it in a browser and add it here with
-the date, per the note above.
+**On the Grok Bot rows.** Same story as ChatGPT above: the plan cards were read in a browser
+and transcribed on 2026-08-20, because `x.ai` returns 403 to any fetch. Claude Cowork needs
+no figure of its own: it is included on the Claude plans already
+priced above ("Includes Claude Cowork" on the Pro card).
+
+**Gemini Spark is deliberately not on the site.** It was in the cloud-agents comparison for a
+day and came out on 2026-08-20: unpriceable at source (Google renders plan prices per region,
+so a fetch reads "/mo" with no number) and available only to AI Ultra in select countries, so
+the comparison is Cowork and Grok Bot. If Spark returns, its claims need fresh TRUST.md rows.
 
 **Deliberately not published.** Any wage figure for a personal or executive assistant. It was
 wanted for the comparison page and could not be read at its source: `bls.gov` refuses automated

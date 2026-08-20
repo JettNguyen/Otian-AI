@@ -55,6 +55,9 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$20` | Claude Pro, billed monthly | `https://claude.com/pricing`, "$20" on the Pro card | Checked: 2026-08-19 |
 | `$17` | Claude Pro, billed annually | Same page, "$17" per month with the annual subscription | Checked: 2026-08-19 |
 | `$100` | Claude Max, the entry tier | Same page, "From $100" | Checked: 2026-08-19 |
+| `$20` | ChatGPT Plus, billed monthly | `https://chatgpt.com/pricing`, "$20 / month" on the Plus card. Read in a browser, not fetched: see the note below | Checked: 2026-08-19 |
+| `$8` | ChatGPT Go, billed monthly | Same page, "$8 / month". Same caveat | Checked: 2026-08-19 |
+| `$100` | ChatGPT Pro, the entry tier | Same page, "From $100 / month". Same caveat | Checked: 2026-08-19 |
 | `$29.99` | Zapier Professional, billed monthly, at 750 tasks | `https://zapier.com/pricing` | Checked: 2026-08-19 |
 | `$19.99` | Zapier Professional, billed annually, at 750 tasks | Same page | Checked: 2026-08-19 |
 | `$12` | Make Core, at 10,000 credits a month | `https://www.make.com/en/pricing`, "$12/mo" | Checked: 2026-08-19 |
@@ -62,13 +65,19 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
 | `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
 
-**Deliberately not published.** ChatGPT's subscription prices, and any wage figure for a
-personal or executive assistant. Both were wanted for the comparison pages and neither could
-be read at its source: `openai.com`, `chatgpt.com` and `bls.gov` all refuse automated
-requests, and a price copied out of a search result or an aggregator is not verification. The
-comparison pages therefore name ChatGPT without pricing it, and argue the assistant
-comparison on what the work looks like rather than on a salary. Add either figure here only
-after reading it on the source page, with the date.
+**On the ChatGPT rows.** `openai.com` and `chatgpt.com` return 403 to every automated request,
+so those three figures were read off the pricing page in a browser by a person and transcribed,
+on 2026-08-19. That is a weaker check than the rest of this table: no script of ours can
+re-confirm it, and the 90-day staleness check will come due against a page we cannot fetch. It
+is still the company's own page rather than a search result or an aggregator, and any reader
+can open the same URL and see the same cards. When the date comes due, someone opens the page
+again. A fetch that fails must not quietly become a figure that rots.
+
+**Deliberately not published.** Any wage figure for a personal or executive assistant. It was
+wanted for the comparison page and could not be read at its source: `bls.gov` refuses automated
+requests, and a salary copied out of a search result or an aggregator is not verification. That
+page therefore argues the comparison on what the work looks like rather than on a number. Add
+the figure here only after reading it on the source page, with the date.
 
 ## Counts and durations
 

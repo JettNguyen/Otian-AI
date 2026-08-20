@@ -834,6 +834,16 @@ row needs the company's own public page as its source, not a search result, not 
 not a summary of one, and not this model's memory. Money figures additionally need a row in
 FACTS.md under "Other companies' prices" with its own `Checked:` date.
 
+**A page that blocks automated requests is still a source; a search result is not.** Several
+companies return 403 to any fetch. Reading their page in a browser and transcribing the figure
+satisfies this rule, because the requirement is the company's own page, not the method of
+getting at it, and any reader can open the same URL and see the same thing. What it does not
+satisfy is re-checking: no script can confirm it later, so those rows carry the caveat in
+FACTS.md and someone has to open the page by hand when the 90-day date comes due. The failure
+mode to guard against is a figure that was verified once and then silently rots, not the
+transcription itself. What remains banned is the shortcut, which is taking the number from a
+search snippet, an aggregator, a competitor's comparison page, or memory.
+
 ### Structural rules for every comparison page
 
 - **Lead on custody, never on privacy.** The positioning note under "No Otian custodian"
@@ -874,6 +884,8 @@ FACTS.md under "Other companies' prices" with its own `Checked:` date.
 |---|---|---|---|
 | Claude Pro is $20 a month, or $17 on the annual plan | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
 | Claude Max starts at $100 a month | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
+| ChatGPT Plus is $20 a month | OpenAI | `https://chatgpt.com/pricing` | 2026-08-19 |
+| ChatGPT has a free tier, Go at $8 a month, and Pro from $100 | OpenAI | `https://chatgpt.com/pricing` | 2026-08-19 |
 | Zapier's free tier includes 100 tasks a month | Zapier | `https://zapier.com/pricing` | 2026-08-19 |
 | Zapier Professional starts at $29.99 a month, or $19.99 billed annually, for 750 tasks | Zapier | `https://zapier.com/pricing` | 2026-08-19 |
 | Make's free tier includes up to 1,000 credits a month | Make | `https://www.make.com/en/pricing` | 2026-08-19 |

@@ -1561,6 +1561,12 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   padding-bottom: 52px;
 }
 
+/* Two rows on the right of the brand: the four menus, then the links that have no menu. The
+   brand spans both so the left edge holds and the second row sits beside the social buttons
+   rather than under the whole footer. Reset at 1024px, where the brand goes full width and the
+   menus fall into two columns beneath it. */
+.footer-brand { grid-row: 1 / span 2; }
+
 .footer-brand .footer-contact-email { margin-top: 20px; }
 
 /* An <a> since 2026-08-19 (the footer's Home link), so it needs to be a block to
@@ -1581,12 +1587,16 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-muted);
 }
 
+/* Primary ink, not muted. A column heading in the same weight of grey as the links under it
+   makes the reader work out which line is the label, and at a glance the four menus read as one
+   undifferentiated list. The heading is the brightest thing in the column and the links sit a
+   step back from it, which is the hierarchy every other label on the site already uses. */
 .footer-col-title {
   font-size: 0.725rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 
@@ -1618,12 +1628,18 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    No rule above it and no ground of its own: it is the same block as the columns, just the part
    that is not a menu. Laid out as rows of links rather than stacks, which is what separates it
    from the grid without a divider doing the work and without it reading as a short column that
-   ran out of items. */
+   ran out of items.
+
+   It is a child of the grid rather than a sibling under it, spanning the four menu columns
+   only, and the brand block spans both rows to hold the left edge. That puts it directly under
+   the columns and level with the social links instead of below the whole footer, where the
+   brand column's height left it stranded in white space. */
 .footer-extra {
+  grid-column: 2 / -1;
   display: flex;
   flex-wrap: wrap;
+  align-content: start;
   gap: 24px 64px;
-  padding: 0 0 34px;
 }
 .footer-extra-group {
   display: flex;
@@ -4908,6 +4924,16 @@ html.js .fade-up:not(.visible) {
   }
 
   .footer-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* The brand is a full-width band here rather than a left column, so it no longer spans two
+     rows, and the menu-less links run the full width under the two columns of menus. */
+  .footer-brand {
+    grid-row: auto;
+  }
+
+  .footer-extra {
     grid-column: 1 / -1;
   }
 

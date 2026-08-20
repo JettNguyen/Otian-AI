@@ -258,8 +258,8 @@
                   .wyn-row{animation:wynIn .7s cubic-bezier(.22,1,.36,1) both}
                   .wy0{animation-delay:0s}.wy1{animation-delay:.1s}.wy2{animation-delay:.24s}.wy3{animation-delay:.34s}.wy4{animation-delay:.44s}
                   @keyframes wynIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-                  .wyn-brace{stroke-dasharray:140;animation:wynDraw .9s ease-out both;animation-delay:.14s}
-                  @keyframes wynDraw{from{stroke-dashoffset:140}to{stroke-dashoffset:0}}
+                  .wyn-brace{stroke-dasharray:1;animation:wynDraw .9s ease-out both;animation-delay:.14s}
+                  @keyframes wynDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
                   .wyn-tick{animation:wynPop .55s cubic-bezier(.34,1.56,.64,1) both;transform-box:fill-box;transform-origin:center}
                   .wt1{animation-delay:.42s}.wt2{animation-delay:.56s}.wt3{animation-delay:.68s}.wt4{animation-delay:.8s}
                   @keyframes wynPop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
@@ -280,7 +280,7 @@
                 <text class="wyn-big" x="38" y="110">3</text>
                 <text class="wyn-biglbl" x="38" y="130">THINGS</text>
               </g>
-              <path class="wyn-brace" d="M88 14 H80 Q76 14 76 18 V182 Q76 186 80 186 H88"/>
+              <path class="wyn-brace" pathLength="1" d="M88 14 H80 Q76 14 76 18 V182 Q76 186 80 186 H88"/>
 
               <g class="wyn-row wy1">
                 <rect class="wyn-in" x="96" y="14" width="488" height="52" rx="12"/>
@@ -313,8 +313,8 @@
               </g>
 
               <!-- outside the brace: wanted, not required -->
-              <line class="wyn-div" x1="96" y1="212" x2="300" y2="212"/>
-              <line class="wyn-div" x1="380" y1="212" x2="584" y2="212"/>
+              <line class="wyn-div" x1="96" y1="212" x2="254" y2="212"/>
+              <line class="wyn-div" x1="426" y1="212" x2="584" y2="212"/>
               <text class="wyn-divlbl" x="340" y="216">and then, when you want it</text>
 
               <g class="wyn-row wy4">
@@ -328,8 +328,8 @@
               </g>
 
               <!-- and what conspicuously is not on it -->
-              <line class="wyn-div" x1="96" y1="306" x2="294" y2="306"/>
-              <line class="wyn-div" x1="386" y1="306" x2="584" y2="306"/>
+              <line class="wyn-div" x1="96" y1="306" x2="288" y2="306"/>
+              <line class="wyn-div" x1="392" y1="306" x2="584" y2="306"/>
               <text class="wyn-divlbl" x="340" y="310">not on the list</text>
 
               <g class="wyn-off wo1">
@@ -350,8 +350,8 @@
                 <rect class="wyn-outbox" x="96" y="398" width="488" height="34" rx="10"/>
                 <circle class="wyn-no" cx="124" cy="415" r="9"/>
                 <line class="wyn-noslash" x1="119.5" y1="419.5" x2="128.5" y2="410.5"/>
-                <text class="wyn-offname" x="150" y="415">A minimum spend</text>
-                <text class="wyn-offsub" x="568" y="415">you pay for what it does</text>
+                <text class="wyn-offname" x="150" y="419">A minimum spend</text>
+                <text class="wyn-offsub" x="568" y="419">you pay for what it does</text>
               </g>
             </svg>
             <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="wynm-t" xmlns="http://www.w3.org/2000/svg">
@@ -378,8 +378,8 @@
                   .wynm-row{animation:wynmIn .7s cubic-bezier(.22,1,.36,1) both}
                   .wym0{animation-delay:0s}.wym1{animation-delay:.1s}.wym2{animation-delay:.24s}.wym3{animation-delay:.34s}.wym4{animation-delay:.44s}
                   @keyframes wynmIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-                  .wynm-brace{stroke-dasharray:140;animation:wynmDraw .9s ease-out both;animation-delay:.14s}
-                  @keyframes wynmDraw{from{stroke-dashoffset:140}to{stroke-dashoffset:0}}
+                  .wynm-brace{stroke-dasharray:1;animation:wynmDraw .9s ease-out both;animation-delay:.14s}
+                  @keyframes wynmDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
                   .wynm-tick{animation:wynmPop .55s cubic-bezier(.34,1.56,.64,1) both;transform-box:fill-box;transform-origin:center}
                   .wtm1{animation-delay:.42s}.wtm2{animation-delay:.56s}.wtm3{animation-delay:.68s}.wtm4{animation-delay:.8s}
                   @keyframes wynmPop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
@@ -393,7 +393,7 @@
                 <text class="wynm-big" x="24" y="106">3</text>
                 <text class="wynm-biglbl" x="24" y="126">THINGS</text>
               </g>
-              <path class="wynm-brace" d="M60 14 H54 Q48 14 48 20 V182 Q48 188 54 188 H60"/>
+              <path class="wynm-brace" pathLength="1" d="M60 14 H54 Q48 14 48 20 V182 Q48 188 54 188 H60"/>
 
               <g class="wynm-row wym1">
                 <rect class="wynm-in" x="64" y="14" width="268" height="54" rx="12"/>
@@ -501,8 +501,6 @@
             <a href="../archie/see-it-work/">See It Work</a>
             <a href="../archie/pricing/">Pricing</a>
             <a href="../individuals/">Guided Setup</a>
-            <a href="../what-you-need/">What You Need</a>
-            <a href="../compare/">Compare</a>
           </nav>
         </div>
         <div>
@@ -515,12 +513,13 @@
           </nav>
         </div>
         <div>
-          <h4 class="footer-col-title">Learn</h4>
-          <nav class="footer-nav-links" aria-label="Learn">
-            <a href="../how-it-works/">How It Works</a>
-            <a href="../ai-explained/">AI Explained</a>
-            <a href="../blog/">Blog</a>
-            <a href="../faq/">FAQ</a>
+          <h4 class="footer-col-title">Compare</h4>
+          <nav class="footer-nav-links" aria-label="Compare">
+            <a href="../compare/">All Comparisons</a>
+            <a href="../compare/chat-apps/">vs a Chat App</a>
+            <a href="../compare/hiring-an-assistant/">vs Hiring Someone</a>
+            <a href="../compare/automation-tools/">vs Automation Tools</a>
+            <a href="../compare/building-it-yourself/">vs Building It Yourself</a>
           </nav>
         </div>
         <div>
@@ -530,6 +529,23 @@
             <a href="../testimonials/">Reviews</a>
             <a href="../contact/">Contact</a>
             <a href="../trust/">Trust</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer-extra">
+        <div class="footer-extra-group">
+          <h4 class="footer-col-title">Learn</h4>
+          <nav class="footer-nav-links" aria-label="Learn">
+            <a href="../how-it-works/">How It Works</a>
+            <a href="../ai-explained/">AI Explained</a>
+            <a href="../blog/">Blog</a>
+            <a href="../faq/">FAQ</a>
+          </nav>
+        </div>
+        <div class="footer-extra-group">
+          <h4 class="footer-col-title">More</h4>
+          <nav class="footer-nav-links" aria-label="More">
+            <a href="../what-you-need/">What You Need</a>
             <a href="../account/">Account</a>
           </nav>
         </div>

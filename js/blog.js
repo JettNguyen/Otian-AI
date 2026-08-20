@@ -45,9 +45,13 @@
     if (isNaN(date.getTime())) {
       return isoDate;
     }
-    return date.toLocaleDateString(undefined, {
+    // 'en-US' and not undefined: with the visitor's own locale this printed "19 Aug 2026" in
+    // Britain and "Aug 19, 2026" here, so the index disagreed with the posts it linked to and
+    // with itself depending on who was reading. The site is written in one language; its dates
+    // are written in one format.
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric'
     });
   }

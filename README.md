@@ -158,12 +158,21 @@ deploys to GitHub Pages through [`.github/workflows/deploy.yml`](.github/workflo
 ```bash
 git clone https://github.com/JettNguyen/Otian-AI.git
 cd Otian-AI
-python3 -m http.server 8000
+python3 scripts/dev-server.py
 ```
 
-Then open <http://localhost:8000>. Use a local server rather than opening the files from disk:
-every page lives in its own directory as an `index.html`, so the links only resolve when something
-is serving directory indexes.
+Then open <http://localhost:5501>. Pages reload themselves when you save. Use a local server
+rather than opening the files from disk: every page lives in its own directory as an
+`index.html`, so the links only resolve when something is serving directory indexes.
+
+Any static server will do (`python3 -m http.server 8000` works), but reload-on-save will not.
+That includes VS Code's Live Server, which does its reloading by appending an inline `<script>`
+to the HTML: the Content-Security-Policy in every page lists a sha256 for each inline script and
+does not allow `'unsafe-inline'`, so the browser blocks that one and saving a file appears to do
+nothing at all. `scripts/dev-server.py` injects the same kind of script and adds its hash to the
+policy on the way out, leaving the rest of the policy exactly as it ships, so a real CSP mistake
+still breaks locally the way it would in production. Pass `--no-reload` when pointing headless
+Chrome at it, or the open event stream keeps the page from ever going idle.
 
 ### Layout
 

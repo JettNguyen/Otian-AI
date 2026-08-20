@@ -4841,6 +4841,12 @@ html[data-theme="dark"] .availability-widget iframe {
     gap: 6px;
     font-size: 0.8rem;
     color: var(--text-muted);
+    /* One line, always. A wrapped crumb makes the bar taller than the clearance the section
+       reserves for it below, and a trail that breaks mid-path stops reading as a path. The
+       current item already ellipsizes, so the trail shortens instead of stacking. */
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    min-width: 0;
   }
 
   .breadcrumb-item + .breadcrumb-item::before {
@@ -4864,6 +4870,19 @@ html[data-theme="dark"] .availability-widget iframe {
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 420px;
+  }
+
+  /* The bar is absolutely positioned, so it takes no room in the flow: the clearance between it
+     and the page's first words was whatever happened to be left of the section's own top
+     padding, about 20px under a hero and never stated anywhere. Reserve the bar's height (~37px:
+     9px padding twice, one 0.8rem line) explicitly, on exactly the sections that contain a bar,
+     so the crumb trail gets the same air at every opening-section flavour and a future padding
+     tweak cannot silently close the gap. */
+  .page-hero:has(.breadcrumb-bar) {
+    padding-top: calc(var(--nav-height) + 93px);
+  }
+  .section--top:has(.breadcrumb-bar) {
+    padding-top: calc(var(--nav-height) + 109px);
   }
 }
 

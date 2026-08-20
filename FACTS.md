@@ -73,6 +73,14 @@ is still the company's own page rather than a search result or an aggregator, an
 can open the same URL and see the same cards. When the date comes due, someone opens the page
 again. A fetch that fails must not quietly become a figure that rots.
 
+**Also deliberately not published.** Prices for Gemini Spark and Grok Bot, on the cloud-agents
+comparison. Spark rides Google AI subscriptions whose page renders prices dynamically per
+region, so a fetch reads "/mo" with no number; Grok Bot rides SuperGrok Heavy and Cursor
+plans, and `x.ai`'s pricing pages refuse automated requests. Both are named and their plan
+tiers stated, without figures. Claude Cowork needs no new figure: it is included on the Claude
+plans already priced above. If a figure is wanted, read it in a browser and add it here with
+the date, per the note above.
+
 **Deliberately not published.** Any wage figure for a personal or executive assistant. It was
 wanted for the comparison page and could not be read at its source: `bls.gov` refuses automated
 requests, and a salary copied out of a search result or an aggregator is not verification. That

@@ -52,6 +52,9 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
 
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on".
+- The thing Archie runs on is a **"computer"**, never a "machine" (swept 2026-08-20; "machine"
+  is borderline jargon and broke the one-name-per-concept rule, since "computer" already carried
+  the concept everywhere else). Blog posts keep their own voice.
 - Guided sessions are **$250/hour**, one hour per session; "$250/session" and "$250/hour" are
   the same claim, not a contradiction.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.

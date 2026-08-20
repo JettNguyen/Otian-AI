@@ -129,7 +129,13 @@ sentence needs a row there, every price is read from that company's own page and
 **"where the other option wins"** band plus a `Sources` fold. A comparison with no losses in
 it is an advertisement and reads as one.
 
-Band order, repeated on all four: hero (with the availability line and a visible checked
+A fifth page, `cloud-agents/` (2026-08-20), covers Claude Cowork, Gemini Spark and Grok Bot in
+one page, the way `automation-tools/` covers three products: the alternative is the category.
+It is the site's closest comparison and its "where they win" section is deliberately the
+bluntest. Spark and Grok Bot are named without prices (Google renders prices per region; xAI's
+pages refuse fetches); Cowork rides the Claude figures already in FACTS.md.
+
+Band order, repeated on all five: hero (with the availability line and a visible checked
 date), the short answer, the side-by-side `.cmp-table`, where the alternative wins, a
 "worth saying" band that concedes the overlap, the `Sources` fold, the quiet CTA.
 

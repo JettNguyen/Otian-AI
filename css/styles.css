@@ -5688,13 +5688,18 @@ html[data-theme="dark"] .booking-container iframe {
 .plan-list li::before {
   content: "";
   position: absolute;
-  left: 3px;
-  top: 0.5em;
-  width: 12px;
-  height: 6px;
-  border-left: 2px solid var(--c-blue);
-  border-bottom: 2px solid var(--c-blue);
-  transform: rotate(-45deg);
+  left: 1px;
+  top: 0.15em;
+  width: 16px;
+  height: 16px;
+  /* A masked SVG rather than two rotated borders: borders cut their ends square, and at this size
+     the two blunt tips are the whole difference between a drawn mark and a typeset one. The mask
+     keeps the colour in a token (the tick has to change with the theme, which a data-URI fill
+     cannot do), and the path is the same checkmark the hero's micro-line draws, so the site has
+     one tick rather than two that nearly match. data: URIs are allowed by img-src in the CSP. */
+  background-color: var(--c-blue);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .plan-note {

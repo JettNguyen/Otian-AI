@@ -894,11 +894,14 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | n8n publishes a self-hostable Community edition on GitHub under its Fair-code licence | n8n | `https://n8n.io/pricing/` | 2026-08-19 |
 
 **Boundaries — do not cross:**
-- ❌ Never print a ChatGPT subscription price. `openai.com` and `chatgpt.com` refuse automated
-  requests, so no figure here has been read at its source. Name the product, do not price it.
-  (Same constraint that keeps the OpenAI entry in the provider-training block a paraphrase.)
-- ❌ Never print a salary figure for an assistant. `bls.gov` also refuses automated requests.
-  The comparison argues on what the work looks like, not on a wage.
+- ⚠️ ChatGPT's prices are in the table above as of 2026-08-19, read off the pricing page in a
+  browser because `openai.com` and `chatgpt.com` return 403 to any fetch. Those rows are the
+  ones most likely to rot: nothing automated can re-check them, so when the date comes due
+  somebody opens the page. (The same constraint still keeps the OpenAI entry in the
+  provider-training block a paraphrase, which has not been re-read.)
+- ❌ Never print a salary figure for an assistant. There is no row for one and no source we can
+  point a reader at. The comparison argues on what the work looks like, not on a wage, and the
+  page says why: pay swings by country, seniority and hours further than one number can carry.
 - ❌ Never claim a competitor *cannot* do something on the basis that their marketing page did
   not mention it. Absence from a pricing page is not absence from the product.
 - Re-read every source before any launch or press push, and update the dates. A stale

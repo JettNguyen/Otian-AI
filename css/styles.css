@@ -82,7 +82,11 @@
      least 4.5:1 in both themes, which is what lets a chip or a badge carry a word rather than
      just a hue. Matches --accent-ink above, and --c-green-ink and --c-gold-ink below, which
      already worked this way. */
-  --c-blue-ink: #3F6DAA;
+  /* Darkened from #3F6DAA on 2026-08-19. That value cleared 4.5 against white and the page
+     ground but only reached 4.31 against --accent-subtle, which is the ground under the Archie
+     column of every comparison table, so the citation markers sitting there were the one blue
+     on the site that failed. This clears it at 4.93 and is a shade darker everywhere else. */
+  --c-blue-ink: #3A649B;
   --c-blue-wash: rgba(89, 136, 203, 0.13);
   --c-teal-ink: #2E7168;
   --c-teal-wash: rgba(62, 154, 146, 0.13);
@@ -4538,10 +4542,6 @@ html[data-theme="dark"] .availability-widget iframe {
 }
 .resource-card--linked h3 a:focus-visible { outline: none; }
 
-/* The wordmark standing in for the word "Archie" in a comparison headline: the mark and the
-   letters are one asset (assets/archie-text.svg), so it is set as an inline image sized in em
-   and sitting on the text baseline. Its colours are baked into the file and read on either
-   ground, which is why it needs no theme handling. */
 /* The mark and the "vs" ride together: text-wrap: balance was happy to put the wordmark alone
    on the first line, which reads as a logo stranded above a headline rather than as its
    opening word. */
@@ -4566,19 +4566,81 @@ html[data-theme="dark"] .availability-widget iframe {
   vertical-align: 0.08em;
 }
 
-.cmp-wordmark {
-  /* display, before anything else: the global reset at the top of this file sets
-     `img, svg { display: block }`, so without this the wordmark takes a line of its own and
-     the headline reads as a logo stranded above a sentence. */
-  display: inline-block;
-  /* 1.02em, not the ~0.7em a cap-height match would suggest: the asset's ink fills 93% of its
-     box and the "A" mark is taller than the letters, so matching cap heights leaves the word
-     visibly smaller than the type beside it. Sized by eye against the h1 at 1280px. */
-  height: 1.02em;
-  width: auto;
-  vertical-align: -0.16em;
-  margin-right: 0.02em;
+/* Citation markers on the comparison pages. Every money figure, every count, every sentence
+   about another company, and every custody or approval claim carries one, and it links to the
+   page that figure or claim was read from: the other company's own pricing page for theirs, our
+   Trust page, Terms, or pricing page for ours.
+
+   The marker links straight out to the source rather than down to the matching entry in the
+   Sources fold, because that fold is a <details> and a fragment link into a closed one depends
+   on browser auto-expansion. A citation that silently does nothing is worse than no citation.
+   The number still matches its fold entry, so a reader who wants our note and the date it was
+   read has somewhere to go.
+
+   Blue, not ember: a citation supports a sentence, it is not the sentence. vertical-align in em
+   rather than `super`, which browsers pair with their own font-size shrink and would stack two
+   reductions on a marker that is already small. */
+.src-cite {
+  /* inline, not inline-block: an atomic inline is a wrap opportunity in its own right, so an
+     inline-block marker broke away from the end of a full line and sat alone on the next one,
+     which reads as a stray numeral rather than as a citation on the sentence above it. As a
+     plain inline with no space before it in the markup, there is nowhere to break. */
+  display: inline;
+  margin-left: 0.1em;
+  padding: 0 0.18em;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.78em;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
+  line-height: 1;
+  vertical-align: 0.42em;
+  color: var(--c-blue-ink);
+  text-decoration: none;
+  border-radius: 3px;
 }
+.src-cite:hover { text-decoration: underline; }
+.src-cite:focus-visible {
+  outline: 2px solid var(--c-blue-ink);
+  outline-offset: 1px;
+  text-decoration: none;
+}
+/* Inside a table cell the surrounding type is already small, so the marker holds its own size
+   rather than shrinking again relative to it. */
+.cmp-table .src-cite { font-size: 0.8rem; }
+
+/* Links inside a Sources fold and under a table have to look like links. The site's base rule is
+   `a { color: inherit; text-decoration: none }`, on the assumption that every link carries a
+   class that styles it, so the plain anchors in these notes rendered as ordinary body text: a
+   register of sources whose sources could not be seen to be clickable. `:not([class])` leaves
+   every classed link (.marketplace-text-link and the rest) exactly as it was. */
+.fold-body a:not([class]),
+.cost-table-note a:not([class]) {
+  color: var(--c-blue-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+.fold-body a:not([class]):hover,
+.cost-table-note a:not([class]):hover { text-decoration-thickness: 2px; }
+
+/* The number on a Sources entry, so the marker in the page and the note at the foot of it are
+   obviously the same thing. Fixed width keeps the labels' left edges in a column. */
+.src-n {
+  display: inline-block;
+  min-width: 1.5em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The comparison headlines set "Archie" as type, not as assets/archie-text.svg. That lockup was
+   tried here and taken out: inside the file the letters are set at 590 units in a 900-unit box,
+   so at any height that keeps the mark from towering over the line, "rchie" renders at about
+   70% of the size of the type beside it, with its baseline 0.08em below the headline's. It read
+   as misaligned even though the image sat on the baseline exactly, because it was the letters
+   inside the image that were small and low, not the box. The lockup is a display asset, where
+   the mark is deliberately monumental; a word inside a sentence needs the opposite proportions.
+   Set as type it cannot drift from the headline it sits in, the fluid clamp() scales it, and
+   one token colours it on both grounds. The brand lives in the nav and the footer. */
 
 /* The hub's router asks the reader's own question back to them, so those labels are the
    headline of their row rather than a component header, and they take the top-layer ember. */

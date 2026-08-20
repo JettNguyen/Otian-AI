@@ -133,6 +133,17 @@ Band order, repeated on all four: hero (with the availability line and a visible
 date), the short answer, the side-by-side `.cmp-table`, where the alternative wins, a
 "worth saying" band that concedes the overlap, the `Sources` fold, the quiet CTA.
 
+Sourcing is visible on the page, not only at the foot of it: every figure and claim carries a
+numbered `.src-cite` superscript linking to where it was read, matching a numbered entry in the
+`Sources` fold. The marker links out to the source rather than down to the fold, since the fold
+is a `<details>` and a fragment link into a closed one depends on browser auto-expansion.
+
+Dates in served content are written **Month Day, Year**, one format everywhere. Where a date is
+rendered by script (`js/blog.js`, `billing/`, `activity/`) the locale is pinned to `en-US`
+rather than left as `undefined`, which otherwise printed "19 Aug 2026" to a British reader and
+"Aug 19, 2026" here. `FACTS.md` and `TRUST.md` keep ISO dates: `scripts/check-facts.py` parses
+them, and they are not served.
+
 Two components were added rather than duplicated. `.cmp-table` rides on `.cost-table`'s
 rules instead of becoming this file's third copy of the same stacked table, and its
 mobile treatment is keyed to `td:first-child` rather than to literal column names, which is

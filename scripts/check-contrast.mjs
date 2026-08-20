@@ -135,6 +135,11 @@ for (const [theme, b] of [["light", LIGHT], ["dark", DARK]]) {
   }
   checks.push([`${theme}: --text-on-accent on --accent`, ratio(token("text-on-accent", b), token("accent", b)), TEXT]);
   checks.push([`${theme}: --accent-ink on --accent-subtle`, ratio(token("accent-ink", b), token("accent-subtle", b)), TEXT]);
+  // The comparison tables tint the Archie column with --accent-subtle, and the citation markers
+  // in those cells are blue, so blue-on-ember is a real pairing on the site and not just a
+  // theoretical one. TEXT and not UI: a marker is 0.8rem, well under the large-text threshold.
+  checks.push([`${theme}: --c-blue-ink on --accent-subtle`, ratio(token("c-blue-ink", b), token("accent-subtle", b)), TEXT]);
+  checks.push([`${theme}: --c-blue-ink on card`, ratio(token("c-blue-ink", b), g.card), TEXT]);
 }
 
 let failed = 0;

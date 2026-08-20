@@ -852,6 +852,19 @@ FACTS.md under "Other companies' prices" with its own `Checked:` date.
 - **Date the page.** Each comparison page prints a visible "Checked" date and carries a
   `Sources` fold listing every third-party claim with its link. A reader who wants to audit
   the page must be able to.
+- **Cite in place, not only at the foot.** Every money figure, every count, every sentence
+  about another company, and every custody or approval claim carries a numbered `.src-cite`
+  marker linking straight to the page it was read from: the other company's own pricing page
+  for theirs, our Trust page, Terms, or pricing page for ours. The number matches its entry in
+  the `Sources` fold, which holds our note and the date. The marker links out rather than down
+  to the fold, because that fold is a `<details>` and a fragment link into a closed one relies
+  on browser auto-expansion; a citation that silently does nothing is worse than none. A figure
+  a reader cannot click through to is a figure they have to take on faith, which is the whole
+  thing this section exists to prevent.
+- **A figure with no source does not get a marker, it gets a sentence.** Where we could not
+  read a number at its source (ChatGPT's prices, assistant wages), the page says so in prose
+  and the `Sources` fold carries an unnumbered entry explaining the omission. Never invent a
+  citation to fill the pattern.
 - The availability sentence and the `archie/#status` link appear on every one of these pages,
   same as everywhere else.
 

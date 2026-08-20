@@ -150,6 +150,26 @@ mobile treatment is keyed to `td:first-child` rather than to literal column name
 what makes `.trust-table` unreusable. `.two-col-card-list--plain` swaps the blue tick for a
 dash: ticking a competitor's advantages in our own accent reads as sarcasm.
 
+### Merges and the Learn hub (2026-08-20)
+
+`what-you-need/` folded into `how-it-works/` as a `#what-you-need` band, sitting immediately
+before "Your path to a running agent", which is the sequence it gates. Inserting a band flipped
+the two after it, and that also fixed a pre-existing double `section-alt` at the foot of the
+page; the grounds now alternate cleanly end to end. The page keeps its numbered requirement
+cards and its paired desktop/mobile diagram. `what-you-need/` and `equipment/` are both
+meta-refresh stubs pointing at the anchor: `equipment/` was pointed at the new target directly
+rather than left chaining through `what-you-need/`.
+
+`learn/` is new, and it exists because `ai-explained/` had **zero inbound links** anywhere
+outside the nav and footer. Learn deliberately has no nav tab, so a hub carries it: the four
+pages as `.resource-card--linked` cards, then a `.calm-list--ask` router, same grammar as the
+compare hub. The footer's menu-less row is now Learn alone, opening on "Start Here".
+
+Worth knowing for the next merge: a page-scoped `<style>` block loads *after* `styles.css`, so
+`.need-list { margin: 0 auto }` silently beat the `.mt-48` utility on the same element once the
+list stopped being the first thing in its section. Use `margin-inline` when moving a component
+onto a page where a utility class has to reach it.
+
 ### Global, after the pages
 - [x] Footer (2026-08-19). **The four columns now mirror the four nav menus exactly, link for
       link**, so the footer teaches nothing the nav contradicts: Archie, Add-ons, Compare,

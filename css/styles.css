@@ -4548,6 +4548,12 @@ html[data-theme="dark"] .availability-widget iframe {
   color: var(--accent);
 }
 
+/* Blue at rest, ember on hover. This line is the supporting layer, not the top one: the card's
+   heading is the thing being offered and the read-more just says which way it goes, so it takes
+   the ink the site gives text links rather than competing with the heading in the same accent.
+   Hover is keyed to the whole card, because the card's face is one stretched link and the
+   heading already turns ember when the pointer is anywhere on it; the read-more moving with it
+   keeps the card reading as one target instead of two. */
 .resource-read-more {
   display: inline-flex;
   align-items: center;
@@ -4555,12 +4561,14 @@ html[data-theme="dark"] .availability-widget iframe {
   margin-top: 14px;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--c-blue-ink);
   transition: color var(--transition-quick);
 }
 
-.resource-read-more:hover {
-  color: var(--accent-hover);
+.resource-read-more:hover,
+.resource-card--linked:hover .resource-read-more,
+.resource-card--linked:focus-within .resource-read-more {
+  color: var(--accent);
 }
 
 /* A card whose whole face is the link. The <h3><a> stays the only real link, so the heading

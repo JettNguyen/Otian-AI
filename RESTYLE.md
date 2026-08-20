@@ -140,6 +140,24 @@ because a bare price column reads as "they are cheaper" when the products are no
 shape. Grok Bot's plan prices were read off the cards in a browser, ChatGPT-style, and carry
 that caveat in FACTS.md.
 
+**Voice rules for every comparison, learned the hard way on cloud-agents (2026-08-20):**
+
+- **Frame on ground Archie wins.** "Same promise, different computer" reduced Archie to the
+  competitor minus always-on; the reader tallied the rows and left. The page's frame is now
+  "an agent you own vs an agent you rent," which has concrete Archie-won rows (whose password
+  store, where you talk to it, the final-build commitment) instead of a values plea. A frame
+  that makes the other side's story the vivid one loses the scan no matter how good the facts.
+- **Concede in facts, never in narration.** Sentences the page says about itself ("this page
+  does not get to pretend that away", "it would be dishonest to bury it", "the honest answer
+  is") read as anxiety, not candor; disclosure is stated once, plainly, and not underlined.
+  The wins sections stay; their intros stopped certifying our own honesty.
+- **Never tell the reader the site isn't for them.** "This whole site is for the people who
+  care" filtered the undecided reader instead of creating the care. Make the stake concrete
+  once (a rented computer stays signed into your accounts somewhere you cannot unplug; the
+  one on your desk, you can) and let them decide.
+- **Advantages must be as picturable as concessions.** The competitor got "laptop at the
+  bottom of a bag"; Archie got "custody." Scenes beat principles; give our side scenes.
+
 Band order, repeated on all five: hero (with the availability line and a visible checked
 date), the short answer, the side-by-side `.cmp-table`, where the alternative wins, a
 "worth saying" band that concedes the overlap, the `Sources` fold, the quiet CTA.

@@ -224,14 +224,147 @@
     </section>
 
     <!-- ==============================
-         How It Works with Archie
+         Archie Business: the shared agent
          ============================== -->
-    <section class="section section-alt" aria-labelledby="how-heading">
+    <section class="section section-alt" aria-labelledby="shared-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">How it works</span>
-          <h2 id="how-heading" class="fade-up delay-1">One agent per teammate, on their own computer.</h2>
-          <p>Archie is our desktop app for building personal AI agents. In a business, that means each person gets an agent shaped to their role, not one shared bot in somebody else&rsquo;s cloud.</p>
+          <img src="../assets/archie-business.svg" alt="" aria-hidden="true" class="fade-up" style="width: 44px; height: 44px; display: block; margin: 0 auto 14px;" />
+          <span class="section-label fade-up">Archie Business</span>
+          <h2 id="shared-heading" class="fade-up delay-1">One agent your whole team messages.</h2>
+          <p>Archie Business runs one agent for the whole business. Everyone messages the same agent, it answers each person from their own mail and calendar once they connect them (and never from anybody else&rsquo;s), and the owner decides who is in. One plan, $99 a month or $999 a year, with no seat count.</p>
+        </div>
+
+        <figure class="explain-figure fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 300" role="img" aria-labelledby="bsh-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
+            <title id="bsh-t">Three teammates message one shared agent running on one computer. Each lane carries their own questions down to it, and beside the agent a note says each person is answered from their own accounts, never anybody else&rsquo;s.</title>
+            <style>
+              .bsh-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.4}
+              .bsh-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
+              .bsh-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .bsh-lane{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.3;stroke-linecap:round}
+              .bsh-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.6}
+              .bsh-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.5}
+              .bsh-a{fill:var(--accent)}
+              .bsh-stand{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
+              .bsh-note{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.3}
+              .bsh-notetxt{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
+              .bsh-dot{fill:var(--accent)}
+              @media (prefers-reduced-motion:no-preference){
+                .bsh-grp{animation:bshIn .7s cubic-bezier(.22,1,.36,1) both}
+                .bs1{animation-delay:.06s}.bs2{animation-delay:.18s}.bs3{animation-delay:.3s}
+                @keyframes bshIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+                .bsh-dot{animation:bshDown 3.3s ease-in-out infinite}
+                .bp1{animation-delay:.2s}.bp2{animation-delay:1.2s}.bp3{animation-delay:2.2s}
+                @keyframes bshDown{0%{opacity:0;transform:translateY(0)}12%{opacity:1}55%{opacity:1;transform:translateY(64px)}70%,100%{opacity:0;transform:translateY(70px)}}
+              }
+            </style>
+
+            <!-- three people, one row -->
+            <g class="bsh-grp bs1">
+              <rect class="bsh-person" x="40" y="10" width="150" height="58" rx="12"/>
+              <text class="bsh-name" x="115" y="34">Support</text>
+              <text class="bsh-sub" x="115" y="52">&ldquo;who&rsquo;s waiting on us?&rdquo;</text>
+            </g>
+            <g class="bsh-grp bs2">
+              <rect class="bsh-person" x="245" y="10" width="150" height="58" rx="12"/>
+              <text class="bsh-name" x="320" y="34">Owner</text>
+              <text class="bsh-sub" x="320" y="52">&ldquo;what&rsquo;s on today?&rdquo;</text>
+            </g>
+            <g class="bsh-grp bs3">
+              <rect class="bsh-person" x="450" y="10" width="150" height="58" rx="12"/>
+              <text class="bsh-name" x="525" y="34">Ops</text>
+              <text class="bsh-sub" x="525" y="52">&ldquo;I&rsquo;ll take the Meyer quote&rdquo;</text>
+            </g>
+
+            <!-- lanes converging on the one agent -->
+            <path class="bsh-lane" d="M115 68 C 115 110, 260 110, 288 142"/>
+            <line class="bsh-lane" x1="320" y1="68" x2="320" y2="142"/>
+            <path class="bsh-lane" d="M525 68 C 525 110, 380 110, 352 142"/>
+            <circle class="bsh-dot bp1" cx="115" cy="72" r="3"/>
+            <circle class="bsh-dot bp2" cx="320" cy="72" r="3"/>
+            <circle class="bsh-dot bp3" cx="525" cy="72" r="3"/>
+
+            <!-- the one agent, one computer -->
+            <rect class="bsh-card" x="224" y="142" width="192" height="120" rx="16"/>
+            <text class="bsh-name" x="320" y="166">The team&rsquo;s agent</text>
+            <rect class="bsh-screen" x="288" y="178" width="64" height="44" rx="6"/>
+            <g class="bsh-a" transform="translate(304.64,185.42) scale(0.03)">
+              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+              <polygon points="328,887 512,727 696,887"/>
+            </g>
+            <path class="bsh-stand" d="M320 222 V230 M306 230 H334"/>
+            <text class="bsh-sub" x="320" y="248">one computer, one plan</text>
+
+            <!-- the privacy note beside it -->
+            <rect class="bsh-note" x="444" y="176" width="176" height="52" rx="12"/>
+            <text class="bsh-notetxt" x="532" y="198">Each person answered from</text>
+            <text class="bsh-notetxt" x="532" y="212">their own accounts, never yours</text>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 262" role="img" aria-labelledby="bshm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="bshm-t">Three teammates message one shared agent running on one computer, and each person is answered from their own accounts, never anybody else&rsquo;s.</title>
+            <style>
+              .bshm-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.3}
+              .bshm-name{fill:currentColor;font-size:10.5px;font-weight:700;text-anchor:middle}
+              .bshm-lane{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3;stroke-linecap:round}
+              .bshm-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.5}
+              .bshm-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.4}
+              .bshm-a{fill:var(--accent)}
+              .bshm-stand{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round}
+              .bshm-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
+              .bshm-dot{fill:var(--accent)}
+              @media (prefers-reduced-motion:no-preference){
+                .bshm-dot{animation:bshmDown 3.3s ease-in-out infinite}
+                .bpm1{animation-delay:.2s}.bpm2{animation-delay:1.2s}.bpm3{animation-delay:2.2s}
+                @keyframes bshmDown{0%{opacity:0;transform:translateY(0)}12%{opacity:1}55%{opacity:1;transform:translateY(40px)}70%,100%{opacity:0;transform:translateY(46px)}}
+              }
+            </style>
+            <rect class="bshm-person" x="8" y="8" width="100" height="40" rx="10"/>
+            <text class="bshm-name" x="58" y="32">Support</text>
+            <rect class="bshm-person" x="120" y="8" width="100" height="40" rx="10"/>
+            <text class="bshm-name" x="170" y="32">Owner</text>
+            <rect class="bshm-person" x="232" y="8" width="100" height="40" rx="10"/>
+            <text class="bshm-name" x="282" y="32">Ops</text>
+
+            <path class="bshm-lane" d="M58 48 C 58 78, 130 80, 152 100"/>
+            <line class="bshm-lane" x1="170" y1="48" x2="170" y2="100"/>
+            <path class="bshm-lane" d="M282 48 C 282 78, 210 80, 188 100"/>
+            <circle class="bshm-dot bpm1" cx="58" cy="52" r="3"/>
+            <circle class="bshm-dot bpm2" cx="170" cy="52" r="3"/>
+            <circle class="bshm-dot bpm3" cx="282" cy="52" r="3"/>
+
+            <rect class="bshm-card" x="118" y="100" width="104" height="96" rx="14"/>
+            <text class="bshm-name" x="170" y="118">The team&rsquo;s agent</text>
+            <rect class="bshm-screen" x="150" y="128" width="40" height="32" rx="5"/>
+            <g class="bshm-a" transform="translate(158.53,133.12) scale(0.0224)">
+              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+              <polygon points="328,887 512,727 696,887"/>
+            </g>
+            <path class="bshm-stand" d="M170 160 V166 M160 166 H180"/>
+            <text class="bshm-sub" x="170" y="184">one computer, one plan</text>
+            <text class="bshm-sub" x="170" y="224">Each person answered from their own</text>
+            <text class="bshm-sub" x="170" y="238">accounts, never anybody else&rsquo;s</text>
+          </svg>
+          <figcaption>One agent for the whole business, on one computer. Everyone messages it, the owner decides who is in, and each person is answered from their own connected accounts, never anybody else&rsquo;s.</figcaption>
+        </figure>
+
+        <div class="pricing-why mt-48 fade-up delay-2">
+          <p class="text-center">
+            It installs beside regular Archie as its own app, with its own data and its own keys. The store inside opens on the add-ons built for teams: the handoff ledger, the watch on what customers are owed, and the morning standup that assembles both. <a href="../archie/pricing/">The full plan, side by side with the personal one</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         How It Works with Archie
+         ============================== -->
+    <section class="section" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The other way: Archie, per person</span>
+          <h2 id="how-heading" class="fade-up delay-1">Or an agent per teammate, each on their own computer.</h2>
+          <p>Some teams want the opposite of sharing: each person gets an agent shaped to their role, on their own computer, with their own data. That is regular Archie, $30 a month or $299 a year per person, and it is how our guided setup below builds things when a team asks for it.</p>
         </div>
 
         <figure class="explain-figure fade-up delay-1" id="biz-fig">
@@ -501,7 +634,7 @@
     <!-- ==============================
          Guided Setup for Teams
          ============================== -->
-    <section class="section" id="pricing" aria-labelledby="guided-heading">
+    <section class="section section-alt" id="pricing" aria-labelledby="guided-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Guided setup</span>
@@ -552,7 +685,7 @@
     <!-- ==============================
          Free Call CTA
          ============================== -->
-    <section class="section section-alt" aria-label="Book the free discovery call">
+    <section class="section" aria-label="Book the free discovery call">
       <div class="hm-wrap hm-head hm-cta">
         <h2 class="fade-up">Start with the free discovery call.</h2>
         <p class="hm-lede fade-up">Tell us how your business runs and what eats your team&rsquo;s week. We&rsquo;ll tell you which agents make sense, how many sessions the setup needs, and what it costs, before you spend a dollar.</p>

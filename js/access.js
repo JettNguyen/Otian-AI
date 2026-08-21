@@ -28,6 +28,7 @@ export const SUBSCRIPTION_GRANTS_ACCESS = ["active", "trialing", "past_due"];
 function legacyLicense(tiers) {
   if (tiers.includes("admin")) return "staff";
   if (tiers.includes("lifetime")) return "bought";
+  if (tiers.includes("business")) return "plan_business";
   if (tiers.includes("subscriber")) return "plan";
   if (tiers.includes("client")) return "granted";
   return "none";
@@ -64,7 +65,11 @@ export function decideAccess(d, now = Date.now()) {
       has("admin") ||
       has("lifetime") ||
       has("client") ||
-      (has("subscriber") && SUBSCRIPTION_GRANTS_ACCESS.includes(status));
+      // Both plan tiers are Stripe subscriptions, so both answer to the subscription status.
+      // The webhook writes `business` for the Archie Business product (it tells the editions
+      // apart by product id); a business document without this line was told to start a plan
+      // it was already paying for.
+      ((has("subscriber") || has("business")) && SUBSCRIPTION_GRANTS_ACCESS.includes(status));
     return { allowed, license: legacyLicense(tiers), tiers };
   }
 
@@ -78,7 +83,7 @@ export function decideAccess(d, now = Date.now()) {
       ? true
       : license === "granted"
         ? live
-        : license === "plan"
+        : license === "plan" || license === "plan_business"
           ? SUBSCRIPTION_GRANTS_ACCESS.includes(status)
           : false;
   return { allowed, license, tiers };

@@ -271,9 +271,17 @@
                 <span class="pill" id="archie-pill">…</span>
               </div>
               <div class="acct-section-body" id="archie-body">Checking your purchases&hellip;</div>
-              <div class="acct-row acct-hidden" id="archie-actions">
-                <button class="btn btn-primary btn-mini" data-plan="monthly">$30 a month</button>
-                <button class="btn btn-mini" data-plan="yearly">$299 a year</button>
+              <div class="acct-hidden" id="archie-actions">
+                <div class="acct-row">
+                  <span class="acct-plan-name">Archie</span>
+                  <button class="btn btn-primary btn-mini" data-plan="monthly">$30 a month</button>
+                  <button class="btn btn-secondary btn-mini" data-plan="yearly">$299 a year</button>
+                </div>
+                <div class="acct-row">
+                  <span class="acct-plan-name">Archie Business</span>
+                  <button class="btn btn-business btn-mini" data-plan="business-monthly">$99 a month</button>
+                  <button class="btn btn-secondary btn-mini" data-plan="business-yearly">$999 a year</button>
+                </div>
               </div>
             </div>
 
@@ -431,6 +439,11 @@
     const PLAN_LINKS = {
       yearly: "https://buy.stripe.com/dRm4gydNl8Kochl0thaR203",
       monthly: "https://buy.stripe.com/4gM28qbFd5yca9d5NBaR204",
+      // Archie Business checkout links go here when the business runbook finishes (the Stripe
+      // prices must sit on the Archie Business product, or the webhook grants the wrong tier;
+      // see FACTS.md). Until then the buttons fall through to the "isn't set up yet" message.
+      "business-monthly": "",
+      "business-yearly": "",
     };
     const BILLING_API = "https://archie-4f35.onrender.com";
 
@@ -504,7 +517,32 @@
       } catch (e) { return false; }
     }
 
+    // ── Scroll restoration ───────────────────────────────────────────────────
+    // Refreshing while scrolled used to drop the reader near the bottom. Everything on this page
+    // hides behind the auth check, so the browser restored the old scroll offset against the
+    // short loading skeleton, clamped it to that little document's height, and the dashboard
+    // then grew underneath the clamp. So restoration is ours: save the offset on the way out,
+    // and put it back on the frame after the dashboard is revealed, when the page has its real
+    // height again. Only reloads and back/forward get restored; following a link here fresh
+    // should land at the top like any other page.
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const SCROLL_KEY = "acct-scroll";
+    window.addEventListener("pagehide", () => {
+      try { sessionStorage.setItem(SCROLL_KEY, String(window.scrollY)); } catch (e) { /* private mode */ }
+    });
+    function restoreScroll() {
+      let y = 0;
+      try {
+        y = Number(sessionStorage.getItem(SCROLL_KEY)) || 0;
+        sessionStorage.removeItem(SCROLL_KEY);
+      } catch (e) { return; }
+      const nav = performance.getEntriesByType("navigation")[0];
+      if (!nav || (nav.type !== "reload" && nav.type !== "back_forward")) return;
+      if (y > 0) requestAnimationFrame(() => window.scrollTo(0, y));
+    }
+
     // ── This page is signed-in AND second-factor-cleared only. Otherwise → /login/ and come back. ──
+    let restoredOnce = false;
     onAuthStateChanged(auth, (user) => {
       if (!user) { window.location.replace("/login/?next=/account/"); return; }
       if (!twoFactorCleared(user) && !cameFromLogin()) { window.location.replace("/login/?next=/account/"); return; }
@@ -512,6 +550,7 @@
       show("acct-signedin", true);
       setStatus("");
       renderDashboard(user);
+      if (!restoredOnce) { restoredOnce = true; restoreScroll(); }
     });
 
     function renderDashboard(user) {
@@ -573,7 +612,7 @@
         show("archie-actions", false);
       } else {
         setPill("archie-pill", "Not yet", false);
-        body.textContent = "Start a plan to use Archie: $30 a month, or $299 a year. A year costs $61 less than twelve months bought one at a time, and you can change or stop either one whenever you like.";
+        body.textContent = "Start a plan to use Archie: $30 a month or $299 a year for the personal edition, and $99 a month or $999 a year for Archie Business, one plan for a shared agent your whole team can message. You can change or stop either one whenever you like.";
         show("archie-actions", true);
       }
     }

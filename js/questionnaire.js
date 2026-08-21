@@ -1,92 +1,254 @@
 /* ========================================
-   Otian AI | Questionnaire Form
+   Otian AI | Get Started conversation
    js/questionnaire.js
 
-   Two doors: join the Archie waitlist (short path)
-   or the guided-setup intake (full path). The fork
-   step decides which sequence of steps runs.
+   The intake, staged as a chat with Ember rather than a form. One question at a
+   time: Ember's messages arrive behind a typing indicator, answers are tappable
+   chips or one inline field, and each answer echoes back as the reader's own
+   bubble with an edit control that rewinds the thread to that question.
+
+   Two doors, same as before: the Archie waitlist (short path) or the guided-setup
+   intake (longer path). The fork decides which sequence of questions runs, and
+   both end in the same Formspree submission with the same field names the form
+   used, so the inbox side of this did not change.
    ======================================== */
 
 (function () {
   'use strict';
 
-  /* ── Step sequences per path ── */
-  const PATHS = {
-    waitlist: ['step-intent', 'step-waitlist'],
-    guided:   ['step-intent', 'step-about', 'step-help', 'step-handson', 'step-comfort', 'step-closing']
-  };
-
-  const stepLabels = {
-    'step-intent':   'Get started',
-    'step-waitlist': 'Join the waitlist',
-    'step-about':    'About you',
-    'step-help':     'What you want help with',
-    'step-handson':  'How hands-on',
-    'step-comfort':  'Comfort level',
-    'step-closing':  'Closing'
-  };
-
-  let activePath = 'guided'; // default until the fork is answered
-  let pathPos = 0;
+  var FORMSPREE_ID = 'mgobddpy';
+  var EMBER_LOOK = 'terracotta.peak.pill.none';
+  var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ── Element references ── */
-  const steps        = document.querySelectorAll('.form-step');
-  const progressFill = document.getElementById('progressFill');
-  const progressLabel = document.getElementById('progressLabel');
-  const progressCount = document.getElementById('progressCount');
-  const formEl       = document.getElementById('questionnaireForm');
-  const thankyou     = document.getElementById('thankyouScreen');
-  const progressWrap = document.getElementById('progressWrap');
+  var thread = document.getElementById('chatThread');
+  var formEl = document.getElementById('questionnaireForm');
+  var thankyou = document.getElementById('thankyouScreen');
+  var progressWrap = document.getElementById('progressWrap');
+  var progressFill = document.getElementById('progressFill');
+  var progressLabel = document.getElementById('progressLabel');
+  var progressCount = document.getElementById('progressCount');
+  if (!thread) return;
 
-  function currentStepId() {
-    return PATHS[activePath][pathPos];
-  }
+  /* ── The conversation ──
+     Each node is one exchange: Ember's messages (strings are HTML we wrote, never
+     reader input), then one way to answer. `next` names the following node, or
+     decides it from the answer. `ack` is an optional reply to what was chosen. */
+  var NODES = {
 
-  /* ── Update progress bar ── */
-  function updateProgress() {
-    const total = PATHS[activePath].length;
-    const pct = Math.round(((pathPos + 1) / total) * 100);
-    if (progressFill)  progressFill.style.width = pct + '%';
-    if (progressLabel) progressLabel.textContent = stepLabels[currentStepId()] || '';
-    if (progressCount) progressCount.textContent = 'Section ' + (pathPos + 1) + ' of ' + total;
-  }
+    audience: {
+      section: 'Get started',
+      bot: [
+        'Hi, I’m Ember. A few quick questions and we’ll point you to the right starting place. You can change any answer as we go.',
+        'First: who would your AI agent work for? (An agent is AI that does tasks for you, like sorting email or setting reminders, rather than just answering questions.)'
+      ],
+      type: 'choice',
+      name: 'edition',
+      options: [
+        { value: 'personal', label: 'Just me' },
+        { value: 'business', label: 'My business or team' },
+        { value: 'unsure', label: 'I’m not sure yet' }
+      ],
+      ack: function (value) {
+        if (value === 'business') {
+          return 'Got it. That points at the Business plan later on: agents your whole team can message. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a>.';
+        }
+        if (value === 'unsure') {
+          return 'No problem. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a> whenever you want to compare, and nothing here locks you in.';
+        }
+        return null;
+      },
+      next: 'intent'
+    },
 
-  /* ── Show the step at the current path position ── */
-  function showStep(pos, skipScroll) {
-    pathPos = pos;
-    const id = currentStepId();
-    steps.forEach(function (step) {
-      step.classList.toggle('active', step.id === id);
-    });
-    updateProgress();
+    intent: {
+      section: 'Get started',
+      bot: ['And what would you like to do today?'],
+      type: 'choice',
+      cards: true,
+      name: 'intent',
+      options: [
+        {
+          value: 'waitlist',
+          label: 'Put me on the Archie waitlist',
+          desc: 'Archie is our desktop app for building personal AI agents that run on your own computer. The waitlist hears the moment it lands.'
+        },
+        {
+          value: 'guided',
+          label: 'I want help setting up an agent',
+          desc: 'Our guided setup: we build your agent with you, starting with a free call. A few questions here help us come prepared.'
+        }
+      ],
+      setPath: function (value) { return value === 'waitlist' ? 'waitlist' : 'guided'; },
+      next: function (value) { return value === 'waitlist' ? 'wlEmail' : 'gName'; }
+    },
 
-    if (!skipScroll) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    /* ── Waitlist path ── */
+
+    wlEmail: {
+      section: 'Join the waitlist',
+      bot: ['Happy to have you. Two questions and you’re on the list. What email should the invite go to?'],
+      type: 'email',
+      name: 'waitlistEmail',
+      placeholder: 'your@email.com',
+      autocomplete: 'email',
+      next: 'wlPlatform'
+    },
+
+    wlPlatform: {
+      section: 'Join the waitlist',
+      bot: [
+        'And which computer would your agent run on?',
+        'Wondering where Archie stands today? <a href="../archie/#status">Check the current status</a>.'
+      ],
+      type: 'choice',
+      name: 'platform',
+      options: [
+        { value: 'mac', label: 'Mac' },
+        { value: 'windows', label: 'Windows' }
+      ],
+      next: 'wlConfirm'
+    },
+
+    wlConfirm: {
+      section: 'Join the waitlist',
+      bot: ['That’s everything. We’ll email you the moment Archie is ready for you.'],
+      type: 'confirm',
+      label: 'Join the Waitlist'
+    },
+
+    /* ── Guided-setup path ── */
+
+    gName: {
+      section: 'About you',
+      bot: [
+        {
+          note: true,
+          html: '<strong>How pricing works:</strong> your first 30-minute discovery call is free. Guided setup is $250 a session, and each session runs an hour. The rate never goes up because a setup is complicated; a bigger setup can simply take more than one session, and we’ll tell you which yours is on that free discovery call. Archie itself is $30 a month or $299 a year when it ships, a separate cost from your sessions. The AI itself is pay-as-you-go on your own account, billed straight to you. <a href="../archie/pricing/">Every cost, in full</a>.'
+        },
+        'With that on the table: what’s your first and last name?'
+      ],
+      type: 'text',
+      name: 'fullName',
+      placeholder: 'Jane Smith',
+      autocomplete: 'name',
+      errorMsg: 'Please enter your name.',
+      ack: function (value) {
+        var first = String(value).trim().split(' ')[0];
+        return first ? 'Nice to meet you, ' + escapeHtml(first) + '.' : null;
+      },
+      next: 'gEmail'
+    },
+
+    gEmail: {
+      section: 'About you',
+      bot: ['What’s the best email for follow-up?'],
+      type: 'email',
+      name: 'emailAddress',
+      placeholder: 'jane@example.com',
+      autocomplete: 'email',
+      next: 'gTask'
+    },
+
+    gTask: {
+      section: 'What you want help with',
+      bot: ['Now the interesting part. If your AI agent worked perfectly, what is one task you would love to hand off and never do again?'],
+      type: 'textarea',
+      name: 'handOffTask',
+      placeholder: 'e.g. Going through my inbox every morning. There are so many emails and most of them do not need my attention. I just want to see what actually matters.',
+      errorMsg: 'Please describe the task you’d like to hand off.',
+      next: 'gTime'
+    },
+
+    gTime: {
+      section: 'What you want help with',
+      bot: ['Roughly how much time a week does that take right now?'],
+      type: 'choice',
+      name: 'timeSpent',
+      options: [
+        { value: 'under-2', label: 'Under 2 hours' },
+        { value: '2-5', label: '2-5 hours' },
+        { value: '5-10', label: '5-10 hours' },
+        { value: '10-plus', label: '10+ hours' }
+      ],
+      next: 'gApproval'
+    },
+
+    gApproval: {
+      section: 'How hands-on',
+      bot: [
+        'We set up every agent with sensible defaults that protect you from day one. Archie sends email and changes your calendar only on your approval (nothing goes out or gets changed until you say yes) and it can’t spend money or make a purchase at all.',
+        'Beyond those basics: for routine, low-risk tasks (sorting email, setting reminders), should your agent just do it and tell you afterward, or check with you first?'
+      ],
+      type: 'choice',
+      name: 'taskApproval',
+      options: [
+        { value: 'just-do', label: 'Just do it and tell me after' },
+        { value: 'always-ask', label: 'Always ask me first' },
+        { value: 'discuss', label: 'Depends on the task, let’s discuss' }
+      ],
+      next: 'gTech'
+    },
+
+    gTech: {
+      section: 'Comfort level',
+      bot: ['How would you rate your experience with computers? 1 is a beginner, 10 is an expert, and there is no wrong answer; it just tells us how much to explain.'],
+      type: 'rating',
+      name: 'techRating',
+      next: 'gAI'
+    },
+
+    gAI: {
+      section: 'Comfort level',
+      bot: ['Have you used AI tools before, like ChatGPT?'],
+      type: 'choice',
+      name: 'aiExperience',
+      options: [
+        { value: 'yes', label: 'Yes' },
+        { value: 'no', label: 'No' },
+        { value: 'unsure', label: 'Not sure what that is' }
+      ],
+      ack: function (value) {
+        if (value === 'no' || value === 'unsure') {
+          return 'Good to know. The free call starts wherever you are.';
+        }
+        return null;
+      },
+      next: 'gExtra'
+    },
+
+    gExtra: {
+      section: 'Closing',
+      bot: ['Last one. Anything else you would like us to know before your call?'],
+      type: 'textarea',
+      name: 'anythingElse',
+      optional: true,
+      skipLabel: 'Nothing to add',
+      placeholder: 'e.g. I travel frequently and work across two time zones. I have an existing Google Workspace account. I tried an AI tool once and found it confusing. I am hoping this is different.',
+      next: 'gConfirm'
+    },
+
+    gConfirm: {
+      section: 'Closing',
+      bot: ['That’s everything. Send your answers, and on the next screen you can pick a time for your free discovery call.'],
+      type: 'confirm',
+      label: 'Send My Answers'
     }
-  }
+  };
 
-  /* ── Validation helpers ── */
-  function showError(input, msg) {
-    input.classList.add('field-error');
-    const errEl = input.parentElement.querySelector('.form-error-msg');
-    if (errEl) {
-      errEl.textContent = msg;
-      errEl.classList.add('visible');
-    }
-  }
+  /* ── Question order per path, for the progress bar ── */
+  var PATHS = {
+    waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
+    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm']
+  };
 
-  function clearError(input) {
-    input.classList.remove('field-error');
-    const errEl = input.parentElement.querySelector('.form-error-msg');
-    if (errEl) errEl.classList.remove('visible');
-  }
+  var activePath = 'guided'; // default until the fork is answered
+  var answers = {};          // field name -> answer value (what Formspree receives)
+  var history = [];          // one record per asked node: { id, els, timers }
 
-  function clearAllErrors(stepEl) {
-    stepEl.querySelectorAll('.field-error').forEach(function (el) {
-      el.classList.remove('field-error');
-    });
-    stepEl.querySelectorAll('.form-error-msg.visible').forEach(function (el) {
-      el.classList.remove('visible');
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
 
@@ -94,303 +256,385 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
   }
 
-  function scrollToFirstStepError(stepEl) {
-    if (!stepEl) return;
-
-    var firstFieldError = stepEl.querySelector('.field-error');
-    var firstVisibleError = stepEl.querySelector('.form-error-msg.visible');
-    var target = null;
-
-    if (firstFieldError) {
-      target = firstFieldError.closest('.form-group') || firstFieldError;
-    } else if (firstVisibleError) {
-      target = firstVisibleError.closest('.form-group') || firstVisibleError;
-    }
-
-    if (!target) return;
-
-    document.querySelectorAll('.form-group.error-flash').forEach(function (el) {
-      el.classList.remove('error-flash');
-    });
-    target.classList.add('error-flash');
-    window.setTimeout(function () {
-      target.classList.remove('error-flash');
-    }, 1400);
-
-    var navEl = document.getElementById('nav');
-    var progressEl = document.getElementById('progressWrap');
-    var navOffset = navEl ? navEl.offsetHeight : 0;
-    var progressOffset = (progressEl && progressEl.offsetParent !== null) ? progressEl.offsetHeight : 0;
-    var extraOffset = 18;
-    var y = target.getBoundingClientRect().top + window.pageYOffset - navOffset - progressOffset - extraOffset;
-
-    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-
-    var focusTarget = firstFieldError || target.querySelector('input, textarea, select');
-    if (focusTarget && typeof focusTarget.focus === 'function') {
-      focusTarget.focus({ preventScroll: true });
+  /* ── Progress bar ── */
+  function updateProgress(nodeId) {
+    var path = PATHS[activePath];
+    var node = NODES[nodeId];
+    var idx = path.indexOf(nodeId);
+    var total = path.length - 1; // the confirm step is a send button, not a question
+    if (progressLabel) progressLabel.textContent = node.section;
+    if (node.type === 'confirm') {
+      if (progressCount) progressCount.textContent = 'All set';
+      if (progressFill) progressFill.style.width = '100%';
+    } else {
+      if (progressCount) progressCount.textContent = 'Question ' + (idx + 1) + ' of ' + total;
+      if (progressFill) progressFill.style.width = Math.round(((idx + 1) / (total + 1)) * 100) + '%';
     }
   }
 
-  /* ── Validate the current step ── */
-  function validateStep(stepId) {
-    const stepEl = document.getElementById(stepId);
-    if (!stepEl) return true;
-    clearAllErrors(stepEl);
-    let valid = true;
-
-    function requireInput(id, msg) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (!el.value.trim()) {
-        showError(el, msg || 'This field is required.');
-        valid = false;
-      }
+  /* ── Keeping the newest message in view ──
+     Scrolls the page just far enough that the appended node's bottom edge clears
+     the viewport, rather than pinning to the document end (the footer is below). */
+  function scrollToShow(el) {
+    var bottom = el.getBoundingClientRect().bottom + window.pageYOffset;
+    var target = bottom - window.innerHeight + 28;
+    if (target > (window.pageYOffset || 0)) {
+      window.scrollTo({ top: target, behavior: REDUCED ? 'auto' : 'smooth' });
     }
-
-    function requireEmail(id, msg) {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (!el.value.trim()) {
-        showError(el, msg || 'Please enter your email address.');
-        valid = false;
-      } else if (!isValidEmail(el.value.trim())) {
-        showError(el, 'Please enter a valid email address.');
-        valid = false;
-      }
-    }
-
-    function requireChoice(name, errId) {
-      if (!document.querySelector('input[name="' + name + '"]:checked')) {
-        var errEl = document.getElementById(errId);
-        if (errEl) errEl.classList.add('visible');
-        valid = false;
-      }
-    }
-
-    switch (stepId) {
-      case 'step-intent':
-        requireChoice('intent', 'intentError');
-        requireChoice('edition', 'editionError');
-        break;
-
-      case 'step-waitlist':
-        requireEmail('waitlistEmail');
-        requireChoice('platform', 'platformError');
-        break;
-
-      case 'step-about':
-        requireInput('fullName', 'Please enter your name.');
-        requireEmail('emailAddress');
-        requireInput('profession', 'Please tell us your profession or line of work.');
-        break;
-
-      case 'step-help':
-        requireInput('handOffTask', 'Please describe the task you\'d like to hand off.');
-        var checkboxes = document.querySelectorAll('input[name="helpOptions"]');
-        var anyChecked = false;
-        checkboxes.forEach(function (cb) { if (cb.checked) anyChecked = true; });
-        if (!anyChecked) {
-          var groupErr = document.getElementById('helpOptionsError');
-          if (groupErr) groupErr.classList.add('visible');
-          valid = false;
-        }
-        requireChoice('timeSpent', 'timeSpentError');
-        requireChoice('messagingPref', 'messagingPrefError');
-        break;
-
-      case 'step-handson':
-        requireChoice('taskApproval', 'taskApprovalError');
-        requireChoice('urgentNotify', 'urgentNotifyError');
-        requireChoice('summaryFreq', 'summaryFreqError');
-        break;
-
-      case 'step-comfort':
-        requireChoice('techRating', 'techRatingError');
-        requireChoice('aiExperience', 'aiExperienceError');
-        requireChoice('aiAgentAwareness', 'aiAgentAwarenessError');
-        requireChoice('managePref', 'managePrefError');
-        break;
-
-      case 'step-closing':
-        var aiCBs = document.querySelectorAll('input[name="aiTools"]');
-        var aiAny = false;
-        aiCBs.forEach(function (cb) { if (cb.checked) aiAny = true; });
-        if (!aiAny) {
-          var aiErr = document.getElementById('aiToolsError');
-          if (aiErr) aiErr.classList.add('visible');
-          valid = false;
-        }
-        break;
-    }
-
-    return valid;
   }
 
-  /* ── Fork: intent choice sets the active path ── */
-  function selectedIntent() {
-    var checked = document.querySelector('input[name="intent"]:checked');
-    return checked ? checked.value : null;
+  function react(state, ms) {
+    if (window.Ember) window.Ember.react(state, ms);
   }
 
-  document.querySelectorAll('input[name="intent"]').forEach(function (radio) {
-    radio.addEventListener('change', function () {
-      var intent = selectedIntent();
-      if (intent && PATHS[intent]) {
-        activePath = intent;
-        updateProgress();
-      }
-    });
-  });
+  /* ── One group of Ember messages: avatar plus a column of bubbles ── */
+  function botGroup(rec) {
+    var group = document.createElement('div');
+    group.className = 'chat-group chat-in';
+    var avatar = document.createElement('span');
+    avatar.className = 'chat-avatar';
+    avatar.setAttribute('data-ember', EMBER_LOOK);
+    avatar.setAttribute('aria-hidden', 'true');
+    var msgs = document.createElement('div');
+    msgs.className = 'chat-msgs';
+    group.appendChild(avatar);
+    group.appendChild(msgs);
+    thread.appendChild(group);
+    rec.els.push(group);
+    /* ember.js loads deferred, after this script: it sweeps the page itself on
+       DOMContentLoaded, so only groups added later need the explicit mount. */
+    if (window.Ember) window.Ember.auto(group);
+    return msgs;
+  }
 
-  /* ── Next button handler ── */
-  document.querySelectorAll('.btn-next').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var stepId = currentStepId();
-      if (validateStep(stepId)) {
-        if (stepId === 'step-intent') {
-          var intent = selectedIntent();
-          if (intent && PATHS[intent]) activePath = intent;
+  /* Typing dots, then the message. The pause scales with how much is about to arrive,
+     because an instant essay reads as a paste rather than a reply. */
+  function typeThen(rec, msgs, ms, fn) {
+    if (REDUCED) { fn(); return; }
+    var typing = document.createElement('div');
+    typing.className = 'chat-bubble chat-typing chat-in';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    msgs.appendChild(typing);
+    scrollToShow(typing);
+    rec.timers.push(window.setTimeout(function () {
+      typing.remove();
+      fn();
+    }, ms));
+  }
+
+  /* ── Ask one node: play its messages, then offer the way to answer ── */
+  function ask(nodeId, prefill) {
+    var node = NODES[nodeId];
+    if (!node) return;
+    var rec = { id: nodeId, els: [], timers: [] };
+    history.push(rec);
+    updateProgress(nodeId);
+
+    var msgs = botGroup(rec);
+    var i = 0;
+    function nextMsg() {
+      if (i >= node.bot.length) {
+        renderInput(rec, node, prefill);
+        return;
+      }
+      var m = node.bot[i];
+      var html = (typeof m === 'string') ? m : m.html;
+      var delay = 380 + Math.min(html.length * 5, 900);
+      i += 1;
+      typeThen(rec, msgs, delay, function () {
+        var b = document.createElement('div');
+        b.className = 'chat-bubble chat-in' + ((m && m.note) ? ' chat-note' : '');
+        b.innerHTML = html;
+        msgs.appendChild(b);
+        scrollToShow(b);
+        nextMsg();
+      });
+    }
+    nextMsg();
+  }
+
+  /* ── The answering UI for the current node ── */
+  function renderInput(rec, node, prefill) {
+    var ui;
+
+    if (node.type === 'choice') {
+      ui = document.createElement('div');
+      ui.className = 'chat-choices chat-in';
+      node.options.forEach(function (opt) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        if (node.cards) {
+          btn.className = 'chat-choice chat-choice-card';
+          btn.innerHTML = '<span class="chat-choice-title">' + escapeHtml(opt.label) + '</span>' +
+            '<span class="chat-choice-desc">' + escapeHtml(opt.desc) + '</span>';
+        } else {
+          btn.className = 'chat-choice';
+          btn.textContent = opt.label;
         }
-        if (pathPos < PATHS[activePath].length - 1) {
-          showStep(pathPos + 1);
-        }
+        btn.addEventListener('click', function () {
+          answer(rec, node, opt.value, opt.label);
+        });
+        ui.appendChild(btn);
+      });
+
+    } else if (node.type === 'rating') {
+      ui = document.createElement('div');
+      ui.className = 'chat-choices chat-in';
+      for (var n = 1; n <= 10; n++) {
+        (function (val) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'chat-choice chat-choice-rate';
+          btn.textContent = String(val);
+          btn.addEventListener('click', function () {
+            answer(rec, node, String(val), val + ' out of 10');
+          });
+          ui.appendChild(btn);
+        })(n);
+      }
+      var scale = document.createElement('div');
+      scale.className = 'chat-scale-labels';
+      scale.innerHTML = '<span>Beginner</span><span>Expert</span>';
+      ui.appendChild(scale);
+
+    } else if (node.type === 'confirm') {
+      ui = document.createElement('div');
+      ui.className = 'chat-choices chat-in';
+      var send = document.createElement('button');
+      send.type = 'button';
+      send.className = 'btn btn-primary';
+      send.textContent = node.label;
+      send.addEventListener('click', function () {
+        submit(send, node.label);
+      });
+      ui.appendChild(send);
+
+    } else {
+      /* text, email, textarea */
+      ui = document.createElement('div');
+      ui.className = 'chat-input-area chat-in';
+      var row = document.createElement('div');
+      row.className = 'chat-input-row';
+
+      var field;
+      if (node.type === 'textarea') {
+        field = document.createElement('textarea');
+        field.className = 'form-textarea';
+        field.rows = 3;
       } else {
-        scrollToFirstStepError(document.getElementById(stepId));
+        field = document.createElement('input');
+        field.className = 'form-input';
+        field.type = node.type === 'email' ? 'email' : 'text';
       }
-    });
-  });
+      field.placeholder = node.placeholder || '';
+      if (node.autocomplete) field.setAttribute('autocomplete', node.autocomplete);
+      field.setAttribute('aria-label', node.section + ' answer');
+      if (prefill) field.value = prefill;
 
-  /* ── Back button handler ── */
-  document.querySelectorAll('.btn-back').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      if (pathPos > 0) {
-        showStep(pathPos - 1);
+      var sendBtn = document.createElement('button');
+      sendBtn.type = 'button';
+      sendBtn.className = 'chat-send';
+      sendBtn.setAttribute('aria-label', 'Send answer');
+      sendBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>';
+
+      var err = document.createElement('span');
+      err.className = 'form-error-msg';
+      err.setAttribute('role', 'alert');
+
+      function trySend() {
+        var val = field.value.trim();
+        if (!val) {
+          if (node.optional) { answer(rec, node, '', node.skipLabel || 'Skipped'); return; }
+          fail(node.errorMsg || 'Please fill this in to continue.');
+          return;
+        }
+        if (node.type === 'email' && !isValidEmail(val)) {
+          fail('Please enter a valid email address.');
+          return;
+        }
+        answer(rec, node, val, val);
       }
-    });
-  });
 
-  /* ── Clear errors on input ── */
-  document.querySelectorAll('.form-input, .form-textarea').forEach(function (el) {
-    el.addEventListener('input', function () {
-      clearError(el);
-    });
-  });
-
-  /* ── helpOptions: max 3 selections ── */
-  function updateHelpOptionsState() {
-    var checked = document.querySelectorAll('input[name="helpOptions"]:checked');
-    var allCBs  = document.querySelectorAll('input[name="helpOptions"]');
-    var atMax   = checked.length >= 3;
-    allCBs.forEach(function (cb) {
-      if (!cb.checked) {
-        cb.disabled = atMax;
-        var opt = cb.closest('.checkbox-option');
-        if (opt) opt.style.opacity = atMax ? '0.4' : '';
+      function fail(msg) {
+        field.classList.add('field-error');
+        err.textContent = msg;
+        err.classList.add('visible');
+        react('oops', 900);
+        field.focus({ preventScroll: true });
       }
-    });
+
+      sendBtn.addEventListener('click', trySend);
+      field.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          trySend();
+        }
+      });
+      field.addEventListener('input', function () {
+        field.classList.remove('field-error');
+        err.classList.remove('visible');
+      });
+
+      row.appendChild(field);
+      row.appendChild(sendBtn);
+      ui.appendChild(row);
+      ui.appendChild(err);
+
+      if (node.optional) {
+        var skip = document.createElement('button');
+        skip.type = 'button';
+        skip.className = 'chat-skip';
+        skip.textContent = node.skipLabel || 'Skip this question';
+        skip.addEventListener('click', function () {
+          answer(rec, node, field.value.trim(), field.value.trim() || node.skipLabel || 'Skipped');
+        });
+        ui.appendChild(skip);
+      }
+
+      window.setTimeout(function () {
+        field.focus({ preventScroll: true });
+      }, 0);
+    }
+
+    rec.inputUI = ui;
+    thread.appendChild(ui);
+    rec.els.push(ui);
+    scrollToShow(ui);
   }
 
-  document.querySelectorAll('input[name="helpOptions"]').forEach(function (cb) {
-    cb.addEventListener('change', function () {
-      updateHelpOptionsState();
-    });
-  });
+  /* ── An answer: echo it, react, maybe acknowledge, move on ── */
+  function answer(rec, node, value, label) {
+    if (node.name) answers[node.name] = value;
+    if (node.setPath) activePath = node.setPath(value);
 
-  /* ── helpOptions "Other:" checkbox reveals text input ── */
-  var helpOtherCB   = document.getElementById('helpOther');
-  var helpOtherField = document.getElementById('somethingElseField');
-  if (helpOtherCB && helpOtherField) {
-    helpOtherCB.addEventListener('change', function () {
-      helpOtherField.classList.toggle('visible', helpOtherCB.checked);
+    if (rec.inputUI) {
+      rec.inputUI.remove();
+      rec.els.splice(rec.els.indexOf(rec.inputUI), 1);
+      rec.inputUI = null;
+    }
+
+    var row = document.createElement('div');
+    row.className = 'chat-user chat-in';
+    var edit = document.createElement('button');
+    edit.type = 'button';
+    edit.className = 'chat-edit';
+    edit.setAttribute('aria-label', 'Change this answer');
+    edit.title = 'Change this answer';
+    edit.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg>';
+    edit.addEventListener('click', function () {
+      rewindTo(rec);
     });
+    var bubble = document.createElement('div');
+    bubble.className = 'chat-bubble-user';
+    bubble.textContent = label;
+    row.appendChild(edit);
+    row.appendChild(bubble);
+    thread.appendChild(row);
+    rec.els.push(row);
+    scrollToShow(row);
+    react('done', 900);
+
+    var ackHtml = node.ack ? node.ack(value) : null;
+    function goNext() {
+      var nx = (typeof node.next === 'function') ? node.next(value, answers) : node.next;
+      if (nx) ask(nx);
+    }
+    if (ackHtml) {
+      var msgs = botGroup(rec);
+      typeThen(rec, msgs, 380 + Math.min(ackHtml.length * 5, 700), function () {
+        var b = document.createElement('div');
+        b.className = 'chat-bubble chat-in';
+        b.innerHTML = ackHtml;
+        msgs.appendChild(b);
+        scrollToShow(b);
+        rec.timers.push(window.setTimeout(goNext, REDUCED ? 0 : 350));
+      });
+    } else {
+      rec.timers.push(window.setTimeout(goNext, REDUCED ? 0 : 350));
+    }
   }
 
-  /* ── summaryFreq "Other:" radio reveals text input ── */
-  var summaryRadios     = document.querySelectorAll('input[name="summaryFreq"]');
-  var summaryOtherField = document.getElementById('summaryOtherField');
-  summaryRadios.forEach(function (radio) {
-    radio.addEventListener('change', function () {
-      var val = document.querySelector('input[name="summaryFreq"]:checked');
-      if (summaryOtherField) {
-        summaryOtherField.classList.toggle('visible', val && val.value === 'other');
+  /* ── Rewind: remove everything from a question onward and ask it again ── */
+  function rewindTo(rec) {
+    var idx = history.indexOf(rec);
+    if (idx < 0) return;
+    var node = NODES[rec.id];
+    var prev = node.name ? answers[node.name] : null;
+
+    for (var j = history.length - 1; j >= idx; j--) {
+      var r = history[j];
+      r.timers.forEach(window.clearTimeout);
+      r.els.forEach(function (e) { e.remove(); });
+      var n = NODES[r.id];
+      if (n && n.name) delete answers[n.name];
+    }
+    history.length = idx;
+
+    /* If the fork itself was rewound, the path is undecided again. */
+    if (!('intent' in answers)) activePath = 'guided';
+
+    ask(rec.id, (typeof prev === 'string' && prev) ? prev : null);
+  }
+
+  /* ── Submission: same Formspree endpoint and field names as the old form ── */
+  function submit(btn, idleLabel) {
+    btn.disabled = true;
+    btn.classList.add('is-busy');
+    btn.textContent = 'Sending…';
+
+    var fd = new FormData();
+    var gotcha = formEl ? formEl.querySelector('input[name="_gotcha"]') : null;
+    fd.append('_gotcha', gotcha ? gotcha.value : '');
+    Object.keys(answers).forEach(function (key) {
+      fd.append(key, answers[key]);
+    });
+
+    fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function (res) {
+      if (res.ok) {
+        showThankyou();
+      } else {
+        return res.json().then(function (json) {
+          throw new Error(json.errors ? json.errors.map(function (e) { return e.message; }).join(', ') : 'Submission failed');
+        });
       }
-    });
-  });
-
-  /* ── aiTools "Other:" checkbox reveals text input ── */
-  var aiToolsOtherCB    = document.getElementById('aiToolsOther');
-  var aiToolsOtherField = document.getElementById('aiToolsOtherField');
-  if (aiToolsOtherCB && aiToolsOtherField) {
-    aiToolsOtherCB.addEventListener('change', function () {
-      aiToolsOtherField.classList.toggle('visible', aiToolsOtherCB.checked);
+    })
+    .catch(function () {
+      btn.disabled = false;
+      btn.classList.remove('is-busy');
+      btn.textContent = idleLabel;
+      react('oops', 1200);
+      var msg = 'Something went wrong. Please try again or email us at questions@otianai.com';
+      // The page binds the shared status toast (see questionnaire/index.html); the alert is
+      // only the fallback for the module never having loaded.
+      if (window.otianQuestionnaireStatus) window.otianQuestionnaireStatus(msg, 'error');
+      else alert(msg);
     });
   }
-
-  /* ── Submit handler ── */
-  var FORMSPREE_ID = 'mgobddpy'; // ← replace with your 8-char Formspree ID
 
   function showThankyou() {
-    var isWaitlist = selectedIntent() === 'waitlist';
-    var guidedBlock   = document.getElementById('thankyouGuided');
+    var isWaitlist = answers.intent === 'waitlist';
+    var guidedBlock = document.getElementById('thankyouGuided');
     var waitlistBlock = document.getElementById('thankyouWaitlist');
-    if (guidedBlock)   guidedBlock.hidden = isWaitlist;
+    if (guidedBlock) guidedBlock.hidden = isWaitlist;
     if (waitlistBlock) waitlistBlock.hidden = !isWaitlist;
 
     if (!isWaitlist) {
-      var fullName  = (document.getElementById('fullName') || {}).value || '';
-      var firstName = fullName.trim().split(' ')[0] || 'there';
+      var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
       var nameEl = document.getElementById('thankyouName');
       if (nameEl) nameEl.textContent = firstName;
     }
 
-    if (formEl)       formEl.style.display = 'none';
+    if (formEl) formEl.style.display = 'none';
     if (progressWrap) progressWrap.style.display = 'none';
-    if (thankyou)     thankyou.classList.add('visible');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (thankyou) thankyou.classList.add('visible');
+    window.scrollTo({ top: 0, behavior: REDUCED ? 'auto' : 'smooth' });
   }
 
-  document.querySelectorAll('.btn-submit').forEach(function (submitBtn) {
-    var idleLabel = submitBtn.textContent;
-
-    submitBtn.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (!validateStep(currentStepId())) {
-        scrollToFirstStepError(document.getElementById(currentStepId()));
-        return;
-      }
-
-      submitBtn.disabled = true;
-      submitBtn.classList.add('is-busy');
-      submitBtn.textContent = 'Sending…';
-
-      fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-        method: 'POST',
-        body: new FormData(formEl),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (res) {
-        if (res.ok) {
-          showThankyou();
-        } else {
-          return res.json().then(function (json) {
-            throw new Error(json.errors ? json.errors.map(function(e){return e.message;}).join(', ') : 'Submission failed');
-          });
-        }
-      })
-      .catch(function () {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove('is-busy');
-        submitBtn.textContent = idleLabel;
-        var msg = 'Something went wrong. Please try again or email us at questions@otianai.com';
-        // The page binds the shared status toast (see questionnaire/index.html); the alert is
-        // only the fallback for the module never having loaded.
-        if (window.otianQuestionnaireStatus) window.otianQuestionnaireStatus(msg, 'error');
-        else alert(msg);
-      });
-    });
-  });
-
   /* ── Init ── */
-  showStep(0, true);
+  ask('audience');
 })();

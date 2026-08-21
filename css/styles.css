@@ -3338,6 +3338,358 @@ fieldset .checkbox-group {
   margin-bottom: 40px;
 }
 
+/* ── Chat flow (questionnaire) ──
+   The intake, restaged as a conversation: Ember asks one question at a time, answers are
+   tappable chips or a short inline input, and each answer echoes back as the reader's own
+   bubble with an edit control that rewinds the thread to that question. */
+.chat-flow {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 24px 96px;
+}
+
+.chat-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.chat-group {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.chat-avatar {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+.chat-msgs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.chat-bubble {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 88%;
+}
+
+.chat-msgs .chat-bubble:first-child {
+  border-top-left-radius: 6px;
+}
+
+/* The pricing note, in the same dress it wore as .inline-note, so the one paragraph that
+   names money still reads as a notice rather than chatter. */
+.chat-bubble.chat-note {
+  background: var(--accent-subtle);
+  border-color: rgba(224, 138, 91, 0.18);
+}
+
+/* Links in Ember's messages: the site's base anchor inherits its color, which inside a
+   bubble means an invisible link. */
+.chat-bubble a {
+  color: var(--accent-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.chat-bubble a:hover {
+  color: var(--accent-hover);
+}
+
+/* Typing indicator: three dots in a bubble, shown before each of Ember's messages. */
+.chat-typing {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  padding: 16px 18px;
+}
+
+.chat-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: chatDot 1s ease-in-out infinite;
+}
+
+.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes chatDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Entrance for every appended node. */
+.chat-in {
+  animation: chatIn 0.3s ease both;
+}
+
+@keyframes chatIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* The reader's side of the conversation. */
+.chat-user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-bubble-user {
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border-radius: 16px;
+  border-bottom-right-radius: 6px;
+  padding: 11px 18px;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  max-width: 88%;
+  white-space: pre-line;
+}
+
+.chat-edit {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.chat-edit:hover {
+  background: var(--surface-soft-alt);
+  color: var(--text-primary);
+}
+
+.chat-edit:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chat-edit svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Answer chips. Indented past the avatar so they hang under the words, not under Ember. */
+.chat-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 58px;
+}
+
+.chat-choice {
+  border: 1.5px solid var(--accent-line);
+  background: var(--bg-card);
+  color: var(--accent-ink);
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+
+.chat-choice:hover {
+  background: var(--accent-subtle);
+  border-color: var(--accent);
+}
+
+.chat-choice:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chat-choice.is-busy {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Card variant: a chip that carries a title and a line of explanation (the two-door fork). */
+.chat-choice-card {
+  width: 100%;
+  text-align: left;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 14px 18px;
+}
+
+.chat-choice-card:hover {
+  background: var(--bg-card);
+  border-color: var(--accent);
+}
+
+.chat-choice-card .chat-choice-title {
+  display: block;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.chat-choice-card .chat-choice-desc {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-top: 2px;
+}
+
+/* Number chips for the 1-10 scale. */
+.chat-choice-rate {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+}
+
+.chat-scale-labels {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Inline text answers: a field and a send button, in the thread rather than a dock. */
+.chat-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 58px;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.chat-input-row .form-input,
+.chat-input-row .form-textarea {
+  flex: 1;
+}
+
+.chat-input-row .form-textarea {
+  min-height: 96px;
+}
+
+.chat-send {
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.chat-send:hover {
+  background: var(--accent-hover);
+}
+
+.chat-send:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chat-send svg {
+  width: 19px;
+  height: 19px;
+}
+
+.chat-skip {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 6px 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.chat-skip:hover {
+  color: var(--text-primary);
+}
+
+.chat-skip:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.chat-noscript {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .chat-flow {
+    padding: 28px 16px 80px;
+  }
+  .chat-avatar {
+    width: 36px;
+    height: 36px;
+  }
+  .chat-bubble,
+  .chat-bubble-user {
+    max-width: 100%;
+  }
+  .chat-choices,
+  .chat-input-area {
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chat-in {
+    animation: none;
+  }
+  .chat-typing span {
+    animation: none;
+  }
+}
+
 /* ========================================
    20. Pricing Page
    ======================================== */

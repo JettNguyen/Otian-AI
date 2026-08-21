@@ -8852,6 +8852,17 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: 1rem;
 }
 
+/* A quiet header whose section centres its visual. Ember stands centred under his heading,
+   and a left-pinned heading over a centred character reads as two sections sharing a band.
+   The quiet scale stays; only the alignment follows the figure. The box itself needs
+   margin-inline: auto too, because the quiet header is a 720px block pinned left, and
+   centred text inside a left-pinned box still sits left of the figure on a wide screen. */
+.section-header--quiet.section-header--center {
+  text-align: center;
+  margin-inline: auto;
+}
+.section-header--quiet.section-header--center p { margin-inline: auto; }
+
 /* A quiet section does not need a full section's worth of air above it. */
 .section--tight {
   padding-top: 56px;

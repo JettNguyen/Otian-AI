@@ -44,14 +44,15 @@ jobs:
       - name: Check every input has an accessible name
         run: node scripts/check-input-labels.mjs
 
-      # Pages written but not published yet. They stay in the repo and out of the upload, so
-      # their URLs return the 404 page. Delete a line here to publish that page.
+      # Directories in the repo but out of the upload, so their URLs return the 404 page.
+      # A page written ahead of its feature goes here until the feature ships (business/
+      # sat here until 2026-08-21); delete its name to publish it.
       #
-      # firebase-hosting/ is not one of those: it is the redirect stub Firebase Hosting serves on
+      # firebase-hosting/ is not an unpublished page: it is the redirect stub Firebase Hosting serves on
       # archie-77170.firebaseapp.com (see firebase.json), and it has no business answering on
       # otianai.com as well.
       - name: Withhold unpublished pages
-        run: rm -rf business firebase-hosting
+        run: rm -rf firebase-hosting
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

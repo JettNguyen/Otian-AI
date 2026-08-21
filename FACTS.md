@@ -12,7 +12,7 @@ fails on any money figure that does not appear below.
 Adding a figure to a page means adding it here first, with where it comes from. If you cannot
 say where a number comes from, it is not a fact and it does not go on the site.
 
-**Last reconciled against the pages:** 2026-08-19
+**Last reconciled against the pages:** 2026-08-21
 
 ---
 
@@ -25,6 +25,10 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$24.92` | What the yearly plan works out to per month | 299 / 12 |
 | `$30` | Also the measured cost of a heavy month with "Use this for every skill" on | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled. Same number as the monthly plan by coincidence, and a different claim |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
+| `$99` | Archie Business, billed monthly | Stripe subscription price on the Archie Business product. Priced 2026-08-21: 3x the personal month, held under the $100 anchor. The app's copy derives from `src/app/pricing.ts` under `IS_BUSINESS` |
+| `$999` | Archie Business, billed yearly | Same |
+| `$83.25` | What the business yearly plan works out to per month | 999 / 12 |
+| `$189` | What a business year saves against paying monthly | (99 x 12) - 999 |
 | `$19` | The scheduled-reports share of the heavy AI month | Archie repo, `docs/cost-of-running-an-agent.md`. No longer a plan price: it was the monthly plan until 2026-08-19 |
 | `$250` | One guided session, one hour | Set by us, repriced 2026-08-19 from $100. "$250/session" and "$250/hour" are the same claim, not a contradiction |
 | `$4.40` | Light use: what the AI costs to run for a month | Archie repo, `docs/cost-of-running-an-agent.md` |

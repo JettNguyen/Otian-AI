@@ -66,7 +66,7 @@ export function decideAccess(d, now = Date.now()) {
       has("lifetime") ||
       has("client") ||
       // Both plan tiers are Stripe subscriptions, so both answer to the subscription status.
-      // The webhook writes `business` for the Archie Business product (it tells the editions
+      // The webhook writes `business` for the Archie for Business product (it tells the editions
       // apart by product id); a business document without this line was told to start a plan
       // it was already paying for.
       ((has("subscriber") || has("business")) && SUBSCRIPTION_GRANTS_ACCESS.includes(status));

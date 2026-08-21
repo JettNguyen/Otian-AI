@@ -646,7 +646,7 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
 ### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
 
 **Approved wording:** *"an agent answering you and nobody else"*, *"each one answering you and
-nobody else"*, *"only to the one person who paired with it"*. For Archie Business, and only there:
+nobody else"*, *"only to the one person who paired with it"*. For Archie for Business, and only there:
 *"any agent can answer your whole team"*, *"an agent your team shares"*.
 
 **⛔ Banned, and swept off six pages on 2026-08-21: *"one agent your whole team messages"*.** It
@@ -657,7 +657,7 @@ permits, not the shape of the product, and the pricing card contradicted itself 
 "one agent" and "up to 50 agents" seven bullets apart. Say what the difference is: a personal
 agent answers its owner, a business agent can answer everyone the owner lets in.
 
-**⛔ Banned: any wording that makes Archie Business a superset of Archie**, such as "everything in
+**⛔ Banned: any wording that makes Archie for Business a superset of Archie**, such as "everything in
 the personal plan, plus…". They are two apps and two subscriptions, sold from two Stripe products;
 a business purchase writes `plan_business` and grants no personal licence
 (`docs/BUSINESS-PRICING.md`, "What a purchase grants"). Write what the plan buys.

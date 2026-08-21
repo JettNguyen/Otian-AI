@@ -142,7 +142,7 @@
       bot: [
         {
           note: true,
-          html: '<strong>How pricing works:</strong> your first 30-minute discovery call is free. Guided setup is $250 a session, and each session runs an hour. The rate never goes up because a setup is complicated; a bigger setup can simply take more than one session, and we’ll tell you which yours is on that free discovery call. Archie itself is $30 a month or $299 a year when it ships, a separate cost from your sessions. The AI itself is pay-as-you-go on your own account, billed straight to you. <a href="../archie/pricing/">Every cost, in full</a>.'
+          html: '<strong>How pricing works:</strong> your first 30-minute discovery call is free, and guided setup is $250 a session (an hour each; a bigger setup takes more sessions, never a higher rate). Archie itself is $30 a month or $299 a year when it ships, and the AI runs pay-as-you-go on your own account. <a href="../archie/pricing/">Every cost, in full</a>.'
         },
         'With that on the table: what’s your first and last name?'
       ],
@@ -260,7 +260,7 @@
       bot: [
         {
           note: true,
-          html: '<strong>How the roadmap works:</strong> your first 30-minute discovery call is free. On that call we learn your business, note what you need, and answer your questions, including whether a thing is feasible. The roadmap itself (which agents fit which roles, which Add-ons from the marketplace, and what we would build new for you) comes in a paid working session after that, and we’ll tell you what that session costs on the free call, before you commit to anything.'
+          html: '<strong>How the roadmap works:</strong> your first 30-minute discovery call is free: we learn your business and answer your questions, including what’s feasible. The roadmap itself (which agents, which Add-ons, what we’d build new for you) comes in a paid working session after that, and its cost is quoted on the free call.'
         },
         'With that on the table: what’s your first and last name?'
       ],

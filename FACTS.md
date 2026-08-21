@@ -108,6 +108,7 @@ the figure here only after reading it on the source page, with the date.
 | 2 separate plans | Archie and Archie for Business are not a bundle | Archie repo, `docs/BUSINESS-PRICING.md`, "What a purchase grants": a personal purchase writes the `plan` licence (`subscriber` tier), a business purchase writes `plan_business` (`business` tier), from prices sitting on two different Stripe products. Neither grants the other. **What must not be said either way:** whether a licence *runs* the other edition is a separate question the same doc answers "any valid license runs either edition" for the beta only, and the business build's gate is expected to tighten. So the site talks about what a plan buys, never about which app a licence opens |
 | 1 person per agent | How many people one agent answers, in the personal edition | Same file, `PEOPLE_PER_AGENT` and `may_add_person`. Enforced in `access_approve` and `access_invite` before the roster is written. Gated on the **edition** (`IS_BUSINESS`), not the licence, so no personal plan can buy a second person. **Archie for Business has no ceiling**: `PEOPLE_PER_AGENT` is `None` in that build. Say "no seat count", never "unlimited seats", which invites the agent-count confusion the row above forbids. **And never "one agent your whole team messages"**: that was on six pages until 2026-08-21 and it describes the edition as being a single agent, when the edition runs up to 50 and lifts the ceiling on *each* of them. The difference between the editions is who an agent answers, not how many you get |
 | $99 / $999 | Archie for Business, a month / a year | Archie repo, `src/app/pricing.ts` under `IS_BUSINESS`, and `docs/BUSINESS-PRICING.md` for where the numbers come from (3x the personal plan, rounded up to the anchor under $100; decided 2026-08-21). Grants the `business` tier / `plan_business` licence, written by the webhook off which Stripe product the price sits on (the Archie for Business product, id held in Render's `BUSINESS_PRODUCT_ID`). Not on sale until the runbook's steps finish |
+| 30 minutes | The free discovery call, for guided setup and for the Business Roadmap alike | Set by us. Printed on the site before this row existed; listed 2026-08-21. **Open discrepancy:** the Google Calendar appointment schedule the thank-you screen embeds offered "60 min appointments" when checked 2026-08-21, so the calendar or the copy needs to change; the schedule is configured in Google Calendar, not in this repo |
 | 14 days | Money-back guarantee on a plan | Terms of Service |
 | 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
 | 60 days | How long a signed entitlement lasts before it needs refreshing | `crates/archie-core/src/entitlement.rs`; TRUST.md 2026-08-07 |
@@ -153,3 +154,10 @@ re-counts it rather than trusting this file.
 - **Users, installs, hours saved.** We have no published figure for any of these and no
   testimonial behind them. `/testimonials/` says we are still collecting reviews; a stat that
   contradicts that page is worse than no stat.
+- **The Business Roadmap session price.** The roadmap (added 2026-08-21: a consult for
+  businesses that don't know where to start; free 30-minute discovery call, then the
+  recommendations arrive in a paid working session) has no published price. The site says
+  "paid" and that the cost is quoted on the free call, and names no number. The $250 guided
+  session rate is a different service and **must not be reused for the roadmap**: the two are
+  priced independently, and a page implying the roadmap session costs $250 is inventing a
+  figure. Publish a number here first if one is ever set.

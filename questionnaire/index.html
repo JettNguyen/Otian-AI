@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://apis.google.com 'sha256-1Tsz9nhwRl8thQBHFXpMzMLHWXXEcxWZF9PBOoqwTyw=' 'sha256-28hUBF29gZ8lZWxYN+xxQFeKe1blnrZ96WlFx4gv3Ec=' 'sha256-43Gl//LXJNQMFii1nbfZCqc2GG0hJ35NxLe5DbmMfu8=' 'sha256-6dXrBC8A+Qsy2V6Xiz6HtLHKR73OQfzU2GgLtOgX9vA=' 'sha256-CiL2y9kskGaI/9oHwzLsZlGVfNp5NkfQFgnSe943dPg=' 'sha256-KGCMR2HWUMGJ5uwL7KPQo4HpOKHhbQ7BhyvRFy0TXRw=' 'sha256-KKCP4V/cw8s+vrT71cXbVi/JrU2ZGfqyWWUt38ozCn4=' 'sha256-Ro6q0gplmdNQ1KesQBng6Jtj2HwwUV1H14oeGRI3EYw=' 'sha256-SBlsQL5tvESZdDYqpEPn+OoPU+BMlDa4t6fVGkhk9qk=' 'sha256-chwKmzLwH2ztfKODFts2a0fcdHj35R+BOsNW72ObU8g=' 'sha256-cpMmeRXRaKLAgWckPJ+2orORlttTzAdKEkQ6Dc+0COg=' 'sha256-hptM6VwdBIGeCFU50ThXaILNYU84Jg+ZheOs26vhXJg=' 'sha256-iCCF8PQe2xsxwYdN/mdKWws+iFEgZ4BYRs8eEqofCOE=' 'sha256-jcwdJsPi1st4CraRBNtVfHbqhkJ0UyGQxd76ELh1pdQ=' 'sha256-lEr0VyarYEg7p0Y0+s/GY8pryIhqwvo3PZus64o9zMU=' 'sha256-nYcTkFitbSTcdwH+IaftlyXWUc8EyDKk1xLaWZq7ivI=' 'sha256-p5itrV5u1k42akpMd9INuZP1dRcrpc6krxeh3bAYvFQ=' 'sha256-pBS9K0ftSlnA8FKIK4fqIavDkQ4+Zg/oNcT9GB5pMjM=' 'sha256-zNSW+FnKsGckRrmX1mvomI6HEx7IX/FEKEe7W5yJ8aE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.firebasestorage.app; connect-src 'self' https://*.googleapis.com https://*.firebasestorage.app https://archie-4f35.onrender.com https://formspree.io; frame-src https://calendar.google.com https://archie-77170.firebaseapp.com; form-action 'self' https://formspree.io; object-src 'none'; base-uri 'none'" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Started | Otian AI</title>
-  <meta name="description" content="Two ways to start: join the Archie waitlist, or book a guided setup, where your first discovery call is free. Tell us what you need and we'll take it from there." />
+  <meta name="description" content="Three ways to start: join the Archie waitlist, book a guided setup, or begin a Business Roadmap. Your first discovery call is free either way. Tell us what you need and we'll take it from there." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -190,17 +190,23 @@
       </div>
       <div id="thankyouGuided">
         <h2>Thanks, <span id="thankyouName">there</span>.</h2>
-        <p>We&rsquo;ve received your answers and will be in touch shortly.</p>
+        <p>We&rsquo;ve received your answers and will be in touch shortly. On the call we&rsquo;ll discuss your setup, how many sessions it&rsquo;ll take, and any questions you have.</p>
+      </div>
 
-        <div class="booking-section">
-          <h3>Next step: schedule your free discovery call</h3>
-          <p>Pick a time that works for you. This call is completely free, no commitment. We&rsquo;ll discuss your setup, how many sessions it&rsquo;ll take, and any questions you have.</p>
-          <div class="booking-container" id="bookingContainer">
-            <div class="booking-frame">
-              <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp?gv=true" title="Book a time on our Google Calendar" loading="lazy"></iframe>
-            </div>
-            <p class="booking-note">If the calendar isn&rsquo;t loading, you can also <a href="mailto:questions@otianai.com?subject=Schedule%20a%20Free%20First%20Call">email us to schedule</a>.</p>
+      <div id="thankyouRoadmap" hidden>
+        <h2>Thanks, <span id="thankyouNameRoadmap">there</span>.</h2>
+        <p>Your answers give us exactly what we need to prepare. On the call we&rsquo;ll learn your business, answer your questions, and tell you what the roadmap session would involve and cost.</p>
+      </div>
+
+      <!-- Both consult paths book the same free call; questionnaire.js hides this for the waitlist. -->
+      <div class="booking-section" id="bookingSection">
+        <h3>Next step: schedule your free discovery call</h3>
+        <p>Pick a time that works for you. This call is completely free, no commitment.</p>
+        <div class="booking-container" id="bookingContainer">
+          <div class="booking-frame">
+            <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp?gv=true" title="Book a time on our Google Calendar" loading="lazy"></iframe>
           </div>
+          <p class="booking-note">If the calendar isn&rsquo;t loading, you can also <a href="mailto:questions@otianai.com?subject=Schedule%20a%20Free%20First%20Call">email us to schedule</a>.</p>
         </div>
       </div>
 

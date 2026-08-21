@@ -7,10 +7,11 @@
    chips or one inline field, and each answer echoes back as the reader's own
    bubble with an edit control that rewinds the thread to that question.
 
-   Two doors, same as before: the Archie waitlist (short path) or the guided-setup
-   intake (longer path). The fork decides which sequence of questions runs, and
-   both end in the same Formspree submission with the same field names the form
-   used, so the inbox side of this did not change.
+   Three doors: the Archie waitlist (short path), the guided-setup intake, or the
+   Business Roadmap consult (shown when the opening answer says business, or not
+   sure). The fork decides which sequence of questions runs, and every path ends
+   in the same Formspree submission; the waitlist and guided paths kept the field
+   names the old form used, so the inbox side of those did not change.
    ======================================== */
 
 (function () {
@@ -51,7 +52,7 @@
       ],
       ack: function (value) {
         if (value === 'business') {
-          return 'Got it. That points at the Business plan later on: agents your whole team can message. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a>.';
+          return 'Got it. That points at Archie for Business later on: agents your whole team can message. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a>.';
         }
         if (value === 'unsure') {
           return 'No problem. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a> whenever you want to compare, and nothing here locks you in.';
@@ -67,20 +68,37 @@
       type: 'choice',
       cards: true,
       name: 'intent',
-      options: [
-        {
-          value: 'waitlist',
-          label: 'Put me on the Archie waitlist',
-          desc: 'Archie is our desktop app for building personal AI agents that run on your own computer. The waitlist hears the moment it lands.'
-        },
-        {
-          value: 'guided',
-          label: 'I want help setting up an agent',
-          desc: 'Our guided setup: we build your agent with you, starting with a free call. A few questions here help us come prepared.'
+      /* The third door shows only when the opening answer said business (or not sure):
+         the Business Roadmap is for shops that are interested but would not know where
+         to start, and a "just me" visitor has no use for it. */
+      options: function (answers) {
+        var opts = [
+          {
+            value: 'waitlist',
+            label: 'Put me on the Archie waitlist',
+            desc: 'Archie is our desktop app for building personal AI agents that run on your own computer. The waitlist hears the moment it lands.'
+          },
+          {
+            value: 'guided',
+            label: 'I want help setting up an agent',
+            desc: 'Our guided setup: we build your agent with you, starting with a free call. A few questions here help us come prepared.'
+          }
+        ];
+        if (answers.edition !== 'personal') {
+          opts.push({
+            value: 'roadmap',
+            label: 'Build a Business Roadmap',
+            desc: 'Our consult for businesses that don’t know where to start. We learn how your business runs, map which agents and Add-ons fit it, and build anything the marketplace doesn’t have yet.'
+          });
         }
-      ],
-      setPath: function (value) { return value === 'waitlist' ? 'waitlist' : 'guided'; },
-      next: function (value) { return value === 'waitlist' ? 'wlEmail' : 'gName'; }
+        return opts;
+      },
+      setPath: function (value) { return PATHS[value] ? value : 'guided'; },
+      next: function (value) {
+        if (value === 'waitlist') return 'wlEmail';
+        if (value === 'roadmap') return 'bzName';
+        return 'gName';
+      }
     },
 
     /* ── Waitlist path ── */
@@ -233,13 +251,110 @@
       bot: ['That’s everything. Send your answers, and on the next screen you can pick a time for your free discovery call.'],
       type: 'confirm',
       label: 'Send My Answers'
+    },
+
+    /* ── Business Roadmap path ── */
+
+    bzName: {
+      section: 'About you',
+      bot: [
+        {
+          note: true,
+          html: '<strong>How the roadmap works:</strong> your first 30-minute discovery call is free. On that call we learn your business, note what you need, and answer your questions, including whether a thing is feasible. The roadmap itself (which agents fit which roles, which Add-ons from the marketplace, and what we would build new for you) comes in a paid working session after that, and we’ll tell you what that session costs on the free call, before you commit to anything.'
+        },
+        'With that on the table: what’s your first and last name?'
+      ],
+      type: 'text',
+      name: 'fullName',
+      placeholder: 'Jane Smith',
+      autocomplete: 'name',
+      errorMsg: 'Please enter your name.',
+      ack: function (value) {
+        var first = String(value).trim().split(' ')[0];
+        return first ? 'Nice to meet you, ' + escapeHtml(first) + '.' : null;
+      },
+      next: 'bzEmail'
+    },
+
+    bzEmail: {
+      section: 'About you',
+      bot: ['What’s the best email for follow-up?'],
+      type: 'email',
+      name: 'emailAddress',
+      placeholder: 'jane@example.com',
+      autocomplete: 'email',
+      next: 'bzCompany'
+    },
+
+    bzCompany: {
+      section: 'Your business',
+      bot: ['What’s the business called, and what’s your role there?'],
+      type: 'text',
+      name: 'companyRole',
+      placeholder: 'e.g. Riverbend Dental, office manager',
+      errorMsg: 'Please tell us the business and your role.',
+      next: 'bzWhat'
+    },
+
+    bzWhat: {
+      section: 'Your business',
+      bot: ['What does the business do? A sentence is plenty.'],
+      type: 'textarea',
+      name: 'businessDescription',
+      placeholder: 'e.g. Independent dental practice, two locations, about 4,000 patients.',
+      errorMsg: 'Please tell us what the business does.',
+      next: 'bzSize'
+    },
+
+    bzSize: {
+      section: 'Your business',
+      bot: ['How many people work there?'],
+      type: 'choice',
+      name: 'teamSize',
+      options: [
+        { value: 'solo', label: 'Just me' },
+        { value: '2-10', label: '2-10' },
+        { value: '11-50', label: '11-50' },
+        { value: '51-plus', label: '51 or more' }
+      ],
+      next: 'bzPain'
+    },
+
+    bzPain: {
+      section: 'Where to start',
+      bot: ['Where does the team’s time go that it shouldn’t? If you already suspect a task an agent could take over, describe it. If you have no idea, that’s normal; finding it is what the roadmap is for.'],
+      type: 'textarea',
+      name: 'timeSinks',
+      optional: true,
+      skipLabel: 'I’m not sure, that’s what I want help with',
+      placeholder: 'e.g. Rekeying orders between systems, chasing invoices, answering the same ten customer questions.',
+      next: 'bzTools'
+    },
+
+    bzTools: {
+      section: 'Where to start',
+      bot: ['Last one. What tools does the business already run on? Whatever comes to mind is enough.'],
+      type: 'textarea',
+      name: 'currentTools',
+      optional: true,
+      skipLabel: 'Skip this question',
+      placeholder: 'e.g. Gmail, QuickBooks, Slack, a Squarespace site.',
+      next: 'bzConfirm'
+    },
+
+    bzConfirm: {
+      section: 'Closing',
+      bot: ['That’s everything. Send your answers, and on the next screen you can pick a time for your free discovery call.'],
+      type: 'confirm',
+      label: 'Send My Answers'
     }
   };
 
   /* ── Question order per path, for the progress bar ── */
   var PATHS = {
     waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
-    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm']
+    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
+    roadmap: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
 
   var activePath = 'guided'; // default until the fork is answered
@@ -360,7 +475,8 @@
     if (node.type === 'choice') {
       ui = document.createElement('div');
       ui.className = 'chat-choices chat-in';
-      node.options.forEach(function (opt) {
+      var options = (typeof node.options === 'function') ? node.options(answers) : node.options;
+      options.forEach(function (opt) {
         var btn = document.createElement('button');
         btn.type = 'button';
         if (node.cards) {
@@ -617,16 +733,23 @@
   }
 
   function showThankyou() {
-    var isWaitlist = answers.intent === 'waitlist';
+    var intent = answers.intent;
     var guidedBlock = document.getElementById('thankyouGuided');
+    var roadmapBlock = document.getElementById('thankyouRoadmap');
     var waitlistBlock = document.getElementById('thankyouWaitlist');
-    if (guidedBlock) guidedBlock.hidden = isWaitlist;
-    if (waitlistBlock) waitlistBlock.hidden = !isWaitlist;
+    var bookingSection = document.getElementById('bookingSection');
+    if (guidedBlock) guidedBlock.hidden = intent !== 'guided';
+    if (roadmapBlock) roadmapBlock.hidden = intent !== 'roadmap';
+    if (waitlistBlock) waitlistBlock.hidden = intent !== 'waitlist';
+    /* Both consult paths book the same free discovery call; only the waitlist has nothing to book. */
+    if (bookingSection) bookingSection.hidden = intent === 'waitlist';
 
-    if (!isWaitlist) {
+    if (intent !== 'waitlist') {
       var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
       var nameEl = document.getElementById('thankyouName');
+      var nameElRoadmap = document.getElementById('thankyouNameRoadmap');
       if (nameEl) nameEl.textContent = firstName;
+      if (nameElRoadmap) nameElRoadmap.textContent = firstName;
     }
 
     if (formEl) formEl.style.display = 'none';

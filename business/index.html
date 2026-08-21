@@ -27,7 +27,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260820-3" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260820-4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -234,10 +234,17 @@
           <p>Archie is our desktop app for building personal AI agents. In a business, that means each person gets an agent shaped to their role, not one shared bot in somebody else&rsquo;s cloud.</p>
         </div>
 
-        <figure class="explain-figure fade-up delay-1">
+        <figure class="explain-figure fade-up delay-1" id="biz-fig">
           <svg class="explain-svg--desktop" viewBox="0 0 640 316" role="img" aria-labelledby="biz-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
             <title id="biz-t">Three teammates, each with their own agent running on their own computer. A line runs beneath them: Otian&rsquo;s servers and your money sit on the far side and nothing reaches them, while email and calendar changes cross only after you approve them.</title>
             <style>
+              /* Archie Business is slate blue where Archie is ember, and this figure is the
+                 edition's own diagram, so it wears the edition's accent. Every rule below reads
+                 var(--accent); overriding the tokens on the figure recolors both drawings (this
+                 one and the mobile variant) without touching a path. Constants match
+                 .btn-business in styles.css, the same hues the business app and mark use. */
+              #biz-fig{--accent:#7AA1D8;--accent-subtle:#DFE9F6;--text-on-accent:#242629}
+              [data-theme="dark"] #biz-fig{--accent:#93B6E5;--accent-subtle:#2F3B4C;--text-on-accent:#262728}
               .biz-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
               .biz-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.5}
               .biz-a{fill:var(--accent)}
@@ -480,7 +487,7 @@
           </article>
         </div>
 
-        <div class="pricing-why mt-48 fade-up delay-2">
+        <div class="pricing-why mt-64 fade-up delay-2">
           <p class="text-center">
             And if Archie can&rsquo;t do it yet, whether that&rsquo;s a tool we don&rsquo;t connect to or a way of working that&rsquo;s particular to your shop, tell us and we&rsquo;ll build the add-on. It becomes a marketplace listing too, so the one we build for you helps the next business as well.
           </p>
@@ -534,9 +541,9 @@
         <div class="pay-methods fade-up delay-4" aria-label="Accepted payment methods">
           <span class="pay-methods-label">Secure checkout, powered by Stripe</span>
           <ul class="pay-methods-list">
-            <li>Visa</li>
-            <li>Mastercard</li>
-            <li>American Express</li>
+            <li><svg viewBox="0 0 46 30" role="img" aria-label="Visa"><rect width="46" height="30" rx="5" fill="#fff"/><text x="23" y="20" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" font-style="italic" letter-spacing="0.5" fill="#1434CB">VISA</text></svg></li>
+            <li><svg viewBox="0 0 46 30" role="img" aria-label="Mastercard"><rect width="46" height="30" rx="5" fill="#fff"/><circle cx="19" cy="15" r="7" fill="#EB001B"/><circle cx="27" cy="15" r="7" fill="#F79E1B"/><path d="M23 9.26A7 7 0 0 1 23 20.74 7 7 0 0 1 23 9.26Z" fill="#FF5F00"/></svg></li>
+            <li><svg viewBox="0 0 46 30" role="img" aria-label="American Express"><rect width="46" height="30" rx="5" fill="#1F72CD"/><text x="23" y="18" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" letter-spacing="0.3" fill="#fff">AMEX</text></svg></li>
           </ul>
         </div>
       </div>

@@ -470,6 +470,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 .mt-32 { margin-top: 32px; }
 .mt-40 { margin-top: 40px; }
 .mt-48 { margin-top: 48px; }
+.mt-64 { margin-top: 64px; }
 .mb-16 { margin-bottom: 16px; }
 .mb-24 { margin-bottom: 24px; }
 .mb-40 { margin-bottom: 40px; }
@@ -7948,6 +7949,11 @@ html[data-theme="dark"] .booking-container iframe {
 .acct-section-body { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.55; margin-top: 6px; }
 .acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
 .acct-row .btn { flex: 0 0 auto; }
+/* The edition label on a plan row: the account page offers Archie and Archie Business side by
+   side, and two rows of bare prices don't say which is which. Sized against the buttons it
+   labels; full flex-basis on narrow screens so the label sits above its row instead of inside. */
+.acct-plan-name { align-self: center; min-width: 108px; font-size: 0.82rem; font-weight: 600; color: var(--text-primary); }
+@media (max-width: 480px) { .acct-plan-name { flex-basis: 100%; margin-bottom: -4px; } }
 .acct-email { font-size: 0.82rem; color: var(--text-secondary); word-break: break-all; }
 /* In a section header the text column must be free to shrink and wrap at word boundaries, and the
    badge or button beside it must never be squeezed. Without this the status line broke mid-word

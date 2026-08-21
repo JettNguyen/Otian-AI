@@ -643,6 +643,33 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
 
+### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
+
+**Approved wording:** *"an agent answering you and nobody else"*, *"each one answering you and
+nobody else"*, *"only to the one person who paired with it"*. On the Business card, and only
+there: *"one agent your whole team can message"*, in the future tense the roadmap rule requires.
+
+A fresh agent is `Claiming`; the first person to send the pairing code becomes its `Owner`, and it
+settles into `OwnerOnly` (`crates/archie-domain/src/access.rs`). Guests are the mode above that,
+and both doors into it now refuse: `access_approve` and `access_invite` check
+`archie_core::plan::may_add_person` before the write
+(`src-tauri/src/commands/access.rs`). The invite door has to be checked too and not just the
+approve door, because an invite code is redeemed over chat by `AccessRoster::try_join` inside the
+gateway, where no command runs; refusing to mint the code is what closes that path.
+
+The gate is the **edition**, not the licence: `archie_domain::product::IS_BUSINESS`, a
+compile-time constant. No plan buys a second person, and a personal build cannot be configured
+into allowing one. Guarded by `plan::tests::one_person_per_agent_on_every_licence_a_customer_can_hold`,
+which asserts it for every paid tier by name, so making this a plan feature breaks a test that
+names this file. Staff builds are exempt so the guest paths stay reachable while they are being
+developed.
+
+**Boundaries.** This is a product limit, not a security boundary, exactly as the agent cap is: it
+counts what is in a roster file on this computer. Do not write it as a guarantee that nobody else
+can ever reach your agent; the roster's own fail-closed behavior is the claim that carries that
+weight. It also does not apply retroactively: a roster that already had guests keeps them, since
+the check is on adding.
+
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
 Planned: group-chat messaging, and a UI for adding user IDs to a permitted-to-message list.
@@ -653,6 +680,12 @@ chat, or the learned primary chat); the only roster that exists governs who may 
 ✅ **The current copy is safe for both** — *"It speaks only in the chats you connect it to, to
 people you've approved"* is true today and stays true after the UI lands. Do not upgrade it to
 anything more specific until the UI exists.
+
+*[Amended 2026-08-20: that wording is still true but is no longer what the site says, and should
+not be reintroduced. "People you've approved" is a plural the personal editions can no longer
+reach, so it advertises a capability that is not on sale; it was replaced on `business/index.html`
+and `faq/index.html` with the one-person wording above. Restore the plural only alongside the
+business edition.]*
 
 ### ✅ Email send with click-to-approve — SHIPPED 2026-07-20 (superseded)
 

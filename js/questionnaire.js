@@ -171,6 +171,7 @@
     switch (stepId) {
       case 'step-intent':
         requireChoice('intent', 'intentError');
+        requireChoice('edition', 'editionError');
         break;
 
       case 'step-waitlist':

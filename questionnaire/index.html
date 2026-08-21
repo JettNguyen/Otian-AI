@@ -224,6 +224,28 @@
             </fieldset>
           </div>
 
+          <div class="form-group">
+            <fieldset>
+              <legend class="form-label">Which plan are you interested in?<span class="required-star" aria-hidden="true">*</span></legend>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="edition" value="personal" />
+                  <span>Personal / Small business: an agent of your own</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="edition" value="business" />
+                  <span>Business: one agent your whole team messages</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="edition" value="unsure" />
+                  <span>Not sure yet</span>
+                </label>
+              </div>
+              <span class="form-error-msg" id="editionError" role="alert">Please select an option.</span>
+              <span class="form-hint">The two are side by side on the <a href="../archie/pricing/">pricing page</a>.</span>
+            </fieldset>
+          </div>
+
           <div class="step-nav">
             <div class="step-nav-left"></div>
             <div class="step-nav-right">

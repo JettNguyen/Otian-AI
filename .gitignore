@@ -13,3 +13,8 @@ cp[0-9]*/
 # Firebase deploy caches and logs. Regenerated on every deploy, machine-local, never shipped.
 .firebase/
 firebase-debug.log
+
+# scripts/check-csp.py writes this probe into the repo root while a sweep runs and removes
+# it after. A crashed or interrupted sweep leaves it behind, where the next check-facts
+# run counts it as a served page.
+_csp-selftest.html

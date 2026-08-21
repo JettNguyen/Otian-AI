@@ -3343,7 +3343,11 @@ fieldset .checkbox-group {
    ======================================== */
 .pricing-why {
   max-width: 800px;
-  margin: 0 auto;
+  /* margin-inline, not `margin: 0 auto`. This rule sits ~2900 lines below the .mt-* utilities at
+     equal specificity, so the shorthand's implied margin-top: 0 won on source order and silently
+     killed every spacing class put on a .pricing-why: business/ carried both an .mt-48 and an
+     .mt-64 that had never once applied. Same trap as .need-list on how-it-works/. */
+  margin-inline: auto;
 }
 
 .pricing-why p {

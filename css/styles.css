@@ -1273,6 +1273,28 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border: 1px solid var(--field-border);
 }
 
+/* The business edition's own fill: Archie Business is slate blue where Archie is ember (its app
+   accent, marks, and this button all derive from the same hues at matched luminance), so its
+   pricing card's action wears the edition's color rather than the site's. Same shape and states
+   as .btn-primary, different constants; the dark values match the business app's dark accent. */
+.btn-business {
+  background: #7AA1D8;
+  color: #242629;
+}
+
+.btn-business:hover {
+  background: #668EC6;
+}
+
+[data-theme="dark"] .btn-business {
+  background: #93B6E5;
+  color: #262728;
+}
+
+[data-theme="dark"] .btn-business:hover {
+  background: #A8C4EB;
+}
+
 .btn-secondary:hover {
   border-color: var(--field-border-strong);
   background: var(--surface-hover);

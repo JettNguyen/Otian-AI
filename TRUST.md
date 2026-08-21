@@ -646,8 +646,26 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
 ### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
 
 **Approved wording:** *"an agent answering you and nobody else"*, *"each one answering you and
-nobody else"*, *"only to the one person who paired with it"*. On the Business card, and only
-there: *"one agent your whole team can message"*, in the future tense the roadmap rule requires.
+nobody else"*, *"only to the one person who paired with it"*. For Archie Business, and only there:
+*"any agent can answer your whole team"*, *"an agent your team shares"*.
+
+**⛔ Banned, and swept off six pages on 2026-08-21: *"one agent your whole team messages"*.** It
+reads as a description of what the edition *is*, and the edition is not one agent: a business
+plan runs up to 50 (`BUSINESS_PLAN_AGENTS`), and what the edition changes is the ceiling on **who
+each one answers**, not the count. Sharing one agent between everybody is a thing the edition
+permits, not the shape of the product, and the pricing card contradicted itself by claiming both
+"one agent" and "up to 50 agents" seven bullets apart. Say what the difference is: a personal
+agent answers its owner, a business agent can answer everyone the owner lets in.
+
+**⛔ Banned: any wording that makes Archie Business a superset of Archie**, such as "everything in
+the personal plan, plus…". They are two apps and two subscriptions, sold from two Stripe products;
+a business purchase writes `plan_business` and grants no personal licence
+(`docs/BUSINESS-PRICING.md`, "What a purchase grants"). Write what the plan buys.
+
+**⛔ Equally banned: saying a business plan will not run the personal app.** Today it does: the
+same doc records the beta decision that "any valid license runs either edition", and the gate is
+expected to tighten in the business build later. Both "includes it" and "will not run it" are
+claims about a thing in flux, so the site makes neither and describes the purchase instead.
 
 A fresh agent is `Claiming`; the first person to send the pairing code becomes its `Owner`, and it
 settles into `OwnerOnly` (`crates/archie-domain/src/access.rs`). Guests are the mode above that,

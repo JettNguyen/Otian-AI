@@ -399,15 +399,14 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 .explain-figure figcaption { text-wrap: pretty; }
 
 /* The shape centered copy should make is a wedge: longest line first, each one a
-   little shorter, every break landing at a sense unit. No wrapping algorithm can
-   produce that, because none of them knows where a phrase ends, so display copy
-   short enough to matter gets its breaks written by hand with <br class="wedge">.
-   They apply above 640px only. Below that the measure is narrow enough that the
-   browser's own breaks are the right ones, and a break written for a 598px column
-   would strand two words on a phone. Same 640px switch the explain-figures use.
-   Rewriting a line means re-checking the wedge: the breaks are tuned to the words. */
-br.wedge { display: none; }
-@media (min-width: 641px) { br.wedge { display: inline; } }
+   little shorter, every break landing where a phrase ends. No wrapping algorithm can
+   produce that, because none of them knows what shape a block should be, so the breaks
+   are measured and inserted by js/nav.js at whatever width the window happens to be,
+   and again when it changes. Hand-written <br> was the first attempt and could not
+   work: a break measured for a 598px column is the wrong break on a phone.
+
+   Elements that carry their own <br> are left alone, so a deliberate break in the
+   footer tagline or the hero micro-note still means what it says. */
 
 /* ========================================
    4. Layout Utilities

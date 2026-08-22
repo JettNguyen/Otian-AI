@@ -413,3 +413,303 @@
     });
   }
 })();
+
+/* ============================================================
+   Wedge typesetting
+
+   Centered copy should sit as an inverted triangle: the first line longest, each
+   one a little shorter, so there is a ragged edge for the eye to follow back to
+   the start of the next line. A centered block whose lines are all one width
+   reads as a justified rectangle and the reader loses their place; a block that
+   ends on three stray words looks broken.
+
+   No wrapping algorithm can do this. `text-wrap: balance` evens the lines, which
+   is the rectangle. `pretty` fills greedily and leaves whatever is left over on
+   the last line, which is the stray words. Neither knows what shape the block
+   should be, so this measures the text and puts the breaks in.
+
+   It runs on every centered block that renders three lines or more, at whatever
+   width the window happens to be, and again whenever that width changes. Blocks
+   of one or two lines are left alone: there is no wedge to make out of two lines,
+   and forcing one only makes the first line short for no reason.
+
+   Without JavaScript nothing here runs and the browser wraps normally, which is what
+   every one of these blocks did before.
+
+   Known limit: at about 320px the column is narrow enough that single words are a
+   third of a line, and for some blocks no arrangement is strictly decreasing. The
+   search returns the least-bad one there rather than pretending. Everything from
+   360px up, which is every phone still shipping, comes out clean.
+   ============================================================ */
+(function () {
+  var SEL = '.hm-wrap p, .hm-hero p, .hm-cta p, .page-hero p, .cta-banner p, .text-center p,'
+          + '.hm-lede, .hm-micro, .hm-hero-micro, .hero-subtitle, .calm-note--center,'
+          + '.works-with-note, .acct-lead, .acct-foot-note, .booking-note,'
+          + '.marketplace-split-note, .demo-player-caption, .vg-caption,'
+          + '.explain-figure figcaption, .section-header p, .pricing-why p';
+
+  var MIN_LINES = 3;      /* two lines have no shape worth making */
+  var DROP_PER_LINE = 0.09;  /* each line aims this much narrower than the one above */
+  var MAX_DROP = 0.28;    /* ...but the last line never aims below this much off the first */
+  var MIN_WORDS = 8;
+  var TOLERANCE = 6;      /* px a line may exceed the one above before it counts */
+
+  /* Width of a range, summed across its rects: a range that already spans a browser
+     line break reports one union box the width of the column, which would read as
+     "this fits" for text that does not. Summing the pieces gives the real width. */
+  function widthOf(range) {
+    var rects = range.getClientRects(), total = 0;
+    for (var i = 0; i < rects.length; i++) total += rects[i].width;
+    return total;
+  }
+
+  /* How many lines the browser is actually drawing. Dividing the text width by the
+     column is not the same number: greedy wrapping leaves a ragged gap at the end of
+     every line, so a block that "fits" in two by arithmetic is routinely drawn in
+     three, and treating it as two skips the block entirely. Rects are grouped by top
+     edge with a tolerance, because inline elements on one line do not share a top to
+     the pixel. */
+  function renderedLines(range) {
+    var rects = range.getClientRects(), tops = [], i, j, seen;
+    for (i = 0; i < rects.length; i++) {
+      if (rects[i].width < 1) continue;
+      seen = false;
+      for (j = 0; j < tops.length; j++) if (Math.abs(tops[j] - rects[i].top) < 4) { seen = true; break; }
+      if (!seen) tops.push(rects[i].top);
+    }
+    return tops.length;
+  }
+
+  function textNodes(el) {
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false), out = [], n;
+    while ((n = walker.nextNode())) if (n.nodeValue.trim()) out.push(n);
+    return out;
+  }
+
+  /* Every word as a (node, start, end) span, measured where it actually sits, so a
+     word inside <strong> or <a> is measured in the weight it renders in. */
+  function measureWords(el, range) {
+    var nodes = textNodes(el), words = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i], re = /\S+/g, m;
+      while ((m = re.exec(node.nodeValue))) {
+        range.setStart(node, m.index);
+        range.setEnd(node, m.index + m[0].length);
+        words.push({ node: node, start: m.index, end: m.index + m[0].length, w: widthOf(range) });
+      }
+    }
+    return words;
+  }
+
+  function clearBreaks(el) {
+    var brs = el.querySelectorAll('br[data-wedge]');
+    for (var i = 0; i < brs.length; i++) brs[i].parentNode.removeChild(brs[i]);
+    if (brs.length) el.normalize();
+  }
+
+  function shape(el) {
+    clearBreaks(el);
+
+    var colWidth = el.clientWidth;
+    if (!colWidth) return;                       /* hidden, or not laid out yet */
+    /* Somebody already decided where this one breaks. The footer tagline and the
+       hero micro-note are set by hand; re-flowing them around their own <br> gives
+       a shape neither of us asked for. */
+    if (el.getElementsByTagName('br').length) return;
+
+    var range = document.createRange();
+    var probe = measureWords(el, range);
+    if (probe.length < MIN_WORDS) return;
+
+    range.setStart(probe[0].node, probe[0].start);
+    range.setEnd(probe[probe.length - 1].node, probe[probe.length - 1].end);
+    var lines = renderedLines(range);
+    if (lines < MIN_LINES) return;
+
+    /* Everything from here is measured with wrapping switched off. A range that spans a
+       line break reports its pieces, and the pieces are short: each break eats the space
+       that would have sat between them, and the sum comes in under the true single-line
+       width by a few pixels per line. Those pixels are why a segment computed to fit the
+       column arrives a word too long and gets wrapped again by the browser, which is the
+       stray 87px line in a narrow column. With nowrap every span is one box and the
+       numbers are the real ones. The element overflows while this runs; nothing paints
+       between here and the restore. */
+    /* Everything from here is measured with wrapping switched off. A range that spans a
+       line break reports its pieces, and the pieces are short: each break eats the space
+       that would have sat between them, so the sum comes in under the true single-line
+       width by a few pixels per line. Those pixels are why a segment computed to fit the
+       column arrives a word too long and gets wrapped again by the browser, which is the
+       stray 87px line in a narrow column. With nowrap every span is one box and the
+       numbers are the real ones. The element overflows while this runs; nothing paints
+       between here and the restore.
+
+       Each position is measured from the first word rather than summed from word widths
+       plus an average space: a lede that opens bold and finishes regular has two space
+       widths and two sets of letterfit, and a reconstructed total drifts against the
+       real one. */
+    var restoreWhiteSpace = el.style.whiteSpace;
+    el.style.whiteSpace = 'nowrap';
+    var words = measureWords(el, range);
+    var cumulative = [];
+    for (var j = 0; j < words.length; j++) {
+      range.setStart(words[0].node, words[0].start);
+      range.setEnd(words[j].node, words[j].end);
+      cumulative.push(widthOf(range));
+    }
+    el.style.whiteSpace = restoreWhiteSpace;
+
+    var textWidth = cumulative[cumulative.length - 1];
+    if (!textWidth) return;
+
+    /* The plan below is a model of how the text will set, and a model is not the page.
+       It is applied, then checked against what the browser actually drew, and if a
+       segment was re-wrapped the whole plan was built for the wrong line count: try
+       again with one more line rather than keep a plan that was never right. */
+    var first, stepDown, breakBefore;
+    var planned = lines;
+    for (var attempt = 0; attempt < 3; attempt++) {
+      lines = planned + attempt;
+      if (layout()) break;
+    }
+    return;
+
+    function layout() {
+      var drop, guard = 0;
+      do {
+        drop = Math.min(MAX_DROP, DROP_PER_LINE * (lines - 1)) * colWidth;
+        first = textWidth / lines + drop / 2;
+        if (first <= colWidth) break;
+        lines++;
+      } while (guard++ < 12);
+      stepDown = drop / Math.max(1, lines - 1);
+
+      /* Choose all the breaks together, not one after another. Filling each line to its
+         own target is a local decision, and local decisions paint themselves into
+         corners: the break that best suits line two can leave line three a choice
+         between far too long and far too short, and nothing later can reach back past
+         a break already taken. So this scores every legal set of breaks and keeps the
+         cheapest, where a line costs the square of its distance from the ladder plus a
+         heavy fine for coming out wider than the line above it.
+
+         The fine is measured against the line above as it actually falls, not against
+         what the ladder wanted it to be. Comparing against the target is what let the
+         bumps through: a line landing well under its own target leaves room for the
+         next one to be wider than it and still sit under the ceiling, and the wedge
+         has a step in it. Carrying the real width makes the state "where the line
+         above started, and where this one starts", which is why the table is indexed
+         by two word positions per line.
+
+         It stays small: a line cannot exceed the column, so each has a handful of
+         legal endings, and there are never many lines. */
+      var n = words.length;
+      var INF = Infinity;
+      var N1 = n + 1;
+      var layer = N1 * N1;
+      var cost = new Float64Array((lines + 1) * layer);
+      var pick = new Int32Array((lines + 1) * layer);
+      var li, prevStart, lineStart, endAt, w, prevW, c, bestC, bestJ, idx, rest, off;
+
+      /* Past the last line the only acceptable state is having spent every word. */
+      for (prevStart = 0; prevStart <= n; prevStart++) {
+        for (lineStart = 0; lineStart <= n; lineStart++) {
+          cost[lines * layer + prevStart * N1 + lineStart] = (lineStart === n) ? 0 : INF;
+        }
+      }
+
+      for (li = lines - 1; li >= 0; li--) {
+        var target = Math.min(colWidth, first - stepDown * li);
+        for (prevStart = 0; prevStart <= n; prevStart++) {
+          for (lineStart = 0; lineStart <= n; lineStart++) {
+            idx = li * layer + prevStart * N1 + lineStart;
+            if (lineStart >= n) { cost[idx] = INF; pick[idx] = -1; continue; }
+            prevW = (li === 0) ? INF : span(lineStart - 1) - (prevStart ? span(prevStart - 1) : 0);
+            bestC = INF; bestJ = -1;
+            for (endAt = lineStart; endAt < n; endAt++) {
+              w = span(endAt) - (lineStart ? span(lineStart - 1) : 0);
+              if (w > colWidth && endAt > lineStart) break;
+              rest = cost[(li + 1) * layer + lineStart * N1 + (endAt + 1)];
+              if (rest === INF) continue;
+              off = w - target;
+              c = off * off + rest;
+              if (w > prevW + TOLERANCE) c += 1e7;
+              if (c < bestC) { bestC = c; bestJ = endAt; }
+            }
+            cost[idx] = bestC;
+            pick[idx] = bestJ;
+          }
+        }
+      }
+
+      breakBefore = [];
+      var at = 0, prevAt = 0;
+      for (li = 0; li < lines && at < n; li++) {
+        var chosen = pick[li * layer + prevAt * N1 + at];
+        if (chosen < at) break;
+        prevAt = at;
+        at = chosen + 1;
+        if (at < n) breakBefore.push(at);
+      }
+
+      applyBreaks(el, words, breakBefore);
+      return lineWidths(el).length === breakBefore.length + 1;
+    }
+
+    function span(b) { return cumulative[b]; }
+  }
+
+  /* Rendered width of each line box. Rects are grouped by top with a tolerance because
+     a bold run and a regular run on the same line do not share a top to the pixel. */
+  function lineWidths(el) {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    var rects = range.getClientRects(), groups = [], i, j, g;
+    for (i = 0; i < rects.length; i++) {
+      if (rects[i].width < 1) continue;
+      g = null;
+      for (j = 0; j < groups.length; j++) {
+        if (Math.abs(groups[j].top - rects[i].top) < 4) { g = groups[j]; break; }
+      }
+      if (g) { g.l = Math.min(g.l, rects[i].left); g.r = Math.max(g.r, rects[i].right); }
+      else groups.push({ top: rects[i].top, l: rects[i].left, r: rects[i].right });
+    }
+    groups.sort(function (a, b) { return a.top - b.top; });
+    return groups.map(function (v) { return v.r - v.l; });
+  }
+
+  /* Word positions are (node, offset) pairs, and splitting a node invalidates every
+     offset after the split, so breaks go in back to front. */
+  function applyBreaks(el, words, breakBefore) {
+    clearBreaks(el);
+    for (var k = breakBefore.length - 1; k >= 0; k--) {
+      var word = words[breakBefore[k]];
+      if (!word || !word.node.parentNode) continue;
+      var tail = word.node.splitText(word.start);
+      var br = document.createElement('br');
+      br.setAttribute('data-wedge', '');
+      tail.parentNode.insertBefore(br, tail);
+    }
+  }
+
+  function shapeAll() {
+    var els = document.querySelectorAll(SEL);
+    for (var i = 0; i < els.length; i++) shape(els[i]);
+  }
+
+  var lastWidth = window.innerWidth, timer;
+  function onResize() {
+    if (window.innerWidth === lastWidth) return;   /* mobile scroll fires resize */
+    lastWidth = window.innerWidth;
+    clearTimeout(timer);
+    timer = setTimeout(shapeAll, 150);
+  }
+
+  function start() {
+    shapeAll();
+    /* Web fonts land after first paint and change every measurement. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(shapeAll);
+    window.addEventListener('resize', onResize);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

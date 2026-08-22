@@ -84,6 +84,11 @@ export const ADDON_SPEC = {
       "grants": "Switch the lights and plugs you added from your own wifi, directly, no cloud.",
       "id": "local_devices",
       "name": "Home devices"
+    },
+    {
+      "grants": "Read the texts that arrive on this Mac and offer replies for you to send.",
+      "id": "imessage",
+      "name": "Messages"
     }
   ],
   "kinds": {
@@ -742,7 +747,7 @@ export const ADDON_SPEC = {
           "fields": [
             {
               "control": "text",
-              "help": "The short label on the specialist's row. What it is for, not how it behaves.",
+              "help": "The short label on its row. What it is for, not how it behaves.",
               "key": "role",
               "label": "Its job, in a few words",
               "max": 500,

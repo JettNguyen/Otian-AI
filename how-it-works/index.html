@@ -27,7 +27,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260821-2" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260822-1" />
   <style>
     /* The requirement cards, moved here with the section from /what-you-need/ on
        2026-08-20. Page-scoped, as they were there: one page uses them. */
@@ -651,7 +651,7 @@
         <div class="section-header">
           <span class="section-label fade-up">The whole list</span>
           <h2 id="need-heading" class="fade-up">What you actually need.</h2>
-          <p>Less than you&rsquo;d think. Three things, and you probably have one of them already.</p>
+          <p>Less than you&rsquo;d think. Three things, and you probably have one of them already. A chat app makes four, and that one can wait: you can talk to your agent inside Archie itself.</p>
         </div>
 
         <div class="need-list mt-48">
@@ -671,27 +671,28 @@
             <p class="need-note">Archie itself is $30 a month or $299 a year when it ships, a separate cost from guided setup. <a href="../archie/pricing/">Every cost, in full</a>.</p>
           </article>
 
-          <!-- Items 3 and 4 were missing until 2026-08-04, and item 4 is a hard requirement: the
-               app shows a sign-in screen before it shows anything else.
-
-               Item 3 stopped being one on 2026-08-06, when Archie gained a conversation of its own.
-               An agent now works with no chat app connected at all, so calling one a requirement
-               turns a recommendation into a barrier, and this is the page somebody reads before
-               deciding whether they can have this at all. What a chat app buys is the half that
-               matters most, being reachable when you are not at the computer, and that is what the
-               item says now. -->
-          <article class="need-item fade-up delay-2">
-            <span class="need-num" aria-hidden="true">3</span>
-            <h3>A chat app, to be reached anywhere</h3>
-            <p>Telegram, Discord, Slack, Matrix or, on a Mac, iMessage. Not something to sort out before you start, since you can talk to your agent inside Archie itself. A chat app is what lets it reach you anywhere; your agent lives there like a contact, and it is the same conversation from your desk or your phone. Telegram is the quickest, and the one most people choose.</p>
-            <p class="need-note">On a Mac, iMessage needs no account at all, and your agent answers in the conversation you have with yourself. WhatsApp is the one still missing, because it does not let an app like this answer on your behalf. That is its rule, not our choice.</p>
-          </article>
-
           <article class="need-item fade-up delay-3">
-            <span class="need-num" aria-hidden="true">4</span>
+            <span class="need-num" aria-hidden="true">3</span>
             <h3>An Otian account, and a plan</h3>
             <p>Archie asks you to sign in when it opens, and a browser window handles it. A plan is $30 a month or $299 a year, and you can change or stop it whenever you like. On our side it holds your email address, your plan, and your paid add-ons. Never a conversation.</p>
             <p class="need-note">The same cost named above, not a second charge. <a href="../archie/pricing/">Every cost, in full</a>.</p>
+          </article>
+
+          <!-- The Otian account is a hard requirement: the app shows a sign-in screen before it
+               shows anything else. The chat app is not, and has not been since 2026-08-06, when
+               Archie gained a conversation of its own: an agent works with no chat app connected
+               at all, so calling one a requirement turns a recommendation into a barrier, on the
+               page somebody reads before deciding whether they can have this. What a chat app
+               buys is being reachable when you are away from the computer.
+
+               So it sits last and carries a + rather than a number, which is what makes the three
+               above agree with the lede and with the homepage band. Do not renumber it back. -->
+
+          <article class="need-item fade-up delay-4">
+            <span class="need-num" aria-hidden="true">+</span>
+            <h3>Optional: a chat app, to be reached anywhere</h3>
+            <p>Telegram, Discord, Slack, Matrix or, on a Mac, iMessage. Not something to sort out before you start, since you can talk to your agent inside Archie itself. A chat app is what lets it reach you anywhere; your agent lives there like a contact, and it is the same conversation from your desk or your phone. Telegram is the quickest, and the one most people choose.</p>
+            <p class="need-note">On a Mac, iMessage needs no account at all, and your agent answers in the conversation you have with yourself. WhatsApp is the one still missing, because it does not let an app like this answer on your behalf. That is its rule, not our choice.</p>
           </article>
 
         </div>

@@ -269,6 +269,16 @@ input:-webkit-autofill:focus {
 html {
   font-size: 16px;
   color-scheme: light;
+  /* The nav is `position: fixed`, so it does not push the page down and the browser
+     happily scrolls an anchor target to y=0, underneath it. Every deep link into a
+     section (`#what-you-need`, `#status`, `#pricing`, and every in-page jump) landed
+     with its heading hidden behind the bar. `scroll-padding-top` on the scrolling
+     element fixes all of them at once: it applies to fragment navigation, to
+     scrollIntoView, and to keyboard scrolling, so it does not need a scroll-margin
+     rule per target. The two that already carry `scroll-margin-top` (.faq-group,
+     line 2856; the pricing card, line 4743) keep it: scroll-margin on the target
+     wins over scroll-padding here, and both resolve to the same offset. */
+  scroll-padding-top: calc(var(--nav-height) + 24px);
 }
 
 html[data-theme="dark"] {
@@ -373,12 +383,31 @@ p { color: var(--text-secondary); line-height: 1.8; }
 h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
 p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 
-/* Centered prose gets the stronger treatment, band by band. */
+/* Centered prose gets `pretty`, deliberately, and this block exists to say so: these
+   selectors are mostly <p> and <figcaption>, which the rule above already covers, so
+   what is written here is a refusal to upgrade them to `balance`. Balancing evens every
+   line to the same width, and a four-line centered lede whose lines are all one width
+   reads as a justified rectangle: there is no ragged edge left for the eye to track, so
+   finding the next line is guesswork and the reader loses their place. The orphan that
+   motivated balancing in the first place is exactly what `pretty` prevents, so nothing
+   is given up. Headings keep `balance` above, where two or three short lines are the
+   whole job and there is no rectangle to build. */
 .hm-wrap p, .hm-hero p, .hm-cta p, .page-hero p, .cta-banner p, .text-center p,
 .hm-lede, .hm-micro, .hm-hero-micro, .hero-subtitle, .calm-note--center,
 .works-with-note, .acct-lead, .acct-foot-note, .booking-note,
 .marketplace-split-note, .demo-player-caption, .vg-caption,
-.explain-figure figcaption { text-wrap: balance; }
+.explain-figure figcaption { text-wrap: pretty; }
+
+/* The shape centered copy should make is a wedge: longest line first, each one a
+   little shorter, every break landing at a sense unit. No wrapping algorithm can
+   produce that, because none of them knows where a phrase ends, so display copy
+   short enough to matter gets its breaks written by hand with <br class="wedge">.
+   They apply above 640px only. Below that the measure is narrow enough that the
+   browser's own breaks are the right ones, and a break written for a 598px column
+   would strand two words on a phone. Same 640px switch the explain-figures use.
+   Rewriting a line means re-checking the wedge: the breaks are tuned to the words. */
+br.wedge { display: none; }
+@media (min-width: 641px) { br.wedge { display: inline; } }
 
 /* ========================================
    4. Layout Utilities

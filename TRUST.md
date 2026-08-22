@@ -55,6 +55,17 @@ The themes, each fixed in place below and on the affected pages:
    says a person with a browser has to confirm it. And the clause "which is what a user's own key
    uses" is deleted from the Google caveat: an AI Studio key can be free-tier, and a free key is
    trained on. We have never asked which kind was pasted.
+10. **Hardened the same day, after the check (both decided by Jett).** Every interactive email
+    tool now refuses the free starter credits exactly as the watchers do: one arm in the tool
+    dispatch covers every `inbox_*` and `watch_*` tool
+    (`crates/archie-runtime/src/gateway/turn.rs`; refusal text in `email/poller.rs`,
+    `INBOX_TOOLS_NEED_YOUR_OWN_KEY`). Approved wording: "Every email feature refuses to run on
+    the free starter credits; connect an AI account of your own and it starts." The privacy
+    policy's Google bullet now scopes the starter-credits exception to calendar and task data
+    for this reason. And the SSRF guard's private-address rule is now enforced inside the HTTP
+    client's own DNS resolver (`crates/archie-net/src/http.rs`, `PublicAddressesOnly`), so the
+    DNS-rebinding window SECURITY.md disclosed that morning is closed: a connection can only
+    dial an address the check vetted, because that is where its addresses come from.
 
 **Reconciliation — 2026-08-04.** *[Figures superseded: repriced to $30/$299 on 2026-08-19, and
 Archie for Business at $99/$999 on 2026-08-21. The mechanism described here is unchanged.]*

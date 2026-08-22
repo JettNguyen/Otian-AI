@@ -23,7 +23,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$30` | Archie, billed monthly. **The headline price**: the month leads on every page and the year follows it as the cheaper option, so a card showing $299 first is out of step | Stripe subscription price. Repriced 2026-08-19 from $19 |
 | `$299` | Archie, billed yearly | Same, repriced from $149. The app's copy derives from `src/app/pricing.ts` in the Archie repo, moved in the same pass |
 | `$24.92` | What the yearly plan works out to per month | 299 / 12 |
-| `$30` | Also the measured cost of a heavy month with "Use this for every skill" on | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled. Same number as the monthly plan by coincidence, and a different claim |
+| `$30` | Also roughly what a heavy month costs with "Use this for every skill" on: the measured range is $23 to $39 | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled; "$30" is the approved rounding of that range, and a page quoting it as exact must switch to the range. Same number as the monthly plan by coincidence, and a different claim |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
 | `$99` | Archie for Business, billed monthly | Stripe subscription price on the Archie for Business product. Priced 2026-08-21: 3x the personal month, held under the $100 anchor. The app's copy derives from `src/app/pricing.ts` under `IS_BUSINESS` |
 | `$999` | Archie for Business, billed yearly | Same |
@@ -38,10 +38,13 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$5` | The scheduled-reports half of the moderate month | Same |
 | `$137` | Heavy use, per month | Same |
 | `$118` | The messages half of the heavy month | Same |
-| `$165` | Heavy use on a busier schedule (320 runs) | Same |
-| `$140` | A heavy month on Balanced, before the quality checkbox | Archie repo, `docs/COST-MEASURED.md` |
+| `$106 to $178` | Heavy use with the real 319-run schedule, measured | Archie repo, `docs/COST-MEASURED.md`. Replaced `$165` 2026-08-21: that figure appeared in neither cited document and was a leftover of a superseded model |
+| `$112 to $184` | A heavy month on Balanced, before the quality checkbox | Archie repo, `docs/COST-MEASURED.md`. A point value must not be attributed to a dataset that carries a range |
+| `$140` | The approved rounding of that heavy Balanced month, for prose that pairs it with the $30 rounding | The companion cost note in the Archie repo ("roughly $140"); always beside "roughly", never as a measured point |
+| `$106` | The floor of heavy use with the real 319-run schedule | Archie repo, `docs/COST-MEASURED.md` ($106.35) |
+| `$178` | The ceiling of the same measurement | Archie repo, `docs/COST-MEASURED.md` ($178.02) |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
-| `$15` | Example price badge on a paid add-on | Illustrative, marketplace UI only |
+| `$15` | The listed price of Meeting Notes, the one paid add-on badge on the browse pages | Its marketplace manifest in the Archie repo. Recorded 2026-08-21: this row used to say "illustrative, marketplace UI only", which stopped being true the day the badge sat on a named listing. While the beta makes everything free, any page carrying the badge must say the beta price beside it |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
 
 ## Other companies' prices
@@ -112,20 +115,20 @@ the figure here only after reading it on the source page, with the date.
 | 14 days | Money-back guarantee on a plan | Terms of Service |
 | 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
 | 60 days | How long a signed entitlement lasts before it needs refreshing | `crates/archie-core/src/entitlement.rs`; TRUST.md 2026-08-07 |
-| 30 days | Our commitment to publish a final no-sign-in build if we cease operations | Terms of Service |
+| 30 days | Our commitment to publish a final build requiring no license check if we cease operations | Terms of Service, quoted in its own words since 2026-08-21 ("no license check", not "no sign-in": the contract's wording is the claim) |
 | 6 hours | How often the version heartbeat goes out, at most | `crates/archie-core/src/telemetry.rs`, `HEARTBEAT_EVERY` |
 | 25% | An add-on commissioner's share of future sales | `skills-marketplace/commission/` |
 | 7 providers | Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, Mistral | `crates/archie-net/src/providers.rs`, counted 2026-08-15 after DeepSeek and Mistral landed (Archie 9ceb303). Google's entry is shown as Gemini and Anthropic's as Claude on the site, the products' own names; the count stays a count of companies. An eighth option, "Another provider", is any OpenAI-format endpoint the user names; it is a door rather than a company and is not counted |
 | 38 apps and services | The works-with band: 5 chat apps + 26 accounts and devices + 7 AI companies | `index.html` band; every name verified in the Archie source 2026-08-15 (connectors in `crates/archie-domain/src/connectors.rs`), marks taken from the app's `BRAND_MARK` table in `src/app/connect.tsx`, which names the site as its reference copy. NOTE: 13 of the 26 connectors (Stripe, YNAB, Lunch Money, Mercury, Splitwise, Raindrop, Readwise, Calendly, Zotero, Mastodon, AfterShip, GitLab, Cloudflare) shipped from provider documentation and have not yet been exercised with a live key; Archie's docs/OPEN-THREADS.md tracks this. They are in the app's picker today, which is what the band claims |
 | 10 minutes | How long the self-check on /trust/ takes with a network monitor | The walkthrough on `trust/index.html` itself; the figure is the length of that procedure, not a benchmark |
 | 5x | What a thought-through ("working") token bills against a read token | The providers' published output-to-input price ratio, used on `archie/pricing/` |
-| 100 words | Roughly how much working a default reply carries | Archie repo, `docs/COST-MEASURED.md`, same measurement as the $140/$30 rows |
+| A few hundred words | Roughly how much working a default reply carries (measured 123 to 641 output tokens a turn) | Archie repo, `docs/COST-MEASURED.md`, same measurement as the Balanced/Economy rows. Was "100 words" until 2026-08-21, which matched only the bottom of the measured range |
 
 ## The stat rows
 
 `index.html` (its own numbers band under the hero since the 2026-08-18 quiet-spine rebuild) prints
-four counts: **144 verified add-ons, 38 apps and services, 7 AI companies, 5 chat apps**.
-`skills-marketplace/browse/` prints three of the same: **144 verified add-ons, 5 chat apps,
+four counts: **149 verified add-ons, 38 apps and services, 7 AI companies, 5 chat apps**.
+`skills-marketplace/browse/` prints three of the same: **149 verified add-ons, 5 chat apps,
 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
 connections band's note also counts **all 38** names the band shows.

@@ -11,9 +11,54 @@ That split is the point. The person who knows what the code actually does holds 
 the person who writes the copy — not a seat at the table, a veto. If Jett says a sentence isn't
 true, it doesn't ship, and there is no appeal to how good it sounds.
 
-**Last verified against the Archie source:** 2026-08-04 (pricing reconciliation, `Archie@main`)
+**Last verified against the Archie source:** 2026-08-21 (full-file fact-check, `Archie@main`)
 
-**Reconciliation — 2026-08-04.** **Pricing changed from a one-time licence to a plan**: $149 a
+**Reconciliation — 2026-08-21.** Every claim in this file and on the site was checked against the
+code in one pass: 473 claims, of which 298 held exactly. What follows is what the rest required.
+The themes, each fixed in place below and on the affected pages:
+
+1. **Pricing.** $30 a month or $299 a year since 2026-08-19; Archie for Business $99 a month or
+   $999 a year since 2026-08-21. Both still Stripe subscriptions granting the `subscriber` tier.
+   The 08-04 reconciliation below records the change to plans and keeps its old figures as
+   history.
+2. **Text Replies shipped (2026-08-21)** and got its own canonical section below. Every absolute
+   of the form "the agent can only ever message you" is now scoped: unprompted, it still messages
+   only you; a reply to somebody else exists only as a draft that goes nowhere until you press
+   Send on it, and then goes out from your own number as you.
+3. **The provider roster is seven named companies plus one you name yourself:** Anthropic, OpenAI,
+   Google, Groq, xAI, DeepSeek, Mistral, and "Another provider" (any OpenAI-format endpoint the
+   user supplies). Every "five providers" sentence in this file and on the site was stale. The
+   enum is `crates/archie-net/src/providers.rs`; requests are built in `crates/archie-net/src/llm/`.
+4. **What We Hold grew again**, the third time the pattern at the end of that section has fired.
+   The honest maximum a legal demand could produce is listed there now: account, plan, paid
+   add-ons, version heartbeats, opt-in crash tails, the trial-credit ledger and its spend history,
+   second-factor records, guided-session invoices, refused-checkout records, and sealed phone
+   messages we cannot open plus their plaintext timestamps.
+5. **The heartbeat has four fields now** (app version, platform, edition, last seen), one document
+   per account per edition, and crash reports carry edition too. **The off switch lives on the
+   Settings page ("This computer"), not under Account**; the approved wording said Account and
+   was wrong about our own app.
+6. **The free credits are capped at two grants per computer** (chosen so a factory reset does not
+   strand the machine), so "a second account cannot have them" promised more than the code
+   refuses. And a key added from Settings stops the proxy **at each agent's next start**, not the
+   moment it is pasted; the setup flow restarts the agent for you, Settings does not.
+7. **The Terms promise a final version with no license check**, not "no sign-in". This file now
+   quotes the Terms' own words everywhere the commitment appears, because a paraphrase of a
+   contract is how a contract drifts.
+8. **The 08-13 quality sweep split `gateway.rs`, `commands.rs`, `llm.rs`, and `email/replies.rs`
+   into module directories**, which killed most of this file's line pointers. Every pointer named
+   in the fact-check was refreshed in place; a pointer not refreshed in this pass should be
+   treated as a location hint, not a citation. The claims themselves were re-verified against the
+   split files.
+9. **The xAI row in the provider-training block is downgraded to unverified.** Every primary xAI
+   document refuses automated readers, so what we had was a summary of summaries; the entry now
+   says a person with a browser has to confirm it. And the clause "which is what a user's own key
+   uses" is deleted from the Google caveat: an AI Studio key can be free-tier, and a free key is
+   trained on. We have never asked which kind was pasted.
+
+**Reconciliation — 2026-08-04.** *[Figures superseded: repriced to $30/$299 on 2026-08-19, and
+Archie for Business at $99/$999 on 2026-08-21. The mechanism described here is unchanged.]*
+**Pricing changed from a one-time licence to a plan**: $149 a
 year or $19 a month, both Stripe subscriptions granting the `subscriber` tier. Everyone who bought
 the one-time licence keeps the permanent `lifetime` tier and full access, forever
 (`crates/archie-core/src/auth.rs`, `verify_access`). Three consequences for this file, all of them
@@ -24,9 +69,15 @@ copy the change made false and all of them fixed in the same pass as the code:
 2. **"If you stop paying us, nothing happens to Archie: you already own it" is now FALSE and is
    removed** from `trust/`, `trust/details/`, `faq/`, `index.html` and the Terms. The honest
    replacement, live now: a plan ends at the close of the period already paid for, nothing on the
-   person's computer is deleted, and restarting a plan restores access.
-3. **"If we disappear, it still keeps working" stays, unchanged and still true.** The Terms
-   commitment (a final version needing no sign-in, published within 30 days of ceasing operations)
+   person's computer is deleted, and restarting a plan restores access. *[Caveat added
+   2026-08-21: the account stays bound to its original Stripe customer, and a re-subscription
+   Stripe books under a new customer is refused with no tier granted until support rebinds it.
+   Say "restarting a plan restores access" only with "if anything looks stuck, write to us"
+   nearby; never promise it as instant and unconditional.]*
+3. **"If we disappear, it still keeps working" stays, in its 60-day form below.** The Terms
+   commitment (a final version **requiring no license check**, published within 30 days of
+   ceasing operations; those are the Terms' own words, and this file used to paraphrase them as
+   "needing no sign-in", which is a different and stronger obligation than the one written)
    is independent of how the app is sold, and it is now the *only* one of the two scenarios we
    promise. That makes it more load-bearing than before, not less.
 
@@ -46,7 +97,7 @@ no network call at all / we don't know you did it" wording and replace it with t
 claim ("we keep only the running total, no per-person list"). Fixed in this file (the free-add-on
 section + the three-things line) and on the site (`trust/`, `index.html`, `faq/`,
 `privacy-policy/`). Also corrects a stale pointer: `require_owned_if_paid` now lives at
-`commands.rs:1744`, not `:1112`.
+`src-tauri/src/commands/market.rs:704` (moved twice; the commands module was split 2026-08-13).
 
 **Reconciliation — 2026-07-26.** The **one-time license migration has SHIPPED**; this file and
 `PRICING-ONETIME-MIGRATION.md` were the stale artifacts, not the copy. Verified in code:
@@ -117,8 +168,13 @@ Each is stated in the strongest form the code supports, and no stronger.
 conversations, your files, your calendar live on your own computer and go straight to your
 AI provider on your own account — they never pass through an Otian server, so there's
 nothing on our side to breach, subpoena, or sell. A legal demand to us can only produce
-what we actually hold: your email, whether you have a current plan, and which paid add-ons you
-bought."
+what we actually hold, and none of it is your content: your account, your plan, your paid
+add-ons, and the operational records listed under What We Hold."
+
+*(Corrected 2026-08-21: the demand sentence used to name three things. The true maximum is the
+What We Hold list — heartbeats, opt-in crash tails, the trial ledger, second-factor records,
+invoices, refused checkouts, sealed phone messages with their timestamps — and a shorter list in
+the one sentence about subpoenas was exactly the wrong place to be selective.)*
 
 **Why it's true:** a synthesis of three already-verified claims below — "Your prompts never
 touch an Otian server" (`llm.rs:16,18`, `lib.rs:41-48`), "What We Hold — three things"
@@ -150,10 +206,17 @@ from your computer, on your account, with your key. We are not in the middle of 
 keep no copy."
 
 **Why it's true:** Provider base URLs are hard-coded constants
-(`crates/archie-net/src/llm.rs:16,18`) — no env var, setting, or flag can redirect them.
-The HTTP client is built with no proxy (`crates/archie-net/src/lib.rs:41-48`). The agent
-runtime crate contains zero Otian hosts. The webview's CSP (`src-tauri/tauri.conf.json:24`)
-forbids the frontend from reaching any host at all.
+(`crates/archie-net/src/llm/mod.rs:36,67-79`) — in a release build, no env var, setting, or
+flag can redirect them (debug builds carry a test-only `ARCHIE_ANTHROPIC_BASE` override that is
+compiled out of what ships). We configure no proxy on the HTTP clients
+(`crates/archie-net/src/lib.rs:71-101`); a proxy the user sets in their own OS environment is
+honored, which is their choice about their traffic, not ours. The agent runtime crate contains
+zero Otian hosts. The webview's CSP (`src-tauri/tauri.conf.json:24`) forbids the frontend from
+reaching any host at all. One deliberate carve-out: the "Another provider" option is exactly a
+setting that sends a key to an address the user typed — its own key, threaded separately, to
+the endpoint they chose. That is the feature working, not the claim failing, but the claim is
+about the seven named providers and must not be written as though no configurable endpoint
+exists.
 
 **Required clause — do not drop it:** web search runs on the *provider's* infrastructure
 and is billed to the user's key (`llm.rs:580-605`). Still not us, but the search query does
@@ -170,10 +233,17 @@ app says this on screen. The site did not say it at all until this date, on a pa
 whole argument is "there is no Otian server in that path", which is the most expensive
 omission this document has ever had to record.
 
-**Approved wording:** "One exception, and it is ours: the free credits you start with are
-paid for on our account, so while you are using them your messages pass through our server
-on the way to Anthropic. The moment you connect a key of your own, that stops, and nothing
-of yours touches us again."
+**Approved wording (amended 2026-08-21):** "One exception, and it is ours: the free credits you
+start with are paid for on our account, so while you are using them your messages pass through
+our server on the way to Anthropic. Connect an AI account of your own and that stops from each
+agent's next start (the setup flow restarts it for you), and no conversation of yours touches us
+again."
+
+*(Two corrections folded in. "The moment you connect" was not what the code does: a key added
+from Settings takes effect when the agent next starts, and nothing on that page restarts it.
+And "nothing of yours" was unscoped; entitlement checks, install counts, opt-in crash tails,
+and sealed phone envelopes still flow, so the sentence is scoped to conversations, which is
+what it was always about.)*
 
 **Boundaries — do not cross:**
 - ❌ Never state the no-Otian-server claim *unscoped* without this clause on the same page.
@@ -213,24 +283,27 @@ sends the tail of the crash: the error and where in our code it happened. Both c
 account ID. Neither carries anything you wrote, received, or asked for."
 
 **Why it's true:** `telemetry.rs` has exactly two entry points. `heartbeat` writes
-`heartbeats/{uid}` with three fields, app version, platform and last seen, at most once per
-six hours per process (`HEARTBEAT_EVERY`), overwriting the same document. `flush` uploads
-queued crash tails to `error_reports` with uid, version, platform, kind, message and build,
-capped at 2000 characters, five reports per launch, and nothing whose `crash.log` is older
-than seven days (`MAX_CRASH_AGE`). Every string passes the same `Redactor` the gateway logs
+`heartbeats/{uid}` with four fields, app version, platform, edition and last seen, at most once
+per six hours per process (`HEARTBEAT_EVERY`), overwriting the same document (one document per
+account **per edition**, so a person running both editions has two rows). `flush` uploads
+queued crash tails to `error_reports` with uid, version, platform, edition, kind, message,
+build and a timestamp, capped at 2000 characters, five reports per launch, and nothing whose
+`crash.log` is older than seven days (`MAX_CRASH_AGE`). Every string passes the same `Redactor` the gateway logs
 use before it is written to disk, so the copy uploaded is the copy the user can read. There
 is still no Sentry, PostHog, Amplitude, Mixpanel, Segment or GA in `Cargo.lock` or
 `package-lock.json`, the Tauri log plugin is a no-op stub, and the webview CSP still makes
 frontend network calls impossible.
 
-**Amended 2026-08-07: there is now an off switch, and it is real.** The app's Account page, under Crash
-reports, carries the switch and the full list of what is in one. Off stops the
+**Amended 2026-08-07: there is now an off switch, and it is real.** The app's Settings page
+("This computer"), under Crash reports, carries the switch and the full list of what is in one.
+*(Corrected 2026-08-21: this said Account, and the pages were split; a claims file wrong about
+which screen of our own app holds a switch is the cheapest kind of wrong to fix.)* Off stops the
 heartbeat, stops the upload, and stops the queue being written at all; anything already
 queued is deleted when the switch is thrown (`telemetry::set_off`, and `is_off` is read at
 all three entry points). It is a marker file in the data directory rather than a setting in
 the database, because a panic hook mid-crash holds a path and nothing else.
 
-**Approved wording for the switch:** "You can turn both off, in the app, under Account. Off
+**Approved wording for the switch:** "You can turn both off, in the app, in Settings. Off
 means nothing further is sent and anything waiting to be sent is deleted."
 
 **Boundaries — do not cross:**
@@ -248,29 +321,38 @@ means nothing further is sent and anything waiting to be sent is deleted."
 
 ### ✅ Which AI company it talks to is your choice, and the trial is Anthropic
 
-**Approved wording:** "Archie runs on an AI account you connect: Anthropic, OpenAI, Google,
-Groq or xAI. You pick, and you can change it later. The free credits you start with run on
-Claude, because that is the account we pay for."
+**Approved wording (amended 2026-08-21):** "Archie runs on an AI account you connect:
+Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, or Mistral, or any provider of your own that
+speaks the OpenAI format. You pick, and you can change it later. The free credits you start
+with run on Claude, because that is the account we pay for."
 
-**Why it's true:** `crates/archie-net/src/llm.rs` builds requests for all five, and the
-provider is a per-agent setting rather than a build-time constant. `TRIAL_MODEL` in
-`stripe-webhook/index.js` is an Anthropic model, because the trial spends our Anthropic key.
+**Why it's true:** the provider enum is `crates/archie-net/src/providers.rs` and requests are
+built in `crates/archie-net/src/llm/` for all seven named providers plus the user-configured
+endpoint; the provider is a per-agent setting rather than a build-time constant. `TRIAL_MODEL`
+in `stripe-webhook/index.js` is an Anthropic model, because the trial spends our Anthropic key.
 
 **Boundaries — do not cross:**
 - ❌ Never write "Archie uses Claude" as a bare statement of what the product is. It was in
   the trust page's own headline until 2026-08-07, where it made a page about who holds your
   data say something false about the product in its first sentence.
-- ❌ Never list a provider we have not shipped. Five, and the list is in `llm.rs`.
-- The five names are a set, not a ranking. Do not imply one is required or recommended
+- ❌ Never list a provider we have not shipped, and never freeze the count in copy that will
+  outlive it: "five" was true once and sat stale on three pages. The list is
+  `providers.rs`, and the site's number must be re-counted from it, not from another page.
+- The names are a set, not a ranking. Do not imply one is required or recommended
   without saying why, and never imply the others are degraded.
 
 ### ✅ The other free trial runs on your own key, so nothing passes through us
 
-**Approved wording:** "The free credits are limited per computer, so if someone has already used
-them on yours, a second account cannot have them. There is another way to try Archie: connect an
-AI account of your own and you get 14 days, on the same terms as everyone else. Because your key
-is paying, your conversations go straight to them, exactly as they do for a paying customer. We
-are never in the middle of them."
+**Approved wording (amended 2026-08-21):** "The free credits are limited per computer, so a
+computer that has used its grants cannot have more. There is another way to try Archie: connect
+an AI account of your own and you get 14 days, on the same terms as everyone else. Because your
+key is paying, your conversations go straight to them, exactly as they do for a paying customer.
+We are never in the middle of them."
+
+*(The old first sentence promised "a second account cannot have them." The cap is two grants
+per computer, chosen so a factory reset does not strand the machine, so a second account CAN
+claim the second grant and only the third is refused. Per the do-not-name-the-numbers rule
+below, the wording says "limited" without saying two.)*
 
 **Why it's true:** two facts, and the second is the one that carries the privacy claim.
 
@@ -278,8 +360,9 @@ are never in the middle of them."
    (`stripe-webhook/index.js`, `/trial/claim`). It is offered only after the credits have been
    refused for that computer.
 2. **A key of the user's own always wins over the trial credential**, and that is what keeps the
-   proxy out of the path. `src-tauri/src/commands.rs:3975-3989` resolves in a fixed order:
-   Anthropic, OpenAI, Gemini, xAI, Groq, and only then the trial. Anybody on a days-only trial has
+   proxy out of the path. `src-tauri/src/commands/gateway_lifecycle.rs:70-93` resolves in a fixed
+   order: Anthropic, OpenAI, Gemini, xAI, Groq, DeepSeek, Mistral, the custom endpoint, and only
+   then the trial. Anybody on a days-only trial has
    connected a key by definition (the app checks it works before asking for the trial), so the
    trial credential is never reached. The ledger is empty as well, so even a call that somehow got
    there would be refused rather than paid for.
@@ -306,8 +389,13 @@ and a timestamp."
 before: "machine ID" is the kind of phrase that makes a plain sentence sound like it is hiding
 something, on a page whose whole job is the opposite.)
 
-**Why it's true:** `src-tauri/tauri.conf.json:45` has no substitution placeholders, so the
+**Why it's true:** `src-tauri/tauri.conf.json:75` has no substitution placeholders, so the
 updater plugin sends a bare GET. Version comparison happens client-side.
+
+**Corrected 2026-08-21: "our server" was the wrong noun.** The manifest is a static file on
+GitHub Pages, so GitHub's servers see the IP address and the timestamp, and we see nothing at
+all: we hold no logs of update checks because no machine of ours answers them. That is the
+stronger true claim; say it that way.
 
 ### ✅ The spend meter is local, and it is an estimate
 
@@ -442,7 +530,8 @@ anyone but the account owner, and the seal means owning the row is not reading i
 Used as a homepage proof chip and in the homepage meta description.
 
 **Why it's true:** Routines fire on a schedule, unattended, and deliver their result to the
-connected chat (`crates/archie-domain/src/routine.rs:70-100`); Telegram is the default delivery.
+connected chat (`crates/archie-domain/src/routine.rs:405-434`); the default delivers to
+whichever channel the agent is on (the enum variant's `NotifyTelegram` name is historical).
 The agent genuinely runs and reports without the user present.
 
 **⚠️ Scope guard — do not extend this into a Phase 2 claim.** "Works while you sleep" (background
@@ -457,33 +546,49 @@ implies is the reason the gate is being built.
 **Approved wording:** "An add-on is a text file, not a program. A Skill is markdown plus
 settings. It cannot run code on your computer, because Archie has nowhere to run it."
 
-**Why it's true:** No `std::process::Command`, no shell, no `dlopen`/`libloading`, no WASM,
-no JS `eval` anywhere in `crates/` or `src-tauri/`. Tauri capabilities are deny-by-default
+**Why it's true (reworded 2026-08-21):** No shell, no `dlopen`/`libloading`, no WASM, no JS
+`eval` anywhere in `crates/` or `src-tauri/`. Process spawning does exist, and the old "no
+`std::process::Command` anywhere" claim was flatly untrue: the crates spawn our own
+hash-verified sidecars (ffmpeg, whisper, yt-dlp, the `imsg` tool), the screen lane's browser,
+and the OS's device-id readers, each with an explicit argument list. What carries the claim is
+that **no add-on text and no model output can ever name a program to run**: nothing parses
+either into a command. Tauri capabilities are deny-by-default
 (`src-tauri/gen/schemas/capabilities.json`) and expose no shell, fs, or http permission to
 the webview.
 
 ---
 
-## What We Hold — state all three, always
+## What We Hold — state the whole list, always
 
-**Approved wording:** "Our servers know three things about you: your email address, whether
-you have a current plan, and which **paid** add-ons you've bought. Not your prompts, not
-your files, not your calendar, not a single conversation. We keep no per-person record of the
-free add-ons you install."
+**The account core:** "Our servers know your email address, whether you have a current plan,
+and which **paid** add-ons you've bought. Not your prompts, not your files, not your calendar,
+not a single conversation. We keep no per-person record of the free add-ons you install."
 
 *(Updated 2026-07-26: was "whether your subscription is active" — false since the one-time
 license shipped. Ownership is the `lifetime` tier, checked with no subscription lookup.)*
 
-**Why all three:** Firebase Auth + the Firestore user doc hold email, uid, `access_tiers`,
-`subscription_status`, `stripe_customer_id` (`crates/archie-core/src/auth.rs:238-267`). The
+**Why:** Firebase Auth + the Firestore user doc hold email, uid, `access_tiers`,
+`subscription_status`, `stripe_customer_id`, and the licence-era fields
+(`crates/archie-core/src/auth.rs:549-640`, the account parsing). The
 Stripe webhook writes a permanent purchase record per paid item — item id, amount, session
 id, timestamp (`stripe-webhook/index.js` → `users/{uid}/purchases/{item_id}`).
 
+**Amended 2026-08-21: the core is not the whole holdings, and this file must carry the whole
+list even where a page carries the short form.** The backend's own collections also hold, where
+they apply: the version heartbeat (version, platform, edition, last seen), opt-in crash tails,
+the trial-credit ledger and its spend history (token counts and amounts, with salted device and
+IP hashes; never message content), second-factor records, guided-session invoices,
+refused-checkout records (uid, country, amount), and sealed phone messages we cannot open plus
+their plaintext timestamps and statuses. A page may summarize; the summary must say it is one
+("about your account", "and the operational records on the trust page"), and the subpoena
+sentence in the custodian claim must never use the short form, because that is the sentence
+whose whole job is completeness.
+
 ✅ **Resolved 2026-07-15.** The old falsehood ("the only thing our servers know is whether
-your subscription is active") has been removed everywhere and replaced with the three-things
-wording above. Now live correctly at `index.html:573`, `archie/index.html:275`,
-`archie/install/index.html:186`, `faq/index.html:306`, `business/index.html:223`,
-`privacy-policy/index.html:154`, `trust/index.html:296`. **Do not let the shorter,
+your subscription is active") has been removed everywhere and replaced with the list
+wording above, live on the homepage, `archie/`, `archie/install/`, `faq/`, `business/`,
+`privacy-policy/`, and `trust/` (cited by page rather than line since 2026-08-21: the pages
+were rebuilt and every line number had rotted). **Do not let the shorter,
 false form return** — "email + subscription + paid add-ons" is the floor; never fewer.
 
 ✅ **Amended 2026-08-06: three became three plus two.** Both of the things this section warned
@@ -560,13 +665,16 @@ it in a later message. Unattended routines can't apply calendar changes at all �
 what they would make instead of making it."
 
 **Why it's true:** every calendar write is staged, never executed, on the turn that proposes
-it (`gateway.rs:2018-2049`). The apply/discard tools are only added to the tool set on a turn
+it (`crates/archie-runtime/src/gateway/tools_calendar.rs:432-548`, staging and verbatim apply).
+The apply/discard tools are only added to the tool set on a turn
 where a proposal is already pending, so the model *cannot* apply a change in the same message
-that proposed it (`gateway.rs:1963-1979`; snapshot rule documented at `gateway.rs:1946-1950`).
-`calendar_apply_pending_change` applies the staged change verbatim and nothing else
-(`gateway.rs:2051-2061`). The unattended routine path returns
-`blocked_needs_user_confirmation` (`gateway.rs:2041-2047`) — the 3am-delete exploit chain this
-file used to document is closed. Guarded by test (`gateway.rs:4617-4626`).
+that proposed it (`tools_calendar.rs:311-327`; the prior-turn snapshot rule in
+`gateway/turn.rs:907-919` and `1333-1340`).
+`calendar_apply_pending_change` applies the staged change verbatim and nothing else.
+The unattended routine path returns
+`blocked_needs_user_confirmation` (`tools_calendar.rs:488-494`) — the 3am-delete exploit chain
+this file used to document is closed. Guarded by test (`tools_calendar.rs:691`). *(Pointers
+refreshed 2026-08-21 after the gateway split; the behavior re-verified unchanged.)*
 
 **Amended 2026-08-16: the proposal carries buttons, and a tap counts as your later message.**
 Approved wording: "the proposal arrives with Confirm, Change something, and Cancel buttons; a
@@ -596,8 +704,12 @@ Gmail until you tap Send."
 **Amended 2026-08-16: Outlook rides the same gate, and the wording may now name it.** Approved
 form: "nothing reaches Gmail or Outlook until you tap Send", and "Gmail and Outlook stay
 read-only unless you turn replies on". Why it's true: the send path is provider-generic behind
-one trait, and the Send button's handler is still the only caller of `send_reply`
-(`crates/archie-runtime/src/email/replies/actions.rs:404`, dispatched from the tap at `:68`).
+one trait, and `send_reply` still has exactly one call site: the send branch of the
+user-action handler (`crates/archie-runtime/src/email/replies/actions.rs:105`; definition at
+`:516`). That branch is reachable from two doors, both of them a person acting: the tapped
+Send button (dispatched at `:53`) and a typed "send" on a chat app that draws no buttons
+(`:435`). Say "until you press Send" where buttons exist and "until you say send" where they
+do not; never imply the word-door does not exist.
 `open_mail_with` selects the provider (`crates/archie-runtime/src/email/mod.rs`, the match on
 `MailProviderId`: Google, Microsoft), and `MicrosoftMail` implements the send
 (`crates/archie-net/src/mail/microsoft.rs`, `impl MailProvider`, `send_reply`). The send
@@ -626,11 +738,78 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   composing fresh email from scratch until that ships.
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
-**Still true, unchanged:**
+### ✅ Text Replies: it reads your texts on your Mac, and only you can send one — SHIPPED 2026-08-21
+
+The one feature that reads messages **other people** wrote, so every sentence about it is held
+to the strictest form the code supports. Mac only, off until installed, and it refuses to run
+on the free starter credits at all (`crates/archie-runtime/src/texts/mod.rs`,
+`say_why_texts_are_not_watched`): triaging a text means sending it to a model, the starter
+credits route through our proxy, and the people who text the owner never agreed to that. So
+**no text handled by this feature ever touches an Otian server**, not as an exception but
+because the code refuses the one configuration where it would.
+
+**Approved wording, what it reads:** "It reads texts as they arrive in Messages on this Mac,
+under Full Disk Access you grant in System Settings. It starts from the moment you switch it
+on and never trawls your history on its own; when a new text arrives, it reads the last few
+messages of that one conversation (up to 12, which can include messages from before you
+switched it on) so the reply fits the thread, and those go to your AI account with the new
+text." Never write "it never reads old messages" bare: the per-thread context window is real
+(`triage.rs`, `HISTORY_LINES`) and pretending otherwise is exactly the overclaim this file
+exists to stop.
+
+**Approved wording, what leaves the computer:** "The text of a message leaves your computer in
+two ways. It goes to the AI account you connected, directly, on your key, so it can be judged
+and answered; we are not in the middle and keep no copy. And the card offering you the reply,
+which quotes the message, arrives through whatever chat app your agent uses, so it crosses that
+platform's servers like anything else you read there." Never write "the AI call is the one
+point where a message leaves your computer": the card is a second point, and on Telegram,
+Discord, Slack, or Matrix it transits their servers.
+
+**Approved wording, the filters:** "Verification codes, short-code senders, and messages
+carrying opt-out phrasing like 'reply STOP' are dropped on this computer before any AI reads
+them. Group chats are off until you turn them on; your ignore list and only-from list are
+honored the same way." Never promise "marketing is filtered" as a category: the free filter is
+a phrase list (`texts/mod.rs`, `AUTOMATED_PHRASES`), and a promotional text without those
+phrases reaches the AI on the owner's account.
+
+**Approved wording, the address book:** "It reads your address book on this computer to turn a
+number into the name you saved. The lookup never leaves the machine; the resolved name then
+appears on the card, in the prompt sent to your AI account, and in any reminder it sets."
+Never write "nothing about your contacts is sent anywhere": the name rides the card and the
+prompt, and saying otherwise contradicts SECURITY.md.
+
+**Approved wording, retention:** "Message text never enters Archie's logs (every log line in
+the lane carries ids, never text). The internal draft record is deleted within a day, on a
+sweep that runs whether or not anything arrives. The card your agent posted stays in your chat
+like any message there, and a commitment it caught lives on as a reminder until it fires."
+
+**Approved wording, sending:** "Nothing sends without you. There is no tool the model can call
+to send a text: the transport's send function is named in exactly one place in the lane, the
+private handler behind the Send action, and a test counts those call sites and fails on a
+second (`texts/replies/tests.rs`, `no_tool_can_send_a_text`). A reply you send goes out from
+your own number, in your own thread, exactly as if you had typed it, because iMessage has no
+way to mark a message as written by an assistant. On a shared agent this is the owner's alone."
+
+**Boundaries — do not cross:**
+- ❌ Never fold this feature into "nothing about your messages is sent to us at any point"
+  alongside the iMessage chat channel. They are different: the chat channel on starter credits
+  DOES route the owner's own self-thread messages through our proxy, like any chat. Scope each
+  sentence to the feature it describes.
+- ❌ Never write "it can only ever message you" anywhere this feature is in scope. The scoped
+  form: unprompted, it messages only you; a reply to somebody else exists only as a draft that
+  goes nowhere until you press Send.
+- Messages does not have to be open; the watch reads the database, not the app. Full Disk
+  Access is required to read, Automation to send, and both are macOS grants the user makes.
+
+**Still true, with one rescoped 2026-08-21:**
 - **The agent cannot buy anything.** `archie-runtime` cannot see `archie-core::purchases`;
   purchases require a human in Stripe Checkout.
-- **The agent only messages you** — `Channel::send` targets the owner's chat; the inbound
-  roster (`access.rs`) governs who may talk *to* it.
+- **Unprompted, the agent messages only its own people** — `Channel::send` targets the chats
+  on its roster (in the personal edition, one person: the owner; on a shared business agent,
+  approved guests' chats too), and the inbound roster (`access.rs`) governs who may talk *to*
+  it. There is no outbound address the model can supply. The old absolute "the agent only
+  messages you" died when Text Replies shipped: a draft it wrote reaches a third party once
+  the owner presses Send on it. See the Text Replies section for the approved scoping.
 - **`remember` is still ungated** — a local write; the persistence vector for an injected
   instruction. Disclose, don't hide.
 
@@ -677,16 +856,21 @@ gateway, where no command runs; refusing to mint the code is what closes that pa
 
 The gate is the **edition**, not the licence: `archie_domain::product::IS_BUSINESS`, a
 compile-time constant. No plan buys a second person, and a personal build cannot be configured
-into allowing one. Guarded by `plan::tests::one_person_per_agent_on_every_licence_a_customer_can_hold`,
-which asserts it for every paid tier by name, so making this a plan feature breaks a test that
+into allowing one. Guarded by
+`plan::tests::no_license_a_customer_can_hold_buys_a_second_person`
+(`crates/archie-core/src/plan.rs:162`, with
+`the_edition_decides_whether_an_agent_is_shared` at `:177`), which asserts it for every paid
+tier by name, so making this a plan feature breaks a test that
 names this file. Staff builds are exempt so the guest paths stay reachable while they are being
-developed.
+developed. *(Test pointer refreshed 2026-08-21; the previously named test was renamed.)*
 
 **Boundaries.** This is a product limit, not a security boundary, exactly as the agent cap is: it
 counts what is in a roster file on this computer. Do not write it as a guarantee that nobody else
 can ever reach your agent; the roster's own fail-closed behavior is the claim that carries that
-weight. It also does not apply retroactively: a roster that already had guests keeps them, since
-the check is on adding.
+weight. *(Amended 2026-08-21: it now applies retroactively too, which is more than this file
+claimed. A one-time startup sweep brings pre-cap rosters inside the edition's limit, removes
+guests beyond it on the personal edition, and names the removed to the owner; staff installs
+are exempt.)*
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
@@ -759,8 +943,10 @@ unreachable, not when the answer is "no".
 "if we vanish, your agent survives" promise. **So do not rely on the accident.** We have made it
 a **contractual commitment** instead (Terms of Service → "Subscription, cancellation, and what
 happens if we go away"): *if Otian ceases operations, we publish a final build requiring no
-subscription check, within 30 days.* That promise survives any change to the license mechanism,
-which means the piracy hole can now be fixed freely without touching the claim.
+license check, within 30 days.* (Those are the Terms' own words; this file used to say
+"subscription check" here and "no sign-in" above, and a claims contract that paraphrases the
+contract it cites is how the two drift apart.) That promise survives any change to the license
+mechanism, which means the piracy hole can now be fixed freely without touching the claim.
 
 **Updated 2026-08-07: the hole is closed, and the accident with it.** The licence check is now a
 statement signed by the billing service over Ed25519, verified against a public key compiled into
@@ -784,7 +970,11 @@ commitment is the thing that has to hold. That is a stronger promise than the ac
 it is written down, but it is a different one and must not be described as the old one.
 
 ⛔ **Never claim a "30-day grace period" for an unreachable server.** No such timer exists.
-✅ **Do claim:** "If you leave, the app stops. If we disappear, it doesn't." Backed by the Terms.
+✅ **Do claim (reworded 2026-08-21):** "If you leave, the app stops. If we disappear, it runs
+on its last license note, up to 60 days, and the final build the Terms oblige us to publish is
+what keeps it running after that." The old punchy form ("if we disappear, it doesn't [stop]")
+contradicted the never-claim-indefinite rule three lines up; the code delivers 60 days and the
+Terms deliver the rest, and the sentence has to say which promise is doing which work.
 
 ### Prompt injection: the gate narrows it, doesn't end it
 
@@ -856,18 +1046,24 @@ provider Archie connects to on whether it trains on API data.
 
 **Why it's true / source:** these are NOT Otian claims and have no Archie code path. Each is a
 citation of the provider's own current policy, linked inline. Verification status (checked
-2026-08-14):
+2026-08-16, aligned with `docs/PROVIDER-DATA-POLICIES.md` in the Archie repo):
 - Anthropic, Google (paid tier), Groq: **verbatim**, pulled directly from the linked policy pages.
-- OpenAI, xAI: **accurate summary, not verbatim.** Their sites block automated fetching, so the
+- OpenAI: **accurate summary, not verbatim.** Their site blocks automated fetching, so the
   wording is a paraphrase with the source linked; upgrade to a direct quote once the exact
   sentence is confirmed from the source.
+- xAI: **unverified.** Every primary xAI document refuses automated readers, so what we held
+  was a summary of summaries, which is not a source. The row stays candid about consumer Grok
+  training by default; a person with a browser has to read the actual API terms before the
+  entry can claim more than that.
 
 **Boundaries — do not cross:**
 - ❌ Never state or imply that *all five* providers commit to not training. xAI is the exception:
   its consumer Grok trains by default, and a self-serve API key's status is not clearly its
   enterprise no-train terms. Keep the xAI entry candid.
-- ❌ Never drop Google's paid-vs-free caveat: the no-train line is the paid tier only, which is
-  what a user's own key uses.
+- ❌ Never drop Google's paid-vs-free caveat: the no-train line is the paid tier only. And
+  never append "which is what a user's own key uses": an AI Studio key can be free-tier, the
+  connect flow points people there, and Archie has never asked which kind was pasted. Whether
+  the caveat protects a given user depends on their Google billing, and only they know it.
 - Provider policies change. Re-verify all five, and re-pull the verbatim ones, before any launch
   or press push, and update the "checked" date. A stale quote here is a false claim.
 

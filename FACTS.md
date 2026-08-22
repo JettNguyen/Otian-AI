@@ -44,7 +44,7 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$106` | The floor of heavy use with the real 319-run schedule | Archie repo, `docs/COST-MEASURED.md` ($106.35) |
 | `$178` | The ceiling of the same measurement | Archie repo, `docs/COST-MEASURED.md` ($178.02) |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
-| `$15` | The listed price of Meeting Notes, the one paid add-on badge on the browse pages | Its marketplace manifest in the Archie repo. Recorded 2026-08-21: this row used to say "illustrative, marketplace UI only", which stopped being true the day the badge sat on a named listing. While the beta makes everything free, any page carrying the badge must say the beta price beside it |
+| `$15` | The parked price of Meeting Notes. Printed nowhere: on 2026-08-21 Jett had it listed Free everywhere for now, so the browse badge says Free like every other listing | Its marketplace manifest in the Archie repo, currently `price_cents: 0` with a test pinning "free for the beta". If the price returns, it goes here first, and any page carrying the badge must say the beta price beside it |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
 
 ## Other companies' prices

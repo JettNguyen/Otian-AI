@@ -43,6 +43,18 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
   saying 60 seconds on one page and 2 minutes on three others. Adding a figure to a page means
   adding it to FACTS.md first. If you cannot say where a number comes from, it is not a fact.
   FACTS.md also records the figures we deliberately do **not** publish and why.
+- **Every page has a word budget, and `scripts/check-copy-length.py` enforces it.** A page with
+  no build step grows one well-meant paragraph at a time, each defensible on its own, until the
+  page nobody re-read end to end is three screens longer than the thing it sells. Marketing
+  pages get **900 words** of body copy; a handful carry a documented higher ceiling (the
+  homepage, How It Works, pricing), and reference pages whose job is completeness (terms,
+  privacy, trust, the FAQ, blog posts, comparisons, our story) are exempt. Diagram labels are
+  counted and reported but never budgeted: a figure earns its words by replacing prose, and
+  taxing it pushes copy back into paragraphs. **Run it before you commit**, alongside
+  `check-facts.py`. When a page is over, the fix is cutting it; raising a budget is a
+  deliberate act that needs the reason written beside the number. The usual source of the
+  overage is the same fact stated in three places, so cut the restatements first and let each
+  claim live once.
 - **Bump the stylesheet version when you change `css/styles.css`.** Every page links it as
   `css/styles.css?v=YYYYMMDD-N`. GitHub Pages serves the file with `max-age=14400`, so without
   a new URL a returning visitor gets today's HTML against a stylesheet up to four hours old,

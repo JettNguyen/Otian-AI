@@ -74,9 +74,20 @@
     });
   }
 
+  /* The colour the phone paints its address bar and task-switcher card. It is set in the markup
+     and again by the pre-paint script, so it is already right on arrival; this is the toggle case,
+     where the page turns dark under a bar that would otherwise stay cream. Values are --bg-primary
+     from each theme in css/styles.css, and have to be literals: the bar is painted by the browser
+     chrome, which cannot read a custom property. Changing either one means changing it there too. */
+  function applyThemeColor(nextTheme) {
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', nextTheme === 'dark' ? '#1A1A19' : '#FCFAF8');
+  }
+
   function applyTheme(theme, shouldPersist) {
     var nextTheme = theme === 'dark' ? 'dark' : 'light';
     root.setAttribute('data-theme', nextTheme);
+    applyThemeColor(nextTheme);
 
     document.querySelectorAll('.theme-toggle').forEach(function (toggle) {
       var isDark = nextTheme === 'dark';

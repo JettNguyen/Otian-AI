@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="682" height="180" viewBox="0 0 681.53 180.00" role="img" aria-label="Otian AI">
+  <!-- Otian AI horizontal lockup: cairn mark left, wordmark right. Transparent ground, with no
+       background rect by design. The viewBox is tight to the ink on all four sides, so the file
+       carries no clear space of its own; whatever it is placed in should supply that.
+
+       Nothing here is hand-placed. The mark is assets/icon-1024-dark.svg unaltered, scaled to
+       stand twice the wordmark's cap height; the wordmark's ink block is centred on the mark's
+       centre line rather than sat on its baseline, and the gap between them is measured ink to
+       ink. Regenerate with scripts/gen-logo.py rather than nudging values here by hand.
+
+       Gradient ids are prefixed "otian" so this can be inlined on a page beside archie-text.svg
+       without the two files' <defs> colliding. -->
+  <defs>
+    <linearGradient id="otianCairnTop" x1="0.1" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#EFA97E"/><stop offset="1" stop-color="#E08A5B"/></linearGradient>
+    <linearGradient id="otianCairnMid" x1="0.1" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#E4915F"/><stop offset="1" stop-color="#D0774A"/></linearGradient>
+    <linearGradient id="otianCairnBase" x1="0.1" y1="0" x2="0.9" y2="1"><stop offset="0" stop-color="#CF7143"/><stop offset="1" stop-color="#BB5F34"/></linearGradient>
+  </defs>
+  <g transform="translate(-41.716 -13.275) scale(0.83210)">
+    <ellipse cx="122" cy="197" rx="72" ry="35" fill="url(#otianCairnBase)" transform="rotate(-4 122 197)"/>
+    <ellipse cx="112" cy="121" rx="56" ry="33" fill="url(#otianCairnMid)" transform="rotate(5 112 121)"/>
+    <ellipse cx="136" cy="47" rx="34" ry="31" fill="url(#otianCairnTop)" transform="rotate(-7 136 47)"/>
+  </g>
+  <!-- "Otian" bold and " AI" regular: the weight pairing the nav lockup uses. The baseline is
+       set explicitly rather than with dominant-baseline, which renderers disagree about. -->
+  <text x="156.54" y="137.10" font-family="Georgia, 'Times New Roman', serif" font-size="128" fill="#F3F0ED"><tspan font-weight="bold">Otian</tspan><tspan> AI</tspan></text>
+</svg>

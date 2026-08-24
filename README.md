@@ -223,7 +223,7 @@ with a date, or they are absent.
 A two-person team. We set up agents by hand, one person at a time, until we knew where every ounce
 of friction lived. Archie is what we learned, compiled.
 
-**Jett Nguyen**, Engineering & Implementation · **Jack Raney**, Discovery & Client Strategy
+**Jett Nguyen**, Engineering & Implementation · **Jack Raney**, Operations & Client Discovery
 
 Our mission: to give ordinary people an AI agent they actually own, one that removes the friction
 from daily life and puts real leverage back in their hands.

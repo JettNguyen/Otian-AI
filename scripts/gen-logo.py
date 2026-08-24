@@ -69,7 +69,7 @@ H = MARK_H       # viewBox is tight to the ink: no built-in margin, add your own
 FONT = 128.0     # gives a cap height of half the mark, the ratio archie-text.svg uses
 GAP = 40.0       # visual space between mark ink and wordmark ink, not between layout boxes
 
-def build(text_fill, defs_extra="", label="Otian AI"):
+def build(otian_fill, base_fill, defs_extra="", label="Otian AI"):
     mx0, my0, mx1, my1 = mark_bounds()
     s = MARK_H / (my1 - my0)
     mark_w = (mx1 - mx0) * s
@@ -107,24 +107,33 @@ def build(text_fill, defs_extra="", label="Otian AI"):
   <g transform="translate({tx:.3f} {ty:.3f}) scale({s:.5f})">
 {ell}
   </g>
-  <!-- "Otian" bold and " AI" regular: the weight pairing the nav lockup uses. The baseline is
-       set explicitly rather than with dominant-baseline, which renderers disagree about. -->
-  <text x="{text_x:.2f}" y="{baseline:.2f}" font-family="Georgia, 'Times New Roman', serif" font-size="{FONT:.0f}" fill="{text_fill}"><tspan font-weight="bold">Otian</tspan><tspan> AI</tspan></text>
+  <!-- "Otian" bold and " AI" regular: the weight pairing the nav lockup uses. The name reads in
+       the site's own ink and only the "AI" carries the accent, but note HOW: the gradient stays
+       on the <text>, where its object bounding box is the whole wordmark, and "Otian" overrides
+       it on its own tspan. Moving the gradient down onto a tspan instead would reframe it around
+       those two letters alone and shift the ramp across the "AI" by a few percent. The baseline
+       is set explicitly rather than with dominant-baseline, which renderers disagree about. -->
+  <text x="{text_x:.2f}" y="{baseline:.2f}" font-family="Georgia, 'Times New Roman', serif" font-size="{FONT:.0f}" fill="{base_fill}"><tspan font-weight="bold" fill="{otian_fill}">Otian</tspan><tspan> AI</tspan></text>
 </svg>
 '''
 
 if __name__ == "__main__":
     import sys
-    GRAD = '\n    <linearGradient id="otianWord" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EFA97E"/><stop offset="1" stop-color="#C36A3D"/></linearGradient>'
+
+    GRAD = ('\n    <linearGradient id="otianWord" x1="0" y1="0" x2="0" y2="1">'
+            '<stop offset="0" stop-color="#EFA97E"/><stop offset="1" stop-color="#C36A3D"/>'
+            '</linearGradient>')
+    INK, CREAM, GRADREF = "#44403B", "#F3F0ED", "url(#otianWord)"
+
     variants = {
-        "otian-text.svg":       ("url(#otianWord)", GRAD),
-        "otian-text-ink.svg":   ("#44403B", ""),
-        "otian-text-cream.svg": ("#F3F0ED", ""),
+        # name                    "Otian"  <text> fill, which " AI" inherits    extra defs
+        "otian-text.svg":        (INK,     GRADREF, GRAD),   # on cream / white
+        "otian-text-cream.svg":  (CREAM,   GRADREF, GRAD),   # the same idea on a dark ground
+        "otian-text-ink.svg":    (INK,     INK,     ""),     # one colour, for single-ink use
     }
     out = sys.argv[1] if len(sys.argv) > 1 else "assets"
-    for name, (fill, extra) in variants.items():
-        open(f"{out}/{name}", "w", encoding="utf-8").write(build(fill, extra))
+    for name, (otian, base, extra) in variants.items():
+        open(f"{out}/{name}", "w", encoding="utf-8").write(build(otian, base, extra))
         print("wrote", name)
-    mx0, my0, mx1, my1 = mark_bounds()
     print(f"\nmetrics: bold 'Otian'={BOLD_W:.4f}em  ' AI'={REST_W:.4f}em"
           f"  ink above baseline={INK_ABOVE:.4f}em below={INK_BELOW:.4f}em")

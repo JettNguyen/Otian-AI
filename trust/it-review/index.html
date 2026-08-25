@@ -186,7 +186,7 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">The Short Version</span>
-          <h2 id="answers" class="fade-up delay-1">Ten answers, before the document.</h2>
+          <h2 id="answers" class="fade-up delay-1">Twelve answers, before the document.</h2>
           <p>Everything below is checkable against a running copy, and the last section tells you how to check it rather than take our word.</p>
         </div>
 
@@ -216,6 +216,14 @@
                 <td data-label="The question"><strong>Where does the work go?</strong></td>
                 <td data-label="The answer">When your agent thinks, it talks to Anthropic or OpenAI directly from your computer, on your account, with your key. We are not in the middle of it, and we keep no copy. The exception is the free starter credits, which run on our account and pass through our server: while an agent is on those, it <strong>cannot read email at all</strong>.</td>
               </tr>
+              <tr class="is-content">
+                <td data-label="The question"><strong>Can a hostile email or web page hijack it?</strong></td>
+                <td data-label="The answer">Partly, and this is the one to weigh. The approval gate stops an injected instruction from changing anything in a connected account that is not easily reversible. It does <strong>not</strong> stop it leaking: the assistant can fetch a web address or run a search whose text carries content from your conversation, and no confirmation stands in front of that. Nobody shipping agents has solved this. The review document has a whole section on what reduces it. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../details/#untrusted-text">The long version &rarr;</a></td>
+              </tr>
+              <tr>
+                <td data-label="The question"><strong>Where do its messages go?</strong></td>
+                <td data-label="The answer">To Archie&rsquo;s own window, and to a chat app only if one is connected. That is optional and worth a decision: a summary of your inbox sent over Telegram is inbox content on Telegram, whose cloud chats are not end-to-end encrypted. Slack and Discord hold content under their own terms. Not connecting one, or pointing Matrix at a homeserver you run, are both supported and neither is a degraded mode.</td>
+              </tr>
               <tr>
                 <td data-label="The question"><strong>What do your servers hold?</strong></td>
                 <td data-label="The answer">Your email address, whether you have a current plan, and which <strong>paid</strong> add-ons you bought. Then, where they apply, the version heartbeat and, if you leave it on, crash tails. That is a summary: <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../#what-we-hold">the whole list is on the Trust page</a>, and the review document carries it in full.</td>
@@ -244,7 +252,7 @@
           </table>
         </div>
 
-        <p class="trust-table-note">Two of those rows are limitations rather than features, and they are in the table rather than under it on purpose. If you find something Archie does that is not described here, that is a bug in our honesty and we want to know. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../../contact/">Tell us</a>, publicly, if you like.</p>
+        <p class="trust-table-note">Four of those rows describe a limit rather than a feature, and they are in the table rather than under it on purpose. If you find something Archie does that is not described here, that is a bug in our honesty and we want to know. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../../contact/">Tell us</a>, publicly, if you like.</p>
       </div>
     </section>
 
@@ -256,12 +264,12 @@
         <div class="section-header">
           <span class="section-label fade-up">The Full Review</span>
           <h2 id="document" class="fade-up delay-1">The document, for the ticket.</h2>
-          <p>Fifteen pages, written for whoever has to approve this rather than for whoever wants it. It covers the same ground as the table above and then keeps going: every host Archie connects to and why, the file paths it creates, every OAuth permission it can request, the operating system prompts it triggers, what each AI provider does with what you send, how an API key compares with an enterprise agreement, and a closing section of open points including the unsigned Windows installer.</p>
+          <p>Twenty-three pages, written for whoever has to approve this rather than for whoever wants it. It opens with a threat model saying what Archie does and does not defend against, then covers every host it connects to, the file paths it creates, every OAuth permission it can request, the operating system prompts it triggers, what each AI provider does with what you send, and how an API key compares with an enterprise agreement. It ends with fourteen open points and a list of the review artifacts we do and do not have, including the ones we have not built.</p>
         </div>
 
         <div class="fade-up delay-2" style="text-align:center">
           <a class="btn btn-primary btn-lg" href="Archie-Overview.pdf" download>Download the review document (PDF)</a>
-          <p class="trust-table-note" style="margin-top:1rem">Archie 0.1.7 &middot; 15 pages &middot; updated when the facts change, not on a schedule.</p>
+          <p class="trust-table-note" style="margin-top:1rem">Archie 0.1.7 &middot; 23 pages &middot; updated when the facts change, not on a schedule.</p>
         </div>
       </div>
     </section>

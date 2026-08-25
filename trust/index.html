@@ -264,6 +264,16 @@
               <p class="trust-quote-para">xAI is the one we cannot vouch for either way. Its primary terms refuse automated readers, so we have not been able to verify them from the source; what is corroborated is that the consumer Grok app trains on conversations by default. If you connect xAI, read its API terms yourself before deciding what to send.</p>
               <span class="trust-quote-src">Read it directly: <a href="https://x.ai/legal/privacy-policy" rel="noopener">xAI Privacy Policy</a> and <a href="https://x.ai/legal/terms-of-service-enterprise" rel="noopener">Enterprise Terms</a></span>
             </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">Mistral</span>
+              <p class="trust-quote-para">Mistral splits the same way Google does. Its free mode trains on what you send, by default. Pay-as-you-go does not. Which one your key is depends on your own Mistral billing, and only you can see that.</p>
+              <span class="trust-quote-src"><a href="https://legal.mistral.ai/terms/commercial-terms-of-service" rel="noopener">Mistral Commercial Terms</a> and <a href="https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training" rel="noopener">their opt-out note</a></span>
+            </li>
+            <li class="trust-quote-item">
+              <span class="trust-quote-co">DeepSeek</span>
+              <p class="trust-quote-para">DeepSeek is the one to read before you connect it. Its terms say nothing about training at all; its privacy policy says personal data is used &ldquo;to train and improve our technology&rdquo; and is collected, processed and stored &ldquo;in People&rsquo;s Republic of China&rdquo;, with no end date on retention. There is an opt-out and it is regional: the EEA, the UK and Switzerland have it, and nobody else is told they do. Their models are open weight, so a copy you run on your own hardware and point Archie at sends DeepSeek nothing; that is the only form of it we would call safe.</p>
+              <span class="trust-quote-src">Read it directly: <a href="https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html" rel="noopener">DeepSeek Privacy Policy</a></span>
+            </li>
           </ul>
         </div>
       </div>
@@ -396,7 +406,7 @@
               <li>Which version of Archie you are running, until you turn that off</li>
               <li>Crash reports, if you leave them on: where in our code it broke, never what you were doing</li>
               <li>While you are on free credits, the ledger of what each call spent</li>
-              <li>Second-factor records and, if you book one, guided-session invoices</li>
+              <li>Second-factor records, guided-session invoices if you book one, and a record of a checkout that was refused (the account, the country, the amount)</li>
               <li>If you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive</li>
             </ul>
           </div>

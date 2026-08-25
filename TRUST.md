@@ -1191,16 +1191,36 @@ citation of the provider's own current policy, linked inline. Verification statu
   was a summary of summaries, which is not a source. The row stays candid about consumer Grok
   training by default; a person with a browser has to read the actual API terms before the
   entry can claim more than that.
+- Mistral: **verbatim, and it splits.** Free mode trains by default; pay-as-you-go does not.
+  <https://legal.mistral.ai/terms/commercial-terms-of-service> and
+  <https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training>,
+  read 2026-08-16. Same shape as Google: which one a user has is a fact only they hold.
+- DeepSeek: **verbatim, and it is the strongest warning on the list.** Their terms say nothing
+  about training; the privacy policy says personal data is used "to train and improve our
+  technology" and is "directly collect[ed], process[ed] and store[d] ... in People's Republic
+  of China", with open-ended retention. The opt-out is regional (EEA, UK, Switzerland) and no
+  such right is stated for anyone else.
+  <https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html>, read 2026-08-16.
+  Their models are open weight, so a self-hosted copy reached through "Another provider" sends
+  DeepSeek nothing; that is the only form of DeepSeek use this file will describe as safe.
+
+**Added 2026-08-25: the roster on this page was five and the product has seven.** Reconciliation
+item 3 at the top of this file recorded the roster as seven in August and this block was not
+updated with it, so `trust/index.html` listed Anthropic, OpenAI, Google, Groq and xAI while the
+same page told people they could connect Mistral or DeepSeek. The omission mattered more than a
+normal staleness bug because the missing two are the two with the worst answers, so the effect of
+leaving them out was a table that read better than the truth. Both rows are now required.
 
 **Boundaries — do not cross:**
-- ❌ Never state or imply that *all five* providers commit to not training. xAI is the exception:
+- ❌ Never state or imply that *all seven* providers commit to not training. xAI, Mistral, DeepSeek
+  and Google all break that sentence in different ways. xAI is the first exception:
   its consumer Grok trains by default, and a self-serve API key's status is not clearly its
   enterprise no-train terms. Keep the xAI entry candid.
 - ❌ Never drop Google's paid-vs-free caveat: the no-train line is the paid tier only. And
   never append "which is what a user's own key uses": an AI Studio key can be free-tier, the
   connect flow points people there, and Archie has never asked which kind was pasted. Whether
   the caveat protects a given user depends on their Google billing, and only they know it.
-- Provider policies change. Re-verify all five, and re-pull the verbatim ones, before any launch
+- Provider policies change. Re-verify all seven, and re-pull the verbatim ones, before any launch
   or press push, and update the "checked" date. A stale quote here is a false claim.
 
 ---

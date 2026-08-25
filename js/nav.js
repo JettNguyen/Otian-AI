@@ -465,6 +465,27 @@
   var MIN_WORDS = 8;
   var TOLERANCE = 6;      /* px a line may exceed the one above before it counts */
 
+  /* A wedge is a shape, and past a certain height it stops reading as one. Eight or
+     nine centered lines is not a taper any more, it is a wall with a slope on it, and
+     the reader meets it as bulk before they read a word of it. The measure that suits
+     a three-line lede is the wrong measure for an eighty-word paragraph: the same
+     780px that makes a short block elegant is what makes a long one nine lines deep.
+     So a block that overruns is allowed a wider column before its breaks are cut, up
+     to whatever room its parent actually has.
+
+     Only ever wider, and only for blocks that overrun: a short lede keeps the measure
+     it was designed at, because widening one buys nothing and costs the line it was
+     meant to fall on. The ceiling exists because the fix has an opposite failure. Past
+     about 1040px a line is long enough that finding the start of the next one is work,
+     which is the same complaint as the wall, arriving from the other side. When both
+     limits bind at once (a very long block in a narrow container) the block stays too
+     tall, and that is the honest outcome: the answer to those is fewer words, and this
+     is not the place that can supply them. */
+  var COMFORT_LINES = 6;   /* beyond this the shape stops doing its job */
+  var WIDEN_CEILING = 1040;   /* px: past here the line is too long to track back from */
+  var WIDEN_STEP = 60;     /* px per try, so the block widens no further than it needs */
+  var WIDEN_TRIES = 8;
+
   /* Width of a range, summed across its rects: a range that already spans a browser
      line break reports one union box the width of the column, which would read as
      "this fits" for text that does not. Summing the pieces gives the real width. */
@@ -474,21 +495,46 @@
     return total;
   }
 
+  /* Rects that share a line, grouped.
+
+     By centre, with a tolerance taken from the line height, and both halves of that
+     were bought the hard way. Grouping by top edge with a flat 4px tolerance is what
+     this did, and a raised superscript does not share a top with the text beside it:
+     the numbered citation markers on the comparison pages were each counted as a line
+     of their own. A paragraph with two of them measured seven lines when it was
+     drawing five, so the wedge planned a seven-line shape, and the browser drew the
+     extra two. That is the "wall of text" on those pages, and it was a measuring bug
+     wearing a typography bug's clothes.
+
+     A centre is the robust thing to compare because vertical-align moves the box and
+     leaves the centre near enough where it was, and half a line height is the right
+     tolerance because that is precisely the distance at which two rects stop being
+     able to be on the same line. */
+  function lineTolerance(el) {
+    var cs = window.getComputedStyle(el);
+    var lh = parseFloat(cs.lineHeight);
+    if (!(lh > 0)) lh = parseFloat(cs.fontSize) * 1.5;
+    return Math.max(4, lh * 0.45);
+  }
+
+  function lineTops(range, tol) {
+    var rects = range.getClientRects(), tops = [], i, j, mid, seen;
+    for (i = 0; i < rects.length; i++) {
+      if (rects[i].width < 1) continue;
+      mid = rects[i].top + rects[i].height / 2;
+      seen = false;
+      for (j = 0; j < tops.length; j++) if (Math.abs(tops[j] - mid) < tol) { seen = true; break; }
+      if (!seen) tops.push(mid);
+    }
+    return tops;
+  }
+
   /* How many lines the browser is actually drawing. Dividing the text width by the
      column is not the same number: greedy wrapping leaves a ragged gap at the end of
      every line, so a block that "fits" in two by arithmetic is routinely drawn in
-     three, and treating it as two skips the block entirely. Rects are grouped by top
-     edge with a tolerance, because inline elements on one line do not share a top to
-     the pixel. */
-  function renderedLines(range) {
-    var rects = range.getClientRects(), tops = [], i, j, seen;
-    for (i = 0; i < rects.length; i++) {
-      if (rects[i].width < 1) continue;
-      seen = false;
-      for (j = 0; j < tops.length; j++) if (Math.abs(tops[j] - rects[i].top) < 4) { seen = true; break; }
-      if (!seen) tops.push(rects[i].top);
-    }
-    return tops.length;
+     three, and treating it as two skips the block entirely. */
+  function renderedLines(range, tol) {
+    return lineTops(range, tol).length;
   }
 
   function textNodes(el) {
@@ -518,8 +564,47 @@
     if (brs.length) el.normalize();
   }
 
+  /* Widen an overrunning block until it sets in COMFORT_LINES or runs out of room.
+
+     Measured rather than modelled, one step at a time, for the reason the rest of this
+     file is: the number of lines a width produces is a fact about the font, the words
+     and the browser, and every attempt to predict it here has been wrong by one. So
+     this asks. Stepping up rather than jumping to the ceiling is what keeps a block
+     that only needed 60px from taking 260 and reading as a different design.
+
+     The parent's content box is the hard stop. Going past it does not widen the block,
+     it overflows it, and a centered block that overflows is no longer centered. */
+  function widen(el, range, lines, tol) {
+    var parent = el.parentNode;
+    if (!parent || parent.nodeType !== 1) return lines;
+    var room = Math.min(WIDEN_CEILING, parent.clientWidth);
+    var width = el.clientWidth;
+    if (width >= room) return lines;
+
+    /* Line count falls in steps, and the steps have plateaus: this block sets in seven
+       lines anywhere from 780px to 900px and only reaches six at 960. So the search
+       does not stop at the first width that bought nothing, which was the bug in the
+       first version of this and cost the whole effect. It keeps going to the room it
+       has, remembers the narrowest width that reached the best count, and settles
+       there, so a block takes the width it needed and not the width it was offered. */
+    var start = width, best = lines, bestWidth = width;
+    for (var t = 0; t < WIDEN_TRIES; t++) {
+      width = Math.min(room, width + WIDEN_STEP);
+      el.style.maxWidth = width + 'px';
+      var now = renderedLines(range, tol);
+      if (now < best) { best = now; bestWidth = width; }
+      if (best <= COMFORT_LINES || width >= room) break;
+    }
+    if (bestWidth === start) { el.style.maxWidth = ''; return lines; }
+    el.style.maxWidth = bestWidth + 'px';
+    return best;
+  }
+
   function shape(el) {
     clearBreaks(el);
+    /* Last pass's widening is not this pass's answer. A resize changes what the parent
+       has to give, so the block goes back to its designed measure and earns it again. */
+    el.style.maxWidth = '';
 
     var colWidth = el.clientWidth;
     if (!colWidth) return;                       /* hidden, or not laid out yet */
@@ -534,8 +619,17 @@
 
     range.setStart(probe[0].node, probe[0].start);
     range.setEnd(probe[probe.length - 1].node, probe[probe.length - 1].end);
-    var lines = renderedLines(range);
+    var tol = lineTolerance(el);
+    var lines = renderedLines(range, tol);
     if (lines < MIN_LINES) return;
+
+    /* Before any breaks are chosen, because the wedge is cut to fit the column and a
+       column that is about to change is the wrong one to cut against. */
+    if (lines > COMFORT_LINES) {
+      lines = widen(el, range, lines, tol);
+      colWidth = el.clientWidth;
+      if (!colWidth) return;
+    }
 
     /* Everything from here is measured with wrapping switched off. A range that spans a
        line break reports its pieces, and the pieces are short: each break eats the space
@@ -673,15 +767,17 @@
   function lineWidths(el) {
     var range = document.createRange();
     range.selectNodeContents(el);
-    var rects = range.getClientRects(), groups = [], i, j, g;
+    var tol = lineTolerance(el);
+    var rects = range.getClientRects(), groups = [], i, j, g, mid;
     for (i = 0; i < rects.length; i++) {
       if (rects[i].width < 1) continue;
+      mid = rects[i].top + rects[i].height / 2;
       g = null;
       for (j = 0; j < groups.length; j++) {
-        if (Math.abs(groups[j].top - rects[i].top) < 4) { g = groups[j]; break; }
+        if (Math.abs(groups[j].top - mid) < tol) { g = groups[j]; break; }
       }
       if (g) { g.l = Math.min(g.l, rects[i].left); g.r = Math.max(g.r, rects[i].right); }
-      else groups.push({ top: rects[i].top, l: rects[i].left, r: rects[i].right });
+      else groups.push({ top: mid, l: rects[i].left, r: rects[i].right });
     }
     groups.sort(function (a, b) { return a.top - b.top; });
     return groups.map(function (v) { return v.r - v.l; });

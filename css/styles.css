@@ -2026,6 +2026,88 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 /* ========================================
    10. Proof Chips
    ======================================== */
+/* ── Find an add-on ───────────────────────────────────────────────────────
+   The box, its example chips and its results. Deliberately plain: this page's
+   argument is that it is a word match and not a model, and a search box dressed
+   up as something cleverer would be arguing the opposite. */
+.find-box { max-width: 640px; margin: 0 auto; }
+
+.find-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  padding: 14px 18px;
+}
+.find-input::placeholder { color: var(--text-muted); }
+.find-input:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+.find-privacy {
+  margin: 10px 2px 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.find-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.find-chip {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-soft-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: border-color var(--transition-quick), color var(--transition-quick);
+}
+.find-chip:hover { border-color: var(--accent); color: var(--text-primary); }
+
+.find-results { max-width: 640px; margin: 32px auto 0; }
+.find-count, .find-empty, .find-more {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 14px;
+}
+.find-more { margin: 16px 0 0; }
+
+.find-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.find-hit {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 15px;
+  text-decoration: none;
+  transition: border-color var(--transition-quick);
+}
+.find-hit:hover, .find-hit:focus-visible { border-color: var(--accent); }
+
 /* The hero's proof row. Chips are links on purpose: every claim on one is the short
    form of a claim on /trust/, and a chip a reader cannot click through to is exactly
    the kind of unbacked assertion this row previously carried. The false chip removed

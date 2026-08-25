@@ -485,18 +485,32 @@ if (priceToggle) {
     applyFilters();
   });
 }
+/* A search spans every add-on, so it can't stay on the packs view: drop into the add-on grid
+   and move the highlight to "All". Shared by typing and by an incoming ?q=, which must land
+   the reader in exactly the state they would have reached by typing it themselves. */
+function leavePacksForSearch() {
+  if (!searchInput || !searchInput.value.trim() || activeType !== "packs") return;
+  activeType = "all";
+  if (!typeTabs) return;
+  Array.prototype.forEach.call(typeTabs.querySelectorAll(".mp-type-tab"), function (t) {
+    t.classList.toggle("is-active", t.dataset.type === "all");
+  });
+}
 if (searchInput) {
   searchInput.addEventListener("input", function () {
-    // A search spans every add-on, so it can't stay on the packs view, so drop into the add-on grid
-    // and move the highlight to "All" the moment the user types.
-    if (searchInput.value.trim() && activeType === "packs") {
-      activeType = "all";
-      Array.prototype.forEach.call(typeTabs.querySelectorAll(".mp-type-tab"), function (t) {
-        t.classList.toggle("is-active", t.dataset.type === "all");
-      });
-    }
+    leavePacksForSearch();
     updateView();
   });
+  /* ?q= makes a result linkable, which is what lets /skills-marketplace/find/ hand off to the
+     real catalog instead of rendering a second copy of it. Applied before the fetch resolves:
+     the value is read by the filter, and the load path rerenders when the items arrive. */
+  try {
+    var incoming = new URLSearchParams(window.location.search).get("q");
+    if (incoming) {
+      searchInput.value = incoming;
+      leavePacksForSearch();
+    }
+  } catch (e) { /* no URLSearchParams, so no deep link; the page still works */ }
 }
 
 /* Expand toggle for both add-on cards and pack cards. `collapsedLabel` differs per surface. */

@@ -28,6 +28,56 @@ handling, or what the agent will and won't do without asking:
 TRUST.md also tracks claims that are **currently live on the site and false**. Do not
 propagate them to new pages. Do not "improve" them. They are being fixed.
 
+## The Otian Standard: what our operating principles require of copy
+
+Source: **The Otian Standard, our operating principles, v3.0 (2026)**, written by Jett and Jack.
+That document is internal and deliberately not in this repo, which is public and serves
+otianai.com. What follows is only the part that governs words on the site, restated so it can be
+enforced here without the internal document being present.
+
+These sit alongside TRUST.md rather than above it. TRUST.md governs whether a claim is **true**.
+These govern whether a true claim is being made **decently**.
+
+- **No urgency, shame, or fear. Ever.** No countdown timers, no "only 3 left", no "act now",
+  no discount that is not really expiring, no implying the reader is behind or foolish for not
+  having this yet. A real capacity limit is different and is allowed: say it as capacity, in
+  plain numbers, with the reason ("we are two people, so this is a handful of slots a week").
+  The site was swept to zero urgency phrasings on 2026-08-25; keep it that way.
+- **Never use our smallness as a defence.** Being a two-person team explains a fact; it never
+  excuses a shortfall on its own. Every time the site says we are small it must, in the same
+  breath, carry either a remedy the reader can use or a commitment with a trigger. The Windows
+  code-signing passage on `archie/install/` is the model: it names the cost, says what we will
+  do, and then hands the reader a way to check us without trusting us.
+- **Name the concrete thing before you ship the sentence.** Hours back, a task they stop doing,
+  a cost they avoid. If a paragraph cannot say what the reader gets, it is decoration and does
+  not ship. Not a number we have not measured, though: see the badges rule in FACTS.md. An
+  honest "what this takes off your plate" beats an invented "saves 5 hours a week".
+- **Publish the limitation beside the capability, on the same page.** Not lower down, not in the
+  FAQ, not on `/trust/` only. A reader who scans one section must meet the catch that belongs to
+  it. This is the rule the `skills-marketplace/browse/` can-and-cannot section exists to satisfy.
+- **The last line of a page is the one that gets remembered.** End on the most useful thing the
+  reader can do next, in their words, never on a marketing flourish and never trailing off. If a
+  CTA block would read the same on any other company's site, rewrite it.
+- **Assume competence, answer the question underneath.** The stated question is the surface.
+  Someone asking "can it move my 3 o'clock?" is losing an hour a week to calendar tetris. Answer
+  what they asked, then address the thing beneath it, without ever implying they should have
+  known.
+- **No dark patterns in copy.** Cancelling is described as plainly as starting. No pre-checked
+  boxes, no double negatives on consent, no cost mentioned only after the decision point. Costs
+  that go to a third party (the AI account) get explained before purchase with realistic
+  estimates, never best-case ones.
+- **We beat competitors by being better, not by misrepresenting them.** Already enforced by
+  TRUST.md's competitor table; it is a principle here too, so a comparison page that would pass
+  the sourcing rule and still leave a false impression does not ship.
+
+**The tie-breaker, when principles conflict and a page is genuinely close.** Run these in order,
+and if any fails, do not ship it: would we be comfortable if the reader knew everything we know
+about why this sentence is worded this way? Would we recommend this to a parent who would not
+check? Does it give more than they paid for, or less? If someone with no loyalty to any of this
+optimised the page ruthlessly, would the reader still be served? If it appeared on the front page
+in two years, would we defend it or explain it away? **The short version: the money is never the
+reason.**
+
 ## Copy conventions
 
 - **No em dashes anywhere in site content.** Never use the `—` character (U+2014) or the

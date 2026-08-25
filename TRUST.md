@@ -497,6 +497,26 @@ count-stuffing) but never retained: there is no `users/{uid}` free-install list 
   only the aggregate. Never phrase it as "nothing leaves" or "zero network calls."
 - ❌ Never imply the ping is anonymous. It carries your ID token by design.
 
+### ✅ What you bought can be added again on another computer (paid add-ons only)
+
+**Approved wording:** "Anything you buy is tied to your Otian account, so another computer can
+add it again without paying twice."
+
+**Why it's true:** a purchase is written per user at `users/{uid}/purchases`
+(`crates/archie-core/src/purchases.rs:290`), and starting checkout for something already owned
+returns `AlreadyPurchased` instead of charging a second time (`purchases.rs:25, 91-92`).
+
+**Boundaries — do not overclaim:**
+- ⛔ **"Add-ons sync automatically, no reinstalling per device"** — caught 2026-08-24 on
+  `skills-marketplace/browse/`. False in two directions at once. It is unscoped, and there is no
+  per-user record of *free* add-ons to sync from at all (see the section directly above), which
+  today is every add-on on the site. Scope it to purchases or do not say it.
+- The claim is about **entitlement, not state**: it says a thing you paid for can be added again
+  somewhere else. Whether an add-on's settings, memory or history travel with it is a separate
+  question with its own answer, and this row does not license one.
+- Marketplace purchasing is not open yet. Keep this in the future tense wherever it appears until
+  it is.
+
 ### ✅ Archie on your phone: an encrypted mailbox we hold and cannot read (SHIPPED)
 
 **Status 2026-08-06:** live. The Firestore rules are deployed, the feature is in the shipped app,

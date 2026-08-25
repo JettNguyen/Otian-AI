@@ -1298,6 +1298,24 @@ the API is not used to train their models. Two say it of their paid tier only. O
 been able to verify at all. And one trains on it and says so in its own policy." When the roster
 changes, that sentence is re-counted from the rows or it is deleted.
 
+**Added 2026-08-25, third pass: the stale rosters were not only on `trust/`.** Sweeping for the
+same bug elsewhere found three more lists frozen at the old roster: `how-it-works/` named five in
+the anatomy figure and five again under "An account with an AI company", and `faq/`'s cost answer
+named four. All three now name seven, and the anchor `trust/#providers` exists so a page can send
+a reader to the sourced table instead of paraphrasing it. **The provider list is
+`crates/archie-net/src/providers.rs` and nothing else**; a page that names providers is re-counted
+from it whenever the enum changes, and a page that only needs to gesture at the set links to the
+anchor rather than typing the names again.
+
+⛔ **And one of the three was worse than stale.** `how-it-works/` recommended Google with "Google
+is free in most countries", steering a first-time reader at the exact tier Google trains on,
+with the paid-vs-free caveat nowhere on the page. The caveat boundary below says never to drop it
+where the no-train line appears; this was the sharper version, a free-tier recommendation with no
+no-train line to attach a caveat to. **Recommending a provider's free tier is making a claim
+about its training terms**, so a page that recommends one carries the terms or links the table.
+Fixed in place: Groq's free tier stays recommended without a caveat because Groq's no-train line
+is unconditional, and Google's now says which tier trains.
+
 **xAI, re-checked 2026-08-25 and unchanged: unverified is what the site says, everywhere it
 says anything.** The only two places on otianai.com that characterize xAI's training terms are
 the trust page's row and the review PDF's provider table, and both say unverified with the

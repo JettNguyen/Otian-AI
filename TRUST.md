@@ -271,6 +271,25 @@ what it was always about.)*
   running is worse than no test. Same fix on `trust/index.html` step 4 and `trust/details/` step 4;
   step 3 on `trust/index.html` also had to name the proxy, because the paragraph invites readers
   to report any other host carrying their content and the details page's list already named it.
+- ❌ **Corrected 2026-08-25: never write that connecting your own key ends the app's traffic to
+  `archie-4f35.onrender.com`.** `trust/details/` step 3 said "Once your own key is in, your agent
+  stops going near it", and that is false three times over. The signed licence assertion is
+  fetched from `{billing}/entitlement` on every launch that reaches us, forever
+  (`crates/archie-core/src/entitlement.rs:193`). The free-add-on install count posts to
+  `{billing}/marketplace/installed` on every free install whatever key you hold
+  (`crates/archie-core/src/purchases.rs:268`). Checkout runs through `/create-checkout` and
+  `/cart-checkout` (`purchases.rs:84,155`). Only the free-credit proxy ends, and only that. The
+  same page's step 4 already said the licence renewal stops when you block the host, so the page
+  contradicted itself in the two paragraphs a reader with a packet sniffer reads hardest. The
+  approved shape names the four jobs and says which one ends: **licence note, free-credit proxy,
+  checkout, install count; the proxy is the one your own key ends.**
+- ✅ **The enumeration names the host, not a nickname per job.** `trust/index.html`'s "Everything
+  that leaves your computer" table called one machine "Our server", "our billing service", "Our
+  checkout server" and "Our count server" in four rows while claiming to be "every single thing",
+  so a reader watching connections saw one name they could not map to any row. All four now say
+  `archie-4f35.onrender.com` and a note under the table says it is one machine doing four jobs.
+  This is the one-name-per-concept rule applied to a hostname, and on this page it is also the
+  difference between a checkable claim and an unfalsifiable one.
 - ✅ It is passed through, not kept. `stripe-webhook/index.js:485-487`: nothing there logs a
   request body, a response body, a prompt, or a completion; what is logged is the uid, hashes
   of the device and IP, token counts and amounts. The reply is buffered in memory to read the
@@ -496,6 +515,13 @@ count-stuffing) but never retained: there is no `users/{uid}` free-install list 
 - The honest strong form is about **retention**, not silence: a request goes out, but we keep
   only the aggregate. Never phrase it as "nothing leaves" or "zero network calls."
 - ❌ Never imply the ping is anonymous. It carries your ID token by design.
+- ⚠️ **Added 2026-08-25: it is a destination, and it belongs in every list of them.** The ping
+  goes to `{billing}/marketplace/installed`, which is `archie-4f35.onrender.com`
+  (`crates/archie-core/src/purchases.rs:268`), and it is unconditional on which AI account the
+  user is on. So it survives connecting your own key, it survives the free credits running out,
+  and it stops only if somebody blocks the host. Wherever the site enumerates where data goes,
+  this is one of the entries, and wherever the site says what blocking us costs you, this is one
+  of the things that stops. Both are now on `trust/`, `trust/details/` and `privacy-policy/`.
 
 ### ✅ What you bought can be added again on another computer (paid add-ons only)
 
@@ -644,6 +670,32 @@ their plaintext timestamps and statuses. A page may summarize; the summary must 
 ("about your account", "and the operational records on the trust page"), and the subpoena
 sentence in the custodian claim must never use the short form, because that is the sentence
 whose whole job is completeness.
+
+**Amended 2026-08-25: `trust/#what-we-hold` is the canonical home, and the page now says so.**
+Two lists were in circulation and they disagreed. The longer one was right, re-verified against
+`stripe-webhook/index.js` in this pass rather than taken from the 08-21 entry above: `mfa_totp`
+(encrypted TOTP secret) and `mfa_codes` (hashed code, expiry, attempt count) at `:3002` and
+`:2627`; `users/{uid}/sessions` invoices at `:3399` and `:3431`; `refused_regions/{sessionId}`
+with uid, country, mode and amount at `:1454`; and the trial ledger at `credits/{uid}` plus
+`trial_devices/{deviceHash}` and `trial_meta/{day}/ips/{ipHash}` at `:917-993`, whose hashes are
+`sha256(TRIAL_HASH_SALT:value)` truncated to 32 chars (`trialHash`, `:837`). Salted, so the
+approved wording may say the stamp cannot be read back, only compared.
+
+Three consequences, all live:
+
+1. **The trust page carries the whole list and declares itself the home of it.** Nothing else on
+   the site may claim completeness. The two items that were understated are now stated: the
+   ledger's device and IP stamps, and the three unsealed fields on a phone message. That second
+   one was already a required clause in the phone-access section and had never reached the
+   holdings list, which is how a required clause dies.
+2. **Every summary elsewhere links here.** `index.html`, `business/` and `trust/it-review/`
+   already did; `archie/`, `archie/install/` and `privacy-policy/` now do. The privacy policy's
+   "three things always, two more where they apply" claimed completeness for the whole of our
+   custody while scoped to what the *app* sends, so it now says which half it is describing, and
+   names this page as the one we maintain if the two ever drift.
+3. **"The three things we hold" is dead on `trust/` too.** It survived in the acquisition
+   limit, one screen below a list of eight, binding a buyer to a chosen few. It now binds them
+   to the list. Anywhere a count appears in front of this list, the count is the bug.
 
 ✅ **Resolved 2026-07-15.** The old falsehood ("the only thing our servers know is whether
 your subscription is active") has been removed everywhere and replaced with the list
@@ -969,6 +1021,28 @@ Neither is gateable at the choke point, because the search never becomes a clien
 **This must not be swept under a "nothing happens without your OK" umbrella.** Say so plainly on
 the Trust page; we already do.
 
+**Re-verified 2026-08-25, and the answer is that nothing needs fixing.** Checked because this
+admission is load-bearing in a way the flattering claims are not: it is the reason a hostile
+reader believed the rest of the page, so a quiet softening of it would cost more than the thing
+it admits. Three findings.
+
+1. **Still there, still in the same form, still prominent.** Second of six in Where We Fall Short
+   on `trust/`, above the fold of that section, nothing behind a click or an accordion, with the
+   long version at `trust/details/#untrusted-text`.
+2. **It has been strengthened, not softened.** `d76725f` widened it from "run a web search whose
+   query carries information from your conversation" to also name item-adding and the `remember`
+   write, and narrowed the *gate's* own claim to changes "that are not easily reversible". Both
+   moves are away from flattery. The leak sentence itself survives intact.
+3. **No contradicting description of the gate anywhere on the site.** Every page was checked. The
+   only approval-gate claim outside the three trust pages is `compare/cloud-agents/`, and it is
+   scoped to "email and calendar changes are held until you approve", which is the approved form
+   and says nothing about leakage. So there is nothing for the tracked-false section here, which
+   is worth writing down: the sections of this file that stay empty are evidence too.
+
+Standing rule this pass establishes: **before any launch or press push, re-read this admission
+on `trust/` and diff it against the last version.** A page gets edited for length, for rhythm,
+for a new feature, and the paragraph nobody is defending is the one that quietly loses a clause.
+
 ---
 
 ## Known Weaknesses — disclose, don't hide
@@ -1210,6 +1284,26 @@ updated with it, so `trust/index.html` listed Anthropic, OpenAI, Google, Groq an
 same page told people they could connect Mistral or DeepSeek. The omission mattered more than a
 normal staleness bug because the missing two are the two with the worst answers, so the effect of
 leaving them out was a table that read better than the truth. Both rows are now required.
+
+**Added 2026-08-25, second pass: the rows were fixed and the sentence above them was not.** The
+trust page's third answer was headed "They don't train on it" over a paragraph beginning "Most of
+the AI companies Archie connects to state plainly that they do not train their models on API
+traffic." At five providers that was arguable. At seven it is not: three say it unconditionally
+(Anthropic, OpenAI, Groq), two say it of the paid tier only (Google, Mistral), one is unverified
+(xAI), and one trains and says so (DeepSeek). "Most" was reachable only by counting the
+conditional pair, and the heading was flatly false for DeepSeek, forty lines above a table that
+said so. **The summary above a sourced table is part of the table.** Approved wording, and it is
+a count rather than a quantifier on purpose: "Of the seven, three say that what you send through
+the API is not used to train their models. Two say it of their paid tier only. One we have not
+been able to verify at all. And one trains on it and says so in its own policy." When the roster
+changes, that sentence is re-counted from the rows or it is deleted.
+
+**xAI, re-checked 2026-08-25 and unchanged: unverified is what the site says, everywhere it
+says anything.** The only two places on otianai.com that characterize xAI's training terms are
+the trust page's row and the review PDF's provider table, and both say unverified with the
+reason. Linking `x.ai/legal/terms-of-service-enterprise` as a "read it directly" source is not
+characterizing it and stays. Any future entry that describes what those enterprise or consumer
+terms *say* needs a person with a browser to have read them and a date recorded here first.
 
 **Boundaries — do not cross:**
 - ❌ Never state or imply that *all seven* providers commit to not training. xAI, Mistral, DeepSeek

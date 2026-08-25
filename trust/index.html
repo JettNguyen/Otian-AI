@@ -220,8 +220,8 @@
           <div class="trust-answer">
             <span class="trust-answer-num">3</span>
             <div>
-              <h3>They don&rsquo;t train on it.</h3>
-              <p>Most of the AI companies Archie connects to state plainly that they do not train their models on API traffic. That is <em>their</em> commitment, not ours to make on their behalf, so don&rsquo;t take our word for it. Each provider&rsquo;s own words, the exceptions included, and a link to its source, are further down this page.</p>
+              <h3>Some of them don&rsquo;t train on it. One of them does.</h3>
+              <p>Of the seven, three say that what you send through the API is not used to train their models: Anthropic, OpenAI and Groq. Two say it of their paid tier only, so which answer applies to you depends on your own billing with them. One we have not been able to verify at all. And one trains on it and says so in its own policy. That is <em>their</em> commitment to make or not make, not ours to make on their behalf, so don&rsquo;t take our word for any of it. Each provider&rsquo;s own words, the exceptions included, and a link to its source, are further down this page.</p>
             </div>
           </div>
         </div>
@@ -310,8 +310,8 @@
               </tr>
               <tr class="is-content">
                 <td data-label="What"><strong>Your agent thinking, while you are on free credits</strong></td>
-                <td data-label="Where it goes">Our server, then Anthropic</td>
-                <td data-label="What's actually in it">The same thing as the row above, and this is the one case where it passes through us. The free credits you start with are spent on our Anthropic account, so the request goes to our server, which forwards it and subtracts what it cost. Nothing there writes down a message or a reply; what it records is your account ID, how many words went each way, and the amount. It stops the moment you connect an AI account of your own.</td>
+                <td data-label="Where it goes">Our billing service, <code>archie-4f35.onrender.com</code>, then Anthropic</td>
+                <td data-label="What's actually in it">The same thing as the row above, and this is the one case where it passes through us. The free credits you start with are spent on our Anthropic account, so the request goes to our server, which forwards it and subtracts what it cost. Nothing there writes down a message or a reply; what it records is your account ID, how many words went each way, and the amount. Connect an AI account of your own and this row stops at each agent&rsquo;s next start; the setup flow restarts them for you.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes, in passing</span></td>
               </tr>
               <tr>
@@ -322,8 +322,8 @@
               </tr>
               <tr>
                 <td data-label="What">License check</td>
-                <td data-label="Where it goes">Google Firebase</td>
-                <td data-label="What's actually in it">Your account ID and a sign-in token. Reads your own account record and fetches a signed copy of your license from our billing service. Both return only facts about your own account.</td>
+                <td data-label="Where it goes">Google Firebase, and our billing service, <code>archie-4f35.onrender.com</code></td>
+                <td data-label="What's actually in it">Your account ID and a sign-in token. Reads your own account record and fetches a signed copy of your license from our billing service. Both return only facts about your own account. This one keeps happening for as long as you use Archie: it is not something connecting your own AI account puts a stop to.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
               <tr>
@@ -340,7 +340,7 @@
               </tr>
               <tr>
                 <td data-label="What">Buying a paid add-on</td>
-                <td data-label="Where it goes">Our checkout server, then Stripe</td>
+                <td data-label="Where it goes">Our billing service, <code>archie-4f35.onrender.com</code>, then Stripe</td>
                 <td data-label="What's actually in it">Your account ID, which add-on, and the email on your account, which is passed to Stripe to prefill the payment page. Stripe handles the card. We never see it.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
@@ -352,8 +352,8 @@
               </tr>
               <tr>
                 <td data-label="What">Installing a <em>free</em> add-on</td>
-                <td data-label="Where it goes">Our count server</td>
-                <td data-label="What's actually in it">Which add-on, and your sign-in token so the count can&rsquo;t be faked. We add one to that add-on&rsquo;s public install total and keep no record of who you are.</td>
+                <td data-label="Where it goes">Our billing service, <code>archie-4f35.onrender.com</code></td>
+                <td data-label="What's actually in it">Which add-on, and your sign-in token so the count can&rsquo;t be faked. We add one to that add-on&rsquo;s public install total and keep no record of who you are. This one happens on every free add-on you add, whichever AI account you are on: it is not part of the free credits and it does not stop when they do.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--no">No</span></td>
               </tr>
               <tr>
@@ -382,6 +382,8 @@
           </table>
         </div>
 
+        <p class="trust-table-note">Four rows name <code>archie-4f35.onrender.com</code>, and it is one machine doing four jobs: signing your license note, standing in for Anthropic while you are on the free credits, starting a checkout, and counting add-on installs. Only the second of those ever carries a word you wrote, and only until you connect an AI account of your own. The other three carry on for as long as you use Archie, which is why the block-list test further down names two hosts rather than one.</p>
+
         <p class="trust-table-note">If you find something Archie sends that is not on this list, that is a bug in our honesty and we want to know. <a href="../contact/">Tell us</a>, publicly, if you like.</p>
       </div>
     </section>
@@ -394,6 +396,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Our servers</span>
           <h2 id="what-we-hold" class="fade-up delay-1">Everything our servers hold.</h2>
+          <p>This is the list, and this page is where it is kept. Everywhere else on this site that mentions what we hold either says the same thing in fewer words and links back here, or is out of date and should be reported to us. If you ever read a shorter version somewhere that does not point at this one, believe this one.</p>
         </div>
 
         <div class="mt-40 two-col fade-up delay-1">
@@ -405,9 +408,9 @@
               <li>Which <em>paid</em> add-ons you&rsquo;ve bought</li>
               <li>Which version of Archie you are running, until you turn that off</li>
               <li>Crash reports, if you leave them on: where in our code it broke, never what you were doing</li>
-              <li>While you are on free credits, the ledger of what each call spent</li>
+              <li>While you are on free credits, the ledger of what each call spent, and beside it a scrambled one-way stamp of the computer and the internet address the credits were claimed from, so the same computer cannot claim them over and over. We cannot read a computer or an address back out of a stamp; we can only tell that two of them match</li>
               <li>Second-factor records, guided-session invoices if you book one, and a record of a checkout that was refused (the account, the country, the amount)</li>
-              <li>If you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive</li>
+              <li>If you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive. Three things about each one are not sealed: when it was left, which version left it, and whether it has been picked up. So we can see that a phone is running a computer, and roughly when, but not a word of what it did</li>
             </ul>
           </div>
           <div class="two-col-card">
@@ -462,7 +465,7 @@
           <div class="trust-limit">
             <h3>If we get bought, the promises go with us or the sale doesn&rsquo;t happen.</h3>
             <p>An acquisition is the usual way a company&rsquo;s privacy promise quietly stops being true: the policy gets rewritten, and the people who trusted the old one find out afterwards. So it is a term of the agreement rather than an intention. Our <a href="../terms-of-service/">Terms</a> bind any successor to the privacy commitments in them and in the <a href="../privacy-policy/">Privacy Policy</a>, and oblige us not to complete a sale that does not carry them.</p>
-            <p>Worth being precise about what that does and does not cover. It binds what a buyer may do with the three things we hold: your email address, whether your plan is current, and which paid add-ons you own. It does not need to cover your conversations, your files or your keys, because those sit on your computer and were never ours to sell. The commitment exists for the part we <em>do</em> have.</p>
+            <p>Worth being precise about what that does and does not cover. It binds what a buyer may do with <a href="#what-we-hold">everything on the list above</a>, all of it, not a chosen few. It does not need to cover your conversations, your files or your keys, because those sit on your computer and were never ours to sell. The commitment exists for the part we <em>do</em> have.</p>
           </div>
 
           <div class="trust-limit">
@@ -518,7 +521,7 @@
             <span class="trust-step-num">4</span>
             <div>
               <h3>Now block us, and watch nothing happen.</h3>
-              <p>Add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list and <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> That is the argument on this page, reduced to something you can test in thirty seconds: on your own key, nothing of ours is in that path, so cutting us out of it changes nothing about it. What does stop is everything those hosts honestly are: updates, new voice and media downloads, and the periodic license renewal, so after about two months of blocking us Archie will refuse to start agents until it can check in once. Try the test before you connect a key and the free credits stop instead, because that one path really does run through us.</p>
+              <p>Add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list and <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> That is the argument on this page, reduced to something you can test in thirty seconds: on your own key, nothing of ours is in that path, so cutting us out of it changes nothing about it. What does stop is everything those hosts honestly are: updates, new voice and media downloads, buying anything, the install count ticking up when you add a free add-on, and the periodic license renewal, so after about two months of blocking us Archie will refuse to start agents until it can check in once. Try the test before you connect a key and the free credits stop instead, because that one path really does run through us.</p>
             </div>
           </div>
         </div>

@@ -1175,6 +1175,13 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Cowork has three permission modes; in Skip mode "Claude doesn't pause to ask and nothing checks its actions automatically" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
 | Grok Bot is in beta for SuperGrok Heavy, Cursor Ultra and Cursor Teams Premium subscribers, on desktop and iOS | xAI | `https://x.ai/news/introducing-grok-bot` | 2026-08-20 |
 | Each Grok Bot "runs on a persistent cloud VM with a browser, filesystem, and terminal" and signs in to your tools there; it comes back "when something needs your approval" | xAI | `https://x.ai/news/introducing-grok-bot`, `https://docs.x.ai/grok-bot/overview` | 2026-08-20 |
+| Symphony by Wix is an AI agent platform for small businesses, on iOS, Android and web, with a "mobile-first interface" | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
+| Symphony is a standalone cloud service; the agents run on Wix's servers | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
+| Symphony is "powered by Wix AI"; the page offers no model choice, so which model runs is Wix's decision, not the customer's | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
+| Symphony claims "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you" | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
+| Symphony has a free plan needing no credit card, with 500 monthly credits and a 50-credit daily cap; credits "reset monthly and do not roll over" | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
+| Symphony is $16 a month for Basic ($12.80 annually), $40 for Pro ($32), $80 for Max ($64) | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
+| Symphony meters in AI credits: "Each action you take with agents and tools consumes AI credits. The exact amount is calculated after each action, based on its complexity and the tool used." | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
 | Grok Bot comes with SuperGrok Heavy at $300 a month or Cursor Ultra at $200 a month (Cursor Teams Premium at $120 a seat also carries it); plan cards read in a browser, since xAI refuses fetches | xAI, Cursor | `https://x.ai/bot` | 2026-08-20 |
 
 **Boundaries — do not cross:**

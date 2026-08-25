@@ -72,6 +72,12 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$19.99` | Zapier Professional, billed annually, at 750 tasks | Same page | Checked: 2026-08-19 |
 | `$12` | Make Core, at 10,000 credits a month | `https://www.make.com/en/pricing`, "$12/mo" | Checked: 2026-08-19 |
 | `$21` | Make Pro, at 10,000 credits a month | Same page, "$21/mo" | Checked: 2026-08-19 |
+| `$16` | Symphony by Wix, Basic, billed monthly | `https://www.wix.com/symphony/pricing` | Checked: 2026-08-24 |
+| `$12.80` | Symphony Basic, billed annually | Same page | Checked: 2026-08-24 |
+| `$40` | Symphony Pro, billed monthly | Same page | Checked: 2026-08-24 |
+| `$32` | Symphony Pro, billed annually | Same page | Checked: 2026-08-24 |
+| `$80` | Symphony Max, billed monthly | Same page | Checked: 2026-08-24 |
+| `$64` | Symphony Max, billed annually | Same page | Checked: 2026-08-24 |
 | `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
 | `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
 
@@ -105,6 +111,7 @@ the figure here only after reading it on the source page, with the date.
 |---|---|---|
 | 149 add-ons | 38 personalities, 65 skills, 4 specialists, 42 routines | Archie repo `data/marketplace/**`, recounted 2026-08-21 (a 65th skill landed after the business-edition count). `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
+| 300M Wix businesses | Symphony's own claim about what its intelligence is drawn from, quoted only to answer it | `https://www.wix.com/symphony`: "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you". Read 2026-08-24. **Print it as their claim, never as our own figure**, and never as an independently verified count of businesses |
 | 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
 | 10 agents | What the personal plan runs | Archie repo, `PLAN_AGENTS` in `crates/archie-core/src/plan.rs`. Staff accounts are the only unlimited ones, so **no page may say "unlimited"** about agent counts |
 | 50 agents | What the business plan runs | Same file, `BUSINESS_PLAN_AGENTS`: the business licence `plan_business` gets its own allowance in `agent_allowance` (2026-08-21), sized so a company can run one per department. Same no-"unlimited" rule |

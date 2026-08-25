@@ -572,6 +572,36 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
+### ✅ What your agent can write to disk
+
+**Approved wording:** "Your agent writes the actual file and tells you where it put it. It can
+write nine kinds: `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`, `.ics` and `.vcf`.
+It chooses the filename. It never chooses the folder."
+
+**Why it's true:** `crates/archie-runtime/src/export.rs` holds an `ALLOWED` table of exactly those
+nine extensions, and the module comment states the design rule: the tool takes "the name, never
+the location", files land in one folder the user was told about, and a copy is kept in their
+Archie folder. Two of the nine are converted rather than written through: `.xlsx` is built from
+CSV the model wrote and `.docx` from Markdown (`Made::Xlsx`, `Made::Docx`). One file is capped at
+5 MB (`MAX_BYTES`).
+
+**The stronger claim, and the reason the list is short.** `ALLOWED` is an allowlist and the
+comment says it "must stay one", because a denylist of dangerous extensions is a losing game
+against platforms that keep inventing new ones. Every kind on it is inert: opening one shows text
+or a table, and none is executed by the OS on a double click. That is the claim worth making, and
+it matters precisely because the text that reaches this tool has often passed through content we
+did not write.
+
+**Boundaries — do not overclaim:**
+- ⛔ **Never claim PDF, images, audio or video.** Archie writes none of them. The BetterClaw
+  wishlist (item 7) proposed exactly that list and it would have been false on four of eight
+  entries. Added here 2026-08-24 so the next person checks the table instead of the brief.
+- ⛔ **Never say the agent writes "into your folders"** or anywhere on your disk. It writes to one
+  folder, and the location is not the model's to pick. The weaker-sounding claim is the true one
+  and it is also the safer-sounding one, which is rare enough to be worth keeping.
+- The nine are what the *export tool* writes. This row says nothing about what an add-on or a
+  connected account may read, which is a separate question with its own answers.
+
 ### ✅ Add-ons are data, not code
 
 **Approved wording:** "An add-on is a text file, not a program. A Skill is markdown plus

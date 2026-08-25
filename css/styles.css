@@ -2026,6 +2026,19 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
 /* ========================================
    10. Proof Chips
    ======================================== */
+/* The hero's proof row. Chips are links on purpose: every claim on one is the short
+   form of a claim on /trust/, and a chip a reader cannot click through to is exactly
+   the kind of unbacked assertion this row previously carried. The false chip removed
+   on 2026-07-20 ("we never hold your data") is why the wording here is scoped and why
+   each one goes somewhere. */
+.hm-proofline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 26px 0 0;
+}
+
 .proof-chip {
   display: inline-flex;
   align-items: center;

@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260823-1" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260824-1" />
   <style>
     /* Page-scoped: the phone recording is portrait (444x960), so it needs its own
        aspect ratio and a much narrower cap than the landscape desktop demo. */
@@ -276,6 +276,48 @@
             </div>
           </figure>
         </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         What it hands you
+         ==============================
+         Formats and behaviour read off crates/archie-runtime/src/export.rs in the Archie
+         repo, not from the competitor brief, which listed PDF, images, audio and video.
+         Archie writes none of those. The list below is the ALLOWED table verbatim, and the
+         allowlist itself is the claim worth making: every format on it is inert, and the
+         agent picks the filename but never the folder. Do not add a format here because a
+         competitor lists one. See TRUST.md, "What your agent can write to disk". -->
+    <section class="section" aria-labelledby="files-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What it hands you</span>
+          <h2 id="files-heading" class="fade-up delay-1">A file on your computer, not text to copy out.</h2>
+          <p>Ask a chat app for a spreadsheet and you get a table in a message that you select, copy, paste and fix. Your agent writes the actual file and tells you where it put it. There is no download, because it was never anywhere else.</p>
+        </div>
+
+        <div class="mt-40 two-col fade-up delay-1">
+          <div class="two-col-card">
+            <h3>What it can write</h3>
+            <ul class="two-col-card-list">
+              <li><strong>Tables</strong>: a real Excel workbook (.xlsx) or a plain .csv that opens in Excel, Numbers or Sheets</li>
+              <li><strong>Documents</strong>: a real Word document (.docx), or Markdown, plain text or a web page</li>
+              <li><strong>Data and cards</strong>: .json, a calendar file (.ics), or a contact card (.vcf)</li>
+              <li>Not PDFs, images, audio or video. It writes those nine kinds and nothing else</li>
+            </ul>
+          </div>
+          <div class="two-col-card">
+            <h3>Why that list is short on purpose</h3>
+            <ul class="two-col-card-list">
+              <li>It is an allowlist, not a filter on dangerous types. Anything not on it cannot be written at all</li>
+              <li>Every kind on it is inert: opening one shows text or a table, and none of them is something your computer runs on a double click</li>
+              <li>Your agent chooses the filename. It never chooses the folder. Files land in one place you were told about, and a copy stays in your Archie folder</li>
+              <li>Which matters because the text asking for a file has often passed through something we did not write</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="hm-micro fade-up">Your agent tells you the path when it is done, so a file written while you were out is one you can find from your phone. <a href="../../trust/">How that is kept safe&nbsp;&rarr;</a></p>
       </div>
     </section>
 

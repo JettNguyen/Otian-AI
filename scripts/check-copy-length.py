@@ -66,6 +66,11 @@ EXEMPT_FILES = {
     "our-story/index.html",   # a story is not a spec sheet
     "account/index.html",     # app surface, mostly UI strings
     "questionnaire/index.html",  # the chat script lives in js/, not here
+    # The public half of our operating principles. Exempt for the same reason as the
+    # terms and the trust page, which it sits beside: a reader comes here to check us,
+    # and the only way to get it under 900 words is to publish fewer promises. Cutting
+    # a page is the right instinct almost everywhere and the wrong one here.
+    "standard/index.html",
 }
 
 SKIP_DIRS = {".git", "node_modules", "scripts", "assets", "css", "js", "data"}

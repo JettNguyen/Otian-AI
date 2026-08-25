@@ -1094,6 +1094,54 @@ flipped, and a promise not to look is worth nothing. The published sentence, whe
 - This **kills the usage/savings dashboard** as specced. Hours-saved-per-employee is derived
   from activity; if we can't see activity, we can't compute it honestly. Do not build it.
 
+### The free tier is permanent, and it runs on the customer's own key
+
+**Decided 2026-08-24. Binding on the build. NOT TO BE PUBLISHED UNTIL THE EXPIRY IS REMOVED.**
+
+**The premise this corrects.** The BetterClaw wishlist (item 1) assumed agent count could not be
+our free-tier lever because "Archie is one agent". That is true of the free trial, not of Archie.
+`crates/archie-core/src/plan.rs` already enforces `FREE_AGENTS = 1`, `PLAN_AGENTS = 10` and
+`BUSINESS_PLAN_AGENTS = 50`, and FACTS.md already prints all three. The lever exists and ships.
+
+**What was actually undecided** was whether the free thing is a countdown or a tier. It is now a
+tier, on one path only:
+
+| | Today | Decided |
+|---|---|---|
+| Credit trial (our money) | 14 days, capped per computer | unchanged |
+| **Own-key trial** | 14 days | **no expiry** |
+| Agents, free | 1 | 1 |
+| Agents, paid | 10 | 10 |
+
+**Why this one and not a feature ceiling.** It costs us nothing ongoing, because the customer is
+paying their own AI bill: that is the same reason the own-key trial could be offered at all (see
+"The other free trial runs on your own key"). It needs no gate that does not exist. And it earns
+the "free forever, never asks for a card" line honestly, which the brief correctly identifies as
+where the persuasive weight sits, rather than in the word "free".
+
+**The build change:** drop the expiry on the `kind: "own_key"` path only
+(`stripe-webhook/index.js`, `/trial/claim`; `crates/archie-core/src/credits.rs`, `TRIAL_DAYS`).
+The credit trial keeps its 14 days, because that one spends our money.
+
+**⛔ Until that ships, no page may say Archie has a free tier**, and none does today. This is a
+roadmap item under the never-describe-an-unshipped-feature-in-the-present-tense rule. Items 1, 10
+and 15 of the wishlist all unblock on the day the expiry comes off, and not before.
+
+### Add-on permissions: one setting, not three levels
+
+**Decided 2026-08-24.** BetterClaw's Intern / Specialist / Lead ladder (wishlist item 3) is not
+being adopted. Archie already made this call once, in a different place and for the same reason:
+`crates/archie-domain/src/access.rs` gives a guest one switch rather than per-tool permissions,
+because "per-tool permissions would be a screen nobody finishes reading."
+
+Ranking three abstractions before you know what any of them do is a worse ask of a non-technical
+buyer than one switch per add-on that says whether it checks with you first. If a per-add-on
+control ships, it is that switch.
+
+**What does not change:** the blunt-scope admission stays exactly where it is, on `/trust/` and on
+the marketplace browse page. An add-on that asks for "calendar" still gets read, create and delete
+together, and a permission UI must never be allowed to imply otherwise.
+
 ### Subscription gating
 
 Archie is gated by payment; we do not pretend otherwise. We do not market "runs forever"

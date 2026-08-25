@@ -1094,38 +1094,65 @@ flipped, and a promise not to look is worth nothing. The published sentence, whe
 - This **kills the usage/savings dashboard** as specced. Hours-saved-per-employee is derived
   from activity; if we can't see activity, we can't compute it honestly. Do not build it.
 
-### The free tier is permanent, and it runs on the customer's own key
+### Both trials keep 14 days (a decision made and reversed the same day)
 
-**Decided 2026-08-24. Binding on the build. NOT TO BE PUBLISHED UNTIL THE EXPIRY IS REMOVED.**
+**Decided, then reversed, 2026-08-24.** This entry is kept rather than struck because the
+reasoning is the useful part and the premise that produced it is still floating around in a
+competitor brief.
 
-**The premise this corrects.** The BetterClaw wishlist (item 1) assumed agent count could not be
-our free-tier lever because "Archie is one agent". That is true of the free trial, not of Archie.
-`crates/archie-core/src/plan.rs` already enforces `FREE_AGENTS = 1`, `PLAN_AGENTS = 10` and
-`BUSINESS_PLAN_AGENTS = 50`, and FACTS.md already prints all three. The lever exists and ships.
+**What was briefly decided:** that the own-key trial would stop expiring, becoming a permanent
+free tier, on the premise that `FREE_AGENTS = 1` is what separates it from a paid plan.
 
-**What was actually undecided** was whether the free thing is a countdown or a tier. It is now a
-tier, on one path only:
+**Why that was wrong.** The premise is true and it is the *only* thing that is. Archie has
+exactly two limits in the whole app: agents (1 free, 10 paid) and people per agent, and the
+second is a compile-time 1 in the personal edition, identical for a trial and a plan. Everything
+else sits behind `require_access`, which is *entitled OR trialling*, so a trial already reaches
+every skill, routine, specialist, personality, integration, the mail daemon, voice and phone
+access. A trial that never ends is therefore the paid product minus nine agents, and Archie for
+Individuals is a one-agent product for most of the people it is sold to. For its actual
+audience that is not a wall, it is the whole thing.
 
-| | Today | Decided |
-|---|---|---|
-| Credit trial (our money) | 14 days, capped per computer | unchanged |
-| **Own-key trial** | 14 days | **no expiry** |
-| Agents, free | 1 | 1 |
-| Agents, paid | 10 | 10 |
+**Nothing shipped.** The app-side change was built across all five places that end a trial and
+reverted in full (Archie repo, `cdee5d5`, reverting `2c006c9` and `1a30bd7`). No server or rules
+deploy happened, so the two repos never disagreed, and no site copy went up: this entry carried a
+hold saying no page could claim a free tier until the expiry actually came off, and none did.
 
-**Why this one and not a feature ceiling.** It costs us nothing ongoing, because the customer is
-paying their own AI bill: that is the same reason the own-key trial could be offered at all (see
-"The other free trial runs on your own key"). It needs no gate that does not exist. And it earns
-the "free forever, never asks for a card" line honestly, which the brief correctly identifies as
-where the persuasive weight sits, rather than in the word "free".
+**The standing true sentence** for pricing and trial copy: "Fourteen days free. One agent. After
+that a plan is $299 a year or $30 a month and runs up to ten agents. If your computer has already
+used its free credits, you can still have the fourteen days by connecting an AI account of your
+own and paying that company directly."
 
-**The build change:** drop the expiry on the `kind: "own_key"` path only
-(`stripe-webhook/index.js`, `/trial/claim`; `crates/archie-core/src/credits.rs`, `TRIAL_DAYS`).
-The credit trial keeps its 14 days, because that one spends our money.
+⛔ **Wishlist items 1, 10 and 15 do not unblock.** BetterClaw's free-tier pattern needs a
+permanent free tier, and we have decided against one. Any future revival has to answer the
+paragraph above, not just repeat the premise.
 
-**⛔ Until that ships, no page may say Archie has a free tier**, and none does today. This is a
-roadmap item under the never-describe-an-unshipped-feature-in-the-present-tense rule. Items 1, 10
-and 15 of the wishlist all unblock on the day the expiry comes off, and not before.
+### ⛔ The starter credits cannot read email, and the site said they could
+
+**Approved wording (added 2026-08-24):** "While your agent is thinking on our credits it cannot
+read your email. Reading your mail would mean the mail itself passing through Otian's servers,
+and the people who wrote to you never agreed to that. Connecting an AI account of your own turns
+every email tool on, straight away and with nothing to switch."
+
+**Why it's true:** every interactive inbox tool and the mail watcher refuse while the agent is on
+the trial credential (`crates/archie-runtime/src/email/poller.rs`,
+`INBOX_TOOLS_NEED_YOUR_OWN_KEY`; one arm of the tool dispatch applies it to everything named
+`inbox_*`, so a later inbox tool is born gated rather than born as a hole, decided 2026-08-21).
+The owner is told once, in chat, rather than left with a feature that silently does nothing. A
+key of the user's own always takes precedence over the trial credential
+(`gateway_lifecycle.rs:70-93`), so connecting one lifts the block with no setting to find.
+
+**What was false, and where.** `archie/pricing/` said the credit trial was "the whole app either
+way: every add-on, every chat app", and the FAQ said "same app, same everything". Both were
+overclaims for the credit trial specifically, and the site sells email features hard enough that
+the pair implied something untrue. Fixed 2026-08-24, found via the Archie repo rather than by
+reading the page.
+
+**Boundaries:**
+- ⛔ Never say the credit trial is "the whole app". It is the whole app except email.
+- ✅ The own-key trial *is* the whole app, and that is worth saying, because it is the difference
+  between the two and it is the reason to connect a key.
+- Do not frame connecting a key as an upsell. It costs us nothing and it is the step that turns
+  email on.
 
 ### Add-on permissions: one setting, not three levels
 

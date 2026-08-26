@@ -109,7 +109,7 @@ the figure here only after reading it on the source page, with the date.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| 149 add-ons | 38 personalities, 65 skills, 4 specialists, 42 routines | Archie repo `data/marketplace/**`, recounted 2026-08-21 (a 65th skill landed after the business-edition count). `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
+| 151 add-ons | 38 personalities, 66 skills, 4 specialists, 43 routines | Archie repo `data/marketplace/**`, recounted 2026-08-26 (the GoHighLevel and lemlist work landed `skills/campaign-watch.json` and `routines/campaign-check.json`). `scripts/check-facts.py` re-counts this when that repo is checked out beside this one, so the stat rows cannot quietly diverge from the store |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
 | 300M Wix businesses | Symphony's own claim about what its intelligence is drawn from, quoted only to answer it | `https://www.wix.com/symphony`: "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you". Read 2026-08-24. **Print it as their claim, never as our own figure**, and never as an independently verified count of businesses |
 | 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
@@ -127,7 +127,7 @@ the figure here only after reading it on the source page, with the date.
 | 6 hours | How often the version heartbeat goes out, at most | `crates/archie-core/src/telemetry.rs`, `HEARTBEAT_EVERY` |
 | 25% | An add-on commissioner's share of future sales | `skills-marketplace/commission/` |
 | 7 providers | Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, Mistral | `crates/archie-net/src/providers.rs`, counted 2026-08-15 after DeepSeek and Mistral landed (Archie 9ceb303). Google's entry is shown as Gemini and Anthropic's as Claude on the site, the products' own names; the count stays a count of companies. An eighth option, "Another provider", is any OpenAI-format endpoint the user names; it is a door rather than a company and is not counted |
-| 38 apps and services | The works-with band: 5 chat apps + 26 accounts and devices + 7 AI companies | `index.html` band; every name verified in the Archie source 2026-08-15 (connectors in `crates/archie-domain/src/connectors.rs`), marks taken from the app's `BRAND_MARK` table in `src/app/connect.tsx`, which names the site as its reference copy. NOTE: 13 of the 26 connectors (Stripe, YNAB, Lunch Money, Mercury, Splitwise, Raindrop, Readwise, Calendly, Zotero, Mastodon, AfterShip, GitLab, Cloudflare) shipped from provider documentation and have not yet been exercised with a live key; Archie's docs/OPEN-THREADS.md tracks this. They are in the app's picker today, which is what the band claims |
+| 40 apps and services | The works-with band: 5 chat apps + 28 accounts and devices + 7 AI companies | `index.html` band; every name verified in the Archie source (connectors in `crates/archie-domain/src/connectors.rs`), marks taken from the app's `BRAND_MARK` table in `src/app/connect.tsx`, which names the site as its reference copy. Recounted 2026-08-26 when GoHighLevel (`crates/archie-net/src/ghl.rs`) and lemlist (`connectors.rs:877`) joined the band. NOTE: 13 of the 28 connectors (Stripe, YNAB, Lunch Money, Mercury, Splitwise, Raindrop, Readwise, Calendly, Zotero, Mastodon, AfterShip, GitLab, Cloudflare) shipped from provider documentation and have not yet been exercised with a live key; Archie's docs/OPEN-THREADS.md tracks this. They are in the app's picker today, which is what the band claims |
 | 10 minutes | How long the self-check on /trust/ takes with a network monitor | The walkthrough on `trust/index.html` itself; the figure is the length of that procedure, not a benchmark |
 | 5x | What a thought-through ("working") token bills against a read token | The providers' published output-to-input price ratio, used on `archie/pricing/` |
 | A few hundred words | Roughly how much working a default reply carries (measured 123 to 641 output tokens a turn) | Archie repo, `docs/COST-MEASURED.md`, same measurement as the Balanced/Economy rows. Was "100 words" until 2026-08-21, which matched only the bottom of the measured range |
@@ -135,11 +135,11 @@ the figure here only after reading it on the source page, with the date.
 ## The stat rows
 
 `index.html` (its own numbers band under the hero since the 2026-08-18 quiet-spine rebuild) prints
-four counts: **149 verified add-ons, 38 apps and services, 7 AI companies, 5 chat apps**.
-`skills-marketplace/browse/` prints three of the same: **149 verified add-ons, 5 chat apps,
+four counts: **151 verified add-ons, 40 apps and services, 7 AI companies, 5 chat apps**.
+`skills-marketplace/browse/` prints three of the same: **151 verified add-ons, 5 chat apps,
 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
-connections band's note also counts **all 38** names the band shows.
+connections band's note also counts **all 40** names the band shows.
 
 The **Personal / Small business** plan card on `archie/pricing/` prints two of the same counts in
 prose ("all 5 chat apps", "any of 7 AI companies"), so a channel or a provider shipping now moves

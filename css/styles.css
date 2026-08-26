@@ -1710,6 +1710,28 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-primary);
 }
 
+/* Two documents rather than two pages. They sit in the Company column under Trust because that
+   is what they are evidence for, and they are not in the nav: a nav entry promises a page, and
+   clicking one of these puts a file in your downloads folder instead. The icon and the (PDF)
+   both say so, because one of them is the only warning a reader on a phone plan gets. */
+.footer-nav-links a.footer-doc-link {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  align-items: start;
+  gap: 8px;
+}
+
+.footer-doc-link svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+.footer-doc-link:hover svg {
+  opacity: 1;
+}
+
 /* Everything the nav does not have a tab for, in a strip under the columns rather than as more
    columns. The four columns above mirror the four nav menus exactly, link for link, so a reader
    who learns the nav already knows the footer. Learn and What You Need sat in that grid and
@@ -2550,7 +2572,7 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   color: var(--text-primary);
 }
 
-/* Brand marks for the works-with row. Every one of the 22 is the company's own artwork, and
+/* Brand marks for the works-with row. Every one of the 24 is the company's own artwork, and
    each traces to a source that can be named:
 
    - Seven come from `SERVICE_MARK` and `OutlookMark` in the Archie app's src/app/connect.tsx,
@@ -2564,6 +2586,10 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
      share the exact palette and May 19, 2026 redesign date with the Google-credited Tasks
      file. Groq is the bolt from groq.com/favicon.svg and Fireflies the logo served by
      fireflies.ai, both fetched from the companies themselves on 2026-08-15.
+   - lemlist is lemlist_symbol.svg from their own brand directory on web-assets.lemlist.com,
+     and GoHighLevel is the symbol half of the logo their homepage loads (the wordmark beside it
+     is 172 units wide and would be a stripe at 18px, so only the three arrows are kept and the
+     original geometry is untouched). Both fetched on 2026-08-26.
 
    Gradient, mask and filter ids inside these inline SVGs are namespaced per brand (wwsl-,
    wwgm-, ...) because inline SVG ids share one document: two marks both defining id="a"
@@ -2579,7 +2605,9 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
    the mark somebody has actually seen is the one on the product they used.
 
    .ww-mark--mono is the two-letter fallback for any future service that arrives before its
-   artwork does; nothing uses it today. */
+   artwork does; nothing uses it today. GoHighLevel is the reason to keep it: their brand kit is
+   behind a support portal, so if the homepage stops serving that file there is somewhere to fall
+   back to that is not a drawing of ours. */
 .ww-mark {
   flex: none;
   display: inline-flex;
@@ -2777,17 +2805,29 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   gap: 14px;
 }
 
+/* The marker hangs in a padded gutter rather than sitting in a flex row. It was a flex
+   row, which made every inline element inside the bullet its own flex item: a <strong>
+   opening label and the sentence after it became two narrow columns wrapping past each
+   other, and an <em> mid-sentence became a third. A bullet is one sentence, so it has to
+   stay one inline flow. */
 .two-col-card-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
+  position: relative;
+  padding-left: 30px;
   font-size: 0.9375rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
+.two-col-card-list li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
 .two-col-card-list li::before {
   content: '';
+  position: absolute;
+  left: 0;
+  top: 0.16em;
   width: 18px;
   height: 18px;
   background: var(--c-blue);
@@ -2797,20 +2837,22 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   mask-size: contain;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  flex-shrink: 0;
-  margin-top: 2px;
 }
 
 /* A ticked list is an endorsement, which is wrong for the half of a comparison that lists what
    the other option does better: ticking a competitor's advantages in our own accent reads as
    sarcasm at best. The plain variant states them without scoring them. */
+.two-col-card-list--plain li {
+  padding-left: 24px;
+}
+
 .two-col-card-list--plain li::before {
   background: var(--text-muted);
   -webkit-mask-image: none;
   mask-image: none;
   width: 12px;
   height: 1.5px;
-  margin-top: 11px;
+  top: 0.72em;
   border-radius: 2px;
   opacity: 0.7;
 }

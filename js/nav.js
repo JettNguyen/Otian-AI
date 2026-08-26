@@ -488,11 +488,45 @@
 
   /* Width of a range, summed across its rects: a range that already spans a browser
      line break reports one union box the width of the column, which would read as
-     "this fits" for text that does not. Summing the pieces gives the real width. */
+     "this fits" for text that does not. Summing the pieces gives the real width.
+
+     Only safe for a range inside a single text node, which is what it is used for.
+     See spanWidth below for why it is wrong for anything longer. */
   function widthOf(range) {
     var rects = range.getClientRects(), total = 0;
     for (var i = 0; i < rects.length; i++) total += rects[i].width;
     return total;
+  }
+
+  /* Width of a range that is known to sit on one line, taken as the union of its rects
+     rather than the sum of them.
+
+     Summing is wrong here, and wrong by a lot. `getClientRects` on a range reports a
+     rect for every element and every text node it touches, so an inline element the
+     range *fully* contains is reported twice: once as the element box, once as the text
+     inside it. A link the range has passed over is therefore counted twice and the
+     running total jumps by the width of the link, at exactly the word where the range
+     finishes swallowing it.
+
+     That is not a rounding error. On the compare index, a paragraph carrying one
+     "See where it stands" link had every position after the link overstated by 188px,
+     so the wedge believed its second line was 575px when the browser was drawing 383,
+     planned a ladder around the wrong number, and produced 515 / 383 / 541: a line
+     shorter than the one under it, which is the one shape this whole routine exists to
+     prevent. The fine that is supposed to stop a step never fired, because by the
+     model's own numbers there was no step.
+
+     A union cannot double-count, because a rect that is already inside the box does not
+     move its edges. It is exact here for the reason the caller sets `white-space:
+     nowrap` first: one line, so the union is the line. */
+  function spanWidth(range) {
+    var rects = range.getClientRects(), l = Infinity, r = -Infinity, i;
+    for (i = 0; i < rects.length; i++) {
+      if (rects[i].width <= 1) continue;
+      if (rects[i].left < l) l = rects[i].left;
+      if (rects[i].right > r) r = rects[i].right;
+    }
+    return r > l ? r - l : 0;
   }
 
   /* Rects that share a line, grouped.
@@ -520,7 +554,7 @@
   function lineTops(range, tol) {
     var rects = range.getClientRects(), tops = [], i, j, mid, seen;
     for (i = 0; i < rects.length; i++) {
-      if (rects[i].width < 1) continue;
+      if (rects[i].width <= 1) continue;
       mid = rects[i].top + rects[i].height / 2;
       seen = false;
       for (j = 0; j < tops.length; j++) if (Math.abs(tops[j] - mid) < tol) { seen = true; break; }
@@ -537,9 +571,38 @@
     return lineTops(range, tol).length;
   }
 
+  /* Text that is in the DOM for a screen reader and not on the screen.
+
+     The numbered citations are links reading `<span class="sr-only">Source </span>3`,
+     and .sr-only is the standard absolutely-positioned, clipped 1px box. Its text is
+     real to a TreeWalker and invisible to a reader, which makes it the worst kind of
+     word for this routine: it can be chosen as a break, and a <br> placed inside a
+     clipped box breaks nothing. The model then believes it ended the line there, the
+     browser carries the visible words on and greedy-wraps them somewhere else, and the
+     line comes out at the full column width with the next one short to match. That is
+     the 718 / 779 / 518 on the compare pages: not a bad choice of break, a break that
+     was never made.
+
+     Detected by geometry rather than by class name, because the class is a convention
+     and the geometry is the actual property that matters: an element occupying a box
+     of a pixel or less holds nothing a reader can see. getBoundingClientRect, not
+     clientWidth, because clientWidth is zero for every ordinary inline element and
+     would throw away every word inside a link. */
+  function isHiddenText(node, root) {
+    var p = node.parentNode, r;
+    while (p && p !== root && p.nodeType === 1) {
+      r = p.getBoundingClientRect();
+      if (r.width <= 1 || r.height <= 1) return true;
+      p = p.parentNode;
+    }
+    return false;
+  }
+
   function textNodes(el) {
     var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false), out = [], n;
-    while ((n = walker.nextNode())) if (n.nodeValue.trim()) out.push(n);
+    while ((n = walker.nextNode())) {
+      if (n.nodeValue.trim() && !isHiddenText(n, el)) out.push(n);
+    }
     return out;
   }
 
@@ -659,7 +722,7 @@
     for (var j = 0; j < words.length; j++) {
       range.setStart(words[0].node, words[0].start);
       range.setEnd(words[j].node, words[j].end);
-      cumulative.push(widthOf(range));
+      cumulative.push(spanWidth(range));
     }
     el.style.whiteSpace = restoreWhiteSpace;
 
@@ -770,7 +833,7 @@
     var tol = lineTolerance(el);
     var rects = range.getClientRects(), groups = [], i, j, g, mid;
     for (i = 0; i < rects.length; i++) {
-      if (rects[i].width < 1) continue;
+      if (rects[i].width <= 1) continue;
       mid = rects[i].top + rects[i].height / 2;
       g = null;
       for (j = 0; j < groups.length; j++) {

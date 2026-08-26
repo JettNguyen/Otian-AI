@@ -10885,3 +10885,117 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 640px) {
   .ember-intro { width: 108px; height: 108px; }
 }
+
+/* ========================================
+   The equipment kit (/equipment/)
+   ========================================
+   The panel js/equipment.js writes when the picker finishes. It sits under the
+   chat rather than replacing it, so the answers that produced it stay on screen
+   and stay editable: a recommendation you cannot trace back to what you said is
+   a recommendation you have to take on faith.
+
+   The catch card is styled apart from the rest on purpose. It carries what the
+   chosen setup will NOT do, and the one thing it must never look like is a
+   footnote. */
+.kit-panel {
+  padding: 8px 0 var(--section-padding);
+}
+
+.kit-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.kit-head h2 {
+  margin: 10px 0 12px;
+}
+.kit-head p {
+  color: var(--text-secondary);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+.kit-cards {
+  display: grid;
+  gap: 18px;
+}
+
+.kit-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.kit-card h3 {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+}
+.kit-card p {
+  margin-bottom: 12px;
+}
+.kit-card p:last-child {
+  margin-bottom: 0;
+}
+.kit-card a {
+  color: var(--c-blue-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* The aside inside a card: a cheaper route, or a warning that belongs with the
+   thing rather than after it. */
+.kit-card .kit-aside {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.kit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+.kit-list li {
+  padding-left: 20px;
+  position: relative;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.kit-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Not a warning colour and not a red box. The point is that this card is part
+   of the recommendation, not an exception printed under it, so it takes the
+   accent the rest of the site uses for the things it wants read. */
+.kit-card--catch {
+  border-left: 3px solid var(--accent);
+}
+.kit-card--catch .kit-list li::before {
+  background: var(--text-muted);
+}
+
+.kit-foot {
+  margin-top: 36px;
+  text-align: center;
+}
+.kit-foot p {
+  max-width: 58ch;
+  margin: 0 auto 20px;
+}
+
+@media (max-width: 640px) {
+  .kit-card { padding: 22px 20px; }
+  .kit-card h3 { font-size: 1.12rem; }
+}

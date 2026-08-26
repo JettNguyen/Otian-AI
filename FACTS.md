@@ -165,6 +165,24 @@ re-counts it rather than trusting this file.
 - **Users, installs, hours saved.** We have no published figure for any of these and no
   testimonial behind them. `/testimonials/` says we are still collecting reviews; a stat that
   contradicts that page is worse than no stat.
+- **Every hardware price, on `/equipment/` and anywhere else.** Added 2026-08-26 with that page.
+  A hardware price is a third-party figure under the rules above, so it would need a row in
+  "Other companies' prices" with the maker's own store as its source and a 90-day re-read. It
+  would also be the worst kind of row to carry: the reader is about to *spend* against it, the
+  price varies by country and by configuration in a way one number cannot hold, and it goes stale
+  without telling us. So the equipment page names machines and says what to look for, and the
+  reader reads the price at the maker's own store, one click away. `js/equipment.js` says the same
+  thing at the top of the file, because that is where somebody would be tempted to add one.
+  **Budget on that page is a shape, not a number:** "spend nothing", "as little as will do the
+  job", "buy once". If a price is ever published there, it needs a sourced row here first, and
+  a person to re-read it every 90 days for as long as it is up.
+- **A minimum processor, memory, or disk for running Archie.** There is no published floor in the
+  Archie repo to cite, and the honest reason is that the demanding part does not happen on the
+  user's computer: the model runs at the AI provider. Inventing a "16GB recommended" would be a
+  number a reader shops against, which is worse than the vaguer truth. The equipment page states
+  the two requirements that *are* sourced (`archie/install/`: macOS 12 Monterey or later; Windows
+  10 or 11, 64-bit) and otherwise says what the machine has to *do*, which is stay on. If a floor
+  is ever measured, it goes here with the measurement.
 - **The Business Roadmap session price.** The roadmap (added 2026-08-21: a consult for
   businesses that don't know where to start; free 30-minute discovery call, then the
   recommendations arrive in a paid working session) has no published price. The site says

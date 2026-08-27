@@ -8685,7 +8685,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .cost-use {
   font-weight: 600;
-  color: var(--c-blue-ink);
+  color: var(--accent-ink);
 }
 
 /* Figures sit in columns, so they get tabular digits and never wrap. */

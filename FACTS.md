@@ -29,20 +29,37 @@ say where a number comes from, it is not a fact and it does not go on the site.
 | `$999` | Archie for Business, billed yearly | Same |
 | `$83.25` | What the business yearly plan works out to per month | 999 / 12 |
 | `$189` | What a business year saves against paying monthly | (99 x 12) - 999 |
-| `$19` | The scheduled-reports share of the heavy AI month | Archie repo, `docs/cost-of-running-an-agent.md`. No longer a plan price: it was the monthly plan until 2026-08-19 |
+| `$19` | Retired 2026-08-26. It was the scheduled-reports share of the heavy AI month under the pre-repricing model, and before that the monthly plan price until 2026-08-19. Kept listed so an old page quoting it does not read as a new claim, but nothing may print it |
 | `$250` | One guided session, one hour | Set by us, repriced 2026-08-19 from $100. "$250/session" and "$250/hour" are the same claim, not a contradiction |
-| `$4.40` | Light use: what the AI costs to run for a month | Archie repo, `docs/cost-of-running-an-agent.md` |
-| `$3.60` | The messages half of the light month | Same |
-| `$32` | Moderate use, per month | Same |
-| `$27` | The messages half of the moderate month | Same |
-| `$5` | The scheduled-reports half of the moderate month | Same |
-| `$137` | Heavy use, per month | Same |
-| `$118` | The messages half of the heavy month | Same |
-| `$106 to $178` | Heavy use with the real 319-run schedule, measured | Archie repo, `docs/COST-MEASURED.md`. Replaced `$165` 2026-08-21: that figure appeared in neither cited document and was a leftover of a superseded model |
-| `$112 to $184` | A heavy month on Balanced, before the quality checkbox | Archie repo, `docs/COST-MEASURED.md`. A point value must not be attributed to a dataset that carries a range |
-| `$140` | The approved rounding of that heavy Balanced month, for prose that pairs it with the $30 rounding | The companion cost note in the Archie repo ("roughly $140"); always beside "roughly", never as a measured point |
-| `$106` | The floor of heavy use with the real 319-run schedule | Archie repo, `docs/COST-MEASURED.md` ($106.35) |
-| `$178` | The ceiling of the same measurement | Archie repo, `docs/COST-MEASURED.md` ($178.02) |
+| `$1` | Light use at Economy, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.4, repriced 2026-08-26. These six rows replaced the single points `$4.40`, `$32` and `$137`, which were point values on a dataset that carries a range and did not say which quality setting they were |
+| `$2` | Light use at Economy, per month, the ceiling | Same |
+| `$5` | Light use at Balanced, per month, the floor. Also the scheduled-reports half of the retired moderate month | Same |
+| `$7` | Light use at Balanced, per month, the ceiling | Same |
+| `$41` | Moderate use at Economy, per month, the floor | Same. Roughly double the retired `$32`, and not because anything got dearer: that row counted no mail watch and assumed a schedule firing a third as often as a real one does |
+| `$63` | Moderate use, per month, the ceiling at both Economy and Balanced | Same |
+| `$44` | Moderate use at Balanced, per month, the floor | Same |
+| `$112` | Heavy use at Economy, per month, the floor | Same. `$112 to $184` was listed as a Balanced figure before 2026-08-26; the repricing moved it to Economy and Balanced went up |
+| `$184` | Heavy use at Economy, per month, the ceiling | Same |
+| `$130` | Heavy use at Balanced, per month, the floor | Same |
+| `$204` | Heavy use at Balanced, per month, the ceiling | Same |
+| `$0.69` | The inbox watch alone at Economy, 30 emails a day reaching the model, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.5. Measured input from a 13-shape corpus on a live key 2026-08-26; the range is the length of the answer, which is still assumed |
+| `$1.10` | The same, ceiling | Same |
+| `$2.08` | The inbox watch at Balanced, 30 a day, floor | Same |
+| `$3.29` | The same, ceiling | Same |
+| `$5.59` | The inbox watch at Balanced with draft replies on, 30 a day, floor | Same. Draft replies roughly triple this lane, because writing a reply is output and output bills at 5x reading |
+| `$9.64` | The same, ceiling | Same |
+| `$1.85` | The inbox watch at Economy, 80 a day, floor | Same |
+| `$2.93` | The same, ceiling | Same |
+| `$5.54` | The inbox watch at Balanced, 80 a day, floor | Same |
+| `$8.78` | The same, ceiling | Same |
+| `$14.90` | The inbox watch at Balanced with draft replies on, 80 a day, floor | Same |
+| `$25.70` | The same, ceiling | Same |
+| `$4.62` | The inbox watch at Economy, 200 a day, floor | Same |
+| `$7.32` | The same, ceiling | Same |
+| `$13.86` | The inbox watch at Balanced, 200 a day, floor | Same |
+| `$21.96` | The same, ceiling | Same |
+| `$37.26` | The inbox watch at Balanced with draft replies on, 200 a day, floor | Same |
+| `$64.26` | The same, ceiling | Same |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | The parked price of Meeting Notes. Printed nowhere: on 2026-08-21 Jett had it listed Free everywhere for now, so the browse badge says Free like every other listing | Its marketplace manifest in the Archie repo, currently `price_cents: 0` with a test pinning "free for the beta". If the price returns, it goes here first, and any page carrying the badge must say the beta price beside it |
 | `$0` | Admin balance placeholder | Not customer-facing copy |

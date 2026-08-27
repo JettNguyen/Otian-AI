@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie Pricing | Otian AI</title>
-  <meta name="description" content="What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), free built-in add-ons, and pay-as-you-go AI billed straight to your own account with the AI company, about $4.40 to $137 a month depending on how hard you work your agent. Guided setup is $250 an hour-long session." />
+  <meta name="description" content="What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), free built-in add-ons, and pay-as-you-go AI billed straight to your own account with the AI company, $1 to $7 a month for a light agent and $112 to $204 for one wired into a whole working day. Guided setup is $250 an hour-long session." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -407,19 +407,20 @@
         <div class="section-header">
           <span class="section-label fade-up">The third cost, in numbers</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">What running the AI actually costs.</h2>
-          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs to run for a month, scheduled reports included.</p>
+          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs to run for a month: the messages you send, the reports it runs on a schedule, and the mail it reads while you are away.</p>
         </div>
 
         <div class="cost-table-wrap fade-up delay-2">
           <table class="cost-table">
-            <caption class="sr-only">Estimated monthly AI cost for one agent, at three levels of use.</caption>
+            <caption class="sr-only">Measured monthly AI cost for one agent, at three levels of use and two response-quality settings.</caption>
             <thead>
               <tr>
                 <th scope="col">How hard you work it</th>
                 <th scope="col">What it&rsquo;s connected to</th>
                 <th scope="col">Messages a day</th>
-                <th scope="col">Per message you send</th>
-                <th scope="col">Per month, all in</th>
+                <th scope="col">Mail a day</th>
+                <th scope="col">Per month at Economy</th>
+                <th scope="col">Per month at Balanced</th>
               </tr>
             </thead>
             <tbody>
@@ -427,30 +428,69 @@
                 <td data-label="How hard you work it"><span class="cost-use">Light</span></td>
                 <td data-label="What it's connected to">A calendar and a folder of documents</td>
                 <td data-label="Messages a day"><span class="cost-num">about 6</span></td>
-                <td data-label="Per message you send"><span class="cost-num">2.0&cent;</span></td>
-                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $4.40</span><span class="cost-split">$3.60 of messages, plus 80&cent; of scheduled reports</span></td>
+                <td data-label="Mail a day"><span class="cost-num">none</span></td>
+                <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$1 to $2</span></td>
+                <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$5 to $7</span></td>
               </tr>
               <tr>
                 <td data-label="How hard you work it"><span class="cost-use">Moderate</span></td>
                 <td data-label="What it's connected to">Calendar, email, a to-do list, and its own lists of people and projects</td>
                 <td data-label="Messages a day"><span class="cost-num">about 25</span></td>
-                <td data-label="Per message you send"><span class="cost-num">3.6&cent;</span></td>
-                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $32</span><span class="cost-split">$27 of messages, plus $5 of scheduled reports</span></td>
+                <td data-label="Mail a day"><span class="cost-num">about 80</span></td>
+                <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$41 to $63</span></td>
+                <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$44 to $63</span></td>
               </tr>
               <tr>
                 <td data-label="How hard you work it"><span class="cost-use">Heavy</span></td>
                 <td data-label="What it's connected to">All of those, plus about as many connections again</td>
                 <td data-label="Messages a day"><span class="cost-num">about 70</span></td>
-                <td data-label="Per message you send"><span class="cost-num">5.6&cent;</span></td>
-                <td data-label="Per month, all in"><span class="cost-num cost-num--total">about $137</span><span class="cost-split">$118 of messages, plus $19 of scheduled reports</span></td>
+                <td data-label="Mail a day"><span class="cost-num">about 200</span></td>
+                <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$112 to $184</span></td>
+                <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$130 to $204</span></td>
               </tr>
             </tbody>
           </table>
-          <p class="cost-table-note">Modelled from measured component sizes and the AI companies&rsquo; published prices in July 2026, for one agent on Claude Sonnet at the Balanced response quality, over a 30-day month. In August 2026 we checked the light row against a real agent, message by message, and it held. Measured on personal Archie: a shared Archie for Business agent answering a whole team does more in a day, so read these as the cost of one person&rsquo;s use, whichever edition it happens on.</p>
+          <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because two things move a bill and neither is the message count: the quality you pick, and how you space your messages out. A message sent a minute after the last costs about a sixth of one sent an hour later. Measured on personal Archie: a shared Archie for Business agent answering a whole team does more in a day, so read these as one person&rsquo;s use.</p>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Per-message times thirty won&rsquo;t reach the monthly total, and that isn&rsquo;t a typo.</strong> The rate counts what you send; the total also covers what your agent does on its own schedule.</p>
-        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> One agent we built fired its schedule about 320 times a month, roughly a third of its whole bill, spent before anybody typed anything. At that rate the heavy row measured between $106 and $178.</p>
+        <p class="cost-note cost-note--lead"><strong>Your agent spends money in three places, and only one of them is you typing.</strong> The messages you send are the biggest, at half to three quarters of the bill. The reports it runs on a schedule are next, at a sixth to a half. The mail it reads while you&rsquo;re away is the smallest, between 3% and 16%. It&rsquo;s listed separately because it&rsquo;s the only one that keeps spending when you stop using your agent.</p>
+        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> Install a dozen add-ons, keep the routines that arrive with them, and the schedule fires about 320 times a month: eight things every morning, three every week, one before every meeting. That is roughly a third of the bill, spent before anybody typed anything.</p>
+        <p class="cost-note"><strong>Mail arriving is the part nobody predicts.</strong> Give your agent your inbox and it reads each message that lands, as often as people email you, whether or not you&rsquo;re at your computer. Set an agent up and then mostly let it run, and this becomes the largest thing you&rsquo;re paying for. None of the three rows above describes that.</p>
+
+        <div class="cost-table-wrap fade-up delay-2">
+          <table class="cost-table">
+            <caption class="sr-only">Monthly cost of the inbox watch alone, by how much mail reaches the agent.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mail reaching your agent</th>
+                <th scope="col">At Economy</th>
+                <th scope="col">At Balanced</th>
+                <th scope="col">At Balanced, writing drafts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Mail reaching your agent">30 a day</td>
+                <td data-label="At Economy"><span class="cost-num">$0.69 to $1.10</span></td>
+                <td data-label="At Balanced"><span class="cost-num">$2.08 to $3.29</span></td>
+                <td data-label="At Balanced, writing drafts"><span class="cost-num">$5.59 to $9.64</span></td>
+              </tr>
+              <tr>
+                <td data-label="Mail reaching your agent">80 a day</td>
+                <td data-label="At Economy"><span class="cost-num">$1.85 to $2.93</span></td>
+                <td data-label="At Balanced"><span class="cost-num">$5.54 to $8.78</span></td>
+                <td data-label="At Balanced, writing drafts"><span class="cost-num">$14.90 to $25.70</span></td>
+              </tr>
+              <tr>
+                <td data-label="Mail reaching your agent">200 a day</td>
+                <td data-label="At Economy"><span class="cost-num">$4.62 to $7.32</span></td>
+                <td data-label="At Balanced"><span class="cost-num">$13.86 to $21.96</span></td>
+                <td data-label="At Balanced, writing drafts"><span class="cost-num">$37.26 to $64.26</span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="cost-table-note">Already inside the totals above, shown separately because it&rsquo;s the one part with nothing to do with how much you use your agent. <strong>Letting it write draft replies roughly triples it</strong>, which the last column is: a reply is a few hundred words of output, and output bills at 5x reading. That switch is on the Email panel.</p>
+        </div>
 
         <!-- Folded, not cut. The table is the claim and these are the reasoning behind it,
              which used to sit between the reader and the number: eight blocks of prose to
@@ -467,12 +507,17 @@
 
               <div class="calm-list-item">
                 <span class="calm-list-label">Cost follows what you connect</span>
-                <p>Every service you connect is described in that briefing. Wire in an inbox, a to-do list and a few more, and the identical question costs roughly 2.8 times as much. Add-ons work the same way.</p>
+                <p>Every service you connect is described in that briefing, in every briefing. Nothing connected is about 950 tokens of descriptions; a calendar and documents, 2,970; calendar and mail, 5,760; everything Archie connects to, 10,100. The identical question costs roughly 2.8 times as much on the loaded agent.</p>
               </div>
 
               <div class="calm-list-item">
-                <span class="calm-list-label">Response quality is the dial you hold</span>
-                <p>Every figure above is Balanced, the default. <strong>An add-on can pick its own quality and ignore the dial</strong>, and most useful ones do. The checkbox under it, &ldquo;Use this for every skill&rdquo;, overrides them, and that is where the saving lives: forced Economy costs <strong>about a fifth</strong> of Balanced, roughly $30 instead of $140 on a heavy month, traded against how good the answers are.</p>
+                <span class="calm-list-label">The quality dial is a big control on a simple agent and a small one on a complicated agent</span>
+                <p><strong>An add-on can pick its own quality and ignore the dial</strong>, and most capable ones do, so what the dial is worth depends on how much of your agent already chose for itself. On the light row it&rsquo;s the whole difference between $1 and $7. On the heavy row it&rsquo;s under 15%. The checkbox under it, &ldquo;Use this for every skill&rdquo;, overrides the add-ons, and on a loaded agent that&rsquo;s where the saving lives: forced Economy costs <strong>about a fifth</strong> of forced Balanced, traded against how good the answers are.</p>
+              </div>
+
+              <div class="calm-list-item">
+                <span class="calm-list-label">Mail gets trimmed before the AI ever sees it</span>
+                <p>Archie strips the quoted thread and the signature before showing a message to the model, because neither is what the sender wrote today. Across thirteen shapes of real mail that&rsquo;s <strong>44% less text, and 84% on a long back-and-forth</strong>, with no change to what the agent concluded. It&rsquo;s a full-price saving: these jobs are below the size any provider will park a copy of.</p>
               </div>
 
               <div class="calm-list-item">
@@ -484,23 +529,23 @@
             <div class="cost-trust">
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p>The briefing sizes, the published prices, the passes a message takes, and all three rows: we ran real agents and read the bill for every call. Every total landed inside what we measured. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
+                <p>All three rows. We built agents at each shape, connected a real calendar and inbox, ran them on a real key and read the bill for every call. The briefing sizes, each service&rsquo;s description, the passes a message takes and how much text comes off an email are counted, not estimated. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p>A message on a lightly connected agent costs between 1.2&cent; and 2.0&cent;, depending on whether you are mid-conversation or starting one.</p>
-              </div>
-              <div class="cost-trust-row">
-                <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p>How much the model works a problem through before answering, which bills at 5x the rate of reading. That is a seventh to a quarter of the bill at the default setting; set it to think harder and it goes up.</p>
+                <p>How much the model works a problem through before answering, which bills at 5x reading: 6% to 9% of a message that starts a conversation, 39% to 50% of one sent mid-conversation.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-                <p>How you space your messages out, the biggest single number in all of it. A message sent mid-conversation reuses the parked briefing; one sent hours later cannot, and <strong>the second kind costs about six times the first</strong>. The figures above assume a reasonable mix.</p>
+                <p>How you space your messages out, the biggest single number in all of it. <strong>A message sent hours after the last costs about six times one sent right after it.</strong> That gap is why every figure above is a range.</p>
+              </div>
+              <div class="cost-trust-row">
+                <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
+                <p>How many messages a day, how often your schedule fires, and <strong>how much mail reaches your agent</strong>. The last is the widest and the newest: 30, 80 and 200 a day bracket what one real inbox did over two days.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p>The moderate and heavy rows: we built agents at both shapes, connected a real calendar and inbox, and ran them. Both totals landed inside what we measured. The one assumption left is how many messages a day a real person sends.</p>
+                <p>Why two rows went up in August 2026. Nothing got dearer. These figures never counted the mail your agent reads while you&rsquo;re away, and assumed a schedule firing a third as often as a real one.</p>
               </div>
             </div>
           </div>

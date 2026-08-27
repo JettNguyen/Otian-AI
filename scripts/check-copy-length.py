@@ -47,8 +47,16 @@ BUDGETS = {
     # How It Works is a procedure. A reader following along needs every step.
     "how-it-works/index.html": 1400,
     # Pricing prints every measured cost with its source, and a cut there reads
-    # as a hidden fee. Set at its 2026-08-22 length: it is at its ceiling.
-    "archie/pricing/index.html": 2300,
+    # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
+    # reason this page is allowed to grow: the repricing found a third place an
+    # agent spends money (mail arriving, which is neither a message somebody sent
+    # nor a scheduled run) and it was in no published figure on any page. Cutting
+    # that disclosure to hold a word count would reproduce exactly the failure the
+    # repricing exists to fix, which the sentence above already said. Four passes
+    # of trimming took the additions from 625 words over to 377 before this moved;
+    # what is left is the new table and the sentences that make it readable. Back
+    # at its ceiling: a paragraph added here still has to cut one.
+    "archie/pricing/index.html": 2700,
 }
 
 # Pages whose job is completeness. Length is not a defect here.

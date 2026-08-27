@@ -189,6 +189,30 @@
         { value: '5-10', label: '5-10 hours' },
         { value: '10-plus', label: '10+ hours' }
       ],
+      next: 'gPlatform'
+    },
+
+    /* The one question that decides whether we can help at all, and until 2026-08-27 only the
+       waitlist path asked it. A guided lead arriving on Linux or wanting the agent to live on a
+       NAS is a conversation we should have before the call, not twelve minutes into it. Same
+       field name as `wlPlatform` so both paths land in one column of the inbox. */
+    gPlatform: {
+      section: 'Your setup',
+      bot: ['Which computer would the agent run on? The work happens on your own computer rather than in the cloud, so it needs one that can stay on.'],
+      type: 'choice',
+      name: 'platform',
+      options: [
+        { value: 'mac', label: 'Mac' },
+        { value: 'windows', label: 'Windows' },
+        { value: 'both', label: 'I have both' },
+        { value: 'other', label: 'Something else, or not sure' }
+      ],
+      ack: function (value) {
+        if (value === 'other') {
+          return 'Good to know. Archie runs on Mac and Windows today, so let’s start the call there and see what fits.';
+        }
+        return null;
+      },
       next: 'gApproval'
     },
 
@@ -353,7 +377,7 @@
   /* ── Question order per path, for the progress bar ── */
   var PATHS = {
     waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
-    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
+    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
     roadmap: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
 

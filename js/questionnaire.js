@@ -121,10 +121,19 @@
       ],
       type: 'choice',
       name: 'platform',
+      /* The third option exists so a reader on Linux is not made to pick a false answer, and so
+         we learn how many of them there are. Matches `gPlatform` on the guided path. */
       options: [
         { value: 'mac', label: 'Mac' },
-        { value: 'windows', label: 'Windows' }
+        { value: 'windows', label: 'Windows' },
+        { value: 'other', label: 'Something else, or not sure' }
       ],
+      ack: function (value) {
+        if (value === 'other') {
+          return 'Thanks for saying. Archie runs on Mac and Windows today, and we’ll tell you if that changes.';
+        }
+        return null;
+      },
       next: 'wlConfirm'
     },
 
@@ -216,19 +225,31 @@
       next: 'gApproval'
     },
 
+    /* This asked which approval policy the reader wanted, and Archie has no such setting: the
+       behavior is fixed per tool, so "just do it and tell me after" was an option we could not
+       honor for the two things people mean by it. Rewritten 2026-08-27 to state what is fixed and
+       then ask the thing that is actually ours to decide together, which is where to start. The
+       field is renamed with it, because the old name now means something different and an inbox
+       column that quietly changes meaning is worse than a new one. */
     gApproval: {
       section: 'How hands-on',
       bot: [
-        'We set up every agent with sensible defaults that protect you from day one. Archie sends email and changes your calendar only on your approval (nothing goes out or gets changed until you say yes) and it can’t spend money or make a purchase at all.',
-        'Beyond those basics: for routine, low-risk tasks (sorting email, setting reminders), should your agent just do it and tell you afterward, or check with you first?'
+        'Two things are fixed in Archie rather than settings you have to find. Email arrives as a draft with a Send button, so nothing leaves your account unless you send it or set the time for it yourself. Calendar changes wait for your approval. And it has no way to buy anything or move money, beyond the AI usage on your own account.',
+        'The rest (sorting, reminders, lists, looking things up) happens on its own and you read the results. Where would you put yourself on that?'
       ],
       type: 'choice',
-      name: 'taskApproval',
+      name: 'howHandsOn',
       options: [
-        { value: 'just-do', label: 'Just do it and tell me after' },
-        { value: 'always-ask', label: 'Always ask me first' },
-        { value: 'discuss', label: 'Depends on the task, let’s discuss' }
+        { value: 'comfortable', label: 'Comfortable, that’s what I want from it' },
+        { value: 'tell-me', label: 'Fine, as long as it tells me what it did' },
+        { value: 'start-small', label: 'I’d rather start with one thing and add as I go' }
       ],
+      ack: function (value) {
+        if (value === 'start-small') {
+          return 'Sensible. We pick the first task together on the call, and it can stay the only one as long as you like.';
+        }
+        return null;
+      },
       next: 'gTech'
     },
 
@@ -240,19 +261,25 @@
       next: 'gAI'
     },
 
+    /* Was Yes/No, which put somebody who tried ChatGPT once in the same bucket as somebody who
+       runs a coding agent daily, and we prepare for those two calls completely differently. */
     gAI: {
       section: 'Comfort level',
-      bot: ['Have you used AI tools before, like ChatGPT?'],
+      bot: ['Have you used AI tools before? Whichever is closest is fine.'],
       type: 'choice',
       name: 'aiExperience',
       options: [
-        { value: 'yes', label: 'Yes' },
-        { value: 'no', label: 'No' },
-        { value: 'unsure', label: 'Not sure what that is' }
+        { value: 'none', label: 'Not yet' },
+        { value: 'tried', label: 'I’ve tried one, like ChatGPT' },
+        { value: 'regular', label: 'I use them most days' },
+        { value: 'builds', label: 'I build with them, or use coding tools like Claude Code' }
       ],
       ack: function (value) {
-        if (value === 'no' || value === 'unsure') {
+        if (value === 'none') {
           return 'Good to know. The free call starts wherever you are.';
+        }
+        if (value === 'builds') {
+          return 'Useful. We’ll skip the introductions and talk about what you’d be consolidating.';
         }
         return null;
       },

@@ -40,8 +40,8 @@
     audience: {
       section: 'Get started',
       bot: [
-        'Hi, I’m Ember. A few quick questions and we’ll point you to the right starting place. You can change any answer as we go.',
-        'First: who would your AI agent work for? (An agent is AI that does tasks for you, like sorting email or setting reminders, rather than just answering questions.)'
+        'Hi, I’m Ember. A few quick questions and we’ll point you to the right place. Change any answer as we go.',
+        'First: who would your agent work for? (An agent is AI that does tasks for you, like sorting email, rather than just answering questions.)'
       ],
       type: 'choice',
       name: 'edition',
@@ -130,7 +130,7 @@
       ],
       ack: function (value) {
         if (value === 'other') {
-          return 'Thanks for saying. Archie runs on Mac and Windows today, and we’ll tell you if that changes.';
+          return 'Thanks for saying. Archie is Mac and Windows today; we’ll tell you if that changes.';
         }
         return null;
       },
@@ -151,7 +151,7 @@
       bot: [
         {
           note: true,
-          html: '<strong>How pricing works:</strong> your first 30-minute discovery call is free, and guided setup is $250 a session (an hour each; a bigger setup takes more sessions, never a higher rate). Archie itself is $30 a month or $299 a year when it ships, and the AI runs pay-as-you-go on your own account. <a href="../archie/pricing/">Every cost, in full</a>.'
+          html: '<strong>How pricing works:</strong> the 30-minute discovery call is free. Guided setup is $250 an hour, and a bigger setup takes more sessions, never a higher rate. Archie itself is $30 a month or $299 a year when it ships, and the AI bills pay-as-you-go on your own account. <a href="../archie/pricing/">Every cost, in full</a>.'
         },
         'With that on the table: what’s your first and last name?'
       ],
@@ -182,7 +182,7 @@
       bot: ['Now the interesting part. If your AI agent worked perfectly, what is one task you would love to hand off and never do again?'],
       type: 'textarea',
       name: 'handOffTask',
-      placeholder: 'e.g. Going through my inbox every morning. There are so many emails and most of them do not need my attention. I just want to see what actually matters.',
+      placeholder: 'e.g. Going through my inbox every morning. Most of it does not need me. I just want to see what actually matters.',
       errorMsg: 'Please describe the task you’d like to hand off.',
       next: 'gTime'
     },
@@ -207,7 +207,7 @@
        field name as `wlPlatform` so both paths land in one column of the inbox. */
     gPlatform: {
       section: 'Your setup',
-      bot: ['Which computer would the agent run on? The work happens on your own computer rather than in the cloud, so it needs one that can stay on.'],
+      bot: ['Which computer would the agent run on? It works from your own computer, so it needs one that can stay on.'],
       type: 'choice',
       name: 'platform',
       options: [
@@ -218,7 +218,7 @@
       ],
       ack: function (value) {
         if (value === 'other') {
-          return 'Good to know. Archie runs on Mac and Windows today, so let’s start the call there and see what fits.';
+          return 'Good to know. Archie runs on Mac and Windows today, so we’ll start there on the call.';
         }
         return null;
       },
@@ -233,20 +233,23 @@
        column that quietly changes meaning is worse than a new one. */
     gApproval: {
       section: 'How hands-on',
+      /* The AI usage this does not mention is disclosed in the pricing note on `gName`, which is
+         where the money conversation belongs; do not delete that note without moving the
+         disclosure here, or this line is left standing alone as an absolute. */
       bot: [
-        'Two things are fixed in Archie rather than settings you have to find. Email arrives as a draft with a Send button, so nothing leaves your account unless you send it or set the time for it yourself. Calendar changes wait for your approval. And it has no way to buy anything or move money, beyond the AI usage on your own account.',
-        'The rest (sorting, reminders, lists, looking things up) happens on its own and you read the results. Where would you put yourself on that?'
+        'Two things are fixed, not settings to find: email always arrives as a draft you send yourself, and calendar changes wait for your approval. It cannot buy anything or move your money.',
+        'The rest (sorting, reminders, lists, lookups) just happens and you read the results. How does that sit with you?'
       ],
       type: 'choice',
       name: 'howHandsOn',
       options: [
-        { value: 'comfortable', label: 'Comfortable, that’s what I want from it' },
-        { value: 'tell-me', label: 'Fine, as long as it tells me what it did' },
-        { value: 'start-small', label: 'I’d rather start with one thing and add as I go' }
+        { value: 'comfortable', label: 'Good, that’s what I want' },
+        { value: 'tell-me', label: 'Fine, if it tells me what it did' },
+        { value: 'start-small', label: 'Start with one thing, add as I go' }
       ],
       ack: function (value) {
         if (value === 'start-small') {
-          return 'Sensible. We pick the first task together on the call, and it can stay the only one as long as you like.';
+          return 'Sensible. We pick the first one together on the call.';
         }
         return null;
       },
@@ -265,21 +268,21 @@
        runs a coding agent daily, and we prepare for those two calls completely differently. */
     gAI: {
       section: 'Comfort level',
-      bot: ['Have you used AI tools before? Whichever is closest is fine.'],
+      bot: ['Have you used AI tools before? Closest is fine.'],
       type: 'choice',
       name: 'aiExperience',
       options: [
         { value: 'none', label: 'Not yet' },
-        { value: 'tried', label: 'I’ve tried one, like ChatGPT' },
+        { value: 'tried', label: 'Tried one, like ChatGPT' },
         { value: 'regular', label: 'I use them most days' },
-        { value: 'builds', label: 'I build with them, or use coding tools like Claude Code' }
+        { value: 'builds', label: 'I build with them, or use Claude Code' }
       ],
       ack: function (value) {
         if (value === 'none') {
           return 'Good to know. The free call starts wherever you are.';
         }
         if (value === 'builds') {
-          return 'Useful. We’ll skip the introductions and talk about what you’d be consolidating.';
+          return 'Useful. We’ll skip the introductions, then.';
         }
         return null;
       },
@@ -293,7 +296,7 @@
       name: 'anythingElse',
       optional: true,
       skipLabel: 'Nothing to add',
-      placeholder: 'e.g. I travel frequently and work across two time zones. I have an existing Google Workspace account. I tried an AI tool once and found it confusing. I am hoping this is different.',
+      placeholder: 'e.g. I work across two time zones. I tried an AI tool once and found it confusing.',
       next: 'gConfirm'
     },
 
@@ -311,7 +314,7 @@
       bot: [
         {
           note: true,
-          html: '<strong>How the roadmap works:</strong> your first 30-minute discovery call is free: we learn your business and answer your questions, including what’s feasible. The roadmap itself (which agents, which Add-ons, what we’d build new for you) comes in a paid working session after that, and its cost is quoted on the free call.'
+          html: '<strong>How the roadmap works:</strong> the 30-minute discovery call is free: we learn your business and answer what is feasible. The roadmap itself (which agents, which Add-ons, what we would build for you) comes in a paid session after that, priced on that free call.'
         },
         'With that on the table: what’s your first and last name?'
       ],
@@ -378,7 +381,7 @@
       name: 'timeSinks',
       optional: true,
       skipLabel: 'I’m not sure, that’s what I want help with',
-      placeholder: 'e.g. Rekeying orders between systems, chasing invoices, answering the same ten customer questions.',
+      placeholder: 'e.g. Rekeying orders between systems, chasing invoices, the same ten customer questions.',
       next: 'bzTools'
     },
 

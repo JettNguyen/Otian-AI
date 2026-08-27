@@ -407,7 +407,7 @@
         <div class="section-header">
           <span class="section-label fade-up">The third cost, in numbers</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">What running the AI actually costs.</h2>
-          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs to run for a month: the messages you send, the reports it runs on a schedule, and the mail it reads while you are away.</p>
+          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs for a month: the messages you send, the reports it runs on a schedule, and the mail it reads while you are away.</p>
         </div>
 
         <div class="cost-table-wrap fade-up delay-2">
@@ -450,12 +450,14 @@
               </tr>
             </tbody>
           </table>
-          <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because two things move a bill and neither is the message count: the quality you pick, and how you space your messages out. A message sent a minute after the last costs about a sixth of one sent an hour later. Measured on personal Archie: a shared Archie for Business agent answering a whole team does more in a day, so read these as one person&rsquo;s use.</p>
+          <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because two things move a bill and neither is the message count: the quality you pick, and how you space your messages out. A message sent a minute after the last costs about a sixth of one sent an hour later. Measured on personal Archie: a shared Archie for Business agent answers a whole team, so read these as one person&rsquo;s use.</p>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Your agent spends money in three places, and only one of them is you typing.</strong> The messages you send are the biggest, at half to three quarters of the bill. The reports it runs on a schedule are next, at a sixth to a half. The mail it reads while you&rsquo;re away is the smallest, between 3% and 16%. It&rsquo;s listed separately because it&rsquo;s the only one that keeps spending when you stop using your agent.</p>
-        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> Install a dozen add-ons, keep the routines that arrive with them, and the schedule fires about 320 times a month: eight things every morning, three every week, one before every meeting. That is roughly a third of the bill, spent before anybody typed anything.</p>
-        <p class="cost-note"><strong>Mail arriving is the part nobody predicts.</strong> Give your agent your inbox and it reads each message that lands, as often as people email you, whether or not you&rsquo;re at your computer. Set an agent up and then mostly let it run, and this becomes the largest thing you&rsquo;re paying for. None of the three rows above describes that.</p>
+        <p class="cost-note cost-note--lead"><strong>These figures should come down, and they haven&rsquo;t yet.</strong> Three changes on 26 August 2026 stopped your agent re-sending its tool list on every reply. Measured on a real key that&rsquo;s <strong>33% off the tool list</strong>, which is about a third of each reply. Nobody has run a whole month with them yet, so the table above is still the last thing actually measured. A real figure late beats a hopeful one now.</p>
+
+        <p class="cost-note cost-note--lead"><strong>Your agent spends in three places, and only one is you typing.</strong> Messages you send are the biggest, half to three quarters. Scheduled reports are next, a sixth to a half. Mail read while you&rsquo;re away is smallest, 3% to 16%, and listed separately because it&rsquo;s the only one that keeps spending when you stop.</p>
+        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> A dozen add-ons with their routines left on fires about 320 times a month: eight every morning, three every week, one before every meeting. Roughly a third of the bill, spent before anybody typed anything.</p>
+        <p class="cost-note"><strong>Mail arriving is the part nobody predicts.</strong> Give your agent your inbox and it reads each message that lands, as often as people email you, whether or not you&rsquo;re at your computer. Set one up and then mostly let it run, and this becomes the largest thing you pay for. None of the rows above describes that.</p>
 
         <div class="cost-table-wrap fade-up delay-2">
           <table class="cost-table">
@@ -507,7 +509,7 @@
 
               <div class="calm-list-item">
                 <span class="calm-list-label">Cost follows what you connect</span>
-                <p>Every service you connect is described in that briefing, in every briefing. Nothing connected is about 950 tokens of descriptions; a calendar and documents, 2,970; calendar and mail, 5,760; everything Archie connects to, 10,100. The identical question costs roughly 2.8 times as much on the loaded agent.</p>
+                <p>Every service you connect is described in that briefing, in every briefing. Nothing connected is about 950 tokens; a calendar and documents, 2,970; calendar and mail, 5,760; everything, 10,100. The same question costs roughly 2.8 times as much on the loaded agent.</p>
               </div>
 
               <div class="calm-list-item">
@@ -517,19 +519,19 @@
 
               <div class="calm-list-item">
                 <span class="calm-list-label">Mail gets trimmed before the AI ever sees it</span>
-                <p>Archie strips the quoted thread and the signature before showing a message to the model, because neither is what the sender wrote today. Across thirteen shapes of real mail that&rsquo;s <strong>44% less text, and 84% on a long back-and-forth</strong>, with no change to what the agent concluded. It&rsquo;s a full-price saving: these jobs are below the size any provider will park a copy of.</p>
+                <p>Archie strips the quoted thread and the signature first, because neither is what the sender wrote today. Across thirteen shapes of real mail that&rsquo;s <strong>44% less text, and 84% on a long back-and-forth</strong>, with no change to what the agent concluded. Full price too: these jobs are below the size any provider will park a copy of.</p>
               </div>
 
               <div class="calm-list-item">
                 <span class="calm-list-label">Archie takes the cheap route when there is one</span>
-                <p>The AI companies let you park a copy of the briefing on their side, where reading it costs about a tenth of the usual price. Archie does this on every agent with nothing to set up. Measured, about three quarters of what an agent read came from a parked copy.</p>
+                <p>The AI companies let you park a copy of the briefing on their side, where reading it back costs about a tenth. Archie does this on every agent with nothing to set up, and since 26 August it parks the tool list separately, so editing one doesn&rsquo;t throw away the other.</p>
               </div>
             </div>
 
             <div class="cost-trust">
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p>All three rows. We built agents at each shape, connected a real calendar and inbox, ran them on a real key and read the bill for every call. The briefing sizes, each service&rsquo;s description, the passes a message takes and how much text comes off an email are counted, not estimated. Web searches bill separately, about a penny each, and none of these figures counts them.</p>
+                <p>All three rows. We built agents at each shape, connected a real calendar and inbox, ran them on a real key and read the bill for every call. The briefing sizes, each service&rsquo;s description, the passes a message takes and how much text comes off an email are counted, not estimated. Web searches bill separately, about a penny each, and aren&rsquo;t counted here.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
@@ -537,7 +539,7 @@
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>
-                <p>How you space your messages out, the biggest single number in all of it. <strong>A message sent hours after the last costs about six times one sent right after it.</strong> That gap is why every figure above is a range.</p>
+                <p>How you space your messages out, the biggest single number here. <strong>A message sent hours after the last costs about six times one sent right after it.</strong> That gap is why every figure above is a range.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--assumed">Assumed</span>

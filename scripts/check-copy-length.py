@@ -71,6 +71,12 @@ EXEMPT_FILES = {
     "privacy-policy/index.html",   # saying less than the truth is the failure
     "terms-of-service/index.html",  # same
     "faq/index.html",         # a list of answers; its length is the question count
+    # Troubleshooting. Exempt for the FAQ's reason and a second one that is stronger: every
+    # answer here is read by somebody who already has the problem, so an answer that stops
+    # short of naming the tab, the section and the button has failed at the moment it is
+    # needed most. Cutting this page cuts the instruction, not the padding. Its length is
+    # governed by the symptom count and by the plain-words rule, not by a budget.
+    "help/index.html",
     "our-story/index.html",   # a story is not a spec sheet
     "account/index.html",     # app surface, mostly UI strings
     "questionnaire/index.html",  # the chat script lives in js/, not here

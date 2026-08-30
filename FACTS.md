@@ -138,7 +138,7 @@ the figure here only after reading it on the source page, with the date.
 | 30 minutes | The free discovery call, for guided setup and for the Business Roadmap alike | Set by us. Printed on the site before this row existed; listed 2026-08-21. **Discrepancy closed 2026-08-27:** the embedded Google Calendar schedule had been booking 60-minute slots against copy saying 30 in nine files, and a real lead booked an hour before anybody noticed. Jett set the schedule to 30 minutes, so the calendar now matches the copy and the nine files stand. The schedule is configured in Google Calendar, not in this repo, so nothing here can check it: if the duration changes again, this row and those nine files are what has to move with it |
 | 3 things to start | A computer you can leave on, an account with an AI company, an Otian account with a plan | The requirement cards on `how-it-works/#what-you-need`, each traced there. A chat app is a **fourth, optional** item: it stopped being a requirement 2026-08-06 when Archie gained a conversation of its own, so an agent runs with none connected. It carries a `+` instead of a number for that reason. **The count is printed in three places** (the homepage "shopping list" band, that section's lede, and `learn/`), so a requirement shipping or dropping moves all three. Recorded 2026-08-22 after the homepage band was found listing two of the three and calling it the whole list |
 | 14 days | Money-back guarantee on a plan | Terms of Service |
-| 14 days | The own-key trial | `stripe-webhook/index.js`, `/trial/claim` |
+| 14 days | How long a free trial runs, and it is both kinds | Archie repo, `stripe-webhook/credits.js:284`, `TRIAL_DAYS`: "how long a trial runs, whatever is left of the credits", mirrored in `archie-core::credits` and `firestore.rules`. **Recorded as the own-key trial only until 2026-08-30**, which read as though the credit trial had no clock; it has the same one, and ends at whichever comes first, the credits or the days. The own-key trial is granted by `/trial/claim` in `stripe-webhook/index.js` |
 | 60 days | How long a signed entitlement lasts before it needs refreshing | `crates/archie-core/src/entitlement.rs`; TRUST.md 2026-08-07 |
 | 30 days | Our commitment to publish a final build requiring no license check if we cease operations | Terms of Service, quoted in its own words since 2026-08-21 ("no license check", not "no sign-in": the contract's wording is the claim) |
 | 6 hours | How often the version heartbeat goes out, at most | `crates/archie-core/src/telemetry.rs`, `HEARTBEAT_EVERY` |
@@ -170,6 +170,13 @@ re-counts it rather than trusting this file.
 
 ## Figures that are deliberately unpublished
 
+- **The size of the free-credit grant.** It is $2 of Anthropic usage (`TRIAL_GRANT_MICROS` in
+  the Archie repo's `stripe-webhook/index.js`), and the app itself refuses to say so: the trial
+  strip counts answers left rather than dollars left, because nobody knows what a dollar of an AI
+  model buys, so the figure supports no decision the reader is trying to make (`src/app/update-banners.tsx`,
+  "Why not dollars"). The site says the credits run out, and says when: the 14 days above, or the
+  credits, whichever is first. Publishing $2 here would put a number on the site that the product
+  deliberately does not put on screen.
 - **The free-credit caps.** Per account, per computer, per day. The app's refusal says "claimed
   here" rather than which limit was hit, so a person probing is not told which knob to turn.
   The site says the credits are limited and can be refused, and names no numbers. TRUST.md,

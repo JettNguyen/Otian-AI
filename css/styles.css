@@ -2785,7 +2785,12 @@ html[data-theme="dark"] .demo-player--hero .demo-player-frame {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  align-items: start;
+  /* Centred, not top-aligned and not stretched. The pair is almost always one
+     list against another of a different length, so top alignment leaves the
+     shorter card hanging off the top edge, and stretching pads it with empty
+     card. Centring reads as two things being weighed against each other,
+     which is what the pair is for. */
+  align-items: center;
 }
 
 .two-col-card {

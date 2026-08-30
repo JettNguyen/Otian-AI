@@ -1316,6 +1316,19 @@ about its training terms**, so a page that recommends one carries the terms or l
 Fixed in place: Groq's free tier stays recommended without a caveat because Groq's no-train line
 is unconditional, and Google's now says which tier trains.
 
+⛔ **Superseded 2026-08-30, and for a reason that has nothing to do with training: Groq's free tier
+cannot run Archie, so the site no longer recommends it anywhere.** That tier allows 8,000 tokens a
+minute, and one turn sends 10,000 to 17,500 because the agent's own instructions travel with every
+message. A free Groq key therefore pastes in, validates green, and then fails on everything the
+person sends. Measured against the live API on 2026-08-29 against two agents, one with eleven
+skills and one with two; the small one is still nearly twice the cap, so there is no agent small
+enough. Three pages carried the claim, all now corrected: `archie/pricing/`, `faq/`, and
+`how-it-works/` said Groq was free to start and needed no card, and now say it is the cheapest to
+run and needs one. **The only free start this site may claim is the credits Archie already
+includes**, which run on Claude. Groq's unconditional no-train line is untouched by any of this and
+is still quoted on `trust/`. The rule above stands and gains a second half: recommending a free
+tier is a claim about its training terms, and also a claim that it works.
+
 **xAI, re-checked 2026-08-25 and unchanged: unverified is what the site says, everywhere it
 says anything.** The only two places on otianai.com that characterize xAI's training terms are
 the trust page's row and the review PDF's provider table, and both say unverified with the

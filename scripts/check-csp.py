@@ -126,10 +126,21 @@ def main():
 
         with open(selftest, "w", encoding="utf-8") as fh:
             fh.write(SELF_TEST)
+        # Twice, and the second one waits far longer, because the first Chrome launch on a machine
+        # is not the same animal as the ninety-third. A warm launch prints the violation in well
+        # under a second (measured 2026-08-30: detected at every deadline from three seconds up),
+        # but the very first one of a session pays for profile creation and, on macOS, Gatekeeper,
+        # and can miss a four-second window. That is exactly what happened here: this check
+        # reported the detector broken on its first run and passed on the next with nothing
+        # changed, which is the worst way for a guard to behave, because the message accused the
+        # detector rather than the clock.
         if not run_chrome(base + "_csp-selftest.html", 3000):
-            print("check-csp: the self-test page reported no violation, so the detector is not")
-            print("working and a clean result would mean nothing. Not reporting a pass.")
-            return 1
+            if not run_chrome(base + "_csp-selftest.html", 3000, wait_s=20):
+                print("check-csp: the self-test page reported no violation even at a 20 second")
+                print("deadline, so the detector is not working and a clean result would mean")
+                print("nothing. Not reporting a pass. Check that Chrome still prints CSP refusals")
+                print("to stderr under --enable-logging=stderr; that is the whole mechanism.")
+                return 1
 
         rels = sorted(pages())
         by_page = {}

@@ -44,6 +44,31 @@ jobs:
       - name: Check every input has an accessible name
         run: node scripts/check-input-labels.mjs
 
+      # The same argument the block above makes for accessibility, made for claims.
+      #
+      # This site's product is trust, and TRUST.md opens by saying a false privacy or capability
+      # claim costs more than every feature on the site combined. Until now nothing at this door
+      # checked one: these three ran only when somebody remembered to run them, which is how
+      # "Groq is free to start and needs no card" sat live on three pages after it stopped being
+      # true. Groq's free tier allows 8,000 tokens a minute and one Archie turn needs ten to
+      # eighteen thousand, so the sentence was true of the key and false of the product, and the
+      # only thing standing between that and a reader was somebody noticing.
+      #
+      # All three are standard-library Python and finish in about a second each, so they cost
+      # nothing on a normal push and stop the one push that matters.
+      #
+      # `check-csp.py` is deliberately NOT here. It loads every page in a real browser, one cold
+      # browser per page in sequence, which is minutes rather than seconds, and its own self-test
+      # currently reports the detector is not working. It wants fixing before it guards anything.
+      - name: Check the figures against their sources
+        run: python3 scripts/check-facts.py
+
+      - name: Check no claim has drifted from TRUST.md
+        run: python3 scripts/check-claim-drift.py
+
+      - name: Check no page has outgrown its budget
+        run: python3 scripts/check-copy-length.py
+
       # Directories in the repo but out of the upload, so their URLs return the 404 page.
       # A page written ahead of its feature goes here until the feature ships (business/
       # sat here until 2026-08-21); delete its name to publish it.

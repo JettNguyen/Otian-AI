@@ -48,6 +48,17 @@ These govern whether a true claim is being made **decently**.
   breath, carry either a remedy the reader can use or a commitment with a trigger. The Windows
   code-signing passage on `archie/install/` is the model: it names the cost, says what we will
   do, and then hands the reader a way to check us without trusting us.
+- **This is a marketing site, so market. Never put ourselves down unless the truth requires it.**
+  Honesty is a floor, not a genre: it obliges us to state every limitation, and it never obliges
+  us to volunteer a self-criticism nobody asked for, to frame a concession as our failing when
+  the same fact reads plainly from the reader's side, or to end a true sentence on the half that
+  makes us look worse. Test any self-diminishing clause by deleting it: **if the sentence is
+  still true and complete without it, it was decoration, and it goes.** "Four things we cannot
+  offer" and "Four things your own build does better" concede the same four points; only one of
+  them is written by someone who wants the reader to buy. The comparison pages set the idiom:
+  frame the other side's advantage as what it buys *them*, not as what we lack. And a limitation
+  we are obliged to publish still gets its remedy in the same breath, per the rule above: the
+  reader should finish the sentence knowing what to do, not knowing we feel bad.
 - **Name the concrete thing before you ship the sentence.** Hours back, a task they stop doing,
   a cost they avoid. If a paragraph cannot say what the reader gets, it is decoration and does
   not ship. Not a number we have not measured, though: see the badges rule in FACTS.md. An

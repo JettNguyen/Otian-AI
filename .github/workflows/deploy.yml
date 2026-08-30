@@ -85,7 +85,7 @@ jobs:
           enablement: true
 
       - name: Upload site
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # Upload the entire repo root as the site
           path: .

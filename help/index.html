@@ -385,13 +385,13 @@
 
         <!-- Group 3 -->
         <div class="faq-group fade-up help-group" id="help-connections">
-          <h3 class="faq-group-title">A connection looks fine and is not</h3>
-          <p class="help-group-note">The hardest kind to spot, because the screen is showing you the wrong thing. Both of these are ours rather than yours.</p>
+          <h3 class="faq-group-title">An account has stopped working</h3>
+          <p class="help-group-note">Nothing you did. A sign-in lapses, a password changes, an administrator withdraws access, and the reading stops.</p>
           <div class="accordion" role="list">
 
             <div class="accordion-item help-item" role="listitem" id="help-connected-but-silent" data-verdict="fix">
               <button class="accordion-trigger" aria-expanded="false">
-                <span class="accordion-title">The account says Connected, but nothing has come through for days.<span class="help-verdict help-verdict-fix">Something to change</span></span>
+                <span class="accordion-title">Nothing has come through from one of my accounts for days.<span class="help-verdict help-verdict-fix">Something to change</span></span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
                 </svg>
@@ -399,10 +399,12 @@
               <div class="accordion-body">
                 <div class="accordion-body-inner">
                   <p class="help-row-label">What is happening</p>
-                  <p>Today, &ldquo;Connected&rdquo; means Archie is holding a key for that account. It does not mean the key still works. If Google or Microsoft withdrew the permission, or you changed your password, or an administrator at your company revoked access, the badge stays green and the reading quietly stops.</p>
-                  <p>We are not comfortable with that. It is on our list to fix so the badge reports whether the last read actually succeeded, and until that ships, the badge is not the thing to trust.</p>
+                  <p>The permission you gave Archie has stopped working. That happens on its own: Google or Microsoft withdrew it, or you changed your password, or an administrator at your company revoked access. Archie keeps trying every half minute and keeps being turned away, so the mail is still in your inbox and none of it is reaching you.</p>
+                  <p class="help-row-label">How to check</p>
+                  <p>In Archie, open the <strong>Connections</strong> tab and look at the account under <strong>Email, calendar, files</strong>. An account that has stopped working says <strong>Not opening</strong> and how long it has been that way, with the reason underneath it in Google&rsquo;s or Microsoft&rsquo;s own words.</p>
+                  <p>Worth knowing what that badge is and is not. The other badges on that row say what you granted, which is still true of an account that has stopped working, so a row of them is not proof of anything. <strong>Not opening</strong> is the only one that reports whether the last read actually succeeded, and it is the one to read.</p>
                   <p class="help-row-label">What to do about it</p>
-                  <p>In Archie, open the <strong>Connections</strong> tab, find the account under <strong>Email, calendar, files</strong>, and press <strong>Reconnect</strong>. Sign in again and approve the permissions. This is safe to do at any time and loses nothing: your settings, your drafts and your agent&rsquo;s memory are all untouched by it.</p>
+                  <p>Press <strong>Reconnect</strong> on that row and sign in again, approving the permissions. If there is no Reconnect button, remove the account and add it back. Either way is safe at any time and loses nothing: your settings, your drafts and your agent&rsquo;s memory are untouched by it, and the mail that piled up while the account was out is read as soon as it opens again.</p>
                 </div>
               </div>
             </div>

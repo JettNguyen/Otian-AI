@@ -188,7 +188,14 @@ re-counts it rather than trusting this file.
   60 seconds we visibly miss on first run.
 - **Users, installs, hours saved.** We have no published figure for any of these and no
   testimonial behind them. `/testimonials/` says we are still collecting reviews; a stat that
-  contradicts that page is worse than no stat.
+  contradicts that page is worse than no stat. **Two of these were live until 2026-08-30**,
+  on `/testimonials/` itself: "morning inbox processing dropped from 90 minutes to around 25
+  minutes" and "missed follow-ups fell substantially". Both came from client work before Archie
+  and neither had a record anybody could point at, which made them the only numbers on the site
+  that could not be traced, on the page whose entire job is being checkable. They are gone. The
+  cards now lead on the job the agent takes off you, written from each add-on's own catalog entry
+  in the Archie repo (`data/marketplace/skills/`), which is a claim we can defend line by line.
+  If a real measured outcome ever exists, it belongs here first, with the engagement and the date.
 - **Every hardware price, on `/equipment/` and anywhere else.** Added 2026-08-26 with that page.
   A hardware price is a third-party figure under the rules above, so it would need a row in
   "Other companies' prices" with the maker's own store as its source and a 90-day re-read. It

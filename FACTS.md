@@ -126,7 +126,7 @@ the figure here only after reading it on the source page, with the date.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| 150 add-ons | 38 personalities, 66 skills, 4 specialists, 42 routines | Archie repo `data/marketplace/**`, recounted 2026-08-29. Went 151 to 150 when `routines/evening-journal.json` was retired on 2026-08-28: Evening Reflection had taken over its job, and a live agent was firing both of them half an hour apart. **This is the first time the count has gone down, and it is why the check exists**: every previous recount was somebody adding a file and remembering to update the pages, so a deletion nobody thought of as a stat change sat wrong on two pages for a day. `scripts/check-facts.py` re-counts this when the Archie repo is checked out beside this one |
+| 151 add-ons | 38 personalities, 66 skills, 4 specialists, 43 routines | Archie repo `data/marketplace/**`, recounted 2026-08-31. The count has now moved twice in three days and neither move was a copy decision: `routines/evening-journal.json` was retired on 2026-08-28 (Evening Reflection had taken over its job, and a live agent was firing both of them half an hour apart), taking it 151 to 150, and `routines/statement-round.json` landed on 2026-08-30, taking it back to 151 with nothing on either page moving. **The down move is why the check exists and the up move is why it has to run on every commit**: a deletion nobody thinks of as a stat change sat wrong for a day, and an addition did the same thing two days later in the opposite direction. `scripts/check-facts.py` re-counts this when the Archie repo is checked out beside this one |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
 | 300M Wix businesses | Symphony's own claim about what its intelligence is drawn from, quoted only to answer it | `https://www.wix.com/symphony`: "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you". Read 2026-08-24. **Print it as their claim, never as our own figure**, and never as an independently verified count of businesses |
 | 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
@@ -152,8 +152,8 @@ the figure here only after reading it on the source page, with the date.
 ## The stat rows
 
 `index.html` (its own numbers band under the hero since the 2026-08-18 quiet-spine rebuild) prints
-four counts: **150 verified add-ons, 40 apps and services, 7 AI companies, 5 chat apps**.
-`skills-marketplace/browse/` prints three of the same: **150 verified add-ons, 5 chat apps,
+four counts: **151 verified add-ons, 40 apps and services, 7 AI companies, 5 chat apps**.
+`skills-marketplace/browse/` prints three of the same: **151 verified add-ons, 5 chat apps,
 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
 connections band's note also counts **all 40** names the band shows.

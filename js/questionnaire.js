@@ -7,9 +7,11 @@
    chips or one inline field, and each answer echoes back as the reader's own
    bubble with an edit control that rewinds the thread to that question.
 
-   Three doors: the Archie waitlist (short path), the guided-setup intake, or the
-   Business Roadmap consult (shown when the opening answer says business, or not
-   sure). The fork decides which sequence of questions runs, and every path ends
+   Three doors, all shown to everyone: the Archie waitlist (short path), the
+   guided-setup intake, or the consulting intake, whose questions adapt to whether
+   the opening answer said business or "just me" (the setup they describe is what
+   consulting sorts on, not their headcount). The fork decides which sequence of
+   questions runs, and every path ends
    in the same Formspree submission; the waitlist and guided paths kept the field
    names the old form used, so the inbox side of those did not change.
    ======================================== */
@@ -337,7 +339,7 @@
       label: 'Send My Answers'
     },
 
-    /* ── Business Roadmap path ── */
+    /* ── Consulting path (the internal key is still `roadmap`, see PATHS below) ── */
 
     bzName: {
       section: 'About you',

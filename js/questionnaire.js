@@ -68,9 +68,11 @@
       type: 'choice',
       cards: true,
       name: 'intent',
-      /* The third door shows only when the opening answer said business (or not sure):
-         the Business Roadmap is for shops that are interested but would not know where
-         to start, and a "just me" visitor has no use for it. */
+      /* All three doors show to everyone. The third one used to be business-only, on the
+         reasoning that a "just me" visitor had no use for a roadmap. That was wrong, and it was
+         wrong in the one direction that costs us: Consulting sorts on how tangled the setup is,
+         not on headcount, and the first person we sold it to was an individual with a household,
+         a rental and side projects. The gate would have routed him away from it. */
       options: function (answers) {
         var opts = [
           {
@@ -84,13 +86,11 @@
             desc: 'Our guided setup: we build your agent with you, starting with a free call. A few questions here help us come prepared.'
           }
         ];
-        if (answers.edition !== 'personal') {
-          opts.push({
-            value: 'roadmap',
-            label: 'Build a Business Roadmap',
-            desc: 'Our consult for businesses that don’t know where to start. We learn how your business runs, map which agents and Add-ons fit it, and build anything the marketplace doesn’t have yet.'
-          });
-        }
+        opts.push({
+          value: 'roadmap',
+          label: 'I already have a lot running',
+          desc: 'Our consulting: for more than one calendar, tools you wired together yourself, or pieces that only keep working because you keep them working. We scope the whole thing in writing before you book anything, then build it in phases.'
+        });
         return opts;
       },
       setPath: function (value) { return PATHS[value] ? value : 'guided'; },
@@ -344,7 +344,7 @@
       bot: [
         {
           note: true,
-          html: '<strong>How the roadmap works:</strong> the 30-minute discovery call is free: we learn your business and answer what is feasible. The roadmap itself (which agents, which Add-ons, what we would build for you) comes in a paid session after that, priced on that free call.'
+          html: '<strong>How consulting works:</strong> the 30-minute discovery call is free, and we use it to learn how the whole thing runs and answer what is feasible. The scope (what gets connected, in what order, and how many sessions each phase is estimated at) comes out of that call in writing, and it is yours whether you book or not. Sessions are $250 an hour, the same rate as guided setup.'
         },
         'With that on the table: what’s your first and last name?'
       ],
@@ -371,28 +371,48 @@
     },
 
     bzCompany: {
-      section: 'Your business',
-      bot: ['What’s the business called, and what’s your role there?'],
+      section: 'Your setup',
+      bot: function (a) {
+        return [a.edition === 'personal'
+          ? 'What should we call this setup, and what is your part in it?'
+          : 'What’s the business called, and what’s your role there?'];
+      },
       type: 'text',
       name: 'companyRole',
-      placeholder: 'e.g. Riverbend Dental, office manager',
-      errorMsg: 'Please tell us the business and your role.',
+      placeholder: function (a) {
+        return a.edition === 'personal'
+          ? 'e.g. the house and the rental, I run all of it'
+          : 'e.g. Riverbend Dental, office manager';
+      },
+      errorMsg: 'Please tell us a little about it.',
       next: 'bzWhat'
     },
 
     bzWhat: {
-      section: 'Your business',
-      bot: ['What does the business do? A sentence is plenty.'],
+      section: 'Your setup',
+      bot: function (a) {
+        return [a.edition === 'personal'
+          ? 'What is it you are running? A sentence is plenty.'
+          : 'What does the business do? A sentence is plenty.'];
+      },
       type: 'textarea',
       name: 'businessDescription',
-      placeholder: 'e.g. Independent dental practice, two locations, about 4,000 patients.',
-      errorMsg: 'Please tell us what the business does.',
+      placeholder: function (a) {
+        return a.edition === 'personal'
+          ? 'e.g. A house, a rental I manage, and two side projects, on three computers.'
+          : 'e.g. Independent dental practice, two locations, about 4,000 patients.';
+      },
+      errorMsg: 'Please tell us a little about it.',
       next: 'bzSize'
     },
 
     bzSize: {
-      section: 'Your business',
-      bot: ['How many people work there?'],
+      section: 'Your setup',
+      bot: function (a) {
+        return [a.edition === 'personal'
+          ? 'Besides you, who else would be using it?'
+          : 'How many people work there?'];
+      },
       type: 'choice',
       name: 'teamSize',
       options: [
@@ -406,7 +426,11 @@
 
     bzPain: {
       section: 'Where to start',
-      bot: ['Where does the team’s time go that it shouldn’t? If you already suspect a task an agent could take over, describe it. If you have no idea, that’s normal; finding it is what the roadmap is for.'],
+      bot: function (a) {
+        return [a.edition === 'personal'
+          ? 'What are you holding together right now that you would rather not be? The thing that only works because you keep it working is exactly what we are looking for.'
+          : 'Where does the team’s time go that it shouldn’t? If you already suspect a task an agent could take over, describe it. If you have no idea, that’s normal; finding it is what the free call is for.'];
+      },
       type: 'textarea',
       name: 'timeSinks',
       optional: true,
@@ -417,7 +441,11 @@
 
     bzTools: {
       section: 'Where to start',
-      bot: ['Last one. What tools does the business already run on? Whatever comes to mind is enough.'],
+      bot: function (a) {
+        return [a.edition === 'personal'
+          ? 'Last one. What is it all running on today? Whatever comes to mind is enough, computers included.'
+          : 'Last one. What tools does the business already run on? Whatever comes to mind is enough.'];
+      },
       type: 'textarea',
       name: 'currentTools',
       optional: true,

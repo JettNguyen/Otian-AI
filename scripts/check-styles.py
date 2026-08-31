@@ -52,6 +52,11 @@ FONT_SIZE_OK = [
 # glow and the autofill hack all use the box-shadow property without being a
 # light source, so a shared elevation token would say nothing true about them.
 SHADOW_OK = [
+    # app-security/ is the one page that mirrors the Archie app's palette rather than the site's
+    # (RESTYLE.md: "stays mirroring the Archie app's own palette, documented exception"), so it
+    # defines --shadow-card in its own light and dark blocks. Pointing it at a site token would
+    # pass this check by importing the cream page's ink into a page that is deliberately not it.
+    (re.compile(r'^var\(--shadow-card\)$'), "app-security's own palette, per RESTYLE.md"),
     (re.compile(r'^var\(--shadow-[a-z]+\)$'), "a token"),  # name checked against :root below
     (re.compile(r'^none$'), "removes one"),
     (re.compile(r'^inset\b'), "an inset rule, not an elevation"),

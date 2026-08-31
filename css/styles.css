@@ -1270,7 +1270,14 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   position: fixed;
   top: 0;
   right: 220px;
-  width: 160px;
+  /* Wide enough for a label that says what it is. The menu items were renamed to name their
+     subject ("What Computer Do I Need?" rather than "What to Run It On"), which is longer, and at
+     160px every one of them wrapped to two lines. The ceiling is 200px and the floor is the old
+     160px, because this panel sits beside the 220px drawer: on a 375px phone, 220 + 200 + a 16px
+     margin already exceeds the viewport, so the clamp gives the extra room only to the phones that
+     have it and never takes any away from the ones that do not. The closed-state transform below
+     is written in percentages of this width, so it stays correct at every step of the clamp. */
+  width: clamp(160px, calc(100vw - 236px), 200px);
   height: 100%;
   background: var(--bg-secondary);
   box-shadow: var(--shadow-lg);

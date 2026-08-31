@@ -12,6 +12,16 @@ fails on any money figure that does not appear below.
 Adding a figure to a page means adding it here first, with where it comes from. If you cannot
 say where a number comes from, it is not a fact and it does not go on the site.
 
+**A row is permission, and nothing in the row's note is read.** `allowed_figures()` in
+`scripts/check-facts.py` matches any line in this file that opens a table row with a backticked
+money figure, anywhere in the file, under any heading. It keeps the figure and throws the rest of
+the line away. So a row cannot be used to *record* a price we have decided not to publish, however
+firmly the note beside it says so: writing the row licenses that figure on every page the checker
+guards, and the sentence explaining that it is not authorised is invisible to the only thing
+enforcing this. Figures we are withholding go in prose bullets under **"Figures that are
+deliberately unpublished"** at the foot of this file. That is not a stylistic preference. It is the
+only shape the checker cannot see.
+
 **Last reconciled against the pages:** 2026-08-21
 
 ---

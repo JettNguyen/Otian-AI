@@ -1068,18 +1068,18 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    Three tiers, sized to what actually fits:
    • > 1100px          full row: logo (icon + wordmark + tagline), all menus,
                        theme toggle, Get Started, avatar.
-   • 901 to 1100px     drop the wordmark + tagline to their icon so the full set
+   • 971 to 1100px     drop the wordmark + tagline to their icon so the full set
                        of menus keeps fitting on one line; controls stay put.
-   • ≤ 900px           menus + Get Started move into the drawer, hamburger appears,
+   • ≤ 970px           menus + Get Started move into the drawer, hamburger appears,
                        and the wordmark returns (there's room again, and it keeps
                        the company name on screen at phone widths, which Google
                        OAuth verification requires on the home page). */
-@media (max-width: 1100px) and (min-width: 901px) {
+@media (max-width: 1100px) and (min-width: 971px) {
   .nav-inner { gap: 14px; }
   .nav-links { gap: 2px; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 970px) {
   /* Qualified with .nav so display:none beats the base .btn rule on .nav-cta
      regardless of source order. */
   .nav .nav-links,

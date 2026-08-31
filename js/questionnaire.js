@@ -89,7 +89,7 @@
           }
         ];
         opts.push({
-          value: 'roadmap',
+          value: 'consulting',
           label: 'I already have a lot running',
           desc: 'Our consulting: for more than one calendar, tools you wired together yourself, or pieces that only keep working because you keep them working. We scope the whole thing in writing before you book anything, then build it in phases.'
         });
@@ -98,7 +98,7 @@
       setPath: function (value) { return PATHS[value] ? value : 'guided'; },
       next: function (value) {
         if (value === 'waitlist') return 'wlEmail';
-        if (value === 'roadmap') return 'bzName';
+        if (value === 'consulting') return 'bzName';
         return 'gName';
       }
     },
@@ -339,7 +339,7 @@
       label: 'Send My Answers'
     },
 
-    /* ── Consulting path (the internal key is still `roadmap`, see PATHS below) ── */
+    /* ── Consulting path ── */
 
     bzName: {
       section: 'About you',
@@ -468,7 +468,7 @@
   var PATHS = {
     waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
     guided: ['audience', 'intent', 'gName', 'gEmail', 'gWork', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
-    roadmap: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
+    consulting: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
 
   var activePath = 'guided'; // default until the fork is answered
@@ -853,11 +853,11 @@
   function showThankyou() {
     var intent = answers.intent;
     var guidedBlock = document.getElementById('thankyouGuided');
-    var roadmapBlock = document.getElementById('thankyouRoadmap');
+    var consultingBlock = document.getElementById('thankyouConsulting');
     var waitlistBlock = document.getElementById('thankyouWaitlist');
     var bookingSection = document.getElementById('bookingSection');
     if (guidedBlock) guidedBlock.hidden = intent !== 'guided';
-    if (roadmapBlock) roadmapBlock.hidden = intent !== 'roadmap';
+    if (consultingBlock) consultingBlock.hidden = intent !== 'consulting';
     if (waitlistBlock) waitlistBlock.hidden = intent !== 'waitlist';
     /* Both consult paths book the same free discovery call; only the waitlist has nothing to book. */
     if (bookingSection) bookingSection.hidden = intent === 'waitlist';
@@ -865,9 +865,9 @@
     if (intent !== 'waitlist') {
       var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
       var nameEl = document.getElementById('thankyouName');
-      var nameElRoadmap = document.getElementById('thankyouNameRoadmap');
+      var nameElConsulting = document.getElementById('thankyouNameConsulting');
       if (nameEl) nameEl.textContent = firstName;
-      if (nameElRoadmap) nameElRoadmap.textContent = firstName;
+      if (nameElConsulting) nameElConsulting.textContent = firstName;
     }
 
     if (formEl) formEl.style.display = 'none';

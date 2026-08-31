@@ -37,6 +37,17 @@
        this page reads as the same product as the page the visitor arrived from. */
     :root {
       color-scheme: light;
+      /* The five rungs this page uses, and the card's shadow. Same names and same values as
+         css/styles.css, repeated here for the same reason the palette above is: this page links
+         no shared stylesheet, so a token it does not define is a token that does not resolve. */
+      --fs-2xs: 0.6875rem;
+      --fs-xs: 0.75rem;
+      --fs-sm: 0.8125rem;
+      --fs-base: 0.875rem;
+      --fs-lg: 1rem;
+      --shadow-card: 0 16px 36px rgba(74,66,58,0.10);
+      --radius: 12px;
+      --radius-sm: 8px;
       --bg-primary: #FCFAF8;
       --bg-card: rgba(255,255,255,0.94);
       --bg-input: #FFFFFF;
@@ -85,6 +96,7 @@
       --ok-ink: #8FBF7C;
       --ok-subtle: rgba(143,191,124,0.16);
       --danger: #FF9F97;
+      --shadow-card: 0 16px 36px rgba(0,0,0,0.5);
       /* The wash has less contrast to work with against a dark ground, so it is given more. */
       --glow-opacity: 0.10;
     }
@@ -112,7 +124,7 @@
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 24px; padding: 2rem;
-      box-shadow: var(--shadow-md);
+      box-shadow: var(--shadow-card);
     }
     .head { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
     .byline { font-size: var(--fs-2xs); letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }

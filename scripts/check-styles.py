@@ -147,20 +147,31 @@ def main():
     files = [ROOT / "css/styles.css"] + sorted(ROOT.glob("**/*.html"))
     files = [f for f in files if f.name not in SKIP_FILES and "node_modules" not in str(f)]
 
-    # The ladders as :root actually defines them. Checking the name against this
-    # rather than against a pattern is what stops a page defining its own
-    # --shadow-card three points off --shadow-md and passing on shape alone.
+    # Every token a page names has to resolve, and where it resolves from depends
+    # on whether the page links the shared stylesheet. Thirteen pages do not:
+    # app-security/ is standalone on purpose and mirrors the tokens it needs into
+    # its own :root. A var() that resolves nowhere does not fall back to the old
+    # literal, it drops the declaration, so an unresolvable --fs- rung is not a
+    # style nit but a font-size that silently stopped applying. This checks the
+    # thing that actually matters rather than the name's shape.
     css = (ROOT / "css/styles.css").read_text()
-    known = set(re.findall(r'(--(?:fs|shadow)-[0-9a-z]+)\s*:', css))
+    shared = set(re.findall(r'(--[0-9a-z-]+)\s*:', css))
 
     failures = []
     for f in files:
+        text = f.read_text()
         for line, prop, val, why in check(f):
             failures.append((f.relative_to(ROOT), line, prop, val, why))
-        for m in re.finditer(r'var\((--(?:fs|shadow)-[0-9a-z]+)\)', f.read_text()):
-            if m.group(1) not in known:
+        scope = set(re.findall(r'(--[0-9a-z-]+)\s*:', text))
+        # An actual <link>, not the string: app-security/ mentions css/styles.css
+        # three times in comments explaining why it does NOT link it, which is
+        # exactly the page this rule exists to protect.
+        if re.search(r'<link[^>]+href="[^"]*styles\.css', text):
+            scope |= shared
+        for m in re.finditer(r'var\((--(?:fs|shadow|radius)[0-9a-z-]*)\)', text):
+            if m.group(1) not in scope:
                 failures.append((f.relative_to(ROOT), 0, "var", m.group(1),
-                                 "names a token that :root does not define"))
+                                 "names a token nothing in this page's scope defines"))
 
     if args.report:
         css = (ROOT / "css/styles.css").read_text()

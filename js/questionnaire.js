@@ -174,6 +174,19 @@
       name: 'emailAddress',
       placeholder: 'jane@example.com',
       autocomplete: 'email',
+      next: 'gWork'
+    },
+
+    /* Added 2026-08-27. We were preparing for calls knowing the task and not the person, and a
+       task means different things depending on whose week it sits in. Worded to be answerable by
+       somebody retired or between jobs as easily as by somebody with a title. */
+    gWork: {
+      section: 'About you',
+      bot: ['What do you do? Work, studies, volunteering, running a household: whatever takes up your days.'],
+      type: 'text',
+      name: 'dailyWork',
+      placeholder: 'e.g. Realtor. Or: retired, and I run the HOA.',
+      errorMsg: 'A few words is plenty.',
       next: 'gTask'
     },
 
@@ -289,14 +302,31 @@
       next: 'gExtra'
     },
 
+    /* One box, asked two ways. "What are you running today?" is the most useful question we have
+       for somebody with a dozen cron jobs and a dead end for somebody who has opened ChatGPT once,
+       and "anything that eats your time?" is the reverse. The generic version is the fallback, and
+       it is what everybody got until 2026-08-27. */
     gExtra: {
       section: 'Closing',
-      bot: ['Last one. Anything else you would like us to know before your call?'],
+      bot: function (a) {
+        if (a.aiExperience === 'regular' || a.aiExperience === 'builds') {
+          return ['Last one. What are you running today, and what is not working about it? Tools, scripts, anything you have already automated.'];
+        }
+        if (a.aiExperience === 'none' || a.aiExperience === 'tried') {
+          return ['Last one. Anything else that eats your time? Even if you have no idea whether an agent could help, say it and we will tell you on the call.'];
+        }
+        return ['Last one. Anything else you would like us to know before your call?'];
+      },
       type: 'textarea',
       name: 'anythingElse',
       optional: true,
       skipLabel: 'Nothing to add',
-      placeholder: 'e.g. I work across two time zones. I tried an AI tool once and found it confusing.',
+      placeholder: function (a) {
+        if (a.aiExperience === 'regular' || a.aiExperience === 'builds') {
+          return 'e.g. A dozen scheduled jobs and a coding agent I babysit. Three computers, two of them always on.';
+        }
+        return 'e.g. Chasing paperwork for my parents. Keeping track of everyone’s schedules.';
+      },
       next: 'gConfirm'
     },
 
@@ -407,7 +437,7 @@
   /* ── Question order per path, for the progress bar ── */
   var PATHS = {
     waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
-    guided: ['audience', 'intent', 'gName', 'gEmail', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
+    guided: ['audience', 'intent', 'gName', 'gEmail', 'gWork', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
     roadmap: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
 
@@ -500,13 +530,17 @@
     updateProgress(nodeId);
 
     var msgs = botGroup(rec);
+    /* Like `options`, a node's messages may be a function of what has been answered so far. One
+       question that reads differently to a beginner and to somebody running their own scripts is
+       better than two nodes, which the progress bar would have to count as two. */
+    var bot = (typeof node.bot === 'function') ? node.bot(answers) : node.bot;
     var i = 0;
     function nextMsg() {
-      if (i >= node.bot.length) {
+      if (i >= bot.length) {
         renderInput(rec, node, prefill);
         return;
       }
-      var m = node.bot[i];
+      var m = bot[i];
       var html = (typeof m === 'string') ? m : m.html;
       var delay = 380 + Math.min(html.length * 5, 900);
       i += 1;
@@ -596,7 +630,7 @@
         field.className = 'form-input';
         field.type = node.type === 'email' ? 'email' : 'text';
       }
-      field.placeholder = node.placeholder || '';
+      field.placeholder = (typeof node.placeholder === 'function' ? node.placeholder(answers) : node.placeholder) || '';
       if (node.autocomplete) field.setAttribute('autocomplete', node.autocomplete);
       field.setAttribute('aria-label', node.section + ' answer');
       if (prefill) field.value = prefill;

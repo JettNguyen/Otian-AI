@@ -483,7 +483,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
    whole job and there is no rectangle to build. */
 .hm-wrap p, .hm-hero p, .hm-cta p, .page-hero p, .cta-banner p, .text-center p,
 .hm-lede, .hm-micro, .hm-hero-micro, .hero-subtitle, .calm-note--center,
-.works-with-note, .acct-lead, .acct-foot-note, .booking-note,
+.acct-lead, .acct-foot-note, .booking-note,
 .marketplace-split-note, .demo-player-caption, .vg-caption,
 .explain-figure figcaption { text-wrap: pretty; }
 
@@ -1497,59 +1497,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   transform: translateY(0);
 }
 
-/* ── Interactive states, everywhere ────────────────────────────────────────────
-   Audited 2026-08-15 by pulling every class that sits on an <a> or a <button> in the
-   markup (and in the JS that builds markup) and checking it against this stylesheet.
-   Result: .btn and five card types were complete; roughly forty other clickable things
-   had a hover and nothing else. A control that lights up on hover and then does nothing
-   when you press it reads as broken on a touchscreen, where there is no hover at all and
-   the press IS the only feedback.
-
-   Done as three shared rules rather than forty bespoke ones, because forty bespoke ones
-   drift. Two lists, split by a CSS fact rather than by taste: `transform` does nothing on
-   a non-replaced inline element, so an inline text link cannot be scaled and gets a fade
-   instead. Anything that is its own box gets the press.
-
-   The press is deliberately smaller than a hover. Hover says "this is a thing"; the press
-   only has to confirm the tap landed. */
-
-/* 1. Boxes: buttons, chips, pills, tabs, icon buttons, whole clickable cards. */
-.social-link:active,
-.nav-logo:active,
-.nav-hamburger:active,
-.nav-account-btn:active,
-.nav-more-toggle:active,
-.nav-drawer-cat:active,
-.nav-drawer-back:active,
-.theme-toggle:active,
-.accordion-trigger:active,
-.glossary-trigger:active,
-.marketplace-filter-pill:active,
-.marketplace-status-badge:active,
-.mp-type-tab:active,
-.mp-back-link:active,
-.mp-price-btn:active,
-.mp-card-link:active,
-.mp-pack-card:active,
-.mp-product-card:active,
-.resource-filter:active,
-.start-here-pill:active,
-.az-letter:active,
-.phone-store-chip:active,
-.phone-store-more:active,
-.phone-tab:active,
-.site-banner-close:active,
-.status-toast-x:active,
-.checklist-item:active,
-.checklist-reset-btn:active,
-.demo-player-toggle:active,
-.btn-run:active,
-.use-case-item:active,
-.hero-status:active,
-.proof-chip--link:active {
-  transform: scale(0.97);
-}
-
 /* 2. Inline text links, where transform is a no-op. */
 .marketplace-text-link:active,
 .price-card-link:active,
@@ -1565,46 +1512,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .mp-card-expand:active,
 .act-remove:active {
   opacity: 0.65;
-}
-
-/* A press is not an animation anybody asked for; honour the setting that says so. */
-@media (prefers-reduced-motion: reduce) {
-  .social-link:active,
-  .nav-logo:active,
-  .nav-hamburger:active,
-  .nav-account-btn:active,
-  .nav-more-toggle:active,
-  .nav-drawer-cat:active,
-  .nav-drawer-back:active,
-  .theme-toggle:active,
-  .accordion-trigger:active,
-  .glossary-trigger:active,
-  .marketplace-filter-pill:active,
-  .marketplace-status-badge:active,
-  .mp-type-tab:active,
-  .mp-back-link:active,
-  .mp-price-btn:active,
-  .mp-card-link:active,
-  .mp-pack-card:active,
-  .mp-product-card:active,
-  .resource-filter:active,
-  .start-here-pill:active,
-  .az-letter:active,
-  .phone-store-chip:active,
-  .phone-store-more:active,
-  .phone-tab:active,
-  .site-banner-close:active,
-  .status-toast-x:active,
-  .checklist-item:active,
-  .checklist-reset-btn:active,
-  .demo-player-toggle:active,
-  .btn-run:active,
-  .use-case-item:active,
-  .hero-status:active,
-  .proof-chip--link:active {
-    transform: none;
-    opacity: 0.75;
-  }
 }
 
 /* 3. The two that had no hover at all. The rest of the nav lights up on hover and these
@@ -2191,54 +2098,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 .find-hit:hover, .find-hit:focus-visible { border-color: var(--accent); }
 
-/* The hero's proof row. Chips are links on purpose: every claim on one is the short
-   form of a claim on /trust/, and a chip a reader cannot click through to is exactly
-   the kind of unbacked assertion this row previously carried. The false chip removed
-   on 2026-07-20 ("we never hold your data") is why the wording here is scoped and why
-   each one goes somewhere. */
-.hm-proofline {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 26px 0 0;
-}
-
-.proof-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 14px;
-  background: var(--bg-card);
-  border-radius: 999px;
-  font-size: var(--fs-sm);
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.proof-chip-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* The one chip that goes somewhere. It sits last in the row and takes the reader to the page
-   that backs up the five before it, which is the only claim here a competitor cannot copy by
-   typing it. Accent-ink rather than accent: accent is tuned for fills and fails AA as text. */
-.proof-chip--link {
-  color: var(--accent-ink);
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s ease;
-}
-
-.proof-chip--link:hover,
-.proof-chip--link:focus-visible {
-  background: var(--accent-subtle);
-}
-
 /* ========================================
    11. Feature Cards Grid
    ======================================== */
@@ -2459,248 +2318,8 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   }
 }
 
-/* ── Works-with: the river band under the hero ───────────────────────────────
-   One dense strip of the 22 names, two rows drifting opposite ways. Chips rather than a
-   comma list so the eye lands on a mark it recognises without reading anything, which is
-   the entire job: this sits directly under the hero, before a visitor has read a word.
-
-   The motion contract, so nobody "fixes" half of it:
-   - .ww-track is six identical lists and the keyframe translates -50%, so the landing
-     frame is pixel-identical to the start. Uniform spacing comes from padding-right on
-     each list, NOT gap on the track: a track gap leaves half a gap at the -50% point and
-     the loop visibly jumps.
-   - 112s is not a taste choice on its own: half a track is roughly 4500px, and 4500/112 is
-     about 40px/s, slow enough to read a name mid-drift. Change duration and width
-     together or the speed changes.
-   - Hover pauses the row under the cursor; the checkbox in the section markup pauses
-     both rows without a pointer, which is what WCAG 2.2.2 actually asks for; and
-     reduced-motion replaces the whole mechanism with a static wrapped row. */
-.ww-band {
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
-  padding: 30px 0 32px;
-}
-
-.ww-band-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
-
-.ww-band-head .section-label {
-  margin-bottom: 0;
-}
-
-.ww-band-line {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: var(--fs-2xl);
-  font-weight: 400;
-  margin: 0;
-}
-
-.ww-pause-btn {
-  margin-left: auto;
-  align-self: center;
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--bg-card);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background var(--transition-quick), color var(--transition-quick);
-}
-
-.ww-pause-btn:hover {
-  background: var(--surface-hover);
-  color: var(--text-primary);
-}
-
-.ww-pause-btn:active {
-  background: var(--surface-hover-strong);
-}
-
-.ww-pause-box:focus-visible ~ .container .ww-pause-btn {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.ww-pause-glyph {
-  width: 12px;
-  height: 12px;
-  display: block;
-}
-
-.ww-pause-on { display: none; }
-.ww-pause-box:checked ~ .container svg.ww-pause-on { display: block; }
-.ww-pause-box:checked ~ .container span.ww-pause-on { display: inline; }
-.ww-pause-box:checked ~ .container .ww-pause-off { display: none; }
-
-.ww-mq {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-
-.ww-mq + .ww-mq { margin-top: 10px; }
-
-.ww-track {
-  display: flex;
-  width: max-content;
-  animation: ww-drift 112s linear infinite;
-}
-
-.ww-mq--rev .ww-track { animation-direction: reverse; }
-
-.ww-mq:hover .ww-track,
-.ww-pause-box:checked ~ .ww-mq .ww-track {
-  animation-play-state: paused;
-}
-
-/* Doubled selector on purpose: .works-with-list's own margin/padding/gap rule sits later
-   in this file and wins a specificity tie, which is how the seam between list copies
-   shipped with zero gap (its padding: 0 beat the padding-right here). The padding-right
-   must always equal the in-list gap: it is the spacing at the -50% loop seam, and any
-   mismatch shows as a hitch between the last pill and the first. */
-.works-with-list.ww-run {
-  flex-wrap: nowrap;
-  gap: 10px;
-  padding-right: 10px;
-}
-
-/* Each chromatic pill takes a light wash of its brand's own colour, the same hex its
-   mark already carries, so the tint is sourced exactly like the shape. Achromatic brands
-   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) publish ink-on-white and
-   deliberately keep the plain white card pill: an earlier neutral-grey fallback made them
-   look disabled next to the coloured rows. The attribute selector is the gate, because
-   only tinted pills carry the inline --ww-tint; and the doubled class outranks the base
-   pill rule that sits later in this file (equal specificity shipped tintless pills once
-   already). Browsers without color-mix keep the plain card pill. */
-.works-with-list.ww-run li[style*="--ww-tint"] {
-  background: color-mix(in srgb, var(--ww-tint) 12%, var(--bg-card));
-  border-color: color-mix(in srgb, var(--ww-tint) 32%, var(--border));
-}
-
 @keyframes ww-drift {
   to { transform: translateX(-50%); }
-}
-
-.ww-band .stat-row {
-  margin: 22px 0 0;
-}
-
-.ww-band .works-with-note { margin-top: 14px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .ww-track { animation: none; width: auto; }
-  .ww-mq {
-    -webkit-mask-image: none;
-    mask-image: none;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .ww-track > [aria-hidden="true"] { display: none; }
-  .ww-run { flex-wrap: wrap; }
-  .ww-pause-btn { display: none; }
-}
-
-.works-with-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.works-with-list li {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 30px;
-  padding: 5px 12px 5px 8px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg-card);
-  font-size: var(--fs-base);
-  font-weight: 500;
-  color: var(--text-primary);
-}
-
-/* Brand marks for the works-with row. Every one of the 24 is the company's own artwork, and
-   each traces to a source that can be named:
-
-   - Seven come from `SERVICE_MARK` and `OutlookMark` in the Archie app's src/app/connect.tsx,
-     so the product and the site agree about what a service looks like.
-   - Ten came from Simple Icons, verifiably the same source the app used (its notion.svg is
-     byte-identical to the path already in connect.tsx).
-   - Slack, OpenAI, xAI, and the 2026 Google set (Gmail, Calendar, Tasks) and 2025 Gemini
-     sparkle are the official artwork via Wikimedia Commons, each file's source page checked:
-     Tasks is credited to workspace.google.com directly, Gemini was extracted from Google's
-     own About Gemini page, Slack from Slack's brandfolder, and the Gmail/Calendar 2026 files
-     share the exact palette and May 19, 2026 redesign date with the Google-credited Tasks
-     file. Groq is the bolt from groq.com/favicon.svg and Fireflies the logo served by
-     fireflies.ai, both fetched from the companies themselves on 2026-08-15.
-   - lemlist is lemlist_symbol.svg from their own brand directory on web-assets.lemlist.com,
-     and GoHighLevel is the symbol half of the logo their homepage loads (the wordmark beside it
-     is 172 units wide and would be a stripe at 18px, so only the three arrows are kept and the
-     original geometry is untouched). Both fetched on 2026-08-26.
-
-   Gradient, mask and filter ids inside these inline SVGs are namespaced per brand (wwsl-,
-   wwgm-, ...) because inline SVG ids share one document: two marks both defining id="a"
-   would silently take the first one's gradient.
-
-   Colour follows the brand rather than us, which is the app's rule and its reasoning: a
-   chromatic mark keeps its colour, because the colour is half the recognition (Telegram's
-   blue, Discord's blurple, Linear's purple, Airtable's three). An achromatic one takes
-   currentColor, which is what those brands specify, since they publish black on light
-   grounds and white on dark, and it is the only version that survives dark mode (Notion,
-   GitHub, Matrix, OpenAI, xAI, LIFX). Anthropic's tile wears Claude's splotch in Claude's
-   own coral rather than the corporate A, matching the app: the label names the company, and
-   the mark somebody has actually seen is the one on the product they used.
-
-   .ww-mark--mono is the two-letter fallback for any future service that arrives before its
-   artwork does; nothing uses it today. GoHighLevel is the reason to keep it: their brand kit is
-   behind a support portal, so if the homepage stops serving that file there is somewhere to fall
-   back to that is not a drawing of ours. */
-.ww-mark {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  color: var(--text-primary);
-}
-
-.ww-mark svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.ww-mark--mono {
-  border-radius: 5px;
-  background: var(--surface-soft-strong);
-  color: var(--text-muted);
-  font-size: var(--fs-3xs);
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-.works-with-note {
-  max-width: 860px;
-  margin: 32px auto 0;
-  text-align: center;
-  font-size: var(--fs-md);
-  color: var(--text-secondary);
-  line-height: 1.8;
 }
 
 /* Objection answers under a step, not a second description of it. Deliberately quieter than
@@ -6092,11 +5711,6 @@ html.js .fade-up:not(.visible) {
     gap: 6px;
   }
 
-  .proof-chip {
-    justify-content: center;
-    padding: 6px 12px;
-  }
-
   .form-container {
     padding-left: 16px;
     padding-right: 16px;
@@ -7930,9 +7544,6 @@ html[data-theme="dark"] .booking-container iframe {
     padding: 14px 24px;
   }
 }
-
-
-
 
 
 /* ==========================================================================
@@ -10670,11 +10281,6 @@ html[data-theme="dark"] .booking-container iframe {
    to name its subject before it claims anything about it: the headline never says what the
    thing is, so a lede starting on "Yours" leaves the reader owning an unnamed it. */
 .hm-lede strong { color: var(--text-primary); font-weight: 600; }
-/* The three steps that are left after the download. Kept short on purpose: the length
-   of this line is the claim, so it never grows into a sentence. */
-/* c-blue-ink, not c-blue: the bright blue is a fill and a stroke colour, and this is
-   0.02em-tracked text on the page ground. */
-.hm-kicker { margin: 18px 0 0; font-size: clamp(0.9rem, 0.83rem + 0.36vw, 1.1rem); font-weight: 600; letter-spacing: 0.02em; color: var(--c-blue-ink); }
 .hm-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
 /* Not flex. As a flex row the sentence and the link beside it become two flex items, so on a
    narrow screen they stop being one line of prose and lay out as two columns, each wrapping
@@ -10693,37 +10299,6 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pill b { color: var(--accent-ink); font-weight: 600; }
 .hm-demo { max-width: 1000px; margin: 64px auto 0; }
 .hm-demo-cap { margin-top: 14px; text-align: center; }
-
-/* Numbers */
-.hm-numbers { padding: 8px 24px 88px; }
-.hm-numbers ul {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(4, auto); gap: 0 64px; justify-content: center;
-}
-.hm-numbers li { text-align: center; }
-.hm-num-top { display: flex; align-items: center; justify-content: center; gap: 10px; }
-.hm-num-top svg { color: var(--accent); flex-shrink: 0; }
-.hm-numbers b {
-  font-family: Georgia, 'Times New Roman', serif; font-weight: 500;
-  font-size: var(--fs-8xl); line-height: 1.1; font-variant-numeric: tabular-nums;
-}
-.hm-numbers .hm-num-label {
-  display: block; font-size: var(--fs-xs); font-weight: 650; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--text-muted);
-}
-@media (max-width: 640px) { .hm-numbers ul { grid-template-columns: repeat(2, auto); gap: 28px 48px; } }
-
-/* Connections band: the river band restyled to the quiet grammar */
-.ww-band--home { background: var(--bg-secondary); border-bottom: 0; padding: 96px 0; }
-/* The headline stays truly centered and the pause control rides its row at the
-   right edge of the container: absolute, so the button's width never nudges the
-   centering, anchored to the bottom of the head where the headline sits. */
-.ww-band--home .ww-band-head { position: relative; flex-direction: column; align-items: center; text-align: center; gap: 4px; margin-bottom: 44px; }
-.ww-band--home .ww-pause-btn { position: absolute; right: 0; bottom: 4px; margin-left: 0; }
-.ww-band--home .works-with-list li,
-.ww-band--home .works-with-list.ww-run li[style*="--ww-tint"] { background: transparent; border: 0; box-shadow: none; font-weight: 600; }
-.ww-band--home .ww-band-line { font-size: clamp(1.85rem, 3.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.18; }
-.ww-band--home .works-with-note { text-align: center; max-width: 620px; margin: 40px auto 0; font-size: var(--fs-sm); color: var(--text-muted); }
 
 /* The day spine. The section paints its own flat ground on purpose: the body
    carries soft radial washes, and the headline masks that hide the spine line
@@ -10850,50 +10425,6 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-chipline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .hm-chipline > svg { color: var(--c-blue); flex-shrink: 0; }
 
-/* Inside the app: the screenshot carousel */
-.hm-shots-tabs { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin: 40px 0 18px; }
-.hm-shots-tab {
-  font-family: inherit; font-size: var(--fs-base); font-weight: 600; padding: 7px 16px;
-  border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card);
-  color: var(--text-secondary); cursor: pointer; transition: border-color var(--transition-quick), color var(--transition-quick);
-}
-.hm-shots-tab:hover { border-color: var(--accent); color: var(--text-primary); }
-.hm-shots-tab.is-on { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-/* Each shot is a plain rectangle of the app window, so the rounding and the shadow are
-   the page's job, not the file's: one radius and one shadow for all three. They are
-   stacked in one grid cell and crossfaded, which keeps the stage height steady instead
-   of jumping between slides. */
-.hm-shots-stage { max-width: 860px; margin: 0 auto; display: grid; }
-.hm-shot {
-  grid-area: 1 / 1; margin: 0;
-  opacity: 0; visibility: hidden;
-  transform: scale(0.985);
-  transition: opacity 420ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-              visibility 0s linear 420ms;
-}
-.hm-shot.is-on {
-  opacity: 1; visibility: visible; transform: none;
-  transition-delay: 0s, 0s, 0s;
-}
-.hm-shot img {
-  width: 100%; height: auto; display: block;
-  border-radius: var(--radius-sm);
-  /* Black, and not a token: a screenshot is its own image, so the shadow belongs to the photo
-     rather than to the page ink. Listed in scripts/check-styles.py. */
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34);
-}
-/* The chat shot is a phone standing in front of the window, so it is cut out rather than
-   rectangular: the shadow has to follow the silhouette, and a radius would round the box
-   around both of them. */
-.hm-shot--cut img {
-  border-radius: 0; box-shadow: none;
-  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.34));
-}
-@media (prefers-reduced-motion: reduce) {
-  .hm-shot { transition: opacity 1ms linear, visibility 0s linear 1ms; transform: none; }
-}
-
 /* Where your words go */
 .hm-flow { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 48px 0 12px; }
 .hm-node {
@@ -10968,13 +10499,12 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero .section-label { animation: hm-fade-up-in 0.6s ease 0.05s backwards; }
 .hm-hero h1 { animation: hm-fade-up-in 0.6s ease 0.12s backwards; }
 .hm-hero .hm-lede { animation: hm-fade-up-in 0.6s ease 0.2s backwards; }
-.hm-hero .hm-kicker { animation: hm-fade-up-in 0.6s ease 0.24s backwards; }
 .hm-hero .hm-actions { animation: hm-fade-up-in 0.6s ease 0.28s backwards; }
 .hm-hero .hm-hero-micro { animation: hm-fade-up-in 0.6s ease 0.34s backwards; }
 .hm-hero .hm-pill { animation: hm-fade-up-in 0.6s ease 0.4s backwards; }
 .hm-hero .hm-demo { animation: hm-fade-up-in 0.7s ease 0.48s backwards; }
 @media (prefers-reduced-motion: reduce) {
-  .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede, .hm-hero .hm-kicker,
+  .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede,
   .hm-hero .hm-actions, .hm-hero .hm-hero-micro, .hm-hero .hm-pill,
   .hm-hero .hm-demo { animation: none; }
   .hm-spine::before { height: calc(100% - 12px); }

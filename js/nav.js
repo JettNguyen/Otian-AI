@@ -455,7 +455,7 @@
 (function () {
   var SEL = '.hm-wrap p, .hm-hero p, .hm-cta p, .page-hero p, .cta-banner p, .text-center p,'
           + '.hm-lede, .hm-micro, .hm-hero-micro, .hero-subtitle, .calm-note--center,'
-          + '.works-with-note, .acct-lead, .acct-foot-note, .booking-note,'
+          + '.acct-lead, .acct-foot-note, .booking-note,'
           + '.marketplace-split-note, .demo-player-caption, .vg-caption,'
           + '.explain-figure figcaption, .section-header p, .pricing-why p';
 

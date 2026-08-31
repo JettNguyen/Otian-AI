@@ -131,7 +131,14 @@ reason.**
   is the only thing that reliably busts it. One scripted find-and-replace across every page.
 
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
-  are its kinds. Never "add an add-on".
+  are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is
+  deliberate:** `js/catalog.js` and `js/marketplace.js` map the `subagents` collection to
+  `kind: "specialist"` with `shelf: "skill"`, because a Specialist differs from a Skill in how it is
+  built and not in anything a shopper is choosing between. So the marketplace shows three type tabs,
+  three tab colours are defined (`--c-blue` is documented in `css/styles.css` as "no longer an add-on
+  colour"), and `skills-marketplace/what-is-an-add-on/` explains three. Four is the catalog's
+  structure and the count in FACTS.md; three is the taxonomy the reader is shown. Do not "fix" the
+  explainer page to four: a redirect stub said four on 2026-08-31 and it was the stub that was wrong.
 - The thing Archie runs on is a **"computer"**, never a "machine" (swept 2026-08-20; "machine"
   is borderline jargon and broke the one-name-per-concept rule, since "computer" already carried
   the concept everywhere else). Blog posts keep their own voice.

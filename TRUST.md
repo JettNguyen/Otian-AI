@@ -770,6 +770,46 @@ Before shipping anything that writes to Firestore, come back here first.
 
 ## ⛔ Claims That Are FALSE Today — must not ship
 
+### ✅ One agent, many add-ons: what a scope or breadth claim may say
+
+**Added 2026-08-31, because the homepage began making a breadth claim and no row governed one.**
+Every other row here governs what we may say about *custody*. This one governs what we may say
+about *how much of a life* Archie covers, which is the claim the coverage grid on `index.html`
+makes and the claim Jack has asked for three times.
+
+**Approved wordings:**
+- "One agent, not one app per job."
+- "Not just the work half."
+- Naming domains by enumeration: "the inbox, the bills, the prescriptions, the birthdays", or any
+  other list whose every item is a **shipped add-on named exactly as its manifest names it**.
+- "151 add-ons, and they all run on the one agent." (The count is FACTS.md's, re-counted by
+  `scripts/check-facts.py` against the Archie repo on every commit.)
+
+**Why it is true:** add-ons are data, not code (see the row above), loaded by the one agent rather
+than installed as separate programs, so breadth is a property of the catalog and not a claim about
+the binary. The catalog is `/Users/Games/Desktop/Code/Archie/data/marketplace/**`, which is the
+same tree check-facts.py counts, so any enumeration is checkable by a reader and by a script.
+
+**Boundaries, and these are the point of the row:**
+- ⛔ **Never "everything", "anything", "your whole life", or "no ceiling."** Unfalsifiable, and
+  false: `compare/building-it-yourself/` already tells readers, correctly, that add-ons being
+  instructions rather than code *is* a ceiling. A breadth claim that contradicts our own comparison
+  page is worse than no breadth claim.
+- ⛔ **Never a count of domains, and never a count of "personal" add-ons.** Enumerating is the
+  claim; summarising the enumeration is the overclaim, and a domain count is a number nobody
+  measured.
+- ⛔ **Never name an add-on that is not in the catalog, and never rename one.** A grid that prints a
+  name a reader cannot find is the fastest way to lose the argument the grid exists to win.
+- ⚠️ **The blanks are load-bearing.** Any enumeration ships beside the things we do not cover, in
+  the same element. A list without holes reads as marketing; that is why `index.html` carries three
+  empty rows under the fourteen full ones.
+- ⚠️ **Breadth has a published cost and it must not be hidden.** `archie/pricing/` measures it: "A
+  dozen add-ons with their routines left on fires about 320 times a month: eight every morning,
+  three every week, one before every meeting. About a third of the bill, before anybody typed
+  anything." Any page inviting a reader to add many add-ons carries that ceiling or links to it.
+- ⛔ **Never lean a breadth claim on the connectors band.** Eight of those brands have never met a
+  live key. Recognition is not capability.
+
 ### ✅ Calendar changes require your confirmation — SHIPPED, enforced in code (was ⛔ until 2026-07-20)
 
 **Approved wording:** "When your agent wants to change a calendar you've connected — create,

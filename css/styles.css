@@ -10957,3 +10957,13 @@ html[data-theme="dark"] .booking-container iframe {
   .cover-job { font-size: var(--fs-md); }
   .cover-addon { font-size: var(--fs-md); }
 }
+
+/* The cost of breadth, stated where breadth is offered. TRUST.md's scope row requires any page
+   inviting a reader to add many add-ons to carry the measured bill or link to it, so this sits
+   inside the grid's own section rather than in the pricing band further down. */
+.cover-ceiling {
+  margin: 28px 0 0;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+  max-width: 62ch;
+}

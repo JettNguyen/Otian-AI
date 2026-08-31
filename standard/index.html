@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260831-1" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260831-2" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -156,120 +156,329 @@
 
   <main id="main">
 
-    <section class="section" aria-labelledby="std-heading">
-      <div class="hm-wrap hm-head">
+    <section class="page-hero" aria-label="Page introduction">
+      <div class="page-hero-inner">
         <span class="section-label fade-up">The Otian Standard</span>
-        <h1 id="std-heading" class="fade-up delay-1">How we intend to behave.</h1>
-        <p class="hm-lede fade-up delay-1">This says nothing about what we sell. It is the answer to a different question, written down while it was easy to answer, so that we already know what we decided on the day it gets expensive.</p>
-        <p class="hm-micro fade-up delay-2">This is the public half of a longer document we keep internally. Version 3.0, 2026. If a line here is one we would not actually hold ourselves to, it should be deleted rather than admired.</p>
+        <h1 class="fade-up delay-1">How we intend to behave.</h1>
+        <p>This is not a business plan. It says nothing about what we sell or how we grow. It is the answer to a different question, written down while it was easy to answer, so that we already know what we decided on the day it gets expensive.</p>
+        <p class="page-hero-note">Our operating principles, in full. Version 4.0, 2026.</p>
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="std-what-heading">
-      <div class="container">
+    <section class="section section-alt" aria-labelledby="std-about-heading">
+      <div class="container container-narrow">
         <div class="section-header">
-          <span class="section-label fade-up">What we are actually in</span>
-          <h2 id="std-what-heading" class="fade-up delay-1">A service business that ships software.</h2>
-          <p>The code is how the service gets delivered. It is not the product. A software company measures features shipped; a service company measures whether one particular person is better off tonight than they were this morning. When those point in different directions we are the second kind, and that decides what we build, what we refuse, and what we apologise for.</p>
-          <p>What we are trying to do, stated plainly enough to be measured against: <strong>give ordinary people an AI agent they actually own, one that takes friction out of the day and puts real time and real control back in their hands.</strong></p>
+          <span class="section-label fade-up">The document</span>
+          <h2 id="std-about-heading" class="fade-up delay-1">What this is, and what to do with it.</h2>
         </div>
+        <div class="trust-prose fade-up delay-2">
+          <p>We wrote it down for three reasons. First, so that when a decision is hard and money is on one side of it, we already know what we decided back when it was easy. Second, so anyone who works with us, buys from us, or builds for us knows exactly what to expect and can call us out when we fall short. Third, because a two-person company becomes a bigger company, and the culture that gets written down is the one that survives.</p>
+          <p>Everything below is meant to be enforceable. <strong>If a line here is one we would not actually hold ourselves to, it should be deleted rather than admired.</strong></p>
+        </div>
+        <div class="trust-table-wrap fade-up delay-2">
+          <table class="trust-table">
+            <tbody>
+              <tr><th scope="row">Company</th><td>Otian AI LLC</td></tr>
+              <tr><th scope="row">Version</th><td>4.0, 2026</td></tr>
+              <tr><th scope="row">Principles</th><td>15, plus one tie-breaker</td></tr>
+              <tr><th scope="row">Written by</th><td>Jett Nguyen, Jack Raney</td></tr>
+              <tr><th scope="row">Reviewed</th><td>Quarterly, revised yearly</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <nav class="std-toc fade-up delay-3" aria-label="Contents">
+          <p class="std-toc-title">Contents</p>
+          <ol class="std-toc-list">
+            <li><a href="#std-business">What business we are actually in</a></li>
+            <li><a href="#std-aim">Our definite chief aim</a></li>
+            <li><a href="#std-sacrifice">What we are willing to sacrifice</a></li>
+            <li><a href="#std-p1">1. Go the extra mile</a></li>
+            <li><a href="#std-p2">2. Value first, always</a></li>
+            <li><a href="#std-p3">3. Say the true thing, especially when it costs us</a></li>
+            <li><a href="#std-p4">4. Do not screw people over</a></li>
+            <li><a href="#std-p5">5. Build the incentives so that doing right is the easy path</a></li>
+            <li><a href="#std-p6">6. Privacy is a promise, not a feature</a></li>
+            <li><a href="#std-p7">7. The agent acts under your authority, never around it</a></li>
+            <li><a href="#std-p8">8. The three moments of service</a></li>
+            <li><a href="#std-p9">9. Treat people well</a></li>
+            <li><a href="#std-p10">10. Take care of our own first</a></li>
+            <li><a href="#std-p11">11. Push authority down to whoever is holding the problem</a></li>
+            <li><a href="#std-p12">12. Own mistakes fast, and write a great last chapter</a></li>
+            <li><a href="#std-p13">13. Do fewer things, and finish the back of the fence</a></li>
+            <li><a href="#std-p14">14. Build for the person who is not technical</a></li>
+            <li><a href="#std-p15">15. Personal initiative and persistence</a></li>
+            <li><a href="#std-commitment">The commitment: the line we do not cross</a></li>
+            <li><a href="#std-tiebreaker">When principles collide: the tie-breaker</a></li>
+            <li><a href="#std-measurement">How we will know if this is working</a></li>
+            <li><a href="#std-enforcement">Holding ourselves to it</a></li>
+          </ol>
+        </nav>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="std-give-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">What we trade away</span>
-          <h2 id="std-give-heading" class="fade-up delay-1">Said in advance, so it is not decided on a bad month.</h2>
-        </div>
-        <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
-          <div class="calm-list-item">
-            <span class="calm-list-label">Speed of growth, for quality of service</span>
-            <p>We would rather have a hundred people who would argue with a stranger on our behalf than a thousand who are indifferent. We will turn business away to stay inside what we can actually serve.</p>
-          </div>
-          <div class="calm-list-item">
-            <span class="calm-list-label">Margin, for trust</span>
-            <p>There is a maximum markup on anything we resell or pass through. It is written down internally and we do not raise it because we discover we could. Growth comes from serving more people, not from taking more per person.</p>
-          </div>
-          <div class="calm-list-item">
-            <span class="calm-list-label">Short-term revenue, for a reputation that compounds</span>
-            <p>Most of what is on this page costs money in the month it is applied. If we are ever tempted by &ldquo;just this once, for cash flow&rdquo;, this line is the answer.</p>
-          </div>
-          <div class="calm-list-item">
-            <span class="calm-list-label">What is not for sale at any price</span>
-            <p>The privacy architecture, the honesty, and the service standard. We would rather stay small permanently than trade one of them.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="section" aria-label="The Otian Standard in full">
+      <article class="article-body fade-up delay-1">
 
-    <section class="section section-alt" aria-labelledby="std-p-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">The promises</span>
-          <h2 id="std-p-heading" class="fade-up delay-1">What you should be able to hold us to.</h2>
-        </div>
-        <div class="trust-limits mt-48 fade-up delay-1">
-          <div class="trust-limit">
-            <h3>We render more than we are paid for, and we do not mention it.</h3>
-            <p>Every engagement ships at least one thing you did not pay for and did not ask for, chosen because we noticed you needed it. A skill configured you never mentioned, an annoyance fixed while we were in there, a cheat sheet in your own words. We do not invoice it or point at it. If we cannot find one, we did not look closely enough.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>We only make money after you are better off.</h3>
-            <p>Before we charge for something we can name what you get: hours back, a task you stop doing, money saved. We will tell you on a call that you are not a fit, that a free tool would serve you better, or that you could do this yourself in an hour. Those are all acceptable answers and none of them costs you anything.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>We say the true thing, especially when it costs us.</h3>
-            <p>We describe what the product does today, not next quarter. Limitations sit next to capabilities, in the marketing copy, not buried in an FAQ. Our prices are published so nobody books a call to learn a number. We will not let you stay wrong about what you are buying because correcting you would be awkward.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>No dark patterns, no urgency, no surprises.</h3>
-            <p>Cancelling is as easy as starting. No countdown timers for discounts that are not expiring, no pre-checked boxes, no retention gauntlet. No silent renewals and no price rise without hearing it from us first. We will not use urgency, shame or fear to close a sale, and we will not design any flow that works only if you are not reading carefully.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>Privacy is the architecture, not a setting.</h3>
-            <p>Archie runs on your computer, on your own AI account, so your conversations go straight to the AI company and never through us. We do not sell, rent, broker or trade your data, aggregated or otherwise, and we do not train on it. If we are ever acquired or wound down, those commitments bind whoever succeeds us or the deal does not happen: that is a term of our <a href="../terms-of-service/">agreement</a>, not an intention. The <a href="../trust/">Trust page</a> lists everything we hold, and how to verify it yourself.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>You hear back the same day.</h3>
-            <p>Every message gets a real human response the day it arrives, even when the response is &ldquo;I have read this, I am working on it, you will have a full answer Thursday&rdquo;. Nobody should wonder whether we saw it. We do not measure our support by call length or tickets closed, because every one of those quietly instructs the person to get off the phone.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>When we get it wrong, you hear it from us first.</h3>
-            <p>We tell you before you discover it. We say what happened in plain words, not passive voice: we made a mistake, not an error occurred. We say what we are doing and by when, we make it right materially rather than with an apology, and then we do one more thing. No non-disparagement clause attached to a refund, ever: if you had a bad time you are free to say so.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>If it needs a terminal, we have not finished it.</h3>
-            <p>Powerful AI tooling is currently reserved for people who can code, and that is the whole reason we exist. Plain language everywhere. Any jargon that must appear gets explained where it appears. You should always be able to answer three questions: what is it doing, why, and how do I stop it. We assume you are capable and new, never that you will not keep up.</p>
-          </div>
-          <div class="trust-limit">
-            <h3>We beat competitors by being better.</h3>
-            <p>Never by misrepresenting them. Every claim we print about another company is sourced to that company&rsquo;s own page and dated, and our comparison pages carry a section where the alternative wins.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <h2 id="std-business">What business we are actually in</h2>
+        <p>We build software. That is not the business we are in.</p>
+        <p>We are a customer service business. We help people add value to their own lives through AI agents they can actually reach, actually understand, and actually own. The code is the delivery mechanism. The service is the product.</p>
+        <p>This distinction is not decorative. It determines what we measure, who we hire, what we apologize for, and what we refuse to do. A software company optimizes for features shipped. A service company optimizes for whether a specific human being is better off tonight than they were this morning. When those two point in different directions, we are the second kind of company.</p>
+        <p>The companies worth imitating were never really in the business they appeared to be in. The great hotels were not in the room rental business. The great retailers were not in the business of the thing on the shelf. We are not in the software business.</p>
 
-    <section class="section" aria-labelledby="std-tie-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">When it is close</span>
-          <h2 id="std-tie-heading" class="fade-up delay-1">The tie-breaker.</h2>
-          <p>When a decision is genuinely close and the promises above point different ways, we run these in order, and if any fails we do not do it. Would we be comfortable if you knew everything we know about this decision, including why we made it? Would we recommend it to a parent, or to a friend who trusted us and would not check? Does it give you more than you paid for, or less? If someone with no loyalty to any of this optimised it ruthlessly, would you still be well served? If it appeared on the front page in two years, would we defend it or explain it away?</p>
-          <p>If we find ourselves building an argument for why this particular case is an exception, that argument is the signal to stop. The short version, when there is no time for any of it: <strong>the money is never the reason.</strong></p>
-        </div>
-      </div>
+        <h2 id="std-aim">Our definite chief aim</h2>
+        <p>Vague wanting accomplishes nothing. A purpose has to be specific, written, believed, and acted on daily before it does any work. So here is ours, stated plainly enough to be measured against:</p>
+        <p class="article-pullquote">To give ordinary people an AI agent they actually own, one that takes the friction out of daily life and puts real time and real control back in their hands.</p>
+        <p>Concretely, we intend for every client to be able to name the hours we gave back to them. Not &ldquo;it&rsquo;s neat.&rdquo; Not &ldquo;it saves time.&rdquo; A number they would defend to a skeptical spouse.</p>
+        <p>Every principle below exists to protect that sentence from us. Companies rarely abandon their purpose on purpose. They trade it away one reasonable-sounding decision at a time.</p>
+
+        <h2 id="std-sacrifice">What we are willing to sacrifice</h2>
+        <p>The best-run companies do something most avoid: they state in advance what will be given up, and for what. Deciding this early makes every principle below cheaper to hold, because the expensive choice is already pre-committed rather than being weighed fresh on a bad month. We will trade the following away, on purpose.</p>
+        <p><strong>Speed of growth, for quality of service.</strong> We would rather have a hundred customers who would argue with a stranger on our behalf than a thousand who are indifferent. Growth that outruns our ability to serve people well is not growth we want, and we will turn business away to avoid it.</p>
+        <p><strong>Margin, for trust.</strong> See the margin ceiling in Principle 2. We are choosing to make less per customer than we could.</p>
+        <p><strong>Optionality, for commitments.</strong> Every promise in this document narrows what we can do later. That is the point of a promise. We accept the narrowing.</p>
+        <p><strong>Short-term revenue, for a reputation that compounds.</strong> Nearly every principle here costs money in the quarter it is applied and pays back over years. We are explicitly playing the long version. If we are ever tempted to say &ldquo;just this once, for cash flow&rdquo;, this paragraph is the answer.</p>
+        <p><strong>Not for sale at any price.</strong> The privacy architecture, the honesty, and the service standard. Those are not tradeable, and we would rather stay small permanently than sell any of them.</p>
+
+        <h2 id="std-p1">Principle 1. Go the extra mile</h2>
+        <p>Render more service and better service than we are paid for, every time, without keeping score.</p>
+        <p>This is the oldest idea in this document and the one we are staking the company on. It works close to the way a law works: the person who consistently delivers more than the compensation asks for eventually gets to name their price, because they have made themselves difficult to replace and there is no one else to buy from.</p>
+        <p>The quality of service has three parts and we hold ourselves to all three. <strong>Quality:</strong> the work is right. Not right enough that the customer will not complain. Right enough that we would be pleased to have it inspected. <strong>Quantity:</strong> more than was asked. Not padding, not busywork, but the real additional thing. <strong>Mental attitude:</strong> done willingly, warmly, without the customer sensing they have cost us something. Service rendered grudgingly is not service. It is a transaction with a bad smell.</p>
+        <p><strong>The extra mile standard, in practice.</strong> Every engagement ships at least one thing the client did not pay for and did not ask for, chosen because we noticed they needed it. A skill configured that they never mentioned. A recurring annoyance we fixed while we were in there. A written cheat sheet in their own words. If we cannot find one, we did not look at their situation closely enough.</p>
+        <p>We do not mention it, invoice it, or point at it. They will notice. The noticing is the point.</p>
+
+        <h2 id="std-p2">Principle 2. Value first, always</h2>
+        <p>We only make money after the customer is better off.</p>
+        <p>We are in the business of giving people back hours. Revenue is what happens when we do that well, not the thing we optimize for directly. The purpose of a business is to create and keep a customer. Profit is the test of whether that worked, not the reason it exists.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>Before we ship a feature, charge for an add-on, or take a client, we can name the concrete thing the customer gets. Hours back. A task they no longer do. Money saved. If we cannot name it, we do not ship it.</li>
+          <li>We will tell a prospect that we are not a fit for them. A free tool, a competitor, or &ldquo;honestly, you don&rsquo;t need this&rdquo; are all acceptable answers on a discovery call.</li>
+          <li>We do not sell to someone who will not get value just because they are willing to pay.</li>
+        </ul>
+        <p><strong>The margin ceiling.</strong> The most trusted retailers in the world hold a hard cap on markup and keep holding it when told they are leaving money on the table, because the cap is the promise. We do the same. Our ceiling is <strong>20% on anything we resell or pass through, and 0% on third-party AI usage</strong>, which you pay your provider directly at cost. We do not raise the ceiling because we discovered we could. Growth comes from serving more people, not from extracting more per person. Any change to this number is a revision to this document, dated and visible, with the reason stated.</p>
+        <p>We will not ship features designed to look impressive in a demo rather than to work on a Tuesday. We will not pad a scope of work with things the client does not need. And we will not take money for a guided setup when we know the person could do it themselves in an hour, without telling them so.</p>
+
+        <h2 id="std-p3">Principle 3. Say the true thing, especially when it costs us</h2>
+        <p>Honesty is not a policy we have. It is the product we sell.</p>
+        <p>We are asking people to install software on their own computer and connect it to their inbox, their calendar, and their money. That only works if our word is worth something. One dishonest quarter would cost us more than it could ever earn.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>We describe what the product does today, not what it will do next quarter. Archie is in testing and our website says so.</li>
+          <li>We publish limitations next to capabilities. If something breaks often, has a rough edge, or only works on one platform, that goes in the marketing copy, not just the FAQ.</li>
+          <li>Our demos show real output, including the unglamorous parts. If we stage or trim something for length, we say so on the screen.</li>
+          <li>We do not use testimonials we solicited under pressure, incentivized quietly, or edited to change their meaning.</li>
+          <li>When a customer asks &ldquo;will this work for my situation?&rdquo; we answer the question they asked, honestly, even when the honest answer loses the sale.</li>
+          <li>We publish our prices openly. Archie&rsquo;s plans, the guided session rate and every add-on price are on the site, so nobody books a call to find out what something costs. Where a price genuinely is not set yet, we say that it is quoted on the call rather than letting you assume there is a number we are hiding.</li>
+        </ul>
+        <p>We will not imply capabilities we do not have, through wording, imagery, or omission. We will not compare ourselves to competitors using claims we have not verified. And we will not let a customer stay wrong about what they are buying because correcting them would be awkward.</p>
+
+        <h2 id="std-p4">Principle 4. Do not screw people over</h2>
+        <p>The test: would we be comfortable if the other person could see everything we know?</p>
+        <p>Most people are not screwed over by villains. They are screwed over by companies that found a legal, defensible, slightly too clever arrangement and told themselves it was fine. That is the failure mode we are guarding against.</p>
+        <p>In practice:</p>
+        <ul>
+          <li><strong>Pricing is plain.</strong> One number, stated up front, in language a non-technical person understands. Costs that flow to a third party, such as AI usage billed directly by the model provider, get explained clearly before purchase, with realistic estimates rather than best-case ones.</li>
+          <li><strong>No dark patterns.</strong> Canceling is as easy as signing up, in the same number of clicks, without a phone call or a retention gauntlet. No pre-checked boxes. No countdown timers for discounts that are not actually expiring. No confusing double negatives on consent.</li>
+          <li><strong>No surprise charges.</strong> No silent renewals, no price increases without clear advance notice, no auto-upgrades. If a plan changes, existing customers hear it from us first and directly.</li>
+          <li><strong>No lock-in as strategy.</strong> People should stay because leaving would cost them something they value, not because leaving is deliberately painful. Data is exportable in a usable format. The agent runs on your own computer under your own accounts, and that is a promise about power, not just architecture.</li>
+        </ul>
+        <p><strong>The money-back guarantee.</strong> Archie carries a 14-day money-back guarantee, and inside that window it is not a negotiation: no forms, no interrogation, no partial credit dressed up as generosity. We would rather refund ten people who could have been argued with than keep one person&rsquo;s money they resent us for. The window, and what sits outside it, is written into our <a href="../terms-of-service/">Terms of Service</a>, and the Terms are the version you can hold us to rather than a promise on a page we control.</p>
+        <p>The one limit, stated now so we never have to invent it under pressure: if a person works the guarantee repeatedly and in obvious bad faith, we end the relationship with them. We do not respond by adding conditions for everyone else. The door is what closes.</p>
+        <p>We will not design any flow whose effectiveness depends on the customer not reading carefully. We will not use urgency, shame, or fear to close a sale. And we will not interpret an ambiguous contract term in our own favor without first raising it with the other side.</p>
+
+        <h2 id="std-p5">Principle 5. Build the incentives so that doing right is the easy path</h2>
+        <p>Good intentions do not survive a compensation plan that points the other way.</p>
+        <p>Incentive-caused bias is enormously powerful and mostly invisible to the person experiencing it. People do not consciously decide to mislead a customer for a bonus. They simply find that the version of the truth that pays is also, somehow, the version they believe.</p>
+        <p>Every principle in this document is currently held in place by the two of us caring. That is not a system. This principle is the system.</p>
+        <p>In practice:</p>
+        <ul>
+          <li><strong>No commission on a sale we would have advised against.</strong> If a prospect is not a fit, walking away has to be at least as rewarded as closing. Someone who talks a person out of buying gets the same recognition as someone who closes.</li>
+          <li><strong>Compensation follows retention, not signature.</strong> Whatever we pay for bringing in business is weighted toward the customer still being here and still happy a year later, with clawback if they churn early because the sale should not have happened.</li>
+          <li><strong>No metric that punishes patience.</strong> We will never measure support by call length, tickets closed per hour, or time to resolution. Every one of those quietly instructs the person to get off the phone.</li>
+          <li><strong>Nobody is paid more for the customer understanding less.</strong> Not through upsells on confusion, not through complexity that requires our help to navigate.</li>
+          <li><strong>We audit our own incentives annually.</strong> The question is not &ldquo;are our people honest&rdquo;, it is &ldquo;what behavior is our pay structure actually purchasing&rdquo;. If those diverge, the structure changes, not the people.</li>
+        </ul>
+        <p><strong>The test for any new incentive.</strong> If someone optimized it ruthlessly and cynically, with no loyalty to this document at all, would the customer still be well served? If not, the incentive is wrong regardless of who we hire.</p>
+
+        <h2 id="std-p6">Principle 6. Privacy is a promise, not a feature</h2>
+        <p>We do not want your data. That is the architecture and the intent.</p>
+        <p>We built Archie to run on your own computer, under your own accounts, with your own AI key, so that your conversations go straight to the AI provider and never pass through us. This is our strongest commitment because it is the easiest one to quietly abandon later, once we have scale and a reason.</p>
+        <p><strong>One exception, and it is ours.</strong> The free credits a new install starts with are paid for on our account, so while you are using them your messages pass through a server of ours on the way to Anthropic. Connect an AI account of your own and that stops from each agent&rsquo;s next start, and no conversation of yours touches us again. We would rather name that here than let you find it with a packet sniffer.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>We collect the minimum needed to operate and support the product, and we can articulate why each thing is collected. That is your email address, whether you have a current plan, which paid add-ons you have bought, and a short list of operational records. It is a summary, and the complete list, which we maintain and you can check line by line, is on the <a href="../trust/#what-we-hold">Trust page</a>.</li>
+          <li>We do not sell, rent, broker, or trade customer data. Not aggregated, not anonymized, not &ldquo;with a trusted partner&rdquo;. Ever.</li>
+          <li>We do not train models on customer data.</li>
+          <li>If we ever need to change what we collect, we ask first and make declining a real option rather than a functional exile.</li>
+          <li>Security incidents get disclosed promptly and plainly, including the ones where we look bad, including the ones we are not legally required to report.</li>
+        </ul>
+        <p><strong>Successor clause.</strong> If Otian AI is ever acquired, merged, or wound down, these privacy commitments transfer with it or the deal does not happen. That is already a term of our <a href="../terms-of-service/">agreement</a> rather than an intention, because an acquirer is the most likely way a promise like ours quietly stops being true.</p>
+
+        <h2 id="std-p7">Principle 7. The agent acts under your authority, never around it</h2>
+        <p>We are handing people something that can act in the world on their behalf. That is the whole product and the whole risk.</p>
+        <p>Nothing else in this document is specific to what we actually sell. This principle is. An agent with access to someone&rsquo;s inbox, calendar, files, and payments is not a chatbot that can be wrong harmlessly. When it is wrong, something happens.</p>
+        <p><strong>Consequence gets consent.</strong> Anything irreversible, anything that reaches another person, and anything that moves money is proposed first and carried out only after you approve it. That is the rule we design to, and speed is never a reason to skip it.</p>
+        <p><strong>What that is today, exactly.</strong> An email or a text goes out only when you press Send on the draft. A calendar change is proposed first, can never apply on the turn that proposed it, can only apply exactly as proposed, and can never apply while you are away. Two things Archie cannot do at all: it cannot spend money or buy anything, and on its own it can only ever message you. When we widen what an agent can reach, the confirmation is built before the capability ships, not after. If we ever let you widen what it may do without asking, that will be a deliberate choice made in specific terms, and narrowing it again will never cost you anything.</p>
+        <p><strong>What the confirmation does not do</strong>, published here rather than left for you to discover. It stops your agent changing things without you. It does not stop it being wrong: if it misreads you and you approve without looking, it will carry out the mistake faithfully. And it does not stop information leaving, because a web search your agent runs carries whatever it put into the query. We say that on the <a href="../trust/">Trust page</a> too, because it is exactly the sort of admission that a broad promise about nothing happening without your approval would quietly swallow.</p>
+        <p><strong>Three questions, always answerable.</strong> What is it doing, why, and how do I stop it. There is a way to see what the agent has done, in plain language, and a way to stop it immediately that a non-technical person can find under stress.</p>
+        <p><strong>We are honest about confident wrongness.</strong> These systems state incorrect things fluently. We say so in our marketing, not only in the fine print, and we design so that the cost of a mistake is small and visible rather than large and quiet. We would rather it tell you it is unsure than hand you a smooth answer it cannot support.</p>
+        <p><strong>When the agent causes harm, it is ours.</strong> We do not hide behind the model provider, your configuration, or a limitation of liability clause. We tell you immediately, we help fix what happened, we make it right materially, and we change the system so it cannot happen the same way twice. &ldquo;The AI did it&rdquo; is not an explanation we will ever offer.</p>
+        <p><strong>Where we hold back.</strong> We do not build features that create dependence rather than capability, that quietly deepen the agent&rsquo;s reach beyond what was asked for, or that place the agent between a person and something they should be handling themselves. We do not build engagement mechanics. Time returned to you is the goal, and time spent with our product is not a number we want to grow.</p>
+        <p><strong>We owe extra care where it matters most.</strong> Our whole market is people who are not technical, and some of them will be elderly, unwell, stressed, or unfamiliar with what an agent can do. The defaults are set for that person, not for the power user. Anything that would be a minor annoyance for an expert and a catastrophe for a beginner gets designed for the beginner.</p>
+        <p><strong>When the ground shifts underneath us.</strong> The models we depend on are not ours. They get deprecated, repriced, degraded, restricted, and occasionally suspended without our involvement. So: we tell you what your agent depends on before you buy. We give as much notice as we are given, immediately, without waiting to see if it resolves itself. We do not let you discover a capability has vanished by having it fail on you. Where a change makes the product materially worse than what you paid for, we will not hold you to a plan for something that no longer does what you bought it for: cancel and we stop billing, and if you are inside the money-back window the guarantee applies whether or not the change was our fault. We design for portability across providers wherever we can, because a promise about ownership is hollow if one vendor&rsquo;s decision can end it.</p>
+
+        <h2 id="std-p8">Principle 8. The three moments of service</h2>
+        <p>Hospitality reduces to three moments, drilled until they become reflex: a genuine welcome, anticipation of the need that was never spoken, and a farewell that leaves the person feeling known. It works because every interaction really does have a beginning, a middle, and an end, and most companies only pay attention to the middle.</p>
+        <p>Ours:</p>
+        <p><strong>Open warmly and by name.</strong> Every call, email, and message starts with a human being addressing a human being. Never a template that could have been sent to anyone. Never a ticket number as a greeting.</p>
+        <p><strong>Anticipate the thing they did not ask for.</strong> The stated request is the surface. Behind &ldquo;can it move my 3 o&rsquo;clock?&rdquo; is a person losing an hour a week to calendar tetris. We answer the question and then address the thing underneath it.</p>
+        <p><strong>Close so the last moment is the best one.</strong> The end of an interaction is what gets remembered and repeated. We do not let a conversation trail off into silence. We confirm the person got what they needed, in their words, and we tell them exactly how to reach us again.</p>
+        <p><strong>The sundown rule.</strong> Every message gets a real human response within one business day, even when the response is only &ldquo;I have read this, I am working on it, you will have a full answer by Thursday&rdquo;. Nobody should wonder whether we saw it. We state a bound rather than promising always, because a promise we quietly stop keeping is worse than a smaller promise kept, and we intend to beat it nearly every time. Our current availability is published on the <a href="../contact/">contact page</a>, straight from our own calendar, and if we are ever going to be slower than this for a stretch we will say so in advance on the site rather than letting people find out by waiting.</p>
+
+        <h2 id="std-p9">Principle 9. Treat people well</h2>
+        <p>Everyone we deal with is a person with limited time and their own problems.</p>
+        <p>Service does not require anyone to be beneath anyone. We are not servants and our customers are not marks. Two adults, equal in dignity, one of whom needs a thing done.</p>
+        <p>The Golden Rule is a written policy here, not a sentiment, and it only works applied in every direction at once, to customers and partners and each other alike. Applied selectively it is not a principle, it is a marketing choice. So:</p>
+        <p><strong>Customers.</strong> We assume competence and never condescend, especially with non-technical users, who are exactly who this product is for. We explain rather than mystify. We answer support requests like the person on the other end is waiting, because they are. We are patient with the fifth time someone asks the same question. People are interested in their own situation, not in our product, and the fastest way to be useful is to be actually curious about theirs.</p>
+        <p><strong>Developers and partners in the marketplace.</strong> We pay on time, in full, without being chased. Terms are clear before work starts. We do not clone an add-on someone built for our marketplace and ship it ourselves. Credit goes to whoever did the work.</p>
+        <p><strong>Each other.</strong> A real partnership means two people working in genuine harmony toward the same definite aim, and the harmony is the hard part, not the partnership. Disagreement is expected and said out loud, in the room, not softened into agreement and then relitigated afterward. Once a decision is made, we back it. Neither founder gets to be surprised by something the other has known for a week.</p>
+        <p><strong>Anyone we ever hire.</strong> Honest offers, honest expectations, honest feedback. We do not describe a job as one thing and hand over another. Nobody is asked to do something that would violate this document, and anyone can refuse on that basis without consequence.</p>
+        <p><strong>Competitors.</strong> We beat them by being better, not by misrepresenting them. Every claim we print about another company is sourced to that company&rsquo;s own page and dated, and our <a href="../compare/">comparison pages</a> carry a section where the alternative wins.</p>
+
+        <h2 id="std-p10">Principle 10. Take care of our own first</h2>
+        <p>The order is: our people, then our customers, then the business.</p>
+        <p>This looks backwards and is not. People who are treated well treat customers well, and the sequence cannot be reversed. Every person who works here is somebody&rsquo;s child and should go home feeling that way.</p>
+        <p>Nobody who feels squeezed, misled, or disposable delivers the kind of service described in this document. It cannot be mandated into existence. It can only be modeled and then passed along.</p>
+        <p>Today we are two people, so this principle governs how we treat each other and every contractor we work with. As we grow it means:</p>
+        <ul>
+          <li><strong>We hire for character first.</strong> Roughly half technical skill and half emotional skill, weighted toward the emotional. The rubric: humble, meaning no ego about who does what; hungry, meaning self-driven; and smart about people, meaning aware of their effect on others. Missing any one of the three is a no, no matter how strong the other two are. Skills are teachable. Whether someone actually likes helping people is not.</li>
+          <li><strong>The interview test.</strong> Would we want this person on a call with a nervous seventy-year-old who is worried they will break something?</li>
+          <li><strong>We would rather pay someone to leave early than keep someone who does not fit.</strong> A bad fit costs the culture more than it costs the payroll, and the cost lands on their colleagues before it lands on us.</li>
+          <li><strong>Nobody&rsquo;s job is to absorb abuse.</strong> A customer who is cruel to someone on our team stops being our customer. Serving people well does not include tolerating that, and any employee who ends such a relationship will be backed, not second-guessed.</li>
+        </ul>
+
+        <h2 id="std-p11">Principle 11. Push authority down to whoever is holding the problem</h2>
+        <p>The person closest to the customer can fix it without asking.</p>
+        <p>The best service organizations give every employee a real spending limit, no approval required, to make a problem right on the spot. The best employee handbooks are effectively one sentence telling people to use good judgment. Both work for the same reason: an apology that requires a manager&rsquo;s signature arrives too late to matter.</p>
+        <p><strong>The Fix-It Authority.</strong> Either founder, and anyone we hire, can spend up to <strong>$500 per customer</strong> to resolve a problem immediately, without discussion, without permission, and without justifying it afterward. Above that, one conversation, not a process. If someone uses the authority badly, we coach them. We do not take it away, because taking it away teaches everyone else to stop caring. We publish the number because an authority nobody knows about cannot be invoked.</p>
+        <p><strong>Kill the stupid rules.</strong> Anyone can nominate a policy of ours for deletion, and the burden of proof sits with keeping it, not with removing it. When we can hire for it, we will pay a standing bounty for finding internal rules that make no sense to the customer.</p>
+        <p>Rules exist to help people who do not yet have judgment. The goal is to develop judgment, not to substitute for it permanently.</p>
+
+        <h2 id="std-p12">Principle 12. Own mistakes fast, and write a great last chapter</h2>
+        <p>We will get things wrong. What we control is what happens in the hour after.</p>
+        <p>A mistake handled beautifully creates more loyalty than never having made the mistake at all. Customers do not expect perfection. They expect to find out what you are like when things go sideways, and most of them have never seen a company handle it well.</p>
+        <p>The instinct under pressure is to minimize, delay, and hope. That instinct is wrong every time, and it is the specific behavior this principle exists to override.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>We tell the affected person before they discover it themselves.</li>
+          <li>We say what happened in plain language, without hiding behind passive voice. &ldquo;We made a mistake&rdquo;, not &ldquo;an error occurred&rdquo;.</li>
+          <li>We say what we are doing about it and by when.</li>
+          <li>We make it right materially, not just with an apology. Refund, redo, credit, whatever actually restores the person.</li>
+          <li>We then do one more thing beyond restoring them. That is the last chapter.</li>
+          <li>No non-disparagement clause in a refund. If someone had a bad experience, they are free to say so.</li>
+        </ul>
+        <p><strong>Fix the system, not the person.</strong> The overwhelming majority of failures come from the process people are working inside rather than from the people themselves, and blaming individuals both misses the cause and guarantees the next one gets hidden. When something goes wrong here, the first question is what about our setup made this easy to do and hard to catch. Only after that do we ask whether anyone needed help.</p>
+        <p>We do not punish anyone internally for surfacing a problem early. The only unacceptable response to a mistake is concealing it.</p>
+
+        <h2 id="std-p13">Principle 13. Do fewer things, and finish the back of the fence</h2>
+        <p>Range is not the goal. Nothing half-built ships, and nothing sloppy ships because it is hidden.</p>
+        <p>The most loved restaurants keep the same short menu for decades. The most loved grocers carry a fraction of what a normal store does. The software companies that last ship a small number of things over twenty years. All of them are loved for the same reason: a short list is a promise that everything on it is good.</p>
+        <p>Our marketplace will grow past a hundred add-ons. The risk is obvious. A catalog is only an asset if the customer can trust any item in it, and it becomes a liability the moment they cannot.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>Every add-on we publish, we would put in front of a paying client ourselves. If we would hesitate, it does not ship.</li>
+          <li>We would rather remove something than maintain it badly. A retired skill is honest. A broken one is not.</li>
+          <li>Saying no to a feature is a normal outcome, not a failure of ambition.</li>
+          <li>We finish. A half-shipped feature, a half-answered support thread, and a half-kept promise are all the same failure.</li>
+        </ul>
+        <p>And the invisible parts get the same care. There is an old story about a cabinetmaker who finished the back panel that would face the wall and never be seen, because he would know it was there. Almost all of our work is that back panel. The customer will never read the code, see the error handling, or know how carefully their data was protected. We do it properly anyway, because the alternative is a company that only performs quality when someone is looking, and that habit does not stay contained.</p>
+
+        <h2 id="std-p14">Principle 14. Build for the person who is not technical</h2>
+        <p>If it needs a terminal, we have not finished it.</p>
+        <p>Our whole reason for existing is that powerful AI tooling is currently reserved for people who can code. Every decision that pushes complexity back onto the customer is a small betrayal of that.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>Plain language everywhere: the product, the site, the emails, the error messages, the contracts.</li>
+          <li>Any jargon that must appear gets explained the moment it appears.</li>
+          <li>We test with people who are not us, especially people who are not comfortable with computers.</li>
+          <li>Setup is something a customer can complete alone. If they need us, that is a defect we have chosen not to fix yet, and we say so rather than selling the fix.</li>
+          <li>We measure our own writing by whether the least technical person we know can follow it, not by whether it is accurate.</li>
+        </ul>
+
+        <h2 id="std-p15">Principle 15. Personal initiative and persistence</h2>
+        <p>Nobody is coming to tell us what to do.</p>
+        <p>Two habits matter more in a small company than anywhere else. The first is personal initiative: acting without being told, on the thing that needs doing rather than the thing that was assigned. The second is persistence, which is less about heroism than about the ordinary refusal to stop, and which most often fails within sight of the goal.</p>
+        <p>In practice:</p>
+        <ul>
+          <li>Either of us can start anything. Neither of us needs permission to fix something that is broken or serve a customer better.</li>
+          <li>Temporary defeat is information, not a verdict. When something does not work, we ask what it taught us and change the method, not the aim.</li>
+          <li>We do not use &ldquo;we&rsquo;re small&rdquo; as an excuse to a customer. It is an explanation we may offer ourselves and never a defense we offer them.</li>
+        </ul>
+
+        <h2 id="std-commitment">The commitment: the line we do not cross</h2>
+        <p>The most credible values are the ones anyone can verify from the outside and that visibly cost money to keep. A company that closes its doors one day a week, every week, for decades, has said more than any advertisement could.</p>
+        <p>We wanted one commitment of that kind: visible, costly, and never bent. These were the candidates. We never charge for support, at any tier, forever. We never run a paid ad, and grow only by referral and by being worth talking about. We always tell a prospect when a cheaper option, including a free one, would serve them better, in writing, before they pay us anything. We never take outside money that would require us to break a promise in this document.</p>
+        <p>None of those four is what we wrote. Each is one instance of the thing they were all circling, and the line below is the thing itself.</p>
+        <p class="article-pullquote">We are paid by the people we serve, and by nobody else.</p>
+        <p>Once written here it does not come out, and if the day comes that it costs us badly, that is the day it does its work.</p>
+        <p><strong>What this forecloses</strong>, written out so nobody has to interpret it later. Advertising of any kind. Paid, sponsored, or promoted placement anywhere in the marketplace, including a position in a list. Selling, renting, or brokering customer data. Commissions or referral fees from an AI provider, or from any service Archie connects to. Paid partnerships. The sale of a lead. If money ever reaches us from anywhere other than a person paying us for our own work, we have broken this, and the fact that it was legal, disclosed, or industry standard will not be a defense.</p>
+        <p><strong>Where the marketplace sits</strong>, stated precisely, because this is the one place the line could be misread. We take a platform fee on marketplace sales. That fee comes out of the price the customer pays, is disclosed to both sides, is the same percentage for every developer, and buys nothing except the platform itself. That is inside the line, because the money still originates with the person being served and no third party is paying us to influence what they see.</p>
+        <p>What would put us outside the line: any payment from a developer for placement, promotion, ranking, featuring, or inclusion. Any fee that differs by who is paying it rather than by what is being sold. Any arrangement where a developer&rsquo;s spending changes what a customer is shown. Ranking in our marketplace is determined by what we believe serves the customer, and it is never for sale at any price, to anyone, including to ourselves for our own add-ons.</p>
+        <p>The same test governs any future arrangement. Trace the money backwards. If it starts with the person we are serving, we are inside the line. If it starts with anyone who benefits from influencing that person, we are outside it, no matter how the contract is worded.</p>
+        <p>We chose this commitment over the other four because it contains them. An add-on cannot buy its position if nobody but the customer pays us, and there is no paid ad if there is no advertiser. It is also the commitment that sits underneath Principle 6 and makes it structural rather than sincere. We are not asking anyone to trust that we would refuse to sell their data. We are saying we have no revenue line to sell it into.</p>
+
+        <h2 id="std-tiebreaker">When principles collide: the tie-breaker</h2>
+        <p>When a decision is genuinely close and the principles above point in different directions, we run these tests in order:</p>
+        <ol>
+          <li><strong>The disclosure test.</strong> Would we be comfortable if the customer knew everything we know about this decision, including why we made it?</li>
+          <li><strong>The parent test.</strong> Would we recommend this to a parent, or to a friend who trusted us and would not check?</li>
+          <li><strong>The extra mile test.</strong> Does this give the customer more than they paid for, or less?</li>
+          <li><strong>The incentive test.</strong> If someone with no loyalty to this document optimized this ruthlessly, would the customer still be well served?</li>
+          <li><strong>The record test.</strong> If this appeared on the front page in two years, would we defend it or explain it away?</li>
+        </ol>
+        <p>If any test fails, we do not do it. If we find ourselves constructing an argument for why a particular case is an exception, that argument is the signal to stop.</p>
+        <p>The short version, when there is no time for any of this: <strong>the money is never the reason.</strong></p>
+
+        <h2 id="std-measurement">How we will know if this is working</h2>
+        <p>Stated values are unfalsifiable unless something measurable depends on them. These are the numbers that would actually move if we are doing what this document says. Each has a target, because a metric without a threshold is a metric nobody fails.</p>
+        <p><strong>Earned growth.</strong> The honest test of whether customers love you is how much of your growth came from them: existing customers spending more, plus new customers who arrived because someone told them to. Target: at least <strong>60%</strong> of new business is referral or repeat. If that share falls while revenue climbs, we are buying growth rather than earning it, and the principles above have become decoration.</p>
+        <p><strong>Time to first human response.</strong> Target: 100% within one business day, measured, not estimated. The sundown rule either holds or it does not.</p>
+        <p><strong>Refund rate, examined rather than minimized.</strong> No target, on purpose. A number near zero is not automatically good news. It may mean we are making refunds hard. We look at the reasons, not the rate.</p>
+        <p><strong>Referrals per client.</strong> Target: rising year over year. The single best evidence that someone was better off for having met us.</p>
+        <p><strong>Churn conversations completed.</strong> Target: we attempt one with every departing customer, and complete them with at least half. We write down what they actually said rather than our interpretation of it.</p>
+        <p><strong>Agent actions taken without confirmation that should have required it.</strong> Target: zero. Every instance is treated as a defect in the system, reviewed under Principle 12, and disclosed to the affected customer.</p>
+        <p>We do not measure support efficiency. See Principle 5.</p>
+
+        <h2 id="std-enforcement">Holding ourselves to it</h2>
+        <p>A document like this is worthless if nobody checks it.</p>
+        <p><strong>Daily.</strong> A short line-up before the work starts. One principle from this document, read aloud, plus anything either of us has heard from a customer in the last day. The best service companies in the world have done a version of this every day for decades, and it is the cheapest culture mechanism we know of.</p>
+        <p><strong>Every quarter.</strong> Both founders read this document end to end and name at least one place we fell short. If neither of us can find one, we are not looking hard enough. We also review the numbers above and our own incentive structure.</p>
+        <p><strong>Every year.</strong> We revise it. Principles get sharpened, added, or removed based on what actually happened. Every version is dated and kept, so the changes are visible.</p>
+        <p><strong>Anyone can invoke it.</strong> A customer, a marketplace developer, a contractor, or a future employee can point at a line here and say we are not living up to it. That is not an inconvenience. That is the document working.</p>
+        <p>If we ever change a principle because it became expensive, we say so explicitly in the revision, in those words. We do not get to quietly soften a commitment and call it an update.</p>
+        <p><strong>When informal becomes formal.</strong> Several principles here say &ldquo;as we grow&rdquo;. The trigger is our first hire who is not a founder. On that day, the hiring rubric, the Fix-It Authority, the incentive rules, and the daily line-up stop being intentions and become written policy in the handbook, and this document is the first thing that person reads.</p>
+        <p><strong>A note on the two of us.</strong> The founders who build enduring companies tend to share an odd combination: fierce ambition for the institution paired with very little ambition for themselves personally, and a habit of crediting others when things go well and looking in the mirror when they do not. That is the standard we hold each other to. If either of us starts confusing the company&rsquo;s success with our own importance, the other is obligated to say so out loud.</p>
+        <p><strong>If one of us leaves.</strong> This document survives the partnership that wrote it. Whoever remains is bound by it, and cannot amend it alone except through the same dated, visible revision process. If we ever disagree so fundamentally about these principles that we cannot continue together, the disagreement gets written down before anyone leaves, so that whoever inherits the company knows what was argued and why. If the company is ever sold or passed on, this document goes with it, and the successor clause in Principle 6 applies to the whole of it, not only to privacy.</p>
+
+        <h2 id="std-summary">In one sentence</h2>
+        <p class="article-pullquote">We give people back their time, we give them more than they paid for, we tell them the truth about it, and we never make money in a way we would be embarrassed to explain.</p>
+
+        <h2 id="std-note">A note on what is written here</h2>
+        <p>None of these ideas are original to us. They come from a long line of service businesses, manufacturers, retailers, and writers who worked out, mostly the hard way, what it takes to treat people well and stay in business doing it. We have read them, argued with them, and taken what fits a company like ours. We claim no credit for the thinking. We claim only the commitment.</p>
+        <p>Written by Jett Nguyen and Jack Raney. Questions, disagreements, and accusations of hypocrisy are all welcome at <a href="mailto:questions@otianai.com">questions@otianai.com</a>.</p>
+
+      </article>
     </section>
 
     <section class="section section-alt" aria-label="Invoke it">
       <div class="hm-wrap hm-head hm-cta">
-        <h2 class="fade-up">Anyone can invoke this.</h2>
-        <p class="fade-up">A customer, a developer building for the marketplace, a contractor, or anyone we ever hire can point at a line here and tell us we are not living up to it. That is not an inconvenience. That is the document working.</p>
+        <h2 class="fade-up">Point at a line and tell us we missed it.</h2>
+        <p class="fade-up">A customer, a developer building for the marketplace, a contractor, or anyone we ever hire can hold us to any sentence on this page. That is not an inconvenience. That is the document working.</p>
         <div class="hm-actions fade-up">
           <a href="../contact/" class="btn btn-primary">Tell Us We Fell Short</a>
           <a href="../trust/" class="btn btn-secondary">Check the Privacy Claims&nbsp;&rarr;</a>
         </div>
-        <p class="hm-micro fade-up">We revise this every year and keep every version, so the changes are visible. If we ever change a promise because it became expensive, we will say so in those words rather than quietly softening it and calling it an update.</p>
+        <p class="hm-micro fade-up">Version 4.0, 2026. We revise this every year and keep every version, so the changes are visible. If we ever change a principle because it became expensive, we will say so in those words rather than quietly softening it and calling it an update.</p>
       </div>
     </section>
 
@@ -298,8 +507,6 @@
             <a href="../archie/see-it-work/">See It Work</a>
             <a href="../archie/pricing/">Pricing</a>
             <a href="../equipment/">What to Run It On</a>
-            <a href="../individuals/">Guided Setup</a>
-            <a href="../business/">For Business</a>
           </nav>
         </div>
         <div>
@@ -309,6 +516,13 @@
             <a href="../skills-marketplace/browse/">Browse the Marketplace</a>
             <a href="../skills-marketplace/commission/">Commission One</a>
             <a href="../skills-marketplace/for-developers/">For Developers</a>
+          </nav>
+        </div>
+        <div>
+          <h4 class="footer-col-title">Services</h4>
+          <nav class="footer-nav-links" aria-label="Services">
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../business/">For Business</a>
           </nav>
         </div>
         <div>

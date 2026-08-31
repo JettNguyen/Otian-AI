@@ -1645,15 +1645,16 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 /* The brand block, then one column per nav menu, in nav order. The footer is the
-   nav laid flat, so a reader who knows one knows the other. */
+   nav laid flat, so a reader who knows one knows the other, which is why this
+   went from four menu columns to five when Services joined the nav. */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
-  gap: 48px 36px;
+  grid-template-columns: 1.2fr repeat(5, minmax(0, 1fr));
+  gap: 48px 28px;
   padding-bottom: 52px;
 }
 
-/* Two rows on the right of the brand: the four menus, then the links that have no menu. The
+/* Two rows on the right of the brand: the five menus, then the links that have no menu. The
    brand spans both so the left edge holds and the second row sits beside the social buttons
    rather than under the whole footer. Reset at 1024px, where the brand goes full width and the
    menus fall into two columns beneath it. */
@@ -5720,7 +5721,7 @@ html.js .fade-up:not(.visible) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Brand across the top, the four menus two-by-two beneath it. */
+  /* Brand across the top, the menus two-by-two beneath it. */
   .footer-grid {
     grid-template-columns: 1fr 1fr;
     gap: 36px;
@@ -11228,4 +11229,67 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 640px) {
   .kit-card { padding: 22px 20px; }
   .kit-card h3 { font-size: 1.12rem; }
+}
+
+/* ========================================
+   The Otian Standard (/standard/)
+   ========================================
+   The page is the whole operating-principles document, around 5,600 words, so it
+   is the one marketing-side page a reader arrives at intending to scan rather than
+   read start to finish: they came to check one promise. The contents block is what
+   makes that possible, and it is the only thing here that needed CSS the site did
+   not already have. Everything else on the page is .article-body, .trust-table and
+   .trust-prose, which is deliberate: this document sits beside the terms and the
+   trust page, and it should read like them.
+
+   Two columns above 640px because 22 entries in one column pushes the document
+   itself below the fold on a laptop, which buries the thing the reader came for
+   under the index of it. */
+.std-toc {
+  margin-top: 40px;
+  padding: 24px 26px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.std-toc-title {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.std-toc-list {
+  margin: 0;
+  padding-left: 20px;
+  columns: 2;
+  column-gap: 32px;
+  list-style: decimal;
+}
+
+.std-toc-list li {
+  /* break-inside, or a two-line entry splits across the column boundary and the
+     second half reads as a separate item with no number. */
+  break-inside: avoid;
+  margin-bottom: 9px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.std-toc-list a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.std-toc-list a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .std-toc { padding: 20px 18px; }
+  .std-toc-list { columns: 1; }
 }

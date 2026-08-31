@@ -11357,3 +11357,73 @@ html[data-theme="dark"] .booking-container iframe {
   .std-toc { padding: 20px 18px; }
   .std-toc-list { columns: 1; }
 }
+
+/* ========================================
+   The coverage grid (homepage)
+   Two columns: a part of a life on the left, the add-on that takes it on the right. It is a
+   table of real names rather than a drawing, so it is HTML and its words are counted, and it is
+   paid for by the marquee it replaced rather than by hiding copy inside an <svg>.
+   The blank rows are the point of the object, so they are styled as absence and not as an error:
+   same rules, same rhythm, muted right column, no icon and no colour that reads as a warning.
+   ======================================== */
+.cover-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+
+.cover-grid li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 28px;
+  align-items: baseline;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cover-job {
+  font-size: var(--fs-lg);
+  color: var(--text-primary);
+}
+
+.cover-addon {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--accent-ink);
+}
+
+/* The connection tag rides with the add-on rather than sitting in a third column: it qualifies
+   that one name, and a column of its own would have been mostly empty and read as a rating. */
+.cover-needs {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.cover-blank-head {
+  margin: 40px 0 0;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+}
+
+.cover-grid--blank { margin-top: 12px; }
+.cover-grid--blank .cover-job { color: var(--text-secondary); }
+
+.cover-none {
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .cover-grid li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+    padding: 11px 2px;
+  }
+  .cover-job { font-size: var(--fs-md); }
+  .cover-addon { font-size: var(--fs-md); }
+}

@@ -30,10 +30,17 @@ propagate them to new pages. Do not "improve" them. They are being fixed.
 
 ## The Otian Standard: what our operating principles require of copy
 
-Source: **The Otian Standard, our operating principles, v3.0 (2026)**, written by Jett and Jack.
-That document is internal and deliberately not in this repo, which is public and serves
-otianai.com. What follows is only the part that governs words on the site, restated so it can be
-enforced here without the internal document being present.
+Source: **The Otian Standard, our operating principles, v4.0 (2026)**, written by Jett and Jack.
+As of 2026-08-31 it is **published in full at `standard/`**, so it is no longer an internal
+document this file has to paraphrase: read the page. What follows stays here anyway, because it
+is the part that governs words on the site and it is faster to enforce than 5,600 words of prose.
+Where the two ever disagree, the page is the document and this is the summary.
+
+Two things the page settled that copy has to respect. The money-back guarantee is **14 days**,
+matching the Terms of Service, and no page may describe it as unconditional. And Principle 7's
+"consequence gets consent" is a **design rule, not a shipped-capability claim**: the page states
+the rule, then names what is actually enforced today in TRUST.md's approved wording, then names
+what the confirmation does not do. Copy it in that order or not at all.
 
 These sit alongside TRUST.md rather than above it. TRUST.md governs whether a claim is **true**.
 These govern whether a true claim is being made **decently**.

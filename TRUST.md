@@ -848,11 +848,11 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 - Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
   wherever this claim anchors a section.
 
-### ✅ Email goes out only when you tap Send — SHIPPED (was 🚧 roadmap until 2026-07-20)
+### ✅ Email goes out only when you send it or set a time — SHIPPED (was 🚧 roadmap until 2026-07-20)
 
-**Approved wording:** "Archie can draft email replies, but it cannot send one on its own. The
-draft comes to your chat as a card with Send / Edit / Dismiss buttons, and nothing reaches
-Gmail until you tap Send."
+**Approved wording (corrected 2026-08-31, see the amendment below):** "Archie can draft email
+replies, but it cannot send one on its own. The draft comes to your chat as a card with Send /
+Edit / Dismiss buttons, and nothing leaves your account until you send it or set a time for it."
 
 **Amended 2026-08-16: Outlook rides the same gate, and the wording may now name it.** Approved
 form: "nothing reaches Gmail or Outlook until you tap Send", and "Gmail and Outlook stay
@@ -874,6 +874,37 @@ connection made without it is refused before any send by the `capabilities().sen
 `capabilities_follow_what_was_granted_rather_than_what_was_asked`). Pointer refresh from 07-20:
 `email/replies.rs` became the `email/replies/` module and `gmail_send_reply` became the trait
 method `send_reply`; the single-caller shape is unchanged.
+
+**Amended 2026-08-31: a scheduled send goes out with nobody pressing anything, so the absolute
+form is retired.** The old wording ("nothing reaches Gmail until you tap Send") is **false as
+written** and must not be used again. A reply can carry a `send_at`, and then, in Archie's own
+words, `email::replies::actions::send_due` "transmits it with nobody pressing anything"
+(`crates/archie-runtime/src/gateway/prompt.rs:796`; the function is at
+`crates/archie-runtime/src/email/replies/actions.rs:1012`, called every poll cycle from
+`email/poller.rs:111`). The card also carries its own **Send later** button
+(`email/replies/card.rs:242`). This is why the Archie repo corrected its own store copy in
+commit `9baf1fd6`, "The store copy promised something scheduled send had just made untrue"; the
+site was not corrected with it, on twelve pages, for the reason `prompt.rs` names: *"a parameter
+added to an existing tool does not read as 'a sending tool was added'."*
+
+**Approved forms.** Use the shipped product's own sentence, live in
+`data/marketplace/skills/email-manager.json` since 2026-08-28: "Nothing leaves your account
+until you send it or set a time." Also approved: "it cannot send on its own: every email is a
+draft you read first", and, where the schedule is the point, "a reply set to go later calls
+itself off if they write back first."
+
+**What is still absolute, and may still be said that way.** The agent **cannot arm a timed send
+by itself**: `timed_send_needs_a_person` (`email/replies/draft.rs:154`) rejects `send_at` unless
+a person typed that turn, so a routine firing on a schedule and an arriving email can both draft
+and neither can schedule. So "your agent cannot send email on its own" stays true, and every
+send is still a person's instruction. What is **not** true is that a person presses a button at
+the moment mail leaves.
+
+**Text replies are unaffected and stay absolute.** There is no `send_at` on the texts path
+(`crates/archie-runtime/src/texts/` has no scheduled send; its "scheduled pass" is a *reading*
+pass). **Do not weaken the text-reply wording while fixing the email wording:** a sentence that
+covers both must either split them or use the email form for both, and splitting is better,
+because the text claim is the stronger one and we give it away for nothing otherwise.
 
 **Why it's true:** the model's tool set contains **no email-send tool** (tool definitions in
 `gateway.rs`: calendar, meetings, specialists, knowledge, remember — nothing sends).
@@ -969,7 +1000,8 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | Claim | Status |
 |---|---|
 | "Archie asks before it changes anything in your calendar." | ✅ **True now** (two-turn gate) |
-| "Nothing reaches Gmail until you tap Send." | ✅ **True now** (single-caller send path) |
+| "Nothing reaches Gmail until you tap Send." | ⛔ **Banned 2026-08-31.** A scheduled send leaves with no tap. Use "nothing leaves your account until you send it or set a time." |
+| "Nothing leaves your account until you send it or set a time." | ✅ **True now** (single-caller send path; a timed send cannot be armed by the agent) |
 | "Archie cannot spend your money." | ✅ True (and no purchase code path exists in the runtime) |
 | "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |

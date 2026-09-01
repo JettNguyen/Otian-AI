@@ -71,7 +71,7 @@ single conversation. We keep no per-person record of the free add-ons you instal
 
 **You hold the switches on the parts that matter.** Archie can draft an email reply, but it
 cannot send one on its own: the draft comes to your chat with Send, Edit and Dismiss buttons, and
-nothing reaches Gmail until you tap Send. It asks before it changes anything in your calendar.
+nothing leaves your account until you send it or set a time. It asks before it changes anything in your calendar.
 And it cannot spend your money, because no purchase path exists in the app at all.
 
 **It works while you sleep.** Routines run on a schedule, unattended, and report back to your

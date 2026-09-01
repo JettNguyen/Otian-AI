@@ -37,8 +37,10 @@
   --text-secondary: #69645D;
   --text-muted: #777069;
   --border: #EAE6E1;
-  --nav-glass: rgba(252, 250, 248, 0.82);
-  --nav-glass-scrolled: rgba(252, 250, 248, 0.95);
+  /* The nav's surface once content is passing under it. There is no at-rest counterpart on
+     purpose: at the top of a page the nav has no background at all (see section 5). */
+  --nav-glass-scrolled: rgba(252, 250, 248, 0.85);
+  --nav-glass-solid: rgba(252, 250, 248, 0.97);
   --surface-hover: rgba(68, 64, 59, 0.07);
   --surface-hover-strong: rgba(68, 64, 59, 0.12);
   --surface-soft: rgba(68, 64, 59, 0.025);
@@ -209,8 +211,8 @@
   --text-secondary: #AEACA6;
   --text-muted: #A6A29C;
   --border: #3F3E3A;
-  --nav-glass: rgba(26, 26, 25, 0.74);
-  --nav-glass-scrolled: rgba(26, 26, 25, 0.94);
+  --nav-glass-scrolled: rgba(26, 26, 25, 0.82);
+  --nav-glass-solid: rgba(26, 26, 25, 0.96);
   --surface-hover: rgba(243, 240, 237, 0.06);
   --surface-hover-strong: rgba(243, 240, 237, 0.14);
   --surface-soft: rgba(243, 240, 237, 0.03);
@@ -595,6 +597,18 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 /* ========================================
    5. Navigation
    ======================================== */
+/* At the top of a page the nav has no surface of its own: no panel, no blur, no hairline, no
+   rounded corners. The logo and links sit directly on the page, which is what makes the header
+   read as part of the hero rather than a slab parked on top of it. The fixed wash on body::before
+   is the reason this matters more here than it would elsewhere: an opaque bar cut a rectangle out
+   of a gradient that covers the whole viewport, so the one region that visibly did not belong to
+   the page was the header.
+
+   The surface is earned, not default. It fades in the moment content starts passing underneath
+   (.scrolled, from js/nav.js), because that is the only moment it has a job to do: keeping the
+   links legible over whatever is sliding by. Same reason it comes back with the mobile drawer
+   open, where the nav paints over the drawer and its overlay and would otherwise show both
+   through itself in two different colours. */
 .nav {
   position: fixed;
   top: 0;
@@ -604,16 +618,35 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   height: var(--nav-height);
   display: flex;
   align-items: center;
-  background: var(--nav-glass);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-  border-bottom: 1px solid var(--border);
-  border-radius: 0 0 14px 14px;
-  transition: background var(--transition);
+  background: transparent;
+  /* blur(0px), not `none`: a filter list only interpolates against a matching list, so the
+     zero-value form is what lets the glass arrive as a fade instead of a snap. */
+  backdrop-filter: blur(0px) saturate(100%);
+  -webkit-backdrop-filter: blur(0px) saturate(100%);
+  border-bottom: 1px solid transparent;
+  transition:
+    background var(--transition),
+    backdrop-filter var(--transition),
+    -webkit-backdrop-filter var(--transition),
+    border-color var(--transition);
 }
 
-.nav.scrolled {
+.nav.scrolled,
+.nav.drawer-open {
   background: var(--nav-glass-scrolled);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-bottom-color: var(--border);
+}
+
+/* The glass runs at an alpha that assumes a blur behind it. Without backdrop-filter that alpha is
+   just a translucent bar with live text sliding under it, so where the filter is unavailable the
+   surface goes near-opaque and legibility does not depend on a progressive enhancement. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .nav.scrolled,
+  .nav.drawer-open {
+    background: var(--nav-glass-solid);
+  }
 }
 
 .nav-inner {
@@ -1646,7 +1679,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .footer {
   background: var(--bg-secondary);
   border-top: 1px solid var(--border);
-  padding-top: 64px;
+  padding-top: 72px;
 }
 
 .footer-inner {
@@ -1658,11 +1691,23 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 /* The brand block, then one column per nav menu, in nav order. The footer is the
    nav laid flat, so a reader who knows one knows the other, which is why this
    went from four menu columns to five when Services joined the nav. */
+/* Weighted columns, not equal sixths. Our menu labels are questions ("What Computer Do I
+   Need?", "vs Cowork, Grok Bot and Symphony"), not one-word product names, so six equal
+   columns handed Services, which has three short entries, exactly as much room as Compare,
+   which has six long ones, and wrapped most of the site index onto two lines to pay for it.
+   The fractions below are the widths the labels actually want, so all but the longest two
+   links now sit on one line. Any change to a menu's labels should be re-checked here. */
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.2fr repeat(5, minmax(0, 1fr));
-  gap: 48px 28px;
-  padding-bottom: 52px;
+  grid-template-columns:
+    minmax(0, 1.91fr)  /* brand:    185px, "Secure AI agents, your way." on one line */
+    minmax(0, 1.61fr)  /* Archie:   161px, all but "What Computer Do I Need?"        */
+    minmax(0, 1.51fr)  /* Add-ons:  151px, below this "Add-ons" breaks at its hyphen */
+    minmax(0, 1.29fr)  /* Services: 129px, all three                                 */
+    minmax(0, 1.94fr)  /* Compare:  189px, all but the six-word Cowork line          */
+    minmax(0, 1.96fr); /* About:    192px, all six including both PDF rows           */
+  gap: 44px 26px;
+  padding-bottom: 44px;
 }
 
 /* Two rows on the right of the brand: the five menus, then the links that have no menu. The
@@ -1671,23 +1716,27 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    menus fall into two columns beneath it. */
 .footer-brand { grid-row: 1 / span 2; }
 
-.footer-brand .footer-contact-email { margin-top: 20px; }
+.footer-brand .footer-contact-email { margin-top: 18px; }
 
 /* An <a> since 2026-08-19 (the footer's Home link), so it needs to be a block to
    keep its own margin. */
 .footer-logo {
   display: inline-block;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
+/* A mark, not a poster. At 150px the three stones were the largest object in the footer and
+   the loudest, which put the weight of the whole block in the one column that carries no
+   links, and left the brand column reading as a picture with some grey text under it. */
 .footer-logo img {
   height: auto;
-  width: 150px;
+  width: 88px;
   display: block;
 }
 
 .footer-tagline {
   font-size: var(--fs-base);
+  line-height: 1.7;
   color: var(--text-muted);
 }
 
@@ -1701,19 +1750,25 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-primary);
-  margin-bottom: 20px;
+  line-height: 1.4;
+  margin-bottom: 18px;
 }
 
+/* Gap between links, leading inside one. They used to be the same number: a link that wrapped
+   set its two lines 22px apart and the next link started 10px after that, so the two-line
+   items ran into their neighbours and a column read as one grey paragraph rather than a list.
+   Tighter leading inside the item and a real gap between items keeps each link one object. */
 .footer-nav-links {
   display: flex;
   flex-direction: column;
+  gap: 11px;
 }
 
 .footer-nav-links a {
   display: block;
-  margin-bottom: 10px;
   break-inside: avoid;
   font-size: var(--fs-base);
+  line-height: 1.45;
   color: var(--text-secondary);
   transition: color var(--transition);
 }
@@ -1777,9 +1832,8 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .footer-extra .footer-nav-links {
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 0 20px;
+  gap: 10px 20px;
 }
-.footer-extra .footer-nav-links a { margin-bottom: 0; }
 
 .footer-contact-col {
   display: flex;
@@ -1804,20 +1858,26 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--accent);
 }
 
-/* Three stacked centered rows at every width: copyright, the third-party marks note,
-   then the legal links. It was flex-plus-absolutely-positioned-links, and the note's
-   arrival made the links collide with whichever line wrapped near them. */
+/* Four stacked rows at every width: the AI note, copyright, the third-party marks note, then
+   the legal links. It was flex-plus-absolutely-positioned-links, and the note's arrival made
+   the links collide with whichever line wrapped near them, so stacked rows stay.
+
+   Left, not centred. Everything above this rule hangs off the same left edge, and four centred
+   rows of grey small print under a left-aligned index read as a second footer that belongs to
+   another page. Centred also gave the longest line, the marks note, the widest measure of any
+   text on the site, which is the one thing that line does not need. */
 .footer-bottom {
   border-top: 1px solid var(--border);
-  padding: 20px 0;
-  text-align: center;
+  padding: 24px 0 36px;
+  text-align: left;
   display: grid;
-  justify-items: center;
+  justify-items: start;
   gap: 10px;
 }
 
 .footer-bottom p {
   font-size: var(--fs-sm);
+  line-height: 1.7;
   color: var(--text-muted);
 }
 
@@ -1825,12 +1885,14 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    under the absolutely-positioned legal links and collided with them. */
 .footer-marks-note {
   font-size: var(--fs-xs);
-  max-width: 760px;
+  max-width: 92ch;
 }
 
 .footer-legal-links {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin-top: 4px;
 }
 
 .footer-legal-links a {
@@ -5730,6 +5792,69 @@ html.js .fade-up:not(.visible) {
     padding: 24px;
   }
 }
+
+/* ========================================
+   Footer widths between the two extremes
+   ========================================
+   The footer index is the one grid on the site whose cells hold labels of a fixed, known length,
+   so its breakpoints are set by where those labels start breaking rather than by the usual
+   device bands. Two bands sit between the six-column desktop layout and the phone stack.
+
+   The six-column layout is only ever right at its full 1152px of content, which is --max-width
+   plus the inner padding: 1248px of viewport. Below that every column shrinks at once and
+   "Add-ons" goes back to breaking at its own hyphen, so the brand gives up its column and
+   becomes a band, and the five menus take the whole width in the proportions they were
+   measured for. */
+@media (min-width: 1025px) and (max-width: 1247px) {
+  .footer-grid {
+    grid-template-columns:
+      minmax(0, 1.61fr) minmax(0, 1.51fr) minmax(0, 1.29fr)
+      minmax(0, 1.94fr) minmax(0, 1.96fr);
+  }
+
+  .footer-brand {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+
+  .footer-extra {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Three menus across on a tablet, not two. Two columns on a 900px screen gave every cell 430px
+   to hold 180px of labels and pushed the index five rows deep, which is the same amount of
+   scrolling as the phone layout for none of the reason. Must stay after the 1000px block: same
+   specificity, so it wins on order. */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px 26px;
+  }
+}
+
+/* Wherever the brand is a band rather than a column, it is laid out as one: the mark and the
+   tagline on the left, the way to reach us on the right. Stacked, the same four items are a
+   290px tower of mostly empty row, and the reader scrolls past a third of a screen of nothing
+   to reach the index. Not on a phone, where there is no width to put anything beside anything. */
+@media (min-width: 768px) and (max-width: 1247px) {
+  .footer-brand {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 18px 32px;
+  }
+
+  .footer-logo { margin-bottom: 0; }
+
+  .footer-tagline { margin-right: auto; }
+
+  .footer-brand .footer-contact-email {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
 
 @media (max-width: 1000px) {
   .use-cases-grid {

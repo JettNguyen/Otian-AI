@@ -372,7 +372,12 @@
   const drawer    = document.getElementById('navDrawer');
   const overlay   = document.getElementById('navOverlay');
 
+  /* The nav sits above both the drawer and its overlay, and at the top of a page it has no
+     background, so an open drawer would otherwise show the dark overlay through the left of the
+     header and the drawer's own panel through the right. It needs its surface back for as long
+     as the drawer is open, wherever the page happens to be scrolled to. */
   function openDrawer() {
+    if (nav) nav.classList.add('drawer-open');
     hamburger.classList.add('open');
     drawer.classList.add('open');
     overlay.classList.add('open');
@@ -382,6 +387,7 @@
   }
 
   function closeDrawer() {
+    if (nav) nav.classList.remove('drawer-open');
     hamburger.classList.remove('open');
     drawer.classList.remove('open');
     overlay.classList.remove('open');

@@ -8,7 +8,10 @@ selling. This counts the words a visitor actually reads and fails when a page
 is over budget.
 
 What counts: everything inside <main> that a reader sees, minus the nav, the
-drawer, the footer, scripts, styles, and <svg> innards. Diagram labels are
+drawer, the footer, scripts, styles, <svg> innards, and anything marked
+aria-hidden="true" (since 2026-09-01: the works-with band's marquee is one real
+list and three hidden copies that exist only so the loop has no seam, and a
+reader reads the names once, not four times). Diagram labels are
 counted separately and reported, never budgeted: a figure earns its words by
 replacing prose, and taxing it pushes copy back into paragraphs.
 
@@ -103,11 +106,17 @@ class CopyExtractor(HTMLParser):
         self.body: list[str] = []
         self.figure: list[str] = []
 
+    # Tags that never close, so they must not deepen a dropped subtree: a <br> inside a
+    # hidden list would otherwise leave the parser dropping copy for the rest of the page.
+    VOID = {"br", "img", "input", "hr", "wbr", "source", "track", "embed", "area", "col", "meta", "link", "base", "param"}
+
     def handle_starttag(self, tag, attrs):
         if tag == "main":
             self.depth_main += 1
-        if self.drop_depth or tag in self.DROP:
-            self.drop_depth += 1
+        hidden = ("aria-hidden", "true") in attrs
+        if self.drop_depth or tag in self.DROP or hidden:
+            if tag not in self.VOID:
+                self.drop_depth += 1
         elif tag == "svg" or self.svg_depth:
             self.svg_depth += 1
 

@@ -133,6 +133,7 @@
       options: [
         { value: 'google', label: 'Gmail or Google Workspace' },
         { value: 'microsoft', label: 'Outlook or Office 365' },
+        { value: 'imap', label: 'iCloud, Fastmail, Yahoo, AOL, Zoho Mail or GMX' },
         { value: 'other', label: 'Somewhere else' },
         { value: 'skip', label: 'I don’t want it near my email' }
       ],
@@ -519,7 +520,7 @@
       out.push('<li><strong>Windows warns you on first launch.</strong> Our installer is not signed yet. <a href="../archie/install/">The reason, and how to check the download yourself.</a></li>');
     }
     if (answers.mail === 'other') {
-      out.push('<li><strong>Your email provider is not one it connects to.</strong> Archie works with Gmail and with Outlook. No machine on this page changes that.</li>');
+      out.push('<li><strong>Your email provider is not one it connects to.</strong> Archie works with Gmail, Outlook, iCloud, Fastmail, Yahoo, AOL, Zoho Mail and GMX. No machine on this page changes that.</li>');
     }
     if (answers.machine === 'laptop-daily') {
       out.push('<li><strong>The agent stops when your laptop does.</strong> Anything overnight is not going to happen, and that is most of what a routine is for.</li>');

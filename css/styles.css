@@ -2654,6 +2654,14 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
      of this same W with a dot), and the wordmark at 18px wide is a stripe, so the W stands for
      it. currentColor because they ship the mark in navy on light and in white on dark
      (logo-wiz-white.svg), which is the same rule Notion follows above. */
+/* Added with the 0.2.2 copy, 2026-09-01, for the six mail providers the app-password door connects:
+   - iCloud, Yahoo, AOL and GMX are Simple Icons paths (CC0), each redrawn from the company's own
+     mark and carried here in the brand colour Simple Icons records for it: iCloud #3693F3, Yahoo
+     #6001D2, GMX #1C449B. AOL publishes a black wordmark, so it takes currentColor like Notion.
+   - Fastmail is favicon.svg exactly as fastmail.com serves it, fetched 2026-09-01.
+   - Zoho is zoho-logo-web.svg from zohowebstatic.com, the mark zoho.com loads in its own header,
+     fetched 2026-09-01: the four boxes in their four colours, cropped to leave off the small
+     wordmark underneath, which is a stripe at 18px. */
 .ww-mark {
   flex: none;
   display: inline-flex;

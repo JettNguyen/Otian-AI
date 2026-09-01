@@ -695,6 +695,50 @@ and the request never leaves your network."
 - What the agent learns from a light (its name, on or off) goes to the AI provider like any other
   tool result. Say so wherever the local lane is described; the privacy policy does.
 
+### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPS IN 0.2.2)
+
+Built 2026-09-01: `crates/archie-net/src/mail/imap.rs` (IMAP over TLS on 993, SMTP with STARTTLS
+on 587) and `crates/archie-net/src/calendar/caldav.rs`, behind the same `MailProvider` and
+`CalendarProvider` traits Google and Microsoft use, so every rule already verified for Google mail
+holds here without a new code path: the send gate, the calendar confirmation, the poller's
+filters, the starter-credits refusal. Connected through `imap_connect` in
+`src-tauri/src/commands/integrations.rs`. **Not in a shipped build until Archie 0.2.2.** The copy
+describing it (the privacy policy section, the six names in the trust rows, the six marks on the
+band, the equipment questionnaire's option, two paragraphs on help/) sits in the site commit dated
+2026-09-01 and must not go live before that release.
+
+**Approved wording:** "You make an app password on the provider's own website and paste it once.
+Archie keeps it in your operating system's Keychain and sends it to that provider's own mail and
+calendar servers, directly from this computer, every time it opens the mailbox; it goes nowhere
+else." And: "What the account can do is what the connect step could prove: it signs in to the
+incoming mail server, tries the outgoing one, and looks for the calendar where the provider
+publishes one."
+
+**Why it's true:**
+- The password is stored with `create_credential(... Generic ...)` and referenced from the
+  account's `token_credential_ref`; `crates/archie-runtime/src/accounts.rs` hands it back as the
+  secret for `MailProviderId::Imap`. It is sent as the IMAP LOGIN and SMTP AUTH secret and as
+  Basic auth to the CalDAV host, and to nothing else.
+- Hosts are fixed per service in `KNOWN_SERVICES` (`imap.rs`): imap.mail.me.com,
+  smtp.mail.me.com and caldav.icloud.com for iCloud, and the equivalents for Fastmail, Yahoo, AOL,
+  Zoho and GMX. There is no field for a host of the user's own.
+- An IMAP account's `scopes` are what connect PROVED (`imap:read`, `imap:file`, `smtp:send`,
+  `caldav:read`, `caldav:write`), and `capabilities_of` reads them, so the app never assumes send
+  or calendar.
+- AOL and GMX have `caldav_root: None`: no calendar is looked for or claimed.
+
+**Boundaries:**
+- ❌ Never "sign in with Apple", or any OAuth phrasing. There is no OAuth for these; the app
+  password is the whole mechanism.
+- ❌ Never "your password never leaves your computer". It is sent to the provider on every
+  connection, exactly like the API key. The custody claim is Keychain storage plus "to the
+  provider's own servers and nowhere else".
+- ❌ Never promise a calendar for AOL or GMX, and never promise one for the other four
+  unconditionally: it exists only if discovery found one at connect.
+- Untested against a live account as of 2026-09-01 (Archie's docs/OPEN-THREADS.md lists the four
+  assumptions). The copy describes what the code does; the first live connect is what settles
+  whether every provider behaves as documented.
+
 ## What We Hold — state the whole list, always
 
 **The account core:** "Our servers know your email address and whether you have a current plan.

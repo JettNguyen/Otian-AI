@@ -186,6 +186,7 @@ if (root) {
           "afterend",
           '<div class="nav-account-divider"></div>' +
           '<div class="nav-account-menu-section">Admin only</div>' +
+          adminLink("/admin/", "War room") +
           adminLink("/admin/billing/", "Invoice a client") +
           adminLink("/admin/tiers/", "Manage tiers") +
           adminLink("/admin/ops/", "Ops console")

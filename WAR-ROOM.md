@@ -5,8 +5,10 @@ shows the users, the income, the feedback, the goal, and the links to everything
 day does not start by opening six tabs. Jett named the constraint in the same breath: most of
 what a normal startup dashboard shows is user data we say we do not collect and do not want.
 
-This file settles what that page is, what it is allowed to show, and what it is not. It is the
-spec; the page it describes does not exist yet.
+This file settles what that page is, what it is allowed to show, and what it is not.
+
+**Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room, carrying Goal, Health, Fleet,
+Attention and Doors. Passes 2 and 3 below are still ahead.
 
 ## Where it lives
 
@@ -47,11 +49,19 @@ Two corollaries:
 
 Seven panels, ordered by how often you would actually look.
 
-**1. Goal.** Paying accounts against 50,000, and the recurring revenue that implies, computed
-live from the plan mix rather than typed in. Jack's number from the call, on the screen, every
-day. Decide once and write it beside the bar: whether the count is paid accounts, or paid plus
-lifetime, or installs reporting a heartbeat. Three different numbers, and a goal bar that
-quietly switches definitions is worse than no bar.
+**1. Goal.** Jack's number from the call, on the screen, every day.
+
+**A browser cannot count accounts.** `firestore.rules` gives an admin `read` on `heartbeats`,
+`error_reports`, `trial_meta` and `config/flags`, but `match /users/{uid}` is
+`allow read: if request.auth.uid == uid` with no `isAdmin()` branch, so no page on this site can
+read another person's account document or count the collection. That is a correct rule and it is
+not being changed to feed a dashboard.
+
+So Pass 1 counts **copies that reported a heartbeat in the last seven days**, and the bar says
+"of 50,000 installs" in those words, with the undercount named underneath. It is a real number,
+available today, and it is not pretending to be an account count. Pass 2 puts paid accounts
+beside it off the billing summary, and the label moves at the same time. A goal bar that quietly
+switches definitions is worse than no bar; one that changes its label out loud is fine.
 
 **2. Money.** Monthly recurring revenue, new subscriptions and cancellations this month, failed
 payments worth a nudge, outstanding guided-session invoices, Stripe available balance and the
@@ -116,9 +126,12 @@ also the part that works on day one with no backend at all.
 
 Three passes, each one shippable on its own.
 
-- **Pass 1, no backend work.** The page, the gate, Doors, and the three panels the site can
-  already compute from Firestore: Health, Fleet, and the account counts behind Goal. This alone
-  fixes the "where do I look" problem.
+- **Pass 1, no backend work. SHIPPED 2026-09-01.** The page, the gate, Doors, and the panels the
+  site can already compute: Goal (on installs), Health, Fleet and Attention. Attention was not in
+  the first draft of this file and earned its place during the build: crashes this week, which
+  remote levers are in force right now, and what shipped last. A lever left on is the thing you
+  forget, and it belongs on the page you open first rather than three clicks into the console
+  that sets it.
 - **Pass 2, one endpoint.** `GET /admin/summary` on the billing service, which unlocks Money
   and the revenue half of Goal. The spend and reimbursement line goes in here.
 - **Pass 3, the human panels.** Feedback and Follow-ups as hand-entered lists, then Hudson
@@ -141,6 +154,11 @@ Three passes, each one shippable on its own.
 
 ## Still to decide
 
-1. What the Goal bar counts: paid accounts, paid plus lifetime, or reporting installs.
-2. Whether the spend and reimbursement line goes on the page.
-3. Whether anyone besides the two of us ever holds the `admin` tier.
+1. Whether the spend and reimbursement line goes on the page.
+2. Whether anyone besides the two of us ever holds the `admin` tier.
+3. Two doors are stubbed and visibly unfinished until somebody pastes the address in: the shared
+   Drive folder and Hudson. They are `<span class="wr-door is-todo">` in `admin/index.html`, each
+   with a TODO comment beside it. A dead link on this page costs more than an obvious gap.
+
+*Settled 2026-09-01: the Goal bar counts installs until the billing summary lands, and the page
+is called the War Room.*

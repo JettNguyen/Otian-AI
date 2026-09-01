@@ -10934,6 +10934,61 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 2px;
 }
 
+/* Six rows carrying a scene rather than fourteen carrying a label. The left column is wider
+   because it is now doing the work: the row has to be recognised, not scanned. `align-items:
+   start` rather than `baseline`, since a two-line label and a one-line add-on name have no shared
+   baseline worth aligning to once the description sits under them. */
+.cover-grid--scenes li {
+  grid-template-columns: 1.6fr 1fr;
+  gap: 10px 32px;
+  align-items: start;
+  padding: 20px 2px;
+}
+
+.cover-scene p {
+  margin: 7px 0 0;
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 52ch;
+}
+
+.cover-grid--scenes .cover-job {
+  font-weight: 600;
+}
+
+/* A second add-on on one row. It must not borrow `.cover-needs`, which is the muted tag meaning
+   "this one needs a connection": read that way, a second product name turns into a prerequisite
+   the row does not have. Same weight and colour as the first name, on its own line. */
+.cover-second {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  font-style: normal;
+  color: var(--accent-ink);
+  margin-top: 2px;
+}
+
+/* The enumeration the six rows gave up. It is one sentence rather than eight more rows, because
+   the count is what makes breadth believable and the scenes are what make it tangible, and only
+   one of the two needs room. */
+.cover-more {
+  margin: 24px 0 0;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  max-width: 68ch;
+}
+
+/* The caught-it line. Sized like body copy rather than like the mini-card labels around it,
+   because it is the only prose on the spine and the point is that it reads as a fact about the
+   reader's week, not as a UI string. */
+.hm-caught {
+  margin: 0 0 12px;
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
 .cover-blank-head {
   margin: 40px 0 0;
   font-size: var(--fs-md);
@@ -10956,6 +11011,16 @@ html[data-theme="dark"] .booking-container iframe {
   }
   .cover-job { font-size: var(--fs-md); }
   .cover-addon { font-size: var(--fs-md); }
+  .cover-second { font-size: var(--fs-md); }
+
+  /* Stacked, the add-on name has to come back up under the label it belongs to rather than sit
+     below a four-line description, where it reads as a footnote to the paragraph. */
+  .cover-grid--scenes li {
+    gap: 6px;
+    padding: 16px 2px;
+  }
+  .cover-grid--scenes .cover-addon { order: -1; }
+  .cover-scene p { font-size: var(--fs-base); max-width: none; }
 }
 
 /* The cost of breadth, stated where breadth is offered. TRUST.md's scope row requires any page

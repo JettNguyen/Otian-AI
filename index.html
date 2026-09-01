@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260831-8" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260901-1" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -271,25 +271,55 @@
         <div class="section-header">
           <span class="section-label fade-up">What it covers</span>
           <h2 id="cover-heading" class="fade-up">Name a part of your week. It is on the list, or the row is blank.</h2>
-          <p>Each row is one add-on you can read today, under the name it actually has.</p>
+          <p>Every add-on named here is one you can read today, under the name it actually has.</p>
         </div>
 
-        <ul class="cover-grid fade-up delay-1">
-            <li><span class="cover-job">The inbox</span><span class="cover-addon">Email Manager<em class="cover-needs">needs your mail</em></span></li>
-            <li><span class="cover-job">The calendar</span><span class="cover-addon">Calendar Manager<em class="cover-needs">needs your calendar</em></span></li>
-            <li><span class="cover-job">What is arriving</span><span class="cover-addon">Package Tracker<em class="cover-needs">needs your mail</em></span></li>
-            <li><span class="cover-job">The school mail</span><span class="cover-addon">School &amp; Family<em class="cover-needs">needs your mail</em></span></li>
-            <li><span class="cover-job">The bills</span><span class="cover-addon">Bills &amp; Subscriptions</span></li>
-            <li><span class="cover-job">The prescriptions</span><span class="cover-addon">Medication &amp; Refill Reminder</span></li>
-            <li><span class="cover-job">What the doctor actually said</span><span class="cover-addon">Health Record</span></li>
-            <li><span class="cover-job">The birthdays</span><span class="cover-addon">Birthday &amp; Anniversary Keeper</span></li>
-            <li><span class="cover-job">The people you owe a call</span><span class="cover-addon">Stay in Touch</span></li>
-            <li><span class="cover-job">The house jobs</span><span class="cover-addon">Home Maintenance</span></li>
-            <li><span class="cover-job">The car</span><span class="cover-addon">Car Keeper</span></li>
-            <li><span class="cover-job">Dinner</span><span class="cover-addon">Meal Planner</span></li>
-            <li><span class="cover-job">The trip</span><span class="cover-addon">Trip Planner<em class="cover-needs">needs flight search</em></span></li>
-            <li><span class="cover-job">The fourteen-step form</span><span class="cover-addon">Paperwork</span></li>
+        <ul class="cover-grid cover-grid--scenes fade-up delay-1">
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">The mail you have not opened</span>
+              <p>It reads what arrives and tells you which of it actually needs an answer, with the reply already written for the ones that do. Nothing goes out that you did not send or set a time for.</p>
+            </div>
+            <span class="cover-addon">Email Manager<em class="cover-needs">needs your mail</em></span>
+          </li>
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">The subscription that quietly went up</span>
+              <p>One list of everything that charges you on a repeat, with real dates. Ask what is due and get the next few. Ask what you are not using and find the ones renewing in the dark.</p>
+            </div>
+            <span class="cover-addon">Bills &amp; Subscriptions</span>
+          </li>
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">The form with fourteen steps and no map</span>
+              <p>Visas, licences, permits, benefits, enrolment. It holds which step you are on, which documents are still missing, what each one costs and what happens next, so you never restart from the top.</p>
+            </div>
+            <span class="cover-addon">Paperwork</span>
+          </li>
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">What the doctor actually said</span>
+              <p>The part you lose on the way out of the appointment. Tell it what was said and it keeps a dated record, the history of what changed and why, and your questions ready for next time.</p>
+            </div>
+            <span class="cover-addon">Health Record</span>
+          </li>
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">The upkeep nobody puts in a calendar</span>
+              <p>Furnace filters, detector batteries, gutters. Oil changes, registration, insurance, inspection. It proposes the list, you keep the parts that fit your place, and it tells you what is coming due before it slips.</p>
+            </div>
+            <span class="cover-addon">Home Maintenance<em class="cover-second">Car Keeper</em></span>
+          </li>
+          <li>
+            <div class="cover-scene">
+              <span class="cover-job">The people you keep meaning to call</span>
+              <p>Tell it who matters and how often you want to talk. It says when it has been too long, with an opener ready to send, which is usually the part that stops you.</p>
+            </div>
+            <span class="cover-addon">Stay in Touch</span>
+          </li>
         </ul>
+
+        <p class="cover-more fade-up">Six of a hundred and fifty-one, chosen because they have nothing to do with each other. The calendar, the school mail, what is arriving in the post, the birthdays, the prescriptions, dinner and the trip are on the same shelf, written out the same way.</p>
 
         <p class="cover-blank-head fade-up">And the rows that are still blank.</p>
         <ul class="cover-grid cover-grid--blank fade-up">
@@ -368,6 +398,21 @@
               <div class="hm-bubble"><div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Week Ahead</b><span class="hm-micro">Sundays &middot; 6:00 pm</span></div></div>
             </div>
           </div>
+        </div>
+
+        <!-- The one stop on the spine that is not a chat card. Every other moment here is the agent
+             addressing you, which four times over proves "it messages you" rather than "it takes
+             things off your plate". This one is a job whose whole content is having noticed, and it
+             deliberately carries no Send button, because there is nothing for the reader to approve
+             and pretending otherwise would be the easiest overclaim on the page. -->
+        <div class="hm-stop fade-up">
+          <span class="hm-stamp"><i aria-hidden="true"></i>8:30 pm</span>
+          <h3>Something you did not know was expiring</h3>
+          <div class="hm-mini">
+            <p class="hm-caught">The return window on the jacket closes Friday. Nobody keeps a list of those, which is why they get missed.</p>
+            <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Return Window Watch</b><span class="hm-micro">a week out &middot; a month out for a warranty</span></div>
+          </div>
+          <span class="hm-micro">Silent on the days nothing is closing, which is most of them.</span>
         </div>
 
         <div class="hm-stop fade-up">

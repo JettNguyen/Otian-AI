@@ -30,8 +30,8 @@ The themes, each fixed in place below and on the affected pages:
    user supplies). Every "five providers" sentence in this file and on the site was stale. The
    enum is `crates/archie-net/src/providers.rs`; requests are built in `crates/archie-net/src/llm/`.
 4. **What We Hold grew again**, the third time the pattern at the end of that section has fired.
-   The honest maximum a legal demand could produce is listed there now: account, plan, paid
-   add-ons, version heartbeats, opt-in crash tails, the trial-credit ledger and its spend history,
+   The honest maximum a legal demand could produce is listed there now: account, plan,
+   version heartbeats, opt-in crash tails, the trial-credit ledger and its spend history,
    second-factor records, guided-session invoices, refused-checkout records, and sealed phone
    messages we cannot open plus their plaintext timestamps.
 5. **The heartbeat has four fields now** (app version, platform, edition, last seen), one document
@@ -179,8 +179,8 @@ Each is stated in the strongest form the code supports, and no stronger.
 conversations, your files, your calendar live on your own computer and go straight to your
 AI provider on your own account — they never pass through an Otian server, so there's
 nothing on our side to breach, subpoena, or sell. A legal demand to us can only produce
-what we actually hold, and none of it is your content: your account, your plan, your paid
-add-ons, and the operational records listed under What We Hold."
+what we actually hold, and none of it is your content: your account, your plan, and the
+operational records listed under What We Hold."
 
 *(Corrected 2026-08-21: the demand sentence used to name three things. The true maximum is the
 What We Hold list — heartbeats, opt-in crash tails, the trial ledger, second-factor records,
@@ -188,7 +188,7 @@ invoices, refused checkouts, sealed phone messages with their timestamps — and
 the one sentence about subpoenas was exactly the wrong place to be selective.)*
 
 **Why it's true:** a synthesis of three already-verified claims below — "Your prompts never
-touch an Otian server" (`llm.rs:16,18`, `lib.rs:41-48`), "What We Hold — three things"
+touch an Otian server" (`llm.rs:16,18`, `lib.rs:41-48`), "What We Hold"
 (`auth.rs:237-244`, `stripe-webhook`), and "We ship no telemetry and no analytics." There is
 no Otian datastore of user content for a breach or subpoena to reach.
 
@@ -196,9 +196,10 @@ no Otian datastore of user content for a breach or subpoena to reach.
 - ❌ Never "no third party ever holds/sees your data." Prompts still go to Anthropic/OpenAI
   (a third party) for inference. This claim is about **Otian** custody, not the provider. Keep
   the provider-egress clause visible wherever this appears.
-- ❌ Never say "your data" unscoped — we **do** hold email + license status + paid add-ons.
-  Scope it to content: "conversations, files, calendar." The three-things disclosure is the floor.
-- ❌ Never "nothing to subpoena." A subpoena to us yields email + license status + paid add-ons.
+- ❌ Never say "your data" unscoped: we **do** hold email + plan status.
+  Scope it to content: "conversations, files, calendar." The What We Hold list is the floor.
+- ❌ Never "nothing to subpoena." A subpoena to us yields email + plan status and the operational
+  records under What We Hold.
   The true strong form is "your *content* can't be produced from us — we don't have it."
 - ❌ NOT a compliance certification. It does not make Archie "HIPAA-compliant" or
   "GDPR-compliant" — content still flows to a cloud AI provider under the user's own account.
@@ -277,12 +278,14 @@ what it was always about.)*
   fetched from `{billing}/entitlement` on every launch that reaches us, forever
   (`crates/archie-core/src/entitlement.rs:193`). The free-add-on install count posts to
   `{billing}/marketplace/installed` on every free install whatever key you hold
-  (`crates/archie-core/src/purchases.rs:268`). Checkout runs through `/create-checkout` and
-  `/cart-checkout` (`purchases.rs:84,155`). Only the free-credit proxy ends, and only that. The
+  (`crates/archie-core/src/purchases.rs:268`). `purchases.rs` still carries checkout functions,
+  but nothing in the app calls them (see the retired purchase section below). Only the
+  free-credit proxy ends, and only that. The
   same page's step 4 already said the licence renewal stops when you block the host, so the page
   contradicted itself in the two paragraphs a reader with a packet sniffer reads hardest. The
-  approved shape names the four jobs and says which one ends: **licence note, free-credit proxy,
-  checkout, install count; the proxy is the one your own key ends.**
+  approved shape names the three jobs and says which one ends: **licence note, free-credit proxy,
+  install count; the proxy is the one your own key ends.** (Checkout was a fourth until every
+  add-on became included with Archie; nothing in the app starts one.)
 - ✅ **The enumeration names the host, not a nickname per job.** `trust/index.html`'s "Everything
   that leaves your computer" table called one machine "Our server", "our billing service", "Our
   checkout server" and "Our count server" in four rows while claiming to be "every single thing",
@@ -493,11 +496,14 @@ gloss inside one sentence, which is what made those paragraphs unreadable. Use o
 the plain one outside this document. Still banned either way: "your keys never leave your
 computer" (see Banned Phrasings).
 
-### ✅ We keep no per-person record of the free add-ons you install
+### ✅ We keep no per-person record of the add-ons you install
 
-**Approved wording:** "When you add a free add-on, Archie bumps its public popularity count by
+**Approved wording:** "When you add an add-on, Archie bumps its public popularity count by
 one. That request is signed in as you, so the number can't be faked, but all we ever keep is the
-running total. We hold no list of which free add-ons are yours."
+running total. We hold no list of which add-ons are yours."
+
+*(Every add-on is included with Archie, so "free add-on" is retired as a phrase: it implies a paid
+kind that does not exist. Say "add-on".)*
 
 **Why it's true:** installing *any* add-on fires a best-effort `report_install` POST to the
 billing service (`crates/archie-core/src/purchases.rs:111-130`), carrying the caller's Firebase
@@ -523,25 +529,28 @@ count-stuffing) but never retained: there is no `users/{uid}` free-install list 
   this is one of the entries, and wherever the site says what blocking us costs you, this is one
   of the things that stops. Both are now on `trust/`, `trust/details/` and `privacy-policy/`.
 
-### ✅ What you bought can be added again on another computer (paid add-ons only)
+### ⛔ No add-on is sold, so there is no purchase, no receipt, and no per-person add-on list
 
-**Approved wording:** "Anything you buy is tied to your Otian account, so another computer can
-add it again without paying twice."
+**The fact:** every add-on (skill, routine, specialist, personality) is included with Archie. There
+is no per-add-on price, no Buy, and no customer-facing purchase record. The site says "Every add-on
+is included with Archie" and never frames it as a change.
 
-**Why it's true:** a purchase is written per user at `users/{uid}/purchases`
-(`crates/archie-core/src/purchases.rs:290`), and starting checkout for something already owned
-returns `AlreadyPurchased` instead of charging a second time (`purchases.rs:25, 91-92`).
+**Why it's true:** every catalog entry is `price_cents: 0`. `crates/archie-core/src/purchases.rs`
+still exists in the app's core crate, but nothing in the app calls its checkout functions
+(`create_checkout`, `create_cart_checkout` have no callers), and the one `list_purchases` call left
+(`src-tauri/src/commands/market.rs`, `require_owned_if_paid`) sits behind a `price_cents == 0`
+early return that every catalog entry takes, so it never runs. The Stripe webhook's per-item
+purchase writer (`users/{uid}/purchases/{item_id}`) has nothing to write, because no item checkout
+is ever started. Cite the file, not a line: lines move.
 
-**Boundaries — do not overclaim:**
-- ⛔ **"Add-ons sync automatically, no reinstalling per device"** — caught 2026-08-24 on
-  `skills-marketplace/browse/`. False in two directions at once. It is unscoped, and there is no
-  per-user record of *free* add-ons to sync from at all (see the section directly above), which
-  today is every add-on on the site. Scope it to purchases or do not say it.
-- The claim is about **entitlement, not state**: it says a thing you paid for can be added again
-  somewhere else. Whether an add-on's settings, memory or history travel with it is a separate
-  question with its own answer, and this row does not license one.
-- Marketplace purchasing is not open yet. Keep this in the future tense wherever it appears until
-  it is.
+**Boundaries:**
+- ⛔ Never "paid add-on", "premium", "bought", "buy", a price, or "free add-on" (which implies a
+  paid kind). Never "now free", "no longer sold", "for the beta": it is a standing fact.
+- ⛔ **"Add-ons sync automatically, no reinstalling per device"** (caught 2026-08-24 on
+  `skills-marketplace/browse/`) stays banned. There is no per-user record of any add-on to sync
+  from, so a new computer adds them again. Say that.
+- ⛔ The retired claim "Anything you buy is tied to your Otian account, so another computer can
+  add it again without paying twice" must not return: there is nothing bought to tie.
 
 ### ✅ Archie on your phone: an encrypted mailbox we hold and cannot read (SHIPPED)
 
@@ -647,18 +656,19 @@ the webview.
 
 ## What We Hold — state the whole list, always
 
-**The account core:** "Our servers know your email address, whether you have a current plan,
-and which **paid** add-ons you've bought. Not your prompts, not your files, not your calendar,
-not a single conversation. We keep no per-person record of the free add-ons you install."
+**The account core:** "Our servers know your email address and whether you have a current plan.
+Not your prompts, not your files, not your calendar, not a single conversation. We keep no
+per-person record of the add-ons you install."
 
 *(Updated 2026-07-26: was "whether your subscription is active" — false since the one-time
 license shipped. Ownership is the `lifetime` tier, checked with no subscription lookup.)*
 
 **Why:** Firebase Auth + the Firestore user doc hold email, uid, `access_tiers`,
 `subscription_status`, `stripe_customer_id`, and the licence-era fields
-(`crates/archie-core/src/auth.rs:549-640`, the account parsing). The
-Stripe webhook writes a permanent purchase record per paid item — item id, amount, session
-id, timestamp (`stripe-webhook/index.js` → `users/{uid}/purchases/{item_id}`).
+(`crates/archie-core/src/auth.rs:549-640`, the account parsing). There is no per-person
+add-on record: every add-on is included with Archie and nothing starts an item checkout, so the
+Stripe webhook's per-item purchase writer (`stripe-webhook/index.js` →
+`users/{uid}/purchases/{item_id}`) has nothing to write (see "No add-on is sold" above).
 
 **Amended 2026-08-21: the core is not the whole holdings, and this file must carry the whole
 list even where a page carries the short form.** The backend's own collections also hold, where
@@ -702,7 +712,7 @@ your subscription is active") has been removed everywhere and replaced with the 
 wording above, live on the homepage, `archie/`, `archie/install/`, `faq/`, `business/`,
 `privacy-policy/`, and `trust/` (cited by page rather than line since 2026-08-21: the pages
 were rebuilt and every line number had rotted). **Do not let the shorter,
-false form return** — "email + subscription + paid add-ons" is the floor; never fewer.
+false form return**: "email + plan status" is the floor; never fewer.
 
 ✅ **Amended 2026-08-06: three became three plus two.** Both of the things this section warned
 about arrived, and the old sentence survived both of them for a while, which is exactly the failure
@@ -716,8 +726,8 @@ mode it names below.
 
 **Approved wording**, now live on the five pages listed above:
 
-> Our servers hold your email address, whether you have a current plan, and which **paid** add-ons
-> you've bought. Two more only where they apply: which version of Archie you are running, so we
+> Our servers hold your email address and whether you have a current plan. Two more only where
+> they apply: which version of Archie you are running, so we
 > know what is still out there before we ever switch one off, and, if you turn on phone access, the
 > messages between your computer and your phone, sealed with a key we never receive.
 
@@ -1200,7 +1210,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | Banned | Why |
 |---|---|
 | "Your data never leaves your device" | **False.** Your prompts go to Anthropic/OpenAI. The true claim is that *we* never see them. |
-| "The only thing our servers know is whether your subscription is active" | **False.** Also your email and every paid add-on you own. |
+| "The only thing our servers know is whether your subscription is active" | **False.** Also your email, and the operational records under What We Hold. |
 | "Fully private" / "completely private" / "100% private" | Unfalsifiable. Means nothing. Say what we hold and what we don't. |
 | "Zero data collection" | **False.** We collect your email. |
 | "Bank-grade" / "military-grade" encryption | Meaningless. We use the OS Keychain and TLS. Say that. |
@@ -1208,7 +1218,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | "Nothing sends without your OK" (unscoped) | Chat replies and provider web-search queries leave without a per-item OK. Use the scoped forms: calendar-confirmation / Send-tap wordings. |
 | "Sandboxed add-ons" | Misleading. Add-ons are data, not code — there is nothing to sandbox. The true claim is *stronger*; make it instead. |
 | "Your keys never leave your computer" / "keys stay on your computer" | **False.** The key is sent to Anthropic/OpenAI as a request header on every call (`secrets.rs`, `x-api-key`/bearer). The true claim is storage + custody: "keys sit in your system's keychain, where we have no way to read them." |
-| "We never hold your data" (unscoped) | Unscoped "your data" is false — we hold email + license + paid add-ons. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip, and again 2026-08-03 as the `business/` feature-card **heading** — the body underneath stated all three things we hold, but a heading is what gets scanned and the correction sat four sentences down. Check headings, not just body copy. |
+| "We never hold your data" (unscoped) | Unscoped "your data" is false; we hold email + plan status. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip, and again 2026-08-03 as the `business/` feature-card **heading**: the body underneath stated everything we hold, but a heading is what gets scanned and the correction sat four sentences down. Check headings, not just body copy. |
 | "It asks before it acts" / "acts only with your approval" (unscoped) | Same umbrella as "nothing sends without your OK": chat replies, provider web search, `remember`, and calendar reads act without asking. Use the scoped Send-tap / calendar-changes forms. |
 | "Your agent's data stays on your computer" (once phone access ships) | **False** with phone access on. Installed add-ons and their settings are mirrored to our servers, encrypted. The true claim is custody without access: "we hold the messages and cannot read them." |
 | "Phone access never touches our servers" | **False**, and backwards. The mechanism *is* our servers, holding sealed messages. Claiming absence throws away the honest, checkable claim in exchange for one that is trivially disprovable. |

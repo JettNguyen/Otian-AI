@@ -72,7 +72,7 @@ only shape the checker cannot see.
 | `$37.26` | The inbox watch at Balanced with draft replies on, 200 a day, floor | Same |
 | `$64.26` | The same, ceiling | Same |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
-| `$15` | The price Meeting Notes once carried. Printed nowhere. On 2026-08-21 it was listed Free everywhere for now; on 2026-09-01 the decision was made permanent: **every add-on is included with Archie**, for everyone, and nothing in the catalog is sold on its own. The site's price filter, price badges and the submission form's price question were retired the same day | Its marketplace manifest in the Archie repo, `price_cents: 0` like all 151. The field stays only because removing it is a data migration. Pages say "included", never "free to start" or "premium" |
+| `$15` | Printed nowhere, and there is no add-on price to print: **every add-on is included with Archie**, for everyone, and nothing in the catalog is sold on its own. The site has no price filter, no price badge, and no price question on the submission form | Its marketplace manifest in the Archie repo, `price_cents: 0` like all 151. The field stays only because removing it is a data migration. Pages say "included", never "free to start" or "premium" |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
 
 ## Other companies' prices

@@ -14,8 +14,8 @@
    server. So the key exists in the Keychain on that computer and in localStorage here, and nowhere
    else. Firestore holds ciphertext.
 
-   That is load-bearing rather than decorative. TRUST.md commits us to holding three things about a
-   person: their email, whether they own Archie, and which paid add-ons they bought. A readable
+   That is load-bearing rather than decorative. TRUST.md commits us to holding two things about a
+   person: their email and whether they have a current plan. A readable
    mirror of somebody's installed skills and the answers they typed into them would quietly make
    that false. Sealing the payload is what lets this feature exist without changing the sentence.
 
@@ -792,8 +792,8 @@ function kindHeading(kind, label, count) {
    Browsing and installing, against the same live Firestore catalog the desktop app and the
    marketplace page read (js/catalog.js). Installing is the one thing here that changes somebody's
    agent, so it goes the long way round: an encrypted command to the computer, which runs it through
-   `marketplace_install` exactly as the desktop's own Install button does. Nothing about a paid
-   add-on's paywall, its prompt body, or its asset download is reimplemented on this side. */
+   `marketplace_install` exactly as the desktop's own Install button does. Nothing about an
+   add-on's prompt body or its asset download is reimplemented on this side. */
 
 /** The catalog, fetched once per page load. Small, and it does not change while someone browses. */
 let catalog = null;
@@ -841,10 +841,6 @@ function installedKeys(agent) {
   (agent.specialists || []).forEach((s) => keys.add("specialist:" + s.slug));
   if (agent.personality && agent.personality.id) keys.add("personality:" + agent.personality.id);
   return keys;
-}
-
-function priceLabel(cents) {
-  return cents ? "$" + (cents / 100).toFixed(2).replace(/\.00$/, "") : "Free";
 }
 
 async function renderStore(agent) {
@@ -1000,25 +996,13 @@ function bindStoreFilters() {
 
 function storeRow(item, have, agent) {
   const installed = have.has(item.kind + ":" + item.id);
-  const paid = item.price_cents > 0;
 
-  // Paid add-ons are bought on the computer. Saying so beats an Add button that fails, and the
-  // desktop's `marketplace_install` would refuse this anyway (require_owned_if_paid).
+  // Every add-on is included with Archie, so every row installs from here the same way.
   const action = installed
     ? '<button class="btn btn-secondary btn-mini" data-uninstall="' + escapeHtml(item.id) +
       '" data-kind="' + escapeHtml(item.kind) + '">Remove</button>'
-    : paid
-      ? ""
-      : '<button class="btn btn-primary btn-mini" data-install="' + escapeHtml(item.id) +
-        '" data-kind="' + escapeHtml(item.kind) + '">Add</button>';
-
-  // The price is a sentence, so it goes under the description with the other sentences rather than
-  // in the column the Add button would have used. Held there it was wider than the button it stood
-  // in for, and it took half the row away from the words explaining what the thing does.
-  const priceNote = !installed && paid
-    ? '<div class="phone-store-note phone-store-price">' + escapeHtml(priceLabel(item.price_cents)) +
-      ". Add this one on your computer.</div>"
-    : "";
+    : '<button class="btn btn-primary btn-mini" data-install="' + escapeHtml(item.id) +
+      '" data-kind="' + escapeHtml(item.kind) + '">Add</button>';
 
   // What it will still want after installing, said before the tap rather than discovered after.
   const needs = (item.required_integrations || [])
@@ -1039,8 +1023,6 @@ function storeRow(item, have, agent) {
     '<div class="phone-store-kind">' + escapeHtml(kind) + "</div>" +
     '<div class="phone-row-name">' + escapeHtml(item.name) + "</div>" +
     '<div class="phone-store-desc">' + escapeHtml(item.description) + "</div>" +
-    // Price first: what it costs decides whether the rest of the row is worth reading.
-    priceNote +
     needsNote +
     "</div>" +
     action +

@@ -10978,7 +10978,11 @@ html[data-theme="dark"] .booking-container iframe {
 /* Six rows carrying a scene rather than fourteen carrying a label. The left column is wider
    because it is now doing the work: the row has to be recognised, not scanned. `align-items:
    start` rather than `baseline`, since a two-line label and a one-line add-on name have no shared
-   baseline worth aligning to once the description sits under them. */
+   baseline worth aligning to once the description sits under them.
+
+   The label is a question the reader has asked themselves, so it is set as speech and given the
+   weight normally reserved for a heading. On a skim it is the only thing read, and the whole
+   section works or fails on whether that one line is recognised. */
 .cover-grid--scenes li {
   grid-template-columns: 1.6fr 1fr;
   gap: 10px 32px;
@@ -10996,6 +11000,9 @@ html[data-theme="dark"] .booking-container iframe {
 
 .cover-grid--scenes .cover-job {
   font-weight: 600;
+  font-size: var(--fs-xl);
+  line-height: 1.35;
+  display: block;
 }
 
 /* A second add-on on one row. It must not borrow `.cover-needs`, which is the muted tag meaning

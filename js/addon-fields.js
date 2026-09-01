@@ -46,6 +46,11 @@ export const ADDON_SPEC = {
       "name": "GoHighLevel"
     },
     {
+      "grants": "Read the meeting transcripts in a Fireflies account: recaps, decisions, action items, and who said what.",
+      "id": "fireflies",
+      "name": "Fireflies"
+    },
+    {
       "grants": "Read and write the Notion pages and databases you share with it.",
       "id": "notion",
       "name": "Notion"
@@ -166,18 +171,6 @@ export const ADDON_SPEC = {
               ],
               "placeholder": "",
               "required": true,
-              "scaffold": ""
-            },
-            {
-              "control": "number",
-              "help": "In cents. 0 is free.",
-              "key": "price_cents",
-              "label": "Price",
-              "max": 0,
-              "max_items": 0,
-              "options": [],
-              "placeholder": "",
-              "required": false,
               "scaffold": ""
             }
           ],
@@ -328,18 +321,6 @@ export const ADDON_SPEC = {
               ],
               "placeholder": "",
               "required": true,
-              "scaffold": ""
-            },
-            {
-              "control": "number",
-              "help": "In cents. 0 is free.",
-              "key": "price_cents",
-              "label": "Price",
-              "max": 0,
-              "max_items": 0,
-              "options": [],
-              "placeholder": "",
-              "required": false,
               "scaffold": ""
             }
           ],
@@ -515,18 +496,6 @@ export const ADDON_SPEC = {
               "placeholder": "",
               "required": true,
               "scaffold": ""
-            },
-            {
-              "control": "number",
-              "help": "In cents. 0 is free.",
-              "key": "price_cents",
-              "label": "Price",
-              "max": 0,
-              "max_items": 0,
-              "options": [],
-              "placeholder": "",
-              "required": false,
-              "scaffold": ""
             }
           ],
           "title": "Basics"
@@ -536,7 +505,7 @@ export const ADDON_SPEC = {
           "fields": [
             {
               "control": "prompt",
-              "help": "The prompt the skill runs on. Say what it does, name its tools, then the rules, ending with what it must never do and what to do when something is missing. Skills that skip those last two guess instead of asking.",
+              "help": "The prompt the skill runs on. Say what it does, name the tools it already has, then the rules, ending with what it must never do and what to do when something is missing. Skills that skip those last two guess instead of asking.",
               "key": "template_md",
               "label": "Instructions",
               "max": 20000,
@@ -544,7 +513,7 @@ export const ADDON_SPEC = {
               "options": [],
               "placeholder": "",
               "required": true,
-              "scaffold": "What this does, in one line and in your own words.\n\nTools:\n- Name each tool it should use, and when to reach for it.\n\nRules:\n1) When I say \"…\" → do this, in this order.\n2) When I say \"…\" → do this instead.\n3) If something it needs is missing → ask me for it. Never make it up.\n\nNever:\n- Never state something it didn't actually look up.\n- Never say a job finished before it has.\n\nHow it should sound: one line.\n"
+              "scaffold": "What this does, in one line and in your own words.\n\nTools:\n- Name each tool it should use, and when to reach for it. Only ones it really has: ticking a box\n  under Connected accounts is what grants the matching tools, and a name invented here is one it\n  cannot call.\n\nRules:\n1) When I say \"…\" → do this, in this order.\n2) When I say \"…\" → do this instead.\n3) If something it needs is missing → ask me for it. Never make it up.\n\nNever:\n- Never state something it didn't actually look up.\n- Never say a job finished before it has.\n\nHow it should sound: one line.\n"
             },
             {
               "control": "select",
@@ -725,18 +694,6 @@ export const ADDON_SPEC = {
               ],
               "placeholder": "",
               "required": true,
-              "scaffold": ""
-            },
-            {
-              "control": "number",
-              "help": "In cents. 0 is free.",
-              "key": "price_cents",
-              "label": "Price",
-              "max": 0,
-              "max_items": 0,
-              "options": [],
-              "placeholder": "",
-              "required": false,
               "scaffold": ""
             }
           ],

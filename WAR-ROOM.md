@@ -57,11 +57,15 @@ Seven panels, ordered by how often you would actually look.
 read another person's account document or count the collection. That is a correct rule and it is
 not being changed to feed a dashboard.
 
-So Pass 1 counts **copies that reported a heartbeat in the last seven days**, and the bar says
-"of 50,000 installs" in those words, with the undercount named underneath. It is a real number,
-available today, and it is not pretending to be an account count. Pass 2 puts paid accounts
-beside it off the billing summary, and the label moves at the same time. A goal bar that quietly
-switches definitions is worse than no bar; one that changes its label out loud is fine.
+So Pass 1 counts **distinct accounts that ran Archie in the last seven days**, and the bar says
+"of 50,000 active users". A heartbeat document is `heartbeats/{uid}` for the personal edition and
+`heartbeats/{uid}:business` for the other (`crates/archie-core/src/telemetry.rs`), so stripping
+the suffix turns rows into people exactly. Fleet deliberately keeps the rows, because a version
+histogram wants copies, not people.
+
+It is a floor, not a headcount, and the caption says so: an account whose copy nobody opens never
+reports. Pass 2 puts how many of them pay beside it, off the billing summary. A goal bar that
+quietly switches definitions is worse than no bar; one that changes its label out loud is fine.
 
 **2. Money.** Monthly recurring revenue, new subscriptions and cancellations this month, failed
 payments worth a nudge, outstanding guided-session invoices, Stripe available balance and the
@@ -127,7 +131,7 @@ also the part that works on day one with no backend at all.
 Three passes, each one shippable on its own.
 
 - **Pass 1, no backend work. SHIPPED 2026-09-01.** The page, the gate, Doors, and the panels the
-  site can already compute: Goal (on installs), Health, Fleet and Attention. Attention was not in
+  site can already compute: Goal (active accounts), Health, Fleet and Attention. Attention was not in
   the first draft of this file and earned its place during the build: crashes this week, which
   remote levers are in force right now, and what shipped last. A lever left on is the thing you
   forget, and it belongs on the page you open first rather than three clicks into the console
@@ -160,5 +164,6 @@ Three passes, each one shippable on its own.
    Drive folder and Hudson. They are `<span class="wr-door is-todo">` in `admin/index.html`, each
    with a TODO comment beside it. A dead link on this page costs more than an obvious gap.
 
-*Settled 2026-09-01: the Goal bar counts installs until the billing summary lands, and the page
-is called the War Room.*
+*Settled 2026-09-01: the page is called the War Room, and the Goal bar counts distinct active
+accounts until the billing summary lands (revised the same day from copies to accounts, once the
+heartbeat document id turned out to make people countable exactly).*

@@ -654,6 +654,47 @@ the webview.
 
 ---
 
+### ✅ What you can connect, and where each one's traffic goes
+
+Recorded 2026-09-01, when the works-with band went back on the homepage and the "Your connected
+accounts" rows on `trust/` and `trust/details/` were found naming five services out of a roster
+of forty-two. A list that stops at five, under a heading that invites the reader to catch us
+out, is the same shape as the holdings-list incident under What We Hold.
+
+**Approved wording (trust rows):** "Google, Microsoft, Telegram, Discord, Slack, Matrix, Todoist,
+Fireflies, GoHighLevel, and any service you connected with a key of your own: directly." And for
+the local lane: "Lights you added from your own wifi (Philips Hue, WiZ, LIFX): over that wifi,
+and the request never leaves your network."
+
+**Why it's true:**
+- Chat apps: the five adapters in `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`,
+  every one outbound from the user's computer on the user's own tokens. Signal (`signal.rs`) is
+  behind a non-default cargo feature for licence reasons (FACTS.md, "5 chat apps") and stays off
+  the site until that is resolved.
+- Mail and calendar: `crates/archie-net/src/mail/{google,microsoft}.rs` and
+  `calendar/{google,microsoft}.rs`, OAuth tokens in the Keychain, requests straight to Google and
+  Microsoft.
+- Todoist, Fireflies, GoHighLevel: a pasted key each, `BuiltinIntegration` in
+  `crates/archie-domain/src/builtins.rs` and `crates/archie-net/src/ghl.rs`.
+- Every service connected with a key: `KNOWN_SERVICES` in `crates/archie-domain/src/connectors.rs`,
+  twenty-one of them. A key is bound to one host (`ConnectorEntry`) and the runtime attaches it,
+  never the model (`archie_net::http::send` drops runtime-owned headers).
+- Lights on the user's own wifi: `crates/archie-domain/src/local_devices.rs` refuses any roster
+  address that is not private, `crates/archie-net/src/local/{hue,wiz,lifx}.rs` speak only to those
+  addresses, and the test `the_two_guards_never_overlap` (`local/mod.rs`) proves no address is
+  reachable from both the local lane and the internet lane.
+
+**Boundaries:**
+- ❌ Never "never leaves your computer" for the lights. It leaves the computer and crosses the
+  user's own wifi to the bulb or the bridge. The claim is that it never leaves the *network*.
+- ❌ Never fold the LIFX cloud connector and the LIFX bulb on the wifi into one path. `lifx` in
+  `KNOWN_SERVICES` goes to api.lifx.com on a key; a LIFX bulb added on the Home devices card is
+  reached on the LAN. The band shows LIFX once and the privacy policy describes both.
+- The Hue bridge talks to Philips on its own. That is the bridge's traffic, not Archie's, and no
+  sentence may say Archie keeps it home.
+- What the agent learns from a light (its name, on or off) goes to the AI provider like any other
+  tool result. Say so wherever the local lane is described; the privacy policy does.
+
 ## What We Hold — state the whole list, always
 
 **The account core:** "Our servers know your email address and whether you have a current plan.

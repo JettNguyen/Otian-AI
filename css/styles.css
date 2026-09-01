@@ -2432,8 +2432,260 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   }
 }
 
+/* ── Works-with: the river band under the hero ───────────────────────────────
+   One dense strip of the 22 names, two rows drifting opposite ways. Chips rather than a
+   comma list so the eye lands on a mark it recognises without reading anything, which is
+   the entire job: this sits directly under the hero, before a visitor has read a word.
+
+   The motion contract, so nobody "fixes" half of it:
+   - .ww-track is six identical lists and the keyframe translates -50%, so the landing
+     frame is pixel-identical to the start. Uniform spacing comes from padding-right on
+     each list, NOT gap on the track: a track gap leaves half a gap at the -50% point and
+     the loop visibly jumps.
+   - 112s is not a taste choice on its own: half a track is roughly 4500px, and 4500/112 is
+     about 40px/s, slow enough to read a name mid-drift. Change duration and width
+     together or the speed changes. Since 2026-09-01 each track sets --ww-dur inline, scaled
+     to its own name count (112s per twenty), so two rows of different lengths drift at the
+     same speed.
+   - Hover pauses the row under the cursor; the checkbox in the section markup pauses
+     both rows without a pointer, which is what WCAG 2.2.2 actually asks for; and
+     reduced-motion replaces the whole mechanism with a static wrapped row. */
+.ww-band {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 30px 0 32px;
+}
+
+.ww-band-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.ww-band-head .section-label {
+  margin-bottom: 0;
+}
+
+.ww-band-line {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-2xl);
+  font-weight: 400;
+  margin: 0;
+}
+
+.ww-pause-btn {
+  margin-left: auto;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition-quick), color var(--transition-quick);
+}
+
+.ww-pause-btn:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.ww-pause-btn:active {
+  background: var(--surface-hover-strong);
+}
+
+.ww-pause-box:focus-visible ~ .container .ww-pause-btn {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.ww-pause-glyph {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+.ww-pause-on { display: none; }
+.ww-pause-box:checked ~ .container svg.ww-pause-on { display: block; }
+.ww-pause-box:checked ~ .container span.ww-pause-on { display: inline; }
+.ww-pause-box:checked ~ .container .ww-pause-off { display: none; }
+
+.ww-mq {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.ww-mq + .ww-mq { margin-top: 10px; }
+
+.ww-track {
+  display: flex;
+  width: max-content;
+  animation: ww-drift var(--ww-dur, 112s) linear infinite;
+}
+
+.ww-mq--rev .ww-track { animation-direction: reverse; }
+
+.ww-mq:hover .ww-track,
+.ww-pause-box:checked ~ .ww-mq .ww-track {
+  animation-play-state: paused;
+}
+
+/* Doubled selector on purpose: .works-with-list's own margin/padding/gap rule sits later
+   in this file and wins a specificity tie, which is how the seam between list copies
+   shipped with zero gap (its padding: 0 beat the padding-right here). The padding-right
+   must always equal the in-list gap: it is the spacing at the -50% loop seam, and any
+   mismatch shows as a hitch between the last pill and the first. */
+.works-with-list.ww-run {
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+/* Each chromatic pill takes a light wash of its brand's own colour, the same hex its
+   mark already carries, so the tint is sourced exactly like the shape. Achromatic brands
+   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) publish ink-on-white and
+   deliberately keep the plain white card pill: an earlier neutral-grey fallback made them
+   look disabled next to the coloured rows. The attribute selector is the gate, because
+   only tinted pills carry the inline --ww-tint; and the doubled class outranks the base
+   pill rule that sits later in this file (equal specificity shipped tintless pills once
+   already). Browsers without color-mix keep the plain card pill. */
+.works-with-list.ww-run li[style*="--ww-tint"] {
+  background: color-mix(in srgb, var(--ww-tint) 12%, var(--bg-card));
+  border-color: color-mix(in srgb, var(--ww-tint) 32%, var(--border));
+}
+
 @keyframes ww-drift {
   to { transform: translateX(-50%); }
+}
+
+.ww-band .stat-row {
+  margin: 22px 0 0;
+}
+
+.ww-band .works-with-note { margin-top: 14px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ww-track { animation: none; width: auto; }
+  .ww-mq {
+    -webkit-mask-image: none;
+    mask-image: none;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .ww-track > [aria-hidden="true"] { display: none; }
+  .ww-run { flex-wrap: wrap; }
+  .ww-pause-btn { display: none; }
+}
+
+.works-with-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.works-with-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 5px 12px 5px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Brand marks for the works-with row. Every one of the 24 is the company's own artwork, and
+   each traces to a source that can be named:
+
+   - Seven come from `SERVICE_MARK` and `OutlookMark` in the Archie app's src/app/connect.tsx,
+     so the product and the site agree about what a service looks like.
+   - Ten came from Simple Icons, verifiably the same source the app used (its notion.svg is
+     byte-identical to the path already in connect.tsx).
+   - Slack, OpenAI, xAI, and the 2026 Google set (Gmail, Calendar, Tasks) and 2025 Gemini
+     sparkle are the official artwork via Wikimedia Commons, each file's source page checked:
+     Tasks is credited to workspace.google.com directly, Gemini was extracted from Google's
+     own About Gemini page, Slack from Slack's brandfolder, and the Gmail/Calendar 2026 files
+     share the exact palette and May 19, 2026 redesign date with the Google-credited Tasks
+     file. Groq is the bolt from groq.com/favicon.svg and Fireflies the logo served by
+     fireflies.ai, both fetched from the companies themselves on 2026-08-15.
+   - lemlist is lemlist_symbol.svg from their own brand directory on web-assets.lemlist.com,
+     and GoHighLevel is the symbol half of the logo their homepage loads (the wordmark beside it
+     is 172 units wide and would be a stripe at 18px, so only the three arrows are kept and the
+     original geometry is untouched). Both fetched on 2026-08-26.
+
+   Gradient, mask and filter ids inside these inline SVGs are namespaced per brand (wwsl-,
+   wwgm-, ...) because inline SVG ids share one document: two marks both defining id="a"
+   would silently take the first one's gradient.
+
+   Colour follows the brand rather than us, which is the app's rule and its reasoning: a
+   chromatic mark keeps its colour, because the colour is half the recognition (Telegram's
+   blue, Discord's blurple, Linear's purple, Airtable's three). An achromatic one takes
+   currentColor, which is what those brands specify, since they publish black on light
+   grounds and white on dark, and it is the only version that survives dark mode (Notion,
+   GitHub, Matrix, OpenAI, xAI, LIFX). Anthropic's tile wears Claude's splotch in Claude's
+   own coral rather than the corporate A, matching the app: the label names the company, and
+   the mark somebody has actually seen is the one on the product they used.
+
+   .ww-mark--mono is the two-letter fallback for any future service that arrives before its
+   artwork does; nothing uses it today. GoHighLevel is the reason to keep it: their brand kit is
+   behind a support portal, so if the homepage stops serving that file there is somewhere to fall
+   back to that is not a drawing of ours. */
+/* Added 2026-09-01, when the band came back with the roster brought up to the app:
+   - Philips Hue is the Simple Icons path (CC0, redrawn from the mark on philips-hue.com), in
+     the brand blue Simple Icons records for it, #0065D3. Telegram, Discord, Linear, Airtable,
+     Home Assistant and most of the second row already came from the same set.
+   - WiZ is the W from wiz-logo-small.svg, the wordmark wizconnected.com loads in its own header,
+     fetched 2026-09-01: one path, geometry untouched, the way GoHighLevel keeps only its three
+     arrows. Signify publishes no standalone symbol as a vector (their favicon is a 32px raster
+     of this same W with a dot), and the wordmark at 18px wide is a stripe, so the W stands for
+     it. currentColor because they ship the mark in navy on light and in white on dark
+     (logo-wiz-white.svg), which is the same rule Notion follows above. */
+.ww-mark {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--text-primary);
+}
+
+.ww-mark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ww-mark--mono {
+  border-radius: 5px;
+  background: var(--surface-soft-strong);
+  color: var(--text-muted);
+  font-size: var(--fs-3xs);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.works-with-note {
+  max-width: 860px;
+  margin: 32px auto 0;
+  text-align: center;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.8;
 }
 
 /* Objection answers under a step, not a second description of it. Deliberately quieter than
@@ -10481,6 +10733,18 @@ html[data-theme="dark"] .booking-container iframe {
    carries soft radial washes, and the headline masks that hide the spine line
    behind text paint flat --bg-primary. On a washed backdrop those masks show
    their edges; on a flat one they disappear completely. */
+/* Connections band: the river band restyled to the quiet grammar */
+.ww-band--home { background: var(--bg-secondary); border-bottom: 0; padding: 96px 0; }
+/* The headline stays truly centered and the pause control rides its row at the
+   right edge of the container: absolute, so the button's width never nudges the
+   centering, anchored to the bottom of the head where the headline sits. */
+.ww-band--home .ww-band-head { position: relative; flex-direction: column; align-items: center; text-align: center; gap: 4px; margin-bottom: 44px; }
+.ww-band--home .ww-pause-btn { position: absolute; right: 0; bottom: 4px; margin-left: 0; }
+.ww-band--home .works-with-list li,
+.ww-band--home .works-with-list.ww-run li[style*="--ww-tint"] { background: transparent; border: 0; box-shadow: none; font-weight: 600; }
+.ww-band--home .ww-band-line { font-size: clamp(1.85rem, 3.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.18; }
+.ww-band--home .works-with-note { text-align: center; max-width: 620px; margin: 40px auto 0; font-size: var(--fs-sm); color: var(--text-muted); }
+
 .hm-day { background: var(--bg-primary); }
 .hm-dayhead { margin-bottom: 64px; }
 .hm-spine { position: relative; max-width: 560px; margin: 0 auto; }

@@ -61,59 +61,77 @@ function kindLabel(kind) {
 }
 
 /* Featured Starter Packs: curated bundles of add-ons that already exist in the catalog, referenced
-   by kind + id (mirrors Archie's src/app/packs.ts). A pack carries no logic of its own: the page
-   resolves each item against the loaded catalog, so a private item a visitor can't see simply
-   doesn't appear in that pack (and is counted as "shared with select accounts" instead). Keep the
-   ids in sync with data/marketplace/<kind>/ in the Archie repo. */
+   by kind + id. A copy of every pack in Archie's src/app/packs.ts that is not marked exclusive,
+   regenerated from that file on 2026-09-01 (it had drifted: one pack had been added there and
+   another had become exclusive). An exclusive pack is one the app shows only to the accounts
+   every one of its items was shared with, so it does not belong on a public page at all. A pack
+   carries no logic of its own: the page resolves each item against the loaded catalog, so a
+   private item a visitor can't see simply doesn't appear in that pack (and is counted as "shared
+   with select accounts" instead). Keep in step with packs.ts in the Archie repo. */
 var PACKS = [
-  { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A great all-rounder to start with", accent: "accent", recommended: true,
-    description: "The best first pack for anyone. Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, nothing to set up.",
+  { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A bit of everything, so you find what you’ll actually use", accent: "accent", recommended: true,
+    description: "Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, with nothing to set up.",
+    example: "add “call the dentist” to my to-do list",
     items: [["skill","task-manager"],["skill","personal-journal"],["specialist","researcher"],["personality","friendly"]] },
-  { id: "personal-organizer", name: "Personal Organizer", tagline: "Stay on top of tasks and habits", accent: "blue",
-    description: "Turn your agent into the thing that keeps your life on track: a real task list and habit tracker, plus a morning digest of what's due and a Sunday review of the week. It nudges you so you don't have to remember to check.",
+  { id: "personal-organizer", name: "Personal Organizer", tagline: "One place for tasks and habits, with a nudge before anything slips", accent: "blue",
+    description: "A real task list and a habit tracker your agent keeps for you, a digest each morning of what is due, and a look back at the week each Sunday.",
+    example: "what have I got on today?",
     items: [["skill","task-manager"],["skill","habit-tracker"],["routine","daily-task-digest"],["routine","weekly-review"]] },
-  { id: "mind-wellness", name: "Mind & Wellness", tagline: "Reflect, and build good habits", accent: "teal",
-    description: "A calmer corner of your day. Keep a private journal, note your mood, log a daily gratitude, and track the habits you're building, with gentle evening and check-in nudges, all in an unhurried, grounding voice.",
-    items: [["skill","personal-journal"],["skill","mood-tracker"],["skill","gratitude"],["skill","habit-tracker"],["routine","evening-journal"],["routine","mood-check-in"],["routine","gratitude-wind-down"],["routine","habit-check-in"],["personality","calm-anchor"]] },
-  { id: "creators-desk", name: "Creator's Desk", tagline: "Write, learn, and stay inspired", accent: "plum",
-    description: "For making things. A writing skill that drafts and sharpens your words, a learning coach to skill up, a saved reading list for inspiration, and a bright, imaginative voice to bounce ideas off.",
+  { id: "mind-wellness", name: "Mind & Wellness", tagline: "Reflect and build good habits, for a calmer, steadier day", accent: "teal",
+    description: "A calmer corner of your day. One dated entry holds your journal, your mood and the good things, and Habit Tracker keeps your streaks honest, with one gentle evening nudge that files all of it from a single reply.",
+    example: "I had a good day today, here’s why…",
+    items: [["skill","personal-journal"],["skill","habit-tracker"],["routine","evening-reflection"],["routine","habit-check-in"]] },
+  { id: "creators-desk", name: "Creator’s Desk", tagline: "Write, learn, and stay inspired, so the blank page stops winning", accent: "plum",
+    description: "A writing skill that drafts and sharpens your words, a learning coach for the craft you are picking up, a saved reading list, and a bright, imaginative voice to bounce ideas off.",
+    example: "help me write an opening line for this post",
     items: [["specialist","writer"],["skill","learning-coach"],["skill","reading-list"],["personality","creative-muse"]] },
-  { id: "student", name: "Student", tagline: "Learn faster, study smarter", accent: "gold",
+  { id: "student", name: "Student", tagline: "Flashcards, quizzes, and sources that make studying stick", accent: "gold",
     description: "A study partner that sticks. The learning coach makes flashcards and quizzes you with spaced repetition, the researcher digs up sources on the live web, and the study-partner voice keeps you focused and encouraged.",
+    example: "quiz me on what I studied yesterday",
     items: [["skill","learning-coach"],["specialist","researcher"],["personality","study-partner"]] },
-  { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, trips, and reading", accent: "green",
-    description: "The everyday-life bundle. Plan meals around your tastes (or around what's already in your fridge), track spending, set savings goals, plan trips, and keep one list of everything you want to read: saved tools your agent remembers between chats.",
-    items: [["skill","meal-planner"],["skill","fridge-dinner"],["skill","expense-tracker"],["skill","savings-goals"],["skill","trip-planner"],["skill","reading-list"]] },
-  { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already caught up", accent: "blue",
-    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered from the live web and delivered in a crisp, no-fluff voice.",
-    items: [["specialist","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"],["personality","concise"]] },
-  { id: "home-errands", name: "Home & Errands", tagline: "The household admin, off your plate", accent: "gold",
-    description: "The stuff that's easy to forget. Track bills, home upkeep, your car, warranties and returns, and your plants and pets (each with a timely reminder), plus a watch on prices for things you're waiting to buy, all run by an unflappable concierge.",
-    items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["personality","exec-concierge"]] },
-  { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Never miss a moment that matters", accent: "plum",
-    description: "Be the person who always remembers. Your agent keeps birthdays and the people you mean to stay in touch with, nudges you before it's too late, and helps you write the card, note, or reply, in a warm, personal voice.",
-    items: [["skill","birthday-keeper"],["skill","stay-in-touch"],["skill","card-note-writer"],["skill","reply-helper"],["routine","birthday-heads-up"],["routine","stay-in-touch-nudge"],["personality","warm-companion"]] },
-  { id: "healthy-active", name: "Healthy & Active", tagline: "Move more, stay on top of your health", accent: "green",
-    description: "A pocket coach for body and routine. Get home workouts you can do anywhere with a nudge to actually do them, and keep your medications on schedule with a daily reminder, all in an upbeat, motivating voice.",
-    items: [["skill","home-workout"],["skill","medication-reminder"],["routine","workout-nudge"],["routine","med-reminders"],["personality","hype-coach"]] },
-  { id: "fun-curious", name: "Fun & Curious", tagline: "A little delight, every day", accent: "accent",
-    description: "For the fun of it. Learn a new word and a piece of trivia each day, and get a spot-on pick for what to watch tonight: a light, playful sidekick that makes your agent enjoyable to open, not just useful.",
-    items: [["skill","word-of-the-day"],["skill","daily-trivia"],["skill","watch-tonight"],["routine","daily-word"],["routine","trivia-time"],["personality","playful-sidekick"]] },
-  { id: "sales-business", name: "Sales & Business", tagline: "For teams working a pipeline", accent: "accent",
-    description: "The lead-gen toolkit. A shared client memory, a strategist that reasons about your next move, and a deal desk that matches buyers to suppliers, plus engagement scoring, outreach drafting, a lead-gen playbook, a prospecting skill, pipeline reports, a weekly strategy note, and a closer's voice. Built for sales teams.",
-    items: [["skill","client-brain"],["skill","strategist"],["skill","deal-desk"],["skill","engagement-scoring"],["skill","outreach-studio"],["skill","lead-gen-playbook"],["specialist","prospector"],["routine","daily-pipeline-report"],["routine","weekly-pipeline-review"],["routine","weekly-strategy"],["personality","deal-closer"]] },
+  { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, and trips handled, so the week runs itself", accent: "green",
+    description: "The everyday-life bundle. Plan meals around your tastes (or around what’s already in your fridge), keep on top of what repeats and what you spend, plan trips, and hold one list of everything you want to read and watch. These are saved tools your agent remembers between chats.",
+    example: "what can I make with chicken, rice and half a lemon?",
+    items: [["skill","meal-planner"],["skill","bill-tracker"],["skill","money-in-out"],["skill","trip-planner"],["skill","reading-list"]] },
+  { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already up to date, without opening a single app", accent: "blue",
+    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered from the live web while you sleep.",
+    example: "what happened in the news overnight?",
+    items: [["specialist","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"]] },
+  { id: "life-admin", name: "Life Admin", tagline: "The paperwork side of being a person, held for you", accent: "gold",
+    description: "For the parts of life that arrive as documents and appointments. Ask your own lease, policy or handbook a question and get the clause quoted back, keep a long application moving without reloading it in your head, remember what the doctor actually said, and hand the whole house over to a sitter in one note. Nothing to connect.",
+    example: "does my lease let me have a dog?",
+    items: [["skill","my-documents"],["skill","paperwork"],["skill","health-record"],["skill","the-handover"],["specialist","researcher"]] },
+  { id: "home-errands", name: "Home & Errands", tagline: "Every renewal date, remembered for you", accent: "gold",
+    description: "The dates nobody writes down. Bills and subscriptions before they lapse, the filter and the service due on the house and the car, a warranty before its return window shuts, the plants and the pets, and the price on something you are waiting to buy.",
+    example: "my car insurance renews in March, remind me",
+    items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["routine","return-window-watch"]] },
+  { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Remember the people who matter, so you’re never the one who forgot", accent: "plum",
+    description: "Your agent keeps birthdays and the people you mean to stay in touch with, nudges you before it’s too late, and helps you write the card, note, or reply.",
+    example: "remind me about mom’s birthday next month",
+    items: [["skill","birthday-keeper"],["skill","stay-in-touch"],["skill","reply-helper"],["routine","birthday-heads-up"],["routine","stay-in-touch-nudge"]] },
+  { id: "healthy-active", name: "Healthy & Active", tagline: "A workout you can start now, and medications on time", accent: "green",
+    description: "Home workouts you can do anywhere, with a nudge to actually do them, and a daily reminder that keeps your medications on schedule.",
+    example: "give me a 20 minute workout I can do at home",
+    items: [["skill","home-workout"],["skill","medication-reminder"],["routine","workout-nudge"],["routine","med-reminders"]] },
+  { id: "fun-curious", name: "Fun & Curious", tagline: "A little delight every day, for when you need a lighter minute", accent: "accent",
+    description: "Learn a new word and a piece of trivia each day, and keep one list of everything you want to read and watch, with a confident pick when you can’t decide what to put on. The word and the trivia arrive on their own each day.",
+    example: "what should I watch tonight?",
+    items: [["skill","word-of-the-day"],["skill","daily-trivia"],["skill","reading-list"],["routine","daily-word"],["routine","trivia-time"]] },
 ];
 
 /* Friendly names for integration slugs, for the "Works with" hint on a card's detail.
    The two mail slugs are named after Google because Google was the only provider when they were
-   written, and they cannot be renamed now: the slug is in every published add-on. Outlook and
-   Office 365 serve both, so the chip says what is needed rather than whose. Kept in step with
-   `INTEGRATION_LABELS` in the Archie repo's src/app/marketplace.tsx. */
+   written, and they cannot be renamed now: the slug is in every published add-on. Several
+   providers serve each of them now, so the chip says what is needed rather than whose. Kept in
+   step with `INTEGRATION_LABELS` in the Archie repo's src/app/store-widgets.tsx. */
 var INTEGRATION_LABELS = {
   fireflies: "Fireflies",
-  google_calendar: "Google or Outlook calendar",
-  gmail: "Gmail or Outlook",
+  google_calendar: "a calendar",
+  gmail: "an email account",
   google_tasks: "Google Tasks",
+  home_assistant: "Home Assistant",
+  local_devices: "Hue, WiZ or LIFX on your wifi",
+  imessage: "Messages on a Mac",
 };
 function formatIntegration(slug) {
   return INTEGRATION_LABELS[slug] ||
@@ -278,6 +296,16 @@ var emptyState  = document.getElementById("marketplaceFilterEmpty");
 var statusEl    = document.getElementById("mpGridStatus");
 
 var state = { publicItems: [], privateItems: [], loaded: false };
+/* The line above the pack cards while a search is running ("2 packs for this"). Made here rather
+   than in the page, so the browse page carries no element that only a search ever fills. */
+var packHitsEl = null;
+if (packGrid && packGrid.parentNode) {
+  packHitsEl = document.createElement("p");
+  packHitsEl.className = "mp-grid-status";
+  packHitsEl.hidden = true;
+  packGrid.parentNode.insertBefore(packHitsEl, packGrid);
+}
+var lastPackHits = 0;
 // Starter Packs are the default landing view, matching the Archie app.
 var activeType = "packs";
 var activeCategory = "all";
@@ -391,22 +419,56 @@ function packHtml(pack, index) {
   return html;
 }
 
-function renderPacks() {
-  if (!packGrid) return;
-  var index = {};
-  allItems().forEach(function (it) { index[it.kind + "/" + it.id] = it; });
-  packGrid.innerHTML = PACKS.map(function (p) { return packHtml(p, index); }).join("");
+/* Packs answer the search box too, the way they do in the app (Archie's marketplace.tsx, "Packs
+   answer the search box too"). Until 2026-09-01 typing anything dropped the whole packs view, so
+   "student" found a learning skill and never the Student pack, and a bundle that hides when you
+   search for the bundle is not a bundle. Matched on the pack's own words, its example message,
+   and the names and descriptions of what is inside it, because somebody typing "invoices" wants
+   the pack that handles invoices whatever it is called. Every typed word has to appear. */
+function packMatches(q, index) {
+  var terms = q.split(/\s+/).filter(Boolean);
+  if (!terms.length) return PACKS;
+  return PACKS.filter(function (p) {
+    var inside = p.items.map(function (pair) {
+      var it = index[pair[0] + "/" + pair[1]];
+      return it ? it.name + " " + (it.description || "") : "";
+    });
+    var hay = [p.name, p.tagline, p.description, p.example || ""].concat(inside).join(" ").toLowerCase();
+    return terms.every(function (t) { return hay.indexOf(t) !== -1; });
+  });
 }
 
-/* Show the packs grid or the add-on grid depending on the active tab. Packs is a distinct view
-   with no category filtering; searching always drops into the add-on grid. */
+/* Draws the pack cards for the current search (every pack when nothing is typed) and returns how
+   many there are, so updateView can tell whether the grid has anything to show. */
+function renderPacks(q) {
+  if (!packGrid) return 0;
+  var index = {};
+  allItems().forEach(function (it) { index[it.kind + "/" + it.id] = it; });
+  var packs = packMatches(q, index);
+  packGrid.innerHTML = packs.map(function (p) { return packHtml(p, index); }).join("");
+  return packs.length;
+}
+
+/* Show the packs grid, the add-on grid, or both. The Starter Packs tab is a distinct view with no
+   category filtering. A search shows the add-on grid and, above it, whichever packs match, with a
+   line saying so: a pack is a whole answer to a search where a single add-on is a piece of one. */
 function updateView() {
-  var searching = searchInput && searchInput.value.trim().length > 0;
-  var showPacks = activeType === "packs" && !searching;
-  if (packGrid) packGrid.hidden = !showPacks;
-  if (controlsRow) controlsRow.hidden = showPacks;
-  if (grid) grid.hidden = showPacks;
-  if (showPacks) {
+  var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  var searching = q.length > 0;
+  var packsTab = activeType === "packs" && !searching;
+  var hits = renderPacks(q);
+  lastPackHits = searching ? hits : 0;
+  var packsShown = packsTab || lastPackHits > 0;
+  if (packGrid) packGrid.hidden = !packsShown;
+  if (packHitsEl) {
+    packHitsEl.hidden = lastPackHits === 0;
+    packHitsEl.textContent = lastPackHits === 1
+      ? "A pack for this. It installs several add-ons at once."
+      : lastPackHits + " packs for this. Each installs several add-ons at once.";
+  }
+  if (controlsRow) controlsRow.hidden = packsTab;
+  if (grid) grid.hidden = packsTab;
+  if (packsTab) {
     if (emptyState) emptyState.hidden = true;
   } else {
     applyFilters();
@@ -428,7 +490,8 @@ function applyFilters() {
     card.hidden = !match;
     if (match) visible++;
   });
-  if (emptyState) emptyState.hidden = visible !== 0 || !state.loaded;
+  // A search that found a pack and no single add-on is not empty: the pack is the answer.
+  if (emptyState) emptyState.hidden = visible !== 0 || lastPackHits > 0 || !state.loaded;
 }
 
 function rerender() {
@@ -436,7 +499,6 @@ function rerender() {
   renderTabs(items);
   renderCategories(items);
   renderGrid(items);
-  renderPacks();
   updateView();
 }
 
@@ -463,9 +525,10 @@ if (filterBar) {
     applyFilters();
   });
 }
-/* A search spans every add-on, so it can't stay on the packs view: drop into the add-on grid
-   and move the highlight to "All". Shared by typing and by an incoming ?q=, which must land
-   the reader in exactly the state they would have reached by typing it themselves. */
+/* A search spans every add-on, so it can't stay on the packs-only view: drop into the add-on grid
+   (the packs that match are drawn above it by updateView) and move the highlight to "All".
+   Shared by typing and by an incoming ?q=, which must land the reader in exactly the state they
+   would have reached by typing it themselves. */
 function leavePacksForSearch() {
   if (!searchInput || !searchInput.value.trim() || activeType !== "packs") return;
   activeType = "all";

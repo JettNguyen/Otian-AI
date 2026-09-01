@@ -862,11 +862,17 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   transform: rotate(-135deg) translateY(-1px);
 }
 
+/* A dropdown is as wide as its wordiest entry, so the width is really a budget on the labels.
+   The ceiling is set just past the longest one we keep ("What We Can and Can't See"), which
+   means a new entry that overruns wraps to two lines in the menu rather than quietly stretching
+   the panel across the header. Wrapping is the visible failure, and a visible failure is the
+   point: it asks for a shorter name instead of more room. */
 .nav-more-menu {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
   min-width: 200px;
+  max-width: 240px;
   background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -1344,13 +1350,18 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   position: fixed;
   top: 0;
   right: 220px;
-  /* Wide enough for a label that says what it is. The menu items were renamed to name their
-     subject ("What Computer Do I Need?" rather than "What to Run It On"), which is longer, and at
-     160px every one of them wrapped to two lines. The ceiling is 200px and the floor is the old
-     160px, because this panel sits beside the 220px drawer: on a 375px phone, 220 + 200 + a 16px
-     margin already exceeds the viewport, so the clamp gives the extra room only to the phones that
-     have it and never takes any away from the ones that do not. The closed-state transform below
-     is written in percentages of this width, so it stays correct at every step of the clamp. */
+  /* Wide enough for a label that says what it is. The menu items name their subject rather than
+     gesturing at it, and at the 160px floor the longer ones still wrap. Most were shortened on
+     2026-09-01, which is what took the worst of them off a third line; the one that sets this
+     width now is "What We Can and Can't See", and that one is staying long on purpose, because
+     the half saying what we cannot see is the honest half and a nav label is not the place to
+     drop it.
+
+     The ceiling is 200px and the floor is the old 160px, because this panel sits beside the 220px
+     drawer: on a 375px phone, 220 + 200 + a 16px margin already exceeds the viewport, so the clamp
+     gives the extra room only to the phones that have it and never takes any away from the ones
+     that do not. The closed-state transform below is written in percentages of this width, so it
+     stays correct at every step of the clamp. */
   width: clamp(160px, calc(100vw - 236px), 200px);
   height: 100%;
   background: var(--bg-secondary);

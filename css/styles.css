@@ -692,6 +692,47 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   }
 }
 
+/* While the reader is heading down the page the wordmark text tucks away behind the icon,
+   and it slides back out the moment they head up. js/nav.js drives it by toggling
+   .logo-tucked on the nav from scroll direction. Only the divider and text move; the icon
+   stays put, so the link home never shifts under the pointer. The max-width is a ceiling
+   for the animation, not a layout width: it only needs to clear the widest tagline. */
+.nav-logo-divider,
+.nav-logo-text {
+  transition:
+    opacity 0.28s ease,
+    transform 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    max-width 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    margin 0.38s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-logo-text {
+  max-width: 220px;
+  overflow: hidden;
+}
+
+.nav.logo-tucked .nav-logo-text {
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+.nav.logo-tucked .nav-logo-divider {
+  width: 0;
+  margin-left: 0;
+  margin-right: 0;
+  opacity: 0;
+  transform: scaleY(0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo-divider,
+  .nav-logo-text {
+    transition: none;
+  }
+}
+
 /* Desktop links */
 .nav-links {
   display: flex;

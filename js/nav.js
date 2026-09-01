@@ -265,15 +265,29 @@
     }
   });
 
-  /* ── Scroll: nav opacity ── */
+  /* ── Scroll: nav opacity + wordmark tuck ── */
   const nav = document.getElementById('nav');
   if (nav) {
+    /* The wordmark text tucks away behind the icon while the reader heads down the page,
+       and slides back out the moment they head up (styles.css, .logo-tucked). Direction,
+       not position: someone deep in a long page who reverses gets the name back
+       immediately. The 12px hysteresis keeps momentum-scroll wobble on touch screens
+       from flickering it, and near the top the text is always shown, so a page never
+       arrives with the name missing. */
+    var lastY = window.scrollY;
     window.addEventListener('scroll', function () {
-      if (window.scrollY > 20) {
-        nav.classList.add('scrolled');
+      var y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 20);
+      if (y <= 80) {
+        nav.classList.remove('logo-tucked');
+      } else if (y > lastY + 12) {
+        nav.classList.add('logo-tucked');
+      } else if (y >= lastY - 12) {
+        return; /* within hysteresis: leave lastY as the anchor */
       } else {
-        nav.classList.remove('scrolled');
+        nav.classList.remove('logo-tucked');
       }
+      lastY = y;
     }, { passive: true });
   }
 

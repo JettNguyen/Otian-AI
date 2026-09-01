@@ -185,11 +185,6 @@ function fetchPrivate(uid) {
 
 /* ── Card rendering ─────────────────────────────────────────────────────── */
 
-function priceLabel(cents) {
-  if (!cents) return { cls: "is-free", text: "Free" };
-  return { cls: "is-premium", text: "$" + (cents / 100).toFixed(2).replace(/\.00$/, "") + " · one-time" };
-}
-
 function detailHtml(item) {
   var parts = [];
 
@@ -233,7 +228,6 @@ function detailHtml(item) {
 
 function cardHtml(item) {
   var kindLabel = COLLECTIONS.filter(function (c) { return c.kind === item.kind; })[0].label;
-  var price = item.price_cents ? priceLabel(item.price_cents) : null;
   var isPrivate = item.visibility === "private";
   var searchBlob = [item.name, item.description, item.long_description, item.tagline, item.category,
     item.role, item.tone].concat(item.triggers).join(" ").toLowerCase();
@@ -242,7 +236,6 @@ function cardHtml(item) {
   var html = "";
   html += '<article class="mp-product-card" data-type="' + shelfKind(item.kind) + '"' +
     ' data-category="' + escapeHtml(item.category) + '"' +
-    ' data-price="' + (item.price_cents ? "premium" : "free") + '"' +
     ' data-visibility="' + item.visibility + '"' +
     ' data-name="' + escapeHtml(item.name.toLowerCase()) + '"' +
     ' data-search="' + escapeHtml(searchBlob) + '">';
@@ -261,7 +254,6 @@ function cardHtml(item) {
   if (detail) html += '<div class="mp-card-detail" hidden>' + detail + "</div>";
 
   html += '<div class="mp-card-bottom">';
-  if (price) html += '<span class="mp-price-badge ' + price.cls + '">' + price.text + "</span>";
   if (isPrivate) {
     html += '<span class="mp-exclusive-badge" title="Shared privately with your account">' +
       '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' +
@@ -279,7 +271,6 @@ function cardHtml(item) {
 var typeTabs    = document.getElementById("mpTypeTabs");
 var filterBar   = document.getElementById("marketplaceFilterBar");
 var searchInput = document.getElementById("marketplaceSearchInput");
-var priceToggle = document.getElementById("mpPriceToggle");
 var controlsRow = document.getElementById("mpControlsRow");
 var grid        = document.getElementById("mpProductGrid");
 var packGrid    = document.getElementById("mpPackGrid");
@@ -290,7 +281,6 @@ var state = { publicItems: [], privateItems: [], loaded: false };
 // Starter Packs are the default landing view, matching the Archie app.
 var activeType = "packs";
 var activeCategory = "all";
-var activePrice = "all";
 
 function allItems() {
   // Dedupe by kind+id (a private item could in principle also match public if mislabeled).
@@ -409,7 +399,7 @@ function renderPacks() {
 }
 
 /* Show the packs grid or the add-on grid depending on the active tab. Packs is a distinct view
-   with no category/price filtering; searching always drops into the add-on grid. */
+   with no category filtering; searching always drops into the add-on grid. */
 function updateView() {
   var searching = searchInput && searchInput.value.trim().length > 0;
   var showPacks = activeType === "packs" && !searching;
@@ -433,9 +423,8 @@ function applyFilters() {
       : activeType === "exclusive" ? card.dataset.visibility === "private"
       : card.dataset.type === activeType;
     var matchCat = activeCategory === "all" || card.dataset.category === activeCategory;
-    var matchPrice = activePrice === "all" || card.dataset.price === activePrice;
     var matchSearch = !q || (card.dataset.search || "").indexOf(q) !== -1;
-    var match = matchType && matchCat && matchPrice && matchSearch;
+    var match = matchType && matchCat && matchSearch;
     card.hidden = !match;
     if (match) visible++;
   });
@@ -451,7 +440,7 @@ function rerender() {
   updateView();
 }
 
-/* Event delegation: tabs, category pills, price toggle, card expand. */
+/* Event delegation: tabs, category pills, card expand. */
 if (typeTabs) {
   typeTabs.addEventListener("click", function (e) {
     var tab = e.target.closest(".mp-type-tab");
@@ -470,17 +459,6 @@ if (filterBar) {
     activeCategory = pill.dataset.filter;
     Array.prototype.forEach.call(filterBar.querySelectorAll(".marketplace-filter-pill"), function (p) {
       p.classList.toggle("is-active", p === pill);
-    });
-    applyFilters();
-  });
-}
-if (priceToggle) {
-  priceToggle.addEventListener("click", function (e) {
-    var btn = e.target.closest(".mp-price-btn");
-    if (!btn) return;
-    activePrice = btn.dataset.price;
-    Array.prototype.forEach.call(priceToggle.querySelectorAll(".mp-price-btn"), function (b) {
-      b.classList.toggle("is-active", b === btn);
     });
     applyFilters();
   });
@@ -538,10 +516,6 @@ if (grid) {
     state.publicItems = items;
     state.loaded = true;
     setStatus("");
-    if (priceToggle) {
-      var anyPremium = allItems().some(function (it) { return it.price_cents > 0; });
-      priceToggle.style.display = anyPremium ? "" : "none";
-    }
     rerender();
   }).catch(function () {
     setStatus("Couldn't load the marketplace right now. Please refresh in a moment.");

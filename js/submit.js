@@ -338,22 +338,6 @@ function renderField(spec) {
       return group(spec, s);
     }
 
-    case "number": {
-      // Price is stored in cents but asked for in dollars, because nobody prices anything in
-      // cents. Converted on read, so the payload matches the manifest.
-      const input = el("input", {
-        class: "form-input",
-        type: "number",
-        id,
-        min: 0,
-        max: 50,
-        step: 1,
-        placeholder: "e.g. 8. Free is 0, and the final price is settled together during review",
-      });
-      readers[spec.key] = () => Math.round((Number(input.value) || 0) * 100);
-      return group(spec, input);
-    }
-
     case "toggle": {
       const box = el("input", { type: "checkbox", id });
       readers[spec.key] = () => box.checked;

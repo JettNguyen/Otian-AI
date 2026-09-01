@@ -7,8 +7,10 @@ what a normal startup dashboard shows is user data we say we do not collect and 
 
 This file settles what that page is, what it is allowed to show, and what it is not.
 
-**Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room, carrying Goal, Health, Fleet,
-Attention and Doors. Passes 2 and 3 below are still ahead.
+**Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room. **Pass 2 is built the same day**
+and waits on a Render deploy: `GET /admin/summary` is committed in the Archie repo but is not live
+until the billing service redeploys, and until it is, the Money panel says so rather than showing
+a zero. Pass 3 is still ahead.
 
 ## Where it lives
 
@@ -136,8 +138,21 @@ Three passes, each one shippable on its own.
   remote levers are in force right now, and what shipped last. A lever left on is the thing you
   forget, and it belongs on the page you open first rather than three clicks into the console
   that sets it.
-- **Pass 2, one endpoint.** `GET /admin/summary` on the billing service, which unlocks Money
-  and the revenue half of Goal. The spend and reimbursement line goes in here.
+- **Pass 2, one endpoint. BUILT 2026-09-01, awaiting a Render deploy.** `GET /admin/summary`
+  (`stripe-webhook/index.js`, arithmetic in `stripe-webhook/summary.js` with 18 tests) answers in
+  five independently-guarded sections: accounts, revenue, Stripe balance, sessions owed, and the
+  hand-entered figures. Totals only; nothing in the response identifies a person. On the site it
+  draws the Money panel and the paying line under the Goal bar.
+
+  Three decisions inside it worth knowing. **MRR is a run rate**, normalised to cents per month,
+  ignoring coupons, tax and part-months, and the panel says so. **Trials are counted but excluded**,
+  because a run rate that includes them reads as money on a day nobody paid. **past_due stays in**,
+  matching `GRACE_STATUSES`, because that customer still has access; it is shown again as "at risk"
+  so the exposure is not hidden inside the total.
+
+  The spend and reimbursement line reads `config/warroom`, a document typed by hand. Set
+  `spend_cents` and `reimbursed_cents` on it and the line appears; leave it absent and nothing
+  shows. It is labelled "typed by hand" on the page.
 - **Pass 3, the human panels.** Feedback and Follow-ups as hand-entered lists, then Hudson
   pushing into the same collection, then the read-only Telegram feed if it still sounds good.
 

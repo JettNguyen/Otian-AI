@@ -618,25 +618,41 @@
     return false;
   }
 
+  /* Every text node a reader can see, the whitespace-only ones included. They carry no words,
+     but they are the evidence that two tokens sitting in different elements have a space
+     between them, and measureWords cannot tell a gap from an adjacency without them. */
   function textNodes(el) {
     var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false), out = [], n;
     while ((n = walker.nextNode())) {
-      if (n.nodeValue.trim() && !isHiddenText(n, el)) out.push(n);
+      if (!isHiddenText(n, el)) out.push(n);
     }
     return out;
   }
 
   /* Every word as a (node, start, end) span, measured where it actually sits, so a
-     word inside <strong> or <a> is measured in the weight it renders in. */
+     word inside <strong> or <a> is measured in the weight it renders in.
+
+     `gapBefore` says whether real whitespace separates this word from the one before it, and
+     it is what makes a break position legal at all. Words are cut out of one text node at a
+     time, so a link and the punctuation that follows it arrive here as two separate words with
+     nothing between them: `...where it stands</a>), so read this page` yields "stands" and
+     "),". Nothing in the geometry says they are joined, so the wedge was free to end a line
+     after "stands" and open the next one with a closing bracket. A browser never offers that
+     break, because to a browser "stands)," is one word, and the whole point of this routine is
+     to choose among the breaks the browser would have made. */
   function measureWords(el, range) {
-    var nodes = textNodes(el), words = [];
+    var nodes = textNodes(el), words = [], gap = true;
     for (var i = 0; i < nodes.length; i++) {
-      var node = nodes[i], re = /\S+/g, m;
-      while ((m = re.exec(node.nodeValue))) {
+      var node = nodes[i], text = node.nodeValue, re = /\S+/g, m, after = 0;
+      while ((m = re.exec(text))) {
+        if (/\s/.test(text.slice(after, m.index))) gap = true;
+        after = m.index + m[0].length;
         range.setStart(node, m.index);
         range.setEnd(node, m.index + m[0].length);
-        words.push({ node: node, start: m.index, end: m.index + m[0].length, w: widthOf(range) });
+        words.push({ node: node, start: m.index, end: m.index + m[0].length, w: widthOf(range), gapBefore: gap });
+        gap = false;
       }
+      if (/\s/.test(text.slice(after))) gap = true;
     }
     return words;
   }
@@ -815,6 +831,9 @@
             for (endAt = lineStart; endAt < n; endAt++) {
               w = span(endAt) - (lineStart ? span(lineStart - 1) : 0);
               if (w > colWidth && endAt > lineStart) break;
+              /* Ending the line here means starting the next one at endAt + 1, which is only a
+                 break the browser would also have offered if whitespace separates the two. */
+              if (endAt + 1 < n && !words[endAt + 1].gapBefore) continue;
               rest = cost[(li + 1) * layer + lineStart * N1 + (endAt + 1)];
               if (rest === INF) continue;
               off = w - target;

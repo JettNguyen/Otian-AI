@@ -179,10 +179,6 @@
       transition: border-color var(--transition), background var(--transition), transform var(--transition);
     }
     .wr-door:hover { border-color: var(--accent); background: var(--surface-hover); transform: translateY(-1px); }
-    /* A door whose address nobody has pasted in yet. Visibly unfinished rather than quietly
-       broken: a dead link on this page costs more than an obvious gap. */
-    .wr-door.is-todo { opacity: 0.55; cursor: not-allowed; border-style: dashed; }
-    .wr-door.is-todo:hover { border-color: var(--border); background: var(--bg-card); transform: none; }
     .wr-door-group { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--text-muted); margin-top: 12px; }
     .wr-door-group:first-of-type { margin-top: 8px; }
@@ -454,10 +450,10 @@
 
               <div class="wr-door-group">Company</div>
               <div class="wr-doors">
-                <!-- TODO(jett): paste the shared Drive folder URL and turn this span into an <a>. -->
-                <span class="wr-door is-todo" title="Paste the folder URL into admin/index.html">Company Drive</span>
-                <!-- TODO(jett): paste the Hudson workspace URL and turn this span into an <a>. -->
-                <span class="wr-door is-todo" title="Paste the workspace URL into admin/index.html">Hudson</span>
+                <!-- The /u/0/ that Drive puts in a copied link pins the first signed-in
+                     Google account, which is not always the Otian one. Dropped, so Drive picks. -->
+                <a class="wr-door" href="https://drive.google.com/drive/folders/0AK5cDPgCITHQUk9PVA" target="_blank" rel="noopener">Company Drive</a>
+                <a class="wr-door" href="https://t.me/nrsolveaibot" target="_blank" rel="noopener">Hudson</a>
                 <a class="wr-door" href="https://web.telegram.org/" target="_blank" rel="noopener">Telegram</a>
                 <a class="wr-door" href="https://calendar.google.com/" target="_blank" rel="noopener">Calendar</a>
               </div>

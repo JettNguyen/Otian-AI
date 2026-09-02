@@ -135,7 +135,7 @@ site's closest comparison and its "where they win" section is deliberately the b
 Gemini Spark was in it for a day and came out (unpriceable at source, AI Ultra only, select
 countries; FACTS.md records the removal). The pricing rows do the arguing: each figure says
 what it buys ($20 = an agent inside one company's plan and limits; $200 to $300 = renting the
-always-on computer; $30 + ~$4.40 = the computer you already own plus intelligence at cost),
+always-on computer; $30 + $1 to $7 = the computer you already own plus intelligence at cost),
 because a bare price column reads as "they are cheaper" when the products are not the same
 shape. Grok Bot's plan prices were read off the cards in a browser, ChatGPT-style, and carry
 that caveat in FACTS.md.

@@ -21,6 +21,7 @@ Exit 0 when clean, 1 with a report otherwise.
 """
 
 import datetime
+import json
 import os
 import re
 import sys
@@ -135,7 +136,13 @@ STAT_NUM = re.compile(
 
 
 def catalog_count():
-    """How many add-ons the store actually has, or None if the Archie repo isn't here."""
+    """How many add-ons a visitor can install, or None if the Archie repo isn't here.
+
+    Private manifests are skipped, decided by Jett 2026-09-01. The count was the whole directory
+    until then, and by that day 18 of the 153 were `visibility: private`: one client's sales pack
+    and two items for a beta account. Those reach allowlisted accounts only, so a reader who opened
+    the store to check the number on the page would have counted 135 and found the site 18 out.
+    """
     if not os.path.isdir(ARCHIE_CATALOG):
         return None
     total = 0
@@ -143,7 +150,13 @@ def catalog_count():
         path = os.path.join(ARCHIE_CATALOG, coll)
         if not os.path.isdir(path):
             return None
-        total += len([f for f in os.listdir(path) if f.endswith(".json")])
+        for name in os.listdir(path):
+            if not name.endswith(".json"):
+                continue
+            with open(os.path.join(path, name), encoding="utf-8") as fh:
+                # Absent means public, the same default the seeder and the store query use.
+                if json.load(fh).get("visibility") != "private":
+                    total += 1
     return total
 
 

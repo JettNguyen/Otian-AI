@@ -104,6 +104,16 @@ they currently live in Jack's head and in Hudson. Same manual pattern as feedbac
 is next, when. Hudson pushing into the same collection is the version-two upgrade, not the
 starting point.
 
+**6b. The launch countdown.** A chip in the header counting whole local days to launch. The date
+is **not in this repo**: it reads `launch_date` from the `config/warroom` document, which arrives
+through `/admin/summary`. That is the point of it. `/admin/` is a static page in a public repo, so
+a date hardcoded in the markup is readable by anyone who fetches the page or opens GitHub; the gate
+hides the data, not the HTML. No date set means no chip.
+
+Checked against the Standard before building it: "no countdown timers" governs copy aimed at a
+reader, where a clock exists to pressure them. Two founders counting down to their own launch on an
+admin page is not that, and nothing about it reaches a customer.
+
 **7. Doors.** The link rail: Stripe, Firebase console, Render, GitHub, the Google Docs, the
 marketplace catalog, the three admin tools, the live site. Unglamorous, and it is the part Jack
 described most concretely ("so we're not moving around from Slack, or from Telegram"). It is

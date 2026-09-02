@@ -7,7 +7,8 @@ what a normal startup dashboard shows is user data we say we do not collect and 
 
 This file settles what that page is, what it is allowed to show, and what it is not.
 
-**Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room. **Pass 2 is built the same day**
+**Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room, and the Hudson panel from pass 3
+landed the same day. **Pass 2 is built the same day**
 and waits on a Render deploy: `GET /admin/summary` is committed in the Archie repo but is not live
 until the billing service redeploys, and until it is, the Money panel says so rather than showing
 a zero. Pass 3 is still ahead.
@@ -117,6 +118,8 @@ also the part that works on day one with no backend at all.
   it is not part of this build.
 - **Not a place to act on an account.** Grants, tiers and invoices stay on `/admin/tiers/` and
   `/admin/billing/`, where the actions already are.
+- **Not a second place to read Hudson.** The panel is a summary with a Clear button. Hudson's own
+  chat is still where you go to talk to it or read a thread in full.
 - **Not a Telegram client.** A browser page cannot hold one without either a bot token sitting
   in the page or a relay through our backend. A read-only feed of one dedicated ops channel via
   a bot is small and worth doing later; a full messaging surface is a lot of work to reproduce
@@ -153,8 +156,9 @@ Three passes, each one shippable on its own.
   The spend and reimbursement line reads `config/warroom`, a document typed by hand. Set
   `spend_cents` and `reimbursed_cents` on it and the line appears; leave it absent and nothing
   shows. It is labelled "typed by hand" on the page.
-- **Pass 3, the human panels.** Feedback and Follow-ups as hand-entered lists, then Hudson
-  pushing into the same collection, then the read-only Telegram feed if it still sounds good.
+- **Pass 3, the human panels.** Hudson landed first and out of order, since it writes its own
+  notes and needed no hand entry. What is left is Feedback as a hand-entered list, and the
+  read-only Telegram feed if it still sounds good. Follow-ups is probably absorbed by Hudson.
 
 ## House rules this page has to obey
 

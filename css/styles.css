@@ -7333,12 +7333,12 @@ html[data-theme="dark"] .booking-container iframe {
   opacity: 0.6;
 }
 
-/* Card badges row */
+/* Card badges row: the kind and the category, under the name, left to right. */
 .mp-card-badges {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 16px;
+  gap: 6px;
 }
 
 .mp-type-badge,
@@ -7398,18 +7398,18 @@ html[data-theme="dark"] .booking-container iframe {
 .mp-face--routine { background: var(--c-teal-subtle); color: var(--c-teal); }
 .mp-face--personality { background: var(--c-plum-subtle); color: var(--c-plum); }
 
-/* The face and the badges share the card's top line. The badges keep their own rule above for
-   the detail pages that still use it alone. */
+/* The card's top line, laid out like the app's shelf card: the face leads and the name sits
+   beside it with the badges hanging under the name, so the face is what the eye lands on and
+   the name is the first thing it reads after. */
 .mp-card-top {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 16px;
 }
-.mp-card-top .mp-card-badges {
+.mp-card-heading {
   flex: 1;
   min-width: 0;
-  margin-bottom: 0;
 }
 .mp-detail-top {
   display: flex;
@@ -7422,26 +7422,47 @@ html[data-theme="dark"] .booking-container iframe {
 /* Card content */
 .mp-product-card h3 {
   font-size: var(--fs-xl);
-  margin-bottom: 4px;
-}
-
-.mp-card-author {
-  font-size: var(--fs-sm);
-  color: var(--text-muted);
-  margin-bottom: 10px;
-}
-
-.mp-card-tagline {
-  font-size: var(--fs-sm);
-  font-weight: 600;
-  color: var(--accent);
+  line-height: 1.2;
   margin-bottom: 6px;
 }
+
+/* A personality's tagline: the voice's own line, in the card's own ink rather than the brand
+   accent, which on a plum card was a third colour saying nothing. */
+.mp-card-tagline {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+/* The footer's left half: who made it, how many have it, and the exclusive mark when it is
+   one. One muted line, so the link on the right is the only thing on the row that asks for a
+   click. */
+.mp-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  min-width: 0;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+.mp-card-author {
+  white-space: nowrap;
+}
+.mp-card-installs {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.mp-card-installs svg { flex-shrink: 0; }
 
 .mp-card-desc {
   font-size: var(--fs-base);
   color: var(--text-secondary);
   line-height: 1.6;
+  margin-bottom: 20px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   line-clamp: 3;

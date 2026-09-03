@@ -49,6 +49,9 @@ function normalize(kind, id, data) {
     name: data.name || id,
     author: data.author || "Otian AI",
     price_cents: typeof data.price_cents === "number" ? data.price_cents : 0,
+    // Incremented by the backend on every install, so it is measured, never modelled. Zero for
+    // an add-on nobody has installed yet, and shown only once it is above that.
+    install_count: typeof data.install_count === "number" ? data.install_count : 0,
     description: data.description || "",
     long_description: data.long_description || "",
     tagline: data.tagline || "",

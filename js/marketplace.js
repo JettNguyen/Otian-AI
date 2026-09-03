@@ -179,6 +179,9 @@ function normalize(kind, id, data) {
     name: data.name || id,
     author: data.author || "Otian AI",
     price_cents: typeof data.price_cents === "number" ? data.price_cents : 0,
+    // Incremented by the backend on every install, so it is measured, never modelled. Zero for
+    // an add-on nobody has installed yet, and shown only once it is above that.
+    install_count: typeof data.install_count === "number" ? data.install_count : 0,
     description: data.description || "",
     long_description: data.long_description || "",
     tagline: data.tagline || "",
@@ -278,15 +281,16 @@ function cardHtml(item) {
     ' data-name="' + escapeHtml(item.name.toLowerCase()) + '"' +
     ' data-search="' + escapeHtml(searchBlob) + '">';
 
-  // The face first, then the badges: the app's iconography (js/faces.js), so a grid can be read
-  // by shape and colour before a single name is read.
+  // The card is laid out the way the app lays out a shelf card: the face leads and the name sits
+  // beside it, the kind and category badges hang under the name, then the one line of copy, and
+  // the footer carries who made it and how many have it. Every line answers a different
+  // question, so nothing on the card competes with the line above it.
   html += '<div class="mp-card-top">' + faceHtml(item.kind, item.id, "card");
+  html += '<div class="mp-card-heading"><h3>' + escapeHtml(item.name) + "</h3>";
   html += '<div class="mp-card-badges"><span class="mp-type-badge">' + escapeHtml(kindLabel) + "</span>";
   if (item.category) html += '<span class="mp-category-badge">' + escapeHtml(item.category) + "</span>";
-  html += "</div></div>";
+  html += "</div></div></div>";
 
-  html += "<h3>" + escapeHtml(item.name) + "</h3>";
-  html += '<p class="mp-card-author">by ' + escapeHtml(item.author) + "</p>";
   if (item.kind === "personality" && item.tagline) {
     html += '<p class="mp-card-tagline">' + escapeHtml(item.tagline) + "</p>";
   }
@@ -294,12 +298,22 @@ function cardHtml(item) {
 
   if (detail) html += '<div class="mp-card-detail" hidden>' + detail + "</div>";
 
-  html += '<div class="mp-card-bottom">';
+  html += '<div class="mp-card-bottom"><div class="mp-card-meta">';
+  html += '<span class="mp-card-author">by ' + escapeHtml(item.author) + "</span>";
+  // The count the app shows, in the app's words: a download arrow and the number, hidden at zero
+  // so a new add-on does not read "0 installs".
+  if (item.install_count > 0) {
+    html += '<span class="mp-card-installs" title="Installed ' + item.install_count.toLocaleString() +
+      " time" + (item.install_count === 1 ? "" : "s") + '">' +
+      '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg>' +
+      item.install_count.toLocaleString() + " install" + (item.install_count === 1 ? "" : "s") + "</span>";
+  }
   if (isPrivate) {
     html += '<span class="mp-exclusive-badge" title="Shared privately with your account">' +
       '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' +
       "Exclusive</span>";
   }
+  html += "</div>";
   if (detail) {
     html += '<button type="button" class="mp-card-link mp-card-expand" aria-expanded="false">View Details &rarr;</button>';
   }

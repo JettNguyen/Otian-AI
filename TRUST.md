@@ -300,7 +300,7 @@ what it was always about.)*
   rather than "is stored", and never upgrade this to "we cannot see it": a proxy we operate
   could be changed to log, and the honest claim is that it does not.
 
-### ✅ The plan with the AI included runs through the same proxy, by choice, mail included
+### ✅ The plan with the AI included runs through the same proxy, by choice, and mail and texts are off on it
 
 **Added 2026-09-02.** Archie is also sold at $59 a month or $599 a year with $25 of Claude Sonnet
 usage inside each month (`docs/AI-INCLUDED-PLAN.md` in the Archie repo). That usage is spent on
@@ -312,17 +312,34 @@ and both have to be said wherever the plan is described:
 - **It refills each paid month and nothing rolls over.** `renewPlanLedger` sets the balance; it
   does not add to it. When the $25 is used the agent pauses until the next invoice or until an
   account of the customer's own is connected (`PLAN_GRANT_MICROS`, `plan_exhausted`).
-- **Email and the text watch work on it.** The consent gate in `crates/archie-runtime/src/email/poller.rs`
-  (`on_someone_elses_credits`, borrowed by `texts/mod.rs` and the tool gate in `turn.rs`) compares
-  against the trial sentinel only, so the plan's sentinel (`archie_net::llm::PLAN_CREDENTIAL`)
-  passes. The customer chose the plan on a checkout line that says so; a trial user was never
-  asked. So mail and texts the agent reads and writes on this plan pass through the proxy.
+- **Email and the text watch do NOT work on it, and this reversed on 2026-09-03.** They did when
+  the plan shipped: the gate compared against the trial sentinel alone, so the plan's sentinel
+  (`archie_net::llm::PLAN_CREDENTIAL`) passed, on the argument that the customer chose the plan at
+  a checkout line that says so while a trial user was never asked. Both halves came off, a day
+  apart in reasoning and the same day in code, and the reasons are different:
 
-**Approved wording:** "That usage runs on our Anthropic account, so your messages, and the mail
-your agent reads and writes for you, pass through our server on the way to Anthropic. It writes
-nothing down, we keep no copy, and we use none of it for anything. When the $25 is used, your
-agent pauses until next month; connect an AI account of your own at any point and it carries on
-from there, with nothing to switch."
+  - **Mail**, because four documents in front of Google and the CASA assessor say Otian operates
+    no server in the Gmail data path, and the plan had made those statements untrue for six weeks.
+    The code was changed to match the filing rather than the filing amended mid-review. **This one
+    is temporary**: it comes back if a later submission describes the proxy.
+  - **Texts**, because consent from the owner is not consent from the person who texted them, who
+    is not in the room and cannot be asked. **This one is permanent** and does not return when the
+    Google review finishes.
+
+  Both now ask `runs_through_otian` in `crates/archie-runtime/src/email/poller.rs`, which is true
+  on either proxy sentinel, with a test pinning both. So on this plan the agent thinks through the
+  proxy and reads neither mail nor texts.
+
+**Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
+write to your agent passes through our server on the way to Anthropic. It writes nothing down, we
+keep no copy, and we use none of it for anything. Email and text replies are the two things it
+will not do on this plan, because they carry what other people wrote and those people never agreed
+to anything. Both work on an AI account of your own, where nothing goes through us at all. When
+the $25 is used, your agent pauses until next month."
+
+*(The wording it replaces said "and the mail your agent reads and writes for you" passes through
+our server. That was true for six weeks and is now false in the one direction that matters, so any
+page still carrying it is describing a product we do not sell.)*
 
 **Boundaries, do not cross:**
 - ❌ Never "we cannot see it" or "we technically cannot read it" for this plan, for the same

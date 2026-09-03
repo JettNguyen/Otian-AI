@@ -220,6 +220,18 @@ Three passes, each one shippable on its own.
   The spend and reimbursement line reads `config/warroom`, a document typed by hand. Set
   `spend_cents` and `reimbursed_cents` on it and the line appears; leave it absent and nothing
   shows. It is labelled "typed by hand" on the page.
+
+  **Google's account ceiling sits in the same cluster, added 2026-09-03.** While Archie's OAuth
+  client is unverified, Google allows 100 accounts to connect for the life of the client and a
+  revoked one does not give its slot back, so this is a ceiling the business can hit before
+  verification clears. Nothing can compute it: the figure lives in the Google Cloud console, the
+  connection happens on the customer's own computer and is never reported to us, and a count of
+  currently connected accounts would undercount a lifetime total. Type `google_oauth_slots_used`
+  (a number) and `google_oauth_read_on` (a date, either type) into `config/warroom` and the row
+  appears reading "5 of 100, while unverified, read 6 days ago". Leave them absent and there is no
+  row, deliberately: "0 of 100" and "nobody has looked" are opposite facts. Both fields come out
+  when the Letter of Validation clears, along with the row and the ceiling constant beside the
+  trial gauges.
 - **Pass 3, the human panels.** Hudson landed first and out of order, since it writes its own
   notes and needed no hand entry. What is left is Feedback as a hand-entered list, and the
   read-only Telegram feed if it still sounds good. Follow-ups is probably absorbed by Hudson.

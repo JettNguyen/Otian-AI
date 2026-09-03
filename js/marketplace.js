@@ -16,6 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { faceHtml, categoryGlyphHtml } from "./faces.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -258,9 +259,12 @@ function cardHtml(item) {
     ' data-name="' + escapeHtml(item.name.toLowerCase()) + '"' +
     ' data-search="' + escapeHtml(searchBlob) + '">';
 
+  // The face first, then the badges: the app's iconography (js/faces.js), so a grid can be read
+  // by shape and colour before a single name is read.
+  html += '<div class="mp-card-top">' + faceHtml(item.kind, item.id, "card");
   html += '<div class="mp-card-badges"><span class="mp-type-badge">' + escapeHtml(kindLabel) + "</span>";
   if (item.category) html += '<span class="mp-category-badge">' + escapeHtml(item.category) + "</span>";
-  html += "</div>";
+  html += "</div></div>";
 
   html += "<h3>" + escapeHtml(item.name) + "</h3>";
   html += '<p class="mp-card-author">by ' + escapeHtml(item.author) + "</p>";
@@ -376,7 +380,7 @@ function renderCategories(items) {
   html += list.map(function (c) {
     return '<button type="button" class="marketplace-filter-pill' +
       (activeCategory === c ? " is-active" : "") + '" data-filter="' + escapeHtml(c) + '">' +
-      escapeHtml(titleCase(c)) + "</button>";
+      categoryGlyphHtml(c) + escapeHtml(titleCase(c)) + "</button>";
   }).join("");
   filterBar.innerHTML = html;
 }
@@ -394,7 +398,8 @@ function packHtml(pack, index) {
 
   var itemsHtml = resolved.map(function (it) {
     var cls = "mp-type-badge" + (it.kind === "skill" ? "" : " mp-type-badge--" + it.kind);
-    return '<li class="mp-pack-item"><span class="' + cls + '">' + escapeHtml(kindLabel(it.kind)) +
+    return '<li class="mp-pack-item">' + faceHtml(it.kind, it.id, "row") +
+      '<span class="' + cls + '">' + escapeHtml(kindLabel(it.kind)) +
       '</span><span class="mp-pack-item-name">' + escapeHtml(it.name) + "</span></li>";
   }).join("");
 

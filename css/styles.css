@@ -7187,10 +7187,26 @@ html[data-theme="dark"] .booking-container iframe {
   border-color: var(--accent);
 }
 
+.marketplace-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .marketplace-filter-pill.is-active {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--text-on-accent);
+}
+
+/* The mark inside a category pill, from the same set the add-on faces use (js/faces.js), so a
+   pill and the cards it filters to share a vocabulary. currentColor, so it follows the pill
+   through hover and the active state without a rule of its own. */
+.mp-pill-glyph {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 .marketplace-category-grid [hidden] {
@@ -7360,6 +7376,48 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--surface-soft-strong);
   color: var(--text-secondary);
 }
+
+/* ── Add-on faces ──
+   The Archie app's iconography, carried over (js/faces.js): a stroked mark for what an add-on is
+   about, on a rounded field in the colour of what it is. The field's tint is the kind's badge
+   colour, the same three the type badges use above, because that colour already means the kind
+   everywhere on the site and a subject tint would put a second meaning on it. Stroked, never
+   filled, so the mark keeps its shape on a 13% wash at the row size. */
+.mp-face {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: var(--accent-subtle);
+  color: var(--accent-hover);
+}
+.mp-face svg { display: block; }
+.mp-face--card { width: 40px; height: 40px; border-radius: var(--radius); }
+.mp-face--card svg { width: 20px; height: 20px; }
+.mp-face--row { width: 32px; height: 32px; border-radius: 9px; }
+.mp-face--row svg { width: 18px; height: 18px; }
+.mp-face--routine { background: var(--c-teal-subtle); color: var(--c-teal); }
+.mp-face--personality { background: var(--c-plum-subtle); color: var(--c-plum); }
+
+/* The face and the badges share the card's top line. The badges keep their own rule above for
+   the detail pages that still use it alone. */
+.mp-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.mp-card-top .mp-card-badges {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+.mp-detail-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.mp-detail-top .mp-detail-badges { margin-bottom: 0; }
 
 /* Card content */
 .mp-product-card h3 {

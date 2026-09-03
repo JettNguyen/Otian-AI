@@ -144,6 +144,11 @@ reason.**
   the concept everywhere else). Blog posts keep their own voice.
 - Guided sessions are **$250/hour**, one hour per session; "$250/session" and "$250/hour" are
   the same claim, not a contradiction.
+- **Add-on faces are the Archie app's, copied.** `js/faces.js` carries the app's `GLYPH_PATHS`
+  and `FACE` map (a stroked mark per add-on on a field tinted by kind) so the browse grid, pack
+  lists, phone-page rows, and detail pages read the way the app's store does. Do not draw new
+  marks or reassign one here: change it in the Archie repo's `src/app/faces.ts`, then copy.
+  `scripts/check-faces.py` fails when the two drift, and lists live catalog ids the map lacks.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally.
 - **Plain words, and never talk down.** (Mirrors the Archie repo's plain-words rule.) Write so a

@@ -34,6 +34,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { bindStatusToast } from "./status-toast.js";
 import { COLLECTIONS, loadCatalog, shelfKind } from "./catalog.js";
+import { faceHtml } from "./faces.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -1017,6 +1018,7 @@ function storeRow(item, have, agent) {
 
   return (
     '<li class="phone-row phone-store-row" data-kind="' + escapeHtml(item.kind) + '">' +
+    faceHtml(item.kind, item.id, "row") +
     '<div class="phone-store-main">' +
     // Above the name rather than beside it. A row scrolled to on its own has no heading in view,
     // and what kind of thing this is decides what the Add button is about to do to the agent.

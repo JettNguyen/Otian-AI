@@ -8,15 +8,15 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Submit a Skill | Otian AI</title>
-  <meta name="description" content="Submit your skill to the Archie marketplace. Sign in, describe what it does, paste its instructions template, attach a screenshot of it working, and we'll review it for listing." />
+<title>Reporting a security problem | Otian AI</title>
+  <meta name="description" content="Where to send a security problem you found in Archie, what we do with it, and how fast." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="../../../assets/icon-1024-dark.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="../../../assets/icon-1024.png" />
+  <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
   <script>
     /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
        get a cream flash on every page view (nav.js applies the theme too late). */
@@ -35,64 +35,67 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../../css/styles.css?v=20260903-5" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260903-5" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ==============================
+       Navigation
+       ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="../../../" class="nav-logo"><img src="../../../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
+      <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
       <div class="nav-links">
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../../archie/" role="menuitem">What Archie Is</a>
-            <a href="../../../archie/see-it-work/" role="menuitem">See It Work</a>
-            <a href="../../../archie/pricing/" role="menuitem">Pricing</a>
-            <a href="../../../equipment/" role="menuitem">What You Need</a>
+            <a href="../archie/" role="menuitem">What Archie Is</a>
+            <a href="../archie/see-it-work/" role="menuitem">See It Work</a>
+            <a href="../archie/pricing/" role="menuitem">Pricing</a>
+            <a href="../equipment/" role="menuitem">What You Need</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
           <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
-            <a href="../../../skills-marketplace/what-is-an-add-on/" role="menuitem">What an Add-on Is</a>
-            <a href="../../../skills-marketplace/browse/" role="menuitem">Browse All</a>
-            <a href="../../../skills-marketplace/commission/" role="menuitem">Have One Built</a>
-            <a href="../../../skills-marketplace/for-developers/" role="menuitem">Build One</a>
+            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What an Add-on Is</a>
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse All</a>
+            <a href="../skills-marketplace/commission/" role="menuitem">Have One Built</a>
+            <a href="../skills-marketplace/for-developers/" role="menuitem">Build One</a>
           </div>
         </div>
         <div class="nav-more" id="navServices">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
           <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../../../individuals/" role="menuitem">Guided Setup</a>
-            <a href="../../../consulting/" role="menuitem">Consulting</a>
-            <a href="../../../business/" role="menuitem">For Business</a>
+            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../consulting/" role="menuitem">Consulting</a>
+            <a href="../business/" role="menuitem">For Business</a>
           </div>
         </div>
         <div class="nav-more" id="navCompare">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompareMenu" type="button">Compare</button>
           <div class="nav-more-menu" id="navCompareMenu" role="menu" aria-label="Compare">
-            <a href="../../../compare/" role="menuitem">All Comparisons</a>
-            <a href="../../../compare/chat-apps/" role="menuitem">vs Chat Apps</a>
-            <a href="../../../compare/hiring-an-assistant/" role="menuitem">vs Hiring Someone</a>
-            <a href="../../../compare/automation-tools/" role="menuitem">vs Zapier and Make</a>
-            <a href="../../../compare/building-it-yourself/" role="menuitem">vs Building It Yourself</a>
-            <a href="../../../compare/cloud-agents/" role="menuitem">vs Cloud Agents</a>
+            <a href="../compare/" role="menuitem">All Comparisons</a>
+            <a href="../compare/chat-apps/" role="menuitem">vs Chat Apps</a>
+            <a href="../compare/hiring-an-assistant/" role="menuitem">vs Hiring Someone</a>
+            <a href="../compare/automation-tools/" role="menuitem">vs Zapier and Make</a>
+            <a href="../compare/building-it-yourself/" role="menuitem">vs Building It Yourself</a>
+            <a href="../compare/cloud-agents/" role="menuitem">vs Cloud Agents</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompanyMenu" type="button">About</button>
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="About">
-            <a href="../../../our-story/" role="menuitem">Our Story</a>
-            <a href="../../../testimonials/" role="menuitem">Reviews</a>
-            <a href="../../../contact/" role="menuitem">Contact</a>
-            <a href="../../../trust/" role="menuitem">What We Can and Can&rsquo;t See</a>
-            <a href="../../../standard/" role="menuitem">The Otian Standard</a>
+            <a href="../our-story/" role="menuitem">Our Story</a>
+            <a href="../testimonials/" role="menuitem">Reviews</a>
+            <a href="../contact/" role="menuitem">Contact</a>
+            <a href="../trust/" role="menuitem">What We Can and Can&rsquo;t See</a>
+            <a href="../standard/" role="menuitem">The Otian Standard</a>
           </div>
         </div>
       </div>
-      <a href="../../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
       <div class="nav-account" id="navAccount">
         <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
           <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
@@ -112,7 +115,7 @@
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompare" aria-expanded="false" aria-controls="navDrawerFlyout">Compare</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
-    <a href="../../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
   </nav>
 
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
@@ -121,101 +124,119 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../../archie/">What Archie Is</a>
-      <a href="../../../archie/see-it-work/">See It Work</a>
-      <a href="../../../archie/pricing/">Pricing</a>
-      <a href="../../../equipment/">What You Need</a>
+      <a href="../archie/">What Archie Is</a>
+      <a href="../archie/see-it-work/">See It Work</a>
+      <a href="../archie/pricing/">Pricing</a>
+      <a href="../equipment/">What You Need</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
-      <a href="../../../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
-      <a href="../../../skills-marketplace/browse/">Browse All</a>
-      <a href="../../../skills-marketplace/commission/">Have One Built</a>
-      <a href="../../../skills-marketplace/for-developers/">Build One</a>
+      <a href="../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
+      <a href="../skills-marketplace/browse/">Browse All</a>
+      <a href="../skills-marketplace/commission/">Have One Built</a>
+      <a href="../skills-marketplace/for-developers/">Build One</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../../../individuals/">Guided Setup</a>
-      <a href="../../../consulting/">Consulting</a>
-      <a href="../../../business/">For Business</a>
+      <a href="../individuals/">Guided Setup</a>
+      <a href="../consulting/">Consulting</a>
+      <a href="../business/">For Business</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
-      <a href="../../../compare/">All Comparisons</a>
-      <a href="../../../compare/chat-apps/">vs Chat Apps</a>
-      <a href="../../../compare/hiring-an-assistant/">vs Hiring Someone</a>
-      <a href="../../../compare/automation-tools/">vs Zapier and Make</a>
-      <a href="../../../compare/building-it-yourself/">vs Building It Yourself</a>
-      <a href="../../../compare/cloud-agents/">vs Cloud Agents</a>
+      <a href="../compare/">All Comparisons</a>
+      <a href="../compare/chat-apps/">vs Chat Apps</a>
+      <a href="../compare/hiring-an-assistant/">vs Hiring Someone</a>
+      <a href="../compare/automation-tools/">vs Zapier and Make</a>
+      <a href="../compare/building-it-yourself/">vs Building It Yourself</a>
+      <a href="../compare/cloud-agents/">vs Cloud Agents</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
-      <a href="../../../our-story/">Our Story</a>
-      <a href="../../../testimonials/">Reviews</a>
-      <a href="../../../contact/">Contact</a>
-      <a href="../../../trust/">What We Can and Can&rsquo;t See</a>
-      <a href="../../../standard/">The Otian Standard</a>
+      <a href="../our-story/">Our Story</a>
+      <a href="../testimonials/">Reviews</a>
+      <a href="../contact/">Contact</a>
+      <a href="../trust/">What We Can and Can&rsquo;t See</a>
+      <a href="../standard/">The Otian Standard</a>
     </div>
   </div>
 
   <main id="main">
 
+    <!-- ==============================
+         Page Hero
+         ============================== -->
     <section class="page-hero" aria-label="Page introduction">
-      <nav class="breadcrumb-bar" aria-label="Breadcrumb">
-        <div class="breadcrumb-bar-inner">
-          <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="../">Submit an Add-on</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Skill</li>
-          </ol>
-        </div>
-      </nav>
       <div class="page-hero-inner">
-        <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Submit</a>
-        <span class="section-label fade-up">For developers</span>
-        <h1 class="fade-up delay-1">Submit a skill.</h1>
-        <p>A skill is a capability your agent gains: managing a calendar, triaging email, tracking expenses. Fill in the form, show it working, and submit for review.</p>
-        <p class="" style="margin-top:0.6rem;font-size:var(--fs-base);"><a href="../">Submitting something else?</a></p>
+        <span class="section-label fade-up">Security</span>
+        <h1 class="fade-up delay-1">Reporting a security problem</h1>
+        <div class="article-byline fade-up delay-2">
+          <span>Last updated: September 3, 2026</span>
+        </div>
       </div>
     </section>
 
-    <section class="section" aria-label="Skill submission form">
-      <div class="container" style="max-width: 720px;">
+    <!-- ==============================
+         Policy Body
+         ============================== -->
+    <section class="section" aria-labelledby="security-heading">
+      <div class="container">
+        <h2 class="sr-only" id="security-heading">Reporting a security problem</h2>
 
-        <div id="signinGate" class="cta-banner fade-up">
-          <h2>Sign in to submit</h2>
-          <p>Submissions are linked to your account so we can credit you and follow up during review.</p>
-          <button id="btnSignIn" class="btn btn-primary btn-lg" type="button">Sign in with Google</button>
-          <p id="signinError" style="display:none; color:var(--danger); margin-top:0.75rem;"></p>
-        </div>
+        <article class="article-body fade-up delay-1">
 
-        <!-- The fields are not written here. js/submit.js builds them from js/addon-fields.js,
-             which is generated from the same table Archie's installer reads its character caps
-             from, so this form and the app can never drift apart. All four submit pages are this
-             same shell; only the hero copy and data-addon-type differ. -->
-        <form id="skillForm" data-addon-type="skill" style="display:none;" novalidate>
-          <p style="margin-bottom:1.5rem; color:var(--text-muted);">
-            Signed in as <strong id="signedInAs"></strong> &middot; <a href="#" id="btnSignOut">sign out</a>
-          </p>
+          <p>If you have found something in Archie, on this site, or in anything else of ours, write to <a href="mailto:questions@otianai.com">questions@otianai.com</a> and put <strong>security</strong> in the subject line.</p>
 
-          <div id="specFields"></div>
+          <p>That is the same address as everything else here, and it is deliberate: it is the mailbox we actually read, so a report lands somewhere with a habit attached to it rather than in an alias nobody opens. It reaches both of us, and one of us answers the same day.</p>
 
-          <p id="formError" style="display:none; color:var(--danger); margin-bottom:1rem;"></p>
+          <p>Tell us what you found, what it lets somebody do, and how you found it. A rough note is worth more to us than a polished one that took a week. If you would rather encrypt it, say so in the first message and we will send you a key.</p>
 
-          <button id="btnSubmit" class="btn btn-primary btn-lg" type="submit">Submit for review</button>
-        </form>
+          <h2>What happens next</h2>
 
-        <div id="doneBanner" class="cta-banner fade-up" style="display:none;">
-          <h2>Submitted!</h2>
-          <p>Thanks, your skill is in the review queue. We'll email your account address once it's been reviewed.</p>
-          <a href="../../browse/" class="btn btn-primary btn-lg">Back to the Marketplace</a>
-        </div>
+          <p>We reply <strong>within one working day</strong> to say we have it and who is looking at it.</p>
 
+          <p><strong>Within five working days</strong> we tell you whether we agree it is a problem, and if we do, when we expect to have it fixed. If the fix needs a release, we say which release. If we decide it is not a problem, we say why, in enough detail that you can tell us we are wrong.</p>
+
+          <p>After that you hear from us when something changes, not on a schedule. If a fix slips, we say so rather than going quiet.</p>
+
+          <h2>What we ask of you</h2>
+
+          <ul>
+            <li><strong>Give us 90 days before you publish</strong>, or less if we have already shipped the fix and told you so. If you think the timeline should be shorter because people are at risk right now, say that and we will agree one with you.</li>
+            <li><strong>Do not test against another person&rsquo;s account or data.</strong> If you need an account to demonstrate something, ask and we will make you one.</li>
+            <li><strong>Do not run anything that degrades the service for other people</strong>, which mostly means load testing and automated scanning against our servers rather than against your own copy of the app.</li>
+          </ul>
+
+          <h2>What you can expect from us</h2>
+
+          <ul>
+            <li>We will not threaten you, and we will not ask you to sign anything before we will read what you sent.</li>
+            <li>If you find something real, we will name you when we write about the fix, unless you would rather we did not.</li>
+            <li>We are two people and we do not have a bounty program. We would rather say that plainly than leave you to guess.</li>
+          </ul>
+
+          <h2>If your organization needs a data processing agreement</h2>
+
+          <p>Send us yours and we will review and sign it. Most of what Archie handles never reaches us at all: on your own AI account, your conversations, mail, calendar and files go from your computer to the services you connected, and we are not in that path. What we do hold is your email address, whether you have a current plan, and the operational records listed on the <a href="../trust/#what-we-hold">Trust page</a>, and that is what an agreement with us would cover.</p>
+
+          <p>We do not publish our own standard agreement yet. When we do, it will be linked here, and it will name the same subprocessors the <a href="../privacy-policy/#subprocessors">privacy policy</a> does.</p>
+
+          <h2>What we have not got</h2>
+
+          <p>Said here rather than left for you to discover: there is no SOC 2 report, no ISO 27001 certificate, and no HIPAA business associate agreement. Nobody outside Otian AI has audited Archie, and there has been no external penetration test. If your policy requires a certification from a software vendor, we do not meet it today, and the architecture document below does not change that answer.</p>
+
+          <p>What that document does do is describe exactly what Archie installs, what it sends, where credentials are kept, and what it cannot do, including the parts we would rather not have to write down. It is written for whoever has to approve the software: <a href="../trust/it-review/">the review document is here</a>.</p>
+
+        </article>
       </div>
     </section>
 
   </main>
 
+  <!-- ==============================
+       Footer
+       ============================== -->
   <footer class="footer" aria-label="Site footer">
     <div class="footer-inner">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="footer-logo" href="../../../"><img src="../../../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /></a>
+          <a class="footer-logo" href="../"><img src="../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /></a>
           <p class="footer-tagline">Secure AI agents, your way.<br />Easy plug-and-play, fully in your control.</p>
           <a href="mailto:questions@otianai.com" class="footer-contact-email">questions@otianai.com</a>
           <div class="social-links" aria-label="Otian AI on social media">
@@ -227,61 +248,61 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../../archie/">What Archie Is</a>
-            <a href="../../../archie/see-it-work/">See It Work</a>
-            <a href="../../../archie/pricing/">Pricing</a>
-            <a href="../../../equipment/">What You Need</a>
+            <a href="../archie/">What Archie Is</a>
+            <a href="../archie/see-it-work/">See It Work</a>
+            <a href="../archie/pricing/">Pricing</a>
+            <a href="../equipment/">What You Need</a>
           </nav>
         </div>
         <div>
           <h4 class="footer-col-title">Add-ons</h4>
           <nav class="footer-nav-links" aria-label="Add-ons">
-            <a href="../../../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
-            <a href="../../../skills-marketplace/browse/">Browse All</a>
-            <a href="../../../skills-marketplace/commission/">Have One Built</a>
-            <a href="../../../skills-marketplace/for-developers/">Build One</a>
+            <a href="../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
+            <a href="../skills-marketplace/browse/">Browse All</a>
+            <a href="../skills-marketplace/commission/">Have One Built</a>
+            <a href="../skills-marketplace/for-developers/">Build One</a>
           </nav>
         </div>
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="../../../individuals/">Guided Setup</a>
-            <a href="../../../consulting/">Consulting</a>
-            <a href="../../../business/">For Business</a>
+            <a href="../individuals/">Guided Setup</a>
+            <a href="../consulting/">Consulting</a>
+            <a href="../business/">For Business</a>
           </nav>
         </div>
         <div>
           <h4 class="footer-col-title">Compare</h4>
           <nav class="footer-nav-links" aria-label="Compare">
-            <a href="../../../compare/">All Comparisons</a>
-            <a href="../../../compare/chat-apps/">vs Chat Apps</a>
-            <a href="../../../compare/hiring-an-assistant/">vs Hiring Someone</a>
-            <a href="../../../compare/automation-tools/">vs Zapier and Make</a>
-            <a href="../../../compare/building-it-yourself/">vs Building It Yourself</a>
-            <a href="../../../compare/cloud-agents/">vs Cloud Agents</a>
+            <a href="../compare/">All Comparisons</a>
+            <a href="../compare/chat-apps/">vs Chat Apps</a>
+            <a href="../compare/hiring-an-assistant/">vs Hiring Someone</a>
+            <a href="../compare/automation-tools/">vs Zapier and Make</a>
+            <a href="../compare/building-it-yourself/">vs Building It Yourself</a>
+            <a href="../compare/cloud-agents/">vs Cloud Agents</a>
           </nav>
         </div>
         <div>
           <h4 class="footer-col-title">About</h4>
           <nav class="footer-nav-links" aria-label="About">
-            <a href="../../../our-story/">Our Story</a>
-            <a href="../../../testimonials/">Reviews</a>
-            <a href="../../../contact/">Contact</a>
-            <a href="../../../trust/">What We Can and Can&rsquo;t See</a>
-            <a class="footer-doc-link" href="../../../assets/Archie-Overview-Public.pdf" download><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.25v7.5m0 0L5 6.75M8 9.75l3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.75 11.25v1.5c0 .55.45 1 1 1h8.5c.55 0 1-.45 1-1v-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Archie Overview (PDF)</span></a>
-            <a class="footer-doc-link" href="../../../assets/Otian-Standard.pdf" download><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.25v7.5m0 0L5 6.75M8 9.75l3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.75 11.25v1.5c0 .55.45 1 1 1h8.5c.55 0 1-.45 1-1v-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>The Otian Standard (PDF)</span></a>
+            <a href="../our-story/">Our Story</a>
+            <a href="../testimonials/">Reviews</a>
+            <a href="../contact/">Contact</a>
+            <a href="../trust/">What We Can and Can&rsquo;t See</a>
+            <a class="footer-doc-link" href="../assets/Archie-Overview-Public.pdf" download><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.25v7.5m0 0L5 6.75M8 9.75l3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.75 11.25v1.5c0 .55.45 1 1 1h8.5c.55 0 1-.45 1-1v-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Archie Overview (PDF)</span></a>
+            <a class="footer-doc-link" href="../assets/Otian-Standard.pdf" download><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2.25v7.5m0 0L5 6.75M8 9.75l3-3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M2.75 11.25v1.5c0 .55.45 1 1 1h8.5c.55 0 1-.45 1-1v-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>The Otian Standard (PDF)</span></a>
           </nav>
         </div>
         <div class="footer-extra">
           <div class="footer-extra-group">
             <h4 class="footer-col-title">Learn</h4>
             <nav class="footer-nav-links" aria-label="Learn">
-              <a href="../../../learn/">Start Here</a>
-              <a href="../../../how-it-works/">How It Works</a>
-              <a href="../../../ai-explained/">AI Explained</a>
-              <a href="../../../blog/">Blog</a>
-              <a href="../../../faq/">FAQ</a>
-              <a href="../../../help/">Troubleshooting</a>
+              <a href="../learn/">Start Here</a>
+              <a href="../how-it-works/">How It Works</a>
+              <a href="../ai-explained/">AI Explained</a>
+              <a href="../blog/">Blog</a>
+              <a href="../faq/">FAQ</a>
+              <a href="../help/">Troubleshooting</a>
             </nav>
           </div>
         </div>
@@ -291,16 +312,15 @@
         <p>&copy; 2026 Otian AI LLC. All rights reserved. Otian&trade; and Archie&trade; are trademarks of Otian AI LLC.</p>
         <p class="footer-marks-note">All other product names, logos, and brands belong to their respective owners and appear here only to identify the products Archie works with, or is compared to; their use does not imply endorsement or affiliation, and no comparison on this site is endorsed by the company it names.</p>
         <nav class="footer-legal-links" aria-label="Legal">
-          <a href="../../../privacy-policy/">Privacy Policy</a>
-          <a href="../../../terms-of-service/">Terms of Service</a>
-          <a href="../../../security/">Security</a>
+          <a href="../privacy-policy/">Privacy Policy</a>
+          <a href="../terms-of-service/">Terms of Service</a>
+          <a href="./">Security</a>
         </nav>
       </div>
     </div>
   </footer>
 
-  <script src="../../../js/nav.js"></script>
-  <script type="module" src="../../../js/account-nav.js"></script>
-  <script type="module" src="../../../js/submit.js"></script>
+  <script src="../js/nav.js"></script>
+  <script type="module" src="../js/account-nav.js"></script>
 </body>
 </html>

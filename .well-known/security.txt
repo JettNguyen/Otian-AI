@@ -1,0 +1,5 @@
+Contact: mailto:questions@otianai.com
+Expires: 2027-09-03T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://otianai.com/.well-known/security.txt
+Policy: https://otianai.com/security/

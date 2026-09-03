@@ -295,7 +295,7 @@
           <h2>Third-Party AI Providers</h2>
           <p>The agents we build typically run on AI models from providers such as Anthropic (Claude) or OpenAI (ChatGPT). On every plan except the one with the AI included, you create and pay for your own account directly with the provider you choose, and we do not mark up that cost or collect it. On that one plan the AI is ours: it runs on our own Anthropic account and $25 of usage a month is inside the price you pay us. Information you send to your agent (for example, an email draft it helps you write) is processed by that provider under their own privacy policy and terms, which we encourage you to review. We don't control, and aren't responsible for, how those providers handle data on their end.</p>
 
-          <h2>Service Providers We Use</h2>
+          <h2 id="subprocessors">Service Providers We Use</h2>
           <p>We rely on a small number of trusted companies ("subprocessors") to run our accounts, billing, and communications. Each processes only the limited information described above, only to provide its service to us, and under its own terms and security practices:</p>
           <ul>
             <li><strong>Google Firebase</strong>: sign-in and the account record (your email and license status).</li>
@@ -306,10 +306,31 @@
           <p>We do not use third-party advertising or analytics services.</p>
 
           <h2 id="data-retention">Data Retention</h2>
-          <p>We keep intake, session, and billing records for as long as needed to provide our services and to meet our own recordkeeping and tax obligations, and we delete or anonymize them when they're no longer needed. You can ask us to delete your contact and intake information at any time; see "Your Choices" below.</p>
+          <p>How long each thing is kept, in days and months rather than in the words "as long as needed". Where a period is longer than you might expect, it is either a control we would have to rebuild without it or a record the law requires us to keep, and the table says which.</p>
+          <div class="cmp-table-wrap">
+          <table class="cmp-table">
+            <thead><tr><th>What</th><th>How long</th><th>Why that long</th></tr></thead>
+            <tbody>
+              <tr><td>Crash and failure reports</td><td>90 days</td><td>Long enough to tell whether a release is failing, and short enough that nothing accumulates. They carry no message content.</td></tr>
+              <tr><td>The version line (which version of Archie you run)</td><td>One record, overwritten each time, deleted with your account</td><td>There is no history to keep: the same row is rewritten every six hours.</td></tr>
+              <tr><td>The free-credit and included-AI ledger</td><td>The life of your account, then 90 days</td><td>It is how the credits are subtracted, and a billing question after you leave can still be answered.</td></tr>
+              <tr><td>The per-call spend history behind it</td><td>12 months</td><td>Token counts and amounts, never a request or a reply.</td></tr>
+              <tr><td>The scrambled stamp of a computer that claimed free credits</td><td>12 months from the last claim</td><td>It is the only thing stopping the same computer claiming the credits over and over. Shorter and that stops working.</td></tr>
+              <tr><td>The scrambled stamp of an internet address, per day</td><td>90 days</td><td>Same purpose, and the daily limit only ever reads today's.</td></tr>
+              <tr><td>A record that a payment was refused</td><td>12 months</td><td>Your account id, the country and the amount, kept to spot a pattern of fraud attempts.</td></tr>
+              <tr><td>Two-factor records</td><td>The life of your account. A single sign-in code: 15 minutes</td><td>They are how you get in.</td></tr>
+              <tr><td>Invoices and guided-session records</td><td>7 years</td><td>Tax and company-records law, and the one row here we cannot shorten. Stripe keeps its own copy under its own policy.</td></tr>
+              <tr><td>Sealed messages between your computer and your phone</td><td>Until collected, and at most 30 days</td><td>Both ends delete a message once it has been shown. The limit is for one nobody ever collected.</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p>Two things sit beside that table rather than in it. <strong>A deletion is a deletion from our live systems</strong>, and our database provider keeps its own short-term backups, currently seven days, so a record can sit in one of those after it is gone from ours. And <strong>deleting your account does not wait for any of these periods</strong>: it removes your account and everything filed under it straight away, including invoices and two-factor records, and the three items keyed separately (failure reports, the version line, and the credit ledger) fall away on the schedule above or on request, whichever comes first.</p>
+          <p>You can ask us to delete your contact and intake information at any time; see "Your Choices" below.</p>
 
           <h2>Data Security</h2>
           <p>We take reasonable steps to protect the information you share with us, including limiting who has access to it. That said, no method of storage or transmission is completely secure, and we can't guarantee absolute security.</p>
+          <p><strong>If we are breached.</strong> If personal information we hold about you is exposed, we will tell you <strong>within 72 hours</strong> of establishing that it happened, by email to the address on your account. We will say what was taken, when, what we have done about it, and what you should do, and we will say all of that even where the honest answer is that we do not yet know. If we are still working out the scope at 72 hours, you will hear that at 72 hours rather than hearing nothing until we are finished. We will not wait for legal advice about whether a notice is required before sending one.</p>
+          <p>What limits the damage is the shortness of the list above: a breach of us cannot produce anybody's conversations, mail, calendar entries, files or API keys, because we do not hold them. <a href="../security/">How to report something you have found</a> is on its own page.</p>
 
           <h2>Children's Privacy</h2>
           <p>Our services are intended for adults. We don't knowingly collect information from anyone under 18.</p>
@@ -419,6 +440,7 @@
         <nav class="footer-legal-links" aria-label="Legal">
           <a href="../privacy-policy/">Privacy Policy</a>
           <a href="../terms-of-service/">Terms of Service</a>
+          <a href="../security/">Security</a>
         </nav>
       </div>
     </div>

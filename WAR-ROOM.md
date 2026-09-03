@@ -10,8 +10,10 @@ This file settles what that page is, what it is allowed to show, and what it is 
 **Pass 1 shipped 2026-09-01** at `/admin/`, called the War Room, and the Hudson panel from pass 3
 landed the same day. **Pass 2 went live 2026-09-02**: `GET /admin/summary` and `POST /hudson/note`
 both came up on one Render deploy, and Hudson has posted all three kinds of note through its own
-client. What is left of pass 3 is the Feedback panel and, if it still sounds good, the Telegram
-feed.
+client. **Pass 4, the Plan panel, shipped 2026-09-03**, which is Jack's goal sheet on the page it
+gets read on; it needed no backend change, because `/admin/summary` already passes the whole
+`config/warroom` document through. What is left of pass 3 is the Feedback panel and, if it still
+sounds good, the Telegram feed.
 
 ## Where it lives
 
@@ -50,7 +52,7 @@ Two corollaries:
 
 ## What it shows
 
-Seven panels, ordered by how often you would actually look.
+Eight panels, ordered by how often you would actually look.
 
 **1. Goal.** Jack's number from the call, on the screen, every day.
 
@@ -69,6 +71,54 @@ histogram wants copies, not people.
 It is a floor, not a headcount, and the caption says so: an account whose copy nobody opens never
 reports. Pass 2 puts how many of them pay beside it, off the billing summary. A goal bar that
 quietly switches definitions is worse than no bar; one that changes its label out loud is fine.
+
+**Pass 4 changed what the bar counts, out loud.** Jack's goal sheet (2026-09-03) is explicit that
+50,000 is the peak and that the peak gets looked at four times a year, while the plan curve is what
+gets worked monthly, so a bar counting to 50,000 every morning is the page arguing with its own
+plan. The bar now counts **paid accounts against this month's target on the plan curve**, which is
+the unit the sheet is written in, and 50,000 is one line inside the panel below it. The caption
+carries both definitions, because the tile above the bar still counts active accounts and the two
+are different numbers.
+
+**1b. Plan.** Jack's 50,000 goal sheet, rendered. The sheet has three curves off one starting
+point (75 paid accounts at the end of month zero) and one rule about which you look at when: the
+plan curve at 35 percent month over month is what you are accountable to and is worked monthly,
+the floor at 20 percent is the tripwire that says the funnel is broken rather than the spend is
+too low, and the peak at 80 percent is on the wall and read four times a year. So the panel shows
+this month's plan and floor beside what is actually paying, names the shelf being worked to with
+its gate, and gives the peak one line.
+
+**Rates, not the sheet's tables.** A twelve-row table copied by hand into a second file is a table
+that drifts from the document it came from, and every value here is one multiplication. The result
+lands on the sheet's own numbers everywhere except month eight, where the sheet's step-by-step
+rounding says 828 and compounding says 827.
+
+**No date is typed into the page.** Month zero is whatever month `launch_date` on `config/warroom`
+falls in, arriving through `/admin/summary`, for the reason the countdown chip works that way:
+`/admin/` is a static page in a public repo and the gate hides the data, not the markup. Every
+date the panel prints, the four shelf days and the April renegotiation among them, is derived
+from that one field. Without it the panel still draws every target and says which half is missing.
+
+Three of the sheet's supporting targets, **activation, month-two churn and trial to paid, are not
+measured anywhere**, so the panel prints the target in force and the words "not measured" beside
+it. That is corollary 2 above, and it is the most useful thing this panel says in month one:
+instrumentation is a pre-launch item precisely because none of those three has a number yet. The
+two that are measured are measured: business accounts off the summary's account tally, add-ons off
+the live catalog through `js/catalog.js` (signed out, so it counts what a visitor can install,
+which is the convention every printed count on the site uses).
+
+The eight pre-launch items are a list with a done pill each, ticked by hand in a `prelaunch` map
+on `config/warroom` (the keys are in the page, beside their labels). The group carries the sheet's
+own minimum-ship rule, decided in advance so a slip is not a failure, and it takes itself off the
+page once launch day has passed and every item is ticked.
+
+The sheet's daily three sit at the foot of the panel as one sentence, with the bad-week rule. The
+weekly and monthly lists are not there: they are review cadences, and the numbers they review are
+the rest of this page.
+
+**What is deliberately not on it: the sheet's revenue projections.** The Money panel above prints
+what Stripe actually bills, and a projected net beside a real one is two numbers competing to be
+the number. The blended-net-per-account figure and the ARR columns stay in Jack's document.
 
 **2. Money.** Monthly recurring revenue, new subscriptions and cancellations this month, failed
 payments worth a nudge, outstanding guided-session invoices, Stripe available balance and the
@@ -137,6 +187,10 @@ also the part that works on day one with no backend at all.
 - **Not the agent manager, yet.** Jack's "manage all our agents" is the right long-term shape:
   one row per agent, what it is, last heartbeat, last thing it did. There is one agent today.
   Build the frame when there is a second one, not before.
+- **Not a second copy of the goal sheet.** The Plan panel renders the part of Jack's sheet that
+  is a number and can be checked against what is actually happening. The reasoning, the three
+  curves in full, the revenue columns and the tripwires stay in the document, which is where they
+  are argued with. If the sheet and the panel ever disagree, the sheet is the document.
 - **Not a Jarvis skin.** The Jarvis reference is about density and one-glance readability, not
   about neon on black. Reuse the site's own `acct-*`, `ver-row` and `pill` components from the
   ops console so it looks like Otian.
@@ -169,6 +223,12 @@ Three passes, each one shippable on its own.
 - **Pass 3, the human panels.** Hudson landed first and out of order, since it writes its own
   notes and needed no hand entry. What is left is Feedback as a hand-entered list, and the
   read-only Telegram feed if it still sounds good. Follow-ups is probably absorbed by Hudson.
+- **Pass 4, the Plan panel. SHIPPED 2026-09-03.** No backend work, because `buildSummary()` in
+  `stripe-webhook/index.js` already returns the whole `config/warroom` document as `manual`, so
+  the two new hand-entered fields (`launch_date`, which was already read, and the `prelaunch` map)
+  arrive with no deploy. Two things to type into that document to finish it: `launch_date`, which
+  the countdown chip already wants, and `prelaunch` as a map of the eight keys to `true` as each
+  is done. Neither is required for the panel to draw.
 
 ## House rules this page has to obey
 
@@ -196,3 +256,7 @@ Three passes, each one shippable on its own.
 *Settled 2026-09-01: the page is called the War Room, and the Goal bar counts distinct active
 accounts until the billing summary lands (revised the same day from copies to accounts, once the
 heartbeat document id turned out to make people countable exactly).*
+
+*Settled 2026-09-03: the bar counts to the plan curve's target for this month, in paid accounts,
+and not to 50,000. The goal sheet's own rule is that the peak is read four times a year, so a page
+that put it on the wall every morning would be arguing with the plan it exists to serve.*

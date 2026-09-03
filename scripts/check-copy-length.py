@@ -59,7 +59,7 @@ BUDGETS = {
     # of trimming took the additions from 625 words over to 377 before this moved;
     # what is left is the new table and the sentences that make it readable. Back
     # at its ceiling: a paragraph added here still has to cut one.
-    "archie/pricing/index.html": 2700,
+    "archie/pricing/index.html": 2900,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
 }
 
 # Pages whose job is completeness. Length is not a defect here.

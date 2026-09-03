@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260901-4" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260902-1" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -227,7 +227,7 @@
             <span class="trust-answer-num">2</span>
             <div>
               <h3>We are not in the middle of it.</h3>
-              <p>Archie calls the AI company <strong>directly from your computer</strong>. Not relayed through us. Not proxied by us. There is no Otian server in that path at all, so there is simply nothing on our side that <em>could</em> read it.</p>
+              <p>Archie calls the AI company <strong>directly from your computer</strong>. Not relayed through us. Not proxied by us. There is no Otian server in that path at all, so there is simply nothing on our side that <em>could</em> read it. That is the plain plan, on your own key. On the free credits and on the plan with the AI included, we are paying the AI company, so the requests pass through a server of ours on the way there; it writes nothing down, and it drops out of the path from each agent&rsquo;s next start once you connect an account of your own.</p>
             </div>
           </div>
           <div class="trust-answer">
@@ -240,7 +240,7 @@
         </div>
 
         <div class="trust-prose fade-up delay-4">
-          <p><strong>One exception, and it is ours.</strong> Archie starts you with a small amount of free credits so you can watch an agent work before being asked for an account of your own. Those run on Claude, on <em>our</em> Anthropic account, and that is the one case where your messages pass through a server of ours on the way. It works that way because there is no such thing as a personal key we could hand you: the alternative is our own key sitting inside the app on your laptop, where anyone could take it. Nothing about those messages is written down there. What the server records is your account ID, token counts each way, the amount, when, and a running count of calls, so it can stop at the amount you were given: never a message or a reply. Connect an account of your own and that path is gone from each agent's next start (the setup flow restarts it for you), and your conversations never reach us again; the small account flows described elsewhere on this page, like the plan check and crash reports if you leave them on, are separate and carry no conversation.</p>
+          <p><strong>One exception, and it is ours.</strong> Archie starts you with a small amount of free credits so you can watch an agent work before being asked for an account of your own. Those run on Claude, on <em>our</em> Anthropic account, and that is the one case where your messages pass through a server of ours on the way. The plan with the AI included runs the same way, on purpose and for as long as you keep it: $25 of usage a month on our Anthropic account, through the same server, with your mail riding it too, because you chose that plan knowing so. The same three facts hold for it: nothing there writes a message down, we keep no copy, and we use none of it. It works that way because there is no such thing as a personal key we could hand you: the alternative is our own key sitting inside the app on your laptop, where anyone could take it. Nothing about those messages is written down there. What the server records is your account ID, token counts each way, the amount, when, and a running count of calls, so it can stop at the amount you were given: never a message or a reply. Connect an account of your own and that path is gone from each agent's next start (the setup flow restarts it for you), and your conversations never reach us again; the small account flows described elsewhere on this page, like the plan check and crash reports if you leave them on, are separate and carry no conversation.</p>
 
           <p>What running on your own computer actually buys you, then, is this: your life does not <em>also</em> accumulate on a server of ours. There is no Otian archive to be breached, subpoenaed, sold in an acquisition, or quietly repurposed when our business model changes. We didn&rsquo;t promise not to look at your data. We built it so there is nothing to look at.</p>
 
@@ -322,9 +322,9 @@
                 <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes</span></td>
               </tr>
               <tr class="is-content">
-                <td data-label="What"><strong>Your agent thinking, while you are on free credits</strong></td>
+                <td data-label="What"><strong>Your agent thinking, while you are on free credits or the plan with the AI included</strong></td>
                 <td data-label="Where it goes">Our billing service, <code>archie-4f35.onrender.com</code>, then Anthropic</td>
-                <td data-label="What's actually in it">The same thing as the row above, and this is the one case where it passes through us. The free credits you start with are spent on our Anthropic account, so the request goes to our server, which forwards it and subtracts what it cost. Nothing there writes down a message or a reply; what it records is your account ID, how many words went each way, and the amount. Connect an AI account of your own and this row stops at each agent&rsquo;s next start; the setup flow restarts them for you.</td>
+                <td data-label="What's actually in it">The same thing as the row above, and this is the one case where it passes through us. The free credits you start with, and the $25 a month in the plan with the AI included, are spent on our Anthropic account, so the request goes to our server, which forwards it and subtracts what it cost. On the plan, the mail your agent reads and writes rides the same way. Nothing there writes down a message or a reply; what it records is your account ID, how many words went each way, and the amount. Connect an AI account of your own and this row stops at each agent&rsquo;s next start; the setup flow restarts them for you.</td>
                 <td data-label="Your content?"><span class="trust-flag trust-flag--yes">Yes, in passing</span></td>
               </tr>
               <tr>
@@ -383,7 +383,7 @@
           </table>
         </div>
 
-        <p class="trust-table-note">Three rows name <code>archie-4f35.onrender.com</code>, and it is one machine doing three jobs: signing your license note, standing in for Anthropic while you are on the free credits, and counting add-on installs. Only the second of those ever carries a word you wrote, and only until you connect an AI account of your own. The other two carry on for as long as you use Archie, which is why the block-list test further down names two hosts rather than one.</p>
+        <p class="trust-table-note">Three rows name <code>archie-4f35.onrender.com</code>, and it is one machine doing three jobs: signing your license note, standing in for Anthropic while you are on the free credits or the plan with the AI included, and counting add-on installs. Only the second of those ever carries a word you wrote, and only until you connect an AI account of your own. The other two carry on for as long as you use Archie, which is why the block-list test further down names two hosts rather than one.</p>
 
         <p class="trust-table-note">If you find something Archie sends that is not on this list, that is a bug in our honesty and we want to know. <a href="../contact/">Tell us</a>, publicly, if you like.</p>
       </div>
@@ -408,7 +408,7 @@
               <li>Whether you have a current plan</li>
               <li>Which version of Archie you are running, until you turn that off</li>
               <li>Crash reports, if you leave them on: where in our code it broke, never what you were doing</li>
-              <li>While you are on free credits, the ledger of what each call spent, and beside it a scrambled one-way stamp of the computer and the internet address the credits were claimed from, so the same computer cannot claim them over and over. We cannot read a computer or an address back out of a stamp; we can only tell that two of them match</li>
+              <li>While you are on free credits or the plan with the AI included, the ledger of what each call spent, and beside it a scrambled one-way stamp of the computer and the internet address the credits were claimed from, so the same computer cannot claim them over and over. We cannot read a computer or an address back out of a stamp; we can only tell that two of them match</li>
               <li>Second-factor records, guided-session invoices if you book one, and a record of a checkout that was refused (the account, the country, the amount)</li>
               <li>If you turn on phone access, the messages between your computer and your phone, sealed with a key we never receive. Three things about each one are not sealed: when it was left, which version left it, and whether it has been picked up. So we can see that a phone is running a computer, and roughly when, but not a word of what it did</li>
             </ul>
@@ -416,7 +416,7 @@
           <div class="two-col-card">
             <h3>What we don&rsquo;t</h3>
             <ul class="two-col-card-list">
-              <li>Your prompts and your agent&rsquo;s replies. While you are on free credits they pass through our server on the way to Anthropic, and nothing there writes them down</li>
+              <li>Your prompts and your agent&rsquo;s replies. While you are on free credits, or on the plan with the AI included, they pass through our server on the way to Anthropic, and nothing there writes them down</li>
               <li>Your files, notes, and knowledge base</li>
               <li>Everything your agent remembers</li>
               <li>Your calendar, emails, and messages</li>
@@ -513,7 +513,7 @@
             <span class="trust-step-num">3</span>
             <div>
               <h3>Here is exactly what you should see.</h3>
-              <p>Your AI company, on your key, or our billing service standing in for it while you are still spending the free credits. Our sign-in and plan check, carrying your account ID, and with it the version ping and crash reports until you turn those off, plus add-on catalog reads and install counts. One update check, carrying nothing about you. Downloads from our asset host when an add-on needs a tool like a voice. The phone mailbox, if you turned phone access on, sealed. Plus whichever accounts <em>you</em> connected, reached directly. If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way. <a href="details/#expected-hosts">The exact hostnames to expect &rarr;</a></p>
+              <p>Your AI company, on your key, or our billing service standing in for it while you are spending the free credits or the plan&rsquo;s included AI. Our sign-in and plan check, carrying your account ID, and with it the version ping and crash reports until you turn those off, plus add-on catalog reads and install counts. One update check, carrying nothing about you. Downloads from our asset host when an add-on needs a tool like a voice. The phone mailbox, if you turned phone access on, sealed. Plus whichever accounts <em>you</em> connected, reached directly. If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way. <a href="details/#expected-hosts">The exact hostnames to expect &rarr;</a></p>
             </div>
           </div>
           <div class="trust-step">

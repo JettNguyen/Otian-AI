@@ -6690,6 +6690,29 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
 }
 
+/* The AI-included price, as an inset on the For Individuals card rather than a fourth card.
+   Same amount size as the card's own price so the two read as two prices for one plan; the
+   accent line is the same one the lead card wears, so the inset belongs to the card it sits in
+   and does not read as a nested product. --surface-soft is the lightest wash the site uses for
+   a region that is not a card (the 8% wash reads as a disabled control in dark mode). */
+.plan-option {
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-soft);
+  padding: 18px 20px 4px;
+  margin: 0 0 24px;
+}
+.plan-option-label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 10px;
+}
+.plan-option .plan-card-line { margin-bottom: 12px; }
+.plan-option .plan-fine { margin-bottom: 14px; }
 .plan-cta {
   margin-top: auto;
   align-self: flex-start;

@@ -300,6 +300,44 @@ what it was always about.)*
   rather than "is stored", and never upgrade this to "we cannot see it": a proxy we operate
   could be changed to log, and the honest claim is that it does not.
 
+### ✅ The plan with the AI included runs through the same proxy, by choice, mail included
+
+**Added 2026-09-02.** Archie is also sold at $59 a month or $599 a year with $25 of Claude Sonnet
+usage inside each month (`docs/AI-INCLUDED-PLAN.md` in the Archie repo). That usage is spent on
+our Anthropic account through the same billing-service proxy as the free credits
+(`stripe-webhook/index.js`, the `/trial/v1/messages` route; the ledger is `kind: "plan"` in
+`stripe-webhook/credits.js`, refilled on `invoice.paid`). Two things differ from the free credits
+and both have to be said wherever the plan is described:
+
+- **It refills each paid month and nothing rolls over.** `renewPlanLedger` sets the balance; it
+  does not add to it. When the $25 is used the agent pauses until the next invoice or until an
+  account of the customer's own is connected (`PLAN_GRANT_MICROS`, `plan_exhausted`).
+- **Email and the text watch work on it.** The consent gate in `crates/archie-runtime/src/email/poller.rs`
+  (`on_someone_elses_credits`, borrowed by `texts/mod.rs` and the tool gate in `turn.rs`) compares
+  against the trial sentinel only, so the plan's sentinel (`archie_net::llm::PLAN_CREDENTIAL`)
+  passes. The customer chose the plan on a checkout line that says so; a trial user was never
+  asked. So mail and texts the agent reads and writes on this plan pass through the proxy.
+
+**Approved wording:** "That usage runs on our Anthropic account, so your messages, and the mail
+your agent reads and writes for you, pass through our server on the way to Anthropic. It writes
+nothing down, we keep no copy, and we use none of it for anything. When the $25 is used, your
+agent pauses until next month; connect an AI account of your own at any point and it carries on
+from there, with nothing to switch."
+
+**Boundaries, do not cross:**
+- ❌ Never "we cannot see it" or "we technically cannot read it" for this plan, for the same
+  reason as the free credits above: the reply is buffered in memory to read the `usage` block,
+  and a proxy we operate could be changed to log. The honest and stronger claim is the three-part
+  one: nothing writes it down, no copy is kept, none of it is used. All three are true today and
+  the third follows from the second.
+- ❌ Never "unlimited" or "all the AI you need". It is $25 at list price, and the pricing page
+  says which of the three measured bands fit inside it.
+- ❌ The plain plan's "no Otian server in the path" is now scoped to the plain plan on every page
+  that also mentions this one. An unscoped version beside a plan that is sold with the proxy
+  inside is false for that plan.
+- ✅ The `ai_included` flag on the user document exists for support and is not a holding that
+  changes the What We Hold list: it is part of "whether you have a current plan".
+
 ### ✅ No analytics, and two small things that are not analytics
 
 > **Corrected 2026-08-06.** This entry said "no telemetry of any kind. Not opt-out, absent",

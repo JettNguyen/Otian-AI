@@ -7659,27 +7659,41 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* Hover lift for this card lives in section 27, gated to real pointers. */
 
+/* The name and the Recommended mark on one line, the mark in the pack's tint rather than solid,
+   matching the app's pack cards. It used to be absolutely positioned in the corner with the
+   title padded away from it, and a two-word name at the card's largest size still ran under it. */
+.mp-pack-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
 .mp-pack-ribbon {
-  position: absolute;
-  top: 14px;
-  right: 16px;
+  flex-shrink: 0;
+  margin-top: 6px;
   font-size: var(--fs-3xs);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 3px 10px;
   border-radius: 999px;
-  background: var(--pack-base);
-  color: var(--text-on-accent);
+  background: var(--pack-subtle);
+  color: var(--pack-base);
+}
+
+/* The faces of what is inside a pack (js/faces.js), each in its own kind's tint. */
+.mp-pack-faces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .mp-pack-card h3 {
   font-size: var(--fs-2xl);
   margin-bottom: 4px;
-}
-
-.mp-pack-ribbon ~ h3 {
-  padding-right: 96px;
 }
 
 .mp-pack-tagline {

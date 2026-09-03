@@ -411,10 +411,19 @@ function packHtml(pack, index) {
   }
 
   var html = '<article class="mp-pack-card mp-pack-card--' + pack.accent + '">';
+  // The name and the Recommended mark share one line, the mark in the pack's own tint the way the
+  // app draws its "Start here", so a long name wraps under the mark instead of running into it.
+  html += '<div class="mp-pack-head"><h3>' + escapeHtml(pack.name) + "</h3>";
   if (pack.recommended) html += '<span class="mp-pack-ribbon">Recommended</span>';
-  html += "<h3>" + escapeHtml(pack.name) + "</h3>";
+  html += "</div>";
   html += '<p class="mp-pack-tagline">' + escapeHtml(pack.tagline) + "</p>";
   html += '<p class="mp-pack-desc">' + escapeHtml(pack.description) + "</p>";
+  // The faces of what is inside, so the landing view carries the store's iconography and the
+  // "4 add-ons" count below has four shapes above it that say which four.
+  if (resolved.length) {
+    html += '<div class="mp-pack-faces">' +
+      resolved.map(function (it) { return faceHtml(it.kind, it.id, "row"); }).join("") + "</div>";
+  }
   html += '<div class="mp-pack-bottom">';
   html += '<span class="mp-pack-count">' + pack.items.length + " add-on" + (pack.items.length === 1 ? "" : "s") + "</span>";
   html += '<button type="button" class="mp-card-link mp-card-expand" aria-expanded="false">See what&rsquo;s inside &rarr;</button>';

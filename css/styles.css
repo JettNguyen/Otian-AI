@@ -7167,18 +7167,20 @@ html[data-theme="dark"] .booking-container iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 32px;
 }
 
+/* A category chip narrows the view rather than switching it, so it is the smaller, quieter
+   shape: outlined at rest, a tinted fill when chosen, never the solid fill a button gets. */
 .marketplace-filter-pill {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-xs);
   font-weight: 500;
   color: var(--text-secondary);
-  background: var(--bg-card);
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 8px 16px;
+  padding: 6px 12px;
   transition: color var(--transition), background var(--transition), border-color var(--transition);
 }
 
@@ -7194,9 +7196,10 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .marketplace-filter-pill.is-active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--text-on-accent);
+  background: var(--accent-subtle);
+  border-color: transparent;
+  color: var(--accent-hover);
+  font-weight: 600;
 }
 
 /* The mark inside a category pill, from the same set the add-on faces use (js/faces.js), so a
@@ -7223,23 +7226,30 @@ html[data-theme="dark"] .booking-container iframe {
 /* ── Product Marketplace ── */
 
 /* Type tabs */
+/* The view switcher is drawn as tabs: labels on one rule, the open one underlined in its
+   kind's colour. Tabs say "one of these is on the page at a time", which is what these do, and
+   the shape is deliberately not the pill the category chips use below, because a view and a
+   filter are not the same kind of choice. */
 .mp-type-tabs {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 4px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
 }
 
 .mp-type-tab {
   font-size: var(--fs-md);
   font-weight: 600;
-  color: var(--tab-color, var(--text-secondary));
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 10px 22px;
-  transition: color var(--transition), background var(--transition), border-color var(--transition);
+  color: var(--text-secondary);
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  margin-bottom: -1px;
+  padding: 10px 16px 12px;
+  transition: color var(--transition), border-color var(--transition);
 }
 
 /* Each type tab carries its add-on color (matching the badges): as text at rest and a
@@ -7250,23 +7260,76 @@ html[data-theme="dark"] .booking-container iframe {
 
 .mp-type-tab:hover {
   color: var(--tab-color, var(--text-primary));
-  border-color: var(--tab-color, var(--accent));
 }
 
 .mp-type-tab.is-active {
-  background: var(--tab-color, var(--accent));
-  border-color: var(--tab-color, var(--accent));
-  color: var(--text-on-accent);
+  color: var(--tab-color, var(--accent));
+  border-bottom-color: var(--tab-color, var(--accent));
 }
 
-/* Controls row (category pills + price toggle) */
+/* Controls row: the category chips on the left, the sort on the right. */
 .mp-controls-row {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px 24px;
   margin-bottom: 32px;
+}
+
+.mp-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-width: 0;
+}
+
+/* The word beside each control, so a chip row and a select each say what they are. */
+.mp-filter-label {
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* The sort control, a native select dressed like the site's fields with its own chevron, so it
+   reads as "pick one" the way a select does everywhere else. */
+.mp-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.mp-sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px 14px;
+  border: 1px solid var(--field-border);
+  border-radius: var(--radius-sm);
+  padding: 7px 32px 7px 12px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.mp-sort-select:hover {
+  border-color: var(--accent);
+}
+
+.mp-sort-select:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-color: var(--focus-ring);
 }
 
 .mp-controls-row .marketplace-filter-bar {
@@ -8087,6 +8150,15 @@ html[data-theme="dark"] .booking-container iframe {
 
   .mp-controls-row .marketplace-filter-bar {
     justify-content: flex-start;
+  }
+
+  .mp-sort {
+    width: 100%;
+  }
+
+  .mp-sort-select {
+    flex: 1;
+    min-width: 0;
   }
 
   .mp-price-toggle {

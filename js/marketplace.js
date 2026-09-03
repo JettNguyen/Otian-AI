@@ -182,6 +182,8 @@ function normalize(kind, id, data) {
     // Incremented by the backend on every install, so it is measured, never modelled. Zero for
     // an add-on nobody has installed yet, and shown only once it is above that.
     install_count: typeof data.install_count === "number" ? data.install_count : 0,
+    // ISO date, as every manifest carries it. Missing sorts last under "Recently added".
+    created_at: typeof data.created_at === "string" ? data.created_at : "",
     description: data.description || "",
     long_description: data.long_description || "",
     tagline: data.tagline || "",
@@ -331,6 +333,7 @@ var grid        = document.getElementById("mpProductGrid");
 var packGrid    = document.getElementById("mpPackGrid");
 var emptyState  = document.getElementById("marketplaceFilterEmpty");
 var statusEl    = document.getElementById("mpGridStatus");
+var sortSelect  = document.getElementById("mpSort");
 
 var state = { publicItems: [], privateItems: [], loaded: false };
 /* The line above the pack cards while a search is running ("2 packs for this"). Made here rather
@@ -346,6 +349,9 @@ var lastPackHits = 0;
 // Starter Packs are the default landing view, matching the Archie app.
 var activeType = "packs";
 var activeCategory = "all";
+/* The order of the grid, the app's three choices with the app's default. "Most installed" ties
+   break on name, so the many add-ons nobody has installed yet still read as a list. */
+var sortMode = sortSelect ? sortSelect.value : "installs";
 
 function allItems() {
   // Dedupe by kind+id (a private item could in principle also match public if mislabeled).
@@ -356,8 +362,11 @@ function allItems() {
     if (!seen[key]) { seen[key] = 1; out.push(it); }
   });
   out.sort(function (a, b) {
-    var ka = KIND_ORDER.indexOf(shelfKind(a.kind)), kb = KIND_ORDER.indexOf(shelfKind(b.kind));
-    return ka !== kb ? ka - kb : a.name.localeCompare(b.name);
+    if (sortMode === "name") return a.name.localeCompare(b.name);
+    if (sortMode === "recent") {
+      return (b.created_at || "").localeCompare(a.created_at || "") || a.name.localeCompare(b.name);
+    }
+    return (b.install_count - a.install_count) || a.name.localeCompare(b.name);
   });
   return out;
 }
@@ -545,6 +554,16 @@ function rerender() {
   renderCategories(items);
   renderGrid(items);
   updateView();
+}
+
+/* Reordering redraws the grid, so the cards' open details close; the filters and the search
+   are read again from their own state, so nothing else moves. */
+if (sortSelect) {
+  sortSelect.addEventListener("change", function () {
+    sortMode = sortSelect.value;
+    renderGrid(allItems());
+    applyFilters();
+  });
 }
 
 /* Event delegation: tabs, category pills, card expand. */

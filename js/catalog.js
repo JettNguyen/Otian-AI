@@ -52,6 +52,8 @@ function normalize(kind, id, data) {
     // Incremented by the backend on every install, so it is measured, never modelled. Zero for
     // an add-on nobody has installed yet, and shown only once it is above that.
     install_count: typeof data.install_count === "number" ? data.install_count : 0,
+    // ISO date, as every manifest carries it. Missing sorts last under "Recently added".
+    created_at: typeof data.created_at === "string" ? data.created_at : "",
     description: data.description || "",
     long_description: data.long_description || "",
     tagline: data.tagline || "",

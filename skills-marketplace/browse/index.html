@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260903-4" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260903-5" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -217,10 +217,25 @@
         <!-- Starter Packs view (default). Curated bundles resolved against the live catalog. -->
         <div class="mp-product-grid mp-pack-grid fade-up delay-2" id="mpPackGrid"></div>
 
+        <!-- Three controls, three shapes. The tabs above switch which view is on the page; the
+             chips narrow that view to a category; the select reorders what is left. They used to
+             be three rows of the same pill, which made a view, a filter and an order look like
+             the same kind of choice. -->
         <div class="mp-controls-row fade-up delay-1" id="mpControlsRow" hidden>
-          <div class="marketplace-filter-bar" id="marketplaceFilterBar" role="group" aria-label="Filter by category">
-            <button type="button" class="marketplace-filter-pill is-active" data-filter="all">All</button>
+          <div class="mp-filter-group">
+            <span class="mp-filter-label" id="mpCategoryLabel">Category</span>
+            <div class="marketplace-filter-bar" id="marketplaceFilterBar" role="group" aria-labelledby="mpCategoryLabel">
+              <button type="button" class="marketplace-filter-pill is-active" data-filter="all">All</button>
+            </div>
           </div>
+          <label class="mp-sort" for="mpSort">
+            <span class="mp-filter-label">Sort</span>
+            <select id="mpSort" class="mp-sort-select">
+              <option value="installs">Most installed</option>
+              <option value="recent">Recently added</option>
+              <option value="name">Name (A to Z)</option>
+            </select>
+          </label>
         </div>
 
         <p class="mp-grid-status" id="mpGridStatus" role="status" aria-live="polite" hidden></p>

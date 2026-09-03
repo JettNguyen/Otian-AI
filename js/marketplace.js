@@ -16,7 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { faceHtml, categoryGlyphHtml } from "./faces.js";
+import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -69,6 +69,25 @@ function kindLabel(kind) {
    carries no logic of its own: the page resolves each item against the loaded catalog, so a
    private item a visitor can't see simply doesn't appear in that pack (and is counted as "shared
    with select accounts" instead). Keep in step with packs.ts in the Archie repo. */
+/* The mark a pack wears, beside its name, in the pack's own accent. One per pack rather than
+   the faces of everything inside: a row of five tiles on twelve cards was more icons than the
+   landing view could carry, and a pack has a subject of its own. Chosen from the same set the
+   add-ons use (js/faces.js), by what the pack is mostly for. */
+var PACK_FACE = {
+  "everyday-assistant": "list",
+  "personal-organizer": "list",
+  "mind-wellness": "leaf",
+  "creators-desk": "pen",
+  "student": "book",
+  "home-kitchen": "food",
+  "daily-briefing": "news",
+  "life-admin": "doc",
+  "home-errands": "home",
+  "close-thoughtful": "people",
+  "healthy-active": "pulse",
+  "fun-curious": "spark",
+};
+
 var PACKS = [
   { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A bit of everything, so you find what you’ll actually use", accent: "accent", recommended: true,
     description: "Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, with nothing to set up.",
@@ -411,19 +430,17 @@ function packHtml(pack, index) {
   }
 
   var html = '<article class="mp-pack-card mp-pack-card--' + pack.accent + '">';
-  // The name and the Recommended mark share one line, the mark in the pack's own tint the way the
-  // app draws its "Start here", so a long name wraps under the mark instead of running into it.
-  html += '<div class="mp-pack-head"><h3>' + escapeHtml(pack.name) + "</h3>";
+  // The face leads and the name sits beside it, the way the app lays out a card. The Recommended
+  // mark shares the line, in the pack's own tint the way the app draws its "Start here", so a
+  // long name wraps under the mark instead of running into it.
+  html += '<div class="mp-pack-head">';
+  html += '<span class="mp-face mp-face--card mp-face--pack" aria-hidden="true">' +
+    glyphSvg(PACK_FACE[pack.id] || "addon", 1.6) + "</span>";
+  html += "<h3>" + escapeHtml(pack.name) + "</h3>";
   if (pack.recommended) html += '<span class="mp-pack-ribbon">Recommended</span>';
   html += "</div>";
   html += '<p class="mp-pack-tagline">' + escapeHtml(pack.tagline) + "</p>";
   html += '<p class="mp-pack-desc">' + escapeHtml(pack.description) + "</p>";
-  // The faces of what is inside, so the landing view carries the store's iconography and the
-  // "4 add-ons" count below has four shapes above it that say which four.
-  if (resolved.length) {
-    html += '<div class="mp-pack-faces">' +
-      resolved.map(function (it) { return faceHtml(it.kind, it.id, "row"); }).join("") + "</div>";
-  }
   html += '<div class="mp-pack-bottom">';
   html += '<span class="mp-pack-count">' + pack.items.length + " add-on" + (pack.items.length === 1 ? "" : "s") + "</span>";
   html += '<button type="button" class="mp-card-link mp-card-expand" aria-expanded="false">See what&rsquo;s inside &rarr;</button>';

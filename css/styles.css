@@ -7664,15 +7664,28 @@ html[data-theme="dark"] .booking-container iframe {
    title padded away from it, and a two-word name at the card's largest size still ran under it. */
 .mp-pack-head {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
   min-width: 0;
+  margin-bottom: 6px;
+}
+/* The name keeps its own line and the Recommended mark drops beneath when the three do not fit,
+   rather than the name breaking in two beside a mark that did. */
+.mp-pack-head h3 {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-bottom: 0;
+}
+/* A pack is not a kind, so its face takes the pack's own accent, the colour its top border and
+   tagline already wear. */
+.mp-face--pack {
+  background: var(--pack-subtle);
+  color: var(--pack-base);
 }
 
 .mp-pack-ribbon {
   flex-shrink: 0;
-  margin-top: 6px;
   font-size: var(--fs-3xs);
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -7683,12 +7696,10 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--pack-base);
 }
 
-/* The faces of what is inside a pack (js/faces.js), each in its own kind's tint. */
-.mp-pack-faces {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 14px;
+/* A kind card on the commission page leads with the kind's default face, the mark an add-on of
+   that kind wears in the store before it has one of its own. */
+.feature-card > .mp-face {
+  margin-bottom: 16px;
 }
 
 .mp-pack-card h3 {

@@ -854,6 +854,17 @@ mode it names below.
 > know what is still out there before we ever switch one off, and, if you turn on phone access, the
 > messages between your computer and your phone, sealed with a key we never receive.
 
+✅ **Amended 2026-09-03: the account record gained the Terms acceptance.** The app's sign-in doors
+now sit under "By continuing, you agree to the Terms of Service and Privacy Policy", the shell
+records the Terms version it showed (`archie_core::auth::TERMS_VERSION`, the page's "Last updated"
+date), and the billing service writes `terms: {version, accepted_at_ms}` on the user document the
+first time an entitlement fetch carries a version the account has not agreed to
+(`stripe-webhook/index.js`, the `/entitlement` route). One more row in What We Hold, on the trust
+page and in the privacy policy, the same day. Sessions signed in before this build sent nothing and
+have nothing recorded; the row says "when you signed in", which is true of them too because there
+is no record. `TERMS_VERSION` must move whenever the Terms page's date does, or the record names a
+version that no longer exists.
+
 **"Three things" is retired as a phrase.** It was a floor claim, not a slogan, and it has been
 breached twice; anybody reaching for its punchiness is reaching for a sentence that has already been
 false once. The list is the claim.

@@ -95,6 +95,7 @@ require(
 HOLDINGS = {
     "email address": ["email address"],
     "current plan": ["current plan", "whether you have a plan"],
+    "terms acceptance": ["version of the terms you agreed to"],
     "version heartbeat": ["which version of Archie you are running", "version heartbeat"],
     "crash reports": ["crash report"],
     "trial credit ledger": ["free credits, the ledger", "credit ledger", "ledger of what each call"],

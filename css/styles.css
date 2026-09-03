@@ -9070,6 +9070,10 @@ html[data-theme="dark"] .booking-container iframe {
 }
 @keyframes acctspin { to { transform: rotate(360deg); } }
 .acct-foot-note { text-align: center; font-size: var(--fs-xs); color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
+.acct-plan-terms { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 14px; line-height: 1.6; max-width: 62ch; }
+.acct-plan-terms a { color: var(--text-secondary); }
+.auth-agree { text-align: center; font-size: var(--fs-xs); color: var(--text-muted); margin-top: 14px; line-height: 1.55; }
+.auth-agree a { color: var(--text-secondary); }
 .acct-foot-note a { color: var(--text-secondary); }
 
 .act-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }

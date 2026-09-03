@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260902-1" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260902-2" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
@@ -274,18 +274,7 @@
             <span class="price-card-label">For Individuals</span>
             <div class="price-card-amount">$30<span>a month</span></div>
             <p class="plan-card-line">Or $299 a year, which works out at $24.92 a month and saves you $61.</p>
-            <!-- The AI-included price is an option on this plan, not a fourth card: it is the same
-                 plan with one more thing inside, and a fourth column would say "a bigger tier" on
-                 a page whose heading promises one plan. The inset carries its own amount at the
-                 card's amount size so the two prices read as peers, and the disclosure TRUST.md
-                 requires in the same breath as the offer sits inside the inset, not in the fine
-                 print at the bottom. -->
-            <div class="plan-option">
-              <span class="plan-option-label">Or with the AI included</span>
-              <div class="price-card-amount">$59<span>a month</span></div>
-              <p class="plan-card-line">Or $599 a year. The same plan, plus $25 of Claude Sonnet usage every month, so there is no AI account to open and no second bill.</p>
-              <p class="plan-fine">That usage runs on our Anthropic account, so your messages, and the mail your agent reads and writes for you, pass through our server on the way to Anthropic. It writes nothing down, we keep no copy, and we use none of it for anything. When the $25 is used, your agent pauses until next month; connect an AI account of your own at any point and it carries on from there, with nothing to switch.</p>
-            </div>
+            <p class="plan-card-line">Or <a href="#ai-included">with the AI included, $59 a month</a>.</p>
             <ul class="plan-list">
               <li>Up to 10 agents on your own computer, each one answering you and nobody else</li>
               <li>They run only while that computer is on, awake and connected to the internet. A laptop works if it stays plugged in with sleep set to Never; a time that passes while it is asleep is skipped, not run late</li>
@@ -318,6 +307,27 @@
             <a class="btn btn-business plan-cta" href="../../questionnaire/">Get Us Started</a>
           </article>
         </div>
+
+        <!-- The plan with the AI included, as a band under the three plans rather than a fourth
+             column or an inset. It is the For Individuals plan with one more thing inside, so it
+             hangs off that card by a link and gets the width to say the three things TRUST.md
+             requires in the same breath as the price: where the usage runs, what happens when it
+             is used, and whether $25 is enough. A nested card made the middle column twice the
+             height of its neighbors; a fourth column said "a bigger tier" under a heading that
+             promises one plan. -->
+        <article class="plan-band fade-up delay-2" id="ai-included" aria-labelledby="ai-included-label">
+          <div class="plan-band-price">
+            <span class="price-card-label" id="ai-included-label">For Individuals, with the AI included</span>
+            <div class="price-card-amount">$59<span>a month</span></div>
+            <p class="plan-card-line">Or $599 a year. The plan above, plus $25 of Claude Sonnet usage every month, so there is no AI account to open and no second bill.</p>
+            <a class="btn btn-primary plan-cta" href="../../questionnaire/">Get My Agent Started</a>
+          </div>
+          <div class="plan-band-body">
+            <p><strong>Where it runs.</strong> On our Anthropic account, so your messages, and the mail your agent reads and writes for you, pass through our server on the way to Anthropic. It writes nothing down, we keep no copy, and we use none of it.</p>
+            <p><strong>When the $25 is used.</strong> Your agent pauses until next month refills it; nothing rolls over. Connect an AI account of your own at any point and it carries on from there, with nothing to switch.</p>
+            <p><strong>Is $25 enough?</strong> <a href="#ai-cost">Measured against real use</a>: a light month fits several times over, a moderate month uses about half of it, and a heavy month does not fit.</p>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -474,7 +484,6 @@
             </tbody>
           </table>
           <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because two things move a bill and neither is the message count: the quality you pick, and how you space your messages out. A message sent a minute after the last costs about a sixth of one sent an hour later. These are one person&rsquo;s use: a shared Archie for Business agent answers a whole team.</p>
-          <p class="cost-table-note">Against the $25 in the plan with the AI included: a light month fits several times over, a moderate month uses about half of it, and a heavy month does not fit. If you are heavy, bring an AI account of your own.</p>
         </div>
 
         <p class="cost-note cost-note--lead"><strong>There is a third setting, and it is not in this table.</strong> Response quality, on an agent&rsquo;s page, offers Economy, Balanced and Best. We read real bills for the first two and never benched Best, so its column is left out rather than guessed at. It costs more than Balanced; how much more is unmeasured.</p>

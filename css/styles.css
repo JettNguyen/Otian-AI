@@ -6690,29 +6690,49 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
 }
 
-/* The AI-included price, as an inset on the For Individuals card rather than a fourth card.
-   Same amount size as the card's own price so the two read as two prices for one plan; the
-   accent line is the same one the lead card wears, so the inset belongs to the card it sits in
-   and does not read as a nested product. --surface-soft is the lightest wash the site uses for
-   a region that is not a card (the 8% wash reads as a disabled control in dark mode). */
-.plan-option {
+/* The plan with the AI included, as one wide band under the three plan cards. Price on the
+   left at the cards' amount size, the three things the offer has to say on the right, and the
+   same accent line the lead card wears, so the band reads as that card's second price rather
+   than a fourth product. Pulled up by the grid's own gap so the row sits with the cards. */
+.plan-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+  gap: 40px;
+  align-items: center;
+  background: var(--bg-card);
   border: 1px solid var(--accent-line);
-  border-radius: var(--radius-sm);
-  background: var(--surface-soft);
-  padding: 18px 20px 4px;
-  margin: 0 0 24px;
+  border-radius: var(--radius);
+  padding: 32px;
+  margin: -24px 0 48px;
 }
-.plan-option-label {
-  display: block;
-  font-size: var(--fs-xs);
-  font-weight: 600;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  margin-bottom: 10px;
+.plan-band-price {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
-.plan-option .plan-card-line { margin-bottom: 12px; }
-.plan-option .plan-fine { margin-bottom: 14px; }
+.plan-band-price .price-card-amount {
+  font-size: clamp(1.85rem, 2.4vw, 2.5rem);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+.plan-band-price .plan-cta { margin-top: 4px; }
+.plan-band-body {
+  display: grid;
+  gap: 14px;
+  padding-left: 40px;
+  border-left: 1px solid var(--border);
+}
+.plan-band-body p {
+  margin: 0;
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+.plan-band-body strong { color: var(--text-primary); }
+@media (max-width: 1000px) {
+  .plan-band { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 24px; }
+  .plan-band-body { padding-left: 0; padding-top: 20px; border-left: 0; border-top: 1px solid var(--border); }
+}
 .plan-cta {
   margin-top: auto;
   align-self: flex-start;

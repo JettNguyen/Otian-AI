@@ -11750,3 +11750,39 @@ html[data-theme="dark"] .booking-container iframe {
 .btn.is-started {
   background: var(--accent-hover);
 }
+
+/* The platform's mark inside its download button: Apple's for the Mac, the four panes for
+   Windows. currentColor, so it reads on the primary and the secondary button alike. */
+.btn-mark {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  margin-top: -2px;
+}
+
+/* js/download-feedback.js marks the card for the visitor's own computer: a small label above
+   the heading, and the card moved first. The other card's button drops to secondary so the one
+   that fits this computer is the one that stands out. */
+.install-here {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink, var(--accent));
+}
+
+.two-col-card.is-this-computer {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+/* The Archie wordmark above the install heading: a display asset, sized so the mark reads as
+   the app's and the heading under it stays the heading. Both gradients in the file hold on the
+   cream and the dark ground, so one file serves both themes. */
+.install-wordmark {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 0 auto 26px;
+}

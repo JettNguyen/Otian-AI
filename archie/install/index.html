@@ -42,7 +42,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260904-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260904-3" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -169,6 +169,12 @@
   <!-- ==============================
        Download
        ============================== -->
+  <!-- One hero, one button. The page used to open with a 74-word paragraph and two equal cards,
+       which read as a preview with a download bolted on. Now js/download-feedback.js shows the
+       button for the computer in front of the reader and folds the other platform into a link;
+       with no script, or on a computer that is neither, both platforms show side by side. The
+       testing status is still here, once, in the hub's status-box idiom, and the requirements
+       and the Windows warning teaser sit as small print under the button they belong to. -->
   <section class="section section--top" aria-labelledby="install-heading">
       <nav class="breadcrumb-bar" aria-label="Breadcrumb">
         <div class="breadcrumb-bar-inner">
@@ -179,34 +185,34 @@
         </div>
       </nav>
     <div class="container">
-      <div class="section-header">
-        <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Archie</a>
+      <div class="install-hero">
         <img src="../../assets/archie-text.svg" width="2300" height="900" alt="Archie" class="install-wordmark fade-up" />
-        <span class="section-label fade-up">The desktop app</span>
         <h1 id="install-heading" class="fade-up delay-1">Install Archie.</h1>
-        <p>Archie runs on your own computer. It isn&rsquo;t a website you log into. Download it, open it, and your agent lives on your computer. Archie hasn&rsquo;t shipped yet (<a href="../#status">here&rsquo;s where it stands</a>), so read this page as a preview: <a href="../../questionnaire/">join the waitlist</a> and this is where we&rsquo;ll send you on release day. Below is where each platform&rsquo;s download will live, and an honest account of what you&rsquo;ll see the first time you open it.</p>
+        <p class="install-lede fade-up delay-1">Your own AI agent, on your own computer. A desktop app you download and open, not a website you log into.</p>
+
+        <div class="install-actions fade-up delay-2" id="install-actions">
+          <div class="install-platform" data-os="mac">
+            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>Download for Mac</span></a>
+            <p class="install-req">macOS 12 Monterey or later, Apple&nbsp;silicon or Intel. Signed and notarized with Apple, so it opens the way any other app does.</p>
+            <p class="download-note" id="download-note-mac" role="status" aria-live="polite"></p>
+          </div>
+          <div class="install-platform" data-os="win">
+            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg><span>Download for Windows</span></a>
+            <p class="install-req">Windows 10 or 11, 64-bit. Windows will try to stop you the first time; <a href="#warning-heading">the next section explains why</a>.</p>
+            <p class="download-note" id="download-note-win" role="status" aria-live="polite"></p>
+          </div>
+          <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Not a Mac? Get it for Windows</button><button type="button" class="install-other-btn" data-show="mac">Not Windows? Get it for Mac</button></p>
+        </div>
+
+        <div class="install-status fade-up delay-3">
+          <p><strong>Archie is in testing</strong> and not for sale yet (<a href="../#status">here&rsquo;s where it stands</a>). <a href="../../questionnaire/">Join the waitlist</a> and this is where we&rsquo;ll send you on release day.</p>
+        </div>
       </div>
 
-      <div class="mt-40 two-col fade-up delay-1">
-        <div class="two-col-card">
-          <h3>Mac</h3>
-          <p>macOS 12 Monterey or later. One download works on both Apple&nbsp;silicon and Intel Macs.</p>
-          <p style="margin-top: 20px;">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac" data-os="mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>Download for Mac</span></a>
-          </p>
-          <p class="download-note" id="download-note-mac" role="status" aria-live="polite"></p>
-          <p style="margin-top: 16px; font-size: var(--fs-base);">Signed and notarized with Apple. It opens the way any other app does: no warnings, nothing to click past.</p>
-        </div>
-        <div class="two-col-card">
-          <h3>Windows</h3>
-          <p>Windows 10 or 11, 64-bit.</p>
-          <p style="margin-top: 20px;">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win" data-os="win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M0 0h11.377v11.372H0zm12.623 0H24v11.372H12.623zM0 12.623h11.377V24H0zm12.623 0H24V24H12.623z"/></svg><span>Download for Windows</span></a>
-          </p>
-          <p class="download-note" id="download-note-win" role="status" aria-live="polite"></p>
-          <p style="margin-top: 16px; font-size: var(--fs-base);"><strong>Windows will try to stop you the first time.</strong> That&rsquo;s expected with our first releases, and the next section explains exactly why; please read it before you install.</p>
-        </div>
-      </div>
+      <figure class="install-shot fade-up delay-3">
+        <div class="demo-player-frame"><img src="../../assets/archie-demo-light-poster.jpg" width="1600" height="1030" alt="The Archie app open on a Mac: an agent called Archibald in the sidebar, and a welcome screen listing what it can talk through and what it can be pointed at." loading="lazy" /></div>
+        <figcaption><a href="../see-it-work/">Watch it work, start to finish &rarr;</a></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -292,9 +298,9 @@
       <!-- The two paths, kept below the cards rather than in the section header: the header
            gets one short paragraph like every other band, and the unflattering half (we are
            in the path while you are on our credits) still gets said in full. -->
-      <p class="" style="margin-top: 32px; text-align: center;">Once your key is in, your agent talks to the AI directly and your conversations never pass through us. Before it is, you are on the free credits, which we pay for, so those messages do pass through our server. We hold no copy on either path. That is also why your agent will not read your email until your own key is in: your mail would pass through us too, and the people who wrote to you never agreed to that. Connecting your account turns every email tool on straight away.</p>
+      <p class="install-prose" style="margin-top: 32px;">Once your key is in, your agent talks to the AI directly and your conversations never pass through us. Before it is, you are on the free credits, which we pay for, so those messages do pass through our server. We hold no copy on either path. That is also why your agent will not read your email until your own key is in: your mail would pass through us too, and the people who wrote to you never agreed to that. Connecting your account turns every email tool on straight away.</p>
 
-      <p class="" style="margin-top: 20px; text-align: center;">There is no analytics or tracking in Archie. If it crashes it writes a log and sends us the tail next time you open the app, so we learn something broke. You can switch that off in Settings, under &ldquo;This computer&rdquo;, and the log stays on your computer either way.</p>
+      <p class="install-prose" style="margin-top: 20px;">There is no analytics or tracking in Archie. If it crashes it writes a log and sends us the tail next time you open the app, so we learn something broke. You can switch that off in Settings, under &ldquo;This computer&rdquo;, and the log stays on your computer either way.</p>
     </div>
   </section>
 

@@ -1,11 +1,11 @@
 // download-feedback.js: the install page's download buttons, made to fit the computer in front
 // of the visitor, and made to say something when clicked.
 //
-// Two jobs. First, on load: work out whether this is a Mac or a Windows computer, move that
-// platform's card first, label it "For this computer", and turn the other card's button into
-// the secondary style so the right one stands out. A phone, an iPad or a Linux computer gets
-// the page as written, both cards equal. The cards start hidden by the fade-up rule until they
-// scroll into view, so the reorder happens before anyone sees them.
+// Two jobs. First, on load: work out whether this is a Mac or a Windows computer and show that
+// platform's button alone, with the other platform folded into a "Not a Mac?" line that puts it
+// back. A phone, an iPad or a Linux computer gets the page as written, both platforms side by
+// side. The block starts hidden by the fade-up rule until it scrolls into view, so the choice is
+// made before anyone sees it.
 //
 // Second, on click: the installers live on GitHub, which serves them as attachments, so a click
 // starts the download without leaving this page and nothing on the page moves. The browser does
@@ -38,25 +38,21 @@
     return "";
   }
 
-  /* ── The card for this computer comes first ───────────────────────────────────────────── */
+  /* ── This computer's button ───────────────────────────────────────────────────────────── */
+  var actions = document.getElementById("install-actions");
   var os = detectOs();
-  var buttons = document.querySelectorAll("[data-download-note]");
-  if (os) {
-    Array.prototype.forEach.call(buttons, function (btn) {
-      var card = btn.closest(".two-col-card");
-      if (!card) return;
-      if (btn.getAttribute("data-os") === os) {
-        card.classList.add("is-this-computer");
-        var tag = document.createElement("span");
-        tag.className = "install-here";
-        tag.textContent = "For this computer";
-        card.prepend(tag);
-        if (card.parentNode && card.parentNode.firstElementChild !== card) card.parentNode.prepend(card);
-      } else {
-        btn.classList.remove("btn-primary");
-        btn.classList.add("btn-secondary");
-      }
-    });
+  if (actions && os) {
+    actions.classList.add("is-" + os);
+    var other = actions.querySelector(".install-other");
+    if (other) {
+      other.hidden = false;
+      other.addEventListener("click", function (e) {
+        if (!e.target.closest(".install-other-btn")) return;
+        actions.classList.add("show-both");
+        var shown = actions.querySelector('.install-platform[data-os="' + e.target.getAttribute("data-show") + '"] .btn');
+        if (shown) shown.focus();
+      });
+    }
   }
 
   /* ── What the click says ──────────────────────────────────────────────────────────────── */
@@ -89,7 +85,7 @@
     note.append(lead, hint, link, tail);
   }
 
-  Array.prototype.forEach.call(buttons, function (btn) {
+  Array.prototype.forEach.call(document.querySelectorAll("[data-download-note]"), function (btn) {
     var note = document.getElementById(btn.getAttribute("data-download-note"));
     /* The label sits in a span beside the platform mark, so swapping it leaves the mark alone. */
     var labelEl = btn.querySelector("span") || btn;

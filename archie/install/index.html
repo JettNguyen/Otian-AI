@@ -42,7 +42,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260904-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260904-4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -186,8 +186,10 @@
       </nav>
     <div class="container">
       <div class="install-hero">
-        <img src="../../assets/archie-text.svg" width="2300" height="900" alt="Archie" class="install-wordmark fade-up" />
-        <h1 id="install-heading" class="fade-up delay-1">Install Archie.</h1>
+        <!-- The wordmark stands in for the word: its "rchie" is Georgia bold at 590 of the file's
+             900 units, the same face as the heading, so at 900/590 em the letters match the type
+             beside them exactly and only the mark rises above the line. -->
+        <h1 id="install-heading" class="fade-up delay-1">Install <img src="../../assets/archie-text.svg" width="2300" height="900" alt="Archie" class="install-wordmark" />.</h1>
         <p class="install-lede fade-up delay-1">Your own AI agent, on your own computer. A desktop app you download and open, not a website you log into.</p>
 
         <div class="install-actions fade-up delay-2" id="install-actions">

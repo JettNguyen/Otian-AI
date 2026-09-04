@@ -11724,14 +11724,17 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: center;
 }
 
-/* The wordmark above the heading: a display asset, sized so the mark reads as the app's and the
-   heading under it stays the heading. Both gradients in the file hold on the cream and the dark
-   ground, so one file serves both themes. */
+/* The wordmark inside the heading, standing in for the word "Archie". Inside the file the letters
+   are Georgia bold at 590 units in a 900-unit box with their baseline about 68 units above the
+   bottom edge, so 900/590 em tall puts them at the heading's own size and a small negative
+   vertical-align sets them on its baseline. The mark is taller than the type on purpose. Both
+   gradients in the file hold on the cream and the dark ground, so one file serves both themes. */
 .install-wordmark {
-  display: block;
-  width: 200px;
-  height: auto;
-  margin: 0 auto 26px;
+  display: inline-block;
+  height: 1.525em;
+  width: auto;
+  vertical-align: -0.115em;
+  margin-left: 0.04em;
 }
 
 .install-hero h1 {

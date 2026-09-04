@@ -42,7 +42,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260903-5" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260904-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -191,16 +191,18 @@
           <h3>Mac</h3>
           <p>macOS 12 Monterey or later. One download works on both Apple&nbsp;silicon and Intel Macs.</p>
           <p style="margin-top: 20px;">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg">Download for Mac</a>
+            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac">Download for Mac</a>
           </p>
+          <p class="download-note" id="download-note-mac" role="status" aria-live="polite"></p>
           <p style="margin-top: 16px; font-size: var(--fs-base);">Signed and notarized with Apple. It opens the way any other app does: no warnings, nothing to click past.</p>
         </div>
         <div class="two-col-card">
           <h3>Windows</h3>
           <p>Windows 10 or 11, 64-bit.</p>
           <p style="margin-top: 20px;">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe">Download for Windows</a>
+            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win">Download for Windows</a>
           </p>
+          <p class="download-note" id="download-note-win" role="status" aria-live="polite"></p>
           <p style="margin-top: 16px; font-size: var(--fs-base);"><strong>Windows will try to stop you the first time.</strong> That&rsquo;s expected with our first releases, and the next section explains exactly why; please read it before you install.</p>
         </div>
       </div>
@@ -406,6 +408,7 @@
   </footer>
 
   <script src="../../js/nav.js"></script>
+  <script src="../../js/download-feedback.js"></script>
   <script type="module" src="../../js/account-nav.js"></script>
 </body>
 </html>

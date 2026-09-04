@@ -11711,3 +11711,42 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
   max-width: 62ch;
 }
+
+/* ==============================
+   44. Install: download feedback
+   ============================== */
+
+/* The note under each install button on archie/install/, filled by js/download-feedback.js once
+   the button is clicked. It is in the markup from the start (an aria-live region has to exist
+   before its text changes to be announced), so it collapses while empty rather than leaving a
+   gap under the button. The button's .is-started state is a colour change only: the label already
+   says "Download started", and the note beneath it carries the rest. */
+.download-note {
+  margin: 14px 0 0;
+  font-size: var(--fs-base);
+  color: var(--text-secondary);
+  max-width: 44ch;
+}
+
+.download-note:empty {
+  display: none;
+}
+
+.download-note strong {
+  color: var(--text-primary);
+}
+
+/* The base anchor inherits its colour, which inside a note would hide the fallback link. */
+.download-note a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.download-note a:hover {
+  color: var(--accent-hover);
+}
+
+.btn.is-started {
+  background: var(--accent-hover);
+}

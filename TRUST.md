@@ -1188,7 +1188,7 @@ a business purchase writes `plan_business` and grants no personal licence
 (`docs/BUSINESS-PRICING.md`, "What a purchase grants"). Write what the plan buys.
 
 **⛔ Equally banned: saying a business plan will not run the personal app.** Today it does: the
-same doc records the beta decision that "any valid license runs either edition", and the gate is
+same doc records the testing-phase decision that "any valid license runs either edition", and the gate is
 expected to tighten in the business build later. Both "includes it" and "will not run it" are
 claims about a thing in flux, so the site makes neither and describes the purchase instead.
 

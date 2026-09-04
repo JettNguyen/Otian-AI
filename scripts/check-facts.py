@@ -140,7 +140,7 @@ def catalog_count():
 
     Private manifests are skipped, decided by Jett 2026-09-01. The count was the whole directory
     until then, and by that day 18 of the 153 were `visibility: private`: one client's sales pack
-    and two items for a beta account. Those reach allowlisted accounts only, so a reader who opened
+    and two items for a testing account. Those reach allowlisted accounts only, so a reader who opened
     the store to check the number on the page would have counted 135 and found the site 18 out.
     """
     if not os.path.isdir(ARCHIE_CATALOG):

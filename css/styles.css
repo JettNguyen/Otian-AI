@@ -12160,38 +12160,22 @@ html[data-theme="dark"] .booking-container iframe {
   justify-content: center;
 }
 
-/* A whole phone, where the day spine's is a fragment.
-   .hm-pz draws its bezel as a left-to-right gradient and then masks its own top and bottom away,
-   which is right on the spine: the phone is a glimpse the thread scrolls past. As the hero's one
-   foreground object that reads as a dark panel with no edges, and in dark mode the spine's wall
-   (#232322) sits two values off the page ground, so the device disappeared into the section
-   altogether. Here it is a closed rounded body with a real frame and its own ground, and it wears
-   the wall the tails already reference, so .hm-bubble's cutout keeps working untouched. */
+/* The day spine's phone, larger. Not a closed device: .hm-pz draws side rails and then masks its
+   own top and bottom away, and that is the right call here too. A complete phone has to commit to
+   a phone's proportions, and this one is as tall as three bubbles, so a closed body with rounded
+   corners and an earpiece came out square and read as a tablet. Faded top and bottom it is a
+   glimpse of a screen, which has no proportions to get wrong and puts every pixel of attention on
+   the conversation instead of on a drawing of hardware.
+
+   The fade is deeper than the spine's, because it is bigger: 34px dissolves a 300px object and
+   only crops a 480px one. */
 .hm-pz--hero {
   --hm-pz-wall: var(--bg-secondary);
-  max-width: 372px;
+  max-width: 376px;
   width: 100%;
-  padding: 30px 22px 34px;
-  background: var(--bg-secondary);
-  border: 9px solid var(--hm-pz-bezel);
-  border-radius: 46px;
-  box-shadow: var(--shadow-lg);
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-/* The earpiece slot. One 44px bar is the whole difference between "a rounded box of messages"
-   and "a phone", and it costs no markup: everything above it in the hero is already saying the
-   agent reaches you where you are, so the object should not need a caption to be recognised. */
-.hm-pz--hero::before {
-  content: "";
-  display: block;
-  width: 44px;
-  height: 5px;
-  margin: 0 auto 22px;
-  border-radius: 999px;
-  background: var(--hm-pz-bezel);
-  opacity: 0.5;
+  padding: 64px 26px 52px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 76px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 76px), transparent);
 }
 
 /* The conversation is the hero's subject, so it gets the room the day spine's minis do not. */
@@ -12222,7 +12206,7 @@ html[data-theme="dark"] .booking-container iframe {
      roughly square, which reads as a widget; a real thread has the day's empty screen above it
      and the newest message at the thumb. The floor is the tallest scene plus that headroom, so
      nothing resizes as the cycle turns. */
-  min-height: 348px;
+  min-height: 290px;
   align-content: end;
 }
 .hm-scene { grid-area: 1 / 1; align-self: end; }

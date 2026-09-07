@@ -11614,12 +11614,65 @@ html[data-theme="dark"] .booking-container iframe {
    The label is a question the reader has asked themselves, so it is set as speech and given the
    weight normally reserved for a heading. On a skim it is the only thing read, and the whole
    section works or fails on whether that one line is recognised. */
-.cover-grid--scenes li {
-  grid-template-columns: 1.6fr 1fr;
-  gap: 10px 32px;
-  align-items: start;
-  padding: 20px 2px;
+/* Two across, and cards rather than table rows, since 2026-09-07.
+   As full-width rows these six ran 1,700px down the page with a right-hand column that held two
+   short lines and a great deal of nothing, so the section that decides whether somebody keeps
+   reading was the longest and emptiest thing on the homepage. Paired up they are roughly half
+   the height, which puts three or four of them on screen at once: the point of six unrelated
+   jobs is the *spread*, and a spread you have to scroll through is an argument you have to
+   remember rather than one you can see.
+
+   What the rows did well is kept. The question still leads at heading weight, and it is still
+   the only thing read on a skim, so the whole thing still works or fails on that one line. The
+   add-on name still sits at the foot of its own scene rather than in a column of its own.
+
+   The mark is the app's, filled in by scripts/gen-marketplace.mjs from js/faces.js, and it is
+   the same one the store shows against that add-on. That is the whole reason to have it: a
+   reader who meets Reply Watch here and later opens the marketplace should meet the same object,
+   and it costs the page no words to say so. */
+.cover-grid--scenes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 32px;
+  border-top: 0;
 }
+
+.cover-grid--scenes li {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  padding: 22px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 0;
+}
+
+/* The scene takes the slack so every add-on name in a row sits on the same line, whatever the
+   description above it did. Without this a two-line blurb next to a three-line one leaves the
+   two names half a paragraph apart and the pair stops reading as a pair. */
+.cover-grid--scenes .cover-scene { flex: 1; }
+
+/* The mark leads the name, the way the store's own card lays it out. */
+.cover-grid--scenes .cover-addon {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0 12px;
+}
+/* The mark shares a row with the name and nothing else, so the two centre on each other and the
+   connection tag hangs below out of that alignment. Spanning both rows instead centres the mark
+   on the pair, which drops the name by half a line on the four add-ons that carry a tag and
+   leaves it where it was on the two that do not: side by side, the names in a row then sit at
+   two different heights for a reason the reader cannot see. */
+.cover-mark { grid-row: 1; }
+.cover-grid--scenes .cover-needs { grid-column: 2; margin-top: 2px; }
+
+/* The tag's row is reserved whether or not the add-on has one. Two of the six need no
+   connection, so without this their block is a line shorter, and since the scene above takes the
+   slack to bottom-align the pair, a shorter block puts its *name* a line lower than the one
+   beside it. Reserving the row is a layout reservation and not invented copy: the space is
+   empty, which is what "needs nothing" looks like. */
+.cover-grid--scenes .cover-addon { grid-template-rows: auto 1.2em; }
 
 .cover-scene p {
   margin: 7px 0 0;
@@ -11694,11 +11747,20 @@ html[data-theme="dark"] .booking-container iframe {
 
   /* Stacked, the add-on name has to come back up under the label it belongs to rather than sit
      below a four-line description, where it reads as a footnote to the paragraph. */
+  /* One across on a phone, where two columns would put each scene in about 20 characters. */
+  .cover-grid--scenes { grid-template-columns: 1fr; gap: 0; }
   .cover-grid--scenes li {
-    gap: 6px;
-    padding: 16px 2px;
+    gap: 8px;
+    padding: 16px 0;
   }
+  /* The add-on and its mark move above the scene here, as they have since the stacked layout
+     existed: on one column the name is the row's own heading, and the mark gives the eye
+     something to run down the left edge of six of them. */
   .cover-grid--scenes .cover-addon { order: -1; }
+  /* No reserved tag row here. It exists so two names side by side sit on the same line, and on
+     one column there is nothing beside them: all it leaves is a gap under the two add-ons that
+     need no connection. */
+  .cover-grid--scenes .cover-addon { grid-template-rows: auto auto; }
   .cover-scene p { font-size: var(--fs-base); max-width: none; }
 }
 

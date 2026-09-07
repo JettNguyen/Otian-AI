@@ -29,9 +29,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { COLLECTIONS, normalize, cardHtml } from "../js/addon-card.js";
+import { faceHtml } from "../js/faces.js";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const PAGE = path.join(ROOT, "skills-marketplace", "browse", "index.html");
+const HOME = path.join(ROOT, "index.html");
+const SLOT = '<span class="cover-mark" data-face-slot>';
 
 /* The catalog is authored in the Archie repo and seeded into Firestore by its own CI, exactly as
  * scripts/check-facts.py and scripts/check-faces.py already assume. Sitting beside this repo is
@@ -113,6 +116,58 @@ function currentBlock(html) {
   throw new Error("mpProductGrid is never closed in " + PAGE);
 }
 
+/* The homepage's coverage grid names six real add-ons, and each of them already has a mark in
+ * the app's own set. The copy stays in index.html, where it is written and edited; only the mark
+ * is filled in here, keyed by the `data-face="kind:id"` on each row, so the six glyph paths are
+ * not hand-copied into a third place after js/faces.js and the Archie repo. A row naming an id
+ * that is not in the catalog is a mistake worth stopping for: it means the homepage is pointing
+ * at an add-on nobody can install.
+ *
+ * Returns the page's new text, or throws. */
+function renderHomeFaces(items) {
+  const byKey = new Map(items.map((i) => [i.kind + ":" + i.id, i]));
+  const html = fs.readFileSync(HOME, "utf8");
+  const missing = [];
+  let next = "";
+  let at = 0;
+
+  const ROW = /<li data-face="([^"]+)">/g;
+  let row;
+  while ((row = ROW.exec(html))) {
+    const key = row[1];
+    if (!byKey.has(key)) { missing.push(key); continue; }
+
+    const slot = html.indexOf(SLOT, row.index);
+    if (slot === -1) throw new Error("row " + key + " has no mark slot in index.html");
+
+    /* The mark is itself spans inside spans, so the first </span> after the slot is not the
+     * slot's own. Count depth, exactly as currentBlock() does for the grid's divs. Getting this
+     * wrong is not a crash: it is a generator that rewrites a slightly different string every
+     * run, so --check never goes green and the page churns on every commit. */
+    const tags = /<span\b[^>]*>|<\/span>/g;
+    tags.lastIndex = slot;
+    let depth = 0;
+    let end = -1;
+    let m;
+    while ((m = tags.exec(html))) {
+      depth += m[0] === "</span>" ? -1 : 1;
+      if (depth === 0) { end = m.index + m[0].length; break; }
+    }
+    if (end === -1) throw new Error("mark slot for " + key + " is never closed in index.html");
+
+    const colon = key.indexOf(":");
+    next += html.slice(at, slot) + SLOT +
+      faceHtml(key.slice(0, colon), key.slice(colon + 1), "row") + "</span>";
+    at = end;
+  }
+  next += html.slice(at);
+
+  if (missing.length) {
+    throw new Error("index.html names add-ons that are not in the catalog: " + missing.join(", "));
+  }
+  return { html, next };
+}
+
 function main() {
   const check = process.argv.includes("--check");
   const items = readCatalog();
@@ -127,24 +182,38 @@ function main() {
   const wanted = render(items);
   const have = html.slice(start, end);
 
-  if (have === wanted) {
-    console.log(`gen-marketplace: clean. ${items.length} public add-ons in the page.`);
+  const changed = have !== wanted;
+  const home = renderHomeFaces(items);
+  const homeChanged = home.html !== home.next;
+
+  if (!changed && !homeChanged) {
+    console.log(`gen-marketplace: clean. ${items.length} public add-ons in the page, ` +
+      "six marks on the homepage.");
     return 0;
   }
 
   if (check) {
     const shipped = (have.match(/<article class="mp-product-card"/g) || []).length;
     console.log(
-      "gen-marketplace: skills-marketplace/browse/ is out of date.\n\n" +
-      `  in the page:   ${shipped} add-on card(s)\n` +
-      `  in the catalog: ${items.length} public add-on(s)\n\n` +
-      "Run: node scripts/gen-marketplace.mjs"
+      "gen-marketplace: generated markup is out of date.\n\n" +
+      (changed
+        ? `  skills-marketplace/browse/: ${shipped} card(s) in the page, ` +
+          `${items.length} public add-on(s) in the catalog\n`
+        : "") +
+      (homeChanged ? "  index.html: the coverage grid's marks have moved\n" : "") +
+      "\nRun: node scripts/gen-marketplace.mjs"
     );
     return 1;
   }
 
-  fs.writeFileSync(PAGE, html.slice(0, start) + wanted + html.slice(end), "utf8");
-  console.log(`gen-marketplace: wrote ${items.length} add-on cards into skills-marketplace/browse/.`);
+  if (changed) {
+    fs.writeFileSync(PAGE, html.slice(0, start) + wanted + html.slice(end), "utf8");
+  }
+  if (homeChanged) fs.writeFileSync(HOME, home.next, "utf8");
+  console.log(
+    `gen-marketplace: ${changed ? items.length + " add-on cards into skills-marketplace/browse/" : "browse page unchanged"}` +
+    `, ${homeChanged ? "six marks into index.html" : "homepage unchanged"}.`
+  );
   return 0;
 }
 

@@ -12354,6 +12354,9 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: var(--fs-sm);
   line-height: 1.45;
   color: var(--text-secondary);
+  /* The hero centres its copy below 900px and the composer is inside that. A message typed into
+     a box is left-aligned wherever you are reading it. */
+  text-align: left;
 }
 .hm-composer-hint { color: var(--text-muted); }
 .hm-send {
@@ -12369,18 +12372,27 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-send svg { width: 15px; height: 15px; }
 
 /* ---- The typewriter ----
-   One <i> per character, revealed on its own delay. The obvious CSS typewriter animates a
-   nowrap element's width, and that one cannot wrap: it is a single line being uncovered, so a
-   message longer than the field either clips or scrolls, and a real composer does neither. It
-   grows a second line. So the characters are separate elements, every one of them laid out from
-   the first frame and merely invisible, which also means the field is already the right height
-   before a single character shows and nothing reflows as the message fills it in.
+   One <i> per character, revealed on its own delay, and a character that has not been typed yet
+   has font-size 0 so it takes no room at all. That is what makes the box behave: it is one line
+   until the words reach a second one, exactly like the box on your phone, and it is one line
+   again the moment the message is sent.
+
+   The obvious CSS typewriter animates a nowrap element's width, and that one cannot wrap: it
+   uncovers a single line, so a long message either clips or scrolls sideways. Per character is
+   the only shape of this that can grow a second line.
+
+   font-size and not display, for the collapse as well as the growth. Every character is sized in
+   em, so setting the container to 0 takes all of them with it in the same frame, which is what a
+   sent message looks like: the field empties at once, not one letter at a time from the left.
+   Animating display would do the same on a new enough browser and nothing at all on an older
+   one, and this needs no such qualification.
 
    The caret rides the same animation. A character turns its own right border on as it appears
    and off one step later, so exactly one border is lit at any moment and it walks the text,
-   through a line break and all. A separate caret element cannot do that: there is nothing to
-   position it against between two characters. */
+   through a line break and all. A separate caret element cannot do that: between two characters
+   there is nothing to position it against. */
 .hm-typed {
+  font-size: var(--fs-sm);
   color: var(--text-primary);
   /* pre-wrap, so the spaces between the characters survive being their own elements, and the
      line still breaks where a line should break. */
@@ -12394,23 +12406,33 @@ html[data-theme="dark"] .booking-container iframe {
   margin-right: -1.5px;
   animation: hm-char var(--hm-lap) linear infinite both;
   /* 24ms a character. Fast enough to read as typing rather than as a reveal, slow enough that
-     the longest message (54 characters) is in before the send at about 1.4s. */
+     the longest message is in before the send at about 1.4s. */
   animation-delay: calc(var(--s) * var(--hm-hold) + var(--i) * 24ms);
 }
 
-/* 1% of the lap is 455ms, so a character's step is 0.053% and the stops below are that step
-   either side of its entrance. `both` is what keeps a character invisible before its delay. */
+/* 1% of the lap is 455ms, so a character's step is 0.053% and the stops below sit either side of
+   its entrance. `both` is what keeps a character at zero before its delay. */
 @keyframes hm-char {
-  0%           { opacity: 0; border-right-color: transparent; }
-  0.02%        { opacity: 1; border-right-color: var(--accent); }
-  0.05%        { opacity: 1; border-right-color: var(--accent); }
-  0.07%, 100%  { opacity: 1; border-right-color: transparent; }
+  0%           { font-size: 0; border-right-color: transparent; }
+  0.02%        { font-size: 1em; border-right-color: var(--accent); }
+  0.05%        { font-size: 1em; border-right-color: var(--accent); }
+  0.07%, 100%  { font-size: 1em; border-right-color: transparent; }
 }
 
-/* The field empties on the send, all at once, the way a field does. */
+/* The send empties the field and the placeholder comes back, both in one frame. */
 @keyframes hm-typed-clear {
-  0%, 2.95%   { opacity: 1; }
-  3.0%, 100%  { opacity: 0; }
+  0%, 2.95%   { font-size: var(--fs-sm); }
+  3.0%, 100%  { font-size: 0; }
+}
+@keyframes hm-hint-return {
+  0%, 2.95%   { font-size: 0; }
+  3.0%, 100%  { font-size: var(--fs-sm); }
+}
+/* Only a field that types hides its placeholder. The two scenes the agent starts never had one
+   to hide. */
+.hm-typed + .hm-composer-hint {
+  animation: hm-hint-return var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
 }
 
 /* The send. A quick press on the beat the message leaves the field, and nothing the rest of the
@@ -12508,8 +12530,11 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-typing { display: none; }
   /* The field holds the finished message rather than typing it, and the caret goes with the
      movement it belonged to. */
-  .hm-typed { animation: none; opacity: 1; }
-  .hm-typed i { animation: none; opacity: 1; border-right-color: transparent; }
+  /* The finished message sits in the field, and the placeholder it would have come back to is
+     not shown on top of it. */
+  .hm-typed { animation: none; font-size: var(--fs-sm); }
+  .hm-typed i { animation: none; font-size: 1em; border-right-color: transparent; }
+  .hm-typed + .hm-composer-hint { animation: none; font-size: 0; }
   .hm-send { animation: none; }
 }
 

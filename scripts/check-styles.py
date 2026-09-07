@@ -45,6 +45,11 @@ FONT_SIZE_OK = [
     (re.compile(r'^inherit$'), "inherits"),
     (re.compile(r'^[\d.]+em$'), "relative to its parent on purpose"),
     (re.compile(r'^clamp\('), "fluid display size"),
+    # Zero is not a size on the ladder because it is not type at all: it is how an element is
+    # collapsed out of the line box while staying in the document. The hero composer types one
+    # <i> per character and an untyped character sits at 0, which is what lets the field grow to
+    # a second line only when the words actually reach one.
+    (re.compile(r'^0$'), "collapsed, not sized"),
 ]
 
 # A box-shadow may be a token, or one of these. The distinction that matters is

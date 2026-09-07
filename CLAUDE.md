@@ -129,7 +129,7 @@ reason.**
   which looks exactly like the site is broken rather than cached, and a hard refresh does not
   fix it because the cache is at the CDN edge, not in the browser. Changing the query string
   is the only thing that reliably busts it. One scripted find-and-replace across every page.
-- **Two files on this site are generated, and both have a `--check` mode. Run them before you
+- **Three parts of this site are generated, and each has a `--check` mode. Run them before you
   commit.** There is still no build step: these write into the repo, the result is committed,
   and the check is what stops the committed copy drifting from what it was made from.
   - `python3 scripts/gen-discovery.py` writes `sitemap.xml`, `robots.txt` and `llms.txt` from
@@ -147,6 +147,10 @@ reason.**
     through `js/addon-card.js`, the same module the browser runs**, so there is one card
     builder and not two. Run it after the Archie catalog moves, in the push order FACTS.md
     already sets out for the count: Archie first, then here.
+  - `node scripts/gen-blog.mjs` writes the published posts into `blog/` from
+    `assets/articles.json`, which had the same bug on a smaller scale: the hub page for fifteen
+    posts carried 183 characters and named none of them. It renders through `js/blog-card.js`,
+    which `js/blog.js` imports too.
 
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is

@@ -35,6 +35,7 @@ Usage:
 """
 
 import argparse
+import datetime
 import os
 import re
 import subprocess
@@ -87,19 +88,42 @@ def xml_escape(text):
     return (text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
 
-def last_changed(rel):
-    """Committed date of a file, or None when git has never seen it.
+def _git(*args):
+    try:
+        out = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True, timeout=20)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return out.stdout if out.returncode == 0 else None
+
+
+def uncommitted():
+    """Paths with changes not yet committed, staged or not.
+
+    These are why lastmod cannot be `git log` alone. A page edited in the working tree still
+    reports its previous commit's date, so a sitemap generated in the same breath as the edit
+    would announce the page as older than the change it is being regenerated for, and --check
+    would then fail on the very next run because the commit moved the date underneath it. A file
+    about to be committed is dated today, which is when it is going to be published.
+    """
+    out = _git("status", "--porcelain", "-z")
+    if out is None:
+        return set()
+    paths = set()
+    for entry in out.split("\0"):
+        if len(entry) > 3:
+            paths.add(entry[3:])
+    return paths
+
+
+def last_changed(rel, pending):
+    """The date a page last changed, or None when git has never seen it.
 
     Author date, not commit date: a rebase should not tell the world every page changed.
     """
-    try:
-        out = subprocess.run(
-            ["git", "log", "-1", "--format=%as", "--", rel],
-            cwd=ROOT, capture_output=True, text=True, timeout=20,
-        )
-    except (OSError, subprocess.SubprocessError):
-        return None
-    stamp = out.stdout.strip()
+    if rel in pending:
+        return datetime.date.today().isoformat()
+    out = _git("log", "-1", "--format=%as", "--", rel)
+    stamp = (out or "").strip()
     return stamp if re.fullmatch(r"\d{4}-\d{2}-\d{2}", stamp) else None
 
 
@@ -115,6 +139,7 @@ def url_for(rel):
 def public_pages():
     """Every page a stranger can open, newest-sorted by nothing: path order is stable."""
     pages = []
+    pending = uncommitted()
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS and not d.startswith("."))
         for name in sorted(filenames):
@@ -137,7 +162,7 @@ def public_pages():
                 "url": url_for(rel),
                 "title": TITLE_SUFFIX.sub("", unescape(title.group(1))) if title else "",
                 "description": unescape(desc.group(1)) if desc else "",
-                "lastmod": last_changed(rel),
+                "lastmod": last_changed(rel, pending),
             })
     return pages
 

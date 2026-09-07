@@ -11061,10 +11061,25 @@ html[data-theme="dark"] .booking-container iframe {
   --hm-pz-wall: #EAE2D8;
   --hm-pz-bezel: #1C1916;
   --hm-pz-rim: #1C1916;
+  --hm-pz-glow: color-mix(in srgb, var(--accent) 11%, transparent);
   position: relative; z-index: 1;
   max-width: 384px; margin: 0 auto;
   padding: 40px 30px;
-  background: linear-gradient(to right,
+  /* Two layers: a wallpaper over the screen, and the rails that make it a screen.
+     A flat wall read as a rectangle of paint rather than as somewhere a conversation is
+     happening, and every phone has something behind its bubbles. This is the least a wallpaper
+     can be: one soft warm light from above the top edge, no pattern, no second colour, gone by
+     46% of the way down.
+     IT HAS TO BE GONE BY THEN. The bubble tails are drawn by painting a flat patch of
+     --hm-pz-wall over the ink block that bridges the corner, so wherever the wallpaper is not
+     the plain wall colour, that patch is a visible notch. Tails sit at the bottom edges of
+     bubbles, which live in the lower half, and the light stops before it reaches any of them.
+     Anything busier here (a pattern, a texture, a second stop) would have to reckon with that
+     patch first, and the honest fix would be redrawing the tail as a clip rather than a cover. */
+  background:
+    radial-gradient(115% 52% at 50% -6%, var(--hm-pz-glow), transparent 100%)
+      12px 0 / calc(100% - 24px) 100% no-repeat,
+    linear-gradient(to right,
     var(--hm-pz-rim) 0 1.5px,
     var(--hm-pz-bezel) 1.5px 12px,
     var(--hm-pz-wall) 12px calc(100% - 12px),
@@ -11073,7 +11088,12 @@ html[data-theme="dark"] .booking-container iframe {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
 }
-[data-theme="dark"] .hm-pz { --hm-pz-wall: #232322; --hm-pz-bezel: #0D0D0C; --hm-pz-rim: rgba(243, 240, 237, 0.18); }
+/* Weaker in the dark, where the same mix moves further: the wall is near black, so a tenth of
+   the accent is a much bigger step there than it is on the cream. */
+[data-theme="dark"] .hm-pz {
+  --hm-pz-wall: #232322; --hm-pz-bezel: #0D0D0C; --hm-pz-rim: rgba(243, 240, 237, 0.18);
+  --hm-pz-glow: color-mix(in srgb, var(--accent) 6%, transparent);
+}
 .hm-msg {
   text-align: left; font-size: var(--fs-base);
   display: flex; flex-direction: column; align-items: flex-start; gap: 6px;

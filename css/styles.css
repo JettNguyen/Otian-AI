@@ -12184,24 +12184,38 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz--hero .hm-mini-quote { font-size: var(--fs-md); line-height: 1.5; }
 .hm-pz--hero .hm-chipline { margin-top: 10px; }
 
-/* ---- The three scenes ----
-   The phone cycles through three exchanges rather than holding one. Three, because the argument
-   the rest of the page spends 600 words on is that these jobs have nothing to do with each other,
-   and a single frozen conversation makes Archie look like it does one thing. Each scene is a
-   different *kind* of thing: you asking for a job, you asking for a change and being asked back,
-   and it starting something you never asked about. The third one has no question above it on
-   purpose. That is the whole difference between an agent and a chat app, and it is the only one
-   of the three a reader cannot already picture.
+/* ---- The scenes ----
+   The phone cycles through seven exchanges rather than holding one. Seven, because the argument
+   the rest of the page spends six hundred words on is that these jobs have nothing to do with
+   each other, and a single frozen conversation makes Archie look like it does one thing. The
+   order alternates who spoke first: you asking, then it arriving unasked, then you asking again.
+   That alternation is the argument, and a chat app only ever does the odd-numbered ones.
 
-   Every claim in them is one the site can back. The calendar change proposes and waits, which is
-   TRUST.md's confirmation claim and is enforced in code; the routine is made from a sentence,
-   which the day spine shows further down; the renewals list carries no figures, because a money
-   figure on this site needs a row in FACTS.md and an illustration is not a fact.
+   Every one of them is a thing the shipped build does, checked against the Archie repo's README:
+   a routine made from a sentence, a reminder delivered word for word with Done/Later/Dismiss, a
+   mail draft that one pressed button or one scheduled time can send and nothing else, a calendar
+   edit that stages and commits on a later message, a watch registered against a person rather
+   than a thread, a date coming due in one of your own lists, and a flight lookup that books
+   nothing. No figure appears in any of them: a money figure on this site needs a FACTS.md row,
+   and an illustration is not a fact.
 
-   All three sit in one grid cell, so the phone is as tall as the tallest and never resizes
+   All seven sit in one grid cell, so the phone is as tall as the tallest and never resizes
    mid-cycle. Stacking them absolutely would collapse the parent to nothing instead. */
 .hm-scenes {
   display: grid;
+  /* The whole cycle in two numbers. Every delay below is derived from them, so adding a scene is
+     a <div> with the next --s and nothing else: the hand-written delay table this replaced was
+     one typo away from two scenes on screen at once. The keyframe percentages ARE tied to the
+     count, though (one scene is 100/7 = 14.29% of a lap), so changing --hm-count means moving
+     the four stops in @keyframes hm-scene and hm-in with it. */
+  /* 4.2s a scene. The entrance is the part that was too slow before, not the hold: content
+     settles in under a second now (a 0.33s fade plus at most two 0.28s beats), and what is left
+     of the slot is reading time. The longest scene is about twenty-five words, which wants three
+     seconds sitting still, and that is what this leaves. */
+  --hm-hold: 4.2s;
+  --hm-count: 7;
+  --hm-lap: calc(var(--hm-hold) * var(--hm-count));
+
   /* Portrait, and the thread sits at the bottom of it. Sized by content alone the phone came out
      roughly square, which reads as a widget; a real thread has the day's empty screen above it
      and the newest message at the thumb. The floor is the tallest scene plus that headroom, so
@@ -12211,35 +12225,36 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-scene { grid-area: 1 / 1; align-self: end; }
 
-/* 18s, three scenes, so each holds for about five and a half. Long enough to read nine words and
-   then look away; short enough that somebody who stops to watch sees all three without deciding
-   to. Both keyframes run the full 18s and the delay is what selects the window, which is the only
-   way to keep three staggered scenes in step: separate durations drift apart within a minute. */
+/* BOTH keyframes must return to 0 before 100%, and that is the whole bug this shape fixes.
+   hm-in used to hold opacity 1 from its entrance all the way to 100% and then jump to 0 at the
+   wrap. An element whose stagger delay pushed it past its scene's fade-in wrapped while the
+   scene was fully visible, so it blinked off and back on once a lap: not a rendering glitch, a
+   keyframe that ended on the wrong value. Now every animated thing fades out with its scene and
+   holds 0 to the end of the lap, and the wrap has nothing left to jump. */
 @keyframes hm-scene {
-  0%, 1%    { opacity: 0; }
-  4%, 29%   { opacity: 1; }
-  33%, 100% { opacity: 0; }
+  0%          { opacity: 0; }
+  1.4%, 11.4% { opacity: 1; }
+  13.4%, 100% { opacity: 0; }
 }
 @keyframes hm-in {
-  0%, 2%   { opacity: 0; transform: translateY(9px); }
-  7%, 100% { opacity: 1; transform: none; }
+  0%          { opacity: 0; transform: translateY(8px); }
+  3.2%, 11.4% { opacity: 1; transform: none; }
+  13.4%, 100% { opacity: 0; transform: none; }
 }
 
-.hm-scene { animation: hm-scene 18s linear infinite both; }
-.hm-scene-2 { animation-delay: 6s; }
-.hm-scene-3 { animation-delay: 12s; }
+.hm-scene {
+  animation: hm-scene var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+  /* One promoted layer per scene, not one per bubble: the scenes cross-fade over each other and
+     that is where a repaint would show. */
+  will-change: opacity;
+}
 
-/* The bubbles inside a scene arrive in the order they really would, one beat apart. The delays
-   are absolute (scene window + offset), because an animation-delay cannot be relative to a
-   parent's. */
-.hm-in { animation: hm-in 18s linear infinite both; }
-.hm-in-1a { animation-delay: 0.1s; }
-.hm-in-1b { animation-delay: 0.9s; }
-.hm-in-2a { animation-delay: 6.1s; }
-.hm-in-2b { animation-delay: 6.9s; }
-.hm-in-2c { animation-delay: 7.5s; }
-.hm-in-3a { animation-delay: 12.1s; }
-.hm-in-3b { animation-delay: 13.0s; }
+/* --s is set once on the scene and inherits, so a bubble only has to say which beat it is. */
+.hm-in {
+  animation: hm-in var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * 0.28s);
+}
 
 /* The line under the confirm buttons. Not a bubble: it is the app telling you what will not
    happen, which is the same register as the micro line under the hero button. */
@@ -12268,7 +12283,10 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-turn .hm-bubble { max-width: none; width: 100%; }
 
 .hm-pz--hero .hm-msg-btns {
-  grid-template-columns: repeat(2, 1fr);
+  /* Two buttons or three, whatever the scene carries. */
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
   gap: 3px;
   max-width: none;
   width: 100%;
@@ -12314,7 +12332,8 @@ html[data-theme="dark"] .booking-container iframe {
      other two are the reason the phone moves, and with the movement gone they would stack three
      conversations on top of each other in the same grid cell. */
   .hm-scene, .hm-in { animation: none; opacity: 1; transform: none; }
-  .hm-scene-2, .hm-scene-3 { display: none; }
+  .hm-scene { display: none; }
+  .hm-scene:first-child { display: block; }
 }
 
 /* ---- See it work: the recording's own section ---- */

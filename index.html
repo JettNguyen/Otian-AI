@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-9" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-10" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -213,14 +213,19 @@
       </div>
 
       <div class="hm-stage">
-        <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through three exchanges. First: you write, every morning tell me what is on and what I owe people; the agent answers that it is done, every day at 7:00 am, and shows a routine called Morning Brief. Second: you ask it to move your three o'clock; it proposes Thursday at 10, with buttons to confirm the change or pick another time, and says nothing moves until you confirm. Third: unprompted, it says two things renew this week, your car insurance on Tuesday and the storage unit on Friday, with buttons to remind you the day before or to leave it.">
+        <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven exchanges with an AI agent. You ask for a morning summary and it confirms a daily routine. You ask for a reminder and it arrives at four with Done, Later and Dismiss. It tells you a reply to Sam is drafted and offers Send, Edit and Dismiss, noting that it writes but only sends when you tap Send or at a time you set. You ask it to move a three o&rsquo;clock and it proposes Thursday at ten with Confirm and Another time, noting that nothing moves until you confirm. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two, noting that it finds them and books nothing.">
           <div class="hm-scenes" aria-hidden="true">
 
-            <!-- 1. Plain words in, a scheduled job out. The headline's claim, demonstrated. -->
-            <div class="hm-scene hm-scene-1">
+            <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
+                 The order alternates who spoke first: you asking, then it arriving unasked, then
+                 you asking again. That alternation is the argument. A chat app only ever does the
+                 odd-numbered ones. -->
+
+            <!-- 1. Plain words in, a scheduled job out. -->
+            <div class="hm-scene" style="--s:0">
               <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in hm-in-1a"><p class="hm-mini-quote">&ldquo;Every morning, tell me what&rsquo;s on and what I owe people.&rdquo;<time>7:02 am</time></p></div>
-                <div class="hm-bubble hm-in hm-in-1b">
+                <div class="hm-bubble hm-bubble--out hm-in" style="--d:0"><p class="hm-mini-quote">&ldquo;Every morning, tell me what&rsquo;s on and what I owe people.&rdquo;<time>7:02 am</time></p></div>
+                <div class="hm-bubble hm-in" style="--d:1">
                   <p class="hm-mini-quote">Done. Every day at 7:00&nbsp;am.</p>
                   <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Morning Brief</b></div>
                   <time>7:02 am</time>
@@ -228,38 +233,84 @@
               </div>
             </div>
 
-            <!-- 2. The consequence gate, which is the one thing a hosted agent cannot show:
-                 a calendar change is proposed and waits. TRUST.md's calendar-confirmation
-                 claim, in its own approved shape, with the buttons that enforce it. -->
-            <div class="hm-scene hm-scene-2">
+            <!-- 2. A reminder, delivered word for word. It costs no tokens and it arrives even if
+                 the computer was shut when you asked, which is why it gets its own scene. -->
+            <div class="hm-scene" style="--s:1">
               <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in hm-in-2a"><p class="hm-mini-quote">&ldquo;Can you move my 3 o&rsquo;clock?&rdquo;<time>2:41 pm</time></p></div>
-                <div class="hm-turn hm-in hm-in-2b">
-                  <div class="hm-bubble"><p class="hm-mini-quote">Thursday at 10 is free for both of you.<time>2:41 pm</time></p></div>
-                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
+                <div class="hm-bubble hm-bubble--out hm-in" style="--d:0"><p class="hm-mini-quote">&ldquo;Remind me to call the vet at four.&rdquo;<time>11:20 am</time></p></div>
+                <div class="hm-turn hm-in" style="--d:1">
+                  <div class="hm-bubble"><p class="hm-mini-quote">Call the vet.<time>4:00 pm</time></p></div>
+                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Done</span><span class="hm-msg-btn">Later</span><span class="hm-msg-btn">Dismiss</span></div>
                 </div>
-                <span class="hm-scene-note hm-in hm-in-2c">Nothing moves until you confirm it.</span>
               </div>
             </div>
 
-            <!-- 3. The one nobody asks for. It arrives on its own, which is the difference
-                 between an agent and a chat app, so this scene has no question above it. -->
-            <div class="hm-scene hm-scene-3">
+            <!-- 3. The draft. One function in the whole tree puts mail on the wire and it is
+                 reachable from a pressed Send or a send you scheduled, which is what the note
+                 says in the two ways it is true. -->
+            <div class="hm-scene" style="--s:2">
               <div class="hm-msg">
-                <div class="hm-bubble hm-in hm-in-3a">
+                <div class="hm-bubble hm-in" style="--d:0"><p class="hm-mini-quote">Sam asked about October. I drafted a reply.<time>1:28 pm</time></p></div>
+                <div class="hm-turn hm-in" style="--d:1">
+                  <div class="hm-bubble"><p class="hm-mini-quote">&ldquo;The second option works for us. Can you hold October&nbsp;12?&rdquo;</p></div>
+                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
+                </div>
+                <span class="hm-scene-note hm-in" style="--d:2">It writes. It sends when you tap Send, or at a time you set.</span>
+              </div>
+            </div>
+
+            <!-- 4. A calendar change stages and commits on a later message. -->
+            <div class="hm-scene" style="--s:3">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-bubble--out hm-in" style="--d:0"><p class="hm-mini-quote">&ldquo;Can you move my 3 o&rsquo;clock?&rdquo;<time>2:41 pm</time></p></div>
+                <div class="hm-turn hm-in" style="--d:1">
+                  <div class="hm-bubble"><p class="hm-mini-quote">Thursday at 10 is free for both of you.<time>2:41 pm</time></p></div>
+                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
+                </div>
+                <span class="hm-scene-note hm-in" style="--d:2">Nothing moves until you confirm it.</span>
+              </div>
+            </div>
+
+            <!-- 5. A watch registers the person, not the thread, so it fires whichever message
+                 they answer on. -->
+            <div class="hm-scene" style="--s:4">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-bubble--out hm-in" style="--d:0"><p class="hm-mini-quote">&ldquo;Tell me when Priya writes back.&rdquo;<time>9:15 am</time></p></div>
+                <div class="hm-bubble hm-in" style="--d:1"><p class="hm-mini-quote">Watching for Priya, not for that thread. I&rsquo;ll say the moment anything from her lands.<time>9:15 am</time></p></div>
+              </div>
+            </div>
+
+            <!-- 6. A date in one of your own lists comes due. No model call to notice it: this is
+                 date arithmetic, which is why it is free to run every day. -->
+            <div class="hm-scene" style="--s:5">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-in" style="--d:0">
                   <div class="hm-mini-label">Renewing this week</div>
                   <div class="hm-mini-row"><b>Tue</b> Car insurance</div>
                   <div class="hm-mini-row"><b>Fri</b> Storage unit</div>
                   <time>9:04 am</time>
                 </div>
-                <div class="hm-turn hm-in hm-in-3b">
-                  <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?<time>9:04 am</time></p></div>
+                <div class="hm-turn hm-in" style="--d:1">
+                  <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?</p></div>
                   <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Yes</span><span class="hm-msg-btn">Leave it</span></div>
                 </div>
               </div>
             </div>
 
-          </div>
+            <!-- 7. Flights are read from this computer with no key and no quota, and the tool
+                 books nothing at all. The last line is the whole point of the scene. -->
+            <div class="hm-scene" style="--s:6">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-bubble--out hm-in" style="--d:0"><p class="hm-mini-quote">&ldquo;Anything direct to Lisbon in March?&rdquo;<time>8:47 pm</time></p></div>
+                <div class="hm-bubble hm-in" style="--d:1">
+                  <div class="hm-mini-row"><b>Sat 14</b> direct, 2h 55m</div>
+                  <div class="hm-mini-row"><b>Sat 21</b> direct, 3h 05m</div>
+                  <time>8:47 pm</time>
+                </div>
+                <span class="hm-scene-note hm-in" style="--d:2">It finds them. It books nothing.</span>
+              </div>
+            </div>
+
         </div>
       </div>
     </section>

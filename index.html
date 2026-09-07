@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-20" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-21" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -213,7 +213,7 @@
       </div>
 
       <div class="hm-stage">
-          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is free for both of you, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is open, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her and will say as soon as anything from her lands. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
             <div class="hm-scenes" aria-hidden="true">
 
               <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
@@ -298,7 +298,10 @@
               </div>
 
               <!-- 4. A calendar change: it says what it read before it says what it found, and the change
-                 stages until a later message commits it. -->
+                 stages until a later message commits it. It speaks only for YOUR calendar. The
+                 adapter reads the accounts you connected and there is nothing in the tree that
+                 reads anybody else's free/busy, so a line about a time being free for both of you
+                 would be the illustration claiming a capability the app does not have. -->
               <div class="hm-scene" style="--s:3">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
@@ -308,7 +311,7 @@
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Checked your calendar. Thursday at 10 is free for both of you.</p></div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Checked your calendar. Thursday at 10 is open.</p></div>
                       <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
                       <time>2:41 pm</time>
                     </div>
@@ -331,7 +334,7 @@
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Watching for Priya, not for that thread. I&rsquo;ll say the moment anything from her lands.</p></div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Watching for Priya. I&rsquo;ll say as soon as anything from her lands.</p></div>
                       <time>9:15 am</time>
                     </div>
                   </div>
@@ -408,7 +411,7 @@
             <p class="hm-cap" style="--s:1">Ask for a reminder in plain words. It arrives when you said, with the buttons on it.</p>
             <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
             <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
-            <p class="hm-cap" style="--s:4">Watch a person, not a thread. It tells you whichever way they answer.</p>
+            <p class="hm-cap" style="--s:4">Ask to be told when someone answers. It watches the person, not one thread.</p>
             <p class="hm-cap" style="--s:5">It reads dates out of your own lists and tells you before one comes due.</p>
             <p class="hm-cap" style="--s:6">It looks things up and hands you the answer. It books nothing.</p>
           </div>

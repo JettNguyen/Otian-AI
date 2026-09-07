@@ -12444,10 +12444,15 @@ html[data-theme="dark"] .booking-container iframe {
    caret that walks along fine, which is exactly what it looked like. A percentage cannot be read
    that way by anything.
 
-   1% of the lap is 525ms, so a character's step is 0.057% and 0.02% (10ms) is as close to
-   instant as a keyframe gets. `both` is what holds a character at zero through its delay. */
+   STEPS, NOT A RAMP, and that is the second bug this had. 0.02% of the lap is 10ms, so a
+   character used to spend ten milliseconds being interpolated from nothing up to full size.
+   At 60fps roughly a third of the characters get a frame drawn somewhere in the middle of that,
+   so a third of them appeared at a wrong smaller size and snapped to the right one a frame
+   later. Thirty characters a second doing it reads as the text strobing while it types. A step
+   function has no in-between value to draw: the character is absent, and then it is there.
+   `both` is what holds it absent through its delay. */
 @keyframes hm-char {
-  0%          { font-size: 0; }
+  0%          { font-size: 0; animation-timing-function: steps(1, end); }
   0.02%, 100% { font-size: 100%; }
 }
 
@@ -12470,13 +12475,17 @@ html[data-theme="dark"] .booking-container iframe {
   5.0%, 100% { opacity: 0; }
 }
 
-/* The send empties the field and the placeholder comes back, both in one frame. */
+/* The send empties the field and the placeholder comes back, both in one frame. Stepped for the
+   same reason the characters are: without it these two ramp through 52ms of half-sized type,
+   which is three frames of the whole message and the placeholder shrinking past each other. */
 @keyframes hm-typed-clear {
-  0%, 4.9%    { font-size: var(--fs-sm); }
+  0%          { font-size: var(--fs-sm); }
+  4.9%        { font-size: var(--fs-sm); animation-timing-function: steps(1, end); }
   5.0%, 100%  { font-size: 0; }
 }
 @keyframes hm-hint-return {
-  0%, 4.9%    { font-size: 0; }
+  0%          { font-size: 0; }
+  4.9%        { font-size: 0; animation-timing-function: steps(1, end); }
   5.0%, 100%  { font-size: var(--fs-sm); }
 }
 /* Only a field that types hides its placeholder. The two scenes the agent starts never had one

@@ -12172,15 +12172,16 @@ html[data-theme="dark"] .booking-container iframe {
      (one scene is 100/7 = 14.29% of a lap), so changing --hm-count means moving the stops in
      hm-scene, hm-in, hm-fly and hm-type with it.
 
-     10s a scene, and every individual movement inside it under half a second. Those pull in
+     9s a scene, and every individual movement inside it under half a second. Those pull in
      opposite directions on purpose: the entrances were what felt slow and the hold was what felt
      short. A scene types for under two seconds, sits on the finished message for three quarters
-     of one, sends, and is answered by 4.5s. Everything after that is stillness: four and a half
-     seconds of a finished exchange, which is most of the scene and is the point of it. The
-     movement is there to be understood, not watched, and a reader who arrives mid-scene should
-     find something readable rather than something in progress.
+     of one, sends, and is answered by 4.5s. The three and a half seconds after that are stillness,
+     and reading is the only thing that sets them: the longest answer in a typed scene is twelve
+     words, and three and a half seconds of it standing still is about two hundred words a minute,
+     which is an unhurried read of something you can also see is short. The scenes the agent opens
+     have more to read and get longer to read it, because their content lands at 1s and not 4.5s.
      --hm-beat is the gap between beats and --d says which beat a thing is. */
-  --hm-hold: 10s;
+  --hm-hold: 9s;
   --hm-beat: 0.5s;
   --hm-count: 7;
   --hm-lap: calc(var(--hm-hold) * var(--hm-count));
@@ -12262,7 +12263,7 @@ html[data-theme="dark"] .booking-container iframe {
    holds 0 to the end of the lap, and the wrap has nothing left to jump. */
 @keyframes hm-scene {
   0%            { opacity: 0; }
-  0.33%, 13.15% { opacity: 1; }
+  0.37%, 13.15% { opacity: 1; }
   13.9%, 100%   { opacity: 0; }
 }
 
@@ -12282,8 +12283,8 @@ html[data-theme="dark"] .booking-container iframe {
    governs every property in that interval, and the opacity in this one is meant to ease. */
 @keyframes hm-in {
   0%            { opacity: 0; transform: translateY(6px); max-height: 0; margin-top: 0; }
-  0.01%         { max-height: 400px; margin-top: 10px; }
-  0.37%         { opacity: 1; transform: none; }
+  0.011%        { max-height: 400px; margin-top: 10px; }
+  0.41%         { opacity: 1; transform: none; }
   13.15%        { opacity: 1; transform: none; }
   13.9%         { opacity: 0; transform: none; max-height: 400px; margin-top: 10px; }
   13.91%, 100%  { opacity: 0; transform: none; max-height: 0; margin-top: 0; }
@@ -12297,9 +12298,9 @@ html[data-theme="dark"] .booking-container iframe {
    place the tap happened rather than out of its own middle. */
 @keyframes hm-fly {
   0%           { opacity: 0; transform: translateY(26px) scale(0.74); }
-  0.07%        { opacity: 1; }
-  0.39%        { transform: translateY(0) scale(1.04); }
-  0.64%        { transform: none; }
+  0.08%        { opacity: 1; }
+  0.43%        { transform: translateY(0) scale(1.04); }
+  0.71%        { transform: none; }
   13.15%       { opacity: 1; transform: none; }
   13.9%, 100%  { opacity: 0; transform: none; }
 }
@@ -12319,9 +12320,9 @@ html[data-theme="dark"] .booking-container iframe {
    you had just sent a finger's width above the message bar with nothing in between. */
 @keyframes hm-type {
   0%              { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
-  0.01%           { max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
-  0.3%, 1.4386%   { opacity: 1; max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
-  1.4387%, 100%   { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
+  0.011%          { max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
+  0.33%, 1.598%   { opacity: 1; max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
+  1.599%, 100%    { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
 }
 @keyframes hm-type-dot {
   0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
@@ -12423,17 +12424,24 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: left;
 }
 .hm-composer-hint { color: var(--text-muted); }
+/* Sized to the field beside it and filled, because it is the button the whole scene turns on.
+   It was a 30px circle next to a 37px field, in the subtle accent on the subtle accent ink,
+   which is the pairing this site uses for a chip and not for an action: it read as a disabled
+   control floating a few pixels above the box it belongs to. Same fill and same ink as
+   .btn-primary now, so the button in the mockup and the button in the hero are one button. The
+   glyph points up, which is what a phone puts on a send key; an arrow pointing right is the
+   mark for going to the next thing, which is not what this does. */
 .hm-send {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--accent-subtle);
-  color: var(--accent-ink);
+  background: var(--accent);
+  color: var(--text-on-accent);
 }
-.hm-send svg { width: 15px; height: 15px; }
+.hm-send svg { width: 17px; height: 17px; }
 
 /* ---- The typewriter ----
    One <i> per character, revealed on its own delay, and a character that has not been typed yet
@@ -12507,9 +12515,9 @@ html[data-theme="dark"] .booking-container iframe {
    that has to be true is that every one of them is at zero before its copy wraps. */
 @keyframes hm-char {
   0%          { font-size: 0; animation-timing-function: steps(1, end); }
-  0.015%      { font-size: 100%; }
-  3.7%        { font-size: 100%; animation-timing-function: steps(1, end); }
-  3.75%, 100% { font-size: 0; }
+  0.017%      { font-size: 100%; }
+  4.16%       { font-size: 100%; animation-timing-function: steps(1, end); }
+  4.17%, 100% { font-size: 0; }
 }
 
 /* Zero-width, so it sits between two characters without moving either. It comes up with the
@@ -12526,9 +12534,9 @@ html[data-theme="dark"] .booking-container iframe {
   animation-delay: calc(var(--s) * var(--hm-hold));
 }
 @keyframes hm-caret {
-  0%, 0.3%    { opacity: 0; }
-  0.37%, 3.67% { opacity: 1; }
-  3.75%, 100% { opacity: 0; }
+  0%, 0.33%    { opacity: 0; }
+  0.41%, 4.08% { opacity: 1; }
+  4.17%, 100%  { opacity: 0; }
 }
 
 /* The send empties the field and the placeholder comes back, both in one frame. Stepped for the
@@ -12536,13 +12544,13 @@ html[data-theme="dark"] .booking-container iframe {
    which is three frames of the whole message and the placeholder shrinking past each other. */
 @keyframes hm-typed-clear {
   0%          { font-size: var(--fs-sm); }
-  3.67%       { font-size: var(--fs-sm); animation-timing-function: steps(1, end); }
-  3.75%, 100% { font-size: 0; }
+  4.08%       { font-size: var(--fs-sm); animation-timing-function: steps(1, end); }
+  4.17%, 100% { font-size: 0; }
 }
 @keyframes hm-hint-return {
   0%          { font-size: 0; }
-  3.67%       { font-size: 0; animation-timing-function: steps(1, end); }
-  3.75%, 100% { font-size: var(--fs-sm); }
+  4.08%       { font-size: 0; animation-timing-function: steps(1, end); }
+  4.17%, 100% { font-size: var(--fs-sm); }
 }
 /* Only a field that types hides its placeholder. The two scenes the agent starts never had one
    to hide. */
@@ -12554,9 +12562,9 @@ html[data-theme="dark"] .booking-container iframe {
 /* The send. A quick press on the beat the message leaves the field, and nothing the rest of the
    lap: a button that pulses forever is a button nobody believes did anything. */
 @keyframes hm-send-press {
-  0%, 3.52%   { transform: scale(1); }
-  3.71%       { transform: scale(0.82); }
-  4.13%, 100% { transform: scale(1); }
+  0%, 3.91%   { transform: scale(1); }
+  4.12%       { transform: scale(0.82); }
+  4.59%, 100% { transform: scale(1); }
 }
 .hm-scene:has(.hm-typed) .hm-send {
   animation: hm-send-press var(--hm-lap) ease-out infinite both;

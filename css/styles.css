@@ -12158,6 +12158,11 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 48px;
   display: flex;
   justify-content: center;
+  /* center, not the flex default of stretch. Stretched, the phone grew to the height of the
+     copy column beside it while its screen stayed 330px, so the composer sat wherever the
+     screen ended and a hundred and forty pixels of empty phone hung underneath it. The phone
+     is its own object with its own size; the column it shares a row with is not its business. */
+  align-items: center;
 }
 
 /* The day spine's phone, larger. Not a closed device: .hm-pz draws side rails and then masks its
@@ -12173,9 +12178,13 @@ html[data-theme="dark"] .booking-container iframe {
   --hm-pz-wall: var(--bg-secondary);
   max-width: 376px;
   width: 100%;
-  padding: 64px 26px 52px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 76px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 76px), transparent);
+  padding: 64px 26px 30px;
+  /* Asymmetric on purpose. The top is where the thread scrolls away, so it dissolves over a deep
+     104px; the bottom holds the composer, which is fixed chrome a phone never fades out, so it
+     gets 14px of softening and no more. Symmetric fades put the input inside the dissolve and it
+     read as floating in fog. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 14px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 14px), transparent);
 }
 
 /* The conversation is the hero's subject, so it gets the room the day spine's minis do not. */
@@ -12213,8 +12222,8 @@ html[data-theme="dark"] .booking-container iframe {
      felt short. A scene now plays its four beats in under two seconds and then sits still for
      three and a half, which is what twenty-five words of chat actually needs.
      --hm-beat is the gap between beats, and --d on an element says which beat it is. */
-  --hm-hold: 6s;
-  --hm-beat: 0.55s;
+  --hm-hold: 6.5s;
+  --hm-beat: 0.5s;
   --hm-count: 7;
   --hm-lap: calc(var(--hm-hold) * var(--hm-count));
 
@@ -12222,10 +12231,23 @@ html[data-theme="dark"] .booking-container iframe {
      roughly square, which reads as a widget; a real thread has the day's empty screen above it
      and the newest message at the thumb. The floor is the tallest scene plus that headroom, so
      nothing resizes as the cycle turns. */
-  min-height: 290px;
-  align-content: end;
+  min-height: 330px;
+  align-content: stretch;
+  /* minmax(0, 1fr), not the auto default. The composer holds one nowrap line of up to 39
+     characters, and an auto column sizes to max-content, so on a 390px phone the grid grew to
+     the width of that line and pushed the send button out through the side of the device. */
+  grid-template-columns: minmax(0, 1fr);
 }
-.hm-scene { grid-area: 1 / 1; align-self: end; }
+.hm-scene {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 14px;
+  min-width: 0;
+}
+/* The thread fills what the composer leaves and hangs its newest message at the bottom. */
+.hm-scene > .hm-msg { align-self: end; }
 
 /* BOTH keyframes must return to 0 before 100%, and that is the whole bug this shape fixes.
    hm-in used to hold opacity 1 from its entrance all the way to 100% and then jump to 0 at the
@@ -12306,6 +12328,92 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-typing i:nth-child(2) { animation-delay: 0.15s; }
 .hm-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+/* ---- The composer ----
+   A message is typed and sent, rather than appearing already sent. That beat is the one the whole
+   product argument rests on: you write to it the way you would write to a person, so watching the
+   words go in is worth more than any number of finished bubbles.
+
+   Real chrome, always on screen, so the phone has a bottom edge and the cycle has something that
+   does not move. The two scenes the agent starts show the placeholder and never type, which is
+   what an unprompted message looks like from your side. */
+.hm-composer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.hm-composer-field {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.hm-composer-hint { color: var(--text-muted); }
+.hm-send {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+}
+.hm-send svg { width: 15px; height: 15px; }
+
+/* The typewriter. max-width in ch with a matching steps() count is the one shape of this that
+   lands on whole characters: --chars is the message's own length, written into the markup beside
+   the words it counts, so the reveal and the step size cannot disagree. Inter is proportional and
+   1ch is the width of a zero, so the last character or two arrive a hair early or late, which at
+   this size nobody can see.
+
+   Type for 1.1s, sit a third of a second with the caret still going, then clear on the send at
+   about 1.4s into the slot. Every thread beat in a scene that types is numbered from there. */
+.hm-typed {
+  display: inline-block;
+  vertical-align: bottom;
+  width: max-content;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text-primary);
+  border-right: 1.5px solid var(--accent);
+  animation:
+    hm-typewrite var(--hm-lap) steps(var(--chars), end) infinite both,
+    hm-caret var(--hm-lap) steps(1, end) infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+}
+
+/* One slot is 100/7 = 14.29% of a lap, and 1% of the lap is 65ms. So: type for 1.4s, sit for a
+   third of a second with the caret still blinking, then clear on the send. */
+@keyframes hm-typewrite {
+  0%          { max-width: 0; }
+  2.5%, 2.9%  { max-width: min(calc(var(--chars) * 1ch), 100%); }
+  3.0%, 100%  { max-width: 0; }
+}
+/* The caret is only there while something is being typed into the field. */
+@keyframes hm-caret {
+  0%, 2.85%  { border-right-color: var(--accent); }
+  2.9%, 100% { border-right-color: transparent; }
+}
+
+/* The send. A quick press on the beat the message leaves the field, and nothing the rest of the
+   lap: a button that pulses forever is a button nobody believes did anything. */
+@keyframes hm-send-press {
+  0%, 2.7%   { transform: scale(1); }
+  3.05%      { transform: scale(0.82); }
+  3.5%, 100% { transform: scale(1); }
+}
+.hm-scene:has(.hm-typed) .hm-send {
+  animation: hm-send-press var(--hm-lap) ease-out infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+}
 
 /* The line under the confirm buttons. Not a bubble: it is the app telling you what will not
    happen, which is the same register as the micro line under the hero button. */
@@ -12388,6 +12496,10 @@ html[data-theme="dark"] .booking-container iframe {
   /* The dots were only ever there to be watched, and with the cycle stopped they would sit on
      top of the answer they are meant to turn into. */
   .hm-typing { display: none; }
+  /* The field holds the finished message rather than typing it, and the caret goes with the
+     movement it belonged to. */
+  .hm-typed { animation: none; max-width: none; border-right-color: transparent; }
+  .hm-send { animation: none; }
 }
 
 /* ---- See it work: the recording's own section ---- */

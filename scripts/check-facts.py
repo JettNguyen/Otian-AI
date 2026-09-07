@@ -43,6 +43,19 @@ SKIP_FILES = {
 MONEY = re.compile(r"\$\d[\d,]*(?:\.\d+)?")
 EM_DASH = re.compile(r"—|&mdash;|&#8212;|&#x2014;")
 
+# Content written into a page by scripts/gen-marketplace.mjs, out of the add-on manifests in the
+# Archie repo. A "$" in there is an add-on describing itself ("Rent cleared this morning at 6am
+# for $1,450" is a sample conversation inside Money In & Out), not a price Otian charges, and
+# FACTS.md governs the latter. Listing 36 illustrative figures in FACTS.md would be a wrong entry
+# per figure; skipping the whole file would stop checking the hand-written copy around the grid.
+#
+# Scoped to money on purpose. The em-dash rule still reads these lines, because a dash in an
+# add-on's description is served from this domain like any other character, and the catalog is
+# swept clean today. If one ever appears, this check should say so and the fix is in the Archie
+# repo's manifest, not here.
+GENERATED_START = "<!-- GENERATED-CATALOG-START -->"
+GENERATED_END = "<!-- GENERATED-CATALOG-END -->"
+
 # A figure in a FACTS.md table row, e.g. "| `$149` | Archie, billed yearly | ... |"
 FACTS_ROW = re.compile(r"^\|\s*`(\$[\d,]*(?:\.\d+)?)`")
 
@@ -202,9 +215,14 @@ def main():
 
     for rel, check_money in served_files():
         scanned += 1
+        generated = False
         with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as fh:
             for lineno, line in enumerate(fh, 1):
-                if check_money:
+                if GENERATED_START in line:
+                    generated = True
+                elif GENERATED_END in line:
+                    generated = False
+                if check_money and not generated:
                     for found in MONEY.findall(line):
                         # "$100," picks up sentence punctuation; compare the figure itself.
                         if found.rstrip(",") not in figures:

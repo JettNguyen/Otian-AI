@@ -71,6 +71,14 @@ EXEMPT_PREFIXES = (
 )
 
 EXEMPT_FILES = {
+    # The catalog itself, 146 add-ons deep, written into the page by
+    # scripts/gen-marketplace.mjs on 2026-09-07. The grid used to be an empty div a script
+    # filled in, so this page measured 900-ish words and showed a crawler none of the shelf.
+    # Now it ships the shelf. A word budget on a catalog is a budget on how many things we
+    # sell, which is not a thing to have an opinion about: the fix for a page that is too
+    # long is to cut copy, and there is no copy here to cut, only products. The hand-written
+    # half of the page is what the budget was ever for, and it is 15 paragraphs, unchanged.
+    "skills-marketplace/browse/index.html",
     "privacy-policy/index.html",   # saying less than the truth is the failure
     "terms-of-service/index.html",  # same
     "faq/index.html",         # a list of answers; its length is the question count

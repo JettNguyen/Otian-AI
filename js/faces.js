@@ -169,6 +169,9 @@ export const FACE = {
   "routine:market-morning": "chart",
   "routine:med-reminders": "pill",
   "routine:meeting-briefing": "people",
+  // The same mark as the Meeting Sync it stands in for: what it is made of is still the
+  // recorded call, whatever it does with one afterwards.
+  "routine:meeting-desk-sync": "mic",
   "routine:morning-brief": "news",
   "routine:morning-news": "news",
   "routine:nightly-sweep": "spark",

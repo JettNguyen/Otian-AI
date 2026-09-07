@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-2" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-8" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -179,19 +179,106 @@
          width. The demo player itself is unchanged (see js/demo-player.js and
          the sourcing comments in git history for the source markup).
          ============================== -->
+    <!-- ==============================
+         Hero
+
+         Two columns since 2026-09-07. It was a centred column of type on a flat ground with the
+         screen recording under it, and the recording is the wrong thing to open on however good
+         it is: at hero size the app's own interface is six-pixel text, so the first screenful was
+         570px of prose and then a bright rectangle nobody could read. The demo did not get worse,
+         it got a section of its own below, where it has the room to be watched.
+
+         What replaced it is the exchange the headline is promising. A person says a job in the
+         words they would use with a person; the agent answers with the routine it just made. That
+         is the whole product in two bubbles, it is legible at any size because it is four lines of
+         real type rather than a screenshot of an interface, and it is the surface most people will
+         actually use Archie through. The phone and the bubbles are not new: they are the same
+         .hm-pz and .hm-bubble the day spine has used since August, promoted from fourth position
+         to first.
+
+         It arrives rather than sitting there. The messages animate in once, in the order they
+         would really arrive, which is the one piece of movement on the page that is describing
+         something true instead of decorating. prefers-reduced-motion gets the finished
+         conversation with no animation at all.
+         ============================== -->
     <section class="hm-hero" aria-label="Hero">
       <div class="hm-hero-inner">
         <span class="section-label">Otian AI &middot; Meet Archie</span>
         <h1>Nothing to figure out. No code. <em>Your time back</em>, starting today.</h1>
-        <p class="hm-lede"><strong>Archie is a desktop app that runs your own AI agent.</strong> An add-on is one job you hand it, and there are 146 today. Below is what they take off you, and where the rows are still blank.</p>
+        <p class="hm-lede"><strong>Archie is a desktop app that runs your own AI agent.</strong> You tell it a job the way you would tell a person, and it does that job on a schedule, from the chat apps you already have open.</p>
         <div class="hm-actions">
           <a href="questionnaire/" class="btn btn-primary btn-lg">Get My Agent Started</a>
         </div>
         <p class="hm-hero-micro">Archie is in testing. The waitlist hears the day it opens. <a href="archie/#status">See where it stands&nbsp;&rarr;</a></p>
+      </div>
 
-        <!-- The testing-status pill lived here until 2026-08-18. Availability is now stated on
-             the pages that can give it room (archie/#status is still the one source of the
-             facts); the hero links there through the nav rather than through a badge. -->
+      <div class="hm-stage">
+        <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through three exchanges. First: you write, every morning tell me what is on and what I owe people; the agent answers that it is done, every day at 7:00 am, and shows a routine called Morning Brief. Second: you ask it to move your three o'clock; it proposes Thursday at 10, with buttons to confirm the change or pick another time, and says nothing moves until you confirm. Third: unprompted, it says two things renew this week, your car insurance on Tuesday and the storage unit on Friday, with buttons to remind you the day before or to leave it.">
+          <div class="hm-scenes" aria-hidden="true">
+
+            <!-- 1. Plain words in, a scheduled job out. The headline's claim, demonstrated. -->
+            <div class="hm-scene hm-scene-1">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-bubble--out hm-in hm-in-1a"><p class="hm-mini-quote">&ldquo;Every morning, tell me what&rsquo;s on and what I owe people.&rdquo;<time>7:02 am</time></p></div>
+                <div class="hm-bubble hm-in hm-in-1b">
+                  <p class="hm-mini-quote">Done. Every day at 7:00&nbsp;am.</p>
+                  <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Morning Brief</b></div>
+                  <time>7:02 am</time>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. The consequence gate, which is the one thing a hosted agent cannot show:
+                 a calendar change is proposed and waits. TRUST.md's calendar-confirmation
+                 claim, in its own approved shape, with the buttons that enforce it. -->
+            <div class="hm-scene hm-scene-2">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-bubble--out hm-in hm-in-2a"><p class="hm-mini-quote">&ldquo;Can you move my 3 o&rsquo;clock?&rdquo;<time>2:41 pm</time></p></div>
+                <div class="hm-turn hm-in hm-in-2b">
+                  <div class="hm-bubble"><p class="hm-mini-quote">Thursday at 10 is free for both of you.<time>2:41 pm</time></p></div>
+                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
+                </div>
+                <span class="hm-scene-note hm-in hm-in-2c">Nothing moves until you confirm it.</span>
+              </div>
+            </div>
+
+            <!-- 3. The one nobody asks for. It arrives on its own, which is the difference
+                 between an agent and a chat app, so this scene has no question above it. -->
+            <div class="hm-scene hm-scene-3">
+              <div class="hm-msg">
+                <div class="hm-bubble hm-in hm-in-3a">
+                  <div class="hm-mini-label">Renewing this week</div>
+                  <div class="hm-mini-row"><b>Tue</b> Car insurance</div>
+                  <div class="hm-mini-row"><b>Fri</b> Storage unit</div>
+                  <time>9:04 am</time>
+                </div>
+                <div class="hm-turn hm-in hm-in-3b">
+                  <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?<time>9:04 am</time></p></div>
+                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Yes</span><span class="hm-msg-btn">Leave it</span></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         See it work
+
+         The screen recording, which opened the page until 2026-09-07. It is the most honest thing
+         on the site (one take of the real app, not a mockup) and it was in the worst place for it:
+         at hero width the app's interface is six-pixel type, so it read as a bright rectangle
+         rather than as a product. Here it is introduced, so a reader knows what they are looking
+         at before it starts, and js/demo-player.js only begins it when the section scrolls into
+         view, which is now a deliberate arrival rather than something already running behind the
+         headline.
+         ============================== -->
+    <section class="section hm-seeit" aria-labelledby="seeit-heading">
+      <div class="hm-wrap hm-wrap--wide hm-head">
+        <span class="section-label fade-up">See it work</span>
+        <h2 id="seeit-heading" class="fade-up">One take, no edits, start to finish.</h2>
       </div>
       <div class="hm-demo" id="demo">
         <figure class="demo-player demo-player--hero">
@@ -199,14 +286,15 @@
               <!-- No src on the <video> and no src on the <source>s on purpose, only data-src: the
                    browser fetches the poster and nothing else. Until js/demo-player.js picks ONE of
                    the candidates below and starts it (when the hero scrolls into view), the frame
-                   shows that poster.
+                   shows that poster, which is the recording's own opening frame.
 
-               Until 2026-09-07 the poster was the recording's own opening frame, which is
-               Archie's welcome screen: the still every crawler and link preview got was our
-               own marketing copy rather than the product doing anything. It is now the moment
-               at 18 seconds where the agent hands back the week it assembled off a read-only
-               calendar, and js/demo-player.js starts the first play there so the visitor does
-               not watch the finished work cut back to a greeting.
+               That opening frame was briefly replaced (2026-09-07) with the moment the agent
+               hands back an assembled week, because as the hero's only image the welcome screen
+               meant every crawler and link preview was served our own marketing copy. The hero
+               is a phone conversation now and the recording sits under a heading of its own, so
+               the reason is gone and so is the change: this section promises one take start to
+               finish, and a poster taken from eighteen seconds in was the page disagreeing with
+               its own headline.
 
                    The poster is what anything that does not run our JavaScript gets, and that is the
                    whole reason it is here. Without it the frame is an empty transparent box on a
@@ -235,8 +323,7 @@
                    Archie card) and then loops. Same file /archie/see-it-work/ plays, so going there
                    next costs nothing. -->
               <video class="demo-player-video" preload="none"
-                     poster="assets/archie-demo-light-poster-week.jpg"
-                     data-start="18"
+                     poster="assets/archie-demo-light-poster.jpg"
                      muted loop playsinline disablepictureinpicture
                      aria-label="A silent, looping screen recording of Archie: opening the app, pointing a new agent called Archibald at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
                 <source data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1648" data-fps="60" />

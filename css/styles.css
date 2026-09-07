@@ -10923,7 +10923,52 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-micro a:hover, .hm-hero-micro a:hover { color: var(--c-blue); text-decoration: underline; }
 
 /* Hero */
-.hm-hero { padding: calc(var(--nav-height) + 56px) 24px 64px; text-align: center; }
+/* Two columns from 900px: the promise on the left, the promise happening on the right.
+   Centred stayed for the stacked layout, where a lone column of left-ragged type under a
+   centred nav reads as a page that has slipped sideways. */
+.hm-hero {
+  padding: calc(var(--nav-height) + 56px) 24px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* No wash of its own. body::before already paints these two radials fixed behind every page, and
+   a second copy scoped to the hero is the same light source drawn twice: in dark mode, where the
+   washes are deliberately near-invisible for contrast reasons documented at the tokens, it added
+   nothing but a seam where it ended. The hero gets its depth from having a real object in it. */
+
+@media (min-width: 900px) {
+  .hm-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: center;
+    gap: 0 56px;
+    max-width: 1180px;
+    margin: 0 auto;
+    text-align: left;
+    /* Less than a normal section's foot. The hero's own bottom edge is empty space either side of
+       a phone, so the standard gap on top of it reads as a hole rather than as breathing room. */
+    padding-bottom: 36px;
+  }
+  /* The headline measure that made three sentences land two-per-line was set for a full-width
+     centred block. In half the width it has to come down or "No code." breaks on its own line
+     again, which is the thing the 900px max-width was chosen to prevent. */
+  .hm-hero-inner { max-width: none; }
+    /* Half the page is not enough width to land two of the three sentences per line, which is what
+     the full-width rule's 900px bought. So the target changes rather than the rule bending: at
+     24ch each sentence gets its own line and the last one breaks on its comma. Four lines that
+     break where the writer put a full stop read as written; three lines with "Nothing to figure /
+     out." in them read as a mistake. `balance` comes off for the same reason, since evening out
+     the ragged edge is exactly what pulls a break back inside a sentence. */
+  .hm-hero h1 {
+    max-width: 24ch;
+    font-size: clamp(2rem, 2.75vw, 2.5rem);
+    text-wrap: pretty;
+  }
+  .hm-lede { margin-left: 0; margin-right: 0; max-width: 40ch; }
+  .hm-actions { justify-content: flex-start; }
+}
 /* 900, not 780: the headline is three sentences, and at 780 the balancer could only fit it
    by breaking "No code." across lines. The lede and the buttons keep their own narrower
    measures, so this widens the headline and nothing else. */
@@ -12099,4 +12144,199 @@ html[data-theme="dark"] .booking-container iframe {
      so on a phone the three prices are already at this size. Stating it keeps the rule on
      the type ladder instead of one rung off it for a 0.05rem nobody can see. */
   .hm-plan-price { font-size: var(--fs-7xl); }
+}
+
+/* ==============================
+   46. Homepage hero: the phone, and the conversation arriving
+   ============================== */
+
+/* The stage the phone stands on. The phone itself is .hm-pz, unchanged, the same object the day
+   spine has used since August; all this does is give it somewhere to stand and a little lift, so
+   the hero has a foreground object rather than a second column of nothing. */
+.hm-stage {
+  position: relative;
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+/* A whole phone, where the day spine's is a fragment.
+   .hm-pz draws its bezel as a left-to-right gradient and then masks its own top and bottom away,
+   which is right on the spine: the phone is a glimpse the thread scrolls past. As the hero's one
+   foreground object that reads as a dark panel with no edges, and in dark mode the spine's wall
+   (#232322) sits two values off the page ground, so the device disappeared into the section
+   altogether. Here it is a closed rounded body with a real frame and its own ground, and it wears
+   the wall the tails already reference, so .hm-bubble's cutout keeps working untouched. */
+.hm-pz--hero {
+  --hm-pz-wall: var(--bg-secondary);
+  max-width: 372px;
+  width: 100%;
+  padding: 30px 22px 34px;
+  background: var(--bg-secondary);
+  border: 9px solid var(--hm-pz-bezel);
+  border-radius: 46px;
+  box-shadow: var(--shadow-lg);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* The earpiece slot. One 44px bar is the whole difference between "a rounded box of messages"
+   and "a phone", and it costs no markup: everything above it in the hero is already saying the
+   agent reaches you where you are, so the object should not need a caption to be recognised. */
+.hm-pz--hero::before {
+  content: "";
+  display: block;
+  width: 44px;
+  height: 5px;
+  margin: 0 auto 22px;
+  border-radius: 999px;
+  background: var(--hm-pz-bezel);
+  opacity: 0.5;
+}
+
+/* The conversation is the hero's subject, so it gets the room the day spine's minis do not. */
+.hm-pz--hero .hm-msg { gap: 10px; width: 100%; }
+.hm-pz--hero .hm-bubble { max-width: 92%; }
+.hm-pz--hero .hm-mini-quote { font-size: var(--fs-md); line-height: 1.5; }
+.hm-pz--hero .hm-chipline { margin-top: 10px; }
+
+/* ---- The three scenes ----
+   The phone cycles through three exchanges rather than holding one. Three, because the argument
+   the rest of the page spends 600 words on is that these jobs have nothing to do with each other,
+   and a single frozen conversation makes Archie look like it does one thing. Each scene is a
+   different *kind* of thing: you asking for a job, you asking for a change and being asked back,
+   and it starting something you never asked about. The third one has no question above it on
+   purpose. That is the whole difference between an agent and a chat app, and it is the only one
+   of the three a reader cannot already picture.
+
+   Every claim in them is one the site can back. The calendar change proposes and waits, which is
+   TRUST.md's confirmation claim and is enforced in code; the routine is made from a sentence,
+   which the day spine shows further down; the renewals list carries no figures, because a money
+   figure on this site needs a row in FACTS.md and an illustration is not a fact.
+
+   All three sit in one grid cell, so the phone is as tall as the tallest and never resizes
+   mid-cycle. Stacking them absolutely would collapse the parent to nothing instead. */
+.hm-scenes {
+  display: grid;
+  /* Portrait, and the thread sits at the bottom of it. Sized by content alone the phone came out
+     roughly square, which reads as a widget; a real thread has the day's empty screen above it
+     and the newest message at the thumb. The floor is the tallest scene plus that headroom, so
+     nothing resizes as the cycle turns. */
+  min-height: 348px;
+  align-content: end;
+}
+.hm-scene { grid-area: 1 / 1; align-self: end; }
+
+/* 18s, three scenes, so each holds for about five and a half. Long enough to read nine words and
+   then look away; short enough that somebody who stops to watch sees all three without deciding
+   to. Both keyframes run the full 18s and the delay is what selects the window, which is the only
+   way to keep three staggered scenes in step: separate durations drift apart within a minute. */
+@keyframes hm-scene {
+  0%, 1%    { opacity: 0; }
+  4%, 29%   { opacity: 1; }
+  33%, 100% { opacity: 0; }
+}
+@keyframes hm-in {
+  0%, 2%   { opacity: 0; transform: translateY(9px); }
+  7%, 100% { opacity: 1; transform: none; }
+}
+
+.hm-scene { animation: hm-scene 18s linear infinite both; }
+.hm-scene-2 { animation-delay: 6s; }
+.hm-scene-3 { animation-delay: 12s; }
+
+/* The bubbles inside a scene arrive in the order they really would, one beat apart. The delays
+   are absolute (scene window + offset), because an animation-delay cannot be relative to a
+   parent's. */
+.hm-in { animation: hm-in 18s linear infinite both; }
+.hm-in-1a { animation-delay: 0.1s; }
+.hm-in-1b { animation-delay: 0.9s; }
+.hm-in-2a { animation-delay: 6.1s; }
+.hm-in-2b { animation-delay: 6.9s; }
+.hm-in-2c { animation-delay: 7.5s; }
+.hm-in-3a { animation-delay: 12.1s; }
+.hm-in-3b { animation-delay: 13.0s; }
+
+/* The line under the confirm buttons. Not a bubble: it is the app telling you what will not
+   happen, which is the same register as the micro line under the hero button. */
+.hm-scene-note {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  padding-left: 2px;
+}
+
+/* ---- The attached keyboard, the way a chat app actually does it ----
+   The buttons are not in the bubble. In Telegram an inline keyboard is its own block hanging off
+   the bottom of the message, the width of the message, and that difference is not decoration: a
+   button inside the bubble reads as part of what the agent said, and a button under it reads as
+   something the app is offering you. This whole section of the site turns on the second reading,
+   because the claim is that the agent proposes and waits.
+
+   .hm-turn is the message and its keyboard as one object, so the keyboard takes the bubble's
+   width (or the bubble takes the keyboard's, whichever is wider, which is what the chat app does
+   too) and the pair arrives on one animation instead of two. */
+.hm-turn {
+  display: grid;
+  gap: 3px;
+  width: fit-content;
+  max-width: 92%;
+}
+.hm-turn .hm-bubble { max-width: none; width: 100%; }
+
+.hm-pz--hero .hm-msg-btns {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+.hm-pz--hero .hm-msg-btn {
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  background: color-mix(in srgb, var(--text-primary) 9%, transparent);
+  color: var(--text-secondary);
+}
+/* Rounded on the outside edges only, so the row reads as one attached strip rather than two
+   floating pills. Same shape the bubble's bottom corners just gave up. */
+.hm-pz--hero .hm-msg-btns > :first-child { border-bottom-left-radius: 14px; }
+.hm-pz--hero .hm-msg-btns > :last-child { border-bottom-right-radius: 14px; }
+.hm-pz--hero .hm-msg-btn--go {
+  background: var(--accent-subtle);
+  color: var(--accent-ink);
+}
+
+/* A message with a keyboard under it squares off its own bottom corners, because the two are one
+   object and a rounded edge between them would draw a line the chat app does not draw. */
+.hm-turn .hm-bubble { border-bottom-left-radius: 0; border-bottom-right-radius: 4px; }
+
+/* The timestamp, set the way a thread sets it: inside the bubble, trailing the last line, and
+   small enough to be scenery. It is what makes four bubbles read as a conversation with a shape
+   rather than as four captions. */
+.hm-pz--hero .hm-mini-quote time,
+.hm-pz--hero .hm-bubble > time {
+  font-size: var(--fs-3xs);
+  color: var(--text-muted);
+  margin-left: 8px;
+  float: right;
+  position: relative;
+  top: 0.55em;
+}
+.hm-pz--hero .hm-bubble > time { display: block; float: none; text-align: right; top: 0; margin: 6px 0 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* One scene, still, and it is the first: the one that shows what the headline promises. The
+     other two are the reason the phone moves, and with the movement gone they would stack three
+     conversations on top of each other in the same grid cell. */
+  .hm-scene, .hm-in { animation: none; opacity: 1; transform: none; }
+  .hm-scene-2, .hm-scene-3 { display: none; }
+}
+
+/* ---- See it work: the recording's own section ---- */
+.hm-seeit .hm-demo { margin-top: 44px; }
+
+@media (max-width: 899px) {
+  .hm-stage { margin-top: 40px; }
+  .hm-pz--hero { max-width: 320px; }
 }

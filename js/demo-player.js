@@ -198,48 +198,9 @@
       });
     }
 
-    /* The poster is not frame zero. It is the moment the agent hands back a week it has
-       assembled, because that still is what a crawler, a link preview, and anyone whose OS
-       asks for reduced motion are served, and the recording opens on the app's welcome
-       screen instead. Without this, picking the better still would make things worse: the
-       visitor would see the finished work and then watch it cut back to a greeting.
-
-       So the first play starts where the poster stops, and only the first. The loop wraps to
-       zero afterwards and the whole take plays from the top from then on, which is the demo
-       the page has always shown. Seeking needs the metadata, so it waits for it, and if the
-       seek is refused the video simply starts at the beginning: one frame out of step is a
-       far smaller failure than a hero that never plays. */
-    var startedOnce = false;
-
-    function seekToStart() {
-      var at = parseFloat(video.getAttribute('data-start') || '0');
-      if (startedOnce || !at || video.currentTime > 0) return Promise.resolve();
-      startedOnce = true;
-      if (video.readyState >= 1) {
-        try { video.currentTime = at; } catch (e) { /* start from the top */ }
-        return Promise.resolve();
-      }
-      return new Promise(function (resolve) {
-        var done = false;
-        function go() {
-          if (done) return;
-          done = true;
-          video.removeEventListener('loadedmetadata', go);
-          try { video.currentTime = at; } catch (e) { /* start from the top */ }
-          resolve();
-        }
-        video.addEventListener('loadedmetadata', go);
-        /* preload="none" means metadata may never be asked for on its own. Nudging preload
-           is what makes loadedmetadata arrive; the timeout is the belt for the braces, so a
-           browser that does neither still gets a playing video. */
-        video.preload = 'metadata';
-        setTimeout(go, 1200);
-      });
-    }
-
     function play() {
       if (pausedByUser) return;
-      load().then(seekToStart).then(function () {
+      load().then(function () {
         // They may have hit pause while we were still deciding.
         if (pausedByUser) return;
         var started = video.play();

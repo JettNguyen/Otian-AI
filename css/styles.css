@@ -12339,7 +12339,9 @@ html[data-theme="dark"] .booking-container iframe {
    what an unprompted message looks like from your side. */
 .hm-composer {
   display: flex;
-  align-items: center;
+  /* end, not centre: when the field is two lines the send button belongs beside the last of
+     them, which is where a thumb expects it. */
+  align-items: flex-end;
   gap: 8px;
   min-width: 0;
 }
@@ -12350,9 +12352,8 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 999px;
   background: color-mix(in srgb, var(--text-primary) 8%, transparent);
   font-size: var(--fs-sm);
+  line-height: 1.45;
   color: var(--text-secondary);
-  overflow: hidden;
-  white-space: nowrap;
 }
 .hm-composer-hint { color: var(--text-muted); }
 .hm-send {
@@ -12367,40 +12368,49 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-send svg { width: 15px; height: 15px; }
 
-/* The typewriter. max-width in ch with a matching steps() count is the one shape of this that
-   lands on whole characters: --chars is the message's own length, written into the markup beside
-   the words it counts, so the reveal and the step size cannot disagree. Inter is proportional and
-   1ch is the width of a zero, so the last character or two arrive a hair early or late, which at
-   this size nobody can see.
+/* ---- The typewriter ----
+   One <i> per character, revealed on its own delay. The obvious CSS typewriter animates a
+   nowrap element's width, and that one cannot wrap: it is a single line being uncovered, so a
+   message longer than the field either clips or scrolls, and a real composer does neither. It
+   grows a second line. So the characters are separate elements, every one of them laid out from
+   the first frame and merely invisible, which also means the field is already the right height
+   before a single character shows and nothing reflows as the message fills it in.
 
-   Type for 1.1s, sit a third of a second with the caret still going, then clear on the send at
-   about 1.4s into the slot. Every thread beat in a scene that types is numbered from there. */
+   The caret rides the same animation. A character turns its own right border on as it appears
+   and off one step later, so exactly one border is lit at any moment and it walks the text,
+   through a line break and all. A separate caret element cannot do that: there is nothing to
+   position it against between two characters. */
 .hm-typed {
-  display: inline-block;
-  vertical-align: bottom;
-  width: max-content;
-  max-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
   color: var(--text-primary);
-  border-right: 1.5px solid var(--accent);
-  animation:
-    hm-typewrite var(--hm-lap) steps(var(--chars), end) infinite both,
-    hm-caret var(--hm-lap) steps(1, end) infinite both;
+  /* pre-wrap, so the spaces between the characters survive being their own elements, and the
+     line still breaks where a line should break. */
+  white-space: pre-wrap;
+  animation: hm-typed-clear var(--hm-lap) linear infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold));
 }
-
-/* One slot is 100/7 = 14.29% of a lap, and 1% of the lap is 65ms. So: type for 1.4s, sit for a
-   third of a second with the caret still blinking, then clear on the send. */
-@keyframes hm-typewrite {
-  0%          { max-width: 0; }
-  2.5%, 2.9%  { max-width: min(calc(var(--chars) * 1ch), 100%); }
-  3.0%, 100%  { max-width: 0; }
+.hm-typed i {
+  font-style: normal;
+  border-right: 1.5px solid transparent;
+  margin-right: -1.5px;
+  animation: hm-char var(--hm-lap) linear infinite both;
+  /* 24ms a character. Fast enough to read as typing rather than as a reveal, slow enough that
+     the longest message (54 characters) is in before the send at about 1.4s. */
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--i) * 24ms);
 }
-/* The caret is only there while something is being typed into the field. */
-@keyframes hm-caret {
-  0%, 2.85%  { border-right-color: var(--accent); }
-  2.9%, 100% { border-right-color: transparent; }
+
+/* 1% of the lap is 455ms, so a character's step is 0.053% and the stops below are that step
+   either side of its entrance. `both` is what keeps a character invisible before its delay. */
+@keyframes hm-char {
+  0%           { opacity: 0; border-right-color: transparent; }
+  0.02%        { opacity: 1; border-right-color: var(--accent); }
+  0.05%        { opacity: 1; border-right-color: var(--accent); }
+  0.07%, 100%  { opacity: 1; border-right-color: transparent; }
+}
+
+/* The field empties on the send, all at once, the way a field does. */
+@keyframes hm-typed-clear {
+  0%, 2.95%   { opacity: 1; }
+  3.0%, 100%  { opacity: 0; }
 }
 
 /* The send. A quick press on the beat the message leaves the field, and nothing the rest of the
@@ -12498,7 +12508,8 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-typing { display: none; }
   /* The field holds the finished message rather than typing it, and the caret goes with the
      movement it belonged to. */
-  .hm-typed { animation: none; max-width: none; border-right-color: transparent; }
+  .hm-typed { animation: none; opacity: 1; }
+  .hm-typed i { animation: none; opacity: 1; border-right-color: transparent; }
   .hm-send { animation: none; }
 }
 

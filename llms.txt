@@ -1,0 +1,96 @@
+# Otian AI
+
+> Archie is a desktop app that runs your own AI agent on your own computer. You give it a job in plain words, from the chat apps you already use, and it does the job on a schedule. Otian AI is the two-person company that makes it.
+
+This file is a curated map for answer engines. The full machine index is
+https://otianai.com/sitemap.xml.
+
+Every claim below is one this site can back with a pointer to the code that makes it
+true. https://otianai.com/trust/ is that page, claim by claim, and it lists the ones we got
+wrong along with the ones we got right. If a claim here cannot be checked there, it is
+a mistake and we want to hear about it: questions@otianai.com.
+
+## Common questions
+
+- **What is Archie?** A desktop app that runs an AI agent on your own computer. It handles mail, calendar, and recurring jobs, and you reach it from Telegram, Discord, Slack, Matrix, or iMessage on a Mac. It is not a chatbot you open and type into: it runs on a schedule and comes back when it has something.
+- **Does Otian AI see my conversations?** No. When your agent thinks, it talks to Anthropic or OpenAI directly from your computer, on your account, with your key. We are not in the middle of it, and we keep no copy. What we do hold is your email address, your plan, and the operational records listed at https://otianai.com/trust/#what-we-hold. Your prompts still go to your AI provider, who is a third party; the claim is about Otian custody, not about secrecy from everyone.
+- **Where does it run?** On a computer you own and leave on. There is no Otian server running your agent, which is why there is no Otian copy of what it reads. A hosted agent platform cannot make that claim, because the runtime that assembles the prompt is theirs.
+- **What does it cost?** $30 a month, or $299 a year. Archie for Business is $99 a month or $999 a year. The AI itself is billed by your AI provider, to you, at their price: we add nothing to it. There is a plan with the AI included at $59 a month or $599 a year, which carries $25 of usage a month. Guided setup is $250 for an hour. Money back within 14 days.
+- **Do I need to know how to code?** No. Add-ons are written in plain words, not code, and you install one by picking it. Setting up an agent is answering a few questions about what it is for.
+- **What is an add-on?** One job you hand the agent, and there are 146 today, included with Archie for everyone. There are four kinds in the catalog and the site shows three, because a Specialist differs from a Skill in how it is built and not in anything a shopper is choosing between: Skills, Routines, and Personalities.
+- **Can it send email or change my calendar on its own?** Mail goes out when you tap Send or set a time for it, and a calendar change is proposed and waits for your confirmation. It cannot spend money or buy anything. It reads your calendar and answers chat messages without asking each time, which is the same door being useful, and is worth knowing before you connect either.
+- **What can it connect to?** 48 apps and services: 5 chat apps, 7 AI companies, and 36 accounts and devices. Each one connects on an account of yours or over your own wifi, and none of them until you connect it.
+- **Which AI models can it use?** Your pick of 7 companies: Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, and Mistral. You can also point it at any OpenAI-format endpoint you name. You bring the account and the key, and the provider bills you directly at their price.
+- **How many agents and people?** The plan runs 10 agents; the free trial runs 1. In the personal edition one agent answers one person, enforced in code. Archie for Business runs 50 agents and puts no ceiling on how many people an agent answers.
+- **Is there a free plan?** There is a free trial, not a free plan. It runs 14 days or until the starter credits are spent, whichever comes first, and there is a second form of it that runs on your own key. After that it is $30 a month.
+- **What can I check for myself?** All of it, and that is the point. https://otianai.com/trust/ lists every claim on this site with a pointer to the code that makes it true, and carries a 10-minute walkthrough for verifying the custody claim yourself with a network monitor. Claims we have not shipped are labelled as roadmap, and claims that were true and stopped being true are listed as corrections.
+
+## The product
+
+- [Archie: AI Agents on Your Own Computer](https://otianai.com/archie/): Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now.
+- [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit.
+- [Archie Pricing](https://otianai.com/archie/pricing/): What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), every add-on included, and pay-as-you-go AI billed straight to your own account with...
+- [See Archie Work](https://otianai.com/archie/see-it-work/): 2 silent recordings: building a personal AI agent in Archie from scratch, and living with one: a morning briefing arriving over Telegram, unprompted.
+- [What to Run It On](https://otianai.com/equipment/): Which computer to run your AI agent on, answered for your situation: the one you already own, or the small desktop to buy if you don't. Plus the parts people expect to need and don't.
+
+## Who it is for
+
+- [Guided Setup](https://otianai.com/individuals/): What a personal AI agent handles for one person (inbox, calendar, research, follow-ups) and a guided setup service that sets your first agent up with you.
+- [Archie for Business](https://otianai.com/business/): Inbox triage, scheduling, follow-ups, research, reports: Archie for Business runs up to 50 agents your team can share, on your own computer and AI account, so your team’s work never passes through us.
+- [Consulting](https://otianai.com/consulting/): Design and build work for a setup that already exists: several computers, tools wired together by hand, pieces that only stay in step because you keep them there. Scoped in writing before you book, then built in phases at $250 an hour.
+
+## Add-ons
+
+- [Add-on Marketplace](https://otianai.com/skills-marketplace/browse/): Browse the personalities, skills, and routines for your Archie agent. Join the waitlist to hear when the marketplace opens.
+- [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/): An add-on is anything you add to your Archie agent to make it more yours: a new skill, a friendlier voice, a task it handles on its own, or an extra helper. Coming with Archie's launch.
+- [Find an Add-on](https://otianai.com/skills-marketplace/find/): Describe a job you want off your plate in plain words and see which Otian AI add-ons already do it. No account, no AI, and nothing you type leaves your browser.
+- [Commission an Add-on](https://otianai.com/skills-marketplace/commission/): If Archie can't do it yet, tell us what you need. Otian AI scopes it, quotes it per add-on, and builds it: it's yours, and it joins the marketplace, included with Archie for everyone who needs it after you.
+- [For Developers](https://otianai.com/skills-marketplace/for-developers/): Build an add-on for Archie, submit it for review, and it is listed on the marketplace under your name, included with Archie for everyone. Free to list, and open to any developer.
+
+## Privacy, security and claims
+
+- [Trust](https://otianai.com/trust/): Every single thing Archie sends anywhere, who receives it, and what's in it, plus the parts that don't flatter us. Then: how to verify all of it yourself with a network monitor, in 10 minutes.
+- [Trust: The Long Version](https://otianai.com/trust/details/): The full reasoning behind every claim on the Trust page: the limits of the approval gate, what happens to Archie if Otian disappears, and the 10-minute check you can run yourself.
+- [For an IT review: Archie](https://otianai.com/trust/it-review/): The page to send to whoever approves software where you work: what Archie installs, what it connects to, what it never does, and a review document you can attach to a ticket.
+- [Reporting a security problem](https://otianai.com/security/): Where to send a security problem you found in Archie, what we do with it, and how fast.
+- [Privacy Policy](https://otianai.com/privacy-policy/): How Otian AI collects, uses, and protects your information.
+- [Terms of Service](https://otianai.com/terms-of-service/): The terms that govern your use of Otian AI's website and services.
+
+## How we compare
+
+- [Compare Archie to the Alternatives](https://otianai.com/compare/): A chat app, an automation, an assistant, your own build, or the AI companies' own agents. Five honest comparisons that each say where the other option wins, with every price read from the source and dated.
+- [Archie vs ChatGPT and Claude](https://otianai.com/compare/chat-apps/): A chat app answers when you open it and ask. Archie runs the same AI models on your own computer, on a schedule, through your own accounts. An honest side-by-side, including what a chat app does better.
+- [Archie vs Claude Cowork, Grok Bot and Symphony](https://otianai.com/compare/cloud-agents/): Claude Cowork, Grok Bot and Wix Symphony are agents you rent: they work on a computer their company runs. Archie is an agent you own. Both sides of that trade, priced, sourced and dated.
+- [Archie vs Zapier, Make and n8n](https://otianai.com/compare/automation-tools/): Automation tools do exactly what their diagram says. An agent is told the job in a sentence and works out the steps. Prices, tradeoffs, and four reasons to keep your automations.
+- [Archie vs Building It Yourself](https://otianai.com/compare/building-it-yourself/): The parts are free and public, and a build of your own wins on control, cost and privacy. What Archie sells is that the connectors, the approval gate and the updates are finished.
+- [Archie vs Hiring an Assistant](https://otianai.com/compare/hiring-an-assistant/): A person handles judgement; an agent handles repetition. An honest comparison of a personal AI agent and a part-time assistant, including the four things no agent does.
+
+## About us
+
+- [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie. The story behind Otian AI, and the two people who build every agent themselves.
+- [The Otian Standard](https://otianai.com/standard/): How Otian AI intends to behave: the promises we hold ourselves to on service, honesty, privacy and pricing, written down so you can point at a line and tell us we fell short.
+- [Contact](https://otianai.com/contact/): Questions before getting started, or an add-on you need built? Get in touch with Otian AI.
+- [Reviews](https://otianai.com/testimonials/): The jobs an Archie agent takes over, add-on by add-on, and what clients say about working with Otian AI.
+
+## Learning
+
+- [Learn](https://otianai.com/learn/): Everything worth reading before you start: how an agent actually works, what you need to run one, the AI terms in plain English, the questions people ask, and the blog.
+- [FAQ](https://otianai.com/faq/): Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control.
+- [AI Explained](https://otianai.com/ai-explained/): Plain-English AI terms to help you understand agents, automation, and how modern AI tools work.
+- [Blog](https://otianai.com/blog/): Practical AI articles, workflow playbooks, and user stories from the Otian AI community.
+- [Is My Agent Broken?](https://otianai.com/help/): Troubleshooting for Archie. What your agent does quietly on purpose, what is actually broken, and what to press for each one.
+
+## What we do not claim
+
+- Archie cannot spend money or buy anything.
+- It connects to no bank. The add-ons that track bills and spending keep the list you
+  give them.
+- We are not a compliance certification. Your content still flows to a cloud AI
+  provider under your own account, so nothing here makes a deployment HIPAA or GDPR
+  compliant on its own.
+- We hold your email address and your plan. Any page saying we collect nothing is
+  wrong, and we have listed what we hold rather than rounding it to zero.
+- Windows builds are not code-signed yet, so Windows shows a warning on first run.
+  The install page says what we are doing about it and how to check the download
+  without having to trust us.
+

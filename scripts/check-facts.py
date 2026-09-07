@@ -112,6 +112,11 @@ def served_files():
                 yield rel, False
             elif name.endswith(".md") and rel.startswith("blog/"):
                 yield rel, False
+            # llms.txt and robots.txt are served, and llms.txt prints prices. It exists to be
+            # quoted back to somebody by a machine that will not check it, which makes it the
+            # last file that should be exempt from the check every page goes through.
+            elif name.endswith(".txt") and os.path.dirname(rel) == "":
+                yield rel, True
 
 
 # The four collections the store sells from, per COLLECTIONS in js/catalog.js. `resources` and

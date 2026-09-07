@@ -213,7 +213,7 @@
       </div>
 
       <div class="hm-stage">
-          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it confirms a daily routine called Morning Brief. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is free for both of you, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is free for both of you, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
             <div class="hm-scenes" aria-hidden="true">
 
               <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
@@ -222,7 +222,12 @@
                    odd-numbered ones. What each one is FOR is said under the phone, in .hm-caps, and
                    never inside the thread: a caption in the chat reads as something the agent said. -->
 
-              <!-- 1. Plain words in, a scheduled job out. -->
+              <!-- 1. Plain words in, a scheduled job out, in the sentence the app actually returns when a
+                 routine is written (skill_builder.rs: "Added the routine ... It runs on its own
+                 ..."). The step before it, the drafted card with Keep it under it, is real and is
+                 not drawn here: it is a five-line card with a three-button row, which made the
+                 first scene the tallest of the seven and so padded the other six with the empty
+                 phone it needed. Three other scenes already carry the proposes-then-waits beat. -->
               <div class="hm-scene" style="--s:0">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
@@ -232,10 +237,7 @@
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble">
-                        <p class="hm-mini-quote">Done. Every day at 7:00&nbsp;am.</p>
-                        <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Morning Brief</b></div>
-                      </div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Added the routine &ldquo;Morning Brief&rdquo;. It runs on its own every day at 7:00&nbsp;am.</p></div>
                       <time>7:02 am</time>
                     </div>
                   </div>
@@ -349,8 +351,8 @@
                     <div class="hm-turn hm-in" style="--d:2">
                       <div class="hm-bubble">
                         <p class="hm-mini-quote"><b>Renewing this week</b></p>
-                        <div class="hm-mini-row"><b>Tue</b> Car insurance</div>
-                        <div class="hm-mini-row"><b>Fri</b> Storage unit</div>
+                        <p class="hm-mini-quote">Tue: car insurance</p>
+                        <p class="hm-mini-quote">Fri: storage unit</p>
                       </div>
                       <time>9:04 am</time>
                     </div>
@@ -379,8 +381,9 @@
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
                       <div class="hm-bubble">
-                        <div class="hm-mini-row"><b>Sat 14</b> direct, 2h 55m</div>
-                        <div class="hm-mini-row"><b>Sat 21</b> direct, 3h 05m</div>
+                        <p class="hm-mini-quote">Two direct, both Saturdays:</p>
+                        <p class="hm-mini-quote">Sat 14: 2h 55m</p>
+                        <p class="hm-mini-quote">Sat 21: 3h 05m</p>
                       </div>
                       <time>8:47 pm</time>
                     </div>
@@ -401,7 +404,7 @@
                here it is a caption, every scene has one, and the phone stays a phone. Same lap and
                the same --s, so a caption cannot drift out of step with the scene it names. -->
           <div class="hm-caps" aria-hidden="true">
-            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on the schedule you gave it.</p>
+            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
             <p class="hm-cap" style="--s:1">Ask for a reminder in plain words. It arrives when you said, with the buttons on it.</p>
             <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
             <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
@@ -714,10 +717,10 @@
           <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. The agent&rsquo;s morning brief lists a 9:00 standup, an 11:30 with Maria for Q3 kickoff prep, the internet bill due Thursday, and Dad&rsquo;s birthday Saturday.">
             <div class="hm-msg" aria-hidden="true">
               <div class="hm-bubble">
-                <div class="hm-mini-label">Morning brief &middot; in your chat</div>
-                <div class="hm-mini-row"><b>9:00</b> Standup, video call</div>
-                <div class="hm-mini-row"><b>11:30</b> Maria, Q3 kickoff prep</div>
-                <div class="hm-mini-row"><b>Also</b> Internet bill Thursday, Dad&rsquo;s birthday Saturday</div>
+                <p class="hm-mini-quote"><b>Morning brief</b></p>
+                <p class="hm-mini-quote">9:00: standup, video call</p>
+                <p class="hm-mini-quote">11:30: Maria, Q3 kickoff prep</p>
+                <p class="hm-mini-quote">Also: internet bill Thursday, Dad&rsquo;s birthday Saturday</p>
               </div>
             </div>
           </div>
@@ -729,7 +732,7 @@
           <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. A drafted reply to Sam waits with three buttons attached below the message: Send, Edit, and Dismiss.">
             <div class="hm-msg" aria-hidden="true">
               <div class="hm-bubble">
-                <div class="hm-mini-label">Draft reply &middot; to Sam</div>
+                <p class="hm-mini-quote"><b>Draft reply</b> (to Sam):</p>
                 <p class="hm-mini-quote">Hi Sam, sorry for the slow reply. The second option works for us. Can you hold October&nbsp;12?</p>
               </div>
               <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
@@ -741,10 +744,13 @@
         <div class="hm-stop fade-up">
           <span class="hm-stamp"><i aria-hidden="true"></i>6:12 pm</span>
           <h3>One sentence becomes a routine</h3>
-          <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. You write: Every Sunday at 6, send me the week ahead. The agent answers with a confirmed routine named Week Ahead, running Sundays at 6:00 pm.">
+          <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. You write: Every Sunday at 6, send me the week ahead. The agent answers with a routine it has written, named Week Ahead, that runs every Sunday at 6:00 pm.">
             <div class="hm-msg" aria-hidden="true">
               <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">&ldquo;Every Sunday at 6, send me the week ahead.&rdquo;</p></div>
-              <div class="hm-bubble"><div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Week Ahead</b><span class="hm-micro">Sundays &middot; 6:00 pm</span></div></div>
+              <div class="hm-bubble">
+                <p class="hm-mini-quote"><b>Week Ahead</b> (a routine I have written)</p>
+                <p class="hm-mini-quote">Runs on its own: every Sunday at 6:00&nbsp;pm.</p>
+              </div>
             </div>
           </div>
         </div>

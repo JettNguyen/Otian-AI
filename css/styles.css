@@ -11130,8 +11130,6 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-msg-btn--go { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
 .hm-mini-label { font-size: var(--fs-2xs); font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-.hm-mini-row { display: flex; gap: 10px; padding: 3px 0; color: var(--text-secondary); }
-.hm-mini-row b { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .hm-mini-quote { color: var(--text-primary); margin: 0; }
 .hm-mini {
   position: relative; z-index: 1;
@@ -12211,7 +12209,6 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz--hero .hm-msg { gap: 10px; width: 100%; }
 .hm-pz--hero .hm-bubble { max-width: 92%; }
 .hm-pz--hero .hm-mini-quote { font-size: var(--fs-md); line-height: 1.5; }
-.hm-pz--hero .hm-chipline { margin-top: 10px; }
 
 /* ---- The scenes ----
    The phone cycles through seven exchanges rather than holding one. Seven, because the argument
@@ -12619,10 +12616,10 @@ html[data-theme="dark"] .booking-container iframe {
    side. */
 .hm-turn:has(.hm-msg-btns) > .hm-bubble { border-bottom-left-radius: 0; border-bottom-right-radius: 4px; }
 
-/* The mail card carries three lines in one bubble, so they need the spacing a chat app gives
-   consecutive lines of one message, and the summary the app sends in _italics_ keeps them. */
-.hm-pz--hero .hm-mini-quote + .hm-mini-quote { margin-top: 3px; }
-.hm-pz--hero .hm-mini-quote + .hm-mini-row { margin-top: 7px; }
+/* A message of several lines: the mail card, the morning brief, a list of dates. They get the
+   spacing a chat app gives consecutive lines of ONE message, which is closer than paragraphs
+   and further apart than a wrapped line, and the summary the app sends in _italics_ keeps it. */
+.hm-pz .hm-mini-quote + .hm-mini-quote { margin-top: 3px; }
 .hm-em { font-style: italic; font-size: var(--fs-sm); color: var(--text-secondary); }
 
 @media (prefers-reduced-motion: reduce) {

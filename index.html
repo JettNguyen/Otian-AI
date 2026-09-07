@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-19" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-20" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -213,155 +213,202 @@
       </div>
 
       <div class="hm-stage">
-        <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven exchanges with an AI agent. You ask for a morning summary and it confirms a daily routine. You ask for a reminder and it arrives at four with Done, Later and Dismiss. It tells you a reply to Sam is drafted and offers Send, Edit and Dismiss, noting that it writes but only sends when you tap Send or at a time you set. You ask it to move a three o&rsquo;clock and it proposes Thursday at ten with Confirm and Another time, noting that nothing moves until you confirm. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two, noting that it finds them and books nothing.">
-          <div class="hm-scenes" aria-hidden="true">
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it confirms a daily routine called Morning Brief. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is free for both of you, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her rather than for that thread. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
+            <div class="hm-scenes" aria-hidden="true">
 
-            <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
-                 The order alternates who spoke first: you asking, then it arriving unasked, then
-                 you asking again. That alternation is the argument. A chat app only ever does the
-                 odd-numbered ones. -->
+              <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
+                   The order alternates who spoke first: you asking, then it arriving unasked, then
+                   you asking again. That alternation is the argument. A chat app only ever does the
+                   odd-numbered ones. What each one is FOR is said under the phone, in .hm-caps, and
+                   never inside the thread: a caption in the chat reads as something the agent said. -->
 
-            <!-- 1. Plain words in, a scheduled job out. -->
-            <div class="hm-scene" style="--s:0">
-              <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in" style="--d:3"><p class="hm-mini-quote">Every morning, tell me what&rsquo;s on and what I owe people.<time>7:02 am</time></p></div>
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:4"><i></i><i></i><i></i></div>
-                  <div class="hm-bubble hm-in" style="--d:6">
-                    <p class="hm-mini-quote">Done. Every day at 7:00&nbsp;am.</p>
-                    <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Morning Brief</b></div>
+              <!-- 1. Plain words in, a scheduled job out. -->
+              <div class="hm-scene" style="--s:0">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Every morning, tell me what&rsquo;s on and what I owe people.</p></div>
                     <time>7:02 am</time>
                   </div>
-                </div>
-              </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">E</i><i style="--i:1">v</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">y</i><i style="--i:5"> </i><i style="--i:6">m</i><i style="--i:7">o</i><i style="--i:8">r</i><i style="--i:9">n</i><i style="--i:10">i</i><i style="--i:11">n</i><i style="--i:12">g</i><i style="--i:13">,</i><i style="--i:14"> </i><i style="--i:15">t</i><i style="--i:16">e</i><i style="--i:17">l</i><i style="--i:18">l</i><i style="--i:19"> </i><i style="--i:20">m</i><i style="--i:21">e</i><i style="--i:22"> </i><i style="--i:23">w</i><i style="--i:24">h</i><i style="--i:25">a</i><i style="--i:26">t</i><i style="--i:27">&rsquo;</i><i style="--i:28">s</i><i style="--i:29"> </i><i style="--i:30">o</i><i style="--i:31">n</i><i style="--i:32"> </i><i style="--i:33">a</i><i style="--i:34">n</i><i style="--i:35">d</i><i style="--i:36"> </i><i style="--i:37">w</i><i style="--i:38">h</i><i style="--i:39">a</i><i style="--i:40">t</i><i style="--i:41"> </i><i style="--i:42">I</i><i style="--i:43"> </i><i style="--i:44">o</i><i style="--i:45">w</i><i style="--i:46">e</i><i style="--i:47"> </i><i style="--i:48">p</i><i style="--i:49">e</i><i style="--i:50">o</i><i style="--i:51">p</i><i style="--i:52">l</i><i style="--i:53">e</i><i style="--i:54">.</i></span><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
-
-            <!-- 2. A reminder, delivered word for word. It costs no tokens and it arrives even if
-                 the computer was shut when you asked, which is why it gets its own scene. -->
-            <div class="hm-scene" style="--s:1">
-              <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in" style="--d:3"><p class="hm-mini-quote">Remind me to call the vet at four.<time>11:20 am</time></p></div>
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:4"><i></i><i></i><i></i></div>
-                  <div class="hm-turn hm-in" style="--d:6">
-                    <div class="hm-bubble"><p class="hm-mini-quote">Call the vet.<time>4:00 pm</time></p></div>
-                    <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Done</span><span class="hm-msg-btn">Later</span><span class="hm-msg-btn">Dismiss</span></div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote">Done. Every day at 7:00&nbsp;am.</p>
+                        <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Morning Brief</b></div>
+                      </div>
+                      <time>7:02 am</time>
+                    </div>
                   </div>
                 </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">E</i><i style="--i:1">v</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">y</i><i style="--i:5"> </i><i style="--i:6">m</i><i style="--i:7">o</i><i style="--i:8">r</i><i style="--i:9">n</i><i style="--i:10">i</i><i style="--i:11">n</i><i style="--i:12">g</i><i style="--i:13">,</i><i style="--i:14"> </i><i style="--i:15">t</i><i style="--i:16">e</i><i style="--i:17">l</i><i style="--i:18">l</i><i style="--i:19"> </i><i style="--i:20">m</i><i style="--i:21">e</i><i style="--i:22"> </i><i style="--i:23">w</i><i style="--i:24">h</i><i style="--i:25">a</i><i style="--i:26">t</i><i style="--i:27">&rsquo;</i><i style="--i:28">s</i><i style="--i:29"> </i><i style="--i:30">o</i><i style="--i:31">n</i><i style="--i:32"> </i><i style="--i:33">a</i><i style="--i:34">n</i><i style="--i:35">d</i><i style="--i:36"> </i><i style="--i:37">w</i><i style="--i:38">h</i><i style="--i:39">a</i><i style="--i:40">t</i><i style="--i:41"> </i><i style="--i:42">I</i><i style="--i:43"> </i><i style="--i:44">o</i><i style="--i:45">w</i><i style="--i:46">e</i><i style="--i:47"> </i><i style="--i:48">p</i><i style="--i:49">e</i><i style="--i:50">o</i><i style="--i:51">p</i><i style="--i:52">l</i><i style="--i:53">e</i><i style="--i:54">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
+                </div>
               </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">R</i><i style="--i:1">e</i><i style="--i:2">m</i><i style="--i:3">i</i><i style="--i:4">n</i><i style="--i:5">d</i><i style="--i:6"> </i><i style="--i:7">m</i><i style="--i:8">e</i><i style="--i:9"> </i><i style="--i:10">t</i><i style="--i:11">o</i><i style="--i:12"> </i><i style="--i:13">c</i><i style="--i:14">a</i><i style="--i:15">l</i><i style="--i:16">l</i><i style="--i:17"> </i><i style="--i:18">t</i><i style="--i:19">h</i><i style="--i:20">e</i><i style="--i:21"> </i><i style="--i:22">v</i><i style="--i:23">e</i><i style="--i:24">t</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27">t</i><i style="--i:28"> </i><i style="--i:29">f</i><i style="--i:30">o</i><i style="--i:31">u</i><i style="--i:32">r</i><i style="--i:33">.</i></span><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
 
-            <!-- 3. The draft. One function in the whole tree puts mail on the wire and it is
-                 reachable from a pressed Send or a send you scheduled, which is what the note
-                 says in the two ways it is true. -->
-            <div class="hm-scene" style="--s:2">
-              <div class="hm-msg">
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
-                  <div class="hm-bubble hm-in" style="--d:1"><p class="hm-mini-quote">Sam asked about October. I drafted a reply.<time>1:28 pm</time></p></div>
-                </div>
-                <div class="hm-turn hm-in" style="--d:2">
-                  <div class="hm-bubble"><p class="hm-mini-quote">&ldquo;The second option works for us. Can you hold October&nbsp;12?&rdquo;</p></div>
-                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
-                </div>
-                <span class="hm-scene-note hm-in" style="--d:3">It writes. It sends when you tap Send, or at a time you set.</span>
-              </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
-
-            <!-- 4. A calendar change stages and commits on a later message. -->
-            <div class="hm-scene" style="--s:3">
-              <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in" style="--d:3"><p class="hm-mini-quote">Can you move my 3 o&rsquo;clock?<time>2:41 pm</time></p></div>
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:4"><i></i><i></i><i></i></div>
-                  <div class="hm-turn hm-in" style="--d:6">
-                    <div class="hm-bubble"><p class="hm-mini-quote">Thursday at 10 is free for both of you.<time>2:41 pm</time></p></div>
-                    <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
+              <!-- 2. A reminder, delivered word for word, with the buttons a reminder needs. -->
+              <div class="hm-scene" style="--s:1">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Remind me to call the vet at four.</p></div>
+                    <time>11:20 am</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Call the vet.</p></div>
+                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Done</span><span class="hm-msg-btn">Later</span><span class="hm-msg-btn">Dismiss</span></div>
+                      <time>4:00 pm</time>
+                    </div>
                   </div>
                 </div>
-                <span class="hm-scene-note hm-in" style="--d:7">Nothing moves until you confirm it.</span>
-              </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">C</i><i style="--i:1">a</i><i style="--i:2">n</i><i style="--i:3"> </i><i style="--i:4">y</i><i style="--i:5">o</i><i style="--i:6">u</i><i style="--i:7"> </i><i style="--i:8">m</i><i style="--i:9">o</i><i style="--i:10">v</i><i style="--i:11">e</i><i style="--i:12"> </i><i style="--i:13">m</i><i style="--i:14">y</i><i style="--i:15"> </i><i style="--i:16">3</i><i style="--i:17"> </i><i style="--i:18">o</i><i style="--i:19">&rsquo;</i><i style="--i:20">c</i><i style="--i:21">l</i><i style="--i:22">o</i><i style="--i:23">c</i><i style="--i:24">k</i><i style="--i:25">?</i></span><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
-
-            <!-- 5. A watch registers the person, not the thread, so it fires whichever message
-                 they answer on. -->
-            <div class="hm-scene" style="--s:4">
-              <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in" style="--d:3"><p class="hm-mini-quote">Tell me when Priya writes back.<time>9:15 am</time></p></div>
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:4"><i></i><i></i><i></i></div>
-                  <div class="hm-bubble hm-in" style="--d:6"><p class="hm-mini-quote">Watching for Priya, not for that thread. I&rsquo;ll say the moment anything from her lands.<time>9:15 am</time></p></div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">R</i><i style="--i:1">e</i><i style="--i:2">m</i><i style="--i:3">i</i><i style="--i:4">n</i><i style="--i:5">d</i><i style="--i:6"> </i><i style="--i:7">m</i><i style="--i:8">e</i><i style="--i:9"> </i><i style="--i:10">t</i><i style="--i:11">o</i><i style="--i:12"> </i><i style="--i:13">c</i><i style="--i:14">a</i><i style="--i:15">l</i><i style="--i:16">l</i><i style="--i:17"> </i><i style="--i:18">t</i><i style="--i:19">h</i><i style="--i:20">e</i><i style="--i:21"> </i><i style="--i:22">v</i><i style="--i:23">e</i><i style="--i:24">t</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27">t</i><i style="--i:28"> </i><i style="--i:29">f</i><i style="--i:30">o</i><i style="--i:31">u</i><i style="--i:32">r</i><i style="--i:33">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
                 </div>
               </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">T</i><i style="--i:1">e</i><i style="--i:2">l</i><i style="--i:3">l</i><i style="--i:4"> </i><i style="--i:5">m</i><i style="--i:6">e</i><i style="--i:7"> </i><i style="--i:8">w</i><i style="--i:9">h</i><i style="--i:10">e</i><i style="--i:11">n</i><i style="--i:12"> </i><i style="--i:13">P</i><i style="--i:14">r</i><i style="--i:15">i</i><i style="--i:16">y</i><i style="--i:17">a</i><i style="--i:18"> </i><i style="--i:19">w</i><i style="--i:20">r</i><i style="--i:21">i</i><i style="--i:22">t</i><i style="--i:23">e</i><i style="--i:24">s</i><i style="--i:25"> </i><i style="--i:26">b</i><i style="--i:27">a</i><i style="--i:28">c</i><i style="--i:29">k</i><i style="--i:30">.</i></span><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
 
-            <!-- 6. A date in one of your own lists comes due. No model call to notice it: this is
-                 date arithmetic, which is why it is free to run every day. -->
-            <div class="hm-scene" style="--s:5">
-              <div class="hm-msg">
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
-                  <div class="hm-bubble hm-in" style="--d:1">
-                    <div class="hm-mini-label">Renewing this week</div>
-                    <div class="hm-mini-row"><b>Tue</b> Car insurance</div>
-                    <div class="hm-mini-row"><b>Fri</b> Storage unit</div>
-                    <time>9:04 am</time>
+              <!-- 3. The draft, as one card, which is the shape the app actually sends: who wrote, what they
+                 wanted, the reply, and the three buttons. Exactly one function in the tree puts
+                 mail on the wire and it is reachable from a pressed Send or a send you scheduled. -->
+              <div class="hm-scene" style="--s:2">
+                <div class="hm-msg">
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:2">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote"><b>New email</b> from Sam</p>
+                        <p class="hm-mini-quote hm-em">Asking whether October still works.</p>
+                        <div class="hm-draft">
+                          <span class="hm-draft-label"><b>Draft reply</b> (to Sam):</span>
+                          <p class="hm-mini-quote">The second option works for us. Can you hold October&nbsp;12?</p>
+                        </div>
+                      </div>
+                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
+                      <time>1:28 pm</time>
+                    </div>
                   </div>
                 </div>
-                <div class="hm-turn hm-in" style="--d:2">
-                  <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?</p></div>
-                  <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Yes</span><span class="hm-msg-btn">Leave it</span></div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
                 </div>
               </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
 
-            <!-- 7. Flights are read from this computer with no key and no quota, and the tool
-                 books nothing at all. The last line is the whole point of the scene. -->
-            <div class="hm-scene" style="--s:6">
-              <div class="hm-msg">
-                <div class="hm-bubble hm-bubble--out hm-in" style="--d:3"><p class="hm-mini-quote">Anything direct to Lisbon in March?<time>8:47 pm</time></p></div>
-                <div class="hm-reply">
-                  <div class="hm-typing hm-type" style="--d:4"><i></i><i></i><i></i></div>
-                  <div class="hm-bubble hm-in" style="--d:6">
-                    <div class="hm-mini-row"><b>Sat 14</b> direct, 2h 55m</div>
-                    <div class="hm-mini-row"><b>Sat 21</b> direct, 3h 05m</div>
+              <!-- 4. A calendar change: it says what it read before it says what it found, and the change
+                 stages until a later message commits it. -->
+              <div class="hm-scene" style="--s:3">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Can you move my 3 o&rsquo;clock?</p></div>
+                    <time>2:41 pm</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Checked your calendar. Thursday at 10 is free for both of you.</p></div>
+                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
+                      <time>2:41 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">C</i><i style="--i:1">a</i><i style="--i:2">n</i><i style="--i:3"> </i><i style="--i:4">y</i><i style="--i:5">o</i><i style="--i:6">u</i><i style="--i:7"> </i><i style="--i:8">m</i><i style="--i:9">o</i><i style="--i:10">v</i><i style="--i:11">e</i><i style="--i:12"> </i><i style="--i:13">m</i><i style="--i:14">y</i><i style="--i:15"> </i><i style="--i:16">3</i><i style="--i:17"> </i><i style="--i:18">o</i><i style="--i:19">&rsquo;</i><i style="--i:20">c</i><i style="--i:21">l</i><i style="--i:22">o</i><i style="--i:23">c</i><i style="--i:24">k</i><i style="--i:25">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
+                </div>
+              </div>
+
+              <!-- 5. A watch registers the person, not the thread, so it fires whichever message they
+                 answer on. -->
+              <div class="hm-scene" style="--s:4">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Tell me when Priya writes back.</p></div>
+                    <time>9:15 am</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Watching for Priya, not for that thread. I&rsquo;ll say the moment anything from her lands.</p></div>
+                      <time>9:15 am</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">T</i><i style="--i:1">e</i><i style="--i:2">l</i><i style="--i:3">l</i><i style="--i:4"> </i><i style="--i:5">m</i><i style="--i:6">e</i><i style="--i:7"> </i><i style="--i:8">w</i><i style="--i:9">h</i><i style="--i:10">e</i><i style="--i:11">n</i><i style="--i:12"> </i><i style="--i:13">P</i><i style="--i:14">r</i><i style="--i:15">i</i><i style="--i:16">y</i><i style="--i:17">a</i><i style="--i:18"> </i><i style="--i:19">w</i><i style="--i:20">r</i><i style="--i:21">i</i><i style="--i:22">t</i><i style="--i:23">e</i><i style="--i:24">s</i><i style="--i:25"> </i><i style="--i:26">b</i><i style="--i:27">a</i><i style="--i:28">c</i><i style="--i:29">k</i><i style="--i:30">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
+                </div>
+              </div>
+
+              <!-- 6. A date in one of your own lists comes due. No model call to notice it: this is date
+                 arithmetic, which is why it is free to run every day. -->
+              <div class="hm-scene" style="--s:5">
+                <div class="hm-msg">
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:2">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote"><b>Renewing this week</b></p>
+                        <div class="hm-mini-row"><b>Tue</b> Car insurance</div>
+                        <div class="hm-mini-row"><b>Fri</b> Storage unit</div>
+                      </div>
+                      <time>9:04 am</time>
+                    </div>
+                  </div>
+                  <div class="hm-turn hm-in" style="--d:4">
+                    <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?</p></div>
+                    <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Yes</span><span class="hm-msg-btn">Leave it</span></div>
+                    <time>9:05 am</time>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
+                </div>
+              </div>
+
+              <!-- 7. Flights are read from this computer with no key and no quota, and the tool books
+                 nothing at all. The caption under the phone is the whole point of the scene. -->
+              <div class="hm-scene" style="--s:6">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Anything direct to Lisbon in March?</p></div>
                     <time>8:47 pm</time>
                   </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble">
+                        <div class="hm-mini-row"><b>Sat 14</b> direct, 2h 55m</div>
+                        <div class="hm-mini-row"><b>Sat 21</b> direct, 3h 05m</div>
+                      </div>
+                      <time>8:47 pm</time>
+                    </div>
+                  </div>
                 </div>
-                <span class="hm-scene-note hm-in" style="--d:7">It finds them. It books nothing.</span>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">A</i><i style="--i:1">n</i><i style="--i:2">y</i><i style="--i:3">t</i><i style="--i:4">h</i><i style="--i:5">i</i><i style="--i:6">n</i><i style="--i:7">g</i><i style="--i:8"> </i><i style="--i:9">d</i><i style="--i:10">i</i><i style="--i:11">r</i><i style="--i:12">e</i><i style="--i:13">c</i><i style="--i:14">t</i><i style="--i:15"> </i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18"> </i><i style="--i:19">L</i><i style="--i:20">i</i><i style="--i:21">s</i><i style="--i:22">b</i><i style="--i:23">o</i><i style="--i:24">n</i><i style="--i:25"> </i><i style="--i:26">i</i><i style="--i:27">n</i><i style="--i:28"> </i><i style="--i:29">M</i><i style="--i:30">a</i><i style="--i:31">r</i><i style="--i:32">c</i><i style="--i:33">h</i><i style="--i:34">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
+                </div>
               </div>
-                <div class="hm-composer" aria-hidden="true">
-                  <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">A</i><i style="--i:1">n</i><i style="--i:2">y</i><i style="--i:3">t</i><i style="--i:4">h</i><i style="--i:5">i</i><i style="--i:6">n</i><i style="--i:7">g</i><i style="--i:8"> </i><i style="--i:9">d</i><i style="--i:10">i</i><i style="--i:11">r</i><i style="--i:12">e</i><i style="--i:13">c</i><i style="--i:14">t</i><i style="--i:15"> </i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18"> </i><i style="--i:19">L</i><i style="--i:20">i</i><i style="--i:21">s</i><i style="--i:22">b</i><i style="--i:23">o</i><i style="--i:24">n</i><i style="--i:25"> </i><i style="--i:26">i</i><i style="--i:27">n</i><i style="--i:28"> </i><i style="--i:29">M</i><i style="--i:30">a</i><i style="--i:31">r</i><i style="--i:32">c</i><i style="--i:33">h</i><i style="--i:34">?</i></span><span class="hm-composer-hint">Message</span></div>
-                  <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12h13M12 6.5l5.5 5.5L12 17.5"/></svg></span>
-                </div>
-            </div>
 
+            </div>
           </div>
-        </div>
+
+          <!-- What the scene is showing, under the phone rather than in the thread. A line of
+               explanation inside a chat bubble is the app talking about itself, which no chat app
+               does and which made three of the seven read as an advert with a message on top. Out
+               here it is a caption, every scene has one, and the phone stays a phone. Same lap and
+               the same --s, so a caption cannot drift out of step with the scene it names. -->
+          <div class="hm-caps" aria-hidden="true">
+            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on the schedule you gave it.</p>
+            <p class="hm-cap" style="--s:1">Ask for a reminder in plain words. It arrives when you said, with the buttons on it.</p>
+            <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
+            <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
+            <p class="hm-cap" style="--s:4">Watch a person, not a thread. It tells you whichever way they answer.</p>
+            <p class="hm-cap" style="--s:5">It reads dates out of your own lists and tells you before one comes due.</p>
+            <p class="hm-cap" style="--s:6">It looks things up and hands you the answer. It books nothing.</p>
+          </div>
       </div>
     </section>
 

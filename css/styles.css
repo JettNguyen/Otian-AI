@@ -12157,12 +12157,32 @@ html[data-theme="dark"] .booking-container iframe {
   position: relative;
   margin-top: 48px;
   display: flex;
+  /* A column now: the phone, then the line saying what the scene is showing. */
+  flex-direction: column;
   justify-content: center;
   /* center, not the flex default of stretch. Stretched, the phone grew to the height of the
      copy column beside it while its screen stayed 330px, so the composer sat wherever the
      screen ended and a hundred and forty pixels of empty phone hung underneath it. The phone
      is its own object with its own size; the column it shares a row with is not its business. */
   align-items: center;
+
+  /* THE WHOLE CYCLE IN TWO NUMBERS, and they live here rather than on .hm-scenes because the
+     captions under the phone run off the same clock and would otherwise have to be told the
+     timing twice. Every delay below is derived from them, so adding a scene is a <div> with the
+     next --s and a <p> with the same one: the hand-written delay table this replaced was one
+     typo away from two scenes on screen at once. The keyframe percentages ARE tied to the count
+     (one scene is 100/7 = 14.29% of a lap), so changing --hm-count means moving the stops in
+     hm-scene, hm-in, hm-fly and hm-type with it.
+
+     7.5s a scene, and every individual movement inside it under half a second. Those pull in
+     opposite directions on purpose: the entrances were what felt slow and the hold was what felt
+     short. A scene types for under two seconds, sits on the finished message for three quarters
+     of one, sends, and is answered by 4.5s, which leaves the exchange standing still for the
+     last two and a half. --hm-beat is the gap between beats and --d says which beat a thing is. */
+  --hm-hold: 7.5s;
+  --hm-beat: 0.5s;
+  --hm-count: 7;
+  --hm-lap: calc(var(--hm-hold) * var(--hm-count));
 }
 
 /* The day spine's phone, larger. Not a closed device: .hm-pz draws side rails and then masks its
@@ -12212,21 +12232,6 @@ html[data-theme="dark"] .booking-container iframe {
    mid-cycle. Stacking them absolutely would collapse the parent to nothing instead. */
 .hm-scenes {
   display: grid;
-  /* The whole cycle in two numbers. Every delay below is derived from them, so adding a scene is
-     a <div> with the next --s and nothing else: the hand-written delay table this replaced was
-     one typo away from two scenes on screen at once. The keyframe percentages ARE tied to the
-     count, though (one scene is 100/7 = 14.29% of a lap), so changing --hm-count means moving
-     the four stops in @keyframes hm-scene and hm-in with it. */
-  /* 6s a scene, and every individual movement inside it under a quarter second. Those pull in
-     opposite directions on purpose: the entrances were what felt slow, and the hold was what
-     felt short. A scene now plays its four beats in under two seconds and then sits still for
-     three and a half, which is what twenty-five words of chat actually needs.
-     --hm-beat is the gap between beats, and --d on an element says which beat it is. */
-  --hm-hold: 6.5s;
-  --hm-beat: 0.5s;
-  --hm-count: 7;
-  --hm-lap: calc(var(--hm-hold) * var(--hm-count));
-
   /* Portrait, and the thread sits at the bottom of it. Sized by content alone the phone came out
      roughly square, which reads as a widget; a real thread has the day's empty screen above it
      and the newest message at the thumb. The floor is the tallest scene plus that headroom, so
@@ -12256,14 +12261,29 @@ html[data-theme="dark"] .booking-container iframe {
    keyframe that ended on the wrong value. Now every animated thing fades out with its scene and
    holds 0 to the end of the lap, and the wrap has nothing left to jump. */
 @keyframes hm-scene {
-  0%          { opacity: 0; }
-  0.5%, 12.6% { opacity: 1; }
-  13.6%, 100% { opacity: 0; }
+  0%           { opacity: 0; }
+  0.44%, 12.95% { opacity: 1; }
+  13.9%, 100%  { opacity: 0; }
 }
 @keyframes hm-in {
-  0%          { opacity: 0; transform: translateY(6px); }
-  0.6%, 12.6% { opacity: 1; transform: none; }
-  13.6%, 100% { opacity: 0; transform: none; }
+  0%           { opacity: 0; transform: translateY(6px); }
+  0.5%, 12.95% { opacity: 1; transform: none; }
+  13.9%, 100%  { opacity: 0; transform: none; }
+}
+
+/* THE MESSAGE YOU SENT, arriving the way a phone sends one: it comes up from where the composer
+   is, small, and settles a hair past its size before it lands. That overshoot is the whole
+   effect. A bubble that fades in has been placed there by a stylesheet; one that arrives from
+   under the thread was sent by the person reading, which is the difference this scene is making.
+   transform-origin is bottom right, the corner nearest the send button, so it grows out of the
+   place the tap happened rather than out of its own middle. */
+@keyframes hm-fly {
+  0%           { opacity: 0; transform: translateY(26px) scale(0.74); }
+  0.1%         { opacity: 1; }
+  0.55%        { transform: translateY(0) scale(1.04); }
+  0.85%        { transform: none; }
+  12.95%       { opacity: 1; transform: none; }
+  13.9%, 100%  { opacity: 0; transform: none; }
 }
 
 /* The three dots, which are the only thing here that leaves before its scene does. A reply that
@@ -12272,8 +12292,8 @@ html[data-theme="dark"] .booking-container iframe {
    at the wrap either. */
 @keyframes hm-type {
   0%          { opacity: 0; }
-  0.5%, 1.9%  { opacity: 1; }
-  2.5%, 100%  { opacity: 0; }
+  0.4%, 1.8%  { opacity: 1; }
+  2.2%, 100%  { opacity: 0; }
 }
 @keyframes hm-type-dot {
   0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
@@ -12291,6 +12311,13 @@ html[data-theme="dark"] .booking-container iframe {
 /* --s is set once on the scene and inherits, so a bubble only has to say which beat it is. */
 .hm-in {
   animation: hm-in var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+.hm-fly {
+  transform-origin: bottom right;
+  /* The overshoot is in the keyframes, so the easing only has to get it there fast and stop
+     pushing. A bezier that overshoots as well would fight them. */
+  animation: hm-fly var(--hm-lap) cubic-bezier(0.22, 1, 0.36, 1) infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
 }
 
@@ -12387,10 +12414,13 @@ html[data-theme="dark"] .booking-container iframe {
    Animating display would do the same on a new enough browser and nothing at all on an older
    one, and this needs no such qualification.
 
-   The caret rides the same animation. A character turns its own right border on as it appears
-   and off one step later, so exactly one border is lit at any moment and it walks the text,
-   through a line break and all. A separate caret element cannot do that: between two characters
-   there is nothing to position it against. */
+   THE CARET IS ONE ELEMENT, sitting after the last character. That looks like it could not
+   work, and it works for the same reason the growth does: an untyped character is font-size 0,
+   so it occupies nothing, so a caret placed after ALL of them renders exactly where the typing
+   has got to, and moves through a line break with it. The first version instead lit each
+   character's own right border as it appeared and put it out a step later. That walks too, but
+   it animates a second property on every one of fifty-five elements, and it can only be lit for
+   part of a character's step, so at speed it read as a flicker chasing the words. */
 .hm-typed {
   font-size: var(--fs-sm);
   color: var(--text-primary);
@@ -12402,31 +12432,55 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-typed i {
   font-style: normal;
-  border-right: 1.5px solid transparent;
-  margin-right: -1.5px;
   animation: hm-char var(--hm-lap) linear infinite both;
-  /* 24ms a character. Fast enough to read as typing rather than as a reveal, slow enough that
-     the longest message is in before the send at about 1.4s. */
-  animation-delay: calc(var(--s) * var(--hm-hold) + var(--i) * 24ms);
+  /* A quarter second of nothing, then 30ms a character. The pause is the beat before somebody
+     starts typing, and 30ms is slow enough to read as a person and quick enough that the longest
+     message here is in by 1.9s, three quarters of a second before it is sent. */
+  animation-delay: calc(var(--s) * var(--hm-hold) + 250ms + var(--i) * 30ms);
 }
 
-/* 1% of the lap is 455ms, so a character's step is 0.053% and the stops below sit either side of
-   its entrance. `both` is what keeps a character at zero before its delay. */
+/* 100%, NOT 1em, and this is the bug that hid here for a day. The two mean the same thing for
+   font-size, and a percentage says out loud what it is a percentage of: the parent's font-size.
+   `1em` in a font-size keyframe reads as self-referential, engines have disagreed about it, and
+   where it loses the argument the character never grows while every other property in the same
+   keyframes carries on animating. That failure looks like text that will not type out with a
+   caret that walks along fine, which is exactly what it looked like. A percentage cannot be read
+   that way by anything.
+
+   1% of the lap is 525ms, so a character's step is 0.057% and 0.02% (10ms) is as close to
+   instant as a keyframe gets. `both` is what holds a character at zero through its delay. */
 @keyframes hm-char {
-  0%           { font-size: 0; border-right-color: transparent; }
-  0.02%        { font-size: 1em; border-right-color: var(--accent); }
-  0.05%        { font-size: 1em; border-right-color: var(--accent); }
-  0.07%, 100%  { font-size: 1em; border-right-color: transparent; }
+  0%          { font-size: 0; }
+  0.02%, 100% { font-size: 100%; }
+}
+
+/* Zero-width, so it sits between two characters without moving either. It comes up with the
+   first character and goes out with the send, both on the scene's clock rather than any
+   character's, so no message length can drag it out of step. */
+.hm-caret {
+  display: inline-block;
+  width: 0;
+  border-left: 1.5px solid var(--accent);
+  /* Sized off the line rather than the glyphs, so it is a caret and not an underscore. */
+  height: 1.05em;
+  vertical-align: -0.2em;
+  animation: hm-caret var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+}
+@keyframes hm-caret {
+  0%, 0.4%   { opacity: 0; }
+  0.5%, 4.9% { opacity: 1; }
+  5.0%, 100% { opacity: 0; }
 }
 
 /* The send empties the field and the placeholder comes back, both in one frame. */
 @keyframes hm-typed-clear {
-  0%, 2.95%   { font-size: var(--fs-sm); }
-  3.0%, 100%  { font-size: 0; }
+  0%, 4.9%    { font-size: var(--fs-sm); }
+  5.0%, 100%  { font-size: 0; }
 }
 @keyframes hm-hint-return {
-  0%, 2.95%   { font-size: 0; }
-  3.0%, 100%  { font-size: var(--fs-sm); }
+  0%, 4.9%    { font-size: 0; }
+  5.0%, 100%  { font-size: var(--fs-sm); }
 }
 /* Only a field that types hides its placeholder. The two scenes the agent starts never had one
    to hide. */
@@ -12438,21 +12492,43 @@ html[data-theme="dark"] .booking-container iframe {
 /* The send. A quick press on the beat the message leaves the field, and nothing the rest of the
    lap: a button that pulses forever is a button nobody believes did anything. */
 @keyframes hm-send-press {
-  0%, 2.7%   { transform: scale(1); }
-  3.05%      { transform: scale(0.82); }
-  3.5%, 100% { transform: scale(1); }
+  0%, 4.7%   { transform: scale(1); }
+  4.95%      { transform: scale(0.82); }
+  5.5%, 100% { transform: scale(1); }
 }
 .hm-scene:has(.hm-typed) .hm-send {
   animation: hm-send-press var(--hm-lap) ease-out infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold));
 }
 
-/* The line under the confirm buttons. Not a bubble: it is the app telling you what will not
-   happen, which is the same register as the micro line under the hero button. */
-.hm-scene-note {
-  font-size: var(--fs-xs);
-  color: var(--text-muted);
-  padding-left: 2px;
+/* ---- What the scene is showing, under the phone ----
+   Three of the seven used to carry their explanation inside the thread, as a line under the
+   buttons. It was in the wrong place twice over: no chat app writes captions to you, so it read
+   as the agent narrating itself, and the four scenes without one had nothing saying what they
+   were for. Out here every scene gets one line, the phone holds only chat, and the caption is
+   free to say what the reader is actually being shown rather than what a bubble could plausibly
+   have said.
+
+   Same lap and the same --s as the scene it belongs to, off the clock on .hm-stage, so a caption
+   cannot drift out of step with the phone above it. All seven share one grid cell for the same
+   reason the scenes do: the block is as tall as the longest and never resizes mid-cycle. */
+.hm-caps {
+  display: grid;
+  width: 100%;
+  max-width: 376px;
+  margin-top: 20px;
+}
+.hm-cap {
+  grid-area: 1 / 1;
+  align-self: start;
+  margin: 0;
+  text-align: center;
+  text-wrap: pretty;
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  animation: hm-scene var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
 }
 
 /* ---- The attached keyboard, the way a chat app actually does it ----
@@ -12462,9 +12538,10 @@ html[data-theme="dark"] .booking-container iframe {
    something the app is offering you. This whole section of the site turns on the second reading,
    because the claim is that the agent proposes and waits.
 
-   .hm-turn is the message and its keyboard as one object, so the keyboard takes the bubble's
-   width (or the bubble takes the keyboard's, whichever is wider, which is what the chat app does
-   too) and the pair arrives on one animation instead of two. */
+   .hm-turn is the message and everything attached to it as one object: the bubble, the keyboard
+   if it has one, and the time. The keyboard takes the bubble's width (or the bubble takes the
+   keyboard's, whichever is wider, which is what the chat app does too) and the whole thing
+   arrives on one animation instead of three. */
 .hm-turn {
   display: grid;
   gap: 3px;
@@ -12472,6 +12549,41 @@ html[data-theme="dark"] .booking-container iframe {
   max-width: 92%;
 }
 .hm-turn .hm-bubble { max-width: none; width: 100%; }
+.hm-turn--out { align-self: flex-end; }
+
+/* The time, OUTSIDE the bubble and under it. Inside, trailing the last line, is Telegram's
+   arrangement and it costs the bubble something: the text has to leave a hole for it, so a
+   short message reserves room for a timestamp and a long one wraps early to avoid it. Out here
+   it is what it actually is, a note about the message rather than part of what was said, and
+   the bubble goes back to being the width of its words. */
+.hm-turn > time {
+  font-size: var(--fs-3xs);
+  color: var(--text-muted);
+  padding: 0 4px;
+  margin-top: 1px;
+}
+.hm-turn--out > time { text-align: right; }
+
+/* The drafted reply, inside the one card the app sends: who wrote, what they wanted, and then
+   the words that would go out, set apart so nobody mistakes the draft for the summary. One
+   message, not two, because that is what arrives in the chat: a single card with three buttons
+   on it, and splitting it here would have shown a handover the app does not make. */
+.hm-draft {
+  margin-top: 10px;
+  padding-left: 11px;
+  border-left: 2px solid var(--accent);
+}
+/* A bold run and then plain words, because that is what a chat app can draw. Everything the
+   agent sends is markdown over a wire: **bold**, _italic_, and nothing else. Uppercase
+   letterspaced labels are a stylesheet's idea of a heading, and putting one inside a bubble
+   said the quiet part out loud, that this was a website drawing a chat rather than a chat. */
+.hm-draft-label {
+  display: block;
+  margin-bottom: 3px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+.hm-draft-label b { color: var(--text-primary); font-weight: 700; }
 
 .hm-pz--hero .hm-msg-btns {
   /* Two buttons or three, whatever the scene carries. */
@@ -12501,40 +12613,38 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* A message with a keyboard under it squares off its own bottom corners, because the two are one
-   object and a rounded edge between them would draw a line the chat app does not draw. */
-.hm-turn .hm-bubble { border-bottom-left-radius: 0; border-bottom-right-radius: 4px; }
+   object and a rounded edge between them would draw a line the chat app does not draw. Guarded
+   on :has, now that a turn wraps every message: one with only a timestamp under it is still a
+   plain bubble and keeps its own corners, and the outgoing ones keep the tail on the other
+   side. */
+.hm-turn:has(.hm-msg-btns) > .hm-bubble { border-bottom-left-radius: 0; border-bottom-right-radius: 4px; }
 
-/* The timestamp, set the way a thread sets it: inside the bubble, trailing the last line, and
-   small enough to be scenery. It is what makes four bubbles read as a conversation with a shape
-   rather than as four captions. */
-.hm-pz--hero .hm-mini-quote time,
-.hm-pz--hero .hm-bubble > time {
-  font-size: var(--fs-3xs);
-  color: var(--text-muted);
-  margin-left: 8px;
-  float: right;
-  position: relative;
-  top: 0.55em;
-}
-.hm-pz--hero .hm-bubble > time { display: block; float: none; text-align: right; top: 0; margin: 6px 0 0; }
+/* The mail card carries three lines in one bubble, so they need the spacing a chat app gives
+   consecutive lines of one message, and the summary the app sends in _italics_ keeps them. */
+.hm-pz--hero .hm-mini-quote + .hm-mini-quote { margin-top: 3px; }
+.hm-pz--hero .hm-mini-quote + .hm-mini-row { margin-top: 7px; }
+.hm-em { font-style: italic; font-size: var(--fs-sm); color: var(--text-secondary); }
 
 @media (prefers-reduced-motion: reduce) {
   /* One scene, still, and it is the first: the one that shows what the headline promises. The
      other two are the reason the phone moves, and with the movement gone they would stack three
      conversations on top of each other in the same grid cell. */
-  .hm-scene, .hm-in { animation: none; opacity: 1; transform: none; }
-  .hm-scene { display: none; }
-  .hm-scene:first-child { display: block; }
+  .hm-scene, .hm-in, .hm-fly, .hm-cap { animation: none; opacity: 1; transform: none; }
+  /* grid, not block. .hm-scene's own grid-template-rows is what holds the composer at the
+     bottom of the phone, and display:block threw it away, so the still frame put the message
+     box halfway up the screen. */
+  .hm-scene, .hm-cap { display: none; }
+  .hm-scene:first-child { display: grid; }
+  .hm-cap:first-child { display: block; }
   /* The dots were only ever there to be watched, and with the cycle stopped they would sit on
      top of the answer they are meant to turn into. */
   .hm-typing { display: none; }
-  /* The field holds the finished message rather than typing it, and the caret goes with the
-     movement it belonged to. */
-  /* The finished message sits in the field, and the placeholder it would have come back to is
-     not shown on top of it. */
-  .hm-typed { animation: none; font-size: var(--fs-sm); }
-  .hm-typed i { animation: none; font-size: 1em; border-right-color: transparent; }
-  .hm-typed + .hm-composer-hint { animation: none; font-size: 0; }
+  /* The still frame is the conversation AFTER it happened, so the field is empty and back on
+     its placeholder, which is where a chat app leaves it. Holding the typed words in the box as
+     well printed the same sentence twice, once as a sent bubble and once as a thing still
+     waiting to be sent. The caret goes with the movement it belonged to. */
+  .hm-typed { display: none; }
+  .hm-typed + .hm-composer-hint { animation: none; font-size: var(--fs-sm); }
   .hm-send { animation: none; }
 }
 

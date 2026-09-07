@@ -50,6 +50,11 @@ FONT_SIZE_OK = [
     # <i> per character and an untyped character sits at 0, which is what lets the field grow to
     # a second line only when the words actually reach one.
     (re.compile(r'^0$'), "collapsed, not sized"),
+    # 100% is the other half of that: the size the collapsed character comes BACK to, which is
+    # whatever its parent is. Written as a percentage rather than 1em on purpose, because a
+    # percentage says out loud what it is a percentage of and engines have disagreed about
+    # whether em in a font-size keyframe means the parent or the element itself.
+    (re.compile(r'^100%$'), "back to the parent's size, not a size of its own"),
 ]
 
 # A box-shadow may be a token, or one of these. The distinction that matters is

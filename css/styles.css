@@ -12208,11 +12208,13 @@ html[data-theme="dark"] .booking-container iframe {
      one typo away from two scenes on screen at once. The keyframe percentages ARE tied to the
      count, though (one scene is 100/7 = 14.29% of a lap), so changing --hm-count means moving
      the four stops in @keyframes hm-scene and hm-in with it. */
-  /* 4.2s a scene. The entrance is the part that was too slow before, not the hold: content
-     settles in under a second now (a 0.33s fade plus at most two 0.28s beats), and what is left
-     of the slot is reading time. The longest scene is about twenty-five words, which wants three
-     seconds sitting still, and that is what this leaves. */
-  --hm-hold: 4.2s;
+  /* 6s a scene, and every individual movement inside it under a quarter second. Those pull in
+     opposite directions on purpose: the entrances were what felt slow, and the hold was what
+     felt short. A scene now plays its four beats in under two seconds and then sits still for
+     three and a half, which is what twenty-five words of chat actually needs.
+     --hm-beat is the gap between beats, and --d on an element says which beat it is. */
+  --hm-hold: 6s;
+  --hm-beat: 0.55s;
   --hm-count: 7;
   --hm-lap: calc(var(--hm-hold) * var(--hm-count));
 
@@ -12233,13 +12235,27 @@ html[data-theme="dark"] .booking-container iframe {
    holds 0 to the end of the lap, and the wrap has nothing left to jump. */
 @keyframes hm-scene {
   0%          { opacity: 0; }
-  1.4%, 11.4% { opacity: 1; }
-  13.4%, 100% { opacity: 0; }
+  0.5%, 12.6% { opacity: 1; }
+  13.6%, 100% { opacity: 0; }
 }
 @keyframes hm-in {
-  0%          { opacity: 0; transform: translateY(8px); }
-  3.2%, 11.4% { opacity: 1; transform: none; }
-  13.4%, 100% { opacity: 0; transform: none; }
+  0%          { opacity: 0; transform: translateY(6px); }
+  0.6%, 12.6% { opacity: 1; transform: none; }
+  13.6%, 100% { opacity: 0; transform: none; }
+}
+
+/* The three dots, which are the only thing here that leaves before its scene does. A reply that
+   appears the instant the question lands reads as a canned graphic; a beat of waiting is what
+   makes two bubbles read as one exchange. It ends on 0 like everything else, so it cannot flash
+   at the wrap either. */
+@keyframes hm-type {
+  0%          { opacity: 0; }
+  0.5%, 1.9%  { opacity: 1; }
+  2.5%, 100%  { opacity: 0; }
+}
+@keyframes hm-type-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30%           { opacity: 0.9; transform: translateY(-3px); }
 }
 
 .hm-scene {
@@ -12253,8 +12269,43 @@ html[data-theme="dark"] .booking-container iframe {
 /* --s is set once on the scene and inherits, so a bubble only has to say which beat it is. */
 .hm-in {
   animation: hm-in var(--hm-lap) linear infinite both;
-  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * 0.28s);
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
 }
+
+/* The waiting beat and the answer it turns into share one grid cell, bottom-left, so the answer
+   fades in over the dots and nothing below it moves. The alternative is collapsing the dots'
+   height as the bubble expands, which is a layout animation on every message in the hero, and
+   the reason threads on the web feel cheap. */
+/* width:100% matters. .hm-msg is a flex column with align-items:flex-start, so without it the
+   reply cell shrinks toward min-content and the longer messages wrap at about half the width
+   they should: "Watching for Priya, not / for that thread." set five words to a line. Full width
+   here, and justify-items:start so each item still takes only its own fit-content inside it. */
+.hm-reply { display: grid; justify-items: start; width: 100%; }
+.hm-reply > * { grid-area: 1 / 1; align-self: end; }
+
+.hm-type {
+  animation: hm-type var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+.hm-typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border-bottom-left-radius: 0;
+  box-shadow: var(--shadow-xs);
+}
+.hm-typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: hm-type-dot 1.1s ease-in-out infinite;
+}
+.hm-typing i:nth-child(2) { animation-delay: 0.15s; }
+.hm-typing i:nth-child(3) { animation-delay: 0.3s; }
 
 /* The line under the confirm buttons. Not a bubble: it is the app telling you what will not
    happen, which is the same register as the micro line under the hero button. */
@@ -12334,6 +12385,9 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-scene, .hm-in { animation: none; opacity: 1; transform: none; }
   .hm-scene { display: none; }
   .hm-scene:first-child { display: block; }
+  /* The dots were only ever there to be watched, and with the cycle stopped they would sit on
+     top of the answer they are meant to turn into. */
+  .hm-typing { display: none; }
 }
 
 /* ---- See it work: the recording's own section ---- */

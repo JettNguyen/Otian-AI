@@ -9,7 +9,7 @@
 
    js/marketplace.js calls it with what Firestore returned, which is the live store and the only
    authority: it alone can see the private items shared with a signed-in account, and it is what
-   a visitor ends up looking at. scripts/gen-marketplace.py calls it through Node with the public
+   a visitor ends up looking at. scripts/gen-marketplace.mjs calls it through Node with the public
    manifests in the Archie repo, and writes the result into skills-marketplace/browse/ as static
    HTML, because until 2026-09-07 the grid on that page was an empty <div> filled in by script
    and everything without JavaScript saw a catalog of 146 add-ons render as the words "No add-ons
@@ -19,7 +19,7 @@
    So the page now ships the public catalog in its markup and the script replaces it on load.
    Both paths have to produce the same card or the page visibly rewrites itself in front of
    somebody, which is why this file exists instead of a second copy of the renderer in Python.
-   scripts/check-marketplace.py fails when the shipped HTML and the manifests disagree.
+   `node scripts/gen-marketplace.mjs --check` fails when the two disagree.
 
    Extracted from js/marketplace.js on 2026-09-07, which is where all of it was written and where
    the page wiring still lives. Same reason js/catalog.js was extracted before it.

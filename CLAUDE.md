@@ -129,6 +129,24 @@ reason.**
   which looks exactly like the site is broken rather than cached, and a hard refresh does not
   fix it because the cache is at the CDN edge, not in the browser. Changing the query string
   is the only thing that reliably busts it. One scripted find-and-replace across every page.
+- **Two files on this site are generated, and both have a `--check` mode. Run them before you
+  commit.** There is still no build step: these write into the repo, the result is committed,
+  and the check is what stops the committed copy drifting from what it was made from.
+  - `python3 scripts/gen-discovery.py` writes `sitemap.xml`, `robots.txt` and `llms.txt` from
+    the pages that exist, skipping the signed-in half, the noindex pages and the redirect
+    stubs. Adding, renaming or retiring a page means running it. `llms.txt` is the one to be
+    careful with: it is quoted back to people by machines that will not check it, so every
+    claim in it is TRUST.md's approved wording or a FACTS.md figure, and it is checked by
+    `check-facts.py` like any served file.
+  - `node scripts/gen-marketplace.mjs` writes the public add-on catalog into
+    `skills-marketplace/browse/` as static HTML. Until 2026-09-07 that grid was an empty div a
+    script filled from Firestore, so everything that does not run JavaScript (every crawler,
+    every answer engine, every link preview) saw the site's largest asset as the words "No
+    add-ons match your filters." Firestore is still the authority and the script still
+    replaces the grid on load; the markup is a snapshot of the public shelf. **It renders
+    through `js/addon-card.js`, the same module the browser runs**, so there is one card
+    builder and not two. Run it after the Archie catalog moves, in the push order FACTS.md
+    already sets out for the count: Archie first, then here.
 
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is

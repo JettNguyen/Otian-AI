@@ -18,7 +18,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js";
 /* The card renderer and the manifest shape live in their own module so that
-   scripts/gen-marketplace.py can call the very same code through Node and write the
+   scripts/gen-marketplace.mjs can call the very same code through Node and write the
    public catalog into the page as static HTML. Before that the grid was an empty div,
    and everything that does not run JavaScript saw 146 add-ons as "No add-ons match your
    filters." See the header of js/addon-card.js. */

@@ -173,7 +173,13 @@ the figure here only after reading it on the source page, with the date.
 rebuild until 2026-08-31 (**151 verified add-ons, 40 apps and services, 7 AI companies, 5 chat
 apps**, all four under the whole-directory convention that ended 2026-09-01); the band came out with the coverage-grid rebuild, and the only count on the homepage now
 is the one the works-with band's note prints, **48**.
-`skills-marketplace/browse/` prints **135 verified add-ons, 5 chat apps, 7 AI companies**. "Verified" is backed by the marketplace review gate (the for-developers
+`skills-marketplace/browse/` prints **146 verified add-ons, 5 chat apps, 7 AI companies**, and
+since 2026-09-07 it also **ships all 146 cards in its markup**, written by
+`node scripts/gen-marketplace.mjs` out of the same manifests this row is counted from. So the
+catalog moving now moves the page's HTML as well as its stat row, and the generator's `--check`
+mode fails when it has not. The homepage's two prose counts ("there are 146 today", "six of a
+hundred and forty-six") are **not** in the markup shape `check-facts.py` reads, so nothing checks
+them; both were stale from 2026-09-02 until 2026-09-07. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
 connections band's note counts **all 48** names the band shows.
 

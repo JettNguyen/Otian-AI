@@ -11932,3 +11932,109 @@ html[data-theme="dark"] .booking-container iframe {
     margin-top: 40px;
   }
 }
+
+/* ==============================
+   45. Homepage: the price band
+   ============================== */
+
+/* Three thin cards under the setup band on index.html, added 2026-09-07. The heading above
+   them has promised "$30 a month" for as long as the section has existed, and the page never
+   printed it: the number lived one click away on archie/pricing/, which is a click a reader
+   should not have to spend to learn what a thing costs.
+
+   Deliberately NOT .plan-card. Those carry nine-item lists and a button each, and three of
+   them is a pricing page, which this is not allowed to become. These share the type scale and
+   the lead-card border so the two pages read as one system, and nothing else: no lists, no
+   per-card CTA, one paragraph apiece. If a fourth line ever needs to go in a card here, it
+   belongs on archie/pricing/ instead. */
+.hm-plans {
+  display: grid;
+  /* minmax(0, 1fr) for the reason the plan grid gives: a bare 1fr will not shrink below its
+     contents and pushes the page sideways on a narrow phone. */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+  margin-top: 44px;
+  text-align: left;
+}
+
+.hm-plan {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px;
+}
+
+/* Same call as .plan-card--lead: a border, not a "most popular" badge. That is a sales count
+   we do not have, and inventing one is the exact move the Standard's no-dark-patterns rule
+   exists to stop. */
+.hm-plan--lead { border-color: var(--accent-line); }
+
+.hm-plan-label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--c-blue-ink);
+  margin-bottom: 10px;
+}
+
+/* One size whether the amount is a price or the word "Free", and nowrap, so the three
+   paragraphs below start at the same height. Cards that fall out of step by half a line read
+   as three unrelated boxes. */
+.hm-plan-price {
+  font-size: clamp(var(--fs-7xl), 2.1vw, 2.15rem);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  margin-bottom: 12px;
+}
+
+.hm-plan-price span {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 5px;
+}
+
+.hm-plan p {
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.hm-plan-alt {
+  margin-top: 10px !important;
+  padding-top: 10px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
+/* The AI bill. Its own line under the cards rather than fine print inside one, because it is
+   a real second cost that does not come to us, and the Standard puts a third-party cost before
+   the decision point rather than after it. Centred to the band, at the measure the rest of the
+   section's prose uses. */
+.hm-plan-note {
+  max-width: 62ch;
+  margin: 26px auto 0;
+  font-size: var(--fs-sm);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .hm-plans { grid-template-columns: 1fr; gap: 14px; }
+  /* Stacked, the lead card is no longer in the middle, so the border is doing nothing but
+     making one card look different for no reason a phone reader can see. The order is what
+     carries the emphasis instead: the plan people buy is already second. */
+  .hm-plan { padding: 22px 20px; }
+  /* The clamp's own floor, named: --fs-7xl is 1.75rem and the clamp bottoms out at 1.7rem,
+     so on a phone the three prices are already at this size. Stating it keeps the rule on
+     the type ladder instead of one rung off it for a 0.05rem nobody can see. */
+  .hm-plan-price { font-size: var(--fs-7xl); }
+}

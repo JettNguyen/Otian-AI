@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260904-4" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-1" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -183,7 +183,7 @@
       <div class="hm-hero-inner">
         <span class="section-label">Otian AI &middot; Meet Archie</span>
         <h1>Nothing to figure out. No code. <em>Your time back</em>, starting today.</h1>
-        <p class="hm-lede"><strong>Archie is a desktop app that runs your own AI agent.</strong> An add-on is one job you hand it, and there are 135 today. Below is what they take off you, and where the rows are still blank.</p>
+        <p class="hm-lede"><strong>Archie is a desktop app that runs your own AI agent.</strong> An add-on is one job you hand it, and there are 146 today. Below is what they take off you, and where the rows are still blank.</p>
         <div class="hm-actions">
           <a href="questionnaire/" class="btn btn-primary btn-lg">Get My Agent Started</a>
         </div>
@@ -199,7 +199,14 @@
               <!-- No src on the <video> and no src on the <source>s on purpose, only data-src: the
                    browser fetches the poster and nothing else. Until js/demo-player.js picks ONE of
                    the candidates below and starts it (when the hero scrolls into view), the frame
-                   shows that poster, which is the recording's own opening frame.
+                   shows that poster.
+
+               Until 2026-09-07 the poster was the recording's own opening frame, which is
+               Archie's welcome screen: the still every crawler and link preview got was our
+               own marketing copy rather than the product doing anything. It is now the moment
+               at 18 seconds where the agent hands back the week it assembled off a read-only
+               calendar, and js/demo-player.js starts the first play there so the visitor does
+               not watch the finished work cut back to a greeting.
 
                    The poster is what anything that does not run our JavaScript gets, and that is the
                    whole reason it is here. Without it the frame is an empty transparent box on a
@@ -228,7 +235,8 @@
                    Archie card) and then loops. Same file /archie/see-it-work/ plays, so going there
                    next costs nothing. -->
               <video class="demo-player-video" preload="none"
-                     poster="assets/archie-demo-light-poster.jpg"
+                     poster="assets/archie-demo-light-poster-week.jpg"
+                     data-start="18"
                      muted loop playsinline disablepictureinpicture
                      aria-label="A silent, looping screen recording of Archie: opening the app, pointing a new agent called Archibald at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
                 <source data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1648" data-fps="60" />
@@ -425,7 +433,7 @@
           </li>
         </ul>
 
-        <p class="cover-more fade-up">Six of a hundred and fifty-one, and they were picked for having nothing to do with each other. The calendar, the school mail, what is arriving in the post, the birthdays, the prescriptions, dinner and the trip are the same shape: small, spread out, and yours to stop doing.</p>
+        <p class="cover-more fade-up">Six of a hundred and forty-six, and they were picked for having nothing to do with each other. The calendar, the school mail, what is arriving in the post, the birthdays, the prescriptions, dinner and the trip are the same shape: small, spread out, and yours to stop doing.</p>
 
         <p class="cover-blank-head fade-up">And the rows that are still blank.</p>
         <ul class="cover-grid cover-grid--blank fade-up">
@@ -580,6 +588,48 @@
           <div class="hm-need hm-need--done"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>That&rsquo;s it</div>
         </div>
         <p class="calm-note calm-note--center fade-up"><a href="how-it-works/#what-you-need">See the full list &rarr;</a></p>
+
+        <!-- The price, on the page that promises it.
+             ==============================================================
+             This heading has said "Then $30 a month" since the section existed, and until
+             2026-09-07 the page never showed a price: a reader who wanted to know what they
+             would pay had to leave for archie/pricing/. A competitor teardown that day put
+             four tiers, a billing toggle and an enterprise band on their own homepage, and
+             the honest reading of it was not that they had a better page, it was that ours
+             asked for a decision and withheld the number.
+
+             Three cards, deliberately thin. This is not a second pricing page and must not
+             grow into one: each card carries the price, the year option, and the one thing
+             that separates it from the card beside it. Everything a purchase actually turns
+             on (what the trial does and does not reach, the proxy disclosure that has to sit
+             beside the free credits, cancellation) lives on archie/pricing/ and stays there,
+             because splitting a disclosure across two pages is how the half a reader sees
+             becomes the half that flatters us.
+
+             The AI bill gets its own line below the cards rather than a footnote inside one.
+             It is a real second cost that does not come to us, the Standard requires it
+             stated before the decision point rather than after, and a reader who meets it
+             here should leave with the measured range rather than an estimate we made up. -->
+        <div class="hm-plans fade-up">
+          <article class="hm-plan">
+            <span class="hm-plan-label">Free to try</span>
+            <div class="hm-plan-price hm-plan-price--words">Free<span>no card</span></div>
+            <p>14 days, or until the starter credits run out. One agent, and nearly the whole app.</p>
+          </article>
+          <article class="hm-plan hm-plan--lead">
+            <span class="hm-plan-label">Archie</span>
+            <div class="hm-plan-price">$30<span>a month</span></div>
+            <p>Or $299 a year. Up to 10 agents, and every one of the 146 add-ons.</p>
+            <p class="hm-plan-alt">Or <a href="archie/pricing/#ai-included">$59 with the AI included</a>, if you would rather not open an AI account.</p>
+          </article>
+          <article class="hm-plan">
+            <span class="hm-plan-label">Archie for Business</span>
+            <div class="hm-plan-price">$99<span>a month</span></div>
+            <p>Or $999 a year. Up to 50 agents, and any of them can answer your whole team.</p>
+          </article>
+        </div>
+        <p class="hm-plan-note fade-up">On the $30 plan the AI is a second bill, and it does not come to us: your AI company charges your account at their price, and we add nothing to it. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">What that costs, measured&nbsp;&rarr;</a></p>
+        <p class="calm-note calm-note--center fade-up"><a href="archie/pricing/">Full pricing, and how the trials work &rarr;</a></p>
       </div>
     </section>
 

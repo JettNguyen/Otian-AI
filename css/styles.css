@@ -12490,10 +12490,26 @@ html[data-theme="dark"] .booking-container iframe {
    so a third of them appeared at a wrong smaller size and snapped to the right one a frame
    later. Thirty characters a second doing it reads as the text strobing while it types. A step
    function has no in-between value to draw: the character is absent, and then it is there.
-   `both` is what holds it absent through its delay. */
+   `both` is what holds it absent through its delay.
+
+   AND IT GOES BACK TO NOTHING WHEN THE MESSAGE IS SENT, which is the third bug and the one that
+   broke every lap after the first. Each character runs its own copy of the lap, offset by its
+   delay, and a delay applies once: after that the copy repeats forever on its own phase. Holding
+   full size from 0.015% all the way to 100% meant a character was full size at the instant its
+   copy wrapped, and the field's own clear returns to full size at the lap boundary, so lap two
+   opened with the whole message already sitting in the box. Then each character in turn wrapped
+   to zero for ten milliseconds and back: a wave of single-letter blinks running along a sentence
+   that was never typed. Sampling laps one and two gave 0,2,12,32,55 against 55,55,54,55.
+
+   The stop is at the send, mirroring the field's clear below, which is also what it means: a
+   character is on screen from the moment it is typed until the moment it is sent. The field is
+   collapsed by then, so the characters going out one at a time behind it cannot be seen, and all
+   that has to be true is that every one of them is at zero before its copy wraps. */
 @keyframes hm-char {
-  0%           { font-size: 0; animation-timing-function: steps(1, end); }
-  0.015%, 100% { font-size: 100%; }
+  0%          { font-size: 0; animation-timing-function: steps(1, end); }
+  0.015%      { font-size: 100%; }
+  3.7%        { font-size: 100%; animation-timing-function: steps(1, end); }
+  3.75%, 100% { font-size: 0; }
 }
 
 /* Zero-width, so it sits between two characters without moving either. It comes up with the

@@ -6729,49 +6729,65 @@ html[data-theme="dark"] .booking-container iframe {
    and we have none to count: /testimonials/ says on its own page that we are still collecting
    reviews. A recommendation is a fact about us, it is true, and a reader can hold us to it.
 
-   GREEN, NOT THE ACCENT. The accent is on every call to action on this site, so a flag wearing
-   it read as one more button rather than as a mark on the column. --c-green-fill is the app's
-   own solid green, the one on its Start switch, and it carries white here the way it does
-   there: one meaning colour used for one meaning in both places. Neither value inverts in dark
-   mode (see the note beside the tokens), and white on it measures 4.9:1, which check-contrast
-   cannot see from here because the pairing is written on the rule rather than in :root.
+   THE ACCENT, AND NOT A MEANING COLOUR. This was green for a day, on the reasoning that the
+   accent is on every call to action here and a flag wearing it would read as one more button.
+   Jett's call was the accent and it is the better one: green on this site means "succeeded",
+   which the Finished pill in the hero says one screen up, and a column somebody is choosing
+   between is not a status. The accent is the colour this site already uses to mean "this is
+   the one", so the recommendation is made in our own voice instead of borrowed from a state.
+
+   What keeps the flag from reading as a button is everything about it except the colour: micro
+   type, uppercase, letter-spaced, no elevation, and sitting ON the card's top border, where
+   nothing on this site puts a control. Its ink is --text-on-accent, the dark ink every
+   accent-coloured surface here carries, and not white: white on #E08A5B measures 2.4:1 and is
+   unreadable at this size, while the dark ink measures 5.8:1 in light and more in dark.
+   check-contrast cannot see either pairing from here, because it is written on the rule rather
+   than in :root.
+
+   Both selectors are doubled up (.hm-plan.hm-plan--lead) because they have to win against a
+   rule six thousand lines further down: the homepage's .hm-plan sets its own background, border
+   shorthand and shadow, and at equal specificity the later rule takes all three. The card that
+   was supposed to be the flagged one was a white card with an orange pill floating over it.
 
    The flag sits ON the top border rather than inside the card, which is what makes it read as a
    label attached to the column instead of a fourth line of copy inside it. Nothing inside the
    card moves to make room: the three columns start their labels at the same height, and a lead
    card that pushed its own label down would put the three out of step by half a line, which is
    what makes a row of cards read as three unrelated boxes. */
-.plan-card--lead,
-.hm-plan--lead {
+.plan-card.plan-card--lead,
+.hm-plan.hm-plan--lead {
   position: relative;
   /* THE WHOLE CARD, not just its edge. A border and a shadow say "this one is different"; a
      ground says "this one is the answer", and it is the only thing in a row of three that a
-     reader takes in before reading a word. It is the flag's own green, carried down into the
+     reader takes in before reading a word. It is the flag's own colour, carried down into the
      card at a fraction of itself, so the mark and the column it marks are one object rather
      than a pill sitting on an unrelated box.
 
      Mixed against --bg-card rather than set as an rgba wash, so it lands correctly in both
-     themes off one declaration: on cream it is a card that has gone very slightly green, and on
-     the dark page it is the dark card ground moved the same distance in the same direction. A
+     themes off one declaration: on cream it is a card that has warmed a shade towards the
+     accent, and on the dark page it is the dark card ground moved the same distance in the same
+     direction. A
      flat rgba would have been a pale film over the dark theme's card and would have read as a
      different material rather than the same card in another colour.
 
      13%, walked up until the column was the thing a reader's eye lands on first in a row of
-     three, and stopped before the card started reading as a status rather than a choice (a
-     green panel means "succeeded" everywhere else on this site, including the pill in the hero
-     one screen up). 6% was the first try and it was too polite to be seen at a glance, which
-     is the only job this colour has. Body text on it measures 12.4:1 in light and 11.1:1 in
-     dark, so nothing inside the card had to move with the ground. */
-  background: color-mix(in srgb, var(--c-green) 13%, var(--bg-card));
-  border-color: color-mix(in srgb, var(--c-green) 40%, var(--border));
+     three, and stopped before the ground was strong enough to fight the buttons standing on it:
+     the accent is also what the call to action inside this card is painted with, and a tint
+     that got close to the button would have flattened the one thing the card is asking the
+     reader to do. 6% was the first try and it was too polite to be seen at a glance, which is
+     the only job this colour has. Body text on it measures 9.2:1 in light and 9.7:1 in dark and
+     the muted line under it 5.9:1 and 4.9:1, so nothing inside the card had to move with the
+     ground. */
+  background: color-mix(in srgb, var(--accent) 13%, var(--bg-card));
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
 }
 /* A rung of elevation over its neighbours in each family's own vocabulary, which is the cheapest
    way to say which column the page is recommending without writing a sentence claiming anybody
    else picked it. Separate rules because the two families sit at different heights to begin
    with: the pricing table's cards are already lifted and the homepage's three are barely off
    the band. */
-.plan-card--lead { box-shadow: var(--lift-lg); }
-.hm-plan--lead { box-shadow: var(--lift-md); }
+.plan-card.plan-card--lead { box-shadow: var(--lift-lg); }
+.hm-plan.hm-plan--lead { box-shadow: var(--lift-md); }
 .plan-flag {
   position: absolute;
   top: 0;
@@ -6779,8 +6795,8 @@ html[data-theme="dark"] .booking-container iframe {
   transform: translate(-50%, -50%);
   padding: 3px 12px;
   border-radius: 999px;
-  background: var(--c-green-fill);
-  color: #FFFFFF;
+  background: var(--accent);
+  color: var(--text-on-accent);
   font-size: var(--fs-2xs);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -11530,8 +11546,8 @@ html[data-theme="dark"] .booking-container iframe {
    five minutes beats a 60 seconds we visibly miss on first run. The chip at the foot of each card
    carries who spends the time instead, which is checkable today and is the thing the minutes were
    standing in for. Three colours, three answers: you (muted), the AI company (gold, because it is
-   the one step that is not ours to hurry), and Archie itself (green, the same green as the flag on
-   the plan and the Finished pill in the hero, all three meaning the same thing). */
+   the one step that is not ours to hurry), and Archie itself (green, the same green as the Finished
+   pill in the hero, both meaning the same thing: it is done and nobody had to do it). */
 .hm-steps {
   list-style: none;
   max-width: 1120px;
@@ -11561,18 +11577,22 @@ html[data-theme="dark"] .booking-container iframe {
    anybody looked at it. So the highlight runs on a loop instead: a light travels the track, disc
    to disc, in the order the steps are read, and there is always something in motion on the page.
 
-   ONE KEYFRAME FOR ALL FIVE, and the shape of it is what makes that possible. Every step runs the
-   same animation on the same 7s lap and differs only by an animation-delay of --i lap-fifths, so
-   the light passes each disc at its own moment. That only works because the keyframe returns to
-   where it started: an animation-delay applies once, so an infinite animation repeats forever on
-   its own phase, and its state at 100% is the state the element is in while the light is
-   somewhere else. A "fill up as the light passes and stay filled" version cannot be written this
-   way at all, because every step would have to switch off at the same instant and that instant is
-   a different phase for each of them.
+   ONE KEYFRAME PER STEP, and that is forced rather than chosen. A shared keyframe with five
+   delays can only be offset in time, so every step would light for the same length and go out at
+   the same phase; these windows differ in length (the fill takes each step's own share of the
+   fifteen minutes) and they go out in a deliberate order on the way back. All nine of them are
+   generated from one list, the same cumulative minutes the clock counts through, so the drawing
+   and the numbers cannot drift apart.
+
+   THE LAP IS TWELVE SECONDS AND IT IS NOT ALL FORWARD. The run owns the first 80% of it, the
+   finished state holds for 10% so a reader who arrives late sees a completed track rather than
+   only a moving one, and the last 10% is the rewind. Nothing in the loop cuts: the lit discs go
+   out one at a time from the far end, each segment retracts towards the disc it started from, and
+   at 100% every one of them is exactly where it was at 0%.
 
    No script and no scroll dependency, so this is running before anything has been observed, and
    it is off entirely under prefers-reduced-motion (below), where the track is a static diagram. */
-.hm-steps { --st-lap: 10s; }
+.hm-steps { --st-lap: 12s; }
 
 /* The clock over the track.
 
@@ -11580,17 +11600,25 @@ html[data-theme="dark"] .booking-container iframe {
    five takes, which is the opposite of what it means, and there is no wording that fixes that
    while the number sits inside the card.
 
-   It counts by swapping, which is the only way to animate a number without a script: the five
-   figures sit in one cell and each is shown for the fifth of the lap that its own step is lit, so
-   the reading climbs with the light and lands on the total. No fill mode on the animation, and
-   this is the whole trick: with `both` the backwards fill would paint every figure's 0% state
-   during its delay and all five would be stacked on top of each other at load. Unset, the base
-   rule (opacity 0) holds until each figure's turn arrives.
+   It counts by swapping, which is the only way to animate a number without a script: sixteen
+   figures sit in one grid cell and each is shown for its own slice of the lap, so the reading
+   climbs while the track fills and lands on the total.
 
-   The keyframe hides at 100% and shows at 0%, so the wrap from the last figure back to the first
-   is the jump it should be rather than a fade through both. */
+   SIXTEEN KEYFRAMES, one per reading, and the reason is the countdown. Every figure is now on
+   screen twice a lap: once on the way up, at a sixteenth of the forward pass, and once on the way
+   back, for a sixteenth of the rewind. Two windows of different lengths at unrelated positions
+   cannot be written as one keyframe with a delay, and the alternative (a second row of sixteen
+   figures for the countdown) would have put every reading in the markup twice, which is exactly
+   what FACTS.md says not to do with these numbers: they live in one place so that measuring the
+   install for real is a small edit. The keyframes hold no numbers, only timing, and they are
+   generated from the same list the track is.
+
+   The last reading is the one that holds. 15 arrives at 75% and stays through the second the
+   track spends complete, then the countdown runs it back to 0 at seventy-five thousandths of a
+   second a figure, so the rewind reads as a rewind and not as a clock that jumped. Every switch is a
+   hundredth of a percent, which is under a frame: these are digits changing, not crossfading. */
 .hm-eta {
-  --st-lap: 10s;
+  --st-lap: 12s;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -11625,13 +11653,132 @@ html[data-theme="dark"] .booking-container iframe {
   grid-area: 1 / 1;
   font-style: normal;
   opacity: 0;
-  animation: hm-eta-tick var(--st-lap) linear infinite;
-  animation-delay: calc(var(--i) * var(--st-lap) / 16);
+  animation: var(--st-lap) linear infinite both;
 }
-@keyframes hm-eta-tick {
-  0%          { opacity: 1; }
-  6.24%       { opacity: 1; }
-  6.25%, 100% { opacity: 0; }
+.hm-eta-clock i:nth-child(1)    { animation-name: hm-eta-0; }
+.hm-eta-clock i:nth-child(2)    { animation-name: hm-eta-1; }
+.hm-eta-clock i:nth-child(3)    { animation-name: hm-eta-2; }
+.hm-eta-clock i:nth-child(4)    { animation-name: hm-eta-3; }
+.hm-eta-clock i:nth-child(5)    { animation-name: hm-eta-4; }
+.hm-eta-clock i:nth-child(6)    { animation-name: hm-eta-5; }
+.hm-eta-clock i:nth-child(7)    { animation-name: hm-eta-6; }
+.hm-eta-clock i:nth-child(8)    { animation-name: hm-eta-7; }
+.hm-eta-clock i:nth-child(9)    { animation-name: hm-eta-8; }
+.hm-eta-clock i:nth-child(10)   { animation-name: hm-eta-9; }
+.hm-eta-clock i:nth-child(11)   { animation-name: hm-eta-10; }
+.hm-eta-clock i:nth-child(12)   { animation-name: hm-eta-11; }
+.hm-eta-clock i:nth-child(13)   { animation-name: hm-eta-12; }
+.hm-eta-clock i:nth-child(14)   { animation-name: hm-eta-13; }
+.hm-eta-clock i:nth-child(15)   { animation-name: hm-eta-14; }
+.hm-eta-clock i:nth-child(16)   { animation-name: hm-eta-15; }
+
+@keyframes hm-eta-0 {
+  0%, 4.99%           { opacity: 1; }
+  5%, 99.365%         { opacity: 0; }
+  99.375%, 100%       { opacity: 1; }
+}
+@keyframes hm-eta-1 {
+  0%, 4.99%           { opacity: 0; }
+  5%, 9.99%           { opacity: 1; }
+  10%, 98.74%         { opacity: 0; }
+  98.75%, 99.365%     { opacity: 1; }
+  99.375%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-2 {
+  0%, 9.99%           { opacity: 0; }
+  10%, 14.99%         { opacity: 1; }
+  15%, 98.115%        { opacity: 0; }
+  98.125%, 98.74%     { opacity: 1; }
+  98.75%, 100%        { opacity: 0; }
+}
+@keyframes hm-eta-3 {
+  0%, 14.99%          { opacity: 0; }
+  15%, 19.99%         { opacity: 1; }
+  20%, 97.49%         { opacity: 0; }
+  97.5%, 98.115%      { opacity: 1; }
+  98.125%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-4 {
+  0%, 19.99%          { opacity: 0; }
+  20%, 24.99%         { opacity: 1; }
+  25%, 96.865%        { opacity: 0; }
+  96.875%, 97.49%     { opacity: 1; }
+  97.5%, 100%         { opacity: 0; }
+}
+@keyframes hm-eta-5 {
+  0%, 24.99%          { opacity: 0; }
+  25%, 29.99%         { opacity: 1; }
+  30%, 96.24%         { opacity: 0; }
+  96.25%, 96.865%     { opacity: 1; }
+  96.875%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-6 {
+  0%, 29.99%          { opacity: 0; }
+  30%, 34.99%         { opacity: 1; }
+  35%, 95.615%        { opacity: 0; }
+  95.625%, 96.24%     { opacity: 1; }
+  96.25%, 100%        { opacity: 0; }
+}
+@keyframes hm-eta-7 {
+  0%, 34.99%          { opacity: 0; }
+  35%, 39.99%         { opacity: 1; }
+  40%, 94.99%         { opacity: 0; }
+  95%, 95.615%        { opacity: 1; }
+  95.625%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-8 {
+  0%, 39.99%          { opacity: 0; }
+  40%, 44.99%         { opacity: 1; }
+  45%, 94.365%        { opacity: 0; }
+  94.375%, 94.99%     { opacity: 1; }
+  95%, 100%           { opacity: 0; }
+}
+@keyframes hm-eta-9 {
+  0%, 44.99%          { opacity: 0; }
+  45%, 49.99%         { opacity: 1; }
+  50%, 93.74%         { opacity: 0; }
+  93.75%, 94.365%     { opacity: 1; }
+  94.375%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-10 {
+  0%, 49.99%          { opacity: 0; }
+  50%, 54.99%         { opacity: 1; }
+  55%, 93.115%        { opacity: 0; }
+  93.125%, 93.74%     { opacity: 1; }
+  93.75%, 100%        { opacity: 0; }
+}
+@keyframes hm-eta-11 {
+  0%, 54.99%          { opacity: 0; }
+  55%, 59.99%         { opacity: 1; }
+  60%, 92.49%         { opacity: 0; }
+  92.5%, 93.115%      { opacity: 1; }
+  93.125%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-12 {
+  0%, 59.99%          { opacity: 0; }
+  60%, 64.99%         { opacity: 1; }
+  65%, 91.865%        { opacity: 0; }
+  91.875%, 92.49%     { opacity: 1; }
+  92.5%, 100%         { opacity: 0; }
+}
+@keyframes hm-eta-13 {
+  0%, 64.99%          { opacity: 0; }
+  65%, 69.99%         { opacity: 1; }
+  70%, 91.24%         { opacity: 0; }
+  91.25%, 91.865%     { opacity: 1; }
+  91.875%, 100%       { opacity: 0; }
+}
+@keyframes hm-eta-14 {
+  0%, 69.99%          { opacity: 0; }
+  70%, 74.99%         { opacity: 1; }
+  75%, 90.615%        { opacity: 0; }
+  90.625%, 91.24%     { opacity: 1; }
+  91.25%, 100%        { opacity: 0; }
+}
+@keyframes hm-eta-15 {
+  0%, 74.99%          { opacity: 0; }
+  75%, 90.615%        { opacity: 1; }
+  90.625%, 100%       { opacity: 0; }
 }
 /* THE TRACK IS THE PROGRESS BAR, AND IT RUNS AT THE SPEED THE ESTIMATE SAYS.
 
@@ -11647,8 +11794,13 @@ html[data-theme="dark"] .booking-container iframe {
    well as in start. Nine of them, generated from the same list of step-start minutes the clock
    counts through, so the drawing and the numbers cannot drift apart.
 
-   Everything holds to 97% and is back to nothing at 100%. That is the reset, it is the only jump
-   in the loop, and it lasts three tenths of a second. */
+   IT REWINDS RATHER THAN RESETTING. Every segment used to drop to nothing at the same instant,
+   which is the one moment in the loop that looked like a bug: five lights and four bars vanishing
+   together reads as a page that has stopped rather than a run that has finished. Now they come
+   back in reverse, last first, three tenths of a second each: the fourth segment retracts towards
+   step four while step five's disc goes dark, then the third, then the second, then the first, and
+   the clock counts down over the top of them. Each segment shrinks from its far end towards the
+   disc that fed it, which is what transform-origin already does for the fill, run backwards. */
 .hm-step-n { animation: var(--st-lap) linear infinite both; }
 .hm-step:nth-child(1) .hm-step-n { animation-name: hm-lit-1; }
 .hm-step:nth-child(2) .hm-step-n { animation-name: hm-lit-2; }
@@ -11656,28 +11808,27 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-step:nth-child(4) .hm-step-n { animation-name: hm-lit-4; }
 .hm-step:nth-child(5) .hm-step-n { animation-name: hm-lit-5; }
 @keyframes hm-lit-1 {
-  0%, 97.0%      { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 100%        { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
 }
 @keyframes hm-lit-2 {
-  0%, 6.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  7.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 5.333%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  6.333%, 97.5%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  98.1%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-3 {
-  0%, 26.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  27.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 21.333%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  22.333%, 95%    { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  95.6%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-4 {
-  0%, 60.0%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  61.2%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 48%         { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  49%, 92.5%      { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  93.1%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-5 {
-  0%, 86.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  87.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 69.333%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  70.333%, 90%    { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  90.6%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 /* The covered part of the track, drawn over the hairline rather than instead of it, so the empty
    track stays a fact of the diagram and this is only how far the run has got. It stays where it
@@ -11700,24 +11851,24 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-step:nth-child(3)::after { animation-name: hm-fill-3; }
 .hm-step:nth-child(4)::after { animation-name: hm-fill-4; }
 @keyframes hm-fill-1 {
-  0%, 0.0%      { transform: scaleX(0); }
-  6.667%, 97.0%   { transform: scaleX(1); }
-  100%           { transform: scaleX(0); }
+  0%              { transform: scaleX(0); }
+  5.333%, 97.5%   { transform: scaleX(1); }
+  100%            { transform: scaleX(0); }
 }
 @keyframes hm-fill-2 {
-  0%, 6.667%      { transform: scaleX(0); }
-  26.667%, 97.0%   { transform: scaleX(1); }
-  100%           { transform: scaleX(0); }
+  0%, 5.333%      { transform: scaleX(0); }
+  21.333%, 95%    { transform: scaleX(1); }
+  97.5%, 100%     { transform: scaleX(0); }
 }
 @keyframes hm-fill-3 {
-  0%, 26.667%      { transform: scaleX(0); }
-  60.0%, 97.0%   { transform: scaleX(1); }
-  100%           { transform: scaleX(0); }
+  0%, 21.333%     { transform: scaleX(0); }
+  48%, 92.5%      { transform: scaleX(1); }
+  95%, 100%       { transform: scaleX(0); }
 }
 @keyframes hm-fill-4 {
-  0%, 60.0%      { transform: scaleX(0); }
-  86.667%, 97.0%   { transform: scaleX(1); }
-  100%           { transform: scaleX(0); }
+  0%, 48%         { transform: scaleX(0); }
+  69.333%, 90%    { transform: scaleX(1); }
+  92.5%, 100%     { transform: scaleX(0); }
 }
 /* The rail, one segment per step, from this disc to the next one. Drawn per step rather than as
    one line under the row so that a wrapped row cannot leave a rail running off into nothing. */
@@ -11807,24 +11958,24 @@ html[data-theme="dark"] .booking-container iframe {
     transform-origin: center top;
   }
   @keyframes hm-fill-1 {
-    0%, 0.0%      { transform: scaleY(0); }
-    6.667%, 97.0%   { transform: scaleY(1); }
-    100%           { transform: scaleY(0); }
+    0%              { transform: scaleY(0); }
+    5.333%, 97.5%   { transform: scaleY(1); }
+    100%            { transform: scaleY(0); }
   }
   @keyframes hm-fill-2 {
-    0%, 6.667%      { transform: scaleY(0); }
-    26.667%, 97.0%   { transform: scaleY(1); }
-    100%           { transform: scaleY(0); }
+    0%, 5.333%      { transform: scaleY(0); }
+    21.333%, 95%    { transform: scaleY(1); }
+    97.5%, 100%     { transform: scaleY(0); }
   }
   @keyframes hm-fill-3 {
-    0%, 26.667%      { transform: scaleY(0); }
-    60.0%, 97.0%   { transform: scaleY(1); }
-    100%           { transform: scaleY(0); }
+    0%, 21.333%     { transform: scaleY(0); }
+    48%, 92.5%      { transform: scaleY(1); }
+    95%, 100%       { transform: scaleY(0); }
   }
   @keyframes hm-fill-4 {
-    0%, 60.0%      { transform: scaleY(0); }
-    86.667%, 97.0%   { transform: scaleY(1); }
-    100%           { transform: scaleY(0); }
+    0%, 48%         { transform: scaleY(0); }
+    69.333%, 90%    { transform: scaleY(1); }
+    92.5%, 100%     { transform: scaleY(0); }
   }
   .hm-step:last-child { padding-bottom: 0; }
 }
@@ -12733,8 +12884,10 @@ html[data-theme="dark"] .booking-container iframe {
   box-shadow: var(--edge-top), var(--shadow-sm);
 }
 
-/* The lead card's border, elevation and flag are set with the pricing page's above, so the
-   two pages recommend the same column in the same words and the same weight. */
+/* The lead card's ground, border, elevation and flag are set with the pricing page's above, so
+   the two pages recommend the same column in the same words and the same weight. That rule is
+   written as .hm-plan.hm-plan--lead so it beats the background, border and box-shadow set right
+   here: it sits earlier in the file, and at equal specificity this one would win. */
 
 .hm-plan-label {
   display: block;
@@ -13581,7 +13734,7 @@ html[data-theme="dark"] .booking-container iframe {
   z-index: 1;
   width: 100%;
   max-width: 376px;
-  margin-top: 12px;
+  margin-top: 18px;
   min-height: 210px;
 }
 .hm-desk {

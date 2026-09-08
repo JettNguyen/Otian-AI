@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260908-8" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260908-9" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -440,6 +440,26 @@
             </div>
           </div>
 
+          <!-- What the scene is showing, under the phone rather than in the thread. A line of
+               explanation inside a chat bubble is the app talking about itself, which no chat app
+               does and which made three of the seven read as an advert with a message on top. Out
+               here it is a caption, every scene has one, and the phone stays a phone. Same lap and
+               the same --s, so a caption cannot drift out of step with the scene it names.
+
+               It sits between the phone and the record, not under both, because it is the phone's
+               caption: it says what the conversation above it is showing, and the record below is
+               the same job seen from the other side. Under the record it was a line of text with
+               two things above it and no way to tell which one it belonged to, and it put the
+               height of the record between a message and the sentence explaining it. -->
+          <div class="hm-caps" aria-hidden="true">
+            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
+            <p class="hm-cap" style="--s:1">Ask in plain words. It reads the time back, goes quiet, and turns up hours later.</p>
+            <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
+            <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
+            <p class="hm-cap" style="--s:4">Ask to be told when someone answers. It watches the person, not one thread.</p>
+            <p class="hm-cap" style="--s:5">It reads dates out of your own lists and tells you before one comes due.</p>
+            <p class="hm-cap" style="--s:6">It looks things up and hands you the answer. It books nothing.</p>
+          </div>
 
           <!-- ==============================
                The record the job wrote, beside the conversation that asked for it.
@@ -471,9 +491,10 @@
           <!-- The card sizes to the job it is showing; this box holds the room. A record with one
                step is shorter than one with two, and a window that stays the height of its
                tallest possible contents is a box with a gap in it rather than a window. But the
-               caption under it cannot jump every nine seconds either, so the reserved height
-               lives out here, where it is invisible, and the bordered card inside is free to be
-               exactly as tall as what it holds. -->
+               hero cannot change height every nine seconds either, or the whole page below it
+               steps up and down while somebody is reading it, so the reserved height lives out
+               here, where it is invisible and paints nothing, and the bordered card inside is
+               free to be exactly as tall as what it holds. -->
           <div class="hm-deskbox" aria-hidden="true">
           <div class="hm-desk">
             <!-- The panel's own header, built to rhyme with the phone's. Up there it is a face and
@@ -563,21 +584,6 @@
             </article>
           </div>
           </div>
-          </div>
-
-          <!-- What the scene is showing, under the phone rather than in the thread. A line of
-               explanation inside a chat bubble is the app talking about itself, which no chat app
-               does and which made three of the seven read as an advert with a message on top. Out
-               here it is a caption, every scene has one, and the phone stays a phone. Same lap and
-               the same --s, so a caption cannot drift out of step with the scene it names. -->
-          <div class="hm-caps" aria-hidden="true">
-            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
-            <p class="hm-cap" style="--s:1">Ask in plain words. It reads the time back, goes quiet, and turns up hours later.</p>
-            <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
-            <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
-            <p class="hm-cap" style="--s:4">Ask to be told when someone answers. It watches the person, not one thread.</p>
-            <p class="hm-cap" style="--s:5">It reads dates out of your own lists and tells you before one comes due.</p>
-            <p class="hm-cap" style="--s:6">It looks things up and hands you the answer. It books nothing.</p>
           </div>
       </div>
     </section>
@@ -1196,38 +1202,43 @@
 
              aria-hidden, because a clock that counts is a picture of the estimate and not the
              estimate itself: the heading carries "about fifteen minutes" as text, and the line
-             under the track carries what kind of number that is. -->
+             under the track carries what kind of number that is.
+
+             It runs back down at the end of every lap, with the track. A clock that climbed to
+             15 and then blinked to 0 read as a counter that had lost its place; running the
+             figures back down while the segments retract says the loop is starting over, which
+             is the only thing that is actually happening. -->
         <p class="hm-eta fade-up" aria-hidden="true">
           <span class="hm-eta-label">Estimated</span>
-          <span class="hm-eta-clock"><i style="--i:0">0</i><i style="--i:1">1</i><i style="--i:2">2</i><i style="--i:3">3</i><i style="--i:4">4</i><i style="--i:5">5</i><i style="--i:6">6</i><i style="--i:7">7</i><i style="--i:8">8</i><i style="--i:9">9</i><i style="--i:10">10</i><i style="--i:11">11</i><i style="--i:12">12</i><i style="--i:13">13</i><i style="--i:14">14</i><i style="--i:15">15</i></span>
+          <span class="hm-eta-clock"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i><i>13</i><i>14</i><i>15</i></span>
           <span class="hm-eta-unit">min</span>
         </p>
         <ol class="hm-steps fade-up">
-          <li class="hm-step" style="--i:0">
+          <li class="hm-step">
             <span class="hm-step-n" aria-hidden="true">1</span>
             <h3>Pick a computer it can live on</h3>
             <p>One you can leave on and connected. Yours probably qualifies.</p>
             <span class="hm-step-who">You, once</span>
           </li>
-          <li class="hm-step" style="--i:1">
+          <li class="hm-step">
             <span class="hm-step-n" aria-hidden="true">2</span>
             <h3>Install Archie</h3>
             <p>One download, an Otian account, a plan. Nothing to host.</p>
             <span class="hm-step-who">You, once</span>
           </li>
-          <li class="hm-step" style="--i:2">
+          <li class="hm-step">
             <span class="hm-step-n" aria-hidden="true">3</span>
             <h3>Point it at an AI account</h3>
             <p>Your own, any of 7 AI companies. It bills you, never us.</p>
             <span class="hm-step-who hm-step-who--them">Them, not us</span>
           </li>
-          <li class="hm-step" style="--i:3">
+          <li class="hm-step">
             <span class="hm-step-n" aria-hidden="true">4</span>
             <h3>Meet your agent</h3>
             <p>Answer a few questions. It writes its own skills and routines from them, and tells you what it added.</p>
             <span class="hm-step-who hm-step-who--it">Archie writes it</span>
           </li>
-          <li class="hm-step" style="--i:4">
+          <li class="hm-step">
             <span class="hm-step-n" aria-hidden="true">5</span>
             <h3>Message it from your phone</h3>
             <p>One claim code connects Telegram, Discord, Slack, Matrix or iMessage.</p>

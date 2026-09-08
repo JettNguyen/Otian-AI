@@ -8,8 +8,22 @@
    ======================================== */
 :root {
   /* Colors */
-  --bg-primary: #FCFAF8;
-  --bg-secondary: #F5F3EF;
+  /* THE GROUND IS DARKER THAN THE CARDS, and by enough to see. It was #FCFAF8 against a #FFFFFF
+     card: a difference of about one and a half percent, which is not a difference. Every card,
+     panel and chip on the site was therefore held up entirely by its own hairline border, and a
+     shape that needs an outline to exist is a drawing of a card rather than a card. Shadows could
+     not rescue it either, because a shadow is a darkening of the surface behind an object and
+     there was no room below white to darken into.
+
+     So the page and the band step down about four percent and the card stays pure white. Same hue,
+     same warmth, the same three surfaces in the same order. What changed is that the order is now
+     visible, which is what makes a card look like it is sitting on the page instead of printed on
+     it, and it is what every elevation in this file was quietly failing to deliver.
+
+     Checked, not assumed: scripts/check-contrast.mjs re-measures every text pairing against these
+     two, and it is --text-muted on the page ground that moves furthest (see its note below). */
+  --bg-primary: #F8F5F1;
+  --bg-secondary: #F0EDE7;
   --bg-card: #FFFFFF;
   --accent: #E08A5B;
   --accent-hover: #CC7647;
@@ -35,7 +49,10 @@
   --danger-ring: rgba(224, 49, 49, 0.12);
   --text-primary: #44403B;
   --text-secondary: #69645D;
-  --text-muted: #777069;
+  /* One notch darker than #777069, which measured 4.49:1 on the page ground once it stepped down
+     four percent: a hundredth short of the 4.5 WCAG asks of body text, and the kind of miss that is
+     invisible to look at and absolute to a checker. The ground moving is what moved the ink. */
+  --text-muted: #736C65;
   --border: #EAE6E1;
   /* The nav's surface once content is passing under it. There is no at-rest counterpart on
      purpose: at the top of a page the nav has no background at all (see section 5). */
@@ -65,8 +82,13 @@
   --line-muted: rgba(68, 64, 59, 0.24);
   --overlay-bg: rgba(42, 37, 33, 0.18);
   --text-on-accent: #2A2521;
-  --bg-wash-one: rgba(251, 228, 211, 0.42);
-  --bg-wash-two: rgba(240, 184, 168, 0.24);
+  /* Pulled back with the ground. These two radials are painted OVER --bg-primary, so their
+     strength is relative to what is under them: at 0.42 and 0.24 on the old near-white page they
+     were a hint of warmth in the top corners, and on a ground four percent deeper the same two read
+     as a peach tint across the whole first screenful. The page's warmth comes from the accent and
+     the content; the ground's job is to be the value the cards sit above. */
+  --bg-wash-one: rgba(251, 228, 211, 0.3);
+  --bg-wash-two: rgba(240, 184, 168, 0.15);
 
   /* Add-on type accents: mirror the Archie app so a Routine and Personality
      read as teal/plum; Skills use the brand accent above. --c-blue is kept
@@ -176,10 +198,36 @@
      underneath it instead of deepening it; every elevation below is cast in the text ink, which
      is what makes a stack of cards read as warm rather than as smudged. Two rules still cast
      black on purpose and are listed as exceptions in scripts/check-styles.py, with the reason. */
-  --shadow-xs: 0 1px 2px rgba(68, 64, 59, 0.1);
-  --shadow-sm: 0 8px 22px rgba(68, 64, 59, 0.08);
-  --shadow-md: 0 16px 36px rgba(68, 64, 59, 0.12);
-  --shadow-lg: 0 28px 60px rgba(68, 64, 59, 0.18);
+  /* EACH RUNG IS A STACK, and that is what the page was missing. Every one of these was a single
+     blur: one offset, one radius, one alpha. A single blur is not what a light does. A real object
+     casts two shadows at once, a small dark one where it touches the surface and a wide faint one
+     from the room, and the eye reads the PAIR as contact. With only the wide one a card looks like
+     it has a smudge under it and stays visibly printed on the page rather than resting on it,
+     which is the whole of "the site has no depth". So every rung is a contact shadow plus one or
+     two ambient ones, and the ambient ones carry a negative spread so they stay under the object
+     instead of haloing out around it.
+
+     They grow in offset as well as in blur, because that is the other half of the illusion: how
+     far a shadow sits below a thing is how high the thing is. The old set grew only in blur, so a
+     --shadow-lg card was a --shadow-sm card with a softer smudge at what read as the same height. */
+  --shadow-xs: 0 1px 1px rgba(68, 64, 59, 0.05), 0 1px 3px rgba(68, 64, 59, 0.09);
+  --shadow-sm: 0 1px 2px rgba(68, 64, 59, 0.07), 0 4px 8px -2px rgba(68, 64, 59, 0.08),
+               0 10px 20px -6px rgba(68, 64, 59, 0.1);
+  --shadow-md: 0 1px 2px rgba(68, 64, 59, 0.07), 0 8px 16px -4px rgba(68, 64, 59, 0.1),
+               0 22px 40px -12px rgba(68, 64, 59, 0.16);
+  --shadow-lg: 0 2px 4px rgba(68, 64, 59, 0.08), 0 14px 28px -8px rgba(68, 64, 59, 0.14),
+               0 40px 72px -24px rgba(68, 64, 59, 0.24);
+  /* The lit top edge, and it is not an elevation: it is the face of the object catching the same
+     light the shadows are cast by. One hairline of white along the top inside edge is what makes a
+     rectangle read as a surface with a thickness rather than as a coloured area, and it costs
+     nothing on a page that already has a light source established.
+
+     Separate from the rungs rather than baked into them, because a dark surface takes the light
+     differently: on the cream page a card is white and the edge is nearly pure white, and in dark
+     mode it is a whisper on charcoal that would be a scar at the same alpha. Stack it in front of
+     an elevation, edge first, then the rung. (Described rather than shown, because
+     check-styles.py reads a declaration in a comment as a declaration.) */
+  --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.9);
   /* Thrown from the left, not below: the hero's player sits at an angle to the page and a
      symmetrical shadow reads as a sticker on it. Art-directed, used by that one frame. */
   --shadow-drop: -28px 34px 74px -34px rgba(68, 64, 59, 0.42);
@@ -263,10 +311,18 @@
   --c-gold: #DCAF57;
   --c-gold-subtle: rgba(220, 175, 87, 0.16);
   --c-gold-ink: #DCAF57;
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 8px 48px rgba(0, 0, 0, 0.6);
+  /* Stacked for the same reason as the light set, and leaning harder on the contact shadow. A
+     shadow on a near-black page has almost nowhere to go: there is no value left below the ground
+     for a wide ambient blur to darken, so the tight one under the object does nearly all the work
+     and --edge-top does the rest. In dark mode that edge is the primary depth cue rather than a
+     finishing touch. */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 22px -6px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.45), 0 20px 44px -12px rgba(0, 0, 0, 0.6);
+  /* A whisper. At the light theme's 0.9 this is a bright scar across the top of every card; the
+     job here is only to say the surface has a top face, not to draw a line. */
+  --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.055);
   --shadow-drop: -28px 34px 74px -34px rgba(0, 0, 0, 0.6);
   --shadow-accent: 0 4px 20px rgba(224, 138, 91, 0.35);
 }
@@ -2016,27 +2072,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   filter: blur(18px);
   pointer-events: none;
   z-index: 0;
-}
-
-.hero-visual .demo-player {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: none;
-}
-
-/* Frameless: the recording already contains a Mac window. Only the left corners are
-   ever on screen, so only they are rounded. */
-.demo-player--hero .demo-player-frame {
-  border: 0;
-  border-radius: var(--radius) 0 0 var(--radius);
-  box-shadow: var(--shadow-drop);
-  /* Placeholder shown while the recording is still loading, and left in place if it ever
-     fails to load: the Otian mark centered on the brand surface, instead of the base
-     frame's near-black fill. --bg-secondary carries the theme, so the card is cream in
-     light and warm-dark in dark. The video is object-fit:cover at the same 1.553 aspect,
-     so it covers this completely the instant it paints. */
-  background: var(--bg-secondary) url("../assets/otian-icon-rounded.svg") center / clamp(160px, 30%, 300px) no-repeat;
 }
 
 
@@ -5872,46 +5907,11 @@ html.js .fade-up:not(.visible) {
     display: none;
   }
 
-  /* Native aspect (1.553). The recording fills its own width: it is zoomed into the app for all
-     but its opening seconds, so the UI reaches the edges and there's no wallpaper margin worth
-     cropping away. Show it whole and let the bottom fade below melt it into the page. Nothing
-     vertical is cropped, so the mask is plain frame percentages and the two vendor gradients
-     can't drift apart. */
-  .demo-player--hero .demo-player-frame {
-    aspect-ratio: 1280 / 824;
-    border-radius: 0;
-    box-shadow: none;
-    /* Transparent on purpose, overriding the desktop hero's Otian-mark placeholder: the
-       video fades out across its bottom third here, so any frame backdrop (mark or fill)
-       would show through that fade as a rectangle. Nothing behind the video once it's gone. */
-    background: transparent;
-  }
+  /* The recording's frame is NOT squared off down here any more. It used to lose its border, its
+     radius and its shadow below 1000px and dissolve its bottom third into the headline behind it,
+     which was right while it was the hero and is a different object from the desktop one now that
+     it is a figure in a section. The frame is the same at every width; see .demo-player--wide. */
 
-  .demo-player--hero .demo-player-video {
-    object-position: center;
-  }
-
-  /* The recording dissolves into the page across its whole bottom third, and the headline rises
-     into what it leaves behind. A long, even ramp (solid to ~62% of the frame, then a gradual
-     slope to fully transparent right at the edge) so the picture melts out instead of ending on
-     a line. This matters most in dark mode: the app's footer bar and the desktop strip below the
-     window are bright against a near-black page, and a short ramp left a visible seam there; the
-     long ramp carries them all the way to nothing. On the closing card it is just empty cream (or
-     near-black) doing the same. Plain frame percentages, since nothing is transformed. */
-  .demo-player--hero .demo-player-video {
-    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
-  }
-
-  /* No backdrop-filter blur down here, deliberately: it was tried and it made things worse.
-     Two reasons, and they compound. It can't help: backdrop-filter blurs the backdrop, but in
-     the fade zone the mask above has already taken the video away, so the backdrop IS the page
-     background and there is nothing left to blur. And it actively hurts: the filter clamps at
-     its own bottom edge, so it drags bright pixels down from where the video is still opaque
-     into rows that should be empty, repainting them right up to the frame's edge, where
-     overflow: hidden then guillotines them. That is a hard line: measured, it tripled the
-     brightness step at the boundary. The crop above is what removes the line; the alpha ramp
-     is what makes it smooth. */
 
   /* Ride the headline up onto the faded tail of the video, just the cap-line of its first row,
      into the part that has already dissolved toward nothing. The fade now begins at ~62% of the
@@ -8217,6 +8217,36 @@ html[data-theme="dark"] .booking-container iframe {
 .demo-player {
   max-width: 760px;
   margin: 0 auto;
+}
+
+/* The recording, at the width its own section gives it.
+   ==========================================================================
+   This was .demo-player--hero, and it carried a hero's treatment long after it stopped being one.
+   While the recording opened the page it bled off the right edge, so it was frameless with only
+   its LEFT corners rounded and a shadow thrown from the left; below 1000px it lost its frame
+   entirely, squared every corner and dissolved its own bottom third into the headline rising
+   behind it. All of that was right for a picture running off the side of a hero. None of it is
+   right for a figure standing in the middle of a section, which is what it has been since
+   2026-09-07, and the visible result was a recording whose corners were round on one side at
+   1440px and square on all four at 900px.
+
+   So the modifier now says the only thing still true about this placement, which is that it is
+   wider than the 760px default, and every other rule is the base frame's: four equal corners, one
+   border, one elevation, at every width. `class="hero-visual"` appears in no page on the site, so
+   the wrapper rules that went with it are gone too.
+
+   It lives here, beside .demo-player, rather than up in the hero section where its ancestor did:
+   .demo-player's own max-width is one class too, so declared six thousand lines earlier this rule
+   lost the cascade and the figure stayed 760px wide while claiming to be wide.
+
+   The placeholder stays. It is what shows while the recording loads and what is left if it never
+   does: the Otian mark on the brand surface rather than the base frame's near-black fill. The
+   video is object-fit:cover at the same 1.553 aspect, so it covers this the instant it paints. */
+.demo-player--wide {
+  max-width: 1000px;
+}
+.demo-player--wide .demo-player-frame {
+  background: var(--bg-secondary) url("../assets/otian-icon-rounded.svg") center / clamp(160px, 30%, 300px) no-repeat;
 }
 
 .demo-player-frame {
@@ -11065,11 +11095,42 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* Phone zoom-in around each chat mock */
+/* THE PHONE RUNS ITS OWN PALETTE, in both themes, and it is the same phone everywhere on the
+   site. This started on the hero's device: the wall was a page colour, so at 376px the phone was a
+   slightly different cream on the cream page and a slightly different charcoal on the dark one,
+   and the eye could not find an edge on it. A screen is not a surface of the page, it is a lit
+   thing standing on it.
+
+   It lived on .hm-pz--hero for a day and that was worse, not better: the hero opened on a dark
+   device and then the day spine, four screens down, showed the same product on a cream one. Two
+   drawings of one object on one page is the same failure as calling an agent a bot three sentences
+   later, and it is more obvious, because a reader does not have to read anything to see it. So the
+   island lives here and every phone on the site is that phone.
+
+   Everything below is the set of tokens the phone's contents read, re-pointed at that ground: the
+   site's own dark-theme values where there is one, because those were already measured against a
+   dark ground, and a warmer wall than the dark theme's neutral, because a phone screen at arm's
+   length is warm and the page around it is too.
+
+   Measured, since scripts/check-contrast.mjs only reads :root and [data-theme="dark"] and cannot
+   see a scoped block like this one: cream on a bubble is 11.7:1, cream on a sent bubble 9.0:1, the
+   timestamps 6.0:1 on the wall, a button's label 6.9:1, and the accent on a chosen button 5.3:1.
+   The send button keeps the shipped dark pairing (--text-on-accent on --accent) untouched. */
 .hm-pz {
-  --hm-pz-wall: #EAE2D8;
-  --hm-pz-bezel: #1C1916;
-  --hm-pz-rim: #1C1916;
-  --hm-pz-glow: color-mix(in srgb, var(--accent) 11%, transparent);
+  --hm-pz-wall: #211E1C;
+  --hm-pz-bezel: #0E0D0C;
+  --hm-pz-rim: rgba(247, 243, 238, 0.22);
+  --hm-pz-glow: rgba(224, 138, 91, 0.20);
+  --bg-card: #322D29;
+  --text-primary: #F6F2EC;
+  --text-secondary: #C4BCB2;
+  --text-muted: #A29A91;
+  --accent: #EDA277;
+  --accent-subtle: #533A27;
+  --accent-ink: #F0AC80;
+  --text-on-accent: #292624;
+  --border: rgba(246, 242, 236, 0.14);
+  --shadow-xs: none;
   position: relative; z-index: 1;
   max-width: 384px; margin: 0 auto;
   padding: 40px 30px;
@@ -11096,11 +11157,19 @@ html[data-theme="dark"] .booking-container iframe {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
 }
-/* Weaker in the dark, where the same mix moves further: the wall is near black, so a tenth of
-   the accent is a much bigger step there than it is on the cream. */
+/* Dark mode needs the phone the other way up. The palette above is a lit screen, which on the
+   cream page is the darkest thing in the figure and needs no help separating; on the dark page it
+   was three hundredths off the ground behind it and the device had no edge. So the wall lifts a
+   step, the bubble lifts with it to keep their relationship, and the rim goes from a suggestion to
+   a hairline of light along the sides, which is what the edge of a phone in a dim room does.
+   Contrast inside is unchanged or better: cream on the lifted bubble is 10.4:1. */
 [data-theme="dark"] .hm-pz {
-  --hm-pz-wall: #232322; --hm-pz-bezel: #0D0D0C; --hm-pz-rim: rgba(243, 240, 237, 0.18);
-  --hm-pz-glow: color-mix(in srgb, var(--accent) 6%, transparent);
+  --hm-pz-wall: #272321;
+  --hm-pz-bezel: #131211;
+  --hm-pz-rim: rgba(247, 243, 238, 0.34);
+  --hm-pz-glow: rgba(224, 138, 91, 0.16);
+  --bg-card: #38322E;
+  --accent-subtle: #5A4029;
 }
 .hm-msg {
   text-align: left; font-size: var(--fs-base);
@@ -11172,7 +11241,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-flow { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 48px 0 12px; }
 .hm-node {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 22px; text-align: center; box-shadow: var(--shadow-sm);
+  padding: 14px 22px; text-align: center; box-shadow: var(--edge-top), var(--shadow-sm);
 }
 .hm-node--you { border-color: var(--accent); }
 .hm-node b { display: block; font-weight: 650; font-size: var(--fs-md); }
@@ -11210,6 +11279,8 @@ html[data-theme="dark"] .booking-container iframe {
   display: flex; align-items: center; gap: 12px;
   background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 14px 20px; font-size: var(--fs-base); font-weight: 550;
+  /* A shopping list of physical things you need, so the chips are physical too. */
+  box-shadow: var(--edge-top), var(--shadow-xs);
 }
 .hm-need svg { color: var(--accent); flex-shrink: 0; }
 /* Ember like every other check glyph on the site (see the color rule in RESTYLE.md). */
@@ -11701,10 +11772,15 @@ html[data-theme="dark"] .booking-container iframe {
    the same one the store shows against that add-on. That is the whole reason to have it: a
    reader who meets Reply Watch here and later opens the marketplace should meet the same object,
    and it costs the page no words to say so. */
+/* CARDS, and this time actually cards. They were called cards when they stopped being full-width
+   table rows, and what they were was four cells in a grid with a hairline across the top of each:
+   the longest stretch of the homepage with nothing on it a hand could pick up. The section's whole
+   argument is that these four jobs have nothing to do with each other, and four separate objects
+   say that before a word is read, where four cells under four rules say the opposite. */
 .cover-grid--scenes {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 32px;
+  gap: 20px;
   border-top: 0;
 }
 
@@ -11713,9 +11789,11 @@ html[data-theme="dark"] .booking-container iframe {
   flex-direction: column;
   gap: 12px;
   align-items: stretch;
-  padding: 22px 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 0;
+  padding: 22px 24px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--edge-top), var(--shadow-sm);
 }
 
 /* The scene takes the slack so every add-on name in a row sits on the same line, whatever the
@@ -12098,6 +12176,9 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 26px 24px;
+  /* These are the objects a reader is choosing between, and they had no elevation at all: three
+     white rectangles outlined on a cream band, which is a table with rounded corners. */
+  box-shadow: var(--edge-top), var(--shadow-sm);
 }
 
 /* Same call as .plan-card--lead: a border, not a "most popular" badge. That is a sales count
@@ -12255,7 +12336,10 @@ html[data-theme="dark"] .booking-container iframe {
 
    The fade is deeper than the spine's, because it is bigger: 34px dissolves a 300px object and
    only crops a 480px one. */
-/* IT RUNS ITS OWN PALETTE, in both themes, and that is the change that made the hero an object
+/* SIZE, CROP AND CHROME. The palette this carried moved up to .hm-pz so the day spine's phones
+   are the same device; what is left is what is different about the hero's. The original note is
+   kept below because it is why the palette exists at all: this phone was the object that made the
+   hero an object
    rather than a panel. The wall was --bg-secondary, which is one step off --bg-primary by design:
    on the cream page the phone was a slightly different cream, and on the dark page a slightly
    different charcoal. At hero size that is a 376px rectangle the eye cannot find an edge on, and
@@ -12276,21 +12360,6 @@ html[data-theme="dark"] .booking-container iframe {
    with a patch of --hm-pz-wall, so a gradient down there shows as a notch. Same rule as .hm-pz,
    and the reason the glow below stops at 38%. */
 .hm-pz--hero {
-  --hm-pz-wall: #211E1C;
-  --hm-pz-bezel: #0E0D0C;
-  --hm-pz-rim: rgba(247, 243, 238, 0.22);
-  --hm-pz-glow: rgba(224, 138, 91, 0.20);
-  --bg-card: #322D29;
-  --text-primary: #F6F2EC;
-  --text-secondary: #C4BCB2;
-  --text-muted: #A29A91;
-  --accent: #EDA277;
-  --accent-subtle: #533A27;
-  --accent-ink: #F0AC80;
-  --text-on-accent: #292624;
-  --border: rgba(246, 242, 236, 0.14);
-  --shadow-xs: none;
-
   max-width: 376px;
   width: 100%;
   /* OPEN AT BOTH ENDS, which is the crop that reads as a phone without committing to a phone's
@@ -12388,21 +12457,6 @@ html[data-theme="dark"] .booking-container iframe {
   min-height: 420px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
   mask-image: linear-gradient(to bottom, transparent, #000 44px);
-}
-
-/* Dark mode needs the phone the other way up. The palette above is a lit screen, which on the
-   cream page is the darkest thing in the hero and needs no help separating; on the dark page it
-   was three hundredths off the ground behind it and the device had no edge. So the wall lifts a
-   step, the bubble lifts with it to keep their relationship, and the rim goes from a suggestion
-   to a hairline of light along the sides, which is what the edge of a phone in a dim room does.
-   Contrast inside is unchanged or better: cream on the lifted bubble is 10.4:1. */
-[data-theme="dark"] .hm-pz--hero {
-  --hm-pz-wall: #272321;
-  --hm-pz-bezel: #131211;
-  --hm-pz-rim: rgba(247, 243, 238, 0.34);
-  --hm-pz-glow: rgba(224, 138, 91, 0.16);
-  --bg-card: #38322E;
-  --accent-subtle: #5A4029;
 }
 
 /* ---- The break in the thread ----
@@ -12960,7 +13014,9 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  /* A rung above the rest of the section, because these two are its subject and the three ways
+     below them are its argument. Elevation is the cheapest way to say which is which. */
+  box-shadow: var(--edge-top), var(--shadow-md);
 }
 .grow-mark { display: block; margin-bottom: 14px; }
 .grow-pair h3 { font-size: var(--fs-xl); line-height: 1.3; margin: 0 0 8px; }

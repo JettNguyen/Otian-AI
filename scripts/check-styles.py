@@ -68,6 +68,12 @@ SHADOW_OK = [
     # pass this check by importing the cream page's ink into a page that is deliberately not it.
     (re.compile(r'^var\(--shadow-card\)$'), "app-security's own palette, per RESTYLE.md"),
     (re.compile(r'^var\(--shadow-[a-z]+\)$'), "a token"),  # name checked against :root below
+    # --edge-top is a lit top edge rather than an elevation, and it is meant to be stacked in
+    # front of one: `box-shadow: var(--edge-top), var(--shadow-md)`. A composite of named tokens
+    # is still named, which is the only thing this file is defending, so it passes as a list.
+    (re.compile(r'^var\(--edge-[a-z]+\)$'), "a lit edge, not an elevation"),
+    (re.compile(r'^var\(--(?:shadow|edge)-[a-z]+\)(?:\s*,\s*var\(--(?:shadow|edge)-[a-z]+\))+$'),
+     "named tokens stacked"),
     (re.compile(r'^none$'), "removes one"),
     (re.compile(r'^inset\b'), "an inset rule, not an elevation"),
     (re.compile(r'^0 0 0 '), "a ring or spread, not an elevation"),
@@ -178,7 +184,7 @@ def main():
         # exactly the page this rule exists to protect.
         if re.search(r'<link[^>]+href="[^"]*styles\.css', text):
             scope |= shared
-        for m in re.finditer(r'var\((--(?:fs|shadow|radius)[0-9a-z-]*)\)', text):
+        for m in re.finditer(r'var\((--(?:fs|shadow|radius|edge)[0-9a-z-]*)\)', text):
             if m.group(1) not in scope:
                 failures.append((f.relative_to(ROOT), 0, "var", m.group(1),
                                  "names a token nothing in this page's scope defines"))

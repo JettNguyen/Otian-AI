@@ -11572,7 +11572,7 @@ html[data-theme="dark"] .booking-container iframe {
 
    No script and no scroll dependency, so this is running before anything has been observed, and
    it is off entirely under prefers-reduced-motion (below), where the track is a static diagram. */
-.hm-steps { --st-lap: 7s; }
+.hm-steps { --st-lap: 10s; }
 
 /* The clock over the track.
 
@@ -11590,7 +11590,7 @@ html[data-theme="dark"] .booking-container iframe {
    The keyframe hides at 100% and shows at 0%, so the wrap from the last figure back to the first
    is the jump it should be rather than a fade through both. */
 .hm-eta {
-  --st-lap: 7s;
+  --st-lap: 10s;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -11606,13 +11606,19 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .hm-eta-clock {
   display: grid;
-  /* One cell for all five, sized by the widest, so the label beside it does not step sideways as
+  /* One cell for all sixteen, sized by the widest, so "min" beside it does not step sideways as
      the reading goes from one figure to two. */
-  justify-items: start;
+  justify-items: end;
+  min-width: 1.35em;
   font-size: var(--fs-2xl);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
+  color: var(--accent-ink);
+}
+.hm-eta-unit {
+  font-size: var(--fs-lg);
+  font-weight: 650;
   color: var(--accent-ink);
 }
 .hm-eta-clock i {
@@ -11620,27 +11626,63 @@ html[data-theme="dark"] .booking-container iframe {
   font-style: normal;
   opacity: 0;
   animation: hm-eta-tick var(--st-lap) linear infinite;
-  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+  animation-delay: calc(var(--i) * var(--st-lap) / 16);
 }
 @keyframes hm-eta-tick {
   0%          { opacity: 1; }
-  19.99%      { opacity: 1; }
-  20%, 100%   { opacity: 0; }
+  6.24%       { opacity: 1; }
+  6.25%, 100% { opacity: 0; }
 }
-.hm-step-n {
-  animation: hm-step-lit var(--st-lap) linear infinite both;
-  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+/* THE TRACK IS THE PROGRESS BAR, AND IT RUNS AT THE SPEED THE ESTIMATE SAYS.
+
+   The five steps are evenly spaced on screen and are not evenly spaced in time: one minute, then
+   three, then five, then four, then two. A light crossing them at a constant rate would be a
+   decoration that contradicted the numbers above it. So each segment of the fill takes exactly its
+   own share of the lap, which means it crawls from step 3 to step 4 and clears step 1 almost at
+   once, and a reader watching it learns where the fifteen minutes go without a sentence about it.
+   That is the same fact the line under the track states in words, drawn.
+
+   ONE KEYFRAME PER SEGMENT, not one shared keyframe with five delays, and that is forced rather
+   than chosen: a shared keyframe can only be offset in time, and these windows differ in length as
+   well as in start. Nine of them, generated from the same list of step-start minutes the clock
+   counts through, so the drawing and the numbers cannot drift apart.
+
+   Everything holds to 97% and is back to nothing at 100%. That is the reset, it is the only jump
+   in the loop, and it lasts three tenths of a second. */
+.hm-step-n { animation: var(--st-lap) linear infinite both; }
+.hm-step:nth-child(1) .hm-step-n { animation-name: hm-lit-1; }
+.hm-step:nth-child(2) .hm-step-n { animation-name: hm-lit-2; }
+.hm-step:nth-child(3) .hm-step-n { animation-name: hm-lit-3; }
+.hm-step:nth-child(4) .hm-step-n { animation-name: hm-lit-4; }
+.hm-step:nth-child(5) .hm-step-n { animation-name: hm-lit-5; }
+@keyframes hm-lit-1 {
+  0%, 97.0%      { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
-@keyframes hm-step-lit {
-  0%          { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  6%          { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  17%         { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  27%, 100%   { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+@keyframes hm-lit-2 {
+  0%, 6.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  7.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
-/* The light crossing the gap to the next disc, drawn over the rail rather than instead of it, so
-   the rail is a fact of the diagram and this is only the thing moving along it. It ends the lap at
-   full width and invisible, which is not the same state it starts in and does not need to be:
-   opacity is 0 at both ends, so nothing about the difference is on screen. */
+@keyframes hm-lit-3 {
+  0%, 26.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  27.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+}
+@keyframes hm-lit-4 {
+  0%, 60.0%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  61.2%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+}
+@keyframes hm-lit-5 {
+  0%, 86.667%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  87.867%, 97.0%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  100%           { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+}
+/* The covered part of the track, drawn over the hairline rather than instead of it, so the empty
+   track stays a fact of the diagram and this is only how far the run has got. It stays where it
+   reached rather than passing through, because the question the band answers is how far in you
+   are and not where a dot is. */
 .hm-step::after {
   content: "";
   position: absolute;
@@ -11650,16 +11692,32 @@ html[data-theme="dark"] .booking-container iframe {
   height: 1.5px;
   background: var(--accent);
   transform-origin: left center;
-  opacity: 0;
-  animation: hm-step-sweep var(--st-lap) linear infinite both;
-  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+  animation: var(--st-lap) linear infinite both;
 }
 .hm-step:last-child::after { display: none; }
-@keyframes hm-step-sweep {
-  0%          { opacity: 0; transform: scaleX(0); }
-  8%          { opacity: 1; transform: scaleX(0); }
-  20%         { opacity: 1; transform: scaleX(1); }
-  30%, 100%   { opacity: 0; transform: scaleX(1); }
+.hm-step:nth-child(1)::after { animation-name: hm-fill-1; }
+.hm-step:nth-child(2)::after { animation-name: hm-fill-2; }
+.hm-step:nth-child(3)::after { animation-name: hm-fill-3; }
+.hm-step:nth-child(4)::after { animation-name: hm-fill-4; }
+@keyframes hm-fill-1 {
+  0%, 0.0%      { transform: scaleX(0); }
+  6.667%, 97.0%   { transform: scaleX(1); }
+  100%           { transform: scaleX(0); }
+}
+@keyframes hm-fill-2 {
+  0%, 6.667%      { transform: scaleX(0); }
+  26.667%, 97.0%   { transform: scaleX(1); }
+  100%           { transform: scaleX(0); }
+}
+@keyframes hm-fill-3 {
+  0%, 26.667%      { transform: scaleX(0); }
+  60.0%, 97.0%   { transform: scaleX(1); }
+  100%           { transform: scaleX(0); }
+}
+@keyframes hm-fill-4 {
+  0%, 60.0%      { transform: scaleX(0); }
+  86.667%, 97.0%   { transform: scaleX(1); }
+  100%           { transform: scaleX(0); }
 }
 /* The rail, one segment per step, from this disc to the next one. Drawn per step rather than as
    one line under the row so that a wrapped row cannot leave a rail running off into nothing. */
@@ -11740,7 +11798,7 @@ html[data-theme="dark"] .booking-container iframe {
     width: 1.5px;
     height: calc(100% - 40px);
   }
-  /* The light turns with the track. */
+  /* The fill turns with the track: same four windows, other axis. */
   .hm-step::after {
     top: 40px;
     left: 15.25px;
@@ -11748,11 +11806,25 @@ html[data-theme="dark"] .booking-container iframe {
     height: calc(100% - 40px);
     transform-origin: center top;
   }
-  @keyframes hm-step-sweep {
-    0%          { opacity: 0; transform: scaleY(0); }
-    8%          { opacity: 1; transform: scaleY(0); }
-    20%         { opacity: 1; transform: scaleY(1); }
-    30%, 100%   { opacity: 0; transform: scaleY(1); }
+  @keyframes hm-fill-1 {
+    0%, 0.0%      { transform: scaleY(0); }
+    6.667%, 97.0%   { transform: scaleY(1); }
+    100%           { transform: scaleY(0); }
+  }
+  @keyframes hm-fill-2 {
+    0%, 6.667%      { transform: scaleY(0); }
+    26.667%, 97.0%   { transform: scaleY(1); }
+    100%           { transform: scaleY(0); }
+  }
+  @keyframes hm-fill-3 {
+    0%, 26.667%      { transform: scaleY(0); }
+    60.0%, 97.0%   { transform: scaleY(1); }
+    100%           { transform: scaleY(0); }
+  }
+  @keyframes hm-fill-4 {
+    0%, 60.0%      { transform: scaleY(0); }
+    86.667%, 97.0%   { transform: scaleY(1); }
+    100%           { transform: scaleY(0); }
   }
   .hm-step:last-child { padding-bottom: 0; }
 }
@@ -12909,7 +12981,7 @@ html[data-theme="dark"] .booking-container iframe {
   /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
      does, while the words stay on the same 26px as the thread below them. */
   margin: 0 -14px;
-  padding: 10px 14px 12px;
+  padding: 8px 14px 10px;
   border-bottom: 1px solid var(--border);
 }
 .hm-pz-face { display: block; width: 38px; height: 38px; flex-shrink: 0; }
@@ -12921,7 +12993,7 @@ html[data-theme="dark"] .booking-container iframe {
    says the thing below it belongs to the app rather than to the conversation. */
 .hm-pz--hero .hm-composer {
   margin: 0 -14px;
-  padding: 13px 14px 0;
+  padding: 10px 14px 0;
   border-top: 1px solid var(--border);
 }
 .hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: left; }
@@ -12944,7 +13016,15 @@ html[data-theme="dark"] .booking-container iframe {
      newest message was doing the work of making this a phone. The panel does that work now, and
      the two objects together were 946px of hero, which put the panel's own steps below the fold
      on a laptop. The headroom is what paid for it, because it was the one part of this column
-     that was there to be looked at rather than read. */
+     that was there to be looked at rather than read.
+
+     THIS FLOOR IS WHAT HOLDS THE PHONE STILL, and that is now its main job. Every scene's
+     entrance animates max-height, so without a floor above the tallest of them the device would
+     breathe by nearly two hundred pixels a lap: the shortest moment in the cycle measures 133 and
+     the tallest thread 315. At 340 it is never exceeded and never undercut, so the phone is one
+     size for the whole cycle and only the record under it changes height. The 25 that are left
+     put the tallest thread's top message under the dissolve rather than behind it. Anything that
+     makes a thread taller has to raise this number with it. */
   min-height: 340px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
   mask-image: linear-gradient(to bottom, transparent, #000 44px);
@@ -12972,7 +13052,17 @@ html[data-theme="dark"] .booking-container iframe {
 /* The conversation is the hero's subject, so it gets the room the day spine's minis do not. */
 .hm-pz--hero .hm-msg { gap: 0; width: 100%; }
 .hm-pz--hero .hm-bubble { max-width: 92%; }
-.hm-pz--hero .hm-mini-quote { font-size: var(--fs-md); line-height: 1.5; }
+/* A rung down the ladder and a tighter leading, which is what pays for most of the phone being
+   shorter. The device was 475px and its height was set entirely by the reminder scene, the one
+   with three turns and an afternoon in the middle of them. There was no box to trim: every other
+   scene's empty screen sits above its thread rather than inside it, so a smaller floor cropped
+   the tall one and changed nothing else. The type comes down instead, 15/1.5 to 14/1.42, which
+   takes about two and a half pixels off every line; the tall scene carries fourteen of them. */
+.hm-pz--hero .hm-mini-quote { font-size: var(--fs-base); line-height: 1.42; }
+/* Two pixels off the top and bottom of every bubble, from the same place and for the same reason:
+   the tall scene has six of them. The sides are untouched, because the width is what keeps the
+   lines from wrapping into more lines. */
+.hm-pz--hero .hm-bubble { padding-top: 10px; padding-bottom: 10px; }
 
 /* ---- The scenes ----
    The phone cycles through seven exchanges rather than holding one. Seven, because the argument
@@ -13009,7 +13099,7 @@ html[data-theme="dark"] .booking-container iframe {
   align-self: stretch;
   display: grid;
   grid-template-rows: 1fr auto;
-  gap: 14px;
+  gap: 10px;
   min-width: 0;
 }
 /* The thread fills what the composer leaves and hangs its newest message at the bottom. */
@@ -13043,10 +13133,10 @@ html[data-theme="dark"] .booking-container iframe {
    governs every property in that interval, and the opacity in this one is meant to ease. */
 @keyframes hm-in {
   0%            { opacity: 0; transform: translateY(6px); max-height: 0; margin-top: 0; }
-  0.011%        { max-height: 400px; margin-top: 10px; }
+  0.011%        { max-height: 400px; margin-top: 6px; }
   0.41%         { opacity: 1; transform: none; }
   13.15%        { opacity: 1; transform: none; }
-  13.9%         { opacity: 0; transform: none; max-height: 400px; margin-top: 10px; }
+  13.9%         { opacity: 0; transform: none; max-height: 400px; margin-top: 6px; }
   13.91%, 100%  { opacity: 0; transform: none; max-height: 0; margin-top: 0; }
 }
 
@@ -13080,8 +13170,8 @@ html[data-theme="dark"] .booking-container iframe {
    you had just sent a finger's width above the message bar with nothing in between. */
 @keyframes hm-type {
   0%              { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
-  0.011%          { max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
-  0.33%, 1.598%   { opacity: 1; max-height: 40px; margin-top: 10px; padding-top: 14px; padding-bottom: 14px; }
+  0.011%          { max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  0.33%, 1.598%   { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
   1.599%, 100%    { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
 }
 @keyframes hm-type-dot {
@@ -13173,7 +13263,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-composer-field {
   flex: 1;
   min-width: 0;
-  padding: 9px 14px;
+  padding: 8px 14px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--text-primary) 8%, transparent);
   font-size: var(--fs-sm);
@@ -13388,6 +13478,9 @@ html[data-theme="dark"] .booking-container iframe {
    the bubble goes back to being the width of its words. */
 .hm-turn > time {
   font-size: var(--fs-3xs);
+  /* Its own line box rather than the inherited one. A 10px stamp on a 1.5 body leading is a 15px
+     row for a 12px glyph, and the tall scene stacks three of them. */
+  line-height: 1.2;
   color: var(--text-muted);
   padding: 0 4px;
   margin-top: 1px;
@@ -13426,7 +13519,7 @@ html[data-theme="dark"] .booking-container iframe {
   margin: 0;
 }
 .hm-pz--hero .hm-msg-btn {
-  padding: 9px 10px;
+  padding: 7px 10px;
   border: 0;
   border-radius: 6px;
   box-shadow: none;
@@ -13480,12 +13573,19 @@ html[data-theme="dark"] .booking-container iframe {
 
    The bar and the panels are one object, so the wrapper carries the border, the rounding and the
    elevation, and .hm-work inside it gives up its own. */
-.hm-desk {
+/* The box that reserves the room and paints nothing. Its floor is the tallest record the cycle
+   draws, measured rather than guessed, so the caption under the phone never moves while the card
+   inside it changes height every nine seconds. */
+.hm-deskbox {
   position: relative;
   z-index: 1;
   width: 100%;
   max-width: 376px;
-  margin-top: 10px;
+  margin-top: 12px;
+  min-height: 210px;
+}
+.hm-desk {
+  width: 100%;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -13536,8 +13636,26 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: left;
   /* No frame of its own: .hm-desk around it carries the border, the rounding and the lift, and a
      second box inside the first drew a line where the window's own document begins. */
-  animation: hm-scene var(--hm-lap) linear infinite both;
+  overflow: hidden;
+  /* Not hm-scene, which only fades. All seven records sit in the same grid cell, so one that is
+     invisible but still has a height makes the cell as tall as the tallest of them and the card
+     is a box with a gap under its last step. Collapsed to nothing, the cell is the height of
+     whichever record is on screen, and the card is that record's own size: 114px for a job with
+     one step in it, 210px for one with two and a duration. */
+  animation: hm-work-scene var(--hm-lap) linear infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold));
+}
+@keyframes hm-work-scene {
+  0%             { opacity: 0; max-height: 0; }
+  0.011%         { max-height: 400px; }
+  0.37%, 13.15%  { opacity: 1; max-height: 400px; }
+  13.9%          { opacity: 0; max-height: 400px; }
+  /* The outgoing record keeps its height until the incoming one has opened, which is at 14.2857%
+     (one scene of seven). Collapsing it the moment it faded left a quarter of a second in which
+     every record was zero and the card was its own title bar, and an empty window blinking once a
+     scene reads as a fault rather than as a handover. */
+  14.30%         { max-height: 400px; }
+  14.31%, 100%   { opacity: 0; max-height: 0; }
 }
 
 /* Title on the left, the outcome on the right, on one line, the way the panel's own header sits.
@@ -13600,9 +13718,13 @@ html[data-theme="dark"] .booking-container iframe {
   align-items: flex-start;
   gap: 9px;
   padding: 8px 13px;
-  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  /* Declared on all four sides at zero width so the keyframe has one property to animate. Only
+     the bottom is ever drawn. */
+  border: 0 solid var(--border);
+  border-bottom-width: 1px;
 }
-.hm-work-steps li:last-child { border-bottom: 0; }
+.hm-work-steps li:last-child { border-bottom-width: 0; }
 /* The app's disc, at the app's size. No nudge on it: the circle and the words beside it have the
    same line box, so `align-items: flex-start` already centres them on each other, and the two
    pixels a margin would add is exactly far enough to read as wrong. */
@@ -13641,7 +13763,9 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-work-none {
   margin: 0;
   padding: 10px 13px 12px;
-  border-top: 1px solid var(--border);
+  overflow: hidden;
+  border: 0 solid var(--border);
+  border-top-width: 1px;
   font-size: var(--fs-sm);
   line-height: 1.5;
   color: var(--text-secondary);
@@ -13663,9 +13787,36 @@ html[data-theme="dark"] .booking-container iframe {
   0.4%, 4.76% { opacity: 1; }
   4.77%, 100% { opacity: 0; }
 }
-.hm-work-in {
+.hm-work-fade {
   animation: hm-work-in var(--hm-lap) linear infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+/* A step takes the room it needs when it lands and not a moment before, so the window grows a
+   line at a time the way the real one does while the job runs. Padding and the hairline animate
+   with the height, because a border-box cannot shrink below its own padding: left alone, a
+   collapsed row still stood 17px tall, and two of those are the gap this exists to close. */
+.hm-work-open {
+  animation: hm-work-row var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+@keyframes hm-work-row {
+  0%             { opacity: 0; transform: translateY(4px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+  0.011%         { max-height: 90px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+  0.4%           { opacity: 1; transform: none; }
+  13.15%         { opacity: 1; transform: none; max-height: 90px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+  13.9%          { opacity: 0; transform: none; max-height: 90px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+  13.91%, 100%   { opacity: 0; transform: none; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+}
+/* The read-only note is the same movement with its own padding, because it is the whole document
+   of a job that changed nothing rather than one row of one. */
+.hm-work-none.hm-work-open { animation-name: hm-work-note; }
+@keyframes hm-work-note {
+  0%             { opacity: 0; transform: translateY(4px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+  0.011%         { max-height: 120px; padding-top: 10px; padding-bottom: 12px; border-width: 1px; }
+  0.4%           { opacity: 1; transform: none; }
+  13.15%         { opacity: 1; transform: none; max-height: 120px; padding-top: 10px; padding-bottom: 12px; border-width: 1px; }
+  13.9%          { opacity: 0; transform: none; max-height: 120px; padding-top: 10px; padding-bottom: 12px; border-width: 1px; }
+  13.91%, 100%   { opacity: 0; transform: none; max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
 }
 .hm-work-run {
   animation: hm-work-run var(--hm-lap) linear infinite both;
@@ -13679,7 +13830,7 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-step::after { display: none; }
   .hm-step-n { animation: none; background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
   /* The clock stops on the total, which is the reading the heading states in words and the only
-     one of the five that is true of the whole track. */
+     one of the sixteen that is true of the whole track. */
   .hm-eta-clock i { animation: none; opacity: 0; }
   .hm-eta-clock i:last-child { opacity: 1; }
   .hm-desk-live i { animation: none; opacity: 1; }
@@ -13698,7 +13849,9 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-cap:first-child { display: block; }
   /* Same rule as the captions, for the same reason: with the cycle stopped, seven panels in one
      grid cell would print seven job records on top of each other. */
-  .hm-work, .hm-work-in, .hm-work-run { animation: none; opacity: 1; transform: none; }
+  .hm-work, .hm-work-fade, .hm-work-open, .hm-work-run {
+    animation: none; opacity: 1; transform: none; max-height: none;
+  }
   .hm-work { display: none; }
   .hm-work:first-child { display: grid; }
   /* The live pill is the three seconds before the outcome. With nothing moving there is no
@@ -13789,10 +13942,14 @@ html[data-theme="dark"] .booking-container iframe {
   /* Fifty-six pixels narrower, so messages that fitted on one line at 376 take two here and the
      tallest thread measures 331 rather than 308. Same sum as the desktop floor, with that number
      in it: without the difference the reminder's opening line sits in the dissolve again. */
-  .hm-pz--hero .hm-scenes { min-height: 444px; }
+  /* 444 until the type in the thread came down. The tallest thread measures 335 here now, so
+     that floor was carrying a hundred pixels of empty screen, enough that the phone read as a
+     tall box with a conversation at the bottom of it. 360 leaves the same 25px of headroom the
+     desktop floor leaves. */
+  .hm-pz--hero .hm-scenes { min-height: 360px; }
   /* The panel is the phone's object, so it takes the phone's width here rather than standing
      56px wider than the device whose work it is reporting. */
-  .hm-desk { max-width: 320px; }
+  .hm-deskbox { max-width: 320px; }
   /* The wash was sized off the phone's width, and the phone lost a sixth of it here while the
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }

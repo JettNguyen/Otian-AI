@@ -9201,6 +9201,49 @@ html[data-theme="dark"] .booking-container iframe {
 .pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
 .pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
 
+/* A switch that both reports a state and changes it. It replaced a pill beside a button, which
+   was two controls saying one thing: the pill reported, the button acted, and they could
+   disagree. One control cannot disagree with itself, which is the point here rather than the
+   saved pixels, because the thing being reported is whether an account is protected. */
+.acct-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-hover-strong);
+  box-shadow: var(--well);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+}
+.acct-switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--bg-card);
+  box-shadow: var(--lift-sm);
+  transition: transform var(--transition);
+}
+.acct-switch[aria-checked="true"] { background: var(--c-teal); border-color: var(--c-teal); }
+.acct-switch[aria-checked="true"]::after { transform: translateX(18px); }
+.acct-switch:focus-visible { outline: 2px solid var(--c-teal); outline-offset: 2px; }
+.acct-switch:disabled { cursor: default; opacity: 0.5; }
+/* The knob takes whichever ink its own track is not. On the cream theme one white knob clears both
+   tracks, but in the dark theme the card and the off track are both dark and the teal is light, so
+   a single ink loses the knob in one state or the other: it was invisible when off. Each state
+   picks the ink that contrasts with the track behind it, which is the only thing the knob has to do. */
+[data-theme="dark"] .acct-switch::after { background: var(--text-primary); }
+[data-theme="dark"] .acct-switch[aria-checked="true"]::after { background: var(--bg-card); }
+@media (prefers-reduced-motion: reduce) {
+  .acct-switch, .acct-switch::after { transition: none; }
+}
+
 .code {
   font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: var(--fs-base); letter-spacing: 0.06em;
   background: var(--surface-soft-strong); border-radius: var(--radius-sm);

@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-26" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260907-27" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -583,18 +583,136 @@
           <h2 id="works-with-heading" class="ww-band-line">The apps you already have open.</h2>
           <label for="ww-pause" class="ww-pause-btn" title="Pause the motion"><svg class="ww-pause-glyph ww-pause-off" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.5 2.5h2.6v11H4.5zM8.9 2.5h2.6v11H8.9z" /></svg><svg class="ww-pause-glyph ww-pause-on" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5.2 2.6v10.8L13.2 8z" /></svg><span class="sr-only ww-pause-off">Pause the motion</span><span class="sr-only ww-pause-on">Play the motion</span></label>
         </div>
-        <!-- The shape of the band before the names scroll past. It was two rows of logos and a
-             note, which reads as a list rather than as reach: a visitor got no number until the
-             line under the marquees, by which point the logos had already gone by. The three
-             counts are exact and dated in FACTS.md, 48 is the total the note below refers back to,
-             and the 7 and the 5 are named parts of it rather than three things to add up.
-             .stat-row is the browse page's component and css/styles.css already carried a
-             .ww-band .stat-row rule for a row that was never placed here. -->
-        <ul class="stat-row fade-up">
-          <li class="stat"><span class="stat-num">48</span><span class="stat-label">Apps and services</span></li>
-          <li class="stat"><span class="stat-num">7</span><span class="stat-label">AI companies</span></li>
-          <li class="stat"><span class="stat-num">5</span><span class="stat-label">Chat apps</span></li>
-        </ul>
+        <!-- THE SHAPE OF THE BAND, BEFORE THE NAMES SCROLL PAST.
+             This was two rows of logos and a note, and a competitor teardown had it exactly
+             right: a list of words is not a picture of reach, and a visitor got no number at all
+             until the line under the marquees, by which point the logos had gone past. A stat row
+             of three counts stood here for one commit and this replaces it, because the counts
+             are worth more inside the drawing than beside it.
+
+             What the drawing says that neither the numbers nor the logos do is where the lines
+             start. Everything here radiates from a computer that is yours, which is the one
+             picture a hosted competitor cannot draw of itself. It stops there on purpose: this
+             is about what Archie reaches, not about where your words go, and that second claim
+             has its own section further down with the qualifications it needs. Nothing here says
+             "and nothing passes through us", because on the free credits and on the plan with
+             the AI included, something does.
+
+             Counts: 5 + 36 + 7 = 48, the split FACTS.md records for this band, so the three
+             cards are the whole of it and not three samples. The third line of each card says
+             what the group is for rather than naming members, because the marquee underneath
+             already names all forty-eight. -->
+        <figure class="explain-figure explain-figure--band fade-up">
+          <!-- =================== DESKTOP =================== -->
+          <svg class="explain-svg--desktop" viewBox="0 0 680 300" role="img" aria-labelledby="cxd-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="cxd-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 36 accounts and devices, among them mail, calendar, money and lights.</title>
+            <style>
+              .cx-screen{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .cx-base{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+              .cx-bar{fill:var(--accent);opacity:.55}
+              .cx-bar-b{fill:var(--accent)}
+              .cx-card{fill:rgba(224,138,91,.028);stroke:var(--border);stroke-width:1.5}
+              .cx-link{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#cxArr)}
+              .cx-num{fill:var(--accent);font-size:27px;font-weight:700;text-anchor:middle}
+              .cx-title{fill:currentColor;font-size:15px;font-weight:700;text-anchor:middle}
+              .cx-lbl{fill:currentColor;font-size:14.5px;font-weight:600;text-anchor:start}
+              .cx-cap{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:middle}
+              .cx-sub{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:start}
+              @media (prefers-reduced-motion:no-preference){
+                .cx-link{animation:cxFlow 1.9s linear infinite}
+                @keyframes cxFlow{to{stroke-dashoffset:-18}}
+              }
+            </style>
+            <defs>
+              <marker id="cxArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+
+            <path class="cx-link" d="M158 150 C 214 150 226 46 282 46"/>
+            <path class="cx-link" d="M158 150 H 282"/>
+            <path class="cx-link" d="M158 150 C 214 150 226 254 282 254"/>
+
+            <rect class="cx-screen" x="58" y="100" width="84" height="58" rx="4"/>
+            <rect class="cx-bar" x="70" y="113" width="36" height="7" rx="3.5"/>
+            <rect class="cx-bar-b" x="94" y="126" width="36" height="7" rx="3.5"/>
+            <rect class="cx-bar" x="70" y="139" width="27" height="7" rx="3.5"/>
+            <path class="cx-base" d="M44 166 h112 l-9 13 h-94 z"/>
+            <text class="cx-title" x="100" y="201">Archie</text>
+            <text class="cx-cap" x="100" y="220">on your computer</text>
+
+            <rect class="cx-card" x="286" y="8" width="376" height="76" rx="12"/>
+            <text class="cx-num" x="330" y="56">5</text>
+            <text class="cx-lbl" x="366" y="41">Chat apps</text>
+            <text class="cx-sub" x="366" y="61">where you talk to it</text>
+
+            <rect class="cx-card" x="286" y="112" width="376" height="76" rx="12"/>
+            <text class="cx-num" x="330" y="160">7</text>
+            <text class="cx-lbl" x="366" y="145">AI companies</text>
+            <text class="cx-sub" x="366" y="165">on an account of yours</text>
+
+            <rect class="cx-card" x="286" y="216" width="376" height="76" rx="12"/>
+            <text class="cx-num" x="330" y="264">36</text>
+            <text class="cx-lbl" x="366" y="249">Accounts and devices</text>
+            <text class="cx-sub" x="366" y="269">mail, calendar, money, lights</text>
+          </svg>
+
+          <!-- =================== MOBILE =================== -->
+          <svg class="explain-svg--mobile" viewBox="0 0 380 470" role="img" aria-labelledby="cxm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="cxm-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 36 accounts and devices, among them mail, calendar, money and lights.</title>
+            <style>
+              .cxm-screen{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .cxm-base{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+              .cxm-bar{fill:var(--accent);opacity:.55}
+              .cxm-bar-b{fill:var(--accent)}
+              .cxm-card{fill:rgba(224,138,91,.028);stroke:var(--border);stroke-width:1.5}
+              .cxm-spine{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.45;stroke-linecap:round}
+              .cxm-link{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#cxmArr)}
+              .cxm-num{fill:var(--accent);font-size:24px;font-weight:700;text-anchor:middle}
+              .cxm-title{fill:currentColor;font-size:15px;font-weight:700;text-anchor:start}
+              .cxm-lbl{fill:currentColor;font-size:13.5px;font-weight:600;text-anchor:start}
+              .cxm-cap{fill:currentColor;opacity:.62;font-size:12px;text-anchor:start}
+              .cxm-sub{fill:currentColor;opacity:.62;font-size:11.5px;text-anchor:start}
+              @media (prefers-reduced-motion:no-preference){
+                .cxm-link{animation:cxFlowM 1.9s linear infinite}
+                @keyframes cxFlowM{to{stroke-dashoffset:-18}}
+              }
+            </style>
+            <defs>
+              <marker id="cxmArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+
+            <path class="cxm-spine" d="M52 80 V 398"/>
+            <path class="cxm-link" d="M52 146 H 80"/>
+            <path class="cxm-link" d="M52 272 H 80"/>
+            <path class="cxm-link" d="M52 398 H 80"/>
+
+            <rect class="cxm-screen" x="26" y="20" width="52" height="38" rx="3.5"/>
+            <rect class="cxm-bar" x="34" y="29" width="24" height="5" rx="2.5"/>
+            <rect class="cxm-bar-b" x="48" y="38" width="22" height="5" rx="2.5"/>
+            <rect class="cxm-bar" x="34" y="47" width="18" height="5" rx="2.5"/>
+            <path class="cxm-base" d="M16 64 h72 l-7 10 h-58 z"/>
+            <text class="cxm-title" x="100" y="40">Archie</text>
+            <text class="cxm-cap" x="100" y="58">on your computer</text>
+
+            <rect class="cxm-card" x="84" y="100" width="280" height="92" rx="12"/>
+            <text class="cxm-num" x="116" y="155">5</text>
+            <text class="cxm-lbl" x="150" y="141">Chat apps</text>
+            <text class="cxm-sub" x="150" y="162">where you talk to it</text>
+
+            <rect class="cxm-card" x="84" y="226" width="280" height="92" rx="12"/>
+            <text class="cxm-num" x="116" y="281">7</text>
+            <text class="cxm-lbl" x="150" y="267">AI companies</text>
+            <text class="cxm-sub" x="150" y="288">on an account of yours</text>
+
+            <rect class="cxm-card" x="84" y="352" width="280" height="92" rx="12"/>
+            <text class="cxm-num" x="116" y="407">36</text>
+            <text class="cxm-lbl" x="150" y="393">Accounts and devices</text>
+            <text class="cxm-sub" x="150" y="414">mail, calendar, money, lights</text>
+          </svg>
+        </figure>
       </div>
 
       <div class="ww-mq">

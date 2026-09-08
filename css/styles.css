@@ -2565,11 +2565,16 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   to { transform: translateX(-50%); }
 }
 
-/* The head already carries 44px under it, so this only has to set the gap to the marquees.
-   Its own 40px top margin plus that would have left the counts adrift from the heading they
-   belong to and crowded against the first row of logos. */
 .ww-band .stat-row {
-  margin: 0 0 36px;
+  margin: 22px 0 0;
+}
+
+/* The connections figure sits between the heading and the marquees. --band's 8px was tuned for
+   a figure that is the last thing in its section; this one has two rows of logos under it, and
+   the head above it already carries 44px. */
+.ww-band .explain-figure {
+  margin-top: 0;
+  margin-bottom: 34px;
 }
 
 .ww-band .works-with-note { margin-top: 14px; }

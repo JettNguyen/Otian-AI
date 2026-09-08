@@ -6722,16 +6722,25 @@ html[data-theme="dark"] .booking-container iframe {
 
    A tier table has three columns and a reader who counts them concludes we sell three tiers,
    which is the one thing the heading above the table is trying to say we do not: the column to
-   the left is a trial that runs out and the column to the right is a different app. So the
-   middle card carries a flag, and it says "The plan" rather than "Most popular", because we
-   have no sales to count and /testimonials/ says so. The claim on the flag is checkable off the
-   page it sits on; a popularity claim would be the only sentence in the table that is not.
+   the left is a trial that runs out and the column to the right is a different app.
+
+   So the middle card carries a flag, and it says "Our pick" rather than "Most popular". The
+   difference is who is doing the claiming. A popularity badge is a fact about other customers,
+   and we have none to count: /testimonials/ says on its own page that we are still collecting
+   reviews. A recommendation is a fact about us, it is true, and a reader can hold us to it.
+
+   GREEN, NOT THE ACCENT. The accent is on every call to action on this site, so a flag wearing
+   it read as one more button rather than as a mark on the column. --c-green-fill is the app's
+   own solid green, the one on its Start switch, and it carries white here the way it does
+   there: one meaning colour used for one meaning in both places. Neither value inverts in dark
+   mode (see the note beside the tokens), and white on it measures 4.9:1, which check-contrast
+   cannot see from here because the pairing is written on the rule rather than in :root.
 
    The flag sits ON the top border rather than inside the card, which is what makes it read as a
-   label attached to the column instead of a fourth line of copy inside it, and it is why the
-   card takes the extra top padding: without it the label above the price would move up under
-   the flag on the lead card only, and three columns that start at different heights read as
-   three unrelated boxes. */
+   label attached to the column instead of a fourth line of copy inside it. Nothing inside the
+   card moves to make room: the three columns start their labels at the same height, and a lead
+   card that pushed its own label down would put the three out of step by half a line, which is
+   what makes a row of cards read as three unrelated boxes. */
 .plan-card--lead,
 .hm-plan--lead {
   position: relative;
@@ -6751,8 +6760,8 @@ html[data-theme="dark"] .booking-container iframe {
   transform: translate(-50%, -50%);
   padding: 3px 12px;
   border-radius: 999px;
-  background: var(--accent);
-  color: var(--text-on-accent);
+  background: var(--c-green-fill);
+  color: #FFFFFF;
   font-size: var(--fs-2xs);
   font-weight: 700;
   letter-spacing: 0.08em;

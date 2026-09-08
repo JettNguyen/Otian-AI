@@ -6718,9 +6718,47 @@ html[data-theme="dark"] .booking-container iframe {
   box-shadow: var(--lift-md);
 }
 
-/* The middle card leads on a border, not a badge. "Most popular" is a sales count we do not
-   have, and /testimonials/ says so on its own page. */
-.plan-card--lead { border-color: var(--accent-line); }
+/* The one plan, flagged.
+
+   A tier table has three columns and a reader who counts them concludes we sell three tiers,
+   which is the one thing the heading above the table is trying to say we do not: the column to
+   the left is a trial that runs out and the column to the right is a different app. So the
+   middle card carries a flag, and it says "The plan" rather than "Most popular", because we
+   have no sales to count and /testimonials/ says so. The claim on the flag is checkable off the
+   page it sits on; a popularity claim would be the only sentence in the table that is not.
+
+   The flag sits ON the top border rather than inside the card, which is what makes it read as a
+   label attached to the column instead of a fourth line of copy inside it, and it is why the
+   card takes the extra top padding: without it the label above the price would move up under
+   the flag on the lead card only, and three columns that start at different heights read as
+   three unrelated boxes. */
+.plan-card--lead,
+.hm-plan--lead {
+  position: relative;
+  border-color: var(--accent-line);
+}
+/* A rung of elevation over its neighbours in each family's own vocabulary, which is the cheapest
+   way to say which column the page is recommending without writing a sentence claiming anybody
+   else picked it. Separate rules because the two families sit at different heights to begin
+   with: the pricing table's cards are already lifted and the homepage's three are barely off
+   the band. */
+.plan-card--lead { box-shadow: var(--lift-lg); }
+.hm-plan--lead { box-shadow: var(--lift-md); }
+.plan-flag {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
 
 /* One size for all three amounts, whether the amount is a price or a word: at different sizes
    the label above and the list below start at different heights, and three columns that do not
@@ -12356,10 +12394,8 @@ html[data-theme="dark"] .booking-container iframe {
   box-shadow: var(--edge-top), var(--shadow-sm);
 }
 
-/* Same call as .plan-card--lead: a border, not a "most popular" badge. That is a sales count
-   we do not have, and inventing one is the exact move the Standard's no-dark-patterns rule
-   exists to stop. */
-.hm-plan--lead { border-color: var(--accent-line); }
+/* The lead card's border, elevation and flag are set with the pricing page's above, so the
+   two pages recommend the same column in the same words and the same weight. */
 
 .hm-plan-label {
   display: block;

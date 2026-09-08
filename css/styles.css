@@ -2565,8 +2565,11 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   to { transform: translateX(-50%); }
 }
 
+/* The head already carries 44px under it, so this only has to set the gap to the marquees.
+   Its own 40px top margin plus that would have left the counts adrift from the heading they
+   belong to and crowded against the first row of logos. */
 .ww-band .stat-row {
-  margin: 22px 0 0;
+  margin: 0 0 36px;
 }
 
 .ww-band .works-with-note { margin-top: 14px; }

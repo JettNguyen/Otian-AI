@@ -12293,23 +12293,40 @@ html[data-theme="dark"] .booking-container iframe {
 
   max-width: 376px;
   width: 100%;
-  padding: 8px 26px 26px;
-  /* Rounded at the top and running off the bottom, which is the one crop that reads as a phone
-     without committing to a phone's proportions. Closed on all four sides this object is 376
-     wide by about 480 tall, and a 0.78 rectangle with rounded corners is a tablet. Open at the
-     bottom it has no aspect ratio to get wrong, and the thread carrying on past the edge of the
-     figure is what every product shot of a messaging app looks like.
+  /* OPEN AT BOTH ENDS, which is the crop that reads as a phone without committing to a phone's
+     proportions. Closed on all four sides this object is 376 wide by about 500 tall, and a 0.75
+     rectangle is a tablet; a rounded top edge was tried and read as exactly that, a closed box.
+     Dissolved at both ends it has no aspect ratio to get wrong and it is a glimpse of a screen,
+     which is what every product shot of a messaging app is.
 
-     The old fade dissolved the top 104px too, because the top was where the thread scrolled away
-     into nothing. There is a header up there now, so the dissolve moved down onto .hm-scenes,
-     where the thread actually scrolls away underneath it. */
-  border-radius: 30px 30px 0 0;
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
-  /* Lift. The glow behind it on .hm-stage says there is light around the phone; this says the
-     phone is in front of the page rather than printed on it. The mask takes the bottom of it
-     away with the bottom of the device, which is correct: a shadow cannot outlive its object. */
-  box-shadow: 0 34px 64px -28px rgba(40, 27, 18, 0.5), 0 6px 18px -10px rgba(40, 27, 18, 0.32);
+     THE DISSOLVE IS LOWER THAN THE TOP OF THE ELEMENT, and that is the whole of this. Every
+     earlier version tied the fade's length to the padding above the header, so the band always
+     sat in the same place relative to Ember and only the figure's height changed: 92px and 52px
+     were tried and each one bought nothing but a taller strip of blank warm wall. The two are
+     decoupled now. There are 4px of padding, so the header sits almost at the top of the
+     element, and the mask reaches full strength at 26px, which is inside it. Less of the phone
+     shows above Ember, and the gradient the eye reads as the top edge has moved down onto him.
+
+     26 and not further: Ember is 38px tall and starts at 4, so a longer ramp begins taking his
+     face rather than the wall behind it.
+
+     The foot is the same idea, and deliberately less of it. It used to be 26px of wall with a
+     16px softening, which is a hem rather than a dissolve: the device stopped, and then a thin
+     line of it was blurred. Now there are 14px of padding and the ramp starts 20px up, so it
+     just catches the bottom edge of the message bar and the phone leaves the picture through its
+     own chrome rather than through a strip of empty wall. It is not the top's 26px mirrored: the
+     top's ramp lands on a profile picture and a name, which stay readable half-dissolved, and
+     the bottom's lands on the one control in the figure. Taking a quarter of the send button
+     away read as a button that had been rubbed out. The rule above the bar carries the rest of
+     the separation. */
+  padding: 4px 26px 14px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 26px, #000 calc(100% - 20px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 26px, #000 calc(100% - 20px), transparent);
+  /* No shadow, deliberately. The device is open at both ends now, so there is no border box worth
+     casting one from: a box-shadow drew a hard rectangle around a shape that dissolves, and a
+     drop-shadow filter is composited before the mask, which tiles the gradient out over the blur.
+     The lift comes from the wash behind it on .hm-stage and from the screen being the darkest
+     thing in the hero, which is what a lit object standing on a page actually looks like. */
 }
 /* The same two layers as .hm-pz, with the light stopped at 38% instead of 52%. This phone is half
    again as tall, so the inherited percentage put the end of the glow level with the top of the
@@ -12342,6 +12359,17 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid var(--border);
 }
 .hm-pz-face { display: block; width: 38px; height: 38px; flex-shrink: 0; }
+
+/* The message bar gets the same hairline as the header, for the same reason and to the same
+   edges. Without it the field was one more rounded shape at the bottom of a column of rounded
+   shapes, and on the scenes where the last message is a card with buttons the two ran together:
+   a row of three buttons with a pill under it reads as part of the card. A rule across the phone
+   says the thing below it belongs to the app rather than to the conversation. */
+.hm-pz--hero .hm-composer {
+  margin: 0 -14px;
+  padding: 13px 14px 0;
+  border-top: 1px solid var(--border);
+}
 .hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: left; }
 .hm-pz-who b { font-size: var(--fs-sm); font-weight: 650; color: var(--text-primary); }
 .hm-pz-who i { font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); }
@@ -12349,13 +12377,15 @@ html[data-theme="dark"] .booking-container iframe {
 /* The thread dissolves under the header, not off the top of the device. Shorter than the 104px
    it replaces, because it no longer has to stand in for a missing top edge.
 
-   The floor went up with it. 330px was set when the tallest scene was a mail card; the reminder is
-   four blocks now, and at 330 its opening message sat inside the dissolve, so the one line the
-   scene is built on arrived already half gone. 372 is that scene at full height with the fade
-   clear of it, and the six shorter scenes spend the extra forty pixels on empty screen above the
-   thread, which is what a thread looks like and is now framed by a header rather than by nothing. */
+   The floor went up with it, and it has to clear the fade and not merely the content. 330px was
+   set when the tallest scene was a mail card; the reminder is four blocks and 308px tall, so at
+   330 and again at 372 its opening message began exactly where the thread does and arrived
+   already half dissolved. The floor is that 308 plus the composer, its rule, the gap, and 44px of
+   clearance for the fade, which is the number below. The six shorter scenes spend the difference
+   on empty screen above the thread, which is what a thread looks like and is now framed by a
+   header rather than by nothing. */
 .hm-pz--hero .hm-scenes {
-  min-height: 372px;
+  min-height: 420px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
   mask-image: linear-gradient(to bottom, transparent, #000 44px);
 }
@@ -12906,16 +12936,78 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-send { animation: none; }
 }
 
+/* ========================================
+   Where it starts, and that it does not stop there
+   ======================================== */
+/* Two cards and three lines, and the two halves are doing opposite jobs, so they are built
+   differently on purpose. The pair is the answer to "which of these do I turn on first", so it is
+   raised: real cards, the app's own marks, room around the words. The three ways are the answer
+   to "what is this in a year", which is an argument rather than a shelf, so they are set flat, in
+   a row, at the weight of a caption. Making both of them cards would have said the shelf and the
+   argument were the same kind of thing. */
+.grow-pair {
+  list-style: none;
+  max-width: 880px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.grow-pair li {
+  padding: 24px 24px 26px;
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+.grow-mark { display: block; margin-bottom: 14px; }
+.grow-pair h3 { font-size: var(--fs-xl); line-height: 1.3; margin: 0 0 8px; }
+.grow-pair p { margin: 0; font-size: var(--fs-md); line-height: 1.6; color: var(--text-secondary); }
+
+.grow-then { margin-top: 46px; }
+.grow-ways {
+  list-style: none;
+  padding: 0;
+  margin: 26px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px 32px;
+  text-align: left;
+}
+/* The mark spans both rows so it sits against the whole item rather than against its first line,
+   which is the one place in this block the three are allowed to look like cards. */
+.grow-ways li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* start, not the stretch default. The three items are one row of the outer grid, so each li is
+     as tall as the tallest, and a stretched auto row hands its slack to the rows inside: the item
+     with the shortest sentence had a twelve-pixel hole opened between its heading and its text,
+     and the three headings then sat on three different lines for no visible reason. */
+  align-content: start;
+  gap: 3px 12px;
+}
+.grow-ways svg { grid-row: 1 / span 2; margin-top: 1px; color: var(--accent); }
+.grow-ways b { color: var(--text-primary); font-weight: 650; font-size: var(--fs-lg); }
+.grow-ways span { color: var(--text-secondary); font-size: var(--fs-md); line-height: 1.6; }
+
+@media (max-width: 780px) {
+  .grow-pair { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 32px; }
+  .grow-ways { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .grow-then { margin-top: 36px; }
+}
+
 /* ---- See it work: the recording's own section ---- */
 .hm-seeit .hm-demo { margin-top: 44px; }
 
 @media (max-width: 899px) {
   .hm-stage { margin-top: 40px; }
   .hm-pz--hero { max-width: 320px; }
-  /* Fifty-six pixels narrower, so every message that fitted on one line at 376 takes two here and
-     the tallest scene grows by about forty. Without this the floor set for the desktop width left
-     the reminder's opening line sitting in the dissolve at the top of the thread. */
-  .hm-pz--hero .hm-scenes { min-height: 416px; }
+  /* Fifty-six pixels narrower, so messages that fitted on one line at 376 take two here and the
+     tallest thread measures 331 rather than 308. Same sum as the desktop floor, with that number
+     in it: without the difference the reminder's opening line sits in the dissolve again. */
+  .hm-pz--hero .hm-scenes { min-height: 444px; }
   /* The wash was sized off the phone's width, and the phone lost a sixth of it here while the
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }

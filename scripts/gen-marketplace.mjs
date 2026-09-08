@@ -130,6 +130,11 @@ function renderHomeFaces(items) {
   const missing = [];
   let next = "";
   let at = 0;
+  /* Counted, not asserted. Both messages below said "six marks" as a literal, and the coverage
+     grid is four rows since the homepage's "Where it starts" section took the mail and calendar
+     ones. A generator that reports a number it is not measuring is a generator that will keep
+     reporting it after the next edit too. */
+  let marks = 0;
 
   const ROW = /<li data-face="([^"]+)">/g;
   let row;
@@ -159,13 +164,14 @@ function renderHomeFaces(items) {
     next += html.slice(at, slot) + SLOT +
       faceHtml(key.slice(0, colon), key.slice(colon + 1), "row") + "</span>";
     at = end;
+    marks++;
   }
   next += html.slice(at);
 
   if (missing.length) {
     throw new Error("index.html names add-ons that are not in the catalog: " + missing.join(", "));
   }
-  return { html, next };
+  return { html, next, marks };
 }
 
 function main() {
@@ -188,7 +194,7 @@ function main() {
 
   if (!changed && !homeChanged) {
     console.log(`gen-marketplace: clean. ${items.length} public add-ons in the page, ` +
-      "six marks on the homepage.");
+      `${home.marks} marks on the homepage.`);
     return 0;
   }
 
@@ -212,7 +218,7 @@ function main() {
   if (homeChanged) fs.writeFileSync(HOME, home.next, "utf8");
   console.log(
     `gen-marketplace: ${changed ? items.length + " add-on cards into skills-marketplace/browse/" : "browse page unchanged"}` +
-    `, ${homeChanged ? "six marks into index.html" : "homepage unchanged"}.`
+    `, ${homeChanged ? home.marks + " marks into index.html" : "homepage unchanged"}.`
   );
   return 0;
 }

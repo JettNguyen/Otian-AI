@@ -6744,7 +6744,26 @@ html[data-theme="dark"] .booking-container iframe {
 .plan-card--lead,
 .hm-plan--lead {
   position: relative;
-  border-color: var(--accent-line);
+  /* THE WHOLE CARD, not just its edge. A border and a shadow say "this one is different"; a
+     ground says "this one is the answer", and it is the only thing in a row of three that a
+     reader takes in before reading a word. It is the flag's own green, carried down into the
+     card at a fraction of itself, so the mark and the column it marks are one object rather
+     than a pill sitting on an unrelated box.
+
+     Mixed against --bg-card rather than set as an rgba wash, so it lands correctly in both
+     themes off one declaration: on cream it is a card that has gone very slightly green, and on
+     the dark page it is the dark card ground moved the same distance in the same direction. A
+     flat rgba would have been a pale film over the dark theme's card and would have read as a
+     different material rather than the same card in another colour.
+
+     13%, walked up until the column was the thing a reader's eye lands on first in a row of
+     three, and stopped before the card started reading as a status rather than a choice (a
+     green panel means "succeeded" everywhere else on this site, including the pill in the hero
+     one screen up). 6% was the first try and it was too polite to be seen at a glance, which
+     is the only job this colour has. Body text on it measures 12.4:1 in light and 11.1:1 in
+     dark, so nothing inside the card had to move with the ground. */
+  background: color-mix(in srgb, var(--c-green) 13%, var(--bg-card));
+  border-color: color-mix(in srgb, var(--c-green) 40%, var(--border));
 }
 /* A rung of elevation over its neighbours in each family's own vocabulary, which is the cheapest
    way to say which column the page is recommending without writing a sentence claiming anybody
@@ -11205,7 +11224,7 @@ html[data-theme="dark"] .booking-container iframe {
        The top came down by 24 with it when the job panel went in: the stage is two stacked
        objects now, and every pixel above the first one is a pixel the second one falls below the
        fold by. */
-    padding-top: calc(var(--nav-height) + 32px);
+    padding-top: calc(var(--nav-height) + 20px);
     padding-bottom: 36px;
   }
   /* The headline measure that made three sentences land two-per-line was set for a full-width
@@ -11493,19 +11512,258 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-flow-arrow svg { transform: rotate(90deg); }
 }
 
-/* Setup */
-.hm-needs { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px; }
-.hm-need {
-  display: flex; align-items: center; gap: 12px;
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 20px; font-size: var(--fs-base); font-weight: 550;
-  /* A shopping list of physical things you need, so the chips are physical too. */
-  box-shadow: var(--edge-top), var(--shadow-xs);
+/* Setup: the five steps, on a track.
+
+   This replaced .hm-needs, which was three chips naming the things you must own and a fourth
+   saying "That's it". Those answered "can I", and after two minutes of watching the recording the
+   question is "what am I in for". The three requirements are still all here, inside the steps
+   they belong to (the computer is 1, the Otian account and plan are 2, the AI account is 3), and
+   the link to the full list is still under the track: rounding down what setup takes is the one
+   direction this page may never round in.
+
+   A track and not a stack of cards. The rail is the point of the section, because the argument is
+   that this is a short line with an end to it, and five boxes in a row do not say that. It is one
+   hairline per step drawn from the disc to the next disc, rather than one line under all five,
+   which is what keeps it correct when the row wraps: the last step in a row draws nothing.
+
+   No minutes on the discs. FACTS.md records why: nobody has timed a clean install, and an honest
+   five minutes beats a 60 seconds we visibly miss on first run. The chip at the foot of each card
+   carries who spends the time instead, which is checkable today and is the thing the minutes were
+   standing in for. Three colours, three answers: you (muted), the AI company (gold, because it is
+   the one step that is not ours to hurry), and Archie itself (green, the same green as the flag on
+   the plan and the Finished pill in the hero, all three meaning the same thing). */
+.hm-steps {
+  list-style: none;
+  max-width: 1120px;
+  margin: 40px auto 0;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0 18px;
+  text-align: left;
 }
-.hm-need svg { color: var(--accent); flex-shrink: 0; }
-/* Ember like every other check glyph on the site (see the color rule in RESTYLE.md). */
-.hm-need--done svg { color: var(--accent); }
-.hm-need span { color: var(--text-secondary); font-weight: 450; }
+.hm-step {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 10px;
+  padding-top: 4px;
+}
+.hm-step-n { grid-row: 1; }
+.hm-steps h3 { grid-row: 2; }
+.hm-steps p { grid-row: 3; }
+.hm-step-who { grid-row: 4; }
+
+/* The track keeps moving.
+
+   A one-shot reveal on scroll said the sequence takes time exactly once, to the reader who
+   happened to be scrolling when it fired, and then the band was five still cards for as long as
+   anybody looked at it. So the highlight runs on a loop instead: a light travels the track, disc
+   to disc, in the order the steps are read, and there is always something in motion on the page.
+
+   ONE KEYFRAME FOR ALL FIVE, and the shape of it is what makes that possible. Every step runs the
+   same animation on the same 7s lap and differs only by an animation-delay of --i lap-fifths, so
+   the light passes each disc at its own moment. That only works because the keyframe returns to
+   where it started: an animation-delay applies once, so an infinite animation repeats forever on
+   its own phase, and its state at 100% is the state the element is in while the light is
+   somewhere else. A "fill up as the light passes and stay filled" version cannot be written this
+   way at all, because every step would have to switch off at the same instant and that instant is
+   a different phase for each of them.
+
+   No script and no scroll dependency, so this is running before anything has been observed, and
+   it is off entirely under prefers-reduced-motion (below), where the track is a static diagram. */
+.hm-steps { --st-lap: 7s; }
+
+/* The clock over the track.
+
+   One readout, not five labels. A running total printed beside step five reads as the time step
+   five takes, which is the opposite of what it means, and there is no wording that fixes that
+   while the number sits inside the card.
+
+   It counts by swapping, which is the only way to animate a number without a script: the five
+   figures sit in one cell and each is shown for the fifth of the lap that its own step is lit, so
+   the reading climbs with the light and lands on the total. No fill mode on the animation, and
+   this is the whole trick: with `both` the backwards fill would paint every figure's 0% state
+   during its delay and all five would be stacked on top of each other at load. Unset, the base
+   rule (opacity 0) holds until each figure's turn arrives.
+
+   The keyframe hides at 100% and shows at 0%, so the wrap from the last figure back to the first
+   is the jump it should be rather than a fade through both. */
+.hm-eta {
+  --st-lap: 7s;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 26px 0 0;
+}
+.hm-eta-label {
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.hm-eta-clock {
+  display: grid;
+  /* One cell for all five, sized by the widest, so the label beside it does not step sideways as
+     the reading goes from one figure to two. */
+  justify-items: start;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  color: var(--accent-ink);
+}
+.hm-eta-clock i {
+  grid-area: 1 / 1;
+  font-style: normal;
+  opacity: 0;
+  animation: hm-eta-tick var(--st-lap) linear infinite;
+  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+}
+@keyframes hm-eta-tick {
+  0%          { opacity: 1; }
+  19.99%      { opacity: 1; }
+  20%, 100%   { opacity: 0; }
+}
+.hm-step-n {
+  animation: hm-step-lit var(--st-lap) linear infinite both;
+  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+}
+@keyframes hm-step-lit {
+  0%          { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  6%          { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  17%         { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  27%, 100%   { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+}
+/* The light crossing the gap to the next disc, drawn over the rail rather than instead of it, so
+   the rail is a fact of the diagram and this is only the thing moving along it. It ends the lap at
+   full width and invisible, which is not the same state it starts in and does not need to be:
+   opacity is 0 at both ends, so nothing about the difference is on screen. */
+.hm-step::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 40px;
+  width: calc(100% + 18px - 40px);
+  height: 1.5px;
+  background: var(--accent);
+  transform-origin: left center;
+  opacity: 0;
+  animation: hm-step-sweep var(--st-lap) linear infinite both;
+  animation-delay: calc(var(--i) * var(--st-lap) / 5);
+}
+.hm-step:last-child::after { display: none; }
+@keyframes hm-step-sweep {
+  0%          { opacity: 0; transform: scaleX(0); }
+  8%          { opacity: 1; transform: scaleX(0); }
+  20%         { opacity: 1; transform: scaleX(1); }
+  30%, 100%   { opacity: 0; transform: scaleX(1); }
+}
+/* The rail, one segment per step, from this disc to the next one. Drawn per step rather than as
+   one line under the row so that a wrapped row cannot leave a rail running off into nothing. */
+.hm-step::before {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 40px;
+  width: calc(100% + 18px - 40px);
+  height: 1.5px;
+  background: var(--border);
+}
+.hm-step:last-child::before { display: none; }
+.hm-step-n {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent-line);
+  color: var(--accent-ink);
+  font-size: var(--fs-base);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.hm-steps h3 { margin: 0; font-size: var(--fs-lg); line-height: 1.3; }
+.hm-steps p { margin: 0; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-secondary); }
+.hm-step-who {
+  align-self: end;
+  justify-self: start;
+  margin-top: 4px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  line-height: 1.6;
+}
+.hm-step-who--them { background: var(--c-gold-subtle); color: var(--c-gold-ink); }
+.hm-step-who--it { background: var(--c-green-subtle); color: var(--c-green-ink); }
+/* Narrower than five, the track turns on its side rather than folding.
+
+   Two columns was the obvious middle step and it was wrong twice: five is prime, so the last row
+   held one card and half the band was empty, and a rail between two columns draws a line sideways
+   on one row and a jump to the row below on the next, which is a shape the sequence does not
+   have. So the fold goes straight from five abreast to one down the left, the rail turns with it,
+   and the column is capped at a readable measure instead of running the width of the page. */
+@media (max-width: 1080px) {
+  .hm-steps {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 640px;
+    gap: 0;
+  }
+  /* The whole card indents past the rail, so the disc sits on the line and the words start clear
+     of it. The disc moves beside the title here instead of above it. */
+  .hm-step {
+    grid-template-columns: 32px minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    column-gap: 14px;
+    row-gap: 6px;
+    padding-bottom: 26px;
+  }
+  .hm-step-n { grid-row: 1; grid-column: 1; }
+  /* The clock moves to the end of the step's own line here, where a timeline puts it, rather than
+     under a disc that is now only 32px wide. The heading keeps clear of it by measure. */
+  .hm-steps h3 { grid-row: 1; grid-column: 2; align-self: center; }
+  .hm-steps p { grid-row: 2; grid-column: 2; }
+  .hm-step-who { grid-row: 3; grid-column: 2; }
+  /* Vertical now: from under this disc to the top of the next one. */
+  .hm-step::before {
+    top: 40px;
+    left: 15.25px;
+    width: 1.5px;
+    height: calc(100% - 40px);
+  }
+  /* The light turns with the track. */
+  .hm-step::after {
+    top: 40px;
+    left: 15.25px;
+    width: 1.5px;
+    height: calc(100% - 40px);
+    transform-origin: center top;
+  }
+  @keyframes hm-step-sweep {
+    0%          { opacity: 0; transform: scaleY(0); }
+    8%          { opacity: 1; transform: scaleY(0); }
+    20%         { opacity: 1; transform: scaleY(1); }
+    30%, 100%   { opacity: 0; transform: scaleY(1); }
+  }
+  .hm-step:last-child { padding-bottom: 0; }
+}
+
+.hm-steps-after {
+  max-width: 620px;
+  margin: 28px auto 0;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
 
 /* Who builds it */
 .hm-people {
@@ -12687,7 +12945,7 @@ html[data-theme="dark"] .booking-container iframe {
      the two objects together were 946px of hero, which put the panel's own steps below the fold
      on a laptop. The headroom is what paid for it, because it was the one part of this column
      that was there to be looked at rather than read. */
-  min-height: 372px;
+  min-height: 340px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
   mask-image: linear-gradient(to bottom, transparent, #000 44px);
 }
@@ -13211,13 +13469,64 @@ html[data-theme="dark"] .booking-container iframe {
 
    The panels overlay on one grid cell exactly as the captions do, so the tallest one sets the
    height and the seven cannot drift out of step with the scenes: same lap, same --s, one clock. */
-.hm-works {
+/* The record is a window on a computer, and it has to look like one.
+
+   Without a header this was a card, and a card on a marketing page is a thing we drew. The bar is
+   built to rhyme with the phone's, line for line: up there a face and "Archie / on your computer",
+   down here a computer and "Work / on your computer", so a reader sees two windows onto one agent
+   rather than a mockup and an illustration of one. "Work" is the board's real name in the app, and
+   the live dot beside it says the thing the panel exists to prove: this is being written down as
+   it happens, on the machine named in the line above it.
+
+   The bar and the panels are one object, so the wrapper carries the border, the rounding and the
+   elevation, and .hm-work inside it gives up its own. */
+.hm-desk {
   position: relative;
   z-index: 1;
-  display: grid;
   width: 100%;
   max-width: 376px;
-  margin-top: 14px;
+  margin-top: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--edge-top), var(--shadow-sm);
+  overflow: hidden;
+  text-align: left;
+}
+.hm-desk-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  /* A shade off the panel under it, the way a title bar sits off the document it titles. */
+  background: color-mix(in srgb, var(--text-primary) 4%, var(--bg-card));
+}
+.hm-desk-mark { display: flex; color: var(--text-muted); }
+.hm-desk-who { display: grid; line-height: 1.25; flex: 1 1 auto; min-width: 0; }
+.hm-desk-who b { font-size: var(--fs-sm); font-weight: 650; color: var(--text-primary); }
+.hm-desk-who i { font-style: normal; font-size: var(--fs-2xs); color: var(--text-muted); }
+/* The dot is the app's own live colour, the one the outcome pill wears while a job is running. */
+.hm-desk-live {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  font-size: var(--fs-2xs);
+  color: var(--text-muted);
+}
+.hm-desk-live i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c-teal);
+  animation: hm-desk-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hm-desk-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+.hm-works {
+  display: grid;
+  width: 100%;
 }
 .hm-work {
   grid-area: 1 / 1;
@@ -13225,11 +13534,8 @@ html[data-theme="dark"] .booking-container iframe {
   display: grid;
   gap: 0;
   text-align: left;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--edge-top), var(--shadow-sm);
-  overflow: hidden;
+  /* No frame of its own: .hm-desk around it carries the border, the rounding and the lift, and a
+     second box inside the first drew a line where the window's own document begins. */
   animation: hm-scene var(--hm-lap) linear infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold));
 }
@@ -13367,6 +13673,16 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* The rail is information and stays; the light that travels it is not, and goes. Every disc
+     back to its resting colour, so the track reads as a numbered diagram rather than as one step
+     frozen mid-highlight. */
+  .hm-step::after { display: none; }
+  .hm-step-n { animation: none; background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  /* The clock stops on the total, which is the reading the heading states in words and the only
+     one of the five that is true of the whole track. */
+  .hm-eta-clock i { animation: none; opacity: 0; }
+  .hm-eta-clock i:last-child { opacity: 1; }
+  .hm-desk-live i { animation: none; opacity: 1; }
   /* One scene, still, and it is the first: the one that shows what the headline promises. The
      other two are the reason the phone moves, and with the movement gone they would stack three
      conversations on top of each other in the same grid cell. */
@@ -13476,7 +13792,7 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-pz--hero .hm-scenes { min-height: 444px; }
   /* The panel is the phone's object, so it takes the phone's width here rather than standing
      56px wider than the device whose work it is reporting. */
-  .hm-works { max-width: 320px; }
+  .hm-desk { max-width: 320px; }
   /* The wash was sized off the phone's width, and the phone lost a sixth of it here while the
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }

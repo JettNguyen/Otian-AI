@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260908-5" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260908-7" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -468,7 +468,20 @@
                one place the panel and the thread are deliberately in step: the wait in the chat
                is the work in the panel.
                ============================== -->
-          <div class="hm-works" aria-hidden="true">
+          <div class="hm-desk" aria-hidden="true">
+            <!-- The panel's own header, built to rhyme with the phone's. Up there it is a face and
+                 "Archie / on your computer"; here it is a computer and "Work / on your computer",
+                 same two lines in the same places. The parallel is the whole point: a reader who
+                 has just been told the agent lives on their computer needs to see that the thread
+                 and the record are two windows onto one thing, and that the second one is the one
+                 with the machine in it. Without it this was a card on a marketing page, which is
+                 exactly what the record must not look like. -->
+            <div class="hm-desk-bar">
+              <span class="hm-desk-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18l-1.8-3H4.8z"/></svg></span>
+              <span class="hm-desk-who"><b>Work</b><i>on your computer</i></span>
+              <span class="hm-desk-live"><i></i>writing it down</span>
+            </div>
+          <div class="hm-works">
             <article class="hm-work" style="--s:0">
               <div class="hm-work-head">
                 <span class="hm-work-title">Morning Brief</span>
@@ -541,6 +554,7 @@
               <p class="hm-work-meta hm-work-in" style="--d:13">8:47 pm &middot; no steps</p>
               <p class="hm-work-none hm-work-in" style="--d:13">Nothing was changed in this job, so there are no steps to show. Reading, searching and answering are not recorded here.</p>
             </article>
+          </div>
           </div>
 
           <!-- What the scene is showing, under the phone rather than in the thread. A line of
@@ -1057,35 +1071,17 @@
           </div>
         </div>
 
-        <div class="hm-stop fade-up">
-          <span class="hm-stamp"><i aria-hidden="true"></i>1:28 pm</span>
-          <h3>A reply, drafted. It waits for you.</h3>
-          <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. A drafted reply to Sam waits with three buttons attached below the message: Send, Edit, and Dismiss.">
-            <div class="hm-msg" aria-hidden="true">
-              <div class="hm-bubble">
-                <p class="hm-mini-quote"><b>Draft reply</b> (to Sam):</p>
-                <p class="hm-mini-quote">Hi Sam, sorry for the slow reply. The second option works for us. Can you hold October&nbsp;12?</p>
-              </div>
-              <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
-            </div>
-          </div>
-          <span class="hm-micro">Nothing leaves until you send it or set a time.</span>
-        </div>
+        <!-- Two stops came off this spine on 2026-09-08, and the hero is why. It used to open on
+             a video and the spine was the only place the page showed the agent working; it opens
+             on a phone running seven scenes now, and two of these were the same scene twice. The
+             1:28 pm stop was the drafted reply to Sam, which is hero scene 3 down to the name and
+             the timestamp, and the 6:12 pm stop was a sentence becoming a routine, which is hero
+             scene 1. Restating a thing one screen after showing it is how a page gets longer than
+             what it sells, and these two were the clearest case of it on the homepage.
 
-        <div class="hm-stop fade-up">
-          <span class="hm-stamp"><i aria-hidden="true"></i>6:12 pm</span>
-          <h3>One sentence becomes a routine</h3>
-          <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. You write: Every Sunday at 6, send me the week ahead. The agent answers with a routine it has written, named Week Ahead, that runs every Sunday at 6:00 pm.">
-            <div class="hm-msg" aria-hidden="true">
-              <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">&ldquo;Every Sunday at 6, send me the week ahead.&rdquo;</p></div>
-              <div class="hm-bubble">
-                <p class="hm-mini-quote"><b>Week Ahead</b> (a routine I have written)</p>
-                <p class="hm-mini-quote">Runs on its own: every Sunday at 6:00&nbsp;pm.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
+             The three that stayed are the ones the hero does not carry: a brief with the day
+             actually assembled in it, a job whose whole content is having noticed something, and
+             the night, which is the argument that any of this runs while you are not there. -->
         <!-- The one stop on the spine that is not a chat card. Every other moment here is the agent
              addressing you, which four times over proves "it messages you" rather than "it takes
              things off your plate". This one is a job whose whole content is having noticed, and it
@@ -1107,8 +1103,7 @@
           <div class="hm-mini">
             <div class="hm-chipline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>3 routines scheduled</b><span class="hm-micro">next: Morning Brief, 7:00 am</span></div>
           </div>
-          <span class="hm-micro">And tomorrow, it starts again.</span>
-        </div>
+                  </div>
 
       </div>
     </section>
@@ -1147,19 +1142,88 @@
     <section class="section section-alt" aria-labelledby="need-heading">
       <div class="hm-wrap hm-wrap--wide hm-head">
         <span class="section-label fade-up">Setup</span>
-        <h2 id="need-heading" class="fade-up">Three things to start. Then $30 a month.</h2>
-        <div class="hm-needs fade-up">
-          <div class="hm-need"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18l-1.8-3H4.8z"/></svg>A computer that stays on <span>&nbsp;and connected to the internet</span></div>
-          <div class="hm-need"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5c.7 4.6 3.4 7.3 8 8-4.6.7-7.3 3.4-8 8-.7-4.6-3.4-7.3-8-8 4.6-.7 7.3-3.4 8-8z"/></svg>An AI account <span>&nbsp;it bills you, never us</span></div>
-          <!-- The Otian account and plan was missing here until 2026-08-22, so the band
-               said "the whole shopping list" and "that's it" over two items while
-               /how-it-works/#what-you-need listed three required ones. Understating what
-               setup takes is the one direction this page must never round in. Keep these
-               three in step with that section's numbered cards. -->
-          <div class="hm-need"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 19.5c1.1-3.2 3.5-4.8 6.5-4.8s5.4 1.6 6.5 4.8"/></svg>An Otian account <span>&nbsp;and a plan</span></div>
-          <div class="hm-need hm-need--done"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>That&rsquo;s it</div>
-        </div>
-        <p class="calm-note calm-note--center fade-up"><a href="how-it-works/#what-you-need">See the full list &rarr;</a></p>
+        <h2 id="need-heading" class="fade-up">Five steps, about fifteen minutes, and none of them is configuration.</h2>
+
+        <!-- ==============================
+             The setup, as a sequence rather than a shopping list.
+
+             This band was three requirement chips and the words "That's it". A list of things you
+             must own answers "can I", and the question somebody actually has after watching the
+             recording is "what am I in for". The five steps are the ones on
+             how-it-works/#timeline, in that order and under those names, so the two pages describe
+             one sequence and not two. The three requirements did not go anywhere: the computer is
+             step 1, the Otian account and plan are step 2, and the AI account is step 3. Rounding
+             down what setup takes is the one direction this page may never round in, and the link
+             to the full list is still under it.
+
+             THE MINUTES ARE AN ESTIMATE AND THE PAGE SAYS SO, in bold, in the line under the
+             track. Nobody has timed a clean install; FACTS.md carries the row, what the estimate
+             is built from step by step, and the standing note that a measurement replaces it the
+             day somebody runs one. Two things keep it honest rather than promotional. It is not
+             rounded down: 15 is what the five steps add up to and it is not the number a
+             competitor would print. And the step that dominates it is named rather than buried,
+             because it is the one we cannot make faster: Archie cannot open an account with an AI
+             company for you, so five of the fifteen minutes are that company's checkout.
+
+             The chips say who spends the time, which is the half a total cannot carry. The five
+             elapsed figures live once, in the clock above the track, so a timed install is five
+             spans, one heading and one FACTS.md row.
+
+             The last card is the one the section is for. Four of these happen once; the fifth is
+             every day after, and it is the same routine the phone at the top of the page writes.
+             ============================== -->
+        <!-- The clock is one readout for the whole track, not a label on each step.
+
+             It was five labels for about an hour, and beside its own step "15 min" read as the
+             time that step takes rather than the time you have spent by the end of it. That is
+             the failure mode of putting a running total next to the thing it is running over,
+             and no wording fixes it while the number sits in the card.
+
+             Out here it is a clock, and it moves with the light: each figure is shown for the
+             fifth of the lap that its own step is lit, so the reading climbs 1, 4, 9, 13, 15 and
+             lands on the total the heading already states in words. Same --st-lap and the same
+             --i as the discs, so the two cannot drift.
+
+             aria-hidden, because a clock that counts is a picture of the estimate and not the
+             estimate itself: the heading carries "about fifteen minutes" as text, and the line
+             under the track carries what kind of number that is. -->
+        <p class="hm-eta" aria-hidden="true">
+          <span class="hm-eta-label">Estimated</span>
+          <span class="hm-eta-clock"><i style="--i:0">1 min</i><i style="--i:1">4 min</i><i style="--i:2">9 min</i><i style="--i:3">13 min</i><i style="--i:4">15 min</i></span>
+        </p>
+        <ol class="hm-steps fade-up">
+          <li class="hm-step" style="--i:0">
+            <span class="hm-step-n" aria-hidden="true">1</span>
+            <h3>Pick a computer it can live on</h3>
+            <p>One you can leave on and connected. Yours probably qualifies.</p>
+            <span class="hm-step-who">You, once</span>
+          </li>
+          <li class="hm-step" style="--i:1">
+            <span class="hm-step-n" aria-hidden="true">2</span>
+            <h3>Install Archie</h3>
+            <p>One download, an Otian account, a plan. Nothing to host.</p>
+            <span class="hm-step-who">You, once</span>
+          </li>
+          <li class="hm-step" style="--i:2">
+            <span class="hm-step-n" aria-hidden="true">3</span>
+            <h3>Point it at an AI account</h3>
+            <p>Your own, any of 7 AI companies. It bills you, never us.</p>
+            <span class="hm-step-who hm-step-who--them">Them, not us</span>
+          </li>
+          <li class="hm-step" style="--i:3">
+            <span class="hm-step-n" aria-hidden="true">4</span>
+            <h3>Meet your agent</h3>
+            <p>Answer a few questions. It writes its own skills and routines from them, and tells you what it added.</p>
+            <span class="hm-step-who hm-step-who--it">Archie writes it</span>
+          </li>
+          <li class="hm-step" style="--i:4">
+            <span class="hm-step-n" aria-hidden="true">5</span>
+            <h3>Message it from your phone</h3>
+            <p>One claim code connects Telegram, Discord, Slack, Matrix or iMessage.</p>
+            <span class="hm-step-who">You, once</span>
+          </li>
+        </ol>
+        <p class="hm-steps-after fade-up"><b>Estimates, not a stopwatch.</b> Nobody has timed a clean install, and the longest step is opening an account with an AI company: their checkout, not our installer. Then it runs without you. <a href="how-it-works/#what-you-need">The full list of what you need &rarr;</a></p>
 
         <!-- The price, on the page that promises it.
              ==============================================================
@@ -1189,7 +1253,7 @@
             <p>14 days, or until the starter credits run out. One agent, and nearly the whole app.</p>
           </article>
           <article class="hm-plan hm-plan--lead">
-            <span class="plan-flag">The plan</span>
+            <span class="plan-flag">Our pick</span>
             <span class="hm-plan-label">Archie</span>
             <div class="hm-plan-price">$30<span>a month</span></div>
             <p>Or $299 a year. Up to 10 agents, and every one of the 146 add-ons.</p>

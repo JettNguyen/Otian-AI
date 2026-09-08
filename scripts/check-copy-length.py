@@ -46,7 +46,15 @@ DEFAULT_BUDGET = 900
 BUDGETS = {
     # The homepage carries the whole story once: what Archie is, who it is for,
     # what it costs, and why to trust it. It is the one page allowed to.
-    "index.html": 1200,
+    # Raised 2026-09-08 from 1200, for the five setup steps: the page had a band
+    # of three requirement chips answering "can I", and nothing answering "what
+    # am I in for", which is the question somebody has after the recording. Two
+    # cuts paid for most of it. Two stops came off the day spine because the hero
+    # now runs seven scenes and those two were the same scene twice (the drafted
+    # reply to Sam, and a sentence becoming a routine), and the AI bill stopped
+    # being described three ways in one sentence. The 76 that were left are the
+    # steps themselves, and they are the page's most concrete words.
+    "index.html": 1280,
     # How It Works is a procedure. A reader following along needs every step.
     "how-it-works/index.html": 1400,
     # Pricing prints every measured cost with its source, and a cut there reads

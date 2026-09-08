@@ -12215,6 +12215,37 @@ html[data-theme="dark"] .booking-container iframe {
   --hm-lap: calc(var(--hm-hold) * var(--hm-count));
 }
 
+/* The light the phone is standing in. Half the hero is one object and a caption, and with a flat
+   ground behind it the other half of that column was empty page: the phone had no room around it,
+   it had nothing around it. This is the accent at a fifth, a soft round wash wider than the device
+   and centred a little above its middle, so the dark screen has something to be dark against and
+   the column has a middle.
+
+   Not a second copy of the page wash. body::before paints two fixed radials behind everything and
+   they are deliberately near-invisible in dark mode; this is a light source belonging to one
+   object, in one place, and it reads in both themes for that reason. */
+.hm-stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  width: 132%;
+  max-width: 620px;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 20%, transparent), transparent);
+  pointer-events: none;
+  z-index: 0;
+}
+/* Further up in the dark, where the accent is lighter than everything around it: at 20% it read as
+   a haze the phone was sitting in rather than as light coming from behind it. */
+[data-theme="dark"] .hm-stage::before {
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 13%, transparent), transparent);
+}
+/* A positioned z-index:0 box paints above in-flow content, so without this the wash lies over the
+   captions rather than behind the phone they belong to. */
+.hm-caps { position: relative; z-index: 1; }
+
 /* The day spine's phone, larger. Not a closed device: .hm-pz draws side rails and then masks its
    own top and bottom away, and that is the right call here too. A complete phone has to commit to
    a phone's proportions, and this one is as tall as three bubbles, so a closed body with rounded
@@ -12224,18 +12255,144 @@ html[data-theme="dark"] .booking-container iframe {
 
    The fade is deeper than the spine's, because it is bigger: 34px dissolves a 300px object and
    only crops a 480px one. */
+/* IT RUNS ITS OWN PALETTE, in both themes, and that is the change that made the hero an object
+   rather than a panel. The wall was --bg-secondary, which is one step off --bg-primary by design:
+   on the cream page the phone was a slightly different cream, and on the dark page a slightly
+   different charcoal. At hero size that is a 376px rectangle the eye cannot find an edge on, and
+   no amount of writing inside it fixes that.
+
+   A screen is not a surface of the page, it is a lit thing standing on it, so this one is dark and
+   stays dark whichever theme is on. Everything below is the set of tokens the phone's contents
+   actually read, re-pointed at that ground: the site's own dark-theme values where there is one,
+   because they were already measured against a dark ground, and a warmer wall than the dark
+   theme's neutral because a phone screen at arm's length is warm and the page around it is too.
+
+   Measured, since scripts/check-contrast.mjs only reads :root and [data-theme="dark"] and cannot
+   see a scoped block like this one: cream on a bubble is 11.7:1, cream on a sent bubble 9.0:1,
+   the timestamps 6.0:1 on the wall, a button's label 6.9:1, and the accent on a chosen button
+   5.3:1. The send button keeps the shipped dark pairing (--text-on-accent on --accent) untouched.
+
+   THE WALL HAS TO STAY FLAT WHERE THE BUBBLES ARE. The tails are drawn by covering the corner
+   with a patch of --hm-pz-wall, so a gradient down there shows as a notch. Same rule as .hm-pz,
+   and the reason the glow below stops at 38%. */
 .hm-pz--hero {
-  --hm-pz-wall: var(--bg-secondary);
+  --hm-pz-wall: #211E1C;
+  --hm-pz-bezel: #0E0D0C;
+  --hm-pz-rim: rgba(247, 243, 238, 0.22);
+  --hm-pz-glow: rgba(224, 138, 91, 0.20);
+  --bg-card: #322D29;
+  --text-primary: #F6F2EC;
+  --text-secondary: #C4BCB2;
+  --text-muted: #A29A91;
+  --accent: #EDA277;
+  --accent-subtle: #533A27;
+  --accent-ink: #F0AC80;
+  --text-on-accent: #292624;
+  --border: rgba(246, 242, 236, 0.14);
+  --shadow-xs: none;
+
   max-width: 376px;
   width: 100%;
-  padding: 64px 26px 30px;
-  /* Asymmetric on purpose. The top is where the thread scrolls away, so it dissolves over a deep
-     104px; the bottom holds the composer, which is fixed chrome a phone never fades out, so it
-     gets 14px of softening and no more. Symmetric fades put the input inside the dissolve and it
-     read as floating in fog. */
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 14px), transparent);
-  mask-image: linear-gradient(to bottom, transparent, #000 104px, #000 calc(100% - 14px), transparent);
+  padding: 8px 26px 26px;
+  /* Rounded at the top and running off the bottom, which is the one crop that reads as a phone
+     without committing to a phone's proportions. Closed on all four sides this object is 376
+     wide by about 480 tall, and a 0.78 rectangle with rounded corners is a tablet. Open at the
+     bottom it has no aspect ratio to get wrong, and the thread carrying on past the edge of the
+     figure is what every product shot of a messaging app looks like.
+
+     The old fade dissolved the top 104px too, because the top was where the thread scrolled away
+     into nothing. There is a header up there now, so the dissolve moved down onto .hm-scenes,
+     where the thread actually scrolls away underneath it. */
+  border-radius: 30px 30px 0 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 16px), transparent);
+  /* Lift. The glow behind it on .hm-stage says there is light around the phone; this says the
+     phone is in front of the page rather than printed on it. The mask takes the bottom of it
+     away with the bottom of the device, which is correct: a shadow cannot outlive its object. */
+  box-shadow: 0 34px 64px -28px rgba(40, 27, 18, 0.5), 0 6px 18px -10px rgba(40, 27, 18, 0.32);
 }
+/* The same two layers as .hm-pz, with the light stopped at 38% instead of 52%. This phone is half
+   again as tall, so the inherited percentage put the end of the glow level with the top of the
+   thread, and the flat wall the tails need did not begin until halfway down the bubbles. Written
+   out in full rather than as a background-size override, which would resize the rails too. */
+.hm-pz--hero {
+  background:
+    radial-gradient(115% 38% at 50% -4%, var(--hm-pz-glow), transparent 100%)
+      12px 0 / calc(100% - 24px) 100% no-repeat,
+    linear-gradient(to right,
+    var(--hm-pz-rim) 0 1.5px,
+    var(--hm-pz-bezel) 1.5px 12px,
+    var(--hm-pz-wall) 12px calc(100% - 12px),
+    var(--hm-pz-bezel) calc(100% - 12px) calc(100% - 1.5px),
+    var(--hm-pz-rim) calc(100% - 1.5px) 100%);
+}
+
+/* ---- Who you are talking to ----
+   The header is the top of the app rather than the top of the thread, so it does not fade with
+   the conversation and it does not move with the cycle. Ember is the profile picture, which is
+   the one place in a chat app a character is not decoration. */
+.hm-pz-head {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
+     does, while the words stay on the same 26px as the thread below them. */
+  margin: 0 -14px;
+  padding: 10px 14px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.hm-pz-face { display: block; width: 38px; height: 38px; flex-shrink: 0; }
+.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: left; }
+.hm-pz-who b { font-size: var(--fs-sm); font-weight: 650; color: var(--text-primary); }
+.hm-pz-who i { font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); }
+
+/* The thread dissolves under the header, not off the top of the device. Shorter than the 104px
+   it replaces, because it no longer has to stand in for a missing top edge.
+
+   The floor went up with it. 330px was set when the tallest scene was a mail card; the reminder is
+   four blocks now, and at 330 its opening message sat inside the dissolve, so the one line the
+   scene is built on arrived already half gone. 372 is that scene at full height with the fade
+   clear of it, and the six shorter scenes spend the extra forty pixels on empty screen above the
+   thread, which is what a thread looks like and is now framed by a header rather than by nothing. */
+.hm-pz--hero .hm-scenes {
+  min-height: 372px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
+  mask-image: linear-gradient(to bottom, transparent, #000 44px);
+}
+
+/* Dark mode needs the phone the other way up. The palette above is a lit screen, which on the
+   cream page is the darkest thing in the hero and needs no help separating; on the dark page it
+   was three hundredths off the ground behind it and the device had no edge. So the wall lifts a
+   step, the bubble lifts with it to keep their relationship, and the rim goes from a suggestion
+   to a hairline of light along the sides, which is what the edge of a phone in a dim room does.
+   Contrast inside is unchanged or better: cream on the lifted bubble is 10.4:1. */
+[data-theme="dark"] .hm-pz--hero {
+  --hm-pz-wall: #272321;
+  --hm-pz-bezel: #131211;
+  --hm-pz-rim: rgba(247, 243, 238, 0.34);
+  --hm-pz-glow: rgba(224, 138, 91, 0.16);
+  --bg-card: #38322E;
+  --accent-subtle: #5A4029;
+}
+
+/* ---- The break in the thread ----
+   What a chat looks like when nothing happens for an afternoon. It is chrome and not a message:
+   centred, hairline either side, no bubble and no tail, so it cannot be read as something the
+   agent said. That distinction is the reason the explanations live under the phone, and it is
+   also the reason this one is allowed to live inside it.
+
+   It carries hm-in like every other turn, so it collapses to nothing off its own beat and the
+   thread closes over it. */
+.hm-break {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  font-size: var(--fs-3xs);
+  color: var(--text-muted);
+}
+.hm-break::before,
+.hm-break::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 
 /* The conversation is the hero's subject, so it gets the room the day spine's minis do not. */
 .hm-pz--hero .hm-msg { gap: 0; width: 100%; }
@@ -12755,4 +12912,11 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 899px) {
   .hm-stage { margin-top: 40px; }
   .hm-pz--hero { max-width: 320px; }
+  /* Fifty-six pixels narrower, so every message that fitted on one line at 376 takes two here and
+     the tallest scene grows by about forty. Without this the floor set for the desktop width left
+     the reminder's opening line sitting in the dissolve at the top of the thread. */
+  .hm-pz--hero .hm-scenes { min-height: 416px; }
+  /* The wash was sized off the phone's width, and the phone lost a sixth of it here while the
+     column it stands in did not, so the light stopped short of the device on both sides. */
+  .hm-stage::before { width: 156%; }
 }

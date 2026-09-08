@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260907-27" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260908-1" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -213,8 +213,25 @@
       </div>
 
       <div class="hm-stage">
-          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder and it arrives at four with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is open, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her and will say as soon as anything from her lands. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
-            <div class="hm-scenes" aria-hidden="true">
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder at noon, it reads the time and the words back to you, and four hours later the reminder itself arrives with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is open, with Confirm and Another time. You ask to be told when Priya writes back and it says it is watching for her and will say as soon as anything from her lands. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
+            <!-- The top of the phone: who you are talking to. It is here for three reasons and
+               each one was a hole before it. The screen opened on 300px of empty wall, because a
+               thread hangs its newest message at the thumb and there is nothing above it. A phone
+               that is only a thread is a picture of a conversation rather than a picture of an
+               app. And Ember, who is Archie's face in the app itself, was on four other pages and
+               not on the one page everybody sees first.
+
+               He is the profile picture, which is the one place a character belongs in a chat app
+               and the one place he is not decoration: the reader learns what the agent looks like
+               in the app before they ever open it. Same look as archie/ and 404 (the app's
+               terracotta, peaked, pill-eyed default), because one name and one face per concept.
+               js/ember.js draws him and the pointer moves his eyes. -->
+          <div class="hm-pz-head" aria-hidden="true">
+            <span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span>
+            <span class="hm-pz-who"><b>Archie</b><i>on your computer</i></span>
+          </div>
+
+          <div class="hm-scenes" aria-hidden="true">
 
               <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
                    The order alternates who spoke first: you asking, then it arriving unasked, then
@@ -248,17 +265,39 @@
                 </div>
               </div>
 
-              <!-- 2. A reminder, delivered word for word, with the buttons a reminder needs. -->
+              <!-- 2. A reminder, and the four hours in the middle of it.
+
+                 It used to be two bubbles: you ask at 11:20, the dots run, the reminder lands. The
+                 timestamps said 11:20 am and 4:00 pm and nobody read them, because everything else
+                 on screen said the agent had answered a request with a reminder on the spot, which
+                 is not what a reminder is and is the one thing this scene exists to show.
+
+                 Three things fix it, and the first two are simply what the app really does. The
+                 agent answers at once, and it answers by reading the time and the exact words back
+                 (tools_reminders.rs, reminder_set: "Tell the user the day and time AND those exact
+                 words, so they can catch it now if either one is wrong"). Then the thread breaks,
+                 the way a thread does when nothing happens for an afternoon. Then the reminder
+                 arrives, in the app's own words (reminders.rs, `message`: "Reminder: " and then
+                 your text, never rewritten) with the three buttons it lands with.
+
+                 Noon, not 11:20, so the break can say four hours and mean it. -->
               <div class="hm-scene" style="--s:1">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
                     <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Remind me to call the vet at four.</p></div>
-                    <time>11:20 am</time>
+                    <time>12:00 pm</time>
                   </div>
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Call the vet.</p></div>
+                    <div class="hm-turn hm-in" style="--d:8">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Set for today at 4:00&nbsp;pm, saying &ldquo;Call the vet.&rdquo;</p></div>
+                      <time>12:00 pm</time>
+                    </div>
+                  </div>
+                  <div class="hm-break hm-in" style="--d:11"><span>4 hours later</span></div>
+                  <div class="hm-reply">
+                    <div class="hm-turn hm-in" style="--d:12">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Reminder: Call the vet.</p></div>
                       <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Done</span><span class="hm-msg-btn">Later</span><span class="hm-msg-btn">Dismiss</span></div>
                       <time>4:00 pm</time>
                     </div>
@@ -408,7 +447,7 @@
                the same --s, so a caption cannot drift out of step with the scene it names. -->
           <div class="hm-caps" aria-hidden="true">
             <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
-            <p class="hm-cap" style="--s:1">Ask for a reminder in plain words. It arrives when you said, with the buttons on it.</p>
+            <p class="hm-cap" style="--s:1">Ask in plain words. It reads the time back, goes quiet, and turns up hours later.</p>
             <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
             <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
             <p class="hm-cap" style="--s:4">Ask to be told when someone answers. It watches the person, not one thread.</p>

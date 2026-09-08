@@ -155,6 +155,12 @@
      something that just lights up, and these fire on every pointer crossing.
      Anything that also moves keeps --transition. */
   --transition-quick: 0.15s ease;
+  /* And shorter still for a press, which is the one interaction with a real-world referent: a
+     key goes down the instant it is touched, and anything slower than about a frame and a half
+     reads as the button lagging behind the finger rather than answering it. Only the way DOWN
+     runs on this. Every :active rule below sets it on itself, so releasing falls back to the
+     element's own transition and the control eases back up, which is also what a key does. */
+  --transition-press: 0.07s ease;
   --max-width: 1200px;
   --section-padding: 96px 24px;
   --nav-height: 72px;
@@ -1705,84 +1711,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   outline-offset: 2px;
 }
 
-/* THE PRESS. Every control on this site answers the finger, and the two rules below are the
-   whole of it. What was here before was thirteen hand-listed class names, which meant the
-   question "does this thing react when you push it?" was answered by whether somebody had
-   remembered to add it to a list, and an audit on 2026-09-08 found that for most of the site the
-   answer was no: the nav's menus, the drawer, the accordion, every filter pill, every type tab,
-   the whole marketplace card, the theme toggle, the skip link. Two hundred and forty-three social
-   links. They lit up under a mouse and then did nothing at all when clicked, which on a trackpad
-   or a phone is the entire feedback loop missing.
-
-   So it is written the other way round now: everything presses, and a thing that should not says
-   so itself. Two shapes, because a press is a physical claim and the two kinds of control are
-   physically different:
-
-   1. A CONTROL GOES DOWN. It is an object with a face and a height (see --lift-* in :root), so
-      pressing it moves it a pixel toward the page and drops its elevation a rung. The transform
-      and the shadow have to move together or it slides instead of sinking.
-
-   2. A TEXT LINK DIMS. A word in a sentence has no height to lose and nowhere to go: shifting it
-      a pixel would move the line it is set in. So it takes the ink down instead.
-
-   Both animate, which took more than adding the states. Nearly every control here declared its
-   own `transition` naming only the properties its hover changed, and a transition list that does
-   not name `transform` makes a transform instantaneous no matter what the :active rule says.
-   Twenty-eight of those lists were extended on the same date. */
-
-/* 1. Controls: down a pixel, down a rung. */
-.btn:active,
-.theme-toggle:active,
-.nav-account-btn:active,
-.nav-hamburger:active,
-.nav-more-toggle:active,
-.nav-drawer-cat:active,
-.nav-drawer-back:active,
-.social-link:active,
-.accordion-trigger:active,
-.faq-jump a:active,
-.help-filter:active,
-.chat-choice:active,
-.az-letter:active,
-.find-hit:active,
-.resource-filter:active,
-.marketplace-filter-pill:active,
-.marketplace-status-badge:active,
-.mp-type-tab:active,
-.mp-price-btn:active,
-.phone-tab:active,
-.phone-store-chip:active,
-.site-banner-close:active,
-.start-here-pill:active,
-.checklist-item:active,
-.use-case-item:active,
-.skip-link:active,
-.install-other-btn:active,
-button:active,
-[role="button"]:active,
-input[type="submit"]:active,
-input[type="button"]:active {
-  transform: translateY(1px);
-  box-shadow: var(--lift-keydown);
-}
-
-/* A card that is a link is a control too, and it is the one place the press has to reach past the
-   thing being clicked: the <a> wraps the card, so the card is what the reader sees move. */
-.mp-card-link:active .mp-product-card,
-.mp-card-link:active .mp-pack-card {
-  transform: translateY(1px);
-  box-shadow: var(--lift-keydown);
-}
-
-/* 2. Text: the ink goes down instead. Every link that is not one of the objects above, which is
-   the rule that replaced the list of thirteen. */
-a:not(.btn):active,
-summary:active,
-.mp-card-expand:active,
-.act-remove:active {
-  opacity: 0.62;
-}
-
 /* And the clock the press runs on, for the controls that never declared a transition at all: a
    bare <a>, a <summary>, the footer's links, the skip link. An element selector, so anything with
    a class of its own overrides this rather than fighting it. */
@@ -2415,6 +2343,7 @@ summary,
   border-radius: var(--radius);
   padding: 32px;
   transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 /* feature-card hover: pointer devices only, see section 26 */
@@ -2850,6 +2779,15 @@ summary,
    - Zoho is zoho-logo-web.svg from zohowebstatic.com, the mark zoho.com loads in its own header,
      fetched 2026-09-01: the four boxes in their four colours, cropped to leave off the small
      wordmark underneath, which is a stripe at 18px. */
+/* Added 2026-09-08, when Zoom joined the roster:
+   - Zoom is the Simple Icons path (CC0), in the brand blue Simple Icons records for it, #0B5CFF,
+     and the app carries the same one. It is a WORDMARK, which is the opposite of the call made for
+     WiZ and Zoho above, and for the opposite reason: those two publish a symbol and a wordmark, so
+     the symbol was kept. Zoom publishes no symbol as a vector. Their own header logo is these four
+     letters, both files Wikimedia Commons holds are the same wordmark, and the blue camera tile
+     people picture exists only as a raster, so the choice here was their artwork or a drawing of
+     ours, and the rule above settles that. At 18px it is a small blue word rather than a mark,
+     which was looked at rather than assumed. */
 .ww-mark {
   flex: none;
   display: inline-flex;
@@ -3587,6 +3525,7 @@ fieldset legend + * {
   color: var(--text-primary);
   transition: border-color var(--transition), box-shadow var(--transition);
   outline: none;
+  box-shadow: var(--well);
 }
 
 .form-input:focus,
@@ -3678,6 +3617,7 @@ fieldset legend + * {
   flex-shrink: 0;
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  box-shadow: var(--well);
 }
 
 .radio-option input[type="radio"]:checked {
@@ -6420,32 +6360,6 @@ html.js .fade-up:not(.visible) {
   }
 }
 
-/* Tap feedback for touch devices */
-@media (hover: none) {
-  .feature-card:active {
-    transform: scale(0.98);
-  }
-
-  .team-card:active,
-  .value-card:active {
-    border-color: rgba(224, 138, 91, 0.3);
-  }
-
-  .rating-option:active span {
-    border-color: var(--accent);
-    background: var(--accent-subtle);
-  }
-
-  .checkbox-option:active input[type="checkbox"],
-  .radio-option:active input[type="radio"] {
-    border-color: var(--accent);
-  }
-
-  .btn:active {
-    transform: scale(0.98);
-  }
-}
-
 /* ========================================
    29. Calendar Booking Section (Questionnaire)
    ======================================== */
@@ -7587,6 +7501,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 24px;
   transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .mp-product-card[hidden] {
@@ -7940,6 +7855,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 24px;
   transition: transform var(--transition), box-shadow var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 /* Hover lift for this card lives in section 27, gated to real pointers. */
@@ -9241,6 +9157,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
   transition: border-color var(--transition), box-shadow var(--transition);
+  box-shadow: var(--well);
 }
 .acct-fields input:focus {
   border-color: var(--focus-ring);
@@ -13286,4 +13203,154 @@ html[data-theme="dark"] .booking-container iframe {
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }
 }
-/*SHOTOVERRIDE*/ .fade-up{opacity:1 !important;transform:none !important;} .hero{min-height:0 !important;} /*ENDSHOT*/
+
+/* ========================================
+   36. Press
+   Last in the file on purpose. See the note
+   inside: a press has to beat the hover it
+   is happening underneath.
+   ======================================== */
+
+/* WHY THIS LIVES AT THE BOTTOM OF THE FILE. A press happens while the pointer is still on the
+   control, so :hover and :active are both matching at once and the two rules are deciding the
+   same property. `.btn-primary:hover` and `.btn:active` are both one class and one pseudo-class,
+   which is a tie, and a tie is broken by whichever comes last. These rules were written beside
+   the focus states near the top, so every control whose hover moves it (both buttons, the
+   resource links and all four kinds of card, which is every call to action on the site) kept the
+   hover's lift when it was clicked and moved nothing at all. Nothing about the rules was wrong;
+   they were six thousand lines too early. Anything added here goes below, not above. */
+
+/* THE PRESS. Every control on this site answers the finger, and the two rules below are the
+   whole of it. What was here before was thirteen hand-listed class names, which meant the
+   question "does this thing react when you push it?" was answered by whether somebody had
+   remembered to add it to a list, and an audit on 2026-09-08 found that for most of the site the
+   answer was no: the nav's menus, the drawer, the accordion, every filter pill, every type tab,
+   the whole marketplace card, the theme toggle, the skip link. Two hundred and forty-three social
+   links. They lit up under a mouse and then did nothing at all when clicked, which on a trackpad
+   or a phone is the entire feedback loop missing.
+
+   So it is written the other way round now: everything presses, and a thing that should not says
+   so itself. Two shapes, because a press is a physical claim and the two kinds of control are
+   physically different:
+
+   1. A CONTROL GOES DOWN. It is an object with a face and a height (see --lift-* in :root), so
+      pressing it moves it a pixel toward the page and drops its elevation a rung. The transform
+      and the shadow have to move together or it slides instead of sinking.
+
+   2. A TEXT LINK DIMS. A word in a sentence has no height to lose and nowhere to go: shifting it
+      a pixel would move the line it is set in. So it takes the ink down instead.
+
+   Both animate, which took more than adding the states. Nearly every control here declared its
+   own `transition` naming only the properties its hover changed, and a transition list that does
+   not name `transform` makes a transform instantaneous no matter what the :active rule says.
+   Twenty-eight of those lists were extended on the same date. */
+
+/* 1. Controls: down a pixel, down a rung. Every selector here is on something that is actually
+   clicked. Two are qualified with `a` because the same class is also used on a <span> for the
+   inert version of the control (the current letter in the A-Z rail, a status badge with nowhere
+   to go), and a press is a promise that something is about to happen. */
+.btn:active,
+.theme-toggle:active,
+.nav-account-btn:active,
+.nav-hamburger:active,
+.nav-more-toggle:active,
+.nav-drawer-cat:active,
+.nav-drawer-back:active,
+.social-link:active,
+.accordion-trigger:active,
+.faq-jump a:active,
+.help-filter:active,
+.chat-choice:active,
+a.az-letter:active,
+.find-hit:active,
+.resource-filter:active,
+.marketplace-filter-pill:active,
+a.marketplace-status-badge:active,
+.mp-type-tab:active,
+.mp-price-btn:active,
+.phone-tab:active,
+.phone-store-chip:active,
+.site-banner-close:active,
+.start-here-pill:active,
+.checklist-item:active,
+.skip-link:active,
+.install-other-btn:active,
+button:active,
+[role="button"]:active,
+input[type="submit"]:active,
+input[type="button"]:active {
+  transform: translateY(1px);
+  box-shadow: var(--lift-keydown);
+  /* Explicit, and the reason is the rule below. Many of these are anchors, and a control that
+     both sinks and fades to 62 percent reads as breaking rather than as moving: on a white chip
+     over a cream page the fade is the ground showing through it. One class outranks the bare
+     element selector down there, so saying it here is what keeps the two presses apart. */
+  opacity: 1;
+  transition: transform var(--transition-press), box-shadow var(--transition-press),
+              opacity var(--transition-press);
+}
+
+/* The one card that is itself a control. It is an <article> with a stretched link inside it, so
+   clicking anywhere on it navigates, and it is reached by nothing above.
+
+   The other lifting cards are deliberately NOT here, and the distinction is what a press is
+   allowed to claim. .feature-card, .team-card, .value-card, .mp-product-card and .mp-pack-card
+   are all <article> elements that nothing happens when you click: on the marketplace cards the
+   control is the View Details button inside, which presses on its own. :active fires on any
+   element under a held pointer, so adding them would have been easy and would have had every one
+   of those cards answer a click it is not going to act on, which is worse than not moving. They
+   keep their hover, which promises nothing. */
+.resource-card--linked:active {
+  transform: translateY(1px);
+  box-shadow: var(--lift-keydown);
+  transition: transform var(--transition-press), box-shadow var(--transition-press);
+}
+
+/* 2. Text: the ink goes down instead. A bare element selector on purpose, so that it is the
+   weakest thing in this section: every control above carries at least one class, which is what
+   lets each of them opt out of the dim by naming `opacity` itself rather than by being listed
+   here a second time. So this ends up meaning "every link that is not one of the objects above",
+   without a list to keep in step with the one above it. */
+a:active,
+summary:active,
+.mp-card-expand:active,
+.act-remove:active {
+  opacity: 0.62;
+  transition: opacity var(--transition-press);
+}
+
+/* Tap feedback, which is the same press on a device that cannot hover. A finger covers the
+   control it is pressing, so a pixel of travel under it is not a cue; the card or the button
+   takes a scale instead, which is visible around the edge of the thumb. Only the transform is
+   restated: the elevation drop above still applies, and that is most of what is read anyway.
+
+   Below the press section rather than above it for the reason written there. */
+/* Tap feedback for touch devices */
+@media (hover: none) {
+  .feature-card:active {
+    transform: scale(0.98);
+    transition: transform var(--transition-press);
+  }
+
+  .team-card:active,
+  .value-card:active {
+    border-color: rgba(224, 138, 91, 0.3);
+  }
+
+  .rating-option:active span {
+    border-color: var(--accent);
+    background: var(--accent-subtle);
+  }
+
+  .checkbox-option:active input[type="checkbox"],
+  .radio-option:active input[type="radio"] {
+    border-color: var(--accent);
+  }
+
+  .btn:active,
+  button:active,
+  [role="button"]:active {
+    transform: scale(0.97);
+    transition: transform var(--transition-press), box-shadow var(--transition-press);
+  }
+}

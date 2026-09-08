@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260908-4" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260908-5" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -438,6 +438,109 @@
               </div>
 
             </div>
+          </div>
+
+
+          <!-- ==============================
+               The record the job wrote, beside the conversation that asked for it.
+
+               This is Archie's own job panel, the one that opens off the Work board, rebuilt in
+               the site's CSS: the title, the outcome pill from `outcomeBadge`, the meta line
+               `journalWhen` and `journalDuration` write, and the numbered steps `describe()`
+               words. It is here because the thread above it can only ever show what the agent
+               SAID, and the question a buyer actually has is what it DID. A sentence in a bubble
+               is a claim; a numbered, timestamped, undoable step is a receipt.
+
+               Every string below is the app's, not ours. "under a second" is journalDuration's
+               own output for a sub-second job, "Asked you" and "Finished" are two of the five
+               labels in outcomeBadge, and the empty state is the sentence journal-panel.tsx puts
+               on a job that changed nothing.
+
+               THREE OF THE SEVEN ARE EMPTY, and that is the argument rather than a gap to fill.
+               The journal records changes: a job that only read your calendar, your lists or the
+               web writes no step, has nothing to undo, and says so. A panel that found something
+               to boast about on all seven would be a panel that had stopped being the app.
+
+               Uniform beats on purpose. The steps land at 5.0s, 5.5s and 6.0s into every scene
+               and the outcome settles at 6.5s, whatever the conversation above is doing, so the
+               timing table is one row rather than seven and a new scene needs no tuning. The
+               "Working" pill runs from 3.5s (where the typing dots start) to 6.5s, which is the
+               one place the panel and the thread are deliberately in step: the wait in the chat
+               is the work in the panel.
+               ============================== -->
+          <div class="hm-works" aria-hidden="true">
+            <article class="hm-work" style="--s:0">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Morning Brief</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--done hm-work-in" style="--d:13">Finished</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">7:02 am &middot; 1 step &middot; 3 s</p>
+              <ol class="hm-work-steps">
+                <li class="hm-work-in" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Added the routine &ldquo;Morning Brief&rdquo;</span><time>7:02:11</time></li>
+              </ol>
+            </article>
+            <article class="hm-work" style="--s:1">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Call the vet</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--done hm-work-in" style="--d:13">Finished</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">12:00 pm &middot; 1 step &middot; under a second</p>
+              <ol class="hm-work-steps">
+                <li class="hm-work-in" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Set a reminder: Call the vet.</span><time>12:00:04</time></li>
+              </ol>
+            </article>
+            <article class="hm-work" style="--s:2">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Inbox</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--ask hm-work-in" style="--d:13">Asked you</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">1:28 pm &middot; 2 steps &middot; 9 s</p>
+              <ol class="hm-work-steps">
+                <li class="hm-work-in" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Filed 3 emails out of the inbox</span><time>1:28:31</time></li>
+                <li class="hm-work-in" style="--d:11"><span class="hm-work-n">2</span><span class="hm-work-what">Drafted a reply for you to send: Tuesday works, 10 is better&hellip;</span><time>1:28:36</time></li>
+              </ol>
+            </article>
+            <article class="hm-work" style="--s:3">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Move the 3 o&rsquo;clock</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--ask hm-work-in" style="--d:13">Asked you</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">2:41 pm &middot; no steps</p>
+              <p class="hm-work-none hm-work-in" style="--d:13">Nothing was changed in this job, so there are no steps to show. Reading, searching and answering are not recorded here.</p>
+            </article>
+            <article class="hm-work" style="--s:4">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Watch for Priya</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--done hm-work-in" style="--d:13">Finished</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">9:15 am &middot; 1 step &middot; under a second</p>
+              <ol class="hm-work-steps">
+                <li class="hm-work-in" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Started waiting on Priya to reply</span><time>9:15:02</time></li>
+              </ol>
+            </article>
+            <article class="hm-work" style="--s:5">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Renewals check</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--done hm-work-in" style="--d:13">Finished</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">9:04 am &middot; no steps</p>
+              <p class="hm-work-none hm-work-in" style="--d:13">Nothing was changed in this job, so there are no steps to show. Reading, searching and answering are not recorded here.</p>
+            </article>
+            <article class="hm-work" style="--s:6">
+              <div class="hm-work-head">
+                <span class="hm-work-title">Direct flights to Lisbon</span>
+                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
+                <span class="hm-work-pill hm-work-pill--done hm-work-in" style="--d:13">Finished</span>
+              </div>
+              <p class="hm-work-meta hm-work-in" style="--d:13">8:47 pm &middot; no steps</p>
+              <p class="hm-work-none hm-work-in" style="--d:13">Nothing was changed in this job, so there are no steps to show. Reading, searching and answering are not recorded here.</p>
+            </article>
           </div>
 
           <!-- What the scene is showing, under the phone rather than in the thread. A line of

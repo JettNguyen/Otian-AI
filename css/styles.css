@@ -11154,7 +11154,11 @@ html[data-theme="dark"] .booking-container iframe {
     margin: 0 auto;
     text-align: left;
     /* Less than a normal section's foot. The hero's own bottom edge is empty space either side of
-       a phone, so the standard gap on top of it reads as a hole rather than as breathing room. */
+       a phone, so the standard gap on top of it reads as a hole rather than as breathing room.
+       The top came down by 24 with it when the job panel went in: the stage is two stacked
+       objects now, and every pixel above the first one is a pixel the second one falls below the
+       fold by. */
+    padding-top: calc(var(--nav-height) + 32px);
     padding-bottom: 36px;
   }
   /* The headline measure that made three sentences land two-per-line was set for a full-width
@@ -12632,7 +12636,13 @@ html[data-theme="dark"] .booking-container iframe {
    on empty screen above the thread, which is what a thread looks like and is now framed by a
    header rather than by nothing. */
 .hm-pz--hero .hm-scenes {
-  min-height: 420px;
+  /* 420 until the job panel went in under the phone. That floor was headroom: a thread sized by
+     its own content came out roughly square and read as a widget, so the empty screen above the
+     newest message was doing the work of making this a phone. The panel does that work now, and
+     the two objects together were 946px of hero, which put the panel's own steps below the fold
+     on a laptop. The headroom is what paid for it, because it was the one part of this column
+     that was there to be looked at rather than read. */
+  min-height: 372px;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 44px);
   mask-image: linear-gradient(to bottom, transparent, #000 44px);
 }
@@ -13142,6 +13152,175 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz .hm-mini-quote + .hm-mini-quote { margin-top: 3px; }
 .hm-em { font-style: italic; font-size: var(--fs-sm); color: var(--text-secondary); }
 
+
+/* ---- The job record, under the phone ----
+
+   Archie's own job panel, the one that opens off a card on the Work board, in the site's tokens.
+   The thread above shows what the agent said; this shows what it wrote down. A bubble is a claim
+   and this is the receipt, which is the difference the whole page is arguing about.
+
+   It borrows the app's grammar rather than inventing one: the outcome pill is `outcomeBadge`'s
+   subtle fill and ink text, the numbered circle is the app's own `h-5 w-5` disc with the step
+   number in it, the step time is tabular and muted on the right, and the rows are separated by a
+   hairline rather than boxed, because in the app they are one list and not a stack of cards.
+
+   The panels overlay on one grid cell exactly as the captions do, so the tallest one sets the
+   height and the seven cannot drift out of step with the scenes: same lap, same --s, one clock. */
+.hm-works {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 100%;
+  max-width: 376px;
+  margin-top: 14px;
+}
+.hm-work {
+  grid-area: 1 / 1;
+  align-self: start;
+  display: grid;
+  gap: 0;
+  text-align: left;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--edge-top), var(--shadow-sm);
+  overflow: hidden;
+  animation: hm-scene var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+}
+
+/* Title on the left, the outcome on the right, on one line, the way the panel's own header sits.
+   The two pills share a cell rather than sitting side by side: one is what the job is doing and
+   the other is how it ended, and they are the same fact at two times. */
+.hm-work-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Room on the right for the pill, which is out of flow and would otherwise have the title
+     running underneath it. Measured against the widest of the three labels, "Asked you". */
+  padding: 11px 84px 0 13px;
+}
+.hm-work-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Both pills stand in one place at the right of the header, so nothing on the row moves when the
+   job stops working and starts being finished. Absolute rather than a grid cell, because the
+   header is a flex row and the title has to keep the whole of the width the pill is not using. */
+.hm-work-pill {
+  position: absolute;
+  right: 13px;
+  top: 11px;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.hm-work-pill--live { background: var(--c-teal-subtle); color: var(--c-teal-ink); }
+.hm-work-pill--done { background: var(--c-green-subtle); color: var(--c-green-ink); }
+.hm-work-pill--ask { background: var(--c-gold-subtle); color: var(--c-gold-ink); }
+
+.hm-work-meta {
+  margin: 3px 0 0;
+  padding: 0 13px 11px;
+  font-size: var(--fs-2xs);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+.hm-work-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.hm-work-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 8px 13px;
+  border-bottom: 1px solid var(--border);
+}
+.hm-work-steps li:last-child { border-bottom: 0; }
+/* The app's disc, at the app's size. No nudge on it: the circle and the words beside it have the
+   same line box, so `align-items: flex-start` already centres them on each other, and the two
+   pixels a margin would add is exactly far enough to read as wrong. */
+.hm-work-n {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text-primary) 9%, transparent);
+  font-size: var(--fs-3xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.hm-work-what {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: var(--fs-sm);
+  line-height: 20px;
+  color: var(--text-primary);
+}
+.hm-work-steps time {
+  flex: 0 0 auto;
+  font-size: var(--fs-2xs);
+  line-height: 20px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+
+/* A job that changed nothing. The app's own sentence, and the reason three of the seven carry it:
+   the journal records changes, so reading a calendar or searching the web leaves no step and
+   offers no undo. Set at the weight of a note rather than of a failure, because it is neither. */
+.hm-work-none {
+  margin: 0;
+  padding: 10px 13px 12px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Arriving. Two shapes, both on the lap clock and both hidden at 100%, which is the state the
+   element is in at the moment its own scene begins: an animation-delay applies once, so an
+   infinite animation repeats forever on its own phase and its last frame is its first. */
+@keyframes hm-work-in {
+  0%          { opacity: 0; transform: translateY(4px); }
+  0.4%        { opacity: 1; transform: none; }
+  13.15%      { opacity: 1; transform: none; }
+  13.9%, 100% { opacity: 0; transform: none; }
+}
+/* Visible for exactly the three seconds between the typing dots starting and the outcome
+   settling, which is the one place this panel and the thread are deliberately in step. */
+@keyframes hm-work-run {
+  0%          { opacity: 0; }
+  0.4%, 4.76% { opacity: 1; }
+  4.77%, 100% { opacity: 0; }
+}
+.hm-work-in {
+  animation: hm-work-in var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+.hm-work-run {
+  animation: hm-work-run var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold) + var(--d) * var(--hm-beat));
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* One scene, still, and it is the first: the one that shows what the headline promises. The
      other two are the reason the phone moves, and with the movement gone they would stack three
@@ -13156,6 +13335,14 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-scene, .hm-cap { display: none; }
   .hm-scene:first-child { display: grid; }
   .hm-cap:first-child { display: block; }
+  /* Same rule as the captions, for the same reason: with the cycle stopped, seven panels in one
+     grid cell would print seven job records on top of each other. */
+  .hm-work, .hm-work-in, .hm-work-run { animation: none; opacity: 1; transform: none; }
+  .hm-work { display: none; }
+  .hm-work:first-child { display: grid; }
+  /* The live pill is the three seconds before the outcome. With nothing moving there is no
+     before, so the job is simply the one it ended as. */
+  .hm-work-pill--live { display: none; }
   /* The dots were only ever there to be watched, and with the cycle stopped they would sit on
      top of the answer they are meant to turn into. */
   .hm-typing { display: none; }
@@ -13242,6 +13429,9 @@ html[data-theme="dark"] .booking-container iframe {
      tallest thread measures 331 rather than 308. Same sum as the desktop floor, with that number
      in it: without the difference the reminder's opening line sits in the dissolve again. */
   .hm-pz--hero .hm-scenes { min-height: 444px; }
+  /* The panel is the phone's object, so it takes the phone's width here rather than standing
+     56px wider than the device whose work it is reporting. */
+  .hm-works { max-width: 320px; }
   /* The wash was sized off the phone's width, and the phone lost a sixth of it here while the
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }

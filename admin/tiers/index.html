@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260908-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260908-3" />
   <style>
     /* ── Account page (page-scoped): reuses global tokens so it themes light/dark ── */
     .acct-wrap { max-width: 520px; margin: 0 auto; }
@@ -51,6 +51,7 @@
       border: 1px solid var(--field-border); background: var(--bg-secondary);
       color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
       transition: border-color var(--transition), box-shadow var(--transition);
+      box-shadow: var(--well);
     }
     .acct-fields select:focus,
     .acct-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
@@ -94,6 +95,7 @@
       text-transform: capitalize; padding: 8px 16px; border-radius: 999px; cursor: pointer;
       transition: color var(--transition), border-color var(--transition),
                   background var(--transition), box-shadow var(--transition);
+      box-shadow: var(--lift-xs);
     }
     .tier-toggle:hover { border-color: var(--accent); color: var(--text-primary); }
     .tier-toggle[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-subtle); color: var(--accent); }

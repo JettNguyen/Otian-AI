@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260908-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260908-3" />
   <style>
     /* ── Account page (page-scoped): reuses global tokens so it themes light/dark ── */
     .acct-wrap { max-width: 520px; margin: 0 auto; }
@@ -50,6 +50,7 @@
       border: 1px solid var(--field-border); background: var(--bg-secondary);
       color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
       transition: border-color var(--transition), box-shadow var(--transition);
+      box-shadow: var(--well);
     }
     .acct-fields input:focus, .acct-fields textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
     .acct-fields textarea { resize: vertical; min-height: 74px; }

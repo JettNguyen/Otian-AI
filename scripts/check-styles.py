@@ -72,6 +72,14 @@ SHADOW_OK = [
     # front of one: `box-shadow: var(--edge-top), var(--shadow-md)`. A composite of named tokens
     # is still named, which is the only thing this file is defending, so it passes as a list.
     (re.compile(r'^var\(--edge-[a-z]+\)$'), "a lit edge, not an elevation"),
+    # --lift-* is the composite the site actually reaches for: a lit top edge, a shaded underside
+    # and one of the four rungs, so an object arrives with its face and its height together. It is
+    # a single named token here for the same reason it is one there.
+    (re.compile(r'^var\(--lift-[a-z]+\)$'), "an object at a height"),
+    # --well is the inverse: light falling into a field that is cut into the page rather than
+    # sitting on it. Inset, so the `^inset` rule below would pass it anyway once resolved; named
+    # here so the reason is written down beside the others.
+    (re.compile(r'^var\(--well\)$'), "a field cut into the page, not raised off it"),
     (re.compile(r'^var\(--(?:shadow|edge)-[a-z]+\)(?:\s*,\s*var\(--(?:shadow|edge)-[a-z]+\))+$'),
      "named tokens stacked"),
     (re.compile(r'^none$'), "removes one"),
@@ -184,7 +192,7 @@ def main():
         # exactly the page this rule exists to protect.
         if re.search(r'<link[^>]+href="[^"]*styles\.css', text):
             scope |= shared
-        for m in re.finditer(r'var\((--(?:fs|shadow|radius|edge)[0-9a-z-]*)\)', text):
+        for m in re.finditer(r'var\((--(?:fs|shadow|radius|edge|lift|well)[0-9a-z-]*)\)', text):
             if m.group(1) not in scope:
                 failures.append((f.relative_to(ROOT), 0, "var", m.group(1),
                                  "names a token nothing in this page's scope defines"))

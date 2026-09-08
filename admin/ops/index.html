@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260908-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260908-3" />
   <style>
     /* ── Shared admin-page scaffolding (same as /admin/tiers/), wider for tables ── */
     .acct-wrap { max-width: 720px; margin: 0 auto; }
@@ -77,6 +77,7 @@
       border: 1px solid var(--field-border); background: var(--bg-secondary);
       color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
       transition: border-color var(--transition), box-shadow var(--transition);
+      box-shadow: var(--well);
     }
     .ops-fields input:focus, .ops-fields textarea:focus, .ops-fields select:focus {
       border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle);
@@ -92,6 +93,7 @@
       text-transform: capitalize; padding: 7px 14px; border-radius: 999px; cursor: pointer;
       transition: color var(--transition), border-color var(--transition),
                   background var(--transition), box-shadow var(--transition);
+      box-shadow: var(--lift-xs);
     }
     .chan-toggle:hover { border-color: var(--danger); color: var(--text-primary); }
     .chan-toggle[aria-pressed="true"] { border-color: var(--danger); background: var(--danger-ring); color: var(--danger); }
@@ -119,6 +121,7 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--fs-xs);
       line-height: 1.5; white-space: pre-wrap; word-break: break-word;
       max-height: 180px; overflow-y: auto; color: var(--text-secondary);
+      box-shadow: var(--lift-sm);
     }
     .rel-notes { margin: 8px 0 0; font-size: var(--fs-sm); line-height: 1.6; color: var(--text-secondary); white-space: pre-wrap; }
     details.rel > summary { cursor: pointer; }

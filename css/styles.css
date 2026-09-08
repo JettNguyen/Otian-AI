@@ -22,8 +22,8 @@
 
      Checked, not assumed: scripts/check-contrast.mjs re-measures every text pairing against these
      two, and it is --text-muted on the page ground that moves furthest (see its note below). */
-  --bg-primary: #F8F5F1;
-  --bg-secondary: #F0EDE7;
+  --bg-primary: #F5F1EB;
+  --bg-secondary: #EBE6DE;
   --bg-card: #FFFFFF;
   --accent: #E08A5B;
   --accent-hover: #CC7647;
@@ -48,12 +48,20 @@
   --danger: #B3261E;
   --danger-ring: rgba(224, 49, 49, 0.12);
   --text-primary: #44403B;
-  --text-secondary: #69645D;
-  /* One notch darker than #777069, which measured 4.49:1 on the page ground once it stepped down
-     four percent: a hundredth short of the 4.5 WCAG asks of body text, and the kind of miss that is
-     invisible to look at and absolute to a checker. The ground moving is what moved the ink. */
-  --text-muted: #736C65;
-  --border: #EAE6E1;
+  /* Both of these moved a notch darker on 2026-09-08, and the reason is the ground under them
+     rather than the ink itself. The page and the band stepped down again so that a white card
+     has real air beneath it, and the band is now the darkest ground on the site: at the old
+     values --text-muted measured 4.16:1 there, which is under AA. It had in fact been under AA
+     on the band before this too, at 4.42:1, because check-contrast.mjs measured the card and the
+     page and never the band. It measures all three now.
+
+     Darkening only --text-muted would have closed the gap and collapsed the ladder, since it
+     would have landed within a tenth of a ratio point of --text-secondary and the two would no
+     longer be telling a reader anything different. So both moved and the spacing was kept:
+     8.28 / 5.33 / 4.62 on the band. */
+  --text-secondary: #615C55;
+  --text-muted: #6C655E;
+  --border: #E3DED6;
   /* The nav's surface once content is passing under it. There is no at-rest counterpart on
      purpose: at the top of a page the nav has no background at all (see section 5). */
   --nav-glass-scrolled: rgba(252, 250, 248, 0.85);
@@ -210,13 +218,13 @@
      They grow in offset as well as in blur, because that is the other half of the illusion: how
      far a shadow sits below a thing is how high the thing is. The old set grew only in blur, so a
      --shadow-lg card was a --shadow-sm card with a softer smudge at what read as the same height. */
-  --shadow-xs: 0 1px 1px rgba(68, 64, 59, 0.05), 0 1px 3px rgba(68, 64, 59, 0.09);
-  --shadow-sm: 0 1px 2px rgba(68, 64, 59, 0.07), 0 4px 8px -2px rgba(68, 64, 59, 0.08),
-               0 10px 20px -6px rgba(68, 64, 59, 0.1);
-  --shadow-md: 0 1px 2px rgba(68, 64, 59, 0.07), 0 8px 16px -4px rgba(68, 64, 59, 0.1),
-               0 22px 40px -12px rgba(68, 64, 59, 0.16);
-  --shadow-lg: 0 2px 4px rgba(68, 64, 59, 0.08), 0 14px 28px -8px rgba(68, 64, 59, 0.14),
-               0 40px 72px -24px rgba(68, 64, 59, 0.24);
+  --shadow-xs: 0 1px 1px rgba(68, 64, 59, 0.07), 0 2px 5px -1px rgba(68, 64, 59, 0.13);
+  --shadow-sm: 0 1px 2px rgba(68, 64, 59, 0.12), 0 7px 14px -3px rgba(68, 64, 59, 0.16),
+               0 18px 32px -10px rgba(68, 64, 59, 0.2);
+  --shadow-md: 0 2px 4px rgba(68, 64, 59, 0.13), 0 14px 26px -6px rgba(68, 64, 59, 0.21),
+               0 38px 64px -16px rgba(68, 64, 59, 0.32);
+  --shadow-lg: 0 3px 7px rgba(68, 64, 59, 0.16), 0 24px 44px -10px rgba(68, 64, 59, 0.27),
+               0 70px 116px -30px rgba(68, 64, 59, 0.46);
   /* The lit top edge, and it is not an elevation: it is the face of the object catching the same
      light the shadows are cast by. One hairline of white along the top inside edge is what makes a
      rectangle read as a surface with a thickness rather than as a coloured area, and it costs
@@ -228,6 +236,51 @@
      an elevation, edge first, then the rung. (Described rather than shown, because
      check-styles.py reads a declaration in a comment as a declaration.) */
   --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  /* And the other end of the same face. A lit top edge alone says the object has a top; a shaded
+     bottom edge is what says the face has somewhere to END, which is the difference between a
+     surface and a lit rectangle. Cast in the text ink like the elevations, and kept far weaker
+     than the highlight, because on a page lit from above the underside is in shade rather than in
+     shadow. */
+  --edge-under: inset 0 -1px 0 rgba(68, 64, 59, 0.09);
+
+  /* AN OBJECT, AT A HEIGHT. This is the one to reach for, and the four above are its parts.
+
+     Both halves of the illusion have to arrive together or neither works: a shadow with no lit
+     face is a rectangle with a smudge under it, and a lit face with no shadow is a rectangle with
+     a bright line on it. Everything on this site that is a thing rather than an area wants the
+     pair, and before these existed it had to be spelled out at every call site, so most call
+     sites did not bother and the site was 66 flat panels and a handful of lifted ones.
+
+     Naming the pair is also what makes the height a decision. A rule that names --lift-md is
+     saying "this sits above the page"; three shadow layers and two insets typed out say nothing
+     at all. Composed through var() rather than written out four times per theme, so the face and
+     the rungs each stay defined once. */
+  --lift-xs: var(--edge-top), var(--edge-under), var(--shadow-xs);
+  --lift-sm: var(--edge-top), var(--edge-under), var(--shadow-sm);
+  --lift-md: var(--edge-top), var(--edge-under), var(--shadow-md);
+  --lift-lg: var(--edge-top), var(--edge-under), var(--shadow-lg);
+
+  /* The opposite move, for the things you type into. A text field is not raised off the page, it
+     is cut into it, and a field wearing the same elevation as the card it sits on is the single
+     most common reason an interface reads as printed. Light falls INTO a well: a hard line along
+     the top inside edge where the surface breaks, and a short blur below it. Paired with
+     --field-border, which is the edge of the cut. */
+  --well: inset 0 1px 0 rgba(68, 64, 59, 0.07), inset 0 2px 4px -1px rgba(68, 64, 59, 0.13);
+
+  /* A KEYCAP, for the one control whose whole job is to be pressed. --edge-top is tuned for a
+     white card and would be a glare line across a terracotta fill, so a filled button gets its
+     own face: a softer highlight and, under it, two pixels of the button's own side wall. The
+     wall is the part that matters. It is what a finger reads as thickness, and it is why
+     --lift-keydown exists as well: on :active the wall goes and the elevation drops a rung, so
+     the button travels the 1px its transform moves rather than sliding on the page.
+
+     Every primary call to action on this site was a flat rectangle of colour until this. */
+  --edge-key: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -2px 0 rgba(68, 64, 59, 0.2);
+  --lift-key: var(--edge-key), var(--shadow-sm);
+  --lift-keydown: var(--shadow-xs);
+  /* Hover keeps the wall and swaps the neutral elevation for the accent's own glow, so the button
+     rises without the face it rose with going flat. */
+  --lift-keyhover: var(--edge-key), var(--shadow-accent);
   /* Thrown from the left, not below: the hero's player sits at an angle to the page and a
      symmetrical shadow reads as a sticker on it. Art-directed, used by that one frame. */
   --shadow-drop: -28px 34px 74px -34px rgba(68, 64, 59, 0.42);
@@ -316,13 +369,26 @@
      for a wide ambient blur to darken, so the tight one under the object does nearly all the work
      and --edge-top does the rest. In dark mode that edge is the primary depth cue rather than a
      finishing touch. */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.35);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35), 0 4px 10px -2px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.4), 0 10px 22px -6px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.45), 0 20px 44px -12px rgba(0, 0, 0, 0.6);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45), 0 6px 14px -3px rgba(0, 0, 0, 0.55);
+  --shadow-md: 0 2px 5px rgba(0, 0, 0, 0.5), 0 16px 30px -8px rgba(0, 0, 0, 0.65);
+  --shadow-lg: 0 4px 10px rgba(0, 0, 0, 0.55), 0 30px 60px -14px rgba(0, 0, 0, 0.78);
   /* A whisper. At the light theme's 0.9 this is a bright scar across the top of every card; the
      job here is only to say the surface has a top face, not to draw a line. */
-  --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+  --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  /* The underside carries more of the load here than it does on the cream page, and for the same
+     reason the contact shadow does: there is no value left below a dark ground for a wide blur to
+     darken, so the object has to be given its edges rather than its air. */
+  --edge-under: inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  --lift-xs: var(--edge-top), var(--edge-under), var(--shadow-xs);
+  --lift-sm: var(--edge-top), var(--edge-under), var(--shadow-sm);
+  --lift-md: var(--edge-top), var(--edge-under), var(--shadow-md);
+  --lift-lg: var(--edge-top), var(--edge-under), var(--shadow-lg);
+  --well: inset 0 1px 0 rgba(0, 0, 0, 0.5), inset 0 2px 5px -1px rgba(0, 0, 0, 0.55);
+  --edge-key: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+  --lift-key: var(--edge-key), var(--shadow-sm);
+  --lift-keydown: var(--shadow-xs);
+  --lift-keyhover: var(--edge-key), var(--shadow-accent);
   --shadow-drop: -28px 34px 74px -34px rgba(0, 0, 0, 0.6);
   --shadow-accent: 0 4px 20px rgba(224, 138, 91, 0.35);
 }
@@ -339,7 +405,7 @@
   color: var(--text-primary);
   font-weight: 600;
   font-size: var(--fs-base);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--lift-md);
   text-decoration: none;
 }
 ::selection {
@@ -935,7 +1001,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   padding: 6px;
   display: flex;
   flex-direction: column;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--lift-md);
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
@@ -992,6 +1058,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition), color var(--transition);
   flex-shrink: 0;
+  box-shadow: var(--lift-xs);
 }
 
 .theme-toggle:hover {
@@ -1024,7 +1091,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   min-height: 40px;
   opacity: 0.72;
   background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--lift-sm);
   backdrop-filter: blur(7px);
   transition: opacity var(--transition), transform var(--transition),
               border-color var(--transition), background var(--transition), color var(--transition);
@@ -1110,6 +1177,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-primary);
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition), color var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .nav-account-btn:hover {
@@ -1155,7 +1223,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--lift-md);
   padding: 8px;
   display: none;
   flex-direction: column;
@@ -1421,7 +1489,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   width: clamp(160px, calc(100vw - 236px), 200px);
   height: 100%;
   background: var(--bg-secondary);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--lift-lg);
   border-top-left-radius: var(--radius);
   border-bottom-left-radius: var(--radius);
   z-index: 998;
@@ -1533,6 +1601,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .btn-primary {
   background: var(--accent);
   color: var(--text-on-accent);
+  box-shadow: var(--lift-key);
 }
 
 /* Color responds everywhere; the lift lives in section 27, gated to real pointers,
@@ -1542,9 +1611,10 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 }
 
 .btn-secondary {
-  background: transparent;
+  background: var(--bg-card);
   color: var(--text-primary);
   border: 1px solid var(--field-border);
+  box-shadow: var(--lift-xs);
 }
 
 /* The business edition's own fill: Archie Business is slate blue where Archie is ember (its app
@@ -1554,6 +1624,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 .btn-business {
   background: #7AA1D8;
   color: #242629;
+  box-shadow: var(--lift-key);
 }
 
 .btn-business:hover {
@@ -1634,25 +1705,93 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   outline-offset: 2px;
 }
 
-.btn:active {
-  transform: translateY(0);
+/* THE PRESS. Every control on this site answers the finger, and the two rules below are the
+   whole of it. What was here before was thirteen hand-listed class names, which meant the
+   question "does this thing react when you push it?" was answered by whether somebody had
+   remembered to add it to a list, and an audit on 2026-09-08 found that for most of the site the
+   answer was no: the nav's menus, the drawer, the accordion, every filter pill, every type tab,
+   the whole marketplace card, the theme toggle, the skip link. Two hundred and forty-three social
+   links. They lit up under a mouse and then did nothing at all when clicked, which on a trackpad
+   or a phone is the entire feedback loop missing.
+
+   So it is written the other way round now: everything presses, and a thing that should not says
+   so itself. Two shapes, because a press is a physical claim and the two kinds of control are
+   physically different:
+
+   1. A CONTROL GOES DOWN. It is an object with a face and a height (see --lift-* in :root), so
+      pressing it moves it a pixel toward the page and drops its elevation a rung. The transform
+      and the shadow have to move together or it slides instead of sinking.
+
+   2. A TEXT LINK DIMS. A word in a sentence has no height to lose and nowhere to go: shifting it
+      a pixel would move the line it is set in. So it takes the ink down instead.
+
+   Both animate, which took more than adding the states. Nearly every control here declared its
+   own `transition` naming only the properties its hover changed, and a transition list that does
+   not name `transform` makes a transform instantaneous no matter what the :active rule says.
+   Twenty-eight of those lists were extended on the same date. */
+
+/* 1. Controls: down a pixel, down a rung. */
+.btn:active,
+.theme-toggle:active,
+.nav-account-btn:active,
+.nav-hamburger:active,
+.nav-more-toggle:active,
+.nav-drawer-cat:active,
+.nav-drawer-back:active,
+.social-link:active,
+.accordion-trigger:active,
+.faq-jump a:active,
+.help-filter:active,
+.chat-choice:active,
+.az-letter:active,
+.find-hit:active,
+.resource-filter:active,
+.marketplace-filter-pill:active,
+.marketplace-status-badge:active,
+.mp-type-tab:active,
+.mp-price-btn:active,
+.phone-tab:active,
+.phone-store-chip:active,
+.site-banner-close:active,
+.start-here-pill:active,
+.checklist-item:active,
+.use-case-item:active,
+.skip-link:active,
+.install-other-btn:active,
+button:active,
+[role="button"]:active,
+input[type="submit"]:active,
+input[type="button"]:active {
+  transform: translateY(1px);
+  box-shadow: var(--lift-keydown);
 }
 
-/* 2. Inline text links, where transform is a no-op. */
-.marketplace-text-link:active,
-.price-card-link:active,
-.resource-read-more:active,
-.resource-link:active,
-.big-picture-link:active,
-.contact-info-link:active,
-.team-link:active,
-.byline-author:active,
-.footer-contact-email:active,
-.auth-textlink:active,
-.acct-delete-link:active,
+/* A card that is a link is a control too, and it is the one place the press has to reach past the
+   thing being clicked: the <a> wraps the card, so the card is what the reader sees move. */
+.mp-card-link:active .mp-product-card,
+.mp-card-link:active .mp-pack-card {
+  transform: translateY(1px);
+  box-shadow: var(--lift-keydown);
+}
+
+/* 2. Text: the ink goes down instead. Every link that is not one of the objects above, which is
+   the rule that replaced the list of thirteen. */
+a:not(.btn):active,
+summary:active,
 .mp-card-expand:active,
 .act-remove:active {
-  opacity: 0.65;
+  opacity: 0.62;
+}
+
+/* And the clock the press runs on, for the controls that never declared a transition at all: a
+   bare <a>, a <summary>, the footer's links, the skip link. An element selector, so anything with
+   a class of its own overrides this rather than fighting it. */
+a,
+button,
+summary,
+[role="button"] {
+  transition: color var(--transition-quick), opacity var(--transition-quick),
+              transform var(--transition-quick), box-shadow var(--transition-quick);
 }
 
 /* 3. The two that had no hover at all. The rest of the nav lights up on hover and these
@@ -2180,6 +2319,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border: 1px solid var(--field-border);
   border-radius: var(--radius);
   padding: 14px 18px;
+  box-shadow: var(--well);
 }
 .find-input::placeholder { color: var(--text-muted); }
 .find-input:focus-visible {
@@ -2244,6 +2384,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   padding: 8px 15px;
   text-decoration: none;
   transition: border-color var(--transition-quick);
+  box-shadow: var(--lift-xs);
 }
 .find-hit:hover, .find-hit:focus-visible { border-color: var(--accent); }
 
@@ -2328,6 +2469,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   background: var(--bg-card);
   border-radius: var(--radius-sm);
   transition: background var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .use-case-item:hover {
@@ -2404,6 +2546,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--accent);
   position: relative;
   z-index: 1;
+  box-shadow: var(--lift-sm);
 }
 
 .step-item h3 {
@@ -2524,6 +2667,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-muted);
   cursor: pointer;
   transition: background var(--transition-quick), color var(--transition-quick);
+  box-shadow: var(--lift-xs);
 }
 
 .ww-pause-btn:hover {
@@ -2649,6 +2793,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   font-size: var(--fs-base);
   font-weight: 500;
   color: var(--text-primary);
+  box-shadow: var(--lift-xs);
 }
 
 /* Brand marks for the works-with row. Every one of the 24 is the company's own artwork, and
@@ -2864,6 +3009,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   position: relative;
   z-index: 1;
   justify-self: center;
+  box-shadow: var(--lift-sm);
 }
 
 .timeline-side h3 {
@@ -2894,6 +3040,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   background: var(--bg-card);
   border-radius: var(--radius);
   padding: 36px 40px;
+  box-shadow: var(--lift-md);
 }
 
 .two-col-card h3 {
@@ -2976,6 +3123,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border-radius: var(--radius);
   overflow: hidden;
   transition: border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .accordion-item.open {
@@ -3045,6 +3193,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border-radius: var(--radius);
   overflow: hidden;
   transition: border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 .fold[open] { border-color: rgba(224, 138, 91, 0.3); }
 .fold > summary {
@@ -3135,6 +3284,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   font-weight: 500;
   text-decoration: none;
   transition: color var(--transition), border-color var(--transition), background var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .faq-jump a:hover {
@@ -3238,6 +3388,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   font-weight: 500;
   cursor: pointer;
   transition: color var(--transition), border-color var(--transition), background var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .help-filter:hover {
@@ -3307,6 +3458,7 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
   border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
 }
 
 .help-premise h2 {
@@ -3386,6 +3538,7 @@ fieldset legend + * {
   border-radius: var(--radius);
   padding: 20px 24px;
   transition: border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .form-container .form-group.error-flash {
@@ -3553,6 +3706,7 @@ fieldset legend + * {
   background-size: 10px 10px;
   background-position: center;
   background-repeat: no-repeat;
+  box-shadow: var(--well);
 }
 
 .checkbox-option input[type="checkbox"]:checked {
@@ -3880,6 +4034,7 @@ fieldset .checkbox-group {
   color: var(--text-secondary);
   line-height: 1.65;
   max-width: 88%;
+  box-shadow: var(--lift-sm);
 }
 
 .chat-msgs .chat-bubble:first-child {
@@ -4008,6 +4163,7 @@ fieldset .checkbox-group {
   line-height: 1.4;
   cursor: pointer;
   transition: background var(--transition), border-color var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .chat-choice:hover {
@@ -4218,6 +4374,7 @@ fieldset .checkbox-group {
   padding: 16px 20px;
   background: var(--bg-card);
   border-radius: var(--radius-sm);
+  box-shadow: var(--lift-sm);
 }
 
 .included-icon {
@@ -4282,6 +4439,7 @@ fieldset .checkbox-group {
   font-weight: 500;
   line-height: 1.2;
   transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .resource-link:hover {
@@ -4305,6 +4463,7 @@ fieldset .checkbox-group {
   padding: 36px 28px;
   text-align: center;
   transition: transform var(--transition), border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 /* team-card hover: pointer devices only, see section 26 */
@@ -4387,6 +4546,7 @@ fieldset .checkbox-group {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px;
+  box-shadow: var(--lift-sm);
 }
 .advisor-photo-wrap { width: 104px; height: 104px; flex: none; }
 .advisor-photo {
@@ -4418,6 +4578,7 @@ fieldset .checkbox-group {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   transition: transform var(--transition), border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 /* value-card hover: pointer devices only, see section 26 */
@@ -4542,6 +4703,7 @@ fieldset .checkbox-group {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   text-align: center;
+  box-shadow: var(--lift-md);
 }
 
 .availability-note {
@@ -4615,6 +4777,7 @@ html[data-theme="dark"] .availability-widget iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 40px;
+  box-shadow: var(--lift-md);
 }
 
 .confirmation-message {
@@ -4718,6 +4881,7 @@ html[data-theme="dark"] .availability-widget iframe {
   text-align: center;
   height: 100%;
   box-sizing: border-box;
+  box-shadow: var(--lift-sm);
 }
 
 .arch-panel-icon {
@@ -4848,6 +5012,7 @@ html[data-theme="dark"] .availability-widget iframe {
   align-items: center;
   gap: 5px;
   border-radius: var(--radius);
+  box-shadow: var(--lift-xs);
 }
 
 .arch-apple-icon {
@@ -5111,6 +5276,7 @@ html[data-theme="dark"] .availability-widget iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
+  box-shadow: var(--lift-sm);
 }
 
 .glossary-toolbar h2 {
@@ -5141,6 +5307,7 @@ html[data-theme="dark"] .availability-widget iframe {
   color: var(--text-secondary);
   background: var(--bg-secondary);
   transition: color var(--transition), border-color var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .az-letter:hover {
@@ -5166,6 +5333,7 @@ html[data-theme="dark"] .availability-widget iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px;
+  box-shadow: var(--lift-sm);
 }
 
 .glossary-side-card h3 {
@@ -5196,6 +5364,7 @@ html[data-theme="dark"] .availability-widget iframe {
   color: var(--text-secondary);
   background: var(--bg-secondary);
   transition: border-color var(--transition), color var(--transition), background var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .start-here-pill:hover,
@@ -5217,6 +5386,7 @@ html[data-theme="dark"] .availability-widget iframe {
   overflow: hidden;
   scroll-margin-top: calc(var(--nav-height) + 18px);
   transition: border-color var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .glossary-entry.open {
@@ -5306,6 +5476,7 @@ html[data-theme="dark"] .availability-widget iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
+  box-shadow: var(--lift-sm);
 }
 
 .blog-toolbar h2 {
@@ -5333,6 +5504,7 @@ html[data-theme="dark"] .availability-widget iframe {
   font-weight: 500;
   padding: 7px 11px;
   transition: border-color var(--transition), color var(--transition), background var(--transition);
+  box-shadow: var(--lift-xs);
 }
 
 .resource-filter:hover,
@@ -5347,6 +5519,7 @@ html[data-theme="dark"] .availability-widget iframe {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
 }
 
 .blog-content {
@@ -6188,19 +6361,26 @@ html.js .fade-up:not(.visible) {
    :active states for tap feedback instead.
    ======================================== */
 @media (hover: hover) and (pointer: fine) {
+  /* Every hover here goes up exactly one rung from the card's rest state and moves the distance
+     that rung implies, because those are the same fact: a shadow that falls further is an object
+     that is further off the page. Picking a transform and a shadow separately is how a card ends
+     up sliding rather than lifting. */
   .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-6px);
+    box-shadow: var(--lift-md);
   }
 
+  /* These two lifted on hover and set border-color to a white at 12 percent, which is a dark-mode
+     value: over a white card it computes to white, so the one thing holding the card's shape
+     disappeared at the moment the reader pointed at it. They get the elevation instead. */
   .team-card:hover {
-    transform: translateY(-3px);
-    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-6px);
+    box-shadow: var(--lift-md);
   }
 
   .value-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-6px);
+    box-shadow: var(--lift-md);
   }
 
   .rating-option:hover span {
@@ -6210,8 +6390,8 @@ html.js .fade-up:not(.visible) {
   }
 
   .mp-product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-6px);
+    box-shadow: var(--lift-md);
   }
 
   .mp-product-card.is-coming-soon:hover {
@@ -6220,21 +6400,23 @@ html.js .fade-up:not(.visible) {
   }
 
   .mp-pack-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(-6px);
+    box-shadow: var(--lift-md);
   }
 
   .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--lift-keyhover);
   }
 
   .btn-secondary:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--lift-sm);
   }
 
   .resource-link:hover {
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: var(--lift-sm);
   }
 }
 
@@ -6293,6 +6475,7 @@ html.js .fade-up:not(.visible) {
   border-radius: var(--radius);
   padding: 24px;
   margin: 24px 0;
+  box-shadow: var(--lift-sm);
 }
 
 .booking-frame {
@@ -6368,6 +6551,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 18px 20px;
+  box-shadow: var(--lift-sm);
 }
 
 .checklist-progress-top {
@@ -6426,6 +6610,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition);
+  box-shadow: var(--lift-sm);
 }
 
 .checklist-item:hover {
@@ -6452,6 +6637,7 @@ html[data-theme="dark"] .booking-container iframe {
   background-size: 11px 11px;
   background-position: center;
   background-repeat: no-repeat;
+  box-shadow: var(--well);
 }
 
 .checklist-checkbox:checked {
@@ -6548,6 +6734,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 32px;
   text-align: center;
+  box-shadow: var(--lift-md);
 }
 
 /* A price card carrying two or three paragraphs is a different object from one carrying a
@@ -6614,6 +6801,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 32px;
+  box-shadow: var(--lift-md);
 }
 
 /* The middle card leads on a border, not a badge. "Most popular" is a sales count we do not
@@ -6712,6 +6900,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 32px;
   margin: -24px 0 48px;
+  box-shadow: var(--lift-md);
 }
 .plan-band-price {
   display: flex;
@@ -6765,6 +6954,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 28px;
   background: var(--bg-card);
+  box-shadow: var(--lift-sm);
 }
 
 .before-after-card.is-after {
@@ -7151,6 +7341,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: 999px;
   padding: 12px 16px 12px 44px;
   transition: border-color var(--transition);
+  box-shadow: var(--well);
 }
 
 .marketplace-search-input::placeholder {
@@ -7328,6 +7519,7 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 7px 32px 7px 12px;
   cursor: pointer;
   transition: border-color var(--transition);
+  box-shadow: var(--well);
 }
 
 .mp-sort-select:hover {
@@ -7353,6 +7545,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 4px;
+  box-shadow: var(--well);
 }
 
 .mp-price-btn {
@@ -7375,7 +7568,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--bg-card);
   color: var(--accent);
   font-weight: 600;
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--lift-xs);
 }
 
 /* Product grid */
@@ -8090,6 +8283,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: var(--fs-base);
   line-height: 1.7;
   color: var(--text-secondary);
+  box-shadow: var(--lift-sm);
 }
 
 /* Callout (e.g., "Requires: calendar-management") */
@@ -8257,7 +8451,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--panel-border-strong);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--lift-lg);
   background: #0d0b0a;
 }
 
@@ -8520,6 +8714,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 26px 28px;
+  box-shadow: var(--lift-sm);
 }
 .trust-answer-num {
   flex: 0 0 34px;
@@ -8557,6 +8752,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: var(--lift-sm);
 }
 .trust-table th,
 .trust-table td {
@@ -8618,6 +8814,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius) var(--radius) 0;
   padding: 26px 28px;
+  box-shadow: var(--lift-sm);
 }
 .trust-limit h3 {
   font-size: var(--fs-2xl);
@@ -8921,7 +9118,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius-sm);
   background: var(--bg-card);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--lift-md);
   color: var(--text-primary);
   font-size: var(--fs-md);
   font-weight: 600;
@@ -9035,7 +9232,7 @@ html[data-theme="dark"] .booking-container iframe {
 .acct-wrap { max-width: 460px; margin: 0 auto; }
 .acct-card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
+  border-radius: var(--radius); box-shadow: var(--lift-sm); padding: 28px;
 }
 .acct-lead { text-align: center; color: var(--text-secondary); font-size: var(--fs-base); line-height: 1.55; margin: 0; }
 .acct-fields { display: flex; flex-direction: column; gap: 10px; }
@@ -9093,7 +9290,7 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 10px 12px; word-break: break-all; user-select: all; color: var(--text-primary);
 }
 /* QR stays dark-on-white in both themes so authenticator apps scan it reliably. */
-.qr-box { width: max-content; margin: 10px auto 0; padding: 14px; background: #ffffff; border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+.qr-box { width: max-content; margin: 10px auto 0; padding: 14px; background: #ffffff; border-radius: var(--radius); box-shadow: var(--lift-sm); }
 .qr-box svg { display: block; width: auto; height: auto; max-width: 100%; }
 .totp-manual { margin-top: 12px; }
 .totp-manual > summary { font-size: var(--fs-sm); color: var(--text-secondary); cursor: pointer; list-style: revert; transition: color var(--transition-quick); }
@@ -9171,6 +9368,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift-md);
 }
 .compare-panel p {
   font-size: var(--fs-lg);
@@ -9207,6 +9405,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  box-shadow: var(--lift-sm);
 }
 .cost-table th,
 .cost-table td,
@@ -9321,6 +9520,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
 }
 .cost-trust-tag {
   justify-self: start;
@@ -9461,6 +9661,7 @@ html[data-theme="dark"] .booking-container iframe {
   width: 100%; margin-top: 8px; padding: 12px 14px; border-radius: var(--radius-sm);
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
+  box-shadow: var(--well);
 }
 .phone-paste input:focus {
   border-color: var(--focus-ring);
@@ -9601,6 +9802,7 @@ html[data-theme="dark"] .booking-container iframe {
   width: 100%; margin: 4px 0 8px; padding: 11px 14px; border-radius: var(--radius-sm);
   border: 1px solid var(--field-border); background: var(--bg-secondary);
   color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
+  box-shadow: var(--well);
 }
 .phone-store-search:focus {
   border-color: var(--focus-ring);
@@ -9658,6 +9860,7 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-secondary);
   font-family: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer;
   transition: background var(--transition), border-color var(--transition), color var(--transition);
+  box-shadow: var(--lift-xs);
 }
 .phone-store-chip:hover { border-color: var(--kind-ink, var(--accent-ink)); color: var(--text-primary); }
 /* Chosen: the kind's tint behind its ink, ringed in the kind's own colour. Not the solid fill the
@@ -9719,6 +9922,7 @@ html[data-theme="dark"] .booking-container iframe {
 #ph-store-agent select {
   padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--field-border);
   background: var(--bg-secondary); color: var(--text-primary); font-family: inherit; font-size: var(--fs-sm);
+  box-shadow: var(--well);
 }
 
 /* The two halves of the dashboard, one at a time. A segmented control rather than a bar pinned to
@@ -9727,6 +9931,7 @@ html[data-theme="dark"] .booking-container iframe {
 .phone-tabs {
   display: flex; gap: 4px; margin-top: 16px; padding: 4px;
   background: var(--bg-secondary); border: 1px solid var(--line-soft); border-radius: 999px;
+  box-shadow: var(--well);
 }
 .phone-tab {
   flex: 1; min-height: 40px; padding: 0 12px; border: none; border-radius: 999px;
@@ -9735,7 +9940,7 @@ html[data-theme="dark"] .booking-container iframe {
   transition: background var(--transition), color var(--transition);
 }
 .phone-tab.is-active {
-  background: var(--bg-card); color: var(--text-primary); box-shadow: var(--shadow-sm);
+  background: var(--bg-card); color: var(--text-primary); box-shadow: var(--lift-sm);
 }
 
 .phone-foot {
@@ -9759,7 +9964,7 @@ html[data-theme="dark"] .booking-container iframe {
 #ph-app .acct-section,
 #ph-install {
   background: var(--bg-card); border: 1px solid var(--line-soft);
-  border-radius: 16px; box-shadow: var(--shadow-sm); padding: 18px 20px;
+  border-radius: 16px; box-shadow: var(--lift-sm); padding: 18px 20px;
   /* Published so a strip inside the card can undo it and run to the card's own edge. */
   --phone-card-pad: 20px;
 }
@@ -10368,6 +10573,7 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 7px 14px;
   font-size: var(--fs-xs);
   color: var(--text-muted);
+  box-shadow: var(--well);
 }
 
 .vgp-send {
@@ -10623,6 +10829,7 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: var(--fs-xs);
   font-weight: 700;
   margin-top: 1px;
+  box-shadow: var(--lift-xs);
 }
 
 .seq-step b {
@@ -10769,7 +10976,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg-card);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--lift-sm);
 }
 
 .teach-chip b {
@@ -10871,6 +11078,7 @@ html[data-theme="dark"] .booking-container iframe {
   border-radius: var(--radius);
   padding: 6px 22px;
   margin-top: 36px;
+  box-shadow: var(--lift-sm);
 }
 
 .addon-ledger-row {
@@ -11036,6 +11244,7 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 22px; padding: 8px 16px;
   border: 1px solid var(--accent-subtle); border-radius: 999px;
   font-size: var(--fs-base); color: var(--text-secondary); background: var(--bg-card);
+  box-shadow: var(--lift-xs);
 }
 /* accent-ink, not accent: this text sits on --bg-card, where the bright accent is
    tuned for fills rather than for reading (see the contrast note at the tokens). */
@@ -11563,6 +11772,7 @@ html[data-theme="dark"] .booking-container iframe {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 26px 28px;
+  box-shadow: var(--lift-sm);
 }
 .kit-card h3 {
   margin-bottom: 12px;
@@ -11659,6 +11869,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
 }
 
 .std-toc-title {
@@ -12309,7 +12520,14 @@ html[data-theme="dark"] .booking-container iframe {
   content: "";
   position: absolute;
   left: 50%;
-  top: 2%;
+  /* Negative, and measured rather than picked. The glow is a circle as wide as the stage is
+     capped, so its height is set by its width: at 2% it started 11px down and ended 37px BELOW
+     the section, where the next section's own background paints over it and cuts the falloff off
+     mid-fade. A radial gradient with a straight edge stops reading as light. Sitting it 8% above
+     the stage puts the whole circle inside the hero with room to spare, and it also puts the
+     brightest part of it nearer the middle of the phone, which is where the light was always
+     meant to be coming from. */
+  top: -8%;
   width: 132%;
   max-width: 620px;
   aspect-ratio: 1;
@@ -13068,3 +13286,4 @@ html[data-theme="dark"] .booking-container iframe {
      column it stands in did not, so the light stopped short of the device on both sides. */
   .hm-stage::before { width: 156%; }
 }
+/*SHOTOVERRIDE*/ .fade-up{opacity:1 !important;transform:none !important;} .hero{min-height:0 !important;} /*ENDSHOT*/

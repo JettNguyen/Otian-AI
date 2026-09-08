@@ -128,10 +128,14 @@ for (const [theme, b] of [["light", LIGHT], ["dark", DARK]]) {
     }
   }
 
-  // Text.
+  // Text. --bg-secondary is checked alongside the other two as of 2026-09-08, and it should have
+  // been from the start: it is the alternating band, so roughly every other section on the site
+  // sets its copy on it. Nobody was measuring the darkest of the three grounds. --text-muted had
+  // been failing there at 4.42 for some time and no run of this file said so.
   for (const t of ["text-primary", "text-secondary", "text-muted"]) {
     checks.push([`${theme}: --${t} on card`, ratio(token(t, b), g.card), TEXT]);
     checks.push([`${theme}: --${t} on --bg-primary`, ratio(token(t, b), g["bg-primary"]), TEXT]);
+    checks.push([`${theme}: --${t} on --bg-secondary`, ratio(token(t, b), g["bg-secondary"]), TEXT]);
   }
   checks.push([`${theme}: --text-on-accent on --accent`, ratio(token("text-on-accent", b), token("accent", b)), TEXT]);
   checks.push([`${theme}: --accent-ink on --accent-subtle`, ratio(token("accent-ink", b), token("accent-subtle", b)), TEXT]);

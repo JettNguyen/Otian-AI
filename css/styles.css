@@ -11585,8 +11585,8 @@ html[data-theme="dark"] .booking-container iframe {
    and the numbers cannot drift apart.
 
    THE LAP IS TWELVE SECONDS AND IT IS NOT ALL FORWARD. The run owns the first 80% of it, the
-   finished state holds for 10% so a reader who arrives late sees a completed track rather than
-   only a moving one, and the last 10% is the rewind. Nothing in the loop cuts: the lit discs go
+   finished state holds for 15% so a reader who arrives late sees a completed track rather than
+   only a moving one, and the last 5% is the rewind. Nothing in the loop cuts: the lit discs go
    out one at a time from the far end, each segment retracts towards the disc it started from, and
    at 100% every one of them is exactly where it was at 0%.
 
@@ -11613,9 +11613,10 @@ html[data-theme="dark"] .booking-container iframe {
    install for real is a small edit. The keyframes hold no numbers, only timing, and they are
    generated from the same list the track is.
 
-   The last reading is the one that holds. 15 arrives at 75% and stays through the second the
-   track spends complete, then the countdown runs it back to 0 at seventy-five thousandths of a
-   second a figure, so the rewind reads as a rewind and not as a clock that jumped. Every switch is a
+   The last reading is the one that holds. 15 arrives at 75% and stays through the second and a
+   half the track spends complete, then the countdown runs it back to 0 at thirty-seven and a half
+   thousandths of a second a figure, which is two frames: fast enough to read as a rewind rather
+   than as a count, and slow enough that it is plainly running the other way. Every switch is a
    hundredth of a percent, which is under a frame: these are digits changing, not crossfading. */
 .hm-eta {
   --st-lap: 12s;
@@ -11674,112 +11675,113 @@ html[data-theme="dark"] .booking-container iframe {
 
 @keyframes hm-eta-0 {
   0%, 4.99%           { opacity: 1; }
-  5%, 99.365%         { opacity: 0; }
-  99.375%, 100%       { opacity: 1; }
+  5%, 99.6775%        { opacity: 0; }
+  99.6875%, 100%      { opacity: 1; }
 }
 @keyframes hm-eta-1 {
   0%, 4.99%           { opacity: 0; }
   5%, 9.99%           { opacity: 1; }
-  10%, 98.74%         { opacity: 0; }
-  98.75%, 99.365%     { opacity: 1; }
-  99.375%, 100%       { opacity: 0; }
+  10%, 99.365%        { opacity: 0; }
+  99.375%, 99.6775%   { opacity: 1; }
+  99.6875%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-2 {
   0%, 9.99%           { opacity: 0; }
   10%, 14.99%         { opacity: 1; }
-  15%, 98.115%        { opacity: 0; }
-  98.125%, 98.74%     { opacity: 1; }
-  98.75%, 100%        { opacity: 0; }
+  15%, 99.0525%       { opacity: 0; }
+  99.0625%, 99.365%   { opacity: 1; }
+  99.375%, 100%       { opacity: 0; }
 }
 @keyframes hm-eta-3 {
   0%, 14.99%          { opacity: 0; }
   15%, 19.99%         { opacity: 1; }
-  20%, 97.49%         { opacity: 0; }
-  97.5%, 98.115%      { opacity: 1; }
-  98.125%, 100%       { opacity: 0; }
+  20%, 98.74%         { opacity: 0; }
+  98.75%, 99.0525%    { opacity: 1; }
+  99.0625%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-4 {
   0%, 19.99%          { opacity: 0; }
   20%, 24.99%         { opacity: 1; }
-  25%, 96.865%        { opacity: 0; }
-  96.875%, 97.49%     { opacity: 1; }
-  97.5%, 100%         { opacity: 0; }
+  25%, 98.4275%       { opacity: 0; }
+  98.4375%, 98.74%    { opacity: 1; }
+  98.75%, 100%        { opacity: 0; }
 }
 @keyframes hm-eta-5 {
   0%, 24.99%          { opacity: 0; }
   25%, 29.99%         { opacity: 1; }
-  30%, 96.24%         { opacity: 0; }
-  96.25%, 96.865%     { opacity: 1; }
-  96.875%, 100%       { opacity: 0; }
+  30%, 98.115%        { opacity: 0; }
+  98.125%, 98.4275%   { opacity: 1; }
+  98.4375%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-6 {
   0%, 29.99%          { opacity: 0; }
   30%, 34.99%         { opacity: 1; }
-  35%, 95.615%        { opacity: 0; }
-  95.625%, 96.24%     { opacity: 1; }
-  96.25%, 100%        { opacity: 0; }
+  35%, 97.8025%       { opacity: 0; }
+  97.8125%, 98.115%   { opacity: 1; }
+  98.125%, 100%       { opacity: 0; }
 }
 @keyframes hm-eta-7 {
   0%, 34.99%          { opacity: 0; }
   35%, 39.99%         { opacity: 1; }
-  40%, 94.99%         { opacity: 0; }
-  95%, 95.615%        { opacity: 1; }
-  95.625%, 100%       { opacity: 0; }
+  40%, 97.49%         { opacity: 0; }
+  97.5%, 97.8025%     { opacity: 1; }
+  97.8125%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-8 {
   0%, 39.99%          { opacity: 0; }
   40%, 44.99%         { opacity: 1; }
-  45%, 94.365%        { opacity: 0; }
-  94.375%, 94.99%     { opacity: 1; }
-  95%, 100%           { opacity: 0; }
+  45%, 97.1775%       { opacity: 0; }
+  97.1875%, 97.49%    { opacity: 1; }
+  97.5%, 100%         { opacity: 0; }
 }
 @keyframes hm-eta-9 {
   0%, 44.99%          { opacity: 0; }
   45%, 49.99%         { opacity: 1; }
-  50%, 93.74%         { opacity: 0; }
-  93.75%, 94.365%     { opacity: 1; }
-  94.375%, 100%       { opacity: 0; }
+  50%, 96.865%        { opacity: 0; }
+  96.875%, 97.1775%   { opacity: 1; }
+  97.1875%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-10 {
   0%, 49.99%          { opacity: 0; }
   50%, 54.99%         { opacity: 1; }
-  55%, 93.115%        { opacity: 0; }
-  93.125%, 93.74%     { opacity: 1; }
-  93.75%, 100%        { opacity: 0; }
+  55%, 96.5525%       { opacity: 0; }
+  96.5625%, 96.865%   { opacity: 1; }
+  96.875%, 100%       { opacity: 0; }
 }
 @keyframes hm-eta-11 {
   0%, 54.99%          { opacity: 0; }
   55%, 59.99%         { opacity: 1; }
-  60%, 92.49%         { opacity: 0; }
-  92.5%, 93.115%      { opacity: 1; }
-  93.125%, 100%       { opacity: 0; }
+  60%, 96.24%         { opacity: 0; }
+  96.25%, 96.5525%    { opacity: 1; }
+  96.5625%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-12 {
   0%, 59.99%          { opacity: 0; }
   60%, 64.99%         { opacity: 1; }
-  65%, 91.865%        { opacity: 0; }
-  91.875%, 92.49%     { opacity: 1; }
-  92.5%, 100%         { opacity: 0; }
+  65%, 95.9275%       { opacity: 0; }
+  95.9375%, 96.24%    { opacity: 1; }
+  96.25%, 100%        { opacity: 0; }
 }
 @keyframes hm-eta-13 {
   0%, 64.99%          { opacity: 0; }
   65%, 69.99%         { opacity: 1; }
-  70%, 91.24%         { opacity: 0; }
-  91.25%, 91.865%     { opacity: 1; }
-  91.875%, 100%       { opacity: 0; }
+  70%, 95.615%        { opacity: 0; }
+  95.625%, 95.9275%   { opacity: 1; }
+  95.9375%, 100%      { opacity: 0; }
 }
 @keyframes hm-eta-14 {
   0%, 69.99%          { opacity: 0; }
   70%, 74.99%         { opacity: 1; }
-  75%, 90.615%        { opacity: 0; }
-  90.625%, 91.24%     { opacity: 1; }
-  91.25%, 100%        { opacity: 0; }
+  75%, 95.3025%       { opacity: 0; }
+  95.3125%, 95.615%   { opacity: 1; }
+  95.625%, 100%       { opacity: 0; }
 }
 @keyframes hm-eta-15 {
   0%, 74.99%          { opacity: 0; }
-  75%, 90.615%        { opacity: 1; }
-  90.625%, 100%       { opacity: 0; }
+  75%, 95.3025%       { opacity: 1; }
+  95.3125%, 100%      { opacity: 0; }
 }
+
 /* THE TRACK IS THE PROGRESS BAR, AND IT RUNS AT THE SPEED THE ESTIMATE SAYS.
 
    The five steps are evenly spaced on screen and are not evenly spaced in time: one minute, then
@@ -11797,9 +11799,12 @@ html[data-theme="dark"] .booking-container iframe {
    IT REWINDS RATHER THAN RESETTING. Every segment used to drop to nothing at the same instant,
    which is the one moment in the loop that looked like a bug: five lights and four bars vanishing
    together reads as a page that has stopped rather than a run that has finished. Now they come
-   back in reverse, last first, three tenths of a second each: the fourth segment retracts towards
-   step four while step five's disc goes dark, then the third, then the second, then the first, and
-   the clock counts down over the top of them. Each segment shrinks from its far end towards the
+   back in reverse, last first, and quickly: six hundred milliseconds for all four, a hundred and
+   fifty each. The fourth segment retracts towards step four while step five's disc goes dark, then
+   the third, then the second, then the first, and the clock counts down over the top of them. The
+   rewind is not the part worth watching, so it is over about as fast as the eye can follow it and
+   still see which way it went; the second and a half the track spends complete before it is what
+   a reader is being given time to read. Each segment shrinks from its far end towards the
    disc that fed it, which is what transform-origin already does for the fill, run backwards. */
 .hm-step-n { animation: var(--st-lap) linear infinite both; }
 .hm-step:nth-child(1) .hm-step-n { animation-name: hm-lit-1; }
@@ -11811,24 +11816,24 @@ html[data-theme="dark"] .booking-container iframe {
   0%, 100%        { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
 }
 @keyframes hm-lit-2 {
-  0%, 5.333%      { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  6.333%, 97.5%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  98.1%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 5.3333%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  6.3333%, 98.75% { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  99.05%, 100%    { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-3 {
-  0%, 21.333%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  22.333%, 95%    { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  95.6%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 21.3333%    { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  22.3333%, 97.5% { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  97.8%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-4 {
   0%, 48%         { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  49%, 92.5%      { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  93.1%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  49%, 96.25%     { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  96.55%, 100%    { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 @keyframes hm-lit-5 {
-  0%, 69.333%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
-  70.333%, 90%    { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
-  90.6%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  0%, 69.3333%    { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
+  70.3333%, 95%   { background: var(--accent); border-color: var(--accent); color: var(--text-on-accent); }
+  95.3%, 100%     { background: var(--bg-card); border-color: var(--accent-line); color: var(--accent-ink); }
 }
 /* The covered part of the track, drawn over the hairline rather than instead of it, so the empty
    track stays a fact of the diagram and this is only how far the run has got. It stays where it
@@ -11852,23 +11857,23 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-step:nth-child(4)::after { animation-name: hm-fill-4; }
 @keyframes hm-fill-1 {
   0%              { transform: scaleX(0); }
-  5.333%, 97.5%   { transform: scaleX(1); }
+  5.3333%, 98.75% { transform: scaleX(1); }
   100%            { transform: scaleX(0); }
 }
 @keyframes hm-fill-2 {
-  0%, 5.333%      { transform: scaleX(0); }
-  21.333%, 95%    { transform: scaleX(1); }
-  97.5%, 100%     { transform: scaleX(0); }
+  0%, 5.3333%     { transform: scaleX(0); }
+  21.3333%, 97.5% { transform: scaleX(1); }
+  98.75%, 100%    { transform: scaleX(0); }
 }
 @keyframes hm-fill-3 {
-  0%, 21.333%     { transform: scaleX(0); }
-  48%, 92.5%      { transform: scaleX(1); }
-  95%, 100%       { transform: scaleX(0); }
+  0%, 21.3333%    { transform: scaleX(0); }
+  48%, 96.25%     { transform: scaleX(1); }
+  97.5%, 100%     { transform: scaleX(0); }
 }
 @keyframes hm-fill-4 {
   0%, 48%         { transform: scaleX(0); }
-  69.333%, 90%    { transform: scaleX(1); }
-  92.5%, 100%     { transform: scaleX(0); }
+  69.3333%, 95%   { transform: scaleX(1); }
+  96.25%, 100%    { transform: scaleX(0); }
 }
 /* The rail, one segment per step, from this disc to the next one. Drawn per step rather than as
    one line under the row so that a wrapped row cannot leave a rail running off into nothing. */
@@ -11959,23 +11964,23 @@ html[data-theme="dark"] .booking-container iframe {
   }
   @keyframes hm-fill-1 {
     0%              { transform: scaleY(0); }
-    5.333%, 97.5%   { transform: scaleY(1); }
+    5.3333%, 98.75% { transform: scaleY(1); }
     100%            { transform: scaleY(0); }
   }
   @keyframes hm-fill-2 {
-    0%, 5.333%      { transform: scaleY(0); }
-    21.333%, 95%    { transform: scaleY(1); }
-    97.5%, 100%     { transform: scaleY(0); }
+    0%, 5.3333%     { transform: scaleY(0); }
+    21.3333%, 97.5% { transform: scaleY(1); }
+    98.75%, 100%    { transform: scaleY(0); }
   }
   @keyframes hm-fill-3 {
-    0%, 21.333%     { transform: scaleY(0); }
-    48%, 92.5%      { transform: scaleY(1); }
-    95%, 100%       { transform: scaleY(0); }
+    0%, 21.3333%    { transform: scaleY(0); }
+    48%, 96.25%     { transform: scaleY(1); }
+    97.5%, 100%     { transform: scaleY(0); }
   }
   @keyframes hm-fill-4 {
     0%, 48%         { transform: scaleY(0); }
-    69.333%, 90%    { transform: scaleY(1); }
-    92.5%, 100%     { transform: scaleY(0); }
+    69.3333%, 95%   { transform: scaleY(1); }
+    96.25%, 100%    { transform: scaleY(0); }
   }
   .hm-step:last-child { padding-bottom: 0; }
 }

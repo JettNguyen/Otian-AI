@@ -794,6 +794,60 @@ publishes one."
   assumptions). The copy describes what the code does; the first live connect is what settles
   whether every provider behaves as documented.
 
+### ✅ What it structurally cannot do: the answer to "is this the AI that ends the world"
+
+Verified against `Archie@main` on 2026-09-09. This is the fear a beta tester arrived with on a
+recorded call, in as many words, after a podcast about a swarm of bots going rogue. It is not the
+privacy question and the privacy answers do not touch it, so it gets a claim of its own.
+
+**Approved wording (positioning):** "The stories people are frightened by are about many AI
+programs talking to each other with nobody in the middle. Archie is one agent, and the only
+conversation it is in is the one with you. It is not awake between messages: it runs when you write
+to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
+runs in between. It cannot run a program on your computer. It cannot call, text, spend, or press a
+button that finishes something, on a website or anywhere else; drafts wait for your Send. And you
+can quit the app, because there is nowhere else it is running."
+
+**Why it's true, item by item:**
+
+| Claim | What makes it true |
+| --- | --- |
+| One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
+| Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
+| No program execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
+| No calls, texts, purchases, or finalizing presses | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking |
+| No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
+| Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |
+| The switch is the owner's | Start and Stop per agent, and the app quits. It answers only while the computer is awake, Archie is open and the agent is started |
+
+**Where it already ships:** the guide `what-it-will-not-do` in the Archie binary
+(`archie_domain::builtins::builtin_resources`), linked from the first screen of the first run, on
+the same line as the sentence that says it can be asked for almost anything.
+
+**Boundaries, do not cross:**
+- ❌ Never "Archie is safe" or "it cannot do harm". Every item above is a limit on **actions**. It
+  says nothing about whether the AI is right, and being wrong in a draft somebody sends is the
+  realistic harm in this product.
+- ❌ Never let this imply the gate stops prompt injection. It does not, and the Known Weaknesses
+  section says so. The honest relationship is the other way round: these walls are what make an
+  injected instruction survivable, because the worst a talked-into agent can reach is a draft
+  somebody has to press Send on.
+- ❌ Never "it has no internet access". It searches the web, fetches pages, and with Websites on
+  it drives a browser. The limit is what it may finish, not what it may read.
+- ❌ Never claim anything about the AI model's own training, alignment or safety work. We do not
+  train a model and have no standing to speak for Anthropic, OpenAI or anyone else.
+- ❌ Never say "one agent" in a way that denies specialists exist. They do, an owner installs them,
+  and one runs when the agent hands it a job. The true strong form is that a helper cannot hand
+  the job on again and cannot start anything of its own.
+- ❌ Never use a competitor's incident as the contrast without naming and sourcing it.
+
+**Positioning note:** this belongs where the unbounded promise is made, not on a page by itself. The
+sentence that starts the worry is "it can do almost anything you ask", so the edge is worth naming
+in the same breath rather than three screens later. It is also the honest form of the OpenClaw
+comparison already in Archie's `docs/EXPECTATIONS.md` ask 11: the same shape, minus the two things
+that made that one dangerous.
+
+
 ## What We Hold — state the whole list, always
 
 **The account core:** "Our servers know your email address and whether you have a current plan.

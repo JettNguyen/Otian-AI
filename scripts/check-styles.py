@@ -74,8 +74,10 @@ SHADOW_OK = [
     (re.compile(r'^var\(--edge-[a-z]+\)$'), "a lit edge, not an elevation"),
     # --lift-* is the composite the site actually reaches for: a lit top edge, a shaded underside
     # and one of the four rungs, so an object arrives with its face and its height together. It is
-    # a single named token here for the same reason it is one there.
-    (re.compile(r'^var\(--lift-[a-z]+\)$'), "an object at a height"),
+    # a single named token here for the same reason it is one there. Hyphens allowed in the
+    # suffix since 2026-09-08: the button family grew --lift-key-biz and --lift-quiet-hover, and
+    # a pattern that stopped at the first hyphen was rejecting names for being descriptive.
+    (re.compile(r'^var\(--lift-[a-z][a-z-]*\)$'), "an object at a height"),
     # --well is the inverse: light falling into a field that is cut into the page rather than
     # sitting on it. Inset, so the `^inset` rule below would pass it anyway once resolved; named
     # here so the reason is written down beside the others.

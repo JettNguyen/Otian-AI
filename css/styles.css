@@ -273,26 +273,58 @@
      --field-border, which is the edge of the cut. */
   --well: inset 0 1px 0 rgba(68, 64, 59, 0.07), inset 0 2px 4px -1px rgba(68, 64, 59, 0.13);
 
-  /* A KEYCAP, for the one control whose whole job is to be pressed. --edge-top is tuned for a
-     white card and would be a glare line across a terracotta fill, so a filled button gets its
-     own face: a softer highlight and, under it, two pixels of the button's own side wall. The
-     wall is the part that matters. It is what a finger reads as thickness, and it is why
-     --lift-keydown exists as well: on :active the wall goes and the elevation drops a rung, so
-     the button travels the 1px its transform moves rather than sliding on the page.
+  /* A BUTTON, NOT A KEYCAP. These carried a moulded face until 2026-09-08: a white highlight
+     along the top inside edge and two pixels of the button's own side wall under it, over the
+     same three-layer elevation a card gets. It was a faithful drawing of a physical key and it
+     made every call to action on the site look injection-moulded, which is Jett's word for it and
+     the right one. A bevel is a 2013 tell now, and the wide ambient blur under a 44px object is
+     the other one: a shadow that reaches 32px out from something 44px tall reads as a sticker
+     hovering over the page rather than as a thing sitting on it.
 
-     Every primary call to action on this site was a flat rectangle of colour until this. */
-  --edge-key: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -2px 0 rgba(68, 64, 59, 0.2);
-  --lift-key: var(--edge-key), var(--shadow-sm);
-  --lift-keydown: var(--shadow-xs);
-  /* Hover keeps the wall and swaps the neutral elevation for the accent's own glow, so the button
-     rises without the face it rose with going flat. */
-  --lift-keyhover: var(--edge-key), var(--shadow-accent);
+     Flat is not the answer either. The first pass took the bevel out and left two grey layers
+     under a solid rectangle, which is every default button ever shipped: correct, and plain.
+     What separates an expensive control from a plain one is not how much depth it has, it is
+     whether the depth is specific to the object, and there are exactly two things that make it
+     specific.
+
+     THE SHADOW IS THE BUTTON'S OWN COLOUR. A terracotta object in a lit room throws a warm
+     shadow, not a grey one, and the eye knows this without being told: a grey shadow under a
+     coloured thing is the tell that the colour was applied to a shape rather than belonging to
+     it. So --lift-key is cast in the accent's deep shade (the same hue at a third of the
+     lightness) and the business edition has its own in slate, because a terracotta shadow under a
+     blue button is a mistake nobody can name and everybody sees. That is also why the shadow can
+     be softer and further than a grey one at the same weight would dare: colour reads as light
+     falling, where grey reads as dirt.
+
+     THE FACE IS LIT, NOT MOULDED. --sheen is a white gradient across the top 62% of the fill at
+     an eighth of an alpha, which is what a flat surface looks like under a light source above it.
+     The old bevel was two hard bands, a highlight and a wall, and hard bands are the moulding;
+     one soft falloff over 44px is the light. Nothing is inset any more, so no edge of the button
+     is drawn: it is a shape catching light, which is the difference between a key and a surface.
+
+     The press still reads, because the elevation still moves: on :active it drops to one neutral
+     hairline while the transform takes the button down its pixel. */
+  --lift-key: 0 1px 2px rgba(122, 68, 37, 0.22), 0 5px 14px -5px rgba(122, 68, 37, 0.38);
+  --lift-keyhover: 0 2px 4px rgba(122, 68, 37, 0.24), 0 10px 22px -8px rgba(122, 68, 37, 0.45);
+  --lift-key-biz: 0 1px 2px rgba(38, 60, 96, 0.22), 0 5px 14px -5px rgba(38, 60, 96, 0.38);
+  --lift-key-biz-hover: 0 2px 4px rgba(38, 60, 96, 0.24), 0 10px 22px -8px rgba(38, 60, 96, 0.45);
+  --sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0) 62%);
+  /* Neutral, because every pressed control on the site lands on this one and most of them are not
+     coloured. */
+  --lift-keydown: 0 1px 1px rgba(68, 64, 59, 0.14);
+  /* And the quiet end of the same idea, for the controls that are a surface rather than a fill:
+     the outline button, the account circle, the theme toggle. All three wore the card face (a
+     near-white top edge over a shaded underside) at 44px across, which is where "3D" was coming
+     from: that highlight is calibrated for a 300px card and reads as a moulded rim on a button.
+     The border is the edge here, so all the shadow owes them is the fact that they are not
+     printed on the page. */
+  --lift-quiet: 0 1px 1px rgba(68, 64, 59, 0.05), 0 1px 3px rgba(68, 64, 59, 0.07);
+  /* The same surface a rung higher: what a quiet control moves to under a pointer, and where the
+     floating theme toggle sits all the time, because that one really is above the page. */
+  --lift-quiet-raised: 0 1px 2px rgba(68, 64, 59, 0.07), 0 4px 10px -3px rgba(68, 64, 59, 0.15);
   /* Thrown from the left, not below: the hero's player sits at an angle to the page and a
      symmetrical shadow reads as a sticker on it. Art-directed, used by that one frame. */
   --shadow-drop: -28px 34px 74px -34px rgba(68, 64, 59, 0.42);
-  /* The accent's own glow, for the one control that is the brand colour and needs to lift off a
-     tinted band. Not an elevation: it carries hue, so it never stacks with the four above. */
-  --shadow-accent: 0 4px 20px rgba(224, 138, 91, 0.35);
 }
 
 [data-theme="dark"] {
@@ -391,12 +423,20 @@
   --lift-md: var(--edge-top), var(--edge-under), var(--shadow-md);
   --lift-lg: var(--edge-top), var(--edge-under), var(--shadow-lg);
   --well: inset 0 1px 0 rgba(0, 0, 0, 0.5), inset 0 2px 5px -1px rgba(0, 0, 0, 0.55);
-  --edge-key: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
-  --lift-key: var(--edge-key), var(--shadow-sm);
-  --lift-keydown: var(--shadow-xs);
-  --lift-keyhover: var(--edge-key), var(--shadow-accent);
+  /* Black, not tinted, and that is not an oversight. A shadow is the ground with the light taken
+     out of it, and on a near-black page there is nothing left to take: a warm shadow here would
+     be a warm smear painted under the button rather than an absence of light, which is the exact
+     mistake the light theme's tint avoids. The sheen carries the character instead, weaker than
+     on cream because a light fill on a dark ground is already the brightest thing in its area. */
+  --lift-key: 0 1px 2px rgba(0, 0, 0, 0.5), 0 5px 14px -5px rgba(0, 0, 0, 0.6);
+  --lift-keyhover: 0 2px 4px rgba(0, 0, 0, 0.5), 0 10px 22px -8px rgba(0, 0, 0, 0.7);
+  --lift-key-biz: 0 1px 2px rgba(0, 0, 0, 0.5), 0 5px 14px -5px rgba(0, 0, 0, 0.6);
+  --lift-key-biz-hover: 0 2px 4px rgba(0, 0, 0, 0.5), 0 10px 22px -8px rgba(0, 0, 0, 0.7);
+  --sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 62%);
+  --lift-keydown: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --lift-quiet: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --lift-quiet-raised: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 10px -3px rgba(0, 0, 0, 0.5);
   --shadow-drop: -28px 34px 74px -34px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 4px 20px rgba(224, 138, 91, 0.35);
 }
 
 /* Skip link: hidden until keyboard focus, then a small pinned card over the nav. */
@@ -1064,7 +1104,8 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition), color var(--transition);
   flex-shrink: 0;
-  box-shadow: var(--lift-xs);
+  /* Same as the account circle beside it: the card face is calibrated for a card. */
+  box-shadow: var(--lift-quiet);
 }
 
 .theme-toggle:hover {
@@ -1097,7 +1138,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   min-height: 40px;
   opacity: 0.72;
   background: var(--bg-card);
-  box-shadow: var(--lift-sm);
+  box-shadow: var(--lift-quiet-raised);
   backdrop-filter: blur(7px);
   transition: opacity var(--transition), transform var(--transition),
               border-color var(--transition), background var(--transition), color var(--transition);
@@ -1183,7 +1224,9 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   color: var(--text-primary);
   cursor: pointer;
   transition: border-color var(--transition), background var(--transition), color var(--transition);
-  box-shadow: var(--lift-xs);
+  /* Not the card face. A 44px circle wearing --edge-top's near-white top edge over a shaded
+     underside is a moulded bead, and it sat in the corner of every page on the site. */
+  box-shadow: var(--lift-quiet);
 }
 
 .nav-account-btn:hover {
@@ -1606,6 +1649,10 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 .btn-primary {
   background: var(--accent);
+  /* background-image, and every state below changes background-COLOR for the same reason: the
+     `background` shorthand resets the image, so a hover written as `background:` would take the
+     lit face off the button at the moment a pointer arrives on it. */
+  background-image: var(--sheen);
   color: var(--text-on-accent);
   box-shadow: var(--lift-key);
 }
@@ -1613,14 +1660,14 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 /* Color responds everywhere; the lift lives in section 27, gated to real pointers,
    so a tapped button never sticks mid-hover on touch. */
 .btn-primary:hover {
-  background: var(--accent-hover);
+  background-color: var(--accent-hover);
 }
 
 .btn-secondary {
   background: var(--bg-card);
   color: var(--text-primary);
   border: 1px solid var(--field-border);
-  box-shadow: var(--lift-xs);
+  box-shadow: var(--lift-quiet);
 }
 
 /* The business edition's own fill: Archie Business is slate blue where Archie is ember (its app
@@ -1629,21 +1676,22 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
    as .btn-primary, different constants; the dark values match the business app's dark accent. */
 .btn-business {
   background: #7AA1D8;
+  background-image: var(--sheen);
   color: #242629;
-  box-shadow: var(--lift-key);
+  box-shadow: var(--lift-key-biz);
 }
 
 .btn-business:hover {
-  background: #668EC6;
+  background-color: #668EC6;
 }
 
 [data-theme="dark"] .btn-business {
-  background: #93B6E5;
+  background-color: #93B6E5;
   color: #262728;
 }
 
 [data-theme="dark"] .btn-business:hover {
-  background: #A8C4EB;
+  background-color: #A8C4EB;
 }
 
 .btn-secondary:hover {
@@ -6344,14 +6392,22 @@ html.js .fade-up:not(.visible) {
     box-shadow: var(--lift-md);
   }
 
+  /* A pixel, not two. A button that hops 2px and grows a shadow to match is a button
+     announcing itself; at 1px the same move reads as the surface responding to the pointer,
+     which is the whole of what a hover is for. */
   .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: var(--lift-keyhover);
   }
 
+  .btn-business:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--lift-key-biz-hover);
+  }
+
   .btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--lift-sm);
+    transform: translateY(-1px);
+    box-shadow: var(--lift-quiet-raised);
   }
 
   .resource-link:hover {
@@ -12794,7 +12850,7 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 .btn.is-started {
-  background: var(--accent-hover);
+  background-color: var(--accent-hover);
 }
 
 /* The testing status, in the same box the Archie hub's hero uses for it (that page carries the

@@ -160,8 +160,7 @@ if (root) {
     out.addEventListener("click", async () => {
       closeMenu();
       try { sessionStorage.removeItem("otian_2fa_ok"); } catch (e) {} // clear this session's 2FA clearance
-      try { sessionStorage.removeItem(BILL_CACHE_KEY); } catch (e) {}
-      try { await signOut(auth); } catch (e) { /* ignore */ }
+      try { await signOut(auth); } catch (e) { /* ignore */ }  // the observer below clears the cache
       // If we're on a signed-in-only page, get out of it.
       if (location.pathname.replace(/\/+$/, "").endsWith("/account")) { location.href = "/login/"; return; }
       // Everywhere else the page stays put, so the only visible change was an avatar quietly
@@ -196,5 +195,15 @@ if (root) {
   }
 
   renderSignedOut(); // sensible default until auth resolves
-  onAuthStateChanged(auth, (user) => { user ? renderSignedIn(user) : renderSignedOut(); });
+  onAuthStateChanged(auth, (user) => {
+    if (user) { renderSignedIn(user); return; }
+    // Signed out, by whatever route. The cached summary holds the previous account's uid, what it
+    // owes and whether it is staff, so it has to go with the session. Clearing it used to be a line
+    // inside this file's own Sign out button, and the account page has a second Sign out button
+    // that never got the line: sign out there and all three sat in the tab afterwards, which is
+    // exactly the question CASA's Config 3 asks. Hung off the auth state, every way out clears it,
+    // including the ones nobody has written yet.
+    try { sessionStorage.removeItem(BILL_CACHE_KEY); } catch (e) {}
+    renderSignedOut();
+  });
 }

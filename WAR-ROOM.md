@@ -20,8 +20,9 @@ sounds good, the Telegram feed.
 `/admin/` becomes a real page: the index the three existing admin tools already behave like
 children of. Same gate as those three, unchanged and not reinvented:
 
-- Firebase Auth, plus the second-factor session check (`twoFactorCleared`, the same function
-  `admin/ops/index.html` uses), plus `users/{uid}.access_tiers` containing `admin`.
+- Firebase Auth, plus the second factor (`passedSecondFactor`, the same function
+  `admin/ops/index.html` uses, reading `firebase.sign_in_second_factor` off the ID token), plus
+  `users/{uid}.access_tiers` containing `admin`.
 - The client check fails politely. The real enforcement is the Firestore rules' `isAdmin()`
   and the billing service's admin routes, exactly as today.
 - `noindex`, and a fourth entry at the top of the admin group in `js/account-nav.js`.

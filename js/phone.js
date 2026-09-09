@@ -1317,35 +1317,20 @@ async function start(user) {
 }
 
 /* ── The gate ───────────────────────────────────────────────────────────────────────────────
-   Signed in AND second-factor cleared, exactly like /account/. This page can install software into
-   somebody's agent and start it running, so a password alone must not reach it by typing the URL. */
+   Signed in, which is what Firebase's own session says. This page used to also require a
+   sessionStorage key the sign-in page wrote, on the theory that it proved a second factor. It did
+   not: /login wrote that key on every successful sign-in, factor or none, so what it recorded was
+   "came through /login in this browser session". Arriving here with a persisted session and no key
+   bounced to /login, which signed you straight back in and returned you here with the key set, so
+   the check cost a redirect and refused nobody. Removed on 2026-09-09.
 
-function isFirstEntry(user) {
-  const c = Date.parse((user.metadata && user.metadata.creationTime) || "");
-  const l = Date.parse((user.metadata && user.metadata.lastSignInTime) || "");
-  if (Number.isNaN(c) || Number.isNaN(l)) return false;
-  return Math.abs(l - c) < 10000;
-}
-
-function twoFactorCleared(user) {
-  try { if (sessionStorage.getItem("otian_2fa_ok") === user.uid) return true; } catch (e) {}
-  return isFirstEntry(user);
-}
-
-/** Arrived straight from the sign-in page, which has already vetted this session. Without this, a
- *  per-session flag lost to private browsing makes /login/ and this page redirect to each other
- *  forever. Mirrors the same guard on /account/. */
-function cameFromLogin() {
-  try {
-    const r = new URL(document.referrer);
-    return r.origin === location.origin && r.pathname.replace(/\/+$/, "") === "/login";
-  } catch (e) { return false; }
-}
+   The second factor that does exist is Firebase's own, enrolled on /account/ and resolved during
+   sign-in. The staff consoles read the claim Google signs into the token. This is not a staff page
+   and must not require one: almost nobody who reaches it has an authenticator enrolled. */
 
 onAuthStateChanged(auth, (user) => {
   // The key is already captured (module load, above), so a redirect to sign in cannot drop it.
   if (!user) { location.replace("/login/?next=/phone/"); return; }
-  if (!twoFactorCleared(user) && !cameFromLogin()) { location.replace("/login/?next=/phone/"); return; }
   void start(user);
 });
 

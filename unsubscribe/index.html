@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Session Billing | Otian AI</title>
-  <meta name="description" content="Pay for your Otian AI guided sessions." />
+  <title>Unsubscribe | Otian AI</title>
+  <meta name="description" content="Come off the Otian AI weekly letter. No sign-in needed." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="robots" content="noindex" />
@@ -37,10 +37,24 @@
     })();
   </script>
   <link rel="stylesheet" href="../css/styles.css?v=20260908-12" />
+  <style>
+    /* Page-unique: the confirmation mark, and centering the card. Everything else here is the
+       shared Account family in styles.css section 40, deliberately, so this page cannot drift
+       away from /account/ the way three copies of the auth block already started to. */
+    .unsub-wrap { max-width: 420px; }
+    .unsub-card { text-align: center; }
+    .unsub-icon { width: 52px; height: 52px; margin: 0 auto 14px; display: block; color: var(--c-teal); }
+    .unsub-title { font-size: var(--fs-2xl); font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+    .unsub-btns .btn { width: 100%; }
+    .unsub-undo { margin-bottom: 0; font-size: var(--fs-sm); }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ==============================
+       Navigation
+       ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="../" class="nav-logo"><img src="../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Secure AI Agents, Your Way</span></span></a>
@@ -159,52 +173,59 @@
 
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Your Account</span>
-        <h1 class="fade-up delay-1">Session Billing</h1>
-        <p>Your guided-session invoices and payment history.</p>
+        <span class="section-label fade-up">Email</span>
+        <h1 class="fade-up delay-1">Weekly letter</h1>
       </div>
     </section>
 
-    <section class="section" aria-label="Session billing">
+    <!--
+      Three cards, one shown at a time. The whole page exists so that leaving costs one press of a
+      link in an email and nothing else: no password, no account, no hunting for a setting. An
+      unsubscribe somebody cannot complete is not a small usability problem, it is the thing that
+      makes the next letter spam.
+
+      A signed link (?u=&t=) is acted on the moment the page opens, because the press already
+      happened in the reader's inbox and asking them to press again is asking twice. Anyone
+      arriving without one gets their session used if they have it, and the address box if they do
+      not.
+    -->
+    <section class="section" aria-label="Unsubscribe">
       <div class="container">
-        <div class="acct-wrap">
+        <div class="acct-wrap unsub-wrap">
 
-          <div id="bil-loading" class="acct-card">
+          <div id="unsub-loading" class="acct-card unsub-card">
             <div class="acct-spinner" aria-hidden="true"></div>
-            <p class="acct-lead">Loading your billing&hellip;</p>
+            <p class="acct-lead" id="unsub-loading-body" style="margin:0;">Taking you off the weekly letter&hellip;</p>
           </div>
 
-          <div id="bil-content" class="acct-hidden">
-            <div class="acct-section">
-              <div class="acct-section-head">
-                <div class="acct-section-title">Outstanding balance</div>
-                <span class="pill" id="bil-pill">…</span>
-              </div>
-              <div class="bal-big" id="bil-balance" style="margin-top:6px;">$0</div>
-              <div id="bil-owed-list" style="margin-top:10px;"></div>
-              <div class="acct-row" id="bil-pay-row" style="margin-top:14px;">
-                <button class="btn btn-primary btn-mini" id="btn-pay">Pay balance</button>
-              </div>
+          <div id="unsub-done" class="acct-card unsub-card acct-hidden">
+            <svg class="unsub-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5 5-5"/></svg>
+            <div class="unsub-title">You&rsquo;re unsubscribed.</div>
+            <p class="acct-lead" id="unsub-done-body">No more weekly letters will be sent.</p>
+            <p class="acct-lead unsub-undo">Changed your mind? Turn it back on from your <a href="../account/">account page</a>.</p>
+          </div>
+
+          <div id="unsub-ask" class="acct-card unsub-card acct-hidden">
+            <div class="unsub-title">Leave the weekly letter</div>
+            <p class="acct-lead" id="unsub-ask-body">Type the address it goes to, and we will stop sending it.</p>
+            <div class="acct-fields">
+              <input type="email" id="unsub-email" aria-label="The email address to unsubscribe" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="you@example.com" />
             </div>
-
-            <div class="acct-section">
-              <div class="acct-section-title">Paid sessions</div>
-              <div id="bil-paid-list" style="margin-top:8px;"></div>
+            <div class="unsub-btns">
+              <button class="btn btn-primary" id="btn-unsub">Unsubscribe</button>
             </div>
           </div>
 
-          <div id="bil-empty" class="acct-card acct-hidden">
-            <p class="acct-lead" style="margin:0;">Session billing is for guided-session clients. If you&rsquo;ve booked guided sessions with us, your invoices and payment history will appear here.</p>
-          </div>
-
-          <div id="acct-status" role="status" aria-live="polite"></div>
+          <div id="unsub-status" role="status" aria-live="polite"></div>
 
           <p class="acct-foot-note">
-            Guided sessions are $250 each. <a href="../individuals/">About guided setup</a> &middot; <a href="../account/">Back to your account</a>
+            This page changes one thing: whether the weekly letter is sent to you. Your account,
+            your plan, and anything Archie is doing on your own computer are untouched.
           </p>
         </div>
       </div>
     </section>
+
   </main>
 
   <!-- ==============================
@@ -302,10 +323,10 @@
   <script type="module" src="../js/account-nav.js"></script>
 
   <script type="module">
-    import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { bindStatusToast } from "../js/status-toast.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { postJson } from "../js/service-api.js";
+
+    // Same Firebase project as the rest of the site (archie-77170). Loaded lazily, far below.
     const firebaseConfig = {
       apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
       authDomain: "archie-77170.firebaseapp.com",
@@ -314,116 +335,145 @@
       messagingSenderId: "516396797258",
       appId: "1:516396797258:web:362cf2815128f3c82345b3",
     };
-    const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
 
-    const BILLING_API = "https://archie-4f35.onrender.com";
     const $ = (id) => document.getElementById(id);
-    const statusEl = $("acct-status");
-    const setStatus = bindStatusToast(statusEl);
-    function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
-    async function busy(btn, fn) {
-      if (!btn) return fn();
-      const wasDisabled = btn.disabled;
-      btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true"); btn.disabled = true;
-      try { return await fn(); }
-      finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
+    const setStatus = bindStatusToast($("unsub-status"));
+    function card(which) {
+      for (const name of ["loading", "done", "ask"]) {
+        $("unsub-" + name).classList.toggle("acct-hidden", name !== which);
+      }
     }
-    async function billingPost(path, body, timeoutMs = 30000) {
-      const ctrl = new AbortController();
-      const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+
+    function pretty(e) {
+      if (e && e.kind === "network") return "Couldn't reach the service. It sleeps when it is idle, so give it a moment and try again.";
+      if (e && e.kind === "http" && (e.status === 404 || e.status === 503)) return "The weekly letter isn't running right now, so there was nothing to change.";
+      return (e && e.message) || "Something went wrong.";
+    }
+
+    // One bounded attempt, then say what is happening and give the second the room a wake-up needs.
+    // The account page's card does the same thing for the same reason: a free-tier service that has
+    // gone to sleep takes about a minute, which is longer than any sensible first timeout, and
+    // "still waking up" is worth more to somebody than a failure they can only answer by pressing
+    // a button we could press ourselves.
+    async function callWithWake(path, body) {
       try {
-        return await fetch(BILLING_API + path, {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body), signal: ctrl.signal,
+        return await postJson(path, body, 20000);
+      } catch (e) {
+        if (!e || e.kind !== "network") throw e;
+        $("unsub-loading-body").textContent =
+          "Still waking up. This runs on a service that sleeps when nobody is using it, so the first try can take up to a minute.";
+        return postJson(path, body, 70000);
+      }
+    }
+
+    function done(email, exact) {
+      $("unsub-done-body").textContent = exact || (email
+        ? "No more weekly letters go to " + email + "."
+        : "No more weekly letters will be sent to you.");
+      card("done");
+      setStatus("");
+    }
+
+    function ask(reason) {
+      if (reason) $("unsub-ask-body").textContent = reason;
+      card("ask");
+      $("unsub-email").focus();
+    }
+
+    // Firebase only when it can actually help: somebody who pressed the link in a letter is
+    // usually signed out on that device, and making them wait on an SDK to be told something we
+    // already knew from the link is the slow path for the common case.
+    async function sessionToken() {
+      try {
+        const [appMod, authMod] = await Promise.all([
+          import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"),
+          import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"),
+        ]);
+        const app = appMod.getApps().length ? appMod.getApp() : appMod.initializeApp(firebaseConfig);
+        const auth = authMod.getAuth(app);
+        let stop = null;
+        const user = await new Promise((resolve) => {
+          let settled = false;
+          const finish = (u) => { if (settled) return; settled = true; resolve(u); };
+          stop = authMod.onAuthStateChanged(auth, finish, () => finish(null));
+          // A stalled SDK must never hold this page: there is always the address box behind it.
+          setTimeout(() => finish(null), 6000);
         });
-      } catch (err) { const e = new Error("network"); e.kind = "network"; throw e; }
-      finally { clearTimeout(timer); }
+        if (stop) stop();
+        return user ? await user.getIdToken() : null;
+      } catch (e) {
+        return null;
+      }
     }
-    function money(cents) {
-      const n = Number(cents || 0) / 100;
-      return "$" + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2));
-    }
-    function fmtDate(v) {
-      try {
-        if (v && typeof v.toDate === "function") return v.toDate().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-        if (typeof v === "string" && v) return v;
-      } catch (e) {}
-      return "";
-    }
-    function escapeHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
     const params = new URLSearchParams(window.location.search);
+    const uid = (params.get("u") || "").trim();
+    const token = (params.get("t") || "").trim();
 
-    onAuthStateChanged(auth, (user) => {
-      if (!user) { window.location.replace("/login/?next=/billing/"); return; }
-      if (params.get("paid") === "1") setStatus("Payment received. Thank you.", "ok");
-      else if (params.get("paid") === "0") setStatus("Payment cancelled. Nothing was charged.", "");
-      render(user).catch((e) => setStatus((e && e.message) || "Couldn't load your billing.", "error"));
-    });
-
-    let currentUser = null;
-    async function render(user) {
-      currentUser = user;
-      let tier = "none";
-      try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) tier = (snap.data() || {}).access_tier || "none"; } catch (e) {}
-
-      let sessions = [];
-      try {
-        const ss = await getDocs(collection(db, "users", user.uid, "sessions"));
-        ss.forEach((d) => sessions.push({ id: d.id, ...(d.data() || {}) }));
-      } catch (e) {}
-
-      // Not a client and never had a session → nothing to show here.
-      if (tier !== "client" && sessions.length === 0) {
-        show("bil-loading", false);
-        show("bil-empty", true);
+    async function start() {
+      if (uid && token) {
+        card("loading");
+        try {
+          const d = await callWithWake("/newsletter/unsubscribe", { uid, token });
+          done(d && d.email);
+        } catch (e) {
+          // A refused link still has to end somewhere useful, so it falls through to the box
+          // rather than to an apology. 400 is the link itself being wrong, which is worth saying
+          // plainly; anything else is ours and gets the toast.
+          const bad = e && e.kind === "http" && e.status === 400;
+          ask(bad
+            ? "That unsubscribe link didn't work. Type the address instead and we will stop sending it."
+            : "We couldn't use your unsubscribe link just now. Type the address instead and we will stop sending it.");
+          if (!bad) setStatus(pretty(e), "error");
+        }
         return;
       }
 
-      const owed = sessions.filter((s) => s.status === "owed").sort((a, b) => tsMs(a.created_at) - tsMs(b.created_at));
-      const paid = sessions.filter((s) => s.status === "paid").sort((a, b) => tsMs(b.paid_at) - tsMs(a.paid_at));
-      const balance = owed.reduce((sum, s) => sum + (Number(s.amount_cents) || 0), 0);
-
-      $("bil-balance").textContent = money(balance);
-      setPill("bil-pill", balance > 0 ? "Due" : "Paid up", balance === 0);
-      $("bil-owed-list").innerHTML = owed.length
-        ? owed.map((s) => row(escapeHtml(s.description || "Guided session"), fmtDate(s.session_date) || fmtDate(s.created_at), money(s.amount_cents), true, escapeHtml(s.notes || ""))).join("")
-        : '<div class="act-empty">You\'re all paid up: no sessions due.</div>';
-      show("bil-pay-row", balance > 0);
-
-      $("bil-paid-list").innerHTML = paid.length
-        ? paid.map((s) => row(escapeHtml(s.description || "Guided session"), fmtDate(s.paid_at) || fmtDate(s.session_date), money(s.amount_cents), false, escapeHtml(s.notes || ""))).join("")
-        : '<div class="act-empty">No paid sessions yet.</div>';
-
-      show("bil-loading", false);
-      show("bil-content", true);
-    }
-
-    $("btn-pay").addEventListener("click", () => busy($("btn-pay"), async () => {
-      const user = currentUser || auth.currentUser; if (!user) return;
-      setStatus("Opening secure checkout\u2026");
-      try {
-        const idToken = await user.getIdToken();
-        const r = await billingPost("/account/session-checkout", { id_token: idToken });
-        const d = await r.json().catch(() => ({}));
-        if (!r.ok || !d.url) throw new Error(d.error || "Couldn't start checkout.");
-        window.location.href = d.url;
-        await new Promise(() => {});
-      } catch (e) {
-        setStatus(e.kind === "network" ? "Couldn't reach the billing service. Try again in a moment." : ((e && e.message) || "Couldn't start checkout."), "error");
+      // No link. Somebody signed in has already proved who they are, so do not ask them again.
+      card("loading");
+      $("unsub-loading-body").textContent = "Checking\u2026";
+      const idToken = await sessionToken();
+      if (idToken) {
+        try {
+          const d = await callWithWake("/newsletter/disable", { id_token: idToken });
+          done(d && d.email);
+          return;
+        } catch (e) {
+          setStatus(pretty(e), "error");
+        }
       }
-    }));
-
-    function tsMs(v) { try { return v && v.toDate ? v.toDate().getTime() : 0; } catch (e) { return 0; } }
-    function setPill(id, text, on) { const el = $(id); el.textContent = text; el.className = "pill " + (on ? "pill-on" : "pill-off"); }
-    function row(title, date, amount, owed, note) {
-      return '<div class="act-row"><div class="act-main"><div class="act-title">' + title + '</div>' +
-        (date ? '<div class="act-sub">' + escapeHtml(date) + '</div>' : '') +
-        (note ? '<div class="act-note">' + note + '</div>' : '') +
-        '</div><div class="act-amount' + (owed ? ' owed' : '') + '">' + escapeHtml(amount) + '</div></div>';
+      ask(null);
     }
+
+    $("btn-unsub").addEventListener("click", async () => {
+      const btn = $("btn-unsub");
+      const email = ($("unsub-email").value || "").trim();
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+        setStatus("That doesn't look like an email address.", "error");
+        $("unsub-email").focus();
+        return;
+      }
+      btn.disabled = true; btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true");
+      $("unsub-loading-body").textContent = "Taking " + email + " off the weekly letter\u2026";
+      card("loading");
+      try {
+        await callWithWake("/newsletter/unsubscribe", { email });
+        // Deliberately does not say whether that address was on the list. The server will not tell
+        // us, and it must not: this box has no proof of who is asking, so confirming membership
+        // would turn it into a way of finding out who we mail.
+        done(null, "If " + email + " was on the weekly letter, it isn't now.");
+      } catch (e) {
+        ask(null);
+        setStatus(pretty(e), "error");
+      } finally {
+        btn.disabled = false; btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy");
+      }
+    });
+    $("unsub-email").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); $("btn-unsub").click(); }
+    });
+
+    start();
   </script>
 </body>
 </html>

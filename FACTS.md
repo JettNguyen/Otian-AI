@@ -141,7 +141,7 @@ the figure here only after reading it on the source page, with the date.
 
 | Figure | What it is | Where it comes from |
 |---|---|---|
-| 146 add-ons | 36 personalities, 69 skills, 3 specialists, 38 routines: what a visitor can install | Archie repo `data/marketplace/**`, counted 2026-09-03 by `check-facts.py`, which skips any manifest marked `visibility: private`. **The count and the store move on the same push.** The figure is only true once the Archie repo's `firebase-deploy.yml` has run, because that workflow is what seeds Firestore from `data/marketplace/**`, and this page reads the store rather than a list typed here: printing 146 before that deploy would put the number above a shelf holding 135. So the Archie push lands first and the site push follows it. History: 135 on 2026-09-01, which was 153 under the old convention that counted the 18 private manifests (one client's sales pack and two items for a testing account); 151 on 2026-08-31; and the jump to 146 is the eleven connector add-ons and MCP work of 2026-09-02, which sat uncounted for a day while the checker said so. |
+| 148 add-ons | 36 personalities, 70 skills, 3 specialists, 39 routines: what a visitor can install | Archie repo `data/marketplace/**`, counted 2026-09-03 by `check-facts.py`, which skips any manifest marked `visibility: private`. **The count and the store move on the same push.** The figure is only true once the Archie repo's `firebase-deploy.yml` has run, because that workflow is what seeds Firestore from `data/marketplace/**`, and this page reads the store rather than a list typed here: printing 146 before that deploy would put the number above a shelf holding 135. So the Archie push lands first and the site push follows it. History: 135 on 2026-09-01, which was 153 under the old convention that counted the 18 private manifests (one client's sales pack and two items for a testing account); 151 on 2026-08-31; and the jump to 146 is the eleven connector add-ons and MCP work of 2026-09-02, which sat uncounted for a day while the checker said so. 148 on 2026-09-10, one skill and one routine, which sat uncounted for two days. **That move also found a second way the number can lie.** The catalog said 148 and the live store held 147: `savings-goals` left the catalog on 2026-08-02, was hidden by the retire sweep, came back on 2026-08-07, and stayed hidden for over a month because the seeder carried the sweep's `visibility: private` forward as though an admin had chosen it. Fixed in the Archie repo by stamping who made each visibility write, so only a console decision survives a reseed. **The store reaches 148 on the first Archie deploy after that fix**, which is why this row moved after that push and not before it. |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
 | 300M Wix businesses | Symphony's own claim about what its intelligence is drawn from, quoted only to answer it | `https://www.wix.com/symphony`: "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you". Read 2026-08-24. **Print it as their claim, never as our own figure**, and never as an independently verified count of businesses |
 | 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
@@ -174,13 +174,19 @@ the figure here only after reading it on the source page, with the date.
 rebuild until 2026-08-31 (**151 verified add-ons, 40 apps and services, 7 AI companies, 5 chat
 apps**, all four under the whole-directory convention that ended 2026-09-01); the band came out with the coverage-grid rebuild, and the only count on the homepage now
 is the one the works-with band's note prints, **49**.
-`skills-marketplace/browse/` prints **146 verified add-ons, 5 chat apps, 7 AI companies**, and
-since 2026-09-07 it also **ships all 146 cards in its markup**, written by
+`skills-marketplace/browse/` prints **148 verified add-ons, 5 chat apps, 7 AI companies**, and
+since 2026-09-07 it also **ships all 148 cards in its markup**, written by
 `node scripts/gen-marketplace.mjs` out of the same manifests this row is counted from. So the
 catalog moving now moves the page's HTML as well as its stat row, and the generator's `--check`
-mode fails when it has not. The homepage's two prose counts ("there are 146 today", "six of a
-hundred and forty-six") are **not** in the markup shape `check-facts.py` reads, so nothing checks
-them; both were stale from 2026-09-02 until 2026-09-07. "Verified" is backed by the marketplace review gate (the for-developers
+mode fails when it has not. **The generator writes the cards and not the stat row**, so the
+number beside them is still a hand edit and still has to move in the same push.
+
+The homepage carries three more counts that are **not** in the markup shape `check-facts.py`
+reads, so nothing checks them: "148 on the shelf today", "Four of a hundred and forty-eight", and
+"every one of the 148 add-ons" on the pricing card. They were stale from 2026-09-02 until
+2026-09-07, and stale again until 2026-09-10, when the third was found: this file said there were
+two of them and there are three. A fourth sits in an HTML comment about an earlier version of the
+page and is deliberately left alone, being a note about what the page used to be. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
 connections band's note counts **all 48** names the band shows.
 

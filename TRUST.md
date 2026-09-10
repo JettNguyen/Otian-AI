@@ -1289,6 +1289,97 @@ reach, so it advertises a capability that is not on sale; it was replaced on `bu
 and `faq/index.html` with the one-person wording above. Restore the plural only alongside the
 business edition.]*
 
+### 🚧 The weekly letter: LIST RUNNING, COPY CORRECTED, ONE DECISION STILL OPEN
+
+**Two places on the site carry the weekly letter and no others may.** The switch on
+`account/index.html`, which is a control rather than a claim, and one bullet in
+`privacy-policy/index.html`, which is the disclosure that has to exist before a first send. No
+marketing page mentions it, and none may until it sends.
+
+**What changed on 2026-09-10.** The earlier version of this entry said the three routes returned
+404 and that nobody was on a list. Both were true when it was written and neither is true now. The
+mailer shipped the same day, in `stripe-webhook/index.js` in the Archie repo, and a backfill ran
+against production.
+
+| | Then | Now |
+| --- | --- | --- |
+| `POST /newsletter/status`, `/enable`, `/disable` | 404 | live, and 401 to a bad token, the same as `/mfa/status` |
+| People on the list | none | **29** |
+| The card's "isn't running" branch | what everybody saw, on a 404 | kept, and now fires on 503 instead: that is the mailer answering without `NEWSLETTER_AUDIENCE_ID` set (`newsletterUnavailable()`), which is the one way the letter can stop running without the routes going away |
+
+The 29 are every account with a verified email and a `users/{uid}` document, which is 29 of 30.
+The one left off has no account document. Nothing has been sent to any of them.
+
+**⚠️ The privacy policy bullet was false, and was corrected the same day.** It had said:
+
+> One email a week from us, **off unless you switch it on yourself** on your account page.
+
+Nobody switched anything on. The list was populated by a backfill of existing accounts, which is
+opt-out, and the sentence described opt-in. It was the one claim on the site a subscriber could
+disprove by simply not remembering having done it.
+
+**Fixed 2026-09-10 by taking the first of the two remedies: the copy now describes what actually
+happens.** `planContact` in `stripe-webhook/newsletter.js` returns `{action: "add", status:
+"subscribed"}` for any account with a verified email and a `users/{uid}` document that has not
+opted out, so the bullet now reads "If you have an account here with a confirmed email address,
+you are already on it: we added existing account holders rather than asking each of them to opt in
+first", and names the switch in the same breath, per the rule that a limitation we are obliged to
+publish gets its remedy beside it.
+
+**The second remedy is still open and is Jett's alone: whether to keep an opt-out list at all, or
+empty the audience and make the switch the only way on.** That is a decision about the product and
+about what consent the sending rests on, not about wording, and nothing on the site now depends on
+which way it goes: the copy is true today either way, and if the audience is emptied this bullet
+gets rewritten to the opt-in form it started as. **Do not send an issue before that is settled.**
+
+Note that the account card itself is not affected and does not need touching. It reads the live
+state from `/newsletter/status` and renders what it finds, so the 29 see a switch that is on,
+which is accurate. The card is a control; only the policy bullet makes a claim about how somebody
+got there.
+
+**Retention, which the earlier entry could not answer and now can.** Both halves are in
+`stripe-webhook/index.js` and `stripe-webhook/newsletter.js`:
+
+- **Deleting an account removes the address entirely.** `/account/delete` deletes the
+  `newsletter/{uid}` document and calls Resend to delete the contact. Nothing is kept, and nothing
+  suppressed is kept either, because there is no account left to hold it against.
+- **Unsubscribing keeps a suppression record, on purpose and for as long as the account exists.**
+  `newsletter/{uid}` holds `status: "unsubscribed"`, and it is what stops a later sync run putting
+  somebody back on after Resend's own contact is gone. Keeping it is what honors the opt-out; the
+  alternative is forgetting that they said no.
+
+✅ **Written 2026-09-10**, in the same push, as a row reading "Until you turn the letter off or
+delete your account. A note that you turned it off outlives the address, for as long as the
+account does".
+
+✅ **`trust/#what-we-hold` was incomplete and was completed 2026-09-10.** It was correct while
+nothing was held; twenty nine addresses are held. Per the "state the whole list, always" rule
+above, the list now carries "Your address on the weekly letter's list, and whether you are on it
+or off", with the suppression note and the account-deletion behavior in the same item.
+
+**The one claim to verify before the first issue goes out**, because it is the only one a reader
+could catch us on using nothing but the email itself:
+
+> **We do not track opens or clicks**: there is no tracking pixel in an issue, and its links go
+> where they say they go rather than through a counter, so we have no way of knowing whether you
+> read one.
+
+Resend has open tracking and click tracking as per-domain settings. Both are off by default, and
+click tracking rewrites every link through a Resend domain when it is on, which anyone can see by
+hovering a link in the letter. **Open the Resend dashboard, confirm both are off for
+`news.otianai.com`, and record it here with the date.** Nothing in the mailer can set them: it
+touches contacts and audiences only, never domain settings, so the dashboard is the only place
+this can be true or false. If either is on, that sentence is false from the moment it goes out,
+and false in the most checkable way a claim can be.
+
+**Still not done, and both are now live gaps rather than future ones:**
+
+- The unsubscribe link and the postal address in every issue. A list with 29 people on it and no
+  working unsubscribe is the part that is illegal rather than untidy.
+- The account card's copy names both ways off, the switch and the unsubscribe link in every issue,
+  in both states. Leaving has to read as plainly as joining; do not let a later edit trim the
+  off-ramp out of the "on" sentence.
+
 ### ✅ Email send with click-to-approve — SHIPPED 2026-07-20 (superseded)
 
 See "**Email goes out only when you tap Send**" above for the approved wording, code pointers,

@@ -1803,14 +1803,43 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Cowork has three permission modes; in Skip mode "Claude doesn't pause to ask and nothing checks its actions automatically" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
 | Grok Bot is in beta for SuperGrok Heavy, Cursor Ultra and Cursor Teams Premium subscribers, on desktop and iOS | xAI | `https://x.ai/news/introducing-grok-bot` | 2026-08-20 |
 | Each Grok Bot "runs on a persistent cloud VM with a browser, filesystem, and terminal" and signs in to your tools there; it comes back "when something needs your approval" | xAI | `https://x.ai/news/introducing-grok-bot`, `https://docs.x.ai/grok-bot/overview` | 2026-08-20 |
-| Symphony by Wix is an AI agent platform for small businesses, on iOS, Android and web, with a "mobile-first interface" | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
-| Symphony is a standalone cloud service; the agents run on Wix's servers | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
+| Symphony by Wix is an AI agent platform for small businesses, on iOS, Android and web, with a "mobile-first interface" | Wix | `https://www.wix.com/symphony` | 2026-09-11 |
+| Symphony is "a new standalone AI agent platform", "platform-agnostic", and used with a Wix account though it needs no Wix website | Wix | `https://www.wix.com/press-room/home/post/wix-launches-symphony-by-wix-a-new-standalone-multi-agent-system-built-for-smbs`, `https://support.wix.com/en/article/symphony-an-overview` | 2026-09-11 |
+| Symphony is reached in a browser or its iOS/Android app: "Symphony is available on iOS and Android. Download the app and take your business with you wherever you go." Wix publishes no program you run on your own computer | Wix | `https://www.wix.com/symphony` | 2026-09-11 |
+| Symphony "checks with you first before your agents act, so nothing important happens without your approval" | Wix | `https://support.wix.com/en/article/symphony-an-overview` | 2026-09-11 |
+| Symphony's agents "don't wait to be asked. They spot the moves worth making and run with the ones you approve. Day or night." | Wix | `https://www.wix.com/symphony` | 2026-09-11 |
 | Symphony is "powered by Wix AI"; the page offers no model choice, so which model runs is Wix's decision, not the customer's | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
-| Symphony claims "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you" | Wix | `https://www.wix.com/symphony` | 2026-08-24 |
-| Symphony has a free plan needing no credit card, with 500 monthly credits and a 50-credit daily cap; credits "reset monthly and do not roll over" | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
-| Symphony is $16 a month for Basic ($12.80 annually), $40 for Pro ($32), $80 for Max ($64) | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
-| Symphony meters in AI credits: "Each action you take with agents and tools consumes AI credits. The exact amount is calculated after each action, based on its complexity and the tool used." | Wix | `https://www.wix.com/symphony/pricing` | 2026-08-24 |
+| Symphony is "powered by Wix AI and built on 20 years of real business expertise"; Wix names no model and its product and pricing pages offer no model choice | Wix | `https://www.wix.com/symphony` | 2026-09-11 |
+| Wix says Symphony draws on "experience and unique data accumulated in supporting hundreds of millions of businesses worldwide" | Wix | `https://www.wix.com/press-room/home/post/wix-launches-symphony-by-wix-a-new-standalone-multi-agent-system-built-for-smbs` | 2026-09-11 |
+| Symphony has a free plan, "no credit card needed", with 500 monthly credits and 100 daily credits; credits "reset monthly and do not roll over" | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
+| Symphony Basic carries 2,000 monthly credits and Pro 5,000 | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
+| Symphony is $16 a month for Basic ($12.80 annually), $40 for Pro ($32), $80 for Max ($64) | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
+| Symphony meters in AI credits: "Each action you take with agents and tools consumes AI credits. The exact amount is calculated after each action, based on its complexity and the tool used." | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
 | Grok Bot comes with SuperGrok Heavy at $300 a month or Cursor Ultra at $200 a month (Cursor Teams Premium at $120 a seat also carries it); plan cards read in a browser, since xAI refuses fetches | xAI, Cursor | `https://x.ai/bot` | 2026-08-20 |
+
+**Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
+two of them were live on `compare/cloud-agents/`:
+
+1. ⛔ **"Run as a standalone cloud service on Wix's own servers" had no source and is deleted.**
+   Nothing on `wix.com/symphony`, the pricing page, the overview article or the launch press
+   release says where Symphony's agents run. It reads as an obvious inference from the product's
+   shape, which is exactly the kind of sentence this section exists to stop: an unsourced claim
+   about another company's infrastructure. What their pages *do* support is how you reach it, and
+   that is what the rows now say. The honest and checkable form is that Symphony is a service you
+   sign in to with a Wix account, in a browser or its phone app, and that **Wix does not publish
+   where the agents run**. Not publishing it is a fair thing to point out; guessing it is not.
+2. ⛔ **The free plan's daily cap doubled, from 50 to 100.** `compare/cloud-agents/` printed 50 in
+   two places. A competitor's number that moved in our favour is still a false number.
+3. ⛔ **The "300M Wix businesses" quote is no longer on the page** and is retired. The live page
+   says "powered by Wix AI and built on 20 years of real business expertise"; the press release
+   says "hundreds of millions of businesses worldwide". Neither is 300M, so the row is replaced by
+   the two sentences that are actually there.
+
+⚠️ **And one finding that cuts against us, recorded because that is the rule.** Symphony publishes
+an approval gate of its own: "It checks with you first before your agents act, so nothing important
+happens without your approval." No page may imply Symphony acts unchecked, or that asking first is
+something only Archie does. The difference worth writing about is **whose computer the work happens
+on and which AI company answers**, not who asks permission.
 
 **Boundaries — do not cross:**
 - ⚠️ ChatGPT's prices are in the table above as of 2026-08-19, read off the pricing page in a

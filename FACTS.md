@@ -104,12 +104,12 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$19.99` | Zapier Professional, billed annually, at 750 tasks | Same page | Checked: 2026-08-19 |
 | `$12` | Make Core, at 10,000 credits a month | `https://www.make.com/en/pricing`, "$12/mo" | Checked: 2026-08-19 |
 | `$21` | Make Pro, at 10,000 credits a month | Same page, "$21/mo" | Checked: 2026-08-19 |
-| `$16` | Symphony by Wix, Basic, billed monthly | `https://www.wix.com/symphony/pricing` | Checked: 2026-08-24 |
-| `$12.80` | Symphony Basic, billed annually | Same page | Checked: 2026-08-24 |
-| `$40` | Symphony Pro, billed monthly | Same page | Checked: 2026-08-24 |
-| `$32` | Symphony Pro, billed annually | Same page | Checked: 2026-08-24 |
-| `$80` | Symphony Max, billed monthly | Same page | Checked: 2026-08-24 |
-| `$64` | Symphony Max, billed annually | Same page | Checked: 2026-08-24 |
+| `$16` | Symphony by Wix, Basic, billed monthly | `https://www.wix.com/symphony/pricing` | Checked: 2026-09-11 |
+| `$12.80` | Symphony Basic, billed annually | Same page | Checked: 2026-09-11 |
+| `$40` | Symphony Pro, billed monthly | Same page | Checked: 2026-09-11 |
+| `$32` | Symphony Pro, billed annually | Same page | Checked: 2026-09-11 |
+| `$80` | Symphony Max, billed monthly | Same page | Checked: 2026-09-11 |
+| `$64` | Symphony Max, billed annually | Same page | Checked: 2026-09-11 |
 | `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
 | `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
 
@@ -143,7 +143,8 @@ the figure here only after reading it on the source page, with the date.
 |---|---|---|
 | 148 add-ons | 36 personalities, 70 skills, 3 specialists, 39 routines: what a visitor can install | Archie repo `data/marketplace/**`, counted 2026-09-03 by `check-facts.py`, which skips any manifest marked `visibility: private`. **The count and the store move on the same push.** The figure is only true once the Archie repo's `firebase-deploy.yml` has run, because that workflow is what seeds Firestore from `data/marketplace/**`, and this page reads the store rather than a list typed here: printing 146 before that deploy would put the number above a shelf holding 135. So the Archie push lands first and the site push follows it. History: 135 on 2026-09-01, which was 153 under the old convention that counted the 18 private manifests (one client's sales pack and two items for a testing account); 151 on 2026-08-31; and the jump to 146 is the eleven connector add-ons and MCP work of 2026-09-02, which sat uncounted for a day while the checker said so. 148 on 2026-09-10, one skill and one routine, which sat uncounted for two days. **That move also found a second way the number can lie.** The catalog said 148 and the live store held 147: `savings-goals` left the catalog on 2026-08-02, was hidden by the retire sweep, came back on 2026-08-07, and stayed hidden for over a month because the seeder carried the sweep's `visibility: private` forward as though an admin had chosen it. Fixed in the Archie repo by stamping who made each visibility write, so only a console decision survives a reseed. **The store reaches 148 on the first Archie deploy after that fix**, which is why this row moved after that push and not before it. |
 | 5 chat apps | Telegram, Discord, Slack, Matrix, and (on a Mac) iMessage | `crates/archie-net/src/{telegram,discord,slack,matrix,imessage}.rs`. iMessage ships 2026-08-17: basic mode via the `imsg` CLI, macOS only, agent answers in the owner's message-yourself thread. A sixth adapter (`signal.rs`) exists but is behind the non-default `signal` cargo feature and is NOT in release builds: its dependency (libsignal, via presage) is AGPL-3.0-only, which a closed-source binary cannot ship (`src-tauri/Cargo.toml:41`). Signal does not count and must not appear in site copy until that licence question is resolved |
-| 300M Wix businesses | Symphony's own claim about what its intelligence is drawn from, quoted only to answer it | `https://www.wix.com/symphony`: "the intelligence of 300M Wix businesses across every industry and geo, and turns it into a team of agents built just for you". Read 2026-08-24. **Print it as their claim, never as our own figure**, and never as an independently verified count of businesses |
+| 500 / 100 credits | Symphony by Wix's free plan: 500 monthly credits and 100 daily credits, which "reset monthly and do not roll over" | `https://www.wix.com/symphony/pricing`, read 2026-09-11. **Was a 50-a-day cap when read on 2026-08-24 and it has doubled**, so this row is a standing reminder that a competitor's allowance moves: re-read the page, never carry the old figure forward. Print as their terms, never as a measurement of ours |
+| 2,000 / 5,000 credits | Symphony Basic and Pro monthly credit allowances | Same page, read 2026-09-11. Max publishes no figure, described only as "Maximum usage to go big", so **no number may be printed for Max** |
 | 1 agent | What the free trial runs | Archie repo, `crates/archie-core/src/plan.rs`, `FREE_AGENTS`. Enforced in `agent_create` before the row is written |
 | 10 agents | What the personal plan runs | Archie repo, `PLAN_AGENTS` in `crates/archie-core/src/plan.rs`. Staff accounts are the only unlimited ones, so **no page may say "unlimited"** about agent counts |
 | 50 agents | What the business plan runs | Same file, `BUSINESS_PLAN_AGENTS`: the business licence `plan_business` gets its own allowance in `agent_allowance` (2026-08-21), sized so a company can run one per department. Same no-"unlimited" rule |

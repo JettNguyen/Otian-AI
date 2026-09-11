@@ -14703,6 +14703,160 @@ html[data-theme="dark"] .booking-container iframe {
   .mon-row--theirs .mon-dot { animation: none; }
 }
 
+/* ── Hero scene tabs (homepage) ──
+   Seven pills under the phone, one per scene, on the same clock as the scenes: the same --s,
+   the same lap, the same hold, so a pill lights when its scene arrives and nothing has to be
+   told the timing twice. Pressing one is js/home.js: it puts `is-held` on the stage and
+   `is-on` on the chosen scene, caption and job record, and the rules below take over.
+
+   HELD. The lap animations come off everything and the held scene's beats play ONCE from
+   their own zero. Each *-held keyframe is the entrance slice of the lap keyframe it mirrors
+   (hm-in, hm-fly, hm-type, hm-char, hm-caret, the field clear and hint return, the send press,
+   hm-work-in, hm-work-row, hm-work-run), at the same seconds the lap version reaches them,
+   with the scene's --d beats as the delay and none of the --s offset. A scene that is shown by
+   toggling display restarts its animations, which is what lets the same tab be pressed twice
+   and the same beats play again. */
+.hm-tabs {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  max-width: 376px;
+  margin: 16px auto 0;
+}
+.hm-tab {
+  min-height: 30px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  animation: hm-tab-lit var(--hm-lap) linear infinite both;
+  animation-delay: calc(var(--s) * var(--hm-hold));
+}
+@keyframes hm-tab-lit {
+  0%, 0.37%    { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
+  0.9%, 13.15% { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
+  13.9%, 100%  { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
+}
+.hm-tab:hover { border-color: var(--accent); }
+.hm-tab:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.hm-stage.is-held .hm-tab { animation: none; }
+.hm-stage.is-held .hm-tab.is-on { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
+
+.hm-stage.is-held .hm-scene,
+.hm-stage.is-held .hm-cap,
+.hm-stage.is-held .hm-work { animation: none; display: none; }
+.hm-stage.is-held .hm-scene.is-on { display: grid; opacity: 1; }
+.hm-stage.is-held .hm-cap.is-on { display: block; opacity: 1; }
+.hm-stage.is-held .hm-work.is-on { display: grid; opacity: 1; max-height: none; }
+
+.hm-stage.is-held .is-on .hm-in { animation: hm-in-held 0.26s ease both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+.hm-stage.is-held .is-on .hm-fly { animation: hm-fly-held 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+.hm-stage.is-held .is-on .hm-type { animation: hm-type-held 1s linear both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+.hm-stage.is-held .is-on .hm-typed { animation: hm-typed-clear-held 2.63s steps(1, end) both; animation-delay: 0s; }
+.hm-stage.is-held .is-on .hm-typed i { animation: hm-char-held 2.63s steps(1, end) both; animation-delay: calc(250ms + var(--i) * 30ms); }
+.hm-stage.is-held .is-on .hm-caret { animation: hm-caret-held 2.63s linear both; animation-delay: 0s; }
+.hm-stage.is-held .is-on .hm-typed + .hm-composer-hint { animation: hm-hint-return-held 2.63s steps(1, end) both; animation-delay: 0s; }
+.hm-stage.is-held .hm-scene.is-on:has(.hm-typed) .hm-send { animation: hm-send-press-held 2.9s linear both; animation-delay: 0s; }
+.hm-stage.is-held .is-on .hm-work-fade { animation: hm-work-in-held 0.25s ease both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+.hm-stage.is-held .is-on .hm-work-open { animation: hm-work-row-held 0.25s ease both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+.hm-stage.is-held .is-on .hm-work-none.hm-work-open { animation-name: hm-work-note-held; }
+.hm-stage.is-held .is-on .hm-work-run { animation: hm-work-run-held 3s linear both; animation-delay: calc(var(--d) * var(--hm-beat)); }
+
+@keyframes hm-in-held {
+  0%   { opacity: 0; transform: translateY(6px); max-height: 0; margin-top: 0; }
+  4%   { max-height: 400px; margin-top: 6px; }
+  100% { opacity: 1; transform: none; max-height: 400px; margin-top: 6px; }
+}
+@keyframes hm-fly-held {
+  0%   { opacity: 0; transform: translateY(26px) scale(0.74); }
+  11%  { opacity: 1; }
+  60%  { transform: translateY(0) scale(1.04); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes hm-type-held {
+  0%         { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
+  1.1%       { max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  21%, 99.9% { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  100%       { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
+}
+@keyframes hm-typed-clear-held {
+  0%, 99.9% { font-size: var(--fs-sm); }
+  100%      { font-size: 0; }
+}
+@keyframes hm-char-held {
+  0%          { font-size: 0; }
+  0.1%, 99.9% { font-size: 100%; }
+  100%        { font-size: 0; }
+}
+@keyframes hm-caret-held {
+  0%, 9.9%     { opacity: 0; }
+  10%, 97.7%   { opacity: 1; }
+  97.8%, 100%  { opacity: 0; }
+}
+@keyframes hm-hint-return-held {
+  0%, 99.9% { font-size: 0; }
+  100%      { font-size: var(--fs-sm); }
+}
+@keyframes hm-send-press-held {
+  0%, 84.8% { transform: scale(1); }
+  89.7%     { transform: scale(0.82); }
+  100%      { transform: scale(1); }
+}
+@keyframes hm-work-in-held {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes hm-work-row-held {
+  0%   { opacity: 0; transform: translateY(4px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+  4%   { max-height: 90px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+  100% { opacity: 1; transform: none; max-height: 90px; padding-top: 8px; padding-bottom: 8px; border-width: 1px; }
+}
+@keyframes hm-work-note-held {
+  0%   { opacity: 0; transform: translateY(4px); max-height: 0; padding-top: 0; padding-bottom: 0; border-width: 0; }
+  4%   { max-height: 120px; padding-top: 10px; padding-bottom: 12px; border-width: 1px; }
+  100% { opacity: 1; transform: none; max-height: 120px; padding-top: 10px; padding-bottom: 12px; border-width: 1px; }
+}
+@keyframes hm-work-run-held {
+  0%          { opacity: 0; }
+  8.3%, 99.9% { opacity: 1; }
+  100%        { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* The cycle is already stopped on the first scene by the rules in section 46. Here the
+     tabs stop with it, the first one lit, and a held scene arrives whole with no beats. */
+  .hm-tab { animation: none; }
+  .hm-tabs .hm-tab:first-child { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
+  .hm-stage.is-held .hm-tabs .hm-tab:first-child:not(.is-on) { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
+  .hm-stage.is-held .is-on .hm-in,
+  .hm-stage.is-held .is-on .hm-fly,
+  .hm-stage.is-held .is-on .hm-type,
+  .hm-stage.is-held .is-on .hm-typed,
+  .hm-stage.is-held .is-on .hm-typed i,
+  .hm-stage.is-held .is-on .hm-caret,
+  .hm-stage.is-held .is-on .hm-typed + .hm-composer-hint,
+  .hm-stage.is-held .hm-scene.is-on:has(.hm-typed) .hm-send,
+  .hm-stage.is-held .is-on .hm-work-fade,
+  .hm-stage.is-held .is-on .hm-work-open,
+  .hm-stage.is-held .is-on .hm-work-run { animation: none; }
+  .hm-stage.is-held .is-on .hm-type,
+  .hm-stage.is-held .is-on .hm-work-run { display: none; }
+  .hm-stage.is-held .is-on .hm-work-open { max-height: none; opacity: 1; transform: none; }
+}
+@media (max-width: 640px) {
+  .hm-tabs { max-width: 320px; gap: 5px; }
+  .hm-tab { min-height: 28px; padding: 4px 10px; font-size: var(--fs-2xs); }
+}
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260911-13" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260911-14" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -456,6 +456,21 @@
                the same job seen from the other side. Under the record it was a line of text with
                two things above it and no way to tell which one it belonged to, and it put the
                height of the record between a message and the sentence explaining it. -->
+          <!-- The reader's hand on the dial. Seven pills, one per scene, lit on the same clock as
+               the phone (CSS, the same --s), so they show where the cycle is; press one and
+               js/home.js holds that scene, plays its beats once, and lets the cycle go on if you
+               leave it alone for a while. Without the script they are still the map of what is
+               above, lighting as each scene arrives. -->
+          <div class="hm-tabs" role="group" aria-label="Pick a scene">
+            <button class="hm-tab" type="button" style="--s:0" data-scene="0" aria-pressed="false">A morning brief</button>
+            <button class="hm-tab" type="button" style="--s:1" data-scene="1" aria-pressed="false">A reminder</button>
+            <button class="hm-tab" type="button" style="--s:2" data-scene="2" aria-pressed="false">A reply to send</button>
+            <button class="hm-tab" type="button" style="--s:3" data-scene="3" aria-pressed="false">Move a meeting</button>
+            <button class="hm-tab" type="button" style="--s:4" data-scene="4" aria-pressed="false">Watch for a reply</button>
+            <button class="hm-tab" type="button" style="--s:5" data-scene="5" aria-pressed="false">What renews</button>
+            <button class="hm-tab" type="button" style="--s:6" data-scene="6" aria-pressed="false">Look it up</button>
+          </div>
+
           <div class="hm-caps" aria-hidden="true">
             <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
             <p class="hm-cap" style="--s:1">Ask in plain words. It reads the time back, goes quiet, and turns up hours later.</p>

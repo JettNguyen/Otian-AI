@@ -39,4 +39,67 @@
     measure();
   }
 
+  /* Scene tabs under the hero phone. The cycle is CSS and stays CSS; this only holds one
+     scene when a tab is pressed. Holding adds `is-held` to the stage and `is-on` to that
+     scene, its caption and its job record, and the stylesheet does the rest: the lap
+     animations stop, the held scene's beats play once from their own start, and the tab lights.
+     Pressing the lit tab, or leaving it alone for twenty seconds, lets the cycle go, and it
+     goes from the top because everything restarts together. The tabs light on their own clock
+     while nothing is held, so this file never has to know where the cycle is. */
+  var stage = document.querySelector('.hm-stage');
+  var tabs = stage ? stage.querySelectorAll('.hm-tab[data-scene]') : [];
+  if (stage && tabs.length) {
+    var HOLD_MS = 20000;
+    var held = -1;
+    var release = null;
+
+    /* Everything on the clock, keyed by its --s, so this does not depend on DOM order. */
+    function bySceneIndex(selector) {
+      var out = {};
+      var els = stage.querySelectorAll(selector);
+      for (var i = 0; i < els.length; i++) {
+        var n = parseInt(els[i].style.getPropertyValue('--s'), 10);
+        if (!isNaN(n)) out[n] = els[i];
+      }
+      return out;
+    }
+    var scenes = bySceneIndex('.hm-scene');
+    var caps = bySceneIndex('.hm-cap');
+    var works = bySceneIndex('.hm-work');
+
+    function mark(map, on) {
+      for (var k in map) {
+        if (Object.prototype.hasOwnProperty.call(map, k)) map[k].classList.toggle('is-on', +k === on);
+      }
+    }
+    function paintTabs(on) {
+      for (var i = 0; i < tabs.length; i++) {
+        var mine = parseInt(tabs[i].getAttribute('data-scene'), 10) === on;
+        tabs[i].classList.toggle('is-on', mine);
+        tabs[i].setAttribute('aria-pressed', String(mine));
+      }
+    }
+    function hold(i) {
+      held = i;
+      stage.classList.add('is-held');
+      mark(scenes, i); mark(caps, i); mark(works, i);
+      paintTabs(i);
+      clearTimeout(release);
+      release = setTimeout(letGo, HOLD_MS);
+    }
+    function letGo() {
+      held = -1;
+      clearTimeout(release);
+      stage.classList.remove('is-held');
+      mark(scenes, -1); mark(caps, -1); mark(works, -1);
+      paintTabs(-1);
+    }
+    for (var t = 0; t < tabs.length; t++) {
+      tabs[t].addEventListener('click', function () {
+        var i = parseInt(this.getAttribute('data-scene'), 10);
+        if (i === held) letGo(); else hold(i);
+      });
+    }
+  }
+
 })();

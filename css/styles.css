@@ -14914,6 +14914,77 @@ html[data-theme="dark"] .booking-container iframe {
   .cmp-strip-table tbody tr { animation: none; }
 }
 
+/* ── The setup chapters (how-it-works/) ──
+   Six step tiles under the recording, three across. A step that is in the footage carries its
+   moments as small buttons; js/demo-player.js reveals them, seeks on press, and lights the tile
+   and button the playhead is in. `hidden` has to beat the flex display or the buttons would
+   show on a page with no script. */
+.chapters {
+  list-style: none;
+  margin: 36px auto 0;
+  padding: 0;
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.chapter {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 18px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
+  transition: border-color var(--transition);
+}
+.chapter.is-on { border-color: var(--accent); }
+.chapter-n {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: var(--bg-card);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+.chapter > div { min-width: 0; }
+.chapter h3 { font-size: var(--fs-lg); margin: 5px 0 6px; }
+.chapter p { margin: 0; font-size: var(--fs-base); color: var(--text-secondary); line-height: 1.6; }
+.chapter-times { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.chapter-times[hidden] { display: none; }
+.chapter-time {
+  font: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--c-blue-ink);
+  background: var(--c-blue-subtle);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 4px 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.chapter-time::before { content: "\25B8\00a0"; }
+.chapter-time:hover { border-color: var(--c-blue); }
+.chapter-time:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.chapter-time.is-on { background: var(--accent-subtle); color: var(--accent-ink); }
+@media (max-width: 900px) {
+  .chapters { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .chapters { grid-template-columns: 1fr; gap: 10px; }
+  .chapter { padding: 16px; }
+}
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

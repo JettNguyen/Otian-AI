@@ -231,6 +231,60 @@
       });
     }
 
+    /* Chapters. A list elsewhere on the page can point at this player by the figure's id
+       (data-chapters-for), with buttons carrying data-seek in seconds. Pressing one loads the
+       recording if it has not been fetched yet, plays it, and seeks once the metadata is in.
+       That is an explicit ask, so it goes ahead under reduced motion too. While the recording
+       plays, the button and the step the playhead is in light up, so the list reads as the
+       recording's own index. The buttons ship hidden and are revealed here, so a page with no
+       script shows a list and never a button that does nothing. */
+    var chapters = player.id
+      ? document.querySelector('.chapters[data-chapters-for="' + player.id + '"]')
+      : null;
+    if (chapters) {
+      var chips = Array.prototype.slice.call(chapters.querySelectorAll('.chapter-time[data-seek]'));
+      Array.prototype.forEach.call(chapters.querySelectorAll('.chapter-times'), function (row) {
+        row.hidden = false;
+      });
+      var seekTo = function (t) {
+        pausedByUser = false;
+        player.classList.remove('is-paused');
+        if (toggle) toggle.setAttribute('aria-label', 'Pause the demo');
+        load().then(function () {
+          var go = function () {
+            try { video.currentTime = t; } catch (e) { /* not seekable yet; it plays from the top */ }
+          };
+          if (video.readyState >= 1) {
+            go();
+          } else {
+            video.addEventListener('loadedmetadata', function once() {
+              video.removeEventListener('loadedmetadata', once);
+              go();
+            });
+          }
+          // play() is what starts the fetch on a preload="none" element, so it comes last.
+          var r = video.play();
+          if (r && typeof r.catch === 'function') r.catch(function () {});
+        });
+      };
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          seekTo(parseFloat(chip.getAttribute('data-seek')) || 0);
+        });
+      });
+      video.addEventListener('timeupdate', function () {
+        var t = video.currentTime;
+        var on = null;
+        for (var i = 0; i < chips.length; i++) {
+          if (parseFloat(chips[i].getAttribute('data-seek')) <= t + 0.25) on = chips[i];
+        }
+        chips.forEach(function (c) { c.classList.toggle('is-on', c === on); });
+        Array.prototype.forEach.call(chapters.querySelectorAll('.chapter'), function (li) {
+          li.classList.toggle('is-on', !!on && li.contains(on));
+        });
+      });
+    }
+
     if (reduceMotion) {
       // Poster only. Nothing is fetched and nothing moves until they press play.
       player.classList.add('is-paused');

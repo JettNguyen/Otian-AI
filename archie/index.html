@@ -46,7 +46,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-19" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-20" />
   <style>
     /* Page-scoped: the #status block, the one place on the site where Archie's
        availability and platform facts live. Other pages link here, never restate. */
@@ -227,374 +227,56 @@
           <p>Archie is a desktop app that runs your own AI agent. You talk to it the way you&rsquo;d text a friend, and it gets things done: your calendar, your inbox, research, and the busywork you&rsquo;d rather not.</p>
           <p>What makes it different is where it lives: on your computer, not on ours. It talks to the AI company directly, on your own account. You own the whole thing.</p>
         </div>
+          <!-- How Archie works, in three moments on one line, and one thing passing through them.
+               Redrawn 2026-09-11 from a three-card figure that carried 128 words of labels; the
+               sentences it held are the caption now. The style block serves both variants. -->
           <figure class="explain-figure fade-up delay-2">
-            <!-- =================== DESKTOP =================== -->
-            <svg class="explain-svg--desktop" viewBox="0 0 680 1190" role="img" aria-labelledby="axd-t" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;font-family:inherit">
-              <title id="axd-t">How Archie works in three steps. One: plug it in. Archie is downloaded onto a laptop in your home and stays plugged in and connected to the internet. Two: sign it in. You sign Archie into your email and calendar on that same laptop. Three: message it. You send a task from anywhere, Archie works on it at home, and a little while later he messages back that drafts are ready for you to send.</title>
+            <svg class="explain-svg--desktop" viewBox="0 0 560 190" role="img" aria-labelledby="ar-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+              <title id="ar-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
               <style>
-                .ax-house{fill:rgba(224,138,91,.05);stroke:var(--accent);stroke-width:1.6}
-                .ax-roof{fill:rgba(224,138,91,.1);stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round}
-                .ax-screen{fill:rgba(224,138,91,.05);stroke:var(--accent);stroke-width:1.8}
-                .ax-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.32;stroke-linecap:round}
-                .ax-desk{fill:none;stroke:currentColor;stroke-width:2;opacity:.45;stroke-linecap:round}
-                .ax-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-                .ax-glyph-b{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-                .ax-fill{fill:var(--accent)}
-                .ax-thread{fill:none;stroke:var(--accent);stroke-width:2;opacity:.35;stroke-linecap:round;stroke-dasharray:1 10}
-                .ax-link{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#axArrO)}
-                .ax-arc-back{fill:none;stroke:currentColor;stroke-width:1.8;opacity:.45;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#axArrN)}
-                .ax-badge{fill:var(--bg-primary);stroke:var(--c-blue);stroke-width:1.6}
-                .ax-badge-n{fill:var(--c-blue-ink);font-size:15px;font-weight:700;text-anchor:middle}
-                .ax-pill{fill:var(--bg-primary);stroke:var(--accent);stroke-width:1.4}
-                .ax-pill-n{fill:var(--bg-primary);stroke:currentColor;stroke-width:1.2;opacity:.9}
-                .ax-card{fill:rgba(224,138,91,.028);stroke:var(--border);stroke-width:1.5}
-                .ax-title{fill:currentColor;font-size:16px;font-weight:700;text-anchor:middle}
-                .ax-cap{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:middle}
-                .ax-lbl{fill:currentColor;opacity:.62;font-size:11px;font-weight:600;text-anchor:middle}
-                .ax-home{fill:var(--c-blue-ink);font-size:11px;font-weight:700;text-anchor:middle;letter-spacing:.3px}
-                .ax-msg{fill:var(--accent);font-size:12px;font-weight:600;text-anchor:middle}
-                .ax-msg-n{fill:currentColor;opacity:.75;font-size:12px;font-weight:600;text-anchor:middle}
-                .ax-later{fill:currentColor;opacity:.55;font-size:11.5px;font-style:italic;text-anchor:middle}
-                @media (prefers-reduced-motion:no-preference){
-                  .ax-stage{animation:axIn .7s cubic-bezier(.22,1,.36,1) both}
-                  .axs1{animation-delay:.05s}.axs2{animation-delay:.2s}.axs3{animation-delay:.35s}
-                  @keyframes axIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-                  .ax-link,.ax-arc-back{animation:axFlow 1.8s linear infinite}
-                  @keyframes axFlow{to{stroke-dashoffset:-18}}
+                .ar-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+                .ar-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+                .ar-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round}
+                .ar-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+                .ar-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+                .ar-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+                .ar-tick{fill:none;stroke:var(--c-green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+                .ar-you{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+                .ar-power{fill:var(--c-green)}
+                .ar-dot{display:none;fill:var(--accent)}
+                @supports (offset-path:path("M0,0 L1,1")){
+                  .ar-dot{display:block;offset-distance:33%}
+                  @media (prefers-reduced-motion:no-preference){
+                    .ar-dot{animation:arWalk 8s linear infinite}
+                    @keyframes arWalk{0%{offset-distance:0%}28%{offset-distance:33.3%}42%{offset-distance:33.3%}64%{offset-distance:66.6%}78%{offset-distance:66.6%}100%{offset-distance:100%}}
+                  }
                 }
               </style>
-
-              <defs>
-                <marker id="axArrO" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M2 2 L10 6 L2 10" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </marker>
-                <marker id="axArrN" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M2 2 L10 6 L2 10" fill="none" stroke="currentColor" opacity=".5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </marker>
-                <!-- cutaway house, desk, laptop, cord + outlet. 300 x 200 local -->
-                <g id="ax-house">
-                  <polygon class="ax-roof" points="0,62 150,6 300,62"/>
-                  <text class="ax-home" x="150" y="50">your home</text>
-                  <path class="ax-wire" d="M10 62 V196 M290 62 V196 M10 196 H290"/>
-                  <path class="ax-desk" d="M60 166 H240 M72 166 V196 M228 166 V196"/>
-                  <rect class="ax-screen" x="95" y="70" width="110" height="84" rx="6"/>
-                  <polygon class="ax-house" points="88,154 212,154 222,166 78,166"/>
-                  <circle class="ax-fill" cx="206" cy="160" r="2.2"/>
-                  <path class="ax-wire" d="M221 165 C252 173 266 177 285 181"/>
-                  <rect class="ax-wire" x="285" y="175" width="5" height="12" fill="none"/>
-                </g>
-                <!-- Archie, line style, centered on body. Arms added per step. -->
-                <!-- Ember, in the diagram's line style: the same body the site's live Ember
-                     draws (js/ember.js: peak, round body, pill eyes, smile, feet), at one third
-                     scale and stroke-drawn in accent like everything else here. Same origin and
-                     footprint as the robot he replaces, so each step's arms (waving, holding the
-                     key, holding the draft) still attach at x = +-17. -->
-                <g id="ax-bot">
-                  <path class="ax-fill" d="M0 -31.5 L-5.5 -19.5 L5.5 -19.5 Z"/>
-                  <circle class="ax-glyph" cx="0" cy="-4" r="22"/>
-                  <rect class="ax-fill" x="-9.7" y="-10.3" width="4.7" height="9.3" rx="2.3"/>
-                  <rect class="ax-fill" x="5" y="-10.3" width="4.7" height="9.3" rx="2.3"/>
-                  <path class="ax-glyph" d="M-3.5 3.5 Q0 6.5 3.5 3.5"/>
-                  <ellipse class="ax-fill" cx="-6" cy="19.5" rx="3.3" ry="2.5"/>
-                  <ellipse class="ax-fill" cx="6" cy="19.5" rx="3.3" ry="2.5"/>
-                </g>
-              </defs>
-
-              <!-- grouping cards, one per step; numbered badges straddle each top edge -->
-              <rect class="ax-card" x="24" y="38" width="632" height="330" rx="20"/>
-              <rect class="ax-card" x="24" y="408" width="632" height="352" rx="20"/>
-              <rect class="ax-card" x="24" y="798" width="632" height="380" rx="20"/>
-
-              <!-- thread, stitching one card to the next through the gap -->
-              <path class="ax-thread" d="M340 368 V392 M340 760 V782"/>
-
-              <!-- ============ STEP 1 ============ -->
-              <g class="ax-stage axs1">
-                <circle class="ax-badge" cx="340" cy="38" r="16"/>
-                <text class="ax-badge-n" x="340" y="43">1</text>
-                <text class="ax-title" x="340" y="78">Plug it in</text>
-                <g transform="translate(190,92)">
-                  <use href="#ax-house"/>
-                  <g transform="translate(150,126)">
-                    <!-- download chevron -->
-                    <path class="ax-glyph" d="M0 -52 V-44 M-4 -47 L0 -42 L4 -47"/>
-                    <use href="#ax-bot"/>
-                    <!-- waving arm -->
-                    <path class="ax-glyph-b" d="M21.5 0 Q26 -6 28 -16"/>
-                    <circle class="ax-fill" cx="28.5" cy="-18" r="2.5"/>
-                    <path class="ax-glyph" d="M33 -24 Q35 -26 37 -24 M34 -17 Q37 -18 38 -15" opacity=".55"/>
-                    <path class="ax-glyph-b" d="M-20.2 4.7 L-24 8"/>
-                  </g>
-                </g>
-                <text class="ax-cap" x="340" y="330">Use a computer you already have. An old laptop works.</text>
-                <text class="ax-cap" x="340" y="352">Download Archie, leave it plugged in and connected. He only works while it is on.</text>
-              </g>
-
-              <!-- ============ STEP 2 ============ -->
-              <g class="ax-stage axs2">
-                <circle class="ax-badge" cx="340" cy="408" r="16"/>
-                <text class="ax-badge-n" x="340" y="413">2</text>
-                <text class="ax-title" x="340" y="448">Sign it in</text>
-
-                <!-- email tile -->
-                <rect class="ax-screen" x="52" y="542" width="84" height="56" rx="10"/>
-                <path class="ax-glyph" d="M72 556 h44 v28 h-44 z M72 556 l22 16 l22 -16"/>
-                <text class="ax-lbl" x="94" y="620">your email</text>
-                <path class="ax-link" d="M140 570 L282 573"/>
-
-                <!-- calendar tile -->
-                <rect class="ax-screen" x="544" y="542" width="84" height="56" rx="10"/>
-                <path class="ax-glyph" d="M564 559 h44 v26 h-44 z M564 568 h44 M576 554 v8 M596 554 v8"/>
-                <text class="ax-lbl" x="586" y="620">your calendar</text>
-                <path class="ax-link" d="M540 570 L398 573"/>
-
-                <g transform="translate(190,462)">
-                  <use href="#ax-house"/>
-                  <g transform="translate(150,126)">
-                    <use href="#ax-bot"/>
-                    <!-- arm up, hand gripping the key shaft; teeth clear below the grip -->
-                    <path class="ax-glyph-b" d="M21.5 -2 Q24 -10 27 -19"/>
-                    <path class="ax-glyph-b" d="M-20.2 4.7 L-24 8"/>
-                    <g class="ax-glyph-b">
-                      <circle cx="29" cy="-30" r="5"/>
-                      <path d="M29 -25 V-4 M29 -8 H34 M29 -13 H33"/>
-                    </g>
-                    <circle class="ax-fill" cx="29" cy="-20" r="2.8"/>
-                  </g>
-                </g>
-                <text class="ax-cap" x="340" y="700">Same laptop, same house. You sign Archie into your email and calendar yourself,</text>
-                <text class="ax-cap" x="340" y="722">the way you sign in anywhere. Your inbox and calendar stay on your computer,</text>
-                <text class="ax-cap" x="340" y="744">and Otian never gets a copy.</text>
-              </g>
-
-              <!-- ============ STEP 3 ============ -->
-              <g class="ax-stage axs3">
-                <circle class="ax-badge" cx="340" cy="798" r="16"/>
-                <text class="ax-badge-n" x="340" y="803">3</text>
-                <text class="ax-title" x="340" y="838">Message it</text>
-
-                <!-- you, away from home: person and phone together inside the ring -->
-                <circle class="ax-screen" cx="140" cy="1002" r="44"/>
-                <circle class="ax-glyph" cx="132" cy="989" r="9.5"/>
-                <path class="ax-glyph-b" d="M114 1024 Q132 1002 150 1024"/>
-                <g transform="translate(154,992)">
-                  <rect class="ax-glyph" x="0" y="0" width="16" height="26" rx="3" fill="var(--bg-primary)"/>
-                  <line class="ax-glyph" x1="4" y1="8" x2="12" y2="8" stroke-width="1.6"/>
-                  <line class="ax-wire" x1="4" y1="13.5" x2="12" y2="13.5"/>
-                </g>
-                <text class="ax-lbl" x="130" y="1070">you, out anywhere</text>
-
-                <!-- home, smaller -->
-                <g transform="translate(408,922) scale(0.72)">
-                  <use href="#ax-house"/>
-                  <g transform="translate(150,126)">
-                    <use href="#ax-bot"/>
-                    <!-- at work beside a draft -->
-                    <path class="ax-glyph-b" d="M20.2 4.7 L24 8 M-20.2 4.7 L-24 8"/>
-                    <g class="ax-glyph" transform="translate(26,-2)">
-                      <rect x="0" y="0" width="14" height="18" rx="2"/>
-                      <path d="M3.5 5 H10.5 M3.5 9.5 H10.5 M3.5 14 H8" stroke-width="1.4"/>
-                    </g>
-                  </g>
-                </g>
-
-                <!-- out: ring -> house. Mirrored twin of the return arc below. -->
-                <path class="ax-link" d="M181 986 C240 922 350 922 409 975"/>
-                <rect class="ax-pill" x="250" y="904" width="112" height="26" rx="13"/>
-                <text class="ax-msg" x="306" y="921">catch me up</text>
-
-                <!-- back: house -> ring, a while later. Same curve, reflected. -->
-                <path class="ax-arc-back" d="M409 1029 C350 1082 250 1082 181 1018"/>
-                <g class="ax-glyph" opacity=".65">
-                  <circle cx="300" cy="1067" r="9" fill="var(--bg-primary)"/>
-                  <path d="M300 1062 V1067 L303.5 1068.8"/>
-                </g>
-                <text class="ax-later" x="398" y="1078">a little while later…</text>
-
-                <rect class="ax-pill-n" x="234" y="1092" width="212" height="26" rx="13"/>
-                <text class="ax-msg-n" x="340" y="1109">done, 3 drafts ready for you</text>
-
-                <text class="ax-cap" x="340" y="1140">Send a task from anywhere, on a messaging app you already have. Archie works on it at home,</text>
-                <text class="ax-cap" x="340" y="1162">even after you put your phone away. He writes the draft, you press send, and he messages you back.</text>
-              </g>
+              <path class="ar-line" d="M60,80 L480,80"/>
+              <rect class="ar-us" x="24" y="54" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="80" r="2.5"/>
+              <rect class="ar-box" x="164" y="48" width="72" height="64" rx="10"/><path class="ar-ink" d="M180,66h40M180,78h40M180,90h22"/><path class="ar-tick" d="M212,88l6,6l12,-14"/>
+              <rect class="ar-box" x="304" y="44" width="42" height="72" rx="8"/><rect class="ar-us" x="312" y="68" width="26" height="14" rx="6"/>
+              <g class="ar-you"><circle cx="480" cy="66" r="9"/><path d="M462,96 a18,18 0 0 1 36,0"/></g>
+              <text class="ar-name" x="60" y="134">Plug it in</text><text class="ar-sub" x="60" y="150">a computer that stays on</text>
+              <text class="ar-name" x="200" y="134">Sign it in</text><text class="ar-sub" x="200" y="150">your mail and calendar</text>
+              <text class="ar-name" x="325" y="134">Message it</text><text class="ar-sub" x="325" y="150">from anywhere</text>
+              <text class="ar-name" x="480" y="134">You</text><text class="ar-sub" x="480" y="150">the draft, ready to send</text>
+              <circle class="ar-dot" r="6" style="offset-path:path('M60,80 L200,80 L325,80 L480,80')"/>
             </svg>
-
-            <!-- =================== MOBILE =================== -->
-            <svg class="explain-svg--mobile" viewBox="0 0 340 1312" role="img" aria-labelledby="axm-t" xmlns="http://www.w3.org/2000/svg">
-              <title id="axm-t">How Archie works in three steps. One: plug it in. Archie is downloaded onto a laptop in your home and stays plugged in and connected to the internet. Two: sign it in. You sign Archie into your email and calendar on that same laptop. Three: message it. You send a task from anywhere, Archie works on it at home, and a little while later he messages back that drafts are ready for you to send.</title>
-              <style>
-                .axm-house{fill:rgba(224,138,91,.05);stroke:var(--accent);stroke-width:1.6}
-                .axm-roof{fill:rgba(224,138,91,.1);stroke:var(--accent);stroke-width:1.6;stroke-linejoin:round}
-                .axm-screen{fill:rgba(224,138,91,.05);stroke:var(--accent);stroke-width:1.8}
-                .axm-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.32;stroke-linecap:round}
-                .axm-desk{fill:none;stroke:currentColor;stroke-width:2;opacity:.45;stroke-linecap:round}
-                .axm-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-                .axm-glyph-b{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-                .axm-fill{fill:var(--accent)}
-                .axm-thread{fill:none;stroke:var(--accent);stroke-width:2;opacity:.35;stroke-linecap:round;stroke-dasharray:1 10}
-                .axm-link{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#axmArrO)}
-                .axm-arc-back{fill:none;stroke:currentColor;stroke-width:1.8;opacity:.45;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#axmArrN)}
-                .axm-badge{fill:var(--bg-primary);stroke:var(--c-blue);stroke-width:1.6}
-                .axm-badge-n{fill:var(--c-blue-ink);font-size:14px;font-weight:700;text-anchor:middle}
-                .axm-pill{fill:var(--bg-primary);stroke:var(--accent);stroke-width:1.4}
-                .axm-pill-n{fill:var(--bg-primary);stroke:currentColor;stroke-width:1.2;opacity:.9}
-                .axm-card{fill:rgba(224,138,91,.028);stroke:var(--border);stroke-width:1.5}
-                .axm-title{fill:currentColor;font-size:15px;font-weight:700;text-anchor:middle}
-                .axm-cap{fill:currentColor;opacity:.62;font-size:11.5px;text-anchor:middle}
-                .axm-lbl{fill:currentColor;opacity:.62;font-size:10px;font-weight:600;text-anchor:middle}
-                .axm-home{fill:var(--c-blue-ink);font-size:11px;font-weight:700;text-anchor:middle;letter-spacing:.3px}
-                .axm-msg{fill:var(--accent);font-size:11px;font-weight:600;text-anchor:middle}
-                .axm-msg-n{fill:currentColor;opacity:.75;font-size:11px;font-weight:600;text-anchor:middle}
-                .axm-later{fill:currentColor;opacity:.55;font-size:10.5px;font-style:italic;text-anchor:middle}
-                @media (prefers-reduced-motion:no-preference){
-                  .axm-link,.axm-arc-back{animation:axmFlow 1.8s linear infinite}
-                  @keyframes axmFlow{to{stroke-dashoffset:-18}}
-                }
-              </style>
-
-              <defs>
-                <marker id="axmArrO" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M2 2 L10 6 L2 10" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </marker>
-                <marker id="axmArrN" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                  <path d="M2 2 L10 6 L2 10" fill="none" stroke="currentColor" opacity=".5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                </marker>
-                <g id="axm-house">
-                  <polygon class="axm-roof" points="0,62 150,6 300,62"/>
-                  <text class="axm-home" x="150" y="50" style="font-size:13px">your home</text>
-                  <path class="axm-wire" d="M10 62 V196 M290 62 V196 M10 196 H290"/>
-                  <path class="axm-desk" d="M60 166 H240 M72 166 V196 M228 166 V196"/>
-                  <rect class="axm-screen" x="95" y="70" width="110" height="84" rx="6"/>
-                  <polygon class="axm-house" points="88,154 212,154 222,166 78,166"/>
-                  <circle class="axm-fill" cx="206" cy="160" r="2.2"/>
-                  <path class="axm-wire" d="M221 165 C252 173 266 177 285 181"/>
-                  <rect class="axm-wire" x="285" y="175" width="5" height="12" fill="none"/>
-                </g>
-                <!-- Ember, same mapping as #ax-bot above. -->
-                <g id="axm-bot">
-                  <path class="axm-fill" d="M0 -31.5 L-5.5 -19.5 L5.5 -19.5 Z"/>
-                  <circle class="axm-glyph" cx="0" cy="-4" r="22"/>
-                  <rect class="axm-fill" x="-9.7" y="-10.3" width="4.7" height="9.3" rx="2.3"/>
-                  <rect class="axm-fill" x="5" y="-10.3" width="4.7" height="9.3" rx="2.3"/>
-                  <path class="axm-glyph" d="M-3.5 3.5 Q0 6.5 3.5 3.5"/>
-                  <ellipse class="axm-fill" cx="-6" cy="19.5" rx="3.3" ry="2.5"/>
-                  <ellipse class="axm-fill" cx="6" cy="19.5" rx="3.3" ry="2.5"/>
-                </g>
-              </defs>
-
-              <!-- grouping cards, one per step -->
-              <rect class="axm-card" x="2" y="36" width="336" height="298" rx="18"/>
-              <rect class="axm-card" x="2" y="384" width="336" height="324" rx="18"/>
-              <rect class="axm-card" x="2" y="752" width="336" height="548" rx="18"/>
-
-              <path class="axm-thread" d="M170 334 V369 M170 708 V737"/>
-
-              <!-- ===== STEP 1 ===== -->
-              <circle class="axm-badge" cx="170" cy="36" r="15"/>
-              <text class="axm-badge-n" x="170" y="41">1</text>
-              <text class="axm-title" x="170" y="74">Plug it in</text>
-              <g transform="translate(50,88) scale(0.8)">
-                <use href="#axm-house"/>
-                <g transform="translate(150,126)">
-                  <path class="axm-glyph" d="M0 -52 V-44 M-4 -47 L0 -42 L4 -47"/>
-                  <use href="#axm-bot"/>
-                  <path class="axm-glyph-b" d="M21.5 0 Q26 -6 28 -16"/>
-                  <circle class="axm-fill" cx="28.5" cy="-18" r="2.5"/>
-                  <path class="axm-glyph-b" d="M-20.2 4.7 L-24 8"/>
-                </g>
-              </g>
-              <text class="axm-cap" x="170" y="284">Use a computer you already have. An old laptop</text>
-              <text class="axm-cap" x="170" y="304">works. Download Archie and leave it plugged in</text>
-              <text class="axm-cap" x="170" y="324">and connected to the internet. He lives here,</text>
-              <text class="axm-cap" x="170" y="344">and only works while it is on and online.</text>
-
-              <!-- ===== STEP 2 ===== -->
-              <circle class="axm-badge" cx="170" cy="384" r="15"/>
-              <text class="axm-badge-n" x="170" y="389">2</text>
-              <text class="axm-title" x="170" y="422">Sign it in</text>
-
-              <rect class="axm-screen" x="4" y="520" width="46" height="36" rx="8"/>
-              <path class="axm-glyph" d="M14 529 h26 v18 h-26 z M14 529 l13 10 l13 -10" stroke-width="1.7"/>
-              <text class="axm-lbl" x="27" y="572">your</text>
-              <text class="axm-lbl" x="27" y="585">email</text>
-              <path class="axm-link" d="M52 538 L124 528"/>
-
-              <rect class="axm-screen" x="290" y="520" width="46" height="36" rx="8"/>
-              <path class="axm-glyph" d="M300 531 h26 v16 h-26 z M300 537 h26 M307 527 v6 M319 527 v6" stroke-width="1.7"/>
-              <text class="axm-lbl" x="313" y="572">your</text>
-              <text class="axm-lbl" x="313" y="585">calendar</text>
-              <path class="axm-link" d="M288 538 L216 528"/>
-
-              <g transform="translate(50,436) scale(0.8)">
-                <use href="#axm-house"/>
-                <g transform="translate(150,126)">
-                  <use href="#axm-bot"/>
-                  <path class="axm-glyph-b" d="M21.5 -2 Q24 -10 27 -19"/>
-                  <path class="axm-glyph-b" d="M-20.2 4.7 L-24 8"/>
-                  <g class="axm-glyph-b">
-                    <circle cx="29" cy="-30" r="5"/>
-                    <path d="M29 -25 V-4 M29 -8 H34 M29 -13 H33"/>
-                  </g>
-                  <circle class="axm-fill" cx="29" cy="-20" r="2.8"/>
-                </g>
-              </g>
-              <text class="axm-cap" x="170" y="636">Same laptop, same house. You sign Archie into</text>
-              <text class="axm-cap" x="170" y="656">your email and calendar yourself, the way you</text>
-              <text class="axm-cap" x="170" y="676">sign in anywhere. Your inbox and calendar stay</text>
-              <text class="axm-cap" x="170" y="696">on your computer, and Otian never gets a copy.</text>
-
-              <!-- ===== STEP 3 ===== -->
-              <circle class="axm-badge" cx="170" cy="752" r="15"/>
-              <text class="axm-badge-n" x="170" y="757">3</text>
-              <text class="axm-title" x="170" y="790">Message it</text>
-
-              <!-- you: person and phone together inside the ring -->
-              <circle class="axm-screen" cx="105" cy="866" r="40"/>
-              <circle class="axm-glyph" cx="97" cy="854" r="8.5"/>
-              <path class="axm-glyph-b" d="M81 887 Q97 866 113 887"/>
-              <g transform="translate(117,856)">
-                <rect class="axm-glyph" x="0" y="0" width="15" height="24" rx="3" fill="var(--bg-primary)"/>
-                <line class="axm-glyph" x1="4" y1="7" x2="11" y2="7" stroke-width="1.5"/>
-                <line class="axm-wire" x1="4" y1="12" x2="11" y2="12"/>
-              </g>
-              <text class="axm-lbl" x="105" y="922">you, out anywhere</text>
-
-              <!-- out: ring -> home -->
-              <path class="axm-link" d="M142 850 C250 840 296 895 243 968"/>
-              <rect class="axm-pill" x="212" y="820" width="104" height="24" rx="12"/>
-              <text class="axm-msg" x="264" y="836">catch me up</text>
-
-              <!-- home -->
-              <g transform="translate(35,940) scale(0.85)">
-                <use href="#axm-house"/>
-                <g transform="translate(150,126)">
-                  <use href="#axm-bot"/>
-                  <path class="axm-glyph-b" d="M20.2 4.7 L24 8 M-20.2 4.7 L-24 8"/>
-                  <g class="axm-glyph" transform="translate(26,-2)">
-                    <rect x="0" y="0" width="14" height="18" rx="2"/>
-                    <path d="M3.5 5 H10.5 M3.5 9.5 H10.5 M3.5 14 H8" stroke-width="1.4"/>
-                  </g>
-                </g>
-              </g>
-
-              <!-- back: home -> your chat, straight down with the time cue on the line -->
-              <path class="axm-arc-back" d="M170 1108 V1150"/>
-              <g class="axm-glyph" opacity=".65">
-                <circle cx="170" cy="1128" r="8" fill="var(--bg-primary)"/>
-                <path d="M170 1123.5 V1128 L173.5 1129.8"/>
-              </g>
-              <text class="axm-later" x="248" y="1132">a little while later…</text>
-
-              <rect class="axm-pill-n" x="72" y="1160" width="196" height="24" rx="12"/>
-              <text class="axm-msg-n" x="170" y="1176">done, 3 drafts ready for you</text>
-
-              <text class="axm-cap" x="170" y="1228">Send a task from anywhere, on a messaging app</text>
-              <text class="axm-cap" x="170" y="1248">you already have. Archie works on it at home,</text>
-              <text class="axm-cap" x="170" y="1268">even after you put your phone away. He writes</text>
-              <text class="axm-cap" x="170" y="1288">the draft, you press send, and he messages you back.</text>
+            <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="arm-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="arm-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
+              <path class="ar-line" d="M60,40 L60,300"/>
+              <rect class="ar-us" x="24" y="14" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="40" r="2.5"/>
+              <rect class="ar-box" x="24" y="98" width="72" height="64" rx="10"/><path class="ar-ink" d="M40,116h40M40,128h40M40,140h22"/><path class="ar-tick" d="M72,138l6,6l12,-14"/>
+              <rect class="ar-box" x="39" y="184" width="42" height="72" rx="8"/><rect class="ar-us" x="47" y="208" width="26" height="14" rx="6"/>
+              <g class="ar-you"><circle cx="60" cy="286" r="9"/><path d="M42,316 a18,18 0 0 1 36,0"/></g>
+              <text class="ar-name" x="120" y="38" style="text-anchor:start">Plug it in</text><text class="ar-sub" x="120" y="54" style="text-anchor:start">a computer that stays on</text>
+              <text class="ar-name" x="120" y="128" style="text-anchor:start">Sign it in</text><text class="ar-sub" x="120" y="144" style="text-anchor:start">your mail and calendar</text>
+              <text class="ar-name" x="120" y="218" style="text-anchor:start">Message it</text><text class="ar-sub" x="120" y="234" style="text-anchor:start">from anywhere</text>
+              <text class="ar-name" x="120" y="298" style="text-anchor:start">You</text><text class="ar-sub" x="120" y="314" style="text-anchor:start">the draft, ready to send</text>
+              <circle class="ar-dot" r="6" style="offset-path:path('M60,40 L60,130 L60,220 L60,300')"/>
             </svg>
-
-            <figcaption>How Archie works: plug it in, sign it in, message it.</figcaption>
+            <figcaption>Plug it in: a computer you already have, left on and connected. Sign it in: your mail and calendar, on that computer, and Otian never gets a copy. Message it: from anywhere, it writes the draft and you press send.</figcaption>
           </figure>
       </div>
     </section>

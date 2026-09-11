@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260911-10" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260911-11" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
@@ -461,7 +461,37 @@
         <div class="section-header">
           <span class="section-label fade-up">The third cost, in numbers</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">What running the AI actually costs.</h2>
-          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs for a month: the messages you send, the reports it runs on a schedule, and the mail it reads while you are away.</p>
+          <p>The AI account is yours and we take no cut of it, so we have no reason to be vague. Here is what one agent costs for a month, measured.</p>
+        </div>
+
+        <!-- One choice, one number. The measured table below is the claim; this is the reader's
+             hand on it: pick how hard you will work the agent and read the band. No script, the
+             radios drive the CSS (section 47 in css/styles.css). Only the bands FACTS.md holds,
+             at the two qualities we measured; Best is unmeasured and is not offered. -->
+        <div class="cost-pick fade-up delay-2">
+          <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-light" checked />
+          <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-moderate" />
+          <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-heavy" />
+          <div class="cost-pick-tabs" role="group" aria-label="How hard you will work it">
+            <label class="cost-pick-tab" for="cp-light"><b>Light</b><span>calendar and a folder, about 6 messages a day</span></label>
+            <label class="cost-pick-tab" for="cp-moderate"><b>Moderate</b><span>calendar and inbox, about 25 messages a day</span></label>
+            <label class="cost-pick-tab" for="cp-heavy"><b>Heavy</b><span>everything connected, about 70 messages a day</span></label>
+          </div>
+          <div class="cost-pick-out" aria-live="polite">
+            <div class="cost-pick-band" data-pick="light">
+              <p class="cost-pick-num">$1 to $2</p>
+              <p class="cost-pick-line">a month at Economy, or <b>$5 to $7</b> at Balanced</p>
+            </div>
+            <div class="cost-pick-band" data-pick="moderate">
+              <p class="cost-pick-num">$41 to $63</p>
+              <p class="cost-pick-line">a month at Economy, or <b>$44 to $63</b> at Balanced</p>
+            </div>
+            <div class="cost-pick-band" data-pick="heavy">
+              <p class="cost-pick-num">$112 to $184</p>
+              <p class="cost-pick-line">a month at Economy, or <b>$130 to $204</b> at Balanced</p>
+            </div>
+            <p class="cost-pick-note">Measured in August 2026, and an estimate: the real bill is on your AI company&rsquo;s own dashboard.</p>
+          </div>
         </div>
 
         <div class="cost-table-wrap fade-up delay-2">
@@ -504,16 +534,10 @@
               </tr>
             </tbody>
           </table>
-          <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because two things move a bill and neither is the message count: the quality you pick, and how you space your messages out. A message sent a minute after the last costs about a sixth of one sent an hour later. These are one person&rsquo;s use: a shared Archie for Business agent answers a whole team.</p>
+          <p class="cost-table-note">Measured in August 2026 from real agents on a real key, at Anthropic&rsquo;s published prices, over a 30-day month. Each figure is a range because the bill moves with the quality you pick and how you space your messages out, not with the count. One person&rsquo;s use: a shared Archie for Business agent answers a whole team.</p>
         </div>
 
         <p class="cost-note cost-note--lead"><strong>There is a third setting, and it is not in this table.</strong> Response quality, on an agent&rsquo;s page, offers Economy, Balanced and Best. We read real bills for the first two and never benched Best, so its column is left out rather than guessed at. It costs more than Balanced; how much more is unmeasured.</p>
-
-        <p class="cost-note cost-note--lead"><strong>These figures should come down, and they haven&rsquo;t yet.</strong> Three changes on 26 August 2026 stopped your agent re-sending its tool list on every reply: <strong>33% off that list</strong>, measured, and the list is about a third of each reply. Nobody has run a month with them, so the table above stands. A real figure late beats a hopeful one now.</p>
-
-        <p class="cost-note cost-note--lead"><strong>Your agent spends in three places, and only one is you typing.</strong> Messages you send are the biggest, half to three quarters. Scheduled reports are next, a sixth to a half. Mail read while you&rsquo;re away is smallest, 3% to 16%.</p>
-        <p class="cost-note"><strong>The scheduled half is easy to underestimate.</strong> A dozen add-ons with their routines left on fires about 320 times a month: eight every morning, three every week, one before every meeting. About a third of the bill, before anybody typed anything.</p>
-        <p class="cost-note"><strong>Mail arriving is the part nobody predicts.</strong> Your agent reads every message that lands, whether or not you&rsquo;re at your computer. It is the smallest of the three while you are using your agent, and the only one that carries on when you stop, which is why it is listed on its own.</p>
 
         <div class="cost-table-wrap fade-up delay-2">
           <table class="cost-table">
@@ -552,12 +576,33 @@
 
         <!-- Folded, not cut. The table is the claim and these are the reasoning behind it,
              which used to sit between the reader and the number: eight blocks of prose to
-             get through after the answer had already been given. Every word is still here,
-             and the browser's find-in-page still reaches it. -->
+             get through after the answer had already been given, and on 2026-09-11 the three
+             "where it spends" notes joined them. Every word is still here, and the browser's
+             find-in-page still reaches it. -->
         <details class="fold fade-up delay-2">
           <summary>Why it costs what it costs, and how we know</summary>
           <div class="fold-body">
             <div class="calm-list calm-list--ruled">
+              <div class="calm-list-item">
+                <span class="calm-list-label">Your agent spends in three places, and only one is you typing</span>
+                <p>Messages you send are the biggest, half to three quarters. Scheduled reports are next, a sixth to a half. Mail read while you&rsquo;re away is smallest, 3% to 16%.</p>
+              </div>
+
+              <div class="calm-list-item">
+                <span class="calm-list-label">The scheduled half is easy to underestimate</span>
+                <p>A dozen add-ons with their routines left on fires about 320 times a month: eight every morning, three every week, one before every meeting. About a third of the bill, before anybody typed anything.</p>
+              </div>
+
+              <div class="calm-list-item">
+                <span class="calm-list-label">Mail arriving is the part nobody predicts</span>
+                <p>Your agent reads every message that lands, whether or not you&rsquo;re at your computer. It is the smallest of the three while you are using your agent, and the only one that carries on when you stop, which is why the inbox watch has a table of its own above.</p>
+              </div>
+
+              <div class="calm-list-item">
+                <span class="calm-list-label">These figures should come down, and they haven&rsquo;t yet</span>
+                <p>Three changes on 26 August 2026 stopped your agent re-sending its tool list on every reply: <strong>33% off that list</strong>, measured, and the list is about a third of each reply. Nobody has run a month with them, so the table above stands. A real figure late beats a hopeful one now.</p>
+              </div>
+
               <div class="calm-list-item">
                 <span class="calm-list-label">It&rsquo;s the passes that add up</span>
                 <p>Every reply hands your agent a fresh briefing. Answering from it takes one pass; looking something up takes three or four, each re-sending the whole briefing. Passes multiply the bill, not your question&rsquo;s length.</p>

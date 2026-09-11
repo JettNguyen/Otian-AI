@@ -14389,6 +14389,95 @@ html[data-theme="dark"] .booking-container iframe {
   .la-stage--mobile { display: block; }
 }
 
+/* ── The cost picker (archie/pricing/) ──
+   Three radios drive it and nothing else does: the checked one lights its tab and shows its
+   band, through sibling selectors, so the widget works with no script and reads as three
+   stacked bands in anything too old for it. The inputs are hidden the accessible way (not
+   display:none), so the group still takes focus and the arrow keys still move it. */
+.cost-pick {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto 40px;
+  padding: 22px 24px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
+}
+.cost-pick-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.cost-pick-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.cost-pick-tab {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition), background var(--transition);
+}
+.cost-pick-tab b { font-size: var(--fs-md); font-weight: 650; color: var(--text-primary); }
+.cost-pick-tab span { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.4; }
+.cost-pick-tab:hover { border-color: var(--accent); }
+#cp-light:checked ~ .cost-pick-tabs [for="cp-light"],
+#cp-moderate:checked ~ .cost-pick-tabs [for="cp-moderate"],
+#cp-heavy:checked ~ .cost-pick-tabs [for="cp-heavy"] {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+}
+#cp-light:focus-visible ~ .cost-pick-tabs [for="cp-light"],
+#cp-moderate:focus-visible ~ .cost-pick-tabs [for="cp-moderate"],
+#cp-heavy:focus-visible ~ .cost-pick-tabs [for="cp-heavy"] {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+.cost-pick-band { display: none; padding-top: 22px; }
+#cp-light:checked ~ .cost-pick-out [data-pick="light"],
+#cp-moderate:checked ~ .cost-pick-out [data-pick="moderate"],
+#cp-heavy:checked ~ .cost-pick-out [data-pick="heavy"] {
+  display: block;
+  animation: cost-pick-in 0.35s ease;
+}
+@keyframes cost-pick-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Serif for the one number, the way the site sets its headings: it is the answer, not a cell. */
+.cost-pick-num {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: var(--fs-9xl);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.cost-pick-line { margin: 8px 0 0; color: var(--text-secondary); font-size: var(--fs-md); }
+.cost-pick-line b { color: var(--text-primary); font-weight: 600; }
+.cost-pick-note { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--text-muted); line-height: 1.6; }
+@media (max-width: 640px) {
+  .cost-pick { padding: 18px 18px 20px; }
+  .cost-pick-tabs { grid-template-columns: 1fr; }
+  .cost-pick-tab { grid-template-columns: auto 1fr; align-items: baseline; gap: 10px; }
+  .cost-pick-num { font-size: var(--fs-8xl); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cost-pick-band { animation: none !important; }
+}
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

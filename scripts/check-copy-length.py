@@ -79,7 +79,13 @@ BUDGETS = {
     # of trimming took the additions from 625 words over to 377 before this moved;
     # what is left is the new table and the sentences that make it readable. Back
     # at its ceiling: a paragraph added here still has to cut one.
-    "archie/pricing/index.html": 2900,
+    # Raised from 2900 to 2960 on 2026-09-11 for the cost picker: three tabs and one
+    # number above the measured table, so a reader who will not parse a six-column
+    # table still gets their band. Its labels are the table's own words restated as
+    # a control, about 70 of them, counted here as body only because the widget is
+    # HTML and not SVG. Four notes moved into the fold and one was trimmed to pay
+    # for it, which is why the rise is 60 and not the widget's full weight.
+    "archie/pricing/index.html": 2960,
     # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
     # because it is about our own product. Its visible prose is 426 words, well under the
     # default, and the page is carried by a figure of three real app screens rather than by

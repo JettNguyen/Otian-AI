@@ -875,12 +875,17 @@
     // Authenticator app (TOTP)
     // Render an otpauth:// string to a QR code as inline SVG: dark modules on a forced-white
     // background so authenticator apps scan it in either site theme. Nothing leaves the browser.
+    //
+    // No margin inside the SVG. A QR needs a light border around it or a camera cannot find its
+    // edges, and .qr-box already draws one: 14px of forced white, which at this cell size is three
+    // and a half modules. Drawing a second border in here stacked the two and left the code filling
+    // about two thirds of the white square. If .qr-box ever loses its padding, this has to go back.
     function renderQrSvg(text) {
       const qr = window.qrcode(0, "M");   // type 0 = auto-size, "M" = ~15% error correction
       qr.addData(text);
       qr.make();
       const n = qr.getModuleCount();
-      const cell = 4, margin = 4;
+      const cell = 4, margin = 0;
       const size = (n + margin * 2) * cell;
       let rects = "";
       for (let r = 0; r < n; r++) {

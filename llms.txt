@@ -58,9 +58,10 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## How we compare
 
-- [Compare Archie to the Alternatives](https://otianai.com/compare/): A chat app, an automation, an assistant, your own build, or the AI companies' own agents. Five honest comparisons that each say where the other option wins, with every price read from the source and dated.
+- [Compare Archie to the Alternatives](https://otianai.com/compare/): A chat app, an automation, an assistant, your own build, or the AI companies' own agents. Six honest comparisons that each say where the other option wins, with every price read from the source and dated.
 - [Archie vs ChatGPT and Claude](https://otianai.com/compare/chat-apps/): A chat app answers when you open it and ask. Archie runs the same AI models on your own computer, on a schedule, through your own accounts. An honest side-by-side, including what a chat app does better.
 - [Archie vs Claude Cowork, Grok Bot and Symphony](https://otianai.com/compare/cloud-agents/): Claude Cowork, Grok Bot and Wix Symphony are agents you rent: they work on a computer their company runs. Archie is an agent you own. Both sides of that trade, priced, sourced and dated.
+- [Archie vs Wix Symphony](https://otianai.com/compare/symphony/): Symphony by Wix and Archie both give you a team of agents in one chat that acts and checks with you first. They differ on whose computer the work happens on and which AI company answers. Both sides, priced, sourced and dated.
 - [Archie vs Zapier, Make and n8n](https://otianai.com/compare/automation-tools/): Automation tools do exactly what their diagram says. An agent is told the job in a sentence and works out the steps. Prices, tradeoffs, and four reasons to keep your automations.
 - [Archie vs Building It Yourself](https://otianai.com/compare/building-it-yourself/): The parts are free and public, and a build of your own wins on control, cost and privacy. What Archie sells is that the connectors, the approval gate and the updates are finished.
 - [Archie vs Hiring an Assistant](https://otianai.com/compare/hiring-an-assistant/): A person handles judgement; an agent handles repetition. An honest comparison of a personal AI agent and a part-time assistant, including the four things no agent does.

@@ -329,8 +329,8 @@ MAP = [
     ("Privacy, security and claims", ["trust/", "trust/details/", "trust/it-review/",
                                       "security/", "privacy-policy/", "terms-of-service/"]),
     ("How we compare", ["compare/", "compare/chat-apps/", "compare/cloud-agents/",
-                        "compare/automation-tools/", "compare/building-it-yourself/",
-                        "compare/hiring-an-assistant/"]),
+                        "compare/symphony/", "compare/automation-tools/",
+                        "compare/building-it-yourself/", "compare/hiring-an-assistant/"]),
     ("About us", ["our-story/", "standard/", "contact/", "testimonials/"]),
     ("Learning", ["learn/", "faq/", "ai-explained/", "blog/", "help/"]),
 ]

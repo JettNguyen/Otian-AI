@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260911-19" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260911-20" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -184,201 +184,51 @@
           <span class="section-label fade-up">Getting started</span>
           <h2 id="how-to-list-heading" class="fade-up delay-1">From idea to listed.</h2>
         </div>
+        <!-- One line, four stops, one token that pauses at each. Redrawn 2026-09-11 from a
+             pipeline of 37 shapes and six animations. The style block serves both variants. -->
         <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 560 205" role="img" aria-labelledby="dev-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-            <title id="dev-t">A pipeline from building an add-on to its listing: build it, submit it for review, it is listed under your name, and it is included with Archie for everyone, on the website and inside Archie.</title>
+          <svg class="explain-svg--desktop" viewBox="0 0 520 176" role="img" aria-labelledby="dv-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+            <title id="dv-t">One line with four stops: build it, we review it, it is listed under your name, and it is included with Archie for everyone, on the website and inside Archie. A token walks the line and pauses at each stop.</title>
             <style>
-              .dev-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
-              .dev-node--out{fill:rgba(224,138,91,.14)}
-              .dev-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-              .dev-badge{fill:var(--c-blue)}
-              .dev-num{fill:var(--text-on-accent);font-size:12px;font-weight:700;text-anchor:middle}
-              .dev-name{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
-              .dev-sub{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
-              .dev-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
-              .dev-wire{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.3;stroke-linecap:round}
-              .dev-dglyph{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-              .dev-amark{fill:var(--accent)}
-              .dev-dlbl{fill:currentColor;opacity:.6;font-size:11px;text-anchor:middle}
-              .dev-port{fill:var(--accent)}
-              .dev-run{fill:var(--accent);opacity:0}
-              .dev-out{fill:var(--accent);opacity:0}
-              @media (prefers-reduced-motion:no-preference){
-                .dev-r1{animation:devRun 2.8s linear infinite}
-                .dev-r2{animation:devRun 2.8s linear infinite .93s}
-                .dev-r3{animation:devRun 2.8s linear infinite 1.86s}
-                @keyframes devRun{0%{opacity:0;transform:translateX(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateX(76px)}}
-                .dev-o1{animation:devOutA 3s ease-in-out infinite .4s}
-                .dev-o2{animation:devOutB 3s ease-in-out infinite 1.7s}
-                @keyframes devOutA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-28px,74px)}100%{opacity:0;transform:translate(-28px,74px)}}
-                @keyframes devOutB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(28px,74px)}100%{opacity:0;transform:translate(28px,74px)}}
-                .dev-mark{animation:devPulse 3.4s ease-in-out infinite}
-                @keyframes devPulse{0%,100%{opacity:1}50%{opacity:.62}}
+              .dv-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round}
+              .dv-stop{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .dv-stop--end{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+              .dv-n{fill:currentColor;opacity:.55;font-size:11px;font-weight:650;text-anchor:middle}
+              .dv-name{fill:currentColor;font-size:12px;font-weight:650;text-anchor:middle}
+              .dv-sub{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
+              .dv-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .dv-dot{display:block;offset-distance:33%}
+                @media (prefers-reduced-motion:no-preference){
+                  .dv-dot{animation:dvWalk 8s linear infinite}
+                  @keyframes dvWalk{0%{offset-distance:0%}22%{offset-distance:33.3%}36%{offset-distance:33.3%}58%{offset-distance:66.6%}72%{offset-distance:66.6%}94%{offset-distance:100%}100%{offset-distance:100%}}
+                }
               }
             </style>
-
-            <!-- spine connectors -->
-            <path class="dev-arrow" d="M92 64 L168 64 M160 58 L168 64 L160 70"/>
-            <path class="dev-arrow" d="M224 64 L300 64 M292 58 L300 64 L292 70"/>
-            <path class="dev-arrow" d="M356 64 L432 64 M424 58 L432 64 L424 70"/>
-            <circle class="dev-run dev-r1" cx="92" cy="64" r="3.5"/>
-            <circle class="dev-run dev-r2" cx="224" cy="64" r="3.5"/>
-            <circle class="dev-run dev-r3" cx="356" cy="64" r="3.5"/>
-
-            <!-- 1 · Build -->
-            <rect class="dev-node" x="36" y="36" width="56" height="56" rx="16"/>
-            <path class="dev-glyph" d="M57 56 L51 64 L57 72"/>
-            <path class="dev-glyph" d="M71 56 L77 64 L71 72"/>
-            <path class="dev-glyph" d="M67 55 L61 73"/>
-            <circle class="dev-badge" cx="36" cy="36" r="11"/><text class="dev-num" x="36" y="40">1</text>
-            <text class="dev-name" x="64" y="120">Build</text>
-            <text class="dev-sub" x="64" y="136">package the task</text>
-
-            <!-- 2 · Submit -->
-            <rect class="dev-node" x="168" y="36" width="56" height="56" rx="16"/>
-            <path class="dev-glyph" d="M196 71 L196 55"/>
-            <path class="dev-glyph" d="M189 62 L196 54 L203 62"/>
-            <path class="dev-glyph" d="M184 74 L208 74"/>
-            <circle class="dev-badge" cx="168" cy="36" r="11"/><text class="dev-num" x="168" y="40">2</text>
-            <text class="dev-name" x="196" y="120">Submit</text>
-            <text class="dev-sub" x="196" y="136">we review it</text>
-
-            <!-- 3 · List / distribute -->
-            <rect class="dev-node" x="300" y="36" width="56" height="56" rx="16"/>
-            <circle class="dev-port" cx="321" cy="64" r="3"/>
-            <path class="dev-glyph" d="M329 57 A9 9 0 0 1 329 71"/>
-            <path class="dev-glyph" d="M335 52 A15 15 0 0 1 335 76"/>
-            <circle class="dev-badge" cx="300" cy="36" r="11"/><text class="dev-num" x="300" y="40">3</text>
-            <text class="dev-name" x="328" y="120">List</text>
-            <text class="dev-sub" x="328" y="136">under your name</text>
-
-            <!-- 4 · Included -->
-            <rect class="dev-node dev-node--out" x="432" y="36" width="56" height="56" rx="16"/>
-            <g class="dev-mark" transform="translate(0,2)">
-              <circle class="dev-glyph" cx="460" cy="62" r="10"/>
-              <path class="dev-glyph" d="M454.5 62.5 L458.5 66.5 L466 58.5"/>
-            </g>
-            <circle class="dev-badge" cx="432" cy="36" r="11"/><text class="dev-num" x="432" y="40">4</text>
-            <text class="dev-name" x="460" y="120">Included</text>
-            <text class="dev-sub" x="460" y="136">with Archie</text>
-
-            <!-- reach: from Included it goes out to the Website and inside Archie -->
-            <path class="dev-wire" d="M432 78 L404 152"/>
-            <path class="dev-wire" d="M424.1 108.4 L418 115 L417.8 106"/>
-            <path class="dev-wire" d="M488 78 L516 152"/>
-            <path class="dev-wire" d="M495.9 108.4 L502 115 L502.2 106"/>
-            <circle class="dev-port" cx="432" cy="78" r="2.5"/>
-            <circle class="dev-port" cx="488" cy="78" r="2.5"/>
-            <circle class="dev-out dev-o1" cx="432" cy="78" r="3"/>
-            <circle class="dev-out dev-o2" cx="488" cy="78" r="3"/>
-
-            <rect class="dev-dglyph" x="393" y="155" width="22" height="15" rx="3"/>
-            <path class="dev-dglyph" d="M404 170 L404 174 M397 174 L411 174"/>
-            <text class="dev-dlbl" x="404" y="190">Website</text>
-
-            <g class="dev-amark" transform="translate(503.2,151.3) scale(0.025)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <text class="dev-dlbl" x="516" y="190">in Archie</text>
+            <path class="dv-line" d="M60,80 L450,80"/>
+            <circle class="dv-stop" cx="60" cy="80" r="16"/><text class="dv-n" x="60" y="84">1</text>
+            <circle class="dv-stop" cx="190" cy="80" r="16"/><text class="dv-n" x="190" y="84">2</text>
+            <circle class="dv-stop" cx="320" cy="80" r="16"/><text class="dv-n" x="320" y="84">3</text>
+            <circle class="dv-stop dv-stop--end" cx="450" cy="80" r="16"/><text class="dv-n" x="450" y="84">4</text>
+            <text class="dv-name" x="60" y="122">Build it</text><text class="dv-sub" x="60" y="138">a skill, a routine or a personality</text>
+            <text class="dv-name" x="190" y="122">We review it</text><text class="dv-sub" x="190" y="138">works as described, safe to run</text>
+            <text class="dv-name" x="320" y="122">Listed, under your name</text><text class="dv-sub" x="320" y="138">in the marketplace</text>
+            <text class="dv-name" x="450" y="122">Included with Archie</text><text class="dv-sub" x="450" y="138">on the website and in the app</text>
+            <circle class="dv-dot" r="6" style="offset-path:path('M60,80 L190,80 L320,80 L450,80')"/>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 652" role="img" aria-labelledby="devm-t" xmlns="http://www.w3.org/2000/svg">
-  <title id="devm-t">A pipeline from building an add-on to its listing: build it, submit it for review, it is listed under your name, and it is included with Archie for everyone, on the website and inside Archie.</title>
-  <style>
-    .devm-node{fill:rgba(224,138,91,.08);stroke:var(--accent);stroke-width:1.5}
-    .devm-node--out{fill:rgba(224,138,91,.14)}
-    .devm-glyph{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-    .devm-badge{fill:var(--c-blue)}
-    .devm-num{fill:var(--text-on-accent);font-size:12px;font-weight:700;text-anchor:middle}
-    .devm-name{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
-    .devm-sub{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
-    .devm-arrow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round;stroke-linejoin:round}
-    .devm-wire{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.3;stroke-linecap:round}
-    .devm-dglyph{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-    .devm-amark{fill:var(--accent)}
-    .devm-dlbl{fill:currentColor;opacity:.6;font-size:11px;text-anchor:middle}
-    .devm-port{fill:var(--accent)}
-    .devm-run{fill:var(--accent);opacity:0}
-    .devm-out{fill:var(--accent);opacity:0}
-    @media (prefers-reduced-motion:no-preference){
-      .devm-r1{animation:devmRun 2.8s linear infinite}
-      .devm-r2{animation:devmRun 2.8s linear infinite .93s}
-      .devm-r3{animation:devmRun 2.8s linear infinite 1.86s}
-      @keyframes devmRun{0%{opacity:0;transform:translateY(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(32px)}}
-      .devm-o1{animation:devmOutA 3s ease-in-out infinite .4s}
-      .devm-o2{animation:devmOutB 3s ease-in-out infinite 1.7s}
-      @keyframes devmOutA{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(-42px,86px)}100%{opacity:0;transform:translate(-42px,86px)}}
-      @keyframes devmOutB{0%{opacity:0;transform:translate(0,0)}18%{opacity:1}82%{opacity:1;transform:translate(42px,86px)}100%{opacity:0;transform:translate(42px,86px)}}
-      .devm-mark{animation:devmPulse 3.4s ease-in-out infinite}
-      @keyframes devmPulse{0%,100%{opacity:1}50%{opacity:.62}}
-    }
-  </style>
-
-  <!-- spine connectors -->
-  <path class="devm-arrow" d="M170 134 L170 166 M164 158 L170 166 L176 158"/>
-  <path class="devm-arrow" d="M170 282 L170 314 M164 306 L170 314 L176 306"/>
-  <path class="devm-arrow" d="M170 430 L170 462 M164 454 L170 462 L176 454"/>
-  <circle class="devm-run devm-r1" cx="170" cy="134" r="3.5"/>
-  <circle class="devm-run devm-r2" cx="170" cy="282" r="3.5"/>
-  <circle class="devm-run devm-r3" cx="170" cy="430" r="3.5"/>
-
-  <!-- 1 · Build -->
-  <rect class="devm-node" x="142" y="24" width="56" height="56" rx="16"/>
-  <path class="devm-glyph" d="M163 44 L157 52 L163 60"/>
-  <path class="devm-glyph" d="M177 44 L183 52 L177 60"/>
-  <path class="devm-glyph" d="M173 43 L167 61"/>
-  <circle class="devm-badge" cx="142" cy="24" r="11"/><text class="devm-num" x="142" y="28">1</text>
-  <text class="devm-name" x="170" y="104">Build</text>
-  <text class="devm-sub" x="170" y="120">package the task</text>
-
-  <!-- 2 · Submit -->
-  <rect class="devm-node" x="142" y="172" width="56" height="56" rx="16"/>
-  <path class="devm-glyph" d="M170 207 L170 191"/>
-  <path class="devm-glyph" d="M163 198 L170 190 L177 198"/>
-  <path class="devm-glyph" d="M158 210 L182 210"/>
-  <circle class="devm-badge" cx="142" cy="172" r="11"/><text class="devm-num" x="142" y="176">2</text>
-  <text class="devm-name" x="170" y="252">Submit</text>
-  <text class="devm-sub" x="170" y="268">we review it</text>
-
-  <!-- 3 · List / distribute -->
-  <rect class="devm-node" x="142" y="320" width="56" height="56" rx="16"/>
-  <circle class="devm-port" cx="163" cy="348" r="3"/>
-  <path class="devm-glyph" d="M171 341 A9 9 0 0 1 171 355"/>
-  <path class="devm-glyph" d="M177 336 A15 15 0 0 1 177 360"/>
-  <circle class="devm-badge" cx="142" cy="320" r="11"/><text class="devm-num" x="142" y="324">3</text>
-  <text class="devm-name" x="170" y="400">List</text>
-  <text class="devm-sub" x="170" y="416">under your name</text>
-
-  <!-- 4 · Included -->
-  <rect class="devm-node devm-node--out" x="142" y="468" width="56" height="56" rx="16"/>
-  <g class="devm-mark">
-    <circle class="devm-glyph" cx="170" cy="494" r="10"/>
-    <path class="devm-glyph" d="M164.5 494.5 L168.5 498.5 L176 490.5"/>
-  </g>
-  <circle class="devm-badge" cx="142" cy="468" r="11"/><text class="devm-num" x="142" y="472">4</text>
-  <text class="devm-name" x="170" y="548">Included</text>
-  <text class="devm-sub" x="170" y="564">with Archie</text>
-
-  <!-- reach: from Included it goes out to the Website and inside Archie -->
-  <path class="devm-wire" d="M142 510 L100 596"/>
-  <path class="devm-wire" d="M127.7 547 L121 553 L121.6 544"/>
-  <path class="devm-wire" d="M198 510 L240 596"/>
-  <path class="devm-wire" d="M212.3 547 L219 553 L218.4 544"/>
-  <circle class="devm-port" cx="142" cy="510" r="2.5"/>
-  <circle class="devm-port" cx="198" cy="510" r="2.5"/>
-  <circle class="devm-out devm-o1" cx="142" cy="510" r="3"/>
-  <circle class="devm-out devm-o2" cx="198" cy="510" r="3"/>
-
-  <rect class="devm-dglyph" x="89" y="600" width="22" height="15" rx="3"/>
-  <path class="devm-dglyph" d="M100 615 L100 619 M93 619 L107 619"/>
-  <text class="devm-dlbl" x="100" y="635">Website</text>
-
-  <g class="devm-amark" transform="translate(227.2,595.6) scale(0.025)">
-    <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-    <polygon points="328,887 512,727 696,887"/>
-  </g>
-  <text class="devm-dlbl" x="240" y="635">in Archie</text>
-</svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="dvm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="dvm-t">One line with four stops: build it, we review it, it is listed under your name, and it is included with Archie for everyone, on the website and inside Archie. A token walks the line and pauses at each stop.</title>
+            <path class="dv-line" d="M40,40 L40,300"/>
+            <circle class="dv-stop" cx="40" cy="40" r="16"/><text class="dv-n" x="40" y="44">1</text>
+            <circle class="dv-stop" cx="40" cy="127" r="16"/><text class="dv-n" x="40" y="131">2</text>
+            <circle class="dv-stop" cx="40" cy="214" r="16"/><text class="dv-n" x="40" y="218">3</text>
+            <circle class="dv-stop dv-stop--end" cx="40" cy="300" r="16"/><text class="dv-n" x="40" y="304">4</text>
+            <text class="dv-name" x="70" y="37" style="text-anchor:start">Build it</text><text class="dv-sub" x="70" y="53" style="text-anchor:start">a skill, a routine or a personality</text>
+            <text class="dv-name" x="70" y="124" style="text-anchor:start">We review it</text><text class="dv-sub" x="70" y="140" style="text-anchor:start">works as described, safe to run</text>
+            <text class="dv-name" x="70" y="211" style="text-anchor:start">Listed, under your name</text><text class="dv-sub" x="70" y="227" style="text-anchor:start">in the marketplace</text>
+            <text class="dv-name" x="70" y="297" style="text-anchor:start">Included with Archie</text><text class="dv-sub" x="70" y="313" style="text-anchor:start">on the website and in the app</text>
+            <circle class="dv-dot" r="6" style="offset-path:path('M40,40 L40,127 L40,214 L40,300')"/>
+          </svg>
           <figcaption>You build and submit; we review it, list it under your name, and it is included with Archie for everyone, on the website and inside Archie.</figcaption>
         </figure>
 

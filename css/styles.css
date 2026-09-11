@@ -15045,6 +15045,13 @@ html[data-theme="dark"] .booking-container iframe {
 .kit-figure figcaption { margin-bottom: 0; }
 .kit-panel .kit-figure { margin-bottom: 32px; }
 
+/* ── One shared agent, or an agent each (business/) ──
+   The packet map's switch and stages, borrowed whole (.pm-switch*, .pm-stage*), with two
+   groups in the drawing that trade places: the shared agent and the three lanes into it, or
+   an agent per person. Off is shared; on is each. */
+.pm-switch-input:checked ~ .pm-stage .bz-one { opacity: 0.12; }
+.pm-switch-input:checked ~ .pm-stage .bz-each { opacity: 1; }
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

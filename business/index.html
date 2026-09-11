@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-19" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-20" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -267,139 +267,67 @@
           <p>A personal Archie agent answers one person: its owner. A business one answers everybody the owner lets in, and that is the whole difference between the editions. Each person is answered from their own mail and calendar, never anybody else&rsquo;s.</p>
         </div>
 
-        <figure class="explain-figure fade-up delay-1" id="bsh-fig">
-          <svg class="explain-svg--desktop" viewBox="0 0 640 300" role="img" aria-labelledby="bsh-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-            <title id="bsh-t">Three teammates message one shared agent running on one computer. Each lane carries their own questions down to it, and beside the agent a note says each person is answered from their own accounts, never anybody else&rsquo;s.</title>
-            <style>
-              /* Archie for Business is slate blue, and this is the business edition's own diagram,
-                 so it wears the edition's accent rather than Archie's ember. Constants match
-                 .btn-business in styles.css and #biz-fig further down this page. */
-              #bsh-fig{--accent:#7AA1D8;--accent-subtle:#DFE9F6}
-              [data-theme="dark"] #bsh-fig{--accent:#93B6E5;--accent-subtle:#2F3B4C}
-              .bsh-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.4}
-              .bsh-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-              .bsh-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .bsh-lane{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.3;stroke-linecap:round}
-              .bsh-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.6}
-              .bsh-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.5}
-              .bsh-a{fill:var(--accent)}
-              .bsh-stand{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
-              .bsh-note{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.3}
-              .bsh-notetxt{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
-              .bsh-dot{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .bsh-grp{animation:bshIn .7s cubic-bezier(.22,1,.36,1) both}
-                .bs1{animation-delay:.06s}.bs2{animation-delay:.18s}.bs3{animation-delay:.3s}
-                @keyframes bshIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-                /* Each dot rides its own lane with offset-path, not translateY. translateY only
-                   travels straight down, which is right for the middle lane and wrong for the two
-                   that curve: the Support and Ops dots dropped vertically off their arcs into open
-                   space while the line bent away underneath them. The paths below are the lanes'
-                   own curves rewritten to start at 0,0, so each dot's cx/cy stays on the lane it
-                   belongs to and offset-path moves it from there. offset-rotate is pinned so the
-                   generated transform is a pure translate: a rotation would swing the dot around
-                   the viewBox-centre transform-origin and displace it. */
-                .bsh-dot{offset-rotate:0deg;animation:bshDown 3.3s ease-in-out infinite}
-                .bp1{offset-path:path("M0 0 C 0 42, 145 42, 173 74")}
-                .bp2{offset-path:path("M0 0 L 0 74")}
-                .bp3{offset-path:path("M0 0 C 0 42, -145 42, -173 74")}
-                .bp1{animation-delay:.2s}.bp2{animation-delay:1.2s}.bp3{animation-delay:2.2s}
-                @keyframes bshDown{0%{opacity:0;offset-distance:0%}12%{opacity:1}55%{opacity:1;offset-distance:86%}70%,100%{opacity:0;offset-distance:100%}}
-              }
-            </style>
-
-            <!-- three people, one row -->
-            <g class="bsh-grp bs1">
-              <rect class="bsh-person" x="40" y="10" width="150" height="58" rx="12"/>
-              <text class="bsh-name" x="115" y="34">Support</text>
-              <text class="bsh-sub" x="115" y="52">&ldquo;who&rsquo;s waiting on us?&rdquo;</text>
-            </g>
-            <g class="bsh-grp bs2">
-              <rect class="bsh-person" x="245" y="10" width="150" height="58" rx="12"/>
-              <text class="bsh-name" x="320" y="34">Owner</text>
-              <text class="bsh-sub" x="320" y="52">&ldquo;what&rsquo;s on today?&rdquo;</text>
-            </g>
-            <g class="bsh-grp bs3">
-              <rect class="bsh-person" x="450" y="10" width="150" height="58" rx="12"/>
-              <text class="bsh-name" x="525" y="34">Ops</text>
-              <text class="bsh-sub" x="525" y="52">&ldquo;I&rsquo;ll take the Meyer quote&rdquo;</text>
-            </g>
-
-            <!-- lanes converging on the one agent -->
-            <path class="bsh-lane" d="M115 68 C 115 110, 260 110, 288 142"/>
-            <line class="bsh-lane" x1="320" y1="68" x2="320" y2="142"/>
-            <path class="bsh-lane" d="M525 68 C 525 110, 380 110, 352 142"/>
-            <circle class="bsh-dot bp1" cx="115" cy="68" r="3"/>
-            <circle class="bsh-dot bp2" cx="320" cy="68" r="3"/>
-            <circle class="bsh-dot bp3" cx="525" cy="68" r="3"/>
-
-            <!-- the one agent, one computer -->
-            <rect class="bsh-card" x="224" y="142" width="192" height="120" rx="16"/>
-            <text class="bsh-name" x="320" y="166">Your team&rsquo;s agent</text>
-            <rect class="bsh-screen" x="288" y="178" width="64" height="44" rx="6"/>
-            <g class="bsh-a" transform="translate(304.64,185.42) scale(0.03)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <path class="bsh-stand" d="M320 222 V230 M306 230 H334"/>
-            <text class="bsh-sub" x="320" y="248">one computer, one plan</text>
-
-            <!-- the privacy note beside it -->
-            <rect class="bsh-note" x="444" y="176" width="176" height="52" rx="12"/>
-            <text class="bsh-notetxt" x="532" y="198">Each person answered from</text>
-            <text class="bsh-notetxt" x="532" y="212">their own accounts, never yours</text>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 262" role="img" aria-labelledby="bshm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="bshm-t">Three teammates message one shared agent running on one computer, and each person is answered from their own accounts, never anybody else&rsquo;s.</title>
-            <style>
-              .bshm-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.3}
-              .bshm-name{fill:currentColor;font-size:10.5px;font-weight:700;text-anchor:middle}
-              .bshm-lane{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3;stroke-linecap:round}
-              .bshm-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.5}
-              .bshm-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.4}
-              .bshm-a{fill:var(--accent)}
-              .bshm-stand{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round}
-              .bshm-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .bshm-dot{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                /* Same fix as the desktop drawing above: the outer lanes curve, so the dots
-                   follow the curve instead of falling straight past it. */
-                .bshm-dot{offset-rotate:0deg;animation:bshmDown 3.3s ease-in-out infinite}
-                .bpm1{offset-path:path("M0 0 C 0 30, 72 32, 94 52")}
-                .bpm2{offset-path:path("M0 0 L 0 52")}
-                .bpm3{offset-path:path("M0 0 C 0 30, -72 32, -94 52")}
-                .bpm1{animation-delay:.2s}.bpm2{animation-delay:1.2s}.bpm3{animation-delay:2.2s}
-                @keyframes bshmDown{0%{opacity:0;offset-distance:0%}12%{opacity:1}55%{opacity:1;offset-distance:77%}70%,100%{opacity:0;offset-distance:100%}}
-              }
-            </style>
-            <rect class="bshm-person" x="8" y="8" width="100" height="40" rx="10"/>
-            <text class="bshm-name" x="58" y="32">Support</text>
-            <rect class="bshm-person" x="120" y="8" width="100" height="40" rx="10"/>
-            <text class="bshm-name" x="170" y="32">Owner</text>
-            <rect class="bshm-person" x="232" y="8" width="100" height="40" rx="10"/>
-            <text class="bshm-name" x="282" y="32">Ops</text>
-
-            <path class="bshm-lane" d="M58 48 C 58 78, 130 80, 152 100"/>
-            <line class="bshm-lane" x1="170" y1="48" x2="170" y2="100"/>
-            <path class="bshm-lane" d="M282 48 C 282 78, 210 80, 188 100"/>
-            <circle class="bshm-dot bpm1" cx="58" cy="48" r="3"/>
-            <circle class="bshm-dot bpm2" cx="170" cy="48" r="3"/>
-            <circle class="bshm-dot bpm3" cx="282" cy="48" r="3"/>
-
-            <rect class="bshm-card" x="118" y="100" width="104" height="102" rx="14"/>
-            <text class="bshm-name" x="170" y="118">Your team&rsquo;s agent</text>
-            <rect class="bshm-screen" x="150" y="128" width="40" height="32" rx="5"/>
-            <g class="bshm-a" transform="translate(158.53,133.12) scale(0.0224)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <path class="bshm-stand" d="M170 160 V166 M160 166 H180"/>
-            <text class="bshm-sub" x="170" y="180">one computer,</text>
-            <text class="bshm-sub" x="170" y="191">one plan</text>
-            <text class="bshm-sub" x="170" y="224">Each person answered from their own</text>
-            <text class="bshm-sub" x="170" y="238">accounts, never anybody else&rsquo;s</text>
-          </svg>
-          <figcaption>One shared agent on one computer. Everyone messages it, the owner decides who is in, and each person is answered from their own connected accounts.</figcaption>
+        <!-- One drawing where there were two: the same three people and the same computer, and
+             the switch says whether their lanes meet one shared agent or three of their own. The
+             switch is a checkbox the CSS answers, the way the packet map's does on trust/ (it
+             borrows those classes). Merged 2026-09-11. The style block serves both variants. -->
+        <figure class="explain-figure pm-figure bz-figure fade-up delay-1" id="bsh-fig">
+          <input class="pm-switch-input" type="checkbox" id="bz-each" />
+          <label class="pm-switch" for="bz-each">
+            <span class="pm-switch-track" aria-hidden="true"><span class="pm-switch-knob"></span></span>
+            <span class="pm-switch-text">
+              <b class="pm-switch-off">One shared agent</b>
+              <b class="pm-switch-on">An agent each</b>
+              <i>Flip it to see the other way, in the same app.</i>
+            </span>
+          </label>
+          <div class="pm-stage pm-stage--desktop">
+            <svg class="explain-svg--desktop" viewBox="0 0 560 230" role="img" aria-labelledby="bz-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+              <title id="bz-t">Three teammates, Support, the owner and Ops, above one computer. With the switch on one shared agent, their three lanes meet a single agent box; with it on an agent each, every lane meets a box of its own, still inside the one computer.</title>
+              <style>
+                .bz-you{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+                .bz-name{fill:currentColor;font-size:12px;font-weight:650;text-anchor:middle}
+                .bz-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
+                .bz-box{fill:none;stroke:var(--line-muted);stroke-width:1.5;stroke-dasharray:5 6}
+                .bz-lane{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+                .bz-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+                .bz-one,.bz-each{transition:opacity .35s ease}
+                .bz-each{opacity:.12}
+              </style>
+              <g class="bz-you"><circle cx="160" cy="34" r="9"/><path d="M142,64 a18,18 0 0 1 36,0"/><circle cx="280" cy="34" r="9"/><path d="M262,64 a18,18 0 0 1 36,0"/><circle cx="400" cy="34" r="9"/><path d="M382,64 a18,18 0 0 1 36,0"/></g>
+              <text class="bz-name" x="160" y="86">Support</text><text class="bz-name" x="280" y="86">Owner</text><text class="bz-name" x="400" y="86">Ops</text>
+              <rect class="bz-box" x="90" y="104" width="380" height="112" rx="14"/><text class="bz-label" x="106" y="124">ONE COMPUTER, ONE PLAN</text>
+              <g class="bz-one">
+                <path class="bz-lane" d="M160,92 L280,152 M280,92 L280,152 M400,92 L280,152"/>
+                <rect class="bz-agent" x="220" y="152" width="120" height="44" rx="12"/><text class="bz-name" x="280" y="179">Your team&rsquo;s agent</text>
+              </g>
+              <g class="bz-each">
+                <path class="bz-lane" d="M160,92 L160,152 M280,92 L280,152 M400,92 L400,152"/>
+                <rect class="bz-agent" x="118" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="160" y="179">Support&rsquo;s</text>
+                <rect class="bz-agent" x="238" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="280" y="179">Owner&rsquo;s</text>
+                <rect class="bz-agent" x="358" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="400" y="179">Ops&rsquo;</text>
+              </g>
+            </svg>
+          </div>
+          <div class="pm-stage pm-stage--mobile">
+            <svg class="explain-svg--mobile" viewBox="0 0 340 230" role="img" aria-labelledby="bzm-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="bzm-t">Three teammates, Support, the owner and Ops, above one computer. With the switch on one shared agent, their three lanes meet a single agent box; with it on an agent each, every lane meets a box of its own, still inside the one computer.</title>
+              <g class="bz-you"><circle cx="66" cy="34" r="9"/><path d="M48,64 a18,18 0 0 1 36,0"/><circle cx="170" cy="34" r="9"/><path d="M152,64 a18,18 0 0 1 36,0"/><circle cx="274" cy="34" r="9"/><path d="M256,64 a18,18 0 0 1 36,0"/></g>
+              <text class="bz-name" x="66" y="86">Support</text><text class="bz-name" x="170" y="86">Owner</text><text class="bz-name" x="274" y="86">Ops</text>
+              <rect class="bz-box" x="14" y="104" width="312" height="112" rx="14"/><text class="bz-label" x="30" y="124">ONE COMPUTER, ONE PLAN</text>
+              <g class="bz-one">
+                <path class="bz-lane" d="M66,92 L170,152 M170,92 L170,152 M274,92 L170,152"/>
+                <rect class="bz-agent" x="110" y="152" width="120" height="44" rx="12"/><text class="bz-name" x="170" y="179">Your team&rsquo;s agent</text>
+              </g>
+              <g class="bz-each">
+                <path class="bz-lane" d="M66,92 L66,152 M170,92 L170,152 M274,92 L274,152"/>
+                <rect class="bz-agent" x="24" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="66" y="179">Support&rsquo;s</text>
+                <rect class="bz-agent" x="128" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="170" y="179">Owner&rsquo;s</text>
+                <rect class="bz-agent" x="232" y="152" width="84" height="44" rx="12"/><text class="bz-name" x="274" y="179">Ops&rsquo;</text>
+              </g>
+            </svg>
+          </div>
+          <figcaption>One shared agent on one computer. Everyone messages it, the owner decides who is in, and each person is answered from their own connected accounts. Flip the switch for an agent each, in the same app.</figcaption>
         </figure>
 
         <div class="pricing-why mt-48 fade-up delay-2">
@@ -418,156 +346,11 @@
         <div class="section-header">
           <span class="section-label fade-up">The other way: an agent per person</span>
           <h2 id="how-heading" class="fade-up delay-1">Or an agent per teammate, all in the same app.</h2>
-          <p>Some teams want a desk per person instead of one shared desk. The same app does that: an agent per teammate, shaped to their role, beside the one everybody shares.</p>
+          <p>Some teams want a desk per person instead of one shared desk. The same app does that: an agent per teammate, shaped to their role, beside the one everybody shares, with room for an agent per department, up to 50. The switch on the drawing above shows it.</p>
         </div>
 
-        <figure class="explain-figure fade-up delay-1" id="biz-fig">
-          <svg class="explain-svg--desktop" viewBox="0 0 640 292" role="img" aria-labelledby="biz-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-            <title id="biz-t">The same three teammates, each now messaging an agent of their own inside one Archie for Business app on one computer. Support&rsquo;s agent handles inbox triage, the owner&rsquo;s agent the follow-ups, and Ops&rsquo; agent the weekly numbers. One plan runs them all, up to 50 agents.</title>
-            <style>
-              /* Archie for Business is slate blue where Archie is ember, and this figure is the
-                 edition's own diagram, so it wears the edition's accent. Every rule below reads
-                 var(--accent); overriding the tokens on the figure recolors both drawings (this
-                 one and the mobile variant) without touching a path. Constants match
-                 .btn-business in styles.css, the same hues the business app and mark use. */
-              #biz-fig{--accent:#7AA1D8;--accent-subtle:#DFE9F6}
-              [data-theme="dark"] #biz-fig{--accent:#93B6E5;--accent-subtle:#2F3B4C}
-              .biz-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.4}
-              .biz-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-              .biz-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .biz-lane{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.3;stroke-linecap:round}
-              .biz-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.6}
-              .biz-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.5}
-              .biz-a{fill:var(--accent)}
-              .biz-stand{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
-              .biz-dot{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .biz-grp{animation:bizIn .7s cubic-bezier(.22,1,.36,1) both}
-                .bz1{animation-delay:.06s}.bz2{animation-delay:.18s}.bz3{animation-delay:.3s}
-                .bz4{animation-delay:.42s}
-                @keyframes bizIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-                /* The shared figure's dots ride offset-path because its outer lanes curve.
-                   These lanes are straight verticals, so translateY is the honest tool. */
-                .biz-dot{animation:bizDown 3.3s ease-in-out infinite}
-                .bd1{animation-delay:.2s}.bd2{animation-delay:1.2s}.bd3{animation-delay:2.2s}
-                @keyframes bizDown{0%{opacity:0;transform:translateY(0)}12%{opacity:1}55%{opacity:1;transform:translateY(64px)}70%,100%{opacity:0;transform:translateY(74px)}}
-              }
-            </style>
-
-            <!-- the same three people as the shared drawing above -->
-            <g class="biz-grp bz1">
-              <rect class="biz-person" x="40" y="10" width="150" height="58" rx="12"/>
-              <text class="biz-name" x="115" y="34">Support</text>
-              <text class="biz-sub" x="115" y="52">&ldquo;who&rsquo;s waiting on us?&rdquo;</text>
-            </g>
-            <g class="biz-grp bz2">
-              <rect class="biz-person" x="245" y="10" width="150" height="58" rx="12"/>
-              <text class="biz-name" x="320" y="34">Owner</text>
-              <text class="biz-sub" x="320" y="52">&ldquo;what&rsquo;s on today?&rdquo;</text>
-            </g>
-            <g class="biz-grp bz3">
-              <rect class="biz-person" x="450" y="10" width="150" height="58" rx="12"/>
-              <text class="biz-name" x="525" y="34">Ops</text>
-              <text class="biz-sub" x="525" y="52">&ldquo;I&rsquo;ll take the Meyer quote&rdquo;</text>
-            </g>
-
-            <!-- parallel lanes: nothing converges, each question lands on its own agent -->
-            <line class="biz-lane" x1="115" y1="68" x2="115" y2="142"/>
-            <line class="biz-lane" x1="320" y1="68" x2="320" y2="142"/>
-            <line class="biz-lane" x1="525" y1="68" x2="525" y2="142"/>
-            <circle class="biz-dot bd1" cx="115" cy="68" r="3"/>
-            <circle class="biz-dot bd2" cx="320" cy="68" r="3"/>
-            <circle class="biz-dot bd3" cx="525" cy="68" r="3"/>
-
-            <!-- one agent each, and every one of them inside the same app -->
-            <g class="biz-grp bz4">
-              <rect class="biz-card" x="32" y="142" width="576" height="132" rx="16"/>
-              <text class="biz-name" x="320" y="164">One Archie for Business</text>
-              <rect class="biz-screen" x="83" y="174" width="64" height="44" rx="6"/>
-              <g class="biz-a" transform="translate(99.64,181.42) scale(0.03)">
-                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-                <polygon points="328,887 512,727 696,887"/>
-              </g>
-              <rect class="biz-screen" x="288" y="174" width="64" height="44" rx="6"/>
-              <g class="biz-a" transform="translate(304.64,181.42) scale(0.03)">
-                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-                <polygon points="328,887 512,727 696,887"/>
-              </g>
-              <rect class="biz-screen" x="493" y="174" width="64" height="44" rx="6"/>
-              <g class="biz-a" transform="translate(509.64,181.42) scale(0.03)">
-                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-                <polygon points="328,887 512,727 696,887"/>
-              </g>
-              <text class="biz-sub" x="115" y="230">Support&rsquo;s agent</text>
-              <text class="biz-sub" x="115" y="244">inbox triage</text>
-              <text class="biz-sub" x="320" y="230">Owner&rsquo;s agent</text>
-              <text class="biz-sub" x="320" y="244">follow-ups</text>
-              <text class="biz-sub" x="525" y="230">Ops&rsquo; agent</text>
-              <text class="biz-sub" x="525" y="244">weekly numbers</text>
-              <text class="biz-sub" x="320" y="262">one computer, one plan, up to 50 agents</text>
-              <path class="biz-stand" d="M320 274 V282 M300 282 H340"/>
-            </g>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 208" role="img" aria-labelledby="bizm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="bizm-t">The same three teammates, each messaging an agent of their own, and all three agents run inside one Archie for Business app on one computer, on one plan.</title>
-            <style>
-              .bizm-person{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.3}
-              .bizm-name{fill:currentColor;font-size:10.5px;font-weight:700;text-anchor:middle}
-              .bizm-lane{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.3;stroke-linecap:round}
-              .bizm-card{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.5}
-              .bizm-screen{fill:var(--accent-subtle);stroke:var(--accent);stroke-width:1.4}
-              .bizm-a{fill:var(--accent)}
-              .bizm-stand{fill:none;stroke:var(--accent);stroke-width:1.6;stroke-linecap:round}
-              .bizm-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .bizm-dot{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .bizm-dot{animation:bizmDown 3.3s ease-in-out infinite}
-                .bdm1{animation-delay:.2s}.bdm2{animation-delay:1.2s}.bdm3{animation-delay:2.2s}
-                @keyframes bizmDown{0%{opacity:0;transform:translateY(0)}12%{opacity:1}55%{opacity:1;transform:translateY(26px)}70%,100%{opacity:0;transform:translateY(32px)}}
-              }
-            </style>
-            <rect class="bizm-person" x="8" y="8" width="100" height="40" rx="10"/>
-            <text class="bizm-name" x="58" y="32">Support</text>
-            <rect class="bizm-person" x="120" y="8" width="100" height="40" rx="10"/>
-            <text class="bizm-name" x="170" y="32">Owner</text>
-            <rect class="bizm-person" x="232" y="8" width="100" height="40" rx="10"/>
-            <text class="bizm-name" x="282" y="32">Ops</text>
-
-            <line class="bizm-lane" x1="58" y1="48" x2="58" y2="80"/>
-            <line class="bizm-lane" x1="170" y1="48" x2="170" y2="80"/>
-            <line class="bizm-lane" x1="282" y1="48" x2="282" y2="80"/>
-            <circle class="bizm-dot bdm1" cx="58" cy="48" r="3"/>
-            <circle class="bizm-dot bdm2" cx="170" cy="48" r="3"/>
-            <circle class="bizm-dot bdm3" cx="282" cy="48" r="3"/>
-
-            <rect class="bizm-card" x="6" y="80" width="328" height="112" rx="14"/>
-            <text class="bizm-name" x="170" y="98">One Archie for Business</text>
-            <rect class="bizm-screen" x="38" y="108" width="40" height="32" rx="5"/>
-            <g class="bizm-a" transform="translate(46.53,113.12) scale(0.0224)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <rect class="bizm-screen" x="150" y="108" width="40" height="32" rx="5"/>
-            <g class="bizm-a" transform="translate(158.53,113.12) scale(0.0224)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <rect class="bizm-screen" x="262" y="108" width="40" height="32" rx="5"/>
-            <g class="bizm-a" transform="translate(270.53,113.12) scale(0.0224)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <text class="bizm-sub" x="58" y="152">Support&rsquo;s</text>
-            <text class="bizm-sub" x="58" y="165">inbox triage</text>
-            <text class="bizm-sub" x="170" y="152">Owner&rsquo;s</text>
-            <text class="bizm-sub" x="170" y="165">follow-ups</text>
-            <text class="bizm-sub" x="282" y="152">Ops&rsquo;</text>
-            <text class="bizm-sub" x="282" y="165">weekly numbers</text>
-            <text class="bizm-sub" x="170" y="181">one computer, one plan, up to 50 agents</text>
-            <path class="bizm-stand" d="M170 192 V198 M160 198 H180"/>
-          </svg>
-          <figcaption>The same three people, the other way: each messages an agent of their own, shaped to their role, all inside the one app on one computer. Room for an agent per department, up to 50.</figcaption>
-        </figure>
+        <!-- The second drawing of the same three people stood here until 2026-09-11. The
+             figure above carries both ways now, on its switch. -->
 
         <div class="feature-grid mt-48">
           <article class="feature-card fade-up delay-1">

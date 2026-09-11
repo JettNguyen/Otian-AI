@@ -14710,8 +14710,12 @@ html[data-theme="dark"] .booking-container iframe {
    with no delay, one keyframe set per segment (hm-seg-0 to 6, keyed by DOM order), so each
    fills during its own nine seconds, stays full until the lap ends, and every bar empties
    together when the cycle starts over. The button's colour lights on the scene's clock the
-   same way the captions do. Pressing one is js/home.js: it puts `is-held` on the stage and
-   `is-on` on the chosen scene, caption, job record and button, and the rules below take over.
+   same way the captions do. Pressing one is js/home.js: it moves every animation on the lap
+   to the start of that scene, so the bar fills over the scene's nine seconds and the cycle
+   carries on from there. Nothing below is needed for that. The HELD rules are the fallback
+   for a browser with no getAnimations, and for reduced motion, where there is no clock to
+   move: there the script puts `is-held` on the stage and `is-on` on the chosen scene,
+   caption, job record and button.
 
    HELD. The lap animations come off everything and the held scene's beats play ONCE from
    their own zero. Each *-held keyframe further down is the entrance slice of the lap keyframe
@@ -14766,22 +14770,25 @@ html[data-theme="dark"] .booking-container iframe {
   background: var(--line-soft);
   overflow: hidden;
 }
-.hm-pick i::after {
-  content: "";
+/* A real element rather than ::after, so that when a button is pressed the script can move
+   its animation with every other one on the clock (getAnimations with subtree does not reach
+   pseudo-elements everywhere). */
+.hm-pick i b {
   position: absolute;
   inset: 0;
+  display: block;
   background: var(--accent);
   transform-origin: left;
   transform: scaleX(0);
   animation: hm-seg-0 var(--hm-lap) linear infinite both;
 }
-.hm-picks .hm-pick:nth-child(1) i::after { animation-name: hm-seg-0; }
-.hm-picks .hm-pick:nth-child(2) i::after { animation-name: hm-seg-1; }
-.hm-picks .hm-pick:nth-child(3) i::after { animation-name: hm-seg-2; }
-.hm-picks .hm-pick:nth-child(4) i::after { animation-name: hm-seg-3; }
-.hm-picks .hm-pick:nth-child(5) i::after { animation-name: hm-seg-4; }
-.hm-picks .hm-pick:nth-child(6) i::after { animation-name: hm-seg-5; }
-.hm-picks .hm-pick:nth-child(7) i::after { animation-name: hm-seg-6; }
+.hm-picks .hm-pick:nth-child(1) i b { animation-name: hm-seg-0; }
+.hm-picks .hm-pick:nth-child(2) i b { animation-name: hm-seg-1; }
+.hm-picks .hm-pick:nth-child(3) i b { animation-name: hm-seg-2; }
+.hm-picks .hm-pick:nth-child(4) i b { animation-name: hm-seg-3; }
+.hm-picks .hm-pick:nth-child(5) i b { animation-name: hm-seg-4; }
+.hm-picks .hm-pick:nth-child(6) i b { animation-name: hm-seg-5; }
+.hm-picks .hm-pick:nth-child(7) i b { animation-name: hm-seg-6; }
 @keyframes hm-seg-0 { 0% { transform: scaleX(0); } 14.2857%, 100% { transform: scaleX(1); } }
 @keyframes hm-seg-1 { 0%, 14.2857% { transform: scaleX(0); } 28.5714%, 100% { transform: scaleX(1); } }
 @keyframes hm-seg-2 { 0%, 28.5714% { transform: scaleX(0); } 42.8571%, 100% { transform: scaleX(1); } }
@@ -14791,8 +14798,8 @@ html[data-theme="dark"] .booking-container iframe {
 @keyframes hm-seg-6 { 0%, 85.7143% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
 .hm-stage.is-held .hm-pick { animation: none; }
 .hm-stage.is-held .hm-pick.is-on { color: var(--accent-ink); }
-.hm-stage.is-held .hm-pick i::after { animation: none; transform: scaleX(0); }
-.hm-stage.is-held .hm-pick.is-on i::after { transform: scaleX(1); }
+.hm-stage.is-held .hm-pick i b { animation: none; transform: scaleX(0); }
+.hm-stage.is-held .hm-pick.is-on i b { transform: scaleX(1); }
 
 .hm-stage.is-held .hm-scene,
 .hm-stage.is-held .hm-cap,
@@ -14876,11 +14883,11 @@ html[data-theme="dark"] .booking-container iframe {
 @media (prefers-reduced-motion: reduce) {
   /* The cycle is already stopped on the first scene by the rules in section 46. Here the
      tabs stop with it, the first one lit, and a held scene arrives whole with no beats. */
-  .hm-pick, .hm-pick i::after { animation: none; }
+  .hm-pick, .hm-pick i b { animation: none; }
   .hm-picks .hm-pick:first-child { color: var(--accent-ink); }
-  .hm-picks .hm-pick:first-child i::after { transform: scaleX(1); }
+  .hm-picks .hm-pick:first-child i b { transform: scaleX(1); }
   .hm-stage.is-held .hm-picks .hm-pick:first-child:not(.is-on) { color: var(--text-secondary); }
-  .hm-stage.is-held .hm-picks .hm-pick:first-child:not(.is-on) i::after { transform: scaleX(0); }
+  .hm-stage.is-held .hm-picks .hm-pick:first-child:not(.is-on) i b { transform: scaleX(0); }
   .hm-stage.is-held .is-on .hm-in,
   .hm-stage.is-held .is-on .hm-fly,
   .hm-stage.is-held .is-on .hm-type,

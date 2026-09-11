@@ -39,22 +39,46 @@
     measure();
   }
 
-  /* The scene picker above the hero phone. The cycle is CSS and stays CSS; this only holds one
-     scene when a tab is pressed. Holding adds `is-held` to the stage and `is-on` to that
-     scene, its caption and its job record, and the stylesheet does the rest: the lap
-     animations stop, the held scene's beats play once from their own start, and the button
-     lights with its bar full. Pressing the lit button, or leaving it alone for twenty seconds,
-     lets the cycle go, and it goes from the top because everything restarts together. The bars
-     fill on their own clock while nothing is held, so this file never has to know where the
-     cycle is. */
+  /* The scene picker above the hero phone. The cycle is CSS and stays CSS; pressing a button
+     moves the clock. Every animation on the lap (the scenes, their beats, the captions, the job
+     records, the picker's bars and lights) has the same 63s duration and a delay derived from
+     its scene, so setting one currentTime on all of them puts them at the same instant: the
+     start of the chosen scene. Its bar then fills over the scene's nine seconds and the cycle
+     carries on from there, the way a phone does when you tap a story.
+
+     The fallback is the older hold: where getAnimations is missing, or under reduced motion,
+     where the animations are off and there is no clock to move, the press puts `is-held` on
+     the stage and `is-on` on the chosen scene, caption, job record and button, and the
+     stylesheet shows that scene whole. Pressing the lit button, or leaving it twenty seconds,
+     lets the page go back to its still first scene. */
   var stage = document.querySelector('.hm-stage');
-  var tabs = stage ? stage.querySelectorAll('.hm-pick[data-scene]') : [];
-  if (stage && tabs.length) {
+  var picks = stage ? stage.querySelectorAll('.hm-pick[data-scene]') : [];
+  if (stage && picks.length) {
+    var cs = getComputedStyle(stage);
+    var hold = (parseFloat(cs.getPropertyValue('--hm-hold')) || 9) * 1000;
+    var count = parseInt(cs.getPropertyValue('--hm-count'), 10) || picks.length;
+    var lap = hold * count;
+
+    /* Read fresh on every press: a scene shown by toggling display gets new animation objects. */
+    function lapAnimations() {
+      if (!stage.getAnimations) return [];
+      return stage.getAnimations({ subtree: true }).filter(function (a) {
+        var t = a.effect && a.effect.getComputedTiming ? a.effect.getComputedTiming() : null;
+        return !!t && Math.abs(t.duration - lap) < 50;
+      });
+    }
+    function jumpTo(i) {
+      var anims = lapAnimations();
+      if (!anims.length) return false;
+      var at = i * hold;
+      for (var k = 0; k < anims.length; k++) anims[k].currentTime = at;
+      return true;
+    }
+
+    /* The fallback hold. */
     var HOLD_MS = 20000;
     var held = -1;
     var release = null;
-
-    /* Everything on the clock, keyed by its --s, so this does not depend on DOM order. */
     function bySceneIndex(selector) {
       var out = {};
       var els = stage.querySelectorAll(selector);
@@ -67,24 +91,21 @@
     var scenes = bySceneIndex('.hm-scene');
     var caps = bySceneIndex('.hm-cap');
     var works = bySceneIndex('.hm-work');
-
     function mark(map, on) {
       for (var k in map) {
         if (Object.prototype.hasOwnProperty.call(map, k)) map[k].classList.toggle('is-on', +k === on);
       }
     }
-    function paintTabs(on) {
-      for (var i = 0; i < tabs.length; i++) {
-        var mine = parseInt(tabs[i].getAttribute('data-scene'), 10) === on;
-        tabs[i].classList.toggle('is-on', mine);
-        tabs[i].setAttribute('aria-pressed', String(mine));
+    function paintPicks(on) {
+      for (var i = 0; i < picks.length; i++) {
+        picks[i].classList.toggle('is-on', parseInt(picks[i].getAttribute('data-scene'), 10) === on);
       }
     }
-    function hold(i) {
+    function holdScene(i) {
       held = i;
       stage.classList.add('is-held');
       mark(scenes, i); mark(caps, i); mark(works, i);
-      paintTabs(i);
+      paintPicks(i);
       clearTimeout(release);
       release = setTimeout(letGo, HOLD_MS);
     }
@@ -93,12 +114,14 @@
       clearTimeout(release);
       stage.classList.remove('is-held');
       mark(scenes, -1); mark(caps, -1); mark(works, -1);
-      paintTabs(-1);
+      paintPicks(-1);
     }
-    for (var t = 0; t < tabs.length; t++) {
-      tabs[t].addEventListener('click', function () {
+
+    for (var t = 0; t < picks.length; t++) {
+      picks[t].addEventListener('click', function () {
         var i = parseInt(this.getAttribute('data-scene'), 10);
-        if (i === held) letGo(); else hold(i);
+        if (held < 0 && jumpTo(i)) return;
+        if (i === held) letGo(); else holdScene(i);
       });
     }
   }

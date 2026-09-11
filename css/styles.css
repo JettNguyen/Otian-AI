@@ -13325,10 +13325,15 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 10px 14px 0;
   border-top: 1px solid var(--border);
 }
-/* Where it lives, sat against the right edge of the bar. `min-width: 0` used to be here,
-   left over from when this held the name and had to be allowed to shrink; on a flex item
-   it let three short words fall onto two lines, so the note is held on one line and kept
-   out of the shrinking. */
+/* Where it lives, sat against the right edge of the bar, on two lines: "on your" over
+   "computer", so the note stays narrow and the bar keeps its shape.
+
+   The break is written into the markup rather than left to the wrapper, and `nowrap` holds
+   everything else on its line, because a measured break is the one thing a wrapping
+   algorithm cannot be told: at this width three words wrapped to two lines on their own,
+   but which two was up to the font. An explicit <br> is always the same two lines.
+   (`min-width: 0` used to be here, left over from when this slot held the name and had to
+   be allowed to shrink.) */
 .hm-pz-who {
   display: grid;
   flex-shrink: 0;

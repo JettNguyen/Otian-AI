@@ -13256,8 +13256,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz-head {
   display: flex;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: space-between;
   gap: 11px;
   /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
      does, while the words stay on the same 26px as the thread below them. */
@@ -13266,27 +13265,19 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid var(--border);
 }
 
-/* The app's own bar, copied in shape: the wordmark sits at the left, where it is the way
-   back out of an agent, and the agent's name sits in the MIDDLE of the bar rather than in
-   the middle of what the wordmark left over. The app centres it the same way and says why
-   (TopBar in src/ui.tsx), so the mark is taken out of the flow instead of padding both
-   corners to match. */
+/* The app's own bar: the Archie lockup at the left, where it is the way back out of an
+   agent, with Ember beside it because he is the face of the agent you are talking to.
+   The word is assets/archie-text.svg, the same drawing the app's ArchieWordmark makes
+   (the arrowhead is the A), so the mark on this page and the mark in the app are one
+   drawing rather than two that drift. */
 .hm-pz-mark {
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 7px;
+  min-width: 0;
 }
-.hm-pz-mark b {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: var(--fs-sm);
-  font-weight: 700;
-  color: var(--accent-ink);
-}
-.hm-pz-face { display: block; width: 24px; height: 24px; flex-shrink: 0; }
+.hm-pz-word { display: block; height: 18px; width: auto; }
+.hm-pz-face { display: block; width: 26px; height: 26px; flex-shrink: 0; }
 
 /* The message bar gets the same hairline as the header, for the same reason and to the same
    edges. Without it the field was one more rounded shape at the bottom of a column of rounded
@@ -13298,11 +13289,8 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 10px 14px 0;
   border-top: 1px solid var(--border);
 }
-.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: center; }
-.hm-pz-who b {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: var(--fs-base); font-weight: 400; color: var(--text-primary);
-}
+/* Where it lives, sat against the right edge of the bar. */
+.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: right; }
 .hm-pz-who i { font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); }
 
 /* The thread dissolves under the header, not off the top of the device. Shorter than the 104px

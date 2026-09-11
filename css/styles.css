@@ -13256,7 +13256,8 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz-head {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  position: relative;
   gap: 11px;
   /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
      does, while the words stay on the same 26px as the thread below them. */
@@ -13265,16 +13266,20 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid var(--border);
 }
 
-/* The app's own bar: the Archie lockup at the left, where it is the way back out of an
-   agent, with Ember beside it because he is the face of the agent you are talking to.
-   The word is assets/archie-text.svg, the same drawing the app's ArchieWordmark makes
-   (the arrowhead is the A), so the mark on this page and the mark in the app are one
-   drawing rather than two that drift. */
+/* Ember and the Archie lockup together, in the middle of the bar: who you are talking to
+   is the thing the header is for, so it sits centred rather than tucked into a corner, and
+   it is centred on the BAR rather than on whatever space the note at the right leaves over.
+   The word is assets/archie-text.svg, the same drawing the app's ArchieWordmark makes (the
+   arrowhead is the A), so the mark here and the mark in the app are one drawing rather than
+   two that drift. */
 .hm-pz-mark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: 7px;
-  min-width: 0;
 }
 .hm-pz-word { display: block; height: 18px; width: auto; }
 .hm-pz-face { display: block; width: 26px; height: 26px; flex-shrink: 0; }

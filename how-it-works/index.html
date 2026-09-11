@@ -577,7 +577,10 @@
                 .kf-dot{display:block;offset-distance:35%}
                 @media (prefers-reduced-motion:no-preference){
                   .kf-dot{animation:kfLap 7s linear infinite}
-                  @keyframes kfLap{from{offset-distance:0%}to{offset-distance:100%}}
+                  .kf-dot--m{animation-name:kfLapM}
+                  /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                  @keyframes kfLap{0%{offset-distance:0%;opacity:1}13.9%{opacity:1}15.4%{opacity:.28}22.2%{opacity:.28}23.6%{opacity:1}26.9%{opacity:1}28.3%{opacity:.28}32.1%{opacity:.28}33.6%{opacity:1}66.4%{opacity:1}67.9%{opacity:.28}71.7%{opacity:.28}73.1%{opacity:1}76.4%{opacity:1}77.8%{opacity:.28}84.6%{opacity:.28}86.1%{opacity:1}100%{offset-distance:100%;opacity:1}}
+                  @keyframes kfLapM{0%{offset-distance:0%;opacity:1}9.3%{opacity:1}11.9%{opacity:.28}22.2%{opacity:.28}24.7%{opacity:1}30.3%{opacity:1}32.8%{opacity:.28}39.8%{opacity:.28}42.3%{opacity:1}57.7%{opacity:1}60.2%{opacity:.28}67.2%{opacity:.28}69.7%{opacity:1}75.3%{opacity:1}77.8%{opacity:.28}88.1%{opacity:.28}90.7%{opacity:1}100%{offset-distance:100%;opacity:1}}
                   .kf-power{animation:kfBreathe 2.4s ease-in-out infinite}
                   @keyframes kfBreathe{0%,100%{opacity:1}50%{opacity:.35}}
                 }
@@ -647,7 +650,7 @@
             <text class="kf-name" x="288" y="196">Your phone</text>
             <text class="kf-sub" x="288" y="211">how you reach it</text>
 
-            <circle class="kf-dot" r="5" style="offset-path:path('M128,128 L170,128 L205,128 L205,80 L229,66 L272,96 L229,66 L205,80 L205,128 L170,128 L128,128')"/>
+            <circle class="kf-dot kf-dot--m" r="5" style="offset-path:path('M128,128 L170,128 L205,128 L205,80 L229,66 L266,92 L229,66 L205,80 L205,128 L170,128 L128,128')"/>
 
             <line class="kf-rule" x1="20" y1="240" x2="320" y2="240"/>
             <text class="kf-tiny" x="170" y="233">not on the list</text>

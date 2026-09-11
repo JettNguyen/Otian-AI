@@ -389,6 +389,9 @@
                   .iv-dot{animation:ivIn 5s linear infinite}
                   .iv-dot--2{animation-delay:-1.7s}.iv-dot--3{animation-delay:-3.4s}
                   @keyframes ivIn{0%{offset-distance:0%;opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                  .iv-d{animation-name:ivInD}
+                  /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                  @keyframes ivInD{0%{offset-distance:0%;opacity:1}56.7%{opacity:1}68.3%{opacity:.28}88%{opacity:.28}100%{offset-distance:100%;opacity:0}}
                 }
               }
             </style>
@@ -399,7 +402,7 @@
             <text class="iv-lab" x="374" y="92">Draft reply, ready</text><path class="iv-ink" d="M374,104h100M374,114h72"/>
             <rect class="iv-send" x="374" y="124" width="46" height="18" rx="9"/><text class="iv-sendtext" x="397" y="136.5">Send</text>
             <text class="iv-sub" x="430" y="170">you read it, you send it</text>
-            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M96,50 L200,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M96,110 L200,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M96,170 L200,110')"/>
+            <circle class="iv-dot iv-d iv-dot--1" r="5" style="offset-path:path('M96,50 L200,110')"/><circle class="iv-dot iv-d iv-dot--2" r="5" style="offset-path:path('M96,110 L200,110')"/><circle class="iv-dot iv-d iv-dot--3" r="5" style="offset-path:path('M96,170 L200,110')"/>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 300" role="img" aria-labelledby="ivm-t" xmlns="http://www.w3.org/2000/svg">
             <title id="ivm-t">Inbox, calendar and follow-ups at the top, three lines down into Archie, and one draft reply below it with a Send button. Dots travel the lines in.</title>

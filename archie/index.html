@@ -248,7 +248,10 @@
                   .ar-dot{display:block;offset-distance:33%}
                   @media (prefers-reduced-motion:no-preference){
                     .ar-dot{animation:arWalk 8s linear infinite}
-                    @keyframes arWalk{0%{offset-distance:0%}28%{offset-distance:33.3%}42%{offset-distance:33.3%}64%{offset-distance:66.6%}78%{offset-distance:66.6%}100%{offset-distance:100%}}
+                    .ar-m{animation-name:arWalkM}
+                    /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                    @keyframes arWalk{0%{offset-distance:0%;opacity:.28}6%{opacity:.28}8.4%{opacity:1}19.6%{opacity:1}22%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}46.7%{opacity:.28}48.6%{opacity:1}57.4%{opacity:1}59.3%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%;opacity:.28}79.9%{opacity:1}100%{offset-distance:100%;opacity:1}}
+                    @keyframes arWalkM{0%{offset-distance:0%;opacity:.28}6.5%{opacity:.28}10.3%{opacity:1}16.8%{opacity:1}20.7%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}49.5%{opacity:.28}52.5%{opacity:1}55.1%{opacity:1}58.1%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%}87.3%{opacity:.28}90.4%{opacity:1}100%{offset-distance:100%;opacity:1}}
                   }
                 }
               </style>
@@ -274,7 +277,7 @@
               <text class="ar-name" x="120" y="128" style="text-anchor:start">Sign it in</text><text class="ar-sub" x="120" y="144" style="text-anchor:start">your mail and calendar</text>
               <text class="ar-name" x="120" y="218" style="text-anchor:start">Message it</text><text class="ar-sub" x="120" y="234" style="text-anchor:start">from anywhere</text>
               <text class="ar-name" x="120" y="298" style="text-anchor:start">You</text><text class="ar-sub" x="120" y="314" style="text-anchor:start">the draft, ready to send</text>
-              <circle class="ar-dot" r="6" style="offset-path:path('M60,40 L60,130 L60,220 L60,300')"/>
+              <circle class="ar-dot ar-m" r="6" style="offset-path:path('M60,40 L60,130 L60,220 L60,300')"/>
             </svg>
             <figcaption>Plug it in: a computer you already have, left on and connected. Sign it in: your mail and calendar, on that computer, and Otian never gets a copy. Message it: from anywhere, it writes the draft and you press send.</figcaption>
           </figure>

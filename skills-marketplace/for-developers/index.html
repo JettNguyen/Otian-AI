@@ -201,7 +201,10 @@
                 .dv-dot{display:block;offset-distance:33%}
                 @media (prefers-reduced-motion:no-preference){
                   .dv-dot{animation:dvWalk 8s linear infinite}
-                  @keyframes dvWalk{0%{offset-distance:0%}22%{offset-distance:33.3%}36%{offset-distance:33.3%}58%{offset-distance:66.6%}72%{offset-distance:66.6%}94%{offset-distance:100%}100%{offset-distance:100%}}
+                  .dv-m{animation-name:dvWalkM}
+                  /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                  @keyframes dvWalk{0%{offset-distance:0%;opacity:.28}1.7%{opacity:.28}3.7%{opacity:1}18.3%{opacity:1}20.3%{opacity:.28}22%{offset-distance:33.3%}36%{offset-distance:33.3%}37.7%{opacity:.28}39.7%{opacity:1}54.3%{opacity:1}56.4%{opacity:.28}58%{offset-distance:66.6%}72%{offset-distance:66.6%}73.7%{opacity:.28}75.8%{opacity:1}90.3%{opacity:1}92.3%{opacity:.28}94%{offset-distance:100%;opacity:.28}100%{offset-distance:100%;opacity:.28}}
+                  @keyframes dvWalkM{0%{offset-distance:0%;opacity:.28}2.5%{opacity:.28}5.6%{opacity:1}16.5%{opacity:1}19.6%{opacity:.28}22%{offset-distance:33.3%}36%{offset-distance:33.3%}38.6%{opacity:.28}41.7%{opacity:1}52.6%{opacity:1}55.7%{opacity:.28}58%{offset-distance:66.6%}72%{offset-distance:66.6%}74.7%{opacity:.28}77.8%{opacity:1}88.4%{opacity:1}91.5%{opacity:.28}94%{offset-distance:100%;opacity:.28}100%{offset-distance:100%;opacity:.28}}
                 }
               }
             </style>
@@ -227,7 +230,7 @@
             <text class="dv-name" x="70" y="124" style="text-anchor:start">We review it</text><text class="dv-sub" x="70" y="140" style="text-anchor:start">works as described, safe to run</text>
             <text class="dv-name" x="70" y="211" style="text-anchor:start">Listed, under your name</text><text class="dv-sub" x="70" y="227" style="text-anchor:start">in the marketplace</text>
             <text class="dv-name" x="70" y="297" style="text-anchor:start">Included with Archie</text><text class="dv-sub" x="70" y="313" style="text-anchor:start">on the website and in the app</text>
-            <circle class="dv-dot" r="6" style="offset-path:path('M40,40 L40,127 L40,214 L40,300')"/>
+            <circle class="dv-dot dv-m" r="6" style="offset-path:path('M40,40 L40,127 L40,214 L40,300')"/>
           </svg>
           <figcaption>You build and submit; we review it, list it under your name, and it is included with Archie for everyone, on the website and inside Archie.</figcaption>
         </figure>

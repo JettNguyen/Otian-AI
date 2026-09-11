@@ -188,6 +188,9 @@
                 @media (prefers-reduced-motion:no-preference){
                   .ai-dot{animation:aiRing 9s linear infinite}
                   @keyframes aiRing{from{offset-distance:0%}to{offset-distance:100%}}
+                  .ai-d{animation-name:aiRingD}
+                  /* the dot dims while its centre is inside a step, so it reads as passing through rather than over */
+                  @keyframes aiRingD{0%{offset-distance:0%;opacity:.28}7.6%{opacity:.28}9.3%{opacity:1}17.2%{opacity:1}18.9%{opacity:.28}22.5%{opacity:.28}24.1%{opacity:1}33.8%{opacity:1}35.5%{opacity:.28}45.5%{opacity:.28}47.2%{opacity:1}52.8%{opacity:1}54.5%{opacity:.28}64.5%{opacity:.28}66.2%{opacity:1}75.9%{opacity:1}77.5%{opacity:.28}81.1%{opacity:.28}82.8%{opacity:1}90.8%{opacity:1}92.5%{opacity:.28}100%{offset-distance:100%;opacity:.28}}
                 }
               }
             </style>
@@ -198,7 +201,7 @@
             <rect class="ai-stop" x="162" y="202" width="124" height="34" rx="17"/><text class="ai-name" x="224" y="224">4 &middot; It can pause for your OK</text><text class="ai-term" x="224" y="252">human-in-the-loop</text>
             <rect class="ai-stop" x="114" y="96" width="124" height="34" rx="17"/><text class="ai-name" x="176" y="118">5 &middot; It does the job</text><text class="ai-term" x="176" y="146">in your tools</text>
             <text class="ai-n" x="300" y="152">the result comes back to you</text>
-            <circle class="ai-dot" r="6" style="offset-path:path('M300,47 A130,95 0 1 1 299.9,47')"/>
+            <circle class="ai-dot ai-d" r="6" style="offset-path:path('M300,47 A130,95 0 1 1 299.9,47')"/>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 360" role="img" aria-labelledby="aim-t" xmlns="http://www.w3.org/2000/svg">
             <title id="aim-t">How an AI agent works, in five steps around a ring. One: you ask, and that request is the prompt. Two: it reads what it knows, which is its context window. Three: it works out what to do, using the model. Four: it can pause for your OK, a human-in-the-loop checkpoint. Five: it does the job in your tools. Then the result comes back to you, at the top of the ring.</title>

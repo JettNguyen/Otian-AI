@@ -349,7 +349,13 @@
                   .pm-dot{display:block;offset-distance:30%}
                   @media (prefers-reduced-motion:no-preference){
                     .pm-dot{animation:pmLap 6s linear infinite}
+                    .pm-dot.pm-proxy{animation-name:pmLapP}
+                    .pm-dot.pm-proxy.pm-dot--m{animation-name:pmLapPM}
                     @keyframes pmLap{from{offset-distance:0%}to{offset-distance:100%}}
+                    /* the dot through us dims while it is inside the billing box, so it reads as passing through rather than over.
+                       It rides on fill-opacity because the switch above owns opacity. */
+                    @keyframes pmLapP{0%{fill-opacity:1;offset-distance:0%}18.4%{fill-opacity:1}20.8%{fill-opacity:.28}39.7%{fill-opacity:.28}42.1%{fill-opacity:1}57.9%{fill-opacity:1}60.3%{fill-opacity:.28}79.2%{fill-opacity:.28}81.6%{fill-opacity:1}100%{fill-opacity:1;offset-distance:100%}}
+                    @keyframes pmLapPM{0%{fill-opacity:1;offset-distance:0%}19.3%{fill-opacity:1}22.4%{fill-opacity:.28}34.2%{fill-opacity:.28}37.3%{fill-opacity:1}62.7%{fill-opacity:1}65.8%{fill-opacity:.28}77.6%{fill-opacity:.28}80.7%{fill-opacity:1}100%{fill-opacity:1;offset-distance:100%}}
                   }
                 }
               </style>
@@ -462,7 +468,7 @@
               </g>
 
               <circle class="pm-dot pm-direct" r="5.5" style="offset-path:path('M170,196 L170,68 L170,196')"/>
-              <circle class="pm-dot pm-proxy" r="5.5" style="offset-path:path('M150,196 L92,152 L92,100 L130,68 L92,100 L92,152 L150,196')"/>
+              <circle class="pm-dot pm-proxy pm-dot--m" r="5.5" style="offset-path:path('M150,196 L92,152 L92,100 L130,68 L92,100 L92,152 L150,196')"/>
             </svg>
           </div>
           <figcaption id="packetMapCaption">Every host Archie talks to, drawn where the table below lists it. On your own AI account, the only lines that carry your words go to your AI company and to the accounts you connected.</figcaption>

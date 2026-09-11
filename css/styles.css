@@ -14985,6 +14985,14 @@ html[data-theme="dark"] .booking-container iframe {
   .chapter { padding: 16px; }
 }
 
+/* ── The kit, drawn (equipment/) ──
+   The drawing's classes and states live in its SVG's <style>. Here: where it sits. Under
+   "The short answer" it is the untailored kit; inside the kit panel it is the same figure
+   cloned by js/equipment.js with the reader's answers on it, and the cards follow it. */
+.kit-figure { max-width: 600px; margin: 0 auto 28px; }
+.kit-figure figcaption { margin-bottom: 0; }
+.kit-panel .kit-figure { margin-bottom: 32px; }
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

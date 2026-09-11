@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-16" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-17" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -222,12 +222,125 @@
           <p>The picker above tailors this. Here it is untailored, which is right for most people.</p>
         </div>
 
+        <!-- The kit, drawn. Three attributes on the figure pick what is shown (data-machine:
+             mini, desktop or laptop; data-net: wired or wifi; data-platform: mac or windows),
+             and the SVG's own style block answers them, so js/equipment.js can clone this
+             figure into the kit and set three attributes rather than draw anything. No ids
+             inside, on purpose: the clone would duplicate them. -->
+        <figure class="explain-figure kit-figure fade-up delay-2" data-machine="mini" data-net="wired" data-platform="mac">
+          <svg class="explain-svg--desktop" viewBox="0 0 560 300" role="img" aria-label="The kit: a computer that stays awake, wired to the router or on Wi-Fi, reaching the internet, and your phone reaching your agent from anywhere. Under a line, crossed off: a graphics card, a server, a second monitor, a static address." xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <style>
+              .kf-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .kf-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .kf-tiny{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
+              .kf-body{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+              .kf-box{fill:var(--bg-card);stroke:currentColor;stroke-width:1.5;opacity:.85}
+              .kf-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .kf-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .kf-wire--dashed{stroke-dasharray:4 5}
+              .kf-arc{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
+              .kf-badge{fill:var(--c-blue-subtle);stroke:var(--c-blue);stroke-width:1}
+              .kf-badgetext{fill:var(--c-blue-ink);font-size:10.5px;font-weight:650;text-anchor:middle}
+              .kf-power{fill:var(--c-green)}
+              .kf-rule{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:3 5}
+              .kf-no{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1}
+              .kf-notext{fill:currentColor;opacity:.55;font-size:10.5px;text-anchor:middle}
+              .kf-strike{stroke:currentColor;stroke-width:1.4;opacity:.55;stroke-linecap:round}
+              .kf-m,.kf-net{display:none}
+              .kit-figure[data-machine="mini"] .kf-m--mini,
+              .kit-figure[data-machine="desktop"] .kf-m--desktop,
+              .kit-figure[data-machine="laptop"] .kf-m--laptop,
+              .kit-figure[data-net="wired"] .kf-net--wired,
+              .kit-figure[data-net="wifi"] .kf-net--wifi{display:block}
+              .kf-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .kf-dot{display:block;offset-distance:35%}
+                @media (prefers-reduced-motion:no-preference){
+                  .kf-dot{animation:kfLap 7s linear infinite}
+                  @keyframes kfLap{from{offset-distance:0%}to{offset-distance:100%}}
+                  .kf-power{animation:kfBreathe 2.4s ease-in-out infinite}
+                  @keyframes kfBreathe{0%,100%{opacity:1}50%{opacity:.35}}
+                }
+              }
+            </style>
+
+            <!-- the computer: one of three bodies -->
+            <g class="kf-m kf-m--mini"><rect class="kf-body" x="54" y="112" width="92" height="40" rx="9"/><circle class="kf-power" cx="132" cy="132" r="2.5"/></g>
+            <g class="kf-m kf-m--desktop"><rect class="kf-body" x="72" y="46" width="56" height="106" rx="6"/><line class="kf-line" x1="84" y1="64" x2="116" y2="64"/><line class="kf-line" x1="84" y1="74" x2="116" y2="74"/><circle class="kf-power" cx="100" cy="140" r="2.5"/></g>
+            <g class="kf-m kf-m--laptop"><rect class="kf-body" x="60" y="82" width="80" height="54" rx="4"/><path class="kf-body" d="M48,136 h104 l8,14 h-120 z"/><circle class="kf-power" cx="100" cy="143" r="2"/></g>
+            <text class="kf-name kf-machine" x="100" y="176">Your computer</text>
+            <text class="kf-sub kf-os" x="100" y="191">macOS 12 Monterey or later</text>
+            <rect class="kf-badge" x="52" y="202" width="96" height="20" rx="10"/><text class="kf-badgetext" x="100" y="215.5">sleep: never</text>
+
+            <!-- the link to the router: a cable, or Wi-Fi -->
+            <g class="kf-net kf-net--wired"><line class="kf-wire" x1="150" y1="132" x2="250" y2="132"/><text class="kf-tiny" x="200" y="124">a cable</text></g>
+            <g class="kf-net kf-net--wifi"><path class="kf-arc" d="M186,140 a20,20 0 0 1 28,0"/><path class="kf-arc" d="M179,131 a30,30 0 0 1 42,0"/><path class="kf-arc" d="M172,122 a40,40 0 0 1 56,0"/><text class="kf-tiny" x="200" y="158">Wi-Fi</text></g>
+
+            <!-- the router, and the internet above it -->
+            <rect class="kf-box" x="250" y="116" width="80" height="32" rx="6"/>
+            <line class="kf-line" x1="262" y1="116" x2="262" y2="100"/><line class="kf-line" x1="318" y1="116" x2="318" y2="100"/>
+            <text class="kf-name" x="290" y="176">Router</text>
+            <path class="kf-box" d="M266,66 a13,13 0 0 1 25,-9 a12,12 0 0 1 22,7 a10,10 0 0 1 -2,20 h-44 a10,10 0 0 1 -1,-18 z"/>
+            <text class="kf-tiny" x="290" y="46">the internet</text>
+            <line class="kf-wire" x1="290" y1="116" x2="290" y2="84"/>
+
+            <!-- your phone, anywhere -->
+            <path class="kf-wire kf-wire--dashed" d="M314,70 L436,96"/>
+            <rect class="kf-box" x="436" y="66" width="48" height="90" rx="8"/>
+            <rect class="kf-body" x="446" y="92" width="30" height="16" rx="6"/>
+            <text class="kf-name" x="460" y="176">Your phone</text>
+            <text class="kf-sub" x="460" y="191">how you reach it</text>
+
+            <!-- the reply, travelling -->
+            <circle class="kf-dot" r="5" style="offset-path:path('M150,132 L250,132 L290,132 L290,84 L314,70 L436,96 L314,70 L290,84 L290,132 L250,132 L150,132')"/>
+
+            <!-- under the line: what people expect to need and do not -->
+            <line class="kf-rule" x1="30" y1="240" x2="530" y2="240"/>
+            <text class="kf-tiny" x="280" y="233">not on the list</text>
+            <rect class="kf-no" x="30" y="254" width="104" height="22" rx="11"/><text class="kf-notext" x="82" y="268.5">a graphics card</text><line class="kf-strike" x1="44" y1="265" x2="120" y2="265"/>
+            <rect class="kf-no" x="146" y="254" width="70" height="22" rx="11"/><text class="kf-notext" x="181" y="268.5">a server</text><line class="kf-strike" x1="158" y1="265" x2="204" y2="265"/>
+            <rect class="kf-no" x="228" y="254" width="116" height="22" rx="11"/><text class="kf-notext" x="286" y="268.5">a second monitor</text><line class="kf-strike" x1="242" y1="265" x2="330" y2="265"/>
+            <rect class="kf-no" x="356" y="254" width="112" height="22" rx="11"/><text class="kf-notext" x="412" y="268.5">a static address</text><line class="kf-strike" x1="370" y1="265" x2="454" y2="265"/>
+          </svg>
+
+          <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-label="The kit: a computer that stays awake, wired to the router or on Wi-Fi, reaching the internet, and your phone reaching your agent from anywhere. Under a line, crossed off: a graphics card, a server, a second monitor, a static address." xmlns="http://www.w3.org/2000/svg">
+            <g class="kf-m kf-m--mini"><rect class="kf-body" x="32" y="108" width="92" height="40" rx="9"/><circle class="kf-power" cx="110" cy="128" r="2.5"/></g>
+            <g class="kf-m kf-m--desktop"><rect class="kf-body" x="50" y="42" width="56" height="106" rx="6"/><line class="kf-line" x1="62" y1="60" x2="94" y2="60"/><line class="kf-line" x1="62" y1="70" x2="94" y2="70"/><circle class="kf-power" cx="78" cy="136" r="2.5"/></g>
+            <g class="kf-m kf-m--laptop"><rect class="kf-body" x="38" y="78" width="80" height="54" rx="4"/><path class="kf-body" d="M26,132 h104 l8,14 h-120 z"/><circle class="kf-power" cx="78" cy="139" r="2"/></g>
+            <text class="kf-name kf-machine" x="78" y="172">Your computer</text>
+            <text class="kf-sub kf-os" x="78" y="187">macOS 12 Monterey or later</text>
+            <rect class="kf-badge" x="30" y="198" width="96" height="20" rx="10"/><text class="kf-badgetext" x="78" y="211.5">sleep: never</text>
+
+            <g class="kf-net kf-net--wired"><line class="kf-wire" x1="128" y1="128" x2="170" y2="128"/><text class="kf-tiny" x="149" y="120">a cable</text></g>
+            <g class="kf-net kf-net--wifi"><path class="kf-arc" d="M139,136 a14,14 0 0 1 20,0"/><path class="kf-arc" d="M133,128 a22,22 0 0 1 32,0"/><text class="kf-tiny" x="149" y="152">Wi-Fi</text></g>
+
+            <rect class="kf-box" x="170" y="112" width="70" height="32" rx="6"/>
+            <line class="kf-line" x1="182" y1="112" x2="182" y2="96"/><line class="kf-line" x1="228" y1="112" x2="228" y2="96"/>
+            <text class="kf-name" x="205" y="172">Router</text>
+            <path class="kf-box" d="M181,62 a13,13 0 0 1 25,-9 a12,12 0 0 1 22,7 a10,10 0 0 1 -2,20 h-44 a10,10 0 0 1 -1,-18 z"/>
+            <text class="kf-tiny" x="205" y="42">the internet</text>
+            <line class="kf-wire" x1="205" y1="112" x2="205" y2="80"/>
+
+            <path class="kf-wire kf-wire--dashed" d="M229,66 L272,96"/>
+            <rect class="kf-box" x="266" y="92" width="44" height="82" rx="8"/>
+            <rect class="kf-body" x="275" y="116" width="26" height="14" rx="6"/>
+            <text class="kf-name" x="288" y="196">Your phone</text>
+            <text class="kf-sub" x="288" y="211">how you reach it</text>
+
+            <circle class="kf-dot" r="5" style="offset-path:path('M128,128 L170,128 L205,128 L205,80 L229,66 L272,96 L229,66 L205,80 L205,128 L170,128 L128,128')"/>
+
+            <line class="kf-rule" x1="20" y1="240" x2="320" y2="240"/>
+            <text class="kf-tiny" x="170" y="233">not on the list</text>
+            <rect class="kf-no" x="20" y="254" width="104" height="22" rx="11"/><text class="kf-notext" x="72" y="268.5">a graphics card</text><line class="kf-strike" x1="34" y1="265" x2="110" y2="265"/>
+            <rect class="kf-no" x="134" y="254" width="70" height="22" rx="11"/><text class="kf-notext" x="169" y="268.5">a server</text><line class="kf-strike" x1="146" y1="265" x2="192" y2="265"/>
+            <rect class="kf-no" x="20" y="286" width="116" height="22" rx="11"/><text class="kf-notext" x="78" y="300.5">a second monitor</text><line class="kf-strike" x1="34" y1="297" x2="122" y2="297"/>
+            <rect class="kf-no" x="146" y="286" width="112" height="22" rx="11"/><text class="kf-notext" x="202" y="300.5">a static address</text><line class="kf-strike" x1="160" y1="297" x2="244" y2="297"/>
+          </svg>
+          <figcaption>The whole kit: a computer that stays awake, a cable to the router if you can, and the phone you already have. Everything under the line is something people expect to need and do not.</figcaption>
+        </figure>
+
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Use the computer you already have.</strong> The only real requirement is one you do not mind leaving powered on, awake and connected, because your agent can only answer while Archie is running.</p>
-
-          <p><strong>If you are buying, buy a small desktop.</strong> A Mac mini is the easy answer and the one we would buy ourselves. A small Windows desktop does the same job. What matters is that you can leave it on, not that it is fast.</p>
-
-          <p><strong>Wire it to the router if you can</strong>, and add an AI account and a plan, neither of which is hardware. <a href="../how-it-works/#what-you-need">The whole list</a> sits with the setup steps.</p>
+          <p><strong>Use the computer you already have</strong>, if you do not mind leaving it on, awake and connected: your agent can only answer while Archie is running. <strong>If you are buying, buy a small desktop.</strong> A Mac mini is the one we would buy ourselves; a small Windows desktop does the same job, and what matters is that you can leave it on, not that it is fast. The rest is an AI account and a plan, neither of which is hardware: <a href="../how-it-works/#what-you-need">the whole list</a> sits with the setup steps.</p>
         </div>
       </div>
     </section>

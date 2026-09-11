@@ -538,6 +538,39 @@
     };
   }
 
+  /* The kit, drawn from the answers. The figure lives in the page under "The short answer"
+     (untailored: a Mac mini on a cable) and is cloned here with three attributes set, which
+     is all its SVG needs to show a different body, a cable or Wi-Fi, and the right system
+     line. Nothing is drawn in this file. */
+  function kitFigure() {
+    var src = document.querySelector('.kit-figure');
+    if (!src) return '';
+    var fig = src.cloneNode(true);
+    fig.classList.remove('fade-up', 'delay-2');
+    var m = answers.machine;
+    var p = platformOf();
+    var machine = m === 'desktop' ? 'desktop' : (m === 'laptop-spare' || m === 'laptop-daily') ? 'laptop' : 'mini';
+    fig.setAttribute('data-machine', machine);
+    fig.setAttribute('data-net', answers.place === 'elsewhere' ? 'wifi' : 'wired');
+    fig.setAttribute('data-platform', p);
+    var name = m === 'desktop' ? 'The desktop you have'
+      : m === 'laptop-spare' ? 'That laptop, plugged in'
+      : m === 'laptop-daily' ? 'Your laptop, while it is open'
+      : p === 'mac' ? 'A Mac mini' : 'A small Windows desktop';
+    var os = p === 'mac' ? 'macOS 12 Monterey or later' : 'Windows 10 or 11, 64-bit';
+    var names = fig.querySelectorAll('.kf-machine');
+    for (var i = 0; i < names.length; i++) names[i].textContent = name;
+    var oses = fig.querySelectorAll('.kf-os');
+    for (var j = 0; j < oses.length; j++) oses[j].textContent = os;
+    var cap = fig.querySelector('figcaption');
+    if (cap) {
+      cap.textContent = answers.place === 'elsewhere'
+        ? 'Drawn from your answers: on Wi-Fi where it sits, so put it where the signal is good. Change an answer above and it redraws.'
+        : 'Drawn from your answers. Change one above and it redraws.';
+    }
+    return fig.outerHTML;
+  }
+
   function showKit() {
     var cards = [computerCard(), awakeCard(), networkCard(), extrasCard(), catchCard(), costCard()];
     var html = '<div class="container container-narrow">' +
@@ -545,7 +578,7 @@
       '<span class="section-label">Your kit</span>' +
       '<h2>Here is what we would set up.</h2>' +
       '<p>Written for your answers. Change one above and this rewrites itself.</p>' +
-      '</div><div class="kit-cards">';
+      '</div>' + kitFigure() + '<div class="kit-cards">';
 
     cards.forEach(function (c) {
       if (!c) return;

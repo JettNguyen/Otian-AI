@@ -4448,11 +4448,43 @@ fieldset .checkbox-group {
   margin: 0 auto;
 }
 
-/* The bio paragraph reads as body copy, not as a caption. Everything above it in the card
+/* The bio reads as body copy, not as a caption. Everything above it in the card
    (avatar, name, role, LinkedIn) keeps the centred treatment .team-card sets. */
 .team-card > p:not(.team-role) {
   text-align: left;
   margin-top: 18px;
+}
+
+/* A founder bio is a lead sentence, the specifics as a list, then the background line.
+   The list is what makes it scannable: four things somebody owns, read in four glances
+   rather than mined out of one paragraph. Deliberately a quiet dot and not the ticked
+   circle .two-col-card-list uses, because a tick reads as a feature we are selling and
+   these are responsibilities. */
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+  margin-top: 14px;
+}
+
+.team-list li {
+  position: relative;
+  padding-left: 18px;
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.team-list li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .team-card {

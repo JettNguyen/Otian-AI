@@ -11573,24 +11573,46 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom-right-radius: 0; border-bottom-left-radius: 12px;
 }
 /* A card's buttons, drawn the way the app draws them (InlineActions in the Archie Mobile
-   repo's src/ui.tsx): not three separate pills but one bordered box split by hairlines,
-   the labels in the accent, and the word for backing out in muted ink. Nothing is filled
-   until it has been pressed, so the phone on this page reads as the app rather than as a
-   web page's idea of it. Flex rather than a three-column grid because two of the seven
-   scenes offer two buttons, and an empty third cell inside a box is a hole. */
+   repo's src/ui.tsx): not three separate pills but ONE box split by soft dividers, the
+   labels in the accent, and the word for backing out in muted ink. Nothing is filled until
+   it has been pressed.
+
+   No outline, deliberately, even though the app's own box carries a hairline. A hairline
+   there is half a pixel; a 1px border here was the only drawn edge anywhere on this phone,
+   because every bubble above it is a shadow on a fill rather than an outlined box, so it
+   read as a form control that had wandered into a chat. Same fill and same shadow as
+   .hm-bubble, which is how the app's card reads at the size it is actually seen.
+
+   Flex rather than a three-column grid because two of the seven scenes offer two buttons,
+   and an empty third cell inside a box is a hole. The dividers are --line-soft, which is
+   the token matching the lineSoft the app splits its own cells with. */
 .hm-msg-btns {
-  display: flex; width: 100%; max-width: 340px;
-  border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; background: var(--bg-card);
+  display: flex;
+  width: 100%;
+  /* The same ceiling as .hm-bubble, so the buttons line up with the card they belong to
+     instead of running wider than it. */
+  max-width: 264px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xs);
 }
 .hm-msg-btn {
-  flex: 1; text-align: center; font-size: var(--fs-xs); font-weight: 600;
-  padding: 10px 0; border: 0; border-left: 1px solid var(--border);
-  color: var(--accent-ink); background: transparent;
+  flex: 1;
+  text-align: center;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  padding: 12px 0;
+  border: 0;
+  border-left: 1px solid var(--line-soft);
+  color: var(--accent-ink);
+  background: transparent;
 }
 .hm-msg-btn:first-child { border-left: 0; }
 /* Whatever the last one says, it is the way out of the card, and the app greys it. */
 .hm-msg-btn:last-child { color: var(--text-muted); }
+/* --accent-ink rather than the app's --accent: the same colour by role, at the contrast a
+   label on a pale card needs. In the dark theme the two tokens are the same value. */
 .hm-msg-btn--go { background: transparent; color: var(--accent-ink); }
 .hm-mini-label { font-size: var(--fs-2xs); font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
 .hm-mini-quote { color: var(--text-primary); margin: 0; }
@@ -13256,7 +13278,7 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz-head {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   position: relative;
   gap: 11px;
   /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
@@ -13266,22 +13288,31 @@ html[data-theme="dark"] .booking-container iframe {
   border-bottom: 1px solid var(--border);
 }
 
-/* Ember and the Archie lockup together, in the middle of the bar: who you are talking to
-   is the thing the header is for, so it sits centred rather than tucked into a corner, and
-   it is centred on the BAR rather than on whatever space the note at the right leaves over.
-   The word is assets/archie-text.svg, the same drawing the app's ArchieWordmark makes (the
-   arrowhead is the A), so the mark here and the mark in the app are one drawing rather than
-   two that drift. */
-.hm-pz-mark {
+/* The app's own bar, in three parts. The Archie lockup sits at the left, where in the app
+   it is the way back out of an agent (assets/archie-text.svg, the same drawing the app's
+   ArchieWordmark makes, where the arrowhead is the A). The agent you are actually talking
+   to sits in the middle: Ember, who is its face, and its name. Where it runs sits at the
+   right.
+
+   The middle is centred on the BAR rather than on whatever the two ends leave over, the
+   way the app centres its own title and for the reason it gives (TopBar in src/ui.tsx):
+   otherwise the name slides sideways whenever either end changes length. */
+.hm-pz-word { display: block; height: 18px; width: auto; flex-shrink: 0; }
+.hm-pz-agent {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
 }
-.hm-pz-word { display: block; height: 18px; width: auto; }
+.hm-pz-agent b {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-base);
+  font-weight: 400;
+  color: var(--text-primary);
+}
 .hm-pz-face { display: block; width: 26px; height: 26px; flex-shrink: 0; }
 
 /* The message bar gets the same hairline as the header, for the same reason and to the same

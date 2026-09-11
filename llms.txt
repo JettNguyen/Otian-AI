@@ -30,7 +30,6 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Archie: AI Agents on Your Own Computer](https://otianai.com/archie/): Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit.
 - [Archie Pricing](https://otianai.com/archie/pricing/): What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), every add-on included, and pay-as-you-go AI billed straight to your own account with...
-- [See Archie Work](https://otianai.com/archie/see-it-work/): 2 silent recordings: building a personal AI agent in Archie from scratch, and living with one: a morning briefing arriving over Telegram, unprompted.
 - [What to Run It On](https://otianai.com/equipment/): Which computer to run your AI agent on, answered for your situation: the one you already own, or the small desktop to buy if you don't. Plus the parts people expect to need and don't.
 
 ## Who it is for

@@ -56,7 +56,19 @@ BUDGETS = {
     # steps themselves, and they are the page's most concrete words.
     "index.html": 1280,
     # How It Works is a procedure. A reader following along needs every step.
-    "how-it-works/index.html": 1400,
+    # Raised 2026-09-11 from 1400, because the page absorbed archie/see-it-work/
+    # rather than growing: that page was a second explanation of the same journey
+    # with better evidence, and a reader had to find both to get either. This is a
+    # net cut, not an addition. The two pages ran 1,896 words against 2,300 of
+    # combined budget; merged and de-duplicated they run 1,695. What came off was
+    # restatement, every word of it: the parts defined once in the diagram instead
+    # of again in the setup steps, one of the two "Archie is in testing" lines, the
+    # computer answered in the requirements instead of again in step one, and the
+    # custody sentence that the moving-parts section already makes in full. What
+    # came on is two silent recordings and the file-formats section, which is the
+    # only place the site says what the agent actually hands you.
+    # Back at its ceiling on purpose: a paragraph added here still has to cut one.
+    "how-it-works/index.html": 1700,
     # Pricing prints every measured cost with its source, and a cut there reads
     # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
     # reason this page is allowed to grow: the repricing found a third place an

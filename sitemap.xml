@@ -26,17 +26,12 @@
   </url>
   <url>
     <loc>https://otianai.com/archie/mobile/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://otianai.com/archie/pricing/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://otianai.com/archie/see-it-work/</loc>
+    <loc>https://otianai.com/archie/pricing/</loc>
     <lastmod>2026-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

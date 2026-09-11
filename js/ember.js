@@ -226,12 +226,7 @@
     }
   }
 
-  function actOnce(rig) {
-    if (REDUCED || rig.acting || rig.state !== "idle") return;
-    var i = Math.floor(Math.random() * ACTS.length);
-    if (i === rig.lastAct) i = (i + 1 + Math.floor(Math.random() * (ACTS.length - 1))) % ACTS.length;
-    rig.lastAct = i;
-    var act = ACTS[i];
+  function runAct(rig, act) {
     rig.acting = true;
     rig.svg.classList.add(act.cls);
     sparks(rig.host, act.sparks);
@@ -239,6 +234,29 @@
       rig.svg.classList.remove(act.cls);
       rig.acting = false;
     }, act.ms);
+  }
+
+  function actOnce(rig) {
+    if (REDUCED || rig.acting || rig.state !== "idle") return;
+    var i = Math.floor(Math.random() * ACTS.length);
+    if (i === rig.lastAct) i = (i + 1 + Math.floor(Math.random() * (ACTS.length - 1))) % ACTS.length;
+    rig.lastAct = i;
+    runAct(rig, ACTS[i]);
+  }
+
+  /* A named act on one Ember, for a page that has a moment to mark: the living-agent figure
+     has him hop when the message is let through the gate. Same table as the click, so a hop
+     asked for here is the same hop, sparks and all. Silent under reduced motion and while he is
+     already doing something, like the click is. */
+  function actNamed(host, name) {
+    if (REDUCED) return;
+    for (var i = 0; i < rigs.length; i++) {
+      var rig = rigs[i];
+      if (rig.host !== host || rig.acting || rig.state !== "idle") continue;
+      for (var j = 0; j < ACTS.length; j++) {
+        if (ACTS[j].cls === "st-act-" + name) { runAct(rig, ACTS[j]); return; }
+      }
+    }
   }
 
   function onMove(e) {
@@ -472,7 +490,7 @@
   }
 
   window.Ember = {
-    mount: mount, auto: auto, react: react,
+    mount: mount, auto: auto, react: react, act: actNamed,
     lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor
   };
 

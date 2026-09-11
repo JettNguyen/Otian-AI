@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-9" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-10" />
   <style>
     /* The requirement cards, moved here with the section from /what-you-need/ on
        2026-08-20. Page-scoped, as they were there: one page uses them. */
@@ -89,145 +89,6 @@
       .need-item {
         padding: 28px 24px;
       }
-    }
-  </style>
-  <style>
-    /* ── Page-scoped: the "What Archie is" anatomy figure ──────────────
-       One picture: you message your agent; it runs on your computer,
-       built from parts, and reaches out to an AI model on your own
-       account plus your apps. Reflows to a single column and never
-       scrolls sideways. Part colours mirror the Archie app's add-on
-       types: Skills = brand accent, Routines = teal, Personality = plum;
-       Knowledge Base and Connections stay neutral because they aren't
-       add-on kinds. */
-    .anat {
-      max-width: 760px;
-      margin: 48px auto 0;
-      display: flex;
-      flex-direction: column;
-    }
-    .anat-you {
-      align-self: center;
-      text-align: center;
-      max-width: 440px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 26px;
-      box-shadow: var(--shadow-sm);
-    }
-    .anat-you strong { display: block; font-size: var(--fs-xl); }
-    .anat-node-kind {
-      display: block;
-      font-size: var(--fs-xs);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .anat-node-sub { display: block; color: var(--text-secondary); font-size: var(--fs-base); margin-top: 3px; }
-
-    .anat-link {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 46px;
-      position: relative;
-    }
-    .anat-link::before {
-      content: "";
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 2px;
-      background: repeating-linear-gradient(var(--line-muted) 0 5px, transparent 5px 10px);
-    }
-    .anat-link-label {
-      position: relative;
-      font-size: var(--fs-2xs);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      background: var(--bg-secondary);
-      padding: 3px 10px;
-    }
-
-    .anat-computer {
-      position: relative;
-      border: 1.5px dashed var(--dashed-border);
-      border-radius: 16px;
-      background: var(--surface-soft);
-      padding: 30px 18px 20px;
-    }
-    .anat-computer-label {
-      position: absolute;
-      top: 0; left: 22px;
-      transform: translateY(-50%);
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text-secondary);
-      font-size: var(--fs-xs);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-      padding: 3px 12px;
-      box-shadow: var(--lift-xs);
-    }
-    .anat-agent {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: var(--shadow-sm);
-    }
-    .anat-agent-head strong { font-size: var(--fs-xl); }
-    .anat-agent-head span { display: block; color: var(--text-secondary); font-size: var(--fs-base); margin-top: 4px; }
-    .anat-parts {
-      margin-top: 16px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(196px, 1fr));
-      gap: 10px;
-    }
-    .anat-part {
-      --dot: var(--text-muted);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--dot);
-      border-radius: var(--radius-sm);
-      background: var(--bg-primary);
-      padding: 10px 12px;
-    }
-    .anat-part strong { font-size: var(--fs-md); }
-    .anat-part span { display: block; color: var(--text-secondary); font-size: var(--fs-base); margin-top: 2px; }
-    .anat-part--skill { --dot: var(--accent); }
-    .anat-part--routine { --dot: var(--c-teal); }
-    .anat-part--personality { --dot: var(--c-plum); }
-
-    .anat-out {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .anat-out-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      box-shadow: var(--shadow-sm);
-    }
-    .anat-out-card strong { font-size: var(--fs-lg); }
-    .anat-out-card span { display: block; color: var(--text-secondary); font-size: var(--fs-base); margin-top: 4px; }
-
-    .anat-trust {
-      max-width: 620px;
-      margin: 22px auto 0;
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: var(--fs-md);
-    }
-
-    @media (max-width: 620px) {
-      .anat-out { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -671,51 +532,136 @@
         <div class="section-header">
           <span class="section-label fade-up">The moving parts</span>
           <h2 id="arch-heading" class="fade-up">How it all connects.</h2>
-          <p>Your agent runs on your own computer, built from a handful of parts you choose. Here&rsquo;s the whole thing, and everywhere it reaches.</p>
+          <p>Your agent runs on your own computer, built from a handful of parts you choose. Here is the whole thing, everywhere it reaches, and the one place it waits.</p>
         </div>
 
-        <div class="anat fade-up delay-1" role="img" aria-label="Diagram: you message your agent from your chat app. Your agent runs on your computer and is built from parts: Personality, Skills, Routines, Knowledge Base, and Connections. It thinks with an AI model on your own account; email sends and calendar changes wait for your approval.">
+        <figure class="explain-figure la-figure fade-up delay-1">
+          <!-- ================== DESKTOP ==================
+               The living agent. One message laps you, your agent, the AI company and back, on your
+               own account; a second heads for your mail and calendar and waits at the gate until you
+               say so. The dots are CSS (offset-path) and hidden where the browser lacks it, so the
+               still drawing is the whole figure; js/living-agent.js only cues Ember's hop. The style
+               block below serves BOTH variants: an SVG's <style> is document-wide, so it is written
+               once here and the mobile drawing reuses the classes. -->
+          <div class="la-stage la-stage--desktop">
+            <svg class="explain-svg--desktop" viewBox="0 0 640 300" role="img" aria-labelledby="la-t" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;font-family:inherit">
+              <title id="la-t">You message your agent from your chat app. It runs on your computer, made of parts you choose, and thinks with the AI company you picked, on your own account: a message goes from you to your agent to the AI company and back. A second message, heading for your mail and calendar, stops at a gate marked waits for you.</title>
+              <style>
+                .la-glyph{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+                .la-name{fill:currentColor;font-size:13px;font-weight:650;text-anchor:middle}
+                .la-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+                .la-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
+                .la-box{fill:rgba(68,64,59,.03);stroke:var(--line-muted);stroke-width:1.5;stroke-dasharray:5 6}
+                .la-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+                .la-node{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+                .la-pill{stroke-width:1}
+                .la-pill--personality{fill:var(--c-plum-subtle);stroke:var(--c-plum)}
+                .la-pill--skill{fill:var(--accent-subtle);stroke:var(--accent)}
+                .la-pill--routine{fill:var(--c-teal-subtle);stroke:var(--c-teal)}
+                .la-pill--plain{fill:var(--bg-card);stroke:var(--line-muted)}
+                .la-pilltext{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle}
+                .la-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round;stroke-linejoin:round}
+                .la-gate{fill:none;stroke:var(--c-blue);stroke-width:2.5;stroke-linecap:round}
+                .la-gatelabel{fill:var(--c-blue-ink);font-size:11px;font-weight:650;text-anchor:middle}
+                .la-pulse{display:none;fill:var(--accent)}
+                @supports (offset-path:path("M0,0 L1,1")){
+                  .la-pulse{display:block}
+                  .la-pulse-1{offset-distance:30%}
+                  .la-pulse-2{offset-distance:42%}
+                  @media (prefers-reduced-motion:no-preference){
+                    .la-pulse-1{animation:laLap 7s linear infinite}
+                    .la-pulse-2{animation:laGate 7s linear infinite}
+                    @keyframes laLap{from{offset-distance:0%}to{offset-distance:100%}}
+                    @keyframes laGate{0%,40%{offset-distance:0%;opacity:0}44%{opacity:1}62%,78%{offset-distance:42%;opacity:1}100%{offset-distance:100%;opacity:1}}
+                  }
+                }
+              </style>
+              <defs><marker id="la-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
 
-          <div class="anat-you">
-            <span class="anat-node-kind">You</span>
-            <strong>Your chat app</strong>
-            <span class="anat-node-sub">Telegram, Discord, Slack, Matrix or iMessage, you just message it</span>
+              <!-- you -->
+              <g class="la-glyph"><circle cx="60" cy="126" r="10"/><path d="M40,156 a20,20 0 0 1 40,0"/></g>
+              <text class="la-name" x="60" y="180">You</text>
+              <text class="la-sub" x="60" y="195">your chat app</text>
+
+              <!-- your computer, and the agent on it -->
+              <rect class="la-box" x="150" y="44" width="280" height="212" rx="16"/>
+              <text class="la-label" x="168" y="66">YOUR COMPUTER</text>
+              <rect class="la-agent" x="196" y="94" width="188" height="104" rx="12"/>
+              <text class="la-name" x="290" y="120">Your agent</text>
+              <rect class="la-pill la-pill--personality" x="212" y="132" width="62" height="18" rx="9"/><text class="la-pilltext" x="243" y="144.5">Personality</text>
+              <rect class="la-pill la-pill--skill" x="280" y="132" width="38" height="18" rx="9"/><text class="la-pilltext" x="299" y="144.5">Skills</text>
+              <rect class="la-pill la-pill--routine" x="324" y="132" width="48" height="18" rx="9"/><text class="la-pilltext" x="348" y="144.5">Routines</text>
+              <rect class="la-pill la-pill--plain" x="226" y="156" width="60" height="18" rx="9"/><text class="la-pilltext" x="256" y="168.5">Knowledge</text>
+              <rect class="la-pill la-pill--plain" x="292" y="156" width="72" height="18" rx="9"/><text class="la-pilltext" x="328" y="168.5">Connections</text>
+
+              <!-- where it reaches -->
+              <rect class="la-node" x="470" y="86" width="154" height="52" rx="12"/>
+              <text class="la-name" x="547" y="108">AI company</text>
+              <text class="la-sub" x="547" y="124">your pick of 7, your account</text>
+              <rect class="la-node" x="470" y="196" width="154" height="52" rx="12"/>
+              <text class="la-name" x="547" y="218">Mail and calendar</text>
+              <text class="la-sub" x="547" y="234">your accounts</text>
+
+              <!-- wires -->
+              <g class="la-wire">
+                <path d="M86,146 L196,146" marker-start="url(#la-ah)" marker-end="url(#la-ah)"/>
+                <path d="M384,120 L470,112" marker-start="url(#la-ah)" marker-end="url(#la-ah)"/>
+                <path d="M290,198 L290,222 L470,222" marker-end="url(#la-ah)"/>
+              </g>
+              <g class="la-gate"><path d="M346,212 v20"/><path d="M356,212 v20"/></g>
+              <text class="la-gatelabel" x="351" y="248">waits for you</text>
+
+              <!-- the two messages; cx/cy stay 0 because offset-path positions them -->
+              <circle class="la-pulse la-pulse-1" r="6" style="offset-path:path('M86,146 L196,146 L384,120 L470,112 L384,120 L196,146 L86,146')"/>
+              <circle class="la-pulse la-pulse-2" r="6" style="offset-path:path('M290,198 L290,222 L470,222')"/>
+            </svg>
+            <span class="la-ember" data-ember="terracotta.peak.pill.none" aria-hidden="true"></span>
           </div>
 
-          <div class="anat-link" aria-hidden="true"><span class="anat-link-label">you message it &middot; it replies</span></div>
+          <!-- ================== MOBILE ==================
+               Same nodes, stacked: you above your computer, the AI company and your accounts below it,
+               the gate on the right-hand wire. Classes come from the block above. -->
+          <div class="la-stage la-stage--mobile">
+            <svg class="explain-svg--mobile" viewBox="0 0 340 440" role="img" aria-labelledby="lam-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="lam-t">You message your agent from your chat app. It runs on your computer, made of parts you choose, and thinks with the AI company you picked, on your own account: a message goes from you to your agent to the AI company and back. A second message, heading for your mail and calendar, stops at a gate marked waits for you.</title>
+              <defs><marker id="lam-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
 
-          <div class="anat-computer">
-            <span class="anat-computer-label">Your computer</span>
-            <div class="anat-agent">
-              <div class="anat-agent-head">
-                <strong>Your agent</strong>
-                <span>It arrives working, and it is made of parts: add, swap, or remove any of them anytime.</span>
-              </div>
-              <div class="anat-parts">
-                <div class="anat-part anat-part--personality"><strong>Personality</strong><span>How it talks to you.</span></div>
-                <div class="anat-part anat-part--skill"><strong>Skills</strong><span>The things it can do.</span></div>
-                <div class="anat-part anat-part--routine"><strong>Routines</strong><span>What it does on a schedule.</span></div>
-                <div class="anat-part"><strong>Knowledge Base</strong><span>Your files, so it knows what you know.</span></div>
-                <div class="anat-part"><strong>Connections</strong><span>The apps you plug in.</span></div>
-              </div>
-            </div>
+              <g class="la-glyph"><circle cx="170" cy="30" r="10"/><path d="M150,60 a20,20 0 0 1 40,0"/></g>
+              <text class="la-name" x="170" y="82">You</text>
+              <text class="la-sub" x="170" y="97">your chat app</text>
+
+              <rect class="la-box" x="20" y="116" width="300" height="230" rx="16"/>
+              <text class="la-label" x="36" y="138">YOUR COMPUTER</text>
+              <rect class="la-agent" x="50" y="156" width="240" height="106" rx="12"/>
+              <text class="la-name" x="170" y="182">Your agent</text>
+              <rect class="la-pill la-pill--personality" x="90" y="194" width="62" height="18" rx="9"/><text class="la-pilltext" x="121" y="206.5">Personality</text>
+              <rect class="la-pill la-pill--skill" x="158" y="194" width="38" height="18" rx="9"/><text class="la-pilltext" x="177" y="206.5">Skills</text>
+              <rect class="la-pill la-pill--routine" x="202" y="194" width="48" height="18" rx="9"/><text class="la-pilltext" x="226" y="206.5">Routines</text>
+              <rect class="la-pill la-pill--plain" x="101" y="218" width="60" height="18" rx="9"/><text class="la-pilltext" x="131" y="230.5">Knowledge</text>
+              <rect class="la-pill la-pill--plain" x="167" y="218" width="72" height="18" rx="9"/><text class="la-pilltext" x="203" y="230.5">Connections</text>
+
+              <rect class="la-node" x="20" y="372" width="145" height="56" rx="12"/>
+              <text class="la-name" x="92.5" y="394">AI company</text>
+              <text class="la-sub" x="92.5" y="410">your pick of 7, your account</text>
+              <rect class="la-node" x="175" y="372" width="145" height="56" rx="12"/>
+              <text class="la-name" x="247.5" y="394">Mail and calendar</text>
+              <text class="la-sub" x="247.5" y="410">your accounts</text>
+
+              <g class="la-wire">
+                <path d="M170,104 L170,156" marker-start="url(#lam-ah)" marker-end="url(#lam-ah)"/>
+                <path d="M110,262 L110,372" marker-start="url(#lam-ah)" marker-end="url(#lam-ah)"/>
+                <path d="M230,262 L230,372" marker-end="url(#lam-ah)"/>
+              </g>
+              <g class="la-gate"><path d="M220,304 h20"/><path d="M220,314 h20"/></g>
+              <text class="la-gatelabel" x="248" y="313" style="text-anchor:start">waits for you</text>
+
+              <circle class="la-pulse la-pulse-1" r="6" style="offset-path:path('M170,104 L170,209 L110,262 L110,372 L110,262 L170,209 L170,104')"/>
+              <circle class="la-pulse la-pulse-2" r="6" style="offset-path:path('M230,262 L230,372')"/>
+            </svg>
+            <span class="la-ember" data-ember="terracotta.peak.pill.none" aria-hidden="true"></span>
           </div>
-
-          <div class="anat-link" aria-hidden="true"><span class="anat-link-label">reaches out to</span></div>
-
-          <div class="anat-out">
-            <div class="anat-out-card">
-              <strong>An AI model</strong>
-              <span>Claude, ChatGPT, Gemini, Groq, Grok, DeepSeek or Mistral: whichever you pick, on your own account. Archie talks to the AI company directly, so we&rsquo;re never in the middle. Two things run on ours instead: the free starter credits, and the plan with the AI included.</span>
-            </div>
-            <div class="anat-out-card">
-              <strong>Your apps</strong>
-              <span>Email, calendar, and more. It sends email and changes your calendar only after you approve each one, and it can&rsquo;t spend money.</span>
-            </div>
-          </div>
-        </div><!-- /.anat -->
-
-        <p class="anat-trust">Your files and its memory live on your computer. The private codes that let it reach your AI account sit in your computer&rsquo;s built-in password store, where we have no way to read them. When it thinks, it talks to the AI company directly, on your account, never through us. <a href="../trust/">See how we prove it &rarr;</a></p>
+            <figcaption>Your files and its memory live on your computer. The private codes that let it reach your AI account sit in your computer&rsquo;s built-in password store, where we have no way to read them. When it thinks, it talks to the AI company directly, on your account, never through us. One exception, and it is ours: the free starter credits and the plan with the AI included reach Anthropic through a server of ours. It sends email and changes your calendar only after you approve each one, and it can&rsquo;t spend money. <a href="../trust/">See how we prove it &rarr;</a></figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1269,6 +1215,7 @@
   <script src="../js/nav.js"></script>
   <script src="../js/demo-player.js"></script>
   <script src="../js/ember.js" defer></script>
+  <script src="../js/living-agent.js" defer></script>
   <script type="module" src="../js/account-nav.js"></script>
 </body>
 </html>

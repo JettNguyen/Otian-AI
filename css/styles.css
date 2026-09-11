@@ -11625,17 +11625,9 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-chipline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .hm-chipline > svg { color: var(--c-blue); flex-shrink: 0; }
 
-/* Where your words go */
-.hm-flow { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin: 48px 0 12px; }
-.hm-node {
-  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 22px; text-align: center; box-shadow: var(--edge-top), var(--shadow-sm);
-}
-.hm-node--you { border-color: var(--accent); }
-.hm-node b { display: block; font-weight: 650; font-size: var(--fs-md); }
-.hm-node span { font-size: var(--fs-xs); color: var(--text-secondary); }
-.hm-flow-arrow { display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--accent); }
-.hm-flow-arrow em { font-style: normal; font-size: var(--fs-xs); font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+/* Where your words go. The two-node flow that stood here until 2026-09-11 was replaced by the
+   living-agent figure (section 47), which draws the same custody claim with the message moving. */
+.la-figure + .hm-aside { margin-top: 28px; }
 .hm-aside { font-size: var(--fs-base); color: var(--text-secondary); margin: 0 0 48px; }
 .hm-aside b { color: var(--text-primary); font-weight: 600; }
 /* A quiet checklist, deliberately not cards: the two cards above it are the
@@ -14371,6 +14363,30 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 640px) {
   .faq-find { padding: 0 16px; }
   .faq-find-input { font-size: var(--fs-lg); } /* under 16px iOS zooms the page on focus, and --fs-lg is 16px */
+}
+
+/* ── The living agent (how-it-works/, homepage) ──
+   The figure's own classes and keyframes live in the SVG's <style>, as every explain-figure's
+   do. What is here is the HTML around it: one positioned stage per variant so Ember can stand
+   beside the gate in the drawing's own coordinates, and the swap at 640px, which has to move
+   the stages and not just the SVGs or the hidden variant's Ember would still be on the page. */
+.la-figure { position: relative; }
+.la-stage { position: relative; width: 100%; max-width: 680px; margin: 0 auto; }
+.la-stage--mobile { display: none; max-width: 340px; }
+.la-stage svg { display: block; width: 100%; height: auto; }
+/* Placed in percentages of the stage, which is the drawing's box exactly, so he stays on the
+   wire at every width: desktop 322,224 of 640x300; mobile 196,322 of 340x440. */
+.la-ember {
+  position: absolute;
+  width: 4.7%;
+  aspect-ratio: 1;
+  left: 47.97%;
+  top: 64.67%;
+}
+.la-stage--mobile .la-ember { width: 8.8%; left: 54.4%; top: 66.4%; }
+@media (max-width: 640px) {
+  .la-stage--desktop { display: none; }
+  .la-stage--mobile { display: block; }
 }
 
 /* ========================================

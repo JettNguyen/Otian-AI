@@ -645,6 +645,137 @@ anyone but the account owner, and the seal means owning the row is not reading i
   the key. That is what the Unpair button and key rotation are for.
 - ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
 
+### 🚧 The Archie app for a phone: sealed, where a chat app is not. IN BUILD, NOT SHIPPED
+
+**Status 2026-09-11.** The client is written and runs (`/Users/Games/Desktop/Code/archie-mobile`).
+The one route it needs, `/phone/pair`, is written and unit-tested and **is not deployed**
+(`stripe-webhook/phone-pair.js`, frozen with the rest of the Render service until the CASA assessor
+signs off). Nobody outside the team can pair a phone today, and the app is in neither store. So
+every sentence about it on the site is future tense, per `CLAUDE.md` rule 4, and **no page may carry
+a ship date**, because we do not have one to give.
+
+**Why this claim is worth making at all.** Today an agent reaches its owner through a chat app, and
+that is the one part of Archie that crosses somebody else's servers in a form they can read. The
+text-replies section above already concedes it in approved wording: the reply card "arrives through
+whatever chat app your agent uses, so it crosses that platform's servers like anything else you read
+there." The app is the answer to that sentence. Until it ships, the sentence stands and the
+concession stays on the page.
+
+**Approved wording, the claim:**
+
+> Right now your agent reaches you through a chat app, so what it says to you crosses that company's
+> servers like any other message you send there. We are building an app that does not work that way.
+> Your computer seals every message before it leaves, with a key it makes itself and gives to your
+> phone by showing it a code to scan. The key never passes through us. We hold the sealed messages
+> and cannot open them.
+
+**Approved wording, the comparison.** Every clause is the other company's own published position.
+Cite it that way on the page, with the link, or do not make the comparison:
+
+> - **Telegram.** An ordinary Telegram chat, which is the kind an agent uses, is encrypted between
+>   your device and Telegram's servers rather than end to end. Telegram's own FAQ says cloud chats
+>   are "stored encrypted in the Telegram Cloud", and that "several court orders from different
+>   jurisdictions are required to force us to give up any data." Its end-to-end kind, a Secret Chat,
+>   is between two people on their phones and is not something an agent can use.
+> - **Discord.** Discord end-to-end encrypts every voice and video call, and says so plainly. Text
+>   is not covered, in its own words: "We have no current plans to extend E2EE to text messages."
+> - **Matrix.** Matrix rooms can be end-to-end encrypted, and Archie cannot read one that is: the
+>   connect guide asks for an unencrypted room, so this is the same trade, not a better one.
+> - **iMessage on a Mac is the exception.** Apple already encrypts it end to end, and Archie reads
+>   it out of the Messages app on your own computer rather than over the network.
+
+Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq> and
+<https://discord.com/blog/every-voice-and-video-call-on-discord-is-now-end-to-end-encrypted>.
+
+**Why it's true.**
+
+- **Sealed before it leaves.** AES-256-GCM, 96 bit nonce, version-tagged, both ends refusing a
+  version they do not know: `crates/archie-core/src/phone.rs` (`seal`/`open`) and the phone's second
+  implementation at `src/relay/envelope.ts` in the app repo. This is the same envelope the shipped
+  phone-access claim above rests on, which is why this is one mechanism and not a new one.
+- **The key never passes through us.** The desktop generates it, keeps it in the OS keychain, and
+  delivers it in a **URL fragment**, which a browser does not transmit to a server (`phone::pair_url`,
+  asserted by `the_pairing_key_rides_in_the_fragment_never_the_query`). It reaches the phone by
+  camera and lands in the Keychain or the Keystore (`src/relay/pairing.ts`).
+- **No sign-in, so no password of yours is on the phone.** The computer vouches for the phone with a
+  ticket good once and for minutes, spent inside a transaction, compared in constant time, with one
+  identical refusal for all five ways to fail (`stripe-webhook/phone-pair.js`).
+- **A phone is allowed less than the owner's own browser.** The token carries `scope: "phone"`, and
+  `notPhone()` in `firestore.rules` keeps it out of the user document, the purchase list and the
+  credit ledger. This is the rare case where the app is stricter than the web page it replaces, and
+  it is worth saying, because a phone is the device most likely to be lost.
+- **The chat-app sentence is real.** `crates/archie-net/src/matrix.rs` states in its own header that
+  the adapter is a plain client with no crypto store and cannot read `m.room.encrypted`, and it says
+  so in the room itself (`ENCRYPTED_ROOM_NOTICE`). Telegram, Discord and Slack have no end-to-end
+  option for a bot at all.
+
+**Approved wording, what the app is and is not.** This is a capability claim, so it lives here too:
+
+> The app is not running your agent. Nothing about your agent moves to your phone: it stays on the
+> computer you installed it on, with your files, your passwords and your connected accounts, and it
+> runs there whether your phone is in your hand, in your pocket, or flat. The app is a way to reach
+> that computer and tell it things.
+>
+> What you can do from it is most of what you do at the computer: start it or stop it, add an add-on
+> or take one off, finish an add-on's setup, turn a routine on and off or move the time it runs,
+> rename it, change its face, read what it has been doing, and talk to it.
+
+**Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
+`match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
+each of the four add-on kinds, build a skill, set the name, the face and an add-on's answers, turn a
+skill or routine on and off, set a routine's time, add a row to a collection, say something, press a
+button on a card, and browse this computer's catalog. There is no op for running code, reading a
+file, or reaching a secret, and a phone cannot invent one: an unknown op is refused by the computer.
+The snapshot it draws from is built by `build_snapshot` in the same file, whose header lists what
+never travels: anybody else's conversation on a shared agent, knowledge files, the rows inside a
+record collection, credential values (not even the last four of one), the screenshots a job took,
+and the audio and pictures inside a conversation.
+
+**Required clauses. Do not drop them:**
+
+- ⚠️ **Future tense, everywhere, with no date.** "We are building", never "Archie has an app". The
+  moment a present-tense sentence about this app appears on the site, this entry has been broken.
+- ⚠️ **Say that we hold it.** Same clause as the shipped phone-access claim: this is custody without
+  access. "It never touches our servers" is FALSE here and must never be written.
+- ⚠️ **Name iMessage as the exception.** The comparison is true of Telegram, Discord, Slack and
+  Matrix, and it is not true of iMessage, which Apple already encrypts end to end. Leaving iMessage
+  out turns a checkable claim into an implied one, which is the failure the Standard's "we will not"
+  list names directly. It also costs nothing: an honest exception is what makes a reader believe the
+  other four.
+- ⚠️ **Three fields stay in the clear**, exactly as on the shipped claim: when a message was left,
+  which version of Archie wrote it, and whether a command is waiting, done or failed. We can see
+  that a phone is talking to a computer, and roughly when, never what it said.
+- ⚠️ **Whoever holds the phone holds the key.** Say what the remedy is in the same breath: unpair on
+  the computer, which retires the key, so nothing sealed afterwards can be opened by that phone.
+- ⚠️ **Say that the app is not running the agent, on any page that describes what it can do.** This is
+  the expectation an app creates that the product cannot meet, and `docs/MOBILE-APP.md` section 7 is
+  about exactly it: people assume a thing works because it is installed, and this one works because a
+  computer somewhere is awake. Every page that shows the app doing something has to carry the
+  computer in the same breath.
+- ⚠️ **"Most of what you do at the computer", never "everything".** The op list is a short allowlist
+  and the snapshot leaves things out on purpose. Name at least one thing it cannot reach whenever the
+  capability is described, and never write "full control", "everything your agent can do", or
+  "the whole app on your phone".
+
+**Boundaries. Do not cross:**
+
+- ❌ Never "we are more secure than Telegram" as a company-to-company claim. The comparison we are
+  allowed to make is narrow and mechanical: a chat app holds your agent's messages in a form that
+  company can open, and the app does not. Say the mechanism, not the league table.
+- ❌ Never "the most secure way to reach an AI agent", or any superlative. We have not tested every
+  product that exists and the claim is not checkable.
+- ❌ Never "Telegram reads your messages" or "Discord reads your messages". The true and sourced
+  claim is about what those companies **can** do and what their own documents say, and the stronger
+  version is an accusation we cannot support.
+- ❌ Never imply the app removes the chat app, or that a chat app becomes unsafe to use. Most people
+  will keep using one, the agent still works there, and the app is a second door rather than a
+  replacement for the first.
+- ❌ Never "end-to-end encrypted, so nobody can ever see your agent", for the reason the shipped
+  claim gives: the desktop is one end, the phone is the other, and somebody at that unlocked
+  computer has everything.
+- ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
+  and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
+
 ### ✅ It works while you sleep
 
 **Approved wording:** "It Works While You Sleep" / "works in the background while you sleep."

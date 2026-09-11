@@ -12127,6 +12127,14 @@ html[data-theme="dark"] .booking-container iframe {
   line-height: 1.6;
   color: var(--text-secondary);
 }
+/* The one link in it is the way on to the whole list, so it takes the site's text-link blue
+   rather than the paragraph's grey (asked for 2026-09-11). */
+.hm-steps-after a {
+  color: var(--c-blue-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 
 /* Who builds it */
 .hm-people {

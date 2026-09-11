@@ -14478,6 +14478,97 @@ html[data-theme="dark"] .booking-container iframe {
   .cost-pick-band { animation: none !important; }
 }
 
+/* ── The packet map (trust/) ──
+   The drawing's classes and its one keyframe live in the SVG's <style>. Here: the switch, the
+   pick states js/packet-map.js writes as `data-active`, and the stage swap at 640px. The
+   switch is a checkbox before the stages in the DOM, so `:checked ~` reaches into both
+   drawings with no script: it dims the direct line and lights the one through us. */
+.pm-figure { position: relative; }
+.pm-stage { position: relative; width: 100%; max-width: 680px; margin: 0 auto; }
+.pm-stage--mobile { display: none; max-width: 340px; }
+.pm-stage svg { display: block; width: 100%; height: auto; }
+.pm-switch-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pm-switch {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 22px;
+  padding: 10px 16px 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--lift-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--transition);
+}
+.pm-switch:hover { border-color: var(--accent); }
+.pm-switch-input:focus-visible ~ .pm-switch { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.pm-switch-track {
+  position: relative;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--line-muted);
+  transition: background var(--transition);
+}
+.pm-switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition);
+}
+.pm-switch-input:checked ~ .pm-switch .pm-switch-track { background: var(--accent); }
+.pm-switch-input:checked ~ .pm-switch .pm-switch-knob { transform: translateX(18px); }
+.pm-switch-text { display: grid; gap: 1px; min-width: 0; }
+.pm-switch-text b { font-size: var(--fs-md); font-weight: 650; color: var(--text-primary); }
+.pm-switch-text i { font-style: normal; font-size: var(--fs-xs); color: var(--text-muted); }
+.pm-switch-on { display: none; }
+.pm-switch-input:checked ~ .pm-switch .pm-switch-off { display: none; }
+.pm-switch-input:checked ~ .pm-switch .pm-switch-on { display: block; }
+/* The lines. Which of the two carries your words is the switch's whole job. */
+.pm-switch-input:checked ~ .pm-stage .pm-direct { opacity: 0.16; }
+.pm-switch-input:checked ~ .pm-stage .pm-proxy { opacity: 1; }
+/* Picking a host quiets the rest, the pickable-diagram pattern from what-is-an-add-on/. */
+.pm-figure[data-active] .pm-node { opacity: 0.3; }
+.pm-figure[data-active="ai"] .pm-node[data-node="ai"],
+.pm-figure[data-active="billing"] .pm-node[data-node="billing"],
+.pm-figure[data-active="accounts"] .pm-node[data-node="accounts"],
+.pm-figure[data-active="signin"] .pm-node[data-node="signin"],
+.pm-figure[data-active="update"] .pm-node[data-node="update"],
+.pm-figure[data-active="github"] .pm-node[data-node="github"] { opacity: 1; }
+.pm-figure[data-active="ai"] .pm-node[data-node="ai"] rect,
+.pm-figure[data-active="billing"] .pm-node[data-node="billing"] rect,
+.pm-figure[data-active="accounts"] .pm-node[data-node="accounts"] rect,
+.pm-figure[data-active="signin"] .pm-node[data-node="signin"] rect,
+.pm-figure[data-active="update"] .pm-node[data-node="update"] rect,
+.pm-figure[data-active="github"] .pm-node[data-node="github"] rect { fill: var(--accent-subtle); stroke: var(--accent); stroke-width: 2; }
+/* The caption changes under a pointer; three lines held open so the table under it does not hop. */
+.pm-figure figcaption { min-height: 4.6em; }
+@media (max-width: 640px) {
+  .pm-stage--desktop { display: none; }
+  .pm-stage--mobile { display: block; }
+  .pm-switch { border-radius: var(--radius); align-items: flex-start; }
+  .pm-switch-track { margin-top: 2px; }
+  .pm-figure figcaption { min-height: 0; }
+}
+
 /* ========================================
    36. Press
    Last in the file on purpose. See the note

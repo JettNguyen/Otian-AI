@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-10" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-12" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -308,6 +308,166 @@
           <p>Not a summary. Not the highlights. Every single thing Archie sends anywhere, what is in it, and who receives it.</p>
         </div>
 
+        <!-- The packet map. Your computer in the middle, every host Archie talks to around it,
+             named the way a network monitor prints them, and the table under it is the list in
+             full. The switch is the point: on your own AI account the line to the AI company is
+             the one that carries your words; on the free credits or the plan with the AI included
+             it goes dark and the line through our billing service lights, then on to Anthropic.
+             The switch is a checkbox the CSS answers; tapping a host is js/packet-map.js, and the
+             figure is complete without it. -->
+        <figure class="explain-figure pm-figure fade-up delay-2" id="packetMap">
+          <input class="pm-switch-input" type="checkbox" id="pm-credits" />
+          <label class="pm-switch" for="pm-credits">
+            <span class="pm-switch-track" aria-hidden="true"><span class="pm-switch-knob"></span></span>
+            <span class="pm-switch-text">
+              <b class="pm-switch-off">On your own AI account</b>
+              <b class="pm-switch-on">On the free credits, or the plan with the AI included</b>
+              <i>Flip it to see the one path that runs through us.</i>
+            </span>
+          </label>
+
+          <!-- ================== DESKTOP ================== -->
+          <div class="pm-stage pm-stage--desktop">
+            <svg class="explain-svg--desktop" viewBox="0 0 640 320" role="img" aria-labelledby="pm-t" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;font-family:inherit">
+              <title id="pm-t">Your computer in the middle, with six hosts around it: your AI company, our billing service at archie-4f35.onrender.com, the accounts you connected, Google Firebase for signing in, otianai.com for the update check, and GitHub for update files. On your own AI account the line to your AI company carries your words directly. On the free credits or the plan with the AI included, that line goes dark and your words go to our billing service first, then on to Anthropic.</title>
+              <style>
+                .pm-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+                .pm-host{fill:currentColor;font-size:10.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-anchor:middle;opacity:.72}
+                .pm-sub{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
+                .pm-you{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+                .pm-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+                .pm-box--ours{stroke-dasharray:4 4}
+                .pm-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round;stroke-linejoin:round}
+                .pm-wire--words{stroke:var(--accent);stroke-width:2;opacity:.9}
+                .pm-proxy{opacity:.16;transition:opacity .35s ease}
+                .pm-direct{transition:opacity .35s ease}
+                .pm-node{cursor:pointer;transition:opacity .25s ease}
+                .pm-node:focus{outline:none}
+                .pm-node:focus-visible rect{stroke-width:2.4;stroke-dasharray:6 4}
+                .pm-dot{display:none;fill:var(--accent)}
+                @supports (offset-path:path("M0,0 L1,1")){
+                  .pm-dot{display:block;offset-distance:30%}
+                  @media (prefers-reduced-motion:no-preference){
+                    .pm-dot{animation:pmLap 6s linear infinite}
+                    @keyframes pmLap{from{offset-distance:0%}to{offset-distance:100%}}
+                  }
+                }
+              </style>
+              <defs><marker id="pm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
+
+              <!-- wires first, so the boxes sit on them -->
+              <g class="pm-wire">
+                <path class="pm-direct pm-wire--words" d="M390,146 L480,72" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+                <path class="pm-proxy pm-wire--words" d="M390,160 L480,160" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+                <path class="pm-proxy pm-wire--words" d="M552,134 L552,92" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+                <path class="pm-wire--words" d="M390,174 L480,248" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+                <path d="M250,146 L160,72" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+                <path d="M250,160 L160,160" marker-end="url(#pm-ah)"/>
+                <path d="M250,174 L160,248" marker-start="url(#pm-ah)" marker-end="url(#pm-ah)"/>
+              </g>
+
+              <!-- your computer -->
+              <rect class="pm-you" x="250" y="130" width="140" height="60" rx="12"/>
+              <text class="pm-name" x="320" y="155">Your computer</text>
+              <text class="pm-sub" x="320" y="171">Archie, your files, your keys</text>
+
+              <!-- the hosts. data-say is the row, read out by js/packet-map.js when tapped. -->
+              <g class="pm-node" data-node="ai" tabindex="0" role="button" aria-pressed="false" data-say="Your agent thinking: the prompt, the conversation, and whatever file or message it is working with. To your AI company directly, on your key, never through us.">
+                <rect class="pm-box" x="480" y="40" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="552" y="62">Your AI company</text>
+                <text class="pm-sub" x="552" y="78">your words, your key</text>
+              </g>
+              <g class="pm-node" data-node="billing" tabindex="0" role="button" aria-pressed="false" data-say="Our billing service, one computer doing three jobs: it signs your license note, it counts add-on installs, and it stands in for Anthropic while you are on the free credits or the plan with the AI included. Only that last job ever carries a word you wrote, and only until you connect an AI account of your own. The other two carry on for as long as you use Archie.">
+                <rect class="pm-box pm-box--ours" x="480" y="134" width="144" height="52" rx="12"/>
+                <text class="pm-host" x="552" y="156">archie-4f35.onrender.com</text>
+                <text class="pm-sub" x="552" y="172">our billing service</text>
+              </g>
+              <g class="pm-node" data-node="accounts" tabindex="0" role="button" aria-pressed="false" data-say="The accounts you connected: Google, Microsoft, Telegram and the rest, on your own tokens, directly. Whatever you asked your agent to do there reaches them the way it would if you did it yourself. It does not reach us.">
+                <rect class="pm-box" x="480" y="228" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="552" y="250">Your accounts</text>
+                <text class="pm-sub" x="552" y="266">mail, calendar, chat</text>
+              </g>
+              <g class="pm-node" data-node="signin" tabindex="0" role="button" aria-pressed="false" data-say="Signing in and the plan check: your email address, your account ID and a sign-in token, and the facts about your own account that come back. Crash reports and which version you run go here too, until you turn those off. Never your content.">
+                <rect class="pm-box pm-box--ours" x="16" y="40" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="88" y="62">Sign-in and plan</text>
+                <text class="pm-sub" x="88" y="78">Google Firebase, our account system</text>
+              </g>
+              <g class="pm-node" data-node="update" tabindex="0" role="button" aria-pressed="false" data-say="The update check: a plain request carrying no version number, nothing identifying your computer, and no account. The site is hosted on GitHub Pages and we run no server for it.">
+                <rect class="pm-box pm-box--ours" x="16" y="134" width="144" height="52" rx="12"/>
+                <text class="pm-host" x="88" y="156">otianai.com</text>
+                <text class="pm-sub" x="88" y="172">is there an update?</text>
+              </g>
+              <g class="pm-node" data-node="github" tabindex="0" role="button" aria-pressed="false" data-say="Downloading an update: the app file, signed, and verified on your computer before it installs. Nothing about you goes with the request.">
+                <rect class="pm-box" x="16" y="228" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="88" y="250">GitHub</text>
+                <text class="pm-sub" x="88" y="266">the update file itself</text>
+              </g>
+
+              <!-- your words, moving. One dot on the direct line, one on the line through us; the
+                   switch decides which is lit. cx/cy stay 0: offset-path positions them. -->
+              <circle class="pm-dot pm-direct" r="5.5" style="offset-path:path('M390,146 L480,72 L390,146')"/>
+              <circle class="pm-dot pm-proxy" r="5.5" style="offset-path:path('M390,160 L480,160 L552,160 L552,92 L552,160 L480,160 L390,160')"/>
+            </svg>
+          </div>
+
+          <!-- ================== MOBILE ================== -->
+          <div class="pm-stage pm-stage--mobile">
+            <svg class="explain-svg--mobile" viewBox="0 0 340 450" role="img" aria-labelledby="pmm-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="pmm-t">Your computer in the middle, with six hosts around it: your AI company, our billing service at archie-4f35.onrender.com, the accounts you connected, Google Firebase for signing in, otianai.com for the update check, and GitHub for update files. On your own AI account the line to your AI company carries your words directly. On the free credits or the plan with the AI included, that line goes dark and your words go to our billing service first, then on to Anthropic.</title>
+              <defs><marker id="pmm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
+
+              <g class="pm-wire">
+                <path class="pm-direct pm-wire--words" d="M170,196 L170,68" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+                <path class="pm-proxy pm-wire--words" d="M150,196 L92,152" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+                <path class="pm-proxy pm-wire--words" d="M92,100 L130,68" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+                <path class="pm-wire--words" d="M190,196 L248,152" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+                <path d="M150,256 L92,300" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+                <path d="M190,256 L248,300" marker-end="url(#pmm-ah)"/>
+                <path d="M170,256 L170,384" marker-start="url(#pmm-ah)" marker-end="url(#pmm-ah)"/>
+              </g>
+
+              <rect class="pm-you" x="100" y="196" width="140" height="60" rx="12"/>
+              <text class="pm-name" x="170" y="221">Your computer</text>
+              <text class="pm-sub" x="170" y="237">Archie, your files, your keys</text>
+
+              <g class="pm-node" data-node="ai" tabindex="0" role="button" aria-pressed="false" data-say="Your agent thinking: the prompt, the conversation, and whatever file or message it is working with. To your AI company directly, on your key, never through us.">
+                <rect class="pm-box" x="98" y="16" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="170" y="38">Your AI company</text>
+                <text class="pm-sub" x="170" y="54">your words, your key</text>
+              </g>
+              <g class="pm-node" data-node="billing" tabindex="0" role="button" aria-pressed="false" data-say="Our billing service, one computer doing three jobs: it signs your license note, it counts add-on installs, and it stands in for Anthropic while you are on the free credits or the plan with the AI included. Only that last job ever carries a word you wrote, and only until you connect an AI account of your own. The other two carry on for as long as you use Archie.">
+                <rect class="pm-box pm-box--ours" x="20" y="100" width="144" height="52" rx="12"/>
+                <text class="pm-host" x="92" y="122">archie-4f35.onrender.com</text>
+                <text class="pm-sub" x="92" y="138">our billing service</text>
+              </g>
+              <g class="pm-node" data-node="accounts" tabindex="0" role="button" aria-pressed="false" data-say="The accounts you connected: Google, Microsoft, Telegram and the rest, on your own tokens, directly. Whatever you asked your agent to do there reaches them the way it would if you did it yourself. It does not reach us.">
+                <rect class="pm-box" x="176" y="100" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="248" y="122">Your accounts</text>
+                <text class="pm-sub" x="248" y="138">mail, calendar, chat</text>
+              </g>
+              <g class="pm-node" data-node="signin" tabindex="0" role="button" aria-pressed="false" data-say="Signing in and the plan check: your email address, your account ID and a sign-in token, and the facts about your own account that come back. Crash reports and which version you run go here too, until you turn those off. Never your content.">
+                <rect class="pm-box pm-box--ours" x="20" y="300" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="92" y="322">Sign-in and plan</text>
+                <text class="pm-sub" x="92" y="338">Google Firebase</text>
+              </g>
+              <g class="pm-node" data-node="update" tabindex="0" role="button" aria-pressed="false" data-say="The update check: a plain request carrying no version number, nothing identifying your computer, and no account. The site is hosted on GitHub Pages and we run no server for it.">
+                <rect class="pm-box pm-box--ours" x="176" y="300" width="144" height="52" rx="12"/>
+                <text class="pm-host" x="248" y="322">otianai.com</text>
+                <text class="pm-sub" x="248" y="338">is there an update?</text>
+              </g>
+              <g class="pm-node" data-node="github" tabindex="0" role="button" aria-pressed="false" data-say="Downloading an update: the app file, signed, and verified on your computer before it installs. Nothing about you goes with the request.">
+                <rect class="pm-box" x="98" y="384" width="144" height="52" rx="12"/>
+                <text class="pm-name" x="170" y="406">GitHub</text>
+                <text class="pm-sub" x="170" y="422">the update file itself</text>
+              </g>
+
+              <circle class="pm-dot pm-direct" r="5.5" style="offset-path:path('M170,196 L170,68 L170,196')"/>
+              <circle class="pm-dot pm-proxy" r="5.5" style="offset-path:path('M150,196 L92,152 L92,100 L130,68 L92,100 L92,152 L150,196')"/>
+            </svg>
+          </div>
+          <figcaption id="packetMapCaption">Every host Archie talks to, drawn where the table below lists it. On your own AI account, the only lines that carry your words go to your AI company and to the accounts you connected.</figcaption>
+        </figure>
+
         <div class="trust-table-wrap fade-up delay-2">
           <table class="trust-table">
             <caption class="sr-only">Every outbound connection Archie makes, its destination, its contents, and whether it contains your content.</caption>
@@ -387,8 +547,6 @@
             </tbody>
           </table>
         </div>
-
-        <p class="trust-table-note">Three rows name <code>archie-4f35.onrender.com</code>, and it is one machine doing three jobs: signing your license note, standing in for Anthropic while you are on the free credits or the plan with the AI included, and counting add-on installs. Only the second of those ever carries a word you wrote, and only until you connect an AI account of your own. The other two carry on for as long as you use Archie, which is why the block-list test further down names two hosts rather than one.</p>
 
         <p class="trust-table-note">If you find something Archie sends that is not on this list, that is a bug in our honesty and we want to know. <a href="../contact/">Tell us</a>, publicly, if you like.</p>
       </div>
@@ -678,5 +836,6 @@
 
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
+  <script src="../js/packet-map.js" defer></script>
 </body>
 </html>

@@ -11572,14 +11572,26 @@ html[data-theme="dark"] .booking-container iframe {
   left: auto; right: -12px;
   border-bottom-right-radius: 0; border-bottom-left-radius: 12px;
 }
-.hm-msg-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; width: 100%; max-width: 340px; }
-.hm-msg-btn {
-  text-align: center; font-size: var(--fs-xs); font-weight: 600;
-  padding: 8px 0; border-radius: var(--radius-sm);
-  border: 1px solid var(--border); color: var(--text-secondary); background: var(--bg-card);
-  box-shadow: var(--shadow-xs);
+/* A card's buttons, drawn the way the app draws them (InlineActions in the Archie Mobile
+   repo's src/ui.tsx): not three separate pills but one bordered box split by hairlines,
+   the labels in the accent, and the word for backing out in muted ink. Nothing is filled
+   until it has been pressed, so the phone on this page reads as the app rather than as a
+   web page's idea of it. Flex rather than a three-column grid because two of the seven
+   scenes offer two buttons, and an empty third cell inside a box is a hole. */
+.hm-msg-btns {
+  display: flex; width: 100%; max-width: 340px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; background: var(--bg-card);
 }
-.hm-msg-btn--go { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
+.hm-msg-btn {
+  flex: 1; text-align: center; font-size: var(--fs-xs); font-weight: 600;
+  padding: 10px 0; border: 0; border-left: 1px solid var(--border);
+  color: var(--accent-ink); background: transparent;
+}
+.hm-msg-btn:first-child { border-left: 0; }
+/* Whatever the last one says, it is the way out of the card, and the app greys it. */
+.hm-msg-btn:last-child { color: var(--text-muted); }
+.hm-msg-btn--go { background: transparent; color: var(--accent-ink); }
 .hm-mini-label { font-size: var(--fs-2xs); font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
 .hm-mini-quote { color: var(--text-primary); margin: 0; }
 .hm-mini {
@@ -13244,6 +13256,8 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-pz-head {
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
   gap: 11px;
   /* Negative side margins so the hairline runs to the bezel, the way a chat app's header rule
      does, while the words stay on the same 26px as the thread below them. */
@@ -13251,7 +13265,28 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 8px 14px 10px;
   border-bottom: 1px solid var(--border);
 }
-.hm-pz-face { display: block; width: 38px; height: 38px; flex-shrink: 0; }
+
+/* The app's own bar, copied in shape: the wordmark sits at the left, where it is the way
+   back out of an agent, and the agent's name sits in the MIDDLE of the bar rather than in
+   the middle of what the wordmark left over. The app centres it the same way and says why
+   (TopBar in src/ui.tsx), so the mark is taken out of the flow instead of padding both
+   corners to match. */
+.hm-pz-mark {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.hm-pz-mark b {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--accent-ink);
+}
+.hm-pz-face { display: block; width: 24px; height: 24px; flex-shrink: 0; }
 
 /* The message bar gets the same hairline as the header, for the same reason and to the same
    edges. Without it the field was one more rounded shape at the bottom of a column of rounded
@@ -13263,8 +13298,11 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 10px 14px 0;
   border-top: 1px solid var(--border);
 }
-.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: left; }
-.hm-pz-who b { font-size: var(--fs-sm); font-weight: 650; color: var(--text-primary); }
+.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: center; }
+.hm-pz-who b {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-base); font-weight: 400; color: var(--text-primary);
+}
 .hm-pz-who i { font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); }
 
 /* The thread dissolves under the header, not off the top of the device. Shorter than the 104px

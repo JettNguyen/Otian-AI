@@ -14311,6 +14311,69 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ========================================
+   47. The visual pass (2026-09-11)
+   Pictures and small controls that took the place of paragraphs. Each block
+   below names the page it is for. Every figure here is complete without
+   JavaScript and holds still under reduced motion; the scripts only add a hand
+   on the dial. Kept ABOVE the press section, which has to stay last.
+   ======================================== */
+
+/* ── FAQ finder (faq/) ──
+   One pill above the six groups. It ships `hidden` and js/faq-find.js reveals it, so the page
+   never shows a search box that searches nothing. */
+.faq-find {
+  max-width: 740px;
+  margin: 0 auto 36px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  min-height: 54px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--lift-sm);
+  transition: border-color var(--transition);
+}
+.faq-find:focus-within { border-color: var(--accent); }
+.faq-find-icon { width: 18px; height: 18px; flex-shrink: 0; color: var(--text-muted); }
+.faq-find-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--fs-md);
+  color: var(--text-primary);
+  padding: 14px 0;
+  outline: none;
+}
+.faq-find-input::placeholder { color: var(--text-muted); }
+.faq-find-count {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.faq-find-none {
+  max-width: 740px;
+  margin: -16px auto 32px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+.faq-find-none a { color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: 2px; }
+/* What the finder hides. A class rather than the hidden attribute, because the accordion item
+   and the group both carry display rules of their own that an attribute would lose to. */
+.faq-group.is-hidden,
+.accordion-item.is-hidden { display: none; }
+/* A jump link whose group is empty stays, dimmed: the map at the top keeps telling the truth. */
+.faq-jump a.is-empty { opacity: 0.4; }
+@media (max-width: 640px) {
+  .faq-find { padding: 0 16px; }
+  .faq-find-input { font-size: var(--fs-lg); } /* under 16px iOS zooms the page on focus, and --fs-lg is 16px */
+}
+
+/* ========================================
    36. Press
    Last in the file on purpose. See the note
    inside: a press has to beat the hover it

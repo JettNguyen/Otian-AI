@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-8" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-9" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -188,6 +188,17 @@
     <section class="section" aria-labelledby="faq-heading">
       <div class="container">
         <h2 class="sr-only" id="faq-heading">All frequently asked questions</h2>
+
+        <!-- The finder. Hidden until js/faq-find.js reveals it, so a page with no script shows
+             a list and never a box that does nothing. It narrows the list below as you type and
+             opens the question when one is left; every answer stays on the page in full. -->
+        <form class="faq-find fade-up" role="search" aria-label="Find a question" data-faq-find hidden>
+          <label class="sr-only" for="faqFind">Find your question</label>
+          <svg class="faq-find-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+          <input id="faqFind" class="faq-find-input" type="search" placeholder="Find your question: email, cost, Windows&hellip;" autocomplete="off" spellcheck="false" />
+          <span class="faq-find-count" id="faqFindCount" aria-live="polite"></span>
+        </form>
+        <p class="faq-find-none" id="faqFindNone" hidden>Nothing on this page matches that. <a href="../contact/">Ask us</a>, and the answer goes up here.</p>
 
         <div class="faq-group fade-up" id="faq-basics">
           <h3 class="faq-group-title">The basics</h3>
@@ -768,6 +779,7 @@
 
   <script src="../js/nav.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
+  <script src="../js/faq-find.js" defer></script>
   <script>
     /* ── Accordion, one open at a time ── */
     document.querySelectorAll('.accordion-trigger').forEach(function (btn) {

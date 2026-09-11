@@ -253,196 +253,10 @@
           <h2 id="loop-heading" class="fade-up">What handing something over looks like.</h2>
           <p>You message your agent the way you&rsquo;d text a friend (&ldquo;what&rsquo;s on my calendar?&rdquo; &ldquo;move my 3 o&rsquo;clock,&rdquo; &ldquo;catch me up on today&rsquo;s meetings&rdquo;). It goes away and works, comes back if it needs you, and tells you when it&rsquo;s done.</p>
         </div>
-        <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 476 292" role="img" aria-labelledby="dl-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
-            <title id="dl-t">The delegation loop: you send a task to your agent, the agent works in the background, checks in with what it found, and reports back when it is done, a continuous cycle around the agent.</title>
-            <style>
-              .dl-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-              .dl-a{fill:var(--accent)}
-              .dl-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-              .dl-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-              .dl-dot{fill:var(--accent)}
-              .dl-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
-              .dl-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-              .dl-sub{fill:currentColor;opacity:.6;font-size:9.5px;text-anchor:middle}
-              .dl-alabel{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle;opacity:.72}
-              .dl-run{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .dl-grp{animation:dlIn .7s cubic-bezier(.22,1,.36,1) both}
-                .dg1{animation-delay:.06s}.dg2{animation-delay:.2s}.dg3{animation-delay:.34s}.dg4{animation-delay:.48s}
-                @keyframes dlIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-                .dl-r-top{animation:dlTop 3s linear infinite}
-                @keyframes dlTop{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(212px)}}
-                .dl-r-right{animation:dlRight 1.3s linear infinite}
-                @keyframes dlRight{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(86px)}}
-                .dl-r-bottom{animation:dlBottom 3s linear infinite}
-                @keyframes dlBottom{0%{opacity:0;transform:translateX(0)}14%{opacity:1}86%{opacity:1}100%{opacity:0;transform:translateX(-212px)}}
-                .dl-r-left{animation:dlLeft 1.3s linear infinite}
-                @keyframes dlLeft{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(-86px)}}
-              }
-            </style>
-
-            <!-- loop flow arrows (clockwise) -->
-            <line class="dl-flow" x1="132" y1="75" x2="344" y2="75"/>
-            <path class="dl-flow" d="M336 70 L344 75 L336 80"/>
-            <line class="dl-flow" x1="392" y1="110" x2="392" y2="196"/>
-            <path class="dl-flow" d="M387 188 L392 196 L397 188"/>
-            <line class="dl-flow" x1="344" y1="231" x2="132" y2="231"/>
-            <path class="dl-flow" d="M140 226 L132 231 L140 236"/>
-            <line class="dl-flow" x1="84" y1="196" x2="84" y2="110"/>
-            <path class="dl-flow" d="M79 118 L84 110 L89 118"/>
-
-            <!-- circulating dots -->
-            <circle class="dl-run dl-r-top" cx="132" cy="75" r="3"/>
-            <circle class="dl-run dl-r-right" cx="392" cy="110" r="3"/>
-            <circle class="dl-run dl-r-bottom" cx="344" cy="231" r="3"/>
-            <circle class="dl-run dl-r-left" cx="84" cy="196" r="3"/>
-
-            <!-- arrow labels -->
-            <text class="dl-alabel" x="238" y="93">message</text>
-            <text class="dl-alabel" x="238" y="216">from anywhere</text>
-
-            <!-- agent core -->
-            <circle class="dl-ring" cx="238" cy="153" r="46"/>
-            <g class="dl-a" transform="translate(201.1,117.9) scale(0.072)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-
-            <!-- You -->
-            <g class="dl-grp dg1">
-              <rect class="dl-tile" x="36" y="40" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="58" r="5.5"/>
-              <path class="dl-glyph" d="M74 74 a10 9 0 0 1 20 0"/>
-              <text class="dl-name" x="84" y="89">You</text>
-              <text class="dl-sub" x="84" y="102">delegate a task</text>
-            </g>
-
-            <!-- Working -->
-            <g class="dl-grp dg2">
-              <rect class="dl-tile" x="344" y="40" width="96" height="70" rx="14"/>
-              <circle class="dl-dot" cx="383" cy="64" r="2.6"/>
-              <circle class="dl-dot" cx="392" cy="64" r="2.6"/>
-              <circle class="dl-dot" cx="401" cy="64" r="2.6"/>
-              <text class="dl-name" x="392" y="89">Working</text>
-              <text class="dl-sub" x="392" y="102">in the background</text>
-            </g>
-
-            <!-- Checks in (approval gate) -->
-            <g class="dl-grp dg3">
-              <rect class="dl-tile" x="344" y="196" width="96" height="70" rx="14"/>
-              <rect class="dl-glyph" x="380" y="209" width="24" height="16" rx="5"/>
-              <path class="dl-glyph" d="M384 225 l-1 5 5-4"/>
-              <path class="dl-glyph" d="M386 217 l3 3 6-6"/>
-              <text class="dl-name" x="392" y="245">Checks in</text>
-              <text class="dl-sub" x="392" y="258">with what it found</text>
-            </g>
-
-            <!-- Done -->
-            <g class="dl-grp dg4">
-              <rect class="dl-tile" x="36" y="196" width="96" height="70" rx="14"/>
-              <circle class="dl-glyph" cx="84" cy="217" r="10"/>
-              <path class="dl-glyph" d="M79 218 l3.5 4 7-8"/>
-              <text class="dl-name" x="84" y="245">Done</text>
-              <text class="dl-sub" x="84" y="258">handled for you</text>
-            </g>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 464" role="img" aria-labelledby="dlm-t" xmlns="http://www.w3.org/2000/svg">
-  <title id="dlm-t">The delegation loop: you send a task to your agent, the agent works in the background, checks in with what it found, and reports back when it is done, a continuous cycle around the agent.</title>
-  <style>
-    .dlm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-    .dlm-a{fill:var(--accent)}
-    .dlm-tile{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.4}
-    .dlm-glyph{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-    .dlm-dot{fill:var(--accent)}
-    .dlm-flow{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.34;stroke-linecap:round;stroke-linejoin:round}
-    .dlm-name{fill:currentColor;font-size:12px;font-weight:700;text-anchor:middle}
-    .dlm-sub{fill:currentColor;opacity:.6;font-size:10.5px;text-anchor:middle}
-    .dlm-alabel{fill:currentColor;font-size:10.5px;font-weight:600;text-anchor:start;opacity:.72}
-    .dlm-run{fill:var(--accent)}
-    @media (prefers-reduced-motion:no-preference){
-      .dlm-grp{animation:dlmIn .7s cubic-bezier(.22,1,.36,1) both}
-      .dlm-g1{animation-delay:.06s}.dlm-g2{animation-delay:.2s}.dlm-g3{animation-delay:.34s}.dlm-g4{animation-delay:.48s}
-      @keyframes dlmIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-      .dlm-r-d1{animation:dlmDrop54 1.1s linear infinite}
-      .dlm-r-d2{animation:dlmDrop44 .9s linear infinite}
-      .dlm-r-d3{animation:dlmDrop54 1.1s linear infinite}
-      @keyframes dlmDrop54{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(54px)}}
-      @keyframes dlmDrop44{0%{opacity:0;transform:translateY(0)}20%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(44px)}}
-      .dlm-r-up{animation:dlmRise 3.4s linear infinite}
-      @keyframes dlmRise{0%{opacity:0;transform:translateY(0)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-362px)}}
-    }
-  </style>
-
-  <!-- downward flow arrows between the stacked tiles -->
-  <line class="dlm-flow" x1="96" y1="86" x2="96" y2="140"/>
-  <path class="dlm-flow" d="M91 132 L96 140 L101 132"/>
-  <line class="dlm-flow" x1="96" y1="210" x2="96" y2="254"/>
-  <path class="dlm-flow" d="M91 246 L96 254 L101 246"/>
-  <line class="dlm-flow" x1="96" y1="324" x2="96" y2="378"/>
-  <path class="dlm-flow" d="M91 370 L96 378 L101 370"/>
-
-  <!-- return wire closing the loop up the right side -->
-  <path class="dlm-flow" d="M176 413 H324 V51 H176"/>
-  <path class="dlm-flow" d="M184 46 L176 51 L184 56"/>
-
-  <!-- circulating dots -->
-  <circle class="dlm-run dlm-r-d1" cx="96" cy="86" r="3"/>
-  <circle class="dlm-run dlm-r-d2" cx="96" cy="210" r="3"/>
-  <circle class="dlm-run dlm-r-d3" cx="96" cy="324" r="3"/>
-  <circle class="dlm-run dlm-r-up" cx="324" cy="413" r="3"/>
-
-  <!-- arrow labels -->
-  <text class="dlm-alabel" x="110" y="117">message</text>
-  <text class="dlm-alabel" x="110" y="355">from anywhere</text>
-
-  <!-- agent core, enclosed by the loop -->
-  <circle class="dlm-ring" cx="250" cy="232" r="44"/>
-  <g class="dlm-a" transform="translate(214.7,198.4) scale(0.069)">
-    <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-    <polygon points="328,887 512,727 696,887"/>
-  </g>
-
-  <!-- You -->
-  <g class="dlm-grp dlm-g1">
-    <rect class="dlm-tile" x="16" y="16" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="32" r="5.5"/>
-    <path class="dlm-glyph" d="M86 48 a10 9 0 0 1 20 0"/>
-    <text class="dlm-name" x="96" y="63">You</text>
-    <text class="dlm-sub" x="96" y="76">delegate a task</text>
-  </g>
-
-  <!-- Working -->
-  <g class="dlm-grp dlm-g2">
-    <rect class="dlm-tile" x="16" y="140" width="160" height="70" rx="14"/>
-    <circle class="dlm-dot" cx="87" cy="161" r="2.6"/>
-    <circle class="dlm-dot" cx="96" cy="161" r="2.6"/>
-    <circle class="dlm-dot" cx="105" cy="161" r="2.6"/>
-    <text class="dlm-name" x="96" y="187">Working</text>
-    <text class="dlm-sub" x="96" y="200">in the background</text>
-  </g>
-
-  <!-- Checks in (approval gate) -->
-  <g class="dlm-grp dlm-g3">
-    <rect class="dlm-tile" x="16" y="254" width="160" height="70" rx="14"/>
-    <rect class="dlm-glyph" x="84" y="262" width="24" height="16" rx="5"/>
-    <path class="dlm-glyph" d="M88 279 l-1 5 5-4"/>
-    <path class="dlm-glyph" d="M91 270 l3 3 6-6"/>
-    <text class="dlm-name" x="96" y="301">Checks in</text>
-    <text class="dlm-sub" x="96" y="314">with what it found</text>
-  </g>
-
-  <!-- Done -->
-  <g class="dlm-grp dlm-g4">
-    <rect class="dlm-tile" x="16" y="378" width="160" height="70" rx="14"/>
-    <circle class="dlm-glyph" cx="96" cy="397" r="10"/>
-    <path class="dlm-glyph" d="M91 397 l3.5 4 7-8"/>
-    <text class="dlm-name" x="96" y="425">Done</text>
-    <text class="dlm-sub" x="96" y="438">handled for you</text>
-  </g>
-</svg>
-          <figcaption>You send a task; it works in the background, gets it done, and reports back when it&rsquo;s finished.</figcaption>
-        </figure>
+        <!-- The delegation-loop figure stood here until 2026-09-11. It came out because the
+             living agent two sections down draws the same loop with the gate and the AI company
+             on it, and two animated loops on one page fought each other. The recording below is
+             a handover happening, which is the better picture of one anyway. -->
 
         <p class="calm-note calm-note--center">It holds the things you&rsquo;d otherwise carry in your head. Tell it once: the follow-up on Friday, the detail to check before the call. It keeps hold of it, and messages you first when the time comes.</p>
 
@@ -730,243 +544,120 @@
         </div>
 
         <div class="mt-48">
-          <figure class="explain-figure fade-up delay-3">
-            <svg class="explain-svg--desktop" viewBox="0 0 600 446" role="img" aria-labelledby="wyn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-              <title id="wyn-t">The whole list is 3 things: a computer that stays on and connected to the internet, an account with an AI company, and an Otian account with a plan. Below them, marked as something to add when you want it, sits a chat app, so your agent can reach you anywhere. Below a second divider marked &ldquo;not on the list&rdquo; sit 3 things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
-              <style>
-                .wyn-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.5}
-                .wyn-tickbg{fill:var(--accent)}
-                /* Outlined rather than filled, for the one item that is wanted rather than needed.
-                   Same size and same column as the ticks, so the list still reads as one list. */
-                .wyn-plus-ring{fill:none;stroke:var(--accent);stroke-width:1.6}
-                .wyn-plus{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
-                .wyn-tickmk{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-                .wyn-brace{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-                .wyn-big{fill:var(--accent);font-size:46px;font-weight:700;text-anchor:middle}
-                .wyn-biglbl{fill:currentColor;opacity:.55;font-size:10px;font-weight:600;text-anchor:middle;letter-spacing:.06em}
-                .wyn-name{fill:currentColor;font-size:12.5px;font-weight:700}
-                .wyn-sub{fill:currentColor;opacity:.6;font-size:9.5px}
-                .wyn-div{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.28;stroke-dasharray:4 5;stroke-linecap:round}
-                .wyn-divlbl{fill:currentColor;opacity:.5;font-size:10px;font-weight:600;text-anchor:middle;letter-spacing:.04em}
-                .wyn-outbox{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.2;stroke-dasharray:5 5}
-                .wyn-no{fill:none;stroke:var(--text-muted);stroke-width:1.4}
-                .wyn-noslash{fill:none;stroke:var(--text-muted);stroke-width:1.5;stroke-linecap:round}
-                .wyn-offname{fill:currentColor;opacity:.55;font-size:11.5px;font-weight:600}
-                .wyn-offsub{fill:currentColor;opacity:.4;font-size:9.5px;text-anchor:end}
+        <!-- The kit, drawn: the same figure equipment/ carries, untailored. It replaced a
+             figure of this list with 87 words of labels on 2026-09-11; the three cards above
+             are the list, and this is the picture of what you end up with. -->
+        <figure class="explain-figure kit-figure fade-up delay-3" data-machine="mini" data-net="wired" data-platform="mac">
+          <svg class="explain-svg--desktop" viewBox="0 0 560 300" role="img" aria-label="The kit: a computer that stays awake, wired to the router or on Wi-Fi, reaching the internet, and your phone reaching your agent from anywhere. Under a line, crossed off: a graphics card, a server, a second monitor, a static address." xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <style>
+              .kf-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .kf-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .kf-tiny{fill:currentColor;opacity:.6;font-size:10px;text-anchor:middle}
+              .kf-body{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+              .kf-box{fill:var(--bg-card);stroke:currentColor;stroke-width:1.5;opacity:.85}
+              .kf-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .kf-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .kf-wire--dashed{stroke-dasharray:4 5}
+              .kf-arc{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round}
+              .kf-badge{fill:var(--c-blue-subtle);stroke:var(--c-blue);stroke-width:1}
+              .kf-badgetext{fill:var(--c-blue-ink);font-size:10.5px;font-weight:650;text-anchor:middle}
+              .kf-power{fill:var(--c-green)}
+              .kf-rule{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:3 5}
+              .kf-no{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1}
+              .kf-notext{fill:currentColor;opacity:.55;font-size:10.5px;text-anchor:middle}
+              .kf-strike{stroke:currentColor;stroke-width:1.4;opacity:.55;stroke-linecap:round}
+              .kf-m,.kf-net{display:none}
+              .kit-figure[data-machine="mini"] .kf-m--mini,
+              .kit-figure[data-machine="desktop"] .kf-m--desktop,
+              .kit-figure[data-machine="laptop"] .kf-m--laptop,
+              .kit-figure[data-net="wired"] .kf-net--wired,
+              .kit-figure[data-net="wifi"] .kf-net--wifi{display:block}
+              .kf-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .kf-dot{display:block;offset-distance:35%}
                 @media (prefers-reduced-motion:no-preference){
-                  .wyn-row{animation:wynIn .7s cubic-bezier(.22,1,.36,1) both}
-                  .wy0{animation-delay:0s}.wy1{animation-delay:.1s}.wy2{animation-delay:.24s}.wy3{animation-delay:.34s}.wy4{animation-delay:.44s}
-                  @keyframes wynIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-                  .wyn-brace{stroke-dasharray:1;animation:wynDraw .9s ease-out both;animation-delay:.14s}
-                  @keyframes wynDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-                  .wyn-tick{animation:wynPop .55s cubic-bezier(.34,1.56,.64,1) both;transform-box:fill-box;transform-origin:center}
-                  .wt1{animation-delay:.42s}.wt2{animation-delay:.56s}.wt3{animation-delay:.68s}.wt4{animation-delay:.8s}
-                  @keyframes wynPop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
-                  .wyn-off{animation:wynOff .8s ease-out both}
-                  .wo1{animation-delay:.78s}.wo2{animation-delay:.9s}.wo3{animation-delay:1.02s}
-                  @keyframes wynOff{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+                  .kf-dot{animation:kfLap 7s linear infinite}
+                  @keyframes kfLap{from{offset-distance:0%}to{offset-distance:100%}}
+                  .kf-power{animation:kfBreathe 2.4s ease-in-out infinite}
+                  @keyframes kfBreathe{0%,100%{opacity:1}50%{opacity:.35}}
                 }
-              </style>
+              }
+            </style>
 
-              <!-- the list, and how short it is.
+            <!-- the computer: one of three bodies -->
+            <g class="kf-m kf-m--mini"><rect class="kf-body" x="54" y="112" width="92" height="40" rx="9"/><circle class="kf-power" cx="132" cy="132" r="2.5"/></g>
+            <g class="kf-m kf-m--desktop"><rect class="kf-body" x="72" y="46" width="56" height="106" rx="6"/><line class="kf-line" x1="84" y1="64" x2="116" y2="64"/><line class="kf-line" x1="84" y1="74" x2="116" y2="74"/><circle class="kf-power" cx="100" cy="140" r="2.5"/></g>
+            <g class="kf-m kf-m--laptop"><rect class="kf-body" x="60" y="82" width="80" height="54" rx="4"/><path class="kf-body" d="M48,136 h104 l8,14 h-120 z"/><circle class="kf-power" cx="100" cy="143" r="2"/></g>
+            <text class="kf-name kf-machine" x="100" y="176">Your computer</text>
+            <text class="kf-sub kf-os" x="100" y="191">macOS 12 Monterey or later</text>
+            <rect class="kf-badge" x="52" y="202" width="96" height="20" rx="10"/><text class="kf-badgetext" x="100" y="215.5">sleep: never</text>
 
-                   Three, not four. The chat app was inside this brace until 2026-08-06 and stopped
-                   being a requirement when Archie gained a conversation of its own; it sits below
-                   the brace now, with an outlined plus rather than a filled tick, because "you will
-                   want this" and "you cannot start without this" are different promises and a
-                   diagram that draws them identically makes the smaller one into a barrier. -->
-              <g class="wyn-row wy0">
-                <text class="wyn-big" x="38" y="110">3</text>
-                <text class="wyn-biglbl" x="38" y="130">THINGS</text>
-              </g>
-              <path class="wyn-brace" pathLength="1" d="M88 14 H80 Q76 14 76 18 V182 Q76 186 80 186 H88"/>
+            <!-- the link to the router: a cable, or Wi-Fi -->
+            <g class="kf-net kf-net--wired"><line class="kf-wire" x1="150" y1="132" x2="250" y2="132"/><text class="kf-tiny" x="200" y="124">a cable</text></g>
+            <g class="kf-net kf-net--wifi"><path class="kf-arc" d="M186,140 a20,20 0 0 1 28,0"/><path class="kf-arc" d="M179,131 a30,30 0 0 1 42,0"/><path class="kf-arc" d="M172,122 a40,40 0 0 1 56,0"/><text class="kf-tiny" x="200" y="158">Wi-Fi</text></g>
 
-              <g class="wyn-row wy1">
-                <rect class="wyn-in" x="96" y="14" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="36">A computer that stays on</text>
-                <text class="wyn-sub" x="154" y="52">and online, so your agent can answer</text>
-              </g>
-              <g class="wyn-tick wt1">
-                <circle class="wyn-tickbg" cx="124" cy="40" r="14"/>
-                <path class="wyn-tickmk" d="M115.3 40.9 L121.4 47 L131 33.9"/>
-              </g>
+            <!-- the router, and the internet above it -->
+            <rect class="kf-box" x="250" y="116" width="80" height="32" rx="6"/>
+            <line class="kf-line" x1="262" y1="116" x2="262" y2="100"/><line class="kf-line" x1="318" y1="116" x2="318" y2="100"/>
+            <text class="kf-name" x="290" y="176">Router</text>
+            <path class="kf-box" d="M266,66 a13,13 0 0 1 25,-9 a12,12 0 0 1 22,7 a10,10 0 0 1 -2,20 h-44 a10,10 0 0 1 -1,-18 z"/>
+            <text class="kf-tiny" x="290" y="46">the internet</text>
+            <line class="kf-wire" x1="290" y1="116" x2="290" y2="84"/>
 
-              <g class="wyn-row wy2">
-                <rect class="wyn-in" x="96" y="74" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="96">An AI company account</text>
-                <text class="wyn-sub" x="154" y="112">pay-as-you-go, billed straight to you</text>
-              </g>
-              <g class="wyn-tick wt2">
-                <circle class="wyn-tickbg" cx="124" cy="100" r="14"/>
-                <path class="wyn-tickmk" d="M115.3 100.9 L121.4 107 L131 93.9"/>
-              </g>
+            <!-- your phone, anywhere -->
+            <path class="kf-wire kf-wire--dashed" d="M314,70 L436,96"/>
+            <rect class="kf-box" x="436" y="66" width="48" height="90" rx="8"/>
+            <rect class="kf-body" x="446" y="92" width="30" height="16" rx="6"/>
+            <text class="kf-name" x="460" y="176">Your phone</text>
+            <text class="kf-sub" x="460" y="191">how you reach it</text>
 
-              <g class="wyn-row wy3">
-                <rect class="wyn-in" x="96" y="134" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="156">An Otian account, and a plan</text>
-                <text class="wyn-sub" x="154" y="172">$30 a month, or $299 a year</text>
-              </g>
-              <g class="wyn-tick wt3">
-                <circle class="wyn-tickbg" cx="124" cy="160" r="14"/>
-                <path class="wyn-tickmk" d="M115.3 160.9 L121.4 167 L131 153.9"/>
-              </g>
+            <!-- the reply, travelling -->
+            <circle class="kf-dot" r="5" style="offset-path:path('M150,132 L250,132 L290,132 L290,84 L314,70 L436,96 L314,70 L290,84 L290,132 L250,132 L150,132')"/>
 
-              <!-- outside the brace: wanted, not required -->
-              <line class="wyn-div" x1="96" y1="212" x2="254" y2="212"/>
-              <line class="wyn-div" x1="426" y1="212" x2="584" y2="212"/>
-              <text class="wyn-divlbl" x="340" y="216">and then, when you want it</text>
+            <!-- under the line: what people expect to need and do not -->
+            <line class="kf-rule" x1="30" y1="240" x2="530" y2="240"/>
+            <text class="kf-tiny" x="280" y="233">not on the list</text>
+            <rect class="kf-no" x="30" y="254" width="104" height="22" rx="11"/><text class="kf-notext" x="82" y="268.5">a graphics card</text><line class="kf-strike" x1="44" y1="265" x2="120" y2="265"/>
+            <rect class="kf-no" x="146" y="254" width="70" height="22" rx="11"/><text class="kf-notext" x="181" y="268.5">a server</text><line class="kf-strike" x1="158" y1="265" x2="204" y2="265"/>
+            <rect class="kf-no" x="228" y="254" width="116" height="22" rx="11"/><text class="kf-notext" x="286" y="268.5">a second monitor</text><line class="kf-strike" x1="242" y1="265" x2="330" y2="265"/>
+            <rect class="kf-no" x="356" y="254" width="112" height="22" rx="11"/><text class="kf-notext" x="412" y="268.5">a static address</text><line class="kf-strike" x1="370" y1="265" x2="454" y2="265"/>
+          </svg>
 
-              <g class="wyn-row wy4">
-                <rect class="wyn-in" x="96" y="228" width="488" height="52" rx="12"/>
-                <text class="wyn-name" x="154" y="250">A chat app, to be reached anywhere</text>
-                <text class="wyn-sub" x="154" y="266">Telegram, Discord, Slack, Matrix, iMessage</text>
-              </g>
-              <g class="wyn-tick wt4">
-                <circle class="wyn-plus-ring" cx="124" cy="254" r="13.5"/>
-                <path class="wyn-plus" d="M124 247.5 V260.5 M117.5 254 H130.5"/>
-              </g>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-label="The kit: a computer that stays awake, wired to the router or on Wi-Fi, reaching the internet, and your phone reaching your agent from anywhere. Under a line, crossed off: a graphics card, a server, a second monitor, a static address." xmlns="http://www.w3.org/2000/svg">
+            <g class="kf-m kf-m--mini"><rect class="kf-body" x="32" y="108" width="92" height="40" rx="9"/><circle class="kf-power" cx="110" cy="128" r="2.5"/></g>
+            <g class="kf-m kf-m--desktop"><rect class="kf-body" x="50" y="42" width="56" height="106" rx="6"/><line class="kf-line" x1="62" y1="60" x2="94" y2="60"/><line class="kf-line" x1="62" y1="70" x2="94" y2="70"/><circle class="kf-power" cx="78" cy="136" r="2.5"/></g>
+            <g class="kf-m kf-m--laptop"><rect class="kf-body" x="38" y="78" width="80" height="54" rx="4"/><path class="kf-body" d="M26,132 h104 l8,14 h-120 z"/><circle class="kf-power" cx="78" cy="139" r="2"/></g>
+            <text class="kf-name kf-machine" x="78" y="172">Your computer</text>
+            <text class="kf-sub kf-os" x="78" y="187">macOS 12 Monterey or later</text>
+            <rect class="kf-badge" x="30" y="198" width="96" height="20" rx="10"/><text class="kf-badgetext" x="78" y="211.5">sleep: never</text>
 
-              <!-- and what conspicuously is not on it -->
-              <line class="wyn-div" x1="96" y1="306" x2="288" y2="306"/>
-              <line class="wyn-div" x1="392" y1="306" x2="584" y2="306"/>
-              <text class="wyn-divlbl" x="340" y="310">not on the list</text>
+            <g class="kf-net kf-net--wired"><line class="kf-wire" x1="128" y1="128" x2="170" y2="128"/><text class="kf-tiny" x="149" y="120">a cable</text></g>
+            <g class="kf-net kf-net--wifi"><path class="kf-arc" d="M139,136 a14,14 0 0 1 20,0"/><path class="kf-arc" d="M133,128 a22,22 0 0 1 32,0"/><text class="kf-tiny" x="149" y="152">Wi-Fi</text></g>
 
-              <g class="wyn-off wo1">
-                <rect class="wyn-outbox" x="96" y="322" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="339" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="343.5" x2="128.5" y2="334.5"/>
-                <text class="wyn-offname" x="150" y="343">Anything to install on your phone</text>
-                <text class="wyn-offsub" x="568" y="343">your chat app is already there</text>
-              </g>
-              <g class="wyn-off wo2">
-                <rect class="wyn-outbox" x="96" y="360" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="377" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="381.5" x2="128.5" y2="372.5"/>
-                <text class="wyn-offname" x="150" y="381">A new computer</text>
-                <text class="wyn-offsub" x="568" y="381">use the one you have</text>
-              </g>
-              <g class="wyn-off wo3">
-                <rect class="wyn-outbox" x="96" y="398" width="488" height="34" rx="10"/>
-                <circle class="wyn-no" cx="124" cy="415" r="9"/>
-                <line class="wyn-noslash" x1="119.5" y1="419.5" x2="128.5" y2="410.5"/>
-                <text class="wyn-offname" x="150" y="419">A minimum spend</text>
-                <text class="wyn-offsub" x="568" y="419">you pay for what it does</text>
-              </g>
-            </svg>
-            <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="wynm-t" xmlns="http://www.w3.org/2000/svg">
-              <title id="wynm-t">The whole list is 3 things: a computer that stays on and connected to the internet, an account with an AI company, and an Otian account with a plan. Below them, marked as something to add when you want it, sits a chat app, so your agent can reach you anywhere. Below a second divider marked &ldquo;not on the list&rdquo; sit 3 things crossed off: anything to install on your phone, a new computer, and a minimum spend.</title>
-              <style>
-                .wynm-in{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.4}
-                .wynm-tickbg{fill:var(--accent)}
-                .wynm-plus-ring{fill:none;stroke:var(--accent);stroke-width:1.6}
-                .wynm-plus{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
-                .wynm-tickmk{fill:none;stroke:var(--text-on-accent);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-                .wynm-brace{fill:none;stroke:var(--accent);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-                .wynm-big{fill:var(--accent);font-size:38px;font-weight:700;text-anchor:middle}
-                .wynm-biglbl{fill:currentColor;opacity:.55;font-size:9.5px;font-weight:600;text-anchor:middle;letter-spacing:.06em}
-                .wynm-name{fill:currentColor;font-size:11px;font-weight:700}
-                .wynm-sub{fill:currentColor;opacity:.6;font-size:9px}
-                .wynm-div{fill:none;stroke:currentColor;stroke-width:1.3;opacity:.28;stroke-dasharray:4 5;stroke-linecap:round}
-                .wynm-divlbl{fill:currentColor;opacity:.5;font-size:9.5px;font-weight:600;text-anchor:middle;letter-spacing:.04em}
-                .wynm-outbox{fill:var(--surface-soft-alt);stroke:var(--line-muted);stroke-width:1.2;stroke-dasharray:5 5}
-                .wynm-no{fill:none;stroke:var(--text-muted);stroke-width:1.4}
-                .wynm-noslash{fill:none;stroke:var(--text-muted);stroke-width:1.5;stroke-linecap:round}
-                .wynm-offname{fill:currentColor;opacity:.55;font-size:10.5px;font-weight:600}
-                .wynm-offsub{fill:currentColor;opacity:.4;font-size:9px}
-                @media (prefers-reduced-motion:no-preference){
-                  .wynm-row{animation:wynmIn .7s cubic-bezier(.22,1,.36,1) both}
-                  .wym0{animation-delay:0s}.wym1{animation-delay:.1s}.wym2{animation-delay:.24s}.wym3{animation-delay:.34s}.wym4{animation-delay:.44s}
-                  @keyframes wynmIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-                  .wynm-brace{stroke-dasharray:1;animation:wynmDraw .9s ease-out both;animation-delay:.14s}
-                  @keyframes wynmDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-                  .wynm-tick{animation:wynmPop .55s cubic-bezier(.34,1.56,.64,1) both;transform-box:fill-box;transform-origin:center}
-                  .wtm1{animation-delay:.42s}.wtm2{animation-delay:.56s}.wtm3{animation-delay:.68s}.wtm4{animation-delay:.8s}
-                  @keyframes wynmPop{0%{opacity:0;transform:scale(.4)}60%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
-                  .wynm-off{animation:wynmOff .8s ease-out both}
-                  .wom1{animation-delay:.78s}.wom2{animation-delay:.9s}.wom3{animation-delay:1.02s}
-                  @keyframes wynmOff{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-                }
-              </style>
+            <rect class="kf-box" x="170" y="112" width="70" height="32" rx="6"/>
+            <line class="kf-line" x1="182" y1="112" x2="182" y2="96"/><line class="kf-line" x1="228" y1="112" x2="228" y2="96"/>
+            <text class="kf-name" x="205" y="172">Router</text>
+            <path class="kf-box" d="M181,62 a13,13 0 0 1 25,-9 a12,12 0 0 1 22,7 a10,10 0 0 1 -2,20 h-44 a10,10 0 0 1 -1,-18 z"/>
+            <text class="kf-tiny" x="205" y="42">the internet</text>
+            <line class="kf-wire" x1="205" y1="112" x2="205" y2="80"/>
 
-              <g class="wynm-row wym0">
-                <text class="wynm-big" x="24" y="106">3</text>
-                <text class="wynm-biglbl" x="24" y="126">THINGS</text>
-              </g>
-              <path class="wynm-brace" pathLength="1" d="M60 14 H54 Q48 14 48 20 V182 Q48 188 54 188 H60"/>
+            <path class="kf-wire kf-wire--dashed" d="M229,66 L272,96"/>
+            <rect class="kf-box" x="266" y="92" width="44" height="82" rx="8"/>
+            <rect class="kf-body" x="275" y="116" width="26" height="14" rx="6"/>
+            <text class="kf-name" x="288" y="196">Your phone</text>
+            <text class="kf-sub" x="288" y="211">how you reach it</text>
 
-              <g class="wynm-row wym1">
-                <rect class="wynm-in" x="64" y="14" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="36">A computer that stays on</text>
-                <text class="wynm-sub" x="110" y="52">and online, so your agent can answer</text>
-              </g>
-              <g class="wynm-tick wtm1">
-                <circle class="wynm-tickbg" cx="88" cy="41" r="13"/>
-                <path class="wynm-tickmk" d="M79.9 41.8 L85.6 47.5 L94.5 35.3"/>
-              </g>
+            <circle class="kf-dot" r="5" style="offset-path:path('M128,128 L170,128 L205,128 L205,80 L229,66 L272,96 L229,66 L205,80 L205,128 L170,128 L128,128')"/>
 
-              <g class="wynm-row wym2">
-                <rect class="wynm-in" x="64" y="74" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="96">An AI company account</text>
-                <text class="wynm-sub" x="110" y="112">pay-as-you-go, billed straight to you</text>
-              </g>
-              <g class="wynm-tick wtm2">
-                <circle class="wynm-tickbg" cx="88" cy="101" r="13"/>
-                <path class="wynm-tickmk" d="M79.9 101.8 L85.6 107.5 L94.5 95.3"/>
-              </g>
-
-              <g class="wynm-row wym3">
-                <rect class="wynm-in" x="64" y="134" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="156">An Otian account, and a plan</text>
-                <text class="wynm-sub" x="110" y="172">$30 a month, or $299 a year</text>
-              </g>
-              <g class="wynm-tick wtm3">
-                <circle class="wynm-tickbg" cx="88" cy="161" r="13"/>
-                <path class="wynm-tickmk" d="M79.9 161.8 L85.6 167.5 L94.5 155.3"/>
-              </g>
-
-              <!-- outside the brace: wanted, not required -->
-              <line class="wynm-div" x1="64" y1="212" x2="140" y2="212"/>
-              <line class="wynm-div" x1="256" y1="212" x2="332" y2="212"/>
-              <text class="wynm-divlbl" x="198" y="216">when you want it</text>
-
-              <g class="wynm-row wym4">
-                <rect class="wynm-in" x="64" y="228" width="268" height="54" rx="12"/>
-                <text class="wynm-name" x="110" y="250">A chat app, to be reached</text>
-                <text class="wynm-sub" x="110" y="266">Telegram, Discord, Slack, iMessage</text>
-              </g>
-              <g class="wynm-tick wtm4">
-                <circle class="wynm-plus-ring" cx="88" cy="255" r="13"/>
-                <path class="wynm-plus" d="M88 248.5 V261.5 M81.5 255 H94.5"/>
-              </g>
-
-              <line class="wynm-div" x1="64" y1="306" x2="153" y2="306"/>
-              <line class="wynm-div" x1="243" y1="306" x2="332" y2="306"/>
-              <text class="wynm-divlbl" x="198" y="310">not on the list</text>
-
-              <g class="wynm-off wom1">
-                <rect class="wynm-outbox" x="64" y="322" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="343" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="347.2" x2="92.2" y2="338.8"/>
-                <text class="wynm-offname" x="110" y="340">Anything to install on your phone</text>
-                <text class="wynm-offsub" x="110" y="354">your chat app is already there</text>
-              </g>
-              <g class="wynm-off wom2">
-                <rect class="wynm-outbox" x="64" y="370" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="391" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="395.2" x2="92.2" y2="386.8"/>
-                <text class="wynm-offname" x="110" y="388">A new computer</text>
-                <text class="wynm-offsub" x="110" y="402">use the one you have</text>
-              </g>
-              <g class="wynm-off wom3">
-                <rect class="wynm-outbox" x="64" y="418" width="268" height="42" rx="10"/>
-                <circle class="wynm-no" cx="88" cy="439" r="8.5"/>
-                <line class="wynm-noslash" x1="83.8" y1="443.2" x2="92.2" y2="434.8"/>
-                <text class="wynm-offname" x="110" y="436">A minimum spend</text>
-                <text class="wynm-offsub" x="110" y="450">you pay for what it does</text>
-              </g>
-            </svg>
-            <figcaption>3 things, then 1 worth adding, and then the list stops. Everything under the last divider is something people expect to need and don&rsquo;t.</figcaption>
-          </figure>
+            <line class="kf-rule" x1="20" y1="240" x2="320" y2="240"/>
+            <text class="kf-tiny" x="170" y="233">not on the list</text>
+            <rect class="kf-no" x="20" y="254" width="104" height="22" rx="11"/><text class="kf-notext" x="72" y="268.5">a graphics card</text><line class="kf-strike" x1="34" y1="265" x2="110" y2="265"/>
+            <rect class="kf-no" x="134" y="254" width="70" height="22" rx="11"/><text class="kf-notext" x="169" y="268.5">a server</text><line class="kf-strike" x1="146" y1="265" x2="192" y2="265"/>
+            <rect class="kf-no" x="20" y="286" width="116" height="22" rx="11"/><text class="kf-notext" x="78" y="300.5">a second monitor</text><line class="kf-strike" x1="34" y1="297" x2="122" y2="297"/>
+            <rect class="kf-no" x="146" y="286" width="112" height="22" rx="11"/><text class="kf-notext" x="202" y="300.5">a static address</text><line class="kf-strike" x1="160" y1="297" x2="244" y2="297"/>
+          </svg>
+          <figcaption>The whole kit: a computer that stays awake, a cable to the router if you can, and the phone you already have. Everything under the line is something people expect to need and do not.</figcaption>
+        </figure>
         </div>
       </div>
     </section>

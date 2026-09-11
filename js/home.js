@@ -39,15 +39,16 @@
     measure();
   }
 
-  /* Scene tabs under the hero phone. The cycle is CSS and stays CSS; this only holds one
+  /* The scene picker above the hero phone. The cycle is CSS and stays CSS; this only holds one
      scene when a tab is pressed. Holding adds `is-held` to the stage and `is-on` to that
      scene, its caption and its job record, and the stylesheet does the rest: the lap
-     animations stop, the held scene's beats play once from their own start, and the tab lights.
-     Pressing the lit tab, or leaving it alone for twenty seconds, lets the cycle go, and it
-     goes from the top because everything restarts together. The tabs light on their own clock
-     while nothing is held, so this file never has to know where the cycle is. */
+     animations stop, the held scene's beats play once from their own start, and the button
+     lights with its bar full. Pressing the lit button, or leaving it alone for twenty seconds,
+     lets the cycle go, and it goes from the top because everything restarts together. The bars
+     fill on their own clock while nothing is held, so this file never has to know where the
+     cycle is. */
   var stage = document.querySelector('.hm-stage');
-  var tabs = stage ? stage.querySelectorAll('.hm-tab[data-scene]') : [];
+  var tabs = stage ? stage.querySelectorAll('.hm-pick[data-scene]') : [];
   if (stage && tabs.length) {
     var HOLD_MS = 20000;
     var held = -1;

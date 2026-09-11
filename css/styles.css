@@ -14703,54 +14703,96 @@ html[data-theme="dark"] .booking-container iframe {
   .mon-row--theirs .mon-dot { animation: none; }
 }
 
-/* ── Hero scene tabs (homepage) ──
-   Seven pills under the phone, one per scene, on the same clock as the scenes: the same --s,
-   the same lap, the same hold, so a pill lights when its scene arrives and nothing has to be
-   told the timing twice. Pressing one is js/home.js: it puts `is-held` on the stage and
-   `is-on` on the chosen scene, caption and job record, and the rules below take over.
+/* ── Hero scene picker (homepage) ──
+   Seven small buttons above the phone, one per scene, each with a bar under it that fills
+   while its scene plays: the strip is the cycle's progress and the reader's hand on it at
+   once, the way a phone shows a run of stories. The bars run on the same lap as the scenes
+   with no delay, one keyframe set per segment (hm-seg-0 to 6, keyed by DOM order), so each
+   fills during its own nine seconds, stays full until the lap ends, and every bar empties
+   together when the cycle starts over. The button's colour lights on the scene's clock the
+   same way the captions do. Pressing one is js/home.js: it puts `is-held` on the stage and
+   `is-on` on the chosen scene, caption, job record and button, and the rules below take over.
 
    HELD. The lap animations come off everything and the held scene's beats play ONCE from
-   their own zero. Each *-held keyframe is the entrance slice of the lap keyframe it mirrors
-   (hm-in, hm-fly, hm-type, hm-char, hm-caret, the field clear and hint return, the send press,
-   hm-work-in, hm-work-row, hm-work-run), at the same seconds the lap version reaches them,
-   with the scene's --d beats as the delay and none of the --s offset. A scene that is shown by
-   toggling display restarts its animations, which is what lets the same tab be pressed twice
-   and the same beats play again. */
-.hm-tabs {
+   their own zero. Each *-held keyframe further down is the entrance slice of the lap keyframe
+   it mirrors (hm-in, hm-fly, hm-type, hm-char, hm-caret, the field clear and hint return, the
+   send press, hm-work-in, hm-work-row, hm-work-run), at the same seconds the lap version
+   reaches them, with the scene's --d beats as the delay and none of the --s offset. A scene
+   shown by toggling display restarts its animations, which is what lets the same button be
+   pressed twice and the same beats play again. */
+.hm-picks {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
   width: 100%;
   max-width: 376px;
-  margin: 16px auto 0;
+  margin: 0 auto 14px;
 }
-.hm-tab {
-  min-height: 30px;
-  padding: 5px 11px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-secondary);
+.hm-pick {
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  padding: 6px 2px 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
   font: inherit;
-  font-size: var(--fs-xs);
+  font-size: var(--fs-2xs);
   font-weight: 600;
   line-height: 1.2;
+  color: var(--text-secondary);
   cursor: pointer;
-  animation: hm-tab-lit var(--hm-lap) linear infinite both;
+  animation: hm-pick-lit var(--hm-lap) linear infinite both;
   animation-delay: calc(var(--s) * var(--hm-hold));
 }
-@keyframes hm-tab-lit {
-  0%, 0.37%    { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
-  0.9%, 13.15% { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
-  13.9%, 100%  { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
+.hm-pick svg { width: 18px; height: 18px; color: inherit; opacity: 0.85; }
+.hm-pick:hover { background: var(--surface-soft); }
+.hm-pick:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+@keyframes hm-pick-lit {
+  0%, 0.37%    { color: var(--text-secondary); }
+  0.9%, 13.15% { color: var(--accent-ink); }
+  13.9%, 100%  { color: var(--text-secondary); }
 }
-.hm-tab:hover { border-color: var(--accent); }
-.hm-tab:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-.hm-stage.is-held .hm-tab { animation: none; }
-.hm-stage.is-held .hm-tab.is-on { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
+/* The bar: a track, and a fill that runs the scene's nine seconds. */
+.hm-pick i {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 3px;
+  margin-top: 2px;
+  border-radius: 999px;
+  background: var(--line-soft);
+  overflow: hidden;
+}
+.hm-pick i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: hm-seg-0 var(--hm-lap) linear infinite both;
+}
+.hm-picks .hm-pick:nth-child(1) i::after { animation-name: hm-seg-0; }
+.hm-picks .hm-pick:nth-child(2) i::after { animation-name: hm-seg-1; }
+.hm-picks .hm-pick:nth-child(3) i::after { animation-name: hm-seg-2; }
+.hm-picks .hm-pick:nth-child(4) i::after { animation-name: hm-seg-3; }
+.hm-picks .hm-pick:nth-child(5) i::after { animation-name: hm-seg-4; }
+.hm-picks .hm-pick:nth-child(6) i::after { animation-name: hm-seg-5; }
+.hm-picks .hm-pick:nth-child(7) i::after { animation-name: hm-seg-6; }
+@keyframes hm-seg-0 { 0% { transform: scaleX(0); } 14.2857%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-1 { 0%, 14.2857% { transform: scaleX(0); } 28.5714%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-2 { 0%, 28.5714% { transform: scaleX(0); } 42.8571%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-3 { 0%, 42.8571% { transform: scaleX(0); } 57.1429%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-4 { 0%, 57.1429% { transform: scaleX(0); } 71.4286%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-5 { 0%, 71.4286% { transform: scaleX(0); } 85.7143%, 100% { transform: scaleX(1); } }
+@keyframes hm-seg-6 { 0%, 85.7143% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+.hm-stage.is-held .hm-pick { animation: none; }
+.hm-stage.is-held .hm-pick.is-on { color: var(--accent-ink); }
+.hm-stage.is-held .hm-pick i::after { animation: none; transform: scaleX(0); }
+.hm-stage.is-held .hm-pick.is-on i::after { transform: scaleX(1); }
 
 .hm-stage.is-held .hm-scene,
 .hm-stage.is-held .hm-cap,
@@ -14834,9 +14876,11 @@ html[data-theme="dark"] .booking-container iframe {
 @media (prefers-reduced-motion: reduce) {
   /* The cycle is already stopped on the first scene by the rules in section 46. Here the
      tabs stop with it, the first one lit, and a held scene arrives whole with no beats. */
-  .hm-tab { animation: none; }
-  .hm-tabs .hm-tab:first-child { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
-  .hm-stage.is-held .hm-tabs .hm-tab:first-child:not(.is-on) { background: var(--bg-card); border-color: var(--border); color: var(--text-secondary); }
+  .hm-pick, .hm-pick i::after { animation: none; }
+  .hm-picks .hm-pick:first-child { color: var(--accent-ink); }
+  .hm-picks .hm-pick:first-child i::after { transform: scaleX(1); }
+  .hm-stage.is-held .hm-picks .hm-pick:first-child:not(.is-on) { color: var(--text-secondary); }
+  .hm-stage.is-held .hm-picks .hm-pick:first-child:not(.is-on) i::after { transform: scaleX(0); }
   .hm-stage.is-held .is-on .hm-in,
   .hm-stage.is-held .is-on .hm-fly,
   .hm-stage.is-held .is-on .hm-type,
@@ -14853,8 +14897,9 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-stage.is-held .is-on .hm-work-open { max-height: none; opacity: 1; transform: none; }
 }
 @media (max-width: 640px) {
-  .hm-tabs { max-width: 320px; gap: 5px; }
-  .hm-tab { min-height: 28px; padding: 4px 10px; font-size: var(--fs-2xs); }
+  .hm-picks { max-width: 320px; gap: 3px; margin-bottom: 12px; }
+  .hm-pick { padding: 5px 1px 3px; font-size: var(--fs-3xs); }
+  .hm-pick svg { width: 16px; height: 16px; }
 }
 
 /* ── The three-row strip (compare/, all six pages) ──

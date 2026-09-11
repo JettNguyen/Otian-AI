@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-12" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-13" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -685,14 +685,37 @@
             <span class="trust-step-num">3</span>
             <div>
               <h3>Here is exactly what you should see.</h3>
-              <p>Your AI company, on your key, or our billing service standing in for it while you are spending the free credits or the plan&rsquo;s included AI. Our sign-in and plan check, carrying your account ID, and with it the version ping and crash reports until you turn those off, plus add-on catalog reads and install counts. One update check, carrying nothing about you. Downloads from our asset host when an add-on needs a tool like a voice. The phone mailbox, if you turned phone access on, sealed. Plus whichever accounts <em>you</em> connected, reached directly. If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way. <a href="details/#expected-hosts">The exact hostnames to expect &rarr;</a></p>
+              <p>Your AI company on your key, the accounts you connected, and the short list of hosts of ours in the window below, each with what it carries. If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way. <a href="details/#expected-hosts">The exact hostnames to expect &rarr;</a></p>
+
+              <!-- The monitor window, drawn. Hosts as trust/details/ names them, both of ours in
+                   full. The switch at the bottom does step 4 for the reader: a checkbox the CSS
+                   answers, no script. Under reduced motion the dots hold still. -->
+              <div class="mon fade-up">
+                <input class="mon-block-input" type="checkbox" id="mon-block" />
+                <div class="mon-window" role="group" aria-label="What a network monitor shows while Archie runs on your own AI account">
+                  <div class="mon-bar" aria-hidden="true"><span></span><span></span><span></span><b>Connections &middot; Archie</b></div>
+                  <ul class="mon-rows">
+                    <li class="mon-row mon-row--theirs"><i class="mon-dot" aria-hidden="true"></i><code>api.anthropic.com</code><span>your agent thinking, on your key: whichever of the 7 you connected</span></li>
+                    <li class="mon-row mon-row--theirs"><i class="mon-dot" aria-hidden="true"></i><code class="mon-plain">the accounts you connected</code><span>your mail, calendar and chat, on your own tokens</span></li>
+                    <li class="mon-row mon-row--ours"><i class="mon-dot" aria-hidden="true"></i><code>archie-4f35.onrender.com</code><span>your license note, add-on install counts</span><em>blocked</em></li>
+                    <li class="mon-row mon-row--theirs"><i class="mon-dot" aria-hidden="true"></i><code>firestore.googleapis.com</code><span>sign-in and plan check; the version ping until you turn it off</span></li>
+                    <li class="mon-row mon-row--ours"><i class="mon-dot" aria-hidden="true"></i><code>otianai.com</code><span>the update check, carrying nothing about you</span><em>blocked</em></li>
+                    <li class="mon-row mon-row--theirs"><i class="mon-dot" aria-hidden="true"></i><code>assets.otianai.com</code><span>only when an add-on needs a tool, like a voice</span></li>
+                    <li class="mon-row mon-row--theirs"><i class="mon-dot" aria-hidden="true"></i><code>github.com</code><span>only while an update downloads</span></li>
+                  </ul>
+                  <div class="mon-foot">
+                    <label class="mon-toggle" for="mon-block"><span class="mon-toggle-track" aria-hidden="true"><span class="mon-toggle-knob"></span></span><span>Block <code>otianai.com</code> and <code>archie-4f35.onrender.com</code></span></label>
+                    <span class="mon-verdict" aria-live="polite"><i class="mon-dot" aria-hidden="true"></i>still thinking, on your key</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="trust-step">
             <span class="trust-step-num">4</span>
             <div>
               <h3>Now block us, and watch nothing happen.</h3>
-              <p>Add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list and <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> That is the argument on this page, reduced to something you can test in thirty seconds: on your own key, nothing of ours is in that path, so cutting us out of it changes nothing about it. What does stop is everything those hosts honestly are: updates, new voice and media downloads, the install count ticking up when you add an add-on, and the periodic license renewal, so after about two months of blocking us Archie will refuse to start agents until it can check in once. Try the test before you connect a key and the free credits stop instead, because that one path really does run through us.</p>
+              <p>The switch in the window above shows what happens. Then do it for real: add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list and <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> On your own key, nothing of ours is in that path, so cutting us out of it changes nothing about it. What does stop is everything those hosts honestly are: updates, new voice and media downloads, the install count ticking up when you add an add-on, and the periodic license renewal, so after about two months of blocking us Archie will refuse to start agents until it can check in once. Try the test before you connect a key and the free credits stop instead, because that one path really does run through us.</p>
             </div>
           </div>
         </div>

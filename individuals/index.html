@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-19" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260911-20" />
   <style>
     /* individuals: hero agent line. One restrained beat above the fold, the agent mark
        breathing while the small jobs roll past. The funnel figure further down carries
@@ -365,191 +365,53 @@
           <h2 id="uses-heading" class="fade-up">The small stuff, handled.</h2>
           <p>The repetitive work, off your plate: it drafts, sorts, and reminds. Email goes out only when you send it or set a time.</p>
         </div>
+        <!-- Three lines in, one draft out. Redrawn 2026-09-11 from a funnel of 42 shapes; the
+             Send button is the claim, so it is the one thing in ember. The style block serves
+             both variants. -->
         <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 560 214" role="img" aria-labelledby="ind-loop-t" xmlns="http://www.w3.org/2000/svg" style="max-width:660px;font-family:inherit">
-            <title id="ind-loop-t">Repetitive inbox, calendar, and follow-up tasks funnel into Archie, which hands back a ready-to-send draft for you to review and send yourself.</title>
+          <svg class="explain-svg--desktop" viewBox="0 0 520 220" role="img" aria-labelledby="iv-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+            <title id="iv-t">Inbox, calendar and follow-ups on the left, three lines into Archie, and one draft reply out on the right with a Send button under it. Dots travel the lines in.</title>
             <style>
-              .ind-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.3}
-              .ind-tile{fill:rgba(224,138,91,.12);stroke:var(--accent);stroke-width:1.3}
-              .ind-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-              .ind-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32;stroke-linecap:round}
-              .ind-port{fill:var(--accent)}
-              .ind-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-              .ind-a{fill:var(--accent)}
-              .ind-card{fill:rgba(224,138,91,.04);stroke:var(--accent);stroke-width:1.5}
-              .ind-bar{fill:currentColor}
-              .ind-gate{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.4;stroke-dasharray:3 5;stroke-linecap:round}
-              .ind-badge{fill:var(--accent)}
-              .ind-check{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-              .ind-pulse{fill:none;stroke:var(--accent);stroke-width:1.5;transform-box:fill-box;transform-origin:center}
-              .ind-name{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-              .ind-lbl{fill:currentColor;font-size:11px;font-weight:600}
-              .ind-spark{fill:var(--accent)}
-              @media (prefers-reduced-motion:no-preference){
-                .ind-pulse{animation:indPulse 2.6s ease-out infinite}
-                @keyframes indPulse{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(1.9);opacity:0}}
-                .ind-spark{animation:indSpark 2.8s linear infinite}
-                @keyframes indSpark{0%{opacity:0;transform:translateX(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateX(62px)}}
+              .iv-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round;stroke-linejoin:round}
+              .iv-in{fill:currentColor;font-size:12.5px;font-weight:650}
+              .iv-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+              .iv-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .iv-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .iv-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round}
+              .iv-lab{fill:currentColor;font-size:11px;font-weight:650}
+              .iv-send{fill:var(--accent)}
+              .iv-sendtext{fill:#292624;font-size:10.5px;font-weight:650;text-anchor:middle}
+              .iv-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .iv-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .iv-dot{display:block;offset-distance:40%}
+                @media (prefers-reduced-motion:no-preference){
+                  .iv-dot{animation:ivIn 5s linear infinite}
+                  .iv-dot--2{animation-delay:-1.7s}.iv-dot--3{animation-delay:-3.4s}
+                  @keyframes ivIn{0%{offset-distance:0%;opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                }
               }
             </style>
-
-            <path class="ind-wire" d="M126 55 C158 55 162 117 188 117"/>
-            <path class="ind-wire" d="M126 117 L188 117"/>
-            <path class="ind-wire" d="M126 179 C158 179 162 117 188 117"/>
-            <path class="ind-wire" d="M268 117 L300 117"/>
-            <path class="ind-wire" d="M386 117 L402 117"/>
-            <path class="ind-wire" d="M434 117 L476 117"/>
-
-            <g transform="translate(14,33)">
-              <rect class="ind-chip" x="0" y="0" width="112" height="44" rx="12"/>
-              <rect class="ind-tile" x="12" y="10" width="24" height="24" rx="7"/>
-              <rect class="ind-glyph" x="15" y="16" width="18" height="12" rx="2.5"/>
-              <polyline class="ind-glyph" points="15,17 24,24 33,17"/>
-              <text class="ind-lbl" x="42" y="27">Inbox</text>
-            </g>
-            <g transform="translate(14,95)">
-              <rect class="ind-chip" x="0" y="0" width="112" height="44" rx="12"/>
-              <rect class="ind-tile" x="12" y="10" width="24" height="24" rx="7"/>
-              <rect class="ind-glyph" x="15" y="16" width="18" height="13" rx="2.5"/>
-              <line class="ind-glyph" x1="15" y1="21" x2="33" y2="21"/>
-              <line class="ind-glyph" x1="20" y1="13" x2="20" y2="16"/>
-              <line class="ind-glyph" x1="28" y1="13" x2="28" y2="16"/>
-              <text class="ind-lbl" x="42" y="27">Calendar</text>
-            </g>
-            <g transform="translate(14,157)">
-              <rect class="ind-chip" x="0" y="0" width="112" height="44" rx="12"/>
-              <rect class="ind-tile" x="12" y="10" width="24" height="24" rx="7"/>
-              <circle class="ind-glyph" cx="24" cy="18" r="3.8"/>
-              <path class="ind-glyph" d="M17 30 a7 6 0 0 1 14 0"/>
-              <text class="ind-lbl" x="42" y="27">Follow-ups</text>
-            </g>
-
-            <circle class="ind-port" cx="126" cy="55" r="3"/>
-            <circle class="ind-port" cx="126" cy="117" r="3"/>
-            <circle class="ind-port" cx="126" cy="179" r="3"/>
-            <circle class="ind-spark" cx="126" cy="117" r="3"/>
-            <circle class="ind-port" cx="188" cy="117" r="3"/>
-
-            <circle class="ind-ring" cx="228" cy="117" r="40"/>
-            <g class="ind-a" transform="translate(195.7,86.3) scale(0.063)">
-              <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-              <polygon points="328,887 512,727 696,887"/>
-            </g>
-            <text class="ind-name" x="228" y="171">Archie</text>
-
-            <circle class="ind-port" cx="268" cy="117" r="3"/>
-            <circle class="ind-port" cx="300" cy="117" r="3"/>
-
-            <rect class="ind-card" x="300" y="82" width="86" height="70" rx="12"/>
-            <rect class="ind-bar" x="316" y="98" width="54" height="7" rx="3.5" opacity=".22"/>
-            <rect class="ind-bar" x="316" y="112" width="40" height="6" rx="3" opacity=".14"/>
-            <rect class="ind-bar" x="316" y="124" width="48" height="6" rx="3" opacity=".14"/>
-            <text class="ind-name" x="343" y="171">Draft reply</text>
-
-            <line class="ind-gate" x1="418" y1="58" x2="418" y2="176"/>
-            <circle class="ind-pulse" cx="418" cy="117" r="16"/>
-            <circle class="ind-badge" cx="418" cy="117" r="16"/>
-            <path class="ind-check" d="M408 118 L415 125 L426 110"/>
-            <text class="ind-name" x="418" y="171">You review</text>
-
-            <circle class="ind-port" cx="476" cy="117" r="3"/>
-            <rect class="ind-card" x="476" y="94" width="58" height="46" rx="12"/>
-            <path class="ind-glyph" d="M493 116 L517 107 L506 127 L503 118 Z"/>
-            <path class="ind-glyph" d="M503 118 L517 107"/>
-            <text class="ind-name" x="505" y="171">You send it</text>
+            <path class="iv-line" d="M96,50 L200,110 L360,110"/><path class="iv-line" d="M96,110 L200,110"/><path class="iv-line" d="M96,170 L200,110"/>
+            <text class="iv-in" x="14" y="54">Inbox</text><text class="iv-in" x="14" y="114">Calendar</text><text class="iv-in" x="14" y="174">Follow-ups</text>
+            <rect class="iv-agent" x="160" y="84" width="80" height="52" rx="12"/><text class="iv-name" x="200" y="114">Archie</text>
+            <rect class="iv-card" x="360" y="70" width="140" height="80" rx="12"/>
+            <text class="iv-lab" x="374" y="92">Draft reply, ready</text><path class="iv-ink" d="M374,104h100M374,114h72"/>
+            <rect class="iv-send" x="374" y="124" width="46" height="18" rx="9"/><text class="iv-sendtext" x="397" y="136.5">Send</text>
+            <text class="iv-sub" x="430" y="170">you read it, you send it</text>
+            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M96,50 L200,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M96,110 L200,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M96,170 L200,110')"/>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="indm-t" xmlns="http://www.w3.org/2000/svg">
-  <title id="indm-t">Repetitive inbox, calendar, and follow-up tasks funnel down into Archie, which hands back a ready-to-send draft for you to review and send yourself.</title>
-  <style>
-    .indm-chip{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.3}
-    .indm-tile{fill:rgba(224,138,91,.12);stroke:var(--accent);stroke-width:1.3}
-    .indm-glyph{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-    .indm-wire{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.32;stroke-linecap:round}
-    .indm-port{fill:var(--accent)}
-    .indm-ring{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.5}
-    .indm-a{fill:var(--accent)}
-    .indm-card{fill:rgba(224,138,91,.04);stroke:var(--accent);stroke-width:1.5}
-    .indm-bar{fill:currentColor}
-    .indm-gate{fill:none;stroke:currentColor;stroke-width:1.4;opacity:.4;stroke-dasharray:3 5;stroke-linecap:round}
-    .indm-badge{fill:var(--accent)}
-    .indm-check{fill:none;stroke:var(--text-on-accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-    .indm-pulse{fill:none;stroke:var(--accent);stroke-width:1.5;transform-box:fill-box;transform-origin:center}
-    .indm-name{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-    .indm-lbl{fill:currentColor;font-size:11px;font-weight:600}
-    .indm-spark{fill:var(--accent)}
-    @media (prefers-reduced-motion:no-preference){
-      .indm-pulse{animation:indmPulse 2.6s ease-out infinite}
-      @keyframes indmPulse{0%{transform:scale(1);opacity:.5}70%,100%{transform:scale(1.9);opacity:0}}
-      .indm-spark{animation:indmSpark 2.8s linear infinite}
-      @keyframes indmSpark{0%{opacity:0;transform:translateY(0)}12%{opacity:1}80%{opacity:1}100%{opacity:0;transform:translateY(58px)}}
-    }
-  </style>
-
-  <path class="indm-wire" d="M56 80 C56 114 170 106 170 138"/>
-  <path class="indm-wire" d="M170 80 L170 138"/>
-  <path class="indm-wire" d="M284 80 C284 114 170 106 170 138"/>
-  <path class="indm-wire" d="M170 218 L170 244"/>
-  <path class="indm-wire" d="M170 314 L170 340"/>
-  <path class="indm-wire" d="M170 372 L170 414"/>
-
-  <g transform="translate(6,14)">
-    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
-    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
-    <rect class="indm-glyph" x="41" y="16" width="18" height="12" rx="2.5"/>
-    <polyline class="indm-glyph" points="41,17 50,24 59,17"/>
-    <text class="indm-name" x="50" y="54">Inbox</text>
-  </g>
-  <g transform="translate(120,14)">
-    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
-    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
-    <rect class="indm-glyph" x="41" y="16" width="18" height="13" rx="2.5"/>
-    <line class="indm-glyph" x1="41" y1="21" x2="59" y2="21"/>
-    <line class="indm-glyph" x1="46" y1="13" x2="46" y2="16"/>
-    <line class="indm-glyph" x1="54" y1="13" x2="54" y2="16"/>
-    <text class="indm-name" x="50" y="54">Calendar</text>
-  </g>
-  <g transform="translate(234,14)">
-    <rect class="indm-chip" x="0" y="0" width="100" height="66" rx="12"/>
-    <rect class="indm-tile" x="38" y="10" width="24" height="24" rx="7"/>
-    <circle class="indm-glyph" cx="50" cy="18" r="3.8"/>
-    <path class="indm-glyph" d="M43 30 a7 6 0 0 1 14 0"/>
-    <text class="indm-name" x="50" y="54">Follow-ups</text>
-  </g>
-
-  <circle class="indm-port" cx="56" cy="80" r="3"/>
-  <circle class="indm-port" cx="170" cy="80" r="3"/>
-  <circle class="indm-port" cx="284" cy="80" r="3"/>
-  <circle class="indm-spark" cx="170" cy="80" r="3"/>
-  <circle class="indm-port" cx="170" cy="138" r="3"/>
-
-  <circle class="indm-ring" cx="170" cy="178" r="40"/>
-  <g class="indm-a" transform="translate(137.7,147.3) scale(0.063)">
-    <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
-    <polygon points="328,887 512,727 696,887"/>
-  </g>
-  <text class="indm-lbl" x="222" y="182">Archie</text>
-
-  <circle class="indm-port" cx="170" cy="218" r="3"/>
-  <circle class="indm-port" cx="170" cy="244" r="3"/>
-
-  <rect class="indm-card" x="127" y="244" width="86" height="70" rx="12"/>
-  <rect class="indm-bar" x="143" y="260" width="54" height="7" rx="3.5" opacity=".22"/>
-  <rect class="indm-bar" x="143" y="274" width="40" height="6" rx="3" opacity=".14"/>
-  <rect class="indm-bar" x="143" y="286" width="48" height="6" rx="3" opacity=".14"/>
-  <text class="indm-lbl" x="221" y="283">Draft reply</text>
-
-  <line class="indm-gate" x1="112" y1="356" x2="200" y2="356"/>
-  <circle class="indm-pulse" cx="170" cy="356" r="16"/>
-  <circle class="indm-badge" cx="170" cy="356" r="16"/>
-  <path class="indm-check" d="M161 358 L167 364 L179 349"/>
-  <text class="indm-lbl" x="206" y="360">You review</text>
-
-  <circle class="indm-port" cx="170" cy="414" r="3"/>
-  <rect class="indm-card" x="141" y="414" width="58" height="46" rx="12"/>
-  <path class="indm-glyph" d="M159 438 L183 429 L172 449 L169 440 Z"/>
-  <path class="indm-glyph" d="M169 440 L183 429"/>
-  <text class="indm-lbl" x="207" y="441">You send it</text>
-</svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 300" role="img" aria-labelledby="ivm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="ivm-t">Inbox, calendar and follow-ups at the top, three lines down into Archie, and one draft reply below it with a Send button. Dots travel the lines in.</title>
+            <path class="iv-line" d="M60,44 L170,110"/><path class="iv-line" d="M170,44 L170,110"/><path class="iv-line" d="M280,44 L170,110"/><path class="iv-line" d="M170,162 L170,196"/>
+            <text class="iv-in iv-name" x="60" y="34">Inbox</text><text class="iv-in iv-name" x="170" y="34">Calendar</text><text class="iv-in iv-name" x="280" y="34">Follow-ups</text>
+            <rect class="iv-agent" x="130" y="110" width="80" height="52" rx="12"/><text class="iv-name" x="170" y="140">Archie</text>
+            <rect class="iv-card" x="100" y="196" width="140" height="80" rx="12"/>
+            <text class="iv-lab" x="114" y="218">Draft reply, ready</text><path class="iv-ink" d="M114,230h100M114,240h72"/>
+            <rect class="iv-send" x="114" y="250" width="46" height="18" rx="9"/><text class="iv-sendtext" x="137" y="262.5">Send</text>
+            <text class="iv-sub" x="170" y="294">you read it, you send it</text>
+            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M60,44 L170,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M170,44 L170,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M280,44 L170,110')"/>
+          </svg>
           <figcaption>The repetitive stuff funnels into Archie, which hands back ready-to-send drafts. You read them, and you send them.</figcaption>
         </figure>
 

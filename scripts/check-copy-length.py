@@ -80,16 +80,16 @@ BUDGETS = {
     # what is left is the new table and the sentences that make it readable. Back
     # at its ceiling: a paragraph added here still has to cut one.
     "archie/pricing/index.html": 2900,
-    # The app page is a sourced comparison that happens to live under archie/ rather than
-    # compare/, because it is about our own product. Its hand-written prose is 790 words, under
-    # the default: the overage is 342 words of comparison table and 475 words of sources, which
-    # is the same shape that makes compare/ exempt. Every quote in that table is another
-    # company's own wording, and the sources block is required by CLAUDE.md's own rule that a
-    # comparison ships with its sources. Cutting either one means either dropping a source or
-    # paraphrasing a quote, and paraphrasing somebody else's security posture is how a
-    # comparison becomes a misrepresentation. The prose half is what this budget still governs:
-    # a paragraph added there has to cut one.
-    "archie/mobile/index.html": 1650,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
+    # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
+    # because it is about our own product. Its visible prose is 426 words, well under the
+    # default, and the page is carried by a figure of three real app screens rather than by
+    # copy. The overage is two things a reader does not meet as text: 300 words of comparison
+    # table, every quote in it another company's own wording, and a 394-word sources fold that
+    # is collapsed behind a summary. Cutting either means dropping a source or paraphrasing
+    # somebody else's security posture, and paraphrasing that is how a comparison becomes a
+    # misrepresentation. The prose half is what this budget still governs, and it has room to
+    # spare on purpose: this page is meant to be looked at, not read.
+    "archie/mobile/index.html": 1150,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
 }
 
 # Pages whose job is completeness. Length is not a defect here.

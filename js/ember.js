@@ -159,12 +159,16 @@
       '<ellipse cx="118" cy="169" rx="10" ry="7.5" fill="' + hue.dark + '"/>' +
       (TOPPERS[look.topper] || TOPPERS.peak)(hue.dark, hue.mid) +
       '<circle cx="100" cy="108" r="60" fill="url(#ember-' + uid + ')"/>' +
-      '<ellipse cx="65" cy="125" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
-      '<ellipse cx="135" cy="125" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
-      eye(78, 103, eyes) + eye(122, 103, eyes) +
-      '<path class="mouth mouth-smile" d="M93 132 Q100 138 107 132" stroke="#2A2521" ' +
+      /* The face sits two units lower in the body than the app's ember-gen.ts draws it (eyes
+         105 not 103, blush 127, mouth 134): a pixel at the sizes the site shows him, asked for
+         on 2026-09-11 because he read as looking up out of his own circle. If the app takes
+         the same nudge, this note goes. */
+      '<ellipse cx="65" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
+      '<ellipse cx="135" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
+      eye(78, 105, eyes) + eye(122, 105, eyes) +
+      '<path class="mouth mouth-smile" d="M93 134 Q100 140 107 134" stroke="#2A2521" ' +
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
-      '<path class="mouth mouth-flat" d="M93 134 L107 134" stroke="#2A2521" stroke-width="3.2" ' +
+      '<path class="mouth mouth-flat" d="M93 136 L107 136" stroke="#2A2521" stroke-width="3.2" ' +
       'fill="none" stroke-linecap="round" opacity="0"/>' +
       (EXTRAS[look.extra] || EXTRAS.none)(hue.dark) +
       "</g></g></svg>";

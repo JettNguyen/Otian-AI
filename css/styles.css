@@ -13325,9 +13325,30 @@ html[data-theme="dark"] .booking-container iframe {
   padding: 10px 14px 0;
   border-top: 1px solid var(--border);
 }
-/* Where it lives, sat against the right edge of the bar. */
-.hm-pz-who { display: grid; min-width: 0; line-height: 1.25; text-align: right; }
+/* Where it lives, sat against the right edge of the bar. `min-width: 0` used to be here,
+   left over from when this held the name and had to be allowed to shrink; on a flex item
+   it let three short words fall onto two lines, so the note is held on one line and kept
+   out of the shrinking. */
+.hm-pz-who {
+  display: grid;
+  flex-shrink: 0;
+  white-space: nowrap;
+  line-height: 1.25;
+  text-align: right;
+}
 .hm-pz-who i { font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); }
+
+/* On a narrow phone the bar stops centring the agent and simply spaces the three parts out.
+   Centring is done by taking the middle out of the flow, which is what lets it sit on the
+   middle of the BAR, and the cost of being out of the flow is that nothing stops it meeting
+   the note at the right once the phone is narrow enough. Laid out in flow it cannot overlap:
+   the name gives up being exactly centred, which is the smaller loss. */
+@media (max-width: 420px) {
+  .hm-pz-agent {
+    position: static;
+    transform: none;
+  }
+}
 
 /* The thread dissolves under the header, not off the top of the device. Shorter than the 104px
    it replaces, because it no longer has to stand in for a missing top edge.

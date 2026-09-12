@@ -533,6 +533,28 @@ thirds off" (it was "four fifths" until that day). The unforced dial on the same
 **Required clause, do not drop it:** say that the checkbox also takes the add-ons off the level
 they chose. A saving quoted without its trade is a claim we cannot defend.
 
+### ✅ We work to keep the AI bill down, and we do not say how
+
+**Approved wording:** "We keep working on what a reply costs, and we do not publish how. Nobody
+here earns anything from this bill, and you should not pay more for a reply than it has to cost.
+Changes made since these figures were measured are not in them: the table moves when a full month
+with a change has been read, not before."
+
+**Why it's true:** the AI account is the owner's own and Otian takes no cut of it (the custody
+claims above), and the Archie repo carries a cost rule in its `CLAUDE.md` that a change raising
+what an ordinary reply costs has to earn it out loud, with `docs/COST-MEASURED.md` as the record
+every published figure is read from. The figures on the pricing page move only on a measurement,
+which is the standing rule on that page since 2026-08-26.
+
+**Required clauses, and one ban.** Say that we do not publish how, and say what moves the table.
+**Never describe a mechanism on the site**: not what is kept between replies, not how the tool
+list is handled, not the order scheduled reports run in, nothing about which text sits where in
+what Archie sends. Jett's direction of 2026-09-12: the outcomes are public, the methods are the
+company's. The Archie repo is private, so never write "published with the source"; "kept with the
+Archie code" is the approved form. Comparisons with what other agents cost go on the compare
+pages, sourced and dated like every other third-party figure, with at most a sentence of it on
+the pricing page.
+
 ### ✅ Your API key stays in the Keychain
 
 **Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to

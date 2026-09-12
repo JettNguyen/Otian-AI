@@ -303,28 +303,67 @@
           <p>Ask a chat app for a spreadsheet and you get a table in a message that you select, copy, paste and fix. Your agent writes the actual file and tells you where it put it. There is no download, because it was never anywhere else.</p>
         </div>
 
-        <div class="mt-40 two-col fade-up delay-1">
-          <div class="two-col-card">
-            <h3>What it can write</h3>
-            <ul class="two-col-card-list">
-              <li><strong>Tables</strong>: a real Excel workbook (.xlsx) or a plain .csv that opens in Excel, Numbers or Sheets</li>
-              <li><strong>Documents</strong>: a real Word document (.docx), or Markdown, plain text or a web page</li>
-              <li><strong>Data and cards</strong>: .json, a calendar file (.ics), or a contact card (.vcf)</li>
-              <li>Not PDFs, images, audio or video. It writes those nine kinds and nothing else</li>
-            </ul>
-          </div>
-          <div class="two-col-card">
-            <h3>Why that list is short on purpose</h3>
-            <ul class="two-col-card-list">
-              <li>It is an allowlist, not a filter on dangerous types. Anything not on it cannot be written at all</li>
-              <li>Every kind on it is inert: opening one shows text or a table, and none of them is something your computer runs on a double click</li>
-              <li>Your agent chooses the filename. It never chooses the folder. Files land in one place you were told about, and a copy stays in your Archie folder</li>
-              <li>Which matters because the text asking for a file has often passed through something we did not write</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="hm-micro fade-up">Your agent tells you the path when it is done, so a file written while you were out is one you can find from your phone. <a href="../trust/">How that is kept safe&nbsp;&rarr;</a></p>
+        <!-- The nine kinds and the one folder, drawn, 2026-09-11. Two card lists made this point in
+             239 words; the caption is TRUST.md's approved wording and the line under the figure keeps
+             the two load-bearing reasons. The style block serves both variants. -->
+        <figure class="explain-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 200" role="img" aria-labelledby="nk-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="nk-t">Your agent on the left. A card lists the nine kinds of file it can write. A dot travels a line from the agent into one folder. Under the line, struck through: PDF, images, audio, video, anything that runs.</title>
+            <style>
+              .nk-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .nk-kinds{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .nk-mono{fill:currentColor;font-size:11px;text-anchor:middle;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;opacity:.85}
+              .nk-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .nk-folder{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5;stroke-linejoin:round}
+              .nk-no{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1}
+              .nk-notext{fill:currentColor;opacity:.55;font-size:10.5px;text-anchor:middle}
+              .nk-strike{stroke:currentColor;stroke-width:1.4;opacity:.55;stroke-linecap:round}
+              .nk-lab{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .nk-cap{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .nk-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .nk-dot{display:block;offset-distance:45%}
+                @media (prefers-reduced-motion:no-preference){
+                  .nk-dot{animation:nkIn 4s linear infinite}
+                  @keyframes nkIn{0%{offset-distance:0%;opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                }
+              }
+            </style>
+            <rect class="nk-agent" x="30" y="60" width="130" height="80" rx="14"/>
+            <text class="nk-lab" x="95" y="96">Your agent</text><text class="nk-cap" x="95" y="112">writes the file itself</text>
+            <text class="nk-cap" x="310" y="16">nine kinds, and only these</text>
+            <rect class="nk-kinds" x="200" y="24" width="220" height="46" rx="10"/>
+            <text class="nk-mono" x="310" y="43">.xlsx  .csv  .docx  .md  .txt</text>
+            <text class="nk-mono" x="310" y="60">.html  .json  .ics  .vcf</text>
+            <path class="nk-wire" d="M160,100 L440,100"/>
+            <circle class="nk-dot" r="6" style="offset-path:path('M160,100 L440,100')"/>
+            <path class="nk-folder" d="M440,84 h32 l10,10 h48 v56 h-90 z"/>
+            <text class="nk-lab" x="485" y="176">One folder</text><text class="nk-cap" x="485" y="191">the one you were told about</text>
+            <rect class="nk-no" x="200" y="128" width="220" height="24" rx="12"/>
+            <text class="nk-notext" x="310" y="144">PDF &middot; images &middot; audio &middot; video &middot; anything that runs</text>
+            <line class="nk-strike" x1="216" y1="140" x2="404" y2="140"/>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 340" role="img" aria-labelledby="nkm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="nkm-t">Your agent on the left. A card lists the nine kinds of file it can write. A dot travels a line from the agent into one folder. Under the line, struck through: PDF, images, audio, video, anything that runs.</title>
+            <rect class="nk-agent" x="20" y="20" width="130" height="80" rx="14"/>
+            <text class="nk-lab" x="85" y="56">Your agent</text><text class="nk-cap" x="85" y="72">writes the file itself</text>
+            <path class="nk-wire" d="M60,100 L60,250"/>
+            <circle class="nk-dot" r="5" style="offset-path:path('M60,100 L60,250')"/>
+            <text class="nk-cap" x="220" y="112">nine kinds, and only these</text>
+            <rect class="nk-kinds" x="120" y="120" width="200" height="46" rx="10"/>
+            <text class="nk-mono" x="220" y="139">.xlsx  .csv  .docx  .md  .txt</text>
+            <text class="nk-mono" x="220" y="156">.html  .json  .ics  .vcf</text>
+            <rect class="nk-no" x="120" y="182" width="200" height="40" rx="12"/>
+            <text class="nk-notext" x="220" y="198">PDF &middot; images &middot; audio &middot; video</text>
+            <text class="nk-notext" x="220" y="213">anything that runs</text>
+            <line class="nk-strike" x1="136" y1="203" x2="304" y2="203"/>
+            <path class="nk-folder" d="M15,250 h32 l10,10 h48 v56 h-90 z"/>
+            <text class="nk-lab" x="60" y="334">One folder</text>
+            <text class="nk-cap" x="220" y="290">the one you were told about</text>
+          </svg>
+          <figcaption>Your agent writes the actual file and tells you where it put it. It chooses the filename. It never chooses the folder.</figcaption>
+        </figure>
+        <p class="hm-micro fade-up">The list is an allowlist, so anything not on it cannot be written at all, and every kind on it is inert: opening one shows text or a table, and none of them is something your computer runs on a double click. Your agent tells you the path when it is done, so a file written while you were out is one you can find from your phone. <a href="../trust/">How that is kept safe&nbsp;&rarr;</a></p>
       </div>
     </section>
 

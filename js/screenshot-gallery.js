@@ -20,6 +20,9 @@
   'use strict';
 
   var PIXELS_PER_SECOND = 35;
+  /* A gallery can set its own pace with data-pps on the .screenshot-gallery element. The
+     Archie Mobile screens run at 8: at 35 a 300px phone crossed the screen in about nine
+     seconds, which is a marquee, not a screen anybody can read. */
 
   document.querySelectorAll('.screenshot-gallery-track').forEach(function (track) {
     var items = Array.from(track.children);
@@ -40,7 +43,9 @@
 
     Promise.all(imagesReady).then(function () {
       var loopDistance = track.scrollWidth / 2;
-      var duration = Math.max(loopDistance / PIXELS_PER_SECOND, 4);
+      var gallery = track.closest('.screenshot-gallery');
+      var pps = parseFloat(gallery && gallery.getAttribute('data-pps')) || PIXELS_PER_SECOND;
+      var duration = Math.max(loopDistance / pps, 4);
       track.style.animationDuration = duration + 's';
       track.classList.add('is-ready');
     });

@@ -8,7 +8,7 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Invoice a Client | Otian AI</title>
+  <title>Hudson | Otian AI</title>
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="robots" content="noindex, nofollow" />
@@ -37,27 +37,13 @@
   </script>
   <link rel="stylesheet" href="../../css/styles.css?v=20260911-23" />
   <style>
-    /* ── Account page (page-scoped): reuses global tokens so it themes light/dark ── */
-    .acct-wrap { max-width: 520px; margin: 0 auto; }
+    /* ── Shared admin-page scaffolding (same as /admin/ops/) ── */
+    .acct-wrap { max-width: 820px; margin: 0 auto; }
     .acct-card {
       background: var(--bg-card); border: 1px solid var(--border);
       border-radius: var(--radius); box-shadow: var(--shadow-sm); padding: 28px;
     }
     .acct-lead { text-align: center; color: var(--text-secondary); font-size: var(--fs-base); line-height: 1.55; margin: 0; }
-    .acct-fields { display: flex; flex-direction: column; gap: 10px; }
-    .acct-fields input, .acct-fields textarea {
-      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm);
-      border: 1px solid var(--field-border); background: var(--bg-secondary);
-      color: var(--text-primary); font-family: inherit; font-size: var(--fs-base); outline: none;
-      transition: border-color var(--transition), box-shadow var(--transition);
-      box-shadow: var(--well);
-    }
-    .acct-fields input:focus, .acct-fields textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
-    .acct-fields textarea { resize: vertical; min-height: 74px; }
-    .acct-field-label { font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); margin-top: 4px; }
-    .acct-field-label:first-child { margin-top: 0; }
-
-    /* Dashboard sections */
     .acct-section {
       border: 1px solid var(--border); border-radius: var(--radius);
       padding: 18px 20px; background: var(--surface-soft);
@@ -65,53 +51,89 @@
     .acct-section + .acct-section { margin-top: 14px; }
     .acct-section-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
     .acct-section-title { font-size: var(--fs-md); font-weight: 600; color: var(--text-primary); }
-    .acct-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-    .acct-row .btn { flex: 0 0 auto; }
-
+    .act-sub { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px; line-height: 1.5; }
     .pill { font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.02em; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
     .pill-on { background: rgba(62, 154, 146, 0.16); color: var(--c-teal); }
     .pill-off { background: var(--surface-hover-strong); color: var(--text-muted); }
-    .btn.btn-mini { padding: 8px 14px; font-size: var(--fs-sm); }
-
-
-    .acct-hidden { display: none !important; }
+    .pill-warn { background: var(--c-gold-subtle); color: var(--c-gold-ink, var(--c-gold)); }
+    .pill-bad { background: var(--danger-ring); color: var(--danger); }
+    .acct-hidden { display: none; }
     .acct-spinner {
-      width: 40px; height: 40px; margin: 4px auto 16px; border-radius: 50%;
-      border: 3px solid var(--surface-hover-strong); border-top-color: var(--accent);
-      animation: acctspin 0.7s linear infinite;
+      width: 22px; height: 22px; margin: 0 auto 12px; border-radius: 50%;
+      border: 2px solid var(--border); border-top-color: var(--c-terracotta);
+      animation: acct-spin 0.8s linear infinite;
     }
-    @keyframes acctspin { to { transform: rotate(360deg); } }
-    .acct-foot-note { text-align: center; font-size: var(--fs-xs); color: var(--text-muted); margin-top: 22px; line-height: 1.55; }
-    .acct-foot-note a { color: var(--text-secondary); }
-  </style>
-  <style>
-    .act-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 10px 0; border-top: 1px solid var(--border); }
-    .act-row:first-child { border-top: none; }
-    .act-main { min-width: 0; }
-    .act-title { font-size: var(--fs-base); color: var(--text-primary); font-weight: 500; }
-    .act-sub { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px; }
-    .act-note { font-size: var(--fs-xs); color: var(--text-secondary); margin-top: 3px; line-height: 1.45; }
-    .act-amount { font-size: var(--fs-base); color: var(--text-primary); font-weight: 600; white-space: nowrap; }
-    .act-amount.owed { color: var(--accent); }
-    .act-empty { font-size: var(--fs-base); color: var(--text-muted); padding: 6px 0; }
-    .bal-big { font-size: var(--fs-7xl); font-weight: 700; color: var(--text-primary); }
+    @keyframes acct-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .acct-spinner { animation: none; } }
 
-    /* Amount field with a fixed $ prefix, so the number reads as dollars at a glance. */
-    .adm-amount-wrap { position: relative; }
-    .adm-amount-wrap::before {
-      content: "$"; position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-      color: var(--text-muted); font-size: var(--fs-base); pointer-events: none;
+    /* ── The pulse strip: is he working, is the page current ──
+       Three facts, side by side, because each one is useless without the others. Work with a stale
+       page means the list below is out of date; a fresh page with nothing running means the list is
+       accurate and nothing is acting on it. */
+    .hu-pulse { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    @media (max-width: 640px) { .hu-pulse { grid-template-columns: 1fr; } }
+    .hu-pulse-cell {
+      border: 1px solid var(--border); border-radius: var(--radius-sm, 10px);
+      padding: 12px 14px; background: var(--bg-card);
     }
-    .adm-amount-wrap input { padding-left: 28px; }
+    .hu-pulse-val { font-size: var(--fs-lg); font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+    .hu-pulse-lab { font-size: var(--fs-2xs); color: var(--text-muted); margin-top: 4px; letter-spacing: 0.02em; }
 
-    .act-remove {
-      flex: 0 0 auto; border: 1px solid var(--border); background: transparent;
-      color: var(--text-muted); font-family: inherit; font-size: var(--fs-xs); font-weight: 600;
-      padding: 4px 10px; border-radius: 999px; cursor: pointer;
-      transition: color var(--transition), border-color var(--transition);
+    /* ── Capability cards ── */
+    .hu-filter {
+      width: 100%; padding: 10px 12px; font: inherit; font-size: var(--fs-sm);
+      color: var(--text-primary); background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-sm, 10px);
     }
-    .act-remove:hover { color: #b3261e; border-color: rgba(224, 49, 49, 0.42); }
-    [data-theme="dark"] .act-remove:hover { color: #ff9f97; }
+    .hu-area { margin-top: 18px; }
+    .hu-area-name {
+      font-size: var(--fs-2xs); font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+    }
+    .hu-cap {
+      border: 1px solid var(--border); border-radius: var(--radius-sm, 10px);
+      padding: 12px 14px; background: var(--bg-card);
+    }
+    .hu-cap + .hu-cap { margin-top: 8px; }
+    .hu-cap-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .hu-cap-title { font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+    .hu-cap-sum { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.55; margin-top: 4px; }
+    .hu-cap-sum.is-todo { color: var(--text-muted); font-style: italic; }
+    .hu-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .hu-chip {
+      font: inherit; font-size: var(--fs-2xs); color: var(--text-secondary);
+      background: var(--surface-soft); border: 1px solid var(--border);
+      border-radius: 999px; padding: 4px 10px; cursor: pointer; text-align: left;
+    }
+    .hu-chip:hover { background: var(--surface-hover-strong); color: var(--text-primary); }
+    .hu-chip.is-copied { border-color: var(--c-teal); color: var(--c-teal); }
+
+    /* ── Rows: the schedule, the limits, the changelog ── */
+    .hu-row {
+      display: flex; gap: 12px; align-items: baseline;
+      padding: 9px 0; border-top: 1px solid var(--border);
+    }
+    .hu-row:first-child { border-top: 0; }
+    .hu-when {
+      flex: 0 0 168px; font-size: var(--fs-2xs); font-weight: 600;
+      color: var(--text-muted); letter-spacing: 0.01em;
+    }
+    .hu-what { flex: 1; font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.5; }
+    .hu-detail { display: block; color: var(--text-muted); margin-top: 3px; }
+    @media (max-width: 640px) {
+      .hu-row { flex-direction: column; gap: 2px; }
+      .hu-when { flex: none; }
+    }
+    .hu-list { margin: 0; padding-left: 18px; }
+    .hu-list li { font-size: var(--fs-xs); color: var(--text-secondary); line-height: 1.6; margin-top: 6px; }
+    .hu-date { flex: 0 0 92px; font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); }
+    .hu-door-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .hu-door {
+      font-size: var(--fs-xs); color: var(--text-secondary); text-decoration: none;
+      border: 1px solid var(--border); border-radius: 999px; padding: 6px 12px;
+      background: var(--bg-card);
+    }
+    .hu-door:hover { color: var(--text-primary); background: var(--surface-hover-strong); }
   </style>
 </head>
 <body>
@@ -240,12 +262,12 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <span class="section-label fade-up">Admin</span>
-        <h1 class="fade-up delay-1">Invoice a Client</h1>
-        <p>Log a guided session onto a client&rsquo;s account, and they pay it from their billing page.</p>
+        <h1 class="fade-up delay-1">Hudson</h1>
+        <p>What you can ask him for, what he does without being asked, and what he will not touch.</p>
       </div>
     </section>
 
-    <section class="section" aria-label="Invoice a client">
+    <section class="section" aria-label="Hudson dashboard">
       <div class="container">
         <div class="acct-wrap">
 
@@ -263,55 +285,95 @@
           </div>
 
           <div id="adm-content" class="acct-hidden">
+
+            <!-- ── Pulse ────────────────────────────────────────────────────────────────────
+                 Three facts that only mean something together. Work with a stale page means the
+                 lists below describe a Hudson that has moved on; a current page with nothing
+                 running means the lists are right and nothing is acting on them. -->
             <div class="acct-section">
-              <div class="acct-section-title">New invoice</div>
-              <div class="acct-fields" style="margin-top:12px;">
-                <label class="acct-field-label" for="adm-email">Client</label>
-                <input type="text" id="adm-email" placeholder="Search by name or email&hellip;" autocomplete="off" />
-                <label class="acct-field-label" for="adm-amount">Amount</label>
-                <div class="adm-amount-wrap">
-                  <input type="number" id="adm-amount" value="250" min="1" step="0.01" inputmode="decimal" />
-                </div>
-                <label class="acct-field-label" for="adm-desc">Description</label>
-                <input type="text" id="adm-desc" placeholder="Guided session" autocomplete="off" />
-                <label class="acct-field-label" for="adm-date">Session date</label>
-                <input type="date" id="adm-date" />
-                <label class="acct-field-label" for="adm-notes">Invoice details <span style="font-weight:400;">(the client sees these)</span></label>
-                <textarea id="adm-notes" placeholder="What the session covered, e.g. &ldquo;Set up Archie with the Calendar skill and a morning briefing routine.&rdquo;"></textarea>
-              </div>
-              <div class="acct-row">
-                <button class="btn btn-primary btn-mini" id="btn-add">Add invoice</button>
-                <button class="btn btn-secondary btn-mini" id="btn-lookup">Look up client</button>
-              </div>
-            </div>
-
-            <div class="acct-section acct-hidden" id="adm-client">
               <div class="acct-section-head">
-                <div class="acct-section-title" id="adm-client-title">Client</div>
-                <span class="pill" id="adm-pill">-</span>
+                <div class="acct-section-title">Right now</div>
+                <span class="pill pill-off" id="hu-state">&hellip;</span>
               </div>
-              <div class="bal-big" id="adm-balance" style="margin-top:6px;">$0</div>
-              <div id="adm-owed-list" style="margin-top:10px;"></div>
-              <div class="acct-section-title" style="margin-top:16px;">Paid</div>
-              <div id="adm-paid-list" style="margin-top:6px;"></div>
+              <div class="hu-pulse" style="margin-top:12px;">
+                <div class="hu-pulse-cell">
+                  <div class="hu-pulse-val" id="hu-last">&hellip;</div>
+                  <div class="hu-pulse-lab">since he last reported work</div>
+                </div>
+                <div class="hu-pulse-cell">
+                  <div class="hu-pulse-val" id="hu-jobs">&hellip;</div>
+                  <div class="hu-pulse-lab">scheduled jobs running</div>
+                </div>
+                <div class="hu-pulse-cell">
+                  <div class="hu-pulse-val" id="hu-built">&hellip;</div>
+                  <div class="hu-pulse-lab">since this page was rebuilt</div>
+                </div>
+              </div>
+              <p class="act-sub" style="margin-top:10px;" id="hu-trouble"></p>
+              <p class="act-sub" style="margin-top:8px;">Everything below is generated from Hudson&rsquo;s own instructions, so it says what he actually does rather than what anyone remembers building. A capability added to him appears here the next time it rebuilds.</p>
             </div>
+
+            <!-- ── What you can ask for ──────────────────────────────────────────────────── -->
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Ask him for</div>
+                <span class="pill pill-off" id="hu-count">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">The example phrases are taken from the instructions themselves, so anything here matches. Tap one to copy it. A card marked with a verb ends in an approval card in Telegram: the tap is the only thing that sends.</p>
+              <label class="acct-hidden" for="hu-filter">Filter capabilities</label>
+              <input type="search" id="hu-filter" class="hu-filter" style="margin-top:12px;" placeholder="Filter: email, calendar, drive, social" autocomplete="off" />
+              <div id="hu-caps"></div>
+              <div class="act-sub acct-hidden" id="hu-caps-empty" style="margin-top:10px;">Nothing matches that.</div>
+            </div>
+
+            <!-- ── The half nobody asked for ─────────────────────────────────────────────── -->
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Runs itself</div>
+                <span class="pill pill-off" id="hu-sched-count">&hellip;</span>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">These fire on their own, so there is nothing to set up and nothing to remember. The times come from the schedules that actually run, not from anyone&rsquo;s description of them, and a job flagged here is one whose work is quietly not happening.</p>
+              <div id="hu-sched" style="margin-top:8px;"></div>
+            </div>
+
+            <!-- ── The limits, in his own words ──────────────────────────────────────────── -->
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Will not</div>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">Quoted from his instructions rather than summarised, so the answer to &ldquo;why won&rsquo;t he&rdquo; is always the line that makes it true. Something missing that should be here is a fix request, not an argument with him.</p>
+              <ul class="hu-list" id="hu-limits" style="margin-top:10px;"></ul>
+            </div>
+
+            <!-- ── What changed ─────────────────────────────────────────────────────────── -->
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Changed recently</div>
+              </div>
+              <p class="act-sub" style="margin-top:6px;">Fixes to Hudson ship in sessions you were not in, which is how a picture of him goes stale. This is the same list he posts to the group, kept where it can be read days later.</p>
+              <div id="hu-changes" style="margin-top:8px;"></div>
+            </div>
+
+            <div class="acct-section">
+              <div class="acct-section-head">
+                <div class="acct-section-title">Doors</div>
+              </div>
+              <div class="hu-door-row">
+                <a class="hu-door" href="https://t.me/nrsolveaibot" target="_blank" rel="noopener">Talk to Hudson</a>
+                <a class="hu-door" href="../">War room</a>
+                <a class="hu-door" href="../ops/">Ops console</a>
+              </div>
+            </div>
+
+            <div id="acct-status" role="status" aria-live="polite"></div>
+
           </div>
-
-          <div id="acct-status" role="status" aria-live="polite"></div>
-
-          <p class="acct-foot-note">
-            Invoices default to $250, one guided session. Clients pay their balance at
-            otianai.com/billing/ through Stripe Checkout; payments mark the covered sessions paid automatically.
-            Also see <a href="../tiers/">Manage tiers</a> &middot; <a href="../ops/">Ops console</a>.
-          </p>
         </div>
       </div>
     </section>
+
   </main>
 
-  <!-- ==============================
-       Footer
-       ============================== -->
   <footer class="footer" aria-label="Site footer">
     <div class="footer-inner">
       <div class="footer-grid">
@@ -407,9 +469,11 @@
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { bindStatusToast } from "../../js/status-toast.js";
-    import { attachPersonSearch } from "../../js/admin-search.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import {
+      getFirestore, doc, getDoc,
+      collection, getDocs, query, orderBy, limit,
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     const firebaseConfig = {
       apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
       authDomain: "archie-77170.firebaseapp.com",
@@ -422,40 +486,33 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
-    const BILLING_API = "https://archie-4f35.onrender.com";
     const $ = (id) => document.getElementById(id);
-    const statusEl = $("acct-status");
-    const setStatus = bindStatusToast(statusEl);
+    const setStatus = bindStatusToast($("acct-status"));
     function show(el, on) { (typeof el === "string" ? $(el) : el).classList.toggle("acct-hidden", !on); }
-    async function busy(btn, fn) {
-      if (!btn) return fn();
-      const wasDisabled = btn.disabled;
-      btn.classList.add("is-busy"); btn.setAttribute("aria-busy", "true"); btn.disabled = true;
-      try { return await fn(); }
-      finally { btn.classList.remove("is-busy"); btn.removeAttribute("aria-busy"); btn.disabled = wasDisabled; }
+    function toDate(v) {
+      if (v && typeof v.toDate === "function") return v.toDate();
+      const d = new Date(v || 0);
+      return Number.isNaN(d.getTime()) ? null : d;
     }
-    function money(cents) {
-      const n = Number(cents || 0) / 100;
-      return "$" + (n % 1 === 0 ? n.toFixed(0) : n.toFixed(2));
+    function ago(date) {
+      if (!date) return "never";
+      const mins = Math.floor((Date.now() - date.getTime()) / 60000);
+      if (mins < 1) return "just now";
+      if (mins < 60) return mins + "m";
+      if (mins < 60 * 48) return Math.floor(mins / 60) + "h";
+      return Math.floor(mins / (60 * 24)) + "d";
     }
-    function fmtMs(ms) {
-      if (!ms) return "";
-      try { return new Date(ms).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }); } catch (e) { return ""; }
+    function el(tag, cls, text) {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      // textContent throughout, never innerHTML: every string on this page was written by an agent
+      // or copied out of a file it read, and neither is a trusted shape.
+      if (text != null) node.textContent = text;
+      return node;
     }
-    function escapeHtml(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
 
-    // The second factor, read from the token Google signed rather than a flag this page wrote.
-    // `firebase.sign_in_second_factor` is present only when Firebase itself resolved a factor during
-    // sign-in, and it is the same claim the billing service's requireAdminUser checks, so this screen
-    // and that API now agree instead of each guessing separately.
-    //
-    // It replaced a sessionStorage key named otian_2fa_ok on 2026-09-09. The sign-in page set that key
-    // on every successful sign-in, factor or no factor, so what it recorded was "came through /login
-    // in this browser session", which Firebase's own session already says.
-    //
-    // A refusal shows a card rather than redirecting. Sending a staff member back to /login cannot
-    // help when the answer is no: an account with nothing enrolled signs in clean and arrives back
-    // here, forever.
+    // The second factor, read from the token Google signed rather than a flag this page wrote. Same
+    // check as /admin/ops/ and the billing service's admin routes, so all three agree.
     async function passedSecondFactor(user) {
       try {
         const t = await user.getIdTokenResult();
@@ -463,131 +520,229 @@
       } catch (e) { return false; }
     }
 
-    // Authenticated call to the billing service. The server re-checks the admin tier on every
-    // request; the tier gate below is only there to fail politely for non-admins.
-    async function api(path, { method = "GET", body } = {}) {
-      const user = auth.currentUser;
-      if (!user) throw new Error("signed out");
-      const idToken = await user.getIdToken();
-      let r;
-      try {
-        r = await fetch(BILLING_API + path, {
-          method,
-          headers: { "Content-Type": "application/json", Authorization: "Bearer " + idToken },
-          body: body ? JSON.stringify(body) : undefined,
-        });
-      } catch (err) { throw new Error("Couldn't reach the billing service. Try again in a moment."); }
-      const d = await r.json().catch(() => ({}));
-      if (!r.ok) throw new Error(d.error || "Request failed.");
-      return d;
-    }
-
     onAuthStateChanged(auth, async (user) => {
-      if (!user) { window.location.replace("/login/?next=/admin/billing/"); return; }
-      let tier = "none";
-      try { const snap = await getDoc(doc(db, "users", user.uid)); if (snap.exists()) tier = (snap.data() || {}).access_tier || "none"; } catch (e) {}
+      if (!user) { window.location.replace("/login/?next=/admin/hudson/"); return; }
+      let tiers = [];
+      try {
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const d = snap.exists() ? snap.data() || {} : {};
+        tiers = d.access_tiers || (d.access_tier && d.access_tier !== "none" ? [d.access_tier] : []);
+      } catch (e) {}
       show("adm-loading", false);
-      // Staff first, then the factor. The other order tells a customer who wandered in to go and set
-      // up an authenticator, which is both confusing and a hint that this page is worth a second try.
-      if (tier !== "admin") { show("adm-denied", true); return; }
+      if (!tiers.includes("admin")) { show("adm-denied", true); return; }
       if (!(await passedSecondFactor(user))) { show("adm-nomfa", true); return; }
       show("adm-content", true);
-      $("adm-email").focus();
+      loadCapabilities(); loadPulse();
     });
 
-    let lastClient = null; // { uid, email } from the most recent lookup/invoice
+    // ── What Hudson can do ────────────────────────────────────────────────────────────────
+    //
+    // One document, written by workspace-business/jobs/capabilities.py through
+    // POST /hudson/capabilities and generated from Hudson's own instruction files. Nothing here is
+    // typed by hand, which is the only reason a page like this is safe to believe: a list of an
+    // agent's capabilities maintained separately from the agent is wrong within a week, and a wrong
+    // list is worse than none because it gets believed.
+    let manifest = null;
 
-    function renderClient(d) {
-      lastClient = { uid: d.uid, email: d.email };
-      $("adm-client-title").textContent = d.email;
-      $("adm-balance").textContent = money(d.balance_cents);
-      const pill = $("adm-pill");
-      pill.textContent = d.balance_cents > 0 ? "Due" : "Paid up";
-      pill.className = "pill " + (d.balance_cents > 0 ? "pill-off" : "pill-on");
+    async function loadCapabilities() {
+      let snap;
+      try {
+        snap = await getDoc(doc(db, "config", "hudson_capabilities"));
+      } catch (e) {
+        $("hu-count").textContent = "unreadable";
+        $("hu-caps").appendChild(el("p", "act-sub", "Could not read Hudson's capabilities: " + e.message));
+        return;
+      }
+      if (!snap.exists()) {
+        $("hu-count").textContent = "not published";
+        $("hu-caps").appendChild(el("p", "act-sub",
+          "Nothing published yet. It arrives the first time capabilities.py runs on Jett's computer."));
+        return;
+      }
+      manifest = snap.data() || {};
+      renderCapabilities();
+      renderSchedule();
+      renderLimits();
+      renderChanges();
+      renderBuilt();
+    }
 
-      const owed = d.sessions.filter((s) => s.status === "owed");
-      const paid = d.sessions.filter((s) => s.status === "paid");
-      $("adm-owed-list").innerHTML = owed.length
-        ? owed.map((s) => row(s, true)).join("")
-        : '<div class="act-empty">Nothing owed.</div>';
-      $("adm-paid-list").innerHTML = paid.length
-        ? paid.map((s) => row(s, false)).join("")
-        : '<div class="act-empty">No paid sessions yet.</div>';
-      show("adm-client", true);
+    function chip(text) {
+      const b = el("button", "hu-chip", text);
+      b.type = "button";
+      b.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+          b.classList.add("is-copied");
+          setStatus("Copied. Send it to Hudson in Telegram.", "ok");
+          setTimeout(() => b.classList.remove("is-copied"), 1500);
+        } catch (e) {
+          // Clipboard access can be refused, and a chip that silently does nothing reads as broken.
+          setStatus("Could not copy. Select the text instead.", "warn");
+        }
+      });
+      return b;
+    }
 
-      document.querySelectorAll("[data-remove]").forEach((btn) => {
-        btn.addEventListener("click", () => busy(btn, async () => {
-          const id = btn.getAttribute("data-remove");
-          if (!confirm("Remove this invoice? The client will no longer owe it.")) return;
-          setStatus("Removing invoice…");
-          try {
-            await api("/admin/billing/remove-session", { method: "POST", body: { uid: lastClient.uid, session_id: id } });
-            setStatus("Invoice removed.", "ok");
-            await lookup(lastClient.email);
-          } catch (e) { setStatus(e.message, "error"); }
-        }));
+    function capCard(cap) {
+      const card = el("div", "hu-cap");
+      const head = el("div", "hu-cap-head");
+      head.appendChild(el("div", "hu-cap-title", cap.title || cap.id));
+      if (cap.tap) head.appendChild(el("span", "pill pill-warn", cap.tap));
+      card.appendChild(head);
+      // A capability with no wording yet still shows. Hiding it would make a route invisible on
+      // exactly the day it is newest, which is the drift this page exists to end.
+      const described = cap.described !== false && cap.summary;
+      card.appendChild(el("div", "hu-cap-sum" + (described ? "" : " is-todo"),
+        described ? cap.summary : "Built, but not described here yet. Ask him what it does."));
+      const examples = Array.isArray(cap.examples) ? cap.examples : [];
+      if (examples.length) {
+        const chips = el("div", "hu-chips");
+        examples.forEach((e) => chips.appendChild(chip(e)));
+        card.appendChild(chips);
+      }
+      return card;
+    }
+
+    function renderCapabilities() {
+      const caps = Array.isArray(manifest.capabilities) ? manifest.capabilities : [];
+      const described = caps.filter((c) => c.described !== false && c.summary).length;
+      $("hu-count").textContent = caps.length + " things";
+      $("hu-count").className = "pill " + (described === caps.length ? "pill-on" : "pill-warn");
+      drawCaps("");
+      $("hu-filter").addEventListener("input", (e) => drawCaps(e.target.value || ""));
+    }
+
+    function drawCaps(term) {
+      const caps = Array.isArray(manifest.capabilities) ? manifest.capabilities : [];
+      const needle = term.trim().toLowerCase();
+      // Matched across everything on the card, examples included: someone who half remembers the
+      // phrase is exactly the person this filter is for.
+      const hits = caps.filter((c) => !needle || [
+        c.title, c.area, c.summary, c.tap, (c.examples || []).join(" "), (c.commands || []).join(" "),
+      ].join(" ").toLowerCase().includes(needle));
+
+      const wrap = $("hu-caps");
+      wrap.textContent = "";
+      show("hu-caps-empty", hits.length === 0);
+
+      const areas = [];
+      hits.forEach((c) => { if (!areas.includes(c.area)) areas.push(c.area); });
+      areas.sort((a, b) => a.localeCompare(b));
+      areas.forEach((area) => {
+        const group = el("div", "hu-area");
+        group.appendChild(el("div", "hu-area-name", area));
+        hits.filter((c) => c.area === area).forEach((c) => group.appendChild(capCard(c)));
+        wrap.appendChild(group);
       });
     }
 
-    function row(s, owed) {
-      const date = s.session_date || fmtMs(owed ? s.created_at_ms : s.paid_at_ms);
-      return '<div class="act-row"><div class="act-main">' +
-        '<div class="act-title">' + escapeHtml(s.description || "Guided session") + "</div>" +
-        (date ? '<div class="act-sub">' + escapeHtml(date) + "</div>" : "") +
-        (s.notes ? '<div class="act-note">' + escapeHtml(s.notes) + "</div>" : "") +
-        '</div><div class="act-amount' + (owed ? " owed" : "") + '">' + escapeHtml(money(s.amount_cents)) + "</div>" +
-        (owed ? '<button type="button" class="act-remove" data-remove="' + escapeHtml(s.id) + '">Remove</button>' : "") +
-        "</div>";
+    // ── What runs without being asked ─────────────────────────────────────────────────────
+    //
+    // Worst first, so a job that has stopped is at the top rather than alphabetically buried in a
+    // list of healthy ones. A job waiting on a founder's tap is NOT trouble: that is the approval
+    // model working, and sorting it with the failures would have the page crying wolf every day.
+    const STATUS_RANK = { never_ran: 0, failing: 1, stale: 2, unknown: 3, waiting: 4, healthy: 5 };
+    const STATUS_PILL = {
+      never_ran: ["pill-bad", "never run"],
+      failing: ["pill-bad", "failing"],
+      stale: ["pill-bad", "stopped"],
+      unknown: ["pill-off", "cannot tell"],
+      waiting: ["pill-warn", "waiting on you"],
+      healthy: ["pill-on", "running"],
+    };
+
+    function renderSchedule() {
+      const jobs = (Array.isArray(manifest.runs_itself) ? manifest.runs_itself : []).slice();
+      jobs.sort((a, b) =>
+        (STATUS_RANK[a.status] ?? 9) - (STATUS_RANK[b.status] ?? 9) ||
+        String(a.what).localeCompare(String(b.what)));
+
+      const running = jobs.filter((j) => j.status === "healthy" || j.status === "waiting").length;
+      $("hu-jobs").textContent = running + " of " + jobs.length;
+      $("hu-sched-count").textContent = running + " of " + jobs.length + " running";
+      $("hu-sched-count").className = "pill " + (running === jobs.length ? "pill-on" : "pill-warn");
+
+      const wrap = $("hu-sched");
+      wrap.textContent = "";
+      jobs.forEach((job) => {
+        const row = el("div", "hu-row");
+        row.appendChild(el("div", "hu-when", job.when || ""));
+        const what = el("div", "hu-what", job.what || job.id);
+        if (job.detail) what.appendChild(el("span", "hu-detail", job.detail));
+        row.appendChild(what);
+        const [cls, label] = STATUS_PILL[job.status] || STATUS_PILL.unknown;
+        row.appendChild(el("span", "pill " + cls, label));
+        wrap.appendChild(row);
+      });
     }
 
-    async function lookup(email) {
-      const d = await api("/admin/billing/client?email=" + encodeURIComponent(email));
-      renderClient(d);
-      return d;
+    function renderLimits() {
+      const wrap = $("hu-limits");
+      wrap.textContent = "";
+      (Array.isArray(manifest.limits) ? manifest.limits : []).forEach((line) => {
+        wrap.appendChild(el("li", null, line));
+      });
     }
 
-    // Same type-ahead as /admin/tiers/. Invoicing needs an address you have typed correctly, and
-    // a client's name is far easier to remember than which of their addresses they signed up with.
-    attachPersonSearch($("adm-email"), {
-      api,
-      onPick(m) {
-        if (m.pending) { show("adm-client", false); setStatus("No account for " + m.email + " yet. You can still invoice them.", "ok"); return; }
-        setStatus("Looking up…");
-        lookup(m.email).then(() => setStatus("")).catch((e) => { show("adm-client", false); setStatus(e.message, "error"); });
-      },
-    });
+    function renderChanges() {
+      const wrap = $("hu-changes");
+      wrap.textContent = "";
+      const changes = Array.isArray(manifest.changes) ? manifest.changes : [];
+      if (!changes.length) {
+        wrap.appendChild(el("p", "act-sub", "Nothing logged in the last few weeks."));
+        return;
+      }
+      changes.slice(0, 12).forEach((change) => {
+        const row = el("div", "hu-row");
+        row.appendChild(el("div", "hu-date", change.date || ""));
+        row.appendChild(el("div", "hu-what", change.what || ""));
+        wrap.appendChild(row);
+      });
+    }
 
-    $("btn-lookup").addEventListener("click", () => busy($("btn-lookup"), async () => {
-      const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Search for the client first.", "error"); return; }
-      setStatus("Looking up…");
-      try { await lookup(email); setStatus(""); }
-      catch (e) { show("adm-client", false); setStatus(e.message, "error"); }
-    }));
+    // ── Is any of this current ────────────────────────────────────────────────────────────
+    //
+    // The page can be wrong in one way only: by being old. So how old it is sits beside everything
+    // it claims, and goes amber once a rebuild has been missed. The source digest is what it was
+    // built from, so a generator that quietly stopped shows up as a number that never moves.
+    const STALE_HOURS = 36;
 
-    $("btn-add").addEventListener("click", () => busy($("btn-add"), async () => {
-      const email = $("adm-email").value.trim();
-      if (!email) { setStatus("Enter the client's email.", "error"); return; }
-      const dollars = parseFloat($("adm-amount").value);
-      if (!Number.isFinite(dollars) || dollars <= 0) { setStatus("Enter an amount above zero.", "error"); return; }
-      const amount_cents = Math.round(dollars * 100);
-      setStatus("Adding invoice…");
+    function renderBuilt() {
+      const built = toDate(manifest.generated_at);
+      $("hu-built").textContent = ago(built);
+      const hours = built ? (Date.now() - built.getTime()) / 3600000 : Infinity;
+      const state = $("hu-state");
+      if (hours > STALE_HOURS) {
+        state.className = "pill pill-warn";
+        state.textContent = "page may be out of date";
+      } else {
+        state.className = "pill pill-on";
+        state.textContent = "current";
+      }
+
+      const trouble = (Array.isArray(manifest.runs_itself) ? manifest.runs_itself : [])
+        .filter((j) => ["never_ran", "failing", "stale"].includes(j.status));
+      const line = $("hu-trouble");
+      line.textContent = trouble.length
+        ? trouble.length + " scheduled job" + (trouble.length === 1 ? " is" : "s are") +
+          " not running: " + trouble.map((j) => j.what).join(" ")
+        : "";
+    }
+
+    // Hudson's own last sign of life, from the newest note in the war room. It answers the question
+    // the capability list cannot: he can do all of this, but is he doing anything.
+    async function loadPulse() {
       try {
-        const d = await api("/admin/billing/add-session", {
-          method: "POST",
-          body: {
-            email,
-            amount_cents,
-            description: $("adm-desc").value.trim(),
-            session_date: $("adm-date").value,
-            notes: $("adm-notes").value.trim(),
-          },
-        });
-        setStatus("Invoice added: " + money(d.amount_cents) + " for " + email + ". They'll see it at otianai.com/billing/.", "ok");
-        $("adm-desc").value = ""; $("adm-notes").value = ""; $("adm-date").value = ""; $("adm-amount").value = "250";
-        try { await lookup(email); } catch (e) { /* invoice added; lookup is best-effort */ }
-      } catch (e) { setStatus(e.message, "error"); }
-    }));
+        const snap = await getDocs(query(collection(db, "hudson_notes"),
+          orderBy("created_at", "desc"), limit(1)));
+        const first = snap.docs[0];
+        $("hu-last").textContent = first ? ago(toDate(first.data().created_at)) : "nothing yet";
+      } catch (e) {
+        $("hu-last").textContent = "unknown";
+      }
+    }
   </script>
+
 </body>
 </html>

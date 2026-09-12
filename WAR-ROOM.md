@@ -180,14 +180,19 @@ also the part that works on day one with no backend at all.
 - **Not a place to act on an account.** Grants, tiers and invoices stay on `/admin/tiers/` and
   `/admin/billing/`, where the actions already are.
 - **Not a second place to read Hudson.** The panel is a summary with a Clear button. Hudson's own
-  chat is still where you go to talk to it or read a thread in full.
+  chat is still where you go to talk to it or read a thread in full. **What Hudson can DO is a
+  different page**, `/admin/hudson/`, added 2026-09-11 and settled in HUDSON-DASHBOARD.md: this
+  panel is the work he has done, that page is the capability, the schedule and the limits, and
+  neither belongs inside the other.
 - **Not a Telegram client.** A browser page cannot hold one without either a bot token sitting
   in the page or a relay through our backend. A read-only feed of one dedicated ops channel via
   a bot is small and worth doing later; a full messaging surface is a lot of work to reproduce
   something the phone in your hand already does better.
 - **Not the agent manager, yet.** Jack's "manage all our agents" is the right long-term shape:
   one row per agent, what it is, last heartbeat, last thing it did. There is one agent today.
-  Build the frame when there is a second one, not before.
+  Build the frame when there is a second one, not before. `/admin/hudson/` is the first agent's own
+  page rather than that frame: when a second agent exists, what generalises is the generator, not
+  the page.
 - **Not a second copy of the goal sheet.** The Plan panel renders the part of Jack's sheet that
   is a number and can be checked against what is actually happening. The reasoning, the three
   curves in full, the revenue columns and the tripwires stay in the document, which is where they

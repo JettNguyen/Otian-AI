@@ -2590,8 +2590,9 @@ summary,
 /* ── Works-with: the shelf under the reach figure ───────────────────────────
    Every name once, as chips, in the three groups the figure above counts. Chips rather than a
    comma list so the eye lands on a mark it recognises without reading anything. Two drifting
-   marquees with a pause control stood here until 2026-09-11; the figure is the band's one
-   motion now, and a list read at rest needs no pause. .ww-mark, .works-with-list and the note
+   marquees with a pause control stood here until 2026-09-11. Since the same evening the marks
+   ride inside the figure, a lane per card, and the shelf sits in a fold under it (.ww-fold, in
+   section 47), closed until somebody wants a name. .ww-mark, .works-with-list and the note
    below are what the shelf is made of. */
 .ww-band {
   background: var(--bg-card);
@@ -14961,6 +14962,17 @@ html[data-theme="dark"] .booking-container iframe {
 /* The homepage's index is a strip of moments under the rail rather than tiles. */
 .chapters--strip { display: flex; justify-content: center; max-width: 1000px; margin: 12px auto 0; }
 .chapters--strip .chapter-times { justify-content: center; margin-top: 0; }
+
+/* ── The connections band's lanes and fold (index.html) ──
+   Each card in the reach figure carries a lane of its own members' marks, drawn with <use>
+   from the band's sprite. The two lanes that fit their card whole sit still; the 37 drift
+   under a fading mask, so the motion lands on the one group too big to read at rest. All of
+   that lives in the figure's own <style>. Here: the fold that took the shelf's place under
+   the figure. It is the FAQ's .fold, quieter: no lift and a centered one-line summary, so the
+   49 names stay on the page for anyone hunting one without being the band's second picture. */
+.ww-band .ww-fold { margin-top: 0; box-shadow: none; }
+.ww-band .ww-fold > summary { justify-content: center; font-size: var(--fs-sm); color: var(--text-secondary); padding: 14px 20px; }
+.ww-band .ww-fold > .fold-body { padding-top: 10px; }
 
 /* ── The kit, drawn (equipment/) ──
    The drawing's classes and states live in its SVG's <style>. Here: where it sits. Under

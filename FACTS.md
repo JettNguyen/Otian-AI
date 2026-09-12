@@ -189,7 +189,7 @@ reads, so nothing checks them: "148 on the shelf today", "Four of a hundred and 
 two of them and there are three. A fourth sits in an HTML comment about an earlier version of the
 page and is deliberately left alone, being a note about what the page used to be. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
-connections band's shelf names **all 49** the band counts.
+connections band's fold names **all 49** the band counts, and the figure's three lanes carry the same 49 marks.
 
 The **Personal / Small business** plan card on `archie/pricing/` prints two of the same counts in
 prose ("all 5 chat apps", "any of 7 AI companies"), so a channel or a provider shipping now moves

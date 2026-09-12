@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260911-23" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260911-24" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -718,8 +718,9 @@
          artwork (sourcing is documented above .ww-mark in css/styles.css).
 
          Until 2026-09-11 the names drifted past in two marquees, four copies each with a pause
-         control. They sit on a shelf now, once each, in the figure's three groups: the figure is
-         the band's one motion, and a list read at rest needs no pause.
+         control. The marks ride inside the figure now, a lane per card, and the names sit once
+         each in a fold under it: the figure is the band's one motion, and a list read at rest
+         needs no pause.
 
          Came off the page on 2026-08-31 with the stat band and the carousel, and went back on
          2026-09-01 at Jett's call: the coverage grid answers "will it take what I carry", and
@@ -870,12 +871,14 @@
 
              Counts: 5 + 37 + 7 = 49, the split FACTS.md records for this band, so the three
              cards are the whole of it and not three samples. The third line of each card says
-             what the group is for rather than naming members, because the shelf underneath
-             already names all forty-nine. -->
+             what the group is for; the lane under it shows the members themselves, the same
+             marks the fold below names. The two lanes that fit their card whole sit still and
+             the 37 drift, so the band's motion lands on the one group too big to read at rest.
+             Jett's call on 2026-09-11, over every lane drifting. -->
         <figure class="explain-figure explain-figure--band fade-up">
           <!-- =================== DESKTOP =================== -->
-          <svg class="explain-svg--desktop" viewBox="0 0 680 300" role="img" aria-labelledby="cxd-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="cxd-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 37 accounts and devices, among them mail, calendar, money and lights.</title>
+          <svg class="explain-svg--desktop cx-still" viewBox="0 0 680 360" role="img" aria-labelledby="cxd-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="cxd-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 37 accounts and devices, among them mail, calendar, money and lights. Each card carries the marks of its own members.</title>
             <style>
               .cx-screen{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
               .cx-base{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
@@ -884,52 +887,149 @@
               .cx-card{fill:rgba(224,138,91,.028);stroke:var(--border);stroke-width:1.5}
               .cx-link{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:1 8;marker-end:url(#cxArr)}
               .cx-num{fill:var(--accent);font-size:27px;font-weight:700;text-anchor:middle}
-              .cx-title{fill:currentColor;font-size:15px;font-weight:700;text-anchor:middle}
               .cx-lbl{fill:currentColor;font-size:14.5px;font-weight:600;text-anchor:start}
-              .cx-cap{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:middle}
               .cx-sub{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:start}
+              .cx-cap{fill:currentColor;opacity:.62;font-size:12.5px;text-anchor:middle}
+              .cx-title{fill:currentColor;font-size:15px;font-weight:700;text-anchor:middle}
               @media (prefers-reduced-motion:no-preference){
                 .cx-link{animation:cxFlow 1.9s linear infinite}
                 @keyframes cxFlow{to{stroke-dashoffset:-18}}
+                .cx-river--s{animation:cxRiverS 17.4s linear infinite}
+                .cx-river--l{animation:cxRiverL 70.3s linear infinite}
+                .cx-river--still{animation:none}
+                @keyframes cxRiverS{from{transform:translateX(-348px)}to{transform:translateX(0)}}
+                @keyframes cxRiverL{from{transform:translateX(-1406px)}to{transform:translateX(0)}}
               }
             </style>
             <defs>
               <marker id="cxArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                 <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
               </marker>
+              <linearGradient id="cxFadeG"><stop offset="0" stop-color="#000"/><stop offset=".06" stop-color="#fff"/><stop offset=".94" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+                            <mask id="cxFade3" maskUnits="userSpaceOnUse" x="300" y="318" width="348" height="28"><rect x="300" y="318" width="348" height="28" fill="url(#cxFadeG)"/></mask>
             </defs>
 
-            <path class="cx-link" d="M158 150 C 214 150 226 46 282 46"/>
-            <path class="cx-link" d="M158 150 H 282"/>
-            <path class="cx-link" d="M158 150 C 214 150 226 254 282 254"/>
+            <path class="cx-link" d="M158 180 C 214 180 226 56 282 56"/>
+            <path class="cx-link" d="M158 180 H 282"/>
+            <path class="cx-link" d="M158 180 C 214 180 226 304 282 304"/>
 
-            <rect class="cx-screen" x="58" y="100" width="84" height="58" rx="4"/>
-            <rect class="cx-bar" x="70" y="113" width="36" height="7" rx="3.5"/>
-            <rect class="cx-bar-b" x="94" y="126" width="36" height="7" rx="3.5"/>
-            <rect class="cx-bar" x="70" y="139" width="27" height="7" rx="3.5"/>
-            <path class="cx-base" d="M44 166 h112 l-9 13 h-94 z"/>
-            <text class="cx-title" x="100" y="201">Archie</text>
-            <text class="cx-cap" x="100" y="220">on your computer</text>
+            <rect class="cx-screen" x="58" y="130" width="84" height="58" rx="4"/>
+            <rect class="cx-bar" x="70" y="143" width="36" height="7" rx="3.5"/>
+            <rect class="cx-bar-b" x="94" y="156" width="36" height="7" rx="3.5"/>
+            <rect class="cx-bar" x="70" y="169" width="27" height="7" rx="3.5"/>
+            <path class="cx-base" d="M44 196 h112 l-9 13 h-94 z"/>
+            <text class="cx-title" x="100" y="231">Archie</text>
+            <text class="cx-cap" x="100" y="250">on your computer</text>
 
-            <rect class="cx-card" x="286" y="8" width="376" height="76" rx="12"/>
+            <rect class="cx-card" x="286" y="8" width="376" height="96" rx="12"/>
             <text class="cx-num" x="330" y="56">5</text>
             <text class="cx-lbl" x="366" y="41">Chat apps</text>
             <text class="cx-sub" x="366" y="61">where you talk to it</text>
-
-            <rect class="cx-card" x="286" y="112" width="376" height="76" rx="12"/>
-            <text class="cx-num" x="330" y="160">7</text>
-            <text class="cx-lbl" x="366" y="145">AI companies</text>
-            <text class="cx-sub" x="366" y="165">on an account of yours</text>
-
-            <rect class="cx-card" x="286" y="216" width="376" height="76" rx="12"/>
-            <text class="cx-num" x="330" y="264">37</text>
-            <text class="cx-lbl" x="366" y="249">Accounts and devices</text>
-            <text class="cx-sub" x="366" y="269">mail, calendar, money, lights</text>
+            <g class="cx-river cx-river--s cx-river--still">
+<use href="#wwm-telegram" x="323.8" y="73" width="22" height="22"><title>Telegram</title></use>
+<use href="#wwm-discord" x="393.4" y="73" width="22" height="22"><title>Discord</title></use>
+<use href="#wwm-slack" x="463.0" y="73" width="22" height="22"><title>Slack</title></use>
+<use href="#wwm-matrix" x="532.6" y="73" width="22" height="22"><title>Matrix</title></use>
+<use href="#wwm-imessage" x="602.2" y="73" width="22" height="22"><title>iMessage</title></use>
+</g>
+            <rect class="cx-card" x="286" y="132" width="376" height="96" rx="12"/>
+            <text class="cx-num" x="330" y="180">7</text>
+            <text class="cx-lbl" x="366" y="165">AI companies</text>
+            <text class="cx-sub" x="366" y="185">on an account of yours</text>
+            <g class="cx-river cx-river--s cx-river--still">
+<use href="#wwm-anthropic" x="313.9" y="197" width="22" height="22"><title>Claude</title></use>
+<use href="#wwm-openai" x="363.6" y="197" width="22" height="22"><title>OpenAI</title></use>
+<use href="#wwm-gemini" x="413.3" y="197" width="22" height="22"><title>Gemini</title></use>
+<use href="#wwm-groq" x="463.0" y="197" width="22" height="22"><title>Groq</title></use>
+<use href="#wwm-xai" x="512.7" y="197" width="22" height="22"><title>xAI</title></use>
+<use href="#wwm-deepseek" x="562.4" y="197" width="22" height="22"><title>DeepSeek</title></use>
+<use href="#wwm-mistral" x="612.1" y="197" width="22" height="22"><title>Mistral</title></use>
+</g>
+            <rect class="cx-card" x="286" y="256" width="376" height="96" rx="12"/>
+            <text class="cx-num" x="330" y="304">37</text>
+            <text class="cx-lbl" x="366" y="289">Accounts and devices</text>
+            <text class="cx-sub" x="366" y="309">mail, calendar, money, lights</text>
+            <g mask="url(#cxFade3)"><g class="cx-river cx-river--l">
+<use href="#wwm-gmail" x="308.0" y="321" width="22" height="22"><title>Gmail</title></use>
+<use href="#wwm-google-calendar" x="346.0" y="321" width="22" height="22"><title>Google Calendar</title></use>
+<use href="#wwm-google-tasks" x="384.0" y="321" width="22" height="22"><title>Google Tasks</title></use>
+<use href="#wwm-outlook" x="422.0" y="321" width="22" height="22"><title>Outlook</title></use>
+<use href="#wwm-icloud" x="460.0" y="321" width="22" height="22"><title>iCloud</title></use>
+<use href="#wwm-fastmail" x="498.0" y="321" width="22" height="22"><title>Fastmail</title></use>
+<use href="#wwm-yahoo" x="536.0" y="321" width="22" height="22"><title>Yahoo</title></use>
+<use href="#wwm-aol" x="574.0" y="321" width="22" height="22"><title>AOL</title></use>
+<use href="#wwm-zoho" x="612.0" y="321" width="22" height="22"><title>Zoho Mail</title></use>
+<use href="#wwm-gmx" x="650.0" y="321" width="22" height="22"><title>GMX</title></use>
+<use href="#wwm-fireflies" x="688.0" y="321" width="22" height="22"><title>Fireflies</title></use>
+<use href="#wwm-zoom" x="726.0" y="321" width="22" height="22"><title>Zoom</title></use>
+<use href="#wwm-notion" x="764.0" y="321" width="22" height="22"><title>Notion</title></use>
+<use href="#wwm-todoist" x="802.0" y="321" width="22" height="22"><title>Todoist</title></use>
+<use href="#wwm-stripe" x="840.0" y="321" width="22" height="22"><title>Stripe</title></use>
+<use href="#wwm-github" x="878.0" y="321" width="22" height="22"><title>GitHub</title></use>
+<use href="#wwm-gitlab" x="916.0" y="321" width="22" height="22"><title>GitLab</title></use>
+<use href="#wwm-linear" x="954.0" y="321" width="22" height="22"><title>Linear</title></use>
+<use href="#wwm-cloudflare" x="992.0" y="321" width="22" height="22"><title>Cloudflare</title></use>
+<use href="#wwm-airtable" x="1030.0" y="321" width="22" height="22"><title>Airtable</title></use>
+<use href="#wwm-calendly" x="1068.0" y="321" width="22" height="22"><title>Calendly</title></use>
+<use href="#wwm-gohighlevel" x="1106.0" y="321" width="22" height="22"><title>GoHighLevel</title></use>
+<use href="#wwm-lemlist" x="1144.0" y="321" width="22" height="22"><title>lemlist</title></use>
+<use href="#wwm-ynab" x="1182.0" y="321" width="22" height="22"><title>YNAB</title></use>
+<use href="#wwm-lunch-money" x="1220.0" y="321" width="22" height="22"><title>Lunch Money</title></use>
+<use href="#wwm-mercury" x="1258.0" y="321" width="22" height="22"><title>Mercury</title></use>
+<use href="#wwm-splitwise" x="1296.0" y="321" width="22" height="22"><title>Splitwise</title></use>
+<use href="#wwm-raindrop" x="1334.0" y="321" width="22" height="22"><title>Raindrop</title></use>
+<use href="#wwm-readwise" x="1372.0" y="321" width="22" height="22"><title>Readwise</title></use>
+<use href="#wwm-zotero" x="1410.0" y="321" width="22" height="22"><title>Zotero</title></use>
+<use href="#wwm-mastodon" x="1448.0" y="321" width="22" height="22"><title>Mastodon</title></use>
+<use href="#wwm-aftership" x="1486.0" y="321" width="22" height="22"><title>AfterShip</title></use>
+<use href="#wwm-home-assistant" x="1524.0" y="321" width="22" height="22"><title>Home Assistant</title></use>
+<use href="#wwm-govee" x="1562.0" y="321" width="22" height="22"><title>Govee</title></use>
+<use href="#wwm-lifx" x="1600.0" y="321" width="22" height="22"><title>LIFX</title></use>
+<use href="#wwm-philips-hue" x="1638.0" y="321" width="22" height="22"><title>Philips Hue</title></use>
+<use href="#wwm-wiz" x="1676.0" y="321" width="22" height="22"><title>WiZ</title></use>
+<use href="#wwm-gmail" x="1714.0" y="321" width="22" height="22"><title>Gmail</title></use>
+<use href="#wwm-google-calendar" x="1752.0" y="321" width="22" height="22"><title>Google Calendar</title></use>
+<use href="#wwm-google-tasks" x="1790.0" y="321" width="22" height="22"><title>Google Tasks</title></use>
+<use href="#wwm-outlook" x="1828.0" y="321" width="22" height="22"><title>Outlook</title></use>
+<use href="#wwm-icloud" x="1866.0" y="321" width="22" height="22"><title>iCloud</title></use>
+<use href="#wwm-fastmail" x="1904.0" y="321" width="22" height="22"><title>Fastmail</title></use>
+<use href="#wwm-yahoo" x="1942.0" y="321" width="22" height="22"><title>Yahoo</title></use>
+<use href="#wwm-aol" x="1980.0" y="321" width="22" height="22"><title>AOL</title></use>
+<use href="#wwm-zoho" x="2018.0" y="321" width="22" height="22"><title>Zoho Mail</title></use>
+<use href="#wwm-gmx" x="2056.0" y="321" width="22" height="22"><title>GMX</title></use>
+<use href="#wwm-fireflies" x="2094.0" y="321" width="22" height="22"><title>Fireflies</title></use>
+<use href="#wwm-zoom" x="2132.0" y="321" width="22" height="22"><title>Zoom</title></use>
+<use href="#wwm-notion" x="2170.0" y="321" width="22" height="22"><title>Notion</title></use>
+<use href="#wwm-todoist" x="2208.0" y="321" width="22" height="22"><title>Todoist</title></use>
+<use href="#wwm-stripe" x="2246.0" y="321" width="22" height="22"><title>Stripe</title></use>
+<use href="#wwm-github" x="2284.0" y="321" width="22" height="22"><title>GitHub</title></use>
+<use href="#wwm-gitlab" x="2322.0" y="321" width="22" height="22"><title>GitLab</title></use>
+<use href="#wwm-linear" x="2360.0" y="321" width="22" height="22"><title>Linear</title></use>
+<use href="#wwm-cloudflare" x="2398.0" y="321" width="22" height="22"><title>Cloudflare</title></use>
+<use href="#wwm-airtable" x="2436.0" y="321" width="22" height="22"><title>Airtable</title></use>
+<use href="#wwm-calendly" x="2474.0" y="321" width="22" height="22"><title>Calendly</title></use>
+<use href="#wwm-gohighlevel" x="2512.0" y="321" width="22" height="22"><title>GoHighLevel</title></use>
+<use href="#wwm-lemlist" x="2550.0" y="321" width="22" height="22"><title>lemlist</title></use>
+<use href="#wwm-ynab" x="2588.0" y="321" width="22" height="22"><title>YNAB</title></use>
+<use href="#wwm-lunch-money" x="2626.0" y="321" width="22" height="22"><title>Lunch Money</title></use>
+<use href="#wwm-mercury" x="2664.0" y="321" width="22" height="22"><title>Mercury</title></use>
+<use href="#wwm-splitwise" x="2702.0" y="321" width="22" height="22"><title>Splitwise</title></use>
+<use href="#wwm-raindrop" x="2740.0" y="321" width="22" height="22"><title>Raindrop</title></use>
+<use href="#wwm-readwise" x="2778.0" y="321" width="22" height="22"><title>Readwise</title></use>
+<use href="#wwm-zotero" x="2816.0" y="321" width="22" height="22"><title>Zotero</title></use>
+<use href="#wwm-mastodon" x="2854.0" y="321" width="22" height="22"><title>Mastodon</title></use>
+<use href="#wwm-aftership" x="2892.0" y="321" width="22" height="22"><title>AfterShip</title></use>
+<use href="#wwm-home-assistant" x="2930.0" y="321" width="22" height="22"><title>Home Assistant</title></use>
+<use href="#wwm-govee" x="2968.0" y="321" width="22" height="22"><title>Govee</title></use>
+<use href="#wwm-lifx" x="3006.0" y="321" width="22" height="22"><title>LIFX</title></use>
+<use href="#wwm-philips-hue" x="3044.0" y="321" width="22" height="22"><title>Philips Hue</title></use>
+<use href="#wwm-wiz" x="3082.0" y="321" width="22" height="22"><title>WiZ</title></use>
+</g></g>
           </svg>
 
           <!-- =================== MOBILE =================== -->
-          <svg class="explain-svg--mobile" viewBox="0 0 380 470" role="img" aria-labelledby="cxm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="cxm-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 37 accounts and devices, among them mail, calendar, money and lights.</title>
+          <svg class="explain-svg--mobile cxm-still" viewBox="0 0 380 500" role="img" aria-labelledby="cxm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="cxm-t">Archie runs on a computer of your own and reaches out from there: to 5 chat apps, where you talk to it; to any of 7 AI companies, on an account of yours; and to 37 accounts and devices, among them mail, calendar, money and lights. Each card carries the marks of its own members.</title>
             <style>
               .cxm-screen{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
               .cxm-base{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
@@ -946,18 +1046,25 @@
               @media (prefers-reduced-motion:no-preference){
                 .cxm-link{animation:cxFlowM 1.9s linear infinite}
                 @keyframes cxFlowM{to{stroke-dashoffset:-18}}
+                .cxm-river--s{animation:cxmRiverS 12.6s linear infinite}
+                .cxm-river--l{animation:cxmRiverL 59.2s linear infinite}
+                .cxm-river--still{animation:none}
+                @keyframes cxmRiverS{from{transform:translateX(-252px)}to{transform:translateX(0)}}
+                @keyframes cxmRiverL{from{transform:translateX(-1184px)}to{transform:translateX(0)}}
               }
             </style>
             <defs>
               <marker id="cxmArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
                 <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
               </marker>
+              <linearGradient id="cxmFadeG"><stop offset="0" stop-color="#000"/><stop offset=".06" stop-color="#fff"/><stop offset=".94" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+                            <mask id="cxmFade3" maskUnits="userSpaceOnUse" x="98" y="447" width="252" height="26"><rect x="98" y="447" width="252" height="26" fill="url(#cxmFadeG)"/></mask>
             </defs>
 
-            <path class="cxm-spine" d="M52 80 V 398"/>
-            <path class="cxm-link" d="M52 146 H 80"/>
-            <path class="cxm-link" d="M52 272 H 80"/>
-            <path class="cxm-link" d="M52 398 H 80"/>
+            <path class="cxm-spine" d="M52 80 V 426"/>
+            <path class="cxm-link" d="M52 154 H 80"/>
+            <path class="cxm-link" d="M52 290 H 80"/>
+            <path class="cxm-link" d="M52 426 H 80"/>
 
             <rect class="cxm-screen" x="26" y="20" width="52" height="38" rx="3.5"/>
             <rect class="cxm-bar" x="34" y="29" width="24" height="5" rx="2.5"/>
@@ -967,28 +1074,123 @@
             <text class="cxm-title" x="100" y="40">Archie</text>
             <text class="cxm-cap" x="100" y="58">on your computer</text>
 
-            <rect class="cxm-card" x="84" y="100" width="280" height="92" rx="12"/>
+            <rect class="cxm-card" x="84" y="100" width="280" height="108" rx="12"/>
             <text class="cxm-num" x="116" y="155">5</text>
             <text class="cxm-lbl" x="150" y="141">Chat apps</text>
             <text class="cxm-sub" x="150" y="162">where you talk to it</text>
-
-            <rect class="cxm-card" x="84" y="226" width="280" height="92" rx="12"/>
-            <text class="cxm-num" x="116" y="281">7</text>
-            <text class="cxm-lbl" x="150" y="267">AI companies</text>
-            <text class="cxm-sub" x="150" y="288">on an account of yours</text>
-
-            <rect class="cxm-card" x="84" y="352" width="280" height="92" rx="12"/>
-            <text class="cxm-num" x="116" y="407">37</text>
-            <text class="cxm-lbl" x="150" y="393">Accounts and devices</text>
-            <text class="cxm-sub" x="150" y="414">mail, calendar, money, lights</text>
+            <g class="cxm-river cxm-river--s cxm-river--still">
+<use href="#wwm-telegram" x="113.2" y="178" width="20" height="20"><title>Telegram</title></use>
+<use href="#wwm-discord" x="163.6" y="178" width="20" height="20"><title>Discord</title></use>
+<use href="#wwm-slack" x="214.0" y="178" width="20" height="20"><title>Slack</title></use>
+<use href="#wwm-matrix" x="264.4" y="178" width="20" height="20"><title>Matrix</title></use>
+<use href="#wwm-imessage" x="314.8" y="178" width="20" height="20"><title>iMessage</title></use>
+</g>
+            <rect class="cxm-card" x="84" y="236" width="280" height="108" rx="12"/>
+            <text class="cxm-num" x="116" y="291">7</text>
+            <text class="cxm-lbl" x="150" y="277">AI companies</text>
+            <text class="cxm-sub" x="150" y="298">on an account of yours</text>
+            <g class="cxm-river cxm-river--s cxm-river--still">
+<use href="#wwm-anthropic" x="106.0" y="314" width="20" height="20"><title>Claude</title></use>
+<use href="#wwm-openai" x="142.0" y="314" width="20" height="20"><title>OpenAI</title></use>
+<use href="#wwm-gemini" x="178.0" y="314" width="20" height="20"><title>Gemini</title></use>
+<use href="#wwm-groq" x="214.0" y="314" width="20" height="20"><title>Groq</title></use>
+<use href="#wwm-xai" x="250.0" y="314" width="20" height="20"><title>xAI</title></use>
+<use href="#wwm-deepseek" x="286.0" y="314" width="20" height="20"><title>DeepSeek</title></use>
+<use href="#wwm-mistral" x="322.0" y="314" width="20" height="20"><title>Mistral</title></use>
+</g>
+            <rect class="cxm-card" x="84" y="372" width="280" height="108" rx="12"/>
+            <text class="cxm-num" x="116" y="427">37</text>
+            <text class="cxm-lbl" x="150" y="413">Accounts and devices</text>
+            <text class="cxm-sub" x="150" y="434">mail, calendar, money, lights</text>
+            <g mask="url(#cxmFade3)"><g class="cxm-river cxm-river--l">
+<use href="#wwm-gmail" x="104.0" y="450" width="20" height="20"><title>Gmail</title></use>
+<use href="#wwm-google-calendar" x="136.0" y="450" width="20" height="20"><title>Google Calendar</title></use>
+<use href="#wwm-google-tasks" x="168.0" y="450" width="20" height="20"><title>Google Tasks</title></use>
+<use href="#wwm-outlook" x="200.0" y="450" width="20" height="20"><title>Outlook</title></use>
+<use href="#wwm-icloud" x="232.0" y="450" width="20" height="20"><title>iCloud</title></use>
+<use href="#wwm-fastmail" x="264.0" y="450" width="20" height="20"><title>Fastmail</title></use>
+<use href="#wwm-yahoo" x="296.0" y="450" width="20" height="20"><title>Yahoo</title></use>
+<use href="#wwm-aol" x="328.0" y="450" width="20" height="20"><title>AOL</title></use>
+<use href="#wwm-zoho" x="360.0" y="450" width="20" height="20"><title>Zoho Mail</title></use>
+<use href="#wwm-gmx" x="392.0" y="450" width="20" height="20"><title>GMX</title></use>
+<use href="#wwm-fireflies" x="424.0" y="450" width="20" height="20"><title>Fireflies</title></use>
+<use href="#wwm-zoom" x="456.0" y="450" width="20" height="20"><title>Zoom</title></use>
+<use href="#wwm-notion" x="488.0" y="450" width="20" height="20"><title>Notion</title></use>
+<use href="#wwm-todoist" x="520.0" y="450" width="20" height="20"><title>Todoist</title></use>
+<use href="#wwm-stripe" x="552.0" y="450" width="20" height="20"><title>Stripe</title></use>
+<use href="#wwm-github" x="584.0" y="450" width="20" height="20"><title>GitHub</title></use>
+<use href="#wwm-gitlab" x="616.0" y="450" width="20" height="20"><title>GitLab</title></use>
+<use href="#wwm-linear" x="648.0" y="450" width="20" height="20"><title>Linear</title></use>
+<use href="#wwm-cloudflare" x="680.0" y="450" width="20" height="20"><title>Cloudflare</title></use>
+<use href="#wwm-airtable" x="712.0" y="450" width="20" height="20"><title>Airtable</title></use>
+<use href="#wwm-calendly" x="744.0" y="450" width="20" height="20"><title>Calendly</title></use>
+<use href="#wwm-gohighlevel" x="776.0" y="450" width="20" height="20"><title>GoHighLevel</title></use>
+<use href="#wwm-lemlist" x="808.0" y="450" width="20" height="20"><title>lemlist</title></use>
+<use href="#wwm-ynab" x="840.0" y="450" width="20" height="20"><title>YNAB</title></use>
+<use href="#wwm-lunch-money" x="872.0" y="450" width="20" height="20"><title>Lunch Money</title></use>
+<use href="#wwm-mercury" x="904.0" y="450" width="20" height="20"><title>Mercury</title></use>
+<use href="#wwm-splitwise" x="936.0" y="450" width="20" height="20"><title>Splitwise</title></use>
+<use href="#wwm-raindrop" x="968.0" y="450" width="20" height="20"><title>Raindrop</title></use>
+<use href="#wwm-readwise" x="1000.0" y="450" width="20" height="20"><title>Readwise</title></use>
+<use href="#wwm-zotero" x="1032.0" y="450" width="20" height="20"><title>Zotero</title></use>
+<use href="#wwm-mastodon" x="1064.0" y="450" width="20" height="20"><title>Mastodon</title></use>
+<use href="#wwm-aftership" x="1096.0" y="450" width="20" height="20"><title>AfterShip</title></use>
+<use href="#wwm-home-assistant" x="1128.0" y="450" width="20" height="20"><title>Home Assistant</title></use>
+<use href="#wwm-govee" x="1160.0" y="450" width="20" height="20"><title>Govee</title></use>
+<use href="#wwm-lifx" x="1192.0" y="450" width="20" height="20"><title>LIFX</title></use>
+<use href="#wwm-philips-hue" x="1224.0" y="450" width="20" height="20"><title>Philips Hue</title></use>
+<use href="#wwm-wiz" x="1256.0" y="450" width="20" height="20"><title>WiZ</title></use>
+<use href="#wwm-gmail" x="1288.0" y="450" width="20" height="20"><title>Gmail</title></use>
+<use href="#wwm-google-calendar" x="1320.0" y="450" width="20" height="20"><title>Google Calendar</title></use>
+<use href="#wwm-google-tasks" x="1352.0" y="450" width="20" height="20"><title>Google Tasks</title></use>
+<use href="#wwm-outlook" x="1384.0" y="450" width="20" height="20"><title>Outlook</title></use>
+<use href="#wwm-icloud" x="1416.0" y="450" width="20" height="20"><title>iCloud</title></use>
+<use href="#wwm-fastmail" x="1448.0" y="450" width="20" height="20"><title>Fastmail</title></use>
+<use href="#wwm-yahoo" x="1480.0" y="450" width="20" height="20"><title>Yahoo</title></use>
+<use href="#wwm-aol" x="1512.0" y="450" width="20" height="20"><title>AOL</title></use>
+<use href="#wwm-zoho" x="1544.0" y="450" width="20" height="20"><title>Zoho Mail</title></use>
+<use href="#wwm-gmx" x="1576.0" y="450" width="20" height="20"><title>GMX</title></use>
+<use href="#wwm-fireflies" x="1608.0" y="450" width="20" height="20"><title>Fireflies</title></use>
+<use href="#wwm-zoom" x="1640.0" y="450" width="20" height="20"><title>Zoom</title></use>
+<use href="#wwm-notion" x="1672.0" y="450" width="20" height="20"><title>Notion</title></use>
+<use href="#wwm-todoist" x="1704.0" y="450" width="20" height="20"><title>Todoist</title></use>
+<use href="#wwm-stripe" x="1736.0" y="450" width="20" height="20"><title>Stripe</title></use>
+<use href="#wwm-github" x="1768.0" y="450" width="20" height="20"><title>GitHub</title></use>
+<use href="#wwm-gitlab" x="1800.0" y="450" width="20" height="20"><title>GitLab</title></use>
+<use href="#wwm-linear" x="1832.0" y="450" width="20" height="20"><title>Linear</title></use>
+<use href="#wwm-cloudflare" x="1864.0" y="450" width="20" height="20"><title>Cloudflare</title></use>
+<use href="#wwm-airtable" x="1896.0" y="450" width="20" height="20"><title>Airtable</title></use>
+<use href="#wwm-calendly" x="1928.0" y="450" width="20" height="20"><title>Calendly</title></use>
+<use href="#wwm-gohighlevel" x="1960.0" y="450" width="20" height="20"><title>GoHighLevel</title></use>
+<use href="#wwm-lemlist" x="1992.0" y="450" width="20" height="20"><title>lemlist</title></use>
+<use href="#wwm-ynab" x="2024.0" y="450" width="20" height="20"><title>YNAB</title></use>
+<use href="#wwm-lunch-money" x="2056.0" y="450" width="20" height="20"><title>Lunch Money</title></use>
+<use href="#wwm-mercury" x="2088.0" y="450" width="20" height="20"><title>Mercury</title></use>
+<use href="#wwm-splitwise" x="2120.0" y="450" width="20" height="20"><title>Splitwise</title></use>
+<use href="#wwm-raindrop" x="2152.0" y="450" width="20" height="20"><title>Raindrop</title></use>
+<use href="#wwm-readwise" x="2184.0" y="450" width="20" height="20"><title>Readwise</title></use>
+<use href="#wwm-zotero" x="2216.0" y="450" width="20" height="20"><title>Zotero</title></use>
+<use href="#wwm-mastodon" x="2248.0" y="450" width="20" height="20"><title>Mastodon</title></use>
+<use href="#wwm-aftership" x="2280.0" y="450" width="20" height="20"><title>AfterShip</title></use>
+<use href="#wwm-home-assistant" x="2312.0" y="450" width="20" height="20"><title>Home Assistant</title></use>
+<use href="#wwm-govee" x="2344.0" y="450" width="20" height="20"><title>Govee</title></use>
+<use href="#wwm-lifx" x="2376.0" y="450" width="20" height="20"><title>LIFX</title></use>
+<use href="#wwm-philips-hue" x="2408.0" y="450" width="20" height="20"><title>Philips Hue</title></use>
+<use href="#wwm-wiz" x="2440.0" y="450" width="20" height="20"><title>WiZ</title></use>
+</g></g>
           </svg>
         </figure>
       </div>
 
       <div class="container">
-        <!-- The shelf: every name once, in the three groups the figure counts. It replaced two
-             drifting marquees (49 names, each four times, a pause control) on 2026-09-11: the
-             figure above is the band's one motion, and a list read at rest needs no pause. -->
+        <!-- The shelf: every name once, in the three groups the figure counts, folded away until
+             somebody wants a name. It replaced two drifting marquees (49 names, each four times,
+             a pause control) on 2026-09-11 and went into the fold the same evening, when the
+             marks moved up into the figure's lanes: the figure above is the band's one motion,
+             and a list read at rest needs no pause. -->
+        <details class="fold ww-fold">
+          <summary>All 49, by name</summary>
+          <div class="fold-body">
         <div class="ww-shelf">
           <div class="ww-group">
             <p class="ww-group-head">Chat apps</p>
@@ -1003,6 +1205,8 @@
             <ul class="works-with-list"><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-gmail" /></svg></span>Gmail</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-google-calendar" /></svg></span>Google Calendar</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-google-tasks" /></svg></span>Google Tasks</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-outlook" /></svg></span>Outlook</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-icloud" /></svg></span>iCloud</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-fastmail" /></svg></span>Fastmail</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-yahoo" /></svg></span>Yahoo</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-aol" /></svg></span>AOL</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-zoho" /></svg></span>Zoho Mail</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-gmx" /></svg></span>GMX</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-fireflies" /></svg></span>Fireflies</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-zoom" /></svg></span>Zoom</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-notion" /></svg></span>Notion</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-todoist" /></svg></span>Todoist</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-stripe" /></svg></span>Stripe</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-github" /></svg></span>GitHub</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-gitlab" /></svg></span>GitLab</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-linear" /></svg></span>Linear</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-cloudflare" /></svg></span>Cloudflare</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-airtable" /></svg></span>Airtable</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-calendly" /></svg></span>Calendly</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-gohighlevel" /></svg></span>GoHighLevel</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-lemlist" /></svg></span>lemlist</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-ynab" /></svg></span>YNAB</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-lunch-money" /></svg></span>Lunch Money</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-mercury" /></svg></span>Mercury</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-splitwise" /></svg></span>Splitwise</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-raindrop" /></svg></span>Raindrop</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-readwise" /></svg></span>Readwise</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-zotero" /></svg></span>Zotero</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-mastodon" /></svg></span>Mastodon</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-aftership" /></svg></span>AfterShip</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-home-assistant" /></svg></span>Home Assistant</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-govee" /></svg></span>Govee</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-lifx" /></svg></span>LIFX</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-philips-hue" /></svg></span>Philips Hue</li><li><span class="ww-mark" aria-hidden="true"><svg aria-hidden="true" focusable="false"><use href="#wwm-wiz" /></svg></span>WiZ</li></ul>
           </div>
         </div>
+          </div>
+        </details>
         <p class="works-with-note">All 49 run on accounts of yours, or on your own wifi, and none of them until you connect it. <a href="trust/" class="marketplace-text-link">What that means for your data &rarr;</a></p>
       </div>
     </section>

@@ -1946,6 +1946,11 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
   disclosure principle from "The Test" applied to comparison: the unflattering item you
   volunteer buys more belief than the flattering one you argue for. A comparison page with no
   losses reads as an advertisement and is treated as one.
+- **And a section where Archie wins comes first, and gets at least as much room.** Jett's
+  direction of 2026-09-12: the pages argue for us, in sentences that are true, and put our
+  strengths ahead of our gaps. The alternative's section stays, shorter and matter-of-fact, for
+  the reason above. Ours sits before it, and every item in it is a claim this file already
+  approves, cited in place to the Trust, pricing or Terms page.
 - **Category claims and company claims are different things.** "A chat app answers when you
   open it and ask" describes the category and needs no citation. "ChatGPT costs $X" or
   "Zapier cannot do Y" is a claim about a company and needs a row.

@@ -233,24 +233,67 @@
         <p>Windows shows a blue box with that heading, and the only obvious button says <em>Don&rsquo;t run</em>. Nothing is wrong. Here is how to get past it, and why it happens at all, because you shouldn&rsquo;t click through a security warning just because someone told you to.</p>
       </div>
 
-      <div class="mt-40 steps-row">
-        <div class="step-item fade-up delay-1">
-          <div class="step-number" aria-hidden="true">1</div>
-          <h3>Click &ldquo;More info&rdquo;</h3>
-          <p>It&rsquo;s the small link in the blue box, above the buttons. It&rsquo;s easy to miss; it doesn&rsquo;t look like a link.</p>
-        </div>
-        <div class="step-item fade-up delay-2">
-          <div class="step-number" aria-hidden="true">2</div>
-          <h3>Check the publisher</h3>
-          <p>2 lines appear. The app name should read <strong>Archie</strong>. If it says anything else, stop. You don&rsquo;t have our installer.</p>
-        </div>
-        <div class="step-item fade-up delay-3">
-          <div class="step-number" aria-hidden="true">3</div>
-          <h3>Click &ldquo;Run anyway&rdquo;</h3>
-          <p>A new button appears once <em>More info</em> is expanded. Archie installs normally from there, and you won&rsquo;t see this screen again on this computer.</p>
-        </div>
-      </div>
-
+      <!-- The box itself, drawn in the site's tokens, with the two things to click ringed in turn.
+           Three step cards described this dialog in words until 2026-09-11: a link that does not look
+           like a link, two lines that appear, a button that was not there before. A reader has the box
+           in front of them, so the figure shows the box. State A rings More info; state B adds the two
+           lines and Run anyway and rings that. Reduced motion holds state B, which is the whole answer.
+           The style block serves both variants. -->
+      <figure class="explain-figure mt-40 fade-up delay-1">
+        <svg class="explain-svg--desktop" viewBox="0 0 520 250" role="img" aria-labelledby="ss-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+          <title id="ss-t">The Windows box, drawn: a shield, the words Windows protected your PC, two lines of text, and a More info link, ringed first. Then two more lines, App: Archie and Publisher: unknown, and a Run anyway button, ringed second, beside Don't run.</title>
+          <style>
+            .ss-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+            .ss-shield{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;opacity:.7}
+            .ss-h{fill:currentColor;font-size:13px;font-weight:650}
+            .ss-bar{fill:currentColor;opacity:.14}
+            .ss-link{fill:var(--c-blue-ink);font-size:11.5px;font-weight:600;text-decoration:underline}
+            .ss-line{fill:currentColor;font-size:11.5px;opacity:.85}
+            .ss-btn{fill:var(--bg-primary);stroke:var(--line-muted);stroke-width:1.3}
+            .ss-btntext{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
+            .ss-ring{fill:none;stroke:var(--accent);stroke-width:2}
+            .ss-a{opacity:0}
+            @media (prefers-reduced-motion:no-preference){
+              .ss-a{animation:ssA 7s ease-in-out infinite}
+              .ss-b{animation:ssB 7s ease-in-out infinite}
+              @keyframes ssA{0%,40%{opacity:1}46%,100%{opacity:0}}
+              @keyframes ssB{0%,44%{opacity:0}50%,92%{opacity:1}97%,100%{opacity:0}}
+            }
+          </style>
+            <rect class="ss-card" x="110" y="24" width="300" height="200" rx="12"/>
+            <path class="ss-shield" d="M144,42 l13,5 v11 c0,9 -13,14 -13,14 c0,0 -13,-5 -13,-14 v-11 z"/>
+            <text class="ss-h" x="168" y="61">Windows protected your PC</text>
+            <rect class="ss-bar" x="132" y="78" width="222" height="7" rx="3.5"/>
+            <rect class="ss-bar" x="132" y="92" width="160" height="7" rx="3.5"/>
+            <text class="ss-link" x="132" y="120">More info</text>
+            <rect class="ss-ring ss-a" x="124" y="106" width="70" height="20" rx="10"/>
+            <g class="ss-b">
+              <text class="ss-line" x="132" y="148">App: <tspan font-weight="650">Archie</tspan></text>
+              <text class="ss-line" x="132" y="164">Publisher: unknown</text>
+              <rect class="ss-btn" x="236" y="184" width="82" height="26" rx="6"/><text class="ss-btntext" x="277" y="201">Run anyway</text>
+              <rect class="ss-ring" x="230" y="178" width="94" height="38" rx="10"/>
+            </g>
+            <rect class="ss-btn" x="326" y="184" width="70" height="26" rx="6"/><text class="ss-btntext" x="361" y="201">Don't run</text>
+        </svg>
+        <svg class="explain-svg--mobile" viewBox="0 0 340 250" role="img" aria-labelledby="ssm-t" xmlns="http://www.w3.org/2000/svg">
+          <title id="ssm-t">The Windows box, drawn: a shield, the words Windows protected your PC, two lines of text, and a More info link, ringed first. Then two more lines, App: Archie and Publisher: unknown, and a Run anyway button, ringed second, beside Don't run.</title>
+            <rect class="ss-card" x="20" y="24" width="300" height="200" rx="12"/>
+            <path class="ss-shield" d="M54,42 l13,5 v11 c0,9 -13,14 -13,14 c0,0 -13,-5 -13,-14 v-11 z"/>
+            <text class="ss-h" x="78" y="61">Windows protected your PC</text>
+            <rect class="ss-bar" x="42" y="78" width="222" height="7" rx="3.5"/>
+            <rect class="ss-bar" x="42" y="92" width="160" height="7" rx="3.5"/>
+            <text class="ss-link" x="42" y="120">More info</text>
+            <rect class="ss-ring ss-a" x="34" y="106" width="70" height="20" rx="10"/>
+            <g class="ss-b">
+              <text class="ss-line" x="42" y="148">App: <tspan font-weight="650">Archie</tspan></text>
+              <text class="ss-line" x="42" y="164">Publisher: unknown</text>
+              <rect class="ss-btn" x="146" y="184" width="82" height="26" rx="6"/><text class="ss-btntext" x="187" y="201">Run anyway</text>
+              <rect class="ss-ring" x="140" y="178" width="94" height="38" rx="10"/>
+            </g>
+            <rect class="ss-btn" x="236" y="184" width="70" height="26" rx="6"/><text class="ss-btntext" x="271" y="201">Don't run</text>
+        </svg>
+        <figcaption>Click <b>More info</b>. Check that the app name reads <b>Archie</b>, and stop if it says anything else: you don&rsquo;t have our installer. Click <b>Run anyway</b>. Archie installs normally from there, and the box does not come back on this computer.</figcaption>
+      </figure>
       <div class="mt-48 two-col fade-up delay-1">
         <div class="two-col-card">
           <h3>Why Windows says that</h3>

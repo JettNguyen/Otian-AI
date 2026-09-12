@@ -182,3 +182,7 @@ reason.**
   analogies, and over-explaining the obvious, all of which imply the reader might not keep up. The
   opposite failure counts too: unexplained jargon (API key, keychain, provider) that assumes the
   reader already knows. Respect the reader as capable but new.
+- **Example names read as American.** Sam, Dana, Ellen, Todd, Sarah, Emily, Mike. Never Priya,
+  Marco, Kenji, Reyes or anything that reads as from somewhere else, in copy, mockups, sample
+  data, or the catalog. Jett's rule across every Otian product, 2026-09-11. The catalog copy is
+  authored in the Archie repo, so a name there is fixed there and the browse page regenerated.

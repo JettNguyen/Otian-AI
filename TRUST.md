@@ -555,6 +555,35 @@ Archie code" is the approved form. Comparisons with what other agents cost go on
 pages, sourced and dated like every other third-party figure, with at most a sentence of it on
 the pricing page.
 
+### ✅ What other agents charge per unit, and the like-for-like caveat
+
+**Approved shape:** a table on `compare/cloud-agents/` (and one row each on the Symphony and
+automation comparisons) that prints each company's own unit at its own price, with a numbered
+`.src-cite` on every figure, beside our measured cost per reply: "$0.01 when it follows another
+closely, up to $0.11 when it starts from nothing, measured on an agent with twelve add-ons and
+everything connected, at Balanced." The pricing page carries one sentence of it and links to the
+table.
+
+**Why it's true:** every third-party figure is the company's own published price or rate, read on
+the date in FACTS.md; the derived ones (a Copilot reply that takes two actions, a Zapier activity,
+a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. Ours is
+`docs/COST-MEASURED.md` section 14.5 in the Archie repo: the twelve-add-on bench shape, warm and
+cold-and-writes, at Anthropic's sheet of 2026-09-12.
+
+**Required clauses, do not drop them.** (1) Say the units are different sizes of work: a credit,
+an action and a reply are not the same thing, and the companies say so. (2) Beside the $0.11, say
+that a reply that delegates to a specialist or uses the Deep setting costs more; the tester's agent
+averaged $0.155 a turn with both in the mix. (3) Call the OpenClaw figures one person's log, never
+"what OpenClaw costs". (4) Claude Code is on the page for the shape of the bill (an agent on a
+key), not the size of the job, and the note says so.
+
+**Bans.** Never "cheaper than X" as a flat sentence; the reader does the comparison, in units the
+page has explained. Never a figure from a search snippet, an aggregator, or a vendor's blog about a
+competitor (Kilo's OpenClaw page and Lindy's Devin page were read and left out for that reason).
+Never a per-task figure a company does not publish: Symphony, Manus, Genspark, Grok Bot and
+Perplexity's Computer publish none that survive their own caveats, so their rows say "not
+published" or do not exist.
+
 ### ✅ Your API key stays in the Keychain
 
 **Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to

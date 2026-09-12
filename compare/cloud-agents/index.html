@@ -309,7 +309,68 @@
       </div>
     </section>
 
-    <!-- ==============================
+        <!-- ==============================
+    What the AI itself costs, per unit
+    Each company's own unit at its own price, read September 12, 2026, beside our measured
+    per-reply figure. The units are different sizes of work and the note under the table says
+    so. TRUST.md ("What other agents charge per unit") has the rule; FACTS.md has every figure.
+    ============================== -->
+    <section class="section section-alt" id="ai-cost" aria-labelledby="unit-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The AI bill, per piece of work</span>
+          <h2 id="unit-heading" class="fade-up delay-1">What one piece of work costs, on their price lists and on ours.</h2>
+          <p>A rented agent sells its AI by the credit, the action or the conversation. Archie&rsquo;s runs on your own account at the AI company&rsquo;s price, and we have measured what one reply costs. Each company&rsquo;s own unit at its own price, with ours beside them.</p>
+        </div>
+
+        <div class="cost-table-wrap fade-up delay-1">
+          <table class="cost-table">
+            <caption class="sr-only">What one unit of AI work costs on each agent, in that agent&rsquo;s own unit, from its own price list, beside Archie&rsquo;s measured cost per reply.</caption>
+            <thead>
+              <tr>
+                <th scope="col">Agent</th>
+                <th scope="col">Their unit</th>
+                <th scope="col">What it costs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Agent" class="is-archie">Archie</td>
+                <td data-label="Their unit" class="is-archie">One reply from your agent, with every pass it takes inside it</td>
+                <td data-label="What it costs" class="is-archie"><span class="cost-num">$0.01</span> when it follows another closely, up to <span class="cost-num">$0.11</span> when it starts from nothing, measured on an agent with twelve add-ons and everything connected, at Balanced<a class="src-cite" href="../../archie/pricing/"><span class="sr-only">Source </span>6</a>. A reply that hands work to a specialist or uses the Deep setting costs more. Billed by the AI company to you</td>
+              </tr>
+              <tr>
+                <td data-label="Agent">Lindy</td>
+                <td data-label="Their unit">A credit. An &ldquo;everyday ask&rdquo; is 2 to 250 of them, &ldquo;deep work&rdquo; 250 to 1,000</td>
+                <td data-label="What it costs"><span class="cost-num">$29.99</span> a month for 3,000 credits, so an everyday ask is <span class="cost-num">$0.02</span> to <span class="cost-num">$2.50</span> and deep work <span class="cost-num">$2.50</span> to <span class="cost-num">$10</span><a class="src-cite" href="https://www.lindy.ai/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>10</a></td>
+              </tr>
+              <tr>
+                <td data-label="Agent">Zapier Agents</td>
+                <td data-label="Their unit">An activity: one action, one search, or one question answered from a knowledge source</td>
+                <td data-label="What it costs"><span class="cost-num">$400</span> a year for 1,500 activities a month, about <span class="cost-num">$0.02</span> each<a class="src-cite" href="https://zapier.com/l/agents-pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>11</a></td>
+              </tr>
+              <tr>
+                <td data-label="Agent">Microsoft Copilot Studio</td>
+                <td data-label="Their unit">A credit. An answer is 2 of them, an action 5</td>
+                <td data-label="What it costs"><span class="cost-num">$200</span> a month for 25,000 credits, or <span class="cost-num">$0.01</span> each pay as you go, so a reply that takes two actions is about <span class="cost-num">$0.10</span> to <span class="cost-num">$0.12</span><a class="src-cite" href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>12</a></td>
+              </tr>
+              <tr>
+                <td data-label="Agent">Salesforce Agentforce</td>
+                <td data-label="Their unit">A conversation, or an action paid in Flex Credits</td>
+                <td data-label="What it costs"><span class="cost-num">$2</span> a conversation, or <span class="cost-num">$0.10</span> an action<a class="src-cite" href="https://www.salesforce.com/agentforce/pricing/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>13</a></td>
+              </tr>
+              <tr>
+                <td data-label="Agent">Claude Code, an agent on a key like ours</td>
+                <td data-label="Their unit">A developer&rsquo;s working day</td>
+                <td data-label="What it costs">About <span class="cost-num">$13</span> an active day and <span class="cost-num">$150</span> to <span class="cost-num">$250</span> a month, on Anthropic&rsquo;s own figures<a class="src-cite" href="https://code.claude.com/docs/en/costs" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>14</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="cost-table-note">Read each row in its own unit: a Lindy credit, a Copilot credit and a reply are different sizes of work, and the companies say so. Ours is one reply with everything it did inside it; most of theirs is one step. Claude Code is a coding agent, which works a problem far harder than an assistant does, and it is here because it is the same kind of bill as ours: an agent on your own key, priced by the AI company. One published three-month log of OpenClaw, another agent on a key, came to <span class="cost-num">$187</span>, <span class="cost-num">$94</span> and <span class="cost-num">$78</span> a month as its owner moved to cheaper models<a class="src-cite" href="https://dev.to/helen_mireille_47b02db70c/how-much-does-it-actually-cost-to-run-an-ai-agent-247-in-2026-i-tracked-every-dollar-for-three-3k4i" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>15</a>. Their figures were read from their own pages on September 12, 2026; ours were measured in August and priced at Anthropic&rsquo;s rates of September 12. We keep working on ours, and we do not publish how.</p>
+        </div>
+      </div>
+    </section>
+<!-- ==============================
          Where renting wins
          ============================== -->
     <section class="section section-alt" aria-labelledby="wins-heading">
@@ -398,7 +459,31 @@
                 <span class="calm-list-label"><span class="src-n">9</span>Symphony&rsquo;s prices and its credits</span>
                 <p>Free, then Basic at $16 a month ($12.80 billed annually), Pro at $40 ($32) and Max at $80 ($64). The free plan needs no credit card and carries 500 monthly credits and 100 daily credits; credits &ldquo;reset monthly and do not roll over&rdquo;. Basic carries 2,000 monthly credits and Pro 5,000; Max publishes no figure. The unit is defined on the page as: &ldquo;Each action you take with agents and tools consumes AI credits. The exact amount is calculated after each action, based on its complexity and the tool used.&rdquo; From <a href="https://www.wix.com/symphony/pricing" rel="nofollow noopener" target="_blank">wix.com/symphony/pricing</a>, read on September 11, 2026. The daily cap was 50 when this page was first written and is 100 now, so the figure above is the one re-read on that date.</p>
               </div>
-              <div class="calm-list-item">
+                            <div class="calm-list-item" id="src-10">
+                <span class="calm-list-label"><span class="src-n">10</span>Lindy&rsquo;s credits</span>
+                <p>Plus at $29.99 a month per user with &ldquo;3k credits / user / mo&rdquo;, from <a href="https://www.lindy.ai/pricing" rel="nofollow noopener" target="_blank">lindy.ai/pricing</a>, and the ranges &ldquo;Everyday Asks 2-250 Credits&rdquo; and &ldquo;Deep work 250-1,000 Credits&rdquo; from the same page, read September 12, 2026. The per-ask dollars are our arithmetic on those two published numbers: $29.99 over 3,000 credits is a cent a credit. Lindy&rsquo;s <a href="https://docs.lindy.ai/account-billing/credits" rel="nofollow noopener" target="_blank">credits guide</a> adds that &ldquo;Most teams never come close to their limit.&rdquo;</p>
+              </div>
+              <div class="calm-list-item" id="src-11">
+                <span class="calm-list-label"><span class="src-n">11</span>Zapier Agents&rsquo; activities</span>
+                <p>&ldquo;Agents Pro $400 billed annually&rdquo; with &ldquo;up to 1,500 times per month&rdquo;, from <a href="https://zapier.com/l/agents-pricing" rel="nofollow noopener" target="_blank">zapier.com/l/agents-pricing</a>, read September 12, 2026. What counts as one activity is from Zapier&rsquo;s <a href="https://help.zapier.com/hc/en-us/articles/26559132765325-How-is-Zapier-Agents-usage-measured" rel="nofollow noopener" target="_blank">help article</a>: a trigger, an action, a search, a question answered from a knowledge source, each one activity. $400 over twelve months of 1,500 is 2.2 cents, our arithmetic.</p>
+              </div>
+              <div class="calm-list-item" id="src-12">
+                <span class="calm-list-label"><span class="src-n">12</span>Microsoft Copilot Studio&rsquo;s credits</span>
+                <p>&ldquo;1 capacity pack = 25,000 Copilot Credits&rdquo; at &ldquo;$200 per credit pack/month (billed annually)&rdquo; from <a href="https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/copilot-studio" rel="nofollow noopener" target="_blank">Microsoft&rsquo;s pricing page</a>, and the rate table, generative answer 2 credits and agent action 5, with the pay-as-you-go rate of $0.01 a credit, from <a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management" rel="nofollow noopener" target="_blank">Microsoft Learn</a>, both read September 12, 2026. A reply that takes two actions is 12 credits, our arithmetic: $0.096 prepaid, $0.12 metered.</p>
+              </div>
+              <div class="calm-list-item" id="src-13">
+                <span class="calm-list-label"><span class="src-n">13</span>Salesforce Agentforce&rsquo;s conversations and actions</span>
+                <p>&ldquo;$2 USD per conversation&rdquo; and &ldquo;$500 USD per 100,000 Credits&rdquo; from <a href="https://www.salesforce.com/agentforce/pricing/" rel="nofollow noopener" target="_blank">salesforce.com/agentforce/pricing</a>, and &ldquo;One Agentforce action consumes 20 Flex Credits ($0.10 USD)&rdquo; from <a href="https://www.salesforce.com/blog/flex-credits/" rel="nofollow noopener" target="_blank">Salesforce&rsquo;s Flex Credits announcement</a>, read September 12, 2026.</p>
+              </div>
+              <div class="calm-list-item" id="src-14">
+                <span class="calm-list-label"><span class="src-n">14</span>What Claude Code costs, in Anthropic&rsquo;s words</span>
+                <p>&ldquo;Across enterprise deployments, the average cost is around $13 per developer per active day and $150-250 per developer per month&rdquo;, from <a href="https://code.claude.com/docs/en/costs" rel="nofollow noopener" target="_blank">code.claude.com/docs/en/costs</a>, read September 12, 2026. A coding agent, not an assistant, and on the page for the shape of the bill rather than the size of the job.</p>
+              </div>
+              <div class="calm-list-item" id="src-15">
+                <span class="calm-list-label"><span class="src-n">15</span>One person&rsquo;s OpenClaw bill, three months running</span>
+                <p>A self-hosted OpenClaw agent tracked by its owner: &ldquo;Month one: $187&rdquo; on Claude Opus, $94 in month two after moving to Sonnet, $78 in month three, from <a href="https://dev.to/helen_mireille_47b02db70c/how-much-does-it-actually-cost-to-run-an-ai-agent-247-in-2026-i-tracked-every-dollar-for-three-3k4i" rel="nofollow noopener" target="_blank">a dev.to post of March 30, 2026</a>, read September 12, 2026. One log, not a price list, and the only kind of figure that exists for an open-source runner with no price of its own.</p>
+              </div>
+<div class="calm-list-item">
                 <span class="calm-list-label">What we have not claimed</span>
                 <p>Nothing here says these products are careless with your content: each company documents its own isolation, defaults and approvals, and we quote them doing it. The claim is only that their agent works on a computer they run and Archie works on yours. Nothing here says Symphony trains on one customer&rsquo;s data to answer another, either: we quote what Wix says its intelligence is drawn from and argue about what an average can and cannot know, which is a different point. Each company&rsquo;s own security documentation is the place to judge their side properly.</p>
               </div>

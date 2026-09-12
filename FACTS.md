@@ -22,7 +22,7 @@ enforcing this. Figures we are withholding go in prose bullets under **"Figures 
 deliberately unpublished"** at the foot of this file. That is not a stylistic preference. It is the
 only shape the checker cannot see.
 
-**Last reconciled against the pages:** 2026-09-12
+**Last reconciled against the pages:** 2026-09-12 (per-unit comparison rows added the same day)
 
 ---
 
@@ -57,6 +57,8 @@ only shape the checker cannot see.
 | `$151` | Heavy use at Economy, per month, the ceiling | Same |
 | `$87` | Heavy use at Balanced, per month, the floor | Same |
 | `$162` | Heavy use at Balanced, per month, the ceiling | Same |
+| `$0.01` | One reply from a fully loaded agent when it follows another closely (a warm reply), at Balanced: $0.0120 on the twelve-add-on bench shape, rounded. **The same string is a Copilot Studio credit in the third-party table below; both are real** | Archie repo, `docs/COST-MEASURED.md` section 14.5, measured August 2026 and priced at Anthropic's sheet of 2026-09-12. Printed on the pricing page and the cloud-agents, Symphony and automation comparisons since 2026-09-12 |
+| `$0.11` | The same reply starting from nothing and paying the premium to store its briefing (cold and writes): $0.1063, rounded up. A reply that delegates to a specialist or uses the Deep setting costs more, and every page that prints this says so | Same section. The tester's business agent averaged $0.155 a turn with a Deep skill and delegation in the mix, which is why the caveat is a required clause (TRUST.md, "What other agents charge per unit") |
 | `$160` | Heavy use at Balanced, the ceiling rounded to the ten, for prose that says "up to around" | Same; `how-it-works/` |
 | `$0.69` | The inbox watch alone at Economy, 30 emails a day reaching the model, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.5 (measured 2026-08-26 from a 13-shape corpus on a live key; the range is the length of the answer), repriced 2026-09-12 at Sonnet 5's kept launch price. The Economy column is Haiku and did not move |
 | `$1.10` | The same, ceiling | Same |
@@ -113,6 +115,27 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$64` | Symphony Max, billed annually | Same page | Checked: 2026-09-11 |
 | `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
 | `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
+| `$29.99` | Lindy Plus, per user, billed monthly, at 3,000 credits a month. The same figure as Zapier Professional above by coincidence | `https://www.lindy.ai/pricing`, "$ 29.99 /mo per user" and "3k credits / user / mo" | Checked: 2026-09-12 |
+| `$0.02` | Two things by arithmetic: Lindy's cheapest "everyday ask" (2 credits at a cent each), and one Zapier Agents activity ($400 a year over twelve months of 1,500 is 2.2 cents) | Lindy's pricing page, "Everyday Asks 2-250 Credits"; `https://zapier.com/l/agents-pricing` | Checked: 2026-09-12 |
+| `$2.50` | Lindy: an everyday ask at its top, 250 credits, which is also where "Deep work 250-1,000 Credits" starts. Our arithmetic at a cent a credit | `https://www.lindy.ai/pricing` | Checked: 2026-09-12 |
+| `$10` | Lindy: deep work at 1,000 credits, our arithmetic. Also Lindy's top-up price per 1,000 credits on `https://docs.lindy.ai/account-billing/credits`, which is not printed | `https://www.lindy.ai/pricing` | Checked: 2026-09-12 |
+| `$400` | Zapier Agents Pro, billed annually, "up to 1,500 times per month" | `https://zapier.com/l/agents-pricing`, "Agents Pro $400 billed annually" | Checked: 2026-09-12 |
+| `$200` | Microsoft Copilot Studio capacity pack: 25,000 Copilot Credits a month, billed annually. Also Cursor Ultra above | `https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/copilot-studio`, "$200 per credit pack/month (billed annually)" | Checked: 2026-09-12 |
+| `$0.01` | Copilot Studio pay-as-you-go, per Copilot Credit. The same string is Archie's warm reply in the Money table | `https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-messages-management`, "Pricing: $0.01/Copilot Credit" | Checked: 2026-09-12 |
+| `$0.008` | A Copilot Studio credit prepaid ($200 over 25,000) and a Symphony Basic credit ($16 over 2,000), both our arithmetic | Microsoft's pricing page above; `https://www.wix.com/symphony/pricing` | Checked: 2026-09-12 |
+| `$0.04` | One Copilot Studio agent action prepaid (5 credits at $0.008, our arithmetic). Also a Zapier task on Professional ($29.99 over 750, our arithmetic) | Microsoft Learn rate table above; `https://zapier.com/pricing` | Checked: 2026-09-12 |
+| `$0.10` | Two things: a Copilot Studio reply that takes two actions, prepaid (2 + 5 + 5 = 12 credits at $0.008 is $0.096, printed rounded on the pages and exact in the Sources fold), and one Agentforce action, 20 Flex Credits | Microsoft Learn rate table; `https://www.salesforce.com/blog/flex-credits/`, "One Agentforce action consumes 20 Flex Credits ($0.10 USD)" | Checked: 2026-09-12 |
+| `$0.096` | The Copilot Studio two-action reply, prepaid, exact; Sources fold only | Our arithmetic on the two Microsoft pages above | Checked: 2026-09-12 |
+| `$0.12` | The same 12 credits pay as you go, at $0.01 each | Microsoft Learn rate table above | Checked: 2026-09-12 |
+| `$2` | Salesforce Agentforce, per conversation. The `$2` in the Money table is our starter credits; this row is theirs | `https://www.salesforce.com/agentforce/pricing/`, "$2 USD per conversation" | Checked: 2026-09-12 |
+| `$500` | Agentforce Flex Credits, per 100,000 | Same page, "$500 USD per 100,000 Credits" | Checked: 2026-09-12 |
+| `$13` | Claude Code, per developer per active day, Anthropic's own average across enterprise deployments | `https://code.claude.com/docs/en/costs` | Checked: 2026-09-12 |
+| `$150` | Claude Code, per developer per month, the bottom of Anthropic's own range | Same page, "$150-250 per developer per month" | Checked: 2026-09-12 |
+| `$250` | Claude Code, per developer per month, the top of that range | Same page | Checked: 2026-09-12 |
+| `$187` | One published OpenClaw log, month one, on Claude Opus. **One person's log, and every page that prints it calls it that** | `https://dev.to/helen_mireille_47b02db70c/how-much-does-it-actually-cost-to-run-an-ai-agent-247-in-2026-i-tracked-every-dollar-for-three-3k4i`, March 30, 2026 | Checked: 2026-09-12 |
+| `$94` | The same log, month two, after moving to Sonnet | Same post | Checked: 2026-09-12 |
+| `$78` | The same log, month three | Same post | Checked: 2026-09-12 |
+| `$0.0012` | A Make Core credit: $12 over 10,000, our arithmetic | `https://www.make.com/en/pricing` | Checked: 2026-09-12 |
 
 **On the ChatGPT rows.** `openai.com` and `chatgpt.com` return 403 to every automated request,
 so those three figures were read off the pricing page in a browser by a person and transcribed,

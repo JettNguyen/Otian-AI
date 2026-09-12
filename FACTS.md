@@ -22,7 +22,7 @@ enforcing this. Figures we are withholding go in prose bullets under **"Figures 
 deliberately unpublished"** at the foot of this file. That is not a stylistic preference. It is the
 only shape the checker cannot see.
 
-**Last reconciled against the pages:** 2026-08-31
+**Last reconciled against the pages:** 2026-09-12
 
 ---
 
@@ -36,7 +36,7 @@ only shape the checker cannot see.
 | `$59` | Archie with the AI included, billed monthly | Stripe subscription price on the "Archie, AI included" product. Decided by Jett 2026-09-02: the plain month plus $29, sized so $25 of usage at list price and the card fee fit inside. The app's copy derives from `src/app/pricing.ts` in the Archie repo (`PLAN_AI_MONTHLY_CENTS`); `docs/AI-INCLUDED-PLAN.md` there has the arithmetic |
 | `$599` | Archie with the AI included, billed yearly | Same (`PLAN_AI_YEARLY_CENTS`). No per-month or savings figure is published for this plan, on purpose: two derived numbers per plan was already the drift the check exists for |
 | `$2` | The free starter credits a new install is given, spent on Anthropic usage we pay for. Lasts until it is spent or 14 days pass, whichever is first | Archie repo, `TRIAL_GRANT_MICROS` on the billing service (2,000,000 micro-dollars) and `TRIAL_DAYS` in `crates/archie-core/src/credits.rs`. Published for the first time on 2026-09-03: the Terms had described the gift without ever naming its size or its clock, so somebody whose credits expired unspent had been told the opposite of what happens |
-| `$25` | AI usage included each month on that plan, on Claude Sonnet, refilled each paid month with nothing carried over. **Do not print "at Anthropic's published prices" or any wording that denominates the allowance in the provider's own rate card.** It is what the meter runs on and it is what makes the plan read as reselling Anthropic rather than selling Archie with a model inside it; `docs/LEGAL-REVIEW.md` in the Archie repo has the clause it turns on | Archie repo, `PLAN_GRANT_MICROS` on the billing service (25,000,000 micro-dollars) and `PLAN_AI_ALLOWANCE` in `src/app/pricing.ts`. Against `docs/COST-MEASURED.md`: a light month fits several times, a moderate month is about half, a heavy month does not fit |
+| `$25` | AI usage included each month on that plan, on Claude Sonnet, refilled each paid month with nothing carried over. **Do not print "at Anthropic's published prices" or any wording that denominates the allowance in the provider's own rate card.** It is what the meter runs on and it is what makes the plan read as reselling Anthropic rather than selling Archie with a model inside it; `docs/LEGAL-REVIEW.md` in the Archie repo has the clause it turns on | Archie repo, `PLAN_GRANT_MICROS` on the billing service (25,000,000 micro-dollars) and `PLAN_AI_ALLOWANCE` in `src/app/pricing.ts`. Against `docs/COST-MEASURED.md` at the 2026-09-12 prices: a light month fits several times over, a moderate month is half to most of it, a heavy month does not fit |
 | `$30` | Also roughly what a heavy month costs with "Use this for every skill" on: the measured range is $23 to $39 | Archie repo, `docs/COST-MEASURED.md`. Measured 2026-08-10, not modelled; "$30" is the approved rounding of that range, and a page quoting it as exact must switch to the range. Same number as the monthly plan by coincidence, and a different claim |
 | `$61` | What a year saves against paying monthly | (30 x 12) - 299 |
 | `$99` | Archie for Business, billed monthly | Stripe subscription price on the Archie for Business product. Priced 2026-08-21: 3x the personal month, held under the $100 anchor. The app's copy derives from `src/app/pricing.ts` under `IS_BUSINESS` |
@@ -46,35 +46,36 @@ only shape the checker cannot see.
 | `$19` | Retired 2026-08-26. It was the scheduled-reports share of the heavy AI month under the pre-repricing model, and before that the monthly plan price until 2026-08-19. Kept listed so an old page quoting it does not read as a new claim, but nothing may print it |
 | `$250` | One session, one hour, for **both** guided setup and consulting | Set by us, repriced 2026-08-19 from $100. "$250/session" and "$250/hour" are the same claim, not a contradiction. Widened 2026-08-31 when consulting shipped as a second service on the same rate, on Jett's rate-consistency direction: an hour of our time is one price whatever it is spent on, and both service pages say so in the same words, because a reader who finds two rates for two services reasonably assumes the dearer one is the upsell. **Sourced to us, not to the Terms.** `terms-of-service/index.html:230` says "Guided sessions after that are billed at the rate quoted to you at the time (currently $250 per session)", which is scoped to guided sessions and permits a *different* rate by written agreement; it does not authorise applying $250 to a second service, so it may not be cited as the source for the consulting half. **Closed 2026-08-31:** the Fees & Payment clause had no wording for a scoped, phased engagement, nor for the overrun commitment the consulting page makes. Both are now in the clause at `terms-of-service/index.html:230`, the trigger quoted in the same words the page uses, so the rate is still sourced to us and the *engagement shape* is now sourced to the Terms. Also closed the same day: the Terms listed "Ongoing support after your agent is set up" as included and unbounded while `consulting/index.html:277` priced later work separately, so the two documents contradicted each other on what a customer had bought. The clause now separates answering questions about what we set up (free, no time limit) from new work (scoped and priced first) |
 | `$500` | The Fix-It Authority: what either founder, or anyone we hire, can spend per customer to put a problem right with no approval and no justification afterwards | The Otian Standard, our operating principles v4.0, Principle 11, published in full on `standard/` 2026-08-31. Set by us, and the only figure here that is a policy rather than a price: the page says we publish the number because an authority nobody knows about cannot be invoked, which is exactly why it may not quietly change. Listed 2026-08-31, when check-facts caught it on a page that had gone up without it |
-| `$1` | Light use at Economy, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.4, repriced 2026-08-26. These six rows replaced the single points `$4.40`, `$32` and `$137`, which were point values on a dataset that carries a range and did not say which quality setting they were |
-| `$2` | Light use at Economy, per month, the ceiling | Same |
-| `$5` | Light use at Balanced, per month, the floor. Also the scheduled-reports half of the retired moderate month | Same |
-| `$7` | Light use at Balanced, per month, the ceiling | Same |
-| `$41` | Moderate use at Economy, per month, the floor | Same. Roughly double the retired `$32`, and not because anything got dearer: that row counted no mail watch and assumed a schedule firing a third as often as a real one does |
-| `$63` | Moderate use, per month, the ceiling at both Economy and Balanced | Same |
-| `$44` | Moderate use at Balanced, per month, the floor | Same |
-| `$112` | Heavy use at Economy, per month, the floor | Same. `$112 to $184` was listed as a Balanced figure before 2026-08-26; the repricing moved it to Economy and Balanced went up |
-| `$184` | Heavy use at Economy, per month, the ceiling | Same |
-| `$130` | Heavy use at Balanced, per month, the floor | Same |
-| `$204` | Heavy use at Balanced, per month, the ceiling | Same |
-| `$0.69` | The inbox watch alone at Economy, 30 emails a day reaching the model, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.5. Measured input from a 13-shape corpus on a live key 2026-08-26; the range is the length of the answer, which is still assumed |
+| `$1` | Light use at Economy, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 14.1, repriced 2026-09-12: Anthropic kept Claude Sonnet 5 at its launch price instead of raising it on September 1, so every Balanced figure fell by a third and the Economy figures on the connected rows almost as far. The floor of each range is the measured turn priced at that sheet; the ceiling also prices a cold reply's input at 1.25x, the smallest premium a reply that parks its briefing pays, and rounds up to the dollar, so the site does not overpromise. These twelve rows replaced the 2026-08-26 set ($1, $2, $5, $7, $41, $44, $63, $112, $130, $184, $204) |
+| `$3` | Light use at Economy, per month, the ceiling; also light use at Balanced, the floor | Same |
+| `$6` | Light use at Balanced, per month, the ceiling | Same |
+| `$28` | Moderate use at Economy, per month, the floor | Same. Back to about the retired `$32` of July, for two reasons that cancel: the August remeasure counted the mail watch and a real schedule (roughly double), the September repricing took a third back off |
+| `$52` | Moderate use at Economy, per month, the ceiling | Same |
+| `$30` | Moderate use at Balanced, per month, the floor (the same number as the monthly plan, a coincidence) | Same |
+| `$51` | Moderate use at Balanced, per month, the ceiling | Same |
+| `$78` | Heavy use at Economy, per month, the floor | Same |
+| `$151` | Heavy use at Economy, per month, the ceiling | Same |
+| `$87` | Heavy use at Balanced, per month, the floor | Same |
+| `$162` | Heavy use at Balanced, per month, the ceiling | Same |
+| `$160` | Heavy use at Balanced, the ceiling rounded to the ten, for prose that says "up to around" | Same; `how-it-works/` |
+| `$0.69` | The inbox watch alone at Economy, 30 emails a day reaching the model, per month, the floor | Archie repo, `docs/COST-MEASURED.md` section 9.5 (measured 2026-08-26 from a 13-shape corpus on a live key; the range is the length of the answer), repriced 2026-09-12 at Sonnet 5's kept launch price. The Economy column is Haiku and did not move |
 | `$1.10` | The same, ceiling | Same |
-| `$2.08` | The inbox watch at Balanced, 30 a day, floor | Same |
-| `$3.29` | The same, ceiling | Same |
-| `$5.59` | The inbox watch at Balanced with draft replies on, 30 a day, floor | Same. Draft replies roughly triple this lane, because writing a reply is output and output bills at 5x reading |
-| `$9.64` | The same, ceiling | Same |
+| `$1.39` | The inbox watch at Balanced, 30 a day, floor | Same |
+| `$2.20` | The same, ceiling | Same |
+| `$3.73` | The inbox watch at Balanced with draft replies on, 30 a day, floor | Same. Draft replies roughly triple this lane, because writing a reply is output and output bills at 5x reading |
+| `$6.43` | The same, ceiling | Same |
 | `$1.85` | The inbox watch at Economy, 80 a day, floor | Same |
 | `$2.93` | The same, ceiling | Same |
-| `$5.54` | The inbox watch at Balanced, 80 a day, floor | Same |
-| `$8.78` | The same, ceiling | Same |
-| `$14.90` | The inbox watch at Balanced with draft replies on, 80 a day, floor | Same |
-| `$25.70` | The same, ceiling | Same |
+| `$3.70` | The inbox watch at Balanced, 80 a day, floor | Same |
+| `$5.86` | The same, ceiling | Same |
+| `$9.94` | The inbox watch at Balanced with draft replies on, 80 a day, floor | Same |
+| `$17.14` | The same, ceiling | Same |
 | `$4.62` | The inbox watch at Economy, 200 a day, floor | Same |
 | `$7.32` | The same, ceiling | Same |
-| `$13.86` | The inbox watch at Balanced, 200 a day, floor | Same |
-| `$21.96` | The same, ceiling | Same |
-| `$37.26` | The inbox watch at Balanced with draft replies on, 200 a day, floor | Same |
-| `$64.26` | The same, ceiling | Same |
+| `$9.24` | The inbox watch at Balanced, 200 a day, floor | Same |
+| `$14.64` | The same, ceiling | Same |
+| `$24.84` | The inbox watch at Balanced with draft replies on, 200 a day, floor | Same |
+| `$42.84` | The same, ceiling | Same |
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | Printed nowhere, and there is no add-on price to print: **every add-on is included with Archie**, for everyone, and nothing in the catalog is sold on its own. The site has no price filter, no price badge, and no price question on the submission form | Its marketplace manifest in the Archie repo, `price_cents: 0` like all 151. The field stays only because removing it is a data migration. Pages say "included", never "free to start" or "premium" |
 | `$0` | Admin balance placeholder | Not customer-facing copy |

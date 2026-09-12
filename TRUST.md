@@ -511,7 +511,8 @@ keep. Never write "Archie tracks your exact spend" or "see your bill in Archie".
 **Approved wording:** "An add-on can pick its own response quality and ignore the dial, and many
 do, so on an agent with several add-ons installed the dial alone barely changes the bill. The
 checkbox under it, 'Use this for every skill', overrides them. Measured in August 2026 on an agent
-with 12 add-ons, that checkbox took about four fifths off the monthly cost."
+with 12 add-ons and priced at today's rates, that checkbox takes about two thirds off the monthly
+cost."
 
 **Why it's true:** `resolve_for` (`crates/archie-runtime/src/gateway.rs:711-718`) is the single
 place the model is chosen for a reply. With the flag off it calls `resolve_model`, which lets a
@@ -521,10 +522,13 @@ dial for every target. The flag is `AgentBundleManifest::force_model_tier`, writ
 checkbox in `src/app/agent-detail.tsx`. Web search is bumped to Balanced rather than broken
 (`resolve_model_forced`, same file line 699).
 
-**The four fifths is measured, not modelled:** `crates/archie-runtime/examples/cost_bench.rs`
+**The two thirds is measured, not modelled:** `crates/archie-runtime/examples/cost_bench.rs`
 run with `--live --force-fast` against a twelve-skill agent on 2026-08-10. Forced Economy came to
-18% of forced Balanced on a warm turn and 21% on a cold one. The unforced dial on the same agent
-saved 4% to 7%. Figures and the full dataset: `docs/COST-MEASURED.md` in the Archie repo.
+18% of forced Balanced on a warm turn and 21% on a cold one at the price sheet of that day. On
+September 12, 2026 Anthropic made Claude Sonnet 5's launch price the standard price instead of
+raising it, and the same measured tokens at that sheet come to 27% and 32%, which is the "about two
+thirds off" (it was "four fifths" until that day). The unforced dial on the same agent saved 4% to
+7%. Figures and the full dataset: `docs/COST-MEASURED.md` in the Archie repo, sections 3 and 14.
 
 **Required clause, do not drop it:** say that the checkbox also takes the add-ons off the level
 they chose. A saving quoted without its trade is a claim we cannot defend.

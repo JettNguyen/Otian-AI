@@ -2587,24 +2587,12 @@ summary,
   }
 }
 
-/* ── Works-with: the river band under the hero ───────────────────────────────
-   One dense strip of the 22 names, two rows drifting opposite ways. Chips rather than a
-   comma list so the eye lands on a mark it recognises without reading anything, which is
-   the entire job: this sits directly under the hero, before a visitor has read a word.
-
-   The motion contract, so nobody "fixes" half of it:
-   - .ww-track is six identical lists and the keyframe translates -50%, so the landing
-     frame is pixel-identical to the start. Uniform spacing comes from padding-right on
-     each list, NOT gap on the track: a track gap leaves half a gap at the -50% point and
-     the loop visibly jumps.
-   - 112s is not a taste choice on its own: half a track is roughly 4500px, and 4500/112 is
-     about 40px/s, slow enough to read a name mid-drift. Change duration and width
-     together or the speed changes. Since 2026-09-01 each track sets --ww-dur inline, scaled
-     to its own name count (112s per twenty), so two rows of different lengths drift at the
-     same speed.
-   - Hover pauses the row under the cursor; the checkbox in the section markup pauses
-     both rows without a pointer, which is what WCAG 2.2.2 actually asks for; and
-     reduced-motion replaces the whole mechanism with a static wrapped row. */
+/* ── Works-with: the shelf under the reach figure ───────────────────────────
+   Every name once, as chips, in the three groups the figure above counts. Chips rather than a
+   comma list so the eye lands on a mark it recognises without reading anything. Two drifting
+   marquees with a pause control stood here until 2026-09-11; the figure is the band's one
+   motion now, and a list read at rest needs no pause. .ww-mark, .works-with-list and the note
+   below are what the shelf is made of. */
 .ww-band {
   background: var(--bg-card);
   border-bottom: 1px solid var(--border);
@@ -2630,95 +2618,26 @@ summary,
   margin: 0;
 }
 
-.ww-pause-btn {
-  margin-left: auto;
-  align-self: center;
-  width: 32px;
-  height: 32px;
-  display: inline-flex;
-  align-items: center;
+.ww-shelf {
+  display: grid;
+  gap: 26px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* Group labels: the small uppercase blue header the site uses for supporting structure. */
+.ww-group-head {
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--c-blue-ink);
+}
+
+.ww-shelf .works-with-list {
   justify-content: center;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--bg-card);
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: background var(--transition-quick), color var(--transition-quick);
-  box-shadow: var(--lift-xs);
-}
-
-.ww-pause-btn:hover {
-  background: var(--surface-hover);
-  color: var(--text-primary);
-}
-
-.ww-pause-btn:active {
-  background: var(--surface-hover-strong);
-}
-
-.ww-pause-box:focus-visible ~ .container .ww-pause-btn {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.ww-pause-glyph {
-  width: 12px;
-  height: 12px;
-  display: block;
-}
-
-.ww-pause-on { display: none; }
-.ww-pause-box:checked ~ .container svg.ww-pause-on { display: block; }
-.ww-pause-box:checked ~ .container span.ww-pause-on { display: inline; }
-.ww-pause-box:checked ~ .container .ww-pause-off { display: none; }
-
-.ww-mq {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
-}
-
-.ww-mq + .ww-mq { margin-top: 10px; }
-
-.ww-track {
-  display: flex;
-  width: max-content;
-  animation: ww-drift var(--ww-dur, 112s) linear infinite;
-}
-
-.ww-mq--rev .ww-track { animation-direction: reverse; }
-
-.ww-mq:hover .ww-track,
-.ww-pause-box:checked ~ .ww-mq .ww-track {
-  animation-play-state: paused;
-}
-
-/* Doubled selector on purpose: .works-with-list's own margin/padding/gap rule sits later
-   in this file and wins a specificity tie, which is how the seam between list copies
-   shipped with zero gap (its padding: 0 beat the padding-right here). The padding-right
-   must always equal the in-list gap: it is the spacing at the -50% loop seam, and any
-   mismatch shows as a hitch between the last pill and the first. */
-.works-with-list.ww-run {
-  flex-wrap: nowrap;
-  gap: 10px;
-  padding-right: 10px;
-}
-
-/* Each chromatic pill takes a light wash of its brand's own colour, the same hex its
-   mark already carries, so the tint is sourced exactly like the shape. Achromatic brands
-   (Notion, GitHub, Matrix, OpenAI, xAI, LIFX, Mercury, Readwise) publish ink-on-white and
-   deliberately keep the plain white card pill: an earlier neutral-grey fallback made them
-   look disabled next to the coloured rows. The attribute selector is the gate, because
-   only tinted pills carry the inline --ww-tint; and the doubled class outranks the base
-   pill rule that sits later in this file (equal specificity shipped tintless pills once
-   already). Browsers without color-mix keep the plain card pill. */
-.works-with-list.ww-run li[style*="--ww-tint"] {
-  background: color-mix(in srgb, var(--ww-tint) 12%, var(--bg-card));
-  border-color: color-mix(in srgb, var(--ww-tint) 32%, var(--border));
-}
-
-@keyframes ww-drift {
-  to { transform: translateX(-50%); }
 }
 
 .ww-band .stat-row {
@@ -2726,7 +2645,7 @@ summary,
 }
 
 /* The connections figure sits between the heading and the marquees. --band's 8px was tuned for
-   a figure that is the last thing in its section; this one has two rows of logos under it, and
+   a figure that is the last thing in its section; this one has the shelf under it, and
    the head above it already carries 44px. */
 .ww-band .explain-figure {
   margin-top: 0;
@@ -2734,20 +2653,6 @@ summary,
 }
 
 .ww-band .works-with-note { margin-top: 14px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .ww-track { animation: none; width: auto; }
-  .ww-mq {
-    -webkit-mask-image: none;
-    mask-image: none;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-  .ww-track > [aria-hidden="true"] { display: none; }
-  .ww-run { flex-wrap: wrap; }
-  .ww-pause-btn { display: none; }
-}
 
 .works-with-list {
   display: flex;
@@ -11403,13 +11308,9 @@ html[data-theme="dark"] .booking-container iframe {
    their edges; on a flat one they disappear completely. */
 /* Connections band: the river band restyled to the quiet grammar */
 .ww-band--home { background: var(--bg-secondary); border-bottom: 0; padding: 96px 0; }
-/* The headline stays truly centered and the pause control rides its row at the
-   right edge of the container: absolute, so the button's width never nudges the
-   centering, anchored to the bottom of the head where the headline sits. */
+/* The headline stays truly centered; the shelf and the note sit under it. */
 .ww-band--home .ww-band-head { position: relative; flex-direction: column; align-items: center; text-align: center; gap: 4px; margin-bottom: 44px; }
-.ww-band--home .ww-pause-btn { position: absolute; right: 0; bottom: 4px; margin-left: 0; }
-.ww-band--home .works-with-list li,
-.ww-band--home .works-with-list.ww-run li[style*="--ww-tint"] { background: transparent; border: 0; box-shadow: none; font-weight: 600; }
+.ww-band--home .works-with-list li { background: transparent; border: 0; box-shadow: none; font-weight: 600; }
 .ww-band--home .ww-band-line { font-size: clamp(1.85rem, 3.2vw, 2.5rem); font-weight: 700; letter-spacing: -0.015em; line-height: 1.18; }
 .ww-band--home .works-with-note { text-align: center; max-width: 620px; margin: 40px auto 0; font-size: var(--fs-sm); color: var(--text-muted); }
 

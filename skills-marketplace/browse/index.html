@@ -1167,11 +1167,67 @@ it reads what you have already collected. there is nothing to import and nothing
           <p>The frightening version of a marketplace is that you install a stranger&rsquo;s plugin and it runs code on your computer, next to your email. That is not what this is, and the reason is structural rather than a promise. Here is the whole of it, including the half that doesn&rsquo;t flatter us.</p>
         </div>
 
+        <!-- The mechanism, drawn, 2026-09-11: text goes into your agent; a program has nowhere to go.
+             The caption is TRUST.md's approved wording. The same figure sits on trust/ and on the
+             marketplace's vetting band; the honest edges stay in prose beside it. The style block
+             serves both variants. -->
+        <figure class="explain-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 226" role="img" aria-labelledby="tx-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="tx-t">A text document flows along a dotted line into your agent, which reads it and follows it. Beside the agent, a program block with a code mark is struck through: there is nowhere here to run one.</title>
+            <style>
+              .tx-doc{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.7;stroke-linejoin:round}
+              .tx-fold{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linejoin:round}
+              .tx-lines{stroke:currentColor;stroke-width:4;stroke-linecap:round;opacity:.22}
+              .tx-wire{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.75;stroke-linecap:round;stroke-dasharray:1 8}
+              .tx-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .tx-slot{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:3 4;opacity:.7}
+              .tx-prog{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .tx-code{fill:currentColor;opacity:.5;font-size:20px;font-weight:600;text-anchor:middle;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+              .tx-strike{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round}
+              .tx-lab{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .tx-cap{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              @media (prefers-reduced-motion:no-preference){
+                .tx-wire{animation:txFlow 1.9s linear infinite}
+                @keyframes txFlow{to{stroke-dashoffset:-18}}
+              }
+            </style>
+            <path class="tx-doc" d="M60,52 h64 l24,24 v100 h-88 z"/>
+            <path class="tx-fold" d="M124,52 v24 h24"/>
+            <path class="tx-lines" d="M76,100 h52 M76,116 h58 M76,132 h44 M76,148 h54"/>
+            <text class="tx-lab" x="104" y="200">An add-on</text><text class="tx-cap" x="104" y="215">text your agent reads</text>
+            <path class="tx-wire" d="M150,116 L246,116"/>
+            <rect class="tx-agent" x="250" y="64" width="150" height="104" rx="14"/>
+            <text class="tx-lab" x="325" y="94">Your agent</text>
+            <rect class="tx-slot" x="270" y="110" width="110" height="38" rx="8"/>
+            <text class="tx-cap" x="325" y="133">reads it, follows it</text>
+            <rect class="tx-prog" x="446" y="78" width="110" height="76" rx="10"/>
+            <text class="tx-code" x="501" y="124">&lt;/&gt;</text>
+            <path class="tx-strike" d="M458,146 L544,86"/>
+            <text class="tx-lab" x="501" y="200">A program</text><text class="tx-cap" x="501" y="215">nowhere here to run one</text>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="txm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="txm-t">A text document flows along a dotted line into your agent, which reads it and follows it. Beside the agent, a program block with a code mark is struck through: there is nowhere here to run one.</title>
+            <path class="tx-doc" d="M40,30 h64 l24,24 v100 h-88 z"/>
+            <path class="tx-fold" d="M104,30 v24 h24"/>
+            <path class="tx-lines" d="M56,78 h52 M56,94 h58 M56,110 h44 M56,126 h54"/>
+            <text class="tx-lab" x="84" y="178">An add-on</text><text class="tx-cap" x="84" y="193">text your agent reads</text>
+            <path class="tx-wire" d="M132,94 L166,94"/>
+            <rect class="tx-agent" x="170" y="42" width="150" height="104" rx="14"/>
+            <text class="tx-lab" x="245" y="72">Your agent</text>
+            <rect class="tx-slot" x="190" y="88" width="110" height="38" rx="8"/>
+            <text class="tx-cap" x="245" y="111">reads it, follows it</text>
+            <rect class="tx-prog" x="210" y="206" width="110" height="76" rx="10"/>
+            <text class="tx-code" x="265" y="252">&lt;/&gt;</text>
+            <path class="tx-strike" d="M222,274 L308,214"/>
+            <text class="tx-lab" x="265" y="308">A program</text><text class="tx-cap" x="265" y="323">nowhere here to run one</text>
+          </svg>
+          <figcaption>An add-on is a text file, not a program. A Skill is markdown plus settings. It cannot run code on your computer, because Archie has nowhere to run it.</figcaption>
+        </figure>
         <div class="mt-40 two-col fade-up delay-1">
           <div class="two-col-card">
             <h3>What we can tell you</h3>
             <ul class="two-col-card-list">
-              <li>An add-on cannot run a program. A Skill is a text file plus settings, a Personality is written instructions, a Routine is a schedule. Archie has nowhere to run code, so nothing inside an add-on can read your files or reach the internet by itself</li>
+              <li>An add-on cannot run a program, so nothing inside one can read your files or reach the internet by itself</li>
               <li>A person reads every add-on before it is listed. Right now that person is one of the two of us, and we read every line of every submission</li>
               <li>An add-on has to declare which of your connected accounts it needs, and you see that list before you add it</li>
               <li>Adding an add-on leaves no record of who you are. It bumps that add-on&rsquo;s public install count, signed in as you so the tally can&rsquo;t be gamed, and the running total is all we keep</li>

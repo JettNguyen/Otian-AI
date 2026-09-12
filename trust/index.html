@@ -745,8 +745,64 @@
           <p>The frightening version of a marketplace is: you install a stranger&rsquo;s plugin, and it runs code on your computer, next to your email. That is not what this is, and the reason is structural, not a promise.</p>
         </div>
 
+        <!-- The mechanism, drawn, 2026-09-11: text goes into your agent; a program has nowhere to go.
+             The caption is TRUST.md's approved wording. The same figure sits on trust/ and on the
+             marketplace's vetting band; the honest edges stay in prose beside it. The style block
+             serves both variants. -->
+        <figure class="explain-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 226" role="img" aria-labelledby="tx-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="tx-t">A text document flows along a dotted line into your agent, which reads it and follows it. Beside the agent, a program block with a code mark is struck through: there is nowhere here to run one.</title>
+            <style>
+              .tx-doc{fill:var(--bg-card);stroke:var(--accent);stroke-width:1.7;stroke-linejoin:round}
+              .tx-fold{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linejoin:round}
+              .tx-lines{stroke:currentColor;stroke-width:4;stroke-linecap:round;opacity:.22}
+              .tx-wire{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.75;stroke-linecap:round;stroke-dasharray:1 8}
+              .tx-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .tx-slot{fill:none;stroke:var(--accent);stroke-width:1.2;stroke-dasharray:3 4;opacity:.7}
+              .tx-prog{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .tx-code{fill:currentColor;opacity:.5;font-size:20px;font-weight:600;text-anchor:middle;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+              .tx-strike{stroke:var(--accent);stroke-width:2.2;stroke-linecap:round}
+              .tx-lab{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .tx-cap{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              @media (prefers-reduced-motion:no-preference){
+                .tx-wire{animation:txFlow 1.9s linear infinite}
+                @keyframes txFlow{to{stroke-dashoffset:-18}}
+              }
+            </style>
+            <path class="tx-doc" d="M60,52 h64 l24,24 v100 h-88 z"/>
+            <path class="tx-fold" d="M124,52 v24 h24"/>
+            <path class="tx-lines" d="M76,100 h52 M76,116 h58 M76,132 h44 M76,148 h54"/>
+            <text class="tx-lab" x="104" y="200">An add-on</text><text class="tx-cap" x="104" y="215">text your agent reads</text>
+            <path class="tx-wire" d="M150,116 L246,116"/>
+            <rect class="tx-agent" x="250" y="64" width="150" height="104" rx="14"/>
+            <text class="tx-lab" x="325" y="94">Your agent</text>
+            <rect class="tx-slot" x="270" y="110" width="110" height="38" rx="8"/>
+            <text class="tx-cap" x="325" y="133">reads it, follows it</text>
+            <rect class="tx-prog" x="446" y="78" width="110" height="76" rx="10"/>
+            <text class="tx-code" x="501" y="124">&lt;/&gt;</text>
+            <path class="tx-strike" d="M458,146 L544,86"/>
+            <text class="tx-lab" x="501" y="200">A program</text><text class="tx-cap" x="501" y="215">nowhere here to run one</text>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="txm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="txm-t">A text document flows along a dotted line into your agent, which reads it and follows it. Beside the agent, a program block with a code mark is struck through: there is nowhere here to run one.</title>
+            <path class="tx-doc" d="M40,30 h64 l24,24 v100 h-88 z"/>
+            <path class="tx-fold" d="M104,30 v24 h24"/>
+            <path class="tx-lines" d="M56,78 h52 M56,94 h58 M56,110 h44 M56,126 h54"/>
+            <text class="tx-lab" x="84" y="178">An add-on</text><text class="tx-cap" x="84" y="193">text your agent reads</text>
+            <path class="tx-wire" d="M132,94 L166,94"/>
+            <rect class="tx-agent" x="170" y="42" width="150" height="104" rx="14"/>
+            <text class="tx-lab" x="245" y="72">Your agent</text>
+            <rect class="tx-slot" x="190" y="88" width="110" height="38" rx="8"/>
+            <text class="tx-cap" x="245" y="111">reads it, follows it</text>
+            <rect class="tx-prog" x="210" y="206" width="110" height="76" rx="10"/>
+            <text class="tx-code" x="265" y="252">&lt;/&gt;</text>
+            <path class="tx-strike" d="M222,274 L308,214"/>
+            <text class="tx-lab" x="265" y="308">A program</text><text class="tx-cap" x="265" y="323">nowhere here to run one</text>
+          </svg>
+          <figcaption>An add-on is a text file, not a program. A Skill is markdown plus settings. It cannot run code on your computer, because Archie has nowhere to run it.</figcaption>
+        </figure>
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Archie has nowhere to run code.</strong> A Skill is a text file plus some settings. A Personality is a set of written instructions. A Routine is a schedule. Nothing in an add-on can run as a program, so it cannot itself read files off your disk or open a network connection. Not because we&rsquo;d catch it; because there is no mechanism for it to use. What an add-on <em>is</em>, is instructions your agent follows, and your agent can fetch public web pages, so a malicious add-on has the same leak channel as any hostile text your agent reads. That is why the prompt-injection admission above applies to add-ons too, and why what an add-on says it does is worth reading before you install it.</p>
+          <p><strong>Nothing in an add-on can run as a program</strong>, so it cannot itself read files off your disk or open a network connection. Not because we&rsquo;d catch it; because there is no mechanism for it to use. What an add-on <em>is</em>, is instructions your agent follows, and your agent can fetch public web pages, so a malicious add-on has the same leak channel as any hostile text your agent reads. That is why the prompt-injection admission above applies to add-ons too, and why what an add-on says it does is worth reading before you install it.</p>
 
           <p>What an add-on <em>can</em> do is tell your agent how to behave and declare which of your connected accounts it needs. Today that is blunter than we want: declaring &ldquo;calendar&rdquo; grants reading, creating <em>and deleting</em> together, rather than asking you about each. One cap sits above it: the account itself. Connect your calendar with reading alone and no add-on gets the tools to create or delete, no matter what it declared. <a href="details/#addons-long">How that works, in full &rarr;</a></p>
 

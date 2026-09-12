@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260911-21" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260911-22" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -628,7 +628,7 @@
         <h2 id="seeit-heading" class="fade-up">An agent set up from scratch, then asked to fix an afternoon.</h2>
       </div>
       <div class="hm-demo" id="demo">
-        <figure class="demo-player demo-player--wide">
+        <figure class="demo-player demo-player--wide" id="homeDemo">
             <div class="demo-player-frame">
               <!-- No src on the <video> and no src on the <source>s on purpose, only data-src: the
                    browser fetches the poster and nothing else. Until js/demo-player.js picks ONE of
@@ -685,8 +685,25 @@
                    (js/demo-player.js), and the full recording (which does have a pause control)
                    lives on /archie/see-it-work/. -->
             </div>
-          </figure>
-        <p class="hm-micro hm-demo-cap">The whole demo, one take: a new agent, a calendar, Telegram, a double-booked afternoon fixed from a phone.</p>
+                    <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
+        </figure>
+        <!-- The recording's index, 2026-09-11. The rail above is built by js/demo-player.js from
+             these buttons: a tick per moment, filled to the playhead, seekable on click. The
+             times are the ones how-it-works/#timeline uses, so the two pages index one recording.
+             The buttons ship hidden and the script reveals them, so a page with no script shows
+             the recording and never a button that does nothing. -->
+        <div class="chapters chapters--strip" data-chapters-for="homeDemo">
+          <div class="chapter-times" hidden>
+            <button type="button" class="chapter-time" data-seek="0">0:00 it arrives working</button>
+            <button type="button" class="chapter-time" data-seek="4">0:04 a calendar</button>
+            <button type="button" class="chapter-time" data-seek="28">0:28 who it works for</button>
+            <button type="button" class="chapter-time" data-seek="68">1:08 Telegram, one code</button>
+            <button type="button" class="chapter-time" data-seek="108">1:48 a double-booked afternoon, from a phone</button>
+            <button type="button" class="chapter-time" data-seek="124">2:04 it proposes, you confirm</button>
+          </div>
+        </div>
+
+        <p class="hm-micro hm-demo-cap">The whole demo, one take. Press a moment to jump to it.</p>
       </div>
     </section>
 

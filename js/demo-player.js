@@ -246,6 +246,20 @@
       Array.prototype.forEach.call(chapters.querySelectorAll('.chapter-times'), function (row) {
         row.hidden = false;
       });
+      /* The rail: a track under the frame with a tick per moment, filled to the playhead and
+         seekable on click. Ticks are placed from data-duration until the real duration is in,
+         so they are on screen before anything is fetched, which under reduced motion is until
+         the visitor presses play. */
+      var rail = player.querySelector('.demo-player-rail');
+      var ticks = [];
+      var railDuration = function () {
+        return video.duration || parseFloat(rail && rail.getAttribute('data-duration')) || 0;
+      };
+      var placeTicks = function () {
+        var d = railDuration();
+        if (!d) return;
+        ticks.forEach(function (tk) { tk.el.style.left = (Math.min(tk.at, d) / d * 100) + '%'; });
+      };
       var seekTo = function (t) {
         pausedByUser = false;
         player.classList.remove('is-paused');
@@ -272,6 +286,24 @@
           seekTo(parseFloat(chip.getAttribute('data-seek')) || 0);
         });
       });
+      if (rail) {
+        chips.forEach(function (chip) {
+          var b = document.createElement('b');
+          b.title = chip.textContent.trim();
+          rail.appendChild(b);
+          ticks.push({ at: parseFloat(chip.getAttribute('data-seek')) || 0, el: b, chip: chip });
+        });
+        placeTicks();
+        video.addEventListener('loadedmetadata', placeTicks);
+        rail.addEventListener('click', function (e) {
+          var d = railDuration();
+          if (!d) return;
+          var r = rail.getBoundingClientRect();
+          var f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+          seekTo(f * d);
+        });
+        rail.hidden = false;
+      }
       video.addEventListener('timeupdate', function () {
         var t = video.currentTime;
         var on = null;
@@ -279,6 +311,11 @@
           if (parseFloat(chips[i].getAttribute('data-seek')) <= t + 0.25) on = chips[i];
         }
         chips.forEach(function (c) { c.classList.toggle('is-on', c === on); });
+        if (rail) {
+          var d = railDuration();
+          rail.style.setProperty('--pos', d ? Math.min(1, t / d) : 0);
+          ticks.forEach(function (tk) { tk.el.classList.toggle('is-on', tk.chip === on); });
+        }
         Array.prototype.forEach.call(chapters.querySelectorAll('.chapter'), function (li) {
           li.classList.toggle('is-on', !!on && li.contains(on));
         });

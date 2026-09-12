@@ -15045,6 +15045,22 @@ html[data-theme="dark"] .booking-container iframe {
   .chapter { padding: 16px; }
 }
 
+/* ── The recording's rail (index, how-it-works), 2026-09-11 ──
+   A thin track under the player with a tick at each chapter, built by js/demo-player.js from
+   the chapter buttons, filled to the playhead, and seekable on click. Ships hidden: with no
+   script there are no ticks and nothing to seek. Ticks are blue, the site's wayfinding colour;
+   the fill is ember, because it is the recording's own progress. The 20px box is the click
+   target; the visible track is 4px of it. */
+.demo-player-rail { position: relative; height: 20px; margin: 10px 2px 0; cursor: pointer; }
+.demo-player-rail[hidden] { display: none; }
+.demo-player-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 4px; border-radius: 999px; background: var(--line-soft); }
+.demo-player-rail i { position: absolute; left: 0; top: 8px; height: 4px; width: calc(var(--pos, 0) * 100%); border-radius: 999px; background: var(--accent); }
+.demo-player-rail b { position: absolute; top: 3px; width: 2px; height: 14px; margin-left: -1px; border-radius: 1px; background: var(--c-blue); transition: background var(--transition); }
+.demo-player-rail b.is-on { background: var(--accent-ink); }
+/* The homepage's index is a strip of moments under the rail rather than tiles. */
+.chapters--strip { display: flex; justify-content: center; max-width: 1000px; margin: 12px auto 0; }
+.chapters--strip .chapter-times { justify-content: center; margin-top: 0; }
+
 /* ── The kit, drawn (equipment/) ──
    The drawing's classes and states live in its SVG's <style>. Here: where it sits. Under
    "The short answer" it is the untailored kit; inside the kit panel it is the same figure

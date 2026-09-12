@@ -54,7 +54,7 @@ BUDGETS = {
     # reply to Sam, and a sentence becoming a routine), and the AI bill stopped
     # being described three ways in one sentence. The 76 that were left are the
     # steps themselves, and they are the page's most concrete words.
-    "index.html": 1280,
+    "index.html": 1300,   # raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
     # How It Works is a procedure. A reader following along needs every step.
     # Raised 2026-09-11 from 1400, because the page absorbed archie/see-it-work/
     # rather than growing: that page was a second explanation of the same journey

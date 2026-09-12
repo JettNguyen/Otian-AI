@@ -344,7 +344,7 @@
             <a class="btn btn-primary plan-cta" href="../../questionnaire/">Get My Agent Started</a>
           </div>
           <div class="plan-band-body">
-            <p><strong>Where it runs.</strong> On our Anthropic account, so your messages, and the mail your agent reads and writes for you, pass through our server on the way to Anthropic. It writes nothing down, we keep no copy, and we use none of it.</p>
+            <p><strong>Where it runs.</strong> On our Anthropic account, so what you write to your agent passes through our server on the way to Anthropic. It writes nothing down, we keep no copy, and we use none of it for anything. Email and text replies are the two things it will not do on this plan, because they carry what other people wrote and those people never agreed to anything. Both work on an AI account of your own, where nothing goes through us at all.</p>
             <p><strong>When the $25 is used.</strong> Your agent pauses until next month refills it; nothing rolls over. Connect an AI account of your own at any point and it carries on from there, with nothing to switch.</p>
             <p><strong>Is $25 enough?</strong> <a href="#ai-cost">Measured against real use</a>: a light month fits several times over, a moderate month uses about half of it, and a heavy month does not fit.</p>
           </div>
@@ -426,24 +426,87 @@
           <p>Neither one asks for a card.</p>
         </div>
 
+        <!-- The two paths, drawn the way trust/ draws them, 2026-09-11. Two prose cards carried two bold
+             sentences, we are in the path and we are not; the lanes say it in a glance and the dot through
+             our server dims, as every dot on the site does inside a card. The caption is TRUST.md's proxy
+             wording, in the same breath as the credits below. The style block serves both variants. -->
+        <figure class="explain-figure mt-48 fade-up delay-1" id="twoPaths">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 210" role="img" aria-labelledby="tp-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="tp-t">Two lanes. On the free credits, or the plan with the AI included, your words go from you through our server to Anthropic. On an AI account of your own, they go from you straight to your AI company.</title>
+            <style>
+              .tp-lane{fill:currentColor;opacity:.62;font-size:11px;font-weight:600}
+              .tp-you{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+              .tp-wire{fill:none;stroke:var(--accent);stroke-width:2;opacity:.9;stroke-linecap:round}
+              .tp-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .tp-ours{stroke-dasharray:4 4}
+              .tp-name{fill:currentColor;font-size:12px;font-weight:650;text-anchor:middle}
+              .tp-sub{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
+              .tp-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .tp-dot{display:block;offset-distance:22%}
+                @media (prefers-reduced-motion:no-preference){
+                  .tp-dot{animation:tpLane 5s linear infinite}
+                  .tp-dot--ours{animation-name:tpOurs}
+                  .tp-m.tp-dot--ours{animation-name:tpOursM}
+                  @keyframes tpLane{0%{offset-distance:0%;opacity:1}96%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                  /* the dot dims while its centre is inside our server's box */
+                  @keyframes tpOurs{0%{offset-distance:0%;opacity:1}31.7%{opacity:1}35%{opacity:.28}65%{opacity:.28}68.3%{opacity:1}96%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                  @keyframes tpOursM{0%{offset-distance:0%;opacity:1}14.4%{opacity:1}20.8%{opacity:.28}79.2%{opacity:.28}85.6%{opacity:1}96%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                }
+              }
+            </style>
+            <text class="tp-lane" x="20" y="24">Free credits, or the plan with the AI included</text>
+            <g class="tp-you"><circle cx="70" cy="62" r="8"/><path d="M54,86 a16,16 0 0 1 32,0"/></g>
+            <path class="tp-wire" d="M90,70 L450,70"/>
+            <rect class="tp-box tp-ours" x="210" y="48" width="120" height="44" rx="10"/>
+            <text class="tp-name" x="270" y="67">Our server</text><text class="tp-sub" x="270" y="82">writes nothing down</text>
+            <rect class="tp-box" x="450" y="48" width="130" height="44" rx="10"/>
+            <text class="tp-name" x="515" y="67">Anthropic</text><text class="tp-sub" x="515" y="82">on our account</text>
+            <circle class="tp-dot tp-dot--ours" r="6" style="offset-path:path('M90,70 L450,70')"/>
+            <text class="tp-lane" x="20" y="124">An AI account of your own</text>
+            <g class="tp-you"><circle cx="70" cy="162" r="8"/><path d="M54,186 a16,16 0 0 1 32,0"/></g>
+            <path class="tp-wire" d="M90,170 L450,170"/>
+            <rect class="tp-box" x="450" y="148" width="130" height="44" rx="10"/>
+            <text class="tp-name" x="515" y="167">Your AI company</text><text class="tp-sub" x="515" y="182">your key, your bill</text>
+            <circle class="tp-dot" r="6" style="offset-path:path('M90,170 L450,170')"/>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 210" role="img" aria-labelledby="tpm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="tpm-t">Two lanes. On the free credits, or the plan with the AI included, your words go from you through our server to Anthropic. On an AI account of your own, they go from you straight to your AI company.</title>
+            <text class="tp-lane" x="12" y="24">Free credits, or the plan with the AI included</text>
+            <g class="tp-you"><circle cx="30" cy="62" r="8"/><path d="M14,86 a16,16 0 0 1 32,0"/></g>
+            <path class="tp-wire" d="M50,70 L220,70"/>
+            <rect class="tp-box tp-ours" x="80" y="48" width="110" height="44" rx="10"/>
+            <text class="tp-name" x="135" y="67">Our server</text><text class="tp-sub" x="135" y="82">writes nothing down</text>
+            <rect class="tp-box" x="220" y="48" width="110" height="44" rx="10"/>
+            <text class="tp-name" x="275" y="67">Anthropic</text><text class="tp-sub" x="275" y="82">on our account</text>
+            <circle class="tp-dot tp-dot--ours tp-m" r="5.5" style="offset-path:path('M50,70 L220,70')"/>
+            <text class="tp-lane" x="12" y="124">An AI account of your own</text>
+            <g class="tp-you"><circle cx="30" cy="162" r="8"/><path d="M14,186 a16,16 0 0 1 32,0"/></g>
+            <path class="tp-wire" d="M50,170 L220,170"/>
+            <rect class="tp-box" x="220" y="148" width="110" height="44" rx="10"/>
+            <text class="tp-name" x="275" y="167">Your AI company</text><text class="tp-sub" x="275" y="182">your key, your bill</text>
+            <circle class="tp-dot" r="5.5" style="offset-path:path('M50,170 L220,170')"/>
+          </svg>
+          <figcaption>While we are paying, on the free credits or the plan with the AI included, your messages pass through our server on the way to Anthropic. It writes nothing down, we keep no copy, and we use none of it for anything. Connect an AI account of your own and that stops from each agent&rsquo;s next start.</figcaption>
+        </figure>
         <div class="mt-48 price-grid fade-up delay-1">
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Our Account</span>
             <div class="price-card-amount price-card-amount--words">Free credits<span>to start</span></div>
             <p>A new install arrives with a gift of AI usage we pay for, so your agent works before you connect anything of your own. It runs on Claude, the account the credits spend from.</p>
-            <p><strong>We are paying, so we are in the path.</strong> While you are on the free credits, or on the plan with the AI included, your messages pass through our server on the way to Anthropic. Nothing there writes them down, we keep no copy, and we use none of it for anything. On the plan, that includes your mail. Connect an AI account of your own and it stops from each agent&rsquo;s next start.</p>
+            <p><strong>We are paying, so we are in the path:</strong> the top lane above.</p>
             <p>The credits are given per account, need a confirmed email address, are limited per computer, and can be refused.</p>
           </article>
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Your Own Account</span>
             <div class="price-card-amount">14 days<span>on your key</span></div>
             <p>If the credits have already been claimed on your computer, there is still a full trial. Connect an AI account of your own and Archie runs for a fortnight.</p>
-            <p><strong>Your key is paying, so we are not in the path at all.</strong> Your conversations go straight to the AI company you picked. We are never in the middle of them.</p>
+            <p><strong>Your key is paying, so we are not in the path at all:</strong> the bottom lane.</p>
             <p>You are covering your own AI bill for those two weeks, which is why we can offer them. On the usage in the next section, that is a few dollars.</p>
           </article>
         </div>
 
-        <p class="price-note">Which of the two you are on is on screen in the app, and the full account of what leaves your computer on either path is on the <a href="../../trust/">Trust page</a>.</p>
+        <p class="price-note">Which of the two you are on is on screen in the app, and every host is drawn on the <a href="../../trust/">Trust page</a>.</p>
       </div>
     </section>
 

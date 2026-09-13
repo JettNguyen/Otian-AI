@@ -537,14 +537,15 @@ they chose. A saving quoted without its trade is a claim we cannot defend.
 
 **Approved wording:** "We keep working on what a reply costs, and we do not publish how. Nobody
 here earns anything from this bill, and you should not pay more for a reply than it has to cost.
-Changes made since these figures were measured are not in them: the table moves when a full month
-with a change has been read, not before."
+A change reaches these figures once it has been measured, not before."
 
 **Why it's true:** the AI account is the owner's own and Otian takes no cut of it (the custody
 claims above), and the Archie repo carries a cost rule in its `CLAUDE.md` that a change raising
 what an ordinary reply costs has to earn it out loud, with `docs/COST-MEASURED.md` as the record
 every published figure is read from. The figures on the pricing page move only on a measurement,
-which is the standing rule on that page since 2026-08-26.
+which is the standing rule on that page since 2026-08-26. On the evening of 2026-09-12 the rows
+moved for the scheduled reports and the inbox watch, on a price read off the provider's own sheet
+and one live run, and the page says nothing about why: the method is the part that is withheld.
 
 **Required clauses, and one ban.** Say that we do not publish how, and say what moves the table.
 **Never describe a mechanism on the site**: not what is kept between replies, not how the tool

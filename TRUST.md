@@ -1748,7 +1748,7 @@ second is a compile-time 1 in the personal edition, identical for a trial and a 
 else sits behind `require_access`, which is *entitled OR trialling*, so a trial already reaches
 every skill, routine, specialist, personality, integration, the mail daemon, voice and phone
 access. A trial that never ends is therefore the paid product minus nine agents, and Archie for
-Individuals is a one-agent product for most of the people it is sold to. For its actual
+Personal is a one-agent product for most of the people it is sold to. For its actual
 audience that is not a wall, it is the whole thing.
 
 **Nothing shipped.** The app-side change was built across all five places that end a trial and

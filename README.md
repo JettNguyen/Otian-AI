@@ -141,7 +141,7 @@ edition of the app rather than a service we sell, so `archie/business/` sits bes
 `archie/personal/` and both are reachable from the Archie menu. It was filed under Services until
 2026-09-14, which left a reader to work out for themselves that the two are the same app; the
 pages now open with the same two-row fork pointing at each other. Old URLs stay alive as
-redirect stubs: `business/` to `archie/business/`, and `individuals/` to `guided-setup/`. The
+redirect stubs: `business/` to `archie/business/`, and `individuals/` to `services/#guided`. The
 stubs carry a `<meta http-equiv="refresh">`, which is what keeps `gen-discovery.py` from listing
 them in the sitemap.
 

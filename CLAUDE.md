@@ -187,9 +187,13 @@ reason.**
 - **The top bar says what we sell, and that is three things.** Archie is the product,
   Add-ons is the shelf, and Services is our time: $250 an hour for guided setup, consulting,
   or an add-on built to order. Until 2026-09-14 the third one was a bare link to a single
-  page, and it looked thin because **a third of it was filed under Add-ons**: "Have One
-  Built" is a service that happens to produce an add-on, and it sat on the shelf beside the
-  things you get for free. It is under Services now, and nothing moved on disk. The slot for
+  page, and it looked thin because **a third of it was filed under Add-ons**: "Have an
+  Add-on Built" is a service that happens to produce an add-on, and it sat on the shelf
+  beside the things you get for free. It is under Services now, and nothing moved on disk.
+  **A menu row is read without its menu**, which is why that row is not "Have One Built"
+  any more: the pronoun had its antecedent in the Add-ons heading it used to sit under, and
+  moving the row to Services left "one" pointing at nothing. A label that only parses in
+  the menu it was written for does not survive the menu being reorganised. The slot for
   a fifth menu came from **Compare**, which was seven rows for six pages with one or two body
   inbound links each; it is one row inside **Learn** pointing at the hub that already lists
   them all. Learn is the other half of that change: `blog/` is the second most body-linked
@@ -251,6 +255,24 @@ reason.**
   `scripts/check-faces.py` fails when the two drift, and lists live catalog ids the map lacks.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally.
+- **A label is read without the thing around it, so it names its own subject.**
+  `python3 scripts/check-pronouns.py` enforces it over every heading, button, menu row,
+  card label and CTA on the site. A menu row is read without its menu, a step heading
+  without the step before it, an FAQ question with its answer still closed, a comparison
+  card without the grid it sits in: land on any of those cold and "it" points at whatever
+  the reader was already thinking about. Two of these were found on 2026-09-14 and they
+  are the shape to remember. "Have One Built" moved from Add-ons to Services and the
+  pronoun lost the heading that had been its antecedent, which is the general case: **a
+  label that only parses inside the menu it was written for does not survive the menu
+  being reorganised.** And `compare/symphony/` carried "Five things it does that Symphony
+  does not" four words above "Five things it does that we do not", the same four words
+  for opposite subjects, on a page whose whole job is telling two things apart. The check
+  exempts what a reader never meets alone: `<th>` (a column header is answered by its
+  row), a heading with a `section-label` naming a noun directly above it, a paragraph
+  under its own heading, quoted reader sentences, and `blog/`, which keeps its own voice.
+  Everything else in the allow-list carries the reason beside it, and one of them is that
+  TRUST.md governs the wording. Run it with `--openers` for the softer pass over
+  paragraphs that start on a bare pronoun; those are judgement calls, not failures.
 - **Plain words, and never talk down.** (Mirrors the Archie repo's plain-words rule.) Write so a
   first-time, non-technical reader understands, without making them feel stupid. Define a term the
   first time it appears rather than in a glossary, keep **one name per concept** across the whole

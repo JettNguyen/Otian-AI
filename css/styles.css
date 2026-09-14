@@ -1883,9 +1883,9 @@ summary,
   display: grid;
   grid-template-columns:
     minmax(0, 1.91fr)  /* brand:    185px, "Secure AI agents, your way." on one line */
-    minmax(0, 1.61fr)  /* Archie:   161px, all but "What Computer Do I Need?"        */
+    minmax(0, 1.41fr)  /* Archie:   141px, the widest row is "Archie Mobile"         */
     minmax(0, 1.51fr)  /* Add-ons:  151px, below this "Add-ons" breaks at its hyphen */
-    minmax(0, 1.46fr)  /* Services: 146px, all four, "Have One Built" on one line  */
+    minmax(0, 1.66fr)  /* Services: 166px, "Have an Add-on Built" on one line        */
     minmax(0, 1.77fr)  /* Learn:    177px, the widest row is "Troubleshooting"       */
     minmax(0, 1.96fr); /* About:    192px, all six including both PDF rows           */
   gap: 44px 26px;
@@ -6157,7 +6157,7 @@ html.js .fade-up:not(.visible) {
 @media (min-width: 1025px) and (max-width: 1247px) {
   .footer-grid {
     grid-template-columns:
-      minmax(0, 1.61fr) minmax(0, 1.51fr) minmax(0, 1.46fr)
+      minmax(0, 1.41fr) minmax(0, 1.51fr) minmax(0, 1.66fr)
       minmax(0, 1.77fr) minmax(0, 1.96fr);
   }
 

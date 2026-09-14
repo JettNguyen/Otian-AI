@@ -69,15 +69,28 @@ jobs:
       - name: Check no page has outgrown its budget
         run: python3 scripts/check-copy-length.py
 
-      # Directories in the repo but out of the upload, so their URLs return the 404 page.
-      # A page written ahead of its feature goes here until the feature ships (business/
-      # sat here until 2026-08-21); delete its name to publish it.
-      #
-      # firebase-hosting/ is not an unpublished page: it is the redirect stub Firebase Hosting serves on
-      # archie-77170.firebaseapp.com (see firebase.json), and it has no business answering on
-      # otianai.com as well.
-      - name: Withhold unpublished pages
-        run: rm -rf firebase-hosting
+      - name: Check generated catalog and discovery files
+        run: |
+          node scripts/gen-catalog-index.mjs --check
+          node scripts/gen-marketplace.mjs --check
+          node scripts/gen-blog.mjs --check
+          python3 scripts/gen-discovery.py --check
+          python3 scripts/gen-phone-mocks.py --check
+          python3 scripts/gen-csp.py --check
+          python3 scripts/archive-terms.py --check
+
+      - name: Check navigation, links, access, and policy artifacts
+        run: |
+          python3 scripts/check-nav.py
+          python3 scripts/check-links.py
+          node scripts/check-access.mjs
+          python3 scripts/check-publication.py
+          python3 scripts/check-policy-artifacts.py
+
+      # Build the artifact from an allowlist. Internal Markdown, scripts, browser profiles,
+      # repository metadata, Firebase config and any newly added file are excluded by default.
+      - name: Stage the public site
+        run: python3 scripts/stage-site.py "${RUNNER_TEMP}/otian-site"
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -87,8 +100,7 @@ jobs:
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload the entire repo root as the site
-          path: .
+          path: ${{ runner.temp }}/otian-site
 
       - name: Deploy to GitHub Pages
         id: deploy

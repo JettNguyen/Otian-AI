@@ -76,8 +76,9 @@ export function decideAccess(d, now = Date.now()) {
   // A granted license may carry an end date in epoch milliseconds. Absent, null or unparseable all
   // mean "until somebody retires it by hand", which is what every converted account got: inventing
   // an expiry would revoke access on a schedule nobody agreed to.
-  const end = Number(data.license_until ?? data.licence_until);
-  const live = !Number.isFinite(end) || now < end;
+  const rawEnd = data.license_until ?? data.licence_until;
+  const end = Number(rawEnd);
+  const live = rawEnd == null || rawEnd === "" || !Number.isFinite(end) || now < end;
   const allowed =
     license === "staff" || license === "bought"
       ? true

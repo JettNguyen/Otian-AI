@@ -248,7 +248,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Most AI assistants live on someone else&rsquo;s servers and bill you every month. Archie is the opposite. Your conversations and files stay on your own computer and go straight to the AI company on your own account, never through our servers. You pay the AI company directly, with no markup from us. You also stay in control: email waits for your Send tap, and it can&rsquo;t spend money on its own (there is no purchase feature, and anything shaped like paying on a website is stopped and routed to you first). Most tools rent you an assistant they control; Otian hands you one that&rsquo;s actually yours.
+                  Archie runs on your computer, where you control your files, agent settings and keys. An active license is required to use the app; canceling does not delete your data. On your own AI key, conversation content goes directly to your AI provider from each agent&rsquo;s next start. Starter credits and AI-included usage pass through our server without being retained. <a href="../trust/#what-we-hold">Our Trust page explains the operational records we hold</a>. Email waits for your Send tap or a send time you set, and calendar changes need approval.
                 </div>
               </div>
             </div>
@@ -357,9 +357,9 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Yes, and there are 2 ways in.<br /><br />
-                  <strong>Free credits.</strong> A new install comes with a small amount of AI usage we pay for, so you can watch an agent do something real before opening an account anywhere. They go to your Otian account once, they need a confirmed email address, and they are limited per computer: if someone has already used them on the computer you are on, Archie will tell you they have been claimed here rather than hand out a fresh set. While you are spending them, your messages pass through a server of ours on the way to Claude, because it is our account paying. That happens in one other place, and only if you choose it: the plan with the AI included, which carries $25 of Claude usage a month on the same account of ours. On every other plan, and the moment you connect an AI account of your own, nothing of yours passes through us at all.<br /><br />
-                  <strong>Or 14 days on your own AI account.</strong> If the credits are gone, or you would rather they were never in the picture, connect an AI account of your own and you get a full fortnight. This is the one that is genuinely the whole app: on our credits your agent cannot read your email, because your mail would pass through our servers and the people who wrote to you never agreed to that. Connecting your own account turns every email tool on with nothing to switch, and your conversations go straight to the AI company you picked, with us never in the middle.
+                  During testing, access depends on your account or trial eligibility. There are two trial options.<br /><br />
+                  <strong>Starter credits.</strong> Eligible accounts get $2 of Claude usage, expiring 14 days after the grant or when spent, whichever comes first. A confirmed email is required; credits are limited per account and computer and may be refused. Messages pass through our server to Anthropic; we keep no conversation content. Email and text reading are disabled on this funded usage.<br /><br />
+                  <strong>Or a trial on your own AI key.</strong> Eligible accounts can try Archie for 14 days while paying their provider directly. Switching from credits does not restart the original trial clock. Your key bypasses our conversation proxy from each agent&rsquo;s next start and enables email and text reading. <a href="../archie/pricing/#try-heading">Trial details</a>; <a href="../trust/#what-we-hold">operational records we hold</a>.
                 </div>
               </div>
             </div>
@@ -372,7 +372,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  No. The app is a plan of its own, $30 a month or $299 a year (at launch); guided sessions cover our time building your agent with you. They are priced separately because they are separate things, and a session is worth having whether or not you keep the app running afterwards.
+                  No. The app is a separate plan: Personal is $30 a month or $299 a year, Business $99 a month or $999 a year at launch; guided sessions cover our time building your agent with you. They are priced separately because they are separate things, and a session is worth having whether or not you keep the app running afterwards.
                 </div>
               </div>
             </div>
@@ -385,7 +385,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Yes, on the app. Archie comes with a 14-day money-back guarantee: email us within 14 days of starting a plan and we&rsquo;ll refund what you paid in full. After that you stop a plan yourself: Account page, Your plan, Manage plan, which opens Stripe&rsquo;s billing page. It takes effect at the end of the period you have already paid for, with no email to us needed. Guided sessions are hours we have already spent with you, so that time is not refundable. It is part of why the discovery call is free.
+                  Yes, on the app. Archie comes with a 14-day money-back guarantee: email us within 14 days of first starting a plan and we&rsquo;ll refund what you paid in full. After that you stop a plan yourself: Account page, Your plan, Manage plan, which opens Stripe&rsquo;s billing page. It takes effect at the end of the period you have already paid for, with no email to us needed. Guided sessions are hours we have already spent with you, so that time is not refundable. It is part of why the discovery call is free.
                 </div>
               </div>
             </div>
@@ -471,7 +471,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Nothing is permanent: if something goes wrong, we fix or undo it, then fine-tune based on your feedback. Early mistakes are a normal, expected part of the process; that&rsquo;s what the tuning period is for.
+                  We fix what can be fixed and tune the agent from your feedback. A sent message or an approved change may not be reversible, so review drafts and proposals before approving them. Early mistakes are why the tuning period and approval steps exist.
                 </div>
               </div>
             </div>
@@ -486,7 +486,7 @@
                 <div class="accordion-body-inner">
                   No. Archie runs on your own computer, and your agent&rsquo;s instructions, uploaded files, chat history and API key all stay there; the key sits in your computer&rsquo;s built-in password store, where we cannot read it. Removing the app does not remove that folder or your keys, so to erase everything use the factory reset inside Archie, under Account.
 
-                  When your agent thinks, it sends that request to the AI company you chose, on your account, with your key. We are never in the middle of it. One exception: the free credits Archie starts you with run on our own Anthropic account, so until you connect an account of your own those requests pass through a server of ours, which forwards them and measures the spend without recording what was in them.
+                  When your agent thinks on your own key, it sends conversation content directly to the AI company you chose. Free credits use our Anthropic account, so those requests pass through our server, which measures spend without recording what was said. Your own key bypasses that route from each agent&rsquo;s next start.
 
                   Our servers hold your email address and whether you have a current plan, plus a handful of operational records: the version line and crash reports (both switchable off under Settings), sealed phone messages if you turn phone access on, an add-on install count with no record of which are yours, and the free-credit ledger, second-factor records and any session invoices. None of it holds anything you wrote. <a href="../trust/#what-we-hold">The whole list, in full, is on the trust page</a>.
                 </div>
@@ -519,7 +519,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  A first working version can often be live the same day, and most clients have one to three useful workflows running within the first week of completing the intake form, so you don&rsquo;t need to wait for a perfect final version to start benefiting. From there, &ldquo;setup&rdquo; isn&rsquo;t really a finish line. Most people keep building for weeks and months, adding accounts, tasks, and new ways of using it as they go.
+                  A guided walkthrough is one hour. Larger builds are split into phases, with an estimated number of sessions and total cost given after the free discovery call. You can begin with one useful workflow and add accounts or jobs later.
                 </div>
               </div>
             </div>
@@ -545,7 +545,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  If it can be done on a computer, your agent can probably learn to do it: inbox and calendar, research, bookkeeping, travel, health tracking, customer follow-ups, even building you a small tool. Day to day, some people get a morning briefing and a clean inbox; others let it quietly run parts of a business. The real question isn&rsquo;t &ldquo;can it do X&rdquo;, it&rsquo;s &ldquo;what would make your life easier?&rdquo; <a href="../how-it-works/">See it work</a>
+                  Archie can work with connected email, calendars, files, chat apps and the add-ons in its public catalog. Common jobs include morning briefings, meeting preparation, research, reminders and drafting replies for your approval. <a href="../skills-marketplace/browse/">Browse the current catalog</a> or <a href="../how-it-works/">see how it works</a>.
                 </div>
               </div>
             </div>
@@ -602,7 +602,7 @@
               </button>
               <div class="accordion-body">
                 <div class="accordion-body-inner">
-                  Two different things, so here is both. If you stop your plan, Archie stops letting you in at the end of the period you have paid for; nothing on your computer is deleted, and starting a plan again puts everything back (in the rare case where the payment system books your return as a new customer, it can take an email to us first). Every add-on is included with Archie today, and if that ever changes, anything you bought outright stays bought. If <em>we</em> disappear, that is the one we have committed to in writing: our <a href="../terms-of-service/">Terms</a> require us to publish a final version that requires no license check, within 30 days of ceasing operations. Your account with the AI company and its key are separate from all of this and unaffected; you manage those directly with the provider you chose.
+                  If you stop your plan, Archie stops letting you in at the end of the paid period; nothing on your computer is deleted, and starting a plan again restores access to it. Every add-on is included with Archie rather than sold separately. If <em>we</em> cease operations, our <a href="../terms-of-service/">Terms</a> require us to publish a final version without a license check within 30 days. Your account with the AI company and its key remain under your control.
                 </div>
               </div>
             </div>
@@ -803,8 +803,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 

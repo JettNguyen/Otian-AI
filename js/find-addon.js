@@ -1,86 +1,71 @@
-/* Find an add-on: plain word matching, no model, no network.
- *
- * The whole point of this file is what it does NOT do. There is no fetch, no API key, no
- * model call, and no logging. What somebody types stays in the tab, which is what lets the
- * page say so in plain words. If a future version wants to interpret a description rather
- * than match words in it, that is a different tool with a different privacy line, and the
- * sentence on the page has to change in the same commit.
- *
- * JOBS is hand written and deliberately so. It maps how a person says a problem ("my inbox
- * is a mess") onto what the catalog calls the answer ("Email Replies"), which is exactly the
- * gap the browse page's own search cannot cross: none of those words appear in any add-on's
- * text. Slugs are not names here either (email-manager is "Email Replies", bill-tracker is
- * "Bills & Subscriptions"), so every name below is copied from the catalog rather than
- * derived, and a rename in the Archie repo's data/marketplace has to be mirrored here.
- *
- * Adding a job: put in the words somebody would actually type, not the words we use. "Chase",
- * "nag" and "waiting" earn their place; "workflow automation" does not.
- */
+/* Plain word matching. Queries stay in the tab. Names come from the generated public catalog. */
+import { CATALOG_INDEX } from './catalog-index.js';
+const byKey = new Map(CATALOG_INDEX.map(item => [item.key, item]));
 
 var JOBS = [
   { words: ["inbox", "email", "unread", "e-mail", "mail pile", "reply to emails", "emails"],
-    addons: ["Email Replies", "Inbox Rules", "The Right Words"] },
+    addons: ["skill:email-manager", "skill:inbox-rules", "skill:reply-helper"] },
   { words: ["calendar", "schedule", "book a time", "find a time", "double booked", "diary"],
-    addons: ["Calendar Manager", "Find a Time"] },
+    addons: ["skill:calendar-management", "skill:find-a-time"] },
   { words: ["meeting", "meetings", "minutes", "notes from", "recap", "standup", "call notes"],
-    addons: ["Meeting Notes", "Meeting Prep"] },
+    addons: ["skill:fireflies", "skill:meeting-prep"] },
   { words: ["todo", "to-do", "task", "tasks", "forget", "forgetting", "keep track of what"],
-    addons: ["Task Manager", "To-Do List (Todoist)", "To-Do List (Google Tasks)", "Commitment Keeper"] },
+    addons: ["skill:task-manager", "skill:todoist", "skill:google-tasks", "skill:commitment-keeper"] },
   { words: ["bill", "bills", "subscription", "subscriptions", "recurring charge", "direct debit"],
-    addons: ["Bills & Subscriptions", "Money In & Out"] },
+    addons: ["skill:bill-tracker", "skill:money-in-out"] },
   { words: ["spend", "spending", "budget", "money", "expenses", "savings", "cashback", "credit card points"],
-    addons: ["Savings Goals", "Money In & Out", "Card Rewards"] },
+    addons: ["skill:savings-goals", "skill:money-in-out", "skill:card-rewards"] },
   { words: ["invoice", "invoices", "unpaid", "chase payment", "owed", "get paid", "bookkeeping", "receipts"],
-    addons: ["Owed to Customers", "Statement Collector", "Clean Books"] },
+    addons: ["skill:owed-to-customers", "skill:statement-collector", "skill:clean-books"] },
   { words: ["text", "texts", "sms", "imessage", "messages", "whatsapp"],
-    addons: ["Text Replies", "The Right Words"] },
+    addons: ["skill:text-replies", "skill:reply-helper"] },
   { words: ["follow up", "follow-up", "chase", "chasing", "waiting on", "nobody replied", "no response"],
-    addons: ["Waiting On", "Circle Back", "Commitment Keeper"] },
+    addons: ["skill:waiting-on", "skill:circle-back", "skill:commitment-keeper"] },
   { words: ["keep in touch", "friends", "family", "birthday", "birthdays", "anniversary", "lost touch"],
-    addons: ["Stay in Touch", "Birthday & Anniversary Keeper"] },
+    addons: ["skill:stay-in-touch", "skill:birthday-keeper"] },
   { words: ["news", "briefing", "morning", "catch up on", "headlines", "markets", "stocks"],
-    addons: ["Personal News Briefing", "Market Digest"] },
+    addons: ["skill:news-briefing", "skill:market-digest"] },
   { words: ["research", "look into", "find out", "compare options", "dig into"],
-    addons: ["Researcher", "Lead-Gen Playbook"] },
+    addons: ["specialist:researcher", "specialist:deep-researcher"] },
   { words: ["write", "writing", "draft", "blog", "post", "wording", "how to say"],
-    addons: ["Writer", "The Right Words"] },
+    addons: ["specialist:writer", "skill:reply-helper"] },
   { words: ["client", "clients", "crm", "deal", "deals", "pipeline", "prospect", "sales"],
-    addons: ["Client Brain", "Deal Desk", "Engagement & Scoring", "Strategist"] },
+    addons: ["skill:owed-to-customers", "skill:waiting-on", "skill:the-handover"] },
   { words: ["lead", "leads", "outreach", "cold email", "new business", "prospecting"],
-    addons: ["Outreach Studio", "Lead-Gen Playbook"] },
+    addons: ["skill:reply-helper", "specialist:deep-researcher"] },
   { words: ["document", "documents", "paperwork", "filing", "forms", "form", "admin"],
-    addons: ["My Documents", "Paperwork", "Form Filler"] },
+    addons: ["skill:my-documents", "skill:paperwork", "skill:form-filler"] },
   { words: ["package", "delivery", "deliveries", "order", "parcel", "returns", "warranty"],
-    addons: ["Package Tracker", "Warranty & Returns"] },
+    addons: ["skill:package-tracker", "skill:warranty-returns"] },
   { words: ["house", "home", "maintenance", "boiler", "repairs", "lights", "away from home"],
-    addons: ["Home Maintenance", "House Watch", "Home Lights"] },
+    addons: ["skill:home-maintenance", "skill:house-watch", "skill:home-lights"] },
   { words: ["health", "medication", "prescription", "refill", "doctor", "appointment"],
-    addons: ["Health Record", "Medication & Refill Reminder"] },
+    addons: ["skill:health-record", "skill:medication-reminder"] },
   { words: ["habit", "habits", "gym", "workout", "exercise", "fitness", "streak"],
-    addons: ["Habit Tracker", "Home Workout Coach"] },
+    addons: ["skill:habit-tracker", "skill:home-workout"] },
   { words: ["learn", "learning", "study", "studying", "course", "revision", "vocabulary"],
-    addons: ["Learning Coach", "Course Companion", "Word of the Day"] },
+    addons: ["skill:learning-coach", "skill:course-companion", "skill:word-of-the-day"] },
   { words: ["trip", "travel", "holiday", "vacation", "flight", "itinerary"],
-    addons: ["Trip Planner"] },
+    addons: ["skill:trip-planner"] },
   { words: ["meal", "meals", "dinner", "cooking", "recipes", "groceries", "shopping list"],
-    addons: ["Meal Planner"] },
+    addons: ["skill:meal-planner"] },
   { words: ["kids", "school", "children", "term dates", "childcare"],
-    addons: ["School & Family"] },
+    addons: ["skill:school-family"] },
   { words: ["price", "prices", "deal alert", "cheaper", "watch for a discount"],
-    addons: ["Price Watch"] },
+    addons: ["skill:price-watch"] },
   { words: ["journal", "journalling", "reflect", "diary entry", "how my week went"],
-    addons: ["Reflection", "The Honest Week"] },
+    addons: ["skill:personal-journal", "skill:honest-week"] },
   { words: ["reading", "books", "watchlist", "to read", "to watch"],
-    addons: ["Reading & Watch List"] },
+    addons: ["skill:reading-list"] },
   { words: ["pet", "pets", "plants", "dog", "cat", "watering"],
-    addons: ["Plant & Pet Care"] },
+    addons: ["skill:plant-pet-care"] },
   { words: ["car", "mot", "insurance renewal", "service due", "vehicle"],
-    addons: ["Car Keeper"] },
+    addons: ["skill:car-keeper"] },
   { words: ["github", "code", "pull request", "repo", "issues"],
-    addons: ["GitHub Keeper"] },
-  { words: ["notion"], addons: ["Notion Keeper"] },
+    addons: ["skill:github-keeper"] },
+  { words: ["notion"], addons: ["skill:notion-keeper"] },
   { words: ["team", "handover", "onboarding", "new starter", "who is doing", "delegate"],
-    addons: ["The Handover", "New Teammate Welcome", "Who's Got This"] }
+    addons: ["skill:the-handover", "skill:new-teammate-welcome", "skill:whos-got-this"] }
 ];
 
 /* Seeded because a blank box kills adoption, and because these teach the register the
@@ -122,7 +107,7 @@ function match(query) {
   var out = [];
   scored.slice(0, 3).forEach(function (s) {
     s.job.addons.forEach(function (name) {
-      if (!seen[name]) { seen[name] = 1; out.push(name); }
+      if (!seen[name]) { seen[name] = 1; if (byKey.has(name)) out.push(byKey.get(name)); }
     });
   });
   return out.slice(0, 8);
@@ -145,10 +130,10 @@ function render(query) {
   var html = '<p class="find-count">' + found.length +
     (found.length === 1 ? ' add-on already does something like that.' : ' add-ons already do something like that.') +
     '</p><ul class="find-list">';
-  found.forEach(function (name) {
+  found.forEach(function (item) {
     // Deep-links into the browse page's own search, so there is one catalog and one renderer.
-    html += '<li><a class="find-hit" href="../browse/?q=' + encodeURIComponent(name) + '">' +
-            escapeHtml(name) + '</a></li>';
+    html += '<li><a class="find-hit" href="../browse/?addon=' + encodeURIComponent(item.key) + '">' +
+            escapeHtml(item.name) + '</a></li>';
   });
   html += '</ul><p class="find-more">Not it? <a class="marketplace-text-link" href="../commission/">' +
           'Tell us what you actually need&nbsp;&rarr;</a></p>';

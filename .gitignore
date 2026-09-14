@@ -18,3 +18,5 @@ firebase-debug.log
 # it after. A crashed or interrupted sweep leaves it behind, where the next check-facts
 # run counts it as a served page.
 _csp-selftest.html
+_site/
+scripts/__pycache__/

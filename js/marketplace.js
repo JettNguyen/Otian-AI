@@ -343,6 +343,9 @@ function renderPacks(q) {
 /* Show the packs grid, the add-on grid, or both. The Starter Packs tab is a distinct view with no
    category filtering. A search shows the add-on grid and, above it, whichever packs match, with a
    line saying so: a pack is a whole answer to a search where a single add-on is a piece of one. */
+var selectedAddon = new URLSearchParams(window.location.search).get("addon") || "";
+if (selectedAddon) activeType = "all";
+
 function updateView() {
   var q = searchInput ? searchInput.value.trim().toLowerCase() : "";
   var searching = q.length > 0;
@@ -376,7 +379,8 @@ function applyFilters() {
       : activeType === "exclusive" ? card.dataset.visibility === "private"
       : card.dataset.type === activeType;
     var matchCat = activeCategory === "all" || card.dataset.category === activeCategory;
-    var matchSearch = !q || (card.dataset.search || "").indexOf(q) !== -1;
+    var matchSearch = selectedAddon ? card.dataset.addon === selectedAddon
+      : !q || (card.dataset.search || "").indexOf(q) !== -1;
     var match = matchType && matchCat && matchSearch;
     card.hidden = !match;
     if (match) visible++;
@@ -440,6 +444,7 @@ function leavePacksForSearch() {
 }
 if (searchInput) {
   searchInput.addEventListener("input", function () {
+    selectedAddon = "";
     leavePacksForSearch();
     updateView();
   });

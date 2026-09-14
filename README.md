@@ -179,8 +179,10 @@ day to day was always product copy and is in `archie/personal/`.
 This is the source of **otianai.com**: the marketing site, and only the marketing site. The Archie
 desktop app is a separate codebase, and nothing in here runs an agent.
 
-It is hand-written static HTML. No framework, no bundler, no build step. Every push to `main`
-deploys to GitHub Pages through [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+It is hand-written static HTML with no framework or bundler. Every push to `main` runs the checks,
+builds an allowlisted public artifact, and deploys that artifact to GitHub Pages through
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). Repository documents and tools are
+excluded by default.
 
 ### Running the site locally
 
@@ -214,8 +216,7 @@ js/                     one small module per page that needs one
   nav.js                shared: theme, nav, drawer, loaded everywhere
   catalog.js            reads the live add-on catalog from Firestore
 assets/                 logos, screenshots, demo video, diagrams
-data/marketplace/       local copies of catalog shapes (the live catalog is Firestore,
-                        seeded from the Archie repo)
+data/public-catalog.json a snapshot of the 148 public Firestore add-ons used by CI and static HTML
 TRUST.md                every privacy claim we are allowed to make, with code pointers
 CLAUDE.md               the house rules below, in full
 ```

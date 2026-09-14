@@ -36,11 +36,8 @@ const PAGE = path.join(ROOT, "skills-marketplace", "browse", "index.html");
 const HOME = path.join(ROOT, "index.html");
 const SLOT = '<span class="cover-mark" data-face-slot>';
 
-/* The catalog is authored in the Archie repo and seeded into Firestore by its own CI, exactly as
- * scripts/check-facts.py and scripts/check-faces.py already assume. Sitting beside this repo is
- * the arrangement both of those encode; without it there is nothing to generate from, and that is
- * a skip rather than a failure, because a machine that only has the site checkout is not broken. */
-const CATALOG = path.join(path.dirname(ROOT), "Archie", "data", "marketplace");
+// A checked-in snapshot of the deployed public store makes generation deterministic in CI.
+const CATALOG = path.join(ROOT, "data", "public-catalog.json");
 
 /* The markers the grid lives between. Generated content sits inside a container that says so, so
  * that a person opening this page in an editor is not left wondering why 146 articles they cannot
@@ -72,24 +69,11 @@ const BANNER = `
                ========================================================================== -->`;
 
 function readCatalog() {
-  if (!fs.existsSync(CATALOG)) return null;
-  const items = [];
-  for (const c of COLLECTIONS) {
-    const dir = path.join(CATALOG, c.coll);
-    if (!fs.existsSync(dir)) return null;
-    for (const file of fs.readdirSync(dir).sort()) {
-      if (!file.endsWith(".json")) continue;
-      const data = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
-      /* Absent means public: the same default the seeder and the store query use. A private
-       * manifest is one client's own work or a testing account's, and it reaches an allowlisted
-       * account through Firestore. It must never be in a file the whole internet can read. */
-      if (data.visibility === "private") continue;
-      items.push(normalize(c.kind, file.replace(/\.json$/, ""), data));
-    }
+  const { items } = JSON.parse(fs.readFileSync(CATALOG, "utf8"));
+  if (!items.length || items.some(item => item.visibility !== "public")) {
+    throw new Error("Catalog snapshot must contain public items only");
   }
-  /* Name order, not the page's default. See the banner above. */
-  items.sort((a, b) => a.name.localeCompare(b.name));
-  return items;
+  return items.slice().sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function render(items) {

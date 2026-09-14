@@ -159,6 +159,7 @@ export function cardHtml(item) {
   html += '<article class="mp-product-card" data-type="' + shelfKind(item.kind) + '"' +
     ' data-category="' + escapeHtml(item.category) + '"' +
     ' data-visibility="' + item.visibility + '"' +
+    ' data-addon="' + escapeHtml(item.kind + ':' + item.id) + '"' +
     ' data-name="' + escapeHtml(item.name.toLowerCase()) + '"' +
     ' data-search="' + escapeHtml(searchBlob) + '">';
 
@@ -201,4 +202,3 @@ export function cardHtml(item) {
   html += "</div></article>";
   return html;
 }
-

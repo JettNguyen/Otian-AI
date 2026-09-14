@@ -120,7 +120,7 @@ def served_files():
             if name.endswith(".html"):
                 yield rel, True
             elif name.endswith(".json") and (rel.startswith("data/") or rel.startswith("assets/")):
-                yield rel, True
+                yield rel, rel != "data/public-catalog.json"
             elif name.endswith((".js", ".css")) and (rel.startswith("js/") or rel.startswith("css/")):
                 yield rel, False
             elif name.endswith(".md") and rel.startswith("blog/"):
@@ -136,11 +136,7 @@ def served_files():
 # `assets` live alongside them in the Archie repo and are not add-ons, so they are not counted.
 SOLD_COLLECTIONS = ("personalities", "skills", "subagents", "routines")
 
-# Where the catalog is authored. CI seeds these files into the Firestore collections the site
-# reads, so this directory is the number, and the site's stat rows have to match it.
-ARCHIE_CATALOG = os.path.join(
-    os.path.dirname(ROOT), "Archie", "data", "marketplace"
-)
+PUBLIC_CATALOG = os.path.join(ROOT, "data", "public-catalog.json")
 
 # Two markup shapes print these counts and both have to be read. .stat-row (the marketplace
 # and the compare hub) pairs .stat-num with .stat-label; .hm-numbers (the homepage band) puts
@@ -154,28 +150,11 @@ STAT_NUM = re.compile(
 
 
 def catalog_count():
-    """How many add-ons a visitor can install, or None if the Archie repo isn't here.
-
-    Private manifests are skipped, decided by Jett 2026-09-01. The count was the whole directory
-    until then, and by that day 18 of the 153 were `visibility: private`: one client's sales pack
-    and two items for a testing account. Those reach allowlisted accounts only, so a reader who opened
-    the store to check the number on the page would have counted 135 and found the site 18 out.
-    """
-    if not os.path.isdir(ARCHIE_CATALOG):
-        return None
-    total = 0
-    for coll in SOLD_COLLECTIONS:
-        path = os.path.join(ARCHIE_CATALOG, coll)
-        if not os.path.isdir(path):
-            return None
-        for name in os.listdir(path):
-            if not name.endswith(".json"):
-                continue
-            with open(os.path.join(path, name), encoding="utf-8") as fh:
-                # Absent means public, the same default the seeder and the store query use.
-                if json.load(fh).get("visibility") != "private":
-                    total += 1
-    return total
+    """The checked-in snapshot of the deployed public store is also available in CI."""
+    with open(PUBLIC_CATALOG, encoding="utf-8") as fh:
+        items = json.load(fh)["items"]
+    assert items and all(item.get("visibility") == "public" for item in items)
+    return len(items)
 
 
 def check_stat_rows(actual):

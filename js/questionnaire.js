@@ -153,7 +153,14 @@
       bot: [
         {
           note: true,
-          html: '<strong>How pricing works:</strong> the 30-minute discovery call is free. Guided setup is $250 an hour, and a bigger setup takes more sessions, never a higher rate. Archie itself is $30 a month or $299 a year when it ships, and the AI bills pay-as-you-go on your own account. <a href="../archie/pricing/">Every cost, in full</a>.'
+          html: function () {
+            var plan = answers.edition === 'business'
+              ? 'Business is $99 a month or $999 a year'
+              : answers.edition === 'personal'
+                ? 'Personal is $30 a month or $299 a year'
+                : 'Personal is $30 a month or $299 a year; Business is $99 a month or $999 a year';
+            return '<strong>How pricing works:</strong> the 30-minute discovery call is free. Guided setup is $250 an hour. At launch, ' + plan + ', with AI usage billed separately on your own account. Paid signup is still closed during testing. <a href="../archie/pricing/">Every cost, in full</a>.';
+          }
         },
         'With that on the table: what’s your first and last name?'
       ],
@@ -492,7 +499,10 @@
     var idx = path.indexOf(nodeId);
     var total = path.length - 1; // the confirm step is a send button, not a question
     if (progressLabel) progressLabel.textContent = node.section;
-    if (node.type === 'confirm') {
+    if (!answers.intent) {
+      if (progressCount) progressCount.textContent = 'Question ' + (idx + 1);
+      if (progressFill) progressFill.style.width = '0%';
+    } else if (node.type === 'confirm') {
       if (progressCount) progressCount.textContent = 'All set';
       if (progressFill) progressFill.style.width = '100%';
     } else {
@@ -572,6 +582,7 @@
       }
       var m = bot[i];
       var html = (typeof m === 'string') ? m : m.html;
+      if (typeof html === 'function') html = html();
       var delay = 380 + Math.min(html.length * 5, 900);
       i += 1;
       typeThen(rec, msgs, delay, function () {

@@ -184,6 +184,23 @@ reason.**
   same rows, same order, only the "you are here" moves. **Keep them mirrored.** Adding a figure
   to one means adding it to the other or to neither. The old URLs are redirect stubs and stay
   that way: `business/` and `individuals/`.
+- **The top bar says what we sell, and that is three things.** Archie is the product,
+  Add-ons is the shelf, and Services is our time: $250 an hour for guided setup, consulting,
+  or an add-on built to order. Until 2026-09-14 the third one was a bare link to a single
+  page, and it looked thin because **a third of it was filed under Add-ons**: "Have One
+  Built" is a service that happens to produce an add-on, and it sat on the shelf beside the
+  things you get for free. It is under Services now, and nothing moved on disk. The slot for
+  a fifth menu came from **Compare**, which was seven rows for six pages with one or two body
+  inbound links each; it is one row inside **Learn** pointing at the hub that already lists
+  them all. Learn is the other half of that change: `blog/` is the second most body-linked
+  page on the site and had no place in the top bar at all, only in the footer.
+- **A menu can name one page more than once, and the highlight has to cope.** Services lists
+  the page and two sections of it, because they are two different things you can buy. Every
+  row there resolves to the same pathname, so `js/nav.js` breaks the tie on the hash: the row
+  matching the reader's hash wins, and with no hash it is the row that has none. Without that
+  the menu lights three rows and says you are in three places, which is what the retired
+  "What to Run It On" row did beside "How It Works" and what it reads as: a styling bug
+  rather than the address problem it is.
 - **A page that exists because another page was split is not a page.** Four merged on
   2026-09-14 and the test each one failed is worth reusing: `guided-setup/` and `consulting/`
   each opened with the same list telling the reader the other one might be theirs; `learn/` was

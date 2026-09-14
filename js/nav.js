@@ -166,7 +166,6 @@
   var currentNorm = window.location.pathname.replace(/\/+$/, '') || '/';
 
   var links = document.querySelectorAll('.nav-links a, .nav-drawer a, .nav-drawer-flyout a');
-  var best = '';
 
   var pathOf = function (link) {
     try {
@@ -176,20 +175,52 @@
     }
   };
 
-  links.forEach(function (link) {
-    var linkNorm = pathOf(link);
-    if (linkNorm === null) return;
-    var matches =
-      linkNorm === currentNorm ||
-      (linkNorm !== '/' && currentNorm.startsWith(linkNorm + '/'));
-    if (matches && linkNorm.length > best.length) best = linkNorm;
-  });
+  var hashOf = function (link) {
+    try {
+      return new URL(link.href).hash || '';
+    } catch (e) {
+      return '';
+    }
+  };
 
-  if (best) {
+  /* ── Which of the tied rows actually lights ──
+     A menu can list one page more than once: Services names the page and two of the sections
+     on it, because they are two different things you can buy. Every row there resolves to the
+     same pathname, so matching on path alone lights three rows at once and the menu says you
+     are in three places. That is what the retired "What to Run It On" row did next to "How It
+     Works", and it reads as a styling bug rather than as the address problem it is.
+
+     So among the rows tied at the longest path match: the one whose hash is the reader's hash
+     wins, and with no hash it is the row that has none. The bare page link is always in the
+     menu, so there is always a winner.                                                      */
+  function paintActive() {
+    var hash = window.location.hash || '';
+    var best = '';
     links.forEach(function (link) {
-      if (pathOf(link) === best) link.classList.add('active');
+      link.classList.remove('active');
+      var linkNorm = pathOf(link);
+      if (linkNorm === null) return;
+      var matches =
+        linkNorm === currentNorm ||
+        (linkNorm !== '/' && currentNorm.startsWith(linkNorm + '/'));
+      if (matches && linkNorm.length > best.length) best = linkNorm;
     });
+    if (!best) return;
+
+    var tied = [];
+    links.forEach(function (link) {
+      if (pathOf(link) === best) tied.push(link);
+    });
+    var win = tied.filter(function (l) { return hashOf(l) === hash; });
+    if (!win.length) win = tied.filter(function (l) { return !hashOf(l); });
+    if (!win.length) win = tied;
+    win.forEach(function (l) { l.classList.add('active'); });
   }
+
+  paintActive();
+  /* Jumping to a section from the menu changes the address without loading anything, so the
+     highlight has to follow or it keeps pointing at where you were. */
+  window.addEventListener('hashchange', paintActive);
 
   /* Account & auth pages aren't in the menus; they hang off the avatar. Light the avatar button
      when you're on one, so the nav still shows where you are. (account-nav.js marks the matching

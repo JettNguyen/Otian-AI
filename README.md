@@ -130,6 +130,13 @@ starting with a free 30-minute call.
 
 | Section | Pages |
 |---|---|
+
+The top bar is five menus and a call to action: **Archie** (the product), **Add-ons**
+(the shelf), **Services** (our time: guided setup, consulting, an add-on built to order),
+**Learn** (AI Explained, Comparisons, Blog, FAQ, Troubleshooting) and **About**. The footer
+carries the same five columns. Compare stopped being its own menu on 2026-09-14 and became
+one row inside Learn pointing at `compare/`, which lists all six comparisons.
+
 | **Archie** | [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
 | **Services** | [Working With Us](https://otianai.com/services/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [Commission One](https://otianai.com/skills-marketplace/commission/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |

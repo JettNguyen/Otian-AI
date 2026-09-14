@@ -1518,12 +1518,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   transition: transform var(--transition);
 }
 
-/* Services is one page, not a menu, so in the drawer it is an <a> rather than a category
-   button (2026-09-14, when guided setup and consulting merged). The chevron points into a
-   flyout that does not exist for it, so it goes; everything else about the row is the same,
-   because it should still read as a peer of Archie and Add-ons rather than a stray link. */
-.nav-drawer-cat--link::after { content: none; }
-
 /* External flyout: pops out to the left of the drawer, attached to it */
 .nav-drawer-flyout {
   position: fixed;
@@ -1891,8 +1885,8 @@ summary,
     minmax(0, 1.91fr)  /* brand:    185px, "Secure AI agents, your way." on one line */
     minmax(0, 1.61fr)  /* Archie:   161px, all but "What Computer Do I Need?"        */
     minmax(0, 1.51fr)  /* Add-ons:  151px, below this "Add-ons" breaks at its hyphen */
-    minmax(0, 1.29fr)  /* Services: 129px, all three                                 */
-    minmax(0, 1.94fr)  /* Compare:  189px, all but the six-word Cowork line          */
+    minmax(0, 1.46fr)  /* Services: 146px, all four, "Have One Built" on one line  */
+    minmax(0, 1.77fr)  /* Learn:    177px, the widest row is "Troubleshooting"       */
     minmax(0, 1.96fr); /* About:    192px, all six including both PDF rows           */
   gap: 44px 26px;
   padding-bottom: 44px;
@@ -1985,42 +1979,6 @@ summary,
 
 .footer-doc-link:hover svg {
   opacity: 1;
-}
-
-/* Everything the nav does not have a tab for, in a strip under the columns rather than as more
-   columns. The four columns above mirror the four nav menus exactly, link for link, so a reader
-   who learns the nav already knows the footer. Learn and What You Need sat in that grid and
-   quietly broke the rule: a fifth column looks like a fifth menu, and "What You Need" under the
-   Archie heading claimed to be somewhere the Archie tab would take you. Below the rule they are
-   plainly what they are, which is the rest of the site.
-
-   No rule above it and no ground of its own: it is the same block as the columns, just the part
-   that is not a menu. Laid out as rows of links rather than stacks, which is what separates it
-   from the grid without a divider doing the work and without it reading as a short column that
-   ran out of items.
-
-   It is a child of the grid rather than a sibling under it, spanning the four menu columns
-   only, and the brand block spans both rows to hold the left edge. That puts it directly under
-   the columns and level with the social links instead of below the whole footer, where the
-   brand column's height left it stranded in white space. */
-.footer-extra {
-  grid-column: 2 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: start;
-  gap: 24px 64px;
-}
-.footer-extra-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 20px;
-}
-.footer-extra .footer-col-title { margin-bottom: 0; }
-.footer-extra .footer-nav-links {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 10px 20px;
 }
 
 .footer-contact-col {
@@ -5949,10 +5907,6 @@ html.js .fade-up:not(.visible) {
     grid-row: auto;
   }
 
-  .footer-extra {
-    grid-column: 1 / -1;
-  }
-
   .values-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -6203,16 +6157,12 @@ html.js .fade-up:not(.visible) {
 @media (min-width: 1025px) and (max-width: 1247px) {
   .footer-grid {
     grid-template-columns:
-      minmax(0, 1.61fr) minmax(0, 1.51fr) minmax(0, 1.29fr)
-      minmax(0, 1.94fr) minmax(0, 1.96fr);
+      minmax(0, 1.61fr) minmax(0, 1.51fr) minmax(0, 1.46fr)
+      minmax(0, 1.77fr) minmax(0, 1.96fr);
   }
 
   .footer-brand {
     grid-row: auto;
-    grid-column: 1 / -1;
-  }
-
-  .footer-extra {
     grid-column: 1 / -1;
   }
 }

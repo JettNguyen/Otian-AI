@@ -77,7 +77,18 @@ BUDGETS = {
     # the pointer sentence in requirement 1 (it now points down its own page), the figure
     # caption's line repeated as the skip list's lede, and the "hit a ceiling" bullet that said
     # step 6 over again word for word.
-    "how-it-works/index.html": 1750,
+    # Cut 2026-09-14 from 1750 to 1550, with the page at 1,507. This is a budget coming down
+    # rather than a page coming in under one, so the arithmetic is the other way round: 238
+    # words came off and one whole section with them. All of it was restatement the two merges
+    # left behind and nobody had read end to end since. The price of a plan was typed three
+    # times in three sections and is now typed once; the chat-app roster twice and now once;
+    # "the computer you already own" three times and now once; the custody sentence and the
+    # approval sentence each lived in the moving-parts caption and again in a later list. The
+    # section that went was "You do not need to be technical", which was one sentence under an
+    # h2: its first half is the lede's job and its second half pointed at the guided path that
+    # the fork above the CTA sets out in full. What did not come off is anything a reader came
+    # for: every requirement, every reason under "not needed", and the whole trust caption.
+    "how-it-works/index.html": 1550,
     # Pricing prints every measured cost with its source, and a cut there reads
     # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
     # reason this page is allowed to grow: the repricing found a third place an

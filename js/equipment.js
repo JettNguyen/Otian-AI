@@ -13,6 +13,13 @@
    duplication: the nav is already duplicated into every page for the same
    reason. If the chat behaviour changes in one, change it in the other.
 
+   ONE DIVERGENCE, AND IT IS ON PURPOSE: when each one starts, and when it is
+   allowed to scroll. The questionnaire IS its page, six words from the top, so
+   it starts at load and its first scroll moves nothing. This one sits two thirds
+   of the way down how-it-works/, so it waits for the reader to reach it and
+   holds its scroll until they have answered something. See the bottom of the
+   file. Do not sync that back.
+
    WHAT IS DIFFERENT, AND IT IS THE POINT. The questionnaire sends somewhere.
    This sends nowhere. Every answer picks between recommendations written out in
    the card functions below, the kit is assembled in the browser, and nothing
@@ -36,6 +43,8 @@
 
   var EMBER_LOOK = 'terracotta.peak.pill.none';
   var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var answered = false;  /* they have picked an answer, so the thread is worth following */
 
   var thread = document.getElementById('chatThread');
   var kitPanel = document.getElementById('kitPanel');
@@ -224,6 +233,11 @@
      node's bottom edge clears the viewport. Right for a bubble, wrong for
      anything tall, which is what scrollToStart below is for. */
   function scrollToShow(el) {
+    /* Not for the opening question. The picker starts when the reader arrives at it, so
+       the first few bubbles land while they are still reading the heading above, and
+       chasing them down the page is the same yank this used to do at page load, just
+       later. Once they have answered something the thread is theirs to follow. */
+    if (!answered) return;
     var bottom = el.getBoundingClientRect().bottom + window.pageYOffset;
     var target = bottom - window.innerHeight + 28;
     if (target > (window.pageYOffset || 0)) {
@@ -337,6 +351,7 @@
   }
 
   function answer(rec, node, value, label) {
+    answered = true;
     if (node.name) answers[node.name] = value;
 
     if (rec.inputUI) {
@@ -539,9 +554,10 @@
   }
 
   /* The kit, drawn from the answers. The figure lives in the page under "The short answer"
-     (untailored: a Mac mini on a cable) and is cloned here with three attributes set, which
-     is all its SVG needs to show a different body, a cable or Wi-Fi, and the right system
-     line. Nothing is drawn in this file. */
+     (untailored: a Mac mini, and its link to the router drawn as "cable or Wi-Fi", because
+     up there we have not been told which) and is cloned here with three attributes set,
+     which is all its SVG needs to show a different body, a cable or Wi-Fi, and the right
+     system line. Nothing is drawn in this file. */
   function kitFigure() {
     var src = document.querySelector('.kit-figure');
     if (!src) return '';
@@ -600,5 +616,33 @@
     scrollToStart(kitPanel);
   }
 
-  ask('machine');
+  /* Start when the reader gets here, not when the page loads.
+
+     ask() appends a bubble and scrolls it into view, so starting at load meant that opening
+     /how-it-works/ threw the reader two thirds of the way down the page, into a question
+     about which computer to buy, before they had read a word of what the page is for. The
+     scroll was doing exactly what it is for; it was the starting that was wrong.
+
+     Nothing is lost by waiting: the thread is empty until it runs, and the section above it
+     says what it is. With no IntersectionObserver, start as before, because an empty section
+     is worse than a scroll. */
+  var started = false;
+
+  function begin() {
+    if (started) return;
+    started = true;
+    ask('machine');
+  }
+
+  var section = progressWrap || thread;
+  if (window.IntersectionObserver && section) {
+    var watch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { watch.disconnect(); begin(); }
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+    watch.observe(section);
+  } else {
+    begin();
+  }
 })();

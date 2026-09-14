@@ -88,7 +88,16 @@ BUDGETS = {
     # h2: its first half is the lede's job and its second half pointed at the guided path that
     # the fork above the CTA sets out in full. What did not come off is anything a reader came
     # for: every requirement, every reason under "not needed", and the whole trust caption.
-    "how-it-works/index.html": 1550,
+    # Cut again the same day, 1550 to 1400, page at 1,392, as the second of the five ceilings
+    # coming down 150. This one had no restatement left to give, so it came off two structural
+    # things instead. The provider roster was a sentence listing eight AI companies and is now
+    # a grid of eight tiles, which is what a roster is; the rule that a page listing providers
+    # lists every one of them still holds, and a grid keeps it honest by making a gap visible.
+    # And "On your own, or with us beside you" was two columns of bullets summarising
+    # services/, a whole page about that exact choice which did not exist when the block was
+    # written: it is a fork and a door now, and its link no longer points at the guided-setup/
+    # stub services/ replaced.
+    "how-it-works/index.html": 1400,
     # Pricing prints every measured cost with its source, and a cut there reads
     # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
     # reason this page is allowed to grow: the repricing found a third place an

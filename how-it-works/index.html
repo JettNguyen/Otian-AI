@@ -76,6 +76,13 @@
     .need-item p {
       color: var(--text-secondary);
     }
+    /* The provider grid belongs to requirement 2, so it takes the card's width rather than
+       the 720px an .explain-figure claims when it stands on its own. */
+    .need-item .explain-figure {
+      max-width: 100%;
+      margin-top: 20px;
+      margin-bottom: 4px;
+    }
     .need-item p + p {
       margin-top: 14px;
     }
@@ -535,7 +542,18 @@
           <article class="need-item fade-up delay-2">
             <span class="need-num" aria-hidden="true">2</span>
             <h3>An AI account, and you pick whose</h3>
-            <p>Archie runs on an AI account you connect: Anthropic (Claude), OpenAI (GPT), Google (Gemini), Groq, xAI (Grok), DeepSeek or Mistral, or any provider of your own that speaks the OpenAI format. You pick, and you can change it later, per agent. It bills you for what your agent does, pay-as-you-go: $1 to $5 a month for a handful of tasks a day, up to around $140 for one wired into a whole working day, capped by you and never seen by us. <a href="../archie/pricing/#ai-cost">Worked out for 3 levels of use</a>. Free tiers differ, and Google&rsquo;s is the one Google trains on: <a href="../trust/#providers">what each company does with your words</a>, before you pick.</p>
+            <figure class="explain-figure">
+              <svg class="explain-svg--desktop" viewBox="0 0 640 216" role="img" aria-label="The eight AI accounts Archie can connect to, as tiles: Anthropic (Claude), OpenAI (GPT), Google (Gemini), Groq, xAI (Grok), DeepSeek, Mistral, and a dashed one for a provider of your own that speaks the OpenAI format. You pick, and you can change it later, per agent." xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit"><style>
+              .pv-title{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .pv-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .pv-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .pv-foot{fill:currentColor;opacity:.72;font-size:11px;text-anchor:middle}
+              .pv-tile{fill:var(--bg-card);stroke:currentColor;stroke-width:1.2;opacity:.85}
+              .pv-tile--own{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4;opacity:1}
+            </style><text class="pv-title" x="320" y="26">Archie runs on an AI account you connect</text><rect class="pv-tile" x="24" y="44" width="136" height="52" rx="10"/><text class="pv-name" x="92" y="66">Anthropic</text><text class="pv-sub" x="92" y="82">Claude</text><rect class="pv-tile" x="176" y="44" width="136" height="52" rx="10"/><text class="pv-name" x="244" y="66">OpenAI</text><text class="pv-sub" x="244" y="82">GPT</text><rect class="pv-tile" x="328" y="44" width="136" height="52" rx="10"/><text class="pv-name" x="396" y="66">Google</text><text class="pv-sub" x="396" y="82">Gemini</text><rect class="pv-tile" x="480" y="44" width="136" height="52" rx="10"/><text class="pv-name" x="548" y="74.5">Groq</text><rect class="pv-tile" x="24" y="112" width="136" height="52" rx="10"/><text class="pv-name" x="92" y="134">xAI</text><text class="pv-sub" x="92" y="150">Grok</text><rect class="pv-tile" x="176" y="112" width="136" height="52" rx="10"/><text class="pv-name" x="244" y="142.5">DeepSeek</text><rect class="pv-tile" x="328" y="112" width="136" height="52" rx="10"/><text class="pv-name" x="396" y="142.5">Mistral</text><rect class="pv-tile pv-tile--own" x="480" y="112" width="136" height="52" rx="10"/><text class="pv-name" x="548" y="134">Your own</text><text class="pv-sub" x="548" y="150">OpenAI format</text><text class="pv-foot" x="320" y="190">You pick, and you can change it later, per agent.</text><text class="pv-foot" x="320" y="207">Your own means any provider that speaks the OpenAI format.</text></svg>
+              <svg class="explain-svg--mobile" viewBox="0 0 340 396" role="img" aria-label="The eight AI accounts Archie can connect to, as tiles: Anthropic (Claude), OpenAI (GPT), Google (Gemini), Groq, xAI (Grok), DeepSeek, Mistral, and a dashed one for a provider of your own that speaks the OpenAI format. You pick, and you can change it later, per agent." xmlns="http://www.w3.org/2000/svg"><text class="pv-title" x="170" y="24">Archie runs on an AI</text><text class="pv-title" x="170" y="42">account you connect</text><rect class="pv-tile" x="16" y="60" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="82">Anthropic</text><text class="pv-sub" x="90" y="98">Claude</text><rect class="pv-tile" x="176" y="60" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="82">OpenAI</text><text class="pv-sub" x="250" y="98">GPT</text><rect class="pv-tile" x="16" y="126" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="148">Google</text><text class="pv-sub" x="90" y="164">Gemini</text><rect class="pv-tile" x="176" y="126" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="156.5">Groq</text><rect class="pv-tile" x="16" y="192" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="214">xAI</text><text class="pv-sub" x="90" y="230">Grok</text><rect class="pv-tile" x="176" y="192" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="222.5">DeepSeek</text><rect class="pv-tile" x="16" y="258" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="288.5">Mistral</text><rect class="pv-tile pv-tile--own" x="176" y="258" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="280">Your own</text><text class="pv-sub" x="250" y="296">OpenAI format</text><text class="pv-foot" x="170" y="352">You pick, and you can change it</text><text class="pv-foot" x="170" y="369">later, per agent. Your own means any</text><text class="pv-foot" x="170" y="386">provider that speaks the OpenAI format.</text></svg>
+            </figure>
+            <p>The account bills you for what your agent does, pay-as-you-go: $1 to $5 a month for a handful of tasks a day, up to around $140 for one wired into a whole working day, capped by you and never seen by us. <a href="../archie/pricing/#ai-cost">Worked out for 3 levels of use</a>. Free tiers differ, and Google&rsquo;s is the one Google trains on: <a href="../trust/#providers">what each company does with your words</a>, before you pick.</p>
             <p class="need-note">This is the AI company&rsquo;s bill, not ours. Archie&rsquo;s own plan is next.</p>
           </article>
 
@@ -748,25 +766,25 @@
           <div class="two-col-card">
             <h3>Not needed</h3>
             <ul class="two-col-card-list">
-              <li><strong>A good graphics card.</strong> The thinking happens on your AI company&rsquo;s computers, not yours. Whatever is already in the machine is enough: Archie sends the request and waits</li>
+              <li><strong>A good graphics card.</strong> The thinking happens on your AI company&rsquo;s computers, not yours. Whatever is in the computer already is enough</li>
               <li><strong>A fast or new computer.</strong> It spends most of its life idle, waiting for something to happen</li>
               <li><strong>A server, a NAS, or anything in a rack.</strong> Archie is a desktop app with a window</li>
-              <li><strong>A second monitor, or any monitor after setup.</strong> You need a screen to set it up. After that you can talk to it from your phone or a chat app</li>
+              <li><strong>A second monitor, or any monitor after setup.</strong> You need a screen to set it up, and after that your phone will do</li>
               <li><strong>A separate internet connection, or a static address.</strong> Nothing connects <em>to</em> your computer: it reaches out, and nothing on the network can reach in</li>
             </ul>
           </div>
           <div class="two-col-card">
             <h3>Worth having</h3>
             <ul class="two-col-card-list">
-              <li><strong>An Ethernet cable</strong>, if the machine can sit near the router</li>
-              <li><strong>Disk space</strong>, if you want it to talk out loud or work with audio and video: those tools run on your computer and download to it</li>
-              <li><strong>A power strip with battery backup</strong>, if your power flickers. It is the difference between a blip and a machine that stays off until you come home</li>
+              <li><strong>An Ethernet cable</strong>, if the computer can sit near the router</li>
+              <li><strong>Disk space</strong>, if you want it to talk out loud or work with audio and video: those tools run on your computer</li>
+              <li><strong>A power strip with battery backup</strong>, if your power flickers. The difference between a blip and a computer that stays off until you come home</li>
               <li><strong>A phone</strong>, which you have. It is how you reach the agent when you are not at the computer</li>
             </ul>
           </div>
         </div>
 
-        <p class="trust-table-note">No hardware prices here: we would be quoting somebody else&rsquo;s, and it would be wrong within the month. Every machine named above is one you can price at the maker&rsquo;s own store.</p>
+        <p class="trust-table-note">No hardware prices here: we would be quoting somebody else&rsquo;s, and it would be wrong within the month. Every computer named above is one you can price at the maker&rsquo;s own store.</p>
       </div>
     </section>
 
@@ -881,28 +899,7 @@
         <div class="section-header">
           <span class="section-label fade-up">2 ways in</span>
           <h2 id="expect-heading" class="fade-up">On your own, or with us beside you.</h2>
-          <p>You can do all of this yourself. Guided setup is for everyone who&rsquo;d rather not do it alone.</p>
-        </div>
-
-        <div class="two-col fade-up delay-1">
-          <div class="two-col-card">
-            <h3>Do it yourself</h3>
-            <ul class="two-col-card-list">
-              <li>Install Archie and build your agent at your own pace</li>
-              <li>Every add-on is included with Archie</li>
-              <li>Connect only the accounts you choose</li>
-            </ul>
-          </div>
-          <div class="two-col-card">
-            <h3>Take the guided path</h3>
-            <ul class="two-col-card-list">
-              <li>A free discovery call to map out what you want</li>
-              <li>We build with you over screen share, teaching every step in plain language</li>
-              <li>Bigger setups can take more than one session, and we tell you how many on that free call</li>
-              <li>Archie&rsquo;s plan is separate from your sessions, and named in full above</li>
-              <li>Read more about <a href="../guided-setup/">guided setup</a></li>
-            </ul>
-          </div>
+          <p>You can do all of this yourself, at your own pace, with every add-on included. Guided setup is for everyone who&rsquo;d rather not: a free call first, then we build it with you over screen share. <a href="../services/#guided">What a session involves&nbsp;&rarr;</a></p>
         </div>
       </div>
     </section>

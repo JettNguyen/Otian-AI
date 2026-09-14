@@ -54,7 +54,18 @@ BUDGETS = {
     # reply to Sam, and a sentence becoming a routine), and the AI bill stopped
     # being described three ways in one sentence. The 76 that were left are the
     # steps themselves, and they are the page's most concrete words.
-    "index.html": 1300,   # raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
+    # Cut 2026-09-14 from 1300 to 1270, page at 1,269, and this is the one of the five that
+    # did not give up its 150. What it gave was 24 words of loose phrasing: "it takes on more
+    # in three directions" said aloud what the three bullets under it already are, "charged to
+    # your account at your AI company's price" carried a clause its own sentence repeats, and
+    # "before you type anything" was decoration on a true sentence. Everything else that counts
+    # here is one distinct claim per line, and the page is already the most drawn on the site:
+    # 542 figure words, three phone screens, an integrations grid, a record of work and a
+    # five-step band. The prose left is the connective tissue between drawings, and taking
+    # another hundred out of it means taking out a claim, not a restatement. The three repeated
+    # sentences the record used to carry came out too, but they were inside an aria-hidden mock
+    # and never counted: a log does not print its own footnote in every row.
+    "index.html": 1270,   # raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
     # How It Works is a procedure. A reader following along needs every step.
     # Raised 2026-09-11 from 1400, because the page absorbed archie/see-it-work/
     # rather than growing: that page was a second explanation of the same journey
@@ -114,6 +125,11 @@ BUDGETS = {
     # a control, about 70 of them, counted here as body only because the widget is
     # HTML and not SVG. Four notes moved into the fold and one was trimmed to pay
     # for it, which is why the rise is 60 and not the widget's full weight.
+    # Considered for the 150-word drop on 2026-09-14 and left alone, for the reason already
+    # written above: a cut here reads as a hidden fee. The arithmetic, so it is on the record:
+    # of 2,977 words, 163 are the table and 880 the folds, and what is left is measured cost
+    # with its source beside it. The visual-first direction the other four pages took is real
+    # and it does not apply to a page whose job is to print every number we charge.
     "archie/pricing/index.html": 2960,
     # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
     # because it is about our own product. Its visible prose is 426 words, well under the
@@ -124,6 +140,12 @@ BUDGETS = {
     # somebody else's security posture, and paraphrasing that is how a comparison becomes a
     # misrepresentation. The prose half is what this budget still governs, and it has room to
     # spare on purpose: this page is meant to be looked at, not read.
+    # Considered for the same 150-word drop on 2026-09-14 and left alone, with the arithmetic
+    # written down so nobody has to redo it: of 1,125 words, 295 are the comparison table and
+    # 395 the sources fold, which is 61% of the page in other companies' published wording and
+    # the citations for it. The page's own prose is about 435 words, well under the default.
+    # Taking 150 off this means dropping a source or paraphrasing somebody else's security
+    # posture, which is the sentence above, and it is still true.
     "archie/mobile/index.html": 1150,
     # Working With Us is /guided-setup/ and /consulting/ merged on 2026-09-14, and the budget
     # is the merge's arithmetic rather than a concession. The two pages ran 1,494 words against

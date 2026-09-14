@@ -7296,8 +7296,13 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 16px;
 }
 /* Following a feature grid, the note must clear the cards, not tuck up under them
-   (the base rule's negative top margin is for the marketplace split layout). */
-.feature-grid + .marketplace-split-note {
+   (the base rule's negative top margin is for the marketplace split layout).
+   .aud-pick is here for the same reason and was missed when it was added on 2026-09-14:
+   wrapping the review grids in the picker broke the adjacency this selector tests for, the
+   note fell back to the -8px, and it printed straight through the dashed empty-state box.
+   Any future wrapper around a grid that sits above one of these notes belongs in this list. */
+.feature-grid + .marketplace-split-note,
+.aud-pick + .marketplace-split-note {
   margin-top: 28px;
 }
 

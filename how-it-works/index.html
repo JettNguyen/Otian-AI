@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260914-1" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260914-2" />
   <style>
     /* The requirement cards, moved here with the section from /what-you-need/ on
        2026-08-20. Page-scoped, as they were there: one page uses them. */
@@ -341,9 +341,14 @@
             <circle class="nk-dot" r="6" style="offset-path:path('M160,100 L440,100')"/>
             <path class="nk-folder" d="M440,84 h32 l10,10 h48 v56 h-90 z"/>
             <text class="nk-lab" x="485" y="176">One folder</text><text class="nk-cap" x="485" y="191">the one you were told about</text>
-            <rect class="nk-no" x="200" y="128" width="220" height="24" rx="12"/>
-            <text class="nk-notext" x="310" y="144">PDF &middot; images &middot; audio &middot; video &middot; anything that runs</text>
-            <line class="nk-strike" x1="216" y1="140" x2="404" y2="140"/>
+            <!-- Two lines, the same split the mobile variant below already uses. On one line this
+                 ran 48 characters at 10.5px, about 250px of text in a 220px pill, so it spilled
+                 out of both ends. Widening was not available: the pill is centred under the
+                 .nk-kinds card it belongs to and the folder sits at x=440. -->
+            <rect class="nk-no" x="200" y="126" width="220" height="40" rx="12"/>
+            <text class="nk-notext" x="310" y="142">PDF &middot; images &middot; audio &middot; video</text>
+            <text class="nk-notext" x="310" y="157">anything that runs</text>
+            <line class="nk-strike" x1="216" y1="147" x2="404" y2="147"/>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 340" role="img" aria-labelledby="nkm-t" xmlns="http://www.w3.org/2000/svg">
             <title id="nkm-t">Your agent on the left. A card lists the nine kinds of file it can write. A dot travels a line from the agent into one folder. Under the line, struck through: PDF, images, audio, video, anything that runs.</title>

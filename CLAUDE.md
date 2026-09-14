@@ -3,9 +3,16 @@
 Static site. Hand-written HTML per page, one shared `css/styles.css`, one shared `js/nav.js`.
 There is no build step and no templating: the nav is duplicated in every page **three** times
 (desktop dropdown, mobile drawer flyout, and the footer column), so a nav change is 3 edit sites
-per page across ~72 pages and must be scripted. Verify afterwards by counting occurrences per
-page, not by eye: a regex that matches the desktop menu and misses the footer leaves a link
-live in the place readers actually reach for.
+per page across ~72 pages and must be scripted. Verify afterwards with
+`python3 scripts/check-nav.py`, not by eye: a regex that matches the desktop menu and misses the
+footer leaves a link live in the place readers actually reach for. That check writes down no
+canonical menu; the majority of pages is the canonical menu, so a deliberate change needs no
+edit to it and an accidental one cannot hide. It exists because the `/equipment/` merge left
+"What to Run It On" in all three of how-it-works/'s own menus and nowhere else (the sweep
+matched the href the other 71 pages carried, and that page had a same-page `#` form), and left
+services/ pointing its own footer at the `guided-setup/` stub it had just replaced. **The page
+a merge is merging INTO is the one the sweep misses**, because its links are the ones written
+differently.
 
 ## Trust claims: read TRUST.md before writing copy
 

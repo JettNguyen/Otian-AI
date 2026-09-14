@@ -284,7 +284,7 @@
              switch is a checkbox the CSS answers, the way the packet map's does on trust/ (it
              borrows those classes). Merged 2026-09-11. The style block serves both variants. -->
         <figure class="explain-figure pm-figure bz-figure fade-up delay-1" id="bsh-fig">
-          <input class="pm-switch-input" type="checkbox" id="bz-each" />
+          <input class="pm-switch-input" type="checkbox" id="bz-each" data-auto-flip="3000" />
           <label class="pm-switch" for="bz-each">
             <span class="pm-switch-track" aria-hidden="true"><span class="pm-switch-knob"></span></span>
             <span class="pm-switch-text">
@@ -558,6 +558,7 @@
   </footer>
 
   <script src="../../js/nav.js"></script>
+  <script src="../../js/switch-cycle.js" defer></script>
   <script type="module" src="../../js/account-nav.js"></script>
 </body>
 </html>

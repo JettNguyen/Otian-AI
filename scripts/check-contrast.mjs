@@ -144,6 +144,13 @@ for (const [theme, b] of [["light", LIGHT], ["dark", DARK]]) {
   // theoretical one. TEXT and not UI: a marker is 0.8rem, well under the large-text threshold.
   checks.push([`${theme}: --c-blue-ink on --accent-subtle`, ratio(token("c-blue-ink", b), token("accent-subtle", b)), TEXT]);
   checks.push([`${theme}: --c-blue-ink on card`, ratio(token("c-blue-ink", b), g.card), TEXT]);
+  // The audience chips on testimonials/: "For one person" in ember on --accent-subtle (checked
+  // just above), "For a team" in slate on --c-blue-subtle. That one is an rgba wash rather than
+  // a solid, so it has to be composited over the card it sits on before the number means
+  // anything. TEXT and not UI: chip type is --fs-xs. Dark clears 4.5 by a hair, which is why
+  // this is a check and not a calculation somebody did once.
+  checks.push([`${theme}: --c-blue-ink on the --c-blue-subtle chip`,
+    ratio(token("c-blue-ink", b), opaque(token("c-blue-subtle", b), g.card)), TEXT]);
 }
 
 let failed = 0;

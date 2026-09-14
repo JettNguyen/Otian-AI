@@ -320,9 +320,13 @@ QUESTIONS = [
 # Sections of the map, in the order a reader needs them. A page not listed here still ships
 # in the sitemap; this file is a curated map, not a second copy of it.
 MAP = [
-    ("The product", ["archie/", "how-it-works/", "archie/pricing/", "archie/see-it-work/",
-                     "equipment/"]),
-    ("Who it is for", ["individuals/", "business/", "consulting/"]),
+    ("The product", ["archie/", "archie/personal/", "archie/business/", "how-it-works/",
+                     "archie/pricing/", "archie/see-it-work/", "equipment/"]),
+    # The two editions moved into "The product" above on 2026-09-14, when Archie for Business
+    # came out from under Services: they are editions of the app, and a machine reading this
+    # file should not be told otherwise. What is left here is the work we do for people, which
+    # is what this heading always meant.
+    ("Services we offer", ["guided-setup/", "consulting/"]),
     ("Add-ons", ["skills-marketplace/browse/", "skills-marketplace/what-is-an-add-on/",
                  "skills-marketplace/find/", "skills-marketplace/commission/",
                  "skills-marketplace/for-developers/"]),

@@ -28,14 +28,15 @@ a mistake and we want to hear about it: questions@otianai.com.
 ## The product
 
 - [Archie: AI Agents on Your Own Computer](https://otianai.com/archie/): Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now.
+- [Archie for Personal](https://otianai.com/archie/personal/): Archie for Personal: up to 10 AI agents on your own computer, handling the inbox, the calendar, the follow-ups and the research. $30 a month or $299 a year.
+- [Archie for Business](https://otianai.com/archie/business/): Inbox triage, scheduling, follow-ups, research, reports: Archie for Business runs up to 50 agents your team can share, on your own computer and AI account, so your team’s work never passes through us.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit.
 - [Archie Pricing](https://otianai.com/archie/pricing/): What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), every add-on included, and pay-as-you-go AI billed straight to your own account with...
 - [What to Run It On](https://otianai.com/equipment/): Which computer to run your AI agent on, answered for your situation: the one you already own, or the small desktop to buy if you don't. Plus the parts people expect to need and don't.
 
-## Who it is for
+## Services we offer
 
-- [Guided Setup](https://otianai.com/individuals/): What a personal AI agent handles for one person (inbox, calendar, research, follow-ups) and a guided setup service that sets your first agent up with you.
-- [Archie for Business](https://otianai.com/business/): Inbox triage, scheduling, follow-ups, research, reports: Archie for Business runs up to 50 agents your team can share, on your own computer and AI account, so your team’s work never passes through us.
+- [Guided Setup](https://otianai.com/guided-setup/): An hour with us and your first Archie agent is running: inbox, calendar and a chat app connected on your own computer, and you able to change it yourself. $250 an hour.
 - [Consulting](https://otianai.com/consulting/): Design and build work for a setup that already exists: several computers, tools wired together by hand, pieces that only stay in step because you keep them there. Scoped in writing before you book, then built in phases at $250 an hour.
 
 ## Add-ons

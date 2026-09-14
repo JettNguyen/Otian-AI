@@ -11288,6 +11288,25 @@ html[data-theme="dark"] .booking-container iframe {
    narrow screen they stop being one line of prose and lay out as two columns, each wrapping
    inside its own half: "Archie is in testing / and not for sale yet." next to "See where / it
    stands". It is a sentence, so it flows as one. */
+/* The audience fork under the hero CTA. Two routes, not a sentence: it has to answer "is this
+   for me" in a glance and take the reader to the right edition page, and a line of prose does
+   only the first. The middot is a real separator rather than a border so the pair wraps onto
+   two centred rows on a narrow phone without leaving a rule hanging in the air. */
+.hm-hero-fork {
+  margin: 14px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 4px 12px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+.hm-hero-fork a { color: var(--c-blue-ink); text-decoration: none; }
+.hm-hero-fork a:hover { color: var(--c-blue); text-decoration: underline; }
+.hm-hero-fork span { color: var(--text-muted); opacity: .6; }
+@media (max-width: 400px) { .hm-hero-fork span { display: none; } }
+
 .hm-hero-micro { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
 .hm-hero-micro svg { display: inline-block; color: var(--accent); vertical-align: -0.15em; }
 .hm-pill {
@@ -12065,12 +12084,13 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero h1 { animation: hm-fade-up-in 0.6s ease 0.12s backwards; }
 .hm-hero .hm-lede { animation: hm-fade-up-in 0.6s ease 0.2s backwards; }
 .hm-hero .hm-actions { animation: hm-fade-up-in 0.6s ease 0.28s backwards; }
-.hm-hero .hm-hero-micro { animation: hm-fade-up-in 0.6s ease 0.34s backwards; }
+.hm-hero .hm-hero-fork { animation: hm-fade-up-in 0.6s ease 0.32s backwards; }
+.hm-hero .hm-hero-micro { animation: hm-fade-up-in 0.6s ease 0.36s backwards; }
 .hm-hero .hm-pill { animation: hm-fade-up-in 0.6s ease 0.4s backwards; }
 .hm-hero .hm-demo { animation: hm-fade-up-in 0.7s ease 0.48s backwards; }
 @media (prefers-reduced-motion: reduce) {
   .hm-hero .section-label, .hm-hero h1, .hm-hero .hm-lede,
-  .hm-hero .hm-actions, .hm-hero .hm-hero-micro, .hm-hero .hm-pill,
+  .hm-hero .hm-actions, .hm-hero .hm-hero-fork, .hm-hero .hm-hero-micro, .hm-hero .hm-pill,
   .hm-hero .hm-demo { animation: none; }
   .hm-spine::before { height: calc(100% - 12px); }
 }
@@ -15139,3 +15159,78 @@ summary:active,
     transition: transform var(--transition-press), box-shadow var(--transition-press);
   }
 }
+
+/* ── The audience picker and its chips (testimonials/) ──
+   Reviews are split by who wrote them, because "is this for someone like me" is the question
+   a reader brings to a reviews page and one undifferentiated wall never answers it. The same
+   CSS-only radio pattern as .cost-pick above: two radios drive the tabs and the panels through
+   sibling selectors, nothing here needs a script, and with CSS off it degrades to two labelled
+   lists stacked. Hiding the inputs with clip rather than display:none is what keeps the group
+   focusable and the arrow keys working. */
+.aud-pick { position: relative; max-width: 940px; margin: 0 auto; }
+.aud-pick-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.aud-pick-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.aud-pick-tab {
+  padding: 9px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+.aud-pick-tab:hover { border-color: var(--accent); }
+#aud-personal:checked ~ .aud-pick-tabs [for="aud-personal"],
+#aud-team:checked ~ .aud-pick-tabs [for="aud-team"] {
+  border-color: var(--accent);
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+#aud-personal:focus-visible ~ .aud-pick-tabs [for="aud-personal"],
+#aud-team:focus-visible ~ .aud-pick-tabs [for="aud-team"] {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 2px;
+}
+.aud-pick-panel { display: none; }
+#aud-personal:checked ~ .aud-pick-out [data-aud="personal"],
+#aud-team:checked ~ .aud-pick-out [data-aud="team"] { display: block; }
+.aud-pick-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 28px 24px;
+  border: 1px dashed var(--line-muted);
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+}
+
+/* The same split, said on a card: which audience the job below belongs to. Ember for one
+   person, slate for a team, matching the two edition marks the site already uses. */
+.card-aud {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+.card-aud--personal { background: var(--accent-subtle); color: var(--accent-ink); }
+.card-aud--team { background: var(--c-blue-subtle); color: var(--c-blue-ink); }

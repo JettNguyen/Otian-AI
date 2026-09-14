@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260911-24" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260914-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -48,6 +48,8 @@
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../archie/" role="menuitem">What Archie Is</a>
+            <a href="../archie/personal/" role="menuitem">For Personal</a>
+            <a href="../archie/business/" role="menuitem">For Business</a>
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
@@ -66,9 +68,8 @@
         <div class="nav-more" id="navServices">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
           <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../individuals/" role="menuitem">Guided Setup</a>
+            <a href="../guided-setup/" role="menuitem">Guided Setup</a>
             <a href="../consulting/" role="menuitem">Consulting</a>
-            <a href="../business/" role="menuitem">For Business</a>
           </div>
         </div>
         <div class="nav-more" id="navCompare">
@@ -124,6 +125,8 @@
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/">What Archie Is</a>
+      <a href="../archie/personal/">For Personal</a>
+      <a href="../archie/business/">For Business</a>
       <a href="../how-it-works/">How It Works</a>
       <a href="../archie/mobile/">Archie Mobile</a>
       <a href="../archie/pricing/">Pricing</a>
@@ -136,9 +139,8 @@
       <a href="../skills-marketplace/for-developers/">Build One</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../individuals/">Guided Setup</a>
+      <a href="../guided-setup/">Guided Setup</a>
       <a href="../consulting/">Consulting</a>
-      <a href="../business/">For Business</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
       <a href="../compare/">All Comparisons</a>
@@ -182,33 +184,37 @@
              ============================== -->
         <div class="section-header">
           <h2 id="successes-heading" class="fade-up">What a well-built agent actually does.</h2>
-          <p>Four jobs people hand over, and the add-on that takes each one. Every line below describes what ships today, and none of these send anything without you.</p>
+          <p>Four jobs people hand over, and the add-on that takes each one, labelled by who it is for. Every line below describes what ships today, and none of these send anything without you.</p>
         </div>
 
         <!-- feature-grid-2: four cards read as a 2x2 block instead of a 3+1 row. -->
         <div class="feature-grid feature-grid-2">
           <article class="feature-card fade-up delay-1">
+            <span class="card-aud card-aud--personal">For one person</span>
             <h3>Your inbox, counted and filed</h3>
             <p><strong>What leaves your week:</strong> Making the same decision about the same sender, every morning, forever.</p>
             <p><strong>How:</strong> Inbox Rules counts before it asks: how many messages from each sender, and how many you never opened. You say what should happen to the big ones, once, and from then on it files them each morning and tells you what it moved. Filing away is your mail app&rsquo;s own archive, so a wrong call costs you one sentence to undo, and it cannot delete anything. Email Manager takes the rest: ask it anything about your mail, and a message that needs an answer arrives with a draft you can change every word of.</p>
           </article>
 
           <article class="feature-card fade-up delay-2">
+            <span class="card-aud card-aud--personal">For one person</span>
             <h3>The replies and invoices you are owed</h3>
             <p><strong>What leaves your week:</strong> Carrying the list of who never wrote back and which invoice was never paid.</p>
             <p><strong>How:</strong> Waiting On reads your sent mail for real asks and real invoices, checks whether the reply or the payment ever arrived, and keeps one list. Ask who owes you and the money comes first, longest overdue at the top, with a chase already written: light at four days late, plain and specific at a month. Say that one is fine and it drops the thread for good. Sending stays yours.</p>
           </article>
 
           <article class="feature-card fade-up delay-1">
+            <span class="card-aud card-aud--personal">For one person</span>
             <h3>Walking in already briefed</h3>
             <p><strong>What leaves your week:</strong> Reading back through a thread in the five minutes before a call.</p>
             <p><strong>How:</strong> Meeting Prep reads the event off your calendar half an hour ahead: who is coming, when and where, and two or three things worth raising. Ask what your day looks like and it flags the back-to-backs. It only reads the calendar; anything you want changed goes through the Calendar Manager add-on, which proposes the change and waits for you.</p>
           </article>
 
           <article class="feature-card fade-up delay-2">
+            <span class="card-aud card-aud--team">For a team</span>
             <h3>The customer nobody answered</h3>
             <p><strong>What leaves your week:</strong> Finding out a customer was missed when they write a second time, angrier.</p>
-            <p><strong>How:</strong> Owed to Customers sweeps the mailboxes your business shares and keeps one row per waiting customer: who wrote, what they asked, how long they have waited. Anyone who has chased twice goes to the top. It reads the sent mail before every report, so a thread a teammate already answered never shows up as owed, and a teammate&rsquo;s own mailbox is read only for them. This one is in the <a class="marketplace-text-link" href="../business/">Archie for Business</a> store.</p>
+            <p><strong>How:</strong> Owed to Customers sweeps the mailboxes your business shares and keeps one row per waiting customer: who wrote, what they asked, how long they have waited. Anyone who has chased twice goes to the top. It reads the sent mail before every report, so a thread a teammate already answered never shows up as owed, and a teammate&rsquo;s own mailbox is read only for them. This one is in the <a class="marketplace-text-link" href="../archie/business/">Archie for Business</a> store.</p>
           </article>
         </div>
       </div>
@@ -231,20 +237,52 @@
            <p class="review-attrib">First name or initials &middot; e.g. guided-setup client</p>
          </article>
 
+         WHICH GRID: there are two, and a review goes in exactly one.
+         #aud-grid-personal is for a review from somebody running Archie for
+         themselves; #aud-grid-team is for one from a business. If you cannot
+         tell from the attribution line which it is, the attribution line is
+         not finished. Split added 2026-09-14: the two audiences were reading
+         one undifferentiated wall and neither could find itself in it.
+
          When the first review goes in: DELETE the "collecting reviews"
-         lede under the heading, and move this section back ABOVE the
-         "What a well-built agent actually does" section, swapping the two
-         section-alt classes so the bands still alternate. It sits second
-         only because the grid is empty.
+         lede under the heading, and delete the empty-state paragraph inside
+         whichever grid it lands in. The other grid keeps its own until it
+         fills. Move this section back ABOVE the "What a well-built agent
+         actually does" section, swapping the two section-alt classes so the
+         bands still alternate. It sits second only because both grids are
+         empty.
          ============================== -->
     <section class="section section-alt" aria-labelledby="reviews-heading">
       <div class="container">
         <div class="section-header">
           <h2 id="reviews-heading" class="fade-up">In their words.</h2>
-          <p>We&rsquo;re collecting reviews from our first clients now. As each one gives us permission to share, it&rsquo;ll appear here, word for word.</p>
+          <p>We&rsquo;re collecting reviews from our first clients now. As each one gives us permission to share, it&rsquo;ll appear here, word for word, under the audience it came from.</p>
         </div>
 
-        <div class="feature-grid fade-up delay-1">
+        <!-- Two radios and no script, the same pattern the cost picker on archie/pricing/ uses:
+             the checked one lights its tab and shows its grid through sibling selectors, and
+             with CSS off it is two labelled lists stacked. The inputs are hidden the accessible
+             way, so the group still takes focus and the arrow keys still move between the tabs.
+             Personal is checked because it is the larger audience, not because it matters more. -->
+        <div class="aud-pick fade-up delay-1">
+          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-personal" checked />
+          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-team" />
+          <div class="aud-pick-tabs" role="group" aria-label="Whose reviews to show">
+            <label class="aud-pick-tab" for="aud-personal">From one person</label>
+            <label class="aud-pick-tab" for="aud-team">From a team</label>
+          </div>
+          <div class="aud-pick-out" aria-live="polite">
+            <div class="aud-pick-panel" data-aud="personal">
+              <div class="feature-grid" id="aud-grid-personal">
+                <p class="aud-pick-empty">No reviews from people running Archie for themselves yet. The first one goes here.</p>
+              </div>
+            </div>
+            <div class="aud-pick-panel" data-aud="team">
+              <div class="feature-grid" id="aud-grid-team">
+                <p class="aud-pick-empty">No reviews from businesses yet. The first one goes here.</p>
+              </div>
+            </div>
+          </div>
         </div>
         <!--
           Said out loud because the alternative is letting a reader assume. There is no submission
@@ -283,6 +321,8 @@
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
             <a href="../archie/">What Archie Is</a>
+            <a href="../archie/personal/">For Personal</a>
+            <a href="../archie/business/">For Business</a>
             <a href="../how-it-works/">How It Works</a>
       <a href="../archie/mobile/">Archie Mobile</a>
             <a href="../archie/pricing/">Pricing</a>
@@ -301,9 +341,8 @@
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="../individuals/">Guided Setup</a>
+            <a href="../guided-setup/">Guided Setup</a>
             <a href="../consulting/">Consulting</a>
-            <a href="../business/">For Business</a>
           </nav>
         </div>
         <div>

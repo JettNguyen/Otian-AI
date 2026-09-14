@@ -130,18 +130,24 @@ starting with a free 30-minute call.
 
 | Section | Pages |
 |---|---|
-| **Archie** | [What Is Archie?](https://otianai.com/archie/) · [See It Work](https://otianai.com/archie/see-it-work/) · [Pricing](https://otianai.com/archie/pricing/) · [Guided Setup](https://otianai.com/individuals/) |
+| **Archie** | [What Is Archie?](https://otianai.com/archie/) · [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [Pricing](https://otianai.com/archie/pricing/) · [What to Run It On](https://otianai.com/equipment/) |
+| **Services** | [Guided Setup](https://otianai.com/guided-setup/) · [Consulting](https://otianai.com/consulting/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [Commission One](https://otianai.com/skills-marketplace/commission/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
-| **Learn** | [How It Works](https://otianai.com/how-it-works/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [What You Need](https://otianai.com/what-you-need/) |
+| **Learn** | [How It Works](https://otianai.com/how-it-works/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [What You Need](https://otianai.com/how-it-works/#what-you-need) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
 
-`business/` is written but not published: it is held back until the Archie business edition is
-close to ready, so <https://otianai.com/business/> returns the 404 page. The directory stays in
-the repo and is deleted in the "Withhold unpublished pages" step of
-[`deploy.yml`](.github/workflows/deploy.yml) before the upload, and `firebase.json` ignores it so
-local serving matches. Publishing it means dropping that `rm`, dropping the `firebase.json`
-ignore, dropping the `robots` meta in the page, and putting the "For Business" link back in three
-places per page (nav menu, mobile drawer, footer).
+**The two editions live under `archie/`, and that is deliberate.** Archie for Business is an
+edition of the app rather than a service we sell, so `archie/business/` sits beside
+`archie/personal/` and both are reachable from the Archie menu. It was filed under Services until
+2026-09-14, which left a reader to work out for themselves that the two are the same app; the
+pages now open with the same two-row fork pointing at each other. Old URLs stay alive as
+redirect stubs: `business/` to `archie/business/`, and `individuals/` to `guided-setup/`. The
+stubs carry a `<meta http-equiv="refresh">`, which is what keeps `gen-discovery.py` from listing
+them in the sitemap.
+
+`individuals/` was a URL that read like an audience and a page that sold a setup session. The
+session half became `guided-setup/`; the half about what an agent actually does day to day was
+always product copy and became `archie/personal/`.
 
 ---
 

@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-<title>Commission an Add-on | Otian AI</title>
-  <meta name="description" content="If Archie can't do it yet, tell us what you need. Otian AI scopes it, quotes it per add-on, and builds it: it's yours, and it joins the marketplace, included with Archie for everyone who needs it after you." />
+<title>Archie for Personal | Otian AI</title>
+  <meta name="description" content="Archie for Personal: up to 10 AI agents on your own computer, handling the inbox, the calendar, the follow-ups and the research. $30 a month or $299 a year." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,6 +36,87 @@
     })();
   </script>
   <link rel="stylesheet" href="../../css/styles.css?v=20260914-1" />
+  <style>
+    /* archie/personal: hero agent line. One restrained beat above the fold, the agent mark
+       breathing while the small jobs roll past. The funnel figure further down carries
+       this page's illustration weight, so this stays a single line and nothing more.
+       Came here with the hero from /individuals/ on 2026-09-14; that page no longer
+       carries the line, so this block was deleted there rather than duplicated. */
+    .ihx-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 100%;
+      padding: 10px 20px 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      font-size: var(--fs-md);
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .ihx-mark {
+      flex: none;
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+    .ihx-mark svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .ihx-a { fill: var(--accent); }
+    .ihx-ring {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.4;
+      opacity: 0;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .ihx-quiet { color: var(--text-secondary); }
+    .ihx-cycle {
+      display: block;
+      /* Fixed window so the pill never resizes as the phrases roll. Sized to the
+         longest phrase with a little slack for a font fallback. */
+      width: 11.6em;
+      height: 1.5em;
+      overflow: hidden;
+      text-align: left;
+    }
+    .ihx-track { display: block; }
+    .ihx-track span {
+      display: block;
+      height: 1.5em;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .ihx-ring { animation: ihxBreathe 3.2s ease-out infinite; }
+      @keyframes ihxBreathe {
+        0% { transform: scale(0.5); opacity: 0.5; }
+        70%, 100% { transform: scale(1.12); opacity: 0; }
+      }
+      .ihx-track { animation: ihxRoll 11.2s cubic-bezier(0.66, 0, 0.2, 1) infinite; }
+      @keyframes ihxRoll {
+        0%, 18% { transform: translateY(0); }
+        25%, 43% { transform: translateY(-1.5em); }
+        50%, 68% { transform: translateY(-3em); }
+        75%, 93% { transform: translateY(-4.5em); }
+        100% { transform: translateY(-6em); }
+      }
+    }
+    @media (max-width: 480px) {
+      .ihx-line { font-size: var(--fs-base); gap: 9px; padding: 9px 16px 9px 11px; }
+      .ihx-mark { width: 26px; height: 26px; }
+    }
+    @media (max-width: 360px) {
+      .ihx-line { font-size: var(--fs-sm); }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -167,92 +248,253 @@
 
     <!-- ==============================
          Page Hero
+         The ember mark, where archie/business/ carries the slate one. The two edition pages
+         are meant to be read as a pair, so they open the same way: mark, "For ...", the
+         heading, one lede, and then the fork that sends the other audience next door.
+         The heading and the "Quietly ..." line came from /individuals/ when that page was
+         split on 2026-09-14: they were always about having an agent, not about the setup
+         session that page sells, and they are the reason this page did not have to be
+         written from nothing.
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Commission an add-on</span>
-        <h1 class="fade-up delay-1">If Archie can&rsquo;t do it yet, we&rsquo;ll build it.</h1>
-        <p>Every &ldquo;easy&rdquo; AI tool is easy because it&rsquo;s limited. Archie is easy because we did the hard part first, and when you reach the edge of what it can do, that edge moves. Tell us what you need. We&rsquo;ll scope it and build it. It&rsquo;s yours, and it goes on the marketplace, so the next person who needs it doesn&rsquo;t have to ask.</p>
-        <div class="fade-up delay-3" style="margin-top: 28px;">
-          <a href="../../contact/" class="btn btn-primary btn-lg">Tell us what you need</a>
+        <img src="../../assets/archie.svg" width="1024" height="1024" alt="Archie" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
+        <span class="section-label fade-up">For personal</span>
+        <h1 class="fade-up delay-1">What it&rsquo;s like to have your own agent.</h1>
+        <p>One agent, on your own computer, quietly working through the inbox, the calendar, the errands, and the research you never get to.</p>
+        <span class="ihx-line fade-up delay-2" role="img" aria-label="Quietly sorting the inbox, checking the calendar, drafting a reply, and gathering research.">
+          <span class="ihx-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+              <circle class="ihx-ring" cx="16" cy="16" r="13"/>
+              <g class="ihx-a" transform="translate(4.51,5.11) scale(0.0224)">
+                <path fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/>
+                <polygon points="328,887 512,727 696,887"/>
+              </g>
+            </svg>
+          </span>
+          <span class="ihx-quiet" aria-hidden="true">Quietly</span>
+          <span class="ihx-cycle" aria-hidden="true">
+            <span class="ihx-track">
+              <span>sorting the inbox</span>
+              <span>checking the calendar</span>
+              <span>drafting a reply</span>
+              <span>gathering research</span>
+              <span>sorting the inbox</span>
+            </span>
+          </span>
+        </span>
+      </div>
+    </section>
+
+    <!-- The fork, and the reason this page exists. Archie for Business used to sit under
+         Services, which filed an edition of the product as a service and left a reader to
+         guess which of the two was theirs. Both editions now open with this same two-row
+         list, pointing at each other, so whichever door somebody came through they can see
+         the other one. Same rows, same order, reversed "you are here": the mirror of it is
+         in archie/business/. Figures are FACTS.md's. -->
+    <section class="section section--tight" aria-labelledby="fork-heading">
+      <div class="container">
+        <div class="section-header section-header--quiet">
+          <h2 id="fork-heading" class="fade-up">Which one is this?</h2>
+        </div>
+        <div class="calm-list calm-list--ruled fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">One person &middot; you are here</span>
+            <p>Archie runs up to 10 agents on your own computer, and each one answers you. $30 a month, or $299 a year.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">A team</span>
+            <p>Up to 50 agents, and any of them can answer your whole team. That is <a class="marketplace-text-link" href="../business/">Archie for Business</a>: $99 a month, or $999 a year. Same app to learn, same computer it runs on.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==============================
+         Day to Day
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="uses-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What it takes on</span>
+          <h2 id="uses-heading" class="fade-up">The small stuff, handled.</h2>
+          <p>The repetitive work, off your plate: it drafts, sorts, and reminds. Email goes out only when you send it or set a time.</p>
+        </div>
+        <!-- Three lines in, one draft out. Redrawn 2026-09-11 from a funnel of 42 shapes; the
+             Send button is the claim, so it is the one thing in ember. The style block serves
+             both variants. -->
+        <figure class="explain-figure fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 520 220" role="img" aria-labelledby="iv-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
+            <title id="iv-t">Inbox, calendar and follow-ups on the left, three lines into Archie, and one draft reply out on the right with a Send button under it. Dots travel the lines in.</title>
+            <style>
+              .iv-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round;stroke-linejoin:round}
+              .iv-in{fill:currentColor;font-size:12.5px;font-weight:650}
+              .iv-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+              .iv-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .iv-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .iv-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round}
+              .iv-lab{fill:currentColor;font-size:11px;font-weight:650}
+              .iv-send{fill:var(--accent)}
+              .iv-sendtext{fill:#292624;font-size:10.5px;font-weight:650;text-anchor:middle}
+              .iv-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .iv-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .iv-dot{display:block;offset-distance:40%}
+                @media (prefers-reduced-motion:no-preference){
+                  .iv-dot{animation:ivIn 5s linear infinite}
+                  .iv-dot--2{animation-delay:-1.7s}.iv-dot--3{animation-delay:-3.4s}
+                  @keyframes ivIn{0%{offset-distance:0%;opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+                  .iv-d{animation-name:ivInD}
+                  /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                  @keyframes ivInD{0%{offset-distance:0%;opacity:1}56.7%{opacity:1}68.3%{opacity:.28}88%{opacity:.28}100%{offset-distance:100%;opacity:0}}
+                }
+              }
+            </style>
+            <path class="iv-line" d="M96,50 L200,110 L360,110"/><path class="iv-line" d="M96,110 L200,110"/><path class="iv-line" d="M96,170 L200,110"/>
+            <text class="iv-in" x="14" y="54">Inbox</text><text class="iv-in" x="14" y="114">Calendar</text><text class="iv-in" x="14" y="174">Follow-ups</text>
+            <rect class="iv-agent" x="160" y="84" width="80" height="52" rx="12"/><text class="iv-name" x="200" y="114">Archie</text>
+            <rect class="iv-card" x="360" y="70" width="140" height="80" rx="12"/>
+            <text class="iv-lab" x="374" y="92">Draft reply, ready</text><path class="iv-ink" d="M374,104h100M374,114h72"/>
+            <rect class="iv-send" x="374" y="124" width="46" height="18" rx="9"/><text class="iv-sendtext" x="397" y="136.5">Send</text>
+            <text class="iv-sub" x="430" y="170">you read it, you send it</text>
+            <circle class="iv-dot iv-d iv-dot--1" r="5" style="offset-path:path('M96,50 L200,110')"/><circle class="iv-dot iv-d iv-dot--2" r="5" style="offset-path:path('M96,110 L200,110')"/><circle class="iv-dot iv-d iv-dot--3" r="5" style="offset-path:path('M96,170 L200,110')"/>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 300" role="img" aria-labelledby="ivm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="ivm-t">Inbox, calendar and follow-ups at the top, three lines down into Archie, and one draft reply below it with a Send button. Dots travel the lines in.</title>
+            <path class="iv-line" d="M60,44 L170,110"/><path class="iv-line" d="M170,44 L170,110"/><path class="iv-line" d="M280,44 L170,110"/><path class="iv-line" d="M170,162 L170,196"/>
+            <text class="iv-in iv-name" x="60" y="34">Inbox</text><text class="iv-in iv-name" x="170" y="34">Calendar</text><text class="iv-in iv-name" x="280" y="34">Follow-ups</text>
+            <rect class="iv-agent" x="130" y="110" width="80" height="52" rx="12"/><text class="iv-name" x="170" y="140">Archie</text>
+            <rect class="iv-card" x="100" y="196" width="140" height="80" rx="12"/>
+            <text class="iv-lab" x="114" y="218">Draft reply, ready</text><path class="iv-ink" d="M114,230h100M114,240h72"/>
+            <rect class="iv-send" x="114" y="250" width="46" height="18" rx="9"/><text class="iv-sendtext" x="137" y="262.5">Send</text>
+            <text class="iv-sub" x="170" y="294">you read it, you send it</text>
+            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M60,44 L170,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M170,44 L170,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M280,44 L170,110')"/>
+          </svg>
+          <figcaption>The repetitive stuff funnels into Archie, which hands back ready-to-send drafts. You read them, and you send them.</figcaption>
+        </figure>
+
+
+        <div class="use-cases-grid fade-up delay-1">
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 8h20"/>
+              <path d="M6 12h4"/>
+              <path d="M6 16h2"/>
+            </svg>
+            <span class="use-case-text"><strong>Email &amp; Inbox</strong><span class="use-case-detail">Flags priority messages and proposes ready-to-send replies</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span class="use-case-text"><strong>Scheduling &amp; Reminders</strong><span class="use-case-detail">Suggests best slots and drafts confirmation messages</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <span class="use-case-text"><strong>Research &amp; Lookups</strong><span class="use-case-detail">Builds ranked lists and summarizes options with next steps</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span class="use-case-text"><strong>Lists &amp; Tracking</strong><span class="use-case-detail">Keeps running lists (follow-ups, applications, plans) and answers questions about them</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            <span class="use-case-text"><strong>Following Up with Contacts</strong><span class="use-case-detail">Prepares personalized check-ins using recent context</span></span>
+          </div>
+
+          <div class="use-case-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <line x1="12" y1="2" x2="12" y2="6"/>
+              <line x1="12" y1="18" x2="12" y2="22"/>
+              <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+              <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+              <line x1="2" y1="12" x2="6" y2="12"/>
+              <line x1="18" y1="12" x2="22" y2="12"/>
+              <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+              <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+            </svg>
+            <span class="use-case-text"><strong>Daily Briefings</strong><span class="use-case-detail">Surfaces your schedule, priority emails, and key reminders each morning</span></span>
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- ==============================
-         How It Works
+         What the plan runs
+         The capability and its catch in the same breath, per the house rule: the seat limit is
+         the one thing about this edition that sends somebody to the other one, and burying it
+         on /archie/pricing/ would make the fork at the top of this page a half-truth. Figures
+         are FACTS.md's (10 agents, 148 add-ons, one person per agent, enforced on the edition
+         rather than the licence). The custody sentence is TRUST.md's approved wording with the
+         provider-egress clause kept, which is not optional.
          ============================== -->
-    <section class="section" aria-labelledby="how-heading">
+    <section class="section" aria-labelledby="plan-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">How it works</span>
-          <h2 id="how-heading" class="fade-up delay-1">Three steps, and only the first is yours.</h2>
-          <p>A commission starts as a conversation, not a project plan. You bring the need; we do the rest.</p>
+          <span class="section-label fade-up">What the plan runs</span>
+          <h2 id="plan-heading" class="fade-up delay-1">Ten agents, every add-on, one person.</h2>
+          <p>The whole catalog is included, so the thing that decides whether this edition fits you is the last word in that heading.</p>
         </div>
-
-        <div class="steps-row">
-          <div class="step-item fade-up delay-1">
-            <div class="step-number" aria-hidden="true">1</div>
-            <h3>Tell us what you need</h3>
-            <p>Describe it in plain language: the thing you keep doing by hand, the app your agent doesn&rsquo;t know yet. No spec required.</p>
+        <div class="calm-list calm-list--ruled fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">Up to 10 agents</span>
+            <p>Run one that watches the inbox and another that keeps the follow-up list, or one for work and one for the house. Every one of the 148 <a class="marketplace-text-link" href="../../skills-marketplace/browse/">add-ons</a> is included, not sold separately, and new ones arrive for everyone.</p>
           </div>
-          <div class="step-item fade-up delay-2">
-            <div class="step-number" aria-hidden="true">2</div>
-            <h3>We scope it and quote it</h3>
-            <p>We work out exactly what it takes and put a price on it. You know the cost before we write a line of it.</p>
+          <div class="calm-list-item">
+            <span class="calm-list-label">One person per agent</span>
+            <p>A personal Archie agent answers one person: its owner. That is enforced in the app, not a policy, so there is no second seat to buy on this plan. If somebody else needs to message the same agent, that is <a class="marketplace-text-link" href="../business/">Archie for Business</a>, which lifts the ceiling on each of them.</p>
           </div>
-          <div class="step-item fade-up delay-3">
-            <div class="step-number" aria-hidden="true">3</div>
-            <h3>We build it, and it&rsquo;s yours</h3>
-            <p>Your agent picks up the new ability, and the add-on joins the marketplace, included with Archie for everyone who needs it after you.</p>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Your computer, your AI account</span>
+            <p>Your conversations, your files and your calendar live on your own computer and go straight to your AI provider on your own account. They never pass through an Otian server. <a class="marketplace-text-link" href="../../trust/">Everything we can and can&rsquo;t see</a>, line by line.</p>
           </div>
-        </div>
-
-        <p class="mt-40 marketplace-split-note">Quoted per add-on: scope first, price before any work starts.</p>
-      </div>
-    </section>
-
-    <!-- ==============================
-         What It Can Be
-         ============================== -->
-    <section class="section section-alt" aria-labelledby="kinds-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">What it can be</span>
-          <h2 id="kinds-heading" class="fade-up delay-1">Any kind of add-on.</h2>
-          <p>A commission can take the shape of any kind of add-on. If you&rsquo;re not sure which one fits, that&rsquo;s what scoping is for. New to add-ons? <a href="../what-is-an-add-on/">Start with the basics</a>.</p>
-        </div>
-
-        <div class="feature-grid fade-up delay-1">
-          <article class="feature-card feature-card--skill">
-            <span class="mp-face mp-face--card mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 5h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/><path d="M9.75 9.75h4.5v4.5h-4.5z"/></svg></span>
-            <h3>A skill</h3>
-            <p>Something new your agent can <em>do</em>: the app or tool it doesn&rsquo;t know how to work with yet.</p>
-          </article>
-          <article class="feature-card feature-card--routine">
-            <span class="mp-face mp-face--card mp-face--routine" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"/><path d="M12 7.5V12l3 2"/></svg></span>
-            <h3>A routine</h3>
-            <p>Something it does <em>on its own</em>, on your schedule: the report you wish landed every Monday.</p>
-          </article>
-          <article class="feature-card feature-card--personality">
-            <span class="mp-face mp-face--card mp-face--personality" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5a1.5 1.5 0 0 1-1.5 1.5H9.5L5 19.5z"/></svg></span>
-            <h3>A personality</h3>
-            <p>How your agent <em>talks</em> to you: a voice and tone shaped around how you like to work.</p>
-          </article>
         </div>
       </div>
     </section>
 
     <!-- ==============================
-         Why We Work This Way
+         How you get one
+         Two routes and their real cost, because the page has just spent six cards saying what
+         an agent takes off your plate and the honest next question is what it takes to stand
+         one up. The self-serve route is free of us entirely, which is worth saying on a page
+         that also sells a setup session.
          ============================== -->
-    <section class="section" aria-labelledby="compounds-heading">
+    <section class="section section-alt" aria-labelledby="start-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Why we work this way</span>
-          <h2 id="compounds-heading" class="fade-up delay-1">Your one-off makes the whole thing better.</h2>
-          <p>Every commissioned add-on becomes a marketplace listing, included with Archie for everyone, so the marketplace grows with real demand: things people actually needed, not things we guessed they might.</p>
-          <p>It&rsquo;s the same move that built Archie in the first place: we kept hand-building the same setups for clients until we turned them into a product. <a href="../../our-story/">That&rsquo;s our whole story</a>; commissions are the next chapter of it.</p>
+          <span class="section-label fade-up">Getting started</span>
+          <h2 id="start-heading" class="fade-up delay-1">On your own, or with us beside you.</h2>
+          <p>Either way it ends up on your computer, under your accounts, with you able to change it.</p>
+        </div>
+        <div class="calm-list calm-list--ruled fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">On your own</span>
+            <p>Install Archie, sign in, and it walks you through the first agent. <a class="marketplace-text-link" href="../../how-it-works/">How It Works</a> has the five steps and <a class="marketplace-text-link" href="../../how-it-works/#what-you-need">what you need</a> before you start. Nothing to pay us beyond the plan.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">With us beside you</span>
+            <p>An hour together, connecting an inbox, a calendar and a chat app, and you leave able to run and change it yourself. That is <a class="marketplace-text-link" href="../../guided-setup/">guided setup</a>, $250 an hour, and it starts with a free call.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -260,18 +502,16 @@
     <!-- ==============================
          CTA
          ============================== -->
-    <section class="section section-alt" aria-label="Call to action">
+    <section class="section" aria-label="Join the waitlist">
       <div class="hm-wrap hm-head hm-cta">
-        <h2 class="fade-up">What&rsquo;s the thing Archie can&rsquo;t do yet?</h2>
-        <div class="hm-actions fade-up">
-          <a href="../../contact/" class="btn btn-primary">Tell us what you need</a>
-          <a href="../browse/" class="btn btn-secondary">Browse the Marketplace</a>
-        </div>
-        <p class="hm-micro fade-up">Tell us. We&rsquo;ll scope it, quote it, and build it, and the edge moves for everyone.</p>
+        <h2 class="fade-up">Tell us what you would hand over first.</h2>
+        <a href="../../questionnaire/" class="btn btn-primary btn-lg fade-up">Get My Agent Started</a>
+        <p class="hm-micro fade-up">Archie is in testing. The waitlist hears the day it opens. <a href="../#status">See where it stands&nbsp;&rarr;</a></p>
       </div>
     </section>
 
   </main>
+
   <!-- ==============================
        Footer
        ============================== -->

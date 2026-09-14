@@ -131,7 +131,7 @@ has no email-send tool; drafts arrive as chat cards with Send/Edit/Dismiss butto
 `gmail_send_reply` has exactly one caller: the "send" button handler (`email/replies.rs:507`,
 `google.rs:279`; callback plumbing `telegram.rs:917-925`). The `gmail.compose` scope is
 requested only when the user opts into send at connect time (`commands.rs:3054-3059`).
-Site copy on business/, faq/, how-it-works/, privacy-policy/, questionnaire/,
+Site copy on archie/business/, faq/, how-it-works/, privacy-policy/, questionnaire/,
 terms-of-service/, and trust/ that describes these flows in the present tense — a ⛔ under the
 07-15 rules — is therefore **true and stays**. The homepage approval card, removed earlier on
 07-20 while this file was stale, has been restored in the approved wording below.
@@ -1079,7 +1079,7 @@ Three consequences, all live:
    ledger's device and IP stamps, and the three unsealed fields on a phone message. That second
    one was already a required clause in the phone-access section and had never reached the
    holdings list, which is how a required clause dies.
-2. **Every summary elsewhere links here.** `index.html`, `business/` and `trust/it-review/`
+2. **Every summary elsewhere links here.** `index.html`, `archie/business/` and `trust/it-review/`
    already did; `archie/`, `archie/install/` and `privacy-policy/` now do. The privacy policy's
    "three things always, two more where they apply" claimed completeness for the whole of our
    custody while scoped to what the *app* sends, so it now says which half it is describing, and
@@ -1090,7 +1090,7 @@ Three consequences, all live:
 
 ✅ **Resolved 2026-07-15.** The old falsehood ("the only thing our servers know is whether
 your subscription is active") has been removed everywhere and replaced with the list
-wording above, live on the homepage, `archie/`, `archie/install/`, `faq/`, `business/`,
+wording above, live on the homepage, `archie/`, `archie/install/`, `faq/`, `archie/business/`,
 `privacy-policy/`, and `trust/` (cited by page rather than line since 2026-08-21: the pages
 were rebuilt and every line number had rotted). **Do not let the shorter,
 false form return**: "email + plan status" is the floor; never fewer.
@@ -1137,7 +1137,7 @@ switch.** Two things, found while adding the telemetry opt-out.
   Now on `trust/index.html` (a paragraph in the opening section and a row of its own in the
   table), `privacy-policy/index.html` (a paragraph under Your AI provider, cross-linked from
   What stays on your computer), `terms-of-service/index.html` (a Free Credits section, since
-  it is also a commercial term), `faq/index.html` and `business/index.html`.
+  it is also a commercial term), `faq/index.html` and `archie/business/index.html`.
 - **Telemetry can be switched off**, and the two rows in the table say so. See the claim above.
 
 ✅ **Amended 2026-08-07 (second pass): how a free trial is given out, and the second kind of
@@ -1472,7 +1472,7 @@ anything more specific until the UI exists.
 
 *[Amended 2026-08-20: that wording is still true but is no longer what the site says, and should
 not be reintroduced. "People you've approved" is a plural the personal editions can no longer
-reach, so it advertises a capability that is not on sale; it was replaced on `business/index.html`
+reach, so it advertises a capability that is not on sale; it was replaced on `archie/business/index.html`
 and `faq/index.html` with the one-person wording above. Restore the plural only alongside the
 business edition.]*
 

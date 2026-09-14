@@ -8,21 +8,10 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-<title>Archie: AI Agents on Your Own Computer | Otian AI</title>
-  <meta name="description" content="Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now." />
+<title>Guided Setup | Otian AI</title>
+  <meta name="description" content="An hour with us and your first Archie agent is running: inbox, calendar and a chat app connected on your own computer, and you able to change it yourself. $250 an hour." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
-  <!-- This page is the Application home page on the Google OAuth consent screen, where the app
-       name is "Archie". The branding check compares that name against the one this page declares,
-       so every name here has to be Archie rather than Otian AI (the publisher, which the title
-       still carries after the colon). Root index.html declares Otian AI in these same three tags
-       for the same reason: it is the home page of the company, this is the home page of the app. -->
-  <meta name="application-name" content="Archie" />
-  <meta property="og:site_name" content="Archie" />
-  <meta property="og:title" content="Archie: Build Personal AI Agents on Your Own Computer | Otian AI" />
-  <meta property="og:description" content="Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now." />
-  <meta property="og:url" content="https://otianai.com/archie/" />
-  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -47,29 +36,6 @@
     })();
   </script>
   <link rel="stylesheet" href="../css/styles.css?v=20260914-1" />
-  <style>
-    /* Page-scoped: the #status block, the one place on the site where Archie's
-       availability and platform facts live. Other pages link here, never restate. */
-    .archie-status {
-      display: inline-flex;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px 20px;
-      margin-top: 28px;
-      padding: 14px 22px;
-      background: var(--accent-subtle);
-      border: 1px solid rgba(224, 138, 91, 0.45);
-      border-radius: var(--radius);
-      scroll-margin-top: 96px;
-    }
-    .archie-status p {
-      margin: 0;
-      font-size: var(--fs-md);
-      color: var(--text-primary);
-    }
-    .archie-status p strong { font-weight: 600; }
-  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -201,273 +167,210 @@
 
     <!-- ==============================
          Page Hero
+         The heading here used to be "What it's like to have your own agent", which is the
+         product's promise and not this page's. It went to archie/personal/ with the rest of
+         the day-to-day material on 2026-09-14, and the "Quietly ..." line went with it, so
+         the animation lives in one place rather than two. What replaced it names the hour
+         somebody is actually buying.
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <!-- The wordmark, and it has to be the wordmark: the heading under it reads "Meet
-             Archie", and Archie is the app. Ember stood here briefly and taught the wrong name to
-             everybody who saw it, because a character directly above "Meet Archie" IS the thing
-             being introduced. Ember is introduced further down, as himself. -->
-        <img src="../assets/archie.svg" width="1024" height="1024" alt="Archie" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
-        <h1 class="fade-up delay-1">Meet Archie</h1>
-        <p>Build personal AI agents that run on your own computer, agents you shape, name, and truly own. No terminals, no code, no middleman.</p>
-        <div class="archie-status fade-up delay-3" id="status">
-          <p><strong>Archie is in testing</strong>, Mac and Windows both, and not for sale yet. The waitlist hears the moment that changes.</p>
-          <a href="../questionnaire/" class="btn btn-primary btn-sm">Join the waitlist</a>
-        </div>
+        <span class="section-label fade-up">Guided setup</span>
+        <h1 class="fade-up delay-1">We set your first agent up with you.</h1>
+        <p>An hour on a call, on your own computer: the inbox, the calendar and a chat app connected, one agent running, and you able to change it after we hang up.</p>
       </div>
     </section>
 
-    <!-- ==============================
-         The Idea
-         ============================== -->
-    <section class="section" aria-labelledby="idea-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">The idea</span>
-          <h2 id="idea-heading" class="fade-up">Your own agent, on your own computer.</h2>
-          <p>Archie is a desktop app that runs your own AI agent. You talk to it the way you&rsquo;d text a friend, and it gets things done: your calendar, your inbox, research, and the busywork you&rsquo;d rather not.</p>
-          <p>What makes it different is where it lives: on your computer, not on ours. It talks to the AI company directly, on your own account. You own the whole thing.</p>
-        </div>
-          <!-- How Archie works, in three moments on one line, and one thing passing through them.
-               Redrawn 2026-09-11 from a three-card figure that carried 128 words of labels; the
-               sentences it held are the caption now. The style block serves both variants. -->
-          <figure class="explain-figure fade-up delay-2">
-            <svg class="explain-svg--desktop" viewBox="0 0 560 190" role="img" aria-labelledby="ar-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
-              <title id="ar-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
-              <style>
-                .ar-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
-                .ar-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
-                .ar-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round}
-                .ar-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
-                .ar-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-                .ar-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
-                .ar-tick{fill:none;stroke:var(--c-green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-                .ar-you{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
-                .ar-power{fill:var(--c-green)}
-                .ar-dot{display:none;fill:var(--accent)}
-                @supports (offset-path:path("M0,0 L1,1")){
-                  .ar-dot{display:block;offset-distance:33%}
-                  @media (prefers-reduced-motion:no-preference){
-                    .ar-dot{animation:arWalk 8s linear infinite}
-                    .ar-m{animation-name:arWalkM}
-                    /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
-                    @keyframes arWalk{0%{offset-distance:0%;opacity:.28}6%{opacity:.28}8.4%{opacity:1}19.6%{opacity:1}22%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}46.7%{opacity:.28}48.6%{opacity:1}57.4%{opacity:1}59.3%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%;opacity:.28}79.9%{opacity:1}100%{offset-distance:100%;opacity:1}}
-                    @keyframes arWalkM{0%{offset-distance:0%;opacity:.28}6.5%{opacity:.28}10.3%{opacity:1}16.8%{opacity:1}20.7%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}49.5%{opacity:.28}52.5%{opacity:1}55.1%{opacity:1}58.1%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%}87.3%{opacity:.28}90.4%{opacity:1}100%{offset-distance:100%;opacity:1}}
-                  }
-                }
-              </style>
-              <path class="ar-line" d="M60,80 L480,80"/>
-              <rect class="ar-us" x="24" y="54" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="80" r="2.5"/>
-              <rect class="ar-box" x="164" y="48" width="72" height="64" rx="10"/><path class="ar-ink" d="M180,66h40M180,78h40M180,90h22"/><path class="ar-tick" d="M212,88l6,6l12,-14"/>
-              <rect class="ar-box" x="304" y="44" width="42" height="72" rx="8"/><rect class="ar-us" x="312" y="68" width="26" height="14" rx="6"/>
-              <g class="ar-you"><circle cx="480" cy="66" r="9"/><path d="M462,96 a18,18 0 0 1 36,0"/></g>
-              <text class="ar-name" x="60" y="134">Plug it in</text><text class="ar-sub" x="60" y="150">a computer that stays on</text>
-              <text class="ar-name" x="200" y="134">Sign it in</text><text class="ar-sub" x="200" y="150">your mail and calendar</text>
-              <text class="ar-name" x="325" y="134">Message it</text><text class="ar-sub" x="325" y="150">from anywhere</text>
-              <text class="ar-name" x="480" y="134">You</text><text class="ar-sub" x="480" y="150">the draft, ready to send</text>
-              <circle class="ar-dot" r="6" style="offset-path:path('M60,80 L200,80 L325,80 L480,80')"/>
-            </svg>
-            <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="arm-t" xmlns="http://www.w3.org/2000/svg">
-              <title id="arm-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
-              <path class="ar-line" d="M60,40 L60,300"/>
-              <rect class="ar-us" x="24" y="14" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="40" r="2.5"/>
-              <rect class="ar-box" x="24" y="98" width="72" height="64" rx="10"/><path class="ar-ink" d="M40,116h40M40,128h40M40,140h22"/><path class="ar-tick" d="M72,138l6,6l12,-14"/>
-              <rect class="ar-box" x="39" y="184" width="42" height="72" rx="8"/><rect class="ar-us" x="47" y="208" width="26" height="14" rx="6"/>
-              <g class="ar-you"><circle cx="60" cy="286" r="9"/><path d="M42,316 a18,18 0 0 1 36,0"/></g>
-              <text class="ar-name" x="120" y="38" style="text-anchor:start">Plug it in</text><text class="ar-sub" x="120" y="54" style="text-anchor:start">a computer that stays on</text>
-              <text class="ar-name" x="120" y="128" style="text-anchor:start">Sign it in</text><text class="ar-sub" x="120" y="144" style="text-anchor:start">your mail and calendar</text>
-              <text class="ar-name" x="120" y="218" style="text-anchor:start">Message it</text><text class="ar-sub" x="120" y="234" style="text-anchor:start">from anywhere</text>
-              <text class="ar-name" x="120" y="298" style="text-anchor:start">You</text><text class="ar-sub" x="120" y="314" style="text-anchor:start">the draft, ready to send</text>
-              <circle class="ar-dot ar-m" r="6" style="offset-path:path('M60,40 L60,130 L60,220 L60,300')"/>
-            </svg>
-            <figcaption>Plug it in: a computer you already have, left on and connected. Sign it in: your mail and calendar, on that computer, and Otian never gets a copy. Message it: from anywhere, it writes the draft and you press send.</figcaption>
-          </figure>
-      </div>
-    </section>
-
-    <!-- ==============================
-         What You Can Build
-         ============================== -->
-    <section class="section section-alt" aria-labelledby="build-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Building it</span>
-          <h2 id="build-heading" class="fade-up">Shape it piece by piece.</h2>
-          <p>Archie is modular. Your agent arrives working, asks what your days look like, and fits its own pieces from your answers. Every one of them is yours to swap, remove, or add to.</p>
-        </div>
-
-        <!-- Unboxed. These five are the parts list, one label and one sentence each, which is
-             exactly what .calm-list is for: bordered cards made the parts read as five products
-             rather than as the pieces of one. The glyphs are the ones the app itself uses in its
-             sidebar, so the part you read about here is the part you click there, and the three
-             that are also add-on kinds carry their kind colour (skill ember, personality plum,
-             routine teal). Knowledge Base and Connections stay blue: they are not kinds. -->
-        <div class="calm-list calm-list--3 calm-list--ruled mt-48 fade-up delay-1">
-          <div class="calm-list-item">
-            <span class="calm-list-label" data-kind="personality">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" /><path d="M9 9.5v.5" /><path d="M15 9.5v.5" /></svg>
-              Personality
-            </span>
-            <p>How your agent talks to you. Warm and chatty or brief and to the point.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label" data-kind="skill">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2" /><rect x="13.5" y="3.5" width="7" height="7" rx="2" /><rect x="3.5" y="13.5" width="7" height="7" rx="2" /><rect x="13.5" y="13.5" width="7" height="7" rx="2" /></svg>
-              Skills
-            </span>
-            <p>The things it can do. Add new abilities in a click from the built-in marketplace: calendar management, inbox triage, research on the live web, and more.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label" data-kind="routine">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
-              Routines
-            </span>
-            <p>Things it does on its own, on a schedule. A briefing every morning, a report every Friday, without being asked.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5v13" /><path d="M3.5 18.5a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1H8a4 4 0 0 1 4 4 4 4 0 0 1 4-4h4.5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H15a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z" /></svg>
-              Knowledge Base
-            </span>
-            <p>Give it your files (notes, PDFs, documents) so it answers from what <em>you</em> know, not just what it was trained on.</p>
-          </div>
-
-          <div class="calm-list-item">
-            <span class="calm-list-label">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v5" /><path d="M15 3v5" /><path d="M6 8h12v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6Z" /><path d="M12 19v2.5" /></svg>
-              Connections
-            </span>
-            <p>Link the tools you already use, like Gmail, Outlook, iCloud and your calendar, only ever when you say so.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Yours Alone (privacy)
-         ============================== -->
-    <section class="section" aria-labelledby="security-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Our servers</span>
-          <h2 id="security-heading" class="fade-up">What we can see.</h2>
-          <p>Its keys sit in your computer&rsquo;s built-in password store, where we have no way to read them, and once your own key is connected your conversations never pass through us. The one exception, the starter credits, and everything else that leaves your computer is listed on the <a href="../trust/">trust page</a>.</p>
-        </div>
-
-        <div class="mt-40 two-col fade-up delay-1">
-          <div class="two-col-card">
-            <h3>What lives on your computer</h3>
-            <ul class="two-col-card-list">
-              <li>Your agent and everything it knows</li>
-              <li>Your files, notes, and its memory</li>
-              <li>Your connected accounts and API keys</li>
-              <li>Every message you exchange</li>
-            </ul>
-          </div>
-          <div class="two-col-card">
-            <h3>What Otian can see</h3>
-            <ul class="two-col-card-list">
-              <li>Your email address, so you can sign in</li>
-              <li>Whether you have a current plan</li>
-              <li>Which version of Archie you are running</li>
-              <li>The messages to your phone, sealed, if you turn phone access on</li>
-              <li>Some smaller account records: crash reports if you leave them on, what the free credits spent, a second factor, an invoice. <a href="../trust/#what-we-hold">The whole list is on our Trust page</a></li>
-              <li>Never your chats, files, or accounts, so there is no central copy to breach</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-40 fade-up delay-1">
-          <h3>An app for your phone, sealed</h3>
-          <p>The chat app you connect is the one part of this that crosses somebody else&rsquo;s servers, so we are building Archie Mobile. Your computer seals every message before it leaves, under a key it hands your phone by showing a code to scan, and that key never passes through us. It does not run your agent: that stays on your computer. Not finished, in neither app store, and no date invented. <a href="mobile/">What it will and will not do</a>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Built for People
-         ============================== -->
-    <section class="section section-alt section--tight" aria-labelledby="easy-heading">
+    <!-- The reciprocal of the fork that opens consulting/. That page sorted the reader and this
+         one did not, so a person who arrived here with a wired-together setup had three links to
+         Consulting in the chrome and nothing in the copy telling them which door was theirs. It
+         sorts on the same fact (how many places does this live in), carries the rate for the same
+         reason, and is deliberately two rows rather than three: on this page the reader is already
+         standing in the right room, so it only has to catch the ones who are not. -->
+    <section class="section section--tight" aria-labelledby="fork-heading">
       <div class="container">
         <div class="section-header section-header--quiet">
-          <span class="section-label fade-up">No code required</span>
-          <h2 id="easy-heading" class="fade-up">Built for people, not programmers.</h2>
-          <p>Running your own AI agent used to mean terminals and config files. Archie tucks all of that behind a friendly app. If you can send a text, you can run it.</p>
+          <h2 id="fork-heading" class="fade-up">Which one is this?</h2>
+        </div>
+        <div class="calm-list calm-list--ruled fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">A walkthrough &middot; you are here</span>
+            <p>Connecting an inbox, a calendar and a chat app on one computer is an hour with us, and you leave able to run and change it yourself. We set sleep to Never with you, because your agent only works while this computer is awake.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Design and build work</span>
+            <p>More than one calendar, tools you have already wired together, or several pieces that have to keep working without you in the middle. That is <a class="marketplace-text-link" href="../consulting/">Consulting</a>: we scope it, quote the whole thing, then build it. Both are $250 an hour, so the question is not which is cheaper, but which one your setup is.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ==============================
-         Ember
+         Guided sessions. First band on the page: this is the guided-setup page, so the
+         three steps and what they cost are what the reader came for, not the last thing
+         they scroll to.
          ============================== -->
-    <!-- Ember's own section, and he needed one. He first went on this page standing over the
-         "Meet Archie" heading, which taught everybody who saw it that the character IS the app.
-         Archie is the app; Ember is the face an agent wears. Said here, once, in the one place
-         he is the subject rather than the decoration. -->
-    <section class="section section--tight" aria-labelledby="ember-heading">
+    <section class="section" aria-labelledby="guided-heading">
       <div class="container">
-        <div class="section-header section-header--quiet section-header--center">
-          <span class="section-label fade-up">Say hello</span>
-          <h2 id="ember-heading" class="fade-up">This is Ember.</h2>
-          <span data-ember="terracotta.peak.pill.none" class="ember-intro fade-up"></span>
-          <p>Ember is the face your agents wear. Every agent you make gets its own: a color, a hat,
-            a pair of eyes, dealt from the agent itself, so two agents on one computer never look
-            like twins. Change any of it whenever you like, or hand over a photo of your own
-            instead. Go on, poke him.</p>
+        <div class="section-header">
+          <span class="section-label fade-up">Guided sessions</span>
+          <h2 id="guided-heading" class="fade-up">Rather do it together?</h2>
+          <p>Most tools hand you a download and wish you luck. We set your first agent up with you.</p>
+        </div>
+
+        <!-- The chips under each step are objection answers, not descriptions. A step title is
+             generic on its own ("We Set It Up With You" could mean anything and could cost
+             anything); three words underneath saying how long, what it costs, and what you are
+             not committing to is what makes the row read as low-risk instead of vague. Each one
+             is a fact stated elsewhere on this page, put where the hesitation actually happens. -->
+        <div class="steps-row">
+          <div class="step-item fade-up delay-1">
+            <div class="step-number" aria-hidden="true">1</div>
+            <h3>Tell us what you need</h3>
+            <p>Fill out the short intake form. The discovery call is free.</p>
+            <ul class="step-chips">
+              <li class="step-chip">About 5 minutes</li>
+              <li class="step-chip">Nothing to install yet</li>
+              <li class="step-chip">Free, no card</li>
+            </ul>
+          </div>
+          <div class="step-item fade-up delay-2">
+            <div class="step-number" aria-hidden="true">2</div>
+            <h3>We set it up with you</h3>
+            <p>Over Zoom, on your own computer. We teach you every step, so you can run it (and change it) yourself.</p>
+            <ul class="step-chips">
+              <li class="step-chip">1 hour a session</li>
+              <li class="step-chip">$250, told up front</li>
+              <li class="step-chip">On your computer, not ours</li>
+            </ul>
+          </div>
+          <div class="step-item fade-up delay-3">
+            <div class="step-number" aria-hidden="true">3</div>
+            <h3>Your agent gets to work</h3>
+            <p>Delegate tasks and get your time back. Archie writes the draft; sending it stays with you.</p>
+            <ul class="step-chips">
+              <li class="step-chip">Change it yourself</li>
+              <li class="step-chip">No session needed to keep going</li>
+              <li class="step-chip">Stop your plan any time</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="text-center mt-48">
+          <a href="../how-it-works/" class="btn btn-secondary fade-up delay-4">See the Full Process &rarr;</a>
         </div>
       </div>
     </section>
 
+    <!-- ==============================
+         What you are setting up
+         What used to stand here was this page's own account of what an agent does day to day:
+         a funnel figure and six use cases, about 300 words. It moved to archie/personal/ on
+         2026-09-14, because it described the product and this page sells the session. What is
+         left is the pointer, which is all a reader standing on a services page needs.
+         ============================== -->
+    <section class="section" aria-labelledby="archie-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">What you are setting up</span>
+          <h2 id="archie-heading" class="fade-up">Archie is the thing we set up.</h2>
+          <p>Our desktop app for AI agents that run on your own computer, through your own accounts. If it can&rsquo;t do something yet, tell us, and we&rsquo;ll build the add-on.</p>
+        </div>
+
+        <div class="text-center">
+          <a href="../archie/personal/" class="btn btn-primary fade-up delay-3">What an agent handles &rarr;</a>
+          <p class="pricing-cta-note">Setting one up for a team instead? <a href="../archie/business/">Archie for Business&nbsp;&rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Guided Door
+         ============================== -->
     <!-- ==============================
          Pricing
          ============================== -->
-    <section class="section section-alt section--tight" aria-labelledby="next-heading">
+    <section class="section section-alt" id="pricing" aria-labelledby="pricing-heading">
       <div class="container">
-        <div class="section-header section-header--quiet">
-          <span class="section-label fade-up">Before you start</span>
-          <h2 id="next-heading" class="fade-up">Two things worth a minute.</h2>
-          <p>The recordings show what it actually looks like. The pricing page lists every cost up front.</p>
+        <div class="section-header">
+          <span class="section-label fade-up">Pricing</span>
+          <h2 id="pricing-heading" class="fade-up">One rate, told up front.</h2>
         </div>
 
-        <div class="mt-48 price-grid fade-up delay-1">
-          <article class="price-card">
-            <span class="price-card-label">See It Work</span>
-            <div class="price-card-amount price-card-amount--words">Two<br />recordings</div>
-            <p>Building an agent from scratch in a few minutes, then a morning briefing arriving on a phone, unprompted, the next day.</p>
-            <a href="../how-it-works/" class="price-card-link">Watch it &rarr;</a>
-          </article>
-          <article class="price-card">
-            <span class="price-card-label">What It Costs</span>
-            <div class="price-card-amount">$30<span>a month</span></div>
-            <p>Or $299 a year, which saves $61. Plus your own pay-as-you-go AI account. Every add-on is included.</p>
-            <a href="pricing/" class="price-card-link">See every cost &rarr;</a>
-          </article>
+        <div class="pricing-why fade-up delay-1">
+          <p>
+            $250 a session. Each session runs an hour. The rate never goes up because your setup is complicated, but a bigger setup can take more than one session. We&rsquo;ll tell you how many on the free call, before you book anything.
+          </p>
+          <p>
+            Archie itself is $30 a month or $299 a year when it ships, a separate cost from your sessions.
+          </p>
+          <p>
+            The AI itself bills you directly, never through us. While we build together that&rsquo;s a standard subscription like Claude Pro, around $20 a month. After that it&rsquo;s your own pay-as-you-go account. <a href="../archie/pricing/#ai-cost">What that runs to</a> is on the pricing page.
+          </p>
         </div>
 
-        <p class="" style="text-align: center; max-width: 560px; margin: 0 auto; color: var(--text-secondary);">And if Archie can&rsquo;t do something yet, tell us: <a href="../skills-marketplace/commission/">we&rsquo;ll build the add-on</a>.</p>
+        <div class="text-center mt-48">
+          <a href="../questionnaire/" class="btn btn-primary fade-up delay-2">Book the Free Call &rarr;</a>
+        </div>
       </div>
     </section>
 
     <!-- ==============================
-         Closing CTA
+         What the free call actually produces.
+
+         "Free consultation" is a phrase most people have been burned by, so the offer is worth
+         nothing until it says what arrives. Listing the five things and then stating the total
+         is what separates this from a sales call with a nicer name. The last item is the one
+         that does the work: a free call that can end in "not this, and here is why" is a
+         different object from one that cannot.
+
+         The volume line is a real constraint, not scarcity theatre. Two people cannot run
+         unlimited hour-long calls, and a promised turnaround we miss costs more than the call
+         earns. If that stops being true, change the sentence rather than quietly dropping it.
          ============================== -->
-    <section class="section" aria-labelledby="coming-heading">
+    <section class="section section--tight" aria-labelledby="deliverables-heading">
       <div class="container">
-        <div class="archie-lockup fade-up">
-          <img src="../assets/archie-text.svg" width="2300" height="900" alt="Archie" />
+        <div class="section-header section-header--quiet">
+          <span class="section-label fade-up">The free call</span>
+          <h2 id="deliverables-heading" class="fade-up">What you walk away with.</h2>
+          <p>Whether or not you book a session afterwards. It is yours either way.</p>
         </div>
+
+        <div class="calm-list calm-list--ruled fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">What to hand over</span>
+            <p>The parts of your week an agent could take on, named specifically, rather than &ldquo;email and calendar&rdquo;.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Which add-ons do it</span>
+            <p>By name, with what each one needs connected before it can work.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">What it would cost to run</span>
+            <p>Worked from what you actually do, on the same figures as <a href="../archie/pricing/#ai-cost">the pricing page</a>. The AI bill is the part people guess wrong.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">What not to automate</span>
+            <p>The parts we would leave alone, and why. There are always some.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Whether it&rsquo;s the wrong tool</span>
+            <p>Said plainly, on the call, if that is the answer. Sometimes it is, and you have lost an hour instead of a year.</p>
+          </div>
+        </div>
+
+        <p class="price-note price-note--flush"><strong>Cost of all 5: nothing.</strong> No follow-up sequence either: we take the call, send you the plan, and leave it with you. We are two people, so this is a handful of calls a week rather than a booking form that never fills up.</p>
       </div>
+    </section>
+
+    <!-- ==============================
+         Free Call CTA
+         ============================== -->
+    <section class="section section-alt" aria-label="Start with the free call">
       <div class="hm-wrap hm-head hm-cta">
-        <h2 id="coming-heading" class="fade-up delay-1">Don&rsquo;t want to wait?</h2>
-        <div class="hm-actions fade-up delay-1">
-          <a href="../questionnaire/" class="btn btn-primary">Get My Agent Started</a>
-          <a href="../skills-marketplace/browse/" class="btn btn-secondary">Browse the Marketplace</a>
-        </div>
-        <p class="hm-micro fade-up delay-1">Archie is in testing. The waitlist hears the day it opens. <a href="#status">See where it stands&nbsp;&rarr;</a> In the meantime, our guided service can set you up with the same kind of agent today.</p>
+        <h2 class="fade-up">Start with the free call.</h2>
+        <a href="../questionnaire/" class="btn btn-primary btn-lg fade-up">Start My Free Call</a>
+        <p class="hm-micro fade-up">Tell us what you&rsquo;d love help with. No cost, no obligation. The form takes about 5 minutes, and we typically respond within 1 business day.</p>
       </div>
     </section>
 
@@ -567,8 +470,6 @@
   </footer>
 
   <script src="../js/nav.js"></script>
-  <script src="../js/ember.js" defer></script>
   <script type="module" src="../js/account-nav.js"></script>
-  <script src="../js/demo-player.js"></script>
 </body>
 </html>

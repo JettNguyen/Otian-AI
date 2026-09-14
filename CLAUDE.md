@@ -1,8 +1,11 @@
 # Otian AI: marketing site
 
 Static site. Hand-written HTML per page, one shared `css/styles.css`, one shared `js/nav.js`.
-There is no build step and no templating: the nav is duplicated in every page (two copies:
-desktop nav and mobile drawer), so nav changes must be scripted across all pages.
+There is no build step and no templating: the nav is duplicated in every page **three** times
+(desktop dropdown, mobile drawer flyout, and the footer column), so a nav change is 3 edit sites
+per page across 76 pages and must be scripted. Verify afterwards by counting occurrences per
+page, not by eye: a regex that matches the desktop menu and misses the footer leaves a link
+live in the place readers actually reach for.
 
 ## Trust claims: read TRUST.md before writing copy
 
@@ -152,6 +155,28 @@ reason.**
     posts carried 183 characters and named none of them. It renders through `js/blog-card.js`,
     which `js/blog.js` imports too.
 
+- **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
+  `archie/business/` are the same app with different ceilings (10 agents and one person per
+  agent, against 50 agents and no seat count), so neither is the default and neither is a
+  service. Business sat under the Services nav until 2026-09-14, which filed an edition of the
+  product next to consulting and left a first-time reader unable to tell who the site was for.
+  Both pages now open with the same two-row "Which one is this?" fork pointing at each other:
+  same rows, same order, only the "you are here" moves. **Keep them mirrored.** Adding a figure
+  to one means adding it to the other or to neither. The old URLs are redirect stubs and stay
+  that way: `business/` and `individuals/`.
+- **The audience is both individuals and businesses, and the homepage has to say so above the
+  fold.** Until 2026-09-14 "business", "team" and "individual" appeared in the nav and footer
+  and in no sentence of body copy; the only in-body signal was a price tier 1,400 words down.
+  The `.hm-hero-fork` under the hero CTA is what fixes that, and it is two links rather than a
+  sentence because it has to answer "is this for me" and route at the same time. Anything that
+  splits by audience elsewhere (the `.card-aud` chips and the `.aud-pick` review grids on
+  `testimonials/`) uses the same two phrases: **"one person"** and **"a team"**. Two registers,
+  and they do not mix. *Personal* and *Business* are the **editions' names**, so they are what
+  the nav labels, the page titles and the prices say ("For Personal", "Archie for Business").
+  *One person* and *a team* describe the **reader**, so they are what anything sorting readers
+  says: the hero fork, the chips, the review tabs, the "Which one is this?" rows. Never
+  "individuals" as a reader-facing label (it was a URL that read like an audience and pointed at
+  a setup service for months), and never "enterprise", which we do not sell.
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is
   deliberate:** `js/catalog.js` and `js/marketplace.js` map the `subagents` collection to

@@ -132,7 +132,7 @@ reason.**
   which looks exactly like the site is broken rather than cached, and a hard refresh does not
   fix it because the cache is at the CDN edge, not in the browser. Changing the query string
   is the only thing that reliably busts it. One scripted find-and-replace across every page.
-- **Three parts of this site are generated, and each has a `--check` mode. Run them before you
+- **Four parts of this site are generated, and each has a `--check` mode. Run them before you
   commit.** There is still no build step: these write into the repo, the result is committed,
   and the check is what stops the committed copy drifting from what it was made from.
   - `python3 scripts/gen-discovery.py` writes `sitemap.xml`, `robots.txt` and `llms.txt` from
@@ -150,6 +150,17 @@ reason.**
     through `js/addon-card.js`, the same module the browser runs**, so there is one card
     builder and not two. Run it after the Archie catalog moves, in the push order FACTS.md
     already sets out for the count: Archie first, then here.
+  - `python3 scripts/gen-phone-mocks.py` draws the three Archie Mobile screens into
+    `archie/mobile/`, as the desktop trio and again as the under-640px gallery. Six drawings
+    of three screens were hand-written SVG until 2026-09-14, which is how the two halves
+    drift: a radius fixed in the gallery and missed in the trio reads as a bug nobody can
+    find. **These are drawings of the app, not screenshots of it.** Everything on them has to
+    be something the app actually has, doing what the app actually does; the styling was
+    brought to the shipping build's from screenshots on 2026-09-14, and the content stays the
+    site's own, because the real screens carry a real person's mail. The chat screen lays its
+    thread out by accumulation against a composer drawn at a fixed height, so the generator
+    asserts the gap: adding a bubble without tightening one fails the run rather than printing
+    a timestamp over the input, which is what happened the first time.
   - `node scripts/gen-blog.mjs` writes the published posts into `blog/` from
     `assets/articles.json`, which had the same bug on a smaller scale: the hub page for fifteen
     posts carried 183 characters and named none of them. It renders through `js/blog-card.js`,

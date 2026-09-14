@@ -13459,8 +13459,9 @@ html[data-theme="dark"] .booking-container iframe {
 @keyframes hm-type {
   0%              { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
   0.011%          { max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
-  0.33%, 1.598%   { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
-  1.599%, 100%    { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
+  0.33%, 1.45%    { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  1.56%           { opacity: 0; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  1.57%, 100%     { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
 }
 @keyframes hm-type-dot {
   0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
@@ -14776,7 +14777,8 @@ html[data-theme="dark"] .booking-container iframe {
 @keyframes hm-type-held {
   0%         { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
   1.1%       { max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
-  21%, 99.9% { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  21%, 91%   { opacity: 1; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
+  98%        { opacity: 0; max-height: 40px; margin-top: 6px; padding-top: 14px; padding-bottom: 14px; }
   100%       { opacity: 0; max-height: 0; margin-top: 0; padding-top: 0; padding-bottom: 0; }
 }
 @keyframes hm-typed-clear-held {

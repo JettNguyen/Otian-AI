@@ -15,6 +15,23 @@ gets read on; it needed no backend change, because `/admin/summary` already pass
 `config/warroom` document through. What is left of pass 3 is the Feedback panel and, if it still
 sounds good, the Telegram feed.
 
+## The mission this page serves
+
+Added 2026-09-14, Jack and Jett, verbatim:
+
+> If we have to sell someone, we haven't built a good enough product.
+>
+> Jack & Jett's mission: every day, build Archie. Every iteration: less setup, less explaining,
+> more streamlined, more organized, more intuitive, faster to value. Always evolving, always
+> better.
+
+It sits at the top of this file because it is the standing test for everything below it, and
+because it is the one thing on the page that is not a number. The first line has teeth here in
+particular: this is a dashboard whose loudest tile counts paid accounts, and a page like that
+drifts toward asking how to move the number. The mission says where to look instead. When the
+bar is short, the question it licenses is which part of Archie still takes too long to explain,
+not which part of the funnel to push harder.
+
 ## Where it lives
 
 `/admin/` becomes a real page: the index the three existing admin tools already behave like

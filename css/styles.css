@@ -1518,6 +1518,12 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   transition: transform var(--transition);
 }
 
+/* Services is one page, not a menu, so in the drawer it is an <a> rather than a category
+   button (2026-09-14, when guided setup and consulting merged). The chevron points into a
+   flyout that does not exist for it, so it goes; everything else about the row is the same,
+   because it should still read as a peer of Archie and Add-ons rather than a stray link. */
+.nav-drawer-cat--link::after { content: none; }
+
 /* External flyout: pops out to the left of the drawer, attached to it */
 .nav-drawer-flyout {
   position: fixed;

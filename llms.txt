@@ -27,17 +27,15 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## The product
 
-- [Archie: AI Agents on Your Own Computer](https://otianai.com/archie/): Archie is Otian AI's desktop app for building personal AI agents that run on your own computer, shaped by you and owned by you. In testing now.
 - [Archie for Personal](https://otianai.com/archie/personal/): Archie for Personal: up to 10 AI agents on your own computer, handling the inbox, the calendar, the follow-ups and the research. $30 a month or $299 a year.
 - [Archie for Business](https://otianai.com/archie/business/): Inbox triage, scheduling, follow-ups, research, reports: Archie for Business runs up to 50 agents your team can share, on your own computer and AI account, so your team’s work never passes through us.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit.
 - [Archie Pricing](https://otianai.com/archie/pricing/): What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), every add-on included, and pay-as-you-go AI billed straight to your own account with...
-- [What to Run It On](https://otianai.com/equipment/): Which computer to run your AI agent on, answered for your situation: the one you already own, or the small desktop to buy if you don't. Plus the parts people expect to need and don't.
+- [Archie Mobile](https://otianai.com/archie/mobile/): Your agent reaches you through a chat app today, which means its messages cross that company’s servers. We are building an app where they do not: sealed on your computer, under a key we never receive. Not finished, and sourced.
 
 ## Services we offer
 
-- [Guided Setup](https://otianai.com/guided-setup/): An hour with us and your first Archie agent is running: inbox, calendar and a chat app connected on your own computer, and you able to change it yourself. $250 an hour.
-- [Consulting](https://otianai.com/consulting/): Design and build work for a setup that already exists: several computers, tools wired together by hand, pieces that only stay in step because you keep them there. Scoped in writing before you book, then built in phases at $250 an hour.
+- [Working With Us](https://otianai.com/services/): Two ways we work with you, both $250 an hour and both starting with a free call: an hour together to get your first Archie agent running, or scoped design and build work for a setup that already has too many moving parts.
 
 ## Add-ons
 
@@ -75,9 +73,8 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Learning
 
-- [Learn](https://otianai.com/learn/): Everything worth reading before you start: how an agent actually works, what you need to run one, the AI terms in plain English, the questions people ask, and the blog.
-- [FAQ](https://otianai.com/faq/): Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control.
 - [AI Explained](https://otianai.com/ai-explained/): Plain-English AI terms to help you understand agents, automation, and how modern AI tools work.
+- [FAQ](https://otianai.com/faq/): Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control.
 - [Blog](https://otianai.com/blog/): Practical AI articles, workflow playbooks, and user stories from the Otian AI community.
 - [Is My Agent Broken?](https://otianai.com/help/): Troubleshooting for Archie. What your agent does quietly on purpose, what is actually broken, and what to press for each one.
 

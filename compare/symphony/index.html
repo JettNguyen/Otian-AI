@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260914-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260914-3" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -46,13 +46,11 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/" role="menuitem">What Archie Is</a>
             <a href="../../archie/personal/" role="menuitem">For Personal</a>
             <a href="../../archie/business/" role="menuitem">For Business</a>
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../../archie/pricing/" role="menuitem">Pricing</a>
-            <a href="../../equipment/" role="menuitem">What to Run It On</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -64,13 +62,7 @@
             <a href="../../skills-marketplace/for-developers/" role="menuitem">Build One</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../../guided-setup/" role="menuitem">Guided Setup</a>
-            <a href="../../consulting/" role="menuitem">Consulting</a>
-          </div>
-        </div>
+        <a href="../../services/">Services</a>
         <div class="nav-more" id="navCompare">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompareMenu" type="button">Compare</button>
           <div class="nav-more-menu" id="navCompareMenu" role="menu" aria-label="Compare">
@@ -111,7 +103,7 @@
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <a class="nav-drawer-cat nav-drawer-cat--link" href="../../services/">Services</a>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompare" aria-expanded="false" aria-controls="navDrawerFlyout">Compare</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
     <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -123,23 +115,17 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/">What Archie Is</a>
       <a href="../../archie/personal/">For Personal</a>
       <a href="../../archie/business/">For Business</a>
       <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
       <a href="../../archie/pricing/">Pricing</a>
-      <a href="../../equipment/">What to Run It On</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
       <a href="../../skills-marketplace/browse/">Browse All</a>
       <a href="../../skills-marketplace/commission/">Have One Built</a>
       <a href="../../skills-marketplace/for-developers/">Build One</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../../guided-setup/">Guided Setup</a>
-      <a href="../../consulting/">Consulting</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
       <a href="../../compare/">All Comparisons</a>
@@ -192,7 +178,7 @@
         <span class="section-label fade-up">Compare</span>
         <h1 class="fade-up delay-1"><span class="cmp-vs"><span class="cmp-us">Archie</span> vs</span> Wix Symphony.</h1>
         <p class="hm-lede fade-up delay-1">This is the closest comparison on the site. Both give you a team of agents in one chat, both act while you are away, and both check with you before the things that matter. The difference is whose computer the work happens on, and who picks the AI company that answers you.</p>
-        <p class="hm-micro fade-up delay-2">Archie is in testing. The waitlist hears the day it opens. <a href="../../archie/#status">See where it stands&nbsp;&rarr;</a> Checked against the sources below on September 11, 2026.</p>
+        <p class="hm-micro fade-up delay-2">Archie is in testing. The waitlist hears the day it opens. <a href="../../archie/personal/#status">See where it stands&nbsp;&rarr;</a> Checked against the sources below on September 11, 2026.</p>
       </div>
     </section>
 
@@ -458,7 +444,7 @@
           <a href="../../trust/" class="btn btn-primary">Read the Custody Receipts&nbsp;&rarr;</a>
           <a href="../../questionnaire/" class="btn btn-secondary">Join the Waitlist</a>
         </div>
-        <p class="hm-micro fade-up">Every claim we make about ourselves points at the code behind it, and the Trust page tells you how to watch the traffic and catch us out. Archie is in testing. The waitlist hears the day it opens. <a href="../../archie/#status">See where it stands&nbsp;&rarr;</a> If you think this page is unfair to Symphony, tell us and we&rsquo;ll fix it.</p>
+        <p class="hm-micro fade-up">Every claim we make about ourselves points at the code behind it, and the Trust page tells you how to watch the traffic and catch us out. Archie is in testing. The waitlist hears the day it opens. <a href="../../archie/personal/#status">See where it stands&nbsp;&rarr;</a> If you think this page is unfair to Symphony, tell us and we&rsquo;ll fix it.</p>
       </div>
     </section>
 
@@ -480,13 +466,11 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/">What Archie Is</a>
             <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/business/">For Business</a>
             <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../archie/pricing/">Pricing</a>
-            <a href="../../equipment/">What to Run It On</a>
           </nav>
         </div>
         <div>
@@ -501,8 +485,9 @@
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="../../guided-setup/">Guided Setup</a>
-            <a href="../../consulting/">Consulting</a>
+            <a href="../../services/">Working With Us</a>
+            <a href="../../services/#guided">Guided Setup</a>
+            <a href="../../services/#consulting">Consulting</a>
           </nav>
         </div>
         <div>
@@ -532,7 +517,6 @@
           <div class="footer-extra-group">
             <h4 class="footer-col-title">Learn</h4>
             <nav class="footer-nav-links" aria-label="Learn">
-              <a href="../../learn/">Start Here</a>
               <a href="../../ai-explained/">AI Explained</a>
               <a href="../../blog/">Blog</a>
               <a href="../../faq/">FAQ</a>

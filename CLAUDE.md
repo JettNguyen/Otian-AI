@@ -3,7 +3,7 @@
 Static site. Hand-written HTML per page, one shared `css/styles.css`, one shared `js/nav.js`.
 There is no build step and no templating: the nav is duplicated in every page **three** times
 (desktop dropdown, mobile drawer flyout, and the footer column), so a nav change is 3 edit sites
-per page across 76 pages and must be scripted. Verify afterwards by counting occurrences per
+per page across ~72 pages and must be scripted. Verify afterwards by counting occurrences per
 page, not by eye: a regex that matches the desktop menu and misses the footer leaves a link
 live in the place readers actually reach for.
 
@@ -164,6 +164,22 @@ reason.**
   same rows, same order, only the "you are here" moves. **Keep them mirrored.** Adding a figure
   to one means adding it to the other or to neither. The old URLs are redirect stubs and stay
   that way: `business/` and `individuals/`.
+- **A page that exists because another page was split is not a page.** Four merged on
+  2026-09-14 and the test each one failed is worth reusing: `guided-setup/` and `consulting/`
+  each opened with the same list telling the reader the other one might be theirs; `learn/` was
+  four cards pointing at pages the footer already listed; `equipment/` elaborated a requirement
+  that `how-it-works/` already carried, using a copy of a figure already on it; `archie/` and
+  `archie/personal/` sat next to each other in one menu with no way to tell them apart. **Before
+  adding a page, check the count of inbound links from page bodies rather than from the nav**:
+  chrome makes every page look equally connected, and all three of the pages with zero real
+  inbound links turned out to be merge candidates. The nav is the symptom, the split page is
+  the cause, and rearranging the menu without merging just moves the problem.
+- **Merging is a net cut or it is not a merge.** Every budget raise in `check-copy-length.py`
+  that came out of this pass is written as arithmetic: the pages' combined old word count, the
+  merged count, and the difference. `services/` is 1,191 where two pages were 1,494;
+  `how-it-works/` is 1,745 where two were 2,002. If a merge does not come out smaller than what
+  went into it, the restatements have not been cut yet, and they are always there: the same
+  claim in both heroes, the rate stated on both pages, two CTAs that said the same thing.
 - **The audience is both individuals and businesses, and the homepage has to say so above the
   fold.** Until 2026-09-14 "business", "team" and "individual" appeared in the nav and footer
   and in no sentence of body copy; the only in-body signal was a price tier 1,400 words down.

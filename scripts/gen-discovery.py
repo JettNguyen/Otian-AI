@@ -320,13 +320,13 @@ QUESTIONS = [
 # Sections of the map, in the order a reader needs them. A page not listed here still ships
 # in the sitemap; this file is a curated map, not a second copy of it.
 MAP = [
-    ("The product", ["archie/", "archie/personal/", "archie/business/", "how-it-works/",
-                     "archie/pricing/", "archie/see-it-work/", "equipment/"]),
-    # The two editions moved into "The product" above on 2026-09-14, when Archie for Business
-    # came out from under Services: they are editions of the app, and a machine reading this
-    # file should not be told otherwise. What is left here is the work we do for people, which
-    # is what this heading always meant.
-    ("Services we offer", ["guided-setup/", "consulting/"]),
+    # /archie/ merged into archie/personal/ later the same day, and /equipment/ into
+    # how-it-works/, so neither is a destination any more. Both are redirect stubs, which this
+    # script already skips; they are off this list so nobody re-adds them from here.
+    ("The product", ["archie/personal/", "archie/business/", "how-it-works/",
+                     "archie/pricing/", "archie/mobile/"]),
+    # Guided setup and consulting are two halves of one page as of 2026-09-14.
+    ("Services we offer", ["services/"]),
     ("Add-ons", ["skills-marketplace/browse/", "skills-marketplace/what-is-an-add-on/",
                  "skills-marketplace/find/", "skills-marketplace/commission/",
                  "skills-marketplace/for-developers/"]),
@@ -336,7 +336,7 @@ MAP = [
                         "compare/symphony/", "compare/automation-tools/",
                         "compare/building-it-yourself/", "compare/hiring-an-assistant/"]),
     ("About us", ["our-story/", "standard/", "contact/", "testimonials/"]),
-    ("Learning", ["learn/", "faq/", "ai-explained/", "blog/", "help/"]),
+    ("Learning", ["ai-explained/", "faq/", "blog/", "help/"]),
 ]
 
 

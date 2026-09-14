@@ -337,6 +337,14 @@
 
     catButtons.forEach(function (btn) {
       const targetId = btn.dataset.drawerTarget;
+      /* A category with no flyout is a plain link wearing the category's clothes (Services,
+         since guided setup and consulting merged into one page on 2026-09-14). It must not
+         open an empty panel on the way out, and hovering it has to close whatever is open,
+         same as hovering any other non-category row in the drawer. */
+      if (!targetId) {
+        if (canHover) btn.addEventListener('mouseenter', resetDrawerPanels);
+        return;
+      }
       const label = btn.textContent.trim();
       btn.addEventListener('click', function () {
         openFlyout(targetId, label);

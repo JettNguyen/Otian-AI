@@ -602,7 +602,7 @@ true and sufficient.
 **Plain-language form, approved 2026-08-03:** marketing pages may say "your computer's
 built-in password store" instead of "Keychain", with no parenthetical gloss. This is the same
 claim, not a weaker one: the load-bearing half is custody ("where we have no way to read
-them"), which is unchanged. Both `archie/` and `how-it-works/` previously ran the term AND its
+them"), which is unchanged. Both `archie/personal/` (then `archie/`) and `how-it-works/` previously ran the term AND its
 gloss inside one sentence, which is what made those paragraphs unreadable. Use one, and prefer
 the plain one outside this document. Still banned either way: "your keys never leave your
 computer" (see Banned Phrasings).

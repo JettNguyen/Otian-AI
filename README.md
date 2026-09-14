@@ -130,10 +130,10 @@ starting with a free 30-minute call.
 
 | Section | Pages |
 |---|---|
-| **Archie** | [What Is Archie?](https://otianai.com/archie/) · [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [Pricing](https://otianai.com/archie/pricing/) · [What to Run It On](https://otianai.com/equipment/) |
-| **Services** | [Guided Setup](https://otianai.com/guided-setup/) · [Consulting](https://otianai.com/consulting/) |
+| **Archie** | [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
+| **Services** | [Working With Us](https://otianai.com/services/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [Commission One](https://otianai.com/skills-marketplace/commission/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
-| **Learn** | [How It Works](https://otianai.com/how-it-works/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [What You Need](https://otianai.com/how-it-works/#what-you-need) |
+| **Learn** | [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
 
 **The two editions live under `archie/`, and that is deliberate.** Archie for Business is an
@@ -145,9 +145,25 @@ redirect stubs: `business/` to `archie/business/`, and `individuals/` to `guided
 stubs carry a `<meta http-equiv="refresh">`, which is what keeps `gen-discovery.py` from listing
 them in the sitemap.
 
-`individuals/` was a URL that read like an audience and a page that sold a setup session. The
-session half became `guided-setup/`; the half about what an agent actually does day to day was
-always product copy and became `archie/personal/`.
+**Four merges on 2026-09-14, in the same pass.** The nav had grown to seven items under Archie
+and two under Services, which was the symptom; the cause was pages that existed because an
+earlier page had been split rather than because a reader needed them. What merged, and why:
+
+| Gone | Into | Why |
+|---|---|---|
+| `archie/` | `archie/personal/` | "What Archie Is" and "For Personal" sat next to each other in one menu and no reader could tell them apart. One page per edition now. `#status` moved with it, and it is still the only place Archie's availability and platform facts live. |
+| `guided-setup/` + `consulting/` | `services/` | Each opened with the same "Which one is this?" list whose only job was sending the reader to the other page. The sort is the spine of the merged page instead. |
+| `equipment/` | `how-it-works/#what-to-run-it-on` | It elaborated a requirement that page already carried, and the kit figure was a copy of the one already there. The figure now exists once; the picker moved to sit under it. |
+| `learn/` | `ai-explained/` | Four cards pointing at pages the footer already listed. A page of navigation duplicating navigation, with no inbound link from any page body. |
+
+Net: four fewer pages, the Archie menu down from seven to five, and Services down from a
+dropdown to a single link. Every old URL is a redirect stub. Internal links were repointed at
+the destinations rather than left bouncing through the stubs, so the stubs exist for bookmarks
+and search results, not for the site's own navigation.
+
+`individuals/` was a URL that read like an audience and a page that sold a setup session. Its
+session half is now the guided half of `services/`; the half about what an agent actually does
+day to day was always product copy and is in `archie/personal/`.
 
 ---
 

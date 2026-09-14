@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260914-2" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260914-3" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -55,13 +55,11 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="archie/" role="menuitem">What Archie Is</a>
             <a href="archie/personal/" role="menuitem">For Personal</a>
             <a href="archie/business/" role="menuitem">For Business</a>
             <a href="how-it-works/" role="menuitem">How It Works</a>
             <a href="archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="archie/pricing/" role="menuitem">Pricing</a>
-            <a href="equipment/" role="menuitem">What to Run It On</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -73,13 +71,7 @@
             <a href="skills-marketplace/for-developers/" role="menuitem">Build One</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="guided-setup/" role="menuitem">Guided Setup</a>
-            <a href="consulting/" role="menuitem">Consulting</a>
-          </div>
-        </div>
+        <a href="services/">Services</a>
         <div class="nav-more" id="navCompare">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompareMenu" type="button">Compare</button>
           <div class="nav-more-menu" id="navCompareMenu" role="menu" aria-label="Compare">
@@ -120,7 +112,7 @@
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <a class="nav-drawer-cat nav-drawer-cat--link" href="services/">Services</a>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompare" aria-expanded="false" aria-controls="navDrawerFlyout">Compare</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
     <a href="questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -132,23 +124,17 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="archie/">What Archie Is</a>
       <a href="archie/personal/">For Personal</a>
       <a href="archie/business/">For Business</a>
       <a href="how-it-works/">How It Works</a>
       <a href="archie/mobile/">Archie Mobile</a>
       <a href="archie/pricing/">Pricing</a>
-      <a href="equipment/">What to Run It On</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
       <a href="skills-marketplace/browse/">Browse All</a>
       <a href="skills-marketplace/commission/">Have One Built</a>
       <a href="skills-marketplace/for-developers/">Build One</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="guided-setup/">Guided Setup</a>
-      <a href="consulting/">Consulting</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
       <a href="compare/">All Comparisons</a>
@@ -223,7 +209,7 @@
              late to be the first mention. Paid for by the cut in the closing CTA below: the page
              is at its 1,300-word ceiling and this did not raise it. -->
         <p class="hm-hero-fork"><a href="archie/personal/">For one person&nbsp;&rarr;</a><span aria-hidden="true">&middot;</span><a href="archie/business/">For a team&nbsp;&rarr;</a></p>
-        <p class="hm-hero-micro">Archie is in testing. The waitlist hears the day it opens. <a href="archie/#status">See where it stands&nbsp;&rarr;</a></p>
+        <p class="hm-hero-micro">Archie is in testing. The waitlist hears the day it opens. <a href="archie/personal/#status">See where it stands&nbsp;&rarr;</a></p>
       </div>
 
       <div class="hm-stage">
@@ -1682,7 +1668,7 @@
       <div class="hm-wrap hm-head">
         <h2 class="fade-up">Tell us which row you would hand over first.</h2>
         <a href="questionnaire/" class="btn btn-primary btn-lg fade-up">Get My Agent Started</a>
-        <p class="hm-micro fade-up"><a href="archie/#status">Where the testing stands&nbsp;&rarr;</a><br> Rather not wait? <a href="guided-setup/">Guided setup</a> starts with a free 30-minute call.</p>
+        <p class="hm-micro fade-up"><a href="archie/personal/#status">Where the testing stands&nbsp;&rarr;</a><br> Rather not wait? <a href="guided-setup/">Guided setup</a> starts with a free 30-minute call.</p>
       </div>
     </section>
 
@@ -1707,13 +1693,11 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="archie/">What Archie Is</a>
             <a href="archie/personal/">For Personal</a>
             <a href="archie/business/">For Business</a>
             <a href="how-it-works/">How It Works</a>
       <a href="archie/mobile/">Archie Mobile</a>
             <a href="archie/pricing/">Pricing</a>
-            <a href="equipment/">What to Run It On</a>
           </nav>
         </div>
         <div>
@@ -1728,8 +1712,9 @@
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="guided-setup/">Guided Setup</a>
-            <a href="consulting/">Consulting</a>
+            <a href="services/">Working With Us</a>
+            <a href="services/#guided">Guided Setup</a>
+            <a href="services/#consulting">Consulting</a>
           </nav>
         </div>
         <div>
@@ -1759,7 +1744,6 @@
           <div class="footer-extra-group">
             <h4 class="footer-col-title">Learn</h4>
             <nav class="footer-nav-links" aria-label="Learn">
-              <a href="learn/">Start Here</a>
               <a href="ai-explained/">AI Explained</a>
               <a href="blog/">Blog</a>
               <a href="faq/">FAQ</a>

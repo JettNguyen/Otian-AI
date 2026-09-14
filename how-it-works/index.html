@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260914-2" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260914-3" />
   <style>
     /* The requirement cards, moved here with the section from /what-you-need/ on
        2026-08-20. Page-scoped, as they were there: one page uses them. */
@@ -105,13 +105,12 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../archie/" role="menuitem">What Archie Is</a>
             <a href="../archie/personal/" role="menuitem">For Personal</a>
             <a href="../archie/business/" role="menuitem">For Business</a>
             <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
-            <a href="../equipment/" role="menuitem">What to Run It On</a>
+            <a href="#what-to-run-it-on" role="menuitem">What to Run It On</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -123,13 +122,7 @@
             <a href="../skills-marketplace/for-developers/" role="menuitem">Build One</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../guided-setup/" role="menuitem">Guided Setup</a>
-            <a href="../consulting/" role="menuitem">Consulting</a>
-          </div>
-        </div>
+        <a href="../services/">Services</a>
         <div class="nav-more" id="navCompare">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompareMenu" type="button">Compare</button>
           <div class="nav-more-menu" id="navCompareMenu" role="menu" aria-label="Compare">
@@ -170,7 +163,7 @@
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <a class="nav-drawer-cat nav-drawer-cat--link" href="../services/">Services</a>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompare" aria-expanded="false" aria-controls="navDrawerFlyout">Compare</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
     <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -182,23 +175,18 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../archie/">What Archie Is</a>
       <a href="../archie/personal/">For Personal</a>
       <a href="../archie/business/">For Business</a>
       <a href="../how-it-works/">How It Works</a>
       <a href="../archie/mobile/">Archie Mobile</a>
       <a href="../archie/pricing/">Pricing</a>
-      <a href="../equipment/">What to Run It On</a>
+      <a href="#what-to-run-it-on">What to Run It On</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
       <a href="../skills-marketplace/browse/">Browse All</a>
       <a href="../skills-marketplace/commission/">Have One Built</a>
       <a href="../skills-marketplace/for-developers/">Build One</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../guided-setup/">Guided Setup</a>
-      <a href="../consulting/">Consulting</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
       <a href="../compare/">All Comparisons</a>
@@ -551,7 +539,7 @@
           <article class="need-item fade-up delay-1">
             <span class="need-num" aria-hidden="true">1</span>
             <h3>A computer that stays on and connected</h3>
-            <p>One you don&rsquo;t mind leaving powered on, awake and online, because your agent can only answer while Archie is running. Already have one? Use it: a laptop needs to stay plugged in and set never to sleep, and we&rsquo;ll sort that with you. If you&rsquo;d rather buy for it, a Mac mini is the easy answer. <a href="../equipment/">What to run it on</a> settles the machine, the network and what to skip, for your situation.</p>
+            <p>One you don&rsquo;t mind leaving powered on, awake and online, because your agent can only answer while Archie is running. Already have one? Use it: a laptop needs to stay plugged in and set never to sleep, and we&rsquo;ll sort that with you. If you&rsquo;d rather buy for it, a Mac mini is the easy answer. <a href="#what-to-run-it-on">The picker below</a> settles it for your situation.</p>
             <!-- procurement slot: "Would rather not think about it? We'll pick the computer, buy it, set it up, and ship it to you ready to go." (do not publish until the service exists) -->
             <p class="need-note">It runs on both Mac and Windows.</p>
           </article>
@@ -711,6 +699,81 @@
       </div>
     </section>
 
+    <!-- ==============================
+         Which computer, answered for your setup
+         /equipment/ merged in here on 2026-09-14. It was a page about a precondition, reachable
+         from three links, sitting one click from the requirement it elaborated, and the kit
+         figure above was already a copy of its figure. What came across is the part this page
+         did not have: the picker, and the reasons under "not needed" that the figure can only
+         state as four struck-through pills. What did not come across is its hero and its "short
+         answer" lede, both of which restated requirement 1 above.
+         js/equipment.js clones the first .kit-figure on the page into #kitPanel, so the figure
+         lives once, up there, and the picker below tailors a copy of it.
+         ============================== -->
+    <section class="section section-alt" id="what-to-run-it-on" aria-labelledby="run-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Which computer</span>
+          <h2 id="run-heading" class="fade-up delay-1">Answer a few questions and Ember lays out your kit.</h2>
+          <p>Usually it is the one you already own. Nothing you answer here leaves your browser.</p>
+        </div>
+      </div>
+    </section>
+    <div class="progress-wrap" id="progressWrap" role="progressbar" aria-label="Equipment picker progress">
+      <div class="progress-wrap-inner">
+        <div class="progress-meta">
+          <span class="progress-step-label" id="progressLabel">Your kit</span>
+          <span class="progress-step-count" id="progressCount">Question 1</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-flow">
+      <!-- js/equipment.js runs the conversation here and writes the kit into #kitPanel
+           below. Nothing is sent anywhere: the answers pick between recommendations that
+           are written out in that file, and they never leave the browser. -->
+      <div class="chat-thread" id="chatThread" role="log" aria-live="polite"></div>
+    </div>
+
+    <div class="kit-panel" id="kitPanel" role="region" aria-label="Your recommended kit" hidden></div>
+
+    <section class="section" aria-labelledby="skip">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Save your money</span>
+          <h2 id="skip" class="fade-up delay-1">What you don&rsquo;t need.</h2>
+          <p>A page recommending equipment has an obvious incentive to make the list longer. This is the other list, with the reasons.</p>
+        </div>
+
+        <div class="two-col fade-up delay-2">
+          <div class="two-col-card">
+            <h3>Not needed</h3>
+            <ul class="two-col-card-list">
+              <li><strong>A graphics card.</strong> The thinking happens on your AI company&rsquo;s computers, not yours. Archie sends the request and waits</li>
+              <li><strong>A fast or new computer.</strong> It spends most of its life idle, waiting for something to happen</li>
+              <li><strong>A server, a NAS, or anything in a rack.</strong> Archie is a desktop app with a window</li>
+              <li><strong>A second monitor, or any monitor after setup.</strong> You need a screen to set it up. After that you can talk to it from your phone or a chat app</li>
+              <li><strong>A separate internet connection, or a static address.</strong> Nothing connects <em>to</em> your computer: it reaches out, and nothing on the network can reach in</li>
+            </ul>
+          </div>
+          <div class="two-col-card">
+            <h3>Worth having</h3>
+            <ul class="two-col-card-list">
+              <li><strong>An Ethernet cable</strong>, if the machine can sit near the router</li>
+              <li><strong>Disk space</strong>, if you want it to talk out loud or work with audio and video: those tools run on your computer and download to it</li>
+              <li><strong>A power strip with battery backup</strong>, if your power flickers. It is the difference between a blip and a machine that stays off until you come home</li>
+              <li><strong>A phone</strong>, which you have. It is how you reach the agent when you are not at the computer</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="trust-table-note">We don&rsquo;t print hardware prices here, because we would be quoting somebody else&rsquo;s price back at you and it would be wrong within the month. Every machine named on this page is one you can price yourself in a minute, at the maker&rsquo;s own store.</p>
+      </div>
+    </section>
+
     <section class="section section-alt" aria-labelledby="timeline-heading">
       <div class="container">
         <div class="section-header">
@@ -767,7 +830,7 @@
             <span class="chapter-n" aria-hidden="true">02</span>
             <div>
               <h3>Install Archie</h3>
-              <p>Download the desktop app and open it. Archie is in testing; the waitlist hears the day it opens. <a href="../archie/#status">See where it stands&nbsp;&rarr;</a></p>
+              <p>Download the desktop app and open it. Archie is in testing; the waitlist hears the day it opens. <a href="../archie/personal/#status">See where it stands&nbsp;&rarr;</a></p>
             </div>
           </li>
           <li class="chapter chapter--filmed">
@@ -832,7 +895,6 @@
               <li>Install Archie and build your agent at your own pace</li>
               <li>Every add-on is included with Archie</li>
               <li>Connect only the accounts you choose; your keys live in your computer&rsquo;s own password store (Keychain on a Mac, Credential Manager on Windows), where we have no way to read them</li>
-              <li>Hit a ceiling? Tell us, and we&rsquo;ll build the add-on</li>
             </ul>
           </div>
           <div class="two-col-card">
@@ -881,13 +943,12 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../archie/">What Archie Is</a>
             <a href="../archie/personal/">For Personal</a>
             <a href="../archie/business/">For Business</a>
             <a href="../how-it-works/">How It Works</a>
       <a href="../archie/mobile/">Archie Mobile</a>
             <a href="../archie/pricing/">Pricing</a>
-            <a href="../equipment/">What to Run It On</a>
+            <a href="#what-to-run-it-on">What to Run It On</a>
           </nav>
         </div>
         <div>
@@ -902,8 +963,9 @@
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="../guided-setup/">Guided Setup</a>
-            <a href="../consulting/">Consulting</a>
+            <a href="../services/">Working With Us</a>
+            <a href="../services/#guided">Guided Setup</a>
+            <a href="../services/#consulting">Consulting</a>
           </nav>
         </div>
         <div>
@@ -933,7 +995,6 @@
           <div class="footer-extra-group">
             <h4 class="footer-col-title">Learn</h4>
             <nav class="footer-nav-links" aria-label="Learn">
-              <a href="../learn/">Start Here</a>
               <a href="../ai-explained/">AI Explained</a>
               <a href="../blog/">Blog</a>
               <a href="../faq/">FAQ</a>
@@ -956,6 +1017,7 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/equipment.js"></script>
   <script src="../js/demo-player.js"></script>
   <script src="../js/ember.js" defer></script>
   <script src="../js/living-agent.js" defer></script>

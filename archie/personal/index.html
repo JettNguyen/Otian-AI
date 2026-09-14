@@ -35,8 +35,30 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260914-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260914-3" />
   <style>
+    /* Page-scoped: the #status block, the one place on the site where Archie's
+       availability and platform facts live. Other pages link here, never restate. */
+    .archie-status {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 20px;
+      margin-top: 28px;
+      padding: 14px 22px;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(224, 138, 91, 0.45);
+      border-radius: var(--radius);
+      scroll-margin-top: 96px;
+    }
+    .archie-status p {
+      margin: 0;
+      font-size: var(--fs-md);
+      color: var(--text-primary);
+    }
+    .archie-status p strong { font-weight: 600; }
+  
     /* archie/personal: hero agent line. One restrained beat above the fold, the agent mark
        breathing while the small jobs roll past. The funnel figure further down carries
        this page's illustration weight, so this stays a single line and nothing more.
@@ -131,13 +153,11 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/" role="menuitem">What Archie Is</a>
             <a href="../../archie/personal/" role="menuitem">For Personal</a>
             <a href="../../archie/business/" role="menuitem">For Business</a>
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../../archie/pricing/" role="menuitem">Pricing</a>
-            <a href="../../equipment/" role="menuitem">What to Run It On</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -149,13 +169,7 @@
             <a href="../../skills-marketplace/for-developers/" role="menuitem">Build One</a>
           </div>
         </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../../guided-setup/" role="menuitem">Guided Setup</a>
-            <a href="../../consulting/" role="menuitem">Consulting</a>
-          </div>
-        </div>
+        <a href="../../services/">Services</a>
         <div class="nav-more" id="navCompare">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navCompareMenu" type="button">Compare</button>
           <div class="nav-more-menu" id="navCompareMenu" role="menu" aria-label="Compare">
@@ -196,7 +210,7 @@
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-    <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+    <a class="nav-drawer-cat nav-drawer-cat--link" href="../../services/">Services</a>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompare" aria-expanded="false" aria-controls="navDrawerFlyout">Compare</button>
     <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
     <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
@@ -208,23 +222,17 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/">What Archie Is</a>
       <a href="../../archie/personal/">For Personal</a>
       <a href="../../archie/business/">For Business</a>
       <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
       <a href="../../archie/pricing/">Pricing</a>
-      <a href="../../equipment/">What to Run It On</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
       <a href="../../skills-marketplace/browse/">Browse All</a>
       <a href="../../skills-marketplace/commission/">Have One Built</a>
       <a href="../../skills-marketplace/for-developers/">Build One</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../../guided-setup/">Guided Setup</a>
-      <a href="../../consulting/">Consulting</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompare">
       <a href="../../compare/">All Comparisons</a>
@@ -283,6 +291,10 @@
             </span>
           </span>
         </span>
+        <div class="archie-status fade-up delay-3" id="status">
+          <p><strong>Archie is in testing</strong>, Mac and Windows both, and not for sale yet. The waitlist hears the moment that changes.</p>
+          <a href="../../questionnaire/" class="btn btn-primary btn-sm">Join the waitlist</a>
+        </div>
       </div>
     </section>
 
@@ -309,10 +321,78 @@
         </div>
       </div>
     </section>
+
+    <!-- ==============================
+         The Idea
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="idea-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">The idea</span>
+          <h2 id="idea-heading" class="fade-up">Your own agent, on your own computer.</h2>
+          <p>Archie is a desktop app that runs your own AI agent. You talk to it the way you&rsquo;d text a friend, and it gets things done: your calendar, your inbox, research, and the busywork you&rsquo;d rather not.</p>
+          <p>What makes it different is where it lives: on your computer, not on ours. It talks to the AI company directly, on your own account. You own the whole thing.</p>
+        </div>
+          <!-- How Archie works, in three moments on one line, and one thing passing through them.
+               Redrawn 2026-09-11 from a three-card figure that carried 128 words of labels; the
+               sentences it held are the caption now. The style block serves both variants. -->
+          <figure class="explain-figure fade-up delay-2">
+            <svg class="explain-svg--desktop" viewBox="0 0 560 190" role="img" aria-labelledby="ar-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+              <title id="ar-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
+              <style>
+                .ar-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+                .ar-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+                .ar-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round}
+                .ar-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8;stroke-linejoin:round}
+                .ar-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+                .ar-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+                .ar-tick{fill:none;stroke:var(--c-green);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+                .ar-you{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+                .ar-power{fill:var(--c-green)}
+                .ar-dot{display:none;fill:var(--accent)}
+                @supports (offset-path:path("M0,0 L1,1")){
+                  .ar-dot{display:block;offset-distance:33%}
+                  @media (prefers-reduced-motion:no-preference){
+                    .ar-dot{animation:arWalk 8s linear infinite}
+                    .ar-m{animation-name:arWalkM}
+                    /* the dot dims while its centre is inside a card, so it reads as passing through rather than over */
+                    @keyframes arWalk{0%{offset-distance:0%;opacity:.28}6%{opacity:.28}8.4%{opacity:1}19.6%{opacity:1}22%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}46.7%{opacity:.28}48.6%{opacity:1}57.4%{opacity:1}59.3%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%;opacity:.28}79.9%{opacity:1}100%{offset-distance:100%;opacity:1}}
+                    @keyframes arWalkM{0%{offset-distance:0%;opacity:.28}6.5%{opacity:.28}10.3%{opacity:1}16.8%{opacity:1}20.7%{opacity:.28}28%{offset-distance:33.3%}42%{offset-distance:33.3%}49.5%{opacity:.28}52.5%{opacity:1}55.1%{opacity:1}58.1%{opacity:.28}64%{offset-distance:66.6%}78%{offset-distance:66.6%}87.3%{opacity:.28}90.4%{opacity:1}100%{offset-distance:100%;opacity:1}}
+                  }
+                }
+              </style>
+              <path class="ar-line" d="M60,80 L480,80"/>
+              <rect class="ar-us" x="24" y="54" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="80" r="2.5"/>
+              <rect class="ar-box" x="164" y="48" width="72" height="64" rx="10"/><path class="ar-ink" d="M180,66h40M180,78h40M180,90h22"/><path class="ar-tick" d="M212,88l6,6l12,-14"/>
+              <rect class="ar-box" x="304" y="44" width="42" height="72" rx="8"/><rect class="ar-us" x="312" y="68" width="26" height="14" rx="6"/>
+              <g class="ar-you"><circle cx="480" cy="66" r="9"/><path d="M462,96 a18,18 0 0 1 36,0"/></g>
+              <text class="ar-name" x="60" y="134">Plug it in</text><text class="ar-sub" x="60" y="150">a computer that stays on</text>
+              <text class="ar-name" x="200" y="134">Sign it in</text><text class="ar-sub" x="200" y="150">your mail and calendar</text>
+              <text class="ar-name" x="325" y="134">Message it</text><text class="ar-sub" x="325" y="150">from anywhere</text>
+              <text class="ar-name" x="480" y="134">You</text><text class="ar-sub" x="480" y="150">the draft, ready to send</text>
+              <circle class="ar-dot" r="6" style="offset-path:path('M60,80 L200,80 L325,80 L480,80')"/>
+            </svg>
+            <svg class="explain-svg--mobile" viewBox="0 0 340 330" role="img" aria-labelledby="arm-t" xmlns="http://www.w3.org/2000/svg">
+              <title id="arm-t">How Archie works in three steps: plug it in, on a computer you already have that stays on and connected; sign it in to your mail and calendar on that same computer; then message it from anywhere, and it writes the draft that you send. A dot passes through the three and reaches you.</title>
+              <path class="ar-line" d="M60,40 L60,300"/>
+              <rect class="ar-us" x="24" y="14" width="72" height="52" rx="9"/><circle class="ar-power" cx="86" cy="40" r="2.5"/>
+              <rect class="ar-box" x="24" y="98" width="72" height="64" rx="10"/><path class="ar-ink" d="M40,116h40M40,128h40M40,140h22"/><path class="ar-tick" d="M72,138l6,6l12,-14"/>
+              <rect class="ar-box" x="39" y="184" width="42" height="72" rx="8"/><rect class="ar-us" x="47" y="208" width="26" height="14" rx="6"/>
+              <g class="ar-you"><circle cx="60" cy="286" r="9"/><path d="M42,316 a18,18 0 0 1 36,0"/></g>
+              <text class="ar-name" x="120" y="38" style="text-anchor:start">Plug it in</text><text class="ar-sub" x="120" y="54" style="text-anchor:start">a computer that stays on</text>
+              <text class="ar-name" x="120" y="128" style="text-anchor:start">Sign it in</text><text class="ar-sub" x="120" y="144" style="text-anchor:start">your mail and calendar</text>
+              <text class="ar-name" x="120" y="218" style="text-anchor:start">Message it</text><text class="ar-sub" x="120" y="234" style="text-anchor:start">from anywhere</text>
+              <text class="ar-name" x="120" y="298" style="text-anchor:start">You</text><text class="ar-sub" x="120" y="314" style="text-anchor:start">the draft, ready to send</text>
+              <circle class="ar-dot ar-m" r="6" style="offset-path:path('M60,40 L60,130 L60,220 L60,300')"/>
+            </svg>
+            <figcaption>Plug it in: a computer you already have, left on and connected. Sign it in: your mail and calendar, on that computer, and Otian never gets a copy. Message it: from anywhere, it writes the draft and you press send.</figcaption>
+          </figure>
+      </div>
+    </section>
     <!-- ==============================
          Day to Day
          ============================== -->
-    <section class="section section-alt" aria-labelledby="uses-heading">
+    <section class="section" aria-labelledby="uses-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">What it takes on</span>
@@ -439,6 +519,77 @@
       </div>
     </section>
 
+    <section class="section section-alt" aria-labelledby="build-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Building it</span>
+          <h2 id="build-heading" class="fade-up">Shape it piece by piece.</h2>
+          <p>Archie is modular. Your agent arrives working, asks what your days look like, and fits its own pieces from your answers. Every one of them is yours to swap, remove, or add to.</p>
+        </div>
+
+        <!-- Unboxed. These five are the parts list, one label and one sentence each, which is
+             exactly what .calm-list is for: bordered cards made the parts read as five products
+             rather than as the pieces of one. The glyphs are the ones the app itself uses in its
+             sidebar, so the part you read about here is the part you click there, and the three
+             that are also add-on kinds carry their kind colour (skill ember, personality plum,
+             routine teal). Knowledge Base and Connections stay blue: they are not kinds. -->
+        <div class="calm-list calm-list--3 calm-list--ruled mt-48 fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label" data-kind="personality">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M8.5 14.5a4.5 4.5 0 0 0 7 0" /><path d="M9 9.5v.5" /><path d="M15 9.5v.5" /></svg>
+              Personality
+            </span>
+            <p>How your agent talks to you. Warm and chatty or brief and to the point.</p>
+          </div>
+
+          <div class="calm-list-item">
+            <span class="calm-list-label" data-kind="skill">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2" /><rect x="13.5" y="3.5" width="7" height="7" rx="2" /><rect x="3.5" y="13.5" width="7" height="7" rx="2" /><rect x="13.5" y="13.5" width="7" height="7" rx="2" /></svg>
+              Skills
+            </span>
+            <p>The things it can do. Add new abilities in a click from the built-in marketplace: calendar management, inbox triage, research on the live web, and more.</p>
+          </div>
+
+          <div class="calm-list-item">
+            <span class="calm-list-label" data-kind="routine">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3.5 2" /></svg>
+              Routines
+            </span>
+            <p>Things it does on its own, on a schedule. A briefing every morning, a report every Friday, without being asked.</p>
+          </div>
+
+          <div class="calm-list-item">
+            <span class="calm-list-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5v13" /><path d="M3.5 18.5a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1H8a4 4 0 0 1 4 4 4 4 0 0 1 4-4h4.5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H15a3 3 0 0 0-3 3 3 3 0 0 0-3-3Z" /></svg>
+              Knowledge Base
+            </span>
+            <p>Give it your files (notes, PDFs, documents) so it answers from what <em>you</em> know, not just what it was trained on.</p>
+          </div>
+
+          <div class="calm-list-item">
+            <span class="calm-list-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v5" /><path d="M15 3v5" /><path d="M6 8h12v5a6 6 0 0 1-6 6 6 6 0 0 1-6-6Z" /><path d="M12 19v2.5" /></svg>
+              Connections
+            </span>
+            <p>Link the tools you already use, like Gmail, Outlook, iCloud and your calendar, only ever when you say so.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section section--tight" aria-labelledby="ember-heading">
+      <div class="container">
+        <div class="section-header section-header--quiet section-header--center">
+          <span class="section-label fade-up">Say hello</span>
+          <h2 id="ember-heading" class="fade-up">This is Ember.</h2>
+          <span data-ember="terracotta.peak.pill.none" class="ember-intro fade-up"></span>
+          <p>Ember is the face your agents wear. Every agent you make gets its own: a color, a hat,
+            a pair of eyes, dealt from the agent itself, so two agents on one computer never look
+            like twins. Change any of it whenever you like, or hand over a photo of your own
+            instead. Go on, poke him.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- ==============================
          What the plan runs
          The capability and its catch in the same breath, per the house rule: the seat limit is
@@ -448,7 +599,7 @@
          rather than the licence). The custody sentence is TRUST.md's approved wording with the
          provider-egress clause kept, which is not optional.
          ============================== -->
-    <section class="section" aria-labelledby="plan-heading">
+    <section class="section section-alt" aria-labelledby="plan-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">What the plan runs</span>
@@ -479,7 +630,7 @@
          one up. The self-serve route is free of us entirely, which is worth saying on a page
          that also sells a setup session.
          ============================== -->
-    <section class="section section-alt" aria-labelledby="start-heading">
+    <section class="section" aria-labelledby="start-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Getting started</span>
@@ -502,11 +653,11 @@
     <!-- ==============================
          CTA
          ============================== -->
-    <section class="section" aria-label="Join the waitlist">
+    <section class="section section-alt" aria-label="Join the waitlist">
       <div class="hm-wrap hm-head hm-cta">
         <h2 class="fade-up">Tell us what you would hand over first.</h2>
         <a href="../../questionnaire/" class="btn btn-primary btn-lg fade-up">Get My Agent Started</a>
-        <p class="hm-micro fade-up">Archie is in testing. The waitlist hears the day it opens. <a href="../#status">See where it stands&nbsp;&rarr;</a></p>
+        <p class="hm-micro fade-up">Archie is in testing. The waitlist hears the day it opens. <a href="#status">See where it stands&nbsp;&rarr;</a></p>
       </div>
     </section>
 
@@ -531,13 +682,11 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/">What Archie Is</a>
             <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/business/">For Business</a>
             <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../archie/pricing/">Pricing</a>
-            <a href="../../equipment/">What to Run It On</a>
           </nav>
         </div>
         <div>
@@ -552,8 +701,9 @@
         <div>
           <h4 class="footer-col-title">Services</h4>
           <nav class="footer-nav-links" aria-label="Services">
-            <a href="../../guided-setup/">Guided Setup</a>
-            <a href="../../consulting/">Consulting</a>
+            <a href="../../services/">Working With Us</a>
+            <a href="../../services/#guided">Guided Setup</a>
+            <a href="../../services/#consulting">Consulting</a>
           </nav>
         </div>
         <div>
@@ -583,7 +733,6 @@
           <div class="footer-extra-group">
             <h4 class="footer-col-title">Learn</h4>
             <nav class="footer-nav-links" aria-label="Learn">
-              <a href="../../learn/">Start Here</a>
               <a href="../../ai-explained/">AI Explained</a>
               <a href="../../blog/">Blog</a>
               <a href="../../faq/">FAQ</a>
@@ -606,6 +755,7 @@
   </footer>
 
   <script src="../../js/nav.js"></script>
+  <script src="../../js/ember.js" defer></script>
   <script type="module" src="../../js/account-nav.js"></script>
 </body>
 </html>

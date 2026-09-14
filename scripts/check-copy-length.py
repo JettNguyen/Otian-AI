@@ -68,7 +68,16 @@ BUDGETS = {
     # came on is two silent recordings and the file-formats section, which is the
     # only place the site says what the agent actually hands you.
     # Back at its ceiling on purpose: a paragraph added here still has to cut one.
-    "how-it-works/index.html": 1700,
+    # Raised 2026-09-14 from 1700 to 1750, on the same terms as the raise above: the page
+    # absorbed /equipment/ rather than growing. Those two ran 2,002 words against 2,600 of
+    # combined budget; merged and de-duplicated they run 1,744, a net cut of 258 words and one
+    # page. What came across is only what this page did not already have, the picker and the
+    # reasons under "not needed"; /equipment/'s hero and its "short answer" lede both restated
+    # requirement 1 and did not. Four more restatements the merge exposed came out with them:
+    # the pointer sentence in requirement 1 (it now points down its own page), the figure
+    # caption's line repeated as the skip list's lede, and the "hit a ceiling" bullet that said
+    # step 6 over again word for word.
+    "how-it-works/index.html": 1750,
     # Pricing prints every measured cost with its source, and a cut there reads
     # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
     # reason this page is allowed to grow: the repricing found a third place an
@@ -95,7 +104,18 @@ BUDGETS = {
     # somebody else's security posture, and paraphrasing that is how a comparison becomes a
     # misrepresentation. The prose half is what this budget still governs, and it has room to
     # spare on purpose: this page is meant to be looked at, not read.
-    "archie/mobile/index.html": 1150,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
+    "archie/mobile/index.html": 1150,
+    # Working With Us is /guided-setup/ and /consulting/ merged on 2026-09-14, and the budget
+    # is the merge's arithmetic rather than a concession. The two pages ran 1,494 words against
+    # 1,800 of combined budget; merged and de-duplicated they run 1,191. This is a net cut of
+    # 303 words and one whole page, not a page that grew.
+    # What came off was restatement, every word of it: the "Which one is this?" list existed on
+    # both pages in near-identical wording because each one's job was to hand the reader to the
+    # other, the $250 rate was stated four times between them, and both closed on the same free
+    # call. What is left is two halves that a reader sorts themselves into, which is what the
+    # duplicated list was trying and failing to do across a page boundary.
+    # At its ceiling on purpose: a paragraph added here still has to cut one.
+    "services/index.html": 1200,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
 }
 
 # Pages whose job is completeness. Length is not a defect here.

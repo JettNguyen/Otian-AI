@@ -126,7 +126,19 @@ BUDGETS = {
     # call. What is left is two halves that a reader sorts themselves into, which is what the
     # duplicated list was trying and failing to do across a page boundary.
     # At its ceiling on purpose: a paragraph added here still has to cut one.
-    "services/index.html": 1200,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
+    # Cut 2026-09-14 from 1200 to 1050, page at 1,048. This is the first of the five ceilings
+    # coming down 150 each, on the reasoning that the site should be looked at more than it is
+    # read. The rule that makes that possible is already here: figure words are counted and
+    # never budgeted, so a paragraph that becomes a drawing is a real cut rather than a moved
+    # one. This page was the whole argument for it. At 1,191 words it was the heaviest page on
+    # the site carrying no drawing at all, zero figure words, and two of its paragraphs were
+    # describing shapes: "an inbox, a calendar and a chat app on one computer" against "several
+    # pieces that have to keep working without you in the middle", and "the rate never rises
+    # with complexity" against a session count that does. Both are now drawn (149 figure words),
+    # the rows under them went back to routing the reader instead of describing the shapes, and
+    # the rest came off restatement: "if we are the wrong tool we say so on the call" was on the
+    # page three times, and the build happening in sessions with you there was on it twice.
+    "services/index.html": 1050,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
 }
 
 # Pages whose job is completeness. Length is not a defect here.

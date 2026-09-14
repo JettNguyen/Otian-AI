@@ -38,9 +38,13 @@ BLOCKS = [
     ("top bar", r'<div class="nav-links"[^>]*>(.*?)</nav>'),
     ("drawer", r'<nav class="nav-drawer"[^>]*>(.*?)</nav>'),
 ]
-BY_ID = ["navArchieMenu", "navAddonsMenu", "navCompareMenu", "navCompanyMenu",
-         "navDrawerFlyoutArchie", "navDrawerFlyoutAddons", "navDrawerFlyoutCompare",
-         "navDrawerFlyoutCompany"]
+# Dropdowns and drawer flyouts are found the same way the footer's columns are, rather than
+# listed. A fixed list only sees the menus somebody remembered to add to it, and the one it
+# missed was real: services/ carried a navDrawerFlyoutServices that no other page had and that
+# nothing could open, because "Services" in the drawer is a plain link and not a category
+# button. It sat there listing the guided-setup/ stub the page had just replaced.
+MENU = re.compile(r'<div class="nav-more-menu"[^>]*id="(\w+)"[^>]*>(.*?)</div>', re.S)
+FLYOUT = re.compile(r'<div class="nav-drawer-flyout-links[^"]*" id="(\w+)">(.*?)</div>', re.S)
 # The footer's columns are found rather than listed, so adding one is covered the day it
 # lands and renaming one shows up as a column the rest of the site has and this page does not.
 FOOTER = re.compile(r'<nav class="footer-nav-links" aria-label="([^"]+)">(.*?)</nav>', re.S)
@@ -73,10 +77,9 @@ def menus_of(page, html):
             inner = re.sub(r'<div class="nav-more-menu".*?</div>', "", m.group(1), flags=re.S)
             inner = re.sub(r'<div class="nav-drawer-flyout.*', "", inner, flags=re.S)
             out[name] = tuple(norm(h, page) for h in HREF.findall(inner))
-    for ident in BY_ID:
-        m = re.search(r'id="%s"[^>]*>(.*?)</div>' % ident, html, re.S)
-        if m:
-            out[ident] = tuple(norm(h, page) for h in HREF.findall(m.group(1)))
+    for pat in (MENU, FLYOUT):
+        for ident, inner in pat.findall(html):
+            out[ident] = tuple(norm(h, page) for h in HREF.findall(inner))
     for label, inner in FOOTER.findall(html):
         out["footer: " + label] = tuple(norm(h, page) for h in HREF.findall(inner))
     return out
@@ -110,7 +113,16 @@ def main():
         canon, agree = shapes[name].most_common(1)[0]
         # A menu that most of the site carries and one page does not is the same bug wearing
         # the other face: the sweep that should have edited every copy created one instead.
-        everywhere = sum(shapes[name].values()) >= len(pages) * 0.8
+        carried = sum(shapes[name].values())
+        everywhere = carried >= len(pages) * 0.8
+        # The other direction: a menu almost nobody carries is an orphan, left behind by a
+        # sweep that removed it everywhere else, and orphans keep stale links alive.
+        if carried <= max(2, len(pages) * 0.05):
+            for page in sorted(pages):
+                if pages[page].get(name) is not None:
+                    print("  %s: only %s has it, out of %d pages" % (name, page, len(pages)))
+                    problems += 1
+            continue
         for page in sorted(pages):
             got = pages[page].get(name)
             if got is None:

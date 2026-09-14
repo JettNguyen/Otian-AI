@@ -12,7 +12,9 @@ edit to it and an accidental one cannot hide. It exists because the `/equipment/
 matched the href the other 71 pages carried, and that page had a same-page `#` form), and left
 services/ pointing its own footer at the `guided-setup/` stub it had just replaced. **The page
 a merge is merging INTO is the one the sweep misses**, because its links are the ones written
-differently.
+differently. `python3 scripts/check-links.py` is the other half of the same lesson: a
+redirect stub is for other people's links, never for ours, and on 2026-09-14 ten of our own
+pages were still reaching their own content through one.
 
 ## Trust claims: read TRUST.md before writing copy
 

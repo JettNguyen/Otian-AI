@@ -20,6 +20,12 @@ picker, the stacked action card under a draft, the per-skill toggle and chevron,
 bars and their counts. The CONTENT is the site's own and stays that way, because the real
 screens carry a real person's mail.
 
+WIDTHS ARE MEASURED, NOT GUESSED. Anything drawn around a string is sized from the string,
+through tw() and the advance tables under it. The version that shipped first used
+len(s) * 6.4, which is the kind of estimate that is wrong in both directions on the same
+screen: it left a sentence sitting off to one side of a bubble 25px too wide for it, and it
+drew the draft's container narrower than the two lines inside it, which ran out the side.
+
     python3 scripts/gen-phone-mocks.py           write the page
     python3 scripts/gen-phone-mocks.py --check   fail if the page is out of date
 """
@@ -69,8 +75,56 @@ def f(v):
     return s[:-2] if s.endswith(".0") else s
 
 
-# ── primitives ───────────────────────────────────────────────────────────────────────────
+# ── text metrics ─────────────────────────────────────────────────────────────────────────
+# Advance widths per 1000 units, so anything drawn around a string can be sized from the
+# string. What was here before was len(s) * 6.4, and it is wrong in both directions at once:
+# the bubble around "Anything from the accountant?" came out 25px wider than the sentence and
+# left it sitting off to one side, while the container around the draft came out narrower
+# than the two lines inside it and they ran out the side of it. Inter is what the page sets
+# and the drawings inherit; names inside them are Georgia, so both are measured.
 SERIF = "Georgia,'Times New Roman',serif"
+
+_INTER = {
+    " ": 260, "a": 543, "b": 585, "c": 511, "d": 585, "e": 553, "f": 340, "g": 585,
+    "h": 570, "i": 245, "j": 245, "k": 530, "l": 245, "m": 870, "n": 570, "o": 580,
+    "p": 585, "q": 585, "r": 375, "s": 500, "t": 355, "u": 570, "v": 505, "w": 780,
+    "x": 505, "y": 505, "z": 470,
+    "A": 664, "B": 654, "C": 682, "D": 700, "E": 590, "F": 578, "G": 712, "H": 718,
+    "I": 273, "J": 522, "K": 645, "L": 559, "M": 883, "N": 726, "O": 744, "P": 632,
+    "Q": 744, "R": 646, "S": 630, "T": 601, "U": 705, "V": 664, "W": 999, "X": 632,
+    "Y": 605, "Z": 606,
+    ".": 290, ",": 290, ":": 290, ";": 290, "!": 290, "?": 510, "'": 222, "\u2019": 222,
+    "-": 360, "\u00b7": 360, "/": 420, "(": 350, ")": 350, "&": 660, "+": 600, "%": 800,
+}
+
+_GEORGIA = {
+    " ": 240, "a": 512, "b": 555, "c": 445, "d": 556, "e": 468, "f": 331, "g": 500,
+    "h": 566, "i": 264, "j": 297, "k": 530, "l": 264, "m": 843, "n": 566, "o": 528,
+    "p": 555, "q": 543, "r": 400, "s": 396, "t": 340, "u": 566, "v": 484, "w": 738,
+    "x": 490, "y": 484, "z": 420,
+    "A": 723, "B": 649, "C": 673, "D": 730, "E": 640, "F": 597, "G": 728, "H": 787,
+    "I": 377, "J": 400, "K": 726, "L": 611, "M": 934, "N": 748, "O": 745, "P": 590,
+    "Q": 745, "R": 680, "S": 570, "T": 638, "U": 735, "V": 723, "W": 1035, "X": 703,
+    "Y": 668, "Z": 599,
+    ".": 275, ",": 275, ":": 275, ";": 275, "!": 275, "?": 435, "'": 213, "\u2019": 213,
+    "-": 348, "\u00b7": 348, "/": 420, "(": 350, ")": 350, "&": 780, "+": 600, "%": 800,
+}
+
+
+def tw(s, size, serif=False, weight="400"):
+    """How wide that string is, drawn. Estimated, and deliberately a little generous:
+    the fallback stack is wider than Inter, and every caller uses this to decide how much
+    room to leave, so erring narrow is the one direction that shows."""
+    table = _GEORGIA if serif else _INTER
+    digit = 622 if serif else 600
+    units = 0
+    for ch in s:
+        units += digit if ch.isdigit() else table.get(ch, 560)
+    w = units * float(size) / 1000.0
+    return w * 1.035 if weight in ("500", "600", "700") else w * 1.01
+
+
+# ── primitives ───────────────────────────────────────────────────────────────────────────
 
 
 def rect(x, y, w, h, r=0, fill="none", stroke=None, sw=1, extra=""):
@@ -196,32 +250,45 @@ def wordmark(x, y, scale=0.02444):
 
 # ── chrome ───────────────────────────────────────────────────────────────────────────────
 def status_bar(clock="9:41"):
-    """The phone's own bar. Nothing here is Archie: it is what makes the rest read as a phone."""
-    o = [text(30, 34, clock, 15.5, "var(--ink)", "600", serif=False)]
-    # the silent bell, which is on every one of these because they are drawn quiet
-    o.append(icon('<path d="M6 16.5V11a6 6 0 0 1 9.3-5M18 13v3.5l1.5 1.5H7"/><path d="M4 4l16 16"/>',
-                  72, 20, 0.62, "var(--ink)", sw=2.2))
-    # signal, wifi, battery
-    for i, h in enumerate((4.5, 7, 9.5, 12)):
-        fill = "var(--ink)" if i < 3 else "var(--soft2)"
-        o.append(rect(300 + i * 6.5, 33 - h, 4, h, 1.2, fill))
-    o.append(icon('<path d="M2 8.5a13 13 0 0 1 16 0M5 12a8.5 8.5 0 0 1 10 0"/>'
-                  '<circle cx="10" cy="15.6" r="1.2" fill="currentColor" stroke="none"/>',
-                  328, 20, 0.62, "var(--ink)", sw=2.2))
-    o.append(rect(348, 24, 22, 11, 3.2, "none", "var(--ink)", 1.2))
-    o.append(rect(350, 26, 15, 7, 1.8, "var(--ink)"))
-    o.append(rect(371, 27.5, 1.8, 4, 0.9, "var(--ink)"))
+    """The phone's own bar. Nothing here is Archie: it is what makes the rest read as a phone.
+
+    Everything sits on one midline with matching margins left and right, laid out from the
+    right edge in: battery, wifi, signal. A silenced-bell glyph used to sit beside the clock
+    because the drawings are quiet ones; it read as a thing that had happened to the phone,
+    which is a fact about nothing, so it is gone.
+    """
+    mid = 30.0
+    o = [text(30, mid + 5.4, clock, 15, "var(--ink)", "600")]
+
+    # battery, its right edge 30 in from the screen edge, to match the clock's 30
+    o.append(rect(332, mid - 6.2, 26, 12.4, 4.2, "none", "var(--ink)", 1.2, ' opacity=".4"'))
+    o.append(rect(358.9, mid - 2.4, 1.8, 4.8, 0.9, "var(--ink)", extra=' opacity=".28"'))
+    o.append(rect(334.4, mid - 4.2, 17, 8.4, 2.2, "var(--ink)"))
+
+    # wifi, two arcs over a dot
+    o.append('<g transform="translate(308,%s)" fill="none" stroke="var(--ink)" stroke-width="1.9"'
+             ' stroke-linecap="round"><path d="M0.4,5.4 Q8,-1.6 15.6,5.4"/>'
+             '<path d="M3.6,8.8 Q8,4.5 12.4,8.8"/></g>' % f(mid - 8))
+    o.append(circle(316, mid + 4.4, 1.7, "var(--ink)"))
+
+    # signal, four bars standing on the same baseline as the clock
+    for i in range(4):
+        h = 4.4 + i * 2.4
+        o.append(rect(279 + i * 5.8, mid + 5.6 - h, 3.6, h, 1.3,
+                      "var(--ink)" if i < 3 else "var(--soft2)"))
     return "".join(o)
 
 
 def header_agent(name, kind):
-    """Wordmark left, then the agent you are talking to, centred, with the picker chevron."""
+    """Wordmark left, then the agent you are talking to, with the picker chevron after it."""
+    nw = tw(name, 17, serif=True)
+    block = 30 + 9 + nw + 5 + 11          # avatar, gap, name, gap, chevron
+    x = (W - block) / 2 + 10              # off true centre, so it clears the wordmark
     o = [wordmark(16, STATUS_H + 5)]
-    cx = W / 2 - 34
-    o.append(avatar(cx, STATUS_H + 26, 15, kind, dot=True))
-    o.append(text(cx + 24, STATUS_H + 31, name, 17, "var(--ink)", "400", serif=True))
-    tw = len(name) * 8.6
-    o.append(icon('<path d="M4 8l6 6 6-6"/>', cx + 28 + tw, STATUS_H + 18, 0.75, "var(--ink2)", sw=2))
+    o.append(avatar(x + 15, STATUS_H + 26, 15, kind, dot=True))
+    o.append(text(x + 39, STATUS_H + 32, name, 17, "var(--ink)", "400", serif=True))
+    o.append(icon('<path d="M4 8l6 6 6-6"/>', x + 39 + nw + 3, STATUS_H + 20,
+                  0.58, "var(--ink2)", sw=2.4))
     o.append(line(0, HEAD_RULE, W, HEAD_RULE))
     return "".join(o)
 
@@ -230,9 +297,9 @@ def header_list(title, chip):
     """Wordmark left, the screen's name centred, and which computer you are looking at."""
     o = [wordmark(16, STATUS_H + 5)]
     o.append(text(W / 2, STATUS_H + 32, title, 18, "var(--ink)", "400", "middle", serif=True))
-    cw = len(chip) * 7.0 + 26
-    o.append(rect(W - 16 - cw, STATUS_H + 12, cw, 30, 15, "var(--soft)", "var(--bd)", 1))
-    o.append(text(W - 16 - cw / 2, STATUS_H + 32, chip, 13, "var(--ink2)", "500", "middle"))
+    cw = tw(chip, 13, weight="500") + 24
+    o.append(rect(W - 16 - cw, STATUS_H + 13, cw, 28, 14, "var(--soft)", "var(--bd)", 1))
+    o.append(text(W - 16 - cw / 2, STATUS_H + 31.5, chip, 13, "var(--ink2)", "500", "middle"))
     o.append(line(0, HEAD_RULE, W, HEAD_RULE))
     return "".join(o)
 
@@ -262,23 +329,30 @@ def tab_bar(tabs, active):
     return "".join(o)
 
 
-def pill(x, y, label, fg, bg, size=12.5, pad=10, h=22):
-    w = len(label) * 6.4 + pad * 2
+def pill(x, y, label, fg, bg, size=12.5, pad=11, h=22):
+    w = tw(label, size, weight="600") + pad * 2
     return (rect(x, y, w, h, h / 2, bg)
-            + text(x + pad, y + h / 2 + 4.2, label, size, fg, "600")), w
+            + text(x + pad, y + h / 2 + size * 0.34, label, size, fg, "600")), w
 
 
 def toggle(x, y, on):
-    """The app's switch: ember when on, a quiet fill when off."""
-    o = [rect(x, y, 50, 30, 15, "var(--acc)" if on else "var(--soft2)")]
-    o.append(circle(x + (35 if on else 15), y + 15, 12, "#FFFFFF"))
-    return "".join(o)
+    """The app's switch: ember when on, a quiet fill when off.
+
+    Sized to the row it sits in rather than to itself. At 50x30 it was taller than the name
+    beside it and hung down into the line of description underneath, near enough to touch it.
+    """
+    return (rect(x, y, 42, 25, 12.5, "var(--acc)" if on else "var(--soft2)")
+            + circle(x + (29.5 if on else 12.5), y + 12.5, 10, "#FFFFFF"))
+
+
+TOGGLE_W, TOGGLE_H = 42.0, 25.0
+CHEV_R = 12.5
 
 
 def chevron_button(cx, cy):
     """The disclosure the app puts beside every switch, so the row has two different jobs."""
-    return (circle(cx, cy, 15, "var(--soft)")
-            + icon('<path d="M4 8l6 6 6-6"/>', cx - 7.5, cy - 7.5, 0.75, "var(--ink2)", sw=2))
+    return (circle(cx, cy, CHEV_R, "var(--soft)")
+            + icon('<path d="M4 8l6 6 6-6"/>', cx - 6, cy - 6.2, 0.6, "var(--ink2)", sw=2.4))
 
 
 # ── screen 1: the agents on your computer ────────────────────────────────────────────────
@@ -315,8 +389,10 @@ def screen_agents():
             glyph = '<rect x="6.6" y="6.6" width="10.8" height="10.8" rx="2.4"/>'
         else:
             glyph = '<path d="M 8.6 5.6 L 18.4 12 L 8.6 18.4 Z"/>'
-        o.append(icon(glyph, bx + 13, y + 30, 0.625, "#FFFFFF", "#FFFFFF", 1.8))
-        o.append(text(bx + 34, y + 43.5, lbl, 13.5, "#FFFFFF", "600"))
+        lw = tw(lbl, 13.5, weight="600")
+        gx = bx + (bw - (15 + 6 + lw)) / 2
+        o.append(icon(glyph, gx, y + 31, 0.625, "#FFFFFF", "#FFFFFF", 1.8))
+        o.append(text(gx + 21, y + 43.5, lbl, 13.5, "#FFFFFF", "600"))
         o.append(text(32, y + 82, a["said"], 13.5, "var(--ink2)"))
         o.append(text(32, y + 99, a["said2"], 13.5, "var(--ink2)"))
         p, pw = pill(32, y + 112, "Running" if a["running"] else "Stopped",
@@ -330,6 +406,10 @@ def screen_agents():
 
 
 # ── screen 2: the conversation, and what a draft offers ──────────────────────────────────
+# The three screens are one person's phone, so the agent you are talking to here and the
+# agent whose skills the third screen lists is the one at the top of the first screen's list.
+AGENT_NAME = AGENTS[0]["name"]
+
 ACTIONS = [
     ("Send", '<path d="M5 12.5l5 5 9-10"/>', "var(--grn)", "var(--acc)"),
     ("Edit it", '<path d="M4 20h4l10-10-4-4L4 16z"/>', "var(--ink2)", "var(--acc)"),
@@ -338,73 +418,95 @@ ACTIONS = [
 ]
 
 
+# The thread. Each entry is who said it and the lines it wraps to; the bubble is drawn
+# around the words rather than the words being fitted into a bubble of a guessed size.
+CHAT = [
+    (True,  ["Anything from the accountant?"]),
+    (False, ["Nothing since Friday. I will wake you", "for one, as you asked."]),
+    (False, ["Twelve came in overnight. Two need you,", "and the other ten are filed."]),
+    (True,  ["Tell the landlord Tuesday morning works."]),
+]
+DRAFT_LEAD = "Here is what I would send:"
+DRAFT_QUOTE = ["Tuesday morning works for us.",
+               "Any time before noon is fine, and",
+               "somebody will be in."]
+
+BUB_FS = 13.5     # the words
+BUB_PADX = 14.0   # side padding inside a bubble
+BUB_PADY = 10.0   # top and bottom padding inside a bubble
+BUB_LH = 17.0     # one line of a bubble
+BUB_BASE = 12.6   # first baseline down from the padding, to sit the block on the middle
+BUB_GAP = 10.0    # between one message and the next
+AGENT_X = 54.0    # where a bubble of theirs starts, clear of the face beside it
+
+
 def screen_chat():
-    o = [status_bar(), header_agent("Archibald", "ember")]
-    y = HEAD_RULE + 18
+    o = [status_bar(), header_agent(AGENT_NAME, "ember")]
+    y = HEAD_RULE + 14
 
-    def bubble(x, w, h, mine):
-        return rect(x, y, w, h, 16, "var(--accS)" if mine else "var(--card)",
-                    None if mine else "var(--bd)", 1)
+    for mine, lines in CHAT:
+        w = max(tw(l, BUB_FS) for l in lines) + BUB_PADX * 2
+        h = BUB_PADY * 2 + BUB_LH * len(lines)
+        x = (W - 16 - w) if mine else AGENT_X
+        o.append(rect(x, y, w, h, 15, "var(--accS)" if mine else "var(--card)",
+                      None if mine else "var(--bd)", 1))
+        if not mine:
+            o.append(avatar(30, y + h - 15, 15, "ember"))
+        for i, ln in enumerate(lines):
+            o.append(text(x + BUB_PADX, y + BUB_PADY + BUB_LH * i + BUB_BASE, ln,
+                          BUB_FS, "var(--ink)"))
+        y += h + BUB_GAP
 
-    # you, asking
-    o.append(bubble(158, 216, 38, True))
-    o.append(text(172, y + 24, "Anything from the accountant?", 13.5, "var(--ink)"))
-    y += 46
-    # the agent answers, with its face beside the bubble the way the app shows it
-    o.append(avatar(30, y + 22, 15, "ember"))
-    o.append(bubble(54, 276, 54, False))
-    o.append(text(68, y + 24, "Nothing since Friday. I will wake you", 13.5, "var(--ink)"))
-    o.append(text(68, y + 41, "for one, as you asked.", 13.5, "var(--ink)"))
-    y += 62
-    o.append(avatar(30, y + 22, 15, "ember"))
-    o.append(bubble(54, 300, 54, False))
-    o.append(text(68, y + 24, "Twelve came in overnight. Two need you,", 13.5, "var(--ink)"))
-    o.append(text(68, y + 41, "and the other ten are filed.", 13.5, "var(--ink)"))
-    y += 62
-    o.append(bubble(86, 288, 38, True))
-    o.append(text(100, y + 24, "Tell the landlord Tuesday morning works.", 13.5, "var(--ink)"))
-    y += 46
+    # The draft, quoted inside its own container, and then its actions in a card of their
+    # own: the shape the app uses to make "nothing was sent" obvious, because the verb is a
+    # row you have not pressed yet. The container is as wide as the longest line in it plus
+    # its padding, which is the whole trick. Drawn at a fixed 272 it was narrower than the
+    # sentences and they ran out the right hand side of it and out of the bubble too.
+    qfs, qlh, qpad = 13.0, 16.0, 9.0
+    bar_w, quote_x = 3.0, 14.0
+    card_w = quote_x + max(tw(l, qfs) for l in DRAFT_QUOTE) + 12
+    card_h = qpad * 2 + qlh * len(DRAFT_QUOTE)
+    bw = max(tw(DRAFT_LEAD, BUB_FS), card_w) + BUB_PADX * 2
+    h = BUB_PADY * 2 + BUB_LH + 8 + card_h
+    o.append(rect(AGENT_X, y, bw, h, 15, "var(--card)", "var(--bd)", 1))
+    o.append(avatar(30, y + h - 15, 15, "ember"))
+    o.append(text(AGENT_X + BUB_PADX, y + BUB_PADY + BUB_BASE, DRAFT_LEAD, BUB_FS, "var(--ink)"))
+    cx0, cy0 = AGENT_X + BUB_PADX, y + BUB_PADY + BUB_LH + 8
+    o.append(rect(cx0, cy0, card_w, card_h, 7, "var(--soft)"))
+    o.append(rect(cx0, cy0, bar_w, card_h, 1.5, "var(--acc)"))
+    for i, ln in enumerate(DRAFT_QUOTE):
+        o.append(text(cx0 + quote_x, cy0 + qpad + qlh * i + 11.8, ln, qfs, "var(--ink2)"))
+    y += h + BUB_GAP
 
-    # the draft, and then its actions in a card of their own: the shape the app uses to make
-    # "nothing was sent" obvious, because the verb is a row you have not pressed yet
-    o.append(avatar(30, y + 22, 15, "ember"))
-    o.append(bubble(54, 300, 96, False))
-    o.append(text(68, y + 24, "Here is what I would send:", 13.5, "var(--ink)"))
-    o.append(rect(68, y + 34, 272, 46, 6, "var(--soft)"))
-    o.append(line(68, y + 34, 68, y + 80, "var(--acc)", 3))
-    o.append(text(78, y + 52, "Tuesday morning works for us. Any time", 13, "var(--ink2)"))
-    o.append(text(78, y + 69, "before noon is fine, and somebody will be in.", 13, "var(--ink2)"))
-    y += 108
-
-    rowh = 44.0
-    o.append(rect(54, y, 300, rowh * len(ACTIONS), 16, "var(--card)", "var(--bd)", 1))
+    rowh, cardw = 40.0, 300.0
+    o.append(rect(AGENT_X, y, cardw, rowh * len(ACTIONS), 15, "var(--card)", "var(--bd)", 1))
     for i, (label, glyph, gcol, tcol) in enumerate(ACTIONS):
         ry = y + rowh * i
         if i:
-            o.append(line(54, ry, 354, ry, "var(--bd)", 1))
-        lw = len(label) * 8.0
-        gx = 204 - lw / 2 - 26
-        o.append(icon(glyph, gx, ry + rowh / 2 - 10, 0.83, gcol, sw=2.2))
-        o.append(text(gx + 28, ry + rowh / 2 + 5, label, 15, tcol, "600"))
-    y += rowh * len(ACTIONS) + 14
-    o.append(text(54, y + 10, "8 minutes ago", 12.5, "var(--ink3)"))
+            o.append(line(AGENT_X, ry, AGENT_X + cardw, ry, "var(--bd)", 1))
+        lw = tw(label, 14.5, weight="600")
+        gx = AGENT_X + (cardw - (18 + 9 + lw)) / 2
+        o.append(icon(glyph, gx, ry + rowh / 2 - 9, 0.75, gcol, sw=2.4))
+        o.append(text(gx + 27, ry + rowh / 2 + 5.2, label, 14.5, tcol, "600"))
+    y += rowh * len(ACTIONS)
+    o.append(text(AGENT_X, y + 19, "8 minutes ago", 12.5, "var(--ink3)"))
 
     # The thread is laid out by accumulation, so adding a bubble pushes everything below it
     # into the composer, which is drawn at a fixed y and would happily print over the top.
     # That happened once: the timestamp landed at 662 against a composer at 660 and the two
     # were each inside the screen, so a bounds check saw nothing wrong. Assert the gap.
-    assert y + 14 <= COMPOSER_Y, (
+    assert y + 23 <= COMPOSER_Y, (
         "chat thread runs to %.0f and the composer starts at %.0f: tighten the bubble gaps "
-        "or drop a message" % (y + 14, COMPOSER_Y))
+        "or drop a message" % (y + 23, COMPOSER_Y))
 
     # the composer
     o.append(circle(38, COMPOSER_Y + 22, 22, "var(--soft)"))
     o.append(icon('<path d="M12 5v14M5 12h14"/>', 27, COMPOSER_Y + 11, 0.9167, "var(--ink2)", sw=2))
     o.append(rect(68, COMPOSER_Y, 254, 44, 22, "var(--card)", "var(--bd)", 1))
-    o.append(text(84, COMPOSER_Y + 28, "Message Archibald", 14, "var(--ink3)"))
+    o.append(text(84, COMPOSER_Y + 27, "Message " + AGENT_NAME, 14, "var(--ink3)"))
     o.append(circle(352, COMPOSER_Y + 22, 22, "var(--acc)"))
-    o.append('<path d="M352 692 v-18 m-7 7 l7 -7 l7 7" stroke="#FFF" stroke-width="2.4"'
-             ' fill="none" stroke-linecap="round" stroke-linejoin="round"/>')
+    o.append('<path d="M352 %s v-18 m-7 7 l7 -7 l7 7" stroke="#FFF" stroke-width="2.4"'
+             ' fill="none" stroke-linecap="round" stroke-linejoin="round"/>' % f(COMPOSER_Y + 32))
     o.append(tab_bar(["Now", "Chat", "Skills", "Routines", "More"], "Chat"))
     return "".join(o)
 
@@ -425,7 +527,7 @@ SKILLS = [
 
 
 def screen_skills():
-    o = [status_bar(), header_agent("Archibald", "ember")]
+    o = [status_bar(), header_agent(AGENT_NAME, "ember")]
     y = HEAD_RULE + 16
     # the way into the marketplace sits above the list, outlined rather than filled: it is
     # the only thing on this screen that leaves it
@@ -435,18 +537,23 @@ def screen_skills():
     o.append(text(142, y + 30, "Browse the marketplace", 15, "var(--acc)", "600"))
     y += 62
 
+    # Both controls are centred on the name's line rather than hung from the top of the card,
+    # which is what left a 50x30 switch and a 30px chevron reaching down to within a pixel of
+    # the description underneath and reading as though they belonged to it.
     for s in SKILLS:
-        ch = 56.0 + 17.0 * len(s["lines"])
+        ch = 58.0 + 17.0 * len(s["lines"])
+        row = y + 28            # the middle of the name's line
         o.append(rect(16, y, 358, ch, 16, "var(--card)", "var(--bd)", 1))
-        o.append(text(32, y + 34, s["name"], 16, "var(--ink)", "400", serif=True))
+        o.append(text(32, y + 33.5, s["name"], 16, "var(--ink)", "400", serif=True))
         if s["note"]:
-            nx = 32 + len(s["name"]) * 8.4 + 10
-            p, _ = pill(nx, y + 18, s["note"], "var(--gld)", "var(--gldS)", 11.5, 8, 20)
+            nx = 32 + tw(s["name"], 16, serif=True) + 10
+            p, _ = pill(nx, row - 10, s["note"], "var(--gld)", "var(--gldS)", 11.5, 9, 20)
             o.append(p)
-        o.append(toggle(266, y + 18, s["on"]))
-        o.append(chevron_button(343, y + 33))
+        chev_cx = 374 - 16 - CHEV_R
+        o.append(toggle(chev_cx - CHEV_R - 12 - TOGGLE_W, row - TOGGLE_H / 2, s["on"]))
+        o.append(chevron_button(chev_cx, row))
         for i, ln in enumerate(s["lines"]):
-            o.append(text(32, y + 58 + i * 17, ln, 13.5, "var(--ink3)"))
+            o.append(text(32, y + 60 + i * 17, ln, 13.5, "var(--ink3)"))
         y += ch + 12
     o.append(tab_bar(["Now", "Chat", "Skills", "Routines", "More"], "Skills"))
     return "".join(o)

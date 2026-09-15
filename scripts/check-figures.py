@@ -212,14 +212,17 @@ def main():
 
     for rel, path in pages():
         for block, classes, line in figure_blocks(path):
-            shapes = sum(len(re.findall(r"<%s\b" % t, block)) for t in SHAPE_TAGS)
-            labels = len(" ".join(re.findall(r"<text\b[^>]*>([\s\S]*?)</text>", block)).split())
+            # The desktop variant alone. Counting the whole block sums both drawings and
+            # reads double, which makes "about twenty shapes" look like forty.
+            one = block.split("explain-svg--mobile")[0]
+            shapes = sum(len(re.findall(r"<%s\b" % t, one)) for t in SHAPE_TAGS)
+            labels = len(" ".join(re.findall(r"<text\b[^>]*>([\s\S]*?)</text>", one)).split())
             rows.append((rel, line, shapes, labels))
             for check, message in check_figure(rel, block, classes, line, banned):
                 failures.append((rel, line, check, message))
 
     if args.report:
-        print(f"{'figure':<52} {'line':>6} {'shapes':>7} {'labels':>7}")
+        print(f"{'figure':<52} {'line':>6} {'shapes':>7} {'labels':>7}   (desktop variant)")
         for rel, line, shapes, labels in sorted(rows, key=lambda r: -r[2]):
             print(f"{rel:<52} {line:6} {shapes:7} {labels:7}")
         print(f"\n{len(rows)} figures. Shapes and labels are reported, never failed:")

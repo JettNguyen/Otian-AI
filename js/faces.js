@@ -74,6 +74,12 @@ export const FACE = {
   "skill:client-brain": "people",
   "skill:commitment-keeper": "list",
   "skill:course-companion": "book",
+  // The book, because what this keeps is a reference: the answers, looked up rather than read.
+  "skill:common-questions": "book",
+  // The bar chart, like every other add-on whose subject is a pipeline. Job Hunt took the
+  // magnifier instead because a hunt is a search; a seller already knows who their leads are and
+  // is looking at the shape of them.
+  "skill:lead-desk": "chart",
   "skill:daily-trivia": "spark",
   "skill:deal-desk": "chart",
   "skill:email-manager": "mail",
@@ -92,6 +98,11 @@ export const FACE = {
   "skill:honest-week": "clock",
   "skill:inbox-rules": "mail",
   "skill:house-watch": "home",
+  // The magnifier, and it is the literal reading rather than a stretch: a job hunt is a search.
+  // "chart" was the other candidate, because the funnel is what this skill has that Waiting On
+  // does not, but a bar chart on a card reads as reporting, and somebody scanning a shelf for the
+  // thing that helps them find work is not looking for a report.
+  "skill:job-hunt": "search",
   "skill:lead-gen-playbook": "chart",
   "skill:learning-coach": "book",
   "skill:market-digest": "chart",
@@ -125,6 +136,12 @@ export const FACE = {
   "skill:project-desk": "people",
   "skill:reading-list": "book",
   "skill:reply-helper": "voice",
+  // The pen, the same mark specialist:writer and skill:personal-journal wear. This one writes.
+  "skill:writing-desk": "pen",
+  // The speech bubble rather than the pen, and the pair is deliberate: Writing Desk writes a
+  // piece and this one writes what the business says out loud in public. Same trade, different
+  // register, and on a shelf the two marks are what tells them apart.
+  "skill:ready-to-post": "voice",
   "skill:savings-goals": "money",
   "skill:school-family": "people",
   "skill:sports-follow": "ball",
@@ -149,6 +166,9 @@ export const FACE = {
   "specialist:writer": "pen",
 
   // ---- Routines ----
+  // "search", the same mark skill:job-hunt wears, because this is that skill keeping its own list
+  // up to date rather than a separate job. Same reasoning as routine:statement-round below.
+  "routine:application-sweep": "search",
   "routine:bill-reminders": "money",
   "routine:birthday-heads-up": "gift",
   "routine:car-checkup": "car",
@@ -179,6 +199,13 @@ export const FACE = {
   "routine:project-check": "pulse",
   "routine:quarterly-card-categories": "money",
   "routine:receipt-sweep": "money",
+  // Each of these four wears its own skill's mark, the same reasoning as routine:statement-round
+  // below: a companion routine is that skill keeping its own appointment, not a separate subject.
+  "routine:revenue-digest": "money",
+  "routine:lead-sweep": "chart",
+  "routine:next-piece": "pen",
+  "routine:queue-check": "voice",
+  "routine:question-sweep": "book",
   "routine:campaign-check": "mail",
   "routine:reply-watch": "mail",
   "routine:return-window-watch": "parcel",

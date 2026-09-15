@@ -141,7 +141,7 @@ reason.**
   which looks exactly like the site is broken rather than cached, and a hard refresh does not
   fix it because the cache is at the CDN edge, not in the browser. Changing the query string
   is the only thing that reliably busts it. One scripted find-and-replace across every page.
-- **Four parts of this site are generated, and each has a `--check` mode. Run them before you
+- **Five parts of this site are generated, and each has a `--check` mode. Run them before you
   commit.** There is still no build step: these write into the repo, the result is committed,
   and the check is what stops the committed copy drifting from what it was made from.
   - `python3 scripts/gen-discovery.py` writes `sitemap.xml`, `robots.txt` and `llms.txt` from
@@ -174,6 +174,14 @@ reason.**
     `assets/articles.json`, which had the same bug on a smaller scale: the hub page for fifteen
     posts carried 183 characters and named none of them. It renders through `js/blog-card.js`,
     which `js/blog.js` imports too.
+  - `node scripts/gen-glossary.mjs` writes the 118 terms into `ai-explained/` from
+    `assets/ai-glossary-final.md`: the entries, both curated pill lists, the A-Z rail and the
+    count. **Same bug a third time, and it was the worst of the three**, because `llms.txt`
+    names that page, so the one page we point machines at was the one shipping four empty
+    elements and the words "Entries shown: 0". It renders through `js/glossary-card.js`, which
+    `js/glossary.js` imports too. A glossary page is the one page on this site whose whole job
+    is being quoted by something that is not a browser, so check it after any edit to the
+    markdown.
 
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per

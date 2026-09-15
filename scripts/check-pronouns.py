@@ -69,7 +69,6 @@ ALLOW = {
     "the difference is not how much you are buying. it is how much has to be decided before anyone starts.",
     "you already built something, and it works because you are standing in the middle of it.",
     "none of it is hard. it is just spread across everything you own.",
-    "that's the whole of it. no configuration, no setup files.",
     "think of it like onboarding.",
     "what the standard is, and what to do with it.",
     # TRUST.md approved wording. The claim is quoted from the document that governs it,

@@ -249,7 +249,10 @@
             .ss-btn{fill:var(--bg-primary);stroke:var(--line-muted);stroke-width:1.3}
             .ss-btntext{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
             .ss-ring{fill:none;stroke:var(--accent);stroke-width:2}
-            .ss-a{opacity:0}
+            /* No base opacity on .ss-a: its only visibility used to come from ssA, which
+               sits behind the reduced-motion guard, so a reader who asked for no motion
+               never saw step one at all. At rest both rings show, which is the whole
+               instruction. .ss-b never carried this and that is how it was found. */
             @media (prefers-reduced-motion:no-preference){
               .ss-a{animation:ssA 7s ease-in-out infinite}
               .ss-b{animation:ssB 7s ease-in-out infinite}

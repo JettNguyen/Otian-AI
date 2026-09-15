@@ -1184,8 +1184,13 @@ makes and the claim Jack has asked for three times.
 - "Not just the work half."
 - Naming domains by enumeration: "the inbox, the bills, the prescriptions, the birthdays", or any
   other list whose every item is a **shipped add-on named exactly as its manifest names it**.
-- "151 add-ons, and they all run on the one agent." (The count is FACTS.md's, re-counted by
-  `scripts/check-facts.py` against the Archie repo on every commit.)
+- "148 add-ons, and they all run on the one agent." (The count is FACTS.md's, re-counted by
+  `scripts/check-facts.py` against the Archie repo on every commit. **Read the number off
+  FACTS.md, never off this line.** It said 151 from 2026-08-31 until 2026-09-15, which is a
+  governing document holding a stale figure as approved wording: check-facts would have caught
+  a page that copied it, but the whole point of this file is that nobody should have to be
+  caught. Same rule as the provider roster above: the site's number is re-counted from the
+  source, not from another page, and this file is another page.)
 
 **Why it is true:** add-ons are data, not code (see the row above), loaded by the one agent rather
 than installed as separate programs, so breadth is a property of the catalog and not a claim about

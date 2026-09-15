@@ -1278,7 +1278,14 @@
         <ul class="cover-grid cover-grid--blank fade-up">
             <li><span class="cover-job">Buying it, booking it, paying it</span><span class="cover-none">Archie cannot spend money or buy anything. It finds the flight and holds the return window; the card stays yours.</span></li>
             <li><span class="cover-job">Your bank, read directly</span><span class="cover-none">Bills &amp; Subscriptions, Money In &amp; Out and Savings Goals keep the list you give them, and connect to no bank.</span></li>
-            <li><span class="cover-job">A job hunt</span><span class="cover-none"><a href="skills-marketplace/browse/?addon=skill%3Ajob-hunt">Job Hunt</a> and Application Sweep help track applications and find openings.</span></li>
+            <!-- This row was "A job hunt" until 2026-09-15, and it had stopped being blank: Job Hunt and
+                 Application Sweep shipped, and the row was edited to name them instead of being replaced.
+                 A list headed "still blank" whose third entry links to a live product spends the one
+                 device on this page that buys belief. TRUST.md: "The blanks are load-bearing." The
+                 replacement is the export allowlist, which is nine extensions and none of these
+                 (crates/archie-runtime/src/export.rs, ALLOWED; TRUST.md "What your agent can write to
+                 disk", whose boundary is "Never claim PDF, images, audio or video"). -->
+            <li><span class="cover-job">A PDF or a slide deck</span><span class="cover-none">It writes spreadsheets, Word documents, calendar files and plain text. No PDFs, pictures, audio or video.</span></li>
         </ul>
 
         <p class="cover-ceiling fade-up">Adding rows is not free. Add-ons with routines run on their own schedule, and those runs are a real part of a heavy month&rsquo;s AI bill. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">What that costs, measured&nbsp;&rarr;</a></p>

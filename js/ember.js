@@ -189,6 +189,18 @@
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var STATE_CLASS = { idle: "", working: "st-working", done: "st-done", oops: "st-oops", sleep: "st-sleep" };
 
+  /* How often he does something unprompted, and how soon after arriving in view. The idle
+     gap was 14 to 30 seconds until 2026-09-15, which is long enough that a reader who scrolls
+     to him, watches, and scrolls on never sees him move at all. Jett asked for "every 10-ish
+     seconds": 8 to 13 averages a shade under 11, and the spread is what keeps two Embers on
+     one page from falling into step. ARRIVE_MS is the hero's own entrance, unchanged, so his
+     landing and the section's do not fight. */
+  var IDLE_MIN = 8000;
+  var IDLE_SPREAD = 5000;
+  var ARRIVE_MS = 520;
+  /* Scrolling him a pixel off the edge and back is not an arrival. */
+  var ARRIVE_COOLDOWN = 5000;
+
   /* What he might do when pressed. Random rather than a cycle, because a cycle is learnable in
      three clicks and then it is a list rather than a reaction; and never the same one twice
      running, because a genuine random repeat reads as the click not having registered. Durations
@@ -232,6 +244,7 @@
 
   function runAct(rig, act) {
     rig.acting = true;
+    rig.lastActAt = performance.now();
     rig.svg.classList.add(act.cls);
     sparks(rig.host, act.sparks);
     setTimeout(function () {
@@ -326,7 +339,21 @@
       rig.rectAt = now;
     }
     var r = rig.rect;
-    if (!r || !r.width || r.bottom < -60 || r.top > window.innerHeight + 60) return;
+    /* A hidden variant (the mobile drawing at desktop width, and the reverse) measures zero
+       wide, so it counts as off-screen and never acts into a display:none box. */
+    var onScreen = !!(r && r.width && r.bottom >= -60 && r.top <= window.innerHeight + 60);
+    if (!onScreen) {
+      rig.visible = false;
+      return;
+    }
+    /* Arriving in view is the moment worth reacting to, and it is the one the old code threw
+       away: the flourish clock ran while he was off-screen, so by the time a reader reached him
+       it was already overdue, the `seen` guard swallowed that one firing, and he then stood
+       still for another 14 to 30 seconds. Now the arrival schedules the act itself. */
+    if (!rig.visible) {
+      rig.visible = true;
+      if (now - rig.lastActAt > ARRIVE_COOLDOWN) rig.flourish = now + ARRIVE_MS;
+    }
     var cx = r.left + r.width / 2;
     var cy = r.top + r.height / 2;
 
@@ -384,10 +411,9 @@
     /* Every so often, unprompted, he does something. Only while idle and only when the reader can
        see him, so nothing plays to an empty screen or interrupts a state that means something. */
     if (!REDUCED && rig.state === "idle" && now > rig.flourish) {
-      rig.flourish = now + 14000 + Math.random() * 16000;
-      if (rig.seen) actOnce(rig);
+      rig.flourish = now + IDLE_MIN + Math.random() * IDLE_SPREAD;
+      actOnce(rig);
     }
-    rig.seen = true;
     for (var i = 0; i < rig.eyes.length; i++) {
       var e = rig.eyes[i];
       e.g.style.transform = "translate(" + (e.bx + rig.gx) + "px," + (e.by + rig.gy) + "px)";
@@ -412,8 +438,9 @@
       gx: 0, gy: 0, lid: 1, blinkT: -1,
       nextBlink: performance.now() + 1200 + Math.random() * 3200,
       wander: { x: 0, y: 0, next: 0 },
-      flourish: performance.now() + 9000 + Math.random() * 12000,
-      seen: false,
+      flourish: performance.now() + IDLE_MIN + Math.random() * IDLE_SPREAD,
+      visible: false,
+      lastActAt: -1e9,
       acting: false,
       lastAct: -1,
       rect: null, rectAt: -1e9
@@ -436,11 +463,11 @@
     } else {
       setState(rig, opts.state || "idle");
       /* Arriving. A character who is simply present when the page paints reads as an image of a
-         character; one who lands reads as having turned up. After the hero's own entrance, so the
-         two do not fight. */
-      if (!REDUCED && (opts.state || "idle") === "idle") {
-        setTimeout(function () { actOnce(rig); }, 520);
-      }
+         character; one who lands reads as having turned up. This used to be a timer set at mount,
+         which meant an Ember below the fold did his one entrance 520ms in, to nobody, and was
+         inert by the time anyone scrolled down. The arrival is handled in update() now, off
+         actually being on screen, so it works the same whether he is in the hero or 1,400 lines
+         down the homepage. */
     }
     start();
 

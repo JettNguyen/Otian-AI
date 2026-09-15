@@ -10339,6 +10339,13 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 14px;
 }
 
+/* A second profile link sits beside the first, so it needs the gap the single one
+   never wanted. The bio paragraph still follows a .team-link, so `+ p` is unaffected. */
+.team-link + .team-link,
+.contact-info-link + .contact-info-link {
+  margin-left: 16px;
+}
+
 .team-link:hover {
   color: var(--c-blue-ink);
 }

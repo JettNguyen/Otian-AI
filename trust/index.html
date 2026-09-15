@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260915-1" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260915-2" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -654,6 +654,66 @@
             <p>What we can offer instead is below: don&rsquo;t trust us. Check.</p>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The Record On Your Side
+         ============================== -->
+    <section class="section" aria-labelledby="record">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">On your computer</span>
+          <h2 id="record" class="fade-up delay-1">What your computer writes down, and what you can take back.</h2>
+          <p>Everything above this line is about what we can and cannot see. This is the other half: what <em>you</em> can see, on your own computer, without asking us for it.</p>
+        </div>
+
+        <div class="trust-prose fade-up delay-2">
+          <p>Archie writes down the things that decide what your agent can reach: a key saved or handed to an agent, a service connected or disconnected, someone allowed to message an agent or stopped from doing so. <strong>It is not a transcript.</strong> What your agent read in your mail, wrote in a reply, or said to you is not in there, for the same reason none of it is on our servers.</p>
+
+          <h3>The record cannot be quietly rewritten.</h3>
+          <p>Each line carries a fingerprint taken over the line before it, so the lines hang together in a chain. Change one line and its own fingerprint stops matching, and so does every link below it. Archie checks the whole chain when it opens and tells you which way it came out, at the top of the list rather than in a footnote. Work the switch and watch it break.</p>
+
+          <!-- The record, drawn, with the app's own sentences for the lines (src/app/settings.tsx,
+               ACCESS_ACTIONS) and its own pass/fail banner above the list. The switch alters line 3,
+               which breaks line 3 and every link under it: that is the claim, and it is the one
+               thing that moves. A checkbox the CSS answers, no script, so the resting state is the
+               record intact and saying so. -->
+          <div class="rec">
+            <input class="rec-alter-input" type="checkbox" id="rec-alter" />
+            <div class="rec-window" role="group" aria-label="Archie&rsquo;s activity record, and what happens to it when one line is altered">
+              <div class="rec-bar" aria-hidden="true"><span></span><span></span><span></span><b>Activity &middot; Archie</b></div>
+
+              <p class="rec-verdict rec-ok" aria-live="polite">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Nothing has been changed. Five lines, chain checked.</span>
+              </p>
+              <p class="rec-verdict rec-bad" aria-live="polite">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="M12 8v4M12 16h.01"/></svg>
+                <span>Line 3 no longer matches its fingerprint, and every line under it is broken too.</span>
+              </p>
+
+              <ol class="rec-rows">
+                <li class="rec-row"><i class="rec-link" aria-hidden="true"></i><span>A key was saved on this computer.</span><code class="rec-fp">7f2a&hellip;c104</code></li>
+                <li class="rec-row"><i class="rec-link" aria-hidden="true"></i><span>A Google account was connected.</span><code class="rec-fp">b9e1&hellip;40d7</code></li>
+                <li class="rec-row rec-row--altered rec-row--after"><i class="rec-link" aria-hidden="true"></i><span><span class="rec-was">Someone was approved to message an agent.</span><span class="rec-now">Someone was blocked from an agent.</span></span><code class="rec-fp">3c8d&hellip;91ab</code></li>
+                <li class="rec-row rec-row--after"><i class="rec-link" aria-hidden="true"></i><span>An outside service was disconnected: Todoist.</span><code class="rec-fp">d15e&hellip;6f22</code></li>
+                <li class="rec-row rec-row--after"><i class="rec-link" aria-hidden="true"></i><span>Someone&rsquo;s access to an agent was taken away.</span><code class="rec-fp">a604&hellip;be39</code></li>
+              </ol>
+
+              <div class="rec-foot">
+                <label class="rec-toggle" for="rec-alter"><span class="rec-toggle-track" aria-hidden="true"><span class="rec-toggle-knob"></span></span><span>Alter line 3 in the record</span></label>
+              </div>
+            </div>
+          </div>
+
+          <p class="trust-table-note">Archie will hand you the whole record as a file, fingerprints included, and it refuses to write that file at all if the chain does not check out. A statement of &ldquo;here is what happened&rdquo; should not be producible from a record that has been tampered with.</p>
+
+          <h3>Taking access back.</h3>
+          <p>Every account you connect can be disconnected from inside Archie. Taking the key off the computer as well is a second, deliberate step, in Settings under Saved keys, and Archie names it on the connection itself rather than leaving you to go looking. You can also do the whole thing from the other side, without involving us at all: Google and Microsoft both let you withdraw what you gave from your own account settings, and the providers you connect with an app password let you cancel the password. If you share an agent, taking somebody&rsquo;s access away is a control in the same place. All of it lands in the record above, like everything else.</p>
+
+          <p class="trust-aside"><strong>Two things this does not do.</strong> It shows tampering, which is not the same as making the record impossible to destroy: somebody who deletes the whole record, and the mark Archie keeps of where it ended, leaves nothing to check, and nothing to check is not the same as nothing happened. And it is evidence for you about your own computer, not something we can vouch for, because we never see it. If you ever want <em>us</em> to prove what your agent did, we cannot, and it is the same reason as everywhere else on this page: we do not have it.</p>
         </div>
       </div>
     </section>

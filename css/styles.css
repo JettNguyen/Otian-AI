@@ -14598,6 +14598,160 @@ html[data-theme="dark"] .booking-container iframe {
   .mon-row { grid-template-columns: 14px minmax(0, 1fr); row-gap: 2px; }
   .mon-row span, .mon-row em { grid-column: 2; text-align: left; justify-self: start; font-size: var(--fs-xs); }
 }
+/* The activity record, drawn, with the chain the app actually keeps. Same shape as .mon above
+   and for the same reason: the reader is at the most skeptical point on the page, and a switch
+   they work beats a paragraph asking them to believe. The switch alters one line and the links
+   below it break, which is the whole claim. A checkbox the CSS answers, no script, so the
+   resting state (the record intact, and saying so) is complete on its own. */
+.rec { position: relative; margin-top: 18px; }
+.rec-alter-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.rec-window {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
+  overflow: hidden;
+}
+.rec-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+.rec-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--line-muted); }
+.rec-bar b {
+  margin-left: 8px;
+  font-size: var(--fs-2xs);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+/* The verdict sits above the list, not under it: the app puts it there because "nothing has
+   been changed" is only worth saying by something that checked, and that is the reason to
+   read the list rather than a footnote to it. */
+.rec-verdict {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 14px 2px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  line-height: 1.45;
+}
+.rec-verdict svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; }
+.rec-ok { background: var(--c-green-subtle); color: var(--c-green-ink); }
+.rec-bad { display: none; background: var(--c-red-subtle); color: var(--c-red-ink); }
+.rec-rows { list-style: none; margin: 0; padding: 6px 0 2px; }
+.rec-row {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+/* The link to the line above, drawn as the dot plus the run of line into it. This is the
+   chain: it is what goes when a line is altered. */
+.rec-link {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c-green);
+  justify-self: center;
+}
+.rec-link::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 2px;
+  height: 14px;
+  transform: translateX(-50%);
+  background: var(--c-green);
+  opacity: 0.55;
+}
+.rec-row:first-child .rec-link::before { display: none; }
+.rec-fp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-2xs);
+  color: var(--text-muted);
+  text-align: right;
+}
+.rec-now { display: none; }
+.rec-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+}
+.rec-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+.rec-toggle-track {
+  position: relative;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--line-muted);
+  transition: background var(--transition);
+}
+.rec-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition);
+}
+.rec-alter-input:checked ~ .rec-window .rec-toggle-track { background: var(--accent); }
+.rec-alter-input:checked ~ .rec-window .rec-toggle-knob { transform: translateX(16px); }
+.rec-alter-input:checked ~ .rec-window .rec-ok { display: none; }
+.rec-alter-input:checked ~ .rec-window .rec-bad { display: flex; }
+.rec-alter-input:checked ~ .rec-window .rec-row--altered .rec-was { display: none; }
+.rec-alter-input:checked ~ .rec-window .rec-row--altered .rec-now { display: inline; }
+/* The altered line and every line after it: the link is what breaks, because each line's
+   fingerprint is taken over the one before it. */
+.rec-alter-input:checked ~ .rec-window .rec-row--after .rec-link { background: var(--c-red); }
+.rec-alter-input:checked ~ .rec-window .rec-row--after .rec-link::before {
+  background: transparent;
+  border-left: 2px dashed var(--c-red);
+  opacity: 0.8;
+}
+.rec-alter-input:checked ~ .rec-window .rec-row--after .rec-fp { color: var(--c-red-ink); }
+.rec-alter-input:focus-visible ~ .rec-window .rec-toggle { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 6px; }
+@media (max-width: 640px) {
+  .rec-row { grid-template-columns: 14px minmax(0, 1fr); row-gap: 2px; }
+  .rec-fp { grid-column: 2; text-align: left; justify-self: start; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mon-row--theirs .mon-dot { animation: none; }
 }

@@ -607,6 +607,57 @@ gloss inside one sentence, which is what made those paragraphs unreadable. Use o
 the plain one outside this document. Still banned either way: "your keys never leave your
 computer" (see Banned Phrasings).
 
+### ✅ The activity record is tamper-evident, and it holds no content
+
+**Approved wording:** "Archie writes down the things that decide what your agent can reach: a
+key saved or handed to an agent, a service connected or disconnected, someone allowed to
+message an agent or stopped from doing so. Each line carries a fingerprint of the line before
+it, so a line that is changed, reordered or deleted shows up as broken the next time Archie
+looks. The record stays on your computer, we never see it, and you can export the whole thing."
+
+**Why it's true:** `crates/archie-core/src/audit.rs` is an append-only, hash-chained log. Each
+event's `hash` is the SHA-256 of its canonical bytes including the *previous* event's hash
+(`hash_event`, `audit.rs:44`), so `verify()` fails on any edited, reordered or deleted row
+(`verify_rows`, `audit.rs:73-81`). `verify_anchored` closes the one gap a pure chain cannot see:
+rows deleted from the *end* leave a shorter chain that is still internally consistent, so the tip
+hash is anchored in the Keychain between runs (`AUDIT_ANCHOR_KEY`) and a missing anchor is
+reported as tail truncation. It runs at startup (`src-tauri/src/lib.rs:332`), and the app shows
+the result as a pass/fail line above the list rather than a footnote (`src/app/settings.tsx`,
+"The claim first ... 'Nothing has been changed' is only worth saying by something that checked").
+`export_jsonl` writes the whole record as JSON Lines with hashes included and **refuses to export
+a chain that fails verification**; it is wired to a real button (`audit_export`,
+`src-tauri/src/commands/mod.rs:664`, registered `lib.rs:538`, called `settings.tsx:812`).
+
+**Why it is ours to claim, and not just a log file:** every product keeps a log. The claim here
+is narrower and checkable: the record cannot be quietly rewritten, and the app tells you so on
+open. That is the difference between an audit trail and a text file.
+
+**Nuance — do not overclaim, three ways:**
+1. **It is not a transcript.** It records the actions above, not what your agent read, wrote or
+   sent. Never let it imply we could show a customer what their agent did to a given email. That
+   would contradict "No Otian custodian" and it is not what the table holds.
+2. **It shows tampering, it does not prevent deletion.** Someone who removes the database and the
+   Keychain anchor together leaves an empty chain that verifies. The honest verb is "shows up",
+   never "cannot be deleted" or "immutable" as a customer-facing word.
+3. **It is local, so it is not attestation.** We never see it and cannot vouch for it. It is
+   evidence for *you* about your own computer, which is the same shape as the network-monitor
+   section on `trust/`, and it must not be written as something we certify.
+
+**Secrets cannot enter it:** metadata is passed through `Redactor::redact_json` before it is
+stored or hashed (`audit.rs:44`), so the trail cannot become a place a key leaks to.
+
+**The take-back controls this claim sits beside, and the one that is two steps.** Disconnecting a
+connected account is one control in the app (`connector_disconnect`,
+`src-tauri/src/commands/integrations.rs:1867`), and it unbinds the credential
+(`credential_ref_id: None`) and removes the connector. **It does not delete the saved key**, which
+is a separate action under Settings / Saved keys; the app says so on the connection card itself
+("To disconnect this app entirely, remove its token in Settings, under Saved keys",
+`src/app/connect.tsx:4121`). Never write disconnect as though it took the key off the computer
+too. Taking a person's access to a shared agent away is `api.accessRevoke`
+(`src/app/access.tsx:808`). All three land in the record above (`credential.deleted`,
+`connector.disconnected`, `access.revoked` in `ACCESS_ACTIONS`), which is the sentence that makes
+the record worth having and is checkable against that table.
+
 ### ✅ We keep no per-person record of the add-ons you install
 
 **Approved wording:** "When you add an add-on, Archie bumps its public popularity count by

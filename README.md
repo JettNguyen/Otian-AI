@@ -253,7 +253,7 @@ with a date, or they are absent.
 A two-person team. We set up agents by hand, one person at a time, until we knew where every ounce
 of friction lived. Archie is what we learned, compiled.
 
-**Jett Nguyen**, Engineering & Implementation · **Jack Raney**, Operations & Client Discovery
+**Jack Raney**, Co-Founder and Chief Executive Officer · **Jett Nguyen**, Co-Founder and Chief Technology Officer
 
 Our mission: to give ordinary people an AI agent they actually own, one that removes the friction
 from daily life and puts real leverage back in their hands.

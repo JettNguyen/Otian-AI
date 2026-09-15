@@ -158,6 +158,48 @@ if os.path.exists(review_path):
     )
 
 # ---------------------------------------------------------------------------
+# 5. The founders' titles.
+#
+# our-story/ is where a reader meets them, so it is the source and every other copy
+# follows it. On 2026-09-15 contact/ still carried the pair from before the titles were
+# settled ("Co-Founder / Engineering & Implementation" and "Co-Founder / Operations &
+# Client Discovery"), and README.md carried the same stale pair, so the page a reader
+# reaches from the top bar disagreed with the page that introduces the two of them.
+# Three copies of one fact is the shape this file exists to catch.
+# ---------------------------------------------------------------------------
+story_html = read("our-story", "index.html")
+TITLES = dict(re.findall(r"<h3>([^<]+)</h3>\s*<p class=\"team-role\">([^<]+)</p>", story_html))
+
+# If the markup moves, fail here rather than passing every copy silently.
+require(
+    {"Jett Nguyen", "Jack Raney"} <= set(TITLES),
+    "our-story/ no longer yields a team-role for both founders, so nothing can be "
+    "checked against it. Fix the reader here before trusting this check again.",
+)
+
+for name, role in TITLES.items():
+    if name not in ("Jett Nguyen", "Jack Raney"):
+        continue
+
+    contact = dict(
+        re.findall(
+            r"<p class=\"contact-info-value\">([^<]+)<span class=\"contact-info-subvalue\">([^<]+)</span>",
+            read("contact", "index.html"),
+        )
+    )
+    require(
+        contact.get(name) == role,
+        f"contact/ gives {name} the title {contact.get(name)!r}, "
+        f"but our-story/ says {role!r}.",
+    )
+
+    readme = read("README.md")
+    require(
+        f"**{name}**, {role}" in readme,
+        f"README.md does not give {name} the title our-story/ does ({role!r}).",
+    )
+
+# ---------------------------------------------------------------------------
 if failures:
     print("check-claim-drift: FAILED")
     for f in failures:
@@ -166,4 +208,4 @@ if failures:
     print("TRUST.md is the source of truth. Fix the page, or fix TRUST.md and then the page.")
     sys.exit(1)
 
-print("check-claim-drift: clean. Provider roster, holdings list, telemetry and the review page agree with TRUST.md.")
+print("check-claim-drift: clean. Provider roster, holdings list, telemetry, the review page\n    and the founders' titles all agree with their source.")

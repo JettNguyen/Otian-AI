@@ -15,6 +15,13 @@ reader reads the names once, not four times). Diagram labels are
 counted separately and reported, never budgeted: a figure earns its words by
 replacing prose, and taxing it pushes copy back into paragraphs.
 
+A <figcaption> counts as figure words too, for the same reason (2026-09-15).
+The visual-first rules in CLAUDE.md make a caption the place a figure's claim
+is written down, so charging a page for writing one pushes the answer toward
+no caption at all, which is the failure the rules exist to stop. The loophole
+that opens is real and CAPTION_MAX closes it: a caption is a caption, not a
+paragraph parked somewhere the budget cannot see.
+
 The budget is per page, in words, and lives in BUDGETS below. A page not
 listed gets DEFAULT_BUDGET. Reference pages (terms, privacy, trust, the
 glossary, blog posts, comparisons) are exempt: their job is to be complete,
@@ -39,6 +46,12 @@ ROOT = Path(__file__).resolve().parent.parent
 # the tightest complete ones about 500, so 900 leaves room to make a real
 # argument and still fails a page that has quietly doubled.
 DEFAULT_BUDGET = 900
+
+# Words one <figcaption> may carry. Captions are free of the page budget, so this is
+# what stops a paragraph moving into one: the longest caption on the site when this
+# landed was 31 words, so 40 leaves room to state a claim and its catch together and
+# still fails a caption that has become prose.
+CAPTION_MAX = 40
 
 # A page over DEFAULT_BUDGET needs a reason here, not a bigger default. These
 # are ceilings, not targets: a page at its budget has to cut a paragraph to add
@@ -221,8 +234,13 @@ class CopyExtractor(HTMLParser):
         self.depth_main = 0
         self.drop_depth = 0
         self.svg_depth = 0
+        self.cap_depth = 0
         self.body: list[str] = []
         self.figure: list[str] = []
+        # Each <figcaption> kept on its own, so a caption can be checked against CAPTION_MAX
+        # individually. Counting them only in aggregate would let one page carry a paragraph
+        # in one caption and pass because its other captions are short.
+        self.captions: list[list[str]] = []
 
     # Tags that never close, so they must not deepen a dropped subtree: a <br> inside a
     # hidden list would otherwise leave the parser dropping copy for the rest of the page.
@@ -237,12 +255,18 @@ class CopyExtractor(HTMLParser):
                 self.drop_depth += 1
         elif tag == "svg" or self.svg_depth:
             self.svg_depth += 1
+        elif tag == "figcaption" or self.cap_depth:
+            if not self.cap_depth:
+                self.captions.append([])
+            self.cap_depth += 1
 
     def handle_endtag(self, tag):
         if self.drop_depth:
             self.drop_depth -= 1
         elif self.svg_depth:
             self.svg_depth -= 1
+        elif self.cap_depth:
+            self.cap_depth -= 1
         if tag == "main" and self.depth_main:
             self.depth_main -= 1
 
@@ -252,7 +276,12 @@ class CopyExtractor(HTMLParser):
         text = data.strip()
         if not text:
             return
-        (self.figure if self.svg_depth else self.body).append(text)
+        if self.svg_depth:
+            self.figure.append(text)
+        elif self.cap_depth:
+            self.captions[-1].append(text)
+        else:
+            self.body.append(text)
 
 
 def count_words(chunks):
@@ -270,7 +299,9 @@ def is_exempt(rel):
 def measure(path):
     parser = CopyExtractor()
     parser.feed(path.read_text(encoding="utf-8"))
-    return count_words(parser.body), count_words(parser.figure)
+    caps = [(count_words(c), " ".join(c)) for c in parser.captions]
+    figure = count_words(parser.figure) + sum(n for n, _ in caps)
+    return count_words(parser.body), figure, caps
 
 
 def pages():
@@ -286,14 +317,19 @@ def main():
     ap.add_argument("--report", action="store_true", help="print every page, longest first")
     args = ap.parse_args()
 
-    rows, failures = [], []
+    rows, failures, long_caps = [], [], []
     for rel, path in pages():
-        body, figure = measure(path)
+        body, figure, caps = measure(path)
         exempt = is_exempt(rel)
         budget = None if exempt else budget_for(rel)
         rows.append((rel, body, figure, budget))
         if budget is not None and body > budget:
             failures.append((rel, body, budget))
+        # Every page, exempt or not: a caption is free of the page budget everywhere,
+        # so it needs its own ceiling everywhere.
+        for n, text in caps:
+            if n > CAPTION_MAX:
+                long_caps.append((rel, n, text))
 
     if args.report:
         rows.sort(key=lambda r: -r[1])
@@ -302,11 +338,21 @@ def main():
             mark = "" if budget is None or body <= budget else "  OVER"
             print(f"{rel:44} {body:6} {str(budget or 'exempt'):>7} {figure:7}{mark}")
 
+    if long_caps:
+        print()
+        for rel, n, text in long_caps:
+            print(f"check-copy-length: {rel} has a {n}-word figcaption, max {CAPTION_MAX}")
+            print(f"    {text[:110]}...")
+        print("\nA caption states the figure's claim. Anything longer belongs in the page copy,")
+        print("where the budget can see it.")
+
     if failures:
         print()
         for rel, body, budget in failures:
             print(f"check-copy-length: {rel} runs {body} words, budget {budget} ({body - budget} over)")
         print("\nCut the page, or raise its budget in scripts/check-copy-length.py with the reason.")
+
+    if failures or long_caps:
         return 1
 
     counted = sum(1 for r in rows if r[3] is not None)

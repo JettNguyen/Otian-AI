@@ -108,6 +108,63 @@ optimised the page ruthlessly, would the reader still be served? If it appeared 
 in two years, would we defend it or explain it away? **The short version: the money is never the
 reason.**
 
+## Visual-first: seven rules for a figure
+
+The site is moving its arguments out of paragraphs and into drawings. That is a direction,
+not a licence: a figure fails differently from a paragraph, because copy is read by
+everyone who opens the page and a figure can be read by nobody. These seven govern every
+drawing on the site. Four have a script under them, `python3 scripts/check-figures.py`.
+Three do not and never will; they are read by a person or not at all, and they are the
+ones worth slowing down for.
+
+1. **The visual carries the claim. The text is the caption.** Draw the figure first, then
+   write the fewest words the drawing cannot say by itself. The test is deletion, the same
+   one the self-diminishing-clause rule uses: cut the paragraph beside a figure, and if the
+   figure still makes the point, the paragraph was decoration and it goes. *Enforced as a
+   floor:* every figure carries a `<figcaption>`, and a caption is capped at 40 words by
+   `check-copy-length.py`, because a caption is a caption and not a paragraph parked
+   somewhere the budget cannot see. Caption words are free of the page budget (changed
+   2026-09-15) so that writing one never costs a page anything.
+2. **The thing that moves is the thing being claimed.** One idea per figure. A message is
+   sent and a draft appears; that is motion carrying an argument. Drifting particles and
+   decorative fade-ups carry none, and on a site whose product is trust, motion that says
+   nothing reads as sales. *No script holds this one.*
+3. **Show the real surface, not an abstraction.** Draw what the app actually shows, doing
+   what it actually does. `archie/mobile/`'s three screens and the homepage's `.hm-stage`
+   are the standard; a generic cloud-and-arrows diagram is not. *No script holds this one.*
+4. **Motion has three tiers, and the tier is a decision.** Looping CSS is tier one and most
+   of the site is there. Scroll-scrubbed is tier two, where the reader's scroll is the clock
+   and nobody misses a beat. A small control the reader works is tier three, and it is the
+   one that earns the most exactly where a reader is most skeptical: a toggle beats two
+   hundred words of reassurance. Pick the tier on purpose rather than defaulting to the
+   first. *No script holds this one.*
+5. **A drawing makes claims, so TRUST.md governs it.** Every rule at the top of this file
+   applies to words inside an SVG, to a caption, and to a shape: a figure showing work
+   happening on your computer must still show the arrow leaving to an AI company, because
+   the provider-egress clause has to stay visible wherever "no server of ours" is implied,
+   and a drawing that stopped at the computer would be making a banned claim in pictures.
+   The limitation belongs in the figure or in its caption, not in a paragraph that later
+   gets cut. *Enforced:* `check-figures.py` reads TRUST.md's banned-phrasings table and
+   fails any figure that says one, in a label, a caption or an accessible name.
+6. **If the claim only exists in motion, machines see nothing.** A crawler, an answer
+   engine, and a reader with reduced motion turned on all see the resting state. This is
+   the glossary's "Entries shown: 0" bug in another costume. *Enforced:* every non-decorative
+   `<svg>` carries an accessible name of real length, every figure carries a caption, and
+   every animation sits inside a `prefers-reduced-motion: no-preference` block so the
+   resting state is complete on its own.
+7. **A visual-first pass is a net cut or it is not one.** Same arithmetic as the merge rule:
+   write the old word count, the new one, and the difference. If a page gained a drawing and
+   lost no prose, the restatement the drawing replaced is still sitting there, which is the
+   usual outcome and the reason to check rather than assume.
+
+**The thing the pilot taught, worth reusing.** `compare/cloud-agents/` was the first page
+done this way, on 2026-09-15: the three-row `cmp-strip` table became one figure whose two
+lanes carry the **same three chips**, so only the container around them changes, which is
+the page's entire argument. The move that made it work was drawing what the two sides have
+in common and letting one difference do all the talking. Note the knock-on: `cmp-strip` is
+shared by all six comparison pages, so that page now deliberately differs from its five
+siblings until they get their own drawings.
+
 ## Copy conventions
 
 - **No em dashes anywhere in site content.** Never use the `—` character (U+2014) or the
@@ -262,7 +319,11 @@ reason.**
   marks or reassign one here: change it in the Archie repo's `src/app/faces.ts`, then copy.
   `scripts/check-faces.py` fails when the two drift, and lists live catalog ids the map lacks.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
-  Diagrams must never scroll horizontally.
+  Diagrams must never scroll horizontally. Enforced, with the rest of the visual-first
+  rules above, by `python3 scripts/check-figures.py`: **run it before you commit**,
+  alongside `check-facts.py` and `check-copy-length.py`. Its `--report` prints the shape
+  and label count of every figure, which is never a failure and is how "one idea, about
+  twenty shapes" stays visible.
 - **A label is read without the thing around it, so it names its own subject.**
   `python3 scripts/check-pronouns.py` enforces it over every heading, button, menu row,
   card label and CTA on the site. A menu row is read without its menu, a step heading

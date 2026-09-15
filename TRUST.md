@@ -2063,6 +2063,11 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Symphony Basic carries 2,000 monthly credits and Pro 5,000 | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
 | Symphony is $16 a month for Basic ($12.80 annually), $40 for Pro ($32), $80 for Max ($64) | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
 | Symphony meters in AI credits: "Each action you take with agents and tools consumes AI credits. The exact amount is calculated after each action, based on its complexity and the tool used." | Wix | `https://www.wix.com/symphony/pricing` | 2026-09-11 |
+| Muse is Meta's personal AI agent, announced 2026-09-08, rolling out in the US on iOS, Android and muse.ai, "and coming soon to AI glasses" | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-15 |
+| Muse "runs on its own dedicated computer in the cloud, contained so no one else's agent can reach it" | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-15 |
+| Muse is "free for most of what people need, with subscription plans for people who want to do more" | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-15 |
+| Muse "doesn't share a person's conversations or the data in their VM with Meta's ad systems", and people "can opt out of their interactions being used to train Meta's AI models" | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-15 |
+| "By default, Muse will not take many important actions, like sending an email, without your approval" | Meta | `https://www.meta.com/help/artificial-intelligence/1687253048996149/` | 2026-09-15 |
 | Grok Bot comes with SuperGrok Heavy at $300 a month or Cursor Ultra at $200 a month (Cursor Teams Premium at $120 a seat also carries it); plan cards read in a browser, since xAI refuses fetches | xAI, Cursor | `https://x.ai/bot` | 2026-08-20 |
 
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
@@ -2088,6 +2093,40 @@ an approval gate of its own: "It checks with you first before your agents act, s
 happens without your approval." No page may imply Symphony acts unchecked, or that asking first is
 something only Archie does. The difference worth writing about is **whose computer the work happens
 on and which AI company answers**, not who asks permission.
+
+### Muse, read 2026-09-15, and the claim it does NOT support
+
+**Why this block exists.** Jett asked for copy contrasting our support with Muse's on 2026-09-15.
+The research was done and **the support claim does not source**, so it did not ship. What follows
+is what the reading actually established, so nobody repeats the attempt from memory.
+
+⛔ **We may not say Muse gives you no human help, in any wording.** Meta's published support
+surface for Muse is Help Center articles (`meta.com/help`), and no way to reach a person about
+Muse was found. **Not finding one is not the same as there not being one**, which is the boundary
+immediately below: absence from the pages we can read is not absence from the product. Meta runs
+account-support channels for other products, `muse.ai` itself redirects signed-out visitors to
+`auth.muse.ai` so the product site cannot be read without an account, and a company that size is
+the least safe subject for an absence claim. The honest form, if a page ever needs one, is that
+**Meta does not publish a named human contact for Muse**, and even that earns its place only
+beside what we *do* publish, which is the checkable half.
+
+⚠️ **Two findings that cut against us, recorded because that is the rule.**
+1. **Muse asks before it acts.** "By default, Muse will not take many important actions, like
+   sending an email, without your approval." That is the third competitor with an approval gate,
+   after Symphony and Grok Bot. No page may imply that asking first is something only Archie does.
+2. **Meta makes a privacy commitment on Muse**, including no sharing with ad systems and a
+   training opt-out. A comparison implying Meta offers no privacy position on this product would
+   be false, whatever anyone's priors about Meta are.
+
+✅ **Where the sourced contrast actually is, and it is a strong one.** Meta's own sentence is that
+Muse "runs on its own dedicated computer in the cloud". That is custody, it is in their words, and
+it is the wedge `compare/cloud-agents/` already argues. A Muse row belongs on that page, not on a
+support page.
+
+⚠️ **Not verified at source: the $20 and $100 subscription prices.** TechCrunch reports "Power at
+$20/month and Maximum at $100/month" and Meta's Help Center confirms a free tier with paid
+subscriptions, but Meta's own pricing page was not readable (the auth wall above). **No Muse price
+may be printed until somebody reads it on Meta's own page**, and neither figure is in FACTS.md.
 
 **Boundaries — do not cross:**
 - ⚠️ ChatGPT's prices are in the table above as of 2026-08-19, read off the pricing page in a

@@ -1,45 +1,26 @@
 /* ========================================
    Otian AI | Glossary Page
    js/glossary.js
+
+   The page's behaviour: the accordion, the search box, the jump links and opening an entry
+   straight from a #hash. The rendering it shares with scripts/gen-glossary.mjs, which writes
+   the same markup into the page so a reader who never runs a script still gets all 120 terms.
+   See js/glossary-card.js for why that split exists.
    ======================================== */
+
+import {
+  parseGlossaryMarkdown,
+  dedupeEntries,
+  makeEntries,
+  makeStartHere,
+  makeBigPicture,
+  makeJumpNav
+} from './glossary-card.js';
 
 (function () {
   'use strict';
 
   var DATA_PATH = '../assets/ai-glossary-final.md';
-
-  /* Everything parsed out of the markdown is interpolated into strings that become innerHTML, so
-     it goes through here first. assets/ai-glossary-final.md is committed and hand-authored, so
-     nothing in it is attacker-controlled and none of this is load-bearing today. It is here
-     because that is a fact about where the file comes from rather than a property of this code:
-     point the fetch at anything user-supplied and every site below turns into an XSS sink without
-     a line of this file changing. Same helper as js/blog.js, js/phone.js and js/marketplace.js. */
-  function escapeHtml(value) {
-    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  var START_HERE_TERMS = [
-    'AI Assistant',
-    'AI Agent',
-    'Chatbot',
-    'Human-in-the-Loop',
-    'Hallucination',
-    'Prompt',
-    'Personal CRM',
-    'Automation',
-    'Generative AI',
-    'ChatGPT',
-    'Conversational AI',
-    'Context Window'
-  ];
-  var BIG_PICTURE_TERMS = [
-    'AGI (Artificial General Intelligence)',
-    'ASI (Artificial Super Intelligence)',
-    'Singularity',
-    'Anthropomorphism',
-    'Emergent Behavior'
-  ];
 
   var searchInput = document.getElementById('glossarySearch');
   var jumpWrap = document.getElementById('azJumpNav');
@@ -47,145 +28,6 @@
   var bigPictureWrap = document.getElementById('bigPictureList');
   var entriesWrap = document.getElementById('glossaryEntries');
   var countEl = document.getElementById('glossaryCount');
-
-  function cleanText(value) {
-    return String(value || '')
-      .replace(/\u00e2\u20ac[\u201c\u201d]/g, ' - ')
-      .replace(/â€“|â€”/g, ' - ')
-      .replace(/[\u2013\u2014]/g, ' - ')
-      .replace(/\s+-\s+/g, ' - ')
-      .replace(/\s{2,}/g, ' ')
-      .trim();
-  }
-
-  function slugify(term) {
-    return term
-      .toLowerCase()
-      .replace(/&/g, 'and')
-      .replace(/[^a-z0-9\s-]/g, '')
-      .trim()
-      .replace(/\s+/g, '-');
-  }
-
-  function parseGlossaryMarkdown(markdown) {
-    var lines = markdown.split(/\r?\n/);
-    var entries = [];
-
-    for (var i = 0; i < lines.length; i += 1) {
-      var line = cleanText(lines[i].trim());
-      var entryMatch = line.match(/^\*\*(.+?)\*\*\s*-\s*(.+)$/);
-      if (entryMatch) {
-        var term = entryMatch[1].trim();
-        var definition = cleanText(entryMatch[2].trim());
-        var example = '';
-
-        for (var j = i + 1; j < lines.length; j += 1) {
-          var next = lines[j].trim();
-          var exampleMatch = next.match(/^Example:\s*(.+)$/);
-          if (exampleMatch) {
-            example = cleanText(exampleMatch[1].trim());
-            break;
-          }
-          if (/^\*\*.+\*\*/.test(next)) {
-            break;
-          }
-        }
-
-        entries.push({
-          type: 'entry',
-          term: term,
-          definition: definition,
-          example: example,
-          slug: slugify(term)
-        });
-        continue;
-      }
-    }
-
-    return entries;
-  }
-
-  function dedupeEntries(entries) {
-    var seen = {};
-    return entries.filter(function (entry) {
-      var key = entry.term.toLowerCase();
-      if (seen[key]) return false;
-      seen[key] = true;
-      return true;
-    });
-  }
-
-  function makeEntryCard(entry) {
-    return [
-      '<article class="glossary-entry" id="' + escapeHtml(entry.slug) + '" data-term="' + escapeHtml(entry.term.toLowerCase()) + '">',
-      '<button class="glossary-trigger" aria-expanded="false">',
-      '<span>' + escapeHtml(entry.term) + '</span>',
-      '<span class="glossary-plus" aria-hidden="true">+</span>',
-      '</button>',
-      '<div class="glossary-body">',
-      '<p>' + escapeHtml(entry.definition) + '</p>',
-      (entry.example ? '<p><strong>Example:</strong> ' + escapeHtml(entry.example) + '</p>' : ''),
-      '</div>',
-      '</article>'
-    ].join('');
-  }
-
-  function renderStartHere(entries) {
-    var byTerm = {};
-    entries.forEach(function (entry) {
-      if (entry.type === 'entry') {
-        byTerm[entry.term] = entry;
-      }
-    });
-
-    var html = START_HERE_TERMS
-      .map(function (term) {
-        if (!byTerm[term]) return '';
-        return '<a href="#' + escapeHtml(byTerm[term].slug) + '" class="start-here-pill">' + escapeHtml(term) + '</a>';
-      })
-      .filter(Boolean)
-      .join('');
-
-    startHereWrap.innerHTML = html;
-  }
-
-  function renderBigPicture(entries) {
-    var byTerm = {};
-    entries.forEach(function (entry) {
-      if (entry.type === 'entry') {
-        byTerm[entry.term] = entry;
-      }
-    });
-
-    var html = BIG_PICTURE_TERMS
-      .map(function (term) {
-        if (!byTerm[term]) return '';
-        return '<a href="#' + escapeHtml(byTerm[term].slug) + '" class="big-picture-link">' + escapeHtml(term) + '</a>';
-      })
-      .filter(Boolean)
-      .join('');
-
-    bigPictureWrap.innerHTML = html;
-  }
-
-  function renderJumpNav(entries) {
-    var letters = {};
-    entries.forEach(function (entry) {
-      var letter = entry.term.charAt(0).toUpperCase();
-      if (!/[A-Z]/.test(letter)) return;
-      if (!letters[letter]) {
-        letters[letter] = entry.slug;
-      }
-    });
-
-    var allLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    jumpWrap.innerHTML = allLetters.map(function (letter) {
-      if (!letters[letter]) {
-        return '<span class="az-letter disabled">' + letter + '</span>';
-      }
-      return '<a class="az-letter" href="#' + escapeHtml(letters[letter]) + '">' + letter + '</a>';
-    }).join('');
-  }
 
   function getScrollOffset() {
     var nav = document.getElementById('nav');
@@ -271,13 +113,15 @@
   }
 
   function init(entries) {
-    renderStartHere(entries);
-    renderBigPicture(entries);
-    renderJumpNav(entries);
-
-    entriesWrap.innerHTML = entries
-      .map(function (entry) { return makeEntryCard(entry); })
-      .join('');
+    /* Redrawn even though scripts/gen-glossary.mjs already wrote all four of these into the
+       page. The markup and this are the same builder over the same file, so the redraw is a
+       no-op a reader cannot see; what it buys is that an edit to the markdown shows up live
+       before anybody remembers to run the generator, and the generator's --check is what says
+       the committed copy has fallen behind. */
+    startHereWrap.innerHTML = makeStartHere(entries);
+    bigPictureWrap.innerHTML = makeBigPicture(entries);
+    jumpWrap.innerHTML = makeJumpNav(entries);
+    entriesWrap.innerHTML = makeEntries(entries);
 
     bindAccordion();
     bindSearch();

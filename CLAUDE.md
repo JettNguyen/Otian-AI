@@ -286,11 +286,21 @@ siblings until they get their own drawings.
   `how-it-works/` is 1,745 where two were 2,002. If a merge does not come out smaller than what
   went into it, the restatements have not been cut yet, and they are always there: the same
   claim in both heroes, the rate stated on both pages, two CTAs that said the same thing.
-- **The audience is both individuals and businesses, and the homepage has to say so above the
-  fold.** Until 2026-09-14 "business", "team" and "individual" appeared in the nav and footer
-  and in no sentence of body copy; the only in-body signal was a price tier 1,400 words down.
-  The `.hm-hero-fork` under the hero CTA is what fixes that, and it is two links rather than a
-  sentence because it has to answer "is this for me" and route at the same time. Anything that
+- **The wedge is one person, personal admin, and the homepage leads on it.** Decided by Jett on
+  2026-09-15, and it **supersedes the 50/50 fork** of the day before: the page used to offer
+  "For one person" and "For a team" as equal choices under the hero CTA, which is not the same
+  as having an audience. Leading means the hero's primary route is the one person, the team
+  route sits on the muted line under it, and the sections downstairs stay what they already
+  were: the post, the bills, the paperwork, the doctor. **Leading is not abandoning.** Archie
+  for Business is a real edition with a real price, it keeps its nav row, its card in the
+  pricing band and its link in the hero's second line, and no page may imply we do not sell it.
+  **Do not "rebalance" the homepage by putting a team add-on in the four cards**: that swap was
+  considered on 2026-09-15 and dropped, because `Owed to Customers` sweeps a business's shared
+  mail and is off-wedge by definition. The rule this replaces is still worth knowing, because
+  the failure it fixed can come back: until 2026-09-14 "business", "team" and "individual"
+  appeared in the nav and footer and in no sentence of body copy, and the only in-body signal
+  was a price tier 1,400 words down. Saying nothing about the audience is the older and worse
+  bug; a wedge is the fix for the fork, not a licence to go quiet again. Anything that
   splits by audience elsewhere (the `.card-aud` chips and the `.aud-pick` review grids on
   `testimonials/`) uses the same two phrases: **"one person"** and **"a team"**. Two registers,
   and they do not mix. *Personal* and *Business* are the **editions' names**, so they are what

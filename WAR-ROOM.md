@@ -280,6 +280,56 @@ Three passes, each one shippable on its own.
   precedent, so it never lands in the stylesheet every visitor downloads. If `css/styles.css`
   does change, bump `?v=` across every page.
 
+## Launch day: the pre-release copy that has to flip
+
+Audited 2026-09-15 against the 2026-10-03 soft launch. Every sentence below is **true today**,
+which is why none of it has been touched: TRUST.md's tense rule forbids describing an unshipped
+state in the present tense, and it forbids it in both directions. This is a launch-day commit,
+and it is written down now so that day is a sweep rather than a search.
+
+The list is here rather than in a script because the replacement wording is not settled. What is
+settled is the extent, and the extent is the part that gets missed: 22 non-blog pages, 15 blog
+posts, and one frozen file that must not be edited.
+
+**Group A: the status sentence.** "Archie is in testing", about 35 instances across 22 non-blog
+pages. The canonical block is `archie/personal/index.html:303`, and nearly every other instance
+links to it as `#status`. Also `index.html:222`, `archie/personal/:667`, `archie/install/:211`,
+`archie/business/:440`, `archie/pricing/:225` and `:736`, `faq/:592`, `how-it-works/:856`,
+`services/:417`, `standard/:269`, all seven `compare/` pages, and both marketplace pages.
+
+**Group B: the waitlist call to action.** 15 non-blog pages and 15 blog posts. `gen-blog.mjs`
+rewrites only the hub page, so the 15 post CTAs are hand-written and need their own scripted
+sweep. A waitlist can reasonably outlive the launch; decide whether it does before sweeping,
+because the answer changes B without changing A.
+
+**Group C: marketplace pre-release chrome.** The `prerelease-banner` blocks at
+`skills-marketplace/browse/:192` and `skills-marketplace/what-is-an-add-on/:572`, and the
+"In Testing: See Status" badges at `browse/:169` and `what-is-an-add-on/:168`. The
+"Submissions open" badge on `for-developers/:168` is a different claim and stays.
+
+**Group D: paid signup, which is gated on Stripe rather than on copy.**
+`archie/pricing/index.html:389` and `terms-of-service/index.html:196`. These two flip when
+checkout actually opens, not when the app ships, and the EEA/UK/Switzerland exclusion is a
+separate fact that survives launch either way.
+
+**Do not touch, and each for a different reason:**
+
+- `compare/cloud-agents/index.html:438` and `:471` are the only two "beta" strings on the site
+  outside the blog, and **both are sourced claims about competitors**, each carrying a
+  `src-cite`. A pre-release sweep that matches on the word "beta" hits these first and breaks
+  the competitor-sourcing rule.
+- `terms-of-service/versions/2026-09-14.json` is a dated, frozen version of the Terms. It says
+  "in testing" because it did. Editing a published version is how a contract stops being one.
+- `js/phone.js:176` is a code comment about testing on a Mac.
+- `standard/index.html:269` cites "Archie is in testing and our website says so" as evidence
+  that our own principles hold. **It has to flip in the same commit as group A**, or the
+  Standard page is left arguing for a claim the rest of the site no longer makes.
+
+The knock-ons, none of which the copy sweep does on its own: `gen-discovery.py` rewrites
+`llms.txt`, whose marketplace line at `llms.txt:42` still says "Join the waitlist to hear when
+the marketplace opens"; `check-facts.py` reads `llms.txt` like any served file; and any touch of
+`css/styles.css` means bumping `?v=` everywhere.
+
 ## Still to decide
 
 1. Whether the spend and reimbursement line goes on the page.

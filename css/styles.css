@@ -16196,6 +16196,16 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    Ember stands on sit outside the zoomed boxes so a measured rectangle never depends on how a
    browser reports zoom. @supports keeps the old scale for a browser without zoom.
 
+   UNDER 971PX THE SCENE IS ANOTHER DRAWING OF THE SAME OBJECTS. The scene is a design box (760
+   by 560 wide, 400 by 560 narrow) that js/home.js scales to whatever the stage gives it, so a
+   pose only has to stay inside the box and nothing is ever placed by viewport arithmetic. Narrow,
+   the window and the phone stack in depth instead of side by side, the caption is a band under
+   the scene rather than a column beside it, and the floors turn a quarter (--fz) so a lap that
+   ran left to right runs toward the camera and fits a portrait frame; every card, sign and the
+   ball turn back by the same quarter to keep facing the camera. Jett saw the first narrow layout
+   (captions on top of a shrunken wide scene) on 2026-09-16 and said the visuals were no longer
+   the focus, which is what this is for.
+
    THE NIGHT IS THE STAGE'S OWN GROUND. Act five paints the stage from --bg-primary down to a
    near-black by mixing on --night, which js/home.js sets from the scroll, and the captions
    switch to light ink at the halfway point. RESTYLE.md's band rule allows exactly this:
@@ -16263,7 +16273,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-scene-wrap { position: relative; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
 .day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(660px, 110%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); pointer-events: none; }
 .day-stage.is-night .day-scene-wrap::before { background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 9%, transparent), transparent); }
-.day-scene { position: relative; width: 760px; height: 560px; max-width: 100%; transform-style: preserve-3d; }
+/* The design box. js/home.js scales it to the stage (SC), so it is never sized by CSS to fit. */
+.day-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-clock { position: absolute; left: 24px; top: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
@@ -16531,14 +16542,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* ---- the floors: a plane in perspective with cards standing on it ---- */
 .day-floor { width: 720px; height: 420px; margin: -180px 0 0 -360px; pointer-events: none; --fo: 0; }
 .day-floor.is-on { pointer-events: auto; }
-.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
+/* --fz: a quarter turn on narrow screens (see the block at the end), 0 otherwise. */
+.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg) rotateZ(var(--fz, 0deg)); transform-style: preserve-3d; }
 .day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
 .day-paths { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--fo); overflow: visible; }
 .day-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .day-paths path.dashed { stroke-dasharray: 5 6; }
 .day-floor[data-mode="credits"] .key { opacity: 0; }
 .day-floor:not([data-mode="credits"]) .credits { opacity: 0; }
-.day-st { position: absolute; left: var(--fx); top: var(--fy); width: 152px; padding: 9px 11px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); font-size: var(--fs-xs); line-height: 1.35; color: var(--text-secondary); }
+.day-st { position: absolute; left: var(--fx); top: var(--fy); width: 152px; padding: 9px 11px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); font-size: var(--fs-xs); line-height: 1.35; color: var(--text-secondary); }
 .day-st b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
 .day-st i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 2px; }
 .day-st .num { position: absolute; top: -10px; left: 10px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--text-on-accent); font-size: var(--fs-3xs); font-weight: 700; display: grid; place-items: center; }
@@ -16548,7 +16560,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    it and its outline fills in. */
 #dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; }
 .day-ico { display: block; width: 46px; height: 46px; margin: 0 auto 4px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.day-st.ghost { transform: translate(-50%, -100%) translateZ(60px) rotateX(-58deg); }
+.day-st.ghost { transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
 .day-st.ghost .day-ico { stroke: var(--text-muted); stroke-dasharray: 3 3; }
 .day-floor[data-mode="credits"] .day-st.ghost .day-ico { stroke: var(--accent); stroke-dasharray: none; }
 .day-st.is-lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle), var(--shadow-sm); }
@@ -16560,7 +16572,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-gate { position: absolute; left: var(--fx); top: var(--fy); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
 /* The sign stands at the line's right end, not over its middle: standing over the middle it sat on
    the computer card's bottom edge and hid the ball. */
-.day-gate span { position: absolute; left: calc(100% + 6px); top: 0; transform: translate(0, -100%) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+.day-gate span { position: absolute; left: calc(100% + 6px); top: 0; transform: translate(0, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 .day-gate.is-on { border-top-color: var(--accent); }
 .day-gate.is-on span { background: var(--accent-subtle); color: var(--accent-ink); border-color: var(--accent); }
 /* The message is a ball standing on the floor, not a disc lying on it: the ball faces the camera
@@ -16569,7 +16581,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-dot { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; --ball: var(--accent); }
 .day-dot.is-held { --ball: var(--c-blue); }
 .day-dot::before { content: ""; position: absolute; left: -9px; top: -4px; width: 18px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, .3); filter: blur(1px); opacity: var(--fo); }
-.day-dot::after { content: ""; position: absolute; left: -8px; top: -16px; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--ball) 45%, #fff), var(--ball) 52%, color-mix(in srgb, var(--ball) 62%, #000) 100%); box-shadow: 0 0 0 0 transparent; transform: rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); }
+.day-dot::after { content: ""; position: absolute; left: -8px; top: -16px; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--ball) 45%, #fff), var(--ball) 52%, color-mix(in srgb, var(--ball) 62%, #000) 100%); box-shadow: 0 0 0 0 transparent; transform: rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); }
 .day-dot.is-held::after { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ball) 28%, transparent); }
 .day-fmark { position: absolute; left: var(--fx); top: var(--fy); }
 
@@ -16598,36 +16610,41 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-beat { opacity: 1; transform: none; }
 }
 
-/* ---- shorter windows: the whole scene scales, so the phone at its closest keeps its bottom edge ---- */
-@media (max-height: 820px) { .day-scene-wrap { --sc: .88; } }
-@media (max-height: 700px) { .day-scene-wrap { --sc: .76; } }
-
-/* ---- narrow screens: the same stage, captions on top, the scene scaled ---- */
-@media (max-width: 900px) {
-  .day-stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(200px, 1fr); gap: 0; padding: calc(var(--nav-height) + 10px) 16px 8px; align-items: start; min-height: 0; }
-  /* The captions share one grid cell, so the row is as tall as the tallest of them and no caption
-     ever spills into the scene under it; the lit one is the one you see. */
-  .day-caps { display: grid; height: auto; }
+/* ---- narrow screens (under 971px): the scene on top, a caption band under it ---- */
+/* The stage is one column: the scene row takes what is left and the caption row is as tall as the
+   tallest caption, because every caption shares one grid cell (the lit one is the one you see), so
+   no caption ever spills into the scene. The scene keeps its 400 by 560 design box and js/home.js
+   scales it to the row and to the stage's full width, so the objects use the whole screen width and
+   are never cut off; the poses for this box are the narrow set in js/home.js. The floors turn a
+   quarter, so both laps run toward the camera. */
+@media (max-width: 970px) {
+  .day-stage { grid-template-columns: 1fr; grid-template-rows: minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
+  .day-scene-wrap { grid-row: 1; height: 100%; min-height: 0; }
+  .day-scene { width: 400px; }
+  .day-caps { grid-row: 2; display: grid; height: auto; padding: 6px 16px 12px; }
   .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
-  .day-cap h1 { font-size: var(--fs-4xl); }
-  .day-cap h2 { font-size: var(--fs-3xl); }
-  .day-cap > p { font-size: var(--fs-sm); margin-top: 10px; }
-  .day-cap .day-catch, .day-cap .hm-hero-micro { display: none; }
-  .day-cap .hm-actions { margin-top: 14px; }
-  .day-chips { gap: 5px; margin-top: 12px; }
-  .day-scene-wrap { --sc: 0.58; min-height: 0; }
-  .day-scene { height: 100%; }
-  .day-clock { left: 12px; top: 4px; }
+  .day-cap h1 { font-size: var(--fs-3xl); }
+  .day-cap h2 { font-size: var(--fs-2xl); }
+  .day-cap .section-label { margin-bottom: 6px; }
+  .day-cap > p { font-size: var(--fs-xs); margin-top: 8px; max-width: none; }
+  .day-cap .day-catch { font-size: var(--fs-2xs); margin-top: 8px; max-width: none; }
+  .day-cap .hm-actions { margin-top: 12px; }
+  .day-cap .hm-hero-micro { font-size: var(--fs-2xs); }
+  .day-chips { gap: 4px; margin-top: 10px; }
+  .day-chip { font-size: var(--fs-3xs); padding: 3px 8px; }
+  .day-seg { margin-top: 10px; }
+  .day-more { margin-top: 8px; font-size: var(--fs-xs); }
+  .day-minutes { margin-top: 10px; padding: 6px 10px; }
+  .day-minutes b { font-size: var(--fs-4xl); }
+  .day-clock { left: 12px; top: 6px; }
   .day-hint { display: none; }
+  .day-floor { --fz: 90deg; }
   .day-cta-row { flex-direction: column; }
 }
 /* Under reduced motion every caption is shown, so they stack instead of sharing a cell. */
-@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+@media (max-width: 970px) and (prefers-reduced-motion: reduce) {
   .day-cap { grid-area: auto; }
 }
-/* Short phones: the scene row is what is left under the captions, so the scene shrinks to it. */
-@media (max-width: 900px) and (max-height: 760px) { .day-scene-wrap { --sc: .5; } }
-@media (max-width: 900px) and (max-height: 640px) { .day-scene-wrap { --sc: .44; } }
 
 /* The four-rows screen grows as its beats land, so a bubble that has not arrived takes no room:
    with all eight present from the start the thread overflowed the screen and the first question

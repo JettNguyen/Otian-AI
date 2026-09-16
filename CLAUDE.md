@@ -268,7 +268,12 @@ siblings until they get their own drawings.
   control on either mockup, find it in the app. The mockups are laid out at the size they are shown
   (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
   window's agent card says "On Archie Mobile" at Jett's direction, which is ahead of the mockup in
-  Downloads (still "Running on Telegram").
+  Downloads (still "Running on Telegram"). **Under 971px the stage is a second composition of the
+  same objects, not the wide one shrunk**: the scene is a design box (760 by 560 wide, 400 by 560
+  narrow) that `js/home.js` fits to the stage every frame, each act has a `narrow` pose beside its
+  wide one, the floors turn a quarter (`--fz`) so the laps run toward the camera, and the caption
+  is a band under the scene. Jett's rule from 2026-09-16: the visuals are the focus on a phone too,
+  so a pose keeps its objects inside the box and nothing is placed by viewport arithmetic.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

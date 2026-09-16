@@ -498,7 +498,11 @@
     }
 
     var tx, ty;
-    if (rig.state === "sleep") {
+    if (rig.look) {
+      /* A page can point them at something: the homepage has them watch the phone while a
+         scene plays on it, and the dot while it laps. Cleared with look(host, null). */
+      tx = rig.look.x; ty = rig.look.y;
+    } else if (rig.state === "sleep") {
       tx = cx; ty = cy + 60;
     } else if (now < attend.until) {
       tx = attend.x; ty = attend.y;
@@ -570,7 +574,8 @@
       acting: false,
       lastAct: "",
       nudge: null, nudgeAt: 0, nudged: false,
-      rect: null, rectAt: -1e9
+      rect: null, rectAt: -1e9,
+      look: null
     };
     for (var i = 0; i < eyeEls.length; i++) {
       rig.eyes.push({
@@ -680,8 +685,23 @@
     }
   }
 
+  /* The same two by host, for a page that holds one Ember over several moments: the homepage
+     keeps a single Ember for the whole day and tells it what it is doing where. */
+  function rigOf(host) {
+    for (var i = 0; i < rigs.length; i++) { if (rigs[i].host === host) return rigs[i]; }
+    return null;
+  }
+  function setNamed(host, state) {
+    var rig = rigOf(host);
+    if (rig && Object.prototype.hasOwnProperty.call(STATE_CLASS, state)) setState(rig, state);
+  }
+  function lookNamed(host, pt) {
+    var rig = rigOf(host);
+    if (rig) rig.look = pt || null;
+  }
+
   window.Ember = {
-    mount: mount, auto: auto, react: react, act: actNamed,
+    mount: mount, auto: auto, react: react, act: actNamed, set: setNamed, look: lookNamed,
     lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor
   };
 

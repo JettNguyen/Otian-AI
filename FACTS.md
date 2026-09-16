@@ -219,10 +219,10 @@ mode fails when it has not. **The generator writes the cards and not the stat ro
 number beside them is still a hand edit and still has to move in the same push.
 
 Five more counts are **not** in the markup shape `check-facts.py` reads, so nothing checks them.
-Three are on the homepage: "160 on the shelf today", "Four of 160", and "every one of the 160
-add-ons" on the pricing card. **Two more are on `archie/personal/`** and were missing from this
+Two are on the homepage since 2026-09-16 (the day stage dropped "160 on the shelf today"): "Four of 160"
+in the coverage act, and "every one of the 160 add-ons" on the pricing card. **Two more are on `archie/personal/`** and were missing from this
 note until 2026-09-16: the same "every one of the 160 add-ons" sentence in the agents card, and the
-figure inside an HTML comment there that cites this file. So a catalog move is six hand edits and a
+figure inside an HTML comment there that cites this file. So a catalog move is five hand edits and a
 regeneration, not four. They were stale from 2026-09-02 until
 2026-09-07, and stale again until 2026-09-10, when the third was found: this file said there were
 two of them and there are three. A fourth sits in an HTML comment about an earlier version of the

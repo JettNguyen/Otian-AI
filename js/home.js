@@ -128,4 +128,215 @@
     }
   }
 
+
+  /* ==============================================================================================
+     THE DAY. The homepage since 2026-09-16: one sticky stage, seven acts, and the scroll is the
+     clock. Everything below turns one number, how far the reader is through .day-story, into a
+     camera pose, a set of beats, and a place for Ember to stand.
+
+     The shape of it, so the next person does not have to re-derive it:
+
+       ACTS  One entry per act. `pose` is where the camera, the window and the phone are and how
+             dark the stage is; poses are lerped over the first 30% of each act's scroll so an act
+             settles before it plays. `mark` names the element Ember stands on; `state` is what
+             Ember is doing there; `scr` is which phone screen is up; `clock` is the chip.
+       BEATS Any element with class="day-beat" and data-act / data-at (a fraction of the act's
+             play phase) lights when the scroll passes it and goes dark when the scroll comes
+             back. A data-until makes it a window, which is how the typing dots go away.
+       MARKS Ember is one position:fixed element. Each frame the driver reads the mark's
+             projected rectangle (getBoundingClientRect sees through the 3D transforms), puts
+             Ember's feet on it, and eases. A new mark is a hop. Past the story the mark is the
+             one beside the closing button, so Ember goes ahead and waits there.
+
+     Two controls are real: Confirm on the calendar card and Send on the mail card. Pressing one
+     marks the screen done, which the stylesheet turns into the follow-up bubbles, and Ember hops.
+     The custody toggle redraws the lap for starter credits, in TRUST.md's own sentence.
+
+     Under reduced motion the stage is unpinned by the stylesheet and this only places Ember on
+     the hero mark, snapped rather than eased, so the page reads as a stack of stills.
+     ============================================================================================== */
+  var story = document.querySelector('.day-story');
+  if (story && window.Ember) (function () {
+    var $ = function (s, r) { return (r || document).querySelector(s); };
+    var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+    var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
+    var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
+    var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes');
+    var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
+    var phoneClock = $('[data-day-clock]');
+    var ember = $('.day-ember');
+    if (!stage || !scene || !win || !phone || !ember) return;
+    var beats = $$('.day-beat').map(function (el) {
+      return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
+    });
+    var marks = {};
+    $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
+
+    var N = 7, SETTLE = 0.3;
+    var W = { x: -60, y: -30, z: -140, ry: 12, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: 1, o: 1 };
+    var W2 = { x: -150, y: -50, z: -240, ry: 18, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -5, s: 1.1, o: 1 };
+    function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
+    var ACTS = [
+      { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0, pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: PH, night: 0, fc: 0, fs: 0 } },
+      { mark: 'm-phone', state: 'idle', clock: '9:12 am', phone: '9:12', scr: 1, pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 } },
+      { mark: 'm-phone', state: 'idle', clock: '1:40 pm', phone: '1:40', scr: 2, pose: { cam: { rx: 2, ry: 3, s: 1.05 }, win: copy(W2, { x: -170, z: -260, ry: 20, o: .4 }), phone: copy(PH2, { x: 90, ry: 3, z: 160 }), night: 0, fc: 0, fs: 0 } },
+      { mark: 'm-computer', state: 'idle', clock: '', phone: '1:40', scr: -1, pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W2, { o: 0 }), phone: copy(PH2, { o: 0 }), night: 0, fc: 1, fs: 0 } },
+      { mark: 'm-phone', state: 'idle', clock: '4:15 pm', phone: '4:15', scr: 4, pose: { cam: { rx: 3, ry: -8, s: 1.04 }, win: copy(W2, { ry: 16 }), phone: copy(PH2, { ry: -8 }), night: 0, fc: 0, fs: 0 } },
+      { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5, pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: copy(PH, { o: .45 }), night: 1, fc: 0, fs: 0 } },
+      { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1, pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 } }
+    ];
+    /* The five minute marks, from FACTS.md: what the clock over the setup track reaches as each
+       step is lit. Estimates, and the caption says so. */
+    var MINUTES = [1, 4, 9, 13, 15];
+
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
+    function lerpPose(a, b, u) {
+      var out = {}, k;
+      for (k in a) out[k] = typeof a[k] === 'number' ? a[k] + (b[k] - a[k]) * u : lerpPose(a[k], b[k], u);
+      return out;
+    }
+
+    /* The stage tilts a few degrees toward the pointer on a device that has one. Tier three, and
+       the smallest control on the page: it is what makes a drawing of two objects read as two
+       objects with air between them. */
+    var tilt = { x: 0, y: 0, tx: 0, ty: 0 };
+    var fine = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fine && !still) {
+      window.addEventListener('pointermove', function (e) {
+        tilt.tx = (e.clientX / window.innerWidth - 0.5) * 6;
+        tilt.ty = (0.5 - e.clientY / window.innerHeight) * 4;
+      }, { passive: true });
+    }
+    var SC = 1;
+    function readScale() { SC = parseFloat(getComputedStyle($('.day-scene-wrap')).getPropertyValue('--sc')) || 1; }
+    readScale();
+    window.addEventListener('resize', readScale);
+
+    function applyPose(p) {
+      scene.style.transform = 'scale(' + SC + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')';
+      win.style.transform = 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg)';
+      win.style.opacity = p.win.o.toFixed(3);
+      phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
+      phone.style.opacity = p.phone.o.toFixed(3);
+      floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
+      floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
+      stage.style.setProperty('--night', p.night.toFixed(3));
+      stage.classList.toggle('is-night', p.night > 0.5);
+    }
+
+    /* The custody lap in floor coordinates: [time, x, y]. The held stretch at the gate is the
+       point of the drawing, so it is a fifth of the lap. The credits path takes the detour through
+       our server and back, which is the one case TRUST.md says the picture may not skip. */
+    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 352], [0.8, 360, 352], [1, 95, 300]];
+    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 500, 215], [0.44, 625, 300], [0.52, 500, 215], [0.6, 360, 300], [0.64, 360, 352], [0.8, 360, 352], [1, 95, 300]];
+    function lapPoint(path, t) {
+      for (var i = 1; i < path.length; i++) {
+        if (t <= path[i][0]) {
+          var a = path[i - 1], b = path[i], u = (t - a[0]) / (b[0] - a[0] || 1);
+          return [a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
+        }
+      }
+      return [path[path.length - 1][1], path[path.length - 1][2]];
+    }
+
+    var cur = -1, markName = '';
+    var ex = -999, ey = -999, es = 96, first = true;
+
+    function setAct(i) {
+      if (i === cur) return;
+      var prev = cur; cur = i;
+      caps.forEach(function (c, j) { c.classList.toggle('is-on', j === i); });
+      scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
+      win.classList.toggle('is-night', i === 5);
+      clock.classList.toggle('is-on', !!ACTS[i].clock);
+      if (ACTS[i].clock) clock.querySelector('span').textContent = ACTS[i].clock;
+      if (phoneClock) phoneClock.textContent = ACTS[i].phone;
+      if (prev >= 0 && !still) window.Ember.act(ember, 'hop');
+      window.Ember.set(ember, ACTS[i].state);
+    }
+
+    function frame() {
+      var r = story.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = story.offsetHeight - vh;
+      var p = still ? 0 : clamp(-r.top / (total || 1), 0, 1);
+      var i = Math.min(N - 1, Math.floor(p * N)), t = p * N - i;
+      if (still) { i = 0; t = 1; }
+      setAct(i);
+      if (hint) hint.classList.toggle('is-off', p > 0.02);
+
+      var settle = i === 0 ? 1 : smooth(t / SETTLE);
+      var pose = i === 0 ? ACTS[0].pose : lerpPose(ACTS[i - 1].pose, ACTS[i].pose, settle);
+      tilt.x += (tilt.tx - tilt.x) * 0.08; tilt.y += (tilt.ty - tilt.y) * 0.08;
+      applyPose(pose);
+
+      var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
+      beats.forEach(function (b) {
+        var on = b.act === i ? (tp >= b.at && tp < b.until) : (b.act < i && b.until > 1);
+        b.el.classList.toggle('is-on', on);
+      });
+
+      var mark = ACTS[i].mark;
+      if (i === 3) {
+        var credits = floorC.getAttribute('data-mode') === 'credits';
+        var pt = lapPoint(credits ? LAP_CREDITS : LAP_KEY, tp);
+        dot.style.left = pt[0] + 'px'; dot.style.top = pt[1] + 'px';
+        var held = tp >= 0.62 && tp < 0.8;
+        dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);
+      }
+      if (i === 6) {
+        var k = Math.min(4, Math.floor(tp * 5.4));
+        mark = 'm-s' + k;
+        steps.forEach(function (s, j) { s.classList.toggle('is-lit', j <= k); });
+        if (mins) mins.textContent = MINUTES[k];
+      }
+      if (r.bottom < vh * 0.55) mark = 'm-cta';
+      var m = marks[mark];
+      if (m) {
+        var size = +m.getAttribute('data-size') || 96;
+        var mr = m.getBoundingClientRect();
+        var tx = mr.left + mr.width / 2 - size / 2;
+        /* 0.85: the ground between Ember's feet is 85% of the way down the drawing's box (viewBox
+           y 6 to 206, feet at 176), so this puts the feet on the mark rather than the box. */
+        var ty = mr.top + mr.height / 2 - size * 0.85;
+        if (mark !== markName) {
+          if (markName && !still) window.Ember.act(ember, 'hop');
+          markName = mark;
+        }
+        var k2 = (first || still) ? 1 : 0.16;
+        ex += (tx - ex) * k2; ey += (ty - ey) * k2; es += (size - es) * k2;
+        first = false;
+        ember.style.width = es.toFixed(1) + 'px'; ember.style.height = es.toFixed(1) + 'px';
+        ember.style.transform = 'translate(' + ex.toFixed(1) + 'px,' + ey.toFixed(1) + 'px)';
+      }
+      /* Ember watches the phone while a scene plays on it, and the dot while it laps. */
+      if (i === 1 || i === 2 || i === 4) { var pr = phone.getBoundingClientRect(); window.Ember.look(ember, { x: pr.left + pr.width / 2, y: pr.top + pr.height * 0.55 }); }
+      else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
+      else window.Ember.look(ember, null);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    /* The two real buttons on the phone. A press marks the screen done and Ember hops; pressing
+       again does nothing, because the thing it did is done. */
+    $$('[data-press]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var scr = btn.closest('.dp-scr');
+        if (!scr || scr.classList.contains('is-done')) return;
+        scr.classList.add('is-done');
+        if (!still) window.Ember.act(ember, 'hop');
+      });
+    });
+    /* The own-key / starter-credits control on the custody act. */
+    $$('.day-seg button[data-mode]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.getAttribute('data-mode');
+        $$('.day-seg button[data-mode]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+        floorC.setAttribute('data-mode', mode);
+        caps[3].classList.toggle('mode-credits', mode === 'credits');
+      });
+    });
+  })();
+
 })();

@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260916-7" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260916-8" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -175,562 +175,408 @@
     </div>
 
     <!-- ==============================
-         Hero: one quiet column
-         The concept-mock hero: label, one serif claim, a short lede, the two
-         actions, the no-card line, the testing pill, then the demo at full
-         width. The demo player itself is unchanged (see js/demo-player.js and
-         the sourcing comments in git history for the source markup).
+         One day with Archie: the homepage as one stage
+
+         Since 2026-09-16 the page is one sticky stage the scroll moves through. Seven acts across
+         one day: the 7:00 am brief on the phone, a calendar move you confirm, a mail draft you
+         send, the custody lap on a floor, the four coverage rows, 2:00 am with the stage dark and
+         only the app window lit, then the five setup steps as a path. The same two objects do the
+         real work the whole way down, and they are the app's own surfaces: the window is ported
+         from archie-app-mockup.html and the phone from archie-screen-kit.html, the two hand-editable
+         mockups that copy the Archie repo's tokens value for value (css/styles.css, section 49,
+         says where they live and how the port was done). Ember is one fixed element that
+         js/home.js walks from mark to mark on those objects.
+
+         The words are captions, one column, one act lit at a time. Every sentence in them was on
+         this page already or is TRUST.md's approved form, so the drawing makes no new claim, and
+         every caption is ordinary text in the DOM, so a crawler, an answer engine and a reader
+         with reduced motion on (where the stylesheet unpins the stage into a stack) all get every
+         claim in words. The scene itself is decoration to a screen reader and describes itself
+         once, in the aria-label on .day-scene, the way the old hero phone did.
+
+         What this replaced, for the arithmetic the visual-first rules ask for: the hero and its
+         seven-scene phone, the demo player, "Where Archie starts", the coverage grid, the day
+         spine, the custody figure, the setup track and the price band's own section. The
+         connections band and the price cards stay, unchanged. 1,270 words of copy became about
+         750, and the ten sections became four.
          ============================== -->
-    <!-- ==============================
-         Hero
+    <svg class="day-sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
+      <linearGradient id="wm-mark" x1="512" y1="85" x2="512" y2="888" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#E8A87C"/><stop offset="0.55" stop-color="#D9825A"/><stop offset="1" stop-color="#B5623C"/>
+      </linearGradient>
+      <linearGradient id="wm-text" x1="690" y1="283" x2="690" y2="815" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#EFA97E"/><stop offset="1" stop-color="#C36A3D"/>
+      </linearGradient>
+      <linearGradient id="dayArchieGrad" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888">
+        <stop offset="0" stop-color="#F0AB80"/><stop offset="0.55" stop-color="#E28D5E"/><stop offset="1" stop-color="#C36A3D"/>
+      </linearGradient>
+      <symbol id="wordmark" viewBox="0 0 2700 900">
+        <polygon points="138,852 322,692 506,852" fill="url(#wm-mark)" stroke="url(#wm-mark)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M 322,50 L 634,815 L 322,677 L 10,815 Z M 322,237 L 194,581 L 450,581 Z" fill="url(#wm-mark)" stroke="url(#wm-mark)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd"/>
+        <text x="690" y="815" font-family="Georgia, serif" font-size="730" font-weight="bold" fill="url(#wm-text)">rchie</text>
+      </symbol>
+      <symbol id="g-agents" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"/><path d="M 5.5 19.2 C 5.5 15.5 8.4 13.6 12 13.6 C 15.6 13.6 18.5 15.5 18.5 19.2"/></symbol>
+      <symbol id="g-now" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="g-work" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="10" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="4" height="8" rx="1.5"/></symbol>
+      <symbol id="g-basket" viewBox="0 0 24 24"><path d="M 3.5 10.5 H 20.5"/><path d="M 5 10.5 V 18 A 1.5 1.5 0 0 0 6.5 19.5 H 17.5 A 1.5 1.5 0 0 0 19 18 V 10.5"/><path d="M 7 10.5 V 8 A 2 2 0 0 1 9 6 H 15 A 2 2 0 0 1 17 8 V 10.5"/></symbol>
+      <symbol id="g-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+      <symbol id="g-skills" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6.3 6.3 4 4M20 20l-2.3-2.3M17.7 6.3 20 4M4 20l2.3-2.3"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="g-routines" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6.4v5.6l3.5 2.3"/></symbol>
+      <symbol id="g-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+      <symbol id="g-personality" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.2 14.5a4.7 4.7 0 0 0 7.6 0M8.8 9h.01M15.2 9h.01"/></symbol>
+      <symbol id="g-documents" viewBox="0 0 24 24"><path d="M13.8 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.7z"/><path d="M13.8 2.5V8.7H20"/><path d="M8 13.5h8M8 17h5"/></symbol>
+      <symbol id="g-connections" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></symbol>
+      <symbol id="g-settings" viewBox="0 0 24 24"><path d="M 4 8.6 H 20"/><path d="M 4 15.4 H 20"/><circle cx="14.8" cy="8.6" r="2.4" fill="currentColor"/><circle cx="9.2" cy="15.4" r="2.4" fill="currentColor"/></symbol>
+      <symbol id="g-mail" viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="M3.4 7.2 12 13.2 20.6 7.2"/></symbol>
+    </svg>
 
-         Two columns since 2026-09-07. It was a centred column of type on a flat ground with the
-         screen recording under it, and the recording is the wrong thing to open on however good
-         it is: at hero size the app's own interface is six-pixel text, so the first screenful was
-         570px of prose and then a bright rectangle nobody could read. The demo did not get worse,
-         it got a section of its own below, where it has the room to be watched.
+    <section class="day-story" aria-label="One day with Archie">
+      <div class="day-stage">
 
-         What replaced it is the exchange the headline is promising. A person says a job in the
-         words they would use with a person; the agent answers with the routine it just made. That
-         is the whole product in two bubbles, it is legible at any size because it is four lines of
-         real type rather than a screenshot of an interface, and it is the surface most people will
-         actually use Archie through. The phone and the bubbles are not new: they are the same
-         .hm-pz and .hm-bubble the day spine has used since August, promoted from fourth position
-         to first.
+        <div class="day-caps">
 
-         It arrives rather than sitting there. The messages animate in once, in the order they
-         would really arrive, which is the one piece of movement on the page that is describing
-         something true instead of decorating. prefers-reduced-motion gets the finished
-         conversation with no animation at all.
-         ============================== -->
-    <section class="hm-hero" aria-label="Hero">
-      <div class="hm-hero-inner">
-        <!-- Ember, at a size you can see, on the page everybody lands on first.
+          <!-- Act 0, 7:00 am. The hero keeps every word it had, minus the phone's six other scenes,
+               which are the day below. -->
+          <article class="day-cap is-on" data-act="0">
+            <span class="section-label">Otian AI &middot; Meet Archie</span>
+            <h1>Don&rsquo;t rent your agent. <em>Own it.</em> Yours to shape &amp; yours to keep.</h1>
+            <p><strong>Archie is a desktop app that runs your AI agent.</strong> You tell it a job the way you would tell a person, and it does that job on a schedule, from the chat apps you already have.</p>
+            <div class="hm-actions">
+              <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+            </div>
+            <p class="hm-hero-fork"><a href="archie/personal/">For one person&nbsp;&rarr;</a></p>
+            <p class="hm-hero-micro">Archie is in testing. The waitlist hears the day it opens. <a href="archie/personal/#status">See where it stands&nbsp;&rarr;</a><br>Running a team? <a href="archie/business/">Archie for Business&nbsp;&rarr;</a></p>
+          </article>
 
-             Ember was already here as the phone's profile picture below, which is the right
-             size for the job that one is doing and too small to be a greeting. This one is the
-             greeting: it stands above the label, arrives before the rest of the hero does, and
-             says one line in its own bubble the first time somebody visits (js/ember.js,
-             `invitation`, which picks tap or click from the device). Pressing it gets a move
-             back, which is the only part of this page that answers the reader directly.
+          <!-- Act 1, 9:12 am. TRUST.md "Calendar changes require your confirmation": proposed
+               first, applied after your yes in a later message, and a button answers for you. -->
+          <article class="day-cap" data-act="1">
+            <span class="section-label">Calendar Manager &middot; 9:12 am</span>
+            <h2>Ask in the words you would say out loud.</h2>
+            <p>Archie reads your calendar on its own. It proposes the exact change and applies it only after you approve it in a later message.</p>
+            <p class="day-catch">A routine running on its own cannot apply a calendar change at all. It reports what it would make instead of making it.</p>
+          </article>
 
-             It costs no words, and that is not a coincidence: this page is at its budget to
-             the word, so anything arriving here has to be a drawing. -->
-        <span class="hm-hero-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
-        <span class="section-label">Otian AI &middot; Meet Archie</span>
-        <h1>Don&rsquo;t rent your agent. <em>Own it.</em> Yours to shape &amp; yours to keep.</h1>
-        <p class="hm-lede"><strong>Archie is a desktop app that runs your AI agent.</strong> You tell it a job the way you&rsquo;d tell a person, and it does that job on a schedule, from the chat apps you already have.</p>
-        <div class="hm-actions">
-          <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+          <!-- Act 2, 1:40 pm. The product's own sentence for the send gate, and the starter-credits
+               refusal beside it, because the limitation sits with the capability. -->
+          <article class="day-cap" data-act="2">
+            <span class="section-label">Email Manager &middot; 1:40 pm</span>
+            <h2>Archie drafts the reply. You send it, or you don&rsquo;t.</h2>
+            <p>Nothing leaves your account until you send it or set a time.</p>
+            <p class="day-catch">Every email feature refuses to run on the free starter credits; connect an AI account of your own and it starts.</p>
+          </article>
+
+          <!-- Act 3. Both captions are the sentences this page already carried for the custody
+               figure, verbatim, so the floor makes no new claim. The toggle redraws the lap for
+               starter credits, which is the one case where our server is in the path. -->
+          <article class="day-cap" data-act="3">
+            <span class="section-label">Where your words go</span>
+            <h2>Your conversations go to your AI provider. Not to us.</h2>
+            <p class="day-main">A message laps from your chat app to your agent to the AI company you picked, and back. Anything heading for your mail or calendar stops at the gate and waits for you.</p>
+            <p class="day-alt">Starter credits and included AI reach Anthropic through our server without being kept. Your own key bypasses it from each agent&rsquo;s next start.</p>
+            <div class="day-seg" role="group" aria-label="Which AI account the lap uses">
+              <button type="button" data-mode="key" aria-pressed="true">Your own AI key</button>
+              <button type="button" data-mode="credits" aria-pressed="false">Starter credits</button>
+            </div>
+            <div class="day-chips">
+              <span class="day-chip"><i></i>Keys in your computer&rsquo;s password store</span>
+              <span class="day-chip"><i></i>No analytics service in the app</span>
+              <span class="day-chip"><i></i>Add-ons are text, not code</span>
+              <span class="day-chip"><i></i>Nothing connects until you connect it</span>
+            </div>
+            <a class="day-more" href="trust/">Check every claim yourself, in 10 minutes&nbsp;&rarr;</a>
+          </article>
+
+          <!-- Act 4, 4:15 pm. The coverage grid's four questions, on the phone, each answered by the
+               add-on that does it under its real name. The dashed chips are the rows still blank. -->
+          <article class="day-cap" data-act="4">
+            <span class="section-label">What Archie takes off you &middot; 4:15 pm</span>
+            <h2>None of it is hard. It is just spread across everything you own.</h2>
+            <p>Four of 160 add-ons, all included, each under its real name. Say the next job in a sentence and Archie writes the routine.</p>
+            <div class="day-chips">
+              <span class="day-chip day-chip--no"><i></i>Cannot spend money or buy anything</span>
+              <span class="day-chip day-chip--no"><i></i>Connects to no bank</span>
+              <span class="day-chip day-chip--no"><i></i>No PDFs, pictures, audio or video</span>
+            </div>
+            <p class="day-catch">Add-ons with routines run on their own schedule, and those runs are a real part of a heavy month&rsquo;s AI bill. <a href="archie/pricing/#ai-cost">What that costs, measured&nbsp;&rarr;</a></p>
+            <a class="day-more" href="skills-marketplace/find/">Say the job in your own words and see which one does it&nbsp;&rarr;</a>
+          </article>
+
+          <!-- Act 5, 2:00 am. "It works while you sleep" is the canonical claim; the wake sentence
+               is TRUST.md's approved wording for the helper that shipped on 2026-09-16. -->
+          <article class="day-cap" data-act="5">
+            <span class="section-label">Overnight &middot; 2:00 am</span>
+            <h2>Archie works while you sleep.</h2>
+            <p>Routines run on a schedule, unattended, and report to your chat. A routine set for seven in the morning arrives at seven, even if the computer was asleep. Archie asks your Mac to wake a few minutes before, runs it, and lets it go back to sleep.</p>
+          </article>
+
+          <!-- Act 6. The five steps stand on the floor and Ember hops one to the next; the minute
+               count climbs 1, 4, 9, 13, 15, the marks FACTS.md records for the track. -->
+          <article class="day-cap" data-act="6">
+            <span class="section-label">Setup &middot; Estimated</span>
+            <h2>Five steps, about fifteen minutes, and none of them is configuration.</h2>
+            <div class="day-minutes"><small>Estimated</small><b id="dayMinutes">1</b><span>min so far</span></div>
+            <p>Estimates, not a stopwatch. The longest step is opening an AI account: their checkout, not ours.</p>
+            <a class="day-more" href="how-it-works/#what-you-need">The full list of what you need&nbsp;&rarr;</a>
+          </article>
+
         </div>
-        <!-- Who this is for, said above the fold. This was a 50/50 fork until 2026-09-15, when
-             Jett picked the wedge: one person, personal admin. The page leads on that now, so
-             the two routes are no longer weighted the same. One person is the primary link; a
-             team still gets a route, on the muted line below, because the edition is real and
-             abandoning the reader is not the same as not leading with them. The rest of the page
-             was already on this wedge (the four cards downstairs are the post, the bills, the
-             paperwork and the doctor), which is why leading on it costs so little markup. -->
-        <p class="hm-hero-fork"><a href="archie/personal/">For one person&nbsp;&rarr;</a></p>
-        <p class="hm-hero-micro">Archie is in testing. The waitlist hears the day it opens. <a href="archie/personal/#status">See where it stands&nbsp;&rarr;</a><br>Running a team? <a href="archie/business/">Archie for Business&nbsp;&rarr;</a></p>
-      </div>
 
-      <div class="hm-stage">
-          <!-- The picker, above the phone. Seven small buttons, one per scene, each with a bar
-               under it that fills while its scene plays: the strip is the cycle's progress and
-               the reader's hand on it at once, the way a phone shows a run of stories. The bars
-               run on the phone's own clock (CSS, keyed by DOM order and the same --s), so nothing
-               here has to be told the timing twice. Press one and js/home.js moves the whole
-               clock to the start of that scene: its bar fills over the scene's nine seconds and
-               the cycle carries on from there. Without the script the strip still shows where
-               the cycle is. -->
-          <div class="hm-picks" role="group" aria-label="Pick a scene">
-            <button class="hm-pick" type="button" style="--s:0" data-scene="0" aria-label="A morning brief"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 4v2M5.6 7.6l1.4 1.4M18.4 7.6L17 9M3 15h18M6.5 15a5.5 5.5 0 0 1 11 0"/></svg><span>Brief</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:1" data-scene="1" aria-label="A reminder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 20.5h4"/></svg><span>Remind</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:2" data-scene="2" aria-label="A reply to send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg><span>Reply</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:3" data-scene="3" aria-label="Move a meeting"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="4" y="5.5" width="16" height="15" rx="2.5"/><path d="M4 10h16M8 3.5v4M16 3.5v4"/><path d="M9.5 15.5h5M12.5 13.5l2 2-2 2"/></svg><span>Move</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:4" data-scene="4" aria-label="Watch for a reply"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 12s3.2-5.5 8.5-5.5S20.5 12 20.5 12s-3.2 5.5-8.5 5.5S3.5 12 3.5 12z"/><circle cx="12" cy="12" r="2.2"/></svg><span>Watch</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:5" data-scene="5" aria-label="What renews"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 12a8 8 0 0 1-14.3 4.9M4 12a8 8 0 0 1 14.3-4.9"/><path d="M18.5 4v3.5H15M5.5 20v-3.5H9"/></svg><span>Renew</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:6" data-scene="6" aria-label="Find an answer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6"/><path d="M16 16l4 4"/></svg><span>Find</span><i aria-hidden="true"><b></b></i></button>
-          </div>
+        <div class="day-scene-wrap">
+          <div class="day-scene" role="img" aria-label="One day with an agent on your computer, drawn on the Archie window and a phone: the morning brief arrives at seven, a calendar move is proposed and waits for your Confirm, a mail draft waits for your Send, the message laps from your phone to your computer to the AI company you picked and back with our server nowhere on the path, four more jobs get their add-on by name, the routines run at two in the morning on a computer left on, and the five setup steps stand in a row with the minutes counted.">
 
-          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You type a request for a morning summary and it adds a routine called Morning Brief that runs every day at seven. You ask for a reminder at noon, it reads the time and the words back to you, and four hours later the reminder itself arrives with Done, Later and Dismiss on it. It hands you one card for a new email from Sam, holding the drafted reply and offering Send, Edit and Dismiss. You ask it to move a three o&rsquo;clock and it says it checked your calendar and that Thursday at ten is open, with Confirm and Another time. You ask to be told when Emily writes back and it says it is watching for her and will say as soon as anything from her lands. It reports two things renewing this week and offers a nudge the day before. And you ask about direct flights to Lisbon in March and it lists two.">
-            <!-- The top of the phone: who you are talking to. It is here for three reasons and
-               each one was a hole before it. The screen opened on 300px of empty wall, because a
-               thread hangs its newest message at the thumb and there is nothing above it. A phone
-               that is only a thread is a picture of a conversation rather than a picture of an
-               app. And Ember, who is Archie's face in the app itself, was on four other pages and
-               not on the one page everybody sees first.
-
-               Ember is the profile picture, which is the one place a character belongs in a chat
-               app and the one place it is not decoration: the reader learns what the agent looks like
-               in the app before they ever open it. Same look as archie/ and 404 (the app's
-               terracotta, peaked, pill-eyed default), because one name and one face per concept.
-
-               THE SLOT BESIDE THE FACE SAYS "your agent", NOT "Ember", SINCE 2026-09-16. It said
-               Ember, which is the starter agent's name in the app and so was accurate, but it put
-               two brand-looking words side by side in the strip a first-time reader meets first:
-               Archie, then Ember, then on your computer. Jett read that as a third name and he was
-               right. Ember is the face your agents wear, which archie/personal/ is where we say,
-               and a face is not a speaker. Written out the strip is now the sentence the hero says
-               underneath it: Archie runs your agent on your computer. The face stays, because the
-               face was always the part that earned its place here.
-               js/ember.js draws them and the pointer moves their eyes. -->
-          <div class="hm-pz-head" aria-hidden="true">
-            <img class="hm-pz-word" src="assets/archie-text.svg" width="2300" height="900" alt="Archie" />
-            <span class="hm-pz-agent"><span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span><b>your agent</b></span>
-            <span class="hm-pz-who"><i>on your<br />computer</i></span>
-          </div>
-
-          <div class="hm-scenes" aria-hidden="true">
-
-              <!-- Seven jobs, each one a thing the shipped build does, and each a different shape.
-                   The order alternates who spoke first: you asking, then it arriving unasked, then
-                   you asking again. That alternation is the argument. A chat app only ever does the
-                   odd-numbered ones. What each one is FOR is said under the phone, in .hm-caps, and
-                   never inside the thread: a caption in the chat reads as something the agent said. -->
-
-              <!-- 1. Plain words in, a scheduled job out, in the sentence the app actually returns when a
-                 routine is written (skill_builder.rs: "Added the routine ... It runs on its own
-                 ..."). The step before it, the drafted card with Keep it under it, is real and is
-                 not drawn here: it is a five-line card with a three-button row, which made the
-                 first scene the tallest of the seven and so padded the other six with the empty
-                 phone it needed. Three other scenes already carry the proposes-then-waits beat. -->
-              <div class="hm-scene" style="--s:0">
-                <div class="hm-msg">
-                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Every morning, tell me what my day looks like and who I owe a reply.</p></div>
-                    <time>7:02 am</time>
-                  </div>
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Added the routine &ldquo;Morning Brief&rdquo;. It runs on its own every day at 7:00&nbsp;am.</p></div>
-                      <time>7:02 am</time>
+            <!-- THE ARCHIE WINDOW. archie-app-mockup.html's chrome, sidebar, agent header and Now
+                 pane, class for class, at half size. The app's own tokens are scoped under
+                 .da-app in the stylesheet. -->
+            <div class="day-layer day-win" aria-hidden="true">
+              <div class="da-app">
+                <span class="da-traffic"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>
+                <div class="da-body">
+                  <aside class="da-side">
+                    <div class="da-brand">
+                      <div class="da-brand-btn">
+                        <svg viewBox="0 0 1024 1024" aria-hidden="true"><polygon fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/><path fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/></svg>
+                        <span class="da-brand-word">rchie</span>
+                      </div>
+                      <span class="da-brand-tag">by Otian AI</span>
                     </div>
-                  </div>
-                </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">E</i><i style="--i:1">v</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">y</i><i style="--i:5"> </i><i style="--i:6">m</i><i style="--i:7">o</i><i style="--i:8">r</i><i style="--i:9">n</i><i style="--i:10">i</i><i style="--i:11">n</i><i style="--i:12">g</i><i style="--i:13">,</i><i style="--i:14"> </i><i style="--i:15">t</i><i style="--i:16">e</i><i style="--i:17">l</i><i style="--i:18">l</i><i style="--i:19"> </i><i style="--i:20">m</i><i style="--i:21">e</i><i style="--i:22"> </i><i style="--i:23">w</i><i style="--i:24">h</i><i style="--i:25">a</i><i style="--i:26">t</i><i style="--i:27"> </i><i style="--i:28">m</i><i style="--i:29">y</i><i style="--i:30"> </i><i style="--i:31">d</i><i style="--i:32">a</i><i style="--i:33">y</i><i style="--i:34"> </i><i style="--i:35">l</i><i style="--i:36">o</i><i style="--i:37">o</i><i style="--i:38">k</i><i style="--i:39">s</i><i style="--i:40"> </i><i style="--i:41">l</i><i style="--i:42">i</i><i style="--i:43">k</i><i style="--i:44">e</i><i style="--i:45"> </i><i style="--i:46">a</i><i style="--i:47">n</i><i style="--i:48">d</i><i style="--i:49"> </i><i style="--i:50">w</i><i style="--i:51">h</i><i style="--i:52">o</i><i style="--i:53"> </i><i style="--i:54">I</i><i style="--i:55"> </i><i style="--i:56">o</i><i style="--i:57">w</i><i style="--i:58">e</i><i style="--i:59"> </i><i style="--i:60">a</i><i style="--i:61"> </i><i style="--i:62">r</i><i style="--i:63">e</i><i style="--i:64">p</i><i style="--i:65">l</i><i style="--i:66">y</i><i style="--i:67">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
-              </div>
-
-              <!-- 2. A reminder, and the four hours in the middle of it.
-
-                 It used to be two bubbles: you ask at 11:20, the dots run, the reminder lands. The
-                 timestamps said 11:20 am and 4:00 pm and nobody read them, because everything else
-                 on screen said the agent had answered a request with a reminder on the spot, which
-                 is not what a reminder is and is the one thing this scene exists to show.
-
-                 Three things fix it, and the first two are simply what the app really does. The
-                 agent answers at once, and it answers by reading the time and the exact words back
-                 (tools_reminders.rs, reminder_set: "Tell the user the day and time AND those exact
-                 words, so they can catch it now if either one is wrong"). Then the thread breaks,
-                 the way a thread does when nothing happens for an afternoon. Then the reminder
-                 arrives, in the app's own words (reminders.rs, `message`: "Reminder: " and then
-                 your text, never rewritten) with the three buttons it lands with.
-
-                 Noon, not 11:20, so the break can say four hours and mean it. -->
-              <div class="hm-scene" style="--s:1">
-                <div class="hm-msg">
-                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Remind me to call the vet at four.</p></div>
-                    <time>12:00 pm</time>
-                  </div>
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Set for today at 4:00&nbsp;pm, saying &ldquo;Call the vet.&rdquo;</p></div>
-                      <time>12:00 pm</time>
+                    <div class="da-picker">
+                      <span class="da-face"><span class="da-avatar md"><span data-ember="terracotta.peak.pill.none"></span></span><span class="da-dot"></span></span>
+                      <span class="da-who"><span class="da-n">Ember</span><span class="da-w">Running on Telegram</span></span>
+                      <svg class="da-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
                     </div>
-                  </div>
-                  <div class="hm-break hm-in" style="--d:11"><span>4 hours later</span></div>
-                  <div class="hm-reply">
-                    <div class="hm-turn hm-in" style="--d:12">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Reminder: Call the vet.</p></div>
-                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Done</span><span class="hm-msg-btn">Later</span><span class="hm-msg-btn">Dismiss</span></div>
-                      <time>4:00 pm</time>
+                    <div class="da-sections">
+                      <div class="da-nav">
+                        <div class="da-row on"><span class="da-glyph"><svg><use href="#g-now"/></svg></span><span class="da-label">Now</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-message"/></svg></span><span class="da-label">Chat</span><span class="da-pill-unread">3</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-calendar"/></svg></span><span class="da-label">Calendar</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-work"/></svg></span><span class="da-label">Work</span></div>
+                        <div class="da-rule"></div>
+                        <div class="da-row"><span class="da-glyph plum"><svg><use href="#g-personality"/></svg></span><span class="da-label">Personality</span></div>
+                        <div class="da-row"><span class="da-glyph skill"><svg><use href="#g-skills"/></svg></span><span class="da-label">Skills</span></div>
+                        <div class="da-row"><span class="da-glyph teal"><svg><use href="#g-routines"/></svg></span><span class="da-label">Routines</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-documents"/></svg></span><span class="da-label">Knowledge</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-connections"/></svg></span><span class="da-label">Connections</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-settings"/></svg></span><span class="da-label">Setup</span></div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">R</i><i style="--i:1">e</i><i style="--i:2">m</i><i style="--i:3">i</i><i style="--i:4">n</i><i style="--i:5">d</i><i style="--i:6"> </i><i style="--i:7">m</i><i style="--i:8">e</i><i style="--i:9"> </i><i style="--i:10">t</i><i style="--i:11">o</i><i style="--i:12"> </i><i style="--i:13">c</i><i style="--i:14">a</i><i style="--i:15">l</i><i style="--i:16">l</i><i style="--i:17"> </i><i style="--i:18">t</i><i style="--i:19">h</i><i style="--i:20">e</i><i style="--i:21"> </i><i style="--i:22">v</i><i style="--i:23">e</i><i style="--i:24">t</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27">t</i><i style="--i:28"> </i><i style="--i:29">f</i><i style="--i:30">o</i><i style="--i:31">u</i><i style="--i:32">r</i><i style="--i:33">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
-              </div>
-
-              <!-- 3. The draft, as one card, which is the shape the app actually sends: who wrote, what they
-                 wanted, the reply, and the three buttons. Exactly one function in the tree puts
-                 mail on the wire and it is reachable from a pressed Send or a send you scheduled. -->
-              <div class="hm-scene" style="--s:2">
-                <div class="hm-msg">
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:2">
-                      <div class="hm-bubble">
-                        <p class="hm-mini-quote"><b>New email</b> from Sam</p>
-                        <p class="hm-mini-quote hm-em">Asking whether October still works.</p>
-                        <div class="hm-draft">
-                          <span class="hm-draft-label"><b>Draft reply</b> (to Sam):</span>
-                          <p class="hm-mini-quote">The second option works for us. Can you hold October&nbsp;12?</p>
+                    <div class="da-places">
+                      <div class="da-place store"><svg><use href="#g-basket"/></svg><span>Marketplace</span></div>
+                      <div class="da-place gold"><svg><use href="#g-documents"/></svg><span>Resources</span></div>
+                      <div class="da-pairrow">
+                        <div class="da-pair"><svg><use href="#g-settings"/></svg><span>Settings</span></div>
+                        <div class="da-pair"><svg><use href="#g-agents"/></svg><span>Account</span></div>
+                      </div>
+                    </div>
+                  </aside>
+                  <div class="da-page">
+                    <div class="da-page-pad">
+                      <div class="da-ahead-row">
+                        <div class="da-ahead-left">
+                          <div class="da-facebtn"><span class="da-avatar lg"><span data-ember="terracotta.peak.pill.none"></span></span></div>
+                          <div style="min-width:0">
+                            <div class="da-name">Ember <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 4.5l3 3L8 19l-4 1 1-4z"/></svg></div>
+                            <p class="da-purpose">Keeps the week straight and answers the mail I would rather not.</p>
+                          </div>
+                        </div>
+                        <div class="da-ahead-right">
+                          <span class="da-statusbtn">&#9679; Live <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                          <span class="da-runbtn">Stop</span>
                         </div>
                       </div>
-                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit</span><span class="hm-msg-btn">Dismiss</span></div>
-                      <time>1:28 pm</time>
-                    </div>
-                  </div>
-                </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
-              </div>
-
-              <!-- 4. A calendar change: it says what it read before it says what it found, and the change
-                 stages until a later message commits it. It speaks only for YOUR calendar. The
-                 adapter reads the accounts you connected and there is nothing in the tree that
-                 reads anybody else's free/busy, so a line about a time being free for both of you
-                 would be the illustration claiming a capability the app does not have. -->
-              <div class="hm-scene" style="--s:3">
-                <div class="hm-msg">
-                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Can you move my 3 o&rsquo;clock?</p></div>
-                    <time>2:41 pm</time>
-                  </div>
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Checked your calendar. Thursday at 10 is open.</p></div>
-                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Confirm</span><span class="hm-msg-btn">Another time</span></div>
-                      <time>2:41 pm</time>
-                    </div>
-                  </div>
-                </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">C</i><i style="--i:1">a</i><i style="--i:2">n</i><i style="--i:3"> </i><i style="--i:4">y</i><i style="--i:5">o</i><i style="--i:6">u</i><i style="--i:7"> </i><i style="--i:8">m</i><i style="--i:9">o</i><i style="--i:10">v</i><i style="--i:11">e</i><i style="--i:12"> </i><i style="--i:13">m</i><i style="--i:14">y</i><i style="--i:15"> </i><i style="--i:16">3</i><i style="--i:17"> </i><i style="--i:18">o</i><i style="--i:19">&rsquo;</i><i style="--i:20">c</i><i style="--i:21">l</i><i style="--i:22">o</i><i style="--i:23">c</i><i style="--i:24">k</i><i style="--i:25">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
-              </div>
-
-              <!-- 5. A watch registers the person, not the thread, so it fires whichever message they
-                 answer on. -->
-              <div class="hm-scene" style="--s:4">
-                <div class="hm-msg">
-                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Tell me when Emily writes back.</p></div>
-                    <time>9:15 am</time>
-                  </div>
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Watching for Emily. I&rsquo;ll say as soon as anything from her lands.</p></div>
-                      <time>9:15 am</time>
-                    </div>
-                  </div>
-                </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">T</i><i style="--i:1">e</i><i style="--i:2">l</i><i style="--i:3">l</i><i style="--i:4"> </i><i style="--i:5">m</i><i style="--i:6">e</i><i style="--i:7"> </i><i style="--i:8">w</i><i style="--i:9">h</i><i style="--i:10">e</i><i style="--i:11">n</i><i style="--i:12"> </i><i style="--i:13">E</i><i style="--i:14">m</i><i style="--i:15">i</i><i style="--i:16">l</i><i style="--i:17">y</i><i style="--i:18"> </i><i style="--i:19">w</i><i style="--i:20">r</i><i style="--i:21">i</i><i style="--i:22">t</i><i style="--i:23">e</i><i style="--i:24">s</i><i style="--i:25"> </i><i style="--i:26">b</i><i style="--i:27">a</i><i style="--i:28">c</i><i style="--i:29">k</i><i style="--i:30">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
-              </div>
-
-              <!-- 6. A date in one of your own lists comes due. No model call to notice it: this is date
-                 arithmetic, which is why it is free to run every day. -->
-              <div class="hm-scene" style="--s:5">
-                <div class="hm-msg">
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:2">
-                      <div class="hm-bubble">
-                        <p class="hm-mini-quote"><b>Renewing this week</b></p>
-                        <p class="hm-mini-quote">Tue: car insurance</p>
-                        <p class="hm-mini-quote">Fri: storage unit</p>
+                      <div class="da-pane">
+                        <div class="da-nowhead">
+                          <p class="h day">Nothing running right now.</p>
+                          <p class="s day">Everything is set up, and the next routine is the morning brief at 7:00 AM.</p>
+                          <p class="h night">Running Bill Reminders.</p>
+                          <p class="s night">Started 12:06 AM. The morning brief is next, at 7:00 AM.</p>
+                          <p class="s mut">Thinking with Claude (by Anthropic). Reachable on Telegram.</p>
+                        </div>
+                        <div class="da-kindcards">
+                          <div class="da-kindcard plum"><div class="k">Personality</div><div class="v">One Step Ahead</div><div class="s">Arrives with the work done and one question</div></div>
+                          <div class="da-kindcard skill"><div class="k">Skills</div><div class="v">12</div><div class="s">What it knows how to do</div></div>
+                          <div class="da-kindcard teal"><div class="k">Routines</div><div class="v">13</div><div class="s">What it does on a schedule</div></div>
+                        </div>
+                        <div class="da-recent">
+                          <div class="hd"><span class="l">Recent work</span><span class="o">Open Work</span></div>
+                          <div class="r day"><span class="t">Morning brief</span><span class="w">Today, 7:00 AM, 41 s</span><span class="da-badge green">Finished</span></div>
+                          <div class="r day"><span class="t">Drafted a reply to Sam</span><span class="w">Today, 1:40 PM, 12 s</span><span class="da-badge gold">Asked you</span></div>
+                          <div class="r day"><span class="t">Filed 14 receipts into Expenses</span><span class="w">Yesterday, 4:12 PM, 2 min 6 s</span><span class="da-badge green">Finished</span></div>
+                          <div class="r night day-beat" data-act="5" data-at="0.12"><span class="t">Return Window Watch</span><span class="w">11:58 PM, 12 s</span><span class="da-badge green">Finished</span></div>
+                          <div class="r night day-beat" data-act="5" data-at="0.42"><span class="t">Bill Reminders</span><span class="w">12:06 AM, 9 s</span><span class="da-badge green">Finished</span></div>
+                          <div class="r night day-beat" data-act="5" data-at="0.7"><span class="t">Morning Brief</span><span class="w">Next, 7:00 AM</span><span class="da-badge gold">Scheduled</span></div>
+                        </div>
                       </div>
-                      <time>9:04 am</time>
                     </div>
                   </div>
-                  <div class="hm-turn hm-in" style="--d:4">
-                    <div class="hm-bubble"><p class="hm-mini-quote">Want a nudge the day before?</p></div>
-                    <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Yes</span><span class="hm-msg-btn">Leave it</span></div>
-                    <time>9:05 am</time>
-                  </div>
                 </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
+                <!-- Where Ember stands: on the desk in front of the window in the hero, and in front
+                     of the lit window at night. In app coordinates, so half of these on screen. -->
+                <i class="day-mark" data-mark="m-hero" data-size="96" style="left:-88px;bottom:-112px"></i>
+                <i class="day-mark" data-mark="m-window" data-size="72" style="left:120px;bottom:-96px"></i>
               </div>
+            </div>
 
-              <!-- 7. Flights are read from this computer with no key and no quota, and the tool books
-                 nothing at all. The caption under the phone is the whole point of the scene. -->
-              <div class="hm-scene" style="--s:6">
-                <div class="hm-msg">
-                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Anything direct to Lisbon in March?</p></div>
-                    <time>8:47 pm</time>
+            <!-- THE PHONE. archie-screen-kit.html's device and conversation parts, class for class:
+                 the bezel with its island and camera, the status bar, the wordmark bar, the
+                 bubbles, the action card and the composer. The screen is the conversation with
+                 your agent as a chat app shows it, which is the surface that ships today; the
+                 phone app's own tabs are not drawn, because that app is in build and has its own
+                 page. -->
+            <div class="day-layer day-phone" aria-hidden="true">
+              <div class="dp-device">
+                <div class="dp-ph">
+                  <div class="dp-statusbar">
+                    <span data-day-clock>7:00</span>
+                    <span class="sigs">
+                      <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                      <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round"><path d="M5.07 8.22A4.15 4.15 0 0 1 10.93 8.22"/><path d="M3.01 6.16A7.05 7.05 0 0 1 12.99 6.16"/><path d="M0.96 4.11A9.95 9.95 0 0 1 15.04 4.11"/><circle cx="8" cy="9.85" r="1.3" fill="currentColor" stroke="none"/></svg>
+                      <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x="0.6" y="0.6" width="22.8" height="11.8" rx="3.5" stroke="currentColor" stroke-opacity=".4" stroke-width="1.1"/><rect x="2.2" y="2.2" width="19.6" height="8.6" rx="2" fill="currentColor"/><path d="M25.3 4.7v3.6a2 2 0 0 0 0-3.6z" fill="currentColor" fill-opacity=".4"/></svg>
+                    </span>
                   </div>
-                  <div class="hm-reply">
-                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
-                    <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble">
-                        <p class="hm-mini-quote">Two direct, both Saturdays:</p>
-                        <p class="hm-mini-quote">Sat 14: 2h 55m</p>
-                        <p class="hm-mini-quote">Sat 21: 3h 05m</p>
+                  <div class="dp-topbar">
+                    <div class="side"><svg class="wm" viewBox="0 0 2700 900" aria-hidden="true"><use href="#wordmark"/></svg></div>
+                    <div class="mid">
+                      <span class="dp-facewrap"><span class="dp-face s30"><span data-ember="terracotta.peak.pill.none"></span></span><span class="dot"></span></span>
+                      <span class="dp-bartitle">Ember</span>
+                    </div>
+                    <div class="side right"></div>
+                  </div>
+                  <div class="dp-transcript">
+
+                    <div class="dp-scr is-on" data-scr="0">
+                      <div class="dp-said">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><b>Morning brief.</b></p><ul><li><span>9:00 standup, video call</span></li><li><span>11:30 Laura, Q3 kickoff prep</span></li><li><span>Internet bill Thursday. Dad&rsquo;s birthday Saturday.</span></li></ul></div></div>
+                          <p class="dp-stamp">7:00 AM</p>
+                        </div>
                       </div>
-                      <time>8:47 pm</time>
                     </div>
+
+                    <div class="dp-scr" data-scr="1">
+                      <div class="dp-mine day-beat" data-act="1" data-at="0.04">
+                        <div class="dp-bub yours"><div class="dp-md"><p>Move my 3 o&rsquo;clock to Thursday.</p></div></div>
+                        <p class="dp-stamp">9:12 AM</p>
+                      </div>
+                      <div class="dp-thinking day-beat" data-act="1" data-at="0.2" data-until="0.44">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <span class="t">Ember is working</span>
+                        <span class="dp-dots"><i></i><i></i><i></i></span>
+                      </div>
+                      <div class="dp-said day-beat" data-act="1" data-at="0.44">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p>Thursday at 10:00 AM is open. Move Q3 kickoff prep there?</p></div></div>
+                          <div class="dp-actions">
+                            <button type="button" class="dp-act" data-press="confirm"><span class="lbl-ic"><span class="em">&#9989;</span><span>Confirm</span></span></button>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Change something</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Cancel</span></span></div>
+                          </div>
+                          <p class="dp-stamp">9:12 AM</p>
+                        </div>
+                      </div>
+                      <div class="dp-mine dp-after">
+                        <div class="dp-bub yours"><div class="dp-md"><p>Yes, go ahead.</p></div></div>
+                        <p class="dp-stamp">9:13 AM</p>
+                      </div>
+                      <div class="dp-said dp-after">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p>Moved. Thursday, 10:00 AM.</p></div></div>
+                          <p class="dp-stamp">9:13 AM</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="dp-scr" data-scr="2">
+                      <div class="dp-said day-beat" data-act="2" data-at="0.06">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
+                          <div class="dp-actions day-beat" data-act="2" data-at="0.3">
+                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></button>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit</span></span></div>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                          </div>
+                          <p class="dp-stamp">1:40 PM</p>
+                          <span class="dp-pill live dp-after">Sent to Sam, 1:41 PM</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="dp-scr dp-scr--grow" data-scr="4">
+                      <div class="dp-mine day-beat" data-act="4" data-at="0.02"><div class="dp-bub yours"><div class="dp-md"><p>Did I say I would send that?</p></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.1"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Commitment Sweep</b> found two: the deck to Sam by Friday, and Dana&rsquo;s invoice.</p></div></div></div></div>
+                      <div class="dp-mine day-beat" data-act="4" data-at="0.24"><div class="dp-bub yours"><div class="dp-md"><p>What is actually charging me?</p></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.32"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Bills &amp; Subscriptions</b>: 14 on the list. Two renew this week.</p></div></div></div></div>
+                      <div class="dp-mine day-beat" data-act="4" data-at="0.46"><div class="dp-bub yours"><div class="dp-md"><p>Which step was I on?</p></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.54"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Paperwork</b>: the permit is at step 3 of 5. Still missing: proof of address.</p></div></div></div></div>
+                      <div class="dp-mine day-beat" data-act="4" data-at="0.68"><div class="dp-bub yours"><div class="dp-md"><p>What did the doctor say?</p></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.76"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Health Record</b>: Tuesday&rsquo;s visit is saved, with your two questions for next time.</p></div></div></div></div>
+                    </div>
+
+                    <div class="dp-scr" data-scr="5">
+                      <div class="dp-sect">Lately</div>
+                      <div class="dp-card">
+                        <div class="dp-lrow"><span class="col"><span class="lbl">Return Window Watch</span><span class="note">11:58 PM</span></span><span class="dp-pill info">Done</span></div>
+                        <div class="dp-lrow"><span class="col"><span class="lbl">Bill Reminders</span><span class="note">12:06 AM</span></span><span class="dp-pill info">Done</span></div>
+                        <div class="dp-lrow"><span class="col"><span class="lbl">Morning Brief</span><span class="note">Next, 7:00 AM</span></span><span class="dp-pill quiet">Scheduled</span></div>
+                      </div>
+                    </div>
+
                   </div>
+                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox">Message Ember</div><div class="dp-knob hot">&uarr;</div></div></div>
                 </div>
-                  <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">A</i><i style="--i:1">n</i><i style="--i:2">y</i><i style="--i:3">t</i><i style="--i:4">h</i><i style="--i:5">i</i><i style="--i:6">n</i><i style="--i:7">g</i><i style="--i:8"> </i><i style="--i:9">d</i><i style="--i:10">i</i><i style="--i:11">r</i><i style="--i:12">e</i><i style="--i:13">c</i><i style="--i:14">t</i><i style="--i:15"> </i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18"> </i><i style="--i:19">L</i><i style="--i:20">i</i><i style="--i:21">s</i><i style="--i:22">b</i><i style="--i:23">o</i><i style="--i:24">n</i><i style="--i:25"> </i><i style="--i:26">i</i><i style="--i:27">n</i><i style="--i:28"> </i><i style="--i:29">M</i><i style="--i:30">a</i><i style="--i:31">r</i><i style="--i:32">c</i><i style="--i:33">h</i><i style="--i:34">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
-                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
-                </div>
+                <!-- Beside the phone, in device coordinates, so a little over half on screen. -->
+                <i class="day-mark" data-mark="m-phone" data-size="84" style="left:-115px;bottom:48px"></i>
               </div>
-
             </div>
-          </div>
 
-          <!-- What the scene is showing, under the phone rather than in the thread. A line of
-               explanation inside a chat bubble is the app talking about itself, which no chat app
-               does and which made three of the seven read as an advert with a message on top. Out
-               here it is a caption, every scene has one, and the phone stays a phone. Same lap and
-               the same --s, so a caption cannot drift out of step with the scene it names.
-
-               It sits between the phone and the record, not under both, because it is the phone's
-               caption: it says what the conversation above it is showing, and the record below is
-               the same job seen from the other side. Under the record it was a line of text with
-               two things above it and no way to tell which one it belonged to, and it put the
-               height of the record between a message and the sentence explaining it. -->
-          <div class="hm-caps" aria-hidden="true">
-            <p class="hm-cap" style="--s:0">Say a job once, in your own words. It runs on its own from then on.</p>
-            <p class="hm-cap" style="--s:1">Ask in plain words. It reads the time back, goes quiet, and turns up hours later.</p>
-            <p class="hm-cap" style="--s:2">It drafts your mail replies. It sends when you tap Send, or at a time you set.</p>
-            <p class="hm-cap" style="--s:3">It reads your calendar and proposes a time. Nothing moves until you confirm it.</p>
-            <p class="hm-cap" style="--s:4">Ask to be told when someone answers. It watches the person, not one thread.</p>
-            <p class="hm-cap" style="--s:5">It reads dates out of your own lists and tells you before one comes due.</p>
-            <p class="hm-cap" style="--s:6">It looks things up and hands you the answer. It books nothing.</p>
-          </div>
-
-          <!-- ==============================
-               The record the job wrote, beside the conversation that asked for it.
-
-               This is Archie's own job panel, the one that opens off the Work board, rebuilt in
-               the site's CSS: the title, the outcome pill from `outcomeBadge`, the meta line
-               `journalWhen` and `journalDuration` write, and the numbered steps `describe()`
-               words. It is here because the thread above it can only ever show what the agent
-               SAID, and the question a buyer actually has is what it DID. A sentence in a bubble
-               is a claim; a numbered, timestamped, undoable step is a receipt.
-
-               Every string below is the app's, not ours. "under a second" is journalDuration's
-               own output for a sub-second job, "Asked you" and "Finished" are two of the five
-               labels in outcomeBadge, and the empty state is the sentence journal-panel.tsx puts
-               on a job that changed nothing.
-
-               THREE OF THE SEVEN ARE EMPTY, and that is the argument rather than a gap to fill.
-               The journal records changes: a job that only read your calendar, your lists or the
-               web writes no step, has nothing to undo, and says so. A panel that found something
-               to boast about on all seven would be a panel that had stopped being the app.
-
-               Uniform beats on purpose. The steps land at 5.0s, 5.5s and 6.0s into every scene
-               and the outcome settles at 6.5s, whatever the conversation above is doing, so the
-               timing table is one row rather than seven and a new scene needs no tuning. The
-               "Working" pill runs from 3.5s (where the typing dots start) to 6.5s, which is the
-               one place the panel and the thread are deliberately in step: the wait in the chat
-               is the work in the panel.
-               ============================== -->
-          <!-- The card sizes to the job it is showing; this box holds the room. A record with one
-               step is shorter than one with two, and a window that stays the height of its
-               tallest possible contents is a box with a gap in it rather than a window. But the
-               hero cannot change height every nine seconds either, or the whole page below it
-               steps up and down while somebody is reading it, so the reserved height lives out
-               here, where it is invisible and paints nothing, and the bordered card inside is
-               free to be exactly as tall as what it holds. -->
-          <div class="hm-deskbox" aria-hidden="true">
-          <div class="hm-desk">
-            <!-- The panel's own header, built to rhyme with the phone's. Up there it is a face and
-                 "Archie / on your computer"; here it is a computer and "Work / on your computer",
-                 same two lines in the same places. The parallel is the whole point: a reader who
-                 has just been told the agent lives on their computer needs to see that the thread
-                 and the record are two windows onto one thing, and that the second one is the one
-                 with the machine in it. Without it this was a card on a marketing page, which is
-                 exactly what the record must not look like. -->
-            <div class="hm-desk-bar">
-              <span class="hm-desk-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18l-1.8-3H4.8z"/></svg></span>
-              <span class="hm-desk-who"><b>Work</b><i>on your computer</i></span>
-              <span class="hm-desk-live"><i></i>writing it down</span>
+            <!-- THE CUSTODY FLOOR. Four stations, and ours has no line to it: that is the claim.
+                 The relay station only exists in starter-credits mode. -->
+            <div class="day-layer day-floor" id="dayFloorCustody" data-mode="key" aria-hidden="true">
+              <div class="day-plane">
+                <div class="day-grid"></div>
+                <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true">
+                  <g class="key"><path d="M95 300 H360 H625"/></g>
+                  <g class="credits"><path d="M95 300 H360"/><path class="dashed" d="M360 300 L500 215 L625 300"/></g>
+                </svg>
+                <div class="day-st" style="--fx:95px;--fy:300px"><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
+                <div class="day-st" style="--fx:360px;--fy:300px"><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
+                <div class="day-st" style="--fx:625px;--fy:300px"><b>Your AI company</b><i>on your account, with your key</i></div>
+                <div class="day-st ghost" style="--fx:640px;--fy:118px"><b>Otian</b><i>Otian&rsquo;s servers hold your email address, plan and listed operational records. Never a conversation.</i></div>
+                <div class="day-st relay" style="--fx:500px;--fy:215px"><b>Our server</b><i>passes it to Anthropic without keeping it</i></div>
+                <div class="day-gate" id="dayGate" style="--fx:360px;--fy:352px"><span>waits for you</span></div>
+                <div class="day-dot" id="dayDot"></div>
+              </div>
             </div>
-          <div class="hm-works">
-            <article class="hm-work" style="--s:0">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Morning Brief</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--done hm-work-fade" style="--d:13">Finished</span>
+
+            <!-- THE SETUP PATH. Five stations, and Ember hops one to the next as the scroll passes
+                 each. The minutes are in the caption, where the words are. -->
+            <div class="day-layer day-floor" id="dayFloorSetup" aria-hidden="true">
+              <div class="day-plane">
+                <div class="day-grid"></div>
+                <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true"><path class="dashed" d="M60 330 H660"/></svg>
+                <div class="day-st step" style="--fx:80px;--fy:262px"><span class="num">1</span><b>Pick a computer your agent can live on</b><i>One you can leave on. You, once.</i></div>
+                <div class="day-st step" style="--fx:220px;--fy:262px"><span class="num">2</span><b>Install the Archie desktop app</b><i>One download, a plan. You, once.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:262px"><span class="num">3</span><b>Choose how to fund the AI</b><i>Free credits, or your own account. Them, not us.</i></div>
+                <div class="day-st step" style="--fx:500px;--fy:262px"><span class="num">4</span><b>Meet your agent</b><i>Archie writes its own routines. Archie, not you.</i></div>
+                <div class="day-st step" style="--fx:640px;--fy:262px"><span class="num">5</span><b>Message your agent from your phone</b><i>A claim code. Optional. You, once.</i></div>
+                <i class="day-mark day-fmark" data-mark="m-s0" data-size="66" style="--fx:80px;--fy:330px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s1" data-size="66" style="--fx:220px;--fy:330px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s2" data-size="66" style="--fx:360px;--fy:330px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s3" data-size="66" style="--fx:500px;--fy:330px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s4" data-size="66" style="--fx:640px;--fy:330px"></i>
               </div>
-              <p class="hm-work-meta"><span>7:02 am</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; 1 step &middot; 3 s</span></p>
-              <ol class="hm-work-steps">
-                <li class="hm-work-open" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Added the routine &ldquo;Morning Brief&rdquo;</span><time>7:02:11</time></li>
-              </ol>
-            </article>
-            <article class="hm-work" style="--s:1">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Call the vet</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--done hm-work-fade" style="--d:13">Finished</span>
-              </div>
-              <p class="hm-work-meta"><span>12:00 pm</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; 1 step &middot; under a second</span></p>
-              <ol class="hm-work-steps">
-                <li class="hm-work-open" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Set a reminder: Call the vet.</span><time>12:00:04</time></li>
-              </ol>
-            </article>
-            <article class="hm-work" style="--s:2">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Inbox</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--ask hm-work-fade" style="--d:13">Asked you</span>
-              </div>
-              <p class="hm-work-meta"><span>1:28 pm</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; 2 steps &middot; 9 s</span></p>
-              <ol class="hm-work-steps">
-                <li class="hm-work-open" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Filed 3 emails out of the inbox</span><time>1:28:31</time></li>
-                <li class="hm-work-open" style="--d:11"><span class="hm-work-n">2</span><span class="hm-work-what">Drafted a reply for you to send: Can you hold October 12?</span><time>1:28:36</time></li>
-              </ol>
-            </article>
-            <article class="hm-work" style="--s:3">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Move the 3 o&rsquo;clock</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--ask hm-work-fade" style="--d:13">Asked you</span>
-              </div>
-              <p class="hm-work-meta"><span>2:41 pm</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; no steps</span></p>
-              <p class="hm-work-none hm-work-open" style="--d:13">Nothing was changed, so there are no steps. Reading, searching and answering are not recorded here.</p>
-            </article>
-            <article class="hm-work" style="--s:4">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Watch for Emily</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--done hm-work-fade" style="--d:13">Finished</span>
-              </div>
-              <p class="hm-work-meta"><span>9:15 am</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; 1 step &middot; under a second</span></p>
-              <ol class="hm-work-steps">
-                <li class="hm-work-open" style="--d:10"><span class="hm-work-n">1</span><span class="hm-work-what">Started waiting on Emily to reply</span><time>9:15:02</time></li>
-              </ol>
-            </article>
-            <article class="hm-work" style="--s:5">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Renewals check</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--done hm-work-fade" style="--d:13">Finished</span>
-              </div>
-              <p class="hm-work-meta"><span>9:04 am</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; no steps</span></p>
-              <p class="hm-work-none hm-work-open" style="--d:13">Nothing was changed, so there are no steps. Reading, searching and answering are not recorded here.</p>
-            </article>
-            <article class="hm-work" style="--s:6">
-              <div class="hm-work-head">
-                <span class="hm-work-title">Direct flights to Lisbon</span>
-                <span class="hm-work-pill hm-work-pill--live hm-work-run" style="--d:7">Working</span>
-                <span class="hm-work-pill hm-work-pill--done hm-work-fade" style="--d:13">Finished</span>
-              </div>
-              <p class="hm-work-meta"><span>8:47 pm</span><span class="hm-work-took hm-work-fade" style="--d:13"> &middot; no steps</span></p>
-              <p class="hm-work-none hm-work-open" style="--d:13">Nothing was changed, so there are no steps. Reading, searching and answering are not recorded here.</p>
-            </article>
-          </div>
-          </div>
-          </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         See it work
-
-         The screen recording, which opened the page until 2026-09-07. It is the most honest thing
-         on the site (one take of the real app, not a mockup) and it was in the worst place for it:
-         at hero width the app's interface is six-pixel type, so it read as a bright rectangle
-         rather than as a product. Here it is introduced, so a reader knows what they are looking
-         at before it starts, and js/demo-player.js only begins it when the section scrolls into
-         view, which is now a deliberate arrival rather than something already running behind the
-         headline.
-         ============================== -->
-    <section class="section hm-seeit" aria-labelledby="seeit-heading">
-      <div class="hm-wrap hm-wrap--wide hm-head">
-        <span class="section-label fade-up">See it work</span>
-        <h2 id="seeit-heading" class="fade-up">An agent set up from scratch, then asked to fix an afternoon.</h2>
-      </div>
-      <div class="hm-demo" id="demo">
-        <figure class="demo-player demo-player--wide" id="homeDemo">
-            <div class="demo-player-frame">
-              <!-- No src on the <video> and no src on the <source>s on purpose, only data-src: the
-                   browser fetches the poster and nothing else. Until js/demo-player.js picks ONE of
-                   the candidates below and starts it (when the hero scrolls into view), the frame
-                   shows that poster, which is the recording's own opening frame.
-
-               That opening frame was briefly replaced (2026-09-07) with the moment the agent
-               hands back an assembled week, because as the hero's only image the welcome screen
-               meant every crawler and link preview was served our own marketing copy. The hero
-               is a phone conversation now and the recording sits under a heading of its own, so
-               the reason is gone and so is the change: the caption under the player promises the
-               whole demo in one take, and a poster taken from eighteen seconds in was the page
-               disagreeing with itself.
-
-                   The poster is what anything that does not run our JavaScript gets, and that is the
-                   whole reason it is here. Without it the frame is an empty transparent box on a
-                   cream ground, so a crawler, a link preview, or a visitor whose OS asks for reduced
-                   motion is served a blank hero out of a healthy 200. Google's renderer returns
-                   exactly that: the nav bar, then nothing, which is what an OAuth reviewer called an
-                   unresponsive home page. One 85KB fetch buys a first paint that shows the product.
-
-                   It picks on decode cost, not just codec support, because those are different
-                   questions: an older laptop will happily report that it "supports" AV1 and then
-                   software-decode 2560px of it, which is exactly the jank we are trying to avoid.
-                   The player asks MediaCapabilities which of these the computer can decode in
-                   hardware, and hands a computer that would struggle the HEVC or H.264 line instead.
-
-                   Two widths, because the 2560 file is only worth its bytes on a display wide enough
-                   to resolve it. Only that top file is gated on width; the 1600 line carries no media
-                   query so it can also catch a wide screen whose decoder just turned down the 2560.
-
-                   One recording, both themes: this is a light capture, offered theme-agnostically (no
-                   data-theme), so the same files serve a dark page too. If Archie's dark UI is ever
-                   recorded, it can come back as a parallel data-theme="dark" set (js/demo-player.js
-                   already filters by data-theme); until then a second, byte-identical dark copy was
-                   just wasted bytes and a needless refetch on every theme toggle.
-
-                   This is the whole demo, not an excerpt: it plays start to finish (through the closing
-                   Archie card) and then loops. Same file /archie/see-it-work/ plays, so going there
-                   next costs nothing. -->
-              <video class="demo-player-video" preload="none"
-                     poster="assets/archie-demo-light-poster.jpg"
-                     muted loop playsinline disablepictureinpicture
-                     aria-label="A silent, looping screen recording of Archie: opening the app, pointing a new agent at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
-                <source data-src="assets/archie-demo-light-2560.av1.mp4"  type='video/mp4; codecs="av01.0.12M.08"'    media="(min-width: 1601px)" data-w="2560" data-h="1648" data-fps="60" />
-                <source data-src="assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.09M.08"'    data-w="1600" data-h="1030" data-fps="60" />
-                <source data-src="assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
-                <source data-src="assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="824"  data-fps="30" />
-                <p>Your browser can&rsquo;t play this video. <a href="how-it-works/">Watch the full demo instead.</a></p>
-              </video>
-              <!-- No pause control here on purpose. This loop is ambient wallpaper, not something to
-                   operate, so it runs silently the whole time the hero is on screen. Anyone who has
-                   asked their OS for reduced motion still gets a still poster instead of movement
-                   (js/demo-player.js), and the full recording (which does have a pause control)
-                   lives on /archie/see-it-work/. -->
             </div>
-                    <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
-        </figure>
-        <!-- The recording's index, 2026-09-11. The rail above is built by js/demo-player.js from
-             these buttons: a tick per moment, filled to the playhead, seekable on click. The
-             times are the ones how-it-works/#timeline uses, so the two pages index one recording.
-             The buttons ship hidden and the script reveals them, so a page with no script shows
-             the recording and never a button that does nothing. -->
-        <div class="chapters chapters--strip" data-chapters-for="homeDemo">
-          <div class="chapter-times" hidden>
-            <button type="button" class="chapter-time" data-seek="0">0:00 your agent arrives working</button>
-            <button type="button" class="chapter-time" data-seek="4">0:04 a calendar</button>
-            <button type="button" class="chapter-time" data-seek="28">0:28 who your agent works for</button>
-            <button type="button" class="chapter-time" data-seek="68">1:08 Telegram, one code</button>
-            <button type="button" class="chapter-time" data-seek="108">1:48 a double-booked afternoon, from a phone</button>
-            <button type="button" class="chapter-time" data-seek="124">2:04 your agent proposes, you confirm</button>
+
           </div>
+          <div class="day-clock is-on" aria-hidden="true"><i></i><span>7:00 am</span></div>
+          <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
         </div>
 
-        <p class="hm-micro hm-demo-cap">The whole demo, one take. Press a moment to jump to it.</p>
       </div>
     </section>
 
@@ -756,73 +602,6 @@
          Marks are defined once as <symbol> and instanced with <use>, because the Gemini
          sparkle alone is 8KB of path data.
          ============================== -->
-    <!-- ==============================
-         Where it starts, and that it does not stop there
-
-         The page had no answer to the two questions somebody asks after the demo. Which of these
-         hundred and forty-six do I turn on first, and what is this in a year. It showed breadth
-         everywhere and a starting point nowhere, which reads as a box of parts.
-
-         So: the two add-ons people hand over first, under the names they carry in the store
-         (Email Manager and Calendar Manager, data/marketplace/skills/, and the marks are the
-         app's own through js/faces.js), and then the three directions the thing grows in. Those
-         three are the answer to "is this a one-off purchase that ages", and each is a mechanism
-         rather than a promise: a routine written from a sentence, a shelf that takes commissions
-         and hands them to everybody, and a provider that is a setting.
-
-         Nothing here re-describes what mail and calendar do. The hero's phone spends two of its
-         seven scenes doing exactly that, one screen up, and the third time a fact is stated is
-         where a page starts getting longer than the thing it sells. The two rows this section
-         took over ("When are you free Thursday?" and "Did they ever write back?") came out of the
-         coverage grid below for the same reason, which is what paid for these words.
-
-         The marks are NOT on data-face slots. scripts/gen-marketplace.mjs fills those by walking
-         `<li data-face>` and the next `<span class="cover-mark" data-face-slot>` in document
-         order, and it knows about the coverage grid only: with slots up here it put three marks
-         on one row down there. These two are the app's glyphs copied from js/faces.js by hand,
-         which check-faces.py still holds to the app's set.
-         ============================== -->
-    <section class="section hm-grow" aria-labelledby="grow-heading">
-      <div class="hm-wrap hm-wrap--wide hm-head">
-        <span class="section-label fade-up">Where Archie starts</span>
-        <h2 id="grow-heading" class="fade-up">Email and calendar first. Then whatever you hand it next.</h2>
-        <p class="fade-up">The two most people start with, and the two that eat the most of a week.</p>
-      </div>
-
-      <ul class="grow-pair fade-up">
-        <li>
-          <span class="grow-mark"><span class="mp-face mp-face--card mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg></span></span>
-          <h3>Email Manager</h3>
-          <p>Ask about your mail and it looks. It drafts the replies and says what is worth answering. Nothing goes out that you did not send or set a time for.</p>
-        </li>
-        <li>
-          <span class="grow-mark"><span class="mp-face mp-face--card mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M3 11h18"/><path d="M8 3v4"/><path d="M16 3v4"/></svg></span></span>
-          <h3>Calendar Manager</h3>
-          <p>Your week by chat, in the words you would use out loud. It reads on its own, and every change is written up for you to approve.</p>
-        </li>
-      </ul>
-
-      <div class="hm-wrap hm-wrap--wide">
-        <p class="grow-then fade-up">Neither is where it stops. Three things add to it, for as long as you keep it.</p>
-        <ul class="grow-ways fade-up">
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7a2.5 2.5 0 0 1-2.5 2.5H10l-4.2 3.4V16H6.5A2.5 2.5 0 0 1 4 13.5z"/><path d="M8.5 10h7"/></svg>
-            <b>You add to it.</b>
-            <span>Say the next job in a sentence. It writes the routine and adds nothing until you keep it.</span>
-          </li>
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8.5h16v10a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18.5z"/><path d="M3 5h18v3.5H3zM10 12h4"/></svg>
-            <b>The shelf adds to it.</b>
-            <span>160 on the shelf today, all included. Ask for the one nobody has built, and it joins them.</span>
-          </li>
-          <li>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3.5c.7 4.6 3.4 7.3 8 8-4.6.7-7.3 3.4-8 8-.7-4.6-3.4-7.3-8-8 4.6-.7 7.3-3.4 8-8z"/></svg>
-            <b>The AI adds to it.</b>
-            <span>Seven AI companies, or an address you name yourself. A better model is a setting, not a new agent.</span>
-          </li>
-        </ul>
-      </div>
-    </section>
 
     <section class="ww-band ww-band--home" aria-labelledby="works-with-heading">
       <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -1245,430 +1024,19 @@
     </section>
 
     <!-- ==============================
-         The coverage grid
-         The catch-all claim, made by enumeration instead of by adjective. Every add-on named here
-         is a real listing in the Archie repo's data/marketplace, spelled exactly as its manifest
-         spells it, so a reader who goes looking finds the same name. The three rows at the bottom
-         are deliberately empty and are the reason the fourteen above are believable: a list with
-         holes reads as an inventory, a list without them reads as marketing. That is also
-         CLAUDE.md's limitation-beside-capability rule satisfied inside a single element rather
-         than in a paragraph further down.
+         The price, on the page that promises it
 
-         It is HTML and not an explain-figure on purpose. The word budget exempts diagram labels so
-         a figure can replace prose, but this is a list of real names rather than a drawing, and
-         hiding thirty-four cells of copy inside an SVG to dodge the count would be using that
-         exemption to do the opposite of what it is for. It is paid for honestly instead: the
-         marquee and the two sections cut above freed far more than this costs.
+         Three cards, deliberately thin, kept exactly as they were when they sat under the setup
+         steps. Everything a purchase actually turns on (what the trial does and does not reach,
+         the proxy disclosure that has to sit beside the free credits, cancellation) lives on
+         archie/pricing/ and stays there. The AI bill gets its own line below the cards rather than
+         a footnote inside one: it is a real second cost that does not come to us, and the Standard
+         requires it stated before the decision point rather than after.
          ============================== -->
-    <section class="section" aria-labelledby="cover-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">What Archie takes off you</span>
-          <h2 id="cover-heading" class="fade-up">None of it is hard. It is just spread across everything you own.</h2>
-          <p>Every add-on named here is one you can read today, under its real name.</p>
-        </div>
-
-        <ul class="cover-grid cover-grid--scenes fade-up delay-1">
-          <li data-face="routine:commitment-sweep">
-            <div class="cover-scene">
-              <span class="cover-job">&ldquo;Did I say I would send that?&rdquo;</span>
-              <p>Promises live in sent mail, which is where they go to be forgotten. It re-reads yours and tells you what is due.</p>
-            </div>
-            <span class="cover-addon"><span class="cover-mark" data-face-slot><span class="mp-face mp-face--row mp-face--routine" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4.5H7.5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-12a2 2 0 0 0-2-2H15"/><path d="M9 3h6v3H9z"/><path d="m9 13 2 2 4-4"/></svg></span></span>Commitment Sweep<em class="cover-needs">needs your mail</em></span>
-          </li>
-          <li data-face="skill:bill-tracker">
-            <div class="cover-scene">
-              <span class="cover-job">&ldquo;What is actually charging me?&rdquo;</span>
-              <p>A card, a bank app, and a folder of confirmation emails. It keeps one list with real dates, including the ones renewing in the dark.</p>
-            </div>
-            <span class="cover-addon"><span class="cover-mark" data-face-slot><span class="mp-face mp-face--row mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6.5h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M2 11h20"/><path d="M6 14.5h4"/></svg></span></span>Bills &amp; Subscriptions</span>
-          </li>
-          <li data-face="skill:paperwork">
-            <div class="cover-scene">
-              <span class="cover-job">&ldquo;Which step was I on?&rdquo;</span>
-              <p>Visas, permits, benefits, enrolment. No map, and you start from the top every time. It holds the step, the missing documents, and what comes next.</p>
-            </div>
-            <span class="cover-addon"><span class="cover-mark" data-face-slot><span class="mp-face mp-face--row mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3H13l5 5v13H6.5z"/><path d="M13 3v5h5"/><path d="M9.5 13h5"/><path d="M9.5 16.5h3.5"/></svg></span></span>Paperwork</span>
-          </li>
-          <li data-face="skill:health-record">
-            <div class="cover-scene">
-              <span class="cover-job">&ldquo;What did the doctor say?&rdquo;</span>
-              <p>Gone by the time you reach the car park. Tell it once and it keeps a dated record, what changed, and your questions for next time.</p>
-            </div>
-            <span class="cover-addon"><span class="cover-mark" data-face-slot><span class="mp-face mp-face--row mp-face--skill" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12.5h4l2-5 3.5 10 2.5-6 1.5 3h5.5"/></svg></span></span>Health Record</span>
-          </li>
-        </ul>
-
-        <p class="cover-more fade-up">Four of 160, picked for having nothing to do with each other. The post, the birthdays, the prescriptions, dinner and the trip are the same shape: small, spread out, and yours to stop doing.</p>
-
-        <p class="cover-blank-head fade-up">And the rows that are still blank.</p>
-        <ul class="cover-grid cover-grid--blank fade-up">
-            <li><span class="cover-job">Buying it, booking it, paying it</span><span class="cover-none">Archie cannot spend money or buy anything. It finds the flight and holds the return window; the card stays yours.</span></li>
-            <li><span class="cover-job">Your bank, read directly</span><span class="cover-none">Bills &amp; Subscriptions, Money In &amp; Out and Savings Goals keep the list you give them, and connect to no bank.</span></li>
-            <!-- This row was "A job hunt" until 2026-09-15, and it had stopped being blank: Job Hunt and
-                 Application Sweep shipped, and the row was edited to name them instead of being replaced.
-                 A list headed "still blank" whose third entry links to a live product spends the one
-                 device on this page that buys belief. TRUST.md: "The blanks are load-bearing." The
-                 replacement is the export allowlist, which is nine extensions and none of these
-                 (crates/archie-runtime/src/export.rs, ALLOWED; TRUST.md "What your agent can write to
-                 disk", whose boundary is "Never claim PDF, images, audio or video"). -->
-            <li><span class="cover-job">A PDF or a slide deck</span><span class="cover-none">It writes spreadsheets, Word documents, calendar files and plain text. No PDFs, pictures, audio or video.</span></li>
-        </ul>
-
-        <p class="cover-ceiling fade-up">Adding rows is not free. Add-ons with routines run on their own schedule, and those runs are a real part of a heavy month&rsquo;s AI bill. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">What that costs, measured&nbsp;&rarr;</a></p>
-        <a class="hm-trust-link fade-up" href="skills-marketplace/find/">Say the job in your own words and see which one does it&nbsp;&rarr;</a>
-      </div>
-    </section>
-
-    <!-- Four counts and no "+" on any of them. "Verified" is the one adjective, and it is
-         load-bearing rather than decorative: nothing goes live in the marketplace without the
-         review gate the for-developers page describes. Each count is exact, listed in FACTS.md
-         with the date it was counted, and re-counted against the Archie repo by
-         scripts/check-facts.py, so the numbers here cannot quietly diverge from the store.
-         js/home.js counts them up on scroll; the markup holds the real values. -->
-
-
-    <!-- ==============================
-         One day with Archie: the day arc as a literal timeline
-         The four story rows, compressed onto one center spine. js/home.js
-         draws the line down as you scroll; each chat mock is drawn in the
-         site's own tokens (never a claimed screenshot) inside a phone
-         zoom-in: bezels at the sides, wallpaper behind, top and bottom faded.
-         The interaction shapes stay verified against the Archie source: the
-         draft card's three buttons are render_card / pending_buttons
-         (crates/archie-runtime/src/email/replies/card.rs), and the Morning
-         Brief contents match data/marketplace/routines/morning-brief.json.
-         ============================== -->
-    <section class="section hm-day" aria-labelledby="day-heading">
-      <div class="hm-wrap hm-head hm-dayhead">
-        <span class="section-label fade-up">One day with Archie</span>
-        <h2 id="day-heading" class="fade-up">By 7:00 am it has already been down the list.</h2>
-      </div>
-      <div class="hm-spine">
-
-        <div class="hm-stop fade-up">
-          <span class="hm-stamp"><i aria-hidden="true"></i>7:00 am</span>
-          <h3>Your morning, already assembled</h3>
-          <div class="hm-pz" role="img" aria-label="An illustration of a phone chat. The agent&rsquo;s morning brief lists a 9:00 standup, an 11:30 with Laura for Q3 kickoff prep, the internet bill due Thursday, and Dad&rsquo;s birthday Saturday.">
-            <div class="hm-msg" aria-hidden="true">
-              <div class="hm-bubble">
-                <p class="hm-mini-quote"><b>Morning brief</b></p>
-                <p class="hm-mini-quote">9:00: standup, video call</p>
-                <p class="hm-mini-quote">11:30: Laura, Q3 kickoff prep</p>
-                <p class="hm-mini-quote">Also: internet bill Thursday, Dad&rsquo;s birthday Saturday</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Two stops came off this spine on 2026-09-08, and the hero is why. It used to open on
-             a video and the spine was the only place the page showed the agent working; it opens
-             on a phone running seven scenes now, and two of these were the same scene twice. The
-             1:28 pm stop was the drafted reply to Sam, which is hero scene 3 down to the name and
-             the timestamp, and the 6:12 pm stop was a sentence becoming a routine, which is hero
-             scene 1. Restating a thing one screen after showing it is how a page gets longer than
-             what it sells, and these two were the clearest case of it on the homepage.
-
-             The three that stayed are the ones the hero does not carry: a brief with the day
-             actually assembled in it, a job whose whole content is having noticed something, and
-             the night, which is the argument that any of this runs while you are not there. -->
-        <!-- The one stop on the spine that is not a chat card. Every other moment here is the agent
-             addressing you, which four times over proves "it messages you" rather than "it takes
-             things off your plate". This one is a job whose whole content is having noticed, and it
-             deliberately carries no Send button, because there is nothing for the reader to approve
-             and pretending otherwise would be the easiest overclaim on the page. -->
-        <div class="hm-stop fade-up">
-          <span class="hm-stamp"><i aria-hidden="true"></i>8:30 pm</span>
-          <h3>Something you did not know was expiring</h3>
-          <div class="hm-mini">
-            <p class="hm-caught">The return window on the jacket closes Friday. Nobody keeps a list of those, which is why they get missed.</p>
-            <div class="hm-chipline"><span class="addon-kind" data-kind="routine">Routine</span><b>Return Window Watch</b><span class="hm-micro">a week out &middot; a month out for a warranty</span></div>
-          </div>
-          <span class="hm-micro">Silent on the days nothing is closing, which is most of them.</span>
-        </div>
-
-        <div class="hm-stop fade-up">
-          <span class="hm-stamp"><i aria-hidden="true"></i>Overnight</span>
-          <h3>Archie works while you sleep</h3>
-          <div class="hm-mini">
-            <div class="hm-chipline"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><b>3 routines scheduled</b><span class="hm-micro">next: Morning Brief, 7:00 am</span></div>
-          </div>
-                  </div>
-
-      </div>
-    </section>
-
-
-    <!-- ==============================
-         Where your words go
-         The custody argument as one diagram, one sentence, and six claims,
-         every one in TRUST.md-approved wording.
-         ============================== -->
-    <section class="section" aria-labelledby="custody-heading">
-      <div class="hm-wrap hm-wrap--wide hm-head">
-        <span class="section-label fade-up">Where your words go</span>
-        <h2 id="custody-heading" class="fade-up">Your conversations go to your AI provider. Not to us.</h2>
-        <figure class="explain-figure la-figure fade-up">
-          <!-- ================== DESKTOP ==================
-               The living agent. One message laps you, your agent, the AI company and back, on your
-               own account; a second heads for your mail and calendar and waits at the gate until you
-               say so. The dots are CSS (offset-path) and hidden where the browser lacks it, so the
-               still drawing is the whole figure; js/living-agent.js only cues Ember's hop. The style
-               block below serves BOTH variants: an SVG's <style> is document-wide, so it is written
-               once here and the mobile drawing reuses the classes. -->
-          <div class="la-stage la-stage--desktop">
-            <svg class="explain-svg--desktop" viewBox="0 0 640 300" role="img" aria-labelledby="la-t" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;font-family:inherit">
-              <title id="la-t">You message your agent from your chat app. It runs on your computer, made of parts you choose, and thinks with the AI company you picked, on your own account: a message goes from you to your agent to the AI company and back. A second message, heading for your mail and calendar, stops at a gate marked waits for you.</title>
-              <style>
-                .la-glyph{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
-                .la-name{fill:currentColor;font-size:13px;font-weight:650;text-anchor:middle}
-                .la-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
-                .la-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
-                .la-box{fill:rgba(68,64,59,.03);stroke:var(--line-muted);stroke-width:1.5;stroke-dasharray:5 6}
-                .la-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
-                .la-node{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-                .la-pill{stroke-width:1}
-                .la-pill--personality{fill:var(--c-plum-subtle);stroke:var(--c-plum)}
-                .la-pill--skill{fill:var(--accent-subtle);stroke:var(--accent)}
-                .la-pill--routine{fill:var(--c-teal-subtle);stroke:var(--c-teal)}
-                .la-pill--plain{fill:var(--bg-card);stroke:var(--line-muted)}
-                .la-pilltext{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle}
-                .la-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round;stroke-linejoin:round}
-                .la-gate{fill:none;stroke:var(--c-blue);stroke-width:2.5;stroke-linecap:round}
-                .la-gatelabel{fill:var(--c-blue-ink);font-size:11px;font-weight:650;text-anchor:middle}
-                .la-pulse{display:none;fill:var(--accent)}
-                @supports (offset-path:path("M0,0 L1,1")){
-                  .la-pulse{display:block}
-                  .la-pulse-1{offset-distance:9%}
-          .la-m.la-pulse-1{offset-distance:5%}
-                  .la-pulse-2{offset-distance:42%}
-                  @media (prefers-reduced-motion:no-preference){
-                    .la-pulse-1{animation:laLap 7s linear infinite}
-            .la-m.la-pulse-1{animation-name:laLapM}
-                    .la-pulse-2{animation:laGate 7s linear infinite}
-                    /* the lap dims while it crosses the agent card (the second and fifth legs), so it reads as passing through rather than over */
-            @keyframes laLap{0%{offset-distance:0%;opacity:1}14.2%{opacity:1}16%{opacity:.28}37%{opacity:.28}38.8%{opacity:1}61.2%{opacity:1}63%{opacity:.28}84%{opacity:.28}85.8%{opacity:1}100%{offset-distance:100%;opacity:1}}
-            @keyframes laLapM{0%{offset-distance:0%;opacity:1}8.8%{opacity:1}10.6%{opacity:.28}29.6%{opacity:.28}31.4%{opacity:1}68.6%{opacity:1}70.4%{opacity:.28}89.4%{opacity:.28}91.2%{opacity:1}100%{offset-distance:100%;opacity:1}}
-                    @keyframes laGate{0%,40%{offset-distance:0%;opacity:0}44%{opacity:1}62%,78%{offset-distance:42%;opacity:1}100%{offset-distance:100%;opacity:1}}
-                  }
-                }
-              </style>
-              <defs><marker id="la-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
-
-              <!-- you -->
-              <g class="la-glyph"><circle cx="60" cy="126" r="10"/><path d="M40,156 a20,20 0 0 1 40,0"/></g>
-              <text class="la-name" x="60" y="180">You</text>
-              <text class="la-sub" x="60" y="195">your chat app</text>
-
-              <!-- your computer, and the agent on it -->
-              <rect class="la-box" x="150" y="44" width="280" height="212" rx="16"/>
-              <text class="la-label" x="168" y="66">YOUR COMPUTER</text>
-              <rect class="la-agent" x="196" y="94" width="188" height="104" rx="12"/>
-              <text class="la-name" x="290" y="120">Your agent</text>
-              <rect class="la-pill la-pill--personality" x="212" y="132" width="62" height="18" rx="9"/><text class="la-pilltext" x="243" y="144.5">Personality</text>
-              <rect class="la-pill la-pill--skill" x="280" y="132" width="38" height="18" rx="9"/><text class="la-pilltext" x="299" y="144.5">Skills</text>
-              <rect class="la-pill la-pill--routine" x="324" y="132" width="48" height="18" rx="9"/><text class="la-pilltext" x="348" y="144.5">Routines</text>
-              <rect class="la-pill la-pill--plain" x="226" y="156" width="60" height="18" rx="9"/><text class="la-pilltext" x="256" y="168.5">Knowledge</text>
-              <rect class="la-pill la-pill--plain" x="292" y="156" width="72" height="18" rx="9"/><text class="la-pilltext" x="328" y="168.5">Connections</text>
-
-              <!-- where it reaches -->
-              <rect class="la-node" x="470" y="86" width="154" height="52" rx="12"/>
-              <text class="la-name" x="547" y="108">AI company</text>
-              <text class="la-sub" x="547" y="124">your pick of 7, your account</text>
-              <rect class="la-node" x="470" y="196" width="154" height="52" rx="12"/>
-              <text class="la-name" x="547" y="218">Mail and calendar</text>
-              <text class="la-sub" x="547" y="234">your accounts</text>
-
-              <!-- wires -->
-              <g class="la-wire">
-                <path d="M86,146 L196,146" marker-start="url(#la-ah)" marker-end="url(#la-ah)"/>
-                <path d="M384,120 L470,112" marker-start="url(#la-ah)" marker-end="url(#la-ah)"/>
-                <path d="M290,198 L290,222 L470,222" marker-end="url(#la-ah)"/>
-              </g>
-              <g class="la-gate"><path d="M346,212 v20"/><path d="M356,212 v20"/></g>
-              <text class="la-gatelabel" x="351" y="248">waits for you</text>
-
-              <!-- the two messages; cx/cy stay 0 because offset-path positions them -->
-              <circle class="la-pulse la-pulse-1" r="6" style="offset-path:path('M86,146 L196,146 L384,120 L470,112 L384,120 L196,146 L86,146')"/>
-              <circle class="la-pulse la-pulse-2" r="6" style="offset-path:path('M290,198 L290,222 L470,222')"/>
-            </svg>
-            <span class="la-ember" data-ember="terracotta.peak.pill.none" aria-hidden="true"></span>
-          </div>
-
-          <!-- ================== MOBILE ==================
-               Same nodes, stacked: you above your computer, the AI company and your accounts below it,
-               the gate on the right-hand wire. Classes come from the block above. -->
-          <div class="la-stage la-stage--mobile">
-            <svg class="explain-svg--mobile" viewBox="0 0 340 440" role="img" aria-labelledby="lam-t" xmlns="http://www.w3.org/2000/svg">
-              <title id="lam-t">You message your agent from your chat app. It runs on your computer, made of parts you choose, and thinks with the AI company you picked, on your own account: a message goes from you to your agent to the AI company and back. A second message, heading for your mail and calendar, stops at a gate marked waits for you.</title>
-              <defs><marker id="lam-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".7"/></marker></defs>
-
-              <g class="la-glyph"><circle cx="170" cy="30" r="10"/><path d="M150,60 a20,20 0 0 1 40,0"/></g>
-              <text class="la-name" x="170" y="82">You</text>
-              <text class="la-sub" x="170" y="97">your chat app</text>
-
-              <rect class="la-box" x="20" y="116" width="300" height="230" rx="16"/>
-              <text class="la-label" x="36" y="138">YOUR COMPUTER</text>
-              <rect class="la-agent" x="50" y="156" width="240" height="106" rx="12"/>
-              <text class="la-name" x="170" y="182">Your agent</text>
-              <rect class="la-pill la-pill--personality" x="90" y="194" width="62" height="18" rx="9"/><text class="la-pilltext" x="121" y="206.5">Personality</text>
-              <rect class="la-pill la-pill--skill" x="158" y="194" width="38" height="18" rx="9"/><text class="la-pilltext" x="177" y="206.5">Skills</text>
-              <rect class="la-pill la-pill--routine" x="202" y="194" width="48" height="18" rx="9"/><text class="la-pilltext" x="226" y="206.5">Routines</text>
-              <rect class="la-pill la-pill--plain" x="101" y="218" width="60" height="18" rx="9"/><text class="la-pilltext" x="131" y="230.5">Knowledge</text>
-              <rect class="la-pill la-pill--plain" x="167" y="218" width="72" height="18" rx="9"/><text class="la-pilltext" x="203" y="230.5">Connections</text>
-
-              <rect class="la-node" x="20" y="372" width="145" height="56" rx="12"/>
-              <text class="la-name" x="92.5" y="394">AI company</text>
-              <text class="la-sub" x="92.5" y="410">your pick of 7, your account</text>
-              <rect class="la-node" x="175" y="372" width="145" height="56" rx="12"/>
-              <text class="la-name" x="247.5" y="394">Mail and calendar</text>
-              <text class="la-sub" x="247.5" y="410">your accounts</text>
-
-              <g class="la-wire">
-                <path d="M170,104 L170,156" marker-start="url(#lam-ah)" marker-end="url(#lam-ah)"/>
-                <path d="M110,262 L110,372" marker-start="url(#lam-ah)" marker-end="url(#lam-ah)"/>
-                <path d="M230,262 L230,372" marker-end="url(#lam-ah)"/>
-              </g>
-              <g class="la-gate"><path d="M220,304 h20"/><path d="M220,314 h20"/></g>
-              <text class="la-gatelabel" x="248" y="313" style="text-anchor:start">waits for you</text>
-
-              <circle class="la-pulse la-pulse-1 la-m" r="6" style="offset-path:path('M170,104 L170,209 L110,262 L110,372 L110,262 L170,209 L170,104')"/>
-              <circle class="la-pulse la-pulse-2" r="6" style="offset-path:path('M230,262 L230,372')"/>
-            </svg>
-            <span class="la-ember" data-ember="terracotta.peak.pill.none" aria-hidden="true"></span>
-          </div>
-  
-          <figcaption>A message laps from your chat app to your agent to the AI company you picked, and back. Anything heading for your mail or calendar stops at the gate and waits for you.</figcaption>
-        </figure>
-        <p class="hm-aside fade-up"><b>Otian&rsquo;s servers hold</b> your email address, plan and <a href="trust/#what-we-hold">listed operational records</a>. Never a conversation. Starter credits and included AI reach Anthropic through our server without being kept. Your own key bypasses it from each agent&rsquo;s next start.</p>
-        <ul class="hm-claims fade-up">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="12" r="3.6"/><path d="M11.6 12h8.4M17 12v3M20 12v2.2"/></svg>Keys in your computer&rsquo;s password store</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.5 12s3.2-5.5 8.5-5.5S20.5 12 20.5 12s-3.2 5.5-8.5 5.5S3.5 12 3.5 12z"/><circle cx="12" cy="12" r="2.2"/><path d="M4.5 4.5l15 15"/></svg>No analytics service in the app</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4M9 11h6M9 14h6M9 17h3.5"/></svg>Add-ons are text, not code</li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 3.5V8M15 3.5V8M7 8h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5z"/><path d="M12 16v4.5"/></svg>Nothing connects until you connect it</li>
-        </ul>
-        <a class="hm-trust-link fade-up" href="trust/">Check every claim yourself, in 10 minutes &rarr;</a>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Setup
-         ============================== -->
-    <section class="section section-alt" aria-labelledby="need-heading">
-      <div class="hm-wrap hm-wrap--wide hm-head">
-        <span class="section-label fade-up">Setup</span>
-        <h2 id="need-heading" class="fade-up">Five steps, about fifteen minutes, and none of them is configuration.</h2>
-
-        <!-- ==============================
-             The setup, as a sequence rather than a shopping list.
-
-             This band was three requirement chips and the words "That's it". A list of things you
-             must own answers "can I", and the question somebody actually has after watching the
-             recording is "what am I in for". The five steps are the ones on
-             how-it-works/#timeline, in that order and under those names, so the two pages describe
-             one sequence and not two. The three requirements did not go anywhere: the computer is
-             step 1, the Otian account and plan are step 2, and the AI account is step 3. Rounding
-             down what setup takes is the one direction this page may never round in, and the link
-             to the full list is still under it.
-
-             THE MINUTES ARE AN ESTIMATE AND THE PAGE SAYS SO, in bold, in the line under the
-             track. Nobody has timed a clean install; FACTS.md carries the row, what the estimate
-             is built from step by step, and the standing note that a measurement replaces it the
-             day somebody runs one. Two things keep it honest rather than promotional. It is not
-             rounded down: 15 is what the five steps add up to and it is not the number a
-             competitor would print. And the step that dominates it is named rather than buried,
-             because it is the one we cannot make faster: Archie cannot open an account with an AI
-             company for you, so five of the fifteen minutes are that company's checkout.
-
-             The chips say who spends the time, which is the half a total cannot carry. The five
-             elapsed figures live once, in the clock above the track, so a timed install is five
-             spans, one heading and one FACTS.md row.
-
-             The last card is the one the section is for. Four of these happen once; the fifth is
-             every day after, and it is the same routine the phone at the top of the page writes.
-             ============================== -->
-        <!-- The clock is one readout for the whole track, not a label on each step.
-
-             It was five labels for about an hour, and beside its own step "15 min" read as the
-             time that step takes rather than the time you have spent by the end of it. That is
-             the failure mode of putting a running total next to the thing it is running over,
-             and no wording fixes it while the number sits in the card.
-
-             Out here it is a clock that runs. It counts every minute from 0 to 15 rather than
-             jumping between the five step totals, because a reading that skips from 4 to 9 says
-             nothing about which of them was the long one. Ticking evenly, it does: the track
-             fills underneath it at whatever speed the minutes require, so the light crawls
-             through step 3 and is past steps 1 and 5 almost at once, and the shape of the
-             fifteen minutes is on screen without a word about it.
-
-             aria-hidden, because a clock that counts is a picture of the estimate and not the
-             estimate itself: the heading carries "about fifteen minutes" as text, and the line
-             under the track carries what kind of number that is.
-
-             It runs back down at the end of every lap, with the track, in about half a second.
-             A clock that climbed to 15 and then blinked to 0 read as a counter that had lost its
-             place; running the figures back down while the segments retract says the loop is
-             starting over, which is the only thing that is actually happening. -->
-        <p class="hm-eta fade-up" aria-hidden="true">
-          <span class="hm-eta-label">Estimated</span>
-          <span class="hm-eta-clock"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>10</i><i>11</i><i>12</i><i>13</i><i>14</i><i>15</i></span>
-          <span class="hm-eta-unit">min</span>
-        </p>
-        <ol class="hm-steps fade-up">
-          <li class="hm-step">
-            <span class="hm-step-n" aria-hidden="true">1</span>
-            <h3>Pick a computer your agent can live on</h3>
-            <p>One you can leave on and connected. Probably yours.</p>
-            <span class="hm-step-who">You, once</span>
-          </li>
-          <li class="hm-step">
-            <span class="hm-step-n" aria-hidden="true">2</span>
-            <h3>Install the Archie desktop app</h3>
-            <p>One download, an Otian account, a plan. Nothing to host.</p>
-            <span class="hm-step-who">You, once</span>
-          </li>
-          <li class="hm-step">
-            <span class="hm-step-n" aria-hidden="true">3</span>
-            <h3>Choose how to fund the AI</h3>
-            <p>Start with free credits, subject to eligibility, or use your own account with any of 7 AI companies.</p>
-            <span class="hm-step-who hm-step-who--them">Them, not us</span>
-          </li>
-          <li class="hm-step">
-            <span class="hm-step-n" aria-hidden="true">4</span>
-            <h3>Meet your agent</h3>
-            <p>Answer a few questions. Archie writes its own skills and routines from them, and tells you what it added.</p>
-            <span class="hm-step-who hm-step-who--it">Archie, not you</span>
-          </li>
-          <li class="hm-step">
-            <span class="hm-step-n" aria-hidden="true">5</span>
-            <h3>Message your agent from your phone</h3>
-            <p>Optional: a claim code connects a chat app. You can also talk in Archie.</p>
-            <span class="hm-step-who">You, once</span>
-          </li>
-        </ol>
-        <p class="hm-steps-after fade-up"><b>Estimates, not a stopwatch.</b> The longest step is opening an AI account: their checkout, not ours. <a href="how-it-works/#what-you-need">The full list of what you need &rarr;</a></p>
-
-        <!-- The price, on the page that promises it.
-             ==============================================================
-             This heading has said "Then $30 a month" since the section existed, and until
-             2026-09-07 the page never showed a price: a reader who wanted to know what they
-             would pay had to leave for archie/pricing/. A competitor teardown that day put
-             four tiers, a billing toggle and an enterprise band on their own homepage, and
-             the honest reading of it was not that they had a better page, it was that ours
-             asked for a decision and withheld the number.
-
-             Three cards, deliberately thin. This is not a second pricing page and must not
-             grow into one: each card carries the price, the year option, and the one thing
-             that separates it from the card beside it. Everything a purchase actually turns
-             on (what the trial does and does not reach, the proxy disclosure that has to sit
-             beside the free credits, cancellation) lives on archie/pricing/ and stays there,
-             because splitting a disclosure across two pages is how the half a reader sees
-             becomes the half that flatters us.
-
-             The AI bill gets its own line below the cards rather than a footnote inside one.
-             It is a real second cost that does not come to us, the Standard requires it
-             stated before the decision point rather than after, and a reader who meets it
-             here should leave with the measured range rather than an estimate we made up. -->
+    <section class="section day-price" aria-labelledby="price-heading">
+      <div class="hm-wrap hm-head">
+        <span class="section-label fade-up">Pricing</span>
+        <h2 id="price-heading" class="fade-up">Free to try, then $30 a month.</h2>
         <div class="hm-plans fade-up">
           <article class="hm-plan">
             <span class="hm-plan-label">Free to try</span>
@@ -1703,17 +1071,25 @@
       </div>
     </section>
 
-
     <!-- ==============================
-         CTA
+         CTA. Ember arrives here ahead of the reader, so the last thing on the page is the character
+         standing beside the one button.
          ============================== -->
     <section class="section section-alt hm-cta" aria-label="Call to action">
       <div class="hm-wrap hm-head">
         <h2 class="fade-up">Tell us which row you would hand over first.</h2>
-        <a href="questionnaire/" class="btn btn-primary btn-lg fade-up">Join the Waitlist</a>
-        <p class="hm-micro fade-up"><a href="archie/personal/#status">Where the testing stands&nbsp;&rarr;</a><br> Questions reach Jett or Jack, answered within one business day. Rather not wait? <a href="services/#guided">Guided setup</a> starts with a free 30-minute call.</p>
+        <div class="day-cta-row fade-up">
+          <span class="day-cta-mark" aria-hidden="true"><i class="day-mark" data-mark="m-cta" data-size="72" style="left:50%;bottom:0"></i></span>
+          <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+        </div>
+        <p class="hm-micro fade-up"><a href="archie/personal/#status">Where the testing stands&nbsp;&rarr;</a><br> Questions reach Jett or Jack, answered within one business day. Rather not wait? <a href="services/#guided">Guided setup</a> starts with a free 30-minute call. <a href="how-it-works/">Watch the full demo, one take&nbsp;&rarr;</a></p>
       </div>
     </section>
+
+    <!-- Ember, the one constant. A fixed element js/home.js walks between the marks above; the
+         greeting is Ember's own line (js/ember.js, invitation), shown once per browser. -->
+    <span class="day-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
+
 
   </main>
 
@@ -1796,12 +1172,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260916-7"></script>
-  <script src="js/ember.js?v=20260916-7" defer></script>
-  <script src="js/living-agent.js?v=20260916-7" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260916-7"></script>
-  <script src="js/demo-player.js?v=20260916-7"></script>
-  <script src="js/home.js?v=20260916-7" defer></script>
+  <script src="js/nav.js?v=20260916-8"></script>
+  <script src="js/ember.js?v=20260916-8" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260916-8"></script>
+  <script src="js/home.js?v=20260916-8" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

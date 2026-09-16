@@ -136,6 +136,18 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$94` | The same log, month two, after moving to Sonnet | Same post | Checked: 2026-09-12 |
 | `$78` | The same log, month three | Same post | Checked: 2026-09-12 |
 | `$0.0012` | A Make Core credit: $12 over 10,000, our arithmetic | `https://www.make.com/en/pricing` | Checked: 2026-09-12 |
+| `$30` | Vellum Mighty, billed monthly, sold as a "Small computer 1 vCPU / 2 GiB, 10 GB storage". **The same string is Archie's month in the Money table, and that coincidence is the most useful fact on the assistants board**: the two products cost the same and the plan buys a different thing | `https://www.vellum.ai/pricing` | Checked: 2026-09-16 |
+| `$100` | Vellum Super, billed monthly, a "Medium computer 2.5 vCPU / 5 GiB, 30 GB storage". Also Claude Max's entry tier above; both are real | `https://www.vellum.ai/pricing` | Checked: 2026-09-16 |
+| `$200` | Vellum Ultra, billed monthly, a "Large computer 4 vCPU / 8 GiB, 60 GB storage". Also Cursor Ultra and the Copilot Studio capacity pack above; all three are real | `https://www.vellum.ai/pricing` | Checked: 2026-09-16 |
+| `$1` | One Vellum credit: the pricing page states "$1 = 1 credit" for usage beyond a plan. Also light use at Economy in the Money table; both are real | `https://www.vellum.ai/pricing` | Checked: 2026-09-16 |
+| `$200` | The top of the Nous Portal range for Hermes, which the page gives as $0 to $200 a month for credits and hosted services. No tier names are published, so **no intermediate Hermes figure may be printed** | `https://hermes-agent.nousresearch.com/` | Checked: 2026-09-16 |
+
+**On the three assistants with no published price.** OpenClaw states that there is none at all
+("No subscription. No hosted tier. No token.", read 2026-09-16), which is a fact and has a TRUST.md
+row. Instinct and Norton Family Assistant are different: both publish a product page and neither
+puts a price on it, Instinct being in private access and Norton not pricing Family Assistant on
+the product page. The assistants board prints that they do not publish one. **It must not print a
+guess, a range, or a figure from a news article**, and it must not imply either is free.
 
 **On the ChatGPT rows.** `openai.com` and `chatgpt.com` return 403 to every automated request,
 so those three figures were read off the pricing page in a browser by a person and transcribed,

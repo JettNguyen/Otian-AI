@@ -2163,6 +2163,27 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Muse "doesn't share a person's conversations or the data in their VM with Meta's ad systems", and people "can opt out of their interactions being used to train Meta's AI models" | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-15 |
 | "By default, Muse will not take many important actions, like sending an email, without your approval" | Meta | `https://www.meta.com/help/artificial-intelligence/1687253048996149/` | 2026-09-15 |
 | Grok Bot comes with SuperGrok Heavy at $300 a month or Cursor Ultra at $200 a month (Cursor Teams Premium at $120 a seat also carries it); plan cards read in a browser, since xAI refuses fetches | xAI, Cursor | `https://x.ai/bot` | 2026-08-20 |
+| Vellum is "A personal AI assistant for your busywork" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| Vellum says "By default, your assistant runs locally. Your conversation history, memory, and credentials stay on your machine and are never used to train models." | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| Vellum is "native to Mac and accessible everywhere: iOS, Android, web app, voice, email, Telegram, Slack, and terminal" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| Vellum says it "is open-source, so you can inspect the code yourself" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| On Vellum, "High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| Vellum is "free to download and start"; its paid plans are Mighty at $30 a month, Super at $100 and Ultra at $200, each described as a computer of a given size (Mighty is "Small computer 1 vCPU / 2 GiB, 10 GB storage") | Vellum | `https://www.vellum.ai/pricing` | 2026-09-16 |
+| Vellum meters in credits beyond what a plan includes, "you only pay for what you use", at "$1 = 1 credit" | Vellum | `https://www.vellum.ai/pricing` | 2026-09-16 |
+| OpenClaw's own summary of itself is "Open source, Runs on your machine, Nobody's business model" | OpenClaw Foundation | `https://openclaw.ai/` | 2026-09-16 |
+| OpenClaw runs on "Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud." | OpenClaw Foundation | `https://openclaw.ai/` | 2026-09-16 |
+| OpenClaw "is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit", and the product is MIT licensed | OpenClaw Foundation | `https://openclaw.ai/` | 2026-09-16 |
+| OpenClaw costs nothing: "No subscription. No hosted tier. No token." | OpenClaw Foundation | `https://openclaw.ai/` | 2026-09-16 |
+| OpenClaw reaches "WhatsApp, Telegram, Discord, Slack, Signal, iMessage, or any of its 29 channels" | OpenClaw Foundation | `https://openclaw.ai/` | 2026-09-16 |
+| Hermes Agent is "The Agent That Grows With You", from Nous Research, free and open source under the MIT license | Nous Research | `https://hermes-agent.nousresearch.com/` | 2026-09-16 |
+| Hermes offers both a desktop app and "Deploy to the cloud" through Nous Portal, and installs on macOS 12+, Windows 10/11 and Linux | Nous Research | `https://hermes-agent.nousresearch.com/` | 2026-09-16 |
+| Hermes reaches "Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI" and "stores conversations, memories, and skills so you can return to your work in a later session" | Nous Research | `https://hermes-agent.nousresearch.com/` | 2026-09-16 |
+| Nous Portal plans for Hermes run from $0 to $200 a month for credits and hosted services | Nous Research | `https://hermes-agent.nousresearch.com/` | 2026-09-16 |
+| "Instinct is a personal assistant that understands what you're working on and what's important to you." | Instinct | `https://instinct.com/` | 2026-09-16 |
+| Instinct "is currently available to a private access group as we're scaling up compute", reached by waitlist or an existing member's invite | Instinct | `https://instinct.com/` | 2026-09-16 |
+| Instinct "connects to your applications and devices - email, messaging, screen, audio, location, and more", and "It's trained to use a phone and a computer. You can text or call it." | Instinct | `https://instinct.com/` | 2026-09-16 |
+| Norton Family Assistant "keeps your family organized, so you never miss to-dos, calendar events, and important updates in your life" and "Plugs into the apps your family already uses" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
+| Norton Family Assistant "Asks first, acts after", and "Your chats are never shared, sold or used to train AI" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
 
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
 two of them were live on `compare/cloud-agents/`:
@@ -2235,6 +2256,51 @@ may be printed until somebody reads it on Meta's own page**, and neither figure 
   not mention it. Absence from a pricing page is not absence from the product.
 - Re-read every source before any launch or press push, and update the dates. A stale
   comparison is a false claim about somebody else's company.
+
+### The assistants board: five companies read for the first time, 2026-09-16
+
+Read to put a whole-category comparison on `compare/`, after Jett asked for something in the
+shape of Vellum's own "AI Assistants Leaderboard". **The thing worth knowing about that page is
+what it does not have:** it ranks four products across six "category winner" dimensions and a
+platform grid, and it carries no citation, no methodology and no date. Vellum is on it, and
+Vellum wins. So the format is worth taking and the practice is not, and the whole of our version
+is that every cell links to the sentence it came from on that company's own page.
+
+**Five new companies, all rows above:** Vellum, OpenClaw, Hermes (Nous Research), Instinct, and
+Norton Family Assistant. With Claude Cowork, Grok Bot, Wix Symphony and Meta Muse already
+sourced, that is nine, and it is the whole of what any assistants board on this site may name.
+
+**⛔ Norton's article about Instinct is not a source for a claim about Instinct.** `us.norton.com`
+published "is-instinct-safe", which says Instinct "can make purchases on your behalf using
+payment methods that you have shared" and that data "may help train AI models" unless the user
+opts out. Both would be useful to us, the first especially, since it is the exact thing
+`screen/guard.rs` refuses. **Neither may be printed.** Norton is a competitor writing about a
+competitor, which is the weakest possible source for an unflattering claim, and the rule at the
+top of this section says the company's own public page. Instinct's own site says neither thing.
+If we want either claim, somebody with an invite reads Instinct's settings and terms, and it
+gets a row of its own. Until then it does not exist.
+
+**What Instinct's own page does not say is itself the finding**, and it is the Symphony shape
+from 2026-09-11 again: Instinct publishes no price, no statement of where it runs, and nothing
+about approval before it acts. Saying so is fair and checkable. Guessing the answers is not, and
+"currently available to a private access group as we're scaling up compute" is a sentence about
+their capacity, not a disclosure of their architecture. The board's cell for them reads that they
+do not publish it.
+
+**Two rows that cut against us, and they stay.** Vellum's "By default, your assistant runs
+locally. Your conversation history, memory, and credentials stay on your machine" is the same
+custody claim we make, from a product that is also open source and also reaches a phone. And
+OpenClaw costs nothing at all: "No subscription. No hosted tier. No token." A board that omitted
+either would be Vellum's page with our logo on it.
+
+**Where Vellum's local claim stops, and the only honest way to put it.** Their paid plans are
+sold as computers, by size: Mighty is a "Small computer 1 vCPU / 2 GiB, 10 GB storage" at $30 a
+month, the same price as Archie's month. A plan denominated in vCPU is a plan that runs
+somewhere, and "by default ... locally" is scoped wording that invites the inference that the
+paid tiers are not. **Do not print that inference.** What the two pages support together is that
+Vellum is local by default and sells hosted computers by the month, and a reader can draw their
+own conclusion from their own words. The banned form is any sentence asserting where a Vellum
+paid plan executes.
 
 ---
 

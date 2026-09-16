@@ -3,9 +3,11 @@
 //
 // Two jobs. First, on load: work out whether this is a Mac or a Windows computer and show that
 // platform's button alone, with the other platform folded into a "Not a Mac?" line that puts it
-// back. A phone, an iPad or a Linux computer gets the page as written, both platforms side by
-// side. The block starts hidden by the fade-up rule until it scrolls into view, so the choice is
-// made before anyone sees it.
+// back. It does this to every download block on the page, which is how the install page can carry
+// Archie's downloads and Archie for Business's without either one guessing for the other. A phone,
+// an iPad or a Linux computer gets the page as written, both platforms side by side. The blocks
+// start hidden by the fade-up rule until they scroll into view, so the choice is made before
+// anyone sees it.
 //
 // Second, on click: the installers live on GitHub, which serves them as attachments, so a click
 // starts the download without leaving this page and nothing on the page moves. The browser does
@@ -39,12 +41,15 @@
   }
 
   /* ── This computer's button ───────────────────────────────────────────────────────────── */
-  var actions = document.getElementById("install-actions");
+  /* Every block on the page, not the first one by id: the install page carries one for Archie and
+     one for Archie for Business, and each folds away the platform this computer is not. Scoped to
+     its own block throughout, so opening the second platform in one leaves the other as it was. */
   var os = detectOs();
-  if (actions && os) {
-    actions.classList.add("is-" + os);
-    var other = actions.querySelector(".install-other");
-    if (other) {
+  if (os) {
+    Array.prototype.forEach.call(document.querySelectorAll(".install-actions"), function (actions) {
+      actions.classList.add("is-" + os);
+      var other = actions.querySelector(".install-other");
+      if (!other) return;
       other.hidden = false;
       other.addEventListener("click", function (e) {
         if (!e.target.closest(".install-other-btn")) return;
@@ -52,7 +57,7 @@
         var shown = actions.querySelector('.install-platform[data-os="' + e.target.getAttribute("data-show") + '"] .btn');
         if (shown) shown.focus();
       });
-    }
+    });
   }
 
   /* ── What the click says ──────────────────────────────────────────────────────────────── */

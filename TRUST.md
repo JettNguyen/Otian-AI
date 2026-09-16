@@ -1609,6 +1609,32 @@ claimed. A one-time startup sweep brings pre-cap rosters inside the edition's li
 guests beyond it on the personal edition, and names the removed to the owner; staff installs
 are exempt.)*
 
+### ✅ The two editions are two apps on one computer: VERIFIED IN THE SHIPPED BINARIES 2026-09-16
+
+**Approved wording:** *"installs beside Archie as its own app, with its own data and its own
+keys"*, *"one computer can run both"*.
+
+macOS takes an app's data directory and its Keychain namespace from the bundle identifier, and the
+two editions never share one: `com.archie.app` against `com.archie.business`, asserted by
+`the_two_editions_never_share_an_identifier` (`src-tauri/tests/editions.rs`) and named as the one
+way the split could stop being a split in `docs/BUSINESS-EDITION.md`. Read straight out of the
+shipped 0.2.5 bundles on September 16, 2026: each binary carries its own identifier and neither
+carries the other's, including the derived `audit` and `index` names built from it.
+
+The same read settled the half with no remote fix. Each binary carries exactly one updater feed and
+it is its own, business to `/archie/b/26924e156bd86c28/`, personal to `/archie/b/68f9841b035fc2c5/`.
+A business install polling the personal feed would download a personal build, which keeps its files
+under a different identifier, so every agent and every connected account would be gone from the
+owner's point of view with the old data still on disk under a name the new binary never opens.
+`the_two_editions_never_share_an_updater_endpoint` holds the two configs apart; the compiled
+binaries were read as well, because the config is what a test can see and the compiled string is
+what ships.
+
+**Boundaries.** This says the two apps do not share storage. It is not a claim that either is
+sandboxed from the other, and nothing stops a person putting the same key in both. Nobody has yet
+run the two side by side through a real session, which is `docs/BUSINESS-EDITION.md`'s own open
+item 1, so write that they install and store separately and not that they have been used together.
+
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
 Planned: group-chat messaging, and a UI for adding user IDs to a permitted-to-message list.

@@ -1791,6 +1791,36 @@ sandboxed from the other, and nothing stops a person putting the same key in bot
 run the two side by side through a real session, which is `docs/BUSINESS-EDITION.md`'s own open
 item 1, so write that they install and store separately and not that they have been used together.
 
+### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
+
+**Approved wording:** *"put your company's name and logo on it"*, *"they stay on the computer
+Archie runs on"*.
+
+Archie for Business lets an owner say what their company is called and add a logo, on the Company
+page. Both are written into `structure.json` at the root of the workspace directory, beside the
+shared record lists, by `set_company_name` and `set_logo` in
+`crates/archie-core/src/bundle/structure.rs`. The logo's bytes are written next to that file as
+`logo.png` or `logo.jpg` and nowhere else.
+
+Nothing sends either one anywhere. The workspace directory is on the owner's own disk, the same
+place every agent bundle already lives, and no code path reads these two fields other than the two
+screens that draw them: the Company page and the sidebar row. The file name rather than a full path
+is what is stored, so the workspace stays movable, and the bytes reach the window as a `data:` URL
+because the app grants its own webview no filesystem access at all
+(`src-tauri/capabilities/default.json` lists no `fs:` and no `asset:` permission, and
+`src-tauri/tauri.conf.json`'s CSP allows `img-src 'self' data: blob:` and no asset protocol).
+
+They are also not sent to the model. The prompt an agent is given names the company only where the
+owner typed it into a skill's own setup, which is the separate `COMPANY_NAME` variable an add-on
+may ask for, and that is the owner's own text going where they put it.
+
+**Boundaries.** This says the two fields stay on the computer. It is **not** a claim that the
+workspace directory is encrypted, and it is not a claim about anything else in that directory. It
+also says nothing about the agent's own picture, which is a different file in a different place
+(`crates/archie-core/src/bundle/avatar.rs`) and has always been local for the same reason. Do not
+write that Archie "knows your brand" or anything that implies the logo is used in what the agent
+produces: it is drawn on two screens in the app and used nowhere else.
+
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
 Planned: group-chat messaging, and a UI for adding user IDs to a permitted-to-message list.

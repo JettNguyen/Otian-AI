@@ -70,7 +70,7 @@ export function decideAccess(d, now = Date.now()) {
       // apart by product id); a business document without this line was told to start a plan
       // it was already paying for.
       ((has("subscriber") || has("business")) && SUBSCRIPTION_GRANTS_ACCESS.includes(status));
-    return { allowed, license: legacyLicense(tiers), tiers };
+    return { allowed, license: legacyLicense(tiers), tiers, edition: editionOf(license, tiers) };
   }
 
   // A granted license may carry an end date in epoch milliseconds. Absent, null or unparseable all
@@ -87,5 +87,24 @@ export function decideAccess(d, now = Date.now()) {
         : license === "plan" || license === "plan_business"
           ? SUBSCRIPTION_GRANTS_ACCESS.includes(status)
           : false;
-  return { allowed, license, tiers };
+  return { allowed, license, tiers, edition: editionOf(license, tiers) };
+}
+
+// WHICH EDITION'S APP THIS ACCOUNT BOUGHT
+//
+// Two vocabularies are live at once while the tier migration runs, the same way `decideAccess`
+// above reads both: the billing service writes `plan_business` as the license, and documents from
+// before it carry `business` in the tiers array. Reading one of them tells half of the customers
+// to install the wrong app.
+//
+// Anything else is "personal", including staff, comped and admin accounts. That is the same
+// default those accounts already had, since the only install link on either page pointed at the
+// personal edition before this existed.
+//
+// This says what was bought. It is deliberately not a claim about what a license will run: the
+// testing-phase rule is that any valid license runs either edition, the business build is expected
+// to tighten later, and TRUST.md bans the site from asserting either version of that. So the
+// pages that call this lead with the edition the customer paid for and say nothing about the other.
+function editionOf(license, tiers) {
+  return license === "plan_business" || tiers.includes("business") ? "business" : "personal";
 }

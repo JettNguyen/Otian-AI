@@ -1882,7 +1882,10 @@ summary,
 .footer-grid {
   display: grid;
   grid-template-columns:
-    minmax(0, 1.91fr)  /* brand:    185px, "Secure AI agents, your way." on one line */
+    minmax(0, 1.91fr)  /* brand:    185px, and the tagline runs a few px past it, so it
+                          breaks where it should: at the sentence, "Don't rent your agent." /
+                          "Own it." The old tagline measured 186px and broke too; this column is
+                          sized for the menu beside it, not for a headline that changes.         */
     minmax(0, 1.41fr)  /* Archie:   141px, the widest row is "Archie Mobile"         */
     minmax(0, 1.51fr)  /* Add-ons:  151px, below this "Add-ons" breaks at its hyphen */
     minmax(0, 1.66fr)  /* Services: 166px, "Have an Add-on Built" on one line        */

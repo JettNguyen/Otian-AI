@@ -4,8 +4,8 @@
 
 # Otian AI
 
-**Secure AI agents, your way.**<br>
-Easy plug-and-play, fully in your control.
+**Don't rent your agent. Own it.**<br>
+Yours to shape & yours to keep. Never ours.
 
 [![Live site](https://img.shields.io/badge/otianai.com-live-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com)
 [![Deploy](https://img.shields.io/github/actions/workflow/status/JettNguyen/Otian-AI/deploy.yml?branch=main&style=flat-square&label=pages%20deploy&labelColor=2A211C&color=E08A5B)](https://github.com/JettNguyen/Otian-AI/actions/workflows/deploy.yml)

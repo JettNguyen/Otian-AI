@@ -12524,6 +12524,26 @@ html[data-theme="dark"] .booking-container iframe {
   .ember-spark { display: none; }
 }
 
+/* Ember in the homepage hero, above the label, at a size that reads as a character rather than
+   as an avatar. The bottom margin is the room the bubble stands in: written in whether the
+   bubble is there or not, because js/ember.js adds it a second after the page has painted and a
+   headline that drops down the screen while somebody is reading it is worse than a little air.
+
+   First on the hero's own ladder (the staggered fade-ups above), so the order reads as somebody
+   turning up and then the page introducing itself. Centred with the hero under 900px and
+   left-aligned with it above, which is what the margin shorthand is doing twice. */
+.hm-hero-ember {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin: 0 auto 38px;
+  cursor: pointer;
+  animation: hm-fade-up-in 0.6s ease 0s backwards;
+}
+@media (min-width: 900px) {
+  .hm-hero-ember { width: 96px; height: 96px; margin: 0 0 44px; }
+}
+
 /* Ember standing over a page hero, where the wordmark used to. */
 .page-hero-ember {
   width: 88px;

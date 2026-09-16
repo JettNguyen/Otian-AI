@@ -14,8 +14,7 @@
  *   <span data-ember-seed="hello"></span>           a look dealt from that word, stable forever
  *   <span data-ember data-ember-state="sleep"></span>       asleep rather than idle
  *   <span data-ember data-ember-play="oops"></span>         winces once on arrival, then settles
- *   <span data-ember data-ember-nudge="Poke Ember"></span>    invites the reader to press them,
- * once
+ *   <span data-ember data-ember-nudge></span>                 invites the reader to press, once
  *
  * Size comes from CSS (set a width and height on the element). One requestAnimationFrame loop
  * drives every Ember on the page and stops itself when there are none.
@@ -293,13 +292,30 @@
      name and a tab stop and answers the space bar. Only the invited ones, though. The Embers
      inside figures are aria-hidden decoration, and turning every drawing on a page into a tab
      stop would charge the keyboard reader for a mascot. */
-  var NUDGE_KEY = "otian_ember_poked";
+  var NUDGE_KEY = "otian_ember_greeted";
   var NUDGE_DELAY = 1500;
 
-  function pokedBefore() {
+  /** What Ember says, which is one sentence and not the page's to write.
+   *
+   *  It was the page's, on the reasoning that words belong with the copy around them. Two things
+   *  changed that. The sentence has to know what the reader is holding, which is a runtime fact
+   *  no static page can carry; and it is the same sentence everywhere Ember offers it, in the app
+   *  as much as here, because it is a character's greeting rather than a page's label. A page can
+   *  still put its own words in the attribute if it ever has a reason to.
+   *
+   *  Tap or click, from what the device actually has. `hover: none` and `pointer: coarse`
+   *  together are a device with no mouse at all; a laptop with a touchscreen answers hover and
+   *  gets "click", which is right, because it has both and one of them is what the word means. */
+  function invitation() {
+    var touch = window.matchMedia &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    return touch ? "Hi! Tap me" : "Hi! Click me";
+  }
+
+  function greetedBefore() {
     try { return localStorage.getItem(NUDGE_KEY) === "1"; } catch (e) { return false; }
   }
-  function rememberPoke() {
+  function rememberGreeting() {
     try { localStorage.setItem(NUDGE_KEY, "1"); } catch (e) { /* private window: it asks again */ }
   }
 
@@ -351,7 +367,7 @@
   function press(rig) {
     actOnce(rig, true);
     if (!rig.nudged) return;
-    rememberPoke();
+    rememberGreeting();
     for (var i = 0; i < rigs.length; i++) clearNudge(rigs[i]);
   }
 
@@ -593,7 +609,7 @@
     host.addEventListener("click", function () { press(rig); });
     host.addEventListener("pointerenter", function () { host.classList.add("is-hovered"); });
     host.addEventListener("pointerleave", function () { host.classList.remove("is-hovered"); });
-    if (opts.nudge) addNudge(rig, opts.nudge);
+    if (opts.nudge != null) addNudge(rig, opts.nudge);
     return {
       element: host,
       set: function (state) { setState(rig, state); },
@@ -604,10 +620,11 @@
     };
   }
 
-  /* The label, and the control it turns them into. The text is the page's, because what to call
-     a press belongs with the copy around them rather than in here. */
+  /* The bubble, and the control it turns Ember into. The words are Ember's own (see
+     `invitation`); a page passes its own only if it has a reason to. */
   function addNudge(rig, text) {
-    if (REDUCED || pokedBefore()) return;
+    text = text || invitation();
+    if (REDUCED || greetedBefore()) return;
     rig.nudged = true;
     var host = rig.host;
     host.setAttribute("role", "button");
@@ -641,7 +658,12 @@
         seed: el.hasAttribute("data-ember-seed") ? el.getAttribute("data-ember-seed") : null,
         state: el.getAttribute("data-ember-state") || "idle",
         play: el.getAttribute("data-ember-play") || null,
-        nudge: el.getAttribute("data-ember-nudge") || null
+        // Opting in is the attribute being there at all, so a page takes Ember's own words by
+        // saying nothing. An empty attribute used to read as "no bubble", which is the opposite
+        // of what writing one says.
+        nudge: el.hasAttribute("data-ember-nudge")
+          ? el.getAttribute("data-ember-nudge") || ""
+          : null
       }));
     }
     return made;

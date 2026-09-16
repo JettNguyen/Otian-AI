@@ -14,6 +14,7 @@
  *   <span data-ember-seed="hello"></span>           a look dealt from that word, stable forever
  *   <span data-ember data-ember-state="sleep"></span>       asleep rather than idle
  *   <span data-ember data-ember-play="oops"></span>         winces once on arrival, then settles
+ *   <span data-ember data-ember-nudge="Poke Ember"></span>    invites the reader to press him, once
  *
  * Size comes from CSS (set a width and height on the element). One requestAnimationFrame loop
  * drives every Ember on the page and stops itself when there are none.
@@ -219,6 +220,41 @@
     { cls: "st-act-nod", ms: 750, sparks: 0 }
   ];
 
+  /* THE INVITATION.
+
+     Ember reacts to a press and almost nobody finds out, because nothing on the page says he
+     will. He blinks, he follows the pointer and he does something unprompted every ten seconds
+     or so, and all of that reads as a nicely drawn picture until the reader presses him and gets
+     an answer back. So where he is the subject of a section rather than a face on something,
+     a small label says what to do.
+
+     Three rules it follows, each one a way this could have gone wrong:
+
+       It goes away and stays away. One press and the label is gone for good, remembered in this
+       browser, because a reader who has already found out is being told something they know.
+       Nagging a returning visitor with an instruction they have followed is the cheapest kind of
+       noise there is.
+
+       It never appears under reduced motion. actOnce() is silent there, so the press does
+       nothing, and an invitation the page will not answer is worse than no invitation.
+
+       It arrives after he does. Shown a beat past his own entrance, so the order reads as a
+       character turning up and then being introduced, rather than a tooltip landing on a picture.
+
+     It also makes him a real control where it appears: a press is an interaction, so it takes a
+     name and a tab stop and answers the space bar. Only the invited ones, though. The Embers
+     inside figures are aria-hidden decoration, and turning every drawing on a page into a tab
+     stop would charge the keyboard reader for a mascot. */
+  var NUDGE_KEY = "otian_ember_poked";
+  var NUDGE_DELAY = 1500;
+
+  function pokedBefore() {
+    try { return localStorage.getItem(NUDGE_KEY) === "1"; } catch (e) { return false; }
+  }
+  function rememberPoke() {
+    try { localStorage.setItem(NUDGE_KEY, "1"); } catch (e) { /* private window: it asks again */ }
+  }
+
   /* The app's own celebration palette, so a spark off Ember here is the same color as a spark off
      Ember in the app. Red is absent on purpose: it means "something is wrong" everywhere else. */
   var SPARK_COLORS = ["#E08A5B", "#679B55", "#BB8C33", "#996FBE", "#3E9A92"];
@@ -259,6 +295,23 @@
     if (i === rig.lastAct) i = (i + 1 + Math.floor(Math.random() * (ACTS.length - 1))) % ACTS.length;
     rig.lastAct = i;
     runAct(rig, ACTS[i]);
+  }
+
+  /* One press, wherever it came from. The act is the answer to it; clearing the labels is the
+     answer to having been told. Every Ember on the page loses its label, not just this one:
+     having found out that he moves is a thing you now know about him, not about one drawing. */
+  function press(rig) {
+    actOnce(rig);
+    if (!rig.nudged) return;
+    rememberPoke();
+    for (var i = 0; i < rigs.length; i++) clearNudge(rigs[i]);
+  }
+
+  function clearNudge(rig) {
+    if (!rig.nudge) return;
+    rig.nudge.remove();
+    rig.nudge = null;
+    rig.nudgeAt = 0;
   }
 
   /* A named act on one Ember, for a page that has a moment to mark: the living-agent figure
@@ -353,6 +406,14 @@
     if (!rig.visible) {
       rig.visible = true;
       if (now - rig.lastActAt > ARRIVE_COOLDOWN) rig.flourish = now + ARRIVE_MS;
+      /* Clocked from being seen rather than from mount, for the same reason the arrival is:
+         an invitation that fades in above the fold while the reader is 1,400 lines down has
+         invited nobody. */
+      if (rig.nudge && !rig.nudgeAt) rig.nudgeAt = now + NUDGE_DELAY;
+    }
+    if (rig.nudgeAt && now > rig.nudgeAt) {
+      rig.nudge.classList.add("is-on");
+      rig.nudgeAt = 0;
     }
     var cx = r.left + r.width / 2;
     var cy = r.top + r.height / 2;
@@ -443,6 +504,7 @@
       lastActAt: -1e9,
       acting: false,
       lastAct: -1,
+      nudge: null, nudgeAt: 0, nudged: false,
       rect: null, rectAt: -1e9
     };
     for (var i = 0; i < eyeEls.length; i++) {
@@ -479,9 +541,10 @@
        him, which on a page you read with the cursor parked anywhere near him is a permanent
        fountain. Being tickled shows in his face and his body, which is where a person would look
        for it; the sparks were the page shouting over both of them. */
-    host.addEventListener("click", function () { actOnce(rig); });
+    host.addEventListener("click", function () { press(rig); });
     host.addEventListener("pointerenter", function () { host.classList.add("is-hovered"); });
     host.addEventListener("pointerleave", function () { host.classList.remove("is-hovered"); });
+    if (opts.nudge) addNudge(rig, opts.nudge);
     return {
       element: host,
       set: function (state) { setState(rig, state); },
@@ -490,6 +553,31 @@
         setTimeout(function () { setState(rig, "idle"); }, ms || 1700);
       }
     };
+  }
+
+  /* The label, and the control it turns him into. The text is the page's, because what to call
+     a press belongs with the copy around him rather than in here. */
+  function addNudge(rig, text) {
+    if (REDUCED || pokedBefore()) return;
+    rig.nudged = true;
+    var host = rig.host;
+    host.setAttribute("role", "button");
+    host.setAttribute("tabindex", "0");
+    host.setAttribute("aria-label", text);
+    host.classList.add("ember-pressable");
+    host.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+      e.preventDefault();
+      press(rig);
+    });
+    var tip = document.createElement("span");
+    tip.className = "ember-nudge";
+    /* The button already says these words as its name. Saying them twice is how a small kindness
+       turns into a stutter for the one reader who cannot see the drawing. */
+    tip.setAttribute("aria-hidden", "true");
+    tip.textContent = text;
+    host.appendChild(tip);
+    rig.nudge = tip;
   }
 
   function auto(root) {
@@ -503,7 +591,8 @@
         key: el.getAttribute("data-ember") || "",
         seed: el.hasAttribute("data-ember-seed") ? el.getAttribute("data-ember-seed") : null,
         state: el.getAttribute("data-ember-state") || "idle",
-        play: el.getAttribute("data-ember-play") || null
+        play: el.getAttribute("data-ember-play") || null,
+        nudge: el.getAttribute("data-ember-nudge") || null
       }));
     }
     return made;

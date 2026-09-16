@@ -12269,12 +12269,58 @@ html[data-theme="dark"] .booking-container iframe {
   width: 132px;
   height: 132px;
   display: block;
-  margin: 6px auto 18px;
+  /* The bottom margin is 46 rather than 18 to hold the room .ember-nudge sits in. Held whether
+     the label is there or not: it is written in by a script after the page has painted, and a
+     paragraph that jumps down the screen a second after you started reading it is a worse
+     failure than a little extra air under him. */
+  margin: 6px auto 46px;
   cursor: pointer;
 }
 @media (max-width: 640px) {
   .ember-intro { width: 108px; height: 108px; }
 }
+
+/* THE INVITATION (js/ember.js, addNudge).
+
+   Ember answers a press and nothing on the page said he would, so where he is the subject of a
+   section this says it, once, and then never again on this browser. Quiet on purpose: a chip in
+   the page's own idiom rather than a callout, because the interesting thing is what he does when
+   you press him and this is only the sentence that gets you there. It is inside his box, so
+   pressing the label is pressing him. */
+.ember-nudge {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  padding: 4px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--fs-xs);
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+}
+/* The corner that points back at him, so the label reads as being about the thing above it and
+   not about the paragraph below. */
+.ember-nudge::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3.5px;
+  transform: rotate(45deg);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  background: var(--bg-card);
+}
+.ember-nudge.is-on { opacity: 1; transform: translateX(-50%) translateY(0); }
+.ember-pressable:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 6px; border-radius: 999px; }
 
 /* ========================================
    The equipment kit (/equipment/)

@@ -2366,6 +2366,27 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Instinct "connects to your applications and devices - email, messaging, screen, audio, location, and more", and "It's trained to use a phone and a computer. You can text or call it." | Instinct | `https://instinct.com/` | 2026-09-16 |
 | Norton Family Assistant "keeps your family organized, so you never miss to-dos, calendar events, and important updates in your life" and "Plugs into the apps your family already uses" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
 | Norton Family Assistant "Asks first, acts after", and "Your chats are never shared, sold or used to train AI" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
+| Vellum&rsquo;s mark on `/compare/` is the file vellum.ai serves as its favicon, unmodified | Vellum | `https://www.vellum.ai/favicon.svg` | 2026-09-16 |
+| OpenClaw&rsquo;s mark on `/compare/` is the file openclaw.ai serves as its favicon, unmodified | OpenClaw | `https://openclaw.ai/favicon.svg` | 2026-09-16 |
+| Hermes&rsquo; mark on `/compare/` is the 48px icon its site declares in its head, unmodified, kept as `assets/mark-hermes.png` | Nous Research | `https://hermes-agent.nousresearch.com/icon.png` | 2026-09-16 |
+| Meta&rsquo;s mark beside Meta Muse on `/compare/` is the symbol part of the logo file meta.com serves in its header, cropped by viewBox with no path touched | Meta | `https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg` | 2026-09-16 |
+| Instinct&rsquo;s mark on `/compare/` is the file instinct.com serves as its favicon, unmodified | Instinct | `https://instinct.com/favicon.svg` | 2026-09-16 |
+| Wix&rsquo;s mark beside Wix Symphony on `/compare/` is the 192px favicon wix.com serves, unmodified, kept as `assets/mark-wix.png` | Wix | `https://www.wix.com/favicon.ico` | 2026-09-16 |
+| Norton&rsquo;s mark on `/compare/` is the 512px app icon its Family Assistant page declares, resized to 96px and otherwise unmodified, kept as `assets/mark-norton.png` | Norton | `https://us.norton.com/products/family-assistant/apple-touch-icon-512.png` | 2026-09-16 |
+| Claude&rsquo;s mark beside Claude Cowork on `/compare/` is the drawing the homepage band already carries for Anthropic, from the app&rsquo;s brand table | Anthropic | `index.html` symbol `wwm-anthropic` | 2026-09-16 |
+| xAI&rsquo;s mark beside Grok Bot on `/compare/` is the drawing the homepage band already carries, from the app&rsquo;s brand table, filled black on the white mark | xAI | `index.html` symbol `wwm-xai` | 2026-09-16 |
+
+**Logos on `/compare/`, added 2026-09-16.** Each mark is the file the company&rsquo;s own site serves
+for itself, fetched that day and named in the rows above, and it is used only to identify the
+product in a comparison, which is what the footer&rsquo;s marks note says every third-party mark on
+this site is for. Nothing is redrawn. Two are the homepage band&rsquo;s existing marks. One is
+cropped (Meta&rsquo;s symbol out of its wordmark file, by viewBox). One is resized (Norton&rsquo;s app
+icon, 512 to 96). Three are rasters kept under `assets/` because that is all the company serves.
+Grok Bot carries xAI&rsquo;s mark and Meta Muse carries Meta&rsquo;s because those are the marks the
+products&rsquo; own pages carry; x.ai refuses automated requests, so its row rests on the mark the
+app&rsquo;s brand table already held. These rows re-read on the same 90-day cadence as the claims.
+Drawing a company&rsquo;s logo from memory is both a trust failure and a legal one, which is why the
+chart carried initials until these were sourced.
 
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
 two of them were live on `compare/cloud-agents/`:

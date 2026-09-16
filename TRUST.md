@@ -1112,6 +1112,26 @@ site is laid out. Next time it uses that site, it already knows its way."
 - ⚠️ It is started by a person pressing Practice on a saved site, or by the agent offering and being
   told yes. Nothing explores unasked, and that clause travels with the description.
 
+**Flight check-in — SHIPPED 2026-09-16.** The one errand in this lane that is neither a purchase
+nor a booking, which is exactly why it could be built when those could not.
+
+*Approved wording:* "Check-in opens 24 hours before a flight and the good seats go in the first
+hour. Your agent finds the flight in your own confirmation email, goes to the airline's site the day
+before, identifies the booking with the confirmation code and your surname, takes a free seat, and
+sends you the boarding pass. It buys nothing: not a seat, not a bag, not priority boarding. If
+check-in cannot finish without paying, it stops and tells you what is being asked for."
+
+- **Why it's true:** `data/marketplace/skills/flight-check-in.json` and
+  `data/marketplace/routines/check-in-window.json` in the Archie repo, on the browser lane above,
+  which is what enforces every sentence of it in code rather than in the skill's own words.
+- ❌ **This does not soften the claim above it.** It checks in; it does not book, change or cancel
+  anything, and it cannot type a card number. A page that lists this beside "books your travel" has
+  broken the strongest claim in this file to advertise the weaker half of a feature.
+- ⚠️ A confirmation code and a surname are not a password, which is why this works at all. Where an
+  airline wants an account sign-in or sends a code, it hands the window over like everything else.
+- ⚠️ **Untested against a real airline.** It runs on a lane that is now tested against a real site,
+  and no airline has been checked into. Copy may say what it does and may not say it is proven.
+
 **What this settles outside this file.** A benchmark or a comparison that scores Archie low on
 purchasing and booking is scoring a decision, not a gap, and the answer is to say so rather than to
 file the work: building it would break the claim above. The sites worth wanting are the ones with no

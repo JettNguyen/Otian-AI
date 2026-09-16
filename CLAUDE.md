@@ -327,6 +327,22 @@ siblings until they get their own drawings.
   colour"), and `skills-marketplace/what-is-an-add-on/` explains three. Four is the catalog's
   structure and the count in FACTS.md; three is the taxonomy the reader is shown. Do not "fix" the
   explainer page to four: a redirect stub said four on 2026-08-31 and it was the stub that was wrong.
+- **Four words, four levels, and they are not interchangeable. Swept 2026-09-16.** *Otian AI* is
+  the company. **Archie** is the desktop app you install. **Your agent** (or agents) is what
+  Archie runs, and you name it. **Ember** is the face your agents wear, defined once on
+  `archie/personal/` and used nowhere else as a name. Jett asked whether Ember should just be
+  called Archie, since Otian plus Archie plus Ember is three names to learn. The answer was no,
+  and the reason is the thing to keep: **Archie was already the one doing double duty.** Served
+  copy called it a desktop app on three pages, an agent on two, a program on one, and a plan on
+  one, and `faq/` said "Archie is one agent" on a product that runs up to ten. Adding the
+  character to that pile would have made four, and it would have collided with the one
+  distinction the product is sold on, because "ten Archies" is not a sentence anybody can say.
+  So: **Archie is never "an agent"**, it is the app that runs one; write "Archie runs an agent
+  you own", not "Archie is an agent you own". **Ember is never a speaker or an actor**, it is a
+  face; the homepage lockup says "Archie | [face] your agent | on your computer" for that reason,
+  where it used to say Ember. The app still names the starter agent Ember (`STARTER_NAME` in
+  `src/app/starter.ts`), which is the last place the two jobs overlap and the open question to
+  put to Jett before it spreads.
 - The thing Archie runs on is a **"computer"**, never a "machine" (swept 2026-08-20; "machine"
   is borderline jargon and broke the one-name-per-concept rule, since "computer" already carried
   the concept everywhere else). Blog posts keep their own voice.

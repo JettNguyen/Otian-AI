@@ -6789,7 +6789,7 @@ html[data-theme="dark"] .booking-container iframe {
   white-space: nowrap;
 }
 
-/* baseline, not the inherited centre: the shared --words rule centres its flex children, which
+/* baseline, not the inherited center: the shared --words rule centres its flex children, which
    floats the small qualifier halfway up the big word. Next to it, "$149 a year" sets the
    qualifier on the baseline, and two cards in a row cannot hang the same phrase differently. */
 .plan-card .price-card-amount--words {
@@ -8611,7 +8611,7 @@ html[data-theme="dark"] .booking-container iframe {
    equals the $-figure line box (2.5rem x 1.6) so the four cards' body
    text starts level across a row. */
 /* Word amounts ("Free or one-time", "Pay as you go") stand in for a "$20" figure, so they
-   reserve the same height and centre inside it, rather than faking it with a 4rem
+   reserve the same height and center inside it, rather than faking it with a 4rem
    line-height, which doubled the card's height the moment the words wrapped to two lines. */
 .price-card-amount--words {
   font-size: var(--fs-7xl);
@@ -12193,10 +12193,10 @@ html[data-theme="dark"] .booking-container iframe {
                it is on the far side of an opaque ball, so it is switched off rather than faded:
                a mirrored face at half strength for three frames is the flatness this is here to
                fix. Every crossing lands on a keyframe where it is already zero wide.
-     the feet  sit below the centre, on the axis, so a turn only closes the gap between them:
-               width by cos a. A flip swings them up the front, to y = 61 cos a from the centre,
+     the feet  sit below the center, on the axis, so a turn only closes the gap between them:
+               width by cos a. A flip swings them up the front, to y = 61 cos a from the center,
                which puts them overhead at half a turn, exactly where they belong.
-     the hat   sits above the centre, so it does the same as the feet in the other direction. Its
+     the hat   sits above the center, so it does the same as the feet in the other direction. Its
                scale is signed rather than absolute, which is what mirrors a cap's brim when you
                come round behind it.
      a scarf   is a band right around them, so it is there from every side: a turn leaves it
@@ -12207,7 +12207,7 @@ html[data-theme="dark"] .booking-container iframe {
    moves, the four radii to change are 60 (face), 61 (feet), 60 (hat) and 50 (scarf).
 
    The transform origins are in view-box units and the view box starts at y=6, so every y here
-   is the drawing's own y minus six: the ball's centre at 108 is written 102. Same rule as
+   is the drawing's own y minus six: the ball's center at 108 is written 102. Same rule as
    .lean's 170 for the ground at 176. */
 .ember .face,
 .ember .feet,
@@ -12917,7 +12917,7 @@ html[data-theme="dark"] .booking-container iframe {
   align-items: center;
   gap: 0 12px;
 }
-/* The mark shares a row with the name and nothing else, so the two centre on each other and the
+/* The mark shares a row with the name and nothing else, so the two center on each other and the
    connection tag hangs below out of that alignment. Spanning both rows instead centres the mark
    on the pair, which drops the name by half a line on the four add-ons that carry a tag and
    leaves it where it was on the two that do not: side by side, the names in a row then sit at
@@ -13868,7 +13868,7 @@ html[data-theme="dark"] .booking-container iframe {
    what an unprompted message looks like from your side. */
 .hm-composer {
   display: flex;
-  /* end, not centre: when the field is two lines the send button belongs beside the last of
+  /* end, not center: when the field is two lines the send button belongs beside the last of
      them, which is where a thumb expects it. */
   align-items: flex-end;
   gap: 8px;

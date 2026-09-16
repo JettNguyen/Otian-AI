@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260916-9" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260916-10" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -228,6 +228,12 @@
       <symbol id="g-connections" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></symbol>
       <symbol id="g-settings" viewBox="0 0 24 24"><path d="M 4 8.6 H 20"/><path d="M 4 15.4 H 20"/><circle cx="14.8" cy="8.6" r="2.4" fill="currentColor"/><circle cx="9.2" cy="15.4" r="2.4" fill="currentColor"/></symbol>
       <symbol id="g-mail" viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="M3.4 7.2 12 13.2 20.6 7.2"/></symbol>
+      <!-- The custody floor's four stations: a phone, a computer, the AI company's building and a
+           server, drawn as little as they can be and still be read. -->
+      <symbol id="g-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.5 5.5h3"/><path d="M11 18.5h2"/></symbol>
+      <symbol id="g-computer" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="10.5" rx="1.6"/><path d="M2.5 18.5h19"/></symbol>
+      <symbol id="g-ai" viewBox="0 0 24 24"><path d="M5 21V7.5L12 4l7 3.5V21"/><path d="M3 21h18"/><path d="M9 11h2M13 11h2M9 15h2M13 15h2M11 21v-3.5h2V21"/></symbol>
+      <symbol id="g-server" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="16" height="6.5" rx="1.6"/><path d="M7.5 7.25h.01M7.5 16.75h.01"/></symbol>
     </svg>
 
     <section class="day-story" aria-label="One day with Archie">
@@ -296,7 +302,7 @@
             <div class="day-chips">
               <span class="day-chip day-chip--no"><i></i>Cannot spend money or buy anything</span>
               <span class="day-chip day-chip--no"><i></i>Connects to no bank</span>
-              <span class="day-chip day-chip--no"><i></i>No PDFs, pictures, audio or video</span>
+              <span class="day-chip day-chip--no"><i></i>Makes no PDFs, pictures, audio or video</span>
             </div>
             <p class="day-catch">Add-ons with routines run on their own schedule, and those runs are a real part of a heavy month&rsquo;s AI bill. <a href="archie/pricing/#ai-cost">What that costs, measured&nbsp;&rarr;</a></p>
             <a class="day-more" href="skills-marketplace/find/">Say the job in your own words and see which one does it&nbsp;&rarr;</a>
@@ -311,10 +317,10 @@
           </article>
 
           <!-- Act 6. The five steps stand on the floor and Ember hops one to the next; the minute
-               count climbs 1, 4, 9, 13, 15, the marks FACTS.md records for the track. -->
+               count climbs 1, 3, 7, 9, 10, the marks FACTS.md records for the track. -->
           <article class="day-cap" data-act="6">
             <span class="section-label">Setup &middot; Estimated</span>
-            <h2>Five steps, about fifteen minutes, and none of them is configuration.</h2>
+            <h2>Five steps, about ten minutes, and none of them is configuration.</h2>
             <div class="day-minutes"><small>Estimated</small><b id="dayMinutes">1</b><span>min so far</span></div>
             <p>Estimates, not a stopwatch. The longest step is opening an AI account: their checkout, not ours.</p>
             <a class="day-more" href="how-it-works/#what-you-need">The full list of what you need&nbsp;&rarr;</a>
@@ -538,20 +544,21 @@
               <i class="day-mark" data-mark="m-phone" data-size="84" style="left:-72px;bottom:30px"></i>
             </div>
 
-            <!-- THE CUSTODY FLOOR. Four stations, and ours has no line to it: that is the claim.
-                 The relay station only exists in starter-credits mode. -->
+            <!-- THE CUSTODY FLOOR. Four stations drawn as icons, and ours has no line to it: that is
+                 the claim. Ours stands behind the computer, lifted off the floor and dotted; on
+                 starter credits and the plan with the AI included the lap detours up to it, its
+                 outline fills in, and its second line appears. -->
             <div class="day-layer day-floor" id="dayFloorCustody" data-mode="key" aria-hidden="true">
               <div class="day-plane">
                 <div class="day-grid"></div>
                 <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true">
                   <g class="key"><path d="M95 300 H360 H625"/></g>
-                  <g class="credits"><path d="M95 300 H360"/><path class="dashed" d="M360 300 L500 215 L625 300"/></g>
+                  <g class="credits"><path d="M95 300 H360"/><path class="dashed" d="M360 300 V60 L625 300"/></g>
                 </svg>
-                <div class="day-st" style="--fx:95px;--fy:300px"><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
-                <div class="day-st" style="--fx:360px;--fy:300px"><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
-                <div class="day-st" style="--fx:625px;--fy:300px"><b>Your AI company</b><i>on your account, with your key</i></div>
-                <div class="day-st ghost" style="--fx:640px;--fy:118px"><b>Otian</b><i>Otian&rsquo;s servers hold your email address, plan and listed operational records. Never a conversation.</i></div>
-                <div class="day-st relay" style="--fx:500px;--fy:215px"><b>Our server</b><i>passes it to Anthropic without keeping it</i></div>
+                <div class="day-st" style="--fx:95px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-phone"/></svg><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
+                <div class="day-st" style="--fx:360px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-computer"/></svg><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
+                <div class="day-st" style="--fx:625px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-ai"/></svg><b>Your AI company</b><i>on your account, with your key</i></div>
+                <div class="day-st ghost" style="--fx:360px;--fy:60px"><svg class="day-ico" aria-hidden="true"><use href="#g-server"/></svg><b>Otian</b><i>Otian&rsquo;s servers hold your email address, plan and listed operational records. Never a conversation.</i><i class="when-credits">On the way to Anthropic it passes through here, without being kept.</i></div>
                 <div class="day-gate" id="dayGate" style="--fx:360px;--fy:352px"><span>waits for you</span></div>
                 <div class="day-dot" id="dayDot"></div>
               </div>
@@ -565,8 +572,8 @@
                 <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true"><path class="dashed" d="M60 330 H660"/></svg>
                 <div class="day-st step" style="--fx:80px;--fy:262px"><span class="num">1</span><b>Pick a computer your agent can live on</b><i>One you can leave on. You, once.</i></div>
                 <div class="day-st step" style="--fx:220px;--fy:262px"><span class="num">2</span><b>Install the Archie desktop app</b><i>One download, a plan. You, once.</i></div>
-                <div class="day-st step" style="--fx:360px;--fy:262px"><span class="num">3</span><b>Choose how to fund the AI</b><i>Free credits, or your own account. Them, not us.</i></div>
-                <div class="day-st step" style="--fx:500px;--fy:262px"><span class="num">4</span><b>Meet your agent</b><i>Archie writes its own routines. Archie, not you.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:262px"><span class="num">3</span><b>Choose how to fund the AI</b><i>Free credits to start, then AI included or your own key. You, once.</i></div>
+                <div class="day-st step" style="--fx:500px;--fy:262px"><span class="num">4</span><b>Meet your agent</b><i>Already there, with a name, a face and its first add-ons. Talk, and it shapes to how you like things. Archie, then you.</i></div>
                 <div class="day-st step" style="--fx:640px;--fy:262px"><span class="num">5</span><b>Message your agent from your phone</b><i>A claim code. Optional. You, once.</i></div>
                 <i class="day-mark day-fmark" data-mark="m-s0" data-size="66" style="--fx:80px;--fy:330px"></i>
                 <i class="day-mark day-fmark" data-mark="m-s1" data-size="66" style="--fx:220px;--fy:330px"></i>
@@ -1177,10 +1184,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260916-9"></script>
-  <script src="js/ember.js?v=20260916-9" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260916-9"></script>
-  <script src="js/home.js?v=20260916-9" defer></script>
+  <script src="js/nav.js?v=20260916-10"></script>
+  <script src="js/ember.js?v=20260916-10" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260916-10"></script>
+  <script src="js/home.js?v=20260916-10" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

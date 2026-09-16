@@ -201,7 +201,7 @@
     ];
     /* The five minute marks, from FACTS.md: what the clock over the setup track reaches as each
        step is lit. Estimates, and the caption says so. */
-    var MINUTES = [1, 4, 9, 13, 15];
+    var MINUTES = [1, 3, 7, 9, 10];
 
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
     function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
@@ -233,6 +233,13 @@
       win.style.opacity = p.win.o.toFixed(3);
       phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
       phone.style.opacity = p.phone.o.toFixed(3);
+      /* The light on the phone's edges moves with its angle to the camera: the side turned toward
+         the viewer catches it, and the bezel's bright corners slide with it. The stylesheet reads
+         these on the bezel, and at rest they are the kit's own values. */
+      var yaw = p.cam.ry + tilt.x + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
+      phone.style.setProperty('--edge-l', clamp(0.14 + 0.36 * sy, 0.03, 0.5).toFixed(3));
+      phone.style.setProperty('--edge-r', clamp(0.14 - 0.36 * sy, 0.03, 0.5).toFixed(3));
+      phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));
@@ -240,12 +247,11 @@
     }
 
     /* The custody lap in floor coordinates: [time, x, y]. The held stretch at the gate is the
-       point of the drawing, so it is a fifth of the lap, and the dot holds 8px short of the gate
-       line (which is at 352) so it stops at the gate rather than on it, in front of the sign that
-       stands behind the line. The credits path takes the detour through our server and back, which
-       is the one case TRUST.md says the picture may not skip. */
-    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 344], [0.8, 360, 344], [1, 95, 300]];
-    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 500, 215], [0.44, 625, 300], [0.52, 500, 215], [0.6, 360, 300], [0.64, 360, 344], [0.8, 360, 344], [1, 95, 300]];
+       point of the drawing, so it is a fifth of the lap, and the ball holds at the gate line (which
+       is at 352, and the sign stands at its end). The credits path takes the detour through our
+       server and back, which is the one case TRUST.md says the picture may not skip. */
+    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
+    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 360, 60], [0.44, 625, 300], [0.52, 360, 60], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {
@@ -317,6 +323,7 @@
         var box = mark === 'm-cta' && ctaBox ? ctaBox : stage;
         if (ember.parentNode !== box) { box.appendChild(ember); first = true; }
         var size = +m.getAttribute('data-size') || 96;
+        if (box === stage) size *= SC;  /* the scene is scaled on small screens, so Ember is too */
         var mr = m.getBoundingClientRect(), br = box.getBoundingClientRect();
         var tx = mr.left - br.left + mr.width / 2 - size / 2;
         /* 0.85: the ground between Ember's feet is 85% of the way down the drawing's box (viewBox

@@ -16251,7 +16251,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-cap.mode-credits .day-main { display: none; }
 .day-minutes { display: inline-flex; align-items: baseline; gap: 8px; margin-top: 18px; padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); align-self: flex-start; }
 .day-minutes small { font-size: var(--fs-2xs); letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); font-weight: 600; }
-.day-minutes b { font-family: Georgia, 'Times New Roman', serif; font-size: var(--fs-7xl); line-height: 1; color: var(--text-primary); min-width: 1.4em; }
+.day-minutes b { font-family: Georgia, 'Times New Roman', serif; font-size: var(--fs-7xl); line-height: 1; color: var(--text-primary); font-variant-numeric: tabular-nums; }
 .day-minutes span { font-size: var(--fs-sm); color: var(--text-secondary); }
 .day-stage h1, .day-stage h2, .day-stage p, .day-stage .day-catch, .day-stage .section-label { transition: color .5s ease; }
 .day-stage.is-night h1, .day-stage.is-night h2, .day-stage.is-night .day-minutes b { color: #F3F0ED; }
@@ -16411,9 +16411,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-phone { width: 263px; height: 552px; margin: -276px 0 0 -131px; }
 .dp-device {
   --bezel-wall: 12px;
-  --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .09), inset 0 1.5px 1.5px rgba(255, 255, 255, .26), inset 0 -1.5px 1.5px rgba(255, 255, 255, .13), inset 1.5px 0 1.5px rgba(255, 255, 255, .10), inset -1.5px 0 1.5px rgba(255, 255, 255, .10), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
+  /* The kit's bezel, with its two side highlights and the angle of its sheen on variables that
+     js/home.js sets from the phone's yaw each frame, so the edge turned toward the camera catches
+     the light and the bright corners slide as the phone turns. At rest the values are the kit's. */
+  --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .09), inset 0 1.5px 1.5px rgba(255, 255, 255, .26), inset 0 -1.5px 1.5px rgba(255, 255, 255, .13), inset 2px 0 2px rgba(255, 255, 255, var(--edge-l, .10)), inset -2px 0 2px rgba(255, 255, 255, var(--edge-r, .10)), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
   position: relative; width: 417px; height: 876px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
-  background: linear-gradient(148deg, #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
+  background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
   box-shadow: var(--shadow-bezel);
   zoom: .63;
 }
@@ -16529,7 +16532,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-floor { width: 720px; height: 420px; margin: -180px 0 0 -360px; pointer-events: none; --fo: 0; }
 .day-floor.is-on { pointer-events: auto; }
 .day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
-.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent); mask-image: radial-gradient(closest-side, #000 60%, transparent); }
+.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
 .day-paths { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--fo); overflow: visible; }
 .day-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .day-paths path.dashed { stroke-dasharray: 5 6; }
@@ -16539,21 +16542,35 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-st b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
 .day-st i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 2px; }
 .day-st .num { position: absolute; top: -10px; left: 10px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--text-on-accent); font-size: var(--fs-3xs); font-weight: 700; display: grid; place-items: center; }
-.day-st.ghost { border-style: dashed; background: color-mix(in srgb, var(--bg-card) 60%, transparent); box-shadow: none; }
+/* The custody floor's stations are icons, not cards: a phone, a computer, the AI company and our
+   server in the site's line-art, the name under each and its one line under that. Ours is dotted
+   and stands lifted off the floor behind the computer, where Ember is; on credits the lap reaches
+   it and its outline fills in. */
+#dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; }
+.day-ico { display: block; width: 46px; height: 46px; margin: 0 auto 4px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.day-st.ghost { transform: translate(-50%, -100%) translateZ(60px) rotateX(-58deg); }
+.day-st.ghost .day-ico { stroke: var(--text-muted); stroke-dasharray: 3 3; }
+.day-floor[data-mode="credits"] .day-st.ghost .day-ico { stroke: var(--accent); stroke-dasharray: none; }
 .day-st.is-lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle), var(--shadow-sm); }
-.day-st.relay { display: none; }
-.day-floor[data-mode="credits"] .day-st.relay { display: block; }
+.day-st .when-credits { display: none; }
+.day-floor[data-mode="credits"] .day-st .when-credits { display: block; }
 .day-st .day-mark { left: 50%; top: 0; }
 /* transform-style, or the gate flattens its label into the floor and the standing-up rotation below
    becomes a second squash: that was "waits for you" reading as a pressed pill. */
 .day-gate { position: absolute; left: var(--fx); top: var(--fy); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
-/* The sign stands 30px behind the line (up the floor, away from the camera), so a dot held just
-   short of the line sits in front of it instead of behind its base. */
-.day-gate span { position: absolute; left: 50%; top: -30px; transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+/* The sign stands at the line's right end, not over its middle: standing over the middle it sat on
+   the computer card's bottom edge and hid the ball. */
+.day-gate span { position: absolute; left: calc(100% + 6px); top: 0; transform: translate(0, -100%) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 .day-gate.is-on { border-top-color: var(--accent); }
 .day-gate.is-on span { background: var(--accent-subtle); color: var(--accent-ink); border-color: var(--accent); }
-.day-dot { position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent); transform: translate(-50%, -50%) translateZ(3px); opacity: var(--fo); }
-.day-dot.is-held { background: var(--c-blue); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c-blue) 22%, transparent); }
+/* The message is a ball standing on the floor, not a disc lying on it: the ball faces the camera
+   (stood up like the cards) and is shaded from the upper left, and the disc under it is its shadow.
+   The fade rides on the two leaves, because an opacity on the ball's box would flatten them. */
+.day-dot { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; --ball: var(--accent); }
+.day-dot.is-held { --ball: var(--c-blue); }
+.day-dot::before { content: ""; position: absolute; left: -9px; top: -4px; width: 18px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, .3); filter: blur(1px); opacity: var(--fo); }
+.day-dot::after { content: ""; position: absolute; left: -8px; top: -16px; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--ball) 45%, #fff), var(--ball) 52%, color-mix(in srgb, var(--ball) 62%, #000) 100%); box-shadow: 0 0 0 0 transparent; transform: rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); }
+.day-dot.is-held::after { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ball) 28%, transparent); }
 .day-fmark { position: absolute; left: var(--fx); top: var(--fy); }
 
 /* ---- Ember, the one constant: an element js/home.js walks between marks, inside the stage ---- */
@@ -16587,19 +16604,30 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
 /* ---- narrow screens: the same stage, captions on top, the scene scaled ---- */
 @media (max-width: 900px) {
-  .day-stage { grid-template-columns: 1fr; grid-template-rows: minmax(0, 46%) minmax(0, 54%); gap: 0; padding: calc(var(--nav-height) + 10px) 16px 8px; align-items: start; }
-  .day-caps { height: 100%; }
-  .day-cap { justify-content: flex-start; }
-  .day-cap h1 { font-size: var(--fs-5xl); }
-  .day-cap h2 { font-size: var(--fs-4xl); }
+  .day-stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(200px, 1fr); gap: 0; padding: calc(var(--nav-height) + 10px) 16px 8px; align-items: start; min-height: 0; }
+  /* The captions share one grid cell, so the row is as tall as the tallest of them and no caption
+     ever spills into the scene under it; the lit one is the one you see. */
+  .day-caps { display: grid; height: auto; }
+  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
+  .day-cap h1 { font-size: var(--fs-4xl); }
+  .day-cap h2 { font-size: var(--fs-3xl); }
   .day-cap > p { font-size: var(--fs-sm); margin-top: 10px; }
   .day-cap .day-catch, .day-cap .hm-hero-micro { display: none; }
-  .day-cap .hm-actions { margin-top: 16px; }
-  .day-scene-wrap { --sc: 0.58; }
+  .day-cap .hm-actions { margin-top: 14px; }
+  .day-chips { gap: 5px; margin-top: 12px; }
+  .day-scene-wrap { --sc: 0.58; min-height: 0; }
   .day-scene { height: 100%; }
   .day-clock { left: 12px; top: 4px; }
+  .day-hint { display: none; }
   .day-cta-row { flex-direction: column; }
 }
+/* Under reduced motion every caption is shown, so they stack instead of sharing a cell. */
+@media (max-width: 900px) and (prefers-reduced-motion: reduce) {
+  .day-cap { grid-area: auto; }
+}
+/* Short phones: the scene row is what is left under the captions, so the scene shrinks to it. */
+@media (max-width: 900px) and (max-height: 760px) { .day-scene-wrap { --sc: .5; } }
+@media (max-width: 900px) and (max-height: 640px) { .day-scene-wrap { --sc: .44; } }
 
 /* The four-rows screen grows as its beats land, so a bubble that has not arrived takes no room:
    with all eight present from the start the thread overflowed the screen and the first question

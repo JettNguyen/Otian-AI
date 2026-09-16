@@ -16163,8 +16163,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    phone) do real things while a camera in CSS perspective moves around them: the 7:00 am
    brief, a calendar move you confirm, a mail draft you send, the custody lap on a floor, the
    four coverage rows, 2:00 am with the stage dark and only the window lit, then the five
-   setup steps as a path. Ember is the one thing on screen the whole way down, a single fixed
-   element that js/home.js walks from mark to mark on the real objects. The words are
+   setup steps as a path. Ember is the one thing on screen the whole way down, a single element
+   inside the stage that js/home.js walks from mark to mark on the real objects. The words are
    captions: one column, one act lit at a time, and every sentence in them is one the page
    already carried or TRUST.md's approved form.
 
@@ -16186,12 +16186,25 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    element's plane, and the floors here are a plane with cards standing on it. So each floor
    carries --fo and every leaf reads it; the layer itself is never faded.
 
+   THE MOCKUPS ARE DRAWN AT THE SIZE THEY ARE SHOWN. Each is written at its own size (the app
+   1040px wide, the phone 417px) and brought down with zoom, never transform: scale(). A scale
+   is applied to a picture the browser has already drawn at full size, and in a 3D scene that
+   picture is then shrunk on the GPU with no mipmaps, so every hairline shimmers as the camera
+   moves; that was "the lines look pixelated". Zoom lays the thing out small, so the drawing is
+   made at the size it is seen. The zoom is picked so each object sits near 1:1 across its poses
+   (the phone is a little under in the hero and a little over in the calendar act), and the marks
+   Ember stands on sit outside the zoomed boxes so a measured rectangle never depends on how a
+   browser reports zoom. @supports keeps the old scale for a browser without zoom.
+
    THE NIGHT IS THE STAGE'S OWN GROUND. Act five paints the stage from --bg-primary down to a
    near-black by mixing on --night, which js/home.js sets from the scroll, and the captions
    switch to light ink at the halfway point. RESTYLE.md's band rule allows exactly this:
    a section whose visuals need an exact ground paints it explicitly. */
 
-.day-story { position: relative; height: calc(7 * 120vh + 100vh); }
+/* One act is 100vh of scrolling and the hero is 0.3 of one, so the first thing moves after a short
+   push rather than a full screen of nothing; LEN in js/home.js is the same list and must agree.
+   The extra 100vh is the stage's own height, which the sticky needs to unpin at the end. */
+.day-story { position: relative; height: calc(6.3 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   --day-night-ground: #14120F;
@@ -16230,7 +16243,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-chip--no i { background: var(--text-muted); }
 /* The own-key / starter-credits control. A toggle in the place a paragraph would go: it redraws
    the lap for the one case where our server is in the path, in TRUST.md's own sentence. */
-.day-seg { display: inline-flex; margin-top: 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); padding: 3px; }
+.day-seg { display: inline-flex; align-self: flex-start; margin-top: 16px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); padding: 3px; }
 .day-seg button { border: 0; background: transparent; color: var(--text-secondary); padding: 5px 12px; border-radius: 999px; font: inherit; font-size: var(--fs-xs); font-weight: 600; cursor: pointer; }
 .day-seg button[aria-pressed="true"] { background: var(--accent-subtle); color: var(--accent-ink); }
 .day-cap .day-alt { display: none; }
@@ -16272,9 +16285,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 }
 .day-beat.is-on { opacity: 1; transform: none; }
 
-/* ---- the Archie window: the desktop app's own surface, at half size ---- */
-.day-win { width: 520px; height: 330px; margin: -165px 0 0 -260px; }
-.day-win .da-app { width: 1040px; height: 660px; transform: scale(.5); transform-origin: 0 0; }
+/* ---- the Archie window: the desktop app's own surface, drawn at the size it is shown ---- */
+.day-win { width: 455px; height: 289px; margin: -145px 0 0 -228px; }
+.day-win .da-app { width: 1040px; height: 660px; zoom: .4375; }
+@supports not (zoom: 1) { .day-win .da-app { transform: scale(.4375); transform-origin: 0 0; } }
 .da-app {
   /* The app's tokens, copied from archie-app-mockup.html, which copies src/styles/globals.css. */
   --bg-primary: #FCFAF8; --bg-secondary: #F5F3EF; --bg-secondary-veil: #F5F3EF8C; --bg-card: #FFFFFF;
@@ -16393,16 +16407,17 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 /* Lit in the dark: the one light in the room at 2:00 am is the window, running. */
 .day-win.is-night .da-app { box-shadow: var(--shadow-lamp); }
 
-/* ---- the phone: the phone kit's own device and conversation, at half size ---- */
-.day-phone { width: 225px; height: 473px; margin: -236px 0 0 -112px; }
+/* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
+.day-phone { width: 263px; height: 552px; margin: -276px 0 0 -131px; }
 .dp-device {
   --bezel-wall: 12px;
   --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .09), inset 0 1.5px 1.5px rgba(255, 255, 255, .26), inset 0 -1.5px 1.5px rgba(255, 255, 255, .13), inset 1.5px 0 1.5px rgba(255, 255, 255, .10), inset -1.5px 0 1.5px rgba(255, 255, 255, .10), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
   position: relative; width: 417px; height: 876px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
   background: linear-gradient(148deg, #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
   box-shadow: var(--shadow-bezel);
-  transform: scale(.54); transform-origin: 0 0;
+  zoom: .63;
 }
+@supports not (zoom: 1) { .dp-device { transform: scale(.63); transform-origin: 0 0; } }
 .dp-device::after { content: ""; position: absolute; z-index: 3; pointer-events: none; left: 50%; transform: translateX(-50%); top: calc(var(--bezel-wall) + 11px); width: 125px; height: 36px; border-radius: 18px; background: #000; box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .07); }
 .dp-device::before { content: ""; position: absolute; z-index: 4; pointer-events: none; left: 50%; margin-left: 25px; top: calc(var(--bezel-wall) + 21px); width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #243040 0%, #0C0F14 56%, #050609 100%); box-shadow: inset 0 0 0 .5px rgba(130, 170, 225, .22); }
 .dp-ph {
@@ -16419,6 +16434,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: flex; flex-direction: column;
 }
+/* iOS draws its home indicator over every app, so the app's composer stops the safe-area inset
+   short of the bottom (its Chat.tsx pads by insets.bottom plus one small space) and the bar sits
+   under it. Without both, the composer hugs the glass. */
+.dp-ph::after { content: ""; position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: var(--text); opacity: .85; z-index: 9; pointer-events: none; }
 .dp-ph * { box-sizing: border-box; }
 .dp-ph p { margin: 0; }
 .dp-statusbar { position: absolute; inset: 0 0 auto 0; height: 59px; z-index: 8; pointer-events: none; display: flex; align-items: center; justify-content: space-between; padding: 15px 32px 0; font-size: var(--fs-xl); font-weight: 600; letter-spacing: .2px; color: var(--text); font-variant-numeric: tabular-nums; }
@@ -16463,9 +16482,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-act .em { font-size: .92em; line-height: 1; flex: none; transform: translateY(.02em); }
 button.dp-act { cursor: pointer; }
 button.dp-act:hover { background: var(--soft); }
+/* A press lights the button for the beat the phone app gives it (its ui.tsx, chosen), then the card
+   settles: the buttons go, the words before the press hide and the words after it show. */
+.dp-scr.is-pressed .dp-act[data-press] { background: var(--accent); color: var(--on-accent); }
 .dp-scr.is-done .dp-actions { display: none; }
 .dp-after { display: none; }
 .dp-scr.is-done .dp-after { display: flex; }
+.dp-scr.is-done p.dp-after { display: block; }
+.dp-scr.is-done .dp-before { display: none; }
 .dp-thinking { display: flex; align-items: center; gap: 8px; }
 .dp-thinking .t { font-size: var(--fs-sm); color: var(--muted); }
 .dp-dots { display: flex; align-items: center; gap: 4px; padding-bottom: 2px; }
@@ -16476,11 +16500,18 @@ button.dp-act:hover { background: var(--soft); }
   .dp-dots i:nth-child(3) { animation-delay: 320ms; }
 }
 @keyframes day-pulse-dot { 0%, 100% { opacity: .9; transform: translateY(0); } 40% { opacity: .28; transform: translateY(1.5px); } }
-.dp-composer { background: var(--bg2); border-top: var(--hair) solid var(--border); box-shadow: var(--lift-phone-bar-up); padding: 12px; display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 2; }
+.dp-composer { background: var(--bg2); border-top: var(--hair) solid var(--border); box-shadow: var(--lift-phone-bar-up); padding: 12px 12px 42px; display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 2; }
 .dp-composer .line { display: flex; align-items: flex-end; gap: 8px; }
 .dp-knob { width: 44px; height: 44px; border-radius: 22px; background: var(--soft); display: flex; align-items: center; justify-content: center; flex: none; color: var(--muted); font-size: var(--fs-4xl); line-height: 26px; }
 .dp-knob.hot { background: var(--accent); color: var(--on-accent); font-weight: 700; }
 .dp-msgbox { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 11px 16px; font-size: var(--fs-lg); color: var(--muted); }
+/* The typed yes of the calendar act: js/home.js turns it on once the proposal has landed and off
+   again when it is sent, and the send knob is a real button only then. */
+.dp-msgbox .typed { display: none; color: var(--text); }
+.dp-ph.is-typed .dp-msgbox .typed { display: inline; }
+.dp-ph.is-typed .dp-msgbox .ph { display: none; }
+button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl); line-height: 26px; cursor: default; }
+.dp-ph.is-typed button.dp-knob { cursor: pointer; }
 .dp-sect { font-size: var(--fs-xs); letter-spacing: .8px; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 0 0 8px; }
 .dp-card { background: var(--card); border: var(--hair) solid var(--border); border-radius: 14px; box-shadow: var(--lift-phone-card); width: 100%; overflow: hidden; }
 .dp-lrow { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: var(--hair) solid var(--line); width: 100%; }
@@ -16513,16 +16544,23 @@ button.dp-act:hover { background: var(--soft); }
 .day-st.relay { display: none; }
 .day-floor[data-mode="credits"] .day-st.relay { display: block; }
 .day-st .day-mark { left: 50%; top: 0; }
-.day-gate { position: absolute; left: var(--fx); top: var(--fy); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); opacity: var(--fo); }
-.day-gate span { position: absolute; left: 50%; top: 0; transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+/* transform-style, or the gate flattens its label into the floor and the standing-up rotation below
+   becomes a second squash: that was "waits for you" reading as a pressed pill. */
+.day-gate { position: absolute; left: var(--fx); top: var(--fy); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
+/* The sign stands 30px behind the line (up the floor, away from the camera), so a dot held just
+   short of the line sits in front of it instead of behind its base. */
+.day-gate span { position: absolute; left: 50%; top: -30px; transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 .day-gate.is-on { border-top-color: var(--accent); }
 .day-gate.is-on span { background: var(--accent-subtle); color: var(--accent-ink); border-color: var(--accent); }
 .day-dot { position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 22%, transparent); transform: translate(-50%, -50%) translateZ(3px); opacity: var(--fo); }
 .day-dot.is-held { background: var(--c-blue); box-shadow: 0 0 0 5px color-mix(in srgb, var(--c-blue) 22%, transparent); }
 .day-fmark { position: absolute; left: var(--fx); top: var(--fy); }
 
-/* ---- Ember, the one constant: a fixed element js/home.js walks between marks ---- */
-.day-ember { position: fixed; left: 0; top: 0; width: 96px; height: 96px; z-index: 40; cursor: pointer; display: block; }
+/* ---- Ember, the one constant: an element js/home.js walks between marks, inside the stage ---- */
+/* Absolute, not fixed. A fixed Ember chasing marks on a sticky stage was measured a frame behind the
+   compositor's scroll and stuttered; inside the stage it rides the stage's own movement and only its
+   own walks are eased. Past the story the script moves it into .day-cta-mark, the same way. */
+.day-ember { position: absolute; left: 0; top: 0; width: 96px; height: 96px; z-index: 40; cursor: pointer; display: block; }
 .day-ember .ember-nudge { top: 14%; left: calc(100% + 8px); transform: translateX(-5px) scale(0.97); }
 .day-ember .ember-nudge.is-on { transform: none; }
 
@@ -16542,6 +16580,10 @@ button.dp-act:hover { background: var(--soft); }
   .day-clock, .day-hint { display: none; }
   .day-beat { opacity: 1; transform: none; }
 }
+
+/* ---- shorter windows: the whole scene scales, so the phone at its closest keeps its bottom edge ---- */
+@media (max-height: 820px) { .day-scene-wrap { --sc: .88; } }
+@media (max-height: 700px) { .day-scene-wrap { --sc: .76; } }
 
 /* ---- narrow screens: the same stage, captions on top, the scene scaled ---- */
 @media (max-width: 900px) {

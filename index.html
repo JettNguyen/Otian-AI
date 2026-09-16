@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260916-8" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260916-9" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -276,7 +276,7 @@
             <p class="day-alt">Starter credits and included AI reach Anthropic through our server without being kept. Your own key bypasses it from each agent&rsquo;s next start.</p>
             <div class="day-seg" role="group" aria-label="Which AI account the lap uses">
               <button type="button" data-mode="key" aria-pressed="true">Your own AI key</button>
-              <button type="button" data-mode="credits" aria-pressed="false">Starter credits</button>
+              <button type="button" data-mode="credits" aria-pressed="false">AI included</button>
             </div>
             <div class="day-chips">
               <span class="day-chip"><i></i>Keys in your computer&rsquo;s password store</span>
@@ -323,7 +323,7 @@
         </div>
 
         <div class="day-scene-wrap">
-          <div class="day-scene" role="img" aria-label="One day with an agent on your computer, drawn on the Archie window and a phone: the morning brief arrives at seven, a calendar move is proposed and waits for your Confirm, a mail draft waits for your Send, the message laps from your phone to your computer to the AI company you picked and back with our server nowhere on the path, four more jobs get their add-on by name, the routines run at two in the morning on a computer left on, and the five setup steps stand in a row with the minutes counted.">
+          <div class="day-scene" role="img" aria-label="One day with an agent on your computer, drawn on the Archie window and a phone: the morning brief arrives at seven, a calendar move is proposed and waits for your yes, a mail draft waits for your Send, the message laps from your phone to your computer to the AI company you picked and back with our server nowhere on the path, four more jobs get their add-on by name, the routines run at two in the morning on a computer left on, and the five setup steps stand in a row with the minutes counted.">
 
             <!-- THE ARCHIE WINDOW. archie-app-mockup.html's chrome, sidebar, agent header and Now
                  pane, class for class, at half size. The app's own tokens are scoped under
@@ -342,7 +342,7 @@
                     </div>
                     <div class="da-picker">
                       <span class="da-face"><span class="da-avatar md"><span data-ember="terracotta.peak.pill.none"></span></span><span class="da-dot"></span></span>
-                      <span class="da-who"><span class="da-n">Ember</span><span class="da-w">Running on Telegram</span></span>
+                      <span class="da-who"><span class="da-n">Ember</span><span class="da-w">On Archie Mobile</span></span>
                       <svg class="da-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
                     </div>
                     <div class="da-sections">
@@ -390,7 +390,7 @@
                           <p class="s day">Everything is set up, and the next routine is the morning brief at 7:00 AM.</p>
                           <p class="h night">Running Bill Reminders.</p>
                           <p class="s night">Started 12:06 AM. The morning brief is next, at 7:00 AM.</p>
-                          <p class="s mut">Thinking with Claude (by Anthropic). Reachable on Telegram.</p>
+                          <p class="s mut">Thinking with Claude (by Anthropic). Reachable on Archie Mobile.</p>
                         </div>
                         <div class="da-kindcards">
                           <div class="da-kindcard plum"><div class="k">Personality</div><div class="v">One Step Ahead</div><div class="s">Arrives with the work done and one question</div></div>
@@ -410,11 +410,13 @@
                     </div>
                   </div>
                 </div>
-                <!-- Where Ember stands: on the desk in front of the window in the hero, and in front
-                     of the lit window at night. In app coordinates, so half of these on screen. -->
-                <i class="day-mark" data-mark="m-hero" data-size="96" style="left:-88px;bottom:-112px"></i>
-                <i class="day-mark" data-mark="m-window" data-size="72" style="left:120px;bottom:-96px"></i>
               </div>
+              <!-- Where Ember stands: on the desk in front of the window in the hero, and in front
+                   of the lit window at night. In the layer's own pixels (the app's, times its zoom),
+                   outside the zoomed box so a measured rectangle never depends on how a browser
+                   reports zoom. -->
+              <i class="day-mark" data-mark="m-hero" data-size="96" style="left:-38px;bottom:-49px"></i>
+              <i class="day-mark" data-mark="m-window" data-size="72" style="left:52px;bottom:-42px"></i>
             </div>
 
             <!-- THE PHONE. archie-screen-kit.html's device and conversation parts, class for class:
@@ -468,11 +470,6 @@
                         <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
                         <div class="col">
                           <div class="dp-bub theirs"><div class="dp-md"><p>Thursday at 10:00 AM is open. Move Q3 kickoff prep there?</p></div></div>
-                          <div class="dp-actions">
-                            <button type="button" class="dp-act" data-press="confirm"><span class="lbl-ic"><span class="em">&#9989;</span><span>Confirm</span></span></button>
-                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Change something</span></span></div>
-                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Cancel</span></span></div>
-                          </div>
                           <p class="dp-stamp">9:12 AM</p>
                         </div>
                       </div>
@@ -493,15 +490,18 @@
                       <div class="dp-said day-beat" data-act="2" data-at="0.06">
                         <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
                         <div class="col">
-                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
+                          <!-- Send edits this card the way the product edits it (the Archie repo's
+                               email/replies/actions.rs): the buttons go and the words become "Sent to"
+                               over the same draft. Both states are here; the stylesheet swaps them on
+                               is-done. The button labels are the card's own. -->
+                          <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> to Sam</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
                           <div class="dp-actions day-beat" data-act="2" data-at="0.3">
                             <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></button>
-                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit</span></span></div>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                             <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                           </div>
                           <p class="dp-stamp">1:40 PM</p>
-                          <span class="dp-pill live dp-after">Sent to Sam, 1:41 PM</span>
                         </div>
                       </div>
                     </div>
@@ -527,11 +527,15 @@
                     </div>
 
                   </div>
-                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox">Message Ember</div><div class="dp-knob hot">&uarr;</div></div></div>
+                  <!-- The calendar act's approval is a typed message, which is how the product takes
+                       one: the skill proposes, and applies only after your yes in a later message. So
+                       the yes sits typed in the box once the proposal lands and the send knob is the
+                       real button. -->
+                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="typed">Yes, go ahead.</span><span class="ph">Message Ember</span></div><button type="button" class="dp-knob hot" data-press="confirm">&uarr;</button></div></div>
                 </div>
-                <!-- Beside the phone, in device coordinates, so a little over half on screen. -->
-                <i class="day-mark" data-mark="m-phone" data-size="84" style="left:-115px;bottom:48px"></i>
               </div>
+              <!-- Beside the phone, in the layer's own pixels, for the reason the window's marks give. -->
+              <i class="day-mark" data-mark="m-phone" data-size="84" style="left:-72px;bottom:30px"></i>
             </div>
 
             <!-- THE CUSTODY FLOOR. Four stations, and ours has no line to it: that is the claim.
@@ -577,6 +581,11 @@
           <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
         </div>
 
+        <!-- Ember, the one constant. Inside the stage, so it rides the stage's own scroll instead of
+             chasing it from a fixed box a frame behind; js/home.js walks it between the marks on
+             the objects, and past the story lifts it into the mark beside the closing button. The
+             greeting is Ember's own line (js/ember.js, invitation), shown once per browser. -->
+        <span class="day-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
       </div>
     </section>
 
@@ -1086,10 +1095,6 @@
       </div>
     </section>
 
-    <!-- Ember, the one constant. A fixed element js/home.js walks between the marks above; the
-         greeting is Ember's own line (js/ember.js, invitation), shown once per browser. -->
-    <span class="day-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
-
 
   </main>
 
@@ -1172,10 +1177,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260916-8"></script>
-  <script src="js/ember.js?v=20260916-8" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260916-8"></script>
-  <script src="js/home.js?v=20260916-8" defer></script>
+  <script src="js/nav.js?v=20260916-9"></script>
+  <script src="js/ember.js?v=20260916-9" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260916-9"></script>
+  <script src="js/home.js?v=20260916-9" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

@@ -535,7 +535,10 @@
     /* The lean is the gaze plus the page's own movement, so a scroll tips them and settles them
        rather than leaving them rigid while everything around them travels. Capped, or a trackpad
        flick spins them. */
-    var tilt = (dx / len) * reach * 3 + Math.max(-7, Math.min(7, scrollVel * 0.22));
+    /* A page that walks them (the homepage stage) hands over their own movement instead, because
+       on a stage pinned to the screen the scroll lean read as a wobble on every wheel notch. */
+    var sway = rig.walk != null ? rig.walk * 0.9 : scrollVel * 0.22;
+    var tilt = (dx / len) * reach * 3 + Math.max(-7, Math.min(7, sway));
     if (rig.lean) rig.lean.style.transform = "rotate(" + tilt.toFixed(2) + "deg)";
 
     /* Every so often, unprompted, they do something. Only while idle and only when the reader can
@@ -575,7 +578,8 @@
       lastAct: "",
       nudge: null, nudgeAt: 0, nudged: false,
       rect: null, rectAt: -1e9,
-      look: null
+      look: null,
+      walk: null
     };
     for (var i = 0; i < eyeEls.length; i++) {
       rig.eyes.push({
@@ -699,10 +703,16 @@
     var rig = rigOf(host);
     if (rig) rig.look = pt || null;
   }
+  /* walk(host, dx): the page moved them dx pixels this frame, so they lean into that and not into
+     the scroll. walk(host, null) hands the lean back to the scroll. */
+  function walkNamed(host, dx) {
+    var rig = rigOf(host);
+    if (rig) rig.walk = dx == null ? null : dx;
+  }
 
   window.Ember = {
     mount: mount, auto: auto, react: react, act: actNamed, set: setNamed, look: lookNamed,
-    lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor
+    walk: walkNamed, lookFor: lookFor, lookFromKey: lookFromKey, svg: svgFor
   };
 
   /* The one page with a form worth reacting to. Taking an option is progress and gets the hop; a

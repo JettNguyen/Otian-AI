@@ -250,9 +250,8 @@ siblings until they get their own drawings.
     markdown.
 
 - **The homepage is one stage, and its two objects are the app's own mockups (2026-09-16).**
-  `index.html` is a sticky `.day-story` the scroll moves through: seven acts across one day,
-  captions in one column, and one fixed Ember that `js/home.js` walks between marks on the
-  objects. The window (`.da-*`) and the phone (`.dp-*`) in css/styles.css section 49 are
+  `index.html` is a sticky `.day-story` the scroll moves through: seven acts across one day, captions in one column, and one Ember inside the stage that
+  `js/home.js` walks between marks on the objects. The window (`.da-*`) and the phone (`.dp-*`) in css/styles.css section 49 are
   class-for-class ports of `archie-app-mockup.html` and `archie-screen-kit.html`, two
   hand-editable mockups Jett keeps in his Downloads folder, which copy the Archie repo's
   tokens value for value. **They are not in any repo.** If the app's surface changes, change
@@ -260,8 +259,16 @@ siblings until they get their own drawings.
   shows the conversation as a chat app shows it and draws none of the phone app's own tabs,
   because Archie Mobile is in build and TRUST.md forbids showing it as shipped. Every caption
   sentence was already on the page or is TRUST.md's approved form; the scene is `role="img"`
-  with the claims in its `aria-label` and `aria-hidden` inside, so `check-copy-length.py`
-  counts the captions and not the mockups.
+  with the claims in its `aria-label` and `aria-hidden` inside, so `check-copy-length.py` counts the captions and not the mockups. **What the phone does is what the
+  product does.** Jett's first review (2026-09-16) caught a "Sent to Sam" pill and a calendar Confirm
+  card that exist in neither app, so both were replaced by what the code does: the calendar skill
+  takes approval as a typed later message (its SKILL.md) and the email card's Send edits the card to
+  "Sent to" with the buttons gone (`email/replies/actions.rs`), after the pressed button stays lit
+  for the beat the phone app gives it (`LINGER_MS` in archie-mobile's `ui.tsx`). Before drawing a
+  control on either mockup, find it in the app. The mockups are laid out at the size they are shown
+  (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
+  window's agent card says "On Archie Mobile" at Jett's direction, which is ahead of the mockup in
+  Downloads (still "Running on Telegram").
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

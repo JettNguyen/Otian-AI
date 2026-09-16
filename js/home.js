@@ -140,17 +140,26 @@
              dark the stage is; poses are lerped over the first 30% of each act's scroll so an act
              settles before it plays. `mark` names the element Ember stands on; `state` is what
              Ember is doing there; `scr` is which phone screen is up; `clock` is the chip.
+       LEN   How much scroll each act gets, in acts: the hero is a short one, so the first thing
+             moves after a push rather than after a full screen of nothing. The stylesheet's
+             .day-story height is the same sum and must agree.
        BEATS Any element with class="day-beat" and data-act / data-at (a fraction of the act's
              play phase) lights when the scroll passes it and goes dark when the scroll comes
              back. A data-until makes it a window, which is how the typing dots go away.
-       MARKS Ember is one position:fixed element. Each frame the driver reads the mark's
-             projected rectangle (getBoundingClientRect sees through the 3D transforms), puts
-             Ember's feet on it, and eases. A new mark is a hop. Past the story the mark is the
-             one beside the closing button, so Ember goes ahead and waits there.
+       MARKS Ember is one element, absolute inside the stage. Each frame the driver reads the
+             mark's projected rectangle (getBoundingClientRect sees through the 3D transforms)
+             against the stage's own, puts Ember's feet on it, and eases. A new mark is a hop.
+             Past the story Ember is lifted into the box beside the closing button and waits
+             there. Inside a box rather than fixed to the viewport, because a fixed element
+             chasing marks on a sticky stage is measured a frame behind the compositor's scroll
+             and stutters; inside the box it rides the box's scroll and only its walks are eased.
 
-     Two controls are real: Confirm on the calendar card and Send on the mail card. Pressing one
-     marks the screen done, which the stylesheet turns into the follow-up bubbles, and Ember hops.
-     The custody toggle redraws the lap for starter credits, in TRUST.md's own sentence.
+     Two controls are real, and both are the product's own: the send knob on the composer, once
+     the calendar act's yes sits typed in it (the skill takes approval as a later message, never
+     a button), and Send on the mail card. A press lights the button for the beat the phone app
+     gives it, then the screen is done, which the stylesheet turns into the edited card or the
+     follow-up bubbles, and Ember hops. The custody toggle redraws the lap for starter credits,
+     in TRUST.md's own sentence.
 
      Under reduced motion the stage is unpinned by the stylesheet and this only places Ember on
      the hero mark, snapped rather than eased, so the page reads as a stack of stills.
@@ -163,8 +172,8 @@
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes');
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
-    var phoneClock = $('[data-day-clock]');
-    var ember = $('.day-ember');
+    var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
+    var ember = $('.day-ember'), ctaBox = $('.day-cta-mark');
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -173,8 +182,13 @@
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
     var N = 7, SETTLE = 0.3;
-    var W = { x: -60, y: -30, z: -140, ry: 12, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: 1, o: 1 };
-    var W2 = { x: -150, y: -50, z: -240, ry: 18, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -5, s: 1.1, o: 1 };
+    var LEN = [0.3, 1, 1, 1, 1, 1, 1], CUM = [0], TOT = 0;
+    LEN.forEach(function (l) { TOT += l; CUM.push(TOT); });
+    /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
+       .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
+       each is rastered near the size it is seen. */
+    var W = { x: -60, y: -30, z: -140, ry: 12, s: 1.143, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: .857, o: 1 };
+    var W2 = { x: -150, y: -50, z: -240, ry: 18, s: 1.143, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -5, s: .943, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0, pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: PH, night: 0, fc: 0, fs: 0 } },
@@ -215,7 +229,7 @@
 
     function applyPose(p) {
       scene.style.transform = 'scale(' + SC + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')';
-      win.style.transform = 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg)';
+      win.style.transform = 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + p.win.s.toFixed(3) + ')';
       win.style.opacity = p.win.o.toFixed(3);
       phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
       phone.style.opacity = p.phone.o.toFixed(3);
@@ -226,10 +240,12 @@
     }
 
     /* The custody lap in floor coordinates: [time, x, y]. The held stretch at the gate is the
-       point of the drawing, so it is a fifth of the lap. The credits path takes the detour through
-       our server and back, which is the one case TRUST.md says the picture may not skip. */
-    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 352], [0.8, 360, 352], [1, 95, 300]];
-    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 500, 215], [0.44, 625, 300], [0.52, 500, 215], [0.6, 360, 300], [0.64, 360, 352], [0.8, 360, 352], [1, 95, 300]];
+       point of the drawing, so it is a fifth of the lap, and the dot holds 8px short of the gate
+       line (which is at 352) so it stops at the gate rather than on it, in front of the sign that
+       stands behind the line. The credits path takes the detour through our server and back, which
+       is the one case TRUST.md says the picture may not skip. */
+    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 344], [0.8, 360, 344], [1, 95, 300]];
+    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 500, 215], [0.44, 625, 300], [0.52, 500, 215], [0.6, 360, 300], [0.64, 360, 344], [0.8, 360, 344], [1, 95, 300]];
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {
@@ -261,7 +277,9 @@
       var vh = window.innerHeight;
       var total = story.offsetHeight - vh;
       var p = still ? 0 : clamp(-r.top / (total || 1), 0, 1);
-      var i = Math.min(N - 1, Math.floor(p * N)), t = p * N - i;
+      var u = p * TOT, i = N - 1;
+      for (var a = 0; a < N; a++) { if (u < CUM[a + 1]) { i = a; break; } }
+      var t = clamp((u - CUM[i]) / LEN[i], 0, 1);
       if (still) { i = 0; t = 1; }
       setAct(i);
       if (hint) hint.classList.toggle('is-off', p > 0.02);
@@ -294,22 +312,32 @@
       if (r.bottom < vh * 0.55) mark = 'm-cta';
       var m = marks[mark];
       if (m) {
+        /* The box Ember is absolute in: the stage while the story plays, the mark's own box beside
+           the closing button after it. Moving between them is a snap under a hop. */
+        var box = mark === 'm-cta' && ctaBox ? ctaBox : stage;
+        if (ember.parentNode !== box) { box.appendChild(ember); first = true; }
         var size = +m.getAttribute('data-size') || 96;
-        var mr = m.getBoundingClientRect();
-        var tx = mr.left + mr.width / 2 - size / 2;
+        var mr = m.getBoundingClientRect(), br = box.getBoundingClientRect();
+        var tx = mr.left - br.left + mr.width / 2 - size / 2;
         /* 0.85: the ground between Ember's feet is 85% of the way down the drawing's box (viewBox
            y 6 to 206, feet at 176), so this puts the feet on the mark rather than the box. */
-        var ty = mr.top + mr.height / 2 - size * 0.85;
+        var ty = mr.top - br.top + mr.height / 2 - size * 0.85;
         if (mark !== markName) {
           if (markName && !still) window.Ember.act(ember, 'hop');
           markName = mark;
         }
-        var k2 = (first || still) ? 1 : 0.16;
+        var k2 = (first || still) ? 1 : 0.16, wasX = ex;
         ex += (tx - ex) * k2; ey += (ty - ey) * k2; es += (size - es) * k2;
         first = false;
         ember.style.width = es.toFixed(1) + 'px'; ember.style.height = es.toFixed(1) + 'px';
         ember.style.transform = 'translate(' + ex.toFixed(1) + 'px,' + ey.toFixed(1) + 'px)';
+        /* Ember leans into its own walk, not into the page's scroll: on a pinned stage the scroll
+           lean read as a wobble on every wheel notch. */
+        window.Ember.walk(ember, ex - wasX);
       }
+      /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
+         is sent; scrolling back above the proposal untypes it. */
+      if (ph && scr1) ph.classList.toggle('is-typed', i === 1 && tp >= 0.5 && !scr1.classList.contains('is-pressed'));
       /* Ember watches the phone while a scene plays on it, and the dot while it laps. */
       if (i === 1 || i === 2 || i === 4) { var pr = phone.getBoundingClientRect(); window.Ember.look(ember, { x: pr.left + pr.width / 2, y: pr.top + pr.height * 0.55 }); }
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
@@ -318,13 +346,19 @@
     }
     requestAnimationFrame(frame);
 
-    /* The two real buttons on the phone. A press marks the screen done and Ember hops; pressing
-       again does nothing, because the thing it did is done. */
+    /* The two real buttons on the phone. The composer's send knob posts the typed yes, and only
+       while it is typed; Send on the mail card lights for the beat the phone app gives a pressed
+       button (LINGER_MS in its ui.tsx) and then the card settles. Pressing again does nothing,
+       because the thing it did is done. */
     $$('[data-press]').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var scr = btn.closest('.dp-scr');
-        if (!scr || scr.classList.contains('is-done')) return;
-        scr.classList.add('is-done');
+        var kind = btn.getAttribute('data-press');
+        var scr = kind === 'confirm' ? scr1 : btn.closest('.dp-scr');
+        if (!scr || scr.classList.contains('is-pressed')) return;
+        if (kind === 'confirm' && !(ph && ph.classList.contains('is-typed'))) return;
+        scr.classList.add('is-pressed');
+        var settle = function () { scr.classList.add('is-done'); };
+        if (kind === 'confirm' || still) settle(); else setTimeout(settle, 700);
         if (!still) window.Ember.act(ember, 'hop');
       });
     });

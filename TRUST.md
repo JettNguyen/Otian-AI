@@ -2399,12 +2399,9 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Vellum&rsquo;s mark on `/compare/` is the file vellum.ai serves as its favicon, unmodified | Vellum | `https://www.vellum.ai/favicon.svg` | 2026-09-16 |
 | OpenClaw&rsquo;s mark on `/compare/` is the file openclaw.ai serves as its favicon, unmodified | OpenClaw | `https://openclaw.ai/favicon.svg` | 2026-09-16 |
 | Hermes&rsquo; mark on `/compare/` is the 48px icon its site declares in its head, unmodified, kept as `assets/mark-hermes.png` | Nous Research | `https://hermes-agent.nousresearch.com/icon.png` | 2026-09-16 |
-| Meta&rsquo;s mark beside Meta Muse on `/compare/` is the symbol part of the logo file meta.com serves in its header, cropped by viewBox with no path touched | Meta | `https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg` | 2026-09-16 |
 | Instinct&rsquo;s mark on `/compare/` is the file instinct.com serves as its favicon, unmodified | Instinct | `https://instinct.com/favicon.svg` | 2026-09-16 |
 | Wix&rsquo;s mark beside Wix Symphony on `/compare/` is the 192px favicon wix.com serves, unmodified, kept as `assets/mark-wix.png` | Wix | `https://www.wix.com/favicon.ico` | 2026-09-16 |
-| Norton&rsquo;s mark on `/compare/` is the 512px app icon its Family Assistant page declares, resized to 96px and otherwise unmodified, kept as `assets/mark-norton.png` | Norton | `https://us.norton.com/products/family-assistant/apple-touch-icon-512.png` | 2026-09-16 |
-| Claude&rsquo;s mark beside Claude Cowork on `/compare/` is the drawing the homepage band already carries for Anthropic, from the app&rsquo;s brand table | Anthropic | `index.html` symbol `wwm-anthropic` | 2026-09-16 |
-| xAI&rsquo;s mark beside Grok Bot on `/compare/` is the drawing the homepage band already carries, from the app&rsquo;s brand table, filled black on the white mark | xAI | `index.html` symbol `wwm-xai` | 2026-09-16 |
+| Wix publishes its own logo for download and asks only that it not be changed: &ldquo;Download our logo on both white and color backgrounds. We just ask you to please not make any changes.&rdquo; | Wix | `https://www.wix.com/about/design-assets` | 2026-09-16 |
 | Vellum's FAQ: "you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
 | Hermes' README: "Use any model you want", naming Nous Portal, OpenRouter, OpenAI and "your own endpoint" | Nous Research | `https://raw.githubusercontent.com/NousResearch/hermes-agent/main/README.md` | 2026-09-16 |
 | Hermes' security docs: "Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it", with `approvals.mode` of "smart, manual, off" | Nous Research | `https://hermes-agent.nousresearch.com/docs/user-guide/security` | 2026-09-16 |
@@ -2425,17 +2422,17 @@ its README. Two gaps stayed gaps, and stay off the chart: nothing on wix.com or 
 says where Symphony's agents run, and nothing on us.norton.com says where Family Assistant's
 work happens. Both pages say the assistant asks first, and the chart's strip says that.
 
-**Logos on `/compare/`, added 2026-09-16.** Each mark is the file the company&rsquo;s own site serves
-for itself, fetched that day and named in the rows above, and it is used only to identify the
-product in a comparison, which is what the footer&rsquo;s marks note says every third-party mark on
-this site is for. Nothing is redrawn. Two are the homepage band&rsquo;s existing marks. One is
-cropped (Meta&rsquo;s symbol out of its wordmark file, by viewBox). One is resized (Norton&rsquo;s app
-icon, 512 to 96). Three are rasters kept under `assets/` because that is all the company serves.
-Grok Bot carries xAI&rsquo;s mark and Meta Muse carries Meta&rsquo;s because those are the marks the
-products&rsquo; own pages carry; x.ai refuses automated requests, so its row rests on the mark the
-app&rsquo;s brand table already held. These rows re-read on the same 90-day cadence as the claims.
+**Logos on `/compare/`, added 2026-09-16 and cut back the same day.** Five marks are live and each
+is the file that company&rsquo;s own site serves for itself, fetched that day and named in the rows
+above, used only to identify the product in a comparison, which is what the footer&rsquo;s marks note
+says every third-party mark on this site is for. Nothing is redrawn. Three are a `favicon.svg`
+untouched; two are rasters kept under `assets/` because that is all those sites serve. Four others
+were live for part of the day and came off, for the reason the next section gives. These rows
+re-read on the same 90-day cadence as the claims.
+
 Drawing a company&rsquo;s logo from memory is both a trust failure and a legal one, which is why the
-chart carried initials until these were sourced.
+chart carried initials until these were sourced. **Sourcing settles a different question than
+permission**, and getting the first one right is not clearance for the second.
 
 ⚠️ **What every one of these companies publishes about their own marks, read 2026-09-16, and it
 does not say yes.** Jett asked whether using the names and the logos is legal, so their brand
@@ -2496,13 +2493,52 @@ rows above is necessary and was never sufficient: fetching a logo from the compa
 proves it is their real mark, not that we may publish it. That distinction cost nothing to learn
 and would have cost a lot to learn later.
 
-⏳ **Open, 2026-09-16: the nine logos are live on `/compare/` and the permission is not in hand.**
-Recorded here the same way this file records a live claim it has not settled yet, so nobody reads
-the rule above and assumes the page already follows it. The names are fine and stay either way.
-The decision is Jett's, because it is a judgement about risk on his own company's page and not a
-question of fact: ship names only, ask the nine for permission and ship names meanwhile, or keep
-the marks knowing the above. Until it is settled, **do not put a competitor's logo on any other
-page of this site**, and do not treat the sourced rows above as clearance.
+✅ **Settled 2026-09-16, by Jett: take off the logos that are confirmed not allowed, and only
+those.** The test that sorts them, and it is the only one that sorts them consistently: **does the
+company publish a rule, addressed to third parties, about using its marks?** A term buried in a
+terms-of-service binds that company's own users, which we are not; a trademark guidelines page
+speaks to everyone, including us.
+
+**Four publish such a rule, all four say no, and all four came off the chart:**
+
+| Off the chart | Their own words | Where |
+| --- | --- | --- |
+| Meta, beside Meta Muse | &ldquo;All usage of the Meta logo requires approval.&rdquo; | `meta.com/brand/resources/meta/our-trademarks/` |
+| Anthropic, beside Claude Cowork | &ldquo;You may only use our trademarks as specifically permitted by us and only in materials we approve beforehand.&rdquo; | `anthropic.com/legal/trademark-guidelines` |
+| xAI, beside Grok Bot | &ldquo;We may grant others the right to use our Marks, but you are not permitted to.&rdquo; | `x.ai/legal/brand-guidelines` |
+| Gen Digital, beside Norton Family Assistant | &ldquo;You may not use any Gen logos unless you have an agreement with or express written consent from Gen authorizing such use.&rdquo; | `gendigital.com/us/en/legal/trademark-policies/` |
+
+Those four now carry an initial set in the site's own type. **A letter we drew is not their mark**,
+which is the point: *New Kids* leaves the name open and closes the distinctive lettering, and an
+initial is neither. `assets/mark-norton.png` was deleted with them; `git checkout 3d67a461 --
+assets/mark-norton.png` brings it back if permission ever lands.
+
+**Five publish no such rule and keep their icon:** Vellum and OpenClaw publish nothing at all
+(OpenClaw is MIT, which covers the code and is silent on marks); Instinct and Nous Research have
+only terms that bind their own users; and Wix runs the other way, publishing its logo for download
+and asking only that it not be altered, which we have not.
+
+⚠️ **The closest call, recorded because it is close.** Nous Research's portal terms say &ldquo;Any
+commercial or promotional distribution, publishing or exploitation of the Nous Research Materials
+is strictly prohibited unless you have received the express prior written permission from Nous
+Research&rdquo; (`portal.nousresearch.com/terms`). It is a user contract, not a brand policy, and
+Hermes itself is MIT, which is why the Hermes mark stayed. If that reading is wrong, Hermes is the
+one that comes off next, and nothing else on the page changes.
+
+📌 **Still open, and not part of what Jett decided: the homepage.** `index.html` carries the
+Anthropic and xAI marks four times each, in the works-with band and two figures. That is a
+compatibility statement rather than a comparison, which is a different posture (Gen Digital's
+guidelines bless exactly that shape: &ldquo;an accurate referential phrase in connection with your
+product or service (e.g., 'for use with,' 'compatible with')&rdquo;). But Anthropic's guidelines
+and xAI's do not carve it out, and both companies are on the four-that-say-no list above. **Raise
+it before the next homepage pass; do not quietly leave it or quietly strip it.**
+
+**And the rule for anything new:** a competitor's name ships in plain type, needing nothing. A
+competitor's logo ships only where that company publishes no rule against it, recorded as a row
+here with the date, or where written permission is in hand. Permission is cheap to ask: Meta's
+brand request form, `marketing@anthropic.com`, `legal@x.ai`, `trademarks@Gen.com`,
+`studiobrandassets@wix.com`, `press@openclaw.org`, `comms@instinct.com`, `support@vellum.ai`,
+`support@nousresearch.com`.
 
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
 two of them were live on `compare/cloud-agents/`:

@@ -1081,16 +1081,103 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
   page serialized to about 6,000 tokens in the only measurement that exists, a job is many reads,
   and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
   no number to publish (Archie repo, `docs/OPEN-THREADS.md`).
-- ❌ Never imply it has been proven against every site. Two things above `CdpPage` have still never
-  run against a real browser (`screen_open`, and route replay), a cross-origin frame serializes as
-  an empty box, which is where a lot of sign-in forms and every payment widget live, and the Windows
-  path runs in CI and has never been watched. The honest shape: the parts a person meets are tested
-  against a real browser, and the edges are known and written down.
+- ❌ Never imply it has been proven against every site. **Two of the three gaps this bullet named
+  closed on 2026-09-16 and the wording had to change with them**, which is this file's own rule
+  working in the direction people forget: a stale boundary makes us claim less than we can do. A
+  cross-origin frame now reads, types and presses (`screen_live.rs`), and the tools a model calls
+  now run against a shop on the open internet (`shop_live.rs`). What is still true: the Windows path
+  runs in CI and has never been watched, and a signed-in errand at somebody's own shop is theirs to
+  run, because signing in is a handover by design. The honest shape: the parts a person meets are
+  tested against a real browser and against a real site, and the edges are known and written down.
+- ⚠️ **Pointing it at a real shop found two defects, and saying so is allowed and better than not.**
+  A dialog the page put up froze the whole job until the time cap (shops raise one on every add to
+  basket), and a cookie banner over a button ate the press while the page read as unchanged. Both
+  are fixed (`CdpPage::answer_dialogs`, `CdpPage::covered_by`). The claim this supports is not "it
+  never breaks"; it is that the edges get found by pointing it at the real thing rather than at our
+  own test page.
+
+**Practice runs — SHIPPED 2026-09-16.** *Approved wording:* "Before your agent uses a site for
+anything real, you can send it to look around. It reads and clicks its way through, types in the
+search box and nowhere else, stays on that one site and finishes nothing, and writes down how the
+site is laid out. Next time it uses that site, it already knows its way."
+
+- **Why it's true:** `screen/tools.rs` (`JobState::practice`, set once on `screen_open` and not
+  changeable mid-job), `screen/guard.rs` (`practice_typing_stop`: a search box is the only field
+  that may be typed in), and `screen/notes.rs`, which caps the note at about 300 tokens and is read
+  back on the call that opens that site and on no other.
+- ❌ **Never say a practice run makes a site safe, or that it "tests" anything.** It is a look
+  around. Every one of the five stops is what it always was on the real errand afterwards.
+- ❌ Never say it is free. It is model calls like any other job, paid by the owner on their own key,
+  and what it buys is that the first real errand is not also the first visit.
+- ⚠️ It is started by a person pressing Practice on a saved site, or by the agent offering and being
+  told yes. Nothing explores unasked, and that clause travels with the description.
 
 **What this settles outside this file.** A benchmark or a comparison that scores Archie low on
 purchasing and booking is scoring a decision, not a gap, and the answer is to say so rather than to
 file the work: building it would break the claim above. The sites worth wanting are the ones with no
 connector and no checkout, which is what the two shipped add-ons do.
+
+### ✅ Waking the computer for a routine — SHIPPED 2026-09-16
+
+**Approved wording:** "A routine set for seven in the morning arrives at seven, even if the computer
+was asleep. Archie asks your Mac to wake a few minutes before, runs it, and lets it go back to
+sleep. The screen stays off. Setting it up asks for your password once, because only an
+administrator of a Mac may schedule a wake, and macOS asks for it in its own box: Archie never sees
+what you type."
+
+**Why it's true:** `archie_runtime::wake` works out which moments the computer has to be awake for,
+and `crates/archie-wake` is the separate program that schedules them, run by launchd as root.
+
+- **Root is not a choice we made.** Measured, not assumed: `IOPMSchedulePowerEvent` answers
+  `kIOReturnNotPrivileged` to an ordinary application and `pmset schedule` answers "must be run as
+  root". That is why there is a helper and why there is a password box, and the honest sentence says
+  so rather than apologizing for it.
+- **The helper does one thing.** It reads a list of numbers. There is no command in the file it
+  reads, no path and nothing to interpret, and the worst thing anybody who can write that file can
+  make it do is wake the computer. It tags every event it makes and cancels only events carrying
+  that tag, so it can never clear somebody else's alarm.
+- **It wakes and never powers on.** Somebody who shut their computer down has said what they want.
+- **Without the helper there is still a fallback**, and it needs nobody's permission: Archie holds
+  the machine awake in the last few minutes before an appointment (the same assertion `caffeinate`
+  takes). That covers a Mac with its lid open and nothing else, which is why it is the fallback.
+- **An appointment earns a wake; a rate never does.** A routine set for a time of day wakes the
+  machine. A routine set to run every fifteen minutes does not, because waking a sleeping laptop
+  ninety-six times a night to keep a polling loop on cadence serves nobody.
+
+**Boundaries — do not cross:**
+- ❌ **Never say Archie works while the computer is off.** It wakes a sleeping computer. A computer
+  that is shut down stays shut down, deliberately.
+- ❌ Never promise it on Windows. There is no lane there yet.
+- ❌ Never say "no password needed". One password, once, at setup, and the sentence that says so is
+  the one that keeps the rest of it credible.
+- ⚠️ **Not yet watched overnight on a real machine.** Everything up to the system call is tested;
+  the call itself needs root. Until somebody has run it through a night, copy may describe what it
+  does and may not call it proven.
+
+### ✅ Finding places on the map — SHIPPED 2026-09-16
+
+**Approved wording:** "Ask for somewhere to eat near the office that is open at eight, and your
+agent looks it up on the map: the name, the street, how far it is, the phone number, and the hours
+for that day. It says what it checked and what it did not."
+
+**Why it's true:** `crates/archie-runtime/src/places.rs` (the `places_search` tool) on
+`crates/archie-runtime/src/maps.rs`, which is the same map connection the drive check already uses.
+
+- **No second sign-up.** It runs on the map key an owner has already connected for "when should I
+  leave", which is free and has no credit card behind it. An agent without that connection never
+  sees the tool at all, rather than offering it and failing.
+- **Nothing there has an account behind it.** The key buys lookups: no history, no saved places, and
+  nothing of the owner's for it to read.
+- **It has no opinion, and says so.** The map carries no ratings and no prices, so the reply carries
+  neither, and every reply tells the model to say that rather than answer from memory. That
+  boundary is the point of the feature: an invented four stars reads exactly like a checked fact.
+
+**Boundaries — do not cross:**
+- ❌ **Never say Archie recommends the best restaurant, or knows what is good.** It knows what is
+  near, what it is called and whether the door is open.
+- ❌ Never imply prices or ratings. Not "cheap eats", not "highly rated".
+- ⚠️ Hours are the map's, and the map is sometimes out of date. The phone number ships in every
+  reply for exactly that reason, and copy should not promise the hours are right.
 
 ### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPS IN 0.2.2)
 

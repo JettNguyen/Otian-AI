@@ -988,6 +988,100 @@ and the request never leaves your network."
 - What the agent learns from a light (its name, on or off) goes to the AI provider like any other
   tool result. Say so wherever the local lane is described; the privacy policy does.
 
+### ✅ Websites: the agent using a site itself, when there is no connector — SHIPPED 2026-08-18
+
+**Recorded 2026-09-16**, a month after it shipped, because it had no entry here and the rule at the
+top of `CLAUDE.md` is that a claim not in this file may not be made. The cost of that gap was not
+silence on the site. It was that the people answering questions about Archie were telling prospects
+the opposite, and filing a shipped capability as unbuilt work in benchmark and competitor notes. **A
+capability with no row in this file reads to everyone downstream as one we do not have.**
+
+**Approved wording:** "When there is no direct connection to a site, your agent can use the site
+itself, the same way you would: it reads the page, it clicks, it types. It works in a browser window
+on your own computer, and you can watch it. You sign in yourself, once, in that window. It never
+types a password, a card number or a sign-in code, and where one of those is asked for it stops and
+hands you the window. Before it presses anything that finalizes an order, a booking or an
+application, it stops and asks you. You name the sites it may never open at all, and every job has a
+time limit."
+
+**It is off until the owner turns it on**, per agent. That clause travels with every description of
+it: releasing it decided that the choice exists, not what anyone chose.
+
+**Why it's true:** `crates/archie-runtime/src/screen/` in the Archie repo.
+`SITES_AND_APPS_RELEASED` in `crates/archie-domain/src/screen.rs` is `true`, and so is its twin in
+`src/app/vocab.ts`; a test fails if only one of them moves. The app calls it **Websites**, on the
+Connections tab, since 2026-08-19, and that is the name copy uses.
+
+- **It is a browser on the person's computer, not a hidden one.** `screen/browser.rs` launches
+  Chrome, Edge or Brave headful and unfocused, never headless, in a profile of the agent's own
+  (`--user-data-dir`, `--remote-debugging-port=0`). Signing in is the person's own doing:
+  `open_for_sign_in` opens the window with no automation attached, so the agent never sees or stores
+  the password, and the session then lasts.
+- **A connector always wins.** The tier order in `screen/mod.rs` is explicit: where a direct
+  connection exists it is used, and "the screen is never the cheap option."
+- **The five stops are enforced in code, not in the prompt** (`screen/guard.rs`, whose own comment
+  says why: "a prompt instruction is a suggestion, and this is the part where a suggestion is not
+  enough").
+  1. **The never-list.** Suffix match on the host, so `chase.com` also blocks `secure.chase.com`.
+     Checked when a page is opened and again on every navigation event, so a redirect cannot slip
+     past. A blocked host ends the job outright.
+  2. **Passwords and card fields are never typed.** `typing_stop` refuses `type="password"`,
+     `autocomplete="current-password"` and `new-password`, and anything `cc-*`, and hands the window
+     to the person.
+  3. **A finalizing press becomes a question.** `click_needs_approval` routes the click to
+     `screen_ask` rather than pressing it, decided on the accessible name and role: `submit`, `pay`,
+     `delete`, `transfer`, `publish`, `unsubscribe` and `purchase` on any element; `send`,
+     `confirm`, `buy`, `book`, `approve`, `apply`, `post`, `order`, `checkout`, `subscribe` and
+     `place` on a button; and phrases such as `place order`, `complete purchase`, `confirm payment`,
+     `buy now`, `book now`, `cancel subscription`, `close account`, `delete account` and
+     `sign contract` wherever they appear. It is deliberately biased toward asking, in the file's
+     own words: "asking wrongly costs a notification, not asking wrongly costs a submitted claim."
+  4. **A time cap per job**, on the wall clock, ten minutes by default and set in the panel. The
+     failure shape of an agent that has lost the plot is a loop rather than a crash, so this is the
+     backstop that matters most.
+  5. **Two-factor is always a handover.** Every time, no code stored, no exceptions.
+- **The prompt says it as well, whatever is installed.** `NEVER_LINE` in
+  `crates/archie-runtime/src/gateway/prompt.rs` sits in every system prompt: the agent never makes
+  phone calls, sends texts of its own, pays for anything, or presses a button that finalizes a
+  purchase, booking or application.
+- **What it learns stays with the person.** `screen/routes.rs` records the click path that worked as
+  role and accessible name, never selectors and never coordinates, learned per person and never
+  shipped inside an add-on. **Only clicks are recorded, never typing**, because typed values are
+  often sensitive and a route file must never hold them.
+
+**Required clauses — do not drop them:**
+- ⚠️ **Say it is off until they turn it on.** Anything else describes a computer the reader does not
+  have.
+- ⚠️ **Say the window comes back to them.** Every stop above ends with the person holding the
+  browser, and that is the actual claim. Not that the agent is careful: that the part which could
+  hurt them is the part it hands back.
+- ⚠️ **Two add-ons use it today**, Statement Collector and Form Filler (`required_screen` in the
+  Archie repo's `data/marketplace/skills/`). Copy implying a shelf of them is describing next year.
+
+**Boundaries — do not cross:**
+- ❌ **Never say Archie buys, books, or checks out.** It cannot type a card number at all, and the
+  press that finalizes an order comes back to the person as a question. This is the same claim as
+  "Archie cannot spend your money", it is one of the strongest things this file holds, and a page
+  selling the agent as completing a purchase breaks it.
+- ❌ Never "it fills in the whole form". It fills what is not a password, a card or a code, and
+  stops at the ones that are.
+- ❌ Never describe it driving other **applications**. That half is not built on either platform.
+  Websites are the whole of what ships.
+- ❌ **Never put a cost figure on it, and never recommend it to someone choosing on price.** One
+  page serialized to about 6,000 tokens in the only measurement that exists, a job is many reads,
+  and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
+  no number to publish (Archie repo, `docs/OPEN-THREADS.md`).
+- ❌ Never imply it has been proven against every site. Two things above `CdpPage` have still never
+  run against a real browser (`screen_open`, and route replay), a cross-origin frame serializes as
+  an empty box, which is where a lot of sign-in forms and every payment widget live, and the Windows
+  path runs in CI and has never been watched. The honest shape: the parts a person meets are tested
+  against a real browser, and the edges are known and written down.
+
+**What this settles outside this file.** A benchmark or a comparison that scores Archie low on
+purchasing and booking is scoring a decision, not a gap, and the answer is to say so rather than to
+file the work: building it would break the claim above. The sites worth wanting are the ones with no
+connector and no checkout, which is what the two shipped add-ons do.
+
 ### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPS IN 0.2.2)
 
 Built 2026-09-01: `crates/archie-net/src/mail/imap.rs` (IMAP over TLS on 993, SMTP with STARTTLS

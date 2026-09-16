@@ -273,7 +273,12 @@ siblings until they get their own drawings.
   narrow) that `js/home.js` fits to the stage every frame, each act has a `narrow` pose beside its
   wide one, the floors turn a quarter (`--fz`) so the laps run toward the camera, and the caption
   is a band under the scene. Jett's rule from 2026-09-16: the visuals are the focus on a phone too,
-  so a pose keeps its objects inside the box and nothing is placed by viewport arithmetic.
+  so a pose keeps its objects inside the box and nothing is placed by viewport arithmetic. Narrow, the
+  phone is shortened (600 kit px; the transcript is bottom-aligned, so it only shows fewer bubbles)
+  so it can stand nearly full width and its words stay readable, Ember stands beside the computer
+  rather than on it, and the setup steps take two alternating columns. The phone has a stacked rim
+  behind its glass (`.dp-edge`), and the message ball sits a few pixels back and goes see-through
+  under a station, both from the same review.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

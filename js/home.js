@@ -176,7 +176,7 @@
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
-    var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes');
+    var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
     var ember = $('.day-ember'), ctaBox = $('.day-cta-mark');
@@ -198,8 +198,8 @@
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centred while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -60, y: -120, z: -260, ry: 14, s: .9, o: 1 }, NP = { x: 70, y: 40, z: 40, ry: -12, s: .78, o: 1 };
-    var NW2 = { x: -140, y: -170, z: -380, ry: 22, s: .75, o: .35 }, NP2 = { x: 0, y: 0, z: 90, ry: -4, s: .86, o: 1 };
+    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 50, z: 40, ry: -12, s: 1.1, o: 1 };
+    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -4, s: 1.3, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
@@ -219,7 +219,7 @@
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -8 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5,
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: copy(PH, { o: .45 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: 0, y: -40, z: -80, ry: 8, s: .82, o: 1 }, phone: copy(NP, { x: 120, y: 120, z: 30, s: .55, o: .4 }), night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 30, z: 40, ry: -6, s: 1.2, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }
@@ -285,7 +285,9 @@
        is at 352, and the sign stands at its end). The credits path takes the detour through our
        server and back, which is the one case TRUST.md says the picture may not skip. */
     var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
-    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 360, 80], [0.44, 625, 300], [0.52, 360, 80], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
+    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 360, 60], [0.44, 625, 300], [0.52, 360, 60], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
+    /* Where the stations stand, so the ball goes see-through while it is under one. */
+    var STATIONS = [[95, 300], [360, 300], [625, 300], [360, 60]];
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {
@@ -341,6 +343,8 @@
         var credits = floorC.getAttribute('data-mode') === 'credits';
         var pt = lapPoint(credits ? LAP_CREDITS : LAP_KEY, tp);
         dot.style.left = pt[0] + 'px'; dot.style.top = pt[1] + 'px';
+        var under = STATIONS.some(function (st) { return Math.abs(pt[0] - st[0]) < 40 && Math.abs(pt[1] - st[1]) < 30; });
+        dot.classList.toggle('is-under', under);
         var held = tp >= 0.62 && tp < 0.8;
         dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);
       }
@@ -349,6 +353,7 @@
         mark = 'm-s' + k;
         steps.forEach(function (s, j) { s.classList.toggle('is-lit', j <= k); });
         if (mins) mins.textContent = MINUTES[k];
+        if (pie) pie.style.setProperty('--pie', tp.toFixed(3));
       }
       if (r.bottom < vh * 0.55) mark = 'm-cta';
       var m = marks[mark];

@@ -14582,6 +14582,39 @@ html[data-theme="dark"] .booking-container iframe {
   .hm-stage::before { width: 156%; }
 }
 
+/* ---- The handover, drawn: how-it-works/ borrows the hero's stage (2026-09-16) ----
+   Same .hm-stage, same phone, same picker and captions, in a section rather than a hero column.
+   The stage is a <figure> here because it is one: a figcaption under the captions names the
+   whole cycle for a reader who never sees it move. Everything the cycle needs is unscoped above;
+   this is only the margin the hero's grid used to supply, and one thing the hero never draws. */
+.hiw-handover {
+  margin: 44px auto 0;
+  max-width: 560px;
+}
+.hiw-handover figcaption {
+  margin-top: 22px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-align: center;
+  text-wrap: pretty;
+}
+/* The file the agent sent into the chat, drawn the way a chat app draws an attachment: a row with
+   the document mark, its name and its kind, above the one line the export tool tells the model to
+   say. Inside .hm-pz, so the palette is the phone's own. */
+.hm-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--text-primary) 9%, transparent);
+}
+.hm-file svg { width: 22px; height: 22px; flex-shrink: 0; color: var(--accent); }
+.hm-file span { display: grid; line-height: 1.25; }
+.hm-file b { font-weight: 600; color: var(--text-primary); font-size: var(--fs-sm); }
+.hm-file i { font-style: normal; font-size: var(--fs-2xs); color: var(--text-muted); }
+
 /* ========================================
    47. The visual pass (2026-09-11)
    Pictures and small controls that took the place of paragraphs. Each block

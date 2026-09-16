@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260916-5" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260916-6" />
   <style>
     /* The requirement cards, moved here with the section from /what-you-need/ on
        2026-08-20. Page-scoped, as they were there: one page uses them. */
@@ -228,11 +228,10 @@
          The screenshot gallery came out on 2026-09-11: all five shots dated from the 2026-07-08
          rebrand and no longer matched the app. A stale screenshot on the page that explains how
          the thing works is worse than no screenshot, because it is the one picture a reader
-         measures the real app against. The maintained version of this is the two live recordings
-         on archie/see-it-work/, which is where a reader who wants to watch it work should be sent;
-         this page does not link them from the body yet, and it is at its word budget, so that is a
-         deliberate gap rather than an oversight. If shots come back, they get a date and a
-         re-shoot rule, not just a refresh.
+         measures the real app against. What the page shows instead is drawn: the phone under the
+         handover section (seven jobs, the homepage's own stage) and the recording of the five
+         steps further down, which is the one recording left on the page. If shots come back,
+         they get a date and a re-shoot rule, not just a refresh.
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
@@ -259,35 +258,232 @@
         </div>
         <!-- The delegation-loop figure stood here until 2026-09-11. It came out because the
              living agent two sections down draws the same loop with the gate and the AI company
-             on it, and two animated loops on one page fought each other. The recording below is
-             a handover happening, which is the better picture of one anyway. -->
+             on it, and two animated loops on one page fought each other. The phone below is
+             seven handovers happening, which is the better picture of one anyway. -->
 
         <p class="calm-note calm-note--center">Your agent holds the things you&rsquo;d otherwise carry in your head. Tell it once: the follow-up on Friday, the detail to check before the call. It messages you first when the time comes.</p>
 
-        <!-- The same handover, recorded. Merged in from archie/see-it-work/ on 2026-09-11 and
-             kept inside this section rather than given one of its own: the paragraphs above say
-             what a handover looks like and this is one happening, so a heading between them would
-             split a single idea in two. Its old page heading and lede came off for the same
-             reason, since they restated the lede directly above. -->
-        <div class="phone-row">
-          <div class="phone-row-text fade-up delay-1">
-            <h3 id="handover-demo-heading">A morning briefing nobody asked for twice</h3>
-            <p>This one runs a <a href="../skills-marketplace/browse/">Daily Briefing routine</a> and sends it over Telegram. Nobody typed a command. It was installed once, and it has arrived every morning since.</p>
+        <!-- The same handover, drawn. The recording that stood here (a phone playing a morning
+             briefing, merged in from archie/see-it-work/ on 2026-09-11) came out on 2026-09-16 for
+             the homepage's phone: the hero's .hm-stage, with its picker, its scenes and its captions,
+             carrying seven jobs the homepage does not draw. Kept inside this section rather than
+             given one of its own, for the reason the recording was: the paragraphs above say what a
+             handover looks like and this is seven of them happening.
+
+             Seven, not six or eight, because the cycle's keyframe stops are cut for seven (see the
+             note on .hm-stage in css/styles.css), and the picker's bars are keyed the same way. The
+             order alternates who spoke first, as the hero's does: you asking, then it arriving
+             unasked. Every scene is a thing the shipped build does, with the pointer written beside
+             it; every caption carries the catch that belongs to it, per the limitation rule. No
+             money figure appears in any of them, because an illustration is not a fact.
+
+             What the machine needs from a page: js/home.js (the picker moves the clock), js/ember.js
+             (the profile picture), and the .hm-stage rules, which are not scoped to the homepage. -->
+        <figure class="hm-stage hiw-handover" aria-labelledby="handover-cap">
+          <div class="hm-picks" role="group" aria-label="Pick a scene">
+            <button class="hm-pick" type="button" style="--s:0" data-scene="0" aria-label="A spreadsheet written"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3.5h7l5 5v12H7z"/><path d="M14 3.5v5h5"/></svg><span>File</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:1" data-scene="1" aria-label="A text answered"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6.5h16v10H9.5L5.5 20v-3.5H4z"/></svg><span>Text</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:2" data-scene="2" aria-label="The doctor visit, read back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M9 3.5h6v3H9z"/><path d="M12 10.5v6M9 13.5h6"/></svg><span>Doctor</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:3" data-scene="3" aria-label="A promise caught"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.3 2.3 4.7-5"/></svg><span>Promise</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:4" data-scene="4" aria-label="Which step you are on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg><span>Steps</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:5" data-scene="5" aria-label="A meeting prepped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Prep</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:6" data-scene="6" aria-label="A website used"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><span>Website</span><i aria-hidden="true"><b></b></i></button>
           </div>
 
-          <figure class="demo-player demo-player--phone fade-up delay-2">
-            <div class="demo-player-frame">
-              <video class="demo-player-video" poster="../assets/nr-demo-poster.jpg"
-                     data-src="../assets/nr-demo.webm" preload="none"
-                     muted loop playsinline disablepictureinpicture
-                     aria-label="A silent screen recording of a phone: an AI agent sends its owner a morning briefing over Telegram, listing the day's priorities, the calendar, and a market summary.">
-                <p>Your browser can&rsquo;t play this video. <a href="../assets/nr-demo.webm">Download it instead.</a></p>
-              </video>
-              <!-- No pause control, as above: ambient motion, with the reduced-motion poster
-                   fallback doing the real accessibility work. -->
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You ask for your bills in a spreadsheet and it sends bills.xlsx into the chat, saying a copy is in your Archie folder. A text from Dana arrives with the reply already drafted, under Send, Edit it and Dismiss. You ask what the doctor said about your knee and it reads back the dated note. At ten to nine it says a promise is due today: the lease you told Todd you would send. You ask where you are on a passport renewal and it says step three of five and what comes next. Half an hour before a meeting with Sarah it sends the prep, including what she has asked about twice. And you ask about a table for four at Rosa&rsquo;s and it finds two times and asks before booking one.">
+          <div class="hm-pz-head" aria-hidden="true">
+            <img class="hm-pz-word" src="../assets/archie-text.svg" width="2300" height="900" alt="Archie" />
+            <span class="hm-pz-agent"><span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span><b>Ember</b></span>
+            <span class="hm-pz-who"><i>on your<br />computer</i></span>
+          </div>
+
+          <div class="hm-scenes" aria-hidden="true">
+
+              <!-- 1. A spreadsheet, written and sent. export.rs writes one of nine inert kinds (.xlsx among
+                 them), sends the file into the chat, and the instructions to the model are to say in
+                 one line what it is and that a copy is in the Archie folder. The list it reads is
+                 Bills &amp; Subscriptions, which is why no mail is needed. TRUST.md, "What your agent
+                 can write to disk": never a PDF, never a folder of the model's choosing. -->
+              <div class="hm-scene" style="--s:0">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Put my bills in a spreadsheet.</p></div>
+                    <time>9:31 am</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble">
+                        <div class="hm-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3.5h7l5 5v12H7z"/><path d="M14 3.5v5h5"/><path d="M9.5 13h5M9.5 16.5h5"/></svg><span><b>bills.xlsx</b><i>Spreadsheet</i></span></div>
+                        <p class="hm-mini-quote">Every bill on your list, one a row, with the next date. A copy is in your Archie folder too.</p>
+                      </div>
+                      <time>9:31 am</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">P</i><i style="--i:1">u</i><i style="--i:2">t</i><i style="--i:3"> </i><i style="--i:4">m</i><i style="--i:5">y</i><i style="--i:6"> </i><i style="--i:7">b</i><i style="--i:8">i</i><i style="--i:9">l</i><i style="--i:10">l</i><i style="--i:11">s</i><i style="--i:12"> </i><i style="--i:13">i</i><i style="--i:14">n</i><i style="--i:15"> </i><i style="--i:16">a</i><i style="--i:17"> </i><i style="--i:18">s</i><i style="--i:19">p</i><i style="--i:20">r</i><i style="--i:21">e</i><i style="--i:22">a</i><i style="--i:23">d</i><i style="--i:24">s</i><i style="--i:25">h</i><i style="--i:26">e</i><i style="--i:27">e</i><i style="--i:28">t</i><i style="--i:29">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 2. A text, with the reply already written. Text Replies is Mac only: it reads Messages on
+                 the computer Archie runs on and drops one card per text that wants an answer, with
+                 the three buttons the skill's own SKILL.md names (Send / Edit it / Dismiss). There is
+                 no tool that sends a text; a person presses the button, every time. -->
+              <div class="hm-scene" style="--s:1">
+                <div class="hm-msg">
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:2">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote"><b>New text</b> from Dana</p>
+                        <p class="hm-mini-quote hm-em">Still on for Saturday?</p>
+                        <div class="hm-draft">
+                          <span class="hm-draft-label"><b>Draft reply</b> (to Dana):</span>
+                          <p class="hm-mini-quote">Yes, 11 at the park. I&rsquo;ll bring the coffee.</p>
+                        </div>
+                      </div>
+                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit it</span><span class="hm-msg-btn">Dismiss</span></div>
+                      <time>6:12 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 3. The appointment you told it about, read back. Health Record saves a dated visit record
+                 and the running history of one problem; the answer here is that record and nothing
+                 else. The catalog copy sets the line the caption repeats: it is a record, not a doctor,
+                 and it never diagnoses or advises. -->
+              <div class="hm-scene" style="--s:2">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">What did the doctor say about my knee?</p></div>
+                    <time>7:40 pm</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Aug 14: rest it two weeks, ice at night, and back in if it swells.</p></div>
+                      <time>7:40 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">a</i><i style="--i:3">t</i><i style="--i:4"> </i><i style="--i:5">d</i><i style="--i:6">i</i><i style="--i:7">d</i><i style="--i:8"> </i><i style="--i:9">t</i><i style="--i:10">h</i><i style="--i:11">e</i><i style="--i:12"> </i><i style="--i:13">d</i><i style="--i:14">o</i><i style="--i:15">c</i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18">r</i><i style="--i:19"> </i><i style="--i:20">s</i><i style="--i:21">a</i><i style="--i:22">y</i><i style="--i:23"> </i><i style="--i:24">a</i><i style="--i:25">b</i><i style="--i:26">o</i><i style="--i:27">u</i><i style="--i:28">t</i><i style="--i:29"> </i><i style="--i:30">m</i><i style="--i:31">y</i><i style="--i:32"> </i><i style="--i:33">k</i><i style="--i:34">n</i><i style="--i:35">e</i><i style="--i:36">e</i><i style="--i:37">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 4. A promise it caught in your sent mail, said the morning it is due. Commitment Sweep's
+                 default trigger is 8:50 am, and its prompt is to send one short message with what is
+                 due today and tomorrow, or NO_UPDATE and nothing at all. 8:50 is that clock. No
+                 buttons: the routine's own usage hint is to reply in words ("sent it", "that's off"). -->
+              <div class="hm-scene" style="--s:3">
+                <div class="hm-msg">
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:2">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote"><b>Due today</b></p>
+                        <p class="hm-mini-quote">The lease to Todd. You told him Friday, on the 9th. Nothing has gone out yet.</p>
+                      </div>
+                      <time>8:50 am</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 5. Where you are in a long process. Paperwork keeps the steps in order, which one you are on,
+                 which documents you still need, and the next action, so the answer is a position and
+                 a next step rather than advice. Not a lawyer or an adviser, per the catalog copy. -->
+              <div class="hm-scene" style="--s:4">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Where am I on the passport renewal?</p></div>
+                    <time>12:15 pm</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Step 3 of 5. Photos done, form mailed Monday. Next: book the appointment.</p></div>
+                      <time>12:15 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">e</i><i style="--i:5"> </i><i style="--i:6">a</i><i style="--i:7">m</i><i style="--i:8"> </i><i style="--i:9">I</i><i style="--i:10"> </i><i style="--i:11">o</i><i style="--i:12">n</i><i style="--i:13"> </i><i style="--i:14">t</i><i style="--i:15">h</i><i style="--i:16">e</i><i style="--i:17"> </i><i style="--i:18">p</i><i style="--i:19">a</i><i style="--i:20">s</i><i style="--i:21">s</i><i style="--i:22">p</i><i style="--i:23">o</i><i style="--i:24">r</i><i style="--i:25">t</i><i style="--i:26"> </i><i style="--i:27">r</i><i style="--i:28">e</i><i style="--i:29">n</i><i style="--i:30">e</i><i style="--i:31">w</i><i style="--i:32">a</i><i style="--i:33">l</i><i style="--i:34">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 6. The prep, half an hour before. Meeting Prep reads the event off your calendar and arrives
+                 thirty minutes ahead of it; with a mail-reading skill installed it also carries the last
+                 exchange with the people in the room, which is the second sentence here. 1:30 for a
+                 2:00 is the half hour. -->
+              <div class="hm-scene" style="--s:5">
+                <div class="hm-msg">
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:0"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:2">
+                      <div class="hm-bubble">
+                        <p class="hm-mini-quote"><b>Sarah at 2:00</b>, about the quote</p>
+                        <p class="hm-mini-quote">The revised one went out Tuesday. She has asked about delivery dates twice, so have a date ready.</p>
+                      </div>
+                      <time>1:30 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
+              <!-- 7. A site with no connection, used the way you would. TRUST.md, "Websites": it reads the
+                 page, clicks and types in a browser window on your own computer that you can watch,
+                 and a press that finalizes a booking is routed to a question instead (screen/guard.rs,
+                 click_needs_approval: `book` on a button). The two buttons are that question. It is
+                 off until the owner turns it on, and the caption carries that clause. -->
+              <div class="hm-scene" style="--s:6">
+                <div class="hm-msg">
+                  <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Is there a table for four at Rosa&rsquo;s Friday at 7?</p></div>
+                    <time>6:05 pm</time>
+                  </div>
+                  <div class="hm-reply">
+                    <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
+                    <div class="hm-turn hm-in" style="--d:9">
+                      <div class="hm-bubble"><p class="hm-mini-quote">Rosa&rsquo;s has 7:15 and 8:30 on Friday for four. Book the 7:15?</p></div>
+                      <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Book it</span><span class="hm-msg-btn">Leave it</span></div>
+                      <time>6:05 pm</time>
+                    </div>
+                  </div>
+                </div>
+                  <div class="hm-composer" aria-hidden="true">
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">I</i><i style="--i:1">s</i><i style="--i:2"> </i><i style="--i:3">t</i><i style="--i:4">h</i><i style="--i:5">e</i><i style="--i:6">r</i><i style="--i:7">e</i><i style="--i:8"> </i><i style="--i:9">a</i><i style="--i:10"> </i><i style="--i:11">t</i><i style="--i:12">a</i><i style="--i:13">b</i><i style="--i:14">l</i><i style="--i:15">e</i><i style="--i:16"> </i><i style="--i:17">f</i><i style="--i:18">o</i><i style="--i:19">r</i><i style="--i:20"> </i><i style="--i:21">f</i><i style="--i:22">o</i><i style="--i:23">u</i><i style="--i:24">r</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27">t</i><i style="--i:28"> </i><i style="--i:29">R</i><i style="--i:30">o</i><i style="--i:31">s</i><i style="--i:32">a</i><i style="--i:33">&rsquo;</i><i style="--i:34">s</i><i style="--i:35"> </i><i style="--i:36">F</i><i style="--i:37">r</i><i style="--i:38">i</i><i style="--i:39">d</i><i style="--i:40">a</i><i style="--i:41">y</i><i style="--i:42"> </i><i style="--i:43">a</i><i style="--i:44">t</i><i style="--i:45"> </i><i style="--i:46">7</i><i style="--i:47">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
+                </div>
+              </div>
             </div>
-          </figure>
-        </div>
+          </div>
+
+          <!-- What each scene is showing, under the phone and never inside the thread: a line of
+               explanation in a bubble is the app talking about itself. Same --s as the scene. -->
+          <div class="hm-caps" aria-hidden="true">
+            <p class="hm-cap" style="--s:0">Ask for a file and it writes the real one and sends it to you. A spreadsheet, a Word document, a calendar file. Never a PDF, and nothing that runs.</p>
+            <p class="hm-cap" style="--s:1">On a Mac, it reads a text as it lands and writes the reply. Nothing sends until you press Send.</p>
+            <p class="hm-cap" style="--s:2">Tell it what the doctor said on the way out. It keeps a dated record and hands it back when you ask. It never gives medical advice.</p>
+            <p class="hm-cap" style="--s:3">Every morning it re-reads your sent mail for promises you made, and says which one is due. A morning with nothing owed stays quiet.</p>
+            <p class="hm-cap" style="--s:4">It keeps the map of a long process: the step you are on, the papers you still need, and what comes next.</p>
+            <p class="hm-cap" style="--s:5">Half an hour before a meeting, the prep arrives: who is coming, what it is about, and the one thing worth having ready.</p>
+            <p class="hm-cap" style="--s:6">It can use a website the way you would, in a browser window on your computer you can watch. Off until you turn it on, and it asks before anything is booked.</p>
+          </div>
+
+          <figcaption id="handover-cap">Seven things people hand over, drawn the way each one arrives in your chat. Press a name above the phone to see one.</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -1007,12 +1203,13 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260916-5"></script>
-  <script src="../js/equipment.js?v=20260916-5"></script>
-  <script src="../js/demo-player.js?v=20260916-5"></script>
-  <script src="../js/ember.js?v=20260916-5" defer></script>
-  <script src="../js/living-agent.js?v=20260916-5" defer></script>
-  <script type="module" src="../js/account-nav.js?v=20260916-5"></script>
+  <script src="../js/nav.js?v=20260916-6"></script>
+  <script src="../js/equipment.js?v=20260916-6"></script>
+  <script src="../js/demo-player.js?v=20260916-6"></script>
+  <script src="../js/home.js?v=20260916-6" defer></script>
+  <script src="../js/ember.js?v=20260916-6" defer></script>
+  <script src="../js/living-agent.js?v=20260916-6" defer></script>
+  <script type="module" src="../js/account-nav.js?v=20260916-6"></script>
 </body>
 </html>
 

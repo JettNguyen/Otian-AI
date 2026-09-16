@@ -1,6 +1,8 @@
-/* Homepage-only behavior: the day-spine draw. Decoration on top of a page that
-   reads fine without it, since the spine's CSS default is fully drawn, and
-   reduced motion skips the draw.
+/* The homepage's day-spine draw and the scene picker on an .hm-stage. Both are
+   decoration on top of a page that reads fine without them: the spine's CSS
+   default is fully drawn, reduced motion skips the draw, and the stage cycles
+   on its own. The stage is on the homepage hero and, since 2026-09-16, on
+   how-it-works/, so this file loads on both.
 
    The stat count-up and the screenshot carousel lived here until 2026-08-31, when
    the coverage grid replaced the stat band and the carousel section came out. */

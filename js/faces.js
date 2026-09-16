@@ -104,6 +104,8 @@ export const FACE = {
   // thing that helps them find work is not looking for a report.
   "skill:job-hunt": "search",
   "skill:lead-gen-playbook": "chart",
+  // The car, not the clock. The answer it gives is a time, but what it knows about is the drive.
+  "skill:leave-time": "car",
   "skill:learning-coach": "book",
   "skill:market-digest": "chart",
   "skill:meal-planner": "food",
@@ -187,6 +189,10 @@ export const FACE = {
   "routine:home-checkup": "home",
   "routine:inbox-sweep": "mail",
   "routine:market-morning": "chart",
+  // The car, matching skill:leave-time, for the same reason meeting-briefing is not a clock: the
+  // early hour is when it runs, and the journeys are what it is about.
+  "routine:leave-time-morning": "car",
+  "routine:leave-time-traffic": "car",
   "routine:med-reminders": "pill",
   "routine:meeting-briefing": "people",
   // The same mark as the Meeting Sync it stands in for: what it is made of is still the

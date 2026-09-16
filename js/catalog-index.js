@@ -77,6 +77,10 @@ export const CATALOG_INDEX = [
     "name": "Commitment Sweep"
   },
   {
+    "key": "skill:common-questions",
+    "name": "Common Questions"
+  },
+  {
     "key": "personality:concise",
     "name": "Concise"
   },
@@ -213,8 +217,20 @@ export const CATALOG_INDEX = [
     "name": "Language Partner"
   },
   {
+    "key": "skill:lead-desk",
+    "name": "Lead Desk"
+  },
+  {
+    "key": "routine:lead-sweep",
+    "name": "Lead Sweep"
+  },
+  {
     "key": "skill:learning-coach",
     "name": "Learning Coach"
+  },
+  {
+    "key": "skill:leave-time",
+    "name": "Leave Time"
   },
   {
     "key": "skill:linear-keeper",
@@ -297,6 +313,10 @@ export const CATALOG_INDEX = [
     "name": "New Teammate Welcome"
   },
   {
+    "key": "routine:next-piece",
+    "name": "Next Piece"
+  },
+  {
     "key": "personality:noir-detective",
     "name": "Noir Detective"
   },
@@ -353,12 +373,24 @@ export const CATALOG_INDEX = [
     "name": "Professional"
   },
   {
+    "key": "routine:question-sweep",
+    "name": "Question Sweep"
+  },
+  {
+    "key": "routine:queue-check",
+    "name": "Queue Check"
+  },
+  {
     "key": "skill:reading-list",
     "name": "Reading & Watch List"
   },
   {
     "key": "skill:readwise-keeper",
     "name": "Readwise Keeper"
+  },
+  {
+    "key": "skill:ready-to-post",
+    "name": "Ready to Post"
   },
   {
     "key": "routine:receipt-sweep",
@@ -379,6 +411,10 @@ export const CATALOG_INDEX = [
   {
     "key": "routine:return-window-watch",
     "name": "Return Window Watch"
+  },
+  {
+    "key": "routine:revenue-digest",
+    "name": "Revenue Digest"
   },
   {
     "key": "skill:revenue-watch",
@@ -497,6 +533,10 @@ export const CATALOG_INDEX = [
     "name": "The Journal Keeper"
   },
   {
+    "key": "routine:leave-time-morning",
+    "name": "The Morning Drive Check"
+  },
+  {
     "key": "personality:the-morning-show",
     "name": "The Morning Show"
   },
@@ -523,6 +563,10 @@ export const CATALOG_INDEX = [
   {
     "key": "personality:team-assistant",
     "name": "The Team Assistant"
+  },
+  {
+    "key": "routine:leave-time-traffic",
+    "name": "The Traffic Watch"
   },
   {
     "key": "personality:the-travel-agent",
@@ -583,6 +627,10 @@ export const CATALOG_INDEX = [
   {
     "key": "specialist:writer",
     "name": "Writer"
+  },
+  {
+    "key": "skill:writing-desk",
+    "name": "Writing Desk"
   },
   {
     "key": "skill:ynab-keeper",

@@ -38,6 +38,7 @@
       "required_integrations": [
         "airtable"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -59,6 +60,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "job-hunt",
       "preview_exchanges": [],
       "visibility": "public"
@@ -80,6 +82,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "bill-tracker",
       "preview_exchanges": [],
       "visibility": "public"
@@ -120,6 +123,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -141,6 +145,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "birthday-keeper",
       "preview_exchanges": [],
       "visibility": "public"
@@ -177,6 +182,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -198,6 +204,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "card-rewards",
       "preview_exchanges": [],
       "visibility": "public"
@@ -239,11 +246,13 @@
       ],
       "setup_steps": [
         "Make the token at Calendly, under Integrations, API and webhooks. Tick reading users, event types, and scheduled events, plus writing scheduled events if you want your agent to be able to cancel one.",
-        "Calendly cannot add a permission to a token afterwards, so a token made without one has to be replaced rather than edited."
+        "Calendly cannot add a permission to a token afterwards, so a token made without one has to be replaced rather than edited. Tick everything you might want now.",
+        "If you also want the notes Calendly writes after a call, tick meeting recaps as well and add the Meeting Notes add-on, which is where those live."
       ],
       "required_integrations": [
         "calendly"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -285,6 +294,7 @@
       "required_integrations": [
         "google_calendar"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -306,6 +316,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -336,6 +347,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "campaign-watch",
       "preview_exchanges": [],
       "visibility": "public"
@@ -381,6 +393,7 @@
       "required_integrations": [
         "lemlist"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -417,6 +430,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -451,6 +465,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -494,6 +509,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -515,6 +531,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "circle-back",
       "preview_exchanges": [],
       "visibility": "public"
@@ -551,6 +568,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -593,6 +611,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -614,7 +633,47 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "commitment-keeper",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
+      "id": "common-questions",
+      "name": "Common Questions",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Counts what people actually ask you, in your own mail, and keeps one good agreed answer for each. When the same question comes in again you get your best wording back instead of writing a fresh reply for the ninth time.",
+      "long_description": "Every business answers the same handful of questions forever. How much, how long, do you come out this far, what happens if it rains, can I change it later. Each one gets a fresh reply typed from nothing, each reply is slightly different from the last, and the worst version is the one written at the end of a long day.\n\nThis counts them. It reads the questions in your own mail, groups the five wordings of one question into one question, and tells you which ones actually come up, with the number attached. That number is the part nobody can see for themselves: everyone has a feeling about what they get asked most and the feeling is usually wrong.\n\nThen it helps you write one good answer for each, drawn from what you have already said and from your own price list, policies or handbook rather than from thin air. You agree it, and from then on that is the answer. Nothing becomes the agreed answer without you saying so.\n\nAnd when you reply to somebody in a way that contradicts an answer you agreed months ago, it says so and asks which one is right now, which is the thing that keeps the set from quietly going stale.\n\nIt writes and counts. Putting the answers on a page anywhere is yours: nothing here can reach a website.\n\nReading your mail needs an account connected on the agent's Connections tab, under Email, calendar, files. It works on Gmail or Outlook.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "what do people ask me",
+        "common questions",
+        "faq",
+        "frequently asked",
+        "same question",
+        "asked again",
+        "answer this one",
+        "standard answer",
+        "what do i usually say",
+        "how do i normally answer",
+        "my answers",
+        "keep this answer",
+        "add an answer",
+        "canned reply"
+      ],
+      "setup_steps": [],
+      "required_integrations": [
+        "gmail"
+      ],
+      "required_screen": [],
+      "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
     },
@@ -635,6 +694,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -692,6 +752,7 @@
       "required_integrations": [
         "video"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -713,6 +774,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -743,6 +805,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "calendar-management",
       "preview_exchanges": [],
       "visibility": "public"
@@ -764,6 +827,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "habit-tracker",
       "preview_exchanges": [],
       "visibility": "public"
@@ -785,6 +849,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "learning-coach",
       "preview_exchanges": [],
       "visibility": "public"
@@ -821,6 +886,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -842,6 +908,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "daily-trivia",
       "preview_exchanges": [],
       "visibility": "public"
@@ -863,6 +930,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "word-of-the-day",
       "preview_exchanges": [],
       "visibility": "public"
@@ -884,6 +952,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "home-workout",
       "preview_exchanges": [],
       "visibility": "public"
@@ -913,6 +982,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -934,6 +1004,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -988,6 +1059,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -998,7 +1070,7 @@
       "name": "Evening Reflection",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 76,
+      "install_count": 81,
       "created_at": "2026-08-02",
       "description": "One calm message at night instead of three or four. Your agent asks about your day once, and your reply becomes the journal entry, the mood, the good things, and your habit streaks, all filed in one pass. Already logged everything? It stays quiet.",
       "long_description": "One warm question at bedtime, one reply from you, and everything lands where it belongs: the day's entry with its mood and good things in your Journal, and your streaks updated in Habit Tracker. It only asks for what is still missing tonight, and on a night you have already logged everything it says nothing at all.",
@@ -1009,6 +1081,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "personal-journal",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1030,6 +1103,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -1088,6 +1162,7 @@
         "gmail",
         "google_calendar"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1121,6 +1196,9 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [
+        "sites"
+      ],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1142,6 +1220,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "honest-week",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1152,7 +1231,7 @@
       "name": "Friendly",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 77,
+      "install_count": 82,
       "created_at": "2026-07-09",
       "description": "The organized friend who says the thing and does not make a production of it. No corporate opener, warmth in the wording rather than in extra length, and if your plan is thin it says so and offers the fix in the same message.",
       "long_description": "Friendly is the peer voice. Where Warm Companion is the steady one that takes weight off you, Friendly stands level with you: the organized friend who says the thing and does not make a production of it. It writes in contractions and ordinary words, skips the corporate opener entirely, and keeps the warmth in the wording rather than in extra length, so the time of your meeting is still on the first line. Praise is specific or it does not happen. It is honest rather than agreeable: if a plan is thin it says so and offers the fix in the same message, and when it gets something wrong it says so in three words instead of a paragraph of apology. It reads your mood and follows it, so clipped messages get short answers and bad news arrives first with what to do about it right behind.",
@@ -1163,6 +1242,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -1215,6 +1295,7 @@
       "required_integrations": [
         "github"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1258,6 +1339,7 @@
       "required_integrations": [
         "gitlab"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1295,6 +1377,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1316,6 +1399,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "home-workout",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1360,6 +1444,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1411,6 +1496,7 @@
         "govee",
         "lifx"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1449,6 +1535,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1485,6 +1572,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1506,6 +1594,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -1571,6 +1660,7 @@
       "required_integrations": [
         "home_assistant"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1592,6 +1682,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -1635,6 +1726,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1656,6 +1748,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "inbox-rules",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1692,6 +1785,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1713,6 +1807,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -1728,6 +1823,76 @@
           "bot": "Checking: $41.20.\n\nRent cleared this morning at 6am for $1,450, which is what took it down. Savings still has $900 if you want to move some across.\n\nWant me to move $200?"
         }
       ],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
+      "id": "lead-desk",
+      "name": "Lead Desk",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Keeps every possible customer in one list with the stage each has reached, moves them itself from what your mail says, tells you who has gone quiet, and drafts the chase. It runs on your own mail, so there is no CRM to keep up to date.",
+      "long_description": "Work comes in as an email, a form that turns into an email, or a message from somebody who got your name from somebody else. Then it lives in your inbox, which is also where everything else lives, and the ones that go quiet go quiet where nobody can see them. The follow-up that never happened is the cheapest sale anybody ever lost.\n\nThis keeps one list: who got in touch, what they wanted, where it got to, and what was last said. It fills the list from your own mail rather than asking you to, and it moves each row when the mail moves it: a reply out, a real conversation, a price sent, a yes, a no. Ask who has gone quiet and it names them oldest first, furthest-along first, with a follow-up drafted in your words.\n\nAsk how it is going and, once there are enough rows to mean anything, it tells you where the funnel is narrowing. Forty inquiries and two conversations is a different problem from six conversations and no wins, and only one of those is fixed by finding more people.\n\nIt drafts and never sends. It will not quote a price, promise a date or write to anybody without being asked.\n\nReading your mail needs an account connected on the agent's Connections tab, under Email, calendar, files. It works on Gmail or Outlook. Without one it still keeps the list from what you tell it.",
+      "tagline": "",
+      "category": "sales",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "lead",
+        "leads",
+        "new lead",
+        "my pipeline",
+        "pipeline",
+        "prospect",
+        "prospects",
+        "enquiry",
+        "inquiry",
+        "who got in touch",
+        "quote",
+        "quoted",
+        "proposal",
+        "follow up with",
+        "went quiet",
+        "gone quiet",
+        "chase",
+        "who hasn't got back",
+        "did they get back",
+        "won the job",
+        "lost the job",
+        "closed the deal",
+        "new customer"
+      ],
+      "setup_steps": [],
+      "required_integrations": [
+        "gmail"
+      ],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "lead-sweep",
+      "name": "Lead Sweep",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Each weekday morning it reads yesterday's mail, moves every lead to the stage it actually reached, and tells you who answered, who is new and who has gone quiet. Quiet itself on a morning when none of that happened.",
+      "long_description": "A list of leads is only worth having if it is true, and keeping it true is the job nobody does. So the stage says Talking three weeks after they stopped talking, and the one who replied on Friday is still sitting under everyone who did not.\n\nThis runs before the working day and does the keeping. It reads the mail that arrived and the mail that went out, moves each row to where it actually got to, and adds anyone new who wrote in. Then it says the part that needs a person: who answered and what they said, who is new, what moved, and who has now been silent long enough to be worth a nudge, oldest and furthest along first.\n\nOn Monday it adds one line on the shape of the pipeline, once there are enough rows for that to mean anything. The rest of the week it stays on what happened.\n\nA morning where nothing moved and nobody went quiet gets no message at all.",
+      "tagline": "",
+      "category": "sales",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "lead-desk",
+      "preview_exchanges": [],
       "visibility": "public"
     },
     {
@@ -1760,6 +1925,59 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
+      "id": "leave-time",
+      "name": "Leave Time",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-15",
+      "description": "Works out when to walk out of the door for what is on your calendar, with the traffic that is actually on the road, and sets the reminder. It digs the address out of your confirmation email when the calendar entry does not have one.",
+      "long_description": "Your calendar says \"Dentist, 2pm\". It does not say where the dentist is, which is why the leave-now alert on your phone has nothing to tell you. This reads the confirmation email, finds the address, keeps it, and then works out what the drive takes with today's traffic on it, so what you get is a time: leave at 1:22. It sets that as a reminder and hands you a link that opens in whichever maps app you use. Where you are leaving from is worked out too, from the thing before it on your calendar, or from home or work depending on the hour, and it always tells you which one it assumed so you can correct it in a line. Addresses it finds once it keeps forever, so the second time you go to that dentist it costs nothing to work out. You need a TomTom key for the traffic, which is free and takes a minute: no credit card, no account to set up.",
+      "tagline": "",
+      "category": "productivity",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "when do i leave",
+        "when should i leave",
+        "what time do i leave",
+        "time to leave",
+        "leave by",
+        "how long to get",
+        "how long will it take to get",
+        "how far is",
+        "traffic",
+        "drive time",
+        "the drive",
+        "commute",
+        "directions to",
+        "route to",
+        "how do i get to",
+        "will i make it",
+        "am i going to be late",
+        "running late",
+        "getting there",
+        "how long is the drive",
+        "map me",
+        "navigate"
+      ],
+      "setup_steps": [
+        "Get a TomTom key, which is free and needs no card. Go to developer.tomtom.com, press Register, confirm your email, and the key is on the dashboard the moment you sign in. Copy it.",
+        "In Archie, open the Connections tab, then Apps, find TomTom, and paste the key in."
+      ],
+      "required_integrations": [
+        "google_calendar",
+        "gmail",
+        "tomtom"
+      ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1819,6 +2037,7 @@
       "required_integrations": [
         "linear"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1859,6 +2078,7 @@
       "required_integrations": [
         "lunch_money"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1897,6 +2117,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1949,6 +2170,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -1987,6 +2209,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2008,6 +2231,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "meeting-prep",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2020,7 +2244,7 @@
       "price_cents": 0,
       "install_count": 1,
       "created_at": "2026-07-12",
-      "description": "Ask \"what did we discuss?\" and get recaps, decisions and action items, read from the transcripts of your calls.",
+      "description": "Ask “what did we discuss?” and get recaps, decisions and action items, read from your calls: Fireflies, Zoom, and the notes Calendly writes after a meeting, all in one place.",
       "long_description": "Connect your Fireflies account and your agent quietly builds a memory of every meeting you have. It pulls new transcripts, works out which speaker is which person, writes a summary with the decisions and action items, and files it away. Then you can just ask: what have Sarah and I talked about recently? What did we decide about pricing? What did I commit to on Tuesday's call? When a transcript comes back with anonymous 'Speaker 1' labels, which Fireflies does for uploads, Teams, and phone calls, the agent infers who's who from the transcript and the invite, shows you its guess, and remembers your correction for good.",
       "tagline": "",
       "category": "productivity",
@@ -2055,8 +2279,10 @@
       "setup_steps": [],
       "required_integrations": [
         "fireflies",
-        "zoom"
+        "zoom",
+        "calendly"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2095,6 +2321,7 @@
       "required_integrations": [
         "google_calendar"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2116,6 +2343,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "fireflies",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2159,6 +2387,7 @@
       "required_integrations": [
         "mercury"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2201,6 +2430,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2222,6 +2452,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "calendar-management",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2243,6 +2474,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "market-digest",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2264,6 +2496,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "medication-reminder",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2285,6 +2518,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "news-briefing",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2306,6 +2540,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "sports-follow",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2316,7 +2551,7 @@
       "name": "Morning Task Checklist",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 77,
+      "install_count": 82,
       "created_at": "2026-07-18",
       "description": "Each morning your agent posts your open tasks as a numbered checklist with a tick button beside each one, so the day starts with a plan you can tap through, or reply to with a number.",
       "long_description": "A gentle morning nudge that you can act on. Every day at your set time, the agent posts your open tasks: what's overdue first, then what's due today, then what's coming. Each item has its own tick button, so finishing one is a single tap; on Signal and Matrix, which draw no buttons, you reply with the number instead and it counts the same. Wherever the chat app allows an edit, the message updates in place as you go, and everything you leave is still there tomorrow. No app to open; it just arrives in your chat.",
@@ -2327,6 +2562,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "task-manager",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2375,6 +2611,7 @@
         "Add your documents under Knowledge in the app: lease, insurance policies, warranties, HOA rules, school handbooks, anything with rules in it. PDF, text, Markdown, CSV and HTML can all be read."
       ],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2396,6 +2633,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2445,7 +2683,30 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "next-piece",
+      "name": "Next Piece",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Notices when something you publish is coming due and has the draft ready before it is, written from what your business actually did and checked against everything you have already put out. Silent on a day when nothing is due.",
+      "long_description": "The piece is due Friday, you remember on Friday, and what gets written is whatever you could think of at four in the afternoon. That is how a good blog becomes a thin one.\n\nThis looks ahead instead. Each weekday morning it reads what you publish and when each one is next due, and when something is coming up in the next few days it does the work before you would have: reads back over what you have already put out so it does not repeat one, looks at what your customers have been asking, what was said on your recorded calls and what has changed in the business, and writes the piece.\n\nWhat arrives is a finished draft with two lines above it, one naming the deadline and one saying where the subject came from. If the subject turns out to be one you covered before, it says which piece and when, and gives you the three real choices instead of writing it again.\n\nWhen there is genuinely nothing worth writing about, it says so and names what it looked at. A quiet week is an answer. And on every day with nothing due, which is most days, it says nothing at all.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "writing-desk",
       "preview_exchanges": [],
       "visibility": "public"
     },
@@ -2466,6 +2727,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2522,6 +2784,7 @@
       "required_integrations": [
         "notion"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2543,6 +2806,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2599,6 +2863,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2620,6 +2885,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2669,6 +2935,7 @@
         "gmail",
         "aftership"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2714,6 +2981,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2751,6 +3019,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2772,6 +3041,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2822,6 +3092,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2843,6 +3114,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "plant-pet-care",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2864,6 +3136,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2915,6 +3188,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -2936,6 +3210,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -2951,6 +3226,50 @@
           "bot": "No. Two things sit at 2 PM: the Calloway renewal call and the budget review you accepted this morning.\n\nKeep the renewal. It is tied to a contract end date and the budget review is not. Thursday at 4 PM is open for the review.\n\nConfirm and I will move the budget review to 4 PM. I cannot tell the other people on it, so I will draft the note for you to send them."
         }
       ],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "question-sweep",
+      "name": "Question Sweep",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Reads the week's questions out of your mail, keeps the count on each one up to date, and tells you when something has crossed into being worth a written answer. Quiet in a week when nothing new did.",
+      "long_description": "A question becomes worth writing down at the point it has been asked enough times, and nobody notices that point going past. It happens over months, in an inbox, one message at a time.\n\nThis watches for it. Once a week it reads the questions that came in, matches each against the answers you already keep, and updates the count quietly in the background. Then it speaks only when something changed: a question that has now been asked three times and still has no answer written, an answer still sitting in draft that people are being given anyway, or a reply you sent this week that contradicts an answer you agreed months ago.\n\nThat last one is the one worth having. An agreed answer that has gone out of date is worse than no answer, because it is the one being given with confidence.\n\nA week where none of that happened gets no message.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "common-questions",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "queue-check",
+      "name": "Queue Check",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Once a week it counts what is left in your queue of posts and writes more for whichever account is running thin, from what has actually happened since it last looked. Silent in a week when the queue is full.",
+      "long_description": "A queue of posts only works if it never runs empty, and noticing that it is nearly empty is exactly the kind of thing nobody does until the morning they need one.\n\nThis counts, once a week. It reads how often each of your accounts is meant to post and how many posts are waiting for it, and it leaves you alone unless one of them is thin. When one is, it reads back over everything you have already posted so it repeats nothing, looks at what has actually happened in your work since it last looked, and writes enough to fill the gap.\n\nWhat arrives is finished posts, not ideas, plus a line saying how many are now waiting for each account.\n\nWhen nothing real has happened, it says so and asks what you have been working on rather than filling the queue with general advice about your trade. That question gets better posts than five pieces of filler would.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "ready-to-post",
+      "preview_exchanges": [],
       "visibility": "public"
     },
     {
@@ -2996,6 +3315,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3034,6 +3354,49 @@
       "required_integrations": [
         "readwise"
       ],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
+      "id": "ready-to-post",
+      "name": "Ready to Post",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Keeps a few posts written and waiting for each place you post, built from things that actually happened in your work rather than general advice. You post them yourself and say which went out.",
+      "long_description": "Nobody runs out of things to say. They run out on a Tuesday morning with the app already open, which is not the same thing and is the only moment that counts.\n\nThis keeps a queue. Not ideas, which are the part you could have had yourself, but posts written out in full, in your voice, at the length that place takes, each with a note on what picture or clip would go with it. You open the list, copy one, post it.\n\nWhat goes in the queue comes from what actually happened: a job you finished, something you shipped, a question a customer asked twice, a number worth saying out loud, what was said on a recorded call. General advice about your trade is what every other account in it is already posting, so it stays rare here on purpose.\n\nIt cannot see your accounts and it does not pretend to. No likes, no views, no follower counts, because nothing here can reach a platform to read them. Nothing posts itself either. You post, you say “posted that one”, and the queue learns what has already gone out so the next batch is not a repeat.\n\nTell it how anything did and it keeps that too. That is the only feedback it will ever get, and it reads it back before writing for that account again.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "post",
+        "posts",
+        "social",
+        "instagram",
+        "linkedin",
+        "facebook",
+        "tiktok",
+        "write a post for",
+        "caption",
+        "captions",
+        "top up the queue",
+        "what have i got to post",
+        "posted that",
+        "posted it",
+        "something to post",
+        "content for",
+        "story idea",
+        "reel idea",
+        "hashtags"
+      ],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3055,6 +3418,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "bill-tracker",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3065,7 +3429,7 @@
       "name": "Reflection",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 76,
+      "install_count": 81,
       "created_at": "2026-07-18",
       "description": "Your day, saved by chatting. Tell your agent how it went and it keeps one dated entry with your mood, the good things, and what happened, then answers \"how have I been lately?\" with something real. Journal, mood, and gratitude in one place, so one reply covers all three.",
       "long_description": "A private journal, a mood record, and the three-good-things practice, all in one dated entry written by chat. Say as much or as little as you want: a sentence about your day, how it felt, one good thing, any of it. Your agent files each part where it belongs and never makes you fill in a form. Because it is all one record, looking back actually works: the arc of a week, when you last felt great, what was good this month. Older Mood and Gratitude lists from before these were one skill stay right where they are, under Knowledge.",
@@ -3108,6 +3472,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3129,6 +3494,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "waiting-on",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3139,7 +3505,7 @@
       "name": "Researcher",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 82,
+      "install_count": 87,
       "created_at": "2026-07-09",
       "description": "A research skill that searches the live web, checks its sources, and comes back with a cited answer.",
       "long_description": "Hand off anything you'd otherwise go and look up. The Researcher searches the live web for current prices, recent news, product documentation, and who works where now, then reports back with the source URL for every claim. Without it, your agent answers from training data alone and cannot tell you when that data is out of date.\n\nSearches run on the AI account you already connected, at roughly a cent each, so there is nothing to sign up for and no extra subscription. Works on Anthropic, OpenAI, xAI, and Groq; Gemini cannot search the live web through Archie yet.",
@@ -3150,6 +3516,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3171,7 +3538,30 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "warranty-returns",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "revenue-digest",
+      "name": "Revenue Digest",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Reads your Stripe at the end of each day and tells you only what needs you: the payments that failed and why, the invoices past due, the subscriptions about to lapse, and any dispute with a deadline. Silent on a day when nothing did.",
+      "long_description": "Stripe emails you about every failed payment, and after a fortnight those emails are weather. The card that failed at two in the morning, the retry that failed on Thursday, the subscription that quietly went past due: each one arrives as another message in a pile you have stopped opening, and you find out when the customer writes to ask why their account stopped working.\n\nThis reads the ledger itself, once at the end of the day, and says only the part that needs a person. Who failed to pay and the reason their card gave, because an expired card and a declined card need different things done next. Which invoices are sitting past their due date and the total they add up to. Which subscriptions are in trouble, including the ones still running that are set not to renew, which is the quietest way a customer leaves.\n\nOn a day when nothing failed, nothing lapsed and nobody disputed anything, it says nothing at all. That is most days, and it is what makes the message worth reading on the day it arrives.\n\nIt reads only. Refunds, voided invoices and cancellations stay things you ask for.",
+      "tagline": "",
+      "category": "finance",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "revenue-watch",
       "preview_exchanges": [],
       "visibility": "public"
     },
@@ -3223,6 +3613,7 @@
       "required_integrations": [
         "stripe"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3257,6 +3648,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3278,6 +3670,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "find-a-time",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3324,6 +3717,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3345,6 +3739,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "school-family",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3366,6 +3761,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3400,6 +3796,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3452,6 +3849,7 @@
       "required_integrations": [
         "splitwise"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3488,6 +3886,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3522,6 +3921,9 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [
+        "sites"
+      ],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3543,6 +3945,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "statement-collector",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3579,6 +3982,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3600,6 +4004,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3630,6 +4035,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "stay-in-touch",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3640,7 +4046,7 @@
       "name": "Task Manager",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 77,
+      "install_count": 82,
       "created_at": "2026-07-18",
       "description": "Say \"remind me to send the invoice Friday\" and it files the task and sets the reminder, so Friday brings a message and not just a row. Ask what's on your plate and it posts a numbered checklist you tick off with one tap, or by replying with the number.",
       "long_description": "One to-do home is enough: if your real list lives in Todoist or Google Tasks, install that skill instead of this one, or \"add a task\" has two places to land. Turn your agent into a to-do list that actually sticks. Say \"remind me to send the invoice Friday\" and it files the task with a due date and sets the reminder for Friday, so the day brings a message and not just a row you have to go and look at. Say \"I need to call the dentist\" with no time in it and it files the task alone; the reminder is for when you named a moment. Ask \"what's on my plate?\" and it posts a numbered checklist with a tick button beside each item, so finishing something is one tap rather than a sentence. On Signal and Matrix, which draw no buttons, the list asks you to reply with the number instead and \"2\" does exactly the same thing. Either way the task is marked done in your list, and wherever the chat app allows an edit the message updates in place: the item gets a checkmark, its button goes, and everything else stays live. Unlike a plain chatbot, every task is saved to a real list, so nothing is forgotten the moment the conversation scrolls away.",
@@ -3672,6 +4078,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3693,6 +4100,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "calendar-management",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3714,6 +4122,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3772,6 +4181,7 @@
       "required_integrations": [
         "imessage"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -3793,6 +4203,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3827,6 +4238,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3861,6 +4273,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3895,6 +4308,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3929,6 +4343,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -3963,6 +4378,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4001,6 +4417,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4056,6 +4473,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4077,6 +4495,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4134,6 +4553,7 @@
       "required_integrations": [
         "google_calendar"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4155,6 +4575,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4170,6 +4591,28 @@
           "bot": "Thank you for putting that here. I am going to be straight with you rather than gentle, because this one matters: I keep your journal, and I am not a therapist.\n\nMonths is a long time to carry something on your own, and it is exactly the kind of thing a trained person can actually help with. If you want, I will add a task for this week to find a therapist who takes your insurance, and I will keep it on the list until you tell me it is done.\n\nAnd if it ever gets to the point where you are thinking about hurting yourself, please call or text 988 in the US, or your local emergency number, that same night. Do not write it down and wait.\n\nThe entry is saved either way."
         }
       ],
+      "visibility": "public"
+    },
+    {
+      "kind": "routine",
+      "id": "leave-time-morning",
+      "name": "The Morning Drive Check",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-15",
+      "description": "Reads the day ahead before you are up, works out what you have to drive to and when to walk out for each one, and sets the reminders. A day with nothing to drive to sends nothing.",
+      "long_description": "This is the run that makes Leave Time arrive instead of waiting to be asked. Early each morning it reads the day's calendar, picks out the things that are somewhere real rather than a video call, finds the address for each (out of your confirmation email, if the calendar entry does not carry one), checks what the drive takes with the traffic that will be on the road at that hour, and sets a reminder at the time you have to go. You get one message with the day's journeys in it, and nothing at all on a day with none. Doing the whole day in one pass is deliberate: it is one run rather than one per appointment, and most of what is on a working calendar is a video call with no journey in it at all.",
+      "tagline": "",
+      "category": "productivity",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "leave-time",
+      "preview_exchanges": [],
       "visibility": "public"
     },
     {
@@ -4189,6 +4632,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4223,6 +4667,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "house-watch",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4244,6 +4689,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4310,6 +4756,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4331,6 +4778,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4365,6 +4813,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4399,6 +4848,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4421,6 +4871,28 @@
       "visibility": "public"
     },
     {
+      "kind": "routine",
+      "id": "leave-time-traffic",
+      "name": "The Traffic Watch",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-15",
+      "description": "Checks the road again as each journey gets close, and moves your reminder if the traffic has turned. It says nothing unless the time you have to leave has actually changed.",
+      "long_description": "The morning check prices your day first thing, which means it prices the five o'clock drive with the traffic a map expects at five o'clock. The truck that jackknifes at half past four is not in that. This one closes the gap: as each journey comes within about an hour, it asks the road again, and if you now have to leave meaningfully earlier it moves the reminder and tells you. Asking a map how long a drive takes costs nothing at all, so this can look every few minutes, and it only wakes your agent on the few occasions the answer has really changed. A jam that keeps getting worse is one message, not one every five minutes. It never tells you to leave later, because a morning built around a departure time should not be moved out from under you.",
+      "tagline": "",
+      "category": "productivity",
+      "role": "",
+      "tone": "",
+      "triggers": [],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "leave-time",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
       "kind": "personality",
       "id": "the-travel-agent",
       "name": "The Travel Agent",
@@ -4437,6 +4909,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4491,6 +4964,7 @@
       "required_integrations": [
         "google_tasks"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4532,6 +5006,7 @@
       "required_integrations": [
         "todoist"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4572,6 +5047,7 @@
       "required_integrations": [
         "flights"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4609,6 +5085,7 @@
       "required_integrations": [
         "video"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4664,6 +5141,7 @@
       "required_integrations": [
         "gmail"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4685,6 +5163,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [
         {
@@ -4734,6 +5213,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4755,6 +5235,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "car-keeper",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4776,6 +5257,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "home-maintenance",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4797,6 +5279,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "price-watch",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4807,7 +5290,7 @@
       "name": "Weekly Review",
       "author": "Otian AI",
       "price_cents": 0,
-      "install_count": 77,
+      "install_count": 82,
       "created_at": "2026-07-18",
       "description": "A Sunday recap: what you finished this week, what's still open, and what's due next week. A clean reset before the week ahead.",
       "long_description": "End the week with a clear head. Every Sunday the agent reviews your Tasks and sends a short recap of what got done, what's still open or overdue, and what's coming up next week, so nothing carries over unnoticed.",
@@ -4818,6 +5301,7 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "task-manager",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4861,6 +5345,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4898,6 +5383,7 @@
       ],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4919,6 +5405,49 @@
       "triggers": [],
       "setup_steps": [],
       "required_integrations": [],
+      "required_screen": [],
+      "required_skill": "",
+      "preview_exchanges": [],
+      "visibility": "public"
+    },
+    {
+      "kind": "skill",
+      "id": "writing-desk",
+      "name": "Writing Desk",
+      "author": "Otian AI",
+      "price_cents": 0,
+      "install_count": 0,
+      "created_at": "2026-09-14",
+      "description": "Keeps a record of everything you have put out and writes the next one from what your business actually did, checking every draft against the archive so you never say the same thing twice. It writes; putting it out stays yours.",
+      "long_description": "Anybody who has promised themselves a weekly post knows the two ways it dies. The first is the blank page on the morning it is due. The second is quieter: three years in, nobody remembers what has already been covered, so the same piece gets written again with a different title and the readers notice before the writer does.\n\nThis keeps both from happening. It holds a record of everything you have published, and it reads that record before it writes a word, so a subject that has been covered comes back as “you wrote this in March, here is a different angle” rather than as a repeat.\n\nAnd it writes from what your business actually did, not from a prompt. What your customers have been asking in your mail, what was said on your recorded calls, what you shipped or fixed or changed, and whatever material you have uploaded. Ask what you should write about and you get a subject with a reason attached.\n\nIt fits what it writes to where it is going: a blog post, release notes, a letter to customers, an update to members, each with its own readers, length and sound, kept as a row you can edit.\n\nNothing it writes is published. No tool here reaches a website or a mailing platform, so it hands you the finished piece and you put it out. Tell it you did and the archive stays true.",
+      "tagline": "",
+      "category": "communication",
+      "role": "",
+      "tone": "",
+      "triggers": [
+        "write a post",
+        "blog post",
+        "write an article",
+        "what should i write",
+        "write something",
+        "draft a post",
+        "release notes",
+        "changelog",
+        "newsletter",
+        "write to customers",
+        "customer update",
+        "write the update",
+        "have i written about",
+        "did i already write",
+        "what have i published",
+        "publish",
+        "published",
+        "posted it",
+        "put it out"
+      ],
+      "setup_steps": [],
+      "required_integrations": [],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4959,6 +5488,7 @@
       "required_integrations": [
         "ynab"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"
@@ -4997,6 +5527,7 @@
       "required_integrations": [
         "zotero"
       ],
+      "required_screen": [],
       "required_skill": "",
       "preview_exchanges": [],
       "visibility": "public"

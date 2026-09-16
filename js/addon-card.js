@@ -98,12 +98,38 @@ export function normalize(kind, id, data) {
     triggers: Array.isArray(data.triggers) ? data.triggers : [],
     setup_steps: Array.isArray(data.setup_steps) ? data.setup_steps : [],
     required_integrations: Array.isArray(data.required_integrations) ? data.required_integrations : [],
+    // A capability the owner has to switch on, not an account to connect, so it is kept apart
+    // from required_integrations and rendered as a sentence rather than a chip: the switch is
+    // half the fact and what the agent will not do on a site is the other half.
+    // scripts/sync-public-catalog.mjs snapshots the store THROUGH this function, so a field
+    // missing here is a field missing from the page, however faithfully the store holds it.
+    required_screen: Array.isArray(data.required_screen) ? data.required_screen : [],
     required_skill: data.required_skill || "",
     preview_exchanges: Array.isArray(data.preview_exchanges) ? data.preview_exchanges : [],
     visibility: data.visibility === "private" ? "private" : "public",
   };
 }
 
+
+/* What an owner has to switch on before an add-on can run, said as a sentence.
+ *
+ * Wording is TRUST.md's, from the "Websites" entry: the switch is off until they turn it on, the
+ * browser is theirs and watchable, and the two things the agent will never do on a site belong in
+ * the same breath as the thing it will. The site's rule is that a limitation is published beside
+ * the capability rather than lower down, and a card is where a reader meets this one.
+ *
+ * The heading names the add-on rather than saying "What it needs", because check-pronouns.py
+ * reads every label cold and a card heading has no menu around it to lend "it" a subject.
+ *
+ * An unknown value renders nothing. Driving other applications is not built on either platform, so
+ * there is no sentence for it yet and inventing one here would put a capability on the shelf that
+ * does not exist.
+ */
+var SCREEN_NEEDS = {
+  sites: "Needs Websites turned on, which is off until you switch it on. Your agent works the " +
+         "site in a browser window on your own computer, and you can watch it. It never types a " +
+         "password or a card number, and it asks before pressing anything that finalizes.",
+};
 
 /* ── Card rendering ─────────────────────────────────────────────────────── */
 
@@ -122,6 +148,15 @@ export function detailHtml(item) {
              '<div class="bubble bot">' + escapeHtml(ex.bot) + "</div>";
     }).join("");
     parts.push('<div><h4>Sample conversation</h4><div class="mp-card-chat">' + chat + "</div></div>");
+  }
+
+  var needs = item.required_screen
+    .map(function (k) { return SCREEN_NEEDS[k]; })
+    .filter(function (line) { return !!line; });
+  if (needs.length) {
+    parts.push('<div><h4>What this add-on needs</h4>' +
+      needs.map(function (line) { return "<p>" + escapeHtml(line) + "</p>"; }).join("") +
+      "</div>");
   }
 
   var worksWith = [];

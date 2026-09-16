@@ -205,79 +205,102 @@
         <div class="section-header">
           <span class="section-label fade-up">Every assistant we could source</span>
           <h2 id="board-heading" class="fade-up delay-1">Nine assistants, and where each one does the work.</h2>
-          <p class="hm-lede fade-up delay-1">Sorted by where the work happens, because that is the difference that outlives every other one. Not ranked: nobody has scored these, and a leaderboard with no method is an advertisement with a table around it. Every cell about another company links to the sentence it came from, on that company&rsquo;s own page. Read September 16, 2026.</p>
+          <p class="hm-lede fade-up delay-1">Ranked by six tests, and the tests are yours to change. Turn off the ones you do not care about and the order moves. A point is only ever for something a company publishes about itself, so nobody is marked down for a feature we could not find, and every cell links to the sentence it came from. Read September 16, 2026.</p>
+        </div>
+
+        <div class="mp-filter-group fade-up delay-1">
+          <span class="mp-filter-label" id="boardTestsLabel">Count only what matters to you</span>
+          <div class="marketplace-filter-bar" role="group" aria-labelledby="boardTestsLabel" id="boardTests">
+            <button type="button" class="marketplace-filter-pill is-active" data-test="local" aria-pressed="true">Runs on your computer</button>
+            <button type="button" class="marketplace-filter-pill is-active" data-test="free" aria-pressed="true">Costs nothing to keep</button>
+            <button type="button" class="marketplace-filter-pill is-active" data-test="asks" aria-pressed="true">Asks before acting</button>
+            <button type="button" class="marketplace-filter-pill is-active" data-test="model" aria-pressed="true">You pick the AI company</button>
+            <button type="button" class="marketplace-filter-pill is-active" data-test="open" aria-pressed="true">Open source</button>
+            <button type="button" class="marketplace-filter-pill is-active" data-test="tells" aria-pressed="true">Publishes a location and a price</button>
+          </div>
         </div>
 
         <div class="cmp-table-wrap fade-up delay-1">
-          <table class="cmp-table">
+          <table class="cmp-table" id="boardTable">
             <thead>
               <tr>
                 <th scope="col">Assistant</th>
                 <th scope="col">Where the work runs</th>
                 <th scope="col">Asks before it acts</th>
                 <th scope="col">What it costs</th>
+                <th scope="col">Tests it meets</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td class="is-archie">Archie</td>
-                <td class="is-archie" data-label="Where the work runs">Your own computer. No server of ours holds what it reads or writes<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a></td>
-                <td class="is-archie" data-label="Asks before it acts">Calendar changes need your confirmation, and nothing leaves your email account until you send it or set a time<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a></td>
-                <td class="is-archie" data-label="What it costs">$30 a month, or $299 a year<a class="src-cite" href="../archie/pricing/"><span class="sr-only">Source </span>2</a></td>
-              </tr>
-              <tr>
-                <td>Vellum</td>
-                <td data-label="Where the work runs">&ldquo;By default, your assistant runs locally&rdquo;. Its paid plans are sold as computers, sized in vCPU<a class="src-cite" href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>3</a></td>
-                <td data-label="Asks before it acts">&ldquo;High-stakes actions &hellip; require explicit approval until you mark them as trusted&rdquo;<a class="src-cite" href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>3</a></td>
-                <td data-label="What it costs">Free to start, then $30, $100 or $200 a month<a class="src-cite" href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>4</a></td>
-              </tr>
-              <tr>
-                <td>OpenClaw</td>
-                <td data-label="Where the work runs">&ldquo;State lives on your machine, not a vendor cloud&rdquo;<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
-                <td data-label="Asks before it acts">The site does not say<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
-                <td data-label="What it costs">Nothing: &ldquo;No subscription. No hosted tier. No token.&rdquo;<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
-              </tr>
-              <tr>
+            <tbody id="boardBody">
+              <tr data-local="1" data-free="1" data-asks="0" data-model="1" data-open="1" data-tells="1">
                 <td>Hermes</td>
                 <td data-label="Where the work runs">A desktop app on Mac, Windows or Linux, or &ldquo;Deploy to the cloud&rdquo; through Nous Portal<a class="src-cite" href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>6</a></td>
                 <td data-label="Asks before it acts">The site does not say<a class="src-cite" href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>6</a></td>
                 <td data-label="What it costs">Free and MIT licensed. Hosted plans run $0 to $200 a month<a class="src-cite" href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>6</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">5</span> of 6</td>
               </tr>
-              <tr>
-                <td>Claude Cowork</td>
-                <td data-label="Where the work runs">&ldquo;Runs on Anthropic&rsquo;s servers, in an isolated environment&rdquo;, and your sessions and files save to your Claude account<a class="src-cite" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>7</a></td>
-                <td data-label="Asks before it acts">Three permission modes, and in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;<a class="src-cite" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>7</a></td>
-                <td data-label="What it costs">Included on Claude plans from Pro up, $20 a month<a class="src-cite" href="https://claude.com/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>8</a></td>
+              <tr data-local="1" data-free="1" data-asks="0" data-model="1" data-open="1" data-tells="1">
+                <td>OpenClaw</td>
+                <td data-label="Where the work runs">&ldquo;State lives on your machine, not a vendor cloud&rdquo;<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
+                <td data-label="Asks before it acts">The site does not say<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
+                <td data-label="What it costs">Nothing: &ldquo;No subscription. No hosted tier. No token.&rdquo;<a class="src-cite" href="https://openclaw.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>5</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">5</span> of 6</td>
               </tr>
-              <tr>
-                <td>Grok Bot</td>
-                <td data-label="Where the work runs">&ldquo;A persistent cloud VM with a browser, filesystem, and terminal&rdquo;, signed in to your tools there<a class="src-cite" href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>9</a></td>
-                <td data-label="Asks before it acts">It comes back &ldquo;when something needs your approval&rdquo;<a class="src-cite" href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>9</a></td>
-                <td data-label="What it costs">With SuperGrok Heavy at $300 a month, or Cursor Ultra at $200<a class="src-cite" href="https://x.ai/bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>10</a></td>
+              <tr data-local="1" data-free="1" data-asks="1" data-model="0" data-open="1" data-tells="1">
+                <td>Vellum</td>
+                <td data-label="Where the work runs">&ldquo;By default, your assistant runs locally&rdquo;. Its paid plans are sold as computers, sized in vCPU<a class="src-cite" href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>3</a></td>
+                <td data-label="Asks before it acts">&ldquo;High-stakes actions &hellip; require explicit approval until you mark them as trusted&rdquo;<a class="src-cite" href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>3</a></td>
+                <td data-label="What it costs">Free to start, then $30, $100 or $200 a month<a class="src-cite" href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>4</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">5</span> of 6</td>
               </tr>
-              <tr>
+              <tr data-local="1" data-free="0" data-asks="1" data-model="1" data-open="0" data-tells="1">
+                <td class="is-archie">Archie</td>
+                <td class="is-archie" data-label="Where the work runs">Your own computer. No server of ours holds what it reads or writes<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a></td>
+                <td class="is-archie" data-label="Asks before it acts">Calendar changes need your confirmation, and nothing leaves your email account until you send it or set a time<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a></td>
+                <td class="is-archie" data-label="What it costs">$30 a month, or $299 a year<a class="src-cite" href="../archie/pricing/"><span class="sr-only">Source </span>2</a></td>
+                <td class="is-archie" data-label="Tests it meets"><span class="cost-use">4</span> of 6</td>
+              </tr>
+              <tr data-local="0" data-free="1" data-asks="1" data-model="0" data-open="0" data-tells="1">
                 <td>Meta Muse</td>
                 <td data-label="Where the work runs">&ldquo;Its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;<a class="src-cite" href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>11</a></td>
                 <td data-label="Asks before it acts">&ldquo;By default, Muse will not take many important actions, like sending an email, without your approval&rdquo;<a class="src-cite" href="https://www.meta.com/help/artificial-intelligence/1687253048996149/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>12</a></td>
                 <td data-label="What it costs">&ldquo;Free for most of what people need, with subscription plans for people who want to do more&rdquo;<a class="src-cite" href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>11</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">3</span> of 6</td>
               </tr>
-              <tr>
+              <tr data-local="0" data-free="0" data-asks="1" data-model="0" data-open="0" data-tells="1">
+                <td>Claude Cowork</td>
+                <td data-label="Where the work runs">&ldquo;Runs on Anthropic&rsquo;s servers, in an isolated environment&rdquo;, and your sessions and files save to your Claude account<a class="src-cite" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>7</a></td>
+                <td data-label="Asks before it acts">Three permission modes, and in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;<a class="src-cite" href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>7</a></td>
+                <td data-label="What it costs">Included on Claude plans from Pro up, $20 a month<a class="src-cite" href="https://claude.com/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>8</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">2</span> of 6</td>
+              </tr>
+              <tr data-local="0" data-free="0" data-asks="1" data-model="0" data-open="0" data-tells="1">
+                <td>Grok Bot</td>
+                <td data-label="Where the work runs">&ldquo;A persistent cloud VM with a browser, filesystem, and terminal&rdquo;, signed in to your tools there<a class="src-cite" href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>9</a></td>
+                <td data-label="Asks before it acts">It comes back &ldquo;when something needs your approval&rdquo;<a class="src-cite" href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>9</a></td>
+                <td data-label="What it costs">With SuperGrok Heavy at $300 a month, or Cursor Ultra at $200<a class="src-cite" href="https://x.ai/bot" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>10</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">2</span> of 6</td>
+              </tr>
+              <tr data-local="0" data-free="1" data-asks="1" data-model="0" data-open="0" data-tells="0">
                 <td>Wix Symphony</td>
                 <td data-label="Where the work runs">Wix does not publish it. You sign in with a Wix account, in a browser or its phone app<a class="src-cite" href="https://www.wix.com/symphony" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>13</a></td>
                 <td data-label="Asks before it acts">It &ldquo;checks with you first before your agents act, so nothing important happens without your approval&rdquo;<a class="src-cite" href="https://support.wix.com/en/article/symphony-an-overview" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>14</a></td>
                 <td data-label="What it costs">A free plan, then $16, $40 or $80 a month<a class="src-cite" href="https://www.wix.com/symphony/pricing" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>15</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">2</span> of 6</td>
               </tr>
-              <tr>
-                <td>Instinct</td>
-                <td data-label="Where the work runs">Not published. It is &ldquo;currently available to a private access group&rdquo;<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
-                <td data-label="Asks before it acts">Not published<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
-                <td data-label="What it costs">Not published<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
-              </tr>
-              <tr>
+              <tr data-local="0" data-free="0" data-asks="1" data-model="0" data-open="0" data-tells="0">
                 <td>Norton Family Assistant</td>
                 <td data-label="Where the work runs">Not published<a class="src-cite" href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>17</a></td>
                 <td data-label="Asks before it acts">&ldquo;Asks first, acts after&rdquo;<a class="src-cite" href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>17</a></td>
                 <td data-label="What it costs">Not published<a class="src-cite" href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>17</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">1</span> of 6</td>
+              </tr>
+              <tr data-local="0" data-free="0" data-asks="0" data-model="0" data-open="0" data-tells="0">
+                <td>Instinct</td>
+                <td data-label="Where the work runs">Not published. It is &ldquo;currently available to a private access group&rdquo;<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
+                <td data-label="Asks before it acts">Not published<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
+                <td data-label="What it costs">Not published<a class="src-cite" href="https://instinct.com/" rel="nofollow noopener" target="_blank"><span class="sr-only">Source </span>16</a></td>
+                <td data-label="Tests it meets"><span class="cost-use">0</span> of 6</td>
               </tr>
             </tbody>
           </table>
@@ -285,9 +308,102 @@
 
         <p class="cost-table-note fade-up delay-1">Every one of these sends your words to an AI model running somewhere else. That column is about where the agent itself lives and where its records sit, not about the model. Four of the nine publish no price, and three publish nothing about where they run; a blank means they have not said, never that we could not be bothered to look.</p>
 
-        <h3 class="fade-up delay-1">Where the other nine beat Archie</h3>
-        <p class="fade-up delay-1">Archie is not the cheapest and it is not the only one that keeps your work on your own computer. OpenClaw costs nothing and has no paid tier at all. Hermes is free to run and MIT licensed. Vellum makes almost the same custody claim we do, is open source, and reaches a phone, a browser and a terminal. Muse and Symphony both have a free plan that renews every month, and ours does not. If price decides this for you, or if you need it in your pocket, two or three of the rows above are better answers than ours, and the pages below say so at length rather than hiding it here.</p>
+        <!-- ==============================
+             The field on the two axes the board can actually source: where the agent runs, and
+             whether you keep paying. Deliberately NOT the cloud-agents figure's argument ("same
+             work, different container"), which is drawn on that page already and would be drift
+             here. This one says the thing the table buries: the quadrant Archie sits in has
+             nobody else in it. Every other thing you run yourself is free software you assemble,
+             and everything you pay for runs on somebody's server.
 
+             Static on purpose. The reader-worked control above the table is this section's tier
+             three, and a quadrant map has nothing that moves which would mean anything; motion
+             that says nothing reads as sales on a page about trust.
+
+             Instinct and Norton are off the grid rather than guessed at, which is the same rule
+             their table cells follow.
+             ============================== -->
+        <figure class="explain-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 320" role="img" aria-labelledby="bd-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="bd-t">A grid of four squares. The columns are free to keep and you pay for it; the rows are runs on your computer and runs on their server. Top left, free and on your own computer: OpenClaw, Hermes and Vellum. Top right, paid and on your own computer: Archie, alone in that square. Bottom left, free and on their server: Meta Muse and Wix Symphony. Bottom right, paid and on their server: Claude Cowork and Grok Bot. Instinct and Norton Family Assistant publish neither fact, so they are named underneath rather than placed.</title>
+            <style>
+              .bd-col{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .bd-row{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:end}
+              .bd-cell{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .bd-cell-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .bd-name{fill:currentColor;font-size:12px;opacity:.85}
+              .bd-name-us{fill:currentColor;font-size:12.5px;font-weight:650}
+              .bd-foot{fill:currentColor;font-size:10.5px;opacity:.62}
+            </style>
+            <text class="bd-col" x="300" y="34">Free to keep</text>
+            <text class="bd-col" x="510" y="34">You pay for it</text>
+
+            <text class="bd-row" x="182" y="100">Runs on</text>
+            <text class="bd-row" x="182" y="118">your computer</text>
+            <text class="bd-row" x="182" y="212">Runs on</text>
+            <text class="bd-row" x="182" y="230">their server</text>
+
+            <rect class="bd-cell" x="200" y="50" width="200" height="120" rx="10"/>
+            <rect class="bd-cell-us" x="410" y="50" width="200" height="120" rx="10"/>
+            <rect class="bd-cell" x="200" y="182" width="200" height="120" rx="10"/>
+            <rect class="bd-cell" x="410" y="182" width="200" height="120" rx="10"/>
+
+            <text class="bd-name" x="222" y="88">OpenClaw</text>
+            <text class="bd-name" x="222" y="116">Hermes</text>
+            <text class="bd-name" x="222" y="144">Vellum</text>
+
+            <text class="bd-name-us" x="432" y="88">Archie</text>
+            <text class="bd-foot" x="432" y="114">and nothing else</text>
+
+            <text class="bd-name" x="222" y="220">Meta Muse</text>
+            <text class="bd-name" x="222" y="248">Wix Symphony</text>
+
+            <text class="bd-name" x="432" y="220">Claude Cowork</text>
+            <text class="bd-name" x="432" y="248">Grok Bot</text>
+
+            <text class="bd-foot" x="200" y="316">Instinct and Norton Family Assistant publish neither fact, so they are not placed.</text>
+          </svg>
+
+          <svg class="explain-svg--mobile" viewBox="0 0 340 474" role="img" aria-labelledby="bdm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="bdm-t">The same four groups, stacked. Free and on your own computer: OpenClaw, Hermes and Vellum. Paid and on your own computer: Archie, and nothing else. Free and on their server: Meta Muse and Wix Symphony. Paid and on their server: Claude Cowork and Grok Bot. Instinct and Norton Family Assistant publish neither fact, so they are named at the foot rather than placed.</title>
+            <style>
+              .bdm-head{fill:currentColor;font-size:12px;font-weight:650}
+              .bdm-cell{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .bdm-cell-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .bdm-name{fill:currentColor;font-size:12px;opacity:.85}
+              .bdm-name-us{fill:currentColor;font-size:12.5px;font-weight:650}
+              .bdm-foot{fill:currentColor;font-size:10.5px;opacity:.62}
+            </style>
+            <text class="bdm-head" x="16" y="18">Free to keep, on your own computer</text>
+            <rect class="bdm-cell" x="16" y="28" width="308" height="86" rx="10"/>
+            <text class="bdm-name" x="36" y="54">OpenClaw</text>
+            <text class="bdm-name" x="36" y="78">Hermes</text>
+            <text class="bdm-name" x="36" y="102">Vellum</text>
+
+            <text class="bdm-head" x="16" y="150">You pay for it, on your own computer</text>
+            <rect class="bdm-cell-us" x="16" y="160" width="308" height="62" rx="10"/>
+            <text class="bdm-name-us" x="36" y="186">Archie</text>
+            <text class="bdm-foot" x="36" y="208">and nothing else</text>
+
+            <text class="bdm-head" x="16" y="258">Free to keep, on their server</text>
+            <rect class="bdm-cell" x="16" y="268" width="308" height="62" rx="10"/>
+            <text class="bdm-name" x="36" y="294">Meta Muse</text>
+            <text class="bdm-name" x="36" y="318">Wix Symphony</text>
+
+            <text class="bdm-head" x="16" y="366">You pay for it, on their server</text>
+            <rect class="bdm-cell" x="16" y="376" width="308" height="62" rx="10"/>
+            <text class="bdm-name" x="36" y="402">Claude Cowork</text>
+            <text class="bdm-name" x="36" y="426">Grok Bot</text>
+
+            <text class="bdm-foot" x="16" y="462">Instinct and Norton publish neither fact, so they are not placed.</text>
+          </svg>
+
+          <figcaption>The only paid agent you run yourself, with nobody else in that square. All ten send your words to an AI company either way: the grid is about where the agent itself sits.</figcaption>
+        </figure>
+
+        <h3 class="fade-up delay-1">Where the other nine beat Archie</h3>
+        <p class="fade-up delay-1">On all six tests Archie comes fourth, and the three above it are free. Hermes, OpenClaw and Vellum each score five: they run on your own computer, they cost nothing to keep, they are open source, and two of the three let you point them at whichever AI company you like. Vellum makes almost the same custody claim we do, in almost the same words, and reaches a phone, a browser and a terminal besides. Muse and Symphony both have a free plan that renews every month, and ours does not.</p>
+        <p class="fade-up delay-1">Two of the six tests are ones a paid product cannot pass by definition, so turn them off if they are not how you are choosing and watch the order change. That is the point of the control, and it cuts both ways: leave every test on and we are fourth, which is the honest count and the one printed above.</p>
         <h3 class="fade-up delay-1">What a table leaves out</h3>
         <p class="fade-up delay-1">These four columns are the ones every company publishes, which is exactly why they are the four. What none of them shows is the distance between installing something and having it do your actual job: the accounts wired up, the rules that match how you work, and somebody to ask when it breaks. That gap is what the six comparisons below are about, and it is the honest place to argue with an agent you could run yourself for nothing.</p>
 
@@ -565,6 +681,7 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script type="module" src="../js/board.js"></script>
   <script type="module" src="../js/account-nav.js"></script>
 </body>
 </html>

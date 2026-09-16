@@ -192,12 +192,21 @@ siblings until they get their own drawings.
   deliberate act that needs the reason written beside the number. The usual source of the
   overage is the same fact stated in three places, so cut the restatements first and let each
   claim live once.
-- **Bump the stylesheet version when you change `css/styles.css`.** Every page links it as
-  `css/styles.css?v=YYYYMMDD-N`. GitHub Pages serves the file with `max-age=14400`, so without
-  a new URL a returning visitor gets today's HTML against a stylesheet up to four hours old,
-  which looks exactly like the site is broken rather than cached, and a hard refresh does not
-  fix it because the cache is at the CDN edge, not in the browser. Changing the query string
-  is the only thing that reliably busts it. One scripted find-and-replace across every page.
+- **Bump the version when you change anything under `css/` or `js/`, and bump all of it
+  together.** Every page links its assets as `...?v=YYYYMMDD-N`, one stamp per deploy. GitHub
+  Pages serves them with `max-age=14400`, so without a new URL a returning visitor gets today's
+  HTML against files up to four hours old, which looks exactly like the site is broken rather
+  than cached, and a hard refresh does not fix it because the cache is at the CDN edge, not in
+  the browser. Changing the query string is the only thing that reliably busts it. One scripted
+  find-and-replace across every page, and `python3 scripts/check-asset-versions.py` after.
+  **Until 2026-09-16 this rule said "stylesheet" and meant it**, which is how a change can ship
+  half-deployed: Ember got four new moves and a backflip, `css/styles.css` got a new version,
+  `js/ember.js` did not, and a second device ran the new keyframes against the old script for
+  four hours. It hopped, which is what the old script knew how to do, and nothing about it
+  looked broken. **A half-deployed change is worse than an undeployed one**, because there is
+  no symptom to chase: the CSS is right there in the inspector. The check covers the third
+  place this hides too, a module inside `js/` importing `"./faces.js"` bare from a versioned
+  entry point, which pulls a stale module through a fresh one.
 - **Five parts of this site are generated, and each has a `--check` mode. Run them before you
   commit.** There is still no build step: these write into the repo, the result is committed,
   and the check is what stops the committed copy drifting from what it was made from.

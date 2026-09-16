@@ -2375,6 +2375,25 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Norton&rsquo;s mark on `/compare/` is the 512px app icon its Family Assistant page declares, resized to 96px and otherwise unmodified, kept as `assets/mark-norton.png` | Norton | `https://us.norton.com/products/family-assistant/apple-touch-icon-512.png` | 2026-09-16 |
 | Claude&rsquo;s mark beside Claude Cowork on `/compare/` is the drawing the homepage band already carries for Anthropic, from the app&rsquo;s brand table | Anthropic | `index.html` symbol `wwm-anthropic` | 2026-09-16 |
 | xAI&rsquo;s mark beside Grok Bot on `/compare/` is the drawing the homepage band already carries, from the app&rsquo;s brand table, filled black on the white mark | xAI | `index.html` symbol `wwm-xai` | 2026-09-16 |
+| Vellum's FAQ: "you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
+| Hermes' README: "Use any model you want", naming Nous Portal, OpenRouter, OpenAI and "your own endpoint" | Nous Research | `https://raw.githubusercontent.com/NousResearch/hermes-agent/main/README.md` | 2026-09-16 |
+| Hermes' security docs: "Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it", with `approvals.mode` of "smart, manual, off" | Nous Research | `https://hermes-agent.nousresearch.com/docs/user-guide/security` | 2026-09-16 |
+| OpenClaw's docs on tool and agent permissions: "Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval" | OpenClaw | `https://docs.openclaw.ai/gateway/security/tool-permissions` | 2026-09-16 |
+| OpenClaw's docs on exec approvals: "Commands run only when policy + allowlist + (optional) user approval all agree" | OpenClaw | `https://docs.openclaw.ai/tools/exec-approvals` | 2026-09-16 |
+| Grok Bots "finish jobs end to end, and only come back when something needs your approval", and "share a computer of their own in the cloud" (read in a browser; x.ai refuses automated requests) | xAI | `https://x.ai/news/introducing-grok-bot` | 2026-09-16 |
+| Instinct's privacy policy: the service is provided with "third-party hosting"; its features "can perform tasks or take actions independently on your behalf, based on the permissions you grant"; it uses "third-party AI model providers who help support the Services" | Instinct | `https://instinct.com/privacy` | 2026-09-16 |
+| Norton's FAQ: "Every send, payment and booking waits for your approval", and "The AI providers we use operate under enterprise contracts with zero data retention" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
+| Cowork's mode selector "offers Auto and Manual (default)"; Manual, "formerly 'Ask before acting'", means "Claude pauses and asks for approval for actions" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-09-16 |
+
+**Re-read 2026-09-16 for the compare chart, and the docs say what the landing pages do not.** Jett
+asked for the chart's "doesn't say" gaps to be filled rather than drawn, so each company's docs,
+FAQ and privacy pages were read. Hermes asks by default and can be set not to; OpenClaw acts on
+its own by default and can be set to ask; Instinct is hosted and acts independently within
+permissions you grant. Those three moved from "doesn't say" onto the chart on the rows above.
+Hermes' "you pick the AI company" point, retired that morning as unsourced, is sourced now from
+its README. Two gaps stayed gaps, and stay off the chart: nothing on wix.com or support.wix.com
+says where Symphony's agents run, and nothing on us.norton.com says where Family Assistant's
+work happens. Both pages say the assistant asks first, and the chart's strip says that.
 
 **Logos on `/compare/`, added 2026-09-16.** Each mark is the file the company&rsquo;s own site serves
 for itself, fetched that day and named in the rows above, and it is used only to identify the

@@ -615,6 +615,16 @@ message an agent or stopped from doing so. Each line carries a fingerprint of th
 it, so a line that is changed, reordered or deleted shows up as broken the next time Archie
 looks. The record stays on your computer, we never see it, and you can export the whole thing."
 
+**Approved wording for the anchor, added 2026-09-16** (the mechanism was already in the
+paragraph below; what is new is a sentence copy may use, because `trust/` and `trust/proof/`
+now draw it): "Archie also writes down where the record ended, in your keychain rather than in
+the record. So a record whose fingerprints have all been rewritten to cover a change still
+ends on a different number than the one Archie left off on, and Archie says so when it opens."
+Say it with the limit attached, which is the same limit as everything else in this section:
+somebody who rewrites the record and the keychain note together leaves nothing to check.
+`verify_anchored` + `AUDIT_ANCHOR_KEY` (`crates/archie-core/src/audit.rs`), run at startup
+(`src-tauri/src/lib.rs:332`).
+
 **Why it's true:** `crates/archie-core/src/audit.rs` is an append-only, hash-chained log. Each
 event's `hash` is the SHA-256 of its canonical bytes including the *previous* event's hash
 (`hash_event`, `audit.rs:44`), so `verify()` fails on any edited, reordered or deleted row
@@ -1179,6 +1189,65 @@ in the same breath rather than three screens later. It is also the honest form o
 comparison already in Archie's `docs/EXPECTATIONS.md` ask 11: the same shape, minus the two things
 that made that one dangerous.
 
+
+### ✅ This website, and what it asks your browser for (added 2026-09-16)
+
+**Why this is here at all.** Every other claim in this file is about the app. `trust/proof/`
+prints the website's own network behaviour out of the reader's browser, live, which makes the
+website a thing the site makes claims about. So the claims go in this file like any other, and
+they get a pointer like any other.
+
+**Approved wording:** "This site runs no analytics, no tag manager, no session recorder and no
+ad pixel. It never has. What it does ask your browser for, besides its own files, is the
+typeface from Google Fonts and Firebase's sign-in code, which the account menu in the top bar
+runs. Those see your address the way any host sees the address of whoever asks it for a file.
+The site is served by GitHub Pages, so GitHub sees the request for the page itself, for the
+same reason."
+
+**Why it's true:** no page carries an external `<script src>` at all, and the only
+cross-origin things any page pulls are the Google Fonts stylesheet and font files, the
+Firebase SDK modules from `www.gstatic.com` (imported by `js/account-nav.js`, `js/marketplace.js`,
+`js/phone.js`, `js/submit.js`), and `apis.google.com` on a sign-in press. The only outbound
+`fetch` to somewhere that is not Firebase or our own billing service is the contact form's
+`https://formspree.io/f/...` in `js/contact.js`. There is no `sendBeacon`, no tracking pixel and
+no `gtag` anywhere in the repo. The ceiling under all of it is the Content-Security-Policy that
+`scripts/gen-csp.py` writes into every page: `connect-src` is an allowlist of four origins, so a
+script that tried to send anything anywhere else would be stopped by the browser rather than by
+our intentions.
+
+**Boundaries — do not overclaim:**
+- ⛔ Never "we do not track you" as an unscoped sentence. Three third parties receive a request
+  and therefore an IP address, and one of them is Google twice. Name them, as the approved
+  wording does.
+- ⛔ Never say the site "makes no third-party requests". It makes four kinds, listed above.
+- ⚠️ The honest strong form is about **what we collect**, not about what nobody can see: we run
+  no measurement of any kind on this site, and the hosts that see a request see it because they
+  are serving a file.
+- ⚠️ If a font is ever self-hosted or an analytics tool is ever added, this section is wrong the
+  same day, and `trust/proof/` will show it before anyone edits this file: the request list there
+  is read from the browser's own record, not from a list we maintain. That is the point of
+  building it that way and it is also a standing commitment: do not replace it with a list.
+
+### ✅ The claims a reader can run in a browser: `trust/proof/` (added 2026-09-16)
+
+**What the page is.** Four claims from this file, running as instruments rather than sentences:
+the activity record's hash chain (real SHA-256 through WebCrypto, over the canonical bytes
+`AuditEvent::canonical_bytes` defines, with the `shasum` command that reproduces the number
+printed beside it), the phone mailbox's seal (the `seal`/`open` pair out of `js/phone.js`, which
+is matched to `crates/archie-core/src/phone.rs` by the `opens_an_envelope_sealed_by_the_browser`
+test vector), the page's own request list and CSP, and the pairing key in the URL fragment.
+
+**The rule that makes it worth having, and the one to enforce in review:** every verdict on that
+page is computed from the real result. Nothing is scripted, nothing is a recording, and no
+instrument has a branch that decides to succeed. An instrument that cannot fail is a picture of
+a check, and a picture of a check on a page called proof is worse than no page at all. If a
+future edit makes one of them unable to report failure, the page has to come down.
+
+**No new claims.** The page states no privacy claim that is not already in this file in approved
+wording. What it adds is the reader's ability to test four of them. It also states its own
+limits in the same pass: these show the mechanisms, not the app's behaviour on somebody's
+computer (the ten-minute network-monitor check remains the answer to that, and the page ends by
+sending the reader to it), and nobody outside the company has audited any of it.
 
 ## What We Hold — state the whole list, always
 

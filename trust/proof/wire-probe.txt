@@ -1,0 +1,9 @@
+This file exists so that a claim on /trust/proof/ can be tested instead of believed.
+
+The page asks your browser for it with a pairing key on the end of the address, after the
+"#", and then prints your browser's own record of the request it made. The key is not in
+that record, and it is not in the request line this file arrived on, because the part of a
+URL after the "#" is not sent to a server. That is why an Archie pairing link can carry a
+key at all.
+
+Nothing about you is written down by fetching this. It is a text file on a static site.

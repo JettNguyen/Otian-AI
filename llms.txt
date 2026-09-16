@@ -48,6 +48,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 ## Privacy, security and claims
 
 - [Trust](https://otianai.com/trust/): Every single thing Archie sends anywhere, who receives it, and what's in it, plus the parts that don't flatter us. Then: how to verify all of it yourself with a network monitor, in 10 minutes.
+- [Run the checks yourself](https://otianai.com/trust/proof/): Four of our privacy claims, running live in your browser: the activity record's real SHA-256 fingerprints, the sealed phone mailbox, this page's own requests, and the pairing key that a browser keeps out of the request.
 - [Trust: The Long Version](https://otianai.com/trust/details/): The full reasoning behind every claim on the Trust page: the limits of the approval gate, what happens to Archie if Otian disappears, and the 10-minute check you can run yourself.
 - [For an IT review: Archie](https://otianai.com/trust/it-review/): The page to send to whoever approves software where you work: what Archie installs, what it connects to, what it never does, and a review document you can attach to a ticket.
 - [Reporting a security problem](https://otianai.com/security/): Where to send a security problem you found in Archie, what we do with it, and how fast.

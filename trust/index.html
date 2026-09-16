@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260915-2" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260916-1" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -673,40 +673,50 @@
           <p>Archie writes down the things that decide what your agent can reach: a key saved or handed to an agent, a service connected or disconnected, someone allowed to message an agent or stopped from doing so. <strong>It is not a transcript.</strong> What your agent read in your mail, wrote in a reply, or said to you is not in there, for the same reason none of it is on our servers.</p>
 
           <h3>The record cannot be quietly rewritten.</h3>
-          <p>Each line carries a fingerprint taken over the line before it, so the lines hang together in a chain. Change one line and its own fingerprint stops matching, and so does every link below it. Archie checks the whole chain when it opens and tells you which way it came out, at the top of the list rather than in a footnote. Work the switch and watch it break.</p>
+          <p>Each line carries a fingerprint taken over the line before it, so the lines hang together in a chain. Change one line and its fingerprint stops matching. Rewrite the fingerprints underneath to cover that up and the record hangs together again, but it now ends on a different number than the one Archie wrote down the last time it checked, which it keeps in your keychain rather than in the record. It checks both when it opens and tells you which way it came out, at the top of the list rather than in a footnote. Work the switch and watch the numbers move.</p>
 
-          <!-- The record, drawn, with the app's own sentences for the lines (src/app/settings.tsx,
-               ACCESS_ACTIONS) and its own pass/fail banner above the list. The switch alters line 3,
-               which breaks line 3 and every link under it: that is the claim, and it is the one
-               thing that moves. A checkbox the CSS answers, no script, so the resting state is the
-               record intact and saying so. -->
-          <div class="rec">
-            <input class="rec-alter-input" type="checkbox" id="rec-alter" />
+          <!-- The record, with the app's own sentences for the lines (src/app/settings.tsx,
+               ACCESS_ACTIONS) and its own pass/fail banner above the list. The switch does what
+               somebody covering their tracks would do: it changes line 3 AND rewrites every
+               fingerprint under it, which leaves a record that hangs together and no longer ends
+               where the keychain says it ended. That last number is the claim, and it is the one
+               thing that moves.
+
+               The fingerprints are real SHA-256 over the same canonical bytes Archie hashes, and
+               both sets are written into this HTML, so a reader with no script gets true numbers
+               and not a picture of some. js/proof.js recomputes them live on top of that (it
+               drives the full instrument on trust/proof/ from the same code), and the checkbox
+               still answers to CSS alone, so nothing here needs the script to have run. -->
+          <div class="rec" data-chain>
+            <input class="rec-alter-input pf-cover" type="checkbox" id="rec-alter" data-chain-cover />
             <div class="rec-window" role="group" aria-label="Archie&rsquo;s activity record, and what happens to it when one line is altered">
               <div class="rec-bar" aria-hidden="true"><span></span><span></span><span></span><b>Activity &middot; Archie</b></div>
 
-              <p class="rec-verdict rec-ok" aria-live="polite">
+              <p class="rec-verdict rec-ok" data-chain-ok aria-live="polite">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/></svg>
                 <span>Nothing has been changed. Five lines, chain checked.</span>
               </p>
-              <p class="rec-verdict rec-bad" aria-live="polite">
+              <p class="rec-verdict rec-bad" data-chain-bad aria-live="polite">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5z"/><path d="M12 8v4M12 16h.01"/></svg>
-                <span>Line 3 no longer matches its fingerprint, and every line under it is broken too.</span>
+                <span data-chain-bad-text>This record hangs together, and it is not the record this computer ended on. The last fingerprint here is 372b&hellip;c7e8. Archie wrote down 6a5f&hellip;f1f2.</span>
               </p>
 
               <ol class="rec-rows">
-                <li class="rec-row"><i class="rec-link" aria-hidden="true"></i><span>A key was saved on this computer.</span><code class="rec-fp">7f2a&hellip;c104</code></li>
-                <li class="rec-row"><i class="rec-link" aria-hidden="true"></i><span>A Google account was connected.</span><code class="rec-fp">b9e1&hellip;40d7</code></li>
-                <li class="rec-row rec-row--altered rec-row--after"><i class="rec-link" aria-hidden="true"></i><span><span class="rec-was">Someone was approved to message an agent.</span><span class="rec-now">Someone was blocked from an agent.</span></span><code class="rec-fp">3c8d&hellip;91ab</code></li>
-                <li class="rec-row rec-row--after"><i class="rec-link" aria-hidden="true"></i><span>An outside service was disconnected: Todoist.</span><code class="rec-fp">d15e&hellip;6f22</code></li>
-                <li class="rec-row rec-row--after"><i class="rec-link" aria-hidden="true"></i><span>Someone&rsquo;s access to an agent was taken away.</span><code class="rec-fp">a604&hellip;be39</code></li>
+                <li class="rec-row" data-chain-row><i class="rec-link" aria-hidden="true"></i><span data-chain-say>A key was saved on this computer.</span><code class="rec-fp"><b class="rec-fp-was" data-chain-fp-was>25cf&hellip;f84a</b><b class="rec-fp-alt" data-chain-fp-now>25cf&hellip;f84a</b></code></li>
+                <li class="rec-row" data-chain-row><i class="rec-link" aria-hidden="true"></i><span data-chain-say>A Google account was connected.</span><code class="rec-fp"><b class="rec-fp-was" data-chain-fp-was>dad7&hellip;7f6c</b><b class="rec-fp-alt" data-chain-fp-now>dad7&hellip;7f6c</b></code></li>
+                <li class="rec-row rec-row--altered rec-row--after" data-chain-row data-chain-alter="access.blocked" data-chain-alter-path="action"><i class="rec-link" aria-hidden="true"></i><span><span class="rec-was" data-chain-say>Someone was approved to message an agent.</span><span class="rec-now">Someone was blocked from an agent.</span></span><code class="rec-fp"><b class="rec-fp-was" data-chain-fp-was>64b3&hellip;1f3b</b><b class="rec-fp-alt" data-chain-fp-now>7bda&hellip;2b7f</b></code></li>
+                <li class="rec-row rec-row--after" data-chain-row><i class="rec-link" aria-hidden="true"></i><span data-chain-say>An outside service was disconnected: Todoist.</span><code class="rec-fp"><b class="rec-fp-was" data-chain-fp-was>a394&hellip;487e</b><b class="rec-fp-alt" data-chain-fp-now>7f65&hellip;3784</b></code></li>
+                <li class="rec-row rec-row--after" data-chain-row><i class="rec-link" aria-hidden="true"></i><span data-chain-say>Someone&rsquo;s access to an agent was taken away.</span><code class="rec-fp"><b class="rec-fp-was" data-chain-fp-was>6a5f&hellip;f1f2</b><b class="rec-fp-alt" data-chain-fp-now>372b&hellip;c7e8</b></code></li>
               </ol>
 
               <div class="rec-foot">
-                <label class="rec-toggle" for="rec-alter"><span class="rec-toggle-track" aria-hidden="true"><span class="rec-toggle-knob"></span></span><span>Alter line 3 in the record</span></label>
+                <label class="rec-toggle" for="rec-alter"><span class="rec-toggle-track" aria-hidden="true"><span class="rec-toggle-knob"></span></span><span>Change line 3, then rewrite the fingerprints under it</span></label>
+                <p class="pf-anchor">Where this computer left off, kept in the keychain: <code data-chain-anchor>6a5f&hellip;f1f2</code> <span>Last fingerprint in the record: <code class="rec-tip" data-chain-tip>6a5f&hellip;f1f2</code></span></p>
               </div>
             </div>
           </div>
+
+          <p class="trust-table-note">Those fingerprints are real SHA-256 over the same bytes Archie hashes, computed in your browser rather than typed in by us. <a href="proof/">Retype any line yourself, beside the command that reproduces the numbers in your own terminal &rarr;</a></p>
 
           <p class="trust-table-note">Archie will hand you the whole record as a file, fingerprints included, and it refuses to write that file at all if the chain does not check out. A statement of &ldquo;here is what happened&rdquo; should not be producible from a record that has been tampered with.</p>
 
@@ -726,7 +736,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Don&rsquo;t trust us</span>
           <h2 id="verify" class="fade-up delay-1">Check for yourself. It takes 10 minutes.</h2>
-          <p>Everything above this line is a claim, and claims are cheap. Here is how to prove or disprove ours without taking our word for a single thing.</p>
+          <p>Everything above this line is a claim, and claims are cheap. Here is how to prove or disprove ours without taking our word for a single thing. Four of them you can test before you install anything, in this browser tab: <a href="proof/">run those four now &rarr;</a></p>
         </div>
 
         <div class="trust-steps fade-up delay-2">
@@ -964,6 +974,7 @@
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script src="../js/proof.js" defer></script>
   <script type="module" src="../js/account-nav.js"></script>
   <script src="../js/packet-map.js" defer></script>
 </body>

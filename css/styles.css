@@ -15370,3 +15370,378 @@ summary:active,
 }
 .card-aud--personal { background: var(--accent-subtle); color: var(--accent-ink); }
 .card-aud--team { background: var(--c-blue-subtle); color: var(--c-blue-ink); }
+
+/* ========================================
+   48. Proof: the instruments (trust/proof/, and the record window on trust/)
+
+   These are not drawings. Every number inside one is computed by the browser while the reader
+   watches, from what the reader typed, so the styling has one job the site's other figures do
+   not have: a value that changed has to be visibly the thing that changed. Hence the pairing
+   that repeats through this section, a stored value beside a recomputed one, and hence the
+   single piece of motion, which is the recomputed value arriving.
+
+   The window chrome is deliberately the same as .rec and .mon above it, because the reader
+   meets those first on trust/ and arrives here expecting the same object to behave the same
+   way. js/proof.js drives the contents; nothing here depends on it having run.
+   ======================================== */
+
+.pf { position: relative; margin: 22px 0 0; }
+.pf-cover {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.pf-window {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--lift-sm);
+  overflow: hidden;
+}
+.pf-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-soft);
+}
+.pf-bar span { width: 9px; height: 9px; border-radius: 50%; background: var(--line-muted); }
+.pf-bar b {
+  margin-left: 8px;
+  font-size: var(--fs-2xs);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* The verdict goes above what it is a verdict on, for the reason the app puts it there:
+   "nothing has been changed" is only worth reading from something that checked. */
+.pf-verdict {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 14px 2px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  line-height: 1.45;
+}
+.pf-verdict[hidden] { display: none; }
+.pf-verdict svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 1px; }
+.pf-verdict--ok { background: var(--c-green-subtle); color: var(--c-green-ink); }
+.pf-verdict--bad { background: var(--c-red-subtle); color: var(--c-red-ink); }
+
+.pf-rows { list-style: none; margin: 0; padding: 6px 0 2px; }
+.pf-row {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+  color: var(--text-primary);
+}
+/* The link to the line above: the dot, and the run of line into it. This is the chain, and
+   it is what goes when a line stops matching. */
+.pf-link {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c-green);
+  justify-self: center;
+  transition: background var(--transition);
+}
+.pf-link::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 9px;
+  width: 2px;
+  height: 18px;
+  transform: translateX(-50%);
+  background: var(--c-green);
+  opacity: 0.55;
+}
+.pf-row:first-child .pf-link::before { display: none; }
+.pf-row.is-broken .pf-link,
+.pf-row.is-rewritten .pf-link { background: var(--c-red); }
+.pf-row.is-broken .pf-link::before,
+.pf-row.is-rewritten .pf-link::before {
+  background: transparent;
+  border-left: 2px dashed var(--c-red);
+  opacity: 0.85;
+}
+
+.pf-say { min-width: 0; }
+/* The one piece of a line the reader may retype, drawn as what it is: a value out of the
+   record, sitting in the sentence rather than in a form somewhere else. */
+.pf-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 8px;
+  padding: 2px 4px 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-soft);
+  font-size: var(--fs-2xs);
+  color: var(--text-muted);
+  vertical-align: middle;
+}
+.pf-edit input,
+.pf-edit select {
+  min-width: 0;
+  max-width: 15ch;
+  padding: 2px 6px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--bg-card);
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text-primary);
+}
+.pf-edit select { max-width: 19ch; }
+.pf-edit input:focus-visible,
+.pf-edit select:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+
+.pf-fp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-2xs);
+  color: var(--text-muted);
+  text-align: right;
+}
+.pf-fp b { font-weight: 400; }
+.pf-fp-now { display: none; color: var(--c-red-ink); font-weight: 650; }
+.pf-row.is-broken .pf-fp-was,
+.pf-row.is-rewritten .pf-fp-was { text-decoration: line-through; opacity: 0.6; }
+.pf-row.is-broken .pf-fp-now,
+.pf-row.is-rewritten .pf-fp-now { display: block; }
+/* A button, because pressing it changes what the working underneath is about. It is styled as
+   the fingerprint itself: the thing you want the working for is the number you are looking at. */
+button.pf-fp {
+  border: 0;
+  padding: 2px 0 2px 6px;
+  background: none;
+  cursor: pointer;
+}
+button.pf-fp:hover .pf-fp-was { color: var(--text-primary); }
+button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; border-radius: 4px; }
+
+.pf-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  font-size: var(--fs-sm);
+}
+.pf-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-primary); }
+.pf-toggle-track {
+  position: relative;
+  flex: 0 0 36px;
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  background: var(--line-muted);
+  transition: background var(--transition);
+}
+.pf-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition);
+}
+.pf-cover:checked ~ .pf-window .pf-toggle-track { background: var(--accent); }
+.pf-cover:checked ~ .pf-window .pf-toggle-knob { transform: translateX(16px); }
+.pf-cover:focus-visible ~ .pf-window .pf-toggle { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 6px; }
+
+/* Where this computer left off, kept outside the record because that is where Archie keeps
+   it: in the keychain, which is the half a rewritten record cannot reach. */
+.pf-anchor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+}
+.pf-anchor code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color: var(--text-primary);
+}
+.pf-anchor code.is-off { color: var(--c-red-ink); font-weight: 650; }
+
+/* The working: the bytes that went into a hash, the command that repeats it anywhere, and the
+   answer. A number a reader can only get from us is not evidence, so this block is the point
+   of the instrument above it rather than an appendix to it. */
+.pf-out { margin-top: 14px; }
+.pf-out h4 {
+  margin: 0 0 6px;
+  font-size: var(--fs-2xs);
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.pf-code {
+  margin: 0 0 12px;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-2xs);
+  line-height: 1.6;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+}
+.pf-code--answer { color: var(--c-green-ink); font-weight: 650; }
+
+/* Two panes, because the claim is the difference between them: what we hold, beside what it
+   says. Never one pane with a caption, which is how a demonstration hides the half that is
+   unflattering. */
+.pf-panes { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+.pf-pane {
+  padding: 13px 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+.pf-pane h4 {
+  margin: 0 0 4px;
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  color: var(--text-primary);
+}
+.pf-pane p { margin: 0 0 8px; font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.5; }
+.pf-pane pre {
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-2xs);
+  line-height: 1.55;
+  color: var(--text-primary);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+.pf-field { display: block; margin: 16px 0 0; }
+.pf-field span { display: block; margin-bottom: 6px; font-size: var(--fs-sm); color: var(--text-primary); }
+.pf-field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--text-primary);
+}
+.pf-field input:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+.pf-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.pf-result {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--surface-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.pf-result--ok { background: var(--c-green-subtle); color: var(--c-green-ink); }
+.pf-result--bad { background: var(--c-red-subtle); color: var(--c-red-ink); }
+.pf-result--warn { background: var(--c-gold-subtle); color: var(--c-gold-ink); }
+
+/* The request list and the policy list. Same row shape: the machine's word on the left, ours
+   on the right, and a count that comes from the browser rather than from us. */
+.pf-net-row,
+.pf-csp-row {
+  display: grid;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--line-soft);
+  font-size: var(--fs-sm);
+}
+.pf-csp-row { grid-template-columns: minmax(0, 9rem) minmax(0, 1fr); }
+.pf-net-row code,
+.pf-csp-row code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  color: var(--text-primary);
+  word-break: break-all;
+}
+.pf-net-row span,
+.pf-csp-row span { color: var(--text-muted); line-height: 1.5; }
+.pf-csp-row span {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: var(--fs-xs);
+  word-break: break-all;
+}
+.pf-net-row em { font-style: normal; color: var(--text-muted); font-size: var(--fs-xs); white-space: nowrap; }
+.pf-net-row.is-unknown code { color: var(--c-red-ink); font-weight: 650; }
+.pf-list { list-style: none; margin: 10px 0 0; padding: 0; }
+.pf-count { margin: 0; font-weight: 650; color: var(--text-primary); }
+.pf-note { margin: 12px 0 0; font-size: var(--fs-xs); color: var(--text-muted); line-height: 1.6; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The one thing that moves is the number that changed, and it moves once. A record that
+     animates while it is intact would be a page selling the idea of tamper-evidence rather
+     than a page showing it. */
+  .pf-row.is-broken .pf-fp-now,
+  .pf-row.is-rewritten .pf-fp-now { animation: pfArrive 420ms ease-out both; }
+}
+@keyframes pfArrive {
+  from { opacity: 0; transform: translateY(-3px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (max-width: 760px) {
+  .pf-panes { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .pf-row { grid-template-columns: 14px minmax(0, 1fr); row-gap: 4px; }
+  .pf-fp { grid-column: 2; align-items: flex-start; text-align: left; }
+  button.pf-fp { padding-left: 0; }
+  .pf-edit { margin-left: 0; margin-top: 4px; }
+  .pf-net-row,
+  .pf-csp-row { grid-template-columns: minmax(0, 1fr); }
+  .pf-net-row em { grid-column: 1; }
+}
+
+/* The record window on trust/ holds both fingerprints for every line it can change: the one
+   stored with the line, and the one a rewrite would put there. Both are real, both are in the
+   HTML, and the switch swaps them with no script involved. js/proof.js writes the same two
+   values back into these elements when it recomputes them live, so the two paths cannot
+   disagree about what a line hashes to. */
+.rec-fp b { font-weight: 400; }
+.rec-fp-alt { display: none; }
+.rec-alter-input:checked ~ .rec-window .rec-row--after .rec-fp-was { display: none; }
+.rec-alter-input:checked ~ .rec-window .rec-row--after .rec-fp-alt { display: inline; }
+.rec-alter-input:checked ~ .rec-window .rec-tip { color: var(--c-red-ink); font-weight: 650; }
+.rec-foot .pf-anchor { flex: 1 1 22ch; justify-content: flex-end; text-align: right; }
+@media (max-width: 640px) {
+  .rec-foot .pf-anchor { justify-content: flex-start; text-align: left; }
+}

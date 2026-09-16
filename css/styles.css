@@ -2706,6 +2706,18 @@ summary,
      people picture exists only as a raster, so the choice here was their artwork or a drawing of
      ours, and the rule above settles that. At 18px it is a small blue word rather than a mark,
      which was looked at rather than assumed. */
+/* Added 2026-09-16, when TomTom joined the roster and Google Tasks was fixed:
+   - TomTom is the Simple Icons path (CC0, redrawn from the mark on brandguide.tomtom.com), in the
+     brand red Simple Icons records for it, #DF1B12. It was the only service in Archie's own
+     `connectors.rs` with no pill here, which came out when every connector in the app became a
+     filter in its store and this band turned out to be one name ahead of the app on two services
+     and one behind on this one. The app carries the same path.
+   - Google Tasks was drawing its tick BLACK. Its artwork is Google's own: a filled blue disc with
+     the tick laid over it as an open stroked path, and that path carried `stroke="#fff"` with no
+     `fill`, so SVG filled it black by default and the white stroke was sitting on a black wedge.
+     `.ww-mark` sets a color and no fill, so nothing downstream was ever going to cover it. One
+     attribute, `fill="none"`, and the artwork is what Google draws. Found by rendering the pill at
+     five times size, which is the only way this one is visible at all. */
 .ww-mark {
   flex: none;
   display: inline-flex;

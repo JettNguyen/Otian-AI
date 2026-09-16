@@ -7,10 +7,10 @@
    gate. All of that motion is CSS (see "The living agent" in css/styles.css); the drawing is
    complete with this file absent.
 
-   The one thing that needs a script is Ember. He stands at the gate, and when the held message
-   is let through he hops. The CSS animation cannot tell him, so this listens for the second
+   The one thing that needs a script is Ember, who stands at the gate: when the held message
+   is let through they hop. The CSS animation cannot tell them, so this listens for the second
    dot's loop and cues the hop at the moment the keyframes release it. Under reduced motion the
-   animation is off, so no event ever fires and he stands still, which is right.
+   animation is off, so no event ever fires and they stand still, which is right.
    ======================================== */
 
 (function () {
@@ -19,7 +19,7 @@
 
   /* When in the 7s loop the gate opens: la-gate holds the dot from 62% to 78% and lets it go
      at 78%. The hop lands on the release, not the arrival: the point of the drawing is that
-     nothing moves until you say so, and he celebrates the saying so. */
+     nothing moves until you say so, and they celebrate the saying so. */
   var LOOP_MS = 7000;
   var RELEASE_AT = 0.78;
 

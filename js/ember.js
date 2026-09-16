@@ -14,7 +14,8 @@
  *   <span data-ember-seed="hello"></span>           a look dealt from that word, stable forever
  *   <span data-ember data-ember-state="sleep"></span>       asleep rather than idle
  *   <span data-ember data-ember-play="oops"></span>         winces once on arrival, then settles
- *   <span data-ember data-ember-nudge="Poke Ember"></span>    invites the reader to press him, once
+ *   <span data-ember data-ember-nudge="Poke Ember"></span>    invites the reader to press them,
+ * once
  *
  * Size comes from CSS (set a width and height on the element). One requestAnimationFrame loop
  * drives every Ember on the page and stops itself when there are none.
@@ -104,6 +105,11 @@
     }
   };
   var EXTRA_IDS = ["none", "glasses", "freckles", "scarf"];
+  /* Where each extra is worn, which only matters once they can turn around. Glasses and freckles
+     are on their face and go wherever their face goes. A scarf is a band around them: it is there
+     from every side, so a turn leaves it alone and only a flip moves it, the same way it moves
+     their feet. Anything added here belongs in one of the two. */
+  var EXTRAS_ON_BODY = { scarf: true };
 
   var uidCounter = 0;
 
@@ -148,7 +154,7 @@
     /* The viewBox starts at y=6, not y=0: that is the whole of Ember's framing, and it is a window
        offset rather than moved coordinates so every part above stays positioned against the body.
        `.ember`'s transform-origin in styles.css is measured from this corner, so the two move
-       together (this y plus that origin's 170 is 176, the ground between his feet). */
+       together (this y plus that origin's 170 is 176, the ground between their feet). */
     return '<svg viewBox="0 6 200 200" aria-hidden="true" focusable="false">' +
       '<defs><linearGradient id="ember-' + uid + '" x1="0" y1="0.18" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
@@ -156,13 +162,23 @@
       '<stop offset="1" stop-color="' + hue.dark + '"/></linearGradient></defs>' +
       '<ellipse cx="100" cy="177" rx="37" ry="6" fill="rgba(68,64,59,.12)"/>' +
       '<g class="anim"><g class="lean">' +
+      /* FOUR PARTS, AND THE REASON THERE ARE FOUR.
+         EMBER IS A BALL, AND A BALL LOOKS THE SAME FROM EVERY SIDE, so the only parts that
+         know which way Ember is facing are the feet, the hat and the face. Grouped separately,
+         each one can be moved the way a point at its own place on a sphere actually moves when
+         the sphere turns, which is what makes a spin read as a turn rather than as a drawing
+         being flipped over. The maths and the numbers are in styles.css beside the keyframes.
+         The ball itself is in none of the groups, because a sphere turning is a sphere. */
+      '<g class="feet">' +
       '<ellipse cx="82" cy="169" rx="10" ry="7.5" fill="' + hue.dark + '"/>' +
       '<ellipse cx="118" cy="169" rx="10" ry="7.5" fill="' + hue.dark + '"/>' +
-      (TOPPERS[look.topper] || TOPPERS.peak)(hue.dark, hue.mid) +
+      '</g>' +
+      '<g class="top">' + (TOPPERS[look.topper] || TOPPERS.peak)(hue.dark, hue.mid) + '</g>' +
       '<circle cx="100" cy="108" r="60" fill="url(#ember-' + uid + ')"/>' +
+      '<g class="face">' +
       /* The face sits two units lower in the body than the app's ember-gen.ts draws it (eyes
-         105 not 103, blush 127, mouth 134): a pixel at the sizes the site shows him, asked for
-         on 2026-09-11 because he read as looking up out of his own circle. If the app takes
+         105 not 103, blush 127, mouth 134): a pixel at the sizes the site shows them, asked for
+         on 2026-09-11 because they read as looking up out of their own circle. If the app takes
          the same nudge, this note goes. */
       '<ellipse cx="65" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
       '<ellipse cx="135" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
@@ -171,7 +187,11 @@
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
       '<path class="mouth mouth-flat" d="M93 136 L107 136" stroke="#2A2521" stroke-width="3.2" ' +
       'fill="none" stroke-linecap="round" opacity="0"/>' +
-      (EXTRAS[look.extra] || EXTRAS.none)(hue.dark) +
+      (EXTRAS_ON_BODY[look.extra] ? "" : (EXTRAS[look.extra] || EXTRAS.none)(hue.dark)) +
+      '</g>' +
+      (EXTRAS_ON_BODY[look.extra]
+        ? '<g class="wrap">' + EXTRAS[look.extra](hue.dark) + "</g>"
+        : "") +
       "</g></g></svg>";
   }
 
@@ -190,19 +210,19 @@
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var STATE_CLASS = { idle: "", working: "st-working", done: "st-done", oops: "st-oops", sleep: "st-sleep" };
 
-  /* How often he does something unprompted, and how soon after arriving in view. The idle
+  /* How often they do something unprompted, and how soon after arriving in view. The idle
      gap was 14 to 30 seconds until 2026-09-15, which is long enough that a reader who scrolls
-     to him, watches, and scrolls on never sees him move at all. Jett asked for "every 10-ish
+     to them, watches, and scrolls on never sees them move at all. Jett asked for "every 10-ish
      seconds": 8 to 13 averages a shade under 11, and the spread is what keeps two Embers on
-     one page from falling into step. ARRIVE_MS is the hero's own entrance, unchanged, so his
+     one page from falling into step. ARRIVE_MS is the hero's own entrance, unchanged, so their
      landing and the section's do not fight. */
   var IDLE_MIN = 8000;
   var IDLE_SPREAD = 5000;
   var ARRIVE_MS = 520;
-  /* Scrolling him a pixel off the edge and back is not an arrival. */
+  /* Scrolling them a pixel off the edge and back is not an arrival. */
   var ARRIVE_COOLDOWN = 5000;
 
-  /* What he might do when pressed. Random rather than a cycle, because a cycle is learnable in
+  /* What they might do when pressed. Random rather than a cycle, because a cycle is learnable in
      three clicks and then it is a list rather than a reaction; and never the same one twice
      running, because a genuine random repeat reads as the click not having registered. Durations
      match the keyframes in styles.css, so the class comes off as the animation ends.
@@ -215,18 +235,46 @@
   var ACTS = [
     { cls: "st-act-hop", ms: 900, sparks: 4 },
     { cls: "st-act-wiggle", ms: 700, sparks: 0 },
-    { cls: "st-act-spin", ms: 850, sparks: 0 },
+    { cls: "st-act-spin", ms: 950, sparks: 0 },
     { cls: "st-act-squish", ms: 600, sparks: 0 },
-    { cls: "st-act-nod", ms: 750, sparks: 0 }
+    { cls: "st-act-nod", ms: 750, sparks: 0 },
+    { cls: "st-act-shimmy", ms: 900, sparks: 0 },
+    { cls: "st-act-groove", ms: 1100, sparks: 0 },
+    { cls: "st-act-peek", ms: 1600, sparks: 0, big: true },
+    { cls: "st-act-backflip", ms: 1250, sparks: 6, big: true }
   ];
+
+  /* THE TWO EMBER SAVES FOR YOU.
+
+     Every act above can fire unprompted, every eight to thirteen seconds, to a reader who did
+     nothing. That is fine for a wiggle. It is not fine for the two marked `big`: the backflip is
+     the largest thing they do, and the peek ends with them looking back over their shoulder at
+     whoever is watching, which is an answer to somebody rather than a thing to do while alone.
+     Spent on nobody they become scenery, and the press that earns them stops being worth making.
+
+     So the idle clock draws from the small ones and a press draws from all of them. The reward
+     for pressing them is a move you cannot get by waiting, which is the whole point of the
+     invitation on /archie/personal/ being there at all. */
+  function pickAct(rig, allowBig) {
+    var pool = [];
+    for (var i = 0; i < ACTS.length; i++) {
+      if (!allowBig && ACTS[i].big) continue;
+      /* Never the same one twice running: a genuine random repeat reads as the press not
+         having registered. */
+      if (ACTS[i].cls === rig.lastAct) continue;
+      pool.push(ACTS[i]);
+    }
+    if (!pool.length) return null;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
 
   /* THE INVITATION.
 
-     Ember reacts to a press and almost nobody finds out, because nothing on the page says he
-     will. He blinks, he follows the pointer and he does something unprompted every ten seconds
-     or so, and all of that reads as a nicely drawn picture until the reader presses him and gets
-     an answer back. So where he is the subject of a section rather than a face on something,
-     a small label says what to do.
+     Ember reacts to a press and almost nobody finds out, because nothing on the page says so.
+     Ember blinks, follows the pointer, and does something unprompted every ten seconds or so,
+     and all of that reads as a nicely drawn picture until the reader presses and gets an answer
+     back. So where Ember is the subject of a section rather than a face on something, a small
+     label says what to do.
 
      Three rules it follows, each one a way this could have gone wrong:
 
@@ -238,10 +286,10 @@
        It never appears under reduced motion. actOnce() is silent there, so the press does
        nothing, and an invitation the page will not answer is worse than no invitation.
 
-       It arrives after he does. Shown a beat past his own entrance, so the order reads as a
+       It arrives after they do. Shown a beat past their own entrance, so the order reads as a
        character turning up and then being introduced, rather than a tooltip landing on a picture.
 
-     It also makes him a real control where it appears: a press is an interaction, so it takes a
+     It also makes them a real control where it appears: a press is an interaction, so it takes a
      name and a tab stop and answers the space bar. Only the invited ones, though. The Embers
      inside figures are aria-hidden decoration, and turning every drawing on a page into a tab
      stop would charge the keyboard reader for a mascot. */
@@ -259,7 +307,7 @@
      Ember in the app. Red is absent on purpose: it means "something is wrong" everywhere else. */
   var SPARK_COLORS = ["#E08A5B", "#679B55", "#BB8C33", "#996FBE", "#3E9A92"];
 
-  /* Little things flying off him. Appended to the host and removed when they land, so nothing
+  /* Little things flying off them. Appended to the host and removed when they land, so nothing
      accumulates on a page somebody leaves open. Skipped entirely under reduced motion. */
   function sparks(host, count) {
     if (REDUCED || !count) return;
@@ -289,19 +337,19 @@
     }, act.ms);
   }
 
-  function actOnce(rig) {
+  function actOnce(rig, allowBig) {
     if (REDUCED || rig.acting || rig.state !== "idle") return;
-    var i = Math.floor(Math.random() * ACTS.length);
-    if (i === rig.lastAct) i = (i + 1 + Math.floor(Math.random() * (ACTS.length - 1))) % ACTS.length;
-    rig.lastAct = i;
-    runAct(rig, ACTS[i]);
+    var act = pickAct(rig, allowBig);
+    if (!act) return;
+    rig.lastAct = act.cls;
+    runAct(rig, act);
   }
 
   /* One press, wherever it came from. The act is the answer to it; clearing the labels is the
      answer to having been told. Every Ember on the page loses its label, not just this one:
-     having found out that he moves is a thing you now know about him, not about one drawing. */
+     having found out that they move is a thing you now know about them, not about one drawing. */
   function press(rig) {
-    actOnce(rig);
+    actOnce(rig, true);
     if (!rig.nudged) return;
     rememberPoke();
     for (var i = 0; i < rigs.length; i++) clearNudge(rigs[i]);
@@ -315,8 +363,8 @@
   }
 
   /* A named act on one Ember, for a page that has a moment to mark: the living-agent figure
-     has him hop when the message is let through the gate. Same table as the click, so a hop
-     asked for here is the same hop, sparks and all. Silent under reduced motion and while he is
+     has them hop when the message is let through the gate. Same table as the click, so a hop
+     asked for here is the same hop, sparks and all. Silent under reduced motion and while they are
      already doing something, like the click is. */
   function actNamed(host, name) {
     if (REDUCED) return;
@@ -324,7 +372,7 @@
       var rig = rigs[i];
       if (rig.host !== host || rig.acting || rig.state !== "idle") continue;
       for (var j = 0; j < ACTS.length; j++) {
-        if (ACTS[j].cls === "st-act-" + name) { runAct(rig, ACTS[j]); return; }
+        if (ACTS[j].cls === "st-act-" + name) { rig.lastAct = ACTS[j].cls; runAct(rig, ACTS[j]); return; }
       }
     }
   }
@@ -336,7 +384,8 @@
   }
 
   /* How fast the page is moving, so Ember can lean into a scroll and settle out of it. Read in
-     the loop rather than acted on here, so a fast flick is one number rather than a burst of work. */
+     the loop rather than acted on here, so a fast flick is one number rather than a burst of work.
+     */
   function onScroll() {
     var y = window.scrollY || window.pageYOffset || 0;
     scrollVel = y - lastScrollY;
@@ -400,8 +449,8 @@
       return;
     }
     /* Arriving in view is the moment worth reacting to, and it is the one the old code threw
-       away: the flourish clock ran while he was off-screen, so by the time a reader reached him
-       it was already overdue, the `seen` guard swallowed that one firing, and he then stood
+       away: the flourish clock ran while they were off-screen, so by the time a reader reached them
+       it was already overdue, the `seen` guard swallowed that one firing, and they then stood
        still for another 14 to 30 seconds. Now the arrival schedules the act itself. */
     if (!rig.visible) {
       rig.visible = true;
@@ -463,17 +512,17 @@
     rig.lid += (lidTarget - rig.lid) * (1 - Math.exp(-dt * 14));
     var open = Math.max(0.06, rig.lid * blink);
 
-    /* The lean is the gaze plus the page's own movement, so a scroll tips him and settles him
-       rather than leaving him rigid while everything around him travels. Capped, or a trackpad
-       flick spins him. */
+    /* The lean is the gaze plus the page's own movement, so a scroll tips them and settles them
+       rather than leaving them rigid while everything around them travels. Capped, or a trackpad
+       flick spins them. */
     var tilt = (dx / len) * reach * 3 + Math.max(-7, Math.min(7, scrollVel * 0.22));
     if (rig.lean) rig.lean.style.transform = "rotate(" + tilt.toFixed(2) + "deg)";
 
-    /* Every so often, unprompted, he does something. Only while idle and only when the reader can
-       see him, so nothing plays to an empty screen or interrupts a state that means something. */
+    /* Every so often, unprompted, they do something. Only while idle and only when the reader can
+       see them, so nothing plays to an empty screen or interrupts a state that means something. */
     if (!REDUCED && rig.state === "idle" && now > rig.flourish) {
       rig.flourish = now + IDLE_MIN + Math.random() * IDLE_SPREAD;
-      actOnce(rig);
+      actOnce(rig, false);
     }
     for (var i = 0; i < rig.eyes.length; i++) {
       var e = rig.eyes[i];
@@ -503,7 +552,7 @@
       visible: false,
       lastActAt: -1e9,
       acting: false,
-      lastAct: -1,
+      lastAct: "",
       nudge: null, nudgeAt: 0, nudged: false,
       rect: null, rectAt: -1e9
     };
@@ -526,21 +575,21 @@
       setState(rig, opts.state || "idle");
       /* Arriving. A character who is simply present when the page paints reads as an image of a
          character; one who lands reads as having turned up. This used to be a timer set at mount,
-         which meant an Ember below the fold did his one entrance 520ms in, to nobody, and was
+         which meant an Ember below the fold did their one entrance 520ms in, to nobody, and was
          inert by the time anyone scrolled down. The arrival is handled in update() now, off
-         actually being on screen, so it works the same whether he is in the hero or 1,400 lines
+         actually being on screen, so it works the same whether they are in the hero or 1,400 lines
          down the homepage. */
     }
     start();
 
-    /* Clicking him is the one interaction people try, so it answers, and answers differently
+    /* Clicking them is the one interaction people try, so it answers, and answers differently
        each time. Hovering is answered by the squirm in styles.css, which needs a class rather than
        `:hover` so it can be kept off under reduced motion in one place.
 
        No sparks on hover, and there were: a burst every 420ms for as long as the pointer sat on
-       him, which on a page you read with the cursor parked anywhere near him is a permanent
-       fountain. Being tickled shows in his face and his body, which is where a person would look
-       for it; the sparks were the page shouting over both of them. */
+       them, which on a page you read with the cursor parked anywhere near them is a permanent
+       fountain. Being tickled shows in the face and the body, which is where a person would
+       look for it; the sparks were the page shouting over both of them. */
     host.addEventListener("click", function () { press(rig); });
     host.addEventListener("pointerenter", function () { host.classList.add("is-hovered"); });
     host.addEventListener("pointerleave", function () { host.classList.remove("is-hovered"); });
@@ -555,8 +604,8 @@
     };
   }
 
-  /* The label, and the control it turns him into. The text is the page's, because what to call
-     a press belongs with the copy around him rather than in here. */
+  /* The label, and the control it turns them into. The text is the page's, because what to call
+     a press belongs with the copy around them rather than in here. */
   function addNudge(rig, text) {
     if (REDUCED || pokedBefore()) return;
     rig.nudged = true;
@@ -615,7 +664,7 @@
   };
 
   /* The one page with a form worth reacting to. Taking an option is progress and gets the hop; a
-     validation message appearing is the form saying no, and he winces with it rather than leaving
+     validation message appearing is the form saying no, and they wince with it rather than leaving
      the red text to carry the whole moment. Bound generically (any radio, any `.form-error-msg`
      becoming visible) so the questionnaire can grow steps without this needing to know. */
   function wireForm() {

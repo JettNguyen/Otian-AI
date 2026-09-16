@@ -12525,23 +12525,25 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* Ember in the homepage hero, above the label, at a size that reads as a character rather than
-   as an avatar. The bottom margin is the room the bubble stands in: written in whether the
-   bubble is there or not, because js/ember.js adds it a second after the page has painted and a
-   headline that drops down the screen while somebody is reading it is worse than a little air.
+   as an avatar. The bottom margin is negative because the drawing has a floor built into it:
+   the viewBox runs 23 units past the bottom of the shadow, which is 11px of empty picture at
+   96 and 8px at 72. Left alone that reads as Ember hovering over the label rather than standing
+   on it, so the margin takes the picture's own footer back and the two sit one on top of the
+   other. Nothing else has to move for it: the bubble is beside Ember here, not under (below).
 
    First on the hero's own ladder (the staggered fade-ups above), so the order reads as somebody
-   turning up and then the page introducing itself. Centred with the hero under 900px and
+   turning up and then the page introducing itself. Centered with the hero under 900px and
    left-aligned with it above, which is what the margin shorthand is doing twice. */
 .hm-hero-ember {
   width: 72px;
   height: 72px;
   display: block;
-  margin: 0 auto 38px;
+  margin: 0 auto -8px;
   cursor: pointer;
   animation: hm-fade-up-in 0.6s ease 0s backwards;
 }
 @media (min-width: 900px) {
-  .hm-hero-ember { width: 96px; height: 96px; margin: 0 0 44px; }
+  .hm-hero-ember { width: 96px; height: 96px; margin: 0 0 -10px; }
 }
 
 /* Ember standing over a page hero, where the wordmark used to. */
@@ -12630,6 +12632,17 @@ html[data-theme="dark"] .booking-container iframe {
 @media (max-width: 640px) {
   .ember-nudge { left: 46%; padding: 5px 11px; font-size: var(--fs-2xs); }
 }
+/* In the homepage hero the bubble stands beside Ember rather than under. Under is right where
+   Ember is the subject of a section and has room below; here the room below is the headline, and
+   Ember is meant to be standing on the label rather than holding a gap open above it. The
+   squared corner still points back at the speaker, from the left now instead of the top. */
+.hm-hero-ember .ember-nudge {
+  top: 14%;
+  left: calc(100% + 8px);
+  transform: translateX(-5px) scale(0.97);
+}
+.hm-hero-ember .ember-nudge.is-on { transform: none; }
+
 .ember-pressable:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 6px; border-radius: 999px; }
 
 /* ========================================

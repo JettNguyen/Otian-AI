@@ -2437,6 +2437,73 @@ app&rsquo;s brand table already held. These rows re-read on the same 90-day cade
 Drawing a company&rsquo;s logo from memory is both a trust failure and a legal one, which is why the
 chart carried initials until these were sourced.
 
+⚠️ **What every one of these companies publishes about their own marks, read 2026-09-16, and it
+does not say yes.** Jett asked whether using the names and the logos is legal, so their brand
+pages, trademark guidelines and terms were read the same way their product pages are, and the two
+halves of the question come out differently.
+
+**The names are settled, and three sources say so.** The FTC's comparative-advertising policy
+(16 CFR 14.15(b)) "encourages the naming of, or reference to competitiors, but requires clarity,
+and, if necessary, disclosure to avoid deception of the consumer", and its footnote defines this
+kind of advertising as one that "identifies the alternative brand by name, illustration or other
+distinctive information". The Lanham Act's dilution exclusions, 15 U.S.C. 1125(c)(3)(A), carve out
+"any fair use, including a nominative or descriptive fair use ... including use in connection
+with ... advertising or promotion that permits consumers to compare goods or services". And
+*New Kids on the Block v. News America Publishing*, 971 F.2d 302, 308 (9th Cir. 1992) sets the
+three-part test a comparison has to meet: the product must not be "readily identifiable without
+use of the trademark", "only so much of the mark or marks may be used as is reasonably necessary
+to identify the product or service", and the user "must do nothing that would, in conjunction with
+the mark, suggest sponsorship or endorsement by the trademark holder". Two of the companies say it
+themselves: xAI's brand guidelines list "Use our Marks only to accurately refer to us or our
+services" as a **Do**, and Gen Digital's say "you generally may use NortonLifeLock trademarks to
+refer to NortonLifeLock's products or services in advertising, promotional, and sales materials".
+
+**The logos are the other half, and this is where the same authorities stop.** The second part of
+the *New Kids* test is the one a logo fails, and the court gave the example in footnote 7 at 308:
+"a soft drink competitor would be entitled to compare its product to Coca-Cola or Coke, but would
+not be entitled to use Coca-Cola's distinctive lettering." *Toyota v. Tabari*, 610 F.3d 1171, 1181
+(9th Cir. 2010) applied it: "use of the stylized Lexus mark and 'Lexus L' logo was more use of the
+mark than necessary ... The Tabaris could adequately communicate their message without using the
+visual trappings of the Lexus brand." *Playboy v. Welles*, 279 F.3d 796, 804 (9th Cir. 2002) held
+the same way, that plain textual references were nominative use and "the repeated, stylized use of
+this abbreviation fails the nominative use test".
+
+**And seven of the nine ask for written permission we do not have.** In their own words:
+
+| Company | What their own page says | Where |
+| --- | --- | --- |
+| Meta | "All usage of the Meta logo requires approval." | `meta.com/brand/resources/meta/our-trademarks/` |
+| Anthropic | "You may only use our trademarks as specifically permitted by us and only in materials we approve beforehand." | `anthropic.com/legal/trademark-guidelines` |
+| xAI | "We may grant others the right to use our Marks, but you are not permitted to." | `x.ai/legal/brand-guidelines` |
+| Gen Digital (Norton) | "You may not use any Gen logos unless you have an agreement with or express written consent from Gen authorizing such use." | `gendigital.com/us/en/legal/trademark-policies/` |
+| Nous Research (Hermes) | "Any commercial or promotional distribution, publishing or exploitation of the Nous Research Materials is strictly prohibited unless you have received the express prior written permission from Nous Research" | `portal.nousresearch.com/terms` |
+| Wix | "Don't use the Wix Studio company name, logo or identity in your promotional campaigns" | `wix.com/studio/about/brand-guidelines` |
+| Instinct | Prohibits third parties who "use, reproduce or remove any ... logo ... displayed on or through the Services" | `instinct.com/terms` |
+| Vellum | No trademark or brand policy published. Its terms assert ownership only. | `vellum.ai/docs/vellum-terms-of-use` |
+| OpenClaw | No trademark or brand policy published. MIT covers the code and grants no mark rights. | `github.com/openclaw/openclaw/blob/main/LICENSE` |
+
+None of the nine publishes anything at all about comparison charts. Silence is not permission, and
+an MIT licence on a codebase is not a licence to its logo. Permission routes exist and are cheap to
+ask: Meta's brand request form, `marketing@anthropic.com`, `legal@x.ai`, `trademarks@Gen.com`,
+`studiobrandassets@wix.com`, `press@openclaw.org`, `comms@instinct.com`, `support@vellum.ai`,
+`support@nousresearch.com`.
+
+**The rule this sets, and it is the same rule as the rest of this file.** A mark stays on a page of
+ours only while we can point at the thing that permits it. Today we can point at the name and not
+at the logo, so **a competitor's name ships in plain type and a competitor's logo ships only with
+that company's permission in hand, recorded as a row here with the date.** The sourcing rule in the
+rows above is necessary and was never sufficient: fetching a logo from the company's own server
+proves it is their real mark, not that we may publish it. That distinction cost nothing to learn
+and would have cost a lot to learn later.
+
+⏳ **Open, 2026-09-16: the nine logos are live on `/compare/` and the permission is not in hand.**
+Recorded here the same way this file records a live claim it has not settled yet, so nobody reads
+the rule above and assumes the page already follows it. The names are fine and stay either way.
+The decision is Jett's, because it is a judgement about risk on his own company's page and not a
+question of fact: ship names only, ask the nine for permission and ship names meanwhile, or keep
+the marks knowing the above. Until it is settled, **do not put a competitor's logo on any other
+page of this site**, and do not treat the sourced rows above as clearance.
+
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
 two of them were live on `compare/cloud-agents/`:
 

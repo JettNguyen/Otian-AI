@@ -286,6 +286,15 @@ siblings until they get their own drawings.
   depths shrank with the perspective until they could not be read and a flat list read as a page
   (Jett, 2026-09-16). The phone has a stacked rim behind its glass (`.dp-edge`), and the message
   ball sits a few pixels back and goes see-through under a station, both from the same review.
+  **Act 6 is drawn, not listed, and that is a 2026-09-17 change.** Wide, the five setup steps
+  each draw one piece of a single line drawing, and what the five of them finish is the phone,
+  the computer and the AI company the rest of the day ran on, so the act ends on the thing it
+  ran on; one card at a time captions the piece being drawn, and Ember walks around it. Every
+  shape carries `pathLength="1"`, so one number per group between 0 and 1 is the whole animation
+  and `js/home.js` measures no path. They stood in a row until then, all five of them there in
+  the act's first frame, so a viewport of scroll moved nothing but which border was lit (Jett:
+  it "looks boring to scroll through"). Narrow keeps the Cover Flow gallery, and the build is
+  not drawn.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

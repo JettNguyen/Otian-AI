@@ -16214,11 +16214,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    switch to light ink at the halfway point. RESTYLE.md's band rule allows exactly this:
    a section whose visuals need an exact ground paints it explicitly. */
 
-/* One act is 100vh of scrolling and the hero is 0.25 of one, and the camera already moves through
-   the hero (PRE in js/home.js), so the first pixel of scroll moves something; LEN in js/home.js is
-   the same list and must agree. The extra 100vh is the stage's own height, which the sticky needs
-   to unpin at the end. */
-.day-story { position: relative; height: calc(6.25 * 100vh + 100vh); }
+/* One act is 100vh of scrolling, the hero is 0.25 of one, and the camera already moves through the
+   hero (PRE in js/home.js), so the first pixel of scroll moves something. Setup is 2, because it is
+   the one act with six things in it. LEN in js/home.js is the same list and must agree, and the sum
+   here is that list's. The extra 100vh is the stage's own height, which the sticky needs to unpin
+   at the end. */
+.day-story { position: relative; height: calc(7.25 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   --day-night-ground: #14120F;
@@ -16661,6 +16662,49 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-dot.is-held::after { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ball) 28%, transparent); }
 .day-fmark { position: absolute; left: var(--fx); top: var(--fy); }
 
+/* ---- the setup build: five steps, and each one draws its own piece of one picture (wide) ---- */
+/* The steps used to stand in a row, all five of them there in the act's first frame, so a whole
+   viewport of scroll moved nothing but which border was lit (Jett, 2026-09-17: it "looks boring to
+   scroll through"). Each step now draws a piece of one drawing, and what the five of them finish is
+   the phone, the computer and the AI company the rest of the day ran on: the story ends on the
+   thing it ran on.
+
+   THE WHOLE ANIMATION IS ONE NUMBER PER GROUP, AND NOTHING IS MEASURED. Every shape carries
+   pathLength="1", which tells the browser to call its own length 1 whatever it really measures, so
+   `stroke-dasharray: 1` is one dash exactly as long as the path and the offset is how much of it
+   is still to come. Both properties inherit, so they sit on the group and every shape under it
+   follows, and js/home.js hands each group a 0-to-1 draw fraction off the scroll. One stroke is
+   moving in every frame of the act, which is the part a row of five lit borders could not do. */
+.day-build {
+  position: absolute; left: var(--fx); top: var(--fy); width: 400px; height: 200px; overflow: visible;
+  fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  opacity: var(--fo); transform-origin: 50% 100%;
+  transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg);
+}
+.day-build > g { stroke-dasharray: 1; }
+.day-build .p0 { stroke-dashoffset: calc(1 - var(--d0, 0)); }
+.day-build .p1 { stroke-dashoffset: calc(1 - var(--d1, 0)); }
+.day-build .p2 { stroke-dashoffset: calc(1 - var(--d2, 0)); }
+.day-build .p3 { stroke-dashoffset: calc(1 - var(--d3, 0)); }
+.day-build .p4 { stroke-dashoffset: calc(1 - var(--d4, 0)); }
+
+/* Wide only, and written as the complement of the narrow block rather than as a min-width, so that
+   at a fractional viewport width the two can never both miss. The five cards stand at one floor
+   point in front of the build and only the step being drawn is up: five cards standing at once say
+   the steps happen together, and the build says they happen in order. */
+@media not all and (max-width: 970px) {
+  #dayFloorSetup .day-st.step { width: 400px; padding: 13px 16px 13px 46px; opacity: 0; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg) translateY(12px); }
+  #dayFloorSetup .day-st.step.is-cur { opacity: var(--fo); transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg) translateY(0); }
+  #dayFloorSetup .day-st.step b { font-size: var(--fs-base); }
+  #dayFloorSetup .day-st.step i { font-size: var(--fs-xs); }
+  #dayFloorSetup .day-st .num { top: 50%; left: 14px; margin-top: -13px; width: 26px; height: 26px; font-size: var(--fs-2xs); }
+}
+/* The rise is the card arriving, so it goes when motion is not wanted; the draw is the scroll's
+   own and stays, the way the rest of the story does. */
+@media not all and (max-width: 970px) and (prefers-reduced-motion: no-preference) {
+  #dayFloorSetup .day-st.step { transition: opacity .35s ease, transform .35s cubic-bezier(.2, .8, .3, 1); }
+}
+
 /* ---- Ember, the one constant: an element js/home.js walks between marks, inside the stage ---- */
 /* Absolute, not fixed. A fixed Ember chasing marks on a sticky stage was measured a frame behind the
    compositor's scroll and stuttered; inside the stage it rides the stage's own movement and only its
@@ -16785,7 +16829,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      "2x larger"), so the neighbors show past it only where the stage is wider than the box,
      which on a phone held upright it is. */
   #dayFloorSetup .day-plane { transform: none; }
-  #dayFloorSetup .day-grid, #dayFloorSetup .day-paths { display: none; }
+  #dayFloorSetup .day-grid, #dayFloorSetup .day-build { display: none; }
   #dayFloorSetup .day-st.step { left: 50%; top: 50%; width: 380px; padding: 16px 18px 16px 58px; line-height: 1.3; transform: translate(-50%, -50%) translate3d(var(--gx, 0px), var(--gy, 0px), var(--gz, 0px)) rotateY(var(--gr, 0deg)) scale(var(--gs, 1)); transform-origin: 50% 50%; opacity: calc(var(--fo) * var(--dim, 1)); }
   #dayFloorSetup .day-st.step b { font-size: var(--fs-2xl); }
   #dayFloorSetup .day-st.step i { font-size: var(--fs-lg); margin-top: 6px; }

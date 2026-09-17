@@ -147,8 +147,10 @@
              arithmetic. Wide, the box may spill 100px past its column; narrow, it takes the
              stage's full width.
        LEN   How much scroll each act gets, in acts: the hero is a short one, so the first thing
-             moves after a push rather than after a full screen of nothing. The stylesheet's
-             .day-story height is the same sum and must agree.
+             moves after a push rather than after a full screen of nothing, and setup is a long
+             one, because six things happen in it and one screen of scroll gave each of them
+             about ninety pixels (Jett, 2026-09-17: "too small between the steps"). The
+             stylesheet's .day-story height is the same sum and must agree.
        BEATS Any element with class="day-beat" and data-act / data-at (a fraction of the act's
              play phase) lights when the scroll passes it and goes dark when the scroll comes
              back. A data-until makes it a window, which is how the typing dots go away.
@@ -188,7 +190,7 @@
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
     var N = 7, SETTLE = 0.3;
-    var LEN = [0.25, 1, 1, 1, 1, 1, 1], CUM = [0], TOT = 0;
+    var LEN = [0.25, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
     /* The hero starts moving on the first pixel of scroll: through its own act the camera goes
        this far toward the calendar pose, and the calendar act's settle finishes the trip. */
     var PRE = 0.5;
@@ -343,6 +345,30 @@
       });
     }
 
+    /* The setup build (wide): how much of each piece is drawn, as five numbers between 0 and 1.
+       bp is the act's own run in pieces, so piece j draws while bp crosses j to j + 1 and exactly
+       one stroke is moving at any point of the act. The shapes carry pathLength="1" (index.html),
+       so nothing here has to measure a path: see .day-build in styles.css. -1 hands the drawing
+       back to the stylesheet, which leaves it undrawn.
+
+       DRAW is the front of a step that the stroke takes; the rest of the step is the finished
+       piece standing still, which is when its card is read. A piece that drew across the whole
+       step never stopped moving, and a drawing nobody is given a moment to look at is the same
+       problem as a row of cards nobody is given a reason to scroll through. */
+    var DRAW = 0.6;
+    var buildEl = $('.day-build'), buildOn = false;
+    function build(bp) {
+      var j;
+      if (!buildEl) return;
+      if (bp < 0) {
+        if (!buildOn) return;
+        for (j = 0; j < 5; j++) buildEl.style.removeProperty('--d' + j);
+        buildOn = false; return;
+      }
+      buildOn = true;
+      for (j = 0; j < 5; j++) buildEl.style.setProperty('--d' + j, clamp((bp - j) / DRAW, 0, 1).toFixed(3));
+    }
+
     /* The four-rows thread moves like a thread. A bubble that lands is kept out of the layout
        until its beat (styles.css, .dp-scr--grow), so the bubbles above it jump up by its height
        the moment it appears; this puts the screen back where it stood and lets it slide (the
@@ -426,17 +452,26 @@
         dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);
       }
       if (i === 6) {
-        /* Five steps over the act, the last held: f runs 0 to 4. Narrow, the gallery slides
-           between cards over the middle of each step (fs), so a card sits still for reading
-           either side of the slide, and the current card is the one nearest the middle. */
+        /* Five steps over the act, the last held. Narrow, the gallery slides between cards over
+           the middle of each step (fs), so a card sits still for reading either side of the
+           slide, and the current card is the one nearest the middle. Wide, the build is the
+           clock: piece j draws while bp crosses j to j+1, so one stroke is moving at every
+           point of the act, a card is up for exactly as long as the piece it captions takes to
+           draw, and the sixth of the act left at the end holds the finished picture, which is
+           the thing the whole act was drawing toward. */
         var f = Math.min(4, tp * 5.4), kf = Math.floor(f), fs = kf + smooth((f - kf - 0.3) / 0.4);
-        var k = narrow ? Math.round(fs) : kf;
+        var bp = Math.min(5, tp * 6);
+        var k = narrow ? Math.round(fs) : Math.min(4, Math.floor(bp));
         mark = (narrow ? 'm-g' : 'm-s') + k;
-        steps.forEach(function (s, j) { s.classList.toggle('is-lit', j <= k); });
+        steps.forEach(function (s, j) {
+          s.classList.toggle('is-lit', j <= k);
+          s.classList.toggle('is-cur', j === k);
+        });
         if (mins) mins.textContent = MINUTES[k];
         if (pie) pie.style.setProperty('--pie', tp.toFixed(3));
         gallery(narrow ? fs : -1);
-      } else gallery(-1);
+        build(narrow ? -1 : bp);
+      } else { gallery(-1); build(-1); }
       if (r.bottom < vh * 0.55) mark = 'm-cta';
       var m = marks[mark];
       if (m) {

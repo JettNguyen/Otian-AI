@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260917-8" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260917-9" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -567,22 +567,60 @@
               </div>
             </div>
 
-            <!-- THE SETUP PATH. Five stations, and Ember hops one to the next as the scroll passes
-                 each. The minutes are in the caption, where the words are. -->
+            <!-- THE SETUP BUILD. Wide, the five steps do not stand in a row: each one draws its own
+                 piece of a single picture, and what they finish is the phone, the computer and the
+                 AI company the rest of the day ran on, so the story closes on the thing it ran on.
+                 One card at a time captions the piece being drawn and Ember walks around it. Narrow,
+                 the same five cards are the Cover Flow gallery and the build is not drawn. The
+                 minutes are in the caption, where the words are. -->
             <div class="day-layer day-floor" id="dayFloorSetup" aria-hidden="true">
               <div class="day-plane">
                 <div class="day-grid"></div>
-                <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true"><path class="dashed wide" d="M60 330 H660"/></svg>
-                <div class="day-st step" style="--fx:80px;--fy:262px"><span class="num">1</span><i class="day-mark" data-mark="m-g0" data-size="66"></i><b>Pick a computer your agent can live on</b><i>One you can leave on. You, once.</i></div>
-                <div class="day-st step" style="--fx:220px;--fy:262px"><span class="num">2</span><i class="day-mark" data-mark="m-g1" data-size="66"></i><b>Install the Archie desktop app</b><i>One download, a plan. You, once.</i></div>
-                <div class="day-st step" style="--fx:360px;--fy:262px"><span class="num">3</span><i class="day-mark" data-mark="m-g2" data-size="66"></i><b>Choose how to fund the AI</b><i>Free credits to start, then AI included or your own key. You, once.</i></div>
-                <div class="day-st step" style="--fx:500px;--fy:262px"><span class="num">4</span><i class="day-mark" data-mark="m-g3" data-size="66"></i><b>Meet your agent</b><i>Already there, with a name, a face and its first add-ons. Talk, and it shapes to how you like things. Archie, then you.</i></div>
-                <div class="day-st step" style="--fx:640px;--fy:262px"><span class="num">5</span><i class="day-mark" data-mark="m-g4" data-size="66"></i><b>Message your agent from your phone</b><i>A claim code. Optional. You, once.</i></div>
-                <i class="day-mark day-fmark" data-mark="m-s0" data-size="66" style="--fx:80px;--fy:330px"></i>
-                <i class="day-mark day-fmark" data-mark="m-s1" data-size="66" style="--fx:220px;--fy:330px"></i>
-                <i class="day-mark day-fmark" data-mark="m-s2" data-size="66" style="--fx:360px;--fy:330px"></i>
-                <i class="day-mark day-fmark" data-mark="m-s3" data-size="66" style="--fx:500px;--fy:330px"></i>
-                <i class="day-mark day-fmark" data-mark="m-s4" data-size="66" style="--fx:640px;--fy:330px"></i>
+                <!-- Every shape carries pathLength="1", so one 0-to-1 number per group is the whole
+                     animation and js/home.js needs to measure nothing: see .day-build in the css.
+                     Paths and not rects or circles, because pathLength on a basic shape is younger
+                     than the rest of this and a rect that ignores it draws all at once. -->
+                <svg class="day-build" viewBox="0 0 400 200" style="--fx:360px;--fy:195px" aria-hidden="true">
+                  <g class="p0">
+                    <path d="M121 44h158a9 9 0 0 1 9 9v96a9 9 0 0 1-9 9H121a9 9 0 0 1-9-9V53a9 9 0 0 1 9-9z" pathLength="1"/>
+                    <path d="M200 158v20" pathLength="1"/>
+                    <path d="M164 180h72" pathLength="1"/>
+                  </g>
+                  <g class="p1">
+                    <path d="M134 60h132a6 6 0 0 1 6 6v70a6 6 0 0 1-6 6H134a6 6 0 0 1-6-6V66a6 6 0 0 1 6-6z" pathLength="1"/>
+                    <path d="M128 78h144" pathLength="1"/>
+                    <path d="M142 94h72" pathLength="1"/>
+                  </g>
+                  <g class="p2">
+                    <path d="M288 72c20-6 32-14 38-30" pathLength="1"/>
+                    <g transform="translate(322 0) scale(2)" stroke-width="1">
+                      <path d="M5 21V7.5L12 4l7 3.5V21" pathLength="1"/>
+                      <path d="M3 21h18" pathLength="1"/>
+                      <path d="M9 11h2M13 11h2M9 15h2M13 15h2" pathLength="1"/>
+                    </g>
+                  </g>
+                  <g class="p3">
+                    <path d="M157 120a11 11 0 1 1-22 0 11 11 0 1 1 22 0z" pathLength="1"/>
+                    <path d="M166 114h74" pathLength="1"/>
+                    <path d="M166 126h52" pathLength="1"/>
+                  </g>
+                  <g class="p4">
+                    <path d="M44 88h36a10 10 0 0 1 10 10v78a10 10 0 0 1-10 10H44a10 10 0 0 1-10-10V98a10 10 0 0 1 10-10z" pathLength="1"/>
+                    <path d="M54 102h16" pathLength="1"/>
+                    <path d="M56 176h12" pathLength="1"/>
+                    <path d="M90 130h22" pathLength="1"/>
+                  </g>
+                </svg>
+                <div class="day-st step" style="--fx:360px;--fy:412px"><span class="num">1</span><i class="day-mark" data-mark="m-g0" data-size="66"></i><b>Pick a computer your agent can live on</b><i>One you can leave on. You, once.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:412px"><span class="num">2</span><i class="day-mark" data-mark="m-g1" data-size="66"></i><b>Install the Archie desktop app</b><i>One download, a plan. You, once.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:412px"><span class="num">3</span><i class="day-mark" data-mark="m-g2" data-size="66"></i><b>Choose how to fund the AI</b><i>Free credits to start, then AI included or your own key. You, once.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:412px"><span class="num">4</span><i class="day-mark" data-mark="m-g3" data-size="66"></i><b>Meet your agent</b><i>Already there, with a name, a face and its first add-ons. Talk, and it shapes to how you like things. Archie, then you.</i></div>
+                <div class="day-st step" style="--fx:360px;--fy:412px"><span class="num">5</span><i class="day-mark" data-mark="m-g4" data-size="66"></i><b>Message your agent from your phone</b><i>A claim code. Optional. You, once.</i></div>
+                <i class="day-mark day-fmark" data-mark="m-s0" data-size="66" style="--fx:650px;--fy:250px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s1" data-size="66" style="--fx:660px;--fy:305px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s2" data-size="66" style="--fx:655px;--fy:195px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s3" data-size="66" style="--fx:80px;--fy:228px"></i>
+                <i class="day-mark day-fmark" data-mark="m-s4" data-size="66" style="--fx:68px;--fy:292px"></i>
               </div>
             </div>
 
@@ -1190,10 +1228,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260917-8"></script>
-  <script src="js/ember.js?v=20260917-8" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260917-8"></script>
-  <script src="js/home.js?v=20260917-8" defer></script>
+  <script src="js/nav.js?v=20260917-9"></script>
+  <script src="js/ember.js?v=20260917-9" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260917-9"></script>
+  <script src="js/home.js?v=20260917-9" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

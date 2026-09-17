@@ -223,18 +223,27 @@
         pose: { cam: { rx: 3, ry: -8, s: 1.04 }, win: copy(W2, { ry: 16 }), phone: copy(PH2, { ry: -14 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -10 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5,
-        /* The one act where the two objects stand apart instead of overlapping. Everywhere else the
-           phone is the subject and it may sit over the window, but at two in the morning the window
-           is what the act is about and both lists are filling in at once, so the phone covering the
-           window hides the evidence (Jett, 2026-09-17: "i cannot see what is happening behind the
-           phone"). On W and PH it covered the right 42% of the window's content column, which is
-           the column Recent work is in and exactly where each row's time and badge sit. So the
-           window slides left and the phone goes smaller and right: measured, that leaves 24px
-           between them with 30px of the 760 box spare on each side. The window keeps s 1.143,
-           because .4375 times 1.143 is exactly a half and rastering it off a half is what made
-           hairlines shimmer; the phone has no such round number to keep. */
-        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 240, s: .74, o: .45 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 20, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        /* The one act where the phone is not the subject. Everywhere else it may sit over the
+           window, but at two in the morning the window is what the act is about and both lists are
+           filling in at once, so a phone over it hides the evidence (Jett, 2026-09-17: "i cannot
+           see what is happening behind the phone"). On W and PH it covered the right 42% of the
+           window's content column, which is the column Recent work is in and exactly where each
+           row's time and badge sit.
+
+           WHAT IT MAY COVER IS THE EDGE, NOT THE ROWS (Jett, same day: it "can move slightly over
+           the desktop app window to cover its right edge"). The app's page carries 32px of right
+           padding and each row 16px more, in its own 1040px coordinates, and it is drawn at zoom
+           .4375, so 21px of the window's right edge is padding and the phone may stand on it. It
+           takes 9 of those and still clears the nearest badge by 12, which reads as one scene
+           rather than as two objects holding themselves apart. The window keeps s 1.143: .4375
+           times 1.143 is exactly a half, and rastering the app off a half is what made hairlines
+           shimmer, so the phone is the one that gives up size.
+
+           Narrow they cannot stand side by side, because the phone is nearly the box's width by
+           design, so they stack instead: the window up, the phone down, and the only thing the
+           phone's masked band reaches is the window's own bottom padding. */
+        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 208, s: .74, o: .45 }), night: 1, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -230, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 110, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }

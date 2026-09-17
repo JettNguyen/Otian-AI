@@ -16280,7 +16280,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
-.day-clock { position: absolute; left: 24px; top: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
+.day-clock { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
 .day-clock.is-on { opacity: 1; }
 .day-clock i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .day-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); font-size: var(--fs-2xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3; }
@@ -16647,8 +16647,18 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-more { margin-top: 8px; font-size: var(--fs-xs); }
   .day-minutes { margin-top: 10px; padding: 6px 10px; }
   .day-minutes b { font-size: var(--fs-4xl); }
-  .day-clock { left: 12px; top: 6px; }
+  .day-clock { top: 6px; }
   .day-hint { display: none; }
+  /* The hero's words are centred and a rung bigger; after it the captions alternate, left, right,
+     left, so the eye is handed from side to side as the acts change. */
+  .day-cap[data-act="0"] { align-items: center; text-align: center; }
+  .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
+  .day-cap[data-act="0"] .hm-actions { justify-content: center; }
+  .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }
+  .day-cap[data-act="2"], .day-cap[data-act="4"], .day-cap[data-act="6"] { align-items: flex-end; text-align: right; }
+  .day-cap[data-act="2"] .day-chips, .day-cap[data-act="4"] .day-chips, .day-cap[data-act="6"] .day-chips { justify-content: flex-end; }
+  .day-cap[data-act="2"] .day-catch, .day-cap[data-act="4"] .day-catch, .day-cap[data-act="6"] .day-catch { border-left: 0; border-right: 2px solid var(--accent-line); padding-left: 0; padding-right: 12px; }
+  .day-cap[data-act="6"] .day-minutes, .day-cap[data-act="2"] .day-seg, .day-cap[data-act="4"] .day-seg, .day-cap[data-act="6"] .day-seg { align-self: flex-end; }
   .day-floor { --fz: 90deg; }
   /* The phone is seen through a window here: the side bezels and the rim stay, so it reads as a
      phone, and its top and bottom ends fade out, so a phone that is shorter than a phone (the

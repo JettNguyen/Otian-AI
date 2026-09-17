@@ -16427,15 +16427,25 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
 /* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
 .day-phone { width: 256px; height: 546px; margin: -273px 0 0 -128px; }
-/* The rim: the layer's own box, which is the zoomed device's, repeated behind it at five-pixel
-   steps down to a back face 35px deep (a phone is about an eighth as thick as it is wide). Each is
-   the bezel's own metal, lit by the same light as the bezel (--lit turns its band), and darker
-   toward the back; the back face carries the cast shadow. */
-.dp-edge { position: absolute; inset: 0; border-radius: 38px; pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(calc(148deg + var(--lit, 0deg)), #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
+/* The rim: the layer's own box, which is the zoomed device's, repeated behind it down to a back
+   face 35px deep (a phone is about an eighth as thick as it is wide). Each is the bezel's own
+   metal, lit by the same light as the bezel (--lit turns its band).
+
+   THE LAYERS ARE NOT THE SAME SIZE, and that is the whole point of them. Stacked at one size they
+   draw a straight prism, which meets the glass at a right angle and reads as a phone from 2013
+   (Jett, 2026-09-17: "it looks like an iphone 5"). So each layer carries its own inset (--i) off
+   the glass's own box, tracing a phone's cross-section: the band swells about two pixels proud of
+   the glass by the third layer, which is the thin bright ring a real phone shows head-on, then
+   comes back through flush and tucks seven pixels in at the back. The radius follows the inset, so
+   every layer stays concentric with the glass, and the layers bunch toward the front where the
+   curve is tightest. --br puts the moving specular on the fullest part of the barrel, where a
+   rounded edge actually catches it, and --dk darkens each layer toward the back, so the side
+   turns away rather than ending. */
+.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
 /* The side of the phone is polished, so the sliver of rim the turn exposes carries a bright line
    down it. js/home.js puts that line where the rim is showing (--rim-x) and brings it up with how
    far the phone is turned (--rim-a), so the phone's side catches the light as it comes around. */
-.dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 9%), rgba(255, 255, 255, var(--rim-a, 0)) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 9%)); }
+.dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 9%), rgba(255, 255, 255, calc(var(--rim-a, 0) * var(--br, 1))) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 9%)); }
 .dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
 .dp-edge--back::after { display: none; }
 .dp-device {

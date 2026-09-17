@@ -16441,8 +16441,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   zoom: .63;
 }
 @supports not (zoom: 1) { .dp-device { transform: scale(.63); transform-origin: 0 0; } }
-.dp-device::after { content: ""; position: absolute; z-index: 3; pointer-events: none; left: 50%; transform: translateX(-50%); top: calc(var(--bezel-wall) + 11px); width: 125px; height: 36px; border-radius: 18px; background: #000; box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .07); }
-.dp-device::before { content: ""; position: absolute; z-index: 4; pointer-events: none; left: 50%; margin-left: 25px; top: calc(var(--bezel-wall) + 21px); width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #243040 0%, #0C0F14 56%, #050609 100%); box-shadow: inset 0 0 0 .5px rgba(130, 170, 225, .22); }
+/* The island is drawn smaller than the kit's (125 by 36) at Jett's direction on 2026-09-16, for the
+   newer phones' narrower cutout; the lens keeps its place inside it. */
+.dp-device::after { content: ""; position: absolute; z-index: 3; pointer-events: none; left: 50%; transform: translateX(-50%); top: calc(var(--bezel-wall) + 14px); width: 96px; height: 30px; border-radius: 15px; background: #000; box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .07); }
+.dp-device::before { content: ""; position: absolute; z-index: 4; pointer-events: none; left: 50%; margin-left: 20px; top: calc(var(--bezel-wall) + 22px); width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #243040 0%, #0C0F14 56%, #050609 100%); box-shadow: inset 0 0 0 .5px rgba(130, 170, 225, .22); }
 .dp-ph {
   /* The phone kit's dark tokens, from src/theme.ts by way of archie-screen-kit.html. Dark in both
      themes, for the reason .hm-pz gives: a screen is a lit thing standing on the page. */
@@ -16457,10 +16459,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: flex; flex-direction: column;
 }
-/* iOS draws its home indicator over every app, so the app's composer stops the safe-area inset
-   short of the bottom (its Chat.tsx pads by insets.bottom plus one small space) and the bar sits
-   under it. Without both, the composer hugs the glass. */
-.dp-ph::after { content: ""; position: absolute; left: 50%; bottom: 8px; width: 134px; height: 5px; margin-left: -67px; border-radius: 3px; background: var(--text); opacity: .85; z-index: 9; pointer-events: none; }
+/* The app's composer stops the safe-area inset short of the bottom (its Chat.tsx pads by
+   insets.bottom plus one small space), so the composer does not hug the glass. The system's home
+   bar is not drawn, at Jett's direction on 2026-09-16. */
 .dp-ph * { box-sizing: border-box; }
 .dp-ph p { margin: 0; }
 .dp-statusbar { position: absolute; inset: 0 0 auto 0; height: 59px; z-index: 8; pointer-events: none; display: flex; align-items: center; justify-content: space-between; padding: 15px 32px 0; font-size: var(--fs-xl); font-weight: 600; letter-spacing: .2px; color: var(--text); font-variant-numeric: tabular-nums; }
@@ -16674,7 +16675,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-device::before, .dp-device::after { display: none; }
   .dp-edge { border-radius: 0; }
   .dp-ph { height: 676px; padding-bottom: 8px; border-radius: 0; }
-  .dp-ph::after { display: none; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }

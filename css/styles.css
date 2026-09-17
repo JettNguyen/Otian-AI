@@ -16285,6 +16285,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
+/* Two in the morning, narrow: Ember stands off the phone's outer lower left, and "lower" is where
+   the mask stops rather than where the layer does, which is why --my is the same 50% the night mask
+   cuts at. Set here and not inline, because an inline custom property outranks every media query:
+   that is why .day-phone .day-mark's narrow override below never applies to m-phone. */
+.day-phone [data-mark="m-night"] { --mx: -26px; --my: 50%; }
 /* The badge and the hint share the scene's grid cell and sit at its top and bottom: grid items of
    the stage, never children of the scene wrap, which is a flex row and would stand them beside the
    scene (that shifted the scene left by half the badge's width, for every act, on 2026-09-16). */
@@ -16812,11 +16817,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-caps { grid-column: 1; grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
-     them on the bottom of the band puts the words at the bottom of the phone, under the scene, where
-     the reader's thumb is, instead of leaving a hole below them (Jett, 2026-09-17, on the overnight
-     act: "the text part can move down more towards the bottom of the page"). The hero keeps the top,
-     because it is the page's first screen and is not scrolled to. */
-  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-end; }
+     them in the middle of the band puts the words under the scene without either a hole below them
+     or a crowd at the edge: flex-start left the hole, flex-end was too far, and Jett asked for
+     "between where it was and where it is now" (2026-09-17). The hero keeps the top, because it is
+     the page's first screen and is not scrolled to. */
+  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: center; }
   .day-cap h1 { font-size: var(--fs-3xl); }
   .day-cap h2 { font-size: var(--fs-2xl); }
   .day-cap .section-label { margin-bottom: 6px; }
@@ -16848,7 +16853,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      composer at the bottom, so both are there and both are dissolving, and the phone reads as
      going on past the window rather than as a short phone with empty margins (which is how it
      read with dead space inside the solid band). The island and status bar are not drawn. */
-  .dp-device, .dp-edge { -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 80%, transparent 96%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 80%, transparent 96%, transparent 100%); }
+  /* The phone is seen through a window: its ends fade out, so it stands nearly full width and
+     readable without needing room for its whole height. A variable, because one act shows a
+     different amount of it, and it inherits from the layer down to the glass and every rim layer. */
+  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 80%, transparent 96%, transparent 100%); }
+  .dp-device, .dp-edge { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
+  /* At two in the morning only the top half is shown. Everything the act needs is up there, because
+     that screen is the Now page and its list runs from the top, and the height it gives back goes to
+     the window, which is what that act is actually about (Jett, 2026-09-17). */
+  .day-stage.is-night .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 50%, transparent 62%, transparent 100%); }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   .dp-device { height: 700px; border-radius: 0; }

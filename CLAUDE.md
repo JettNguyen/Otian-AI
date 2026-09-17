@@ -301,6 +301,13 @@ siblings until they get their own drawings.
   the act's first frame, so a viewport of scroll moved nothing but which border was lit (Jett:
   it "looks boring to scroll through"). Narrow keeps the Cover Flow gallery, and the build is
   not drawn.
+  **One screen is a page, not the conversation (2026-09-17).** The 2:00 am screen is the Lately
+  section of the app's Now page, which carries no message bar, so `data-page` on a `.dp-scr`
+  drops the composer and the screen ends in the jump across to the chat that the app puts there
+  instead. Its rows are out of the layout until they land, on the window's own three beats, so
+  the card grows through the night rather than standing at its finished height from the first
+  frame. Still no tabs. **Before drawing a control, find the page it is on**: a message bar
+  under a list you cannot type into is the same class of mistake as the calendar Confirm card.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

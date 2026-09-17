@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260916-25" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260916-26" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -587,9 +587,12 @@
             </div>
 
           </div>
-          <div class="day-clock is-on" aria-hidden="true"><i></i><span>7:00 am</span></div>
-          <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
         </div>
+        <!-- The clock badge and the scroll hint are the stage's own, placed in the scene's grid cell,
+             not the scene wrap's children: the wrap is a flex row, and a badge inside it stood beside
+             the scene and pushed it sideways by half its own width (found 2026-09-16). -->
+        <div class="day-clock is-on" aria-hidden="true"><i></i><span>7:00 am</span></div>
+        <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
 
         <!-- Ember, the one constant. Inside the stage, so it rides the stage's own scroll instead of
              chasing it from a fixed box a frame behind; js/home.js walks it between the marks on
@@ -1187,10 +1190,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260916-25"></script>
-  <script src="js/ember.js?v=20260916-25" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260916-25"></script>
-  <script src="js/home.js?v=20260916-25" defer></script>
+  <script src="js/nav.js?v=20260916-26"></script>
+  <script src="js/ember.js?v=20260916-26" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260916-26"></script>
+  <script src="js/home.js?v=20260916-26" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

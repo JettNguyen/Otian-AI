@@ -16229,7 +16229,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 [data-theme="dark"] .day-stage { --day-night-ground: #0E0D0C; }
 
 /* ---- the captions: one column, one act lit at a time ---- */
-.day-caps { position: relative; height: 100%; min-height: 0; }
+.day-caps { position: relative; grid-column: 1; grid-row: 1; height: 100%; min-height: 0; }
 .day-cap { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateY(18px); pointer-events: none; }
 @media (prefers-reduced-motion: no-preference) {
   .day-cap { transition: opacity .45s ease, transform .55s cubic-bezier(.2, .8, .3, 1); }
@@ -16273,7 +16273,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-stage.is-night .day-chip { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .14); color: #DAD4CC; }
 
 /* ---- the scene, in perspective ---- */
-.day-scene-wrap { position: relative; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
+.day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
 .day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(660px, 110%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); pointer-events: none; }
 .day-stage.is-night .day-scene-wrap::before { background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 9%, transparent), transparent); }
 /* The design box. js/home.js scales it to the stage (SC), so it is never sized by CSS to fit. */
@@ -16281,10 +16281,13 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
-.day-clock { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
+/* The badge and the hint share the scene's grid cell and sit at its top and bottom: grid items of
+   the stage, never children of the scene wrap, which is a flex row and would stand them beside the
+   scene (that shifted the scene left by half the badge's width, for every act, on 2026-09-16). */
+.day-clock { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: start; margin-top: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
 .day-clock.is-on { opacity: 1; }
 .day-clock i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
-.day-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); font-size: var(--fs-2xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3; }
+.day-hint { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: end; margin-bottom: 14px; font-size: var(--fs-2xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--text-muted); display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 3; }
 .day-hint.is-off { opacity: 0; }
 .day-hint svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-reduced-motion: no-preference) {
@@ -16636,11 +16639,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      same size in every act; the scene slides up over half of it then, so it is centered in the
      whole space rather than under an empty band. The badge is 18 line + 12 padding + 2 border +
      6 margin = 38, which is --clock-row. */
-  .day-clock { position: relative; grid-row: 1; grid-column: 1; justify-self: center; left: auto; top: 0; transform: none; margin: 0 0 6px; line-height: 18px; }
-  .day-scene-wrap { grid-row: 2; height: 100%; min-height: 0; transform: translateY(calc(var(--clock-row) / -2)); }
+  .day-clock { grid-column: 1; grid-row: 1; align-self: auto; margin: 0 0 6px; line-height: 18px; }
+  .day-scene-wrap { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; transform: translateY(calc(var(--clock-row) / -2)); }
   .day-stage.is-timed .day-scene-wrap { transform: none; }
   .day-scene { width: 400px; }
-  .day-caps { grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
+  .day-caps { grid-column: 1; grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
   .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
   .day-cap h1 { font-size: var(--fs-3xl); }
   .day-cap h2 { font-size: var(--fs-2xl); }

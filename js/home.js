@@ -179,7 +179,7 @@
     var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
-    var ember = $('.day-ember'), ctaBox = $('.day-cta-mark');
+    var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grow = $('.dp-scr--grow');
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -306,6 +306,29 @@
     var cur = -1, markName = '';
     var ex = -999, ey = -999, es = 96, first = true;
 
+    /* The four-rows thread moves like a thread. A bubble that lands is kept out of the layout
+       until its beat (styles.css, .dp-scr--grow), so the bubbles above it jump up by its height
+       the moment it appears; this puts the screen back where it stood and lets it slide (the
+       transition is the screen's own). Measured with offsetTop, which is in the screen's own
+       pixels whatever the phone's zoom and pose do to them, so the slide is exactly the jump.
+       With no bubble on before, the thread rises from the screen's bottom edge. */
+    function firstOn(el) {
+      for (var c = el.firstElementChild; c; c = c.nextElementSibling) if (c.classList.contains('is-on')) return c;
+      return null;
+    }
+    function slideThread(wasTop) {
+      var now = firstOn(grow);
+      if (!now || still) return;
+      var edge = grow.clientHeight - 20;
+      var d = (wasTop < 0 ? edge : wasTop) - now.offsetTop;
+      if (Math.abs(d) < 1) return;
+      grow.style.transition = 'none';
+      grow.style.transform = 'translateY(' + d.toFixed(1) + 'px)';
+      void grow.offsetHeight;
+      grow.style.transition = '';
+      grow.style.transform = '';
+    }
+
     function setAct(i) {
       if (i === cur) return;
       var prev = cur; cur = i;
@@ -342,10 +365,14 @@
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
+      var was = grow && grow.classList.contains('is-on') ? firstOn(grow) : null, wasTop = was ? was.offsetTop : -1, landed = false;
       beats.forEach(function (b) {
         var on = b.act === i ? (tp >= b.at && tp < b.until) : (b.act < i && b.until > 1);
+        if (b.el.classList.contains('is-on') === on) return;
         b.el.classList.toggle('is-on', on);
+        if (b.el.parentNode === grow) landed = true;
       });
+      if (landed && grow.classList.contains('is-on')) slideThread(wasTop);
 
       var mark = ACTS[i].mark;
       if (i === 3) {

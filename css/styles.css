@@ -16624,17 +16624,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 }
 
 /* ---- narrow screens (under 971px): the scene on top, a caption band under it ---- */
-/* The stage is one column: the scene row takes what is left and the caption row is as tall as the
-   tallest caption, because every caption shares one grid cell (the lit one is the one you see), so
-   no caption ever spills into the scene. The scene keeps its 400 by 560 design box and js/home.js
-   scales it to the row and to the stage's full width, so the objects use the whole screen width and
-   are never cut off; the poses for this box are the narrow set in js/home.js. The floors turn a
-   quarter, so both laps run toward the camera. */
+/* The stage is one column: the clock badge in a row of its own, the scene row taking what is left,
+   and the caption row as tall as the tallest caption, because every caption shares one grid cell
+   (the lit one is the one you see), so no caption ever spills into the scene. The scene keeps its
+   400 by 560 design box and js/home.js scales it to the row and to the stage's full width, so the
+   objects use the whole screen width and are never cut off; the poses for this box are the narrow
+   set in js/home.js. The floors turn a quarter, so both laps run toward the camera. */
 @media (max-width: 970px) {
-  .day-stage { grid-template-columns: 1fr; grid-template-rows: minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
-  .day-scene-wrap { grid-row: 1; height: 100%; min-height: 0; }
+  .day-stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
+  /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
+     phone's top edge. It keeps its row while it is off, so the scene does not jump when it lights. */
+  .day-clock { position: relative; grid-row: 1; grid-column: 1; justify-self: center; left: auto; top: 0; transform: none; margin: 0 0 6px; }
+  .day-scene-wrap { grid-row: 2; height: 100%; min-height: 0; }
   .day-scene { width: 400px; }
-  .day-caps { grid-row: 2; display: grid; height: auto; padding: 6px 16px 12px; }
+  .day-caps { grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
   .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
   .day-cap h1 { font-size: var(--fs-3xl); }
   .day-cap h2 { font-size: var(--fs-2xl); }
@@ -16649,7 +16652,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-more { margin-top: 8px; font-size: var(--fs-xs); }
   .day-minutes { margin-top: 10px; padding: 6px 10px; }
   .day-minutes b { font-size: var(--fs-4xl); }
-  .day-clock { top: 6px; }
   .day-hint { display: none; }
   /* The hero's words are centred and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
@@ -16705,5 +16707,19 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
 /* The four-rows screen grows as its beats land, so a bubble that has not arrived takes no room:
    with all eight present from the start the thread overflowed the screen and the first question
-   was clipped off the top before anyone had read it. */
+   was clipped off the top before anyone had read it. A bubble kept out of the layout cannot
+   transition in (it is painted for the first time already lit), so its arrival is a keyframe
+   that runs whenever it is shown: it rises and grows from its tail corner, the way a chat app
+   lands a message. The bubbles above it move like a thread too: js/home.js measures how far
+   the thread jumped when a bubble landed and slides the screen back over that distance. */
 .dp-scr--grow .day-beat:not(.is-on) { display: none; }
+.dp-scr--grow .dp-mine.day-beat { transform-origin: 100% 100%; }
+.dp-scr--grow .dp-said.day-beat { transform-origin: 0 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-scr--grow { transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .3, 1); }
+  .dp-scr--grow .day-beat.is-on { animation: dp-msg-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+}
+@keyframes dp-msg-in {
+  from { opacity: 0; transform: translateY(14px) scale(.96); }
+  to { opacity: 1; transform: none; }
+}

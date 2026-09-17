@@ -2811,13 +2811,30 @@ Research&rdquo; (`portal.nousresearch.com/terms`). It is a user contract, not a 
 Hermes itself is MIT, which is why the Hermes mark stayed. If that reading is wrong, Hermes is the
 one that comes off next, and nothing else on the page changes.
 
-📌 **Still open, and not part of what Jett decided: the homepage.** `index.html` carries the
-Anthropic and xAI marks four times each, in the works-with band and two figures. That is a
-compatibility statement rather than a comparison, which is a different posture (Gen Digital's
-guidelines bless exactly that shape: &ldquo;an accurate referential phrase in connection with your
-product or service (e.g., 'for use with,' 'compatible with')&rdquo;). But Anthropic's guidelines
-and xAI's do not carve it out, and both companies are on the four-that-say-no list above. **Raise
-it before the next homepage pass; do not quietly leave it or quietly strip it.**
+✅ **Settled 2026-09-17, by Jett: the homepage band takes the app's allowlist.** This was
+raised as the note above asked, and the answer went further than the note anticipated. The
+compare-page test (does the company publish a rule that says no?) let a logo stay on silence. The
+homepage now runs the opposite default, the one the app already ran: **a logo ships only where that
+company publishes a grant that covers this use.** Silence is not a grant, and neither is a policy
+that permits the word and not the picture.
+
+**Eight qualify and keep their artwork:** GitHub, OpenAI, Airtable, Todoist, Zotero, Linear,
+Telegram, Matrix. **Thirty-seven became lettered tiles**, joining the five that went on 2026-09-16,
+so 42 of the 50 marks in `index.html` are now our own type. The audit behind each verdict is the
+Archie repo's `docs/BRAND-MARKS.md`; the app's list is `CLEARED_MARK` in `src/app/connect.tsx`, and
+**the two must not drift**, because a mark hidden in the app and drawn on the homepage is the exact
+state this pass found and fixed.
+
+**Why the standard moved.** The homepage was carrying four logos this file's own audit calls
+prohibited (DeepSeek, Outlook, iCloud, Fireflies) and a dozen more it calls permission required,
+including Groq, whose policy names this use in as many words: &ldquo;You may not use Groq logos in
+ads, packaging, **UI**, or signage without a license from Groq.&rdquo; Two standards on two
+surfaces meant the safer one was doing no work. What made one standard affordable is that every
+mark in the rivers got its service's name under it the same day: a letter tile with "Google
+Calendar" beneath it is a service, where a letter tile alone was a missing image.
+
+**A tile is not a downgrade to undo quietly.** Restoring any of the thirty-seven takes written
+permission in hand and a row here with the date, exactly like the compare chart above.
 
 **And the rule for anything new:** a competitor's name ships in plain type, needing nothing. A
 competitor's logo ships only where that company publishes no rule against it, recorded as a row

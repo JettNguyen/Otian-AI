@@ -2059,10 +2059,27 @@ summary,
   }
 }
 
-/* Social links (footer + contact page) */
+/* Social links (footer + contact page)
+
+   These three glyphs belong to X, LinkedIn and Meta, and each of those companies allows exactly
+   one thing without being asked: using their icon as a link to your own account there. Each also
+   publishes the terms of that permission, and two of them are about color.
+
+   LinkedIn's is the strict one. It permits blue, black and white, then names modifying the color
+   of the [in] logo as a prohibited use. Instagram allows any solid color and recommends black or
+   white. Black and white are X's own brand colors. So black on the light page and white on the
+   dark one is the one treatment all three allow, which is why this row does not take
+   --text-secondary like the text beside it and does not turn accent on hover. The hover still
+   moves, on the border and the background, which is the part no rule covers.
+
+   The glyph is 29px because that is Instagram's published floor, and it sets the size for all
+   three, since a row of matched badges is the point of the row. The badge grew to 48 to hold it
+   without crowding. Instagram also asks for clear space of half the glyph's size around it, which
+   a bordered badge cannot give its own border; the size rule is the one with a number in it, and
+   every social row on the web is built inside a box like this one. */
 .social-links {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
@@ -2070,23 +2087,26 @@ summary,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: color var(--transition), border-color var(--transition), background var(--transition);
+  color: #000000;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+[data-theme="dark"] .social-link {
+  color: #FFFFFF;
 }
 
 .social-link:hover {
-  color: var(--accent);
   border-color: var(--accent);
   background: var(--accent-subtle);
 }
 
 .social-link svg {
-  width: 18px;
-  height: 18px;
+  width: 29px;
+  height: 29px;
   display: block;
 }
 

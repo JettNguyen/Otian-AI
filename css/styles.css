@@ -16553,8 +16553,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-floor { width: 720px; height: 420px; margin: -180px 0 0 -360px; pointer-events: none; --fo: 0; }
 .day-floor.is-on { pointer-events: auto; }
 /* --fz: a quarter turn on narrow screens (see the block at the end), 0 otherwise. */
-.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg) rotateZ(var(--fz, 0deg)); transform-style: preserve-3d; }
-.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
+.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg) rotateZ(var(--fz, 0deg)) translateY(var(--py, 0px)); transform-style: preserve-3d; }
+.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); transform: translateY(calc(-1 * var(--py, 0px))); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
 .day-paths { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--fo); overflow: visible; }
 .day-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .day-paths path.dashed { stroke-dasharray: 5 6; }
@@ -16570,11 +16570,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    it and its outline fills in. */
 #dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; }
 .day-ico { display: block; width: 46px; height: 46px; margin: 0 auto 4px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.day-st.ghost { left: calc(var(--fx) + var(--gx, 0px)); transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+.day-st.ghost { left: calc(var(--fx) + var(--gx, 0px)); top: calc(var(--fy) + var(--gy, 0px)); transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
 .day-st.ghost .day-ico { stroke: var(--text-muted); stroke-dasharray: 3 3; }
 .day-floor[data-mode="credits"] .day-st.ghost .day-ico { stroke: var(--accent); stroke-dasharray: none; }
 .day-st.is-lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle), var(--shadow-sm); }
-.day-st.step.alt { top: calc(var(--fy) + var(--sy, 0px)); }
 .day-paths .narrow { display: none; }
 .day-st .when-credits { display: none; }
 .day-floor[data-mode="credits"] .day-st .when-credits { display: block; }
@@ -16596,7 +16595,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-dot::before { content: ""; position: absolute; left: -9px; top: -4px; width: 18px; height: 8px; border-radius: 50%; background: rgba(0, 0, 0, .3); filter: blur(1px); opacity: var(--fo); }
 .day-dot::after { content: ""; position: absolute; left: -8px; top: -16px; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--ball) 45%, #fff), var(--ball) 52%, color-mix(in srgb, var(--ball) 62%, #000) 100%); box-shadow: 0 0 0 0 transparent; transform: translate(var(--back-x), var(--back-y)) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 50% 100%; opacity: calc(var(--fo) * var(--under)); }
 .day-dot.is-held::after { box-shadow: 0 0 0 4px color-mix(in srgb, var(--ball) 28%, transparent); }
-.day-fmark { position: absolute; left: var(--fx); top: calc(var(--fy) + var(--fm, 0px)); }
+.day-fmark { position: absolute; left: var(--fx); top: var(--fy); }
 
 /* ---- Ember, the one constant: an element js/home.js walks between marks, inside the stage ---- */
 /* Absolute, not fixed. A fixed Ember chasing marks on a sticky stage was measured a frame behind the
@@ -16634,7 +16633,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
      phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
-     same size in every act; the scene slides up over half of it then, so it is centred in the
+     same size in every act; the scene slides up over half of it then, so it is centered in the
      whole space rather than under an empty band. The badge is 18 line + 12 padding + 2 border +
      6 margin = 38, which is --clock-row. */
   .day-clock { position: relative; grid-row: 1; grid-column: 1; justify-self: center; left: auto; top: 0; transform: none; margin: 0 0 6px; line-height: 18px; }
@@ -16657,7 +16656,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-minutes { margin-top: 10px; padding: 6px 10px; }
   .day-minutes b { font-size: var(--fs-4xl); }
   .day-hint { display: none; }
-  /* The hero's words are centred and a rung bigger; the acts after it stay left, because handing
+  /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
   .day-cap[data-act="0"] { align-items: center; text-align: center; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
@@ -16686,19 +16685,31 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-phone { height: 441px; margin-top: -220px; }
   .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
   .day-phone .day-mark { --mx: -16px; --my: 44px; }
-  /* The floors: type up two rungs, Ember beside the computer rather than on it, our server on the
-     floor in the computer's row to its right, and the setup steps in two alternating columns with
-     Ember's track outside them, so nothing stands in front of anything. */
+  /* The custody floor: type up two rungs, Ember beside the computer rather than on it. The
+     turned plane's center line is its row 210 and the stations stand in row 300, so the plane's
+     content slides 90 along it (--py; the grid stays where it is) and the station column lands
+     on the screen's center, which is where it was not (Jett, 2026-09-16). Our server stands up
+     and to the right, farther from the camera than the computer, so its sign clears Ember's
+     head and it needs no room in the computer's row, which the screen does not have; and the
+     gate is past the computer's own footprint, since on a turned floor the gate's offset runs
+     sideways, where the station is wide. */
   .day-st b { font-size: var(--fs-md); }
   .day-st i { font-size: var(--fs-xs); }
+  #dayFloorCustody { --py: -90px; }
   #dayFloorCustody .day-st { width: 170px; }
   .day-st .day-mark { left: calc(100% + 34px); top: 100%; }
-  /* Our server a step nearer than the computer's row, and the gate past the computer's own
-     footprint, since on a turned floor the gate's offset runs sideways, where the station is wide. */
-  .day-st.ghost { --gx: 50px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+  .day-st.ghost { --gx: -160px; --gy: 125px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
   .day-gate { --gm: 55px; }
-  .day-st.step.alt { --sy: -172px; }
-  .day-fmark { --fm: 70px; }
+  /* The setup floor is not a floor here. Stood on the turned plane, the five cards sat at five
+     depths and the far ones shrank with the perspective until they could not be read (Jett,
+     2026-09-16). So the plane lies flat and the five are a list down the screen, one size, each
+     row on its number, with Ember's track down the left beside them. Rows are 100 apart from
+     row 0 at -40, which centers the five in the box; a row is at most 98 tall. */
+  #dayFloorSetup .day-plane { transform: none; }
+  #dayFloorSetup .day-grid { display: none; }
+  #dayFloorSetup .day-st.step { left: 235px; top: calc(var(--n) * 100px - 40px); width: 315px; padding: 10px 12px 10px 42px; transform: none; }
+  #dayFloorSetup .day-st .num { left: 11px; top: 11px; width: 22px; height: 22px; font-size: var(--fs-2xs); }
+  #dayFloorSetup .day-fmark { left: 195px; top: calc(var(--n) * 100px + 35px); }
   .day-paths .wide { display: none; }
   .day-paths .narrow { display: inline; }
   .day-dot { --back-x: -6px; --back-y: 0px; }

@@ -199,7 +199,7 @@
     var W = { x: -60, y: -30, z: -140, ry: 12, s: 1.143, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: .857, o: 1 };
     var W2 = { x: -150, y: -50, z: -240, ry: 18, s: 1.143, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -12, s: .943, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
-       down in the hero; the phone alone and centred while a scene plays on it; the window alone
+       down in the hero; the phone alone and centered while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
     var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 25, z: 40, ry: -12, s: 1.1, o: 1 };
     var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
@@ -288,11 +288,12 @@
        is at 352, and the sign stands at its end). The credits path takes the detour through our
        server and back, which is the one case TRUST.md says the picture may not skip. */
     function lapKey() { var g = narrow ? 405 : 350; return [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
-    function lapCredits() { var g = narrow ? 405 : 350, o = narrow ? 410 : 360; return [[0, 95, 300], [0.2, 360, 300], [0.32, o, 60], [0.44, 625, 300], [0.52, o, 60], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
+    function lapCredits() { var g = narrow ? 405 : 350, o = otian(); return [[0, 95, 300], [0.2, 360, 300], [0.32, o[0], o[1]], [0.44, 625, 300], [0.52, o[0], o[1]], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
     /* Where the stations stand, so the ball goes see-through while it is under one. Narrow, our
-       server is a step nearer (--gx in the stylesheet) and the gate is past the computer's
-       footprint (--gm), and the lap follows both. */
-    function stations() { return [[95, 300], [360, 300], [625, 300], [narrow ? 410 : 360, 60]]; }
+       server stands up and to the right of the computer (--gx and --gy in the stylesheet) and
+       the gate is past the computer's footprint (--gm), and the lap follows both. */
+    function otian() { return narrow ? [200, 185] : [360, 60]; }
+    function stations() { return [[95, 300], [360, 300], [625, 300], otian()]; }
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {

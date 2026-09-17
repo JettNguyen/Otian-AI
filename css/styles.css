@@ -16440,12 +16440,21 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    every layer stays concentric with the glass, and the layers bunch toward the front where the
    curve is tightest. --br puts the moving specular on the fullest part of the barrel, where a
    rounded edge actually catches it, and --dk darkens each layer toward the back, so the side
-   turns away rather than ending. */
-.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
-/* The side of the phone is polished, so the sliver of rim the turn exposes carries a bright line
-   down it. js/home.js puts that line where the rim is showing (--rim-x) and brings it up with how
-   far the phone is turned (--rim-a), so the phone's side catches the light as it comes around. */
-.dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 9%), rgba(255, 255, 255, calc(var(--rim-a, 0) * var(--br, 1))) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 9%)); }
+   turns away rather than ending.
+
+   THE SWELL IS HELD UNDER A PIXEL, AND THE METAL IS LIT AT ONE END, NOT TWO. Drawn proud by two
+   pixels, in a band whose gradient was bright at 0% and again at 100%, the rim came all the way
+   around the glass at one brightness and read as a silver outline, which is a sharp edge however
+   round the profile behind it is (Jett, 2026-09-17, with a screenshot). So the swell is about half
+   a pixel, which softens the silhouette without drawing a band, and the metal's bright stop is one
+   short arc at the light's own corner, with the rest near black: a rounded edge shows you where
+   the light is, and an outline shows you where the edge is. */
+.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
+/* The side of the phone is polished, so the sliver of rim the turn exposes carries a sheen down
+   it. js/home.js puts that sheen where the rim is showing (--rim-x) and brings it up with how far
+   the phone is turned (--rim-a), so the phone's side catches the light as it comes around. It is a
+   wide soft band rather than a stripe, for the same reason the swell is small. */
+.dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 16%), rgba(255, 255, 255, calc(var(--rim-a, 0) * var(--br, 1))) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 16%)); }
 .dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
 .dp-edge--back::after { display: none; }
 .dp-device {

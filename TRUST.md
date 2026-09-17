@@ -764,12 +764,24 @@ anyone but the account owner, and the seal means owning the row is not reading i
 
 ### 🚧 The Archie app for a phone: sealed, where a chat app is not. IN BUILD, NOT SHIPPED
 
-**Status 2026-09-11.** The client is written and runs (`/Users/Games/Desktop/Code/archie-mobile`).
-The one route it needs, `/phone/pair`, is written and unit-tested and **is not deployed**
-(`stripe-webhook/phone-pair.js`, frozen with the rest of the Render service until the CASA assessor
-signs off). Nobody outside the team can pair a phone today, and the app is in neither store. So
-every sentence about it on the site is future tense, per `CLAUDE.md` rule 4, and **no page may carry
-a ship date**, because we do not have one to give.
+**Status 2026-09-17.** The client is written and runs (`/Users/Games/Desktop/Code/archie-mobile`).
+Two things that were pending on 2026-09-11 have since happened, and one has not.
+
+- **`/phone/pair` is deployed**, since 2026-09-14 (`stripe-webhook/phone-pair.js`), along with the
+  `notPhone()` rules. The freeze it was waiting behind was lifted by the assessor, who said to
+  proceed with the package as it stood.
+- **Build 9 is submitted to the App Store** and sat in review from 2026-09-17. Submitted is not
+  approved: nobody outside the team can install it, it is in no store listing anyone can reach, and
+  a rejection is an ordinary outcome that would push it further out.
+- **Android has not started.** It needs a D-U-N-S number first, which takes up to 30 business days.
+
+So the rule below has not changed and **still holds**: every sentence about this app on the site is
+future tense, and **no page may carry a ship date**. The day it is approved and downloadable, this
+entry moves to SHIPPED and the tense changes with it, in one pass, deliberately. Being in review is
+not that day. **A privacy policy is the one exception**, because Apple requires the policy to
+describe an app under review and a policy is not a promise of availability: `privacy-policy/`
+describes the phone app in the conditional, in the same shape as the shipped phone-access claim
+("if you turn on phone access"), and says nothing about being able to get it.
 
 **Why this claim is worth making at all.** Today an agent reaches its owner through a chat app, and
 that is the one part of Archie that crosses somebody else's servers in a form they can read. The
@@ -847,6 +859,46 @@ The snapshot it draws from is built by `build_snapshot` in the same file, whose 
 never travels: anybody else's conversation on a shared agent, knowledge files, the rows inside a
 record collection, credential values (not even the last four of one), the screenshots a job took,
 and the audio and pictures inside a conversation.
+
+**What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
+the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
+because a permission prompt is the one piece of this product a person reads before they trust it.
+All three were checked against the client on that date.
+
+> - **The camera**, for two things. It reads the square code that pairs the phone with your
+>   computer, and it takes a photo when you choose to show one to an agent. It is not on at any
+>   other time.
+> - **Your photos**, only at the moment you pick one to send. The app is handed the picture you
+>   chose and nothing else, and it never reads the rest of your library.
+> - **The microphone**, only while you are recording something to say to an agent. You start that by
+>   pressing the talk button, you can throw the recording away instead of sending it, and it stops
+>   on its own if you leave the app.
+
+**Why it's true**, all paths in `/Users/Games/Desktop/Code/archie-mobile`:
+
+- **Camera.** `src/screens/Pair.tsx` mounts `CameraView` only while `scanning`, and
+  `src/attach.ts` takes a photo through `ImagePicker.launchCameraAsync`, which is the system's own
+  camera and not a preview this app holds open.
+- **Photos.** `ImagePicker.launchImageLibraryAsync` in `src/attach.ts`. The picker is the system's;
+  what comes back is the one asset, and the app has no library-wide read.
+- **Microphone.** `startTalking` in `src/screens/Chat.tsx` runs on a press, `stopTalking(false)`
+  throws the recording away, and the same function runs when the app stops being `active`, so
+  leaving the app ends the recording rather than leaving it running.
+- **A photo and a voice note ride the sealed mailbox like everything else**, as `put_file` through
+  `run` in `src/attach.ts` and `src/voice.ts`, sealed by `seal` in `src/relay/envelope.ts`. So the
+  custody clause below applies to them word for word: we hold them and cannot read them.
+- **Nothing on the phone reports anything.** No analytics, crash or advertising dependency in
+  `package.json`, and build 9's binary carries no `ASIdentifierManager` or `advertisingIdentifier`
+  symbol, checked with `strings` on the shipped `.ipa`.
+
+⚠️ **The purpose strings in the app say "and nowhere else", and that is the one wording here worth
+arguing about.** `app.json` tells the phone owner a photo or a recording "is sent to the computer
+running Archie and nowhere else." Read as naming the recipient it is true, and nobody but that
+computer can open it. Read as naming the route it is not: the bytes cross our Firestore mailbox on
+the way, sealed, and this document bans "it never touches our servers" for exactly that mechanism.
+It is not an App Store problem and Apple will not reject it. It is ours. **Prefer "it goes to the
+computer running Archie, sealed, and we cannot read it"** and change the strings the next time that
+app is built for any other reason.
 
 **Required clauses. Do not drop them:**
 

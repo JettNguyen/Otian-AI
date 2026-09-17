@@ -16650,19 +16650,22 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-clock { left: 12px; top: 6px; }
   .day-hint { display: none; }
   .day-floor { --fz: 90deg; }
-  /* The phone is a cropped screenshot here, not a device: the app's bar, the thread and the
-     composer, with no bezel, status bar or home bar, so it can stand nearly full width and its
-     words stay readable without a whole phone reading as short and stubby. The transcript is
-     bottom-aligned, so the crop shows fewer bubbles and nothing else changes. */
-  .dp-edge { display: none; }
-  .dp-device { width: 393px; height: 520px; padding: 0; border-radius: 18px; background: none; box-shadow: none; }
+  /* The phone is seen through a window here: the side bezels and the rim stay, so it reads as a
+     phone, and its top and bottom ends fade out, so a phone that is shorter than a phone (the
+     transcript is bottom-aligned, so it only shows fewer bubbles) never reads as stubby. The
+     fade is a mask on the device and on each rim layer, which are flat, so the depth between
+     them survives; dead space above the bar and below the composer keeps every control out of
+     the fade. */
+  /* Fully clear past the island (which ends 59px down) and past the bottom bezel, then a steep
+     ramp; the bar starts and the composer ends inside the solid band. */
+  .dp-device, .dp-edge { -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 10%, #000 20%, #000 86%, transparent 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, transparent 10%, #000 20%, #000 86%, transparent 97%, transparent 100%); }
+  .dp-device { height: 700px; }
   .dp-device::before, .dp-device::after { display: none; }
-  .dp-ph { height: 520px; border-radius: 18px; box-shadow: var(--lift-phone-card); }
+  .dp-ph { height: 676px; padding-bottom: 86px; }
   .dp-ph::after { display: none; }
   .dp-statusbar { display: none; }
-  .dp-topbar { padding-top: 12px; }
-  .dp-composer { padding-bottom: 12px; }
-  .day-phone { width: 248px; height: 328px; margin: -164px 0 0 -124px; }
+  .dp-topbar { padding-top: 128px; }
+  .day-phone { height: 441px; margin-top: -220px; }
   .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
   .day-phone .day-mark { --mx: -16px; --my: 44px; }
   /* The floors: type up two rungs, Ember beside the computer rather than on it, our server on the

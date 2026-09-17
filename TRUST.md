@@ -931,9 +931,19 @@ it matters precisely because the text that reaches this tool has often passed th
 did not write.
 
 **Boundaries — do not overclaim:**
-- ⛔ **Never claim PDF, images, audio or video.** Archie writes none of them. The BetterClaw
-  wishlist (item 7) proposed exactly that list and it would have been false on four of eight
-  entries. Added here 2026-08-24 so the next person checks the table instead of the brief.
+- ⛔ **Never claim PDF or video, and never claim the export tool writes pictures or audio.** The
+  export tool writes none of the four. The agent does make pictures and audio by other paths:
+  `generate_image` (`crates/archie-runtime/src/imagegen.rs`: a picture sent into the conversation,
+  on the user's own provider key or a Gemini key saved for it, and the tool is not offered when
+  neither exists) and voice notes (`crates/archie-runtime/src/speech.rs`: a spoken reply to a spoken
+  message, or on request). PDFs are planned and video would come through a connector (Jett,
+  2026-09-16); neither may be described in the present tense until it ships, and neither of the
+  two the agent does make has a ✅ entry of its own yet, so no page claims them until one is
+  written with its clauses. Until 2026-09-16 this line said Archie writes none of the four, and
+  the homepage carried "No PDFs, pictures, audio or video" as a limitation on the strength of it;
+  it was false on two of four and the chip was retired. The BetterClaw wishlist (item 7) proposed
+  exactly that list and it would have been false on four of eight entries. Added here 2026-08-24
+  so the next person checks the table instead of the brief.
 - ⛔ **Never say the agent writes "into your folders"** or anywhere on your disk. It writes to one
   folder, and the location is not the model's to pick. The weaker-sounding claim is the true one
   and it is also the safer-sounding one, which is rare enough to be worth keeping.

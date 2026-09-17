@@ -198,8 +198,8 @@
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centred while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 50, z: 40, ry: -12, s: 1.15, o: 1 };
-    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.45, o: 1 };
+    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 25, z: 40, ry: -12, s: 1.1, o: 1 };
+    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
@@ -219,7 +219,7 @@
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -10 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5,
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: copy(PH, { o: .45 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 30, z: 40, ry: -6, s: 1.2, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 20, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }

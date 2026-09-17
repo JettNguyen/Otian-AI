@@ -16656,15 +16656,17 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      fade is a mask on the device and on each rim layer, which are flat, so the depth between
      them survives; dead space above the bar and below the composer keeps every control out of
      the fade. */
-  /* Fully clear past the island (which ends 59px down) and past the bottom bezel, then a steep
-     ramp; the bar starts and the composer ends inside the solid band. */
-  .dp-device, .dp-edge { -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 10%, #000 20%, #000 86%, transparent 97%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, transparent 10%, #000 20%, #000 86%, transparent 97%, transparent 100%); }
+  /* Only the bezel ends are fully clear; the ramps run through the app's bar at the top and the
+     composer at the bottom, so both are there and both are dissolving, and the phone reads as
+     going on past the window rather than as a short phone with empty margins (which is how it
+     read with dead space inside the solid band). The island and status bar are not drawn. */
+  .dp-device, .dp-edge { -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 86%, transparent 98.5%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 86%, transparent 98.5%, transparent 100%); }
   .dp-device { height: 700px; }
   .dp-device::before, .dp-device::after { display: none; }
-  .dp-ph { height: 676px; padding-bottom: 86px; }
+  .dp-ph { height: 676px; padding-bottom: 8px; }
   .dp-ph::after { display: none; }
   .dp-statusbar { display: none; }
-  .dp-topbar { padding-top: 128px; }
+  .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }
   .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
   .day-phone .day-mark { --mx: -16px; --my: 44px; }

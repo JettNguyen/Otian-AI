@@ -16810,7 +16810,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-stage.is-timed .day-scene-wrap { transform: none; }
   .day-scene { width: 400px; }
   .day-caps { grid-column: 1; grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
-  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
+  /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
+     longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
+     them on the bottom of the band puts the words at the bottom of the phone, under the scene, where
+     the reader's thumb is, instead of leaving a hole below them (Jett, 2026-09-17, on the overnight
+     act: "the text part can move down more towards the bottom of the page"). The hero keeps the top,
+     because it is the page's first screen and is not scrolled to. */
+  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-end; }
   .day-cap h1 { font-size: var(--fs-3xl); }
   .day-cap h2 { font-size: var(--fs-2xl); }
   .day-cap .section-label { margin-bottom: 6px; }
@@ -16827,7 +16833,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-hint { display: none; }
   /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
-  .day-cap[data-act="0"] { align-items: center; text-align: center; }
+  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
   .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }

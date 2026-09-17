@@ -243,7 +243,7 @@
            design, so they stack instead: the window up, the phone down, and the only thing the
            phone's masked band reaches is the window's own bottom padding. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 208, s: .74, o: .45 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -230, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 110, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -240, z: -320, ry: 16, s: .82, o: .9 }, phone: { x: 30, y: 110, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }

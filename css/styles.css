@@ -16442,22 +16442,25 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    rounded edge actually catches it, and --dk darkens each layer toward the back, so the side
    turns away rather than ending.
 
-   THE SWELL IS HELD UNDER A PIXEL, AND THE METAL IS LIT AT ONE END, NOT TWO. Drawn proud by two
-   pixels, in a band whose gradient was bright at 0% and again at 100%, the rim came all the way
-   around the glass at one brightness and read as a silver outline, which is a sharp edge however
-   round the profile behind it is (Jett, 2026-09-17, with a screenshot). So the swell is about half
-   a pixel, which softens the silhouette without drawing a band, and the metal's bright stop is one
-   short arc at the light's own corner, with the rest near black: a rounded edge shows you where
-   the light is, and an outline shows you where the edge is.
+   NO LAYER STANDS PROUD OF THE GLASS, AND THE SIDE IS POLISHED. Those are two halves of one
+   rule, and getting one without the other is what took three passes. Drawn proud by two pixels the
+   rim came around the glass at one brightness and read as a silver outline, which is a sharp edge
+   however round the profile behind it is; drawn dark to fix that, the side turned into a black
+   plate and read sharper still (Jett, 2026-09-17, with a reference render). So every layer sits at
+   or inside the glass's box, which means the only place metal can show is where the turn opens the
+   side, and that band is bright polished metal. Nothing can ring the silhouette, because head-on
+   there is nothing outside it to see.
 
-   ACROSS THE BAND THE LAYERS GO DARK, BRIGHT, DARK. That is the whole difference between a curve
-   and a plate, and darkening alone, front to back, is a plate at an angle (Jett, 2026-09-17: the
-   right edge still read sharp). --lt is each layer's share of the specular, a bell peaking near
-   z -16, where the inset is about flush, so the bright layers are never the proud ones and the
-   streak cannot come around the front as a ring. Eleven layers rather than seven, because at the
-   angles these poses use the stack steps sideways about a pixel and a half per layer, and at seven
-   it stepped three and read as a stair. */
-.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(255, 255, 255, var(--lt, 0)), rgba(255, 255, 255, var(--lt, 0))), linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
+   THE SIDES ARE NEARLY STRAIGHT, TUCKING IN ONLY AT THE BACK. A phone is flat-sided, and the
+   taper is what the turn has to spend: rounding the whole depth left four pixels of band at the
+   angles these poses use, which is not enough to shade. At the hero's 26 degrees the band is now
+   about nine and a half pixels over eleven layers, so it steps well under a pixel and reads as a
+   curve rather than a stair. */
+
+   ACROSS THE BAND THE LAYERS GO DARK, BRIGHT, DARK. That is the difference between a curve and a
+   plate: darkening alone, front to back, is a plate at an angle. --lt is each layer's share of the
+   specular, a bell peaking near z -16, and --dk takes the last layers down to the back face. */
+.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(255, 255, 255, var(--lt, 0)), rgba(255, 255, 255, var(--lt, 0))), linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #9A9A92 0%, #55554F 12%, #3A3A36 38%, #30302D 70%, #5E5E56 100%); }
 /* The side of the phone is polished, so the sliver of rim the turn exposes carries a sheen down
    it. js/home.js puts that sheen where the rim is showing (--rim-x) and brings it up with how far
    the phone is turned (--rim-a), so the phone's side catches the light as it comes around. It is a
@@ -16488,7 +16491,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      which has carried it all along (--shadow-app on .dp-edge--back). */
   --shadow-bezel: inset 0 2px 3px rgba(255, 255, 255, var(--edge-t, .26)), inset 0 -2px 3px rgba(255, 255, 255, var(--edge-b, .13)), inset 2px 0 3px rgba(255, 255, 255, var(--edge-l, .10)), inset -2px 0 3px rgba(255, 255, 255, var(--edge-r, .10));
   position: relative; width: 407px; height: 866px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
-  background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
+  background: linear-gradient(calc(148deg + var(--lit, 0deg)), #2A2A27 0%, #131312 16%, #0A0A09 42%, #080807 58%, #131312 84%, #262622 100%);
   box-shadow: var(--shadow-bezel);
   zoom: .63;
 }

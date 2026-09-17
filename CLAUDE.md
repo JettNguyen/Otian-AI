@@ -277,12 +277,14 @@ siblings until they get their own drawings.
   phone is seen through a window: side bezels and rim kept so it reads as a phone, top and bottom
   ends faded out by a mask on the device and each rim layer (the transcript is bottom-aligned, so
   it only shows fewer bubbles), standing nearly full width and readable, Ember stands beside the
-  computer rather than on it, the custody stations stand on the screen's center line (the plane's
-  content slides along it, `--py`), and the setup steps are a flat list down the screen, one size,
-  with Ember's track beside it, because five cards at five depths shrank with the perspective until
-  they could not be read (Jett, 2026-09-16). The phone has a stacked rim behind its glass
-  (`.dp-edge`), and the message ball sits a few pixels back and goes see-through under a station,
-  both from the same review.
+  computer rather than on it, the custody stations stand on the turned plane's own center line, row
+  210 (`--cy`, in coordinates and nothing else: sliding the plane's content and sliding the grid
+  back left the grid off to one side), and the setup steps are a Cover Flow gallery, the current
+  card flat, nearly the box's width and in front, the others to either side, turned toward it,
+  dimmer and behind, because five cards at five depths shrank with the perspective until they could
+  not be read and a flat list read as a page (Jett, 2026-09-16). The phone has a stacked rim behind
+  its glass (`.dp-edge`), and the message ball sits a few pixels back and goes see-through under a
+  station, both from the same review.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

@@ -287,13 +287,16 @@
        point of the drawing, so it is a fifth of the lap, and the ball holds at the gate line (which
        is at 352, and the sign stands at its end). The credits path takes the detour through our
        server and back, which is the one case TRUST.md says the picture may not skip. */
-    function lapKey() { var g = narrow ? 405 : 350; return [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
-    function lapCredits() { var g = narrow ? 405 : 350, o = otian(); return [[0, 95, 300], [0.2, 360, 300], [0.32, o[0], o[1]], [0.44, 625, 300], [0.52, o[0], o[1]], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
+    /* Narrow, the stations stand on the plane's center line, row 210, ninety rows up from the
+       wide floor's row 300 (--cy in the stylesheet), and the gate and our server move with them. */
+    function row() { return narrow ? 210 : 300; }
+    function lapKey() { var y = row(), g = narrow ? 315 : 350; return [[0, 95, y], [0.22, 360, y], [0.42, 625, y], [0.6, 360, y], [0.64, 360, g], [0.8, 360, g], [1, 95, y]]; }
+    function lapCredits() { var y = row(), g = narrow ? 315 : 350, o = otian(); return [[0, 95, y], [0.2, 360, y], [0.32, o[0], o[1]], [0.44, 625, y], [0.52, o[0], o[1]], [0.6, 360, y], [0.64, 360, g], [0.8, 360, g], [1, 95, y]]; }
     /* Where the stations stand, so the ball goes see-through while it is under one. Narrow, our
        server stands up and to the right of the computer (--gx and --gy in the stylesheet) and
        the gate is past the computer's footprint (--gm), and the lap follows both. */
-    function otian() { return narrow ? [200, 185] : [360, 60]; }
-    function stations() { return [[95, 300], [360, 300], [625, 300], otian()]; }
+    function otian() { return narrow ? [200, 95] : [360, 60]; }
+    function stations() { var y = row(); return [[95, y], [360, y], [625, y], otian()]; }
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {
@@ -306,6 +309,30 @@
 
     var cur = -1, markName = '';
     var ex = -999, ey = -999, es = 96, first = true;
+
+
+    /* The setup gallery (narrow): each card's place is how far it stands from the current one,
+       in cards. The current one is flat, full size and in front; a neighbor is 200 to the side,
+       turned toward it, a little behind and below, smaller and dimmer; further cards keep the
+       neighbor's turn and go on out and back. -1 hands the cards back to the stylesheet. */
+    var GPROPS = ['--gx', '--gy', '--gz', '--gr', '--gs', '--dim'], galleryOn = false;
+    function gallery(fs) {
+      if (fs < 0) {
+        if (!galleryOn) return;
+        steps.forEach(function (s) { GPROPS.forEach(function (k) { s.style.removeProperty(k); }); });
+        galleryOn = false; return;
+      }
+      galleryOn = true;
+      steps.forEach(function (s, j) {
+        var d = j - fs, a = Math.min(1, Math.abs(d)), far = Math.max(0, Math.abs(d) - 1), sg = d < 0 ? -1 : 1;
+        s.style.setProperty('--gx', (d * 200).toFixed(1) + 'px');
+        s.style.setProperty('--gy', (a * 24).toFixed(1) + 'px');
+        s.style.setProperty('--gz', (-a * 90 - far * 40).toFixed(1) + 'px');
+        s.style.setProperty('--gr', (-sg * a * 32).toFixed(1) + 'deg');
+        s.style.setProperty('--gs', (1 - a * 0.14).toFixed(3));
+        s.style.setProperty('--dim', Math.max(0.2, 1 - a * 0.45 - far * 0.15).toFixed(3));
+      });
+    }
 
     /* The four-rows thread moves like a thread. A bubble that lands is kept out of the layout
        until its beat (styles.css, .dp-scr--grow), so the bubbles above it jump up by its height
@@ -387,12 +414,17 @@
         dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);
       }
       if (i === 6) {
-        var k = Math.min(4, Math.floor(tp * 5.4));
-        mark = 'm-s' + k;
+        /* Five steps over the act, the last held: f runs 0 to 4. Narrow, the gallery slides
+           between cards over the middle of each step (fs), so a card sits still for reading
+           either side of the slide, and the current card is the one nearest the middle. */
+        var f = Math.min(4, tp * 5.4), kf = Math.floor(f), fs = kf + smooth((f - kf - 0.3) / 0.4);
+        var k = narrow ? Math.round(fs) : kf;
+        mark = (narrow ? 'm-g' : 'm-s') + k;
         steps.forEach(function (s, j) { s.classList.toggle('is-lit', j <= k); });
         if (mins) mins.textContent = MINUTES[k];
         if (pie) pie.style.setProperty('--pie', tp.toFixed(3));
-      }
+        gallery(narrow ? fs : -1);
+      } else gallery(-1);
       if (r.bottom < vh * 0.55) mark = 'm-cta';
       var m = marks[mark];
       if (m) {

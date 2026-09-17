@@ -16553,14 +16553,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-floor { width: 720px; height: 420px; margin: -180px 0 0 -360px; pointer-events: none; --fo: 0; }
 .day-floor.is-on { pointer-events: auto; }
 /* --fz: a quarter turn on narrow screens (see the block at the end), 0 otherwise. */
-.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg) rotateZ(var(--fz, 0deg)) translateY(var(--py, 0px)); transform-style: preserve-3d; }
-.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); transform: translateY(calc(-1 * var(--py, 0px))); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
+.day-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg) rotateZ(var(--fz, 0deg)); transform-style: preserve-3d; }
+.day-grid { position: absolute; inset: 0; border-radius: 24px; opacity: var(--fo); background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
 .day-paths { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--fo); overflow: visible; }
 .day-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .day-paths path.dashed { stroke-dasharray: 5 6; }
 .day-floor[data-mode="credits"] .key { opacity: 0; }
 .day-floor:not([data-mode="credits"]) .credits { opacity: 0; }
-.day-st { position: absolute; left: var(--fx); top: var(--fy); width: 152px; padding: 9px 11px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); font-size: var(--fs-xs); line-height: 1.35; color: var(--text-secondary); }
+.day-st { position: absolute; left: var(--fx); top: calc(var(--fy) + var(--cy, 0px)); width: 152px; padding: 9px 11px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 50% 100%; opacity: var(--fo); font-size: var(--fs-xs); line-height: 1.35; color: var(--text-secondary); }
 .day-st b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
 .day-st i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 2px; }
 .day-st .num { position: absolute; top: -10px; left: 10px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: var(--text-on-accent); font-size: var(--fs-3xs); font-weight: 700; display: grid; place-items: center; }
@@ -16685,31 +16685,39 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-phone { height: 441px; margin-top: -220px; }
   .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
   .day-phone .day-mark { --mx: -16px; --my: 44px; }
-  /* The custody floor: type up two rungs, Ember beside the computer rather than on it. The
-     turned plane's center line is its row 210 and the stations stand in row 300, so the plane's
-     content slides 90 along it (--py; the grid stays where it is) and the station column lands
-     on the screen's center, which is where it was not (Jett, 2026-09-16). Our server stands up
-     and to the right, farther from the camera than the computer, so its sign clears Ember's
+  /* The custody floor: type up two rungs, Ember beside the computer rather than on it. On the
+     turned plane its rows run across the screen and the center line is row 210, so the stations
+     stand 90 rows up from where the wide floor draws them (--cy), on the plane's own center line
+     and over the middle of its grid; the paths have narrow copies on that row. This is done in
+     coordinates and nothing else, because sliding the plane's content along it and sliding the
+     grid back left the grid off to one side (Jett's screenshot, 2026-09-16). Our server stands
+     up and to the right, farther from the camera than the computer, so its sign clears Ember's
      head and it needs no room in the computer's row, which the screen does not have; and the
      gate is past the computer's own footprint, since on a turned floor the gate's offset runs
      sideways, where the station is wide. */
   .day-st b { font-size: var(--fs-md); }
   .day-st i { font-size: var(--fs-xs); }
-  #dayFloorCustody { --py: -90px; }
-  #dayFloorCustody .day-st { width: 170px; }
+  #dayFloorCustody .day-st { width: 170px; --cy: -90px; }
   .day-st .day-mark { left: calc(100% + 34px); top: 100%; }
-  .day-st.ghost { --gx: -160px; --gy: 125px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
-  .day-gate { --gm: 55px; }
-  /* The setup floor is not a floor here. Stood on the turned plane, the five cards sat at five
-     depths and the far ones shrank with the perspective until they could not be read (Jett,
-     2026-09-16). So the plane lies flat and the five are a list down the screen, one size, each
-     row on its number, with Ember's track down the left beside them. Rows are 100 apart from
-     row 0 at -40, which centers the five in the box; a row is at most 98 tall. */
+  .day-st.ghost { --gx: -160px; --gy: 35px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+  .day-gate { --gm: -35px; }
+  /* The setup floor is a gallery here, not a floor: the five cards stand in a row like album
+     covers, the current one flat, full size and in front on the center line, the others out to
+     either side, turned toward it, smaller, dimmer and a little behind and below it (Jett's
+     picture of the iPod's Cover Flow, 2026-09-16). Stood at five depths on the turned floor the
+     far cards had shrunk until they could not be read, and a flat list of five read as a page,
+     not a scene. js/home.js sets each card's place from how far it stands from the current one
+     (--gx, --gy, --gz, --gr, --gs, --dim); Ember stands on the current card, on a mark of its own
+     at the card's top edge. The card is nearly the box's width and its type two rungs up (Jett:
+     "2x larger"), so the neighbors show past it only where the stage is wider than the box,
+     which on a phone held upright it is. */
   #dayFloorSetup .day-plane { transform: none; }
-  #dayFloorSetup .day-grid { display: none; }
-  #dayFloorSetup .day-st.step { left: 235px; top: calc(var(--n) * 100px - 40px); width: 315px; padding: 10px 12px 10px 42px; transform: none; }
-  #dayFloorSetup .day-st .num { left: 11px; top: 11px; width: 22px; height: 22px; font-size: var(--fs-2xs); }
-  #dayFloorSetup .day-fmark { left: 195px; top: calc(var(--n) * 100px + 35px); }
+  #dayFloorSetup .day-grid, #dayFloorSetup .day-paths { display: none; }
+  #dayFloorSetup .day-st.step { left: 50%; top: 50%; width: 380px; padding: 16px 18px 16px 58px; line-height: 1.3; transform: translate(-50%, -50%) translate3d(var(--gx, 0px), var(--gy, 0px), var(--gz, 0px)) rotateY(var(--gr, 0deg)) scale(var(--gs, 1)); transform-origin: 50% 50%; opacity: calc(var(--fo) * var(--dim, 1)); }
+  #dayFloorSetup .day-st.step b { font-size: var(--fs-2xl); }
+  #dayFloorSetup .day-st.step i { font-size: var(--fs-lg); margin-top: 6px; }
+  #dayFloorSetup .day-st .num { left: 16px; top: 18px; width: 30px; height: 30px; font-size: var(--fs-sm); }
+  #dayFloorSetup .day-st .day-mark { left: 58px; top: 0; }
   .day-paths .wide { display: none; }
   .day-paths .narrow { display: inline; }
   .day-dot { --back-x: -6px; --back-y: 0px; }

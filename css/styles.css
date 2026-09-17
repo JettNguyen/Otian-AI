@@ -16644,12 +16644,21 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-floor[data-mode="credits"] .day-st .when-credits { display: block; }
 .day-st .day-mark { left: 50%; top: 0; }
 /* transform-style, or the gate flattens its label into the floor and the standing-up rotation below
-   becomes a second squash: that was "waits for you" reading as a pressed pill. */
-.day-gate { position: absolute; left: var(--fx); top: calc(var(--fy) + var(--gm, 0px)); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
+   becomes a second squash: that was "waits for you" reading as a pressed pill.
+
+   AND THE FADE CANNOT SIT ON THIS ELEMENT, which is how that squash came back. An opacity of
+   anything but 1 forces transform-style to its used value of flat, so the label stood up only while
+   --fo was exactly 1 and went down into the floor for the whole of the crossfade out of the lap
+   (Jett, 2026-09-17: the badge "suddenly becomes perspectivized", right as the caption turns into
+   None of it is hard). The line and the label each carry --fo themselves now, and this element
+   carries none, so it holds its 3D the whole way out. Each of them flattens itself, which costs
+   nothing: neither has a child standing up out of its own plane. */
+.day-gate { position: absolute; left: var(--fx); top: calc(var(--fy) + var(--gm, 0px)); width: 160px; height: 0; transform: translate(-50%, 0); transform-style: preserve-3d; }
+.day-gate::before { content: ""; position: absolute; left: 0; right: 0; top: 0; border-top: 2px dashed var(--line-muted); opacity: var(--fo); }
 /* The sign stands at the line's right end, not over its middle: standing over the middle it sat on
    the computer card's bottom edge and hid the ball. */
-.day-gate span { position: absolute; left: calc(100% + 6px); top: 14px; transform: translate(0, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
-.day-gate.is-on { border-top-color: var(--accent); }
+.day-gate span { position: absolute; opacity: var(--fo); left: calc(100% + 6px); top: 14px; transform: translate(0, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+.day-gate.is-on::before { border-top-color: var(--accent); }
 .day-gate.is-on span { background: var(--accent-subtle); color: var(--accent-ink); border-color: var(--accent); }
 /* The message is a ball standing on the floor, not a disc lying on it: the ball faces the camera
    (stood up like the cards) and is shaded from the upper left, and the disc under it is its shadow.

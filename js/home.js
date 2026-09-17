@@ -188,7 +188,10 @@
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
     var N = 7, SETTLE = 0.3;
-    var LEN = [0.3, 1, 1, 1, 1, 1, 1], CUM = [0], TOT = 0;
+    var LEN = [0.25, 1, 1, 1, 1, 1, 1], CUM = [0], TOT = 0;
+    /* The hero starts moving on the first pixel of scroll: through its own act the camera goes
+       this far toward the calendar pose, and the calendar act's settle finishes the trip. */
+    var PRE = 0.5;
     LEN.forEach(function (l) { TOT += l; CUM.push(TOT); });
     /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
@@ -330,7 +333,11 @@
 
       var settle = i === 0 ? 1 : smooth(t / SETTLE);
       fit();
-      var pose = i === 0 ? poseOf(0) : lerpPose(poseOf(i - 1), poseOf(i), settle);
+      var pose;
+      if (still) pose = poseOf(0);
+      else if (i === 0) pose = lerpPose(poseOf(0), poseOf(1), smooth(t) * PRE);
+      else if (i === 1) pose = lerpPose(lerpPose(poseOf(0), poseOf(1), PRE), poseOf(1), settle);
+      else pose = lerpPose(poseOf(i - 1), poseOf(i), settle);
       tilt.x += (tilt.tx - tilt.x) * 0.08; tilt.y += (tilt.ty - tilt.y) * 0.08;
       applyPose(pose);
 

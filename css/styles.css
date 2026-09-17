@@ -16211,10 +16211,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    switch to light ink at the halfway point. RESTYLE.md's band rule allows exactly this:
    a section whose visuals need an exact ground paints it explicitly. */
 
-/* One act is 100vh of scrolling and the hero is 0.3 of one, so the first thing moves after a short
-   push rather than a full screen of nothing; LEN in js/home.js is the same list and must agree.
-   The extra 100vh is the stage's own height, which the sticky needs to unpin at the end. */
-.day-story { position: relative; height: calc(6.3 * 100vh + 100vh); }
+/* One act is 100vh of scrolling and the hero is 0.25 of one, and the camera already moves through
+   the hero (PRE in js/home.js), so the first pixel of scroll moves something; LEN in js/home.js is
+   the same list and must agree. The extra 100vh is the stage's own height, which the sticky needs
+   to unpin at the end. */
+.day-story { position: relative; height: calc(6.25 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   --day-night-ground: #14120F;

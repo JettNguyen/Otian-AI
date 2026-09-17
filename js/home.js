@@ -285,7 +285,7 @@
       phone.style.setProperty('--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
       phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
       phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
-      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.4, 0, 0.14).toFixed(3));
+      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.5, 0, 0.22).toFixed(3));
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));

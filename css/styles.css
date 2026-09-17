@@ -13160,13 +13160,16 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-primary);
 }
 
-/* The platform's mark inside its download button: Apple's for the Mac, the four panes for
-   Windows. currentColor, so it reads on the primary and the secondary button alike. */
+/* The download arrow inside a download button. It used to be the platform's own logo, Apple's
+   for the Mac and the four panes for Windows, and neither company lets anyone else use its mark
+   without a written license: Apple's trademark guidelines say to write the word Mac instead.
+   The button already says which platform it is, so the mark says what the button does. It is
+   symmetric in its box, so unlike the Apple mark it needs no optical nudge. currentColor, so it
+   reads on the primary and the secondary button alike. */
 .btn-mark {
   width: 18px;
   height: 18px;
   flex: 0 0 auto;
-  margin-top: -2px;
 }
 
 /* The note under a download button, filled by js/download-feedback.js once the button is

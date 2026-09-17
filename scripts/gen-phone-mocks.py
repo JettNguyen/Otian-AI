@@ -249,13 +249,18 @@ def wordmark(x, y, scale=0.02444):
 
 
 # ── chrome ───────────────────────────────────────────────────────────────────────────────
-def status_bar(clock="9:41"):
+def status_bar(clock="7:00"):
     """The phone's own bar. Nothing here is Archie: it is what makes the rest read as a phone.
 
     Everything sits on one midline with matching margins left and right, laid out from the
     right edge in: battery, wifi, signal. A silenced-bell glyph used to sit beside the clock
     because the drawings are quiet ones; it read as a thing that had happened to the phone,
     which is a fact about nothing, so it is gone.
+
+    The clock reads 7:00, which is the homepage's morning brief and the site's own hour. It read
+    9:41 until 2026-09-17: the time Apple stops every clock in its own marketing, and the plainest
+    way a drawing of a generic phone tells a reader it is meant to be an iPhone. The drawing is
+    ours and so is the hour on it.
     """
     mid = 30.0
     o = [text(30, mid + 5.4, clock, 15, "var(--ink)", "600")]

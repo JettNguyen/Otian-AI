@@ -42,8 +42,8 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-import { ADDON_SPEC } from "./addon-fields.js?v=20260917-7";
-import { decideAccess } from "./access.js?v=20260917-7";
+import { ADDON_SPEC } from "./addon-fields.js?v=20260917-8";
+import { decideAccess } from "./access.js?v=20260917-8";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",

@@ -910,6 +910,49 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
+### ✅ Archie is free on an AI account of your own, with a limit of 20 jobs a day (SHIPPED 2026-09-17)
+
+**Approved wording:** "Archie is free on an AI account of your own. Paste a key from an AI company
+and the app opens: every skill, every routine, the mail watch, all of it. What free means is 20 jobs
+a day. A job is one piece of work: a reply to you, a routine running, or an email it reacts to. The
+count starts again at midnight. A plan takes the limit off and runs up to ten agents."
+
+**Why it's true:** `require_access` in the Archie repo's
+`src-tauri/src/commands/gateway_lifecycle.rs` has three doors, and the third is
+`crate::auth::own_ai_key`: any AI key saved in a workspace this account owns. There is nothing for
+Otian to fund behind that door, because every call goes to the company that issued the key and is
+billed to the person who pasted it, so the app opens rather than a paywall. The limit is counted in
+the gateway: `archie_domain::allowance` holds `FREE_JOBS_A_DAY = 20` and the arithmetic,
+`archie_runtime::free_day` holds the day's tally in one small file beside the bundles, and
+`take_a_job` in `gateway/turn.rs` takes one off the count at the single point every job passes
+through. `GatewayConfig::free_day` is `None` for every paid account, so nothing is read or counted
+for anybody who is paying.
+
+**The last 5 of the 20 are the person's own.** Routines and the mail and text watches stop at 15
+(`FREE_JOBS_KEPT_FOR_YOU`), so an agent cannot spend the day before its owner sits down, and the
+owner is told once, in chat, on the day it happens. The first-run interview is exempt entirely:
+setting Archie up does not cost a day.
+
+**The boundaries:**
+- ⛔ **Never call it a free plan, a free edition, or Archie Free.** It is not a product and it has
+  no name: every edition is named for who it serves (`Archie`, `Archie for Business`), and a tier
+  qualifier is banned outright. Say what it is: Archie, free, on an AI account of your own.
+- ⛔ **Never say free means unlimited, and never publish the free tier without the number.** The
+  limit is the whole difference between free and paid, so a page that offers one without the other
+  is the trick this entry exists to prevent. The number goes in the same sentence.
+- ⛔ **Phone access is not on it.** Your phone reaches the computer through a mailbox on Otian's own
+  server, which is the one thing here we pay for per message, so `firestore.rules`'s `entitled()`
+  grants it to a plan and to a live trial and to nobody else. Copy that lists what free includes has
+  to say so, and the app's own refusal says it with the button named (`crates/archie-core/src/phone.rs`).
+- ⛔ **Never say a key is needed only for the free tier.** Every Archie needs an AI account, on a
+  plan as much as free; the plan buys Archie, never the thinking. See "What you need" below.
+- ✅ The trial still comes first and is still better: 14 days with nothing counted, on our credits or
+  on a key of your own. The free tier is where you land afterwards instead of at a wall.
+- ⛔ **It is a product limit, not a lock.** The tally is a small file on the owner's own computer and
+  anybody willing to edit it can have more, exactly like the agent cap (`archie_core::plan` says so
+  in as many words). Never describe it as enforcement, and never imply the app is defending itself
+  against its owner.
+
 ### ✅ What your agent remembers about you, and what it lets go of (SHIPPED; entry written 2026-09-16)
 
 **Approved wording:** "Your agent keeps a short list of what it has learned about you, and you can
@@ -2213,11 +2256,21 @@ flipped, and a promise not to look is worth nothing. The published sentence, whe
 - This **kills the usage/savings dashboard** as specced. Hours-saved-per-employee is derived
   from activity; if we can't see activity, we can't compute it honestly. Do not build it.
 
-### Both trials keep 14 days (a decision made and reversed the same day)
+### Both trials keep 14 days (reversed 2026-08-24, and answered 2026-09-17)
 
-**Decided, then reversed, 2026-08-24.** This entry is kept rather than struck because the
-reasoning is the useful part and the premise that produced it is still floating around in a
-competitor brief.
+**Superseded.** There is a free tier now, and it is above: "Archie is free on an AI account of your
+own, with a limit of 20 jobs a day." This entry stays because its argument is what the free tier had
+to answer, and because the argument was right about the thing it was about.
+
+**What it said, and what changed.** It refused a free tier on the grounds that `FREE_AGENTS = 1` was
+the only limit separating free from paid, so a trial that never ended would be the paid product
+minus nine agents, which for a one-agent product is the whole thing. That was correct, and the fix
+was not to argue with it: a second limit now exists, it is a day's worth of work rather than a list
+of withheld features, and it bites every day on anybody who actually leans on Archie. The 2026-08-24
+hold ("no page may claim a free tier until the expiry actually comes off") is lifted, because the
+expiry is not what came off. Nothing expires; the day runs out and comes back.
+
+**The reasoning that produced the refusal, kept as written:**
 
 **What was briefly decided:** that the own-key trial would stop expiring, becoming a permanent
 free tier, on the premise that `FREE_AGENTS = 1` is what separates it from a paid plan.
@@ -2236,14 +2289,14 @@ reverted in full (Archie repo, `cdee5d5`, reverting `2c006c9` and `1a30bd7`). No
 deploy happened, so the two repos never disagreed, and no site copy went up: this entry carried a
 hold saying no page could claim a free tier until the expiry actually came off, and none did.
 
-**The standing true sentence** for pricing and trial copy: "Fourteen days free. One agent. After
-that a plan is $299 a year or $30 a month and runs up to ten agents. If your computer has already
-used its free credits, you can still have the fourteen days by connecting an AI account of your
-own and paying that company directly."
+**The standing true sentence** for pricing and trial copy, rewritten 2026-09-17: "Fourteen days
+free, with nothing counted. After that Archie is free on an AI account of your own, with a limit of
+20 jobs a day. A plan is $299 a year or $30 a month, takes the limit off, and runs up to ten agents.
+Your agent needs an AI account of your own either way, and you pay that company directly."
 
-⛔ **Wishlist items 1, 10 and 15 do not unblock.** BetterClaw's free-tier pattern needs a
-permanent free tier, and we have decided against one. Any future revival has to answer the
-paragraph above, not just repeat the premise.
+The old version of this sentence ended "you can still have the fourteen days by connecting an AI
+account of your own", which was true and is no longer the whole answer: connecting one now opens the
+app whether or not the fourteen days are available.
 
 ### ⛔ The starter credits cannot read email, and the site said they could
 
@@ -2290,9 +2343,11 @@ together, and a permission UI must never be allowed to imply otherwise.
 
 ### Subscription gating
 
-Archie is gated by payment; we do not pretend otherwise. We do not market "runs forever"
-and we do not claim a grace period. If the gate is ever made to fail *closed*, this section
-gets rewritten and the Trust page's honest-limits section updated the same day.
+**Rewritten 2026-09-17, when the third door opened.** Archie is gated by payment *or* by bringing an
+AI account of your own, and the second one is free with a limit of 20 jobs a day. We do not market
+"runs forever", we do not claim a grace period, and we do not describe the free tier without its
+number. If the gate is ever made to fail *closed*, this section gets rewritten and the Trust page's
+honest-limits section updated the same day.
 
 ### ✅ What the AI providers say about training on API traffic (third-party, sourced)
 

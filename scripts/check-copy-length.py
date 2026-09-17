@@ -143,7 +143,14 @@ BUDGETS = {
     # of 2,977 words, 163 are the table and 880 the folds, and what is left is measured cost
     # with its source beside it. The visual-first direction the other four pages took is real
     # and it does not apply to a page whose job is to print every number we charge.
-    "archie/pricing/index.html": 2960,
+    # Raised to 3010 on 2026-09-17, for the free tier. Archie stopped being paid-only that day:
+    # an AI account of your own opens the app with a limit of 20 jobs a day, and TRUST.md's entry
+    # forbids offering the free tier anywhere without that number in the same breath. So it is a
+    # new price on the page whose job is to print every one of them, in three places that each
+    # have to stand alone (the free card, the two-lane section, and the plans lede). 41 words of
+    # the rise were paid for first, out of my own additions and one sentence that was on two cards
+    # word for word; what is left is the fact itself.
+    "archie/pricing/index.html": 3010,
     # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
     # because it is about our own product. Its visible prose is 426 words, well under the
     # default, and the page is carried by a figure of three real app screens rather than by

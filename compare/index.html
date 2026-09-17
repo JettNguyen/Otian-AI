@@ -212,8 +212,20 @@
              The lead visual is a quadrant chart: two axes and big round marks with the name above
              each. It had a shaded corner around Archie until 2026-09-16, when Jett read it as a
              box, and he was right that it was one: a panel drawn around our own mark is a callout,
-             not a chart, and it read as sales. Archie is told apart by what the drawing already
-             gives it, a larger circle in the site's accent, and nothing is framed. It is modelled on the chart Jett sent as the reference on
+             not a chart, and it read as sales. Nothing is framed now. What tells Archie apart is
+             four things, all of them concentric with the mark and none of them a container, since
+             one accent ring alone turned out not to be enough to find it in a glance (Jett, the
+             next day): a soft accent disc behind the circle, a faint accent ring inside that disc,
+             a circle a third larger than the rest with a heavier accent stroke, and its name set
+             in the accent rather than the body colour. Emphasis that stays a mark can grow as much
+             as it needs to. The moment it grows a straight edge it is the panel again.
+
+             THE TWO CONTROL LABELS SIT LEFT OF THE AXIS LINE, in a gutter, at Jett's direction on
+             2026-09-17. They were inside the field, in the corners nobody occupies, which reads as
+             free text floating in the plot rather than as the ends of a scale. Outside, hard
+             against the line and right-aligned to it, they are unmistakably the axis speaking. It
+             costs 56px of field width on desktop and 48px narrow, so every mark moved with the
+             left edge and the marks keep the same fraction of the field they had. It is modelled on the chart Jett sent as the reference on
              2026-09-16 (a competitor's, four products on Complexity against Memory), because it
              was the one he could read in a glance, and four drafts of ours that day could not
              be. A ranked board with six "tests" read as a verdict ("Archie, 4 of 6"). A hatched
@@ -329,15 +341,17 @@
             </defs>
           </svg>
           <svg class="explain-svg--desktop" viewBox="0 0 640 532" role="img" aria-labelledby="fq-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fq-t">A chart with two axes and eight marks scattered across it. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, its circle larger than the rest and ringed in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Vellum and Hermes sit just below it on the your-computer side, Claude Cowork and Meta Muse on the their-servers side, all four at the same height because each asks by default until you change a setting. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. The top-left of the chart is empty. Five circles carry the company&rsquo;s own icon and four carry a letter, and every one has its name above it. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
+            <title id="fq-t">A chart with two axes and eight marks scattered across it. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, set apart by a larger circle, a ring, a soft halo and a name all in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Vellum and Hermes sit just below it on the your-computer side, Claude Cowork and Meta Muse on the their-servers side, all four at the same height because each asks by default until you change a setting. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. The top-left of the chart is empty. Five circles carry the company&rsquo;s own icon and four carry a letter, and every one has its name above it. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
             <style>
               .explain-svg--desktop .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--desktop .fq-title{fill:currentColor;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
-              .explain-svg--desktop .fq-end{fill:currentColor;font-size:11px;font-weight:600;opacity:.78}
+              .explain-svg--desktop .fq-end{fill:currentColor;font-size:10.5px;font-weight:600;opacity:.78}
               .explain-svg--desktop .fq-mark{fill:#FFFFFF;stroke:var(--line-muted);stroke-width:1.5}
-              .explain-svg--desktop .fq-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:2.4}
+              .explain-svg--desktop .fq-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:3}
+              .explain-svg--desktop .fq-halo{fill:var(--accent);opacity:.14}
+              .explain-svg--desktop .fq-halo-in{fill:none;stroke:var(--accent);stroke-width:1.1;opacity:.45}
               .explain-svg--desktop .fq-name{fill:currentColor;font-size:12.5px;font-weight:600;text-anchor:middle}
-              .explain-svg--desktop .fq-name-us{fill:currentColor;font-size:14px;font-weight:700;text-anchor:middle}
+              .explain-svg--desktop .fq-name-us{fill:var(--accent-ink);font-size:14px;font-weight:700;letter-spacing:.005em;text-anchor:middle}
               .explain-svg--desktop .fq-init{fill:#44403B;font-size:17px;font-weight:700;text-anchor:middle}
               .explain-svg--desktop .fq-off-init{fill:#44403B;font-size:9.5px;font-weight:700;text-anchor:middle}
               .explain-svg--desktop .fq-off-h{fill:currentColor;font-size:11px;font-weight:600;opacity:.78}
@@ -356,61 +370,65 @@
               </marker>
             </defs>
 
-            <path class="fq-axis" d="M56 14 V348 H616"/>
-            <text class="fq-title" transform="rotate(-90 20 181)" x="20" y="181" text-anchor="middle">Control &rarr;</text>
-            <text class="fq-end" x="66" y="30">Asks first</text>
-            <text class="fq-end" x="66" y="340">Acts on its own</text>
-            <text class="fq-end" x="56" y="372">Their servers</text>
+            <path class="fq-axis" d="M112 14 V348 H616"/>
+            <text class="fq-title" transform="rotate(-90 12 181)" x="12" y="181" text-anchor="middle">Control &rarr;</text>
+            <text class="fq-end" x="102" y="22" text-anchor="end">Asks first</text>
+            <text class="fq-end" x="102" y="344" text-anchor="end">Acts on its own</text>
+            <text class="fq-end" x="112" y="372">Their servers</text>
             <text class="fq-end" x="616" y="372" text-anchor="end">Your computer</text>
-            <text class="fq-title" x="336" y="396" text-anchor="middle">Privacy &rarr;</text>
+            <text class="fq-title" x="364" y="396" text-anchor="middle">Privacy &rarr;</text>
 
-            <text class="fq-name-us" x="512" y="36">Archie</text>
-            <circle class="fq-mark-us" cx="512" cy="68" r="23"/>
-            <use href="#lg-archie" x="495.9" y="51.9" width="32.2" height="32.2"/>
-            <text class="fq-name" x="424" y="117">Vellum</text>
-            <circle class="fq-mark" cx="424" cy="144" r="18"/>
-            <use href="#lg-vellum" x="414.55" y="134.55" width="18.9" height="18.9"/>
-            <text class="fq-name" x="548" y="131">Hermes</text>
-            <circle class="fq-mark" cx="548" cy="158" r="18"/>
-            <use href="#lg-hermes" x="530.9" y="140.9" width="34.2" height="34.2"/>
-            <text class="fq-name" x="168" y="115">Claude Cowork</text>
-            <circle class="fq-mark" cx="168" cy="142" r="18"/>
-            <text class="fq-init" x="168" y="147.95">C</text>
-            <text class="fq-name" x="272" y="129">Meta Muse</text>
-            <circle class="fq-mark" cx="272" cy="156" r="18"/>
-            <text class="fq-init" x="272" y="161.95">M</text>
-            <text class="fq-name" x="470" y="277">OpenClaw</text>
-            <circle class="fq-mark" cx="470" cy="304" r="18"/>
-            <use href="#lg-openclaw" x="459.65" y="293.65" width="20.7" height="20.7"/>
-            <text class="fq-name" x="170" y="273">Grok Bot</text>
-            <circle class="fq-mark" cx="170" cy="300" r="18"/>
-            <text class="fq-init" x="170" y="305.95">G</text>
-            <text class="fq-name" x="272" y="285">Instinct</text>
-            <circle class="fq-mark" cx="272" cy="312" r="18"/>
-            <use href="#lg-instinct" x="261.2" y="301.2" width="21.6" height="21.6"/>
+            <circle class="fq-halo" cx="522" cy="68" r="34"/>
+            <circle class="fq-halo-in" cx="522" cy="68" r="29.5"/>
+            <text class="fq-name-us" x="522" y="27">Archie</text>
+            <circle class="fq-mark-us" cx="522" cy="68" r="25"/>
+            <use href="#lg-archie" x="504.5" y="50.5" width="35.0" height="35.0"/>
+            <text class="fq-name" x="443" y="117">Vellum</text>
+            <circle class="fq-mark" cx="443" cy="144" r="18"/>
+            <use href="#lg-vellum" x="433.55" y="134.55" width="18.9" height="18.9"/>
+            <text class="fq-name" x="555" y="131">Hermes</text>
+            <circle class="fq-mark" cx="555" cy="158" r="18"/>
+            <use href="#lg-hermes" x="537.9" y="140.9" width="34.2" height="34.2"/>
+            <text class="fq-name" x="213" y="115">Claude Cowork</text>
+            <circle class="fq-mark" cx="213" cy="142" r="18"/>
+            <text class="fq-init" x="213" y="147.95">C</text>
+            <text class="fq-name" x="306" y="129">Meta Muse</text>
+            <circle class="fq-mark" cx="306" cy="156" r="18"/>
+            <text class="fq-init" x="306" y="161.95">M</text>
+            <text class="fq-name" x="485" y="277">OpenClaw</text>
+            <circle class="fq-mark" cx="485" cy="304" r="18"/>
+            <use href="#lg-openclaw" x="474.65" y="293.65" width="20.7" height="20.7"/>
+            <text class="fq-name" x="215" y="273">Grok Bot</text>
+            <circle class="fq-mark" cx="215" cy="300" r="18"/>
+            <text class="fq-init" x="215" y="305.95">G</text>
+            <text class="fq-name" x="306" y="285">Instinct</text>
+            <circle class="fq-mark" cx="306" cy="312" r="18"/>
+            <use href="#lg-instinct" x="295.2" y="301.2" width="21.6" height="21.6"/>
 
-            <text class="fq-off-h" x="56" y="426">Their pages don&rsquo;t say where the work runs:</text>
-            <circle class="fq-mark" cx="65" cy="448" r="9"/>
-            <use href="#lg-symphony" x="58.9" y="441.9" width="12.2" height="12.2"/>
-            <text class="fq-off" x="81" y="452">Wix Symphony</text>
-            <circle class="fq-mark" cx="275" cy="448" r="9"/>
-            <text class="fq-off-init" x="275" y="451.325">N</text>
-            <text class="fq-off" x="291" y="452">Norton Family Assistant</text>
-            <path class="fq-flow" d="M336 460 V478"/>
-            <rect class="fq-band" x="56" y="486" width="560" height="36" rx="10"/>
-            <text class="fq-band-t" x="336" y="508.5">All ten send your words to an AI company&rsquo;s computers.</text>
+            <text class="fq-off-h" x="112" y="426">Their pages don&rsquo;t say where the work runs:</text>
+            <circle class="fq-mark" cx="121" cy="448" r="9"/>
+            <use href="#lg-symphony" x="114.9" y="441.9" width="12.2" height="12.2"/>
+            <text class="fq-off" x="137" y="452">Wix Symphony</text>
+            <circle class="fq-mark" cx="321" cy="448" r="9"/>
+            <text class="fq-off-init" x="321" y="451.325">N</text>
+            <text class="fq-off" x="337" y="452">Norton Family Assistant</text>
+            <path class="fq-flow" d="M364 460 V478"/>
+            <rect class="fq-band" x="112" y="486" width="504" height="36" rx="10"/>
+            <text class="fq-band-t" x="364" y="508.5">All ten send your words to an AI company&rsquo;s computers.</text>
           </svg>
 
           <svg class="explain-svg--mobile" viewBox="0 0 340 610" role="img" aria-labelledby="fqm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fqm-t">The same chart, taller for a narrow screen. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, its circle larger than the rest and ringed in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Just below it, each asking by default until you change a setting: Vellum and Hermes on the your-computer side, Claude Cowork and Meta Muse on the their-servers side. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. Five circles carry the company&rsquo;s own icon and four carry a letter. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
+            <title id="fqm-t">The same chart, taller for a narrow screen. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, set apart by a larger circle, a ring, a soft halo and a name all in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Just below it, each asking by default until you change a setting: Vellum and Hermes on the your-computer side, Claude Cowork and Meta Muse on the their-servers side. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. Five circles carry the company&rsquo;s own icon and four carry a letter. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
             <style>
               .explain-svg--mobile .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--mobile .fq-title{fill:currentColor;font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
-              .explain-svg--mobile .fq-end{fill:currentColor;font-size:9.5px;font-weight:600;opacity:.78}
+              .explain-svg--mobile .fq-end{fill:currentColor;font-size:9px;font-weight:600;opacity:.78}
               .explain-svg--mobile .fq-mark{fill:#FFFFFF;stroke:var(--line-muted);stroke-width:1.5}
-              .explain-svg--mobile .fq-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:2.4}
+              .explain-svg--mobile .fq-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:3}
+              .explain-svg--mobile .fq-halo{fill:var(--accent);opacity:.14}
+              .explain-svg--mobile .fq-halo-in{fill:none;stroke:var(--accent);stroke-width:1.1;opacity:.45}
               .explain-svg--mobile .fq-name{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-              .explain-svg--mobile .fq-name-us{fill:currentColor;font-size:12.5px;font-weight:700;text-anchor:middle}
+              .explain-svg--mobile .fq-name-us{fill:var(--accent-ink);font-size:12.5px;font-weight:700;letter-spacing:.005em;text-anchor:middle}
               .explain-svg--mobile .fq-init{fill:#44403B;font-size:15px;font-weight:700;text-anchor:middle}
               .explain-svg--mobile .fq-off-init{fill:#44403B;font-size:9px;font-weight:700;text-anchor:middle}
               .explain-svg--mobile .fq-off-h{fill:currentColor;font-size:10px;font-weight:600;opacity:.78}
@@ -429,50 +447,52 @@
               </marker>
             </defs>
 
-            <path class="fq-axis" d="M40 14 V404 H324"/>
-            <text class="fq-title" transform="rotate(-90 14 209)" x="14" y="209" text-anchor="middle">Control &rarr;</text>
-            <text class="fq-end" x="50" y="28">Asks first</text>
-            <text class="fq-end" x="50" y="398">Acts on its own</text>
-            <text class="fq-end" x="40" y="426">Their servers</text>
+            <path class="fq-axis" d="M88 14 V404 H324"/>
+            <text class="fq-title" transform="rotate(-90 9 209)" x="9" y="209" text-anchor="middle">Control &rarr;</text>
+            <text class="fq-end" x="80" y="22" text-anchor="end">Asks first</text>
+            <text class="fq-end" x="80" y="402" text-anchor="end">Acts on its own</text>
+            <text class="fq-end" x="88" y="426">Their servers</text>
             <text class="fq-end" x="324" y="426" text-anchor="end">Your computer</text>
-            <text class="fq-title" x="182" y="448" text-anchor="middle">Privacy &rarr;</text>
+            <text class="fq-title" x="206" y="448" text-anchor="middle">Privacy &rarr;</text>
 
-            <text class="fq-name-us" x="272" y="30">Archie</text>
-            <circle class="fq-mark-us" cx="272" cy="58" r="19"/>
-            <use href="#lg-archie" x="258.7" y="44.7" width="26.6" height="26.6"/>
-            <text class="fq-name" x="240" y="116">Vellum</text>
-            <circle class="fq-mark" cx="240" cy="140" r="15"/>
-            <use href="#lg-vellum" x="232.1" y="132.1" width="15.8" height="15.8"/>
-            <text class="fq-name" x="296" y="134">Hermes</text>
-            <circle class="fq-mark" cx="296" cy="158" r="15"/>
-            <use href="#lg-hermes" x="281.75" y="143.75" width="28.5" height="28.5"/>
-            <text class="fq-name" x="104" y="118">Claude Cowork</text>
-            <circle class="fq-mark" cx="104" cy="142" r="15"/>
-            <text class="fq-init" x="104" y="147.25">C</text>
-            <text class="fq-name" x="160" y="136">Meta Muse</text>
-            <circle class="fq-mark" cx="160" cy="160" r="15"/>
-            <text class="fq-init" x="160" y="165.25">M</text>
-            <text class="fq-name" x="262" y="300">OpenClaw</text>
-            <circle class="fq-mark" cx="262" cy="324" r="15"/>
-            <use href="#lg-openclaw" x="253.4" y="315.4" width="17.2" height="17.2"/>
-            <text class="fq-name" x="104" y="296">Grok Bot</text>
-            <circle class="fq-mark" cx="104" cy="320" r="15"/>
-            <text class="fq-init" x="104" y="325.25">G</text>
-            <text class="fq-name" x="166" y="316">Instinct</text>
-            <circle class="fq-mark" cx="166" cy="340" r="15"/>
-            <use href="#lg-instinct" x="157" y="331" width="18.0" height="18.0"/>
+            <circle class="fq-halo" cx="280" cy="58" r="28.5"/>
+            <circle class="fq-halo-in" cx="280" cy="58" r="24.75"/>
+            <text class="fq-name-us" x="280" y="22.5">Archie</text>
+            <circle class="fq-mark-us" cx="280" cy="58" r="21"/>
+            <use href="#lg-archie" x="265.3" y="43.3" width="29.4" height="29.4"/>
+            <text class="fq-name" x="246" y="114">Vellum</text>
+            <circle class="fq-mark" cx="246" cy="138" r="15"/>
+            <use href="#lg-vellum" x="238.1" y="130.1" width="15.8" height="15.8"/>
+            <text class="fq-name" x="298" y="148">Hermes</text>
+            <circle class="fq-mark" cx="298" cy="172" r="15"/>
+            <use href="#lg-hermes" x="283.75" y="157.75" width="28.5" height="28.5"/>
+            <text class="fq-name" x="126" y="114">Claude Cowork</text>
+            <circle class="fq-mark" cx="126" cy="138" r="15"/>
+            <text class="fq-init" x="126" y="143.25">C</text>
+            <text class="fq-name" x="184" y="148">Meta Muse</text>
+            <circle class="fq-mark" cx="184" cy="172" r="15"/>
+            <text class="fq-init" x="184" y="177.25">M</text>
+            <text class="fq-name" x="272" y="304">OpenClaw</text>
+            <circle class="fq-mark" cx="272" cy="328" r="15"/>
+            <use href="#lg-openclaw" x="263.4" y="319.4" width="17.2" height="17.2"/>
+            <text class="fq-name" x="128" y="292">Grok Bot</text>
+            <circle class="fq-mark" cx="128" cy="316" r="15"/>
+            <text class="fq-init" x="128" y="321.25">G</text>
+            <text class="fq-name" x="186" y="324">Instinct</text>
+            <circle class="fq-mark" cx="186" cy="348" r="15"/>
+            <use href="#lg-instinct" x="177" y="339" width="18.0" height="18.0"/>
 
-            <text class="fq-off-h" x="40" y="476">Their pages don&rsquo;t say where the work runs:</text>
-            <circle class="fq-mark" cx="48" cy="494" r="8"/>
-            <use href="#lg-symphony" x="42.6" y="488.6" width="10.8" height="10.8"/>
-            <text class="fq-off" x="63" y="498">Wix Symphony</text>
-            <circle class="fq-mark" cx="48" cy="516" r="8"/>
-            <text class="fq-off-init" x="48" y="519.15">N</text>
-            <text class="fq-off" x="63" y="520">Norton Family Assistant</text>
-            <path class="fq-flow" d="M182 528 V546"/>
-            <rect class="fq-band" x="40" y="554" width="284" height="46" rx="10"/>
-            <text class="fq-band-t" x="182" y="574">All ten send your words to</text>
-            <text class="fq-band-t" x="182" y="589">an AI company&rsquo;s computers.</text>
+            <text class="fq-off-h" x="88" y="476">Their pages don&rsquo;t say where the work runs:</text>
+            <circle class="fq-mark" cx="96" cy="494" r="8"/>
+            <use href="#lg-symphony" x="90.6" y="488.6" width="10.8" height="10.8"/>
+            <text class="fq-off" x="111" y="498">Wix Symphony</text>
+            <circle class="fq-mark" cx="96" cy="516" r="8"/>
+            <text class="fq-off-init" x="96" y="519.15">N</text>
+            <text class="fq-off" x="111" y="520">Norton Family Assistant</text>
+            <path class="fq-flow" d="M206 528 V546"/>
+            <rect class="fq-band" x="88" y="554" width="236" height="46" rx="10"/>
+            <text class="fq-band-t" x="206" y="574">All ten send your words to</text>
+            <text class="fq-band-t" x="206" y="589">an AI company&rsquo;s computers.</text>
           </svg>
 
           <figcaption>For Archie, asks first means calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final. All ten send your words to an AI company&rsquo;s computers.</figcaption>

@@ -16448,8 +16448,16 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    round the profile behind it is (Jett, 2026-09-17, with a screenshot). So the swell is about half
    a pixel, which softens the silhouette without drawing a band, and the metal's bright stop is one
    short arc at the light's own corner, with the rest near black: a rounded edge shows you where
-   the light is, and an outline shows you where the edge is. */
-.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
+   the light is, and an outline shows you where the edge is.
+
+   ACROSS THE BAND THE LAYERS GO DARK, BRIGHT, DARK. That is the whole difference between a curve
+   and a plate, and darkening alone, front to back, is a plate at an angle (Jett, 2026-09-17: the
+   right edge still read sharp). --lt is each layer's share of the specular, a bell peaking near
+   z -16, where the inset is about flush, so the bright layers are never the proud ones and the
+   streak cannot come around the front as a ring. Eleven layers rather than seven, because at the
+   angles these poses use the stack steps sideways about a pixel and a half per layer, and at seven
+   it stepped three and read as a stair. */
+.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(255, 255, 255, var(--lt, 0)), rgba(255, 255, 255, var(--lt, 0))), linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
 /* The side of the phone is polished, so the sliver of rim the turn exposes carries a sheen down
    it. js/home.js puts that sheen where the rim is showing (--rim-x) and brings it up with how far
    the phone is turned (--rim-a), so the phone's side catches the light as it comes around. It is a
@@ -16466,9 +16474,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   /* The bezel's four highlights and the angle of its sheen are variables js/home.js sets from the
      phone's angle each frame: the side turned toward the light blazes and the other goes nearly
      out, the top and bottom follow the camera's pitch, and the bright corners slide around as the
-     phone turns. Each is a crisp hairline for the specular with a soft band behind it for the
-     roll into the glass, rather than the kit's single 2px wash, which on a wall this thin is a
-     third of the bezel and reads as a glow. At rest they are near the kit's own values.
+     phone turns. Each is a soft band a few pixels into the wall, and none of them is a crisp
+     line: a 1px highlight at the phone's own silhouette is a sharp edge by definition, which is
+     what the right side kept reading as while the four sides each carried one. At rest they are
+     near the kit's own values.
 
      NOTHING HERE MAY TRACE THE WHOLE SILHOUETTE AT ONE BRIGHTNESS. A uniform ring is how a cut
      edge reads and is the opposite of how a chamfer reads, which is bright where the light is and
@@ -16477,7 +16486,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      cast shadow went with them: it was painted in the glass's plane, in front of the rim, so it
      darkened the very ring the rounded edge shows. The phone's shadow belongs to the back face,
      which has carried it all along (--shadow-app on .dp-edge--back). */
-  --shadow-bezel: inset 0 1px 0 rgba(255, 255, 255, var(--edge-t, .26)), inset 0 3px 4px rgba(255, 255, 255, calc(var(--edge-t, .26) * .22)), inset 0 -1px 0 rgba(255, 255, 255, var(--edge-b, .13)), inset 0 -3px 4px rgba(255, 255, 255, calc(var(--edge-b, .13) * .22)), inset 1px 0 0 rgba(255, 255, 255, var(--edge-l, .10)), inset 3px 0 4px rgba(255, 255, 255, calc(var(--edge-l, .10) * .22)), inset -1px 0 0 rgba(255, 255, 255, var(--edge-r, .10)), inset -3px 0 4px rgba(255, 255, 255, calc(var(--edge-r, .10) * .22));
+  --shadow-bezel: inset 0 2px 3px rgba(255, 255, 255, var(--edge-t, .26)), inset 0 -2px 3px rgba(255, 255, 255, var(--edge-b, .13)), inset 2px 0 3px rgba(255, 255, 255, var(--edge-l, .10)), inset -2px 0 3px rgba(255, 255, 255, var(--edge-r, .10));
   position: relative; width: 407px; height: 866px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
   background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
   box-shadow: var(--shadow-bezel);

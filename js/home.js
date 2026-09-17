@@ -296,18 +296,26 @@
          the light blazes and the other goes nearly out; the top and bottom follow the camera's
          pitch; the bezel's bright corners slide around with the sheen; and the sliver of rim the
          turn exposes carries a bright line down it, on the side it is showing (a turn to the left
-         brings the rim out on the left, since the rim stands behind the glass). The swing is
-         wide on purpose: the bezel is a hairline now, and a hairline that does not change is not
-         read as metal. The stylesheet reads all of these on the phone. */
+         brings the rim out on the left, since the rim stands behind the glass). The stylesheet
+         reads all of these on the phone.
+
+         THEY WERE SCALED TO SWING AND ENDED UP PINNED. The poses yaw about -26 to +13 degrees, and
+         at 1.1 per unit of sine the lit side sat on its 0.48 ceiling in most frames of the story
+         and every frame of the overnight act, so what it drew was not light moving over metal but a
+         fixed streak of half-white down one edge of the glass (Jett, 2026-09-17: "the glass glare
+         is also a bit too harsh"). The numbers below are scaled to the yaw the poses actually use,
+         so nothing reaches its clamp: the lit side now runs about .19 to .27 where it ran a flat
+         .48, and the rim's line .09 to .16 where it sat on .22. A highlight that never changes is
+         not read as metal, which is why the swing is there, but neither is one that never stops. */
       var yaw = p.cam.ry + tilt.x + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
       var pitch = p.cam.rx + tilt.y, sp = Math.sin(pitch * Math.PI / 180);
-      phone.style.setProperty('--edge-l', clamp(0.16 + 1.1 * sy, 0.02, 0.48).toFixed(3));
-      phone.style.setProperty('--edge-r', clamp(0.16 - 1.1 * sy, 0.02, 0.48).toFixed(3));
-      phone.style.setProperty('--edge-t', clamp(0.26 + 0.9 * sp, 0.06, 0.55).toFixed(3));
+      phone.style.setProperty('--edge-l', clamp(0.10 + 0.38 * sy, 0.02, 0.28).toFixed(3));
+      phone.style.setProperty('--edge-r', clamp(0.10 - 0.38 * sy, 0.02, 0.28).toFixed(3));
+      phone.style.setProperty('--edge-t', clamp(0.17 + 0.9 * sp, 0.05, 0.36).toFixed(3));
       phone.style.setProperty('--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
       phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
       phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
-      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.5, 0, 0.22).toFixed(3));
+      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.36, 0, 0.17).toFixed(3));
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));

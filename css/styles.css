@@ -16681,12 +16681,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   opacity: var(--fo); transform-origin: 50% 100%;
   transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg);
 }
+/* A PIECE THAT HAS NOT STARTED IS NOT PAINTED AT ALL, AND THAT IS NOT BELT AND BRACES. The dash
+   runs from the path's start to --dN, so at --dN 0 it is a dash of zero length sitting on the path's
+   first point, and `stroke-linecap: round` paints a zero-length dash as a dot. An undrawn drawing
+   therefore wore a dot at the start of every path in it (Jett, 2026-09-17, naming two: the left end
+   of the screen's first rule and the left end of the ground under the AI company). Every other value
+   of --dN is a real dash with a real end, so 0 is the only case and taking the group out of the
+   painting is the whole of the cure. It also means the resting state is empty rather than dotted,
+   which is what a reader with no javascript should get. */
 .day-build > g { stroke-dasharray: 1; }
-.day-build .p0 { stroke-dashoffset: calc(1 - var(--d0, 0)); }
-.day-build .p1 { stroke-dashoffset: calc(1 - var(--d1, 0)); }
-.day-build .p2 { stroke-dashoffset: calc(1 - var(--d2, 0)); }
-.day-build .p3 { stroke-dashoffset: calc(1 - var(--d3, 0)); }
-.day-build .p4 { stroke-dashoffset: calc(1 - var(--d4, 0)); }
+.day-build .p0 { stroke-dashoffset: calc(1 - var(--d0, 0)); opacity: clamp(0, calc(var(--d0, 0) * 1000), 1); }
+.day-build .p1 { stroke-dashoffset: calc(1 - var(--d1, 0)); opacity: clamp(0, calc(var(--d1, 0) * 1000), 1); }
+.day-build .p2 { stroke-dashoffset: calc(1 - var(--d2, 0)); opacity: clamp(0, calc(var(--d2, 0) * 1000), 1); }
+.day-build .p3 { stroke-dashoffset: calc(1 - var(--d3, 0)); opacity: clamp(0, calc(var(--d3, 0) * 1000), 1); }
+.day-build .p4 { stroke-dashoffset: calc(1 - var(--d4, 0)); opacity: clamp(0, calc(var(--d4, 0) * 1000), 1); }
 
 /* Wide only, and written as the complement of the narrow block rather than as a min-width, so that
    at a fractional viewport width the two can never both miss. The five cards stand at one floor

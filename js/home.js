@@ -194,12 +194,12 @@
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
        each is rastered near the size it is seen. */
     var W = { x: -60, y: -30, z: -140, ry: 12, s: 1.143, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: .857, o: 1 };
-    var W2 = { x: -150, y: -50, z: -240, ry: 18, s: 1.143, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -5, s: .943, o: 1 };
+    var W2 = { x: -150, y: -50, z: -240, ry: 18, s: 1.143, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -12, s: .943, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centred while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 50, z: 40, ry: -12, s: 1.1, o: 1 };
-    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -4, s: 1.3, o: 1 };
+    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 50, z: 40, ry: -12, s: 1.15, o: 1 };
+    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.45, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
@@ -209,14 +209,14 @@
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '1:40 pm', phone: '1:40', scr: 2,
-        pose: { cam: { rx: 2, ry: 3, s: 1.05 }, win: copy(W2, { x: -170, z: -260, ry: 20, o: .4 }), phone: copy(PH2, { x: 90, ry: 3, z: 160 }), night: 0, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 2, ry: 2, s: 1 }, win: copy(NW2, { ry: 24 }), phone: copy(NP2, { ry: 3 }), night: 0, fc: 0, fs: 0 } },
+        pose: { cam: { rx: 2, ry: 3, s: 1.05 }, win: copy(W2, { x: -170, z: -260, ry: 20, o: .4 }), phone: copy(PH2, { x: 90, ry: 10, z: 160 }), night: 0, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 2, ry: 2, s: 1 }, win: copy(NW2, { ry: 24 }), phone: copy(NP2, { ry: 8 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-computer', state: 'idle', clock: '', phone: '1:40', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W2, { o: 0 }), phone: copy(PH2, { o: 0 }), night: 0, fc: 1, fs: 0 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW2, { o: 0 }), phone: copy(NP2, { o: 0 }), night: 0, fc: 1, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '4:15 pm', phone: '4:15', scr: 4,
-        pose: { cam: { rx: 3, ry: -8, s: 1.04 }, win: copy(W2, { ry: 16 }), phone: copy(PH2, { ry: -8 }), night: 0, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -8 }), night: 0, fc: 0, fs: 0 } },
+        pose: { cam: { rx: 3, ry: -8, s: 1.04 }, win: copy(W2, { ry: 16 }), phone: copy(PH2, { ry: -14 }), night: 0, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -10 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5,
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: copy(PH, { o: .45 }), night: 1, fc: 0, fs: 0 },
         narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 30, z: 40, ry: -6, s: 1.2, o: 1 }, night: 1, fc: 0, fs: 0 } },
@@ -284,10 +284,12 @@
        point of the drawing, so it is a fifth of the lap, and the ball holds at the gate line (which
        is at 352, and the sign stands at its end). The credits path takes the detour through our
        server and back, which is the one case TRUST.md says the picture may not skip. */
-    var LAP_KEY = [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
-    var LAP_CREDITS = [[0, 95, 300], [0.2, 360, 300], [0.32, 360, 60], [0.44, 625, 300], [0.52, 360, 60], [0.6, 360, 300], [0.64, 360, 350], [0.8, 360, 350], [1, 95, 300]];
-    /* Where the stations stand, so the ball goes see-through while it is under one. */
-    var STATIONS = [[95, 300], [360, 300], [625, 300], [360, 60]];
+    function lapKey() { var g = narrow ? 405 : 350; return [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
+    function lapCredits() { var g = narrow ? 405 : 350, o = narrow ? 410 : 360; return [[0, 95, 300], [0.2, 360, 300], [0.32, o, 60], [0.44, 625, 300], [0.52, o, 60], [0.6, 360, 300], [0.64, 360, g], [0.8, 360, g], [1, 95, 300]]; }
+    /* Where the stations stand, so the ball goes see-through while it is under one. Narrow, our
+       server is a step nearer (--gx in the stylesheet) and the gate is past the computer's
+       footprint (--gm), and the lap follows both. */
+    function stations() { return [[95, 300], [360, 300], [625, 300], [narrow ? 410 : 360, 60]]; }
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {
@@ -341,9 +343,9 @@
       var mark = ACTS[i].mark;
       if (i === 3) {
         var credits = floorC.getAttribute('data-mode') === 'credits';
-        var pt = lapPoint(credits ? LAP_CREDITS : LAP_KEY, tp);
+        var pt = lapPoint(credits ? lapCredits() : lapKey(), tp);
         dot.style.left = pt[0] + 'px'; dot.style.top = pt[1] + 'px';
-        var under = STATIONS.some(function (st) { return Math.abs(pt[0] - st[0]) < 40 && Math.abs(pt[1] - st[1]) < 30; });
+        var under = stations().some(function (st) { return Math.abs(pt[0] - st[0]) < 40 && Math.abs(pt[1] - st[1]) < 30; });
         dot.classList.toggle('is-under', under);
         var held = tp >= 0.62 && tp < 0.8;
         dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);

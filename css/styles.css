@@ -16423,8 +16423,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
 /* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
 .day-phone { width: 263px; height: 552px; margin: -276px 0 0 -131px; }
-/* The rim: the layer's own box, which is the zoomed device's, repeated behind it at four-pixel
-   steps down to a back face 28px deep (a phone is about a ninth as thick as it is wide). Each is
+/* The rim: the layer's own box, which is the zoomed device's, repeated behind it at five-pixel
+   steps down to a back face 35px deep (a phone is about an eighth as thick as it is wide). Each is
    the bezel's own metal, darker toward the back, and the back face carries the cast shadow. */
 .dp-edge { position: absolute; inset: 0; border-radius: 42px; pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(148deg, #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
 .dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
@@ -16568,7 +16568,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    it and its outline fills in. */
 #dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; }
 .day-ico { display: block; width: 46px; height: 46px; margin: 0 auto 4px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.day-st.ghost { transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+.day-st.ghost { left: calc(var(--fx) + var(--gx, 0px)); transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
 .day-st.ghost .day-ico { stroke: var(--text-muted); stroke-dasharray: 3 3; }
 .day-floor[data-mode="credits"] .day-st.ghost .day-ico { stroke: var(--accent); stroke-dasharray: none; }
 .day-st.is-lit { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle), var(--shadow-sm); }
@@ -16579,7 +16579,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-st .day-mark { left: 50%; top: 0; }
 /* transform-style, or the gate flattens its label into the floor and the standing-up rotation below
    becomes a second squash: that was "waits for you" reading as a pressed pill. */
-.day-gate { position: absolute; left: var(--fx); top: var(--fy); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
+.day-gate { position: absolute; left: var(--fx); top: calc(var(--fy) + var(--gm, 0px)); width: 160px; height: 0; border-top: 2px dashed var(--line-muted); transform: translate(-50%, 0); transform-style: preserve-3d; opacity: var(--fo); }
 /* The sign stands at the line's right end, not over its middle: standing over the middle it sat on
    the computer card's bottom edge and hid the ball. */
 .day-gate span { position: absolute; left: calc(100% + 6px); top: 14px; transform: translate(0, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); transform-origin: 0 100%; padding: 3px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
@@ -16650,11 +16650,19 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-clock { left: 12px; top: 6px; }
   .day-hint { display: none; }
   .day-floor { --fz: 90deg; }
-  /* The phone is shorter here (the transcript is bottom-aligned, so it shows fewer bubbles and
-     nothing else changes) so it can stand nearly full width and its words stay readable. */
-  .dp-device { height: 624px; }
-  .dp-ph { height: 600px; }
-  .day-phone { height: 393px; margin-top: -196px; }
+  /* The phone is a cropped screenshot here, not a device: the app's bar, the thread and the
+     composer, with no bezel, status bar or home bar, so it can stand nearly full width and its
+     words stay readable without a whole phone reading as short and stubby. The transcript is
+     bottom-aligned, so the crop shows fewer bubbles and nothing else changes. */
+  .dp-edge { display: none; }
+  .dp-device { width: 393px; height: 520px; padding: 0; border-radius: 18px; background: none; box-shadow: none; }
+  .dp-device::before, .dp-device::after { display: none; }
+  .dp-ph { height: 520px; border-radius: 18px; box-shadow: var(--lift-phone-card); }
+  .dp-ph::after { display: none; }
+  .dp-statusbar { display: none; }
+  .dp-topbar { padding-top: 12px; }
+  .dp-composer { padding-bottom: 12px; }
+  .day-phone { width: 248px; height: 328px; margin: -164px 0 0 -124px; }
   .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
   .day-phone .day-mark { --mx: -16px; --my: 44px; }
   /* The floors: type up two rungs, Ember beside the computer rather than on it, our server on the
@@ -16664,7 +16672,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-st i { font-size: var(--fs-xs); }
   #dayFloorCustody .day-st { width: 170px; }
   .day-st .day-mark { left: calc(100% + 34px); top: 100%; }
-  .day-st.ghost { transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+  /* Our server a step nearer than the computer's row, and the gate past the computer's own
+     footprint, since on a turned floor the gate's offset runs sideways, where the station is wide. */
+  .day-st.ghost { --gx: 50px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+  .day-gate { --gm: 55px; }
   .day-st.step.alt { --sy: -172px; }
   .day-fmark { --fm: 70px; }
   .day-paths .wide { display: none; }

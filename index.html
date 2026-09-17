@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260916-12" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260916-13" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -432,9 +432,10 @@
                  phone app's own tabs are not drawn, because that app is in build and has its own
                  page. -->
             <div class="day-layer day-phone" aria-hidden="true">
-              <!-- The phone's thickness: rim layers behind the glass, four pixels apart, so the
-                   bezel shows a real edge when the phone turns instead of reading as a card. -->
-              <i class="dp-edge" style="--z:-4px"></i><i class="dp-edge" style="--z:-8px"></i><i class="dp-edge" style="--z:-12px"></i><i class="dp-edge" style="--z:-16px"></i><i class="dp-edge" style="--z:-20px"></i><i class="dp-edge" style="--z:-24px"></i><i class="dp-edge dp-edge--back" style="--z:-28px"></i>
+              <!-- The phone's thickness: rim layers behind the glass, five pixels apart, so the
+                   bezel shows a real edge when the phone turns instead of reading as a card. Not
+                   drawn narrow, where the phone is a cropped screenshot rather than a device. -->
+              <i class="dp-edge" style="--z:-5px"></i><i class="dp-edge" style="--z:-10px"></i><i class="dp-edge" style="--z:-15px"></i><i class="dp-edge" style="--z:-20px"></i><i class="dp-edge" style="--z:-25px"></i><i class="dp-edge" style="--z:-30px"></i><i class="dp-edge dp-edge--back" style="--z:-35px"></i>
               <div class="dp-device">
                 <div class="dp-ph">
                   <div class="dp-statusbar">
@@ -556,7 +557,7 @@
                 <div class="day-grid"></div>
                 <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true">
                   <g class="key"><path d="M95 300 H360 H625"/></g>
-                  <g class="credits"><path d="M95 300 H360"/><path class="dashed" d="M360 300 V60 L625 300"/></g>
+                  <g class="credits"><path d="M95 300 H360"/><path class="dashed wide" d="M360 300 V60 L625 300"/><path class="dashed narrow" d="M360 300 L410 60 L625 300"/></g>
                 </svg>
                 <div class="day-st" style="--fx:95px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-phone"/></svg><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
                 <div class="day-st" style="--fx:360px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-computer"/></svg><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
@@ -1187,10 +1188,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260916-12"></script>
-  <script src="js/ember.js?v=20260916-12" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260916-12"></script>
-  <script src="js/home.js?v=20260916-12" defer></script>
+  <script src="js/nav.js?v=20260916-13"></script>
+  <script src="js/ember.js?v=20260916-13" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260916-13"></script>
+  <script src="js/home.js?v=20260916-13" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

@@ -913,14 +913,15 @@ implies is the reason the gate is being built.
 ### ✅ What your agent can write to disk
 
 **Approved wording:** "Your agent writes the actual file and tells you where it put it. It can
-write ten kinds: `.pdf`, `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`, `.ics` and
-`.vcf`. It chooses the filename. It never chooses the folder."
+write eleven kinds: `.pdf`, `.pptx`, `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`,
+`.ics` and `.vcf`. It chooses the filename. It never chooses the folder."
 
 **Why it's true:** `crates/archie-runtime/src/export.rs` holds an `ALLOWED` table of exactly those
-ten extensions, and the module comment states the design rule: the tool takes "the name, never
+eleven extensions, and the module comment states the design rule: the tool takes "the name, never
 the location", files land in one folder the user was told about, and a copy is kept in their
-Archie folder. Three of the ten are converted rather than written through: `.xlsx` is built from
-CSV the model wrote, and `.docx` and `.pdf` from Markdown (`Made::Xlsx`, `Made::Docx`, `Made::Pdf`).
+Archie folder. Four of the eleven are converted rather than written through: `.xlsx` is built
+from CSV the model wrote, and `.docx`, `.pdf` and `.pptx` from Markdown (`Made::Xlsx`, `Made::Docx`,
+`Made::Pdf`, `Made::Pptx`).
 One file is capped at 5 MB (`MAX_BYTES`).
 
 **PDF, shipped 2026-09-16, is typeset in the app and sends nothing anywhere.** Worth stating because
@@ -942,6 +943,16 @@ refuses to draw a negative slice, listing the numbers instead. **Charts are a PD
 gets the figures written out rather than the picture, because Word takes a drawing as an image and
 making one would mean shipping a font file to put labels on it. Do not say "charts in documents";
 say PDF.
+
+**Slide decks, shipped 2026-09-16.** Approved wording: "Ask for a deck and you get a real
+PowerPoint file, not a PDF of slides: you can open it and change it." A heading starts a slide and
+what follows is that slide's body, which is the Markdown the agent already writes for a document
+read one level differently. `crates/archie-runtime/src/deck.rs` writes the package itself: a `.pptx`
+is a ZIP of XML with a fixed shape, so nothing is sent anywhere and nothing new ships in the app.
+**Say editable, because that is the whole point of the format**, and a deck somebody cannot change
+is worth less than the notes it came from. **Verified by opening it**, not only by tests: Keynote
+reads the file and renders every slide. Do not claim it has been opened in PowerPoint; that has not
+been tested, and the two read the same format but are not the same reader.
 
 **The stronger claim, and the reason the list is short.** `ALLOWED` is an allowlist and the
 comment says it "must stay one", because a denylist of dangerous extensions is a losing game

@@ -10392,6 +10392,22 @@ html[data-theme="dark"] .booking-container iframe {
   display: block;
 }
 
+/* Both classes hold nothing but LinkedIn and X profile links, and both marks are drawn with
+   fill="currentColor", so without this they inherit --text-muted and hover to blue ink along with
+   the label. LinkedIn permits its [in] logo in blue, black or white and names changing its color
+   as a prohibited use, and black and white are X's own brand colors, so the mark is pinned and the
+   word beside it is left alone: "LinkedIn" still hovers like the link it is, and the logo does
+   not follow it. Same reasoning as .social-link in section 7, where the footer row lives. */
+.team-link svg,
+.contact-info-link svg {
+  color: #000000;
+}
+
+[data-theme="dark"] .team-link svg,
+[data-theme="dark"] .contact-info-link svg {
+  color: #FFFFFF;
+}
+
 /* Contact page. A third line under the name and role, sibling to
    .contact-info-value rather than inside it, so it keeps its own size and
    colour instead of inheriting the value text's. */

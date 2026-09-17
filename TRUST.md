@@ -1534,6 +1534,51 @@ limits in the same pass: these show the mechanisms, not the app's behaviour on s
 computer (the ten-minute network-monitor check remains the answer to that, and the page ends by
 sending the reader to it), and nobody outside the company has audited any of it.
 
+### ✅ The crisis floor, and why it is published (added 2026-09-17)
+
+**Approved wording:** "If you tell your agent you are thinking about hurting yourself, about ending
+your life, or that someone is putting you in danger, it stops being the character you gave it. It
+says plainly that this is bigger than anything it can help you with, and it names where to get help
+now: in the US, call or text 988, and anywhere else your local crisis line, your emergency number,
+or your doctor. Every personality carries it and none of them can override it."
+
+**Why it's true:** `build_system_prompt` in `crates/archie-runtime/src/gateway/prompt.rs` writes
+three floors into every agent's system prompt under the line "no persona overrides any of them",
+and the second is this one, naming 988 and local crisis lines in the words above. **The mechanism
+is the base prompt, not a per-personality check**: a personality is text added beside the floors,
+never a replacement for them, so there is no way for one to omit it. Until 2026-08-13 it worked the
+other way, living inside five personality files and nowhere else, so every other personality
+shipped with no such instruction; that is the history the claim rests on and the reason the
+architecture matters more than a test would. **Do not put a personality count in this claim.**
+`data/marketplace/personalities/` holds 38 manifests and FACTS.md registers 36 public ones, and a
+safety claim is the wrong place to carry a figure that moves. The test
+`every_agent_carries_the_crisis_floor_whatever_its_persona` pins the part architecture cannot: that
+the rule survives a persona written to stay in character and be terse, and that it reaches a
+general agent, a routed skill and a specialist alike. It is prompt text rather than a filter, which
+is the honest description and the one the boundaries below depend on.
+
+**Why it is on the site at all.** California SB 243 took effect on January 1, 2026 and requires an
+operator of a companion chatbot to institute and publish details of its harm prevention measures
+and safety protocols on its website. Whether Archie is a "companion chatbot" under §22601(b) is
+arguable in both directions: it has anthropomorphic features and sustains a relationship across
+sessions, which the definition names, and it is a work assistant rather than something built to
+meet a social need, which the definition also requires. The statute carries a private right of
+action at $1,000 a violation plus fees, so publishing a thing we already do was cheaper than
+winning the argument. Published on `trust/` on 2026-09-17.
+
+**Boundaries — do not overclaim:**
+- ⛔ Never call it monitoring, a safety net, or anything implying somebody is watching. Nobody
+  at Otian AI sees the conversation, no alert is raised and nothing is reported. A sentence
+  implying otherwise contradicts every other claim in this file.
+- ⛔ Never say the agent will catch it. It is a language model reading text and it can miss a
+  person who does not say it plainly.
+- ⛔ Never say Archie offers crisis support, counseling or help. What it does is stop, say it
+  cannot be the one to help, and name who can. That is the entire claim.
+- ⚠️ The refusal to *produce* self-harm content belongs to the AI provider's own safety
+  layer, not to us. Do not claim it as Archie's.
+- ⚠️ If the floor is ever moved out of `prompt.rs`, or a personality is allowed to
+  override it, the Trust page section is wrong the same day.
+
 ## What We Hold — state the whole list, always
 
 **The account core:** "Our servers know your email address and whether you have a current plan.

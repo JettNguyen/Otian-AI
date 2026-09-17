@@ -16425,7 +16425,18 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-badge.green { background: var(--c-green-subtle); color: var(--c-green-strong); }
 .da-badge.gold { background: var(--c-gold-subtle); color: var(--c-gold-strong); }
 .da-recent .r.night, .day-win.is-night .da-recent .r.day { display: none; }
+/* THE LIST GROWS, the same way the phone's Lately card does (Jett, 2026-09-17). A night row that
+   has not landed is out of the layout, so Recent work is as tall as the work that has happened
+   rather than as tall as the work that will. The narrowing sits inside no-preference so the resting
+   state is the whole night, and the landing is a keyframe because a row cannot transition out of
+   display:none. Nothing needed doing about the separators: every .r already carries its own top
+   border, and the rows land in order, so the first visible one is always the one under the header
+   and no hidden row can leave a hairline hanging under the last visible one. */
 .day-win.is-night .da-recent .r.night { display: flex; }
+@media (prefers-reduced-motion: no-preference) {
+  .day-win.is-night .da-recent .r.night:not(.is-on) { display: none; }
+  .day-win.is-night .da-recent .r.night.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+}
 /* Lit in the dark: the one light in the room at 2:00 am is the window, running. */
 .day-win.is-night .da-app { box-shadow: var(--shadow-lamp); }
 
@@ -16636,7 +16647,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .dp-jump .chev { width: 16px; height: 16px; }
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr--page .day-beat:not(.is-on) { display: none; }
-  .dp-scr--page .day-beat.is-on { animation: dp-msg-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr--page .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
 }
 .dp-lrow .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .dp-lrow .lbl { font-size: var(--fs-lg); font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -16912,9 +16923,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .dp-scr--grow .dp-said.day-beat { transform-origin: 0 100%; }
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr--grow { transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .3, 1); }
-  .dp-scr--grow .day-beat.is-on { animation: dp-msg-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr--grow .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
 }
-@keyframes dp-msg-in {
+@keyframes day-land-in {
   from { opacity: 0; transform: translateY(14px) scale(.96); }
   to { opacity: 1; transform: none; }
 }

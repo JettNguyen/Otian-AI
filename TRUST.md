@@ -910,6 +910,31 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
+### ✅ What your agent remembers about you, and what it lets go of (SHIPPED; entry written 2026-09-16)
+
+**Approved wording:** "Your agent keeps a short list of what it has learned about you, and you can
+read every line of it, add one, or delete one. It carries only what has come up lately; the rest is
+kept in a file it can look back at when something you say touches it."
+
+**Why it's true:** `crates/archie-runtime/src/memory.rs` holds two lanes in one small Markdown file,
+budgeted apart. The "About you" lane stamps each fact with the month it last came up and, when the
+lane is full, drops the oldest, which is a rule that can be said out loud: Archie lets go of what
+you have not brought up in a long time. Since 2026-09-16 what it drops is written to an archive file
+beside it rather than destroyed, and a fact comes back into a conversation when a word in what you
+said matches it. The Memory panel on the agent's Knowledge tab shows every line with its month, has
+a cross on each to delete it, a Clear all, and a box to add one by hand
+(`agent_memory_add`, `agent_memory_remove`, `agent_memory_clear`).
+
+**The boundaries:**
+- ⛔ **Never say it remembers everything.** The carried lane is deliberately small, because it is
+  read on every message and the owner pays for those tokens. The archive is the honest version of
+  "nothing is thrown away", and it is searched by matching words, not by a model.
+- ⛔ **Never say Otian AI can see it.** The file is in the agent's folder on the owner's own
+  computer, like everything else in the bundle.
+- ⛔ **Never describe the recall as the agent choosing to look something up.** There is no tool for
+  it and no second AI call; it is word comparison against a file, which is exactly why it costs the
+  owner nothing on the turns where nothing matches.
+
 ### ✅ What your agent can write to disk
 
 **Approved wording:** "Your agent writes the actual file and tells you where it put it. It can
@@ -1617,6 +1642,37 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 - Reads (`calendar_list_events`) are ungated. Say "changes," never "access."
 - Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
   wherever this claim anchors a section.
+
+### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
+
+**Approved wording:** "Ask what the invoice says and your agent opens the attachment and tells you.
+It can send a file back too: the card names what is going with the reply, and it goes when you press
+Send."
+
+**Why it's true:** an attachment is listed on every message read (`Message::attachments` in
+`crates/archie-net/src/mail/mod.rs`) and fetched only when asked for, by
+`MailProvider::get_attachment`, which all three mail backends implement: Gmail walks the message
+payload and fetches by attachment id, Outlook expands the attachment collection and takes `$value`,
+and an IMAP account reads the MIME with `mail-parser` and re-fetches the message uncapped to decode
+one. `inbox_read` takes the name of one, saves it into the same Archie folder everything else the
+agent writes goes to, and reads it with the same extractor the knowledge base uses, so a PDF, a
+spreadsheet, a Word document and a deck all come back as words. Sending works the same way in
+reverse (`OutgoingReply::attachments`), and the file rides in `multipart/mixed` outside the message
+rather than inside it.
+
+**The boundaries, and each one is in the code:**
+- ⛔ **Never say it can attach any file on the computer.** It can attach what is in the one Archie
+  folder, by name. A name with a path in it is flattened to its last component and then is not
+  found (`files_to_attach` in `email/replies/draft.rs`, and its test).
+- ⛔ **Never say it sends the file itself.** Sending a file is sending an email, and that is the
+  same gate as every other reply: the card names the file, and Send is a person pressing Send. The
+  card naming it is load-bearing, because an approval is worth nothing if what it covers is not on
+  the screen.
+- ⛔ **Never claim it reads a scanned document.** There is no OCR anywhere in Archie. A PDF that is
+  a picture of a page comes back saying so, in those words, and the agent passes that on.
+- A file over 25 MB coming in, or 15 MB going out, is refused with a sentence rather than
+  attempted. Both numbers sit under what mail servers accept, because base64 makes an attachment a
+  third larger on the wire.
 
 ### ✅ Email goes out only when you send it or set a time — SHIPPED (was 🚧 roadmap until 2026-07-20)
 

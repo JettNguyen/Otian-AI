@@ -16544,13 +16544,17 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      ONE TOKEN DELIBERATELY DIFFERS, AND IT IS THE INK. The app's --text is #F3F0ED, a warm
      near-white, which on a bubble measures 12.5:1 and on a sent bubble 10.2:1; nothing here was
      ever a contrast failure. What fails is that this screen is drawn at about a third of the size
-     the app runs at, so its 16px type lands near 11px and is grayscale antialiased, which thins
+     the app runs at, so its type is grayscale antialiased at around a dozen pixels, which thins
      light strokes on a dark ground. Jett read that as the messages not standing off their bubbles
-     (2026-09-17), and the honest fix for thin is more ink: #FFFDFB keeps the warm cast and takes
-     the two pairs to 14.0:1 and 11.4:1. Raise the drawing's scale before raising this any further,
-     since the next stop is plain white and the size is the actual cause. */
+     (2026-09-17). The ink went to #FFFDFB and then, when he said it was still not bright enough,
+     to plain white, which is the end of that road: 14.2:1 and 11.6:1, and there is nothing above
+     white. THE RATIO WAS NEVER THE THING THAT WAS DARK. A ratio assumes a solid fill, and a 1px
+     stem at this size is an antialiased smear that never reaches the color it is set in: at 65%
+     coverage a white stem lands on #B5B5B4 and reaches 6.9:1 whatever the token says. The way to
+     make a thin stroke arrive at its color is to make it less thin, which is why .dp-bub carries
+     a weight below, and after that the only lever left is the size the screen is drawn at. */
   --bg: #1A1A19; --bg2: #222221; --card: #2B2B29; --accent: #EDA277; --accent-sub: #453629; --accent-strong: #F0B18D;
-  --text: #FFFDFB; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
+  --text: #FFFFFF; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
   --line: rgba(243, 240, 237, 0.16); --soft: rgba(243, 240, 237, 0.05);
   --green: #8FC47B; --green-sub: rgba(143, 196, 123, 0.16); --gold: #E0B45E; --gold-sub: rgba(224, 180, 94, 0.16);
   --teal: #6FC4BC; --teal-sub: rgba(111, 196, 188, 0.16); --hair: 0.5px;
@@ -16585,7 +16589,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-scr.is-on { opacity: 1; pointer-events: auto; }
 .dp-said { display: flex; gap: 8px; }
 .dp-said .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
-.dp-bub { padding: 12px 16px; font-size: var(--fs-lg); line-height: 22px; color: var(--text); }
+/* 500 where the app draws 400, and it is the size that asks for it, not taste: see the ink note on
+   .dp-ph. A stem that is one pixel at full size is two thirds of one here, so it is drawn as a
+   part-covered pixel and lands grey however white the colour is. The weight puts the coverage back,
+   which is what reads as the text being brighter. Every other line on this screen is already 600 or
+   700, so the message body was the one thing sitting at 400. THIS ONE DOES NOT GO BACK TO THE KIT.
+   Changes to the port normally do, because the kit is where the next one starts, but the kit draws
+   the phone at full size and 400 is right there; carrying this across would make the kit wrong. */
+.dp-bub { padding: 12px 16px; font-size: var(--fs-lg); line-height: 22px; font-weight: 500; color: var(--text); }
 .dp-bub.theirs { max-width: 94%; background: var(--card); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; }
 .dp-mine { align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 100%; }
 .dp-bub.yours { max-width: 100%; background: var(--accent-sub); border-radius: 14px 14px 4px 14px; }
@@ -16646,7 +16657,8 @@ button.dp-act:hover { background: var(--soft); }
    without moving either, and sized off the line so it is a caret and not an underscore. It holds
    steady while characters are still arriving and blinks once the line is finished, the way a real
    one does, so the blink says the typing has stopped rather than decorating it. */
-.dp-msgbox .typed { display: none; color: var(--text); }
+/* The same weight the bubbles carry, so the sentence does not change shape when it is sent. */
+.dp-msgbox .typed { display: none; font-weight: 500; color: var(--text); }
 .dp-ph.is-typed .dp-msgbox .typed { display: inline; }
 .dp-ph.is-typed .dp-msgbox .typed:not(:empty) ~ .ph { display: none; }
 .dp-caret { display: none; }

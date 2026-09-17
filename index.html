@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260917-12" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260917-13" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -526,17 +526,29 @@
                       <div class="dp-said day-beat" data-act="4" data-at="0.76"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Health Record</b>: Tuesday&rsquo;s visit is saved, with your two questions for next time.</p></div></div></div></div>
                     </div>
 
-                    <!-- The same three pieces of work as the window's Recent work list, on the same
-                         three beats, because it is one agent and one night: a row that lands on the
-                         computer has landed on the phone. They arrived together here until the rows
-                         were simply all present, which read as a list that had been there all along
-                         (Jett, 2026-09-17: the phone "doesn't update with the desktop app one"). -->
-                    <div class="dp-scr" data-scr="5">
-                      <div class="dp-sect">Lately</div>
-                      <div class="dp-card">
-                        <div class="dp-lrow day-beat" data-act="5" data-at="0.12"><span class="col"><span class="lbl">Return Window Watch</span><span class="note">11:58 PM</span></span><span class="dp-pill info">Done</span></div>
-                        <div class="dp-lrow day-beat" data-act="5" data-at="0.42"><span class="col"><span class="lbl">Bill Reminders</span><span class="note">12:06 AM</span></span><span class="dp-pill info">Done</span></div>
-                        <div class="dp-lrow day-beat" data-act="5" data-at="0.7"><span class="col"><span class="lbl">Morning Brief</span><span class="note">Next, 7:00 AM</span></span><span class="dp-pill quiet">Scheduled</span></div>
+                    <!-- THIS SCREEN IS NOT THE CONVERSATION. Lately is a section of the app's Now
+                         page (renderNow in archie-screen-kit.html), which carries no message bar and
+                         ends in a jump across to the chat instead. data-page says so and js/home.js
+                         drops the composer for any screen that carries it, because a message bar on
+                         a page you cannot type on is a control the app does not have there (Jett,
+                         2026-09-17). The rows are the same three pieces of work as the window's
+                         Recent work list, on the same three beats, because it is one agent and one
+                         night: work that lands on the computer has landed on the phone. A row that
+                         has not landed is out of the layout, so the card is as tall as the work that
+                         has happened rather than as tall as the work that will. -->
+                    <div class="dp-scr dp-scr--page" data-scr="5" data-page="now">
+                      <div>
+                        <div class="dp-sect">Lately</div>
+                        <div class="dp-card">
+                          <div class="dp-lrow day-beat" data-act="5" data-at="0.12"><span class="col"><span class="lbl">Return Window Watch</span><span class="note">11:58 PM</span></span><span class="dp-pill info">Done</span></div>
+                          <div class="dp-lrow day-beat" data-act="5" data-at="0.42"><span class="col"><span class="lbl">Bill Reminders</span><span class="note">12:06 AM</span></span><span class="dp-pill info">Done</span></div>
+                          <div class="dp-lrow day-beat" data-act="5" data-at="0.7"><span class="col"><span class="lbl">Morning Brief</span><span class="note">Next, 7:00 AM</span></span><span class="dp-pill quiet">Scheduled</span></div>
+                        </div>
+                      </div>
+                      <div class="dp-jump">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 5.5v9a2.5 2.5 0 0 1-2.5 2.5H10l-4 3.2V17a2.5 2.5 0 0 1-2.5-2.5v-9A2.5 2.5 0 0 1 6 3h11.5A2.5 2.5 0 0 1 20 5.5z"/></svg>
+                        <span>Say something to Ember</span>
+                        <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg>
                       </div>
                     </div>
 
@@ -1233,10 +1245,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260917-12"></script>
-  <script src="js/ember.js?v=20260917-12" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260917-12"></script>
-  <script src="js/home.js?v=20260917-12" defer></script>
+  <script src="js/nav.js?v=20260917-13"></script>
+  <script src="js/ember.js?v=20260917-13" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260917-13"></script>
+  <script src="js/home.js?v=20260917-13" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

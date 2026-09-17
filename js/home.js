@@ -398,6 +398,12 @@
       var prev = cur; cur = i;
       caps.forEach(function (c, j) { c.classList.toggle('is-on', j === i); });
       scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
+      /* The message bar belongs to the conversation. A screen that is one of the app's own pages
+         says so with data-page, and the phone drops the composer for it: Lately is a section of
+         the Now page, which ends in a jump across to the chat instead of a box to type in. */
+      if (ph) ph.classList.toggle('is-page', scrs.some(function (s) {
+        return s.classList.contains('is-on') && s.hasAttribute('data-page');
+      }));
       win.classList.toggle('is-night', i === 5);
       clock.classList.toggle('is-on', !!ACTS[i].clock);
       stage.classList.toggle('is-timed', !!ACTS[i].clock);

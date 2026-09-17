@@ -16613,6 +16613,31 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .dp-card { background: var(--card); border: var(--hair) solid var(--border); border-radius: 14px; box-shadow: var(--lift-phone-card); width: 100%; overflow: hidden; }
 .dp-lrow { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: var(--hair) solid var(--line); width: 100%; }
 .dp-lrow:last-child { border-bottom: 0; }
+/* ---- a screen that is one of the app's own pages, not the conversation ---- */
+/* Lately is a section of the Now page, which has no message bar on it: .dp-ph.is-page drops the
+   composer, set by js/home.js off this screen's data-page. The page runs from the top, where the
+   conversation runs from the bottom, and it ends in the jump across to the chat that the app puts
+   there in place of a composer.
+
+   THE LIST GROWS. A row that has not landed is out of the layout, so the card is as tall as the
+   work that has happened; all three sitting there from the first frame read as a list that had been
+   there all along. A beat cannot transition out of display:none, so the landing is the keyframe the
+   thread uses, and the whole thing is inside no-preference so the resting state is the full list.
+   The separator is each row's own top border and not the one above's bottom, because the rows land
+   in order: the first visible row is always :first-child, and no hidden row can leave a hairline
+   hanging under the last visible one. */
+.dp-scr--page { justify-content: flex-start; }
+.dp-ph.is-page .dp-composer { display: none; }
+.dp-scr--page .dp-lrow { border-bottom: 0; border-top: var(--hair) solid var(--line); }
+.dp-scr--page .dp-lrow:first-child { border-top: 0; }
+.dp-jump { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; border-radius: 14px; background: var(--soft); border: var(--hair) solid var(--border); color: var(--muted); font-size: var(--fs-base); }
+.dp-jump span { flex: 1; min-width: 0; }
+.dp-jump svg { flex: none; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.dp-jump .chev { width: 16px; height: 16px; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-scr--page .day-beat:not(.is-on) { display: none; }
+  .dp-scr--page .day-beat.is-on { animation: dp-msg-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+}
 .dp-lrow .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .dp-lrow .lbl { font-size: var(--fs-lg); font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dp-lrow .note { font-size: var(--fs-sm); color: var(--muted); }

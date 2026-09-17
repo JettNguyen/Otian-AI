@@ -913,15 +913,23 @@ implies is the reason the gate is being built.
 ### ✅ What your agent can write to disk
 
 **Approved wording:** "Your agent writes the actual file and tells you where it put it. It can
-write nine kinds: `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`, `.ics` and `.vcf`.
-It chooses the filename. It never chooses the folder."
+write ten kinds: `.pdf`, `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`, `.ics` and
+`.vcf`. It chooses the filename. It never chooses the folder."
 
 **Why it's true:** `crates/archie-runtime/src/export.rs` holds an `ALLOWED` table of exactly those
-nine extensions, and the module comment states the design rule: the tool takes "the name, never
+ten extensions, and the module comment states the design rule: the tool takes "the name, never
 the location", files land in one folder the user was told about, and a copy is kept in their
-Archie folder. Two of the nine are converted rather than written through: `.xlsx` is built from
-CSV the model wrote and `.docx` from Markdown (`Made::Xlsx`, `Made::Docx`). One file is capped at
-5 MB (`MAX_BYTES`).
+Archie folder. Three of the ten are converted rather than written through: `.xlsx` is built from
+CSV the model wrote, and `.docx` and `.pdf` from Markdown (`Made::Xlsx`, `Made::Docx`, `Made::Pdf`).
+One file is capped at 5 MB (`MAX_BYTES`).
+
+**PDF, shipped 2026-09-16, is typeset in the app and sends nothing anywhere.** Worth stating because
+"make me a PDF" is the one file people assume goes through a service. It does not: the document is
+laid out in `export.rs` and written with `lopdf`, which is already in the build because Archie reads
+PDFs. It uses the fonts every PDF reader already has, so nothing is downloaded, no font ships in the
+app, and a report is a few kilobytes. Headings, bold, bullets and page breaks; the line breaks are
+computed with the same character widths the reader itself uses, which is why text cannot run off the
+page.
 
 **The stronger claim, and the reason the list is short.** `ALLOWED` is an allowlist and the
 comment says it "must stay one", because a denylist of dangerous extensions is a losing game
@@ -931,15 +939,16 @@ it matters precisely because the text that reaches this tool has often passed th
 did not write.
 
 **Boundaries — do not overclaim:**
-- ⛔ **Never claim PDF or video, and never claim the export tool writes pictures or audio.** The
-  export tool writes none of the four. The agent does make pictures and audio by other paths:
+- ⛔ **Never claim video, and never claim the export tool writes pictures or audio.** The export
+  tool writes none of the three. The agent does make pictures and audio by other paths:
   `generate_image` (`crates/archie-runtime/src/imagegen.rs`: a picture sent into the conversation,
   on the user's own provider key or a Gemini key saved for it, and the tool is not offered when
   neither exists) and voice notes (`crates/archie-runtime/src/speech.rs`: a spoken reply to a spoken
-  message, or on request). PDFs are planned and video would come through a connector (Jett,
-  2026-09-16); neither may be described in the present tense until it ships, and neither of the
-  two the agent does make has a ✅ entry of its own yet, so no page claims them until one is
-  written with its clauses. Until 2026-09-16 this line said Archie writes none of the four, and
+  message, or on request). **PDF shipped on 2026-09-16 and this bullet moved the same day**, which
+  is the only reason the claim above may be made. Video would come through a connector and may not
+  be described in the present tense until it ships, and neither of the two the agent does make has a
+  ✅ entry of its own yet, so no page claims them until one is written with its clauses. Until
+  2026-09-16 this line said Archie writes none of the four, and
   the homepage carried "No PDFs, pictures, audio or video" as a limitation on the strength of it;
   it was false on two of four and the chip was retired. The BetterClaw wishlist (item 7) proposed
   exactly that list and it would have been false on four of eight entries. Added here 2026-08-24

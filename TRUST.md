@@ -2811,30 +2811,31 @@ Research&rdquo; (`portal.nousresearch.com/terms`). It is a user contract, not a 
 Hermes itself is MIT, which is why the Hermes mark stayed. If that reading is wrong, Hermes is the
 one that comes off next, and nothing else on the page changes.
 
-✅ **Settled 2026-09-17, by Jett: the homepage band takes the app's allowlist.** This was
-raised as the note above asked, and the answer went further than the note anticipated. The
-compare-page test (does the company publish a rule that says no?) let a logo stay on silence. The
-homepage now runs the opposite default, the one the app already ran: **a logo ships only where that
-company publishes a grant that covers this use.** Silence is not a grant, and neither is a policy
-that permits the word and not the picture.
+✅ **Settled 2026-09-17, by Jett, in two steps the same day: the band carries no logos at all.**
+This was raised as the note above asked. The first answer was to run the app's allowlist here, which
+took 37 marks off and left the 8 with a written grant. Seeing that rendered settled the rest: eight
+logos among forty-two lettered tiles reads as a sponsor tier, which is the impression trademark law
+says not to create, and the marks had stopped doing the job that justified them. **So every mark
+came off both surfaces and every service is named in type.** The hidden sprite, `.ww-mark`, and
+about 120 lines recording where each of the fifty logos was fetched from went with them.
 
-**Eight qualify and keep their artwork:** GitHub, OpenAI, Airtable, Todoist, Zotero, Linear,
-Telegram, Matrix. **Thirty-seven became lettered tiles**, joining the five that went on 2026-09-16,
-so 42 of the 50 marks in `index.html` are now our own type. The audit behind each verdict is the
-Archie repo's `docs/BRAND-MARKS.md`; the app's list is `CLEARED_MARK` in `src/app/connect.tsx`, and
-**the two must not drift**, because a mark hidden in the app and drawn on the homepage is the exact
-state this pass found and fixed.
+**The rule this leaves, and it is simpler than what it replaces:** on this site, a company is named
+and not drawn. No exceptions to track, no allowlist to keep in step with the app, and no default
+that quietly goes wrong when the fifty-first connector lands. `git show 18318e82^:index.html` has
+the sprite and `git show 18318e82^:css/styles.css` the sourcing notes, if a grant ever makes one
+worth restoring; the audit that judged each is the Archie repo's `docs/BRAND-MARKS.md`.
 
-**Why the standard moved.** The homepage was carrying four logos this file's own audit calls
-prohibited (DeepSeek, Outlook, iCloud, Fireflies) and a dozen more it calls permission required,
-including Groq, whose policy names this use in as many words: &ldquo;You may not use Groq logos in
-ads, packaging, **UI**, or signage without a license from Groq.&rdquo; Two standards on two
-surfaces meant the safer one was doing no work. What made one standard affordable is that every
-mark in the rivers got its service's name under it the same day: a letter tile with "Google
-Calendar" beneath it is a service, where a letter tile alone was a missing image.
+**What made names alone survivable** is that every mark got its service's name under it earlier the
+same day. Without that the band would have gone from logos to nothing. With it, the figure already
+said the thing the logos were there to say, and the pictures turned out to be the removable half.
 
-**A tile is not a downgrade to undo quietly.** Restoring any of the thirty-seven takes written
-permission in hand and a row here with the date, exactly like the compare chart above.
+⚠️ **One correction, kept because the mistake is the useful part.** This file and `FACTS.md`
+briefly recorded that the site had been drawing "a generic orange lightning bolt" under the name
+Groq. That was wrong. `groq.com/favicon.svg` is a lightning bolt in `#F43E01`, so the site was
+drawing Groq's own file; the app draws their rounded-square mark in `#F54F35`. Both are Groq's
+artwork and the two surfaces simply disagreed about which. **A mark fetched from a company's own
+server can still be the wrong one of their marks**, and a favicon is not what a brand team means by
+their logo.
 
 **And the rule for anything new:** a competitor's name ships in plain type, needing nothing. A
 competitor's logo ships only where that company publishes no rule against it, recorded as a row

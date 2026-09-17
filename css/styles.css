@@ -2666,105 +2666,13 @@ summary,
   box-shadow: var(--lift-xs);
 }
 
-/* Brand marks for the works-with row. Every one of the 24 is the company's own artwork, and
-   each traces to a source that can be named:
-
-   - Seven come from `SERVICE_MARK` and `OutlookMark` in the Archie app's src/app/connect.tsx,
-     so the product and the site agree about what a service looks like.
-   - Ten came from Simple Icons, verifiably the same source the app used (its notion.svg is
-     byte-identical to the path already in connect.tsx).
-   - Slack, OpenAI, xAI, and the 2026 Google set (Gmail, Calendar, Tasks) and 2025 Gemini
-     sparkle are the official artwork via Wikimedia Commons, each file's source page checked:
-     Tasks is credited to workspace.google.com directly, Gemini was extracted from Google's
-     own About Gemini page, Slack from Slack's brandfolder, and the Gmail/Calendar 2026 files
-     share the exact palette and May 19, 2026 redesign date with the Google-credited Tasks
-     file. Groq is the bolt from groq.com/favicon.svg and Fireflies the logo served by
-     fireflies.ai, both fetched from the companies themselves on 2026-08-15.
-   - lemlist is lemlist_symbol.svg from their own brand directory on web-assets.lemlist.com,
-     and GoHighLevel is the symbol half of the logo their homepage loads (the wordmark beside it
-     is 172 units wide and would be a stripe at 18px, so only the three arrows are kept and the
-     original geometry is untouched). Both fetched on 2026-08-26.
-
-   Gradient, mask and filter ids inside these inline SVGs are namespaced per brand (wwsl-,
-   wwgm-, ...) because inline SVG ids share one document: two marks both defining id="a"
-   would silently take the first one's gradient.
-
-   Colour follows the brand rather than us, which is the app's rule and its reasoning: a
-   chromatic mark keeps its colour, because the colour is half the recognition (Telegram's
-   blue, Discord's blurple, Linear's purple, Airtable's three). An achromatic one takes
-   currentColor, which is what those brands specify, since they publish black on light
-   grounds and white on dark, and it is the only version that survives dark mode (Notion,
-   GitHub, Matrix, OpenAI, xAI, LIFX). Anthropic's tile wears Claude's splotch in Claude's
-   own coral rather than the corporate A, matching the app: the label names the company, and
-   the mark somebody has actually seen is the one on the product they used.
-
-   .ww-mark--mono is the two-letter fallback for any future service that arrives before its
-   artwork does; nothing uses it today. GoHighLevel is the reason to keep it: their brand kit is
-   behind a support portal, so if the homepage stops serving that file there is somewhere to fall
-   back to that is not a drawing of ours. */
-/* Added 2026-09-01, when the band came back with the roster brought up to the app:
-   - Philips Hue is the Simple Icons path (CC0, redrawn from the mark on philips-hue.com), in
-     the brand blue Simple Icons records for it, #0065D3. Telegram, Discord, Linear, Airtable,
-     Home Assistant and most of the second row already came from the same set.
-   - WiZ is the W from wiz-logo-small.svg, the wordmark wizconnected.com loads in its own header,
-     fetched 2026-09-01: one path, geometry untouched, the way GoHighLevel keeps only its three
-     arrows. Signify publishes no standalone symbol as a vector (their favicon is a 32px raster
-     of this same W with a dot), and the wordmark at 18px wide is a stripe, so the W stands for
-     it. currentColor because they ship the mark in navy on light and in white on dark
-     (logo-wiz-white.svg), which is the same rule Notion follows above. */
-/* Added with the 0.2.2 copy, 2026-09-01, for the six mail providers the app-password door connects:
-   - iCloud, Yahoo, AOL and GMX are Simple Icons paths (CC0), each redrawn from the company's own
-     mark and carried here in the brand colour Simple Icons records for it: iCloud #3693F3, Yahoo
-     #6001D2, GMX #1C449B. AOL publishes a black wordmark, so it takes currentColor like Notion.
-   - Fastmail is favicon.svg exactly as fastmail.com serves it, fetched 2026-09-01.
-   - Zoho is zoho-logo-web.svg from zohowebstatic.com, the mark zoho.com loads in its own header,
-     fetched 2026-09-01: the four boxes in their four colours, cropped to leave off the small
-     wordmark underneath, which is a stripe at 18px. */
-/* Added 2026-09-08, when Zoom joined the roster:
-   - Zoom is the Simple Icons path (CC0), in the brand blue Simple Icons records for it, #0B5CFF,
-     and the app carries the same one. It is a WORDMARK, which is the opposite of the call made for
-     WiZ and Zoho above, and for the opposite reason: those two publish a symbol and a wordmark, so
-     the symbol was kept. Zoom publishes no symbol as a vector. Their own header logo is these four
-     letters, both files Wikimedia Commons holds are the same wordmark, and the blue camera tile
-     people picture exists only as a raster, so the choice here was their artwork or a drawing of
-     ours, and the rule above settles that. At 18px it is a small blue word rather than a mark,
-     which was looked at rather than assumed. */
-/* Added 2026-09-16, when TomTom joined the roster and Google Tasks was fixed:
-   - TomTom is the Simple Icons path (CC0, redrawn from the mark on brandguide.tomtom.com), in the
-     brand red Simple Icons records for it, #DF1B12. It was the only service in Archie's own
-     `connectors.rs` with no pill here, which came out when every connector in the app became a
-     filter in its store and this band turned out to be one name ahead of the app on two services
-     and one behind on this one. The app carries the same path.
-   - Google Tasks was drawing its tick BLACK. Its artwork is Google's own: a filled blue disc with
-     the tick laid over it as an open stroked path, and that path carried `stroke="#fff"` with no
-     `fill`, so SVG filled it black by default and the white stroke was sitting on a black wedge.
-     `.ww-mark` sets a color and no fill, so nothing downstream was ever going to cover it. One
-     attribute, `fill="none"`, and the artwork is what Google draws. Found by rendering the pill at
-     five times size, which is the only way this one is visible at all. */
-.ww-mark {
-  flex: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  color: var(--text-primary);
-}
-
-.ww-mark svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.ww-mark--mono {
-  border-radius: 5px;
-  background: var(--surface-soft-strong);
-  color: var(--text-muted);
-  font-size: var(--fs-3xs);
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
+/* The band's marks came off on 2026-09-17 and the shelf is names only now, so `.ww-mark`,
+   `.ww-mark--mono` and roughly 120 lines recording where each of the fifty logos was fetched from
+   have gone with them. The reason is in the site's TRUST.md under the 2026-09-17 entry: a logo
+   ships only where that company publishes a grant covering it, eight did, and eight logos among
+   forty-two names read as a sponsor tier. Nothing here is lost: `git show 18318e82^:css/styles.css`
+   has every sourcing line, and the audit that judged each one is the Archie repo's
+   docs/BRAND-MARKS.md. Anything that brings a mark back starts there and not here. */
 
 .works-with-note {
   max-width: 860px;

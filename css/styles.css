@@ -16650,16 +16650,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-minutes b { font-size: var(--fs-4xl); }
   .day-clock { top: 6px; }
   .day-hint { display: none; }
-  /* The hero's words are centred and a rung bigger; after it the captions alternate, left, right,
-     left, so the eye is handed from side to side as the acts change. */
+  /* The hero's words are centred and a rung bigger; the acts after it stay left, because handing
+     the captions from side to side was tried on 2026-09-16 and read as odd. */
   .day-cap[data-act="0"] { align-items: center; text-align: center; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
   .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }
-  .day-cap[data-act="2"], .day-cap[data-act="4"], .day-cap[data-act="6"] { align-items: flex-end; text-align: right; }
-  .day-cap[data-act="2"] .day-chips, .day-cap[data-act="4"] .day-chips, .day-cap[data-act="6"] .day-chips { justify-content: flex-end; }
-  .day-cap[data-act="2"] .day-catch, .day-cap[data-act="4"] .day-catch, .day-cap[data-act="6"] .day-catch { border-left: 0; border-right: 2px solid var(--accent-line); padding-left: 0; padding-right: 12px; }
-  .day-cap[data-act="6"] .day-minutes, .day-cap[data-act="2"] .day-seg, .day-cap[data-act="4"] .day-seg, .day-cap[data-act="6"] .day-seg { align-self: flex-end; }
   .day-floor { --fz: 90deg; }
   /* The phone is seen through a window here: the side bezels and the rim stay, so it reads as a
      phone, and its top and bottom ends fade out, so a phone that is shorter than a phone (the

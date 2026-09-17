@@ -940,6 +940,13 @@ setting Archie up does not cost a day.
 - ⛔ **Never say free means unlimited, and never publish the free tier without the number.** The
   limit is the whole difference between free and paid, so a page that offers one without the other
   is the trick this entry exists to prevent. The number goes in the same sentence.
+- ⛔ **Personal only. Archie for Business has no free tier.** `crate::auth::FREE_TIER_EXISTS` is
+  `!IS_BUSINESS`, a compile-time constant, so the branch is not in the business binary at all and a
+  business account with no plan meets the paywall exactly as it did before. The reason is who the
+  edition is for: a business agent answers a whole team, so twenty jobs a day shared between five
+  people is a working assistant for a small company rather than a trial of one, and anybody who
+  wants to try Archie for nothing already has the personal edition. Any page that names the free
+  tier near the business price has to say which edition it belongs to.
 - ⛔ **Phone access is not on it.** Your phone reaches the computer through a mailbox on Otian's own
   server, which is the one thing here we pay for per message, so `firestore.rules`'s `entitled()`
   grants it to a plan and to a live trial and to nobody else. Copy that lists what free includes has

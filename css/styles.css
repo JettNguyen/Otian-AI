@@ -16469,6 +16469,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 16%), rgba(255, 255, 255, calc(var(--rim-a, 0) * var(--br, 1))) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 16%)); }
 .dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
 .dp-edge--back::after { display: none; }
+/* THE PHONE'S FADE IS PER LAYER, NOT ON THE PHONE. Same rule as .day-gate above: an opacity of
+   anything but 1 forces transform-style to flat, and .day-phone is the element holding the rim's
+   3D, so fading it as a group laid all eleven layers into the glass and the phone read as a card.
+   That is most of act 5, where the pose holds it at .45 so the window is the lit thing in the room.
+   js/home.js hands the pose's opacity down as --o instead, and each layer wears it. The layers do
+   overlap, so the exposed band blends a little differently than one group fade would; that is the
+   price of keeping the thickness, and it is only paid while the phone is dim. */
+.day-phone .dp-edge, .day-phone .dp-device { opacity: var(--o, 1); }
 .dp-device {
   /* A thinner wall than the kit's 12, at Jett's direction on 2026-09-17, the way the newer phones
      are drawn. The screen keeps its 393 by 852, so the device is 407 by 866 and the corner stays

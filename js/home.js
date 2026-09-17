@@ -271,7 +271,8 @@
       win.style.transform = 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + p.win.s.toFixed(3) + ')';
       win.style.opacity = p.win.o.toFixed(3);
       phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
-      phone.style.opacity = p.phone.o.toFixed(3);
+      /* Down to the layers, not onto the phone: see .day-phone .dp-edge in the stylesheet. */
+      phone.style.setProperty('--o', p.phone.o.toFixed(3));
       /* The light on the phone's edges moves with its angle to the camera. The side turned toward
          the light blazes and the other goes nearly out; the top and bottom follow the camera's
          pitch; the bezel's bright corners slide around with the sheen; and the sliver of rim the

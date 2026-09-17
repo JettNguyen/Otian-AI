@@ -16661,9 +16661,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      going on past the window rather than as a short phone with empty margins (which is how it
      read with dead space inside the solid band). The island and status bar are not drawn. */
   .dp-device, .dp-edge { -webkit-mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 86%, transparent 98.5%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 86%, transparent 98.5%, transparent 100%); }
-  .dp-device { height: 700px; }
+  /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
+     corner, even dissolving, says "this is the whole phone". */
+  .dp-device { height: 700px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
-  .dp-ph { height: 676px; padding-bottom: 8px; }
+  .dp-edge { border-radius: 0; }
+  .dp-ph { height: 676px; padding-bottom: 8px; border-radius: 0; }
   .dp-ph::after { display: none; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }

@@ -212,7 +212,7 @@ the figure here only after reading it on the source page, with the date.
 `index.html` printed four counts in a numbers band under the hero from the 2026-08-18 quiet-spine
 rebuild until 2026-08-31 (**151 verified add-ons, 40 apps and services, 7 AI companies, 5 chat
 apps**, all four under the whole-directory convention that ended 2026-09-01); the band came out with the coverage-grid rebuild, and the only count on the homepage now
-is the one the works-with band's note prints, **49**.
+is the one the works-with band's note prints, **50**.
 `skills-marketplace/browse/` prints **148 verified add-ons, 5 chat apps, 7 AI companies**, and
 since 2026-09-07 it also **ships all 148 cards in its markup**, written by
 `node scripts/gen-marketplace.mjs` out of the same manifests this row is counted from. So the
@@ -230,7 +230,7 @@ regeneration, not four. They were stale from 2026-09-02 until
 two of them and there are three. A fourth sits in an HTML comment about an earlier version of the
 page and is deliberately left alone, being a note about what the page used to be. "Verified" is backed by the marketplace review gate (the for-developers
 page: "we check that it works as described and is safe to run before it goes live"). The
-connections band's fold names **all 49** the band counts, and the figure's three lanes carry the same 49 marks.
+connections band's fold names **all 50** the band counts, and the figure's three lanes carry the same 50 marks.
 
 The **Personal / Small business** plan card on `archie/pricing/` prints two of the same counts in
 prose ("all 5 chat apps", "any of 7 AI companies"), so a channel or a provider shipping now moves

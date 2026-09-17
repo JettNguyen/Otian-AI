@@ -16187,7 +16187,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    carries --fo and every leaf reads it; the layer itself is never faded.
 
    THE MOCKUPS ARE DRAWN AT THE SIZE THEY ARE SHOWN. Each is written at its own size (the app
-   1040px wide, the phone 417px) and brought down with zoom, never transform: scale(). A scale
+   1040px wide, the phone 407px) and brought down with zoom, never transform: scale(). A scale
    is applied to a picture the browser has already drawn at full size, and in a 3D scene that
    picture is then shrunk on the GPU with no mipmaps, so every hairline shimmers as the camera
    moves; that was "the lines look pixelated". Zoom lays the thing out small, so the drawing is
@@ -16426,19 +16426,32 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-win.is-night .da-app { box-shadow: var(--shadow-lamp); }
 
 /* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
-.day-phone { width: 263px; height: 552px; margin: -276px 0 0 -131px; }
+.day-phone { width: 256px; height: 546px; margin: -273px 0 0 -128px; }
 /* The rim: the layer's own box, which is the zoomed device's, repeated behind it at five-pixel
    steps down to a back face 35px deep (a phone is about an eighth as thick as it is wide). Each is
-   the bezel's own metal, darker toward the back, and the back face carries the cast shadow. */
-.dp-edge { position: absolute; inset: 0; border-radius: 42px; pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(148deg, #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
+   the bezel's own metal, lit by the same light as the bezel (--lit turns its band), and darker
+   toward the back; the back face carries the cast shadow. */
+.dp-edge { position: absolute; inset: 0; border-radius: 38px; pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(calc(148deg + var(--lit, 0deg)), #3A3A37 0%, #161615 18%, #0A0A09 50%, #161615 82%, #35352F 100%); }
+/* The side of the phone is polished, so the sliver of rim the turn exposes carries a bright line
+   down it. js/home.js puts that line where the rim is showing (--rim-x) and brings it up with how
+   far the phone is turned (--rim-a), so the phone's side catches the light as it comes around. */
+.dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 9%), rgba(255, 255, 255, var(--rim-a, 0)) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 9%)); }
 .dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
+.dp-edge--back::after { display: none; }
 .dp-device {
-  --bezel-wall: 12px;
-  /* The kit's bezel, with its two side highlights and the angle of its sheen on variables that
-     js/home.js sets from the phone's yaw each frame, so the edge turned toward the camera catches
-     the light and the bright corners slide as the phone turns. At rest the values are the kit's. */
-  --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .09), inset 0 1.5px 1.5px rgba(255, 255, 255, .26), inset 0 -1.5px 1.5px rgba(255, 255, 255, .13), inset 2px 0 2px rgba(255, 255, 255, var(--edge-l, .10)), inset -2px 0 2px rgba(255, 255, 255, var(--edge-r, .10)), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
-  position: relative; width: 417px; height: 876px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
+  /* A thinner wall than the kit's 12, at Jett's direction on 2026-09-17, the way the newer phones
+     are drawn. The screen keeps its 393 by 852, so the device is 407 by 866 and the corner stays
+     concentric with the screen's through the calc below; .day-phone above is the same box zoomed,
+     and .dp-edge's radius is it too. */
+  --bezel-wall: 7px;
+  /* The bezel's four highlights and the angle of its sheen are variables js/home.js sets from the
+     phone's angle each frame: the side turned toward the light blazes and the other goes nearly
+     out, the top and bottom follow the camera's pitch, and the bright corners slide around as the
+     phone turns. They are hairlines, not the kit's soft 2px washes, because on a wall this thin a
+     wash is a third of the bezel and reads as a glow rather than as metal. At rest they are near
+     the kit's own values. */
+  --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .10), inset 0 1px 0 rgba(255, 255, 255, var(--edge-t, .26)), inset 0 -1px 0 rgba(255, 255, 255, var(--edge-b, .13)), inset 1px 0 0 rgba(255, 255, 255, var(--edge-l, .10)), inset -1px 0 0 rgba(255, 255, 255, var(--edge-r, .10)), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
+  position: relative; width: 407px; height: 866px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
   background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
   box-shadow: var(--shadow-bezel);
   zoom: .63;
@@ -16682,7 +16695,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-device { height: 700px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
   .dp-edge { border-radius: 0; }
-  .dp-ph { height: 676px; padding-bottom: 8px; border-radius: 0; }
+  .dp-ph { height: 686px; padding-bottom: 8px; border-radius: 0; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }

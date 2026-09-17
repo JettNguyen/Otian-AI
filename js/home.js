@@ -270,13 +270,22 @@
       win.style.opacity = p.win.o.toFixed(3);
       phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
       phone.style.opacity = p.phone.o.toFixed(3);
-      /* The light on the phone's edges moves with its angle to the camera: the side turned toward
-         the viewer catches it, and the bezel's bright corners slide with it. The stylesheet reads
-         these on the bezel, and at rest they are the kit's own values. */
+      /* The light on the phone's edges moves with its angle to the camera. The side turned toward
+         the light blazes and the other goes nearly out; the top and bottom follow the camera's
+         pitch; the bezel's bright corners slide around with the sheen; and the sliver of rim the
+         turn exposes carries a bright line down it, on the side it is showing (a turn to the left
+         brings the rim out on the left, since the rim stands behind the glass). The swing is
+         wide on purpose: the bezel is a hairline now, and a hairline that does not change is not
+         read as metal. The stylesheet reads all of these on the phone. */
       var yaw = p.cam.ry + tilt.x + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
-      phone.style.setProperty('--edge-l', clamp(0.14 + 0.36 * sy, 0.03, 0.5).toFixed(3));
-      phone.style.setProperty('--edge-r', clamp(0.14 - 0.36 * sy, 0.03, 0.5).toFixed(3));
+      var pitch = p.cam.rx + tilt.y, sp = Math.sin(pitch * Math.PI / 180);
+      phone.style.setProperty('--edge-l', clamp(0.16 + 1.1 * sy, 0.02, 0.62).toFixed(3));
+      phone.style.setProperty('--edge-r', clamp(0.16 - 1.1 * sy, 0.02, 0.62).toFixed(3));
+      phone.style.setProperty('--edge-t', clamp(0.26 + 0.9 * sp, 0.06, 0.55).toFixed(3));
+      phone.style.setProperty('--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
       phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
+      phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
+      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.7, 0, 0.32).toFixed(3));
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));

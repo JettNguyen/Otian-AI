@@ -268,23 +268,24 @@ siblings until they get their own drawings.
   control on either mockup, find it in the app. The mockups are laid out at the size they are shown
   (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
   window's agent card says "On Archie Mobile" at Jett's direction, which is ahead of the mockup in
-  Downloads (still "Running on Telegram"). **Under 971px the stage is a second composition of the
-  same objects, not the wide one shrunk**: the scene is a design box (760 by 560 wide, 400 by 560
-  narrow) that `js/home.js` fits to the stage every frame, each act has a `narrow` pose beside its
-  wide one, the floors turn a quarter (`--fz`) so the laps run toward the camera, and the caption
-  is a band under the scene. Jett's rule from 2026-09-16: the visuals are the focus on a phone too,
-  so a pose keeps its objects inside the box and nothing is placed by viewport arithmetic. Narrow, the
-  phone is seen through a window: side bezels and rim kept so it reads as a phone, top and bottom
-  ends faded out by a mask on the device and each rim layer (the transcript is bottom-aligned, so
-  it only shows fewer bubbles), standing nearly full width and readable, Ember stands beside the
-  computer rather than on it, the custody stations stand on the turned plane's own center line, row
-  210 (`--cy`, in coordinates and nothing else: sliding the plane's content and sliding the grid
-  back left the grid off to one side), and the setup steps are a Cover Flow gallery, the current
-  card flat, nearly the box's width and in front, the others to either side, turned toward it,
-  dimmer and behind, because five cards at five depths shrank with the perspective until they could
-  not be read and a flat list read as a page (Jett, 2026-09-16). The phone has a stacked rim behind
-  its glass (`.dp-edge`), and the message ball sits a few pixels back and goes see-through under a
-  station, both from the same review.
+  Downloads (still "Running on Telegram"), as are the phone's smaller island and its thinner bezel
+  wall (7 against the kit's 12, which is why the device is 407 by 866 around a screen that is still
+  393 by 852). **Under 971px the stage is a second composition of the same objects, not the wide one
+  shrunk**: the scene is a design box (760 by 560 wide, 400 by 560 narrow) that `js/home.js` fits to
+  the stage every frame, each act has a `narrow` pose beside its wide one, the floors turn a quarter
+  (`--fz`) so the laps run toward the camera, and the caption is a band under the scene. Jett's rule
+  from 2026-09-16: the visuals are the focus on a phone too, so a pose keeps its objects inside the
+  box and nothing is placed by viewport arithmetic. Narrow, the phone is seen through a window: side
+  bezels and rim kept so it reads as a phone, top and bottom ends faded out by a mask on the device
+  and each rim layer (the transcript is bottom-aligned, so it only shows fewer bubbles), standing
+  nearly full width and readable, Ember stands beside the computer rather than on it, the custody
+  stations stand on the turned plane's own center line, row 210 (`--cy`, in coordinates and nothing
+  else: sliding the plane's content and sliding the grid back left the grid off to one side), and
+  the setup steps are a Cover Flow gallery, the current card flat, nearly the box's width and in
+  front, the others to either side, turned toward it, dimmer and behind, because five cards at five
+  depths shrank with the perspective until they could not be read and a flat list read as a page
+  (Jett, 2026-09-16). The phone has a stacked rim behind its glass (`.dp-edge`), and the message
+  ball sits a few pixels back and goes see-through under a station, both from the same review.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

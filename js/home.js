@@ -182,6 +182,13 @@
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
     var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grow = $('.dp-scr--grow');
+    /* The yes is typed one character at a time, and the scroll is what types it, so scrolling back
+       takes the characters off again. Read the sentence out of the markup rather than repeating it
+       here: the markup is what a reader with reduced motion and a crawler both get, and it carries
+       the whole line. TYPED_AT and TYPED_FOR are where in the act it starts and how much of the act
+       it takes, which is about a fifth of a screen of scroll for fourteen characters. */
+    var typedEl = $('.dp-msgbox .typed'), TYPED = typedEl ? typedEl.textContent : '', typedCut = -1;
+    var TYPED_AT = 0.5, TYPED_FOR = 0.22;
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -553,8 +560,23 @@
         window.Ember.walk(ember, ex - wasX);
       }
       /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
-         is sent; scrolling back above the proposal untypes it. */
-      if (ph && scr1) ph.classList.toggle('is-typed', i === 1 && tp >= 0.5 && !scr1.classList.contains('is-pressed'));
+         is sent; scrolling back above the proposal untypes it. IT ARRIVES A CHARACTER AT A TIME,
+         because the claim of this act is that approval is a message you type and not a button you
+         press (Jett, 2026-09-17), and a sentence that appears whole is a paste. The caret holds
+         steady while characters are still coming and blinks once the line is finished, the way a
+         real one does. Under reduced motion nothing is sliced and the line stands complete. */
+      if (ph && scr1) {
+        var wantTyped = i === 1 && tp >= TYPED_AT && !scr1.classList.contains('is-pressed');
+        ph.classList.toggle('is-typed', wantTyped);
+        if (typedEl) {
+          var tn = (wantTyped && !still) ? clamp((tp - TYPED_AT) / TYPED_FOR, 0, 1) : 1;
+          var cut = Math.round(tn * TYPED.length);
+          if (cut !== typedCut) { typedEl.textContent = TYPED.slice(0, cut); typedCut = cut; }
+          /* Off the character count and not the scroll fraction, so the caret starts blinking the
+             moment the last character lands rather than when the window runs out. */
+          ph.classList.toggle('is-typing', cut < TYPED.length);
+        }
+      }
       /* Ember watches the phone while a scene plays on it, and the dot while it laps. */
       if (i === 1 || i === 2 || i === 4) { var pr = phone.getBoundingClientRect(); window.Ember.look(ember, { x: pr.left + pr.width / 2, y: pr.top + pr.height * 0.55 }); }
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }

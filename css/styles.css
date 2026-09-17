@@ -16622,10 +16622,30 @@ button.dp-act:hover { background: var(--soft); }
 .dp-knob.hot { background: var(--accent); color: var(--on-accent); font-weight: 700; }
 .dp-msgbox { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 11px 16px; font-size: var(--fs-lg); color: var(--muted); }
 /* The typed yes of the calendar act: js/home.js turns it on once the proposal has landed and off
-   again when it is sent, and the send knob is a real button only then. */
+   again when it is sent, and the send knob is a real button only then.
+
+   THE SCROLL TYPES IT, A CHARACTER AT A TIME (Jett, 2026-09-17). The claim this act makes is that
+   approval is a message you type and not a button you press, and a sentence that appears whole is
+   a paste, which is the one thing it must not look like. The scroll is this stage's clock, so the
+   driver slices the line by the act's own progress and scrolling back takes the characters off
+   again; the markup holds the whole sentence, which is what reduced motion and a crawler get.
+   Sliced in the driver rather than animated here, because the looping .hm-typed idiom further up
+   this file runs on its own clock and this one has to answer the reader's.
+
+   The placeholder goes out on the first character and not on the focus, which is what the field
+   itself does. The caret is .hm-caret's shape: zero width, so it sits between two characters
+   without moving either, and sized off the line so it is a caret and not an underscore. It holds
+   steady while characters are still arriving and blinks once the line is finished, the way a real
+   one does, so the blink says the typing has stopped rather than decorating it. */
 .dp-msgbox .typed { display: none; color: var(--text); }
 .dp-ph.is-typed .dp-msgbox .typed { display: inline; }
-.dp-ph.is-typed .dp-msgbox .ph { display: none; }
+.dp-ph.is-typed .dp-msgbox .typed:not(:empty) ~ .ph { display: none; }
+.dp-caret { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-ph.is-typed .dp-caret { display: inline-block; width: 0; height: 1.05em; vertical-align: -.2em; border-left: 1.5px solid var(--accent); animation: dp-caret 1.06s steps(1, end) infinite; }
+  .dp-ph.is-typing .dp-caret { animation: none; }
+}
+@keyframes dp-caret { 0% { opacity: 1; } 50% { opacity: 0; } }
 button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl); line-height: 26px; cursor: default; }
 .dp-ph.is-typed button.dp-knob { cursor: pointer; }
 .dp-sect { font-size: var(--fs-xs); letter-spacing: .8px; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 0 0 8px; }

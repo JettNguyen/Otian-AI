@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260917-21" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260917-22" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -556,8 +556,9 @@
                   <!-- The calendar act's approval is a typed message, which is how the product takes
                        one: the skill proposes, and applies only after your yes in a later message. So
                        the yes sits typed in the box once the proposal lands and the send knob is the
-                       real button. -->
-                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="typed">Yes, go ahead.</span><span class="ph">Message Ember</span></div><button type="button" class="dp-knob hot" data-press="confirm">&uarr;</button></div></div>
+                       real button. The scroll types it a character at a time, off the whole sentence
+                       here, so this is still what a reader with reduced motion and a crawler get. -->
+                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="typed">Yes, go ahead.</span><i class="dp-caret"></i><span class="ph">Message Ember</span></div><button type="button" class="dp-knob hot" data-press="confirm">&uarr;</button></div></div>
                 </div>
               </div>
               <!-- Beside the phone, in the layer's own pixels, for the reason the window's marks give. -->
@@ -1248,10 +1249,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260917-21"></script>
-  <script src="js/ember.js?v=20260917-21" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260917-21"></script>
-  <script src="js/home.js?v=20260917-21" defer></script>
+  <script src="js/nav.js?v=20260917-22"></script>
+  <script src="js/ember.js?v=20260917-22" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260917-22"></script>
+  <script src="js/home.js?v=20260917-22" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

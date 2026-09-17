@@ -287,14 +287,33 @@
     /* SC: the design box fitted to the stage, read every frame so a phone's browser bar coming
        and going, or a window being resized, never leaves an object cut off. Wide, the box may
        spill 100px past its column, which the caption column's own margin absorbs; narrow, it takes
-       the stage's full width and the row the captions leave it. */
+       the stage's full width and the row the captions leave it.
+
+       IT FITS UP AS WELL AS DOWN, SINCE 2026-09-17. This was clamped at 1, meaning the scene was
+       never drawn larger than its design box however much room the stage had, and the room is not
+       small: uncapped it reads 1.10 on a 1280 by 800 screen, 1.31 on a 1440 by 900 and 1.74 on a
+       1920 by 1080, so most readers were seeing the objects at two thirds of the space they had.
+       That is what made the phone's type small enough to look washed out (Jett: "draw the mockups
+       bigger if there is room"). The ceiling is 1.45 rather than none, because past that the phone
+       stops being an object in a room and becomes the page.
+
+       THE 100px SPILL IS A CONCESSION, NOT AN ENTITLEMENT. It exists so a narrow column can still
+       hold the scene, and once the scene is growing there is nothing to concede: the branch below
+       drops it the moment the spill would push the box past its own design size, so a scene that
+       is growing never crosses into the caption column. The two agree at the crossover, where the
+       wrap is 660 and both read 1, so nothing jumps as the window is dragged wider. */
     var SC = 1, narrow = false, wrap = $('.day-scene-wrap');
     var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
     function fit() {
       narrow = !!(narrowQ && narrowQ.matches);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
-      SC = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1)
-                  : clamp(Math.min((wr.width + 100) / 760, wr.height / 560), 0.4, 1);
+      var byW = (wr.width + 100) / 760;
+      if (byW > 1) byW = Math.max(1, wr.width / 760);
+      SC = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
+                  : clamp(Math.min(byW, wr.height / 560), 0.4, 1.45);
+      /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
+         the same pool whatever the fit came out at. */
+      stage.style.setProperty('--sc', SC.toFixed(3));
     }
 
     function applyPose(p) {

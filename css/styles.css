@@ -16278,7 +16278,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
 /* ---- the scene, in perspective ---- */
 .day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
-.day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(660px, 110%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); pointer-events: none; }
+.day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(calc(660px * var(--sc, 1)), 110%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); pointer-events: none; }
 .day-stage.is-night .day-scene-wrap::before { background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 9%, transparent), transparent); }
 /* The design box. js/home.js scales it to the stage (SC), so it is never sized by CSS to fit. */
 .day-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
@@ -16539,9 +16539,18 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-device::before { content: ""; position: absolute; z-index: 4; pointer-events: none; left: 50%; margin-left: 20px; top: calc(var(--bezel-wall) + 22px); width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #243040 0%, #0C0F14 56%, #050609 100%); box-shadow: inset 0 0 0 .5px rgba(130, 170, 225, .22); }
 .dp-ph {
   /* The phone kit's dark tokens, from src/theme.ts by way of archie-screen-kit.html. Dark in both
-     themes, for the reason .hm-pz gives: a screen is a lit thing standing on the page. */
+     themes, for the reason .hm-pz gives: a screen is a lit thing standing on the page.
+
+     ONE TOKEN DELIBERATELY DIFFERS, AND IT IS THE INK. The app's --text is #F3F0ED, a warm
+     near-white, which on a bubble measures 12.5:1 and on a sent bubble 10.2:1; nothing here was
+     ever a contrast failure. What fails is that this screen is drawn at about a third of the size
+     the app runs at, so its 16px type lands near 11px and is grayscale antialiased, which thins
+     light strokes on a dark ground. Jett read that as the messages not standing off their bubbles
+     (2026-09-17), and the honest fix for thin is more ink: #FFFDFB keeps the warm cast and takes
+     the two pairs to 14.0:1 and 11.4:1. Raise the drawing's scale before raising this any further,
+     since the next stop is plain white and the size is the actual cause. */
   --bg: #1A1A19; --bg2: #222221; --card: #2B2B29; --accent: #EDA277; --accent-sub: #453629; --accent-strong: #F0B18D;
-  --text: #F3F0ED; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
+  --text: #FFFDFB; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
   --line: rgba(243, 240, 237, 0.16); --soft: rgba(243, 240, 237, 0.05);
   --green: #8FC47B; --green-sub: rgba(143, 196, 123, 0.16); --gold: #E0B45E; --gold-sub: rgba(224, 180, 94, 0.16);
   --teal: #6FC4BC; --teal-sub: rgba(111, 196, 188, 0.16); --hair: 0.5px;

@@ -336,6 +336,7 @@
       scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
       win.classList.toggle('is-night', i === 5);
       clock.classList.toggle('is-on', !!ACTS[i].clock);
+      stage.classList.toggle('is-timed', !!ACTS[i].clock);
       if (ACTS[i].clock) clock.querySelector('span').textContent = ACTS[i].clock;
       if (phoneClock) phoneClock.textContent = ACTS[i].phone;
       if (prev >= 0 && !still) window.Ember.act(ember, 'hop');

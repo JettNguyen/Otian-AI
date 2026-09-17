@@ -16631,11 +16631,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    objects use the whole screen width and are never cut off; the poses for this box are the narrow
    set in js/home.js. The floors turn a quarter, so both laps run toward the camera. */
 @media (max-width: 970px) {
-  .day-stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
+  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
-     phone's top edge. It keeps its row while it is off, so the scene does not jump when it lights. */
-  .day-clock { position: relative; grid-row: 1; grid-column: 1; justify-self: center; left: auto; top: 0; transform: none; margin: 0 0 6px; }
-  .day-scene-wrap { grid-row: 2; height: 100%; min-height: 0; }
+     phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
+     same size in every act; the scene slides up over half of it then, so it is centred in the
+     whole space rather than under an empty band. The badge is 18 line + 12 padding + 2 border +
+     6 margin = 38, which is --clock-row. */
+  .day-clock { position: relative; grid-row: 1; grid-column: 1; justify-self: center; left: auto; top: 0; transform: none; margin: 0 0 6px; line-height: 18px; }
+  .day-scene-wrap { grid-row: 2; height: 100%; min-height: 0; transform: translateY(calc(var(--clock-row) / -2)); }
+  .day-stage.is-timed .day-scene-wrap { transform: none; }
   .day-scene { width: 400px; }
   .day-caps { grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
   .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: flex-start; }
@@ -16700,9 +16704,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-dot { --back-x: -6px; --back-y: 0px; }
   .day-cta-row { flex-direction: column; }
 }
-/* Under reduced motion every caption is shown, so they stack instead of sharing a cell. */
+@media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
+  .day-scene-wrap { transition: transform .45s cubic-bezier(.2, .8, .3, 1); }
+}
+/* Under reduced motion every caption is shown, so they stack instead of sharing a cell, and the
+   scene has no badge to make room for. */
 @media (max-width: 970px) and (prefers-reduced-motion: reduce) {
   .day-cap { grid-area: auto; }
+  .day-scene-wrap { transform: none; }
 }
 
 /* The four-rows screen grows as its beats land, so a bubble that has not arrived takes no room:

@@ -16686,8 +16686,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }
-  .day-win [data-mark="m-hero"] { --mx: 60px; --my: -40px; }
-  .day-phone .day-mark { --mx: -16px; --my: 44px; }
+  /* Ember stands clear of everything here (Jett, 2026-09-16). Beside the phone it is wholly to
+     the phone's left, in the room between the phone and the screen's edge, and a rung smaller
+     (data-size-narrow) so that room holds it; the hero uses the phone's mark too, since the
+     window's corner is where Ember and the phone met. At night it stands under the window's
+     left half, below its bottom edge and left of the phone. js/home.js keeps it inside the
+     stage on a screen too narrow for the room. */
+  .day-phone .day-mark { --mx: -40px; --my: 44px; }
+  .day-win [data-mark="m-window"] { --mx: 100px; --my: -120px; }
   /* The custody floor: type up two rungs, Ember beside the computer rather than on it. On the
      turned plane its rows run across the screen and the center line is row 210, so the stations
      stand 90 rows up from where the wide floor draws them (--cy), on the plane's own center line
@@ -16701,6 +16707,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-st b { font-size: var(--fs-md); }
   .day-st i { font-size: var(--fs-xs); }
   #dayFloorCustody .day-st { width: 170px; --cy: -90px; }
+  /* The line under each station wraps within 120, so the phone station's line and our server's
+     sentence, which stand at the same height, do not run into each other. */
+  #dayFloorCustody .day-st i { max-width: 120px; margin-left: auto; margin-right: auto; }
   .day-st .day-mark { left: calc(100% + 34px); top: 100%; }
   .day-st.ghost { --gx: -160px; --gy: 35px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
   .day-gate { --gm: -35px; }

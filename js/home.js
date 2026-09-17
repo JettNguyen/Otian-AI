@@ -404,6 +404,9 @@
       if (landed && grow.classList.contains('is-on')) slideThread(wasTop);
 
       var mark = ACTS[i].mark;
+      /* Narrow, the hero's Ember stands beside the phone, where the phone acts put it, rather
+         than on the window's corner, which the phone covers there. */
+      if (narrow && mark === 'm-hero') mark = 'm-phone';
       if (i === 3) {
         var credits = floorC.getAttribute('data-mode') === 'credits';
         var pt = lapPoint(credits ? lapCredits() : lapKey(), tp);
@@ -432,10 +435,13 @@
            the closing button after it. Moving between them is a snap under a hop. */
         var box = mark === 'm-cta' && ctaBox ? ctaBox : stage;
         if (ember.parentNode !== box) { box.appendChild(ember); first = true; }
-        var size = +m.getAttribute('data-size') || 96;
+        var size = (narrow && +m.getAttribute('data-size-narrow')) || +m.getAttribute('data-size') || 96;
         if (box === stage) size *= SC;  /* the scene is scaled on small screens, so Ember is too */
         var mr = m.getBoundingClientRect(), br = box.getBoundingClientRect();
         var tx = mr.left - br.left + mr.width / 2 - size / 2;
+        /* Never off the stage's sides: on a screen too narrow for the room beside the phone, Ember
+           gives up its clearance rather than its edge. */
+        if (box === stage) tx = clamp(tx, 4, br.width - size - 4);
         /* 0.85: the ground between Ember's feet is 85% of the way down the drawing's box (viewBox
            y 6 to 206, feet at 176), so this puts the feet on the mark rather than the box. */
         var ty = mr.top - br.top + mr.height / 2 - size * 0.85;

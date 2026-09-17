@@ -939,7 +939,16 @@ setting Archie up does not cost a day.
   qualifier is banned outright. Say what it is: Archie, free, on an AI account of your own.
 - ⛔ **Never say free means unlimited, and never publish the free tier without the number.** The
   limit is the whole difference between free and paid, so a page that offers one without the other
-  is the trick this entry exists to prevent. The number goes in the same sentence.
+  is the trick this entry exists to prevent. The number goes in the same sentence. What a job *is*
+  may be defined once per page rather than beside every mention of the number.
+- ⛔ **The trial and the free tier are two offers, not two phases of one.** "14 days, then 20 jobs
+  a day" is the sequence most people happen to walk, and writing it that way taught readers that
+  the free tier is what a trial decays into. It is not: somebody who pastes a key on day one never
+  takes the trial at all, and somebody whose computer has spent its credits never could. They differ
+  in what they give (the whole app with nothing counted, against the whole app at 20 jobs a day),
+  in how long they last (14 days or until the credits run out, against no end date), and in whose
+  AI account pays (ours, against theirs), and that last one is what causes the other two. Say "or",
+  never "then", and give each one its own block.
 - ⛔ **Personal only. Archie for Business has no free tier.** `crate::auth::FREE_TIER_EXISTS` is
   `!IS_BUSINESS`, a compile-time constant, so the branch is not in the business binary at all and a
   business account with no plan meets the paywall exactly as it did before. The reason is who the

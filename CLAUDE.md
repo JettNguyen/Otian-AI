@@ -267,13 +267,15 @@ siblings until they get their own drawings.
   for the beat the phone app gives it (`LINGER_MS` in archie-mobile's `ui.tsx`). Before drawing a
   control on either mockup, find it in the app. The mockups are laid out at the size they are shown
   (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
-  window's agent card says "On Archie Mobile" at Jett's direction, which is ahead of the app
-  mockup in Downloads (still "Running on Telegram"). The phone was ahead of its kit the same way
-  until 2026-09-17, when the kit was brought up to the port instead: the thinner bezel wall (7
-  against the kit's old 12, which is why the device is 407 by 866 around a screen that is still
-  393 by 852), the chamfer on the outer 2 of that wall, the smaller island and lens, and the two
-  rings that traced the silhouette taken off. **Carrying a change back to the kit is the
-  direction that keeps the rule true**, because the kit is where the next change starts. **Under
+  window's agent card says "On Archie Mobile" at Jett's direction, and since 2026-09-17 so does
+  the app mockup in Downloads, which read "Running on Telegram" until then (its setup pane still
+  connects Telegram, and that is not a contradiction: the same agent answers in both, as that
+  pane says). The phone kit was behind the same way and was brought up to the port on the same
+  day: the thinner bezel wall (7 against the kit's old 12, which is why the device is 407 by 866
+  around a screen that is still 393 by 852), the chamfer on the outer 2 of that wall, the
+  smaller island and lens, and the two rings that traced the silhouette taken off. **Carrying a
+  change back to the kit is the direction that keeps the rule true**, because the kit is where
+  the next change starts. **Under
   971px the stage is a second composition of the same objects, not the wide one
   shrunk**: the scene is a design box (760 by 560 wide, 400 by 560 narrow) that `js/home.js` fits to
   the stage every frame, each act has a `narrow` pose beside its wide one, the floors turn a quarter

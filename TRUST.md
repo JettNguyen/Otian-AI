@@ -931,6 +931,18 @@ app, and a report is a few kilobytes. Headings, bold, bullets and page breaks; t
 computed with the same character widths the reader itself uses, which is why text cannot run off the
 page.
 
+**Charts in a PDF, shipped 2026-09-16.** Approved wording: "Ask for a chart in a report and you get
+a real one: bars, a line or a pie, drawn in the document." The agent writes a fenced ```chart block
+holding a kind, a title and one `label, value` line each, and `export.rs` draws it with PDF's own
+shapes, in the app's own colors. Drawn rather than pasted in: it stays sharp at any zoom, prints
+properly, and adds nothing to the app's size. Two honest constraints are in the code and may be
+described: a bar chart always has zero on it, because a bar's length is the value and a chart that
+starts somewhere else draws a 1% difference as a bar twice the height of its neighbor; and a pie
+refuses to draw a negative slice, listing the numbers instead. **Charts are a PDF thing.** A `.docx`
+gets the figures written out rather than the picture, because Word takes a drawing as an image and
+making one would mean shipping a font file to put labels on it. Do not say "charts in documents";
+say PDF.
+
 **The stronger claim, and the reason the list is short.** `ALLOWED` is an allowlist and the
 comment says it "must stay one", because a denylist of dangerous extensions is a losing game
 against platforms that keep inventing new ones. Every kind on it is inert: opening one shows text

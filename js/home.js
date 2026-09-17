@@ -223,7 +223,17 @@
         pose: { cam: { rx: 3, ry: -8, s: 1.04 }, win: copy(W2, { ry: 16 }), phone: copy(PH2, { ry: -14 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: copy(NW2, { ry: 18 }), phone: copy(NP2, { ry: -10 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-window', state: 'working', clock: '2:00 am', phone: '2:00', scr: 5,
-        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: copy(PH, { o: .45 }), night: 1, fc: 0, fs: 0 },
+        /* The one act where the two objects stand apart instead of overlapping. Everywhere else the
+           phone is the subject and it may sit over the window, but at two in the morning the window
+           is what the act is about and both lists are filling in at once, so the phone covering the
+           window hides the evidence (Jett, 2026-09-17: "i cannot see what is happening behind the
+           phone"). On W and PH it covered the right 42% of the window's content column, which is
+           the column Recent work is in and exactly where each row's time and badge sit. So the
+           window slides left and the phone goes smaller and right: measured, that leaves 24px
+           between them with 30px of the 760 box spare on each side. The window keeps s 1.143,
+           because .4375 times 1.143 is exactly a half and rastering it off a half is what made
+           hairlines shimmer; the phone has no such round number to keep. */
+        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 240, s: .74, o: .45 }), night: 1, fc: 0, fs: 0 },
         narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -90, y: -170, z: -320, ry: 16, s: .75, o: .9 }, phone: { x: 30, y: 20, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },

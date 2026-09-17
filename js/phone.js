@@ -32,9 +32,9 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import {
   getFirestore, doc, getDoc, setDoc, deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { bindStatusToast } from "./status-toast.js?v=20260917-2";
-import { COLLECTIONS, loadCatalog, shelfKind } from "./catalog.js?v=20260917-2";
-import { faceHtml } from "./faces.js?v=20260917-2";
+import { bindStatusToast } from "./status-toast.js?v=20260917-3";
+import { COLLECTIONS, loadCatalog, shelfKind } from "./catalog.js?v=20260917-3";
+import { faceHtml } from "./faces.js?v=20260917-3";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",

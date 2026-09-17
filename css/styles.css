@@ -16457,10 +16457,18 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   /* The bezel's four highlights and the angle of its sheen are variables js/home.js sets from the
      phone's angle each frame: the side turned toward the light blazes and the other goes nearly
      out, the top and bottom follow the camera's pitch, and the bright corners slide around as the
-     phone turns. They are hairlines, not the kit's soft 2px washes, because on a wall this thin a
-     wash is a third of the bezel and reads as a glow rather than as metal. At rest they are near
-     the kit's own values. */
-  --shadow-bezel: inset 0 0 0 1px rgba(255, 255, 255, .10), inset 0 1px 0 rgba(255, 255, 255, var(--edge-t, .26)), inset 0 -1px 0 rgba(255, 255, 255, var(--edge-b, .13)), inset 1px 0 0 rgba(255, 255, 255, var(--edge-l, .10)), inset -1px 0 0 rgba(255, 255, 255, var(--edge-r, .10)), 0 0 0 1px rgba(0, 0, 0, .7), 0 30px 70px rgba(0, 0, 0, .55), 0 6px 18px rgba(0, 0, 0, .4);
+     phone turns. Each is a crisp hairline for the specular with a soft band behind it for the
+     roll into the glass, rather than the kit's single 2px wash, which on a wall this thin is a
+     third of the bezel and reads as a glow. At rest they are near the kit's own values.
+
+     NOTHING HERE MAY TRACE THE WHOLE SILHOUETTE AT ONE BRIGHTNESS. A uniform ring is how a cut
+     edge reads and is the opposite of how a chamfer reads, which is bright where the light is and
+     dark away from it. This carried two of them, a white 1px inside and a black 1px outside, and
+     the phone read as sharp however round the rim was drawn (Jett, 2026-09-17). The device's own
+     cast shadow went with them: it was painted in the glass's plane, in front of the rim, so it
+     darkened the very ring the rounded edge shows. The phone's shadow belongs to the back face,
+     which has carried it all along (--shadow-app on .dp-edge--back). */
+  --shadow-bezel: inset 0 1px 0 rgba(255, 255, 255, var(--edge-t, .26)), inset 0 3px 4px rgba(255, 255, 255, calc(var(--edge-t, .26) * .22)), inset 0 -1px 0 rgba(255, 255, 255, var(--edge-b, .13)), inset 0 -3px 4px rgba(255, 255, 255, calc(var(--edge-b, .13) * .22)), inset 1px 0 0 rgba(255, 255, 255, var(--edge-l, .10)), inset 3px 0 4px rgba(255, 255, 255, calc(var(--edge-l, .10) * .22)), inset -1px 0 0 rgba(255, 255, 255, var(--edge-r, .10)), inset -3px 0 4px rgba(255, 255, 255, calc(var(--edge-r, .10) * .22));
   position: relative; width: 407px; height: 866px; padding: var(--bezel-wall); border-radius: calc(54px + var(--bezel-wall));
   background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
   box-shadow: var(--shadow-bezel);

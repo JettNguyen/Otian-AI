@@ -617,38 +617,60 @@ THEME = (
     '<style>.mk{--bg:#FCFAF8;--card:#FFFFFF;--ink:#44403B;--ink2:#69645D;--ink3:#6D6861;'
     '--bd:#EAE6E1;--acc:#E08A5B;--accS:#FBE4D3;--grn:#679B55;--grnS:rgba(103,155,85,.14);'
     '--grnF:#4E7D3F;--redF:#BC5145;--gld:#8C6820;--gldS:rgba(187,140,51,.14);'
-    '--soft:rgba(68,64,59,.04);--soft2:rgba(68,64,59,.12);--ls:rgba(68,64,59,.16);--shell:#2E2C29}'
+    '--soft:rgba(68,64,59,.04);--soft2:rgba(68,64,59,.12);--ls:rgba(68,64,59,.16);'
+    '--shell:#2E2C29;--shell-hi:#5A5753;--shell-lo:#171614;--edge:rgba(255,255,255,.18)}'
     ':root[data-theme="dark"] .mk{--bg:#1A1A19;--card:#2B2B29;--ink:#F3F0ED;--ink2:#AEACA6;'
     '--ink3:#ACA8A3;--bd:#3F3E3A;--acc:#EDA277;--accS:#453629;--grn:#8FC47B;'
     '--grnS:rgba(143,196,123,.16);--grnF:#4E7440;--redF:#B0503F;--gld:#DCAF57;--gldS:rgba(220,175,87,.16);'
     '--soft:rgba(243,240,237,.05);--soft2:rgba(243,240,237,.14);--ls:rgba(243,240,237,.16);'
-    '--shell:#4A4844}</style>'
+    '--shell:#3A3936;--shell-hi:#6E6B66;--shell-lo:#1A1918;--edge:rgba(255,255,255,.22)}</style>'
 )
 
 
-def phone(body, ox, oy):
-    cid = uid("sc")
+def device(inner, ox, oy):
+    """The phone around a screen. Until 2026-09-18 this was one dark rounded rectangle, which
+    read as a card with a screen on it (Jett: "too bland"). What a phone has that a card does
+    not: a body that is lit from one corner and darker toward the other, a bright line where
+    the glass meets the metal, a black bezel between the two, the buttons on its sides, and the
+    island at the top of the screen with the lens in it. None of it is Archie; it is what makes
+    the rest read as a phone. Drawn once for the stage and the stills, so the two cannot drift."""
+    cid, gid = uid("sc"), uid("gs")
+    P = SHELL_PAD
     return ('<g transform="translate(%s,%s)">' % (f(ox), f(oy))
-            + rect(-SHELL_PAD, -SHELL_PAD, W + SHELL_PAD * 2, H + SHELL_PAD * 2, 52, "var(--shell)")
-            + '<defs><clipPath id="%s">%s</clipPath></defs>' % (
-                cid, rect(0, 0, W, H, 42, "#000"))
+            + '<defs><clipPath id="%s">%s</clipPath>' % (cid, rect(0, 0, W, H, 42, "#000"))
+            + '<linearGradient id="%s" x1="0" y1="0" x2="0.4" y2="1">' % gid
+            + '<stop offset="0" style="stop-color:var(--shell-hi)"/>'
+            + '<stop offset="0.45" style="stop-color:var(--shell)"/>'
+            + '<stop offset="1" style="stop-color:var(--shell-lo)"/></linearGradient></defs>'
+            # the buttons, on the metal behind the body: volume on the left, power on the right
+            + rect(-P - 3, 118, 3.5, 34, 1.5, "var(--shell-lo)")
+            + rect(-P - 3, 166, 3.5, 54, 1.5, "var(--shell-lo)")
+            + rect(-P - 3, 232, 3.5, 54, 1.5, "var(--shell-lo)")
+            + rect(W + P - 0.5, 186, 3.5, 84, 1.5, "var(--shell-lo)")
+            # the body, its lit edge, and the bezel
+            + rect(-P, -P, W + P * 2, H + P * 2, 52, "url(#%s)" % gid)
+            + rect(-P + 0.75, -P + 0.75, W + P * 2 - 1.5, H + P * 2 - 1.5, 51.5, "none", "var(--edge)", 1)
+            + rect(-4, -4, W + 8, H + 8, 46, "#0B0B0A")
+            # the screen
             + '<g clip-path="url(#%s)">' % cid
-            + rect(0, 0, W, H, 42, "var(--bg)") + body + "</g></g>")
+            + rect(0, 0, W, H, 42, "var(--bg)") + inner + "</g>"
+            # the island and the lens, inside the status bar's clear middle
+            + rect(W / 2 - 46, 11, 92, 28, 14, "#000")
+            + circle(W / 2 + 19, 25, 5.6, "#121820")
+            + circle(W / 2 + 17.4, 23.4, 1.7, "rgba(255,255,255,.32)")
+            + "</g>")
+
+
+def phone(body, ox, oy):
+    return device(body, ox, oy)
 
 
 def phone_multi(bodies, ox, oy):
-    """One shell, every screen inside its clip. The stylesheet lights one .mk-scr at a time
+    """One device, every screen inside its clip. The stylesheet lights one .mk-scr at a time
     and the rest are not painted, so nothing of a dark screen shows through a lit one."""
-    cid = uid("sc")
-    return ('<g transform="translate(%s,%s)">' % (f(ox), f(oy))
-            + rect(-SHELL_PAD, -SHELL_PAD, W + SHELL_PAD * 2, H + SHELL_PAD * 2, 52, "var(--shell)")
-            + '<defs><clipPath id="%s">%s</clipPath></defs>' % (
-                cid, rect(0, 0, W, H, 42, "#000"))
-            + '<g clip-path="url(#%s)">' % cid
-            + rect(0, 0, W, H, 42, "var(--bg)")
-            + "".join('<g class="mk-scr%s" data-scr="%d">%s</g>'
-                      % (" is-on" if i == 0 else "", i, body) for i, body in enumerate(bodies))
-            + "</g></g>")
+    return device("".join('<g class="mk-scr%s" data-scr="%d">%s</g>'
+                          % (" is-on" if i == 0 else "", i, body)
+                          for i, body in enumerate(bodies)), ox, oy)
 
 
 def build():
@@ -665,7 +687,7 @@ def build():
         bodies.append(fn())
     _beat["act"] = None
     stage = ('<svg class="mk mk-stage" viewBox="0 0 412 822" aria-hidden="true" focusable="false"'
-             ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">' + THEME
+             ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit;overflow:visible">' + THEME
              + phone_multi(bodies, 11.0, 11.0) + "</svg>")
 
     # The stills: one drawing per screen, each named, in a row the stylesheet stacks narrow.
@@ -673,7 +695,7 @@ def build():
     for i, (fn, cap, desc) in enumerate(SCREENS):
         tid = "mks%d" % (i + 1)
         svg = ('<svg class="mk" viewBox="0 0 412 874" role="img" aria-labelledby="%s"'
-               ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">' % tid
+               ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit;overflow:visible">' % tid
                + THEME + '<title id="%s">%s</title>' % (tid, esc(desc))
                + phone(fn(), 11.0, 11.0)
                + text(206, caption_y, cap, 21, "currentColor", "500", "middle") + "</svg>")

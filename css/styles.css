@@ -16548,25 +16548,32 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   padding: calc(var(--nav-height) + 8px) 40px 24px; overflow: hidden;
 }
 .mb-story.is-live .mb-caps { grid-column: 1; grid-row: 1; height: 100%; min-height: 0; }
-/* The slab: the scene column is a flat panel a shade off the page, squared off, the way a device
-   is shown on a product page. Not a pool of light; that is the homepage's. */
-.mb-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; }
-.mb-story.is-live .mb-scene-wrap::before { content: ""; position: absolute; inset: 0; border-radius: var(--radius); background: var(--bg-secondary); border: 1px solid var(--border); }
-/* The design box. js/mobile.js scales it to the panel (SC), so it is never sized by CSS to fit. */
-.mb-scene { position: relative; width: 760px; height: 560px; flex: none; }
-/* The phone: the stage drawing at .636 of its 412 by 822, laid out at that size so the drawing is
-   made at the size it is seen (section 49 says why), upright, with its shadow on the slab. Wide it
-   stands right of the box's centre, leaving the left of the box to the line; narrow, on the centre
-   line. js/mobile.js sets --px and --po per act; nothing else about it ever changes. */
-.mb-phone { position: absolute; left: 50%; top: 50%; width: 262px; height: 523px; margin: -262px 0 0 -131px; transform: translate3d(var(--px, 0px), 0, 0); opacity: var(--po, 1); filter: drop-shadow(0 18px 28px rgba(0, 0, 0, .22)); }
-.mb-phone > svg { display: block; width: 100%; height: 100%; }
+/* No slab and no pool of light: the phone stands on the page itself. The wrap carries a
+   perspective so the phone's fixed turn toward the captions has depth, and nothing here moves the
+   camera; that is the homepage's. */
+.mb-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1800px; perspective-origin: 50% 50%; }
+/* The design box. js/mobile.js scales it to the column (SC), so it is never sized by CSS to fit. */
+.mb-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
+/* The phone: the stage drawing at .636 of its 412 by 822 in the box, which is the size the sealed
+   line is drawn against, and js/mobile.js scales it up from there (--ps) to fill the column in the
+   three screen acts, because a phone drawn at a third of the room it has is a small phone (Jett,
+   2026-09-18). It stands turned a few degrees toward the captions (--pr) and flat for the line.
+   The slab behind it is the phone's thickness: 10px back, so the turn shows a side, and the
+   shadow falls off the back rather than off the glass. Wide it stands right of the box's centre
+   for the line's act, leaving the left to the line; narrow, on the centre line. */
+.mb-phone { position: absolute; left: 50%; top: 50%; width: 262px; height: 523px; margin: -262px 0 0 -131px; transform-style: preserve-3d; transform: translate3d(var(--px, 0px), 0, 0) rotateY(var(--pr, 0deg)) scale(var(--ps, 1)); opacity: var(--po, 1); }
+.mb-phone > svg { position: relative; display: block; width: 100%; height: 100%; }
+.mb-phone::before { content: ""; position: absolute; inset: 3px; border-radius: 34px; background: linear-gradient(180deg, #34322F, #141312); transform: translateZ(-10px); box-shadow: var(--shadow-lg); }
+/* The ground under it: a soft contact shadow a little behind the back face, so the phone stands
+   on something rather than floating in a column. */
+.mb-phone::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -14px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .3), transparent); transform: translateZ(-12px); }
 /* One screen up at a time. Off, a screen is not painted, so its beats cannot show through the one
    that is; a beat that has not landed is out of sight the same way. */
 .mk-stage .mk-scr { opacity: 0; }
 .mk-stage .mk-scr.is-on { opacity: 1; }
 .mk-stage .day-beat:not(.is-on) { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
-  .mb-phone { transition: transform .5s cubic-bezier(.2, .8, .3, 1), opacity .4s ease; }
+  .mb-phone { transition: transform .7s cubic-bezier(.2, .8, .3, 1), opacity .4s ease; }
   .mk-stage .mk-scr { transition: opacity .35s ease; }
   .mk-stage .day-beat { transition: opacity .3s ease, transform .4s cubic-bezier(.2, .8, .3, 1); }
   .mk-stage .day-beat:not(.is-on) { transform: translateY(10px); }
@@ -16575,8 +16582,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* ---- the step rail: four names, the current one lit, and a line filling under them ---- */
 .mb-rail { position: absolute; left: 0; top: 0; z-index: 2; display: flex; gap: 18px; margin: 0; padding: 0 0 10px; list-style: none; font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-muted); }
 .mb-rail::after { content: ""; position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: linear-gradient(90deg, var(--accent) calc(var(--p, 0) * 100%), var(--border) 0); }
-.mb-rail li { counter-increment: none; }
 .mb-rail li.is-on { color: var(--accent-ink); }
+.mb-stage .day-hint { grid-column: 1; justify-self: start; align-items: flex-start; margin-bottom: 8px; }
 @media (prefers-reduced-motion: no-preference) { .mb-rail li { transition: color .3s ease; } }
 
 /* ---- the sealed line: two drawn points, the phone as the third, and the message between ---- */

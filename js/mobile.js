@@ -36,22 +36,25 @@
   var LEN = [0.25, 1, 1, 1.25], CUM = [0], TOT = 0;
   LEN.forEach(function (l) { TOT += l; CUM.push(TOT); });
 
-  /* Per act: which screen is up, and where the phone stands. Wide it stands right of the box's
-     centre for the whole story, so the line has the left; the last act keeps the conversation up
-     and the phone where it is, because the phone is the line's third point. Narrow the phone is
-     on the centre line and steps out for the last act, where a drawn phone stands in for it. */
+  /* Per act: which screen is up, and how the phone stands. Through the three screen acts it is
+     big, filling its column (ps, from fit), on the centre line and turned a few degrees toward
+     the captions. For the line it comes back to the box's own size and flat, and wide it moves
+     right so the line has the left, because the phone is the line's third point; narrow it steps
+     out and a drawn phone stands in for it. */
   var ACTS = [
-    { scr: 0, px: 160, npx: 0, po: 1, npo: 1, line: 0 },
-    { scr: 1, px: 160, npx: 0, po: 1, npo: 1, line: 0 },
-    { scr: 2, px: 160, npx: 0, po: 1, npo: 1, line: 0 },
-    { scr: 1, px: 160, npx: 0, po: 1, npo: 0, line: 1 }
+    { scr: 0, big: true, px: 0, pr: -7, po: 1, npo: 1 },
+    { scr: 1, big: true, px: 0, pr: -7, po: 1, npo: 1 },
+    { scr: 2, big: true, px: 0, pr: -7, po: 1, npo: 1 },
+    { scr: 1, big: false, px: 160, pr: 0, po: 1, npo: 0 }
   ];
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
   /* SC: the design box fitted to the slab, every frame, up as well as down, with the same ceiling
      as the homepage's box (js/home.js says why). */
-  var SC = 1, narrow = false;
+  /* PS: how much bigger than the box's phone the big phone is, so that it fills the column:
+     nearly the column's whole height, and never wider than it. */
+  var SC = 1, PS = 1, narrow = false;
   var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
   function fit() {
     narrow = !!(narrowQ && narrowQ.matches);
@@ -59,6 +62,9 @@
     SC = narrow ? clamp(Math.min(wr.width / 400, wr.height / 560), 0.3, 1.45)
                 : clamp(Math.min((wr.width - 24) / 760, (wr.height - 24) / 560), 0.4, 1.45);
     scene.style.transform = 'scale(' + SC.toFixed(3) + ')';
+    var byH = (wr.height * (narrow ? 0.98 : 0.94)) / (523 * SC);
+    var byW = (wr.width * (narrow ? 0.86 : 0.88)) / (262 * SC);
+    PS = clamp(Math.min(byH, byW), 1, 2.6);
   }
 
   /* The lap, in box coordinates: [time, x] along the line's row. Phone to mailbox to computer,
@@ -89,8 +95,14 @@
     caps.forEach(function (c, j) { c.classList.toggle('is-on', j === i); });
     steps.forEach(function (s, j) { s.classList.toggle('is-on', j === i); });
     scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
-    phone.style.setProperty('--px', (narrow ? ACTS[i].npx : ACTS[i].px) + 'px');
+    phone.style.setProperty('--px', (narrow ? 0 : ACTS[i].px) + 'px');
+    phone.style.setProperty('--pr', ACTS[i].pr + 'deg');
     phone.style.setProperty('--po', String(narrow ? ACTS[i].npo : ACTS[i].po));
+  }
+  var psWas = '';
+  function size(i) {
+    var v = (ACTS[i].big ? PS : 1).toFixed(3);
+    if (v !== psWas) { psWas = v; phone.style.setProperty('--ps', v); }
   }
 
   var wasNarrow = null;
@@ -106,6 +118,7 @@
     /* A change of layout re-poses the phone for the act it is in. */
     if (narrow !== wasNarrow) { wasNarrow = narrow; cur = -1; }
     setAct(i);
+    size(i);
     if (hint) hint.classList.toggle('is-off', p > 0.02);
     if (rail) rail.style.setProperty('--p', p.toFixed(3));
 

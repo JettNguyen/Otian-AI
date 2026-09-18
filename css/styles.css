@@ -16676,12 +16676,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .mb-scene { width: 400px; }
   .mb-story.is-live .mb-caps { grid-column: 1; grid-row: 2; display: grid; height: auto; padding: 26px 4px 12px; }
   .mb-rail { left: 50%; transform: translateX(-50%); top: 6px; gap: 14px; padding-bottom: 6px; font-size: var(--fs-3xs); }
-  /* The first screen was cramped (Jett, 2026-09-18): two tiles side by side on a phone's width
-     squeezed each to its pill, and the title a rung too big above them. Stacked, each tile is a
-     full row, and the title comes down a rung. */
+  /* The two tiles stand side by side here too (Jett, 2026-09-18), each half the width, and what
+     makes that fit is the pill: in a row with the name it squeezed the tile, so it sits under the
+     name instead, in the column beside the glyph. The title comes down a rung. */
   .mb-story .day-cap[data-act="0"] h1 { font-size: var(--fs-3xl); }
-  .mb-stores { flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
-  .mb-store { min-width: 0; width: min(100%, 340px); padding: 8px 12px 8px 10px; }
+  .mb-stores { width: 100%; justify-content: center; gap: 8px; margin-top: 14px; }
+  .mb-store { flex: 1 1 0; min-width: 0; max-width: 200px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 3px 10px; align-items: center; padding: 8px 10px; text-align: left; }
+  .mb-store-ic { grid-row: 1 / 3; }
+  .mb-store-state { grid-column: 2; justify-self: start; margin-left: 0; }
   .mb-clear { max-width: none; }
   .mb-clear li { font-size: var(--fs-2xs); }
   .mb-line-path--wide { display: none; }

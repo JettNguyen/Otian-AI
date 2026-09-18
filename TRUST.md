@@ -535,50 +535,53 @@ they chose. A saving quoted without its trade is a claim we cannot defend.
 
 ### ✅ You choose what your agent can do, and what it stops carrying (SHIPPED 2026-09-18)
 
-**Approved wording:** "Your agent's Setup tab has a section called 'What it can do'. Every ability
-in it is switched on until you turn it off. Turn one off and the agent stops offering it, and each
-message you send costs a little less. Ask it for the thing anyway and it tells you which screen
-turns it back on, rather than pretending it never could."
+**Approved wording:** "Your agent's Setup tab has a section called 'What it can do', with a switch
+for each of eight abilities. Every one is on until you turn it off. Turn one off and the agent
+stops offering it, and each message you send costs a little less. Ask it for the thing anyway and
+it tells you which screen turns it back on, rather than pretending it never could."
 
-**The two switches, in the words on the screen:**
+**The eight, in the words on the screen.** Under *Jobs it does for you*: set reminders; save files
+to this computer; look up what it has been doing; read the web. Under *Changes it can make to
+itself*: build new skills and routines; add and remove add-ons; start and pause routines when you
+ask; change which AI answers. Each row names where the job still gets done with the switch off (a
+routine for a repeating nudge, the Work tab for the record, the Marketplace for add-ons, the Build
+a skill tab for a skill, each routine's own card, Response quality for the AI settings).
 
-- **"Don't let this agent build new skills."** It stops offering to build a skill or a routine when
-  you describe a job none of its skills cover. The skills and routines you already have keep
-  running, and you can still write one yourself on the Build a skill tab.
-- **"Don't let this agent read the web."** It stops opening pages and searching, for this agent and
-  every skill installed later. Email, calendar, and chat keep working, and so do the services you
-  connected yourself.
+**Why it's true:** seven are fields on `archie_domain::AgentAbilities`
+(`crates/archie-domain/src/skill.rs`), stored on the agent's own manifest and every one defaulting
+to on, so an `agent.json` written before the screen existed has all of them. The eighth, the web
+switch, is the older `AgentBundleManifest::no_web_access` and is the one field stored in the
+negative, because renaming a field every agent on disk already carries is a data migration; the
+screen draws it positive like the rest. Both are written by `agent_abilities_set` and
+`agent_no_web_access_set` (`src-tauri/src/commands/mod.rs`) and read once at gateway start
+(`src-tauri/src/commands/gateway_lifecycle.rs`). Each switch gates its own tools where the belt is
+assembled (`crates/archie-runtime/src/gateway/turn.rs`), and the ones the prompt also claims in
+words (reminders, saving files) are gated in the same expression that builds the toolkit section,
+so the prompt cannot describe a belt the turn is not holding.
 
-**Why it's true:** both are fields on the agent's own manifest
-(`AgentBundleManifest::no_skill_builder` and `::no_web_access`,
-`crates/archie-domain/src/skill.rs`), written from the checkboxes in `src/app/agent-detail.tsx` by
-`agent_no_skill_builder_set` and `agent_no_web_access_set` (`src-tauri/src/commands/mod.rs`) and
-read once at gateway start (`src-tauri/src/commands/gateway_lifecycle.rs`). The builder switch is
-read through one accessor, `GatewayConfig::skill_writer`, which three separate places consult (the
-tool list, the sentence that invites an offer, and the write itself), so there is no path by which
-an agent with the switch off can be handed the tools or save a draft. The test is
-`a_switched_off_builder_says_where_it_goes_back_on` in
-`crates/archie-runtime/src/gateway/skill_builder.rs`. The web switch is the older of the two and
-had no entry here until this one was written; `crates/archie-runtime/src/tool_policy.rs` holds the
-membership test that keeps a new web-reaching tool from slipping past it.
-
-**Why the agent names the screen:** with the builder off, the turn carries one sentence saying it
-is switched off and where it goes back on (`skill_builder::OFF_NOTE`). Without it the agent obeys
-its standing rule that a no is never the whole answer and goes hunting through the add-on store for
-a thing that is not in the store. Naming the setting is the difference between a switch and a dead
-end.
+**Why the agent names the screen:** with anything switched off, the turn carries one sentence
+listing what is off and the single screen it goes back on
+(`prompt::switched_off_note`). Without it the agent obeys its standing rule that a no is never the
+whole answer, and goes hunting through the add-on store for a reminder add-on that does not exist.
+Naming the setting is the difference between a switch and a dead end. Nothing is added to the
+prompt for an agent with nothing switched off, which is every agent until somebody opens that
+screen.
 
 **Boundaries, and one of them is a number.**
 
 - **No figure for the saving may be quoted anywhere, by anybody, yet.** What is known is read off
-  the code, not off a bench: the builder's tool descriptions are roughly 1,800 tokens carried on
-  every chat turn. Nobody has run a live agent for a month with the switch off and priced it. Until
-  `cost_bench` does, the claim is "a little less", and "a little less" is the ceiling.
-- **Never call this a safety feature in general.** One of the two switches is about safety and the
-  other is about cost, and they sit together because both are agent-wide switches read at start,
-  not because they are alike. The web switch's own claim is the one in the websites section.
+  the code, not off a bench: the seven groups run from roughly 235 to 1,825 tokens of tool
+  descriptions carried on every interactive turn. Nobody has run a live agent for a month with
+  switches off and priced it. Until `cost_bench` does, the claim is "a little less", and "a little
+  less" is the ceiling.
+- **Never call this a safety feature in general.** One of the eight is about safety and seven are
+  about an ability not being wanted. The web switch's own claim is the one in the websites section.
+  Switching an ability off withholds its tools and `execute_tool` refuses what was never offered,
+  but that is not what any of the other seven are for.
 - **Never say it turns off a skill you installed.** It does not. It narrows what the agent offers
   in conversation; the Skills tab is where an add-on is removed.
+- **Never say the agent loses the job.** Every row names where the job still happens, and the claim
+  above only holds because they do.
 - **Never describe what comes off a message.** The mechanism is the company's, under the rule in
   the section immediately below. "Costs a little less" is an outcome and ships; anything about what
   Archie sends does not.

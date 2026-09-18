@@ -9,41 +9,13 @@
   var THEME_KEY = 'nr-theme';
   var root = document.documentElement;
 
-  /* Running as the installed "Archie on your phone" app rather than in a browser tab.
-     The app is for managing an agent, so it should not double as a way to wander into the
-     marketing site: someone who tapped an Archie icon on their home screen did not ask for
-     Pricing, the Blog, or Our Story, and in a window with no address bar and no tabs there is no
-     obvious way back. `.is-app` on the root element is what styles.css hangs that on.
-     Marked here, in the nav script every page loads, because the app can legitimately visit
-     /account/, /login/ and /billing/, and each of those has to know too. */
-  try {
-    if ((window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
-        window.navigator.standalone === true) {
-      root.classList.add('is-app');
-
-      /* The wordmark is a link home on every page of the site, which inside the app is the one
-         door left open into the marketing pages the rest of this hides. Point it at the app's own
-         start instead, so tapping the logo does what it does in any app: go back to the top of
-         this thing, not out of it. Rewritten here rather than per page, because the app can be on
-         /phone/, /account/ or /billing/ and the markup is duplicated in all of them. */
-      var logo = document.querySelector('.nav-logo');
-      if (logo) logo.setAttribute('href', '/phone/');
-
-      /* No pinch or double-tap zoom in the app.
-         Deliberately scoped to standalone and nowhere else: suppressing zoom on a website is an
-         accessibility failure, and the ordinary otianai.com pages keep it. Here the window has no
-         address bar to re-fit a zoomed page with, so an accidental double-tap leaves someone stuck
-         at 2x with no obvious way back, which is the worse outcome. Text still scales with the
-         system font-size setting, which is the accessibility path that matters. */
-      var vp = document.querySelector('meta[name="viewport"]');
-      if (vp) {
-        vp.setAttribute(
-          'content',
-          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover'
-        );
-      }
-    }
-  } catch (e) { /* treat as a normal browser tab */ }
+  /* **There is no installed app on this site any more, and this is where it used to be handled.**
+     `/phone/` was a page that could be added to a home screen and run without browser chrome, so
+     nav.js put `.is-app` on the root element and styles.css stripped the site's navigation away
+     underneath it. That page was decommissioned on September 18, 2026 in favor of the real Archie
+     app, and with its manifest went the only way any page here could enter standalone mode. The
+     branch is gone rather than left dead: a reader finding it would go looking for the app it
+     describes. */
 
   function getStoredTheme() {
     try {

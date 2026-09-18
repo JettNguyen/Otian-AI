@@ -54,9 +54,14 @@ SKIP_FILES = {"404.html", "preview.html", "banner.html"}
 # Everything under these is either signed-in, an admin tool, or a machine endpoint. They
 # carry their own noindex too; this list is what keeps them out of the sitemap, and the
 # Disallow lines below are what keeps a crawler from spending its budget finding that out.
+#
+# `app/` is the odd one: it is nobody's private page, it is where the square code on somebody's
+# own computer sends them. It is here because the app it is about is in neither store, so a search
+# result for it would offer a reader something they cannot have. It comes off this list the day the
+# stores list the app, and `phone/` came off it on September 18, 2026 by being deleted.
 PRIVATE_PREFIXES = (
-    "account/", "activity/", "admin/", "app-auth/", "auth-action/",
-    "billing/", "firebase-hosting/", "login/", "phone/",
+    "account/", "activity/", "admin/", "app/", "app-auth/", "auth-action/",
+    "billing/", "firebase-hosting/", "login/",
 )
 
 NOINDEX = re.compile(r'<meta[^>]+name="robots"[^>]+content="[^"]*noindex', re.I)

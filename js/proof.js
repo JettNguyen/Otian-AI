@@ -620,11 +620,11 @@ async function mountFragment(root) {
   // A real 256-bit key, in the base64url alphabet the pairing link uses so it survives a URL.
   const raw = crypto.getRandomValues(new Uint8Array(32));
   const key = b64(raw).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-  const url = "https://otianai.com/phone/#k=" + key;
+  const url = "https://otianai.com/app/#a1." + key + ".<one-time ticket>";
   if (keyOut) keyOut.textContent = key;
   if (urlOut) urlOut.textContent = url;
   if (wireOut) {
-    wireOut.textContent = "GET /phone/ HTTP/1.1\nHost: otianai.com";
+    wireOut.textContent = "GET /app/ HTTP/1.1\nHost: otianai.com";
   }
 
   async function run() {

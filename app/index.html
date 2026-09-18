@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Archie on Your Phone | Otian AI</title>
-  <meta name="description" content="Manage the Archie agent running on your computer from your phone: add add-ons, finish their setup, and pause routines while you are away from your desk." />
+  <title>Get Archie on Your Phone | Otian AI</title>
+  <meta name="description" content="Where the square code from Archie on your computer lands: what the phone app is, where it stands today, and what to do with a pairing code you have just scanned." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="robots" content="noindex" />
@@ -18,13 +18,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="../assets/icon-1024-dark.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="../assets/icon-1024.png" />
-  <!-- Added to a home screen, this runs without browser chrome. iOS reads the apple- prefixed tag;
-       everything else reads the manifest. -->
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Archie" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <script>
     /* Theme before first paint: saved choice, else the OS preference. Without this, dark users
        get a cream flash on every page view (nav.js applies the theme too late). */
@@ -169,166 +162,69 @@
 
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Archie on Your Phone</span>
-        <h1 class="fade-up delay-1">Your Agent, From Anywhere</h1>
-        <p>Add add-ons, finish their setup, and pause routines without going back to your computer.</p>
+        <span class="section-label fade-up">Archie on your phone</span>
+        <h1 class="fade-up delay-1">Get Archie on Your Phone</h1>
+        <p>This is where the square code in Archie on your computer sends you.</p>
       </div>
     </section>
 
-    <section class="section section--phone" aria-label="Archie on your phone">
+    <section class="section" aria-label="Getting the app">
       <div class="container">
         <div class="acct-wrap">
 
-          <!-- Checking the session. Replaced by exactly one of the panels below. -->
-          <div id="ph-loading" class="acct-card">
-            <div class="acct-spinner" aria-hidden="true"></div>
-            <p class="acct-lead">Checking your session&hellip;</p>
-          </div>
-
           <!--
-            On a laptop or desktop. Home-screen instructions would be nonsense here, so this branch
-            shows none: it says what the page is for and how to get it onto a phone.
+            Shown only when the address carries a pairing code, which the script below detects and
+            never reads out. Everything after the "#" is the key that opens this person's mailbox
+            and a ticket that can be spent once, so it is checked for its shape and then left alone:
+            nothing here writes it into the page, sends it anywhere, or stores it.
           -->
-          <div id="ph-desktop" class="acct-card acct-hidden">
-            <h2 class="phone-h2">This page is for your phone</h2>
+          <div id="app-paired" class="acct-card acct-hidden">
+            <h2 class="app-h2">You scanned a pairing code</h2>
             <p class="acct-lead">
-              It manages the Archie running on this computer from somewhere else. On this screen you
-              already have the whole app, so there is nothing here you cannot do better in Archie
-              itself.
+              Your camera opened this page instead of the app, which is what a camera does with a
+              square code it does not recognize. The code is still good.
             </p>
             <p class="acct-lead" style="margin-top:12px;">
-              To set it up: open Archie, go to <strong>Account</strong>, and turn on
-              <strong>Archie on your phone</strong>. Scan the code it shows with your phone&rsquo;s
-              camera.
+              Open Archie on this phone, press <strong>Scan</strong>, and hold the phone up to your
+              computer&rsquo;s screen again. If the code has run out by then, press
+              <strong>Set up a phone</strong> on the computer for another: it costs nothing and you
+              can do it as often as you like.
             </p>
             <p class="acct-lead" style="margin-top:12px;">
-              A real app is on the way, called Archie Mobile. It seals every message between your
-              computer and your phone under a key we never receive, and it is not running your
-              agent: that stays on this computer. It is not finished and it is in neither app store,
-              so this page is what exists today.
-              <a href="../archie/mobile/">What it will and will not do</a>.
+              If Archie is not on this phone yet, that is the part below.
             </p>
           </div>
 
-          <!--
-            Signed in on a phone, but this browser has no pairing key. Every route here ends at the
-            same place, so the instructions are the instructions, not an error.
-          -->
-          <div id="ph-pair" class="acct-card acct-hidden">
-            <h2 class="phone-h2">Pair this phone</h2>
+          <div class="acct-card">
+            <h2 class="app-h2">Where the app is today</h2>
             <p class="acct-lead">
-              Your agent lives on your computer, and only your computer can let this phone in. This
-              takes about a minute, once.
+              The app is written and it runs. It is not in the App Store or on Google Play yet, so
+              there is nothing on this page to press: we are not able to say when either store will
+              list it, and we would rather leave this sentence plain than put up a date we would
+              have to move.
             </p>
-            <ol class="phone-steps">
-              <li>On your computer, open Archie.</li>
-              <li>Go to <strong>Account</strong>.</li>
-              <li>Turn on <strong>Archie on your phone</strong>.</li>
-              <li>Point this phone&rsquo;s camera at the code it shows, and tap the link.</li>
-            </ol>
-            <!--
-              The paste route exists because scanning cannot reach here from a home-screen app. On
-              iPhone and iPad an installed web app gets its own storage, separate from Safari's, and
-              a scanned QR always opens Safari. So a phone that pairs perfectly in the browser opens
-              its home-screen icon and is a stranger again, with no way to fix it: there is no
-              address bar to paste into and the camera opens the wrong app. Archie's Copy the link
-              button plus this box is that way.
-            -->
-            <div class="phone-paste">
-              <div class="phone-paste-label">
-                On your home screen, a scanned code opens Safari rather than this app, so bring the
-                link across instead. In Archie, under Account, tap <strong>Copy the link</strong>.
-                If your computer is a Mac, that link is already on this phone&rsquo;s clipboard.
-              </div>
-              <button class="btn btn-primary btn-mini" id="ph-paste-clip">Paste from clipboard</button>
-              <!-- The typed route stays for anyone whose phone refuses clipboard access, or who got
-                   the link by message rather than by copying it on a paired Mac. -->
-              <label class="phone-paste-manual" for="ph-paste">Or paste it here yourself:</label>
-              <input type="text" id="ph-paste" inputmode="url" autocomplete="off"
-                     autocapitalize="none" spellcheck="false"
-                     placeholder="https://otianai.com/phone/#k=..." />
-              <button class="btn btn-secondary btn-mini" id="ph-paste-go">Pair with this link</button>
-            </div>
-
-            <p class="phone-note">
-              The code carries the key that encrypts everything between the two devices. It is the
-              reason we can run this without being able to read any of it.
+            <p class="acct-lead" style="margin-top:12px;">
+              Nothing is waiting on it. Your agent already reaches you on the chat app you connected
+              it to, and it already answers in the Archie window on your computer.
+              <a href="../archie/mobile/">What the app will and will not do</a> is written out in
+              full, including the part people expect and it does not do.
             </p>
           </div>
 
-          <!-- Paired. The dashboard. -->
-          <div id="ph-app" class="acct-hidden">
-
-            <!-- Install prompt: filled in by phone.js, per operating system, and absent entirely
-                 once the page is already on a home screen. -->
-            <div id="ph-install" class="phone-install acct-hidden"></div>
-
-            <!-- Status: is Archie awake, and when did it last say so. -->
-            <div class="acct-section" id="ph-status">
-              <div class="acct-section-head">
-                <div>
-                  <div class="acct-section-title" id="ph-status-title">Looking for your computer&hellip;</div>
-                  <div class="acct-email" id="ph-status-detail">&hellip;</div>
-                </div>
-                <span class="pill" id="ph-status-pill">&hellip;</span>
-              </div>
-              <div class="acct-section-body acct-hidden" id="ph-status-help"></div>
-            </div>
-
-            <!--
-              Two halves of the job, kept apart: what this agent already has, and what it could
-              have. Stacking them made one long scroll where browsing the whole marketplace meant
-              first passing everything already installed.
-
-              The status card stays above both, because whether the computer is awake decides
-              whether either half can do anything.
-            -->
-            <div class="phone-tabs acct-hidden" id="ph-tabs" role="tablist" aria-label="Sections">
-              <button class="phone-tab is-active" id="ph-tab-agents" type="button" role="tab"
-                      aria-selected="true" aria-controls="ph-agents">Your agent</button>
-              <button class="phone-tab" id="ph-tab-store" type="button" role="tab"
-                      aria-selected="false" aria-controls="ph-store-section">Marketplace</button>
-            </div>
-
-            <!-- One card per agent: what it has, and what it is still waiting on. -->
-            <div id="ph-agents" role="tabpanel" aria-labelledby="ph-tab-agents" tabindex="0"></div>
-
-            <!--
-              The marketplace. Same live catalog the desktop app and the Browse page read, so what is
-              on sale here cannot drift from what is on sale there. Adding sends an encrypted command
-              to the computer, which runs the ordinary install.
-            -->
-            <div class="acct-section acct-hidden" id="ph-store-section"
-                 role="tabpanel" aria-labelledby="ph-tab-store" tabindex="0">
-              <div id="ph-store-agent" class="acct-hidden"></div>
-              <!--
-                The two ways to narrow the catalog, kept on screen while it is scrolled. Both used
-                to scroll away with it, which meant changing your mind about what you were looking
-                for cost a swipe back up through everything you had just rejected.
-              -->
-              <div class="phone-store-tools">
-                <input type="search" id="ph-store-search" aria-label="Search the store" class="phone-store-search"
-                       placeholder="Search the marketplace" autocomplete="off" autocapitalize="none" />
-                <!--
-                  One chip per kind, in the kinds' own colours, each carrying how many it holds
-                  right now. Filled in by renderStoreFilters so the counts follow the search: with
-                  a word typed, this row is the shape of the result before any of it is read.
-                -->
-                <div id="ph-store-filters" class="phone-store-filters" role="group"
-                     aria-label="Filter by kind"></div>
-              </div>
-              <div id="ph-store"></div>
-            </div>
-
-            <div class="phone-foot">
-              <button class="btn btn-secondary btn-mini" id="ph-refresh">Refresh</button>
-              <button class="btn btn-secondary btn-mini" id="ph-unpair">Unpair this phone</button>
-            </div>
+          <div class="acct-card">
+            <h2 class="app-h2">What the code you scanned is for</h2>
+            <p class="acct-lead">
+              It carries two things: the key that opens the sealed mailbox your computer publishes
+              into, and a one-time ticket proving the phone was standing in front of your
+              computer&rsquo;s screen. Both ride after the <code>#</code> in the address, which is
+              the part of a web address a browser never sends to a server, so neither passed through
+              us on the way here. <a href="../trust/proof/">You can watch that happen</a>.
+            </p>
+            <p class="acct-lead" style="margin-top:12px;">
+              Your agent stays on the computer you installed it on. The app reaches it; it does not
+              move it, and it does not run it.
+            </p>
           </div>
-
-          <!-- bindStatusToast turns this into the bottom-pinned toast, so it needs no class of
-               its own; the same aria-live element the other account pages use. -->
-          <div id="ph-status-toast" role="status" aria-live="polite"></div>
 
         </div>
       </div>
@@ -336,9 +232,6 @@
 
   </main>
 
-  <!-- ==============================
-       Footer
-       ============================== -->
   <footer class="footer" aria-label="Site footer">
     <div class="footer-inner">
       <div class="footer-grid">
@@ -417,6 +310,6 @@
 
   <script src="../js/nav.js?v=20260918-2"></script>
   <script type="module" src="../js/account-nav.js?v=20260918-2"></script>
-  <script type="module" src="../js/phone.js?v=20260918-2"></script>
+  <script type="module" src="../js/app-page.js?v=20260918-2"></script>
 </body>
 </html>

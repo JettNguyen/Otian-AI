@@ -780,16 +780,32 @@ is ever started. Cite the file, not a line: lines move.
 and the "What We Hold" amendment below has landed on all five pages. It is still off unless somebody
 turns it on, per computer, which is a fact the wording has to keep carrying.
 
+**Amended 2026-09-18, and it changes what may be said about this, not whether it is true.** The
+mailbox had two clients: a web page at `otianai.com/phone`, and the Archie app. The web page was
+decommissioned that day and deleted from this repo, so **the app is the only thing that can read
+the mailbox now**, and the app is in neither store (see the entry below, which is still IN BUILD).
+Every word of the approved wording is still true of the mechanism. What is no longer true is the
+implication a reader takes from it, which is that they could go and do this today.
+
+So, until the app ships: **do not put the approved wording on a page as something a reader can
+reach for.** It stays available for what it was always strongest at, which is answering "what do
+you hold, and can you read it" in the What We Hold sections, where it describes custody of
+something the reader may already have switched on. A page that instead *invites* somebody to turn
+phone access on has to carry the app's status in the same breath, in the tense the entry below
+requires. The day the app is approved, this amendment comes out and the entry below moves to
+SHIPPED, in one pass.
+
 **Approved wording:** "Turn on phone access and your computer starts leaving
 messages for your phone in a mailbox on our servers. Every one of them is sealed with a key your
 computer makes and gives to your phone by scanning a code. The key never passes through us, so what
 we hold is a pile of ciphertext with no way to open it."
 
 **Why it's true:** payloads are sealed with AES-256-GCM before they are written
-(`crates/archie-core/src/phone.rs`, `seal`/`open`; browser side in the website repo's
-`js/phone.js`, same functions, verified against each other by the `opens_an_envelope_sealed_by_the_browser`
-test vector). The key is generated on the desktop, stored in the OS keychain, and delivered to the
-phone in a **URL fragment** (`phone::pair_url`, asserted by
+(`crates/archie-core/src/phone.rs`, `seal`/`open`; the reading side is `src/relay/envelope.ts` in
+`archie-mobile`, and `js/proof.js` here carries the same two functions for `trust/proof/`, all of
+them verified against each other by the `opens_an_envelope_sealed_by_the_browser` test vector). The
+key is generated on the desktop, stored in the OS keychain, and delivered to the phone in a **URL
+fragment** (`phone::app_pair_url`, asserted by
 `the_pairing_key_rides_in_the_fragment_never_the_query`), which browsers do not transmit to servers.
 The relay rules in the Archie repo's `firestore.rules` bound shape and size but grant no read to
 anyone but the account owner, and the seal means owning the row is not reading it.
@@ -873,7 +889,7 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
   implementation at `src/relay/envelope.ts` in the app repo. This is the same envelope the shipped
   phone-access claim above rests on, which is why this is one mechanism and not a new one.
 - **The key never passes through us.** The desktop generates it, keeps it in the OS keychain, and
-  delivers it in a **URL fragment**, which a browser does not transmit to a server (`phone::pair_url`,
+  delivers it in a **URL fragment**, which a browser does not transmit to a server (`phone::app_pair_url`,
   asserted by `the_pairing_key_rides_in_the_fragment_never_the_query`). It reaches the phone by
   camera and lands in the Keychain or the Keystore (`src/relay/pairing.ts`).
 - **No sign-in, so no password of yours is on the phone.** The computer vouches for the phone with a
@@ -1588,8 +1604,8 @@ same reason."
 
 **Why it's true:** no page carries an external `<script src>` at all, and the only
 cross-origin things any page pulls are the Google Fonts stylesheet and font files, the
-Firebase SDK modules from `www.gstatic.com` (imported by `js/account-nav.js`, `js/marketplace.js`,
-`js/phone.js`, `js/submit.js`), and `apis.google.com` on a sign-in press. The only outbound
+Firebase SDK modules from `www.gstatic.com` (imported by `js/account-nav.js`, `js/marketplace.js`
+and `js/submit.js`), and `apis.google.com` on a sign-in press. The only outbound
 `fetch` to somewhere that is not Firebase or our own billing service is the contact form's
 `https://formspree.io/f/...` in `js/contact.js`. There is no `sendBeacon`, no tracking pixel and
 no `gtag` anywhere in the repo. The ceiling under all of it is the Content-Security-Policy that
@@ -1615,9 +1631,10 @@ our intentions.
 **What the page is.** Four claims from this file, running as instruments rather than sentences:
 the activity record's hash chain (real SHA-256 through WebCrypto, over the canonical bytes
 `AuditEvent::canonical_bytes` defines, with the `shasum` command that reproduces the number
-printed beside it), the phone mailbox's seal (the `seal`/`open` pair out of `js/phone.js`, which
-is matched to `crates/archie-core/src/phone.rs` by the `opens_an_envelope_sealed_by_the_browser`
-test vector), the page's own request list and CSP, and the pairing key in the URL fragment.
+printed beside it), the phone mailbox's seal (the `seal`/`open` pair inside `js/proof.js`, which
+is matched to `crates/archie-core/src/phone.rs`, and to the phone's own `src/relay/envelope.ts`, by
+the `opens_an_envelope_sealed_by_the_browser` test vector), the page's own request list and CSP,
+and the pairing key in the URL fragment.
 
 **The rule that makes it worth having, and the one to enforce in review:** every verdict on that
 page is computed from the real result. Nothing is scripted, nothing is a recording, and no

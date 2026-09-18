@@ -216,19 +216,140 @@
             </div>
           </div>
         </section>
-<!-- The three rows that decide it, drawn once above the prose. Every phrase is the
-             table's own, further down, where the sources are; nothing here is claimed only here. -->
-        <figure class="cmp-strip fade-up delay-1">
-          <table class="cmp-strip-table">
-            <caption class="sr-only">The three rows that decide it, from the full table below.</caption>
-            <thead><tr><th scope="col"><span class="sr-only">What</span></th><th scope="col" class="cmp-strip-them">An assistant</th><th scope="col" class="cmp-strip-us">Archie</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Judgement on something new</th><td class="cmp-strip-them">decides, and tells you afterwards</td><td class="cmp-strip-us">drafts, then waits for you</td></tr>
-              <tr><th scope="row">Hours</th><td class="cmp-strip-them">the hours you agreed</td><td class="cmp-strip-us">whenever the computer is on</td></tr>
-              <tr><th scope="row">Phone calls and difficult people</th><td class="cmp-strip-them">yes, often the whole reason to hire one</td><td class="cmp-strip-us">no</td></tr>
-            </tbody>
-          </table>
-          <figcaption>The three rows that decide the choice. The full table, with its sources, is under the next heading.</figcaption>
+
+
+        <!-- Where you sit in the row. The strip table that stood here, drawn instead: the same job in both rows, and the one difference is whether you come before the action or after it.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- Where you sit in the row. The strip table that stood here, drawn instead: the same job in both rows, and the one difference is whether you come before the action or after it.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- Where you sit in the row. The strip table that stood here, drawn instead: the same job in both rows, and the one difference is whether you come before the action or after it.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- Where you sit in the row. The strip table that stood here, drawn instead: the same job in both rows, and the one difference is whether you come before the action or after it.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+        <figure class="explain-figure cs-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 340" role="img" aria-labelledby="ha-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="ha-t">Two rows. In the top row, an assistant: something new comes in, then decides, then done, then tells you, with a dot running straight through to the end. In the bottom row, your agent: something new comes in, then drafts, with a line down to the AI you picked, then a box outlined in the site&rsquo;s colour reading waits for your yes, where the dot stops, and only then done.</title>
+            <style>
+              .cs-head{fill:currentColor;font-size:12.5px;font-weight:650}
+              .cs-box-them{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .cs-box-base{fill:var(--bg-card);stroke:none}
+              .cs-box-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .cs-title{fill:currentColor;font-size:12.5px;font-weight:650}
+              .cs-note{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:end}
+              .cs-chip{fill:var(--bg-secondary)}
+              .cs-chip--open{fill:none;stroke:var(--line-muted);stroke-width:1.2;stroke-dasharray:4 3}
+              .cs-chiptext{fill:currentColor;font-size:11px;opacity:.85}
+              .cs-tag{fill:currentColor;font-size:10px;opacity:.6;text-anchor:end}
+              .cs-tag--us{fill:var(--accent-ink);opacity:1;font-weight:600}
+              .cs-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .cs-mark{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+              .cs-you{fill:currentColor;font-size:11px;text-anchor:middle;opacity:.75}
+              .cs-ai{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .cs-aitext{fill:currentColor;font-size:10.5px;text-anchor:middle;opacity:.85}
+              .cs-node{fill:var(--bg-secondary)}
+              .cs-node--stop{fill:rgba(224,138,91,.10);stroke:var(--accent);stroke-width:1.6}
+              .cs-nodetext{fill:currentColor;font-size:11px;opacity:.85;text-anchor:middle}
+              .cs-nodetext--stop{fill:var(--accent-ink);opacity:1;font-weight:600}
+              .cs-bubble{fill:var(--bg-card);stroke:currentColor;stroke-width:1.3;opacity:.9}
+              .cs-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .cs-dot{display:block;offset-distance:50%}
+                @media (prefers-reduced-motion:no-preference){
+                  .cs-dot--in{animation:csIn 5s linear infinite}
+                  .cs-dot--out{animation:csOut 5s linear infinite}
+                  @keyframes csIn{0%{offset-distance:0%;opacity:0}6%{opacity:1}38%{offset-distance:100%;opacity:1}44%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
+                  @keyframes csOut{0%,50%{offset-distance:0%;opacity:0}56%{opacity:1}88%{offset-distance:100%;opacity:1}94%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
+                  .cs-dot{animation-duration:6s;animation-timing-function:linear;animation-iteration-count:infinite}
+                  @keyframes csAnassistan{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}-0.01%{offset-distance:0.00%;opacity:1}0.00%{offset-distance:0.00%;opacity:0.28}22.67%{offset-distance:37.80%;opacity:0.28}22.68%{offset-distance:37.80%;opacity:1}25.83%{offset-distance:43.06%;opacity:1}25.84%{offset-distance:43.06%;opacity:0.28}35.44%{offset-distance:59.09%;opacity:0.28}35.45%{offset-distance:59.09%;opacity:1}38.60%{offset-distance:64.35%;opacity:1}38.61%{offset-distance:64.35%;opacity:0.28}45.49%{offset-distance:75.84%;opacity:0.28}45.50%{offset-distance:75.84%;opacity:1}48.65%{offset-distance:81.10%;opacity:1}48.66%{offset-distance:81.10%;opacity:0.28}59.99%{offset-distance:100.00%;opacity:0.28}60.00%{offset-distance:100.00%;opacity:1}60.00%{offset-distance:100.00%;opacity:1}66.00%{offset-distance:100.00%;opacity:0}100.00%{offset-distance:100.00%;opacity:0}}
+                  @keyframes csYouragent{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}-0.01%{offset-distance:0.00%;opacity:1}0.00%{offset-distance:0.00%;opacity:0.28}37.17%{offset-distance:33.83%;opacity:0.28}37.18%{offset-distance:33.83%;opacity:1}42.34%{offset-distance:38.54%;opacity:1}42.35%{offset-distance:38.54%;opacity:0.28}56.70%{offset-distance:51.61%;opacity:0.28}56.71%{offset-distance:51.61%;opacity:1}60.00%{offset-distance:54.60%;opacity:1}82.00%{offset-distance:54.60%;opacity:1}90.00%{offset-distance:54.60%;opacity:0}100.00%{offset-distance:54.60%;opacity:0}}
+                  @keyframes csAnassistanM{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}-0.01%{offset-distance:0.00%;opacity:1}0.00%{offset-distance:0.00%;opacity:0.28}10.09%{offset-distance:16.83%;opacity:0.28}10.10%{offset-distance:16.83%;opacity:1}16.62%{offset-distance:27.72%;opacity:1}16.63%{offset-distance:27.72%;opacity:0.28}26.72%{offset-distance:44.55%;opacity:0.28}26.73%{offset-distance:44.55%;opacity:1}33.26%{offset-distance:55.45%;opacity:1}33.27%{offset-distance:55.45%;opacity:0.28}43.36%{offset-distance:72.28%;opacity:0.28}43.37%{offset-distance:72.28%;opacity:1}49.89%{offset-distance:83.17%;opacity:1}49.90%{offset-distance:83.17%;opacity:0.28}59.99%{offset-distance:100.00%;opacity:0.28}60.00%{offset-distance:100.00%;opacity:1}60.00%{offset-distance:100.00%;opacity:1}66.00%{offset-distance:100.00%;opacity:0}100.00%{offset-distance:100.00%;opacity:0}}
+                  @keyframes csYouragentM{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}-0.01%{offset-distance:0.00%;opacity:1}0.00%{offset-distance:0.00%;opacity:0.28}19.61%{offset-distance:16.83%;opacity:0.28}19.62%{offset-distance:16.83%;opacity:1}32.30%{offset-distance:27.72%;opacity:1}32.31%{offset-distance:27.72%;opacity:0.28}51.91%{offset-distance:44.55%;opacity:0.28}51.92%{offset-distance:44.55%;opacity:1}60.00%{offset-distance:51.49%;opacity:1}82.00%{offset-distance:51.49%;opacity:1}90.00%{offset-distance:51.49%;opacity:0}100.00%{offset-distance:51.49%;opacity:0}}
+                }
+              }
+            </style>
+            <text class="cs-head" x="8" y="22">An assistant</text>
+            <path class="cs-wire" d="M271,96 L293,96"/>
+            <path class="cs-wire" d="M360,96 L382,96"/>
+            <path class="cs-wire" d="M430,96 L452,96"/>
+            <rect class="cs-node" x="113" y="79" width="158" height="34" rx="10"/>
+            <text class="cs-nodetext" x="192" y="100">Something new comes in</text>
+            <rect class="cs-node" x="293" y="79" width="67" height="34" rx="10"/>
+            <text class="cs-nodetext" x="326.5" y="100">Decides</text>
+            <rect class="cs-node" x="382" y="79" width="48" height="34" rx="10"/>
+            <text class="cs-nodetext" x="406" y="100">Done</text>
+            <rect class="cs-node" x="452" y="79" width="79" height="34" rx="10"/>
+            <text class="cs-nodetext" x="491.5" y="100">Tells you</text>
+            <circle class="cs-dot" r="5" style="offset-path:path('M113,96 L531,96');animation-name:csAnassistan"/>
+            <text class="cs-head" x="8" y="184">Your agent</text>
+            <path class="cs-wire" d="M246,258 L268,258"/>
+            <path class="cs-wire" d="M329,258 L351,258"/>
+            <path class="cs-wire" d="M485,258 L507,258"/>
+            <rect class="cs-node" x="88" y="241" width="158" height="34" rx="10"/>
+            <text class="cs-nodetext" x="167" y="262">Something new comes in</text>
+            <rect class="cs-node" x="268" y="241" width="61" height="34" rx="10"/>
+            <text class="cs-nodetext" x="298.5" y="262">Drafts</text>
+            <path class="cs-wire" d="M298.5,275 L298.5,298"/>
+            <rect class="cs-ai" x="239.5" y="298" width="118" height="30" rx="10"/>
+            <text class="cs-aitext" x="298.5" y="317">The AI you picked</text>
+            <rect class="cs-node cs-node--stop" x="351" y="241" width="134" height="34" rx="10"/>
+            <text class="cs-nodetext cs-nodetext--stop" x="418" y="262">Waits for your yes</text>
+            <rect class="cs-node" x="507" y="241" width="48" height="34" rx="10"/>
+            <text class="cs-nodetext" x="531" y="262">Done</text>
+            <circle class="cs-dot" r="5" style="offset-path:path('M88,258 L555,258');animation-name:csYouragent"/>
+          </svg>
+
+          <svg class="explain-svg--mobile" viewBox="0 0 340 490" role="img" aria-labelledby="ham-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="ham-t">Two columns, stacked. On top, an assistant: something new comes in, decides, done, tells you, with a dot running straight down. Below, your agent: something new comes in, drafts, with the AI you picked beside it, then a box outlined in the site&rsquo;s colour reading waits for your yes, where the dot stops, and only then done.</title>
+            <text class="cs-head" x="8" y="16">An assistant</text>
+            <path class="cs-wire" d="M146,62 LCX,84"/>
+            <path class="cs-wire" d="M146,118 LCX,140"/>
+            <path class="cs-wire" d="M146,174 LCX,196"/>
+            <rect class="cs-node" x="67" y="28" width="158" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="49">Something new comes in</text>
+            <rect class="cs-node" x="86" y="84" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="105">Decides</text>
+            <rect class="cs-node" x="86" y="140" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="161">Done</text>
+            <rect class="cs-node" x="86" y="196" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="217">Tells you</text>
+            <circle class="cs-dot" r="4.5" style="offset-path:path('M146,28 LCX,230');animation-name:csAnassistanM"/>
+            <text class="cs-head" x="8" y="268">Your agent</text>
+            <path class="cs-wire" d="M146,314 LCX,336"/>
+            <path class="cs-wire" d="M146,370 LCX,392"/>
+            <path class="cs-wire" d="M146,426 LCX,448"/>
+            <rect class="cs-node" x="67" y="280" width="158" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="301">Something new comes in</text>
+            <rect class="cs-node" x="86" y="336" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="357">Drafts</text>
+            <path class="cs-wire" d="M206,353 L220,353"/>
+            <rect class="cs-ai" x="220" y="338" width="96" height="30" rx="10"/>
+            <text class="cs-aitext" x="268" y="357">The AI you picked</text>
+            <rect class="cs-node cs-node--stop" x="79" y="392" width="134" height="34" rx="10"/>
+            <text class="cs-nodetext cs-nodetext--stop" x="146" y="413">Waits for your yes</text>
+            <rect class="cs-node" x="86" y="448" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="469">Done</text>
+            <circle class="cs-dot" r="4.5" style="offset-path:path('M146,280 LCX,482');animation-name:csYouragentM"/>
+          </svg>
+          <figcaption>A person decides, then tells you: the judgement you hire for. Your agent drafts, then waits for you. A person keeps the hours you agreed and takes the calls; the agent runs whenever the computer is on and takes none.</figcaption>
         </figure>
       </div>
     </section>

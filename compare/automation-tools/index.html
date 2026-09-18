@@ -216,19 +216,158 @@
             </div>
           </div>
         </section>
-<!-- The three rows that decide it, drawn once above the prose. Every phrase is the
-             table's own, further down, where the sources are; nothing here is claimed only here. -->
-        <figure class="cmp-strip fade-up delay-1">
-          <table class="cmp-strip-table">
-            <caption class="sr-only">The three rows that decide it, from the full table below.</caption>
-            <thead><tr><th scope="col"><span class="sr-only">What</span></th><th scope="col" class="cmp-strip-them">Zapier, Make, n8n</th><th scope="col" class="cmp-strip-us">Archie</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">How you describe the job</th><td class="cmp-strip-them">as steps, in a builder</td><td class="cmp-strip-us">in a sentence</td></tr>
-              <tr><th scope="row">When the input isn&rsquo;t what you expected</th><td class="cmp-strip-them">the step does what it was built to do</td><td class="cmp-strip-us">it reads it and decides, then shows you</td></tr>
-              <tr><th scope="row">Sending something on your behalf</th><td class="cmp-strip-them">sends when the rule fires</td><td class="cmp-strip-us">drafted and held for your Send</td></tr>
-            </tbody>
-          </table>
-          <figcaption>The three rows that decide the choice. The full table, with its sources, is under the next heading.</figcaption>
+
+
+        <!-- One you build, the other you tell. The strip table that stood here, drawn instead: two rows of steps, and the one difference is where each row ends.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- One you build, the other you tell. The strip table that stood here, drawn instead: two rows of steps, and the one difference is where each row ends.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- One you build, the other you tell. The strip table that stood here, drawn instead: two rows of steps, and the one difference is where each row ends.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+
+        <!-- One you build, the other you tell. The strip table that stood here, drawn instead: two rows of steps, and the one difference is where each row ends.
+             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
+             does it, so nothing here touches css/styles.css. The chips are the strip table's
+             own words; the full table, with its sources, is still under the next heading. Both
+             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
+             wherever "your computer" is drawn. -->
+        <figure class="explain-figure cs-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 340" role="img" aria-labelledby="at-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="at-t">Two rows. In the top row, a diagram you build: you, then a chain of boxes, trigger, step, if it matches, step, and sent, with a dot running straight through to the end. In the bottom row, a sentence you tell: you, then a speech bubble reading reply to everyone who asked about pricing, then your agent, with a line down to the AI you picked, then a box outlined in the site&rsquo;s colour reading held for your Send, where the dot stops and waits.</title>
+            <style>
+              .cs-head{fill:currentColor;font-size:12.5px;font-weight:650}
+              .cs-box-them{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .cs-box-base{fill:var(--bg-card);stroke:none}
+              .cs-box-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
+              .cs-title{fill:currentColor;font-size:12.5px;font-weight:650}
+              .cs-note{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:end}
+              .cs-chip{fill:var(--bg-secondary)}
+              .cs-chip--open{fill:none;stroke:var(--line-muted);stroke-width:1.2;stroke-dasharray:4 3}
+              .cs-chiptext{fill:currentColor;font-size:11px;opacity:.85}
+              .cs-tag{fill:currentColor;font-size:10px;opacity:.6;text-anchor:end}
+              .cs-tag--us{fill:var(--accent-ink);opacity:1;font-weight:600}
+              .cs-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .cs-mark{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+              .cs-you{fill:currentColor;font-size:11px;text-anchor:middle;opacity:.75}
+              .cs-ai{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .cs-aitext{fill:currentColor;font-size:10.5px;text-anchor:middle;opacity:.85}
+              .cs-node{fill:var(--bg-secondary)}
+              .cs-node--stop{fill:rgba(224,138,91,.10);stroke:var(--accent);stroke-width:1.6}
+              .cs-nodetext{fill:currentColor;font-size:11px;opacity:.85;text-anchor:middle}
+              .cs-nodetext--stop{fill:var(--accent-ink);opacity:1;font-weight:600}
+              .cs-bubble{fill:var(--bg-card);stroke:currentColor;stroke-width:1.3;opacity:.9}
+              .cs-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .cs-dot{display:block;offset-distance:50%}
+                @media (prefers-reduced-motion:no-preference){
+                  .cs-dot--in{animation:csIn 5s linear infinite}
+                  .cs-dot--out{animation:csOut 5s linear infinite}
+                  @keyframes csIn{0%{offset-distance:0%;opacity:0}6%{opacity:1}38%{offset-distance:100%;opacity:1}44%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
+                  @keyframes csOut{0%,50%{offset-distance:0%;opacity:0}56%{opacity:1}88%{offset-distance:100%;opacity:1}94%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
+                  .cs-dot{animation-duration:6s;animation-timing-function:linear;animation-iteration-count:infinite}
+                  @keyframes csAdiagramyo{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}10.46%{offset-distance:17.45%;opacity:1}10.47%{offset-distance:17.45%;opacity:0.28}18.72%{offset-distance:31.21%;opacity:0.28}18.73%{offset-distance:31.21%;opacity:1}21.43%{offset-distance:35.73%;opacity:1}21.44%{offset-distance:35.73%;opacity:0.28}27.34%{offset-distance:45.59%;opacity:0.28}27.35%{offset-distance:45.59%;opacity:1}30.05%{offset-distance:50.10%;opacity:1}30.06%{offset-distance:50.10%;opacity:0.28}42.74%{offset-distance:71.25%;opacity:0.28}42.75%{offset-distance:71.25%;opacity:1}45.45%{offset-distance:75.77%;opacity:1}45.46%{offset-distance:75.77%;opacity:0.28}51.37%{offset-distance:85.63%;opacity:0.28}51.38%{offset-distance:85.63%;opacity:1}54.08%{offset-distance:90.14%;opacity:1}54.09%{offset-distance:90.14%;opacity:0.28}59.99%{offset-distance:100.00%;opacity:0.28}60.00%{offset-distance:100.00%;opacity:1}60.00%{offset-distance:100.00%;opacity:1}66.00%{offset-distance:100.00%;opacity:0}100.00%{offset-distance:100.00%;opacity:0}}
+                  @keyframes csAsentencey{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}3.16%{offset-distance:3.94%;opacity:1}3.17%{offset-distance:3.94%;opacity:0.28}42.58%{offset-distance:52.95%;opacity:0.28}42.59%{offset-distance:52.95%;opacity:1}45.75%{offset-distance:56.89%;opacity:1}45.76%{offset-distance:56.89%;opacity:0.28}57.98%{offset-distance:72.09%;opacity:0.28}57.99%{offset-distance:72.09%;opacity:1}60.00%{offset-distance:74.60%;opacity:1}82.00%{offset-distance:74.60%;opacity:1}90.00%{offset-distance:74.60%;opacity:0}100.00%{offset-distance:74.60%;opacity:0}}
+                  @keyframes csAdiagramyoM{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}0.91%{offset-distance:1.53%;opacity:1}0.92%{offset-distance:1.53%;opacity:0.28}8.69%{offset-distance:14.50%;opacity:0.28}8.70%{offset-distance:14.50%;opacity:1}13.73%{offset-distance:22.90%;opacity:1}13.74%{offset-distance:22.90%;opacity:0.28}21.52%{offset-distance:35.88%;opacity:0.28}21.53%{offset-distance:35.88%;opacity:1}26.55%{offset-distance:44.27%;opacity:1}26.56%{offset-distance:44.27%;opacity:0.28}34.34%{offset-distance:57.25%;opacity:0.28}34.35%{offset-distance:57.25%;opacity:1}39.38%{offset-distance:65.65%;opacity:1}39.39%{offset-distance:65.65%;opacity:0.28}47.17%{offset-distance:78.63%;opacity:0.28}47.18%{offset-distance:78.63%;opacity:1}52.20%{offset-distance:87.02%;opacity:1}52.21%{offset-distance:87.02%;opacity:0.28}59.99%{offset-distance:100.00%;opacity:0.28}60.00%{offset-distance:100.00%;opacity:1}60.00%{offset-distance:100.00%;opacity:1}66.00%{offset-distance:100.00%;opacity:0}100.00%{offset-distance:100.00%;opacity:0}}
+                  @keyframes csAsentenceyM{0.00%{offset-distance:0.00%;opacity:0}0.50%{offset-distance:0.00%;opacity:1}2.21%{offset-distance:2.67%;opacity:1}2.22%{offset-distance:2.67%;opacity:0.28}21.10%{offset-distance:25.33%;opacity:0.28}21.11%{offset-distance:25.33%;opacity:1}33.32%{offset-distance:40.00%;opacity:1}33.33%{offset-distance:40.00%;opacity:0.28}52.21%{offset-distance:62.67%;opacity:0.28}52.22%{offset-distance:62.67%;opacity:1}60.00%{offset-distance:72.00%;opacity:1}82.00%{offset-distance:72.00%;opacity:1}90.00%{offset-distance:72.00%;opacity:0}100.00%{offset-distance:72.00%;opacity:0}}
+                }
+              }
+            </style>
+            <text class="cs-head" x="8" y="22">A diagram you build</text>
+            <path class="cs-wire" d="M64,96 L149,96"/>
+            <path class="cs-wire" d="M216,96 L238,96"/>
+            <path class="cs-wire" d="M286,96 L308,96"/>
+            <path class="cs-wire" d="M411,96 L433,96"/>
+            <path class="cs-wire" d="M481,96 L503,96"/>
+            <circle class="cs-mark" cx="38" cy="86" r="10"/>
+            <path class="cs-mark" d="M18,116 a20,20 0 0 1 40,0"/>
+            <text class="cs-you" x="38" y="140">You</text>
+            <rect class="cs-node" x="149" y="79" width="67" height="34" rx="10"/>
+            <text class="cs-nodetext" x="182.5" y="100">Trigger</text>
+            <rect class="cs-node" x="238" y="79" width="48" height="34" rx="10"/>
+            <text class="cs-nodetext" x="262" y="100">Step</text>
+            <rect class="cs-node" x="308" y="79" width="103" height="34" rx="10"/>
+            <text class="cs-nodetext" x="359.5" y="100">If it matches</text>
+            <rect class="cs-node" x="433" y="79" width="48" height="34" rx="10"/>
+            <text class="cs-nodetext" x="457" y="100">Step</text>
+            <rect class="cs-node" x="503" y="79" width="48" height="34" rx="10"/>
+            <text class="cs-nodetext" x="527" y="100">Sent</text>
+            <circle class="cs-dot" r="5" style="offset-path:path('M64,96 L551,96');animation-name:csAdiagramyo"/>
+            <text class="cs-head" x="8" y="184">A sentence you tell</text>
+            <path class="cs-wire" d="M64,258 L86,258"/>
+            <path class="cs-wire" d="M360,258 L382,258"/>
+            <path class="cs-wire" d="M467,258 L489,258"/>
+            <circle class="cs-mark" cx="38" cy="248" r="10"/>
+            <path class="cs-mark" d="M18,278 a20,20 0 0 1 40,0"/>
+            <text class="cs-you" x="38" y="302">You</text>
+            <rect class="cs-bubble" x="86" y="241" width="274" height="34" rx="10"/>
+            <path class="cs-bubble" d="M100,274 l-4,9 l12,-9 z"/>
+            <text class="cs-nodetext" x="223" y="262">Reply to everyone who asked about pricing</text>
+            <rect class="cs-node" x="382" y="241" width="85" height="34" rx="10"/>
+            <text class="cs-nodetext" x="424.5" y="262">Your agent</text>
+            <path class="cs-wire" d="M424.5,275 L424.5,298"/>
+            <rect class="cs-ai" x="365.5" y="298" width="118" height="30" rx="10"/>
+            <text class="cs-aitext" x="424.5" y="317">The AI you picked</text>
+            <rect class="cs-node cs-node--stop" x="489" y="241" width="134" height="34" rx="10"/>
+            <text class="cs-nodetext cs-nodetext--stop" x="556" y="262">Held for your Send</text>
+            <circle class="cs-dot" r="5" style="offset-path:path('M64,258 L623,258');animation-name:csAsentencey"/>
+          </svg>
+
+          <svg class="explain-svg--mobile" viewBox="0 0 340 570" role="img" aria-labelledby="atm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="atm-t">Two columns, stacked. On top, a diagram you build: you, then trigger, step, if it matches, step, and sent, with a dot running straight down to the end. Below, a sentence you tell: you, a speech bubble reading reply to everyone who asked about pricing, then your agent, with the AI you picked beside it, then a box outlined in the site&rsquo;s colour reading held for your Send, where the dot stops and waits.</title>
+            <text class="cs-head" x="8" y="16">A diagram you build</text>
+            <path class="cs-wire" d="M146,64 LCX,68"/>
+            <path class="cs-wire" d="M146,102 LCX,124"/>
+            <path class="cs-wire" d="M146,158 LCX,180"/>
+            <path class="cs-wire" d="M146,214 LCX,236"/>
+            <path class="cs-wire" d="M146,270 LCX,292"/>
+            <circle class="cs-mark" cx="146" cy="38" r="8"/>
+            <path class="cs-mark" d="M130,62 a16,16 0 0 1 32,0"/>
+            <text class="cs-you" x="176" y="44" style="text-anchor:start">You</text>
+            <rect class="cs-node" x="86" y="68" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="89">Trigger</text>
+            <rect class="cs-node" x="86" y="124" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="145">Step</text>
+            <rect class="cs-node" x="86" y="180" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="201">If it matches</text>
+            <rect class="cs-node" x="86" y="236" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="257">Step</text>
+            <rect class="cs-node" x="86" y="292" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="313">Sent</text>
+            <circle class="cs-dot" r="4.5" style="offset-path:path('M146,64 LCX,326');animation-name:csAdiagramyoM"/>
+            <text class="cs-head" x="8" y="364">A sentence you tell</text>
+            <path class="cs-wire" d="M146,412 LCX,416"/>
+            <path class="cs-wire" d="M146,450 LCX,472"/>
+            <path class="cs-wire" d="M146,506 LCX,528"/>
+            <circle class="cs-mark" cx="146" cy="386" r="8"/>
+            <path class="cs-mark" d="M130,410 a16,16 0 0 1 32,0"/>
+            <text class="cs-you" x="176" y="392" style="text-anchor:start">You</text>
+            <rect class="cs-bubble" x="9" y="416" width="274" height="34" rx="10"/>
+            <path class="cs-bubble" d="M23,449 l-4,9 l12,-9 z"/>
+            <text class="cs-nodetext" x="146" y="437">Reply to everyone who asked about pricing</text>
+            <rect class="cs-node" x="86" y="472" width="120" height="34" rx="10"/>
+            <text class="cs-nodetext" x="146" y="493">Your agent</text>
+            <path class="cs-wire" d="M206,489 L220,489"/>
+            <rect class="cs-ai" x="220" y="474" width="96" height="30" rx="10"/>
+            <text class="cs-aitext" x="268" y="493">The AI you picked</text>
+            <rect class="cs-node cs-node--stop" x="79" y="528" width="134" height="34" rx="10"/>
+            <text class="cs-nodetext cs-nodetext--stop" x="146" y="549">Held for your Send</text>
+            <circle class="cs-dot" r="4.5" style="offset-path:path('M146,412 LCX,562');animation-name:csAsentenceyM"/>
+          </svg>
+          <figcaption>A diagram runs the steps you drew and sends when the rule fires. Your agent is told the job in a sentence, works out the steps with the AI you picked, and holds the send for you.</figcaption>
         </figure>
       </div>
     </section>

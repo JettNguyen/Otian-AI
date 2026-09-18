@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260918-17" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260918-18" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -503,17 +503,23 @@
                           <!-- Send edits this card the way the product edits it (the Archie repo's
                                email/replies/actions.rs): the buttons go and the words become "Sent to"
                                over the same draft. Both states are here; the stylesheet swaps them on
-                               is-done. The button labels are the card's own. -->
+                               is-done. The button labels are the card's own.
+
+                               THE CARD LANDS AS ONE THING. One beat, on the group, and nothing
+                               inside it carries its own: the buttons belong to the message and the
+                               time belongs to all of it, so staggering them takes a card apart into
+                               pieces that were never separate (Jett, 2026-09-18, after the buttons
+                               and the time were given beats of their own and he saw it). The beats
+                               in the other screens are messages, which do arrive one after another;
+                               this is one message with a control row and a time on it. -->
                           <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> to Sam</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
-                          <div class="dp-actions day-beat" data-act="2" data-at="0.38">
+                          <div class="dp-actions">
                             <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></button>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                             <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                           </div>
-                          <!-- The time lands last, because it is the time ON the card and the card is
-                               not finished until the buttons are under it. -->
-                          <p class="dp-stamp day-beat" data-act="2" data-at="0.5">1:40 PM</p>
+                          <p class="dp-stamp">1:40 PM</p>
                         </div>
                       </div>
                     </div>
@@ -1208,10 +1214,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260918-17"></script>
-  <script src="js/ember.js?v=20260918-17" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260918-17"></script>
-  <script src="js/home.js?v=20260918-17" defer></script>
+  <script src="js/nav.js?v=20260918-18"></script>
+  <script src="js/ember.js?v=20260918-18" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260918-18"></script>
+  <script src="js/home.js?v=20260918-18" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

@@ -16516,21 +16516,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    that runs whenever it is shown: it rises and grows from its tail corner, the way a chat app
    lands a message. The bubbles above it move like a thread too: js/home.js measures how far
    the thread jumped when a bubble landed and slides the screen back over that distance. */
-/* THE MAIL CARD IS BUILT, NOT DELIVERED, AND THAT NEEDS THE SAME TRICK (2026-09-18). Its buttons
-   and its time were beats already, so they came up after the message, and the card still read as
-   one thing arriving whole: a beat that is only faded out still holds its room, so the card stood
-   at full height from the first frame with a blank strip where the buttons were going to be, and
-   nothing about their arrival was an arrival (Jett: "the buttons always load at the same time as
-   the message, so they are not separate"). Out of the layout they grow the card instead. The time
-   was worse than that, because it carried no beat at all and sat under a card that was still being
-   built (Jett: it "appears before the full thing loads in"); it has one now, and it is the last
-   piece, since a time on a card is a time on a finished card. Not scoped to a screen class: the
-   card is the only .dp-actions on the phone, and .dp-scr--grow cannot be reused here because
-   js/home.js holds exactly one of those and slides its thread. */
-.dp-actions.day-beat:not(.is-on), .dp-stamp.day-beat:not(.is-on) { display: none; }
-@media (prefers-reduced-motion: no-preference) {
-  .dp-actions.day-beat.is-on, .dp-stamp.day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
-}
 .dp-scr--grow .day-beat:not(.is-on) { display: none; }
 .dp-scr--grow .dp-mine.day-beat { transform-origin: 100% 100%; }
 .dp-scr--grow .dp-said.day-beat { transform-origin: 0 100%; }

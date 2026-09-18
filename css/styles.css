@@ -16156,7 +16156,21 @@ button.dp-act:hover { background: var(--soft); }
 /* A press lights the button for the beat the phone app gives it (its ui.tsx, chosen), then the card
    settles: the buttons go, the words before the press hide and the words after it show. */
 .dp-scr.is-pressed .dp-act[data-press] { background: var(--accent); color: var(--on-accent); }
-.dp-scr.is-done .dp-actions { display: none; }
+/* THE BUTTONS FOLD AWAY ON SEND, THEY DO NOT VANISH (Jett, 2026-09-18). They were display:none the
+   moment the card settled, so a row four buttons tall left the screen between one frame and the
+   next and the card jumped shut. Folding is the grid trick: the wrapper is a one-row grid going
+   from 1fr to 0fr, which is a transition of the row's OWN height, so nothing here has to know how
+   tall four buttons come out and nothing can be clipped by a max-height guessed too small. The
+   block's own overflow: hidden is what lets the row close over it. Under reduced motion there is
+   no transition and it closes in one frame, which is where this started. */
+.dp-fold { align-self: stretch; width: 100%; display: grid; grid-template-rows: 1fr; }
+.dp-fold > .dp-actions { min-height: 0; }
+.dp-scr.is-done .dp-fold { grid-template-rows: 0fr; }
+.dp-scr.is-done .dp-fold > .dp-actions { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-fold { transition: grid-template-rows .34s cubic-bezier(.4, 0, .2, 1); }
+  .dp-fold > .dp-actions { transition: opacity .28s ease; }
+}
 .dp-after { display: none; }
 .dp-scr.is-done .dp-after { display: flex; }
 .dp-scr.is-done p.dp-after { display: block; }

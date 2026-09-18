@@ -268,8 +268,12 @@ sizes are on the page at rest, and the pick only lights one.
   card that exist in neither app, so both were replaced by what the code does: the calendar skill
   takes approval as a typed later message (its SKILL.md) and the email card's Send edits the card to
   "Sent to" with the buttons gone (`email/replies/actions.rs`), after the pressed button stays lit
-  for the beat the phone app gives it (`LINGER_MS` in archie-mobile's `ui.tsx`). Before drawing a
-  control on either mockup, find it in the app. The mockups are laid out at the size they are shown
+  for the beat the phone app gives it (`LINGER_MS` in archie-mobile's `ui.tsx`). **The scroll presses
+  whichever of those two the reader has not**, further down each act (2026-09-18, `SENDS` in
+  js/home.js): the buttons stay live and a press still does the whole thing at once, but a sent card
+  and a moved meeting are what those two acts claim, and until then both claims sat behind a click
+  most readers never make. Scrolling back under the screen's own beat takes the send apart again.
+  Before drawing a control on either mockup, find it in the app. The mockups are laid out at the size they are shown
   (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
   window's agent card says "On Archie Mobile" at Jett's direction, and since 2026-09-17 so does
   the app mockup in Downloads, which read "Running on Telegram" until then (its setup pane still

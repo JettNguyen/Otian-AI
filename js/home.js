@@ -166,8 +166,11 @@
      the calendar act's yes sits typed in it (the skill takes approval as a later message, never
      a button), and Send on the mail card. A press lights the button for the beat the phone app
      gives it, then the screen is done, which the stylesheet turns into the edited card or the
-     follow-up bubbles, and Ember hops. The custody toggle redraws the lap for starter credits,
-     in TRUST.md's own sentence.
+     follow-up bubbles, and Ember hops. NEITHER ACT WAITS FOREVER: further down each one the scroll
+     presses the button the reader has not, because the sent card and the moved meeting are what
+     the two acts are claiming and they were sitting behind a click most readers never make
+     (SENDS below). The custody toggle redraws the lap for starter credits, in TRUST.md's own
+     sentence.
 
      Under reduced motion the stage is unpinned by the stylesheet and this only places Ember on
      the hero mark, snapped rather than eased, so the page reads as a stack of stills.
@@ -189,6 +192,23 @@
        it takes, which is about a fifth of a screen of scroll for fourteen characters. */
     var typedEl = $('.dp-msgbox .typed'), TYPED = typedEl ? typedEl.textContent : '', typedCut = -1;
     var TYPED_AT = 0.5, TYPED_FOR = 0.22;
+    /* THE SCROLL SENDS IT IF THE READER DOES NOT (2026-09-18). Both of these screens end in a
+       control the reader works, and both were a dead end for a reader who only scrolls: the
+       calendar's yes and the mail card's Send are what make each act's claim visible, and until
+       today someone who never pressed either one never saw the move land or the card edit itself to
+       "Sent to". The claim was sitting behind a click that most readers do not make.
+
+       THE BUTTON IS STILL FIRST, and that is the point of doing it this way rather than animating
+       the send outright. It is live from the moment its screen is up, a press does the whole thing
+       then and there, and the scroll only steps in further down the act if the press has not come,
+       so the tier-three control is still a control and not a decoration. `from` is where the screen
+       stops being assembled and `at` is where the scroll gives up waiting; scrolling back under
+       `from` takes it apart again, the way every other beat on this stage runs backwards, and
+       arriving from a later act settles it with no linger, so scrolling up into a finished act does
+       not replay a button lighting itself. */
+    var scr2 = $('.dp-scr[data-scr="2"]');
+    var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: 0.8, linger: false },
+                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.55, linger: true }];
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -578,6 +598,14 @@
            lean read as a wobble on every wheel notch. */
         window.Ember.walk(ember, ex - wasX);
       }
+      SENDS.forEach(function (sd) {
+        if (!sd.el) return;
+        if (i < sd.act || (i === sd.act && tp < sd.from)) unpress(sd.el, sd.key);
+        else if (i > sd.act) press(sd.el, sd.key, true);
+        /* Only the mail card lingers. Its Send is an action button and the phone app holds it lit
+           for a beat (LINGER_MS); the composer's arrow posts a message, which posts at once. */
+        else if (tp >= sd.at) press(sd.el, sd.key, !sd.linger);
+      });
       /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
          is sent; scrolling back above the proposal untypes it. IT ARRIVES A CHARACTER AT A TIME,
          because the claim of this act is that approval is a message you type and not a button you
@@ -607,17 +635,28 @@
     /* The two real buttons on the phone. The composer's send knob posts the typed yes, and only
        while it is typed; Send on the mail card lights for the beat the phone app gives a pressed
        button (LINGER_MS in its ui.tsx) and then the card settles. Pressing again does nothing,
-       because the thing it did is done. */
+       because the thing it did is done. One path for both the reader's press and the scroll's,
+       so the screen does the same thing whoever sent it; `now` skips the linger, which is for
+       arriving at a screen that should already be settled rather than watching it settle. */
+    var lingerT = { 1: 0, 2: 0 };
+    function press(scr, key, now) {
+      if (!scr || scr.classList.contains('is-pressed')) return;
+      scr.classList.add('is-pressed');
+      var settle = function () { scr.classList.add('is-done'); lingerT[key] = 0; };
+      if (now || still) settle(); else lingerT[key] = setTimeout(settle, 700);
+      if (!still) window.Ember.act(ember, 'hop');
+    }
+    function unpress(scr, key) {
+      if (!scr) return;
+      if (lingerT[key]) { clearTimeout(lingerT[key]); lingerT[key] = 0; }
+      scr.classList.remove('is-pressed', 'is-done');
+    }
     $$('[data-press]').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var kind = btn.getAttribute('data-press');
         var scr = kind === 'confirm' ? scr1 : btn.closest('.dp-scr');
-        if (!scr || scr.classList.contains('is-pressed')) return;
         if (kind === 'confirm' && !(ph && ph.classList.contains('is-typed'))) return;
-        scr.classList.add('is-pressed');
-        var settle = function () { scr.classList.add('is-done'); };
-        if (kind === 'confirm' || still) settle(); else setTimeout(settle, 700);
-        if (!still) window.Ember.act(ember, 'hop');
+        press(scr, kind === 'confirm' ? 1 : 2, kind === 'confirm');
       });
     });
     /* The own-key / starter-credits control on the custody act. */

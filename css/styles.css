@@ -2651,12 +2651,16 @@ summary,
   list-style: none;
 }
 
+/* The left padding was 8 against 12 because a mark sat on that side, and the flex gap had two
+   children to space. With the marks gone on 2026-09-17 an off-center pill is just a pill that
+   looks wrong, so the padding is even and the gap is gone. The name stays --text-primary: setting
+   these in the accent was tried the same day and Jett's call was that fifty of them is an eyesore,
+   which is the right call. The accent belongs on the numbers and the links, not on the roster. */
 .works-with-list li {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
   min-height: 30px;
-  padding: 5px 12px 5px 8px;
+  padding: 5px 12px;
   border: 1px solid var(--border);
   border-radius: 999px;
   background: var(--bg-card);

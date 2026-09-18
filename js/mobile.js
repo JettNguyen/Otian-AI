@@ -23,6 +23,7 @@
   var hint = $('.day-hint', story), rail = $('.mb-rail', story);
   var caps = $$('.day-cap', story), scrs = $$('.mk-scr', story), steps = rail ? $$('li', rail) : [];
   var nodePc = $('.mb-node--pc', story), nodeBox = $('.mb-node--box', story), nodePh = $('.mb-node--ph', story);
+  var pathWide = $('.mb-line-path--wide path', story);
   if (!stage || !wrap || !scene || !phone || !line || !msg || !scrs.length) return;
   var beats = $$('.day-beat', story).map(function (el) {
     return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at') };
@@ -42,11 +43,21 @@
      right so the line has the left, because the phone is the line's third point; narrow it steps
      out and a drawn phone stands in for it. */
   var ACTS = [
-    { scr: 0, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
-    { scr: 1, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
-    { scr: 2, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
-    { scr: 1, big: false, px: 184, pr: 0, pp: 0, po: 1, npo: 0 }
+    { scr: 0, big: true, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 1, big: true, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 2, big: true, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 1, big: false, pr: 0, pp: 0, po: 1, npo: 0 }
   ];
+  /* THE SEALED PHONE IS A FRACTION OF THE BIG ONE, NOT OF THE BOX. Sized in box units it grew with
+     the box, and past about 1250px of window the box keeps growing while the big phone is tied to
+     the column's height, so the two converged and the step back was gone (Jett, 2026-09-18). At
+     .78 it stands where it stood at 1250 and stays there. Its right edge sits near the box's, and
+     the line's end and the name under it follow its edge, since that edge now moves. */
+  var K3 = 0.78;
+  function sealed() {
+    var h = 516.6 * PS * K3, w = 256.4 * PS * K3, cx = 640 - 8 - w / 2;
+    return { cx: cx, left: cx - w / 2, bottom: 280 + h / 2 };
+  }
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
@@ -96,7 +107,7 @@
   var ROW = 280;
   function pc() { return narrow ? 66 : 85; }
   function box() { return narrow ? 200 : 232; }
-  function ph() { return narrow ? 334 : 370; }
+  function ph() { return narrow ? 334 : sealed().left - 8; }
   function lap() {
     var b = box(), p = ph(), c = pc();
     return [[0, p], [0.08, p], [0.3, b], [0.38, b], [0.55, c], [0.68, c], [0.85, b], [0.92, b], [1, p]];
@@ -118,19 +129,28 @@
     caps.forEach(function (c, j) { c.classList.toggle('is-on', j === i); });
     steps.forEach(function (s, j) { s.classList.toggle('is-on', j === i); });
     scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
-    phone.style.setProperty('--px', (narrow ? 0 : ACTS[i].px) + 'px');
     phone.style.setProperty('--pr', ACTS[i].pr + 'deg');
     phone.style.setProperty('--pp', ACTS[i].pp + 'deg');
     phone.style.setProperty('--po', String(narrow ? ACTS[i].npo : ACTS[i].po));
     light(ACTS[i].pr, ACTS[i].pp);
   }
-  /* The zoom multiplier is the column's, every act; the sealed act comes back to the box's size
-     by a transform, which is what transitions. */
-  var psWas = '', pkWas = '';
+  /* The zoom multiplier is the column's, every act; the sealed act steps the phone back by a
+     transform, which is what transitions, and moves it right so the line has the left. */
+  var psWas = '', pkWas = '', pxWas = '', geoWas = '';
   function size(i) {
-    var v = PS.toFixed(3), k = (ACTS[i].big ? 1 : 1 / PS).toFixed(4);
+    var v = PS.toFixed(3), big = ACTS[i].big, k = (big ? 1 : K3).toFixed(3);
+    var g = sealed(), x = (big || narrow ? 0 : g.cx - 320).toFixed(1);
     if (v !== psWas) { psWas = v; phone.style.setProperty('--ps', v); }
     if (k !== pkWas) { pkWas = k; phone.style.setProperty('--pk', k); }
+    if (x !== pxWas) { pxWas = x; phone.style.setProperty('--px', x + 'px'); }
+    var geo = g.left.toFixed(1) + '/' + g.bottom.toFixed(1);
+    if (geo !== geoWas) {
+      geoWas = geo;
+      if (pathWide) pathWide.setAttribute('d', 'M85 280H' + (g.left - 8).toFixed(1));
+      /* The name's centre is 42 rows under the phone's bottom edge: the name is about 42 rows tall,
+         so it clears the edge by about 20. At 28 its top sat on the glass (Jett, 2026-09-18). */
+      if (nodePh) { nodePh.style.setProperty('--nx', g.cx.toFixed(1) + 'px'); nodePh.style.setProperty('--ny', (g.bottom + 42).toFixed(1) + 'px'); }
+    }
   }
 
   var wasNarrow = null;

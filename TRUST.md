@@ -2818,6 +2818,19 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Meta Muse is a sign-in: &ldquo;rolling out in the US on iOS, Android, and muse.ai&rdquo;, and &ldquo;Anyone can use it out of the box, no technical experience required.&rdquo; | Meta | `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-18 |
 | Meta Muse&rsquo;s permissions are one of two settings: &ldquo;If you select Always ask, your Muse will ask for permission before any action&rdquo;, or &ldquo;Ask for some actions&rdquo;, which asks &ldquo;before every write action and important read actions&rdquo; | Meta | `https://www.meta.com/help/artificial-intelligence/1385290430137537/` | 2026-09-18 |
 | Instinct is a sign-in: &ldquo;Text Instinct to get started&rdquo;, and &ldquo;The interface is simple: there are no new interfaces. It&rsquo;s trained to use a phone and a computer. You can text or call it.&rdquo; No approval setting is published | Instinct | `https://instinct.com/` | 2026-09-18 |
+| Norton Family Assistant runs on Gen Digital&rsquo;s side, in its own words: &ldquo;Family Assistant runs a per-user instance architecture: your family graph, connected-account tokens, agent context, and chat history all live inside your own dedicated instance in the cloud, isolated from other users&rdquo;, and &ldquo;Your data is stored on encrypted infrastructure operated by Gen Digital and our cloud providers.&rdquo; This is the row that put it on the their-servers side of the chart | Norton | `https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281` | 2026-09-18 |
+| Norton Family Assistant is reached in a browser or an iPhone app, and there is no program for your own computer: &ldquo;Family Assistant works on any PCs that run in browsers such as Norton Neo, Chrome, and Firefox&rdquo;, and &ldquo;You can also download and install the Norton Family Assistant app from the Apple App Store on an iOS device running iOS 17 or later.&rdquo; Sign in is its Ease level | Norton | `https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281` | 2026-09-18 |
+| Norton Family Assistant is shaped by what you connect and nothing else it publishes: &ldquo;Family Assistant can connect to accounts and services you choose and are authorized to access. Connecting your Gmail is required to get started.&rdquo; No shelf of add-ons is published, which is the settings-and-accounts level of the Customization view | Norton | `https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281` | 2026-09-18 |
+| Symphony&rsquo;s agents work when you are not there: &ldquo;Your agents connect to the suite of tools you already use and can work on their own, 24/7, to help grow your business and manage day-to-day tasks&rdquo;, and &ldquo;Chatting with Symphony doesn&rsquo;t cost anything, but your agents&rsquo; background work uses AI credits.&rdquo; **Wix publishes no sentence saying where that work runs.** Read with the row above that Wix ships only a phone app and a browser, the chart places Symphony on the their-servers side, and the fold says in words that this is a reading of those two sentences and not a quote. If Wix ever publishes the sentence, cite it here and drop the caveat; if it publishes the opposite, Symphony moves | Wix | `https://support.wix.com/en/article/symphony-an-overview`, `https://www.wix.com/symphony` | 2026-09-18 |
+| Symphony is shaped by what you connect and how you brief each agent: &ldquo;Symphony integrates with your existing tools and workflows, like your calendars, email inbox, productivity tools, Slack, Salesforce, and much more&rdquo;, and &ldquo;Create and train your own agent. Set its name, give it a personality, approve goals and actions.&rdquo; No shelf of add-ons is published, which is the settings-and-accounts level | Wix | `https://support.wix.com/en/article/symphony-an-overview`, `https://www.wix.com/symphony` | 2026-09-18 |
+| Claude Cowork has a shelf of add-ons: &ldquo;You manage connectors, skills, and plugins from Customize in the sidebar&rdquo;, and &ldquo;In Cowork, click Customize in the left sidebar, then click the &lsquo;+&rsquo; button to open the directory.&rdquo; That is the shelf level of the Customization view, level with Archie | Anthropic | `https://claude.com/docs/cowork/overview`, `https://support.claude.com/en/articles/12512180-use-skills-in-claude` | 2026-09-18 |
+| Grok Bot has a shelf of add-ons: a Marketplace page lists bots by category (From Grok Bot Team, Engineering, Sales, Marketing, Design, Personal, Recruiting &amp; People, Product, Operations) with an Add button on each. Read in a browser; x.ai refuses scripts. The shelf level, level with Archie | xAI | `https://x.ai/bot/marketplace` | 2026-09-18 |
+| Meta Muse is shaped by what you connect: &ldquo;You can choose to connect Muse to apps and services provided by Meta or third-parties. We call these Connectors&rdquo;, and &ldquo;People choose which apps Muse connects to and exactly how much access it gets.&rdquo; Meta publishes no shelf of add-ons to install, which is the settings-and-accounts level | Meta | `https://www.meta.com/help/artificial-intelligence/1687253048996149/`, `https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/` | 2026-09-18 |
+| Instinct is shaped by what you connect, and its page offers nothing else to install: &ldquo;It connects to your applications and devices - email, messaging, screen, audio, location, and more.&rdquo; The settings-and-accounts level | Instinct | `https://instinct.com/` | 2026-09-18 |
+| Vellum&rsquo;s code is open under MIT: its homepage&rsquo;s own structured data lists &ldquo;Open source (MIT license)&rdquo; among its features, its FAQ says &ldquo;Vellum is open-source, so you can inspect the code yourself&rdquo;, and the page links `github.com/vellum-ai`. With the row below, the top level of the Customization view is sourced for all three open-source products | Vellum | `https://www.vellum.ai/` | 2026-09-18 |
+| Vellum has a shelf of add-ons on top of its open code: &ldquo;Skills give your agents new capabilities. Browse the catalog, pick what you need, and install with a single command&rdquo;, and plugins to &ldquo;Browse and install from the Plugins tab inside the Vellum app.&rdquo; With the open-source row above, that is the top level of the Customization view, its code is yours | Vellum | `https://www.vellum.ai/skills`, `https://www.vellum.ai/plugins` | 2026-09-18 |
+| Hermes has a shelf of add-ons on top of its MIT code: &ldquo;Browse, search, install, and manage skills from online registries, skills.sh, direct well-known skill endpoints, and official optional skills.&rdquo; The top level of the Customization view | Nous Research | `https://hermes-agent.nousresearch.com/docs/user-guide/features/skills` | 2026-09-18 |
+| OpenClaw has a shelf of add-ons on top of its MIT code: &ldquo;Skills &amp; Plugins: Extend with community skills or build your own&rdquo;, and &ldquo;ClawHub: Install skills and plugins.&rdquo; The top level of the Customization view | OpenClaw | `https://openclaw.ai/` | 2026-09-18 |
 | Vellum's FAQ: "you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time" | Vellum | `https://www.vellum.ai/` | 2026-09-16 |
 | Hermes' README: "Use any model you want", naming Nous Portal, OpenRouter, OpenAI and "your own endpoint" | Nous Research | `https://raw.githubusercontent.com/NousResearch/hermes-agent/main/README.md` | 2026-09-16 |
 | Hermes' security docs: "Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it", with `approvals.mode` of "smart, manual, off" | Nous Research | `https://hermes-agent.nousresearch.com/docs/user-guide/security` | 2026-09-16 |
@@ -2828,16 +2841,28 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Norton's FAQ: "Every send, payment and booking waits for your approval", and "The AI providers we use operate under enterprise contracts with zero data retention" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
 | Cowork's mode selector "offers Auto and Manual (default)"; Manual, "formerly 'Ask before acting'", means "Claude pauses and asks for approval for actions" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-09-16 |
 
-**Re-read 2026-09-18 for the compare chart&rsquo;s second view, and for the axis that was mislabelled.**
+**Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was
+mislabelled, and for the two marks that came onto the chart.**
 The chart&rsquo;s up-axis said Control and measured what a product does by default. OpenClaw sat at
 the bottom of it and gives more control than anything on the board, which Jett caught. The axis
 is &ldquo;Asks first&rdquo; now, which is what it measures, and the rows above hold what each
 company publishes about control so the concession is sourced, not felt. The second view, Ease,
 is how you get a product running, in three levels each company&rsquo;s own get-started page puts
-it in: sign in (Cowork, Muse, Instinct), download an app (Archie, Vellum, Hermes, Grok Bot),
-from a terminal (OpenClaw). OpenClaw is the one judgement call: its site offers desktop apps and
-its docs get you started with a shell command and change its permissions with one. The fold says
-both. Symphony and Norton stay off the chart for the reason they always did.
+it in: sign in (Cowork, Muse, Instinct, Symphony, Norton), download an app (Archie, Vellum,
+Hermes, Grok Bot), from a terminal (OpenClaw). OpenClaw is the one judgement call: its site offers
+desktop apps and its docs get you started with a shell command and change its permissions with
+one. The fold says both. The third view, Customization, is how far you can make a product yours,
+in three levels: settings and the accounts you connect (Muse, Instinct, Symphony, Norton), a
+shelf of add-ons you install (Archie, Cowork, Grok Bot), its code is yours (OpenClaw, Hermes,
+Vellum, each open source with a shelf on top). **Archie is one level under the open-source three
+and level with two rented agents, and the chart draws it there.** Jett&rsquo;s instinct was
+&ldquo;just below OpenClaw&rdquo;; within a level the chart never ranks, so the honest drawing is the
+level, and the prose concedes the code point in words. **Symphony and Norton joined the chart the
+same day.** Norton&rsquo;s support FAQ says the work runs in &ldquo;your own dedicated instance in the
+cloud&rdquo;, which is a quote and closes a gap this file had held open since 2026-09-16. Wix still
+publishes no such sentence; its agents &ldquo;work on their own, 24/7&rdquo; and the only things it
+ships are a phone app and a browser, so Symphony sits on the their-servers side by a reading of
+those two rows, and the page&rsquo;s fold says so in those words rather than pretending Wix said it.
 
 **Re-read 2026-09-16 for the compare chart, and the docs say what the landing pages do not.** Jett
 asked for the chart's "doesn't say" gaps to be filled rather than drawn, so each company's docs,
@@ -2848,6 +2873,9 @@ Hermes' "you pick the AI company" point, retired that morning as unsourced, is s
 its README. Two gaps stayed gaps, and stay off the chart: nothing on wix.com or support.wix.com
 says where Symphony's agents run, and nothing on us.norton.com says where Family Assistant's
 work happens. Both pages say the assistant asks first, and the chart's strip says that.
+**Closed 2026-09-18:** Norton's support FAQ, quoted in the rows above, says where the work
+happens; Wix still does not, and the row above records the reading that placed it and labels it
+as one. Both are on the chart and the strip under it is gone.
 
 **Logos on `/compare/`, added 2026-09-16 and cut back the same day.** Five marks are live and each
 is the file that company&rsquo;s own site serves for itself, fetched that day and named in the rows

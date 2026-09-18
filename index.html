@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260918-16" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260918-17" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -505,13 +505,15 @@
                                over the same draft. Both states are here; the stylesheet swaps them on
                                is-done. The button labels are the card's own. -->
                           <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> to Sam</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
-                          <div class="dp-actions day-beat" data-act="2" data-at="0.3">
+                          <div class="dp-actions day-beat" data-act="2" data-at="0.38">
                             <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></button>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                             <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                           </div>
-                          <p class="dp-stamp">1:40 PM</p>
+                          <!-- The time lands last, because it is the time ON the card and the card is
+                               not finished until the buttons are under it. -->
+                          <p class="dp-stamp day-beat" data-act="2" data-at="0.5">1:40 PM</p>
                         </div>
                       </div>
                     </div>
@@ -1206,10 +1208,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260918-16"></script>
-  <script src="js/ember.js?v=20260918-16" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260918-16"></script>
-  <script src="js/home.js?v=20260918-16" defer></script>
+  <script src="js/nav.js?v=20260918-17"></script>
+  <script src="js/ember.js?v=20260918-17" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260918-17"></script>
+  <script src="js/home.js?v=20260918-17" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

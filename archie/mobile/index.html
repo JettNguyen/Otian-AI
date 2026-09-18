@@ -344,6 +344,74 @@
           <p>Each company&rsquo;s own published words, and the app we are building on the last row.</p>
         </div>
 
+        <!-- The table's last column, drawn: one lock per app, open where that company can read
+             what your agent says there and shut where it cannot. Nothing moves on purpose: a lock
+             is a state, not an event, and the sealed line above already carries the motion. The
+             table under it is the sourced list, row for row. -->
+        <figure class="explain-figure lk-figure mt-40 fade-up delay-1">
+          <svg class="explain-svg--desktop" viewBox="0 0 640 116" role="img" aria-labelledby="lk-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="lk-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The app we are building is shut and drawn in the site's colour, marked no, nor can we.</title>
+            <style>
+              .lk-name{fill:currentColor;font-size:11.5px;font-weight:600;text-anchor:middle}
+              .lk-name--us{fill:var(--accent-ink)}
+              .lk-ans{fill:currentColor;font-size:10.5px;opacity:.7;text-anchor:middle}
+              .lk-ans--us{fill:var(--accent-ink);opacity:1;font-weight:600}
+              .lk-body{fill:var(--bg-secondary);stroke:currentColor;stroke-width:1.6;opacity:.55}
+              .lk-arc{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;opacity:.55}
+              .lk-key{fill:currentColor;opacity:.55}
+              .lk-shut{opacity:1}
+              .lk-body.lk-shut{fill:var(--bg-card)}
+              .lk-us{stroke:var(--accent)}
+              .lk-body.lk-us{fill:rgba(224,138,91,.10)}
+              .lk-key.lk-us{fill:var(--accent)}
+            </style>
+<text class="lk-name" x="52" y="36">Telegram</text>
+<rect class="lk-body lk-open" x="41" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M54,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="52" cy="74" r="2"/>
+<text class="lk-ans" x="52" y="100">Yes</text>
+<text class="lk-name" x="159" y="36">Discord</text>
+<rect class="lk-body lk-open" x="148" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M161,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="159" cy="74" r="2"/>
+<text class="lk-ans" x="159" y="100">Yes</text>
+<text class="lk-name" x="266" y="36">Slack</text>
+<rect class="lk-body lk-open" x="255" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M268,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="266" cy="74" r="2"/>
+<text class="lk-ans" x="266" y="100">Yes</text>
+<text class="lk-name" x="373" y="36">Matrix</text>
+<rect class="lk-body lk-open" x="362" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M375,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="373" cy="74" r="2"/>
+<text class="lk-ans" x="373" y="100">Yes</text>
+<text class="lk-name" x="480" y="24">iMessage on</text>
+<text class="lk-name" x="480" y="36">a Mac</text>
+<rect class="lk-body lk-shut" x="469" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-shut" d="M473,66 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut" cx="480" cy="74" r="2"/>
+<text class="lk-ans" x="480" y="100">No</text>
+<text class="lk-name lk-name--us" x="587" y="24">The app</text>
+<text class="lk-name lk-name--us" x="587" y="36">we are building</text>
+<rect class="lk-body lk-shut lk-us" x="576" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-shut lk-us" d="M580,66 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut lk-us" cx="587" cy="74" r="2"/>
+<text class="lk-ans lk-ans--us" x="587" y="100">No, nor can we</text>
+          </svg>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 236" role="img" aria-labelledby="lkm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="lkm-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The app we are building is shut and drawn in the site's colour, marked no, nor can we.</title>
+<text class="lk-name" x="57" y="36">Telegram</text>
+<rect class="lk-body lk-open" x="46" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M59,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="57" cy="74" r="2"/>
+<text class="lk-ans" x="57" y="100">Yes</text>
+<text class="lk-name" x="170" y="36">Discord</text>
+<rect class="lk-body lk-open" x="159" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M172,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="170" cy="74" r="2"/>
+<text class="lk-ans" x="170" y="100">Yes</text>
+<text class="lk-name" x="283" y="36">Slack</text>
+<rect class="lk-body lk-open" x="272" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M285,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="283" cy="74" r="2"/>
+<text class="lk-ans" x="283" y="100">Yes</text>
+<text class="lk-name" x="57" y="156">Matrix</text>
+<rect class="lk-body lk-open" x="46" y="186" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M59,186 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="57" cy="194" r="2"/>
+<text class="lk-ans" x="57" y="220">Yes</text>
+<text class="lk-name" x="170" y="144">iMessage on</text>
+<text class="lk-name" x="170" y="156">a Mac</text>
+<rect class="lk-body lk-shut" x="159" y="186" width="22" height="16" rx="3"/><path class="lk-arc lk-shut" d="M163,186 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut" cx="170" cy="194" r="2"/>
+<text class="lk-ans" x="170" y="220">No</text>
+<text class="lk-name lk-name--us" x="283" y="144">The app</text>
+<text class="lk-name lk-name--us" x="283" y="156">we are building</text>
+<rect class="lk-body lk-shut lk-us" x="272" y="186" width="22" height="16" rx="3"/><path class="lk-arc lk-shut lk-us" d="M276,186 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut lk-us" cx="283" cy="194" r="2"/>
+<text class="lk-ans lk-ans--us" x="283" y="220">No, nor can we</text>
+          </svg>
+          <figcaption>Whether the company whose app carries your agent&rsquo;s messages can read them. iMessage on a Mac is the exception today. The app we are building is sealed on your computer, and we cannot open it either.</figcaption>
+        </figure>
+
         <div class="cmp-table-wrap fade-up delay-1">
           <table class="cmp-table">
             <caption class="sr-only">Each chat app Archie connects to, what that company publishes about encryption, and whether that company can open your agent&rsquo;s messages, compared with the app Otian is building.</caption>

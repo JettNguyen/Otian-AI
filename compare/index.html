@@ -204,13 +204,40 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Every assistant we could source</span>
-          <h2 id="board-heading" class="fade-up delay-1">Ten assistants on privacy and control, placed from what their own pages say.</h2>
-          <p class="hm-lede fade-up delay-1">Privacy here means where the work happens: on their servers, or on your computer. Control means what happens before a step that matters, and it is the height of each mark: it acts on its own at the bottom, it asks by default until you change a setting in the middle, it asks every time at the top. Those two are what this site is built around, which is why they are the axes, and the top right is the corner we are aiming at. Every mark is placed by a sentence on the company&rsquo;s own site, quoted below. Read September 16, 2026.</p>
+          <h2 id="board-heading" class="fade-up delay-1">Ten assistants, placed from what their own pages say.</h2>
+          <p class="hm-lede fade-up delay-1">Privacy runs across: where the work happens, on their servers or on your computer. What runs up is your pick. Asks first is what a product does before a step that matters: it acts unless you set it to ask, it asks by default until you change a setting, or it asks every time and there is no setting. Ease is how you get it running: from a terminal, by downloading an app, or by signing in. Those three are what this site is built around, which is why they are the axes; the top right is the corner we are aiming at, and in the Ease view nobody has reached it, us included. Every mark is placed by a sentence on the company&rsquo;s own site, quoted below. Read September 18, 2026.</p>
         </div>
 
         <!-- ==============================
-             The lead visual is a quadrant chart: two axes and big round marks with the name above
-             each. It had a shaded corner around Archie until 2026-09-16, when Jett read it as a
+             The lead visual is a quadrant chart with a switch: two axes, big round marks with the
+             name above each, and a pair of pills above the chart that choose what runs up it.
+
+             TWO VIEWS, ONE SWITCH, NO SCRIPT (2026-09-18). Privacy runs across in both. Up is the
+             reader's pick: "Asks first", what a product does before a step that matters, by
+             default; or "Ease", how you get it running. Every mark keeps its x and slides to its
+             other height. The switch is two hidden radios and the stylesheet's own review-tab
+             pills (.aud-pick-radio, .aud-pick-tab), with `#fq-ease:checked ~` rules inside each
+             chart's <style> that set one transform per mark and swap the axis labels, which is
+             the pattern testimonials/ already uses and needs nothing under js/. The resting state
+             is the whole Asks-first chart, so a crawler, a reduced-motion reader and a reader with
+             no JavaScript each get a complete chart, and both views' facts are in the accessible
+             name and the fold. This is tier three in CLAUDE.md's motion rules, a small control
+             the reader works, and Jett asked for it after a day that went: three labelled tiers,
+             a free field, a 3D field with ease as depth (built, and found hard to read, as I had
+             said it would be), then this.
+
+             THE UP-AXIS WAS CALLED CONTROL, AND IT WAS NOT MEASURING CONTROL. It measured what a
+             product does by default. OpenClaw sat at the bottom of it and gives more control than
+             anything on the board: five exec modes, ask-always, per-command allow lists, MIT.
+             Jett caught it. The axis is "Asks first" now, which is what it measures, the fold
+             quotes OpenClaw's permission docs, the prose concedes the control win in so many
+             words, and Archie's height above the four that also ask is a hair, because out of
+             the box they behave the same and the only difference is that Archie's asking has no
+             setting. The ease levels are each company's own get-started page: sign in (Cowork,
+             Muse, Instinct), download an app (Archie, Vellum, Hermes, Grok Bot), from a terminal
+             (OpenClaw, whose docs start with a shell command and change permissions with one; it
+             ships desktop apps too, and the fold says so). In the Ease view the top right is
+             empty, us included, and the lede says that rather than hiding it. It had a shaded corner around Archie until 2026-09-16, when Jett read it as a
              box, and he was right that it was one: a panel drawn around our own mark is a callout,
              not a chart, and it read as sales. Nothing is framed now. What tells Archie apart is
              four things, all of them concentric with the mark and none of them a container, since
@@ -340,8 +367,25 @@
               <symbol id="lg-symphony" viewBox="0 0 192 192"><clipPath id="lg-symphony-round"><circle cx="96" cy="96" r="96"/></clipPath><image href="../assets/mark-wix.png" width="192" height="192" clip-path="url(#lg-symphony-round)"/></symbol>
             </defs>
           </svg>
+          <input type="radio" class="aud-pick-radio" name="fq-view" id="fq-asks" checked>
+          <input type="radio" class="aud-pick-radio" name="fq-view" id="fq-ease">
+          <style>
+            /* The pills are .aud-pick-tab from the stylesheet; only their checked and focus
+               states are keyed to ids, so those two rules live here with the ids they serve. */
+            .fq-switch{margin:0 0 18px;align-items:center}
+            .fq-switch-lead{font-size:var(--fs-sm);color:var(--text-muted);font-weight:600;margin-right:4px}
+            #fq-asks:checked ~ .fq-switch [for="fq-asks"],
+            #fq-ease:checked ~ .fq-switch [for="fq-ease"]{border-color:var(--accent);background:var(--accent-subtle);color:var(--text-primary)}
+            #fq-asks:focus-visible ~ .fq-switch [for="fq-asks"],
+            #fq-ease:focus-visible ~ .fq-switch [for="fq-ease"]{outline:2px solid var(--accent-ink);outline-offset:2px}
+          </style>
+          <div class="aud-pick-tabs fq-switch" role="group" aria-label="Which measure runs up the chart">
+            <span class="fq-switch-lead">Up the chart:</span>
+            <label class="aud-pick-tab" for="fq-asks">Asks first</label>
+            <label class="aud-pick-tab" for="fq-ease">Ease</label>
+          </div>
           <svg class="explain-svg--desktop" viewBox="0 0 640 532" role="img" aria-labelledby="fq-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fq-t">A chart with two axes and eight marks scattered across it. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, set apart by a larger circle, a ring, a soft halo and a name all in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Vellum and Hermes sit just below it on the your-computer side, Claude Cowork and Meta Muse on the their-servers side, all four at the same height because each asks by default until you change a setting. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. The top-left of the chart is empty. Five circles carry the company&rsquo;s own icon and four carry a letter, and every one has its name above it. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
+            <title id="fq-t">A chart with two axes and a switch above it. Across, privacy: their servers on the left, your computer on the right, the same in both views. The switch chooses what runs up the chart. With Asks first, the resting view: Archie sits alone at the top right, set apart by a larger circle, a soft halo and a name in the colour of this site, a short way above Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the their-servers side, which all ask by default until you change a setting; along the bottom, acting on their own unless set to ask: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. With Ease, every mark slides to how you get it running: Claude Cowork, Meta Muse and Instinct at the top, because you sign in and they are there; Archie, Vellum, Hermes and Grok Bot a short way below, each a desktop app you download; OpenClaw alone at the bottom, installed and configured from a terminal. Five circles carry the company&rsquo;s own icon and four carry a letter, and every one has its name above it. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
             <style>
               .explain-svg--desktop .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--desktop .fq-title{fill:currentColor;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
@@ -359,7 +403,19 @@
               .explain-svg--desktop .fq-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#fqArr)}
               .explain-svg--desktop .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--desktop .fq-band-t{fill:currentColor;font-size:13px;font-weight:650;text-anchor:middle}
+              .explain-svg--desktop .fq-v-ease{display:none}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(524px,139.96px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(430px,147.96px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(586px,159.96px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(486px,304px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(214px,62px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(330px,66px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(216px,149.96px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(270px,84px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-v-asks{display:none}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-v-ease{display:inline}
               @media (prefers-reduced-motion:no-preference){
+                .explain-svg--desktop .fq-m{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
                 .explain-svg--desktop .fq-flow{animation:fqFlow 1.9s linear infinite}
                 @keyframes fqFlow{to{stroke-dashoffset:-18}}
               }
@@ -371,39 +427,62 @@
             </defs>
 
             <path class="fq-axis" d="M112 14 V348 H616"/>
-            <text class="fq-title" transform="rotate(-90 12 181)" x="12" y="181" text-anchor="middle">Control &rarr;</text>
-            <text class="fq-end" x="102" y="22" text-anchor="end">Asks first</text>
-            <text class="fq-end" x="102" y="344" text-anchor="end">Acts on its own</text>
             <text class="fq-end" x="112" y="372">Their servers</text>
             <text class="fq-end" x="616" y="372" text-anchor="end">Your computer</text>
             <text class="fq-title" x="364" y="396" text-anchor="middle">Privacy &rarr;</text>
+            <g class="fq-v-asks">
+              <text class="fq-title" transform="rotate(-90 12 181)" x="12" y="181" text-anchor="middle">Asks first &rarr;</text>
+              <text class="fq-end" x="102" y="22" text-anchor="end">Every step<tspan x="102" dy="12">that matters</tspan></text>
+              <text class="fq-end" x="102" y="344" text-anchor="end">Not by default</text>
+            </g>
+            <g class="fq-v-ease">
+              <text class="fq-title" transform="rotate(-90 12 181)" x="12" y="181" text-anchor="middle">Ease &rarr;</text>
+              <text class="fq-end" x="102" y="22" text-anchor="end">Sign in</text>
+              <text class="fq-end" x="102" y="344" text-anchor="end">From a terminal</text>
+            </g>
 
-            <circle class="fq-halo" cx="522" cy="68" r="34"/>
-            <circle class="fq-halo-in" cx="522" cy="68" r="29.5"/>
-            <text class="fq-name-us" x="522" y="27">Archie</text>
-            <circle class="fq-mark-us" cx="522" cy="68" r="25"/>
-            <use href="#lg-archie" x="504.5" y="50.5" width="35.0" height="35.0"/>
-            <text class="fq-name" x="443" y="117">Vellum</text>
-            <circle class="fq-mark" cx="443" cy="144" r="18"/>
-            <use href="#lg-vellum" x="433.55" y="134.55" width="18.9" height="18.9"/>
-            <text class="fq-name" x="555" y="131">Hermes</text>
-            <circle class="fq-mark" cx="555" cy="158" r="18"/>
-            <use href="#lg-hermes" x="537.9" y="140.9" width="34.2" height="34.2"/>
-            <text class="fq-name" x="213" y="115">Claude Cowork</text>
-            <circle class="fq-mark" cx="213" cy="142" r="18"/>
-            <text class="fq-init" x="213" y="147.95">C</text>
-            <text class="fq-name" x="306" y="129">Meta Muse</text>
-            <circle class="fq-mark" cx="306" cy="156" r="18"/>
-            <text class="fq-init" x="306" y="161.95">M</text>
-            <text class="fq-name" x="485" y="277">OpenClaw</text>
-            <circle class="fq-mark" cx="485" cy="304" r="18"/>
-            <use href="#lg-openclaw" x="474.65" y="293.65" width="20.7" height="20.7"/>
-            <text class="fq-name" x="215" y="273">Grok Bot</text>
-            <circle class="fq-mark" cx="215" cy="300" r="18"/>
-            <text class="fq-init" x="215" y="305.95">G</text>
-            <text class="fq-name" x="306" y="285">Instinct</text>
-            <circle class="fq-mark" cx="306" cy="312" r="18"/>
-            <use href="#lg-instinct" x="295.2" y="301.2" width="21.6" height="21.6"/>
+            <g class="fq-m fq-m-archie" transform="translate(524,68)">
+              <circle class="fq-halo" cx="0" cy="0" r="34"/>
+              <circle class="fq-halo-in" cx="0" cy="0" r="29.5"/>
+              <text class="fq-name-us" x="0" y="-41">Archie</text>
+              <circle class="fq-mark-us" cx="0" cy="0" r="25"/>
+              <use href="#lg-archie" x="-17.5" y="-17.5" width="35.0" height="35.0"/>
+            </g>
+            <g class="fq-m fq-m-vellum" transform="translate(430,143.96)">
+              <text class="fq-name" x="0" y="-27">Vellum</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <use href="#lg-vellum" x="-9.45" y="-9.45" width="18.9" height="18.9"/>
+            </g>
+            <g class="fq-m fq-m-hermes" transform="translate(586,157.96)">
+              <text class="fq-name" x="0" y="-27">Hermes</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <use href="#lg-hermes" x="-17.1" y="-17.1" width="34.2" height="34.2"/>
+            </g>
+            <g class="fq-m fq-m-openclaw" transform="translate(486,304)">
+              <text class="fq-name" x="0" y="-27">OpenClaw</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <use href="#lg-openclaw" x="-10.35" y="-10.35" width="20.7" height="20.7"/>
+            </g>
+            <g class="fq-m fq-m-cowork" transform="translate(214,141.96)">
+              <text class="fq-name" x="0" y="-27">Claude Cowork</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <text class="fq-init" x="0" y="5.95">C</text>
+            </g>
+            <g class="fq-m fq-m-muse" transform="translate(330,155.96)">
+              <text class="fq-name" x="0" y="-27">Meta Muse</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <text class="fq-init" x="0" y="5.95">M</text>
+            </g>
+            <g class="fq-m fq-m-grok" transform="translate(216,300)">
+              <text class="fq-name" x="0" y="-27">Grok Bot</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <text class="fq-init" x="0" y="5.95">G</text>
+            </g>
+            <g class="fq-m fq-m-instinct" transform="translate(270,314)">
+              <text class="fq-name" x="0" y="-27">Instinct</text>
+              <circle class="fq-mark" cx="0" cy="0" r="18"/>
+              <text class="fq-init" x="0" y="5.95">I</text>
+            </g>
 
             <text class="fq-off-h" x="112" y="426">Their pages don&rsquo;t say where the work runs:</text>
             <circle class="fq-mark" cx="121" cy="448" r="9"/>
@@ -417,8 +496,8 @@
             <text class="fq-band-t" x="364" y="508.5">All ten send your words to an AI company&rsquo;s computers.</text>
           </svg>
 
-          <svg class="explain-svg--mobile" viewBox="0 0 340 610" role="img" aria-labelledby="fqm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fqm-t">The same chart, taller for a narrow screen. Across, privacy: their servers on the left, your computer on the right. Up, control: acts on its own at the bottom, asks first at the top. Archie sits alone at the top right, set apart by a larger circle, a ring, a soft halo and a name all in the colour of this site. It is a short way above the next four and they are a long way above the last three, because out of the box those four ask too. Just below it, each asking by default until you change a setting: Vellum and Hermes on the your-computer side, Claude Cowork and Meta Muse on the their-servers side. Along the bottom, acting on their own: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. Five circles carry the company&rsquo;s own icon and four carry a letter. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 634" role="img" aria-labelledby="fqm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="fqm-t">The same chart, taller for a narrow screen, with the same switch above it. Across, privacy: their servers on the left, your computer on the right, in both views. With Asks first, the resting view: Archie alone at the top right, set apart by a larger circle, a soft halo and a name in the colour of this site, a short way above Vellum, Hermes, Claude Cowork and Meta Muse, which all ask by default until you change a setting; on the floor, acting on their own unless set to ask: OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. With Ease, every mark slides to how you get it running: Claude Cowork, Meta Muse and Instinct at the top, because you sign in and they are there; Archie, Vellum, Hermes and Grok Bot a short way below, each a desktop app you download; OpenClaw alone at the bottom, installed and configured from a terminal. Under the chart, two whose pages don&rsquo;t say where the work runs: Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers.</title>
             <style>
               .explain-svg--mobile .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--mobile .fq-title{fill:currentColor;font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
@@ -427,16 +506,28 @@
               .explain-svg--mobile .fq-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:3}
               .explain-svg--mobile .fq-halo{fill:var(--accent);opacity:.14}
               .explain-svg--mobile .fq-halo-in{fill:none;stroke:var(--accent);stroke-width:1.1;opacity:.45}
-              .explain-svg--mobile .fq-name{fill:currentColor;font-size:11px;font-weight:600;text-anchor:middle}
-              .explain-svg--mobile .fq-name-us{fill:var(--accent-ink);font-size:12.5px;font-weight:700;letter-spacing:.005em;text-anchor:middle}
-              .explain-svg--mobile .fq-init{fill:#44403B;font-size:15px;font-weight:700;text-anchor:middle}
+              .explain-svg--mobile .fq-name{fill:currentColor;font-size:10px;font-weight:600;text-anchor:middle}
+              .explain-svg--mobile .fq-name-us{fill:var(--accent-ink);font-size:12px;font-weight:700;letter-spacing:.005em;text-anchor:middle}
+              .explain-svg--mobile .fq-init{fill:#44403B;font-size:14px;font-weight:700;text-anchor:middle}
               .explain-svg--mobile .fq-off-init{fill:#44403B;font-size:9px;font-weight:700;text-anchor:middle}
               .explain-svg--mobile .fq-off-h{fill:currentColor;font-size:10px;font-weight:600;opacity:.78}
               .explain-svg--mobile .fq-off{fill:currentColor;font-size:10.5px;opacity:.85;font-weight:600}
               .explain-svg--mobile .fq-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#fqmArr)}
               .explain-svg--mobile .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--mobile .fq-band-t{fill:currentColor;font-size:11.5px;font-weight:650;text-anchor:middle}
+              .explain-svg--mobile .fq-v-ease{display:none}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(308px,147.16px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(268px,153.16px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(240px,153.16px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(244px,379px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(130px,80px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(161px,76px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(114px,141.16px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(193px,47px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-v-asks{display:none}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-v-ease{display:inline}
               @media (prefers-reduced-motion:no-preference){
+                .explain-svg--mobile .fq-m{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
                 .explain-svg--mobile .fq-flow{animation:fqmFlow 1.9s linear infinite}
                 @keyframes fqmFlow{to{stroke-dashoffset:-18}}
               }
@@ -447,52 +538,75 @@
               </marker>
             </defs>
 
-            <path class="fq-axis" d="M88 14 V404 H324"/>
-            <text class="fq-title" transform="rotate(-90 9 209)" x="9" y="209" text-anchor="middle">Control &rarr;</text>
-            <text class="fq-end" x="80" y="22" text-anchor="end">Asks first</text>
-            <text class="fq-end" x="80" y="402" text-anchor="end">Acts on its own</text>
-            <text class="fq-end" x="88" y="426">Their servers</text>
-            <text class="fq-end" x="324" y="426" text-anchor="end">Your computer</text>
-            <text class="fq-title" x="206" y="448" text-anchor="middle">Privacy &rarr;</text>
+            <path class="fq-axis" d="M88 14 V428 H334"/>
+            <text class="fq-end" x="88" y="450">Their servers</text>
+            <text class="fq-end" x="334" y="450" text-anchor="end">Your computer</text>
+            <text class="fq-title" x="211" y="472" text-anchor="middle">Privacy &rarr;</text>
+            <g class="fq-v-asks">
+              <text class="fq-title" transform="rotate(-90 9 221)" x="9" y="221" text-anchor="middle">Asks first &rarr;</text>
+              <text class="fq-end" x="80" y="22" text-anchor="end">Every step<tspan x="80" dy="11">that matters</tspan></text>
+              <text class="fq-end" x="80" y="426" text-anchor="end">Not by default</text>
+            </g>
+            <g class="fq-v-ease">
+              <text class="fq-title" transform="rotate(-90 9 221)" x="9" y="221" text-anchor="middle">Ease &rarr;</text>
+              <text class="fq-end" x="80" y="22" text-anchor="end">Sign in</text>
+              <text class="fq-end" x="80" y="415" text-anchor="end">From a<tspan x="80" dy="11">terminal</tspan></text>
+            </g>
 
-            <circle class="fq-halo" cx="280" cy="58" r="28.5"/>
-            <circle class="fq-halo-in" cx="280" cy="58" r="24.75"/>
-            <text class="fq-name-us" x="280" y="22.5">Archie</text>
-            <circle class="fq-mark-us" cx="280" cy="58" r="21"/>
-            <use href="#lg-archie" x="265.3" y="43.3" width="29.4" height="29.4"/>
-            <text class="fq-name" x="246" y="114">Vellum</text>
-            <circle class="fq-mark" cx="246" cy="138" r="15"/>
-            <use href="#lg-vellum" x="238.1" y="130.1" width="15.8" height="15.8"/>
-            <text class="fq-name" x="298" y="148">Hermes</text>
-            <circle class="fq-mark" cx="298" cy="172" r="15"/>
-            <use href="#lg-hermes" x="283.75" y="157.75" width="28.5" height="28.5"/>
-            <text class="fq-name" x="126" y="114">Claude Cowork</text>
-            <circle class="fq-mark" cx="126" cy="138" r="15"/>
-            <text class="fq-init" x="126" y="143.25">C</text>
-            <text class="fq-name" x="184" y="148">Meta Muse</text>
-            <circle class="fq-mark" cx="184" cy="172" r="15"/>
-            <text class="fq-init" x="184" y="177.25">M</text>
-            <text class="fq-name" x="272" y="304">OpenClaw</text>
-            <circle class="fq-mark" cx="272" cy="328" r="15"/>
-            <use href="#lg-openclaw" x="263.4" y="319.4" width="17.2" height="17.2"/>
-            <text class="fq-name" x="128" y="292">Grok Bot</text>
-            <circle class="fq-mark" cx="128" cy="316" r="15"/>
-            <text class="fq-init" x="128" y="321.25">G</text>
-            <text class="fq-name" x="186" y="324">Instinct</text>
-            <circle class="fq-mark" cx="186" cy="348" r="15"/>
-            <use href="#lg-instinct" x="177" y="339" width="18.0" height="18.0"/>
+            <g class="fq-m fq-m-archie" transform="translate(308,61)">
+              <circle class="fq-halo" cx="0" cy="0" r="23"/>
+              <circle class="fq-halo-in" cx="0" cy="0" r="20"/>
+              <text class="fq-name-us" x="0" y="-30">Archie</text>
+              <circle class="fq-mark-us" cx="0" cy="0" r="17"/>
+              <use href="#lg-archie" x="-11.9" y="-11.9" width="23.8" height="23.8"/>
+            </g>
+            <g class="fq-m fq-m-vellum" transform="translate(268,154.16)">
+              <text class="fq-name" x="0" y="-21">Vellum</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <use href="#lg-vellum" x="-6.3" y="-6.3" width="12.6" height="12.6"/>
+            </g>
+            <g class="fq-m fq-m-hermes" transform="translate(240,137.16)">
+              <text class="fq-name" x="0" y="27">Hermes</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <use href="#lg-hermes" x="-11.4" y="-11.4" width="22.8" height="22.8"/>
+            </g>
+            <g class="fq-m fq-m-openclaw" transform="translate(244,383)">
+              <text class="fq-name" x="0" y="-21">OpenClaw</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <use href="#lg-openclaw" x="-6.9" y="-6.9" width="13.8" height="13.8"/>
+            </g>
+            <g class="fq-m fq-m-cowork" transform="translate(130,149.16)">
+              <text class="fq-name" x="0" y="-21">Claude Cowork</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <text class="fq-init" x="0" y="4.9">C</text>
+            </g>
+            <g class="fq-m fq-m-muse" transform="translate(161,147.16)">
+              <text class="fq-name" x="0" y="27">Meta Muse</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <text class="fq-init" x="0" y="4.9">M</text>
+            </g>
+            <g class="fq-m fq-m-grok" transform="translate(114,401)">
+              <text class="fq-name" x="0" y="27">Grok Bot</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <text class="fq-init" x="0" y="4.9">G</text>
+            </g>
+            <g class="fq-m fq-m-instinct" transform="translate(193,395)">
+              <text class="fq-name" x="0" y="-21">Instinct</text>
+              <circle class="fq-mark" cx="0" cy="0" r="12"/>
+              <text class="fq-init" x="0" y="4.9">I</text>
+            </g>
 
-            <text class="fq-off-h" x="88" y="476">Their pages don&rsquo;t say where the work runs:</text>
-            <circle class="fq-mark" cx="96" cy="494" r="8"/>
-            <use href="#lg-symphony" x="90.6" y="488.6" width="10.8" height="10.8"/>
-            <text class="fq-off" x="111" y="498">Wix Symphony</text>
-            <circle class="fq-mark" cx="96" cy="516" r="8"/>
-            <text class="fq-off-init" x="96" y="519.15">N</text>
-            <text class="fq-off" x="111" y="520">Norton Family Assistant</text>
-            <path class="fq-flow" d="M206 528 V546"/>
-            <rect class="fq-band" x="88" y="554" width="236" height="46" rx="10"/>
-            <text class="fq-band-t" x="206" y="574">All ten send your words to</text>
-            <text class="fq-band-t" x="206" y="589">an AI company&rsquo;s computers.</text>
+            <text class="fq-off-h" x="88" y="500">Their pages don&rsquo;t say where the work runs:</text>
+            <circle class="fq-mark" cx="96" cy="518" r="8"/>
+            <use href="#lg-symphony" x="90.6" y="512.6" width="10.8" height="10.8"/>
+            <text class="fq-off" x="111" y="522">Wix Symphony</text>
+            <circle class="fq-mark" cx="96" cy="540" r="8"/>
+            <text class="fq-off-init" x="96" y="543.15">N</text>
+            <text class="fq-off" x="111" y="544">Norton Family Assistant</text>
+            <path class="fq-flow" d="M211 552 V570"/>
+            <rect class="fq-band" x="88" y="578" width="246" height="46" rx="10"/>
+            <text class="fq-band-t" x="211" y="598">All ten send your words to</text>
+            <text class="fq-band-t" x="211" y="613">an AI company&rsquo;s computers.</text>
           </svg>
 
           <figcaption>For Archie, asks first means calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final. All ten send your words to an AI company&rsquo;s computers.</figcaption>
@@ -507,11 +621,11 @@
         <div class="calm-list calm-list--ruled fade-up delay-1">
           <div class="calm-list-item">
             <span class="calm-list-label">The work happens on your computer, on an AI account you own</span>
-            <p>Your files, your conversations and your sign-ins stay on a computer you already have, and your words go straight to the AI company you picked, from a choice of 7, on your own account. Six of the other nine work on a computer their company runs. The three that run on yours are named below.</p>
+            <p>Your files, your conversations and your sign-ins stay on a computer you already have, and your words go straight to the AI company you picked, from a choice of 7, on your own account. Four of the other nine work on a computer their company runs, and two don&rsquo;t say. The three that run on yours are named below.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">The asking has no off switch</span>
-            <p>Calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final. On Archie none of that is a setting. Every other agent on the board that asks can be told to stop asking, and two of them act on their own unless you change a setting<a class="src-cite" href="#src-5"><span class="sr-only">Source </span>5</a>.</p>
+            <p>Calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final. On Archie none of that is a setting. Every other agent on the board that asks can be told to stop asking, and three of them act on their own by default<a class="src-cite" href="#src-5"><span class="sr-only">Source </span>5</a>.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">The AI is billed at cost, with a cap you set</span>
@@ -524,7 +638,7 @@
         </div>
 
         <h3 class="fade-up delay-1">Where the other nine beat Archie</h3>
-        <p class="fade-up delay-1">Hermes, OpenClaw and Vellum run on your own computer, cost nothing to keep and are open source, and if free and open is how you are choosing, they win it. All three let you pick the AI company, as Archie does. OpenClaw can be set to ask before it acts, and Hermes can be set not to; on Archie the asking is built in and has no setting. Vellum makes almost the same custody claim we do, in almost the same words, and reaches a phone, a browser and a terminal besides. Muse and Symphony each have a free plan that renews every month, and ours does not.</p>
+        <p class="fade-up delay-1">Hermes, OpenClaw and Vellum run on your own computer, cost nothing to keep and are open source, and if free and open is how you are choosing, they win it. All three let you pick the AI company, as Archie does. OpenClaw gives you the most control of the ten: five permission modes, one of which asks before every command, allow lists per command, and code you can read and change. Vellum has a Strict mode that asks before everything, and Hermes can be set to ask more or less. On Archie the asking is built in and has no setting, which is the trade the chart draws: less to set up, and less you can change. Vellum makes almost the same custody claim we do, in almost the same words, and reaches a phone, a browser and a terminal besides. Muse and Symphony each have a free plan that renews every month, and ours does not.</p>
         <h3 class="fade-up delay-1">What a drawing leaves out</h3>
         <p class="fade-up delay-1">No drawing shows the distance between installing something and having it do your actual job: the accounts wired up, the rules that match how you work, and somebody to ask when it breaks. That gap is what the six comparisons below are about, and it is the honest place to argue with an agent you could run yourself for nothing.</p>
 
@@ -534,7 +648,7 @@
             <div class="calm-list calm-list--ruled">
               <div class="calm-list-item" id="src-1">
                 <span class="calm-list-label"><span class="src-n">1</span>Archie: custody and what it asks</span>
-                <p>Our own <a href="../trust/">Trust page</a>, claim by claim, with the code behind each one.</p>
+                <p>Our own <a href="../trust/">Trust page</a>, claim by claim, with the code behind each one. Archie is a download from our <a href="../archie/install/">install page</a>, which is the app row.</p>
               </div>
               <div class="calm-list-item" id="src-2">
                 <span class="calm-list-label"><span class="src-n">2</span>Archie: the price</span>
@@ -542,7 +656,7 @@
               </div>
               <div class="calm-list-item" id="src-3">
                 <span class="calm-list-label"><span class="src-n">3</span>Vellum: runs locally by default, and asks until you mark an action trusted</span>
-                <p>Read from <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a> on September 16, 2026. &ldquo;By default, your assistant runs locally. Your conversation history, memory, and credentials stay on your machine and are never used to train models.&rdquo; And: &ldquo;High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted.&rdquo; Its FAQ says &ldquo;you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time.&rdquo; The page also says Vellum is open source and is &ldquo;native to Mac and accessible everywhere: iOS, Android, web app, voice, email, Telegram, Slack, and terminal.&rdquo;</p>
+                <p>Read from <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a> on September 16, 2026. &ldquo;By default, your assistant runs locally. Your conversation history, memory, and credentials stay on your machine and are never used to train models.&rdquo; And: &ldquo;High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted.&rdquo; Its download page, read September 18, offers &ldquo;Vellum for Mac: Native Mac app with computer use&rdquo; and &ldquo;Vellum for Windows: Desktop app for Windows PCs&rdquo;, which is the app row. Its permissions docs give four modes, from Strict, &ldquo;Everything: every action requires explicit approval&rdquo;, to Full access, &ldquo;your assistant never asks for permission&rdquo;. Its FAQ says &ldquo;you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time.&rdquo; The page also says Vellum is open source and is &ldquo;native to Mac and accessible everywhere: iOS, Android, web app, voice, email, Telegram, Slack, and terminal.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-4">
                 <span class="calm-list-label"><span class="src-n">4</span>Vellum: free to start, then $30, $100 or $200 a month</span>
@@ -550,15 +664,15 @@
               </div>
               <div class="calm-list-item" id="src-5">
                 <span class="calm-list-label"><span class="src-n">5</span>OpenClaw: on your machine, free, and acting on its own by default</span>
-                <p>Read from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a> on September 16, 2026. &ldquo;Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud.&rdquo; And: &ldquo;No subscription. No hosted tier. No token.&rdquo; OpenClaw &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; and is MIT licensed. It reaches &ldquo;WhatsApp, Telegram, Discord, Slack, Signal, iMessage, or any of its 29 channels.&rdquo; Its docs, read the same day, place it: on <a href="https://docs.openclaw.ai/gateway/security/tool-permissions" rel="nofollow noopener" target="_blank">tool and agent permissions</a>, &ldquo;Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval&rdquo;, and on <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a>, &ldquo;Commands run only when policy + allowlist + (optional) user approval all agree.&rdquo; So by default it acts on its own, and you can make it ask.</p>
+                <p>Read from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a> on September 16, 2026. &ldquo;Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud.&rdquo; And: &ldquo;No subscription. No hosted tier. No token.&rdquo; OpenClaw &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; and is MIT licensed. It reaches &ldquo;WhatsApp, Telegram, Discord, Slack, Signal, iMessage, or any of its 29 channels.&rdquo; Its docs, read the same day, place it: on <a href="https://docs.openclaw.ai/gateway/security/tool-permissions" rel="nofollow noopener" target="_blank">tool and agent permissions</a>, &ldquo;Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval&rdquo;, and on <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a>, &ldquo;Commands run only when policy + allowlist + (optional) user approval all agree.&rdquo; So by default it acts on its own, and you can make it ask. Read again September 18: its docs give five exec modes, &ldquo;deny&rdquo;, &ldquo;allowlist&rdquo;, &ldquo;ask&rdquo;, &ldquo;auto&rdquo; and &ldquo;full&rdquo;, an &ldquo;ask: always&rdquo; that &ldquo;keeps prompting&rdquo;, and per-command allow lists, which is the most control on this board. Its getting-started is a shell command, &ldquo;Try it in one command&rdquo;, and changing its permissions is another, <code>openclaw config set tools.exec.mode</code>, which is the terminal row; openclaw.ai also offers &ldquo;Desktop Apps: Full apps that install everything for you&rdquo;, and both are true.</p>
               </div>
               <div class="calm-list-item" id="src-6">
                 <span class="calm-list-label"><span class="src-n">6</span>Hermes: desktop or cloud, free and MIT, and asking by default</span>
-                <p>Read from <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> on September 16, 2026, the Nous Research page for it. It offers a desktop app for macOS 12+, Windows 10/11 and Linux, and &ldquo;Deploy to the cloud&rdquo; through Nous Portal. It is &ldquo;free and open source under the MIT license&rdquo;, and Nous Portal plans run from $0 to $200 a month for credits and hosted services. It reaches &ldquo;Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI&rdquo;. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>, read the same day, do: &ldquo;Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it&rdquo;, with three modes, &ldquo;smart | manual | off&rdquo;. Its README says &ldquo;Use any model you want&rdquo;, naming Nous Portal, OpenRouter, OpenAI and your own endpoint.</p>
+                <p>Read from <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> on September 16, 2026, the Nous Research page for it. It offers a desktop app for macOS 12+, Windows 10/11 and Linux, and &ldquo;Deploy to the cloud&rdquo; through Nous Portal. It is &ldquo;free and open source under the MIT license&rdquo;, and Nous Portal plans run from $0 to $200 a month for credits and hosted services. It reaches &ldquo;Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI&rdquo;. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>, read the same day, do: &ldquo;Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it&rdquo;, with three modes, &ldquo;smart | manual | off&rdquo;. Its README says &ldquo;Use any model you want&rdquo;, naming Nous Portal, OpenRouter, OpenAI and your own endpoint. Its site leads with &ldquo;Download desktop app&rdquo;, then &ldquo;Deploy to the cloud&rdquo;, then &ldquo;Install via terminal&rdquo;, and its FAQ says &ldquo;Download Hermes Desktop for macOS or Windows, or use the terminal installation command above&rdquo;, which is the app row; Linux is terminal only.</p>
               </div>
               <div class="calm-list-item" id="src-7">
                 <span class="calm-list-label"><span class="src-n">7</span>Claude Cowork: Anthropic&rsquo;s servers, and a mode that does not ask</span>
-                <p>Read from <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank">Anthropic&rsquo;s own Cowork guide</a> on August 20, 2026. Cowork&rsquo;s work &ldquo;runs on Anthropic&rsquo;s servers, in an isolated environment, and your sessions and files are saved to your Claude account&rdquo;. It has three permission modes; in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;. Re-read September 16, 2026: the mode selector &ldquo;offers Auto and Manual (default)&rdquo;, and in Manual, &ldquo;formerly &lsquo;Ask before acting&rsquo;&rdquo;, &ldquo;Claude pauses and asks for approval for actions.&rdquo;</p>
+                <p>Read from <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank">Anthropic&rsquo;s own Cowork guide</a> on August 20, 2026. &ldquo;Open Claude on the web at claude.ai, in the Claude Desktop app, or in the Claude mobile app&rdquo;, choose Cowork, and &ldquo;describe the task you want Claude to complete&rdquo;, which is the sign-in row. Cowork&rsquo;s work &ldquo;runs on Anthropic&rsquo;s servers, in an isolated environment, and your sessions and files are saved to your Claude account&rdquo;. It has three permission modes; in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;. Re-read September 16, 2026: the mode selector &ldquo;offers Auto and Manual (default)&rdquo;, and in Manual, &ldquo;formerly &lsquo;Ask before acting&rsquo;&rdquo;, &ldquo;Claude pauses and asks for approval for actions.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-8">
                 <span class="calm-list-label"><span class="src-n">8</span>Claude Cowork: included from Pro up, $20 a month</span>
@@ -566,7 +680,7 @@
               </div>
               <div class="calm-list-item" id="src-9">
                 <span class="calm-list-label"><span class="src-n">9</span>Grok Bot: a persistent cloud VM</span>
-                <p>Read from <a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview on August 20, 2026. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo; and signs in to your tools there; it comes back &ldquo;when something needs your approval&rdquo;. Re-read September 16, 2026: &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;, and &ldquo;Bots share a computer of their own in the cloud&rdquo;.</p>
+                <p>Read from <a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview on August 20, 2026. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo; and signs in to your tools there; it comes back &ldquo;when something needs your approval&rdquo;. Re-read September 16, 2026: &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;, and &ldquo;Bots share a computer of their own in the cloud&rdquo;. The same page says &ldquo;Download the app, create your first teammate, and start handing off work&rdquo;, with a Download for macOS button, which is the app row.</p>
               </div>
               <div class="calm-list-item" id="src-10">
                 <span class="calm-list-label"><span class="src-n">10</span>Grok Bot: which plans carry it</span>
@@ -574,7 +688,7 @@
               </div>
               <div class="calm-list-item" id="src-11">
                 <span class="calm-list-label"><span class="src-n">11</span>Meta Muse: a dedicated cloud computer, free for most</span>
-                <p>Read from <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank">Meta&rsquo;s own announcement</a> on September 15, 2026. Muse &ldquo;runs on its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;, and is &ldquo;free for most of what people need, with subscription plans for people who want to do more&rdquo;.</p>
+                <p>Read from <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank">Meta&rsquo;s own announcement</a> on September 15, 2026. Muse &ldquo;runs on its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;, and is &ldquo;free for most of what people need, with subscription plans for people who want to do more&rdquo;. It is &ldquo;rolling out in the US on iOS, Android, and muse.ai&rdquo; and &ldquo;Anyone can use it out of the box, no technical experience required&rdquo;, which is the sign-in row. Its permissions are one of two settings: &ldquo;Always ask&rdquo;, before any action, or &ldquo;Ask for some actions&rdquo;.</p>
               </div>
               <div class="calm-list-item" id="src-12">
                 <span class="calm-list-label"><span class="src-n">12</span>Meta Muse: what it will not do without approval</span>
@@ -594,7 +708,7 @@
               </div>
               <div class="calm-list-item" id="src-16">
                 <span class="calm-list-label"><span class="src-n">16</span>Instinct: in private access, hosted, and acting on its own</span>
-                <p>Read from <a href="https://instinct.com/" rel="nofollow noopener" target="_blank">instinct.com</a> on September 16, 2026. &ldquo;Instinct is a personal assistant that understands what you&rsquo;re working on and what&rsquo;s important to you.&rdquo; It &ldquo;connects to your applications and devices - email, messaging, screen, audio, location, and more&rdquo;, and &ldquo;It&rsquo;s trained to use a phone and a computer. You can text or call it.&rdquo; It is &ldquo;currently available to a private access group as we&rsquo;re scaling up compute&rdquo;. The page gives no price. Its <a href="https://instinct.com/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>, read the same day, places it: the service is provided with &ldquo;third-party hosting&rdquo;, its features &ldquo;can perform tasks or take actions independently on your behalf, based on the permissions you grant&rdquo;, and it uses &ldquo;third-party AI model providers who help support the Services&rdquo;. Other companies have written about what Instinct does; we do not print those claims, because a competitor writing about a competitor is not a source.</p>
+                <p>Read from <a href="https://instinct.com/" rel="nofollow noopener" target="_blank">instinct.com</a> on September 16, 2026. &ldquo;Instinct is a personal assistant that understands what you&rsquo;re working on and what&rsquo;s important to you.&rdquo; It &ldquo;connects to your applications and devices - email, messaging, screen, audio, location, and more&rdquo;, and &ldquo;It&rsquo;s trained to use a phone and a computer. You can text or call it.&rdquo; It is &ldquo;currently available to a private access group as we&rsquo;re scaling up compute&rdquo;. &ldquo;Text Instinct to get started&rdquo;: nothing is installed, which is the sign-in row. The page gives no price. Its <a href="https://instinct.com/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>, read the same day, places it: the service is provided with &ldquo;third-party hosting&rdquo;, its features &ldquo;can perform tasks or take actions independently on your behalf, based on the permissions you grant&rdquo;, and it uses &ldquo;third-party AI model providers who help support the Services&rdquo;. Other companies have written about what Instinct does; we do not print those claims, because a competitor writing about a competitor is not a source.</p>
               </div>
               <div class="calm-list-item" id="src-17">
                 <span class="calm-list-label"><span class="src-n">17</span>Norton Family Assistant: asks first, and prices nothing</span>

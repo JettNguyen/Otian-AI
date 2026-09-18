@@ -82,8 +82,9 @@
                 : clamp(Math.min((wr.width - 24) / 640, (wr.height - 24) / 560), 0.4, 1.25);
     scene.style.transform = 'scale(' + SC.toFixed(3) + ')';
     /* Narrow, the line drawing is fitted to the stage's width on its own, whatever the box came
-       out at (styles.css says why); wide it is the box's. */
-    line.style.setProperty('--ls', narrow ? ((wr.width * 0.9 / 400) / SC).toFixed(3) : '1');
+       out at (styles.css says why), up to 480px of it: on a tablet 90% of the stage made three
+       points the size of saucers (Jett, 2026-09-18). Wide it is the box's. */
+    line.style.setProperty('--ls', narrow ? ((Math.min(wr.width * 0.9, 480) / 400) / SC).toFixed(3) : '1');
     /* The device is 256.4 by 516.6 at the box's own zoom; the multiplier sizes it to the column,
        air left at the ends, and never wider than the column. It filled 94% of the height for a
        day and that was "way too big" (Jett, 2026-09-18), so it takes about six sevenths. */
@@ -151,13 +152,18 @@
     if (v !== psWas) { psWas = v; phone.style.setProperty('--ps', v); }
     if (k !== pkWas) { pkWas = k; phone.style.setProperty('--pk', k); }
     if (x !== pxWas) { pxWas = x; phone.style.setProperty('--px', x + 'px'); }
-    var geo = g.left.toFixed(1) + '/' + g.bottom.toFixed(1);
+    /* Wide, the phone's name follows the phone; narrow, the drawn phone stands where the
+       stylesheet puts it, so the inline position comes off, because an inline custom property
+       outranks the stylesheet's and left the node off the right of the box (Jett, 2026-09-18:
+       no icon for the phone under 971). */
+    var geo = narrow ? 'n' : g.left.toFixed(1) + '/' + g.bottom.toFixed(1);
     if (geo !== geoWas) {
       geoWas = geo;
       if (pathWide) pathWide.setAttribute('d', 'M85 280H' + (g.left - 8).toFixed(1));
+      if (nodePh && narrow) { nodePh.style.removeProperty('--nx'); nodePh.style.removeProperty('--ny'); }
       /* The name's centre is 42 rows under the phone's bottom edge: the name is about 42 rows tall,
          so it clears the edge by about 20. At 28 its top sat on the glass (Jett, 2026-09-18). */
-      if (nodePh) { nodePh.style.setProperty('--nx', g.cx.toFixed(1) + 'px'); nodePh.style.setProperty('--ny', (g.bottom + 42).toFixed(1) + 'px'); }
+      else if (nodePh) { nodePh.style.setProperty('--nx', g.cx.toFixed(1) + 'px'); nodePh.style.setProperty('--ny', (g.bottom + 42).toFixed(1) + 'px'); }
     }
   }
 

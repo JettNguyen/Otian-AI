@@ -1291,11 +1291,47 @@ alone.
 - ⛔ **Never imply a skill you write can do something Archie could not already do.** See the
   ceiling under "Add-ons are data, not code". It is instructions plus permission.
 - ⚠️ **The form offers a subset of the services, not all of them.** `CUSTOM_SKILL_INTEGRATIONS`
-  in `src/app/skill-builder.tsx` is calendar, mail, two task lists and meeting notes. Never print
-  that list as the set a skill can reach; read it from the code, and never imply it is everything
-  the catalog's own skills may name.
+  in `src/app/skill-builder.tsx` is calendar, mail, two task lists and meeting notes, plus (since
+  2026-09-18) anything this owner connected under Something else. Never print that list as the set
+  a skill can reach; read it from the code, and never imply it is everything the catalog's own
+  skills may name. The chat builder is the wider of the two: its list is every service in the
+  catalog as well.
 - ⛔ **Never "no review" or "publish it yourself".** Writing one for your own agent is local.
   Getting one into the shelf for other people is a submission we read by hand.
+
+### ✅ An API nobody here has heard of, connected and used. SHIPPED 2026-09-18, the day a skill could first name one
+
+**Approved wording:** "If the service you want is not on our list, connect it yourself. On the
+Connections tab, press Something else, give it a name, the web address of its API, and the key that
+service gave you. Then write a skill that uses it and tell your agent which addresses to call."
+
+**Why it's true:** `connector_connect` (`src-tauri/src/commands/integrations.rs`) accepts a service
+id that is not in `KNOWN_SERVICES` and builds the connection out of the address and the key the
+person typed. The key goes into the Keychain bound to that one host, exactly like a catalog one, and
+`service_path` (`crates/archie-runtime/src/connectors.rs`) refuses any URL that would land somewhere
+else. A skill reaches a connection only by naming its service id (`connectors_for_target` in
+`crates/archie-runtime/src/gateway/turn.rs`), and since 2026-09-18 both places a person writes a
+skill can name these ids: the chat builder's own list, its validator and the check on the tool the
+body calls (`hand_added_services` in `gateway/skill_builder.rs`), and the boxes on the Skills tab
+form (`src/app/skill-builder.tsx`).
+
+**Boundaries:**
+- ⛔ **Never "works with any service".** It works with a service that answers over https and takes
+  its key as a Bearer token or in a header the person names. `host_of` in `crates/archie-net/src/http.rs`
+  refuses anything that is not https. A service that will not issue a key cannot be connected here
+  at all, and no service signs in through the browser yet.
+- ⛔ **Never imply Archie knows the API.** It knows the address and the key and nothing else. The
+  person writing the skill supplies the paths, which is what both builders now say on screen. Never
+  sell this as "it figures out the API".
+- ⚠️ **Every write asks first, and that is not a setting.** `read_paths` and `receipt_paths` are
+  empty for a service nobody has tested, so reading runs and anything that changes something is put
+  in front of the person (`call_is_read`). Say it as the protection it is, never as a limit that can
+  be turned off.
+- ⛔ **Never put one in the works-with band, or in any count of what Archie works with.** That
+  roster is what we have tested. A service somebody connected themselves is theirs, and we make no
+  claim at all about it working.
+- ⛔ **Never say it existed before 2026-09-18.** The key could be connected from 2026-08, and no
+  skill could name it, so it answered nothing. The claim is the pair, not the connect screen.
 
 ### ✅ What you can connect, and where each one's traffic goes
 
@@ -1320,7 +1356,8 @@ and the request never leaves your network."
 - Todoist, Fireflies, GoHighLevel: a pasted key each, `BuiltinIntegration` in
   `crates/archie-domain/src/builtins.rs` and `crates/archie-net/src/ghl.rs`.
 - Every service connected with a key: `KNOWN_SERVICES` in `crates/archie-domain/src/connectors.rs`,
-  twenty-one of them. A key is bound to one host (`ConnectorEntry`) and the runtime attaches it,
+  twenty-four rows on 2026-09-18: twenty-three named services and one for any other MCP server.
+  Count the file before printing a number; this one has been stale before. A key is bound to one host (`ConnectorEntry`) and the runtime attaches it,
   never the model (`archie_net::http::send` drops runtime-owned headers).
 - Lights on the user's own wifi: `crates/archie-domain/src/local_devices.rs` refuses any roster
   address that is not private, `crates/archie-net/src/local/{hue,wiz,lifx}.rs` speak only to those

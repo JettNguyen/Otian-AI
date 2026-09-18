@@ -16723,6 +16723,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .mb-node .day-ico { width: 62px; height: 62px; padding: 11px; }
   .mb-node b { font-size: var(--fs-sm); }
   .mb-node i { font-size: var(--fs-2xs); max-width: 120px; }
+  /* With the points above the line the drawing's weight sits high in its row, nearer the rail
+     than the caption. Down by 15% of the box (scaled with the drawing) it sits between them with
+     the same air on each side (Jett, 2026-09-18). */
+  .mb-line { transform: translateY(calc(84px * var(--ls, 1))) scale(var(--ls, 1)); }
   .mb-node--pc { --nx: 66px; }
   .mb-node--box { --nx: 200px; }
   .mb-node--ph { --nx: 334px; --ny: 196px; }

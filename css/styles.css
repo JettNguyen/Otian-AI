@@ -16554,19 +16554,36 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .mb-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1800px; perspective-origin: 50% 50%; }
 /* The design box. js/mobile.js scales it to the column (SC), so it is never sized by CSS to fit. */
 .mb-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
-/* The phone: the stage drawing at .636 of its 412 by 822 in the box, which is the size the sealed
-   line is drawn against, and js/mobile.js scales it up from there (--ps) to fill the column in the
-   three screen acts, because a phone drawn at a third of the room it has is a small phone (Jett,
-   2026-09-18). It stands turned a few degrees toward the captions (--pr) and flat for the line.
-   The slab behind it is the phone's thickness: 10px back, so the turn shows a side, and the
-   shadow falls off the back rather than off the glass. Wide it stands right of the box's centre
-   for the line's act, leaving the left to the line; narrow, on the centre line. */
-.mb-phone { position: absolute; left: 50%; top: 50%; width: 262px; height: 523px; margin: -262px 0 0 -131px; transform-style: preserve-3d; transform: translate3d(var(--px, 0px), 0, 0) rotateY(var(--pr, 0deg)) scale(var(--ps, 1)); opacity: var(--po, 1); }
-.mb-phone > svg { position: relative; display: block; width: 100%; height: 100%; }
-.mb-phone::before { content: ""; position: absolute; inset: 3px; border-radius: 34px; background: linear-gradient(180deg, #34322F, #141312); transform: translateZ(-10px); box-shadow: var(--shadow-lg); }
-/* The ground under it: a soft contact shadow a little behind the back face, so the phone stands
-   on something rather than floating in a column. */
-.mb-phone::after { content: ""; position: absolute; left: 8%; right: 8%; bottom: -14px; height: 26px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .3), transparent); transform: translateZ(-12px); }
+/* THE PHONE IS THE HOMEPAGE'S DEVICE WITH A DIFFERENT SCREEN IN IT (Jett, 2026-09-18: "the phone
+   needs to be 3d like on the homepage"). The rim layers, the bezel, the chamfer, the island and the
+   light that moves with the angle are section 49's .dp-* rules, untouched; the screen inside is the
+   generated drawing instead of the homepage's conversation. Two things are this page's own.
+
+   IT IS DRAWN AT THE SIZE IT IS SHOWN, AND THAT SIZE IS THE COLUMN'S. Section 49's phone is zoomed
+   to .63 because that is near 1:1 across its poses. Here the phone fills its column for three acts
+   of four, and how big that is depends on the window, so js/mobile.js measures the column and
+   hands the zoom a multiplier (--ps): the device is laid out at the size it is seen, and nothing
+   is being scaled up off a small raster, which is the shimmer section 49 describes. The rim layers
+   take the same multiplier on their depth and their inset, so the phone's thickness grows with it
+   rather than thinning into a card. For the sealed line it comes back to the box's own size, which
+   is the size the line is drawn against, by a transform (--pk, 1 over the multiplier), and that is
+   the one scale in the story: a still one, on a phone that is stepping back to be a station.
+
+   IT STANDS TURNED TOWARD THE CAPTIONS AND NEVER MOVES. A few degrees of yaw (--pr) through the
+   screen acts, flat for the line, and the bezel's highlights are set from that angle once per act
+   (js/mobile.js, the same formulas as the homepage's). No camera, no pool of light: those are the
+   homepage's, and the first build of this page had them (Jett: it looked like the homepage). */
+.mb-phone { position: absolute; left: 50%; top: 50%; width: calc(256.41px * var(--ps, 1)); height: calc(516.6px * var(--ps, 1)); --phone-mask: none; --shadow-app: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13); transform-style: preserve-3d; transform: translate(-50%, -50%) translate3d(var(--px, 0px), 0, 0) rotateY(var(--pr, 0deg)) scale(var(--pk, 1)); opacity: var(--po, 1); }
+/* 820 by 407 around a screen of 806, which is the drawing's 800 rows at the screen's 393 columns,
+   and every narrow rule section 49 puts on the homepage's phone (the ends fading out, the corners
+   squared, the island gone) is put back here, because this phone is the whole of its scene and is
+   shown whole. Restated with two class names so they outrank the narrow block's one. */
+.mb-phone .dp-device { zoom: calc(.63 * var(--ps, 1)); height: 820px; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel)); -webkit-mask-image: none; mask-image: none; }
+@supports not (zoom: 1) { .mb-phone .dp-device { transform: scale(calc(.63 * var(--ps, 1))); transform-origin: 0 0; } }
+.mb-phone .dp-device::before, .mb-phone .dp-device::after { display: block; }
+.mb-phone .dp-ph { height: 806px; padding: 0; border-radius: 54px; font-family: inherit; }
+.mb-phone .dp-ph > svg { display: block; width: 100%; height: 100%; }
+.mb-phone .dp-edge { inset: calc(var(--i, 0px) * var(--ps, 1)); border-radius: calc((38px - var(--i, 0px)) * var(--ps, 1)); transform: translateZ(calc(var(--z) * var(--ps, 1))); -webkit-mask-image: none; mask-image: none; }
 /* One screen up at a time. Off, a screen is not painted, so its beats cannot show through the one
    that is; a beat that has not landed is out of sight the same way. */
 .mk-stage .mk-scr { opacity: 0; }
@@ -16590,15 +16607,16 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .mb-line { position: absolute; inset: 0; opacity: var(--fo, 0); pointer-events: none; }
 .mb-line-path { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .mb-line-path path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 5 7; }
-.mb-line-path .narrow { display: none; }
+.mb-line-path--narrow { display: none; }
 .mb-node { position: absolute; left: var(--nx); top: var(--ny); width: 150px; transform: translate(-50%, -50%); text-align: center; }
 .mb-node .day-ico { background: var(--bg-primary); border-radius: 50%; padding: 8px; width: 54px; height: 54px; margin-bottom: 6px; box-shadow: 0 0 0 1px var(--border); }
 .mb-node b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
 .mb-node i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 2px; max-width: 130px; margin-left: auto; margin-right: auto; }
 .mb-node--pc { --nx: 70px; --ny: 280px; }
 .mb-node--box { --nx: 235px; --ny: 280px; }
-/* Wide, the phone is the third point and this node is only its name, under the phone. */
-.mb-node--ph { --nx: 540px; --ny: 545px; }
+/* Wide, the phone is the third point and this node is only its name, under the phone: the phone's
+   bottom edge is at row 541 and the name stands clear of it (Jett, 2026-09-18: lower). */
+.mb-node--ph { --nx: 540px; --ny: 590px; }
 .mb-node--ph .day-ico { display: none; }
 /* Ours is drawn in the muted ink and lights only while it is holding the message: it is on the
    line and it is not a ghost, which is the whole difference from the homepage's floor. */
@@ -16658,12 +16676,16 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .mb-scene { width: 400px; }
   .mb-story.is-live .mb-caps { grid-column: 1; grid-row: 2; display: grid; height: auto; padding: 26px 4px 12px; }
   .mb-rail { left: 50%; transform: translateX(-50%); top: 6px; gap: 14px; padding-bottom: 6px; font-size: var(--fs-3xs); }
-  .mb-stores { justify-content: center; gap: 8px; }
-  .mb-store { min-width: 0; padding: 8px 12px 8px 10px; }
+  /* The first screen was cramped (Jett, 2026-09-18): two tiles side by side on a phone's width
+     squeezed each to its pill, and the title a rung too big above them. Stacked, each tile is a
+     full row, and the title comes down a rung. */
+  .mb-story .day-cap[data-act="0"] h1 { font-size: var(--fs-3xl); }
+  .mb-stores { flex-direction: column; align-items: center; gap: 6px; margin-top: 14px; }
+  .mb-store { min-width: 0; width: min(100%, 340px); padding: 8px 12px 8px 10px; }
   .mb-clear { max-width: none; }
   .mb-clear li { font-size: var(--fs-2xs); }
-  .mb-line-path .wide { display: none; }
-  .mb-line-path .narrow { display: inline; }
+  .mb-line-path--wide { display: none; }
+  .mb-line-path--narrow { display: block; }
   .mb-node { width: 120px; }
   .mb-node--box { --nx: 200px; }
   .mb-node--ph { --nx: 330px; --ny: 280px; }

@@ -62,9 +62,26 @@
     SC = narrow ? clamp(Math.min(wr.width / 400, wr.height / 560), 0.3, 1.45)
                 : clamp(Math.min((wr.width - 24) / 760, (wr.height - 24) / 560), 0.4, 1.45);
     scene.style.transform = 'scale(' + SC.toFixed(3) + ')';
-    var byH = (wr.height * (narrow ? 0.98 : 0.94)) / (523 * SC);
-    var byW = (wr.width * (narrow ? 0.86 : 0.88)) / (262 * SC);
+    /* The device is 256.4 by 516.6 at the box's own zoom; the multiplier fills the column with it,
+       a little air left at the ends, and never wider than the column. */
+    var byH = (wr.height * (narrow ? 0.92 : 0.94)) / (516.6 * SC);
+    var byW = (wr.width * (narrow ? 0.86 : 0.88)) / (256.4 * SC);
     PS = clamp(Math.min(byH, byW), 1, 2.6);
+  }
+
+  /* The bezel's four highlights, the angle of its sheen and the sliver of rim the turn exposes
+     are read off the phone's yaw, with the homepage's formulas (js/home.js says how they were
+     set), once per act rather than per frame, because the phone here holds its angle. */
+  function light(yaw) {
+    var sy = Math.sin(yaw * Math.PI / 180);
+    var dev = $('.dp-device', phone);
+    if (!dev) return;
+    dev.style.setProperty('--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
+    dev.style.setProperty('--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
+    dev.style.setProperty('--edge-t', '0.24'); dev.style.setProperty('--edge-b', '0.13');
+    phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
+    phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
+    phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.43, 0, 0.22).toFixed(3));
   }
 
   /* The lap, in box coordinates: [time, x] along the line's row. Phone to mailbox to computer,
@@ -98,11 +115,15 @@
     phone.style.setProperty('--px', (narrow ? 0 : ACTS[i].px) + 'px');
     phone.style.setProperty('--pr', ACTS[i].pr + 'deg');
     phone.style.setProperty('--po', String(narrow ? ACTS[i].npo : ACTS[i].po));
+    light(ACTS[i].pr);
   }
-  var psWas = '';
+  /* The zoom multiplier is the column's, every act; the sealed act comes back to the box's size
+     by a transform, which is what transitions. */
+  var psWas = '', pkWas = '';
   function size(i) {
-    var v = (ACTS[i].big ? PS : 1).toFixed(3);
+    var v = PS.toFixed(3), k = (ACTS[i].big ? 1 : 1 / PS).toFixed(4);
     if (v !== psWas) { psWas = v; phone.style.setProperty('--ps', v); }
+    if (k !== pkWas) { pkWas = k; phone.style.setProperty('--pk', k); }
   }
 
   var wasNarrow = null;

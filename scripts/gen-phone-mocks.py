@@ -146,6 +146,13 @@ def tw(s, size, serif=False, weight="400"):
     digit = 622 if serif else 600
     units = 0
     for ch in s:
+        # An emoji draws from the system's colour font at about an em and a quarter, and the
+        # variation selector and joiner beside one draw nothing at all.
+        if ch in ("\ufe0f", "\u200d"):
+            continue
+        if ord(ch) >= 0x2300:
+            units += 1250
+            continue
         units += digit if ch.isdigit() else table.get(ch, 560)
     w = units * float(size) / 1000.0
     return w * 1.035 if weight in ("500", "600", "700") else w * 1.01
@@ -256,7 +263,9 @@ def avatar(cx, cy, r, kind, dot=False):
 
 
 # ── the Archie wordmark ──────────────────────────────────────────────────────────────────
-def wordmark(x, y, scale=0.02444):
+def wordmark(x, y, scale=0.02867):
+    """78 wide on the homepage phone's 393 screen (.dp-topbar .wm), so 77 on this 390 one. It was
+    66 until 2026-09-18, which read as small beside the homepage's (Jett)."""
     a, b = uid("wm"), uid("wm")
     return ('<g transform="translate(%s,%s) scale(%s)"><defs>'
             '<linearGradient id="%s" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888">'
@@ -390,8 +399,8 @@ def chevron_button(cx, cy):
 # ── screen 1: the agents on your computer ────────────────────────────────────────────────
 AGENTS = [
     dict(name="Email Manager", kind="ember", running=True,
-         said="Twelve came in overnight. Two need you, and the",
-         said2="other ten are filed.",
+         said="\U0001F4E7 Twelve came in overnight. Two need you,",
+         said2="and the other ten are filed.",
          meta="40m ago · 4 skills, 2 routines"),
     dict(name="Bookkeeper", kind="teal", running=False,
          said="Four receipts filed. One from the hardware shop",
@@ -442,11 +451,14 @@ def screen_agents():
 # agent whose skills the third screen lists is the one at the top of the first screen's list.
 AGENT_NAME = AGENTS[0]["name"]
 
+# The card's rows are the app's own button labels, emoji and all, from the Archie repo's
+# texts/replies/card.rs. They were line icons until 2026-09-18, which is not how the app draws
+# them (Jett: the mockup should have emojis like it usually would).
 ACTIONS = [
-    ("Send", '<path d="M5 12.5l5 5 9-10"/>', "var(--grn)", "var(--acc)"),
-    ("Edit it", '<path d="M4 20h4l10-10-4-4L4 16z"/>', "var(--ink2)", "var(--acc)"),
-    ("Send later", '<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.6M8 3L5 5.5M16 3l3 2.5"/>', "var(--ink2)", "var(--acc)"),
-    ("Dismiss", '<path d="M6 6l12 12M18 6L6 18"/>', "var(--ink3)", "var(--ink3)"),
+    ("\u2705 Send", "var(--acc)"),
+    ("\u270f\ufe0f Edit it", "var(--acc)"),
+    ("\u23f0 Send later", "var(--acc)"),
+    ("\u2715 Dismiss", "var(--ink3)"),
 ]
 
 
@@ -455,16 +467,18 @@ ACTIONS = [
 CHAT = [
     (True,  ["Anything from the accountant?"]),
     (False, ["Nothing since Friday. I will wake you", "for one, as you asked."]),
-    (False, ["Twelve came in overnight. Two need you,", "and the other ten are filed."]),
+    (False, ["\U0001F4E7 Twelve came in overnight. Two need you,", "and the other ten are filed."]),
     (True,  ["Tell the landlord Tuesday morning works."]),
 ]
-DRAFT_LEAD = "Here is what I would send:"
+DRAFT_LEAD = "\u270d\ufe0f Here is what I would send:"
 DRAFT_QUOTE = ["Tuesday morning works for us.",
                "Any time before noon is fine, and",
                "somebody will be in."]
 
 BUB_FS = 13.5     # the words
-BUB_PADX = 14.0   # side padding inside a bubble
+BUB_PADX = 14.0   # side padding inside a bubble, which is what sizes it
+BUB_INK = 12.0    # where the words start, two in from that: at 14 they read as sitting too far
+                  # right in the drawn bubble (Jett, 2026-09-18), and the width keeps its 14
 BUB_PADY = 10.0   # top and bottom padding inside a bubble
 BUB_LH = 17.0     # one line of a bubble
 BUB_BASE = 12.6   # first baseline down from the padding, to sit the block on the middle
@@ -489,8 +503,9 @@ def screen_chat():
         if not mine:
             m.append(avatar(30, y + h - 15, 15, "ember"))
         for i, ln in enumerate(lines):
-            m.append(text(x + BUB_PADX, y + BUB_PADY + BUB_LH * i + BUB_BASE, ln,
+            m.append(text(x + BUB_INK, y + BUB_PADY + BUB_LH * i + BUB_BASE, ln,
                           BUB_FS, "var(--ink)"))
+        assert x + w <= W - 16, "a bubble runs past the screen's edge: %r" % lines[0]
         o.append("".join(m) if CHAT_AT[n] is None else beat("".join(m), CHAT_AT[n]))
         y += h + BUB_GAP
 
@@ -507,8 +522,8 @@ def screen_chat():
     h = BUB_PADY * 2 + BUB_LH + 8 + card_h
     d = [rect(AGENT_X, y, bw, h, 15, "var(--card)", "var(--bd)", 1),
          avatar(30, y + h - 15, 15, "ember"),
-         text(AGENT_X + BUB_PADX, y + BUB_PADY + BUB_BASE, DRAFT_LEAD, BUB_FS, "var(--ink)")]
-    cx0, cy0 = AGENT_X + BUB_PADX, y + BUB_PADY + BUB_LH + 8
+         text(AGENT_X + BUB_INK, y + BUB_PADY + BUB_BASE, DRAFT_LEAD, BUB_FS, "var(--ink)")]
+    cx0, cy0 = AGENT_X + BUB_INK, y + BUB_PADY + BUB_LH + 8
     d.append(rect(cx0, cy0, card_w, card_h, 7, "var(--soft)"))
     d.append(rect(cx0, cy0, bar_w, card_h, 1.5, "var(--acc)"))
     for i, ln in enumerate(DRAFT_QUOTE):
@@ -518,14 +533,11 @@ def screen_chat():
 
     rowh, cardw = 40.0, 300.0
     a = [rect(AGENT_X, y, cardw, rowh * len(ACTIONS), 15, "var(--card)", "var(--bd)", 1)]
-    for i, (label, glyph, gcol, tcol) in enumerate(ACTIONS):
+    for i, (label, tcol) in enumerate(ACTIONS):
         ry = y + rowh * i
         if i:
             a.append(line(AGENT_X, ry, AGENT_X + cardw, ry, "var(--bd)", 1))
-        lw = tw(label, 14.5, weight="600")
-        gx = AGENT_X + (cardw - (18 + 9 + lw)) / 2
-        a.append(icon(glyph, gx, ry + rowh / 2 - 9, 0.75, gcol, sw=2.4))
-        a.append(text(gx + 27, ry + rowh / 2 + 5.2, label, 14.5, tcol, "600"))
+        a.append(text(AGENT_X + cardw / 2, ry + rowh / 2 + 5.2, label, 14.5, tcol, "600", "middle"))
     y += rowh * len(ACTIONS)
     a.append(text(AGENT_X, y + 19, "8 minutes ago", 12.5, "var(--ink3)"))
     o.append(beat("".join(a), 0.66))
@@ -665,14 +677,6 @@ def phone(body, ox, oy):
     return device(body, ox, oy)
 
 
-def phone_multi(bodies, ox, oy):
-    """One device, every screen inside its clip. The stylesheet lights one .mk-scr at a time
-    and the rest are not painted, so nothing of a dark screen shows through a lit one."""
-    return device("".join('<g class="mk-scr%s" data-scr="%d">%s</g>'
-                          % (" is-on" if i == 0 else "", i, body)
-                          for i, body in enumerate(bodies)), ox, oy)
-
-
 def build():
     """The two renderings: the stage phone, then the stills."""
     _n[0] = 0
@@ -686,9 +690,16 @@ def build():
         _beat["act"] = i
         bodies.append(fn())
     _beat["act"] = None
-    stage = ('<svg class="mk mk-stage" viewBox="0 0 412 822" aria-hidden="true" focusable="false"'
-             ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit;overflow:visible">' + THEME
-             + phone_multi(bodies, 11.0, 11.0) + "</svg>")
+    # The screen alone, at the screen's own size: the device around it on the stage is the
+    # homepage phone's, in HTML (styles.css section 49, the .dp-* classes), which is what gives
+    # it a rim, a chamfer and light that moves with its angle. The stylesheet lights one
+    # .mk-scr at a time and the rest are not painted.
+    stage = ('<svg class="mk mk-stage" viewBox="0 0 %s %s" aria-hidden="true" focusable="false"'
+             ' xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">' % (f(W), f(H)) + THEME
+             + rect(0, 0, W, H, 0, "var(--bg)")
+             + "".join('<g class="mk-scr%s" data-scr="%d">%s</g>'
+                       % (" is-on" if i == 0 else "", i, body) for i, body in enumerate(bodies))
+             + "</svg>")
 
     # The stills: one drawing per screen, each named, in a row the stylesheet stacks narrow.
     items = []

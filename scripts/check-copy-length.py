@@ -152,21 +152,24 @@ BUDGETS = {
     # word for word; what is left is the fact itself.
     "archie/pricing/index.html": 3010,
     # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
-    # because it is about our own product. Its visible prose is 426 words, well under the
-    # default, and the page is carried by a figure of three real app screens rather than by
-    # copy. The overage is two things a reader does not meet as text: 300 words of comparison
-    # table, every quote in it another company's own wording, and a 394-word sources fold that
-    # is collapsed behind a summary. Cutting either means dropping a source or paraphrasing
-    # somebody else's security posture, and paraphrasing that is how a comparison becomes a
-    # misrepresentation. The prose half is what this budget still governs, and it has room to
-    # spare on purpose: this page is meant to be looked at, not read.
-    # Considered for the same 150-word drop on 2026-09-14 and left alone, with the arithmetic
-    # written down so nobody has to redo it: of 1,125 words, 295 are the comparison table and
-    # 395 the sources fold, which is 61% of the page in other companies' published wording and
-    # the citations for it. The page's own prose is about 435 words, well under the default.
-    # Taking 150 off this means dropping a source or paraphrasing somebody else's security
-    # posture, which is the sentence above, and it is still true.
-    "archie/mobile/index.html": 1150,
+    # because it is about our own product. 690 of its words a reader never meets as prose:
+    # a 295-word comparison table, every quote in it another company's own wording, and a
+    # 395-word sources fold collapsed behind a summary. Cutting either means dropping a
+    # source or paraphrasing somebody else's security posture, which is how a comparison
+    # becomes a misrepresentation. The prose is what this budget governs.
+    # Rebuilt 2026-09-18 as a marketing page in the homepage's shape, one stage and four
+    # acts, and the arithmetic is written down because a visual-first pass is supposed to
+    # be a net cut and this one was not: 1,125 words before, about 1,370 after, +245. Where
+    # it went: the three explainer sections the stage replaced ran 280 words and the four
+    # captions run 330, because the app's op list and all three of TRUST.md's required
+    # clauses for the sealed claim are now on the page (the old page carried two); the
+    # three permission cards are 150 words of wording approved 2026-09-17 that exist
+    # because the App Store makes us publish them, so they are published here where a
+    # person reads them before trusting an app; the store tiles and the hero's line under
+    # them are 40. The restatements were cut before the number moved: the second-door
+    # sentence was on the page three times and is now once. Prose is about 680, still
+    # under the 900 a marketing page gets, on a page that is meant to be looked at.
+    "archie/mobile/index.html": 1400,
     # Working With Us is /guided-setup/ and /consulting/ merged on 2026-09-14, and the budget
     # is the merge's arithmetic rather than a concession. The two pages ran 1,494 words against
     # 1,800 of combined budget; merged and de-duplicated they run 1,191. This is a net cut of

@@ -9572,6 +9572,23 @@ html[data-theme="dark"] .booking-container iframe {
     font-size: var(--fs-lg);
     padding-top: 14px;
   }
+  /* A row written with <th scope="row"> is the same heading, and until 2026-09-18 it was left
+     out of the stacking: it stayed a table cell inside a row that had become a block, so it kept
+     the wide layout's shaded box, its uppercase and its 16px padding, and sat as a box that did
+     not reach the top of its card (Jett, on archie/mobile/; the same on the five compare pages
+     that write their rows this way). It is the first cell's heading now. */
+  .cmp-table tbody th {
+    display: block;
+    width: 100%;
+    background: none;
+    border-bottom: none;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 14px 18px 8px;
+  }
 }
 
 /* ── The /app/ page, on top of the Account family above ──
@@ -16628,7 +16645,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* Narrow, the drawing is fitted to the stage's width on its own (--ls, from js/mobile.js), because
    the box it sits in is fitted to a scene row shorter than the box is tall, which shrank three
    points and a line to a third of the width they had. */
-.mb-line { position: absolute; inset: 0; opacity: var(--fo, 0); pointer-events: none; transform: scale(var(--ls, 1)); }
+/* Down 84 rows wide as well as narrow (Jett, 2026-09-18): with the two points above the line the
+   drawing's weight sat high beside the phone, and this stands the points on the phone's middle
+   with the line under them. js/mobile.js takes the same 84 off the phone's name, which is in
+   here too, so the name stays under the phone. */
+.mb-line { position: absolute; inset: 0; opacity: var(--fo, 0); pointer-events: none; transform: translateY(84px) scale(var(--ls, 1)); }
 .mb-line-path { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .mb-line-path path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 5 7; }
 .mb-line-path--narrow { display: none; }

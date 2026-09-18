@@ -168,8 +168,10 @@
       if (pathWide) pathWide.setAttribute('d', 'M85 280H' + (g.left - 8).toFixed(1));
       if (nodePh && narrow) { nodePh.style.removeProperty('--nx'); nodePh.style.removeProperty('--ny'); }
       /* The name's centre is 42 rows under the phone's bottom edge: the name is about 42 rows tall,
-         so it clears the edge by about 20. At 28 its top sat on the glass (Jett, 2026-09-18). */
-      else if (nodePh) { nodePh.style.setProperty('--nx', g.cx.toFixed(1) + 'px'); nodePh.style.setProperty('--ny', (g.bottom + 42).toFixed(1) + 'px'); }
+         so it clears the edge by about 20. At 28 its top sat on the glass (Jett, 2026-09-18). The
+         84 is the drawing's own drop (styles.css, .mb-line), which the name is inside and the
+         phone is not. */
+      else if (nodePh) { nodePh.style.setProperty('--nx', g.cx.toFixed(1) + 'px'); nodePh.style.setProperty('--ny', (g.bottom + 42 - 84).toFixed(1) + 'px'); }
     }
   }
 

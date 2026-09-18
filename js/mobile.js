@@ -51,18 +51,20 @@
   /* THE SEALED PHONE IS A FRACTION OF THE BIG ONE, NOT OF THE BOX. Sized in box units it grew with
      the box, and past about 1250px of window the box keeps growing while the big phone is tied to
      the column's height, so the two converged and the step back was gone (Jett, 2026-09-18). At
-     .78 it stands where it stood at 1250 and stays there. Its right edge sits near the box's, and
-     the line's end and the name under it follow its edge, since that edge now moves. */
-  /* AND IT NEVER COMES NEARER THE MAILBOX THAN IT STANDS AT 1100px OF WINDOW. Between 971 and 1100
-     the column is narrow, so the multiplier that fills its height is large, and .78 of that phone
-     is wider in the box than the room to the right of the mailbox: at 971 its edge crossed the
-     mailbox's icon (Jett, 2026-09-18). So the width is capped where the phone's left edge stands
-     at 1100, row 310 of the box, and the phone gives up size there rather than room. */
-  var K3 = 0.78, LEFT_MIN = 310;
+     .78 it stands where it stood at 1250 and stays there.
+
+     AND ITS LEFT EDGE STANDS STILL, at row 310 of the box, which is where it stood at 1100px of
+     window and the gap to the mailbox Jett asked for (2026-09-18, twice: at 971 the phone had
+     crossed the mailbox's icon, and at 1150 and up it had drifted away from it). Pinned by its
+     right edge it moved with its size, since a narrow column's height multiplier makes a wide
+     phone and a wide column's makes a small one. Pinned by its left it does not, and what moves
+     instead is how much of the box's right side it fills. Wider than the room to the right of
+     row 310 it gives up size rather than room. The name under it follows its bottom edge. */
+  var K3 = 0.78, LEFT = 310;
   function sealed() {
-    var w = Math.min(256.4 * PS * K3, 640 - 8 - LEFT_MIN);
-    var k = w / (256.4 * PS), h = 516.6 * PS * k, cx = 640 - 8 - w / 2;
-    return { k: k, cx: cx, left: cx - w / 2, bottom: 280 + h / 2 };
+    var w = Math.min(256.4 * PS * K3, 640 - 8 - LEFT);
+    var k = w / (256.4 * PS), h = 516.6 * PS * k;
+    return { k: k, cx: LEFT + w / 2, left: LEFT, bottom: 280 + h / 2 };
   }
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }

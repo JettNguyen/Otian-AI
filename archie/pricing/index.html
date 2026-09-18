@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260918-15" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260918-16" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
@@ -542,16 +542,22 @@
              Only the bands FACTS.md holds, at the two qualities we measured; Best is unmeasured
              and is not offered. Simplified 2026-09-12: the two tables and the nine notes that used
              to follow the picker are in the fold, so the section reads as a number, a paragraph,
-             a fold and a closing line. -->
+             a fold and a closing line. Since 2026-09-18 the three rows are also the drawing: each
+             carries its span on one shared scale to $140 a month (the FAQ's three spans, both
+             quality settings together: $1 to $5, $21 to $42, $64 to $139), so all three sizes are
+             on the page at rest and picking one lights it. The bars and the axis are aria-hidden
+             because the words are already in the row and the band. --lo and --hi are percent of
+             $140. -->
         <div class="cost-pick fade-up delay-2">
           <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-light" checked />
           <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-moderate" />
           <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-heavy" />
           <div class="cost-pick-tabs" role="group" aria-label="How hard you will work it">
-            <label class="cost-pick-tab" for="cp-light"><b>Light</b><span>calendar and a folder, about 6 messages a day</span></label>
-            <label class="cost-pick-tab" for="cp-moderate"><b>Moderate</b><span>calendar and inbox, about 25 messages and 80 emails a day</span></label>
-            <label class="cost-pick-tab" for="cp-heavy"><b>Heavy</b><span>everything connected, about 70 messages and 200 emails a day</span></label>
+            <label class="cost-pick-tab" for="cp-light"><b>Light</b><span>calendar and a folder, about 6 messages a day</span><i class="cost-pick-bar" style="--lo:0.7;--hi:3.6" aria-hidden="true"></i></label>
+            <label class="cost-pick-tab" for="cp-moderate"><b>Moderate</b><span>calendar and inbox, about 25 messages and 80 emails a day</span><i class="cost-pick-bar" style="--lo:15;--hi:30" aria-hidden="true"></i></label>
+            <label class="cost-pick-tab" for="cp-heavy"><b>Heavy</b><span>everything connected, about 70 messages and 200 emails a day</span><i class="cost-pick-bar" style="--lo:45.7;--hi:99.3" aria-hidden="true"></i></label>
           </div>
+          <p class="cost-pick-axis" aria-hidden="true"><span>$140 a month</span></p>
           <div class="cost-pick-out" aria-live="polite">
             <div class="cost-pick-band" data-pick="light">
               <p class="cost-pick-num">$1 to $2</p>
@@ -565,7 +571,7 @@
               <p class="cost-pick-num">$64 to $132</p>
               <p class="cost-pick-line">a month at Economy, or <b>$69 to $139</b> at Balanced</p>
             </div>
-            <p class="cost-pick-note">A range because two things move the bill that are not the message count: whether you send messages in sittings or spread them across the day, and the quality setting. On the moderate row the dial does not move it: that agent&rsquo;s add-ons choose Balanced for themselves. An estimate: the real bill is on your AI company&rsquo;s own dashboard.</p>
+            <p class="cost-pick-note">A range because two things move the bill that are not the message count: whether you send messages in sittings or spread them across the day, and the quality setting. An estimate: the real bill is on your AI company&rsquo;s own dashboard.</p>
           </div>
         </div>
 
@@ -828,8 +834,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260918-15"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260918-15"></script>
-  <script src="../../js/demo-player.js?v=20260918-15"></script>
+  <script src="../../js/nav.js?v=20260918-16"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260918-16"></script>
+  <script src="../../js/demo-player.js?v=20260918-16"></script>
 </body>
 </html>

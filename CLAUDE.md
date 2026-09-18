@@ -161,9 +161,13 @@ ones worth slowing down for.
 done this way, on 2026-09-15: the three-row `cmp-strip` table became one figure whose two
 lanes carry the **same three chips**, so only the container around them changes, which is
 the page's entire argument. The move that made it work was drawing what the two sides have
-in common and letting one difference do all the talking. Note the knock-on: `cmp-strip` is
-shared by all six comparison pages, so that page now deliberately differs from its five
-siblings until they get their own drawings.
+in common and letting one difference do all the talking. The five siblings got their own
+drawings on 2026-09-18, each with its own one difference, and the `cmp-strip` table and its
+CSS are gone: symphony and chat apps change the box in the middle, building it yourself keeps
+the box and changes the state of the chips, and automation tools and hiring an assistant are
+two rows of steps where the one difference is where the row stops. The same day the pricing
+picker's three rows became bars on one scale, so a control and a chart are one object: the
+sizes are on the page at rest, and the pick only lights one.
 
 ## Copy conventions
 

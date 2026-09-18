@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Get Archie on Your Phone | Otian AI</title>
-  <meta name="description" content="Where the square code from Archie on your computer lands: what the phone app is, where it stands today, and what to do with a pairing code you have just scanned." />
+  <title>Pairing Code | Archie Mobile | Otian AI</title>
+  <meta name="description" content="Where a pairing code from Archie on your computer lands when a phone camera opens it instead of the app, and what to do next." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="robots" content="noindex" />
@@ -162,67 +162,53 @@
 
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label fade-up">Archie on your phone</span>
-        <h1 class="fade-up delay-1">Get Archie on Your Phone</h1>
-        <p>This is where the square code in Archie on your computer sends you.</p>
+        <span class="section-label fade-up">Archie Mobile</span>
+        <h1 class="fade-up delay-1">You Scanned a Pairing Code</h1>
+        <p>Your camera opened this page instead of the app. Here is what to do with it.</p>
       </div>
     </section>
 
-    <section class="section" aria-label="Getting the app">
+    <section class="section" aria-label="What to do with the code you scanned">
       <div class="container">
         <div class="acct-wrap">
 
           <!--
-            Shown only when the address carries a pairing code, which the script below detects and
-            never reads out. Everything after the "#" is the key that opens this person's mailbox
-            and a ticket that can be spent once, so it is checked for its shape and then left alone:
-            nothing here writes it into the page, sends it anywhere, or stores it.
+            Two panels, and exactly one of them is the answer. The script picks which by looking at
+            the address, and it looks at the format marker and nothing else: everything after the
+            "#" is the key that opens this person's mailbox and a ticket that can be spent once, so
+            it is never written into the page, never put in a link, and never sent anywhere.
+
+            The panel for somebody who arrived here with no code is the plain one, because arriving
+            with no code means following a link or typing the address, and the honest thing to say
+            to them is where the app actually lives.
           -->
           <div id="app-paired" class="acct-card acct-hidden">
-            <h2 class="app-h2">You scanned a pairing code</h2>
+            <h2 class="app-h2">The code is still good</h2>
             <p class="acct-lead">
-              Your camera opened this page instead of the app, which is what a camera does with a
-              square code it does not recognize. The code is still good.
+              A camera opens a square code as a web address, which is how you got here. Archie
+              Mobile reads the same code itself.
             </p>
             <p class="acct-lead" style="margin-top:12px;">
-              Open Archie on this phone, press <strong>Scan</strong>, and hold the phone up to your
-              computer&rsquo;s screen again. If the code has run out by then, press
-              <strong>Set up a phone</strong> on the computer for another: it costs nothing and you
-              can do it as often as you like.
+              Open <strong>Archie Mobile</strong> on this phone, press <strong>Scan</strong>, and
+              hold the phone up to your computer&rsquo;s screen again. If the code has run out by
+              then, press <strong>Show another code</strong> on the computer: it costs nothing and
+              you can do it as often as you like.
             </p>
             <p class="acct-lead" style="margin-top:12px;">
-              If Archie is not on this phone yet, that is the part below.
+              Not got the app on this phone yet?
+              <a href="../archie/mobile/">Archie Mobile is here</a>.
             </p>
           </div>
 
-          <div class="acct-card">
-            <h2 class="app-h2">Where the app is today</h2>
+          <div id="app-plain" class="acct-card acct-hidden">
+            <h2 class="app-h2">Archie Mobile</h2>
             <p class="acct-lead">
-              The app is written and it runs. It is not in the App Store or on Google Play yet, so
-              there is nothing on this page to press: we are not able to say when either store will
-              list it, and we would rather leave this sentence plain than put up a date we would
-              have to move.
+              The app for the Archie running on your computer. This address is where its pairing
+              codes land when a camera opens one instead of the app, so there is nothing here on its
+              own.
             </p>
             <p class="acct-lead" style="margin-top:12px;">
-              Nothing is waiting on it. Your agent already reaches you on the chat app you connected
-              it to, and it already answers in the Archie window on your computer.
-              <a href="../archie/mobile/">What the app will and will not do</a> is written out in
-              full, including the part people expect and it does not do.
-            </p>
-          </div>
-
-          <div class="acct-card">
-            <h2 class="app-h2">What the code you scanned is for</h2>
-            <p class="acct-lead">
-              It carries two things: the key that opens the sealed mailbox your computer publishes
-              into, and a one-time ticket proving the phone was standing in front of your
-              computer&rsquo;s screen. Both ride after the <code>#</code> in the address, which is
-              the part of a web address a browser never sends to a server, so neither passed through
-              us on the way here. <a href="../trust/proof/">You can watch that happen</a>.
-            </p>
-            <p class="acct-lead" style="margin-top:12px;">
-              Your agent stays on the computer you installed it on. The app reaches it; it does not
-              move it, and it does not run it.
+              <a href="../archie/mobile/">What the app is, and what it will not do</a>.
             </p>
           </div>
 

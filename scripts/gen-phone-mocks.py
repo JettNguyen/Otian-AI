@@ -301,10 +301,12 @@ def status_bar(clock="7:00"):
     mid = 30.0
     o = [text(30, mid + 5.4, clock, 15, "var(--ink)", "600")]
 
-    # battery, its right edge 30 in from the screen edge, to match the clock's 30
+    # battery, its right edge 30 in from the screen edge, to match the clock's 30. Full, and so
+    # are the bars below, because a drawing is not a phone that happens to be at 65% (Jett,
+    # 2026-09-18); the homepage's phone and the kit it is ported from say the same.
     o.append(rect(332, mid - 6.2, 26, 12.4, 4.2, "none", "var(--ink)", 1.2, ' opacity=".4"'))
     o.append(rect(358.9, mid - 2.4, 1.8, 4.8, 0.9, "var(--ink)", extra=' opacity=".28"'))
-    o.append(rect(334.4, mid - 4.2, 17, 8.4, 2.2, "var(--ink)"))
+    o.append(rect(334.4, mid - 4.2, 21.2, 8.4, 2.2, "var(--ink)"))
 
     # wifi, two arcs over a dot
     o.append('<g transform="translate(308,%s)" fill="none" stroke="var(--ink)" stroke-width="1.9"'
@@ -312,11 +314,10 @@ def status_bar(clock="7:00"):
              '<path d="M3.6,8.8 Q8,4.5 12.4,8.8"/></g>' % f(mid - 8))
     o.append(circle(316, mid + 4.4, 1.7, "var(--ink)"))
 
-    # signal, four bars standing on the same baseline as the clock
+    # signal, four bars standing on the same baseline as the clock, all of them lit
     for i in range(4):
         h = 4.4 + i * 2.4
-        o.append(rect(279 + i * 5.8, mid + 5.6 - h, 3.6, h, 1.3,
-                      "var(--ink)" if i < 3 else "var(--soft2)"))
+        o.append(rect(279 + i * 5.8, mid + 5.6 - h, 3.6, h, 1.3, "var(--ink)"))
     return "".join(o)
 
 
@@ -582,10 +583,15 @@ def screen_skills():
     y = HEAD_RULE + 16
     # the way into the marketplace sits above the list, outlined rather than filled: it is
     # the only thing on this screen that leaves it
+    # The glyph and the words are one block, measured and centred in the button: placed by hand
+    # they sat 20px right of its middle (Jett, 2026-09-18).
+    label = "Browse the marketplace"
+    block = 22 + 10 + tw(label, 15, weight="600")
+    bx0 = 16 + (358 - block) / 2
     o.append(rect(16, y, 358, 48, 12, "none", "var(--acc)", 1.5))
     o.append(icon('<path d="M4 8h16l-1.2 12.5H5.2z"/><path d="M8.6 8V6.2a3.4 3.4 0 0 1 6.8 0V8"/>',
-                  110, y + 13, 0.9167, "var(--acc)", sw=1.8))
-    o.append(text(142, y + 30, "Browse the marketplace", 15, "var(--acc)", "600"))
+                  bx0, y + 13, 0.9167, "var(--acc)", sw=1.8))
+    o.append(text(bx0 + 32, y + 30, label, 15, "var(--acc)", "600"))
     y += 62
 
     # Both controls are centred on the name's line rather than hung from the top of the card,

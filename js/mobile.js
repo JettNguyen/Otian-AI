@@ -42,10 +42,10 @@
      right so the line has the left, because the phone is the line's third point; narrow it steps
      out and a drawn phone stands in for it. */
   var ACTS = [
-    { scr: 0, big: true, px: 0, pr: -7, po: 1, npo: 1 },
-    { scr: 1, big: true, px: 0, pr: -7, po: 1, npo: 1 },
-    { scr: 2, big: true, px: 0, pr: -7, po: 1, npo: 1 },
-    { scr: 1, big: false, px: 160, pr: 0, po: 1, npo: 0 }
+    { scr: 0, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 1, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 2, big: true, px: 0, pr: -20, pp: 4, po: 1, npo: 1 },
+    { scr: 1, big: false, px: 184, pr: 0, pp: 0, po: 1, npo: 0 }
   ];
 
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
@@ -60,25 +60,30 @@
     narrow = !!(narrowQ && narrowQ.matches);
     var wr = wrap.getBoundingClientRect();
     SC = narrow ? clamp(Math.min(wr.width / 400, wr.height / 560), 0.3, 1.45)
-                : clamp(Math.min((wr.width - 24) / 760, (wr.height - 24) / 560), 0.4, 1.45);
+                : clamp(Math.min((wr.width - 24) / 640, (wr.height - 24) / 560), 0.4, 1.25);
     scene.style.transform = 'scale(' + SC.toFixed(3) + ')';
-    /* The device is 256.4 by 516.6 at the box's own zoom; the multiplier fills the column with it,
-       a little air left at the ends, and never wider than the column. */
-    var byH = (wr.height * (narrow ? 0.92 : 0.94)) / (516.6 * SC);
-    var byW = (wr.width * (narrow ? 0.86 : 0.88)) / (256.4 * SC);
-    PS = clamp(Math.min(byH, byW), 1, 2.6);
+    /* Narrow, the line drawing is fitted to the stage's width on its own, whatever the box came
+       out at (styles.css says why); wide it is the box's. */
+    line.style.setProperty('--ls', narrow ? ((wr.width * 0.9 / 400) / SC).toFixed(3) : '1');
+    /* The device is 256.4 by 516.6 at the box's own zoom; the multiplier sizes it to the column,
+       air left at the ends, and never wider than the column. It filled 94% of the height for a
+       day and that was "way too big" (Jett, 2026-09-18), so it takes about six sevenths. */
+    var byH = (wr.height * (narrow ? 0.88 : 0.86)) / (516.6 * SC);
+    var byW = (wr.width * (narrow ? 0.82 : 0.8)) / (256.4 * SC);
+    PS = clamp(Math.min(byH, byW), 1, 2.2);
   }
 
   /* The bezel's four highlights, the angle of its sheen and the sliver of rim the turn exposes
      are read off the phone's yaw, with the homepage's formulas (js/home.js says how they were
      set), once per act rather than per frame, because the phone here holds its angle. */
-  function light(yaw) {
-    var sy = Math.sin(yaw * Math.PI / 180);
+  function light(yaw, pitch) {
+    var sy = Math.sin(yaw * Math.PI / 180), sp = Math.sin(pitch * Math.PI / 180);
     var dev = $('.dp-device', phone);
     if (!dev) return;
     dev.style.setProperty('--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
     dev.style.setProperty('--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
-    dev.style.setProperty('--edge-t', '0.24'); dev.style.setProperty('--edge-b', '0.13');
+    dev.style.setProperty('--edge-t', clamp(0.21 + 0.9 * sp, 0.05, 0.45).toFixed(3));
+    dev.style.setProperty('--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
     phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
     phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
     phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.43, 0, 0.22).toFixed(3));
@@ -88,12 +93,13 @@
      a hold there while the agent does the thing, and back the same way. The message is sealed
      everywhere but at the two ends, which is the claim, and dims while it is under a point or
      inside the phone. Wide the phone's edge is the line's end; narrow the drawn phone is. */
-  var ROW = 280, PC = 70;
-  function box() { return narrow ? 200 : 235; }
-  function ph() { return narrow ? 330 : 400; }
+  var ROW = 280;
+  function pc() { return narrow ? 66 : 85; }
+  function box() { return narrow ? 200 : 232; }
+  function ph() { return narrow ? 334 : 370; }
   function lap() {
-    var b = box(), p = ph();
-    return [[0, p], [0.08, p], [0.3, b], [0.38, b], [0.55, PC], [0.68, PC], [0.85, b], [0.92, b], [1, p]];
+    var b = box(), p = ph(), c = pc();
+    return [[0, p], [0.08, p], [0.3, b], [0.38, b], [0.55, c], [0.68, c], [0.85, b], [0.92, b], [1, p]];
   }
   function lapX(path, t) {
     for (var i = 1; i < path.length; i++) {
@@ -114,8 +120,9 @@
     scrs.forEach(function (s) { s.classList.toggle('is-on', +s.getAttribute('data-scr') === ACTS[i].scr); });
     phone.style.setProperty('--px', (narrow ? 0 : ACTS[i].px) + 'px');
     phone.style.setProperty('--pr', ACTS[i].pr + 'deg');
+    phone.style.setProperty('--pp', ACTS[i].pp + 'deg');
     phone.style.setProperty('--po', String(narrow ? ACTS[i].npo : ACTS[i].po));
-    light(ACTS[i].pr);
+    light(ACTS[i].pr, ACTS[i].pp);
   }
   /* The zoom multiplier is the column's, every act; the sealed act comes back to the box's size
      by a transform, which is what transitions. */
@@ -158,7 +165,7 @@
       msg.style.left = x + 'px'; msg.style.top = ROW + 'px';
       var sealed = (tp > 0.09 && tp < 0.54) || (tp > 0.69 && tp < 0.99);
       msg.classList.toggle('is-sealed', sealed);
-      var atBox = Math.abs(x - box()) < 36, atPc = Math.abs(x - PC) < 36, atPh = Math.abs(x - ph()) < 36;
+      var atBox = Math.abs(x - box()) < 36, atPc = Math.abs(x - pc()) < 36, atPh = Math.abs(x - ph()) < 36;
       msg.classList.toggle('is-under', atBox || atPc || atPh);
       if (nodeBox) nodeBox.classList.toggle('is-lit', atBox);
       if (nodePc) nodePc.classList.toggle('is-lit', atPc);

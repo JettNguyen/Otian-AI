@@ -533,6 +533,56 @@ thirds off" (it was "four fifths" until that day). The unforced dial on the same
 **Required clause, do not drop it:** say that the checkbox also takes the add-ons off the level
 they chose. A saving quoted without its trade is a claim we cannot defend.
 
+### ✅ You choose what your agent can do, and what it stops carrying (SHIPPED 2026-09-18)
+
+**Approved wording:** "Your agent's Setup tab has a section called 'What it can do'. Every ability
+in it is switched on until you turn it off. Turn one off and the agent stops offering it, and each
+message you send costs a little less. Ask it for the thing anyway and it tells you which screen
+turns it back on, rather than pretending it never could."
+
+**The two switches, in the words on the screen:**
+
+- **"Don't let this agent build new skills."** It stops offering to build a skill or a routine when
+  you describe a job none of its skills cover. The skills and routines you already have keep
+  running, and you can still write one yourself on the Build a skill tab.
+- **"Don't let this agent read the web."** It stops opening pages and searching, for this agent and
+  every skill installed later. Email, calendar, and chat keep working, and so do the services you
+  connected yourself.
+
+**Why it's true:** both are fields on the agent's own manifest
+(`AgentBundleManifest::no_skill_builder` and `::no_web_access`,
+`crates/archie-domain/src/skill.rs`), written from the checkboxes in `src/app/agent-detail.tsx` by
+`agent_no_skill_builder_set` and `agent_no_web_access_set` (`src-tauri/src/commands/mod.rs`) and
+read once at gateway start (`src-tauri/src/commands/gateway_lifecycle.rs`). The builder switch is
+read through one accessor, `GatewayConfig::skill_writer`, which three separate places consult (the
+tool list, the sentence that invites an offer, and the write itself), so there is no path by which
+an agent with the switch off can be handed the tools or save a draft. The test is
+`a_switched_off_builder_says_where_it_goes_back_on` in
+`crates/archie-runtime/src/gateway/skill_builder.rs`. The web switch is the older of the two and
+had no entry here until this one was written; `crates/archie-runtime/src/tool_policy.rs` holds the
+membership test that keeps a new web-reaching tool from slipping past it.
+
+**Why the agent names the screen:** with the builder off, the turn carries one sentence saying it
+is switched off and where it goes back on (`skill_builder::OFF_NOTE`). Without it the agent obeys
+its standing rule that a no is never the whole answer and goes hunting through the add-on store for
+a thing that is not in the store. Naming the setting is the difference between a switch and a dead
+end.
+
+**Boundaries, and one of them is a number.**
+
+- **No figure for the saving may be quoted anywhere, by anybody, yet.** What is known is read off
+  the code, not off a bench: the builder's tool descriptions are roughly 1,800 tokens carried on
+  every chat turn. Nobody has run a live agent for a month with the switch off and priced it. Until
+  `cost_bench` does, the claim is "a little less", and "a little less" is the ceiling.
+- **Never call this a safety feature in general.** One of the two switches is about safety and the
+  other is about cost, and they sit together because both are agent-wide switches read at start,
+  not because they are alike. The web switch's own claim is the one in the websites section.
+- **Never say it turns off a skill you installed.** It does not. It narrows what the agent offers
+  in conversation; the Skills tab is where an add-on is removed.
+- **Never describe what comes off a message.** The mechanism is the company's, under the rule in
+  the section immediately below. "Costs a little less" is an outcome and ships; anything about what
+  Archie sends does not.
+
 ### ✅ We work to keep the AI bill down, and we do not say how
 
 **Approved wording:** "We keep working on what a reply costs, and we do not publish how. Nobody

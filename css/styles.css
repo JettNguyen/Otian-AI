@@ -528,6 +528,19 @@ html {
   scroll-padding-top: calc(var(--nav-height) + 24px);
 }
 
+/* A LINK TO A PLACE ON THIS PAGE SCROLLS THERE (2026-09-18). Without this the browser cuts
+   straight to the target, which on a long page reads as the page having been replaced rather than
+   moved through: the reader loses where they were and, on a section that fades its contents up as
+   they arrive, meets it mid-animation. Scrolling keeps the two ends of the jump joined.
+
+   Inside the no-preference block, because this is motion the reader did not ask for and the whole
+   point of the cut is that it is instant. It reaches fragment navigation and every scrollIntoView
+   that does not name a behavior of its own; the two places here that scroll on purpose
+   (js/equipment.js, js/ask-otian.js) both pass an explicit one, so neither changes. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
 html[data-theme="dark"] {
   color-scheme: dark;
 }

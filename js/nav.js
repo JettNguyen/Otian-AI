@@ -933,3 +933,57 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+
+/* ========================================
+   An in-page link lands on the thing, even inside a fold nobody has opened
+   ======================================== */
+/* `scroll-behavior: smooth` in the stylesheet is what turns the jump into a scroll. This is the
+   other half of the same complaint: when the target sits inside a closed <details>, the browser
+   scrolls to an element of no height and nothing appears to happen, which reads as a dead link.
+   archie/mobile/'s six source citations are all like that: the numbers beside a claim point into
+   the sources fold, and every one of them did nothing until 2026-09-18.
+
+   So: open every fold above the target before the browser scrolls. On a click, which runs before
+   the default jump, and on arrival with a hash in the address, which is the shared-link case. */
+(function () {
+  'use strict';
+
+  function openFoldsTo(el) {
+    var opened = false;
+    for (var p = el; p; p = p.parentElement) {
+      if (p.tagName === 'DETAILS' && !p.open) { p.open = true; opened = true; }
+    }
+    return opened;
+  }
+
+  function targetOf(hash) {
+    if (!hash || hash.length < 2) return null;
+    var id = hash.slice(1);
+    try {
+      return document.getElementById(decodeURIComponent(id)) || document.getElementById(id);
+    } catch (e) {
+      return document.getElementById(id);
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    /* Same document only: a link to another page's section is that page's business. */
+    if (!a || !a.hash || a.pathname !== window.location.pathname || a.search !== window.location.search) return;
+    var el = targetOf(a.hash);
+    if (el) openFoldsTo(el);
+  });
+
+  function onArrival() {
+    var el = targetOf(window.location.hash);
+    /* Opening a fold moves the page under the browser's own scroll, which has already happened by
+       now, so put the target back in view afterwards. Unnamed behavior, so the stylesheet decides
+       whether that is a scroll or a cut. */
+    if (el && openFoldsTo(el) && el.scrollIntoView) el.scrollIntoView();
+  }
+
+  window.addEventListener('hashchange', onArrival);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', onArrival);
+  else onArrival();
+})();

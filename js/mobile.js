@@ -61,6 +61,9 @@
      instead is how much of the box's right side it fills. Wider than the room to the right of
      row 310 it gives up size rather than room. The name under it follows its bottom edge. */
   var K3 = 0.78, LEFT = 310;
+  /* Through the screen acts, wide, the phone stands 48 rows right of the box's centre line rather
+     than on it (Jett, 2026-09-18: "move to the right a bit"); narrow, on the line. */
+  var BIG_X = 48;
   function sealed() {
     var w = Math.min(256.4 * PS * K3, 640 - 8 - LEFT);
     var k = w / (256.4 * PS), h = 516.6 * PS * k;
@@ -148,7 +151,7 @@
   var psWas = '', pkWas = '', pxWas = '', geoWas = '';
   function size(i) {
     var g = sealed(), v = PS.toFixed(3), big = ACTS[i].big, k = (big ? 1 : g.k).toFixed(3);
-    var x = (big || narrow ? 0 : g.cx - 320).toFixed(1);
+    var x = (narrow ? 0 : big ? BIG_X : g.cx - 320).toFixed(1);
     if (v !== psWas) { psWas = v; phone.style.setProperty('--ps', v); }
     if (k !== pkWas) { pkWas = k; phone.style.setProperty('--pk', k); }
     if (x !== pxWas) { pxWas = x; phone.style.setProperty('--px', x + 'px'); }

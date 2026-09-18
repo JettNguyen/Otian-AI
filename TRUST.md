@@ -429,6 +429,48 @@ in `stripe-webhook/index.js` is an Anthropic model, because the trial spends our
 - The names are a set, not a ranking. Do not imply one is required or recommended
   without saying why, and never imply the others are degraded.
 
+### ✅ A model on your own computer, found and checked before anything binds to it (SHIPPED 2026-09-01, Archie 0.2.2)
+
+**Added 2026-09-18, and it should have existed on 2026-09-01.** This capability shipped, and
+`compare/building-it-yourself/` spent seventeen days conceding the opposite to readers: "Archie
+connects to a hosted provider, so on that one axis a local model beats every hosted setup, ours
+included." Two competitors publish local models as a feature. We shipped one and argued against
+ourselves with it. See the note under the mail entry: the failure mode is a file that records what
+we cannot do and is never re-read when we can.
+
+**Approved wording:** "Archie can run on a model on your own computer instead of an AI company's.
+It looks for Ollama, LM Studio and llama.cpp on this computer, hands what it finds a tool to see
+whether it can use one, and offers to bind it only if it can. With one bound, what you type goes to
+that model instead of to a provider."
+
+**Why it's true:** `crates/archie-net/src/local_llm.rs`. `RUNNERS` is a fixed list of three
+loopback ports rather than a scan, which is the same inversion `docs/LOCAL-DEVICES.md` applies to
+lights: what a person may point Archie at is not what Archie may point itself at. `probe()` and
+`preflight()` reach the app as `local_llm_probe` and `local_llm_preflight`
+(`src-tauri/src/lib.rs`, `src-tauri/src/commands/mod.rs`), and the connect screen calls both
+(`useLocalModel` in `src/app/connect.tsx`). Below that module there is no special case: a local
+model rides `LlmProvider::Custom` in `crates/archie-net/src/providers.rs` as an address and a model
+name, the same path as any other OpenAI-format endpoint a person supplies.
+
+**Boundaries — do not cross:**
+- ⛔ **Never "your data never leaves your device."** It is in the banned table and it stays there.
+  A bound local model changes where the **model call** goes and nothing else. The services you
+  connected are still reached when a skill uses one, the web tool still fetches pages, and the
+  licence assertion still reaches us.
+- ⚠️ **The catch ships in the same breath, and it is not a small one.** Nothing binds until the
+  model has been handed a tool and has actually called it, because a model that writes good prose
+  and never calls a tool makes an agent that sounds fine and does nothing. That is the ordinary
+  behaviour of a small model, which is what somebody trying this for the first time is likeliest
+  to have pulled. Any sentence offering this carries that sentence too.
+- ⛔ **No number, of any kind.** No minimum model, no size, no speed, no quality comparison against
+  a hosted provider. Nobody has benchmarked one for the agent lane.
+- ⚠️ **Not the default and not the trial.** It is bound inside the "Another provider" panel, which
+  is the only place it can be bound. Never draw it as the way Archie normally runs.
+- ⚠️ **Three products on the compare board publish something similar** and two of them explicitly:
+  Vellum names Ollama, OpenClaw says "Bring hosted, subscription-backed, gateway, or local models",
+  and Hermes offers "your own endpoint", which is close but is not the same sentence. This is not a
+  thing only we do, and no page may say it is.
+
 ### ✅ The other free trial runs on your own key, so nothing passes through us
 
 **Approved wording (amended 2026-08-21):** "The free credits are limited per computer, so a
@@ -1202,7 +1244,58 @@ either into a command. Tauri capabilities are deny-by-default
 (`src-tauri/gen/schemas/capabilities.json`) and expose no shell, fs, or http permission to
 the webview.
 
+**What that costs, and it must be published wherever the safety of it is claimed (added
+2026-09-18).** An add-on is instructions plus permission to use tools the app already has. Which
+tools exist is a code-declared registry (`TOOL_GRANTS` in
+`crates/archie-runtime/src/gateway/skill_builder.rs`), and which services may be named is a closed
+list (`integrations()` in `crates/archie-domain/src/addon_fields.rs`, plus the connector catalog in
+`crates/archie-domain/src/connectors.rs`). `docs/ADDON-ARCHITECTURE.md` says an unknown value
+"grants nothing, silently", and ADR-0007 gives the reason: a static registry means no dynamic code
+loading. **So adding a service, a tool, an event source or a screen is an app release, and only we
+can cut one.** Read the code for the current sets; the architecture doc warns that its own copy of
+them goes stale, and so would a copy here.
+
+⛔ **Never imply a person can extend what Archie can do.** They can recombine it, at any depth.
+✅ **Do say** that a new service or a new ability comes from us, in a release, and that the shelf
+and the skill you write yourself both draw on the same fixed set.
+
 ---
+
+### ✅ You can tell it what you wish it did, and it writes the skill (SHIPPED 2026-09-01, Archie 0.2.2)
+
+**Added 2026-09-18, three weeks late, and nothing on the site has ever said it.** This is the
+strongest answer we have to "can I make it mine", it shipped in the same release as the mail
+providers, and it went unclaimed while the compare board drew us a level below three products
+whose advantage is that you can edit their code.
+
+**Approved wording:** "Say what you wish your agent could do, in your own words. It asks a
+couple of questions, writes the skill, and shows you a card naming what it assumed. Press Keep it
+and your agent has it. If you would rather fill in the fields yourself, the Skills tab has the
+form."
+
+**Why it's true:** the chat path is `crates/archie-runtime/src/gateway/skill_builder.rs`, whose
+tools (`skill_builder_start`, `skill_draft_pending` and the rest) draft against the same caps and
+the same tool registry the catalog is validated against; the card, the buttons and the reply after
+Keep it are written in Rust, so what a person reads cannot drift from what was built.
+`docs/CUSTOM-SKILLS-FROM-CHAT.md` documents the flow, with the live runs that shaped it, built
+2026-09-01 and reworked the next day. The form is `src/app/skill-builder.tsx`, writing through
+`skill_add` (`src-tauri/src/commands/bundle_env.rs`). A skill made either way carries no
+`manifest.json`, which is how the app tells it from a catalog one, and `skill_prompt_is_customized`
+(`crates/archie-core/src/bundle/skills.rs`) is why a catalog refresh leaves a prompt you edited
+alone.
+
+**Boundaries — do not cross:**
+- ⛔ **Never "build your own add-on" unscoped.** Skills, specialists and routines can be written
+  on this computer (`skill_add`, `subagent_add`, `routine_add` in `src-tauri/src/lib.rs`). A
+  personality cannot: there is no `personality_add`, only install, remove and additional rules.
+- ⛔ **Never imply a skill you write can do something Archie could not already do.** See the
+  ceiling under "Add-ons are data, not code". It is instructions plus permission.
+- ⚠️ **The form offers a subset of the services, not all of them.** `CUSTOM_SKILL_INTEGRATIONS`
+  in `src/app/skill-builder.tsx` is calendar, mail, two task lists and meeting notes. Never print
+  that list as the set a skill can reach; read it from the code, and never imply it is everything
+  the catalog's own skills may name.
+- ⛔ **Never "no review" or "publish it yourself".** Writing one for your own agent is local.
+  Getting one into the shelf for other people is a submission we read by hand.
 
 ### ✅ What you can connect, and where each one's traffic goes
 
@@ -1493,17 +1586,20 @@ for that day. It says what it checked and what it did not."
 - ⚠️ Hours are the map's, and the map is sometimes out of date. The phone number ships in every
   reply for exactly that reason, and copy should not promise the hours are right.
 
-### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPS IN 0.2.2)
+### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPPED 2026-09-01, Archie 0.2.2)
 
 Built 2026-09-01: `crates/archie-net/src/mail/imap.rs` (IMAP over TLS on 993, SMTP with STARTTLS
 on 587) and `crates/archie-net/src/calendar/caldav.rs`, behind the same `MailProvider` and
 `CalendarProvider` traits Google and Microsoft use, so every rule already verified for Google mail
 holds here without a new code path: the send gate, the calendar confirmation, the poller's
 filters, the starter-credits refusal. Connected through `imap_connect` in
-`src-tauri/src/commands/integrations.rs`. **Not in a shipped build until Archie 0.2.2.** The copy
-describing it (the privacy policy section, the six names in the trust rows, the six marks on the
-band, the equipment questionnaire's option, two paragraphs on help/) sits in the site commit dated
-2026-09-01 and must not go live before that release.
+`src-tauri/src/commands/integrations.rs`. **Shipped in Archie 0.2.2 on 2026-09-01**, and the app is
+at 0.2.5 as of 2026-09-15; `archie/releases.json` on this site is the record of both, written by
+the release pipeline rather than by hand. *This heading said "SHIPS IN 0.2.2" until 2026-09-18, and
+the paragraph under it still told a reader the copy must not go live. It had gone live, correctly,
+seventeen days earlier.* **A release gate written into this file is a fact with an expiry date on
+it, and nothing expires it**: the same pass found two shipped capabilities with no entry here at
+all, below. When a gate is written, the release that lifts it lifts this sentence too.
 
 **Approved wording:** "You make an app password on the provider's own website and paste it once.
 Archie keeps it in your operating system's Keychain and sends it to that provider's own mail and

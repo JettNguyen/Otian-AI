@@ -255,8 +255,7 @@ def build_robots():
 
 SUMMARY = """Archie is a desktop app that runs your own AI agent on your own computer. You
 tell the agent a job in plain words, and it does that job on the schedule you set. You reach
-it from your phone, in a chat app you already use. Otian AI is the two-person company that
-makes it."""
+it from your phone. Otian AI is the two-person company that makes it."""
 
 # The block that answers the question an answer engine is usually being asked. Each pair is
 # a question somebody types and the shortest true answer, with the limitation in the same

@@ -1352,6 +1352,53 @@ and `crates/archie-wake` is the separate program that schedules them, run by lau
   the call itself needs root. Until somebody has run it through a night, copy may describe what it
   does and may not call it proven.
 
+### ✅ Reminders, and the one that stands down if the person writes back — SHIPPED (conditions 2026-09-17)
+
+Reminders themselves have been in Archie since well before this entry. It is written now because
+nothing in this file said so, which under our own rule means nobody selling could say it either.
+
+**Approved wording:** "Tell it to remind you at a time and it does, in your own words, at that
+minute. It does not need you to be in a conversation and it does not ask an AI anything to read
+your own sentence back to you. You can also make one conditional: \"remind me Thursday to chase the
+quote unless Ellen has replied\". If Ellen emails or texts in first, the reminder is dropped and
+Archie tells you it did."
+
+**Why it's true:** `crates/archie-runtime/src/reminders.rs` is the store and the clock;
+`crates/archie-runtime/src/gateway/tools_reminders.rs` is the tool the model calls; the condition is
+`UnlessHeardFrom` on a reminder, offered to every inbound email and text by
+`crates/archie-runtime/src/email/watches.rs` (`stand_down_reminders`).
+
+- **No AI call at delivery.** The text is the owner's sentence, kept and read back verbatim. A
+  reminder is one row in a small file and one task watching the clock, so the count of them costs
+  nothing per month.
+- **No AI call to notice an answer either.** The condition is matched against mail the agent is
+  already watching, by the same rule the mail watches use. Noticing costs one read of a small file.
+- **It survives a shut laptop.** A reminder whose minute passed while the machine was asleep
+  arrives when it comes back and says what time it was meant for. Past a week it is dropped rather
+  than delivered, and the drop is logged.
+- **Quiet hours do not hold one.** That is deliberate: the minute was named by the person being
+  interrupted.
+- **The condition is visible before the day comes.** It is printed beside the reminder on the work
+  board and in the list, because one that stands down leaves the list the moment the answer arrives.
+
+**Boundaries — do not cross:**
+- ❌ **Never say the condition understands what the reply said.** It notices that the named person
+  wrote, not that they answered the question. A note about something else from the same person
+  drops the reminder.
+- ❌ **Never say the match is exact.** A name matches as a whole word, an address matches exactly,
+  and the loose half is on purpose (see the mail-watch reasoning). Copy may say "if Ellen writes
+  in", never "if Ellen replies to that email": no thread is being followed, because Archie does not
+  send the email in the first place.
+- ❌ **Never say a reminder can repeat.** One is a single moment. Something that happens every week
+  is a routine, and the agent offers to build one when it sees the same reminder asked for a third
+  time.
+- ⚠️ **The condition needs a mailbox or the Mac text watch.** With neither connected nothing can
+  notice an answer, and the reminder simply arrives at its time. The agent says so when it is set,
+  and copy must not imply otherwise.
+- ⚠️ **Not yet watched on a real mailbox.** The join is tested both halves and end to end in unit
+  tests; nobody has set a conditional reminder and had a real person answer it. Copy may describe
+  what it does and may not call it proven.
+
 ### ✅ Finding places on the map — SHIPPED 2026-09-16
 
 **Approved wording:** "Ask for somewhere to eat near the office that is open at eight, and your

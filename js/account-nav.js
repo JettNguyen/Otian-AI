@@ -10,7 +10,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { bindStatusToast } from "./status-toast.js?v=20260917-24";
+import { bindStatusToast } from "./status-toast.js?v=20260918-1";
 
 // A toast of the nav's own, since most pages carry no status element: created on first use,
 // then reused. bindStatusToast upgrades it into the shared bottom toast (styles.css section 39).

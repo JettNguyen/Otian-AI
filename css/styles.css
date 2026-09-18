@@ -11238,7 +11238,14 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-hero-fork span { color: var(--text-muted); opacity: .6; }
 @media (max-width: 400px) { .hm-hero-fork span { display: none; } }
 
-.hm-hero-micro { margin: 16px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
+/* The second audience and the release status are two different things, so they are not two halves
+   of one muted sentence: this one is a route, and it reads like the fork above it, one rung
+   quieter. The status sentence below stays plain prose. */
+.hm-hero-alt { margin: 8px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
+.hm-hero-alt a { color: var(--c-blue-ink); font-weight: 600; text-decoration: none; }
+.hm-hero-alt a:hover { color: var(--c-blue); text-decoration: underline; }
+
+.hm-hero-micro { margin: 14px 0 0; font-size: var(--fs-sm); color: var(--text-muted); }
 .hm-hero-micro svg { display: inline-block; color: var(--accent); vertical-align: -0.15em; }
 .hm-pill {
   display: inline-flex; gap: 8px; align-items: center;
@@ -16196,7 +16203,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-cap .day-catch { margin-top: 14px; padding-left: 12px; border-left: 2px solid var(--accent-line); font-size: var(--fs-sm); color: var(--text-muted); max-width: 42ch; }
 .day-cap .hm-actions { justify-content: flex-start; margin-top: 26px; }
 .day-cap .hm-hero-fork { justify-content: flex-start; }
-.day-cap .hm-hero-micro { text-align: left; }
+.day-cap .hm-hero-alt, .day-cap .hm-hero-micro { text-align: left; }
 .day-more { display: inline-block; margin-top: 14px; font-size: var(--fs-sm); font-weight: 600; text-decoration: none; }
 .day-more:hover { text-decoration: underline; }
 .day-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
@@ -16820,7 +16827,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-cap > p { font-size: var(--fs-sm); margin-top: 8px; max-width: none; }
   .day-cap .day-catch { font-size: var(--fs-xs); margin-top: 8px; max-width: none; }
   .day-cap .hm-actions { margin-top: 12px; }
-  .day-cap .hm-hero-micro { font-size: var(--fs-xs); }
+  .day-cap .hm-hero-alt, .day-cap .hm-hero-micro { font-size: var(--fs-xs); }
   .day-chips { gap: 4px; margin-top: 10px; }
   .day-chip { font-size: var(--fs-2xs); padding: 3px 8px; }
   .day-seg { margin-top: 10px; }
@@ -16833,7 +16840,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
-  .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }
+  .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-alt, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }
   .day-floor { --fz: 90deg; }
   /* The phone is seen through a window here: the side bezels and the rim stay, so it reads as a
      phone, and its top and bottom ends fade out, so a phone that is shorter than a phone (the

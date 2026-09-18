@@ -1240,18 +1240,32 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   outline-offset: 2px;
 }
 
-/* Signed-in: filled accent circle with the account initial */
+/* Signed-in: an accent-TINTED circle with the account initial, not a filled one.
+
+   IT WAS FILLED UNTIL 2026-09-18, AND THAT PUT TWO PRIMARY BUTTONS IN THE NAV. Get Started is a
+   solid accent shape 44 tall; a solid accent circle 44 tall standing right beside it is the same
+   object in a different outline, and at a glance the eye reads two calls to action where there is
+   one (Jett). An account control is never a call to action. The tint says signed in and says yours
+   just as plainly, because the thing that carries that meaning is the initial and not the fill, and
+   it keeps this button in the family of the theme toggle above, which is the family it belongs to:
+   a 44px bordered circle on the card face with the quiet lift. The one rule to keep if this is ever
+   restyled again: whatever the nav's single filled accent shape is, nothing else in the nav wears
+   the same fill. */
 .nav-account-btn.is-authed {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--text-on-accent);
+  background: var(--accent-subtle);
+  border-color: var(--accent-line);
+  color: var(--accent-ink);
 }
-.nav-account-btn.is-authed:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--text-on-accent); }
+.nav-account-btn.is-authed:hover { background: var(--accent-subtle); border-color: var(--accent); color: var(--accent-ink); }
 
 /* Active: you're on an account/auth page. An accent ring marks the avatar as "current",
    the same way a menu link goes accent on its own page. */
 .nav-account-btn.active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
 .nav-account-btn.active:not(.is-authed) { color: var(--accent); }
+/* The signed-in face is --accent-subtle now, so the ring above would be the same color as the
+   thing it rings and read as a fatter button rather than a mark. Signed in, the ring is the accent
+   line instead, which stands off both the tint and the page. */
+.nav-account-btn.is-authed.active { box-shadow: 0 0 0 3px var(--accent-line); }
 
 .nav-account-avatar {
   display: inline-flex;

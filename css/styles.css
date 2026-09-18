@@ -16204,8 +16204,13 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-cap .hm-actions { justify-content: flex-start; margin-top: 26px; }
 .day-cap .hm-hero-fork { justify-content: flex-start; }
 .day-cap .hm-hero-alt, .day-cap .hm-hero-micro { text-align: left; }
-.day-more { display: inline-block; margin-top: 14px; font-size: var(--fs-sm); font-weight: 600; text-decoration: none; }
-.day-more:hover { text-decoration: underline; }
+/* Links inside the captions read as links, like every other text link on the site: base `a`
+   inherits its color, so without this they came out the caption's own text color, which is
+   near-white in the dark theme and unreadable as a link. */
+.day-more { display: inline-block; margin-top: 14px; font-size: var(--fs-sm); font-weight: 600; text-decoration: none; color: var(--c-blue-ink); transition: color var(--transition-quick); }
+.day-more:hover { color: var(--c-blue); text-decoration: underline; }
+.day-cap .day-catch a { color: var(--c-blue-ink); font-weight: 600; }
+.day-cap .day-catch a:hover { color: var(--c-blue); text-decoration: underline; }
 .day-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 .day-chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); font-size: var(--fs-xs); color: var(--text-secondary); }
 .day-chip i { width: 6px; height: 6px; border-radius: 50%; background: var(--c-blue); flex: none; }

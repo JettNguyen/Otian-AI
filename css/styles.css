@@ -16636,8 +16636,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .mb-node .day-ico { background: var(--bg-primary); border-radius: 50%; padding: 12px; width: 70px; height: 70px; margin-bottom: 8px; box-shadow: 0 0 0 1px var(--border); }
 .mb-node b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-md); }
 .mb-node i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-xs); margin-top: 2px; max-width: 140px; margin-left: auto; margin-right: auto; }
-.mb-node--pc { --nx: 85px; --ny: 280px; }
-.mb-node--box { --nx: 232px; --ny: 280px; }
+/* The two drawn points stand above the line, not on it, so the message runs a clear line under
+   them rather than passing under each circle (Jett, 2026-09-18); their icons are 70 across, so
+   from the computer's to the mailbox's is 77 rows, and js/mobile.js stands the phone's edge 77
+   from the mailbox's to match. */
+.mb-node--pc { --nx: 85px; --ny: 196px; }
+.mb-node--box { --nx: 232px; --ny: 196px; }
 /* Wide, the phone is the third point and this node is only its name, under the phone: the phone
    stands 516 rows tall on the box's centre line, so its bottom edge is row 523 and the name stands
    clear of it (Jett, 2026-09-18: lower). */
@@ -16721,6 +16725,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .mb-node i { font-size: var(--fs-2xs); max-width: 120px; }
   .mb-node--pc { --nx: 66px; }
   .mb-node--box { --nx: 200px; }
-  .mb-node--ph { --nx: 334px; --ny: 280px; }
+  .mb-node--ph { --nx: 334px; --ny: 196px; }
   .mb-node--ph .day-ico { display: block; }
 }

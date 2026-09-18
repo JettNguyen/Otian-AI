@@ -60,7 +60,9 @@
      phone and a wide column's makes a small one. Pinned by its left it does not, and what moves
      instead is how much of the box's right side it fills. Wider than the room to the right of
      row 310 it gives up size rather than room. The name under it follows its bottom edge. */
-  var K3 = 0.78, LEFT = 310;
+  /* 344: the mailbox's icon ends at row 267, and the computer's ends 77 rows before the mailbox's
+     begins, so the phone's edge stands 77 past the mailbox's (Jett, 2026-09-18: even spacing). */
+  var K3 = 0.78, LEFT = 344;
   /* Through the screen acts, wide, the phone stands 48 rows right of the box's centre line rather
      than on it (Jett, 2026-09-18: "move to the right a bit"); narrow, on the line. */
   var BIG_X = 48;
@@ -119,7 +121,8 @@
   var ROW = 280;
   function pc() { return narrow ? 66 : 85; }
   function box() { return narrow ? 200 : 232; }
-  function ph() { return narrow ? 334 : sealed().left - 8; }
+  /* Wide the message stops beside the phone's edge, its own width clear of the glass. */
+  function ph() { return narrow ? 334 : sealed().left - 22; }
   function lap() {
     var b = box(), p = ph(), c = pc();
     return [[0, p], [0.08, p], [0.3, b], [0.38, b], [0.55, c], [0.68, c], [0.85, b], [0.92, b], [1, p]];
@@ -203,7 +206,9 @@
       var sealed = (tp > 0.09 && tp < 0.54) || (tp > 0.69 && tp < 0.99);
       msg.classList.toggle('is-sealed', sealed);
       var atBox = Math.abs(x - box()) < 36, atPc = Math.abs(x - pc()) < 36, atPh = Math.abs(x - ph()) < 36;
-      msg.classList.toggle('is-under', atBox || atPc || atPh);
+      /* The points stand above the line now, so nothing is under one; the message dims only at
+         the phone's end, where it has gone in. */
+      msg.classList.toggle('is-under', atPh);
       if (nodeBox) nodeBox.classList.toggle('is-lit', atBox);
       if (nodePc) nodePc.classList.toggle('is-lit', atPc);
       if (nodePh) nodePh.classList.toggle('is-lit', atPh);

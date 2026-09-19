@@ -230,7 +230,19 @@ whose rest is lying flat behind the hinge, so `rotateX(-80deg)` stands it up lea
 `rotateX(-180deg)` lays it shut on the base; the panel carries two faces with their backs hidden,
 the screen and the lid, so closing shows the lid and never the window mirrored. Narrow, the two
 desks stand one behind the other, theirs at the back and yours in front, and the laptop is scaled
-about the front edge of its base so the name standing just past that edge stays under it. The concept
+about the front edge of its base so the name standing just past that edge stays under it. Jett's
+first look (2026-09-19) taught four more. **The lid is the base's depth**: a panel deeper than the
+base lies past its front edge when it is shut, and it ran under the name standing there, so the
+base is 172 deep to match. **The near edge grows, so leave room**: an object 20 from the box's edge
+at rest was cut off at rest and worse mid-swing, when the panel's top comes nearest the camera; the
+composition stands 40 further left, with 34 to spare at rest and 18 at the widest point of the
+swing. **A laptop is scaled with `scale3d`, never `scale`**: a 2D scale shrinks the base and the
+panel's width but not the panel's height, which stands along the floor's normal, so the narrow
+screen came out square on a two-thirds base. And **the wires are drawn once per composition**,
+each out of a computer's side and around the open screen, with the tower far enough back that its
+wire starts above the screen's top edge; narrow hid them at first, and a comparison of two wires
+with the wires hidden is not one (the ring of phones still hides its lanes narrow, and is next
+for the same treatment). The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the
@@ -382,7 +394,7 @@ sizes are on the page at rest, and the pick only lights one.
   and `gen-phone-mocks.py` followed, so no chat phone on the site draws a face beside a
   message. **Under
   971px the stage is a second composition of the same objects, not the wide one
-  shrunk**: the scene is a design box (760 by 560 wide, 400 by 465 narrow) that `js/home.js` fits to
+  shrunk**: the scene is a design box (760 by 560 wide, 400 by 430 narrow) that `js/home.js` fits to
   the stage every frame **up as well as down** (it was clamped at 1 until 2026-09-17, so a 1440 by
   900 screen drew the scene at 76% of the room it had and the phone's type landed near 11px, which
   is what Jett read as the messages having no contrast; the ceiling is 1.45 and a growing scene

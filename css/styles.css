@@ -16477,11 +16477,6 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
-/* Two in the morning, narrow: Ember stands off the phone's outer lower left, and "lower" is where
-   the mask stops rather than where the layer does, which is why --my is the same 50% the night mask
-   cuts at. Set here and not inline, because an inline custom property outranks every media query:
-   that is why .day-phone .day-mark's narrow override below never applies to m-phone. */
-.day-phone [data-mark="m-night"] { --mx: -26px; --my: 50%; }
 /* The badge and the hint share the scene's grid cell and sit at its top and bottom: grid items of
    the stage, never children of the scene wrap, which is a flex row and would stand them beside the
    scene (that shifted the scene left by half the badge's width, for every act, on 2026-09-16). */
@@ -17292,7 +17287,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      bottom of the screen"). The scene's row gives the 24 up and the fit's own divisor gives some
      of it back, so the mockups are within a few percent of the size they were. The driver reads
      both numbers off this rule rather than carrying its own copy of them. */
-  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 36px; }
+  /* AND IT IS PAINTED TEN HIGHER THAN IT IS LAID OUT (2026-09-19, Jett: "move the text content up
+     closer to the mockups by about 10-ish px"). The two margins cancel, so the row takes up exactly
+     the height it did and the scene is drawn at exactly the size it was. That is the whole reason
+     it is written as a pair: the scene's row is the 1fr, so anything that changes this box's height
+     is given to the picture instead of to the words, which is what the 36 below did and why it
+     moved the caption barely a pixel closer to the phone.
+
+     THE TEN COMES OUT OF THE ROOM UNDER THE WORDS, because it is the only place left. The scene's
+     row holds the phone plus the air the mask fades it out in, and on a phone the fit is within a
+     percent of the ceiling the sides put on it, so the picture cannot grow into that air and the
+     gap cannot be closed by making the phone bigger. Taking it off the top instead would push the
+     mockups back down toward the clock badge, which is the change above this one. So 36 under the
+     words becomes 46, and the words sit 10 nearer the thing they are captioning. */
+  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 36px; margin: -10px 0 10px; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
      them in the middle of the band puts the words under the scene without either a hole below them
@@ -17453,6 +17461,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      left half, below its bottom edge and left of the phone. js/home.js keeps it inside the
      stage on a screen too narrow for the room. */
   .day-phone .day-mark { --mx: -40px; --my: 44px; }
+  /* AND TWO IN THE MORNING IS ITS OWN MARK, WHICH HAS TO SIT BELOW THE LINE ABOVE (2026-09-19).
+     This block is the only place m-night is ever used, because the swap to it happens narrow. It
+     was written in the wide section on a selector of the same weight as the line above, and equal
+     weight later in the file wins, so the mark Ember stood on at night was the one written for the
+     four conversation acts: 44px off the bottom of a phone whose visible half ends more than a
+     third of the way up. Ember stood in the middle of the caption and the careful comment that
+     came with it had never once applied.
+
+     SIX TENTHS UP AND NOT THE MASK'S OWN HALF, because the words moved up to meet the phone and
+     the phone moved up to cover the window on the same day, so a foot at the phone's visible
+     bottom is a foot on the caption's first line. The extra tenth is the caption's room: Ember
+     stands beside the phone's lower screen rather than under it, still in the space between the
+     phone and the edge of the screen. Move the 2:00 am phone again and this is solved with it. */
+  .day-phone [data-mark="m-night"] { --mx: -40px; --my: 60%; }
   .day-win [data-mark="m-window"] { --mx: 100px; --my: -120px; }
   /* The custody floor: type up two rungs, Ember beside the computer rather than on it. On the
      turned plane its rows run across the screen and the center line is row 210, so the stations
@@ -17480,16 +17502,22 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      far cards had shrunk until they could not be read, and a flat list of five read as a page,
      not a scene. js/home.js sets each card's place from how far it stands from the current one
      (--gx, --gy, --gz, --gr, --gs, --dim); Ember stands on the current card, on a mark of its own
-     at the card's top edge. The card is nearly the box's width and its type two rungs up (Jett:
+     at the card's top edge. The card is most of the box's width and its type a rung up (Jett:
      "2x larger"), so the neighbors show past it only where the stage is wider than the box,
-     which on a phone held upright it is. */
+     which on a phone held upright it is. IT WAS THE WHOLE BOX AND TWO RUNGS UNTIL 2026-09-19
+     (Jett: "the 5 steps is a bit too big on mobile widths"), and what came off is one number in
+     four places: the card, the type, the number's badge and the step the gallery slides by in
+     js/home.js, all down about an eighth, so the picture is the same picture and smaller. The
+     card's line count is what holds it together: 330 less its padding at 16px carries the same
+     words per line 380 less its padding carried at 18, so nothing rewrapped and nothing grew
+     back in height. */
   #dayFloorSetup .day-plane { transform: none; }
   #dayFloorSetup .day-grid, #dayFloorSetup .day-build { display: none; }
-  #dayFloorSetup .day-st.step { left: 50%; top: 50%; width: 380px; padding: 16px 18px 16px 58px; line-height: 1.3; transform: translate(-50%, -50%) translate3d(var(--gx, 0px), var(--gy, 0px), var(--gz, 0px)) rotateY(var(--gr, 0deg)) scale(var(--gs, 1)); transform-origin: 50% 50%; opacity: calc(var(--fo) * var(--dim, 1)); }
-  #dayFloorSetup .day-st.step b { font-size: var(--fs-2xl); }
-  #dayFloorSetup .day-st.step i { font-size: var(--fs-lg); margin-top: 6px; }
-  #dayFloorSetup .day-st .num { left: 16px; top: 18px; width: 30px; height: 30px; font-size: var(--fs-sm); }
-  #dayFloorSetup .day-st .day-mark { left: 58px; top: 0; }
+  #dayFloorSetup .day-st.step { left: 50%; top: 50%; width: 330px; padding: 14px 16px 14px 50px; line-height: 1.3; transform: translate(-50%, -50%) translate3d(var(--gx, 0px), var(--gy, 0px), var(--gz, 0px)) rotateY(var(--gr, 0deg)) scale(var(--gs, 1)); transform-origin: 50% 50%; opacity: calc(var(--fo) * var(--dim, 1)); }
+  #dayFloorSetup .day-st.step b { font-size: var(--fs-lg); }
+  #dayFloorSetup .day-st.step i { font-size: var(--fs-md); margin-top: 5px; }
+  #dayFloorSetup .day-st .num { left: 14px; top: 16px; width: 26px; height: 26px; font-size: var(--fs-xs); }
+  #dayFloorSetup .day-st .day-mark { left: 50px; top: 0; }
   .day-paths .wide { display: none; }
   .day-paths .narrow { display: inline; }
   .day-dot { --back-x: -6px; --back-y: 0px; }
@@ -17516,8 +17544,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-stage { padding-top: calc(var(--nav-height) + 4px); }
   .day-clock { margin-bottom: 4px; }
   /* Less of it on a short screen, and not out of meanness: the scene's row is small there too, so
-     the room over the words is smaller and the room under them has to match it. */
-  .day-caps { padding: 2px 16px 20px; }
+     the room over the words is smaller and the room under them has to match it. The pull up the
+     band is painted with comes down with them for the same reason: ten off a gap that is already
+     small here would have the words standing in the phone's fade. */
+  .day-caps { padding: 2px 16px 20px; margin: -6px 0 6px; }
   .day-cap h1 { font-size: var(--fs-2xl); }
   .day-cap h2 { font-size: var(--fs-xl); }
   .day-cap .section-label { margin-bottom: 2px; }

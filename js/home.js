@@ -317,14 +317,25 @@
            design, so they stack instead: the window up, the phone down, and the only thing the
            phone's masked band reaches is the window's own bottom padding. THE STACK IS HAND
            PACKED AND THE TWO y's ARE ITS WHOLE ARRANGEMENT (re-solved 2026-09-19 for the shorter
-           slice and the 19-unit nudge): the window's top sits on the row's top edge, the phone
-           follows about twenty units under the window's bottom, and what runs past the row at the
-           end is the last of the phone's fade, which is nothing. Neither gives up size, because
-           at two in the morning the window is the subject and the phone is already the smaller
-           claim. Change --phone-mask's night stops, .day-phone's height or the nudge and these
-           two numbers are solved again, not adjusted. */
+           slice and the 19-unit nudge): the window's top sits on the row's top edge, and what runs
+           past the row at the end is the last of the phone's fade, which is nothing. The phone
+           gives up the size, because at two in the morning the window is the subject and the phone
+           is already the smaller claim. Change --phone-mask's night stops, .day-phone's height or
+           the nudge and these two numbers are solved again, not adjusted.
+
+           THE PHONE STANDS IN FRONT OF THE WINDOW NOW, 28 UNITS UP OVER TWO PASSES THE SAME DAY
+           (Jett: "the phone can cover a bit more of the desktop window", then "by another 10-15
+           px"). It used to follow about twenty units under the window's bottom edge, two objects
+           in a column; it starts inside that edge now, so the pair reads as one scene with the
+           phone in front. WHAT LIMITS IT IS THE WINDOW'S LAST ROW AND NOT ITS EDGE: the fade takes
+           the top eighth of the phone's box, so the box may stand well inside the window while the
+           phone itself starts at its bottom rule, and the run this was set at leaves 27px between
+           the box's top and the bottom of the finished Bill Reminders row, which is what the act is
+           claiming. Take more and the claim goes under the phone. Ember moves with this: it stands
+           on the phone at a mark measured off the phone's own bottom (m-night in the stylesheet,
+           inside the narrow block), so the two are solved together. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -101, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 227, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -101, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 199, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest
@@ -464,8 +475,9 @@
        (see act 5's narrow pose). */
     var NARROW_H = 430;
     /* THE BAND UNDER THE SCENE IS AS TALL AS THE CAPTION IN IT, and the scene gets everything
-       else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own 6 + 12, two
-       numbers that have to agree. Measured off the caption being shown, which is why the narrow
+       else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own padding, read off
+       it rather than typed here. Its margins are not part of this and must not be: they cancel,
+       so the band is laid out at the height this sets and painted ten higher. Measured off the caption being shown, which is why the narrow
        .day-cap is centered rather than stretched: a stretched caption reports the band's height
        back and the driver would be reading its own output. */
     var CAPS_PAD = 18, capH = 0, capQ = '', capPadAt = '';
@@ -642,7 +654,7 @@
 
 
     /* The setup gallery (narrow): each card's place is how far it stands from the current one,
-       in cards. The current one is flat, full size and in front; a neighbor is 200 to the side,
+       in cards. The current one is flat, full size and in front; a neighbor is 174 to the side,
        turned toward it, a little behind and below, smaller and dimmer; further cards keep the
        neighbor's turn and go on out and back. -1 hands the cards back to the stylesheet. */
     var GPROPS = ['--gx', '--gy', '--gz', '--gr', '--gs', '--dim'], galleryOn = false;
@@ -655,7 +667,7 @@
       galleryOn = true;
       steps.forEach(function (s, j) {
         var d = j - fs, a = Math.min(1, Math.abs(d)), far = Math.max(0, Math.abs(d) - 1), sg = d < 0 ? -1 : 1;
-        s.style.setProperty('--gx', (d * 200).toFixed(1) + 'px');
+        s.style.setProperty('--gx', (d * 174).toFixed(1) + 'px');
         s.style.setProperty('--gy', (a * 24).toFixed(1) + 'px');
         s.style.setProperty('--gz', (-a * 90 - far * 40).toFixed(1) + 'px');
         s.style.setProperty('--gr', (-sg * a * 32).toFixed(1) + 'deg');

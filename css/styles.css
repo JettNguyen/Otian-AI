@@ -11920,9 +11920,9 @@ html[data-theme="dark"] .booking-container iframe {
 .ember .top,
 .ember .wrap { transform-box: view-box; }
 .ember .face { transform-origin: 100px 102px; }
-/* The tongue hangs from where it leaves the mouth, so that is what it turns about: the lip at
-   y=136, written 130 on the same view-box rule as the rest. */
-.ember .tongue { transform-box: view-box; transform-origin: 100px 130px; }
+/* The tongue swings about its root, which is inside the mouth rather than on its edge: y=140,
+   written 134 on the same view-box rule as the rest. */
+.ember .tongue { transform-box: view-box; transform-origin: 100px 134px; }
 .ember .feet { transform-origin: 100px 163px; }
 .ember .top { transform-origin: 100px 42px; }
 .ember .wrap { transform-origin: 100px 152px; }
@@ -11941,6 +11941,130 @@ html[data-theme="dark"] .booking-container iframe {
 .ember svg.st-act-peek .top { animation: ember-peek-top 1.6s linear 1; }
 .ember svg.st-act-peek .anim { animation: ember-peek-body 1.6s ease-in-out 1; }
 
+/* ── WHAT EMBER WEARS HAS WEIGHT TOO ───────────────────────────────────────────────────────
+
+   Two parts bend when the body under them moves: the antenna's stalk (with its ball on the end,
+   which is most of why it bends) and the tuft, both turning about their own root on the head, and
+   a scarf's tail, hanging off the band. The peak and the ears are drawn into the body and a cap is
+   worn tight, so none of them moves: a hat sliding about on the head reads as a bug rather than as
+   weight, which is the whole difference between follow-through and a glitch.
+
+   Same method as the tongue, tuned down: a damped spring per part, driven by where its own root
+   actually goes when the body plays an act (its scale, then its rotation about the ground, then
+   its travel), integrated at a tenth of a millisecond and thinned to the fewest stops that hold
+   the curve inside a degree. The antenna and the tuft answer sideways drive by turning and up-and-
+   down drive by squashing along their own length; the scarf's tail only turns, because cloth does
+   not stretch. One gain per part across every act, so the acts stay honest against each other: a
+   wiggle whips the antenna and a nod barely troubles it, and that is the numbers rather than taste.
+
+   **The acts that are not here are the ones the arithmetic ruled out.** A hop and a groove squash
+   the antenna by 6 or 9 percent, but the body is already squashing and the antenna rides that, so
+   only the hop's landing was worth its own table. The spin, the peek and the backflip are the
+   turnaround, where the hat is already being carried through a sphere and a second opinion about
+   where it should be would fight it. And the blep moves the hat by nothing at all, because the
+   head turns about the very axis the hat is standing on.
+
+   Each curve is faded to rest over its last eighth. The act's class comes off on the final frame,
+   so a part still mid-swing would snap straight, and a jerk on the way out is worse than no
+   follow-through at all. */
+.ember .sway,
+.ember .tail { transform-box: view-box; }
+.ember svg.st-act-wiggle .sway { animation: ember-sway-wiggle 0.7s linear 1; }
+.ember svg.st-act-nod .sway { animation: ember-sway-nod 0.75s linear 1; }
+.ember svg.st-act-shimmy .sway { animation: ember-sway-shimmy 0.9s linear 1; }
+.ember svg.st-act-hop .sway,
+/* The same landing, because `done` IS the hop: see the state rules at the top of this section. */
+.ember svg.st-done .sway { animation: ember-sway-hop 0.9s linear 1; }
+.ember svg.st-act-shimmy .tail { animation: ember-tail-shimmy 0.9s linear 1; }
+.ember svg.st-act-squish .tail { animation: ember-tail-squish 0.6s linear 1; }
+
+@keyframes ember-sway-hop {
+  0% { transform: scaleY(1); }
+  15.5% { transform: scaleY(0.996); }
+  19% { transform: scaleY(0.937); }
+  26.5% { transform: scaleY(1.029); }
+  34.5% { transform: scaleY(0.986); }
+  41.5% { transform: scaleY(1.004); }
+  45.5% { transform: scaleY(1.09); }
+  52.5% { transform: scaleY(0.96); }
+  60.5% { transform: scaleY(1.019); }
+  65.5% { transform: scaleY(1.005); }
+  69.5% { transform: scaleY(0.926); }
+  76.5% { transform: scaleY(1.032); }
+  100% { transform: scaleY(1); }
+}
+@keyframes ember-sway-wiggle {
+  0% { transform: rotate(0deg); }
+  10.5% { transform: rotate(-2.2deg); }
+  19.5% { transform: rotate(1.1deg); }
+  24% { transform: rotate(14.7deg); }
+  26.5% { transform: rotate(17.4deg); }
+  28.5% { transform: rotate(16.4deg); }
+  38.5% { transform: rotate(-4deg); }
+  40.5% { transform: rotate(-6.9deg); }
+  44.5% { transform: rotate(-8.4deg); }
+  48% { transform: rotate(-16.1deg); }
+  50.5% { transform: rotate(-18deg); }
+  52.5% { transform: rotate(-16.2deg); }
+  61.5% { transform: rotate(4.1deg); }
+  64% { transform: rotate(7.1deg); }
+  69% { transform: rotate(7.4deg); }
+  74.5% { transform: rotate(12deg); }
+  76.5% { transform: rotate(11.2deg); }
+  85% { transform: rotate(-1.6deg); }
+  91% { transform: rotate(-7.2deg); }
+  99.5% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes ember-sway-nod {
+  0% { transform: rotate(0deg) scaleY(1); }
+  29.5% { transform: rotate(0deg) scaleY(1); }
+  37% { transform: rotate(4.1deg) scaleY(0.984); }
+  59.5% { transform: rotate(-4.4deg) scaleY(1.022); }
+  73% { transform: rotate(1.8deg) scaleY(0.995); }
+  99.5% { transform: rotate(0deg) scaleY(1); }
+  100% { transform: rotate(0deg) scaleY(1); }
+}
+@keyframes ember-sway-shimmy {
+  0% { transform: rotate(0deg); }
+  18% { transform: rotate(0.4deg); }
+  23.5% { transform: rotate(2.3deg); }
+  42% { transform: rotate(-2.8deg); }
+  60% { transform: rotate(3.2deg); }
+  78% { transform: rotate(-3.9deg); }
+  90% { transform: rotate(2.8deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes ember-tail-shimmy {
+  0% { transform: rotate(0deg); }
+  11% { transform: rotate(-1.2deg); }
+  18% { transform: rotate(0.8deg); }
+  23% { transform: rotate(7.7deg); }
+  28.5% { transform: rotate(6.8deg); }
+  36% { transform: rotate(-1.9deg); }
+  40% { transform: rotate(-11.4deg); }
+  42.5% { transform: rotate(-13.5deg); }
+  46% { transform: rotate(-10.9deg); }
+  54% { transform: rotate(2.5deg); }
+  58% { transform: rotate(13.5deg); }
+  60.5% { transform: rotate(15deg); }
+  64% { transform: rotate(12deg); }
+  76% { transform: rotate(-12.8deg); }
+  78% { transform: rotate(-14.2deg); }
+  82% { transform: rotate(-11.3deg); }
+  89.5% { transform: rotate(3.4deg); }
+  93% { transform: rotate(5.8deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes ember-tail-squish {
+  0% { transform: rotate(0deg); }
+  29.5% { transform: rotate(-0.2deg); }
+  40.5% { transform: rotate(-2.6deg); }
+  70.5% { transform: rotate(3.6deg); }
+  86.5% { transform: rotate(-2.2deg); }
+  99.5% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
 /* ONE IN A HUNDRED: the tongue comes out and the head goes side to side.
 
    It is a joke, and it is the only thing on this site that is one, so it is kept to a hundredth
@@ -12353,7 +12477,10 @@ html[data-theme="dark"] .booking-container iframe {
   .ember svg[class*="st-act-"] .face,
   .ember svg[class*="st-act-"] .feet,
   .ember svg[class*="st-act-"] .top,
-  .ember svg[class*="st-act-"] .wrap { animation: none; }
+  .ember svg[class*="st-act-"] .wrap,
+  .ember svg[class*="st-act-"] .sway,
+  .ember svg[class*="st-act-"] .tail,
+  .ember svg.st-done .sway { animation: none; }
   /* The giggle is information (they like it), so the face still changes; only the squirm goes. */
   .ember-spark { display: none; }
 }

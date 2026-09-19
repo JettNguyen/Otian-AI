@@ -39,17 +39,27 @@
         '" stroke-width="8" stroke-linejoin="round"/>';
     },
     none: function () { return ""; },
+    /* WHICH OF THESE HAVE WEIGHT, AND WHICH ARE PART OF THE BODY.
+       A stalk with a ball on the end of it and a tuft of hair are things that bend when the head
+       they stand on moves, so each one is wrapped in a `sway` group turning about its own root
+       and given a spring in styles.css. The peak and the ears are drawn into the body, and a cap
+       is worn tight: none of the three bends, and a hat that slid about the head would read as a
+       bug at the sizes Ember appears. The origin is per topper, so it rides on the markup rather
+       than in a class, and it is written in view-box coordinates (the drawing's y minus six) the
+       way every other transform origin on Ember is. */
     antenna: function (d) {
-      return '<path d="M100 52 Q98 36 104 28" stroke="' + d +
+      return '<g class="sway" style="transform-origin:100px 46px">' +
+        '<path d="M100 52 Q98 36 104 28" stroke="' + d +
         '" stroke-width="6" fill="none" stroke-linecap="round"/>' +
-        '<circle cx="105" cy="24" r="8" fill="' + d + '"/>';
+        '<circle cx="105" cy="24" r="8" fill="' + d + '"/></g>';
     },
     ears: function (d) {
       return '<circle cx="66" cy="58" r="14" fill="' + d + '"/>' +
         '<circle cx="134" cy="58" r="14" fill="' + d + '"/>';
     },
     tuft: function (d) {
-      return '<path d="M100 56 Q92 34 104 22 Q100 38 112 44 Q104 46 100 56 Z" fill="' + d + '"/>';
+      return '<g class="sway" style="transform-origin:100px 50px">' +
+        '<path d="M100 56 Q92 34 104 22 Q100 38 112 44 Q104 46 100 56 Z" fill="' + d + '"/></g>';
     },
     cap: function (d, m) {
       return '<path d="M56 74 A46 46 0 0 1 144 74 Z" fill="' + d + '"/>' +
@@ -97,10 +107,17 @@
     },
     /* Cream, not the body's own dark: as `hue.dark` it read as a shadow across the body rather
        than as something worn. The hairline keeps the cream from floating on a pale hue. */
+    /* The tail is drawn BEFORE the band now, not after, and that one swap is what lets it swing.
+       Its top edge was always inside the band's eight units of thickness; drawn over the band it
+       showed as a line across it, and turning about a join that is on top of what it hangs from
+       opens a notch of skin at the corner. Underneath, the band covers the join at every angle it
+       reaches, and the tail's top edge is a unit lower so a hard swing cannot lift a corner past
+       the band's upper edge. It turns about the middle of that hidden edge. */
     scarf: function (d) {
       return '<g stroke="' + d + '" stroke-width="2.2" stroke-linejoin="round">' +
-        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="#FBF1E4"/>' +
-        '<path d="M128 156 l10 22 q-7 3 -13 1 l-6 -19 Z" fill="#F2E2CE"/></g>';
+        '<g class="tail" style="transform-origin:123.5px 153px">' +
+        '<path d="M128 157 L138 178 q-7 3 -13 1 L119 161 Z" fill="#F2E2CE"/></g>' +
+        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="#FBF1E4"/></g>';
     }
   };
   var EXTRA_IDS = ["none", "glasses", "freckles", "scarf"];
@@ -166,7 +183,7 @@
          group that does not turn, because a clip path on the turning group turns with it and
          clips nothing. These are plain drawing coordinates, not the view-box-corner ones the
          transform origins in styles.css use. */
-      '<clipPath id="lip-' + uid + '"><rect x="86" y="134" width="28" height="34"/></clipPath>' +
+      '<clipPath id="lip-' + uid + '"><rect x="84" y="134" width="32" height="34"/></clipPath>' +
       '</defs>' +
       '<ellipse cx="100" cy="177" rx="37" ry="6" fill="rgba(68,64,59,.12)"/>' +
       '<g class="anim"><g class="lean">' +
@@ -195,18 +212,21 @@
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
       '<path class="mouth mouth-flat" d="M93 136 L107 136" stroke="#2A2521" stroke-width="3.2" ' +
       'fill="none" stroke-linecap="round" opacity="0"/>' +
-      /* The tongue, for the one move in a hundred: a jaw dropped open and a tongue hanging out
-         of it, drawn together and switched on as a pair. The jaw is filled rather than stroked,
-         for the reason the app's snoring mouth is: at the sizes Ember is shown a stroked ring
-         fills in with antialiasing and reads as a smudge. It is narrower than the smile (11.2
-         against 14), so the open mouth never grows wider than the closed one. `opacity="0"` is
-         on the markup rather than left to CSS, because the app rasterizes this same string into
-         saved pictures with no stylesheet near it and the two drawings stay the same drawing. */
+      /* The tongue, for the one move in a hundred, and THE MOUTH HAS TO READ AS OPEN BEFORE THE
+         TONGUE READS AS A TONGUE. The first version dropped a small jaw (11.2 wide, inside the
+         smile's own 14) and hung the tongue off its lip, and what that drew was a pink shape with
+         a dark line over it: a mouth, not a tongue out of one. So the opening is now bigger than
+         the closed smile rather than smaller, because a mouth pulled open IS bigger, and the
+         tongue starts inside it, crosses the bottom edge and carries on over the chin. Dark all
+         round the top of it is what says which of the two shapes is the hole. Filled rather than
+         stroked: at the sizes Ember is drawn a stroked ring fills in with antialiasing and reads
+         as a smudge. `opacity="0"` is on the markup rather than left to CSS, because the app
+         rasterizes this same string into saved pictures with no stylesheet near it. */
       '<g class="mouth mouth-blep" opacity="0">' +
-      '<path d="M93.8 134 A6.2 6.2 0 0 0 106.2 134 Z" fill="#2A2521"/>' +
+      '<ellipse cx="100" cy="140" rx="10.5" ry="6" fill="#2A2521"/>' +
       '<g clip-path="url(#lip-' + uid + ')"><g class="tongue">' +
-      '<path d="M95 136 L105 136 L105 145 Q105 150.5 100 150.5 Q95 150.5 95 145 Z" ' +
-      'fill="#DE8A86" stroke="#2A2521" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="M95.2 139 L104.8 139 L104.8 150 Q104.8 155 100 155 Q95.2 155 95.2 150 Z" ' +
+      'fill="#E59AA0" stroke="#2A2521" stroke-width="1.7" stroke-linejoin="round"/>' +
       '</g></g>' +
       '</g>' +
       (EXTRAS_ON_BODY[look.extra] ? "" : (EXTRAS[look.extra] || EXTRAS.none)(hue.dark)) +

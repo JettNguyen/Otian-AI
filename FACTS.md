@@ -262,7 +262,7 @@ re-counts it rather than trusting this file.
 - **Users, installs, hours saved, as figures of ours.** We still have no published figure for
   users or installs, and none for hours saved that is ours to make. **What changed on 2026-09-18
   is the third one, and only inside quotation marks.** Patrick West (Chem Can Services and
-  Westway Site Services), 60 days in, wrote his own review and it is published in full on
+  Westway Site Services), 60 days in, wrote his own testimonial and it is published in full on
   `/testimonials/`: "I would estimate that I am saving two to three hours per day on ordinary
   tasks that Coleman now handles for me". The same sentence is quoted on the homepage under the
   heading "Patrick gets two to three hours back, every day."
@@ -283,7 +283,7 @@ re-counts it rather than trusting this file.
   If a real measured outcome ever exists, it belongs here first, with the engagement and the date.
   Note what was wrong with those two and is not wrong with Patrick's: they were numbers in our
   voice with nobody's name on them and no record behind them. His is in his voice, with his name
-  and his company on it, and the record is the review itself.
+  and his company on it, and the record is the testimonial itself.
 - **Every hardware price, on `/how-it-works/#what-to-run-it-on` and anywhere else.** Added 2026-08-26 with the page that section came from (`/equipment/`, merged into How It Works 2026-09-14).
   A hardware price is a third-party figure under the rules above, so it would need a row in
   "Other companies' prices" with the maker's own store as its source and a 90-day re-read. It

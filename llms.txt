@@ -69,7 +69,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie. The story behind Otian AI, and the two people who build every agent themselves.
 - [The Otian Standard](https://otianai.com/standard/): How Otian AI intends to behave: the promises we hold ourselves to on service, honesty, privacy and pricing, written down so you can point at a line and tell us we fell short.
 - [Contact](https://otianai.com/contact/): Questions before getting started, or an add-on you need built? Get in touch with Otian AI.
-- [Reviews](https://otianai.com/testimonials/): The jobs an Archie agent takes over, add-on by add-on, and what clients say about working with Otian AI.
+- [Testimonials](https://otianai.com/testimonials/): The jobs an Archie agent takes over, add-on by add-on, and what clients say about working with Otian AI.
 
 ## Learning
 

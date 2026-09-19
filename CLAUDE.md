@@ -187,7 +187,21 @@ the floor's near half toward the camera and a phone left at z 0 has the plane pa
 it (Jett saw the grid over the buttons); and **the homepage's under-971px phone rules are bare
 `.dp-` selectors in a media block** (a shorter masked device, no status bar, square corners),
 so any other phone on the site has to say its whole shape with more weight or it loses its
-ends on a tablet. The concept list for the other pages is in the session
+ends on a tablet. Jett's first look added two more (2026-09-18): **the floor wrapper needs
+`transform-style: preserve-3d` itself**, or the tilted plane inside it is projected flat with
+no camera and the grid is a squashed rectangle (the homepage's floor gets it from `.day-layer`,
+which is easy to miss when copying the recipe; "is the grid supposed to have perspective?");
+and **a scene that waits for the reader's press reads as stuck** ("it gets stuck on
+highlighting your inbox"), the homepage's own lesson from the same day, so the script presses
+each Send itself after a hold long enough to read a card, loops after the third, pauses off
+screen, and a hand press does the same thing at once. And **the root of a 3D context is scaled
+with a transform, never with zoom**: the box shipped zoomed to its column, Chrome drew it in
+full, and Jett's browser drew a flat grid and a phone with no rim, because WebKit does not carry
+a 3D context through zoom. `js/home.js` fits the homepage scene with `scale()` and zooms only
+the mockups inside it, and the drafts scene now fits the same way (`--pk`, measured by
+`js/drafts-scene.js`). No render here can check it: the WebKit snapshot tool draws every 3D
+scene flat, on screen or off, so depth in Safari is checked by Jett or not at all. The concept
+list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the
 app's own meter, a card flip. Build one, judge it, then set the pace.

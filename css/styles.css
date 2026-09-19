@@ -6736,8 +6736,8 @@ html[data-theme="dark"] .booking-container iframe {
 
    So the middle card carries a flag, and it says "Our pick" rather than "Most popular". The
    difference is who is doing the claiming. A popularity badge is a fact about other customers,
-   and we have none to count: /testimonials/ says on its own page that we are still collecting
-   reviews. A recommendation is a fact about us, it is true, and a reader can hold us to it.
+   and we have none to count: one published testimonial on /testimonials/ is not a count of
+   buyers. A recommendation is a fact about us, it is true, and a reader can hold us to it.
 
    THE ACCENT, AND NOT A MEANING COLOUR. This was green for a day, on the reasoning that the
    accent is on every call to action here and a flag wearing it would read as one more button.
@@ -7303,7 +7303,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* Following a feature grid, the note must clear the cards, not tuck up under them
    (the base rule's negative top margin is for the marketplace split layout).
    .aud-pick is here for the same reason and was missed when it was added on 2026-09-14:
-   wrapping the review grids in the picker broke the adjacency this selector tests for, the
+   wrapping the testimonial grids in the picker broke the adjacency this selector tests for, the
    note fell back to the -8px, and it printed straight through the dashed empty-state box.
    Any future wrapper around a grid that sits above one of these notes belongs in this list. */
 .feature-grid + .marketplace-split-note,
@@ -9046,65 +9046,65 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* ==============================
-   37. Reviews
+   37. Testimonials
    ============================== */
 
-.review-card blockquote {
+.tm-card blockquote {
   margin: 0;
 }
 
-.review-card blockquote p {
+.tm-card blockquote p {
   font-size: var(--fs-lg);
   line-height: 1.65;
   color: var(--text-primary);
 }
 
-.review-attrib {
+.tm-attrib {
   margin-top: 14px;
   font-size: var(--fs-base);
   font-weight: 600;
   color: var(--text-muted);
 }
 
-/* A review that runs longer than a paragraph. The grid it sits in is three columns, so
-   one long review left alone becomes a column of about twenty words a line and four
+/* A testimonial that runs longer than a paragraph. The grid it sits in is three columns, so
+   one long testimonial left alone becomes a column of about twenty words a line and four
    screens tall, which is the shape nobody reads. It takes the whole row instead, and then
    gives most of it back: a card the full 1,120px wide sets the measure at about 85
    characters and leaves 190px of nothing down its right-hand side, because the text stops
    at a readable width and the card does not. 46rem is the card holding a letter's measure
    and looking like it meant to. Only the first paragraph keeps --fs-lg: 250 words at that
    size is a page of large type, and the size stops meaning "read this first". */
-.review-card--long {
+.tm-card--long {
   grid-column: 1 / -1;
   max-width: 46rem;
   margin-inline: auto;
 }
 
-.review-card--long blockquote p {
+.tm-card--long blockquote p {
   font-size: var(--fs-base);
   margin: 0 0 16px;
 }
 
-.review-card--long blockquote p:last-child {
+.tm-card--long blockquote p:last-child {
   margin-bottom: 0;
 }
 
-.review-card--long .review-lede {
+.tm-card--long .tm-lede {
   font-size: var(--fs-lg);
 }
 
-/* The homepage's review band is --bg-card, and it is the only band on that page that is.
+/* The homepage's testimonial band is --bg-card, and it is the only band on that page that is.
    It cannot be .section-alt: .ww-band--home overrides the connections band directly above
    it to --bg-secondary, which is what .section-alt already is, so the two ran together as
    one long band with a heading in the middle of it. It cannot be the plain band either,
    because .day-price below it is --bg-primary and it would blend downward instead. White
    is the one value that is neither neighbour, and it earns itself twice over: the page's
    one piece of evidence is the page's one white band. */
-.day-review { background: var(--bg-card); }
+.day-testimonial { background: var(--bg-card); }
 
 /* The homepage's one quote. Centred, because the band it sits in is centred, and marked
    as somebody else's words by the rule and the indent rather than by quote marks, which
-   at this size look like a decorative flourish. Same reasoning as .review-card--long. */
+   at this size look like a decorative flourish. Same reasoning as .tm-card--long. */
 .hm-quote {
   margin: 22px auto 0;
   max-width: 54ch;
@@ -9120,7 +9120,7 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-primary);
 }
 
-.day-review .review-attrib {
+.day-testimonial .tm-attrib {
   text-align: left;
   max-width: 54ch;
   margin: 12px auto 0;
@@ -9130,7 +9130,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* His own two headings, kept because they are his. Small and lettered so they read as
    the writer's own divisions and not as ours: a section heading in the page's own type
    would put our voice inside somebody else's quote. */
-.review-card--long .review-head {
+.tm-card--long .tm-head {
   margin: 26px 0 10px;
   font-size: var(--fs-xs);
   font-weight: 700;
@@ -15689,7 +15689,7 @@ summary:active,
 
 /* ── The audience picker and its chips (testimonials/) ──
    Reviews are split by who wrote them, because "is this for someone like me" is the question
-   a reader brings to a reviews page and one undifferentiated wall never answers it. The same
+   a reader brings to a testimonials page and one undifferentiated wall never answers it. The same
    CSS-only radio pattern as .cost-pick above: two radios drive the tabs and the panels through
    sibling selectors, nothing here needs a script, and with CSS off it degrades to two labelled
    lists stacked. Hiding the inputs with clip rather than display:none is what keeps the group
@@ -17564,10 +17564,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    press; js/drafts-scene.js runs the landing and the press. The second staged page after the
    hiring dial (Jett, 2026-09-18: each page its own scene, the same brand).
 
-   THE BOX IS DRAWN AT ONE SIZE AND ZOOMED TO ITS COLUMN. 720 by 620 wide, 400 by 700 narrow, and
-   zoom (never transform: scale, see section 49) brings it to the scene's width with a container
-   unit, so nothing is placed by viewport arithmetic. The floor is the homepage floor's own recipe:
-   a plane laid back 58 degrees with things standing on it counter-rotated about their feet.
+   THE BOX IS DRAWN AT ONE SIZE AND SCALED TO ITS COLUMN. 720 by 620 wide, 400 by 620 narrow, and
+   js/drafts-scene.js measures the scene and sets --pk, a transform: scale on the box, the way
+   js/home.js fits the homepage scene, so nothing is placed by viewport arithmetic. The zoom rule
+   in section 49 is for the mockups, and the phone inside keeps its zoom; the box is the root of
+   the 3D context and it shipped with zoom on it instead, which is the thing WebKit will not carry
+   a 3D context through: Jett saw a flat grid and a phone with no rim, on the second look of
+   2026-09-18, in a scene Chrome drew in full. The floor is the homepage floor's own recipe: a
+   plane laid back 58 degrees with things standing on it counter-rotated about their feet.
 
    A CARD'S STATES ARE ON THE CARD, not on the screen as the homepage keys them, because this
    screen holds three cards in one thread and each is pressed on its own; the five rules below
@@ -17579,9 +17583,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    presses each Send itself after a hold, loops when the third is sent, and a hand press does the
    same thing at once. */
 .pd-figure { max-width: 720px; margin: 0 auto; }
-.pd-scene { position: relative; width: 100%; aspect-ratio: 720 / 620; container-type: inline-size; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; }
-.pd-box { position: absolute; left: 0; top: 0; width: 720px; height: 620px; zoom: calc(100cqw / 720px); transform-style: preserve-3d; }
-@supports not (zoom: 1) { .pd-box { transform: scale(calc(100cqw / 720px)); transform-origin: 0 0; } }
+.pd-scene { position: relative; width: 100%; aspect-ratio: 720 / 620; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; }
+.pd-box { position: absolute; left: 0; top: 0; width: 720px; height: 620px; transform: scale(var(--pk, 1)); transform-origin: 0 0; transform-style: preserve-3d; }
 /* the floor */
 /* preserve-3d on the floor is what lets the plane's tilt reach the scene's perspective: without it
    the floor is flat, the plane is projected into it with no camera, and the grid is a squashed
@@ -17646,9 +17649,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   /* Narrow, the floor goes and the stations are a row of chips over the phone: a floor at this
      width shrank the phone past reading, and the queue reads fine as three chips, the lit one the
      station whose draft is on the screen. The box is redrawn, not the wide one shrunk. */
-  .pd-scene { aspect-ratio: 400 / 700; perspective: none; }
-  .pd-box { width: 400px; height: 700px; zoom: calc(100cqw / 400px); }
-  @supports not (zoom: 1) { .pd-box { transform: scale(calc(100cqw / 400px)); } }
+  .pd-scene { aspect-ratio: 400 / 620; perspective: none; }
+  .pd-box { width: 400px; height: 620px; }
   .pd-floor { display: none; }
   .pd-chips { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: center; gap: 8px; margin: 0; padding: 0 12px; list-style: none; }
   .pd-chip { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }

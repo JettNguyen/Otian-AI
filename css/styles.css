@@ -9067,6 +9067,15 @@ html[data-theme="dark"] .booking-container iframe {
   font-size: var(--fs-lg);
 }
 
+/* The homepage's review band is --bg-card, and it is the only band on that page that is.
+   It cannot be .section-alt: .ww-band--home overrides the connections band directly above
+   it to --bg-secondary, which is what .section-alt already is, so the two ran together as
+   one long band with a heading in the middle of it. It cannot be the plain band either,
+   because .day-price below it is --bg-primary and it would blend downward instead. White
+   is the one value that is neither neighbour, and it earns itself twice over: the page's
+   one piece of evidence is the page's one white band. */
+.day-review { background: var(--bg-card); }
+
 /* The homepage's one quote. Centred, because the band it sits in is centred, and marked
    as somebody else's words by the rule and the indent rather than by quote marks, which
    at this size look like a decorative flourish. Same reasoning as .review-card--long. */

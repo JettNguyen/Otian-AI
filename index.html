@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260918-39" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260918-40" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -387,9 +387,15 @@
 
             <!-- THE ARCHIE WINDOW. archie-app-mockup.html's chrome, sidebar, agent header and Now
                  pane, class for class, at half size. The app's own tokens are scoped under
-                 .da-app in the stylesheet. -->
+                 .da-app in the stylesheet.
+
+                 THE SIDEBAR IS SHUT, which is the app's own collapsed state and not a narrower
+                 sidebar (Jett, 2026-09-19). data-rail is the mockup's own attribute and carries
+                 the whole difference: 80px of tiles, the wordmark and the agent card gone, the
+                 face standing on its own. It leaves the page 116 more pixels to lay out in, which
+                 is where the window's content had been running out of room. -->
             <div class="day-layer day-win" aria-hidden="true">
-              <div class="da-app">
+              <div class="da-app" data-rail="shut">
                 <span class="da-traffic"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>
                 <div class="da-body">
                   <aside class="da-side">
@@ -405,6 +411,10 @@
                       <span class="da-who"><span class="da-n">Ember</span><span class="da-w">On Archie Mobile</span></span>
                       <svg class="da-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
                     </div>
+                    <!-- The same agent with the sidebar shut: the face on its own, because the
+                         name and where the agent is reached have nowhere to sit in an 80px
+                         column and the face is what people look for anyway. -->
+                    <span class="da-railface"><span class="da-face"><span class="da-avatar sm"><span data-ember="terracotta.peak.pill.none"></span></span><span class="da-dot"></span></span></span>
                     <div class="da-sections">
                       <div class="da-nav">
                         <div class="da-row on"><span class="da-glyph"><svg><use href="#g-now"/></svg></span><span class="da-label">Now</span></div>
@@ -1520,10 +1530,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260918-39"></script>
-  <script src="js/ember.js?v=20260918-39" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260918-39"></script>
-  <script src="js/home.js?v=20260918-39" defer></script>
+  <script src="js/nav.js?v=20260918-40"></script>
+  <script src="js/ember.js?v=20260918-40" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260918-40"></script>
+  <script src="js/home.js?v=20260918-40" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

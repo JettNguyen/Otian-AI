@@ -345,7 +345,12 @@ sizes are on the page at rest, and the pick only lights one.
   around a screen that is still 393 by 852), the chamfer on the outer 2 of that wall, the
   smaller island and lens, and the two rings that traced the silhouette taken off. **Carrying a
   change back to the kit is the direction that keeps the rule true**, because the kit is where
-  the next change starts. **Under
+  the next change starts. The last change ran the right way round (2026-09-18): the app dropped
+  the agent's face from every message and from the working row (archie-mobile's 510b626: one
+  agent in the thread, its face in the bar at twice the size, the tail says who is speaking, and
+  both sides on one 86% rule), Jett carried it to the kit, and then the port, the drafts scene
+  and `gen-phone-mocks.py` followed, so no chat phone on the site draws a face beside a
+  message. **Under
   971px the stage is a second composition of the same objects, not the wide one
   shrunk**: the scene is a design box (760 by 560 wide, 400 by 560 narrow) that `js/home.js` fits to
   the stage every frame **up as well as down** (it was clamped at 1 until 2026-09-17, so a 1440 by

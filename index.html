@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260918-30" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260918-31" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -506,11 +506,8 @@
 
                     <div class="dp-scr is-on" data-scr="0">
                       <div class="dp-said">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
-                        <div class="col">
-                          <div class="dp-bub theirs"><div class="dp-md"><p><b>Morning brief.</b></p><ul><li><span>9:00 standup, video call</span></li><li><span>11:30 Laura, Q3 kickoff prep</span></li><li><span>Internet bill Thursday. Dad&rsquo;s birthday Saturday.</span></li></ul></div></div>
-                          <p class="dp-stamp">7:00 AM</p>
-                        </div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Morning brief.</b></p><ul><li><span>9:00 standup, video call</span></li><li><span>11:30 Laura, Q3 kickoff prep</span></li><li><span>Internet bill Thursday. Dad&rsquo;s birthday Saturday.</span></li></ul></div></div>
+                        <p class="dp-stamp">7:00 AM</p>
                       </div>
                     </div>
 
@@ -520,73 +517,60 @@
                         <p class="dp-stamp">9:12 AM</p>
                       </div>
                       <div class="dp-thinking day-beat" data-act="1" data-at="0.2" data-until="0.44">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
                         <span class="t">Ember is working</span>
                         <span class="dp-dots"><i></i><i></i><i></i></span>
                       </div>
                       <div class="dp-said day-beat" data-act="1" data-at="0.44">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
-                        <div class="col">
-                          <div class="dp-bub theirs"><div class="dp-md"><p>Thursday at 10:00 AM is open. Move Q3 kickoff prep there?</p></div></div>
-                          <p class="dp-stamp">9:12 AM</p>
-                        </div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p>Thursday at 10:00 AM is open. Move Q3 kickoff prep there?</p></div></div>
+                        <p class="dp-stamp">9:12 AM</p>
                       </div>
                       <div class="dp-mine dp-after">
                         <div class="dp-bub yours"><div class="dp-md"><p>Yes, that works.</p></div></div>
                         <p class="dp-stamp">9:13 AM</p>
                       </div>
                       <div class="dp-said dp-after">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
-                        <div class="col">
-                          <div class="dp-bub theirs"><div class="dp-md"><p>Moved. Thursday, 10:00 AM.</p></div></div>
-                          <p class="dp-stamp">9:13 AM</p>
-                        </div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p>Moved. Thursday, 10:00 AM.</p></div></div>
+                        <p class="dp-stamp">9:13 AM</p>
                       </div>
                     </div>
 
                     <div class="dp-scr" data-scr="2">
                       <div class="dp-said day-beat" data-act="2" data-at="0.06">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
-                        <div class="col">
-                          <!-- Send edits this card the way the product edits it (the Archie repo's
-                               email/replies/actions.rs): the buttons go and the words become "Sent (to
-                               Sam):" over the same draft, which is that file's own form for a reply. Both
-                               states are here; the stylesheet swaps them on is-done. The button labels
-                               are the card's own.
-
-                               THE HEADING AND THE REPLY BOTH STAY, AND ONE LINE SWAPS. The card is
-                               rewritten in place, so `heading()` in email/replies/card.rs is shared
-                               by the live card and by what it becomes, and `sent_card()` is that
-                               heading plus "✅ Sent (to X):" plus the same draft body. The app
-                               rewrote a sent card down to the outcome and the reply once, and Jett
-                               scrolled back to one and could not tell what email it had answered;
-                               the comment on `heading()` is that fix. This screen had the same bug
-                               until 2026-09-18: both the heading and the body were dp-before, so a
-                               send took the email off the card. Only the label is a before/after
-                               pair now, which is the one line that actually changes.
-
-                               THE PRESS ITSELF IS THE PHONE APP'S (archie-mobile
-                               commit 8533dae, 2026-09-18): the button stays lit and busy, a spinner where
-                               its mark was, until the computer answers, and the answer is the card
-                               changing plus a notice over the screen in the computer's own words, "Sent
-                               ✅", which leaves on its own. The notice is this screen's last child.
-
-                               THE CARD LANDS AS ONE THING. One beat, on the group, and nothing
-                               inside it carries its own: the buttons belong to the message and the
-                               time belongs to all of it, so staggering them takes a card apart into
-                               pieces that were never separate (Jett, 2026-09-18, after the buttons
-                               and the time were given beats of their own and he saw it). The beats
-                               in the other screens are messages, which do arrive one after another;
-                               this is one message with a control row and a time on it. -->
-                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
-                          <div class="dp-fold"><div class="dp-actions">
-                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
-                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
-                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
-                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
-                          </div></div>
-                          <p class="dp-stamp">1:40 PM</p>
-                        </div>
+                        <!-- Send edits this card the way the product edits it (the Archie repo's
+                             email/replies/actions.rs): the buttons go and the words become "Sent (to
+                             Sam):" over the same draft, which is that file's own form for a reply. Both
+                             states are here; the stylesheet swaps them on is-done. The button labels
+                             are the card's own.
+                             THE HEADING AND THE REPLY BOTH STAY, AND ONE LINE SWAPS. The card is
+                             rewritten in place, so `heading()` in email/replies/card.rs is shared
+                             by the live card and by what it becomes, and `sent_card()` is that
+                             heading plus "✅ Sent (to X):" plus the same draft body. The app
+                             rewrote a sent card down to the outcome and the reply once, and Jett
+                             scrolled back to one and could not tell what email it had answered;
+                             the comment on `heading()` is that fix. This screen had the same bug
+                             until 2026-09-18: both the heading and the body were dp-before, so a
+                             send took the email off the card. Only the label is a before/after
+                             pair now, which is the one line that actually changes.
+                             THE PRESS ITSELF IS THE PHONE APP'S (archie-mobile
+                             commit 8533dae, 2026-09-18): the button stays lit and busy, a spinner where
+                             its mark was, until the computer answers, and the answer is the card
+                             changing plus a notice over the screen in the computer's own words, "Sent
+                             ✅", which leaves on its own. The notice is this screen's last child.
+                             THE CARD LANDS AS ONE THING. One beat, on the group, and nothing
+                             inside it carries its own: the buttons belong to the message and the
+                             time belongs to all of it, so staggering them takes a card apart into
+                             pieces that were never separate (Jett, 2026-09-18, after the buttons
+                             and the time were given beats of their own and he saw it). The beats
+                             in the other screens are messages, which do arrive one after another;
+                             this is one message with a control row and a time on it. -->
+                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
+                        <div class="dp-fold"><div class="dp-actions">
+                          <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
+                          <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                          <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                          <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                        </div></div>
+                        <p class="dp-stamp">1:40 PM</p>
                       </div>
                       <!-- The computer's answer to the press, over the screen, in its own words. Played by
                            the stylesheet on is-noticed, which js/home.js adds only when a press settles
@@ -596,13 +580,13 @@
 
                     <div class="dp-scr dp-scr--grow" data-scr="4">
                       <div class="dp-mine day-beat" data-act="4" data-at="0.02"><div class="dp-bub yours"><div class="dp-md"><p>Did I promise anyone anything?</p></div></div></div>
-                      <div class="dp-said day-beat" data-act="4" data-at="0.1"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Commitment Sweep</b> found two: the deck to Sam by Friday, and Dana&rsquo;s invoice.</p></div></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.1"><div class="dp-bub theirs"><div class="dp-md"><p><b>Commitment Sweep</b> found two: the deck to Sam by Friday, and Dana&rsquo;s invoice.</p></div></div></div>
                       <div class="dp-mine day-beat" data-act="4" data-at="0.24"><div class="dp-bub yours"><div class="dp-md"><p>What am I still paying for?</p></div></div></div>
-                      <div class="dp-said day-beat" data-act="4" data-at="0.32"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Bills &amp; Subscriptions</b>: 14 on the list. Two renew this week.</p></div></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.32"><div class="dp-bub theirs"><div class="dp-md"><p><b>Bills &amp; Subscriptions</b>: 14 on the list. Two renew this week.</p></div></div></div>
                       <div class="dp-mine day-beat" data-act="4" data-at="0.46"><div class="dp-bub yours"><div class="dp-md"><p>How far did I get with the permit?</p></div></div></div>
-                      <div class="dp-said day-beat" data-act="4" data-at="0.54"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Paperwork</b>: the permit is at step 3 of 5. Still missing: proof of address.</p></div></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.54"><div class="dp-bub theirs"><div class="dp-md"><p><b>Paperwork</b>: the permit is at step 3 of 5. Still missing: proof of address.</p></div></div></div>
                       <div class="dp-mine day-beat" data-act="4" data-at="0.68"><div class="dp-bub yours"><div class="dp-md"><p>What did the doctor say again?</p></div></div></div>
-                      <div class="dp-said day-beat" data-act="4" data-at="0.76"><span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span><div class="col"><div class="dp-bub theirs"><div class="dp-md"><p><b>Health Record</b>: Tuesday&rsquo;s visit is saved, with your two questions for next time.</p></div></div></div></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.76"><div class="dp-bub theirs"><div class="dp-md"><p><b>Health Record</b>: Tuesday&rsquo;s visit is saved, with your two questions for next time.</p></div></div></div>
                     </div>
 
                     <!-- THIS SCREEN IS NOT THE CONVERSATION. Lately is a section of the app's Now
@@ -622,11 +606,8 @@
                          sent message. Nothing here spends money or sends anything. -->
                     <div class="dp-scr" data-scr="6">
                       <div class="dp-said">
-                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
-                        <div class="col">
-                          <div class="dp-bub theirs"><div class="dp-md"><p><b>Overnight.</b></p><ul><li><span>Return window on the monitor closes today. Draft ready.</span></li><li><span>Internet bill Thursday, on your list.</span></li></ul><p>Nothing else needs you.</p></div></div>
-                          <p class="dp-stamp">7:00 AM</p>
-                        </div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Overnight.</b></p><ul><li><span>Return window on the monitor closes today. Draft ready.</span></li><li><span>Internet bill Thursday, on your list.</span></li></ul><p>Nothing else needs you.</p></div></div>
+                        <p class="dp-stamp">7:00 AM</p>
                       </div>
                     </div>
 
@@ -1533,10 +1514,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260918-30"></script>
-  <script src="js/ember.js?v=20260918-30" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260918-30"></script>
-  <script src="js/home.js?v=20260918-30" defer></script>
+  <script src="js/nav.js?v=20260918-31"></script>
+  <script src="js/ember.js?v=20260918-31" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260918-31"></script>
+  <script src="js/home.js?v=20260918-31" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

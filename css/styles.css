@@ -16719,15 +16719,20 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-facewrap { position: relative; flex: none; display: block; }
 .dp-face { border-radius: 50%; overflow: hidden; background: var(--accent-sub); flex: none; display: block; }
 .dp-face.s30 { width: 30px; height: 30px; }
-.dp-face.s28 { width: 28px; height: 28px; }
 .dp-face .ember { width: 100%; height: 100%; }
 .dp-facewrap .dot { position: absolute; right: -1px; bottom: -1px; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--bg); background: var(--green); }
 .dp-transcript { position: relative; flex: 1; min-height: 0; overflow: hidden; }
 .dp-scr { position: absolute; inset: 0; padding: 16px 16px 20px; display: flex; flex-direction: column; justify-content: flex-end; gap: 12px; opacity: 0; pointer-events: none; }
 @media (prefers-reduced-motion: no-preference) { .dp-scr { transition: opacity .35s ease; } }
 .dp-scr.is-on { opacity: 1; pointer-events: auto; }
-.dp-said { display: flex; gap: 8px; }
-.dp-said .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+/* No face beside a message, since the app's 510b626 (2026-09-18) and the kit the same evening: a
+   face on a message answers "who said this", and in a thread with one agent in it nobody is asking,
+   because the face is in the bar at nearly twice the size and never scrolls away. Thirty-six points
+   of every message's width went to say what the bar had said. The tail says who is speaking, and
+   both sides sit on one rule now, 86% of the transcript, one anchored left and one right, where
+   the agent's used to be 94% of what was left after the face. So a row is the column itself, the
+   way the kit's .said is, and the .col wrapper went with the face. */
+.dp-said { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; max-width: 86%; }
 /* 500 where the app draws 400, and it is the size that asks for it, not taste: see the ink note on
    .dp-ph. A stem that is one pixel at full size is two thirds of one here, so it is drawn as a
    part-covered pixel and lands grey however white the colour is. The weight puts the coverage back,
@@ -16736,8 +16741,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    Changes to the port normally do, because the kit is where the next one starts, but the kit draws
    the phone at full size and 400 is right there; carrying this across would make the kit wrong. */
 .dp-bub { padding: 12px 16px; font-size: var(--fs-lg); line-height: 22px; font-weight: 500; color: var(--text); }
-.dp-bub.theirs { max-width: 94%; background: var(--card); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; }
-.dp-mine { align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 100%; }
+.dp-bub.theirs { max-width: 100%; background: var(--card); border: 1px solid var(--border); border-radius: 14px 14px 14px 4px; }
+.dp-mine { align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; max-width: 86%; }
 .dp-bub.yours { max-width: 100%; background: var(--accent-sub); border-radius: 14px 14px 4px 14px; }
 .dp-md { display: flex; flex-direction: column; gap: 8px; }
 .dp-md .quote { border-left: 3px solid var(--accent); padding: 2px 0 2px 12px; display: flex; flex-direction: column; gap: 2px; }

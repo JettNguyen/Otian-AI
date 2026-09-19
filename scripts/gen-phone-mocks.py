@@ -484,7 +484,9 @@ BUB_PADY = 10.0   # top and bottom padding inside a bubble
 BUB_LH = 17.0     # one line of a bubble
 BUB_BASE = 12.6   # first baseline down from the padding, to sit the block on the middle
 BUB_GAP = 10.0    # between one message and the next
-AGENT_X = 54.0    # where a bubble of theirs starts, clear of the face beside it
+AGENT_X = 16.0    # where a bubble of theirs starts: the same 16 in from the edge as yours end,
+                  # since the face beside it went (the app's 510b626, 2026-09-18: one agent in the
+                  # thread, its face in the bar, and the tail says who is speaking)
 
 
 def screen_chat():
@@ -501,8 +503,6 @@ def screen_chat():
         x = (W - 16 - w) if mine else AGENT_X
         m.append(rect(x, y, w, h, 15, "var(--accS)" if mine else "var(--card)",
                       None if mine else "var(--bd)", 1))
-        if not mine:
-            m.append(avatar(30, y + h - 15, 15, "ember"))
         for i, ln in enumerate(lines):
             m.append(text(x + BUB_INK, y + BUB_PADY + BUB_LH * i + BUB_BASE, ln,
                           BUB_FS, "var(--ink)"))
@@ -522,7 +522,6 @@ def screen_chat():
     bw = max(tw(DRAFT_LEAD, BUB_FS), card_w) + BUB_PADX * 2
     h = BUB_PADY * 2 + BUB_LH + 8 + card_h
     d = [rect(AGENT_X, y, bw, h, 15, "var(--card)", "var(--bd)", 1),
-         avatar(30, y + h - 15, 15, "ember"),
          text(AGENT_X + BUB_INK, y + BUB_PADY + BUB_BASE, DRAFT_LEAD, BUB_FS, "var(--ink)")]
     cx0, cy0 = AGENT_X + BUB_INK, y + BUB_PADY + BUB_LH + 8
     d.append(rect(cx0, cy0, card_w, card_h, 7, "var(--soft)"))

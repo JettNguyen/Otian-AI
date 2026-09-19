@@ -2104,8 +2104,11 @@ habit to a fact about what arrives over the wire, and a fact is the kind of thin
   counted, or reached by id, which is why the store's own code has no edition filter in it.
 - `each_scope_lists_in_its_own_edition_only` runs in both builds, so each edition proves its own
   store rather than one build asserting something about the other.
-- The tags are in the catalog: 36 skills, 25 routines and 8 personalities carry `editions:
-  "personal"`.
+- The tags are in the catalog: on 2026-09-18, 32 skills, 22 routines and 8 personalities carry
+  `editions: "personal"`, leaving the business store 53 skills, 32 routines, 4 specialists, 30
+  personalities and all 36 resource guides. Seven were retagged `both` in the same pass because
+  the business-only department packs named them, which is the catalog saying a business uses them;
+  `scripts/check-departments.py` fails the build on that contradiction now.
 
 **Boundaries:**
 - ⛔ **Never "Archie for Business has fewer add-ons."** True and useless. It is the same catalog

@@ -430,11 +430,24 @@
       stage.style.setProperty('--sc', SC.toFixed(3));
     }
 
+    /* THE SCENE HAS TO BE ABLE TO STOP, OR IT IS NEVER DRAWN SHARP. A 3D layer is rasterized once
+       and the texture is scaled by the transform after it; the engine re-draws it when the transform
+       settles or changes enough to be worth it. This wrote a transform on every frame forever: SC
+       went in at full float precision, and the tilt eases by 8% of the remaining distance a frame,
+       which approaches its target and never arrives. So the layer was permanently mid-animation,
+       the texture was never re-cut at the size the scene had actually reached, and the finest mark
+       on it showed that first. Jett's repro on 2026-09-19 names it exactly: resize the window with
+       the pointer still and the wordmark comes out distorted, then "the archie logo comes back
+       after i put my cursor on the site", because a few degrees of tilt is a big enough change to
+       force the re-draw that standing still never asked for. Round, snap, and write only what
+       changed, and the scene reaches a state it can be drawn at. */
+    var lastT = { scene: '', win: '', phone: '' };
+    function put(el, key, v) { if (lastT[key] !== v) { el.style.transform = v; lastT[key] = v; } }
     function applyPose(p) {
-      scene.style.transform = 'scale(' + SC + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')';
-      win.style.transform = 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + p.win.s.toFixed(3) + ')';
+      put(scene, 'scene', 'scale(' + SC.toFixed(4) + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')');
+      put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + p.win.s.toFixed(3) + ')');
       win.style.opacity = p.win.o.toFixed(3);
-      phone.style.transform = 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')';
+      put(phone, 'phone', 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')');
       /* On the phone, not down on its layers: see the comment above .dp-device in the stylesheet
          for why the per-layer fade was tried and taken back. */
       phone.style.opacity = p.phone.o.toFixed(3);
@@ -632,7 +645,11 @@
       else if (i === 0) pose = lerpPose(poseOf(0), poseOf(1), smooth(t) * PRE);
       else if (i === 1) pose = lerpPose(lerpPose(poseOf(0), poseOf(1), PRE), poseOf(1), settle);
       else pose = lerpPose(poseOf(i - 1), poseOf(i), settle);
+      /* Snapped once it is within a hundredth of a degree, which is under the two decimals the
+         transform is written to, so the ease ends instead of approaching forever: see applyPose. */
       tilt.x += (tilt.tx - tilt.x) * 0.08; tilt.y += (tilt.ty - tilt.y) * 0.08;
+      if (Math.abs(tilt.tx - tilt.x) < 0.01) tilt.x = tilt.tx;
+      if (Math.abs(tilt.ty - tilt.y) < 0.01) tilt.y = tilt.ty;
       /* ── THE HERO'S SECOND BEAT: THE MOCKUPS STEP OUT ──────────────────────────────────────
          Narrow only, and act 0 only. The hero opens as a picture with a headline on it, and then
          the description arrives and there is no longer room on a phone for both: whichever one

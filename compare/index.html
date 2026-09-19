@@ -311,9 +311,21 @@
              distance below them. The ratio is the claim. The exact pixels are not, and the scatter
              inside a step still says nothing.
 
+             A MARK'S X NEVER CHANGES, AND THE FIELD IS SPLIT RATHER THAN GRADED (both Jett,
+             2026-09-18). Switching views moves a mark up or down and nowhere else: the position
+             is chosen once and every view reuses it, so the reader watches ten things rise and
+             fall rather than ten things reshuffle. That was the two-view design and it was given
+             up when the mark count reached ten, because a fixed x could not clear the Ease view,
+             where five of the six marks on the their-servers side share the top level. What
+             bought it back was making the name's side part of the position: neighbours whose
+             names sit on opposite sides of their circles interleave, so the pair needing the most
+             room is the pair two apart. And the midline now carries a thin dotted rule, because
+             across is two answers and not a scale. It is dotted and lighter than the axis on
+             purpose: it separates two answers to one question and is not a second axis.
+
              ONE HONEST DIFFERENCE FROM THE REFERENCE, invisible at a glance: a mark's height is
-             a sourced step and nothing else. Marks are placed freely, so the few pixels between
-             two at the same step are there to make ten circles read as a field instead of a
+             a sourced step and nothing else. The few pixels between two marks at the same step
+             are fixed per mark and are there to make ten circles read as a field instead of a
              row. That scatter is drawing, not measurement, and it must never grow into something
              a reader could rank. Across, there are two positions and no middle: the company's own
              page says the work runs on their servers or on your computer.
@@ -438,6 +450,7 @@
             <title id="fq-t">A chart with two axes and a selector bar above it. Across, privacy: their servers on the left, your computer on the right, the same in every view. The bar chooses what runs up the chart. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the their-servers side; along the bottom, acting on their own unless set to ask, OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; a short way below, a desktop app you download, Archie, Vellum and Hermes on the your-computer side and Grok Bot on the other; at the bottom, installed and configured from a terminal, OpenClaw alone. Customization: at the top, its code is yours to change, OpenClaw, Hermes and Vellum, all on the your-computer side; a short way below, a shelf of add-ons you install, Archie on the your-computer side and Claude Cowork and Grok Bot on the their-servers side; at the bottom, settings and the accounts you connect, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant. Five circles carry the company&rsquo;s own icon and five carry a letter, and every one has its name beside it. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--desktop .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
+              .explain-svg--desktop .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
               .explain-svg--desktop .fq-title{fill:currentColor;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
               .explain-svg--desktop .fq-end{fill:currentColor;font-size:10.5px;font-weight:600;opacity:.78}
               .explain-svg--desktop .fq-mark{fill:#FFFFFF;stroke:var(--line-muted);stroke-width:1.5}
@@ -451,29 +464,29 @@
               .explain-svg--desktop .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--desktop .fq-band-t{fill:currentColor;font-size:13px;font-weight:650;text-anchor:middle}
               .explain-svg--desktop .fq-v-ease,.fq-v-custom{display:none}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(530px,141.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(452px,141.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(482px,159.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(500px,343px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(178px,63px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(250px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(220px,141.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(322px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(286px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(214px,63px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(492px,141.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(555px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(422px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(471px,352px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(326px,63px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(200px,81px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(186px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(291px,81px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(256px,81px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(165px,63px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-v-asks{display:none}
               #fq-ease:checked ~ .explain-svg--desktop .fq-v-ease{display:inline}
               #fq-ease:checked ~ .explain-svg--desktop .fq-v-custom{display:none}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(500px,159.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(452px,81px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(536px,63px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(500px,63px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(202px,159.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(244px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(256px,141.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(316px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(280px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(214px,343px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(492px,141.4px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(555px,72px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(422px,72px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(471px,72px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(326px,141.4px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(200px,361px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(186px,150.4px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(291px,361px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(256px,361px)}
+              #fq-custom:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(165px,343px)}
               #fq-custom:checked ~ .explain-svg--desktop .fq-v-asks{display:none}
               #fq-custom:checked ~ .explain-svg--desktop .fq-v-ease{display:none}
               #fq-custom:checked ~ .explain-svg--desktop .fq-v-custom{display:inline}
@@ -490,6 +503,7 @@
             </defs>
 
             <path class="fq-axis" d="M112 14 V404 H616"/>
+            <path class="fq-split" d="M364 14 V404"/>
             <text class="fq-end" x="112" y="428">Their servers</text>
             <text class="fq-end" x="616" y="428" text-anchor="end">Your computer</text>
             <text class="fq-title" x="364" y="452" text-anchor="middle">Privacy &rarr;</text>
@@ -509,54 +523,54 @@
               <text class="fq-end" x="102" y="388" text-anchor="end">Settings and<tspan x="102" dy="12">your accounts</tspan></text>
             </g>
 
-            <g class="fq-m fq-m-archie" transform="translate(500,63)">
+            <g class="fq-m fq-m-archie" transform="translate(492,63)">
               <circle class="fq-halo" cx="0" cy="0" r="30"/>
               <circle class="fq-halo-in" cx="0" cy="0" r="26"/>
               <text class="fq-name-us" x="0" y="-37">Archie</text>
               <circle class="fq-mark-us" cx="0" cy="0" r="22"/>
               <use href="#lg-archie" x="-15.4" y="-15.4" width="30.8" height="30.8"/>
             </g>
-            <g class="fq-m fq-m-vellum" transform="translate(452,141.4)">
+            <g class="fq-m fq-m-vellum" transform="translate(555,150.4)">
               <text class="fq-name" x="0" y="-25">Vellum</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-vellum" x="-8.4" y="-8.4" width="16.8" height="16.8"/>
             </g>
-            <g class="fq-m fq-m-hermes" transform="translate(506,141.4)">
+            <g class="fq-m fq-m-hermes" transform="translate(422,150.4)">
               <text class="fq-name" x="0" y="33.5">Hermes</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-hermes" x="-15.2" y="-15.2" width="30.4" height="30.4"/>
             </g>
-            <g class="fq-m fq-m-openclaw" transform="translate(500,343)">
+            <g class="fq-m fq-m-openclaw" transform="translate(471,352)">
               <text class="fq-name" x="0" y="-25">OpenClaw</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-openclaw" x="-9.2" y="-9.2" width="18.4" height="18.4"/>
             </g>
-            <g class="fq-m fq-m-cowork" transform="translate(202,159.4)">
-              <text class="fq-name" x="0" y="33.5">Claude Cowork</text>
+            <g class="fq-m fq-m-cowork" transform="translate(326,141.4)">
+              <text class="fq-name" x="0" y="-25">Claude Cowork</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">C</text>
             </g>
-            <g class="fq-m fq-m-muse" transform="translate(256,141.4)">
+            <g class="fq-m fq-m-muse" transform="translate(200,159.4)">
               <text class="fq-name" x="0" y="33.5">Meta Muse</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(220,343)">
+            <g class="fq-m fq-m-grok" transform="translate(186,352)">
               <text class="fq-name" x="0" y="33.5">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">G</text>
             </g>
-            <g class="fq-m fq-m-instinct" transform="translate(274,361)">
+            <g class="fq-m fq-m-instinct" transform="translate(291,361)">
               <text class="fq-name" x="0" y="33.5">Instinct</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">I</text>
             </g>
-            <g class="fq-m fq-m-symphony" transform="translate(280,81)">
+            <g class="fq-m fq-m-symphony" transform="translate(256,81)">
               <text class="fq-name" x="0" y="-25">Wix Symphony</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-symphony" x="-10.8" y="-10.8" width="21.6" height="21.6"/>
             </g>
-            <g class="fq-m fq-m-norton" transform="translate(214,63)">
+            <g class="fq-m fq-m-norton" transform="translate(165,63)">
               <text class="fq-name" x="0" y="-38.75">Norton Family<tspan x="0" dy="13.75">Assistant</tspan></text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">N</text>
@@ -571,6 +585,7 @@
             <title id="fqm-t">The same chart, taller for a narrow screen, with the same selector bar above it and the names shortened to fit: Cowork for Claude Cowork, Muse for Meta Muse, Symphony for Wix Symphony and Norton for Norton Family Assistant. Across, privacy: their servers on the left, your computer on the right, in every view. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the other; on the floor, acting on their own unless set to ask, OpenClaw on the your-computer side and Grok Bot and Instinct on the other. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; below, a desktop app you download, Archie, Vellum, Hermes and Grok Bot; at the bottom, from a terminal, OpenClaw. Customization: at the top, its code is yours to change, OpenClaw, Hermes and Vellum, all on the your-computer side; below, a shelf of add-ons you install, Archie, Claude Cowork and Grok Bot; at the bottom, settings and the accounts you connect, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--mobile .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
+              .explain-svg--mobile .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
               .explain-svg--mobile .fq-title{fill:currentColor;font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5}
               .explain-svg--mobile .fq-end{fill:currentColor;font-size:9px;font-weight:600;opacity:.78}
               .explain-svg--mobile .fq-mark{fill:#FFFFFF;stroke:var(--line-muted);stroke-width:1.5}
@@ -584,29 +599,29 @@
               .explain-svg--mobile .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--mobile .fq-band-t{fill:currentColor;font-size:11.5px;font-weight:650;text-anchor:middle}
               .explain-svg--mobile .fq-v-ease,.fq-v-custom{display:none}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(305px,158.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(255px,158.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(275px,176.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(275px,415px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(147px,77px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(102px,59px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(127px,158.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(197px,77px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(127px,59px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(172px,77px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(273px,158.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(305px,176.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(241px,176.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(269px,424px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(174px,77px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(106px,59px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(134px,158.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(194px,59px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(126px,77px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(146px,59px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-v-asks{display:none}
               #fq-ease:checked ~ .explain-svg--mobile .fq-v-ease{display:inline}
               #fq-ease:checked ~ .explain-svg--mobile .fq-v-custom{display:none}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(275px,158.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(255px,59px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(280px,59px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(305px,59px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(157px,176.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(142px,415px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(117px,158.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(187px,433px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(117px,415px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(167px,415px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(273px,158.68px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(305px,77px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(241px,77px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(269px,68px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(174px,176.68px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(106px,415px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(134px,158.68px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(194px,415px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(126px,433px)}
+              #fq-custom:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(146px,415px)}
               #fq-custom:checked ~ .explain-svg--mobile .fq-v-asks{display:none}
               #fq-custom:checked ~ .explain-svg--mobile .fq-v-ease{display:none}
               #fq-custom:checked ~ .explain-svg--mobile .fq-v-custom{display:inline}
@@ -623,6 +638,7 @@
             </defs>
 
             <path class="fq-axis" d="M88 14 V470 H334"/>
+            <path class="fq-split" d="M211 14 V470"/>
             <text class="fq-end" x="88" y="492">Their servers</text>
             <text class="fq-end" x="334" y="492" text-anchor="end">Your computer</text>
             <text class="fq-title" x="211" y="514" text-anchor="middle">Privacy &rarr;</text>
@@ -642,54 +658,54 @@
               <text class="fq-end" x="80" y="457" text-anchor="end">Settings and<tspan x="80" dy="11">your accounts</tspan></text>
             </g>
 
-            <g class="fq-m fq-m-archie" transform="translate(275,59)">
+            <g class="fq-m fq-m-archie" transform="translate(273,59)">
               <circle class="fq-halo" cx="0" cy="0" r="21"/>
               <circle class="fq-halo-in" cx="0" cy="0" r="18.5"/>
               <text class="fq-name-us" x="0" y="-28">Archie</text>
               <circle class="fq-mark-us" cx="0" cy="0" r="16"/>
               <use href="#lg-archie" x="-11.2" y="-11.2" width="22.4" height="22.4"/>
             </g>
-            <g class="fq-m fq-m-vellum" transform="translate(255,158.68)">
-              <text class="fq-name" x="0" y="-21">Vellum</text>
+            <g class="fq-m fq-m-vellum" transform="translate(305,176.68)">
+              <text class="fq-name" x="0" y="26.5">Vellum</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-vellum" x="-6.3" y="-6.3" width="12.6" height="12.6"/>
             </g>
-            <g class="fq-m fq-m-hermes" transform="translate(280,158.68)">
+            <g class="fq-m fq-m-hermes" transform="translate(241,176.68)">
               <text class="fq-name" x="0" y="26.5">Hermes</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-hermes" x="-11.4" y="-11.4" width="22.8" height="22.8"/>
             </g>
-            <g class="fq-m fq-m-openclaw" transform="translate(275,415)">
+            <g class="fq-m fq-m-openclaw" transform="translate(269,424)">
               <text class="fq-name" x="0" y="-21">OpenClaw</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-openclaw" x="-6.9" y="-6.9" width="13.8" height="13.8"/>
             </g>
-            <g class="fq-m fq-m-cowork" transform="translate(127,176.68)">
+            <g class="fq-m fq-m-cowork" transform="translate(174,176.68)">
               <text class="fq-name" x="0" y="26.5">Cowork</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">C</text>
             </g>
-            <g class="fq-m fq-m-muse" transform="translate(157,158.68)">
-              <text class="fq-name" x="0" y="26.5">Muse</text>
+            <g class="fq-m fq-m-muse" transform="translate(106,158.68)">
+              <text class="fq-name" x="0" y="-21">Muse</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(127,415)">
+            <g class="fq-m fq-m-grok" transform="translate(134,415)">
               <text class="fq-name" x="0" y="26.5">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">G</text>
             </g>
-            <g class="fq-m fq-m-instinct" transform="translate(167,433)">
-              <text class="fq-name" x="0" y="26.5">Instinct</text>
+            <g class="fq-m fq-m-instinct" transform="translate(194,415)">
+              <text class="fq-name" x="0" y="-21">Instinct</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">I</text>
             </g>
-            <g class="fq-m fq-m-symphony" transform="translate(132,59)">
-              <text class="fq-name" x="0" y="-21">Symphony</text>
+            <g class="fq-m fq-m-symphony" transform="translate(126,77)">
+              <text class="fq-name" x="0" y="26.5">Symphony</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-symphony" x="-8.1" y="-8.1" width="16.2" height="16.2"/>
             </g>
-            <g class="fq-m fq-m-norton" transform="translate(167,77)">
+            <g class="fq-m fq-m-norton" transform="translate(146,59)">
               <text class="fq-name" x="0" y="-21">Norton</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">N</text>

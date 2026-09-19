@@ -16415,9 +16415,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-clock { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: start; margin-top: 8px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-card); font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); opacity: 0; z-index: 3; box-shadow: var(--shadow-sm); }
 .day-clock.is-on { opacity: 1; }
 .day-clock i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
-.day-hint { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: end; margin-bottom: 14px; font-size: var(--fs-sm); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 3; }
+.day-hint { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: end; margin-bottom: 14px; font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; gap: 7px; z-index: 3; }
 .day-hint.is-off { opacity: 0; }
-.day-hint svg { width: 21px; height: 21px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.day-hint svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-reduced-motion: no-preference) {
   .day-clock, .day-hint { transition: opacity .35s; }
   .day-hint svg { animation: day-dip 1.6s ease-in-out infinite; }

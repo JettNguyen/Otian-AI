@@ -257,10 +257,10 @@
        front/bigger when each of them hold equal value in the shot"). Now the desk is shot from two
        sides. W/PH is the computer's side of the day: the window near the camera and nearly its own
        size, the phone clear of it and a little behind. W2/PH2 is the phone's: the phone forward and
-       the window back and turned. The morning, the night and the morning after are the computer's,
-       because what those three acts claim is on it; the hours in between are the phone's, because
-       that is where the reader is, and it reads as leaving the desk and coming back to it rather
-       than as a camera that cannot make up its mind. */
+       the window back and turned. The morning and the night are the computer's, because what those
+       two acts claim is on it; the hours in between and the brief that opens the next morning are
+       the phone's, because that is where the reader is, and it reads as leaving the desk and coming
+       back to it rather than as a camera that cannot make up its mind. */
     var W = { x: -86, y: -4, z: 0, ry: 10, s: .94, o: 1 }, PH = { x: 232, y: 2, z: -90, ry: -13, s: .96, o: 1 };
     var W2 = { x: -126, y: -14, z: -190, ry: 16, s: 1.06, o: .5 }, PH2 = { x: 186, y: 2, z: 110, ry: -12, s: .90, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
@@ -319,8 +319,16 @@
            loop rather than adding a scene, because the 2:00 am act ends on "Morning Brief,
            Next, 7:00 AM" and this is that brief arriving. The clock reading 7:00 a second time
            is the payoff: same hour as the hero, and this time the list is in the past tense.
-           Phone forward, window pushed back, and the night is off. */
-        pose: { cam: { rx: 4, ry: -9, s: 1.02 }, win: copy(W, { ry: 12, z: -10 }), phone: copy(PH, { ry: -9, z: -80, x: 226 }), night: 0, fc: 0, fs: 0 },
+           Phone forward, window pushed back, and the night is off.
+
+           IT IS THE PHONE'S SHOT, NOT THE COMPUTER'S (Jett, 2026-09-19: "the phone should come to
+           the front on next morning section"). This ran on W/PH for a day, on the reading that a
+           morning belongs to the desk; but the brief is handed to the reader before they are at
+           the desk, which is the whole point of the act, and the thing being read has to be the
+           thing in front. The window stays brighter here than it is at midday (o .65 against W2's
+           .5) and nearer (z -155 against -190), because the reader watched that window fill an act
+           ago and what the brief is about is still on it. */
+        pose: { cam: { rx: 4, ry: -9, s: 1.02 }, win: copy(W2, { x: -116, ry: 13, z: -155, o: .65 }), phone: copy(PH2, { x: 198, ry: -10, z: 115, s: .91 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '7:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },

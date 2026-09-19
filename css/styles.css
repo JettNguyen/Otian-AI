@@ -16177,12 +16177,16 @@ button.dp-act:hover { background: var(--soft); }
   @keyframes dp-spin { to { transform: rotate(360deg); } }
 }
 /* Two layers, as the app draws it: the tint is 16% of a colour and this thing floats over a
-   transcript, so the card colour goes underneath and the tint on top of that. */
-.dp-notice { position: absolute; left: 16px; right: 16px; bottom: 12px; z-index: 3; display: none; border-radius: var(--radius); overflow: hidden; background: var(--card); border: var(--hair) solid var(--green); box-shadow: var(--lift-phone-float); pointer-events: none; }
+   transcript, so the card colour goes underneath and the tint on top of that. IT COMES IN FROM THE
+   TOP, UNDER THE HEADER BAR (Jett, 2026-09-18), not from the bottom where the app puts it: this
+   transcript is bottom-aligned and only ever a card deep, so a toast rising over the composer sat
+   on the card's last line and its time. The app's own screen scrolls under its notice; this one
+   does not. */
+.dp-notice { position: absolute; left: 16px; right: 16px; top: 12px; z-index: 3; display: none; border-radius: var(--radius); overflow: hidden; background: var(--card); border: var(--hair) solid var(--green); box-shadow: var(--lift-phone-float); pointer-events: none; }
 .dp-notice .in { background: var(--green-sub); padding: 12px; font-size: var(--fs-md); line-height: 20px; color: var(--text); }
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr.is-noticed .dp-notice { display: block; animation: dp-notice 6s ease both; }
-  @keyframes dp-notice { 0% { opacity: 0; transform: translateY(10px); } 4% { opacity: 1; transform: none; } 95% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+  @keyframes dp-notice { 0% { opacity: 0; transform: translateY(-10px); } 4% { opacity: 1; transform: none; } 95% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
 }
 /* THE BUTTONS FOLD AWAY ON SEND, THEY DO NOT VANISH (Jett, 2026-09-18). They were display:none the
    moment the card settled, so a row four buttons tall left the screen between one frame and the

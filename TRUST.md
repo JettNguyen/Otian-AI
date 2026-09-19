@@ -3318,6 +3318,15 @@ day (zero body inbound links, the product already named 31 times on the destinat
 redirect stub; its one point the destination lacked, that Symphony is built for a phone first,
 is a clause there now.
 
+**The egress clause moved from that figure's band to that figure's caption, and it is still
+required** (Jett asked for the band off on 2026-09-18, the sort figure being the third thing on
+that screen to carry the sentence, after the caption and the chart under it). CLAUDE.md's visual
+rule 5 allows either: "The limitation belongs in the figure or in its caption." So the caption
+now ends "All ten send your words to an AI company's computers by default", and the sentence has
+to survive any later edit of that caption. A drawing that sorts ten agents onto "your computer"
+with no egress clause anywhere on it is the banned claim in pictures, whichever of the two places
+carries it.
+
 ---
 
 ## Change Process

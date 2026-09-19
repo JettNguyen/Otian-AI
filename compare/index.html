@@ -228,14 +228,23 @@
         </div>
 
         <figure class="explain-figure mt-40 fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 640 352" role="img" aria-labelledby="sv-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="sv-t">Ten agents sorted by two yes-or-no questions. A row of ten marks at the top: Archie, Claude Cowork, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenClaw, Vellum and Wix Symphony. Under the first question, does the work happen on your own computer, six move left and dim under the label their servers: Claude Cowork, Grok Bot, Meta Muse, Instinct, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, and Norton Family Assistant. Four stay on the right under your computer: Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, three move left and dim under can be turned off: Vellum, Hermes and OpenClaw. Archie stands alone on the right under no off switch, drawn larger, with a soft halo and its name in the colour of this site. A dashed line leads into a band along the bottom reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
+          <svg class="explain-svg--desktop" viewBox="0 0 640 310" role="img" aria-labelledby="sv-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
+            <title id="sv-t">Ten agents sorted by two yes-or-no questions. A row of ten marks at the top: Archie, Claude Cowork, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenClaw, Vellum and Wix Symphony. Under the first question, does the work happen on your own computer, six move left and dim under the label their servers: Claude Cowork, Grok Bot, Meta Muse, Instinct, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, and Norton Family Assistant. Four stay on the right under your computer: Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, three move left and dim under can be turned off: Vellum, Hermes and OpenClaw. Archie stands alone on the right under no off switch, drawn larger, with a soft halo and its name in the colour of this site.</title>
             <style>
               .explain-svg--desktop .sv-q{fill:currentColor;font-size:12.5px;font-weight:650}
               .explain-svg--desktop .sv-rule{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--desktop .sv-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
               .explain-svg--desktop .sv-lab{fill:currentColor;font-size:9.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;opacity:.5;text-anchor:middle}
               .explain-svg--desktop .sv-lab-us{fill:var(--accent-ink);opacity:1}
+              /* A CLASS BEATS A PRESENTATION ATTRIBUTE, and text-anchor is one. .sv-lab sets
+                 middle above, so text-anchor="start" written on an element did nothing and the
+                 row label centred on x=8, hanging two thirds of itself off the left edge (Jett,
+                 2026-09-18: the A of AGENTS was clipped). The same rule cut "NO OFF SWITCH" at the
+                 right edge. The anchor is a class now, after .sv-lab so it wins on order, and the
+                 two answers under the second question sit at the middle of what they label rather
+                 than at an edge they cannot reach. Widths measured in Inter at 9.5px with the
+                 letter-spacing: 113 and 88, which is what put them at 466 and 594. */
+              .explain-svg--desktop .sv-lab--s{text-anchor:start}
               .explain-svg--desktop .sv-mark{fill:#FFFFFF;stroke:var(--line-muted);stroke-width:1.5}
               .explain-svg--desktop .sv-mark-us{fill:#FFFFFF;stroke:var(--accent);stroke-width:2.4}
               .explain-svg--desktop .sv-halo{fill:var(--accent);opacity:.14}
@@ -244,22 +253,10 @@
               .explain-svg--desktop .sv-name-us{fill:var(--accent-ink);font-size:13px;font-weight:700;text-anchor:middle}
               .explain-svg--desktop .sv-init{fill:#44403B;font-size:14px;font-weight:700;text-anchor:middle}
               .explain-svg--desktop .sv-out{opacity:.42}
-              .explain-svg--desktop .sv-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#svArr)}
-              .explain-svg--desktop .sv-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
-              .explain-svg--desktop .sv-band-t{fill:currentColor;font-size:12px;font-weight:650;text-anchor:middle}
-              @media (prefers-reduced-motion:no-preference){
-                .explain-svg--desktop .sv-flow{animation:svFlow 1.9s linear infinite}
-                @keyframes svFlow{to{stroke-dashoffset:-18}}
-              }
             </style>
-            <defs>
-              <marker id="svArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-              </marker>
-            </defs>
 
             <!-- Row A: all ten, in alphabetical order, no names. Every name appears where its mark lands. -->
-            <text class="sv-lab" x="8" y="44" text-anchor="start">Ten agents</text>
+            <text class="sv-lab sv-lab--s" x="8" y="44">Ten agents</text>
             <g transform="translate(122,40)"><circle class="sv-mark-us" r="13"/><use href="#lg-archie" x="-9.1" y="-9.1" width="18.2" height="18.2"/></g>
             <g transform="translate(166,40)"><circle class="sv-mark" r="13"/><text class="sv-init" y="5">C</text></g>
             <g transform="translate(210,40)"><circle class="sv-mark" r="13"/><text class="sv-init" y="5">G</text></g>
@@ -293,8 +290,8 @@
             <!-- Question 2, asked only of the four on your computer -->
             <text class="sv-q" x="8" y="202">Is asking your permission a setting?</text>
             <path class="sv-rule" d="M8 210 H632"/>
-            <text class="sv-lab" x="486" y="232">Can be turned off</text>
-            <text class="sv-lab sv-lab-us" x="632" y="232" text-anchor="end">No off switch</text>
+            <text class="sv-lab" x="466" y="232">Can be turned off</text>
+            <text class="sv-lab sv-lab-us" x="594" y="232">No off switch</text>
             <path class="sv-split" d="M570 242 V300"/>
             <g class="sv-out">
               <g transform="translate(430,258)"><circle class="sv-mark" r="13"/><use href="#lg-vellum" x="-6.8" y="-6.8" width="13.6" height="13.6"/><text class="sv-name" y="27">Vellum</text></g>
@@ -309,14 +306,10 @@
               <text class="sv-name-us" y="38">Archie</text>
             </g>
 
-            <!-- The provider-egress clause, in the picture -->
-            <path class="sv-flow" d="M320 280 V314"/>
-            <rect class="sv-band" x="8" y="318" width="624" height="30" rx="10"/>
-            <text class="sv-band-t" x="320" y="338">All ten send your words to an AI company&rsquo;s computers by default.</text>
           </svg>
 
-          <svg class="explain-svg--mobile" viewBox="0 0 340 496" role="img" aria-labelledby="svm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="svm-t">Ten agents sorted by two yes-or-no questions, stacked for a narrow screen. A row of ten marks at the top: Archie, Claude Cowork, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenClaw, Vellum and Wix Symphony, with the shorter names Cowork, Muse, Norton and Symphony used below. Under the first question, does the work happen on your own computer, a dimmed row labelled their servers holds Claude Cowork, Grok Bot, Meta Muse, Instinct, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, and Norton Family Assistant; a row labelled your computer holds Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, a dimmed row labelled can be turned off holds Vellum, Hermes and OpenClaw, and under no off switch Archie stands alone, drawn larger with a soft halo and its name in the colour of this site. A dashed line leads into a band at the bottom reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 424" role="img" aria-labelledby="svm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="svm-t">Ten agents sorted by two yes-or-no questions, stacked for a narrow screen. A row of ten marks at the top: Archie, Claude Cowork, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenClaw, Vellum and Wix Symphony, with the shorter names Cowork, Muse, Norton and Symphony used below. Under the first question, does the work happen on your own computer, a dimmed row labelled their servers holds Claude Cowork, Grok Bot, Meta Muse, Instinct, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, and Norton Family Assistant; a row labelled your computer holds Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, a dimmed row labelled can be turned off holds Vellum, Hermes and OpenClaw, and under no off switch Archie stands alone, drawn larger with a soft halo and its name in the colour of this site.</title>
             <style>
               .explain-svg--mobile .sv-q{fill:currentColor;font-size:11.5px;font-weight:650}
               .explain-svg--mobile .sv-rule{stroke:var(--line-muted);stroke-width:1.4;fill:none}
@@ -331,19 +324,7 @@
               .explain-svg--mobile .sv-init{fill:#44403B;font-size:12px;font-weight:700;text-anchor:middle}
               .explain-svg--mobile .sv-init--s{font-size:11px}
               .explain-svg--mobile .sv-out{opacity:.42}
-              .explain-svg--mobile .sv-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#svmArr)}
-              .explain-svg--mobile .sv-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
-              .explain-svg--mobile .sv-band-t{fill:currentColor;font-size:11px;font-weight:650;text-anchor:middle}
-              @media (prefers-reduced-motion:no-preference){
-                .explain-svg--mobile .sv-flow{animation:svmFlow 1.9s linear infinite}
-                @keyframes svmFlow{to{stroke-dashoffset:-18}}
-              }
             </style>
-            <defs>
-              <marker id="svmArr" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                <path d="M0 1.6 L7 5 L0 8.4" fill="none" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-              </marker>
-            </defs>
 
             <text class="sv-lab" x="8" y="14">Ten agents</text>
             <g transform="translate(35,36)"><circle class="sv-mark-us" r="10"/><use href="#lg-archie" x="-7" y="-7" width="14" height="14"/></g>
@@ -391,12 +372,8 @@
               <text class="sv-name-us" x="34" y="5">Archie</text>
             </g>
 
-            <path class="sv-flow" d="M170 424 V440"/>
-            <rect class="sv-band" x="8" y="444" width="324" height="44" rx="10"/>
-            <text class="sv-band-t" x="170" y="462">All ten send your words to an AI</text>
-            <text class="sv-band-t" x="170" y="477">company&rsquo;s computers by default.</text>
           </svg>
-          <figcaption>Six work on their servers. Of the four on yours, three can be set to stop asking. For Archie, asking means calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final.</figcaption>
+          <figcaption>For Archie, asking means calendar changes are confirmed, nothing is sent until you send it, and it stops before an order is final. All ten send your words to an AI company&rsquo;s computers by default.</figcaption>
         </figure>
       </div>
     </section>

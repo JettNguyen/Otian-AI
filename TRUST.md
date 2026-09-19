@@ -1298,6 +1298,19 @@ alone.
   catalog as well.
 - ⛔ **Never "no review" or "publish it yourself".** Writing one for your own agent is local.
   Getting one into the shelf for other people is a submission we read by hand.
+- ⛔ **Never as a thing only we do, and this was checked properly on 2026-09-18.** Six of the nine
+  products on the compare board publish the same capability, each in its own words: Claude&rsquo;s
+  skill-creator (&ldquo;Describe what you want, and Claude generates the folder structure&rdquo;),
+  Vellum (&ldquo;You can create new skills by describing what you want in the chat&rdquo;), Hermes
+  (`/learn`, &ldquo;without hand-writing the SKILL.md&rdquo;), OpenClaw (Skill Workshop, &ldquo;ask
+  the agent for the skill you want&rdquo;), Grok Bot (&ldquo;Save the process we just used as a
+  skill&rdquo;), and Meta Muse on its engineering blog (&ldquo;builds its own tools&rdquo;, though
+  Meta&rsquo;s own help centre says skills are Meta-built and cannot be installed, so that one is
+  contested between two Meta pages). **Getting a new ability by asking for it is table stakes
+  among agent-shaped products, not a differentiator**, and the entry above calling it our
+  strongest answer to &ldquo;can I make it mine&rdquo; was written before that was known. It is
+  still true that it is our strongest answer. It is not true that it sets us apart, and any page
+  implying it does is wrong.
 
 ### ✅ An API nobody here has heard of, connected and used. SHIPPED 2026-09-18, the day a skill could first name one
 

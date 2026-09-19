@@ -205,7 +205,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Every assistant we could source</span>
           <h2 id="board-heading" class="fade-up delay-1">Ten assistants, placed from what their own pages say.</h2>
-          <p class="hm-lede fade-up delay-1">Privacy runs across: where the work happens, on their servers or on your computer. What runs up is your pick. Asks first is what a product does before a step that matters: it acts unless you set it to ask, it asks by default until you change a setting, or it asks every time and there is no setting. Ease is how you get it running: from a terminal, by downloading an app, or by signing in. Customization is how far you can make it yours: settings and the accounts you connect, a shelf of add-ons you install, or its code, open for you to change. Privacy and asking first are what this site is built around, which is why the chart rests on them. The top right is the corner we are aiming at, and in the other two views we have not reached it: nobody has on Ease, and three have on Customization. Every mark is placed by a sentence on the company&rsquo;s own site, quoted below. Read September 18, 2026.</p>
+          <p class="hm-lede fade-up delay-1">Privacy runs across: where the work happens, on their servers or on your computer. What runs up is your pick. Asks first is what a product does before a step that matters: it acts unless you set it to ask, it asks by default until you change a setting, or it asks every time and there is no setting. Ease is how you get it running: from a terminal, by downloading an app, or by signing in. Those two and privacy are what this site is built around, which is why the chart rests on them. The top right is the corner we are aiming at, and in the Ease view nobody has reached it, us included. Every mark is placed by a sentence on the company&rsquo;s own site, quoted below. Read September 18, 2026.</p>
         </div>
 
         <!-- ==============================
@@ -214,8 +214,8 @@
 
              THREE VIEWS, ONE BAR, NO SCRIPT (2026-09-18). Privacy runs across in every view. Up
              is the reader's pick: "Asks first", what a product does before a step that matters,
-             by default; "Ease", how you get it running; or "Customization", how far you can make
-             it yours. The bar is three hidden radios (the stylesheet's .aud-pick-radio, the
+             by default; or "Ease", how you get it running. The bar is two hidden radios
+             (the stylesheet's .aud-pick-radio, the
              review tabs' own) and three labels in a bordered track, with `#fq-ease:checked ~` and
              `#fq-custom:checked ~` rules inside each chart's <style> that set one transform per
              mark and swap the axis labels, which is the pattern testimonials/ already uses and
@@ -225,12 +225,11 @@
              three in CLAUDE.md's motion rules, a small control the reader works, and Jett asked
              for it after a day that went: three labelled tiers, a free field, a 3D field with
              ease as depth (built, and found hard to read, as I had said it would be), two views
-             on a pair of pills, then this. He asked for the bar in place of the pills and for
-             Customization as the third view the same evening.
+             on a pair of pills, then this. He asked for the bar in place of the pills the same
+             evening, along with a third view that was built and then dropped; the block below
+             on the third view says why, because the reasoning outlives the view.
 
-             TEN MARKS, AND HOW THEY ARE PLACED. Ten marks in three views is more than a fixed x
-             per mark can carry: six share the floor of the Customization view on one side. So a
-             mark keeps its side and may shift along it between views, sliding on a diagonal. The
+             TEN MARKS, AND HOW THEY ARE PLACED. The
              generator (gen3v.py in the session scratchpad, not in the repo) gives each half of
              the field a grid of positions 6px apart on desktop and 5px narrow, and three rows 9px
              apart; a mark's name sits above or below its circle, fixed per mark, so neighbours in
@@ -256,16 +255,33 @@
              those two facts, and the fold says in words that it is a reading and not a quote.
              TRUST.md carries the rows and the rule for reversing it. The strip is gone.
 
-             CUSTOMIZATION HAS THREE LEVELS, AND ARCHIE IS NOT AT THE TOP. Settings and the
-             accounts you connect (Muse, Instinct, Symphony, Norton, each sourced to a page that
-             offers nothing else to install); a shelf of add-ons you install (Archie, and also
-             Claude Cowork's Customize directory and Grok Bot's marketplace, both found by reading
-             rather than assumed); its code is yours (OpenClaw, Hermes, Vellum, MIT all three,
-             each with a shelf on top). Jett's instinct was Archie "just below OpenClaw". Within a
-             level the chart never ranks, so the honest drawing is the level: one step under the
-             open-source three and level with two rented agents, and the prose concedes the code
-             point in words. A view that puts us second is on the chart because a reader who wants
-             to change the code should hear from us who lets them.
+             A THIRD VIEW WAS BUILT TWICE AND DROPPED, AND THE REASONING IS THE POINT (2026-09-18).
+             The first version was Customization, and its levels were how much of the product's
+             code you could change: settings and your accounts, a shelf of add-ons, its code is
+             yours. That put Archie a step under OpenClaw, Hermes and Vellum, which is true and is
+             the wrong measure. Jett: customization "shouldn't really be measured by how much of
+             its code can be changed. that is for really technical users." He is right, and this
+             site is sold to the person who will never open a terminal.
+
+             So the axis was redefined as how much you can shape without writing code, and the
+             definition was written down and timestamped BEFORE a single competitor was looked at
+             under it, because we were redefining a measure immediately after finding we came
+             second on it and that sequence is exactly what a reader is entitled to be cynical
+             about. Three levels: settings and the accounts you connect; a name, a manner and a
+             shelf; ask in conversation and it writes you an ability that did not exist. The rule
+             written down with it: if Archie ends up alone at the top, be suspicious rather than
+             pleased.
+
+             Researched against all nine, it put seven of the ten on one line. Claude Cowork,
+             Meta Muse, Grok Bot, Vellum, Hermes and OpenClaw all publish conversational skill
+             authoring, in their own words, and so do we. Wix Symphony sits alone below it, and
+             Norton and Instinct at the floor. **An axis that separates nobody is not an axis**,
+             and a third definition would have been the move this whole board exists to avoid. So
+             the view came off and the finding went into prose, where it is worth more: telling a
+             reader that six of the other nine will also write them a skill if they ask is a
+             better sentence than a row of seven marks at the same height. TRUST.md holds every
+             level with its quote, and a boundary saying this capability is table stakes and may
+             never be claimed as ours alone.
 
              THE UP-AXIS WAS CALLED CONTROL, AND IT WAS NOT MEASURING CONTROL. It measured what a
              product does by default. OpenClaw sat at the bottom of it and gives more control than
@@ -422,7 +438,6 @@
           </svg>
           <input type="radio" class="aud-pick-radio" name="fq-view" id="fq-asks" checked>
           <input type="radio" class="aud-pick-radio" name="fq-view" id="fq-ease">
-          <input type="radio" class="aud-pick-radio" name="fq-view" id="fq-custom">
           <style>
             /* One selector bar: a bordered track and three options, the checked one lit.
                Keyed to the three radio ids above, so the rules live with them. */
@@ -432,22 +447,19 @@
             .fq-bar-opt{padding:7px 15px;border:1px solid transparent;border-radius:999px;font-size:var(--fs-sm);font-weight:600;color:var(--text-secondary);cursor:pointer;transition:background var(--transition),color var(--transition),border-color var(--transition)}
             .fq-bar-opt:hover{color:var(--text-primary)}
             #fq-asks:checked ~ .fq-bar-wrap [for="fq-asks"],
-            #fq-ease:checked ~ .fq-bar-wrap [for="fq-ease"],
-            #fq-custom:checked ~ .fq-bar-wrap [for="fq-custom"]{background:var(--accent-subtle);color:var(--text-primary);border-color:var(--accent)}
+            #fq-ease:checked ~ .fq-bar-wrap [for="fq-ease"]{background:var(--accent-subtle);color:var(--text-primary);border-color:var(--accent)}
             #fq-asks:focus-visible ~ .fq-bar-wrap [for="fq-asks"],
-            #fq-ease:focus-visible ~ .fq-bar-wrap [for="fq-ease"],
-            #fq-custom:focus-visible ~ .fq-bar-wrap [for="fq-custom"]{outline:2px solid var(--accent-ink);outline-offset:2px}
+            #fq-ease:focus-visible ~ .fq-bar-wrap [for="fq-ease"]{outline:2px solid var(--accent-ink);outline-offset:2px}
           </style>
           <div class="fq-bar-wrap">
             <span class="fq-bar-lead">Up the chart:</span>
             <div class="fq-bar" role="group" aria-label="Which measure runs up the chart">
               <label class="fq-bar-opt" for="fq-asks">Asks first</label>
               <label class="fq-bar-opt" for="fq-ease">Ease</label>
-              <label class="fq-bar-opt" for="fq-custom">Customization</label>
             </div>
           </div>
           <svg class="explain-svg--desktop" viewBox="0 0 640 538" role="img" aria-labelledby="fq-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fq-t">A chart with two axes and a selector bar above it. Across, privacy: their servers on the left, your computer on the right, the same in every view. The bar chooses what runs up the chart. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the their-servers side; along the bottom, acting on their own unless set to ask, OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; a short way below, a desktop app you download, Archie, Vellum and Hermes on the your-computer side and Grok Bot on the other; at the bottom, installed and configured from a terminal, OpenClaw alone. Customization: at the top, its code is yours to change, OpenClaw, Hermes and Vellum, all on the your-computer side; a short way below, a shelf of add-ons you install, Archie on the your-computer side and Claude Cowork and Grok Bot on the their-servers side; at the bottom, settings and the accounts you connect, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant. Five circles carry the company&rsquo;s own icon and five carry a letter, and every one has its name beside it. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
+            <title id="fq-t">A chart with two axes and a selector bar above it. Across, privacy: their servers on the left, your computer on the right, the same in every view. The bar chooses what runs up the chart. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the their-servers side; along the bottom, acting on their own unless set to ask, OpenClaw on the your-computer side, Grok Bot and Instinct on the their-servers side. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; a short way below, a desktop app you download, Archie, Vellum and Hermes on the your-computer side and Grok Bot on the other; at the bottom, installed and configured from a terminal, OpenClaw alone. Five circles carry the company&rsquo;s own icon and five carry a letter, and every one has its name beside it. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--desktop .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--desktop .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
@@ -463,33 +475,19 @@
               .explain-svg--desktop .fq-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#fqArr)}
               .explain-svg--desktop .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--desktop .fq-band-t{fill:currentColor;font-size:13px;font-weight:650;text-anchor:middle}
-              .explain-svg--desktop .fq-v-ease,.fq-v-custom{display:none}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(492px,141.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(555px,150.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(422px,150.4px)}
+              .explain-svg--desktop .fq-v-ease{display:none}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(492px,159.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(548px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(429px,150.4px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(471px,352px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(326px,63px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(200px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(186px,150.4px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(291px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(256px,81px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(165px,63px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(221px,63px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(319px,81px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(242px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(151px,81px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(291px,63px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(186px,63px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-v-asks{display:none}
               #fq-ease:checked ~ .explain-svg--desktop .fq-v-ease{display:inline}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-v-custom{display:none}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-archie{transform:translate(492px,141.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-vellum{transform:translate(555px,72px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-hermes{transform:translate(422px,72px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(471px,72px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(326px,141.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(200px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(186px,150.4px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(291px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(256px,361px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(165px,343px)}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-v-asks{display:none}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-v-ease{display:none}
-              #fq-custom:checked ~ .explain-svg--desktop .fq-v-custom{display:inline}
               @media (prefers-reduced-motion:no-preference){
                 .explain-svg--desktop .fq-m{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
                 .explain-svg--desktop .fq-flow{animation:fqFlow 1.9s linear infinite}
@@ -517,25 +515,20 @@
               <text class="fq-end" x="102" y="22" text-anchor="end">Sign in</text>
               <text class="fq-end" x="102" y="400" text-anchor="end">From a terminal</text>
             </g>
-            <g class="fq-v-custom">
-              <text class="fq-title" transform="rotate(-90 12 209)" x="12" y="209" text-anchor="middle">Customization &rarr;</text>
-              <text class="fq-end" x="102" y="22" text-anchor="end">Its code<tspan x="102" dy="12">is yours</tspan></text>
-              <text class="fq-end" x="102" y="388" text-anchor="end">Settings and<tspan x="102" dy="12">your accounts</tspan></text>
-            </g>
 
-            <g class="fq-m fq-m-archie" transform="translate(492,63)">
+            <g class="fq-m fq-m-archie" transform="translate(492,81)">
               <circle class="fq-halo" cx="0" cy="0" r="30"/>
               <circle class="fq-halo-in" cx="0" cy="0" r="26"/>
               <text class="fq-name-us" x="0" y="-37">Archie</text>
               <circle class="fq-mark-us" cx="0" cy="0" r="22"/>
               <use href="#lg-archie" x="-15.4" y="-15.4" width="30.8" height="30.8"/>
             </g>
-            <g class="fq-m fq-m-vellum" transform="translate(555,150.4)">
+            <g class="fq-m fq-m-vellum" transform="translate(548,150.4)">
               <text class="fq-name" x="0" y="-25">Vellum</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-vellum" x="-8.4" y="-8.4" width="16.8" height="16.8"/>
             </g>
-            <g class="fq-m fq-m-hermes" transform="translate(422,150.4)">
+            <g class="fq-m fq-m-hermes" transform="translate(429,150.4)">
               <text class="fq-name" x="0" y="33.5">Hermes</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-hermes" x="-15.2" y="-15.2" width="30.4" height="30.4"/>
@@ -545,32 +538,32 @@
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-openclaw" x="-9.2" y="-9.2" width="18.4" height="18.4"/>
             </g>
-            <g class="fq-m fq-m-cowork" transform="translate(326,141.4)">
-              <text class="fq-name" x="0" y="-25">Claude Cowork</text>
+            <g class="fq-m fq-m-cowork" transform="translate(221,141.4)">
+              <text class="fq-name" x="0" y="33.5">Claude Cowork</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">C</text>
             </g>
-            <g class="fq-m fq-m-muse" transform="translate(200,159.4)">
+            <g class="fq-m fq-m-muse" transform="translate(319,159.4)">
               <text class="fq-name" x="0" y="33.5">Meta Muse</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(186,352)">
+            <g class="fq-m fq-m-grok" transform="translate(242,352)">
               <text class="fq-name" x="0" y="33.5">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">G</text>
             </g>
-            <g class="fq-m fq-m-instinct" transform="translate(291,361)">
+            <g class="fq-m fq-m-instinct" transform="translate(151,361)">
               <text class="fq-name" x="0" y="33.5">Instinct</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">I</text>
             </g>
-            <g class="fq-m fq-m-symphony" transform="translate(256,81)">
+            <g class="fq-m fq-m-symphony" transform="translate(291,63)">
               <text class="fq-name" x="0" y="-25">Wix Symphony</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <use href="#lg-symphony" x="-10.8" y="-10.8" width="21.6" height="21.6"/>
             </g>
-            <g class="fq-m fq-m-norton" transform="translate(165,63)">
+            <g class="fq-m fq-m-norton" transform="translate(186,63)">
               <text class="fq-name" x="0" y="-38.75">Norton Family<tspan x="0" dy="13.75">Assistant</tspan></text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">N</text>
@@ -582,7 +575,7 @@
           </svg>
 
           <svg class="explain-svg--mobile" viewBox="0 0 340 616" role="img" aria-labelledby="fqm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fqm-t">The same chart, taller for a narrow screen, with the same selector bar above it and the names shortened to fit: Cowork for Claude Cowork, Muse for Meta Muse, Symphony for Wix Symphony and Norton for Norton Family Assistant. Across, privacy: their servers on the left, your computer on the right, in every view. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the other; on the floor, acting on their own unless set to ask, OpenClaw on the your-computer side and Grok Bot and Instinct on the other. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; below, a desktop app you download, Archie, Vellum, Hermes and Grok Bot; at the bottom, from a terminal, OpenClaw. Customization: at the top, its code is yours to change, OpenClaw, Hermes and Vellum, all on the your-computer side; below, a shelf of add-ons you install, Archie, Claude Cowork and Grok Bot; at the bottom, settings and the accounts you connect, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
+            <title id="fqm-t">The same chart, taller for a narrow screen, with the same selector bar above it and the names shortened to fit: Cowork for Claude Cowork, Muse for Meta Muse, Symphony for Wix Symphony and Norton for Norton Family Assistant. Across, privacy: their servers on the left, your computer on the right, in every view. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the colour of this site, and Wix Symphony and Norton Family Assistant on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork and Meta Muse on the other; on the floor, acting on their own unless set to ask, OpenClaw on the your-computer side and Grok Bot and Instinct on the other. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, Instinct, Wix Symphony and Norton Family Assistant, all on the their-servers side; below, a desktop app you download, Archie, Vellum, Hermes and Grok Bot; at the bottom, from a terminal, OpenClaw. A dashed line leaves for a band reading that all ten send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--mobile .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--mobile .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
@@ -598,33 +591,19 @@
               .explain-svg--mobile .fq-flow{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.7;stroke-linecap:round;stroke-dasharray:2 7;marker-end:url(#fqmArr)}
               .explain-svg--mobile .fq-band{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.6}
               .explain-svg--mobile .fq-band-t{fill:currentColor;font-size:11.5px;font-weight:650;text-anchor:middle}
-              .explain-svg--mobile .fq-v-ease,.fq-v-custom{display:none}
+              .explain-svg--mobile .fq-v-ease{display:none}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(273px,158.68px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(305px,176.68px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(241px,176.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(269px,424px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(281px,424px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(174px,77px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(106px,59px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(134px,158.68px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(194px,59px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(126px,77px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(158px,167.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(126px,77px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(194px,59px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(146px,59px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-v-asks{display:none}
               #fq-ease:checked ~ .explain-svg--mobile .fq-v-ease{display:inline}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-v-custom{display:none}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-archie{transform:translate(273px,158.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-vellum{transform:translate(305px,77px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-hermes{transform:translate(241px,77px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(269px,68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(174px,176.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(106px,415px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(134px,158.68px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(194px,415px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(126px,433px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(146px,415px)}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-v-asks{display:none}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-v-ease{display:none}
-              #fq-custom:checked ~ .explain-svg--mobile .fq-v-custom{display:inline}
               @media (prefers-reduced-motion:no-preference){
                 .explain-svg--mobile .fq-m{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
                 .explain-svg--mobile .fq-flow{animation:fqmFlow 1.9s linear infinite}
@@ -652,11 +631,6 @@
               <text class="fq-end" x="80" y="22" text-anchor="end">Sign in</text>
               <text class="fq-end" x="80" y="457" text-anchor="end">From a<tspan x="80" dy="11">terminal</tspan></text>
             </g>
-            <g class="fq-v-custom">
-              <text class="fq-title" transform="rotate(-90 9 242)" x="9" y="242" text-anchor="middle">Customization &rarr;</text>
-              <text class="fq-end" x="80" y="22" text-anchor="end">Its code<tspan x="80" dy="11">is yours</tspan></text>
-              <text class="fq-end" x="80" y="457" text-anchor="end">Settings and<tspan x="80" dy="11">your accounts</tspan></text>
-            </g>
 
             <g class="fq-m fq-m-archie" transform="translate(273,59)">
               <circle class="fq-halo" cx="0" cy="0" r="21"/>
@@ -675,8 +649,8 @@
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-hermes" x="-11.4" y="-11.4" width="22.8" height="22.8"/>
             </g>
-            <g class="fq-m fq-m-openclaw" transform="translate(269,424)">
-              <text class="fq-name" x="0" y="-21">OpenClaw</text>
+            <g class="fq-m fq-m-openclaw" transform="translate(281,424)">
+              <text class="fq-name" x="0" y="26.5">OpenClaw</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-openclaw" x="-6.9" y="-6.9" width="13.8" height="13.8"/>
             </g>
@@ -690,18 +664,18 @@
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(134,415)">
-              <text class="fq-name" x="0" y="26.5">Grok Bot</text>
+            <g class="fq-m fq-m-grok" transform="translate(158,424)">
+              <text class="fq-name" x="0" y="-21">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">G</text>
             </g>
-            <g class="fq-m fq-m-instinct" transform="translate(194,415)">
-              <text class="fq-name" x="0" y="-21">Instinct</text>
+            <g class="fq-m fq-m-instinct" transform="translate(126,433)">
+              <text class="fq-name" x="0" y="26.5">Instinct</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">I</text>
             </g>
-            <g class="fq-m fq-m-symphony" transform="translate(126,77)">
-              <text class="fq-name" x="0" y="26.5">Symphony</text>
+            <g class="fq-m fq-m-symphony" transform="translate(194,59)">
+              <text class="fq-name" x="0" y="-21">Symphony</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <use href="#lg-symphony" x="-8.1" y="-8.1" width="16.2" height="16.2"/>
             </g>
@@ -746,16 +720,16 @@
         </div>
 
         <h3 class="fade-up delay-1">Where the other nine beat Archie</h3>
-        <p class="fade-up delay-1">Hermes, OpenClaw and Vellum run on your own computer, cost nothing to keep and are open source, and if free and open is how you are choosing, they win it. Open code is also the top of the Customization view, and all three have a shelf of add-ons besides; Archie&rsquo;s shelf puts it one step under them, level with Claude Cowork and Grok Bot, which have shelves of their own. All three let you pick the AI company, as Archie does. OpenClaw gives you the most control of the ten: five permission modes, one of which asks before every command, allow lists per command, and code you can read and change. Vellum has a Strict mode that asks before everything, and Hermes can be set to ask more or less. On Archie the asking is built in and has no setting, which is the trade the chart draws: less to set up, and less you can change. Vellum makes almost the same custody claim we do, in almost the same words, and reaches a phone, a browser and a terminal besides. Muse and Symphony each have a free plan that renews every month, and ours does not.</p>
-        <!-- What the Customization level means in practice, added 2026-09-18 when Jett asked why we
-             sit under the open-source three and whether it can be fixed. The level is drawn and the
-             level is right; a level is not an explanation, and a reader who wants to make the thing
-             theirs deserves the two halves in the order the Standard asks for: what they can do,
-             then the catch, on the same screen. Every line here has a TRUST.md entry behind it, two
-             of them written the same day for capabilities that had shipped on 2026-09-01 and were
-             claimed nowhere. -->
+        <p class="fade-up delay-1">Hermes, OpenClaw and Vellum run on your own computer, cost nothing to keep and are open source, and if free and open is how you are choosing, they win it. Their code is published and ours is not, so anything you can imagine you can write, and you can read every line before you trust it. That is the larger freedom if you are the person who would use it, and the chart does not draw it, because the chart measures what happens without writing code. All three let you pick the AI company, as Archie does. OpenClaw gives you the most control of the ten: five permission modes, one of which asks before every command, allow lists per command, and code you can read and change. Vellum has a Strict mode that asks before everything, and Hermes can be set to ask more or less. On Archie the asking is built in and has no setting, which is the trade the chart draws: less to set up, and less you can change. Vellum makes almost the same custody claim we do, in almost the same words, and reaches a phone, a browser and a terminal besides. Muse and Symphony each have a free plan that renews every month, and ours does not.</p>
+<!-- Added 2026-09-18 when Jett asked why Archie is less customizable than the others and
+             whether it can be fixed. This section is what the retired third view was trying to
+             draw, and prose does it better: the honest answer has a "yes, and", a "no", and a
+             "so does nearly everybody", and a mark at a height carries none of the three. Order
+             is the one the Standard asks for: what a reader can do, then the catch, on the same
+             screen. Every line has a TRUST.md entry behind it, three of them written the same day,
+             two for capabilities that shipped on 2026-09-01 and were claimed nowhere. -->
         <h3 class="fade-up delay-1">What you can change, and what you cannot</h3>
-        <p class="fade-up delay-1">The chart puts a level on it. Here is what that level means once you are actually using the thing.</p>
+        <p class="fade-up delay-1">Not on the chart, because it did not separate anybody. Six of the other nine will also write you a new ability if you ask them for one, so this is where Archie stands rather than where it wins.</p>
         <div class="calm-list calm-list--ruled fade-up delay-1">
           <div class="calm-list-item">
             <span class="calm-list-label">Describe a skill and your agent writes it</span>
@@ -767,7 +741,7 @@
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">A new ability has to come from us</span>
-            <p>A skill is instructions plus permission to use something Archie already has. Which services and which abilities exist is decided when we build the app, so a new one is a new version and we are the only ones who can release it. On the three open-source products you would write it yourself, which is the whole of the gap the chart draws.</p>
+            <p>A skill is instructions plus permission to use something Archie already has. Which services and which abilities exist is decided when we build the app, so a new one is a new version and we are the only ones who can release it. On Hermes, OpenClaw and Vellum you would write it yourself, because their code is published.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Archie&rsquo;s code is not published</span>
@@ -784,7 +758,7 @@
             <div class="calm-list calm-list--ruled">
               <div class="calm-list-item" id="src-1">
                 <span class="calm-list-label"><span class="src-n">1</span>Archie: custody and what it asks</span>
-                <p>Our own <a href="../trust/">Trust page</a>, claim by claim, with the code behind each one. Archie is a download from our <a href="../archie/install/">install page</a>, which is the app row. Its shelf is <a href="../skills-marketplace/browse/">the add-ons page</a>, which is the shelf level of the Customization view; its code is not published.</p>
+                <p>Our own <a href="../trust/">Trust page</a>, claim by claim, with the code behind each one. Archie is a download from our <a href="../archie/install/">install page</a>, which is the app row. Its shelf is <a href="../skills-marketplace/browse/">the add-ons page</a>, which is the shelf; Archie&rsquo;s own code is not published. Telling your agent what you wish it did, and having it write the skill, shipped in Archie 0.2.2 on September 1, 2026.</p>
               </div>
               <div class="calm-list-item" id="src-2">
                 <span class="calm-list-label"><span class="src-n">2</span>Archie: the price</span>
@@ -792,7 +766,7 @@
               </div>
               <div class="calm-list-item" id="src-3">
                 <span class="calm-list-label"><span class="src-n">3</span>Vellum: runs locally by default, and asks until you mark an action trusted</span>
-                <p>Read from <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a> on September 16, 2026. &ldquo;By default, your assistant runs locally. Your conversation history, memory, and credentials stay on your machine and are never used to train models.&rdquo; And: &ldquo;High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted.&rdquo; Its download page, read September 18, offers &ldquo;Vellum for Mac: Native Mac app with computer use&rdquo; and &ldquo;Vellum for Windows: Desktop app for Windows PCs&rdquo;, which is the app row. Its permissions docs give four modes, from Strict, &ldquo;Everything: every action requires explicit approval&rdquo;, to Full access, &ldquo;your assistant never asks for permission&rdquo;. Its FAQ says &ldquo;you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time.&rdquo; The page also says Vellum is open source and is &ldquo;native to Mac and accessible everywhere: iOS, Android, web app, voice, email, Telegram, Slack, and terminal.&rdquo; Its <a href="https://www.vellum.ai/skills" rel="nofollow noopener" target="_blank">skills page</a>, read September 18, says &ldquo;Skills give your agents new capabilities. Browse the catalog, pick what you need, and install with a single command&rdquo;, and its <a href="https://www.vellum.ai/plugins" rel="nofollow noopener" target="_blank">plugins page</a> says to &ldquo;Browse and install from the Plugins tab inside the Vellum app&rdquo;; with the code open, that is the top of the Customization view.</p>
+                <p>Read from <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a> on September 16, 2026. &ldquo;By default, your assistant runs locally. Your conversation history, memory, and credentials stay on your machine and are never used to train models.&rdquo; And: &ldquo;High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted.&rdquo; Its download page, read September 18, offers &ldquo;Vellum for Mac: Native Mac app with computer use&rdquo; and &ldquo;Vellum for Windows: Desktop app for Windows PCs&rdquo;, which is the app row. Its permissions docs give four modes, from Strict, &ldquo;Everything: every action requires explicit approval&rdquo;, to Full access, &ldquo;your assistant never asks for permission&rdquo;. Its FAQ says &ldquo;you can switch between models including OpenAI, Anthropic, Gemini, or open weights via Ollama at any time.&rdquo; The page also says Vellum is open source and is &ldquo;native to Mac and accessible everywhere: iOS, Android, web app, voice, email, Telegram, Slack, and terminal.&rdquo; Its <a href="https://www.vellum.ai/skills" rel="nofollow noopener" target="_blank">skills page</a>, read September 18, says &ldquo;Skills give your agents new capabilities. Browse the catalog, pick what you need, and install with a single command&rdquo;, and its <a href="https://www.vellum.ai/plugins" rel="nofollow noopener" target="_blank">plugins page</a> says to &ldquo;Browse and install from the Plugins tab inside the Vellum app&rdquo;; with the code open, its code is yours to change. Its docs, read September 18, also say &ldquo;You can create new skills by describing what you want in the chat&rdquo;, and that the agent &ldquo;writes the instructions&rdquo; itself.</p>
               </div>
               <div class="calm-list-item" id="src-4">
                 <span class="calm-list-label"><span class="src-n">4</span>Vellum: free to start, then $30, $100 or $200 a month</span>
@@ -800,15 +774,15 @@
               </div>
               <div class="calm-list-item" id="src-5">
                 <span class="calm-list-label"><span class="src-n">5</span>OpenClaw: on your machine, free, and acting on its own by default</span>
-                <p>Read from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a> on September 16, 2026. &ldquo;Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud.&rdquo; And: &ldquo;No subscription. No hosted tier. No token.&rdquo; OpenClaw &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; and is MIT licensed. It reaches &ldquo;WhatsApp, Telegram, Discord, Slack, Signal, iMessage, or any of its 29 channels.&rdquo; Its docs, read the same day, place it: on <a href="https://docs.openclaw.ai/gateway/security/tool-permissions" rel="nofollow noopener" target="_blank">tool and agent permissions</a>, &ldquo;Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval&rdquo;, and on <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a>, &ldquo;Commands run only when policy + allowlist + (optional) user approval all agree.&rdquo; So by default it acts on its own, and you can make it ask. Read again September 18: its docs give five exec modes, &ldquo;deny&rdquo;, &ldquo;allowlist&rdquo;, &ldquo;ask&rdquo;, &ldquo;auto&rdquo; and &ldquo;full&rdquo;, an &ldquo;ask: always&rdquo; that &ldquo;keeps prompting&rdquo;, and per-command allow lists, which is the most control on this board. Its getting-started is a shell command, &ldquo;Try it in one command&rdquo;, and changing its permissions is another, <code>openclaw config set tools.exec.mode</code>, which is the terminal row; openclaw.ai also offers &ldquo;Desktop Apps: Full apps that install everything for you&rdquo;, and both are true. The same page lists &ldquo;Skills &amp; Plugins: Extend with community skills or build your own&rdquo; and &ldquo;ClawHub: Install skills and plugins&rdquo;, and with MIT code that is the top of the Customization view.</p>
+                <p>Read from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a> on September 16, 2026. &ldquo;Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud.&rdquo; And: &ldquo;No subscription. No hosted tier. No token.&rdquo; OpenClaw &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; and is MIT licensed. It reaches &ldquo;WhatsApp, Telegram, Discord, Slack, Signal, iMessage, or any of its 29 channels.&rdquo; Its docs, read the same day, place it: on <a href="https://docs.openclaw.ai/gateway/security/tool-permissions" rel="nofollow noopener" target="_blank">tool and agent permissions</a>, &ldquo;Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval&rdquo;, and on <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a>, &ldquo;Commands run only when policy + allowlist + (optional) user approval all agree.&rdquo; So by default it acts on its own, and you can make it ask. Read again September 18: its docs give five exec modes, &ldquo;deny&rdquo;, &ldquo;allowlist&rdquo;, &ldquo;ask&rdquo;, &ldquo;auto&rdquo; and &ldquo;full&rdquo;, an &ldquo;ask: always&rdquo; that &ldquo;keeps prompting&rdquo;, and per-command allow lists, which is the most control on this board. Its getting-started is a shell command, &ldquo;Try it in one command&rdquo;, and changing its permissions is another, <code>openclaw config set tools.exec.mode</code>, which is the terminal row; openclaw.ai also offers &ldquo;Desktop Apps: Full apps that install everything for you&rdquo;, and both are true. The same page lists &ldquo;Skills &amp; Plugins: Extend with community skills or build your own&rdquo; and &ldquo;ClawHub: Install skills and plugins&rdquo;, and with MIT code its code is yours to change. Its Skill Workshop docs, read September 18, say &ldquo;ask the agent for the skill you want&rdquo; and give the example &ldquo;Make a skill called morning-catchup that runs my Monday inbox routine.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-6">
                 <span class="calm-list-label"><span class="src-n">6</span>Hermes: desktop or cloud, free and MIT, and asking by default</span>
-                <p>Read from <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> on September 16, 2026, the Nous Research page for it. It offers a desktop app for macOS 12+, Windows 10/11 and Linux, and &ldquo;Deploy to the cloud&rdquo; through Nous Portal. It is &ldquo;free and open source under the MIT license&rdquo;, and Nous Portal plans run from $0 to $200 a month for credits and hosted services. It reaches &ldquo;Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI&rdquo;. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>, read the same day, do: &ldquo;Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it&rdquo;, with three modes, &ldquo;smart | manual | off&rdquo;. Its README says &ldquo;Use any model you want&rdquo;, naming Nous Portal, OpenRouter, OpenAI and your own endpoint. Its site leads with &ldquo;Download desktop app&rdquo;, then &ldquo;Deploy to the cloud&rdquo;, then &ldquo;Install via terminal&rdquo;, and its FAQ says &ldquo;Download Hermes Desktop for macOS or Windows, or use the terminal installation command above&rdquo;, which is the app row; Linux is terminal only. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills" rel="nofollow noopener" target="_blank">skills docs</a>, read September 18, say &ldquo;Browse, search, install, and manage skills from online registries, skills.sh, direct well-known skill endpoints, and official optional skills&rdquo;, and with MIT code that is the top of the Customization view.</p>
+                <p>Read from <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> on September 16, 2026, the Nous Research page for it. It offers a desktop app for macOS 12+, Windows 10/11 and Linux, and &ldquo;Deploy to the cloud&rdquo; through Nous Portal. It is &ldquo;free and open source under the MIT license&rdquo;, and Nous Portal plans run from $0 to $200 a month for credits and hosted services. It reaches &ldquo;Telegram, Discord, Slack, WhatsApp, Signal, Email, CLI&rdquo;. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>, read the same day, do: &ldquo;Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it&rdquo;, with three modes, &ldquo;smart | manual | off&rdquo;. Its README says &ldquo;Use any model you want&rdquo;, naming Nous Portal, OpenRouter, OpenAI and your own endpoint. Its site leads with &ldquo;Download desktop app&rdquo;, then &ldquo;Deploy to the cloud&rdquo;, then &ldquo;Install via terminal&rdquo;, and its FAQ says &ldquo;Download Hermes Desktop for macOS or Windows, or use the terminal installation command above&rdquo;, which is the app row; Linux is terminal only. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills" rel="nofollow noopener" target="_blank">skills docs</a>, read September 18, say &ldquo;Browse, search, install, and manage skills from online registries, skills.sh, direct well-known skill endpoints, and official optional skills&rdquo;, and with MIT code its code is yours to change. The same docs add <code>/learn</code>, &ldquo;the fast way to turn something you already know&nbsp;&hellip; into a reusable skill, without hand-writing the SKILL.md&rdquo;.</p>
               </div>
               <div class="calm-list-item" id="src-7">
                 <span class="calm-list-label"><span class="src-n">7</span>Claude Cowork: Anthropic&rsquo;s servers, and a mode that does not ask</span>
-                <p>Read from <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank">Anthropic&rsquo;s own Cowork guide</a> on August 20, 2026. &ldquo;Open Claude on the web at claude.ai, in the Claude Desktop app, or in the Claude mobile app&rdquo;, choose Cowork, and &ldquo;describe the task you want Claude to complete&rdquo;, which is the sign-in row. Cowork&rsquo;s work &ldquo;runs on Anthropic&rsquo;s servers, in an isolated environment, and your sessions and files are saved to your Claude account&rdquo;. It has three permission modes; in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;. Re-read September 16, 2026: the mode selector &ldquo;offers Auto and Manual (default)&rdquo;, and in Manual, &ldquo;formerly &lsquo;Ask before acting&rsquo;&rdquo;, &ldquo;Claude pauses and asks for approval for actions.&rdquo; Its <a href="https://claude.com/docs/cowork/overview" rel="nofollow noopener" target="_blank">overview</a>, read September 18, says &ldquo;You manage connectors, skills, and plugins from Customize in the sidebar&rdquo;, and its <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" rel="nofollow noopener" target="_blank">skills guide</a> says &ldquo;In Cowork, click Customize in the left sidebar, then click the &lsquo;+&rsquo; button to open the directory&rdquo;, which is the shelf level of the Customization view, level with Archie.</p>
+                <p>Read from <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank">Anthropic&rsquo;s own Cowork guide</a> on August 20, 2026. &ldquo;Open Claude on the web at claude.ai, in the Claude Desktop app, or in the Claude mobile app&rdquo;, choose Cowork, and &ldquo;describe the task you want Claude to complete&rdquo;, which is the sign-in row. Cowork&rsquo;s work &ldquo;runs on Anthropic&rsquo;s servers, in an isolated environment, and your sessions and files are saved to your Claude account&rdquo;. It has three permission modes; in Skip mode &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;. Re-read September 16, 2026: the mode selector &ldquo;offers Auto and Manual (default)&rdquo;, and in Manual, &ldquo;formerly &lsquo;Ask before acting&rsquo;&rdquo;, &ldquo;Claude pauses and asks for approval for actions.&rdquo; Its <a href="https://claude.com/docs/cowork/overview" rel="nofollow noopener" target="_blank">overview</a>, read September 18, says &ldquo;You manage connectors, skills, and plugins from Customize in the sidebar&rdquo;, and its <a href="https://support.claude.com/en/articles/12512180-use-skills-in-claude" rel="nofollow noopener" target="_blank">skills guide</a> says &ldquo;In Cowork, click Customize in the left sidebar, then click the &lsquo;+&rsquo; button to open the directory&rdquo;, so ready-made abilities can be added to it, as they can to Archie. Anthropic&rsquo;s skills page, read September 18, also offers a skill-creator: &ldquo;Describe what you want, and Claude generates the folder structure, formats the SKILL.md file, and bundles your resources.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-8">
                 <span class="calm-list-label"><span class="src-n">8</span>Claude Cowork: included from Pro up, $20 a month</span>
@@ -816,7 +790,7 @@
               </div>
               <div class="calm-list-item" id="src-9">
                 <span class="calm-list-label"><span class="src-n">9</span>Grok Bot: a persistent cloud VM</span>
-                <p>Read from <a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview on August 20, 2026. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo; and signs in to your tools there; it comes back &ldquo;when something needs your approval&rdquo;. Re-read September 16, 2026: &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;, and &ldquo;Bots share a computer of their own in the cloud&rdquo;. The same page says &ldquo;Download the app, create your first teammate, and start handing off work&rdquo;, with a Download for macOS button, which is the app row. Its <a href="https://x.ai/bot/marketplace" rel="nofollow noopener" target="_blank">marketplace</a>, read in a browser on September 18, lists bots by category with an Add button on each, which is the shelf level of the Customization view, level with Archie.</p>
+                <p>Read from <a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview on August 20, 2026. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo; and signs in to your tools there; it comes back &ldquo;when something needs your approval&rdquo;. Re-read September 16, 2026: &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;, and &ldquo;Bots share a computer of their own in the cloud&rdquo;. The same page says &ldquo;Download the app, create your first teammate, and start handing off work&rdquo;, with a Download for macOS button, which is the app row. Its <a href="https://x.ai/bot/marketplace" rel="nofollow noopener" target="_blank">marketplace</a>, read in a browser on September 18, lists bots by category with an Add button on each, so ready-made abilities can be added to it, as they can to Archie. Its docs, read September 18, also write a skill on request: &ldquo;Save the process we just used as a skill called &lsquo;Weekly account health&rsquo;&rdquo;, and you can &ldquo;set its name, label, description, and avatar&rdquo;.</p>
               </div>
               <div class="calm-list-item" id="src-10">
                 <span class="calm-list-label"><span class="src-n">10</span>Grok Bot: which plans carry it</span>
@@ -824,7 +798,7 @@
               </div>
               <div class="calm-list-item" id="src-11">
                 <span class="calm-list-label"><span class="src-n">11</span>Meta Muse: a dedicated cloud computer, free for most</span>
-                <p>Read from <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank">Meta&rsquo;s own announcement</a> on September 15, 2026. Muse &ldquo;runs on its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;, and is &ldquo;free for most of what people need, with subscription plans for people who want to do more&rdquo;. It is &ldquo;rolling out in the US on iOS, Android, and muse.ai&rdquo; and &ldquo;Anyone can use it out of the box, no technical experience required&rdquo;, which is the sign-in row. Its permissions are one of two settings: &ldquo;Always ask&rdquo;, before any action, or &ldquo;Ask for some actions&rdquo;. The announcement says &ldquo;People choose which apps Muse connects to and exactly how much access it gets&rdquo;, and <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/" rel="nofollow noopener" target="_blank">Meta&rsquo;s help centre</a>, read September 18, says &ldquo;You can choose to connect Muse to apps and services provided by Meta or third-parties. We call these Connectors.&rdquo; Meta publishes no shelf of add-ons, which is the settings-and-accounts level of the Customization view.</p>
+                <p>Read from <a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank">Meta&rsquo;s own announcement</a> on September 15, 2026. Muse &ldquo;runs on its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;, and is &ldquo;free for most of what people need, with subscription plans for people who want to do more&rdquo;. It is &ldquo;rolling out in the US on iOS, Android, and muse.ai&rdquo; and &ldquo;Anyone can use it out of the box, no technical experience required&rdquo;, which is the sign-in row. Its permissions are one of two settings: &ldquo;Always ask&rdquo;, before any action, or &ldquo;Ask for some actions&rdquo;. The announcement says &ldquo;People choose which apps Muse connects to and exactly how much access it gets&rdquo;, and <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/" rel="nofollow noopener" target="_blank">Meta&rsquo;s help centre</a>, read September 18, says &ldquo;You can choose to connect Muse to apps and services provided by Meta or third-parties. We call these Connectors.&rdquo; Meta publishes no shelf of add-ons, and its help centre says &ldquo;Skills are developed by Meta and are already part of Muse&rdquo;, so on that page what a person changes is settings, connectors, and the name, personality and tone, which Meta says you can alter by asking in the conversation. Meta&rsquo;s own engineering blog goes further, saying Muse &ldquo;builds its own tools&rdquo; and &ldquo;can also write its own custom connectors&rdquo;. The two Meta pages disagree and we are not going to pick a winner for them.</p>
               </div>
               <div class="calm-list-item" id="src-12">
                 <span class="calm-list-label"><span class="src-n">12</span>Meta Muse: what it will not do without approval</span>
@@ -832,7 +806,7 @@
               </div>
               <div class="calm-list-item" id="src-13">
                 <span class="calm-list-label"><span class="src-n">13</span>Wix Symphony: how you reach it, and where the work happens</span>
-                <p>Read from <a href="https://www.wix.com/symphony" rel="nofollow noopener" target="_blank">wix.com/symphony</a> on September 11, 2026. Symphony is used with a Wix account, in a browser or its iOS and Android apps, and Wix publishes no program you run on your own computer, which is the sign-in row. Read again September 18: <a href="https://support.wix.com/en/article/symphony-an-overview" rel="nofollow noopener" target="_blank">Wix&rsquo;s own overview</a> says &ldquo;Your agents connect to the suite of tools you already use and can work on their own, 24/7, to help grow your business and manage day-to-day tasks&rdquo;, and that &ldquo;your agents&rsquo; background work uses AI credits&rdquo;. Wix publishes no sentence saying where that work runs. Work that goes on while you are away, on a product that ships only a phone app and a browser, is not happening on a computer of yours, and that is why Symphony sits on the their-servers side: it is our reading of those two sentences, not a quote, and if Wix publishes the sentence either way we will cite it. The same overview says Symphony &ldquo;integrates with your existing tools and workflows, like your calendars, email inbox, productivity tools, Slack, Salesforce, and much more&rdquo;, and the product page says &ldquo;Create and train your own agent. Set its name, give it a personality, approve goals and actions&rdquo;; no shelf of add-ons is published, which is the settings-and-accounts level of the Customization view.</p>
+                <p>Read from <a href="https://www.wix.com/symphony" rel="nofollow noopener" target="_blank">wix.com/symphony</a> on September 11, 2026. Symphony is used with a Wix account, in a browser or its iOS and Android apps, and Wix publishes no program you run on your own computer, which is the sign-in row. Read again September 18: <a href="https://support.wix.com/en/article/symphony-an-overview" rel="nofollow noopener" target="_blank">Wix&rsquo;s own overview</a> says &ldquo;Your agents connect to the suite of tools you already use and can work on their own, 24/7, to help grow your business and manage day-to-day tasks&rdquo;, and that &ldquo;your agents&rsquo; background work uses AI credits&rdquo;. Wix publishes no sentence saying where that work runs. Work that goes on while you are away, on a product that ships only a phone app and a browser, is not happening on a computer of yours, and that is why Symphony sits on the their-servers side: it is our reading of those two sentences, not a quote, and if Wix publishes the sentence either way we will cite it. The same overview says Symphony &ldquo;integrates with your existing tools and workflows, like your calendars, email inbox, productivity tools, Slack, Salesforce, and much more&rdquo;, and the product page says &ldquo;Create and train your own agent. Set its name, give it a personality, approve goals and actions&rdquo;; no shelf of add-ons is published, so what a person can change is settings and the accounts they connect.</p>
               </div>
               <div class="calm-list-item" id="src-14">
                 <span class="calm-list-label"><span class="src-n">14</span>Wix Symphony: it checks first</span>
@@ -844,11 +818,11 @@
               </div>
               <div class="calm-list-item" id="src-16">
                 <span class="calm-list-label"><span class="src-n">16</span>Instinct: in private access, hosted, and acting on its own</span>
-                <p>Read from <a href="https://instinct.com/" rel="nofollow noopener" target="_blank">instinct.com</a> on September 16, 2026. &ldquo;Instinct is a personal assistant that understands what you&rsquo;re working on and what&rsquo;s important to you.&rdquo; It &ldquo;connects to your applications and devices - email, messaging, screen, audio, location, and more&rdquo;, and &ldquo;It&rsquo;s trained to use a phone and a computer. You can text or call it.&rdquo; It is &ldquo;currently available to a private access group as we&rsquo;re scaling up compute&rdquo;. &ldquo;Text Instinct to get started&rdquo;: nothing is installed, which is the sign-in row. The page gives no price. Its <a href="https://instinct.com/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>, read the same day, places it: the service is provided with &ldquo;third-party hosting&rdquo;, its features &ldquo;can perform tasks or take actions independently on your behalf, based on the permissions you grant&rdquo;, and it uses &ldquo;third-party AI model providers who help support the Services&rdquo;. Nothing on its page is installed beyond what it connects to, which is the settings-and-accounts level of the Customization view. Other companies have written about what Instinct does; we do not print those claims, because a competitor writing about a competitor is not a source.</p>
+                <p>Read from <a href="https://instinct.com/" rel="nofollow noopener" target="_blank">instinct.com</a> on September 16, 2026. &ldquo;Instinct is a personal assistant that understands what you&rsquo;re working on and what&rsquo;s important to you.&rdquo; It &ldquo;connects to your applications and devices - email, messaging, screen, audio, location, and more&rdquo;, and &ldquo;It&rsquo;s trained to use a phone and a computer. You can text or call it.&rdquo; It is &ldquo;currently available to a private access group as we&rsquo;re scaling up compute&rdquo;. &ldquo;Text Instinct to get started&rdquo;: nothing is installed, which is the sign-in row. The page gives no price. Its <a href="https://instinct.com/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>, read the same day, places it: the service is provided with &ldquo;third-party hosting&rdquo;, its features &ldquo;can perform tasks or take actions independently on your behalf, based on the permissions you grant&rdquo;, and it uses &ldquo;third-party AI model providers who help support the Services&rdquo;. Nothing on its page is installed beyond what it connects to, so what a person can change is settings and the accounts they connect. Other companies have written about what Instinct does; we do not print those claims, because a competitor writing about a competitor is not a source.</p>
               </div>
               <div class="calm-list-item" id="src-17">
                 <span class="calm-list-label"><span class="src-n">17</span>Norton Family Assistant: asks first, runs in the cloud, and prices nothing</span>
-                <p>Read from <a href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank">us.norton.com/products/family-assistant</a> on September 16, 2026. It &ldquo;keeps your family organized, so you never miss to-dos, calendar events, and important updates in your life&rdquo;, &ldquo;Plugs into the apps your family already uses&rdquo;, and &ldquo;Asks first, acts after&rdquo;; its FAQ adds &ldquo;Every send, payment and booking waits for your approval&rdquo; and that &ldquo;the AI providers we use operate under enterprise contracts with zero data retention&rdquo;. Norton says &ldquo;Your chats are never shared, sold or used to train AI.&rdquo; The product page carries no price. Its <a href="https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281" rel="nofollow noopener" target="_blank">support FAQ</a>, read September 18, 2026, says where it runs: &ldquo;Family Assistant runs a per-user instance architecture: your family graph, connected-account tokens, agent context, and chat history all live inside your own dedicated instance in the cloud, isolated from other users&rdquo;, which is why it sits on the their-servers side. It &ldquo;works on any PCs that run in browsers such as Norton Neo, Chrome, and Firefox&rdquo; or as an iPhone app, which is the sign-in row, and it &ldquo;can connect to accounts and services you choose&rdquo;, with no shelf of add-ons published, which is the settings-and-accounts level of the Customization view.</p>
+                <p>Read from <a href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank">us.norton.com/products/family-assistant</a> on September 16, 2026. It &ldquo;keeps your family organized, so you never miss to-dos, calendar events, and important updates in your life&rdquo;, &ldquo;Plugs into the apps your family already uses&rdquo;, and &ldquo;Asks first, acts after&rdquo;; its FAQ adds &ldquo;Every send, payment and booking waits for your approval&rdquo; and that &ldquo;the AI providers we use operate under enterprise contracts with zero data retention&rdquo;. Norton says &ldquo;Your chats are never shared, sold or used to train AI.&rdquo; The product page carries no price. Its <a href="https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281" rel="nofollow noopener" target="_blank">support FAQ</a>, read September 18, 2026, says where it runs: &ldquo;Family Assistant runs a per-user instance architecture: your family graph, connected-account tokens, agent context, and chat history all live inside your own dedicated instance in the cloud, isolated from other users&rdquo;, which is why it sits on the their-servers side. It &ldquo;works on any PCs that run in browsers such as Norton Neo, Chrome, and Firefox&rdquo; or as an iPhone app, which is the sign-in row, and it &ldquo;can connect to accounts and services you choose&rdquo;, with no shelf of add-ons published, so what a person can change is settings and the accounts they connect.</p>
               </div>
             </div>
           </div>

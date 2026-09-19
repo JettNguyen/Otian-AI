@@ -400,6 +400,7 @@
       heroBeats.forEach(function (el) { el.style.setProperty('--beat-h', el.scrollHeight + 'px'); });
     }
 
+    var HINT_BAND = 80;
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
@@ -407,8 +408,12 @@
       lastWrapH = wr.height;
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
+      /* The band the scroll hint stands in, which the scene may not grow into: see the comment on
+         .day-scene-wrap in the stylesheet, whose padding-bottom is this same number and must stay
+         it. Zero where there is no hint drawn, which is narrow and reduced motion. */
+      var band = (narrow || still) ? 0 : HINT_BAND;
       scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
-                        : clamp(Math.min(byW, wr.height / 560), 0.4, 1.45);
+                        : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the
          page open by growing into itself. That is not hypothetical. `setAct` returns early while

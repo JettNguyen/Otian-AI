@@ -16446,7 +16446,22 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-stage.is-night .day-chip { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .14); color: #DAD4CC; }
 
 /* ---- the scene, in perspective ---- */
-.day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
+/* THE HINT GETS A BAND OF ITS OWN AT THE BOTTOM, AND THE SCENE IS CENTERED ABOVE IT. The clock and
+   the hint are laid over this cell rather than stacked around it, which worked while the scene could
+   never be taller than its 560 design box: there was always a margin of empty cell at top and
+   bottom to lay them on. Since the fit was allowed to grow past 1 the scene can fill the cell, and
+   the hero's phone stands with its feet on the box's own bottom edge, so at about 1300px wide,
+   which is where the fit crosses 1, "Scroll through one day" started running across the phone
+   (Jett, 2026-09-19, at "around 1350px width or higher"). The padding is what the hint stands in,
+   and because this is a centered flex box the scene centers in what is left, so it clears the hint
+   without being pushed off center. js/home.js subtracts the same number from the height it fits to,
+   and HINT_BAND there is this number: they must agree, and scratchpad/hint.py is what solved for it.
+   80 and not the hint's own 59, because the hero's phone projects about 5px past the box's bottom
+   edge at z 70 and a band that only matches the hint leaves the two touching; this leaves 15px of
+   air in the tightest window and costs three hundredths of the fit there. Zero where there is no hint, which is narrow
+   and reduced motion, so neither gives up the room. */
+.day-stage { --hint-band: 80px; }
+.day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; padding-bottom: var(--hint-band); display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
 .day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(calc((660px + var(--night, 0) * 230px) * var(--sc, 1)), 126%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) calc(18% + var(--night, 0) * 9%), transparent), transparent); pointer-events: none; }
 /* The lamp behind the objects grows and warms with the room instead of being turned down for it.
    It used to drop to 9% on .is-night, which left the two mockups cut out of a dark ground with
@@ -17116,6 +17131,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      already the honest indicator. A rail tracking acts that now stand in a stack would be reporting
      on a story that is not being told. */
   .day-clock, .day-hint, .day-rail { display: none; }
+  .day-stage { --hint-band: 0px; }
   /* The acts stand in a stack here and the pose never reaches the overnight one, so the room
      never darkens and a sky would be pale dots over a cream page for the whole story. */
   .day-sky { display: none; }
@@ -17144,6 +17160,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      whole space rather than under an empty band. The badge is 18 line + 12 padding + 2 border +
      6 margin = 38, which is --clock-row. */
   .day-clock { grid-column: 1; grid-row: 1; align-self: auto; margin: 0 0 6px; line-height: 18px; }
+  .day-stage { --hint-band: 0px; }
   .day-scene-wrap { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; transform: translateY(calc(var(--clock-row) / -2)); }
   .day-stage.is-timed .day-scene-wrap { transform: none; }
   .day-scene { width: 400px; }

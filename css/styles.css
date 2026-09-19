@@ -17275,8 +17275,18 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      the scale is, so it settles rather than snapping. It already worked this way in one direction:
      the hero's band grows as its beats open, which is what made the rest of the story pay for the
      hero. WITHOUT JAVASCRIPT IT IS STILL auto, which is the old behaviour and fits every caption.
-     The 6 and 12 here are read by the driver as CAPS_PAD: two numbers that must agree. */
-  .day-caps { grid-column: 1; grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
+     The 6 and 12 here are read by the driver as CAPS_PAD: two numbers that must agree.
+
+     AND THE ROW HAS TO BE TOLD, WHICH IS THE WHOLE FIX. Setting a height on this box did nothing
+     for what is inside it: eight captions in one implicit row size that row to the tallest of
+     them, so the band came down to the caption on screen and its contents stayed 286 tall and
+     hung out of the bottom of a stage that clips. Every act past the hero lost its last line or
+     two (Jett: "it is pointless to have the text if it's just not there"). One explicit row that
+     is the box's own height fixes it: the caption on screen is exactly that tall, and the seven
+     that are not on screen overflow it while they are invisible, which is what they are for.
+     With no JavaScript the height is auto, the row resolves to the tallest caption again, and
+     the old behaviour is back. */
+  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 12px; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
      them in the middle of the band puts the words under the scene without either a hole below them

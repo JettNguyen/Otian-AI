@@ -217,8 +217,13 @@
     var marks = {};
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
-    var N = 7, SETTLE = 0.3;
+    var SETTLE = 0.3;
     var LEN = [0.25, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
+    /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
+       the seventh act moved one of the two and not the other, which lands the last act's scroll
+       on the act before it: the setup track never lit and nothing threw. Two numbers that must
+       agree are one number. */
+    var N = LEN.length;
     /* The hero starts moving on the first pixel of scroll: through its own act the camera goes
        this far toward the calendar pose, and the calendar act's settle finishes the trip. */
     var PRE = 0.5;

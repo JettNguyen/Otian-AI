@@ -634,7 +634,144 @@
           <div class="trust-limit">
             <h3>Archie checks your plan, and it tells you exactly what that check sees.</h3>
             <p>The app checks your plan when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account has a current plan, and nothing more.</p>
-            <p><strong>If <em>we</em> disappear, Archie keeps working.</strong> The app runs on its last license note for up to 60 days on its own, and our <a href="../terms-of-service/">Terms</a> require us to publish a final version that requires no license check, within 30 days of ceasing operations, which is what carries it past that. That is a term of the agreement, not a promise on a blog. If <em>you</em> stop your plan, Archie stops letting you in at the end of the period you paid for, and nothing on your computer is deleted. <a href="details/#license-check">The full version &rarr;</a></p>
+            <!-- ================= THE TWO ENDINGS, DRAWN (2026-09-18) =================
+                 This was one 96-word paragraph carrying the two scenarios a reader actually
+                 wants separated, welded together by a "That is a term of the agreement" in the
+                 middle. Permanence is one of the drives the marketing pass is built on, and a
+                 paragraph is the worst shape for it: the reader has to hold two futures in their
+                 head at once to see that only one of them is about us.
+
+                 A CONTROL RATHER THAN A LOOP, on purpose. Motion tier three earns the most
+                 exactly where a reader is most skeptical, and "what happens when your vendor
+                 dies" is the most skeptical a reader on this page gets. Flipping it yourself
+                 beats being told. The switch is the compare hub's page-local pattern: two hidden
+                 radios, sibling selectors, no script, and with CSS off both states are drawn.
+
+                 THE LIMITATION IS THE OTHER HALF OF THE CONTROL, which is why "You leave" is the
+                 side that rests. The honest ending is the one that costs us something, and a
+                 figure that only drew the flattering half would be the thing the Standard's
+                 self-diminishing-clause rule is the mirror image of.
+
+                 TRUST.md, and this is the tight part. L2569 bans claiming the app runs
+                 indefinitely without us: it runs on its last license note for UP TO 60 DAYS, and
+                 the Terms commitment is what carries it past that. So the chip reads "Keeps
+                 running" and the line under it carries both stages, in the same figure, never in
+                 a paragraph that could be cut later. The Terms' own words are "no license check",
+                 never "no sign-in": L45 and L88 both name that paraphrase as the way a contract
+                 drifts from the claim about it. =============================== -->
+            <figure class="explain-figure pk-figure mt-40">
+              <input type="radio" class="aud-pick-radio" name="pk-fate" id="pk-leave" checked>
+              <input type="radio" class="aud-pick-radio" name="pk-fate" id="pk-gone">
+              <style>
+                .pk-bar-wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px;margin:0 0 18px}
+                .pk-bar-lead{font-size:var(--fs-sm);color:var(--text-muted);font-weight:600}
+                .pk-bar{display:inline-flex;padding:3px;border:1px solid var(--border);border-radius:999px;background:var(--bg-primary)}
+                .pk-bar-opt{padding:7px 15px;border:1px solid transparent;border-radius:999px;font-size:var(--fs-sm);font-weight:600;color:var(--text-secondary);cursor:pointer;transition:background var(--transition),color var(--transition),border-color var(--transition)}
+                .pk-bar-opt:hover{color:var(--text-primary)}
+                #pk-leave:checked ~ .pk-bar-wrap [for="pk-leave"],
+                #pk-gone:checked ~ .pk-bar-wrap [for="pk-gone"]{background:var(--accent-subtle);color:var(--text-primary);border-color:var(--accent)}
+                #pk-leave:focus-visible ~ .pk-bar-wrap [for="pk-leave"],
+                #pk-gone:focus-visible ~ .pk-bar-wrap [for="pk-gone"]{outline:2px solid var(--accent-ink);outline-offset:2px}
+                .pk-b{display:none}
+                #pk-gone:checked ~ svg .pk-a{display:none}
+                #pk-gone:checked ~ svg .pk-b{display:block}
+              </style>
+              <div class="pk-bar-wrap">
+                <span class="pk-bar-lead">What happens if:</span>
+                <div class="pk-bar" role="group" aria-label="Which ending to draw">
+                  <label class="pk-bar-opt" for="pk-leave">You leave</label>
+                  <label class="pk-bar-opt" for="pk-gone">We disappear</label>
+                </div>
+              </div>
+              <svg class="explain-svg--desktop" viewBox="0 0 600 252" role="img" aria-labelledby="pk-t" xmlns="http://www.w3.org/2000/svg" style="max-width:620px;font-family:inherit">
+                <style>
+                  .pk-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
+                  .pk-box{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
+                  .pk-otian{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+                  .pk-otian--gone{fill:none;stroke:var(--line-muted);stroke-width:1.5;stroke-dasharray:5 6;opacity:.45}
+                  .pk-oname{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+                  .pk-oname--gone{opacity:.45}
+                  .pk-app{fill:currentColor;font-size:14.5px;font-weight:650}
+                  .pk-sub{fill:currentColor;opacity:.62;font-size:10.5px}
+                  .pk-link{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+                  .pk-link--gone{opacity:.22;stroke-dasharray:4 5}
+                  .pk-tag{fill:currentColor;opacity:.62;font-size:10.5px}
+                  .pk-chip{fill:none;stroke:var(--c-blue);stroke-width:2}
+                  .pk-chiptext{fill:var(--c-blue-ink);font-size:13px;font-weight:650;text-anchor:middle}
+                  .pk-foot{fill:currentColor;opacity:.72;font-size:11px;text-anchor:middle}
+                  .pk-ostate{opacity:.62;font-size:10.5px;font-weight:400}
+                  .pk-ostate--gone{font-size:10.5px;font-weight:400}
+                </style>
+                <title id="pk-t">Two endings for the app on your computer, on one switch. If you stop your plan: Otian is still there checking your plan, and Archie stops letting you in at the end of the period you paid for, with nothing on your computer deleted. If Otian ceases operations: there is nothing left to check, and Archie keeps running, on its last license note for up to 60 days and then on the final build our Terms oblige us to publish, which needs no license check.</title>
+                <g class="pk-a">
+                  <rect class="pk-otian" x="210" y="16" width="180" height="48" rx="12"/>
+                  <text class="pk-oname" x="300" y="38">Otian AI</text>
+                  <text class="pk-oname pk-ostate" x="300" y="56">still here</text>
+                  <path class="pk-link" d="M300,64 V104"/>
+                  <text class="pk-tag" x="312" y="88">checks your plan</text>
+                </g>
+                <g class="pk-b">
+                  <rect class="pk-otian--gone" x="210" y="16" width="180" height="48" rx="12"/>
+                  <text class="pk-oname pk-oname--gone" x="300" y="38">Otian AI</text>
+                  <text class="pk-oname pk-oname--gone pk-ostate--gone" x="300" y="56">gone</text>
+                  <path class="pk-link pk-link--gone" d="M300,64 V104"/>
+                  <text class="pk-tag" x="312" y="88">nothing left to check</text>
+                </g>
+
+                <rect class="pk-box" x="80" y="104" width="440" height="102" rx="14"/>
+                <text class="pk-label" x="100" y="128">YOUR COMPUTER</text>
+                <text class="pk-app" x="100" y="154">Archie</text>
+                <text class="pk-sub" x="100" y="174">your agent, your files, your keys</text>
+
+                <g class="pk-a">
+                  <rect class="pk-chip" x="300" y="130" width="196" height="46" rx="11"/>
+                  <text class="pk-chiptext" x="398" y="158">Stops letting you in</text>
+                  <text class="pk-foot" x="300" y="236">At the end of the period you paid for. Nothing on your computer is deleted.</text>
+                </g>
+                <g class="pk-b">
+                  <rect class="pk-chip" x="300" y="130" width="196" height="46" rx="11"/>
+                  <text class="pk-chiptext" x="398" y="158">Keeps running</text>
+                  <text class="pk-foot" x="300" y="236">60 days on its last license note, then the final build, which needs no license check.</text>
+                </g>
+              </svg>
+              <svg class="explain-svg--mobile" viewBox="0 0 340 340" role="img" aria-labelledby="pkm-t" xmlns="http://www.w3.org/2000/svg">
+                <title id="pkm-t">Two endings for the app on your computer, on one switch. If you stop your plan: Otian is still there checking your plan, and Archie stops letting you in at the end of the period you paid for, with nothing on your computer deleted. If Otian ceases operations: there is nothing left to check, and Archie keeps running, on its last license note for up to 60 days and then on the final build our Terms oblige us to publish, which needs no license check.</title>
+                <g class="pk-a">
+                  <rect class="pk-otian" x="90" y="14" width="160" height="46" rx="12"/>
+                  <text class="pk-oname" x="170" y="36">Otian AI</text>
+                  <text class="pk-oname pk-ostate" x="170" y="53">still here</text>
+                  <path class="pk-link" d="M170,60 V98"/>
+                  <text class="pk-tag" x="182" y="82">checks your plan</text>
+                </g>
+                <g class="pk-b">
+                  <rect class="pk-otian--gone" x="90" y="14" width="160" height="46" rx="12"/>
+                  <text class="pk-oname pk-oname--gone" x="170" y="36">Otian AI</text>
+                  <text class="pk-oname pk-oname--gone pk-ostate--gone" x="170" y="53">gone</text>
+                  <path class="pk-link pk-link--gone" d="M170,60 V98"/>
+                  <text class="pk-tag" x="182" y="82">nothing left to check</text>
+                </g>
+
+                <rect class="pk-box" x="12" y="98" width="316" height="132" rx="14"/>
+                <text class="pk-label" x="30" y="122">YOUR COMPUTER</text>
+                <text class="pk-app" x="30" y="148">Archie</text>
+                <text class="pk-sub" x="30" y="167">your agent, your files, your keys</text>
+
+                <g class="pk-a">
+                  <rect class="pk-chip" x="30" y="178" width="200" height="40" rx="11"/>
+                  <text class="pk-chiptext" x="130" y="203">Stops letting you in</text>
+                  <text class="pk-foot" x="170" y="264">At the end of the period you paid for.</text>
+                  <text class="pk-foot" x="170" y="284">Nothing on your computer is deleted.</text>
+                </g>
+                <g class="pk-b">
+                  <rect class="pk-chip" x="30" y="178" width="200" height="40" rx="11"/>
+                  <text class="pk-chiptext" x="130" y="203">Keeps running</text>
+                  <text class="pk-foot" x="170" y="264">60 days on its last license note, then</text>
+                  <text class="pk-foot" x="170" y="284">the final build, which needs no license check.</text>
+                </g>
+              </svg>
+              <figcaption>Two endings. If you stop your plan, Archie stops letting you in and deletes nothing. If we cease operations, our Terms oblige us to publish a final build that needs no license check.</figcaption>
+            </figure>
+            <p>Both are terms of the <a href="../terms-of-service/">agreement</a> rather than promises on a blog. <a href="details/#license-check">The full version &rarr;</a></p>
           </div>
 
           <div class="trust-limit">

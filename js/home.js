@@ -318,7 +318,7 @@
            claim. Change --phone-mask's night stops, .day-phone's height or the nudge and these
            two numbers are solved again, not adjusted. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -150, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 210, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -119, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 223, z: 40, ry: -6, s: 1.05, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest
@@ -435,9 +435,10 @@
        and the mockups were drawn at a third of the screen's width.
 
        IT IS THE PHONE'S HEIGHT, NOT THE BOX'S CONTENT. Acts stack objects past it (2:00 am puts
-       the window above the phone and runs 30% over) and the masks are what make that read; what
-       this number has to track is .day-phone's box in the stylesheet, 365 at NP2's 1.22 with the
-       perspective at z 60, which is 465. Change one and measure the other. */
+       the window above the phone and runs over at both ends) and the masks are what make that
+       read; what this number has to hold is .day-phone's box in the stylesheet as the projection
+       leaves it, which at NP2's 1.22 and z 60 is 456 for today's 348. Change one and measure the
+       other. The nine units left over are air, and the fades take most of them. */
     var NARROW_H = 465;
     /* THE BAND UNDER THE SCENE IS AS TALL AS THE CAPTION IN IT, and the scene gets everything
        else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own 6 + 12, two
@@ -479,7 +480,11 @@
          .day-scene-wrap in the stylesheet, whose padding-bottom is this same number and must stay
          it. Zero where there is no hint drawn, which is narrow and reduced motion. */
       var band = (narrow || still) ? 0 : HINT_BAND;
-      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / NARROW_H), 0.3, 1.45)
+      /* The narrow floor is 0.1 and not 0.3: the scene's row has no floor either (see .day-stage in
+         the stylesheet), so on a short phone the row can come down to almost nothing, and a scene
+         held at 0.3 in a row of 80 would be drawn straight over the caption it just gave the room
+         to. Small and inside its row beats legible and on top of the words. */
+      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / NARROW_H), 0.1, 1.45)
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the

@@ -17234,7 +17234,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      and the row starts eight pixels lower, which is six clear of the shadow. It costs the scene
      eight pixels of height, and js/home.js fits the scene to whatever the row is, so nothing
      else moves. --clock-row is the badge's own height and is unchanged. */
-  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
+  /* THE SCENE'S ROW HAS NO FLOOR, SINCE 2026-09-19. It was minmax(160px, 1fr), and 160 is a floor
+     the stage cannot pay for on a short phone: the nav and the clock take 122 before anything is
+     drawn, so a 667px screen has 385 left for a caption and the two longest want more than that.
+     The rows overflowed a stage that is exactly one screen tall and clips, and what went over the
+     edge was the bottom of the caption (Jett: "when the visuals grow, the rest of the page content
+     overflows out of view"). With no floor the scene gives the room up instead, which is the right
+     way round: a scene drawn small still says what it is, and a sentence with its last line cut
+     off says nothing. The fit's own floor came down with it (js/home.js, the narrow clamp). */
+  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
      phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
      same size in every act; the scene slides up over half of it then, so it is centered in the
@@ -17249,10 +17257,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      row rather than against the box, that left 52 units of air over the phone and 92 under it,
      which is the scene crowding the clock badge and standing off from the caption (Jett,
      2026-09-19: "too close to the time badge and too far away from the start of the text"). Half
-     the difference is 19, in the scene's own units and scaled with it, so it holds at every size.
-     The four conversation acts agree within two units; the 2:00 am act is hand-stacked around it.
-     Change --phone-mask and this is one of the numbers that moves. */
-  .day-stage.is-timed .day-scene-wrap { transform: translateY(calc(var(--sc, 1) * 19px)); }
+     the difference is the nudge, in the scene's own units and scaled with it, so it holds at every
+     size, and the four conversation acts agree on it within two units.
+
+     IT WENT FROM 19 DOWN TO 4 UP THE SAME DAY, and that is the mask moving it rather than a
+     change of mind: cutting the slice under the message bar took the bottom stop from 80% to 90%,
+     so the part you can see stopped sitting high in the box. Change --phone-mask and this number
+     is solved again, not adjusted, and so is the 2:00 am stack. */
+  .day-stage.is-timed .day-scene-wrap { transform: translateY(calc(var(--sc, 1) * -4px)); }
   .day-scene { width: 400px; }
   /* THE BAND IS AS TALL AS THE CAPTION IN IT, AND IT WAS AS TALL AS THE LONGEST ONE UNTIL
      2026-09-19. Eight captions stacked in one grid cell means the cell is the tallest of them,
@@ -17348,22 +17360,40 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      fade is a mask on the device and on each rim layer, which are flat, so the depth between
      them survives; dead space above the bar and below the composer keeps every control out of
      the fade. */
-  /* Only the bezel ends are fully clear; the ramps run through the app's bar at the top and the
-     composer at the bottom, so both are there and both are dissolving, and the phone reads as
-     going on past the window rather than as a short phone with empty margins (which is how it
-     read with dead space inside the solid band). The island and status bar are not drawn. */
+  /* THE TOP RAMP RUNS THROUGH THE APP'S BAR AND THE BOTTOM ONE DOES NOT, and that asymmetry is
+     the 2026-09-19 change. Both ends used to dissolve through something you could read, on the
+     reasoning that a phone reads as going on past the window rather than as a short phone with
+     empty margins. It holds at the top, where the bar is furniture. It did not hold at the
+     bottom, where the thing dissolving was the message bar, the one control on the screen, with
+     42px of the composer's safe area under it still being drawn (Jett: "there's extra space
+     between the message bar and when it fades in"). So the slice is cut through the safe area
+     instead, and the ramp that is left starts in the bar's own bottom third rather than above it
+     (Jett, same day: "the fade out of the bottom of the mockup can slightly fade out the message
+     bar a bit more"), so the phone dissolves through the last thing it is saying instead of
+     stopping dead under it.
+
+     98.5% AND NOT 100%: the bezel wall is the device's last 1.3%, and a mask that only reaches
+     nothing at the very end leaves a hairline of metal across the bottom of a slice that is not
+     supposed to have an end ("ensure the bottom bezel is not visible"). Ending the ramp above it
+     puts the whole wall inside the clear part. The island and status bar are not drawn. */
   /* The phone is seen through a window: its ends fade out, so it stands nearly full width and
      readable without needing room for its whole height. A variable, because one act shows a
      different amount of it, and it inherits from the layer down to the glass and every rim layer. */
-  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 80%, transparent 96%, transparent 100%); }
+  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 90%, transparent 98.5%, transparent 100%); }
   .dp-device, .dp-edge { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
   /* At two in the morning only the top half is shown. Everything the act needs is up there, because
      that screen is the Now page and its list runs from the top, and the height it gives back goes to
      the window, which is what that act is actually about (Jett, 2026-09-17). */
-  .day-stage.is-night .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 50%, transparent 62%, transparent 100%); }
+  .day-stage.is-night .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 52%, transparent 65%, transparent 100%); }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
-  .dp-device { height: 700px; border-radius: 0; }
+  /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that
+     plus the bezel wall twice, and .day-phone below is the device at zoom .63. Shorten one and the
+     other two move with it: left at 700 against a 538 screen, the device carries 148px of bare
+     bezel under the message bar, the mask's stops land in it rather than on the app, and the
+     phone runs past its own layer box. That is what was under the composer when Jett said there
+     was extra space before the fade, and the mask was not what was wrong. */
+  .dp-device { height: 552px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
   .dp-edge { border-radius: 0; }
   /* A SHORTER SLICE, SINCE 2026-09-19. The fit is height-bound on every phone (the box is 400 by
@@ -17373,16 +17403,33 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      which is what the wide view reads at. The mask's stops are percentages, so the slice dissolves
      at the same places; what is lost is about a bubble and a half of conversation, off the top,
      which was inside the fade anyway. */
-  .dp-ph { height: 566px; padding-bottom: 8px; --ph-r: 0px; }
+  .dp-ph { height: 538px; padding-bottom: 8px; --ph-r: 0px; }
+  /* THE SLICE IS CUT JUST UNDER THE MESSAGE BAR (Jett, 2026-09-19: "there's extra space between
+     the message bar and when it fades in"). The app's composer holds 42px under its row, which is
+     the safe area its Chat.tsx pads by so the bar does not hug the glass; on a whole phone that is
+     the home bar's band, and on a slice it is 42px of nothing between the last thing you can read
+     and the end of the picture. The slice is cut through it instead, and the mask's bottom stop
+     sits where the bar does, so the phone ends where it stops saying anything.
+
+     Scoped to .day-phone, unlike its neighbours here: the rules around it are bare .dp- selectors
+     that every other phone on the site already answers with more weight, and this one would be a
+     new thing for each of them to answer. */
+  .day-phone .dp-composer { padding-bottom: 14px; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
-  .day-phone { height: 365px; margin-top: -182px; }
+  .day-phone { height: 348px; margin-top: -174px; }
   /* The phone is a slice here, with both ends dissolved by --phone-mask, so its halo is pulled in
      off the ends: light spilling from a part of the phone that has faded to nothing reads as a
      glow with no source. The mask cannot simply be applied to the halo instead, because a mask
      covers the border box and a box-shadow is painted outside it, which would erase the glow
      rather than shape it. */
   .day-phone::before { inset: 8% 0 14%; border-radius: 34px; }
+  /* AND IN AGAIN AT TWO IN THE MORNING, because that act cuts the phone at 52% and the glow has to
+     stop where the screen does. Left at 14% it lit a phone-shaped patch of room a third of the way
+     past the end of the phone, over the caption, which is the same fault the inset above exists to
+     fix and the one act where it is worst: the room is dark, so the only light down there was
+     coming from nothing. */
+  .day-stage.is-night .day-phone::before { inset: 8% 0 46%; }
   /* Ember stands clear of everything here (Jett, 2026-09-16). Beside the phone it is wholly to
      the phone's left, in the room between the phone and the screen's edge, and a rung smaller
      (data-size-narrow) so that room holds it; the hero uses the phone's mark too, since the
@@ -17432,6 +17479,45 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-dot { --back-x: -6px; --back-y: 0px; }
   .day-cta-row { flex-direction: column; }
 }
+/* ── A phone that is short as well as narrow ───────────────────────────────────────────────────
+   The stage is one screen with three rows in it, and two of them have a floor: the nav's own
+   height plus the clock is 122 before anything is drawn, and the scene's row will not go under
+   160. That leaves a 667px phone, which is every SE and every iPhone with the bars up, about 385
+   for a caption; the hero wants 409 and the custody act 369, so both of them ran off the bottom
+   of the screen and the last line of each was simply not there (Jett, 2026-09-19: "ensure the
+   full section content fits in a phone height too").
+
+   Everything here is spacing and one rung of type. Nothing is hidden: a line that only appears on
+   a tall phone is a line that does not exist, and two of these captions carry what the act is
+   claiming. The scene's floor comes down with them, because on a screen this short the words are
+   the part that cannot be cut.
+
+   700 AND NOT 760, because the bars in a phone browser come and go and dvh goes with them: an
+   iPhone 14 is 745 with the address bar and 844 without, so a line drawn anywhere between those
+   two makes the captions resize while somebody is scrolling. 700 sits under both of those and
+   over the SE's 667 and 553, so every phone is on one side of it the whole way down. */
+@media (max-width: 970px) and (max-height: 700px) {
+  .day-stage { padding-top: calc(var(--nav-height) + 4px); }
+  .day-clock { margin-bottom: 4px; }
+  .day-caps { padding: 2px 16px 8px; }
+  .day-cap h1 { font-size: var(--fs-2xl); }
+  .day-cap h2 { font-size: var(--fs-xl); }
+  .day-cap .section-label { margin-bottom: 2px; }
+  .day-cap > p { font-size: var(--fs-xs); margin-top: 5px; }
+  .day-cap .day-beat, .day-cap .day-main, .day-cap .day-alt { margin-top: 5px; }
+  .day-cap .day-catch, .day-cap .day-more { margin-top: 5px; }
+  .day-cap .hm-actions { margin-top: 8px; }
+  .day-cap .hm-actions .btn { padding: 10px 18px; }
+  .day-cap .hm-hero-fork, .day-cap .hm-hero-alt, .day-cap .hm-hero-micro { margin-top: 4px; }
+  .day-cap .hm-hero-alt, .day-cap .hm-hero-micro { font-size: var(--fs-2xs); }
+  .day-chips { margin-top: 6px; }
+  .day-chip { padding: 2px 7px; }
+  .day-seg { margin-top: 6px; }
+  .day-more { margin-top: 5px; }
+  .day-minutes { margin-top: 6px; padding: 4px 10px; }
+  .day-cap[data-act="0"] .day-hint--flow { margin-top: 8px; margin-bottom: 4px; }
+}
+
 @media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
   .day-scene-wrap { transition: transform .45s cubic-bezier(.2, .8, .3, 1); }
 }

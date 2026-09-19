@@ -251,7 +251,7 @@
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centered while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -70, y: -150, z: -300, ry: 14, s: .8, o: 1 }, NP = { x: 40, y: 25, z: 40, ry: -12, s: 1.1, o: 1 };
+    var NW = { x: -108, y: -142, z: -300, ry: 14, s: .66, o: 1 }, NP = { x: 100, y: 44, z: 40, ry: -12, s: .86, o: 1 };
     var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [

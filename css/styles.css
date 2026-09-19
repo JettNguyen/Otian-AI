@@ -16348,6 +16348,30 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   .day-cap { transition: opacity .45s ease, transform .55s cubic-bezier(.2, .8, .3, 1); }
 }
 .day-cap.is-on { opacity: 1; transform: none; pointer-events: auto; }
+/* ── The hero arrives in three ─────────────────────────────────────────────
+   Act 0 used to land whole: a label, a two line headline, a five line paragraph, a button and
+   three more links, all at once, over a scene with two mockups and a clock in it. On a phone that
+   is the entire first screen with no quiet in it anywhere (Jett, 2026-09-18: "there's too much
+   going on").
+
+   So the act opens on the headline and hands over the rest as you scroll, using the beat mechanism
+   the rest of the story already runs on. The paragraph at a third of the act, the three forks at
+   just under two thirds. Act 0 is 0.25 of a screen long (`LEN[0]` in js/home.js), so those are
+   about 70px and 130px of scroll: enough that the page is clearly answering the scroll, short
+   enough that nobody has to hunt for the sentence that says what Archie is.
+
+   THE BUTTON IS NOT A BEAT, and that is deliberate. Everything here is a thing to read; the button
+   is the thing to do, and a call to action that appears only once somebody has scrolled past it is
+   a call to action for the people who did not need it.
+
+   These collapse rather than fade in place, so the block is genuinely shorter at rest instead of
+   being the same height with holes in it. `.day-cap` is centered, so it grows from the middle and
+   the headline rises as the rest arrives. With no JavaScript the driver never runs and the `is-on`
+   in the markup stands, which is the same trick act 0's own caption uses. */
+.day-cap[data-act="0"] .day-beat:not(.is-on) { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .day-cap[data-act="0"] .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+}
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .day-cap h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }
 .day-cap h2 { font-size: clamp(1.55rem, 2.3vw, 2.05rem); margin: 0; }
@@ -17131,7 +17155,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-stage .day-hint svg { width: 15px; height: 15px; }
   /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
-  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; }
+  /* Centered rather than top aligned, which it was until 2026-09-18. The two were the same thing
+     while the hero landed whole and filled the cell; now that the paragraph and the forks arrive
+     on the scroll, flex-start left the short resting state pinned to the top of a cell sized by
+     the tallest act, with 177px of nothing under the button. Centered, the block grows out of the
+     middle as the beats land and there is no hole in either state. */
+  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: center; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
   .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-alt, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }

@@ -268,13 +268,20 @@ sizes are on the page at rest, and the pick only lights one.
   product does.** Jett's first review (2026-09-16) caught a "Sent to Sam" pill and a calendar Confirm
   card that exist in neither app, so both were replaced by what the code does: the calendar skill
   takes approval as a typed later message (its SKILL.md) and the email card's Send edits the card to
-  "Sent (to Sam):" with the buttons gone (`email/replies/actions.rs`, whose own form for a reply that
+  "Sent (to Sam):" with the buttons gone, **keeping the email above it and the reply below it**,
+  because `heading()` there is shared by the live card and by what it becomes and a receipt that has
+  lost the question is not one (the app lost both once and Jett caught it; the site had the same bug
+  until 2026-09-18, and only the one label is a before/after pair now) (`email/replies/actions.rs`, whose own form for a reply that
   is), after the pressed button stays lit and busy, a spinner where its mark was, until the computer
   answers (`InlineActions` in archie-mobile's `ui.tsx`, since its commit 8533dae of 2026-09-18; it
   lit for a 700ms beat and retired before that, and so did the site until the same evening), and
   the answer also arrives as a notice over the screen in the computer's own words, "Sent ✅", which
   leaves on its own. The kit in Downloads carries both states as "Chat · Send pressed" and "Chat ·
-  Sent". **The scroll presses
+  Sent". **The scroll runs the wait too, and that is not a detail** (2026-09-18): the busy beat ran on a
+  900ms timer, so it resolved whether or not anybody scrolled and the sent card arrived with almost
+  none of the act left. `at` starts the spinner and `done` settles it, both in scroll. A press by
+  hand keeps a real clock, because somebody who presses and stops scrolling still has to see it
+  land. **The scroll presses
   whichever of those two the reader has not**, further down each act (2026-09-18, `SENDS` in
   js/home.js): the buttons stay live and a press still does the whole thing at once, but a sent card
   and a moved meeting are what those two acts claim, and until then both claims sat behind a click

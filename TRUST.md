@@ -1132,6 +1132,59 @@ setting Archie up does not cost a day.
   in as many words). Never describe it as enforcement, and never imply the app is defending itself
   against its owner.
 
+### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
+
+**Approved wording:** "Your agent answers ordinary questions the same way any AI chat you have
+used does: how to word a hard email, what a letter actually means, what to cook with what is in
+the fridge. Same conversation as everything else it does."
+
+**Why it's true:** a plain text answer with no tool call is the designed, prompted-for and tested
+outcome, not an edge case.
+- The system prompt names ordinary conversation as one of the agent's abilities, in the same
+  sentence that limits the others: "Your abilities are the tools you have been given this turn,
+  plus ordinary conversation, and nothing more"
+  (`crates/archie-runtime/src/gateway/prompt.rs`, in `build_system_prompt`).
+- A persona is framed as a manner rather than a script, with the escape hatch spelled out: "when
+  you're asked a plain question, a factual one, or something outside this brief, just answer it
+  ... never let it become a reason to withhold a straight answer" (same file). A unit test guards
+  that wording, `a_persona_is_framed_as_a_manner_so_a_plain_question_still_gets_a_plain_answer`,
+  and the comment above it names the bug it was written for: a "Creative Muse" persona changing
+  the subject rather than answering a question with one answer.
+- An agent with nothing installed is told it "can hold a conversation and answer from your own
+  knowledge" (same file, the bare-toolkit branch).
+- The router treats it as a destination rather than a miss: "general: none of these, so the
+  assistant answers directly" (`crates/archie-runtime/src/router.rs`), and questions about the
+  assistant itself are pulled there on purpose.
+- The turn loop returns the model's text as the reply as soon as a round produces no tool calls,
+  including the first round (`crates/archie-runtime/src/gateway/turn.rs`, "If the model produced
+  no tool calls this round, we have the final reply"). Tool choice is `auto` on a general turn;
+  the one place a tool call is forced is gated on a connected calendar. An empty reply is logged
+  as a warning, which is the other way round from a rule: text with no tools is the success case.
+
+**Boundaries — do not overclaim:**
+- ⛔ **Never say it answers "anything".** It is a model, so it is wrong sometimes, and the app
+  says so under its own composer. Say it answers the way any AI chat does, which is a claim the
+  reader can check against the chat they already use, and do not promise accuracy we cannot.
+- ⛔ **Never use this to imply the answer is private when it is not.** An ordinary question goes
+  to the AI company on the reader's own account, exactly as every other message does. On the
+  trial or on a plan's included allowance with no key of their own connected, it goes to
+  Anthropic through our proxy (`crates/archie-net/src/llm/trial.rs`, and the ordering note in
+  `src-tauri/src/commands/gateway_lifecycle.rs`: a key the user connected always wins). That is
+  the same route every message takes and is already covered by the entries above; this capability
+  adds no new claim about where words go, and must not be written as though it did.
+- ⛔ **Do not say it "replaces" a chat app you pay for.** We have not priced that comparison and
+  the competitor rules govern it. The true and useful form is that the asking and the doing are
+  in one conversation.
+- ⚠️ **Where a real answer needs a file or a live fact, the product prefers looking it up.** The
+  code pushes toward opening the document rather than answering from the line beside its name,
+  and toward labelling a recalled fact as possibly out of date. So do not write copy implying it
+  prefers to answer from memory: it prefers to check, and answers from its own knowledge when
+  there is nothing to check.
+- ⚠️ **The first few messages of a brand new agent are onboarding**, which is a deliberately
+  tool-free chat; a task asked during it is deferred with one line while the question is still
+  answered (`crates/archie-runtime/src/gateway/onboarding.rs`). Nothing on the site describes
+  this, and nothing needs to.
+
 ### ✅ What your agent remembers about you, and what it lets go of (SHIPPED; entry written 2026-09-16)
 
 **Approved wording:** "Your agent keeps a short list of what it has learned about you, and you can

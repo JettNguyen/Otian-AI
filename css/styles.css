@@ -16205,7 +16205,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    the one act with six things in it. LEN in js/home.js is the same list and must agree, and the sum
    here is that list's. The extra 100vh is the stage's own height, which the sticky needs to unpin
    at the end. */
-.day-story { position: relative; height: calc(8.25 * 100vh + 100vh); }
+.day-story { position: relative; height: calc(8.6 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
@@ -16441,6 +16441,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-clock i { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
 .day-hint { position: relative; grid-column: 2; grid-row: 1; justify-self: center; align-self: end; margin-bottom: 14px; font-size: var(--fs-xs); letter-spacing: .12em; text-transform: uppercase; font-weight: 700; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; gap: 7px; z-index: 3; }
 .day-hint.is-off { opacity: 0; }
+/* The in-flow cue is the phone's, and the one in the stage's grid is the wide screen's. Each is
+   display:none at the other's width rather than moved, because they sit in different boxes: one
+   under the scene, one under the button. See index.html beside the second one. */
+.day-hint--flow { display: none; }
 .day-hint svg { width: 19px; height: 19px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-reduced-motion: no-preference) {
   .day-clock, .day-hint { transition: opacity .35s; }
@@ -17148,10 +17152,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      the picture is under the cue changes with the act and with the height, because the scene and
      Ember both move. So it carries its own ground rather than trusting what is behind it, which is
      the next rule. */
-  .day-stage .day-hint { display: flex; grid-column: 1; grid-row: 2; justify-self: center; align-self: end;
-    flex-direction: row; align-items: center; gap: 7px; margin: 0 0 2px; z-index: 5;
-    padding: 5px 13px; border-radius: 999px; border: 1px solid var(--border);
-    background: var(--bg-card); box-shadow: var(--shadow-sm); }
+  /* `align-self` is the wide rule's, where it means "sit at the bottom of the scene's cell". In
+     this column it is the horizontal axis, so it pushed the cue off to the right. */
+  .day-cap[data-act="0"] .day-hint--flow { display: flex; align-self: center; margin-top: 20px; }
+  /* Out of the flow entirely once it is dim, not just invisible. It is dim from the first 2% of
+     the story and the description does not land until 34% of act 0, so nothing is ever waiting on
+     the space it held; leaving it in would make the caption's tallest state taller than any state
+     that happens, and the scene pays for that in row height (see pinCaps in js/home.js). */
+  .day-cap[data-act="0"] .day-hint--flow.is-off { display: none; }
   /* The clock's own badge, deliberately: the two are a pair, one at the top of the scene saying
      what time it is and one at the bottom saying the time will move. It also solves the reading
      problem, since a filled pill is legible over anything the scene puts behind it. The arrow
@@ -17159,15 +17167,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      something loose underneath. Ember can still pass behind the pill on the shortest phones; it
      reads as Ember standing behind it, and Ember's position is the scroll driver's, not this
      rule's, so there is no placement that avoids it at every act. */
-  .day-stage .day-hint svg { width: 15px; height: 15px; }
   /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
-  /* Centered rather than top aligned, which it was until 2026-09-18. The two were the same thing
-     while the hero landed whole and filled the cell; now that the paragraph and the forks arrive
-     on the scroll, flex-start left the short resting state pinned to the top of a cell sized by
-     the tallest act, with 177px of nothing under the button. Centered, the block grows out of the
-     middle as the beats land and there is no hole in either state. */
-  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: center; }
+  /* Top aligned, so the hero's words and its button sit directly under the scene and leave the
+     rest of the cell for the cue below them. It was centered for one commit, when the resting
+     state was short and the cell was sized by whatever act happened to be tallest; the cell is
+     pinned to act 0's own full height now (pinCaps in js/home.js), so the space under the button
+     at rest is exactly the space the description will fill, and the cue stands in it meanwhile. */
+  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
   .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-alt, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }

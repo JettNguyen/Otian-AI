@@ -280,6 +280,12 @@
             <p class="hm-hero-fork day-beat is-on" data-act="0" data-at="0.62"><a href="archie/personal/">For one person&nbsp;&rarr;</a></p>
             <p class="hm-hero-alt day-beat is-on" data-act="0" data-at="0.62">Running a team? <a href="archie/business/">Archie for Business&nbsp;&rarr;</a></p>
             <p class="hm-hero-micro day-beat is-on" data-act="0" data-at="0.62">Archie is in testing. <a href="archie/personal/#status">See where it stands&nbsp;&rarr;</a></p>
+            <!-- The phone's scroll cue. A SECOND one, and the duplication is the point: the wide
+                 cue stands under the scene in the stage's own grid, and there is no way to put one
+                 element both there and inside this caption, which is where "under the button" is.
+                 Each is hidden at the other's width. Both are aria-hidden, so a screen reader hears
+                 neither twice, and js/home.js dims every .day-hint together. -->
+            <div class="day-hint day-hint--flow" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
           </article>
 
           <!-- Act 1, 9:12 am. TRUST.md "Calendar changes require your confirmation": proposed

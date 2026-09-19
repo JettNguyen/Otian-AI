@@ -182,7 +182,7 @@
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
-    var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
+    var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
@@ -219,7 +219,12 @@
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
     var SETTLE = 0.3;
-    var LEN = [0.25, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
+    /* Act 0 was 0.25 of a screen and is 0.6 since 2026-09-18, so getting past the hero takes real
+       scrolling now that the hero has something to reveal: the paragraph lands at 0.34 of the act
+       and the forks at 0.62, which used to be 21px and 39px apart and are 172px and 314px now
+       (Jett: "make the scroll last a bit longer for the first section"). `.day-story`'s height in
+       the stylesheet is this list's sum plus one and must be changed with it. */
+    var LEN = [0.6, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must
@@ -355,8 +360,59 @@
        wrap is 660 and both read 1, so nothing jumps as the window is dragged wider. */
     var SC = 1, narrow = false, wrap = $('.day-scene-wrap');
     var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
+
+    /* PIN THE CAPTION ROW, OR THE SCENE BREATHES. Narrow, the stage is one screen of three rows and
+       the scene's is the `1fr`, so the scene gets whatever the captions leave. Every act's caption
+       sits in one grid cell, so that row is as tall as the tallest of them, which is a constant and
+       was never a problem. Act 0's beats broke it: the hero now opens short and fills out as you
+       scroll, and act 0 full is the tallest caption there is, so the row grew, the scene's row
+       shrank by the same amount, and `fit()` reads that row every frame. The mockups drew big at
+       the top of the page and snapped 10% smaller the moment the description landed (Jett,
+       2026-09-18: "the mockups grow then snap back to smaller").
+
+       So the row is pinned to the tallest caption, measured rather than guessed, because the answer
+       depends on where the text wraps and that depends on the width. Measured by unstacking the
+       cell for one frame, which is layout work, so it runs on resize and not on scroll. Everything
+       hidden is made visible for the measurement: the point is the tallest the row will EVER be,
+       not the tallest it is right now. */
+    var capsBox = $('.day-caps'), pinnedAt = '';
+    function pinCaps(w, h) {
+      if (!capsBox) return;
+      /* `fit()` is the frame loop's, so this has to charge nothing on a scroll. Two forced
+         reflows per frame is exactly what a scroll cannot afford, and the answer only changes
+         when the box does, so it is keyed on the box. */
+      var key = narrow + 'x' + Math.round(w) + 'x' + Math.round(h);
+      if (key === pinnedAt) return;
+      pinnedAt = key;
+      if (!narrow) { capsBox.style.minHeight = ''; return; }
+      /* TWO MEASUREMENTS, NOT ONE, because the tallest the caption ever gets is not the sum of
+         everything in it. The cue leaves as soon as the page is scrolled at all (`is-off` at 2% of
+         the story) and the description lands at 34% of act 0, so the cue and the full caption are
+         never on screen together. Reserving for both cost the scene 97px of row and drew the
+         mockups a quarter smaller than they had been, for a state that cannot happen.
+
+         So: the resting caption with its cue, against the full caption without it, and the row is
+         pinned to whichever is taller. Measured on the cell itself, which already sizes to the
+         tallest caption in it, rather than by taking the acts apart and adding them up: that
+         version came out 18px short and left 18px of snap in. */
+      capsBox.style.minHeight = '';
+      var flow = $('.day-hint--flow'), beats = $$('.day-cap[data-act="0"] .day-beat');
+      var wasFlow = flow ? flow.style.display : '', wasBeat = beats.map(function (el) { return el.style.display; });
+      beats.forEach(function (el) { el.style.display = 'none'; });
+      if (flow) flow.style.display = 'flex';
+      var atRest = capsBox.getBoundingClientRect().height;
+      beats.forEach(function (el) { el.style.display = 'block'; });
+      if (flow) flow.style.display = 'none';
+      var full = capsBox.getBoundingClientRect().height;
+      beats.forEach(function (el, i) { el.style.display = wasBeat[i]; });
+      if (flow) flow.style.display = wasFlow;
+      var tall = Math.max(atRest, full);
+      if (tall > 0) capsBox.style.minHeight = Math.ceil(tall) + 'px';
+    }
+
     function fit() {
       narrow = !!(narrowQ && narrowQ.matches);
+      pinCaps(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
@@ -546,7 +602,7 @@
       var t = clamp((u - CUM[i]) / LEN[i], 0, 1);
       if (still) { i = 0; t = 1; }
       setAct(i);
-      if (hint) hint.classList.toggle('is-off', p > 0.02);
+      hints.forEach(function (h) { h.classList.toggle('is-off', p > 0.02); });
       /* Where the day is, as a fraction of the act it is in: full behind, empty ahead, and the one
          under the reader filling. Written only when the rounded value moves, because this runs on
          every frame of every scroll and eight style writes a frame that set the same string is the

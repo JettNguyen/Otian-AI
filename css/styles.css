@@ -16355,10 +16355,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    going on").
 
    So the act opens on the headline and hands over the rest as you scroll, using the beat mechanism
-   the rest of the story already runs on. The paragraph at a third of the act, the three forks at
-   just under two thirds. Act 0 is 0.25 of a screen long (`LEN[0]` in js/home.js), so those are
-   about 70px and 130px of scroll: enough that the page is clearly answering the scroll, short
-   enough that nobody has to hunt for the sentence that says what Archie is.
+   the rest of the story already runs on. All four land together at 0.34 of the act, which over
+   act 0's 0.6 of a screen (`LEN[0]` in js/home.js) is about 172px of scroll: enough that the page
+   is clearly answering the scroll, short enough that nobody has to hunt for the sentence that says
+   what Archie is. Together and not in sequence, because a paragraph followed a beat later by the
+   links under the button reads as the page still loading rather than as one thing arriving (Jett,
+   2026-09-19: "should animate in at once, not the description then the links").
 
    THE BUTTON IS NOT A BEAT, and that is deliberate. Everything here is a thing to read; the button
    is the thing to do, and a call to action that appears only once somebody has scrolled past it is

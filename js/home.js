@@ -220,10 +220,10 @@
 
     var SETTLE = 0.3;
     /* Act 0 was 0.25 of a screen and is 0.6 since 2026-09-18, so getting past the hero takes real
-       scrolling now that the hero has something to reveal: the paragraph lands at 0.34 of the act
-       and the forks at 0.62, which used to be 21px and 39px apart and are 172px and 314px now
-       (Jett: "make the scroll last a bit longer for the first section"). `.day-story`'s height in
-       the stylesheet is this list's sum plus one and must be changed with it. */
+       scrolling now that the hero has something to reveal (Jett: "make the scroll last a bit
+       longer for the first section"). The rest of it lands together at 0.34 of the act, which is
+       about 172px of scroll, and it used to be 21px. `.day-story`'s height in the stylesheet is
+       this list's sum plus one and must be changed with it. */
     var LEN = [0.6, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
@@ -631,8 +631,8 @@
 
          Three phases over act 0's own progress, not three acts, because an act is a claim with a
          scene and this is one claim seen twice. The mockups fade from 0.22 to 0.40, which is
-         where the description lands; they stay gone while the forks arrive at 0.62; and they come
-         back from 0.74 to 0.96, so they are whole again before act 1 takes over the pose.
+         where the whole of the rest of the hero lands; they stay gone while it is read; and they
+         come back from 0.74 to 0.96, whole again before act 1 takes over the pose.
 
          The caption rides up as they go, by a share of the row they vacate, or the words would be
          read at the bottom of a screen with nothing in the top half of it. A transform, not a

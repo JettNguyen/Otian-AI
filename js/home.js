@@ -322,6 +322,8 @@
     var MINUTES = [1, 3, 7, 9, 10];
 
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    /* 0 before `a`, 1 after `b`, eased between. The act-progress equivalent of a keyframe pair. */
+    function ramp(v, a, b) { return smooth((v - a) / (b - a)); }
     function smooth(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
     function lerpPose(a, b, u) {
       var out = {}, k;
@@ -376,7 +378,7 @@
 
        An earlier fix pinned the caption row so the scene could not move at all. It did stop the
        snap, and it also threw away the effect this is for. */
-    var EASE_SC = 0.12, scTarget = 1;
+    var EASE_SC = 0.12, scTarget = 1, lastWrapH = 0, capsEl = $('.day-caps');
 
     /* THE HEIGHT EACH HERO BEAT OPENS TO, measured rather than guessed. `max-height` is what
        animates the room open (see the stylesheet beside `.day-beat`), and it needs a real number
@@ -402,6 +404,7 @@
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+      lastWrapH = wr.height;
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
       scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
@@ -620,6 +623,43 @@
       else if (i === 1) pose = lerpPose(lerpPose(poseOf(0), poseOf(1), PRE), poseOf(1), settle);
       else pose = lerpPose(poseOf(i - 1), poseOf(i), settle);
       tilt.x += (tilt.tx - tilt.x) * 0.08; tilt.y += (tilt.ty - tilt.y) * 0.08;
+      /* ── THE HERO'S SECOND BEAT: THE MOCKUPS STEP OUT ──────────────────────────────────────
+         Narrow only, and act 0 only. The hero opens as a picture with a headline on it, and then
+         the description arrives and there is no longer room on a phone for both: whichever one
+         the reader is looking at, the other is in the way. So the picture leaves while the words
+         are being read, and comes back on its way into the day (Jett, 2026-09-19).
+
+         Three phases over act 0's own progress, not three acts, because an act is a claim with a
+         scene and this is one claim seen twice. The mockups fade from 0.22 to 0.40, which is
+         where the description lands; they stay gone while the forks arrive at 0.62; and they come
+         back from 0.74 to 0.96, so they are whole again before act 1 takes over the pose.
+
+         The caption rides up as they go, by a share of the row they vacate, or the words would be
+         read at the bottom of a screen with nothing in the top half of it. A transform, not a
+         layout change: the row is still there, and nothing reflows while somebody is reading.
+
+         The clock goes with them. It is the scene's own label, and a time floating over an empty
+         stage is a caption for a picture that is not there. */
+      var heroHide = 0;
+      if (narrow && !still && i === 0) {
+        heroHide = ramp(t, 0.22, 0.40) * (1 - ramp(t, 0.74, 0.96));
+        if (heroHide > 0.001) {
+          pose = copy(pose, {
+            win: copy(pose.win, { o: pose.win.o * (1 - heroHide) }),
+            phone: copy(pose.phone, { o: pose.phone.o * (1 - heroHide) })
+          });
+        }
+      }
+      if (capsEl) {
+        var lift = heroHide > 0.001 ? (-heroHide * lastWrapH * 0.45).toFixed(1) + 'px' : '';
+        var want = lift ? 'translateY(' + lift + ')' : '';
+        if (capsEl.style.transform !== want) capsEl.style.transform = want;
+      }
+      if (clock) clock.style.opacity = heroHide > 0.001 ? (1 - heroHide).toFixed(3) : '';
+      /* Ember goes with them, and has to. Ember stands on a mark, every mark in this act is on the
+         phone or the window, and a mascot standing on an object that has faded out is a mascot
+         standing on the headline. */
+      if (ember) ember.style.opacity = heroHide > 0.001 ? (1 - heroHide).toFixed(3) : '';
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);

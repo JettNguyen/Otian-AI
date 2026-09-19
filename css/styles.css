@@ -16368,28 +16368,38 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    being the same height with holes in it. `.day-cap` is centered, so it grows from the middle and
    the headline rises as the rest arrives. With no JavaScript the driver never runs and the `is-on`
    in the markup stands, which is the same trick act 0's own caption uses. */
-/* THE ROOM OPENS, IT DOES NOT POP. These four were `display: none` until they landed, which made
-   the fade a lie: the box appeared in one frame and shoved the button down with it, and no amount
-   of fading the words hides a layout that jumped (Jett, 2026-09-18: they "should animate in rather
-   than appear"). Height is the thing that has to move.
+/* THE ROOM OPENS, IT DOES NOT POP, AND ONLY ON A PHONE. These four were `display: none` until
+   they landed, which made the fade a lie: the box appeared in one frame and shoved the button
+   down with it, and no amount of fading the words hides a layout that jumped (Jett, 2026-09-18:
+   they "should animate in rather than appear"). Height is the thing that has to move.
 
-   Height is also the thing CSS will not animate from nothing to auto, so the height is measured
-   and handed here as `--beat-h` (js/home.js, beside the fit), once per viewport box rather than
-   per frame. `max-height` then has a real number at both ends and the easing is the easing rather
-   than an approximation of one. The margin travels with it, or the collapsed state keeps the 14px
-   of space it is supposed to have given up.
+   Height is also the thing CSS will not animate from nothing to auto, so it is measured and handed
+   here as `--beat-h` (js/home.js, beside the fit), once per viewport box rather than per frame.
+   `max-height` then has a real number at both ends and the easing is the easing rather than an
+   approximation of one. The margin travels with it, or the collapsed state keeps the 14px of
+   space it is supposed to have given up.
 
    The 0fr-to-1fr grid trick was tried first and does not collapse in this page: the track sizes
-   itself to its content here even with `overflow: hidden` and `min-height: 0` on the item and even
-   set inline, though the same markup collapses in isolation. Not worth the hunt when a measured
+   itself to its content even with `overflow: hidden` and `min-height: 0` on the item and even set
+   inline, though the same markup collapses in isolation. Not worth the hunt when a measured
    number is exact anyway.
 
-   The fade is the stock `.day-beat` pair, which was always there and always worked; it just had
-   nothing to fade into. */
-.day-cap[data-act="0"] .day-beat { overflow: hidden; max-height: var(--beat-h, 24rem); }
-.day-cap[data-act="0"] .day-beat:not(.is-on) { max-height: 0; margin-top: 0; }
-@media (prefers-reduced-motion: no-preference) {
-  .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.2, .8, .3, 1), margin-top .5s cubic-bezier(.2, .8, .3, 1); }
+   NONE OF IT HAPPENS ON A WIDE SCREEN (Jett, 2026-09-19: "only mobile since everything is more
+   compact"). There the caption has a column of its own beside the scene and room for all of it at
+   once, so the whole hero lands with the act and these four are ordinary paragraphs. They keep
+   the `day-beat` class because the driver is what turns it on and off; the width is what decides
+   whether being off means anything. */
+@media (max-width: 970px) {
+  .day-cap[data-act="0"] .day-beat { overflow: hidden; max-height: var(--beat-h, 24rem); }
+  .day-cap[data-act="0"] .day-beat:not(.is-on) { max-height: 0; margin-top: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.2, .8, .3, 1), margin-top .5s cubic-bezier(.2, .8, .3, 1); }
+  }
+}
+/* The stock `.day-beat` pair fades every beat in the story from nothing, which is right for the
+   ones inside the phone and wrong for a paragraph that should simply be on the page. */
+@media (min-width: 971px) {
+  .day-cap[data-act="0"] .day-beat { opacity: 1; transform: none; }
 }
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .day-cap h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }

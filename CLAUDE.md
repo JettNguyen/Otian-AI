@@ -359,6 +359,20 @@ sizes are on the page at rest, and the pick only lights one.
   the card grows through the night rather than standing at its finished height from the first
   frame. Still no tabs. **Before drawing a control, find the page it is on**: a message bar
   under a list you cannot type into is the same class of mistake as the calendar Confirm card.
+  **The overnight act has a sky, and the sky moves (2026-09-18).** Light mode's night ground was
+  lightened from #14120F to #262320 at Jett's ask ("a bit less dark"), because it was darker than
+  the dark theme's own page and read as the power going out rather than as late; the dark theme
+  keeps its own near-black, which is the point of `--day-night-ground` being a variable. Above it
+  `.day-sky` is a field of 58 stars in two depths, fading in off the same `--night` the room is
+  painted with, at the half-way mark where the captions turn to light ink. **It twinkles and it
+  drifts, and visual-first rule 2 would otherwise forbid that**: Jett asked for it in those words
+  ("move like you're looking at the sky"), so it is the one place on the site where motion carries
+  no claim and stays. Three things hold it together and are easy to break: a star's brightness is
+  `fill-opacity` on the circle and never `opacity`, because the twinkle animates `opacity` and the
+  two have to multiply (a CSS `opacity` would beat the presentation attribute and flatten all 58
+  to one star); every animation rule hangs off `.is-night`, so nothing animates through the other
+  seven acts; and the whole sky is `display: none` under reduced motion, where the acts stand in a
+  stack and the room never darkens.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

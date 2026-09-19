@@ -15862,9 +15862,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    the focus, which is what this is for.
 
    THE NIGHT IS THE STAGE'S OWN GROUND. Act five paints the stage from --bg-primary down to a
-   near-black by mixing on --night, which js/home.js sets from the scroll, and the captions
+   dark room by mixing on --night, which js/home.js sets from the scroll, and the captions
    switch to light ink at the halfway point. RESTYLE.md's band rule allows exactly this:
-   a section whose visuals need an exact ground paints it explicitly. */
+   a section whose visuals need an exact ground paints it explicitly. The two themes do not land
+   in the same place, and that is the point of the variable: the dark theme goes to a near-black,
+   and light mode stops well short of it, because a reader who picked the cream page did not ask
+   for the darkest thing on the site halfway down it. */
 
 /* One act is 100vh of scrolling, the hero is 0.25 of one, and the camera already moves through the
    hero (PRE in js/home.js), so the first pixel of scroll moves something. Setup is 2, because it is
@@ -15874,7 +15877,13 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-story { position: relative; height: calc(8.25 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
-  --day-night-ground: #14120F;
+  /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
+     was darker than the dark theme's own page and read as the power going out rather than as late
+     (Jett: "a bit less dark"). Every night ink still clears AA on this by a wide margin: the
+     headings' #F3F0ED at 13.8:1, the body's #C9C3BB at 8.9:1, the label's #EDA277 at 8.0:1. And
+     it puts the room within a rung of the nav bar at the end of its own dimming, so the bar sits
+     just above the room instead of floating pale over a hole. */
+  --day-night-ground: #262320;
   position: sticky; top: 0;
   height: 100vh; height: 100dvh; min-height: 600px;
   display: grid; grid-template-columns: minmax(300px, 440px) minmax(0, 1fr); gap: 24px; align-items: center;
@@ -15883,6 +15892,87 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   background: color-mix(in srgb, var(--day-night-ground) calc(var(--night) * 100%), var(--bg-primary));
 }
 [data-theme="dark"] .day-stage { --day-night-ground: #0E0D0C; }
+
+/* ---- the sky: stars, for as long as the room is dark ---- */
+/* A sparse field over the whole stage, behind the captions and behind the scene, so the lamp
+   washes out the stars nearest it the way a lamp does. They come out at the same point the
+   captions turn to light ink (nothing below .5, full by .92), because pale dots on a half-lit
+   grey room are dirt rather than sky, and .5 is where the room is dark enough to be one. No
+   clamp() is needed around the calc: opacity clamps its own computed value into 0 and 1.
+
+   IT TWINKLES AND IT DRIFTS, at Jett's direction (2026-09-18, "move like you're looking at the
+   sky"), which is the one place on this stage where motion carries no claim and is there anyway:
+   a still field of dots reads as a texture, and this act is the one asking the reader to believe
+   the room is real and empty. Fast enough to catch somebody who stops and looks at it for a few
+   seconds, which is Jett's measure and not a guess (2026-09-18, the first pass was three times
+   slower and read as a still picture); slow enough that the list growing in the window is still
+   the thing the act is about.
+
+   A STAR'S BRIGHTNESS IS fill-opacity ON THE CIRCLE, never opacity, in the markup and not here.
+   The twinkle animates opacity and the two multiply, so the field keeps its own range instead of
+   pulsing between one brightness and another; and a CSS `opacity` on .day-sky circle would beat
+   the presentation attribute and flatten all 58 of them to the same star. */
+.day-sky { position: absolute; inset: 0; pointer-events: none; opacity: calc((var(--night, 0) - .5) * 2.4); }
+.day-sky svg { display: block; width: 100%; height: 100%; }
+.day-sky circle { fill: #F3F0ED; }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ALL OF THIS HANGS OFF .is-night, which js/home.js turns on at the same half-way mark the sky
+     fades in at, so nothing here runs through the other seven acts. An invisible element's
+     animations are not free: without the gate, twenty circles would be repainting their own
+     opacity for the whole page, including while the stage is doing per-frame work for an act
+     that has no sky in it. They start already spread out, because every delay is negative. */
+  /* Each depth wanders a closed loop and comes back, because a drift that ran one way would have
+     to snap back, and the snap is the only frame anybody would notice. The far field moves about
+     thirteen units of the 1440 the sky is drawn in, the near one nineteen, and the near one covers
+     them in under half the time, so the two are never in step and the depth between them is what
+     stops the whole sky reading as one sheet sliding. Both amplitudes stay under the margin the
+     outermost stars keep from the edge of the box (36 units at the tightest), so a drift never
+     pulls a bare corner into the room. */
+  .day-stage.is-night .day-sky-far { animation: day-sky-far 42s ease-in-out infinite; }
+  .day-stage.is-night .day-sky-near { animation: day-sky-near 30s ease-in-out infinite; }
+  /* Every third star scintillates, which is both what a sky does (they do not all go at once) and
+     what a laptop can afford on a stage that is already doing per-frame work: 58 elements
+     repainting their own opacity is a cost the effect does not need. Three lengths crossed with
+     five offsets, all negative, so no two start together and the field is already mid-cycle on
+     the frame it first appears. The longhands come after the shorthand on purpose: the shorthand
+     would reset them. */
+  .day-stage.is-night .day-sky circle:nth-child(3n+1) { animation: day-twinkle 4.6s ease-in-out infinite; }
+  .day-stage.is-night .day-sky circle:nth-child(6n+1) { animation-duration: 6.4s; }
+  .day-stage.is-night .day-sky circle:nth-child(9n+1) { animation-duration: 3.7s; }
+  .day-stage.is-night .day-sky circle:nth-child(5n+1) { animation-delay: -2.4s; }
+  .day-stage.is-night .day-sky circle:nth-child(5n+2) { animation-delay: -1.1s; }
+  .day-stage.is-night .day-sky circle:nth-child(5n+3) { animation-delay: -3.7s; }
+  .day-stage.is-night .day-sky circle:nth-child(5n+4) { animation-delay: -5.2s; }
+  .day-stage.is-night .day-sky circle:nth-child(5n+5) { animation-delay: -6.6s; }
+}
+@keyframes day-sky-far {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(-10px, 6px); }
+  62% { transform: translate(-4px, 13px); }
+  84% { transform: translate(7px, 5px); }
+}
+@keyframes day-sky-near {
+  0%, 100% { transform: translate(0, 0); }
+  28% { transform: translate(-18px, 8px); }
+  55% { transform: translate(-7px, 19px); }
+  80% { transform: translate(11px, 6px); }
+}
+@keyframes day-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .42; } }
+
+/* ---- the two screens dim with the room ---- */
+/* At two in the morning the window and the phone are the only lit things in the scene, and at
+   full brightness they read as two daylight objects laid on a dark ground rather than as screens
+   in a dark room. The phone going light with the page made it plainer, because a cream rectangle
+   is the brightest thing on the stage at the hour the act is about. Both turn down on --night,
+   continuously, so there is no frame where they change; brightness() and nothing else, because a
+   screen at night is the same screen turned down, not a different colour.
+   IT GOES ON THE TWO DISPLAY SURFACES, not on .day-win and .day-phone, because a filter flattens
+   transform-style: preserve-3d and those two are the 3D layers. The phone's rim really does sit at
+   a depth (.dp-edge) and is a sibling of the screen, so it keeps its metal, which is right anyway:
+   a dark room dims what is lit, not what is reflecting. Scoped to the stage because
+   archie/mobile/ draws a .dp-ph too, and that one has no night to dim with. */
+.day-stage .da-app, .day-stage .dp-ph { filter: brightness(calc(1 - var(--night, 0) * .26)); }
 
 /* ---- the captions: one column, one act lit at a time ---- */
 .day-caps { position: relative; grid-column: 1; grid-row: 1; height: 100%; min-height: 0; }
@@ -16592,6 +16682,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      already the honest indicator. A rail tracking acts that now stand in a stack would be reporting
      on a story that is not being told. */
   .day-clock, .day-hint, .day-rail { display: none; }
+  /* The acts stand in a stack here and the pose never reaches the overnight one, so the room
+     never darkens and a sky would be pale dots over a cream page for the whole story. */
+  .day-sky { display: none; }
   .day-beat { opacity: 1; transform: none; }
 }
 

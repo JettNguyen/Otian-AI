@@ -16,7 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20260918-21";
+import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20260918-22";
 /* The card renderer and the manifest shape live in their own module so that
    scripts/gen-marketplace.mjs can call the very same code through Node and write the
    public catalog into the page as static HTML. Before that the grid was an empty div,
@@ -25,7 +25,7 @@ import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20260918-21"
 import {
   COLLECTIONS, shelfKind, escapeHtml, titleCase, formatIntegration,
   normalize, detailHtml, cardHtml,
-} from "./addon-card.js?v=20260918-21";
+} from "./addon-card.js?v=20260918-22";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",

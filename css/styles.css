@@ -615,6 +615,21 @@ button {
   font-family: inherit;
 }
 
+/* Everything else a reader can click, shown with the hand. A browser gives <button> and a
+   linked <a> the pointer on its own and leaves these on the arrow, even though clicking
+   each one does something: a <label for> focuses or toggles its control, a <select> opens
+   its list, a <summary> folds its section, and [role="button"] is a button in every way a
+   reader can tell. Jett found one of these by hovering on 2026-09-18; the browser audit run
+   the same day over 36 pages, one per template, found no other clickable element on the site
+   without it. Anything drawn to LOOK clickable and is not, like the buttons on the homepage's
+   app mockups, keeps the arrow on purpose: this rule is for what actually does something. */
+label[for],
+select,
+summary,
+[role="button"] {
+  cursor: pointer;
+}
+
 input,
 textarea,
 select {

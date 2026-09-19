@@ -1163,7 +1163,9 @@ outcome, not an edge case.
 
 **Boundaries — do not overclaim:**
 - ⛔ **Never say it answers "anything".** It is a model, so it is wrong sometimes, and the app
-  says so under its own composer. Say it answers the way any AI chat does, which is a claim the
+  says so under its own composer, in those words: "Archie can get things wrong. Check before you
+  act on it." (`src/app/conversation.tsx`, and the comment there says why it is under the box
+  rather than in the transcript). Say it answers the way any AI chat does, which is a claim the
   reader can check against the chat they already use, and do not promise accuracy we cannot.
 - ⛔ **Never use this to imply the answer is private when it is not.** An ordinary question goes
   to the AI company on the reader's own account, exactly as every other message does. On the

@@ -218,7 +218,19 @@ label stands 72 further in, which after the tilt lands just under the phone's bo
 figure holding a visually-hidden checkbox must be `position: relative`, or the one-pixel input
 lands at the top of the page and a flip scrolls the reader up to it; and the glass's rounded
 clip failed again under animation, so `.dp-ph` is its own compositing layer now (`will-change`)
-on top of the clip-path. The concept
+on top of the clip-path. The fourth scene is the **two desks on `compare/cloud-agents/`**
+(`.cl-figure`, the two desks section in `css/styles.css`, `js/desk-scene.js`): their computer as a
+dark tower on the left desk, your own laptop on the right with the homepage's window as its
+screen, one board at the back naming the AI each is wired to, a message on each wire, and the
+lid, which closes every few seconds so the agent beside the laptop sleeps and your wire goes
+quiet while theirs keeps carrying: the caption's honest second sentence, drawn, on the page whose
+flat lanes Jett named first. **The laptop is the one object on the site that is not a billboard**:
+it is built in the floor's own space, a base lying flat and a panel hinged at the base's back edge
+whose rest is lying flat behind the hinge, so `rotateX(-80deg)` stands it up leaning back and
+`rotateX(-180deg)` lays it shut on the base; the panel carries two faces with their backs hidden,
+the screen and the lid, so closing shows the lid and never the window mirrored. Narrow, the two
+desks stand one behind the other, theirs at the back and yours in front, and the laptop is scaled
+about the front edge of its base so the name standing just past that edge stays under it. The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

@@ -17066,7 +17066,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      and the row starts eight pixels lower, which is six clear of the shadow. It costs the scene
      eight pixels of height, and js/home.js fits the scene to whatever the row is, so nothing
      else moves. --clock-row is the badge's own height and is unchanged. */
-  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
+  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
      phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
      same size in every act; the scene slides up over half of it then, so it is centered in the
@@ -17097,6 +17097,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-more { margin-top: 8px; font-size: var(--fs-xs); }
   .day-minutes { margin-top: 10px; padding: 6px 10px; }
   .day-minutes b { font-size: var(--fs-4xl); }
+  /* Hidden by default here and given back below, on the phones tall enough to hold it. */
   .day-hint { display: none; }
   /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
@@ -17187,6 +17188,26 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-paths .narrow { display: inline; }
   .day-dot { --back-x: -6px; --back-y: 0px; }
   .day-cta-row { flex-direction: column; }
+}
+
+/* ── The scroll cue on a phone ──────────────────────────────────────────────
+   The cue is the only thing telling a phone reader that the clock above it moves and that there is
+   a day underneath, and it was hidden at this width, which is where it is needed most: a phone
+   shows one act and nothing after it, so a reader who does not scroll sees the hero and leaves.
+
+   It goes in a row of its own under the words rather than over the scene, which is where it sits
+   on a wide screen. The phone's bottom is dissolved by --phone-mask there, and a line of type
+   across a fade reads as a fault in the fade. Last thing in the stage, so it is the last thing
+   before the scroll it asks for.
+
+   **The height condition is not taste, it is the only thing keeping it off the copy.** `.day-stage`
+   is `position: sticky; height: 100dvh`, so the hero is exactly one screen and the rows share a
+   fixed budget. The scene row bottoms out at `minmax(160px, 1fr)`, and once it is there the caption
+   row has nowhere left to give: at 667px, which is the SE, the last link and this cue draw over
+   each other. Measured 2026-09-18, and 690px was already clear, so 700px is the floor with a
+   margin. Below it the SE keeps exactly what it has today, which is no cue and no overlap. */
+@media (max-width: 970px) and (min-height: 700px) {
+  .day-hint { display: flex; grid-column: 1; grid-row: 4; justify-self: center; align-self: end; margin: 2px 0 10px; }
 }
 @media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
   .day-scene-wrap { transition: transform .45s cubic-bezier(.2, .8, .3, 1); }

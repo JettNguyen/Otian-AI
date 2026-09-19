@@ -501,9 +501,14 @@
                         <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
                         <div class="col">
                           <!-- Send edits this card the way the product edits it (the Archie repo's
-                               email/replies/actions.rs): the buttons go and the words become "Sent to"
-                               over the same draft. Both states are here; the stylesheet swaps them on
-                               is-done. The button labels are the card's own.
+                               email/replies/actions.rs): the buttons go and the words become "Sent (to
+                               Sam):" over the same draft, which is that file's own form for a reply. Both
+                               states are here; the stylesheet swaps them on is-done. The button labels
+                               are the card's own. THE PRESS ITSELF IS THE PHONE APP'S (archie-mobile
+                               commit 8533dae, 2026-09-18): the button stays lit and busy, a spinner where
+                               its mark was, until the computer answers, and the answer is the card
+                               changing plus a notice over the screen in the computer's own words, "Sent
+                               ✅", which leaves on its own. The notice is this screen's last child.
 
                                THE CARD LANDS AS ONE THING. One beat, on the group, and nothing
                                inside it carries its own: the buttons belong to the message and the
@@ -512,9 +517,9 @@
                                and the time were given beats of their own and he saw it). The beats
                                in the other screens are messages, which do arrive one after another;
                                this is one message with a control row and a time on it. -->
-                          <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> to Sam</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
+                          <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
                           <div class="dp-fold"><div class="dp-actions">
-                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></button>
+                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                             <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
@@ -522,6 +527,10 @@
                           <p class="dp-stamp">1:40 PM</p>
                         </div>
                       </div>
+                      <!-- The computer's answer to the press, over the screen, in its own words. Played by
+                           the stylesheet on is-noticed, which js/home.js adds only when a press settles
+                           here and not when the reader arrives at a screen already settled. -->
+                      <div class="dp-notice" aria-hidden="true"><div class="in">Sent &#9989;</div></div>
                     </div>
 
                     <div class="dp-scr dp-scr--grow" data-scr="4">
@@ -667,6 +676,131 @@
              the objects, and past the story lifts it into the mark beside the closing button. The
              greeting is Ember's own line (js/ember.js, invitation), shown once per browser. -->
         <span class="day-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
+      </div>
+    </section>
+
+    <!-- ==============================================================
+         THE ONE THING THAT STOPS AN INSTALL, AND IT IS NOT PRIVACY (2026-09-18).
+         The day story above shows six acts of an agent doing things, and a reader who has
+         just watched that has exactly one objection left: not "who can see this" but "what
+         if it says something stupid with my name on it". The site said almost nothing about
+         that. A survey of every served page found the fear stated twice in total, and the
+         best sentence for it was buried on compare/hiring-an-assistant/: "A mistake waits
+         for your yes rather than going out under your name." This section is that sentence
+         given a drawing and put where a first-time reader meets it.
+
+         WHY A FIGURE AND NOT A CHANGE TO ACT 2, WHICH ALREADY DRAWS A DRAFT CARD. The day
+         story's window and phone are ports of the app's own mockups, and everything on them
+         has to be something the app actually has: that rule is what retired the invented
+         "Sent to Sam" pill and the calendar Confirm card. A note reading "Sam has not paid"
+         is not on any screen in the app, so it cannot go on a mockup. An explain-figure is
+         a diagram rather than a portrait of a screen, so it is allowed to be diagrammatic,
+         and that distinction is the whole reason this is a separate figure.
+
+         THE AGENT IS NOT DRAWN AS STUPID, AND THAT IS THE POINT. The draft is correct,
+         polite and exactly what the calendar supports. What it is missing is a fact that
+         lives in no inbox and no calendar, which is why the gate is not a safety net over a
+         bad machine: it is the one step only the person can take. Drawing it the other way
+         round ("AI makes mistakes, we catch them") sells the product by insulting it and
+         flatters nobody.
+
+         RESTING STATE IS THE GOOD OUTCOME. The still drawing is the draft already stopped
+         with the reader about to read it; the dot only re-enacts how it got there. A figure
+         about a thing going wrong that RESTS on the thing going wrong would be a fear
+         message, which the Otian Standard bans outright.
+
+         TRUST.md: the gate wording is scoped on purpose. The banned-phrasings table forbids
+         the unscoped "nothing sends without your OK" and "it asks before it acts", and the
+         absolute "nothing reaches Gmail until you tap Send" was retired as FALSE on
+         2026-08-31, because a scheduled send goes out with nobody pressing anything. The
+         sub-label under Send is the shipped product's own sentence in miniature.
+
+         The gate is --c-blue and the person glyph is the la-figure's, both lifted from
+         how-it-works/ so a reader who has seen that drawing recognises this one.
+         ============================================================== -->
+    <section class="section" aria-labelledby="mine-heading">
+      <div class="container">
+        <div class="hm-wrap hm-head">
+          <span class="section-label fade-up">Before a reply goes out</span>
+          <h2 id="mine-heading" class="fade-up">Your agent is not wrong. It just isn&rsquo;t you.</h2>
+        </div>
+        <figure class="explain-figure mn-figure fade-up delay-1">
+          <!-- =================== DESKTOP =================== -->
+          <svg class="explain-svg--desktop" viewBox="0 0 600 240" role="img" aria-labelledby="mn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="mn-t">Your agent has written a reply to Sam Whitaker agreeing to Thursday at two. The draft travels one line and stops at a gate, where you are standing. Past the gate, faint and not yet reached, is Send, marked until you send it or set a time. Under the drawing: only you know Sam has not paid for the last two.</title>
+            <style>
+              .mn-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
+              .mn-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .mn-to{fill:currentColor;opacity:.62;font-size:10.5px}
+              .mn-rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.18}
+              .mn-body{fill:currentColor;font-size:12.5px;font-weight:650}
+              .mn-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.28;stroke-linecap:round}
+              .mn-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
+              .mn-wire--past{opacity:.28;stroke-dasharray:4 5}
+              .mn-gate{fill:none;stroke:var(--c-blue);stroke-width:2.5;stroke-linecap:round}
+              .mn-glyph{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+              .mn-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
+              .mn-send{fill:none;stroke:var(--line-muted);stroke-width:1.5}
+              .mn-sendtext{fill:currentColor;opacity:.62;font-size:11.5px;font-weight:650;text-anchor:middle}
+              .mn-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
+              .mn-note{fill:var(--c-blue-ink);font-size:12px;font-weight:650;text-anchor:middle}
+              .mn-dot{display:none;fill:var(--accent)}
+              @supports (offset-path:path("M0,0 L1,1")){
+                .mn-dot{display:block;offset-distance:100%}
+                @media (prefers-reduced-motion:no-preference){
+                  .mn-dot{animation:mnHold 6s ease-in-out infinite}
+                  @keyframes mnHold{0%{offset-distance:0%;opacity:0}9%{opacity:1}38%{offset-distance:100%;opacity:1}92%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:1}}
+                }
+              }
+            </style>
+            <defs><marker id="mn-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".55"/></marker></defs>
+
+            <text class="mn-label" x="14" y="20">YOUR AGENT WROTE THIS</text>
+            <rect class="mn-card" x="12" y="30" width="222" height="96" rx="12"/>
+            <text class="mn-to" x="30" y="54">To: Sam Whitaker</text>
+            <path class="mn-rule" d="M30,64 h186"/>
+            <text class="mn-body" x="30" y="86">Thursday at 2 works well.</text>
+            <path class="mn-ink" d="M30,100 h128M30,111 h84"/>
+
+            <path class="mn-wire" d="M234,78 L292,78" marker-end="url(#mn-ah)"/>
+            <path class="mn-gate" d="M306,36 V128"/>
+            <path class="mn-wire mn-wire--past" d="M320,78 L424,78"/>
+            <rect class="mn-send" x="430" y="65" width="66" height="26" rx="13"/>
+            <text class="mn-sendtext" x="463" y="82">Send</text>
+            <text class="mn-sub" x="463" y="108">until you send it, or set a time</text>
+
+            <g class="mn-glyph"><circle cx="306" cy="140" r="10"/><path d="M286,170 a20,20 0 0 1 40,0"/></g>
+            <text class="mn-name" x="306" y="192">You</text>
+            <text class="mn-note" x="300" y="224">Only you know Sam has not paid for the last two.</text>
+
+            <circle class="mn-dot" r="5" style="offset-path:path('M234,78 L306,78')"/>
+          </svg>
+          <!-- =================== MOBILE =================== -->
+          <svg class="explain-svg--mobile" viewBox="0 0 340 344" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="mnm-t">Your agent has written a reply to Sam Whitaker agreeing to Thursday at two. The draft travels down one line and stops at a gate, where you are standing beside it. Below the gate, faint and not yet reached, is Send, marked until you send it or set a time. At the bottom: only you know Sam has not paid for the last two.</title>
+            <text class="mn-label" x="14" y="20">YOUR AGENT WROTE THIS</text>
+            <rect class="mn-card" x="12" y="30" width="316" height="96" rx="12"/>
+            <text class="mn-to" x="30" y="54">To: Sam Whitaker</text>
+            <path class="mn-rule" d="M30,64 h280"/>
+            <text class="mn-body" x="30" y="86">Thursday at 2 works well.</text>
+            <path class="mn-ink" d="M30,100 h188M30,111 h124"/>
+
+            <path class="mn-wire" d="M120,126 L120,164" marker-end="url(#mn-ah)"/>
+            <path class="mn-gate" d="M64,172 H240"/>
+            <path class="mn-wire mn-wire--past" d="M120,180 L120,214"/>
+            <rect class="mn-send" x="87" y="218" width="66" height="26" rx="13"/>
+            <text class="mn-sendtext" x="120" y="235">Send</text>
+            <text class="mn-sub" x="120" y="260">until you send it, or set a time</text>
+
+            <g class="mn-glyph"><circle cx="256" cy="172" r="10"/><path d="M236,202 a20,20 0 0 1 40,0"/></g>
+            <text class="mn-name" x="256" y="224">You</text>
+            <text class="mn-note" x="170" y="300">Only you know Sam has not</text>
+            <text class="mn-note" x="170" y="320">paid for the last two.</text>
+
+            <circle class="mn-dot" r="5" style="offset-path:path('M120,126 L120,172')"/>
+          </svg>
+          <figcaption>Your agent knows the calendar. It does not know that Sam has not paid. A mistake waits for your yes rather than going out under your name.</figcaption>
+        </figure>
       </div>
     </section>
 

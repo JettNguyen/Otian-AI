@@ -11920,6 +11920,9 @@ html[data-theme="dark"] .booking-container iframe {
 .ember .top,
 .ember .wrap { transform-box: view-box; }
 .ember .face { transform-origin: 100px 102px; }
+/* The tongue hangs from where it leaves the mouth, so that is what it turns about: the lip at
+   y=136, written 130 on the same view-box rule as the rest. */
+.ember .tongue { transform-box: view-box; transform-origin: 100px 130px; }
 .ember .feet { transform-origin: 100px 163px; }
 .ember .top { transform-origin: 100px 42px; }
 .ember .wrap { transform-origin: 100px 152px; }
@@ -11965,6 +11968,7 @@ html[data-theme="dark"] .booking-container iframe {
 .ember svg.st-act-blep .face { animation: ember-blep-face 1.3s linear 1; }
 .ember svg.st-act-blep .feet { animation: ember-blep-turn 1.3s linear 1; }
 .ember svg.st-act-blep .top { animation: ember-blep-turn 1.3s linear 1; }
+.ember svg.st-act-blep .tongue { animation: ember-blep-tongue 1.3s linear 1; }
 .ember svg.st-act-blep .mouth-smile { opacity: 0; }
 .ember svg.st-act-blep .mouth-blep { opacity: 1; }
 
@@ -12210,6 +12214,50 @@ html[data-theme="dark"] .booking-container iframe {
   74% { transform: scaleX(0.42); }
   86% { transform: scaleX(0.87); }
   100% { transform: scaleX(1); }
+}
+/* THE TONGUE IS NOT ATTACHED TO THE HEAD, and this is the arithmetic that says so.
+
+   Hinged at the lip and swung by the head underneath it: a damped spring, driven by the
+   sideways acceleration of its own root, integrated at a tenth of a millisecond and kept at the
+   turning points of the answer rather than on a grid, because a grid drops a whip between two
+   samples and prints it flat. 5Hz with a damping ratio of 0.22, which is a small floppy thing
+   next to a head going at just under four: near enough to resonance that the swings build, far
+   enough that they do not run away. The amplitude is the one chosen number, scaled so the peak
+   reads at 22 degrees; everything else is the shape the spring gave.
+
+   The two things to look at, because they are the whole point of it. The tongue is at its far
+   side about two percent AFTER the head reaches its own, so it is still going out while the head
+   is already coming back; and its first lean is into the swing rather than away from it, because
+   for the first eighth of a second the head is accelerating and the tongue has been left behind.
+   A tongue that hit its extreme with the head would be painted on.
+
+   The first fifteen percent is the length rather than the angle, and it is not from the spring:
+   the tongue comes out of the mouth, overshoots, and settles. The sim's own last hundredth is
+   dropped so the act ends with the tongue at rest. */
+@keyframes ember-blep-tongue {
+  0% { transform: rotate(0deg) scaleY(0.12); }
+  4% { transform: rotate(0deg) scaleY(1.12); }
+  7.5% { transform: rotate(0.7deg) scaleY(0.93); }
+  11% { transform: rotate(4.8deg) scaleY(1.04); }
+  15% { transform: rotate(0deg) scaleY(1); }
+  18.5% { transform: rotate(-14.7deg) scaleY(1); }
+  23% { transform: rotate(0deg) scaleY(1); }
+  28% { transform: rotate(20.7deg) scaleY(1); }
+  32.5% { transform: rotate(0deg) scaleY(1); }
+  38% { transform: rotate(-22deg) scaleY(1); }
+  42.5% { transform: rotate(0deg) scaleY(1); }
+  47.5% { transform: rotate(21.7deg) scaleY(1); }
+  52% { transform: rotate(0deg) scaleY(1); }
+  57.5% { transform: rotate(-21.2deg) scaleY(1); }
+  62% { transform: rotate(0deg) scaleY(1); }
+  67.5% { transform: rotate(21.1deg) scaleY(1); }
+  72% { transform: rotate(0deg) scaleY(1); }
+  77% { transform: rotate(-17.2deg) scaleY(1); }
+  81.5% { transform: rotate(0deg) scaleY(1); }
+  86% { transform: rotate(10.9deg) scaleY(1); }
+  90.5% { transform: rotate(0deg) scaleY(1); }
+  94.5% { transform: rotate(-6.9deg) scaleY(1); }
+  99%, 100% { transform: rotate(0deg) scaleY(1); }
 }
 @keyframes ember-blep-face {
   0%, 8% { transform: translateX(0px) scaleX(1); }

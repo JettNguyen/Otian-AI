@@ -158,7 +158,16 @@
       '<defs><linearGradient id="ember-' + uid + '" x1="0" y1="0.18" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
       '<stop offset="0.55" stop-color="' + hue.mid + '"/>' +
-      '<stop offset="1" stop-color="' + hue.dark + '"/></linearGradient></defs>' +
+      '<stop offset="1" stop-color="' + hue.dark + '"/></linearGradient>' +
+      /* The lip, as a clip. The tongue swings about where it leaves the mouth, and a shape
+         rotating about its own top edge lifts its far corner above that edge: 22 degrees puts
+         about two units of it over the lip, which at the sizes Ember is drawn is a pink nub on
+         the face. Clipping to everything below the lip line takes it, and the clip sits on a
+         group that does not turn, because a clip path on the turning group turns with it and
+         clips nothing. These are plain drawing coordinates, not the view-box-corner ones the
+         transform origins in styles.css use. */
+      '<clipPath id="lip-' + uid + '"><rect x="86" y="134" width="28" height="34"/></clipPath>' +
+      '</defs>' +
       '<ellipse cx="100" cy="177" rx="37" ry="6" fill="rgba(68,64,59,.12)"/>' +
       '<g class="anim"><g class="lean">' +
       /* FOUR PARTS, AND THE REASON THERE ARE FOUR.
@@ -195,8 +204,10 @@
          saved pictures with no stylesheet near it and the two drawings stay the same drawing. */
       '<g class="mouth mouth-blep" opacity="0">' +
       '<path d="M93.8 134 A6.2 6.2 0 0 0 106.2 134 Z" fill="#2A2521"/>' +
+      '<g clip-path="url(#lip-' + uid + ')"><g class="tongue">' +
       '<path d="M95 136 L105 136 L105 145 Q105 150.5 100 150.5 Q95 150.5 95 145 Z" ' +
       'fill="#DE8A86" stroke="#2A2521" stroke-width="2" stroke-linejoin="round"/>' +
+      '</g></g>' +
       '</g>' +
       (EXTRAS_ON_BODY[look.extra] ? "" : (EXTRAS[look.extra] || EXTRAS.none)(hue.dark)) +
       '</g>' +

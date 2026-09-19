@@ -377,8 +377,30 @@
        An earlier fix pinned the caption row so the scene could not move at all. It did stop the
        snap, and it also threw away the effect this is for. */
     var EASE_SC = 0.12, scTarget = 1;
+
+    /* THE HEIGHT EACH HERO BEAT OPENS TO, measured rather than guessed. `max-height` is what
+       animates the room open (see the stylesheet beside `.day-beat`), and it needs a real number
+       at the far end or the easing is a fraction of the curve followed by nothing. `scrollHeight`
+       reads the content through the collapsed box, so nothing has to be shown to be measured.
+       Keyed on the viewport box: the answer only changes when the text rewraps, and this is
+       layout work that a scroll cannot afford to do per frame. */
+    /* The markup gives these `is-on` so a reader with no JavaScript gets the whole hero. With the
+       driver here they are the driver's, and they have to be the driver's BEFORE the first paint:
+       left alone they would be drawn open and then animate shut, which is a page that closes
+       itself while you look at it. Cleared here, and the transitions are switched on a frame later
+       (`is-driven`), so that correction costs nothing and every later change is animated. */
+    var heroBeats = $$('.day-cap[data-act="0"] .day-beat'), measuredAt = '';
+    heroBeats.forEach(function (el) { el.classList.remove('is-on'); });
+    function measureBeats(w, h) {
+      var key = Math.round(w) + 'x' + Math.round(h);
+      if (key === measuredAt || !heroBeats.length) return;
+      measuredAt = key;
+      heroBeats.forEach(function (el) { el.style.setProperty('--beat-h', el.scrollHeight + 'px'); });
+    }
+
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
+      measureBeats(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
@@ -721,6 +743,7 @@
       if (i === 1 || i === 2 || i === 4) { var pr = phone.getBoundingClientRect(); window.Ember.look(ember, { x: pr.left + pr.width / 2, y: pr.top + pr.height * 0.55 }); }
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
       else window.Ember.look(ember, null);
+      if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
       requestAnimationFrame(frame);
     }
     requestAnimationFrame(frame);

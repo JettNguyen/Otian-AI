@@ -16088,31 +16088,55 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-device::after { content: ""; position: absolute; z-index: 3; pointer-events: none; left: 50%; transform: translateX(-50%); top: calc(var(--bezel-wall) + 14px); width: 96px; height: 30px; border-radius: 15px; background: #000; box-shadow: inset 0 0 0 .5px rgba(255, 255, 255, .07); }
 .dp-device::before { content: ""; position: absolute; z-index: 4; pointer-events: none; left: 50%; margin-left: 20px; top: calc(var(--bezel-wall) + 22px); width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #243040 0%, #0C0F14 56%, #050609 100%); box-shadow: inset 0 0 0 .5px rgba(130, 170, 225, .22); }
 .dp-ph {
-  /* The phone kit's dark tokens, from src/theme.ts by way of archie-screen-kit.html. Dark in both
-     themes, for the reason .hm-pz gives: a screen is a lit thing standing on the page.
+  /* The phone kit's tokens, from src/theme.ts by way of archie-screen-kit.html, and THE SCREEN
+     FOLLOWS THE PAGE (2026-09-18). It was the dark set in both themes until archie-mobile shipped
+     a theme picker the same day (its commit f208e08, "let you pick light or dark, and follow the
+     phone until you do"), which is what made a light screen a thing the app really does. Before
+     that a light phone would have been a drawing of a product that had no light mode, which is
+     the rule every mockup on this site is held to. The window beside it has worked this way all
+     along ([data-theme="dark"] .da-app below), and so do the three stills on archie/mobile/ that
+     gen-phone-mocks.py draws, so the live phone was the last object on the stage still arguing
+     with the page around it.
 
-     ONE TOKEN DELIBERATELY DIFFERS, AND IT IS THE INK. The app's --text is #F3F0ED, a warm
-     near-white, which on a bubble measures 12.5:1 and on a sent bubble 10.2:1; nothing here was
-     ever a contrast failure. What fails is that this screen is drawn at about a third of the size
-     the app runs at, so its type is grayscale antialiased at around a dozen pixels, which thins
-     light strokes on a dark ground. Jett read that as the messages not standing off their bubbles
-     (2026-09-17). The ink went to #FFFDFB and then, when he said it was still not bright enough,
-     to plain white, which is the end of that road: 14.2:1 and 11.6:1, and there is nothing above
-     white. THE RATIO WAS NEVER THE THING THAT WAS DARK. A ratio assumes a solid fill, and a 1px
-     stem at this size is an antialiased smear that never reaches the color it is set in: at 65%
-     coverage a white stem lands on #B5B5B4 and reaches 6.9:1 whatever the token says. The way to
-     make a thin stroke arrive at its color is to make it less thin, which is why .dp-bub carries
-     a weight below, and after that the only lever left is the size the screen is drawn at. */
-  --bg: #1A1A19; --bg2: #222221; --card: #2B2B29; --accent: #EDA277; --accent-sub: #453629; --accent-strong: #F0B18D;
-  --text: #FFFFFF; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
-  --line: rgba(243, 240, 237, 0.16); --soft: rgba(243, 240, 237, 0.05);
-  --green: #8FC47B; --green-sub: rgba(143, 196, 123, 0.16); --gold: #E0B45E; --gold-sub: rgba(224, 180, 94, 0.16);
-  --teal: #6FC4BC; --teal-sub: rgba(111, 196, 188, 0.16); --hair: 0.5px;
-  --lift-phone-card: 0 4px 16px rgba(0, 0, 0, 0.5); --lift-phone-bar: 0 4px 16px rgba(0, 0, 0, 0.55); --lift-phone-bar-up: 0 -4px 16px rgba(0, 0, 0, 0.55); --lift-phone-float: 0 8px 36px rgba(0, 0, 0, 0.65);
+     .hm-pz on how-it-works/ is NOT this and did not change: it is a drawn conversation on a dark
+     device in both themes, with its own measured ratios and the reasoning above it. Leaving it is
+     a decision, not an oversight, and the paragraph there is the one to read before touching it.
+
+     The light values are the app's own, straight across. The lifts are its liftLight, with the
+     radius doubled the way the dark ones already double liftDark's: RN's shadowRadius is about
+     half a CSS blur. */
+  --bg: #FCFAF8; --bg2: #F5F3EF; --card: #FFFFFF; --accent: #E08A5B; --accent-sub: #FBE4D3; --accent-strong: #884E30;
+  --text: #44403B; --text2: #69645D; --muted: #6D6861; --on-accent: #2A2521; --border: #EAE6E1;
+  --line: rgba(68, 64, 59, 0.16); --soft: rgba(68, 64, 59, 0.04);
+  --green: #679B55; --green-sub: rgba(103, 155, 85, 0.14); --gold: #BB8C33; --gold-sub: rgba(187, 140, 51, 0.14);
+  --teal: #3E9A92; --teal-sub: rgba(62, 154, 146, 0.13); --hair: 0.5px;
+  --lift-phone-card: 0 4px 18px rgba(68, 64, 59, 0.13); --lift-phone-bar: 0 4px 16px rgba(68, 64, 59, 0.16); --lift-phone-bar-up: 0 -4px 16px rgba(68, 64, 59, 0.16); --lift-phone-float: 0 8px 32px rgba(68, 64, 59, 0.3);
   position: relative; width: 393px; height: 852px; border-radius: 54px; overflow: hidden;
   background: var(--bg); color: var(--text); text-align: left; line-height: 1.35;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: flex; flex-direction: column;
+}
+/* The dark set, and ONE TOKEN DELIBERATELY DIFFERS: the ink. The app's --text is #F3F0ED, a warm
+   near-white, which on a bubble measures 12.5:1 and on a sent bubble 10.2:1; nothing here was ever
+   a contrast failure. What fails is that this screen is drawn at about a third of the size the app
+   runs at, so its type is grayscale antialiased at around a dozen pixels, which thins light strokes
+   on a dark ground. Jett read that as the messages not standing off their bubbles (2026-09-17). The
+   ink went to #FFFDFB and then, when he said it was still not bright enough, to plain white, which
+   is the end of that road: 14.2:1 and 11.6:1, and there is nothing above white. THE RATIO WAS NEVER
+   THE THING THAT WAS DARK. A ratio assumes a solid fill, and a 1px stem at this size is an
+   antialiased smear that never reaches the color it is set in: at 65% coverage a white stem lands
+   on #B5B5B4 and reaches 6.9:1 whatever the token says. The way to make a thin stroke arrive at its
+   color is to make it less thin, which is why .dp-bub carries a weight below, and after that the
+   only lever left is the size the screen is drawn at. THE LIGHT SET NEEDS NO SUCH LIFT: a dark stem
+   on a near-white ground gains coverage from the same antialiasing that costs a light one, so the
+   ink there is the app's #44403B unchanged. */
+[data-theme="dark"] .dp-ph {
+  --bg: #1A1A19; --bg2: #222221; --card: #2B2B29; --accent: #EDA277; --accent-sub: #453629; --accent-strong: #F0B18D;
+  --text: #FFFFFF; --text2: #AEACA6; --muted: #ACA8A3; --on-accent: #292624; --border: #3F3E3A;
+  --line: rgba(243, 240, 237, 0.16); --soft: rgba(243, 240, 237, 0.05);
+  --green: #8FC47B; --green-sub: rgba(143, 196, 123, 0.16); --gold: #E0B45E; --gold-sub: rgba(224, 180, 94, 0.16);
+  --teal: #6FC4BC; --teal-sub: rgba(111, 196, 188, 0.16);
+  --lift-phone-card: 0 4px 16px rgba(0, 0, 0, 0.5); --lift-phone-bar: 0 4px 16px rgba(0, 0, 0, 0.55); --lift-phone-bar-up: 0 -4px 16px rgba(0, 0, 0, 0.55); --lift-phone-float: 0 8px 36px rgba(0, 0, 0, 0.65);
 }
 /* The app's composer stops the safe-area inset short of the bottom (its Chat.tsx pads by
    insets.bottom plus one small space), so the composer does not hug the glass. The system's home

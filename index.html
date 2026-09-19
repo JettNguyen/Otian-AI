@@ -525,7 +525,20 @@
                                email/replies/actions.rs): the buttons go and the words become "Sent (to
                                Sam):" over the same draft, which is that file's own form for a reply. Both
                                states are here; the stylesheet swaps them on is-done. The button labels
-                               are the card's own. THE PRESS ITSELF IS THE PHONE APP'S (archie-mobile
+                               are the card's own.
+
+                               THE HEADING AND THE REPLY BOTH STAY, AND ONE LINE SWAPS. The card is
+                               rewritten in place, so `heading()` in email/replies/card.rs is shared
+                               by the live card and by what it becomes, and `sent_card()` is that
+                               heading plus "✅ Sent (to X):" plus the same draft body. The app
+                               rewrote a sent card down to the outcome and the reply once, and Jett
+                               scrolled back to one and could not tell what email it had answered;
+                               the comment on `heading()` is that fix. This screen had the same bug
+                               until 2026-09-18: both the heading and the body were dp-before, so a
+                               send took the email off the card. Only the label is a before/after
+                               pair now, which is the one line that actually changes.
+
+                               THE PRESS ITSELF IS THE PHONE APP'S (archie-mobile
                                commit 8533dae, 2026-09-18): the button stays lit and busy, a spinner where
                                its mark was, until the computer answers, and the answer is the card
                                changing plus a notice over the screen in the computer's own words, "Sent
@@ -538,7 +551,7 @@
                                and the time were given beats of their own and he saw it). The beats
                                in the other screens are messages, which do arrive one after another;
                                this is one message with a control row and a time on it. -->
-                          <div class="dp-bub theirs"><div class="dp-md"><p class="dp-before"><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam): Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p class="dp-after">Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we push the kickoff to Thursday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Thursday works. 10:00 our end, and I&rsquo;ll send the invite.</p></div></div>
                           <div class="dp-fold"><div class="dp-actions">
                             <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
                             <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>

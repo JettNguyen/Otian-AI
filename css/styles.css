@@ -11793,10 +11793,19 @@ html[data-theme="dark"] .booking-container iframe {
    head swings far enough that the eyes stop being what you are watching. Roughly a third of the
    travel over half again the time keeps the unevenness and lets the happy arcs read, which are the
    part that says they like it. Same numbers as the app's `archieEmberTickle` in globals.css. */
-.ember.is-hovered .anim { animation: ember-tickle 0.9s ease-in-out infinite; }
-.ember.is-hovered .pill,
-.ember.is-hovered .glint { opacity: 0; }
-.ember.is-hovered .happy { opacity: 1; }
+/* **A move takes the tickle off, and that guard is the whole of these three lines.** A press
+   happens with the pointer on them, so every act was being played by an Ember already squirming
+   with the giggling eyes on: the act won the body (it is the more specific rule) and lost the
+   face, so nine of them played to a reader behind shut eyes and the tenth, the one whose joke is
+   the tongue, had no eyes to tell it with. The squirm is the answer to a pointer and the act is
+   the answer to a press; the press is the bigger of the two, so it takes the face. The act class
+   is the guard because it already exists and is already on the svg: nothing to keep in step and
+   nothing to leave behind if a move is interrupted. The tickle comes back on its own when the
+   class comes off, which is right, because the pointer is still on them. */
+.ember.is-hovered svg:not([class*="st-act-"]) .anim { animation: ember-tickle 0.9s ease-in-out infinite; }
+.ember.is-hovered svg:not([class*="st-act-"]) .pill,
+.ember.is-hovered svg:not([class*="st-act-"]) .glint { opacity: 0; }
+.ember.is-hovered svg:not([class*="st-act-"]) .happy { opacity: 1; }
 @keyframes ember-tickle {
   0%   { transform: translate(0, 0) rotate(0deg) scale(1, 1); }
   14%  { transform: translate(-0.8%, -0.4%) rotate(-1.5deg) scale(1.012, 0.99); }

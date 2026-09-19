@@ -16412,6 +16412,26 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 }
 
 /* ---- Ember, the one constant: an element js/home.js walks between marks, inside the stage ---- */
+/* ---- the day rail: where you are in the day, under the nav ---- */
+/* Absolute inside the sticky stage rather than a grid item, which is the one placement that cannot
+   collide with anything: the stage is two columns wide and one column narrow, the captions fill
+   their cell, and the clock badge owns the top row narrow. Under the nav it is out of all three.
+
+   THE SEGMENTS ARE SIZED BY THE ACT, NOT EVENLY. js/home.js gives each one a flex-grow out of LEN,
+   so a tick falls where an act does and the fill crosses the bar at one rate all the way down.
+   Eight even segments would have run the quarter-length hero in 3% of the page and the setup act,
+   which is eight times longer, at an eighth of the speed, and a progress bar whose speed is a
+   surprise is worse than none: the thing it exists to say is that the scroll is doing something.
+
+   The unfilled half is the border colour, so at rest it reads as a rule and not as an empty
+   meter. Same linear-gradient-with-a-custom-property fill as .mb-rail on archie/mobile/. */
+.day-rail { position: absolute; top: calc(var(--nav-height) + 2px); left: 0; right: 0; z-index: 5; display: flex; gap: 3px; height: 2px; pointer-events: none; }
+.day-rail i { flex: 1 1 0; background: linear-gradient(90deg, var(--accent) calc(var(--f, 0) * 100%), var(--border) 0); }
+/* Night, the same swap the rest of the stage makes: the border colour is a light-theme line and
+   goes to nothing on the dark ground, and the accent is the one the night captions use. */
+.day-stage.is-night .day-rail i { background: linear-gradient(90deg, #EDA277 calc(var(--f, 0) * 100%), rgba(255, 255, 255, .16) 0); }
+@media (prefers-reduced-motion: no-preference) { .day-rail i { transition: background .12s linear; } }
+
 /* Absolute, not fixed. A fixed Ember chasing marks on a sticky stage was measured a frame behind the
    compositor's scroll and stuttered; inside the stage it rides the stage's own movement and only its
    own walks are eased. Past the story the script moves it into .day-cta-mark, the same way. */
@@ -16432,7 +16452,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-cap { position: relative; opacity: 1; transform: none; pointer-events: auto; padding: 28px 0; border-top: 1px solid var(--border); }
   .day-cap:first-child { border-top: 0; }
   .day-scene-wrap { height: 620px; }
-  .day-clock, .day-hint { display: none; }
+  /* The story is unpinned here, so the scroll is the page's own and the browser's scrollbar is
+     already the honest indicator. A rail tracking acts that now stand in a stack would be reporting
+     on a story that is not being told. */
+  .day-clock, .day-hint, .day-rail { display: none; }
   .day-beat { opacity: 1; transform: none; }
 }
 

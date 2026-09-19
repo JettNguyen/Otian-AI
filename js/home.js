@@ -183,6 +183,7 @@
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
+    var rail = $('.day-rail');
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
     var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grow = $('.dp-scr--grow');
@@ -228,6 +229,20 @@
        this far toward the calendar pose, and the calendar act's settle finishes the trip. */
     var PRE = 0.5;
     LEN.forEach(function (l) { TOT += l; CUM.push(TOT); });
+    /* THE RAIL IS BUILT FROM LEN, which is the whole reason it is built here rather than written
+       into index.html: the act count and the act lengths are already in this array, and a rail
+       typed out beside it is the pair of numbers that must agree which took the setup track out
+       earlier today. One segment per act, each one flex-grown by that act's own share of the
+       scroll, so the fill crosses the bar at one rate from the hero to the last setup step and a
+       tick falls where an act does. Asked for by Jett (2026-09-18): scrolling into a beat that is
+       still assembling moves a camera between two poses, and a camera easing is not something you
+       can see move, so the page looked stuck. */
+    var segs = [], segF = [];
+    if (rail) LEN.forEach(function (l, k) {
+      var seg = document.createElement('i');
+      seg.style.flexGrow = l;
+      rail.appendChild(seg); segs.push(seg); segF.push(-1);
+    });
     /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
        each is rastered near the size it is seen. */
@@ -525,6 +540,15 @@
       if (still) { i = 0; t = 1; }
       setAct(i);
       if (hint) hint.classList.toggle('is-off', p > 0.02);
+      /* Where the day is, as a fraction of the act it is in: full behind, empty ahead, and the one
+         under the reader filling. Written only when the rounded value moves, because this runs on
+         every frame of every scroll and eight style writes a frame that set the same string is the
+         kind of work that shows up as a dropped frame on a laptop and nowhere else. Skipped under
+         reduced motion, where the stylesheet has the rail off and the acts stand in a stack. */
+      if (!still) for (var sk = 0; sk < segs.length; sk++) {
+        var f = clamp(i + t - sk, 0, 1), q = f.toFixed(3);
+        if (segF[sk] !== q) { segs[sk].style.setProperty('--f', q); segF[sk] = q; }
+      }
 
       var settle = i === 0 ? 1 : smooth(t / SETTLE);
       fit();

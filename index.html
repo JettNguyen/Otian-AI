@@ -720,6 +720,19 @@
         <div class="day-clock is-on" aria-hidden="true"><i></i><span>7:00 am</span></div>
         <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
 
+        <!-- Where you are in the day, as a line under the nav. Asked for by Jett on 2026-09-18: a
+             reader who scrolls into a beat that is still assembling has nothing telling them the
+             scroll is doing anything, because a camera easing between two poses is not something
+             you can see move. Same fill as archie/mobile/'s step rail, which is the page this is
+             modelled on, and for the same reason.
+
+             EMPTY ON PURPOSE: js/home.js builds one segment per act out of LEN, the act table it
+             already owns, and sizes each by that act's own share of the scroll. Writing eight of
+             them here would be the act count typed twice, which is the bug that took the setup
+             track out earlier the same day. With no script there is nothing to draw and an empty
+             2px strip, which is the right amount of nothing for decoration. -->
+        <div class="day-rail" aria-hidden="true"></div>
+
         <!-- Ember, the one constant. Inside the stage, so it rides the stage's own scroll instead of
              chasing it from a fixed box a frame behind; js/home.js walks it between the marks on
              the objects, and past the story lifts it into the mark beside the closing button. The

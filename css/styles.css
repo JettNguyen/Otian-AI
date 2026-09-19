@@ -17116,7 +17116,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    56 degrees and everything that stands on it is counter-rotated about its own feet, the way
    the homepage floor's cards stand. Positions come in as --x and --y, percent of the plane, so
    the scene scales with its column and nothing is placed by viewport arithmetic. The hand sweeps
-   a day in 24 seconds; Ember walks the rim while the computer is on, the person is at their
+   a day in 24 seconds; Ember walks the rim all day (the kit is a computer that stays on, so the ring has no gap:
+   Jett, 2026-09-18, no time on the clock when the computer sleeps), the person is at their
    desk for their hours, and a beat lights as the hand passes it. At rest it is eight in the
    morning, with every arc, beat and label drawn, which is the whole claim without the motion. */
 .hd-figure { max-width: 720px; margin: 0 auto; }
@@ -17132,7 +17133,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .hd-arc { fill: none; stroke-linecap: round; }
 .hd-arc--agent { stroke: var(--accent); stroke-width: 10; }
 .hd-arc--person { stroke: var(--line-muted); stroke-width: 10; }
-.hd-arc--off { stroke: var(--line-soft); stroke-width: 4; stroke-dasharray: 2 8; }
 .hd-dot { stroke: var(--bg-card); stroke-width: 2.5; }
 .hd-dot--agent { fill: var(--accent); }
 .hd-dot--person { fill: var(--text-muted); }
@@ -17147,9 +17147,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .hd-beat--agent b { color: var(--accent-ink); border-color: var(--accent); }
 .hd-beat { opacity: .82; }
 .hd-person { --r: 21%; opacity: .9; }
-.hd-asleep { --r: 30%; }
 .hd-person svg { display: block; width: clamp(26px, 6vw, 44px); height: auto; margin: 0 auto 2px; fill: none; stroke: var(--text-secondary); stroke-width: 1.6; stroke-linecap: round; }
-.hd-asleep i { font-size: clamp(8px, 1.6vw, 11px); }
 .hd-walk { position: absolute; left: 81.45%; top: 70.42%; width: 21%; transform: translate(-50%, -92%) rotateX(calc(-1 * var(--tilt))); transform-origin: 50% 100%; }
 /* Ember's box is a square made of width alone (padding, then the drawing filling it), because a
    percent height inside the transformed plane resolved to nothing and drew Ember as a flat oval. */
@@ -17180,7 +17178,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 @media (prefers-reduced-motion: no-preference) {
   .hd-hand { animation: hd-hand 24s linear infinite; }
   @keyframes hd-hand { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  .hd-walk, .hd-shadow { animation: hd-walk 24s linear infinite, hd-on 24s linear infinite; }
+  .hd-walk, .hd-shadow { animation: hd-walk 24s linear infinite; }
   @keyframes hd-walk {
   0.000% { left: 50.00%; top: 12.50%; }
   4.167% { left: 59.71%; top: 13.78%; }
@@ -17208,7 +17206,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   95.833% { left: 40.29%; top: 13.78%; }
   100.000% { left: 50.00%; top: 12.50%; }
   }
-  @keyframes hd-on { 0.000% { opacity: 0; } 19.167% { opacity: 0; } 20.833% { opacity: 1; } 104.167% { opacity: 1; } 105.833% { opacity: 0; } 100.000% { opacity: 0; } }
   .hd-ember { animation: hd-step .5s ease-in-out infinite; }
   @keyframes hd-step { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4%); } }
   .hd-person { animation: hd-person 24s linear infinite; }

@@ -630,6 +630,32 @@ summary,
   cursor: pointer;
 }
 
+/* The same rule for what only SCRIPT makes clickable, which the sweep above could not see.
+   That sweep read the markup, so it found every <button>, <summary> and role=button and
+   reported the site clean; it had no way to know that js/ember.js binds a click to every
+   face it mounts ("Clicking them is the one interaction people try, so it answers, and
+   answers differently each time", ember.js) or that js/nav.js closes the drawer when the
+   scrim is clicked. So Ember was live on five pages and drawn with the arrow on all but
+   one: .day-ember had the pointer only because it was the one somebody happened to hover,
+   which is how this gets fixed one element at a time forever.
+
+   [data-ember] and [data-ember-seed] are the exact set, not .ember: they are what
+   mountAll() in ember.js queries, so the cursor cannot drift from what is actually bound.
+
+   Found 2026-09-18 by a WKWebView probe that wrapped EventTarget.addEventListener before
+   the page's own scripts ran and then asked each tagged element for its computed cursor.
+   That is the only audit that answers this question, and it is worth re-running after any
+   new click handler. Two things it flags are NOT defects: a bare <a href> computes
+   `cursor: auto` in WebKit and still shows the hand, and a container with a delegated
+   listener (p.install-other) is not itself the click target. And button.dp-knob stays on
+   the arrow until .dp-ph.is-typed, which is correct: its handler returns early until then,
+   so the cursor and the behaviour already agree. */
+[data-ember],
+[data-ember-seed],
+.nav-overlay {
+  cursor: pointer;
+}
+
 input,
 textarea,
 select {

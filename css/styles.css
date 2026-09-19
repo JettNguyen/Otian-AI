@@ -11929,6 +11929,36 @@ html[data-theme="dark"] .booking-container iframe {
 .ember svg.st-act-peek .top { animation: ember-peek-top 1.6s linear 1; }
 .ember svg.st-act-peek .anim { animation: ember-peek-body 1.6s ease-in-out 1; }
 
+/* ONE IN A HUNDRED: the tongue comes out and the head goes side to side.
+
+   It is a joke, and it is the only thing on this site that is one, so it is kept to a hundredth
+   of the presses and a hundredth of the idle firings by `RARE_CHANCE` in ember.js. What makes it
+   work is that nobody can make it happen: seen twice in a morning it would be Ember's party
+   trick, and a mascot with a party trick is a mascot being sold to you.
+
+   The shake is the turnaround doing an inch of work, the way the groove's fifteen pixels are:
+   the face rides the sphere out to x = 60 sin a and narrows by cos a, while the feet and the hat
+   sit on the axis and only close by the same cosine. Six swings that lose their nerve at the end,
+   because a shake that stops dead reads as a video cut. The mouth swap is opacity, like every
+   other face on Ember, so the drawing is whole at any frame.
+
+   **Fourteen degrees, and the ceiling is the blush rather than taste.** A cheek rides out at
+   43.5 cos a from the middle and the ball is only 56.9 wide at the cheeks' own height, which is
+   sqrt(60 squared minus 19 squared) and not 60: past about 14 degrees the blush slides off the
+   silhouette and sits on the page as a pale smudge. The spin gets away with more because it is
+   through that angle in two frames and never turns around inside it; a shake stops at its extreme
+   six times, so it stops short of the edge. 43.5 cos a + 60 sin a <= 56.9 is the whole of it, and
+   it lands on the same amplitude the groove already uses.
+
+   Linear on the three groups for the same reason the turn is: the ease is already in the
+   angles, and easing each of eighteen segments would pulse eighteen times. */
+.ember svg.st-act-blep .anim { animation: ember-blep-body 1.3s ease-in-out 1; }
+.ember svg.st-act-blep .face { animation: ember-blep-face 1.3s linear 1; }
+.ember svg.st-act-blep .feet { animation: ember-blep-turn 1.3s linear 1; }
+.ember svg.st-act-blep .top { animation: ember-blep-turn 1.3s linear 1; }
+.ember svg.st-act-blep .mouth-smile { opacity: 0; }
+.ember svg.st-act-blep .mouth-blep { opacity: 1; }
+
 /* The backflip. The rotation is linear on purpose and it is not a stylistic choice: Ember is
    in the air, and nothing in the air speeds up or slows its own spin. The crouch before and the
    landing after are where the timing lives. */
@@ -12171,6 +12201,56 @@ html[data-theme="dark"] .booking-container iframe {
   74% { transform: scaleX(0.42); }
   86% { transform: scaleX(0.87); }
   100% { transform: scaleX(1); }
+}
+@keyframes ember-blep-face {
+  0%, 8% { transform: translateX(0px) scaleX(1); }
+  16% { transform: translateX(14.52px) scaleX(0.97); }
+  21% { transform: translateX(0px) scaleX(1); }
+  26% { transform: translateX(-14.52px) scaleX(0.97); }
+  31% { transform: translateX(0px) scaleX(1); }
+  36% { transform: translateX(14.52px) scaleX(0.97); }
+  41% { transform: translateX(0px) scaleX(1); }
+  46% { transform: translateX(-14.52px) scaleX(0.97); }
+  51% { transform: translateX(0px) scaleX(1); }
+  56% { transform: translateX(14.52px) scaleX(0.97); }
+  61% { transform: translateX(0px) scaleX(1); }
+  66% { transform: translateX(-14.52px) scaleX(0.97); }
+  71% { transform: translateX(0px) scaleX(1); }
+  76% { transform: translateX(9.55px) scaleX(0.99); }
+  81% { transform: translateX(0px) scaleX(1); }
+  86% { transform: translateX(-5.02px) scaleX(1); }
+  93%, 100% { transform: translateX(0px) scaleX(1); }
+}
+/* The feet and the hat are on the axis the head is turning about, so they never travel: they
+   only close by the cosine, twice per swing. Written once and used by both. */
+@keyframes ember-blep-turn {
+  0%, 8% { transform: scaleX(1); }
+  16% { transform: scaleX(0.97); }
+  21% { transform: scaleX(1); }
+  26% { transform: scaleX(0.97); }
+  31% { transform: scaleX(1); }
+  36% { transform: scaleX(0.97); }
+  41% { transform: scaleX(1); }
+  46% { transform: scaleX(0.97); }
+  51% { transform: scaleX(1); }
+  56% { transform: scaleX(0.97); }
+  61% { transform: scaleX(1); }
+  66% { transform: scaleX(0.97); }
+  71% { transform: scaleX(1); }
+  76% { transform: scaleX(0.99); }
+  81% { transform: scaleX(1); }
+  86% { transform: scaleX(1); }
+  93%, 100% { transform: scaleX(1); }
+}
+/* The body under it: a gather as the mouth opens, a small rise while the head is going, and a
+   settle. Deliberately almost nothing, because the head is what is moving and a body swinging
+   with it would read as the whole drawing being shaken. */
+@keyframes ember-blep-body {
+  0% { transform: translateY(0) scale(1, 1); }
+  8% { transform: translateY(2.5%) scale(1.06, 0.94); }
+  18% { transform: translateY(-2%) scale(0.98, 1.02); }
+  50% { transform: translateY(-1.5%) scale(1, 1); }
+  86%, 100% { transform: translateY(0) scale(1, 1); }
 }
 @keyframes ember-squish {
   0%, 100% { transform: scale(1, 1); }

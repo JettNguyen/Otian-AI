@@ -186,6 +186,18 @@
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
       '<path class="mouth mouth-flat" d="M93 136 L107 136" stroke="#2A2521" stroke-width="3.2" ' +
       'fill="none" stroke-linecap="round" opacity="0"/>' +
+      /* The tongue, for the one move in a hundred: a jaw dropped open and a tongue hanging out
+         of it, drawn together and switched on as a pair. The jaw is filled rather than stroked,
+         for the reason the app's snoring mouth is: at the sizes Ember is shown a stroked ring
+         fills in with antialiasing and reads as a smudge. It is narrower than the smile (11.2
+         against 14), so the open mouth never grows wider than the closed one. `opacity="0"` is
+         on the markup rather than left to CSS, because the app rasterizes this same string into
+         saved pictures with no stylesheet near it and the two drawings stay the same drawing. */
+      '<g class="mouth mouth-blep" opacity="0">' +
+      '<path d="M93.8 134 A6.2 6.2 0 0 0 106.2 134 Z" fill="#2A2521"/>' +
+      '<path d="M95 136 L105 136 L105 145 Q105 150.5 100 150.5 Q95 150.5 95 145 Z" ' +
+      'fill="#DE8A86" stroke="#2A2521" stroke-width="2" stroke-linejoin="round"/>' +
+      '</g>' +
       (EXTRAS_ON_BODY[look.extra] ? "" : (EXTRAS[look.extra] || EXTRAS.none)(hue.dark)) +
       '</g>' +
       (EXTRAS_ON_BODY[look.extra]
@@ -240,8 +252,20 @@
     { cls: "st-act-shimmy", ms: 900, sparks: 0 },
     { cls: "st-act-groove", ms: 1100, sparks: 0 },
     { cls: "st-act-peek", ms: 1600, sparks: 0, big: true },
-    { cls: "st-act-backflip", ms: 1250, sparks: 6, big: true }
+    { cls: "st-act-backflip", ms: 1250, sparks: 6, big: true },
+    { cls: "st-act-blep", ms: 1300, sparks: 0, rare: true }
   ];
+
+  /* THE ONE IN A HUNDRED.
+
+     Tongue out, head going side to side, and then back to normal as though nothing happened.
+     `rare` keeps it out of both pools below, so the picker never lands on it: it arrives only
+     when the roll says so, whether the idle clock or a press did the asking. One percent is the
+     whole point of it. Most readers never see it, nobody can make it happen on purpose, and the
+     one who does see it saw something rather than found a feature. Raise this number and it
+     stops being that; it becomes the move Ember does, and it is not a move Ember should be
+     doing at the reader on any page that is asking them to trust us. */
+  var RARE_CHANCE = 0.01;
 
   /* THE TWO EMBER SAVES FOR YOU.
 
@@ -255,8 +279,15 @@
      for pressing them is a move you cannot get by waiting, which is the whole point of the
      invitation on /archie/personal/ being there at all. */
   function pickAct(rig, allowBig) {
+    /* Rolled first and separately, so a rare act's odds are its own rather than one share of
+       however many acts the table happens to hold today. */
+    for (var r = 0; r < ACTS.length; r++) {
+      if (!ACTS[r].rare) continue;
+      if (ACTS[r].cls !== rig.lastAct && Math.random() < RARE_CHANCE) return ACTS[r];
+    }
     var pool = [];
     for (var i = 0; i < ACTS.length; i++) {
+      if (ACTS[i].rare) continue;
       if (!allowBig && ACTS[i].big) continue;
       /* Never the same one twice running: a genuine random repeat reads as the press not
          having registered. */

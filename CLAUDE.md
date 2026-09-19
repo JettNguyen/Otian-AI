@@ -204,7 +204,21 @@ scene flat, on screen or off, so depth in Safari is checked by Jett or not at al
 the same browser (2026-09-18): the glass's top corners stood over the bezel "sometimes", which is
 WebKit dropping an overflow-plus-radius clip for a child that gets its own compositing layer (the
 notice, a landing card, the spinner), so `.dp-ph` clips with `clip-path` as well, one `--ph-r`
-driving the corner and the clip on every phone. The concept
+driving the corner and the clip on every phone. The third scene is the **ring of phones on
+`archie/business/`** (`.bz-figure`, the ring of phones section in `css/styles.css`,
+`js/ring-scene.js`), the one the editions rule asked for once Personal had a scene: three
+teammates' phones (the personal page's whole phone at a `--ps`) standing in an arc behind the
+homepage's window (at a `--wz`) on the agent's Setup page, the one that says who can message it,
+with the packet map's switch turning the one agent standing at the computer into three, each with
+its own face and its own name in every phone's bar. Its message rolls from a phone to the
+computer and back to the same phone, and no lane runs behind the window, because a ball that
+vanishes behind an object for most of its run is not carrying the claim. Three lessons from Jett's
+first look (2026-09-19): a name standing in front of a phone's foot covers its composer, so a
+label stands 72 further in, which after the tilt lands just under the phone's bottom edge; a
+figure holding a visually-hidden checkbox must be `position: relative`, or the one-pixel input
+lands at the top of the page and a flip scrolls the reader up to it; and the glass's rounded
+clip failed again under animation, so `.dp-ph` is its own compositing layer now (`will-change`)
+on top of the clip-path. The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

@@ -209,7 +209,7 @@
        not replay a button lighting itself. */
     var scr2 = $('.dp-scr[data-scr="2"]');
     var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: 0.8, busy: false },
-                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.55, busy: true }];
+                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.32, done: 0.46, busy: true }];
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -617,11 +617,23 @@
       SENDS.forEach(function (sd) {
         if (!sd.el) return;
         if (i < sd.act || (i === sd.act && tp < sd.from)) unpress(sd.el, sd.key);
-        else if (i > sd.act) press(sd.el, sd.key, true);
+        else if (i > sd.act) press(sd.el, sd.key, 'now');
         /* Only the mail card waits. Its Send is a card button and the phone app holds it lit and
            busy until the computer answers; the composer's arrow posts a message, which posts at
-           once. */
-        else if (tp >= sd.at) press(sd.el, sd.key, !sd.busy);
+           once.
+
+           THE SCROLL IS THE CLOCK FOR ITS OWN PRESS (Jett, 2026-09-18). The busy beat ran on a
+           900ms timer, so it resolved whether or not anybody scrolled: "i don't have to scroll
+           for it to send". A reader moving at any speed spent that second watching a spinner and
+           met the sent card with almost none of the act left, which read as the state appearing
+           and going. `at` starts the spinner and `done` settles it, both in scroll, so the beat
+           cannot be outrun and the sent card holds the rest of the act. A press by hand keeps a
+           real clock, because somebody who presses and stops scrolling still has to see it
+           land. */
+        else if (tp >= sd.at) {
+          press(sd.el, sd.key, sd.busy ? 'hold' : 'now');
+          if (sd.busy && tp >= sd.done) answer(sd.el, sd.key);
+        }
       });
       /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
          is sent; scrolling back above the proposal untypes it. IT ARRIVES A CHARACTER AT A TIME,
@@ -655,20 +667,30 @@
        its commit 8533dae of 2026-09-18; it lit for a 700ms beat and retired before that, and so did
        this), and then the card settles and the computer's answer arrives as a notice over the
        screen, which the stylesheet plays on is-noticed. Here the computer answers in a beat
-       (BUSY_MS), because there is no computer. Pressing again does nothing, because the thing it
-       did is done. One path for both the reader's press and the scroll's, so the screen does the
-       same thing whoever sent it; `now` skips the wait and the notice, which is for arriving at a
-       screen that should already be settled rather than watching it settle. */
+       (BUSY_MS), because there is no computer, and the scroll answers at its own mark rather than
+       on that timer, which is the note in the frame loop. Pressing again does nothing, because the
+       thing it did is done. One path for both the reader's press and the scroll's, so the screen
+       does the same thing whoever sent it; 'now' skips the wait and the notice, which is for
+       arriving at a screen that should already be settled rather than watching it settle. */
     var busyT = { 1: 0, 2: 0 }, BUSY_MS = 900;
-    function press(scr, key, now) {
+    /* The computer's answer: the card edits itself, and unless it was already settled when the
+       reader got here, the notice says so. Named `answer` and not `settle` because the frame loop
+       carries a `settle` of its own, the eased fraction a pose is moved by, and a function shadowed
+       by a number throws on the frame it is first called. `quiet` is that case, and it is also reduced motion,
+       where the card stands finished and a toast would be feedback on a press nobody made. */
+    function answer(scr, key, quiet) {
+      if (!scr || scr.classList.contains('is-done')) return;
+      if (busyT[key]) { clearTimeout(busyT[key]); busyT[key] = 0; }
+      scr.classList.add('is-done');
+      if (!quiet && !still) scr.classList.add('is-noticed');
+    }
+    /* `how` is what runs the wait: 'now' settles on the spot, 'clock' waits BUSY_MS because a
+       hand pressed it, and 'hold' stays busy until the scroll reaches the card's `done`. */
+    function press(scr, key, how) {
       if (!scr || scr.classList.contains('is-pressed')) return;
       scr.classList.add('is-pressed');
-      var settle = function (answered) {
-        scr.classList.add('is-done');
-        if (answered) scr.classList.add('is-noticed');
-        busyT[key] = 0;
-      };
-      if (now || still) settle(false); else busyT[key] = setTimeout(function () { settle(true); }, BUSY_MS);
+      if (how === 'now' || still) answer(scr, key, true);
+      else if (how === 'clock') busyT[key] = setTimeout(function () { answer(scr, key); }, BUSY_MS);
       if (!still) window.Ember.act(ember, 'hop');
     }
     function unpress(scr, key) {
@@ -681,7 +703,7 @@
         var kind = btn.getAttribute('data-press');
         var scr = kind === 'confirm' ? scr1 : btn.closest('.dp-scr');
         if (kind === 'confirm' && !(ph && ph.classList.contains('is-typed'))) return;
-        press(scr, kind === 'confirm' ? 1 : 2, kind === 'confirm');
+        press(scr, kind === 'confirm' ? 1 : 2, kind === 'confirm' ? 'now' : 'clock');
       });
     });
     /* The own-key / starter-credits control on the custody act. */

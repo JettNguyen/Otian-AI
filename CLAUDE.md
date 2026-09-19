@@ -370,12 +370,23 @@ sizes are on the page at rest, and the pick only lights one.
   and `gen-phone-mocks.py` followed, so no chat phone on the site draws a face beside a
   message. **Under
   971px the stage is a second composition of the same objects, not the wide one
-  shrunk**: the scene is a design box (760 by 560 wide, 400 by 560 narrow) that `js/home.js` fits to
+  shrunk**: the scene is a design box (760 by 560 wide, 400 by 465 narrow) that `js/home.js` fits to
   the stage every frame **up as well as down** (it was clamped at 1 until 2026-09-17, so a 1440 by
   900 screen drew the scene at 76% of the room it had and the phone's type landed near 11px, which
   is what Jett read as the messages having no contrast; the ceiling is 1.45 and a growing scene
   gives up the 100px spill, which is a concession for a narrow column and not an entitlement), each
-  act has a `narrow` pose beside its wide one, the floors turn a quarter
+  act has a `narrow` pose beside its wide one, **and narrow the fit is height-bound on every phone
+  there is**, so three things that look like layout are really the size of the mockups (all three
+  changed 2026-09-19, when Jett asked how they could be bigger on a phone). The caption band was
+  one cell with eight captions stacked in it, so it was always as tall as the longest of them and
+  every act paid for act 3's; it is measured off the caption on screen now and eased like the
+  scale, which is worth 130 to 200 pixels of scene. The narrow phone is a shorter slice of a
+  device, 566 rather than 686, because height the picture does not need is width and type it never
+  gets: the same drawing went from a third of the screen's width to about three quarters, and its
+  messages from 5px to 11. And the narrow divisor is the phone's own projected height rather than
+  a round number, so those two move together. The scene also sits 19 units lower than its box,
+  because `--phone-mask` takes more off the bottom than the top and centering the box put the
+  picture too close to the clock and too far from the caption. The floors turn a quarter
   (`--fz`) so the laps run toward the camera, and the caption is a band under the scene. Jett's rule
   from 2026-09-16: the visuals are the focus on a phone too, so a pose keeps its objects inside the
   box and nothing is placed by viewport arithmetic. Narrow, the phone is seen through a window: side

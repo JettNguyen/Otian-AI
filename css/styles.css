@@ -17185,8 +17185,27 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-clock { grid-column: 1; grid-row: 1; align-self: auto; margin: 0 0 6px; line-height: 18px; }
   .day-stage { --hint-band: 0px; }
   .day-scene-wrap { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; transform: translateY(calc(var(--clock-row) / -2)); }
-  .day-stage.is-timed .day-scene-wrap { transform: none; }
+  /* DOWN A LITTLE, BECAUSE THE PHONE'S BOX IS NOT WHERE THE PHONE IS. Both ends are dissolved by
+     --phone-mask and not by the same amount: the top is gone by 13% of the box and the bottom
+     holds to 80%, so what you can see sits high in what is being centered. Measured against the
+     row rather than against the box, that left 52 units of air over the phone and 92 under it,
+     which is the scene crowding the clock badge and standing off from the caption (Jett,
+     2026-09-19: "too close to the time badge and too far away from the start of the text"). Half
+     the difference is 19, in the scene's own units and scaled with it, so it holds at every size.
+     The four conversation acts agree within two units; the 2:00 am act is hand-stacked around it.
+     Change --phone-mask and this is one of the numbers that moves. */
+  .day-stage.is-timed .day-scene-wrap { transform: translateY(calc(var(--sc, 1) * 19px)); }
   .day-scene { width: 400px; }
+  /* THE BAND IS AS TALL AS THE CAPTION IN IT, AND IT WAS AS TALL AS THE LONGEST ONE UNTIL
+     2026-09-19. Eight captions stacked in one grid cell means the cell is the tallest of them,
+     which on a phone is act 3's 345px, and every other act paid for a caption it was not showing:
+     act 6 needs 123. The scene's row is what was left over, so the mockups were drawn at a third
+     of the screen's width (Jett: "how can the mockups be bigger in mobile views as well?"). The
+     height comes from js/home.js now, measured off the caption on screen and eased the same way
+     the scale is, so it settles rather than snapping. It already worked this way in one direction:
+     the hero's band grows as its beats open, which is what made the rest of the story pay for the
+     hero. WITHOUT JAVASCRIPT IT IS STILL auto, which is the old behaviour and fits every caption.
+     The 6 and 12 here are read by the driver as CAPS_PAD: two numbers that must agree. */
   .day-caps { grid-column: 1; grid-row: 3; display: grid; height: auto; padding: 6px 16px 12px; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
@@ -17194,7 +17213,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      or a crowd at the edge: flex-start left the hole, flex-end was too far, and Jett asked for
      "between where it was and where it is now" (2026-09-17). The hero keeps the top, because it is
      the page's first screen and is not scrolled to. */
-  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; justify-content: center; }
+  /* `align-self` rather than the wide rule's `justify-content`, and that is what makes the band
+     measurable: stretched to the cell, every caption reports the cell's height back and the
+     driver would be measuring its own output. Centered, a caption is its own content and the
+     one being shown is the one the band is sized to. It draws the same either way. */
+  .day-cap { position: relative; inset: auto; grid-area: 1 / 1; align-self: center; }
   .day-cap h1 { font-size: var(--fs-3xl); }
   .day-cap h2 { font-size: var(--fs-2xl); }
   .day-cap .section-label { margin-bottom: 6px; }
@@ -17285,10 +17308,17 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-device { height: 700px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
   .dp-edge { border-radius: 0; }
-  .dp-ph { height: 686px; padding-bottom: 8px; --ph-r: 0px; }
+  /* A SHORTER SLICE, SINCE 2026-09-19. The fit is height-bound on every phone (the box is 400 by
+     465 and no phone's scene row is 1.16 times its width), so height the phone does not need is
+     width and type it never gets: at 686 it was drawn at a third of the screen and its messages
+     landed near 5px. At 566 the same picture is 72% of the screen and the messages read at 11px,
+     which is what the wide view reads at. The mask's stops are percentages, so the slice dissolves
+     at the same places; what is lost is about a bubble and a half of conversation, off the top,
+     which was inside the fade anyway. */
+  .dp-ph { height: 566px; padding-bottom: 8px; --ph-r: 0px; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
-  .day-phone { height: 441px; margin-top: -220px; }
+  .day-phone { height: 365px; margin-top: -182px; }
   /* The phone is a slice here, with both ends dissolved by --phone-mask, so its halo is pulled in
      off the ends: light spilling from a part of the phone that has faded to nothing reads as a
      glow with no source. The mask cannot simply be applied to the halo instead, because a mask

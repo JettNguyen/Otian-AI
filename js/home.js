@@ -309,9 +309,16 @@
 
            Narrow they cannot stand side by side, because the phone is nearly the box's width by
            design, so they stack instead: the window up, the phone down, and the only thing the
-           phone's masked band reaches is the window's own bottom padding. */
+           phone's masked band reaches is the window's own bottom padding. THE STACK IS HAND
+           PACKED AND THE TWO y's ARE ITS WHOLE ARRANGEMENT (re-solved 2026-09-19 for the shorter
+           slice and the 19-unit nudge): the window's top sits on the row's top edge, the phone
+           follows about twenty units under the window's bottom, and what runs past the row at the
+           end is the last of the phone's fade, which is nothing. Neither gives up size, because
+           at two in the morning the window is the subject and the phone is already the smaller
+           claim. Change --phone-mask's night stops, .day-phone's height or the nudge and these
+           two numbers are solved again, not adjusted. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -212, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 165, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -150, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 210, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest
@@ -419,18 +426,60 @@
     }
 
     var HINT_BAND = 80;
+    /* THE NARROW BOX IS 400 BY 465, AND THE 465 IS THE PHONE'S OWN PROJECTED HEIGHT. Narrow the
+       fit is height-bound on every phone there is: it goes by width only where the scene's row is
+       more than 1.16 times the screen is wide, and no phone leaves a row like that once the nav,
+       the clock and a caption are out of it. So this number is not a frame the scene sits in, it
+       is the divisor that decides the size, and a slice of phone taller than the picture needs is
+       width and type the picture never gets. It was 560 against a 686px slice until 2026-09-19,
+       and the mockups were drawn at a third of the screen's width.
+
+       IT IS THE PHONE'S HEIGHT, NOT THE BOX'S CONTENT. Acts stack objects past it (2:00 am puts
+       the window above the phone and runs 30% over) and the masks are what make that read; what
+       this number has to track is .day-phone's box in the stylesheet, 365 at NP2's 1.22 with the
+       perspective at z 60, which is 465. Change one and measure the other. */
+    var NARROW_H = 465;
+    /* THE BAND UNDER THE SCENE IS AS TALL AS THE CAPTION IN IT, and the scene gets everything
+       else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own 6 + 12, two
+       numbers that have to agree. Measured off the caption being shown, which is why the narrow
+       .day-cap is centered rather than stretched: a stretched caption reports the band's height
+       back and the driver would be reading its own output. */
+    var CAPS_PAD = 18, capH = 0, capQ = '';
+    function capsFit() {
+      if (!capsEl || !caps.length) return;
+      if (!narrow || still) {
+        if (capQ) { capsEl.style.height = ''; capQ = ''; capH = 0; }
+        return;
+      }
+      var want = caps[cur < 0 ? 0 : cur].offsetHeight + CAPS_PAD;
+      /* Eased, and for the reason the scale is eased: a caption is swapped in one frame, and a
+         row that changes height in one frame is a snap. Both ease at one rate, so the words
+         settle into their new place while the scene grows into the room they gave up. The hero
+         needs no special case: its beats open on a transition, so its caption is already a height
+         that moves, and this follows it. */
+      if (!capQ) capH = want;
+      else if (Math.abs(want - capH) < 0.5) capH = want;
+      else capH += (want - capH) * EASE_SC;
+      var q = Math.round(capH) + 'px';
+      if (capQ !== q) { capsEl.style.height = q; capQ = q; }
+    }
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       lastWrapH = wr.height;
+      /* Read here, with the two rects, and written below with --sc: everything this frame reads
+         is read before anything is written, or the browser lays the page out twice per frame. The
+         band it writes lands in the rect above on the next frame, which is a frame of lag on a
+         number that is already easing. */
+      capsFit();
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
       /* The band the scroll hint stands in, which the scene may not grow into: see the comment on
          .day-scene-wrap in the stylesheet, whose padding-bottom is this same number and must stay
          it. Zero where there is no hint drawn, which is narrow and reduced motion. */
       var band = (narrow || still) ? 0 : HINT_BAND;
-      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
+      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / NARROW_H), 0.3, 1.45)
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the

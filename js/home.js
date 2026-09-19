@@ -472,6 +472,11 @@
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
+      /* AND A SECOND ONE THAT TURNS ON THE MOMENT THERE IS ANY NIGHT, which is what carries the
+         screens' dimming filter. is-night is a look, at the half-way mark; this is a switch, so the
+         filter exists in the one act that needs it and in no other. See the note on the filter in
+         the stylesheet for why an idle filter is not free. */
+      stage.classList.toggle('has-night', p.night > 0);
       /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The root
          carries the same number and the stylesheet dims the bar with it (Jett, 2026-09-18: in light
          mode a cream bar sat over the dark room for the whole overnight act). A NUMBER AND NOT A

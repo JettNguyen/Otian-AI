@@ -16302,8 +16302,18 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    transform-style: preserve-3d and those two are the 3D layers. The phone's rim really does sit at
    a depth (.dp-edge) and is a sibling of the screen, so it keeps its metal, which is right anyway:
    a dark room dims what is lit, not what is reflecting. Scoped to the stage because
-   archie/mobile/ draws a .dp-ph too, and that one has no night to dim with. */
-.day-stage .da-app, .day-stage .dp-ph { filter: brightness(calc(1 - var(--night, 0) * .26)); }
+   archie/mobile/ draws a .dp-ph too, and that one has no night to dim with.
+
+   IT ONLY EXISTS WHILE THERE IS NIGHT TO APPLY, and that is not a micro-optimisation. A filter of
+   any value, brightness(1) included, makes an element a filter root: it is drawn into a buffer of
+   its own and the buffer is then scaled by the 3D chain, instead of the contents being drawn at
+   the size they are finally shown. Everything on both screens was going through that in all seven
+   acts, and the first thing a resampled buffer shows is the finest mark on it, which is the phone's
+   wordmark, a serif set at 730 units and shown about eleven pixels tall (Jett, 2026-09-19:
+   "sometimes the archie logo on the phone gets distorted", and sometimes is what a compositor
+   picking a raster scale looks like). has-night comes on with the first frame that has any night in
+   it, so six of the seven acts now have no filter at all. */
+.day-stage.has-night .da-app, .day-stage.has-night .dp-ph { filter: brightness(calc(1 - var(--night, 0) * .26)); }
 
 /* ---- and the screens light the air around them ---- */
 /* Jett, 2026-09-18: the displays should look like they are lighting up the air around the screen.

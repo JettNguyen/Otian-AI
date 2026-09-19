@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260918-27" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260918-28" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -226,12 +226,13 @@
              inside a reduced-motion block, with the resting state (eight in the morning) complete on
              its own. The pilot for staging a comparison rather than diagramming it (Jett, 2026-09-18). -->
         <figure class="hd-figure fade-up delay-1">
-          <div class="hd-scene" role="img" aria-label="One day as a clock face lying on a table, midnight at the far edge and noon nearest you. A grey arc from nine to five is a person, the hours you agreed, with two moments only a person takes: takes the call, and reads the room. A terracotta ring all the way round is your agent, there the whole day while the computer is on, with a brief before six, a meeting moved after your yes, replies chased and the inbox watched. Ember walks the rim all day as one hand sweeps it.">
+          <div class="hd-scene" role="img" aria-label="One day as a clock face lying on a table, midnight at the far edge and noon nearest you. A grey arc from nine to five is a person, the hours you agreed, with two moments only a person takes: takes the call, and reads the room. A terracotta ring all the way round is your agent, there the whole day while the computer is on, with the inbox watched all day, shown as a dotted ring crawling round the edge, and three moments on the ring: a brief before six, a meeting moved after your yes, and replies chased. Ember walks the rim all day as one hand sweeps it.">
             <div class="hd-plane" aria-hidden="true">
               <svg class="hd-dial" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
             <circle class="hd-face" cx="200" cy="200" r="182"/>
             <g class="hd-ticks"><line x1="200.0" y1="40.0" x2="200.0" y2="28.0"/><line x1="242.7" y1="40.6" x2="244.5" y2="33.9"/><line x1="282.5" y1="57.1" x2="286.0" y2="51.0"/><line x1="316.7" y1="83.3" x2="321.6" y2="78.4"/><line x1="342.9" y1="117.5" x2="349.0" y2="114.0"/><line x1="359.4" y1="157.3" x2="366.1" y2="155.5"/><line x1="360.0" y1="200.0" x2="372.0" y2="200.0"/><line x1="359.4" y1="242.7" x2="366.1" y2="244.5"/><line x1="342.9" y1="282.5" x2="349.0" y2="286.0"/><line x1="316.7" y1="316.7" x2="321.6" y2="321.6"/><line x1="282.5" y1="342.9" x2="286.0" y2="349.0"/><line x1="242.7" y1="359.4" x2="244.5" y2="366.1"/><line x1="200.0" y1="360.0" x2="200.0" y2="372.0"/><line x1="157.3" y1="359.4" x2="155.5" y2="366.1"/><line x1="117.5" y1="342.9" x2="114.0" y2="349.0"/><line x1="83.3" y1="316.7" x2="78.4" y2="321.6"/><line x1="57.1" y1="282.5" x2="51.0" y2="286.0"/><line x1="40.6" y1="242.7" x2="33.9" y2="244.5"/><line x1="40.0" y1="200.0" x2="28.0" y2="200.0"/><line x1="40.6" y1="157.3" x2="33.9" y2="155.5"/><line x1="57.1" y1="117.5" x2="51.0" y2="114.0"/><line x1="83.3" y1="83.3" x2="78.4" y2="78.4"/><line x1="117.5" y1="57.1" x2="114.0" y2="51.0"/><line x1="157.3" y1="40.6" x2="155.5" y2="33.9"/></g>
             <circle class="hd-arc hd-arc--agent" cx="200" cy="200" r="150"/>
+            <circle class="hd-inbox" cx="200" cy="200" r="177" pathLength="100"/>
             <path class="hd-arc hd-arc--person" d="M293.3,293.3 A132,132 0 0 1 72.5,234.2"/>
             <text class="hd-hour" x="200" y="18">midnight</text>
 <text class="hd-hour" x="385" y="204">6 am</text>
@@ -242,7 +243,6 @@
 <circle class="hd-dot hd-dot--agent" cx="125.0" cy="329.9" r="5"/>
 <circle class="hd-dot hd-dot--person" cx="70.1" cy="275.0" r="5"/>
 <circle class="hd-dot hd-dot--agent" cx="61.4" cy="142.6" r="5"/>
-<circle class="hd-dot hd-dot--agent" cx="135.4" cy="64.6" r="5"/>
             <g class="hd-hand"><line x1="200" y1="200" x2="200" y2="62"/><circle cx="200" cy="200" r="6"/></g>
           </svg>
                             <div class="hd-stand hd-person" style="--ux:-0.156;--uy:0.988"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><b>A person</b><i>9 to 5, the hours you agreed</i></div>
@@ -251,16 +251,16 @@
               <div class="hd-stand hd-beat hd-beat--agent hd-beat-2" style="--ux:-0.500;--uy:0.866"><b>A meeting moved, after your yes</b></div>
               <div class="hd-stand hd-beat hd-beat--person hd-beat-3" style="--ux:-0.866;--uy:0.500"><b>Reads the room</b></div>
               <div class="hd-stand hd-beat hd-beat--agent hd-beat-4" style="--ux:-0.924;--uy:-0.383"><b>Replies chased</b></div>
-              <div class="hd-stand hd-beat hd-beat--agent hd-beat-5" style="--ux:-0.431;--uy:-0.903"><b>Inbox watched</b></div>
+              <div class="hd-stand hd-beat hd-beat--agent hd-beat--always" style="--ux:-0.566;--uy:-0.824"><b>Inbox watched, all day</b></div>
               <div class="hd-shadow"></div>
               <div class="hd-walk"><span class="hd-ember" data-ember="terracotta.peak.pill.none"></span></div>
             </div>
           </div>
           <ul class="hd-legend" aria-hidden="true">
-            <li class="hd-legend--agent"><b>Your agent, while the computer is on</b><span>a brief before six, a meeting moved after your yes, replies chased, inbox watched</span></li>
+            <li class="hd-legend--agent"><b>Your agent, while the computer is on</b><span>the inbox watched all day, a brief before six, a meeting moved after your yes, replies chased</span></li>
             <li class="hd-legend--person"><b>A person, the hours you agreed</b><span>takes the call, reads the room</span></li>
           </ul>
-          <figcaption>One day on a dial. A person keeps the hours you agreed, and two of the moments only a person can take. Your agent is there whenever the computer is on, Sunday included, and a meeting moves after your yes.</figcaption>
+          <figcaption>One day on a dial. A person keeps the hours you agreed, and two of the moments only a person can take. Your agent is there all day, watching the inbox throughout, and a meeting moves after your yes.</figcaption>
         </figure>
       </div>
     </section>
@@ -477,9 +477,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260918-27"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260918-27"></script>
-  <script src="../../js/ember.js?v=20260918-27"></script>
-  <script src="../../js/demo-player.js?v=20260918-27"></script>
+  <script src="../../js/nav.js?v=20260918-28"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260918-28"></script>
+  <script src="../../js/ember.js?v=20260918-28"></script>
+  <script src="../../js/demo-player.js?v=20260918-28"></script>
 </body>
 </html>

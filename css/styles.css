@@ -17239,6 +17239,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .hd-arc { fill: none; stroke-linecap: round; }
 .hd-arc--agent { stroke: var(--accent); stroke-width: 10; }
 .hd-arc--person { stroke: var(--line-muted); stroke-width: 10; }
+/* The inbox watch is not a moment, so it is a ring: dotted, just inside the edge, crawling. */
+.hd-inbox { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 0.6 1.4; opacity: .7; }
 .hd-dot { stroke: var(--bg-card); stroke-width: 2.5; }
 .hd-dot--agent { fill: var(--accent); }
 .hd-dot--person { fill: var(--text-muted); }
@@ -17252,6 +17254,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .hd-beat b { padding: 4px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
 .hd-beat--agent b { color: var(--accent-ink); border-color: var(--accent); }
 .hd-beat { opacity: .82; }
+.hd-beat--always { opacity: 1; }
 .hd-person { --r: 21%; opacity: .9; }
 .hd-person svg { display: block; width: clamp(26px, 6vw, 44px); height: auto; margin: 0 auto 2px; fill: none; stroke: var(--text-secondary); stroke-width: 1.6; stroke-linecap: round; }
 .hd-walk { position: absolute; left: 81.45%; top: 70.42%; width: 21%; transform: translate(-50%, -92%) rotateX(calc(-1 * var(--tilt))); transform-origin: 50% 100%; }
@@ -17283,6 +17286,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 }
 @media (prefers-reduced-motion: no-preference) {
   .hd-hand { animation: hd-hand 24s linear infinite; }
+  .hd-inbox { animation: hd-inbox 1.6s linear infinite; }
+  @keyframes hd-inbox { to { stroke-dashoffset: -2; } }
   @keyframes hd-hand { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .hd-walk, .hd-shadow { animation: hd-walk 24s linear infinite; }
   @keyframes hd-walk {
@@ -17326,6 +17331,4 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   @keyframes hd-beat-3 { 0.000% { opacity: 0.32; } 65.625% { opacity: 0.32; } 66.667% { opacity: 1; } 75.833% { opacity: 1; } 78.333% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
   .hd-beat-4 { animation: hd-beat-4 24s linear infinite; }
   @keyframes hd-beat-4 { 0.000% { opacity: 0.32; } 80.208% { opacity: 0.32; } 81.250% { opacity: 1; } 90.417% { opacity: 1; } 92.917% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
-  .hd-beat-5 { animation: hd-beat-5 24s linear infinite; }
-  @keyframes hd-beat-5 { 0.000% { opacity: 0.32; } 91.875% { opacity: 0.32; } 92.917% { opacity: 1; } 102.083% { opacity: 1; } 104.583% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
 }

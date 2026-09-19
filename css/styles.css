@@ -17155,11 +17155,18 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   /* `align-self` is the wide rule's, where it means "sit at the bottom of the scene's cell". In
      this column it is the horizontal axis, so it pushed the cue off to the right. */
   .day-cap[data-act="0"] .day-hint--flow { display: flex; align-self: center; margin-top: 20px; }
-  /* Out of the flow entirely once it is dim, not just invisible. It is dim from the first 2% of
-     the story and the description does not land until 34% of act 0, so nothing is ever waiting on
-     the space it held; leaving it in would make the caption's tallest state taller than any state
-     that happens, and the scene pays for that in row height (see pinCaps in js/home.js). */
-  .day-cap[data-act="0"] .day-hint--flow.is-off { display: none; }
+  /* It gives its space back at the moment the description takes it, and not before. The scene is
+     drawn at whatever height the captions leave it (see fit in js/home.js), so every change to
+     this caption's height changes the size of the mockups, and the order of those changes is the
+     whole difference between one movement and a wobble.
+
+     Keyed off the description's own beat with a sibling combinator rather than off `is-off`, which
+     fires at 2% of the story, 27px of scroll before the description lands: that would have handed
+     the space to the scene, grown the mockups, and then shrunk them again a moment later. This way
+     there is one change, in one direction, and the cue's 65px goes straight to the paragraph
+     replacing it instead of coming out of the scene's row. Worth 0.55 against 0.44 in the drawn
+     scale, which is the difference between "shrinks a bit" and "shrinks by a third". */
+  .day-cap[data-act="0"] .day-beat.is-on ~ .day-hint--flow { display: none; }
   /* The clock's own badge, deliberately: the two are a pair, one at the top of the scene saying
      what time it is and one at the bottom saying the time will move. It also solves the reading
      problem, since a filled pill is legible over anything the scene puts behind it. The arrow
@@ -17169,12 +17176,16 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      rule's, so there is no placement that avoids it at every act. */
   /* The hero's words are centered and a rung bigger; the acts after it stay left, because handing
      the captions from side to side was tried on 2026-09-16 and read as odd. */
-  /* Top aligned, so the hero's words and its button sit directly under the scene and leave the
-     rest of the cell for the cue below them. It was centered for one commit, when the resting
-     state was short and the cell was sized by whatever act happened to be tallest; the cell is
-     pinned to act 0's own full height now (pinCaps in js/home.js), so the space under the button
-     at rest is exactly the space the description will fill, and the cue stands in it meanwhile. */
-  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; }
+  /* Top aligned, so the hero's words and its button sit directly under the scene and the cue sits
+     under them. Centered was tried for one commit and put the resting block in the middle of a
+     cell sized by whatever act happened to be tallest, which read as floating.
+
+     The nudge is a nudge and not centering, so the block keeps a fixed distance from the scene
+     whatever is in it (Jett, 2026-09-18: "can move down a bit from where it's at now"). At rest it
+     costs nothing, because act 0 short is not the tallest caption and the cell has the room
+     already; with the description in, act 0 is the tallest and this comes out of the scene's row
+     like everything else in here. */
+  .day-cap[data-act="0"] { align-items: center; text-align: center; justify-content: flex-start; padding-top: 26px; }
   .day-cap[data-act="0"] h1 { font-size: var(--fs-4xl); }
   .day-cap[data-act="0"] .hm-actions { justify-content: center; }
   .day-cap[data-act="0"] .hm-hero-fork, .day-cap[data-act="0"] .hm-hero-alt, .day-cap[data-act="0"] .hm-hero-micro { text-align: center; }

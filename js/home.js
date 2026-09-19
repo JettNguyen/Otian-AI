@@ -361,63 +361,40 @@
     var SC = 1, narrow = false, wrap = $('.day-scene-wrap');
     var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
 
-    /* PIN THE CAPTION ROW, OR THE SCENE BREATHES. Narrow, the stage is one screen of three rows and
-       the scene's is the `1fr`, so the scene gets whatever the captions leave. Every act's caption
-       sits in one grid cell, so that row is as tall as the tallest of them, which is a constant and
-       was never a problem. Act 0's beats broke it: the hero now opens short and fills out as you
-       scroll, and act 0 full is the tallest caption there is, so the row grew, the scene's row
-       shrank by the same amount, and `fit()` reads that row every frame. The mockups drew big at
-       the top of the page and snapped 10% smaller the moment the description landed (Jett,
-       2026-09-18: "the mockups grow then snap back to smaller").
+    /* THE SCENE IS MEANT TO BREATHE, AND THE EASE IS WHAT MAKES IT READ AS BREATHING. Narrow, the
+       stage is one screen of rows and the scene's is the `1fr`, so the scene is drawn at whatever
+       height the captions leave it. Act 0 opens on the headline alone and fills out as you scroll,
+       which means the hero's mockups get a taller row than the rest of the story and are drawn
+       bigger there. That is wanted (Jett, 2026-09-18: "the mockups can be bigger in the first
+       section with less and shrink a bit when the full description is there").
 
-       So the row is pinned to the tallest caption, measured rather than guessed, because the answer
-       depends on where the text wraps and that depends on the width. Measured by unstacking the
-       cell for one frame, which is layout work, so it runs on resize and not on scroll. Everything
-       hidden is made visible for the measurement: the point is the tallest the row will EVER be,
-       not the tallest it is right now. */
-    var capsBox = $('.day-caps'), pinnedAt = '';
-    function pinCaps(w, h) {
-      if (!capsBox) return;
-      /* `fit()` is the frame loop's, so this has to charge nothing on a scroll. Two forced
-         reflows per frame is exactly what a scroll cannot afford, and the answer only changes
-         when the box does, so it is keyed on the box. */
-      var key = narrow + 'x' + Math.round(w) + 'x' + Math.round(h);
-      if (key === pinnedAt) return;
-      pinnedAt = key;
-      if (!narrow) { capsBox.style.minHeight = ''; return; }
-      /* TWO MEASUREMENTS, NOT ONE, because the tallest the caption ever gets is not the sum of
-         everything in it. The cue leaves as soon as the page is scrolled at all (`is-off` at 2% of
-         the story) and the description lands at 34% of act 0, so the cue and the full caption are
-         never on screen together. Reserving for both cost the scene 97px of row and drew the
-         mockups a quarter smaller than they had been, for a state that cannot happen.
+       What was not wanted is the way it arrived. A beat lands in one frame, so the row changed in
+       one frame and the scene changed size with it, which is a snap and reads as a fault. The fit
+       is the target now and the drawn scale chases it, so the same change plays as the scene
+       settling. EASE_SC is per frame at 60fps: .12 is about a fifth of a second to close the gap,
+       which is slower than a beat's own fade and therefore the thing the eye follows.
 
-         So: the resting caption with its cue, against the full caption without it, and the row is
-         pinned to whichever is taller. Measured on the cell itself, which already sizes to the
-         tallest caption in it, rather than by taking the acts apart and adding them up: that
-         version came out 18px short and left 18px of snap in. */
-      capsBox.style.minHeight = '';
-      var flow = $('.day-hint--flow'), beats = $$('.day-cap[data-act="0"] .day-beat');
-      var wasFlow = flow ? flow.style.display : '', wasBeat = beats.map(function (el) { return el.style.display; });
-      beats.forEach(function (el) { el.style.display = 'none'; });
-      if (flow) flow.style.display = 'flex';
-      var atRest = capsBox.getBoundingClientRect().height;
-      beats.forEach(function (el) { el.style.display = 'block'; });
-      if (flow) flow.style.display = 'none';
-      var full = capsBox.getBoundingClientRect().height;
-      beats.forEach(function (el, i) { el.style.display = wasBeat[i]; });
-      if (flow) flow.style.display = wasFlow;
-      var tall = Math.max(atRest, full);
-      if (tall > 0) capsBox.style.minHeight = Math.ceil(tall) + 'px';
-    }
-
-    function fit() {
+       An earlier fix pinned the caption row so the scene could not move at all. It did stop the
+       snap, and it also threw away the effect this is for. */
+    var EASE_SC = 0.12, scTarget = 1;
+    function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
-      pinCaps(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
-      SC = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
-                  : clamp(Math.min(byW, wr.height / 560), 0.4, 1.45);
+      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / 560), 0.3, 1.45)
+                        : clamp(Math.min(byW, wr.height / 560), 0.4, 1.45);
+      /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
+         from: the scene should already be the size it is going to be, and easing there makes the
+         page open by growing into itself. That is not hypothetical. `setAct` returns early while
+         the act has not changed, so on the very first frame act 0's beats still carry the `is-on`
+         the markup gives them for readers with no JavaScript, and the first fit measures the full
+         caption. Snapping while `p` is 0 means that frame is spent and gone before anything is
+         painted. Resizing a window is the same case for a different reason: the target is chasing
+         the drag, and easing behind it is lag rather than motion. */
+      if (!ease || !narrow) SC = scTarget;
+      else if (Math.abs(scTarget - SC) < 0.002) SC = scTarget;
+      else SC += (scTarget - SC) * EASE_SC;
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
          the same pool whatever the fit came out at. */
       stage.style.setProperty('--sc', SC.toFixed(3));
@@ -614,7 +591,7 @@
       }
 
       var settle = i === 0 ? 1 : smooth(t / SETTLE);
-      fit();
+      fit(p > 0);
       var pose;
       if (still) pose = poseOf(0);
       else if (i === 0) pose = lerpPose(poseOf(0), poseOf(1), smooth(t) * PRE);

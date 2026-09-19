@@ -266,7 +266,13 @@
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centered while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -108, y: -142, z: -300, ry: 14, s: 0.523, o: 1 }, NP = { x: 100, y: 44, z: 40, ry: -12, s: .86, o: 1 };
+    /* CENTERED, AND IT WAS NOT (Jett, 2026-09-19: the window "has a space on the left side but the
+       phone touches the right edge"). The two of them together ran from -177 to 213, which is
+       eighteen units right of the middle of the box, so the composition leaned on the right edge
+       of the screen while the left had room. Both moved left by that eighteen: the hero is the one
+       act where the window and the phone stand side by side, so nothing else in the story reads
+       the same way and nothing else moved. */
+    var NW = { x: -126, y: -142, z: -300, ry: 14, s: 0.523, o: 1 }, NP = { x: 82, y: 44, z: 40, ry: -12, s: .86, o: 1 };
     var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: 0.555, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
@@ -426,6 +432,8 @@
     }
 
     var HINT_BAND = 80;
+    /* .day-caps' own left and right padding in the narrow stylesheet: two numbers that must agree. */
+    var EDGE = 16;
     /* THE NARROW BOX IS 400 BY 465, AND THE 465 IS THE PHONE'S OWN PROJECTED HEIGHT. Narrow the
        fit is height-bound on every phone there is: it goes by width only where the scene's row is
        more than 1.16 times the screen is wide, and no phone leaves a row like that once the nav,
@@ -483,8 +491,16 @@
       /* The narrow floor is 0.1 and not 0.3: the scene's row has no floor either (see .day-stage in
          the stylesheet), so on a short phone the row can come down to almost nothing, and a scene
          held at 0.3 in a row of 80 would be drawn straight over the caption it just gave the room
-         to. Small and inside its row beats legible and on top of the words. */
-      scTarget = narrow ? clamp(Math.min(sr.width / 400, wr.height / NARROW_H), 0.1, 1.45)
+         to. Small and inside its row beats legible and on top of the words.
+
+         AND NARROW IT STOPS SHORT OF THE SIDES. The width went straight into the divisor until
+         2026-09-19, so a scene with room to grow grew until it was the screen: the hero's two
+         objects are 390 units across a 400 unit box, which on a phone is the whole width and no
+         edge (Jett: "make the max size a bit smaller rather than almost full width"). EDGE is the
+         caption band's own side padding, so the picture and the words below it stop in the same
+         place, and it is a margin in screen pixels rather than a bigger divisor because that is
+         what a gutter is. */
+      scTarget = narrow ? clamp(Math.min((sr.width - EDGE * 2) / 400, wr.height / NARROW_H), 0.1, 1.45)
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the

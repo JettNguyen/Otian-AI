@@ -163,7 +163,8 @@ lanes carry the **same three chips**, so only the container around them changes,
 the page's entire argument. The move that made it work was drawing what the two sides have
 in common and letting one difference do all the talking. The five siblings got their own
 drawings on 2026-09-18, each with its own one difference, and the `cmp-strip` table and its
-CSS are gone: symphony and chat apps change the box in the middle, building it yourself keeps
+CSS are gone: chat apps changes the box in the middle (symphony did too, until it merged into
+cloud-agents on 2026-09-18), building it yourself keeps
 the box and changes the state of the chips, and automation tools and hiring an assistant are
 two rows of steps where the one difference is where the row stops. The same day the pricing
 picker's three rows became bars on one scale, so a control and a chart are one object: the
@@ -359,7 +360,9 @@ sizes are on the page at rest, and the pick only lights one.
   adding a page, check the count of inbound links from page bodies rather than from the nav**:
   chrome makes every page look equally connected, and all three of the pages with zero real
   inbound links turned out to be merge candidates. The nav is the symptom, the split page is
-  the cause, and rearranging the menu without merging just moves the problem.
+  the cause, and rearranging the menu without merging just moves the problem. `compare/symphony/`
+  followed on 2026-09-18 by the same test: zero body inbound links, and the product it compared
+  against was already named 31 times on `compare/cloud-agents/`, which is where it went.
 - **Merging is a net cut or it is not a merge.** Every budget raise in `check-copy-length.py`
   that came out of this pass is written as arithmetic: the pages' combined old word count, the
   merged count, and the difference. `services/` is 1,191 where two pages were 1,494;

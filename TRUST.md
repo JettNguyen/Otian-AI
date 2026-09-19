@@ -653,8 +653,8 @@ the pricing page.
 
 ### ✅ What other agents charge per unit, and the like-for-like caveat
 
-**Approved shape:** a table on `compare/cloud-agents/` (and one row each on the Symphony and
-automation comparisons) that prints each company's own unit at its own price, with a numbered
+**Approved shape:** a table on `compare/cloud-agents/` (and one row on the automation
+comparison; the Symphony page merged into `compare/cloud-agents/` on 2026-09-18) that prints each company's own unit at its own price, with a numbered
 `.src-cite` on every figure, beside our measured cost per reply: "$0.01 when it follows another
 closely, up to $0.11 when it starts from nothing, measured on an agent with twelve add-ons and
 everything connected, at Balanced." The pricing page carries one sentence of it and links to the
@@ -2500,7 +2500,9 @@ it admits. Three findings.
 3. **No contradicting description of the gate anywhere on the site.** Every page was checked. The
    only approval-gate claim outside the three trust pages is `compare/cloud-agents/`, and it is
    scoped to "email and calendar changes are held until you approve", which is the approved form
-   and says nothing about leakage. So there is nothing for the tracked-false section here, which
+   and says nothing about leakage. Since 2026-09-18 `compare/` carries it too, in the h1 and in
+   the sort figure's caption, scoped to the three shipped gates and to the claim that none of
+   them is a setting. So there is nothing for the tracked-false section here, which
    is worth writing down: the sections of this file that stay empty are evidence too.
 
 Standing rule this pass establishes: **before any launch or press push, re-read this admission
@@ -3292,6 +3294,27 @@ paid tiers are not. **Do not print that inference.** What the two pages support 
 Vellum is local by default and sells hosted computers by the month, and a reader can draw their
 own conclusion from their own words. The banned form is any sentence asserting where a Vellum
 paid plan executes.
+
+---
+
+**The hub was cut to the binary, 2026-09-18.** Jett's direction: cut every sentence another
+of the nine could say unchanged, put the one line all nine fail where the reader lands first,
+and make the binary do the selling. The line is the h1 on `compare/`: ten agents, and Archie
+is the only one that works on your own computer and asks first with no off switch. It is the
+chart's own finding read as two yes-or-no questions, and a figure under the h1 sorts the ten
+marks by them: six leave at whose computer (Symphony by the reading above), three of the four
+on yours leave at whether the asking is a setting, and Archie is what is left. Every sentence
+about us that OpenClaw, Vellum or Hermes could have printed unchanged (your computer, your
+account, at cost, a shelf, a skill written on request) came off the page; the concessions
+stayed, one line each. **One sentence retired with the old prose, and it stays retired:**
+"every other agent on the board that asks can be told to stop asking." Symphony and Norton
+publish no setting either way, which is why the chart places them at Archie's own level, and
+the sentence contradicted the drawing above it. The two-question form never needs it: those
+two leave at the first question, and the second is asked only of the four on your computer,
+where it is true of all three. `compare/symphony/` merged into `compare/cloud-agents/` the same
+day (zero body inbound links, the product already named 31 times on the destination) and is a
+redirect stub; its one point the destination lacked, that Symphony is built for a phone first,
+is a clause there now.
 
 ---
 

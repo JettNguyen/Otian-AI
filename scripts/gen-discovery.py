@@ -336,9 +336,10 @@ MAP = [
     ("Privacy, security and claims", ["trust/", "trust/proof/", "trust/details/",
                                       "trust/it-review/", "security/", "privacy-policy/",
                                       "terms-of-service/"]),
+    # compare/symphony/ merged into compare/cloud-agents/ on 2026-09-18 and is a redirect stub.
     ("How we compare", ["compare/", "compare/chat-apps/", "compare/cloud-agents/",
-                        "compare/symphony/", "compare/automation-tools/",
-                        "compare/building-it-yourself/", "compare/hiring-an-assistant/"]),
+                        "compare/automation-tools/", "compare/building-it-yourself/",
+                        "compare/hiring-an-assistant/"]),
     ("About us", ["our-story/", "standard/", "contact/", "testimonials/"]),
     ("Learning", ["ai-explained/", "faq/", "blog/", "help/"]),
 ]

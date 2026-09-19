@@ -268,8 +268,13 @@ sizes are on the page at rest, and the pick only lights one.
   product does.** Jett's first review (2026-09-16) caught a "Sent to Sam" pill and a calendar Confirm
   card that exist in neither app, so both were replaced by what the code does: the calendar skill
   takes approval as a typed later message (its SKILL.md) and the email card's Send edits the card to
-  "Sent to" with the buttons gone (`email/replies/actions.rs`), after the pressed button stays lit
-  for the beat the phone app gives it (`LINGER_MS` in archie-mobile's `ui.tsx`). **The scroll presses
+  "Sent (to Sam):" with the buttons gone (`email/replies/actions.rs`, whose own form for a reply that
+  is), after the pressed button stays lit and busy, a spinner where its mark was, until the computer
+  answers (`InlineActions` in archie-mobile's `ui.tsx`, since its commit 8533dae of 2026-09-18; it
+  lit for a 700ms beat and retired before that, and so did the site until the same evening), and
+  the answer also arrives as a notice over the screen in the computer's own words, "Sent ✅", which
+  leaves on its own. The kit in Downloads carries both states as "Chat · Send pressed" and "Chat ·
+  Sent". **The scroll presses
   whichever of those two the reader has not**, further down each act (2026-09-18, `SENDS` in
   js/home.js): the buttons stay live and a press still does the whole thing at once, but a sent card
   and a moved meeting are what those two acts claim, and until then both claims sat behind a click

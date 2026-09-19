@@ -130,7 +130,7 @@
 
 
   /* ==============================================================================================
-     THE DAY. The homepage since 2026-09-16: one sticky stage, seven acts, and the scroll is the
+     THE DAY. The homepage since 2026-09-16: one sticky stage, eight acts, and the scroll is the
      clock. Everything below turns one number, how far the reader is through .day-story, into a
      camera pose, a set of beats, and a place for Ember to stand.
 
@@ -164,9 +164,10 @@
 
      Two controls are real, and both are the product's own: the send knob on the composer, once
      the calendar act's yes sits typed in it (the skill takes approval as a later message, never
-     a button), and Send on the mail card. A press lights the button for the beat the phone app
-     gives it, then the screen is done, which the stylesheet turns into the edited card or the
-     follow-up bubbles, and Ember hops. NEITHER ACT WAITS FOREVER: further down each one the scroll
+     a button), and Send on the mail card. A press lights the button, and on the mail card it stays
+     lit and busy until the computer answers, the way the phone app holds it; then the screen is
+     done, which the stylesheet turns into the edited card or the follow-up bubbles, the mail card
+     gets the computer's answer as a notice, and Ember hops. NEITHER ACT WAITS FOREVER: further down each one the scroll
      presses the button the reader has not, because the sent card and the moved meeting are what
      the two acts are claiming and they were sitting behind a click most readers never make
      (SENDS below). The custody toggle redraws the lap for starter credits, in TRUST.md's own
@@ -207,8 +208,8 @@
        arriving from a later act settles it with no linger, so scrolling up into a finished act does
        not replay a button lighting itself. */
     var scr2 = $('.dp-scr[data-scr="2"]');
-    var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: 0.8, linger: false },
-                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.55, linger: true }];
+    var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: 0.8, busy: false },
+                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.55, busy: true }];
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -217,7 +218,7 @@
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
     var N = 7, SETTLE = 0.3;
-    var LEN = [0.25, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
+    var LEN = [0.25, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
     /* The hero starts moving on the first pixel of scroll: through its own act the camera goes
        this far toward the calendar pose, and the calendar act's settle finishes the trip. */
     var PRE = 0.5;
@@ -276,7 +277,17 @@
            phone's masked band reaches is the window's own bottom padding. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 208, s: .74 }), night: 1, fc: 0, fs: 0 },
         narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -212, z: -320, ry: 16, s: 1, o: .9 }, phone: { x: 30, y: 165, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
-      { mark: 'm-s0', state: 'idle', clock: '', phone: '2:00', scr: -1,
+      { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
+        /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
+           moment where the reader feels anything, and relief is the drive the page was weakest
+           on: index.html carried no instance of "hours" or "time back" at all. It closes the
+           loop rather than adding a scene, because the 2:00 am act ends on "Morning Brief,
+           Next, 7:00 AM" and this is that brief arriving. The clock reading 7:00 a second time
+           is the payoff: same hour as the hero, and this time the list is in the past tense.
+           Phone forward, window pushed back, and the night is off. */
+        pose: { cam: { rx: 4, ry: -9, s: 1.02 }, win: copy(W2, { ry: 14 }), phone: copy(PH2, { ry: -9 }), night: 0, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
+      { mark: 'm-s0', state: 'idle', clock: '', phone: '7:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }
     ];
@@ -547,7 +558,7 @@
         var held = tp >= 0.62 && tp < 0.8;
         dot.classList.toggle('is-held', held); gate.classList.toggle('is-on', held);
       }
-      if (i === 6) {
+      if (i === 7) {
         /* Five steps over the act, the last held. Narrow, the gallery slides between cards over
            the middle of each step (fs), so a card sits still for reading either side of the
            slide, and the current card is the one nearest the middle. Wide, the build is the
@@ -602,9 +613,10 @@
         if (!sd.el) return;
         if (i < sd.act || (i === sd.act && tp < sd.from)) unpress(sd.el, sd.key);
         else if (i > sd.act) press(sd.el, sd.key, true);
-        /* Only the mail card lingers. Its Send is an action button and the phone app holds it lit
-           for a beat (LINGER_MS); the composer's arrow posts a message, which posts at once. */
-        else if (tp >= sd.at) press(sd.el, sd.key, !sd.linger);
+        /* Only the mail card waits. Its Send is a card button and the phone app holds it lit and
+           busy until the computer answers; the composer's arrow posts a message, which posts at
+           once. */
+        else if (tp >= sd.at) press(sd.el, sd.key, !sd.busy);
       });
       /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
          is sent; scrolling back above the proposal untypes it. IT ARRIVES A CHARACTER AT A TIME,
@@ -633,23 +645,31 @@
     requestAnimationFrame(frame);
 
     /* The two real buttons on the phone. The composer's send knob posts the typed yes, and only
-       while it is typed; Send on the mail card lights for the beat the phone app gives a pressed
-       button (LINGER_MS in its ui.tsx) and then the card settles. Pressing again does nothing,
-       because the thing it did is done. One path for both the reader's press and the scroll's,
-       so the screen does the same thing whoever sent it; `now` skips the linger, which is for
-       arriving at a screen that should already be settled rather than watching it settle. */
-    var lingerT = { 1: 0, 2: 0 };
+       while it is typed; Send on the mail card stays lit and busy until the computer answers, the
+       way the phone app holds a pressed card button (InlineActions in archie-mobile's ui.tsx, since
+       its commit 8533dae of 2026-09-18; it lit for a 700ms beat and retired before that, and so did
+       this), and then the card settles and the computer's answer arrives as a notice over the
+       screen, which the stylesheet plays on is-noticed. Here the computer answers in a beat
+       (BUSY_MS), because there is no computer. Pressing again does nothing, because the thing it
+       did is done. One path for both the reader's press and the scroll's, so the screen does the
+       same thing whoever sent it; `now` skips the wait and the notice, which is for arriving at a
+       screen that should already be settled rather than watching it settle. */
+    var busyT = { 1: 0, 2: 0 }, BUSY_MS = 900;
     function press(scr, key, now) {
       if (!scr || scr.classList.contains('is-pressed')) return;
       scr.classList.add('is-pressed');
-      var settle = function () { scr.classList.add('is-done'); lingerT[key] = 0; };
-      if (now || still) settle(); else lingerT[key] = setTimeout(settle, 700);
+      var settle = function (answered) {
+        scr.classList.add('is-done');
+        if (answered) scr.classList.add('is-noticed');
+        busyT[key] = 0;
+      };
+      if (now || still) settle(false); else busyT[key] = setTimeout(function () { settle(true); }, BUSY_MS);
       if (!still) window.Ember.act(ember, 'hop');
     }
     function unpress(scr, key) {
       if (!scr) return;
-      if (lingerT[key]) { clearTimeout(lingerT[key]); lingerT[key] = 0; }
-      scr.classList.remove('is-pressed', 'is-done');
+      if (busyT[key]) { clearTimeout(busyT[key]); busyT[key] = 0; }
+      scr.classList.remove('is-pressed', 'is-done', 'is-noticed');
     }
     $$('[data-press]').forEach(function (btn) {
       btn.addEventListener('click', function () {

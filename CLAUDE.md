@@ -372,7 +372,12 @@ sizes are on the page at rest, and the pick only lights one.
   two have to multiply (a CSS `opacity` would beat the presentation attribute and flatten all 58
   to one star); every animation rule hangs off `.is-night`, so nothing animates through the other
   seven acts; and the whole sky is `display: none` under reduced motion, where the acts stand in a
-  stack and the room never darkens.
+  stack and the room never darkens. **The screens also light the air around them**, as a halo on
+  `.day-win::before` and `.day-phone::before` rather than on the screens: the display surfaces
+  carry the dimming filter, a filter dims an element's own `box-shadow` with it, and the phone's
+  screen sits inside an opaque bezel where a cast shadow would never be seen. It replaced
+  `--shadow-lamp`, which was the same idea on the window alone, in the room's terracotta, flipped
+  on by a class at one scroll notch.
 - **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a

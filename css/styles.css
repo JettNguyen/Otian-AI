@@ -15974,6 +15974,42 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    archie/mobile/ draws a .dp-ph too, and that one has no night to dim with. */
 .day-stage .da-app, .day-stage .dp-ph { filter: brightness(calc(1 - var(--night, 0) * .26)); }
 
+/* ---- and the screens light the air around them ---- */
+/* Jett, 2026-09-18: the displays should look like they are lighting up the air around the screen.
+   Each object gets a halo inside its own layer, behind it, traced from its own outline. A
+   box-shadow on a pseudo-element is the right primitive, because a lit panel spills light in the
+   shape of the panel; a radial gradient would lay a circle of light around a rectangle. Two casts,
+   which is what a screen in a dark room actually does: a tight bloom hugging the edge, and a wide
+   faint spill filling the air well past it. Both ride --night, so they arrive and leave with the
+   room and there is no frame where a light switches on.
+
+   THE HALO IS ON THE LAYER, NEVER ON THE SCREEN, for two separate reasons. .da-app and .dp-ph
+   carry the brightness filter that turns them down for the night, and a filter dims an element's
+   own box-shadow along with it, so a glow put there would go weakest exactly as the room went
+   darkest. The phone's case is worse than backwards: its screen sits inside an opaque bezel and a
+   stack of rim layers, so a shadow cast from it would be painted underneath the phone's own body
+   and never seen at all. Both pseudo-elements trace their object exactly (the window is
+   --radius at zoom .4375, the device is its 61px corner at zoom .63), and sit a pixel back in the
+   layer's own 3D space so nothing has to rely on paint order between coplanar siblings.
+
+   The light is the screen's own and not the room's. The lamp behind the scene is terracotta and
+   already warms everything; a second wash in the same colour would read as more lamp, so this one
+   is the near-white a cream app actually throws. This replaces --shadow-lamp, which was the same
+   idea done smaller: accent-coloured, on the window alone, and flipped on by a class at one scroll
+   notch. */
+.day-win::before, .day-phone::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateZ(-1px);
+  --shadow-screen: 0 0 38px -6px rgba(255, 247, 237, calc(var(--night, 0) * .27)), 0 0 112px 16px rgba(252, 234, 216, calc(var(--night, 0) * .13));
+  box-shadow: var(--shadow-screen);
+}
+.day-win::before { border-radius: 6px; }
+.day-phone::before { border-radius: 38px; }
+/* A dark screen throws less light than a cream one, and in the dark theme both mockups are on the
+   app's dark palette, so the cream halo would ring something that is not itself lit. */
+[data-theme="dark"] .day-win::before, [data-theme="dark"] .day-phone::before {
+  --shadow-screen: 0 0 24px -2px rgba(226, 233, 242, calc(var(--night, 0) * .17)), 0 0 88px 12px rgba(213, 222, 233, calc(var(--night, 0) * .07));
+}
+
 /* ---- the captions: one column, one act lit at a time ---- */
 .day-caps { position: relative; grid-column: 1; grid-row: 1; height: 100%; min-height: 0; }
 .day-cap { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; opacity: 0; transform: translateY(18px); pointer-events: none; }
@@ -16082,8 +16118,6 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --c-teal: #3E9A92; --c-teal-subtle: rgba(62, 154, 146, 0.13); --c-teal-strong: #2B6961;
   --c-red-fill: #BC5145;
   --shadow-app: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13);
-  /* The same cast with the room dark around it: the window is the one light at 2:00 am. */
-  --shadow-lamp: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13), 0 0 90px 4px rgba(237, 162, 119, 0.18);
   position: relative; display: flex; flex-direction: column;
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: var(--fs-base); line-height: 1.4; color: var(--text-primary); text-align: left;
   background: radial-gradient(circle at 15% -5%, var(--bg-wash-one), transparent 38%), radial-gradient(circle at 100% 0%, var(--bg-wash-two), transparent 34%), var(--bg-primary);
@@ -16194,8 +16228,6 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   .day-win.is-night .da-recent .r.night:not(.is-on) { display: none; }
   .day-win.is-night .da-recent .r.night.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
 }
-/* Lit in the dark: the one light in the room at 2:00 am is the window, running. */
-.day-win.is-night .da-app { box-shadow: var(--shadow-lamp); }
 
 /* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
 .day-phone { width: 256px; height: 546px; margin: -273px 0 0 -128px; }
@@ -16770,6 +16802,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }
+  /* The phone is a slice here, with both ends dissolved by --phone-mask, so its halo is pulled in
+     off the ends: light spilling from a part of the phone that has faded to nothing reads as a
+     glow with no source. The mask cannot simply be applied to the halo instead, because a mask
+     covers the border box and a box-shadow is painted outside it, which would erase the glow
+     rather than shape it. */
+  .day-phone::before { inset: 8% 0 14%; border-radius: 34px; }
   /* Ember stands clear of everything here (Jett, 2026-09-16). Beside the phone it is wholly to
      the phone's left, in the room between the phone and the screen's edge, and a rung smaller
      (data-size-narrow) so that room holds it; the hero uses the phone's mark too, since the

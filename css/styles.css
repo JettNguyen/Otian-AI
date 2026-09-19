@@ -16700,7 +16700,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --green: #679B55; --green-sub: rgba(103, 155, 85, 0.14); --gold: #BB8C33; --gold-sub: rgba(187, 140, 51, 0.14);
   --teal: #3E9A92; --teal-sub: rgba(62, 154, 146, 0.13); --hair: 0.5px;
   --lift-phone-card: 0 4px 18px rgba(68, 64, 59, 0.13); --lift-phone-bar: 0 4px 16px rgba(68, 64, 59, 0.16); --lift-phone-bar-up: 0 -4px 16px rgba(68, 64, 59, 0.16); --lift-phone-float: 0 8px 32px rgba(68, 64, 59, 0.3);
-  position: relative; width: 393px; height: 852px; border-radius: 54px; overflow: hidden;
+  /* ONE RADIUS, AND IT CLIPS TWICE. overflow: hidden with a border-radius is the clip a screen
+     wants, and WebKit drops it for a child that gets its own compositing layer, which on this
+     screen is whatever is moving: the notice sliding in, a card landing, the busy spinner. For
+     that beat the glass paints square and its corners stand over the bezel; Jett saw the top
+     corners do it "sometimes" on archie/personal/ (2026-09-18). clip-path is applied as a mask on
+     the layer itself, so it holds through compositing, and the same --ph-r drives both, so the
+     narrow homepage's square glass and the two whole phones each set one number. */
+  position: relative; width: 393px; height: 852px; --ph-r: 54px; border-radius: var(--ph-r); clip-path: inset(0 round var(--ph-r)); overflow: hidden;
   background: var(--bg); color: var(--text); text-align: left; line-height: 1.35;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: flex; flex-direction: column;
@@ -17189,7 +17196,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-device { height: 700px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
   .dp-edge { border-radius: 0; }
-  .dp-ph { height: 686px; padding-bottom: 8px; border-radius: 0; }
+  .dp-ph { height: 686px; padding-bottom: 8px; --ph-r: 0px; }
   .dp-statusbar { display: none; }
   .dp-topbar { padding-top: 24px; }
   .day-phone { height: 441px; margin-top: -220px; }
@@ -17365,7 +17372,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .mb-phone .dp-device { zoom: calc(.63 * var(--ps, 1)); height: 820px; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel)); -webkit-mask-image: none; mask-image: none; }
 @supports not (zoom: 1) { .mb-phone .dp-device { transform: scale(calc(.63 * var(--ps, 1))); transform-origin: 0 0; } }
 .mb-phone .dp-device::before, .mb-phone .dp-device::after { display: block; }
-.mb-phone .dp-ph { height: 806px; padding: 0; border-radius: 54px; font-family: inherit; }
+.mb-phone .dp-ph { height: 806px; padding: 0; --ph-r: 54px; font-family: inherit; }
 .mb-phone .dp-ph > svg { display: block; width: 100%; height: 100%; }
 .mb-phone .dp-edge { inset: calc(var(--i, 0px) * var(--ps, 1)); border-radius: calc((38px - var(--i, 0px)) * var(--ps, 1)); transform: translateZ(calc(var(--z) * var(--ps, 1))); -webkit-mask-image: none; mask-image: none; }
 /* One screen up at a time. Off, a screen is not painted, so its beats cannot show through the one
@@ -17683,7 +17690,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .pd-phone .dp-device { height: 866px; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel)); -webkit-mask-image: none; mask-image: none; }
 .pd-phone .dp-edge { border-radius: calc(38px - var(--i, 0px)); -webkit-mask-image: none; mask-image: none; }
 .pd-phone .dp-device::before, .pd-phone .dp-device::after { display: block; }
-.pd-phone .dp-ph { height: 852px; padding: 0; border-radius: 54px; }
+.pd-phone .dp-ph { height: 852px; padding: 0; --ph-r: 54px; }
 .pd-phone .dp-statusbar { display: flex; }
 .pd-phone .dp-topbar { padding-top: 63px; }
 .pd-chips { display: none; }

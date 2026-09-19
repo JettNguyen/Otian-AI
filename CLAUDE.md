@@ -200,7 +200,11 @@ full, and Jett's browser drew a flat grid and a phone with no rim, because WebKi
 a 3D context through zoom. `js/home.js` fits the homepage scene with `scale()` and zooms only
 the mockups inside it, and the drafts scene now fits the same way (`--pk`, measured by
 `js/drafts-scene.js`). No render here can check it: the WebKit snapshot tool draws every 3D
-scene flat, on screen or off, so depth in Safari is checked by Jett or not at all. The concept
+scene flat, on screen or off, so depth in Safari is checked by Jett or not at all. One more from
+the same browser (2026-09-18): the glass's top corners stood over the bezel "sometimes", which is
+WebKit dropping an overflow-plus-radius clip for a child that gets its own compositing layer (the
+notice, a landing card, the spinner), so `.dp-ph` clips with `clip-path` as well, one `--ph-r`
+driving the corner and the clip on every phone. The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

@@ -625,20 +625,32 @@
       if (nq !== lastNight) { document.documentElement.style.setProperty('--day-night', nq); lastNight = nq; }
     }
 
-    /* The custody lap in floor coordinates: [time, x, y]. The held stretch at the gate is the
-       point of the drawing, so it is a fifth of the lap, and the ball holds at the gate line (which
-       is at 352, and the sign stands at its end). The credits path takes the detour through our
-       server and back, which is the one case TRUST.md says the picture may not skip. */
-    /* Narrow, the stations stand on the plane's center line, row 210, ninety rows up from the
-       wide floor's row 300 (--cy in the stylesheet), and the gate and our server move with them. */
-    function row() { return narrow ? 210 : 300; }
-    function lapKey() { var y = row(), g = narrow ? 315 : 350; return [[0, 95, y], [0.22, 360, y], [0.42, 625, y], [0.6, 360, y], [0.64, 360, g], [0.8, 360, g], [1, 95, y]]; }
-    function lapCredits() { var y = row(), g = narrow ? 315 : 350, o = otian(); return [[0, 95, y], [0.2, 360, y], [0.32, o[0], o[1]], [0.44, 625, y], [0.52, o[0], o[1]], [0.6, 360, y], [0.64, 360, g], [0.8, 360, g], [1, 95, y]]; }
-    /* Where the stations stand, so the ball goes see-through while it is under one. Narrow, our
-       server stands up and to the right of the computer (--gx and --gy in the stylesheet) and
-       the gate is past the computer's footprint (--gm), and the lap follows both. */
-    function otian() { return narrow ? [200, 95] : [360, 60]; }
-    function stations() { var y = row(); return [[95, y], [360, y], [625, y], otian()]; }
+    /* THE CUSTODY LAP IN FLOOR COORDINATES: [time, x, y]. Wide the road runs across the floor at
+       row 300 and the branch toward your mail runs toward the camera; narrow the same road runs
+       down column 250 and that branch runs out to the right, because narrow this floor stands up
+       and becomes a board (see #dayFloorCustody in the stylesheet, and why). The order of the
+       stops is the same one either way, which is the whole point of the rebuild.
+
+       The held stretch at the gate is a fifth of the lap, since it is the point of the drawing,
+       and the ball holds on the gate's own line rather than short of it. The credits path takes
+       the detour through our server and back, which is the one case TRUST.md says the picture may
+       not skip. EVERY NUMBER HERE HAS A TWIN IN THE STYLESHEET, the --fx and --fy of the station
+       it names: move one there and the ball stops arriving at it. */
+    function lapKey() {
+      return narrow ? [[0, 250, 55], [0.22, 250, 185], [0.42, 250, 345], [0.6, 250, 185], [0.64, 330, 185], [0.8, 330, 185], [1, 250, 55]]
+                    : [[0, 95, 300], [0.22, 360, 300], [0.42, 625, 300], [0.6, 360, 300], [0.64, 360, 340], [0.8, 360, 340], [1, 95, 300]];
+    }
+    function lapCredits() {
+      return narrow ? [[0, 250, 55], [0.2, 250, 185], [0.32, 470, 305], [0.44, 250, 345], [0.52, 470, 305], [0.6, 250, 185], [0.64, 330, 185], [0.8, 330, 185], [1, 250, 55]]
+                    : [[0, 95, 300], [0.2, 360, 300], [0.32, 490, 188], [0.44, 625, 300], [0.52, 490, 188], [0.6, 360, 300], [0.64, 360, 340], [0.8, 360, 340], [1, 95, 300]];
+    }
+    /* Where the stations stand, so the ball goes see-through while it is under one. Narrow the
+       stops sit on the road rather than above it, so this is most of the lap and not a corner
+       case: a ball drawn over the word it is passing is the thing the dimming exists for. */
+    function stations() {
+      return narrow ? [[250, 55], [250, 185], [250, 345], [470, 305], [470, 185]]
+                    : [[95, 300], [360, 300], [625, 300], [490, 170], [360, 520]];
+    }
     function lapPoint(path, t) {
       for (var i = 1; i < path.length; i++) {
         if (t <= path[i][0]) {

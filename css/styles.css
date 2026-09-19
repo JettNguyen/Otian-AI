@@ -17072,8 +17072,29 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* The custody floor's stations are icons, not cards: a phone, a computer, the AI company and our
    server in the site's line-art, the name under each and its one line under that. Ours is dotted
    and stands lifted off the floor behind the computer, where Ember is; on credits the lap reaches
-   it and its outline fills in. */
-#dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; }
+   it and its outline fills in.
+
+   THE COORDINATES ARE HERE AND NOT IN THE MARKUP (2026-09-19). Narrow is a second layout of this
+   road rather than this one shrunk, and an inline --fx outranks every media query, so a station
+   written inline can never move. Stops stand 12 back off the road so the road runs clear in front
+   of their feet rather than through their last line, which is most of why the old one looked like
+   labels scattered on a grid. */
+#dayFloorCustody .day-st { width: 150px; padding: 0; background: none; border: 0; box-shadow: none; text-align: center; transform: translate(-50%, calc(-100% - 22px)) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
+#dayFloorCustody [data-o="phone"] { --fx: 95px; --fy: 300px; }
+#dayFloorCustody [data-o="computer"] { --fx: 360px; --fy: 300px; }
+#dayFloorCustody [data-o="ai"] { --fx: 625px; --fy: 300px; }
+#dayFloorCustody [data-o="mail"] { --fx: 360px; --fy: 520px; }
+#dayFloorCustody [data-o="otian"] { --fx: 490px; --fy: 170px; }
+#dayFloorCustody .day-gate { --fx: 360px; --fy: 340px; }
+/* THE ROAD IS A BAND, AND THE GRID GETS OUT OF ITS WAY. A two-pixel line in --line-muted over a
+   grid drawn in --line-soft is the same line twice, so the road read as grid and the three stops
+   read as three separate drawings (Jett, 2026-09-19). The band is the accent at a fifth, wide
+   enough that the ball rides it, and the grid comes down to half strength under it. */
+#dayFloorCustody .day-grid { opacity: calc(var(--fo) * .5); }
+#dayFloorCustody .day-paths .bed { stroke: color-mix(in srgb, var(--accent) 32%, transparent); stroke-width: 13; }
+/* The gate is the one thing on this floor that guards something, so it stands across the branch
+   toward your mail rather than beside the computer with nothing behind it. */
+#dayFloorCustody [data-o="mail"] .day-ico { stroke: var(--text-secondary); }
 .day-ico { display: block; width: 46px; height: 46px; margin: 0 auto 4px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .day-st.ghost { left: calc(var(--fx) + var(--gx, 0px)); top: calc(var(--fy) + var(--gy, 0px)); transform: translate(-50%, -100%) translateZ(60px) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
 .day-st.ghost .day-ico { stroke: var(--text-muted); stroke-dasharray: 3 3; }
@@ -17082,6 +17103,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-paths .narrow { display: none; }
 .day-st .when-credits { display: none; }
 .day-floor[data-mode="credits"] .day-st .when-credits { display: block; }
+/* The pair, because on credits the AI stop is not on your account and our server is on the way:
+   two claims that are false in the other mode, so each mode says its own and neither carries the
+   other's. TRUST.md's two approved forms, one each. */
+.day-floor[data-mode="credits"] .day-st .when-key { display: none; }
 .day-st .day-mark { left: 50%; top: 0; }
 /* transform-style, or the gate flattens its label into the floor and the standing-up rotation below
    becomes a second squash: that was "waits for you" reading as a pressed pill.
@@ -17476,25 +17501,44 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      phone and the edge of the screen. Move the 2:00 am phone again and this is solved with it. */
   .day-phone [data-mark="m-night"] { --mx: -40px; --my: 60%; }
   .day-win [data-mark="m-window"] { --mx: 100px; --my: -120px; }
-  /* The custody floor: type up two rungs, Ember beside the computer rather than on it. On the
-     turned plane its rows run across the screen and the center line is row 210, so the stations
-     stand 90 rows up from where the wide floor draws them (--cy), on the plane's own center line
-     and over the middle of its grid; the paths have narrow copies on that row. This is done in
-     coordinates and nothing else, because sliding the plane's content along it and sliding the
-     grid back left the grid off to one side (Jett's screenshot, 2026-09-16). Our server stands
-     up and to the right, farther from the camera than the computer, so its sign clears Ember's
-     head and it needs no room in the computer's row, which the screen does not have; and the
-     gate is past the computer's own footprint, since on a turned floor the gate's offset runs
-     sideways, where the station is wide. */
+  /* THE CUSTODY FLOOR STANDS UP NARROW, AND THAT IS THE WHOLE FIX (2026-09-19). Wide, the three
+     stops are at one depth on the turned floor, so they draw at one size and the tilt costs
+     nothing. Narrow the road has to run down the screen, and down the screen on a turned floor is
+     straight into depth: the near stop drew a fifth bigger than the far one, each label at its own
+     size, which is most of what made this act unreadable on a phone. So this floor alone gives up
+     its tilt here and becomes a board, the way the setup floor gives up its floor and becomes a
+     gallery, and the road runs down the left with everything that is not on it standing to the
+     right. The stops sit ON the road rather than above it, because a card whose foot is on a
+     vertical road covers the road above it. The order is the same one the wide floor reads
+     left to right, which is the point: nobody re-learns the picture on a phone. */
   .day-st b { font-size: var(--fs-md); }
   .day-st i { font-size: var(--fs-xs); }
-  #dayFloorCustody .day-st { width: 170px; --cy: -90px; }
-  /* The line under each station wraps within 120, so the phone station's line and our server's
-     sentence, which stand at the same height, do not run into each other. */
-  #dayFloorCustody .day-st i { max-width: 120px; margin-left: auto; margin-right: auto; }
-  .day-st .day-mark { left: calc(100% + 34px); top: 100%; }
-  .day-st.ghost { --gx: -160px; --gy: 35px; transform: translate(-50%, -100%) rotateZ(calc(-1 * var(--fz, 0deg))) rotateX(-58deg); }
-  .day-gate { --gm: -35px; }
+  #dayFloorCustody .day-plane { transform: none; }
+  #dayFloorCustody .day-grid { opacity: calc(var(--fo) * .32); }
+  #dayFloorCustody .day-paths .bed { stroke-width: 15; }
+  #dayFloorCustody .day-st { width: 150px; --cy: 0px; transform: translate(-50%, -50%); }
+  #dayFloorCustody .day-st i { max-width: 140px; margin-left: auto; margin-right: auto; }
+  #dayFloorCustody [data-o="phone"] { --fx: 250px; --fy: 55px; }
+  #dayFloorCustody [data-o="computer"] { --fx: 250px; --fy: 185px; }
+  #dayFloorCustody [data-o="ai"] { --fx: 250px; --fy: 345px; }
+  #dayFloorCustody [data-o="mail"] { --fx: 470px; --fy: 185px; width: 140px; }
+  #dayFloorCustody [data-o="otian"] { --fx: 470px; --fy: 305px; width: 160px; --gx: 0px; --gy: 0px; transform: translate(-50%, -50%); }
+  #dayFloorCustody [data-o="otian"] i { max-width: 150px; }
+  /* The branch toward your mail runs sideways here, so the gate stands on the left edge of a tall
+     box rather than across the top of a wide one, and its sign stands over the line. */
+  #dayFloorCustody .day-gate { --fx: 330px; --fy: 185px; --gm: 0px; width: 0; height: 64px; transform: translate(0, -50%); }
+  #dayFloorCustody .day-gate::before { left: 0; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 2px dashed var(--line-muted); }
+  #dayFloorCustody .day-gate.is-on::before { border-left-color: var(--accent); }
+  #dayFloorCustody .day-gate span { left: 50%; top: -8px; transform: translate(-50%, -100%); }
+  /* A flat board, so nothing counter-rotates and nothing casts on it: the ball stands on its own
+     and the ellipse under it would be a shadow on a wall. Both are written on the id, because the
+     ball's two leaves are shared with the desk scene on compare/cloud-agents/. */
+  #dayDot::after { transform: translate(var(--back-x), var(--back-y)); }
+  #dayDot::before { display: none; }
+  /* Ember stands in the empty quarter above the branch, off the road and clear of every card:
+     there is no room on the road's left, which is 90 units wide here, and the road's right is
+     where the two things that are not on it stand. */
+  #dayFloorCustody .day-st .day-mark { left: calc(100% + 78px); top: -84px; }
   /* The setup floor is a gallery here, not a floor: the five cards stand in a row like album
      covers, the current one flat, full size and in front on the center line, the others out to
      either side, turned toward it, smaller, dimmer and a little behind and below it (Jett's

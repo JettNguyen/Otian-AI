@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260918-48" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260918-49" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -669,22 +669,46 @@
               <i class="day-mark" data-mark="m-night" data-size="72" data-size-narrow="60"></i>
             </div>
 
-            <!-- THE CUSTODY FLOOR. Four stations drawn as icons, and ours has no line to it: that is
-                 the claim. Ours stands behind the computer, lifted off the floor and dotted; on
-                 starter credits and the plan with the AI included the lap detours up to it, its
-                 outline fills in, and its second line appears. -->
+            <!-- THE CUSTODY FLOOR: ONE ROAD, READ IN THE SAME ORDER AT EVERY WIDTH. Rebuilt
+                 2026-09-19, because the first one was four things claiming the eye at once and none
+                 of them saying where to start (Jett: "it is a mess and hard to follow. this goes
+                 for both narrow and wider screens"). Three stops stand on one road, your phone then
+                 your computer then the AI you picked, and the ball runs out to the end and back.
+                 Everything that is not on that road is visibly off it: ours has no line to it at
+                 all, which is the claim, and the branch toward your mail ends at a gate the ball
+                 stops at, so the gate guards something instead of hanging in the air. On starter
+                 credits and on the plan with the AI included the road itself detours through ours,
+                 its outline fills in and its line changes, because that is the one case TRUST.md
+                 says the picture may not skip, and the AI stop says whose account it is on.
+                 EVERY COORDINATE IS IN THE STYLESHEET, keyed by data-o rather than written inline
+                 here: narrow is a second layout of the same road and not this one shrunk, and an
+                 inline custom property outranks the media query that would move it. -->
             <div class="day-layer day-floor" id="dayFloorCustody" data-mode="key" aria-hidden="true">
               <div class="day-plane">
                 <div class="day-grid"></div>
+                <!-- The road is a band under the stops and not a hairline between them: at two
+                     pixels over a grid of the same weight it read as one more grid line, and three
+                     stops on a road nobody can see are three things standing apart. -->
                 <svg class="day-paths" viewBox="0 0 720 420" aria-hidden="true">
-                  <g class="key"><path class="wide" d="M95 300 H360 H625"/><path class="narrow" d="M95 210 H360 H625"/></g>
-                  <g class="credits"><path class="wide" d="M95 300 H360"/><path class="dashed wide" d="M360 300 V60 L625 300"/><path class="narrow" d="M95 210 H360"/><path class="dashed narrow" d="M360 210 L200 95 L625 210"/></g>
+                  <g class="road">
+                    <path class="bed wide" d="M95 300 H360"/><path class="bed wide" d="M360 300 V494"/>
+                    <path class="bed narrow" d="M250 55 V185"/><path class="bed narrow" d="M250 185 H405"/>
+                  </g>
+                  <g class="key">
+                    <path class="bed wide" d="M360 300 H625"/>
+                    <path class="bed narrow" d="M250 185 V345"/>
+                  </g>
+                  <g class="credits">
+                    <path class="bed wide" d="M360 300 L490 188 L625 300"/>
+                    <path class="bed narrow" d="M250 185 L470 305 L250 345"/>
+                  </g>
                 </svg>
-                <div class="day-st" style="--fx:95px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-phone"/></svg><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
-                <div class="day-st" style="--fx:360px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-computer"/></svg><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
-                <div class="day-st" style="--fx:625px;--fy:300px"><svg class="day-ico" aria-hidden="true"><use href="#g-ai"/></svg><b>Your AI company</b><i>on your account, with your key</i></div>
-                <div class="day-st ghost" style="--fx:360px;--fy:60px"><svg class="day-ico" aria-hidden="true"><use href="#g-server"/></svg><b>Otian</b><i>Otian&rsquo;s servers hold your email address, plan and listed operational records. Never a conversation.</i><i class="when-credits">On the way to Anthropic it passes through here, without being kept.</i></div>
-                <div class="day-gate" id="dayGate" style="--fx:360px;--fy:352px"><span>waits for you</span></div>
+                <div class="day-st" data-o="phone"><svg class="day-ico" aria-hidden="true"><use href="#g-phone"/></svg><b>Your phone</b><i>Telegram, Discord, Slack, Matrix or iMessage</i></div>
+                <div class="day-st" data-o="computer"><svg class="day-ico" aria-hidden="true"><use href="#g-computer"/></svg><b>Your computer</b><i>Archie, and your agent</i><i class="day-mark" data-mark="m-computer" data-size="66"></i></div>
+                <div class="day-st" data-o="ai"><svg class="day-ico" aria-hidden="true"><use href="#g-ai"/></svg><b class="when-key">The AI you picked</b><b class="when-credits">Anthropic</b><i class="when-key">on your account, with your key</i><i class="when-credits">on our account, not yours</i></div>
+                <div class="day-st" data-o="mail"><svg class="day-ico" aria-hidden="true"><use href="#g-mail"/></svg><b>Your mail and calendar</b></div>
+                <div class="day-st ghost" data-o="otian"><svg class="day-ico" aria-hidden="true"><use href="#g-server"/></svg><b>Otian</b><i class="when-key">Holds your email address, plan and listed operational records. Never a conversation.</i><i class="when-credits">On the way to Anthropic it passes through here. Nothing written down, no copy kept.</i></div>
+                <div class="day-gate" id="dayGate"><span>waits for you</span></div>
                 <div class="day-dot" id="dayDot"></div>
               </div>
             </div>
@@ -1540,10 +1564,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260918-48"></script>
-  <script src="js/ember.js?v=20260918-48" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260918-48"></script>
-  <script src="js/home.js?v=20260918-48" defer></script>
+  <script src="js/nav.js?v=20260918-49"></script>
+  <script src="js/ember.js?v=20260918-49" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260918-49"></script>
+  <script src="js/home.js?v=20260918-49" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

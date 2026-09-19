@@ -17389,3 +17389,94 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .hd-beat-4 { animation: hd-beat-4 24s linear infinite; }
   @keyframes hd-beat-4 { 0.000% { opacity: 0.32; } 80.208% { opacity: 0.32; } 81.250% { opacity: 1; } 90.417% { opacity: 1; } 92.917% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
 }
+
+/* ── The drafts scene (archie/personal/) ──
+   The phone is the homepage's port of the app (.dp-* above), standing on a turned floor with
+   three stations queued behind it, one draft landing at a time and waiting for the reader's own
+   press; js/drafts-scene.js runs the landing and the press. The second staged page after the
+   hiring dial (Jett, 2026-09-18: each page its own scene, the same brand).
+
+   THE BOX IS DRAWN AT ONE SIZE AND ZOOMED TO ITS COLUMN. 720 by 620 wide, 400 by 700 narrow, and
+   zoom (never transform: scale, see section 49) brings it to the scene's width with a container
+   unit, so nothing is placed by viewport arithmetic. The floor is the homepage floor's own recipe:
+   a plane laid back 58 degrees with things standing on it counter-rotated about their feet.
+
+   A CARD'S STATES ARE ON THE CARD, not on the screen as the homepage keys them, because this
+   screen holds three cards in one thread and each is pressed on its own; the five rules below
+   are the homepage's, re-keyed. The notice stays the screen's. */
+.pd-figure { max-width: 720px; margin: 0 auto; }
+.pd-scene { position: relative; width: 100%; aspect-ratio: 720 / 620; container-type: inline-size; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; }
+.pd-box { position: absolute; left: 0; top: 0; width: 720px; height: 620px; zoom: calc(100cqw / 720px); transform-style: preserve-3d; }
+@supports not (zoom: 1) { .pd-box { transform: scale(calc(100cqw / 720px)); transform-origin: 0 0; } }
+/* the floor */
+.pd-floor { position: absolute; left: 0; top: 300px; width: 720px; height: 420px; --fo: 1; }
+.pd-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
+.pd-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); -webkit-mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); }
+.pd-paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pd-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pd-paths path.dashed { stroke-dasharray: 5 6; }
+.pd-st { position: absolute; left: var(--fx); top: var(--fy); width: 124px; text-align: center; transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; }
+.pd-st .day-ico { stroke: var(--text-muted); transition: stroke var(--transition), opacity var(--transition); }
+.pd-st b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
+.pd-st i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 2px; }
+.pd-st.is-lit .day-ico { stroke: var(--accent); }
+.pd-st.is-done { opacity: .5; }
+.pd-st.is-done .day-ico { stroke: var(--green, #679B55); }
+.pd-ball { opacity: 0; offset-distance: 0%; offset-rotate: 0deg; }
+.pd-ember-stand { position: absolute; left: var(--fx); top: var(--fy); width: 84px; height: 84px; transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; }
+.pd-ember { display: block; width: 100%; height: 100%; }
+/* the phone: the homepage's .day-phone box, turned a little so its side shows */
+/* The phone stands AT the foot, not at zero depth: the floor's near half comes toward the camera
+   (rotateX brings the bottom edge forward), so a phone left at z 0 has the plane pass through its
+   lower half and the grid paints over the buttons. The foot is 120px past the plane's middle, which
+   after 58 degrees is 102px toward the camera; the phone is moved out to meet it, and its top is
+   set so its bottom lands on the foot after the perspective has had its say. */
+.pd-phone { position: absolute; left: 430px; top: 22px; width: 256px; height: 546px; transform: translateZ(102px) rotateY(-9deg); transform-style: preserve-3d; }
+.pd-phone .dp-device { position: relative; }
+/* The homepage cuts its phone's screen to 686px under 971px (a window onto the phone); this phone
+   is whole at every width, so the screen is said here with enough weight to win. */
+/* Under 971px the homepage shows its phone through a window: masked ends, a shorter device with
+   square corners, no island, no status bar. Those rules are bare .dp- selectors in a media block,
+   so they would reach this phone on a tablet too; it is whole at every width, said here with the
+   weight to win. */
+.pd-phone .dp-device { height: 866px; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel)); -webkit-mask-image: none; mask-image: none; }
+.pd-phone .dp-edge { border-radius: calc(38px - var(--i, 0px)); -webkit-mask-image: none; mask-image: none; }
+.pd-phone .dp-device::before, .pd-phone .dp-device::after { display: block; }
+.pd-phone .dp-ph { height: 852px; padding: 0; border-radius: 54px; }
+.pd-phone .dp-statusbar { display: flex; }
+.pd-phone .dp-topbar { padding-top: 63px; }
+.pd-chips { display: none; }
+/* a card lands as one thing, and a card's states are its own */
+.pd-card { display: none; }
+.pd-card.is-in { display: flex; }
+.pd-card.is-pressed .dp-act[data-press] { background: var(--accent); color: var(--on-accent); }
+.pd-card.is-pressed:not(.is-done) .dp-act[data-press] .em { display: none; }
+.pd-card.is-pressed:not(.is-done) .dp-act[data-press] .dp-spin { display: block; }
+.pd-card.is-done .dp-fold { grid-template-rows: 0fr; }
+.pd-card.is-done .dp-fold > .dp-actions { opacity: 0; pointer-events: none; }
+.pd-card.is-done .dp-after { display: flex; }
+.pd-card.is-done p.dp-after { display: block; }
+.pd-card.is-done .dp-before { display: none; }
+.pd-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
+@media (prefers-reduced-motion: no-preference) {
+  .pd-card.is-in { animation: pd-land .42s cubic-bezier(.2, .8, .3, 1) both; }
+  @keyframes pd-land { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .pd-ball.is-rolling { animation: pd-roll 1.1s cubic-bezier(.3, .1, .3, 1) both; }
+  @keyframes pd-roll { 0% { opacity: 0; offset-distance: 0%; } 8% { opacity: 1; } 92% { opacity: 1; } 100% { opacity: 0; offset-distance: 100%; } }
+}
+@media (max-width: 640px) {
+  /* Narrow, the floor goes and the stations are a row of chips over the phone: a floor at this
+     width shrank the phone past reading, and the queue reads fine as three chips, the lit one the
+     station whose draft is on the screen. The box is redrawn, not the wide one shrunk. */
+  .pd-scene { aspect-ratio: 400 / 700; perspective: none; }
+  .pd-box { width: 400px; height: 700px; zoom: calc(100cqw / 400px); }
+  @supports not (zoom: 1) { .pd-box { transform: scale(calc(100cqw / 400px)); } }
+  .pd-floor { display: none; }
+  .pd-chips { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: center; gap: 8px; margin: 0; padding: 0 12px; list-style: none; }
+  .pd-chip { display: flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); font-size: var(--fs-2xs); font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+  .pd-chip svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .pd-chip.is-lit { color: var(--accent-ink); border-color: var(--accent); }
+  .pd-chip.is-done { opacity: .5; }
+  .pd-phone { left: 72px; top: 64px; transform: none; }
+  .pd-phone .dp-device { zoom: .63; }
+}

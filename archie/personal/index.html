@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260918-28" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260918-29" />
   <style>
     /* Page-scoped: the #status block, the one place on the site where Archie's
        availability and platform facts live. Other pages link here, never restate. */
@@ -408,55 +408,125 @@
           <h2 id="uses-heading" class="fade-up">The small stuff, handled.</h2>
           <p>The repetitive work, off your plate: it drafts, sorts, and reminds. Email goes out only when you send it or set a time.</p>
         </div>
-        <!-- Three lines in, one draft out. Redrawn 2026-09-11 from a funnel of 42 shapes; the
-             Send button is the claim, so it is the one thing in ember. The style block serves
-             both variants. -->
-        <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 520 220" role="img" aria-labelledby="iv-t" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;font-family:inherit">
-            <title id="iv-t">Inbox, calendar and follow-ups on the left, three lines into Archie, and one draft reply out on the right with a Send button under it. Dots travel the lines in.</title>
-            <style>
-              .iv-line{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.45;stroke-linecap:round;stroke-linejoin:round}
-              .iv-in{fill:currentColor;font-size:12.5px;font-weight:650}
-              .iv-agent{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
-              .iv-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
-              .iv-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-              .iv-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4;stroke-linecap:round}
-              .iv-lab{fill:currentColor;font-size:11px;font-weight:650}
-              .iv-send{fill:var(--accent)}
-              .iv-sendtext{fill:#292624;font-size:10.5px;font-weight:650;text-anchor:middle}
-              .iv-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
-              .iv-dot{display:none;fill:var(--accent)}
-              @supports (offset-path:path("M0,0 L1,1")){
-                .iv-dot{display:block;offset-distance:40%}
-                @media (prefers-reduced-motion:no-preference){
-                  .iv-dot{animation:ivIn 5s linear infinite}
-                  .iv-dot--2{animation-delay:-1.7s}.iv-dot--3{animation-delay:-3.4s}
-                  @keyframes ivIn{0%{offset-distance:0%;opacity:1}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
-                }
-              }
-            </style>
-            <path class="iv-line" d="M96,50 L160,110"/><path class="iv-line" d="M96,110 L160,110"/><path class="iv-line" d="M96,170 L160,110"/>
-            <path class="iv-line" d="M240,110 L360,110"/>
-            <text class="iv-in" x="14" y="54">Inbox</text><text class="iv-in" x="14" y="114">Calendar</text><text class="iv-in" x="14" y="174">Follow-ups</text>
-            <rect class="iv-agent" x="160" y="84" width="80" height="52" rx="12"/><text class="iv-name" x="200" y="114">Archie</text>
-            <rect class="iv-card" x="360" y="70" width="140" height="80" rx="12"/>
-            <text class="iv-lab" x="374" y="92">Draft reply, ready</text><path class="iv-ink" d="M374,104h100M374,114h72"/>
-            <rect class="iv-send" x="374" y="124" width="46" height="18" rx="9"/><text class="iv-sendtext" x="397" y="136.5">Send</text>
-            <text class="iv-sub" x="430" y="170">you read it, you send it</text>
-            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M96,50 L160,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M96,110 L160,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M96,170 L160,110')"/>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 300" role="img" aria-labelledby="ivm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="ivm-t">Inbox, calendar and follow-ups at the top, three lines down into Archie, and one draft reply below it with a Send button. Dots travel the lines in.</title>
-            <path class="iv-line" d="M60,44 L170,110"/><path class="iv-line" d="M170,44 L170,110"/><path class="iv-line" d="M280,44 L170,110"/><path class="iv-line" d="M170,162 L170,196"/>
-            <text class="iv-in iv-name" x="60" y="34">Inbox</text><text class="iv-in iv-name" x="170" y="34">Calendar</text><text class="iv-in iv-name" x="280" y="34">Follow-ups</text>
-            <rect class="iv-agent" x="130" y="110" width="80" height="52" rx="12"/><text class="iv-name" x="170" y="140">Archie</text>
-            <rect class="iv-card" x="100" y="196" width="140" height="80" rx="12"/>
-            <text class="iv-lab" x="114" y="218">Draft reply, ready</text><path class="iv-ink" d="M114,230h100M114,240h72"/>
-            <rect class="iv-send" x="114" y="250" width="46" height="18" rx="9"/><text class="iv-sendtext" x="137" y="262.5">Send</text>
-            <text class="iv-sub" x="170" y="294">you read it, you send it</text>
-            <circle class="iv-dot iv-dot--1" r="5" style="offset-path:path('M60,44 L170,110')"/><circle class="iv-dot iv-dot--2" r="5" style="offset-path:path('M170,44 L170,110')"/><circle class="iv-dot iv-dot--3" r="5" style="offset-path:path('M280,44 L170,110')"/>
-          </svg>
-          <figcaption>The repetitive stuff funnels into Archie, which hands back ready-to-send drafts. You read them, and you send them.</figcaption>
+        <!-- THE DRAFTS SCENE. Three things come in, one draft comes out at a time, and it waits on
+             the phone until you press Send. The phone is the homepage's port of the app (.dp-*,
+             css/styles.css section 49) on a turned floor, three stations queued behind it, and a
+             message that rolls down a station's line before its draft lands; js/drafts-scene.js
+             runs the landing and the press. The card is the app's own email card, with the app's
+             own buttons, and Send does what email/replies/actions.rs does: the button stays lit
+             and busy, the words become "Sent (to X):" over the same draft with the buttons folded,
+             and a notice says so. NOTHING ARRIVES PAST A DRAFT YOU HAVE NOT SENT: the next station
+             only lets go after the press, which is the whole claim drawn as a queue. Every name is
+             American (Dana, Todd) and every draft is a reply the Email add-on writes. The first
+             card is in the markup lit and waiting, so a reader with no script, reduced motion or a
+             crawler gets the resting claim whole. Narrow, the floor goes and the three stations
+             become a row of chips over the phone, because a floor at 360px shrank the phone past
+             reading. The scene is one role="img" with the claim in its aria-label and everything
+             inside aria-hidden, as the homepage stage is, so check-copy-length.py counts none of
+             the phone's text; the pilot for staging the wedge's page (Jett, 2026-09-18). -->
+        <svg class="pd-sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden">
+          <linearGradient id="wm-mark" x1="512" y1="85" x2="512" y2="888" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#E8A87C"/><stop offset="0.55" stop-color="#D9825A"/><stop offset="1" stop-color="#B5623C"/></linearGradient>
+          <linearGradient id="wm-text" x1="690" y1="283" x2="690" y2="815" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#EFA97E"/><stop offset="1" stop-color="#C36A3D"/></linearGradient>
+          <symbol id="wordmark" viewBox="0 0 2700 900"><polygon points="138,852 322,692 506,852" fill="url(#wm-mark)" stroke="url(#wm-mark)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round"/><path d="M 322,50 L 634,815 L 322,677 L 10,815 Z M 322,237 L 194,581 L 450,581 Z" fill="url(#wm-mark)" stroke="url(#wm-mark)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd"/><text x="690" y="815" font-family="Georgia, serif" font-size="730" font-weight="bold" fill="url(#wm-text)">rchie</text></symbol>
+          <symbol id="g-mail" viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.4"/><path d="M3.4 7.2 12 13.2 20.6 7.2"/></symbol>
+          <symbol id="g-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+          <symbol id="g-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+        </svg>
+        <figure class="pd-figure fade-up delay-1">
+          <div class="pd-scene" role="img" aria-label="An illustration of the Archie app on a phone, standing on a floor with three stations queued behind it: your inbox, your calendar, and the follow-ups you asked for. A message rolls from the first station to the phone and a draft reply to Dana lands in the chat with Send, Edit it, Send later and Dismiss under it. Pressing Send turns the card into Sent to Dana with the buttons gone, and only then does the next station's draft come in: a confirmation for the dentist, then a nudge to Todd about an invoice.">
+            <div class="pd-box" aria-hidden="true">
+              <div class="pd-floor"><div class="pd-plane">
+                <div class="pd-grid"></div>
+                <svg class="pd-paths" viewBox="0 0 720 420" aria-hidden="true" focusable="false">
+                <path d="M70,74 C70,240 498,330 588,330" class="dashed"/>
+                <path d="M225,74 C225,240 498,330 588,330" class="dashed"/>
+                <path d="M380,74 C380,240 498,330 588,330" class="dashed"/>
+                </svg>
+              <div class="pd-st is-lit" data-st="0" style="--fx:70px;--fy:60px"><svg class="day-ico" aria-hidden="true"><use href="#g-mail"/></svg><b>Your inbox</b><i>a reply, drafted</i></div>
+              <div class="pd-st" data-st="1" style="--fx:225px;--fy:60px"><svg class="day-ico" aria-hidden="true"><use href="#g-calendar"/></svg><b>Your calendar</b><i>a confirmation, drafted</i></div>
+              <div class="pd-st" data-st="2" style="--fx:380px;--fy:60px"><svg class="day-ico" aria-hidden="true"><use href="#g-message"/></svg><b>Follow-ups you asked for</b><i>a nudge, drafted</i></div>
+              <i class="day-dot pd-ball" data-ball="0" style="offset-path:path('M70,74 C70,240 498,330 588,330')"></i>
+              <i class="day-dot pd-ball" data-ball="1" style="offset-path:path('M225,74 C225,240 498,330 588,330')"></i>
+              <i class="day-dot pd-ball" data-ball="2" style="offset-path:path('M380,74 C380,240 498,330 588,330')"></i>
+                <div class="pd-ember-stand" style="--fx:400px;--fy:352px"><span class="pd-ember" data-ember="terracotta.peak.pill.none"></span></div>
+              </div></div>
+
+              <ul class="pd-chips">
+            <li class="pd-chip is-lit" data-st="0"><svg aria-hidden="true"><use href="#g-mail"/></svg>Your inbox</li>
+            <li class="pd-chip" data-st="1"><svg aria-hidden="true"><use href="#g-calendar"/></svg>Your calendar</li>
+            <li class="pd-chip" data-st="2"><svg aria-hidden="true"><use href="#g-message"/></svg>Follow-ups you asked for</li>
+              </ul>
+
+              <div class="pd-phone">
+                <i class="dp-edge" style="--z:-2px;--i:-0.21px;--lt:0.019;--dk:0.001;--br:0.30"></i><i class="dp-edge" style="--z:-5px;--i:-0.45px;--lt:0.047;--dk:0.008;--br:0.51"></i><i class="dp-edge" style="--z:-8px;--i:-0.57px;--lt:0.095;--dk:0.021;--br:0.74"></i><i class="dp-edge" style="--z:-11px;--i:-0.54px;--lt:0.154;--dk:0.043;--br:0.93"></i><i class="dp-edge" style="--z:-14px;--i:-0.31px;--lt:0.200;--dk:0.073;--br:1.00"></i><i class="dp-edge" style="--z:-17px;--i:0.13px;--lt:0.207;--dk:0.112;--br:0.93"></i><i class="dp-edge" style="--z:-21px;--i:1.06px;--lt:0.154;--dk:0.179;--br:0.67"></i><i class="dp-edge" style="--z:-25px;--i:2.41px;--lt:0.077;--dk:0.262;--br:0.37"></i><i class="dp-edge" style="--z:-29px;--i:4.16px;--lt:0.026;--dk:0.364;--br:0.16"></i><i class="dp-edge" style="--z:-32px;--i:5.73px;--lt:0.009;--dk:0.452;--br:0.07"></i><i class="dp-edge dp-edge--back" style="--z:-35px;--i:7.5px"></i>
+                <div class="dp-device">
+                  <div class="dp-ph">
+                    <div class="dp-statusbar">
+                      <span>9:12</span>
+                      <span class="sigs">
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                        <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x="0.6" y="0.6" width="22.8" height="11.8" rx="3.5" stroke="currentColor" stroke-opacity=".4" stroke-width="1.1"/><rect x="2.2" y="2.2" width="19.6" height="8.6" rx="2" fill="currentColor"/><path d="M24.6 4.5v4a2 2 0 0 0 0-4z" fill="currentColor" fill-opacity=".4"/></svg>
+                      </span>
+                    </div>
+                    <div class="dp-topbar">
+                      <div class="side"><svg class="wm" viewBox="0 0 2700 900" aria-hidden="true"><use href="#wordmark"/></svg></div>
+                      <div class="mid">
+                        <span class="dp-facewrap"><span class="dp-face s30"><span data-ember="terracotta.peak.pill.none"></span></span><span class="dot"></span></span>
+                        <span class="dp-bartitle">Ember</span>
+                      </div>
+                      <div class="side right"></div>
+                    </div>
+                    <div class="dp-transcript">
+                      <div class="dp-scr is-on">
+                      <div class="dp-said pd-card is-in" data-card="0">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Dana</i>. <i>Are you free to talk on Tuesday?</i></p><p class="dp-before"><b>Draft reply</b> (to Dana):</p><p class="dp-after">&#9989; <b>Sent</b> (to Dana):</p><p>Tuesday after 2 works. I&rsquo;ll hold 2:30 and send the invite.</p></div></div>
+                          <div class="dp-fold"><div class="dp-actions">
+                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                          </div></div>
+                          <p class="dp-stamp">9:12 AM</p>
+                        </div>
+                      </div>
+                      <div class="dp-said pd-card" data-card="1">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-calendar"/></svg> <b>From your calendar</b> from <i>Bright Smile Dental</i>. <i>Please confirm your 9:00 tomorrow.</i></p><p class="dp-before"><b>Draft reply</b> (to Bright Smile Dental):</p><p class="dp-after">&#9989; <b>Sent</b> (to Bright Smile Dental):</p><p>Confirmed for 9:00 tomorrow. Thank you.</p></div></div>
+                          <div class="dp-fold"><div class="dp-actions">
+                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                          </div></div>
+                          <p class="dp-stamp">9:14 AM</p>
+                        </div>
+                      </div>
+                      <div class="dp-said pd-card" data-card="2">
+                        <span class="dp-face s28"><span data-ember="terracotta.peak.pill.none"></span></span>
+                        <div class="col">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-message"/></svg> <b>Follow-up</b> from <i>Todd</i>. <i>No reply about invoice 214 in 8 days.</i></p><p class="dp-before"><b>Draft reply</b> (to Todd):</p><p class="dp-after">&#9989; <b>Sent</b> (to Todd):</p><p>Quick nudge on invoice 214, due last Friday. Could you let me know when it will go out?</p></div></div>
+                          <div class="dp-fold"><div class="dp-actions">
+                            <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                            <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                          </div></div>
+                          <p class="dp-stamp">9:15 AM</p>
+                        </div>
+                      </div>
+                        <div class="dp-notice" aria-hidden="true"><div class="in">Sent &#9989;</div></div>
+                      </div>
+                    </div>
+                    <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="ph">Message Ember</span></div><div class="dp-knob">&uarr;</div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption>Three things come in: your inbox, your calendar, and the follow-ups you asked for. One draft comes out at a time, and it waits on the phone until you press Send. Press it, and the next one lands.</figcaption>
         </figure>
 
 
@@ -755,8 +825,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260918-28"></script>
-  <script src="../../js/ember.js?v=20260918-28" defer></script>
-  <script type="module" src="../../js/account-nav.js?v=20260918-28"></script>
+  <script src="../../js/nav.js?v=20260918-29"></script>
+  <script src="../../js/ember.js?v=20260918-29" defer></script>
+  <script src="../../js/drafts-scene.js?v=20260918-29" defer></script>
+  <script type="module" src="../../js/account-nav.js?v=20260918-29"></script>
 </body>
 </html>

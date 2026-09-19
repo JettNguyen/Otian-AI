@@ -178,7 +178,16 @@ in the morning, every arc and label drawn) has to be checked by a person. Two th
 build taught: a percent height inside a transformed plane resolves to nothing in WebKit, so
 Ember's box is a square made of width alone (padding, then the drawing filling it); and the
 near edge of a tilted plane grows under perspective, so the scene needs more room below the
-plane than a flat render shows. The concept list for the other pages is in the session
+plane than a flat render shows. The second scene is the **drafts scene on `archie/personal/`** (`.pd-figure`, the drafts
+scene section in `css/styles.css`, `js/drafts-scene.js`): the homepage's phone port standing
+on a turned floor, three stations queued behind it, one draft landing at a time as the app's
+own email card, and the reader's own Send is what lets the next one in. Two more lessons from
+it: **an object on a floor stands at its foot's depth**, not at zero, because rotateX brings
+the floor's near half toward the camera and a phone left at z 0 has the plane pass through
+it (Jett saw the grid over the buttons); and **the homepage's under-971px phone rules are bare
+`.dp-` selectors in a media block** (a shorter masked device, no status bar, square corners),
+so any other phone on the site has to say its whole shape with more weight or it loses its
+ends on a tablet. The concept list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the
 app's own meter, a card flip. Build one, judge it, then set the pace.

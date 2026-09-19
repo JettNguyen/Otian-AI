@@ -11080,6 +11080,9 @@ html[data-theme="dark"] .booking-container iframe {
   --accent: #EDA277;
   --accent-subtle: #533A27;
   --accent-ink: #F0AC80;
+  /* The app's green for a lit screen, not the page's: this phone is dark in both themes, and the
+     cream-page green (#679B55) is mixed for ink on paper. src/theme.ts, dark. */
+  --c-green: #8FC47B;
   --text-on-accent: #292624;
   --border: rgba(246, 242, 236, 0.14);
   --shadow-xs: none;
@@ -13548,7 +13551,20 @@ html[data-theme="dark"] .booking-container iframe {
   font-weight: 400;
   color: var(--text-primary);
 }
+.hm-pz-facewrap { position: relative; flex-shrink: 0; display: block; }
 .hm-pz-face { display: block; width: 26px; height: 26px; flex-shrink: 0; }
+/* The green bead the app puts on a running agent's face (`face(a, 30, { dot: true })` and
+   .facewrap .dot in archie-screen-kit.html, ported here): 30 percent of the face, hung off the
+   bottom-right corner, ringed in whatever is behind it so it reads as sitting on top rather than
+   as a hole. The ring is the wall and not a card, because the bar is painted straight onto the
+   wallpaper. Green rather than grey because the agent in this thread is answering. */
+.hm-pz-dot {
+  position: absolute; right: -1px; bottom: -1px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--hm-pz-wall);
+  background: var(--c-green);
+}
 
 /* The message bar gets the same hairline as the header, for the same reason and to the same
    edges. Without it the field was one more rounded shape at the bottom of a column of rounded
@@ -14108,6 +14124,14 @@ html[data-theme="dark"] .booking-container iframe {
   max-width: none;
   width: 100%;
   margin: 0;
+  /* On the phone the buttons are separated pills, each carrying its own fill, so the box that
+     holds them carries none: the base rule's card fill and shadow are the one-box drawing, and
+     left on underneath they showed through the 3px gaps and around the row as a plate. Overflow
+     goes back to visible with them, because the corners below are wider than this box's radius
+     and were being shaved. */
+  background: none;
+  box-shadow: none;
+  overflow: visible;
 }
 .hm-pz--hero .hm-msg-btn {
   padding: 7px 10px;
@@ -17530,13 +17554,23 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
    A CARD'S STATES ARE ON THE CARD, not on the screen as the homepage keys them, because this
    screen holds three cards in one thread and each is pressed on its own; the five rules below
-   are the homepage's, re-keyed. The notice stays the screen's. */
+   are the homepage's, re-keyed. The notice stays the screen's.
+
+   THE SCENE RUNS ITSELF, and a press by hand is still live (2026-09-18). It shipped waiting for
+   the reader's Send, and Jett read that as stuck ("it gets stuck on highlighting your inbox"):
+   the homepage's lesson again, a claim behind a click most readers never make. So the script
+   presses each Send itself after a hold, loops when the third is sent, and a hand press does the
+   same thing at once. */
 .pd-figure { max-width: 720px; margin: 0 auto; }
 .pd-scene { position: relative; width: 100%; aspect-ratio: 720 / 620; container-type: inline-size; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; }
 .pd-box { position: absolute; left: 0; top: 0; width: 720px; height: 620px; zoom: calc(100cqw / 720px); transform-style: preserve-3d; }
 @supports not (zoom: 1) { .pd-box { transform: scale(calc(100cqw / 720px)); transform-origin: 0 0; } }
 /* the floor */
-.pd-floor { position: absolute; left: 0; top: 300px; width: 720px; height: 420px; --fo: 1; }
+/* preserve-3d on the floor is what lets the plane's tilt reach the scene's perspective: without it
+   the floor is flat, the plane is projected into it with no camera, and the grid is a squashed
+   rectangle (Jett, 2026-09-18: "is the grid supposed to have perspective?"). The homepage floor
+   gets it from .day-layer. */
+.pd-floor { position: absolute; left: 0; top: 300px; width: 720px; height: 420px; --fo: 1; transform-style: preserve-3d; }
 .pd-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
 .pd-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); -webkit-mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); }
 .pd-paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }

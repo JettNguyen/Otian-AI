@@ -293,17 +293,19 @@
           <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You ask for your bills in a spreadsheet and it sends bills.xlsx into the chat, saying a copy is in your Archie folder. A text from Dana arrives with the reply already drafted, under Send, Edit it and Dismiss. You ask what the doctor said about your knee and it reads back the dated note. At ten to nine it says a promise is due today: the lease you told Todd you would send. You ask where you are on a passport renewal and it says step three of five and what comes next. Half an hour before a meeting with Sarah it sends the prep, including what she has asked about twice. And you ask about a table for four at Rosa&rsquo;s and it finds two times and asks before booking one.">
           <div class="hm-pz-head" aria-hidden="true">
             <img class="hm-pz-word" src="../assets/archie-text.svg" width="2300" height="900" alt="Archie" />
-            <span class="hm-pz-agent"><span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span><b>Ember</b></span>
+            <span class="hm-pz-agent"><span class="hm-pz-facewrap"><span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span><i class="hm-pz-dot"></i></span><b>Ember</b></span>
             <span class="hm-pz-who"><i>on your<br />computer</i></span>
           </div>
 
           <div class="hm-scenes" aria-hidden="true">
 
-              <!-- 1. A spreadsheet, written and sent. export.rs writes one of nine inert kinds (.xlsx among
-                 them), sends the file into the chat, and the instructions to the model are to say in
-                 one line what it is and that a copy is in the Archie folder. The list it reads is
+              <!-- 1. A spreadsheet, written and sent. export.rs writes one of eleven inert kinds (.xlsx
+                 among them), sends the file into the chat, and the instructions to the model are to say
+                 in one line what it is and that a copy is in the Archie folder. The list it reads is
                  Bills &amp; Subscriptions, which is why no mail is needed. TRUST.md, "What your agent
-                 can write to disk": never a PDF, never a folder of the model's choosing. -->
+                 can write to disk": the name is the model's and the folder never is. The caption used
+                 to end on "never a PDF", which was true until PDF and slide decks shipped on
+                 2026-09-16; the figure further down the page was updated that day and this was not. -->
               <div class="hm-scene" style="--s:0">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
@@ -473,7 +475,7 @@
           <!-- What each scene is showing, under the phone and never inside the thread: a line of
                explanation in a bubble is the app talking about itself. Same --s as the scene. -->
           <div class="hm-caps" aria-hidden="true">
-            <p class="hm-cap" style="--s:0">Ask for a file and it writes the real one and sends it to you. A spreadsheet, a Word document, a calendar file. Never a PDF, and nothing that runs.</p>
+            <p class="hm-cap" style="--s:0">Ask for a file and it writes the real one and sends it to you. A spreadsheet, a PDF, a slide deck. Eleven kinds, and nothing your computer would run.</p>
             <p class="hm-cap" style="--s:1">On a Mac, it reads a text as it lands and writes the reply. Nothing sends until you press Send.</p>
             <p class="hm-cap" style="--s:2">Tell it what the doctor said on the way out. It keeps a dated record and hands it back when you ask. It never gives medical advice.</p>
             <p class="hm-cap" style="--s:3">Every morning it re-reads your sent mail for promises you made, and says which one is due. A morning with nothing owed stays quiet.</p>

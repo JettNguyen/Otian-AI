@@ -1226,7 +1226,7 @@ did not write.
 - ⛔ **Never say the agent writes "into your folders"** or anywhere on your disk. It writes to one
   folder, and the location is not the model's to pick. The weaker-sounding claim is the true one
   and it is also the safer-sounding one, which is rare enough to be worth keeping.
-- The nine are what the *export tool* writes. This row says nothing about what an add-on or a
+- The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
 ### ✅ Add-ons are data, not code

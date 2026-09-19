@@ -324,7 +324,7 @@
            claim. Change --phone-mask's night stops, .day-phone's height or the nudge and these
            two numbers are solved again, not adjusted. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -119, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 223, z: 40, ry: -6, s: 1.05, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -101, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 227, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest
@@ -448,13 +448,21 @@
        leaves it, which at NP2's 1.22 and z 60 is 456 for today's 348. Change one and measure the
        other.
 
-       IT IS ELEVEN UNDER THAT, NOT NINE OVER, SINCE 2026-09-19. The caption band took 24 more
-       pixels for the room under the words, and rather than let the phone pay all of that the row
-       came in to where the box runs a few units past both ends. Those ends are the mask's own
-       fades, 59 units at the top and 46 at the bottom, so a dozen units of overrun sits inside the
-       part that is already dissolving. Do not push it much further: past the fade is a phone with
-       a cut end. */
-    var NARROW_H = 445;
+       IT IS TWENTY SIX UNDER THAT NOW, AND THE AIR IS WHY. The row is the only place the air
+       around the phone comes from: what is left over after the phone's solid band is split above
+       it and below it, so a row wider than the picture puts the same gap between the phone and
+       the clock as it puts between the phone and the caption. Both of those were asked to come
+       in on 2026-09-19 ("the mockups can move up closer to the time badge and the text captions
+       can move closer to the bottom of the mockups"), and the nudge cannot do it: it moves the
+       phone down one gap and up the other. Only the row can take from both at once, and 445 to
+       430 takes about five pixels off each on a phone.
+
+       WHAT STOPS IT GOING FURTHER IS THE MASK AND THE 2:00 AM STACK. The box runs past the row by
+       half the difference at each end, and those ends are the mask's own fades, 59 units at the
+       top and 46 at the bottom; past those is a phone with a cut end. And the one act that stacks
+       two objects is packed against the row's own edges, so every change here is re-solved there
+       (see act 5's narrow pose). */
+    var NARROW_H = 430;
     /* THE BAND UNDER THE SCENE IS AS TALL AS THE CAPTION IN IT, and the scene gets everything
        else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own 6 + 12, two
        numbers that have to agree. Measured off the caption being shown, which is why the narrow

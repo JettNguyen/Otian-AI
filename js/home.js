@@ -251,13 +251,23 @@
     /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
        each is rastered near the size it is seen. */
-    var W = { x: -60, y: -30, z: -140, ry: 12, s: 1.143, o: 1 }, PH = { x: 170, y: 30, z: 70, ry: -14, s: .857, o: 1 };
-    var W2 = { x: -150, y: -50, z: -240, ry: 18, s: 1.143, o: .5 }, PH2 = { x: 100, y: 10, z: 150, ry: -12, s: .943, o: 1 };
+    /* WHICH ONE IS IN FRONT CHANGES ACROSS THE DAY (2026-09-19). The window sat behind the phone in
+       every act, at a negative z in all seven, so the same diorama was photographed seven times and
+       the computer was always the thing at the back (Jett: "cycle between which mockups get the
+       front/bigger when each of them hold equal value in the shot"). Now the desk is shot from two
+       sides. W/PH is the computer's side of the day: the window near the camera and nearly its own
+       size, the phone clear of it and a little behind. W2/PH2 is the phone's: the phone forward and
+       the window back and turned. The morning, the night and the morning after are the computer's,
+       because what those three acts claim is on it; the hours in between are the phone's, because
+       that is where the reader is, and it reads as leaving the desk and coming back to it rather
+       than as a camera that cannot make up its mind. */
+    var W = { x: -86, y: -4, z: 0, ry: 10, s: .94, o: 1 }, PH = { x: 232, y: 2, z: -90, ry: -13, s: .96, o: 1 };
+    var W2 = { x: -126, y: -14, z: -190, ry: 16, s: 1.06, o: .5 }, PH2 = { x: 186, y: 2, z: 110, ry: -12, s: .90, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centered while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
-    var NW = { x: -108, y: -142, z: -300, ry: 14, s: .66, o: 1 }, NP = { x: 100, y: 44, z: 40, ry: -12, s: .86, o: 1 };
-    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: .7, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
+    var NW = { x: -108, y: -142, z: -300, ry: 14, s: 0.523, o: 1 }, NP = { x: 100, y: 44, z: 40, ry: -12, s: .86, o: 1 };
+    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: 0.555, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
@@ -267,7 +277,7 @@
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '1:40 pm', phone: '1:40', scr: 2,
-        pose: { cam: { rx: 2, ry: 3, s: 1.05 }, win: copy(W2, { x: -170, z: -260, ry: 20, o: .4 }), phone: copy(PH2, { x: 90, ry: 10, z: 160 }), night: 0, fc: 0, fs: 0 },
+        pose: { cam: { rx: 2, ry: 3, s: 1.05 }, win: copy(W2, { x: -96, ry: 19, o: .4 }), phone: copy(PH2, { ry: 10, z: 120 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: 2, s: 1 }, win: copy(NW2, { ry: 24 }), phone: copy(NP2, { ry: 8 }), night: 0, fc: 0, fs: 0 } },
       { mark: 'm-computer', state: 'idle', clock: '', phone: '1:40', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W2, { o: 0 }), phone: copy(PH2, { o: 0 }), night: 0, fc: 1, fs: 0 },
@@ -300,8 +310,8 @@
            Narrow they cannot stand side by side, because the phone is nearly the box's width by
            design, so they stack instead: the window up, the phone down, and the only thing the
            phone's masked band reaches is the window's own bottom padding. */
-        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -162 }), phone: copy(PH, { x: 208, s: .74 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -212, z: -320, ry: 16, s: 1, o: .9 }, phone: { x: 30, y: 165, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -212, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 165, z: 40, ry: -6, s: 1.1, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest
@@ -310,7 +320,7 @@
            Next, 7:00 AM" and this is that brief arriving. The clock reading 7:00 a second time
            is the payoff: same hour as the hero, and this time the list is in the past tense.
            Phone forward, window pushed back, and the night is off. */
-        pose: { cam: { rx: 4, ry: -9, s: 1.02 }, win: copy(W2, { ry: 14 }), phone: copy(PH2, { ry: -9 }), night: 0, fc: 0, fs: 0 },
+        pose: { cam: { rx: 4, ry: -9, s: 1.02 }, win: copy(W, { ry: 12, z: -10 }), phone: copy(PH, { ry: -9, z: -80, x: 226 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 3, ry: -6, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-s0', state: 'idle', clock: '', phone: '7:00', scr: -1,
         pose: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(W, { o: 0 }), phone: copy(PH, { o: 0 }), night: 0, fc: 0, fs: 1 },

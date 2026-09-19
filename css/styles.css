@@ -16516,9 +16516,26 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-beat.is-on { opacity: 1; transform: none; }
 
 /* ---- the Archie window: the desktop app's own surface, drawn at the size it is shown ---- */
-.day-win { width: 455px; height: 289px; margin: -145px 0 0 -228px; }
-.day-win .da-app { width: 1040px; height: 660px; zoom: .4375; }
-@supports not (zoom: 1) { .day-win .da-app { transform: scale(.4375); transform-origin: 0 0; } }
+/* A SMALLER WINDOW, DRAWN BIGGER (2026-09-19). The app was laid out at 1040 by 660 and shown at
+   .4375, so its 14px type landed between 7.3 and 7.5px on a 1440 screen: under the page's own
+   smallest type, and unreadable by the standard the rest of the site is held to (Jett: "the
+   mockups are just too small to read the text"). The fix is not a bigger picture, because the
+   picture is already as big as the column allows; it is FEWER LAYOUT PIXELS ACROSS THE SAME
+   PICTURE. 820 by 640 is a window somebody actually runs on a laptop, and at .70 the same drawing
+   carries 1.6 times the type. Everything in the page that could overflow already ellipsises, so
+   the narrowing degrades by clipping a label rather than by breaking a row; the sidebar came in
+   with it so the personality's name still fits its card whole.
+
+   The clean-fraction rule that used to hold here (.4375 times 1.143 is exactly a half) is gone and
+   was already gone: the fit multiplies everything by a number between .92 and 1.45 now, so nothing
+   in this chain lands on a half and the hairlines take their chances either way. */
+.day-win { width: 574px; height: 448px; margin: -224px 0 0 -287px; }
+.day-win .da-app { width: 820px; height: 640px; zoom: .70; }
+@supports not (zoom: 1) { .day-win .da-app { transform: scale(.70); transform-origin: 0 0; } }
+/* The sidebar comes in with the window, which is what a sidebar does when the window is narrow.
+   Scoped here and not on .da-side, because archie/business/ draws the same app at its full 1040 and
+   nothing about that window is narrow. */
+.day-win .da-side { width: 196px; }
 .da-app {
   /* The app's tokens, copied from archie-app-mockup.html, which copies src/styles/globals.css. */
   --bg-primary: #FCFAF8; --bg-secondary: #F5F3EF; --bg-secondary-veil: #F5F3EF8C; --bg-card: #FFFFFF;

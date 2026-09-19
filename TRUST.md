@@ -2078,6 +2078,46 @@ same tree check-facts.py counts, so any enumeration is checkable by a reader and
   anything." Any page inviting a reader to add many add-ons carries that ceiling or links to it.
 - ⛔ **Never lean a breadth claim on the connectors band.** Eight of those brands have never met a
   live key. Recognition is not capability.
+- ⛔ **Never put the catalog count on a page about Archie for Business.** Since 2026-09-18 the two
+  editions hold different catalogs (see the row below), so FACTS.md's number is the personal
+  edition's and printing it beside the business edition names a store that does not exist. A
+  business page enumerates, the way this row already asks everybody to.
+
+### ✅ Archie for Business's Marketplace holds only what a business can use
+
+**Added 2026-09-18, the day the split became real.** Until then both editions were sent the same
+catalog and the business store sorted the personal-life add-ons onto a second tab. Now they are not
+sent at all, which means "the business store does not carry the meal planner" went from a shelving
+habit to a fact about what arrives over the wire, and a fact is the kind of thing this file governs.
+
+**Approved wording:**
+- "Archie for Business's Marketplace holds the add-ons built for a team, plus everything a business
+  and a person can both use. The personal-life ones are not in it."
+- Naming what is out by enumeration: "no expense tracker, no meal planner, no workout log."
+
+**Why it's true**, in the Archie repo:
+- `EditionScope::listed_here` in `crates/archie-domain/src/marketplace.rs` answers `false` for a
+  `Personal` add-on in a business build. The edition is which binary somebody launched, not a
+  setting, so there is nothing to flip.
+- It is applied where the catalog is read, not where it is drawn: `src-tauri/src/commands/market.rs`,
+  `commands/routine.rs`, `commands/personality.rs`. What does not arrive cannot be searched,
+  counted, or reached by id, which is why the store's own code has no edition filter in it.
+- `each_scope_lists_in_its_own_edition_only` runs in both builds, so each edition proves its own
+  store rather than one build asserting something about the other.
+- The tags are in the catalog: 36 skills, 25 routines and 8 personalities carry `editions:
+  "personal"`.
+
+**Boundaries:**
+- ⛔ **Never "Archie for Business has fewer add-ons."** True and useless. It is the same catalog
+  with the home half taken out, not a smaller product, and the edition costs more.
+- ⛔ **Never say a business owner cannot get one.** They can run Archie, which is the edition those
+  add-ons were written for, and anything installed before today keeps running and updating. This
+  decides listing, not entitlement.
+- ⛔ **Never claim the reverse as new.** The personal store has never carried the team-shaped
+  add-ons, since the editions shipped. Only the personal half moved on 2026-09-18.
+- ⚠️ **Three travel and admin skills are deliberately in both**: Flight Check-In, Paperwork, and
+  Trip Planner. Business travel and business licensing are real, so a page must not say "nothing
+  personal" when it means "no personal-life add-ons".
 
 ### ✅ Calendar changes require your confirmation — SHIPPED, enforced in code (was ⛔ until 2026-07-20)
 

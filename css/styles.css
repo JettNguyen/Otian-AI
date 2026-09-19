@@ -17286,7 +17286,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      that are not on screen overflow it while they are invisible, which is what they are for.
      With no JavaScript the height is auto, the row resolves to the tallest caption again, and
      the old behaviour is back. */
-  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 12px; }
+  /* THE 36 UNDER THE WORDS IS THE ROOM OVER THEM, ROUGHLY (2026-09-19). The band sat 12 off the
+     bottom of the screen while the scene's row left about fifty above it, so the caption read as
+     pinned to the edge with a hole over it (Jett: "the text content should not be hugging the
+     bottom of the screen"). The scene's row gives the 24 up and the fit's own divisor gives some
+     of it back, so the mockups are within a few percent of the size they were. The driver reads
+     both numbers off this rule rather than carrying its own copy of them. */
+  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 36px; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
      them in the middle of the band puts the words under the scene without either a hole below them
@@ -17509,7 +17515,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 @media (max-width: 970px) and (max-height: 700px) {
   .day-stage { padding-top: calc(var(--nav-height) + 4px); }
   .day-clock { margin-bottom: 4px; }
-  .day-caps { padding: 2px 16px 8px; }
+  /* Less of it on a short screen, and not out of meanness: the scene's row is small there too, so
+     the room over the words is smaller and the room under them has to match it. */
+  .day-caps { padding: 2px 16px 20px; }
   .day-cap h1 { font-size: var(--fs-2xl); }
   .day-cap h2 { font-size: var(--fs-xl); }
   .day-cap .section-label { margin-bottom: 2px; }

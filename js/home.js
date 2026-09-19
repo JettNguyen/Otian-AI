@@ -446,14 +446,31 @@
        the window above the phone and runs over at both ends) and the masks are what make that
        read; what this number has to hold is .day-phone's box in the stylesheet as the projection
        leaves it, which at NP2's 1.22 and z 60 is 456 for today's 348. Change one and measure the
-       other. The nine units left over are air, and the fades take most of them. */
-    var NARROW_H = 465;
+       other.
+
+       IT IS ELEVEN UNDER THAT, NOT NINE OVER, SINCE 2026-09-19. The caption band took 24 more
+       pixels for the room under the words, and rather than let the phone pay all of that the row
+       came in to where the box runs a few units past both ends. Those ends are the mask's own
+       fades, 59 units at the top and 46 at the bottom, so a dozen units of overrun sits inside the
+       part that is already dissolving. Do not push it much further: past the fade is a phone with
+       a cut end. */
+    var NARROW_H = 445;
     /* THE BAND UNDER THE SCENE IS AS TALL AS THE CAPTION IN IT, and the scene gets everything
        else. The stylesheet's .day-caps carries why; CAPS_PAD is that rule's own 6 + 12, two
        numbers that have to agree. Measured off the caption being shown, which is why the narrow
        .day-cap is centered rather than stretched: a stretched caption reports the band's height
        back and the driver would be reading its own output. */
-    var CAPS_PAD = 18, capH = 0, capQ = '';
+    var CAPS_PAD = 18, capH = 0, capQ = '', capPadAt = '';
+    /* Read off .day-caps rather than typed here, because that rule's padding changes with the
+       screen and a driver carrying its own copy of it is two numbers that have to agree. Keyed on
+       the viewport, like the hero's beat heights: the answer only moves when a media query does. */
+    function capsPad(w, h) {
+      var key = Math.round(w) + 'x' + Math.round(h);
+      if (key === capPadAt || !capsEl) return;
+      capPadAt = key;
+      var cs = window.getComputedStyle(capsEl);
+      CAPS_PAD = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+    }
     function capsFit() {
       if (!capsEl || !caps.length) return;
       if (!narrow || still) {
@@ -475,6 +492,7 @@
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
+      capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       lastWrapH = wr.height;
       /* Read here, with the two rects, and written below with --sc: everything this frame reads

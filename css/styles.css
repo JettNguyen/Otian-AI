@@ -11047,45 +11047,54 @@ html[data-theme="dark"] .booking-container iframe {
 }
 
 /* Phone zoom-in around each chat mock */
-/* THE PHONE RUNS ITS OWN PALETTE, in both themes, and it is the same phone everywhere on the
-   site. This started on the hero's device: the wall was a page colour, so at 376px the phone was a
-   slightly different cream on the cream page and a slightly different charcoal on the dark one,
-   and the eye could not find an edge on it. A screen is not a surface of the page, it is a lit
-   thing standing on it.
+/* THE PHONE RUNS THE APP'S PALETTE AND FOLLOWS THE PAGE (2026-09-18, Jett's direction: the
+   mockup is light when the site is light). It used to be a dark device in both themes, and the
+   reason is worth keeping because it still governs the values below: the wall was a page colour,
+   so at 376px the phone was a slightly different cream on the cream page and a slightly different
+   charcoal on the dark one, and the eye could not find an edge on it. That was fixed by making
+   the screen dark everywhere. It is fixed here by the app's own light screen, which is #FCFAF8
+   against a #F5F1EB page, and by the two 12px rails of near-black bezel down the sides, which are
+   the edge and are dark in both themes because a phone's frame is.
 
-   It lived on .hm-pz--hero for a day and that was worse, not better: the hero opened on a dark
-   device and then the day spine, four screens down, showed the same product on a cream one. Two
-   drawings of one object on one page is the same failure as calling an agent a bot three sentences
-   later, and it is more obvious, because a reader does not have to read anything to see it. So the
-   island lives here and every phone on the site is that phone.
+   The homepage's phone came across the same way earlier the same day (see .dp-ph below, and the
+   note on its light set): archie-mobile shipped a theme picker in its commit f208e08, so a light
+   screen is a thing the app really does, which is the rule every mockup on this site is held to.
+   This one was the last object still arguing with the page around it.
 
-   Everything below is the set of tokens the phone's contents read, re-pointed at that ground: the
-   site's own dark-theme values where there is one, because those were already measured against a
-   dark ground, and a warmer wall than the dark theme's neutral, because a phone screen at arm's
-   length is warm and the page around it is too.
+   Everything below is the set of tokens the phone's contents read, pointed at the app's own
+   values rather than the site's. They are close, because the site's palette came from the app's,
+   and where they differ the app wins: this is a drawing of the app.
 
    Measured, since scripts/check-contrast.mjs only reads :root and [data-theme="dark"] and cannot
-   see a scoped block like this one: cream on a bubble is 11.7:1, cream on a sent bubble 9.0:1, the
-   timestamps 6.0:1 on the wall, a button's label 6.9:1, and the accent on a chosen button 5.3:1.
-   The send button keeps the shipped dark pairing (--text-on-accent on --accent) untouched. */
+   see a scoped block like this one. Light: ink on a bubble is 10.3:1, ink on a sent bubble 8.4:1,
+   the timestamps 5.3:1 on the wall, a button's label 4.8:1 on its pill, and the accent ink on a
+   chosen button 5.4:1. Dark: cream on a bubble is 10.4:1, cream on a sent bubble 9.0:1, the timestamps 6.0:1 on
+   the wall, a button's label 6.9:1, and the accent on a chosen button 5.3:1. The send button
+   keeps each theme's shipped pairing (--text-on-accent on --accent) untouched. */
 .hm-pz {
-  --hm-pz-wall: #211E1C;
+  --hm-pz-wall: #FCFAF8;
+  /* The frame, and it does not follow the page. A phone's edge is dark metal in a lit room too,
+     and on the cream page these two rails are the whole of the device's edge. */
   --hm-pz-bezel: #0E0D0C;
   --hm-pz-rim: rgba(247, 243, 238, 0.22);
-  --hm-pz-glow: rgba(224, 138, 91, 0.20);
-  --bg-card: #322D29;
-  --text-primary: #F6F2EC;
-  --text-secondary: #C4BCB2;
-  --text-muted: #A29A91;
-  --accent: #EDA277;
-  --accent-subtle: #533A27;
-  --accent-ink: #F0AC80;
-  /* The app's green for a lit screen, not the page's: this phone is dark in both themes, and the
-     cream-page green (#679B55) is mixed for ink on paper. src/theme.ts, dark. */
-  --c-green: #8FC47B;
-  --text-on-accent: #292624;
-  --border: rgba(246, 242, 236, 0.14);
-  --shadow-xs: none;
+  /* Half the dark screen's, because the same wash that reads as a lit wall behind dark bubbles
+     reads as a peach tint on a near-white one. It still has to be gone before the bubbles start,
+     for the tail reason below. */
+  --hm-pz-glow: rgba(224, 138, 91, 0.10);
+  --bg-card: #FFFFFF;
+  --text-primary: #44403B;
+  --text-secondary: #69645D;
+  --text-muted: #6D6861;
+  --accent: #E08A5B;
+  --accent-subtle: #FBE4D3;
+  --accent-ink: #884E30;
+  --c-green: #679B55;
+  --text-on-accent: #2A2521;
+  --border: #EAE6E1;
+  /* No override in light, deliberately. The app separates an incoming bubble from the wall with a
+     hairline border; this one cannot carry a border, because the tail is drawn by two blocks
+     bridging the corner and a border would outline them too (see .hm-bubble). So the page's own
+     --shadow-xs does that work, which is the same trade the vg bubbles on see-it-work make. */
   position: relative; z-index: 1;
   max-width: 384px; margin: 0 auto;
   padding: 40px 30px;
@@ -11112,19 +11121,34 @@ html[data-theme="dark"] .booking-container iframe {
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
   mask-image: linear-gradient(to bottom, transparent, #000 34px, #000 calc(100% - 34px), transparent);
 }
-/* Dark mode needs the phone the other way up. The palette above is a lit screen, which on the
-   cream page is the darkest thing in the figure and needs no help separating; on the dark page it
-   was three hundredths off the ground behind it and the device had no edge. So the wall lifts a
-   step, the bubble lifts with it to keep their relationship, and the rim goes from a suggestion to
-   a hairline of light along the sides, which is what the edge of a phone in a dim room does.
-   Contrast inside is unchanged or better: cream on the lifted bubble is 10.4:1. */
+/* The dark screen, and it is NOT the app's dark values straight across, which is the one place
+   this drawing departs from the app on purpose. The app's dark --bg is #1A1A19 and so is this
+   site's dark page, so a phone painted in it is three hundredths off the ground behind it and has
+   no edge at all. The wall lifts a step and the bubble lifts with it to keep their relationship,
+   and the rim goes from a suggestion to a hairline of light along the sides, which is what the
+   edge of a phone in a dim room does. The ink is warmer than the light set's for the same reason
+   the homepage phone's is: a thin light stroke on a dark ground loses coverage to antialiasing at
+   the size these screens are drawn.
+
+   Everything here was measured against this ground, not the app's: cream on the lifted bubble is
+   10.4:1. */
 [data-theme="dark"] .hm-pz {
   --hm-pz-wall: #272321;
   --hm-pz-bezel: #131211;
   --hm-pz-rim: rgba(247, 243, 238, 0.34);
   --hm-pz-glow: rgba(224, 138, 91, 0.16);
   --bg-card: #38322E;
+  --text-primary: #F6F2EC;
+  --text-secondary: #C4BCB2;
+  --text-muted: #A29A91;
+  --accent: #EDA277;
   --accent-subtle: #5A4029;
+  --accent-ink: #F0AC80;
+  --c-green: #8FC47B;
+  --text-on-accent: #292624;
+  --border: rgba(246, 242, 236, 0.14);
+  /* A cast shadow under a bubble is a light-room thing; in the dark the lift is the fill. */
+  --shadow-xs: none;
 }
 .hm-msg {
   text-align: left; font-size: var(--fs-base);
@@ -13441,16 +13465,9 @@ html[data-theme="dark"] .booking-container iframe {
    different charcoal. At hero size that is a 376px rectangle the eye cannot find an edge on, and
    no amount of writing inside it fixes that.
 
-   A screen is not a surface of the page, it is a lit thing standing on it, so this one is dark and
-   stays dark whichever theme is on. Everything below is the set of tokens the phone's contents
-   actually read, re-pointed at that ground: the site's own dark-theme values where there is one,
-   because they were already measured against a dark ground, and a warmer wall than the dark
-   theme's neutral because a phone screen at arm's length is warm and the page around it is too.
-
-   Measured, since scripts/check-contrast.mjs only reads :root and [data-theme="dark"] and cannot
-   see a scoped block like this one: cream on a bubble is 11.7:1, cream on a sent bubble 9.0:1,
-   the timestamps 6.0:1 on the wall, a button's label 6.9:1, and the accent on a chosen button
-   5.3:1. The send button keeps the shipped dark pairing (--text-on-accent on --accent) untouched.
+   A screen is not a surface of the page, it is a lit thing standing on it, and until 2026-09-18
+   that meant dark in both themes. It is the app's own screen now, following the page, and the
+   edge comes from the bezel rails instead; the palette and the measured ratios are on .hm-pz.
 
    THE WALL HAS TO STAY FLAT WHERE THE BUBBLES ARE. The tails are drawn by covering the corner
    with a patch of --hm-pz-wall, so a gradient down there shows as a notch. Same rule as .hm-pz,
@@ -16646,9 +16663,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      gen-phone-mocks.py draws, so the live phone was the last object on the stage still arguing
      with the page around it.
 
-     .hm-pz on how-it-works/ is NOT this and did not change: it is a drawn conversation on a dark
-     device in both themes, with its own measured ratios and the reasoning above it. Leaving it is
-     a decision, not an oversight, and the paragraph there is the one to read before touching it.
+     .hm-pz on how-it-works/ followed the same evening, at Jett's ask, and for the same reason.
+     It keeps its own dark values rather than the app's, because the app's dark --bg is this
+     site's dark page and a phone painted in it has no edge; the paragraph there says so.
 
      The light values are the app's own, straight across. The lifts are its liftLight, with the
      radius doubled the way the dark ones already double liftDark's: RN's shadowRadius is about
@@ -17572,7 +17589,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    gets it from .day-layer. */
 .pd-floor { position: absolute; left: 0; top: 300px; width: 720px; height: 420px; --fo: 1; transform-style: preserve-3d; }
 .pd-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
-.pd-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); -webkit-mask-image: radial-gradient(ellipse at 60% 70%, #000 45%, transparent 82%); }
+.pd-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
 .pd-paths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .pd-paths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .pd-paths path.dashed { stroke-dasharray: 5 6; }

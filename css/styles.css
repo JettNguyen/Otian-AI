@@ -18047,7 +18047,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    hiring dial and the drafts scene (Jett, 2026-09-18: each page its own scene, the same brand),
    and the one the editions rule asked for: Personal had a scene and Business a flat drawing.
 
-   THE SAME RECIPE AS THE DRAFTS SCENE: a box drawn at one size (720 by 620 wide, 400 by 560
+   THE SAME RECIPE AS THE DRAFTS SCENE: a box drawn at one size (720 by 620 wide, 400 by 640
    narrow), scaled to its column by a transform that js/ring-scene.js measures (--pk; a transform,
    never zoom, because the box is the root of the 3D context and WebKit will not carry one
    through zoom), a floor laid back 58 degrees with things standing on it counter-rotated about
@@ -18157,21 +18157,29 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 }
 @media (max-width: 640px) {
   /* Narrow, the floor goes flat and the ring is a row: the window on top, the three phones under
-     it with their names, and the agents standing where the two meet. The box is redrawn. */
-  .bz-scene { aspect-ratio: 400 / 560; perspective: none; }
-  .bz-box { width: 400px; height: 560px; }
-  .bz-floor { top: 0; width: 400px; height: 560px; }
+     it with their names, the agents standing where the two meet, and the lanes running up from
+     each phone's top edge to the agents' feet, so the message is seen leaving and coming back
+     here too. The box is redrawn. The lanes were hidden until 2026-09-19, the same fault the two
+     desks had, and the phones stand 80 lower than they did to give the lanes their length. */
+  .bz-scene { aspect-ratio: 400 / 640; perspective: none; }
+  .bz-box { width: 400px; height: 640px; }
+  .bz-floor { top: 0; width: 400px; height: 640px; }
   .bz-plane { transform: none; }
-  .bz-grid, .bz-paths, .bz-ball { display: none; }
+  .bz-grid { display: none; }
+  .bz-paths .bz-w { display: none; }
+  .bz-paths .bz-n { display: inline; }
+  .bz-ball[data-ball="0"] { offset-path: path('M70,344 C70,306 112,286 128,276'); }
+  .bz-ball[data-ball="1"] { offset-path: path('M200,344 C200,320 200,296 200,276'); }
+  .bz-ball[data-ball="2"] { offset-path: path('M330,344 C330,306 288,286 272,276'); }
   .bz-stand { transform: translate(-50%, -100%); }
   .bz-win { --fx: 200px; --fy: 232px; --wz: .34; }
   .bz-phone { --ps: .40; }
-  [data-o="sam"] { --fx: 200px; --fy: 486px; }
-  [data-o="dana"] { --fx: 70px; --fy: 486px; }
-  [data-o="todd"] { --fx: 330px; --fy: 486px; }
-  [data-o="l-sam"] { --fx: 200px; --fy: 526px; }
-  [data-o="l-dana"] { --fx: 70px; --fy: 526px; }
-  [data-o="l-todd"] { --fx: 330px; --fy: 526px; }
+  [data-o="sam"] { --fx: 200px; --fy: 566px; }
+  [data-o="dana"] { --fx: 70px; --fy: 566px; }
+  [data-o="todd"] { --fx: 330px; --fy: 566px; }
+  [data-o="l-sam"] { --fx: 200px; --fy: 606px; }
+  [data-o="l-dana"] { --fx: 70px; --fy: 606px; }
+  [data-o="l-todd"] { --fx: 330px; --fy: 606px; }
   [data-o="e-one"] { --fx: 200px; --fy: 262px; width: 60px; }
   [data-o="e-dana"] { --fx: 128px; --fy: 258px; width: 48px; }
   [data-o="e-sam"] { --fx: 200px; --fy: 258px; width: 48px; }
@@ -18189,6 +18197,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    drafts scene and the ring of phones, and the one whose flat drawing he named first.
 
    THE SAME RECIPE AS THE DRAFTS SCENE AND THE RING: a box drawn at one size (720 by 420 wide,
+/* the lanes, one per phone and one set per composition, in the stylesheet so narrow can have
+   its own; the svg draws the same paths and hides the set that is not in use */
+.bz-ball[data-ball="0"] { offset-path: path('M92,102 C92,260 90,405 250,410 C380,414 470,400 518,380'); }
+.bz-ball[data-ball="1"] { offset-path: path('M360,14 C470,18 548,80 550,190 C552,300 540,348 522,378'); }
+.bz-ball[data-ball="2"] { offset-path: path('M628,102 C628,220 600,332 526,376'); }
+.bz-paths .bz-n { display: none; }
    400 by 440 narrow), fitted to its column by a transform that js/desk-scene.js measures (--pk),
    a floor laid back 58 degrees, and every object placed by a data-o name so the narrow layout is
    a second composition (their desk at the back, yours in front) and not the wide one shrunk.

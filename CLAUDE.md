@@ -241,8 +241,9 @@ panel's width but not the panel's height, which stands along the floor's normal,
 screen came out square on a two-thirds base. And **the wires are drawn once per composition**,
 each out of a computer's side and around the open screen, with the tower far enough back that its
 wire starts above the screen's top edge; narrow hid them at first, and a comparison of two wires
-with the wires hidden is not one (the ring of phones still hides its lanes narrow, and is next
-for the same treatment). The concept
+with the wires hidden is not one. The ring of phones had hidden its lanes narrow the same way,
+and got its own the same day: three short lanes up from the phones' top edges to the agents'
+feet, with the phones stood 80 lower to give them their length. The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

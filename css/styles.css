@@ -16425,7 +16425,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
    The unfilled half is the border colour, so at rest it reads as a rule and not as an empty
    meter. Same linear-gradient-with-a-custom-property fill as .mb-rail on archie/mobile/. */
-.day-rail { position: absolute; top: calc(var(--nav-height) + 2px); left: 0; right: 0; z-index: 5; display: flex; gap: 3px; height: 2px; pointer-events: none; }
+.day-rail { position: absolute; top: var(--nav-height); left: 0; right: 0; z-index: 5; display: flex; gap: 3px; height: 2px; pointer-events: none; }
 .day-rail i { flex: 1 1 0; background: linear-gradient(90deg, var(--accent) calc(var(--f, 0) * 100%), var(--border) 0); }
 /* Night, the same swap the rest of the stage makes: the border colour is a light-theme line and
    goes to nothing on the dark ground, and the accent is the one the night captions use. */
@@ -16467,7 +16467,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    objects use the whole screen width and are never cut off; the poses for this box are the narrow
    set in js/home.js. The floors turn a quarter, so both laps run toward the camera. */
 @media (max-width: 970px) {
-  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 0 0; align-items: stretch; min-height: 0; }
+  /* The 12 over the nav is the rail's clearance, and it was 4 until 2026-09-18. The clock badge
+     is the first row here, so it began exactly where the rail ended, and --shadow-sm's second
+     layer (0 7px 14px -3px) reaches about four pixels ABOVE the thing casting it, which laid a
+     soft edge over the line (Jett: covered very slightly). The rail sits flush under the nav now
+     and the row starts eight pixels lower, which is six clear of the shadow. It costs the scene
+     eight pixels of height, and js/home.js fits the scene to whatever the row is, so nothing
+     else moves. --clock-row is the badge's own height and is unchanged. */
+  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
      phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
      same size in every act; the scene slides up over half of it then, so it is centered in the

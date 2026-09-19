@@ -9006,6 +9006,44 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-muted);
 }
 
+/* A review that runs longer than a paragraph. The grid it sits in is three columns, so
+   one long review left alone becomes a column of about twenty words a line and four
+   screens tall, which is the shape nobody reads. It takes the whole row instead and
+   holds its own measure, and only the first paragraph keeps --fs-lg: 250 words at that
+   size is a page of large type, and the size stops meaning "read this first". */
+.review-card--long {
+  grid-column: 1 / -1;
+}
+
+.review-card--long blockquote {
+  max-width: 68ch;
+}
+
+.review-card--long blockquote p {
+  font-size: var(--fs-base);
+  margin: 0 0 16px;
+}
+
+.review-card--long blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.review-card--long .review-lede {
+  font-size: var(--fs-lg);
+}
+
+/* His own two headings, kept because they are his. Small and lettered so they read as
+   the writer's own divisions and not as ours: a section heading in the page's own type
+   would put our voice inside somebody else's quote. */
+.review-card--long .review-head {
+  margin: 26px 0 10px;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
 /* ==============================
    38. Account billing badge
    ============================== */
@@ -16864,4 +16902,122 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .mb-node--box { --nx: 200px; }
   .mb-node--ph { --nx: 334px; --ny: 196px; }
   .mb-node--ph .day-ico { display: block; }
+}
+
+/* ── The day dial (compare/hiring-an-assistant/) ──
+   One day as a clock face lying on a turned plane, the first comparison staged rather than
+   diagrammed (Jett, 2026-09-18: each page its own scene, the same brand). Midnight is the far
+   edge and noon the near one, so the working day is nearest the reader. The plane lies back
+   56 degrees and everything that stands on it is counter-rotated about its own feet, the way
+   the homepage floor's cards stand. Positions come in as --x and --y, percent of the plane, so
+   the scene scales with its column and nothing is placed by viewport arithmetic. The hand sweeps
+   a day in 24 seconds; Ember walks the rim while the computer is on, the person is at their
+   desk for their hours, and a beat lights as the hand passes it. At rest it is eight in the
+   morning, with every arc, beat and label drawn, which is the whole claim without the motion. */
+.hd-figure { max-width: 720px; margin: 0 auto; }
+.hd-scene { --tilt: 56deg; --lr: 49%; position: relative; width: 100%; aspect-ratio: 720 / 430; perspective: 1000px; perspective-origin: 50% 20%; overflow: hidden; }
+/* The plane is square by padding rather than aspect-ratio, so its children can resolve percent
+   heights against it: Ember is a square box sized in percent of the plane, and an aspect-ratio
+   height is one WebKit will not let a child measure. */
+.hd-plane { position: absolute; left: 14%; top: -14%; width: 72%; height: 0; padding-bottom: 72%; transform: rotateX(var(--tilt)); transform-style: preserve-3d; }
+.hd-dial { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hd-face { fill: var(--bg-card); stroke: var(--border); stroke-width: 1.5; }
+.hd-ticks line { stroke: var(--line-muted); stroke-width: 1.5; stroke-linecap: round; }
+.hd-hour { fill: var(--text-muted); font-size: 12px; font-weight: 600; text-anchor: middle; }
+.hd-arc { fill: none; stroke-linecap: round; }
+.hd-arc--agent { stroke: var(--accent); stroke-width: 10; }
+.hd-arc--person { stroke: var(--line-muted); stroke-width: 10; }
+.hd-arc--off { stroke: var(--line-soft); stroke-width: 4; stroke-dasharray: 2 8; }
+.hd-dot { stroke: var(--bg-card); stroke-width: 2.5; }
+.hd-dot--agent { fill: var(--accent); }
+.hd-dot--person { fill: var(--text-muted); }
+.hd-hand line { stroke: var(--text-primary); stroke-width: 2.5; stroke-linecap: round; }
+.hd-hand circle { fill: var(--text-primary); }
+.hd-hand { transform-origin: 200px 200px; transform: rotate(90deg); }
+/* standing things: their feet at (--x, --y) on the plane, their bodies turned to face the camera */
+.hd-stand { --r: var(--lr); position: absolute; left: calc(50% + var(--ux) * var(--r)); top: calc(50% + var(--uy) * var(--r)); transform: translate(-50%, -100%) rotateX(calc(-1 * var(--tilt))); transform-origin: 50% 100%; text-align: center; white-space: nowrap; pointer-events: none; }
+.hd-stand b { display: block; font-size: clamp(10px, 2.4vw, 13px); font-weight: 600; color: var(--text-primary); }
+.hd-stand i { display: block; font-style: normal; font-size: clamp(9px, 2vw, 11px); color: var(--text-muted); }
+.hd-beat b { padding: 4px 9px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.hd-beat--agent b { color: var(--accent-ink); border-color: var(--accent); }
+.hd-beat { opacity: .82; }
+.hd-person { --r: 21%; opacity: .9; }
+.hd-asleep { --r: 30%; }
+.hd-person svg { display: block; width: clamp(26px, 6vw, 44px); height: auto; margin: 0 auto 2px; fill: none; stroke: var(--text-secondary); stroke-width: 1.6; stroke-linecap: round; }
+.hd-asleep i { font-size: clamp(8px, 1.6vw, 11px); }
+.hd-walk { position: absolute; left: 81.45%; top: 70.42%; width: 21%; transform: translate(-50%, -92%) rotateX(calc(-1 * var(--tilt))); transform-origin: 50% 100%; }
+/* Ember's box is a square made of width alone (padding, then the drawing filling it), because a
+   percent height inside the transformed plane resolved to nothing and drew Ember as a flat oval. */
+.hd-ember { display: block; position: relative; width: 100%; height: 0; padding-bottom: 100%; }
+.hd-ember svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hd-shadow { position: absolute; left: 81.45%; top: 70.42%; width: 11%; height: 4%; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(0,0,0,.16), transparent 70%); transform: translate(-50%, -50%); }
+.hd-legend { display: flex; justify-content: center; gap: 18px; margin: 6px 0 0; padding: 0; list-style: none; font-size: var(--fs-2xs); color: var(--text-muted); }
+.hd-legend b { font-weight: 500; }
+.hd-legend span { display: none; }
+.hd-legend li { display: flex; align-items: center; gap: 6px; }
+.hd-legend li::before { content: ""; width: 16px; height: 5px; border-radius: 3px; background: var(--line-muted); }
+.hd-legend .hd-legend--agent::before { background: var(--accent); }
+.hd-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
+@media (max-width: 640px) {
+  /* Narrow, the beats come off the plane and into the key under it: six standing labels on an
+     82% plane overlapped each other and the person, and a label read at 10px on a phone was
+     not a label. The dial keeps its arcs, its dots, the person and Ember. */
+  .hd-scene { --tilt: 44deg; aspect-ratio: 1 / 0.8; perspective: 700px; }
+  .hd-plane { left: 6%; top: -9%; width: 88%; padding-bottom: 88%; }
+  .hd-person { --r: 14%; }
+  .hd-beat, .hd-person i { display: none; }
+  .hd-legend { flex-direction: column; align-items: stretch; gap: 8px; margin-top: 4px; padding: 0 4px; }
+  .hd-legend li { display: grid; grid-template-columns: 16px 1fr; align-items: start; gap: 4px 8px; }
+  .hd-legend li::before { margin-top: 5px; }
+  .hd-legend b { display: block; color: var(--text-secondary); font-weight: 600; }
+  .hd-legend span { display: block; grid-column: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hd-hand { animation: hd-hand 24s linear infinite; }
+  @keyframes hd-hand { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .hd-walk, .hd-shadow { animation: hd-walk 24s linear infinite, hd-on 24s linear infinite; }
+  @keyframes hd-walk {
+  0.000% { left: 50.00%; top: 12.50%; }
+  4.167% { left: 59.71%; top: 13.78%; }
+  8.333% { left: 68.75%; top: 17.52%; }
+  12.500% { left: 76.52%; top: 23.48%; }
+  16.667% { left: 82.48%; top: 31.25%; }
+  20.833% { left: 86.22%; top: 40.29%; }
+  25.000% { left: 87.50%; top: 50.00%; }
+  29.167% { left: 86.22%; top: 59.71%; }
+  33.333% { left: 82.48%; top: 68.75%; }
+  37.500% { left: 76.52%; top: 76.52%; }
+  41.667% { left: 68.75%; top: 82.48%; }
+  45.833% { left: 59.71%; top: 86.22%; }
+  50.000% { left: 50.00%; top: 87.50%; }
+  54.167% { left: 40.29%; top: 86.22%; }
+  58.333% { left: 31.25%; top: 82.48%; }
+  62.500% { left: 23.48%; top: 76.52%; }
+  66.667% { left: 17.52%; top: 68.75%; }
+  70.833% { left: 13.78%; top: 59.71%; }
+  75.000% { left: 12.50%; top: 50.00%; }
+  79.167% { left: 13.78%; top: 40.29%; }
+  83.333% { left: 17.52%; top: 31.25%; }
+  87.500% { left: 23.48%; top: 23.48%; }
+  91.667% { left: 31.25%; top: 17.52%; }
+  95.833% { left: 40.29%; top: 13.78%; }
+  100.000% { left: 50.00%; top: 12.50%; }
+  }
+  @keyframes hd-on { 0.000% { opacity: 0; } 19.167% { opacity: 0; } 20.833% { opacity: 1; } 104.167% { opacity: 1; } 105.833% { opacity: 0; } 100.000% { opacity: 0; } }
+  .hd-ember { animation: hd-step .5s ease-in-out infinite; }
+  @keyframes hd-step { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4%); } }
+  .hd-person { animation: hd-person 24s linear infinite; }
+  @keyframes hd-person { 0.000% { opacity: 0.22; } 35.833% { opacity: 0.22; } 37.500% { opacity: 1; } 70.833% { opacity: 1; } 72.500% { opacity: 0.22; } 100.000% { opacity: 0.22; } }
+  .hd-beat-0 { animation: hd-beat-0 24s linear infinite; }
+  @keyframes hd-beat-0 { 0.000% { opacity: 0.32; } 21.458% { opacity: 0.32; } 22.500% { opacity: 1; } 31.667% { opacity: 1; } 34.167% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
+  .hd-beat-1 { animation: hd-beat-1 24s linear infinite; }
+  @keyframes hd-beat-1 { 0.000% { opacity: 0.32; } 40.625% { opacity: 0.32; } 41.667% { opacity: 1; } 50.833% { opacity: 1; } 53.333% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
+  .hd-beat-2 { animation: hd-beat-2 24s linear infinite; }
+  @keyframes hd-beat-2 { 0.000% { opacity: 0.32; } 57.292% { opacity: 0.32; } 58.333% { opacity: 1; } 67.500% { opacity: 1; } 70.000% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
+  .hd-beat-3 { animation: hd-beat-3 24s linear infinite; }
+  @keyframes hd-beat-3 { 0.000% { opacity: 0.32; } 65.625% { opacity: 0.32; } 66.667% { opacity: 1; } 75.833% { opacity: 1; } 78.333% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
+  .hd-beat-4 { animation: hd-beat-4 24s linear infinite; }
+  @keyframes hd-beat-4 { 0.000% { opacity: 0.32; } 80.208% { opacity: 0.32; } 81.250% { opacity: 1; } 90.417% { opacity: 1; } 92.917% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
+  .hd-beat-5 { animation: hd-beat-5 24s linear infinite; }
+  @keyframes hd-beat-5 { 0.000% { opacity: 0.32; } 91.875% { opacity: 0.32; } 92.917% { opacity: 1; } 102.083% { opacity: 1; } 104.583% { opacity: 0.32; } 100.000% { opacity: 0.32; } }
 }

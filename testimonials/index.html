@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260918-22" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260918-23" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -160,11 +160,121 @@
       <div class="page-hero-inner">
         <span class="section-label fade-up">Use cases and client feedback</span>
         <h1 class="fade-up delay-1">What an agent can take off your week.</h1>
-        <p>Examples of the jobs an agent can handle. Client reviews will appear here once we have permission to publish them.</p>
+        <p>What our clients say, word for word, and the jobs an agent takes over.</p>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="successes-heading">
+    <!-- ==============================
+         Reviews (hand-maintained)
+         ==============================
+
+         TO ADD A REVIEW: copy the template below into the review grid,
+         fill in the quote and the attribution line, and commit.
+         Keep quotes verbatim; mark any trims with [&hellip;].
+         Publish only with the client's permission, and never add claims
+         on their behalf that we couldn't make ourselves (see TRUST.md).
+
+         <article class="feature-card review-card">
+           <blockquote>
+             <p>&ldquo;The review text goes here, word for word.&rdquo;</p>
+           </blockquote>
+           <p class="review-attrib">First name or initials &middot; e.g. guided-setup client</p>
+         </article>
+
+         A LONG REVIEW: a review that runs past a paragraph, or carries
+         headings of its own, takes .review-card--long and drops the outer
+         &ldquo;&rdquo;. Quote marks around six paragraphs read as a mistake,
+         and the card already says whose words these are. Everything else is
+         unchanged: verbatim, trims marked, permission first.
+
+         WHICH GRID: there are two, and a review goes in exactly one.
+         #aud-grid-personal is for a review from somebody running Archie for
+         themselves; #aud-grid-team is for one from a business. If you cannot
+         tell from the attribution line which it is, the attribution line is
+         not finished. Split added 2026-09-14: the two audiences were reading
+         one undifferentiated wall and neither could find itself in it.
+
+         THE TEST IS THE SETUP, NOT THE SUBJECT, and the first review is the
+         one that shows why. Patrick's headline example is his business's
+         failed card payments, and he still sits under "From one person": one
+         person, one agent, his own mail, his own day, no shared mailbox and
+         nobody else to answer to. "From a team" is the Owed to Customers
+         shape, where the agent sweeps mail several people share. Filing him
+         by what he does for a living rather than by how he runs it would put
+         a solo reader in front of an empty tab and tell a team something
+         untrue about what it was buying.
+
+         DONE 2026-09-18, when the first review went in: the "collecting
+         reviews" lede came off the heading, the personal grid's empty state
+         became the review, and this section moved back above "What a
+         well-built agent actually does" with the two section-alt classes
+         swapped so the bands still alternate. The team grid keeps its empty
+         state until it fills.
+         ============================== -->
+    <section class="section" aria-labelledby="reviews-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="reviews-heading" class="fade-up">In their words.</h2>
+          <p>Published with permission, word for word, under the audience each one came from. Coleman is the name Patrick gave the agent Archie runs for him; you name your own.</p>
+        </div>
+
+        <!-- Two radios and no script, the same pattern the cost picker on archie/pricing/ uses:
+             the checked one lights its tab and shows its grid through sibling selectors, and
+             with CSS off it is two labelled lists stacked. The inputs are hidden the accessible
+             way, so the group still takes focus and the arrow keys still move between the tabs.
+             Personal is checked because it is the larger audience, not because it matters more. -->
+        <div class="aud-pick fade-up delay-1">
+          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-personal" checked />
+          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-team" />
+          <div class="aud-pick-tabs" role="group" aria-label="Whose reviews to show">
+            <label class="aud-pick-tab" for="aud-personal">From one person</label>
+            <label class="aud-pick-tab" for="aud-team">From a team</label>
+          </div>
+          <div class="aud-pick-out" aria-live="polite">
+            <div class="aud-pick-panel" data-aud="personal">
+              <div class="feature-grid" id="aud-grid-personal">
+                <!-- The first review Otian ever published, 2026-09-18. Word for word, nothing
+                     trimmed, and no outer quote marks: it runs to six paragraphs with two
+                     headings of its own, and a pair of curly quotes wrapped around all of that
+                     reads as a mistake rather than as a quotation. The .review-card--long
+                     treatment is what marks it as somebody else's words instead.
+                     His "two to three hours per day" is HIS estimate, in his sentence, with
+                     "I would estimate" attached. It is not a figure of ours: FACTS.md,
+                     "Users, installs, hours saved", says what may and may not be done with it. -->
+                <article class="feature-card review-card review-card--long fade-up">
+                  <blockquote>
+                    <p class="review-lede">I have been using &ldquo;Coleman&rdquo; for approximately 60 days now, and I have found him to be very helpful in my day-to-day life. I use him to assist with both my work and personal life.</p>
+                    <p class="review-head">Work &ndash; Specific Example</p>
+                    <p>In my business, we accept credit cards for recurring charges. In the past, when those transactions failed, I would have to gather each customer&rsquo;s email address and send individual emails notifying them of the situation.</p>
+                    <p>With Coleman, I can copy and paste each email address, and he constructs the email and prepares an individual message for each customer. Once I approve them, Coleman sends all of the emails. This process saves me hours of work.</p>
+                    <p class="review-head">Personal &ndash; Specific Example</p>
+                    <p>I have given Coleman personal goals that I want to accomplish each day. Coleman reminds me about them and follows up with me to see if I have completed them. I could certainly do this on my own, but having Coleman hold me accountable makes a difference. It is almost like having a personal coach.</p>
+                    <p>I would estimate that I am saving two to three hours per day on ordinary tasks that Coleman now handles for me, including bulk emails, building reports, and generating email responses.</p>
+                    <p>After 60 days, I am continuing to learn more about what Coleman can do each day. As I become more familiar with his capabilities, I am able to delegate more and more tasks to him, which continues to save me time and make my day more efficient.</p>
+                  </blockquote>
+                  <p class="review-attrib">Patrick West, Chem Can Services &middot; Westway Site Services</p>
+                </article>
+              </div>
+            </div>
+            <div class="aud-pick-panel" data-aud="team">
+              <div class="feature-grid" id="aud-grid-team">
+                <p class="aud-pick-empty">No reviews from businesses yet. The first one goes here.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--
+          Said out loud because the alternative is letting a reader assume. There is no submission
+          form on this page and there never has been, which means every review here was put here by
+          us. A page that quietly reads like an open review platform while being a curated one is
+          the kind of small dishonesty this whole site is built to avoid, and it costs nothing to
+          just say which it is.
+        -->
+        <p class="marketplace-split-note">A note on how this page works: there&rsquo;s no submission form, so every review here was added by us, by hand, with that client&rsquo;s permission. Quotes are word for word, and any trim is marked. We don&rsquo;t write reviews on anyone&rsquo;s behalf, and we don&rsquo;t take them down for being unflattering. For results you can check rather than opinions you have to trust, the section below is the better read.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="successes-heading">
       <div class="container">
         <!-- ==============================
              Every "How" line here is written from the add-on's own catalog entry in the
@@ -212,81 +322,6 @@
             <p><strong>How:</strong> Owed to Customers sweeps the mailboxes your business shares and keeps one row per waiting customer: who wrote, what they asked, how long they have waited. Anyone who has chased twice goes to the top. It reads the sent mail before every report, so a thread a teammate already answered never shows up as owed, and a teammate&rsquo;s own mailbox is read only for them. This one is in the <a class="marketplace-text-link" href="../archie/business/">Archie for Business</a> store.</p>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- ==============================
-         Reviews (hand-maintained)
-         ==============================
-
-         TO ADD A REVIEW: copy the template below into the review grid,
-         fill in the quote and the attribution line, and commit.
-         Keep quotes verbatim; mark any trims with [&hellip;].
-         Publish only with the client's permission, and never add claims
-         on their behalf that we couldn't make ourselves (see TRUST.md).
-
-         <article class="feature-card review-card">
-           <blockquote>
-             <p>&ldquo;The review text goes here, word for word.&rdquo;</p>
-           </blockquote>
-           <p class="review-attrib">First name or initials &middot; e.g. guided-setup client</p>
-         </article>
-
-         WHICH GRID: there are two, and a review goes in exactly one.
-         #aud-grid-personal is for a review from somebody running Archie for
-         themselves; #aud-grid-team is for one from a business. If you cannot
-         tell from the attribution line which it is, the attribution line is
-         not finished. Split added 2026-09-14: the two audiences were reading
-         one undifferentiated wall and neither could find itself in it.
-
-         When the first review goes in: DELETE the "collecting reviews"
-         lede under the heading, and delete the empty-state paragraph inside
-         whichever grid it lands in. The other grid keeps its own until it
-         fills. Move this section back ABOVE the "What a well-built agent
-         actually does" section, swapping the two section-alt classes so the
-         bands still alternate. It sits second only because both grids are
-         empty.
-         ============================== -->
-    <section class="section section-alt" aria-labelledby="reviews-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 id="reviews-heading" class="fade-up">In their words.</h2>
-          <p>We&rsquo;re collecting reviews from our first clients now. As each one gives us permission to share, it&rsquo;ll appear here, word for word, under the audience it came from.</p>
-        </div>
-
-        <!-- Two radios and no script, the same pattern the cost picker on archie/pricing/ uses:
-             the checked one lights its tab and shows its grid through sibling selectors, and
-             with CSS off it is two labelled lists stacked. The inputs are hidden the accessible
-             way, so the group still takes focus and the arrow keys still move between the tabs.
-             Personal is checked because it is the larger audience, not because it matters more. -->
-        <div class="aud-pick fade-up delay-1">
-          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-personal" checked />
-          <input class="aud-pick-radio" type="radio" name="aud-pick" id="aud-team" />
-          <div class="aud-pick-tabs" role="group" aria-label="Whose reviews to show">
-            <label class="aud-pick-tab" for="aud-personal">From one person</label>
-            <label class="aud-pick-tab" for="aud-team">From a team</label>
-          </div>
-          <div class="aud-pick-out" aria-live="polite">
-            <div class="aud-pick-panel" data-aud="personal">
-              <div class="feature-grid" id="aud-grid-personal">
-                <p class="aud-pick-empty">No reviews from people running Archie for themselves yet. The first one goes here.</p>
-              </div>
-            </div>
-            <div class="aud-pick-panel" data-aud="team">
-              <div class="feature-grid" id="aud-grid-team">
-                <p class="aud-pick-empty">No reviews from businesses yet. The first one goes here.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--
-          Said out loud because the alternative is letting a reader assume. There is no submission
-          form on this page and there never has been, which means every review here was put here by
-          us. A page that quietly reads like an open review platform while being a curated one is
-          the kind of small dishonesty this whole site is built to avoid, and it costs nothing to
-          just say which it is.
-        -->
-        <p class="marketplace-split-note">A note on how this page works: there&rsquo;s no submission form, so every review here was added by us, by hand, with that client&rsquo;s permission. Quotes are word for word, and any trim is marked. We don&rsquo;t write reviews on anyone&rsquo;s behalf, and we don&rsquo;t take them down for being unflattering. For results you can check rather than opinions you have to trust, the section above is the better read.</p>
       </div>
     </section>
 
@@ -375,8 +410,8 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260918-22"></script>
-  <script type="module" src="../js/account-nav.js?v=20260918-22"></script>
+  <script src="../js/nav.js?v=20260918-23"></script>
+  <script type="module" src="../js/account-nav.js?v=20260918-23"></script>
 </body>
 </html>
 

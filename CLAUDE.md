@@ -157,6 +157,32 @@ ones worth slowing down for.
    lost no prose, the restatement the drawing replaced is still sitting there, which is the
    usual outcome and the reason to check rather than assume.
 
+**Staged, not diagrammed (2026-09-18).** Jett's direction, after seeing the five comparison
+strips drawn as lanes and chains: flat boxes-and-wires SVGs "read as hard to understand at
+first glance", and the homepage and the Archie pages "make it alive and right in front of the
+person." So the direction for an argument figure is a staged scene with depth, real objects
+and a character, and **each page gets its own scene, distinct in feel and obviously the same
+brand**, never the homepage stage copied around ("i don't necessarily want to copy and paste
+the homepage across all pages"). One page, one mechanism, no two pages the same trick, all in
+the brand's own vocabulary: the app window and phone ports, Ember, the terracotta, the turned
+floor, plain words. CSS perspective and real objects; never WebGL. Reference figures stay flat,
+because they are read fastest that way and two of them are read by machines: the compare
+hub's quadrant board, the trust packet map, the glossary, the installer dialog. The pilot is
+the **day dial on `compare/hiring-an-assistant/`** (`.hd-figure`, the day dial section in
+`css/styles.css`): one day as a clock face lying on a turned plane, midnight at the far edge,
+a grey arc for the hours you agreed and a terracotta one for while the computer is on, one
+hand sweeping the day, Ember walking the rim and a person at their desk for their hours. It
+is one `role="img"` with the claim in its `aria-label` and everything inside `aria-hidden`,
+as the homepage stage is, so `check-figures.py` does not see it and the resting state (eight
+in the morning, every arc and label drawn) has to be checked by a person. Two things the
+build taught: a percent height inside a transformed plane resolves to nothing in WebKit, so
+Ember's box is a square made of width alone (padding, then the drawing filling it); and the
+near edge of a tilted plane grows under perspective, so the scene needs more room below the
+plane than a flat render shows. The concept list for the other pages is in the session
+memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
+clock through the night, two timelines, parts flying into the window, a ring of phones, the
+app's own meter, a card flip. Build one, judge it, then set the pace.
+
 **The thing the pilot taught, worth reusing.** `compare/cloud-agents/` was the first page
 done this way, on 2026-09-15: the three-row `cmp-strip` table became one figure whose two
 lanes carry the **same three chips**, so only the container around them changes, which is

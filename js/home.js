@@ -183,7 +183,7 @@
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var clock = $('.day-clock'), hint = $('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
-    var rail = $('.day-rail');
+    var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
     var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grow = $('.dp-scr--grow');
@@ -409,6 +409,13 @@
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
+      /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The root
+         carries the same number and the stylesheet dims the bar with it (Jett, 2026-09-18: in light
+         mode a cream bar sat over the dark room for the whole overnight act). A NUMBER AND NOT A
+         CLASS, because a class flips at one scroll notch and the snap back on the way out is the
+         flash he asked not to have. Written only when it moves, since this runs every frame. */
+      var nq = p.night.toFixed(3);
+      if (nq !== lastNight) { document.documentElement.style.setProperty('--day-night', nq); lastNight = nq; }
     }
 
     /* The custody lap in floor coordinates: [time, x, y]. The held stretch at the gate is the

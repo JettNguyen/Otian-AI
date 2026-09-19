@@ -9008,15 +9008,16 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* A review that runs longer than a paragraph. The grid it sits in is three columns, so
    one long review left alone becomes a column of about twenty words a line and four
-   screens tall, which is the shape nobody reads. It takes the whole row instead and
-   holds its own measure, and only the first paragraph keeps --fs-lg: 250 words at that
+   screens tall, which is the shape nobody reads. It takes the whole row instead, and then
+   gives most of it back: a card the full 1,120px wide sets the measure at about 85
+   characters and leaves 190px of nothing down its right-hand side, because the text stops
+   at a readable width and the card does not. 46rem is the card holding a letter's measure
+   and looking like it meant to. Only the first paragraph keeps --fs-lg: 250 words at that
    size is a page of large type, and the size stops meaning "read this first". */
 .review-card--long {
   grid-column: 1 / -1;
-}
-
-.review-card--long blockquote {
-  max-width: 68ch;
+  max-width: 46rem;
+  margin-inline: auto;
 }
 
 .review-card--long blockquote p {
@@ -9030,6 +9031,31 @@ html[data-theme="dark"] .booking-container iframe {
 
 .review-card--long .review-lede {
   font-size: var(--fs-lg);
+}
+
+/* The homepage's one quote. Centred, because the band it sits in is centred, and marked
+   as somebody else's words by the rule and the indent rather than by quote marks, which
+   at this size look like a decorative flourish. Same reasoning as .review-card--long. */
+.hm-quote {
+  margin: 22px auto 0;
+  max-width: 54ch;
+  padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--accent);
+  text-align: left;
+}
+
+.hm-quote p {
+  margin: 0;
+  font-size: var(--fs-lg);
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.day-review .review-attrib {
+  text-align: left;
+  max-width: 54ch;
+  margin: 12px auto 0;
+  padding-left: 21px;
 }
 
 /* His own two headings, kept because they are his. Small and lettered so they read as

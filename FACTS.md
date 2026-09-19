@@ -259,9 +259,21 @@ re-counts it rather than trusting this file.
   "Counts and durations" that now carries a setup estimate is deliberately worded as an estimate
   rather than as this. Nobody has timed a clean install, and the day somebody does, the estimate
   is replaced by the measurement and this bullet goes.
-- **Users, installs, hours saved.** We have no published figure for any of these and no
-  testimonial behind them. `/testimonials/` says we are still collecting reviews; a stat that
-  contradicts that page is worse than no stat. **Two of these were live until 2026-08-30**,
+- **Users, installs, hours saved, as figures of ours.** We still have no published figure for
+  users or installs, and none for hours saved that is ours to make. **What changed on 2026-09-18
+  is the third one, and only inside quotation marks.** Patrick West (Chem Can Services and
+  Westway Site Services), 60 days in, wrote his own review and it is published in full on
+  `/testimonials/`: "I would estimate that I am saving two to three hours per day on ordinary
+  tasks that Coleman now handles for me". The same sentence is quoted on the homepage under the
+  heading "Patrick gets two to three hours back, every day."
+
+  **What that licenses, exactly.** His sentence, word for word, with his name on it. Nothing
+  else. It is one person's estimate of his own week, unmeasured by him and unmeasured by us, so:
+  no averaging it, no rounding it to "hours a day" as a site claim, no "customers save two to
+  three hours a day", no badge, no stat band, and no heading that states it without naming him.
+  A sample of one is a story, and a story is worth publishing and is not a statistic. The day
+  somebody times a real week, that is a different row and it goes in "Counts and durations" with
+  the engagement and the date. **Two of these were live until 2026-08-30**,
   on `/testimonials/` itself: "morning inbox processing dropped from 90 minutes to around 25
   minutes" and "missed follow-ups fell substantially". Both came from client work before Archie
   and neither had a record anybody could point at, which made them the only numbers on the site
@@ -269,6 +281,9 @@ re-counts it rather than trusting this file.
   cards now lead on the job the agent takes off you, written from each add-on's own catalog entry
   in the Archie repo (`data/marketplace/skills/`), which is a claim we can defend line by line.
   If a real measured outcome ever exists, it belongs here first, with the engagement and the date.
+  Note what was wrong with those two and is not wrong with Patrick's: they were numbers in our
+  voice with nobody's name on them and no record behind them. His is in his voice, with his name
+  and his company on it, and the record is the review itself.
 - **Every hardware price, on `/how-it-works/#what-to-run-it-on` and anywhere else.** Added 2026-08-26 with the page that section came from (`/equipment/`, merged into How It Works 2026-09-14).
   A hardware price is a third-party figure under the rules above, so it would need a row in
   "Other companies' prices" with the maker's own store as its source and a 90-day re-read. It

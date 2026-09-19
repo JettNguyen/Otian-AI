@@ -3300,10 +3300,12 @@ paid plan executes.
 **The hub was cut to the binary, 2026-09-18.** Jett's direction: cut every sentence another
 of the nine could say unchanged, put the one line all nine fail where the reader lands first,
 and make the binary do the selling. The line is the h1 on `compare/`: ten agents, and Archie
-is the only one that works on your own computer and asks first with no off switch. It is the
+is the only one that works on your own computer and asks your permission first, with no off switch. It is the
 chart's own finding read as two yes-or-no questions, and a figure under the h1 sorts the ten
 marks by them: six leave at whose computer (Symphony by the reading above), three of the four
-on yours leave at whether the asking is a setting, and Archie is what is left. Every sentence
+on yours leave at whether asking your permission is a setting (Jett, the same evening: "asking as a
+setting" alone is vague, so the page says permission and the two answers are "can be turned off"
+and "no off switch"), and Archie is what is left. Every sentence
 about us that OpenClaw, Vellum or Hermes could have printed unchanged (your computer, your
 account, at cost, a shelf, a skill written on request) came off the page; the concessions
 stayed, one line each. **One sentence retired with the old prose, and it stays retired:**

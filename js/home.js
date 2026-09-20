@@ -653,15 +653,6 @@
          the same phone, and it still turns with it. Wide, the conic is drawn and these go unread. */
       phone.style.setProperty('--chm-l', String(chamfer(310 + yaw * 0.7)));
       phone.style.setProperty('--chm-r', String(chamfer(130 + yaw * 0.7)));
-      /* THE RIM IS PAINTED ONLY WHERE IT CAN SHOW, narrow (see --edge-cut in the stylesheet). The
-         sliver a slab swings out past the glass is on the side the phone is turned toward, the
-         side the sheen is on, and it grows with the turn: two or three pixels at these yaws, so
-         the showing side keeps a little more than that and the hidden side keeps nothing, because
-         that side's edge stands inside the device's and anything kept there lands behind the
-         glass. Wide, the phone has no mask and these go unread. */
-      var out = clamp(2 + Math.abs(sy) * 14, 0, 8);
-      phone.style.setProperty('--cut-l', (sy > 0 ? out : 0).toFixed(1) + 'px');
-      phone.style.setProperty('--cut-r', (sy < 0 ? out : 0).toFixed(1) + 'px');
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));

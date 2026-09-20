@@ -2201,11 +2201,55 @@ rather than inside it.
   same gate as every other reply: the card names the file, and Send is a person pressing Send. The
   card naming it is load-bearing, because an approval is worth nothing if what it covers is not on
   the screen.
-- ⛔ **Never claim it reads a scanned document.** There is no OCR anywhere in Archie. A PDF that is
-  a picture of a page comes back saying so, in those words, and the agent passes that on.
+- ⚠️ **A scanned document is read only if the owner turned that on.** Off by default, and off is
+  the refusal this boundary used to describe: the file comes back saying it is a picture of a page
+  and the agent passes that on. See the entry below for what switching it on buys, and never carry
+  the claim without the switch.
 - A file over 25 MB coming in, or 15 MB going out, is refused with a sentence rather than
   attempted. Both numbers sit under what mail servers accept, because base64 makes an attachment a
   third larger on the wire.
+
+### ✅ A PDF that is a picture of a page, read — SHIPPED 2026-09-17, off until switched on
+
+**Written 2026-09-19, two days late.** Until now this file said "there is no OCR anywhere in
+Archie", which was true when it was written and had been false for two days, and under our own
+rule that sentence was the only thing anybody selling was allowed to say. This is the failure the
+Websites entry names in the other direction: a stale boundary makes us claim less than we can do.
+
+**Approved wording:** "Some PDFs are photographs of a page, so there are no words in the file to
+read: a scanned statement, a signed contract, a fax. Archie can look at the pages and write out
+what is on them. It is off until you switch it on, under Response quality, because it costs a cent
+or two each time and it needs an Anthropic account."
+
+**Why it's true:** `crates/archie-runtime/src/scanned.rs` sends the pages to Anthropic's document
+block and asks for a transcription. Both document paths use it: an attachment on an email
+(`email/inbox.rs`) and a file in the agent's knowledge (`gateway/tools_knowledge.rs`). The switch
+is `AgentBundleManifest::read_scanned_documents`, drawn on the agent's Response quality pane as
+"Read PDFs that are scans".
+
+- **It transcribes and never interprets.** The prompt says to copy every number exactly as
+  printed, to keep a table's rows as rows, and to write `[unreadable]` where a figure cannot be
+  read: "Never guess at a digit, never complete a partial number, and never supply a value that
+  would make a total add up." A gap somebody can chase beats a number nobody can tell from a real
+  one.
+- **Ten pages and 16 MB, and the ceiling is money wearing a page count.** Anthropic accepts far
+  more; each page is billed to the owner, and a two-hundred-page scan read without being asked is
+  a bill somebody opens their account to find. The refusal names the number.
+- **Off is a real answer, not a dead end.** With the switch off the agent says the file is a scan
+  and asks for the original, which is what it did before this existed.
+
+**Boundaries:**
+- ⛔ **Never say Archie does OCR.** There is no OCR engine in it and nothing on the computer
+  reads the page. The file goes to the owner's own AI account, which is the same place their mail
+  already goes when they ask about it, and that is the sentence to use if somebody asks where it
+  went.
+- ⛔ **Never claim it on a non-Anthropic account.** Only Anthropic's document block renders the
+  pages. On any other key the switch does nothing and the screen says so.
+- ⛔ **Never claim it is on.** It ships off, deliberately, and a page that describes it without
+  the switch is describing something the reader does not have.
+- ⚠️ **Never put a figure on the cost beyond "a cent or two".** That is what the screen says and
+  it is the only number anybody has measured; a scan's page count is the variable and nobody has
+  run a spread of real documents.
 
 ### ✅ Email goes out only when you send it or set a time — SHIPPED (was 🚧 roadmap until 2026-07-20)
 

@@ -16796,7 +16796,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      which has carried it all along (--shadow-app on .dp-edge--back). */
   --shadow-bezel: inset 0 0 0 1px rgba(0, 0, 0, .45), inset 0 2px 3px rgba(255, 255, 255, var(--edge-t, .26)), inset 0 -2px 3px rgba(255, 255, 255, var(--edge-b, .13)), inset 2px 0 3px rgba(255, 255, 255, var(--edge-l, .10)), inset -2px 0 3px rgba(255, 255, 255, var(--edge-r, .10));
   position: relative; width: 407px; height: 866px; padding: var(--bezel-wall); border: var(--bezel-bevel) solid transparent; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel));
-  background: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%) padding-box, conic-gradient(from calc(-40deg + var(--lit, 0deg)), #E6E6E2 0deg, #B4B4AE 38deg, #5A5A55 92deg, #262624 160deg, #191917 200deg, #3E3E3A 252deg, #A2A29C 318deg, #E6E6E2 360deg) border-box;
+  /* The face and the chamfer are named, because the narrow slice replaces both of them: each is
+     lit for a whole phone, one on a diagonal and one round the rim, and a slice has neither of
+     the corners they are brightest at. See the narrow block. */
+  --bezel-face: linear-gradient(calc(148deg + var(--lit, 0deg)), #4A4A46 0%, #1B1B19 16%, #0B0B0A 42%, #080807 58%, #1B1B19 84%, #45453F 100%);
+  --bezel-chamfer: conic-gradient(from calc(-40deg + var(--lit, 0deg)), #E6E6E2 0deg, #B4B4AE 38deg, #5A5A55 92deg, #262624 160deg, #191917 200deg, #3E3E3A 252deg, #A2A29C 318deg, #E6E6E2 360deg);
+  background: var(--bezel-face) padding-box, var(--bezel-chamfer) border-box;
   box-shadow: var(--shadow-bezel);
   zoom: .63;
 }
@@ -17536,6 +17541,43 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      phone runs past its own layer box. That is what was under the composer when Jett said there
      was extra space before the fade, and the mask was not what was wrong. */
   .dp-device { height: 552px; border-radius: 0; }
+  /* AND THE CHAMFER STOPS PRETENDING THE SLICE HAS CORNERS (2026-09-19). The chamfer round the
+     outside of the bezel wall is a conic gradient centered on the device, which is how a rounded
+     metal edge reads on a whole phone: brightest where the light is, at the corners, and darkest
+     at the middle of a long side. A slice has no corners, and the angles that would be its
+     corners land inside it, a quarter of the way down, which is exactly where the top ramp
+     finishes. Measured on the right edge in the dark theme against a page of 26: 92 to 105
+     through 12 to 28 percent, 55 to 74 through the middle, and 53 with the chamfer taken off. So
+     the phone carried a light band down the part of it that is supposed to be dissolving, at
+     both ends and on both sides (Jett, 2026-09-19: "the right side edge on the bottom as
+     pictured, and the top still have a very bright glare-ish effect. i don't like it", in Chrome
+     and in both themes). The plate below hides the part of it that falls inside the ramps, which
+     is why the ends read as better than the quarter mark.
+
+     Narrow it is a gradient across instead of around: one tone down the left edge, one down the
+     right, and the middle is under the face anyway. THE TONES ARE THE CONIC'S OWN, sampled where
+     a whole phone's two long sides are (90 and 270 degrees, which is 130 and 310 into the
+     gradient once --lit has turned it), so the slice is the middle of the same phone rather than
+     a new metal: 67 and 137 at this act's yaw, moving with the turn as the conic did, because a
+     highlight that never changes is not read as metal. js/home.js samples the stop list and
+     hands over --chm-l and --chm-r. This is not the uniform ring the comment above forbids: the
+     two sides differ by the turn, and the ring's other two sides are inside the fade.
+
+     THE FACE HAD THE SAME BUG IN THE OTHER LAYER, and it is what the bottom end was. The
+     bezel's face runs on a 148 degree diagonal, light at the top left corner and the bottom
+     right one and dark through the middle, which is a phone lit from one side. The slice is
+     the middle of that phone, so both its walls sit on the dark stops and the diagonal has
+     nothing left to say there: read where a whole phone's two long sides are, it gives 11
+     and 14 at this act and 9 to 19 across the story. What it did instead was carry the
+     bottom right corner's light end up into the slice, so the right wall went from 11 in the
+     middle to 37 at 84 percent and the composer's corner had a lit wall beside it (Jett
+     pictured that corner). Flat, and the turn is carried by the highlight and the chamfer,
+     which is where it is carried at this size anyway: the wall at 84 percent reads 11, 14,
+     24, 44, 53 across, which is what the middle reads. */
+  .day-phone .dp-device {
+    --bezel-face: linear-gradient(#0C0C0B, #0C0C0B);
+    --bezel-chamfer: linear-gradient(90deg, rgb(var(--chm-l, 137) var(--chm-l, 137) calc(var(--chm-l, 137) * .97)) 0, rgb(var(--chm-l, 137) var(--chm-l, 137) calc(var(--chm-l, 137) * .97)) 3px, #1B1B19 40%, #1B1B19 60%, rgb(var(--chm-r, 67) var(--chm-r, 67) calc(var(--chm-r, 67) * .97)) calc(100% - 3px), rgb(var(--chm-r, 67) var(--chm-r, 67) calc(var(--chm-r, 67) * .97)) 100%);
+  }
   .dp-device::before, .dp-device::after { display: none; }
   /* THE BEZEL'S LIGHTING GOES OUT IN THE RAMPS (2026-09-19). The side turned toward the light
      carries a white band inside its wall (--edge-l and --edge-r in --shadow-bezel) and the

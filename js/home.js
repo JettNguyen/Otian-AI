@@ -369,6 +369,37 @@
        step is lit. Estimates, and the caption says so. */
     var MINUTES = [1, 3, 7, 9, 10];
 
+    /* The bezel chamfer's stop list, as --bezel-chamfer draws it, so one place holds the metal
+
+       and the narrow slice reads its two sides out of it rather than naming new colors. Each
+
+       stop is a degree into the gradient and the red channel there; green is the same and blue
+
+       is 3% under, which is the metal's whole tint. */
+
+    var CHAMFER = [[0, 230], [38, 180], [92, 90], [160, 38], [200, 25], [252, 62], [318, 162], [360, 230]];
+
+    function chamfer(deg) {
+
+      var d = ((deg % 360) + 360) % 360;
+
+      for (var i = 1; i < CHAMFER.length; i++) {
+
+        if (d <= CHAMFER[i][0]) {
+
+          var a = CHAMFER[i - 1], b = CHAMFER[i];
+
+          return Math.round(a[1] + (b[1] - a[1]) * (d - a[0]) / (b[0] - a[0]));
+
+        }
+
+      }
+
+      return 230;
+
+    }
+
+
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
     /* 0 before `a`, 1 after `b`, eased between. The act-progress equivalent of a keyframe pair. */
     function ramp(v, a, b) { return smooth((v - a) / (b - a)); }
@@ -613,6 +644,15 @@
       phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
       phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
       phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.43, 0, 0.22).toFixed(3));
+      /* AND THE CHAMFER'S TWO SIDES, NARROW (see --bezel-chamfer in the stylesheet). The chamfer
+         is a conic round the bezel, so it is brightest at the corners, and a slice of a phone has
+         none: those angles land a quarter of the way down it, in a light band across the part that
+         is dissolving. Narrow it becomes one tone per side, and these are the conic's own stops
+         read where a whole phone's long sides are, 90 and 270 degrees, which is 130 and 310 into a
+         gradient that starts at -40 and has been turned by --lit. So the slice is the middle of
+         the same phone, and it still turns with it. Wide, the conic is drawn and these go unread. */
+      phone.style.setProperty('--chm-l', String(chamfer(310 + yaw * 0.7)));
+      phone.style.setProperty('--chm-r', String(chamfer(130 + yaw * 0.7)));
       /* THE RIM IS PAINTED ONLY WHERE IT CAN SHOW, narrow (see --edge-cut in the stylesheet). The
          sliver a slab swings out past the glass is on the side the phone is turned toward, the
          side the sheen is on, and it grows with the turn: two or three pixels at these yaws, so

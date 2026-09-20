@@ -17441,7 +17441,21 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      the rule to keep: a look may snap, a size may not. Without the driver it resolves to 0, which
      is the day mask, which is the right thing to see. */
   .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
-  .dp-device, .dp-edge { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
+  /* AND THE RIM GOES FIRST, WHICH IS WHY IT HAS A MASK OF ITS OWN (2026-09-19). The rim is the
+     raised edge standing in front of the glass, and it is near-black on every theme, so fading it
+     on the screen's own schedule means half a rim over the page for the length of the ramp: on the
+     dark theme that is invisible and in light mode it is a grey band across both ends of the phone
+     (Jett: "the gradient fade out for the top and bottom of the phone mockups is still dark in
+     light mode. they should be light gradients right?"). Fading black into cream can only go
+     through grey, so the answer is not to fade it there at all: the rim's own band is pulled
+     inside the screen's, 13 further in at the top and 6 at the bottom, so it is gone before the
+     screen is and the last thing dissolving at either end is the screen itself. That is cream in
+     light and near-black in the dark theme, which is what makes the fade read as the room's own
+     colour on both. The bottom stops track --night with the screen's, or the night crop would
+     hand the rim back. */
+  .day-phone { --edge-mask: linear-gradient(to bottom, transparent 0, transparent 8%, #000 26%, #000 calc(84% - var(--night, 0) * 38%), transparent calc(92% - var(--night, 0) * 33.5%), transparent 100%); }
+  .dp-device { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
+  .dp-edge { -webkit-mask-image: var(--edge-mask); mask-image: var(--edge-mask); }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that

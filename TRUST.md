@@ -1582,16 +1582,23 @@ purchasing and booking is scoring a decision, not a gap, and the answer is to sa
 file the work: building it would break the claim above. The sites worth wanting are the ones with no
 connector and no checkout, which is what the two shipped add-ons do.
 
-### ✅ Waking the computer for a routine — SHIPPED 2026-09-16
+### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
-**Approved wording:** "A routine set for seven in the morning arrives at seven, even if the computer
-was asleep. Archie asks your Mac to wake a few minutes before, runs it, and lets it go back to
-sleep. The screen stays off. Setting it up asks for your password once, because only an
-administrator of a Mac may schedule a wake, and macOS asks for it in its own box: Archie never sees
-what you type."
+**Approved wording:** "A routine set for seven in the morning arrives at seven, even if the
+computer was asleep. Archie asks the computer to wake a few minutes before, runs it, and lets it go
+back to sleep. The screen stays off."
 
-**Why it's true:** `archie_runtime::wake` works out which moments the computer has to be awake for,
-and `crates/archie-wake` is the separate program that schedules them, run by launchd as root.
+**And the setup sentence, which is different on each and must match the reader's machine:** on a
+Mac, "Setting it up asks for your password once, because only an administrator of a Mac may
+schedule a wake, and macOS asks for it in its own box: Archie never sees what you type." On
+Windows, "Setting it up is one press. Windows lets you schedule a wake for your own computer, so
+there is nothing to approve."
+
+**Why it's true:** `archie_runtime::wake` works out which moments the computer has to be awake for.
+On macOS `crates/archie-wake` is the separate program that schedules them, run by launchd as root.
+On Windows `archie_runtime::wake::windows_task` writes a Task Scheduler task carrying `WakeToRun`,
+as the ordinary person who opened Archie. The deciding half is shared: both platforms wake for the
+same appointments, worked out by the same code.
 
 - **Root is not a choice we made.** Measured, not assumed: `IOPMSchedulePowerEvent` answers
   `kIOReturnNotPrivileged` to an ordinary application and `pmset schedule` answers "must be run as
@@ -1612,12 +1619,21 @@ and `crates/archie-wake` is the separate program that schedules them, run by lau
 **Boundaries — do not cross:**
 - ❌ **Never say Archie works while the computer is off.** It wakes a sleeping computer. A computer
   that is shut down stays shut down, deliberately.
-- ❌ Never promise it on Windows. There is no lane there yet.
-- ❌ Never say "no password needed". One password, once, at setup, and the sentence that says so is
-  the one that keeps the rest of it credible.
-- ⚠️ **Not yet watched overnight on a real machine.** Everything up to the system call is tested;
-  the call itself needs root. Until somebody has run it through a night, copy may describe what it
-  does and may not call it proven.
+- ❌ **Never carry one platform's setup sentence to the other.** "One password, once" is true on a
+  Mac and the sentence that keeps the rest of it credible; saying it to a Windows reader describes
+  a step that does not exist. "Nothing to approve" is true on Windows and would be a lie about a
+  Mac. A page that cannot tell which reader it has says the first paragraph and neither sentence.
+- ⚠️ **On Windows, set up is not the same as working.** The power plan decides whether any timer
+  may wake the machine, and on a lot of laptops the on-battery setting ships off or set to
+  important-only, which means Windows' own timers and not ours. Archie reads that setting
+  (`wake_timers_allowed`) and the Routines card names the presses that change it. Never claim
+  Windows wakes work without naming this; an owner whose plan says no gets nothing and no
+  explanation anywhere but that card.
+- ⚠️ **Not yet watched overnight on a real machine, on either platform.** Everything up to the
+  system call is tested; on macOS the call needs root, on Windows it needs Windows. Until somebody
+  has run each through a night, copy may describe what it does and may not call it proven. The
+  Windows half additionally has three facts read off Microsoft's documentation rather than a
+  machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
 ### ✅ Reminders, and the one that stands down if the person writes back — SHIPPED (conditions 2026-09-17)
 

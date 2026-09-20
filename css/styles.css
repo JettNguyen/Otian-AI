@@ -17441,44 +17441,54 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      the rule to keep: a look may snap, a size may not. Without the driver it resolves to 0, which
      is the day mask, which is the right thing to see. */
   .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
-  /* AND THE RIM'S MASK IS THE SAME RAMP WITH ITS ALPHA BENT (2026-09-19), SO THE SIDES DO NOT END
-     IN A STUB. The rim is eleven slabs standing behind the glass five pixels apart, and every one
-     of them is masked on its own, so a ramp that takes a single layer down to a tenth takes the
-     stack to 1 minus 0.9 to the eleventh, which is very nearly solid: the phone's sides would keep
-     their black through the whole ramp and then stop dead. Cutting the rim short instead, so it is
-     gone before the screen fades, leaves eleven little stubs where it ends, which is worse and was
-     tried ("looks worse where the gradients are").
+  /* AND THE RIM FADES AT THE SCREEN'S OWN RATE, THROUGH THE ELEVENTH ROOT (2026-09-19). The rim is
+     eleven slabs standing behind the glass five pixels apart, and every one of them is masked on
+     its own, so whatever one layer's mask says, the stack says something stronger: a ramp that
+     takes a single layer to a tenth takes eleven of them to 1 minus 0.9 to the eleventh, which is
+     very nearly solid. That is why the rim on the screen's own ramp read as a dark band (Jett: "the
+     gradient fade out for the top and bottom of the phone mockups is still dark in light mode"),
+     why cutting it short left eleven stubs ("looks worse where the gradients are"), and why holding
+     each layer at 8% and dropping it at 94% left the rim stopping three quarters of the way down a
+     screen that kept going to 98.5, with eleven ends at eleven heights because the slabs stand at
+     eleven depths (Jett: "it's almost like there's a second back to the phone", "i see some sketch
+     lines or something").
 
-     So the stops carry alpha rather than moving: each layer holds at 8%, which is about 60% for
-     eleven of them, and only the last pixel and a half goes solid, so the sides give out at the
-     pace the rest of the picture does. Change the number of .dp-edge layers in index.html and the
-     8% is solved again, not adjusted: it is 1 minus 0.4 to the one-eleventh. The bottom stops
-     track --night with the screen's, or the two in the morning crop would hand the rim back. */
-  .day-phone { --edge-mask: linear-gradient(to bottom, transparent 0, transparent 9%, rgba(0, 0, 0, .08) 11.8%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), rgba(0, 0, 0, .08) calc(91.2% - var(--night, 0) * 38%), transparent calc(94% - var(--night, 0) * 38%), transparent 100%); }
-  /* AND NOTHING OF THE RIM IS PAINTED BEHIND THE PHONE (2026-09-19). Bending the alpha fixed the
-     sides and left the real fault standing, because the slabs are siblings of .dp-device and not
-     children of it: the device's own mask cannot reach them, so a translucent rim stands behind a
-     translucent phone, and two layers that fade on their own never fade to the same thing. All the
-     way down the ramp the phone's black back showed through its own fading screen, as a
-     semi-transparent bar across the message bar and across the app's top bar (Jett: "why does it
-     look like there is a semi transparent black bar across the bottom where the message bar is?
-     there's a similar issue at the top"). Masking the two as one group is the obvious answer and
-     is not on offer: a mask flattens the 3D context under it, and the depth between the slabs is
-     the phone's whole thickness.
+     So the stops are the screen's stops, and each carries the alpha that eleven layers of it add
+     up to the screen's: 1 minus (1 minus s) to the one-eleventh, sampled at eight values of s and
+     joined by straight lines, which is within a hundredth of the curve. The stack then tracks the
+     glass to within that, the sides give out with the screen and never before it, and at the end
+     of the ramp each layer is at a hundredth or less, so where the eleven ends land no longer
+     shows. The bottom stops ride --night at the screen's own rate, so the two in the morning crop
+     moves the rim with the glass. Change the number of .dp-edge layers in index.html and the six
+     alphas are solved again, not adjusted: a = 1 - (1 - s) ^ (1 / n) at s = .97, .9, .75, .5, .25
+     and .1. */
+  .day-phone { --edge-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, rgba(0, 0, 0, .0095) 2.65%, rgba(0, 0, 0, .0258) 4.375%, rgba(0, 0, 0, .0611) 7.25%, rgba(0, 0, 0, .1184) 10.125%, rgba(0, 0, 0, .1889) 11.85%, rgba(0, 0, 0, .273) 12.655%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), rgba(0, 0, 0, .273) calc(90.255% - var(--night, 0) * 37.865%), rgba(0, 0, 0, .1889) calc(90.85% - var(--night, 0) * 37.55%), rgba(0, 0, 0, .1184) calc(92.125% - var(--night, 0) * 36.875%), rgba(0, 0, 0, .0611) calc(94.25% - var(--night, 0) * 35.75%), rgba(0, 0, 0, .0258) calc(96.375% - var(--night, 0) * 34.625%), rgba(0, 0, 0, .0095) calc(97.65% - var(--night, 0) * 33.95%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
+  /* AND THE RIM IS PAINTED ONLY WHERE IT CAN SHOW (2026-09-19). The slabs are siblings of
+     .dp-device, not children of it, so the device's mask cannot reach them, and a rim behind the
+     glass is a second translucent layer under a translucent one: through the ramp the phone's
+     black back showed through its own fading screen, a bar across the message bar and another
+     across the app's top bar (Jett: "why does it look like there is a semi transparent black bar
+     across the bottom where the message bar is?"). Masking the two as one group would be the
+     answer, and is not on offer, because a mask flattens the 3D context under it and the depth
+     between the slabs is the phone's whole thickness.
 
-     Behind the device there is nothing to see anyway. The bezel and the glass are opaque, and the
-     only part of a slab that ever shows is the sliver the turn swings out past the device's edge,
-     which is eleven pixels at the widest any narrow pose turns. So the rim keeps its outer 20px,
-     is gone by 34, and paints nothing in between, and the ramp fades the phone over whatever is
-     really behind it. In light mode the band was worth 14 levels of luminance at the bottom and 9
-     at the top, on every act that shows the phone, and both are 0 now.
+     Nothing behind the glass is meant to be seen. What a slab shows is the sliver the turn swings
+     out past the device's edge, on the side the phone is turned toward (the side --rim-x puts the
+     sheen on), two or three pixels at these yaws. So js/home.js sets --cut-l and --cut-r from the
+     yaw each frame, a little more than the sliver on the showing side and nothing on the hidden
+     side, whose edge stands inside the device's, so anything kept there lands behind the glass.
+     Each slab keeps that much of each edge and paints nothing else.
+     In light mode the bar was worth 14 levels of luminance across the composer and 9 across the
+     top bar, and both are 0.
 
-     Two masks intersected rather than one: a linear-gradient runs on one axis and this needs
-     both. The other phones on the site answer the bare .dp-edge rule below with more weight and
-     set no mask at all, so the pair never reaches them. */
-  .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 20px, transparent 34px, transparent calc(100% - 34px), #000 calc(100% - 20px), #000 100%); }
+     Two masks intersected, since a linear-gradient runs on one axis and this needs both; checked on
+     a translated layer in WebKit as well as in Chrome. no-repeat, because a mask tiles by default
+     and the back slab's shadow, painted outside its box, would come through the tiles beyond it.
+     The other phones on the site answer the bare .dp-edge rule with more weight and set no mask,
+     so none of this reaches them. */
+  .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 var(--cut-l, 0px), transparent calc(var(--cut-l, 0px) + 2px), transparent calc(100% - var(--cut-r, 0px) - 2px), #000 calc(100% - var(--cut-r, 0px)), #000 100%); }
   .dp-device { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
-  .dp-edge { -webkit-mask-image: var(--edge-mask), var(--edge-cut); mask-image: var(--edge-mask), var(--edge-cut); -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .dp-edge { -webkit-mask-image: var(--edge-mask), var(--edge-cut); mask-image: var(--edge-mask), var(--edge-cut); -webkit-mask-composite: source-in; mask-composite: intersect; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that

@@ -16198,7 +16198,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    the one act with six things in it. LEN in js/home.js is the same list and must agree, and the sum
    here is that list's. The extra 100vh is the stage's own height, which the sticky needs to unpin
    at the end. */
-.day-story { position: relative; height: calc(8.6 * 100vh + 100vh); }
+.day-story { position: relative; height: calc(8.4 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
@@ -17051,6 +17051,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-scr--page .day-beat:not(.is-on) { display: none; }
   .dp-scr--page .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
 }
+/* The next morning's brief lands the same way, a line at a time, so the bubble grows through the
+   act instead of standing finished from its first frame (2026-09-19, see the screen in index.html).
+   Scoped to the screen, because the other chat screens reserve a beat's room before it lands and
+   this one is one bubble whose room is the lines in it. Under reduced motion the base .day-beat
+   rule shows every line, so the resting state is the whole brief. */
+@media (prefers-reduced-motion: no-preference) {
+  .dp-scr[data-scr="6"] .day-beat:not(.is-on) { display: none; }
+  .dp-scr[data-scr="6"] .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+}
 .dp-lrow .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .dp-lrow .lbl { font-size: var(--fs-lg); font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .dp-lrow .note { font-size: var(--fs-sm); color: var(--muted); }
@@ -17528,15 +17537,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      was extra space before the fade, and the mask was not what was wrong. */
   .dp-device { height: 552px; border-radius: 0; }
   .dp-device::before, .dp-device::after { display: none; }
-  .dp-edge { border-radius: 0; }
-  /* A SHORTER SLICE, SINCE 2026-09-19. The fit is height-bound on every phone (the box is 400 by
-     465 and no phone's scene row is 1.16 times its width), so height the phone does not need is
-     width and type it never gets: at 686 it was drawn at a third of the screen and its messages
-     landed near 5px. At 566 the same picture is 72% of the screen and the messages read at 11px,
-     which is what the wide view reads at. The mask's stops are percentages, so the slice dissolves
-     at the same places; what is lost is about a bubble and a half of conversation, off the top,
-     which was inside the fade anyway. */
-  .dp-ph { height: 538px; padding-bottom: 8px; --ph-r: 0px; }
   /* THE BEZEL'S LIGHTING GOES OUT IN THE RAMPS (2026-09-19). The side turned toward the light
      carries a white band inside its wall (--edge-l and --edge-r in --shadow-bezel) and the
      chamfer's conic sheen runs round the outside of it, and both are right where the phone is
@@ -17550,6 +17550,15 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      ends, so the edge dissolves as a dark line and the lighting comes back where the phone is
      whole. Scoped to .day-phone, because this pseudo is the lens on every other phone. */
   .day-phone .dp-device::before { display: block; position: absolute; inset: calc(-1 * var(--bezel-bevel)); width: auto; height: auto; margin: 0; border-radius: 0; box-shadow: none; z-index: 0; pointer-events: none; background: linear-gradient(to bottom, #0B0B0A 0, #0B0B0A 8%, transparent 11%, transparent calc(85.5% - var(--night, 0) * 35%), #0B0B0A calc(88.5% - var(--night, 0) * 35%), #0B0B0A 100%); }
+  .dp-edge { border-radius: 0; }
+  /* A SHORTER SLICE, SINCE 2026-09-19. The fit is height-bound on every phone (the box is 400 by
+     465 and no phone's scene row is 1.16 times its width), so height the phone does not need is
+     width and type it never gets: at 686 it was drawn at a third of the screen and its messages
+     landed near 5px. At 566 the same picture is 72% of the screen and the messages read at 11px,
+     which is what the wide view reads at. The mask's stops are percentages, so the slice dissolves
+     at the same places; what is lost is about a bubble and a half of conversation, off the top,
+     which was inside the fade anyway. */
+  .dp-ph { height: 538px; padding-bottom: 8px; --ph-r: 0px; }
   /* THE SLICE IS CUT JUST UNDER THE MESSAGE BAR (Jett, 2026-09-19: "there's extra space between
      the message bar and when it fades in"). The app's composer holds 42px under its row, which is
      the safe area its Chat.tsx pads by so the bar does not hug the glass; on a whole phone that is

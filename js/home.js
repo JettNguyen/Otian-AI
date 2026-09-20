@@ -223,8 +223,14 @@
        scrolling now that the hero has something to reveal (Jett: "make the scroll last a bit
        longer for the first section"). The rest of it lands together at 0.34 of the act, which is
        about 172px of scroll, and it used to be 21px. `.day-story`'s height in the stylesheet is
-       this list's sum plus one and must be changed with it. */
-    var LEN = [0.6, 1, 1, 1, 1, 1, 1, 2], CUM = [0], TOT = 0;
+       this list's sum plus one and must be changed with it.
+
+       Act 6 is 0.8 since 2026-09-19. Its brief stood finished from the act's first frame, so a
+       full act of scroll moved nothing (Jett: "nothing happens during the next morning section
+       visual-wise and it takes a bit to scroll through it"); the brief lands line by line now,
+       the last line at .56 on the beat clock, which is .69 of the act, and the act is as long
+       as that plus the reading of it. */
+    var LEN = [0.6, 1, 1, 1, 1, 1, 0.8, 2], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must

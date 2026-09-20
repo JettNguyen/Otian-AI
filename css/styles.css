@@ -18515,11 +18515,16 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-paths .ch-cord { stroke: var(--accent); stroke-width: 2.5; }
 .ch-paths .ch-n { display: none; }
 .ch-stand { position: absolute; left: var(--fx); top: var(--fy); transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; }
-/* the seven platforms, lying on the floor in a shallow arc: a pad on top and a front face standing
-   at its front edge carrying the company's name, so the name is part of the slab (standing in
-   front, the names "fall off the platforms": Jett, 2026-09-19) */
-.ch-pad { position: absolute; left: calc(var(--x) - 28px); top: calc(var(--y) - 15px); width: 56px; height: 30px; border-radius: 9px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: border-color .35s, background .35s, box-shadow .35s; }
-.ch-nm { --fx: var(--x); --fy: calc(var(--y) + 15px); width: 56px; height: 17px; line-height: 17px; text-align: center; font-size: var(--fs-3xs); font-weight: 600; color: var(--text-primary); border-radius: 0 0 7px 7px; background: color-mix(in srgb, var(--bg-card) 82%, var(--text-muted)); border: 1px solid var(--border); border-top: 0; box-sizing: border-box; white-space: nowrap; overflow: hidden; transition: border-color .35s, background .35s; }
+/* the seven platforms, standing on the floor in a shallow arc, each built in the floor's own space
+   the way the laptop is: a top raised off the floor by the slab's thickness (translateZ), and a
+   front face lying behind the top's front edge and turned up perpendicular to the floor
+   (rotateX(-90deg) about its bottom edge, so its front faces the camera and its top edge meets the
+   raised top), carrying the company's name. The name used to stand in front as a billboard, and
+   read as "falling off the platform"; then as a billboard glued to the pad's edge, and the slab read
+   as a flat 2D badge (Jett, 2026-09-19, both). A face in the floor's space foreshortens with the
+   floor, and a top lit from above with a shaded face under it is what makes a slab a slab. */
+.ch-pad { position: absolute; left: calc(var(--x) - 28px); top: calc(var(--y) - 15px); width: 56px; height: 30px; box-sizing: border-box; border-radius: 6px; background: linear-gradient(180deg, color-mix(in srgb, var(--bg-card) 88%, #fff), var(--bg-card)); border: 1px solid var(--border); transform: translateZ(14px); transition: border-color .35s, background .35s, box-shadow .35s; }
+.ch-nm { position: absolute; left: calc(var(--x) - 28px); top: calc(var(--y) + 1px); width: 56px; height: 14px; line-height: 14px; box-sizing: border-box; text-align: center; font-size: var(--fs-3xs); font-weight: 600; color: var(--text-primary); background: color-mix(in srgb, var(--bg-card) 70%, var(--text-muted)); border: 1px solid var(--border); border-top: 0; border-radius: 0 0 3px 3px; transform-origin: 50% 100%; transform: rotateX(-90deg); white-space: nowrap; overflow: hidden; transition: border-color .35s, background .35s, color .35s; }
 .ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 60px; --y: 156px; }
 .ch-pad[data-ai="openai"], .ch-nm[data-ai="openai"] { --x: 126px; --y: 135px; }
 .ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 192px; --y: 122px; }
@@ -18528,7 +18533,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-pad[data-ai="deepseek"], .ch-nm[data-ai="deepseek"] { --x: 390px; --y: 135px; }
 .ch-pad[data-ai="mistral"], .ch-nm[data-ai="mistral"] { --x: 456px; --y: 156px; }
 #ch-anthropic:checked ~ .ch-scene .ch-pad[data-ai="anthropic"], #ch-openai:checked ~ .ch-scene .ch-pad[data-ai="openai"], #ch-gemini:checked ~ .ch-scene .ch-pad[data-ai="gemini"], #ch-xai:checked ~ .ch-scene .ch-pad[data-ai="xai"], #ch-groq:checked ~ .ch-scene .ch-pad[data-ai="groq"], #ch-deepseek:checked ~ .ch-scene .ch-pad[data-ai="deepseek"], #ch-mistral:checked ~ .ch-scene .ch-pad[data-ai="mistral"] { border-color: var(--accent); background: var(--accent-subtle); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
-#ch-anthropic:checked ~ .ch-scene .ch-nm[data-ai="anthropic"], #ch-openai:checked ~ .ch-scene .ch-nm[data-ai="openai"], #ch-gemini:checked ~ .ch-scene .ch-nm[data-ai="gemini"], #ch-xai:checked ~ .ch-scene .ch-nm[data-ai="xai"], #ch-groq:checked ~ .ch-scene .ch-nm[data-ai="groq"], #ch-deepseek:checked ~ .ch-scene .ch-nm[data-ai="deepseek"], #ch-mistral:checked ~ .ch-scene .ch-nm[data-ai="mistral"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent-subtle) 80%, var(--accent)); color: var(--accent-strong); }
+#ch-anthropic:checked ~ .ch-scene .ch-nm[data-ai="anthropic"], #ch-openai:checked ~ .ch-scene .ch-nm[data-ai="openai"], #ch-gemini:checked ~ .ch-scene .ch-nm[data-ai="gemini"], #ch-xai:checked ~ .ch-scene .ch-nm[data-ai="xai"], #ch-groq:checked ~ .ch-scene .ch-nm[data-ai="groq"], #ch-deepseek:checked ~ .ch-scene .ch-nm[data-ai="deepseek"], #ch-mistral:checked ~ .ch-scene .ch-nm[data-ai="mistral"] { border-color: var(--accent); background: var(--accent); color: var(--text-on-accent); }
 /* the chat apps: one plain chat window, no company's dress, wired to every company's platform,
    because each of the seven has a chat app of its own and it answers with that company's AI */
 [data-o="chat"] { --fx: 258px; --fy: 0px; }
@@ -18598,8 +18603,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .ch-floor { top: -50px; width: 400px; height: 600px; }
   .ch-paths .ch-w { display: none; }
   .ch-paths .ch-n { display: inline; }
-  .ch-pad { left: calc(var(--x) - 22px); top: calc(var(--y) - 11px); width: 44px; height: 22px; border-radius: 7px; }
-  .ch-nm { --fy: calc(var(--y) + 11px); width: 44px; height: 13px; line-height: 13px; font-size: 7.5px; border-radius: 0 0 5px 5px; }
+  .ch-pad { left: calc(var(--x) - 22px); top: calc(var(--y) - 11px); width: 44px; height: 22px; border-radius: 5px; transform: translateZ(11px); }
+  .ch-nm { left: calc(var(--x) - 22px); top: var(--y); width: 44px; height: 11px; line-height: 11px; font-size: 7.5px; border-radius: 0 0 2px 2px; }
   .ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 26px; --y: 170px; }
   .ch-pad[data-ai="openai"], .ch-nm[data-ai="openai"] { --x: 76px; --y: 148px; }
   .ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 126px; --y: 134px; }

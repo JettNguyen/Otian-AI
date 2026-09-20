@@ -18464,9 +18464,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
 /* ── The AI you picked (compare/chat-apps/) ──
    Seven pads on the floor at the back, one for each AI company Archie can think with, named at
-   the front edge; one plain chat window standing behind them for the chat apps, wired to the
-   three companies that make them and to no other pad, because a chat app answers with its
-   maker's AI on its maker's servers; and in front, your own computer, the homepage's window on
+   the front edge; one plain chat window standing behind them for the chat apps, with a cord to
+   every company's platform, because each of the seven has a chat app of its own and it answers
+   with its maker's AI on its maker's servers; and in front, your own computer, the homepage's window on
    Setup, AI account, with a cord running from it to whichever pad you picked and the agent
    standing behind that pad holding the cord's end. Pick another company on the bar above and
    the agent carries the cord over. The fifth staged page (Jett, 2026-09-19), and the first whose
@@ -18476,8 +18476,9 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    the page's own table says chat apps increasingly run scheduled tasks, so a drawing of one
    sitting idle all night would have been a claim the page itself hedges. Which AI answers is
    the one row of that table with no hedge on it. Two of Jett's first-look notes shaped it: one
-   unnamed chat window wired to one company read as arbitrary, and three copies of it read as
-   clutter, so it is one window with three cords; and a bar of three picks read as "only these
+   unnamed chat window wired to one company read as arbitrary, three copies of it read as
+   clutter, and one window wired to three of seven read as arbitrary again, so it is one window
+   with a cord to every company; and a bar of three picks read as "only these
    three", so the bar carries all seven, in the app's order and words.
 
    THE SAME RECIPE AS THE OTHER SCENES: a box drawn at one size (720 by 380 wide, 400 by 450
@@ -18503,7 +18504,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-opt i { display: block; font-style: normal; font-weight: 500; font-size: var(--fs-3xs); color: var(--text-muted); }
 #ch-anthropic:checked ~ .ch-bar-wrap [for="ch-anthropic"], #ch-openai:checked ~ .ch-bar-wrap [for="ch-openai"], #ch-gemini:checked ~ .ch-bar-wrap [for="ch-gemini"], #ch-xai:checked ~ .ch-bar-wrap [for="ch-xai"], #ch-groq:checked ~ .ch-bar-wrap [for="ch-groq"], #ch-deepseek:checked ~ .ch-bar-wrap [for="ch-deepseek"], #ch-mistral:checked ~ .ch-bar-wrap [for="ch-mistral"] { background: var(--accent-subtle); color: var(--text-primary); border-color: var(--accent); }
 #ch-anthropic:focus-visible ~ .ch-bar-wrap [for="ch-anthropic"], #ch-openai:focus-visible ~ .ch-bar-wrap [for="ch-openai"], #ch-gemini:focus-visible ~ .ch-bar-wrap [for="ch-gemini"], #ch-xai:focus-visible ~ .ch-bar-wrap [for="ch-xai"], #ch-groq:focus-visible ~ .ch-bar-wrap [for="ch-groq"], #ch-deepseek:focus-visible ~ .ch-bar-wrap [for="ch-deepseek"], #ch-mistral:focus-visible ~ .ch-bar-wrap [for="ch-mistral"] { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-.ch-scene { position: relative; width: 100%; aspect-ratio: 720 / 380; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; --cord: 478 364; --cord-c1: 380 372; --cord-in: 70 80; --st-anthropic: 60 147; --st-openai: 126 126; --st-gemini: 192 113; --st-xai: 258 109; --st-groq: 324 113; --st-deepseek: 390 126; --st-mistral: 456 147; }
+.ch-scene { position: relative; width: 100%; aspect-ratio: 720 / 380; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; --cord: 478 364; --cord-c1: 380 372; --cord-in: 70 80; --st-anthropic: 60 153; --st-openai: 126 132; --st-gemini: 192 119; --st-xai: 258 115; --st-groq: 324 119; --st-deepseek: 390 132; --st-mistral: 456 153; }
 .ch-box { position: absolute; left: 0; top: 0; width: 720px; height: 380px; transform: scale(var(--pk, 1)); transform-origin: 0 0; transform-style: preserve-3d; }
 .ch-floor { position: absolute; left: 0; top: -40px; width: 720px; height: 460px; --fo: 1; transform-style: preserve-3d; }
 .ch-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
@@ -18514,19 +18515,23 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-paths .ch-cord { stroke: var(--accent); stroke-width: 2.5; }
 .ch-paths .ch-n { display: none; }
 .ch-stand { position: absolute; left: var(--fx); top: var(--fy); transform: translate(-50%, -100%) rotateX(-58deg); transform-origin: 50% 100%; }
-/* the seven pads, lying on the floor in a shallow arc, each named just in front of it */
+/* the seven platforms, lying on the floor in a shallow arc: a pad on top and a front face standing
+   at its front edge carrying the company's name, so the name is part of the slab (standing in
+   front, the names "fall off the platforms": Jett, 2026-09-19) */
 .ch-pad { position: absolute; left: calc(var(--x) - 28px); top: calc(var(--y) - 15px); width: 56px; height: 30px; border-radius: 9px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); transition: border-color .35s, background .35s, box-shadow .35s; }
-.ch-nm { --fx: var(--x); --fy: calc(var(--y) + 30px); width: 66px; text-align: center; font-size: var(--fs-3xs); font-weight: 600; color: var(--text-secondary); }
-.ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 60px; --y: 150px; }
-.ch-pad[data-ai="openai"], .ch-nm[data-ai="openai"] { --x: 126px; --y: 129px; }
-.ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 192px; --y: 116px; }
-.ch-pad[data-ai="xai"], .ch-nm[data-ai="xai"] { --x: 258px; --y: 112px; }
-.ch-pad[data-ai="groq"], .ch-nm[data-ai="groq"] { --x: 324px; --y: 116px; }
-.ch-pad[data-ai="deepseek"], .ch-nm[data-ai="deepseek"] { --x: 390px; --y: 129px; }
-.ch-pad[data-ai="mistral"], .ch-nm[data-ai="mistral"] { --x: 456px; --y: 150px; }
+.ch-nm { --fx: var(--x); --fy: calc(var(--y) + 15px); width: 56px; height: 17px; line-height: 17px; text-align: center; font-size: var(--fs-3xs); font-weight: 600; color: var(--text-primary); border-radius: 0 0 7px 7px; background: color-mix(in srgb, var(--bg-card) 82%, var(--text-muted)); border: 1px solid var(--border); border-top: 0; box-sizing: border-box; white-space: nowrap; overflow: hidden; transition: border-color .35s, background .35s; }
+.ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 60px; --y: 156px; }
+.ch-pad[data-ai="openai"], .ch-nm[data-ai="openai"] { --x: 126px; --y: 135px; }
+.ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 192px; --y: 122px; }
+.ch-pad[data-ai="xai"], .ch-nm[data-ai="xai"] { --x: 258px; --y: 118px; }
+.ch-pad[data-ai="groq"], .ch-nm[data-ai="groq"] { --x: 324px; --y: 122px; }
+.ch-pad[data-ai="deepseek"], .ch-nm[data-ai="deepseek"] { --x: 390px; --y: 135px; }
+.ch-pad[data-ai="mistral"], .ch-nm[data-ai="mistral"] { --x: 456px; --y: 156px; }
 #ch-anthropic:checked ~ .ch-scene .ch-pad[data-ai="anthropic"], #ch-openai:checked ~ .ch-scene .ch-pad[data-ai="openai"], #ch-gemini:checked ~ .ch-scene .ch-pad[data-ai="gemini"], #ch-xai:checked ~ .ch-scene .ch-pad[data-ai="xai"], #ch-groq:checked ~ .ch-scene .ch-pad[data-ai="groq"], #ch-deepseek:checked ~ .ch-scene .ch-pad[data-ai="deepseek"], #ch-mistral:checked ~ .ch-scene .ch-pad[data-ai="mistral"] { border-color: var(--accent); background: var(--accent-subtle); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
-/* the chat apps: one plain chat window, no company's dress, wired to the three makers */
-[data-o="chat"] { --fx: 126px; --fy: 0px; }
+#ch-anthropic:checked ~ .ch-scene .ch-nm[data-ai="anthropic"], #ch-openai:checked ~ .ch-scene .ch-nm[data-ai="openai"], #ch-gemini:checked ~ .ch-scene .ch-nm[data-ai="gemini"], #ch-xai:checked ~ .ch-scene .ch-nm[data-ai="xai"], #ch-groq:checked ~ .ch-scene .ch-nm[data-ai="groq"], #ch-deepseek:checked ~ .ch-scene .ch-nm[data-ai="deepseek"], #ch-mistral:checked ~ .ch-scene .ch-nm[data-ai="mistral"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent-subtle) 80%, var(--accent)); color: var(--accent-strong); }
+/* the chat apps: one plain chat window, no company's dress, wired to every company's platform,
+   because each of the seven has a chat app of its own and it answers with that company's AI */
+[data-o="chat"] { --fx: 258px; --fy: 0px; }
 .ch-chat { width: 110px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); overflow: hidden; font-size: 7px; line-height: 1.3; color: var(--text-primary); text-align: left; }
 .ch-chat .t { display: flex; align-items: center; gap: 4px; padding: 4px 6px; border-bottom: 1px solid var(--line-soft); font-weight: 600; font-size: 7.5px; }
 .ch-chat .t i { display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--line-muted); }
@@ -18588,22 +18593,22 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      small at the front right, so the cord can run up the left side in view and cross to its pad
      above the window's top edge: a window standing in front of the pads' whole width hid the
      cord's middle. The box is redrawn. */
-  .ch-scene { aspect-ratio: 400 / 450; perspective: 1200px; --cord: 182 496; --cord-c1: 130 482; --cord-in: -30 150; --st-anthropic: 30 167; --st-openai: 76 145; --st-gemini: 122 131; --st-xai: 168 127; --st-groq: 214 131; --st-deepseek: 260 145; --st-mistral: 306 167; }
+  .ch-scene { aspect-ratio: 400 / 450; perspective: 1200px; --cord: 182 496; --cord-c1: 130 482; --cord-in: -30 150; --st-anthropic: 26 167; --st-openai: 76 145; --st-gemini: 126 131; --st-xai: 176 127; --st-groq: 226 131; --st-deepseek: 276 145; --st-mistral: 326 167; }
   .ch-box { width: 400px; height: 450px; }
   .ch-floor { top: -50px; width: 400px; height: 600px; }
   .ch-paths .ch-w { display: none; }
   .ch-paths .ch-n { display: inline; }
-  .ch-pad { left: calc(var(--x) - 20px); top: calc(var(--y) - 11px); width: 40px; height: 22px; border-radius: 7px; }
-  .ch-nm { --fy: calc(var(--y) + 24px); width: 50px; font-size: 8.5px; }
-  .ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 30px; --y: 170px; }
+  .ch-pad { left: calc(var(--x) - 22px); top: calc(var(--y) - 11px); width: 44px; height: 22px; border-radius: 7px; }
+  .ch-nm { --fy: calc(var(--y) + 11px); width: 44px; height: 13px; line-height: 13px; font-size: 7.5px; border-radius: 0 0 5px 5px; }
+  .ch-pad[data-ai="anthropic"], .ch-nm[data-ai="anthropic"] { --x: 26px; --y: 170px; }
   .ch-pad[data-ai="openai"], .ch-nm[data-ai="openai"] { --x: 76px; --y: 148px; }
-  .ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 122px; --y: 134px; }
-  .ch-pad[data-ai="xai"], .ch-nm[data-ai="xai"] { --x: 168px; --y: 130px; }
-  .ch-pad[data-ai="groq"], .ch-nm[data-ai="groq"] { --x: 214px; --y: 134px; }
-  .ch-pad[data-ai="deepseek"], .ch-nm[data-ai="deepseek"] { --x: 260px; --y: 148px; }
-  .ch-pad[data-ai="mistral"], .ch-nm[data-ai="mistral"] { --x: 306px; --y: 170px; }
-  [data-o="chat"] { --fx: 76px; --fy: 4px; }
-  .ch-chat { width: 92px; }
+  .ch-pad[data-ai="gemini"], .ch-nm[data-ai="gemini"] { --x: 126px; --y: 134px; }
+  .ch-pad[data-ai="xai"], .ch-nm[data-ai="xai"] { --x: 176px; --y: 130px; }
+  .ch-pad[data-ai="groq"], .ch-nm[data-ai="groq"] { --x: 226px; --y: 134px; }
+  .ch-pad[data-ai="deepseek"], .ch-nm[data-ai="deepseek"] { --x: 276px; --y: 148px; }
+  .ch-pad[data-ai="mistral"], .ch-nm[data-ai="mistral"] { --x: 326px; --y: 170px; }
+  [data-o="chat"] { --fx: 176px; --fy: 0px; }
+  .ch-chat { width: 96px; }
   [data-o="win"] { --fx: 272px; --fy: 500px; --wz: .16; }
   [data-o="l-you"] { --fx: 272px; --fy: 556px; }
   .ch-lab { width: 130px; }

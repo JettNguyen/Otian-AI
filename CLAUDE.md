@@ -245,9 +245,9 @@ with the wires hidden is not one. The ring of phones had hidden its lanes narrow
 and got its own the same day: three short lanes up from the phones' top edges to the agents'
 feet, with the phones stood 80 lower to give them their length. The fifth scene is **the AI you
 picked on `compare/chat-apps/`** (`.ch-figure`, the AI you picked section in `css/styles.css`,
-`js/pick-scene.js`): seven pads on the floor, one per AI company, one plain chat window wired to
-the three companies that make the chat apps, and your computer on Setup, AI account, with a
-cord Ember carries to whichever pad you picked. **It was going to be a clock through the night,
+`js/pick-scene.js`): seven platforms on the floor, one per AI company with its name on the slab's front
+face, one plain chat window with a cord to every one of them, and your computer on Setup, AI
+account, with a cord Ember carries to whichever platform you picked. **It was going to be a clock through the night,
 and TRUST.md stopped that before a line was drawn**: the page's own table says chat apps
 increasingly run scheduled tasks, so a chat app drawn idle all night would have been a claim the
 page hedges; which AI answers is the one row of that table with no hedge on it, so that is the
@@ -259,9 +259,11 @@ children of the figure, so the lit pad, the window's in-use row, its note and it
 `#ch-x:checked ~` in CSS alone, and the script owns only what a checkbox cannot redraw: where
 Ember stands and the cord's path, a cubic built from `--st-*`, `--cord`, `--cord-c1` and
 `--cord-in` on the scene, which narrow overrides. Three things its build taught: one unnamed chat
-window wired to one company reads as arbitrary and three copies read as clutter, so it is one
-window with three cords; Ember standing in front of a pad hides that pad's name, so Ember stands
-behind the pad, the names stand in front, and the cord runs under the pad to Ember's feet; and a
+window wired to one company reads as arbitrary, three copies read as clutter, and one window wired
+to three of seven reads as arbitrary again (every one of the seven has a chat app of its own), so
+it is one window with a cord to each; Ember standing in front of a pad hides that pad's name, and a
+name standing in front of the pad "falls off the platform", so Ember stands behind the pad, the
+name is the slab's own front face, and the cord runs under the pad to Ember's feet; and a
 window standing in front of the pads' whole width hides both the pads behind it and the cord's
 middle, so wide the pads sit left of a smaller window and narrow the window is small at the front
 right with the cord routed up the left side. The concept

@@ -1307,12 +1307,29 @@ list (`integrations()` in `crates/archie-domain/src/addon_fields.rs`, plus the c
 `crates/archie-domain/src/connectors.rs`). `docs/ADDON-ARCHITECTURE.md` says an unknown value
 "grants nothing, silently", and ADR-0007 gives the reason: a static registry means no dynamic code
 loading. **So adding a service, a tool, an event source or a screen is an app release, and only we
-can cut one.** Read the code for the current sets; the architecture doc warns that its own copy of
-them goes stale, and so would a copy here.
+can cut one, with one exception below.** Read the code for the current sets; the architecture doc
+warns that its own copy of them goes stale, and so would a copy here.
 
-⛔ **Never imply a person can extend what Archie can do.** They can recombine it, at any depth.
-✅ **Do say** that a new service or a new ability comes from us, in a release, and that the shelf
-and the skill you write yourself both draw on the same fixed set.
+**The exception, and it is a real one: a remote MCP server (shipped 2026-09-02).** A person types
+an `https` address under Connections, and `connector_connect` asks that server what it offers and
+stores its answer on the connection (`entry.mcp_tools`, from `McpServer::list_tools`). Those tool
+names then go onto the model's belt every turn, named inline in `mcp_call`'s own description
+(`mcp_call_definition` in `crates/archie-runtime/src/connectors.rs`). Four are in the catalog
+(GitHub, Linear, Stripe, Cloudflare) and a fifth row, "Another MCP server", takes any address. So
+the person really has added tools Archie never shipped, without a release. What does not change is
+the safety shape: a tool the server marks read-only runs, and anything else is staged for the
+person's approval like every other write.
+
+⚠️ **Untested against a live server, so say what it does and never call it proven.** Nothing has
+connected to a real endpoint (`docs/MCP-AND-SKILLMD.md`, and the Archie repo's own "built but
+never run live" list). Same clause as Flight Check-In.
+
+⛔ **Never imply a person can extend what Archie can do, except through an MCP server.** Outside
+that one door they recombine what exists, at any depth, and a new service or ability comes from us
+in a release. This boundary read as absolute until 2026-09-19, seventeen days after the door
+opened, which is this file's own stale-boundary failure: it made us claim less than we can do.
+✅ **Do say** that the shelf and the skill you write yourself draw on the same fixed set, and that
+an MCP server is the way past it.
 
 ---
 
@@ -1510,8 +1527,11 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
 - ⚠️ **Say the window comes back to them.** Every stop above ends with the person holding the
   browser, and that is the actual claim. Not that the agent is careful: that the part which could
   hurt them is the part it hands back.
-- ⚠️ **Two add-ons use it today**, Statement Collector and Form Filler (`required_screen` in the
-  Archie repo's `data/marketplace/skills/`). Copy implying a shelf of them is describing next year.
+- ⚠️ **Three add-ons use it today**, Statement Collector, Form Filler and Flight Check-In
+  (`required_screen` in the Archie repo's `data/marketplace/skills/`, and that grep is the count).
+  Flight Check-In joined on 2026-09-16 and this clause was not updated in the same pass, while the
+  entry describing it sits forty lines below. Copy implying a shelf of them is still describing
+  next year.
 
 **Boundaries — do not cross:**
 - ❌ **Never say Archie buys, books, or checks out.** It cannot type a card number at all, and the

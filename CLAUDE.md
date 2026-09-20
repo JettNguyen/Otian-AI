@@ -243,7 +243,28 @@ each out of a computer's side and around the open screen, with the tower far eno
 wire starts above the screen's top edge; narrow hid them at first, and a comparison of two wires
 with the wires hidden is not one. The ring of phones had hidden its lanes narrow the same way,
 and got its own the same day: three short lanes up from the phones' top edges to the agents'
-feet, with the phones stood 80 lower to give them their length. The concept
+feet, with the phones stood 80 lower to give them their length. The fifth scene is **the AI you
+picked on `compare/chat-apps/`** (`.ch-figure`, the AI you picked section in `css/styles.css`,
+`js/pick-scene.js`): seven pads on the floor, one per AI company, one plain chat window wired to
+the three companies that make the chat apps, and your computer on Setup, AI account, with a
+cord Ember carries to whichever pad you picked. **It was going to be a clock through the night,
+and TRUST.md stopped that before a line was drawn**: the page's own table says chat apps
+increasingly run scheduled tasks, so a chat app drawn idle all night would have been a claim the
+page hedges; which AI answers is the one row of that table with no hedge on it, so that is the
+claim. **Its control is the app's own picker, all seven rows of it**, as radios above the scene
+in the app's order and words (`PROVIDER_ORDER`, `PROVIDER_LABEL`, the notes and key hints in
+archie's `src/app/connections.ts`), because the rows drawn inside the window are far too small
+to be the control, and a bar of three read to Jett as "only these three". The radios are direct
+children of the figure, so the lit pad, the window's in-use row, its note and its key hint follow
+`#ch-x:checked ~` in CSS alone, and the script owns only what a checkbox cannot redraw: where
+Ember stands and the cord's path, a cubic built from `--st-*`, `--cord`, `--cord-c1` and
+`--cord-in` on the scene, which narrow overrides. Three things its build taught: one unnamed chat
+window wired to one company reads as arbitrary and three copies read as clutter, so it is one
+window with three cords; Ember standing in front of a pad hides that pad's name, so Ember stands
+behind the pad, the names stand in front, and the cord runs under the pad to Ember's feet; and a
+window standing in front of the pads' whole width hides both the pads behind it and the cord's
+middle, so wide the pads sit left of a smaller window and narrow the window is small at the front
+right with the cord routed up the left side. The concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

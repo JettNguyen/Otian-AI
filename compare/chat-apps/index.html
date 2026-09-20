@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie vs ChatGPT and Claude | Otian AI</title>
-  <meta name="description" content="A chat app answers when you open it and ask. Archie runs the same AI models on your own computer, on a schedule, through your own accounts. An honest side-by-side, including what a chat app does better." />
+  <meta name="description" content="A chat app answers when you open it and ask. Archie runs an agent on your own computer that thinks with the same AI companies&rsquo; models, on your own accounts, on a schedule you set. An honest side-by-side, including what a chat app does better." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260918-56" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260918-57" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -190,156 +190,146 @@
 
         
 
-        <!-- Where the work runs. The strip table that stood here, drawn instead: the same chips in both rows, and only the box around them changes.
-             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
-             does it, so nothing here touches css/styles.css. The chips are the strip table's
-             own words; the full table, with its sources, is still under the next heading. Both
-             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
-             wherever "your computer" is drawn. -->
-
-        <!-- Where the work runs. The strip table that stood here, drawn instead: the same chips in both rows, and only the box around them changes.
-             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
-             does it, so nothing here touches css/styles.css. The chips are the strip table's
-             own words; the full table, with its sources, is still under the next heading. Both
-             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
-             wherever "your computer" is drawn. -->
-
-        <!-- Where the work runs. The strip table that stood here, drawn instead: the same chips in both rows, and only the box around them changes.
-             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
-             does it, so nothing here touches css/styles.css. The chips are the strip table's
-             own words; the full table, with its sources, is still under the next heading. Both
-             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
-             wherever "your computer" is drawn. -->
-
-        <!-- Where the work runs. The strip table that stood here, drawn instead: the same chips in both rows, and only the box around them changes.
-             The figure's classes and keyframes live in its own <style>, as compare/cloud-agents/
-             does it, so nothing here touches css/styles.css. The chips are the strip table's
-             own words; the full table, with its sources, is still under the next heading. Both
-             rows end at an AI company because TRUST.md keeps the provider-egress clause visible
-             wherever "your computer" is drawn. -->
-        <figure class="explain-figure cs-figure mt-40 fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 640 330" role="img" aria-labelledby="ca-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="ca-t">Two rows, drawn the same way. In the top row, a chat app: you on the left, then a box labelled the chat app&rsquo;s servers, the same company as its AI, holding the agent, its files and conversations, and its scheduled tasks where the plan has them. A line runs from that box to that company&rsquo;s own AI. In the bottom row, Archie: the agent, its files and conversations, and its routines, in a box labelled your computer, while it is on, with a line running to the AI you picked, on your account.</title>
-            <style>
-              .cs-head{fill:currentColor;font-size:12.5px;font-weight:650}
-              .cs-box-them{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-              .cs-box-base{fill:var(--bg-card);stroke:none}
-              .cs-box-us{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
-              .cs-title{fill:currentColor;font-size:12.5px;font-weight:650}
-              .cs-note{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:end}
-              .cs-chip{fill:var(--bg-secondary)}
-              .cs-chip--open{fill:none;stroke:var(--line-muted);stroke-width:1.2;stroke-dasharray:4 3}
-              .cs-chiptext{fill:currentColor;font-size:11px;opacity:.85}
-              .cs-tag{fill:currentColor;font-size:10px;opacity:.6;text-anchor:end}
-              .cs-tag--us{fill:var(--accent-ink);opacity:1;font-weight:600}
-              .cs-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
-              .cs-mark{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
-              .cs-you{fill:currentColor;font-size:11px;text-anchor:middle;opacity:.75}
-              .cs-ai{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-              .cs-aitext{fill:currentColor;font-size:10.5px;text-anchor:middle;opacity:.85}
-              .cs-node{fill:var(--bg-secondary)}
-              .cs-node--stop{fill:rgba(224,138,91,.10);stroke:var(--accent);stroke-width:1.6}
-              .cs-nodetext{fill:currentColor;font-size:11px;opacity:.85;text-anchor:middle}
-              .cs-nodetext--stop{fill:var(--accent-ink);opacity:1;font-weight:600}
-              .cs-bubble{fill:var(--bg-card);stroke:currentColor;stroke-width:1.3;opacity:.9}
-              .cs-dot{display:none;fill:var(--accent)}
-              @supports (offset-path:path("M0,0 L1,1")){
-                .cs-dot{display:block;offset-distance:50%}
-                @media (prefers-reduced-motion:no-preference){
-                  .cs-dot--in{animation:csIn 5s linear infinite}
-                  .cs-dot--out{animation:csOut 5s linear infinite}
-                  @keyframes csIn{0%{offset-distance:0%;opacity:0}6%{opacity:1}38%{offset-distance:100%;opacity:1}44%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
-                  @keyframes csOut{0%,50%{offset-distance:0%;opacity:0}56%{opacity:1}88%{offset-distance:100%;opacity:1}94%{offset-distance:100%;opacity:0}100%{offset-distance:100%;opacity:0}}
-
-                }
-              }
-            </style>
-            <text class="cs-head" x="8" y="22">A chat app</text>
-            <circle class="cs-mark" cx="38" cy="86" r="10"/>
-            <path class="cs-mark" d="M18,116 a20,20 0 0 1 40,0"/>
-            <text class="cs-you" x="38" y="140">You</text>
-            <path class="cs-wire" d="M64,96 L152,96"/>
-            <circle class="cs-dot cs-dot--in" r="5" style="offset-path:path('M64,96 L152,96')"/>
-            <rect class="cs-box-them" x="152" y="36" width="310" height="120" rx="14"/>
-            <text class="cs-title" x="167" y="58">The chat app&rsquo;s servers</text>
-            <text class="cs-note" x="447" y="58">the same company as its AI</text>
-            <rect class="cs-chip" x="164" y="70" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="85">The agent</text>
-            <rect class="cs-chip" x="164" y="96" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="111">Its files and conversations</text>
-            <rect class="cs-chip" x="164" y="122" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="137">Its scheduled tasks, where the plan has them</text>
-            <path class="cs-wire" d="M462,96 L528,96"/>
-            <circle class="cs-dot cs-dot--out" r="5" style="offset-path:path('M462,96 L528,96')"/>
-            <rect class="cs-ai" x="528" y="72" width="108" height="48" rx="12"/>
-            <text class="cs-aitext" x="582" y="92">That company&rsquo;s</text>
-            <text class="cs-aitext" x="582" y="106">own AI</text>
-            <text class="cs-head" x="8" y="184">Archie</text>
-            <circle class="cs-mark" cx="38" cy="248" r="10"/>
-            <path class="cs-mark" d="M18,278 a20,20 0 0 1 40,0"/>
-            <text class="cs-you" x="38" y="302">You</text>
-            <path class="cs-wire" d="M64,258 L152,258"/>
-            <circle class="cs-dot cs-dot--in" r="5" style="offset-path:path('M64,258 L152,258')"/>
-            <rect class="cs-box-base" x="152" y="198" width="310" height="120" rx="14"/>
-            <rect class="cs-box-us" x="152" y="198" width="310" height="120" rx="14"/>
-            <text class="cs-title" x="167" y="220">Your computer</text>
-            <text class="cs-note" x="447" y="220">while it is on</text>
-            <rect class="cs-chip" x="164" y="232" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="247">The agent</text>
-            <rect class="cs-chip" x="164" y="258" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="273">Its files and conversations</text>
-            <rect class="cs-chip" x="164" y="284" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="299">Its routines</text>
-            <path class="cs-wire" d="M462,258 L528,258"/>
-            <circle class="cs-dot cs-dot--out" r="5" style="offset-path:path('M462,258 L528,258')"/>
-            <rect class="cs-ai" x="528" y="234" width="108" height="48" rx="12"/>
-            <text class="cs-aitext" x="582" y="254">The AI you picked</text>
-            <text class="cs-aitext" x="582" y="268">on your account</text>
-          </svg>
-
-          <svg class="explain-svg--mobile" viewBox="0 0 340 514" role="img" aria-labelledby="cam-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="cam-t">Two rows, stacked. On top, a chat app: you, then a box labelled the chat app&rsquo;s servers, the same company as its AI, holding the agent, its files and conversations, and its scheduled tasks where the plan has them, with a line down to that company&rsquo;s own AI. Below, Archie: the same things in a box labelled your computer, while it is on, with a line down to the AI you picked, on your account.</title>
-            <text class="cs-head" x="8" y="16">A chat app</text>
-            <circle class="cs-mark" cx="30" cy="36" r="8"/>
-            <path class="cs-mark" d="M14,60 a16,16 0 0 1 32,0"/>
-            <text class="cs-you" x="62" y="52" style="text-anchor:start">You</text>
-            <path class="cs-wire" d="M30,68 L30,84"/>
-            <circle class="cs-dot cs-dot--in" r="4.5" style="offset-path:path('M30,68 L30,84')"/>
-            <rect class="cs-box-them" x="8" y="84" width="324" height="116" rx="14"/>
-            <text class="cs-title" x="22" y="106">The chat app&rsquo;s servers</text>
-            <text class="cs-note" x="318" y="106">the same company as its AI</text>
-            <rect class="cs-chip" x="19" y="118" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="133">The agent</text>
-            <rect class="cs-chip" x="19" y="144" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="159">Its files and conversations</text>
-            <rect class="cs-chip" x="19" y="170" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="185">Its scheduled tasks, where the plan has them</text>
-            <path class="cs-wire" d="M30,200 L30,216"/>
-            <circle class="cs-dot cs-dot--out" r="4.5" style="offset-path:path('M30,200 L30,216')"/>
-            <rect class="cs-ai" x="8" y="216" width="160" height="34" rx="11"/>
-            <text class="cs-aitext" x="88" y="237">That company&rsquo;s own AI</text>
-            <text class="cs-head" x="8" y="270">Archie</text>
-            <circle class="cs-mark" cx="30" cy="290" r="8"/>
-            <path class="cs-mark" d="M14,314 a16,16 0 0 1 32,0"/>
-            <text class="cs-you" x="62" y="306" style="text-anchor:start">You</text>
-            <path class="cs-wire" d="M30,322 L30,338"/>
-            <circle class="cs-dot cs-dot--in" r="4.5" style="offset-path:path('M30,322 L30,338')"/>
-            <rect class="cs-box-base" x="8" y="338" width="324" height="116" rx="14"/>
-            <rect class="cs-box-us" x="8" y="338" width="324" height="116" rx="14"/>
-            <text class="cs-title" x="22" y="360">Your computer</text>
-            <text class="cs-note" x="318" y="360">while it is on</text>
-            <rect class="cs-chip" x="19" y="372" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="387">The agent</text>
-            <rect class="cs-chip" x="19" y="398" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="413">Its files and conversations</text>
-            <rect class="cs-chip" x="19" y="424" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="439">Its routines</text>
-            <path class="cs-wire" d="M30,454 L30,470"/>
-            <circle class="cs-dot cs-dot--out" r="4.5" style="offset-path:path('M30,454 L30,470')"/>
-            <rect class="cs-ai" x="8" y="470" width="210" height="34" rx="11"/>
-            <text class="cs-aitext" x="113" y="491">The AI you picked, on your account</text>
-          </svg>
-          <figcaption>A chat app keeps the agent, its files and its tasks on its own servers. Archie keeps them on your computer, thinks with the AI you picked, and holds an email or a meeting change for your Send.</figcaption>
+<!-- The AI you picked. The strip table that stood here was two rows with a box in the middle that changed; this is the
+             page's fifth staged scene (Jett, 2026-09-19): seven pads on the floor, one per AI company, one plain
+             chat window wired to the three companies that make the chat apps, and your own computer on Setup,
+             AI account, with a cord your agent carries to whichever pad you picked. The bar above is the app's
+             own picker at a size a finger can hit, all seven rows of it (three read as "only these three",
+             Jett), in the app's own order and words; the radios are direct children of the figure so the pads,
+             the window's rows, its note and its key hint follow them in CSS alone. js/pick-scene.js walks the
+             agent and redraws the cord, and cycles the pick until the reader takes it. The company names are
+             FACTS.md's seven providers; the labels, row notes and key hints are the app's own, from
+             src/app/connections.ts; the caption keeps TRUST.md's wording for where a chat app keeps its
+             things and for the AI you picked, on your own account. -->
+        <svg class="ch-sprite" aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden"><defs><linearGradient id="dayArchieGrad" gradientUnits="userSpaceOnUse" x1="512" y1="85" x2="512" y2="888">
+        <stop offset="0" stop-color="#F0AB80"/><stop offset="0.55" stop-color="#E28D5E"/><stop offset="1" stop-color="#C36A3D"/>
+      </linearGradient><symbol id="g-ai" viewBox="0 0 24 24"><path d="M5 21V7.5L12 4l7 3.5V21"/><path d="M3 21h18"/><path d="M9 11h2M13 11h2M9 15h2M13 15h2M11 21v-3.5h2V21"/></symbol><symbol id="g-now" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol><symbol id="g-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol><symbol id="g-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol><symbol id="g-work" viewBox="0 0 24 24"><rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="10" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="4" height="8" rx="1.5"/></symbol><symbol id="g-personality" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8.2 14.5a4.7 4.7 0 0 0 7.6 0M8.8 9h.01M15.2 9h.01"/></symbol><symbol id="g-skills" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6.3 6.3 4 4M20 20l-2.3-2.3M17.7 6.3 20 4M4 20l2.3-2.3"/><circle cx="12" cy="12" r="3"/></symbol><symbol id="g-routines" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6.4v5.6l3.5 2.3"/></symbol><symbol id="g-documents" viewBox="0 0 24 24"><path d="M13.8 2.5H6.5A2.5 2.5 0 0 0 4 5v14a2.5 2.5 0 0 0 2.5 2.5h11A2.5 2.5 0 0 0 20 19V8.7z"/><path d="M13.8 2.5V8.7H20"/><path d="M8 13.5h8M8 17h5"/></symbol><symbol id="g-connections" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v3a6 6 0 0 1-12 0z"/><path d="M12 17v5"/></symbol><symbol id="g-settings" viewBox="0 0 24 24"><path d="M 4 8.6 H 20"/><path d="M 4 15.4 H 20"/><circle cx="14.8" cy="8.6" r="2.4" fill="currentColor"/><circle cx="9.2" cy="15.4" r="2.4" fill="currentColor"/></symbol><symbol id="g-basket" viewBox="0 0 24 24"><path d="M 3.5 10.5 H 20.5"/><path d="M 5 10.5 V 18 A 1.5 1.5 0 0 0 6.5 19.5 H 17.5 A 1.5 1.5 0 0 0 19 18 V 10.5"/><path d="M 7 10.5 V 8 A 2 2 0 0 1 9 6 H 15 A 2 2 0 0 1 17 8 V 10.5"/></symbol><symbol id="g-agents" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.4"/><path d="M 5.5 19.2 C 5.5 15.5 8.4 13.6 12 13.6 C 15.6 13.6 18.5 15.5 18.5 19.2"/></symbol></defs></svg>
+        <figure class="ch-figure mt-40 fade-up delay-1">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-anthropic" value="anthropic" checked>
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-openai" value="openai">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-gemini" value="gemini">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-xai" value="xai">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-groq" value="groq">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-deepseek" value="deepseek">
+          <input type="radio" class="ch-radio" name="ch-ai" id="ch-mistral" value="mistral">
+          <div class="ch-bar-wrap">
+            <span class="ch-bar-lead">Archie thinks with</span>
+            <div class="ch-bar" role="group" aria-label="Which AI company Archie thinks with">
+              <label class="ch-opt" for="ch-anthropic">Claude<i>by Anthropic</i></label>
+              <label class="ch-opt" for="ch-openai">ChatGPT<i>by OpenAI</i></label>
+              <label class="ch-opt" for="ch-gemini">Gemini<i>by Google</i></label>
+              <label class="ch-opt" for="ch-xai">Grok<i>by xAI</i></label>
+              <label class="ch-opt" for="ch-groq">Groq<i>&nbsp;</i></label>
+              <label class="ch-opt" for="ch-deepseek">DeepSeek<i>&nbsp;</i></label>
+              <label class="ch-opt" for="ch-mistral">Mistral<i>&nbsp;</i></label>
+            </div>
+          </div>
+          <div class="ch-scene" role="img" aria-label="An illustration of seven pads on a floor, one for each AI company Archie can think with: Anthropic, OpenAI, Google, xAI, Groq, DeepSeek and Mistral. At the back, one plain chat window standing for the chat apps, wired to the three companies that make them, Anthropic, OpenAI and Google, and nowhere else. In front, your own computer running Archie on its Setup page, where the AI account is picked, with a cord running from it across the floor to the pad you picked, and your agent standing at that pad holding the cord's end. Pick any of the seven above and the agent carries the cord to that company's pad; the chat window's cords never move.">
+            <div class="ch-box" aria-hidden="true">
+              <div class="ch-floor"><div class="ch-plane">
+                <div class="ch-grid"></div>
+                <svg class="ch-paths" aria-hidden="true" focusable="false">
+                  <g class="ch-w"><path d="M100,4 L60,135" class="dashed"/><path d="M126,4 L126,114" class="dashed"/><path d="M152,4 L192,101" class="dashed"/></g>
+                  <g class="ch-n"><path d="M58,8 L30,159" class="dashed"/><path d="M76,8 L76,137" class="dashed"/><path d="M94,8 L122,123" class="dashed"/></g>
+                  <path class="ch-cord" d="M478,364 C380,372 130,227 60,147"/>
+                </svg>
+                <div class="ch-pad" data-ai="anthropic"></div>
+                <div class="ch-pad" data-ai="openai"></div>
+                <div class="ch-pad" data-ai="gemini"></div>
+                <div class="ch-pad" data-ai="xai"></div>
+                <div class="ch-pad" data-ai="groq"></div>
+                <div class="ch-pad" data-ai="deepseek"></div>
+                <div class="ch-pad" data-ai="mistral"></div>
+                <div class="ch-stand ch-nm" data-ai="anthropic">Anthropic</div>
+                <div class="ch-stand ch-nm" data-ai="openai">OpenAI</div>
+                <div class="ch-stand ch-nm" data-ai="gemini">Google</div>
+                <div class="ch-stand ch-nm" data-ai="xai">xAI</div>
+                <div class="ch-stand ch-nm" data-ai="groq">Groq</div>
+                <div class="ch-stand ch-nm" data-ai="deepseek">DeepSeek</div>
+                <div class="ch-stand ch-nm" data-ai="mistral">Mistral</div>
+                <div class="ch-stand ch-chat" data-o="chat">
+                  <div class="t"><i></i>Chat apps</div>
+                  <div class="th"><div class="b me">Draft a reply to Sarah</div><div class="b">Sure, here is a draft:</div></div>
+                  <div class="c">Ask anything</div>
+                </div>
+                <div class="ch-stand ch-win" data-o="win">
+                  <div class="da-app">
+                  <span class="da-traffic"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>
+                  <div class="da-body">
+                  <aside class="da-side">
+                  <div class="da-brand">
+                  <div class="da-brand-btn">
+                  <svg viewBox="0 0 1024 1024" aria-hidden="true"><polygon fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/><path fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/></svg>
+                  <span class="da-brand-word">rchie</span>
+                  </div>
+                  <span class="da-brand-tag">by Otian AI</span>
+                  </div>
+                  <div class="da-picker">
+                  <svg class="da-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg>
+                  </div>
+                  <div class="da-sections">
+                  <div class="da-nav">
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-now"/></svg></span><span class="da-label">Now</span></div>
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-message"/></svg></span><span class="da-label">Chat</span><span class="da-pill-unread">3</span></div>
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-calendar"/></svg></span><span class="da-label">Calendar</span></div>
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-work"/></svg></span><span class="da-label">Work</span></div>
+                  <div class="da-rule"></div>
+                  <div class="da-row"><span class="da-glyph plum"><svg><use href="#g-personality"/></svg></span><span class="da-label">Personality</span></div>
+                  <div class="da-row"><span class="da-glyph skill"><svg><use href="#g-skills"/></svg></span><span class="da-label">Skills</span></div>
+                  <div class="da-row"><span class="da-glyph teal"><svg><use href="#g-routines"/></svg></span><span class="da-label">Routines</span></div>
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-documents"/></svg></span><span class="da-label">Knowledge</span></div>
+                  <div class="da-row"><span class="da-glyph"><svg><use href="#g-connections"/></svg></span><span class="da-label">Connections</span></div>
+                  <div class="da-row on"><span class="da-glyph"><svg><use href="#g-settings"/></svg></span><span class="da-label">Setup</span></div>
+                  </div>
+                  </div>
+                  <div class="da-places">
+                  <div class="da-place store"><svg><use href="#g-basket"/></svg><span>Marketplace</span></div>
+                  <div class="da-place gold"><svg><use href="#g-documents"/></svg><span>Resources</span></div>
+                  <div class="da-pairrow">
+                  <div class="da-pair"><svg><use href="#g-settings"/></svg><span>Settings</span></div>
+                  <div class="da-pair"><svg><use href="#g-agents"/></svg><span>Account</span></div>
+                  </div>
+                  </div>
+                  </aside>
+                  <div class="da-page">
+                  <div class="da-page-pad">
+                  <div class="da-ahead-row">
+                  <div class="da-ahead-left">
+                  <div class="da-facebtn"><span class="da-avatar lg"><span data-ember="terracotta.peak.pill.none"></span></span></div><div style="min-width:0"><div class="da-name">Ember <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 4.5l3 3L8 19l-4 1 1-4z"/></svg></div><p class="da-purpose">Answers the front desk, the books and the calendar for the three of us.</p></div>
+                  </div>
+                  <div class="da-ahead-right">
+                  <span class="da-statusbtn">&#9679; Live <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span>
+                  <span class="da-runbtn">Stop</span>
+                  </div>
+                  </div>
+                  <div class="da-pane">
+                  <div class="da-tabhead"><span class="rail"></span><div style="min-width:0;flex:1"><h2>Setup</h2><p>What it needs to run, how it answers, who may message it, the record of what it has done, and how to delete it.</p></div></div>
+                  <div class="da-setuphead"><h3>AI account</h3><div class="note"><span class="ch-v" data-ai="anthropic">Claude (by Anthropic)</span><span class="ch-v" data-ai="openai">ChatGPT (by OpenAI)</span><span class="ch-v" data-ai="gemini">Gemini (by Google)</span><span class="ch-v" data-ai="xai">Grok (by xAI)</span><span class="ch-v" data-ai="groq">Groq</span><span class="ch-v" data-ai="deepseek">DeepSeek</span><span class="ch-v" data-ai="mistral">Mistral</span></div></div>
+                  <div class="da-keycard">
+                  <div class="da-keycard-t">Replace key or switch service</div>
+                  <div class="da-picklist">
+                  <div class="da-pick" data-ai="anthropic"><span class="radio"><i></i></span><span class="tx"><span class="l">Claude (by Anthropic)</span><span class="n done">&#10003; in use</span><span class="n own">recommended; your free credits run on it</span></span></div>
+                  <div class="da-pick" data-ai="openai"><span class="radio"><i></i></span><span class="tx"><span class="l">ChatGPT (by OpenAI)</span><span class="n done">&#10003; in use</span><span class="n own">makes pictures, and searches the web</span></span></div>
+                  <div class="da-pick" data-ai="gemini"><span class="radio"><i></i></span><span class="tx"><span class="l">Gemini (by Google)</span><span class="n done">&#10003; in use</span><span class="n own">makes pictures; free to start</span></span></div>
+                  <div class="da-pick" data-ai="xai"><span class="radio"><i></i></span><span class="tx"><span class="l">Grok (by xAI)</span><span class="n done">&#10003; in use</span><span class="n own">searches the web; needs prepaid credit</span></span></div>
+                  <div class="da-pick" data-ai="groq"><span class="radio"><i></i></span><span class="tx"><span class="l">Groq</span><span class="n done">&#10003; in use</span><span class="n own">runs open models cheaply; needs a card</span></span></div>
+                  <div class="da-pick" data-ai="deepseek"><span class="radio"><i></i></span><span class="tx"><span class="l">DeepSeek</span><span class="n done">&#10003; in use</span><span class="n own">very low cost; a Chinese company</span></span></div>
+                  <div class="da-pick" data-ai="mistral"><span class="radio"><i></i></span><span class="tx"><span class="l">Mistral</span><span class="n done">&#10003; in use</span><span class="n own">a French company, and the only EU one</span></span></div>
+                  </div>
+                  <div class="da-keyrow"><div class="da-field"><span class="ch-v" data-ai="anthropic">sk-ant-&hellip;</span><span class="ch-v" data-ai="openai">sk-&hellip;</span><span class="ch-v" data-ai="gemini">AIza&hellip;</span><span class="ch-v" data-ai="xai">xai-&hellip;</span><span class="ch-v" data-ai="groq">gsk_&hellip;</span><span class="ch-v" data-ai="deepseek">sk-&hellip;</span><span class="ch-v" data-ai="mistral">your key</span></div><span class="da-btn-accent">Connect</span><span class="da-btn-quiet">Show steps</span></div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="ch-stand ch-lab" data-o="l-you"><b>Your computer</b><i>the agent and its files</i></div>
+                <div class="ch-stand ch-agent" data-o="ember"><span class="ch-ember" data-ember="terracotta.peak.pill.none"></span></div>
+              </div></div>
+            </div>
+          </div>
+          <figcaption>Each chat app answers with its maker&rsquo;s AI, on its maker&rsquo;s servers. Archie lives on your computer and thinks with the AI you picked, on an account you pay for: seven companies, and you can change your mind.</figcaption>
         </figure>
 
         <div class="mt-40 two-col fade-up delay-1">
@@ -635,10 +625,10 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260918-56"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260918-56"></script>
-  <script src="../../js/ember.js?v=20260918-56" defer></script>
-  <script src="../../js/pick-scene.js?v=20260918-56" defer></script>
-  <script src="../../js/demo-player.js?v=20260918-56"></script>
+  <script src="../../js/nav.js?v=20260918-57"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260918-57"></script>
+  <script src="../../js/ember.js?v=20260918-57" defer></script>
+  <script src="../../js/pick-scene.js?v=20260918-57" defer></script>
+  <script src="../../js/demo-player.js?v=20260918-57"></script>
 </body>
 </html>

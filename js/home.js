@@ -335,7 +335,7 @@
            on the phone at a mark measured off the phone's own bottom (m-night in the stylesheet,
            inside the narrow block), so the two are solved together. */
         pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -101, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 199, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -115, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 185, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
            moment where the reader feels anything, and relief is the drive the page was weakest

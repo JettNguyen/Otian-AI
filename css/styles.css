@@ -16739,13 +16739,19 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    streak cannot come around the front as a ring. Eleven layers rather than seven, because at the
    angles these poses use the stack steps sideways about a pixel and a half per layer, and at seven
    it stepped three and read as a stair. */
-.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); background: linear-gradient(rgba(255, 255, 255, var(--lt, 0)), rgba(255, 255, 255, var(--lt, 0))), linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
+/* THE PAINT IS ON ::before (2026-09-19), and the slab itself carries only its place, its depth and,
+   narrow, its fade. Narrow needs two masks on a slab, the fade down it and a cut across it, and
+   Safari drops a two-layer mask with a composite operator from a layer that stands in 3D; one
+   mask on the slab and one on its paint is what it honours. See the narrow block. */
+.dp-edge { position: absolute; inset: var(--i, 0px); border-radius: calc(38px - var(--i, 0px)); pointer-events: none; transform: translateZ(var(--z)); }
+.dp-edge::before { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(rgba(255, 255, 255, var(--lt, 0)), rgba(255, 255, 255, var(--lt, 0))), linear-gradient(rgba(0, 0, 0, var(--dk, 0)), rgba(0, 0, 0, var(--dk, 0))), linear-gradient(calc(148deg + var(--lit, 0deg)), #45453F 0%, #1A1A18 11%, #0C0C0B 38%, #090908 74%, #1C1C1A 100%); }
 /* The side of the phone is polished, so the sliver of rim the turn exposes carries a sheen down
    it. js/home.js puts that sheen where the rim is showing (--rim-x) and brings it up with how far
    the phone is turned (--rim-a), so the phone's side catches the light as it comes around. It is a
    wide soft band rather than a stripe, for the same reason the swell is small. */
 .dp-edge::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(90deg, transparent calc(var(--rim-x, 50%) - 16%), rgba(255, 255, 255, calc(var(--rim-a, 0) * var(--br, 1))) var(--rim-x, 50%), transparent calc(var(--rim-x, 50%) + 16%)); }
-.dp-edge--back { background: #0B0B0A; box-shadow: var(--shadow-app); }
+.dp-edge--back { box-shadow: var(--shadow-app); }
+.dp-edge--back::before { background: #0B0B0A; }
 .dp-edge--back::after { display: none; }
 /* THE PHONE FADES AS ONE THING, AND THAT IS A DECISION TAKEN TWICE. An opacity of anything but 1
    forces transform-style to flat, so fading .day-phone as a group lays all eleven rim layers into
@@ -17283,8 +17289,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      IT WENT FROM 19 DOWN TO 4 UP THE SAME DAY, and that is the mask moving it rather than a
      change of mind: cutting the slice under the message bar took the bottom stop from 80% to 90%,
      so the part you can see stopped sitting high in the box. Change --phone-mask and this number
-     is solved again, not adjusted, and so is the 2:00 am stack. */
-  .day-stage.is-timed .day-scene-wrap { transform: translateY(calc(var(--sc, 1) * -4px)); }
+     is solved again, not adjusted, and so is the 2:00 am stack.
+
+     AND FROM 4 UP TO 10 DOWN THE SAME EVENING, when both ramps moved up (the top gone by 10%, the
+     bottom holding to 87%): the part you can see moved up its box by fourteen units, so the scene
+     goes down by the same and the phone stands where it did against the clock and the caption.
+     The four conversation acts agree on it within two units again (9.0, 8.8, 10.7 and 10.4), and
+     the 2:00 am poses in js/home.js carry the fourteen the other way. */
+  .day-stage.is-timed .day-scene-wrap { transform: translateY(calc(var(--sc, 1) * 10px)); }
   .day-scene { width: 400px; }
   /* THE BAND IS AS TALL AS THE CAPTION IN IT, AND IT WAS AS TALL AS THE LONGEST ONE UNTIL
      2026-09-19. Eight captions stacked in one grid cell means the cell is the tallest of them,
@@ -17421,10 +17433,18 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      bar a bit more"), so the phone dissolves through the last thing it is saying instead of
      stopping dead under it.
 
-     98.5% AND NOT 100%: the bezel wall is the device's last 1.3%, and a mask that only reaches
+     97% AND NOT 100%: the bezel wall is the device's last 1.3%, and a mask that only reaches
      nothing at the very end leaves a hairline of metal across the bottom of a slice that is not
      supposed to have an end ("ensure the bottom bezel is not visible"). Ending the ramp above it
-     puts the whole wall inside the clear part. The island and status bar are not drawn. */
+     puts the whole wall inside the clear part. The island and status bar are not drawn.
+
+     BOTH RAMPS MOVED UP THE SAME EVENING. The top holds by 10% rather than 13%, so the bar's face
+     and name stand at half to full rather than a third to four fifths (Jett: "move the gradient
+     up a bit at the top so it fades out less of the header"). The bottom starts at 87% rather
+     than 90% and is gone at 97% rather than 98.5%, which is the message bar's own bottom edge, so
+     the bar is the thing dissolving rather than the space under it (Jett: "move the gradient up
+     on the bottom slightly as well so it fades more of the message bar"). The nudge on
+     .day-scene-wrap and the 2:00 am poses were solved again for it, as their comments say. */
   /* The phone is seen through a window: its ends fade out, so it stands nearly full width and
      readable without needing room for its whole height. A variable, because one act shows a
      different amount of it, and it inherits from the layer down to the glass and every rim layer. */
@@ -17437,10 +17457,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      shrink in height rather than instantly get cut"). They are one rule now, read off --night,
      which is the same 0-to-1 the room is painted with: the phone closes as the light goes and
      opens as it comes back, on the act's own easing, and at either end the numbers are the ones
-     that were there before (90 and 98.5 by day, 52 and 65 at night). --night and not .is-night is
+     that were there before (87 and 97 by day, 52 and 65 at night). --night and not .is-night is
      the rule to keep: a look may snap, a size may not. Without the driver it resolves to 0, which
      is the day mask, which is the right thing to see. */
-  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
+  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 10%, #000 calc(87% - var(--night, 0) * 35%), transparent calc(97% - var(--night, 0) * 32%), transparent 100%); }
   /* AND THE RIM FADES AT THE SCREEN'S OWN RATE, THROUGH THE ELEVENTH ROOT (2026-09-19). The rim is
      eleven slabs standing behind the glass five pixels apart, and every one of them is masked on
      its own, so whatever one layer's mask says, the stack says something stronger: a ramp that
@@ -17462,7 +17482,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      moves the rim with the glass. Change the number of .dp-edge layers in index.html and the six
      alphas are solved again, not adjusted: a = 1 - (1 - s) ^ (1 / n) at s = .97, .9, .75, .5, .25
      and .1. */
-  .day-phone { --edge-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, rgba(0, 0, 0, .0095) 2.65%, rgba(0, 0, 0, .0258) 4.375%, rgba(0, 0, 0, .0611) 7.25%, rgba(0, 0, 0, .1184) 10.125%, rgba(0, 0, 0, .1889) 11.85%, rgba(0, 0, 0, .273) 12.655%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), rgba(0, 0, 0, .273) calc(90.255% - var(--night, 0) * 37.865%), rgba(0, 0, 0, .1889) calc(90.85% - var(--night, 0) * 37.55%), rgba(0, 0, 0, .1184) calc(92.125% - var(--night, 0) * 36.875%), rgba(0, 0, 0, .0611) calc(94.25% - var(--night, 0) * 35.75%), rgba(0, 0, 0, .0258) calc(96.375% - var(--night, 0) * 34.625%), rgba(0, 0, 0, .0095) calc(97.65% - var(--night, 0) * 33.95%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
+  .day-phone { --edge-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, rgba(0, 0, 0, .0095) 2.35%, rgba(0, 0, 0, .0258) 3.625%, rgba(0, 0, 0, .0611) 5.75%, rgba(0, 0, 0, .1184) 7.875%, rgba(0, 0, 0, .1889) 9.15%, rgba(0, 0, 0, .273) 9.745%, #000 10%, #000 calc(87% - var(--night, 0) * 35%), rgba(0, 0, 0, .273) calc(87.3% - var(--night, 0) * 34.91%), rgba(0, 0, 0, .1889) calc(88% - var(--night, 0) * 34.7%), rgba(0, 0, 0, .1184) calc(89.5% - var(--night, 0) * 34.25%), rgba(0, 0, 0, .0611) calc(92% - var(--night, 0) * 33.5%), rgba(0, 0, 0, .0258) calc(94.5% - var(--night, 0) * 32.75%), rgba(0, 0, 0, .0095) calc(96% - var(--night, 0) * 32.3%), transparent calc(97% - var(--night, 0) * 32%), transparent 100%); }
   /* AND THE RIM IS PAINTED ONLY WHERE IT CAN SHOW (2026-09-19). The slabs are siblings of
      .dp-device, not children of it, so the device's mask cannot reach them, and a rim behind the
      glass is a second translucent layer under a translucent one: through the ramp the phone's
@@ -17481,14 +17501,23 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      In light mode the bar was worth 14 levels of luminance across the composer and 9 across the
      top bar, and both are 0.
 
-     Two masks intersected, since a linear-gradient runs on one axis and this needs both; checked on
-     a translated layer in WebKit as well as in Chrome. no-repeat, because a mask tiles by default
-     and the back slab's shadow, painted outside its box, would come through the tiles beyond it.
-     The other phones on the site answer the bare .dp-edge rule with more weight and set no mask,
-     so none of this reaches them. */
+     ONE MASK PER ELEMENT, AND THAT IS THE WHOLE LESSON OF THE EVENING. The fade and the cut are two
+     axes, and a linear-gradient runs on one, so they went on the slab as two mask layers with
+     mask-composite: intersect. Chrome drew that. Safari drew no mask on the slabs at all: each
+     slab is a layer standing in 3D, and WebKit's compositor drops a multi-layer mask with a
+     composite operator from such a layer, while a WKWebView snapshot, which flattens depth, passes
+     the same test. So every Safari screenshot from that commit on showed the rim whole: the
+     rectangle behind the fading glass, eleven stepped ends, and a sliver standing full height
+     beside a fading bezel, light against black in the dark theme. The slab keeps the fade, its
+     paint sits on ::before and carries the cut, and the sheen on ::after carries the cut too, so
+     nothing here asks a 3D layer for more than one mask, which is what it has honoured all week.
+     no-repeat, because a mask tiles by default and the back slab's shadow, painted outside its
+     box, would come through the tiles beyond it. Scoped to .day-phone: the other phones set no
+     mask on their slabs, and the cut is not defined for them. */
   .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 var(--cut-l, 0px), transparent calc(var(--cut-l, 0px) + 2px), transparent calc(100% - var(--cut-r, 0px) - 2px), #000 calc(100% - var(--cut-r, 0px)), #000 100%); }
   .dp-device { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
-  .dp-edge { -webkit-mask-image: var(--edge-mask), var(--edge-cut); mask-image: var(--edge-mask), var(--edge-cut); -webkit-mask-composite: source-in; mask-composite: intersect; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+  .dp-edge { -webkit-mask-image: var(--edge-mask); mask-image: var(--edge-mask); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+  .day-phone .dp-edge::before, .day-phone .dp-edge::after { -webkit-mask-image: var(--edge-cut); mask-image: var(--edge-cut); }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that
@@ -17508,6 +17537,19 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      at the same places; what is lost is about a bubble and a half of conversation, off the top,
      which was inside the fade anyway. */
   .dp-ph { height: 538px; padding-bottom: 8px; --ph-r: 0px; }
+  /* THE BEZEL'S LIGHTING GOES OUT IN THE RAMPS (2026-09-19). The side turned toward the light
+     carries a white band inside its wall (--edge-l and --edge-r in --shadow-bezel) and the
+     chamfer's conic sheen runs round the outside of it, and both are right where the phone is
+     solid: a dark edge with a lit line on it. In a ramp everything around them has gone grey, and
+     a lit line on grey reads as a light patch at each end of the edge (Jett: "the right side
+     edges at the top and bottom have a light part to it which i don't like. is that the glare
+     lighting of the metal?"). It was: measured on the turned side, the highlight adds 11 to 23
+     levels through the ramp and the chamfer 13 at the bottom and 37 at the top, and the rim's own
+     sheen adds nothing at these yaws. So a plate of the wall's own black lies over the bezel in
+     the two ramps, under the glass and over the lighting, and lets go a little before each ramp
+     ends, so the edge dissolves as a dark line and the lighting comes back where the phone is
+     whole. Scoped to .day-phone, because this pseudo is the lens on every other phone. */
+  .day-phone .dp-device::before { display: block; position: absolute; inset: calc(-1 * var(--bezel-bevel)); width: auto; height: auto; margin: 0; border-radius: 0; box-shadow: none; z-index: 0; pointer-events: none; background: linear-gradient(to bottom, #0B0B0A 0, #0B0B0A 8%, transparent 11%, transparent calc(85.5% - var(--night, 0) * 35%), #0B0B0A calc(88.5% - var(--night, 0) * 35%), #0B0B0A 100%); }
   /* THE SLICE IS CUT JUST UNDER THE MESSAGE BAR (Jett, 2026-09-19: "there's extra space between
      the message bar and when it fades in"). The app's composer holds 42px under its row, which is
      the safe area its Chat.tsx pads by so the bar does not hug the glass; on a whole phone that is

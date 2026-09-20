@@ -17513,7 +17513,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      not the bezels though"). Measured on the rim alone at nine in the morning: 24 to 28 down the
      body and 71 to 90 at 96 percent. The wall is the gradient's own middle instead, flat, so it is
      one tone from end to end and the only thing that changes down it is the fade. */
-  .day-phone { --wall: 2px; --wall-metal: #0E0E0D; }
+  .day-phone { --wall: 8px; }
   .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 var(--wall), transparent calc(var(--wall) + .5px), transparent calc(100% - var(--wall) - .5px), #000 calc(100% - var(--wall)), #000 100%); }
   .dp-device { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
   .day-phone .dp-edge { display: none; }
@@ -17522,7 +17522,30 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
     -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask);
     -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
   }
-  .day-phone .dp-edge--back::before { background: var(--wall-metal); -webkit-mask-image: var(--edge-cut); mask-image: var(--edge-cut); }
+  /* AND THE WALL IS A SIDE, NOT A BORDER. Flat, at 2px, it read as a thin line drawn round the
+     phone rather than as the phone's own side (Jett, 2026-09-19: "the phone is too thin now. it
+     should have real depth"), and both halves of that are the same mistake: a side has a width you
+     can believe and it catches the light along it. So the wall is 8px, which is not a taste: the
+     phone is 35px thick on a 256px body, the narrow poses turn it 10 to 16 degrees, and a 35px
+     side turned 14 shows 8.5. The acts' own yaws would give 6.1 to 9.6, so 8 is the middle of what
+     this story would really show, held still. The stack used to give 1.5 to 2.4 of it, because the
+     eleven slabs taper inward toward the back and most of the depth rolls away behind the bezel
+     before it can be seen. And the wall is shaded ACROSS: the phone's back at the
+     silhouette, and the bezel's own chamfer where it meets the device, so the eye reads front face,
+     lit edge, side curving away. Across and not down is the rule this whole evening turned on: a
+     gradient down a slice puts a whole phone's corner inside the picture, a gradient across it is
+     the same everywhere the slice is cut, so it can say whatever it likes. --chm-l and --chm-r are
+     the chamfer's own tones, so the wall meets the bezel at the bezel's colour and turns with it. */
+  .day-phone .dp-edge--back::before {
+    background: linear-gradient(90deg,
+      #090908 0,
+      #131312 calc(var(--wall) * .55),
+      rgb(var(--chm-l, 137) var(--chm-l, 137) calc(var(--chm-l, 137) * .97)) var(--wall),
+      rgb(var(--chm-r, 67) var(--chm-r, 67) calc(var(--chm-r, 67) * .97)) calc(100% - var(--wall)),
+      #131312 calc(100% - var(--wall) * .55),
+      #090908 100%);
+    -webkit-mask-image: var(--edge-cut); mask-image: var(--edge-cut);
+  }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that

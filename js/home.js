@@ -722,11 +722,20 @@
       for (var c = el.firstElementChild; c; c = c.nextElementSibling) if (c.classList.contains('is-on')) return c;
       return null;
     }
+    /* THE "NOTHING WAS HERE" SENTINEL IS null, AND IT WAS A NEGATIVE NUMBER UNTIL 2026-09-19.
+       Once the thread is taller than the screen it overflows the top of it, and a bottom-aligned
+       column that overflows puts its first child ABOVE the box: from the fifth message on, that
+       bubble's offsetTop is legitimately negative. `wasTop < 0` read every one of those as "no
+       bubble was on before" and slid the screen's whole height instead of the one bubble's, so
+       the thread jumped to its top and scrolled back down to the newest message on every landing
+       after the fourth (Jett: "it looks like it autoscrolls to the top instantly then scrolls
+       down to the most recent message"). offsetTop has no out-of-band value to borrow, so the
+       caller passes null and this asks for null. */
     function slideThread(wasTop) {
       var now = firstOn(grow);
       if (!now || still) return;
       var edge = grow.clientHeight - 20;
-      var d = (wasTop < 0 ? edge : wasTop) - now.offsetTop;
+      var d = (wasTop === null ? edge : wasTop) - now.offsetTop;
       if (Math.abs(d) < 1) return;
       grow.style.transition = 'none';
       grow.style.transform = 'translateY(' + d.toFixed(1) + 'px)';
@@ -828,7 +837,7 @@
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
-      var was = grow && grow.classList.contains('is-on') ? firstOn(grow) : null, wasTop = was ? was.offsetTop : -1, landed = false;
+      var was = grow && grow.classList.contains('is-on') ? firstOn(grow) : null, wasTop = was ? was.offsetTop : null, landed = false;
       beats.forEach(function (b) {
         var on = b.act === i ? (tp >= b.at && tp < b.until) : (b.act < i && b.until > 1);
         if (b.el.classList.contains('is-on') === on) return;

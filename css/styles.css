@@ -17428,12 +17428,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   /* The phone is seen through a window: its ends fade out, so it stands nearly full width and
      readable without needing room for its whole height. A variable, because one act shows a
      different amount of it, and it inherits from the layer down to the glass and every rim layer. */
-  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 90%, transparent 98.5%, transparent 100%); }
+  /* AT TWO IN THE MORNING ONLY THE TOP HALF IS SHOWN, AND THE CUT RIDES THE NIGHT THERE AND BACK.
+     Everything that act needs is up there, because that screen is the Now page and its list runs
+     from the top, and the height it gives back goes to the window, which is what the act is about
+     (Jett, 2026-09-17). The two bottom stops were a second rule on .is-night until 2026-09-19, and
+     .is-night is a class that flips at the half-way mark, so the phone lost a third of its height
+     in one frame going in and got it back in one frame coming out (Jett: "can the phone gradually
+     shrink in height rather than instantly get cut"). They are one rule now, read off --night,
+     which is the same 0-to-1 the room is painted with: the phone closes as the light goes and
+     opens as it comes back, on the act's own easing, and at either end the numbers are the ones
+     that were there before (90 and 98.5 by day, 52 and 65 at night). --night and not .is-night is
+     the rule to keep: a look may snap, a size may not. Without the driver it resolves to 0, which
+     is the day mask, which is the right thing to see. */
+  .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 calc(90% - var(--night, 0) * 38%), transparent calc(98.5% - var(--night, 0) * 33.5%), transparent 100%); }
   .dp-device, .dp-edge { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
-  /* At two in the morning only the top half is shown. Everything the act needs is up there, because
-     that screen is the Now page and its list runs from the top, and the height it gives back goes to
-     the window, which is what that act is actually about (Jett, 2026-09-17). */
-  .day-stage.is-night .day-phone { --phone-mask: linear-gradient(to bottom, transparent 0, transparent 1.5%, #000 13%, #000 52%, transparent 65%, transparent 100%); }
   /* No corners: a slice of a phone has straight sides all the way to the fade, and a rounded
      corner, even dissolving, says "this is the whole phone". */
   /* THREE HEIGHTS, ONE SLICE, AND THEY HAVE TO AGREE. The screen above is 538, the device is that
@@ -17472,13 +17480,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      glow with no source. The mask cannot simply be applied to the halo instead, because a mask
      covers the border box and a box-shadow is painted outside it, which would erase the glow
      rather than shape it. */
-  .day-phone::before { inset: 8% 0 14%; border-radius: 34px; }
   /* AND IN AGAIN AT TWO IN THE MORNING, because that act cuts the phone at 52% and the glow has to
      stop where the screen does. Left at 14% it lit a phone-shaped patch of room a third of the way
-     past the end of the phone, over the caption, which is the same fault the inset above exists to
-     fix and the one act where it is worst: the room is dark, so the only light down there was
-     coming from nothing. */
-  .day-stage.is-night .day-phone::before { inset: 8% 0 46%; }
+     past the end of the phone, over the caption, which is the same fault this inset exists to fix
+     and the one act where it is worst: the room is dark, so the only light down there was coming
+     from nothing. It rides --night with the mask above, for the same reason and to the same 46%,
+     or the light would let go of the phone's end on the way in and out. */
+  .day-phone::before { inset: 8% 0 calc(14% + var(--night, 0) * 32%); border-radius: 34px; }
   /* Ember stands clear of everything here (Jett, 2026-09-16). Beside the phone it is wholly to
      the phone's left, in the room between the phone and the screen's edge, and a rung smaller
      (data-size-narrow) so that room holds it; the hero uses the phone's mark too, since the

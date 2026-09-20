@@ -18234,6 +18234,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* the message: a ball out along the lane, and back with the answer; the bubbles land as the
    ball arrives, and while the scene is live a bubble that has not landed takes no room */
 .bz-ball { opacity: 0; offset-distance: 0%; offset-rotate: 0deg; }
+/* the lanes, one per phone and one set per composition, in the stylesheet so narrow can have
+   its own; the svg draws the same paths and hides the set that is not in use */
+.bz-ball[data-ball="0"] { offset-path: path('M92,102 C92,260 90,405 250,410 C380,414 470,400 518,380'); }
+.bz-ball[data-ball="1"] { offset-path: path('M360,14 C470,18 548,80 550,190 C552,300 540,348 522,378'); }
+.bz-ball[data-ball="2"] { offset-path: path('M628,102 C628,220 600,332 526,376'); }
+.bz-paths .bz-n { display: none; }
 .bz-scene.is-live .bz-msg:not(.is-in) { display: none; }
 .bz-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
 @media (prefers-reduced-motion: no-preference) {
@@ -18286,12 +18292,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    drafts scene and the ring of phones, and the one whose flat drawing he named first.
 
    THE SAME RECIPE AS THE DRAFTS SCENE AND THE RING: a box drawn at one size (720 by 420 wide,
-/* the lanes, one per phone and one set per composition, in the stylesheet so narrow can have
-   its own; the svg draws the same paths and hides the set that is not in use */
-.bz-ball[data-ball="0"] { offset-path: path('M92,102 C92,260 90,405 250,410 C380,414 470,400 518,380'); }
-.bz-ball[data-ball="1"] { offset-path: path('M360,14 C470,18 548,80 550,190 C552,300 540,348 522,378'); }
-.bz-ball[data-ball="2"] { offset-path: path('M628,102 C628,220 600,332 526,376'); }
-.bz-paths .bz-n { display: none; }
    400 by 440 narrow), fitted to its column by a transform that js/desk-scene.js measures (--pk),
    a floor laid back 58 degrees, and every object placed by a data-o name so the narrow layout is
    a second composition (their desk at the back, yours in front) and not the wide one shrunk.

@@ -262,9 +262,10 @@ Ember stands and the cord's path, a cubic built from `--st-*`, `--cord`, `--cord
 window wired to one company reads as arbitrary, three copies read as clutter, and one window wired
 to three of seven reads as arbitrary again (every one of the seven has a chat app of its own), so
 it is one window with a cord to each; Ember standing in front of a pad hides that pad's name, and a
-name standing in front of the pad "falls off the platform", so Ember stands behind the pad, the
-name is the slab's own front face, and the cord runs under the pad to Ember's feet, **and the slab is
-built in the floor's space** like the laptop, a top raised by `translateZ` and a face turned up
+name standing in front of the pad "falls off the platform", and behind the pad Ember "appears behind the platform", so Ember stands
+on top of the slab, raised with it by `--z`, the name is the slab's own front face below its feet,
+and the cord runs under the slab to Ember's feet, which shows as the cord entering the face, **and
+the slab is built in the floor's space** like the laptop, a top raised by `translateZ` and a face turned up
 perpendicular to the floor with `rotateX(-90deg)` about its bottom edge, because a billboard face
 glued to a squashed top read as a flat 2D badge ("the platforms are 2d now"); and a
 window standing in front of the pads' whole width hides both the pads behind it and the cord's

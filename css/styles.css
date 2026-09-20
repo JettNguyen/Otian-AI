@@ -18504,7 +18504,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-opt i { display: block; font-style: normal; font-weight: 500; font-size: var(--fs-3xs); color: var(--text-muted); }
 #ch-anthropic:checked ~ .ch-bar-wrap [for="ch-anthropic"], #ch-openai:checked ~ .ch-bar-wrap [for="ch-openai"], #ch-gemini:checked ~ .ch-bar-wrap [for="ch-gemini"], #ch-xai:checked ~ .ch-bar-wrap [for="ch-xai"], #ch-groq:checked ~ .ch-bar-wrap [for="ch-groq"], #ch-deepseek:checked ~ .ch-bar-wrap [for="ch-deepseek"], #ch-mistral:checked ~ .ch-bar-wrap [for="ch-mistral"] { background: var(--accent-subtle); color: var(--text-primary); border-color: var(--accent); }
 #ch-anthropic:focus-visible ~ .ch-bar-wrap [for="ch-anthropic"], #ch-openai:focus-visible ~ .ch-bar-wrap [for="ch-openai"], #ch-gemini:focus-visible ~ .ch-bar-wrap [for="ch-gemini"], #ch-xai:focus-visible ~ .ch-bar-wrap [for="ch-xai"], #ch-groq:focus-visible ~ .ch-bar-wrap [for="ch-groq"], #ch-deepseek:focus-visible ~ .ch-bar-wrap [for="ch-deepseek"], #ch-mistral:focus-visible ~ .ch-bar-wrap [for="ch-mistral"] { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
-.ch-scene { position: relative; width: 100%; aspect-ratio: 720 / 380; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; --cord: 478 364; --cord-c1: 380 372; --cord-in: 70 80; --st-anthropic: 60 156; --st-openai: 126 135; --st-gemini: 192 122; --st-xai: 258 118; --st-groq: 324 122; --st-deepseek: 390 135; --st-mistral: 456 156; }
+.ch-scene { position: relative; width: 100%; aspect-ratio: 720 / 380; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; --cord: 478 364; --cord-c1: 380 372; --cord-in: 70 80; --st-anthropic: 60 165; --st-openai: 126 144; --st-gemini: 192 131; --st-xai: 258 127; --st-groq: 324 131; --st-deepseek: 390 144; --st-mistral: 456 165; }
 .ch-box { position: absolute; left: 0; top: 0; width: 720px; height: 380px; transform: scale(var(--pk, 1)); transform-origin: 0 0; transform-style: preserve-3d; }
 .ch-floor { position: absolute; left: 0; top: -40px; width: 720px; height: 460px; --fo: 1; transform-style: preserve-3d; }
 .ch-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
@@ -18588,10 +18588,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-lab { width: 150px; text-align: center; }
 .ch-lab b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
 .ch-lab i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 1px; }
-/* the agent, standing on the platform you picked, raised with it (--z is the slab's thickness);
-   js/pick-scene.js walks it. The cord ends under the agent's feet, so what shows is the cord
+/* the agent, standing on the platform you picked, raised with it (--z is the slab's thickness)
+   and toward its front edge, so a sliver of the top shows in front of its feet: at the center it
+   read as standing on the back of the platform (Jett). js/pick-scene.js walks it. The cord ends under the agent's feet, so what shows is the cord
    entering the slab's front face. Behind the platform, the agent read as hidden (Jett). */
-[data-o="ember"] { --fx: 60px; --fy: 156px; --z: 14px; width: 48px; }
+[data-o="ember"] { --fx: 60px; --fy: 165px; --z: 14px; width: 48px; }
 .ch-ember { display: block; position: relative; width: 100%; height: 0; padding-bottom: 100%; }
 .ch-ember svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .ch-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
@@ -18600,7 +18601,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      small at the front right, so the cord can run up the left side in view and cross to its pad
      above the window's top edge: a window standing in front of the pads' whole width hid the
      cord's middle. The box is redrawn. */
-  .ch-scene { aspect-ratio: 400 / 450; perspective: 1200px; --cord: 182 496; --cord-c1: 130 482; --cord-in: -30 150; --st-anthropic: 26 170; --st-openai: 76 148; --st-gemini: 126 134; --st-xai: 176 130; --st-groq: 226 134; --st-deepseek: 276 148; --st-mistral: 326 170; }
+  .ch-scene { aspect-ratio: 400 / 450; perspective: 1200px; --cord: 182 496; --cord-c1: 130 482; --cord-in: -30 150; --st-anthropic: 26 176; --st-openai: 76 154; --st-gemini: 126 140; --st-xai: 176 136; --st-groq: 226 140; --st-deepseek: 276 154; --st-mistral: 326 176; }
   .ch-box { width: 400px; height: 450px; }
   .ch-floor { top: -50px; width: 400px; height: 600px; }
   .ch-paths .ch-w { display: none; }
@@ -18619,5 +18620,5 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   [data-o="win"] { --fx: 272px; --fy: 500px; --wz: .16; }
   [data-o="l-you"] { --fx: 272px; --fy: 556px; }
   .ch-lab { width: 130px; }
-  [data-o="ember"] { --fx: 26px; --fy: 170px; --z: 11px; width: 40px; }
+  [data-o="ember"] { --fx: 26px; --fy: 176px; --z: 11px; width: 40px; }
 }

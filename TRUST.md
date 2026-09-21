@@ -1774,6 +1774,79 @@ publishes one."
   assumptions). The copy describes what the code does; the first live connect is what settles
   whether every provider behaves as documented.
 
+### ✅ College: it reads the syllabus and holds the term. It never turns work in and never registers you (IN THE CATALOG 2026-09-21, live on the next catalog push)
+
+The claim, in the words somebody would say:
+
+> Add each class's syllabus and Archie reads it: every due date on the schedule, what the grade is
+> made of, and the rules that cost points. After that it holds the term. It tells you what is due
+> this week, works out what you need on the final to keep an A, and warns you two weeks before the
+> school's own deadlines, like the last day to drop. When registration comes round it reads your
+> degree audit and lays out what to take next, with the clashes and the missing prerequisites
+> marked. It plans and it tracks. Turning the work in and signing up stay yours.
+
+**Why it's true**, all paths in `/Users/Games/Desktop/Code/Archie`:
+
+- **The syllabus.** `data/marketplace/skills/my-classes.json` rule 1. A file added under Knowledge
+  in the app is read with `read_knowledge_file`; PDF, Word and PowerPoint have their text pulled out
+  at ingest by `crates/archie-domain/src/documents.rs`, so a scanned-in syllabus is readable text by
+  the time the skill sees it.
+- **What it holds.** Three lists declared on that manifest and created at install: `courses` (the
+  grade split and the professor's rules, copied word for word), `coursework` (one row per dated
+  item, with what it is worth and what was scored), and `school_dates` (the registrar's dates).
+- **The grade answer is arithmetic, not a prediction.** Rule 5 works over the grade split already
+  copied out of that course's own syllabus and the scores the student entered, and the body requires
+  showing the working and naming which parts have no score yet.
+- **The deadline warnings cost nothing when there is nothing to say.** The `when_due` routine
+  trigger (`crates/archie-domain/src/routine.rs`) scans the rows on the owner's own computer and
+  wakes the model only on the days a row crosses a threshold.
+  `data/marketplace/routines/coursework-due.json` watches `coursework` four days out,
+  `term-dates.json` watches `school_dates` fourteen days out.
+- **The class calendar link.** `my-classes.json` rule 2 and the `CLASS_CALENDAR_LINK` variable. The
+  student pastes the personal calendar feed address their own school publishes (Canvas calls it
+  Calendar Feed, Blackboard calls it Share Calendar, Brightspace calls it Subscribe). It is fetched
+  with `web_fetch`, which attaches no credential to any request ever
+  (`crates/archie-runtime/src/connectors.rs`, `execute_web_fetch`).
+- **Class planning stops before registration.** `data/marketplace/skills/class-planner.json` rule 4
+  says what it cannot see and forbids implying a seat is open. There is no tool in the runtime that
+  could register anybody: registration is not an integration, not a connector, and not on the belt.
+- **Where it is offered.** The College pack in `src/app/packs.ts`, the "Getting through a degree"
+  life in `src/app/lives.ts`, and the worked example in `src/app/setups.tsx`.
+
+**Required clauses. Do not drop them:**
+
+- ⚠️ **Never write "Canvas integration", "connects to Canvas", or any LMS company's name as a
+  connection.** There is no connection to any learning management system. Two things exist and both
+  belong to the student: a calendar feed address they copy out of their own school's site and paste
+  in once, read over the public web; and the notification emails their school already sends them,
+  read only if they connect a mailbox. Say "your class calendar link". Naming Canvas as a
+  connection would be the false claim on this entry.
+- ⚠️ **Say the feed only carries what a professor put a date on.** It is not the whole syllabus and
+  never was. The syllabus is the better source and the product says so in rule 2.
+- ⚠️ **The mail half needs a mailbox connected, and the starter credits cannot read mail.** Same
+  clause as everywhere else on this document: mail tools are `OwnKeyOnly` in
+  `crates/archie-runtime/src/tool_policy.rs`. A page describing the announcements half has to carry
+  that in the same breath.
+- ⚠️ **A drop deadline is the school's, not ours.** The skill fetches the school's own academic
+  calendar page or asks, and rule 3 forbids stating one from general knowledge. Copy may never
+  print a real school's date, and may never imply we know one.
+
+**Boundaries. Do not cross:**
+
+- ❌ Never "it registers you", "it enrolls you", "it drops the class", "it submits your homework",
+  or any wording where the agent acts on the school's systems. It cannot, and there is nothing to
+  build the claim on.
+- ❌ Never say it can see grades in a learning management system, seats left, a waitlist position, a
+  hold on an account, or a registration time. It cannot see any of them.
+- ❌ Never "it knows your school's requirements". It reads the degree audit the student gives it, and
+  `class-planner.json` rule 6 sends every question with a real cost to their academic advisor.
+- ❌ Never "it guarantees you graduate on time", or any outcome claim about a grade, a GPA or a
+  degree. The arithmetic is checkable; the outcome is not ours to promise.
+- ❌ Not a FERPA claim, and never near one. No compliance wording of any kind attaches to this. What
+  is true is what the first entry on this document says: no server of ours holds the content.
+- ❌ Never name a real university, its colors, its logo or its mascot in copy or a mockup. Example
+  schools are invented ones, and the example people follow the house rule: Sam, Dana, Ellen, Todd.
+
 ### ✅ What it structurally cannot do: the answer to "is this the AI that ends the world"
 
 Verified against `Archie@main` on 2026-09-09. This is the fear a beta tester arrived with on a

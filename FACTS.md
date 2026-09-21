@@ -261,19 +261,21 @@ re-counts it rather than trusting this file.
   is replaced by the measurement and this bullet goes.
 - **Users, installs, hours saved, as figures of ours.** We still have no published figure for
   users or installs, and none for hours saved that is ours to make. **What changed on 2026-09-18
-  is the third one, and only inside quotation marks.** A customer 60 days in wrote his own
-  testimonial and it is published in full on `/testimonials/`: "I would estimate that I am
-  saving two to three hours per day on ordinary tasks that Coleman now handles for me". The
-  same sentence is quoted on the homepage under the heading "One customer gets two to three
-  hours back, every day."
+  is the third one, and only inside quotation marks.** Patrick West (Chem Can Services and
+  Westway Site Services), 60 days in, wrote his own testimonial and it is published in full on
+  `/testimonials/`: "I would estimate that I am saving two to three hours per day on ordinary
+  tasks that Coleman now handles for me". The same sentence is quoted on the homepage under the
+  heading "Patrick gets two to three hours back, every day."
 
-  **It is UNSIGNED, and that is a standing constraint, not a formatting choice.** He sent us
-  the words; we have never asked whether we may print his name or either of his companies. So
-  this file does not carry them either: **this repo is public**, so a name written here is a
-  name published. Both pages say the name is held until he tells us in writing that we may,
-  and until that happens nobody adds it back, here or on a page. Jett has the identity.
+  **It ran unsigned from 2026-09-18 to 2026-09-21, and the order is worth keeping.** He sent
+  the words and we published them the same day; the name, the companies and even the trade came
+  straight back off, because nobody had asked him whether we could print them. Jett got his
+  approval on 2026-09-21 and they went back on. **A name is published the moment it is written
+  anywhere in this repo, not when the site goes live**: `JettNguyen/Otian-AI` is public, so a
+  name in a page, an HTML comment, this file or a commit message is a name published. The next
+  testimonial that arrives without a yes runs unsigned the same way.
 
-  **What that licenses, exactly.** His sentence, word for word, unsigned. Nothing
+  **What that licenses, exactly.** His sentence, word for word, with his name on it. Nothing
   else. It is one person's estimate of his own week, unmeasured by him and unmeasured by us, so:
   no averaging it, no rounding it to "hours a day" as a site claim, no "customers save two to
   three hours a day", no badge, no stat band, and no heading that states it without naming him.
@@ -289,7 +291,7 @@ re-counts it rather than trusting this file.
   If a real measured outcome ever exists, it belongs here first, with the engagement and the date.
   Note what was wrong with those two and is not wrong with his: they were numbers in our own
   voice, invented, with no record behind them. His is in his voice, sent to us in writing, and
-  the record is the testimonial itself. An unsigned quote we hold the source of is a different
+  the record is the testimonial itself. A quote we hold the source of is a different
   thing from a figure nobody can trace, and the difference is that we can produce the source.
 - **Every hardware price, on `/how-it-works/#what-to-run-it-on` and anywhere else.** Added 2026-08-26 with the page that section came from (`/equipment/`, merged into How It Works 2026-09-14).
   A hardware price is a third-party figure under the rules above, so it would need a row in

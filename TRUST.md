@@ -1619,10 +1619,13 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
   next year.
 
 **Boundaries — do not cross:**
-- ❌ **Never say Archie buys, books, or checks out.** It cannot type a card number at all, and the
-  press that finalizes an order comes back to the person as a question. This is the same claim as
+- ❌ **Never say Archie buys, books, or checks out.** It cannot type a card number at all, and with
+  the Buying switch off, which is how it ships and how every public page describes it, the press
+  that finalizes an order comes back to the person as a question. This is the same claim as
   "Archie cannot spend your money", it is one of the strongest things this file holds, and a page
-  selling the agent as completing a purchase breaks it.
+  selling the agent as completing a purchase breaks it. **The switch exists in the code since
+  2026-09-21 and changes nothing here**: see "Buying, as a switch the owner turns on" below, which
+  bans writing about it at all until one real purchase has been made.
 - ❌ Never "it fills in the whole form". It fills what is not a password, a card or a code, and
   stops at the ones that are.
 - ❌ Never describe it driving other **applications**. That half is not built on either platform.
@@ -1683,9 +1686,12 @@ check-in cannot finish without paying, it stops and tells you what is being aske
   and no airline has been checked into. Copy may say what it does and may not say it is proven.
 
 **What this settles outside this file.** A benchmark or a comparison that scores Archie low on
-purchasing and booking is scoring a decision, not a gap, and the answer is to say so rather than to
-file the work: building it would break the claim above. The sites worth wanting are the ones with no
-connector and no checkout, which is what the two shipped add-ons do.
+purchasing and booking is scoring a decision, not a gap, and the answer is still to say so rather
+than to file the work. **Updated 2026-09-21:** the decision changed in the code and has not changed
+on the site. A buying switch exists, off by default, unproven, and banned from copy (see "Buying,
+as a switch the owner turns on"), so the answer to a benchmark is unchanged until that ban lifts.
+The sites worth wanting are the ones with no connector and no checkout, which is what the two
+shipped add-ons do.
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
@@ -2583,7 +2589,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | "Archie asks before it changes anything in your calendar." | ✅ **True now** (two-turn gate) |
 | "Nothing reaches Gmail until you tap Send." | ⛔ **Banned 2026-08-31.** A scheduled send leaves with no tap. Use "nothing leaves your account until you send it or set a time." |
 | "Nothing leaves your account until you send it or set a time." | ✅ **True now** (single-caller send path; a timed send cannot be armed by the agent) |
-| "Archie cannot spend your money." | ✅ True (and no purchase code path exists in the runtime) |
+| "Archie cannot spend your money." | ✅ True as shipped (Buying is off by default and off for everybody). ⚠️ **No longer true because no code path exists**: one does since 2026-09-21. The sentence is true about the product; do not defend it with "there is no purchase feature" any more |
 | "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
@@ -2732,11 +2738,70 @@ is a drawing changing, and visual-first rule 5 makes TRUST.md govern it. `check-
 compares the site's copies against this file, so this file moves first or the check reports the
 drift backwards.
 
-**The claim that survives either way, and it is the one to lead on.** There is no purchase or
-payment feature and the model has no tool that moves money; a cap, if it ships, is a ceiling the
+**The claim that survives either way, and it is the one to lead on.** A cap here is a ceiling the
 owner sets on what the **AI company** charges, which is a different sentence from "it can buy
-things". Do not let the two merge. The honest form on the day is: "It still cannot buy anything.
-What you can now set is a limit on what it spends on thinking."
+things". Do not let the two merge, and do not reach for the old shorthand while doing it: **as of
+2026-09-21 "there is no purchase or payment feature" is no longer true**, and the entry below is
+the one that governs that. The honest form on the day is: "This is a limit on what it spends on
+thinking, which is a different thing from what it can buy."
+
+### 🚧 Buying, as a switch the owner turns on: BUILT 2026-09-21, NEVER RUN, NOT APPROVED FOR COPY
+
+**Nothing on the site may change yet, and this entry is not permission to change it.** It exists
+because the rule at the top of this file cuts both ways: a capability nobody wrote down does not
+exist downstream, and a capability written down as shipped before it has ever run is worse. This
+one has never bought anything. Read the two bans at the bottom before writing a word.
+
+**What was actually built** (the Archie repo, 2026-09-21, commits `8d3d95d2` through `09571777`):
+a switch on the Websites panel, off by default, that lets the agent press a button that completes a
+purchase. Everything about it is in `archie_domain::SpendPolicy`, `crates/archie-runtime/src/screen/
+guard.rs` and `.../screen/spend.rs`, and documented in that repo's `docs/SITES-AND-APPS.md`.
+
+**Why it's true, and the four facts that bound it.** Each of these is a line of code, not an
+intention:
+
+1. **Off by default, and off is the product the whole site describes.** An owner who never opens
+   the fold gets the code that shipped before this existed, including the same sentence in the
+   system prompt. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
+   (`the_shipped_state_buys_nothing`) holds it there.
+2. **It still cannot type a card number, ever, switch or no switch.** `guard::typing_stop` refuses
+   any field whose `autocomplete` is a `cc-` value and hands the window to the person, and buying
+   does not touch it. The card has to already be saved at the shop or in the browser profile the
+   agent drives. **Archie never holds a card number** remains true and is now the strongest thing
+   in this area.
+3. **Only presses that buy are released.** `click_needs_approval` still catches Submit, Send,
+   Delete account, Unsubscribe and Cancel subscription, and a second classifier
+   (`click_is_purchase`) decides which of those the switch may release. Recurring charges
+   (Subscribe, Start free trial, Buy membership) are never released, because a per-purchase cap
+   cannot see a charge that lands a month later.
+4. **Three ceilings, and one of them is not ours.** A shop allow-list that is empty-means-nothing,
+   a per-purchase cap, and a rolling total over a window the owner picks. A guest on a shared
+   business agent never spends, in code (`may_spend`).
+
+**The boundary that matters most, and it is not flattering.** The amount is **what the model read
+off the page**, not what the card is charged. A shop that shows a subtotal and charges a total
+passes every limit. The app says so in the panel, in the person's own words, and points them at a
+merchant-locked virtual card from their own bank, where the ceiling is held by somebody who is not
+us. **Any copy about this that does not carry that sentence is dishonest copy**, however true the
+rest of it is.
+
+**⛔ Two bans, until both are lifted in writing here.**
+
+1. **No page may say Archie buys anything.** Not in the present tense, not as "can", not as a
+   coming feature, not in a chip, a caption or a comparison table. It has never completed a real
+   purchase: the decisions are unit-tested and the reading of a real checkout page is not (that
+   repo's `OPEN-THREADS.md`, "Checks that need a real device"). Lift this when one real purchase
+   has been made and the receipt reconciled against a card statement, and not before.
+2. **The fourteen sentences listed in the entry above stay exactly as they are.** They say Archie
+   cannot spend money or buy anything. With the switch off that is what the product does, and the
+   switch is off for everybody. Changing them is a decision about how to sell the product, it is
+   Jett's, and it has not been made. Two of them are legal pages (`privacy-policy/index.html:265`
+   says "no purchase or payment feature", `terms-of-service/index.html:230`), which are the two
+   that would need a lawyer's eye before a word moves, and one is generated into `llms.txt` and
+   quoted back by machines that will not recheck.
+
+**What a reader of this file should take away today:** the capability exists in the code, nobody
+has run it, and the product every public page describes is still the correct one.
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 

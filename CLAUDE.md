@@ -271,7 +271,14 @@ perpendicular to the floor with `rotateX(-90deg)` about its bottom edge, because
 glued to a squashed top read as a flat 2D badge ("the platforms are 2d now"); and a
 window standing in front of the pads' whole width hides both the pads behind it and the cord's
 middle, so wide the pads sit left of a smaller window and narrow the window is small at the front
-right with the cord routed up the left side. The concept
+right with the cord routed up the left side.  **Every object in a scene is placed by a `[data-o]` rule, and every one of those is scoped
+to its own scene** (`.bz-scene [data-o=...]`, not a bare `[data-o=...]`): the names are short,
+three scenes each wanted `win`, `ember` and `l-you`, and a bare attribute selector ties with
+the scene's own class so the block written later wins in silence. It cost three live bugs
+found on 2026-09-21, one of which had cloud-agents' Ember standing at the other company's
+tower on a figure whose whole claim is about the agent beside YOUR laptop. The ring shipped
+right and was broken twelve hours later by a page nobody was editing at the time. The
+concept
 list for the other pages is in the session
 memory (`staged-scenes-not-diagrams`): two desks with a lid closing, a divider you drag, a
 clock through the night, two timelines, parts flying into the window, a ring of phones, the

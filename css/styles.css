@@ -9876,6 +9876,22 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--kind-ink, var(--c-blue-ink));
 }
 
+/* The [data-kind] block those notes keep pointing at, written 2026-09-21. --kind-ink had two
+   readers and no writer anywhere in the repo, so every glyph took the blue fallback and the
+   three add-on kinds were marked as kinds in the markup and drawn as though they were not.
+   Same three the .uc-kind chips take: skill accent, personality plum, routine teal. Knowledge
+   Base and Connections carry no data-kind and keep the blue, because they are parts of an
+   agent and not kinds of add-on.
+
+   The AA warning on .addon-kind and .uc-kind does not apply here. That one is about ink on a
+   wash read as text, and it is why neither badge may be lifted onto --bg-secondary. This is a
+   17px glyph with a 1.7px stroke, which is a graphic: it needs 3:1, and plum (4.26) and teal
+   (4.41) on --bg-secondary, the ground this list sits on, clear that. The label beside it stays
+   blue either way, so no text moved onto a thinner contrast. */
+.calm-list-label[data-kind="skill"]       { --kind-ink: var(--accent-ink); }
+.calm-list-label[data-kind="personality"] { --kind-ink: var(--c-plum-ink); }
+.calm-list-label[data-kind="routine"]     { --kind-ink: var(--c-teal-ink); }
+
 /* A hairline instead of a box: enough to separate, not enough to become an
    object. It divides the columns rather than wrapping each item, so the
    first column stays flush with the paragraph that introduces the list. */

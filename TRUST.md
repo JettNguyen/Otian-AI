@@ -2784,22 +2784,73 @@ also says nothing about the agent's own picture, which is a different file in a 
 write that Archie "knows your brand" or anything that implies the logo is used in what the agent
 produces: it is drawn on two screens in the app and used nowhere else.
 
-### 🚧 A user-set spending cap — IN BUILD 2026-09-21, and the fourteen places that change with it
+### 🚧 A user-set spending cap: BUILT 2026-09-21, NEVER RUN, and the fourteen places it does NOT change
 
-**Nothing here may be written in the present tense yet**, and no page may hint that a cap is
-coming: "cannot spend money or buy anything" is true today and stays exactly as it is until the
-code lands. This entry exists for the day it does, because **"cannot spend money" is the most
-copied claim on this site** and a half-changed claim is worse than an unchanged one. Jett is
-building it (2026-09-21, the Archie repo); Instinct is shipping a $100 programmable wallet, which
-is the reason the position had to be decided rather than drifted into.
+**The code landed on 2026-09-21** (the Archie repo, commit `11f7d864`). It has never stopped a
+real routine on a real computer, so this entry stays 🚧 and the ban at the bottom stands. What
+follows is what was actually built, checked against the code rather than against the plan this
+entry used to hold.
 
-**What must be true before a single word changes:** the cap is **opt-in**, set by the owner in a
-number they type, and with it switched off the product behaves exactly as the fourteen sentences
-below describe. If that is not what ships, this entry is wrong and the wording is rewritten from
-the code, not from here.
+**The three conditions this entry set before a word could change were all met.** The cap is
+**opt-in** (`MonthOfSpend::enabled` is `false` by default, and a test,
+`the_shipped_state_is_no_ceiling_at_all`, holds it there). It is **a number the owner types**, in
+whole dollars, on Settings then Account then Spending. And **with it switched off the product
+behaves exactly as it did before**: the file is never created, never read, and an agent takes no
+branch for it (`archie_runtime::ai_limit`, where the `Option<&Path>` is the whole switch).
 
-**The fourteen places, counted 2026-09-21.** Two are generated and must be changed at their
-source, not in the file:
+**What it actually does, and this is the part that decides the copy.** At the ceiling, the agent
+**stops picking work up on its own**: routines stop, the mail watch stops, the text watch stops.
+**A person typing is never refused.** That is deliberate, not a gap: the case a ceiling exists for
+is a loop running while nobody is watching, and locking the owner out of the conversation would
+lock them out of the one screen where the number can be raised. It is enforced in `run_target`
+(`crates/archie-runtime/src/gateway/turn.rs`), the single point every job passes through, off
+`Asker`, the same argument the free tier's daily count already reads.
+
+**Two boundaries, and neither is flattering.**
+
+1. **It is a ceiling on an estimate, not on an invoice.** Archie is BYOK and nobody here can read
+   the provider's bill from an ordinary API key. The number counted is token counts times a local
+   price table (`src-tauri/src/usage.rs`), which is the same number the Spending page has always
+   shown. It leans high on purpose, so the bill lands under the ceiling rather than over it. **Any
+   copy that says "you will never be charged more than X" is false copy.** The app says "close,
+   not exact" in those words.
+2. **One AI account is invisible to it.** A Custom endpoint is an address the owner typed, and
+   nobody here knows what is charged at it, so those calls are counted in tokens and in no dollar
+   figure at all. A ceiling set by an owner on a Custom endpoint never fills. The panel says so.
+   DeepSeek and Mistral were in this hole too until the same day and are not any more (`32eb026f`
+   added their price rows, and `every_model_the_router_asks_for_has_a_price` keeps them there).
+
+**The fourteen places, and the finding that they do not change.** This entry was written
+expecting the cap to force fourteen rewrites. Reading the shipped code against them says it does
+not, and the reason is the distinction this entry already insisted on: **every one of the fourteen
+is about buying, and the cap is about the AI bill.** They say Archie cannot spend money or buy
+anything, meaning it cannot move the owner's money to somebody else. That is still true. A ceiling
+on what Anthropic charges for thinking does not make Archie able to buy a thing, and an owner who
+sets one has bought nothing.
+
+Two of the fourteen need reading carefully rather than rewriting, and neither turned out to move:
+
+- `privacy-policy/index.html:265` says **"no purchase or payment feature"**. Still true of the
+  cap, which takes no card, holds no card, and sends money nowhere. It is the *buying* entry below
+  that puts this line under pressure, not this one, and that entry's ban keeps it as it is.
+- `faq/index.html:461` says **"It cannot call, text, spend, or press a button"**. "Spend" sits in
+  a list of things done *out in the world*, beside calling and pressing, so it reads as spending
+  the owner's money at somebody else, which is what it has always meant. Left alone.
+- `how-it-works/index.html:733` is the closest call of the fourteen and is worth naming as one.
+  Its paragraph opens "When it thinks, it talks to the AI company directly, on your account", and
+  closes "It sends email and changes your calendar only after you approve each one, and it can't
+  spend money." The AI bill is named two sentences above the word spend. The clause still reads as
+  outward action, because it is joined to sending email and changing a calendar, but a careful
+  reader could squint at it. Left alone today; it is the first line to reread if the ban below is
+  ever lifted.
+- `faq/index.html:447` is the clearest of the fourteen and settles the reading for the rest:
+  "spend money on its own: there is no purchase feature, and anything shaped like paying on a
+  website is stopped and routed to you first." That is buying, in so many words.
+
+**So the fourteen stay exactly as they are, and this is now a finding rather than a task.** The
+list is kept below because it is the list to reread on the day Jett decides the site should
+mention a spending limit at all. That decision has not been made and is his (see the ban at the
+bottom). Two are generated and would have to be changed at their source, not in the file:
 
 | Where | Note |
 | --- | --- |
@@ -2824,10 +2875,18 @@ drift backwards.
 
 **The claim that survives either way, and it is the one to lead on.** A cap here is a ceiling the
 owner sets on what the **AI company** charges, which is a different sentence from "it can buy
-things". Do not let the two merge, and do not reach for the old shorthand while doing it: **as of
-2026-09-21 "there is no purchase or payment feature" is no longer true**, and the entry below is
-the one that governs that. The honest form on the day is: "This is a limit on what it spends on
-thinking, which is a different thing from what it can buy."
+things". Do not let the two merge. The honest form, on the day anything is said at all, is: "This
+is a limit on what it spends on thinking, which is a different thing from what it can buy." The
+app itself carries that sentence on the panel, in those words, so the site has a shipped wording
+to match rather than a fresh one to invent.
+
+**⛔ One ban, until it is lifted in writing here.** No page may mention a spending limit yet. The
+code has never stopped a real routine: the arithmetic and the refusal are unit-tested, and the
+thing that has not happened is a month of real calls adding up to a real ceiling on somebody's
+computer. Lift this when one has, and not before. Lifting it is also a decision about whether to
+sell on it at all, which is Jett's and has not been made. When it is lifted, the sentence goes on
+a page about **what the app costs to run**, never beside the buying sentences, because a limit and
+a purchase in one paragraph is exactly the merge this entry exists to prevent.
 
 ### 🚧 Buying, as a switch the owner turns on: BUILT 2026-09-21, NEVER RUN, NOT APPROVED FOR COPY
 

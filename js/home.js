@@ -302,7 +302,7 @@
            window, but at two in the morning the window is what the act is about and both lists are
            filling in at once, so a phone over it hides the evidence (Jett, 2026-09-17: "i cannot
            see what is happening behind the phone"). On W and PH it covered the right 42% of the
-           window's content column, which is the column Recent tasks is in and exactly where each
+           window's content column, which is the column Recent jobs is in and exactly where each
            row's time and badge sit.
 
            WHAT IT MAY COVER IS THE EDGE, NOT THE ROWS (Jett, same day: it "can move slightly over

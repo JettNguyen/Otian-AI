@@ -619,7 +619,7 @@ it tells you which screen turns it back on, rather than pretending it never coul
 to this computer; look up what it has been doing; read the web. Under *Changes it can make to
 itself*: build new skills and routines; add and remove add-ons; start and pause routines when you
 ask; change which AI answers. Each row names where the job still gets done with the switch off (a
-routine for a repeating nudge, the Tasks tab for the record, the Marketplace for add-ons, the Build
+routine for a repeating nudge, the Jobs tab for the record, the Marketplace for add-ons, the Build
 a skill tab for a skill, each routine's own card, Response quality for the AI settings).
 
 **Why it's true:** seven are fields on `archie_domain::AgentAbilities`
@@ -3199,11 +3199,19 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 
 ## Settled Decisions
 
-### The agent tabs are Dashboard and Tasks, and the mockups are ports: RENAMED 2026-09-21
+### The agent tabs are Dashboard and Jobs, and the mockups are ports: RENAMED 2026-09-21
 
 **What changed.** The two agent tabs that used to read **Now** and **Work** now read **Dashboard**
-and **Tasks**. Jett's call, 2026-09-21. This is a label change and nothing else: no screen gained
+and **Jobs**. Jett's call, 2026-09-21. This is a label change and nothing else: no screen gained
 or lost anything, and no claim on this site becomes more or less true because of it.
+
+**Work became Tasks first, then Jobs, on the same day.** Tasks lasted one pass and never shipped.
+It collided with the Task Manager skill's record collection, which is displayed as **Tasks** and
+holds a person's to-do items, so the app would have had one word for two things: a board of what
+the agent ran, and a list of what the owner means to do. Jobs is the word the app already used
+underneath (the tab's own blurb reads "Every job this agent has run", the chart's accessible name
+is "Jobs finished each day", and the store card says "Jobs it does for you"), so the label now
+agrees with the copy around it rather than competing with it.
 
 **Why it's in here anyway.** Four pages draw the agent's sidebar as a mockup, and a mockup is a
 drawing of a real screen, so visual-first rule 5 puts it under this file. Those four are
@@ -3228,14 +3236,18 @@ reader finding `"now"` in that repo has not found a straggler.
   mockup is a picture of a real screen, so one drawn from a plan is the same kind of wrong as a
   sentence written from one.
 
-  Three surfaces moved on the phone, not two. Its per-agent tab is now **Dashboard**. Its Tasks
-  record lives as a row inside More rather than on the bar, and that row is now **Tasks**. And
-  its top-level bar reads **Agents / Tasks / Marketplace / Settings**, which the desktop has no
+  Three surfaces moved on the phone, not two. Its per-agent tab is now **Dashboard**. Its job
+  record lives as a row inside More rather than on the bar, and that row is now **Jobs**. And
+  its top-level bar reads **Agents / Jobs / Marketplace / Settings**, which the desktop has no
   equivalent of: it is the same record read across every agent rather than one. **The mockup is
   generated**, by `scripts/gen-phone-mocks.py`, so a future rename is an edit to that script and
   a regenerate, never an edit to the HTML, which `--check` would catch in CI anyway.
 - **Do not read this as a new capability.** There is no "dashboard" feature. The tab shows what it
   always showed: what the agent is doing this minute and what is waiting on the owner.
+- **Jobs is not the to-do list, and the two must never be described as one.** A person's to-do
+  items live in the Task Manager skill's own record collection, reachable under Records, and
+  nothing on this site may imply the Jobs tab holds them. The whole reason for the second rename
+  was to keep those two apart on screen.
 
 ### Business Tier — what an admin can see
 

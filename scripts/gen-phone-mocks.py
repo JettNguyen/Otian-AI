@@ -347,13 +347,15 @@ def header_list(title, chip):
 
 
 TAB_ICONS = {
-    "Now": '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
+    # Keyed by the label the phone shows, so a rename here is a rename of the key too. The bar
+    # read Now and Work until 2026-09-21, when the app renamed both to follow the desktop.
+    "Dashboard": '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
     "Chat": '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
     "Skills": '<path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6.3 6.3 4 4M20 20l-2.3-2.3M17.7 6.3 20 4M4 20l2.3-2.3"/><circle cx="12" cy="12" r="3"/>',
     "Routines": '<circle cx="12" cy="12" r="10"/><path d="M12 6.4v5.6l3.5 2.3"/>',
     "More": '<circle cx="5.5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="18.5" cy="12" r="1.6"/>',
     "Agents": '<circle cx="12" cy="9" r="3.4"/><path d="M 5.5 19.2 C 5.5 15.5 8.4 13.6 12 13.6 C 15.6 13.6 18.5 15.5 18.5 19.2"/>',
-    "Work": '<rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="10" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="4" height="8" rx="1.5"/>',
+    "Tasks": '<rect x="3" y="3" width="5" height="18" rx="1.5"/><rect x="10" y="3" width="5" height="12" rx="1.5"/><rect x="17" y="3" width="4" height="8" rx="1.5"/>',
     "Marketplace": '<path d="M4 8h16l-1.2 12.5H5.2z"/><path d="M8.6 8V6.2a3.4 3.4 0 0 1 6.8 0V8"/>',
     "Settings": '<rect x="6" y="2.5" width="12" height="19" rx="2.6"/><path d="M10.6 18.6h2.8"/>',
 }
@@ -443,7 +445,7 @@ def screen_agents():
         o.append(p)
         o.append(text(32 + pw + 10, y + 127.5, a["meta"], 13, "var(--ink3)"))
         y += ch + 14
-    o.append(tab_bar(["Agents", "Work", "Marketplace", "Settings"], "Agents"))
+    o.append(tab_bar(["Agents", "Tasks", "Marketplace", "Settings"], "Agents"))
     return "".join(o)
 
 
@@ -558,7 +560,7 @@ def screen_chat():
     o.append(circle(352, COMPOSER_Y + 22, 22, "var(--acc)"))
     o.append('<path d="M352 %s v-18 m-7 7 l7 -7 l7 7" stroke="#FFF" stroke-width="2.4"'
              ' fill="none" stroke-linecap="round" stroke-linejoin="round"/>' % f(COMPOSER_Y + 32))
-    o.append(tab_bar(["Now", "Chat", "Skills", "Routines", "More"], "Chat"))
+    o.append(tab_bar(["Dashboard", "Chat", "Skills", "Routines", "More"], "Chat"))
     return "".join(o)
 
 
@@ -613,7 +615,7 @@ def screen_skills():
         # the cards land one after another on the stage, a beat apart
         o.append(beat("".join(c), 0.08 + 0.13 * n))
         y += ch + 12
-    o.append(tab_bar(["Now", "Chat", "Skills", "Routines", "More"], "Skills"))
+    o.append(tab_bar(["Dashboard", "Chat", "Skills", "Routines", "More"], "Skills"))
     return "".join(o)
 
 

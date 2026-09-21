@@ -3220,11 +3220,20 @@ reader finding `"now"` in that repo has not found a straggler.
 
 **The boundaries.**
 
-- **The phone mockup was deliberately not changed.** `archie/mobile/index.html` draws Archie
-  Mobile's own bottom bar (Now, Chat, Skills, Routines, More, and an outer Agents / Work /
-  Marketplace / Settings). That is a second product with its own repo, and it has not been
-  renamed. Renaming it here would make the drawing a picture of a screen nobody ships. When the
-  phone app renames, this entry is where to say so.
+- **Archie Mobile renamed the same day, and the phone mockup followed it.** The mockup was held
+  back at first, on the grounds that the phone is a second product with its own repo and renaming
+  the drawing ahead of the app would picture a screen nobody ships. Jett took the call the same
+  day and the app changed too (`archie-mobile`, commit `e5b7eca`), so the drawing changed with it
+  rather than ahead of it. **The order is the rule here**: the app moves, then the mockup. A
+  mockup is a picture of a real screen, so one drawn from a plan is the same kind of wrong as a
+  sentence written from one.
+
+  Three surfaces moved on the phone, not two. Its per-agent tab is now **Dashboard**. Its Tasks
+  record lives as a row inside More rather than on the bar, and that row is now **Tasks**. And
+  its top-level bar reads **Agents / Tasks / Marketplace / Settings**, which the desktop has no
+  equivalent of: it is the same record read across every agent rather than one. **The mockup is
+  generated**, by `scripts/gen-phone-mocks.py`, so a future rename is an edit to that script and
+  a regenerate, never an edit to the HTML, which `--check` would catch in CI anyway.
 - **Do not read this as a new capability.** There is no "dashboard" feature. The tab shows what it
   always showed: what the agent is doing this minute and what is waiting on the owner.
 

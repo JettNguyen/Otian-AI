@@ -1425,6 +1425,42 @@ an MCP server is the way past it.
 
 ---
 
+### ✅ Ask it whether it can do something, and it searches the shelf before it answers (entry written 2026-09-21)
+
+**Approved wording:** "Not sure your agent can do something? Ask it. It searches the add-ons for
+one that fits, and writes a new skill when none does. It shows you what it is adding, and adds
+nothing until you say yes."
+
+**Why it's true:** the tool is `marketplace_search` (`crates/archie-runtime/src/addons.rs`, in
+`tools()`), and its own description tells the agent that a question about the store in any wording
+("can Archie do X?", "what would let you do X?") **is** a search, to run it rather than answer from
+memory, and never to invent an add-on. The match is a local word score over the catalog that copy
+of Archie holds, capped at `MAX_RESULTS` of 5, with `STOP_WORDS` and `same_word` doing the
+matching: no network call, no second model. The chat builder's classify table puts the search
+first, above writing anything ("a job nobody here does, wanted again: search the store; if one
+fits, offer it beside Make one just for me"), a row added 2026-09-08 after a live run wrote a
+medications skill while Medication &amp; Refill Reminder sat in the store unread
+(`docs/CUSTOM-SKILLS-FROM-CHAT.md`).
+
+**The "adds nothing until you say yes" half, which is the load-bearing one.** Finding and adding
+are two tools. `marketplace_install_pending` stages and returns "Staged, not added. Ask the user to
+confirm", and the apply pair (`marketplace_apply_pending_change` / `..._discard_pending_change`)
+exists only on a **later** turn that has something staged (`apply_tools`), so the yes is a real,
+separate message and the model cannot approve its own proposal. `stage()` refuses an id that is not
+in the catalog and refuses anybody but the agent's owner. A written skill is gated the same way by
+its own Keep it card.
+
+**Boundaries — do not cross:**
+- ⛔ **Never "it finds the right one".** It is a word match over names and descriptions, five at
+  most, read back by a model. Say that it searches and tells you what it found.
+- ⛔ **Never say it installs, or "adds it for you".** It proposes; the owner says yes on a later
+  message. Only the owner: a guest on a business agent is told to ask them.
+- ⛔ **Never imply a live search of the whole catalog.** It searches what that copy of Archie was
+  holding when the agent started, which is the staleness `catalog_offers` carries by design.
+- ⚠️ **Both tools are withheld when there is nothing to find** (an agent with the catalog already
+  installed gets neither) and when no installer is wired, where it can find but not offer. So never
+  write it as a thing that happens on every turn.
+
 ### ✅ You can tell it what you wish it did, and it writes the skill (SHIPPED 2026-09-01, Archie 0.2.2)
 
 **Added 2026-09-18, three weeks late, and nothing on the site has ever said it.** This is the

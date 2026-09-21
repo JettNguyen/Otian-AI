@@ -16779,7 +16779,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-badge.gold { background: var(--c-gold-subtle); color: var(--c-gold-strong); }
 .da-recent .r.night, .day-win.is-night .da-recent .r.day { display: none; }
 /* THE LIST GROWS, the same way the phone's Lately card does (Jett, 2026-09-17). A night row that
-   has not landed is out of the layout, so Recent work is as tall as the work that has happened
+   has not landed is out of the layout, so Recent tasks is as tall as the work that has happened
    rather than as tall as the work that will. The narrowing sits inside no-preference so the resting
    state is the whole night, and the landing is a keyframe because a row cannot transition out of
    display:none. Nothing needed doing about the separators: every .r already carries its own top

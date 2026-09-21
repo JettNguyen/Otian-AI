@@ -885,83 +885,94 @@
     <section class="section" aria-labelledby="mine-heading">
       <div class="container">
         <div class="hm-wrap hm-head">
-          <span class="section-label fade-up">Before a reply goes out</span>
-          <h2 id="mine-heading" class="fade-up">No email goes out until you approve it.</h2>
+          <span class="section-label fade-up">Before anything goes out</span>
+          <h2 id="mine-heading" class="fade-up">Nothing goes out or changes in your name until you approve it.</h2>
         </div>
         <figure class="explain-figure mn-figure fade-up delay-1">
           <!-- =================== DESKTOP =================== -->
-          <svg class="explain-svg--desktop" viewBox="0 0 600 240" role="img" aria-labelledby="mn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
-            <title id="mn-t">Your agent has written a reply to Sam Whitaker agreeing to Thursday at two. The draft travels one line and stops at a gate, where you are standing. Past the gate, faint and not yet reached, is Send, marked until you send it or set a time. Under the drawing: only you know you already decided to say no.</title>
+          <svg class="explain-svg--desktop" viewBox="0 0 600 300" role="img" aria-labelledby="mn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+            <title id="mn-t">Three things your agent is ready to do, each on its own line: reply to Sam Whitaker, move Thursday&rsquo;s two o&rsquo;clock, and check off the water bill. All three lines stop at one gate, where you are standing. Past the gate, faint and not yet reached, each line carries on. Under the drawing: your agent answers you on its own, and never acts for you on its own.</title>
             <style>
               .mn-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
               .mn-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-              .mn-to{fill:currentColor;opacity:.62;font-size:10.5px}
-              .mn-rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.18}
               .mn-body{fill:currentColor;font-size:12.5px;font-weight:650}
-              .mn-ink{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.28;stroke-linecap:round}
               .mn-wire{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.5;stroke-linecap:round}
               .mn-wire--past{opacity:.28;stroke-dasharray:4 5}
               .mn-gate{fill:none;stroke:var(--c-blue);stroke-width:2.5;stroke-linecap:round}
-              .mn-glyph{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+              .mn-glyph{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
               .mn-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
-              .mn-send{fill:none;stroke:var(--line-muted);stroke-width:1.5}
-              .mn-sendtext{fill:currentColor;opacity:.62;font-size:11.5px;font-weight:650;text-anchor:middle}
-              .mn-sub{fill:currentColor;opacity:.62;font-size:10.5px;text-anchor:middle}
               .mn-note{fill:var(--c-blue-ink);font-size:12px;font-weight:650;text-anchor:middle}
               .mn-dot{display:none;fill:var(--accent)}
               @supports (offset-path:path("M0,0 L1,1")){
                 .mn-dot{display:block;offset-distance:100%}
                 @media (prefers-reduced-motion:no-preference){
-                  .mn-dot{animation:mnHold 6s ease-in-out infinite}
-                  @keyframes mnHold{0%{offset-distance:0%;opacity:0}9%{opacity:1}38%{offset-distance:100%;opacity:1}92%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:1}}
+                  .mn-dot{animation:mnHold 7s ease-in-out infinite}
+                  .mn-dot--b{animation-delay:-2.33s}
+                  .mn-dot--c{animation-delay:-4.66s}
+                  @keyframes mnHold{0%{offset-distance:0%;opacity:0}8%{opacity:1}34%{offset-distance:100%;opacity:1}92%{offset-distance:100%;opacity:1}100%{offset-distance:100%;opacity:1}}
                 }
               }
             </style>
             <defs><marker id="mn-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".55"/></marker></defs>
 
-            <text class="mn-label" x="14" y="20">YOUR AGENT WROTE THIS</text>
-            <rect class="mn-card" x="12" y="30" width="222" height="96" rx="12"/>
-            <text class="mn-to" x="30" y="54">To: Sam Whitaker</text>
-            <path class="mn-rule" d="M30,64 h186"/>
-            <text class="mn-body" x="30" y="86">Thursday at 2 works well.</text>
-            <path class="mn-ink" d="M30,100 h128M30,111 h84"/>
+            <text class="mn-label" x="14" y="22">YOUR AGENT IS READY TO</text>
 
-            <path class="mn-wire" d="M234,78 L292,78" marker-end="url(#mn-ah)"/>
-            <path class="mn-gate" d="M306,36 V128"/>
-            <path class="mn-wire mn-wire--past" d="M320,78 L424,78"/>
-            <rect class="mn-send" x="430" y="65" width="66" height="26" rx="13"/>
-            <text class="mn-sendtext" x="463" y="82">Send</text>
-            <text class="mn-sub" x="463" y="108">until you send it, or set a time</text>
+            <rect class="mn-card" x="12" y="34" width="268" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,48) scale(.75)"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2,8 L12,15 L22,8"/></g>
+            <text class="mn-body" x="58" y="62">Reply to Sam Whitaker</text>
+            <rect class="mn-card" x="12" y="96" width="268" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,110) scale(.75)"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3,10 H21 M8,3 V7 M16,3 V7"/></g>
+            <text class="mn-body" x="58" y="124">Move Thursday&rsquo;s 2:00</text>
+            <rect class="mn-card" x="12" y="158" width="268" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,172) scale(.75)"><rect x="3" y="4" width="18" height="18" rx="4"/><path d="M8,13 l3,3 l6,-7"/></g>
+            <text class="mn-body" x="58" y="186">Check off the water bill</text>
 
-            <g class="mn-glyph"><circle cx="306" cy="140" r="10"/><path d="M286,170 a20,20 0 0 1 40,0"/></g>
-            <text class="mn-name" x="306" y="192">You</text>
-            <text class="mn-note" x="300" y="224">Only you know you already decided to say no.</text>
+            <path class="mn-wire" d="M280,57 L392,57" marker-end="url(#mn-ah)"/>
+            <path class="mn-wire" d="M280,119 L392,119" marker-end="url(#mn-ah)"/>
+            <path class="mn-wire" d="M280,181 L392,181" marker-end="url(#mn-ah)"/>
 
-            <circle class="mn-dot" r="5" style="offset-path:path('M234,78 L306,78')"/>
+            <path class="mn-gate" d="M400,34 V196"/>
+
+            <path class="mn-wire mn-wire--past" d="M410,57 L562,57"/>
+            <path class="mn-wire mn-wire--past" d="M410,119 L562,119"/>
+            <path class="mn-wire mn-wire--past" d="M410,181 L562,181"/>
+
+            <g class="mn-glyph"><circle cx="400" cy="218" r="11"/><path d="M381,248 a19,19 0 0 1 38,0"/></g>
+            <text class="mn-name" x="400" y="272">You</text>
+
+            <text class="mn-note" x="300" y="296">Your agent answers you on its own. It never acts for you on its own.</text>
+
+            <circle class="mn-dot" r="5" style="offset-path:path('M280,57 L400,57')"/>
+            <circle class="mn-dot mn-dot--b" r="5" style="offset-path:path('M280,119 L400,119')"/>
+            <circle class="mn-dot mn-dot--c" r="5" style="offset-path:path('M280,181 L400,181')"/>
           </svg>
           <!-- =================== MOBILE =================== -->
-          <svg class="explain-svg--mobile" viewBox="0 0 340 344" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="mnm-t">Your agent has written a reply to Sam Whitaker agreeing to Thursday at two. The draft travels down one line and stops at a gate, where you are standing beside it. Below the gate, faint and not yet reached, is Send, marked until you send it or set a time. At the bottom: only you know you already decided to say no.</title>
-            <text class="mn-label" x="14" y="20">YOUR AGENT WROTE THIS</text>
-            <rect class="mn-card" x="12" y="30" width="316" height="96" rx="12"/>
-            <text class="mn-to" x="30" y="54">To: Sam Whitaker</text>
-            <path class="mn-rule" d="M30,64 h280"/>
-            <text class="mn-body" x="30" y="86">Thursday at 2 works well.</text>
-            <path class="mn-ink" d="M30,100 h188M30,111 h124"/>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 380" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="mnm-t">Three things your agent is ready to do, each on its own line: reply to Sam Whitaker, move Thursday&rsquo;s two o&rsquo;clock, and check off the water bill. All three lines stop at one gate, where you are standing. Past the gate, faint and not yet reached, each line carries on. Under the drawing: your agent answers you on its own, and never acts for you on its own.</title>
 
-            <path class="mn-wire" d="M120,126 L120,164" marker-end="url(#mn-ah)"/>
-            <path class="mn-gate" d="M64,172 H240"/>
-            <path class="mn-wire mn-wire--past" d="M120,180 L120,214"/>
-            <rect class="mn-send" x="87" y="218" width="66" height="26" rx="13"/>
-            <text class="mn-sendtext" x="120" y="235">Send</text>
-            <text class="mn-sub" x="120" y="260">until you send it, or set a time</text>
+            <text class="mn-label" x="14" y="22">YOUR AGENT IS READY TO</text>
 
-            <g class="mn-glyph"><circle cx="256" cy="172" r="10"/><path d="M236,202 a20,20 0 0 1 40,0"/></g>
-            <text class="mn-name" x="256" y="224">You</text>
-            <text class="mn-note" x="170" y="300">Only you know you already</text>
-            <text class="mn-note" x="170" y="320">decided to say no.</text>
+            <rect class="mn-card" x="12" y="34" width="316" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,48) scale(.75)"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2,8 L12,15 L22,8"/></g>
+            <text class="mn-body" x="58" y="62">Reply to Sam Whitaker</text>
+            <rect class="mn-card" x="12" y="96" width="316" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,110) scale(.75)"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3,10 H21 M8,3 V7 M16,3 V7"/></g>
+            <text class="mn-body" x="58" y="124">Move Thursday&rsquo;s 2:00</text>
+            <rect class="mn-card" x="12" y="158" width="316" height="46" rx="10"/>
+            <g class="mn-glyph" transform="translate(28,172) scale(.75)"><rect x="3" y="4" width="18" height="18" rx="4"/><path d="M8,13 l3,3 l6,-7"/></g>
+            <text class="mn-body" x="58" y="186">Check off the water bill</text>
 
-            <circle class="mn-dot" r="5" style="offset-path:path('M120,126 L120,172')"/>
+            <path class="mn-wire" d="M170,212 L170,244" marker-end="url(#mn-ah)"/>
+            <path class="mn-gate" d="M56,256 H264"/>
+            <path class="mn-wire mn-wire--past" d="M170,268 L170,302"/>
+
+            <g class="mn-glyph"><circle cx="292" cy="256" r="11"/><path d="M273,286 a19,19 0 0 1 38,0"/></g>
+            <text class="mn-name" x="292" y="310">You</text>
+
+            <text class="mn-note" x="170" y="344">Your agent answers you on its own.</text>
+            <text class="mn-note" x="170" y="362">It never acts for you on its own.</text>
+
+            <circle class="mn-dot" r="5" style="offset-path:path('M170,212 L170,256')"/>
           </svg>
           <figcaption>Your agent has everything you gave it. It does not have the thing you never wrote down. A mistake waits for your yes rather than going out under your name.</figcaption>
         </figure>

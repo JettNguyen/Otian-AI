@@ -619,7 +619,7 @@ it tells you which screen turns it back on, rather than pretending it never coul
 to this computer; look up what it has been doing; read the web. Under *Changes it can make to
 itself*: build new skills and routines; add and remove add-ons; start and pause routines when you
 ask; change which AI answers. Each row names where the job still gets done with the switch off (a
-routine for a repeating nudge, the Work tab for the record, the Marketplace for add-ons, the Build
+routine for a repeating nudge, the Tasks tab for the record, the Marketplace for add-ons, the Build
 a skill tab for a skill, each routine's own card, Response quality for the AI settings).
 
 **Why it's true:** seven are fields on `archie_domain::AgentAbilities`
@@ -2600,7 +2600,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
-| **"Nothing in your name without your yes."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 over a figure that draws the gate with three lanes. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. An email-only sentence was underselling a product-wide property. ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
+| **"Your agent does the work. The approvals are yours."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. An email-only sentence was underselling a product-wide property. ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 
 ### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
 
@@ -3063,6 +3063,35 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 ---
 
 ## Settled Decisions
+
+### The agent tabs are Dashboard and Tasks, and the mockups are ports — RENAMED 2026-09-21
+
+**What changed.** The two agent tabs that used to read **Now** and **Work** now read **Dashboard**
+and **Tasks**. Jett's call, 2026-09-21. This is a label change and nothing else: no screen gained
+or lost anything, and no claim on this site becomes more or less true because of it.
+
+**Why it's in here anyway.** Four pages draw the agent's sidebar as a mockup, and a mockup is a
+drawing of a real screen, so visual-first rule 5 puts it under this file. Those four are
+`index.html`, `archie/business/index.html`, `compare/chat-apps/index.html` and
+`compare/cloud-agents/index.html`, each with one `da-label` per row. They were changed in the same
+pass as the app. The words on those rows are a port, not a design: when the app's rail changes, they
+change, and a mockup that shows a tab the app does not have is the same kind of wrong as a sentence
+that claims a feature the app does not have.
+
+**Why it's true.** `src/app/agent-sections.ts` in the Archie repo, `DETAIL_SECTIONS`, and the two
+`TabHead` titles in `src/app/agent-detail.tsx`. The tab **ids** stay `now` and `work` because they
+are written into saved nav state and read across a dozen files; nobody sees an id. So a future
+reader finding `"now"` in that repo has not found a straggler.
+
+**The boundaries.**
+
+- **The phone mockup was deliberately not changed.** `archie/mobile/index.html` draws Archie
+  Mobile's own bottom bar (Now, Chat, Skills, Routines, More, and an outer Agents / Work /
+  Marketplace / Settings). That is a second product with its own repo, and it has not been
+  renamed. Renaming it here would make the drawing a picture of a screen nobody ships. When the
+  phone app renames, this entry is where to say so.
+- **Do not read this as a new capability.** There is no "dashboard" feature. The tab shows what it
+  always showed: what the agent is doing this minute and what is waiting on the owner.
 
 ### Business Tier — what an admin can see
 

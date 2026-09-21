@@ -200,6 +200,71 @@ for name, role in TITLES.items():
     )
 
 # ---------------------------------------------------------------------------
+# 5. The binary: how many agents, whose computer, and whether the asking has an off switch.
+#
+# `compare/` is the source. Its h1 is the one sentence none of the other nine can print, and
+# every placement behind it is read off that company's own page and dated on `compare/` itself.
+# On 2026-09-21 the claim moved onto three selling pages, which makes four copies of one fact:
+# the exact shape the header of this file describes, and the reason the first two incidents
+# happened. What drifts is the COUNT. The board gains or loses an agent on `compare/`, that
+# page is edited, and the homepage goes on saying ten for months because nothing reads both.
+#
+# The egress clause is checked on every page that carries the binary. TRUST.md ties it to any
+# sorting of the agents onto "your own computer": a page that sorts them and drops it is making
+# a banned claim by omission, whichever of the two places carries it. It is derived from the
+# same count, so an eleventh agent fails every page at once instead of leaving a stale "All ten"
+# behind on three of them.
+
+BINARY_PAGES = (
+    ("compare", "index.html"),
+    ("index.html",),
+    ("archie", "personal", "index.html"),
+    ("archie", "business", "index.html"),
+)
+
+# Comments carry the reasoning for this claim on every page that states it, quoting both the
+# sentence and TRUST.md. Reading them would let a page pass on its own footnotes.
+def visible(*parts):
+    return strip_tags(re.sub(r"<!--.*?-->", " ", read(*parts), flags=re.S))
+
+
+compare_text = visible("compare", "index.html")
+binary = re.search(
+    r"(\w+) agents\. Archie is the only one that works on your own computer",
+    compare_text,
+)
+require(
+    binary is not None,
+    "compare/ no longer opens on the binary in the form this check reads "
+    "('<N> agents. Archie is the only one that works on your own computer...'). "
+    "Fix the reader here before trusting this check again.",
+)
+
+if binary:
+    count = binary.group(1)
+    egress = f"All {count.lower()} send your words to an AI company's computers by default."
+    for page in BINARY_PAGES:
+        where = "/".join(page)
+        text = visible(*page)
+        carries = (
+            "Archie is the only one that works on your own computer" in text
+            or "only Archie works on your own computer" in text
+        )
+        if not carries:
+            continue
+        require(
+            re.search(rf"\b{count} agents\b", text, re.I) is not None,
+            f"{where} states the binary but not the count compare/ states "
+            f"({count.lower()} agents). One of the two has moved.",
+        )
+        require(
+            egress.lower() in text.lower(),
+            f"{where} sorts the agents onto 'your own computer' without the egress clause. "
+            f"TRUST.md requires \"{egress}\" wherever the binary is stated, in the figure or "
+            f"in the copy beside it.",
+        )
+
+# ---------------------------------------------------------------------------
 if failures:
     print("check-claim-drift: FAILED")
     for f in failures:
@@ -208,4 +273,4 @@ if failures:
     print("TRUST.md is the source of truth. Fix the page, or fix TRUST.md and then the page.")
     sys.exit(1)
 
-print("check-claim-drift: clean. Provider roster, holdings list, telemetry, the review page\n    and the founders' titles all agree with their source.")
+print("check-claim-drift: clean. Provider roster, holdings list, telemetry, the review page,\n    the binary's count and egress clause, and the founders' titles all agree with their source.")

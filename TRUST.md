@@ -429,6 +429,32 @@ in `stripe-webhook/index.js` is an Anthropic model, because the trial spends our
 - The names are a set, not a ranking. Do not imply one is required or recommended
   without saying why, and never imply the others are degraded.
 
+**Amended 2026-09-21: changing it is a sentence, not a settings trip, and that shipped in 0.2.5
+on 2026-09-15.** Approved wording: "Ask your agent to use a different AI company and it does.
+'Use ChatGPT instead' is the whole of it. If you have not saved a key for the one you asked for,
+it says where to paste one rather than just refusing." The tool is
+`crates/archie-runtime/src/gateway/tools_ai.rs`, offered where the toolkit is assembled
+(`gateway/turn.rs`), and it moves the same two settings that live on Setup under Response
+quality: which company answers, and how much thinking a reply gets.
+
+**Three boundaries on that sentence, all of them in the code:**
+- ⚠️ **It is interactive only.** A routine cannot reach it, deliberately: both changes restart
+  the gateway, so a schedule that could switch AI could take the agent down mid errand with
+  nobody watching. Never write "your agent picks the model", which implies it chooses on its
+  own. It changes because **you asked**, in a conversation.
+- ⚠️ **It is one of the eight switches** in "What it can do" (see that entry above), on by
+  default and able to be turned off, after which the agent names Response quality instead of
+  pretending it never could. Copy claiming the capability must not imply it is unconditional.
+- ⛔ **Never say "switch and keep going".** The change restarts the agent. That is a few seconds,
+  not a migration, and saying so is better than letting somebody discover it.
+
+**What this is allowed to support, and what it is not.** It is fair to say the agent you built is
+not tied to one AI company, and that a better model from any of them is a setting rather than a
+rebuild: the agent, its skills, its routines and its memory are yours on your disk (see the entry
+on the one file below) and none of them are a provider's. It is **not** a claim that Archie is
+model-agnostic in quality, that every provider does every job equally well, or that we have
+benchmarked them. We have not. Say what moves, not what performs.
+
 ### ✅ A model on your own computer, found and checked before anything binds to it (SHIPPED 2026-09-01, Archie 0.2.2)
 
 **Added 2026-09-18, and it should have existed on 2026-09-01.** This capability shipped, and
@@ -2667,6 +2693,50 @@ also says nothing about the agent's own picture, which is a different file in a 
 (`crates/archie-core/src/bundle/avatar.rs`) and has always been local for the same reason. Do not
 write that Archie "knows your brand" or anything that implies the logo is used in what the agent
 produces: it is drawn on two screens in the app and used nowhere else.
+
+### 🚧 A user-set spending cap — IN BUILD 2026-09-21, and the fourteen places that change with it
+
+**Nothing here may be written in the present tense yet**, and no page may hint that a cap is
+coming: "cannot spend money or buy anything" is true today and stays exactly as it is until the
+code lands. This entry exists for the day it does, because **"cannot spend money" is the most
+copied claim on this site** and a half-changed claim is worse than an unchanged one. Jett is
+building it (2026-09-21, the Archie repo); Instinct is shipping a $100 programmable wallet, which
+is the reason the position had to be decided rather than drifted into.
+
+**What must be true before a single word changes:** the cap is **opt-in**, set by the owner in a
+number they type, and with it switched off the product behaves exactly as the fourteen sentences
+below describe. If that is not what ships, this entry is wrong and the wording is rewritten from
+the code, not from here.
+
+**The fourteen places, counted 2026-09-21.** Two are generated and must be changed at their
+source, not in the file:
+
+| Where | Note |
+| --- | --- |
+| `index.html:347` | the day-chip "Cannot spend money or buy anything" |
+| `archie/business/index.html:531` | "it cannot spend money or buy anything at all" |
+| `faq/index.html:447` | "spend money on its own" |
+| `faq/index.html:461` | "It cannot call, text, spend, or press a button" |
+| `how-it-works/index.html:733` | "it can't spend money" |
+| `trust/index.html:625` | |
+| `trust/details/index.html:209` | |
+| `privacy-policy/index.html:265` | **legal.** "no purchase or payment feature" |
+| `terms-of-service/index.html:230` | **legal.** Archive the old version with `scripts/archive-terms.py` |
+| `standard/index.html:324` | the published operating principles |
+| `llms.txt:21`, `llms.txt:83` | **generated.** `scripts/gen-discovery.py`, and quoted back by machines that will not recheck |
+| `skills-marketplace/browse/index.html:1320` | **generated.** Catalog copy, authored in the Archie repo, then `node scripts/gen-marketplace.mjs` |
+| `README.md:75` | not served, still wrong if it disagrees |
+
+**And the ones that are not sentences.** The homepage chip is a `day-chip--no`, so a change there
+is a drawing changing, and visual-first rule 5 makes TRUST.md govern it. `check-claim-drift.py`
+compares the site's copies against this file, so this file moves first or the check reports the
+drift backwards.
+
+**The claim that survives either way, and it is the one to lead on.** There is no purchase or
+payment feature and the model has no tool that moves money; a cap, if it ships, is a ceiling the
+owner sets on what the **AI company** charges, which is a different sentence from "it can buy
+things". Do not let the two merge. The honest form on the day is: "It still cannot buy anything.
+What you can now set is a limit on what it spends on thinking."
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 

@@ -1165,6 +1165,40 @@ setting Archie up does not cost a day.
   in as many words). Never describe it as enforcement, and never imply the app is defending itself
   against its owner.
 
+### ✅ Your plan is on your Otian account, not on the computer (entry written 2026-09-21)
+
+**Written because `how-it-works/#what-you-need` listed "an Otian account" as one of three things
+to start and never said what it was for**, which reads as a signup for our benefit rather than
+the reader's. It is for the reader, and this is the reason.
+
+**Approved wording:** "The account is where a plan lives if you take one, so it follows you and
+not the computer."
+
+**Why it's true:** the app asks the billing service for a signed entitlement with the account's
+ID token and nothing else: the request body is `{}` or `{terms_version}`
+(`crates/archie-core/src/entitlement.rs`, `fetch`). The service signs a payload of `uid`,
+`accountFacts(user)` and the trial facts (`stripe-webhook/entitlement.js`, `signEntitlement`).
+No device, machine or install identifier is in the request or in the assertion, so what the app
+is allowed to open is decided by who signed in, and signing in on a second computer gets the
+same answer.
+
+**Boundaries — do not cross:**
+- ⛔ **This is the plan, and only the plan. Never let it grow into add-ons.** The retired claim
+  in the no-purchase section above ("anything you buy is tied to your Otian account") stays
+  retired for a different reason: there is no per-person add-on record to tie, so a new computer
+  adds them again. A sentence that says "everything follows your account" is false the moment a
+  reader tests it on their shelf.
+- ⛔ **It does not carry your agents.** Those are files on the computer, and the way they move is
+  the transfer file in "Your whole agent in one file" below, which hands you a list of what to
+  connect again. Never imply signing in restores a setup.
+- ⛔ **Never "use it on all your computers".** Nothing here is a seat count or a device
+  allowance, and the personal edition's ceilings are about agents and people, not machines. The
+  claim is only that the plan is not stranded on one computer, which is what somebody replacing
+  a computer is actually asking.
+- ⛔ **Never say the free credits follow the account.** They are capped per computer and
+  deliberately so (see the free-trial entries above). The two facts point opposite ways and a
+  page that states them loosely says both.
+
 ### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
 
 **Approved wording:** "Your agent answers ordinary questions the same way any AI chat you have

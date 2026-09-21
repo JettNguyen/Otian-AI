@@ -57,21 +57,30 @@ CAPTION_MAX = 40
 # are ceilings, not targets: a page at its budget has to cut a paragraph to add
 # one, which is the whole point.
 BUDGETS = {
-    # what-it-does/ is a picker, and the budget is measuring the wrong thing on it. The default
-    # 900 exists because a prose page grows one well-meant paragraph at a time until nobody has
-    # read it end to end. This page cannot fail that way: twelve panels are in the markup and a
-    # reader is shown ONE. The arithmetic, counted 2026-09-21: 810 of its 1,048 words are the
-    # twelve panels at 59 to 75 words each, 238 are the hero, the chips, the two catches and the
-    # close, so what anybody actually reads at rest is 238 + 68 = about 306 words, a third of
-    # what a marketing page is allowed. The eleven they do not read are in the HTML on purpose,
-    # because visual-first rule 6 says the resting state has to be complete for a crawler, an
-    # answer engine and a reader with scripts off, and the glossary's "Entries shown: 0" is what
-    # the alternative looks like. Taxing that would push the content back into a prose page,
-    # which is the same reason figure labels are counted and never budgeted.
-    # Set at 1060, twelve above today's count, so a thirteenth persona costs one of the twelve
-    # rather than arriving free. If the panels ever stop being one-at-a-time, this goes back to
-    # the default the same day.
-    "what-it-does/index.html": 1060,
+    # The two edition pages each carry a picker as of 2026-09-21, and the budget is measuring
+    # part of it wrong. Six lives on Personal and four roles on a team on Business, each naming
+    # three real add-ons; the reader is shown ONE and the rest are in the markup because
+    # visual-first rule 6 says the resting state has to be whole for a crawler, an answer engine
+    # and a reader with scripts off. The glossary's "Entries shown: 0" is what the alternative
+    # looks like.
+    #
+    # The arithmetic, counted the day it went in. Personal: 1,309 words, of which 343 are the six
+    # panels at 53 to 62 each, so 281 are never on screen and a reader meets about 1,023.
+    # Business: 1,136, of which 195 are the four panels, 144 never on screen, a reader meets
+    # about 990. So this is NOT free: it puts roughly 120 and 90 real words on two pages that
+    # were at 900, and it is worth it because sorting the reader is the one job a paragraph
+    # cannot do. The prose alternative, a list of who each edition is for, costs more words and
+    # works worse, which is the same reason figure labels are counted and never budgeted.
+    #
+    # Nothing was cut to pay for it because there was nothing restating it: the uses section on
+    # Personal is a heading, one lede and the drafts scene, which is aria-hidden and uncounted.
+    # What did come out is the picker's own repeat of the send gate that lede already carries.
+    #
+    # Set just above today's count on purpose, so a seventh life or a fifth role costs an
+    # existing one rather than arriving free. If either picker ever stops being one-at-a-time,
+    # both go back to the default the same day.
+    "archie/personal/index.html": 1320,
+    "archie/business/index.html": 1145,
     # The homepage carries the whole story once: what Archie is, who it is for,
     # what it costs, and why to trust it. It is the one page allowed to.
     # Raised 2026-09-08 from 1200, for the five setup steps: the page had a band

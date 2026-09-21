@@ -155,7 +155,6 @@
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../../archie/personal/" role="menuitem">For Personal</a>
             <a href="../../archie/business/" role="menuitem">For Business</a>
-            <a href="../../what-it-does/" role="menuitem">What Your Agent Does</a>
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../../archie/pricing/" role="menuitem">Pricing</a>
@@ -231,7 +230,6 @@
         <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../../archie/personal/">For Personal</a>
       <a href="../../archie/business/">For Business</a>
-      <a href="../../what-it-does/">What Your Agent Does</a>
       <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
       <a href="../../archie/pricing/">Pricing</a>
@@ -587,6 +585,96 @@
 
         </div>
       </div>
+
+        <!-- Which one are you. The radios are direct children of .uc so the chips and the panels
+             both answer `#uc-n:checked ~` with no script in the way, and every panel is in the
+             markup at rest, so a crawler and a reader with scripts off get all of them rather than
+             whichever is lit. That is the glossary's "Entries shown: 0" lesson applied to a
+             control. The same component runs on the sibling edition page, with roles on a team
+             instead of lives, because "one person" and "a team" is the split these two pages ARE:
+             a consultant working alone is one person and belongs here, not over there.
+             .uc is positioned because .sr-only is absolute, and with no positioned ancestor the
+             inputs land at the top of the document and a click scrolls the reader off the picker. -->
+        <div class="uc">
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-1" checked />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-2" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-3" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-4" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-5" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-6" />
+
+          <div class="uc-chips">
+            <p class="uc-group">Nearest to your week</p>
+            <div class="uc-row">
+              <label class="uc-chip" for="uc-1">Working for yourself</label>
+              <label class="uc-chip" for="uc-2">The family calendar</label>
+              <label class="uc-chip" for="uc-3">A new baby</label>
+              <label class="uc-chip" for="uc-4">Looking after a parent</label>
+              <label class="uc-chip" for="uc-5">The house</label>
+              <label class="uc-chip" for="uc-6">The money</label>
+            </div>
+          </div>
+
+          <div class="uc-panels">
+
+            <article class="uc-panel" data-uc="1" aria-label="Working for yourself">
+              <p class="uc-day">You bill by the hour, so the hour you lose chasing people is the one that costs twice.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Waiting On</b> Every reply that never came, and every invoice nobody paid.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Commitment Keeper</b> Reads your sent mail for every &ldquo;I&rsquo;ll send that over&rdquo;.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Find a Time</b> Reads your calendar and drafts the reply that ends the back and forth.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="2" aria-label="The family calendar">
+              <p class="uc-day">Four schedules, one of them yours, and the school mail nobody has opened.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>School &amp; Family</b> Pulls the dates and the what-to-bring out of the school mail.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Calendar Manager</b> Proposes the move, and makes it once you approve.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Birthday &amp; Anniversary Keeper</b> Every date that matters, early enough to do something.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="3" aria-label="A new baby">
+              <p class="uc-day">Everything still has to happen, and you are doing it on four hours of sleep.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="personality">Personality</span><b>New Parent</b> Written for one hand, at three in the morning.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Medication &amp; Refill Reminder</b> What to take, the dose, and when the refill runs out.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Meal Planner</b> The week&rsquo;s meals out of whatever is in the fridge.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="4" aria-label="Looking after a parent">
+              <p class="uc-day">You leave the appointment and half of what was said has already gone.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Health Record</b> Tell it what the doctor said and it keeps the thread.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Medication &amp; Refill Reminder</b> The list, the doses, and the refill dates.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Paperwork</b> Benefits and enrollments, step by step, with the next one named.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="5" aria-label="The house">
+              <p class="uc-day">None of it is hard. It is that no one thing reminds you of any of it.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Home Maintenance</b> The jobs nobody remembers: furnace filters, drains, the gutters.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Warranty &amp; Returns</b> When you bought it, and the day the return window shuts.</li>
+                <li><span class="uc-kind" data-kind="routine">Routine</span><b>Weekly Home Check</b> Says a job is due two weeks out, safety first, and stays quiet otherwise.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="6" aria-label="The money">
+              <p class="uc-day">You know roughly what comes in. What goes out is spread over eleven websites.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Bills &amp; Subscriptions</b> Everything that charges you on a repeat, with real dates.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Money In &amp; Out</b> Log what you spent as you go, then ask how much is left.</li>
+                <li><span class="uc-kind" data-kind="routine">Routine</span><b>Bill Reminders</b> Three days out, before the late fee rather than after it.</li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+
+        <p class="uc-catch">Three out of 160, all included, and the pick changes nothing about what your agent may do on its own: no email goes out until you approve it, a calendar change is proposed and applied only after you approve it, and none of them can spend money. <a href="../../trust/">The whole list, and how to check it&nbsp;&rarr;</a></p>
     </section>
 
     <section class="section section-alt" aria-labelledby="build-heading">
@@ -762,7 +850,6 @@
           <nav class="footer-nav-links" aria-label="Archie">
             <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/business/">For Business</a>
-      <a href="../../what-it-does/">What Your Agent Does</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../archie/pricing/">Pricing</a>

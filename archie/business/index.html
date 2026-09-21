@@ -52,7 +52,6 @@
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
             <a href="../../archie/personal/" role="menuitem">For Personal</a>
             <a href="../../archie/business/" role="menuitem">For Business</a>
-            <a href="../../what-it-does/" role="menuitem">What Your Agent Does</a>
             <a href="../../how-it-works/" role="menuitem">How It Works</a>
             <a href="../../archie/mobile/" role="menuitem">Archie Mobile</a>
             <a href="../../archie/pricing/" role="menuitem">Pricing</a>
@@ -128,7 +127,6 @@
         <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../../archie/personal/">For Personal</a>
       <a href="../../archie/business/">For Business</a>
-      <a href="../../what-it-does/">What Your Agent Does</a>
       <a href="../../how-it-works/">How It Works</a>
       <a href="../../archie/mobile/">Archie Mobile</a>
       <a href="../../archie/pricing/">Pricing</a>
@@ -530,6 +528,76 @@
              link. The third card is the paragraph. -->
         <div class="pricing-why mt-48 fade-up delay-1">
           <p><strong>Shaped to each role.</strong> Support gets an agent that triages the inbox and drafts replies. The owner gets one that chases follow-ups and preps the weekly numbers. Each asks about the business, then fits its Add-ons: Skills it can use, Routines it runs on a schedule, a Personality it answers in.</p>
+        </div>
+
+        <!-- Which one are you. The radios are direct children of .uc so the chips and the panels
+             both answer `#uc-n:checked ~` with no script in the way, and every panel is in the
+             markup at rest, so a crawler and a reader with scripts off get all of them rather than
+             whichever is lit. That is the glossary's "Entries shown: 0" lesson applied to a
+             control. The same component runs on the sibling edition page, with roles on a team
+             instead of lives, because "one person" and "a team" is the split these two pages ARE:
+             a consultant working alone is one person and belongs here, not over there.
+             .uc is positioned because .sr-only is absolute, and with no positioned ancestor the
+             inputs land at the top of the document and a click scrolls the reader off the picker. -->
+        <div class="uc">
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-1" checked />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-2" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-3" />
+          <input class="sr-only uc-r" type="radio" name="uc" id="uc-4" />
+
+          <div class="uc-chips">
+            <p class="uc-group">Nearest to your team</p>
+            <div class="uc-row">
+              <label class="uc-chip" for="uc-1">The shared inbox</label>
+              <label class="uc-chip" for="uc-2">Whoever owns the numbers</label>
+              <label class="uc-chip" for="uc-3">Selling</label>
+              <label class="uc-chip" for="uc-4">The books</label>
+            </div>
+          </div>
+
+          <div class="uc-panels">
+
+            <article class="uc-panel" data-uc="1" aria-label="The shared inbox">
+              <p class="uc-day">Customers waiting on an answer, and nobody whose job it is to sweep the inbox.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Owed to Customers</b> Sweeps the shared mail for anyone still waiting.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Common Questions</b> Counts what people actually ask, and keeps one agreed answer.</li>
+                <li><span class="uc-kind" data-kind="personality">Personality</span><b>The Operator</b> Runs on shifts, not calendar blocks.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="2" aria-label="Whoever owns the numbers">
+              <p class="uc-day">The week&rsquo;s picture exists. It is spread across four tools.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Revenue Watch</b> Reads your live Stripe: what failed, what nobody has paid.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Waiting On</b> Replies that never came, and invoices that were never paid.</li>
+                <li><span class="uc-kind" data-kind="routine">Routine</span><b>Team Standup</b> One morning brief: the shared calendar, and work still unclaimed.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="3" aria-label="Selling">
+              <p class="uc-day">Leads in four places, and a follow-up nobody owns.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Lead Desk</b> Every possible customer in one list, with the stage each has reached.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Campaign Watch</b> Who wrote back, what they said, which campaign went quiet.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Booking Watch</b> Who booked, what they typed in the form, who moved it.</li>
+              </ul>
+            </article>
+
+            <article class="uc-panel" data-uc="4" aria-label="The books">
+              <p class="uc-day">The same round of sign-ins every month, before any of the work starts.</p>
+              <ul class="uc-list">
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Clean Books</b> Drop a statement PDF and it enters every charge.</li>
+                <li><span class="uc-kind" data-kind="skill">Skill</span><b>Statement Collector</b> Signs in to each account and downloads the month&rsquo;s statement.</li>
+                <li><span class="uc-kind" data-kind="personality">Personality</span><b>The Bookkeeper</b> Numbers first. No lecture attached.</li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+
+        <p class="uc-catch">Three out of 160, all included, and each agent answers the person it was built for. No email goes out until you approve it, a calendar change waits the same way, and it cannot spend your money. <a href="../../trust/">The whole list, and how to check it&nbsp;&rarr;</a></p>
+        <div class="pricing-why">
           <p>Customer lists, invoices, inboxes: your business data stays on your computer, and our servers hold each account&rsquo;s email and plan, never a conversation. An email goes out only when you send it or set a time, a change to a calendar you&rsquo;ve connected is proposed to you before it happens, and it cannot spend money or buy anything at all. <a class="marketplace-text-link" href="../../trust/">The whole list, on the trust page&nbsp;&rarr;</a></p>
           <p><strong>The agent you built stays yours.</strong> Each agent, its skills, its routines and what it has learned about the business saves to one file, under Moving and backups. Put it on the next computer and that one picks up where this left off. No key is in it, so you get a list of what to connect again. It is an ordinary file, not a sealed one, so keep it where you keep your books.</p>
         </div>
@@ -650,7 +718,6 @@
           <nav class="footer-nav-links" aria-label="Archie">
             <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/business/">For Business</a>
-      <a href="../../what-it-does/">What Your Agent Does</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../archie/pricing/">Pricing</a>

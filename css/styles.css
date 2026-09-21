@@ -2037,6 +2037,14 @@ summary,
   font-size: .5em;
   font-weight: 600;
   margin-left: .04em;
+  /* U+2122 is drawn in about the top .7 of its own box, so at half size its top reaches only
+     .35em up a line whose caps reach .72em: it sits near the middle of the letters beside it
+     rather than over them, which is what Jett read as too low on the hero (2026-09-21). The
+     lift is in the glyph's OWN em, so .68em here is .34em of the heading, putting its top at
+     roughly .69 and level with the cap line. line-height: 0 keeps the raised box from growing
+     the h1's line and pushing "Yours to shape" down. */
+  vertical-align: .68em;
+  line-height: 0;
 }
 
 /* The subtitle is a fixed 10px, so .8em put an 8px glyph roughly a pixel and a half UNDER the
@@ -2055,6 +2063,9 @@ summary,
   line-height: 0;
   letter-spacing: 0;
   margin-left: .1em;
+  /* No lift here, unlike the hero. 13px against a 10px parent already puts the glyph's top
+     above the caps on its own, and the hero's .68em on top of that would launch it. */
+  vertical-align: baseline;
 }
 
 /* Primary ink, not muted. A column heading in the same weight of grey as the links under it
@@ -18714,18 +18725,23 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 }
 
 /* ========================================
-   Use-case picker: what-it-does/
+   Which one are you: the picker on both edition pages
    ======================================== */
 
-/* Twelve lives, one lit. The radios are direct children of .uc so both the chips and the panels
-   are reachable with `#uc-n:checked ~`, the arrangement compare/chat-apps/ uses and for the same
-   reason: a control the reader works has to answer with no script in the way. Every panel ships
-   in the HTML, so a crawler, an answer engine and a reader with scripts off get all twelve rather
-   than the one that happens to be showing. That is visual-first rule 6 in a control.
+/* Six lives on archie/personal/ and four roles on a team on archie/business/, one lit. The
+   radios are direct children of .uc so both the chips and the panels are reachable with
+   `#uc-n:checked ~`, the arrangement compare/chat-apps/ uses and for the same reason: a control
+   the reader works has to answer with no script in the way. Every panel ships in the HTML, so a
+   crawler, an answer engine and a reader with scripts off get all of them rather than the one
+   that happens to be lit. That is visual-first rule 6 in a control.
 
-   Positioned, and it has to be: .sr-only is absolute, so with no positioned ancestor the twelve
-   inputs land at the top of the document and clicking a chip scrolls the reader off the picker.
-   Same bug the ring of phones on archie/business/ hit with one checkbox. */
+   Six selectors, not four, because the longer page sets the count and the two share one
+   component. The ids restart at uc-1 on each page, which is safe only because no page carries
+   both pickers; if one ever does, they need separate names.
+
+   Positioned, and it has to be: .sr-only is absolute, so with no positioned ancestor the inputs
+   land at the top of the document and clicking a chip scrolls the reader off the picker. Same
+   bug the ring of phones on archie/business/ hit with one checkbox. */
 .uc {
   position: relative;
   margin-top: 8px;
@@ -18766,13 +18782,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 #uc-3:checked ~ .uc-chips .uc-chip[for="uc-3"],
 #uc-4:checked ~ .uc-chips .uc-chip[for="uc-4"],
 #uc-5:checked ~ .uc-chips .uc-chip[for="uc-5"],
-#uc-6:checked ~ .uc-chips .uc-chip[for="uc-6"],
-#uc-7:checked ~ .uc-chips .uc-chip[for="uc-7"],
-#uc-8:checked ~ .uc-chips .uc-chip[for="uc-8"],
-#uc-9:checked ~ .uc-chips .uc-chip[for="uc-9"],
-#uc-10:checked ~ .uc-chips .uc-chip[for="uc-10"],
-#uc-11:checked ~ .uc-chips .uc-chip[for="uc-11"],
-#uc-12:checked ~ .uc-chips .uc-chip[for="uc-12"] {
+#uc-6:checked ~ .uc-chips .uc-chip[for="uc-6"] {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--text-on-accent);
@@ -18785,13 +18795,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 #uc-3:focus-visible ~ .uc-chips .uc-chip[for="uc-3"],
 #uc-4:focus-visible ~ .uc-chips .uc-chip[for="uc-4"],
 #uc-5:focus-visible ~ .uc-chips .uc-chip[for="uc-5"],
-#uc-6:focus-visible ~ .uc-chips .uc-chip[for="uc-6"],
-#uc-7:focus-visible ~ .uc-chips .uc-chip[for="uc-7"],
-#uc-8:focus-visible ~ .uc-chips .uc-chip[for="uc-8"],
-#uc-9:focus-visible ~ .uc-chips .uc-chip[for="uc-9"],
-#uc-10:focus-visible ~ .uc-chips .uc-chip[for="uc-10"],
-#uc-11:focus-visible ~ .uc-chips .uc-chip[for="uc-11"],
-#uc-12:focus-visible ~ .uc-chips .uc-chip[for="uc-12"] {
+#uc-6:focus-visible ~ .uc-chips .uc-chip[for="uc-6"] {
   outline: 2px solid var(--accent-strong);
   outline-offset: 2px;
 }
@@ -18806,13 +18810,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 #uc-3:checked ~ .uc-panels .uc-panel[data-uc="3"],
 #uc-4:checked ~ .uc-panels .uc-panel[data-uc="4"],
 #uc-5:checked ~ .uc-panels .uc-panel[data-uc="5"],
-#uc-6:checked ~ .uc-panels .uc-panel[data-uc="6"],
-#uc-7:checked ~ .uc-panels .uc-panel[data-uc="7"],
-#uc-8:checked ~ .uc-panels .uc-panel[data-uc="8"],
-#uc-9:checked ~ .uc-panels .uc-panel[data-uc="9"],
-#uc-10:checked ~ .uc-panels .uc-panel[data-uc="10"],
-#uc-11:checked ~ .uc-panels .uc-panel[data-uc="11"],
-#uc-12:checked ~ .uc-panels .uc-panel[data-uc="12"] { display: block; }
+#uc-6:checked ~ .uc-panels .uc-panel[data-uc="6"] { display: block; }
 
 .uc-panel {
   background: var(--bg-card);

@@ -60,7 +60,14 @@ The themes, each fixed in place below and on the affected pages:
     dispatch covers every `inbox_*` and `watch_*` tool
     (`crates/archie-runtime/src/gateway/turn.rs`; refusal text in `email/poller.rs`,
     `INBOX_TOOLS_NEED_YOUR_OWN_KEY`). Approved wording: "Every email feature refuses to run on
-    the free starter credits; connect an AI account of your own and it starts." The privacy
+    the free starter credits; connect an AI account of your own and it starts." **A second
+    approved form, for marketing copy, added 2026-09-21 in a plain-words pass:** "Email features
+    need an AI account of your own. The free starter credits will not run them." It states the
+    condition first and drops "refuses to", which reads as the app being difficult rather than
+    as a limit of the funding. ⚠️ **Do not write "the starter credits do not cover them."**
+    Cover is a billing word and this is not a billing limit: no quantity of starter credits ever
+    runs an email feature, and a reader told about coverage will reasonably go looking for more
+    credits. The words that carry the claim are **will not run**. The privacy
     policy's Google bullet now scopes the starter-credits exception to calendar and task data
     for this reason. And the SSRF guard's private-address rule is now enforced inside the HTTP
     client's own DNS resolver (`crates/archie-net/src/http.rs`, `PublicAddressesOnly`), so the

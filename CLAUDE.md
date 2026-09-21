@@ -212,7 +212,11 @@ homepage's window (at a `--wz`) on the agent's Setup page, the one that says who
 with the packet map's switch turning the one agent standing at the computer into three, each with
 its own face and its own name in every phone's bar. Its message rolls from a phone to the
 computer and back to the same phone, and no lane runs behind the window, because a ball that
-vanishes behind an object for most of its run is not carrying the claim. Three lessons from Jett's
+vanishes behind an object for most of its run is not carrying the claim. **That constraint fights symmetry, and
+symmetry wins**: the window hides the middle of the floor, so the first routing sent all three
+lanes out to one side and Jett read it as scattered (2026-09-21). The shape that satisfies both
+is two mirrored sweeps down the sides and along the front, plus a straight drop into the top of
+the screen for the phone standing directly behind it. Three lessons from Jett's
 first look (2026-09-19): a name standing in front of a phone's foot covers its composer, so a
 label stands 72 further in, which after the tilt lands just under the phone's bottom edge; a
 figure holding a visually-hidden checkbox must be `position: relative`, or the one-pixel input

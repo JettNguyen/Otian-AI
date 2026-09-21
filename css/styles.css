@@ -18414,9 +18414,26 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .bz-ball { opacity: 0; offset-distance: 0%; offset-rotate: 0deg; }
 /* the lanes, one per phone and one set per composition, in the stylesheet so narrow can have
    its own; the svg draws the same paths and hides the set that is not in use */
-.bz-ball[data-ball="0"] { offset-path: path('M92,102 C92,260 90,405 250,410 C380,414 470,400 518,380'); }
-.bz-ball[data-ball="1"] { offset-path: path('M360,14 C470,18 548,80 550,190 C552,300 540,348 522,378'); }
-.bz-ball[data-ball="2"] { offset-path: path('M628,102 C628,220 600,332 526,376'); }
+/* THE THREE WIDE LANES ARE MIRRORS, and getting there is constrained harder than it looks. The
+   window stands at the front of the floor and hides the whole middle of it: a lane anywhere in
+   plane x 200..520 between y 96 and 380 is drawn behind the computer, and a ball that vanishes
+   for most of its run is not carrying the claim. The first version dodged that by routing all
+   three out to the right, which read as scattered ("the lines on wider site widths are just all
+   over the place and not symmetrical, unlike mobile view", Jett, 2026-09-21). It looked
+   deliberate for two days only because the window was sitting at 590 by accident, right where
+   the lanes converged; centering it back put them next to nothing.
+
+   So: Dana sweeps down the left and along the front, Todd is her exact mirror about x=360, and
+   Sam drops straight down the centre into the top of the screen, which is the one route out of
+   the corridor for a phone standing directly behind the window. Checked in WebKit rather than by
+   eye: the two side lanes project to the same top and bottom and mirror to within 0.0px, Sam's
+   projects dead centre, and 21 sampled points per lane all land outside the window's rect. The
+   front sweep stops at plane y 386 rather than 400 for the near-edge reason the two desks
+   taught: at 400 the projection ran to 8px off the bottom of the scene, and it now clears it by
+   20. The ball paths below are the same three curves, so a lane and its message cannot drift. */
+.bz-ball[data-ball="0"] { offset-path: path('M92,102 C92,248 104,362 196,386 C258,404 312,398 352,390'); }
+.bz-ball[data-ball="1"] { offset-path: path('M360,14 C360,38 360,58 360,84'); }
+.bz-ball[data-ball="2"] { offset-path: path('M628,102 C628,248 616,362 524,386 C462,404 408,398 368,390'); }
 .bz-paths .bz-n { display: none; }
 .bz-scene.is-live .bz-msg:not(.is-in) { display: none; }
 .bz-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }

@@ -9151,10 +9151,25 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* The homepage's one quote. Centred, because the band it sits in is centred, and marked
    as somebody else's words by the rule and the indent rather than by quote marks, which
-   at this size look like a decorative flourish. Same reasoning as .tm-card--long. */
-.hm-quote {
+   at this size look like a decorative flourish. Same reasoning as .tm-card--long.
+
+   ONE BOX SETS THE WIDTH, AND THAT IS A FIX, NOT TIDYING (2026-09-21). The quote and the
+   name under it were two boxes, each max-width: 54ch, each centred by auto margins. ch is
+   the width of the font's own 0, and .tm-attrib is weight 600 where the quote is 400, so
+   the two boxes were measured in two different fonts: Inter's figures are proportional and
+   its 0 is not promised to hold its advance across weights. Whatever the exact difference,
+   the wider box centred by auto margins starts further left, and the name hangs left of
+   the rule it is supposed to sit under. Two boxes that have to share a left edge cannot
+   each be measured in their own font, so the wrapper is measured once and both children
+   fill it. (Nothing here can render this: no browser in this checkout, and the metric was
+   reasoned from the cascade rather than measured.) */
+.hm-quoteblock {
   margin: 22px auto 0;
   max-width: 54ch;
+}
+
+.hm-quote {
+  margin: 0;
   padding: 4px 0 4px 18px;
   border-left: 3px solid var(--accent);
   text-align: left;
@@ -9169,8 +9184,7 @@ html[data-theme="dark"] .booking-container iframe {
 
 .day-testimonial .tm-attrib {
   text-align: left;
-  max-width: 54ch;
-  margin: 12px auto 0;
+  margin: 12px 0 0;
   padding-left: 21px;
 }
 

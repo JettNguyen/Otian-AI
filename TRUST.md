@@ -3356,6 +3356,46 @@ brand request form, `marketing@anthropic.com`, `legal@x.ai`, `trademarks@Gen.com
 `studiobrandassets@wix.com`, `press@openclaw.org`, `comms@instinct.com`, `support@vellum.ai`,
 `support@nousresearch.com`.
 
+✅ **Asked and answered, September 20, 2026: Anthropic says no to the mark and yes to the name.**
+This is the first time one of these companies has answered us directly, and it is worth separating
+from the rows above, every one of which is us reading a published page and applying it to ourselves.
+Jett wrote to `marketing@anthropic.com` about the two places the Claude mark had been drawn in the
+app, the tile and the chip in the reply's own words, and took it out of the build while he waited.
+Ariana Kim of Anthropic Marketing replied:
+
+> We aren't able to approve use of the Claude mark for the tile and the chip, so the name in text is
+> the route here. You're welcome to refer to Claude by name in plain text to show which account a
+> key opens, for example listing Claude among the providers Archie supports, as long as nothing
+> implies sponsorship, endorsement, or an affiliation with Anthropic. Any use of our logos or other
+> brand assets requires our prior written approval of the specific use and placement and is subject
+> to our Trademark Guidelines.
+
+The reply says of itself that it is a general explanation of how their published guidelines apply,
+not a license, sponsorship or endorsement. The Archie repo's `docs/BRAND-MARKS.md` carries the same
+record beside the app-side audit.
+
+**Nothing on either surface changes, and that is the point.** The site has carried no logos at all
+since September 17 and the app's tile has carried a monogram since the same day, both decided before
+this reply arrived. What changed is which half we can point at. The refusal confirms a rule we were
+already keeping. The permission is new: **naming Claude in plain type, to say which account a key
+opens, is now allowed in writing rather than by our own reading of nominative fair use.** That is
+firmer ground than anything else on this page stands on, and it is the ground the pricing pages, the
+AI account copy and the provider lists all stand on.
+
+**Two things this closes, and one it opens.**
+
+- ⛔ **`marketing@anthropic.com` is no longer a permission route for the mark.** It is answered. A
+  logo use would now need their prior written approval of a specific use and placement, starting
+  from a no. Do not send screenshots; they asked us not to, since the answer does not turn on how
+  the mark would look.
+- ⛔ **The Anthropic row in the tables above may not be read as "unasked".** It was asked.
+- ⚠️ **The permission carries a condition, and the condition is a sentence rather than a picture.**
+  Naming Claude is allowed only while nothing implies sponsorship, endorsement or affiliation. Two
+  things discharge that today: the `footer-marks-note` in every page's footer, and `NOT_AFFILIATED`
+  in the app's `src/app/trademark-notices.tsx`, which names Anthropic. **Neither may be dropped
+  while Claude is named**, and no copy may drift into "powered by Claude", "built on Claude" or a
+  partner word. None does today, which was checked when this was recorded.
+
 **Re-read 2026-09-11, before the soft launch, and the Symphony rows moved.** Three findings, and
 two of them were live on `compare/cloud-agents/`:
 

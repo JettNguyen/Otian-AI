@@ -1427,9 +1427,15 @@ an MCP server is the way past it.
 
 ### ✅ Ask it whether it can do something, and it searches the shelf before it answers (entry written 2026-09-21)
 
-**Approved wording:** "Not sure your agent can do something? Ask it. It searches the add-ons for
-one that fits, and writes a new skill when none does. It shows you what it is adding, and adds
-nothing until you say yes."
+**Approved wording:** "Not sure your agent can do something? Ask it, and it will build it for
+you. It searches the add-ons for one that fits, and writes a new skill when none does. It shows
+you what it is adding, and adds nothing until you say yes."
+
+**"Build it for you" travels with the last sentence or not at all (2026-09-21).** On its own it is
+the shape this entry bans two lines down, because it promises the doing without the asking, and it
+also quietly promises a new skill where the app would rather hand over one of the 160 that already
+exists. Both are answered by the two sentences that follow it, so the three ship together, on one
+screen, in this order.
 
 **Why it's true:** the tool is `marketplace_search` (`crates/archie-runtime/src/addons.rs`, in
 `tools()`), and its own description tells the agent that a question about the store in any wording

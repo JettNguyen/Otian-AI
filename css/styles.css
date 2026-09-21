@@ -122,7 +122,12 @@
   --c-blue-wash: rgba(89, 136, 203, 0.13);
   --c-teal-ink: #2E7168;
   --c-teal-wash: rgba(62, 154, 146, 0.13);
-  --c-plum-ink: #7B58A3;
+  /* Darkened from #7B58A3 on 2026-09-21, when the parts list on archie/personal/ put this on
+     --bg-secondary as text rather than as a glyph. It measured 4.49 there, under the 4.5 body
+     text asks, while teal ran 4.60 and ember 4.94. #78559F reads 4.70 on that ground and lifts
+     every other place it is used (5.57 to 5.84 on card), so nothing had to be traded for it.
+     check-contrast.mjs measures all three on that ground now. */
+  --c-plum-ink: #78559F;
   --c-plum-wash: rgba(153, 111, 190, 0.13);
   --c-green: #679B55;
   --c-green-subtle: rgba(103, 155, 85, 0.14);
@@ -9860,10 +9865,12 @@ html[data-theme="dark"] .booking-container iframe {
   margin-bottom: 10px;
 }
 
-/* A label may carry the app's own glyph for the part it names. The label stays blue,
-   because that is what a small uppercase component header is everywhere on this site;
-   the glyph is what takes the kind colour, so the three add-on kinds are legible as
-   kinds without three of five labels changing colour and demoting the other two. */
+/* A label may carry the app's own glyph for the part it names. Until 2026-09-21 the label
+   stayed blue and only the glyph took the kind colour, on the reasoning that a small uppercase
+   component header is blue everywhere on this site and three of five changing colour would
+   demote the other two. Jett's call, and it is the right one: a kind you have to read a 17px
+   glyph to identify is not colour coded, and the two that stay blue are the two that are not
+   kinds, which is information rather than demotion. Word and glyph both take --kind-ink now. */
 .calm-list-label:has(svg) {
   display: flex;
   align-items: center;
@@ -9888,6 +9895,7 @@ html[data-theme="dark"] .booking-container iframe {
    17px glyph with a 1.7px stroke, which is a graphic: it needs 3:1, and plum (4.26) and teal
    (4.41) on --bg-secondary, the ground this list sits on, clear that. The label beside it stays
    blue either way, so no text moved onto a thinner contrast. */
+.calm-list-label[data-kind] { color: var(--kind-ink, var(--c-blue-ink)); }
 .calm-list-label[data-kind="skill"]       { --kind-ink: var(--accent-ink); }
 .calm-list-label[data-kind="personality"] { --kind-ink: var(--c-plum-ink); }
 .calm-list-label[data-kind="routine"]     { --kind-ink: var(--c-teal-ink); }

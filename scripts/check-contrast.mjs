@@ -151,6 +151,13 @@ for (const [theme, b] of [["light", LIGHT], ["dark", DARK]]) {
   // this is a check and not a calculation somebody did once.
   checks.push([`${theme}: --c-blue-ink on the --c-blue-subtle chip`,
     ratio(token("c-blue-ink", b), opaque(token("c-blue-subtle", b), g.card)), TEXT]);
+  // The three add-on kinds, as the words of a label and not only as its glyph (2026-09-21, the
+  // parts list on archie/personal/). TEXT and not UI: the label is --fs-xs, so the glyph's 3:1
+  // is not the bar it has to clear. --bg-secondary is the ground because that list sits in an
+  // alternating band, and it is the darkest of the three lights, which is where plum failed.
+  for (const k of ["accent-ink", "c-teal-ink", "c-plum-ink"]) {
+    checks.push([`${theme}: --${k} on --bg-secondary`, ratio(token(k, b), g["bg-secondary"]), TEXT]);
+  }
 }
 
 let failed = 0;

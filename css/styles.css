@@ -2039,12 +2039,21 @@ summary,
   margin-left: .04em;
 }
 
-/* Half of 11px is 5.5px, which is a speck rather than a mark, so the wordmark's copy gives back
-   most of the shrink. The subtitle is uppercase and letter-spaced, and U+2122 is already small
-   inside its box, so .8em reads as a mark here and still does not touch the cap line. Hidden
-   under 480px comes free: the whole subtitle is. */
+/* The subtitle is a fixed 10px, so .8em put an 8px glyph roughly a pixel and a half UNDER the
+   cap line: Jett read it as too small and too low on 2026-09-21, and both come off the same
+   shrink. U+2122 is drawn in about the top .7 of its own box, so its size is also its height
+   above the baseline, and the two complaints have one number between them. Sized in px because
+   the parent is fixed at 10 and a ratio only re-derives the same number less legibly. At 13 the
+   glyph's top lands a shade above the caps, which is where a trademark rides.
+
+   line-height: 0 keeps a 13px inline from growing a 10px line box, so the wordmark's two lines
+   stay where they are. letter-spacing is cleared because the subtitle tracks +.04em and on the
+   last character that lands as a gap after the mark. Hidden under 480px comes free: the whole
+   subtitle is. */
 .nav-logo-subtitle .tm {
-  font-size: .8em;
+  font-size: 13px;
+  line-height: 0;
+  letter-spacing: 0;
   margin-left: .1em;
 }
 

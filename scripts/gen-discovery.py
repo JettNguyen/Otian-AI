@@ -326,7 +326,10 @@ MAP = [
     # /archie/ merged into archie/personal/ later the same day, and /equipment/ into
     # how-it-works/, so neither is a destination any more. Both are redirect stubs, which this
     # script already skips; they are off this list so nobody re-adds them from here.
-    ("The product", ["archie/personal/", "archie/business/", "how-it-works/",
+    # what-it-does/ is in the product block rather than in Learning, because the question it
+    # answers is "would this help someone like me", which is a buying question and not a
+    # teaching one. It is the only page that names add-ons against a life rather than a kind.
+    ("The product", ["archie/personal/", "archie/business/", "what-it-does/", "how-it-works/",
                      "archie/pricing/", "archie/mobile/"]),
     # Guided setup and consulting are two halves of one page as of 2026-09-14.
     ("Services we offer", ["services/"]),

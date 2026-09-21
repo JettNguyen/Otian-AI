@@ -57,6 +57,21 @@ CAPTION_MAX = 40
 # are ceilings, not targets: a page at its budget has to cut a paragraph to add
 # one, which is the whole point.
 BUDGETS = {
+    # what-it-does/ is a picker, and the budget is measuring the wrong thing on it. The default
+    # 900 exists because a prose page grows one well-meant paragraph at a time until nobody has
+    # read it end to end. This page cannot fail that way: twelve panels are in the markup and a
+    # reader is shown ONE. The arithmetic, counted 2026-09-21: 810 of its 1,048 words are the
+    # twelve panels at 59 to 75 words each, 238 are the hero, the chips, the two catches and the
+    # close, so what anybody actually reads at rest is 238 + 68 = about 306 words, a third of
+    # what a marketing page is allowed. The eleven they do not read are in the HTML on purpose,
+    # because visual-first rule 6 says the resting state has to be complete for a crawler, an
+    # answer engine and a reader with scripts off, and the glossary's "Entries shown: 0" is what
+    # the alternative looks like. Taxing that would push the content back into a prose page,
+    # which is the same reason figure labels are counted and never budgeted.
+    # Set at 1060, twelve above today's count, so a thirteenth persona costs one of the twelve
+    # rather than arriving free. If the panels ever stop being one-at-a-time, this goes back to
+    # the default the same day.
+    "what-it-does/index.html": 1060,
     # The homepage carries the whole story once: what Archie is, who it is for,
     # what it costs, and why to trust it. It is the one page allowed to.
     # Raised 2026-09-08 from 1200, for the five setup steps: the page had a band

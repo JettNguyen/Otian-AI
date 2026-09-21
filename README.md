@@ -4,7 +4,7 @@
 
 # Otian AI
 
-**Don't rent your agent. Own it.**<br>
+**Don't rent your agent. Own it.**™<br>
 Yours to shape & yours to keep. Never ours.
 
 [![Live site](https://img.shields.io/badge/otianai.com-live-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com)

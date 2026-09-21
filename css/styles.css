@@ -2027,6 +2027,17 @@ summary,
   color: var(--text-muted);
 }
 
+/* The trademark marker on the tagline, which the homepage h1 carries and nothing else does:
+   convention marks the most prominent use, not every use, and a mark in the nav's 11px subtitle
+   would be a smudge. No vertical-align here on purpose. U+2122 is drawn as a superscript inside
+   its own em box already, so raising it again lands it above the cap height and grows the line
+   box, which on the hero pushes "Yours to shape" onto its own line at some widths. Shrink only. */
+.tm {
+  font-size: .5em;
+  font-weight: 600;
+  margin-left: .04em;
+}
+
 /* Primary ink, not muted. A column heading in the same weight of grey as the links under it
    makes the reader work out which line is the label, and at a glance the four menus read as one
    undifferentiated list. The heading is the brightest thing in the column and the links sit a

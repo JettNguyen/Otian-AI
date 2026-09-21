@@ -1212,6 +1212,65 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
   it and no second AI call; it is word comparison against a file, which is exactly why it costs the
   owner nothing on the turns where nothing matches.
 
+### ✅ Your whole agent in one file, and no key is in it (SHIPPED 2026-09-02 in Archie 0.2.2; entry written 2026-09-21)
+
+**Approved wording:** "Everything you built is in one file you can save where you like: your
+agents, their skills with the answers you gave their setup questions, their routines with the
+schedules, what each one remembers about you, your records, your writing style and the
+conversations. Archie can write one every week on its own and keep the last three. **No key or
+token is in it.** Those stay in your computer's own password store, and putting the file on
+another computer hands you a list of what to connect again."
+
+**Why it's true:** `crates/archie-domain/src/transfer.rs` is the format and every refusal;
+`crates/archie-core/src/transfer.rs` writes and unpacks it. The file is an ordinary zip with the
+extension `.archie`, holding three things: `manifest.json`, the database `archie.db` (agents,
+workspaces, which add-ons each one has, the access record) and the `workspaces/` tree, which is
+every agent bundle (persona, skills with their setup answers, routines with their schedules and
+timezones, records, memory, writing style, chat history, documents). The person picks the
+destination; `AUTO_KEEP` is 3 and the weekly writer keeps that many. The section is on the
+Account page under **Moving and backups** (`src/app/moving.tsx`).
+
+**The key claim, and it is the one worth checking.** `saved_keys` in the manifest is
+`db.all_credential_refs().len()`, a **count**, and no value is read out of the credential store
+anywhere in the module. Secrets live only in the macOS Keychain or Windows Credential Manager
+(`crates/archie-core/src/secrets.rs`, whose module comment states it), and the database rows are
+`CredentialRef`: a label and a last-4. The design note in `transfer.rs` says why, and it is
+quotable: a file that carried them "would be every credential its owner has, in one attachment,
+guarded by wherever they happened to save it."
+
+**What it will not carry, which ships beside the claim and never below it:**
+downloaded tools (ffmpeg, whisper, the speech models) come back by themselves the first time a
+skill needs one; the permissions macOS grants belong to the copy of the app, not to the data; a
+paired phone is paired again, because its key belongs to the old computer. Two more travel and
+are then deleted on purpose: an agent's browser sign-ins and its Signal link are ordinary files
+in the bundle, and on a **different** computer both are worse than missing (the browser opens
+signed out of everything while looking fine, and one Signal link on two computers is a state
+Signal does not expect). `CopyManifest::machine_id` is what separates a rescue from a move, and
+`notes()` names every dropped item on screen.
+
+**Nothing is deleted to make room.** A restore moves what was there into `replaced-<timestamp>/`
+beside it and keeps two (`REPLACED_KEEP`), so a restore somebody regrets is a folder they still
+have. The swap happens at the next launch, before the database is opened.
+
+**Boundaries — do not overclaim:**
+- ⛔ **Never say the file is encrypted or protected. It is a plain zip**, and it holds chat
+  history, records and documents. It is exactly as protected as the folder it is saved into. Any
+  page describing this **must** say so in the same breath, per the limitation-beside-capability
+  rule: "it is an ordinary file, so keep it somewhere you would keep a tax return." Saying
+  "backup" without that is the banned shape, because readers assume a backup is sealed.
+- ⛔ **Never call it an export to anything else.** It restores into Archie and nothing else reads
+  it. It is not an interchange format, and no sentence may suggest a reader can carry their agent
+  to another assistant with it. What it does prove is that leaving **us** costs nothing: the file
+  plus the Terms' final-version commitment is the whole of "yours to keep."
+- ⛔ **Never say a backup moves everything.** Four categories do not travel and are listed above.
+  "Puts that computer where this one is, minus the things a file cannot carry" is the honest form.
+- ⛔ **Never use this to revive "you own Archie."** That claim is retired (see the 2026-07 note at
+  the top of this file) and this entry does not bring it back. This is ownership of **what you
+  built**, not of a software licence. Write "your agent is yours", never "Archie is yours".
+- ⚠️ **A restore is refused across accounts and across editions**, and refused when the backup was
+  made by a newer Archie than the one reading it (`refusal()`). Do not write "restore it anywhere";
+  write "restore it on a computer signed in as you."
+
 ### ✅ What your agent can write to disk
 
 **Approved wording:** "Your agent writes the actual file and tells you where it put it. It can

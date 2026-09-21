@@ -606,11 +606,56 @@
        changed, and the scene reaches a state it can be drawn at. */
     var lastT = { scene: '', win: '', phone: '' };
     function put(el, key, v) { if (lastT[key] !== v) { el.style.transform = v; lastT[key] = v; } }
+    /* AND A MOCKUP IS LAID OUT AT THE SIZE IT IS SHOWN, WHICH IS WHERE ITS TYPE COMES FROM
+       (2026-09-21). The stylesheet's rule has always been zoom and never transform: scale, because
+       a mockup drawn at one size and scaled to another is a picture of type rather than type. Only
+       half of it was true. The window and the phone are laid out at a fixed zoom, .70 and .63, and
+       then SHOWN at that times the scene's fit, times the pose's own scale, times what the
+       perspective does to the depth they stand at: 1.07 to 1.48 on a phone, so the type was drawn
+       once and blown up by as much as half again (Jett, 2026-09-21: "the text gets kind of blurry
+       when the text is small on the mockup").
+
+       A rotation is what makes that bite. Measured on a bare page: a box under scale(1.45) alone
+       is redrawn at 1.45 and is sharp, and the same box under scale(1.45) rotateY(-12deg) is
+       rasterized at 1 and the texture is stretched, which loses a quarter of the edge energy and
+       leaves four fifths of the type's pixels neither ink nor paper. Everything on this stage
+       stands in a rotated 3D scene, so everything on it was in the second case.
+
+       So the whole of that number goes into the layout, as --dz on the mockup, and comes back out
+       of the transform, which is left carrying only the rotation and the move. The projection is
+       identical to the pixel; what changes is the size the type is drawn at. IT MUST COME BACK OUT
+       OF THE TRANSFORM: zoom without the matching divide is just a bigger phone.
+
+       UP TO THE NEXT TENTH AND NEVER BELOW 1, and both halves of that were learned by getting them
+       wrong. Quantized, because zoom is layout and a relayout a frame is not free; UP rather than
+       to the nearest, because a texture drawn a little large is minified when it lands, which is
+       what sharp looks like, and one drawn a little small is stretched, which is what this whole
+       change is about. And never below 1, because the fixed zooms are already larger than some
+       poses show: the window at two in the morning stands 300 back at .52, so a tenth of its own
+       size, and laying it out at that and stretching it 1.3 times back up made it worse than
+       leaving it alone. The floor costs nothing, because a mockup shown smaller than it is drawn
+       was never the complaint.
+
+       CEILING OF 2, because this buys sharpness with texture. The fit is clamped at 1.45 and the
+       largest pose scale is 1.22, so the most this can ask for is about 1.9 and the ceiling is
+       never reached; it is there so that a future pose cannot quietly ask the phone to be drawn at
+       a few times its size, which is megabytes a frame. */
+    var PERSP = 1400;
+    var lastZ = { win: 0, phone: 0 };
+    function dz(s, z) {
+      var v = SC * s * (PERSP / (PERSP - z));
+      return Math.min(2, Math.max(1, Math.ceil(v * 10) / 10));
+    }
+    function zoomTo(el, key, v) { if (lastZ[key] !== v) { el.style.setProperty('--dz', v.toFixed(3)); lastZ[key] = v; } }
     function applyPose(p) {
       put(scene, 'scene', 'scale(' + SC.toFixed(4) + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')');
-      put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + p.win.s.toFixed(3) + ')');
+      var wz = dz(p.cam.s * p.win.s, p.win.z);
+      zoomTo(win, 'win', wz);
+      put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + (p.win.s / wz).toFixed(4) + ')');
       win.style.opacity = p.win.o.toFixed(3);
-      put(phone, 'phone', 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + p.phone.s.toFixed(3) + ')');
+      var pz = dz(p.cam.s * p.phone.s, p.phone.z);
+      zoomTo(phone, 'phone', pz);
+      put(phone, 'phone', 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + (p.phone.s / pz).toFixed(4) + ')');
       /* On the phone, not down on its layers: see the comment above .dp-device in the stylesheet
          for why the per-layer fade was tried and taken back. */
       phone.style.opacity = p.phone.o.toFixed(3);

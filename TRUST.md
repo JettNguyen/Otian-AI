@@ -3064,7 +3064,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 
 ## Settled Decisions
 
-### The agent tabs are Dashboard and Tasks, and the mockups are ports — RENAMED 2026-09-21
+### The agent tabs are Dashboard and Tasks, and the mockups are ports: RENAMED 2026-09-21
 
 **What changed.** The two agent tabs that used to read **Now** and **Work** now read **Dashboard**
 and **Tasks**. Jett's call, 2026-09-21. This is a label change and nothing else: no screen gained

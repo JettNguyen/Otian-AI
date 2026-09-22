@@ -152,7 +152,7 @@ Define "AI account" once on the homepage at first use, in one line under the her
 account is a pay-as-you-go account you open with an AI company. They bill you for the thinking.
 We add nothing." That replaces the 75-word paragraph in the pricing band.
 
-Two more mannerisms worth a sweep. "quietly" appears 58 times across the site and has become a
+Two more mannerisms worth a sweep. "quietly" appears 58 times on the visitor pages, catalog included, and has become a
 tic; keep it where it is literal (the agent stays quiet) and cut it as decoration. "None of it
 is hard" is a heading on the homepage and a lede on the business page.
 

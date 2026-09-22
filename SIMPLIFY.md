@@ -33,62 +33,61 @@ first-time reader can hold in their head.
 | pages describing a free call | 14 (47 times) |
 | different terms on the selling pages for the AI account and the company behind it | 10 |
 
-## Decisions for Jett (Opus starts on section 3 while these are open)
+## What Jett decided, and what shipped (2026-09-21)
 
-Each one is multiple choice with the recommendation first.
+All seven were answered the same day the audit was written, and the work below is done. Where
+the outcome differs from what this file first proposed, the reason is written beside it.
 
-**1. Which page is the product story?**
-- **A (recommended): the homepage.** It already is: the day stage, why Archie, connections,
-  Patrick, pricing, one CTA. `archie/personal/` and `archie/business/` become short edition
-  pages (fork, the lives or roles picker, the ceilings, the price, the scene, one CTA), about
-  550 words each instead of 1,347 and 1,139. Nothing on them that is also on the homepage or
-  How It Works survives.
-- B: `archie/personal/` becomes the product page and the homepage shrinks to a front door.
-  Throws away the stage, which is the best thing on the site. Not recommended.
+| # | Decision | Answer | Shipped |
+|---|---|---|---|
+| 1 | Which page carries the product story | The homepage | Personal 1,271 to 939, Business 1,104 to 845, both mirrored |
+| 2 | Top bar | Four menus, Add-ons and Trust as plain links, Trust across the top | 15 rows where there were 22 |
+| 3 | Services | One row, "Work With Us", under About | Its three anchor rows retired |
+| 4 | Archie Mobile | Keep the row and the page; the page says coming soon | Eyebrow reads "Coming soon"; no date invented |
+| 5 | The Otian Standard | Footer only | In the About column, beside its PDF |
+| 6 | The button | "Join the Waitlist" everywhere it goes to the questionnaire | Nav bar and drawer; 94 "Get Started" gone |
+| 7 | FAQ | Keep all 32 questions, cap every answer | 3,868 words to 2,147, no question dropped |
 
-**2. The top bar.**
-- **A (recommended): four menus, two plain links, one CTA.** Archie (For Personal, For
-  Business, How It Works, Pricing) · Add-ons (a plain link to browse) · Trust (a plain link)
-  · Learn (Comparisons, FAQ, Blog, AI Explained) · About (Our Story, Testimonials, Work With Us,
-  Contact) · Join the Waitlist. Fourteen rows instead of 23. Services' three anchor rows go,
-  and with them the only reason `js/nav.js` needs its hash tie-break. Troubleshooting, Build
-  an Add-on, Security, The Otian Standard and the two PDFs live in the footer.
-- B: keep five menus and only prune rows (drop What an Add-on Is, Build One, Guided Setup,
-  Consulting, Troubleshooting). Nineteen rows. Services stays a menu.
+Three pages merged away and are redirect stubs: `archie/business/install/` into the one install
+page, `skills-marketplace/what-is-an-add-on/` into the Browse hero, and
+`skills-marketplace/commission/` into Work With Us. Jett's steer on the last one was that the
+whole services side should be "cleaned up to be straightforward and easy to understand" with
+"minimal loss of detail", so Work With Us now opens on three ways to work with us and every
+step of all three survives; what came off was the restatement.
 
-**3. Where Services sits.**
-- **A (recommended): one row, "Work With Us", under About**, plus the links it already has
-  from Pricing, How It Works and both edition pages. The mission line in WAR-ROOM.md ("if we
-  have to sell someone, we haven't built a good enough product") and the standing note that
-  people you can reach is an offer, not the headline, both point here.
-- B: keep Services as its own top-bar link (one row, no anchors).
+**Where the outcome differs from the plan in this file.**
 
-**4. Archie Mobile in the top bar.**
-- **A (recommended): keep the page, drop the row.** Link it from the homepage phone, from How
-  It Works' "reach your agent from your phone" item, and from Trust. A product menu that lists
-  an app in neither store is the one place on the site that reads as selling something that
-  does not ship, and the page is 1,461 words about encryption for something nobody can download.
-- B: keep the row, labelled "Archie Mobile (in build)".
+- **How It Works is 1,162, not 800.** The 800 assumed the kit moved to `archie/install/`. That
+  page is `noindex` and off the menus on purpose while Archie is in testing, so moving the
+  answer to "what do I need" onto it would have hidden it from search and from four inbound
+  links. The kit stayed, the prose around it was cut, and both equipment lists went behind a
+  fold: the reader now opens them instead of walking past them.
+- **Trust is 5,150, not 3,000.** Nine of its longest paragraphs were rewritten in place and the
+  h1 now says what the page is, but no claim was moved to `trust/details/`. Every sentence there
+  is TRUST.md-governed, and moving one between pages is the kind of edit that has produced the
+  drift incidents that file records. The remaining work is real and is written up below.
+- **Work With Us is 1,050, not 950.** It absorbed a third page. Three pages in at 1,405 words
+  combined, one page out at 1,050.
+- **The FAQ's longest answer is 84 words, not 60.** Twelve answers sit between 62 and 84. Every
+  one is a single paragraph with a link, and the ones still over are the privacy and pricing
+  answers where cutting further means cutting a claim.
 
-**5. The Otian Standard in the top bar.**
-- **A (recommended): footer only**, under About, beside its PDF. It is 7,030 words of
-  operating principles and the right reader finds it from Our Story, Contact and Trust, which
-  all link it.
-- B: keep it as an About row.
+**Still open, in the order worth doing them.**
 
-**6. The one call-to-action label.**
-- **A (recommended): "Join the Waitlist" everywhere the button goes to the questionnaire**,
-  including the top bar. Today the same destination is "Get Started" (94), "Join the
-  Waitlist" (18) and "Book Your Free Call" (6), so a reader cannot tell whether the button gets
-  them the app or a sales call. Nothing is for sale, so the honest label is the waitlist. "Book
-  a free call" stays only on Work With Us, where it is literally what happens.
-- B: "Get Started" everywhere, and let the questionnaire's first screen sort people.
-
-**7. FAQ shape.**
-- **A (recommended): cut to about twelve questions a first-time reader asks**, answers under
-  60 words with one link each. The seven setup and in-app questions go to Help; the five tagged
-  Guided Setup go to Work With Us.
-- B: keep all 32 and cap every answer at 60 words.
+1. **Trust and its long companion.** Move "Taking access back", "Taking your agent with you" and
+   the crisis section's history to `trust/details/` under their own anchors, which is the split
+   Jett approved and the only remaining way to get the short page near 3,000.
+2. **`skills-marketplace/browse/` is 41,498 words**, the largest thing on the site by a factor of
+   six. It is generated from the catalog, so the fix is in the Archie repo's add-on copy, not
+   here. Nobody has read it end to end.
+3. **`ai-explained/` at 5,530 and `help/` at 2,582** are reference pages doing their job, but the
+   glossary is the page `llms.txt` points machines at and deserves a read.
+4. **`check-faces.py` fails** on seven add-ons the Archie catalog gained (class-planner,
+   flight-check-in, my-classes and four routines). That is an Archie-repo sync, not site work,
+   and it was failing before this pass.
+5. **`check-styles.py` fails** on 36 flagged lines, all of them pre-existing and none of them in
+   the CSS this pass added. Verified by running the check against the stylesheet as it stood
+   before the first commit.
 
 ## 1. What a first-time reader meets today
 

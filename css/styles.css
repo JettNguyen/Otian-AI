@@ -13479,7 +13479,14 @@ html[data-theme="dark"] .booking-container iframe {
    under the price, in the price's own block rather than with the paragraph, and it is muted so
    the plan's own number still reads first. The leading "+" carries the meaning: it is the one
    character that says this is a second number and not a smaller version of the first. */
-.hm-plan-second {
+/* WRITTEN AS `.hm-plan p.hm-plan-second`, AND THAT IS NOT DECORATION. `.hm-plan p` above is two
+   simple selectors and a bare `.hm-plan-second` is one, so the card's own paragraph rule beat
+   this one on colour, font-size and line-height, and the global `p { text-wrap: pretty }` was
+   never actually overridden. It cost two rounds of "i don't see it" and one wrong diagnosis
+   (a stale stylesheet) on 2026-09-22: the background and min-height landed, because nothing
+   else sets those, so the rule looked live while half its declarations were being dropped on
+   the floor. Verified after the fact by reading getComputedStyle off the served page. */
+.hm-plan p.hm-plan-second {
   /* A soft panel rather than coloured ink, chosen by Jett from four rendered treatments on
      2026-09-22 after the first attempt shipped invisible: --text-muted and --text-secondary are
      1.15:1 apart in light and 1.12:1 in dark, so swapping one for the other was a weight change
@@ -13531,7 +13538,7 @@ html[data-theme="dark"] .booking-container iframe {
 /* The qualifier that has to travel with "$1 to $5": the measured light band is one person at a
    handful of tasks a day, and the figure reads as the general case without it. Micro type on
    its own line, so it is a footnote to the number above rather than a third claim. */
-.hm-plan-second small {
+.hm-plan p.hm-plan-second small {
   display: block;
   margin-top: 1px;
   font-size: var(--fs-2xs);
@@ -13575,8 +13582,9 @@ html[data-theme="dark"] .booking-container iframe {
      the type ladder instead of one rung off it for a 0.05rem nobody can see. */
   .hm-plan-price { font-size: var(--fs-7xl); }
   /* Stacked, nothing is beside anything, so the reserved second line is a gap under two of the
-     three cards and nothing else. Levelling only matters in a row. */
-  .hm-plan-second { min-height: 0; }
+     three cards and nothing else. Levelling only matters in a row. Same specificity trick as
+     the rule it overrides, for the same reason. */
+  .hm-plan p.hm-plan-second { min-height: 0; }
 }
 
 /* ==============================

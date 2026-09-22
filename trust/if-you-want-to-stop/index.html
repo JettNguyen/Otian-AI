@@ -8,10 +8,13 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>The AI Model Isn't the Product Anymore. You Are. | Otian AI</title>
-  <meta name="description" content="A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator; the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful." />
+<title>If you want to stop | Otian AI</title>
+  <meta name="description" content="How a plan ends, what happens to everything you built, and how to take it with you. Written down before you start, because the exit is the part nobody publishes." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
+  <meta property="og:title" content="If you want to stop | Otian AI" />
+  <meta property="og:description" content="How a plan ends, what stays on your computer, and how to take it with you." />
+  <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -40,6 +43,9 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ==============================
+       Navigation
+       ============================== -->
   <nav class="nav" id="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="../../" class="nav-logo"><img src="../../assets/icon-1024-dark.svg" width="248" height="248" alt="Otian AI" /><span class="nav-logo-divider" aria-hidden="true"></span><span class="nav-logo-text"><span class="nav-logo-title"><strong>Otian</strong> AI</span><span class="nav-logo-subtitle">Don&rsquo;t rent your agent. Own it.<span class="tm" aria-hidden="true">&trade;</span></span></span></a>
@@ -147,148 +153,175 @@
   </div>
 
   <main id="main">
-    <section class="page-hero article-hero" aria-label="Article introduction">
+
+    <!-- ==============================
+         Page Hero
+
+         Written 2026-09-22. The site had the exit story and it was in seven places: the Terms,
+         the pricing page's fine print, the Account page, the FAQ's two stop questions and the
+         two-endings figure on /trust/. Nobody afraid of starting reads seven pages, and two of
+         the seven were stale-pessimistic (they said Archie "stops letting you in", written
+         before the free tier shipped on 2026-09-17). Fear of starting is fear of not being able
+         to stop, so this is the one page that answers it end to end.
+
+         Every claim here is TRUST.md's: "What happens when a plan ends" (2026-09-22), "Your whole
+         agent in one file", "Archie is free on an AI account of your own", and the Terms for the
+         refund and the final build. Three cases, never averaged into one.
+
+         Deliberately not in the top bar. The Trust menu was cut to two rows on 2026-09-21 and a
+         bar that makes one promise is worth more than this row; it sits in the footer's Trust
+         column beside For an IT Review, which is here for the same reason.
+         ============================== -->
+    <section class="page-hero" aria-label="Page introduction">
       <nav class="breadcrumb-bar" aria-label="Breadcrumb">
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
-            <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">The AI Model Isn't the Product Anymore. You Are.</li>
+            <li class="breadcrumb-item"><a href="../">Trust</a></li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">If you want to stop</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
-        <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
-        <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">The AI Model Isn't the Product Anymore. You Are.</h1>
-        <div class="article-byline fade-up delay-2">
-          <strong><a href="https://www.linkedin.com/in/jack-raney/" class="byline-author" target="_blank" rel="noopener" aria-label="Jack Raney on LinkedIn">Jack Raney</a></strong>
-          <span>&middot;</span>
-          <span>July 12, 2026</span>
-          <span>&middot;</span>
-          <span>6 min read</span>
+        <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Trust</a>
+        <span class="section-label fade-up">Trust</span>
+        <h1 class="fade-up delay-1">If you want to stop.</h1>
+        <p>Almost everything a company writes down is about starting. This is the other half: how a plan ends, what happens to the agent you built, and how to take it with you. None of it is a conversation you have to have with us.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The three cases. A table because there are three of them and they differ, and a
+         paragraph that averages them is a false sentence for two thirds of the readers.
+         ============================== -->
+    <section class="section" aria-labelledby="ending">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Stopping a Plan</span>
+          <h2 id="ending" class="fade-up delay-1">You stop it in Archie, and it runs out the month.</h2>
+          <p>Open the Account page, find Your plan, press Manage plan. It runs to the end of the period you have already paid for. What happens after that is one of three things.</p>
+        </div>
+
+        <div class="trust-table-wrap fade-up delay-2">
+          <table class="trust-table">
+            <caption class="sr-only">What Archie does after a plan ends, in each of the three cases.</caption>
+            <thead>
+              <tr><th scope="col">Where you are</th><th scope="col">What Archie does next</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Personal, with your own AI key saved</th>
+                <td>Archie keeps opening. You land on the free tier: the whole app, at 20 jobs a day, paid for by whoever issued your key rather than by us. A job is one piece of work, and the count starts again at midnight.</td>
+              </tr>
+              <tr>
+                <th scope="row">Personal, with no key saved</th>
+                <td>Archie asks for one. A key from an AI company is free to get and needs no card, and pasting one puts you in the row above.</td>
+              </tr>
+              <tr>
+                <th scope="row">Archie for Business</th>
+                <td>Archie asks for a plan. There is no free tier on the business edition: an agent answering a whole team at 20 jobs a day would be a smaller version of the product rather than a trial of it.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="trust-table-note">Every agent you made is still there in all three, and still works. The free allowance of one agent is checked when you <em>add</em> one, so what it costs you is the eleventh, not the ten you have.</p>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The refund. The exception ships in the same block rather than below it.
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="refund">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">The First 14 Days</span>
+          <h2 id="refund" class="fade-up delay-1">Fourteen days to ask for your money back.</h2>
+          <p>Email us within 14 days of first starting a plan and we refund it in full. You do not have to say why, and there is nothing to fill in. Guided sessions are the exception: those are hours already spent with you, so they are not refunded. Both are in the <a href="../../terms-of-service/">Terms</a> rather than on a blog.</p>
         </div>
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <article class="article-body fade-up delay-1">
-
-<p>A year ago, most conversations about AI were centered around one question: which model is the smartest?</p>
-
-<p>People compared ChatGPT, Claude, Gemini, and every new model release that came out. Which one writes better? Which one codes better? Which one reasons better?</p>
-
-<p>That question made sense because the models were the product. I think that's starting to change.</p>
-
-<p>The next phase of AI will not be defined only by who has the most intelligent model. It will be defined by who can build the most useful relationship between a person and AI. Because intelligence alone is not enough.</p>
-
-<blockquote class="article-pullquote">The most powerful AI system in the world is still limited if it does not understand the person using it.</blockquote>
-
-<h2>The Model Is Becoming Infrastructure</h2>
-
-<p>The pace of AI development is moving faster than almost any technology we've seen before. Models that were considered state-of-the-art a year ago are quickly becoming outdated. New systems continue to improve at reasoning, writing, coding, research, and problem-solving.</p>
-
-<p>Those improvements matter, but they also create an interesting shift. When every major AI company has access to extremely capable models, the underlying intelligence starts becoming less of a differentiator.</p>
-
-<p>A similar thing happened with computers. The average person does not choose their laptop because they know the technical specifications of every component inside it. They choose it because it helps them accomplish what they want to accomplish. The hardware matters, but the experience matters more.</p>
-
-<p>AI is moving in the same direction.</p>
-
-<blockquote class="article-pullquote">The model is the engine. The real value will come from everything built around it.</blockquote>
-
-<h2>The Missing Ingredient Is Context</h2>
-
-<p>The difference between a generic AI assistant and a truly useful AI assistant comes down to one thing: <strong>context</strong>.</p>
-
-<blockquote class="article-pullquote">A general AI knows a lot about the world. A personal AI knows a lot about you.</blockquote>
-
-<p>It understands your goals, your preferences, your habits, your communication style, the tools you use, the people you interact with, and the decisions you make repeatedly throughout your life. That distinction changes everything.</p>
-
-<p>Imagine asking an AI to plan a trip. A basic assistant can find flights and hotels.</p>
-
-<p>A personalized assistant knows that you prefer early flights, that you hate long layovers, that you usually stay at Marriott properties, that you have a golf round scheduled the day after you arrive, and that you prefer to keep your mornings open before important meetings.</p>
-
-<p>The task itself is not difficult. The value comes from knowing how you think.</p>
-
-<h2>This Is Why Agents Matter</h2>
-
-<p>When people talk about AI agents today, they often focus on the automation side of things:</p>
-
-<ul>
-  <li>An AI that can browse the internet.</li>
-  <li>An AI that can click buttons.</li>
-  <li>An AI that can fill out forms.</li>
-</ul>
-
-<p>Those capabilities are impressive, but they are not the end goal. The browser is just a tool. The real breakthrough happens when an AI understands what needs to happen and why.</p>
-
-<p>Booking a flight is easy. Knowing which flight you would choose, understanding why you would choose it, making sure it fits your schedule, updating your calendar, preparing the necessary documents, and handling everything around that decision is where the value comes from.</p>
-
-<blockquote class="article-pullquote">A truly useful agent is not just completing tasks. It is making decisions within the context of your life.</blockquote>
-
-<h2>The Problem With Today's AI</h2>
-
-<p>The biggest limitation with AI today is that every interaction still starts too much from the beginning.</p>
-
-<ol>
-  <li>You open a new chat.</li>
-  <li>You explain what you need.</li>
-  <li>You provide context.</li>
-  <li>You remind it how you like things done.</li>
-  <li>Then you repeat the process again later.</li>
-</ol>
-
-<p>That is not how relationships work. If you hired an assistant and had to reintroduce yourself every morning, explain your priorities every afternoon, and remind them how you prefer things done every week, they would not be very useful.</p>
-
-<p>The value of a great assistant comes from accumulated knowledge. They get better because they understand you better over time. AI should work the same way.</p>
-
-<h2>The Future Is Not One AI Model</h2>
-
-<p>One of the most interesting questions about the future of AI is whether one company will become the single winner. Will it be OpenAI? Anthropic? Google? Something else?</p>
-
-<p>I think the future is probably more complicated. Different models will have different strengths. One may be better at writing, another at coding, another at research, and another at specialized tasks.</p>
-
-<p>The user should not have to think about which model is running in the background. Just like you do not think about which search algorithm answers your Google query, you should not have to think about which AI model handles a specific task. The system should simply know.</p>
-
-<p>The future may not belong to the best individual model. It may belong to the best system built around those models.</p>
-
-<h2>This Is Why We Built Otian AI</h2>
-
-<p>This is the idea behind Otian AI. We do not think the future is another chatbot that waits for you to ask the right question.</p>
-
-<p>We think the future is a personalized AI assistant that understands how you live and work, then helps you accomplish more with less friction.</p>
-
-<p>Everyone's life is different. Your schedule is different. Your goals are different. Your business is different. Your habits are different. The tools you use every day are different. A generic AI experience cannot fully account for that.</p>
-
-<p>At Otian AI, we build custom AI agents designed around the individual. Not templates. Not one-size-fits-all chatbots. Systems that understand your unique workflows, connect to the tools you already use, and help handle the decisions that consume your attention every day.</p>
-
-<p>For one person, that might mean managing a business, organizing projects, and keeping communication organized. For another, it might mean optimizing health, planning travel, managing finances, or staying focused on long-term goals.</p>
-
-<p>The technology is the same. The application is completely personal.</p>
-
-<h2>The Future of AI Is Personal</h2>
-
-<p>The companies building the smartest models will continue pushing the boundaries of what AI can do. But intelligence alone does not create usefulness.</p>
-
-<p>The most valuable AI will not just know more about the world. It will know more about <em>you</em>.</p>
-
-<p>Because the ultimate goal is not having a smarter chatbot. It is having an assistant that understands what you are trying to accomplish, knows how you operate, and helps you get there without requiring you to manage every detail yourself.</p>
-
-<blockquote class="article-pullquote">The future is not opening an AI every time you need help. The future is having one that already knows how to help.</blockquote>
-
-        </article>
-
-        <div class="cta-banner fade-up article-cta">
-          <h2>Own your side of the trade</h2>
-          <p>If the model isn&rsquo;t the product, the setup around it is. We build agents you own, running on your keys and your computer. That changes whose product you are.</p>
-          <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+    <!-- ==============================
+         Nothing is deleted, AND the catch that belongs to it: the backup is written from
+         inside the app, and the paywall replaces the whole app. TRUST.md requires this
+         sentence wherever the ending is described.
+         ============================== -->
+    <section class="section" aria-labelledby="stays">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">What Stays</span>
+          <h2 id="stays" class="fade-up delay-1">Nothing on your computer is deleted.</h2>
+          <p>Your agent, what it remembers, your records, your files and your keys are on your own computer. We have no access to them and we do not delete them, whether you stop or we do. Starting a plan again puts everything back the way you left it.</p>
         </div>
-
-        <div class="text-center mt-40">
-          <a href="../" class="btn btn-secondary">&larr; Back to Blog</a>
+        <div class="trust-limit fade-up delay-2">
+          <h3>Write your backup before you stop, not after.</h3>
+          <p>The one-file backup below is made from inside Archie, on the Account page under Moving and backups. If a plan has lapsed and Archie is asking for a key or a plan, that page is behind the asking, so the backup waits until you paste a key or pick the plan back up. Nothing is lost, because the files never left your computer. It is just easier the day before than the day after.</p>
         </div>
       </div>
     </section>
+
+    <!-- ==============================
+         The transfer file. TRUST.md's two mandatory clauses: no key in it, and it is an
+         ordinary zip. Never "export to another assistant", never "Archie is yours".
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="take">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Taking Your Agent With You</span>
+          <h2 id="take" class="fade-up delay-1">Everything you built, in one file.</h2>
+          <p>Your agents, their skills and routines with the answers and schedules you gave them, what each one remembers about you, your records, your writing style and the conversations. Archie can write one every week on its own and keep the last three. <strong>No key or token is in it:</strong> those stay in your computer&rsquo;s own password store, and another computer hands you a list of what to connect again.</p>
+          <p>It is an ordinary file rather than a sealed one, so keep it somewhere you would keep a tax return. It restores into Archie and nothing else reads it. <a href="../#taking-your-agent">What it carries, and the four things it cannot &rarr;</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The one section that does not require trusting us at all, which is why it is here
+         rather than in the Terms.
+         ============================== -->
+    <section class="section" aria-labelledby="disconnect">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Your Accounts</span>
+          <h2 id="disconnect" class="fade-up delay-1">Disconnecting does not go through us.</h2>
+          <p>Every account you connected comes off from inside Archie, and taking the key off the computer as well is a second, deliberate step in Settings under Saved keys. You can also do it from the other side without involving us at all: Google and Microsoft both let you revoke an app&rsquo;s access from your own account page, and that works whether or not this company still exists.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         The ending that is ours. Publishing your own failure case is the part nobody copies.
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="us">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">If We Stop</span>
+          <h2 id="us" class="fade-up delay-1">If we cease operations, Archie keeps working.</h2>
+          <p>There is a licence check, and it is the thing that would strand you if we disappeared. So the <a href="../../terms-of-service/">Terms</a> oblige us to publish a final version needing no licence check within 30 days of ceasing operations, and until it arrives the copy on your computer runs for up to 60 days on the last note it was given. That is in the agreement you accept, not a promise we can quietly drop.</p>
+        </div>
+        <div class="fade-up delay-2" style="text-align:center">
+          <a class="btn btn-secondary btn-lg" href="../#endings">Both endings, drawn &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         Last line of the page. Most people reading this have not started yet, which is
+         the whole reason it exists; the useful next thing is the door, not a form.
+         ============================== -->
+    <section class="section" aria-labelledby="next">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Next</span>
+          <h2 id="next" class="fade-up delay-1">If you are reading this before you start.</h2>
+          <p>Most people who open this page have not started yet, which is a reasonable way to decide something. If something here is not the answer you needed, write and say which part, and one of the two of us will answer.</p>
+        </div>
+        <div class="fade-up delay-2" style="text-align:center">
+          <a class="btn btn-primary btn-lg" href="../../archie/pricing/">What Archie costs, free tier included</a>
+          <p class="trust-table-note" style="margin-top:1rem">Or <a href="../../contact/">ask us the thing this page did not answer</a>.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="footer" aria-label="Site footer">

@@ -1210,8 +1210,8 @@ frightened reader is asking about, which is whether leaving is survivable.
 
 **Approved wording:** "You stop a plan in Archie, on the Account page, under Your plan. It runs to
 the end of the period you have already paid for. On Personal, if a key from an AI company is saved,
-Archie keeps opening after that: you land on the free tier, at 20 jobs a day and one agent at a
-time, rather than at a wall. Without a saved key, Archie asks for one. Archie for Business has no
+Archie keeps opening after that: you land on the free tier, at 20 jobs a day, rather than at a
+wall. Every agent you have made is still there and still works. Without a saved key, Archie asks for one. Archie for Business has no
 free tier, so it asks for a plan. Nothing on your computer is deleted in any of the three cases."
 
 **Why it's true:** `onFreeTier` in the Archie repo's `src/app/pricing.ts` is
@@ -1245,11 +1245,15 @@ safe and letting them discover they cannot package it is the shape this entry ex
 - ⛔ **Never call the landing place a downgrade, a free plan or a lock-out.** The free tier has no
   name (see the free-tier entry above) and this entry does not give it one. Write "you land on the
   free tier", never "you are moved to the free plan".
-- ⛔ **Never imply the other agents are gone.** A person who lapses with ten agents made keeps all
-  ten on disk; the free ceiling is how many may run, one at a time, and the app's own message says
-  to delete one to make room rather than reporting a limit and stopping
-  (`agent_limit_message` in `plan.rs`). "One agent at a time" is the honest form. "You lose nine
-  agents" is not.
+- ⛔ **Never imply the other agents stop.** `agent_create` in `src-tauri/src/commands/mod.rs` is the
+  **only** caller of `may_add_agent`, so the cap is checked when an agent is added and nowhere else:
+  a person who lapses with ten agents made keeps all ten, and all ten keep working. What the free
+  allowance of one agent costs them is the eleventh. **"One agent at a time" is wrong**, and it was
+  in this entry for an hour on 2026-09-22 before the enforcement point was read: FACTS.md's row says
+  "what an account with no plan runs", which reads as a runtime ceiling and is not one. "The free
+  allowance is one agent, checked when you add one" is the honest form, and the app's own message
+  says to delete one to make room rather than reporting a limit and stopping (`agent_limit_message`
+  in `plan.rs`).
 - ⛔ **Never use this to soften the refund window.** 14 days from first starting a plan, full
   refund, and guided sessions are hours already spent and are not refunded. That is in the Terms
   and it does not stretch.

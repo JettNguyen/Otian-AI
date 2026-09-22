@@ -79,8 +79,21 @@ BUDGETS = {
     # Set just above today's count on purpose, so a seventh life or a fifth role costs an
     # existing one rather than arriving free. If either picker ever stops being one-at-a-time,
     # both go back to the default the same day.
-    "archie/personal/index.html": 1320,
-    "archie/business/index.html": 1145,
+    #
+    # Both came down on 2026-09-21, in the simplification pass, and they came down together
+    # because they are mirrored: Personal 1,271 to 935, Business 1,104 to 845. Jett settled
+    # that the homepage carries the product story, so what left these two is everything the
+    # homepage, how-it-works/ and trust/ already say. Personal lost "The idea" (its two
+    # paragraphs are the homepage hero and a trust/ claim, and its three-step figure is
+    # how-it-works/'s moving parts drawn again), the five-part list under "Building your
+    # agent" (the three kinds are named on the shelf itself now) and the backup paragraph
+    # (trust/, "taking your agent with you"), and its "Getting started" fork became one line
+    # under the button. Business lost the two sections that restated services/ in full, the
+    # payment strip that sat under no price, and the same backup paragraph. The definition of
+    # Archie moved into Personal's hero lede, because a page reached cold from search still
+    # has to say what the thing is.
+    "archie/personal/index.html": 960,
+    "archie/business/index.html": 880,
     # The homepage carries the whole story once: what Archie is, who it is for,
     # what it costs, and why to trust it. It is the one page allowed to.
     # Raised 2026-09-08 from 1200, for the five setup steps: the page had a band

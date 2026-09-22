@@ -296,7 +296,7 @@
     }, { passive: true });
   }
 
-  /* ── Drawer flyout: Services / Learn / Company pop out beside the drawer ── */
+  /* ── Drawer flyout: every category pops a panel out beside the drawer ── */
   const drawerFlyout = document.getElementById('navDrawerFlyout');
   let resetDrawerPanels = function () {};
 
@@ -342,11 +342,12 @@
 
     catButtons.forEach(function (btn) {
       const targetId = btn.dataset.drawerTarget;
-      /* A category with no flyout is a plain link wearing the category's clothes (Add-ons
-         and Trust, since the nav went to four menus on 2026-09-21: each is one page, so a
-         panel holding a single row would be a menu that exists to be opened and closed). It
-         must not open an empty panel on the way out, and hovering it has to close whatever
-         is open, same as hovering any other non-category row in the drawer. */
+      /* Every category has a panel today, and this branch is why that is now a rule rather
+         than a coincidence. Add-ons and Trust shipped as plain links wearing a category's
+         clothes on 2026-09-21 and came back as panels the same day: Jett read a bar where
+         one row drops a menu and the next loads a page as a bar you cannot predict. A row
+         with no panel must still not open an empty one, and hovering it has to close
+         whatever is open, same as hovering any other non-category row in the drawer. */
       if (!targetId) {
         if (canHover) btn.addEventListener('mouseenter', resetDrawerPanels);
         return;

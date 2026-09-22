@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260921-75" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260921-76" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -80,15 +80,27 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../archie/personal/" role="menuitem">For Personal</a>
-            <a href="../archie/business/" role="menuitem">For Business</a>
-            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../archie/business/" role="menuitem"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
             <a href="../archie/mobile/" role="menuitem">Archie Mobile</a>
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
           </div>
         </div>
-        <a href="../skills-marketplace/browse/" class="nav-top-link">Add-ons</a>
-        <a href="../trust/" class="nav-top-link">Trust</a>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse All</a>
+            <a href="../skills-marketplace/find/" role="menuitem">Find an Add-on</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navTrust">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navTrustMenu" type="button">Trust</button>
+          <div class="nav-more-menu" id="navTrustMenu" role="menu" aria-label="Trust">
+            <a href="../trust/" role="menuitem">What We Can and Can&rsquo;t See</a>
+            <a href="../trust/proof/" role="menuitem">Run the Checks Yourself</a>
+          </div>
+        </div>
         <div class="nav-more" id="navLearn">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
           <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
@@ -124,8 +136,8 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-      <a class="nav-drawer-cat nav-drawer-cat--link" href="../skills-marketplace/browse/">Add-ons</a>
-      <a class="nav-drawer-cat nav-drawer-cat--link" href="../trust/">Trust</a>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutTrust" aria-expanded="false" aria-controls="navDrawerFlyout">Trust</button>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
 
@@ -139,11 +151,19 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../archie/personal/">For Personal</a>
-      <a href="../archie/business/">For Business</a>
-      <a href="../how-it-works/">How It Works</a>
+      <a href="../archie/personal/"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="../archie/business/"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
       <a href="../archie/mobile/">Archie Mobile</a>
+      <a href="../how-it-works/">How It Works</a>
       <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/browse/">Browse All</a>
+      <a href="../skills-marketplace/find/">Find an Add-on</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutTrust">
+      <a href="../trust/">What We Can and Can&rsquo;t See</a>
+      <a href="../trust/proof/">Run the Checks Yourself</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../compare/">Comparisons</a>
@@ -300,7 +320,7 @@
               <title id="pm-t">Your computer in the middle, with six hosts around it: your AI company, our billing service at archie-4f35.onrender.com, the accounts you connected, Google Firebase for signing in, otianai.com for the update check, and GitHub for update files. On your own AI account the line to your AI company carries your words directly. On the free credits or the plan with the AI included, that line goes dark and your words go to our billing service first, then on to Anthropic.</title>
               <style>
                 .pm-name{fill:currentColor;font-size:12.5px;font-weight:650;text-anchor:middle}
-                .pm-host{fill:currentColor;font-size:10.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-anchor:middle;opacity:.72}
+                .pm-host{fill:currentColor;font-size:9.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;text-anchor:middle;opacity:.72}
                 .pm-sub{fill:currentColor;opacity:.62;font-size:10px;text-anchor:middle}
                 .pm-you{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:2}
                 .pm-box{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
@@ -353,7 +373,7 @@
               </g>
               <g class="pm-node" data-node="billing" tabindex="0" role="button" aria-pressed="false" data-say="Our billing service, one computer doing three jobs: it signs your license note, it counts add-on installs, and it stands in for Anthropic while you are on the free credits or the plan with the AI included. Only that last job ever carries a word you wrote, and your own AI key stops it from each agent&rsquo;s next start. The other two carry on for as long as you use Archie.">
                 <rect class="pm-box pm-box--ours" x="480" y="134" width="144" height="52" rx="12"/>
-                <text class="pm-host" x="552" y="156">archie-4f35.onrender.com</text>
+                <text class="pm-host" x="552" y="156" textLength="132" lengthAdjust="spacingAndGlyphs">archie-4f35.onrender.com</text>
                 <text class="pm-sub" x="552" y="172">our billing service</text>
               </g>
               <g class="pm-node" data-node="accounts" tabindex="0" role="button" aria-pressed="false" data-say="The accounts you connected: Google, Microsoft, Telegram and the rest, on your own tokens, directly. Whatever you asked your agent to do there reaches them the way it would if you did it yourself. It does not reach us.">
@@ -364,7 +384,7 @@
               <g class="pm-node" data-node="signin" tabindex="0" role="button" aria-pressed="false" data-say="Signing in and the plan check: your email address, your account ID and a sign-in token, and the facts about your own account that come back. Crash reports and which version you run go here too, until you turn those off. Never your content.">
                 <rect class="pm-box pm-box--ours" x="16" y="40" width="144" height="52" rx="12"/>
                 <text class="pm-name" x="88" y="62">Sign-in and plan</text>
-                <text class="pm-sub" x="88" y="78">Google Firebase, our account system</text>
+                <text class="pm-sub" x="88" y="78">Google Firebase</text>
               </g>
               <g class="pm-node" data-node="update" tabindex="0" role="button" aria-pressed="false" data-say="The update check: a plain request carrying no version number, nothing identifying your computer, and no account. The site is hosted on GitHub Pages and we run no server for it.">
                 <rect class="pm-box pm-box--ours" x="16" y="134" width="144" height="52" rx="12"/>
@@ -411,7 +431,7 @@
               </g>
               <g class="pm-node" data-node="billing" tabindex="0" role="button" aria-pressed="false" data-say="Our billing service, one computer doing three jobs: it signs your license note, it counts add-on installs, and it stands in for Anthropic while you are on the free credits or the plan with the AI included. Only that last job ever carries a word you wrote, and your own AI key stops it from each agent&rsquo;s next start. The other two carry on for as long as you use Archie.">
                 <rect class="pm-box pm-box--ours" x="20" y="100" width="144" height="52" rx="12"/>
-                <text class="pm-host" x="92" y="122">archie-4f35.onrender.com</text>
+                <text class="pm-host" x="92" y="122" textLength="132" lengthAdjust="spacingAndGlyphs">archie-4f35.onrender.com</text>
                 <text class="pm-sub" x="92" y="138">our billing service</text>
               </g>
               <g class="pm-node" data-node="accounts" tabindex="0" role="button" aria-pressed="false" data-say="The accounts you connected: Google, Microsoft, Telegram and the rest, on your own tokens, directly. Whatever you asked your agent to do there reaches them the way it would if you did it yourself. It does not reach us.">
@@ -1056,10 +1076,10 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../archie/personal/">For Personal</a>
-            <a href="../archie/business/">For Business</a>
-            <a href="../how-it-works/">How It Works</a>
+            <a href="../archie/personal/"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../archie/business/"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
             <a href="../archie/mobile/">Archie Mobile</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/pricing/">Pricing</a>
           </nav>
         </div>
@@ -1115,9 +1135,9 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260921-75"></script>
-  <script src="../js/proof.js?v=20260921-75" defer></script>
-  <script type="module" src="../js/account-nav.js?v=20260921-75"></script>
-  <script src="../js/packet-map.js?v=20260921-75" defer></script>
+  <script src="../js/nav.js?v=20260921-76"></script>
+  <script src="../js/proof.js?v=20260921-76" defer></script>
+  <script type="module" src="../js/account-nav.js?v=20260921-76"></script>
+  <script src="../js/packet-map.js?v=20260921-76" defer></script>
 </body>
 </html>

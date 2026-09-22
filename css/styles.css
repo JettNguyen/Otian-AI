@@ -1123,34 +1123,19 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   transform: rotate(-135deg) translateY(-1px);
 }
 
-/* A top-level row with no menu under it (Add-ons, Trust, since 2026-09-21). Each is one
-   page, and a dropdown carrying a single row is a menu that exists to be opened and closed.
-   It wears the toggle's clothes exactly, minus the caret: same ink, same hover, same blue
-   "you are here" underline. Without that, one bar would say "you are here" two ways. */
-.nav-links a.nav-top-link {
-  color: var(--nav-ink2);
-  position: relative;
-}
-
-.nav-links a.nav-top-link:hover {
-  color: var(--nav-ink);
-  background: var(--surface-hover);
-}
-
-.nav-links a.nav-top-link.active {
-  color: var(--accent);
-  background: transparent;
-}
-
-.nav-links a.nav-top-link.active::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 5px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--c-blue);
+/* The two rows that name an edition carry its mark (2026-09-21, Jett). Personal and Business
+   are the same app at different ceilings, so the words differ by one, and the terracotta and
+   blue marks are the fastest way to tell the rows apart. Same two files each page's own hero
+   carries. Decorative: the row says the name, so alt is empty and the mark adds nothing to
+   what a screen reader reads out. Sized off the row's own text so it never sets the height. */
+.nav-row-mark {
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 9px;
+  flex-shrink: 0;
+  /* The two menus that carry it lay their rows out with flex, which ignores this; the footer
+     column lays them out as blocks, which does not. One number covers both. */
+  vertical-align: -0.22em;
 }
 
 /* A dropdown is as wide as its wordiest entry, so the width is really a budget on the labels.
@@ -1653,12 +1638,6 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border-bottom: 1.5px solid currentColor;
   transform: rotate(135deg);
   transition: transform var(--transition);
-}
-
-/* Add-ons and Trust wear a category row's clothes and go straight to a page. The chevron
-   comes off: in this drawer it means "a panel opens beside this", and these open nothing. */
-.nav-drawer-cat--link::after {
-  content: none;
 }
 
 /* External flyout: pops out to the left of the drawer, attached to it */
@@ -7409,10 +7388,14 @@ html[data-theme="dark"] .booking-container iframe {
   text-decoration: underline;
 }
 
+/* The bar opens the shopping, so it gets air above it (2026-09-21, Jett). It used to sit
+   directly under the hero's last paragraph; since the three kinds moved up here from the
+   retired explainer page, it sits under a ruled strip, and with no top margin the search
+   field read as the strip's fourth row. */
 .marketplace-search-bar {
   position: relative;
   max-width: 480px;
-  margin: 0 auto 24px;
+  margin: 56px auto 24px;
 }
 
 .marketplace-search-icon {

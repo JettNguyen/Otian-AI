@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260921-75" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260921-76" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -50,15 +50,27 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../archie/personal/" role="menuitem">For Personal</a>
-            <a href="../archie/business/" role="menuitem">For Business</a>
-            <a href="../how-it-works/" role="menuitem">How It Works</a>
+            <a href="../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../archie/business/" role="menuitem"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
             <a href="../archie/mobile/" role="menuitem">Archie Mobile</a>
+            <a href="../how-it-works/" role="menuitem">How It Works</a>
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
           </div>
         </div>
-        <a href="../skills-marketplace/browse/" class="nav-top-link">Add-ons</a>
-        <a href="../trust/" class="nav-top-link">Trust</a>
+        <div class="nav-more" id="navAddons">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
+          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
+            <a href="../skills-marketplace/browse/" role="menuitem">Browse All</a>
+            <a href="../skills-marketplace/find/" role="menuitem">Find an Add-on</a>
+          </div>
+        </div>
+        <div class="nav-more" id="navTrust">
+          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navTrustMenu" type="button">Trust</button>
+          <div class="nav-more-menu" id="navTrustMenu" role="menu" aria-label="Trust">
+            <a href="../trust/" role="menuitem">What We Can and Can&rsquo;t See</a>
+            <a href="../trust/proof/" role="menuitem">Run the Checks Yourself</a>
+          </div>
+        </div>
         <div class="nav-more" id="navLearn">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
           <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
@@ -94,8 +106,8 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-      <a class="nav-drawer-cat nav-drawer-cat--link" href="../skills-marketplace/browse/">Add-ons</a>
-      <a class="nav-drawer-cat nav-drawer-cat--link" href="../trust/">Trust</a>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
+      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutTrust" aria-expanded="false" aria-controls="navDrawerFlyout">Trust</button>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
 
@@ -109,11 +121,19 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../archie/personal/">For Personal</a>
-      <a href="../archie/business/">For Business</a>
-      <a href="../how-it-works/">How It Works</a>
+      <a href="../archie/personal/"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="../archie/business/"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
       <a href="../archie/mobile/">Archie Mobile</a>
+      <a href="../how-it-works/">How It Works</a>
       <a href="../archie/pricing/">Pricing</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
+      <a href="../skills-marketplace/browse/">Browse All</a>
+      <a href="../skills-marketplace/find/">Find an Add-on</a>
+    </div>
+    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutTrust">
+      <a href="../trust/">What We Can and Can&rsquo;t See</a>
+      <a href="../trust/proof/">Run the Checks Yourself</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
       <a href="../compare/">Comparisons</a>
@@ -468,10 +488,10 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../archie/personal/">For Personal</a>
-            <a href="../archie/business/">For Business</a>
-            <a href="../how-it-works/">How It Works</a>
+            <a href="../archie/personal/"><img class="nav-row-mark" src="../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../archie/business/"><img class="nav-row-mark" src="../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
             <a href="../archie/mobile/">Archie Mobile</a>
+            <a href="../how-it-works/">How It Works</a>
             <a href="../archie/pricing/">Pricing</a>
           </nav>
         </div>
@@ -527,7 +547,7 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260921-75"></script>
-  <script type="module" src="../js/account-nav.js?v=20260921-75"></script>
+  <script src="../js/nav.js?v=20260921-76"></script>
+  <script type="module" src="../js/account-nav.js?v=20260921-76"></script>
 </body>
 </html>

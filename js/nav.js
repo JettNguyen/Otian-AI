@@ -156,11 +156,13 @@
   };
 
   /* ── Which of the tied rows actually lights ──
-     A menu can list one page more than once: Services names the page and two of the sections
-     on it, because they are two different things you can buy. Every row there resolves to the
-     same pathname, so matching on path alone lights three rows at once and the menu says you
-     are in three places. That is what the retired "What to Run It On" row did next to "How It
-     Works", and it reads as a styling bug rather than as the address problem it is.
+     A menu can list one page more than once. Services did, naming the page and two of the
+     sections on it, because they were two different things you can buy; it collapsed to one
+     row on 2026-09-21 and no menu does it today. This stays because the situation comes back
+     every time a menu names a section: every such row resolves to the same pathname, so
+     matching on path alone lights several rows at once and the menu says you are in several
+     places. That is what the retired "What to Run It On" row did next to "How It Works", and
+     it reads as a styling bug rather than as the address problem it is.
 
      So among the rows tied at the longest path match: the one whose hash is the reader's hash
      wins, and with no hash it is the row that has none. The bare page link is always in the
@@ -340,10 +342,11 @@
 
     catButtons.forEach(function (btn) {
       const targetId = btn.dataset.drawerTarget;
-      /* A category with no flyout is a plain link wearing the category's clothes (Services,
-         since guided setup and consulting merged into one page on 2026-09-14). It must not
-         open an empty panel on the way out, and hovering it has to close whatever is open,
-         same as hovering any other non-category row in the drawer. */
+      /* A category with no flyout is a plain link wearing the category's clothes (Add-ons
+         and Trust, since the nav went to four menus on 2026-09-21: each is one page, so a
+         panel holding a single row would be a menu that exists to be opened and closed). It
+         must not open an empty panel on the way out, and hovering it has to close whatever
+         is open, same as hovering any other non-category row in the drawer. */
       if (!targetId) {
         if (canHover) btn.addEventListener('mouseenter', resetDrawerPanels);
         return;

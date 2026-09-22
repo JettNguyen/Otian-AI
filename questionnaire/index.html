@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260921-74" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260921-75" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -68,31 +68,15 @@
             <a href="../archie/pricing/" role="menuitem">Pricing</a>
           </div>
         </div>
-        <div class="nav-more" id="navAddons">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navAddonsMenu" type="button">Add-ons</button>
-          <div class="nav-more-menu" id="navAddonsMenu" role="menu" aria-label="Add-ons">
-            <a href="../skills-marketplace/what-is-an-add-on/" role="menuitem">What an Add-on Is</a>
-            <a href="../skills-marketplace/browse/" role="menuitem">Browse All</a>
-            <a href="../skills-marketplace/for-developers/" role="menuitem">Build One</a>
-          </div>
-        </div>
-        <div class="nav-more" id="navServices">
-          <button class="nav-more-toggle" aria-expanded="false" aria-controls="navServicesMenu" type="button">Services</button>
-          <div class="nav-more-menu" id="navServicesMenu" role="menu" aria-label="Services">
-            <a href="../services/" role="menuitem">Working With Us</a>
-            <a href="../services/#guided" role="menuitem">Guided Setup</a>
-            <a href="../services/#consulting" role="menuitem">Consulting</a>
-            <a href="../skills-marketplace/commission/" role="menuitem">Have an Add-on Built</a>
-          </div>
-        </div>
+        <a href="../skills-marketplace/browse/" class="nav-top-link">Add-ons</a>
+        <a href="../trust/" class="nav-top-link">Trust</a>
         <div class="nav-more" id="navLearn">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navLearnMenu" type="button">Learn</button>
           <div class="nav-more-menu" id="navLearnMenu" role="menu" aria-label="Learn">
-            <a href="../ai-explained/" role="menuitem">AI Explained</a>
             <a href="../compare/" role="menuitem">Comparisons</a>
-            <a href="../blog/" role="menuitem">Blog</a>
             <a href="../faq/" role="menuitem">FAQ</a>
-            <a href="../help/" role="menuitem">Troubleshooting</a>
+            <a href="../blog/" role="menuitem">Blog</a>
+            <a href="../ai-explained/" role="menuitem">AI Explained</a>
           </div>
         </div>
         <div class="nav-more" id="navCompany">
@@ -100,13 +84,12 @@
           <div class="nav-more-menu" id="navCompanyMenu" role="menu" aria-label="About">
             <a href="../our-story/" role="menuitem">Our Story</a>
             <a href="../testimonials/" role="menuitem">Testimonials</a>
+            <a href="../services/" role="menuitem">Work With Us</a>
             <a href="../contact/" role="menuitem">Contact</a>
-            <a href="../trust/" role="menuitem">What We Can and Can&rsquo;t See</a>
-            <a href="../standard/" role="menuitem">The Otian Standard</a>
           </div>
         </div>
       </div>
-      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Get Started</a>
+      <a href="../questionnaire/" class="btn btn-primary btn-sm nav-cta">Join the Waitlist</a>
       <div class="nav-account" id="navAccount">
         <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
           <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
@@ -122,12 +105,13 @@
   <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
   <nav class="nav-drawer" id="navDrawer" aria-label="Mobile navigation" aria-hidden="true">
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutArchie" aria-expanded="false" aria-controls="navDrawerFlyout">Archie</button>
-      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutAddons" aria-expanded="false" aria-controls="navDrawerFlyout">Add-ons</button>
-      <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutServices" aria-expanded="false" aria-controls="navDrawerFlyout">Services</button>
+      <a class="nav-drawer-cat nav-drawer-cat--link" href="../skills-marketplace/browse/">Add-ons</a>
+      <a class="nav-drawer-cat nav-drawer-cat--link" href="../trust/">Trust</a>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutLearn" aria-expanded="false" aria-controls="navDrawerFlyout">Learn</button>
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
 
-    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Get Started</a>
+
+    <a href="../questionnaire/" class="btn btn-primary nav-drawer-cta">Join the Waitlist</a>
   </nav>
 
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
@@ -135,37 +119,24 @@
       <svg class="nav-drawer-back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
-        <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
+    <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
       <a href="../archie/personal/">For Personal</a>
       <a href="../archie/business/">For Business</a>
       <a href="../how-it-works/">How It Works</a>
       <a href="../archie/mobile/">Archie Mobile</a>
       <a href="../archie/pricing/">Pricing</a>
     </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
-      <a href="../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
-      <a href="../skills-marketplace/browse/">Browse All</a>
-      <a href="../skills-marketplace/for-developers/">Build One</a>
-    </div>
-    <div class="nav-drawer-flyout-links" id="navDrawerFlyoutServices">
-      <a href="../services/">Working With Us</a>
-      <a href="../services/#guided">Guided Setup</a>
-      <a href="../services/#consulting">Consulting</a>
-      <a href="../skills-marketplace/commission/">Have an Add-on Built</a>
-    </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutLearn">
-      <a href="../ai-explained/">AI Explained</a>
       <a href="../compare/">Comparisons</a>
-      <a href="../blog/">Blog</a>
       <a href="../faq/">FAQ</a>
-      <a href="../help/">Troubleshooting</a>
+      <a href="../blog/">Blog</a>
+      <a href="../ai-explained/">AI Explained</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutCompany">
       <a href="../our-story/">Our Story</a>
       <a href="../testimonials/">Testimonials</a>
+      <a href="../services/">Work With Us</a>
       <a href="../contact/">Contact</a>
-      <a href="../trust/">What We Can and Can&rsquo;t See</a>
-      <a href="../standard/">The Otian Standard</a>
     </div>
   </div>
 
@@ -272,27 +243,26 @@
         <div>
           <h4 class="footer-col-title">Add-ons</h4>
           <nav class="footer-nav-links" aria-label="Add-ons">
-            <a href="../skills-marketplace/what-is-an-add-on/">What an Add-on Is</a>
             <a href="../skills-marketplace/browse/">Browse All</a>
+            <a href="../skills-marketplace/find/">Find an Add-on</a>
             <a href="../skills-marketplace/for-developers/">Build One</a>
           </nav>
         </div>
         <div>
-          <h4 class="footer-col-title">Services</h4>
-          <nav class="footer-nav-links" aria-label="Services">
-            <a href="../services/">Working With Us</a>
-            <a href="../services/#guided">Guided Setup</a>
-            <a href="../services/#consulting">Consulting</a>
-            <a href="../skills-marketplace/commission/">Have an Add-on Built</a>
+          <h4 class="footer-col-title">Trust</h4>
+          <nav class="footer-nav-links" aria-label="Trust">
+            <a href="../trust/">What We Can and Can&rsquo;t See</a>
+            <a href="../trust/proof/">Run the Checks Yourself</a>
+            <a href="../trust/it-review/">For an IT Review</a>
           </nav>
         </div>
         <div>
           <h4 class="footer-col-title">Learn</h4>
           <nav class="footer-nav-links" aria-label="Learn">
-            <a href="../ai-explained/">AI Explained</a>
             <a href="../compare/">Comparisons</a>
-            <a href="../blog/">Blog</a>
             <a href="../faq/">FAQ</a>
+            <a href="../blog/">Blog</a>
+            <a href="../ai-explained/">AI Explained</a>
             <a href="../help/">Troubleshooting</a>
           </nav>
         </div>
@@ -301,8 +271,8 @@
           <nav class="footer-nav-links" aria-label="About">
             <a href="../our-story/">Our Story</a>
             <a href="../testimonials/">Testimonials</a>
+            <a href="../services/">Work With Us</a>
             <a href="../contact/">Contact</a>
-            <a href="../trust/">What We Can and Can&rsquo;t See</a>
             <a href="../standard/">The Otian Standard</a>
             <a class="footer-doc-link" href="../assets/Archie-Overview-Public.pdf" download><span>Archie Overview (PDF)</span></a>
             <a class="footer-doc-link" href="../assets/Otian-Standard.pdf" download><span>The Otian Standard (PDF)</span></a>
@@ -329,10 +299,10 @@
     import { bindStatusToast } from "../js/status-toast.js";
     window.otianQuestionnaireStatus = bindStatusToast(document.getElementById("q-status"));
   </script>
-  <script src="../js/nav.js?v=20260921-74"></script>
-  <script src="../js/ember.js?v=20260921-74" defer></script>
-  <script type="module" src="../js/account-nav.js?v=20260921-74"></script>
-  <script src="../js/questionnaire.js?v=20260921-74"></script>
+  <script src="../js/nav.js?v=20260921-75"></script>
+  <script src="../js/ember.js?v=20260921-75" defer></script>
+  <script type="module" src="../js/account-nav.js?v=20260921-75"></script>
+  <script src="../js/questionnaire.js?v=20260921-75"></script>
 </body>
 </html>
 

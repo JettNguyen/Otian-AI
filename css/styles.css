@@ -1123,6 +1123,36 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   transform: rotate(-135deg) translateY(-1px);
 }
 
+/* A top-level row with no menu under it (Add-ons, Trust, since 2026-09-21). Each is one
+   page, and a dropdown carrying a single row is a menu that exists to be opened and closed.
+   It wears the toggle's clothes exactly, minus the caret: same ink, same hover, same blue
+   "you are here" underline. Without that, one bar would say "you are here" two ways. */
+.nav-links a.nav-top-link {
+  color: var(--nav-ink2);
+  position: relative;
+}
+
+.nav-links a.nav-top-link:hover {
+  color: var(--nav-ink);
+  background: var(--surface-hover);
+}
+
+.nav-links a.nav-top-link.active {
+  color: var(--accent);
+  background: transparent;
+}
+
+.nav-links a.nav-top-link.active::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--c-blue);
+}
+
 /* A dropdown is as wide as its wordiest entry, so the width is really a budget on the labels.
    The ceiling is set just past the longest one we keep ("What We Can and Can't See"), which
    means a new entry that overruns wraps to two lines in the menu rather than quietly stretching
@@ -1623,6 +1653,12 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
   border-bottom: 1.5px solid currentColor;
   transform: rotate(135deg);
   transition: transform var(--transition);
+}
+
+/* Add-ons and Trust wear a category row's clothes and go straight to a page. The chevron
+   comes off: in this drawer it means "a panel opens beside this", and these open nothing. */
+.nav-drawer-cat--link::after {
+  content: none;
 }
 
 /* External flyout: pops out to the left of the drawer, attached to it */

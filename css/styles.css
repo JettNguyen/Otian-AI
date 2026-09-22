@@ -16326,12 +16326,12 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    and light mode stops well short of it, because a reader who picked the cream page did not ask
    for the darkest thing on the site halfway down it. */
 
-/* One act is 100vh of scrolling, the hero is 0.25 of one, and the camera already moves through the
-   hero (PRE in js/home.js), so the first pixel of scroll moves something. Setup is 2, because it is
-   the one act with six things in it. LEN in js/home.js is the same list and must agree, and the sum
-   here is that list's. The extra 100vh is the stage's own height, which the sticky needs to unpin
-   at the end. */
-.day-story { position: relative; height: calc(8.4 * 100vh + 100vh); }
+/* One act is 100vh of scrolling, the hero is 0.6 of one, and the camera already moves through the
+   hero (PRE in js/home.js), so the first pixel of scroll moves something. Setup is 1.5, because it
+   is the one act with six things in it. LEN in js/home.js is the same list and must agree, and the
+   sum here is that list's. The extra 100vh is the stage's own height, which the sticky needs to
+   unpin at the end. */
+.day-story { position: relative; height: calc(7.9 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
@@ -17124,6 +17124,15 @@ button.dp-act:hover { background: var(--soft); }
 .dp-scr.is-done .dp-after { display: flex; }
 .dp-scr.is-done p.dp-after { display: block; }
 .dp-scr.is-done .dp-before { display: none; }
+/* THE PRESS AND THE ANSWER ARE TWO THINGS, and on the calendar screen they are two messages
+   (2026-09-22). A card that edits itself in place has one state to show, so is-done carries the
+   whole of the mail screen; a conversation has your message going out and the agent's coming back,
+   and the app posts yours the instant you press. So dp-sent rides is-pressed and dp-after waits
+   for is-done, with the same working row in between that the first exchange uses. */
+.dp-sent { display: none; }
+.dp-scr.is-pressed .dp-sent { display: flex; }
+.dp-thinking.dp-waiting { display: none; }
+.dp-scr.is-pressed:not(.is-done) .dp-thinking.dp-waiting { display: flex; }
 .dp-thinking { display: flex; align-items: center; gap: 8px; }
 .dp-thinking .t { font-size: var(--fs-sm); color: var(--muted); }
 .dp-dots { display: flex; align-items: center; gap: 4px; padding-bottom: 2px; }
@@ -17134,8 +17143,12 @@ button.dp-act:hover { background: var(--soft); }
   .dp-dots i:nth-child(3) { animation-delay: 320ms; }
 }
 @keyframes day-pulse-dot { 0%, 100% { opacity: .9; transform: translateY(0); } 40% { opacity: .28; transform: translateY(1.5px); } }
-.dp-composer { background: var(--bg2); border-top: var(--hair) solid var(--border); box-shadow: var(--lift-phone-bar-up); padding: 12px 12px 42px; display: flex; flex-direction: column; gap: 8px; position: relative; z-index: 2; }
-.dp-composer .line { display: flex; align-items: flex-end; gap: 8px; }
+/* A GRID OF ONE ROW, NOT A COLUMN OF ONE CHILD, so the bar can close over its own height: same
+   trick as .dp-fold, and for the same reason, which is that nothing here knows how tall it comes
+   out. See .dp-ph.is-page, where it is used. Every composer on the site holds exactly one .line,
+   so this lays out the same as the flex column it replaced. */
+.dp-composer { background: var(--bg2); border-top: var(--hair) solid var(--border); box-shadow: var(--lift-phone-bar-up); padding: 12px 12px 42px; display: grid; grid-template-rows: 1fr; overflow: hidden; position: relative; z-index: 2; }
+.dp-composer .line { min-height: 0; display: flex; align-items: flex-end; gap: 8px; }
 .dp-knob { width: 44px; height: 44px; border-radius: 22px; background: var(--soft); display: flex; align-items: center; justify-content: center; flex: none; color: var(--muted); font-size: var(--fs-4xl); line-height: 26px; }
 .dp-knob.hot { background: var(--accent); color: var(--on-accent); font-weight: 700; }
 .dp-msgbox { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 11px 16px; font-size: var(--fs-lg); color: var(--muted); }
@@ -17177,6 +17190,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    conversation runs from the bottom, and it ends in the jump across to the chat that the app puts
    there in place of a composer.
 
+   THE BAR CLOSES, IT DOES NOT VANISH (Jett, 2026-09-22: "the message bar just disappears suddenly
+   while the messages are there from the previous section"). It was display:none the frame the act
+   turned over, while the screens were still a third of a second into their cross-fade, so the last
+   act's thread stood there for that third of a second with nothing under it. It closes over its own
+   height now, on the screens' own timing, and the transcript takes the room as it goes. Under
+   reduced motion there is no transition and it closes in one frame, which is where this started.
+
    THE LIST GROWS. A row that has not landed is out of the layout, so the card is as tall as the
    work that has happened; all three sitting there from the first frame read as a list that had been
    there all along. A beat cannot transition out of display:none, so the landing is the keyframe the
@@ -17185,7 +17205,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    in order: the first visible row is always :first-child, and no hidden row can leave a hairline
    hanging under the last visible one. */
 .dp-scr--page { justify-content: flex-start; }
-.dp-ph.is-page .dp-composer { display: none; }
+.dp-ph.is-page .dp-composer { grid-template-rows: 0fr; padding-top: 0; padding-bottom: 0; border-top-width: 0; opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .dp-composer { transition: grid-template-rows .35s cubic-bezier(.2, .8, .3, 1), padding .35s cubic-bezier(.2, .8, .3, 1), border-top-width .35s cubic-bezier(.2, .8, .3, 1), opacity .3s ease; }
+}
 .dp-scr--page .dp-lrow { border-bottom: 0; border-top: var(--hair) solid var(--line); }
 .dp-scr--page .dp-lrow:first-child { border-top: 0; }
 .dp-jump { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 16px; border-radius: 14px; background: var(--soft); border: var(--hair) solid var(--border); color: var(--muted); font-size: var(--fs-base); }
@@ -17919,19 +17942,28 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-scene-wrap { transform: none; }
 }
 
-/* The four-rows screen grows as its beats land, so a bubble that has not arrived takes no room:
-   with all eight present from the start the thread overflowed the screen and the first question
-   was clipped off the top before anyone had read it. A bubble kept out of the layout cannot
-   transition in (it is painted for the first time already lit), so its arrival is a keyframe
-   that runs whenever it is shown: it rises and grows from its tail corner, the way a chat app
-   lands a message. The bubbles above it move like a thread too: js/home.js measures how far
-   the thread jumped when a bubble landed and slides the screen back over that distance. */
+/* A GROWING SCREEN IS ONE WHERE A MESSAGE THAT HAS NOT ARRIVED TAKES NO ROOM. The four-rows screen
+   has been one since it was drawn (with all eight present from the start the thread overflowed the
+   screen and the first question was clipped off the top before anyone had read it), and the
+   calendar screen became one on 2026-09-22, because a bottom-aligned column that holds room for
+   messages it has not received lands the first one halfway up the phone with a gap under it. This
+   is the difference between a thread and a list: a thread grows from the composer up.
+
+   A bubble kept out of the layout cannot transition in (it is painted for the first time already
+   lit), so its arrival is a keyframe that runs whenever it is shown: it rises and grows from its
+   tail corner, the way a chat app lands a message. The bubbles above it move like a thread too:
+   js/home.js measures how far the thread jumped when one landed and slides the screen back over
+   that distance. The calendar screen's last three arrive on the send rather than on a beat, so
+   they are named in the keyframe's selector beside the beats. */
 .dp-scr--grow .day-beat:not(.is-on) { display: none; }
-.dp-scr--grow .dp-mine.day-beat { transform-origin: 100% 100%; }
-.dp-scr--grow .dp-said.day-beat { transform-origin: 0 100%; }
+.dp-scr--grow .dp-mine { transform-origin: 100% 100%; }
+.dp-scr--grow .dp-said { transform-origin: 0 100%; }
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr--grow { transition: opacity .35s ease, transform .45s cubic-bezier(.2, .8, .3, 1); }
-  .dp-scr--grow .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr--grow .day-beat.is-on,
+  .dp-scr--grow.is-pressed .dp-sent,
+  .dp-scr--grow.is-pressed:not(.is-done) .dp-waiting,
+  .dp-scr--grow.is-done .dp-after { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
 }
 @keyframes day-land-in {
   from { opacity: 0; transform: translateY(14px) scale(.96); }

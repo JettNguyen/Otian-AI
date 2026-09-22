@@ -149,11 +149,28 @@
        LEN   How much scroll each act gets, in acts: the hero is a short one, so the first thing
              moves after a push rather than after a full screen of nothing, and setup is a long
              one, because six things happen in it and one screen of scroll gave each of them
-             about ninety pixels (Jett, 2026-09-17: "too small between the steps"). The
-             stylesheet's .day-story height is the same sum and must agree.
+             about ninety pixels (Jett, 2026-09-17: "too small between the steps"). It was 2 until
+             2026-09-22 and had gone the other way (Jett: "setup takes a bit too long to scroll
+             through"): two screens of scroll, 197px a step. At 1.5 it is a screen and a half and
+             169px, which is still well clear of the ninety that started it. The stylesheet's
+             .day-story height is the same sum and must agree.
        BEATS Any element with class="day-beat" and data-act / data-at (a fraction of the act's
              play phase) lights when the scroll passes it and goes dark when the scroll comes
              back. A data-until makes it a window, which is how the typing dots go away.
+             EVERY STEP OF AN ACT IS THE SAME LENGTH OF SCROLL (Jett, 2026-09-22: "the animations
+             of messages coming through are not very even with the amount of scrolling done").
+             The gap is g = 1 / (n + 0.5) of the play phase and step k lands at (k + 0.5) * g, so
+             an act is half a gap of nothing, then n steps a gap apart, then a whole gap of the
+             finished screen standing still. Half at the head because the camera has only just
+             arrived and the screen is still fading in; a whole one at the tail because the
+             finished screen is the thing the act was assembling. Nothing here is hand-placed any
+             more, so the times read as thirteenths and seventeenths rather than as round numbers,
+             and adding a step means redividing the act rather than finding a gap.
+             The counts: the calendar act has six (question, working, proposal, the yes typing,
+             the send, the answer), the mail act three (the card, the press, the answer), the
+             four-rows act eight, the overnight act three, the brief four. They had grown into
+             a shape with no rule in it: the first message of the calendar act landed a third of
+             the way through it and the last three arrived inside a fifth of it.
        MARKS Ember is one element, absolute inside the stage. Each frame the driver reads the
              mark's projected rectangle (getBoundingClientRect sees through the 3D transforms)
              against the stage's own, puts Ember's feet on it, and eases. A new mark is a hop.
@@ -164,10 +181,11 @@
 
      Two controls are real, and both are the product's own: the send knob on the composer, once
      the calendar act's yes sits typed in it (the skill takes approval as a later message, never
-     a button), and Send on the mail card. A press lights the button, and on the mail card it stays
-     lit and busy until the computer answers, the way the phone app holds it; then the screen is
-     done, which the stylesheet turns into the edited card or the follow-up bubbles, the mail card
-     gets the computer's answer as a notice, and Ember hops. NEITHER ACT WAITS FOREVER: further down each one the scroll
+     a button), and Send on the mail card. A press lights the button and the screen waits, the way
+     the phone app holds a pressed card; then the computer answers, which the stylesheet turns into
+     the edited card or the reply bubble, the mail card gets the answer as a notice as well, and
+     Ember hops. The calendar screen settled in the frame it was pressed until 2026-09-22, which
+     put your yes and the agent's answer on the screen in the same instant. NEITHER ACT WAITS FOREVER: further down each one the scroll
      presses the button the reader has not, because the sent card and the moved meeting are what
      the two acts are claiming and they were sitting behind a click most readers never make
      (SENDS below). The custody toggle redraws the lap for starter credits, in TRUST.md's own
@@ -186,14 +204,20 @@
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
-    var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grow = $('.dp-scr--grow');
+    var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grows = $$('.dp-scr--grow');
     /* The yes is typed one character at a time, and the scroll is what types it, so scrolling back
        takes the characters off again. Read the sentence out of the markup rather than repeating it
        here: the markup is what a reader with reduced motion and a crawler both get, and it carries
        the whole line. TYPED_AT and TYPED_FOR are where in the act it starts and how much of the act
        it takes, which is about a fifth of a screen of scroll for fourteen characters. */
     var typedEl = $('.dp-msgbox .typed'), TYPED = typedEl ? typedEl.textContent : '', typedCut = -1;
-    var TYPED_AT = 0.5, TYPED_FOR = 0.22;
+    /* Step, in the even grid the BEATS note above sets out: (k + 0.5) / (n + 0.5) of the play
+       phase, for step k of n. */
+    function step(k, n) { return (k + 0.5) / (n + 0.5); }
+    /* The fourth of the calendar act's six steps, and it takes seven tenths of one: the rest of the
+       step is the finished line standing in the box with the knob lit, which is the moment the act
+       is about. Same shape as DRAW on the setup build, and the same reason. */
+    var TYPED_AT = step(3, 6), TYPED_FOR = 0.7 / 6.5;
     /* THE SCROLL SENDS IT IF THE READER DOES NOT (2026-09-18). Both of these screens end in a
        control the reader works, and both were a dead end for a reader who only scrolls: the
        calendar's yes and the mail card's Send are what make each act's claim visible, and until
@@ -209,8 +233,8 @@
        arriving from a later act settles it with no linger, so scrolling up into a finished act does
        not replay a button lighting itself. */
     var scr2 = $('.dp-scr[data-scr="2"]');
-    var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: 0.8, busy: false },
-                 { el: scr2, key: 2, act: 2, from: 0.06, at: 0.32, done: 0.46, busy: true }];
+    var SENDS = [{ el: scr1, key: 1, act: 1, from: TYPED_AT, at: step(4, 6), done: step(5, 6) },
+                 { el: scr2, key: 2, act: 2, from: step(0, 3), at: step(1, 3), done: step(2, 3) }];
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
       return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
@@ -218,7 +242,15 @@
     var marks = {};
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
 
-    var SETTLE = 0.3;
+    /* HOW MUCH OF AN ACT THE CAMERA GETS BEFORE THE ACT PLAYS. It was 0.3 until 2026-09-22, and
+       the overnight act is where that showed: its move is the biggest in the story (the phone drops
+       308px and the window nearly doubles), so a third of an act of creeping read as half of one
+       (Jett: "it takes too much scrolling for the first part of overnight for the phone to go
+       behind the desktop app"). At 0.2 the move is 97% done a sixth of the way in, and every act
+       gets the difference back as play. Measured at 390 by 844: the phone is still moving 15px
+       between .25 and .3 of the act, which is what a reader reads as the camera not having
+       arrived. */
+    var SETTLE = 0.2;
     /* Act 0 was 0.25 of a screen and is 0.6 since 2026-09-18, so getting past the hero takes real
        scrolling now that the hero has something to reveal (Jett: "make the scroll last a bit
        longer for the first section"). The rest of it lands together at 0.34 of the act, which is
@@ -228,9 +260,17 @@
        Act 6 is 0.8 since 2026-09-19. Its brief stood finished from the act's first frame, so a
        full act of scroll moved nothing (Jett: "nothing happens during the next morning section
        visual-wise and it takes a bit to scroll through it"); the brief lands line by line now,
-       the last line at .56 on the beat clock, which is .69 of the act, and the act is as long
-       as that plus the reading of it. */
-    var LEN = [0.6, 1, 1, 1, 1, 1, 0.8, 2], CUM = [0], TOT = 0;
+       four lines on the even grid, with one gap at the end for reading the finished brief. That
+       last hold is 120px on a phone where it used to be 208, which is the right direction for the
+       complaint that started it: the dead scroll was at the end.
+
+       THE ACT LENGTHS ARE NOT SET FROM THE STEP COUNTS, so a step is even inside an act and not
+       across them. At 390 by 844 a step is 104px in the calendar act, 193px in the mail act and
+       the overnight one, 79px in the four-rows act, 120px in the brief and 169px in setup. Evening
+       those would mean sizing every act by how many things happen in it, and an act also has to be
+       long enough to read its caption, which is a trade worth making on purpose rather than by
+       arithmetic. */
+    var LEN = [0.6, 1, 1, 1, 1, 1, 0.8, 1.5], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must
@@ -803,9 +843,9 @@
       for (j = 0; j < 5; j++) buildEl.style.setProperty('--d' + j, clamp((bp - j) / DRAW, 0, 1).toFixed(3));
     }
 
-    /* The four-rows thread moves like a thread. A bubble that lands is kept out of the layout
-       until its beat (styles.css, .dp-scr--grow), so the bubbles above it jump up by its height
-       the moment it appears; this puts the screen back where it stood and lets it slide (the
+    /* A growing thread moves like a thread. A bubble that lands is kept out of the layout until
+       its turn (styles.css, .dp-scr--grow), so the bubbles above it jump up by its height the
+       moment it appears; this puts the screen back where it stood and lets it slide (the
        transition is the screen's own). Measured with offsetTop, which is in the screen's own
        pixels whatever the phone's zoom and pose do to them, so the slide is exactly the jump.
        With no bubble on before, the thread rises from the screen's bottom edge. */
@@ -822,17 +862,17 @@
        after the fourth (Jett: "it looks like it autoscrolls to the top instantly then scrolls
        down to the most recent message"). offsetTop has no out-of-band value to borrow, so the
        caller passes null and this asks for null. */
-    function slideThread(wasTop) {
-      var now = firstOn(grow);
+    function slideThread(el, wasTop) {
+      var now = firstOn(el);
       if (!now || still) return;
-      var edge = grow.clientHeight - 20;
+      var edge = el.clientHeight - 20;
       var d = (wasTop === null ? edge : wasTop) - now.offsetTop;
       if (Math.abs(d) < 1) return;
-      grow.style.transition = 'none';
-      grow.style.transform = 'translateY(' + d.toFixed(1) + 'px)';
-      void grow.offsetHeight;
-      grow.style.transition = '';
-      grow.style.transform = '';
+      el.style.transition = 'none';
+      el.style.transform = 'translateY(' + d.toFixed(1) + 'px)';
+      void el.offsetHeight;
+      el.style.transition = '';
+      el.style.transform = '';
     }
 
     function setAct(i) {
@@ -928,14 +968,18 @@
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
-      var was = grow && grow.classList.contains('is-on') ? firstOn(grow) : null, wasTop = was ? was.offsetTop : null, landed = false;
+      /* WHERE THE THREAD STOOD BEFORE ANYTHING WAS TOGGLED, spent after everything has been. Two
+         screens grow now, and on the calendar one the last three messages arrive from the send
+         rather than from a beat, so the measurement has to outlive both loops. A landing that did
+         not happen costs nothing: slideThread reads the same offsetTop back and returns. */
+      var thread = null;
+      for (var gi = 0; gi < grows.length; gi++) if (grows[gi].classList.contains('is-on')) thread = grows[gi];
+      var was = thread ? firstOn(thread) : null, wasTop = was ? was.offsetTop : null;
       beats.forEach(function (b) {
         var on = b.act === i ? (tp >= b.at && tp < b.until) : (b.act < i && b.until > 1);
         if (b.el.classList.contains('is-on') === on) return;
         b.el.classList.toggle('is-on', on);
-        if (b.el.parentNode === grow) landed = true;
       });
-      if (landed && grow.classList.contains('is-on')) slideThread(wasTop);
 
       var mark = ACTS[i].mark;
       /* Narrow, the hero's Ember stands beside the phone, where the phone acts put it, rather
@@ -1009,23 +1053,26 @@
         if (!sd.el) return;
         if (i < sd.act || (i === sd.act && tp < sd.from)) unpress(sd.el, sd.key);
         else if (i > sd.act) press(sd.el, sd.key, 'now');
-        /* Only the mail card waits. Its Send is a card button and the phone app holds it lit and
-           busy until the computer answers; the composer's arrow posts a message, which posts at
-           once.
+        /* BOTH OF THEM WAIT, and the calendar one has since 2026-09-22. The mail card's Send is a
+           card button the phone app holds lit and busy until the computer answers; the composer's
+           arrow posts a message at once, which is why this one used to settle in the same frame it
+           was pressed, and that made your yes and the agent's "Moved" one event. They are two
+           messages, so they are two steps: the press posts yours, and the answer is its own.
 
            THE SCROLL IS THE CLOCK FOR ITS OWN PRESS (Jett, 2026-09-18). The busy beat ran on a
            900ms timer, so it resolved whether or not anybody scrolled: "i don't have to scroll
            for it to send". A reader moving at any speed spent that second watching a spinner and
            met the sent card with almost none of the act left, which read as the state appearing
-           and going. `at` starts the spinner and `done` settles it, both in scroll, so the beat
-           cannot be outrun and the sent card holds the rest of the act. A press by hand keeps a
-           real clock, because somebody who presses and stops scrolling still has to see it
+           and going. `at` starts the wait and `done` settles it, both in scroll, so the beat
+           cannot be outrun and the settled screen holds the rest of the act. A press by hand keeps
+           a real clock, because somebody who presses and stops scrolling still has to see it
            land. */
         else if (tp >= sd.at) {
-          press(sd.el, sd.key, sd.busy ? 'hold' : 'now');
-          if (sd.busy && tp >= sd.done) answer(sd.el, sd.key);
+          press(sd.el, sd.key, 'hold');
+          if (tp >= sd.done) answer(sd.el, sd.key);
         }
       });
+      if (thread) slideThread(thread, wasTop);
       /* The calendar act's yes sits typed in the composer once the proposal has landed, until it
          is sent; scrolling back above the proposal untypes it. IT ARRIVES A CHARACTER AT A TIME,
          because the claim of this act is that approval is a message you type and not a button you
@@ -1095,7 +1142,7 @@
         var kind = btn.getAttribute('data-press');
         var scr = kind === 'confirm' ? scr1 : btn.closest('.dp-scr');
         if (kind === 'confirm' && !(ph && ph.classList.contains('is-typed'))) return;
-        press(scr, kind === 'confirm' ? 1 : 2, kind === 'confirm' ? 'now' : 'clock');
+        press(scr, kind === 'confirm' ? 1 : 2, 'clock');
       });
     });
     /* The own-key / starter-credits control on the custody act. */

@@ -119,7 +119,9 @@
       section: 'Join the waitlist',
       bot: [
         'And which computer would your agent run on?',
-        'Wondering where Archie stands today? <a href="../archie/#status">Check the current status</a>.'
+        /* Straight at the section, not at archie/, which is a redirect stub and drops the
+           hash on the way through. A stub is for other people's links, never for ours. */
+        'Wondering where Archie stands today? <a href="../archie/personal/#status">Where Archie stands</a>.'
       ],
       type: 'choice',
       name: 'platform',

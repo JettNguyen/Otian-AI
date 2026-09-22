@@ -216,6 +216,16 @@ BUDGETS = {
     # the rows under them went back to routing the reader instead of describing the shapes, and
     # the rest came off restatement: "if we are the wrong tool we say so on the call" was on the
     # page three times, and the build happening in sessions with you there was on it twice.
+    # A third page merged in on 2026-09-21 and the budget did NOT move, which is the arithmetic
+    # worth writing down: skills-marketplace/commission/ was 410 words, this page was 995, and
+    # the merged page is 1,040. Three pages in, one page out, and smaller than any two of them
+    # were. Jett's call, and the reason is that commissioning an add-on is a service we sell by
+    # the job that sat on the add-on shelf beside the things you get for free, starting with the
+    # same free call as the other two. What came across is the three steps and the price; what
+    # paid for it is the hero telling a reader every other AI tool is limited, three kind cards
+    # the browse hero now carries, a "why we work this way" section that was step three again,
+    # and on this page's own side the lede that named all three things the fork names underneath
+    # it and the shutdown promise that belongs to trust/ and pricing/.
     "services/index.html": 1050,   # raised 2026-09-02 from 2700: the plan with the AI included is a second price on the same card and a proxy disclosure that TRUST.md requires in the same breath, about 150 words that cannot live on another page
 }
 

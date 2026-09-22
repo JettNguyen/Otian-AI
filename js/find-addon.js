@@ -122,7 +122,7 @@ function render(query) {
   if (!found.length) {
     results.innerHTML =
       '<p class="find-empty">Nothing in the catalog matches those words yet. That is worth telling us: ' +
-      '<a class="marketplace-text-link" href="../commission/">say what you need</a>, ' +
+      '<a class="marketplace-text-link" href="../../services/#commission">say what you need</a>, ' +
       'or <a class="marketplace-text-link" href="../browse/">look through all of them</a>.</p>';
     return;
   }
@@ -135,7 +135,7 @@ function render(query) {
     html += '<li><a class="find-hit" href="../browse/?addon=' + encodeURIComponent(item.key) + '">' +
             escapeHtml(item.name) + '</a></li>';
   });
-  html += '</ul><p class="find-more">Not it? <a class="marketplace-text-link" href="../commission/">' +
+  html += '</ul><p class="find-more">Not it? <a class="marketplace-text-link" href="../../services/#commission">' +
           'Tell us what you actually need&nbsp;&rarr;</a></p>';
   results.innerHTML = html;
 }

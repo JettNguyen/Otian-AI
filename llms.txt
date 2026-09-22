@@ -35,7 +35,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Services we offer
 
-- [Working With Us](https://otianai.com/services/): Two ways we work with you, both $250 an hour and both starting with a free call: an hour together to get your first Archie agent running, or scoped design and build work for a setup that already has too many moving parts.
+- [Working With Us](https://otianai.com/services/): Three ways we work with you, each starting with a free call: an hour together to get your first Archie agent running, scoped design and build work for a setup with too many moving parts, or an add-on built to order. $250 an hour for the...
 
 ## Add-ons
 

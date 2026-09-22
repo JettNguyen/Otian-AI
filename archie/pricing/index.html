@@ -35,12 +35,22 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260922-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260922-3" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
     .price-grid--three {
       grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* One card, not two. The plan's own price is stated once, in the cards above, so this
+       grid has a single child and the shared two-column rule left a hole beside it: the card
+       sat in the left half looking like something had failed to load. */
+    .price-grid--one {
+      grid-template-columns: 1fr;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .price-note {
@@ -432,7 +442,7 @@
           <p>On a plan with an AI account of your own, you pay Otian for the app and that company for the AI. Add-ons are included. Connected services may charge their own fees.</p>
         </div>
 
-        <div class="mt-48 price-grid fade-up delay-1">
+        <div class="mt-48 price-grid price-grid--one fade-up delay-1">
           <article class="price-card">
             <span class="price-card-label">The AI Itself</span>
             <div class="price-card-amount price-card-amount--words">Pay as you go</div>
@@ -871,8 +881,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260922-2"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260922-2"></script>
-  <script src="../../js/demo-player.js?v=20260922-2"></script>
+  <script src="../../js/nav.js?v=20260922-3"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260922-3"></script>
+  <script src="../../js/demo-player.js?v=20260922-3"></script>
 </body>
 </html>

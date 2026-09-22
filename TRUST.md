@@ -1199,6 +1199,64 @@ same answer.
   deliberately so (see the free-trial entries above). The two facts point opposite ways and a
   page that states them loosely says both.
 
+### ✅ What happens when a plan ends (entry written 2026-09-22)
+
+**Written because the site was more pessimistic than the product.** `faq/` said "If you stop your
+plan, Archie stops letting you in at the end of the period you paid for" and `trust/` said "Archie
+stops letting you in and deletes nothing". Both were written before the free tier shipped on
+2026-09-17 and both were wrong for the commonest case by the time a reader met them. This is the
+stale-pessimistic failure: a true-when-written sentence that now costs us the one thing a
+frightened reader is asking about, which is whether leaving is survivable.
+
+**Approved wording:** "You stop a plan in Archie, on the Account page, under Your plan. It runs to
+the end of the period you have already paid for. On Personal, if a key from an AI company is saved,
+Archie keeps opening after that: you land on the free tier, at 20 jobs a day and one agent at a
+time, rather than at a wall. Without a saved key, Archie asks for one. Archie for Business has no
+free tier, so it asks for a plan. Nothing on your computer is deleted in any of the three cases."
+
+**Why it's true:** `onFreeTier` in the Archie repo's `src/app/pricing.ts` is
+`!IS_BUSINESS && !auth.allowed && !auth.trial_active && auth.own_ai_key`, and `App.tsx` sends a
+person to `PaywallScreen` only when `!auth.allowed && !auth.trial_active && !(FREE_TIER_EXISTS &&
+auth.own_ai_key)`. The same reading decides what actually runs, on the other side, in
+`crate::auth::on_free_tier` (`src-tauri/src/auth.rs`), which `require_access` and the gateway both
+consult. `FREE_TIER_EXISTS` is `!archie_domain::product::IS_BUSINESS`, a compile-time constant, so
+the business binary has no such branch. The agent ceilings are `FREE_AGENTS = 1` and
+`PLAN_AGENTS = 10` in `crates/archie-core/src/plan.rs`. `free_day.rs`'s module comment names this
+exact case in as many words: the tally is per computer rather than per agent because of "the moment
+somebody's plan lapses with ten agents already made".
+
+**Nothing is deleted, and the app says so itself.** The lapsed notice on `PaywallScreen` reads
+"Everything you set up is still here and nothing was deleted. Picking your plan back up puts it all
+back exactly as you left it." The Terms say the same about our side: your agent, its memory, your
+files and your keys are on your own computer, we have no access to them, and we do not delete them.
+
+**The catch, and it ships in the same breath every time:** `PaywallScreen` replaces the whole app,
+not part of it, so the Account page's **Moving and backups** section (`src/app/moving.tsx`) is not
+reachable while a plan is lapsed and no key is saved. The files are all still on the computer and
+nothing has been lost, but the one-file backup is written from inside Archie, so **the honest
+instruction is to write the backup before you stop, not after.** Any page describing the ending has
+to carry that sentence, per the limitation-beside-capability rule. Telling somebody their data is
+safe and letting them discover they cannot package it is the shape this entry exists to prevent.
+
+**Boundaries — do not cross:**
+- ⛔ **Never write the three cases as one.** "Archie keeps working after you stop paying" is false
+  for Business and false for a Personal computer with no key saved. Three sentences, three cases,
+  in that order, or name the case the sentence is about.
+- ⛔ **Never call the landing place a downgrade, a free plan or a lock-out.** The free tier has no
+  name (see the free-tier entry above) and this entry does not give it one. Write "you land on the
+  free tier", never "you are moved to the free plan".
+- ⛔ **Never imply the other agents are gone.** A person who lapses with ten agents made keeps all
+  ten on disk; the free ceiling is how many may run, one at a time, and the app's own message says
+  to delete one to make room rather than reporting a limit and stopping
+  (`agent_limit_message` in `plan.rs`). "One agent at a time" is the honest form. "You lose nine
+  agents" is not.
+- ⛔ **Never use this to soften the refund window.** 14 days from first starting a plan, full
+  refund, and guided sessions are hours already spent and are not refunded. That is in the Terms
+  and it does not stretch.
+- ⛔ **Never say restarting is instant or automatic.** Picking a plan back up is a checkout or the
+  billing portal, and the portal is the right door for a lapsed subscriber because a fresh checkout
+  bills them twice.
+
 ### ✅ It answers ordinary questions too, the way any AI chat does (entry written 2026-09-18)
 
 **Approved wording:** "Your agent answers ordinary questions the same way any AI chat you have

@@ -66,6 +66,13 @@ two rows that went to the footer this morning (Build One, For an IT Review) stay
 footer keeps its five columns in the same order and carries a little more at the bottom of
 each, which is what a footer is for. Nineteen rows, one promise.
 
+**Twenty rows since 2026-09-22**, at Jett's direction: Trust carries a third row, **If You Want
+to Stop**, pointing at `trust/if-you-want-to-stop/`. It is the page that answers the fear of
+starting, which is fear of not being able to stop, and it was written the same day because two
+sentences on the site still said a lapsed plan shuts Archie, which stopped being true when the
+free tier shipped on 2026-09-17. The row earns the promise the bar makes: every Trust row is a
+thing you can check without asking us.
+
 Two more from the same review. **The two edition rows carry their marks**, terracotta for
 Personal and blue for Business, the same two files those pages' heroes use, because two rows
 that differ by one word are the slowest pair in the menu to tell apart. And **Archie Mobile

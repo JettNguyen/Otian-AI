@@ -9720,6 +9720,21 @@ html[data-theme="dark"] .booking-container iframe {
 }
 .cost-note strong { color: var(--text-primary); }
 
+/* Where the three places an agent spends are listed. It was one 110-word paragraph until
+   2026-09-21, which is the wrong shape for three parallel figures: a reader comparing them
+   had to hold all three in their head to see that only one of them is them typing. */
+.cost-note-list {
+  max-width: 780px;
+  margin: 14px auto 0;
+  padding-left: 22px;
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.cost-note-list li + li { margin-top: 8px; }
+.cost-note-list strong { color: var(--text-primary); }
+
 /* Two of the three notes in this section are the reader's actual takeaway, not
    provenance, so they get body weight instead of fine-print grey. */
 .cost-note--lead {

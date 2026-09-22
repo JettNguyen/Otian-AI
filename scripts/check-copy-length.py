@@ -204,7 +204,15 @@ BUDGETS = {
     # have to stand alone (the free card, the two-lane section, and the plans lede). 41 words of
     # the rise were paid for first, out of my own additions and one sentence that was on two cards
     # word for word; what is left is the fact itself.
-    "archie/pricing/index.html": 3010,
+    # Down to 2750 on 2026-09-21, page at 2,700, in the simplification pass. Every figure that
+    # was on the page is still on it: what came off was three sections that priced nothing new.
+    # "Running Archie yourself" opened with a card that said "that is the plan above", a second
+    # that repeated a bullet on every plan card, and a note the third card's own link makes;
+    # the two guided-setup cards were services/ in miniature, on the day services/ was rebuilt
+    # to carry all three things we sell; and "Put Archie next to the alternative" argued the
+    # hiring comparison in four unsourced sentences, on a site that has a sourced page for it.
+    # The three places an agent spends became a list, which is what three parallel figures are.
+    "archie/pricing/index.html": 2750,
     # Archie Mobile is a sourced comparison that lives under archie/ rather than compare/,
     # because it is about our own product. 690 of its words a reader never meets as prose:
     # a 295-word comparison table, every quote in it another company's own wording, and a

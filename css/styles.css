@@ -13482,9 +13482,22 @@ html[data-theme="dark"] .booking-container iframe {
      carries a qualifier. 13px at 1.4 is 18.2, plus 1 of margin, plus 11 at 1.4 is 15.4. */
   min-height: 35px;
   font-size: var(--fs-sm);
-  font-weight: 600;
+  /* Lighter and more muted than the paragraph below, so it reads as an annotation on the price
+     rather than a second bold sentence competing with it. Neutral rather than a hue on purpose
+     (Jett picked it from four rendered options, 2026-09-22): every color on this site already
+     means something, and a tinted cost line would have collided with one. Blue is a text link,
+     terracotta is a button or Ember, and teal, plum, green and gold are add-on kinds and
+     status. --text-muted on --bg-card measures 5.4:1 in light, so it stays a body colour and
+     not a decorative one. */
+  font-weight: 500;
   line-height: 1.4;
-  color: var(--text-secondary);
+  color: var(--text-muted);
+  /* Off the global `p { text-wrap: pretty }`. Pretty balances a two-line block to avoid a short
+     last line, and on a short phrase in a narrow card that reads as breaking early for no
+     reason: at 150px it put "+ $1 to $5 to the / AI company" where a plain wrap fits "to the
+     AI", and it moved the whole qualifier onto its second line with "at" stranded above it.
+     Greedy wrapping is right for two short lines that are already near the card's width. */
+  text-wrap: normal;
 }
 
 /* The qualifier that has to travel with "$1 to $5": the measured light band is one person at a
@@ -13495,6 +13508,9 @@ html[data-theme="dark"] .booking-container iframe {
   margin-top: 1px;
   font-size: var(--fs-2xs);
   font-weight: 500;
+  /* Same ink as the line above it now that that line is muted too. The size is what separates
+     them, which is enough for a six-word footnote and keeps both above the contrast floor;
+     going a step lighter here would have put 11px type under 4.5:1. */
   color: var(--text-muted);
 }
 

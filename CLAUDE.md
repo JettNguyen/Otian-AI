@@ -275,7 +275,26 @@ perpendicular to the floor with `rotateX(-90deg)` about its bottom edge, because
 glued to a squashed top read as a flat 2D badge ("the platforms are 2d now"); and a
 window standing in front of the pads' whole width hides both the pads behind it and the cord's
 middle, so wide the pads sit left of a smaller window and narrow the window is small at the front
-right with the cord routed up the left side.  **Every object in a scene is placed by a `[data-o]` rule, and every one of those is scoped
+right with the cord routed up the left side.  The sixth scene is the **switches on `how-it-works/`** (`.wd-figure`, the what it can do section
+in `css/styles.css`, `js/abilities-scene.js`), the fear figure: your computer on the floor with the
+agent's Setup tab open on **What it can do**, the app's own section, and the agent standing beside
+it among the four things the first card switches on. Its mechanism is the one nothing else on the
+site uses, **a thing that is set down**: every mark is a billboard standing on its own pad, and
+switching its ability off takes away the counter-rotation that stands it out of the floor, so it
+falls on its own foot and comes to rest lying on the pad, foreshortened with the floor. No fade and
+no disappearance, because the tool is still there and the agent is not holding it, which is the
+claim. TRUST.md governs it twice over: **never say the agent loses the job**, so the routes ("a
+routine can still nudge you", "the Jobs tab") are in the caption, and the window draws both cards'
+eight rows because that is what the screen has. Two things it taught. **A control bar outside the
+`role="img"` scene is body copy**, so `check-copy-length.py` charges the page for its labels where
+a caption and the labels inside the scene are free: the four in the app's own words cost 18 words,
+which is why this figure was paid for by cutting three restatements out of the page. And **a port
+that can be written on the type ladder should be**: the older ports write the app's px because
+those values have no rung, but 11, 12 and 8 are `--fs-2xs`, `--fs-xs` and `--radius-sm`, and the
+three rules this port would have duplicated exactly are shared with `.ch-win` instead, so
+`check-styles.py` ends where it started rather than three higher.
+
+**Every object in a scene is placed by a `[data-o]` rule, and every one of those is scoped
 to its own scene** (`.bz-scene [data-o=...]`, not a bare `[data-o=...]`): the names are short,
 three scenes each wanted `win`, `ember` and `l-you`, and a bare attribute selector ties with
 the scene's own class so the block written later wins in silence. It cost three live bugs

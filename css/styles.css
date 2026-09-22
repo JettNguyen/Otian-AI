@@ -13330,6 +13330,25 @@ html[data-theme="dark"] .booking-container iframe {
   text-underline-offset: 3px;
 }
 
+/* The second app's downloads, under the first app's. Archie for Business had a page of its
+   own until 2026-09-21 and everything on it but the file names was a pointer back here. A
+   rule above it, because this is a different product and not another platform of the same
+   one, and secondary buttons, because most readers want the app above. */
+.install-second {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line-muted);
+}
+
+.install-second h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: 12px;
+}
+
+.install-second .install-actions {
+  margin-top: 24px;
+}
+
 /* The app itself, in the homepage demo's frame, as a still: the recording is a 3 MB video and
    this page's job is the download, so the poster stands in and the caption links to the film. */
 .install-shot {

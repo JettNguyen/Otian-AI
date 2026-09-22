@@ -182,7 +182,27 @@
           <p><strong>Archie is in testing</strong> and not for sale yet (<a href="../personal/#status">here&rsquo;s where it stands</a>). <a href="../../questionnaire/">Join the waitlist</a> for launch news. The downloads above are testing builds; access depends on your account or trial eligibility. Public paid signup is closed.</p>
         </div>
 
-        <p class="install-req fade-up delay-3">Running a team? <a href="../business/install/">Archie for Business is a separate app, with its own download</a>.</p>
+        <!-- Archie for Business downloads, here since 2026-09-21. They had a page of their own
+             whose content was three paragraphs saying "read it on the other page": the Windows
+             warning, the keys and the help below are word for word the same for both apps, and
+             the only thing that was ever different is the file you download. js/download-feedback.js
+             was already written for two blocks on one page. -->
+        <div class="install-second fade-up delay-3">
+          <h2 id="business-heading">Running a team? Archie for Business is a second app.</h2>
+          <p class="install-req">It installs beside Archie, with its own data and its own keys, so one computer can run both and neither reads the other&rsquo;s. Two apps and two plans, bought separately. <a href="../business/">What a shared agent does, and what a business plan costs</a>.</p>
+
+          <div class="install-actions">
+            <div class="install-platform" data-os="mac">
+              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest.dmg" data-download-note="download-note-biz-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Business build for Mac</span></a>
+              <p class="download-note" id="download-note-biz-mac" role="status" aria-live="polite"></p>
+            </div>
+            <div class="install-platform" data-os="win">
+              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest-setup.exe" data-download-note="download-note-biz-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Business build for Windows</span></a>
+              <p class="download-note" id="download-note-biz-win" role="status" aria-live="polite"></p>
+            </div>
+            <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Business build for Windows</button><button type="button" class="install-other-btn" data-show="mac">Business build for Mac</button></p>
+          </div>
+        </div>
       </div>
 
       <figure class="install-shot fade-up delay-3">

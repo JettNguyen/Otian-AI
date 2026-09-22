@@ -13475,12 +13475,28 @@ html[data-theme="dark"] .booking-container iframe {
    the plan's own number still reads first. The leading "+" carries the meaning: it is the one
    character that says this is a second number and not a smaller version of the first. */
 .hm-plan-second {
-  margin: -6px 0 12px !important;
+  /* A soft panel rather than coloured ink, chosen by Jett from four rendered treatments on
+     2026-09-22 after the first attempt shipped invisible: --text-muted and --text-secondary are
+     1.15:1 apart in light and 1.12:1 in dark, so swapping one for the other was a weight change
+     with a rounding error attached. The neutral ramp had no room left below --text-secondary
+     before 13px type drops under the 4.5:1 floor, and every hue on this site already means
+     something, so the separation moved from the ink to the ground behind it.
+
+     Mixed from --text-primary rather than set as a colour, so one declaration lands in both
+     themes and on all three grounds: it darkens the white card, lightens the dark one, and sits
+     correctly on the lead card's terracotta tint, which a flat rgba would not have. 6%, walked
+     up until the block reads as its own thing at a glance and stopped before it looked like a
+     control the reader could press. */
+  background: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  margin: -2px 0 12px !important;
   /* Height for two lines whether or not the card has the second one, so the three paragraphs
      under these still start level. The comment on .hm-plan-price says why that matters: a row
      of cards half a line out of step reads as three unrelated boxes, and only the middle card
-     carries a qualifier. 13px at 1.4 is 18.2, plus 1 of margin, plus 11 at 1.4 is 15.4. */
-  min-height: 35px;
+     carries a qualifier. 13px at 1.4 is 18.2, plus 1 of margin, plus 11 at 1.4 is 15.4, plus
+     the panel's 16 of padding. */
+  min-height: 51px;
   font-size: var(--fs-sm);
   /* Lighter and more muted than the paragraph below, so it reads as an annotation on the price
      rather than a second bold sentence competing with it. Neutral rather than a hue on purpose

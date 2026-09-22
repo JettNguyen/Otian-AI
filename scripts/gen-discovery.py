@@ -111,7 +111,13 @@ def uncommitted():
     would then fail on the very next run because the commit moved the date underneath it. A file
     about to be committed is dated today, which is when it is going to be published.
     """
-    out = _git("status", "--porcelain", "-z")
+    # -uall, and the deploy on 2026-09-22 is why. Without it git collapses a brand-new directory
+    # to one entry ("?? trust/if-you-want-to-stop/") instead of naming the file inside it, so the
+    # page this function exists to date is the one page it cannot see. The sitemap then ships that
+    # entry with no <lastmod>, and the very next --check fails, because committing the page gives
+    # git log a date where there was none. A new page in a new folder is the commonest new page
+    # there is, so the default listing is wrong for exactly the case that matters.
+    out = _git("status", "--porcelain", "-uall", "-z")
     if out is None:
         return set()
     paths = set()

@@ -1127,14 +1127,19 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
    are the same app at different ceilings, so the words differ by one, and the terracotta and
    blue marks are the fastest way to tell the rows apart. Same two files each page's own hero
    carries. Decorative: the row says the name, so alt is empty and the mark adds nothing to
-   what a screen reader reads out. Sized off the row's own text so it never sets the height. */
+   what a screen reader reads out. Sized off the row's own text so it never sets the height.
+
+   THE TWO MENUS ONLY, NOT THE FOOTER (2026-09-22, Jett). The footer column is a plain list of
+   links in one type size and the marks read as clutter in it; the dropdown and the drawer are
+   where a reader is choosing between the two editions, which is the job the marks do. */
 .nav-row-mark {
   width: 1.15em;
   height: 1.15em;
   margin-right: 9px;
   flex-shrink: 0;
-  /* The two menus that carry it lay their rows out with flex, which ignores this; the footer
-     column lays them out as blocks, which does not. One number covers both. */
+  /* Both menus that carry it lay their rows out with flex, which ignores this. Kept because it
+     costs nothing and is what a third home for the mark would need; the footer, which laid its
+     rows out as blocks and did need it, no longer carries one. */
   vertical-align: -0.22em;
 }
 
@@ -13508,12 +13513,19 @@ html[data-theme="dark"] .booking-container iframe {
   font-weight: 500;
   line-height: 1.4;
   color: var(--text-muted);
-  /* Off the global `p { text-wrap: pretty }`. Pretty balances a two-line block to avoid a short
-     last line, and on a short phrase in a narrow card that reads as breaking early for no
-     reason: at 150px it put "+ $1 to $5 to the / AI company" where a plain wrap fits "to the
-     AI", and it moved the whole qualifier onto its second line with "at" stranded above it.
-     Greedy wrapping is right for two short lines that are already near the card's width. */
-  text-wrap: normal;
+  /* Off the global `p { text-wrap: pretty }`. Pretty balances a block to avoid a short last
+     line, and on a short phrase in a narrow card that reads as breaking early for no reason: at
+     175px it gave "+ $1 to $5 to the / AI company" where a plain wrap fits "to the AI", and it
+     stranded a single "a" above "handful of tasks a day". Greedy wrapping is right for two
+     short lines already near the card's width.
+
+     IT MUST BE `wrap`, NOT `normal`. `normal` is not a value of this property, so it is dropped
+     as invalid and the inherited `pretty` keeps applying, which looks exactly like the rule is
+     not there: shipped 2026-09-22, and the render that was supposed to prove it was taken at a
+     width where the line fit on one line anyway, so it proved nothing. The longhand is set
+     beside the shorthand for engines that carry `text-wrap-style` without the shorthand. */
+  text-wrap: wrap;
+  text-wrap-style: auto;
 }
 
 /* The qualifier that has to travel with "$1 to $5": the measured light band is one person at a

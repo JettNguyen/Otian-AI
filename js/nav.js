@@ -715,6 +715,19 @@
   }
 
   function shape(el) {
+    /* NOT THE PLAN CARDS. They sit inside .hm-wrap, so `.hm-wrap p` caught them, but they are
+       the opposite of what this is for: the wedge shapes a CENTERED block of prose that runs
+       three lines or more, and a card's copy is left-aligned in a column about 160px wide. At
+       that measure there is no wedge to cut, so it cut one anyway: the homepage price band
+       shipped "+ $1 to $5 / to the AI / company" above "a / handful of tasks a day", and the
+       card's own paragraph broke after "and", "160" and "$299".
+
+       Worth knowing for the next one: this cost four rounds on 2026-09-22 because the symptom
+       reads as a CSS problem and nothing in the stylesheet was responsible. Every fix aimed at
+       text-wrap, and the breaks were <br data-wedge> elements this file had inserted. If a
+       block on this site breaks somewhere a browser never would, read its innerHTML before
+       reading its computed style. */
+    if (el.closest && el.closest('.hm-plan')) return;
     clearBreaks(el);
     /* Last pass's widening is not this pass's answer. A resize changes what the parent
        has to give, so the block goes back to its designed measure and earns it again. */

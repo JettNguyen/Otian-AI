@@ -330,8 +330,9 @@ MAP = [
                      "archie/pricing/", "archie/mobile/"]),
     # Guided setup and consulting are two halves of one page as of 2026-09-14.
     ("Services we offer", ["services/"]),
-    ("Add-ons", ["skills-marketplace/browse/", "skills-marketplace/what-is-an-add-on/",
-                 "skills-marketplace/find/", "skills-marketplace/commission/",
+    # what-is-an-add-on/ merged into the browse hero on 2026-09-21 and is a redirect stub;
+    # commission/ merged into services/ the same day.
+    ("Add-ons", ["skills-marketplace/browse/", "skills-marketplace/find/",
                  "skills-marketplace/for-developers/"]),
     ("Privacy, security and claims", ["trust/", "trust/proof/", "trust/details/",
                                       "trust/it-review/", "security/", "privacy-policy/",

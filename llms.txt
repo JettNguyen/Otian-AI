@@ -40,9 +40,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 ## Add-ons
 
 - [Add-on Marketplace](https://otianai.com/skills-marketplace/browse/): Browse the personalities, skills, and routines for your Archie agent. Join the waitlist to hear when the marketplace opens.
-- [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/): An add-on is anything you add to your Archie agent to make it more yours: a new skill, a friendlier voice, a task it handles on its own, or an extra helper. Coming with Archie's launch.
 - [Find an Add-on](https://otianai.com/skills-marketplace/find/): Describe a job you want off your plate in plain words and see which Otian AI add-ons already do it. No account, no AI, and nothing you type leaves your browser.
-- [Commission an Add-on](https://otianai.com/skills-marketplace/commission/): If Archie can't do it yet, tell us what you need. Otian AI scopes it, quotes it per add-on, and builds it: it's yours, and it joins the marketplace, included with Archie for everyone who needs it after you.
 - [For Developers](https://otianai.com/skills-marketplace/for-developers/): Build an add-on for Archie, submit it for review, and it is listed on the marketplace under your name, included with Archie for everyone. Free to list, and open to any developer.
 
 ## Privacy, security and claims

@@ -160,7 +160,7 @@
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Compare</a>
         <span class="section-label fade-up">Compare</span>
         <h1 class="fade-up delay-1"><span class="cmp-vs"><span class="cmp-us">Archie</span> vs</span> OpenClaw, Hermes, Vellum and building it yourself.</h1>
-        <p class="hm-lede fade-up delay-1">OpenClaw, Hermes and Vellum are free, open source and run on your own computer, the same as Archie. If you enjoy the setup, they are a real choice, and this page will not pretend otherwise.</p>
+        <p class="hm-lede fade-up delay-1">OpenClaw, Hermes and Vellum run on your own computer and cost nothing to run. So does Archie, free on an AI account of your own at 20 jobs a day. Theirs is open source and ours is not, and if you enjoy the setup they are a real choice: this page will not pretend otherwise.</p>
         <p class="hm-micro fade-up delay-2">Archie is in testing. <a href="../../archie/personal/#status">Where it stands&nbsp;&rarr;</a> Checked against the sources below on September 18, 2026.</p>
       </div>
     </section>
@@ -427,7 +427,7 @@
               </tr>
               <tr>
                 <td data-label="">What you pay</td>
-                <td data-label="Archie" class="is-archie"><span class="cost-num">$30</span><a class="src-cite" href="../../archie/pricing/"><span class="sr-only">Source </span>4</a> a month, plus your own AI usage</td>
+                <td data-label="Archie" class="is-archie">Nothing at 20 jobs a day, on an AI account of your own. <span class="cost-num">$30</span><a class="src-cite" href="../../archie/pricing/"><span class="sr-only">Source </span>4</a> a month takes the limit off. Your own AI usage, either way</td>
                 <td data-label="OpenClaw, Hermes, Vellum, or yours">Your own AI usage, and your time</td>
             </tr>
             </tbody>
@@ -462,7 +462,45 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="both-heading">
+    <!-- ==============================
+    Why we charge
+    The objection this whole page sits under, in the words a reader actually uses: three good
+    agents cost nothing, so why pay for this one. It sits AFTER "Where your own build wins" on
+    purpose, because that section is the question and this is the answer to it. The answer is
+    two facts rather than an argument. First, Archie has a free tier of its own, which this page
+    did not carry at all while its table priced Archie at $30 and nothing else (positioning,
+    2026-09-18: the free tier is what answers the competitive objection, and it was buried).
+    Second, open code is paid for somewhere other than the app on all three of the others, every
+    figure sourced in the fold below and each of them in FACTS.md. Nothing here calls free
+    suspect: all three are named as honest ways to fund an agent, because they are, and the
+    third item hands the reader the check we can offer in place of the one we cannot.
+    ============================== -->
+    <section class="section" id="why-paid" aria-labelledby="why-paid-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label fade-up">Why we charge</span>
+          <h2 id="why-paid-heading" class="fade-up delay-1">Archie is free too, and its code is still not published.</h2>
+          <p>OpenClaw, Hermes and Vellum cost nothing to run and can be read line by line. So the fair question is what ours is asking money for, and the first part of the answer is that a working Archie does not cost anything either.</p>
+        </div>
+
+        <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
+          <div class="calm-list-item">
+            <span class="calm-list-label">Archie is free on an AI account of your own</span>
+            <p>Paste a key from an AI company and Archie opens, with no card and no plan. Free means 20 jobs a day, and a job is one piece of work: a reply to you, a routine running, or an email it reacts to. The count starts again at midnight, and five of the twenty are held back for what you ask yourself, so an overnight routine cannot spend the day before you sit down. A plan takes the limit off and runs up to ten agents<a class="src-cite" href="../../archie/pricing/"><span class="sr-only">Source </span>4</a>. So the first choice here is not free against paid.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Open code gets paid for somewhere other than the app</span>
+            <p>Nous sells credits and hosted services for Hermes, $0 to $200 a month. Vellum&rsquo;s plans are computers of a given size, $30 to $200 a month, with use beyond a plan at $1 a credit. OpenClaw sells nothing at all, and is stewarded by a non-profit<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a>. Three honest ways to fund an agent you give away, and in none of them is the app the thing being sold. We charge for Archie itself, which is the arrangement where the thing you pay for and the thing we work on are the same thing.</p>
+          </div>
+          <div class="calm-list-item">
+            <span class="calm-list-label">Taking our word for what is inside, and what to check instead</span>
+            <p>That is the real cost of closed code, and it has a remedy you can run yourself. Published code tells you what a program was written to do; a network monitor tells you what the copy on your computer actually did. Install one, use Archie, and hold what it shows against the hostnames we publish: the <a href="../../trust/">Trust page</a> lists every one of them and walks the whole check in about ten minutes. If reading the source is the check you want, all three of them have it and we do not.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="both-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Worth saying</span>
@@ -498,6 +536,10 @@
                 <span class="calm-list-label"><span class="src-n">6</span>Where your account tokens sit</span>
                 <p>Archie keeps the tokens for your connected accounts in your computer&rsquo;s own password store. What that means, and every outbound connection it makes, are on the <a href="../../trust/">Trust page</a>.</p>
               </div>
+              <div class="calm-list-item" id="src-money">
+                <span class="calm-list-label"><span class="src-n">7</span>What the three sell, from their own pages</span>
+                <p>Read September 16, 2026. Nous Portal plans for Hermes run from $0 to $200 a month for credits and hosted services, and no tier names are published, so no figure between those two is quoted here (<a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a>). Vellum is &ldquo;free to download and start&rdquo;, and its plans are Mighty at $30 a month, Super at $100 and Ultra at $200, each described as a computer of a given size (Mighty is a &ldquo;Small computer 1 vCPU / 2 GiB, 10 GB storage&rdquo;), with usage beyond a plan metered at &ldquo;$1 = 1 credit&rdquo; (<a href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank">vellum.ai/pricing</a>). OpenClaw: &ldquo;No subscription. No hosted tier. No token&rdquo;, and it &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; (<a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>).</p>
+              </div>
               <div class="calm-list-item">
                 <span class="calm-list-label">On local models</span>
                 <p>Said plainly because it is true: a locally run model is more private than a hosted one. Archie can bind a model running on your own computer, and most people will connect an AI account instead, so the honest comparison is between a hosted setup and a local one rather than between us and you. Our claim has always been about custody, that no server of ours holds your content, and never about being the most private option available.</p>
@@ -508,7 +550,7 @@
       </div>
     </section>
 
-    <section class="section section-alt" aria-label="Call to action">
+    <section class="section" aria-label="Call to action">
       <div class="hm-wrap hm-head hm-cta">
         <h2 class="fade-up">Rather not spend the evenings on a build?</h2>
         <div class="hm-actions fade-up">

@@ -13468,10 +13468,34 @@ html[data-theme="dark"] .booking-container iframe {
   margin: 0;
 }
 
-.hm-plan-alt {
-  margin-top: 10px !important;
-  padding-top: 10px;
-  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+/* The second bill, on the card it belongs to. Added 2026-09-22, and it is the whole point of
+   that pass: the price above it is what WE charge, and the AI company's bill was living in a
+   lede, so three cards taken in at a glance were showing half the cost each. It sits one step
+   under the price, in the price's own block rather than with the paragraph, and it is muted so
+   the plan's own number still reads first. The leading "+" carries the meaning: it is the one
+   character that says this is a second number and not a smaller version of the first. */
+.hm-plan-second {
+  margin: -6px 0 12px !important;
+  /* Height for two lines whether or not the card has the second one, so the three paragraphs
+     under these still start level. The comment on .hm-plan-price says why that matters: a row
+     of cards half a line out of step reads as three unrelated boxes, and only the middle card
+     carries a qualifier. 13px at 1.4 is 18.2, plus 1 of margin, plus 11 at 1.4 is 15.4. */
+  min-height: 35px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* The qualifier that has to travel with "$1 to $5": the measured light band is one person at a
+   handful of tasks a day, and the figure reads as the general case without it. Micro type on
+   its own line, so it is a footnote to the number above rather than a third claim. */
+.hm-plan-second small {
+  display: block;
+  margin-top: 1px;
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  color: var(--text-muted);
 }
 
 /* The AI bill. Its own line under the cards rather than fine print inside one, because it is
@@ -13487,6 +13511,15 @@ html[data-theme="dark"] .booking-container iframe {
   text-align: center;
 }
 
+/* The plan where the second bill is ours, moved out of the lead card on 2026-09-22. A rule
+   above it rather than more space, because it is an alternative to all three cards and not a
+   fourth note about them. */
+.hm-plan-note--alt {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+}
+
 @media (max-width: 860px) {
   .hm-plans { grid-template-columns: 1fr; gap: 14px; }
   /* Stacked, the lead card is no longer in the middle, so the border is doing nothing but
@@ -13497,6 +13530,9 @@ html[data-theme="dark"] .booking-container iframe {
      so on a phone the three prices are already at this size. Stating it keeps the rule on
      the type ladder instead of one rung off it for a 0.05rem nobody can see. */
   .hm-plan-price { font-size: var(--fs-7xl); }
+  /* Stacked, nothing is beside anything, so the reserved second line is a gap under two of the
+     three cards and nothing else. Levelling only matters in a row. */
+  .hm-plan-second { min-height: 0; }
 }
 
 /* ==============================

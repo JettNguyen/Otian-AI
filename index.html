@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20260922-1" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20260922-2" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -1482,45 +1482,69 @@
          Three cards, deliberately thin, kept exactly as they were when they sat under the setup
          steps. Everything a purchase actually turns on (what the trial does and does not reach,
          the proxy disclosure that has to sit beside the free credits, cancellation) lives on
-         archie/pricing/ and stays there. The AI bill gets its own line below the cards rather than
-         a footnote inside one: it is a real second cost that does not come to us, and the Standard
-         requires it stated before the decision point rather than after.
+         archie/pricing/ and stays there.
+
+         Reworked 2026-09-22 on Jett's read that the band had "a bit too much text" and that he
+         could not glance at it and understand it. Two changes, and the first is the one that
+         matters: THE BIG NUMBER ON A CARD WAS NOT THE NUMBER YOU PAY. There are two bills here,
+         ours and the AI company's, and the second one lived in a 62-word lede above the cards,
+         so a reader taking the cards in at a glance got half the cost. Each card now carries its
+         own second line, one step under the price, and the AI bill is on the card it belongs to
+         rather than in a paragraph that applies to all three.
+
+         (A receipt with the two bills as rows and a total at the bottom was built first and
+         thrown away: it made the arithmetic explicit and stopped being a card. Jett, on seeing
+         it: "i cannot glance at it and understand it. i have to read it like a receipt rather
+         than a card." A card is a glance object and a receipt is a read-it-down object, and
+         this band has to be the first. Do not rebuild it as a table.)
+
+         The second change is the lede, which is now one line defining the term the heading uses
+         and nothing else. The figures it used to carry are on the cards, the "where those
+         figures come from" link is the measured link below, and the qualifier that has to travel
+         with "$1 to $5" (one person, a handful of tasks a day) is the micro line under it rather
+         than a sentence of its own.
+
+         The plan where we buy the AI came out of the lead card and onto its own line below, at
+         Jett's direction. It is the option a reader with no AI account wants most and it was the
+         hardest thing on the band to find, sitting as fine print inside one of three cards. Its
+         two caveats ride with it, per TRUST.md's AI-included entry: the $25 refills and does not
+         roll over, and email and text replies do not run on it.
+
+         205 words to 192, and every one of them on screen: nothing here is behind a control.
          ============================== -->
     <section class="section day-price" aria-labelledby="price-heading">
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Pricing</span>
         <h2 id="price-heading" class="fade-up">Free on your own AI account, or $30 a month.</h2>
-        <p class="hm-lede fade-up"><strong>That AI account</strong> is yours: Claude, ChatGPT, Gemini or one of four others. You pay them directly for the thinking your agent does, and we add nothing to it. For one person at a handful of tasks a day that is $1 to $5 a month. <a href="archie/pricing/#ai-cost">Where those figures come from&nbsp;&rarr;</a></p>
+        <p class="hm-lede fade-up">An AI account is with Claude, ChatGPT, Gemini or one of four others. You pay them directly, and we add nothing to it.</p>
         <div class="hm-plans fade-up">
           <article class="hm-plan">
             <span class="hm-plan-label">Free</span>
-            <div class="hm-plan-price hm-plan-price--words">Free<span>no card</span></div>
-            <p>14 days of everything on our AI credits, or 20 jobs a day for as long as you like on an AI account of your own. One agent. Archie for Business is a plan from the start.</p>
+            <div class="hm-plan-price hm-plan-price--words">Free<span>one agent</span></div>
+            <p class="hm-plan-second">+ a few dollars to the AI company</p>
+            <p>20 jobs a day, free for as long as you like. Or 14 days on our AI credits first: no account, no card.</p>
           </article>
           <article class="hm-plan hm-plan--lead">
             <span class="plan-flag">Our pick</span>
             <span class="hm-plan-label">Archie</span>
             <div class="hm-plan-price">$30<span>a month</span></div>
-            <p>Or $299 a year. Up to 10 agents, and every one of the 160 add-ons.</p>
-            <p class="hm-plan-alt">Or <a href="archie/pricing/#ai-included">$59 with the AI included</a>, with $25 of monthly usage; email and text replies need an AI account of your own.</p>
+            <p class="hm-plan-second">+ $1 to $5 to the AI company<small>at a handful of tasks a day</small></p>
+            <p>Up to 10 agents, and every one of the 160 add-ons. $299 for the year.</p>
           </article>
           <article class="hm-plan">
             <span class="hm-plan-label">Archie for Business</span>
             <div class="hm-plan-price">$99<span>a month</span></div>
-            <p>Or $999 a year. Up to 50 agents, and any of them can answer your whole team.</p>
+            <p class="hm-plan-second">+ what your team uses</p>
+            <p>Up to 50 agents, and any of them can answer your whole team. $999 for the year.</p>
           </article>
         </div>
-        <!-- Our own meter, then the bill that is not ours, in that order. The first sentence is
-             the contrast a reader is actually shopping on and the page never drew it: platforms
-             in this category commonly bill a subscription and then meter the work on top of it,
-             so "the number above is the number" is worth saying out loud. It is scoped to the
-             $30 plan on purpose. On the plan with the AI included there is $25 of usage a month
-             and the agent pauses when it is spent, which is not us charging more but is also not
-             "use it as much as you like", and an unscoped sentence here would have read as the
-             second thing. The AI bill follows immediately, because a capability and its catch
-             belong in the same breath, and the measured range is one link away rather than an
-             estimate we invented. -->
-        <p class="hm-plan-note fade-up">On the $30 plan, what we charge does not move with how much you use it: no credits to buy, nothing counted per task. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">What the AI costs, measured&nbsp;&rarr;</a></p>
+        <!-- Our own meter, then the plan where the second bill is ours. The first sentence is a
+             contrast a reader is actually shopping on: platforms in this category commonly bill
+             a subscription and then meter the work on top of it, so "the number above is the
+             number" is worth saying out loud, and the measured range is one link away rather
+             than an estimate we invented. -->
+        <p class="hm-plan-note fade-up">No credits to buy, nothing counted per task. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">What the AI costs, measured&nbsp;&rarr;</a></p>
+        <p class="hm-plan-note hm-plan-note--alt fade-up">Don&rsquo;t want a second account? <a href="archie/pricing/#ai-included">$59 a month and we buy the AI for you</a>: $25 of usage each month, and your agent waits for next month if that runs out. Email and text replies need an AI account of your own.</p>
         <p class="calm-note calm-note--center fade-up"><a href="archie/pricing/">Full pricing, and how the trials work &rarr;</a></p>
       </div>
     </section>
@@ -1638,10 +1662,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20260922-1"></script>
-  <script src="js/ember.js?v=20260922-1" defer></script>
-  <script type="module" src="js/account-nav.js?v=20260922-1"></script>
-  <script src="js/home.js?v=20260922-1" defer></script>
+  <script src="js/nav.js?v=20260922-2"></script>
+  <script src="js/ember.js?v=20260922-2" defer></script>
+  <script type="module" src="js/account-nav.js?v=20260922-2"></script>
+  <script src="js/home.js?v=20260922-2" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

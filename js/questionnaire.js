@@ -42,7 +42,7 @@
     audience: {
       section: 'Get started',
       bot: [
-        'Hi, I’m Ember. A few quick questions and we’ll point you to the right place. Change any answer as we go.',
+        'Hi, I’m Ember. A few quick questions and we’ll point you to the right place. Change any answer as we go, and nothing you type is sent until you press the button at the end.',
         'First: who would your agent work for? (An agent is AI that does tasks for you, like sorting email, rather than just answering questions.)'
       ],
       type: 'choice',

@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260922-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260922-4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -463,100 +463,102 @@
     </section>
 
     <!-- ==============================
-    Why we charge, drawn
+    Why we charge
 
-    The objection this page sits under, in the words Jett put it in: people want to know why we
-    charge for more agents and for the limit coming off, when lifting either costs us nothing and
-    the other three give the app away. So the answer is not "we have costs". It is WHICH costs,
-    said out loud, with the half that flatters nobody first.
+    The objection this page sits under: three good agents cost nothing, so why pay for this one.
+    It sits AFTER "Where your own build wins" because that section is the question.
 
-    It shipped as three paragraphs and Jett cut them the same day ("too much words. people want a
-    quick answer that they don't have to read up on"), so the argument is the two lists and the
-    prose is the caption. 587 words to 52. What survives is the honest shape: the cap is not a
-    cost we are recovering, the app existing is, and free is a line rather than a taste.
+    THREE VERSIONS SHIPPED IN ONE DAY AND THE FIRST TWO WERE THE WRONG ARGUMENT. 587 words of
+    prose, then two lists of what costs us nothing against what costs us every month. Jett on the
+    second: "i feel like the visuals and explanation still doesn't justify the pricing." He was
+    right, and the reason is worth keeping: an argument from OUR COSTS loses, because lifting a
+    limit costs us nothing and the reader can work that out. The argument that holds is which way
+    of getting paid we picked, since four of the five send a bill the reader cannot see.
 
-    THE SECOND LIST IS THE LIT ONE, because it is what the money buys. The first list is the
-    concession, and the heading already carries it.
+    SAME SPINE AS archie/pricing/#why-paid, with the four products standing on the rows. Same
+    object, two cuts: there the reader holds our price list, here they hold three free agents.
 
-    EVERY CHIP ON THE COSTS SIDE HAS TO BE AIRTIGHT, and two were not on the first pass.
-    "signing the builds" came off: we hold Apple's certificate and archie/install/ says plainly
-    that the Windows one is not bought yet, so the chip was true of one build and false of the
-    other on a page a reader may have arrived from. And the mailbox chip is not decoration: it is
-    the one thing here we pay for per message (TRUST.md's phone entry), so a figure claiming
-    another job costs us nothing that left it out would be true of the app and false of us.
-    Nothing about headcount appears anywhere: "two people wrote it" is smallness as a defence.
+    THE PLACEMENTS ARE EACH PRODUCT'S ENTRY PLAN, and the frame is what makes one row each
+    honest. Counting Vellum's over-plan credits as "charge per use" would mean counting our own
+    $59 plan the same way, and a rule applied to them and not to us is what TRUST.md's competitor
+    table exists to stop. Entry plans are symmetric: Nous sells credits, Vellum sells a computer,
+    we sell the app, OpenClaw sells nothing. Sources are in the fold below, source 7.
 
-    FLAT, AND ON PURPOSE. The staged-scene direction is for a page's one argument figure, and
-    this is a reference figure, read in one glance and compared across two lists, which is what
-    flat does fastest. Nothing moves in it, per rule 2: no motion here would be carrying a claim.
+    "TAKE YOUR DATA" HAS NOBODY ON IT AND SAYS SO IN WORDS. The row stays because the menu has to
+    be the whole menu, and it is labelled "nobody here" rather than left blank, so no reader can
+    read an empty cell as an unnamed accusation against one of the four.
     ============================== -->
     <section class="section" id="why-paid" aria-labelledby="why-paid-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Why we charge</span>
-          <h2 id="why-paid-heading" class="fade-up delay-1">Your tenth agent costs us nothing to switch on.</h2>
+          <h2 id="why-paid-heading" class="fade-up delay-1">Free code still gets paid for.</h2>
         </div>
 
-        <figure class="explain-figure mt-40 fade-up delay-1" id="whoCharges">
-          <svg class="explain-svg--desktop" viewBox="0 0 600 228" role="img" aria-labelledby="wc-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
-            <title id="wc-t">Two lists. A second agent, a tenth agent and 500 more jobs today cost us nothing. Writing Archie, keeping your connections working, the mailbox your phone uses and answering you cost us every month, however much you use it.</title>
+        <figure class="explain-figure mt-40 fade-up delay-1" id="fiveWays">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 260" role="img" aria-labelledby="fiveWays-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="fiveWays-t">Five ways an app gets paid for, and who is on each. Hermes charges per use, in credits. Vellum rents you a computer. Nobody here takes your data. OpenClaw is paid by someone else: a non-profit stewards it. Archie charges for the app, $30 a month, or free at 20 jobs a day.</title>
             <style>
-              .wc-panel{fill:currentColor;opacity:.04}
-              .wc-panel--ours{fill:var(--accent);opacity:.08}
-              .wc-eye{fill:currentColor;opacity:.62;font-size:12px;font-weight:650}
-              .wc-eye--ours{fill:var(--accent-ink);opacity:1}
-              .wc-chip{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1}
-              .wc-chip--ours{stroke:var(--accent)}
-              .wc-chip-t{fill:currentColor;opacity:.72;font-size:12px;font-weight:600;text-anchor:middle}
-              .wc-chip-t--ours{opacity:1}
-              .explain-svg--mobile .wc-eye,.explain-svg--mobile .wc-chip-t{font-size:11px}
+              .ways-row{fill:currentColor;opacity:.035}
+              .ways-row--ours{fill:var(--accent);opacity:.1}
+              .ways-way{fill:currentColor;opacity:.72;font-size:13px;font-weight:650}
+              .ways-way--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
+              .ways-cost{fill:currentColor;opacity:.55;font-size:12px}
+              .ways-cost--ours{opacity:.85}
+              .ways-who{fill:currentColor;opacity:.62;font-size:12.5px;font-weight:650;text-anchor:end}
+              .ways-who--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
+              .explain-svg--mobile .ways-way{font-size:11px}
+              .explain-svg--mobile .ways-cost{font-size:10.5px}
+              .explain-svg--mobile .ways-who{font-size:11px}
             </style>
-            <rect class="wc-panel" x="6" y="8" width="588" height="82" rx="14"/>
-            <text class="wc-eye" x="28" y="34">Costs us nothing</text>
-            <rect class="wc-chip" x="28" y="46" width="119" height="28" rx="14"/>
-            <text class="wc-chip-t" x="87.5" y="64.32">a second agent</text>
-            <rect class="wc-chip" x="157" y="46" width="105" height="28" rx="14"/>
-            <text class="wc-chip-t" x="209.5" y="64.32">a tenth agent</text>
-            <rect class="wc-chip" x="272" y="46" width="148" height="28" rx="14"/>
-            <text class="wc-chip-t" x="346" y="64.32">500 more jobs today</text>
-            <rect class="wc-panel wc-panel--ours" x="6" y="104" width="588" height="116" rx="14"/>
-            <text class="wc-eye wc-eye--ours" x="28" y="130">Costs us every month, however much you use it</text>
-            <rect class="wc-chip wc-chip--ours" x="28" y="142" width="108" height="28" rx="14"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="82" y="160.32">writing Archie</text>
-            <rect class="wc-chip wc-chip--ours" x="146" y="142" width="229" height="28" rx="14"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="260.5" y="160.32">keeping your connections working</text>
-            <rect class="wc-chip wc-chip--ours" x="28" y="176" width="198" height="28" rx="14"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="127" y="194.32">the mailbox your phone uses</text>
-            <rect class="wc-chip wc-chip--ours" x="236" y="176" width="114" height="28" rx="14"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="293" y="194.32">answering you</text>
-
+            <rect class="ways-row" x="6" y="14" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="39">Charge per use</text>
+            <text class="ways-cost" x="190" y="39">the bill moves with how much it helps</text>
+            <text class="ways-who" x="574" y="39">Hermes</text>
+            <rect class="ways-row" x="6" y="62" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="87">Rent you a computer</text>
+            <text class="ways-cost" x="190" y="87">your work runs on theirs, not yours</text>
+            <text class="ways-who" x="574" y="87">Vellum</text>
+            <rect class="ways-row" x="6" y="110" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="135">Take your data</text>
+            <text class="ways-cost" x="190" y="135">the bill is your data</text>
+            <text class="ways-who" x="574" y="135">nobody here</text>
+            <rect class="ways-row" x="6" y="158" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="183">Someone else pays</text>
+            <text class="ways-cost" x="190" y="183">lasts as long as they keep paying</text>
+            <text class="ways-who" x="574" y="183">OpenClaw</text>
+            <rect class="ways-row ways-row--ours" x="6" y="206" width="588" height="40" rx="10"/>
+            <text class="ways-way ways-way--ours" x="24" y="231">Charge for the app</text>
+            <text class="ways-cost ways-cost--ours" x="190" y="231">$30 a month, or free at 20 jobs a day</text>
+            <text class="ways-who ways-who--ours" x="574" y="231">Archie</text>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 284" role="img" aria-labelledby="wcm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="wcm-t">Two lists. A second agent, a tenth agent and 500 more jobs today cost us nothing. Writing Archie, keeping your connections working, the mailbox your phone uses and answering you cost us every month, however much you use it.</title>
-            <rect class="wc-panel" x="4" y="8" width="332" height="111" rx="14"/>
-            <text class="wc-eye" x="20" y="33">Costs us nothing</text>
-            <rect class="wc-chip" x="20" y="45" width="105" height="26" rx="13"/>
-            <text class="wc-chip-t" x="72.5" y="61.96">a second agent</text>
-            <rect class="wc-chip" x="133" y="45" width="92" height="26" rx="13"/>
-            <text class="wc-chip-t" x="179" y="61.96">a tenth agent</text>
-            <rect class="wc-chip" x="20" y="77" width="131" height="26" rx="13"/>
-            <text class="wc-chip-t" x="85.5" y="93.96">500 more jobs today</text>
-            <rect class="wc-panel wc-panel--ours" x="4" y="133" width="332" height="143" rx="14"/>
-            <text class="wc-eye wc-eye--ours" x="20" y="158">Costs us every month, however much you use it</text>
-            <rect class="wc-chip wc-chip--ours" x="20" y="170" width="94" height="26" rx="13"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="67" y="186.96">writing Archie</text>
-            <rect class="wc-chip wc-chip--ours" x="20" y="202" width="203" height="26" rx="13"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="121.5" y="218.96">keeping your connections working</text>
-            <rect class="wc-chip wc-chip--ours" x="20" y="234" width="175" height="26" rx="13"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="107.5" y="250.96">the mailbox your phone uses</text>
-            <rect class="wc-chip wc-chip--ours" x="203" y="234" width="101" height="26" rx="13"/>
-            <text class="wc-chip-t wc-chip-t--ours" x="253.5" y="250.96">answering you</text>
-
+          <svg class="explain-svg--mobile" viewBox="0 0 340 316" role="img" aria-labelledby="fiveWays-tm" xmlns="http://www.w3.org/2000/svg">
+            <title id="fiveWays-tm">Five ways an app gets paid for, and who is on each. Hermes charges per use, in credits. Vellum rents you a computer. Nobody here takes your data. OpenClaw is paid by someone else: a non-profit stewards it. Archie charges for the app, $30 a month, or free at 20 jobs a day.</title>
+            <rect class="ways-row" x="4" y="12" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="34">Charge per use</text>
+            <text class="ways-who" x="320" y="34">Hermes</text>
+            <text class="ways-cost" x="20" y="53">the bill moves with how much it helps</text>
+            <rect class="ways-row" x="4" y="72" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="94">Rent you a computer</text>
+            <text class="ways-who" x="320" y="94">Vellum</text>
+            <text class="ways-cost" x="20" y="113">your work runs on theirs, not yours</text>
+            <rect class="ways-row" x="4" y="132" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="154">Take your data</text>
+            <text class="ways-who" x="320" y="154">nobody here</text>
+            <text class="ways-cost" x="20" y="173">the bill is your data</text>
+            <rect class="ways-row" x="4" y="192" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="214">Someone else pays</text>
+            <text class="ways-who" x="320" y="214">OpenClaw</text>
+            <text class="ways-cost" x="20" y="233">lasts as long as they keep paying</text>
+            <rect class="ways-row ways-row--ours" x="4" y="252" width="332" height="52" rx="10"/>
+            <text class="ways-way ways-way--ours" x="20" y="274">Charge for the app</text>
+            <text class="ways-who ways-who--ours" x="320" y="274">Archie</text>
+            <text class="ways-cost ways-cost--ours" x="20" y="293">$30 a month, or free at 20 jobs a day</text>
           </svg>
-          <figcaption>Lifting a limit costs us nothing, so the bill is for the app. Hermes sends the same bill as credits and Vellum as a computer to rent. OpenClaw sends none: a non-profit stewards it.<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a></figcaption>
+          <figcaption>What each one&rsquo;s paid plan is for, from their own pages, read September 16, 2026. OpenClaw has no plan: a non-profit stewards it. Only Archie&rsquo;s row is the app itself.<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a></figcaption>
         </figure>
 
-        <p class="hm-micro fade-up delay-1">The price is on the app, not on the work. Free is a line rather than a taste of one: 20 jobs a day on an AI account of your own, for as long as you like, and we never charge by the job.</p>
+        <p class="hm-micro fade-up delay-1">Archie is free too, at 20 jobs a day on an AI account of your own. Lifting that limit costs us nothing, and that is the point: it is where free stops, not a cost we are recovering.</p>
       </div>
     </section>
 
@@ -697,8 +699,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260922-3"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260922-3"></script>
-  <script src="../../js/demo-player.js?v=20260922-3"></script>
+  <script src="../../js/nav.js?v=20260922-4"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260922-4"></script>
+  <script src="../../js/demo-player.js?v=20260922-4"></script>
 </body>
 </html>

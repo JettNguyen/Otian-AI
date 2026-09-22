@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260922-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260922-4" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
@@ -358,79 +358,89 @@
     <!-- ==============================
     Why the plan costs anything
 
-    Jett, 2026-09-22: "people want to know why we charge to get multiple agents and unlimited
-    agent jobs. it doesn't really cost us money to do any of that unless it is the ai-included
-    plan." He is right, and the page priced three plans without ever answering it.
+    Jett, 2026-09-22, after two earlier attempts: "i feel like the visuals and explanation still
+    doesn't justify the pricing." Both earlier figures argued about OUR COSTS, which is the wrong
+    argument: the marginal cost of a tenth agent is nothing and a reader can work that out, so a
+    page defending the price by listing costs is defending it on the one ground it loses.
 
-    The answer is drawn rather than argued, and it is the one fact a reader can check against the
-    cards above: the bar stops growing. Three identical bars is the whole claim, which is why the
-    fourth row exists at all. Nothing here is invented: $30, 20 jobs a day and ten agents are
-    FACTS.md rows, and no figure is put on a level of use we have not sold.
+    The argument that holds is the CHOICE OF BUSINESS MODEL, not the size of the bill. There are
+    about five ways software gets paid for, four of them send a bill the reader cannot see, and
+    picking the visible one is the only claim here a competitor cannot print unchanged. So the
+    figure is the five ways with ours lit, and it replaced the flat-bar chart that stood here
+    (three identical $30 bars) because that one answered "does the price go up" and never
+    answered "why is there a price".
 
-    IT IS NOT THE COMPARE PAGE'S FIGURE. compare/building-it-yourself/#why-paid answers the same
-    question with two lists, what costs us nothing against what costs us every month, because
-    there the reader is holding three free agents in the other hand. Here they are holding our
-    own price list, so the drawing is our own price and the link at the foot carries the rest.
-    One page, one mechanism.
+    THE SAME SPINE RUNS ON compare/building-it-yourself/#why-paid with the four products placed on
+    the rows. Same object, two cuts: here the reader is holding our price list, there they are
+    holding three free agents. The "take your data" row is nobody's on either page and stays, so
+    the menu is the whole menu rather than the four options that flatter us.
+
+    WHAT IS NOT CLAIMED. Not that the other models are dishonest: each row is a real way to run a
+    business and the caption calls them bills, not tricks. And nothing here says we never earn
+    from usage, because the $59 plan does; that plan pauses rather than billing more, which is a
+    difference worth keeping but not one to lean on in a figure.
     ============================== -->
     <section class="section section-alt" id="why-paid" aria-labelledby="why-paid-heading">
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Why the plan costs anything</span>
-          <h2 id="why-paid-heading" class="fade-up delay-1">Ten agents cost the same as one. So does a busy day.</h2>
+          <h2 id="why-paid-heading" class="fade-up delay-1">You are not paying for agents. You are paying so nothing else has to.</h2>
         </div>
 
-        <figure class="explain-figure mt-48 fade-up delay-1" id="flatPrice">
-          <svg class="explain-svg--desktop" viewBox="0 0 600 216" role="img" aria-labelledby="pf-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
-            <title id="pf-t">What the plan costs at four levels of use. One agent at 20 jobs a day costs nothing. One agent with no limit, ten agents with no limit, and ten agents running all day are each $30 a month: the same bar three times.</title>
+        <figure class="explain-figure mt-40 fade-up delay-1" id="fiveWays">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 260" role="img" aria-labelledby="fiveWays-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="fiveWays-t">Five ways an app gets paid for. Charge per use, and the bill moves with how much it helps. Rent you a computer, and your work runs on theirs. Take your data, and the bill is your data. Let someone else pay, and it lasts as long as they keep paying. Or charge for the app, which is ours: $30 a month, or free at 20 jobs a day.</title>
             <style>
-              .pf-label{fill:currentColor;font-size:13px;font-weight:650}
-              .pf-rule{stroke:var(--line-muted);stroke-width:1}
-              .pf-bar{fill:var(--accent);opacity:.9}
-              .pf-stub{fill:currentColor;opacity:.2}
-              .pf-val{fill:currentColor;font-size:13px;font-weight:700}
-              .pf-free{fill:var(--accent-ink);font-size:15px;font-weight:700}
-              .explain-svg--mobile .pf-label,.explain-svg--mobile .pf-val{font-size:11px}
-              .explain-svg--mobile .pf-free{font-size:13px}
+              .ways-row{fill:currentColor;opacity:.035}
+              .ways-row--ours{fill:var(--accent);opacity:.1}
+              .ways-way{fill:currentColor;opacity:.72;font-size:13px;font-weight:650}
+              .ways-way--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
+              .ways-cost{fill:currentColor;opacity:.55;font-size:12px}
+              .ways-cost--ours{opacity:.85}
+              .ways-who{fill:currentColor;opacity:.62;font-size:12.5px;font-weight:650;text-anchor:end}
+              .ways-who--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
+              .explain-svg--mobile .ways-way{font-size:11px}
+              .explain-svg--mobile .ways-cost{font-size:10.5px}
+              .explain-svg--mobile .ways-who{font-size:11px}
             </style>
-            <text class="pf-label" x="6" y="39">One agent, 20 jobs a day</text>
-            <rect class="pf-stub" x="200" y="20" width="5" height="28" rx="2.5"/>
-            <text class="pf-free" x="216" y="40">Nothing</text>
-            <line class="pf-rule" x1="6" y1="59" x2="594" y2="59"/>
-            <text class="pf-label" x="6" y="89">One agent, no limit</text>
-            <rect class="pf-bar" x="200" y="70" width="230" height="28" rx="6"/>
-            <text class="pf-val" x="442" y="89">$30 a month</text>
-            <line class="pf-rule" x1="6" y1="109" x2="594" y2="109"/>
-            <text class="pf-label" x="6" y="139">Ten agents, no limit</text>
-            <rect class="pf-bar" x="200" y="120" width="230" height="28" rx="6"/>
-            <text class="pf-val" x="442" y="139">$30 a month</text>
-            <line class="pf-rule" x1="6" y1="159" x2="594" y2="159"/>
-            <text class="pf-label" x="6" y="189">Ten agents, running all day</text>
-            <rect class="pf-bar" x="200" y="170" width="230" height="28" rx="6"/>
-            <text class="pf-val" x="442" y="189">$30 a month</text>
+            <rect class="ways-row" x="6" y="14" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="39">Charge per use</text>
+            <text class="ways-cost" x="190" y="39">the bill moves with how much it helps</text>
+            <rect class="ways-row" x="6" y="62" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="87">Rent you a computer</text>
+            <text class="ways-cost" x="190" y="87">your work runs on theirs, not yours</text>
+            <rect class="ways-row" x="6" y="110" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="135">Take your data</text>
+            <text class="ways-cost" x="190" y="135">the bill is your data</text>
+            <rect class="ways-row" x="6" y="158" width="588" height="40" rx="10"/>
+            <text class="ways-way" x="24" y="183">Someone else pays</text>
+            <text class="ways-cost" x="190" y="183">lasts as long as they keep paying</text>
+            <rect class="ways-row ways-row--ours" x="6" y="206" width="588" height="40" rx="10"/>
+            <text class="ways-way ways-way--ours" x="24" y="231">Charge for the app</text>
+            <text class="ways-cost ways-cost--ours" x="190" y="231">$30 a month, or free at 20 jobs a day</text>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 216" role="img" aria-labelledby="pfm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="pfm-t">What the plan costs at four levels of use. One agent at 20 jobs a day costs nothing. One agent with no limit, ten agents with no limit, and ten agents running all day are each $30 a month: the same bar three times.</title>
-            <text class="pf-label" x="6" y="39">One agent, 20 jobs a day</text>
-            <rect class="pf-stub" x="154" y="20" width="5" height="28" rx="2.5"/>
-            <text class="pf-free" x="170" y="40">Nothing</text>
-            <line class="pf-rule" x1="6" y1="59" x2="334" y2="59"/>
-            <text class="pf-label" x="6" y="89">One agent, no limit</text>
-            <rect class="pf-bar" x="154" y="70" width="100" height="28" rx="6"/>
-            <text class="pf-val" x="262" y="89">$30 a month</text>
-            <line class="pf-rule" x1="6" y1="109" x2="334" y2="109"/>
-            <text class="pf-label" x="6" y="139">Ten agents, no limit</text>
-            <rect class="pf-bar" x="154" y="120" width="100" height="28" rx="6"/>
-            <text class="pf-val" x="262" y="139">$30 a month</text>
-            <line class="pf-rule" x1="6" y1="159" x2="334" y2="159"/>
-            <text class="pf-label" x="6" y="189">Ten agents, running all day</text>
-            <rect class="pf-bar" x="154" y="170" width="100" height="28" rx="6"/>
-            <text class="pf-val" x="262" y="189">$30 a month</text>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 316" role="img" aria-labelledby="fiveWays-tm" xmlns="http://www.w3.org/2000/svg">
+            <title id="fiveWays-tm">Five ways an app gets paid for. Charge per use, and the bill moves with how much it helps. Rent you a computer, and your work runs on theirs. Take your data, and the bill is your data. Let someone else pay, and it lasts as long as they keep paying. Or charge for the app, which is ours: $30 a month, or free at 20 jobs a day.</title>
+            <rect class="ways-row" x="4" y="12" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="34">Charge per use</text>
+            <text class="ways-cost" x="20" y="53">the bill moves with how much it helps</text>
+            <rect class="ways-row" x="4" y="72" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="94">Rent you a computer</text>
+            <text class="ways-cost" x="20" y="113">your work runs on theirs, not yours</text>
+            <rect class="ways-row" x="4" y="132" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="154">Take your data</text>
+            <text class="ways-cost" x="20" y="173">the bill is your data</text>
+            <rect class="ways-row" x="4" y="192" width="332" height="52" rx="10"/>
+            <text class="ways-way" x="20" y="214">Someone else pays</text>
+            <text class="ways-cost" x="20" y="233">lasts as long as they keep paying</text>
+            <rect class="ways-row ways-row--ours" x="4" y="252" width="332" height="52" rx="10"/>
+            <text class="ways-way ways-way--ours" x="20" y="274">Charge for the app</text>
+            <text class="ways-cost ways-cost--ours" x="20" y="293">$30 a month, or free at 20 jobs a day</text>
           </svg>
-          <figcaption>Lifting a limit costs us nothing, so we never charge by the job or by the agent. The plan pays for Archie itself. Your AI account is billed apart from it, and that bill does move with use.</figcaption>
+          <figcaption>Every app gets paid somehow, and there are about five ways. Four of them send you a bill you cannot see. We picked the one with a number on it.</figcaption>
         </figure>
 
-        <p class="price-note">The same question, standing next to the free and open-source agents: <a href="../../compare/building-it-yourself/#why-paid">what each one charges for&nbsp;&rarr;</a></p>
+        <p class="price-note">Lifting your limit costs us nothing: it is where free stops, not a cost. Ten agents cost the same as one. <a href="../../compare/building-it-yourself/#why-paid">Who pays, on each way&nbsp;&rarr;</a></p>
       </div>
     </section>
 
@@ -881,8 +891,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260922-3"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260922-3"></script>
-  <script src="../../js/demo-player.js?v=20260922-3"></script>
+  <script src="../../js/nav.js?v=20260922-4"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260922-4"></script>
+  <script src="../../js/demo-player.js?v=20260922-4"></script>
 </body>
 </html>

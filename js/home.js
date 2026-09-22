@@ -738,6 +738,16 @@
          the same phone, and it still turns with it. Wide, the conic is drawn and these go unread. */
       phone.style.setProperty('--chm-l', String(chamfer(310 + yaw * 0.7)));
       phone.style.setProperty('--chm-r', String(chamfer(130 + yaw * 0.7)));
+      /* AND WHICH SIDE THE WALL STANDS ON, NARROW. A box shows at most one of its two side faces,
+         and a positive yaw turns the phone's front to face right, so its LEFT side is the one
+         toward the camera; negative brings the right one out. The stylesheet multiplies --wall by
+         these, so the width is the same 8px whichever side it is on: the side is the projection's
+         and the thickness is not, which is the whole of that rule (see --wall). Six degrees rather
+         than a switch at zero, so the crossing inside the mail act's settle reads as a phone
+         turning through face on rather than as a jump; the pointer tilt is 3 degrees and cannot
+         flip an act on its own. */
+      phone.style.setProperty('--wlf', clamp(yaw / 6, 0, 1).toFixed(3));
+      phone.style.setProperty('--wrf', clamp(-yaw / 6, 0, 1).toFixed(3));
       floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
       stage.style.setProperty('--night', p.night.toFixed(3));

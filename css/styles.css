@@ -17737,12 +17737,36 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      inconsistent across sections and pages. i think that needs to be the priority first", and he
      asked for one fixed side everywhere).
 
-     So narrow the eleven become one: a wall standing --wall out past each side of the device, with
-     no depth of its own, so there is no projection to vary and both edges read the same in every
+     So narrow the eleven become one: a wall standing --wall out past ONE side of the device, with
+     no depth of its own, so there is no projection to vary and the edge reads the same in every
      act. --wall is in the layer's own space, which the scene scales with the phone, so it is a
-     fixed share of the phone's width at every size: 2px on a 256px phone, which is the 0.78 percent
-     the last three acts already drew, so the acts that looked right do not move and the two with a
-     bare right edge gain one.
+     fixed share of the phone's width at every size.
+
+     ONE SIDE MEANS ONE, AND IT MEANT BOTH UNTIL 2026-09-22. Jett asked for one fixed side
+     everywhere and got one fixed width on each of them, which is a different thing and reads as a
+     different object: a box shows at most one of its two side faces, so a wall on the far side is
+     thickness that cannot be there. On the left it also sat next to the lit chamfer, so the two
+     ran together into one broad band (Jett: "the left edge of the phone looks extra thick. it looks
+     like the thickness of the phone was transferred over to the left side too"). Measured at 390
+     across the phone's middle in light mode, the left edge was 13.8px of it, peaking at 130 against
+     a 229 page, where the right was the same width and peaked at 73.
+
+     THE SIDE FOLLOWS THE TURN AND THE WIDTH DOES NOT, and those are two separate promises. Pinning
+     it to the right was the first try the same day and it broke the one act that shoots the desk
+     from the other side (Jett: "when the phone tilts to the right in email manager, the phone loses
+     its 3d effect in mobile width because the left edge is not visible but the right edge is").
+     Narrow, the phone's yaw is the camera's plus its own: -20, -12, -16, -14 and -14 in five acts,
+     and +10 in the mail act, and a positive yaw turns the phone's front to face right, which brings
+     its LEFT side toward the camera. So js/home.js hands over --wlf and --wrf off the sign of that
+     yaw and the wall stands out on whichever side is showing. This is not the projection coming
+     back: the width is the same 8px whichever side it is on, and the yaw holds still inside an act,
+     so what Jett objected to on 2026-09-19 (a thickness that came and went between sections, 0.06
+     to 0.76 percent of the phone) cannot happen. The two sides cross over ±6 degrees rather than
+     switching at zero, and the only crossing the story makes with the phone on screen is inside the
+     mail act's settle, where it is nearly face on and a side of almost nothing is what a real phone
+     would show. The light is at the upper left in every act, so a right-hand wall is the dark side
+     and a left-hand one meets the lit chamfer; both are shaded from the chamfer's own tone on that
+     side out to the phone's back.
 
      THREE THINGS GO WITH THE STACK, and that is the point of doing it this way. The eleventh-root
      ramp is gone: it existed because eleven independently masked layers add up to something far
@@ -17761,12 +17785,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      not the bezels though"). Measured on the rim alone at nine in the morning: 24 to 28 down the
      body and 71 to 90 at 96 percent. The wall is the gradient's own middle instead, flat, so it is
      one tone from end to end and the only thing that changes down it is the fade. */
-  .day-phone { --wall: calc(8px * var(--dz, 1)); }
-  .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 var(--wall), transparent calc(var(--wall) + .5px), transparent calc(100% - var(--wall) - .5px), #000 calc(100% - var(--wall)), #000 100%); }
+  .day-phone { --wall: calc(8px * var(--dz, 1)); --wl: calc(var(--wall) * var(--wlf, 0)); --wr: calc(var(--wall) * var(--wrf, 1)); }
+  .day-phone { --edge-cut: linear-gradient(to right, #000 0, #000 var(--wl), transparent calc(var(--wl) + .5px), transparent calc(100% - var(--wr) - .5px), #000 calc(100% - var(--wr)), #000 100%); }
   .dp-device { -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask); }
   .day-phone .dp-edge { display: none; }
   .day-phone .dp-edge--back {
-    display: block; inset: 0 calc(-1 * var(--wall)); transform: none;
+    display: block; inset: 0 calc(-1 * var(--wr)) 0 calc(-1 * var(--wl)); transform: none;
     -webkit-mask-image: var(--phone-mask); mask-image: var(--phone-mask);
     -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
   }
@@ -17778,19 +17802,19 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      side turned 14 shows 8.5. The acts' own yaws would give 6.1 to 9.6, so 8 is the middle of what
      this story would really show, held still. The stack used to give 1.5 to 2.4 of it, because the
      eleven slabs taper inward toward the back and most of the depth rolls away behind the bezel
-     before it can be seen. And the wall is shaded ACROSS: the phone's back at the
-     silhouette, and the bezel's own chamfer where it meets the device, so the eye reads front face,
-     lit edge, side curving away. Across and not down is the rule this whole evening turned on: a
-     gradient down a slice puts a whole phone's corner inside the picture, a gradient across it is
-     the same everywhere the slice is cut, so it can say whatever it likes. --chm-l and --chm-r are
-     the chamfer's own tones, so the wall meets the bezel at the bezel's colour and turns with it. */
+     before it can be seen. And the wall is shaded ACROSS: the bezel's own chamfer where it meets
+     the device and the phone's back at the silhouette, so the eye reads front face, bevel, side
+     curving away. Across and not down is the rule this whole evening turned on: a gradient down a
+     slice puts a whole phone's corner inside the picture, a gradient across it is the same
+     everywhere the slice is cut, so it can say whatever it likes. --chm-l and --chm-r are the
+     chamfer's own tones, so the wall meets the bezel at the bezel's colour and turns with it. */
   .day-phone .dp-edge--back::before {
     background: linear-gradient(90deg,
       #090908 0,
-      #131312 calc(var(--wall) * .55),
-      rgb(var(--chm-l, 137) var(--chm-l, 137) calc(var(--chm-l, 137) * .97)) var(--wall),
-      rgb(var(--chm-r, 67) var(--chm-r, 67) calc(var(--chm-r, 67) * .97)) calc(100% - var(--wall)),
-      #131312 calc(100% - var(--wall) * .55),
+      #131312 calc(var(--wl) * .45),
+      rgb(var(--chm-l, 137) var(--chm-l, 137) calc(var(--chm-l, 137) * .97)) var(--wl),
+      rgb(var(--chm-r, 67) var(--chm-r, 67) calc(var(--chm-r, 67) * .97)) calc(100% - var(--wr)),
+      #131312 calc(100% - var(--wr) * .45),
       #090908 100%);
     -webkit-mask-image: var(--edge-cut); mask-image: var(--edge-cut);
   }

@@ -152,7 +152,17 @@ BUDGETS = {
     # services/, a whole page about that exact choice which did not exist when the block was
     # written: it is a fork and a door now, and its link no longer points at the guided-setup/
     # stub services/ replaced.
-    "how-it-works/index.html": 1400,
+    # Down to 1200 on 2026-09-21, page at 1,163, in the simplification pass, and the equipment
+    # lists went behind a fold on the same day. 171 words came off and none of them was a fact:
+    # the "ask it anything, not only jobs" paragraph was the homepage's own section restated in
+    # a footnote, the allowlist paragraph said the caption's point three ways, the custody
+    # paragraph under the moving-parts figure repeated that figure's caption and kept only the
+    # exception TRUST.md requires, and "On your own, or with us beside you" was a whole section
+    # summarising services/, which is now one line under the button where the reader is choosing
+    # anyway. The fold is the other half and it cuts no words: both equipment lists stay whole,
+    # because a page that recommends hardware and then names what you can skip is doing the
+    # reader a service, and the reader now opens it rather than walking past it.
+    "how-it-works/index.html": 1200,
     # Pricing prints every measured cost with its source, and a cut there reads
     # as a hidden fee. Raised from 2300 to 2700 on 2026-08-26, once, for the one
     # reason this page is allowed to grow: the repricing found a third place an

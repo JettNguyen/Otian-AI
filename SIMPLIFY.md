@@ -41,7 +41,7 @@ the outcome differs from what this file first proposed, the reason is written be
 | # | Decision | Answer | Shipped |
 |---|---|---|---|
 | 1 | Which page carries the product story | The homepage | Personal 1,271 to 939, Business 1,104 to 845, both mirrored |
-| 2 | Top bar | Four menus, Add-ons and Trust as plain links, Trust across the top | 15 rows where there were 22 |
+| 2 | Top bar | Four menus, Add-ons and Trust as plain links, Trust across the top | 15 rows where there were 22, then 19 the same evening: see the note below |
 | 3 | Services | One row, "Work With Us", under About | Its three anchor rows retired |
 | 4 | Archie Mobile | Keep the row and the page; the page says coming soon | Eyebrow reads "Coming soon"; no date invented |
 | 5 | The Otian Standard | Footer only | In the About column, beside its PDF |
@@ -54,6 +54,23 @@ page, `skills-marketplace/what-is-an-add-on/` into the Browse hero, and
 whole services side should be "cleaned up to be straightforward and easy to understand" with
 "minimal loss of detail", so Work With Us now opens on three ways to work with us and every
 step of all three survives; what came off was the restatement.
+
+**The top bar was finished the same evening, and this is the part the audit got wrong.**
+Add-ons and Trust shipped as plain links beside three menus, which Jett read as a bar you
+cannot predict: "clicking on a random one will either drop down a menu or take you to a
+different page." A top bar is a set of promises about what a click does, and a bar making two
+different promises with no way to tell which is which costs more than four rows save. So all
+five open a menu now, and the two new ones are kept tight on purpose: Add-ons has Browse All
+and Find an Add-on, Trust has What We Can and Can't See and Run the Checks Yourself, and the
+two rows that went to the footer this morning (Build One, For an IT Review) stay there. The
+footer keeps its five columns in the same order and carries a little more at the bottom of
+each, which is what a footer is for. Nineteen rows, one promise.
+
+Two more from the same review. **The two edition rows carry their marks**, terracotta for
+Personal and blue for Business, the same two files those pages' heroes use, because two rows
+that differ by one word are the slowest pair in the menu to tell apart. And **Archie Mobile
+sits above How It Works**, at Jett's ask: the three rows that name the product come first, and
+the row that explains it follows them.
 
 **Where the outcome differs from the plan in this file.**
 

@@ -228,15 +228,23 @@ def visible(*parts):
     return strip_tags(re.sub(r"<!--.*?-->", " ", read(*parts), flags=re.S))
 
 
+# Two forms, because the h1 was cut from 24 words to 18 on 2026-09-21 (Jett: the title is
+# too long) and "Archie is the only one that works" became "Only Archie works". Both say the
+# same thing and both are read here, so a later edit can go either way without touching this
+# file. What may NOT be dropped is the tail: the sentence sorts ten agents onto "your own
+# computer", and three of the other nine are there too. The h1 is only true because it asks
+# two things of the one agent left, so a truncation to the first clause is a false claim, not
+# a shorter one.
 compare_text = visible("compare", "index.html")
 binary = re.search(
-    r"(\w+) agents\. Archie is the only one that works on your own computer",
+    r"(\w+) agents\. (?:Archie is the only one that works|Only Archie works) on your own computer",
     compare_text,
 )
 require(
     binary is not None,
-    "compare/ no longer opens on the binary in the form this check reads "
-    "('<N> agents. Archie is the only one that works on your own computer...'). "
+    "compare/ no longer opens on the binary in either form this check reads "
+    "('<N> agents. Only Archie works on your own computer...' or '<N> agents. Archie is the "
+    "only one that works on your own computer...'). "
     "Fix the reader here before trusting this check again.",
 )
 
@@ -246,9 +254,10 @@ if binary:
     for page in BINARY_PAGES:
         where = "/".join(page)
         text = visible(*page)
+        low = text.lower()
         carries = (
-            "Archie is the only one that works on your own computer" in text
-            or "only Archie works on your own computer" in text
+            "archie is the only one that works on your own computer" in low
+            or "only archie works on your own computer" in low
         )
         if not carries:
             continue

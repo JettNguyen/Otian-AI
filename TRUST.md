@@ -3977,8 +3977,8 @@ paid plan executes.
 
 **The hub was cut to the binary, 2026-09-18.** Jett's direction: cut every sentence another
 of the nine could say unchanged, put the one line all nine fail where the reader lands first,
-and make the binary do the selling. The line is the h1 on `compare/`: ten agents, and Archie
-is the only one that works on your own computer and asks your permission first, with no off switch. It is the
+and make the binary do the selling. The line is the h1 on `compare/`: ten agents, and only
+Archie works on your own computer and asks first, with no off switch. It is the
 chart's own finding read as two yes-or-no questions, and a figure under the h1 sorts the ten
 marks by them: six leave at whose computer (Symphony by the reading above), three of the four
 on yours leave at whether asking your permission is a setting (Jett, the same evening: "asking as a
@@ -3995,6 +3995,17 @@ where it is true of all three. `compare/symphony/` merged into `compare/cloud-ag
 day (zero body inbound links, the product already named 31 times on the destination) and is a
 redirect stub; its one point the destination lacked, that Symphony is built for a phone first,
 is a clause there now.
+
+**The h1 was cut from 24 words to 18 on 2026-09-21** (Jett: the title is too long), and two
+things about the cut are the rule for any later one. "Archie is the only one that works"
+became "Only Archie works", which says the same thing in four fewer words, and
+`check-claim-drift.py` reads both forms now so the wording can move without an edit there.
+But "asks your permission first" became "asks first", and **the word permission has to stay
+on the page**: the lede directly under the h1 and both questions in the figure still say it,
+which is what Jett asked for on 2026-09-18 when "asking as a setting" alone read as vague.
+The tail cannot go at all. The sentence sorts ten agents onto "your own computer" and three
+of the other nine are there too, so the h1 is true only because it asks two things of the
+one agent left. Cutting it to the first clause would be a false claim, not a shorter one.
 
 **The egress clause moved from that figure's band to that figure's caption, and it is still
 required** (Jett asked for the band off on 2026-09-18, the sort figure being the third thing on

@@ -102,7 +102,14 @@ BUDGETS = {
     # another hundred out of it means taking out a claim, not a restatement. The three repeated
     # sentences the record used to carry came out too, but they were inside an aria-hidden mock
     # and never counted: a log does not print its own footnote in every row.
-    "index.html": 1270,   # raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
+    # Down to 1050 on 2026-09-21, page at 1,029, in the simplification pass. Nothing was cut
+    # that a reader came for: the whole of it was the same claim twice. The AI account was
+    # defined in the pricing lede and then the note under the cards said "a second bill, at
+    # your AI company's price, and we add nothing to it" over again; the closing line offered
+    # a guided-setup call that the page had already offered, under a button that asks for the
+    # one thing we want. The headroom is deliberately 21 words: this is the page a sentence
+    # gets added to, and now one has to come off for it.
+    "index.html": 1050,   # raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
     # How It Works is a procedure. A reader following along needs every step.
     # Raised 2026-09-11 from 1400, because the page absorbed archie/see-it-work/
     # rather than growing: that page was a second explanation of the same journey

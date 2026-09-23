@@ -1132,15 +1132,21 @@
                  asked for reduced motion, who gets the poster instead. -->
             <video class="demo-player-video" preload="none"
                    poster="../assets/archie-demo-light-poster.jpg"
+                   data-poster-light="../assets/archie-demo-light-poster.jpg"
+                   data-poster-dark="../assets/archie-demo-dark-poster.jpg"
                    muted loop playsinline disablepictureinpicture
-                   aria-label="A silent screen recording of Archie: opening the app, pointing a new agent at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
+                   aria-label="A silent walkthrough of Archie: opening the app, pointing a new agent at a read-only calendar, pairing a phone by scanning a code, answering a few questions on the phone so the agent knows who it works for, then asking it what the day holds and pressing send on a reply it wrote.">
               <!-- No 2560 line here, unlike the hero: this player is capped at 760px, so 1600 already
                    covers a 2x display at 1:1 and anything larger would be bytes nobody can see. Same
-                   files the homepage hero uses, so they're usually already cached. One light capture,
-                   offered theme-agnostically (no data-theme), serves both themes; see the hero note. -->
-              <source data-src="../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.09M.08"'    data-w="1600" data-h="1030" data-fps="60" />
-              <source data-src="../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
-              <source data-src="../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="824"  data-fps="30" />
+                   files the install page uses, so they&rsquo;re usually already cached. The same
+                   film, run once per theme, since 2026-09-23: demo-player.js reads data-theme and
+                   swaps the picture when the page's theme changes. -->
+              <source data-theme="light" data-src="../assets/archie-demo-light-1600.av1.mp4" type='video/mp4; codecs="av01.0.09M.08"' data-w="1600" data-h="1030" data-fps="60" />
+              <source data-theme="light" data-src="../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
+              <source data-theme="light" data-src="../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"' data-w="1280" data-h="824" data-fps="30" />
+              <source data-theme="dark" data-src="../assets/archie-demo-dark-1600.av1.mp4" type='video/mp4; codecs="av01.0.09M.08"' data-w="1600" data-h="1030" data-fps="60" />
+              <source data-theme="dark" data-src="../assets/archie-demo-dark-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
+              <source data-theme="dark" data-src="../assets/archie-demo-dark-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"' data-w="1280" data-h="824" data-fps="30" />
               <p>Your browser can&rsquo;t play this video. <a href="../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
             </video>
             <!-- No pause control: the recording runs on its own as ambient motion. Anyone who has
@@ -1148,7 +1154,7 @@
                  (js/demo-player.js), which is the substantive accessibility protection. -->
           </div>
           <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
-          <figcaption class="demo-player-caption">Recorded in Archie, August 2026.</figcaption>
+          <figcaption class="demo-player-caption">An animated walkthrough of Archie, September 2026.</figcaption>
         </figure>
 
         <!-- The six steps, as the recording's own index. A step that is in the footage carries

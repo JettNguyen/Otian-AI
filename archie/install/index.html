@@ -249,16 +249,27 @@
         <div class="demo-player-frame">
           <video class="demo-player-video" preload="none"
                  poster="../../assets/archie-demo-light-poster.jpg"
+                 data-poster-light="../../assets/archie-demo-light-poster.jpg"
+                 data-poster-dark="../../assets/archie-demo-dark-poster.jpg"
                  muted loop playsinline disablepictureinpicture
-                 aria-label="A silent screen recording of Archie: opening the app, pointing a new agent at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
-            <source data-src="../../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.09M.08"'    data-w="1600" data-h="1030" data-fps="60" />
-            <source data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
-            <source data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="824"  data-fps="30" />
+                 aria-label="A silent walkthrough of Archie: opening the app, pointing a new agent at a read-only calendar, pairing a phone by scanning a code, answering a few questions on the phone so the agent knows who it works for, then asking it what the day holds and pressing send on a reply it wrote.">
+            <!-- The same film twice, once per theme, so the picture follows the page instead of
+                 sitting light on a dark one. demo-player.js reads data-theme, watches
+                 html[data-theme], and carries currentTime across the swap. The two runs are the
+                 same beats rather than the same frames (each is a real take, so the holds land a
+                 few hundredths apart), which is close enough that a swap lands where you were.
+                 Since 2026-09-23; before that there was only a light build. -->
+            <source data-theme="light" data-src="../../assets/archie-demo-light-1600.av1.mp4" type='video/mp4; codecs="av01.0.09M.08"' data-w="1600" data-h="1030" data-fps="60" />
+            <source data-theme="light" data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
+            <source data-theme="light" data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"' data-w="1280" data-h="824" data-fps="30" />
+            <source data-theme="dark" data-src="../../assets/archie-demo-dark-1600.av1.mp4" type='video/mp4; codecs="av01.0.09M.08"' data-w="1600" data-h="1030" data-fps="60" />
+            <source data-theme="dark" data-src="../../assets/archie-demo-dark-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
+            <source data-theme="dark" data-src="../../assets/archie-demo-dark-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"' data-w="1280" data-h="824" data-fps="30" />
             <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
           </video>
         </div>
         <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
-        <figcaption class="demo-player-caption">Recorded in Archie, August 2026. <a href="../../how-it-works/">Watch it beside the steps &rarr;</a></figcaption>
+        <figcaption class="demo-player-caption">An animated walkthrough of Archie, September 2026. <a href="../../how-it-works/">Watch it beside the steps &rarr;</a></figcaption>
       </figure>
     </div>
   </section>

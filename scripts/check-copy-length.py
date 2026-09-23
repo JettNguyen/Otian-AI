@@ -232,6 +232,20 @@ BUDGETS = {
     # sentence was on the page three times and is now once. Prose is about 680, still
     # under the 900 a marketing page gets, on a page that is meant to be looked at.
     "archie/mobile/index.html": 1400,
+    # The install page took a third platform on 2026-09-22 and this is that arithmetic. It ran
+    # under 900 for two desktops, both of which install the way everybody expects. Android does
+    # not: it arrives as a file, and the operating system stops the person twice on the way in,
+    # once to allow their browser to install apps and once for Play Protect. A page that hands
+    # somebody a file and lets them hit those alone is the dead end the writing rules exist to
+    # forbid, so the five steps and why each fires are 150 words that cannot come out. The
+    # download block and the Play Store paragraph are another 120.
+    # The cut came first and it came out of restatement, not out of the new copy: the Android
+    # block was drafted with its own "how to check us" card saying what the Windows section two
+    # screens up already says about the releases page, and with a second paragraph re-explaining
+    # what the phone app is when archie/mobile/ is one link away and exists for that. Both went,
+    # 103 words, before this number moved. 1,050 is a ceiling over 1,030, not room to grow: the
+    # next thing added here comes out of the Windows section or off this page.
+    "archie/install/index.html": 1050,
     # Working With Us is /guided-setup/ and /consulting/ merged on 2026-09-14, and the budget
     # is the merge's arithmetic rather than a concession. The two pages ran 1,494 words against
     # 1,800 of combined budget; merged and de-duplicated they run 1,191. This is a net cut of

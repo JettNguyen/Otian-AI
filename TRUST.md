@@ -906,26 +906,34 @@ anyone but the account owner, and the seal means owning the row is not reading i
   the key. That is what the Unpair button and key rotation are for.
 - ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
 
-### 🚧 The Archie app for a phone: sealed, where a chat app is not. IN BUILD, NOT SHIPPED
+### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID
 
-**Status 2026-09-17.** The client is written and runs (`/Users/Games/Desktop/Code/archie-mobile`).
-Two things that were pending on 2026-09-11 have since happened, and one has not.
+**Status 2026-09-22. The tense split, and this is the deliberate pass that entry always promised.**
+Android and iPhone are no longer in the same state, so no page may talk about "the phone app" as one
+thing any more.
 
+- **Android is downloadable today**, as an APK from the `archie-releases` repo, linked from
+  `archie/install/`. Anyone can install it. **Present tense is correct for Android**, and for
+  Android only.
+- **iPhone is still with Apple.** Build 10 has sat in review since 2026-09-17. In review is not
+  approved: nobody outside the team can install it and it is in no store listing anyone can reach.
+  **Future tense still holds for iPhone**, and **no page may carry a date for it**, because a
+  rejection is an ordinary outcome and we do not control the clock.
 - **`/phone/pair` is deployed**, since 2026-09-14 (`stripe-webhook/phone-pair.js`), along with the
   `notPhone()` rules. The freeze it was waiting behind was lifted by the assessor, who said to
   proceed with the package as it stood.
-- **Build 9 is submitted to the App Store** and sat in review from 2026-09-17. Submitted is not
-  approved: nobody outside the team can install it, it is in no store listing anyone can reach, and
-  a rejection is an ordinary outcome that would push it further out.
-- **Android has not started.** It needs a D-U-N-S number first, which takes up to 30 business days.
+- **Google Play is not started and cannot be rushed.** An organization account needs a D-U-N-S
+  number, which Google's own FAQ puts at up to 28 days. The APK needs none of that today, but
+  **Google is extending developer verification to sideloaded apps**: 2026-09-30 in Brazil,
+  Indonesia, Singapore and Thailand, and 2027 everywhere. Say nothing on the site that implies the
+  direct download is permanent.
 
-So the rule below has not changed and **still holds**: every sentence about this app on the site is
-future tense, and **no page may carry a ship date**. The day it is approved and downloadable, this
-entry moves to SHIPPED and the tense changes with it, in one pass, deliberately. Being in review is
-not that day. **A privacy policy is the one exception**, because Apple requires the policy to
-describe an app under review and a policy is not a promise of availability: `privacy-policy/`
-describes the phone app in the conditional, in the same shape as the shipped phone-access claim
-("if you turn on phone access"), and says nothing about being able to get it.
+**The one thing to say in the same breath as an Android download.** A person installing from a file
+rather than a store has to pass two warnings, and a page that hands them the file owes them both, in
+the same shape the Windows warning already gets on `archie/install/`: Android refuses the first
+install and asks them to allow it from the browser they used, and Play Protect offers to scan an app
+it has not seen. Neither means anything is wrong, and neither should be described as a formality:
+they are the checks working, and the honest thing is to say why they fire.
 
 **Why this claim is worth making at all.** Today an agent reaches its owner through a chat app, and
 that is the one part of Archie that crosses somebody else's servers in a form they can read. The
@@ -1046,8 +1054,11 @@ app is built for any other reason.
 
 **Required clauses. Do not drop them:**
 
-- ⚠️ **Future tense, everywhere, with no date.** "We are building", never "Archie has an app". The
-  moment a present-tense sentence about this app appears on the site, this entry has been broken.
+- ⚠️ **Name the platform, because they are no longer in the same state.** Android is downloadable,
+  so present tense is correct for it. iPhone is in review, so it stays future tense with **no date**,
+  and "we are building" rather than "Archie has an app". A sentence about "the phone app" that does
+  not say which platform is now the failure this clause is watching for, and it was the opposite
+  failure until 2026-09-22.
 - ⚠️ **Say that we hold it.** Same clause as the shipped phone-access claim: this is custody without
   access. "It never touches our servers" is FALSE here and must never be written.
 - ⚠️ **Name iMessage as the exception.** The comparison is true of Telegram, Discord, Slack and

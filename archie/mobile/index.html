@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie Mobile | Otian AI</title>
-  <meta name="description" content="Archie Mobile is the app we are building for your phone. It reaches the agent on your computer, sealed on the way under a key we never receive, and it is not in either store yet. What it can do, what it cannot, and who can open what, sourced." />
+  <meta name="description" content="Archie Mobile reaches the agent on your computer from your phone, sealed on the way under a key we never receive. You can install it on Android today; on iPhone it is with Apple for review. What it can do, and what stays on your computer." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -218,33 +218,33 @@
 
           <!-- Act 0. The hero, and the two store tiles this page exists for. -->
           <article class="day-cap is-on" data-act="0">
-            <span class="section-label">Archie Mobile &middot; Coming soon</span>
+            <span class="section-label">Archie Mobile &middot; On Android now</span>
             <h1>Your computer, <em>from your pocket.</em></h1>
-            <p><strong>Archie Mobile is the app we are building for your phone.</strong> It reaches the agent on your computer from wherever you are.</p>
-            <!-- THE STORE TILES, DRAFTED FOR THE DAY THE APP IS IN A STORE. Today neither is a link
-                 and both say so, because TRUST.md holds this app at IN BUILD, NOT SHIPPED. Apple's
-                 and Google's badge artwork may be shown only for an app that is available, and both
-                 publish that rule to third parties, which is the written grant the logo rule needs.
-                 So on the day: turn each tile into an <a> with the store URL, set data-state="live",
-                 replace the drawn glyph and its two lines with the official badge as their guidelines
-                 give it, and move TRUST.md's entry to SHIPPED in the same commit, which changes every
-                 future tense on this page. Not before, and not one without the other. -->
-            <div class="mb-stores" role="group" aria-label="Where Archie Mobile will be">
+            <p><strong>Archie Mobile reaches the agent on your computer from wherever you are.</strong> On Android you can install it today. On iPhone it is with Apple.</p>
+            <!-- THE TILES WENT HALF LIVE ON 2026-09-22, and the two halves are no longer the same
+                 claim. Android is a direct download from our releases page, so its tile is a real
+                 link with data-state="live" and says "Direct download" rather than "Google Play":
+                 we are not in Play, and a tile that implied it would be the plainest kind of lie.
+                 **Google's badge artwork is still not ours to show** for the same reason, so the
+                 drawn glyph stays until we are actually in the store. The iPhone tile is unchanged
+                 and carries no date, because that is Apple's clock. TRUST.md moved to SHIPPED ON
+                 ANDROID in the same commit, which is what licenses the present tense above. -->
+            <div class="mb-stores" role="group" aria-label="Where Archie Mobile is">
               <div class="mb-store" data-state="soon">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
                 <span class="mb-store-txt"><b>iPhone</b><span>App Store</span></span>
-                <span class="mb-store-state">Not there yet</span>
+                <span class="mb-store-state">With Apple</span>
               </div>
-              <div class="mb-store" data-state="soon">
+              <a class="mb-store" data-state="live" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
-                <span class="mb-store-txt"><b>Android</b><span>Google Play</span></span>
-                <span class="mb-store-state">After the iPhone app</span>
-              </div>
+                <span class="mb-store-txt"><b>Android</b><span>Direct download</span></span>
+                <span class="mb-store-state">Get it</span>
+              </a>
             </div>
             <div class="hm-actions">
               <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
             </div>
-            <p class="hm-hero-micro">In neither store yet. The waitlist hears the day that changes. <a href="#status">Where it stands&nbsp;&rarr;</a></p>
+            <p class="hm-hero-micro">Android installs from a file, one extra tap: <a href="../install/#android-heading">the steps, and why</a>. The waitlist hears when iPhone opens. <a href="#status">Where it stands&nbsp;&rarr;</a></p>
           </article>
 
           <!-- Act 1. TRUST.md's "what the app is and is not", first half: the app reaches the
@@ -334,7 +334,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Side by side</span>
           <h2 id="side-heading" class="fade-up delay-1">Who can open what.</h2>
-          <p>Each company&rsquo;s own published words, and the app we are building on the last row.</p>
+          <p>Each company&rsquo;s own published words, and the Archie phone app on the last row.</p>
         </div>
 
         <!-- The table's last column, drawn: one lock per app, open where that company can read
@@ -343,7 +343,7 @@
              table under it is the sourced list, row for row. -->
         <figure class="explain-figure lk-figure mt-40 fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 640 116" role="img" aria-labelledby="lk-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="lk-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The app we are building is shut and drawn in the site's colour, marked no, nor can we.</title>
+            <title id="lk-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The Archie phone app is shut and drawn in the site's colour, marked no, nor can we.</title>
             <style>
               .lk-name{fill:currentColor;font-size:11.5px;font-weight:600;text-anchor:middle}
               .lk-name--us{fill:var(--accent-ink)}
@@ -374,13 +374,13 @@
 <text class="lk-name" x="480" y="36">a Mac</text>
 <rect class="lk-body lk-shut" x="469" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-shut" d="M473,66 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut" cx="480" cy="74" r="2"/>
 <text class="lk-ans" x="480" y="100">No</text>
-<text class="lk-name lk-name--us" x="587" y="24">The app</text>
-<text class="lk-name lk-name--us" x="587" y="36">we are building</text>
+<text class="lk-name lk-name--us" x="587" y="24">The Archie</text>
+<text class="lk-name lk-name--us" x="587" y="36">phone app</text>
 <rect class="lk-body lk-shut lk-us" x="576" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-shut lk-us" d="M580,66 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut lk-us" cx="587" cy="74" r="2"/>
 <text class="lk-ans lk-ans--us" x="587" y="100">No, nor can we</text>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 236" role="img" aria-labelledby="lkm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="lkm-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The app we are building is shut and drawn in the site's colour, marked no, nor can we.</title>
+            <title id="lkm-t">Six locks in a row, one per app, each named above it and answered below it. Telegram, Discord, Slack and Matrix have their locks swung open, marked yes: that company can read what your agent says there. iMessage on a Mac is shut, marked no. The Archie phone app is shut and drawn in the site's colour, marked no, nor can we.</title>
 <text class="lk-name" x="57" y="36">Telegram</text>
 <rect class="lk-body lk-open" x="46" y="66" width="22" height="16" rx="3"/><path class="lk-arc lk-open" d="M59,66 v-6 a7,7 0 0 1 14,0 v4"/><circle class="lk-key lk-open" cx="57" cy="74" r="2"/>
 <text class="lk-ans" x="57" y="100">Yes</text>
@@ -397,12 +397,12 @@
 <text class="lk-name" x="170" y="156">a Mac</text>
 <rect class="lk-body lk-shut" x="159" y="186" width="22" height="16" rx="3"/><path class="lk-arc lk-shut" d="M163,186 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut" cx="170" cy="194" r="2"/>
 <text class="lk-ans" x="170" y="220">No</text>
-<text class="lk-name lk-name--us" x="283" y="144">The app</text>
-<text class="lk-name lk-name--us" x="283" y="156">we are building</text>
+<text class="lk-name lk-name--us" x="283" y="144">The Archie</text>
+<text class="lk-name lk-name--us" x="283" y="156">phone app</text>
 <rect class="lk-body lk-shut lk-us" x="272" y="186" width="22" height="16" rx="3"/><path class="lk-arc lk-shut lk-us" d="M276,186 v-6 a7,7 0 0 1 14,0 v6"/><circle class="lk-key lk-shut lk-us" cx="283" cy="194" r="2"/>
 <text class="lk-ans lk-ans--us" x="283" y="220">No, nor can we</text>
           </svg>
-          <figcaption>Whether the company whose app carries your agent&rsquo;s messages can read them. iMessage on a Mac is the exception today. The app we are building is sealed on your computer, and we cannot open it either.</figcaption>
+          <figcaption>Whether the company whose app carries your agent&rsquo;s messages can read them. iMessage on a Mac is the exception today. The Archie phone app is sealed on your computer, and we cannot open it either.</figcaption>
         </figure>
 
         <div class="cmp-table-wrap fade-up delay-1">
@@ -442,7 +442,7 @@
                 <td data-label="Can they open it">No</td>
               </tr>
               <tr>
-                <th scope="row"><span class="cmp-us">The app we are building</span></th>
+                <th scope="row"><span class="cmp-us">The Archie phone app</span></th>
                 <td data-label="What we publish">Sealed on your computer before it leaves, under a key it gives your phone by camera. We hold the sealed messages and have no key<a class="src-cite" href="#src-6"><span class="sr-only">Source </span>6</a></td>
                 <td data-label="Can they open it">No, and neither can we</td>
               </tr>
@@ -487,8 +487,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Where Archie Mobile stands</span>
-          <h2 id="status-heading" class="fade-up delay-1">Written and running. In neither store.</h2>
-          <p>The iPhone app is written and runs on our own phones. It is not in the App Store, Android comes after it, and <strong>we cannot give you a date and will not invent one.</strong> Nothing about your setup has to change to be ready for it.</p>
+          <h2 id="status-heading" class="fade-up delay-1">On Android. In neither store.</h2>
+          <p>Android installs today, from a file rather than Google Play: a listing there needs a business identifier that takes weeks, and we are getting one. The iPhone app has been with Apple since September 17, 2026, and <strong>we cannot give you a date and will not invent one</strong>. Nothing about your setup has to change either way.</p>
         </div>
 
         <details class="fold fade-up delay-1">

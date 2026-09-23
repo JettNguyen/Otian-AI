@@ -225,6 +225,23 @@
             <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Business build for Windows</button><button type="button" class="install-other-btn" data-show="mac">Business build for Mac</button></p>
           </div>
         </div>
+
+        <!-- The phone app, here since 2026-09-22. No data-os on the block: the switcher folds away
+             the desktop this computer is not, and this one is neither, so it stays up everywhere.
+             Android only for now on purpose, and the iPhone line says so rather than going quiet. -->
+        <div class="install-second fade-up delay-3">
+          <h2 id="phone-heading">Add your phone. It is a remote control, not a second Archie.</h2>
+          <p class="install-req">Your agent stays on the computer you installed it on and runs there whether your phone is in your hand or in your pocket. From the app you can do most of what you do at the desk, though not open your knowledge files or the rows inside a collection. <a href="../mobile/">What it shows you, and what stays sealed</a>.</p>
+
+          <div class="install-actions">
+            <div class="install-platform">
+              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk" data-download-note="download-note-android"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Android build</span></a>
+              <p class="install-req">Android 7.0 or later. It installs from the file rather than from the Play Store, so Android stops you once on the way; <a href="#android-heading">the next section walks through it</a>.</p>
+              <p class="download-note" id="download-note-android" role="status" aria-live="polite"></p>
+            </div>
+          </div>
+          <p class="install-req">On iPhone it is with Apple for review. That is Apple&rsquo;s clock, so we will not guess at a date. <a href="../../questionnaire/">Join the waitlist</a> to hear when it opens.</p>
+        </div>
       </div>
 
       <figure class="install-shot fade-up delay-3">
@@ -326,9 +343,50 @@
   </section>
 
   <!-- ==============================
+       The Android install
+       ============================== -->
+  <!-- Same job as the Windows warning above it, for the same reason: the app is not coming from a
+       store, so the operating system stops the person and the page that handed them the file owes
+       them the why. Two stops on Android rather than one, and neither is a formality. -->
+  <section class="section" aria-labelledby="android-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label fade-up">Android</span>
+        <h2 id="android-heading" class="fade-up delay-1">Android will stop you once.</h2>
+        <p>The button above hands your phone a file rather than sending you to the Play Store, so Android asks whether you meant it. Nothing is wrong. Here is every screen, in order, and why each fires.</p>
+      </div>
+
+      <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
+        <div class="calm-list-item">
+          <span class="calm-list-label">1 &middot; Your browser downloads a file</span>
+          <p>The button saves an <code>.apk</code>, which is to Android what a <code>.dmg</code> is to a Mac. Chrome may warn that the file can harm your device, which it says of every app it has not been told about. The browser only downloads. It installs nothing.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">2 &middot; You open it</span>
+          <p>Tap the download notification, or find it in Downloads. Android&rsquo;s own installer opens, not the browser.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">3 &middot; Android refuses, once</span>
+          <p>It says this source is not allowed to install apps. Tap <em>Settings</em> on that message, turn on <em>Allow from this source</em>, and press back. You are granting that to your browser, not to us, and you can turn it off again after.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">4 &middot; Play Protect offers to scan it</span>
+          <p>Let it. That is Google checking an app it has not seen before, and it is worth having.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">5 &middot; It installs</span>
+          <p>Open it, and it asks you to scan the code Archie shows on your computer. That is the whole setup. No account, no password.</p>
+        </div>
+      </div>
+
+      <p class="install-prose" style="margin-top: 32px;">It is not in the Play Store because a company listing there needs a D-U-N-S number, a business identifier that takes up to 28 days to issue. We are getting one. Google is also extending these checks to apps installed from a file, in four countries on September 30, 2026 and the rest in 2027, so this route is not permanent. What the app asks for on your phone is written out in our <a href="../../privacy-policy/#the-app-on-your-phone">privacy policy</a>.</p>
+    </div>
+  </section>
+
+  <!-- ==============================
        What we can and can't see
        ============================== -->
-  <section class="section" aria-labelledby="keys-heading">
+  <section class="section section-alt" aria-labelledby="keys-heading">
     <div class="container">
       <div class="section-header">
         <span class="section-label fade-up">Yours alone</span>
@@ -351,7 +409,7 @@
   <!-- ==============================
        Help
        ============================== -->
-  <section class="section section-alt" aria-labelledby="help-heading">
+  <section class="section" aria-labelledby="help-heading">
     <div class="container">
       <div class="section-header">
         <span class="section-label fade-up">Stuck?</span>

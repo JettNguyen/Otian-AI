@@ -210,21 +210,32 @@
 
         <div class="install-actions fade-up delay-2">
           <div class="install-platform" data-os="mac">
-            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Mac</span></a>
-            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest.dmg" data-download-note="download-note-biz-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Mac</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download Archie &middot; Mac</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest.dmg" data-download-note="download-note-biz-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download Archie for Business &middot; Mac</span></a>
             <p class="install-req">macOS 12 Monterey or later, Apple&nbsp;silicon or Intel. Signed and notarized with Apple, so it opens the way any other app does.</p>
             <p class="download-note" data-ed="personal" id="download-note-mac" role="status" aria-live="polite"></p>
             <p class="download-note" data-ed="business" id="download-note-biz-mac" role="status" aria-live="polite"></p>
           </div>
           <div class="install-platform" data-os="win">
-            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Windows</span></a>
-            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest-setup.exe" data-download-note="download-note-biz-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Windows</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download Archie &middot; Windows</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest-setup.exe" data-download-note="download-note-biz-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download Archie for Business &middot; Windows</span></a>
             <p class="install-req">Windows 10 or 11, 64-bit. Windows will try to stop you the first time; <a href="#warning-heading">here is what it shows and what to click</a>.</p>
             <p class="download-note" data-ed="personal" id="download-note-win" role="status" aria-live="polite"></p>
             <p class="download-note" data-ed="business" id="download-note-biz-win" role="status" aria-live="polite"></p>
           </div>
           <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Download for Windows instead</button><button type="button" class="install-other-btn" data-show="mac">Download for Mac instead</button></p>
         </div>
+
+        <!-- The version, read at runtime from the edition's own updater manifest rather than typed
+             here (2026-09-22). Typed, it would be a number the release process does not touch and
+             the site would claim a build it is not serving; read, it cannot drift. Each edition
+             reads its own file, because the two do diverge: for an hour and a half this morning
+             Business was still on 0.2.5 while Personal was on 0.3.0. If either fetch fails its line
+             stays empty and nothing is claimed, which is the right way for this to fail. -->
+        <p class="install-version">
+          <span class="install-ver" data-ed="personal" data-manifest="../b/68f9841b035fc2c5/latest.json"></span>
+          <span class="install-ver" data-ed="business" data-manifest="../b/26924e156bd86c28/latest.json"></span>
+        </p>
 
         <p class="install-req install-ed-note">Archie for Business installs beside Archie, with its own data and its own keys, so one computer can run both and neither reads the other&rsquo;s. Two apps and two plans, bought separately. <a href="../business/">What a shared agent does, and what a business plan costs</a>.</p>
       </div>

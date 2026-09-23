@@ -44,6 +44,25 @@
   /* Every block on the page, not the first one by id: the install page carries one for Archie and
      one for Archie for Business, and each folds away the platform this computer is not. Scoped to
      its own block throughout, so opening the second platform in one leaves the other as it was. */
+  /* ── Which build this is ──────────────────────────────────────────────────────────────── */
+  /* Read off the updater manifest each edition actually serves, so the number on the page is the
+     number the app would install and no release step has to remember to edit copy. A failure is
+     silent on purpose: the span stays empty, CSS hides it, and the page claims nothing. */
+  Array.prototype.forEach.call(document.querySelectorAll(".install-ver[data-manifest]"), function (el) {
+    fetch(el.getAttribute("data-manifest"), { cache: "no-store" })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.version) return;
+        var out = "Version " + d.version;
+        var when = d.pub_date ? new Date(d.pub_date) : null;
+        if (when && !isNaN(when)) {
+          out += " \u00b7 " + when.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+        }
+        el.textContent = out;
+      })
+      .catch(function () { /* nothing to say, so say nothing */ });
+  });
+
   var os = detectOs();
 
   /* The explainer for the operating system you are actually on opens itself; the others stay

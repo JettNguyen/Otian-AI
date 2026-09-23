@@ -13236,6 +13236,14 @@ html[data-theme="dark"] .booking-container iframe {
   grid-template-columns: 1fr;
 }
 
+/* Centering the grid item was only half of it (Jett, 2026-09-22). .install-platform is 340 wide
+   whatever it holds, so the block was centered and the button sat at its left edge, sharing that
+   edge with the requirement text under it, which fills the 340. What reads as off-center is the
+   button against its own text rather than against the column. */
+.install-actions--solo .install-platform {
+  text-align: center;
+}
+
 /* The recording on the install page is the same player as how-it-works/, so it takes that page's
    cap rather than the 860 the still poster used to sit at: 1600 covers 760 at 2x and does not
    cover 860. Written here rather than left to source order, because .install-shot is 4,800 lines
@@ -19365,6 +19373,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 #ed-business:checked ~ .install-actions [data-ed="personal"] { display: none; }
 .install-ed-note { display: none; max-width: 640px; margin-left: auto; margin-right: auto; }
 #ed-business:checked ~ .install-ed-note { display: block; }
+/* The build you are about to download, small and under the button. :empty carries the failure:
+   a manifest that did not load leaves its span with no text and no line appears. */
+.install-version { margin: 14px 0 0; text-align: center; }
+.install-ver { font-size: var(--fs-2xs); color: var(--text-muted); }
+.install-ver:empty { display: none; }
+#ed-personal:checked ~ .install-version [data-ed="business"],
+#ed-business:checked ~ .install-version [data-ed="personal"] { display: none; }
 /* the explainers, folded. A reader who is not on Windows, or not adding a phone, should not meet
    a figure and five steps on the way down a page they opened to get a file. */
 .install-details {

@@ -42,7 +42,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260922-6" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260922-7" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -180,74 +180,115 @@
       </nav>
     <div class="container">
       <div class="install-hero">
+        <!-- The caveat leads, since 2026-09-22. It used to sit under the download pair, where it read
+             as a footnote to those two buttons rather than as the frame for the page: somebody who
+             was just handed this link should know what they are downloading before they download it. -->
+        <p class="install-testing fade-up"><strong>Archie is in testing</strong> and not for sale yet (<a href="../personal/#status">where it stands</a>). These are testing builds, and getting in depends on your account or trial. Public paid signup is closed. <a href="../../questionnaire/">Join the waitlist</a> for launch news.</p>
+
         <!-- The wordmark stands in for the word: its "rchie" is Georgia bold at 590 of the file's
              900 units, the same face as the heading, so at 900/590 em the letters match the type
              beside them exactly and only the mark rises above the line. -->
         <h1 id="install-heading" class="fade-up delay-1">Install <img src="../../assets/archie-text.svg" width="2300" height="900" alt="Archie" class="install-wordmark" />.</h1>
         <p class="install-lede fade-up delay-1">Your own AI agent, on your own computer. A desktop app you download and open, not a website you log into.</p>
 
+        <!-- Two questions, each asked once, since 2026-09-22. The page used to ask "which computer?"
+             three times, once per download block, and answer "which app?" by stacking a second block
+             below the first, so an either/or (the edition) looked the same as an and (the phone).
+             The edition is a radio pair here and the platform is the fold js/download-feedback.js
+             already does, so four buttons are in the markup and exactly one is on screen. Both
+             editions carry the same requirements because they are the same app, so the requirement
+             line belongs to the platform and not to the edition. -->
+        <input type="radio" class="install-ed-in" name="install-ed" id="ed-personal" checked>
+        <input type="radio" class="install-ed-in" name="install-ed" id="ed-business">
+        <div class="install-ed-wrap fade-up delay-2">
+          <span class="install-ed-lead">Which app?</span>
+          <div class="install-ed" role="group" aria-label="Which app to install">
+            <label class="install-ed-opt" for="ed-personal">Archie<i>for one person</i></label>
+            <label class="install-ed-opt" for="ed-business">Archie for Business<i>for a team</i></label>
+          </div>
+        </div>
+
         <div class="install-actions fade-up delay-2">
           <div class="install-platform" data-os="mac">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Mac testing build</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Mac</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest.dmg" data-download-note="download-note-biz-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Mac</span></a>
             <p class="install-req">macOS 12 Monterey or later, Apple&nbsp;silicon or Intel. Signed and notarized with Apple, so it opens the way any other app does.</p>
-            <p class="download-note" id="download-note-mac" role="status" aria-live="polite"></p>
+            <p class="download-note" data-ed="personal" id="download-note-mac" role="status" aria-live="polite"></p>
+            <p class="download-note" data-ed="business" id="download-note-biz-mac" role="status" aria-live="polite"></p>
           </div>
           <div class="install-platform" data-os="win">
-            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Windows testing build</span></a>
-            <p class="install-req">Windows 10 or 11, 64-bit. Windows will try to stop you the first time; <a href="#warning-heading">the next section explains why</a>.</p>
-            <p class="download-note" id="download-note-win" role="status" aria-live="polite"></p>
+            <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest-setup.exe" data-download-note="download-note-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Windows</span></a>
+            <a class="btn btn-primary btn-lg" data-ed="business" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest-setup.exe" data-download-note="download-note-biz-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Windows</span></a>
+            <p class="install-req">Windows 10 or 11, 64-bit. Windows will try to stop you the first time; <a href="#warning-heading">here is what it shows and what to click</a>.</p>
+            <p class="download-note" data-ed="personal" id="download-note-win" role="status" aria-live="polite"></p>
+            <p class="download-note" data-ed="business" id="download-note-biz-win" role="status" aria-live="polite"></p>
           </div>
-          <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Windows testing build</button><button type="button" class="install-other-btn" data-show="mac">Mac testing build</button></p>
+          <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Download for Windows instead</button><button type="button" class="install-other-btn" data-show="mac">Download for Mac instead</button></p>
         </div>
 
-        <div class="install-status fade-up delay-3">
-          <p><strong>Archie is in testing</strong> and not for sale yet (<a href="../personal/#status">here&rsquo;s where it stands</a>). <a href="../../questionnaire/">Join the waitlist</a> for launch news. The downloads above are testing builds; access depends on your account or trial eligibility. Public paid signup is closed.</p>
-        </div>
-
-        <!-- Archie for Business downloads, here since 2026-09-21. They had a page of their own
-             whose content was three paragraphs saying "read it on the other page": the Windows
-             warning, the keys and the help below are word for word the same for both apps, and
-             the only thing that was ever different is the file you download. js/download-feedback.js
-             was already written for two blocks on one page. -->
-        <div class="install-second fade-up delay-3">
-          <h2 id="business-heading">Running a team? Archie for Business is a second app.</h2>
-          <p class="install-req">It installs beside Archie, with its own data and its own keys, so one computer can run both and neither reads the other&rsquo;s. Two apps and two plans, bought separately. <a href="../business/">What a shared agent does, and what a business plan costs</a>.</p>
-
-          <div class="install-actions">
-            <div class="install-platform" data-os="mac">
-              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest.dmg" data-download-note="download-note-biz-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Business build for Mac</span></a>
-              <p class="download-note" id="download-note-biz-mac" role="status" aria-live="polite"></p>
-            </div>
-            <div class="install-platform" data-os="win">
-              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/ArchieBusiness-latest-setup.exe" data-download-note="download-note-biz-win"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Business build for Windows</span></a>
-              <p class="download-note" id="download-note-biz-win" role="status" aria-live="polite"></p>
-            </div>
-            <p class="install-other" hidden><button type="button" class="install-other-btn" data-show="win">Business build for Windows</button><button type="button" class="install-other-btn" data-show="mac">Business build for Mac</button></p>
-          </div>
-        </div>
-
-        <!-- The phone app, here since 2026-09-22. No data-os on the block: the switcher folds away
-             the desktop this computer is not, and this one is neither, so it stays up everywhere.
-             Android only for now on purpose, and the iPhone line says so rather than going quiet. -->
-        <div class="install-second fade-up delay-3">
-          <h2 id="phone-heading">Add your phone. It is a remote control, not a second Archie.</h2>
-          <p class="install-req">Your agent stays on the computer you installed it on and runs there whether your phone is in your hand or in your pocket. From the app you can do most of what you do at the desk, though not open your knowledge files or the rows inside a collection. <a href="../mobile/">What it shows you, and what stays sealed</a>.</p>
-
-          <div class="install-actions">
-            <div class="install-platform">
-              <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk" data-download-note="download-note-android"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Android build</span></a>
-              <p class="install-req">Android 7.0 or later. It installs from the file rather than from the Play Store, so Android stops you once on the way; <a href="#android-heading">the next section walks through it</a>.</p>
-              <p class="download-note" id="download-note-android" role="status" aria-live="polite"></p>
-            </div>
-          </div>
-          <p class="install-req">On iPhone it is with Apple for review. That is Apple&rsquo;s clock, so we will not guess at a date. <a href="../../questionnaire/">Join the waitlist</a> to hear when it opens.</p>
-        </div>
+        <p class="install-req install-ed-note">Archie for Business installs beside Archie, with its own data and its own keys, so one computer can run both and neither reads the other&rsquo;s. Two apps and two plans, bought separately. <a href="../business/">What a shared agent does, and what a business plan costs</a>.</p>
       </div>
 
       <figure class="install-shot fade-up delay-3">
         <div class="demo-player-frame"><img src="../../assets/archie-demo-light-poster.jpg" width="1600" height="1030" alt="The Archie app open on a Mac: an agent in the sidebar, and a welcome screen listing what it can talk through and what it can be pointed at." loading="lazy" /></div>
         <figcaption><a href="../../how-it-works/">Watch Archie work, start to finish &rarr;</a></figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- ==============================
+       The phone, as a step after the computer rather than a third download block (2026-09-22).
+       It is an "and", not an either/or: the two editions are a choice and this is a thing you add
+       to whichever you chose, and stacking all three as siblings said they were the same kind of
+       decision. Android's own stops live inside it, folded away, because a reader who is not
+       adding a phone should never meet them.
+       ============================== -->
+  <section class="section" aria-labelledby="phone-heading">
+    <div class="container container-narrow">
+      <div class="section-header">
+        <span class="section-label fade-up">Your Phone</span>
+        <h2 id="phone-heading" class="fade-up delay-1">Add your phone. It is a remote control, not a second Archie.</h2>
+        <p>Your agent stays on the computer you installed it on and runs there whether your phone is in your hand or in your pocket. From the app you can do most of what you do at the desk, though not open your knowledge files or the rows inside a collection. <a href="../mobile/">What it shows you, and what stays sealed</a>.</p>
+      </div>
+
+      <div class="install-actions fade-up delay-2">
+        <div class="install-platform">
+          <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk" data-download-note="download-note-android"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Android</span></a>
+          <p class="install-req">Android 7.0 or later. It installs from the file rather than from the Play Store, so Android stops you once on the way.</p>
+          <p class="download-note" id="download-note-android" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      <p class="install-req">On iPhone it is with Apple for review. That is Apple&rsquo;s clock, so we will not guess at a date. <a href="../../questionnaire/">Join the waitlist</a> to hear when it opens.</p>
+
+      <details class="install-details mt-40 fade-up delay-3">
+        <summary>Every screen Android shows, in order</summary>
+        <div class="install-details-body">
+          <p>The button hands your phone a file rather than sending you to the Play Store, so Android asks whether you meant it. Nothing is wrong, and each stop is a real one.</p>
+          <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
+        <div class="calm-list-item">
+          <span class="calm-list-label">1 &middot; Your browser downloads a file</span>
+          <p>The button saves an <code>.apk</code>, which is to Android what a <code>.dmg</code> is to a Mac. Chrome may warn that the file can harm your device, which it says of every app it has not been told about. The browser only downloads. It installs nothing.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">2 &middot; You open the file</span>
+          <p>Tap the download notification, or find it in Downloads. Android&rsquo;s own installer opens, not the browser.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">3 &middot; Android refuses, once</span>
+          <p>It says this source is not allowed to install apps. Tap <em>Settings</em> on that message, turn on <em>Allow from this source</em>, and press back. You are granting that to your browser, not to us, and you can turn it off again after.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">4 &middot; Play Protect offers to scan the app</span>
+          <p>Let it. That is Google checking an app it has not seen before, and it is worth having.</p>
+        </div>
+        <div class="calm-list-item">
+          <span class="calm-list-label">5 &middot; The app installs</span>
+          <p>Open it, and it asks you to scan the code Archie shows on your computer. That is the whole setup. No account, no password.</p>
+        </div>
+      </div>
+          <p class="install-prose" style="margin-top: 32px;">It is not in the Play Store because a company listing there needs a D-U-N-S number, a business identifier that takes up to 28 days to issue. We are getting one. Google is also extending these checks to apps installed from a file, in four countries on September 30, 2026 and the rest in 2027, so this route is not permanent. What the app asks for on your phone is written out in our <a href="../../privacy-policy/#the-app-on-your-phone">privacy policy</a>.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -262,6 +303,13 @@
         <p>Windows shows a blue box with that heading, and the only obvious button says <em>Don&rsquo;t run</em>. Nothing is wrong. Here is how to get past it, and why it happens at all, because you shouldn&rsquo;t click through a security warning just because someone told you to.</p>
       </div>
 
+      <!-- Folded away since 2026-09-22: a Mac reader met this whole explainer, figure and all,
+           on the way down a page they opened to get a file. Open by default on Windows, where it
+           is the next thing that happens (js/download-feedback.js sets that from the same detection
+           the download button uses), and one click away everywhere else. -->
+      <details class="install-details mt-40 fade-up delay-1" data-open-os="win">
+        <summary>The box, and the two things to click</summary>
+        <div class="install-details-body">
       <!-- The box itself, drawn in the site's tokens, with the two things to click ringed in turn.
            Three step cards described this dialog in words until 2026-09-11: a link that does not look
            like a link, two lines that appear, a button that was not there before. A reader has the box
@@ -339,49 +387,11 @@
           <p style="margin-top: 12px;">If this is a work computer and somebody has to sign off before it goes on: <a href="../../trust/it-review/">the page written for them &rarr;</a></p>
         </div>
       </div>
+        </div>
+      </details>
     </div>
   </section>
 
-  <!-- ==============================
-       The Android install
-       ============================== -->
-  <!-- Same job as the Windows warning above it, for the same reason: the app is not coming from a
-       store, so the operating system stops the person and the page that handed them the file owes
-       them the why. Two stops on Android rather than one, and neither is a formality. -->
-  <section class="section" aria-labelledby="android-heading">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label fade-up">Android</span>
-        <h2 id="android-heading" class="fade-up delay-1">Android will stop you once.</h2>
-        <p>The button above hands your phone a file rather than sending you to the Play Store, so Android asks whether you meant it. Nothing is wrong. Here is every screen, in order, and why each fires.</p>
-      </div>
-
-      <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
-        <div class="calm-list-item">
-          <span class="calm-list-label">1 &middot; Your browser downloads a file</span>
-          <p>The button saves an <code>.apk</code>, which is to Android what a <code>.dmg</code> is to a Mac. Chrome may warn that the file can harm your device, which it says of every app it has not been told about. The browser only downloads. It installs nothing.</p>
-        </div>
-        <div class="calm-list-item">
-          <span class="calm-list-label">2 &middot; You open it</span>
-          <p>Tap the download notification, or find it in Downloads. Android&rsquo;s own installer opens, not the browser.</p>
-        </div>
-        <div class="calm-list-item">
-          <span class="calm-list-label">3 &middot; Android refuses, once</span>
-          <p>It says this source is not allowed to install apps. Tap <em>Settings</em> on that message, turn on <em>Allow from this source</em>, and press back. You are granting that to your browser, not to us, and you can turn it off again after.</p>
-        </div>
-        <div class="calm-list-item">
-          <span class="calm-list-label">4 &middot; Play Protect offers to scan it</span>
-          <p>Let it. That is Google checking an app it has not seen before, and it is worth having.</p>
-        </div>
-        <div class="calm-list-item">
-          <span class="calm-list-label">5 &middot; It installs</span>
-          <p>Open it, and it asks you to scan the code Archie shows on your computer. That is the whole setup. No account, no password.</p>
-        </div>
-      </div>
-
-      <p class="install-prose" style="margin-top: 32px;">It is not in the Play Store because a company listing there needs a D-U-N-S number, a business identifier that takes up to 28 days to issue. We are getting one. Google is also extending these checks to apps installed from a file, in four countries on September 30, 2026 and the rest in 2027, so this route is not permanent. What the app asks for on your phone is written out in our <a href="../../privacy-policy/#the-app-on-your-phone">privacy policy</a>.</p>
-    </div>
-  </section>
 
   <!-- ==============================
        What we can and can't see
@@ -504,8 +514,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260922-6"></script>
-  <script src="../../js/download-feedback.js?v=20260922-6"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260922-6"></script>
+  <script src="../../js/nav.js?v=20260922-7"></script>
+  <script src="../../js/download-feedback.js?v=20260922-7"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260922-7"></script>
 </body>
 </html>

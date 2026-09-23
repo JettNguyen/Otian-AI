@@ -15,7 +15,7 @@ import {
   makeStartHere,
   makeBigPicture,
   makeJumpNav
-} from './glossary-card.js?v=20260922-6';
+} from './glossary-card.js?v=20260922-7';
 
 (function () {
   'use strict';

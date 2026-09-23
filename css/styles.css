@@ -19310,3 +19310,72 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 @media (prefers-reduced-motion: reduce) {
   .wd-mark, .wd-win .da-sw, .wd-win .da-sw i, .wd-pad, .wd-nm { transition: none; }
 }
+
+/* ── Install page: one question at a time (2026-09-22) ──
+   The page used to ask "which computer are you on?" three times, once per download block, and
+   answer "which app?" by stacking a second block under the first, so an either/or (the edition)
+   was drawn the same way as an and (the phone). Now the edition is a radio pair, the platform is
+   the fold js/download-feedback.js already did, and four buttons in the markup resolve to one on
+   screen. With no script and no OS detected the resting state is both platforms for the checked
+   edition, which is the honest default and what a crawler sees. */
+.install-testing {
+  margin: 0 0 20px;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.install-testing strong { color: var(--text-primary); }
+.install-ed-in { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); border: 0; white-space: nowrap; }
+.install-ed-wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; margin: 32px 0 0; }
+.install-ed-lead { font-size: var(--fs-sm); color: var(--text-muted); font-weight: 600; }
+.install-ed { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 2px; padding: 3px; border: 1px solid var(--border); border-radius: 22px; background: var(--bg-primary); }
+.install-ed-opt { padding: 6px 14px; border: 1px solid transparent; border-radius: 999px; font-size: var(--fs-xs); font-weight: 600; line-height: 1.2; text-align: center; color: var(--text-secondary); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.install-ed-opt i { display: block; font-style: normal; font-weight: 500; font-size: var(--fs-3xs); color: var(--text-muted); }
+.install-ed-opt:hover { color: var(--text-primary); }
+#ed-personal:checked ~ .install-ed-wrap [for="ed-personal"],
+#ed-business:checked ~ .install-ed-wrap [for="ed-business"] { background: var(--accent-subtle); color: var(--text-primary); border-color: var(--accent); }
+#ed-personal:focus-visible ~ .install-ed-wrap [for="ed-personal"],
+#ed-business:focus-visible ~ .install-ed-wrap [for="ed-business"] { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+/* one edition's button and its own note; the other edition's pair is out of the layout entirely,
+   so the platform block keeps the height of a single button */
+#ed-personal:checked ~ .install-actions [data-ed="business"],
+#ed-business:checked ~ .install-actions [data-ed="personal"] { display: none; }
+.install-ed-note { display: none; max-width: 640px; margin-left: auto; margin-right: auto; }
+#ed-business:checked ~ .install-ed-note { display: block; }
+/* the explainers, folded. A reader who is not on Windows, or not adding a phone, should not meet
+   a figure and five steps on the way down a page they opened to get a file. */
+.install-details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  padding: 0 22px;
+}
+.install-details > summary {
+  padding: 16px 0;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  list-style: none;
+}
+.install-details > summary::-webkit-details-marker { display: none; }
+.install-details > summary::after {
+  content: "";
+  float: right;
+  width: 8px;
+  height: 8px;
+  margin: 6px 4px 0 0;
+  border-right: 2px solid var(--text-muted);
+  border-bottom: 2px solid var(--text-muted);
+  transform: rotate(45deg);
+  transition: transform .2s;
+}
+.install-details[open] > summary::after { transform: rotate(-135deg); margin-top: 10px; }
+.install-details > summary:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.install-details-body { padding: 0 0 24px; }
+.install-details-body > :first-child { margin-top: 0; }
+@media (max-width: 640px) {
+  .install-ed { width: 100%; }
+  .install-ed-opt { flex: 1; }
+  .install-details { padding: 0 16px; }
+}

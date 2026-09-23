@@ -45,6 +45,15 @@
      one for Archie for Business, and each folds away the platform this computer is not. Scoped to
      its own block throughout, so opening the second platform in one leaves the other as it was. */
   var os = detectOs();
+
+  /* The explainer for the operating system you are actually on opens itself; the others stay
+     folded. Marked in the markup with data-open-os, so nothing here knows which page it is on. */
+  if (os) {
+    Array.prototype.forEach.call(document.querySelectorAll("details[data-open-os]"), function (d) {
+      if (d.getAttribute("data-open-os") === os) d.open = true;
+    });
+  }
+
   if (os) {
     Array.prototype.forEach.call(document.querySelectorAll(".install-actions"), function (actions) {
       actions.classList.add("is-" + os);
@@ -54,8 +63,13 @@
       other.addEventListener("click", function (e) {
         if (!e.target.closest(".install-other-btn")) return;
         actions.classList.add("show-both");
-        var shown = actions.querySelector('.install-platform[data-os="' + e.target.getAttribute("data-show") + '"] .btn');
-        if (shown) shown.focus();
+        /* The first button in that block is not always the one on screen: each platform now
+           carries both editions and the radio above decides which is drawn, so focus the one
+           that is actually laid out rather than the one that is first in the markup. */
+        var opened = actions.querySelectorAll('.install-platform[data-os="' + e.target.getAttribute("data-show") + '"] .btn');
+        for (var i = 0; i < opened.length; i++) {
+          if (opened[i].offsetParent !== null) { opened[i].focus(); break; }
+        }
       });
     });
   }

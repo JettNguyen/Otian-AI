@@ -8626,7 +8626,15 @@ html[data-theme="dark"] .booking-container iframe {
   margin-left: 4px; /* optical centring: a triangle's mass sits left of its bounding box */
 }
 
+/* Positioned so it paints after the frame, not under it (Jett, 2026-09-22). The frame is
+   position: relative, which puts it and its box-shadow in the positioned-descendants paint step,
+   after the inline text of a plain sibling: so the caption's words came out from under a shadow
+   that reaches about 98px down (--shadow-lg's third layer is 0 70px 116px -30px) while the caption
+   sits 16px below the frame. No offset and no z-index, because nothing here needs to move or to
+   out-rank anything: entering the same paint step later in the document is the whole fix. Spacing
+   would not have fixed it, since the shadow outreaches any margin this caption should have. */
 .demo-player-caption {
+  position: relative;
   margin-top: 16px;
   text-align: center;
   font-size: var(--fs-base);

@@ -231,13 +231,186 @@
       });
     }
 
+    /* The rail. A track under the frame, filled to the playhead, and a real scrubber: press
+       anywhere along it, drag it, or reach it with Tab and move with the arrow keys.
+
+       It used to be built inside the chapters block below, which had two costs. The install page
+       has no chapter list, so it had no way to move through two and a half minutes at all, and the
+       page that did have one could only press, never drag and never from the keyboard.
+
+       Seeking a <video> that ships preload="none" is two steps, not one: the file has to be
+       fetched before there is anything to seek in. So every seek in this file goes through
+       seekTo, which loads if it has to, waits for the metadata if it has to, and only then sets
+       the time. */
+    var rail = player.querySelector('.demo-player-rail');
+    var ticks = [];
+    var scrubbing = false;
+
+    function railDuration() {
+      return video.duration || parseFloat(rail && rail.getAttribute('data-duration')) || 0;
+    }
+
+    function clock(t) {
+      var m = Math.floor(t / 60);
+      var s = Math.floor(t % 60);
+      return m + ':' + (s < 10 ? '0' : '') + s;
+    }
+
+    function paint(t) {
+      if (!rail) return;
+      var d = railDuration();
+      if (!d) return;
+      rail.style.setProperty('--pos', Math.min(1, Math.max(0, t / d)));
+      rail.setAttribute('aria-valuenow', Math.round(t));
+      rail.setAttribute('aria-valuetext', clock(t) + ' of ' + clock(d));
+    }
+
+    /* `resume` is what the visitor was doing before the seek, not what we would prefer they do.
+       Somebody who pressed pause and then dragged the rail is looking for a frame, and starting
+       playback under them is the one thing they just said no to. A chapter button is the other
+       case, because pressing one is an explicit ask to watch from there, and passes true. */
+    function seekTo(t, resume) {
+      var d = railDuration();
+      if (d) t = Math.min(d - 0.05, Math.max(0, t));
+      paint(t);
+      if (resume) {
+        pausedByUser = false;
+        player.classList.remove('is-paused');
+        if (toggle) toggle.setAttribute('aria-label', 'Pause the demo');
+      }
+      load().then(function () {
+        var tries = 0;
+        var go = function () {
+          // A seek the browser cannot serve is not an error, it just does not happen: the time
+          // clamps into whatever `seekable` covers, which is nothing at all when the file came
+          // back as one 200 rather than in ranges, and the recording jumps to the start. So ask
+          // first, and if there is nowhere to land yet, wait for more of the file and ask once
+          // more before giving up.
+          if (!video.seekable.length && tries < 3) {
+            tries += 1;
+            video.addEventListener('progress', function once() {
+              video.removeEventListener('progress', once);
+              go();
+            });
+            return;
+          }
+          try {
+            video.currentTime = t;
+          } catch (e) {
+            /* not seekable yet; it plays from the top */
+          }
+        };
+        if (video.readyState >= 1) {
+          go();
+        } else {
+          // preload="none" fetches nothing until something asks, and a paused player never asks,
+          // so loadedmetadata would never arrive and a seek made while paused would never land.
+          video.preload = 'auto';
+          video.addEventListener('loadedmetadata', function once() {
+            video.removeEventListener('loadedmetadata', once);
+            go();
+          });
+        }
+        if (resume) {
+          var r = video.play();
+          if (r && typeof r.catch === 'function') r.catch(function () {});
+        }
+      });
+    }
+
+    if (rail) {
+      // A slider, said out loud, so the keyboard and a screen reader get the same control the
+      // mouse gets rather than a div that happens to respond to clicks.
+      rail.setAttribute('role', 'slider');
+      rail.setAttribute('tabindex', '0');
+      rail.setAttribute('aria-label', 'Seek the demo');
+      rail.setAttribute('aria-valuemin', '0');
+
+      var measure = function () {
+        var d = railDuration();
+        if (d) rail.setAttribute('aria-valuemax', Math.round(d));
+        paint(video.currentTime || 0);
+      };
+      measure();
+      video.addEventListener('loadedmetadata', measure);
+
+      var pointAt = function (e) {
+        var d = railDuration();
+        if (!d) return 0;
+        var r = rail.getBoundingClientRect();
+        return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)) * d;
+      };
+
+      rail.addEventListener('pointerdown', function (e) {
+        if (!railDuration()) return;
+        scrubbing = true;
+        rail.classList.add('is-scrubbing');
+        // Capture, so a drag that wanders off the track keeps scrubbing instead of stopping
+        // wherever the pointer crossed the edge.
+        if (rail.setPointerCapture) rail.setPointerCapture(e.pointerId);
+        seekTo(pointAt(e), !pausedByUser);
+        // preventDefault stops the press selecting the page under it, and takes the focus with
+        // it, so the focus is put back by hand: press once and the arrow keys work from there.
+        // :focus-visible keeps the ring off for the mouse that just pressed it.
+        e.preventDefault();
+        rail.focus();
+      });
+      rail.addEventListener('pointermove', function (e) {
+        if (scrubbing) seekTo(pointAt(e), false);
+      });
+      var release = function (e) {
+        if (!scrubbing) return;
+        scrubbing = false;
+        rail.classList.remove('is-scrubbing');
+        if (rail.releasePointerCapture && e.pointerId != null) {
+          try {
+            rail.releasePointerCapture(e.pointerId);
+          } catch (err) {
+            /* the capture was already given up */
+          }
+        }
+      };
+      rail.addEventListener('pointerup', release);
+      rail.addEventListener('pointercancel', release);
+
+      // Arrows five seconds, page keys fifteen, Home and End the two ends. These are the numbers
+      // every video player uses, so nobody has to learn them here.
+      rail.addEventListener('keydown', function (e) {
+        var d = railDuration();
+        if (!d) return;
+        var t = video.currentTime || 0;
+        var to = null;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') to = t - 5;
+        else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') to = t + 5;
+        else if (e.key === 'PageDown') to = t - 15;
+        else if (e.key === 'PageUp') to = t + 15;
+        else if (e.key === 'Home') to = 0;
+        // Not the last frame. The recording loops, so the frame after the last one is the first
+        // one, and End landing there is Home with extra steps. A second and a half back is the
+        // closing card, which is what somebody pressing End wants to see.
+        else if (e.key === 'End') to = Math.max(0, d - 1.5);
+        if (to === null) return;
+        e.preventDefault();
+        seekTo(to, !pausedByUser);
+      });
+
+      rail.hidden = false;
+    }
+
+    video.addEventListener('timeupdate', function () {
+      // While a drag is down it owns the playhead. Without this the video's own time fights the
+      // finger, and the handle snaps back on every frame the seek has not landed on yet.
+      if (!scrubbing) paint(video.currentTime);
+    });
+
     /* Chapters. A list elsewhere on the page can point at this player by the figure's id
        (data-chapters-for), with buttons carrying data-seek in seconds. Pressing one loads the
        recording if it has not been fetched yet, plays it, and seeks once the metadata is in.
        That is an explicit ask, so it goes ahead under reduced motion too. While the recording
        plays, the button and the step the playhead is in light up, so the list reads as the
        recording's own index. The buttons ship hidden and are revealed here, so a page with no
-       script shows a list and never a button that does nothing. */
+       script shows a list and never a button that does nothing. Each one also puts a tick on the
+       rail above, which is the same index read as a shape rather than as a list. */
     var chapters = player.id
       ? document.querySelector('.chapters[data-chapters-for="' + player.id + '"]')
       : null;
@@ -246,44 +419,16 @@
       Array.prototype.forEach.call(chapters.querySelectorAll('.chapter-times'), function (row) {
         row.hidden = false;
       });
-      /* The rail: a track under the frame with a tick per moment, filled to the playhead and
-         seekable on click. Ticks are placed from data-duration until the real duration is in,
-         so they are on screen before anything is fetched, which under reduced motion is until
-         the visitor presses play. */
-      var rail = player.querySelector('.demo-player-rail');
-      var ticks = [];
-      var railDuration = function () {
-        return video.duration || parseFloat(rail && rail.getAttribute('data-duration')) || 0;
-      };
       var placeTicks = function () {
         var d = railDuration();
         if (!d) return;
-        ticks.forEach(function (tk) { tk.el.style.left = (Math.min(tk.at, d) / d * 100) + '%'; });
-      };
-      var seekTo = function (t) {
-        pausedByUser = false;
-        player.classList.remove('is-paused');
-        if (toggle) toggle.setAttribute('aria-label', 'Pause the demo');
-        load().then(function () {
-          var go = function () {
-            try { video.currentTime = t; } catch (e) { /* not seekable yet; it plays from the top */ }
-          };
-          if (video.readyState >= 1) {
-            go();
-          } else {
-            video.addEventListener('loadedmetadata', function once() {
-              video.removeEventListener('loadedmetadata', once);
-              go();
-            });
-          }
-          // play() is what starts the fetch on a preload="none" element, so it comes last.
-          var r = video.play();
-          if (r && typeof r.catch === 'function') r.catch(function () {});
+        ticks.forEach(function (tk) {
+          tk.el.style.left = (Math.min(tk.at, d) / d) * 100 + '%';
         });
       };
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
-          seekTo(parseFloat(chip.getAttribute('data-seek')) || 0);
+          seekTo(parseFloat(chip.getAttribute('data-seek')) || 0, true);
         });
       });
       if (rail) {
@@ -293,16 +438,11 @@
           rail.appendChild(b);
           ticks.push({ at: parseFloat(chip.getAttribute('data-seek')) || 0, el: b, chip: chip });
         });
+        // Ticks are placed from data-duration until the real duration is in, so they are on
+        // screen before anything is fetched, which under reduced motion is until someone presses
+        // play.
         placeTicks();
         video.addEventListener('loadedmetadata', placeTicks);
-        rail.addEventListener('click', function (e) {
-          var d = railDuration();
-          if (!d) return;
-          var r = rail.getBoundingClientRect();
-          var f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-          seekTo(f * d);
-        });
-        rail.hidden = false;
       }
       video.addEventListener('timeupdate', function () {
         var t = video.currentTime;
@@ -310,12 +450,12 @@
         for (var i = 0; i < chips.length; i++) {
           if (parseFloat(chips[i].getAttribute('data-seek')) <= t + 0.25) on = chips[i];
         }
-        chips.forEach(function (c) { c.classList.toggle('is-on', c === on); });
-        if (rail) {
-          var d = railDuration();
-          rail.style.setProperty('--pos', d ? Math.min(1, t / d) : 0);
-          ticks.forEach(function (tk) { tk.el.classList.toggle('is-on', tk.chip === on); });
-        }
+        chips.forEach(function (c) {
+          c.classList.toggle('is-on', c === on);
+        });
+        ticks.forEach(function (tk) {
+          tk.el.classList.toggle('is-on', tk.chip === on);
+        });
         Array.prototype.forEach.call(chapters.querySelectorAll('.chapter'), function (li) {
           li.classList.toggle('is-on', !!on && li.contains(on));
         });

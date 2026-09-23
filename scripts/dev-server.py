@@ -164,6 +164,8 @@ class Handler(SimpleHTTPRequestHandler):
     # stylesheet means a stale one looks like a broken page rather than a stale one.
     def end_headers(self) -> None:
         self.send_header("Cache-Control", "no-store, must-revalidate")
+        if self.path.split("?")[0] != RELOAD_PATH:
+            self.send_header("Accept-Ranges", "bytes")
         super().end_headers()
 
     def do_GET(self) -> None:  # noqa: N802 (name comes from the stdlib)
@@ -177,7 +179,61 @@ class Handler(SimpleHTTPRequestHandler):
         if target:
             self.serve_html(target)
             return
+        if self.serve_range():
+            return
         super().do_GET()
+
+    def serve_range(self) -> bool:
+        """Answer a Range request with the bytes it asked for. True if it was handled.
+
+        `SimpleHTTPRequestHandler` answers every request with the whole file and a 200, and a
+        browser reads a 200 to a Range request as a file it cannot seek in: `video.seekable`
+        comes back empty, so setting `currentTime` clamps to zero and the recording jumps to the
+        start. That made the demo player's scrub bar impossible to test here, and made it look
+        broken while being right. GitHub Pages serves ranges, so nothing was ever wrong in
+        production, which is the worst shape a bug can have.
+        """
+        asked = self.headers.get("Range")
+        if not asked:
+            return False
+        m = re.fullmatch(r"bytes=(\d*)-(\d*)", asked.strip())
+        if not m:
+            return False
+        path = self.translate_path(self.path)
+        if not os.path.isfile(path):
+            return False
+        size = os.path.getsize(path)
+        first, last = m.group(1), m.group(2)
+        if first:
+            start = int(first)
+            end = int(last) if last else size - 1
+        elif last:
+            start = max(0, size - int(last))  # "the last N bytes"
+            end = size - 1
+        else:
+            return False
+        end = min(end, size - 1)
+        if start > end or start >= size:
+            self.send_response(416)
+            self.send_header("Content-Range", f"bytes */{size}")
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return True
+        self.send_response(206)
+        self.send_header("Content-Type", self.guess_type(path))
+        self.send_header("Content-Range", f"bytes {start}-{end}/{size}")
+        self.send_header("Content-Length", str(end - start + 1))
+        self.end_headers()
+        left = end - start + 1
+        with open(path, "rb") as fh:
+            fh.seek(start)
+            while left > 0:
+                chunk = fh.read(min(64 * 1024, left))
+                if not chunk:
+                    break
+                self.wfile.write(chunk)
+                left -= len(chunk)
+        return True
 
     def resolve_html(self) -> str | None:
         """The on-disk .html this request wants, if it wants one."""

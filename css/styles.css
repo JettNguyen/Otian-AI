@@ -15746,18 +15746,47 @@ html[data-theme="dark"] .booking-container iframe {
   .chapter { padding: 16px; }
 }
 
-/* ── The recording's rail (index, how-it-works), 2026-09-11 ──
-   A thin track under the player with a tick at each chapter, built by js/demo-player.js from
-   the chapter buttons, filled to the playhead, and seekable on click. Ships hidden: with no
-   script there are no ticks and nothing to seek. Ticks are blue, the site's wayfinding colour;
-   the fill is ember, because it is the recording's own progress. The 20px box is the click
-   target; the visible track is 4px of it. */
-.demo-player-rail { position: relative; height: 20px; margin: 10px 2px 0; cursor: pointer; }
+/* ── The recording's rail (install, how-it-works), 2026-09-11, a scrubber since 2026-09-23 ──
+   A track under the player, filled to the playhead, with a tick at each chapter where a page has
+   a chapter list. It is a real scrubber: press anywhere along it, drag it, or reach it with Tab
+   and move with the arrow keys (js/demo-player.js). Ships hidden, because with no script there is
+   nothing to seek. Ticks are blue, the site's wayfinding color; the fill is ember, because it is
+   the recording's own progress. The 20px box is the target; the visible track is 4px of it.
+   `touch-action: none`, because a drag along the rail is a scrub and not a page scroll, and
+   without it a phone takes the gesture away mid-drag. */
+.demo-player-rail { position: relative; height: 20px; margin: 10px 2px 0; cursor: pointer; touch-action: none; }
 .demo-player-rail[hidden] { display: none; }
 .demo-player-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 4px; border-radius: 999px; background: var(--line-soft); }
 .demo-player-rail i { position: absolute; left: 0; top: 8px; height: 4px; width: calc(var(--pos, 0) * 100%); border-radius: 999px; background: var(--accent); }
 .demo-player-rail b { position: absolute; top: 3px; width: 2px; height: 14px; margin-left: -1px; border-radius: 1px; background: var(--c-blue); transition: background var(--transition); }
 .demo-player-rail b.is-on { background: var(--accent-ink); }
+/* The handle, which is the whole difference between a thing you watch and a thing you take hold
+   of. A bare filled track is a progress bar, and nobody drags a progress bar. It rides the ticks
+   rather than under them, with a ring of page behind it so it stays legible crossing one. */
+.demo-player-rail::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: calc(var(--pos, 0) * 100%);
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg-primary);
+  transition: transform var(--transition);
+  z-index: 1;
+}
+.demo-player-rail:hover::after,
+.demo-player-rail:focus-visible::after,
+.demo-player-rail.is-scrubbing::after { transform: scale(1.3); }
+/* The ring goes on the track rather than on the 20px box, so it draws around the thing somebody
+   is actually aiming at instead of around a band of empty space. */
+.demo-player-rail:focus-visible { outline: none; }
+.demo-player-rail:focus-visible::before { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .demo-player-rail::after { transition: none; }
+}
 /* The homepage's index is a strip of moments under the rail rather than tiles. */
 .chapters--strip { display: flex; justify-content: center; max-width: 1000px; margin: 12px auto 0; }
 .chapters--strip .chapter-times { justify-content: center; margin-top: 0; }

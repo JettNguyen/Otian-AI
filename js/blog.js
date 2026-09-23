@@ -8,7 +8,7 @@
    was by hand and by where its <script> sits. */
 import {
   makeFeatured, makeCard, normalizeArticles, escapeHtml,
-} from './blog-card.js?v=20260922-7';
+} from './blog-card.js?v=20260923-1';
 
 (function () {
   'use strict';

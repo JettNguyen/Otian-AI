@@ -229,9 +229,25 @@
         <p class="install-req install-ed-note">Archie for Business installs beside Archie, with its own data and its own keys, so one computer can run both and neither reads the other&rsquo;s. Two apps and two plans, bought separately. <a href="../business/">What a shared agent does, and what a business plan costs</a>.</p>
       </div>
 
-      <figure class="install-shot fade-up delay-3">
-        <div class="demo-player-frame"><img src="../../assets/archie-demo-light-poster.jpg" width="1600" height="1030" alt="The Archie app open on a Mac: an agent in the sidebar, and a welcome screen listing what it can talk through and what it can be pointed at." loading="lazy" /></div>
-        <figcaption><a href="../../how-it-works/">Watch Archie work, start to finish &rarr;</a></figcaption>
+      <!-- The real player, since 2026-09-22. This was a still poster sitting inside the player's
+           own frame, with no <video> under it and js/demo-player.js not even loaded on the page, so
+           it looked exactly like something that was about to play and never did (Jett). Same figure
+           as how-it-works/, same three encodings, same lazy attach: no src until it scrolls into
+           view, the poster and no autoplay under reduced motion. -->
+      <figure class="demo-player install-shot fade-up delay-3" id="installDemo">
+        <div class="demo-player-frame">
+          <video class="demo-player-video" preload="none"
+                 poster="../../assets/archie-demo-light-poster.jpg"
+                 muted loop playsinline disablepictureinpicture
+                 aria-label="A silent screen recording of Archie: opening the app, pointing a new agent at a read-only calendar, answering a few questions so it knows who it is working for, connecting it to Telegram with a claim code, then messaging it from a phone about a double-booked afternoon and confirming the fix.">
+            <source data-src="../../assets/archie-demo-light-1600.av1.mp4"  type='video/mp4; codecs="av01.0.09M.08"'    data-w="1600" data-h="1030" data-fps="60" />
+            <source data-src="../../assets/archie-demo-light-1600.hevc.mp4" type='video/mp4; codecs="hvc1.1.6.L123.90"' data-w="1600" data-h="1030" data-fps="60" />
+            <source data-src="../../assets/archie-demo-light-1280.h264.mp4" type='video/mp4; codecs="avc1.640028"'      data-w="1280" data-h="824"  data-fps="30" />
+            <p>Your browser can&rsquo;t play this video. <a href="../../assets/archie-demo-light-1280.h264.mp4">Download it instead.</a></p>
+          </video>
+        </div>
+        <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
+        <figcaption class="demo-player-caption">Recorded in Archie, August 2026. <a href="../../how-it-works/">Watch it beside the steps &rarr;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -251,7 +267,7 @@
         <p>Your agent stays on the computer you installed it on and runs there whether your phone is in your hand or in your pocket. From the app you can do most of what you do at the desk, though not open your knowledge files or the rows inside a collection. <a href="../mobile/">What it shows you, and what stays sealed</a>.</p>
       </div>
 
-      <div class="install-actions fade-up delay-2">
+      <div class="install-actions install-actions--solo fade-up delay-2">
         <div class="install-platform">
           <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk" data-download-note="download-note-android"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Android</span></a>
           <p class="install-req">Android 7.0 or later. It installs from the file rather than from the Play Store, so Android stops you once on the way.</p>
@@ -516,6 +532,7 @@
 
   <script src="../../js/nav.js?v=20260922-7"></script>
   <script src="../../js/download-feedback.js?v=20260922-7"></script>
+  <script src="../../js/demo-player.js?v=20260922-7"></script>
   <script type="module" src="../../js/account-nav.js?v=20260922-7"></script>
 </body>
 </html>

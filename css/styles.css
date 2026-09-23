@@ -13221,6 +13221,21 @@ html[data-theme="dark"] .booking-container iframe {
   grid-template-columns: 1fr 1fr;
 }
 
+/* One download and no platform to choose between: the phone block. Two columns with a single
+   child puts that child in the first of them, which reads as a button nudged off to the left
+   rather than a centered one (Jett, 2026-09-22). */
+.install-actions--solo {
+  grid-template-columns: 1fr;
+}
+
+/* The recording on the install page is the same player as how-it-works/, so it takes that page's
+   cap rather than the 860 the still poster used to sit at: 1600 covers 760 at 2x and does not
+   cover 860. Written here rather than left to source order, because .install-shot is 4,800 lines
+   below .demo-player and would otherwise win by accident. Its 56px top margin still applies. */
+.demo-player.install-shot {
+  max-width: 760px;
+}
+
 .install-req {
   margin: 14px 0 0;
   font-size: var(--fs-base);

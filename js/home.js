@@ -168,7 +168,8 @@
              and adding a step means redividing the act rather than finding a gap.
              The counts: the calendar act has six (question, working, proposal, the yes typing,
              the send, the answer), the mail act three (the card, the press, the answer), the
-             four-rows act eight, the overnight act three, the brief four. They had grown into
+             four-rows act thirteen (eight, and five more for the purchase: the ask, the question,
+             the buttons, the tap, the answer, added 2026-09-24), the overnight act three, the brief four. They had grown into
              a shape with no rule in it: the first message of the calendar act landed a third of
              the way through it and the last three arrived inside a fifth of it.
        MARKS Ember is one element, absolute inside the stage. Each frame the driver reads the
@@ -266,11 +267,12 @@
 
        THE ACT LENGTHS ARE NOT SET FROM THE STEP COUNTS, so a step is even inside an act and not
        across them. At 390 by 844 a step is 104px in the calendar act, 193px in the mail act and
-       the overnight one, 79px in the four-rows act, 120px in the brief and 169px in setup. Evening
+       the overnight one, 75px in the four-rows act (1.5 long since 2026-09-24, so its thirteen steps
+       keep about the length its eight had), 120px in the brief and 169px in setup. Evening
        those would mean sizing every act by how many things happen in it, and an act also has to be
        long enough to read its caption, which is a trade worth making on purpose rather than by
        arithmetic. */
-    var LEN = [0.6, 1, 1, 1, 1, 1, 0.8, 1.5], CUM = [0], TOT = 0;
+    var LEN = [0.6, 1, 1, 1, 1.5, 1, 0.8, 1.5], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must

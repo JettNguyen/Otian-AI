@@ -261,7 +261,7 @@
          where the money conversation belongs; do not delete that note without moving the
          disclosure here, or this line is left standing alone as an absolute. */
       bot: [
-        'Two things are fixed, not settings to find: email always arrives as a draft you send yourself, and calendar changes wait for your approval. It cannot buy anything or move your money.',
+        'Two things are fixed, not settings to find: email always arrives as a draft you send yourself, and calendar changes wait for your approval. It buys nothing unless you switch buying on, and then only at shops you pick, up to a limit you set.',
         'The rest (sorting, reminders, lists, lookups) just happens and you read the results. How does that sit with you?'
       ],
       type: 'choice',

@@ -1713,9 +1713,10 @@ capability with no row in this file reads to everyone downstream as one we do no
 itself, the same way you would: it reads the page, it clicks, it types. It works in a browser window
 on your own computer, and you can watch it. You sign in yourself, once, in that window. It never
 types a password, a card number or a sign-in code, and where one of those is asked for it stops and
-hands you the window. Before it presses anything that finalizes an order, a booking or an
-application, it stops and asks you. You name the sites it may never open at all, and every job has a
-time limit."
+hands you the window. Before it presses anything that sends, submits or finalizes something, it
+stops and asks you. The one exception is buying, which is off until you switch it on: then it may
+place an order at a shop you picked, up to a limit you set. You name the sites it may never open at
+all, and every job has a time limit."
 
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
@@ -1756,7 +1757,8 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
 - **The prompt says it as well, whatever is installed.** `NEVER_LINE` in
   `crates/archie-runtime/src/gateway/prompt.rs` sits in every system prompt: the agent never makes
   phone calls, sends texts of its own, pays for anything, or presses a button that finalizes a
-  purchase, booking or application.
+  purchase, booking or application. An agent with buying switched on gets `NEVER_LINE_BUYING` in
+  its place, which releases a purchase inside the owner's limits and nothing else.
 - **What it learns stays with the person.** `screen/routes.rs` records the click path that worked as
   role and accessible name, never selectors and never coordinates, learned per person and never
   shipped inside an add-on. **Only clicks are recorded, never typing**, because typed values are
@@ -1775,13 +1777,12 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
   next year.
 
 **Boundaries — do not cross:**
-- ❌ **Never say Archie buys, books, or checks out.** It cannot type a card number at all, and with
-  the Buying switch off, which is how it ships and how every public page describes it, the press
-  that finalizes an order comes back to the person as a question. This is the same claim as
-  "Archie cannot spend your money", it is one of the strongest things this file holds, and a page
-  selling the agent as completing a purchase breaks it. **The switch exists in the code since
-  2026-09-21 and changes nothing here**: see "Buying, as a switch the owner turns on" below, which
-  bans writing about it at all until one real purchase has been made.
+- ❌ **Never say Archie buys, books, or checks out without the switch and the limits in the same
+  sentence.** It cannot type a card number at all, and with the Buying switch off, which is how it
+  ships, the press that finalizes an order comes back to the person as a question. Switched on, it
+  may press Place order inside the owner's limits. **Rewritten 2026-09-24**, when Jett approved
+  buying for copy: see "Buying, as a switch the owner turns on" below for the wording and its
+  required clauses.
 - ❌ Never "it fills in the whole form". It fills what is not a password, a card or a code, and
   stops at the ones that are.
 - ❌ Never describe it driving other **applications**. That half is not built on either platform.
@@ -1834,7 +1835,9 @@ check-in cannot finish without paying, it stops and tells you what is being aske
   `data/marketplace/routines/check-in-window.json` in the Archie repo, on the browser lane above,
   which is what enforces every sentence of it in code rather than in the skill's own words.
 - ❌ **This does not soften the claim above it.** It checks in; it does not book, change or cancel
-  anything, and it cannot type a card number. A page that lists this beside "books your travel" has
+  anything, and it cannot type a card number. With buying switched on and the airline on the shop
+  list, the code would release a Pay press, so "it buys nothing" rests on the add-on's own
+  instructions in that one case. A page that lists this beside "books your travel" has
   broken the strongest claim in this file to advertise the weaker half of a feature.
 - ⚠️ A confirmation code and a surname are not a password, which is why this works at all. Where an
   airline wants an account sign-in or sends a code, it hands the window over like everything else.
@@ -1843,11 +1846,11 @@ check-in cannot finish without paying, it stops and tells you what is being aske
 
 **What this settles outside this file.** A benchmark or a comparison that scores Archie low on
 purchasing and booking is scoring a decision, not a gap, and the answer is still to say so rather
-than to file the work. **Updated 2026-09-21:** the decision changed in the code and has not changed
-on the site. A buying switch exists, off by default, unproven, and banned from copy (see "Buying,
-as a switch the owner turns on"), so the answer to a benchmark is unchanged until that ban lifts.
-The sites worth wanting are the ones with no connector and no checkout, which is what the two
-shipped add-ons do.
+than to file the work. **Updated 2026-09-24:** the decision changed in the code on September 21 and
+on the site on September 24. Buying is an opt-in switch with limits the owner sets (see "Buying, as
+a switch the owner turns on"), so the answer to a benchmark is that Archie buys when its owner has
+said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
+Book now press is released like a purchase, but nothing plans and books travel as one job.
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
@@ -2104,9 +2107,10 @@ privacy question and the privacy answers do not touch it, so it gets a claim of 
 programs talking to each other with nobody in the middle. Archie is one agent, and the only
 conversation it is in is the one with you. It is not awake between messages: it runs when you write
 to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
-runs in between. It cannot run a program on your computer. It cannot call, text, spend, or press a
-button that finishes something, on a website or anywhere else; drafts wait for your Send. And you
-can quit the app, because there is nowhere else it is running."
+runs in between. It cannot run a program on your computer. It cannot call or text, and it presses
+nothing that finishes something, on a website or anywhere else, unless you switched on buying and
+the order is inside your limits; drafts wait for your Send. And you can quit the app, because there
+is nowhere else it is running."
 
 **Why it's true, item by item:**
 
@@ -2115,7 +2119,7 @@ can quit the app, because there is nowhere else it is running."
 | One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
 | Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
 | No program execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
-| No calls, texts, purchases, or finalizing presses | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking |
+| No calls, texts, or finalizing presses, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry) |
 | No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
 | Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |
 | The switch is the owner's | Start and Stop per agent, and the app quits. It answers only while the computer is awake, Archie is open and the agent is started |
@@ -2729,8 +2733,9 @@ way to mark a message as written by an assistant. On a shared agent this is the 
   Access is required to read, Automation to send, and both are macOS grants the user makes.
 
 **Still true, with one rescoped 2026-08-21:**
-- **The agent cannot buy anything.** `archie-runtime` cannot see `archie-core::purchases`;
-  purchases require a human in Stripe Checkout.
+- **The agent cannot buy anything from us.** `archie-runtime` cannot see `archie-core::purchases`;
+  a plan is bought by a human in Stripe Checkout. Buying at a shop on the web is a separate thing,
+  an opt-in switch since 2026-09-22: see "Buying, as a switch the owner turns on".
 - **Unprompted, the agent messages only its own people** — `Channel::send` targets the chats
   on its roster (in the personal edition, one person: the owner; on a shared business agent,
   approved guests' chats too), and the inbound roster (`access.rs`) governs who may talk *to*
@@ -2745,7 +2750,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | "Archie asks before it changes anything in your calendar." | ✅ **True now** (two-turn gate) |
 | "Nothing reaches Gmail until you tap Send." | ⛔ **Banned 2026-08-31.** A scheduled send leaves with no tap. Use "nothing leaves your account until you send it or set a time." |
 | "Nothing leaves your account until you send it or set a time." | ✅ **True now** (single-caller send path; a timed send cannot be armed by the agent) |
-| "Archie cannot spend your money." | ✅ True as shipped (Buying is off by default and off for everybody). ⚠️ **No longer true because no code path exists**: one does since 2026-09-21. The sentence is true about the product; do not defend it with "there is no purchase feature" any more |
+| "Archie cannot spend your money." | ⛔ **Retired 2026-09-24.** Buying is a switch the owner can turn on, and the site now says so. Use the Buying entry's wording: "Buys only if you switch it on, only at shops you pick, only up to a limit you set." |
 | "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
@@ -2905,7 +2910,7 @@ Two of the fourteen need reading carefully rather than rewriting, and neither tu
 
 - `privacy-policy/index.html:265` says **"no purchase or payment feature"**. Still true of the
   cap, which takes no card, holds no card, and sends money nowhere. It is the *buying* entry below
-  that puts this line under pressure, not this one, and that entry's ban keeps it as it is.
+  that puts this line under pressure, not this one, and it was rewritten when that entry's ban lifted.
 - `faq/index.html:461` says **"It cannot call, text, spend, or press a button"**. "Spend" sits in
   a list of things done *out in the world*, beside calling and pressing, so it reads as spending
   the owner's money at somebody else, which is what it has always meant. Left alone.
@@ -2920,10 +2925,12 @@ Two of the fourteen need reading carefully rather than rewriting, and neither tu
   "spend money on its own: there is no purchase feature, and anything shaped like paying on a
   website is stopped and routed to you first." That is buying, in so many words.
 
-**So the fourteen stay exactly as they are, and this is now a finding rather than a task.** The
-list is kept below because it is the list to reread on the day Jett decides the site should
-mention a spending limit at all. That decision has not been made and is his (see the ban at the
-bottom). Two are generated and would have to be changed at their source, not in the file:
+**Rewritten 2026-09-24, for buying rather than for the cap.** The finding above still stands: the
+cap moved none of them. What moved them is Jett approving buying for copy (the Buying entry below),
+and the same pass rewrote every one to that entry's wording. The cap still may not be mentioned,
+and the rule below about keeping a limit on thinking away from the buying sentences binds harder
+now that the buying sentences exist. The list is kept as the record of where the claim lived. Two
+are generated and were changed at their source, not in the file:
 
 | Where | Note |
 | --- | --- |
@@ -2961,14 +2968,29 @@ sell on it at all, which is Jett's and has not been made. When it is lifted, the
 a page about **what the app costs to run**, never beside the buying sentences, because a limit and
 a purchase in one paragraph is exactly the merge this entry exists to prevent.
 
-### 🚧 Buying, as a switch the owner turns on: BUILT 2026-09-21, NEVER RUN, NOT APPROVED FOR COPY
+### ✅ Buying, as a switch the owner turns on: SHIPPED 2026-09-22 (0.3.0), APPROVED FOR COPY 2026-09-24
 
-**Nothing on the site may change yet, and this entry is not permission to change it.** It exists
-because the rule at the top of this file cuts both ways: a capability nobody wrote down does not
-exist downstream, and a capability written down as shipped before it has ever run is worse. This
-one has never bought anything. Read the two bans at the bottom before writing a word.
+**Jett lifted both bans on 2026-09-24**, in these words: "agent purchases are allowed, they are just
+explicitly gated. We have to offer what these other agents offer, we just have to implement and
+market it in a way that aligns with our company values." The earlier version of this entry held
+all copy back until one real purchase had been reconciled against a card statement, and held the
+fourteen "cannot spend" sentences where they were because changing them was his decision. He has
+made it. The sentences were rewritten the same day (see the list in the spending cap entry above).
 
-**What was actually built** (the Archie repo, 2026-09-21, commits `8d3d95d2` through `09571777`):
+**Approved wording:** "Your agent can buy things for you on a website, if you switch that on. It is
+off until you do. You choose the shops it may buy from, the most it may spend on one order, and the
+most over a week or a month. Inside those limits it presses the final button, Place order or Buy
+now, and tells you what it bought. Anything outside them comes back to you as a question. It never
+types a card number, so your card has to be saved at the shop already. It never starts a
+subscription or a free trial. The limit is checked against the price it reads on the page, so a
+shop that adds a charge at the last step can take it over. For a ceiling nobody can get past, give
+it a card from your bank that works at one shop, with its own limit."
+
+The short form, for a chip, a table cell or a caption: **"Buys only if you switch it on, only at
+shops you pick, only up to a limit you set."**
+
+**What was actually built** (the Archie repo, 2026-09-21, commits `8d3d95d2` through `09571777`, all
+of them in 0.3.0, released September 22):
 a switch on the Websites panel, off by default, that lets the agent press a button that completes a
 purchase. Everything about it is in `archie_domain::SpendPolicy`, `crates/archie-runtime/src/screen/
 guard.rs` and `.../screen/spend.rs`, and documented in that repo's `docs/SITES-AND-APPS.md`.
@@ -3001,23 +3023,46 @@ merchant-locked virtual card from their own bank, where the ceiling is held by s
 us. **Any copy about this that does not carry that sentence is dishonest copy**, however true the
 rest of it is.
 
-**⛔ Two bans, until both are lifted in writing here.**
+**Required clauses, every time it is described, however short the description:**
 
-1. **No page may say Archie buys anything.** Not in the present tense, not as "can", not as a
-   coming feature, not in a chip, a caption or a comparison table. It has never completed a real
-   purchase: the decisions are unit-tested and the reading of a real checkout page is not (that
-   repo's `OPEN-THREADS.md`, "Checks that need a real device"). Lift this when one real purchase
-   has been made and the receipt reconciled against a card statement, and not before.
-2. **The fourteen sentences listed in the entry above stay exactly as they are.** They say Archie
-   cannot spend money or buy anything. With the switch off that is what the product does, and the
-   switch is off for everybody. Changing them is a decision about how to sell the product, it is
-   Jett's, and it has not been made. Two of them are legal pages (`privacy-policy/index.html:265`
-   says "no purchase or payment feature", `terms-of-service/index.html:230`), which are the two
-   that would need a lawyer's eye before a word moves, and one is generated into `llms.txt` and
-   quoted back by machines that will not recheck.
+- ⚠️ **Off until they switch it on.** The same clause as the Websites entry, for the same reason.
+- ⚠️ **The limits are theirs.** Shops, a per-order cap, and a total over a window. A description
+  that names buying and no limit is describing a card handed over.
+- ⚠️ **The weak link, in the same breath as the limit.** "The limit is checked against the price it
+  reads on the page" or words that say that. **Any copy about this that does not carry that
+  sentence, or its short form's promise of a limit the owner sets, is dishonest copy**, however true
+  the rest of it is. On a page with room for one more sentence, the bank card is the remedy, and the
+  Standard's rule is that a published limitation gets its remedy beside it.
+- ⚠️ **It never types a card number.** This is the strongest sentence in the area and it survives
+  the switch unchanged: `guard::typing_stop` is untouched by buying.
 
-**What a reader of this file should take away today:** the capability exists in the code, nobody
-has run it, and the product every public page describes is still the correct one.
+**Boundaries, do not cross:**
+
+- ❌ **Never "it cannot spend your money" or "there is no purchase feature" again.** Both were true
+  of what shipped before September 22 and neither is true now.
+- ❌ **Never "hands-free shopping", "it shops for you", "set it and forget it"** or anything that
+  drops the switch and the limits. The capability is a gate the owner opens, and the gate is the
+  claim.
+- ❌ **Never "you will never be charged more than your limit."** The reading of the page is the
+  weak link, and that sentence is the one the weak link falsifies.
+- ❌ **Never that it can subscribe, start a trial or buy a membership.** Recurring charges are never
+  released, whatever the owner set.
+- ❌ **Never that a guest on a shared agent can buy.** `may_spend` refuses a guest in code.
+- ❌ **Never "tested", "proven" or "reliable at checkout."** The decisions are unit-tested and the
+  browser lane runs against a real shop (`shop_live.rs`), but no real purchase has been completed
+  and reconciled against a card statement yet (the Archie repo's `docs/OPEN-THREADS.md`). Present
+  tense is fine because the code ships; a claim about how well it does it is not, until that
+  purchase has been made. Say "if you switch it on", never "it reliably".
+- ❌ **Do not merge it with the spending cap on the AI bill** (the entry above). A limit on thinking
+  and a limit on buying are two different sentences on two different pages.
+
+**What this does to three older claims.** "Before it presses anything that finalizes an order, it
+stops and asks you" (Websites) now needs its exception named, and the Websites entry carries it.
+"Your agent does the work. You say the word." is scoped to a reply that reaches somebody else and
+does not move, because a purchase is not a reply; do not widen it to cover buying in either
+direction. And Flight Check-In's "It buys nothing" stays true, but it is now the add-on's own
+instructions holding it rather than the code alone: with buying on and an airline on the shop list,
+the code would release a Pay press there.
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 

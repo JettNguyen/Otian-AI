@@ -301,7 +301,7 @@ QUESTIONS = [
      "included with Archie: Skills, Routines, and Personalities."),
     ("Can it send email or change my calendar on its own?",
      "Mail goes out when you tap Send or set a time for it, and a calendar change is proposed "
-     "and waits for your confirmation. It cannot spend money or buy anything. It reads your "
+     "and waits for your confirmation. It buys only if you switch that on, at shops you pick, up to a limit you set. It reads your "
      "calendar and answers chat messages without asking each time, which is the same door "
      "being useful, and is worth knowing before you connect either."),
     ("What can it connect to?",
@@ -393,7 +393,7 @@ def build_llms(pages):
     out += [
         "## What we do not claim",
         "",
-        "- Archie cannot spend money or buy anything.",
+        "- Archie buys only if its owner switches that on, only at shops they pick, and only up to a limit they set.",
         "- It connects to no bank. The add-ons that track bills and spending keep the list you",
         "  give them.",
         "- We are not a compliance certification. Your content still flows to a cloud AI",

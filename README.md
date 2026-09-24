@@ -72,7 +72,7 @@ per-person record of the add-ons you install.
 **You hold the switches on the parts that matter.** Archie can draft an email reply, but it
 cannot send one on its own: the draft comes to your chat with Send, Edit and Dismiss buttons, and
 nothing leaves your account until you send it or set a time. It asks before it changes anything in your calendar.
-And it cannot spend your money, because no purchase path exists in the app at all.
+And it buys nothing unless its owner switches buying on, and then only at shops they list and up to limits they set.
 
 **It works while you sleep.** Routines run on a schedule, unattended, and report back to your
 chat when they're done.

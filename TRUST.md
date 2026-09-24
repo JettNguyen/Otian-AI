@@ -1519,6 +1519,16 @@ the person really has added tools Archie never shipped, without a release. What 
 the safety shape: a tool the server marks read-only runs, and anything else is staged for the
 person's approval like every other write.
 
+**Signing in instead of pasting a key, since 2026-09-24.** *Approved wording:* "Some servers have you
+sign in on their own site instead of giving you a key. For those, Archie opens the sign-in in your
+browser, and what comes back is kept in your computer's password store." Why it's true: the Archie
+repo's `archie_net::mcp_auth` and `connector_mcp_sign_in` (`16145ae6`), which find the server's
+sign-in pages from the server itself, refuse any of them that is not public https, register Archie
+for that one sign-in, and keep the refresh token in the credential store like every other secret.
+Built for Robinhood's trading server. ❌ Never name Robinhood, or any trading, as something Archie
+does: no add-on uses it yet, and a trading claim needs its own entry. ⚠️ A server that rotates its
+sign-in may ask again after Archie restarts (the Archie repo's `docs/OPEN-THREADS.md`).
+
 ⚠️ **Untested against a live server, so say what it does and never call it proven.** Nothing has
 connected to a real endpoint (`docs/MCP-AND-SKILLMD.md`, and the Archie repo's own "built but
 never run live" list). Same clause as Flight Check-In.

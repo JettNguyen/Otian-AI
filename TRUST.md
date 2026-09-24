@@ -2000,6 +2000,39 @@ for that day. It says what it checked and what it did not."
 - ⚠️ Hours are the map's, and the map is sometimes out of date. The phone number ships in every
   reply for exactly that reason, and copy should not promise the hours are right.
 
+### 🚧 Prices at Shopify stores, for Price Watch: BUILT 2026-09-24, not yet in a release
+
+**Not a claim until a release carries it.** Built in the Archie repo on September 24, 2026. Until a
+release ships it, nothing here may be said in the present tense on the site.
+
+**Approved wording, once it ships:** "Ask Price Watch to check your prices, and your agent looks up
+what Shopify stores charge right now: the store, the price, whether it is in stock, and a link that
+opens that store's checkout with the item in the cart. Amazon, Walmart, and the other big
+marketplaces are not Shopify stores, so for those it searches the web."
+
+**Why it's true:** `crates/archie-net/src/shopify.rs` (the catalog client) and
+`crates/archie-runtime/src/shopify.rs` (the `shopify_search` tool), declared by
+`data/marketplace/skills/price-watch.json` from version 1.3.0.
+
+- **No account and no key.** Shopify's catalog answers anonymous searches. What it does require is
+  a page saying which assistant is asking, and this repo serves it at `ucp/agent.json` (it is on
+  the allowlist in `scripts/stage-site.py`). If that page is not live, every search fails, and the
+  tool tells the agent to say so and use a web search instead.
+- **It only reads.** Paying through Shopify's own system is invite-only, so nothing here places an
+  order. The cart link lands on the store's own checkout page, where buying works exactly as the
+  Buying entry says: off until switched on, the shop on the owner's list, and a tap before the
+  order.
+- **Only an agent with Price Watch switched on carries the tool**, so nobody else pays for it.
+
+**Boundaries, do not cross:**
+- ❌ **Never say Archie finds the lowest price anywhere, or checks every store.** It checks Shopify
+  stores, plus whatever a web search turns up.
+- ❌ Never say Archie buys through Shopify, or that Shopify checkout is built in. The order is
+  placed on the store's own page, under the Buying switch.
+- ❌ Never imply Shopify is a partner or endorses Archie. Naming Shopify in plain type to say where
+  a price came from is fine; a Shopify logo is not (the no-logos rule).
+- ⚠️ A price is what the store showed at that moment. Say "right now", never "always current".
+
 ### ✅ Mail and calendar from iCloud and five other providers, on an app password (SHIPPED 2026-09-01, Archie 0.2.2)
 
 Built 2026-09-01: `crates/archie-net/src/mail/imap.rs` (IMAP over TLS on 993, SMTP with STARTTLS

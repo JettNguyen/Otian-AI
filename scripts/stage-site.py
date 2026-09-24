@@ -16,7 +16,10 @@ ROOT_FILES = {'.nojekyll', 'CNAME', 'index.html', '404.html', 'banner.html', 'll
 ASSET_TYPES = {'.svg', '.png', '.jpg', '.jpeg', '.webp', '.ico', '.pdf', '.mp4', '.webm', '.woff', '.woff2'}
 EXTRA = {'assets/articles.json', 'assets/ai-glossary-final.md', 'data/public-catalog.json',
          '.well-known/security.txt', '.well-known/microsoft-identity-association.json',
-         'phone/sw.js', 'phone/manifest.webmanifest', 'terms-of-service/versions/2026-09-14.json'}
+         'phone/sw.js', 'phone/manifest.webmanifest', 'terms-of-service/versions/2026-09-14.json',
+         # Who Archie is, as Shopify's catalog reads it: fetched by Shopify on every product search
+         # the Archie app makes (archie_net::shopify::AGENT_PROFILE). Moving it breaks every search.
+         'ucp/agent.json'}
 
 def public_file(rel):
     p = Path(rel)

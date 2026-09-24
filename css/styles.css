@@ -15758,28 +15758,47 @@ html[data-theme="dark"] .booking-container iframe {
 .demo-player-rail[hidden] { display: none; }
 .demo-player-rail::before { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 4px; border-radius: 999px; background: var(--line-soft); }
 .demo-player-rail i { position: absolute; left: 0; top: 8px; height: 4px; width: calc(var(--pos, 0) * 100%); border-radius: 999px; background: var(--accent); }
-.demo-player-rail b { position: absolute; top: 3px; width: 2px; height: 14px; margin-left: -1px; border-radius: 1px; background: var(--c-blue); transition: background var(--transition); }
-.demo-player-rail b.is-on { background: var(--accent-ink); }
+/* The ticks. Taller than the handle and carrying a hairline of page around them, because a blue
+   mark on the ember fill is blue on orange, which is two colors of the same weight and reads as
+   neither. The hairline is what puts an edge between them, and the extra height is what keeps a
+   tick visible when the handle is parked on it. */
+.demo-player-rail b {
+  position: absolute;
+  top: 2px;
+  width: 3px;
+  height: 16px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--c-blue);
+  box-shadow: 0 0 0 1px var(--bg-primary);
+  transition: background var(--transition);
+}
+/* The one the playhead is in, in ink rather than in ember. Ember was the obvious choice and is
+   wrong in the dark theme, where --accent-ink and --accent are the same value: the mark for
+   "you are here" disappeared into the fill it was sitting on. Ink contrasts with the fill in
+   both themes, which is the only thing this mark has to do. */
+.demo-player-rail b.is-on { background: var(--text-primary); }
 /* The handle, which is the whole difference between a thing you watch and a thing you take hold
-   of. A bare filled track is a progress bar, and nobody drags a progress bar. It rides the ticks
-   rather than under them, with a ring of page behind it so it stays legible crossing one. */
+   of. A bare filled track is a progress bar, and nobody drags a progress bar. Small, because it
+   is the answer to "can I move this" and not the subject of the bar: at 12px with a 3px ring it
+   was the loudest thing on screen and it swallowed whichever tick it was parked on. */
 .demo-player-rail::after {
   content: "";
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: calc(var(--pos, 0) * 100%);
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 3px var(--bg-primary);
+  box-shadow: 0 0 0 2px var(--bg-primary);
   transition: transform var(--transition);
   z-index: 1;
 }
 .demo-player-rail:hover::after,
 .demo-player-rail:focus-visible::after,
-.demo-player-rail.is-scrubbing::after { transform: scale(1.3); }
+.demo-player-rail.is-scrubbing::after { transform: scale(1.2); }
 /* The ring goes on the track rather than on the 20px box, so it draws around the thing somebody
    is actually aiming at instead of around a band of empty space. */
 .demo-player-rail:focus-visible { outline: none; }

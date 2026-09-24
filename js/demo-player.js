@@ -426,8 +426,24 @@
           tk.el.style.left = (Math.min(tk.at, d) / d) * 100 + '%';
         });
       };
+      /* A press on a time is a press on the recording, so the recording has to be where the
+         reader can see it. The list of steps sits under the player and is taller than it, so
+         somebody reading the sixth card has the player six hundred pixels above the fold:
+         pressing a time seeked it, played it, and looked from their seat exactly like a button
+         that does nothing. Only when it is actually out of the way, so a press with the player
+         already on screen does not yank the page. */
+      var bringIntoView = function () {
+        var box = player.getBoundingClientRect();
+        var room = window.innerHeight || document.documentElement.clientHeight;
+        if (box.bottom > 80 && box.top < room - 80) return;
+        player.scrollIntoView({
+          block: 'center',
+          behavior: reduceMotion ? 'auto' : 'smooth'
+        });
+      };
       chips.forEach(function (chip) {
         chip.addEventListener('click', function () {
+          bringIntoView();
           seekTo(parseFloat(chip.getAttribute('data-seek')) || 0, true);
         });
       });

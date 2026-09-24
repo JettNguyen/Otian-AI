@@ -1715,7 +1715,8 @@ on your own computer, and you can watch it. You sign in yourself, once, in that 
 types a password, a card number or a sign-in code, and where one of those is asked for it stops and
 hands you the window. Before it presses anything that sends, submits or finalizes something, it
 stops and sends you the page. Tap Press it for me, from Archie, your phone or your chat app, and it
-presses that one button; or press it yourself in the window. A purchase also needs buying switched
+presses that one button; or finish it yourself, in the window on the computer, or in the shop's
+own app on your phone if your cart shows up there. A purchase also needs buying switched
 on, at a shop you picked and up to a limit you set, and a subscription, a free trial, closing an
 account or moving money is always yours to press. You name the sites it may never open at all, and
 every job has a time limit."
@@ -1776,7 +1777,9 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
 - ⚠️ **Say it is off until they turn it on.** Anything else describes a computer the reader does not
   have.
 - ⚠️ **Say the decision comes back to them.** Every stop above ends with the person deciding,
-  either by tapping for the agent to press that one button or by pressing it themselves, and that
+  either by tapping for the agent to press that one button or by finishing it themselves (the card
+names the computer's window and the shop's own app on their phone, with "if your cart shows up
+there", because not every shop keeps a cart across devices), and that
   is the actual claim. Not that the agent is careful: that the part which could hurt them waits for
   them. Passwords, card numbers and codes are still never typed, tap or not.
 - ⚠️ **Three add-ons use it today**, Statement Collector, Form Filler and Flight Check-In

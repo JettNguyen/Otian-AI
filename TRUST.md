@@ -1714,9 +1714,17 @@ itself, the same way you would: it reads the page, it clicks, it types. It works
 on your own computer, and you can watch it. You sign in yourself, once, in that window. It never
 types a password, a card number or a sign-in code, and where one of those is asked for it stops and
 hands you the window. Before it presses anything that sends, submits or finalizes something, it
-stops and asks you. The one exception is buying, which is off until you switch it on: then it may
-place an order at a shop you picked, up to a limit you set. You name the sites it may never open at
-all, and every job has a time limit."
+stops and sends you the page. Tap Press it for me, from Archie, your phone or your chat app, and it
+presses that one button; or press it yourself in the window. A purchase also needs buying switched
+on, at a shop you picked and up to a limit you set, and a subscription, a free trial, closing an
+account or moving money is always yours to press. You name the sites it may never open at all, and
+every job has a time limit."
+
+**Changed 2026-09-24: a finalizing press can be handed over with a tap.** Jett: "not everybody is
+going to be at their computer to press to approve." Before this, no answer released one. Now the
+owner's tap on the card releases that one press, by its name and its site, once
+(`PendingPress` in `screen/tools.rs`, rechecked against `guard::click_can_be_tapped` at the moment
+of the click). A guest cannot give it and a routine never receives one (`turn.rs`, owner only).
 
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
@@ -1767,9 +1775,10 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
 **Required clauses — do not drop them:**
 - ⚠️ **Say it is off until they turn it on.** Anything else describes a computer the reader does not
   have.
-- ⚠️ **Say the window comes back to them.** Every stop above ends with the person holding the
-  browser, and that is the actual claim. Not that the agent is careful: that the part which could
-  hurt them is the part it hands back.
+- ⚠️ **Say the decision comes back to them.** Every stop above ends with the person deciding,
+  either by tapping for the agent to press that one button or by pressing it themselves, and that
+  is the actual claim. Not that the agent is careful: that the part which could hurt them waits for
+  them. Passwords, card numbers and codes are still never typed, tap or not.
 - ⚠️ **Three add-ons use it today**, Statement Collector, Form Filler and Flight Check-In
   (`required_screen` in the Archie repo's `data/marketplace/skills/`, and that grep is the count).
   Flight Check-In joined on 2026-09-16 and this clause was not updated in the same pass, while the
@@ -2979,15 +2988,28 @@ made it. The sentences were rewritten the same day (see the list in the spending
 
 **Approved wording:** "Your agent can buy things for you on a website, if you switch that on. It is
 off until you do. You choose the shops it may buy from, the most it may spend on one order, and the
-most over a week or a month. Inside those limits it presses the final button, Place order or Buy
-now, and tells you what it bought. Anything outside them comes back to you as a question. It never
+most over a week or a month. Even then it asks before every order: it stops at Place order and
+sends you the page, and it presses the button only after you tap Press it for me, in Archie, on
+your phone or in your chat app. Anything outside your limits it will not press at all. It never
 types a card number, so your card has to be saved at the shop already. It never starts a
 subscription or a free trial. The limit is checked against the price it reads on the page, so a
 shop that adds a charge at the last step can take it over. For a ceiling nobody can get past, give
 it a card from your bank that works at one shop, with its own limit."
 
 The short form, for a chip, a table cell or a caption: **"Buys only if you switch it on, only at
-shops you pick, only up to a limit you set."**
+shops you pick, only up to a limit you set."** Where there is room for one more clause, it is
+"and it asks before every order".
+
+**Changed 2026-09-24, the same day: every purchase waits for a tap.** Jett, in two messages:
+"when ember is allowed to buy, it should still be gated by a tap from the user in archie apps or
+chat apps", and "when the user says to buy something, the agent should still ask, before it does
+the final order confirmation; never just do it." The first version released a purchase inside the
+limits with nobody asked. The Archie repo's `860589da` made the tap the release: the switch and
+the limits decide whether a tap is offered at all, and the tap decides whether the press happens.
+Asking for the purchase in chat ("buy it", "yes") releases nothing: only the card's own button, or
+"press it" typed on a chat app that has no buttons, and only after the card has gone out
+(`is_press_approval` and its test in `gateway/tools_screen.rs`, `approved` in `screen/tools.rs`).
+
 
 **What was actually built** (the Archie repo, 2026-09-21, commits `8d3d95d2` through `09571777`, all
 of them in 0.3.0, released September 22):
@@ -3041,8 +3063,11 @@ rest of it is.
 - ❌ **Never "it cannot spend your money" or "there is no purchase feature" again.** Both were true
   of what shipped before September 22 and neither is true now.
 - ❌ **Never "hands-free shopping", "it shops for you", "set it and forget it"** or anything that
-  drops the switch and the limits. The capability is a gate the owner opens, and the gate is the
-  claim.
+  drops the switch, the limits or the tap. The capability is a gate the owner opens, and the gate is
+  the claim. **Never draw or write a purchase that happens without the card and the tap in
+  between**, including one the person asked for in the same breath.
+- ❌ **Never that a routine buys on its own.** A routine can reach the card; the tap is still the
+  owner's, and a routine has nobody present to give it.
 - ❌ **Never "you will never be charged more than your limit."** The reading of the page is the
   weak link, and that sentence is the one the weak link falsifies.
 - ❌ **Never that it can subscribe, start a trial or buy a membership.** Recurring charges are never

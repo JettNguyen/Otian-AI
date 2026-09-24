@@ -1717,8 +1717,9 @@ hands you the window. Before it presses anything that sends, submits or finalize
 stops and sends you the page. Tap Press it for me, from Archie, your phone or your chat app, and it
 presses that one button; or finish it yourself, in the window on the computer, or in the shop's
 own app on your phone if your cart shows up there. A purchase also needs buying switched
-on, at a shop you picked and up to a limit you set, and a subscription, a free trial, closing an
-account or moving money is always yours to press. You name the sites it may never open at all, and
+on, at a shop you picked and up to a limit you set; a subscription or free trial also needs it on,
+and the card says what it repeats at. Moving money and signing a contract are always yours to
+press. You name the sites it may never open at all, and
 every job has a time limit."
 
 **Changed 2026-09-24: a finalizing press can be handed over with a tap.** Jett: "not everybody is
@@ -2994,8 +2995,8 @@ off until you do. You choose the shops it may buy from, the most it may spend on
 most over a week or a month. Even then it asks before every order: it stops at Place order and
 sends you the page, and it presses the button only after you tap Press it for me, in Archie, on
 your phone or in your chat app. Anything outside your limits it will not press at all. It never
-types a card number, so your card has to be saved at the shop already. It never starts a
-subscription or a free trial. The limit is checked against the price it reads on the page, so a
+types a card number, so your card has to be saved at the shop already. A subscription or free
+trial works the same way, and the card says what it will charge each time and when. The limit is checked against the price it reads on the page, so a
 shop that adds a charge at the last step can take it over. For a ceiling nobody can get past, give
 it a card from your bank that works at one shop, with its own limit."
 
@@ -3034,9 +3035,12 @@ intention:
    in this area.
 3. **Only presses that buy are released.** `click_needs_approval` still catches Submit, Send,
    Delete account, Unsubscribe and Cancel subscription, and a second classifier
-   (`click_is_purchase`) decides which of those the switch may release. Recurring charges
-   (Subscribe, Start free trial, Buy membership) are never released, because a per-purchase cap
-   cannot see a charge that lands a month later.
+   (`click_is_purchase`) decides which of those the switch may release. *Amended 2026-09-24:*
+   every one of them now waits for the owner's tap, and a recurring charge (Subscribe, Start free
+   trial, Buy membership) is tappable with buying on at a listed shop only once the agent has read
+   what repeats and when, which the card then states in the app's words (`click_is_commitment`,
+   Archie repo `c85743e7`). Jett's reasoning: every final move is gated by the person, so a trial
+   somebody wants is theirs to approve.
 4. **Three ceilings, and one of them is not ours.** A shop allow-list that is empty-means-nothing,
    a per-purchase cap, and a rolling total over a window the owner picks. A guest on a shared
    business agent never spends, in code (`may_spend`).
@@ -3073,8 +3077,22 @@ rest of it is.
   owner's, and a routine has nobody present to give it.
 - ❌ **Never "you will never be charged more than your limit."** The reading of the page is the
   weak link, and that sentence is the one the weak link falsifies.
-- ❌ **Never that it can subscribe, start a trial or buy a membership.** Recurring charges are never
-  released, whatever the owner set.
+- ❌ **Never a subscription, trial or membership without "what it repeats at" beside it.** They are
+  tappable since 2026-09-24, and the card carries the recurring price and the first charge; copy
+  that shows one must show that too.
+- ❌ **Never that it moves money or signs a contract.** Transfers, wires, sending money to a person
+  and signing a contract are never pressed, tap or not (`guard::NEVER_TAPPED_WORDS` and
+  `NEVER_TAPPED_PHRASES`): there is no chargeback on a transfer, nothing can check who it goes to,
+  and it is the press a scam page would steer toward.
+- ⚠️ **Closing or deleting an account is tappable**, and the card says "This can't be undone." in
+  the app's words. Say both together or neither.
+- ⚠️ **Shared checkout pages are refused** (Stripe's hosted checkout, PayPal, Shop Pay, Square,
+  Google Pay), because their address names the payment company and not the shop. Never imply those
+  shops can be bought from.
+- ⚠️ **Switching buying on asks the owner to agree to a short note first**, recorded with its
+  version and the time, and each receipt records when the owner tapped. The draft Terms section for
+  this is in the Archie repo's `docs/BUYING-TERMS-DRAFT.md`, awaiting a lawyer; do not publish legal
+  wording from it.
 - ❌ **Never that a guest on a shared agent can buy.** `may_spend` refuses a guest in code.
 - ❌ **Never "tested", "proven" or "reliable at checkout."** The decisions are unit-tested and the
   browser lane runs against a real shop (`shop_live.rs`), but no real purchase has been completed

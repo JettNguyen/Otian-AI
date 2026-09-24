@@ -16498,7 +16498,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    is the one act with six things in it. LEN in js/home.js is the same list and must agree, and the
    sum here is that list's. The extra 100vh is the stage's own height, which the sticky needs to
    unpin at the end. */
-.day-story { position: relative; height: calc(7.9 * 100vh + 100vh); }
+.day-story { position: relative; height: calc(8.4 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
@@ -17233,6 +17233,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-actions.side .dp-act { border-top: 0; border-left: var(--hair) solid var(--line); }
 .dp-act:first-child { border-top: 0; border-left: 0; }
 .dp-act.quiet { color: var(--muted); }
+/* A tap drawn by the scroll (the homepage's purchase, act 4): the lit row lands over the row it
+   lights, as its own beat, so the button is there before the tap and lit after it. */
+.dp-act--tap { position: relative; }
+.dp-act .dp-tap { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--accent); color: var(--on-accent); }
+.dp-act .dp-tap.day-beat { transform: none; }
 .dp-act .lbl-ic { display: inline-flex; align-items: center; gap: .5em; justify-content: center; }
 .dp-act .em { font-size: .92em; line-height: 1; flex: none; transform: translateY(.02em); }
 button.dp-act { cursor: pointer; }
@@ -19388,6 +19393,271 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    switch the reader works still lands, without the fall being animated. */
 @media (prefers-reduced-motion: reduce) {
   .wd-mark, .wd-win .da-sw, .wd-win .da-sw i, .wd-pad, .wd-nm { transition: none; }
+}
+
+/* ── At the checkout (archie/websites/) ──
+   The seventh staged scene, and the one a reader arrives at most skeptical of: an agent at a shop.
+   Its mechanism is its own, TWO WINDOWS AND A SWITCH THAT CHANGES ONLY THE ENDING. Archie on the
+   Chat stands on the left, an ordinary browser at chewy.com on the right, and the agent between
+   them. The run is the same both ways (open the site, read it, add to cart, check out, read the
+   checkout) until the last button, and the reader's switch, the app's own "Let Ember press Buy",
+   decides what happens there. Both ways the agent stops and sends the app's stop card. Off, the card
+   offers only "I'll press it" and "Stop", and the order is theirs to press in the browser. On, the
+   Buying fold shows its limits, the card also offers "Press it for me", the run taps it, and only
+   then is Place order pressed and a receipt lands in the fold's list. Nothing is bought untapped.
+
+   The browser is plain Chrome in the agent's own profile, and it is drawn that way on purpose: the
+   app puts no banner or overlay on it, so neither does this. The pointer moving over the page is
+   the one liberty, standing for where the clicks land. Nothing of the shop's own look is drawn,
+   only its address, which is the placeholder the app's own shop field uses.
+
+   js/websites-scene.js owns the clock and the fit (a transform, never zoom, for WebKit's sake, as
+   everywhere else). Every timed piece carries data-in (the step it arrives on) and optionally
+   data-out or data-out-on (the step it leaves on, always or only with the switch on); the script
+   marks what is showing with .is-in. Without the script the resting state is the finished run for
+   whichever way the switch is set, which is also what a reader with reduced motion gets.
+
+   Every [data-o] rule here is scoped to .wb-scene, per the rule the ring of phones taught. */
+.wb-figure { position: relative; max-width: 1152px; margin-left: auto; margin-right: auto; }
+.wb-in { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); border: 0; white-space: nowrap; }
+.wb-bar-wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; margin: 0 0 18px; }
+.wb-bar-note { font-size: var(--fs-sm); color: var(--text-muted); }
+.wb-switch { display: inline-flex; align-items: center; gap: 10px; padding: 7px 16px 7px 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); font-size: var(--fs-sm); font-weight: 600; line-height: 1.2; color: var(--text-primary); cursor: pointer; transition: border-color .25s, background .25s; }
+.wb-track { position: relative; flex-shrink: 0; width: 34px; height: 20px; border-radius: 999px; background: var(--line-muted); transition: background .25s; }
+.wb-track i { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg-card); box-shadow: var(--shadow-xs); transition: left .25s; }
+#wb-buy:checked ~ .wb-bar-wrap .wb-switch { border-color: var(--accent); background: var(--accent-subtle); }
+#wb-buy:checked ~ .wb-bar-wrap .wb-track { background: var(--accent); }
+#wb-buy:checked ~ .wb-bar-wrap .wb-track i { left: 17px; }
+#wb-buy:focus-visible ~ .wb-bar-wrap .wb-switch { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
+.wb-scene { position: relative; width: 100%; aspect-ratio: 1000 / 490; overflow: hidden; perspective: 2000px; perspective-origin: 50% 30%; }
+.wb-box { position: absolute; left: 0; top: 0; width: 1000px; height: 490px; transform: scale(var(--pk, 1)); transform-origin: 0 0; transform-style: preserve-3d; }
+.wb-floor { position: absolute; left: 0; top: -100px; width: 1000px; height: 760px; transform-style: preserve-3d; }
+.wb-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
+.wb-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
+.wb-stand { position: absolute; left: var(--fx); top: var(--fy); transform: translate(-50%, -100%) translateZ(var(--z, 0px)) rotateX(-58deg); transform-origin: 50% 100%; }
+.wb-scene [data-o="win"] { --fx: 285px; --fy: 600px; --wz: .56; }
+.wb-scene [data-o="browser"] { --fx: 745px; --fy: 470px; --bz: .54; }
+.wb-scene [data-o="fold"] { --fx: 820px; --fy: 640px; --fz: .6; }
+.wb-scene [data-o="ember"] { --fx: 530px; --fy: 650px; width: 60px; }
+.wb-ember { display: block; position: relative; width: 100%; height: 0; padding-bottom: 100%; }
+.wb-ember svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wb-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
+.wb-catch { max-width: 680px; margin: 22px auto 0; font-size: var(--fs-md); line-height: 1.65; color: var(--text-secondary); text-align: center; }
+
+/* the two endings. The switch is a checkbox before the scene, so each ending follows it in CSS
+   alone and the script never has to know which one is showing to draw it. */
+#wb-buy:checked ~ .wb-scene .wb-off, #wb-buy:not(:checked) ~ .wb-scene .wb-on { display: none; }
+/* what is not showing yet, once the script is running the clock; and without it, the resting
+   state: everything that arrives, minus everything that has left by the end */
+.wb-figure.is-live .wb-t:not(.is-in) { display: none; }
+.wb-figure:not(.is-live) [data-out], .wb-figure:not(.is-live) #wb-buy:checked ~ .wb-scene [data-out-on] { display: none; }
+
+/* Archie, on the Chat. The window port at 800 by 620 with the sidebar shut, as the homepage has
+   it, and the Chat pane ported from archie-app-mockup.html's .convo (its .transcript, .msg,
+   .bubble, .actions, .act and .composer), class for class. The transcript is bottom-aligned
+   and clips at the top, which is what a chat does when it outgrows the window. */
+.wb-win { width: calc(800px * var(--wz)); height: calc(620px * var(--wz)); }
+.wb-win .da-app { width: 800px; height: 620px; zoom: var(--wz); }
+@supports not (zoom: 1) { .wb-win .da-app { transform: scale(var(--wz)); transform-origin: 0 0; } }
+.da-convo { display: flex; flex: 1; min-height: 0; flex-direction: column; margin-top: 16px; }
+.da-transcript { display: flex; flex: 1; min-height: 0; flex-direction: column; justify-content: flex-end; overflow: hidden; margin: 0 -12px; padding: 8px 16px 12px; }
+.da-stream { display: flex; flex-direction: column; gap: 12px; }
+.da-msg { display: flex; gap: 8px; }
+.da-msg.mine { flex-direction: row-reverse; }
+.da-msg.cont { margin-top: -6px; }
+.da-msg .spacer { width: 28px; height: 28px; flex-shrink: 0; }
+.da-msg .col { display: flex; max-width: 78%; min-width: 0; flex-direction: column; align-items: flex-start; gap: 6px; }
+.da-msg.mine .col { align-items: flex-end; }
+.da-bubble { border-radius: 16px; padding: 10px 14px; font-size: var(--fs-base); line-height: 1.5; background: var(--bg-card); border: 1px solid var(--line-soft); }
+.da-bubble.first { border-top-left-radius: 2px; }
+.da-msg.mine .da-bubble { background: var(--accent-subtle); border-color: transparent; }
+.da-msg.mine .da-bubble.first { border-top-left-radius: 16px; border-top-right-radius: 2px; }
+.da-bubble p + p { margin-top: 8px; }
+/* the running list of steps is one message whose lines grow at the end (worker.rs) */
+.da-steps span { display: block; color: var(--text-secondary); }
+.da-stamp { padding: 0 4px; font-size: var(--fs-3xs); font-variant-numeric: tabular-nums; color: var(--text-muted); }
+.da-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.da-act { border-radius: var(--radius-sm); border: 1px solid; padding: 8px 12px; font-size: var(--fs-sm); font-weight: 600; line-height: 1.2; white-space: nowrap; }
+.da-act.go { border-color: color-mix(in srgb, var(--c-green) 45%, transparent); background: var(--c-green-subtle); color: var(--c-green-strong); }
+.da-act.stop { border-color: var(--line-muted); background: var(--bg-card); color: var(--text-secondary); }
+.da-act.plain { border-color: var(--line-soft); background: var(--bg-card); color: var(--text-primary); }
+/* the tap: the pressed button stays lit, as the app holds a pressed card */
+.da-act.is-pressed { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-green) 30%, transparent); background: color-mix(in srgb, var(--c-green) 26%, var(--bg-card)); }
+/* the picture the stop sends: the checkout as it stands, small. Drawn as the same page in
+   miniature rather than as a grey box, because a screenshot is the one thing here that has to
+   look like what it is of. */
+.da-shot { position: relative; width: 250px; padding: 12px 14px; border-radius: var(--radius); border: 1px solid var(--line-soft); background: #FFFFFF; color: #202124; display: flex; flex-direction: column; gap: 6px; }
+.da-shot .t { font-size: var(--fs-xs); font-weight: 700; }
+.da-shot .l { height: 6px; width: 70%; border-radius: 3px; background: #E4E6EA; }
+.da-shot .l.s { width: 45%; }
+.da-shot .tot { font-size: var(--fs-3xs); font-weight: 600; }
+.da-shot .b { align-self: flex-start; padding: 5px 12px; border-radius: 999px; background: #202124; color: #FFFFFF; font-size: var(--fs-3xs); font-weight: 600; }
+.da-composer { display: flex; flex-direction: column; border-top: 1px solid var(--line-soft); padding-top: 12px; }
+.da-composer .row { display: flex; align-items: center; gap: 8px; }
+.da-iconbtn { display: flex; width: 42px; height: 42px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); color: var(--text-secondary); }
+.da-iconbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
+.da-box { flex: 1; min-width: 0; height: 42px; display: flex; align-items: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); padding: 0 12px; font-size: var(--fs-base); color: var(--text-muted); white-space: nowrap; overflow: hidden; }
+.da-sendbtn { display: flex; height: 42px; align-items: center; border-radius: var(--radius); background: var(--accent); padding: 0 16px; font-size: var(--fs-base); font-weight: 600; color: var(--text-on-accent); }
+.da-composer .cap { margin-top: 8px; text-align: center; font-size: var(--fs-2xs); line-height: 1.6; color: var(--text-muted); }
+
+/* The browser: an ordinary Chrome window, in the colors Chrome draws its own frame in, light or
+   dark with the page. The shop page inside stays light, as most shops are. */
+.wb-browser { width: calc(720px * var(--bz)); height: calc(560px * var(--bz)); }
+.cr-win { --cr-frame: #DFE3E8; --cr-tab: #FFFFFF; --cr-ink: #1F1F1F; --cr-mute: #5F6368; --cr-field: #EEF1F4; width: 720px; height: 560px; zoom: var(--bz); display: flex; flex-direction: column; overflow: hidden; border-radius: 10px; background: var(--cr-frame); box-shadow: var(--shadow-lg); font-family: system-ui, "Segoe UI", Roboto, sans-serif; color: var(--cr-ink); text-align: left; }
+@supports not (zoom: 1) { .cr-win { transform: scale(var(--bz)); transform-origin: 0 0; } }
+[data-theme="dark"] .cr-win { --cr-frame: #202124; --cr-tab: #35363A; --cr-ink: #E8EAED; --cr-mute: #9AA0A6; --cr-field: #2A2B2E; }
+.cr-tabs { display: flex; align-items: flex-end; gap: 6px; height: 40px; padding: 0 10px; }
+.cr-traffic { display: flex; gap: 8px; align-self: center; margin-right: 12px; }
+.cr-traffic i { display: block; width: 12px; height: 12px; border-radius: 50%; }
+.cr-tab { display: flex; align-items: center; gap: 8px; width: 220px; height: 32px; padding: 0 12px; border-radius: 10px 10px 0 0; background: var(--cr-tab); font-size: var(--fs-xs); color: var(--cr-ink); white-space: nowrap; }
+.cr-tab b { margin-left: auto; font-weight: 400; color: var(--cr-mute); }
+.cr-fav { display: block; width: 14px; height: 14px; border-radius: 4px; background: #9AA6B2; }
+.cr-newtab { align-self: center; font-size: var(--fs-lg); color: var(--cr-mute); }
+.cr-bar { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 12px; background: var(--cr-tab); border-bottom: 1px solid color-mix(in srgb, var(--cr-mute) 25%, transparent); }
+.cr-nav { display: flex; gap: 10px; }
+.cr-nav svg, .cr-omni svg { width: 18px; height: 18px; fill: none; stroke: var(--cr-mute); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cr-omni { flex: 1; display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; background: var(--cr-field); font-size: var(--fs-sm); color: var(--cr-ink); }
+.cr-omni svg { width: 14px; height: 14px; }
+.cr-me { width: 24px; height: 24px; border-radius: 50%; background: #B9C3CE; }
+.cr-page { position: relative; flex: 1; min-height: 0; overflow: hidden; background: #FFFFFF; color: #202124; }
+.sh-top { display: flex; align-items: center; gap: 14px; height: 50px; padding: 0 22px; border-bottom: 1px solid #E4E6EA; }
+.sh-mark { width: 30px; height: 30px; border-radius: var(--radius-sm); background: #C9D1DA; }
+.sh-search { flex: 1; height: 30px; display: flex; align-items: center; padding: 0 14px; border-radius: 999px; border: 1px solid #D5D9DE; font-size: var(--fs-sm); color: #6B7178; }
+.sh-cart { font-size: var(--fs-sm); font-weight: 600; }
+.sh-cart b { display: inline-block; min-width: 20px; margin-left: 4px; padding: 1px 6px; border-radius: 999px; background: #202124; color: #FFFFFF; font-size: var(--fs-2xs); text-align: center; }
+.sh-body { padding: 18px 22px; }
+.sh-body h3 { margin: 0 0 12px; font-size: var(--fs-3xl); font-weight: 700; letter-spacing: -0.01em; color: #202124; }
+.sh-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-top: 1px solid #ECEEF1; }
+.sh-thumb { width: 46px; height: 46px; flex-shrink: 0; border-radius: var(--radius-sm); background: #EEF0F3; }
+.sh-what { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.sh-what b { font-size: var(--fs-md); font-weight: 600; }
+.sh-what i { font-style: normal; font-size: var(--fs-xs); color: #6B7178; }
+.sh-price { font-size: var(--fs-md); font-weight: 600; }
+.sh-btn, .sh-go, .sh-place { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; font-weight: 600; white-space: nowrap; transition: background .2s, color .2s, transform .15s; }
+.sh-btn { min-width: 112px; height: 34px; padding: 0 14px; border: 1px solid #202124; font-size: var(--fs-sm); color: #202124; background: #FFFFFF; }
+.sh-btn .p { display: none; }
+.sh-btn.is-pressed { background: #E8F0E4; border-color: #4E7D3F; color: #33572A; }
+.sh-btn.is-pressed .u { display: none; }
+.sh-btn.is-pressed .p { display: inline; }
+.sh-minicart { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 12px 14px; border-radius: var(--radius); background: #F4F5F7; font-size: var(--fs-sm); font-weight: 600; }
+.sh-go { height: 34px; padding: 0 18px; background: #202124; color: #FFFFFF; font-size: var(--fs-sm); }
+.sh-cols { display: flex; gap: 18px; }
+.sh-left { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.sh-box { display: flex; flex-direction: column; gap: 3px; padding: 11px 14px; border-radius: var(--radius); border: 1px solid #E4E6EA; }
+.sh-box .k { font-size: var(--fs-2xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: #6B7178; }
+.sh-box .v { font-size: var(--fs-sm); }
+.sh-sum { width: 230px; flex-shrink: 0; display: flex; flex-direction: column; gap: 8px; padding: 14px; border-radius: var(--radius); background: #F4F5F7; font-size: var(--fs-sm); }
+.sh-sum .r { display: flex; justify-content: space-between; }
+.sh-sum .r.t { padding-top: 8px; border-top: 1px solid #DDE0E4; font-size: var(--fs-md); font-weight: 700; }
+.sh-place { margin-top: 6px; height: 40px; background: #202124; color: #FFFFFF; font-size: var(--fs-md); }
+.sh-go.is-pressed, .sh-place.is-pressed { background: #4A4D52; transform: scale(.97); }
+.sh-done { display: flex; flex-direction: column; align-items: center; padding-top: 70px; text-align: center; }
+.sh-done h3 { margin-bottom: 6px; }
+.sh-done p { margin: 0; font-size: var(--fs-md); }
+.sh-done p.m { margin-top: 4px; color: #6B7178; }
+.sh-check { display: flex; width: 52px; height: 52px; align-items: center; justify-content: center; margin-bottom: 14px; border-radius: 50%; background: #E8F0E4; color: #33572A; font-size: var(--fs-5xl); font-weight: 700; }
+/* the pointer, standing for where the clicks land. Parked off to the side at rest, where it
+   says nothing; the script moves it to each thing pressed. */
+.cr-cursor { position: absolute; left: 560px; top: 330px; width: 22px; height: 22px; fill: #202124; stroke: #FFFFFF; stroke-width: 1.4; stroke-linejoin: round; pointer-events: none; }
+
+/* The Buying fold on the Connections tab, under Websites, in the app's own words and tokens.
+   It stands as its own small card because on the app it is its own panel: the chat and the
+   limits are two places, and the drawing keeps them two. */
+.wb-fold { width: calc(330px * var(--fz)); }
+.wb-foldapp { width: 330px; height: auto; zoom: var(--fz); padding: 14px 16px 16px; display: block; }
+@supports not (zoom: 1) { .wb-foldapp { transform: scale(var(--fz)); transform-origin: 0 100%; } }
+.wb-fk { font-size: var(--fs-2xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); }
+.wb-fhead { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 6px; }
+.wb-fhead .t { font-size: var(--fs-md); font-weight: 600; color: var(--text-primary); }
+.wb-fhead .a { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
+.wb-frow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+.wb-sw { position: relative; flex-shrink: 0; width: 30px; height: 17px; border-radius: 999px; background: var(--line-muted); transition: background .3s; }
+.wb-sw i { position: absolute; top: 2px; left: 2px; width: 13px; height: 13px; border-radius: 50%; background: var(--bg-card); transition: left .3s; }
+#wb-buy:checked ~ .wb-scene .wb-sw { background: var(--accent); }
+#wb-buy:checked ~ .wb-scene .wb-sw i { left: 15px; }
+.wb-fl { margin-top: 12px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-primary); }
+.wb-chip { display: inline-block; margin-top: 6px; padding: 3px 10px; border-radius: 999px; background: var(--accent-subtle); font-size: var(--fs-xs); font-weight: 500; color: var(--accent-strong); }
+.wb-fv { margin-top: 6px; padding: 6px 10px; border-radius: var(--radius-sm); border: 1px solid var(--field-border); background: var(--bg-card); font-size: var(--fs-sm); font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.wb-none { margin-top: 6px; font-size: var(--fs-xs); color: var(--text-muted); }
+.wb-rcpt { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 6px; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); }
+.wb-rcpt span { display: flex; flex-direction: column; }
+.wb-rcpt .r { text-align: right; }
+.wb-rcpt b { font-size: var(--fs-xs); font-weight: 600; color: var(--text-primary); }
+.wb-rcpt i { font-style: normal; font-size: var(--fs-xs); color: var(--text-muted); }
+
+@media (max-width: 640px) {
+  /* Narrow, the same objects in a second composition: the browser at the back, Archie in
+     front of it and nearly the box's width, the fold at the back beside the browser's foot,
+     and the agent at the front on the right. */
+  .wb-scene { aspect-ratio: 420 / 740; perspective: 1800px; }
+  .wb-box { width: 420px; height: 740px; }
+  .wb-floor { top: 90px; width: 420px; height: 900px; }
+  /* both windows drawn narrower here, the way a window is on a smaller screen, so the type
+     inside them is half again as big as the wide windows scaled down would be */
+  .wb-scene [data-o="browser"] { --fx: 212px; --fy: 0px; --bz: .72; }
+  .wb-scene [data-o="win"] { --fx: 206px; --fy: 600px; --wz: .6; }
+  .wb-scene [data-o="fold"] { --fx: 300px; --fy: 690px; --fz: .46; }
+  .wb-scene [data-o="ember"] { --fx: 150px; --fy: 690px; width: 44px; }
+  .wb-browser { width: calc(560px * var(--bz)); height: calc(470px * var(--bz)); }
+  .cr-win { width: 560px; height: 470px; }
+  .sh-sum { width: 200px; }
+  .cr-tab { width: 180px; }
+  .wb-win { width: calc(640px * var(--wz)); height: calc(600px * var(--wz)); }
+  .wb-win .da-app { width: 640px; height: 600px; }
+  .wb-win .da-purpose { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .wb-figure.is-live .wb-t.is-in { animation: wbIn .45s cubic-bezier(.2, .8, .3, 1) both; }
+  .wb-figure.is-live .cr-cursor { transition: left .7s cubic-bezier(.45, .05, .25, 1), top .7s cubic-bezier(.45, .05, .25, 1); }
+  @keyframes wbIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wb-switch, .wb-track, .wb-track i, .wb-sw, .wb-sw i, .sh-btn, .sh-go, .sh-place { transition: none; }
+}
+/* The small figures under the scene and further down the page: flat reference drawings, one
+   idea each, standing in for sentences the page used to carry. Each is a role="img" with its
+   claim in the accessible name and a figcaption under it. */
+.wb-minis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 1000px; margin: 40px auto 0; }
+.wb-mini { margin: 0; display: flex; flex-direction: column; }
+.wb-mini-art { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 250px; padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); }
+.wb-mini figcaption, .wb-stopfig figcaption { margin-top: 12px; text-align: center; font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); }
+.wb-foldapp--flat { width: 100%; max-width: 290px; zoom: 1; box-shadow: var(--shadow-sm); }
+.wb-sw.is-on { background: var(--accent); }
+.wb-sw.is-on i { left: 15px; }
+.wb-fpair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.wb-fpair > span { display: flex; flex-direction: column; }
+.wb-taps { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 280px; }
+.wb-tap { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: var(--bg-primary); }
+.wb-tap svg { width: 22px; height: 22px; fill: none; stroke: var(--text-secondary); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.wb-tap b { font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+.wb-mini .da-act, .wb-tap .da-act { padding: 5px 9px; font-size: var(--fs-2xs); --c-green: #679B55; --c-green-subtle: rgba(103, 155, 85, 0.14); --c-green-strong: #48733A; }
+[data-theme="dark"] .wb-tap .da-act { --c-green: #8FBF7C; --c-green-subtle: rgba(143, 191, 124, 0.16); --c-green-strong: #8FBF7C; }
+.wb-nevers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 280px; }
+.wb-nevers span { position: relative; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--field-border-strong); font-size: var(--fs-sm); font-weight: 600; color: var(--text-muted); }
+.wb-nevers span::after { content: ""; position: absolute; left: 8px; right: 8px; top: 50%; border-top: 1.5px solid var(--text-muted); transform: rotate(-8deg); }
+.wb-stopfig { max-width: 1000px; margin: 36px auto 0; }
+.wb-stops { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.wb-stop { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 20px 12px 16px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); text-align: center; }
+.wb-stop b { font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+.wb-field { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; width: 100%; max-width: 150px; padding: 7px 10px; border-radius: var(--radius-sm); border: 1px solid var(--field-border-strong); background: var(--bg-primary); font-size: var(--fs-2xs); color: var(--text-muted); text-align: left; }
+.wb-field i { font-style: normal; font-size: var(--fs-sm); letter-spacing: 0.08em; color: var(--text-primary); }
+.wb-field--site { align-items: center; padding: 11px 10px; font-size: var(--fs-sm); color: var(--text-primary); }
+.wb-field--site s { text-decoration-thickness: 1.5px; }
+.wb-back { padding: 3px 10px; border-radius: 999px; background: var(--accent-subtle); font-size: var(--fs-2xs); font-weight: 600; color: var(--accent-ink); }
+.wb-back--end { background: color-mix(in srgb, var(--text-muted) 14%, transparent); color: var(--text-secondary); }
+.wb-clock { display: flex; align-items: center; gap: 6px; padding: 9px 12px; border-radius: var(--radius-sm); border: 1px solid var(--field-border-strong); background: var(--bg-primary); font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+.wb-clock svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.wb-addons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; max-width: 900px; margin: 36px auto 0; }
+.wb-addon { padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); }
+.wb-addon h3 { margin: 14px 0 4px; font-size: var(--fs-lg); }
+.wb-addon p { margin: 0; font-size: var(--fs-sm); line-height: 1.55; color: var(--text-secondary); }
+.wb-face { display: flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: var(--radius); background: var(--accent-subtle); }
+.wb-face svg { width: 24px; height: 24px; fill: none; stroke: var(--accent-ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.wb-or { margin: 22px 0 0; text-align: center; font-size: var(--fs-md); color: var(--text-secondary); }
+@media (max-width: 900px) {
+  .wb-minis, .wb-addons { grid-template-columns: 1fr; max-width: 420px; }
+  .wb-stops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .wb-stop:last-child { grid-column: 1 / -1; }
 }
 
 /* ── Install page: one question at a time (2026-09-22) ──

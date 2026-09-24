@@ -81,6 +81,14 @@ only shape the checker cannot see.
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | Printed nowhere, and there is no add-on price to print: **every add-on is included with Archie**, for everyone, and nothing in the catalog is sold on its own. The site has no price filter, no price badge, and no price question on the submission form | Its marketplace manifest in the Archie repo, `price_cents: 0` like all 151. The field stays only because removing it is a data migration. Pages say "included", never "free to start" or "premium" |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
+| `$38.40` | The example order in the buying mockups: Buddy's dog food at chewy.com, the total the agent reads off the checkout. An illustration, not a price of ours | `archie/websites/` (the checkout scene) and the homepage's 4:15 pm phone, 2026-09-24. Items `$35.99` plus tax `$2.41` makes it, so the drawn checkout adds up |
+| `$35.99` | The same example: the dog food's price on the drawn shop page | Same |
+| `$2.41` | The same example: the tax line on the drawn checkout | Same |
+| `$12.49` | The same drawn shop page: a second item under Buy again, never ordered | Same |
+| `$6.99` | The same drawn shop page: a third item, never ordered | Same |
+| `$50` | The example per-purchase limit, as the agent names it in its reply ("under your $50 limit") | Same. It is the app's own starting value for Most for one purchase |
+| `$50.00` | The same limit as the Buying fold shows it | The Archie repo, `src/app/screen-panel.tsx`: turning the switch on sets `per_purchase_cents` to 5_000 when it was empty |
+| `$200.00` | Most in total, the fold's other starting limit, in the small Buying figure on `archie/websites/` | Same file: `window_cents` starts at 20_000 |
 
 ## Other companies' prices
 

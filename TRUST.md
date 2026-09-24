@@ -1513,11 +1513,21 @@ warns that its own copy of them goes stale, and so would a copy here.
 an `https` address under Connections, and `connector_connect` asks that server what it offers and
 stores its answer on the connection (`entry.mcp_tools`, from `McpServer::list_tools`). Those tool
 names then go onto the model's belt every turn, named inline in `mcp_call`'s own description
-(`mcp_call_definition` in `crates/archie-runtime/src/connectors.rs`). Four are in the catalog
-(GitHub, Linear, Stripe, Cloudflare) and a fifth row, "Another MCP server", takes any address. So
-the person really has added tools Archie never shipped, without a release. What does not change is
-the safety shape: a tool the server marks read-only runs, and anything else is staged for the
-person's approval like every other write.
+(`mcp_call_definition` in `crates/archie-runtime/src/connectors.rs`). The door for any address is
+**Something else** at the foot of the Apps list: an address that looks like one an app hands out for
+AI assistants (`looksLikeAiAddress` in `src/app/connect.tsx`) is connected this way, under the name
+the person gives it. Four vendor servers are also in the catalog (GitHub, Linear, Stripe, Cloudflare),
+and since 2026-09-24 the list offers one only when a skill on that agent asks for it, because no
+store add-on reads them. So the person really has added tools Archie never shipped, without a
+release. What does not change is the safety shape: a tool the server marks read-only runs, and
+anything else is staged for the person's approval like every other write.
+
+⚠️ **The app never says "MCP" to an owner, and copy for owners should not lean on it either**
+(Jett, 2026-09-24: most people do not know what MCP is). The app's words are "an address for AI
+assistants", and the only "MCP" left on its screens is Fireflies' own menu name, "MCP & Dev Tools",
+spelled the way Fireflies spells it (`no_label_or_description_says_mcp` in the Archie repo's
+`crates/archie-domain/src/connectors.rs` holds the catalog to it). On the site, say what the door
+does in those words and give MCP as a parenthetical at most, for the reader who already knows it.
 
 **Signing in instead of pasting a key, since 2026-09-24.** *Approved wording:* "Some servers have you
 sign in on their own site instead of giving you a key. For those, Archie opens the sign-in in your
@@ -1692,7 +1702,10 @@ and the request never leaves your network."
 - Todoist, Fireflies, GoHighLevel: a pasted key each, `BuiltinIntegration` in
   `crates/archie-domain/src/builtins.rs` and `crates/archie-net/src/ghl.rs`.
 - Every service connected with a key: `KNOWN_SERVICES` in `crates/archie-domain/src/connectors.rs`,
-  twenty-four rows on 2026-09-18: twenty-three named services and one for any other MCP server.
+  twenty-four rows on 2026-09-18: twenty-three named services and one for any other MCP server
+  (on screen since 2026-09-24, that one is the Something else door, and the four vendor MCP rows
+  appear only when a skill asks for one, so the Apps list shows nineteen of these plus Todoist,
+  Fireflies, Zoom and GoHighLevel).
   Count the file before printing a number; this one has been stale before. A key is bound to one host (`ConnectorEntry`) and the runtime attaches it,
   never the model (`archie_net::http::send` drops runtime-owned headers).
 - Lights on the user's own wifi: `crates/archie-domain/src/local_devices.rs` refuses any roster

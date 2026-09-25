@@ -1352,6 +1352,49 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
   it and no second AI call; it is word comparison against a file, which is exactly why it costs the
   owner nothing on the turns where nothing matches.
 
+### 🚧 It can look back through your conversation for something you told it: BUILT 2026-09-25, not yet in a release
+
+**Approved wording, once it is in a release:** "Your agent keeps the last twenty messages in front of
+it. Ask about something from further back and it can search your conversation for it, the same
+conversation you can scroll back through in Archie."
+
+**Why it's true** (Archie repo, `69b2e4ed`):
+- `crates/archie-runtime/src/gateway/tools_conversation.rs` is the search. It reads the window's own
+  record of the conversation, `inapp/transcript.json` in the agent's folder, written by
+  `src-tauri/src/inapp.rs`, which keeps the last 500 messages (`MAX_ENTRIES`). It matches the words
+  asked for, with no AI call of its own, skips what the agent already has in front of it, and hands
+  back at most five messages, each with the day and time it was said.
+- The owner's conversation is one conversation across the Archie window and the owner's own chat on
+  a chat app: `crates/archie-net/src/mirror.rs` files both under one chat id. So something said on a
+  phone is found the same way as something typed at the desk.
+- The prompt's sentence about how far back the agent can see names the search on the turns that
+  have it, and tells the agent to say plainly it no longer has something when neither its memory nor
+  the search finds it (`crates/archie-runtime/src/gateway/prompt.rs`, `build_system_prompt`).
+- Tests: `the_owner_can_find_what_they_said_further_back` (the whole loop, in
+  `crates/archie-runtime/tests/pipeline.rs`), `only_the_owner_typing_in_their_own_conversation_can_search_it`
+  (`gateway/turn.rs`), and the matching rules in `tools_conversation.rs`.
+
+**The boundaries:**
+- ⛔ **Never say it remembers every conversation, or everything you ever said.** It searches the last
+  500 messages of the owner's own conversation with that one agent, and nothing older exists for it
+  to search.
+- ⛔ **Never say anybody else can search it.** It is offered only to the owner, typing, in their own
+  conversation (`turn::may_search_conversation`), and refused at dispatch anywhere else. A guest on a
+  shared agent never gets it, including a guest allowed to act as the owner, and it never reads
+  another person's conversation with the agent.
+- ⛔ **Never say it understands what you meant.** It matches words. A question worded differently
+  from what was said can miss, and the agent is told to say it no longer has it rather than guess.
+- ⛔ **Do not merge this with the memory claim above.** The memory is what the agent carries on every
+  message; this is a search the agent chooses to run when asked about something further back. The
+  memory entry's line that its recall has no tool stays true, because that is a different file.
+- ⚠️ **Not everywhere a person talks to it.** A second conversation thread in the window, a routine,
+  and a message a watcher starts do not get it: the thread has a record of its own, and the other two
+  have nobody asking after something said earlier.
+- ⚠️ **What it replaced.** The agent used to be told that anything older than its twenty messages
+  "has been dropped and you cannot read it", which was true of what it could see and false of what
+  the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
+  that was found.
+
 ### ✅ Your whole agent in one file, and no key is in it (SHIPPED 2026-09-02 in Archie 0.2.2; entry written 2026-09-21)
 
 **Approved wording:** "Everything you built is in one file you can save where you like: your

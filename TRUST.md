@@ -1028,13 +1028,20 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
 **Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
 `match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
 each of the four add-on kinds, build a skill, set the name, the face and an add-on's answers, turn a
-skill or routine on and off, set a routine's time, add a row to a collection, say something, press a
-button on a card, and browse this computer's catalog. There is no op for running code, reading a
-file, or reaching a secret, and a phone cannot invent one: an unknown op is refused by the computer.
-The snapshot it draws from is built by `build_snapshot` in the same file, whose header lists what
-never travels: anybody else's conversation on a shared agent, knowledge files, the rows inside a
-record collection, credential values (not even the last four of one), the screenshots a job took,
-and the audio and pictures inside a conversation.
+skill or routine on and off, set a routine's time, set the quality, add a row to a collection, say
+something, press a button on a card, send a picture, a video, a voice note or a document in pieces
+(`put_file`), send several pictures as one message (`send_pictures`), take a document off, and browse
+this computer's catalog. Three more only fetch: the owner's calendar days, and the audio (`spoken`)
+or the picture or file (`media`) on one message of the owner's own conversation. There is no op for
+running code or reaching a secret, and none for reading an arbitrary file: `media` reads only a file
+a message names, and only from the Archie folder in Downloads or the agent's own folder
+(`saved_file_bytes`, tested by `a_phone_can_fetch_only_a_file_the_agent_saved`). A phone cannot
+invent an op: an unknown one is refused by the computer. The snapshot it draws from is built by
+`build_snapshot` in the same file, whose header lists what never travels: anybody else's
+conversation on a shared agent, knowledge files, the rows inside a record collection, credential
+values (not even the last four of one), and the screenshots a job took. The audio, pictures and
+files inside the owner's conversation travel only when somebody on the phone presses to hear, see
+or open one, sealed like everything else (added 2026-09-25; before that they never travelled).
 
 **What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
 the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
@@ -1042,10 +1049,13 @@ because a permission prompt is the one piece of this product a person reads befo
 All three were checked against the client on that date.
 
 > - **The camera**, for two things. It reads the square code that pairs the phone with your
->   computer, and it takes a photo when you choose to show one to an agent. It is not on at any
->   other time.
-> - **Your photos**, only at the moment you pick one to send. The app is handed the picture you
->   chose and nothing else, and it never reads the rest of your library.
+>   computer, and it takes a photo or a short video when you choose to show one to an agent. It is
+>   not on at any other time.
+> - **Your photos**, only at the moment you pick something to send. The app is handed the photos or
+>   videos you chose and nothing else, and it never reads the rest of your library.
+> - **Your files**, only the ones you pick in your phone's own file picker, at the moment you pick
+>   them. The app asks for no permission to read files, because the picker hands over only what you
+>   chose.
 > - **The microphone**, only while you are recording something to say to an agent. You start that by
 >   pressing the talk button, you can throw the recording away instead of sending it, and it stops
 >   on its own if you leave the app.
@@ -1055,14 +1065,19 @@ All three were checked against the client on that date.
 - **Camera.** `src/screens/Pair.tsx` mounts `CameraView` only while `scanning`, and
   `src/attach.ts` takes a photo through `ImagePicker.launchCameraAsync`, which is the system's own
   camera and not a preview this app holds open.
-- **Photos.** `ImagePicker.launchImageLibraryAsync` in `src/attach.ts`. The picker is the system's;
-  what comes back is the one asset, and the app has no library-wide read.
+- **Photos.** `ImagePicker.launchImageLibraryAsync` in `src/attach.ts` (`pickFromPhotos`). The
+  picker is the system's; what comes back is the assets chosen, up to four, and the app has no
+  library-wide read.
+- **Files.** `DocumentPicker.getDocumentAsync` in `src/attach.ts` (`pickFiles`), the system's own
+  picker, copying only the chosen files into the app's cache so they can be read.
 - **Microphone.** `startTalking` in `src/screens/Chat.tsx` runs on a press, `stopTalking(false)`
   throws the recording away, and the same function runs when the app stops being `active`, so
   leaving the app ends the recording rather than leaving it running.
-- **A photo and a voice note ride the sealed mailbox like everything else**, as `put_file` through
-  `run` in `src/attach.ts` and `src/voice.ts`, sealed by `seal` in `src/relay/envelope.ts`. So the
-  custody clause below applies to them word for word: we hold them and cannot read them.
+- **A photo, a video, a document and a voice note ride the sealed mailbox like everything else**,
+  as `put_file` through `run` in `src/attach.ts` and `src/voice.ts`, sealed by `seal` in
+  `src/relay/envelope.ts`, several pieces at a time. The same goes the other way for a picture or
+  a file the agent sends, fetched with `media` when somebody presses it. So the custody clause below
+  applies to them word for word: we hold them and cannot read them.
 - **Nothing on the phone reports anything.** No analytics, crash or advertising dependency in
   `package.json`, and build 9's binary carries no `ASIdentifierManager` or `advertisingIdentifier`
   symbol, checked with `strings` on the shipped `.ipa`.
@@ -1124,7 +1139,53 @@ app is built for any other reason.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### ✅ It works while you sleep
+### 🚧 Pictures, videos and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
+
+**Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video or a
+document, from Archie on your computer or from the Archie app on your phone. It looks at the
+pictures, asks before it watches a video, and reads the document. It sends files back the same way,
+and in Archie it can answer with a table or a checklist when that is the clearer shape."
+
+**Why it's true** (Archie repo `1ddd20d3`, `12461dfc`, `65c1d2f3`, `b3fd0fdf`, `766abc60`, `1df1ba2f`;
+archie-mobile `2e5516e`, `674a438`, `534fce5`, `126831f`):
+- **The window.** The message box takes up to four pictures, one video and any number of documents,
+  from its Add button or dropped on the conversation (`src/app/conversation.tsx`, `src/app/attach.ts`).
+  Several pictures go as one message the agent answers once (`ChannelEvent::Album`,
+  `vision::look_at_photos`). A video is copied into the agent's folder and offered with the Watch or
+  Skip card (`inapp_send_video`, `gateway/video_offer.rs`). Documents are filed under General and the
+  agent is told they arrived.
+- **The app.** The attach sheet opens the camera (a photo or a video), the photo roll (up to four,
+  videos too) and the files picker (`src/attach.ts`, `src/screens/Chat.tsx` in archie-mobile). Files
+  cross in sealed pieces, several at a time, up to 5 MB for a picture, 10 MB for a document and 25 MB
+  for a video (`upload_cap` in `src-tauri/src/phone.rs`, `FILE_MAX` in the app's `src/upload.ts`).
+- **Files back.** The agent sends a file it made or one from its documents (`save_file`, with a
+  `file_id` for a document it holds, `crates/archie-runtime/src/export.rs`). The app shows the
+  agent's pictures and opens its files when somebody presses them (`media`, `src/shown.tsx`).
+- **Tables.** The window and the app draw tables, checklists, links and code
+  (`src/app/markdown.tsx`; `src/text/markdown.ts` in the app, with tests). The agent is told a
+  table is fine only when every screen reading the conversation draws one: talking in Archie alone,
+  and the paired phone reporting it can (`reply_style` in `gateway/prompt.rs`,
+  `GatewayConfig::phone_draws_tables`).
+
+**The boundaries:**
+- ⛔ **Never say it watches every video you send.** It asks first, every time, because watching
+  costs minutes and money on the owner's AI account; and it watches only with Video Synthesizer
+  installed, which brings the tools. Without it the agent says so and names the add-on.
+- ⛔ **Never promise a size past the phone's limits.** From the phone a video is up to 25 MB (about a
+  minute), a document 10 MB and a picture 5 MB, and a video past the limit is refused with how to
+  trim it. From the window a video can be much larger, so copy says "a video" and not a length.
+- ⛔ **Never say tables work on every app.** They are drawn in Archie and in the Archie app. On
+  Telegram, Slack, Discord, Signal and iMessage the agent still writes labeled lists, because two of
+  those cannot draw a table at all.
+- ⚠️ **A document sent in a conversation is kept.** It is filed under General with the agent's other
+  documents, and it stays there until somebody removes it on the Knowledge tab or in the app.
+- ⚠️ **The files travel through our mailbox, sealed.** The phone entries above govern the wording:
+  we hold the ciphertext and cannot read it. Never "the files never touch our servers".
+- ⚠️ **On Android, a file the agent sends opens where the phone has something that opens it.** The
+  app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
+  kind says so rather than opening it.
+
+### ✅ It works while you sleep### ✅ It works while you sleep
 
 **Approved wording:** "It Works While You Sleep" / "works in the background while you sleep."
 Used as a homepage proof chip and in the homepage meta description.

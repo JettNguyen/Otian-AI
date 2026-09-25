@@ -684,6 +684,30 @@ Archie code" is the approved form. Comparisons with what other agents cost go on
 pages, sourced and dated like every other third-party figure, with at most a sentence of it on
 the pricing page.
 
+### ✅ Why there is a store: your agent takes on the jobs you pick (entry written 2026-09-25)
+
+**Approved wording:** "Your agent takes on the jobs you pick, so it fits the way you work, and each
+reply costs less than it would if it came with every one of them." On the site under the heading of
+`skills-marketplace/browse/`. Jett's to reword; the claim is what is checked here, not the words.
+
+**Why it's true:** an add-on reaches a reply only on an agent that has it. The toolkit a reply
+carries is put together per message from what that agent has installed and connected
+(`crates/archie-runtime/src/gateway/turn.rs`, where the belt is assembled), and the router only
+chooses among installed skills. The last two tools that rode every agent regardless, flights and
+video, are carried only when an installed skill uses them since Archie commit `ea957de1` (built
+2026-09-25, not yet in a release; before it, those two were the exception to this sentence). The
+app says the same on its own Marketplace screen (`src/app/marketplace.tsx`, Archie `c7121365`).
+
+**The boundaries:**
+- ⛔ **Never describe what an add-on adds to a reply.** The rule in the entry above governs: the
+  outcome is public, the mechanism is the company's.
+- ⛔ **No figure.** Nobody has priced an agent with every add-on against one with a few. "Costs
+  less" is the claim, and it has no number.
+- ⛔ **Never say the agent does nothing but the jobs you pick.** It answers questions, sets
+  reminders, remembers what you tell it and keeps files, with nothing installed. "Takes on the jobs
+  you pick" is about the store's jobs.
+- ⚠️ **Picking is not buying.** Every add-on is included; never let this read as a price per add-on.
+
 ### ✅ What other agents charge per unit, and the like-for-like caveat
 
 **Approved shape:** a table on `compare/cloud-agents/` (and one row on the automation
@@ -1358,7 +1382,7 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
 it. Ask about something from further back and it can search your conversation for it, the same
 conversation you can scroll back through in Archie."
 
-**Why it's true** (Archie repo, `69b2e4ed`):
+**Why it's true** (Archie repo, `69b2e4ed` and `dd154236`):
 - `crates/archie-runtime/src/gateway/tools_conversation.rs` is the search. It reads the window's own
   record of the conversation, `inapp/transcript.json` in the agent's folder, written by
   `src-tauri/src/inapp.rs`, which keeps the last 500 messages (`MAX_ENTRIES`). It matches the words
@@ -1371,25 +1395,26 @@ conversation you can scroll back through in Archie."
   have it, and tells the agent to say plainly it no longer has something when neither its memory nor
   the search finds it (`crates/archie-runtime/src/gateway/prompt.rs`, `build_system_prompt`).
 - Tests: `the_owner_can_find_what_they_said_further_back` (the whole loop, in
-  `crates/archie-runtime/tests/pipeline.rs`), `only_the_owner_typing_in_their_own_conversation_can_search_it`
+  `crates/archie-runtime/tests/pipeline.rs`), `only_the_owners_own_conversation_can_be_searched`
   (`gateway/turn.rs`), and the matching rules in `tools_conversation.rs`.
 
 **The boundaries:**
 - ⛔ **Never say it remembers every conversation, or everything you ever said.** It searches the last
   500 messages of the owner's own conversation with that one agent, and nothing older exists for it
   to search.
-- ⛔ **Never say anybody else can search it.** It is offered only to the owner, typing, in their own
-  conversation (`turn::may_search_conversation`), and refused at dispatch anywhere else. A guest on a
-  shared agent never gets it, including a guest allowed to act as the owner, and it never reads
-  another person's conversation with the agent.
+- ⛔ **Never say anybody else can search it.** It rides only the owner's own conversation
+  (`turn::may_search_conversation`): the owner's messages, and a message a watcher delivers into
+  that conversation. It is refused at dispatch anywhere else. A guest on a shared agent never gets
+  it, including a guest allowed to act as the owner, and it never reads another person's
+  conversation with the agent.
 - ⛔ **Never say it understands what you meant.** It matches words. A question worded differently
   from what was said can miss, and the agent is told to say it no longer has it rather than guess.
 - ⛔ **Do not merge this with the memory claim above.** The memory is what the agent carries on every
   message; this is a search the agent chooses to run when asked about something further back. The
   memory entry's line that its recall has no tool stays true, because that is a different file.
-- ⚠️ **Not everywhere a person talks to it.** A second conversation thread in the window, a routine,
-  and a message a watcher starts do not get it: the thread has a record of its own, and the other two
-  have nobody asking after something said earlier.
+- ⚠️ **Not everywhere a person talks to it.** A second conversation thread in the window and a
+  routine do not get it: the thread has a record of its own, and a routine is not in a
+  conversation.
 - ⚠️ **What it replaced.** The agent used to be told that anything older than its twenty messages
   "has been dropped and you cannot read it", which was true of what it could see and false of what
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where

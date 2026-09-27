@@ -2805,6 +2805,24 @@ is `AgentBundleManifest::read_scanned_documents`, drawn on the agent's Response 
   it is the only number anybody has measured; a scan's page count is the variable and nobody has
   run a spread of real documents.
 
+### ✅ It can name the page an answer came from (SHIPPED 2026-09-17, in 0.3.0; entry written 2026-09-27)
+
+**Approved wording:** "Ask where a figure came from and your agent can name the page: Archie reads a
+PDF you gave it as numbered pages, so you can open that page yourself."
+
+**Why it's true:** `number_the_pages` in the Archie repo's `crates/archie-domain/src/documents.rs`
+(commit `128aa090`, 2026-09-17, an ancestor of the 0.3.0 release commit `6b585b93`) heads each
+page's text with its number, and an empty page is skipped without renumbering, so "Page 7" is the
+file's seventh page. The knowledge base and files arriving in a conversation use the same extractor.
+First used on the site by the blog post "You Trust Your AI Most on the Work You'll Check Least", in
+the 2026-09-27 voice pass.
+
+**Boundaries, not to cross:**
+- ❌ Never "every answer cites its page". The model decides whether to cite; the numbering only makes
+  it possible.
+- ❌ A scanned PDF with no text layer has nothing to cite until the picture-of-a-page reader is on.
+- What it reads still goes to the AI company, on the account in use.
+
 ### ✅ Email goes out only when you send it or set a time — SHIPPED (was 🚧 roadmap until 2026-07-20)
 
 **Approved wording (corrected 2026-08-31, see the amendment below):** "Archie can draft email

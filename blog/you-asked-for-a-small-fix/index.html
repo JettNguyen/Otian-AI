@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>You Asked for a Small Fix, Not a Rewrite | Otian AI</title>
-  <meta name="description" content="You ask your AI to change one line. It changes the line, and quietly redoes four things you never mentioned. Here's why it can't tell the edit from the rewrite." />
+  <title>You Asked for a Small Fix and Got a Rewrite | Otian AI</title>
+  <meta name="description" content="You ask your AI to change one line, and it also redoes four things you never mentioned. The model can&rsquo;t tell an edit from a rewrite, so the fix is telling it where the edit ends." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -133,14 +133,14 @@
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">You Asked for a Small Fix. Your AI Rewrote Everything Around It.</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">You Asked for a Small Fix and Your AI Rewrote Everything Around It</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
         <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">You Asked for a Small Fix. Your AI Rewrote Everything Around It.</h1>
+        <h1 class="fade-up delay-1">You Asked for a Small Fix and Your AI Rewrote Everything Around It</h1>
         <div class="article-byline fade-up delay-2">
           <strong><a href="https://www.linkedin.com/in/jack-raney/" class="byline-author" target="_blank" rel="noopener" aria-label="Jack Raney on LinkedIn">Jack Raney</a></strong>
           <span>&middot;</span>
@@ -159,49 +159,57 @@
 
 <p>I asked my agent to change one sentence in a client email. Just the second line, which was too blunt. Soften it.</p>
 
-<p>It came back with the line softened. It also reordered the opening, swapped two words in the closing, and "tightened" a paragraph I hadn't mentioned. All of it was arguably better. None of it was what I asked for.</p>
+<p>It came back with the line softened. It also reordered the opening, swapped two words in the closing, and "tightened" a paragraph I hadn't mentioned. All of it was arguably better, and none of it was what I asked for.</p>
 
-<p>You have felt this exact thing, even if you have never touched an agent. You paste a paragraph into ChatGPT and say fix the typo in the third sentence, and it hands you back a cleaner, rewritten paragraph where the typo is gone and so is the specific phrasing you spent ten minutes getting right. You asked for a scalpel. You got a renovation.</p>
+<p>You may have felt this even if you have never touched an agent. You paste a paragraph into a chat app and ask it to fix the typo in the third sentence. It hands you back a cleaner, rewritten paragraph where the typo is gone, and so is the phrasing you spent ten minutes getting right. You asked for a scalpel and got a renovation.</p>
 
-<p>This is not the AI being careless. It is the AI doing exactly what it was built to do, which is why it keeps happening no matter how clearly you ask.</p>
+<p>The AI is doing exactly what it was built to do, which is why it keeps happening however clearly you ask.</p>
 
 <h2>It cannot tell the edit from the rewrite</h2>
 
-<p>Here is the part nobody explains. When you hand the model your text and a request, it does not see a document with one marked spot to change. It sees the whole thing at once, and it produces the whole thing again as its answer.</p>
+<p>When you hand the model your text and a request, it sees the whole thing at once, with no marked spot to change, and it produces the whole thing again as its answer.</p>
 
-<p>There is no internal switch that says "leave everything else exactly as it was." Every word of the output is generated fresh, including the words you wanted untouched. So when it regenerates your paragraph, it is not preserving your sentences and editing one. It is rewriting all of them, and most of the time they come out close to the original because the original was right there in front of it. Sometimes they don't.</p>
+<p>There is no internal switch that says "leave everything else exactly as it was." Every word of the output is generated fresh, including the words you wanted untouched.</p>
 
-<blockquote class="article-pullquote">You did not ask it to keep the rest the same. It never had a way to keep the rest the same. It rebuilt the whole thing and hoped you wouldn't notice the seams.</blockquote>
+<p>So when it regenerates your paragraph, it rewrites all of your sentences. Most of the time they come out close to the original, because the original was right there in front of it. Sometimes they don&rsquo;t.</p>
 
-<p>And the model has a strong pull toward "improve." It has read a great deal of writing about editing, and almost none of that writing says "change the one thing and stop." It says make it better. So when you give it any opening at all, it improves. Softening one line reads, to the model, as a signal that you are in improving mode, and it helpfully keeps going.</p>
+<blockquote class="article-pullquote">The model rebuilds the whole paragraph every time, even when you asked it to change one line.</blockquote>
+
+<p>And the model has a strong pull toward improving things. It has read a great deal of writing about editing, and almost none of that writing tells the editor to change the one thing and stop. So when you give it any opening at all, it improves. Softening one line reads, to the model, as a signal that you are in improving mode, and it helpfully keeps going.</p>
 
 <p>With plain text, you catch this because you can see the whole answer. The stakes climb the moment the thing acting on your request is an agent that does more than write.</p>
 
-<h2>When the overreach is an action, not a word</h2>
+<h2>When the overreach is an action</h2>
 
-<p>Text you can scan. An action, you often can't, at least not before it happens.</p>
+<p>Text you can scan. An action, you often can&rsquo;t, at least not before it happens.</p>
 
-<p>Say you tell an agent to move one meeting to Thursday. The model reads that inside the same instinct: reschedule, and while I'm in here, this whole afternoon is a mess, let me fix it. Now it has not just moved one meeting. It has emailed three people, shifted a second call, and declined an invite it decided was redundant. Every one of those was a reasonable read of "clean up my Thursday." Not one of them was what you said.</p>
+<p>Say you tell an agent to move one meeting to Thursday. The model reads that inside the same instinct: reschedule, and while I&rsquo;m in here, this whole afternoon is a mess, let me fix it.</p>
+
+<p>Besides moving the one meeting, it has emailed three people, shifted a second call, and declined an invite it decided was redundant. Each of those was a reasonable read of "clean up my Thursday," and none of them was what you said.</p>
 
 <p>The softened email I could undo by pulling up the draft and eyeballing it. The rescheduling I might not even know happened until someone replies asking why their meeting moved. The gap between what you asked and what it did stops being a nuisance and starts being something you have to chase down.</p>
 
-<blockquote class="article-pullquote">The problem was never that it did too little. It is that it quietly did more, and "more" is the thing you can't take back.</blockquote>
+<blockquote class="article-pullquote">The extra work an agent does without asking is the part you can&rsquo;t take back.</blockquote>
 
 <h2>Draw the box before you hand off the work</h2>
 
-<p>The fix is not a better model. A smarter model has the same instinct to improve, just with more confidence. The fix is telling it where the edit ends.</p>
+<p>A smarter model has the same instinct to improve, with more confidence. The fix is telling it where the edit ends.</p>
 
-<p>When I ask for the one-line change now, I say: change only the second sentence, return everything else byte for byte, do not improve anything I did not point at. That last clause does real work. It turns off the improving mode the request otherwise switches on. The output comes back with one line different and the rest genuinely untouched, because I gave it permission to stop.</p>
+<p>When I ask for the one-line change now, I say: change only the second sentence, return everything else byte for byte, do not improve anything I did not point at. That last clause does real work. It turns off the improving mode the request otherwise switches on. The output comes back with one line different and the rest untouched, because I gave it permission to stop.</p>
 
-<p>For actions it is the same move, drawn tighter. Move this one meeting and touch nothing else on the calendar. Draft the replies but do not send them. You are not distrusting the agent. You are handing it a job with edges, instead of a mood to act on.</p>
+<p>For actions it is the same move, drawn tighter. Move this one meeting and touch nothing else on the calendar. Draft the replies and leave them for me. That hands the agent a job with edges instead of a mood to act on.</p>
 
-<p>The reason this matters more on your own computer is that you can set the edges once and keep them. An agent you own can hold a standing rule that small means small, that it names what it is about to touch before it touches it, that anything past the line waits for you. Not because it is dumb, but because the space between "fix this line" and "fix everything near this line" is exactly where a helpful tool turns into a mess you have to walk back. The good version of this doesn't act less. It just stays inside the box you drew, every time.</p>
+<p>This matters more on your own computer because you can set the edges once and keep them. An agent you own can hold a standing rule that small means small, and that it names what it is about to touch before it touches it.</p>
+
+<p>The space between "fix this line" and "fix everything near this line" is exactly where a helpful tool turns into a mess you have to walk back. The good version of this stays inside the box you drew, every time.</p>
+
+<p>In Archie the last part doesn&rsquo;t depend on your wording: a reply is a draft until you send it or set a time, and a calendar change is a proposal until you say yes.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Reach out to Otian AI</h2>
-          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

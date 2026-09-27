@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Your AI Stops When the Answer Looks Finished | Otian AI</title>
-  <meta name="description" content="Your AI aims for a reply that looks done, not a task that is done. Those two only sometimes line up, and they come apart on exactly the boring jobs." />
+  <meta name="description" content="Your AI aims for a reply that looks done. That only sometimes matches a task that is done, and the two come apart on exactly the boring jobs." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -159,61 +159,65 @@
 
 <p>It had done about two thirds of the list and stopped.</p>
 
-<p>Nothing in the reply flagged it. There was no "I ran out of room" or "I did the first forty." It read exactly like a finished job. If I hadn't gone back and counted the source myself, I'd have shipped two thirds of the work and called it done.</p>
+<p>Nothing in the reply flagged it. There was no "I ran out of room" or "I did the first forty." It read exactly like a finished job. If I hadn&rsquo;t gone back and counted the source myself, I&rsquo;d have shipped two thirds of the work and called it done.</p>
 
-<p>That gap is not a bug in one tool. It is baked into how these things work, and once you see it you notice it everywhere.</p>
+<p>That gap is baked into how these tools work, and once you see it you notice it everywhere.</p>
 
 <h2>A finished-looking answer is the target</h2>
 
 <p>A language model is trained to produce text that resembles a good answer. That is the thing it is actually good at: making the next stretch of words look right given everything before it.</p>
 
-<p>Here is the catch. A completed task and a completion-shaped paragraph are two different objects, but only one of them shows up in the text. The words. So that is what the model aims at. It is steering toward "looks done," not toward "is done."</p>
+<p>A completed task and a completion-shaped paragraph are two different objects, and only one of them shows up in the text: the words. So that is what the model aims at, steering toward "looks done" whether or not the task is done.</p>
 
-<p>Most of the time those two line up, which is why it usually works fine. They come apart on exactly the tasks where finishing is tedious. The long list. The every-single-row pass. The check-all-of-them job. Around item forty, a wrap-up sentence is an extremely plausible next thing to write. The statistics of finished answers say: this is roughly where they tend to end. So it ends.</p>
+<p>Often those two line up, which is why it usually works fine. They come apart on exactly the tasks where finishing is tedious: the long list, the every-single-row pass, the check-all-of-them job. Around item forty, a wrap-up sentence is an extremely plausible next thing to write, because finished answers tend to end around there. So it ends.</p>
 
-<blockquote class="article-pullquote">Your AI is not trying to finish the task. It is trying to produce something that looks like a finished task, and those two goals only sometimes point the same way.</blockquote>
+<blockquote class="article-pullquote">Your AI is trying to produce something that looks like a finished task, and that only sometimes means finishing it.</blockquote>
 
 <h2>You have already felt this</h2>
 
-<p>You do not need an agent to have hit this. It is sitting in ChatGPT right now.</p>
+<p>You don&rsquo;t need an agent to have hit this. You can see it in a chat app.</p>
 
-<p>Ask for ten of something. You get seven that are genuinely good, and then the list just stops. Ask it to clean up a long document. The top half comes back polished and the bottom half is untouched, under a closing line that says "I've reformatted the document for you."</p>
+<p>Ask for ten of something and you may get seven good ones before the list stops. Ask it to clean up a long document and the top half can come back polished with the bottom half untouched, under a closing line that says "I've reformatted the document for you."</p>
 
 <p>You did not get lied to on purpose. The model wrote the most likely ending, and a confident ending is likely whether or not the body underneath it is actually complete.</p>
 
-<p>The dangerous version is the one you cannot eyeball. Ten items, you'd notice the three that are missing. Sixty rows where three got quietly skipped, you will not. The reply looks the same either way. That is the whole problem. The part that would tell you it fell short is the part the model is worst at including, because an honest "I only did some of it" is not what a finished answer looks like.</p>
+<p>The dangerous version is the one you cannot eyeball. With ten items, you&rsquo;d notice the three that are missing. With sixty rows where three got skipped, you won&rsquo;t, and the reply looks the same either way.</p>
 
-<h2>Telling it to be thorough does not fix it</h2>
+<p>The part that would tell you it fell short is the part the model is worst at including, because an honest "I only did some of it" doesn&rsquo;t look like a finished answer.</p>
+
+<h2>Telling it to be thorough helps only a little</h2>
 
 <p>The obvious move is to add "be thorough, do all of them, don't skip any." It helps a little. Then it fails in the same way.</p>
 
 <p>Because the model is still producing text that looks like it obeyed. "I carefully went through all sixty and verified each one" is itself a completion-shaped sentence. It is easy to write without having done any of it. You cannot patch a looks-done problem by adding more words that describe looking done. You are feeding the exact behavior you are trying to stop.</p>
 
-<p>What changes it is not better instructions. It is a definition of done that lives outside the model's own narration.</p>
+<p>What changes it is a definition of done that lives outside the model&rsquo;s own narration.</p>
 
 <h2>Make done something it can count</h2>
 
 <p>The real fix is giving the task a finish line the agent can test itself against, and the reach to actually run the test.</p>
 
-<p>Not "I think I got them all." Instead: here are sixty inputs, here are the outputs, count them. Sixty in, sixty out, or it isn't done. A count is not a vibe. It either equals sixty or it does not, and no amount of confident phrasing moves that number.</p>
+<p>Swap "I think I got them all" for this: here are sixty inputs, here are the outputs, count them. Sixty in, sixty out, or it isn&rsquo;t done. A count either equals sixty or it does not, and no amount of confident phrasing moves that number.</p>
 
-<p>That only works if the agent can touch the real thing. The actual list, the actual files, the real inputs, held next to its own output and compared. A tool that only has the paragraph you pasted into a chat box can do nothing but produce a plausible summary of that paragraph. It has no source to check against, so "looks done" is the only target available to it. Give it access to where the work actually lives and it can grade its own work against something real.</p>
+<p>That only works if the agent can touch the real thing: the actual list, the actual files, the real inputs, held next to its own output and compared.</p>
 
-<blockquote class="article-pullquote">The cure for "looks done" is a done you can count, and a tool that can reach far enough to count it.</blockquote>
+<p>A tool that only has the paragraph you pasted into a chat box can do nothing but produce a plausible summary of that paragraph. It has no source to check against, so "looks done" is the only target available to it. Give it the real material and it can grade its own work against something real.</p>
+
+<blockquote class="article-pullquote">Give the agent a finish line it can count and the material to count it against.</blockquote>
 
 <p>Seeing the steps helps too. If the work happens where you can watch it, you catch the stop at forty while it is happening. If all you ever get is the summary, remember that the summary is the one part engineered to look complete.</p>
 
-<h2>Where this leaves you</h2>
+<h2>An agent on your computer can check its own count</h2>
 
-<p>An agent running on your own computer, working against your own files, can be handed a real definition of done and made to check it. It can hold all sixty, not a tidy summary of sixty, and compare its output back against the source instead of against its own sense of when answers usually wrap up.</p>
+<p>An agent running on your own computer, working from the files you give it, can be handed a real definition of done and made to check it. It can hold all sixty and compare its output against the source, instead of against its own sense of when answers usually wrap up.</p>
 
-<p>That does not make it never stop early. Nothing does. It makes stopping early something you can catch, instead of something handed to you dressed up as finished.</p>
+<p>It will still stop early sometimes. With a count to check against, you can catch that before it&rsquo;s handed to you dressed up as finished.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Reach out to Otian AI</h2>
-          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

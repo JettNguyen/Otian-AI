@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Your AI Never Sounds Unsure. That's the Problem. | Otian AI</title>
-  <meta name="description" content="Your AI uses the exact same calm, fluent voice whether it knows the answer or is guessing. Here's why, and what actually fixes it." />
+  <title>Your AI Sounds the Same Whether It Knows or Guesses | Otian AI</title>
+  <meta name="description" content="Your AI uses the same calm, fluent voice whether it knows the answer or is guessing. The tone can&rsquo;t tell you which you got, and an answer that points at its source can." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -133,14 +133,14 @@
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Your AI Never Sounds Unsure. That's the Problem.</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Your AI Sounds the Same Whether It Knows or Guesses</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
         <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">Your AI Never Sounds Unsure. That's the Problem.</h1>
+        <h1 class="fade-up delay-1">Your AI Sounds the Same Whether It Knows or Guesses</h1>
         <div class="article-byline fade-up delay-2">
           <strong><a href="https://www.linkedin.com/in/jett-nguyen/" class="byline-author" target="_blank" rel="noopener" aria-label="Jett Nguyen on LinkedIn">Jett Nguyen</a></strong>
           <span>&middot;</span>
@@ -155,53 +155,61 @@
       <div class="container">
         <article class="article-body fade-up delay-1">
 
-<h2>The tone never changes</h2>
+<h2>The tone barely changes</h2>
 
-<p>You've felt this one. You ask ChatGPT something, it answers in clean, calm sentences, you act on it, and later you find out it was wrong. Not sloppy-wrong. Confidently, fluently wrong. The kind of wrong that reads like it came from someone who double-checked before they hit send.</p>
+<p>You may have felt this one. You ask a chat app something, it answers in clean, calm sentences, you act on it, and later you find out it was wrong. It was confidently, fluently wrong, the kind of wrong that reads like it came from someone who double-checked before they hit send.</p>
 
-<p>Now think about all the times it was right. Same voice. Same calm. Same tidy sentences.</p>
+<p>Now think about all the times it was right, in the same voice, with the same calm and the same tidy sentences.</p>
 
-<p>That is the whole problem. The tone is identical whether the model knows the answer or is making it up. Fluency and accuracy are two separate dials, and the model only ever turns one of them up. It always sounds sure. It is not always right. And the sound tells you nothing about the rightness.</p>
+<p>The tone is nearly identical whether the model knows the answer or is making it up. Fluency and accuracy are two separate dials, and the model mostly turns up one of them. It usually sounds sure, right or wrong, and the sound tells you little about whether it&rsquo;s right.</p>
 
-<blockquote class="article-pullquote">Your AI does not have a "not sure" face. It has one face, and it wears it for facts and guesses alike.</blockquote>
+<blockquote class="article-pullquote">Your AI uses the same face for facts and guesses alike.</blockquote>
 
 <h2>Why it reads the same either way</h2>
 
 <p>Under the hood, the model is doing one thing: predicting the next likely stretch of words. In almost everything it learned from, confident writing is more common than hedged writing. Real answers are written by people who sound like they know. So confident-sounding text is what it produces by default, whether or not there is anything solid underneath.</p>
 
-<p>Here is the part that trips people up. The model has no separate, private sense of "I actually have this one." There is no little gauge inside it reading full or empty. Knowing and guessing come out as the same shape of sentence, because it built both the same way, from the shape of your question and the patterns it has seen. A guess is not a different mode for it. It is just an answer with less behind it, wearing the exact same clothes.</p>
+<p>The model has no separate, private sense of "I actually have this one" that reaches the page. Knowing and guessing come out as the same shape of sentence, because it built both the same way, from the shape of your question and the patterns it has seen.</p>
 
-<p>So when you read the reply and it feels authoritative, you are reading the model's writing style. You are not reading its confidence, because it is not showing you any.</p>
+<p>To the model, a guess is an answer with less behind it, wearing the exact same clothes.</p>
+
+<p>So when you read the reply and it feels authoritative, you are reading the model&rsquo;s writing style, and it shows you nothing about its confidence.</p>
 
 <h2>Where this actually bites you</h2>
 
-<p>It bites hardest on the small, checkable facts. A renewal date. A figure from last quarter. The spelling of someone's name. What you and a client agreed to in an email three weeks ago.</p>
+<p>It bites hardest on the small, checkable facts: a renewal date, a figure from last quarter, the spelling of someone&rsquo;s name, what you and a client agreed to in an email three weeks ago.</p>
 
-<p>Ask your agent when a contract renews and it will give you a date. Even, calm, specific. But you cannot tell by reading whether it pulled that date from your actual notes or reconstructed it from the general shape of contracts like that one. Both answers look the same on your screen. One is real and one is a plausible fill-in, and the sentence gives you zero signal about which you got.</p>
+<p>Ask your agent when a contract renews and it will give you a date, even, calm and specific. But you cannot tell by reading whether it pulled that date from your actual notes or reconstructed it from the general shape of contracts like that one.</p>
+
+<p>Both answers look the same on your screen. One is real and one is a plausible fill-in, and the sentence gives you no signal about which you got.</p>
 
 <p>The soft, wordy questions hide this. If you ask for a summary or an opinion, wrong is fuzzy and you shrug it off. It is the precise stuff, the numbers and names you are going to act on, where a confident guess costs you. And those are exactly the questions you are most tempted to trust the clean answer on.</p>
 
-<h2>The fix is not a better-worded question</h2>
+<h2>Better wording helps less than you&rsquo;d hope</h2>
 
-<p>You cannot prompt your way out of this. Tell it "only answer if you're certain" and it will still sound certain, because sounding certain is the only register it has. You are asking a flat gauge to read empty. It cannot.</p>
+<p>Tell it "only answer if you're certain" and it can still sound certain about a guess.</p>
 
-<p>The real fix is to take the guessing off the table. Guessing happens when the model has to reconstruct a fact it cannot see. So let it see the fact. When your agent can open your actual files, your notes, your calendar, your past emails, it does not have to invent the renewal date from vibes. It can read it off the page. Grounded in a real source, the confident tone finally matches something, because now there is something behind it.</p>
+<p>The real fix is to take the guessing off the table. Guessing happens when the model has to reconstruct a fact it cannot see, so let it see the fact.</p>
 
-<p>And then make it show its work. Not just the answer, but where the answer came from: this file, that line, this email from that date. Once it points at a source, you get back the signal the tone was never going to give you. You can glance at what it cited and know in a second whether to trust it, instead of trusting the smoothness of the sentence.</p>
+<p>When your agent can open the files you gave it, your calendar and your past emails, it doesn&rsquo;t have to invent the renewal date from vibes. It can read it off the page, and the confident tone finally has something behind it.</p>
 
-<blockquote class="article-pullquote">A grounded answer and a guess sound the same. What separates them is whether the agent can point at where it got it.</blockquote>
+<p>And then make it show its work: the answer, and where it came from, whether this file, that page or this email from that date. Once it points at a source, you get back the signal the tone was never going to give you. You can glance at what it cited and know in a second whether to trust it, instead of trusting the smoothness of the sentence.</p>
 
-<h2>Trust the source, not the voice</h2>
+<blockquote class="article-pullquote">A grounded answer and a guess sound the same, so ask the agent to point at where it got the answer.</blockquote>
 
-<p>This is not a reason to stop asking. It is a reason to change what you lean on. Stop reading the confidence, because there is none in there to read. Start asking what the answer is standing on.</p>
+<h2>Trust the source the answer points to</h2>
 
-<p>That is a setup question more than a wording question. An agent living on your own computer, with real reach into your own files and notes, is answering from your stuff instead of from the average of the internet. It can guess less because it has to guess less, and it can show you the receipt when you ask. The voice will still be calm and sure every single time. But now you have something better than the voice to go on.</p>
+<p>Keep asking, and change what you lean on. The tone won&rsquo;t tell you how sure the model is, so ask what the answer is standing on.</p>
+
+<p>That is a setup question more than a wording question. An agent on your own computer, working from the files and notes you give it, answers from your stuff instead of from the average of the internet.</p>
+
+<p>It can guess less because it has to guess less, and it can show you the receipt when you ask. The voice will still sound calm and sure, and now you have something better than the voice to go on.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Reach out to Otian AI</h2>
-          <p>We build agents around how you actually work, not templates, not chatbots. If you&rsquo;re ready to see what that looks like for you, let&rsquo;s talk.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

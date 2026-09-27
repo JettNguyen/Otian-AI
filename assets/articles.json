@@ -1,7 +1,7 @@
 [
   {
     "title": "Say \"Maybe\" to Your AI and It Hears \"Do It.\"",
-    "summary": "You float a half-formed idea to your AI the way you would to a colleague. It doesn't wait for you to decide. It just does the thing.",
+    "summary": "You float a half-formed idea to your AI the way you would to a colleague, and it does the thing before you've decided. The line between talking and doing has to be built in.",
     "author": "Jett Nguyen",
     "date": "2026-08-19",
     "readTime": "4 min read",
@@ -15,7 +15,7 @@
   },
   {
     "title": "You Trust Your AI Most on the Work You'll Check Least",
-    "summary": "You check the AI hardest on work you could do yourself, and least on the work you handed off because you couldn't. That's backwards.",
+    "summary": "You check an AI hardest on work you could do yourself, and least on the work you handed off because you couldn't. The fix is an answer you can trace to its source in seconds.",
     "author": "Jack Raney",
     "date": "2026-08-06",
     "readTime": "4 min read",
@@ -29,7 +29,7 @@
   },
   {
     "title": "Your AI Stops the Moment the Answer Looks Finished",
-    "summary": "Your AI aims for a reply that looks done, not a task that is done. Those two only sometimes line up, and they come apart on exactly the boring jobs.",
+    "summary": "Your AI aims for a reply that looks done. That only sometimes matches a task that is done, and the two come apart on exactly the boring jobs.",
     "author": "Jack Raney",
     "date": "2026-08-04",
     "readTime": "4 min read",
@@ -42,8 +42,8 @@
     "url": "your-ai-stops-when-the-answer-looks-finished/"
   },
   {
-    "title": "You Asked for a Small Fix. Your AI Rewrote Everything Around It.",
-    "summary": "You ask your AI to change one line. It changes the line, and quietly redoes four things you never mentioned. Here's why it can't tell the edit from the rewrite.",
+    "title": "You Asked for a Small Fix and Your AI Rewrote Everything Around It",
+    "summary": "You ask your AI to change one line, and it also redoes four things you never mentioned. The model can't tell an edit from a rewrite, so the fix is telling it where the edit ends.",
     "author": "Jack Raney",
     "date": "2026-08-03",
     "readTime": "4 min read",
@@ -56,8 +56,8 @@
     "url": "you-asked-for-a-small-fix/"
   },
   {
-    "title": "Your AI Never Sounds Unsure. That's the Problem.",
-    "summary": "Your AI uses the exact same calm, fluent voice whether it knows the answer or is guessing. Here's why, and what actually fixes it.",
+    "title": "Your AI Sounds the Same Whether It Knows or Guesses",
+    "summary": "Your AI uses the same calm, fluent voice whether it knows the answer or is guessing. The tone can't tell you which you got, and an answer that points at its source can.",
     "author": "Jett Nguyen",
     "date": "2026-08-02",
     "readTime": "5 min read",
@@ -71,7 +71,7 @@
   },
   {
     "title": "The Best Reason to Run AI Locally Has Nothing to Do With Privacy",
-    "summary": "Everyone sells local AI on privacy. That's the defensive reason. The real one is access: an agent that can reach your actual files and act.",
+    "summary": "Privacy is the reason I hear most for running AI on your own computer. I think access is the better one: an agent next to the files you give it takes on the small jobs that were never worth an upload.",
     "author": "Jett Nguyen",
     "date": "2026-07-31",
     "readTime": "5 min read",
@@ -84,8 +84,8 @@
     "url": "the-best-reason-to-run-ai-locally-has-nothing-to-do-with-pri/"
   },
   {
-    "title": "Your AI Agent Should Bother You More, Not Less",
-    "summary": "The frictionless agent that never asks is a liability. The interruptions are the product, and on your own machine you get to draw the line.",
+    "title": "Your AI Agent Should Ask Before Anything It Can't Take Back",
+    "summary": "An agent that never asks is fast right up to the mistake it can't undo. The interruptions worth having come just before a step that commits, like a reply going out or a calendar changing.",
     "author": "Jett Nguyen",
     "date": "2026-07-30",
     "readTime": "5 min read",
@@ -98,8 +98,8 @@
     "url": "your-ai-agent-should-bother-you-more-not-less/"
   },
   {
-    "title": "You're Not Giving the AI Instructions. You're Setting the Odds.",
-    "summary": "Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. Here is the mechanism, and why owning the agent lets you keep the phrasing that works.",
+    "title": "Your Prompt Sets the Odds on What the AI Says Next",
+    "summary": "Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. The mechanism explains the prompt tricks, and an agent you own lets you keep the phrasing that works.",
     "author": "Jett Nguyen",
     "date": "2026-07-20",
     "readTime": "4 min read",
@@ -113,7 +113,7 @@
   },
   {
     "title": "Your AI Should Not Disappear When Your Computer Does",
-    "summary": "When your computer breaks, your photos and files survive, but the context your AI has built about how you work usually doesn't. That accumulated history is becoming one of the most valuable parts of a personal AI, and it shouldn't be tied to one device. How Archie keeps your assistant's memory of you portable.",
+    "summary": "Your photos and files survive a broken computer. What your AI has learned about you should too. How Archie puts what your agent knows about you in one file you can keep somewhere safe and restore on your next computer.",
     "author": "Jack Raney",
     "date": "2026-07-12",
     "readTime": "2 min read",
@@ -126,8 +126,8 @@
     "url": "your-ai-should-not-disappear-when-your-computer-does/"
   },
   {
-    "title": "The AI Model Isn't the Product Anymore. You Are.",
-    "summary": "A year ago the only question about AI was which model is smartest. That's becoming the wrong question. As every company gets access to capable models, raw intelligence stops being the differentiator: the useful AI is the one that actually knows you. Why the next phase of AI is personal, not just powerful.",
+    "title": "Why the Next Phase of AI Is Personal",
+    "summary": "A year ago the big question about AI was which model is smartest. As every company gets access to capable models, raw intelligence matters less, and the useful AI is the one that knows you. Why I think the next phase of AI is personal.",
     "author": "Jack Raney",
     "date": "2026-07-12",
     "readTime": "6 min read",
@@ -141,7 +141,7 @@
   },
   {
     "title": "How My Agent Caught What a Silent Outage Left Behind",
-    "summary": "A minor complaint about a follow-up feature that never fired turned into a two-hour investigation: an expired credential nobody noticed, a hung daemon behind it, an appointment displayed two hours off, and a date parser that had never worked. Four bugs, all silent until someone kept asking.",
+    "summary": "A small complaint about a follow-up feature that never fired turned into a two-hour investigation with my coding agent. It found an expired credential, a hung background process, an appointment shown two hours off, and a date parser that had never worked.",
     "author": "Jack Raney",
     "date": "2026-07-09",
     "readTime": "9 min read",
@@ -154,8 +154,8 @@
     "url": "how-my-agent-caught-what-a-silent-outage-left-behind/"
   },
   {
-    "title": "Everyone Is Either Scared of AI Agents or Ignoring Them. Both Are Wrong.",
-    "summary": "AI agents are one of the most underrated shifts in how people work. Most people are either afraid of them or haven't thought about them at all. Here's what they're actually missing, and why the gap between \"I use AI sometimes\" and \"I have an agent running my workflow\" is going to matter a lot.",
+    "title": "Why I Think AI Agents Are Underrated",
+    "summary": "The reactions I hear most to AI agents are worry about jobs, or no thought at all. I think both miss what an agent is for: taking busywork off your plate and asking you at the step that commits.",
     "author": "Jett Nguyen",
     "date": "2026-07-05",
     "readTime": "5 min read",
@@ -168,8 +168,8 @@
     "url": "ai-agents-underrated/"
   },
   {
-    "title": "My Business Agent Drafted a Fake Client Plan. Here's Exactly Why That Happened.",
-    "summary": "The agent produced a professional email with a detailed action plan. It was also completely made up. Here's what was missing, why the model filled in the gaps confidently, and what building a reliable agent actually requires.",
+    "title": "Why My Business Agent Drafted a Fake Client Plan",
+    "summary": "My agent drafted a professional client email with a detailed action plan, and all of it was made up. The client's files never loaded, so the model filled the gaps with confidence, and the fix was in the setup.",
     "author": "Jett Nguyen",
     "date": "2026-06-30",
     "readTime": "5 min read",
@@ -182,8 +182,8 @@
     "url": "agent-hallucination-context/"
   },
   {
-    "title": "My Workout App Didn't Know What I Should Lift. So I Built Something That Does.",
-    "summary": "Every weekday, Jack's AI agent builds his workout from 60 days of training history, sleep, travel, and his golf schedule, then pushes it to his phone before he's out of bed. No mental math, no guessing what he lifted last week.",
+    "title": "I Stopped Programming My Own Workouts, and My Agent Does It Now",
+    "summary": "Every weekday, a custom agent Jack built for himself plans his workout from 60 days of training history, sleep, travel and his golf schedule. The session is on his phone before he's out of bed.",
     "author": "Jack Raney",
     "date": "2026-06-25",
     "readTime": "4 min read",
@@ -196,8 +196,8 @@
     "url": "ai-built-my-workout-program/"
   },
   {
-    "title": "I Got Socially Engineered by a Fake Google Call. My AI Agent Helped Me Stop What Came Next.",
-    "summary": "A call from Google's real phone number talked Jack into handing over his Gmail account. Less than an hour later, his AI agent caught what he couldn't: hidden inbox filters, a planted passkey, and a backdoor built to survive a password reset.",
+    "title": "How My Agent Caught What a Gmail Hacker Left Behind",
+    "summary": "A call that showed Google's real phone number talked Jack into handing over his Gmail account. Less than an hour later, his AI agent helped him find hidden inbox filters, a planted passkey and a backdoor built to survive a password reset.",
     "author": "Jack Raney",
     "date": "2026-06-23",
     "readTime": "9 min read",

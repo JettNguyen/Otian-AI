@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>How My Agent Caught a Silent Outage | Otian AI</title>
-  <meta name="description" content="A minor complaint about a follow-up feature that never fired turned into a two-hour investigation: an expired credential nobody noticed, a hung daemon behind it, an appointment displayed two hours off, and a date parser that had never worked. Four bugs, all silent until someone kept asking." />
+  <meta name="description" content="A small complaint about a follow-up feature that never fired turned into a two-hour investigation with my coding agent. It found an expired credential, a hung background process, an appointment shown two hours off, and a date parser that had never worked." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -176,105 +176,115 @@
       <div class="container">
         <article class="article-body fade-up delay-1">
 
-<p>It started with a complaint, not a crisis. I told my agent that the skill which tracks email follow-ups for me hadn't fired. Not "hasn't fired recently." Not once, ever, as far as I could remember. No urgency to it, more the mild annoyance of a feature you assume is running quietly in the background until you notice it never actually announced anything.</p>
+<p><em>A note from us: the agent in this story is a coding agent we run on our own systems. Archie doesn&rsquo;t run commands, restart programs or change code.</em></p>
+
+<p>It started with a small complaint. I told my agent that the skill which tracks email follow-ups for me hadn&rsquo;t fired, and I didn&rsquo;t mean recently: as far as I could remember, it had never fired once. There was no urgency to it, only the mild annoyance of a feature you assume is running in the background until you notice it never announced anything.</p>
 
 <p>I expected a quick answer. I got a two-hour investigation that turned up three separate bugs, one of which would have sent me to the wrong place at the wrong hour for a standing personal appointment.</p>
 
 <h2>The Feature That Never Ran</h2>
 
-<p>The first problem was figuring out what "the follow-up skill" even was. It isn't a single toggle: it's a small daemon (a background process that just keeps running, checking your inbox on a timer, the way a thermostat keeps checking the temperature) that reads new email and tries to infer commitments: promises, asks, things a reasonable person would follow up on. When it finds one, it's supposed to surface it.</p>
+<p>The first problem was figuring out what "the follow-up skill" even was. It turned out to be a small daemon, a background process that keeps running and checks your inbox on a timer, the way a thermostat keeps checking the temperature. It reads new email and tries to infer commitments: promises, asks, things a reasonable person would follow up on. When it finds one, it&rsquo;s supposed to surface it.</p>
 
-<p>My agent didn't take my framing at face value. Instead of assuming the feature was misconfigured, it went looking for where the feature actually lived, traced it to the daemon, and checked its output directly: a store of "inferred follow-up commitments," queried with a single command.</p>
+<p>My agent didn&rsquo;t take my framing at face value. Instead of assuming the feature was misconfigured, it went looking for where the feature actually lived and traced it to the daemon. Then it checked the daemon&rsquo;s output directly: a store of "inferred follow-up commitments," queried with a single command.</p>
 
-<p>The count was zero. Not "zero pending": zero, total, ever. Nothing had ever been written to it.</p>
+<p>The count was zero, in total, for all time. Nothing had ever been written to it.</p>
 
-<p>That's the kind of result that tells you the problem isn't the feature's logic. If the logic were wrong, you'd expect some garbage in there: bad inferences, duplicates, something. Zero, forever, means the feature never got a single email to look at in the first place.</p>
+<p>A result like that points away from the feature&rsquo;s logic. If the logic were wrong, you&rsquo;d expect some garbage in there: bad inferences, duplicates, something. Zero, forever, means the feature never got a single email to look at in the first place.</p>
 
 <h2>Two Thousand, Four Hundred, and Ninety-Seven Identical Lines</h2>
 
-<p>The daemon's log confirmed it. Every sixty seconds, it tried to check my inbox. Every sixty seconds, for what turned out to be days, it failed with the exact same error: invalid_grant: Token has been expired or revoked.</p>
+<p>The daemon&rsquo;s log confirmed it. Every sixty seconds, it tried to check my inbox. Every sixty seconds, for what turned out to be days, it failed with the exact same error: invalid_grant: Token has been expired or revoked.</p>
 
-<p>Gmail access for an automated process works through OAuth (the login handshake that lets an app act on your behalf without ever seeing your password) and a refresh token, a long-lived credential that lets the process quietly renew its short-term access every hour without bothering you. That part had been working fine for weeks; the daemon refreshed itself automatically and I never noticed. What died wasn't the hourly refresh. It was the refresh token itself, the thing underneath the thing that renews. Once that's gone, no amount of automatic retrying fixes it. You need a human to sit through a login flow again.</p>
+<p>Gmail access for an automated process works through OAuth, the login handshake that lets an app act on your behalf without seeing your password. Behind it sits a refresh token, a long-lived credential that lets the process renew its short-term access every hour without bothering you.</p>
 
-<p>Nobody had. There was no error to click through, no notification, nothing. Just a log file, growing quietly, that nobody was reading.</p>
+<p>The hourly renewal had been working fine for weeks; the daemon refreshed itself and I never noticed. The refresh token itself had died, the thing underneath the thing that renews. Once that&rsquo;s gone, no amount of automatic retrying fixes it, and a person has to sit through a login flow again.</p>
+
+<p>Nobody had. There was no error to click through and no notification, only a log file growing by a line a minute that nobody was reading.</p>
 
 <p>My agent ran the re-authorization flow, got a fresh token, and confirmed (by hand, hitting the Gmail API directly) that it worked.</p>
 
-<p>And the daemon still didn't recover.</p>
+<p>And the daemon still didn&rsquo;t recover.</p>
 
 <h2>The Bug Behind the Bug</h2>
 
-<p>This is the part I'd have stopped at, if I'd been doing this myself. Token's fixed, ticket's closed, move on. My agent didn't move on, because the daemon's own log had gone completely silent: no errors, but also no successes. A process that's supposed to check something every sixty seconds should be saying something every sixty seconds, even if that something is "nothing new."</p>
+<p>This is the part I&rsquo;d have stopped at, if I&rsquo;d been doing this myself. Token&rsquo;s fixed, ticket&rsquo;s closed, move on. My agent didn&rsquo;t move on, because the daemon&rsquo;s own log had gone completely silent: no errors, but also no successes. A process that&rsquo;s supposed to check something every sixty seconds should be saying something every sixty seconds, even if that something is "nothing new."</p>
 
-<p>It checked the process directly: still running, using zero CPU, doing nothing. Not crashed. Worse, in a way. A crashed process at least tells you it's dead. This one just sat there, holding a working credential it had stopped trying to use, hung on some earlier connection that never came back.</p>
+<p>It checked the process directly: still running, using zero CPU, doing nothing. In a way that&rsquo;s worse than a crash, because a crashed process at least tells you it&rsquo;s dead. This one sat there holding a working credential it had stopped trying to use, hung on some earlier connection that never came back.</p>
 
 <p>The fix was almost anticlimactic: restart it. Once it came back up with a clean connection and the valid token, it immediately found something real (a missed reminder from days earlier) and handled it correctly within seconds.</p>
 
-<p>Two separate failures, stacked on top of each other, and the second one was only visible because nobody stopped at "the token's fixed now."</p>
+<p>Two separate failures, stacked on top of each other, and the second one was only visible because nobody stopped at "the token&rsquo;s fixed now."</p>
 
-<h2>Why Does This Keep Happening?</h2>
+<h2>Why the Credential Kept Dying</h2>
 
 <p>I asked the obvious next question: why did the credential die in the first place, and how do I stop it happening again?</p>
 
-<p>The honest answer is I still don't have full certainty: that requires checking a setting in Google's developer console that isn't reachable from a terminal. But the investigation surfaced something I hadn't known: there were two different sets of credentials sitting in the same config directory, created weeks apart, for the same project. Which means this had already happened once before. Someone's response to it back then (me, presumably, or an earlier version of this same automation) wasn't to diagnose the failure. It was to just generate a new credential and move on, the way you'd get a new key cut instead of asking why the old lock keeps jamming.</p>
+<p>I still don&rsquo;t know for certain. Finding out means checking a setting in Google&rsquo;s developer console, which isn&rsquo;t reachable from a terminal. But the investigation surfaced something I hadn&rsquo;t known: there were two different sets of credentials in the same config directory, created weeks apart, for the same project.</p>
 
-<p>That's the real finding, more than the specific OAuth theory. A recurring failure that gets patched instead of understood just goes quiet again. So instead of only fixing the token, my agent added something that hadn't existed before: if the daemon fails five times in a row (a few minutes of real trouble, not a network blip) it now sends me an actual alert. Not a line in a log file nobody tails. A message. And when it recovers, it tells me that too. The next time this credential dies, however it dies, I'll know within five minutes instead of finding out weeks later by noticing a suspiciously empty list.</p>
+<p>So this had happened once before. Whoever responded back then (me, presumably, or an earlier version of this same automation) generated a new credential and moved on without diagnosing the failure. It&rsquo;s like getting a new key cut instead of asking why the old lock keeps jamming.</p>
+
+<p>That&rsquo;s the real finding, more than the specific OAuth theory: a recurring failure that gets patched without being understood goes silent again. So besides fixing the token, my agent added something that hadn&rsquo;t existed before. If the daemon fails five times in a row, which means a few minutes of real trouble rather than a network blip, it now sends me a message.</p>
+
+<p>When it recovers, it tells me that too. The next time this credential dies, however it dies, I&rsquo;ll know within five minutes instead of finding out weeks later from a suspiciously empty list.</p>
 
 <h2>The Appointment That Would Have Been Two Hours Wrong</h2>
 
-<p>While all this was still being sorted out, a message came through from the same system, working exactly as intended: a recurring personal appointment detected from an email, a calendar event proposed automatically, a reminder set for the drive.</p>
+<p>While all this was still being sorted out, a message came through from the same system, working exactly as intended. It had detected a recurring personal appointment from an email, proposed a calendar event and set a reminder for the drive.</p>
 
 <blockquote class="article-pullquote">Appointment detected: [contact], Jul 9 at 7:00 PM. In-person (50 min).</blockquote>
 
-<p>Something about it read wrong. Not obviously wrong, just a nagging sense that the time didn't match what I expected. I asked my agent to check.</p>
+<p>Something about it read wrong, only as a nagging sense that the time didn&rsquo;t match what I expected. I asked my agent to check.</p>
 
-<p>The actual calendar event, it turned out, was correct: 5:00 PM, in the time zone that matched where the appointment actually was. The message describing it said 7:00 PM. Same appointment, same underlying data, two different times, two hours apart, because the code that generates the human-readable text had been hardcoded to describe every appointment in my home time zone, regardless of where the appointment actually was. When an earlier version of the automation added a special case for "if I'm physically somewhere else, book this in person instead of over video," someone updated the calendar event to use the correct time zone and simply forgot to update the sentence describing it to match.</p>
+<p>The actual calendar event, it turned out, was correct: 5:00 PM, in the time zone that matched where the appointment was. The message describing it said 7:00 PM. It was the same appointment and the same underlying data, with two times two hours apart.</p>
 
-<p>The event itself was never wrong. If I'd tapped confirm, my calendar would have shown the correct time. But I don't check the invite twice; I read the message, I show up. If that message had gone unquestioned, I'd have shown up two hours off from the actual appointment time.</p>
+<p>The code that writes the human-readable text had been hardcoded to describe every appointment in my home time zone, wherever the appointment was. An earlier version of the automation had added a special case for when I&rsquo;m physically somewhere else, booking the appointment in person instead of over video. Whoever added it updated the calendar event to use the correct time zone and forgot to update the sentence describing it.</p>
 
-<p>The instructive part isn't the two-hour gap. It's why it existed: two pieces of information that should never be able to disagree were being computed by two completely separate lines of code, in two different places, written at two different times. Nothing was stopping them from drifting apart, and eventually, quietly, they had.</p>
+<p>The event itself was never wrong. If I&rsquo;d tapped confirm, my calendar would have shown the correct time. But I don&rsquo;t check the invite twice; I read the message, I show up. If that message had gone unquestioned, I&rsquo;d have shown up two hours off from the actual appointment time.</p>
 
-<p>The fix wasn't just correcting the displayed time. It was removing the possibility of this happening again: instead of the message and the calendar event each doing their own time zone math, both now pull from a single shared calculation. There is no longer a version of this bug where they can disagree, because there's only one place left where the time gets decided at all.</p>
+<p>The instructive part is why the gap existed. Two pieces of information that should never be able to disagree were computed by two separate lines of code, in two different places, written at two different times. Nothing was stopping them from drifting apart, and eventually they had.</p>
+
+<p>So the fix went past correcting the displayed time. Instead of the message and the calendar event each doing their own time zone math, both now pull from a single shared calculation. There is no longer a version of this bug where they can disagree, because there&rsquo;s only one place left where the time gets decided at all.</p>
 
 <h2>The Detail I Only Noticed Because I Was Already Looking</h2>
 
-<p>With the time zone fixed, I asked one more question, mostly out of curiosity: did this appointment even follow the format I'd specified for how my calendar titles should look?</p>
+<p>With the time zone fixed, I asked one more question, mostly out of curiosity: did this appointment even follow the format I&rsquo;d specified for how my calendar titles should look?</p>
 
-<p>It didn't. I have a documented standard for exactly how these should read (a specific word order for how a contact's name and the venue relate to each other) and the automated version had it backwards. Not broken, not confusing, just not what I'd actually specified. The kind of small inconsistency that's easy to live with indefinitely because it never causes a visible problem, only a quiet gap between what you asked for and what you're getting.</p>
+<p>It didn&rsquo;t. I have a documented standard for how these should read, a specific word order for a contact&rsquo;s name and the venue, and the automated version had it backwards. Nothing broke. It was the kind of small inconsistency that&rsquo;s easy to live with indefinitely, because it never causes a visible problem, only a gap between what you asked for and what you&rsquo;re getting.</p>
 
-<p>That one wasn't hiding behind an error message. It was hiding behind the fact that nobody had ever put the actual rule next to the actual code and compared them line by line. Once that comparison happened, the mismatch took seconds to find and seconds to fix.</p>
+<p>That one was hiding behind the fact that nobody had ever put the actual rule next to the actual code and compared them line by line. Once that comparison happened, the mismatch took seconds to find and seconds to fix.</p>
 
 <h2>Trying to Break It on Purpose</h2>
 
-<p>By this point I'd found three unrelated bugs while chasing one complaint about a missing feature. That pattern, a small question that keeps leading somewhere else, is usually a sign there's more to find, not less. So rather than call it done, I asked for a stress test: don't just tell me it's fixed, prove it.</p>
+<p>By this point I&rsquo;d found three unrelated bugs while chasing one complaint about a missing feature. In my experience, a small question that keeps leading somewhere else means there&rsquo;s more to find. So instead of calling it done, I asked for a stress test that would prove the fixes held.</p>
 
-<p>My agent built a harness that imported the actual code and ran it against a battery of fabricated scenarios (different date formats real emails might use, a version of the appointment logic run with location flipped both ways, a duplicate reminder for an appointment that already exists, a deliberately garbled email with no usable date in it at all) all without sending a single real message or touching a single real file. Forty-three checks in total.</p>
+<p>My agent wrote a test script that imported the actual code and ran it against a set of made-up scenarios. They included different date formats real emails might use and the appointment logic run with the location flipped both ways. There was also a duplicate reminder for an appointment that already existed, and a deliberately garbled email with no usable date in it at all.</p>
 
-<p>Two failed on the first run. One was a flaw in the test itself, not the code: a shortcut that reset state between calls in a way the real daemon never does, quickly fixed by testing it the same continuous way it actually runs. The other wasn't a flaw in the test. It was a fourth bug: a date format the code claimed to support, using its own documented example as the test case, that had never actually been parseable. A missing comma, silently swallowed by an error handler that was written to fail quietly rather than loudly. There's no way to know how long that path had been dead, because nothing had ever needed it to notice.</p>
+<p>None of it sent a real message or touched a real file. Forty-three checks in total.</p>
 
-<blockquote class="article-pullquote">Forty-three checks, four real bugs found across the whole session, and every one of them was invisible until something insisted on being wrong out loud instead of failing silently.</blockquote>
+<p>Two failed on the first run. One was a flaw in the test itself: a shortcut that reset state between calls in a way the real daemon never does, fixed by testing it the same continuous way it runs.</p>
 
-<h2>What Actually Happened Here</h2>
+<p>The other was a fourth bug. The code claimed to support a date format, and its own documented example of that format had never been parseable. A missing comma was being swallowed by an error handler written to fail without a sound. There&rsquo;s no way to know how long that path had been dead, because nothing had ever needed it to notice.</p>
 
-<p>None of these bugs were dramatic. Nothing was hacked, nothing was stolen, nobody was locked out of anything. The worst-case outcome, if none of this had surfaced, was closer to quietly annoying than dangerous: a feature that never did anything, an appointment I might have shown up to two hours off, a calendar that didn't quite match my own stated preferences, and a code path that had apparently never worked and never would have been missed.</p>
+<blockquote class="article-pullquote">The session found four real bugs, and each one stayed invisible until something made it fail out loud.</blockquote>
 
-<p>But that's exactly the shape most real problems take. They don't announce themselves. They sit in a log file nobody's tailing, or a display string that quietly stopped matching the thing it was describing, or an error handler that was written to fail politely instead of loudly. Nobody sits down and audits their automation for its own sake. You notice when something's a little off, you ask, and then the question either stops at the first plausible answer or it doesn't.</p>
+<h2>Four Small Bugs, All of Them Silent</h2>
 
-<p>What mattered here wasn't any single fix. It was that the investigation didn't stop once the original complaint was technically resolved. Token fixed, but the process is still silent: check why. Time is fixed, but does it match the format I asked for: check that too. Everything looks fine now: prove it, instead of assuming it.</p>
+<p>None of these bugs were dramatic. Nothing was hacked, nothing was stolen, and nobody was locked out of anything. If none of this had surfaced, the worst case was closer to annoying than dangerous.</p>
 
-<h2>Want an Agent Like This?</h2>
+<p>The list was a feature that never did anything, an appointment I might have shown up to two hours off, and calendar titles that didn&rsquo;t match my own stated preferences. Add a code path that had never worked and would never have been missed.</p>
 
-<p>What caught these wasn't a bug tracker or a linter. It was an agent that treats "it's fixed" as the start of the next question, not the end of the conversation.</p>
+<p>That&rsquo;s the shape a lot of real problems take, in my experience. They don&rsquo;t announce themselves. They sit in a log file nobody&rsquo;s reading, a display string that stopped matching the thing it described, or an error handler written to fail politely instead of loudly.</p>
 
-<p>That's what we build at Otian AI: personal AI agents designed around how you actually live and work, not a chatbot that answers what you ask and stops there. An agent that knows your systems, your standards, and keeps looking past the first plausible explanation.</p>
+<p>I never audit my own automation for its own sake. I notice something is a little off, I ask, and then the question either stops at the first plausible answer or it doesn&rsquo;t.</p>
 
-<p>If this made you wonder what's quietly gone wrong in your own life that nobody's caught yet, reach out. That's exactly the gap we close.</p>
+<p>What mattered here was that the investigation didn&rsquo;t stop once the original complaint was technically resolved. The token was fixed, but the process was still silent, so we checked why. The time was fixed, so I asked about the format too. When everything looked fine, I asked for proof instead of assuming it. What caught these was an agent that treated "it&rsquo;s fixed" as the start of the next question.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Catch what slips past you</h2>
-          <p>The outage wasn&rsquo;t the story; the quiet cleanup afterward was. An agent that watches your corner of the world catches what you&rsquo;d only find later. We can set one up for yours.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

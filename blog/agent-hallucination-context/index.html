@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>My Agent Drafted a Fake Client Plan | Otian AI</title>
-  <meta name="description" content="The agent produced a professional email with a detailed action plan. It was also completely made up. Here's what was missing, why the model filled in the gaps, and how we fixed it." />
+  <title>Why My Business Agent Drafted a Fake Client Plan | Otian AI</title>
+  <meta name="description" content="My agent drafted a professional client email with a detailed action plan, and all of it was made up. The client's files never loaded, so the model filled the gaps with confidence, and the fix was in the setup." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -154,14 +154,14 @@
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Why My Business Agent Drafted a Fake Client Plan</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
         <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">My Business Agent Drafted a Fake Client Plan. Here&rsquo;s Exactly Why That Happened.</h1>
+        <h1 class="fade-up delay-1">Why My Business Agent Drafted a Fake Client Plan</h1>
         <div class="article-byline fade-up delay-2">
           <strong><a href="https://www.linkedin.com/in/jett-nguyen/" class="byline-author" target="_blank" rel="noopener" aria-label="Jett Nguyen on LinkedIn">Jett Nguyen</a></strong>
           <span>&middot;</span>
@@ -182,45 +182,45 @@
 
           <p>The action plan it wrote wasn&rsquo;t for that client. It wasn&rsquo;t even close. The agent had invented a generic, plausible-sounding plan and presented it with total confidence, as if it had known the client for months.</p>
 
-          <h2>What Actually Happened</h2>
-          <p>An AI agent doesn&rsquo;t store knowledge the way you do. It doesn&rsquo;t remember your clients between sessions or carry context in its head. Every time an agent runs, it starts from scratch. What it knows depends entirely on what information it loads at the start.</p>
+          <h2>The Client&rsquo;s Files Never Loaded</h2>
+          <p>An AI model doesn&rsquo;t store knowledge the way you do. The model itself carries nothing between runs. What it knows depends on what is loaded at the start. In Archie, that includes what your agent has learned about you and a list of the files you gave it, which it opens when it needs them.</p>
 
-          <p>Those startup files are called bootstrap files. Think of them as the agent&rsquo;s briefing document: who the client is, what the project involves, what&rsquo;s already been decided, what&rsquo;s still open. Before the agent does anything, it reads those files and builds a working picture of the situation.</p>
+          <p>In the agent I was testing, those startup files are called bootstrap files. They work as the agent&rsquo;s briefing document: who the client is, what the project involves, what&rsquo;s already been decided, what&rsquo;s still open. Before the agent does anything, it reads those files and builds a working picture of the situation.</p>
 
           <p>The routing is what tells the agent which files to load and when.</p>
 
-          <p>On that test run, the routing had a gap. The bootstrap files for that client either weren&rsquo;t loaded or were skipped entirely. So when the agent went to write the email, it had nothing real to work from: no client name, no project context, no actual action items. Just a prompt asking it to draft something professional.</p>
+          <p>On that test run, the routing had a gap. The bootstrap files for that client either weren&rsquo;t loaded or were skipped entirely. So when the agent went to write the email, it had nothing real to work from: no client name, no project context, no actual action items, only a prompt asking it to draft something professional.</p>
 
-          <p>So it did what language models do when they don&rsquo;t have what they need: they fill in the gaps. Confidently.</p>
+          <p>So it did what language models do when they don&rsquo;t have what they need, and filled in the gaps with confidence.</p>
 
-          <blockquote class="article-pullquote">The agent wasn&rsquo;t lying. It genuinely didn&rsquo;t know it didn&rsquo;t know.</blockquote>
+          <blockquote class="article-pullquote">The agent had no way to know that it didn&rsquo;t know.</blockquote>
 
           <h2>The Confidence Is the Dangerous Part</h2>
           <p>This is what makes hallucination actually tricky. If the agent had said &ldquo;I don&rsquo;t have enough information to write this,&rdquo; you&rsquo;d fix the problem. But it didn&rsquo;t. It produced something that looked completely real: professional formatting, specific language, the right structure. Nothing in the output signaled that any of it was invented.</p>
 
-          <p>That&rsquo;s the nature of how these models work. They don&rsquo;t experience uncertainty the way you do. They reason from what&rsquo;s in front of them, and if what&rsquo;s in front of them is incomplete, they complete the picture themselves. The output quality doesn&rsquo;t drop. The confidence doesn&rsquo;t waver. It just makes something up.</p>
+          <p>That&rsquo;s how these models work. They don&rsquo;t experience uncertainty the way you do. They reason from what&rsquo;s in front of them, and if what&rsquo;s in front of them is incomplete, they complete the picture themselves, with no drop in polish or confidence.</p>
 
           <h2>What This Taught Me About Building Agents</h2>
           <p>After that draft, I went back and tightened the routing. Every client context, every project file, every relevant document loads before the agent touches anything else. The agent doesn&rsquo;t get to write a single word until it&rsquo;s been properly briefed.</p>
 
-          <p>But the deeper lesson was this: the decision the agent made wasn&rsquo;t wrong. Given what it had, it did exactly what it was supposed to do: write a professional email with an agenda and action items. The inputs were broken. The decision was technically correct.</p>
+          <p>But the deeper lesson was that the agent&rsquo;s decision was reasonable. Given what it had, it did exactly what it was supposed to do: write a professional email with an agenda and action items. The inputs were what broke.</p>
 
-          <blockquote class="article-pullquote">Building a good agent is mostly about getting the inputs right. The model will handle the rest, for better or worse.</blockquote>
+          <blockquote class="article-pullquote">Building a good agent is mostly about getting the inputs right.</blockquote>
 
-          <p>Most people think about agents in terms of outputs: did it do what I asked? The real question is: did it have what it needed to do it correctly? That&rsquo;s the part you build. That&rsquo;s the part that determines whether you get a real plan or a convincing fiction.</p>
+          <p>It&rsquo;s natural to judge an agent by its output: did it do what I asked? The more useful question is whether it had what it needed to do it correctly. That&rsquo;s the part you build, and it decides whether you get a real plan or a convincing fiction.</p>
 
-          <h2>This Is Why We Don&rsquo;t Set It and Forget It</h2>
-          <p>At Otian, we don&rsquo;t hand someone an agent and walk away. We build the context architecture: the bootstrap files, the routing logic, the information the agent has access to. We keep refining it as the picture of your work gets clearer. An agent that knows everything it needs to know is almost never wrong. An agent running on incomplete context is almost always confidently wrong.</p>
+          <h2>Why We Build the Context With You</h2>
+          <p>When we set an agent up with you, we build its context with you: the documents, the routing and the information it has access to. Anything after that is scoped and priced before we start.</p>
 
-          <p>The difference isn&rsquo;t the model. It&rsquo;s the setup.</p>
+          <p>An agent with the context it needs is wrong much less often. One running on incomplete context still sounds sure, and that is the dangerous case. In my experience, the setup makes more of the difference than the model.</p>
 
-          <p>If you&rsquo;ve ever tried an AI tool that seemed to just make things up, that&rsquo;s almost certainly what happened. And it&rsquo;s fixable, but you have to know what to fix.</p>
+          <p>If you&rsquo;ve tried an AI tool that seemed to make things up, missing context is the first thing I&rsquo;d check. It&rsquo;s fixable once you know what to fix.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
           <h2>Give your agent the context</h2>
-          <p>Hallucination shrinks when an agent actually knows your world. That is how we build them: grounded in your files, your calendar, your rules. If you want one that answers from facts, let&rsquo;s talk.</p>
+          <p>An agent that knows your world makes things up less often. In Archie, your agent works from the files you give it, your calendar and what it has learned about you. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

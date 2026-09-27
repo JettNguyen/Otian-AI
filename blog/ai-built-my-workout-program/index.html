@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>I Stopped Programming My Own Workouts | Otian AI</title>
-  <meta name="description" content="Every weekday, Jack's AI agent builds his workout from 60 days of training history, sleep, travel, and his golf schedule, then pushes it to his phone before he's out of bed." />
+  <meta name="description" content="Every weekday, a custom agent Jack built for himself plans his workout from 60 days of training history, sleep, travel and his golf schedule. The session is on his phone before he's out of bed." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -154,14 +154,14 @@
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">I Stopped Programming My Own Workouts. My Agent Does It Now.</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">I Stopped Programming My Own Workouts, and My Agent Does It Now</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
         <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">I Stopped Programming My Own Workouts. My Agent Does It Now.</h1>
+        <h1 class="fade-up delay-1">I Stopped Programming My Own Workouts, and My Agent Does It Now</h1>
         <div class="article-byline fade-up delay-2">
           <strong><a href="https://www.linkedin.com/in/jack-raney/" class="byline-author" target="_blank" rel="noopener" aria-label="Jack Raney on LinkedIn">Jack Raney</a></strong>
           <span>&middot;</span>
@@ -176,46 +176,52 @@
       <div class="container">
         <article class="article-body fade-up delay-1">
 
-          <p>I was spending the first five minutes of every session figuring out what I should actually be doing. Six days a week, that's thirty minutes of mental energy spent before I even touch a weight. It wasn't a training problem; it was a decision fatigue problem. So I fixed it.</p>
+          <p><em>A note from us: this is a custom system Jack built for himself, and Archie doesn&rsquo;t do it out of the box. In Archie, your agent can&rsquo;t run a program on your computer, and replies, calendar moves and changes to your lists wait for your yes.</em></p>
+
+          <p>I was spending the first five minutes of every session figuring out what I should actually be doing. Six days a week, that&rsquo;s thirty minutes of mental energy spent before I even touch a weight. The problem was decision fatigue, so I fixed it.</p>
 
           <h2>It Starts Before I Wake Up</h2>
-          <p>Every weekday at 6 AM and noon, an AI agent (a program that runs automatically in the background, makes decisions, and takes action without me touching it) generates my workout and pushes it directly to Hevy, the app I use to track my training. By the time I'm in the car, the session is already waiting on my phone. It knows my training schedule, my program, and exactly what I should lift and why.</p>
+          <p>Every weekday at 6 AM and noon, an AI agent I built generates my workout and pushes it directly to Hevy, the app I use to track my training. The agent is a program I set up to run on a schedule and act without me touching it.</p>
+
+          <p>By the time I&rsquo;m in the car, the session is already waiting on my phone. It knows my training schedule, my program, and exactly what I should lift and why.</p>
 
           <h2>It Knows My History Better Than I Do</h2>
-          <p>Before every session, the system pulls 60 days of workout history from Hevy and builds a performance profile for every exercise I've done: my 60-day peak, what I lifted last time, whether I've been progressing or stalling. Pulling from Hevy means it connects directly to the app through a software link called an API, which lets it read my full training history automatically. No manual exports, no copying numbers.</p>
+          <p>Before every session, the system pulls 60 days of workout history from Hevy and builds a performance profile for every exercise I&rsquo;ve done. That covers my 60-day peak, what I lifted last time, and whether I&rsquo;ve been progressing or stalling. It reads Hevy directly through an API, a software link between two apps, so I never export anything or copy numbers by hand.</p>
 
-          <p>From that data, it computes target weights before the AI ever gets involved. Hit all your reps last session? You're going up. Stalled at the same weight three times in a row without ever hitting your rep target? It swaps you to a similar exercise to break the pattern. Coming back after travel or a surf trip? It starts you at a calculated comeback weight so you don't crash into a wall on day one.</p>
+          <p>From that data, it computes target weights before the AI ever gets involved. Hit all your reps last session? You&rsquo;re going up.</p>
 
-          <p>The AI doesn't guess. The math runs first, and the AI builds the session around it.</p>
+          <p>Stalled at the same weight three times in a row without ever hitting your rep target? It swaps you to a similar exercise to break the pattern. Coming back after travel or a surf trip? It starts you at a calculated comeback weight so you don&rsquo;t crash into a wall on day one.</p>
+
+          <p>So the math runs first, and the AI builds the session around numbers it didn&rsquo;t have to guess.</p>
 
           <h2>It Pays Attention to the Whole Picture</h2>
-          <p>This is the part most apps miss entirely. If I surfed the day before, the session gets dialed back. Poor sleep logged? Weights come down 5 to 10 percent. Well-rested and moving well in warm-ups? There's room to push above the program.</p>
+          <p>The workout apps I&rsquo;ve used never did this part. If I surfed the day before, the session gets dialed back. Poor sleep logged? Weights come down 5 to 10 percent. Well-rested and moving well in warm-ups? There&rsquo;s room to push above the program.</p>
 
-          <p>I play golf seriously, so every afternoon session includes at least one exercise targeting rotational power or hip stability, movements that carry over directly to the course. And if I have an injury flag active, any movement that could aggravate it is automatically removed before a single exercise is selected. No exceptions, no workarounds.</p>
+          <p>I play golf seriously, so every afternoon session includes at least one exercise targeting rotational power or hip stability, movements that carry over directly to the course. And if I have an injury flag active, any movement that could aggravate it is removed before a single exercise is selected, every time.</p>
 
-          <blockquote class="article-pullquote">The system doesn't just know what the program says. It knows what's actually going on.</blockquote>
+          <blockquote class="article-pullquote">The session changes with my sleep, my travel and yesterday&rsquo;s surf, and the program is only the starting point.</blockquote>
 
           <h2>It Travels With Me</h2>
-          <p>When I fly somewhere for golf, the agent reads the event from my Google Calendar (the same calendar app most people already use), figures out I'm traveling, switches my equipment profile to match the gym at my destination, and adjusts every scheduled session to fire at the right local time. An equipment profile is just a list of what's available: full rack, cables, dumbbells, or bodyweight only. At a hotel, it automatically shifts to exercises that don't need computers. When I get home, it switches back. I've never manually updated a setting for travel. It just handles it.</p>
+          <p>When I fly somewhere for golf, the agent reads the trip from my Google Calendar and works out that I&rsquo;m traveling. It switches my equipment profile to match the gym at my destination and moves every scheduled session to the right local time.</p>
+
+          <p>An equipment profile is a list of what&rsquo;s available: full rack, cables, dumbbells, or bodyweight only. At a hotel, it shifts to dumbbell and bodyweight exercises, and when I get home, it switches back. I&rsquo;ve never updated a setting for travel by hand.</p>
 
           <h2>The Night Before</h2>
-          <p>At 9 PM, I get a message through Telegram (a free messaging app, similar to texting) with tomorrow's gear checklist: what to pack, what's already in the bag, and nutrition timing for the morning session. It's a small touch, but it removes one more decision from the morning.</p>
+          <p>At 9 PM, I get a message through Telegram (a free messaging app, similar to texting) with tomorrow&rsquo;s gear checklist: what to pack, what&rsquo;s already in the bag, and nutrition timing for the morning session. It&rsquo;s a small touch, but it removes one more decision from the morning.</p>
 
-          <h2>What Actually Changed</h2>
-          <p>I don't make training decisions anymore. The system handles them, and I just show up and lift. The session is built from everything the system knows: performance history, sleep, cardio load, travel, injury, sport schedule. It's already in my pocket before I leave the house.</p>
+          <h2>I Don&rsquo;t Make Training Decisions Anymore</h2>
+          <p>The system makes them, and I show up and lift. The session is built from everything the system knows: performance history, sleep, cardio load, travel, injury, sport schedule. It&rsquo;s already in my pocket before I leave the house.</p>
 
-          <blockquote class="article-pullquote">Most apps log what you did. This one decides what you should do next.</blockquote>
+          <blockquote class="article-pullquote">This system plans my next session from what I did in the last sixty days.</blockquote>
 
           <h2>This Is One Piece of Something Larger</h2>
-          <p>The workout agent is one layer of a personal AI system that runs my day: morning briefing, email, contacts, travel, finance, training, all of it coordinated through the same system. We build these at Otian AI. Not templates, not chatbots. Custom-built AI agents designed around how you actually live, your schedule, your goals, your context. The kind of system that makes the right call before you even think to ask.</p>
-
-          <p>If any part of your day runs on decisions that could be automated, that's exactly what we build. Reach out if you want to talk about what that could look like for you.</p>
+          <p>The workout agent is one layer of a personal system I&rsquo;ve built around my own day: morning briefing, email, contacts, travel, finance and training, all coordinated in one place.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Make it build yours</h2>
-          <p>A program that fits your schedule, your equipment, and your knees is exactly the kind of job an agent does well. Tell us what you&rsquo;d hand yours first.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

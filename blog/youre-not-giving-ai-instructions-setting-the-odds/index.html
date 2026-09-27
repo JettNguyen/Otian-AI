@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>You're Not Instructing AI, You're Setting Odds | Otian AI</title>
-  <meta name="description" content="Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. Here is the mechanism, and why owning the agent lets you keep the phrasing that works." />
+  <title>Your Prompt Sets the Odds on What the AI Says Next | Otian AI</title>
+  <meta name="description" content="Tiny prompt changes cause big swings because the model reads your words as the whole world and predicts from there. The mechanism explains the prompt tricks, and an agent you own lets you keep the phrasing that works." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -153,14 +153,14 @@
         <div class="breadcrumb-bar-inner">
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item"><a href="../../blog/">Blog</a></li>
-            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">You're Not Giving the AI Instructions. You're Setting the Odds.</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Your Prompt Sets the Odds on What the AI Says Next</li>
           </ol>
         </div>
       </nav>
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Blog</a>
         <span class="section-label fade-up">Team story</span>
-        <h1 class="fade-up delay-1">You're Not Giving the AI Instructions. You're Setting the Odds.</h1>
+        <h1 class="fade-up delay-1">Your Prompt Sets the Odds on What the AI Says Next</h1>
         <div class="article-byline fade-up delay-2">
           <strong><a href="https://www.linkedin.com/in/jett-nguyen/" class="byline-author" target="_blank" rel="noopener" aria-label="Jett Nguyen on LinkedIn">Jett Nguyen</a></strong>
           <span>&middot;</span>
@@ -175,61 +175,71 @@
       <div class="container">
         <article class="article-body fade-up delay-1">
 
-<h2>Your prompt is a world, not a command</h2>
+<h2>Your prompt is the whole world the model sees</h2>
 
-<p>Most people treat a prompt like a command line. Type the instruction, the computer runs it, done. That mental model is exactly why prompting feels like superstition. You change one small thing, the answer swings, and you have no idea why.</p>
+<p>It&rsquo;s natural to treat a prompt like a command line: type the instruction, the computer runs it, done. That mental model is exactly why prompting feels like superstition. You change one small thing, the answer swings, and you have no idea why.</p>
 
-<p>Here is a model that actually predicts what you will see. A language model does not execute your prompt. It reads your prompt as the whole world it lives in for that one moment, and then it guesses what comes next. Every word you wrote is evidence about what kind of text should follow. Change the evidence a little and you change what the model thinks it is in the middle of writing.</p>
+<p>A better mental model predicts what you will actually see. A language model reads your prompt as the whole world it lives in for that one moment, and then it guesses what comes next.</p>
 
-<blockquote class="article-pullquote">You are not giving the model instructions. You are setting the odds on what it says next.</blockquote>
+<p>Every word you wrote is evidence about what kind of text should follow. Change the evidence a little and you change what the model thinks it is in the middle of writing.</p>
 
-<p>That is not a figure of speech. Underneath, the model is producing a probability for every possible next word, then the next, based on everything in front of it. Add "carefully" and you tilt that probability toward the kind of text that follows careful writing: hedges, checks, second-guesses. Drop it and you tilt toward the fast, confident version. Same task, different corner of the model's behavior.</p>
+<blockquote class="article-pullquote">Every word you write sets the odds on what the model says next.</blockquote>
+
+<p>I mean that literally. Underneath, the model is producing a probability for every possible next word, then the next, based on everything in front of it. Add "carefully" and you tilt that probability toward the kind of text that follows careful writing: hedges, checks, second-guesses. Drop it and you tilt toward the fast, confident version of the same task.</p>
 
 <h2>Why one word ripples</h2>
 
-<p>Here is the part that surprises people. The change does not stay local.</p>
+<p>The change doesn&rsquo;t stay local.</p>
 
-<p>Each word the model writes becomes part of the evidence for the next word. So a nudge in the first sentence shifts the second, which shifts the third. A small steer at the top does not add a small amount of drift at the bottom. It compounds. That is why swapping a single word near the start of a long answer can hand you something structurally different by the end, not just reworded.</p>
+<p>Each word the model writes becomes part of the evidence for the next word. So a nudge in the first sentence shifts the second, which shifts the third, and a small steer at the top compounds by the bottom.</p>
+
+<p>That is why swapping a single word near the start of a long answer can hand you something structurally different by the end, where you might have expected the same answer reworded.</p>
 
 <p>Once you see prompting as steering a distribution instead of typing a command, the "tricks" stop being tricks and start making sense.</p>
 
-<p>Ask "is this code fine?" and you have pointed the model at text that follows a reassuring question, which is usually "yes." Ask "what are three ways this code breaks under load?" and you have pointed it at problems. You did not make the model more honest by being firmer. You changed the target it is aiming for.</p>
+<p>Ask "is this code fine?" and you have pointed the model at text that follows a reassuring question, which is usually a yes. Ask "what are three ways this code breaks under load?" and you have pointed it at problems. Being firmer didn&rsquo;t make the model more honest; the second question changed the target it was aiming for.</p>
 
 <h2>The same moves, seen clearly</h2>
 
-<p>Role framing works for the same reason. "You are a senior security reviewer" does not turn the model into one. It makes security-reviewer text the likely thing to come next, and security reviewers notice different things than a generic helper does.</p>
+<p>Role framing works for the same reason. "You are a senior security reviewer" makes security-reviewer text the likely thing to come next, and security reviewers notice different things than a generic helper does.</p>
 
 <p>Order matters because nearby words pull harder than distant ones. A constraint you bury in the middle of a paragraph gets outvoted by everything after it. The same constraint placed last stays loud. Move it, and behavior moves with it.</p>
 
-<p>Specificity works by killing options. "Summarize this" has a thousand valid continuations, so you get the bland average of all of them. "Summarize this in three bullets a busy founder would actually read" throws most of those continuations away before the model starts. Fewer roads, better odds you land on the one you wanted.</p>
+<p>Specificity works by killing options. "Summarize this" has a thousand valid continuations, so you get the bland average of all of them. "Summarize this in three bullets a busy founder would actually read" throws most of those continuations away before the model starts. Fewer roads means better odds you land on the one you wanted.</p>
 
 <p>And a single example beats a paragraph of description. Show one instance of the exact format you want and the model has a concrete pattern to extend, which is a far stronger signal than adjectives about the format.</p>
 
-<blockquote class="article-pullquote">Vague prompts get you the average. Specific prompts throw the average away.</blockquote>
+<blockquote class="article-pullquote">A specific prompt throws most of the possible answers away before the model starts.</blockquote>
 
 <p>Even the word "don't" can backfire, and the mechanism explains why. Tell the model "don't mention the refund policy" and you have just put "refund policy" into the evidence. You raised its probability by naming it. The model has no clean delete key for a concept you just wrote down. Often the better move is to say what you do want, because that is what actually steers the continuation.</p>
 
-<p>Even "think step by step" is not a magic spell. It works because it makes the model write reasoning first, and every one of those reasoning words becomes evidence for the answer that follows. You are not asking it to try harder. You are giving it room to build the context that leads to a better guess.</p>
+<p>Even "think step by step" has a plain explanation. It makes the model write reasoning first, and every one of those reasoning words becomes evidence for the answer that follows. It gives the model room to build the context that leads to a better guess.</p>
 
 <h2>The trap of the clever one-off</h2>
 
-<p>Here is where most people leak all of this value. They stumble onto a phrasing that works, paste it once, get a great result, and then lose it. Next week they are guessing again. Prompting treated as a party trick never accumulates. The good version lives in your head, or in some chat you will never scroll back to, and it evaporates.</p>
+<p>The value leaks away at the next step. You stumble onto a phrasing that works, paste it once, get a great result, and then lose it. Next week you&rsquo;re guessing again. Prompting treated as a party trick never accumulates. The good version lives in your head, or in some chat you will never scroll back to, and it evaporates.</p>
 
-<p>The thing that actually pays off is turning a prompt that works into something you keep and can open up later. Not a sticky note. Something your agent carries with it, so the behavior you tuned shows up every time without you retyping it.</p>
+<p>What pays off is turning a prompt that works into something your agent carries with it, so the behavior you tuned shows up every time without you retyping it.</p>
 
 <h2>What this looks like when you own the agent</h2>
 
-<p>This is the whole reason we built Archie the way we did. Archie runs an agent on your own computer that talks to you in the chat apps you already use, Telegram, Discord, or Slack. You shape it with add-ons: skills, routines, personalities. Each one is really a prompt someone got right, saved, and aimed at a real job. The one word you discovered stops being a lucky message and becomes permanent behavior.</p>
+<p>This is a big part of why we built Archie the way we did. Archie runs an agent on your own computer that talks to you in its own window, or in a chat app you already use.</p>
 
-<p>Because it runs on your computer, with your keys and your files, the examples that make your prompts good (your actual writing, your real data, the way you actually talk) stay on your computer. You are not pasting your best work into someone's web box to get a decent result. The specificity that makes prompting work comes from you, and it never leaves.</p>
+<p>You shape it with add-ons: skills, routines and personalities. Each one is a prompt someone got right, saved and aimed at a real job, so the phrasing that worked keeps working every time.</p>
 
-<p>And because it is yours, you get to steer it on purpose. An add-on you install carries its own tuned prompt, and that part stays private. You do not have to read someone else's exact words to get a good result. What you add is your own layer on top: your details, your preferred tone, the extra rules that make it fit your work. Those are words you control, and changing them shifts the behavior on purpose this time instead of by accident. A skill you write yourself goes further: every word of it is open to you. Either way, that is the difference between collecting prompt tricks and owning how your agent behaves. Little changes make big differences. The only question is whether you get to keep the good ones.</p>
+<p>The examples that make your prompts good are your actual writing, your real data and the way you actually talk. Because Archie runs on your computer, they are kept on your computer rather than on a server of ours. They go to your AI company each time your agent uses them, on your own account. The specificity that makes prompting work comes from you.</p>
+
+<p>And because it is yours, you get to steer it on purpose. An add-on you install carries its own tuned prompt, which you don&rsquo;t see, and you don&rsquo;t need to read someone else&rsquo;s exact words to get a good result.</p>
+
+<p>What you add is your own layer on top: your details, your preferred tone, the extra rules that make it fit your work. Those are words you control, and changing them shifts the behavior on purpose instead of by accident. A skill you write yourself goes further, because every word of it is open to you.</p>
+
+<p>Either way, you stop collecting prompt tricks and start keeping the phrasing that works, where your agent uses it every time.</p>
 
         </article>
 
         <div class="cta-banner fade-up article-cta">
-          <h2>Set better odds</h2>
-          <p>Good instructions don&rsquo;t script the outcome; they tilt it. We spend our days tilting agents toward useful. Bring us the job you want the odds set for.</p>
+          <h2>Archie runs your agent on your own computer</h2>
+          <p>Your agent takes on the jobs you pick, so it fits the way you work. Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
           <a href="../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
         </div>
 

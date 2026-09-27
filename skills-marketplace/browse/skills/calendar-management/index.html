@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Calendar Management | Add-on Marketplace | Otian AI</title>
-  <meta name="description" content="Full Google Calendar management: create, read, update, and delete events via natural language. Coming to the Archie marketplace." />
+  <title>Calendar Manager | Add-on Marketplace | Otian AI</title>
+  <meta name="description" content="Works your Google or Outlook calendar by chat. Your agent reads it on its own, and every create, change or delete is written up for you to approve before it happens." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -157,7 +157,7 @@
           <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
           <a href="../../../../skills-marketplace/browse/">Skills</a>
           <span class="mp-breadcrumb-sep" aria-hidden="true">/</span>
-          <span>Calendar Management</span>
+          <span>Calendar Manager</span>
         </nav>
 
         <div class="mp-detail-badges">
@@ -165,25 +165,28 @@
           <span class="mp-category-badge">productivity</span>
         </div>
 
-        <h1 class="mp-detail-title">Calendar Management</h1>
+        <h1 class="mp-detail-title">Calendar Manager</h1>
 
         <div class="mp-detail-meta">
-          <span>by Otian AI (built-in)</span>
-          <span>v1.0.0</span>
+          <span>by Otian AI</span>
           <span class="mp-price-badge is-free">Included with Archie</span>
         </div>
 
-        <p class="mp-detail-desc">Give your agent the ability to fully manage a Google Calendar. It can check availability, create events, reschedule meetings, set reminders, find free slots, and summarize upcoming schedules. All changes require confirmation before executing. Requires a connected Google account with calendar access.</p>
+        <p class="mp-detail-desc">Your agent reads your calendar, on Google or Outlook, and drafts changes to it in chat. It can tell you what&rsquo;s coming up, find open time in your own week, and write up a new event, a reschedule or a cancellation.</p>
+        <p class="mp-detail-desc">Every create, change and delete is a proposal you approve in chat first, and nothing lands on your calendar until you say yes. Reading needs no approval.</p>
+        <p class="mp-detail-desc">Two limits to know before you install it. A new or changed event carries a title, a description, a start and an end.</p>
+        <p class="mp-detail-desc">Guests, a location, a video link, all-day events and repeating events are still added in the calendar itself, and your agent tells you the one step that finishes the job.</p>
+        <p class="mp-detail-desc">And your agent sees only your own calendar, so it can find your free time but cannot tell you whether anyone else is free. A very full stretch comes back in pieces, and your agent says when a range is fuller than it could see.</p>
 
         <div class="mp-detail-section">
-          <h3>Required Integrations</h3>
+          <h3>Works with</h3>
           <div class="mp-tags">
-            <span class="mp-tag">Google Calendar</span>
+            <span class="mp-tag">A Google or Outlook calendar</span>
           </div>
         </div>
 
         <div class="mp-detail-section">
-          <h3>Trigger Keywords</h3>
+          <h3>Try saying</h3>
           <div class="mp-tags">
             <span class="mp-tag">calendar</span>
             <span class="mp-tag">schedule</span>
@@ -200,16 +203,17 @@
             <span class="mp-tag">block time</span>
             <span class="mp-tag">reminder</span>
             <span class="mp-tag">agenda</span>
+            <span class="mp-tag">outlook</span>
+            <span class="mp-tag">google calendar</span>
           </div>
         </div>
 
         <div class="mp-detail-section">
           <h3>Setup Steps</h3>
           <ol class="mp-numbered-list">
-            <li>Connect your Google account by clicking 'Connect Google' in the agent settings.</li>
-            <li>Fill in your timezone (e.g. America/New_York).</li>
-            <li>Set your working hours so the agent respects your schedule boundaries.</li>
-            <li>Optionally add scheduling preferences (e.g. 'prefer mornings for focus time').</li>
+            <li>On your agent&rsquo;s Connections tab, under Email, calendar, files, connect a Google or Outlook account with calendar access. Check Let it change events if you want your agent to propose changes.</li>
+            <li>Set your timezone.</li>
+            <li>If you like, set your working hours, a default event length and your scheduling preferences, such as &ldquo;prefer mornings for deep work&rdquo;.</li>
           </ol>
         </div>
 
@@ -227,7 +231,7 @@
               <tr>
                 <td><code>TIMEZONE</code></td>
                 <td>Your timezone</td>
-                <td>IANA timezone (e.g. America/Los_Angeles, Europe/London, Asia/Tokyo)</td>
+                <td>Used so events land at the right local time.</td>
               </tr>
               <tr>
                 <td><code>CALENDAR_ID</code></td>
@@ -237,12 +241,12 @@
               <tr>
                 <td><code>WORKING_HOURS_START</code></td>
                 <td>Work day starts at</td>
-                <td>24-hour format (e.g. 09:00). The agent won't schedule events before this time unless you explicitly ask.</td>
+                <td>Your agent won&rsquo;t schedule events before this time unless you ask.</td>
               </tr>
               <tr>
                 <td><code>WORKING_HOURS_END</code></td>
                 <td>Work day ends at</td>
-                <td>24-hour format (e.g. 17:00). The agent won't schedule events after this time unless you explicitly ask.</td>
+                <td>Your agent won&rsquo;t schedule events after this time unless you ask.</td>
               </tr>
               <tr>
                 <td><code>DEFAULT_EVENT_DURATION</code></td>
@@ -259,7 +263,7 @@
         </div>
 
         <div class="mp-detail-section">
-          <h3>Model Tier</h3>
+          <h3>Response quality</h3>
           <span class="mp-tier-badge">Balanced</span>
         </div>
 

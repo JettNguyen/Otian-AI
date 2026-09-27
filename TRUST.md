@@ -1629,6 +1629,10 @@ did not write.
 **Approved wording:** "An add-on is a text file, not a program. A Skill is markdown plus
 settings. It cannot run code on your computer, because Archie has nowhere to run it."
 
+**Second approved form (2026-09-27, the voice pass):** "An add-on is a text file your agent reads.
+A Skill is written instructions plus settings. It cannot run code on your computer, because Archie
+has nowhere to run it." The same claim without the contrast; the browse page's caption uses it.
+
 **Why it's true (reworded 2026-08-21):** No shell, no `dlopen`/`libloading`, no WASM, no JS
 `eval` anywhere in `crates/` or `src-tauri/`. Process spawning does exist, and the old "no
 `std::process::Command` anywhere" claim was flatly untrue: the crates spawn our own
@@ -2400,6 +2404,11 @@ our intentions.
   is read from the browser's own record, not from a list we maintain. That is the point of
   building it that way and it is also a standing commitment: do not replace it with a list.
 
+**Forms (noted 2026-09-27).** Three scripts post a form to Formspree, and only those three:
+`js/contact.js`, `js/marketplace.js` (the marketplace's email list) and `js/questionnaire.js` (the
+waitlist and the call booking). This entry named only the first until the marketplace page said
+so itself.
+
 ### ✅ The claims a reader can run in a browser: `trust/proof/` (added 2026-09-16)
 
 **What the page is.** Four claims from this file, running as instruments rather than sentences:
@@ -2805,6 +2814,27 @@ is `AgentBundleManifest::read_scanned_documents`, drawn on the agent's Response 
   it is the only number anybody has measured; a scan's page count is the variable and nobody has
   run a spread of real documents.
 
+### ✅ What the technical log holds, and how far back a restart reads mail (entry written 2026-09-27)
+
+**Approved wording, the log:** "That log holds what your agent read and what it decided: who each
+email was from, its subject line, and a short summary of each email or text it left alone. It
+does not hold the full text of an email or a text." help/ asks people to export it and send it to
+us, so it says this before they do.
+
+**Approved wording, the gap:** "When it starts again, your agent reads what arrived while it was
+off, as long as the gap is under about a week. After a longer gap, or sometimes after reconnecting
+an Outlook account, it can only start from that moment." And an account removed and added back
+reads only from then on, which is why help/ says to use Reconnect.
+
+**Why it's true:** the email lane logs sender and subject on "Read a new email and left it alone"
+(the Archie repo's `email/replies/mod.rs`, `card.rs`), and the text lane its summary
+(`texts/replies/triage.rs`). The gap is `MailError::CursorExpired` in `email/poller.rs`: Gmail
+drops history older than about a week and Graph expires a delta link, and on that path the poller
+starts from now. A re-added account gets a new id (`integrations.rs`).
+
+**Boundaries, not to cross:** never "nothing is lost" about a restart or a reconnect. An error
+line on the email triage path can carry up to 200 characters of the AI's own reply.
+
 ### ✅ It can name the page an answer came from (SHIPPED 2026-09-17, in 0.3.0; entry written 2026-09-27)
 
 **Approved wording:** "Ask where a figure came from and your agent can name the page: Archie reads a
@@ -2937,8 +2967,12 @@ appears on the card, in the prompt sent to your AI account, and in any reminder 
 Never write "nothing about your contacts is sent anywhere": the name rides the card and the
 prompt, and saying otherwise contradicts SECURITY.md.
 
-**Approved wording, retention:** "Message text never enters Archie's logs (every log line in
-the lane carries ids, never text). The internal draft record is deleted within a day, on a
+**Approved wording, retention (corrected 2026-09-27):** "Message text never enters Archie's logs.
+When your agent reads a text and leaves it alone, the technical log keeps its own one-line summary
+of that text; every other line in the lane carries ids." *(The older form said every line carries
+ids and never text. `triage.rs` has logged a `summary` field on "Read a new text and left it
+alone" since 2026-08-25, which is in 0.3.0; help/ says so now, and this wording caught up the same
+day.)* " The internal draft record is deleted within a day, on a
 sweep that runs whether or not anything arrives. The card your agent posted stays in your chat
 like any message there, and a commitment it caught lives on as a reminder until it fires."
 

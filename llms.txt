@@ -39,9 +39,9 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Add-ons
 
-- [Add-on Marketplace](https://otianai.com/skills-marketplace/browse/): Browse the personalities, skills, and routines for your Archie agent. Join the waitlist to hear when the marketplace opens.
+- [Add-on Marketplace](https://otianai.com/skills-marketplace/browse/): Browse the personalities, skills and routines your agent can take on, all included with Archie. Join the waitlist to hear when the marketplace opens.
 - [Find an Add-on](https://otianai.com/skills-marketplace/find/): Describe a job you want off your plate in plain words and see which Otian AI add-ons already do it. No account, no AI, and nothing you type leaves your browser.
-- [For Developers](https://otianai.com/skills-marketplace/for-developers/): Build an add-on for Archie, submit it for review, and it is listed on the marketplace under your name, included with Archie for everyone. Free to list, and open to any developer.
+- [For Developers](https://otianai.com/skills-marketplace/for-developers/): Build an add-on for Archie and submit it for review. An accepted add-on is listed under your name and included with Archie for everyone, and listing is free.
 
 ## Privacy, security and claims
 
@@ -74,7 +74,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [AI Explained](https://otianai.com/ai-explained/): Plain-English AI terms to help you understand agents, automation, and how modern AI tools work.
 - [FAQ](https://otianai.com/faq/): Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control.
 - [Blog](https://otianai.com/blog/): Practical articles on putting an AI agent to work, from the Otian AI team.
-- [Is My Agent Broken?](https://otianai.com/help/): Troubleshooting for Archie. What your agent does quietly on purpose, what is actually broken, and what to press for each one.
+- [Is My Agent Broken?](https://otianai.com/help/): Troubleshooting for Archie: what your agent leaves alone on purpose, what is actually broken, and what to press for each one.
 
 ## What we do not claim
 

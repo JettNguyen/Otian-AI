@@ -1139,21 +1139,27 @@ app is built for any other reason.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### 🚧 Pictures, videos and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
+### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
 
-**Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video or a
-document, from Archie on your computer or from the Archie app on your phone. It looks at the
-pictures, asks before it watches a video, and reads the document. It sends files back the same way,
-and in Archie it can answer with a table or a checklist when that is the clearer shape."
+**Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video, a
+recording, or a document, from Archie on your computer or from the Archie app on your phone. It
+looks at the pictures, asks before it watches a video or listens to a recording, and reads the
+document. It sends files back the same way, and in Archie it can answer with a table or a checklist
+when that is the clearer shape."
 
-**Why it's true** (Archie repo `1ddd20d3`, `12461dfc`, `65c1d2f3`, `b3fd0fdf`, `766abc60`, `1df1ba2f`;
-archie-mobile `2e5516e`, `674a438`, `534fce5`, `126831f`):
+**Why it's true** (Archie repo `1ddd20d3`, `12461dfc`, `65c1d2f3`, `b3fd0fdf`, `766abc60`, `1df1ba2f`,
+`20f547d7`; archie-mobile `2e5516e`, `674a438`, `534fce5`, `126831f`, `7453d20`):
 - **The window.** The message box takes up to four pictures, one video and any number of documents,
   from its Add button or dropped on the conversation (`src/app/conversation.tsx`, `src/app/attach.ts`).
   Several pictures go as one message the agent answers once (`ChannelEvent::Album`,
   `vision::look_at_photos`). A video is copied into the agent's folder and offered with the Watch or
   Skip card (`inapp_send_video`, `gateway/video_offer.rs`). Documents are filed under General and the
   agent is told they arrived.
+- **Recordings.** A recording (a meeting, a voicemail; MP3, M4A, WAV, AAC, OGG, Opus or FLAC) goes
+  the way a video does: the same card, worded Listen or Skip, and the same pipeline, which
+  transcribes it and files notes under Knowledge without looking for pictures in it (`is_recording`
+  and `words_for` in `gateway/video_offer.rs`, `video.rs`). In the window it takes the video's
+  place on a message; on the phone it comes from the files picker, up to 25 MB.
 - **The app.** The attach sheet opens the camera (a photo or a video), the photo roll (up to four,
   videos too) and the files picker (`src/attach.ts`, `src/screens/Chat.tsx` in archie-mobile). Files
   cross in sealed pieces, several at a time, up to 5 MB for a picture, 10 MB for a document and 25 MB
@@ -1168,9 +1174,13 @@ archie-mobile `2e5516e`, `674a438`, `534fce5`, `126831f`):
   `GatewayConfig::phone_draws_tables`).
 
 **The boundaries:**
-- ⛔ **Never say it watches every video you send.** It asks first, every time, because watching
-  costs minutes and money on the owner's AI account; and it watches only with Video Synthesizer
-  installed, which brings the tools. Without it the agent says so and names the add-on.
+- ⛔ **Never say it watches every video or listens to every recording you send.** It asks first,
+  every time, because watching or listening costs minutes and money on the owner's AI account; and
+  it does either only with Video Synthesizer installed, which brings the tools. Without it the agent
+  says so and names the add-on.
+- ⛔ **Never say it listens to a recording sent on a chat app.** On Telegram, Slack, Discord, Signal,
+  iMessage and Matrix an audio file is still heard as the sender talking and answered, not turned
+  into notes. The recording card is in Archie and the Archie app only.
 - ⛔ **Never promise a size past the phone's limits.** From the phone a video is up to 25 MB (about a
   minute), a document 10 MB and a picture 5 MB, and a video past the limit is refused with how to
   trim it. From the window a video can be much larger, so copy says "a video" and not a length.
@@ -1185,7 +1195,7 @@ archie-mobile `2e5516e`, `674a438`, `534fce5`, `126831f`):
   app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
   kind says so rather than opening it.
 
-### ✅ It works while you sleep### ✅ It works while you sleep
+### ✅ It works while you sleep
 
 **Approved wording:** "It Works While You Sleep" / "works in the background while you sleep."
 Used as a homepage proof chip and in the homepage meta description.

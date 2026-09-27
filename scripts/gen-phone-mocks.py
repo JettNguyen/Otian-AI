@@ -565,17 +565,21 @@ def screen_chat():
 
 
 # ── screen 3: what an agent is made of ───────────────────────────────────────────────────
+# Real add-ons, each under its catalog name and in its catalog's own words, shortened to fit. TRUST.md:
+# never name an add-on that is not in the catalog. Until 2026-09-27 these five were invented ("Inbox
+# triage", "Reply drafts", "Proofreader", "Calendar", "Receipts") on a screen that sits under Browse
+# the marketplace, which read as five things you could find there.
 SKILLS = [
-    dict(name="Inbox triage", on=True, note=None,
-         lines=["Sorts the morning's mail into what needs", "you and what does not."]),
-    dict(name="Reply drafts", on=True, note=None,
-         lines=["Writes the reply and holds it until you", "press Send."]),
-    dict(name="Proofreader", on=True, note=None,
-         lines=["A specialist. Reads anything before it goes."]),
-    dict(name="Calendar", on=False, note="Needs a connection",
-         lines=["Reads and writes the calendar. Off until", "you connect an account."]),
-    dict(name="Receipts", on=True, note=None,
-         lines=["Files what arrives and totals the month."]),
+    dict(name="Email Manager", on=True, note=None,
+         lines=["Drafts the reply and holds it until you", "send it or set a time."]),
+    dict(name="Inbox Rules", on=False, note="Needs a connection",
+         lines=["Counts who writes to you and files each", "pile. Off until you connect an account."]),
+    dict(name="Writer", on=True, note=None,
+         lines=["A specialist. Writes the thing itself."]),
+    dict(name="Calendar Manager", on=True, note=None,
+         lines=["Proposes a change and makes it once you", "approve it."]),
+    dict(name="Bills & Subscriptions", on=True, note=None,
+         lines=["Everything that charges you on a repeat."]),
 ]
 
 

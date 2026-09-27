@@ -1,5 +1,9 @@
 # RESTYLE: one quiet grammar across the whole site
 
+Current cross-product direction: [BRAND.md](BRAND.md). The dated rollout below is
+historical context. Keep its component guidance where it agrees with the current
+standard and the implemented tokens.
+
 The homepage rebuild (2026-08-18, "The homepage becomes the quiet spine") is the reference.
 Every page moves to the same grammar, one page per commit, until the experience is uniform.
 This file is the working checklist; tick pages as they land.
@@ -12,9 +16,9 @@ This file is the working checklist; tick pages as they land.
 2. **Strict band alternation.** Sections alternate `--bg-primary` / `--bg-secondary`
    top to bottom, no exceptions and no back-to-back same-ground bands. A section whose
    visuals need an exact ground (masks, diagrams) paints it explicitly (see `.hm-day`).
-3. **Two accents, split by meaning.** Ember is Archie acting (and every CTA). Blue
-   (`.section-label--trust`, `--c-blue-ink`) is assurance and verification: custody,
-   approvals, guarantees, the trust page. Kind colors appear only on kind chips.
+3. **Accent roles.** Section eyebrows and main Archie actions use terracotta.
+   Supporting links and wayfinding may use blue ink, as detailed below. The former
+   blue trust-label rule was superseded; color does not certify a claim.
 4. **Stone dark.** Done globally in tokens (2026-08-18). Pages must not carry their own
    dark hexes; the app-security page is the one documented exception (it mirrors the app).
 5. **Less text.** One idea per band. A band is a heading plus at most one short paragraph

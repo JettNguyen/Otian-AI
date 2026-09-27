@@ -4,7 +4,7 @@
 
 Example: Data centers running AI assistants rely on accelerators so they can respond to many users at once without slowing down.
 
-**AGI (Artificial General Intelligence)** – The concept of an AI that could perform any intellectual task a human can, not just one narrow specialty. Nothing on the market today actually works this way.
+**AGI (Artificial General Intelligence)** – The idea of an AI that could do any intellectual task a human can, across every specialty. Nothing on the market today works this way.
 
 Example: When a headline asks whether AGI is near, it's discussing this future possibility, not describing the AI assistants people use right now.
 
@@ -12,7 +12,7 @@ Example: When a headline asks whether AGI is near, it's discussing this future p
 
 Example: An AI agent could draft a reply to a client and send it once you've given the okay, instead of just suggesting wording.
 
-**AI Assistant** – Software that understands everyday requests and carries out tasks for you, such as answering emails, booking appointments, or sorting files. Often used interchangeably with "AI agent," though an agent is the more capable of the two: an assistant answers and does what it is told, while an agent works through multi-step tasks on its own. We say "agent" for the thing you build and own, and "assistant" only for the job it does for you.
+**AI Assistant** – Software that understands everyday requests and does tasks for you, such as answering email or booking appointments. People often use it to mean "AI agent," though an agent does more: an assistant answers and does what it is told, while an agent works through multi-step tasks on its own. We say "agent" for the thing you set up, and "assistant" only for the job it does.
 
 Example: You could tell your AI agent "remind me to call Dave at 2pm tomorrow," and it sets that reminder for you.
 
@@ -26,7 +26,7 @@ Example: This is part of why AI companies test new models for safety before rele
 
 **Anthropomorphism** – The tendency to treat AI as though it has human feelings or awareness, just because it communicates in a human-like way.
 
-Example: A short reply from an AI assistant might feel "cold," but the AI isn't actually moody; it's simply a tool responding to a request.
+Example: A short reply from an AI assistant can feel "cold," though the AI has no mood and is only answering a request.
 
 **Anthropic** – A company known for developing Claude, an AI model built with a strong focus on safety.
 
@@ -162,7 +162,7 @@ Example: An old expert system diagnosing a car problem might follow a rigid deci
 
 **Explainable AI (XAI)** – AI built to reveal its reasoning, so people can understand and verify why it reached a given conclusion.
 
-Example: In a field like finance, explainable AI might show which factors drove a recommendation, not just hand over the recommendation itself.
+Example: In a field like finance, explainable AI might show which factors drove a recommendation along with the recommendation itself.
 
 **Fine-tuning** – Giving an already-trained AI model further, more focused training so it excels at a particular task.
 
@@ -242,7 +242,7 @@ Example: This is part of what makes an AI assistant feel responsive to your actu
 
 **Integration** – A link that allows an AI assistant (or other software) to work directly with another account, app, or service.
 
-Example: An email integration is what allows your AI assistant to read and send messages from your real inbox, not just discuss email in general terms.
+Example: An email integration lets your AI assistant read and send messages in your real inbox, beyond talking about email in general.
 
 **Large Language Model (LLM)** – The category of AI behind most current AI assistants and chatbots, trained on vast amounts of text to understand and produce language.
 
@@ -266,7 +266,7 @@ Example: A machine learning system gets better at spotting patterns the more exa
 
 **Meta Prompt / System Prompt** – Instructions given to an AI behind the scenes, before any conversation starts, that shape its role, tone, and limits.
 
-Example: A system prompt might tell an AI assistant to always confirm before sending an email, quietly guiding its behavior throughout.
+Example: A system prompt might tell an AI assistant to always confirm before sending an email, shaping its behavior in every reply.
 
 **Mixture of Experts** – An AI architecture made up of several smaller, specialized models, with a routing system deciding which one (or ones) should handle a given input.
 
@@ -420,7 +420,7 @@ Example: A developer might use the terminal to launch an AI agent on a server, a
 
 **Token** – The basic unit of text an AI processes, roughly equal to three-quarters of a word on average.
 
-Example: A longer word like "understanding" might be broken into a couple of tokens, relevant mainly for context window limits and AI service pricing, not daily use.
+Example: A longer word like "understanding" might be broken into a couple of tokens, which matters mainly for context window limits and AI service pricing.
 
 **Toxicity** *(see AI Toxicity)*
 
@@ -468,7 +468,7 @@ Example: A webhook could alert your AI assistant the instant a new form is submi
 
 Example: An AI assistant's workflow for a new customer inquiry might be: read the message, check for similar past cases, draft a reply, then flag it for your approval.
 
-**Zero Data Retention** – A policy where information shared with an AI isn't stored afterward: it's used to produce a response, then discarded.
+**Zero Data Retention** – A policy where information shared with an AI is used to produce a response and then discarded, with nothing stored afterward.
 
 Example: This is especially relevant when an AI assistant handles sensitive details like emails or financial information, since it limits how long that data exists anywhere.
 

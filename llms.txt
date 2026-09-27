@@ -27,8 +27,8 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## The product
 
-- [Archie for Personal](https://otianai.com/archie/personal/): Archie for Personal: up to 10 AI agents on your own computer, handling the inbox, the calendar, the follow-ups and the research. $30 a month or $299 a year.
-- [Archie for Business](https://otianai.com/archie/business/): Inbox triage, scheduling, follow-ups, research, reports: Archie for Business runs up to 50 agents your team can share, on your own computer and AI account, so your team’s work never passes through us.
+- [Archie for Personal](https://otianai.com/archie/personal/): AI agents on your own computer for your email, calendar and bills. Free on your own AI account, or up to 10 agents for $30 a month.
+- [Archie for Business](https://otianai.com/archie/business/): Archie for Business runs up to 50 agents on your own computer and AI account, and anyone you let in can message them. They sort the shared inbox, chase unpaid invoices and draft replies.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit.
 - [Archie Pricing](https://otianai.com/archie/pricing/): What Archie will cost: $30 a month or $299 a year for the app ($99 or $999 for Archie for Business, a separate app whose agents your team can share), every add-on included, and pay-as-you-go AI billed straight to your own account with...
 - [Archie Mobile](https://otianai.com/archie/mobile/): Archie Mobile reaches the agent on your computer from your phone, sealed on the way under a key we never receive. You can install it on Android today; on iPhone it is with Apple for review. What it can do, and what stays on your computer.

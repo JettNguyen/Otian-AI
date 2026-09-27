@@ -237,6 +237,8 @@ the endpoint they chose. That is the feature working, not the claim failing, but
 about the seven named providers and must not be written as though no configurable endpoint
 exists.
 
+**Scoped 2026-09-27: "we keep no copy we can read."** The homepage's custody heading says it that way. With phone access on, messages to and from the phone sit on our server sealed with a key we never receive (the Archie Mobile entry below), so an unscoped "we keep no copy" on a page that also sells the phone app would be the absence claim the Banned Phrasings table forbids. "Never a conversation we can read" is the same scope in a holdings sentence.
+
 **Required clause — do not drop it:** web search runs on the *provider's* infrastructure
 and is billed to the user's key (`llm.rs:580-605`). Still not us, but the search query does
 reach the provider's search backend. Say so.
@@ -2963,6 +2965,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
 | **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. An email-only sentence was underselling a product-wide property. ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
+| **"Replies, calendar moves and changes to your lists wait for your yes."** | ✅ **True now, and the homepage heading since 2026-09-27**, replacing "Your agent does the work. You say the word." in Jett's voice pass, where a two-sentence heading is an aphorism formula. It names the three lanes the figure under it draws (a reply, a calendar move, a to-do checked off) instead of carrying the scope in "in your name", so it cannot be read as covering a purchase, which the Buying entry says it must never cover. The row above holds the code pointers. The line under the figure, "No setting turns that asking off", is scoped by this heading and says nothing without it. ⛔ Never shorten it to "everything waits for your yes". The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." |
 
 ### ✅ One agent answers one person — ENFORCED IN CODE 2026-08-20
 
@@ -3039,6 +3042,27 @@ what ships.
 sandboxed from the other, and nothing stops a person putting the same key in both. Nobody has yet
 run the two side by side through a real session, which is `docs/BUSINESS-EDITION.md`'s own open
 item 1, so write that they install and store separately and not that they have been used together.
+
+### ✅ On Archie for Business, a mailbox marked as one person's answers only that person (entry written 2026-09-27)
+
+**Approved wording:** "A business agent answers everybody the owner lets in, and only that person
+is answered from a mailbox marked as theirs."
+
+**Why it's true:** a connected account starts shared. Each one is created with `member_id: None`
+and the comment "Shared until somebody assigns it" (the Archie repo's
+`src-tauri/src/commands/integrations.rs`), and `calendar_shared: false` beside it, so a calendar is
+not shared until somebody says so. The app says it in its own words on the access screen
+(`src/app/access.tsx`): "Any account left as 'Everyone (a shared account)' is one a guest can be
+answered from, its mail included; an account marked as one person's is only handed to that
+person." The choice is "Whose is this?" beside each account, on the Connections tab, under Email,
+calendar, files.
+
+**Boundaries, not to cross:**
+- ❌ **Never "each person is answered from their own mail and calendar" as the default.** Until
+  somebody marks an account it is shared, and a guest can be answered from its mail. archie/business/
+  and archie/pricing/ said the default form until 2026-09-27, found by the claims audit that day.
+- ❌ Never imply the stores that are not accounts are kept per person: the same screen says every
+  guest can read them.
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

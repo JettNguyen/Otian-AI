@@ -4132,6 +4132,17 @@ publishes no such sentence; its agents &ldquo;work on their own, 24/7&rdquo; and
 ships are a phone app and a browser, so Symphony sits on the their-servers side by a reading of
 those two rows, and the page&rsquo;s fold says so in those words rather than pretending Wix said it.
 
+**Moved 2026-09-27, because the page contradicted its own rows.** Meta Muse and Grok Bot now sit
+at the top of the Asks-first view with Symphony and Norton. Muse's two settings both ask "before
+every write action and important read actions", so no setting stops the asking. A Grok Bot comes
+back "when something needs your approval", and no row says it can be set to stop. That is the rule
+that already placed Symphony and Norton. The bottom level now reads "acting on their own by
+default", and only OpenClaw is described as able to be set to ask. None of this moves the binary:
+both sit on the their-servers side, so the h1's count of what runs on your computer is unchanged.
+⚠️ xAI's docs refuse automated reads and nobody has read them for a permission setting; if one
+exists, Grok Bot moves to the middle. The h1 became one sentence the same day, "Of ten agents,
+only Archie works on your own computer...", and `check-claim-drift.py` reads that form too.
+
 **Re-read 2026-09-16 for the compare chart, and the docs say what the landing pages do not.** Jett
 asked for the chart's "doesn't say" gaps to be filled rather than drawn, so each company's docs,
 FAQ and privacy pages were read. Hermes asks by default and can be set not to; OpenClaw acts on
@@ -4453,8 +4464,9 @@ about us that OpenClaw, Vellum or Hermes could have printed unchanged (your comp
 account, at cost, a shelf, a skill written on request) came off the page; the concessions
 stayed, one line each. **One sentence retired with the old prose, and it stays retired:**
 "every other agent on the board that asks can be told to stop asking." Symphony and Norton
-publish no setting either way, which is why the chart places them at Archie's own level, and
-the sentence contradicted the drawing above it. The two-question form never needs it: those
+publish no setting either way, which is why the chart places them at Archie's own level (and,
+since 2026-09-27, Muse and Grok Bot on the same reading), and the sentence contradicted the
+drawing above it. The two-question form never needs it: those
 two leave at the first question, and the second is asked only of the four on your computer,
 where it is true of all three. `compare/symphony/` merged into `compare/cloud-agents/` the same
 day (zero body inbound links, the product already named 31 times on the destination) and is a

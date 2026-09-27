@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>Run the checks yourself | Otian AI</title>
-  <meta name="description" content="Four of our privacy claims, running live in your browser: the activity record's real SHA-256 fingerprints, the sealed phone mailbox, this page's own requests, and the pairing key that a browser keeps out of the request." />
+  <meta name="description" content="Four of our privacy claims, running live in your browser: the activity record's SHA-256 fingerprints, the sealed phone mailbox, this page's own requests, and the pairing key a browser keeps out of the request." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:title" content="Run the checks yourself | Otian AI" />
@@ -186,7 +186,8 @@
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Trust</a>
         <span class="section-label fade-up">Trust</span>
         <h1 class="fade-up delay-1">Four of our claims, running in this tab.</h1>
-        <p>Everywhere else on this site we tell you what we can and cannot see. Four of those claims are not promises but mechanisms, and a mechanism can be run instead of believed. These four run in your browser, on what you type, using the same code and the same rules Archie uses on your computer. Two of them print a command you can paste into your own terminal to get the same answer without us.</p>
+        <p>Everywhere else on this site we tell you what we can and cannot see. Four of those claims are mechanisms, and a mechanism can be run instead of believed.</p>
+        <p>These four run in your browser, on what you type, using the same rules and formats Archie uses on your computer. Two of them print a command you can paste into your own terminal to get the same answer without us.</p>
         <p class="hero-note" data-needs-crypto hidden></p>
         <noscript><p class="hero-note">These four are run by your browser, so with JavaScript off they cannot be run by you. Every number still on the page below is a real one, worked out for the example shown, and none of it can be changed: what is missing is the part where you change it and watch the answer move.</p></noscript>
       </div>
@@ -265,7 +266,8 @@
             </div>
           </div>
 
-          <p class="pf-note">Change any value above and the fingerprint on that line stops matching the one stored with it, which is what Archie reports when it opens. Then work the switch: rewriting every fingerprint underneath makes the record hang together again, and it still does not match where this computer left off, because that last fingerprint is written into the keychain and not into the record. <strong>Both verdicts are worked out from the real numbers, not from which switch is on.</strong></p>
+          <p class="pf-note">Change any value above and the fingerprint on that line stops matching the one stored with it, which is what Archie reports when it opens. Then work the switch: rewriting every fingerprint underneath makes the record hang together again.</p>
+          <p class="pf-note">The record still does not match where this computer left off, because that last fingerprint is written into the keychain rather than into the record. <strong>Both verdicts are worked out from the real numbers, and the switch decides neither.</strong></p>
 
           <!-- The working. This is the part that makes the instrument evidence rather than a
                well-made animation: the bytes are printed, and the command reproduces the
@@ -278,9 +280,11 @@
             <p class="pf-code pf-code--answer" data-chain-hash>64b31a1a73f882ece6c5ff886cf3487403b55723b58f680ccb396075b2ba1f3b</p>
           </div>
 
-          <p class="pf-note">That command is the whole argument for this section. Paste it into Terminal on a Mac, or into any Linux shell with <code>sha256sum</code> in place of <code>shasum -a 256</code>, and your computer prints the number this page prints. We have no way to reach into that, which is what makes it worth more than our saying so. The rule being followed is in <code>crates/archie-domain/src/audit.rs</code>: the fields sorted by name, no spaces, and the previous line&rsquo;s fingerprint carried inside the next one.</p>
+          <p class="pf-note">That command is the whole argument for this section. Paste it into Terminal on a Mac, or into any Linux shell with <code>sha256sum</code> in place of <code>shasum -a 256</code>, and your computer prints the number this page prints. We have no way to reach into that, which is what makes it worth more than our saying so.</p>
+          <p class="pf-note">The rule being followed is in <code>crates/archie-domain/src/audit.rs</code>: the fields sorted by name, no spaces, and the previous line&rsquo;s fingerprint carried inside the next one.</p>
 
-          <p class="trust-aside"><strong>Two things this does not do.</strong> It shows tampering, which is not the same as making the record impossible to destroy: somebody who deletes the whole record and the keychain note together leaves nothing to check, and nothing to check is not the same as nothing happened. And it is evidence for you about your own computer, not something we can vouch for, because we never see it. If you ever want <em>us</em> to prove what your agent did, we cannot, and it is the same reason as everywhere else: we do not have it.</p>
+          <p class="trust-aside"><strong>Two things this does not do.</strong> It shows tampering, and it cannot stop somebody destroying the record: whoever deletes the whole record and the keychain note together leaves nothing to check. Nothing to check is different from nothing having happened.</p>
+          <p class="trust-aside">It is also evidence for you about your own computer, and we cannot vouch for it, because we never see it. If you ever want <em>us</em> to prove what your agent did, we cannot, for the same reason as everywhere else: we do not have it.</p>
         </div>
       </div>
     </section>
@@ -301,7 +305,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Check two</span>
           <h2 id="seal" class="fade-up delay-1">The mailbox for your phone is sealed before we hold it.</h2>
-          <p>Turn on phone access and your computer starts leaving messages for your phone in a mailbox on our servers. Every one of them is sealed with a key your computer makes and gives to your phone by scanning a code. The key never passes through us, so what we hold is a pile of ciphertext with no way to open it. It is off unless you turn it on, per computer.</p>
+          <p>Turn on phone access and your computer starts leaving messages for your phone in a mailbox on our servers. Each one is sealed with a key your computer makes and gives to your phone by scanning a code. The key never passes through us, so what we hold is a pile of ciphertext with no way to open it. It is off unless you turn it on, per computer.</p>
         </div>
 
         <div class="trust-prose fade-up delay-2" data-seal>
@@ -336,9 +340,11 @@
           </div>
           <p class="pf-result" data-seal-result aria-live="polite">Nothing has been sent anywhere: the sealing happens in this tab.</p>
 
-          <p class="pf-note">The key for this demonstration was made in your browser a moment ago and starts <code data-seal-key>waiting for your browser</code>. The two functions doing the work are the ones in <code>js/phone.js</code>, the file that runs when somebody manages their computer from their phone. The sealing is AES-256-GCM, which is built into your browser and into the app, with a fresh number used once for every message. The same two functions exist in Rust in <code>crates/archie-core/src/phone.rs</code>, and a test seals with one and opens with the other so the pair cannot quietly drift apart.</p>
+          <p class="pf-note">The key for this demonstration was made in your browser a moment ago and starts <code data-seal-key>waiting for your browser</code>. The two functions doing the work are in <code>js/proof.js</code>. The sealing is AES-256-GCM, which is built into your browser and into the app, with a fresh number used once for every message.</p>
+          <p class="pf-note">The same pair exists in Rust in <code>crates/archie-core/src/phone.rs</code> and in the Archie Mobile app. A test in each opens a message sealed by this same browser code, which holds both to the format this page uses.</p>
 
-          <p class="trust-aside"><strong>Say what this leaves open.</strong> We hold the mailbox, and holding a sealed row means we can see that a phone is managing a computer and roughly when, which is why the three clear fields are on screen above rather than under a heading further down. The seal protects the message, not the phone: whoever is holding the phone is holding the key, and that is what unpairing and rotating the key are for. And your computer is one end of this, so anyone sitting at it unlocked has everything, as they always did.</p>
+          <p class="trust-aside"><strong>Say what this leaves open.</strong> We hold the mailbox, and holding a sealed row means we can see that a phone is managing a computer and roughly when. That is why the three clear fields are on screen above rather than under a heading further down.</p>
+          <p class="trust-aside">The seal protects the message, and it cannot protect the phone: whoever is holding the phone is holding the key, and that is what unpairing and rotating the key are for. And your computer is one end of this, so anyone sitting at it, past its password, has everything, as they always did.</p>
         </div>
       </div>
     </section>
@@ -367,18 +373,19 @@
             <li class="pf-net-row"><code>fonts.gstatic.com</code><span>Google Fonts: the font files themselves.</span><em>the font files</em></li>
             <li class="pf-net-row"><code>www.gstatic.com</code><span>Firebase&rsquo;s sign-in code, which the account menu in the top bar runs.</span><em>the sign-in code</em></li>
           </ul>
-          <p class="pf-note"><strong>The entries on that list that are not ours are Google&rsquo;s</strong>, and they see your address the way any host sees the address of whoever asks it for a file. One serves the typeface. The others are sign-in: the code the account menu in the top bar runs, and, if you are signed in, the check on your plan. This site is served by GitHub Pages, so GitHub sees the request for the page itself for the same reason. What is not in that list, anywhere on this site, is an analytics script, a tag manager, a session recorder or an ad pixel. We have never had one.</p>
+          <p class="pf-note"><strong>The entries on that list that are not ours are Google&rsquo;s</strong>, and they see your address the way any host sees the address of whoever asks it for a file. One serves the typeface. The others are sign-in: the code the account menu in the top bar runs, and, if you are signed in, the check on your plan.</p>
+          <p class="pf-note">This site is served by GitHub Pages, so GitHub sees the request for the page itself for the same reason. What is not in that list, anywhere on this site, is an analytics script, a tag manager, a session recorder or an ad pixel. We have never had one.</p>
           <p><button type="button" class="btn btn-secondary" data-net-again>Read the list again</button></p>
 
           <h3>What this page is allowed to ask for</h3>
-          <p>The list above is what happened once. This is the rule underneath it: a content security policy, written into the page and enforced by your browser rather than by us. <code>connect-src</code> is the line to read, because it is every place this page is allowed to send anything at all.</p>
+          <p>The list above is what happened once. This is the rule underneath it: a content security policy, written into the page and enforced by your browser rather than by us. The line to read is <code>connect-src</code>, because it is every place this page is allowed to send anything at all.</p>
           <ul class="pf-list" data-csp-list>
             <li class="pf-csp-row"><code>default-src</code><span>'self'</span></li>
             <li class="pf-csp-row"><code>connect-src</code><span>'self' https://*.googleapis.com https://*.firebasestorage.app https://archie-4f35.onrender.com https://formspree.io</span></li>
           </ul>
-          <p class="pf-note">Those four are sign-in and your plan check, add-on pictures, the billing service that answers whether you have a current plan, and the form handler that carries a message from the contact page. A script that tried to send anything anywhere else would be stopped by your browser before it left, and the policy is written into every page on this site by <code>scripts/gen-csp.py</code> rather than by hand.</p>
+          <p class="pf-note">Those four are sign-in and your plan check, add-on pictures, the billing service that answers whether you have a current plan, and the form handler that carries a message from the contact page. A script that tried to send anything anywhere else would be stopped by your browser before it left. The policy is written into every page on this site by <code>scripts/gen-csp.py</code> rather than by hand.</p>
 
-          <p class="trust-aside"><strong>What this proves and what it does not.</strong> This is the website, which is not the app. A page can only show you what a page does. What Archie does on your computer is a separate question with a separate answer, and the honest way to settle it is the ten-minute check at the bottom of this page, not anything we could put in a browser tab.</p>
+          <p class="trust-aside"><strong>What this proves and what it does not.</strong> This is the website, and the app is a separate thing: a page can only show you what a page does. What Archie does on your computer is a separate question, and the honest way to settle it is the ten-minute check at the bottom of this page.</p>
         </div>
       </div>
     </section>
@@ -419,7 +426,8 @@ Host: otianai.com</pre>
           <p class="pf-note">Your browser&rsquo;s own record of the request it made: <code data-frag-record>press the button above</code></p>
           <p class="pf-result" data-frag-verdict aria-live="polite">Press the button and compare what comes back with the key above.</p>
 
-          <p class="trust-aside"><strong>This one is the weakest of the four, so here is where it stops.</strong> It shows what your browser recorded, and a browser&rsquo;s own record is not quite the same question as what went down the wire. The Network tab in your browser settles that properly, and a network monitor settles it for the desktop app as well. What we can point at on our side is the test: <code>the_pairing_key_rides_in_the_fragment_never_the_query</code> fails the build if the key is ever moved into the part of a link that does get sent.</p>
+          <p class="trust-aside"><strong>This one is the weakest of the four, so here is where it stops.</strong> It shows what your browser recorded, and a browser&rsquo;s own record is not quite the same question as what went down the wire. The Network tab in your browser settles that properly, and a network monitor settles it for the desktop app as well.</p>
+          <p class="trust-aside">What we can point at on our side is a test in the Archie code, <code>the_pairing_key_rides_in_the_fragment_never_the_query</code>. It fails the build if the key is ever moved into the part of a link that does get sent.</p>
         </div>
       </div>
     </section>
@@ -433,12 +441,13 @@ Host: otianai.com</pre>
         <div class="section-header">
           <span class="section-label fade-up">The edge of this page</span>
           <h2 id="limits" class="fade-up delay-1">Four checks are not an audit.</h2>
-          <p>Those four show the mechanisms: real hashing, real sealing, and your browser&rsquo;s own record of its own requests. What none of it shows is how Archie behaves on your computer, and that is the question most people actually have.</p>
+          <p>Those four show the mechanisms: real hashing, real sealing, and your browser&rsquo;s own record of its own requests. What none of it shows is how Archie behaves on your computer, which is the bigger question.</p>
         </div>
 
         <div class="trust-prose fade-up delay-2">
-          <p>The way to settle that one is a network monitor and about ten minutes: install one, use Archie properly, and compare what it shows with the list of hostnames we publish. Then block us at the firewall and watch your agent carry on thinking. It is the same shape as everything here, moved to the only place the answer can be found.</p>
-          <p>And the standing gap, which we have written down elsewhere and will not leave out of a page called proof: nobody outside this company has audited any of it. The real answer to &ldquo;why should I believe you&rdquo; is an open-source client, so that none of this rests on our word. We are not there yet, and we are not going to describe a plan as though it were a fact.</p>
+          <p>The way to settle that one is a network monitor and about ten minutes: install one, use Archie properly, and compare what it shows with the list of hostnames we publish. Then, on an AI account of your own, block us at the firewall and watch your agent carry on thinking. It is the same shape as everything here, moved to the only place the answer can be found.</p>
+          <p>And the standing gap, which we have written down elsewhere and will not leave out of a page called proof: nobody outside this company has audited any of it.</p>
+          <p>The real answer to &ldquo;why should I believe you&rdquo; is an open-source client, so that none of this rests on our word. We are not there yet, and we are not going to describe a plan as though it were a fact.</p>
           <p><strong>If one of the four above fails in your browser, that is worth telling us.</strong> Every one computes its verdict from the real result, so a red line here means either a browser we have not seen behaving differently or a mistake of ours, and we want to know which.</p>
         </div>
 

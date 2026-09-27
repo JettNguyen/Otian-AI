@@ -45,9 +45,9 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Privacy, security and claims
 
-- [Trust](https://otianai.com/trust/): Every single thing Archie sends anywhere, who receives it, and what's in it, plus the parts that don't flatter us. Then: how to verify all of it yourself with a network monitor, in 10 minutes.
-- [Run the checks yourself](https://otianai.com/trust/proof/): Four of our privacy claims, running live in your browser: the activity record's real SHA-256 fingerprints, the sealed phone mailbox, this page's own requests, and the pairing key that a browser keeps out of the request.
-- [Trust: The Long Version](https://otianai.com/trust/details/): The full reasoning behind every claim on the Trust page: the limits of the approval gate, what happens to Archie if Otian disappears, and the 10-minute check you can run yourself.
+- [Trust](https://otianai.com/trust/): The connections Archie makes, what is in each, and who receives it, plus the parts that don't flatter us, and how to check them yourself with a network monitor in about 10 minutes.
+- [Run the checks yourself](https://otianai.com/trust/proof/): Four of our privacy claims, running live in your browser: the activity record's SHA-256 fingerprints, the sealed phone mailbox, this page's own requests, and the pairing key a browser keeps out of the request.
+- [Trust: The Long Version](https://otianai.com/trust/details/): The full reasoning behind the Trust page: the limits of the approval gate, what happens to Archie if you stop or we do, and the 10-minute check you can run yourself.
 - [For an IT review: Archie](https://otianai.com/trust/it-review/): The page to send to whoever approves software where you work: what Archie installs, what it connects to, what it never does, and a review document you can attach to a ticket.
 - [Reporting a security problem](https://otianai.com/security/): Where to send a security problem you found in Archie, what we do with it, and how fast.
 - [Privacy Policy](https://otianai.com/privacy-policy/): How Otian AI collects, uses, and protects your information.
@@ -64,7 +64,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## About us
 
-- [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie. The story behind Otian AI, and the two people who build every agent themselves.
+- [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie: the story behind Otian AI, and the two people who build it.
 - [The Otian Standard](https://otianai.com/standard/): How Otian AI intends to behave: the promises we hold ourselves to on service, honesty, privacy and pricing, written down so you can point at a line and tell us we fell short.
 - [Contact](https://otianai.com/contact/): Write to Jett or Jack, the two people who build Archie, about a question, an add-on you need or a setup that stopped working. A reply within one business day.
 - [Testimonials](https://otianai.com/testimonials/): Patrick West's testimonial, word for word, and four jobs an Archie agent can take over, with the add-on that does each.
@@ -72,7 +72,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 ## Learning
 
 - [AI Explained](https://otianai.com/ai-explained/): Plain-English AI terms to help you understand agents, automation, and how modern AI tools work.
-- [FAQ](https://otianai.com/faq/): Answers to the most common questions about personal AI agents, Archie, guided setup, pricing, and how Otian AI keeps everything in your control.
+- [FAQ](https://otianai.com/faq/): Answers about Archie: what an agent does, what it costs, guided setup, what we can and cannot see, and what happens if you stop.
 - [Blog](https://otianai.com/blog/): Practical articles on putting an AI agent to work, from the Otian AI team.
 - [Is My Agent Broken?](https://otianai.com/help/): Troubleshooting for Archie: what your agent leaves alone on purpose, what is actually broken, and what to press for each one.
 

@@ -340,11 +340,15 @@ and both have to be said wherever the plan is described:
   proxy and reads neither mail nor texts.
 
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
-write to your agent passes through our server on the way to Anthropic. It writes nothing down, we
-keep no copy, and we use none of it for anything. Email and text replies are the two things it
+write to your agent passes through our server on the way to Anthropic. It writes down what each
+request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it
 will not do on this plan, because they carry what other people wrote and those people never agreed
 to anything. Both work on an AI account of your own, where nothing goes through us at all. When
 the $25 is used, your agent pauses until next month."
+
+*(Corrected 2026-09-27: it said "It writes nothing down". The server records the account ID, token
+counts, amount, time and call count for each request so it can enforce the allowance, which trust/
+already said in its own table; the approved sentence now says the same.)*
 
 *(The wording it replaces said "and the mail your agent reads and writes for you" passes through
 our server. That was true for six weeks and is now false in the one direction that matters, so any
@@ -378,6 +382,16 @@ says which version it is and whether it is on Mac or Windows, so we know what is
 running before we ever switch a version off. And if it quits unexpectedly, the next launch
 sends the tail of the crash: the error and where in our code it happened. Both carry your
 account ID. Neither carries anything you wrote, received, or asked for."
+
+**A third thing goes out, recorded 2026-09-27: error reports.** Approved wording: "Crash reports
+and error reports, if you leave them on: where in our code it broke, the error line when something
+keeps failing, and, for an add-on, its name and the tool that failed. Never what you wrote." Every
+caller of `telemetry::queue_report` in 0.3.0 sends one: `addon_health.rs` ("{add-on}: {tool}
+failed {n} times in one session"), the gateway restart loop with its last error
+(`gateway_lifecycle.rs`), and the audit, vault and restore failures (`src-tauri/src/lib.rs`). The
+same switch turns them off. ⛔ Never "no error text leaves": a restart loop sends its error line.
+So a page counting what goes out says three things, not two (archie/install/ was corrected the
+same day).
 
 **Why it's true:** `telemetry.rs` has exactly two entry points. `heartbeat` writes
 `heartbeats/{uid}` with four fields, app version, platform, edition and last seen, at most once
@@ -2365,6 +2379,22 @@ in the same breath rather than three screens later. It is also the honest form o
 comparison already in Archie's `docs/EXPECTATIONS.md` ask 11: the same shape, minus the two things
 that made that one dangerous.
 
+
+### ✅ What listens on this computer, and what can reach a local address (entry written 2026-09-27)
+
+**Approved wording:** "Nothing on the network can reach it. Three things listen on 127.0.0.1 only,
+and only while in use: a sign-in waiting for the browser to hand you back, the Google Drive picker,
+and the browser Archie drives during a Websites job." And: "The web tools refuse private, loopback
+and carrier-grade NAT addresses. Three things can reach local addresses: lights added on the local
+wifi, an AI model on this computer, and the Websites browser, which is off until turned on."
+
+**Why it's true:** the sign-in listeners in `oauth.rs` and `auth.rs` and the picker in
+`drive_picker.rs` bind `127.0.0.1:0`, the picker with a five-minute deadline; the Websites browser
+runs with `--remote-debugging-port=0`, which binds loopback. `PublicAddressesOnly` in
+`crates/archie-net/src/http.rs` guards the HTTP client only, so the browser's one fence is the
+owner's never-open list, a list of host suffixes that cannot fence a subnet. trust/it-review/
+carries both since 2026-09-27; it had said Archie listens on no port and cannot reach inside a
+network.
 
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 

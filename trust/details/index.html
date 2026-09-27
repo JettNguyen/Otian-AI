@@ -9,11 +9,11 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>Trust: The Long Version | Otian AI</title>
-  <meta name="description" content="The full reasoning behind every claim on the Trust page: the limits of the approval gate, what happens to Archie if Otian disappears, and the 10-minute check you can run yourself." />
+  <meta name="description" content="The full reasoning behind the Trust page: the limits of the approval gate, what happens to Archie if you stop or we do, and the 10-minute check you can run yourself." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:title" content="Trust: The Long Version | Otian AI" />
-  <meta property="og:description" content="The full reasoning behind every claim on the Trust page." />
+  <meta property="og:description" content="The full reasoning behind the Trust page." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -188,34 +188,42 @@
     <section class="section" aria-labelledby="limits-long">
       <div class="container container-narrow">
         <div class="section-header">
-          <span class="section-label fade-up">No Company Publishes This Section</span>
+          <span class="section-label fade-up">What We Would Rather You Hear From Us</span>
           <h2 id="limits-long" class="fade-up delay-1">Where we fall short.</h2>
-          <p>Every privacy page tells you what a company is good at. Here is the other half. If any of this changes, we will change it here on the same day.</p>
+          <p>Here is what Archie does not do well yet, and where our promises stop. If any of this changes, we will change it here on the same day.</p>
         </div>
 
         <div class="trust-limits fade-up delay-2">
 
           <div class="trust-limit" id="approval-gate">
-            <h3>Your agent asks before it changes anything, and that only helps if you read before you approve.</h3>
-            <p>When your agent wants to change a calendar you&rsquo;ve connected (create, move, or <strong>delete</strong> an event) or send an email or a text, it doesn&rsquo;t just do it. It proposes the exact action first, and the app itself enforces the shape rather than politely instructing the AI: a text goes out only when you press Send on the draft, an email only when you send it or set a time for it (a time your agent cannot set on its own), and a calendar change can never apply on the turn that proposed it, can only apply exactly as proposed, and can never apply while you are away. One honest seam in that: on the calendar side, the AI is what reads your later message as a yes before it calls apply, so what the app guarantees is the structure, and what the AI supplies is the judgment. <strong>It proposes; you dispose.</strong></p>
-            <p>Here is the honest limit that remains. The gate stops your agent from doing something you didn&rsquo;t approve. It cannot stop it from proposing the <em>wrong</em> thing: if it misreads what you wanted and you approve without looking, it will carry out the mistake faithfully. Read what it hands you before you say yes, the way you&rsquo;d check a draft before signing it.</p>
-            <p>Two lines it holds: it <strong>buys only if you switch that on</strong> (off, anything shaped like paying on a website is stopped and routed to you; on, it still stops at Place order and presses it only after you tap to approve that order, only at shops you listed and up to the limits you set, and it never types a card number. The limit is checked against the price it reads on the page, so a shop that adds a charge at the last step can take it over: a card from your bank that works at one shop, with its own limit, is the ceiling nobody gets past) and <strong>unprompted it can only ever message you</strong>, never your team&rsquo;s channels. The one way words it wrote reach anyone else is a reply, to an email or a text, that you read and press Send on, which then goes out from your own account as you.</p>
+            <h3>Your agent asks before it sends anything in your name or changes your calendar, and that only helps if you read before you approve.</h3>
+            <p>When your agent wants to change a calendar you&rsquo;ve connected (create, move, or <strong>delete</strong> an event) or send an email or a text, it proposes the exact action first. The app itself enforces that, rather than politely instructing the AI.</p>
+            <p>A text goes out only when you press Send on the draft. An email goes only when you send it or set a time for it, and your agent cannot set that time on its own. A calendar change can never apply on the turn that proposed it, can only apply exactly as proposed, and can never apply while you are away.</p>
+            <p>One honest seam in that: on the calendar side, the AI is what reads your later message as a yes before it calls apply. So what the app guarantees is the structure, and what the AI supplies is the judgment.</p>
+            <p>Here is the honest limit that remains. The gate stops your agent from sending or changing what it covers without your approval. It cannot stop it from proposing the <em>wrong</em> thing: if it misreads what you wanted and you approve without looking, it will carry out the mistake faithfully. Read what it hands you before you say yes, the way you&rsquo;d check a draft before signing it.</p>
+            <p>Your agent <strong>buys only if you switch that on</strong>. Off, anything shaped like paying on a website is stopped and routed to you. On, it still stops at Place order and presses it only after you tap to approve that order, only at shops you listed and up to the limits you set. It never types a card number.</p>
+            <p>The limit is checked against the price it reads on the page, so a shop that adds a charge at the last step can take it over. A card from your bank that works at one shop, with its own limit, is the ceiling nobody gets past.</p>
+            <p><strong>Unprompted, it messages only you</strong> (on a shared Archie for Business agent, also the people you let in). Anything it writes to anyone else waits for you. An email reply goes when you send it or set a time, and a text reply when you press Send, each from your own account. A web form it fills stops before the button that submits it.</p>
           </div>
 
           <div class="trust-limit" id="untrusted-text">
             <h3>Untrusted text can reach your agent, and the gate won&rsquo;t fully fix it.</h3>
-            <p>If your agent reads a Slack attachment, a meeting transcript, or a web page, that text lands in front of it, and a hostile message could try to talk your agent into something you never asked for. This is a real class of attack against <em>every</em> AI agent, ours included, and we&rsquo;re not going to pretend we&rsquo;re exempt.</p>
-            <p>The approval gate stops such an attack from changing anything in your connected accounts that is not easily reversible. It does <strong>not</strong> stop everything: an injected instruction can still add items, write a note into your agent&rsquo;s memory (where it would persist), and, worst of all, <em>leak</em> something, by having your agent fetch a web address or run a search whose text carries information from your conversation. We don&rsquo;t have a complete answer to that yet. Nobody in this industry does. We&rsquo;d rather write that sentence than let you assume we&rsquo;d solved it.</p>
+            <p>If your agent reads a Slack attachment, a meeting transcript, or a web page, that text lands in front of it. A hostile message in it could try to talk your agent into something you never asked for. This is a real class of attack against AI agents, and ours is not exempt.</p>
+            <p>The approval gate stops such an attack from changing anything in your connected accounts that is not easily reversible. It does <strong>not</strong> stop everything. An injected instruction can still add items and write a note into your agent&rsquo;s memory, where it would persist.</p>
+            <p>Worst of all, an injected instruction can <em>leak</em> something, by having your agent fetch a web address or run a search whose text carries information from your conversation. We don&rsquo;t have a complete answer to that yet, and we&rsquo;d rather write that sentence than let you assume we&rsquo;d solved it.</p>
           </div>
 
           <div class="trust-limit" id="license-check">
-            <h3>Archie checks your plan, and it tells you exactly what that check sees.</h3>
-            <p>Archie is sold as a plan: $30 a month, or $299 a year. The app checks that plan when you sign in, so it isn&rsquo;t a fully offline product, and we&rsquo;re not going to dress that up: our servers see that your account has a current plan, and nothing more.</p>
-            <p>That means the honest answer to &ldquo;what if I stop paying?&rdquo; is that Archie stops letting you in, at the end of the period you have already paid for. Nothing on your computer is deleted, and starting a plan again puts you back where you were; if the payment system books your return under a fresh customer record, the restore can take an email to us before the plan is recognized, so write if anything looks stuck. We used to sell this outright and say so here; we changed it, and this paragraph changed with it rather than being left to age quietly.</p>
-            <p>There is a limit on how long Archie will run without hearing from us, and we would rather tell you the number than let you find it. When you sign in, our server hands the app a signed note saying what your account can open, and that note is good for <strong>60 days</strong>. Every launch that can reach us replaces it, so in ordinary use it never runs down and you will never see this. But an Archie kept offline for two months will ask you to sign in again before it carries on. The note is signed because the alternative was a plain switch inside the app, which anyone could flip; making it unforgeable is what gives it an expiry date at all.</p>
-            <p>The other scenario is the one we have committed to in writing. <strong>If <em>we</em> disappear, Archie keeps working.</strong> Our <a href="../../terms-of-service/">Terms</a> require that if Otian ever ceases operations, we publish a final version that requires no license check, within 30 days. It&rsquo;s a term of the agreement, not a promise on a blog, so you don&rsquo;t have to trust us for it. The two numbers are deliberate: the note lasts twice as long as the deadline for that final build, so the promise has a month of room in it rather than landing exactly as your copy stops.</p>
-            <p>What you&rsquo;d lose if we vanished is updates, the marketplace, and support: the things a living company provides. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours; your copy runs up to 60 days on its last license note, and the final build the Terms oblige us to publish is what keeps it running past that.</p>
-            <p>That matters more than it sounds. Personal-AI apps get acquired, pivoted, and switched off all the time, and when they go, their users&rsquo; data tends to leave with them. Yours can&rsquo;t: there was never a copy on our side to take, sell, or shut off.</p>
+            <h3>Archie checks your plan each time it opens and can reach us.</h3>
+            <p>When public signup opens, Archie will be sold as a plan: $30 a month, or $299 a year. Because it checks your plan, it isn&rsquo;t a fully offline product. The check carries your account ID and a sign-in token, and brings back what your account can open.</p>
+            <p>So what happens if you stop paying? Your plan runs to the end of the period you have already paid for. After that, on Personal with a key from an AI company saved, Archie keeps opening on the free tier, at 20 jobs a day. Without a saved key it asks for one, and Archie for Business asks for a plan.</p>
+            <p>Nothing on your computer is deleted. Write your backup before you stop, because it is made from inside Archie. Picking your plan back up from Archie, rather than through a fresh checkout, puts everything back the way you left it; if anything looks stuck, write to us.</p>
+            <p>There is a limit on how long Archie will run without hearing from us, and we would rather tell you the number than let you find it. When you sign in, our server hands the app a signed note saying what your account can open, and that note is good for <strong>60 days</strong>. Every launch that can reach us replaces it, so in ordinary use you will never see this.</p>
+            <p>But an Archie kept offline for two months will ask you to sign in again before it carries on. The note is signed because the alternative was a plain switch inside the app, which anyone could flip; making it unforgeable is what gives it an expiry date at all.</p>
+            <p>The other scenario is the one we have committed to in writing. <strong>If <em>we</em> disappear, Archie keeps working</strong>: on its last license note for up to 60 days, then on the final version the Terms oblige us to publish. The <a href="../../terms-of-service/">Terms</a> put it in these words: &ldquo;If Otian AI ceases operations, we will publish a final version of Archie that requires no license check, within 30 days of shutting down.&rdquo;</p>
+            <p>That is a term of the agreement, so you don&rsquo;t have to trust us for it. The two numbers are deliberate: the note lasts twice as long as the deadline for that final version, so the promise has a month of room rather than landing exactly as your copy stops.</p>
+            <p>What you&rsquo;d lose if we vanished is updates, the marketplace, support, phone access, and any AI we were paying for, until you connect an account of your own. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
+            <p>We never kept a copy of your conversations that we could read, so there is none to take, sell, or shut off.</p>
           </div>
 
           <div class="trust-limit" id="add-on-receipts">
@@ -240,7 +248,7 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">Don&rsquo;t Trust Us</span>
-          <h2 id="verify-long" class="fade-up delay-1">Check for yourself. It takes 10 minutes.</h2>
+          <h2 id="verify-long" class="fade-up delay-1">Check our claims yourself in about 10 minutes.</h2>
           <p>Everything on the Trust page is a claim, and claims are cheap. Here is how to prove or disprove ours without taking our word for a single thing.</p>
         </div>
 
@@ -262,24 +270,26 @@
           <div class="trust-step" id="expected-hosts">
             <span class="trust-step-num">3</span>
             <div>
-              <h3>Here is exactly what you should see.</h3>
+              <h3>Here is what you should see.</h3>
               <p>If you see anything <em>else</em> carrying your content, we have either lied to you or made a serious mistake, and we want to hear about it either way.</p>
               <ul class="trust-hosts">
                 <li><code>api.anthropic.com</code>, <code>api.openai.com</code>, <code>api.groq.com</code>,<br /><code>api.x.ai</code>, <code>generativelanguage.googleapis.com</code>,<br /><code>api.deepseek.com</code>, <code>api.mistral.ai</code>, or the address you typed for another provider<span>: your agent thinking, on your key. Whichever one you connected, and only that one.</span></li>
-                <li><code>archie-4f35.onrender.com</code><span>: our billing service, doing three jobs. It hands your app the signed note saying what your account can open, on launch. It stands in for Anthropic while you are spending the free credits, or on the plan with the AI included. And it adds one to an add-on&rsquo;s public install count when you add one. Connecting an AI account of your own ends the second of those and only the second: expect to keep seeing this host afterwards, on every launch and every add-on you add.</span></li>
-                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and plan check, the version ping and crash reports until you turn those off, the add-on catalog, and the phone mailbox if you enabled it. Carries your account ID and those records, never your content.</span></li>
+                <li><code>archie-4f35.onrender.com</code><span>: our billing service. It hands your app the signed note saying what your account can open, on launch. It stands in for Anthropic while you spend the free credits or are on the plan with the AI included. And it adds one to an add-on&rsquo;s public install count. Connecting an AI account of your own ends only the second, so expect to keep seeing this host on every launch.</span></li>
+                <li><code>firestore.googleapis.com</code><br /><code>securetoken.googleapis.com</code><span>: our sign-in and plan check, the version ping and crash and error reports until you turn those off, the add-on catalog, and the phone mailbox if you turned it on. Your messages sit there sealed with a key we never receive. Apart from that mailbox, this carries your account ID and those records, never your content.</span></li>
                 <li><code>otianai.com</code><span>: checking for an update, on launch, hourly, and when you come back to the window. Carries nothing about you.</span></li>
                 <li><code>assets.otianai.com</code><span>: only when an add-on you install needs a tool downloaded, like a voice.</span></li>
                 <li><code>github.com</code><span>: only if an update is downloading.</span></li>
-                <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span><span>: Google, Microsoft, iCloud, Fastmail, Yahoo, AOL, Zoho Mail, GMX, Telegram, Discord, Slack, Matrix, Todoist, Fireflies, GoHighLevel, and any service you connected with a key of your own. Directly, on your tokens. A light you added from your own wifi shows up as an address on your own network, never as a host on the internet.</span></li>
+                <li><span class="trust-hosts-plus">Plus whichever accounts <em>you</em> connected</span><span>: Google, Microsoft, iCloud, Fastmail, Yahoo, AOL, Zoho Mail, GMX, Telegram, Discord, Slack, Matrix, Todoist, Fireflies, GoHighLevel, and any service you connected with a key of your own. Directly, on your tokens. A light you added from your own wifi shows up as an address on your own network, never as a host on the internet. Websites your agent opens show up under their own addresses.</span></li>
               </ul>
             </div>
           </div>
           <div class="trust-step">
             <span class="trust-step-num">4</span>
             <div>
-              <h3>Now block us, and watch nothing happen.</h3>
-              <p>Add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list and <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> That is the entire argument, reduced to something you can test in thirty seconds: on your own key, nothing of ours is in that path, so cutting us out of it changes nothing about it. What stops is what those hosts honestly are: updates, new tool downloads, the install count ticking up when you add an add-on, and the periodic license renewal, so after about two months of blocking us Archie will refuse to start agents until it can check in once. Try the test before you connect a key and the free credits stop instead, because that one path really does run through us, exactly as the second line of the list above says.</p>
+              <h3>Block our two hosts, and on your own AI account your agent keeps thinking.</h3>
+              <p>Add <code>otianai.com</code> and <code>archie-4f35.onrender.com</code> to your firewall&rsquo;s block list, and on an AI account of your own <strong>your agent&rsquo;s thinking carries on exactly as before.</strong> That is the whole argument, in a form you can test yourself: nothing of ours is in that path, so cutting us out of it changes nothing about it.</p>
+              <p>What stops is what those hosts are for: updates, new tool downloads, the install count ticking up when you add an add-on, and the periodic license renewal. After about two months of blocking us, Archie will refuse to start agents until it can check in once.</p>
+              <p>Try the test before you connect a key and the free credits stop instead, because that one path does run through us, exactly as the second line of the list above says.</p>
             </div>
           </div>
         </div>
@@ -298,15 +308,19 @@
         <div class="section-header">
           <span class="section-label fade-up">The Marketplace</span>
           <h2 id="addons-long" class="fade-up delay-1">Why an add-on can&rsquo;t reach your files.</h2>
-          <p>The frightening version of a marketplace is: you install a stranger&rsquo;s plugin, and it runs code on your computer, next to your email. That is not what this is, and the reason is structural, not a promise.</p>
+          <p>The frightening version of a marketplace is a stranger&rsquo;s plugin running code on your computer, next to your email. Archie&rsquo;s add-ons cannot do that, and the reason is in how Archie is built.</p>
         </div>
 
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Archie has nowhere to run code.</strong> A Skill is a text file plus some settings. A Personality is a set of written instructions. A Routine is a schedule. Nothing in an add-on can run as a program, so an add-on cannot itself read your disk or open a network connection. Not because we&rsquo;d catch it; because there is no mechanism for it to use. What it can do is instruct your agent, which reads only what you have granted it and can fetch public web pages, so a malicious add-on has the same leak channel as any hostile text your agent reads. Treat installed instructions with the same care as anything else you let your agent read; the prompt-injection admission above is about add-ons too.</p>
+          <p><strong>Archie has nowhere to run code.</strong> A Skill is a text file plus some settings. A Personality is a set of written instructions. A Routine is a schedule. Nothing in an add-on can run as a program, so an add-on cannot itself read your disk or open a network connection. There is no mechanism in Archie for it to use.</p>
 
-          <p><strong>What an add-on <em>can</em> do</strong> is tell your agent how to behave, and declare which of your connected accounts it needs. A calendar Skill gets calendar tools. Two honest edges to that. Declaring is what narrows: an add-on that declares nothing, like plain chat, can reach every service you have connected. And the grant is blunter than we want: declaring &ldquo;calendar&rdquo; grants reading, creating, <em>and deleting</em> together, rather than asking you about each, capped only by the account itself, because a calendar connected with reading alone never yields the create or delete tools to anything. Splitting the grant apart, and showing you in plain English what an add-on is asking for before you install it, is part of the same work as the approval gate above.</p>
+          <p>What it can do is instruct your agent, which reads only what you have granted it and can fetch public web pages. So a malicious add-on has the same leak channel as any hostile text your agent reads. Treat installed instructions with the same care as anything else you let your agent read; the prompt-injection admission above is about add-ons too.</p>
 
-          <p><strong>Every add-on is read by a human before it is listed.</strong> Right now that human is one of the two of us, and we read every line of every submission. That will not scale forever. When it stops being true, this paragraph will change; we won&rsquo;t quietly leave it here.</p>
+          <p><strong>What an add-on <em>can</em> do</strong> is tell your agent how to behave, and declare which of your connected accounts it needs. A calendar Skill gets calendar tools. Two honest edges to that. Declaring is what narrows: an add-on that declares nothing, like plain chat, can reach every service you have connected.</p>
+
+          <p>And the grant is blunter than we want: declaring &ldquo;calendar&rdquo; grants reading, creating, <em>and deleting</em> together, rather than asking you about each. What sets the edge is the account itself: a calendar connected with reading alone never yields the create or delete tools to anything. Splitting that grant apart is not built yet, and we have no date for it.</p>
+
+          <p><strong>Every add-on is read by a human before it is listed.</strong> Right now that human is one of the two of us, and we read every line of every submission. That will not scale forever, and this paragraph will change the day it stops being true.</p>
         </div>
 
         <div class="text-center mt-48">

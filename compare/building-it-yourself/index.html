@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie vs OpenClaw, Hermes, Vellum and Building It Yourself | Otian AI</title>
-  <meta name="description" content="OpenClaw, Hermes and Vellum are free, open source and run on your computer, the same as Archie. What Archie sells is that the connections, the approval gate and the updates arrive finished, and the gate is not a setting." />
+  <meta name="description" content="OpenClaw, Hermes and Vellum publish their code and can run on your own computer, as Archie runs on yours. What Archie sells is the connections, the approval before an email or calendar change, and the updates, already built, with an approval that has no off switch." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -162,7 +162,7 @@
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Compare</a>
         <span class="section-label fade-up">Compare</span>
         <h1 class="fade-up delay-1"><span class="cmp-vs"><span class="cmp-us">Archie</span> vs</span> OpenClaw, Hermes, Vellum and building it yourself.</h1>
-        <p class="hm-lede fade-up delay-1">OpenClaw, Hermes and Vellum run on your own computer and cost nothing to run. So does Archie, free on an AI account of your own at 20 jobs a day. Theirs is open source and ours is not, and if you enjoy the setup they are a real choice: this page will not pretend otherwise.</p>
+        <p class="hm-lede fade-up delay-1">OpenClaw and Hermes are free, Vellum is free to download and start, and all three can run on your own computer. Archie runs there too, free on an AI account of your own at 20 jobs a day. Their code is open and ours is not; Archie adds the connections, the approval and the updates, already built.</p>
         <p class="hm-micro fade-up delay-2">Archie is in testing. <a href="../../archie/personal/#status">Where it stands&nbsp;&rarr;</a> Checked against the sources below on September 18, 2026.</p>
       </div>
     </section>
@@ -171,8 +171,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The short answer</span>
-          <h2 id="short-heading" class="fade-up delay-1">Same idea. The difference is who does the plumbing.</h2>
-          <p>OpenClaw, Hermes, Vellum and your own build all run on hardware you own, on your own AI account, so custody is a tie. What you are choosing is whether the plumbing is your evenings or ours, and whether the gate before a message goes out is built in or a setting.</p>
+          <h2 id="short-heading" class="fade-up delay-1">Archie, OpenClaw, Hermes and Vellum can all run on your computer, so the choice is who does the plumbing.</h2>
         </div>
 
                 <!-- ==============================
@@ -186,21 +185,20 @@
             <div class="section-header">
               <span class="section-label fade-up">Where Archie wins</span>
               <h2 id="owning-heading" class="fade-up delay-1">Four things you do not have to build, or keep building.</h2>
-              <p>Everything here is finished, and it stays finished when the services behind it change.</p>
             </div>
 
             <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
           <div class="calm-list-item">
             <span class="calm-list-label">The connections are done</span>
-            <p>Calendar, mail, files, a to-do list and meeting notes, connected on a picker with the tokens in your computer&rsquo;s password store<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>6</a>, and kept working when a provider changes what it accepts.</p>
+            <p>Calendar, mail, files, a to-do list and meeting notes, connected on a picker with the tokens in your computer&rsquo;s password store<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>6</a>.</p>
           </div>
           <div class="calm-list-item">
-            <span class="calm-list-label">The approval gate is built in, and cannot be switched off</span>
-            <p>A proposed calendar change and a drafted email wait for you. It is enforced in code, not asked for in a prompt<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a>. On OpenClaw and Hermes the gate covers commands, not messages; on Vellum it is a setting with a position that never asks<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>.</p>
+            <span class="calm-list-label">The approval is built in, with no off switch</span>
+            <p>A proposed calendar change and a drafted email wait for you, enforced in code rather than in a prompt<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a>. On OpenClaw, asking is off by default and can be turned on. On Hermes it covers dangerous commands rather than every action, and on Vellum it is a setting with a position that never asks<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>.</p>
           </div>
           <div class="calm-list-item">
-            <span class="calm-list-label">Add-ons are data, not code</span>
-            <p>A skill is instructions, not a program, so there is nothing to compile, nothing to sandbox and nothing to break when Archie updates itself. Theirs are programs installed from a shelf<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. Every add-on in the store is included<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>3</a>.</p>
+            <span class="calm-list-label">Add-ons are text files</span>
+            <p>A skill is written instructions, so there is nothing to compile, nothing to sandbox and nothing to break when Archie updates itself<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>3</a>. A skill on Vellum can bundle scripts<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Archie outlives us</span>
@@ -400,22 +398,22 @@
               <tr>
                 <td data-label="">Getting to a first working agent</td>
                 <td data-label="Archie" class="is-archie">Install it and answer a few questions</td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">A download for Hermes and Vellum, an app or a terminal for OpenClaw, then your accounts wired in by hand<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a></td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">A download for Hermes and Vellum, and an app or a terminal for OpenClaw<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. A build of your own starts from nothing</td>
               </tr>
               <tr>
                 <td data-label="">Connecting your accounts</td>
                 <td data-label="Archie" class="is-archie">A picker, with the tokens kept in your computer&rsquo;s password store<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>6</a></td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">Yours to write, and yours to store safely</td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">Through each one&rsquo;s own channels, skills and plugins<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. On a build of your own, yours to write and to keep safe</td>
               </tr>
               <tr>
-                <td data-label="">Approval before anything sends</td>
+                <td data-label="">Approval before an email or a calendar change goes out</td>
                 <td data-label="Archie" class="is-archie">Built in, and it cannot be skipped<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a></td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">A setting on all three, and off is one of the positions<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a></td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">A setting on all three, and off is one of the positions<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. On a build of your own, yours to write</td>
               </tr>
               <tr>
                 <td data-label="">Keeping it running</td>
                 <td data-label="Archie" class="is-archie">Updates arrive. What stays yours is the computer: it has to be on and awake, for either of these</td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">Yours: dependencies, breaking API changes, the lot</td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">Each has a team behind it<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a>. On a build of your own, it is yours: dependencies, breaking API changes, the lot</td>
               </tr>
               <tr>
                 <td data-label="">Changing how it behaves</td>
@@ -425,16 +423,16 @@
               <tr>
                 <td data-label="">If the company behind it disappears</td>
                 <td data-label="Archie" class="is-archie">Our terms commit us to publishing a final build that needs no license check<a class="src-cite" href="../../terms-of-service/"><span class="sr-only">Source </span>2</a></td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">Nothing to disappear</td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">All three are MIT licensed, so the code stays with you<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. A build of your own has nobody to disappear</td>
               </tr>
               <tr>
                 <td data-label="">What you pay</td>
                 <td data-label="Archie" class="is-archie">Nothing at 20 jobs a day, on an AI account of your own. <span class="cost-num">$30</span><a class="src-cite" href="../../archie/pricing/"><span class="sr-only">Source </span>4</a> a month takes the limit off. Your own AI usage, either way</td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">Your own AI usage, and your time</td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">Nothing for OpenClaw, and optional paid plans on Hermes and Vellum<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a>. Then the AI you use, and your time</td>
             </tr>
             </tbody>
           </table>
-          <p class="cost-table-note">The right column is written from what OpenClaw, Hermes and Vellum publish about themselves, cited at the foot of this page, not from a benchmark of our own.</p>
+          <p class="cost-table-note">The right column is written from what OpenClaw, Hermes and Vellum publish, cited at the foot of this page.</p>
         </div>
       </div>
     </section>
@@ -444,21 +442,21 @@
         <div class="section-header">
           <span class="section-label fade-up">Where your own build wins</span>
           <h2 id="wins-heading" class="fade-up delay-1">Three things OpenClaw, Hermes, Vellum and your own build do better.</h2>
-          <p>All three are real.</p>
         </div>
 
         <div class="calm-list calm-list--ruled mt-48 fade-up delay-1">
           <div class="calm-list-item">
             <span class="calm-list-label">You can read every line</span>
-            <p>Archie is not open source. You can watch what it sends with a network monitor, and our <a href="../../trust/">Trust page</a> shows you how, but you cannot read the source. All three of the others are MIT licensed, so with them, or a build of your own, you can<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>.</p>
+            <p>Archie&rsquo;s code is not published, but you can watch what it sends with a network monitor, and our <a href="../../trust/">Trust page</a> shows you how. All three others are MIT licensed, so with them, or a build of your own, you can read every line<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>.</p>
           </div>
           <div class="calm-list-item">
-            <span class="calm-list-label">No subscription, and nobody to trust</span>
-            <p>No plan, no sign-in, no company that could change its mind. That is a real advantage. What we put against it is in writing rather than in good intentions: our <a href="../../terms-of-service/">Terms</a> require that if Otian ever ceases operations, we publish a final version of Archie that requires no license check, within 30 days.</p>
+            <span class="calm-list-label">Nothing to pay for the software</span>
+            <p>OpenClaw has no plan at all, and Hermes and Vellum sell optional ones<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a>. Archie is free on your own AI account at 20 jobs a day, and $30 a month takes the limit off.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Your own build can do anything you can write</span>
-            <p>Our add-ons are instructions and settings rather than code<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>3</a>, which is a deliberate safety decision and also a ceiling. Your own build has no ceiling.</p>
+            <p>Our add-ons are instructions and settings rather than code<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>3</a>, which is a safety decision and also a ceiling: a skill uses the tools Archie already has.</p>
+            <p>New tools come in our releases, or from a service you connect (MCP), whose tools wait for your approval unless it says they only read. Your own build can run any code you write.</p>
           </div>
         </div>
       </div>
@@ -500,7 +498,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Why we charge</span>
-          <h2 id="why-paid-heading" class="fade-up delay-1">Free code still gets paid for.</h2>
+          <h2 id="why-paid-heading" class="fade-up delay-1">How OpenClaw, Hermes, Vellum and Archie each get paid for.</h2>
         </div>
 
         <figure class="explain-figure mt-40 fade-up delay-1" id="fiveWays">
@@ -525,7 +523,7 @@
             <text class="ways-who" x="574" y="39">Hermes</text>
             <rect class="ways-row" x="6" y="62" width="588" height="40" rx="10"/>
             <text class="ways-way" x="24" y="87">Rent you a computer</text>
-            <text class="ways-cost" x="190" y="87">your work runs on theirs, not yours</text>
+            <text class="ways-cost" x="190" y="87">each plan is a computer of a given size</text>
             <text class="ways-who" x="574" y="87">Vellum</text>
             <rect class="ways-row" x="6" y="110" width="588" height="40" rx="10"/>
             <text class="ways-way" x="24" y="135">Take your data</text>
@@ -533,7 +531,7 @@
             <text class="ways-who" x="574" y="135">not in their pricing</text>
             <rect class="ways-row" x="6" y="158" width="588" height="40" rx="10"/>
             <text class="ways-way" x="24" y="183">Someone else pays</text>
-            <text class="ways-cost" x="190" y="183">lasts as long as they keep paying</text>
+            <text class="ways-cost" x="190" y="183">a non-profit stewards it, and the code is MIT</text>
             <text class="ways-who" x="574" y="183">OpenClaw</text>
             <rect class="ways-row ways-row--ours" x="6" y="206" width="588" height="40" rx="10"/>
             <text class="ways-way ways-way--ours" x="24" y="231">Charge for the app</text>
@@ -549,7 +547,7 @@
             <rect class="ways-row" x="4" y="72" width="332" height="52" rx="10"/>
             <text class="ways-way" x="20" y="94">Rent you a computer</text>
             <text class="ways-who" x="320" y="94">Vellum</text>
-            <text class="ways-cost" x="20" y="113">your work runs on theirs, not yours</text>
+            <text class="ways-cost" x="20" y="113">each plan is a computer of a given size</text>
             <rect class="ways-row" x="4" y="132" width="332" height="52" rx="10"/>
             <text class="ways-way" x="20" y="154">Take your data</text>
             <text class="ways-who" x="320" y="154">not in their pricing</text>
@@ -557,7 +555,7 @@
             <rect class="ways-row" x="4" y="192" width="332" height="52" rx="10"/>
             <text class="ways-way" x="20" y="214">Someone else pays</text>
             <text class="ways-who" x="320" y="214">OpenClaw</text>
-            <text class="ways-cost" x="20" y="233">lasts as long as they keep paying</text>
+            <text class="ways-cost" x="20" y="233">a non-profit stewards it, and the code is MIT</text>
             <rect class="ways-row ways-row--ours" x="4" y="252" width="332" height="52" rx="10"/>
             <text class="ways-way ways-way--ours" x="20" y="274">Charge for the app</text>
             <text class="ways-who ways-who--ours" x="320" y="274">Archie</text>
@@ -566,7 +564,7 @@
           <figcaption>What each one&rsquo;s paid plan is for, from their own pages, read September 16, 2026. OpenClaw has no plan: a non-profit stewards it. Only Archie&rsquo;s row is the app itself.<a class="src-cite" href="#src-money"><span class="sr-only">Source </span>7</a></figcaption>
         </figure>
 
-        <p class="hm-micro fade-up delay-1">Archie is free too, at 20 jobs a day on an AI account of your own. Lifting that limit costs us nothing, and that is the point: it is where free stops, not a cost we are recovering. Nobody stands on the data row because none of their prices say so, which is what their pricing pages show rather than an audit of what any of them does with your data.</p>
+        <p class="hm-micro fade-up delay-1">Nobody stands on the data row because none of their prices say so. We read their pricing pages; we have not audited what any of them does with your data.</p>
       </div>
     </section>
 
@@ -575,7 +573,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Worth saying</span>
           <h2 id="both-heading" class="fade-up delay-1">We built Archie because we got tired of rebuilding it.</h2>
-          <p>The first versions of this were exactly that: OpenClaw, set up by hand, one per person, held together by whoever made them.</p>
+          <p>The first versions were exactly that: OpenClaw, set up by hand, one per person, held together by whoever made them.</p>
         </div>
 
         <details class="fold fade-up delay-1">
@@ -584,14 +582,16 @@
             <div class="calm-list calm-list--ruled">
               <div class="calm-list-item" id="src-1">
                 <span class="calm-list-label" id="src-open"><span class="src-n">1</span>OpenClaw, Hermes and Vellum, from their own pages</span>
-                <p>Read September 16 and 18, 2026, from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>, <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> and <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a>. All three are MIT licensed. Hermes and Vellum lead with a desktop download; OpenClaw ships desktop apps and a terminal path, <code>npx openclaw@latest</code> (<a href="https://docs.openclaw.ai/start/getting-started" rel="nofollow noopener" target="_blank">its docs</a>). Approval is a setting on each: OpenClaw&rsquo;s <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a> govern commands, from <code>deny</code> to <code>full</code>, and the default &ldquo;authorizes permitted changes without an approval prompt&rdquo;; Hermes checks commands against &ldquo;a curated list of dangerous patterns&rdquo; with <code>approvals.mode</code> smart, manual or off (<a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>); Vellum runs from Strict to Full access, where &ldquo;your assistant never asks for permission&rdquo; (<a href="https://www.vellum.ai/docs/trust-security/the-permissions-model" rel="nofollow noopener" target="_blank">its docs</a>). Each installs skills or plugins as code on top of its open code.</p>
+                <p>Read September 16 and 18, 2026, from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>, <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> and <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a>. All three are MIT licensed. Hermes and Vellum lead with a desktop download; OpenClaw ships desktop apps and a terminal path, <code>npx openclaw@latest</code> (<a href="https://docs.openclaw.ai/start/getting-started" rel="nofollow noopener" target="_blank">its docs</a>).</p>
+                <p>Approval is a setting on each. OpenClaw&rsquo;s <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a> govern commands, from <code>deny</code> to <code>full</code>, and the default &ldquo;authorizes permitted changes without an approval prompt&rdquo;. Hermes checks commands against &ldquo;a curated list of dangerous patterns&rdquo; with <code>approvals.mode</code> smart, manual or off (<a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>). Vellum runs from Strict to Full access, where &ldquo;your assistant never asks for permission&rdquo; (<a href="https://www.vellum.ai/docs/trust-security/the-permissions-model" rel="nofollow noopener" target="_blank">its docs</a>).</p>
+                <p>Each has a shelf of skills or plugins on top of its open code, and each reaches you on chat channels of its own. Vellum&rsquo;s docs say a skill it writes bundles &ldquo;any reference notes and scripts the workflow needs&rdquo; (<a href="https://www.vellum.ai/docs/getting-started/your-first-skill.md" rel="nofollow noopener" target="_blank">its docs</a>).</p>
               </div>
               <div class="calm-list-item" id="src-2">
                 <span class="calm-list-label"><span class="src-n">2</span>The final-build commitment</span>
                 <p>Our Terms require us to publish a version that needs no license check if we cease operating. The wording is in the <a href="../../terms-of-service/">Terms of Service</a> and the reasoning is on the <a href="../../trust/">Trust page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-3">
-                <span class="calm-list-label"><span class="src-n">3</span>Add-ons are data, not code</span>
+                <span class="calm-list-label"><span class="src-n">3</span>Add-ons are text files</span>
                 <p>An add-on is written instructions and settings; Archie has nowhere to run code an add-on brings with it. That is why the ceiling above is real, and it is documented on the <a href="../../trust/">Trust page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-4">
@@ -599,7 +599,7 @@
                 <p>Our own price, with the AI usage that sits on top of it broken down on the <a href="../../archie/pricing/">pricing page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-5">
-                <span class="calm-list-label"><span class="src-n">5</span>Approval before anything sends</span>
+                <span class="calm-list-label"><span class="src-n">5</span>Approval before an email or a calendar change goes out</span>
                 <p>Email and calendar changes are drafted and held for approval in the app. The mechanism, and the honest limit on it, are on the <a href="../../trust/">Trust page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-6">
@@ -608,11 +608,14 @@
               </div>
               <div class="calm-list-item" id="src-money">
                 <span class="calm-list-label"><span class="src-n">7</span>What the three sell, from their own pages</span>
-                <p>Read September 16, 2026. Nous Portal plans for Hermes run from $0 to $200 a month for credits and hosted services, and no tier names are published, so no figure between those two is quoted here (<a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a>). Vellum is &ldquo;free to download and start&rdquo;, and its plans are Mighty at $30 a month, Super at $100 and Ultra at $200, each described as a computer of a given size (Mighty is a &ldquo;Small computer 1 vCPU / 2 GiB, 10 GB storage&rdquo;), with usage beyond a plan metered at &ldquo;$1 = 1 credit&rdquo; (<a href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank">vellum.ai/pricing</a>). OpenClaw: &ldquo;No subscription. No hosted tier. No token&rdquo;, and it &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; (<a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>).</p>
+                <p>Read September 16, 2026. Nous Portal plans for Hermes run from $0 to $200 a month for credits and hosted services, and no tier names are published, so no figure between those two is quoted (<a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a>).</p>
+                <p>Vellum is &ldquo;free to download and start&rdquo;. Its plans are Mighty at $30 a month, Super at $100 and Ultra at $200, each described as a computer by size (Mighty is a &ldquo;Small computer 1 vCPU / 2 GiB, 10 GB storage&rdquo;). Usage beyond a plan is metered at &ldquo;$1 = 1 credit&rdquo; (<a href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank">vellum.ai/pricing</a>).</p>
+                <p>OpenClaw: &ldquo;No subscription. No hosted tier. No token&rdquo;, and it &ldquo;is stewarded by the OpenClaw Foundation, an independent US 501(c)(3) non-profit&rdquo; (<a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>).</p>
               </div>
               <div class="calm-list-item">
                 <span class="calm-list-label">On local models</span>
-                <p>Said plainly because it is true: a locally run model is more private than a hosted one. Archie can bind a model running on your own computer, and most people will connect an AI account instead, so the honest comparison is between a hosted setup and a local one rather than between us and you. Our claim has always been about custody, that no server of ours holds your content, and never about being the most private option available.</p>
+                <p>A locally run model is more private than a hosted one. Archie can bind a model running on your own computer. It binds one only after the model shows it can use a tool, which small models often cannot, and it is not the default.</p>
+                <p>Our claim has always been about custody, that no server of ours holds your content, and never about being the most private option available.</p>
               </div>
             </div>
           </div>

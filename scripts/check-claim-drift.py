@@ -236,20 +236,24 @@ def visible(*parts):
 # two things of the one agent left, so a truncation to the first clause is a false claim, not
 # a shorter one.
 compare_text = visible("compare", "index.html")
+# A third form since 2026-09-27, "Of ten agents, only Archie works...": Jett's rules of that day
+# fail a heading of two sentences, and "Ten agents." standing alone was one. Same claim, same count.
 binary = re.search(
-    r"(\w+) agents\. (?:Archie is the only one that works|Only Archie works) on your own computer",
+    r"(?:(\w+) agents\. (?:Archie is the only one that works|Only Archie works)|Of (\w+) agents, only Archie works)"
+    r" on your own computer",
     compare_text,
 )
 require(
     binary is not None,
-    "compare/ no longer opens on the binary in either form this check reads "
-    "('<N> agents. Only Archie works on your own computer...' or '<N> agents. Archie is the "
-    "only one that works on your own computer...'). "
+    "compare/ no longer opens on the binary in any form this check reads "
+    "('Of <N> agents, only Archie works on your own computer...', '<N> agents. Only Archie works "
+    "on your own computer...' or '<N> agents. Archie is the only one that works on your own "
+    "computer...'). "
     "Fix the reader here before trusting this check again.",
 )
 
 if binary:
-    count = binary.group(1)
+    count = binary.group(1) or binary.group(2)
     egress = f"All {count.lower()} send your words to an AI company's computers by default."
     for page in BINARY_PAGES:
         where = "/".join(page)

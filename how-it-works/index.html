@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>How It Works | Otian AI</title>
-  <meta name="description" content="Install Archie on a computer you can leave on, build an agent from add-ons, connect it to Telegram, Discord, Slack, Matrix or iMessage, and message it from anywhere. Here's how the pieces fit." />
+  <meta name="description" content="Install Archie on a computer you can leave on, set up an agent from add-ons, and message it from Telegram, Discord, Slack, Matrix or iMessage. What you need, what you can skip, and the five setup steps." />
   <meta property="og:image" content="https://otianai.com/assets/icon-1024.png" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -231,9 +231,9 @@
          ============================== -->
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
-        <span class="section-label">The Process</span>
-        <h1><span data-ember-seed="how-it-works" class="heading-ember"></span>How it works.</h1>
-        <p>You install Archie, build an agent, and message it from anywhere: no code, no config files, no terminal.</p>
+        <span class="section-label">How it works</span>
+        <h1><span data-ember-seed="how-it-works" class="heading-ember"></span>Install Archie, set up your agent, and message it from your phone.</h1>
+        <p>Your agent runs on your own computer, and you reach it from the chat app you already use. There is no code to write.</p>
       </div>
     </section>
 
@@ -249,8 +249,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The handover</span>
-          <h2 id="loop-heading" class="fade-up">What handing something over looks like.</h2>
-          <p>You message your agent the way you&rsquo;d text a friend (&ldquo;what&rsquo;s on my calendar?&rdquo; &ldquo;move my 3 o&rsquo;clock,&rdquo; &ldquo;catch me up on today&rsquo;s meetings&rdquo;). It goes away and works, comes back if it needs you, and tells you when it&rsquo;s done.</p>
+          <h2 id="loop-heading" class="fade-up">Text your agent the way you&rsquo;d text a friend.</h2>
+          <p>Ask &ldquo;what&rsquo;s on my calendar?&rdquo; or &ldquo;move my 3 o&rsquo;clock,&rdquo; and it goes away and works, comes back if it needs you, and tells you when it&rsquo;s done.</p>
         </div>
         <!-- The delegation-loop figure stood here until 2026-09-11. It came out because the
              living agent two sections down draws the same loop with the gate and the AI company
@@ -471,7 +471,7 @@
           <!-- What each scene is showing, under the phone and never inside the thread: a line of
                explanation in a bubble is the app talking about itself. Same --s as the scene. -->
           <div class="hm-caps" aria-hidden="true">
-            <p class="hm-cap" style="--s:0">Ask for a file and it writes the real one and sends it to you. A spreadsheet, a PDF, a slide deck. Eleven kinds, and nothing your computer would run.</p>
+            <p class="hm-cap" style="--s:0">Ask for a spreadsheet, a PDF or a slide deck, and it writes the real file and sends it to you. It makes eleven kinds, and none is a file your computer would run.</p>
             <p class="hm-cap" style="--s:1">On a Mac, it reads a text as it lands and writes the reply. Nothing sends until you press Send.</p>
             <p class="hm-cap" style="--s:2">Tell it what the doctor said on the way out. It keeps a dated record and hands it back when you ask. It never gives medical advice.</p>
             <p class="hm-cap" style="--s:3">Every morning it re-reads your sent mail for promises you made, and says which one is due. A morning with nothing owed stays quiet.</p>
@@ -480,7 +480,7 @@
             <p class="hm-cap" style="--s:6">It can use a website the way you would, in a browser window on your computer you can watch. Off until you turn it on, and it asks before anything is booked.</p>
           </div>
 
-          <figcaption id="handover-cap">Seven things people hand over, drawn the way each one arrives in your chat. Press a name above the phone to see one, or <a href="../archie/websites/">watch it use a website</a>.</figcaption>
+          <figcaption id="handover-cap">Seven jobs you can hand over, drawn the way each one arrives in your chat. Press a name above the phone to see one, or <a href="../archie/websites/">watch it use a website</a>.</figcaption>
         </figure>
 
         <!-- Not everything is a handover, and until 2026-09-18 the page did not say so anywhere:
@@ -505,8 +505,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">What Archie hands you</span>
-          <h2 id="files-heading" class="fade-up delay-1">A file on your computer, not text to copy out.</h2>
-          <p>Ask Archie for a spreadsheet and your agent writes a file on your computer, then tells you where it put it.</p>
+          <h2 id="files-heading" class="fade-up delay-1">Ask for a spreadsheet and you get a real file on your computer.</h2>
+          <p>Your agent writes the actual file and tells you where it put it.</p>
         </div>
 
         <!-- The kinds and the one folder, drawn, 2026-09-11. Eleven since PDF and slide decks both
@@ -577,9 +577,9 @@
             <text class="nk-lab" x="60" y="334">One folder</text>
             <text class="nk-cap" x="220" y="290">the one you were told about</text>
           </svg>
-          <figcaption>Archie chooses the filename. It never chooses the folder.</figcaption>
+          <figcaption>Archie picks the filename, and every file lands in the one folder you were told about.</figcaption>
         </figure>
-        <p class="hm-micro fade-up">Nothing outside that list can be written, and none of these is a file your computer runs. <a href="../trust/">How that is kept safe&nbsp;&rarr;</a></p>
+        <p class="hm-micro fade-up">Nothing outside that list can be written, and none of these is a file your computer runs. <a href="../trust/">See how that is kept safe&nbsp;&rarr;</a></p>
       </div>
     </section>
 
@@ -590,8 +590,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The moving parts</span>
-          <h2 id="arch-heading" class="fade-up">How it all connects.</h2>
-          <p>Your agent runs on your own computer, built from a handful of parts you choose. Here is the whole thing, everywhere it reaches, and the one place it waits.</p>
+          <h2 id="arch-heading" class="fade-up">Everything your agent reaches, and the one place it waits for you.</h2>
+          <p>Your agent runs on your own computer, built from parts you choose.</p>
         </div>
 
         <figure class="explain-figure la-figure fade-up delay-1">
@@ -839,8 +839,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">The whole list</span>
-          <h2 id="need-heading" class="fade-up">You already have most of this.</h2>
-          <p>Three things: a computer, an AI account, and Archie. The AI account is the only thing that bills you.</p>
+          <h2 id="need-heading" class="fade-up">You need a computer, an AI account and Archie.</h2>
+          <p>Unless you take a plan, only the AI account bills you.</p>
         </div>
 
         <div class="need-list mt-48">
@@ -848,7 +848,7 @@
           <article class="need-item fade-up delay-1">
             <span class="need-num" aria-hidden="true">1</span>
             <h3>Your agent works while you sleep, on a computer you leave on</h3>
-            <p>A sleeping computer does not slow your agent down. It stops it. Use the one you have, Mac or Windows. Buying for it? A Mac mini is the easy answer, and <a href="#what-to-run-it-on">the picker below</a> settles the rest.</p>
+            <p>Your agent answers only while the computer is awake, though Archie can wake it for a scheduled routine. Use the one you have, Mac or Windows. Buying one? A Mac mini is the easy answer, and <a href="#what-to-run-it-on">the picker below</a> settles the rest.</p>
             <!-- procurement slot: "Would rather not think about it? We'll pick the computer, buy it, set it up, and ship it to you ready to go." (do not publish until the service exists) -->
           </article>
 
@@ -867,15 +867,17 @@
               <svg class="explain-svg--mobile" viewBox="0 0 340 396" role="img" aria-label="Archie runs your agent; an AI company does the thinking. The eight you can connect an account with, as tiles: Anthropic (Claude), OpenAI (ChatGPT), Google (Gemini), Groq, xAI (Grok), DeepSeek, Mistral, and a dashed one for an AI service of your own that speaks the OpenAI format. You pick, and you can change it later, per agent." xmlns="http://www.w3.org/2000/svg"><text class="pv-title" x="170" y="24">Archie runs your agent.</text><text class="pv-title" x="170" y="42">An AI company does the thinking.</text><rect class="pv-tile" x="16" y="60" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="82">Anthropic</text><text class="pv-sub" x="90" y="98">Claude</text><rect class="pv-tile" x="176" y="60" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="82">OpenAI</text><text class="pv-sub" x="250" y="98">ChatGPT</text><rect class="pv-tile" x="16" y="126" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="148">Google</text><text class="pv-sub" x="90" y="164">Gemini</text><rect class="pv-tile" x="176" y="126" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="156.5">Groq</text><rect class="pv-tile" x="16" y="192" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="214">xAI</text><text class="pv-sub" x="90" y="230">Grok</text><rect class="pv-tile" x="176" y="192" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="222.5">DeepSeek</text><rect class="pv-tile" x="16" y="258" width="148" height="52" rx="10"/><text class="pv-name" x="90" y="288.5">Mistral</text><rect class="pv-tile pv-tile--own" x="176" y="258" width="148" height="52" rx="10"/><text class="pv-name" x="250" y="280">Your own</text><text class="pv-sub" x="250" y="296">OpenAI format</text><text class="pv-foot" x="170" y="352">You pick, and you can change it</text><text class="pv-foot" x="170" y="369">later, per agent. Your own means any other</text><text class="pv-foot" x="170" y="386">AI service that speaks the OpenAI format.</text></svg>
               <figcaption>You open the account yourself, in your own name, and you can change it per agent later.</figcaption>
             </figure>
-            <p>The bill is yours, capped by you and never seen by us: $1 to $5 a month for a handful of tasks a day, up to around $140 for one working beside you all day. <a href="../archie/pricing/#ai-cost">Worked out for 3 levels of use</a>. Google trains on what goes through its free tier, so read <a href="../trust/#providers">what each company does with your words</a> first.</p>
+            <p>The AI bill is yours, and we never see it: $1 to $5 a month for a handful of tasks a day, up to around $140 for an agent working beside you all day. <a href="../archie/pricing/#ai-cost">See how that is worked out</a>.</p>
+            <p>Google trains on what goes through its free tier, so read <a href="../trust/#providers">what each company does with your words</a> before you pick.</p>
             <p class="need-note">You can try it before opening one: new installs get 14 days on our AI credits, and Personal can include the AI at launch. Both run through a server of ours, and email and text reading need an account of your own.</p>
           </article>
 
           <article class="need-item fade-up delay-3">
             <span class="need-num" aria-hidden="true">3</span>
             <h3>Archie is free to run, at 20 jobs a day</h3>
-            <p>No card and no plan. A job is one piece of work: a reply to you, or a routine running. At launch a plan takes the limit off, at $30 a month. The app asks you to sign in, and on our side we hold your email address, your plan and <a href="../trust/#what-we-hold">listed operational records</a>. Never a conversation.</p>
-            <p class="need-note">The app and the AI are separate bills. <a href="../archie/pricing/">Every cost, in full</a>.</p>
+            <p>No card and no plan. A job is one piece of work: a reply to you, or a routine running. At launch, a plan takes the limit off for $30 a month.</p>
+            <p>The app asks you to sign in. We hold your email address, your plan and the <a href="../trust/#what-we-hold">operational records we list</a>, and never a conversation.</p>
+            <p class="need-note">The app and the AI are separate bills. <a href="../archie/pricing/">See every cost in full</a>.</p>
           </article>
 
           <!-- The Otian account is a hard requirement: the app shows a sign-in screen before it
@@ -892,7 +894,7 @@
             <span class="need-num" aria-hidden="true">+</span>
             <h3>Optional: reach your agent from your phone, through a chat app</h3>
             <p>Your agent shows up as a contact in Telegram, Discord, Slack, Matrix or, on a Mac, iMessage: the same conversation from your desk or your phone. Telegram is the quickest. Nothing to sort out before you start, though: you can talk to it inside Archie.</p>
-            <p class="need-note">WhatsApp is the one still missing: it does not let an app like this answer on your behalf, its rule and not our choice. What your agent tells you crosses that company&rsquo;s servers either way, so we are building <a href="../archie/mobile/">Archie Mobile</a>.</p>
+            <p class="need-note">WhatsApp is missing because its rules don&rsquo;t let an app like this answer for you. Anything your agent tells you through a chat app crosses that company&rsquo;s servers, so we made <a href="../archie/mobile/">Archie Mobile</a>: on Android now, and in review with Apple for iPhone.</p>
           </article>
 
         </div>
@@ -1021,7 +1023,7 @@
             <rect class="kf-no" x="20" y="286" width="116" height="22" rx="11"/><text class="kf-notext" x="78" y="300.5">a second monitor</text><line class="kf-strike" x1="34" y1="297" x2="122" y2="297"/>
             <rect class="kf-no" x="146" y="286" width="112" height="22" rx="11"/><text class="kf-notext" x="202" y="300.5">a static address</text><line class="kf-strike" x1="160" y1="297" x2="244" y2="297"/>
           </svg>
-          <figcaption>The whole kit: a computer that stays awake, a router it reaches by cable or Wi-Fi, and the phone you already have. Everything under the line is something people expect to need and do not.</figcaption>
+          <figcaption>The whole kit: a computer that stays awake, a router it reaches by cable or Wi-Fi, and the phone you already have. Everything under the line is something you might expect to need and don&rsquo;t.</figcaption>
         </figure>
         </div>
       </div>
@@ -1072,8 +1074,7 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">Save your money</span>
-          <h2 id="skip" class="fade-up delay-1">What you don&rsquo;t need.</h2>
-          <p>A page recommending equipment has an obvious incentive to make the list longer. This is the other list, with the reasons.</p>
+          <h2 id="skip" class="fade-up delay-1">You don&rsquo;t need a new computer, a graphics card or a server.</h2>
         </div>
 
         <!-- Folded 2026-09-21. Both lists stay in full, because a page that recommends
@@ -1088,7 +1089,7 @@
           <div class="two-col-card">
             <h3>Not needed</h3>
             <ul class="two-col-card-list">
-              <li><strong>A good graphics card.</strong> The thinking happens on your AI company&rsquo;s computers, not yours. Whatever is in the computer already is enough</li>
+              <li><strong>A good graphics card.</strong> The thinking happens on your AI company&rsquo;s computers, so whatever is in yours is enough</li>
               <li><strong>A fast or new computer.</strong> It spends most of its life idle, waiting for something to happen</li>
               <li><strong>A server, a NAS, or anything in a rack.</strong> Archie is a desktop app with a window</li>
               <li><strong>A second monitor, or any monitor after setup.</strong> You need a screen to set it up, and after that your phone will do</li>
@@ -1106,7 +1107,7 @@
           </div>
         </div>
 
-        <p class="trust-table-note">No hardware prices here: we would be quoting somebody else&rsquo;s, and it would be wrong within the month. Every computer named above is one you can price at the maker&rsquo;s own store.</p>
+        <p class="trust-table-note">We don&rsquo;t list hardware prices, because they would be somebody else&rsquo;s and out of date within a month. You can price every computer named above at the maker&rsquo;s own store.</p>
           </div>
         </details>
       </div>
@@ -1116,8 +1117,7 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Setup</span>
-          <h2 id="timeline-heading" class="fade-up">Your path to a running agent.</h2>
-          <p>5 steps from a quiet computer to a running agent, and one promise for whatever comes after.</p>
+          <h2 id="timeline-heading" class="fade-up">Five steps from a quiet computer to a running agent.</h2>
         </div>
 
         <!-- The recording of the same five steps, merged in from archie/see-it-work/ on
@@ -1174,18 +1174,18 @@
             <span class="chapter-n" aria-hidden="true">02</span>
             <div>
               <h3>Install the Archie desktop app</h3>
-              <p>One download, then sign in. Archie is in testing. <a href="../archie/personal/#status">Where it stands&nbsp;&rarr;</a></p>
+              <p>One download, then sign in. Archie is in testing. <a href="../archie/personal/#status">See where it stands&nbsp;&rarr;</a></p>
             </div>
           </li>
           <li class="chapter chapter--filmed">
             <span class="chapter-n" aria-hidden="true">03</span>
             <div>
-              <h3>Meet your agent</h3>
-              <p>Name it and answer a few questions. It fits itself out from your answers and tells you what it added. <a href="../skills-marketplace/browse/">Browse the marketplace</a> when you want more.</p>
+              <h3>Name your agent and answer a few questions</h3>
+              <p>It fits itself out from your answers and tells you what it added. <a href="../skills-marketplace/browse/">Browse the marketplace</a> when you want more.</p>
               <div class="chapter-times" hidden>
                 <button type="button" class="chapter-time" data-seek="3">0:03 your agent&rsquo;s first screen</button>
                 <button type="button" class="chapter-time" data-seek="9">0:09 a calendar, read only</button>
-                <button type="button" class="chapter-time" data-seek="24">0:24 nothing leaves without your press</button>
+                <button type="button" class="chapter-time" data-seek="24">0:24 a reply waits for your Send</button>
               </div>
             </div>
           </li>
@@ -1205,7 +1205,7 @@
               <h3>Message your agent from anywhere</h3>
               <p>Archie does the work on your computer and replies in your chat. Email and calendar changes wait for your approval, every one.</p>
               <div class="chapter-times" hidden>
-                <button type="button" class="chapter-time" data-seek="77">1:17 what it set up on its own</button>
+                <button type="button" class="chapter-time" data-seek="77">1:17 what the agent set up on its own</button>
                 <button type="button" class="chapter-time" data-seek="104">1:44 a clash, and the fix</button>
                 <button type="button" class="chapter-time" data-seek="120">2:00 a reply, drafted and sent</button>
               </div>
@@ -1214,7 +1214,7 @@
           <li class="chapter">
             <span class="chapter-n" aria-hidden="true">06</span>
             <div>
-              <h3>Hit a ceiling? Tell us</h3>
+              <h3>Ask us for what Archie can&rsquo;t do yet</h3>
               <p>If Archie can&rsquo;t do it yet, we build the add-on, and every <a href="../services/#commission">commissioned add-on</a> becomes a marketplace listing.</p>
             </div>
           </li>
@@ -1227,10 +1227,10 @@
          ============================== -->
     <section class="section section-alt" aria-label="Call to action">
       <div class="hm-wrap hm-head hm-cta">
-        <h2 class="fade-up">Two things you can do without us.</h2>
-        <p class="hm-lede fade-up"><a href="../skills-marketplace/find/">Say the job you want handled</a> and see whether an add-on already does it: what you type stays in your browser. Or <a href="../trust/proof/">run our privacy claims yourself</a>, in about ten minutes.</p>
+        <h2 class="fade-up">Get an email the day Archie is ready for you.</h2>
+        <p class="hm-lede fade-up">Rather not set it up alone? <a href="../services/#guided">We can do it with you on a call</a>.</p>
         <a href="../questionnaire/" class="btn btn-primary btn-lg fade-up">Join the Waitlist</a>
-        <p class="hm-micro fade-up">Tell us what you&rsquo;d hand off first. About 5 minutes, and we&rsquo;ll be in touch within 1 business day. Rather not do the setup alone? <a href="../services/#guided">We do it with you&nbsp;&rarr;</a></p>
+        <p class="hm-micro fade-up">Until then, <a href="../skills-marketplace/find/">say the job you want handled</a> and see if an add-on already does it, or <a href="../trust/proof/">run our privacy checks yourself</a> in about ten minutes.</p>
       </div>
     </section>
 

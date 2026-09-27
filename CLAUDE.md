@@ -108,6 +108,65 @@ optimised the page ruthlessly, would the reader still be served? If it appeared 
 in two years, would we defend it or explain it away? **The short version: the money is never the
 reason.**
 
+## Sounds like a person: Jett's rules for copy (2026-09-27)
+
+Jett, 2026-09-27: "here's things i want to make sure that will make this site sound less ai",
+followed by nineteen rules. They are below in the site's terms. `python3 scripts/check-voice.py`
+fails the seven that are patterns; the rest are read by a person or not at all. **Run it before
+you commit**, alongside `check-facts.py` and `check-copy-length.py`.
+
+**The one buyer.** Every selling page is written to one person buried in their own life admin: the
+email, the bills, the paperwork, the doctor (Jett's answer, 2026-09-27, chosen over "someone who
+works for themselves"). Business pages talk to the owner of a small team. No page is written to
+"whether you're a solo founder, a busy parent or a growing team", and a drawing is copy too: a
+homepage phone showing "Q3 kickoff prep" was talking to somebody else, and became the dentist.
+
+**What the script fails:**
+1. **No antithesis.** "It's not X, it's Y." "X is not Y. It is Z." "Not to us." "An estimate, not
+   a quote." "It does not slow it down. It stops it." "Not just X but Y." Say the true thing
+   directly. A plain negative fact is fine when the absence is the claim: "No email goes out until
+   you send it or set a time."
+2. **No aphorism formulas.** A heading is one sentence that says one thing. "Your agent does the
+   work. You say the word." fails; "Replies, calendar moves and changes to your lists wait for your
+   yes." passes. No "That's the point", "Here's the thing", "The catch?", three-word staccato runs,
+   or "No X. No Y." **The tagline h1 is the one exception**, by Jett's decision the same day.
+3. **No generic openers:** Imagine, Meet, Welcome to, Whether you're, In today's, Ready to, Tired
+   of, Here's why.
+4. **No machine words:** seamless, unlock, empower, elevate, leverage, streamline, robust,
+   powerful, quietly, truly, genuinely, delve, journey, crucial, peace of mind.
+5. **No copy written to everybody:** "whether you are", "no matter who".
+6. **A button is a verb and an outcome:** "See where it stands", "Book Your Free Call". Never
+   "Learn more", "Get started", "Click here".
+7. **Break up blocks:** 45 words a paragraph on a selling page, 70 on a reference page, and 35 a
+   sentence anywhere.
+
+**What a person reads for:**
+- **No fabricated claims.** Nothing about "people", "most people" or "customers" that we have not
+  measured, and we have one testimonial. No line about "most tools" without a source. A number is
+  in FACTS.md or it is not on the page. A capability is in TRUST.md **and in a release** before it
+  is in the present tense: the 2026-09-27 audit found over two hundred claims across the site,
+  and most were the site describing either a build newer than the release or one older than the
+  code.
+- **Specific headlines.** A heading names the thing: a job, a number, a place, a person. "How it
+  works", "Which one is this?" and "The small stuff, handled." say nothing. "Install Archie, set
+  up your agent, and message it from your phone." says it.
+- **Above the fold sells, benefit before feature.** The h1 and the line under it say what the
+  reader gets, then where it runs and what it costs, then answer the first objection, then the
+  button. "Your email, bills and paperwork, handled by an AI agent on your own computer" comes
+  before "Archie is a desktop app".
+- **The body supports the headline.** Every sentence under a heading proves or explains that
+  heading. One that belongs under another heading moves there or goes.
+- **One idea per section, one to three points in it.** A section holding a figure, a card grid, a
+  picker and a list is four sections, and the grid is usually the one to cut.
+- **Punchy, not padded, and written for someone who skims.** Cut the meta sentence ("What decides
+  whether this fits you is the last word in that heading"), the restatement, and the sentence
+  explaining the page to itself.
+- **The objection comes before the call to action**, and the line under a button says what the
+  button does. The waitlist asks for an email and a computer, so "tell us the first job you'd hand
+  off" over its button was a promise the form did not keep.
+- **Proof next to the claim.** Patrick's quote under his heading, the measured table under the
+  cost, the drawing under the gate. A claim whose proof is two pages away is a claim without one.
+
 ## Visual-first: seven rules for a figure
 
 The site is moving its arguments out of paragraphs and into drawings. That is a direction,

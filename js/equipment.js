@@ -136,7 +136,7 @@
 
     mail: {
       section: 'How you want it to work',
-      bot: ['Where does your email live? A lot of what people want starts in the inbox.'],
+      bot: ['Where does your email live? Your inbox is where a lot of an agent’s work starts.'],
       type: 'choice',
       name: 'mail',
       options: [
@@ -488,7 +488,7 @@
         (laptop ? 'Set what closing the lid does as well, or it sleeps regardless.' : 'Then check the machine restarts itself after a power cut, which is a firmware setting rather than a Windows one.') + '</p>';
     return {
       title: 'Keeping it awake',
-      body: body + '<p>This is the step people skip and the one that decides whether any of it works. An agent on a sleeping computer is not slow. It is off.</p>'
+      body: body + '<p>This is the step that decides whether any of it works. On a sleeping computer your agent cannot answer you, though Archie can wake it for a routine set for a time of day.</p>'
     };
   }
 
@@ -514,7 +514,7 @@
   function extrasCard() {
     var bits = ['<li><strong>A screen and keyboard, for setup.</strong> You need to see the app once. After that you can reach your agent from your phone or a chat app.</li>'];
     if (answers.budget !== 'nothing') {
-      bits.push('<li><strong>Disk room</strong>, if you want it to speak or handle audio and video. Those tools run on your computer, unlike the thinking, which does not.</li>');
+      bits.push('<li><strong>Disk room</strong>, if you want it to handle audio and video. Those tools run on your computer, while the thinking happens at your AI company.</li>');
       bits.push('<li><strong>A power strip with a battery in it</strong>, if your electricity flickers. Insurance rather than equipment: skip it if your power is reliable.</li>');
     }
     bits.push('<li><strong>Your phone.</strong> Already in your pocket, and it is how you reach the agent when you are away from the machine.</li>');
@@ -541,7 +541,7 @@
       out.push('<li><strong>The agent stops when your laptop does.</strong> Anything overnight is not going to happen, and that is most of what a routine is for.</li>');
     }
     if (!out.length) {
-      out.push('<li><strong>Nothing you told me rules anything out</strong>, which is the boring outcome and the good one. The usual catches are Windows and texts, or an email provider we do not connect to.</li>');
+      out.push('<li><strong>Nothing you told me rules anything out</strong>, which is the boring outcome and the good one. The catches to watch for are Windows and texts, or an email provider we do not connect to.</li>');
     }
     return { title: 'What this setup will not do', body: '<ul class="kit-list">' + out.join('') + '</ul>', tone: 'catch' };
   }
@@ -549,7 +549,7 @@
   function costCard() {
     return {
       title: 'After the hardware',
-      body: '<p>Two things, neither of them a machine: an account with an AI company, which bills you for what your agent does and which you can cap, and a plan for Archie. <a href="../archie/pricing/">Every cost, in full.</a></p>'
+      body: '<p>One thing that is not a computer: an account with an AI company, which bills you for what your agent does. Archie itself is free on that account at 20 jobs a day, and a plan takes the limit off. <a href="../archie/pricing/">See every cost in full.</a></p>'
     };
   }
 

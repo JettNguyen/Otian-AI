@@ -781,7 +781,14 @@ computer" (see Banned Phrasings).
 key saved or handed to an agent, a service connected or disconnected, someone allowed to
 message an agent or stopped from doing so. Each line carries a fingerprint of the line before
 it, so a line that is changed, reordered or deleted shows up as broken the next time Archie
-looks. The record stays on your computer, we never see it, and you can export the whole thing."
+looks. The record stays on your computer, we never see it, and on Archie for Business you can
+export the whole thing."
+
+*(Corrected 2026-09-28: it said "you can export the whole thing" with no edition, and
+`trust/` said "Archie will hand you the whole record as a file". The personal build refuses:
+`audit_export` returns "Exporting the record is part of Archie for Business." when
+`IS_BUSINESS` is false (`src-tauri/src/commands/mod.rs:864-865`), and has in every release
+since cc56e6e6 of 2026-08-21. Never say a personal owner can export the record.)*
 
 **Approved wording for the anchor, added 2026-09-16** (the mechanism was already in the
 paragraph below; what is new is a sentence copy may use, because `trust/` and `trust/proof/`

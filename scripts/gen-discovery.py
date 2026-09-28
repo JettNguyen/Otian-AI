@@ -315,9 +315,11 @@ QUESTIONS = [
      "one person, enforced in code. Archie for Business runs 50 agents and puts no ceiling on "
      "how many people an agent answers."),
     ("Is there a free plan?",
-     "There is a free trial, not a free plan. It runs 14 days or until the starter credits are "
-     "spent, whichever comes first, and there is a second form of it that runs on your own key. "
-     "After that it is $30 a month."),
+     "Archie is free on an AI account of your own, in the personal edition: 20 jobs a day, and "
+     "the count starts again at midnight. A job is one piece of work: a reply to you, a routine "
+     "running, or an email it reacts to. A plan takes the limit off for $30 a month. Separately, "
+     "a new install can try Archie for up to 14 days on our starter credits, with no AI account "
+     "and no card. Archie for Business has no free tier."),
     ("What can I check for myself?",
      "All of it, and that is the point. https://otianai.com/trust/ lists every claim on this "
      "site with a pointer to the code that makes it true, and carries a 10-minute walkthrough "

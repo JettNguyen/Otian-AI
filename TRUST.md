@@ -3211,7 +3211,7 @@ Every other write to Acuity, booking, notes and no-shows included, is refused (`
 - ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
   the provider sentence: what the agent reads goes to the AI company the owner connected.
 
-### 🚧 Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone; archie-mobile 3d279a3 and 6817d41), not yet in a release
+### 🚧 Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone, c942bc60..de6e9f32 for a new agent's Researcher; archie-mobile 3d279a3 and 6817d41), not yet in a release
 
 **Approved wording, once it ships:** "Whenever you add an add-on, anywhere in Archie or on Archie
 Mobile, Archie asks first. It shows the add-on, the agent it is going on, and what it will use, says
@@ -3236,13 +3236,15 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
   agent-wide switch, so an add-on that lists neither is not walled off from them.
 - ⛔ **Never call it a permission prompt, or say installing grants access.** Connecting an account
   is its own step, and installing connects nothing.
-- ⛔ **Never "nothing goes on without your yes."** The first agent's starter pack goes on unasked, and
-  so, until Archie's `feat/install-step-3` lands, does every new agent's Researcher (Jett chose on
-  2026-09-28 to have it offered through the step).
+- ⛔ **Never "nothing goes on without your yes."** The first agent's starter pack, Researcher included,
+  goes on unasked. Every agent after it is offered the Researcher through the step (`useResearcherOffer`
+  in `src/app/new-agent.ts`), Jett's choice of 2026-09-28.
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
-- ⚠️ The Researcher, Deep Research and the Prospector each say "about a cent a search". Deep Research
-  can make up to 20 searches a run, so never quote its run as "a few cents".
+- ⚠️ **"About a cent a search" is the search fee alone.** Counting the pages a search brings back, one
+  measured 1.6 to 4.3 cents on Sonnet 5 (Archie `docs/COST-MEASURED.md` section 20), so never quote a
+  cent as a search's whole cost. Deep Research: "about 50 cents a run", up to 20 searches; never "a few
+  cents".
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
 ### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the trial, on main), not yet in a release
@@ -3255,8 +3257,8 @@ release carries it.
 **Approved wording, once it ships:** "Bring an agent over from OpenClaw. Archie reads its folder on
 your computer and shows you what it would make before it makes anything. Its personality, what it
 knows about you, its notes, its skills, the OpenClaw skills shared by all its agents that you keep
-ticked, and its scheduled jobs become the new agent's. Notes that do not fit its memory go into older
-memory, which it checks when you mention something in them, and anything that cannot come over is
+ticked, and its scheduled jobs become the new agent's. Its newest notes go into its memory and the
+rest into older memory, which it checks when you mention something in them, and anything that cannot come over is
 listed with the reason. Bringing it over sends nothing anywhere and changes nothing of OpenClaw's,
 and none of OpenClaw's keys or passwords come over. On the free trial it can take the place of an
 agent nobody has used yet, and says so first."
@@ -3268,7 +3270,8 @@ write. The folder is read by `crates/archie-runtime/src/openclaw.rs`: `IDENTITY.
 `AGENTS.md` only when its box is ticked, into the personality; `USER.md` into what it knows about
 you; `MEMORY.md` and the dated notes into the Notes half of memory, newest first up to
 `memory::IMPORT_NOTES_BYTES`, and what does not fit into older memory (`gather_memory` and `pieces`),
-cut at sentence ends so each line fits recall's 320 bytes; each `skills/*/SKILL.md` through
+cut at sentence ends so each line fits recall's 320 bytes, as does every notes file with no date in
+its name, in `memory/` or a folder inside it (`notes_files`, `labeled`, Archie ebf068c3); each `skills/*/SKILL.md` through
 `skill_from_md`. **The skills OpenClaw shares with all its agents** are read from `skills/` in its
 state folder (`shared_skills_dir_for`), one box each, ticked by default, through the same
 `skill_from_md`, and the agent's own skill wins a name clash. **On the free trial**, the import may
@@ -3294,7 +3297,8 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
   own screen said "does not read" until 8d2085ef.
 - ⛔ **Never "everything comes over" or "your agent, exactly as it was."** A skill that needs a
   program stays behind, and so does a job that runs one or whose schedule a routine cannot say
-  exactly, and a notes file with no date in its name. A job at 9:00 and 17:00 comes over as one routine at both times
+  exactly, and OpenClaw's dream reports in `memory/dreaming/`, whose keepers are already in
+  MEMORY.md. A notes file over 2 MB, or one that is not plain text, is named with the reason. A job at 9:00 and 17:00 comes over as one routine at both times
   (Archie 2dbcd9b9); more than 12 times a day, or several times on a day of the month, stays behind. OpenClaw's chat apps,
   tools and plugins do not come over. The review screen lists each with the reason.
 - ⛔ **OpenClaw only, and one way.** No other assistant's folder is read, and nothing goes from

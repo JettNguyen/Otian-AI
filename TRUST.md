@@ -1045,7 +1045,10 @@ thing any more.
   Archie shows on your computer" cannot be completed by a customer. **Decided 2026-09-28 (Jett): the
   gate comes off for Android in the next release**, and the Android download stays on the install
   page meanwhile. Until that release ships, present tense for Android is true of the download and
-  not of the pairing, so no new page may tell a reader to pair a phone.
+  not of the pairing, so no new page may tell a reader to pair a phone. **Built the same day**
+  (Archie `c434a385`, on main): Set up a phone and the Archie Mobile row in the chat-app list are
+  open to everybody, and the row reads "our own app; on Android now, and on iPhone once Apple
+  approves it", with no Recommended tag until the iPhone app is approved.
 
 **The one thing to say in the same breath as an Android download.** A person installing from a file
 rather than a store has to pass two warnings, and a page that hands them the file owes them both, in

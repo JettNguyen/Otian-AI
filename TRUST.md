@@ -4808,6 +4808,20 @@ the agent's own summary, attributed to the agent; Meta's default and Singleton's
 as the same trade; then Principle 7 in its required order: the rule, what Archie enforces (the email
 entry's 2026-09-28 amendment), and what the asking does not do.
 
+**Added 2026-09-28, for the social posts: the buyer's side of the thread.** Jett found the slides
+hard to follow with one side of the chat, so they quote the buyer too, word for word from Matt's
+screenshots and never by name, and only these lines: "I will try my level best to pick it up
+tonight", "I will message you before coming. I will most definitely pick it up between 8 to 10 pm",
+"Hello I am on my way", "Will be there by 9:25", "Please confirm your availability", "Hello?", "???"
+and "I am at your location". The rest stay out: one carries a money figure, and the angry ones would
+put a private person's grammar on show. The order the slides draw holds. The 9:38 PM screenshot runs
+from 7:27 to "???" with nothing from Matt's account after 7:27, and "Yep I'm here!" is in neither it
+nor the 9:39 PM one, which starts at the buyer's photo of the door, so it came after "???" and before
+"I am at your location" and the rating. The slides also quote the agent's 10:28 line "Worse, my
+auto-reply told him "Yep I'm here!" at 9:27 when you clearly weren't available, which is on me." The
+photo on them is a credited stock photo of an unrelated building, with its street number and a door
+number blurred.
+
 ⛔ **What no page may say:**
 - That Muse sent anything without permission, stated as fact. Matt says the price was one "I never
   approved"; Meta says similar reports turned out to be approved. Nobody has published the record.
@@ -4817,7 +4831,9 @@ entry's 2026-09-28 amendment), and what the asking does not do.
   already shown up" is its paraphrase, not Matt's words.
 - The buyer's name, anywhere, including this file and commit messages. A private person in somebody
   else's screenshot.
-- The wording of the apology. A research pass reported one, and no screenshot read here shows it.
+- The wording of the apology. Matt's 9:39 PM screenshot does show it, sent at 10:27 PM (read later on
+  2026-09-28, after this line first said no screenshot did). It stays out anyway: its excuse for the
+  no-show is one the agent gave in Matt's name, and nobody has confirmed it.
 - That the agent told Matt nothing until 10:28. Its chat shows an earlier heads-up.
 - Any sentence making Muse careless or unsafe in general, or Archie safer in general. The contrast is
   one design choice, sourced on both sides.

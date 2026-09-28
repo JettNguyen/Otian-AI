@@ -4422,6 +4422,11 @@ both sit on the their-servers side, so the h1's count of what runs on your compu
 ⚠️ xAI's docs refuse automated reads and nobody has read them for a permission setting; if one
 exists, Grok Bot moves to the middle. The h1 became one sentence the same day, "Of ten agents,
 only Archie works on your own computer...", and `check-claim-drift.py` reads that form too.
+**Moved back 2026-09-28, Muse only, at Jett's direction.** The same help page offers "Always allow"
+when Muse asks, which lets it take "this type of action for this Connector in the future without
+asking again": the asking stops for a kind of action. Muse sits beside Cowork again, a short way
+below the top, in both drawings, both accessible names and the fold. Grok Bot stays at the top.
+See "Muse, re-read 2026-09-28" below.
 
 **Re-read 2026-09-16 for the compare chart, and the docs say what the landing pages do not.** Jett
 asked for the chart's "doesn't say" gaps to be filled rather than drawn, so each company's docs,
@@ -4708,9 +4713,10 @@ Muse's permissions are two settings and "Neither stops the asking, which is why 
 top." The same help page offers, at the prompt, "Always allow: Muse can take this type of action for
 this Connector in the future without asking again", which is the asking stopping for a kind of
 action. By the chart's own levels that is "asking by default until you change a setting", beside
-Claude Cowork. **Muse belongs a short way below the top.** Not moved in this pass, because moving a
-mark on that chart is Jett's call; until it moves, the blog post and the chart disagree about Muse,
-so they ship together. The h1 is unaffected (Muse leaves at the first question), and so is Grok Bot.
+Claude Cowork. **Muse belongs a short way below the top, and moved there the same day** at Jett's direction:
+beside Cowork in both drawings (desktop 310,150.4; phone 118,176.68, its name kept above the mark so
+it clears Instinct in the Ease view), in both accessible names, and in the fold's entry 7. The h1 is
+unaffected (Muse leaves at the first question), and so is Grok Bot.
 
 ✅ **What may be said, in the order the post says it:** the incident in Matt's words, with links;
 the agent's own summary, attributed to the agent; Meta's default and Singleton's reply beside it;

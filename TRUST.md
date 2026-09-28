@@ -1111,6 +1111,10 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
 > or take one off, finish an add-on's setup, turn a routine on and off or move the time it runs,
 > rename it, change its face, read what it has been doing, and talk to it.
 
+⚠️ **On main, a routine can run at several set times a day** (Archie b7c15696, archie-mobile 8f9ae08),
+and the phone moves any one of them. At that release the sentence above can say "move any of the
+times it runs"; until then it stays as written, which is true of 0.3.0.
+
 **Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
 `match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
 each of the four add-on kinds, build a skill, set the name, the face and an add-on's answers, turn a
@@ -2174,6 +2178,35 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
+### 🚧 One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b on main, archie-mobile 8f9ae08), not yet in a release
+
+Jett asked on 2026-09-28 why a routine could not run at 9:00 and 5:00, and decided it should, for
+everyone rather than only for jobs brought over from OpenClaw.
+
+**Approved wording, once it ships:** "A routine can run at several set times a day, up to 12, like
+9:00 in the morning and 5:00 in the afternoon. Each time it runs counts as a job, like any other."
+
+**Why it's true:** `DailyAt` and `DaysOfWeek` in `crates/archie-domain/src/routine.rs` keep the first
+time in `hour` and `minute` and the rest in `also_at`, which is left out of the file when empty, so
+every routine already on disk and every catalog file reads unchanged. At most `MAX_TIMES_A_DAY` (12),
+checked in `validate_times`. The scheduler (`gateway/routines.rs`) waits for the nearest time, and
+after the computer sleeps through several it runs only the latest, once. The Routines tab adds and
+removes times (`src/app/routines.tsx`, `schedule-parse.ts`); the phone shows every time and moves any
+one (archie-mobile `src/schedule.ts` and `screens/Manage.tsx`, `set_routine_time` in
+`src-tauri/src/phone.rs`). `runs_often` counts every time in a day.
+
+**Boundaries:**
+- ⛔ **Never "as often as you like."** Up to 12 set times a day. More often is an interval ("every 30
+  minutes"), which counts from when it starts, not from the clock.
+- ⛔ **Never "it catches up on every run it missed."** After the computer sleeps through several of a
+  day's times, it runs the latest one, once.
+- ⚠️ **Chat sets one time.** Until the chat's routine draft takes several, a routine with several times
+  is set on the Routines tab, and a chat revision of one would save a single time, which its card
+  shows.
+- ⚠️ **Waking for the second time of a day has not been watched on a real machine**, the same caution
+  the waking entry carries.
+- ⚠️ An older phone that does not say which time moves the first and keeps the rest.
+
 ### ✅ Reminders, and the one that stands down if the person writes back — SHIPPED (conditions 2026-09-17)
 
 Reminders themselves have been in Archie since well before this entry. It is written now because
@@ -3223,7 +3256,8 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
   own screen said "does not read" until 8d2085ef.
 - ⛔ **Never "everything comes over" or "your agent, exactly as it was."** A skill that needs a
   program stays behind, and so does a job that runs one or whose schedule a routine cannot say
-  exactly (9:00 and 17:00 is never rounded to 9:00), and notes past the limit. OpenClaw's chat apps,
+  exactly, and notes past the limit. A job at 9:00 and 17:00 comes over as one routine at both times
+  (Archie 2dbcd9b9); more than 12 times a day, or several times on a day of the month, stays behind. OpenClaw's chat apps,
   tools and plugins do not come over. The review screen lists each with the reason.
 - ⛔ **OpenClaw only, and one way.** No other assistant's folder is read, and nothing goes from
   Archie to OpenClaw. The backup entry's "never a portability claim" still holds.

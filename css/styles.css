@@ -18489,7 +18489,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 @media (max-width: 970px) {
   /* Three rows: the rail, the phone, the captions. The rail is a row of its own above the phone
      (Jett, 2026-09-18), centred, and the scene row takes what the other two leave. */
-  .mb-story.is-live .mb-stage { grid-template-columns: 1fr; grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 12px 0; align-items: stretch; min-height: 0; }
+  /* minmax(0, 1fr), not 1fr: a bare 1fr column is at least as wide as its widest child, and the
+     scene's 400px box made the column overrun a 390px phone, which carried the captions 34px past the
+     right edge (found September 28, 2026). */
+  .mb-story.is-live .mb-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(160px, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 4px) 12px 0; align-items: stretch; min-height: 0; }
   .mb-rail { grid-row: 1; justify-self: center; align-self: auto; margin: 0 0 8px; gap: 14px; padding-bottom: 6px; font-size: var(--fs-3xs); }
   .mb-story.is-live .mb-scene-wrap { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; }
   .mb-scene { width: 400px; }

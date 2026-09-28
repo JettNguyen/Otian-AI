@@ -31,7 +31,7 @@ export const ADDON_SPEC = {
       "name": "Google Tasks"
     },
     {
-      "grants": "Turn a video link or file into notes in the knowledge base.",
+      "grants": "Turn a video link or file into notes on the Knowledge tab.",
       "id": "video",
       "name": "Video"
     },
@@ -39,6 +39,16 @@ export const ADDON_SPEC = {
       "grants": "Look up live flight prices and schedules.",
       "id": "flights",
       "name": "Flights"
+    },
+    {
+      "grants": "Look up current prices and stock at Shopify stores.",
+      "id": "shopify_catalog",
+      "name": "Shopify stores"
+    },
+    {
+      "grants": "Find places near an address: name, street, distance, phone and opening hours.",
+      "id": "places",
+      "name": "Places"
     },
     {
       "grants": "Read and update contacts, pipelines and conversations in a GoHighLevel account.",
@@ -51,39 +61,9 @@ export const ADDON_SPEC = {
       "name": "Fireflies"
     },
     {
-      "grants": "Read and write the Notion pages and databases you share with it.",
-      "id": "notion",
-      "name": "Notion"
-    },
-    {
-      "grants": "Read issues, pull requests and repositories your token covers.",
-      "id": "github",
-      "name": "GitHub"
-    },
-    {
-      "grants": "Read and update issues and projects in your Linear workspace.",
-      "id": "linear",
-      "name": "Linear"
-    },
-    {
-      "grants": "Read and update the Airtable bases your token covers.",
-      "id": "airtable",
-      "name": "Airtable"
-    },
-    {
-      "grants": "See every device and sensor in the house, switch lights, plugs and scenes, and propose anything bigger.",
-      "id": "home_assistant",
-      "name": "Home Assistant"
-    },
-    {
-      "grants": "See Govee lights and plugs and control them.",
-      "id": "govee",
-      "name": "Govee"
-    },
-    {
-      "grants": "See LIFX lights and control them.",
-      "id": "lifx",
-      "name": "LIFX"
+      "grants": "Read the transcripts of a Zoom account's cloud recordings. Same tools Fireflies grants, reading the same store.",
+      "id": "zoom",
+      "name": "Zoom"
     },
     {
       "grants": "Switch the lights and plugs you added from your own wifi, directly, no cloud.",
@@ -355,7 +335,7 @@ export const ADDON_SPEC = {
             },
             {
               "control": "prompt",
-              "help": "The message the routine sends the agent each time it fires. Write it as a request.",
+              "help": "The message the routine sends the agent each time it runs. Write it as a request.",
               "key": "default_action.prompt",
               "label": "What it sends",
               "max": 4000,
@@ -374,7 +354,8 @@ export const ADDON_SPEC = {
               "max_items": 0,
               "options": [
                 "notify_telegram",
-                "silent"
+                "silent",
+                "into_brief"
               ],
               "placeholder": "",
               "required": false,
@@ -406,19 +387,19 @@ export const ADDON_SPEC = {
           "fields": [
             {
               "control": "textarea",
-              "help": "One sentence about what shows up in their chat. Skip it when the description already says; a routine speaks first, so nobody has to know what to type.",
+              "help": "One sentence on what to say or reply to get more from it, such as the words that run it now. It shows on the routine's card beside the schedule, so leave the time out. Skip it when there is nothing to say.",
               "key": "usage_hint",
-              "label": "What arrives, and when",
+              "label": "What to say to it",
               "max": 400,
               "max_items": 0,
               "options": [],
-              "placeholder": "e.g. One line per team, in your chat, every morning at 8:15.",
+              "placeholder": "e.g. Say “sweep my leads” to run it now.",
               "required": false,
               "scaffold": ""
             },
             {
               "control": "lines",
-              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be ticked. Usually empty.",
+              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be checked off. Usually empty.",
               "key": "setup_steps",
               "label": "Setup someone must do by hand",
               "max": 300,
@@ -513,7 +494,7 @@ export const ADDON_SPEC = {
               "options": [],
               "placeholder": "",
               "required": true,
-              "scaffold": "What this does, in one line and in your own words.\n\nTools:\n- Name each tool it should use, and when to reach for it. Only ones it really has: ticking a box\n  under Connected accounts is what grants the matching tools, and a name invented here is one it\n  cannot call.\n\nRules:\n1) When I say \"…\" → do this, in this order.\n2) When I say \"…\" → do this instead.\n3) If something it needs is missing → ask me for it. Never make it up.\n\nNever:\n- Never state something it didn't actually look up.\n- Never say a job finished before it has.\n\nHow it should sound: one line.\n"
+              "scaffold": "What this does, in one line and in your own words.\n\nTools:\n- Name each tool it should use, and when to reach for it. Only ones it really has: checking a box\n  under Connected accounts is what grants the matching tools, and a name invented here is one it\n  cannot call.\n\nRules:\n1) When I say \"…\" → do this, in this order.\n2) When I say \"…\" → do this instead.\n3) If something it needs is missing → ask me for it. Never make it up.\n\nNever:\n- Never state something it didn't actually look up.\n- Never say a job finished before it has.\n\nHow it should sound: one line.\n"
             },
             {
               "control": "select",
@@ -617,7 +598,7 @@ export const ADDON_SPEC = {
             },
             {
               "control": "lines",
-              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be ticked. Usually empty.",
+              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be checked off. Usually empty.",
               "key": "setup_steps",
               "label": "Setup someone must do by hand",
               "max": 300,
@@ -728,7 +709,7 @@ export const ADDON_SPEC = {
             },
             {
               "control": "toggle",
-              "help": "Lets it search the web for fresh information. It uses the AI account its owner already connected, at about a cent per search.",
+              "help": "Lets it search the web for fresh information. It uses the AI account its owner already connected, at about 2 to 4 cents a search.",
               "key": "web_search",
               "label": "Web access",
               "max": 0,
@@ -780,13 +761,13 @@ export const ADDON_SPEC = {
               "max": 400,
               "max_items": 0,
               "options": [],
-              "placeholder": "e.g. Each search costs about a cent, and it runs up to five per task.",
+              "placeholder": "e.g. Each search costs about 2 to 4 cents, and it runs up to five per task.",
               "required": false,
               "scaffold": ""
             },
             {
               "control": "lines",
-              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be ticked. Usually empty.",
+              "help": "Only work nothing else can do for them: connect an account, paste a key. Anything declared below is already a button on the panel, so repeating it here makes a chore that can never be checked off. Usually empty.",
               "key": "setup_steps",
               "label": "Setup someone must do by hand",
               "max": 300,

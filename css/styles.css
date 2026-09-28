@@ -16876,10 +16876,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --mac-switch-off: rgba(68, 64, 59, 0.18);
   --pill-plum: #8557AF; --pill-teal: #337670; --pill-ink: #FFFFFF;
   /* What the pane shows, the mockup's .desk: a neutral desktop with the brand's hues run softly
-     through it at 45%, so the pane carries a hint of color and still reads mostly as gray glass.
+     through it at 30%, so the pane carries a hint of color and still reads mostly as gray glass.
      Full strength was far more colorful than the app (Jett, September 28, 2026) and plain gray was
-     too little; this is the step between that he asked for. */
-  --mac-desk: radial-gradient(circle at 12% 18%, rgba(240, 165, 124, 0.45) 0, transparent 38%), radial-gradient(circle at 18% 62%, rgba(111, 179, 170, 0.45) 0, transparent 42%), radial-gradient(circle at 8% 92%, rgba(179, 143, 214, 0.45) 0, transparent 40%), radial-gradient(circle at 30% 40%, rgba(233, 194, 122, 0.45) 0, transparent 34%), #D3D4D5;
+     too little; 45% was still a bit much, and this is the step below it. */
+  --mac-desk: radial-gradient(circle at 12% 18%, rgba(240, 165, 124, 0.3) 0, transparent 38%), radial-gradient(circle at 18% 62%, rgba(111, 179, 170, 0.3) 0, transparent 42%), radial-gradient(circle at 8% 92%, rgba(179, 143, 214, 0.3) 0, transparent 40%), radial-gradient(circle at 30% 40%, rgba(233, 194, 122, 0.3) 0, transparent 34%), #D3D4D5;
   --shadow-app: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13);
   /* The answers under a message, as a bar inside its card: the mockup's --options-*, each a wash
      of the card with one hue in it, so they follow the theme with no second set. */
@@ -16914,7 +16914,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --shadow-pane: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
   --mac-switch-off: rgba(243, 240, 237, 0.2);
   --pill-plum: #C5A8DE; --pill-teal: #59C4BB; --pill-ink: #272629;
-  --mac-desk: radial-gradient(circle at 12% 18%, rgba(138, 69, 39, 0.45) 0, transparent 40%), radial-gradient(circle at 18% 62%, rgba(31, 90, 84, 0.45) 0, transparent 44%), radial-gradient(circle at 8% 92%, rgba(75, 53, 112, 0.45) 0, transparent 42%), radial-gradient(circle at 30% 40%, rgba(110, 84, 36, 0.45) 0, transparent 34%), #1B1B1C;
+  --mac-desk: radial-gradient(circle at 12% 18%, rgba(138, 69, 39, 0.3) 0, transparent 40%), radial-gradient(circle at 18% 62%, rgba(31, 90, 84, 0.3) 0, transparent 44%), radial-gradient(circle at 8% 92%, rgba(75, 53, 112, 0.3) 0, transparent 42%), radial-gradient(circle at 30% 40%, rgba(110, 84, 36, 0.3) 0, transparent 34%), #1B1B1C;
 }
 .da-app * { box-sizing: border-box; }
 .da-app p, .da-app h3 { margin: 0; }
@@ -16948,13 +16948,13 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-sections { flex: 1; min-height: 0; overflow: hidden; margin-top: 8px; }
 .da-nav { display: flex; flex-direction: column; gap: 2px; }
 /* A medium Mac sidebar row: 32 tall, 7 round, and the open one a pill of the accent with the
-   accent's own ink, which is how a focused Mac sidebar marks where you are. The rail keeps the
-   shared tint and the bar outside the tile (below), so the pill is scoped away from it. */
+   accent's own ink, which is how a focused Mac sidebar marks where you are. The rail wears the
+   same pill, as a 40 square with its bar beside it (below). */
 .da-row { display: flex; height: 32px; width: 100%; align-items: center; gap: 10px; border-radius: 7px; padding-right: 10px; font-size: var(--fs-sm); color: var(--text-primary); }
 .da-row.on { background: var(--accent-subtle); font-weight: 600; color: var(--accent-strong); }
-.da-app:not([data-rail="shut"]) .da-row.on { background: var(--accent); color: var(--text-on-accent); }
-.da-app:not([data-rail="shut"]) .da-row.on[data-kind="personality"] { background: var(--pill-plum); color: var(--pill-ink); }
-.da-app:not([data-rail="shut"]) .da-row.on[data-kind="routines"] { background: var(--pill-teal); color: var(--pill-ink); }
+.da-app .da-row.on { background: var(--accent); color: var(--text-on-accent); }
+.da-app .da-row.on[data-kind="personality"] { background: var(--pill-plum); color: var(--pill-ink); }
+.da-app .da-row.on[data-kind="routines"] { background: var(--pill-teal); color: var(--pill-ink); }
 .da-row .da-label { transform: translateY(1px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 /* No tile behind a mark on the Mac, open or shut: the mark keeps its kind's ink and the pane's
    glass runs behind it, as in the mockup's Apple block. */
@@ -16987,9 +16987,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
    Two things go away instead of getting smaller. The agent card becomes the face on its own, and
    wears the accent all the time, which nothing else on the rail does, because it is the one tile
-   here that is a who rather than a where. And the open row's fill becomes a bar outside the tile:
-   three of these tiles are colored all the time, since that is how a Routine is told from a Skill
-   where there are no words, so a fourth fill could not also mean open. */
+   here that is a who rather than a where. And the open tile keeps the panel's pill, as a 40 square
+   with a bar outside it just as tall. Off a Mac the tiles are tinted and the bar alone says open;
+   a Mac draws no tint, so the pill can say it too, in its own ink. The app drew that tile 32 tall
+   under a 40 bar, with a plum drawing on the plum, until Archie's 7182e7a2 (September 28, 2026). */
 .da-app[data-rail="shut"] .da-side { width: 80px; padding-left: 8px; padding-right: 8px; }
 .da-app[data-rail="shut"] .da-brand { align-items: center; padding: 8px 0; }
 .da-app[data-rail="shut"] .da-brand-btn { margin-left: 0; }
@@ -17022,7 +17023,6 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    column and not the size of the picture in it. */
 .da-app[data-rail="shut"] .da-glyph { width: 40px; height: 40px; border-radius: var(--radius); }
 .da-app[data-rail="shut"] .da-glyph svg { width: 22px; height: 22px; }
-.da-app[data-rail="shut"] .da-row.on { background: none; }
 .da-app[data-rail="shut"] .da-row.on::before { content: ""; position: absolute; left: -6px; top: 0; width: 3px; height: 40px; border-radius: 999px; background: var(--accent); }
 /* The waiting-message count moves to the corner the status dot already taught, because the row it
    used to sit at the end of is a 40px tile now. */

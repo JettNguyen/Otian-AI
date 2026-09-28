@@ -292,7 +292,7 @@ QUESTIONS = [
      "$30 a month, or $299 a year. Archie for Business is $99 a month or $999 a year. The AI "
      "itself is billed by your AI provider, to you, at their price: we add nothing to it. "
      "There is a plan with the AI included at $59 a month or $599 a year, which carries $25 of "
-     "usage a month; email and text reading need your own AI key. Paid signup is closed during testing. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan."),
+     "usage a month; email and text reading need your own AI key. Plans are on sale now, while Archie is in testing. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan."),
     ("Do I need to know how to code?",
      "No. Add-ons are written in plain words, not code, and you install one by picking it. "
      "Setting up an agent is answering a few questions about what it is for."),

@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260928-1" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260928-2" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -161,7 +161,7 @@
         <span class="section-label fade-up">Legal</span>
         <h1 class="fade-up delay-1">Privacy Policy</h1>
         <div class="article-byline fade-up delay-2">
-          <span>Last updated: September 24, 2026</span>
+          <span>Last updated: September 28, 2026</span>
         </div>
       </div>
     </section>
@@ -187,7 +187,7 @@
             <li><strong>Your email address</strong>, so you can sign in. It is held in our account system (Google Firebase).</li>
             <li><strong>Whether you have a current plan</strong>, so the app can let you in. Payments are processed by Stripe; we never receive or store your card details.</li>
             <li><strong>Which version of the Terms you agreed to, and when.</strong> Signing in to the app means agreeing to the Terms of Service and this policy, and the sentence saying so sits under the sign-in buttons. The app tells our server the date of the Terms it showed you, and the server writes that date and the moment you signed in beside your account, once per version. Nothing else about the sign-in is kept.</li>
-            <li><strong>Which version of Archie you are running, and a crash report if it breaks.</strong> Once every six hours the app records your account ID, its version number, whether you are on Mac or Windows, which edition it is, and the time. It overwrites the same record each time, and it exists so we know which versions are still in use before we ever stop supporting one. If Archie quits unexpectedly, the next time you open it a crash report goes with it: where in our code it happened and a shortened trace, scrubbed of anything secret-shaped. The crash message itself stays on your disk and is never uploaded. Neither one carries anything you wrote, received, or asked for, and there is no analytics service in Archie: nothing records what you do in it. Two counters do exist, and neither is analytics: the app keeps a log on your own computer of what each AI call cost, so its Account screen can show you your estimated spending, and while you are on the free starter credits our billing server counts what each call spent, because that is how the credits are subtracted. <strong>You can turn the version line and crash reports off</strong>, in the app under Settings, on a page that lists in full what is in each. Off means nothing further is sent and anything waiting to be sent is deleted.</li>
+            <li><strong>Which version of Archie you are running, and a crash or error report if something breaks.</strong> Once every six hours the app records your account ID, its version number, whether you are on Mac or Windows, which edition it is, and the time. It overwrites the same record each time, and it exists so we know which versions are still in use before we ever stop supporting one. If Archie quits unexpectedly, the next time you open it a crash report goes with it: where in our code it happened and a shortened trace, scrubbed of anything secret-shaped. The crash message itself stays on your disk and is never uploaded. If something keeps failing, an error report goes too: where in our code it broke, the error line, and, for an add-on, its name and the tool that failed. None of these carries anything you wrote, received, or asked for, and there is no analytics service in Archie: nothing records what you do in it. Two counters do exist, and neither is analytics: the app keeps a log on your own computer of what each AI call cost, so its Account screen can show you your estimated spending, and while you are on the free starter credits our billing server counts what each call spent, because that is how the credits are subtracted. <strong>You can turn the version line, crash reports and error reports off</strong>, in the app under Settings, on a page that lists in full what is in each. Off means nothing further is sent and anything waiting to be sent is deleted.</li>
             <li><strong>What the free starter credits spent, while you are using them.</strong> A new install comes with a small amount of AI usage we pay for, described under <a href="#your-ai-provider">Your AI provider</a> below. So that it can be stopped at the amount you were given, we keep a ledger for your account: how many tokens each call used, what it cost, and when. Beside it we keep a scrambled, one-way stamp of the computer and the internet address the credits were claimed from, so that the same computer cannot claim them repeatedly. A stamp cannot be turned back into a computer or an address; it can only be compared with another stamp. None of this holds any part of a request or a reply.</li>
             <li><strong>The messages between your computer and your phone, if you turn on phone access.</strong> They sit in our database sealed with a key your computer generates and hands to your phone by QR scan. The key never reaches us, so we hold the messages and cannot read them. Three things about each message are not sealed and are therefore visible to us: the time it was left, the app version that left it, and whether it has been picked up yet. Phone access is off unless you switch it on, per computer. The sealing runs in a browser too, so you can <a href="../trust/proof/#seal">watch a message of yours being sealed, and watch it refuse to open without the key</a>.</li>
           </ul>
@@ -196,7 +196,7 @@
 
           <h3>What stays on your computer</h3>
           <p>Your agent's instructions, the files and notes you give it, everything it remembers, and your entire conversation history are stored on your own device, in Archie's application folder. <strong>We do not receive, store, or have any means of accessing them.</strong> Two exceptions, both described in full elsewhere in this policy: while you are using the free credits Archie starts you with, or the plan with the AI included, your conversations pass through our server on the way to the AI (see <a href="#your-ai-provider">Your AI provider</a> below), and if you turn on phone access, a sealed copy that only your own key can open sits in our database (see the list above). One thing to know about deleting: dragging the app to the Trash does not remove that folder or your keys, because your computer keeps app data separate from apps. To erase everything, use the factory reset inside Archie, under Account, before you delete the app (on Windows, the uninstaller offers a box that does the same).</p>
-          <p>The app contains <strong>no analytics or tracking software of any kind</strong>: not disabled by default, but absent. Nothing in Archie records what you open, what you run, or how often you use it, and there is no third-party analytics service in it to do so. The two things it does send, the version line and the crash report, are described above and can be switched off.</p>
+          <p>The app contains <strong>no analytics or tracking software of any kind</strong>: not disabled by default, but absent. Nothing in Archie records what you open, what you run, or how often you use it, and there is no third-party analytics service in it to do so. The three things it does send, the version line, crash reports and error reports, are described above and can be switched off.</p>
 
           <h3 id="your-ai-provider">Your AI provider</h3>
           <p>To think, your agent must send your request to an AI model. You choose the provider: Anthropic (Claude), OpenAI (ChatGPT), Google (Gemini), Groq, xAI (Grok), DeepSeek, Mistral, or any other provider of your own that speaks the OpenAI format. Archie connects <strong>directly from your computer</strong> to the one you chose, using your own account and your own API key. On your own account that traffic does not pass through us, is not relayed or proxied by us, and we keep no copy of it, and it is governed by your agreement with that provider rather than with us. The two exceptions, where the AI is ours rather than yours, are the next two paragraphs. On your own account, and providers differ in ways that matter: where they run, how long they keep API traffic, and whether they train on it are their policies, not ours, so read the terms of the one you pick. If your agent searches the web, that search runs on the provider's infrastructure and is billed to your account.</p>
@@ -440,7 +440,7 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260928-1"></script>
-  <script type="module" src="../js/account-nav.js?v=20260928-1"></script>
+  <script src="../js/nav.js?v=20260928-2"></script>
+  <script type="module" src="../js/account-nav.js?v=20260928-2"></script>
 </body>
 </html>

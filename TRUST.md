@@ -4879,9 +4879,9 @@ from 7:27 to "???" with nothing from Matt's account after 7:27, and "Yep I'm her
 nor the 9:39 PM one, which starts at the buyer's photo of the door, so it came after "???" and before
 "I am at your location" and the rating. The slides also quote the agent's 10:28 line "Worse, my
 auto-reply told him "Yep I'm here!" at 9:27 when you clearly weren't available, which is on me." The
-photo on them is a credited stock photo of a small keyboard like the one for sale, with its maker's
-name covered; an earlier pick, a building at night, was dropped the same day as ominous and not
-specific to the story.
+photo on them is a credited stock photo of a phone on a table whose blank screen carries that
+exchange, retyped word for word; two earlier picks (a building at night, then a keyboard) were dropped
+the same day as ominous or meaningless.
 
 ⛔ **What no page may say:**
 - That Muse sent anything without permission, stated as fact. Matt says the price was one "I never

@@ -3225,8 +3225,12 @@ exists to stop.
 2026-09-28).** A text reply also carries up to 8 of the owner's own earlier texts, so the draft
 sounds like them: out of 60 read from that conversation (`VOICE_LOOKBACK`), or, when it has fewer
 than 4, from the owner's other watched conversations (`general_voice`, filtered by `worth_sampling`).
-Those go to the owner's AI account too. The Privacy Policy's sentence has the same gap. Jett decides
-whether to fix it now or with the release below.
+Those go to the owner's AI account too. **Fixed in the Privacy Policy on 2026-09-28** (Jett: now, since
+0.3.0 already sends them), in this wording, which is approved for the current release: "It also sends
+up to eight of your own earlier texts, so the reply sounds like you. It picks them from the last sixty
+messages of that conversation, or from your other watched conversations when that one has too few."
+The other conversations pass the same filters as the watch (group chats, the ignore list and the
+allow list, since 2084b469).
 
 🚧 **A switch to turn all of it off: BUILT 2026-09-28 (Archie 74eb99bb on main), not yet in a
 release.** Nothing below ships on a page until the release that carries it. `read_earlier_messages`

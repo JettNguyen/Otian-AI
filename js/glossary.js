@@ -4,7 +4,7 @@
 
    The page's behaviour: the accordion, the search box, the jump links and opening an entry
    straight from a #hash. The rendering it shares with scripts/gen-glossary.mjs, which writes
-   the same markup into the page so a reader who never runs a script still gets all 120 terms.
+   the same markup into the page so a reader who never runs a script still gets every term.
    See js/glossary-card.js for why that split exists.
    ======================================== */
 
@@ -15,7 +15,7 @@ import {
   makeStartHere,
   makeBigPicture,
   makeJumpNav
-} from './glossary-card.js?v=20260927-2';
+} from './glossary-card.js?v=20260928-1';
 
 (function () {
   'use strict';
@@ -123,11 +123,15 @@ import {
     jumpWrap.innerHTML = makeJumpNav(entries);
     entriesWrap.innerHTML = makeEntries(entries);
 
+    bindPage();
+    countEl.textContent = String(entries.length);
+  }
+
+  function bindPage() {
     bindAccordion();
     bindSearch();
     bindJumpLinks();
     openFromHashIfPresent();
-    countEl.textContent = String(entries.length);
   }
 
   function loadGlossary() {
@@ -150,6 +154,12 @@ import {
   loadGlossary().catch(function () {
     /* One retry covers a flaky first load (e.g. a stale cached response); only show the error after that fails too. */
     loadGlossary().catch(function () {
+      /* The generator already wrote every entry into the page, so a failed fetch only means the
+         live redraw is skipped. Wire up what is there; the error is for a page with nothing in it. */
+      if (entriesWrap.querySelector('.glossary-entry')) {
+        bindPage();
+        return;
+      }
       entriesWrap.innerHTML = '<p>Unable to load glossary entries right now. Please refresh the page.</p>';
     });
   });

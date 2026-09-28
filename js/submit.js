@@ -42,8 +42,8 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-import { ADDON_SPEC } from "./addon-fields.js?v=20260927-2";
-import { decideAccess } from "./access.js?v=20260927-2";
+import { ADDON_SPEC } from "./addon-fields.js?v=20260928-1";
+import { decideAccess } from "./access.js?v=20260928-1";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -575,7 +575,7 @@ function buildForm() {
         el("span", {
           style: "line-height:1.55;",
           text:
-            "I built this (or have the rights to it) and grant Otian AI a licence to review, adapt, and publish it on the Archie marketplace. Listing and pricing are settled together during review.",
+            "I built this (or have the rights to it) and grant Otian AI a license to review, adapt, and publish it on the Archie marketplace. Listing is settled together during review.",
         }),
       ),
     ),

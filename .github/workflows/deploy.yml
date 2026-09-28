@@ -77,6 +77,7 @@ jobs:
           node scripts/gen-catalog-index.mjs --check
           node scripts/gen-marketplace.mjs --check
           node scripts/gen-blog.mjs --check
+          node scripts/gen-glossary.mjs --check
           python3 scripts/gen-discovery.py --check
           python3 scripts/gen-phone-mocks.py --check
           python3 scripts/gen-csp.py --check

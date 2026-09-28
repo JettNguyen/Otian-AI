@@ -432,7 +432,7 @@ async function mountSeal(root) {
         {
           status: "pending",
           updated_at: new Date().toISOString(),
-          app_version: "0.2.1",
+          app_version: "0.3.0",
           payload: { v: 1, n: envelope.n.slice(0, 6) + "…", c: envelope.c.slice(0, 10) + "…" },
         },
         null,

@@ -3036,6 +3036,16 @@ and neither can schedule. So "your agent cannot send email on its own" stays tru
 send is still a person's instruction. What is **not** true is that a person presses a button at
 the moment mail leaves.
 
+**Added 2026-09-28: one Send sends one reply.** Approved form: "Each Send sends the one reply on
+its card." Why it's true: the button carries its card's action id (`parse_callback` in
+`handle_action`, `email/replies/actions.rs`), the `"send"` arm resolves that one pending action and
+refuses anything not `Pending` or `Scheduled`, and `send_reply` sends that action's draft. On the
+texts lane, `send_now` (`texts/replies/actions.rs`) sends that action's `draft_body` to that
+action's `chat_rowid` and nothing else. There is no send-all and no grant that carries over to the
+next draft: a grep for `send_all`, `approve_all` and `bulk_send` finds none. This is the Archie half
+of the contrast in "Muse, re-read 2026-09-28", where Muse's prompt can grant "the entire task" or
+"the future". ⛔ Never widen it past replies: buying is a separate switch with its own limits.
+
 **Text replies are unaffected and stay absolute.** There is no `send_at` on the texts path
 (`crates/archie-runtime/src/texts/` has no scheduled send; its "scheduled pass" is a *reading*
 pass). **Do not weaken the text-reply wording while fixing the email wording:** a sentence that
@@ -4363,6 +4373,11 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Instinct's privacy policy: the service is provided with "third-party hosting"; its features "can perform tasks or take actions independently on your behalf, based on the permissions you grant"; it uses "third-party AI model providers who help support the Services" | Instinct | `https://instinct.com/privacy` | 2026-09-16 |
 | Norton's FAQ: "Every send, payment and booking waits for your approval", and "The AI providers we use operate under enterprise contracts with zero data retention" | Norton | `https://us.norton.com/products/family-assistant` | 2026-09-16 |
 | Cowork's mode selector "offers Auto and Manual (default)"; Manual, "formerly 'Ask before acting'", means "Claude pauses and asks for approval for actions" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-09-16 |
+| Muse&rsquo;s approval prompt offers five choices, in Meta&rsquo;s words: &ldquo;Allow once: Muse proceeds this one time&rdquo;, &ldquo;Allow for this task: Muse can take this type of action for the entire task&rdquo;, &ldquo;Allow for this site: Muse can take this type of action for this website in the future without asking again&rdquo;, &ldquo;Always allow: Muse can take this type of action for this Connector in the future without asking again&rdquo;, and &ldquo;Deny: Muse won&rsquo;t proceed this one time&rdquo;. The same page: &ldquo;Because Muse acts on your behalf, you&rsquo;re responsible for guiding it carefully and approving its actions.&rdquo; **This row contradicts the 2026-09-27 placement of Muse on the compare chart:** see &ldquo;Muse, re-read 2026-09-28&rdquo; below | Meta | `https://www.meta.com/help/artificial-intelligence/1385290430137537/` | 2026-09-28 |
+| Vellum&rsquo;s trust rules: &ldquo;Trust rules are persistent decisions that tell the system to always allow or always deny specific actions. They accumulate over time as you use your assistant&rdquo;, and &ldquo;the more you approve, the fewer prompts you see.&rdquo; | Vellum | `https://www.vellum.ai/docs/trust-security/the-permissions-model` | 2026-09-28 |
+| Matt Robb on Threads, posted 9:27 PM Pacific on 2026-09-26 (12:27 AM on the 27th in Toronto): &ldquo;So muse handled my Facebook marketplace today. Just found out it told people my address and agreed a lowball price and then they showed up without it even telling me until late tonight that it messed up. Absolutely wild.&rdquo; A follow-up on Threads: &ldquo;Update on letting muse run my Facebook Marketplace for a day. It gave out my home address. It agreed to a lowball price I never approved. And it didn&rsquo;t tell me any of this until after the guy had left&rdquo;. On X: the buyer &ldquo;did exactly what &lsquo;I&rsquo; told him to do.&rdquo; **A user&rsquo;s account, not Meta&rsquo;s: print it as what Matt posted, with the link, never as a finding about Muse** | Meta, as reported by a Muse user | `https://www.threads.com/@matt.j.robb/post/DdxwAJnDhNy`, `https://www.threads.com/@matt.j.robb/post/Dd0CYKJFHS0`, `https://x.com/MattRobbt/status/2104396139587879234` | 2026-09-28 |
+| Matt&rsquo;s screenshots with those posts. The Marketplace thread, from Matt&rsquo;s account: at 5:27 PM the pickup &ldquo;would have to be&rdquo; at an address Matt scribbled out; at 7:27 PM, &ldquo;Sounds good, e-transfer works. Just message me before you head over tonight!&rdquo; The agent&rsquo;s own summary at 10:28 PM: the buyer came &ldquo;around 9:15&rdquo;, its &ldquo;auto-reply told him &lsquo;Yep I&rsquo;m here!&rsquo; at 9:27 when you clearly weren&rsquo;t available&rdquo;, the buyer left &ldquo;at 9:38 and left a negative rating&rdquo;, and it had &ldquo;sent him an apology from your account&rdquo;. Its answer to Matt&rsquo;s &ldquo;don&rsquo;t agree for pickup unless you check with me&rdquo; begins &ldquo;locked in now as a hard rule&rdquo;, and the rest is under the app&rsquo;s own controls in the screenshot. An earlier heads-up about the buyer sits above 10:28, time not shown | Meta, as reported by a Muse user | the two Threads posts above | 2026-09-28 |
+| David Singleton, of the Muse team, on X at 02:52 UTC on 2026-09-28: &ldquo;David from the Muse team here. I responded to Matt on Threads and sent him a couple of DMs offering to help and look into what happened.&rdquo; and &ldquo;In the past, when we&rsquo;ve worked with users to investigate similar reports, we&rsquo;ve consistently learned that Muse was following direct instructions and correctly asked for permission.&rdquo; x.com refuses fetches, so the first sentence and the start of the second were read through X&rsquo;s embed feed (`cdn.syndication.twimg.com/tweet-result`), and the second in full at TNW. **Print it beside any use of the Marketplace posts** | Meta | `https://x.com/dps/status/2104403954235007302`, `https://thenextweb.com/news/meta-muse-facebook-marketplace-address-buyer-robb` | 2026-09-28 |
 
 **Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was
 mislabelled, and for the two marks that came onto the chart.**
@@ -4674,6 +4689,53 @@ may be printed until somebody reads it on Meta's own page**, and neither figure 
   not mention it. Absence from a pricing page is not absence from the product.
 - Re-read every source before any launch or press push, and update the dates. A stale
   comparison is a false claim about somebody else's company.
+
+### Muse, re-read 2026-09-28: the approval choices, and the Marketplace posts
+
+**Why this block exists.** Matt Robb's posts about letting Muse run Facebook Marketplace for a day
+spread on 2026-09-27 and 28 (an Instagram aggregator, then TNW, Moneywise, Business Insider,
+Mashable and others), and Jett asked for a blog post and social posts from them. The post is
+`blog/your-ai-agents-messages-go-out-under-your-name/`, and its sources are the five rows dated
+2026-09-28 in the table above. What follows is what may be said, what may not, and a finding that
+moves the compare chart.
+
+⚠️ **The 2026-09-27 move put Muse higher than its own help page does.** The compare page's fold says
+Muse's permissions are two settings and "Neither stops the asking, which is why Muse sits at the
+top." The same help page offers, at the prompt, "Always allow: Muse can take this type of action for
+this Connector in the future without asking again", which is the asking stopping for a kind of
+action. By the chart's own levels that is "asking by default until you change a setting", beside
+Claude Cowork. **Muse belongs a short way below the top.** Not moved in this pass, because moving a
+mark on that chart is Jett's call; until it moves, the blog post and the chart disagree about Muse,
+so they ship together. The h1 is unaffected (Muse leaves at the first question), and so is Grok Bot.
+
+✅ **What may be said, in the order the post says it:** the incident in Matt's words, with links;
+the agent's own summary, attributed to the agent; Meta's default and Singleton's reply beside it;
+"Neither side has shown what Matt approved"; Meta's approval choices, quoted; Vellum's trust rules
+as the same trade; then Principle 7 in its required order: the rule, what Archie enforces (the email
+entry's 2026-09-28 amendment), and what the asking does not do.
+
+⛔ **What no page may say:**
+- That Muse sent anything without permission, stated as fact. Matt says the price was one "I never
+  approved"; Meta says similar reports turned out to be approved. Nobody has published the record.
+- How it happened. Moneywise reports the agent saying the pickup location "was in the auto-reply
+  template you approved when we set up the marketplace replies"; no screenshot of that was found, so
+  it is secondhand and does not ship. Mashable's "did not ask him about the sale until the buyer had
+  already shown up" is its paraphrase, not Matt's words.
+- The buyer's name, anywhere, including this file and commit messages. A private person in somebody
+  else's screenshot.
+- The wording of the apology. A research pass reported one, and no screenshot read here shows it.
+- That the agent told Matt nothing until 10:28. Its chat shows an earlier heads-up.
+- Any sentence making Muse careless or unsafe in general, or Archie safer in general. The contrast is
+  one design choice, sourced on both sides.
+- Money figures from the screenshots (the listing and the offer). None is in FACTS.md, none is needed.
+- A Meta or Muse mark, per the logos note. The aggregator's images are theirs and are not reposted.
+
+⚠️ **Re-read for this post, and two older rows that did not re-read.** The Cowork row citing
+`support.claude.com/.../13364135` for connector tools being "Always allow, Needs approval or Blocked"
+no longer matches that page, which now carries the modes ("Skip all approvals", in which "nothing
+checks its actions") and not the connector wording; Cowork's middle placement stands on the modes.
+The Vellum row's grants "once, for ten minutes, or always" were not found on the permissions page
+either, though its trust rules (row above) make the same point. No served page prints either clause.
 
 ### The assistants board: five companies read for the first time, 2026-09-16
 

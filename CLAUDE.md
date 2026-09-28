@@ -468,7 +468,11 @@ sizes are on the page at rest, and the pick only lights one.
   `js/home.js` walks between marks on the objects. The window (`.da-*`) and the phone (`.dp-*`) in css/styles.css section 49 are
   class-for-class ports of `archie-app-mockup.html` and `archie-screen-kit.html`, two
   hand-editable mockups Jett keeps in his Downloads folder, which copy the Archie repo's
-  tokens value for value. **They are not in any repo.** If the app's surface changes, change
+  tokens value for value. **They are not in any repo.** Since 2026-09-28 the mockups draw the
+  app two ways, the Mac and iPhone look and the Windows and Android one (the phone's second look is
+  its own file, `archie-screen-kit-android.html`), and **the ports draw the Apple pair**: the window
+  as a Mac draws it, with its sidebar a pane of plain gray glass, and the phone as an iPhone does,
+  because that pair's light palette is this site's own. If the app's surface changes, change
   the mockup, then change the port; do not redraw either object from a screenshot. The phone
   shows the conversation as a chat app shows it and draws none of the phone app's own tabs,
   because Archie Mobile is in build and TRUST.md forbids showing it as shipped. Every caption

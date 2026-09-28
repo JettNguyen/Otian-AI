@@ -3058,6 +3058,35 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   composing fresh email from scratch until that ships.
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
+### 🚧 Inbox drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad on main), not yet in a release
+
+**Approved wording, once it is in a release:** "Turn on Write like me and give it some of your own
+writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat
+or to mail that just arrived, it writes it the way you write. You still read every draft before it
+goes."
+
+**Why it's true:** the inbox drafter's prompt (`email/replies/triage.rs`, `triage_system`) carries
+the owner's style note when Write like me is on and a note has been read, resolved by
+`owner_writing_style` (`email/replies/helpers.rs`) through the same gate a chat turn uses
+(`owner_style_note` in `gateway/prompt.rs`, which requires the skill to declare `writes_as_owner`),
+so Email Manager's row under "Which skills write like me" decides it. The chat half shipped in 0.1.3
+(2026-08-19). Reading the Sent folder needs its own dated consent (`WritingStyleConfig::sent_consent_at`)
+and is refused on the starter credits. What reaches a prompt is a note of at most 1,200 characters
+plus at most five passages of 400, never the samples themselves (`writing_style::limits`). Tests in
+`email/replies/tests.rs`.
+
+**Boundaries:**
+- ⛔ **Never "every draft sounds like you."** Only with Write like me on, a note read, and Email
+  Manager not set to Not like me. Warmer, briefer and more formal under Other versions do not use it,
+  and how formal a reply is still follows the email being answered.
+- ⛔ **Never say text-message replies use it.** Text Replies learns from the owner's own texts.
+- ⛔ **On Archie for Business, never say a teammate's drafts are in their style.** A teammate's
+  mailbox gets nobody's style, because the note belongs to the agent's owner.
+- ⚠️ **What leaves the computer:** the note and its passages, which are verbatim lines of the owner's
+  own writing, go to the owner's AI company with every email the agent reads in auto-draft mode, and
+  all the samples go once when the Sent folder is read. Never say the passages stay on the computer.
+- ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
+
 ### ✅ Text Replies: it reads your texts on your Mac, and only you can send one — SHIPPED 2026-08-21
 
 The one feature that reads messages **other people** wrote, so every sentence about it is held

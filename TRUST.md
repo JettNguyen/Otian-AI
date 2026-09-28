@@ -753,6 +753,68 @@ Never a per-task figure a company does not publish: Symphony, Manus, Genspark, G
 Perplexity's Computer publish none that survive their own caveats, so their rows say "not
 published" or do not exist.
 
+### ✅ What "own" means in "Don't rent your agent. Own it." (entry written 2026-09-28)
+
+**Written because the tagline had no entry.** "Own it" is on the homepage h1 and every footer, and
+until today nothing in this file said what it covers. The retired claim at the top ("you own
+Archie") shows what happens when the word runs loose: it was read as owning a software license,
+and that stopped being true in July. This entry scopes the word to what is true now.
+
+**Approved wording:** "Your agent is yours. What it is made of, what it remembers and what you
+built for it live on your own computer, and you can save all of it to one file and restore it
+there. If you stop paying, nothing on your computer is deleted, and a personal agent keeps working
+at 20 jobs a day on an AI account of your own. If we close, the Terms oblige us to publish a final
+version of Archie that needs no license check."
+
+**Why it's true:** four entries already in this file, each with its own code pointer. The agent's
+files live on the computer and no server of ours holds them ("No Otian custodian" above). The file
+is "Your whole agent in one file, and no key is in it" (`transfer.rs`). What happens after a plan
+is "What happens when a plan ends" (the free tier, `own_ai_key`). The final version is the Terms'
+own sentence (`terms-of-service/index.html`, "If Otian AI ceases operations"), and the 60-day
+license note that makes it matter is "The subscription gate is fail-open".
+
+**Boundaries:**
+- ⛔ **Never "you own Archie" or "Archie is yours".** The app is sold as a plan. The word covers
+  **your agent and what you built**, never the software license.
+- ⛔ **"Own" never covers the thinking.** Every agent thinks through an AI company's account, so
+  wherever "own it" sits near "on your computer", the arrow to the AI company stays in the same
+  sentence or the same figure, as the custody entry requires.
+- ⛔ **Never a portability claim.** The file restores into Archie and nothing else reads it
+  ("Your whole agent in one file" says why). "Yours to keep" means you can leave us; it never
+  means you can take the agent to another assistant.
+- ⛔ **Never "it runs forever without us".** It runs on its last license note for up to 60 days,
+  and after that the Terms' final version is what has to hold.
+- ⚠️ **Archie for Business has no free tier**, so after a business plan ends the app asks for a
+  plan. Nothing is deleted there either. A page selling "own it" to a team says the first half.
+- ⚠️ **The shutdown term is with a lawyer** (Jett's direction of 2026-09-28: keep it firm, add a
+  court-or-law exception, and build the no-license switch now). If its wording changes, the last
+  sentence of the approved wording changes with it, the same day.
+
+### ✅ Venice works through "Another provider" (entry written 2026-09-28; the guide shipped in 0.3.0)
+
+**Approved wording:** "The dashed tile is for any AI service that works like OpenAI's, such as
+Venice." Or, where there is room: "Venice isn't one of the seven in the list, and it still works:
+pick Another provider and paste its address, a model name and a key, copied from Venice's own
+docs."
+
+**Why it's true:** the Archie repo's `data/marketplace/resources/connect-custom.json` is the guide
+for the "Another provider" row, and since `4608e429` (2026-09-18, in 0.3.0) it carries Venice as
+its worked example: the address `https://api.venice.ai/api/v1`, the key made in Venice's API
+settings, and the model name copied from their list. The row itself is `LlmProvider::Custom`, an
+OpenAI-format endpoint the owner names. `docs/OPEN-THREADS.md` ("An eighth AI provider is reachable
+without being one") records the decision that Venice stays there rather than becoming a named
+provider.
+
+**Boundaries:**
+- ⛔ **Venice is not one of the providers, and no page counts it as one.** The count stays seven
+  (FACTS.md), and it has no row of its own in the picker and no spend estimate on `archie/pricing/`.
+- ⛔ **No claim about what Venice does with what it receives.** No privacy, retention or compliance
+  sentence about Venice ships on our pages, the same rule the Venice partnership notes set. What
+  Venice promises is Venice's to say, and a reader is pointed to Venice's own pages for it.
+- ⛔ **No Venice logo on the roster.** Venice's brand kit permits one (the Archie repo's
+  `docs/BRAND-MARKS.md`), and it still stays off: every company on the site is named in type, and
+  one mark among name tiles reads as a sponsor.
+
 ### ✅ Your API key stays in the Keychain
 
 **Approved wording:** "Your provider key is stored in your Mac's Keychain. It is sent to

@@ -812,8 +812,9 @@ provider.
   sentence about Venice ships on our pages, the same rule the Venice partnership notes set. What
   Venice promises is Venice's to say, and a reader is pointed to Venice's own pages for it.
 - ⛔ **No Venice logo on the roster.** Venice's brand kit permits one (the Archie repo's
-  `docs/BRAND-MARKS.md`), and it still stays off: every company on the site is named in type, and
-  one mark among name tiles reads as a sponsor.
+  `docs/BRAND-MARKS.md`), and it still stays off: every company on the site is named in type (the
+  one exception is a sign-in button that opens that company's own sign-in), and one mark among name
+  tiles reads as a sponsor.
 
 ### ✅ Your API key stays in the Keychain
 
@@ -4588,6 +4589,19 @@ that quietly goes wrong when the fifty-first connector lands. `git show 18318e82
 the sprite and `git show 18318e82^:css/styles.css` the sourcing notes, if a grant ever makes one
 worth restoring; the audit that judged each is the Archie repo's `docs/BRAND-MARKS.md`.
 
+**One exception since 2026-09-28, by Jett: a sign-in button is the company's own.** Where a button
+sends the person to Google's or Microsoft's own sign-in, it is that company's published button,
+unaltered: Google's "Sign in with Google" art on the website's login page (317502ac) and in the app,
+and Microsoft's "Sign in with Microsoft" art on the app's Outlook buttons (on Archie main, not in
+0.3.0). Both companies publish those buttons for exactly this use, and Microsoft's one rule is
+"DON'T alter the Microsoft logo" (learn.microsoft.com, Sign in with Microsoft branding guidelines;
+the files are byte for byte theirs). It is a door, not a roster, so the rule above still holds
+everywhere else: no product icon (Gmail, Calendar, Outlook), no bare G, nothing on a page that sells.
+Apple has no such button for iCloud, whose connection is an app-specific password, so iCloud stays
+in type. **Approved wording:** "Archie's Google and Microsoft sign-in buttons are those companies' own
+published buttons, unaltered." ⛔ Never "partner", "verified by" or "approved by" beside them. Code:
+`src/app/google-button.tsx`, `src/app/microsoft-button.tsx`, `docs/BRAND-MARKS.md`.
+
 **What made names alone survivable** is that every mark got its service's name under it earlier the
 same day. Without that the band would have gone from logos to nothing. With it, the figure already
 said the thing the logos were there to say, and the pictures turned out to be the removable half.
@@ -4626,7 +4640,7 @@ not a license, sponsorship or endorsement. The Archie repo's `docs/BRAND-MARKS.m
 record beside the app-side audit.
 
 **Nothing on either surface changes, and that is the point.** The site has carried no logos at all
-since September 17 and the app's tile has carried a monogram since the same day, both decided before
+since September 17, apart from Google's own sign-in button on the login page since September 28, and the app's tile has carried a monogram since the same day, both decided before
 this reply arrived. What changed is which half we can point at. The refusal confirms a rule we were
 already keeping. The permission is new: **naming Claude in plain type, to say which account a key
 opens, is now allowed in writing rather than by our own reading of nominative fair use.** That is

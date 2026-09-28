@@ -3087,6 +3087,62 @@ plus at most five passages of 400, never the samples themselves (`writing_style:
   all the samples go once when the Sent folder is read. Never say the passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
 
+### 🚧 Acuity Scheduling, read by your agent: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a on main), not yet in a release
+
+**Never run against a real Acuity account yet** (`docs/OPEN-THREADS.md`). Nothing here is said in
+the present tense on the site until a release carries it and one live read has worked.
+
+**Approved wording, once it ships:** "Connect Acuity Scheduling with your User ID and API key, and
+your agent reads your real appointments: who is booked, what they wrote in your intake form, and
+which times are still open for each kind of appointment. It reads only. Booking, moving and
+canceling stay in Acuity. Acuity includes its API on the Premium plan."
+
+**Why it's true:** the `acuity` row in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`),
+bound to `acuityscheduling.com`, with `AuthStyle::BasicUser` (`crates/archie-net/src/http.rs`),
+which attaches the key only when a request's host matches the binding exactly, on every redirect.
+`connector_connect` checks the key against `GET /me` before saving it, and only the key goes to the
+credential store. The skill is `data/marketplace/skills/acuity-keeper.json` (1.0.0,
+`min_app_version` 0.3.1). GET requests run at once as reads; anything else would be staged for
+approval, and the skill tells the agent never to send one.
+
+**Boundaries:**
+- ⛔ Never say it books, reschedules or cancels. v1 does none of those.
+- ⛔ Never say it works on every Acuity plan. The API is on Premium (acuityscheduling.com/pricing:
+  "Custom API & CSS for Developers").
+- ⛔ Never say the key can be narrowed. Acuity's key covers the whole account, and the connect
+  screen says so.
+- ⛔ No Acuity or Squarespace logo, and nothing implying they endorse Archie.
+- ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
+  the provider sentence: what the agent reads goes to the AI company the owner connected.
+
+### 🚧 The Marketplace asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 on main), not yet in a release
+
+**Approved wording, once it ships:** "Nothing from the Marketplace goes onto your agent until you
+say yes. Press Install and Archie shows you the add-on, the agent it is going on, and what it will
+use: your email or calendar, the other accounts it works with, websites, the lists it keeps, and the
+things you wrote that it reads so its drafts sound like you. It also names anything that comes with
+it, such as another add-on it is built on, a routine that starts on a schedule, or a download. Then
+you press Install, or Cancel."
+
+**Why it's true:** every store Install goes through `startInstall` in `src/app/marketplace.tsx`,
+which only opens the step; only `confirmInstall`, run from the step's Install, installs anything.
+The lines come from `src/app/install-consent.ts`, which reads each manifest's
+`required_integrations`, `required_screen`, `writes_as_owner`, `required_collections`,
+`needs_own_ai_account` and a specialist's `web_search`. The routines it names as starting use the
+same filter as `install_companion_routines`.
+
+**Boundaries:**
+- ⛔ **Never say it shows everything an add-on can reach, or that an add-on reaches only what it
+  lists.** It lists what the add-on declares. Mail tools come from the connection, and Websites is an
+  agent-wide switch, so an add-on that lists neither is not walled off from them.
+- ⛔ **Never call it a permission prompt, or say installing grants access.** Connecting an account
+  is its own step, and installing connects nothing.
+- ⛔ **Marketplace only, on the computer.** Four other places still install without it (the
+  Connections tab's add-on button, the agent page's suggestion for an idle connection, the Add beside
+  a skill's dependency, and first run's email and calendar skills), and the phone's Add installs on
+  the first press.
+- ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
+
 ### ✅ Text Replies: it reads your texts on your Mac, and only you can send one — SHIPPED 2026-08-21
 
 The one feature that reads messages **other people** wrote, so every sentence about it is held

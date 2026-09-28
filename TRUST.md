@@ -3241,10 +3241,11 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
   in `src/app/new-agent.ts`), Jett's choice of 2026-09-28.
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
-- ⚠️ **"About a cent a search" is the search fee alone.** Counting the pages a search brings back, one
-  measured 1.6 to 4.3 cents on Sonnet 5 (Archie `docs/COST-MEASURED.md` section 20), so never quote a
-  cent as a search's whole cost. Deep Research: "about 50 cents a run", up to 20 searches; never "a few
-  cents".
+- ⚠️ **A search is "about 2 to 4 cents", counting the pages it brings back** (FACTS.md; measured 1.6 to
+  4.3 cents on Sonnet 5, Archie `docs/COST-MEASURED.md` section 20). The app and the phone say so since
+  Archie 9f888e61 and archie-mobile 49f31d9, and the site's submit page since this sync; "about a cent"
+  was the search fee alone and is never quoted as a search's cost again. Deep Research: "about 50 cents
+  a run", up to 20 searches; never "a few cents".
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
 ### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the trial, on main), not yet in a release

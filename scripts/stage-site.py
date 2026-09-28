@@ -13,7 +13,7 @@ import subprocess
 ROOT = Path(__file__).resolve().parent.parent
 PAGES = set('about account activity admin ai-explained app-auth app-security archie auth-action billing blog business compare consulting contact equipment faq guided-setup help how-it-works individuals learn login our-story phone privacy-policy questionnaire security services skills-marketplace standard terms-of-service testimonials trust unsubscribe what-you-need'.split())
 ROOT_FILES = {'.nojekyll', 'CNAME', 'index.html', '404.html', 'banner.html', 'llms.txt', 'robots.txt', 'sitemap.xml'}
-ASSET_TYPES = {'.svg', '.png', '.jpg', '.jpeg', '.webp', '.ico', '.pdf', '.mp4', '.webm', '.woff', '.woff2'}
+ASSET_TYPES = {'.svg', '.png', '.jpg', '.jpeg', '.webp', '.ico', '.pdf', '.mp4', '.webm', '.vtt', '.woff', '.woff2'}
 EXTRA = {'assets/articles.json', 'assets/ai-glossary-final.md', 'data/public-catalog.json',
          '.well-known/security.txt', '.well-known/microsoft-identity-association.json',
          'phone/sw.js', 'phone/manifest.webmanifest', 'terms-of-service/versions/2026-09-14.json',

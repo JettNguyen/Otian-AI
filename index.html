@@ -520,7 +520,7 @@
                     </span>
                   </div>
                   <div class="dp-topbar">
-                    <div class="side"><svg class="wm" viewBox="0 0 2700 900" aria-hidden="true"><use href="#wordmark"/></svg></div>
+                    <div class="side"><span class="dp-barbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></span></div>
                     <div class="mid">
                       <span class="dp-facewrap"><span class="dp-face s30"><span data-ember="terracotta.peak.pill.none"></span></span><span class="dot"></span></span>
                       <span class="dp-bartitle">Ember</span>
@@ -611,19 +611,19 @@
                              and the time were given beats of their own and he saw it). The beats
                              in the other screens are messages, which do arrive one after another;
                              this is one message with a control row and a time on it. -->
-                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we move the roof estimate to Friday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div></div>
-                        <div class="dp-fold"><div class="dp-actions">
-                          <button type="button" class="dp-act" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
-                          <div class="dp-act"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
-                          <div class="dp-act"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we move the roof estimate to Friday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
+                          <button type="button" class="dp-act go" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
+                          <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                          <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                           <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
-                        </div></div>
+                        </div></div></div>
+                        
                         <p class="dp-stamp">1:40 PM</p>
                       </div>
                       <!-- The computer's answer to the press, over the screen, in its own words. Played by
                            the stylesheet on is-noticed, which js/home.js adds only when a press settles
                            here and not when the reader arrives at a screen already settled. -->
-                      <div class="dp-notice" aria-hidden="true"><div class="in">Sent &#9989;</div></div>
+                      <div class="dp-notice" aria-hidden="true"><div class="in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m7.6 12.3 3 3 5.8-6.2"/></svg><span>Sent</span></div></div>
                     </div>
 
                     <div class="dp-scr dp-scr--grow" data-scr="4">
@@ -644,12 +644,12 @@
                            the short line that follows it, where the app attaches them. -->
                       <div class="dp-mine day-beat" data-act="4" data-at="0.630"><div class="dp-bub yours"><div class="dp-md"><p>Reorder Buddy&rsquo;s dog food from chewy.com.</p></div></div></div>
                       <div class="dp-said day-beat" data-act="4" data-at="0.704"><div class="dp-bub theirs"><div class="dp-md"><p>Place the order for Buddy&rsquo;s dog food at chewy.com, $38.40?</p><p>Tap Press it for me and I will press that one button and nothing else. Or finish it yourself: in the browser window on the computer running Archie, or in the shop&rsquo;s own app or site on your phone, if your cart shows up there.</p></div></div></div>
-                      <div class="dp-said day-beat" data-act="4" data-at="0.778"><div class="dp-bub theirs"><div class="dp-md"><p>I&rsquo;ll wait for you.</p></div></div>
-                        <div class="dp-fold"><div class="dp-actions">
-                          <div class="dp-act dp-act--tap"><span class="lbl-ic"><span class="em">&#9989;</span><span>Press it for me</span></span><span class="dp-tap day-beat" data-act="4" data-at="0.852"><span class="lbl-ic"><span class="em">&#9989;</span><span>Press it for me</span></span></span></div>
-                          <div class="dp-act"><span class="lbl-ic"><span class="em">&#128587;</span><span>I&rsquo;ll finish it myself</span></span></div>
+                      <div class="dp-said day-beat" data-act="4" data-at="0.778"><div class="dp-bub theirs"><div class="dp-md"><p>I&rsquo;ll wait for you.</p></div><div class="dp-fold"><div class="dp-actions two">
+                          <div class="dp-act go dp-act--tap"><span class="lbl-ic"><span class="em">&#9989;</span><span>Press it for me</span></span><span class="dp-tap day-beat" data-act="4" data-at="0.852"><span class="lbl-ic"><span class="em">&#9989;</span><span>Press it for me</span></span></span></div>
+                          <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#128587;</span><span>I&rsquo;ll finish it myself</span></span></div>
                           <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#9995;</span><span>Stop</span></span></div>
-                        </div></div>
+                        </div></div></div>
+                        
                       </div>
                       <div class="dp-said day-beat" data-act="4" data-at="0.926"><div class="dp-bub theirs"><div class="dp-md"><p>Ordered Buddy&rsquo;s dog food at chewy.com for $38.40, under your $50 limit.</p></div></div></div>
                     </div>

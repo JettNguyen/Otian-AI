@@ -4259,6 +4259,16 @@ assets/mark-norton.png` brings it back if permission ever lands.
 only terms that bind their own users; and Wix runs the other way, publishing its logo for download
 and asking only that it not be altered, which we have not.
 
+✅ **Superseded 2026-09-28, by Jett: all nine carry an initial now.** The five above kept their icon
+on the rule that only a published prohibition takes a mark off. That rule sat beside the one two
+paragraphs up (a logo ships only with permission in hand) and the two said different things about
+the same five circles. None of the five had given permission, and the Wix and Hermes icons were
+clipped to a circle, which is arguably the alteration Wix asks against. So the compare chart's
+circles all hold a letter in the site's own type (Hermes H, Instinct I, OpenClaw O, Vellum V, Wix
+Symphony S), and only Archie's holds a mark. `assets/mark-hermes.png` and `assets/mark-wix.png` were
+deleted; the favicon SVGs lived inline in `compare/index.html` and went with the symbols. **The
+permission rule above is now the only rule**: a logo comes back with a written grant and a row here.
+
 ⚠️ **The closest call, recorded because it is close.** Nous Research's portal terms say &ldquo;Any
 commercial or promotional distribution, publishing or exploitation of the Nous Research Materials
 is strictly prohibited unless you have received the express prior written permission from Nous

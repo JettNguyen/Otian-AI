@@ -1634,6 +1634,10 @@ have. The swap happens at the next launch, before the database is opened.
 - ⚠️ **A restore is refused across accounts and across editions**, and refused when the backup was
   made by a newer Archie than the one reading it (`refusal()`). Do not write "restore it anywhere";
   write "restore it on a computer signed in as you."
+- ✅ **The layout is published, since 2026-09-28** (Jett's call): `trust/details/#backup-long` for
+  readers, and the Archie repo's `docs/BACKUP-FORMAT.md` for the full field list, both read from
+  `transfer.rs`. Publishing it is for looking inside your own file. It changes nothing above: it
+  still opens in Archie and nothing else, and the page says so.
 
 ### ✅ What your agent can write to disk
 

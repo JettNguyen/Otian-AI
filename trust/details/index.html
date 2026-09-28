@@ -323,6 +323,31 @@
           <p><strong>Every add-on is read by a human before it is listed.</strong> Right now that human is one of the two of us, and we read every line of every submission. That will not scale forever, and this paragraph will change the day it stops being true.</p>
         </div>
 
+      </div>
+    </section>
+
+    <!-- The backup file's layout, published 2026-09-28 on Jett's call. The full spec is the
+         Archie repo's docs/BACKUP-FORMAT.md, read from transfer.rs. TRUST.md's backup entry still
+         governs: it opens in Archie and nothing else, and no sentence here may suggest another
+         assistant imports it. -->
+    <section class="section section-alt" aria-labelledby="backup-long">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Moving and Backups</span>
+          <h2 id="backup-long" class="fade-up delay-1">What is inside the backup file, so you can look in your own.</h2>
+          <p>The file from Moving and backups is an ordinary zip archive whose name ends in .archie. Rename a copy to end in .zip and your computer will open it.</p>
+        </div>
+
+        <div class="trust-prose fade-up delay-2">
+          <p><strong>Three things are inside.</strong> <code>manifest.json</code> says which Archie wrote it, for which account and edition, when, and how many agents, skills and routines it holds. <code>archie.db</code> is the app&rsquo;s own database. The <code>workspaces</code> folder holds one folder per agent.</p>
+
+          <p><strong>The parts written in words are files you can open in any editor.</strong> In each agent&rsquo;s folder, <code>persona.md</code> is its instructions, <code>user.md</code> is what it knows about you, and <code>memory/agent_memory.md</code> is what it remembers. Each skill has a <code>SKILL.md</code>, and your conversations are in <code>memory/primary_chat.json</code>.</p>
+
+          <p><strong>No key or password is in it, and it is not encrypted.</strong> Your keys stay in your computer&rsquo;s password store, and a restore lists what to connect again. Everything else can be read by anyone holding the file, so keep it where you would keep a tax return.</p>
+
+          <p><strong>It opens in Archie and nothing else.</strong> We publish the layout so you can see your own agent without us. The database and the settings files beside the text are Archie&rsquo;s own bookkeeping, and they change between versions.</p>
+        </div>
+
         <div class="text-center mt-48">
           <a href="../" class="btn btn-secondary fade-up delay-3">&larr; Back to the Trust page</a>
         </div>

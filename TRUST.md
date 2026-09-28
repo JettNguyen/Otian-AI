@@ -3191,21 +3191,24 @@ Every other write to Acuity, booking, notes and no-shows included, is refused (`
 - ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
   the provider sentence: what the agent reads goes to the AI company the owner connected.
 
-### 🚧 The Marketplace asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 on main), not yet in a release
+### 🚧 Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone; archie-mobile 3d279a3 and 6817d41), not yet in a release
 
-**Approved wording, once it ships:** "Nothing from the Marketplace goes onto your agent until you
-say yes. Press Install and Archie shows you the add-on, the agent it is going on, and what it will
-use: your email or calendar, the other accounts it works with, websites, the lists it keeps, and the
-things you wrote that it reads so its drafts sound like you. It also names anything that comes with
-it, such as another add-on it is built on, a routine that starts on a schedule, or a download. Then
-you press Install, or Cancel."
+**Approved wording, once it ships:** "Whenever you add an add-on, anywhere in Archie or on Archie
+Mobile, Archie asks first. It shows the add-on, the agent it is going on, and what it will use, says
+which of those accounts that agent already has connected, and names anything that comes with it, such
+as another add-on it is built on, a routine that starts on a schedule, or a download. Then you press
+Install, or Cancel."
 
-**Why it's true:** every store Install goes through `startInstall` in `src/app/marketplace.tsx`,
-which only opens the step; only `confirmInstall`, run from the step's Install, installs anything.
-The lines come from `src/app/install-consent.ts`, which reads each manifest's
-`required_integrations`, `required_screen`, `writes_as_owner`, `required_collections`,
-`needs_own_ai_account` and a specialist's `web_search`. The routines it names as starting use the
-same filter as `install_companion_routines`.
+**Why it's true:** every door opens the same step: the Marketplace, the Connections tab's add-on
+button, the agent page's suggestion for an unused connection, the Add beside a skill's required
+add-on, and the first run's mail and calendar doors (`src/app/install-dialog.tsx`, with its facts in
+`install-step.ts`); only its Install installs anything. The lines come from
+`src/app/install-consent.ts`, which reads each manifest's `required_integrations`, `required_screen`,
+`writes_as_owner`, `required_collections`, `needs_own_ai_account` and a specialist's `web_search`, and
+each account line says "Connected on Ember." or "Not connected on Ember yet." with a way to connect it
+(`agent-reach.ts`). The phone gets the same facts (`skill_row` and `connected_integrations` in
+`src-tauri/src/phone.rs`) and shows the same step before its Add does anything (archie-mobile
+`src/screens/InstallStep.tsx`).
 
 **Boundaries:**
 - ⛔ **Never say it shows everything an add-on can reach, or that an add-on reaches only what it
@@ -3213,10 +3216,13 @@ same filter as `install_companion_routines`.
   agent-wide switch, so an add-on that lists neither is not walled off from them.
 - ⛔ **Never call it a permission prompt, or say installing grants access.** Connecting an account
   is its own step, and installing connects nothing.
-- ⛔ **Marketplace only, on the computer.** Four other places still install without it (the
-  Connections tab's add-on button, the agent page's suggestion for an idle connection, the Add beside
-  a skill's dependency, and first run's email and calendar skills), and the phone's Add installs on
-  the first press.
+- ⛔ **Never "nothing goes on without your yes."** The first agent's starter pack goes on unasked, and
+  so, until Archie's `feat/install-step-3` lands, does every new agent's Researcher (Jett chose on
+  2026-09-28 to have it offered through the step).
+- ⛔ **The phone connects nothing.** It says where to connect on the computer.
+- ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
+- ⚠️ The Researcher, Deep Research and the Prospector each say "about a cent a search". Deep Research
+  can make up to 20 searches a run, so never quote its run as "a few cents".
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
 ### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the trial, on main), not yet in a release

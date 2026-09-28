@@ -2214,8 +2214,13 @@ one (archie-mobile `src/schedule.ts` and `screens/Manage.tsx`, `set_routine_time
 **Boundaries:**
 - ⛔ **Never "as often as you like."** Up to 24 set times a day. More often is an interval ("every 30
   minutes"), which counts from when it starts, not from the clock.
-- ⚠️ **Each time is a job on the free tier's 20 a day**, so a routine at 24 times uses more than a free
-  day on its own. Say the count beside the cap wherever the cap is sold.
+- ⚠️ **On the free tier, no more than 15 of a routine's runs happen in a day.** Routines and the
+  watches stop at 15 and keep the last 5 for the person (`FREE_JOBS_KEPT_FOR_YOU`, the free-tier
+  entry), so a routine at 24 times runs at most 15 of them, and fewer if mail took some first. Say
+  that beside the cap wherever the cap is sold. On Archie main (3c8d27a9, not in 0.3.0) the Routines
+  tab, chat's routine card and the OpenClaw review say so once a schedule takes more than half of
+  the 15 (`free_day_line` in `archie_domain::allowance`, `freeDayLine` in `src/app/schedule.ts`).
+  Nothing is blocked, and a plan or a trial sees no line.
 - ⛔ **Never "it catches up on every run it missed."** After the computer sleeps through several of a
   day's times, it runs the latest one, once.
 - ⚠️ **Waking for the second time of a day has not been watched on a real machine**, the same caution

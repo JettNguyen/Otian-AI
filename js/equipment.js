@@ -553,11 +553,12 @@
     };
   }
 
-  /* The kit, drawn from the answers. The figure lives in the page under "The short answer"
+  /* The kit, drawn from the answers. The figure lives in the page under "The whole list"
      (untailored: a Mac mini, and its link to the router drawn as "cable or Wi-Fi", because
      up there we have not been told which) and is cloned here with three attributes set,
-     which is all its SVG needs to show a different body, a cable or Wi-Fi, and the right
-     system line. Nothing is drawn in this file. */
+     which is all its scene needs to stand a different computer on the desk, lay a cable or
+     show Wi-Fi, and dress the box for Windows. js/kit-scene.js fits the copy when it lands.
+     Nothing is drawn in this file. */
   function kitFigure() {
     var src = document.querySelector('.kit-figure');
     if (!src) return '';

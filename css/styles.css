@@ -15835,13 +15835,6 @@ html[data-theme="dark"] .booking-container iframe {
 .ww-band .ww-fold > summary { justify-content: center; font-size: var(--fs-sm); color: var(--text-secondary); padding: 14px 20px; }
 .ww-band .ww-fold > .fold-body { padding-top: 10px; }
 
-/* ── The kit, drawn (equipment/) ──
-   The drawing's classes and states live in its SVG's <style>. Here: where it sits. Under
-   "The short answer" it is the untailored kit; inside the kit panel it is the same figure
-   cloned by js/equipment.js with the reader's answers on it, and the cards follow it. */
-.kit-figure { max-width: 600px; margin: 0 auto 28px; }
-.kit-figure figcaption { margin-bottom: 0; }
-.kit-panel .kit-figure { margin-bottom: 32px; }
 
 /* ========================================
    36. Press
@@ -19409,6 +19402,271 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    switch the reader works still lands, without the fall being animated. */
 @media (prefers-reduced-motion: reduce) {
   .wd-mark, .wd-win .da-sw, .wd-win .da-sw i, .wd-pad, .wd-nm { transition: none; }
+}
+
+/* ── The kit, on a desk (how-it-works/) ──
+   Jack asked for it in those words: a Mac mini on a desk with the agent on its screen. The eighth
+   staged scene, and the first whose subject is hardware, so its objects are built rather than
+   stood up. The desk is a top raised off the floor with its front stood up under it; the computer,
+   the router and the display's stand are boxes built in the floor's own space the way the laptop
+   on compare/cloud-agents/ is, a top raised by the box's height and the faces the camera can see
+   turned up about their bottom edges. Only the labels, the antennas, the phone and the AI company's
+   card are billboards.
+
+   ITS MECHANISM IS A CLIMB. One message travels the kit, and it is the only thing that moves: out
+   of the phone asking for a reminder, along the floor into the router, up the cable at the desk's
+   front leg and across the top into the computer; back down and out to the AI company at the back,
+   and in again, where the reminder is set and a row lands at the top of the window's list, Working
+   and then Done; then down and out to the phone, where the reply lands. It changes height as it goes: the ball carries `translate` on
+   the floor's normal alongside its offset-path, so it climbs the leg rather than jumping to the
+   top. Nothing else on the site does that. The switches scene on the same page sets things down;
+   this one carries a thing up.
+
+   ONE ROUTE, ONE PATH, ONE CLOCK. The route is a single offset-path that doubles back on itself,
+   and every keyframe below was generated from segment durations rather than a speed, so the four
+   moments that matter (the AI company is asked, the job lands, the job is done, the reply lands)
+   fall at the same percentages wide and narrow, and the row, the badges, the card and the phone's
+   bubbles run on those percentages with no script. Change the route and regenerate the lot: the
+   percentages are arithmetic on the path's length, not a guess.
+
+   THE FIGURE EXISTS TWICE. js/equipment.js clones it into the kit panel and sets data-machine,
+   data-net and data-platform on the copy, so every state here hangs off those three attributes on
+   .kit-figure and none off an id: the picker's copy redraws itself for a desktop, a laptop, a
+   Windows box, a cable or Wi-Fi. js/kit-scene.js fits every copy, including one that arrives later.
+
+   TRUST.md's provider-egress clause is drawn, not captioned away: the AI company stands at the back
+   with its own wire, and the message visibly goes there and comes back. The router and the phone's
+   wire say nothing about whose servers are in between, because that depends on how the reader
+   reaches the agent, and the page says it under "reach your agent from your phone".
+
+   TWO THINGS JETT'S FIRST LOOK IN SAFARI CHANGED (2026-09-28). The screens are blocks with no
+   words: the app's window and chat, ported whole and zoomed to this size, were type too small to
+   read and too busy to look at, and what they said was never the point. They keep the app's layout
+   and colors (the lights, the sidebar, three cards, the list the job lands in, two bubbles) and are
+   laid out at the size they are shown. And a box's top has square corners: its front and side are
+   rectangles, so a rounded top left their corners standing out past it on every box in the scene,
+   and a slab raised off a surface with no face under it read as floating. The laptop's base has a
+   front now, and the display's stand lies on the desk. */
+.kit-figure { position: relative; max-width: 720px; margin: 0 auto 28px; --kt-h: 64px; }
+.kit-figure figcaption { margin: 14px 0 0; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); text-wrap: pretty; }
+.kit-panel .kit-figure { margin-bottom: 32px; }
+.kt-scene { position: relative; width: 100%; aspect-ratio: 720 / 420; overflow: hidden; perspective: 1400px; perspective-origin: 50% 40%; }
+.kt-box { position: absolute; left: 0; top: 0; width: 720px; height: 420px; transform: scale(var(--pk, 1)); transform-origin: 0 0; transform-style: preserve-3d; }
+.kt-floor { position: absolute; left: 0; top: 30px; width: 720px; height: 500px; --fo: 1; transform-style: preserve-3d; }
+.kt-plane { position: relative; width: 100%; height: 100%; transform: rotateX(58deg); transform-style: preserve-3d; }
+.kt-grid { position: absolute; inset: 0; border-radius: 24px; background: linear-gradient(var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, linear-gradient(90deg, var(--line-soft) 1px, transparent 1px) 0 0 / 60px 60px, color-mix(in srgb, var(--bg-card) 55%, transparent); -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent); mask-image: radial-gradient(closest-side, #000 70%, transparent); }
+.kt-paths, .kt-onpaths { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.kt-paths path, .kt-onpaths path { fill: none; stroke: var(--line-muted); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.kt-paths path.dashed { stroke-dasharray: 5 6; }
+.kt-paths .kt-n, .kt-onpaths .kt-n { display: none; }
+.kt-stand { position: absolute; left: var(--fx); top: var(--fy); transform: translate(-50%, -100%) translateZ(var(--z, 0px)) rotateX(-58deg); transform-origin: 50% 100%; }
+/* the desk: 320 wide and 120 deep, its top --kt-h off the floor, and its front stood up under the
+   top's front edge: an apron and two legs, open between them, so the floor shows through */
+.kt-desk { position: absolute; left: 110px; top: 170px; width: 320px; height: 120px; transform-style: preserve-3d; transform-origin: 0 0; }
+.kt-top { position: absolute; inset: 0; background: linear-gradient(170deg, color-mix(in srgb, var(--bg-card) 58%, #C99A6B), color-mix(in srgb, var(--bg-card) 50%, #B98655)); box-shadow: inset 0 0 0 1px color-mix(in srgb, #7A5436 30%, transparent); transform: translateZ(var(--kt-h)); transform-style: preserve-3d; }
+.kt-dface { position: absolute; left: 0; bottom: 0; width: 320px; height: var(--kt-h); transform-origin: 50% 100%; transform: rotateX(-90deg); --wood: color-mix(in srgb, var(--bg-card) 40%, #9A6B45); background: linear-gradient(var(--wood), var(--wood)) 0 0 / 100% 9px no-repeat, linear-gradient(var(--wood), var(--wood)) 4px 0 / 10px 100% no-repeat, linear-gradient(var(--wood), var(--wood)) calc(100% - 4px) 0 / 10px 100% no-repeat; }
+/* the cable where it climbs: up the right-hand leg, on the face the camera sees */
+.kt-drop { position: absolute; left: 313px; top: 0; width: 2.5px; height: 100%; background: repeating-linear-gradient(180deg, var(--accent) 0 5px, transparent 5px 10px); }
+/* the computer: three bodies, one shown. A box is a top raised by its height, its front stood up
+   about its bottom edge, and its left side stood up about its right edge (the computer stands right
+   of the camera's middle, so the left side is the one in view) */
+.kt-cpu { position: absolute; display: none; transform-style: preserve-3d; --b-top: linear-gradient(160deg, #F1F0ED, #D3D1CC); --b-front: linear-gradient(180deg, #DAD8D3, #C9C7C1); --b-side: #B9B7B1; }
+.kt-cpu i { position: absolute; display: block; }
+.kt-cpu .t { inset: 0; background: var(--b-top); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .08); transform: translateZ(var(--h)); }
+.kt-cpu .f { left: 0; bottom: 0; width: 100%; height: var(--h); background: var(--b-front); transform-origin: 50% 100%; transform: rotateX(-90deg); }
+.kt-cpu .s { left: calc(-1 * var(--h)); top: 0; width: var(--h); height: 100%; background: var(--b-side); transform-origin: 100% 50%; transform: rotateY(90deg); }
+/* the power light, lit the whole time: the computer stays awake, which is the kit's first line */
+.kt-led { position: absolute; right: 8px; bottom: 7px; width: 4px; height: 4px; border-radius: 50%; background: var(--c-green); box-shadow: 0 0 5px var(--c-green); }
+.kt-cpu--mini { left: 248px; top: 44px; width: 64px; height: 64px; --h: 22px; --d: 64px; }
+.kt-cpu--desktop { left: 264px; top: 10px; width: 48px; height: 100px; --h: 104px; --d: 48px; }
+.kt-cpu--desktop .kt-led { right: 50%; bottom: 12px; margin-right: -2px; }
+.kit-figure[data-machine="mini"] .kt-cpu--mini, .kit-figure[data-machine="desktop"] .kt-cpu--desktop { display: block; }
+/* A small Windows box is drawn dark rather than silver (the window's own buttons are below, with the
+   screen) */
+.kit-figure[data-platform="windows"] .kt-cpu { --b-top: linear-gradient(160deg, #3A3A38, #232322); --b-front: linear-gradient(180deg, #2A2A28, #1C1C1B); --b-side: #151514; }
+/* the display: a stand lying on the desk, a neck stood up out of it, and the panel, whose screen is
+   the app's window drawn as blocks. The panel is hinged at its bottom edge in the desk's space and leans back a
+   little; its back is its own face, so it never shows the window mirrored. On the laptop the same
+   panel is the lid, hinged at the back of the base: the vars below move it. */
+.kt-plate { position: absolute; left: 96px; top: 24px; width: 56px; height: 36px; border-radius: 6px; background: linear-gradient(160deg, #E4E3DF, #C3C1BB); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); transform: translateZ(1px); }
+.kt-neck { position: absolute; left: 116px; top: 6px; width: 16px; height: 34px; background: linear-gradient(90deg, #C9C7C1, #E2E0DB 45%, #B5B3AD); transform-origin: 50% 100%; transform: rotateX(-90deg); }
+.kt-panel { --px: 10px; --py: 40px; --pz: 26px; --tilt: -82deg; position: absolute; left: var(--px); top: calc(var(--py) - 149px); width: 229px; height: 149px; transform-origin: 50% 100%; transform: translateZ(var(--pz)) rotateX(var(--tilt)); transform-style: preserve-3d; }
+.kt-screen { position: absolute; inset: 0; border-radius: 7px; padding: 5px; background: #121211; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.kt-back { position: absolute; inset: 0; border-radius: 7px; background: linear-gradient(160deg, #E4E3DF, #C3C1BB); transform: rotateY(180deg); -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.kt-lbase { position: absolute; display: none; left: 83px; top: 12px; width: 229px; height: 100px; background: linear-gradient(180deg, #E7E5E1, #CFCCC6); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); transform: translateZ(5px); transform-style: preserve-3d; }
+/* its front, hanging from the base's front edge down to the desk */
+.kt-lbase::after { content: ""; position: absolute; left: 0; top: 100%; width: 100%; height: 5px; background: linear-gradient(180deg, #CFCCC6, #BDBAB4); transform-origin: 50% 0; transform: rotateX(-90deg); }
+.kt-lbase .keys { position: absolute; left: 20px; right: 20px; top: 12px; height: 46px; border-radius: 5px; background: repeating-linear-gradient(90deg, #3A3936 0 11px, #CFCCC6 11px 13px), #3A3936; -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 8px, transparent 8px 10px); mask-image: repeating-linear-gradient(180deg, #000 0 8px, transparent 8px 10px); opacity: .9; }
+.kit-figure[data-machine="laptop"] .kt-plate, .kit-figure[data-machine="laptop"] .kt-neck { display: none; }
+.kit-figure[data-machine="laptop"] .kt-lbase { display: block; }
+.kit-figure[data-machine="laptop"] .kt-panel { --px: 83px; --py: 12px; --pz: 5px; --tilt: -78deg; }
+/* the screen, in blocks: the app's window (`da-app` for its tokens and ground, light and dark) as a
+   sidebar and a page, at the size it is shown, so nothing in it is zoomed. The Mac's three lights,
+   or on Windows the app's own minimize, maximize and close at the top right, which chrome.tsx draws
+   there because Archie takes the native frame off. */
+.kt-screen .kt-app { display: grid; grid-template-columns: 46px 1fr; width: 100%; height: 100%; border-radius: 3px; box-shadow: none; }
+.kt-lights { position: absolute; top: 5px; left: 6px; z-index: 1; display: flex; gap: 3px; }
+.kt-lights i { display: block; width: 4px; height: 4px; border-radius: 50%; background: #28C840; }
+.kt-lights i:first-child { background: #FF5F57; }
+.kt-lights i:nth-child(2) { background: #FEBC2E; }
+.kt-caps { position: absolute; top: 4px; right: 5px; z-index: 1; display: none; align-items: center; gap: 6px; color: var(--text-secondary); }
+.kt-caps i { position: relative; display: block; width: 5px; height: 5px; }
+.kt-caps .min::before, .kt-caps .x::before, .kt-caps .x::after { content: ""; position: absolute; left: -1px; right: -1px; top: 2px; height: 1px; background: currentColor; }
+.kt-caps .min::before { left: 0; right: 0; }
+.kt-caps .max { border-radius: 1px; box-shadow: inset 0 0 0 1px currentColor; }
+.kt-caps .x::before { transform: rotate(45deg); }
+.kt-caps .x::after { transform: rotate(-45deg); }
+.kit-figure[data-platform="windows"] .kt-lights { display: none; }
+.kit-figure[data-platform="windows"] .kt-caps { display: flex; }
+.kt-side { display: flex; flex-direction: column; gap: 5px; padding: 17px 7px 7px; background: var(--bg-secondary); }
+.kt-side i { display: block; width: 78%; height: 3px; border-radius: 2px; background: var(--line-muted); }
+.kt-side .mark { width: 60%; height: 5px; margin-bottom: 3px; background: var(--accent); }
+.kt-side .on { width: 100%; height: 6px; border-radius: 3px; background: var(--accent-subtle); }
+.kt-main { display: flex; flex-direction: column; gap: 6px; min-width: 0; padding: 17px 8px 7px; }
+.kt-hd { display: block; width: 42%; height: 6px; border-radius: 3px; background: color-mix(in srgb, var(--text-primary) 28%, transparent); }
+.kt-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+.kt-cards i { display: block; height: 18px; border-top: 2px solid; border-radius: 3px; background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--line-soft); }
+.kt-cards .plum { border-top-color: var(--c-plum); }
+.kt-cards .gold { border-top-color: var(--c-gold); }
+.kt-cards .teal { border-top-color: var(--c-teal); }
+.kt-list { display: flex; flex-direction: column; padding: 6px 6px 7px; border-radius: 3px; background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--line-soft); }
+.kt-list::before { content: ""; display: block; width: 32%; height: 3px; margin-bottom: 6px; border-radius: 2px; background: var(--line-muted); }
+.kt-row { display: flex; align-items: center; gap: 4px; height: 7px; margin-bottom: 5px; overflow: hidden; }
+.kt-row:last-child { margin-bottom: 0; }
+.kt-bar { display: block; width: var(--w, 55%); height: 3px; border-radius: 2px; background: color-mix(in srgb, var(--text-primary) 30%, transparent); }
+.kt-ok, .kt-badges i { display: block; width: 11px; height: 5px; border-radius: 3px; }
+.kt-ok { margin-left: auto; background: var(--c-green-subtle); box-shadow: inset 0 0 0 1px var(--c-green); }
+/* the one row that moves: the job you asked for, in the accent because it is in your words, Working
+   in blue and then Done in green. A reminder because setting one is a recorded change that needs no
+   approval (reminder_set is a Change in archie_domain::journal::effect_of); a read or a staged draft
+   would record nothing. */
+.kt-job .kt-bar { --w: 60%; background: var(--accent); }
+.kt-badges { display: grid; flex-shrink: 0; margin-left: auto; }
+.kt-badges > * { grid-area: 1 / 1; }
+.kt-badges .blue { visibility: hidden; background: var(--c-blue-subtle); box-shadow: inset 0 0 0 1px var(--c-blue); }
+.kt-badges .green { background: var(--c-green-subtle); box-shadow: inset 0 0 0 1px var(--c-green); }
+/* the router, on the floor beside the desk: a low box, two antennas standing at its back corners,
+   and three lights on its front */
+.kt-router { position: absolute; left: 470px; top: 236px; width: 60px; height: 32px; transform-style: preserve-3d; --h: 14px; }
+.kt-router i { position: absolute; display: block; }
+.kt-router .t { inset: 0; background: linear-gradient(160deg, #F4F3F0, #DAD8D3); box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1); transform: translateZ(var(--h)); }
+.kt-router .f { left: 0; bottom: 0; width: 100%; height: var(--h); display: flex; align-items: center; justify-content: center; gap: 5px; background: linear-gradient(180deg, #DCDAD5, #C8C6C0); transform-origin: 50% 100%; transform: rotateX(-90deg); }
+.kt-router .f b { width: 3px; height: 3px; border-radius: 50%; background: var(--c-green); box-shadow: 0 0 4px var(--c-green); }
+.kt-router .s { left: calc(-1 * var(--h)); top: 0; width: var(--h); height: 100%; background: #B9B7B1; transform-origin: 100% 50%; transform: rotateY(90deg); }
+.kt-ant { width: 4px; height: 30px; border-radius: 2px; background: linear-gradient(90deg, #C9C7C1, #EDECE9 50%, #B5B3AD); }
+.kt-scene [data-o="ant-l"] { --fx: 478px; --fy: 240px; --z: 14px; }
+.kt-scene [data-o="ant-r"] { --fx: 522px; --fy: 240px; --z: 14px; }
+.kt-wifi { display: none; width: 60px; height: 34px; }
+.kt-wifi svg { display: block; width: 100%; height: 100%; fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; }
+.kt-scene [data-o="wifi"] { --fx: 500px; --fy: 250px; --z: 48px; }
+.kit-figure[data-net="wifi"] .kt-wifi { display: block; }
+.kt-cable { stroke: var(--accent) !important; stroke-width: 2.5 !important; stroke-dasharray: 5 5; }
+.kit-figure[data-net="wired"] .kt-cable { stroke-dasharray: none; }
+.kit-figure[data-net="wired"] .kt-drop { background: var(--accent); }
+.kit-figure[data-net="wifi"] .kt-cable, .kit-figure[data-net="wifi"] .kt-drop { display: none; }
+/* the AI company: the one place the message leaves your home for, with its own wire */
+.kt-board { width: 150px; padding: 8px 10px 9px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); box-shadow: var(--shadow-sm); text-align: center; }
+.kt-board .ico { display: block; width: 26px; height: 26px; margin: 0 auto 3px; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.kt-board b { display: block; font-weight: 600; font-size: var(--fs-2xs); line-height: 1.25; color: var(--text-primary); }
+.kt-board i { display: block; font-style: normal; font-size: var(--fs-3xs); color: var(--text-muted); margin-top: 1px; }
+.kt-scene [data-o="board"] { --fx: 530px; --fy: 80px; }
+/* the names: under the desk, beside the router, and in front of the phone */
+.kt-lab { width: 150px; text-align: center; }
+.kt-lab b { display: block; color: var(--text-primary); font-weight: 600; font-size: var(--fs-sm); }
+.kt-lab i { display: block; font-style: normal; color: var(--text-muted); font-size: var(--fs-2xs); margin-top: 1px; }
+.kt-lab--pc { width: 190px; }
+.kt-lab .kf-net { display: none; }
+.kit-figure[data-net="either"] .kf-net--either, .kit-figure[data-net="wired"] .kf-net--wired, .kit-figure[data-net="wifi"] .kf-net--wifi { display: block; }
+.kt-sleep { display: inline-block; margin-top: 4px; padding: 1px 9px; border-radius: 999px; border: 1px solid var(--c-blue); background: var(--c-blue-subtle); color: var(--c-blue-ink); font-size: var(--fs-3xs); font-weight: 600; }
+.kt-scene [data-o="l-pc"] { --fx: 270px; --fy: 346px; }
+.kt-scene [data-o="l-router"] { --fx: 502px; --fy: 330px; }
+.kt-scene [data-o="phone"] { --fx: 604px; --fy: 392px; }
+.kt-scene [data-o="l-phone"] { --fx: 604px; --fy: 462px; }
+/* the phone: the homepage's port whole, at a --ps, with the weight to beat its under-971px rules
+   (the ring of phones on archie/business/ says why) */
+.kt-phone { --ps: .28; width: calc(256.4px * var(--ps)); height: calc(545.6px * var(--ps)); transform-style: preserve-3d; }
+.kt-phone .dp-device { position: relative; zoom: calc(.63 * var(--ps)); height: 866px; border-radius: calc(54px + var(--bezel-wall) + var(--bezel-bevel)); -webkit-mask-image: none; mask-image: none; }
+@supports not (zoom: 1) { .kt-phone .dp-device { transform: scale(calc(.63 * var(--ps))); transform-origin: 0 0; } }
+.kt-phone .dp-edge { inset: calc(var(--i, 0px) * var(--ps)); border-radius: calc((38px - var(--i, 0px)) * var(--ps)); transform: translateZ(calc(var(--z) * var(--ps))); -webkit-mask-image: none; mask-image: none; }
+.kt-phone .dp-device::before, .kt-phone .dp-device::after { display: block; }
+.kt-phone .dp-ph { height: 852px; padding: 0; --ph-r: 54px; }
+.kt-phone .dp-statusbar { display: flex; }
+.kt-phone .dp-topbar { padding-top: 63px; }
+/* its screen in blocks too, sized in the 393-wide screen the port draws, which zoom brings down with
+   the rest: the agent's name as a bar, and two bubbles with nothing written in them */
+.kt-phone .kt-tbar { display: block; width: 70px; height: 12px; border-radius: 6px; background: currentColor; opacity: .3; }
+.kt-phone .kt-blob { width: var(--bw); height: var(--bh); padding: 0; }
+.kt-msg { overflow: hidden; }
+/* the message itself: the site's ball, carried along the route and up and down the desk's leg */
+.kt-ball { visibility: hidden; offset-distance: 0%; offset-rotate: 0deg; }
+.kt-scene .kt-ball { offset-path: path('M600,386 C584,340 556,298 514,268 L500,252 L470,256 C452,264 434,282 424,300 L424,294 C430,274 430,258 412,246 C430,258 430,274 424,294 L424,300 C434,282 452,264 470,256 L500,252 L506,236 C514,180 524,130 530,96 C524,130 514,180 506,236 L500,252 L470,256 C452,264 434,282 424,300 L424,294 C430,274 430,258 412,246 C430,258 430,274 424,294 L424,300 C434,282 452,264 470,256 L500,252 L514,268 C556,298 584,340 600,386'); }
+/* under the line: what people expect to need and do not */
+.kt-not { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 10px; margin-top: 6px; padding-top: 14px; border-top: 1px dashed var(--line-muted); }
+.kt-not-h { width: 100%; text-align: center; font-size: var(--fs-2xs); color: var(--text-muted); }
+.kt-not s { padding: 3px 11px; border: 1px solid var(--line-muted); border-radius: 999px; background: var(--bg-card); font-size: var(--fs-xs); color: var(--text-muted); text-decoration-thickness: 1.5px; }
+@media (max-width: 640px) {
+  /* Narrow, a second composition rather than the wide one shrunk: the desk scaled about its back
+     corner in all three axes (a 2D scale leaves the display's height standing at full size, the
+     two desks' lesson), the router at the front left, the AI company behind it, and the phone at
+     the front right. The route is regenerated for these positions, on the same clock. */
+  .kt-scene { aspect-ratio: 400 / 440; perspective: 1200px; }
+  .kt-box { width: 400px; height: 440px; }
+  .kt-floor { top: -10px; width: 400px; height: 640px; }
+  .kit-figure { --kt-h: 54.4px; }
+  .kt-desk { left: 100px; top: 120px; transform: scale3d(.85, .85, .85); }
+  .kt-top { transform: translateZ(64px); }
+  .kt-dface { height: 64px; }
+  /* the router stands left of the camera's middle here, so the side in view is its right one, and
+     the cable climbs the desk's left leg and runs along the front of the top to the computer */
+  .kt-drop { left: 5px; }
+  .kt-router { left: 14px; top: 236px; }
+  .kt-router .s { left: 100%; transform-origin: 0 50%; transform: rotateY(-90deg); }
+  .kt-scene [data-o="ant-l"] { --fx: 22px; --fy: 240px; }
+  .kt-scene [data-o="ant-r"] { --fx: 66px; --fy: 240px; }
+  .kt-scene [data-o="wifi"] { --fx: 44px; --fy: 250px; }
+  .kt-scene [data-o="board"] { --fx: 54px; --fy: 50px; }
+  .kt-scene [data-o="l-pc"] { --fx: 204px; --fy: 296px; }
+  .kt-scene [data-o="l-router"] { --fx: 50px; --fy: 326px; }
+  .kt-scene [data-o="phone"] { --fx: 330px; --fy: 474px; }
+  .kt-scene [data-o="l-phone"] { --fx: 200px; --fy: 500px; }
+  .kt-lab { width: 100px; }
+  .kt-lab--pc { width: 170px; }
+  .kt-board { width: 100px; }
+  .kt-phone { --ps: .26; }
+  .kt-onpaths .kt-w { display: none; }
+  .kt-onpaths .kt-n { display: inline; }
+  .kt-paths .kt-w { display: none; }
+  .kt-paths .kt-n { display: inline; }
+  /* the narrow route: the same generator as kt-ball-n below, on the same four moments */
+  .kt-scene .kt-ball { offset-path: path('M326,468 C230,440 80,360 56,268 L44,252 L74,250 C86,246 98,240 105,234 L105,226 C151,215 270,217 323,198 C270,217 151,215 105,226 L105,234 C98,240 86,246 74,250 L44,252 L40,236 C34,170 44,110 54,58 C44,110 34,170 40,236 L44,252 L74,250 C86,246 98,240 105,234 L105,226 C151,215 270,217 323,198 C270,217 151,215 105,226 L105,234 C98,240 86,246 74,250 L44,252 L56,268 C80,360 230,440 326,468'); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* one clock for everything that moves: 16.7 seconds, and every percentage below is one of the
+     route's moments, generated with the ball's keyframes: the AI company is asked 38.92 to 44.31,
+     the ball is back in the computer 60.18, where the reminder is set and the job lands Working,
+     the job is Done 65.5, and the reply lands 85.63. The job lands on the way BACK from the AI
+     company and not on the way in, because the journal writes nothing until the first step that
+     changes something (JournalRecorder in the Archie repo's journal.rs), and setting the reminder
+     is that step. A question the agent answers by reading would land no row at all. */
+  .kt-ball { animation: kt-ball 16.7s linear infinite; }
+  .kt-job { animation: kt-job 16.7s linear infinite; }
+  .kt-badges .blue { animation: kt-work 16.7s step-end infinite; }
+  .kt-badges .green { animation: kt-done 16.7s step-end infinite; }
+  .kt-board { animation: kt-ask 16.7s step-end infinite; }
+  .kt-msg[data-m="q"] { animation: kt-q 16.7s linear infinite; }
+  .kt-msg[data-m="a"] { animation: kt-a 16.7s linear infinite; }
+  .kt-scene.is-away .kt-ball, .kt-scene.is-away .kt-job, .kt-scene.is-away .kt-badges > *, .kt-scene.is-away .kt-board, .kt-scene.is-away .kt-msg { animation-play-state: paused; }
+  @keyframes kt-job { 0%, 60.18% { max-height: 0; margin-bottom: 0; opacity: 0; } 61.8%, 100% { max-height: 7px; margin-bottom: 5px; opacity: 1; } }
+  @keyframes kt-work { 0% { visibility: hidden; } 60.18% { visibility: visible; } 65.5% { visibility: hidden; } }
+  @keyframes kt-done { 0% { visibility: hidden; } 65.5% { visibility: visible; } }
+  @keyframes kt-ask { 0% { border-color: var(--border); } 38.92% { border-color: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); } 44.31% { border-color: var(--border); box-shadow: var(--shadow-sm); } }
+  @keyframes kt-q { 0% { max-height: 0; opacity: 0; } 1.5%, 100% { max-height: 200px; opacity: 1; } }
+  @keyframes kt-a { 0%, 85.63% { max-height: 0; opacity: 0; } 87.2%, 100% { max-height: 300px; opacity: 1; } }
+  @keyframes kt-ball { 0% { offset-distance: 0%; translate: 0 0 0; visibility: hidden; } 3.58% { offset-distance: 0%; translate: 0 0 0; visibility: hidden; } 3.59% { offset-distance: 0%; translate: 0 0 0; visibility: visible; } 10.17% { offset-distance: 11.62%; translate: 0 0 0; visibility: visible; } 10.18% { offset-distance: 11.62%; translate: 0 0 0; visibility: hidden; } 11.97% { offset-distance: 15.65%; translate: 0 0 0; visibility: hidden; } 11.98% { offset-distance: 15.65%; translate: 0 0 0; visibility: visible; } 15.27% { offset-distance: 20.71%; translate: 0 0 0; visibility: visible; } 17.07% { offset-distance: 21.18%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 19.45% { offset-distance: 25.41%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 19.46% { offset-distance: 25.41%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 23.04% { offset-distance: 25.41%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 23.05% { offset-distance: 25.41%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 25.45% { offset-distance: 29.64%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 27.25% { offset-distance: 30.11%; translate: 0 0 0; visibility: visible; } 30.53% { offset-distance: 35.17%; translate: 0 0 0; visibility: visible; } 30.54% { offset-distance: 35.17%; translate: 0 0 0; visibility: hidden; } 32.33% { offset-distance: 38.88%; translate: 0 0 0; visibility: hidden; } 32.34% { offset-distance: 38.88%; translate: 0 0 0; visibility: visible; } 38.92% { offset-distance: 50%; translate: 0 0 0; visibility: visible; } 44.31% { offset-distance: 50%; translate: 0 0 0; visibility: visible; } 50.89% { offset-distance: 61.12%; translate: 0 0 0; visibility: visible; } 50.9% { offset-distance: 61.12%; translate: 0 0 0; visibility: hidden; } 52.68% { offset-distance: 64.83%; translate: 0 0 0; visibility: hidden; } 52.69% { offset-distance: 64.83%; translate: 0 0 0; visibility: visible; } 55.99% { offset-distance: 69.89%; translate: 0 0 0; visibility: visible; } 57.78% { offset-distance: 70.36%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 60.17% { offset-distance: 74.59%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 60.18% { offset-distance: 74.59%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 69.75% { offset-distance: 74.59%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 69.76% { offset-distance: 74.59%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 72.16% { offset-distance: 78.82%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 73.95% { offset-distance: 79.29%; translate: 0 0 0; visibility: visible; } 77.24% { offset-distance: 84.35%; translate: 0 0 0; visibility: visible; } 77.25% { offset-distance: 84.35%; translate: 0 0 0; visibility: hidden; } 79.03% { offset-distance: 88.38%; translate: 0 0 0; visibility: hidden; } 79.04% { offset-distance: 88.38%; translate: 0 0 0; visibility: visible; } 85.62% { offset-distance: 100%; translate: 0 0 0; visibility: visible; } 85.63% { offset-distance: 100%; translate: 0 0 0; visibility: hidden; } 100% { offset-distance: 100%; translate: 0 0 0; visibility: hidden; } }
+  @keyframes kt-ball-n { 0% { offset-distance: 0%; translate: 0 0 0; visibility: hidden; } 3.58% { offset-distance: 0%; translate: 0 0 0; visibility: hidden; } 3.59% { offset-distance: 0%; translate: 0 0 0; visibility: visible; } 10.17% { offset-distance: 15.11%; translate: 0 0 0; visibility: visible; } 10.18% { offset-distance: 15.11%; translate: 0 0 0; visibility: hidden; } 11.97% { offset-distance: 17.28%; translate: 0 0 0; visibility: hidden; } 11.98% { offset-distance: 17.28%; translate: 0 0 0; visibility: visible; } 15.27% { offset-distance: 18.81%; translate: 0 0 0; visibility: visible; } 17.07% { offset-distance: 19.16%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 19.45% { offset-distance: 28.73%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 19.46% { offset-distance: 28.73%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 23.04% { offset-distance: 28.73%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 23.05% { offset-distance: 28.73%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 25.45% { offset-distance: 38.31%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 27.25% { offset-distance: 38.66%; translate: 0 0 0; visibility: visible; } 30.53% { offset-distance: 40.18%; translate: 0 0 0; visibility: visible; } 30.54% { offset-distance: 40.18%; translate: 0 0 0; visibility: hidden; } 32.33% { offset-distance: 42.21%; translate: 0 0 0; visibility: hidden; } 32.34% { offset-distance: 42.21%; translate: 0 0 0; visibility: visible; } 38.92% { offset-distance: 50%; translate: 0 0 0; visibility: visible; } 44.31% { offset-distance: 50%; translate: 0 0 0; visibility: visible; } 50.89% { offset-distance: 57.79%; translate: 0 0 0; visibility: visible; } 50.9% { offset-distance: 57.79%; translate: 0 0 0; visibility: hidden; } 52.68% { offset-distance: 59.82%; translate: 0 0 0; visibility: hidden; } 52.69% { offset-distance: 59.82%; translate: 0 0 0; visibility: visible; } 55.99% { offset-distance: 61.34%; translate: 0 0 0; visibility: visible; } 57.78% { offset-distance: 61.69%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 60.17% { offset-distance: 71.27%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 60.18% { offset-distance: 71.27%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 69.75% { offset-distance: 71.27%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: hidden; } 69.76% { offset-distance: 71.27%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 72.16% { offset-distance: 80.84%; translate: 0 0 calc(var(--kt-h) + 1px); visibility: visible; } 73.95% { offset-distance: 81.19%; translate: 0 0 0; visibility: visible; } 77.24% { offset-distance: 82.72%; translate: 0 0 0; visibility: visible; } 77.25% { offset-distance: 82.72%; translate: 0 0 0; visibility: hidden; } 79.03% { offset-distance: 84.89%; translate: 0 0 0; visibility: hidden; } 79.04% { offset-distance: 84.89%; translate: 0 0 0; visibility: visible; } 85.62% { offset-distance: 100%; translate: 0 0 0; visibility: visible; } 85.63% { offset-distance: 100%; translate: 0 0 0; visibility: hidden; } 100% { offset-distance: 100%; translate: 0 0 0; visibility: hidden; } }
+}
+@media (prefers-reduced-motion: no-preference) and (max-width: 640px) {
+  .kt-ball { animation-name: kt-ball-n; }
 }
 
 /* ── At the checkout (archie/websites/) ──

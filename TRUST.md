@@ -3219,7 +3219,7 @@ same filter as `install_companion_routines`.
   the first press.
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
-### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a and 8d2085ef on main), not yet in a release
+### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the trial, on main), not yet in a release
 
 Jett decided on 2026-09-28 to build it, cron jobs included, because a competitor imports OpenClaw
 automatically. Its review screen has read one real OpenClaw folder; the step that makes the agent
@@ -3228,9 +3228,12 @@ release carries it.
 
 **Approved wording, once it ships:** "Bring an agent over from OpenClaw. Archie reads its folder on
 your computer and shows you what it would make before it makes anything. Its personality, what it
-knows about you, its notes, its skills and its scheduled jobs become the new agent's, and anything
-that cannot come over is listed with the reason. Bringing it over sends nothing anywhere and
-changes nothing of OpenClaw's, and none of OpenClaw's keys or passwords come over."
+knows about you, its notes, its skills, the OpenClaw skills shared by all its agents that you keep
+ticked, and its scheduled jobs become the new agent's. Notes that do not fit its memory go into older
+memory, which it checks when you mention something in them, and anything that cannot come over is
+listed with the reason. Bringing it over sends nothing anywhere and changes nothing of OpenClaw's,
+and none of OpenClaw's keys or passwords come over. On the free trial it can take the place of an
+agent nobody has used yet, and says so first."
 
 **Why it's true:** the screens are `src/app/openclaw-import.tsx`, on the "Where should it start?"
 screen that opens when you add an agent. Find reads only whether OpenClaw's usual folder exists,
@@ -3238,8 +3241,15 @@ Review is a plan from `openclaw_scan`, which writes nothing, and the button on R
 write. The folder is read by `crates/archie-runtime/src/openclaw.rs`: `IDENTITY.md`, `SOUL.md`, and
 `AGENTS.md` only when its box is ticked, into the personality; `USER.md` into what it knows about
 you; `MEMORY.md` and the dated notes into the Notes half of memory, newest first up to
-`memory::IMPORT_NOTES_BYTES`, with what does not fit listed; each `skills/*/SKILL.md` through
-`skill_from_md`. The jobs are read by `crates/archie-core/src/openclaw.rs` from
+`memory::IMPORT_NOTES_BYTES`, and what does not fit into older memory (`gather_memory` and `pieces`),
+cut at sentence ends so each line fits recall's 320 bytes; each `skills/*/SKILL.md` through
+`skill_from_md`. **The skills OpenClaw shares with all its agents** are read from `skills/` in its
+state folder (`shared_skills_dir_for`), one box each, ticked by default, through the same
+`skill_from_md`, and the agent's own skill wins a name clash. **On the free trial**, the import may
+take the place of the one agent there only when nobody has used it (`room` and `why_used` in
+`src-tauri/src/commands/openclaw.rs`: no message anywhere, an empty AI history and usage log, and
+nothing kept or set up by hand), checked again when the button is pressed, and the new agent is made
+before the old one is deleted. The screen says so above the button. The jobs are read by `crates/archie-core/src/openclaw.rs` from
 `state/openclaw.sqlite`, opened read-only, querying only `cron_jobs` and leaving a command job's
 `payload_message` (its command, folder and environment) out of the query, or on an older OpenClaw
 from `cron/jobs.json`. `openclaw.json`, where OpenClaw keeps its model keys and chat-app tokens, is
@@ -3249,6 +3259,8 @@ never opened. The rules are pure functions in `crates/archie-domain/src/openclaw
 files or 5 MB, or matches the shapes of the 2026 registry incidents.
 
 **Boundaries:**
+- ⛔ **Never "only the jobs are read outside the agent's folder."** Two things are: OpenClaw's list of
+  scheduled jobs, and the skills it shares with all its agents. The screen says both.
 - ⛔ **Never "it never reads OpenClaw's keys", "never sees them" or "never opens a file with a key
   in it."** Say none of them come over. The jobs database also holds OpenClaw's sign-in and device
   tokens (the query touches only the jobs table), and an older `cron/jobs.json` is read whole, a
@@ -3256,11 +3268,16 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
   own screen said "does not read" until 8d2085ef.
 - ⛔ **Never "everything comes over" or "your agent, exactly as it was."** A skill that needs a
   program stays behind, and so does a job that runs one or whose schedule a routine cannot say
-  exactly, and notes past the limit. A job at 9:00 and 17:00 comes over as one routine at both times
+  exactly, and a notes file with no date in its name. A job at 9:00 and 17:00 comes over as one routine at both times
   (Archie 2dbcd9b9); more than 12 times a day, or several times on a day of the month, stays behind. OpenClaw's chat apps,
   tools and plugins do not come over. The review screen lists each with the reason.
 - ⛔ **OpenClaw only, and one way.** No other assistant's folder is read, and nothing goes from
   Archie to OpenClaw. The backup entry's "never a portability claim" still holds.
+- ⛔ **Never "nothing is lost" about notes.** Older memory is looked at only when a turn's words match
+  a note, and brings back at most three lines a turn.
+- ⛔ **Never "replaces your starter" without "unused"**, and never without the screen saying so first.
+- ⛔ **Never "no secrets come over."** Notes and skills come over word for word, so anything the owner
+  wrote into them comes too; only OpenClaw's own keys and passwords stay behind.
 - ⚠️ **Routines run on the owner's AI account.** A job that ran every five minutes in OpenClaw does
   the same here, and the review flags anything more often than hourly (`OFTEN_SECONDS`).
 - ⚠️ **Skills and routines keep OpenClaw's words.** One that names a tool only OpenClaw has needs

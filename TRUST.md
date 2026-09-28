@@ -3114,26 +3114,42 @@ does its work; it reaches people with 0.3.1.
   passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
 
-### 🚧 Acuity Scheduling, read by your agent: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a on main), not yet in a release
+### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move, on main), not yet in a release
 
-**Never run against a real Acuity account yet** (`docs/OPEN-THREADS.md`). Nothing here is said in
-the present tense on the site until a release carries it and one live read has worked.
+**Never run against a real Acuity account yet, reads or changes** (`docs/OPEN-THREADS.md`). Jett
+chose on 2026-09-28 to add cancel and move without a live test. Unproven until a Premium account
+tries them: the appointment fields the card is built from, the encoded `ignoreAppointmentIDs[]`,
+whether `admin=true` lifts the client limits, whether Acuity still tells the client in admin mode
+and carries the cancel note, and a cancel of an appointment already canceled. Nothing here is said
+in the present tense on the site until a release carries it and one live read has worked.
 
 **Approved wording, once it ships:** "Connect Acuity Scheduling with your User ID and API key, and
 your agent reads your real appointments: who is booked, what they wrote in your intake form, and
-which times are still open for each kind of appointment. It reads only. Booking, moving and
-canceling stay in Acuity. Acuity includes its API on the Premium plan."
+which times are still open. It can also cancel an appointment, or move one to a time Acuity lists as
+open. First it shows you whose appointment it is, which one, the new time, and whether Acuity will
+tell your client, and nothing changes until you say yes. Booking stays in Acuity. Acuity includes its
+API on the Premium plan."
 
 **Why it's true:** the `acuity` row in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`),
 bound to `acuityscheduling.com`, with `AuthStyle::BasicUser` (`crates/archie-net/src/http.rs`),
 which attaches the key only when a request's host matches the binding exactly, on every redirect.
 `connector_connect` checks the key against `GET /me` before saving it, and only the key goes to the
-credential store. The skill is `data/marketplace/skills/acuity-keeper.json` (1.0.0,
-`min_app_version` 0.3.1). GET requests run at once as reads; anything else would be staged for
-approval, and the skill tells the agent never to send one.
+credential store. GET requests run at once as reads. A cancel or a move is staged, never sent: the
+card is built from Acuity's own record of the appointment (`parse` and `prepare` in
+`crates/archie-runtime/src/acuity.rs`), a move is proposed only for a time `/availability/times`
+lists and is checked again when the owner says yes (`still_true`), and both go with `admin=true`.
+Every other write to Acuity, booking, notes and no-shows included, is refused (`dispatch` and
+`apply_pending` in `crates/archie-runtime/src/connectors.rs`), custom skills too. The skill is
+`data/marketplace/skills/acuity-keeper.json` (1.1.0, `min_app_version` 0.3.1).
 
 **Boundaries:**
-- ⛔ Never say it books, reschedules or cancels. v1 does none of those.
+- ⛔ Never say it books. Booking, notes and no-shows are refused.
+- ⛔ Never "any time". A move goes only to a time Acuity lists as open on that appointment's own
+  calendar.
+- ⛔ Never without the owner's yes. Each cancel and each move is a card first.
+- ⛔ Never "always emails your client". By default Acuity tells the client, by email and by text where
+  the account sends texts; the owner can say not to, and the card says which will happen.
+- ⛔ Never refunds, and never that it was tried on a live account.
 - ⛔ Never say it works on every Acuity plan. The API is on Premium (acuityscheduling.com/pricing:
   "Custom API & CSS for Developers").
 - ⛔ Never say the key can be narrowed. Acuity's key covers the whole account, and the connect

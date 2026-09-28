@@ -2469,6 +2469,34 @@ owner's never-open list, a list of host suffixes that cannot fence a subnet. tru
 carries both since 2026-09-27; it had said Archie listens on no port and cannot reach inside a
 network.
 
+### 🚧 The video library: YouTube behind a press, and an AI voice (decided 2026-09-28, NOT LIVE)
+
+**Not live until the first video page ships.** Nothing below may appear on a page before then, and
+the website entry that follows stays exactly as it is until the same commit that adds the first
+player. Written now so the pages are built to it.
+
+**Jett's decisions (2026-09-28):** the library lives at `learn/<slug>/`, one page per video, and the
+videos are hosted on YouTube, embedded **click to load** on `youtube-nocookie.com`. Each page shows
+our own poster image and makes no request to YouTube until the reader presses play.
+
+**What that does to the no-analytics sentence below, on the day it ships:** "It never has" stays
+true only for the pages without a player. The website entry's approved wording gains one sentence,
+in this form: "Pressing play on a video in the library loads YouTube's player, and YouTube counts
+that play." The privacy policy's list of outside resources names YouTube the same day, and
+`gen-csp.py` gains `frame-src https://www.youtube-nocookie.com` on the library pages only.
+- ⛔ **Never embed the player on page load.** A page view would then reach Google before anybody
+  chose to watch, which is the thing the website entry says does not happen.
+- ⛔ **Never say the nocookie domain means YouTube keeps nothing.** It defers cookies until play; it
+  does not stop YouTube measuring the play.
+
+**Approved wording for the disclosure under each video:** "The voice is made by AI; Jett and Jack
+wrote and checked the script." True only while both halves are, so a video whose script one of us
+did not read does not ship under it.
+
+**Figures stay out of the audio.** `check-facts.py` reads HTML, JS and CSS only, so a price or count
+spoken in a narration, drawn in a frame or written in a caption file is checked by nothing. Each page
+carries a "current details" box instead, and only FACTS.md figures go in it.
+
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 
 **Why this is here at all.** Every other claim in this file is about the app. `trust/proof/`

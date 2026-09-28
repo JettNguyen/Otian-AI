@@ -107,7 +107,7 @@
 
     wlEmail: {
       section: 'Join the waitlist',
-      bot: ['Happy to have you. Two questions and you’re on the list. What email should the invite go to?'],
+      bot: ['Happy to have you. Four questions and you’re on the list. What email should the invite go to?'],
       type: 'email',
       name: 'waitlistEmail',
       placeholder: 'your@email.com',
@@ -137,6 +137,42 @@
           return 'Thanks for saying. Archie is Mac and Windows today; we’ll tell you if that changes.';
         }
         return null;
+      },
+      next: 'wlMail'
+    },
+
+    /* Which mailbox, because Google caps an app under review at 100 Google accounts for its
+       lifetime, and knowing how many on the list read Gmail is how we let them in fairly. */
+    wlMail: {
+      section: 'Join the waitlist',
+      bot: ['Which email would your agent read? It helps us plan around a limit Google puts on Gmail while it reviews Archie.'],
+      type: 'choice',
+      name: 'emailService',
+      options: [
+        { value: 'gmail', label: 'Gmail' },
+        { value: 'google-workspace', label: 'Gmail at work (Google Workspace)' },
+        { value: 'outlook', label: 'Outlook or Microsoft 365' },
+        { value: 'icloud', label: 'iCloud' },
+        { value: 'other', label: 'Something else' }
+      ],
+      next: 'wlRef'
+    },
+
+    /* The referral program's first version (2026-09-28): who sent them, typed or carried in on a
+       ?ref= link, and credited by hand. Nothing is counted anywhere else. */
+    wlRef: {
+      section: 'Join the waitlist',
+      bot: ['Did someone send you? Tell us who, and we’ll thank them.'],
+      type: 'text',
+      name: 'referredBy',
+      optional: true,
+      skipLabel: 'Nobody, I found it myself',
+      placeholder: 'Their name or email',
+      prefill: function () {
+        try {
+          var ref = new URLSearchParams(window.location.search).get('ref') || '';
+          return ref.replace(/[^\w .@+-]/g, '').slice(0, 60);
+        } catch (e) { return ''; }
       },
       next: 'wlConfirm'
     },
@@ -475,7 +511,7 @@
 
   /* ── Question order per path, for the progress bar ── */
   var PATHS = {
-    waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlConfirm'],
+    waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlMail', 'wlRef', 'wlConfirm'],
     guided: ['audience', 'intent', 'gName', 'gEmail', 'gWork', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
     consulting: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
@@ -676,6 +712,7 @@
       field.placeholder = (typeof node.placeholder === 'function' ? node.placeholder(answers) : node.placeholder) || '';
       if (node.autocomplete) field.setAttribute('autocomplete', node.autocomplete);
       field.setAttribute('aria-label', node.section + ' answer');
+      if (!prefill && typeof node.prefill === 'function') prefill = node.prefill();
       if (prefill) field.value = prefill;
 
       var sendBtn = document.createElement('button');

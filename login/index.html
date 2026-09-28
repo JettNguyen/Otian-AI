@@ -36,7 +36,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20260928-2" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260928-3" />
   <style>
     /* ── Auth card (page-scoped), reuses global tokens so it themes light/dark ── */
     .auth-wrap { max-width: 420px; margin: 0 auto; }
@@ -57,6 +57,16 @@
     .auth-fields input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-subtle); }
     .auth-btns { display: flex; flex-direction: column; gap: 10px; }
     .auth-btns .btn { width: 100%; }
+    /* Google's own button, unaltered: the PNGs are signin-assets.zip's light and dark pills, as
+       Google's branding rules require, so this rule only removes our button chrome around them
+       and swaps the two with the theme. */
+    .g-signin { display: block; margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; }
+    .g-signin img { display: block; }
+    .g-signin .g-signin-dark { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-light { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-dark { display: block; }
+    .g-signin:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .g-signin.is-busy { opacity: .6; cursor: progress; }
     .auth-or { display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: var(--fs-sm); margin: 16px 0; }
     .auth-or::before, .auth-or::after { content: ""; flex: 1; height: 1px; background: var(--border); }
     .auth-textlink {
@@ -213,14 +223,13 @@
             <p class="auth-lead" id="auth-card-lead">Your one account for everything at Otian AI.</p>
 
             <div class="auth-btns">
-              <button class="btn btn-primary" id="btn-google">
-                <!-- No Google 'G' here on purpose. Google's sign-in branding rules forbid a
-                     recolored mark ("you can't change the size or color of the Google 'G' logo",
-                     and monochrome versions are listed under Don't), and this one was drawn in
-                     currentColor. Plain text is the use Google's own guidance permits without
-                     permission. To put a mark back, use their supplied button art from
-                     signin-assets.zip unaltered, on a light, dark or neutral theme. -->
-                Continue with Google
+              <!-- Google's supplied button art from signin-assets.zip, unaltered (2026-09-28, Jett's
+                   call): the light and dark pills, swapped with the theme. It replaced a text-only
+                   button on our accent, which Google's branding rules do not list as a permitted
+                   form. Never recolor, crop or redraw the G; replace the files from the zip. -->
+              <button class="g-signin" id="btn-google" type="button" aria-label="Sign in with Google">
+                <img class="g-signin-light" src="../assets/google-signin-light.png" srcset="../assets/google-signin-light.png 1x, ../assets/google-signin-light@2x.png 2x" width="180" height="40" alt="" />
+                <img class="g-signin-dark" src="../assets/google-signin-dark.png" srcset="../assets/google-signin-dark.png 1x, ../assets/google-signin-dark@2x.png 2x" width="180" height="40" alt="" />
               </button>
             </div>
 
@@ -404,8 +413,8 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20260928-2"></script>
-  <script type="module" src="../js/account-nav.js?v=20260928-2"></script>
+  <script src="../js/nav.js?v=20260928-3"></script>
+  <script type="module" src="../js/account-nav.js?v=20260928-3"></script>
 
   <script type="module">
     import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";

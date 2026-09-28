@@ -3077,6 +3077,32 @@ text." Never write "it never reads old messages" bare: the per-thread context wi
 (`triage.rs`, `HISTORY_LINES`) and pretending otherwise is exactly the overclaim this file
 exists to stop.
 
+⚠️ **The wording above leaves out the writing sample, and has since it was written (found
+2026-09-28).** A text reply also carries up to 8 of the owner's own earlier texts, so the draft
+sounds like them: out of 60 read from that conversation (`VOICE_LOOKBACK`), or, when it has fewer
+than 4, from the owner's other watched conversations (`general_voice`, filtered by `worth_sampling`).
+Those go to the owner's AI account too. The Privacy Policy's sentence has the same gap. Jett decides
+whether to fix it now or with the release below.
+
+🚧 **A switch to turn all of it off: BUILT 2026-09-28 (Archie 74eb99bb on main), not yet in a
+release.** Nothing below ships on a page until the release that carries it. `read_earlier_messages`
+on the text watch (`automation.rs`), **on unless the owner turns it off**, shown beside Group chats
+in the app. Off, nothing earlier in any conversation is read: no thread lines, no writing sample from
+this conversation or any other, and no "further back" lookup (`read_thread`, `lookup_menu` and
+`wanted_lookups` in `texts/replies/triage.rs`, with tests in `texts/replies/tests.rs`). The fold,
+which re-reads messages an open card is still answering, stays on either way.
+**Approved wording, at that release:** "When a new text arrives it also reads earlier messages,
+which can include ones from before you switched it on: the last 12 of that one conversation, so the
+reply fits the thread, and up to 8 of your own earlier texts, so the reply sounds like you. Those come
+from that conversation, or from your other watched conversations when it has too few, and they go to
+your AI account with the new text. A switch in the app, on unless you turn it off, stops all of it:
+then only the new messages waiting on an answer are read, and a reply can miss what a message refers
+to."
+- ⛔ Never call the switch opt-in or off by default.
+- ⛔ Never write "it only reads the conversation it is replying to" while the switch is on.
+- ⛔ Never say the switch stops Archie reading texts in general: the chat agent's own
+  `texts_sent_recent` tool, which runs when the owner asks in chat, is a separate lane.
+
 **Approved wording, what leaves the computer:** "The text of a message leaves your computer in
 two ways. It goes to the AI account you connected, directly, on your key, so it can be judged
 and answered; we are not in the middle and keep no copy. And the card offering you the reply,

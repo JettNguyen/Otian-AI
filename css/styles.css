@@ -16846,14 +16846,15 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    lights at 9 and 14 across, the sidebar as a pane of glass under them, 32 rows with the open one a
    pill of the accent, and capsule buttons.
 
-   THE GLASS IS REAL AND UNBLURRED. As in the mockup, the window's own background is a wallpaper,
-   and the page's ground is painted everywhere but the pane by one spread shadow from a box the
-   pane's exact shape (.da-side::before), so the pane is the one hole in the ground and the
-   wallpaper shows through its tint. The mockup also blurs it with backdrop-filter; this port does
-   not, because a backdrop filter redrawn every frame inside a moving 3D scene is the costliest
-   thing a page can ask of WebKit, and a wallpaper made of soft radial gradients looks the same
-   blurred as not. No extra element either: the wallpaper is the window's background, so none of
-   the six pages that draw the window needed a line of markup. */
+   THE GLASS IS REAL AND UNBLURRED. As in the mockup, the window's own background is the desktop
+   behind it, and the page's ground is painted everywhere but the pane by one spread shadow from a
+   box the pane's exact shape (.da-side::before), so the pane is the one hole in the ground and the
+   desktop shows through its tint. The desktop is plain, so the pane is plain gray, as the app's is
+   over a plain desktop. The mockup also blurs it with backdrop-filter; this port does not, because
+   a backdrop filter redrawn every frame inside a moving 3D scene is the costliest thing a page can
+   ask of WebKit, and a flat color looks the same blurred as not. No extra element either: the
+   desktop is the window's background, so none of the six pages that draw the window needed a line
+   of markup. */
 .da-app {
   /* The app's tokens, copied from archie-app-mockup.html, which copies src/styles/globals.css: the
      shared light block with the Mac's own values laid over it. */
@@ -16874,9 +16875,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --shadow-knob: 0 1px 2.5px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
   --mac-switch-off: rgba(68, 64, 59, 0.18);
   --pill-plum: #8557AF; --pill-teal: #337670; --pill-ink: #FFFFFF;
-  /* The wallpaper the pane shows, the mockup's .desk: warm and soft, the brand's own hues run
-     together, so the pane reads as glass without the picture being about a desktop. */
-  --mac-desk: radial-gradient(circle at 12% 18%, #F0A57C 0, transparent 38%), radial-gradient(circle at 18% 62%, #6FB3AA 0, transparent 42%), radial-gradient(circle at 8% 92%, #B38FD6 0, transparent 40%), radial-gradient(circle at 30% 40%, #E9C27A 0, transparent 34%), linear-gradient(160deg, #EADBCB, #D9C6B4);
+  /* What the pane shows, the mockup's .desk: a plain desktop, because over one the Mac's sidebar
+     is plain gray. Solved backward from the gray the app draws there, so the pane lands on about
+     it. It was a wallpaper of the brand's hues for a few hours on September 28, 2026, and Jett found
+     it far more colorful than the app. */
+  --mac-desk: #D3D4D5;
   --shadow-app: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13);
   /* The answers under a message, as a bar inside its card: the mockup's --options-*, each a wash
      of the card with one hue in it, so they follow the theme with no second set. */
@@ -16891,9 +16894,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   background: var(--bg-primary);
   border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-app);
 }
-/* The wallpaper goes on only where a sidebar is drawn to show it. A card cut out of the app with no
-   sidebar (the Websites page's folded cards, the desk on How It Works) keeps the flat ground, which
-   is also what a browser that does not know :has draws everywhere: a pane of plain glass. */
+/* The desktop goes on only where a sidebar is drawn to show it. A card cut out of the app with no
+   sidebar (the Websites page's folded cards, the desk on How It Works) keeps the page's ground, which
+   is also what a browser that does not know :has draws everywhere: a pane tinted over the ground. */
 .da-app:has(.da-side) { background: var(--mac-desk); }
 [data-theme="dark"] .da-app {
   --bg-primary: #1A1A19; --bg-secondary: #222221; --bg-secondary-veil: #2222218C; --bg-card: #2B2B29;
@@ -16911,7 +16914,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --shadow-pane: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
   --mac-switch-off: rgba(243, 240, 237, 0.2);
   --pill-plum: #C5A8DE; --pill-teal: #59C4BB; --pill-ink: #272629;
-  --mac-desk: radial-gradient(circle at 12% 18%, #8A4527 0, transparent 40%), radial-gradient(circle at 18% 62%, #1F5A54 0, transparent 44%), radial-gradient(circle at 8% 92%, #4B3570 0, transparent 42%), radial-gradient(circle at 30% 40%, #6E5424 0, transparent 34%), linear-gradient(160deg, #2A2522, #1B1A19);
+  --mac-desk: #1B1B1C;
 }
 .da-app * { box-sizing: border-box; }
 .da-app p, .da-app h3 { margin: 0; }

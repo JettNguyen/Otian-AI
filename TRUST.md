@@ -2051,8 +2051,9 @@ Connections tab, since 2026-08-19, and that is the name copy uses.
   have.
 - ⚠️ **Say the decision comes back to them.** Every stop above ends with the person deciding,
   either by tapping for the agent to press that one button or by finishing it themselves (the card
-names the computer's window and the shop's own app on their phone, with "if your cart shows up
-there", because not every shop keeps a cart across devices), and that
+names the button by its own name on the page, the computer running Archie and the shop's app, with
+"if your cart shows up there", because not every shop keeps a cart across devices; since Archie
+`9d13a9ac`, September 28, 2026, when "that one button" on the card was too vague for Jett), and that
   is the actual claim. Not that the agent is careful: that the part which could hurt them waits for
   them. Passwords, card numbers and codes are still never typed, tap or not.
 - ⚠️ **Three add-ons use it today**, Statement Collector, Form Filler and Flight Check-In

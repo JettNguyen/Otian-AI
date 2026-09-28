@@ -16645,7 +16645,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --shadow-screen: 0 0 38px -6px rgba(255, 247, 237, calc(var(--night, 0) * .27)), 0 0 112px 16px rgba(252, 234, 216, calc(var(--night, 0) * .13));
   box-shadow: var(--shadow-screen);
 }
-.day-win::before { border-radius: 6px; }
+.day-win::before { border-radius: 11px; }
 .day-phone::before { border-radius: 38px; }
 /* A dark screen throws less light than a cream one, and in the dark theme both mockups are on the
    app's dark palette, so the cream halo would ring something that is not itself lit. */
@@ -16837,44 +16837,94 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    .da-pair, and data-rail on the window's own .da-app in index.html. It came in to 196 from 232
    for one day, which is the move a sidebar makes when a window narrows; the app's own answer to a
    narrow window is to shut the thing, and that is the one being drawn now. */
+/* THE WINDOW IS DRAWN AS A MAC DRAWS IT (2026-09-28). The mockup draws the app two ways, the Mac's
+   and the one every other computer gets, and this port draws the Mac's, for two reasons: it is the
+   iPhone's look too, so the window and the phone beside it read as one product, and its light
+   palette is this website's own (the #F5F1EB ground, white cards, the terracotta filled deep with
+   white on it). Everything it brings is the mockup's Apple block, which follows the Mac section at
+   the end of the Archie repo's globals.css value for value: the Mac's own face, a 16 corner, the
+   lights at 9 and 14 across, the sidebar as a pane of glass under them, 32 rows with the open one a
+   pill of the accent, and capsule buttons.
+
+   THE GLASS IS REAL AND UNBLURRED. As in the mockup, the window's own background is a wallpaper,
+   and the page's ground is painted everywhere but the pane by one spread shadow from a box the
+   pane's exact shape (.da-side::before), so the pane is the one hole in the ground and the
+   wallpaper shows through its tint. The mockup also blurs it with backdrop-filter; this port does
+   not, because a backdrop filter redrawn every frame inside a moving 3D scene is the costliest
+   thing a page can ask of WebKit, and a wallpaper made of soft radial gradients looks the same
+   blurred as not. No extra element either: the wallpaper is the window's background, so none of
+   the six pages that draw the window needed a line of markup. */
 .da-app {
-  /* The app's tokens, copied from archie-app-mockup.html, which copies src/styles/globals.css. */
-  --bg-primary: #FCFAF8; --bg-secondary: #F5F3EF; --bg-secondary-veil: #F5F3EF8C; --bg-card: #FFFFFF;
-  --bg-wash-one: rgba(251, 228, 211, 0.42); --bg-wash-two: rgba(240, 184, 168, 0.24);
-  --accent: #E08A5B; --accent-subtle: #FBE4D3; --accent-strong: #884E30; --accent-line-strong: #E08A5B8C; --text-on-accent: #2A2521;
-  --text-primary: #44403B; --text-secondary: #69645D; --text-muted: #6D6861;
-  --line-soft: rgba(68, 64, 59, 0.16); --line-muted: rgba(68, 64, 59, 0.24); --field-border: rgba(68, 64, 59, 0.62);
+  /* The app's tokens, copied from archie-app-mockup.html, which copies src/styles/globals.css: the
+     shared light block with the Mac's own values laid over it. */
+  --bg-primary: #F5F1EB; --bg-secondary: #EEEAE2; --bg-secondary-veil: #EEEAE28C; --bg-card: #FFFFFF;
+  --accent: #A95425; --accent-subtle: #FBE4D3; --accent-strong: #984C21; --accent-line-strong: #A954258C; --text-on-accent: #FFFFFF;
+  --text-primary: #44403B; --text-secondary: #615C55; --text-muted: #6C655E;
+  --line-soft: rgba(68, 64, 59, 0.16); --line-muted: rgba(68, 64, 59, 0.24); --field-border: rgba(68, 64, 59, 0.62); --field-border-strong: rgba(68, 64, 59, 0.74);
   --surface-soft: rgba(68, 64, 59, 0.025); --surface-soft-strong: rgba(68, 64, 59, 0.08);
-  --c-green: #679B55; --c-green-subtle: rgba(103, 155, 85, 0.14); --c-green-strong: #48733A; --c-green-fill: #4E7D3F;
-  --c-gold: #BB8C33; --c-gold-subtle: rgba(187, 140, 51, 0.14); --c-gold-strong: #85631E; --c-gold-fill: #9A6820; --text-on-gold: #FFFFFF;
+  --c-green: #679B55; --c-green-subtle: rgba(103, 155, 85, 0.14); --c-green-strong: #416934; --c-green-fill: #46723A;
+  --c-gold: #BB8C33; --c-gold-subtle: rgba(187, 140, 51, 0.14); --c-gold-strong: #7D5C1B; --c-gold-fill: #9A6820; --text-on-gold: #FFFFFF;
   --c-plum: #996FBE; --c-plum-subtle: rgba(153, 111, 190, 0.13); --c-plum-strong: #705094;
-  --c-teal: #3E9A92; --c-teal-subtle: rgba(62, 154, 146, 0.13); --c-teal-strong: #2B6961;
-  --c-red-fill: #BC5145;
+  --c-teal: #3E9A92; --c-teal-subtle: rgba(62, 154, 146, 0.13); --c-teal-strong: #2B6B65;
+  --c-red-fill: #A8463B;
+  /* The Mac's own: the pane's tint, hairline and cast, the switch's empty track and its knob, and
+     the open row's pill on Personality and Routines, which the app gets by rebinding --accent. */
+  --mac-glass: rgba(250, 248, 244, 0.64); --mac-edge: rgba(68, 64, 59, 0.1);
+  --shadow-pane: 0 1px 2px rgba(68, 64, 59, 0.05), 0 8px 24px rgba(68, 64, 59, 0.07);
+  --shadow-knob: 0 1px 2.5px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(0, 0, 0, 0.08);
+  --mac-switch-off: rgba(68, 64, 59, 0.18);
+  --pill-plum: #8557AF; --pill-teal: #337670; --pill-ink: #FFFFFF;
+  /* The wallpaper the pane shows, the mockup's .desk: warm and soft, the brand's own hues run
+     together, so the pane reads as glass without the picture being about a desktop. */
+  --mac-desk: radial-gradient(circle at 12% 18%, #F0A57C 0, transparent 38%), radial-gradient(circle at 18% 62%, #6FB3AA 0, transparent 42%), radial-gradient(circle at 8% 92%, #B38FD6 0, transparent 40%), radial-gradient(circle at 30% 40%, #E9C27A 0, transparent 34%), linear-gradient(160deg, #EADBCB, #D9C6B4);
   --shadow-app: 0 30px 70px rgba(0, 0, 0, 0.34), 0 10px 22px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(0, 0, 0, 0.13);
-  position: relative; display: flex; flex-direction: column;
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: var(--fs-base); line-height: 1.4; color: var(--text-primary); text-align: left;
-  background: radial-gradient(circle at 15% -5%, var(--bg-wash-one), transparent 38%), radial-gradient(circle at 100% 0%, var(--bg-wash-two), transparent 34%), var(--bg-primary);
-  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-app);
+  /* The answers under a message, as a bar inside its card: the mockup's --options-*, each a wash
+     of the card with one hue in it, so they follow the theme with no second set. */
+  --options-fill: color-mix(in srgb, var(--bg-card) 95%, var(--text-primary));
+  --options-go: color-mix(in srgb, var(--bg-card) 86%, var(--c-green));
+  --options-go-press: color-mix(in srgb, var(--bg-card) 76%, var(--c-green));
+  --options-plain: color-mix(in srgb, var(--bg-card) 86%, var(--accent));
+  --options-rule: color-mix(in srgb, var(--bg-card) 78%, var(--text-primary));
+  position: relative; display: flex; flex-direction: column; isolation: isolate;
+  /* SF Pro, the Mac's own face. Georgia stays for the headings that name it. */
+  font-family: -apple-system, system-ui, sans-serif; font-size: var(--fs-base); line-height: 1.4; color: var(--text-primary); text-align: left;
+  background: var(--bg-primary);
+  border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-app);
 }
+/* The wallpaper goes on only where a sidebar is drawn to show it. A card cut out of the app with no
+   sidebar (the Websites page's folded cards, the desk on How It Works) keeps the flat ground, which
+   is also what a browser that does not know :has draws everywhere: a pane of plain glass. */
+.da-app:has(.da-side) { background: var(--mac-desk); }
 [data-theme="dark"] .da-app {
   --bg-primary: #1A1A19; --bg-secondary: #222221; --bg-secondary-veil: #2222218C; --bg-card: #2B2B29;
-  --bg-wash-one: rgba(64, 63, 59, 0.35); --bg-wash-two: rgba(239, 199, 119, 0.05);
   --accent: #EDA277; --accent-subtle: #453629; --accent-strong: #F0B18D; --accent-line-strong: #EDA2778C; --text-on-accent: #292624;
-  --text-primary: #F3F0ED; --text-secondary: #AEACA6; --text-muted: #ACA8A3;
-  --line-soft: rgba(243, 240, 237, 0.16); --line-muted: rgba(243, 240, 237, 0.28); --field-border: rgba(243, 240, 237, 0.44);
+  /* The Mac's one change in dark: the website's and the iPhone's quiet ink. */
+  --text-primary: #F3F0ED; --text-secondary: #AEACA6; --text-muted: #A6A29C;
+  --line-soft: rgba(243, 240, 237, 0.16); --line-muted: rgba(243, 240, 237, 0.28); --field-border: rgba(243, 240, 237, 0.44); --field-border-strong: rgba(243, 240, 237, 0.56);
   --surface-soft: rgba(243, 240, 237, 0.03); --surface-soft-strong: rgba(243, 240, 237, 0.1);
   --c-green: #8FBF7C; --c-green-subtle: rgba(143, 191, 124, 0.16); --c-green-strong: #8FBF7C; --c-green-fill: #4E7440;
-  --c-gold: #DCAF57; --c-gold-subtle: rgba(220, 175, 87, 0.16); --c-gold-strong: #DCAF57; --c-gold-fill: #9A6820;
+  --c-gold: #DCAF57; --c-gold-subtle: rgba(220, 175, 87, 0.16); --c-gold-strong: #DCAF57; --c-gold-fill: #9E6B21;
   --c-plum: #BE9BDD; --c-plum-subtle: rgba(190, 155, 221, 0.16); --c-plum-strong: #BE9BDD;
   --c-teal: #6FC4BC; --c-teal-subtle: rgba(111, 196, 188, 0.16); --c-teal-strong: #6FC4BC;
   --c-red-fill: #B0503F;
+  --mac-glass: rgba(38, 38, 36, 0.63); --mac-edge: rgba(243, 240, 237, 0.08);
+  --shadow-pane: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
+  --mac-switch-off: rgba(243, 240, 237, 0.2);
+  --pill-plum: #C5A8DE; --pill-teal: #59C4BB; --pill-ink: #272629;
+  --mac-desk: radial-gradient(circle at 12% 18%, #8A4527 0, transparent 40%), radial-gradient(circle at 18% 62%, #1F5A54 0, transparent 44%), radial-gradient(circle at 8% 92%, #4B3570 0, transparent 42%), radial-gradient(circle at 30% 40%, #6E5424 0, transparent 34%), linear-gradient(160deg, #2A2522, #1B1A19);
 }
 .da-app * { box-sizing: border-box; }
 .da-app p, .da-app h3 { margin: 0; }
-.da-traffic { position: absolute; top: 15px; left: 17px; z-index: 7; display: flex; gap: 8px; }
-.da-traffic i { width: 12px; height: 12px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.13); }
+.da-traffic { position: absolute; top: 9px; left: 9px; z-index: 7; display: flex; gap: 9px; }
+.da-traffic i { width: 14px; height: 14px; border-radius: 50%; display: block; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.13); }
 .da-body { display: flex; flex: 1; min-height: 0; }
-.da-side { width: 232px; flex-shrink: 0; display: flex; flex-direction: column; border-right: 1px solid var(--line-soft); background: var(--bg-secondary-veil); padding: 12px; padding-top: 36px; }
+/* The sidebar, a pane of glass 8 in from the window's left and bottom and under the 32 strip the
+   lights sit in, with a hairline and a soft cast for its edge. 16 round, as in the app since
+   September 28, 2026. */
+.da-side { position: relative; width: 232px; flex-shrink: 0; display: flex; flex-direction: column; margin: 32px 0 8px 8px; border-radius: 16px; background: var(--mac-glass); box-shadow: 0 0 0 0.5px var(--mac-edge), var(--shadow-pane); padding: 12px; padding-top: 4px; }
+/* The page's ground everywhere but the pane. A shadow is never drawn inside its own box, so the
+   pane is the one hole in it; the window clips the rest to its own corners. */
+.da-side::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; box-shadow: 0 0 0 100vmax var(--bg-primary); pointer-events: none; }
 .da-brand { display: flex; flex-direction: column; align-items: flex-start; padding: 8px 4px; }
 .da-brand-btn { display: flex; align-items: center; margin-left: -4px; padding: 2px; }
 .da-brand-btn svg { width: 48px; height: 48px; flex-shrink: 0; }
@@ -16890,22 +16940,32 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-avatar { display: flex; align-items: center; justify-content: center; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--accent-subtle); }
 .da-avatar.sm { width: 28px; height: 28px; }
 .da-avatar.md { width: 36px; height: 36px; }
-.da-avatar.lg { width: 80px; height: 80px; }
+.da-avatar.lg { width: 56px; height: 56px; }
 .da-avatar .ember { width: 100%; height: 100%; }
 .da-sections { flex: 1; min-height: 0; overflow: hidden; margin-top: 8px; }
 .da-nav { display: flex; flex-direction: column; gap: 2px; }
-.da-row { display: flex; height: 36px; width: 100%; align-items: center; gap: 10px; border-radius: var(--radius-sm); padding-right: 10px; font-size: var(--fs-sm); color: var(--text-primary); }
+/* A medium Mac sidebar row: 32 tall, 7 round, and the open one a pill of the accent with the
+   accent's own ink, which is how a focused Mac sidebar marks where you are. The rail keeps the
+   shared tint and the bar outside the tile (below), so the pill is scoped away from it. */
+.da-row { display: flex; height: 32px; width: 100%; align-items: center; gap: 10px; border-radius: 7px; padding-right: 10px; font-size: var(--fs-sm); color: var(--text-primary); }
 .da-row.on { background: var(--accent-subtle); font-weight: 600; color: var(--accent-strong); }
+.da-app:not([data-rail="shut"]) .da-row.on { background: var(--accent); color: var(--text-on-accent); }
+.da-app:not([data-rail="shut"]) .da-row.on[data-kind="personality"] { background: var(--pill-plum); color: var(--pill-ink); }
+.da-app:not([data-rail="shut"]) .da-row.on[data-kind="routines"] { background: var(--pill-teal); color: var(--pill-ink); }
 .da-row .da-label { transform: translateY(1px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.da-glyph { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--radius-sm); flex-shrink: 0; }
-.da-glyph svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.da-glyph.plum { background: var(--c-plum-subtle); color: var(--c-plum-strong); }
-.da-glyph.skill { background: var(--accent-subtle); color: var(--accent-strong); }
-.da-glyph.teal { background: var(--c-teal-subtle); color: var(--c-teal-strong); }
+/* No tile behind a mark on the Mac, open or shut: the mark keeps its kind's ink and the pane's
+   glass runs behind it, as in the mockup's Apple block. */
+.da-glyph { display: grid; place-items: center; width: 28px; height: 28px; border-radius: var(--radius-sm); flex-shrink: 0; }
+.da-glyph svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.da-glyph.plum { color: var(--c-plum-strong); }
+.da-glyph.skill { color: var(--accent-strong); }
+.da-glyph.teal { color: var(--c-teal-strong); }
 .da-row.on .da-glyph { background: none; color: inherit; }
 .da-rule { margin: 6px 0; border-top: 1px solid var(--line-soft); }
 .da-pill-unread { margin-left: auto; flex-shrink: 0; display: inline-flex; height: 18px; min-width: 18px; align-items: center; justify-content: center; border-radius: 999px; background: var(--c-gold-fill); padding: 0 4px; font-size: var(--fs-3xs); font-weight: 600; line-height: 1; color: var(--text-on-gold); }
-.da-places { margin: 12px -12px -12px; border-top: 1px solid var(--line-soft); background: var(--bg-secondary); padding: 8px 12px 12px; display: flex; flex-direction: column; gap: 2px; }
+/* The foot is part of the pane on a Mac, so its own deeper fill goes and the glass runs through it.
+   The rule above it stays, to say where the places end. */
+.da-places { margin: 12px -12px -12px; border-top: 1px solid var(--line-soft); background: transparent; padding: 8px 12px 12px; display: flex; flex-direction: column; gap: 2px; }
 .da-place { display: flex; min-height: 44px; width: 100%; align-items: center; gap: 10px; border-radius: var(--radius-sm); padding: 8px 12px; font-size: var(--fs-sm); font-weight: 500; color: var(--text-secondary); white-space: nowrap; }
 .da-place svg { width: 20px; height: 20px; flex: 0 0 20px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
 .da-place.store { border: 1px solid var(--accent); color: var(--accent-strong); font-weight: 600; background: var(--bg-card); }
@@ -16946,13 +17006,19 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    that scrolls, which is what the app does when a window is short. So the sidebar keeps its own
    gap and nothing else about the rail changes. Draw this window taller and take the override
    back out. */
+/* Every window drawn here is shorter than the sidebar's list, open or shut, so its end fades off
+   the way the app fades any list with more below it (the mockup's .sections.fade-bottom), rather
+   than cutting the last row in half at the foot's rule. Measured on all six pages on September 28,
+   2026; a window drawn tall enough to fit its list should take this back off, because a fade at
+   the end of a list that fits points at nothing. */
+.da-sections { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent); }
 .da-app[data-rail="shut"] .da-nav { align-items: center; padding-right: 4px; }
 .da-app[data-rail="shut"] .da-row { position: relative; width: 40px; height: 40px; justify-content: center; padding-right: 0; border-radius: var(--radius); }
 .da-app[data-rail="shut"] .da-row .da-label { display: none; }
 /* The drawing keeps its share of its own tile, so shutting the sidebar changes the size of the
    column and not the size of the picture in it. */
 .da-app[data-rail="shut"] .da-glyph { width: 40px; height: 40px; border-radius: var(--radius); }
-.da-app[data-rail="shut"] .da-glyph svg { width: 23px; height: 23px; }
+.da-app[data-rail="shut"] .da-glyph svg { width: 22px; height: 22px; }
 .da-app[data-rail="shut"] .da-row.on { background: none; }
 .da-app[data-rail="shut"] .da-row.on::before { content: ""; position: absolute; left: -6px; top: 0; width: 3px; height: 40px; border-radius: 999px; background: var(--accent); }
 /* The waiting-message count moves to the corner the status dot already taught, because the row it
@@ -16972,16 +17038,19 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-app[data-rail="shut"] .da-pair svg { width: 20px; height: 20px; }
 .da-page { position: relative; display: flex; flex: 1; min-width: 0; overflow: hidden; }
 .da-page-pad { display: flex; flex: 1; min-height: 0; flex-direction: column; overflow: hidden; padding: 36px 32px 32px; }
-.da-ahead-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 4px 0; }
-.da-ahead-left { display: flex; min-width: 0; align-items: center; gap: 20px; }
-.da-facebtn { position: relative; display: flex; width: 80px; height: 80px; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%; border: 1px solid var(--line-soft); background: var(--bg-card); flex-shrink: 0; }
-.da-name { min-width: 0; font-family: Georgia, "Times New Roman", serif; font-size: var(--fs-7xl); line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+/* A short header, because it sits over every tab: a 56 face, the name a step down, and the small
+   button, about 64 tall where it was about 90 (the app's 32a4cb62, September 28, 2026). */
+.da-ahead-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.da-ahead-left { display: flex; min-width: 0; align-items: center; gap: 16px; }
+.da-facebtn { position: relative; display: flex; width: 56px; height: 56px; align-items: center; justify-content: center; overflow: hidden; border-radius: 50%; border: 1px solid var(--line-soft); background: var(--bg-card); flex-shrink: 0; }
+.da-name { min-width: 0; font-family: Georgia, "Times New Roman", serif; font-size: var(--fs-5xl); line-height: 32px; font-weight: 600; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
 .da-name svg { width: 16px; height: 16px; color: var(--text-muted); flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
-.da-purpose { margin-top: 2px; font-size: var(--fs-md); color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.da-purpose { font-size: var(--fs-base); line-height: 20px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .da-ahead-right { display: flex; flex-shrink: 0; align-items: center; gap: 12px; }
 .da-statusbtn { display: inline-flex; align-items: center; gap: 4px; font-size: var(--fs-base); color: var(--c-green-strong); white-space: nowrap; }
 .da-statusbtn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-.da-runbtn { border-radius: var(--radius-sm); padding: 8px 16px; font-size: var(--fs-base); font-weight: 500; color: #fff; background: var(--c-red-fill); }
+/* A filled button at this height is a capsule on macOS 26, and none casts a shadow. */
+.da-runbtn { border-radius: 999px; padding: 6px 14px; font-size: var(--fs-base); font-weight: 500; color: #fff; background: var(--c-red-fill); }
 .da-pane { margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
 .da-nowhead .h { font-size: var(--fs-md); font-weight: 600; color: var(--text-primary); }
 .da-nowhead .s { margin-top: 2px; font-size: var(--fs-xs); color: var(--text-secondary); }
@@ -16998,9 +17067,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-kindcard .s { margin-top: 2px; font-size: var(--fs-2xs); line-height: 16px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .da-recent { overflow: hidden; border-radius: var(--radius); background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--line-soft); }
 .da-recent .hd { display: flex; align-items: center; gap: 12px; background: var(--surface-soft-strong); padding: 8px 16px; }
-.da-recent .hd .l { font-size: var(--fs-2xs); font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-secondary); }
+.da-recent .hd .l { font-size: var(--fs-base); font-weight: 600; color: var(--text-primary); }
 .da-recent .hd .o { margin-left: auto; font-size: var(--fs-xs); font-weight: 500; color: var(--accent-strong); }
-.da-recent .r { display: flex; align-items: center; gap: 12px; border-top: 1px solid var(--line-soft); padding: 10px 16px; }
+.da-recent .r { display: flex; flex-wrap: wrap; align-items: center; column-gap: 12px; row-gap: 4px; border-top: 1px solid var(--line-soft); padding: 10px 16px; }
 .da-recent .r .t { min-width: 0; flex: 1 1 208px; font-size: var(--fs-base); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .da-recent .r .w { flex-shrink: 0; font-size: var(--fs-xs); color: var(--text-muted); }
 .da-badge { flex-shrink: 0; border-radius: 999px; padding: 2px 8px; font-size: var(--fs-2xs); font-weight: 600; }
@@ -19033,7 +19102,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .ch-win .da-pick .n.done { display: none; color: var(--c-green-strong); }
 .ch-win .da-keyrow { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .ch-win .da-field { min-width: 11rem; flex: 1; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: var(--bg-card); padding: 4px 8px; font-size: var(--fs-base); color: var(--text-muted); }
-.ch-win .da-btn-accent { border-radius: var(--radius-sm); background: var(--accent); padding: 4px 12px; font-size: var(--fs-base); font-weight: 500; color: var(--text-on-accent); }
+.ch-win .da-btn-accent { border-radius: 999px; background: var(--accent); padding: 4px 12px; font-size: var(--fs-base); font-weight: 500; color: var(--text-on-accent); }
 .ch-win .da-btn-quiet { border-radius: var(--radius-sm); border: 1px solid var(--line-soft); padding: 4px 12px; font-size: var(--fs-base); font-weight: 500; color: var(--text-secondary); }
 /* which row is in use, which note it shows, which name the head carries and which key hint the
    field shows: the radios above decide, and nothing here runs a script */
@@ -19368,8 +19437,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .wd-win .da-abtitle { font-size: var(--fs-xs); font-weight: 500; color: var(--text-primary); }
 .wd-win .da-abrow { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 7px; font-size: var(--fs-xs); color: var(--text-secondary); }
 .wd-win .da-sw { position: relative; flex-shrink: 0; width: 26px; height: 15px; border-radius: 999px; background: var(--accent); transition: background .4s; }
-.wd-win .da-sw i { position: absolute; top: 2px; left: 13px; width: 11px; height: 11px; border-radius: 50%; background: var(--bg-card); transition: left .4s; }
-.wd-figure .wd-win .da-abrow[data-a] .da-sw { background: var(--line-muted); }
+.wd-win .da-sw i { position: absolute; top: 2px; left: 13px; width: 11px; height: 11px; border-radius: 50%; background: #FFFFFF; box-shadow: var(--shadow-knob); transition: left .4s; }
+.wd-figure .wd-win .da-abrow[data-a] .da-sw { background: var(--mac-switch-off); }
 .wd-figure .wd-win .da-abrow[data-a] .da-sw i { left: 2px; }
 .wd-figure .wd-win .da-abrow[data-a] .l { color: var(--text-muted); }
 #wd-rem:checked ~ .wd-scene .da-abrow[data-a="rem"] .da-sw, #wd-file:checked ~ .wd-scene .da-abrow[data-a="file"] .da-sw, #wd-rec:checked ~ .wd-scene .da-abrow[data-a="rec"] .da-sw, #wd-web:checked ~ .wd-scene .da-abrow[data-a="web"] .da-sw { background: var(--accent); }
@@ -19750,13 +19819,18 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 /* the running list of steps is one message whose lines grow at the end (worker.rs) */
 .da-steps span { display: block; color: var(--text-secondary); }
 .da-stamp { padding: 0 4px; font-size: var(--fs-3xs); font-variant-numeric: tabular-nums; color: var(--text-muted); }
-.da-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.da-act { border-radius: var(--radius-sm); border: 1px solid; padding: 8px 12px; font-size: var(--fs-sm); font-weight: 600; line-height: 1.2; white-space: nowrap; }
-.da-act.go { border-color: color-mix(in srgb, var(--c-green) 45%, transparent); background: var(--c-green-subtle); color: var(--c-green-strong); }
-.da-act.stop { border-color: var(--line-muted); background: var(--bg-card); color: var(--text-secondary); }
-.da-act.plain { border-color: var(--line-soft); background: var(--bg-card); color: var(--text-primary); }
-/* the tap: the pressed button stays lit, as the app holds a pressed card */
-.da-act.is-pressed { box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-green) 30%, transparent); background: color-mix(in srgb, var(--c-green) 26%, var(--bg-card)); }
+/* The answers to a message, as a rounded bar along the bottom of its card, like an alert's buttons
+   (the mockup's .actions and .act, the app's ActionRow since September 27, 2026): set 10 in from the
+   card's sides and bottom, 12 round, with soft rules between cells each as wide as its words and
+   growing to share the row. A yes is a green wash with heavier words, anything else that gives
+   something is the accent's, and only the way out is gray. The Mac sets them at 14. */
+.da-bubble .da-actions { display: flex; flex-wrap: wrap; gap: 1px; margin: 10px -4px 0; border: 1px solid var(--options-rule); border-radius: var(--radius); background: var(--options-rule); overflow: hidden; }
+.da-act { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 12px; background: var(--options-fill); font-size: var(--fs-base); font-weight: 500; line-height: 1.25; white-space: nowrap; transition: background-color .25s ease; }
+.da-act.go { background: var(--options-go); color: var(--c-green-strong); font-weight: 600; }
+.da-act.stop { color: var(--text-secondary); }
+.da-act.plain { background: var(--options-plain); color: var(--accent-strong); }
+/* the tap: the pressed answer goes a shade deeper, which is what a press does in the app */
+.da-act.go.is-pressed { background: var(--options-go-press); transition-duration: 90ms; }
 /* the picture the stop sends: the checkout as it stands, small. Drawn as the same page in
    miniature rather than as a grey box, because a screenshot is the one thing here that has to
    look like what it is of. */
@@ -19771,7 +19845,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .da-iconbtn { display: flex; width: 42px; height: 42px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); color: var(--text-secondary); }
 .da-iconbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
 .da-box { flex: 1; min-width: 0; height: 42px; display: flex; align-items: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); padding: 0 12px; font-size: var(--fs-base); color: var(--text-muted); white-space: nowrap; overflow: hidden; }
-.da-sendbtn { display: flex; height: 42px; align-items: center; border-radius: var(--radius); background: var(--accent); padding: 0 16px; font-size: var(--fs-base); font-weight: 600; color: var(--text-on-accent); }
+.da-sendbtn { display: flex; height: 42px; align-items: center; border-radius: 999px; background: var(--accent); padding: 0 16px; font-size: var(--fs-base); font-weight: 600; color: var(--text-on-accent); }
 .da-composer .cap { margin-top: 8px; text-align: center; font-size: var(--fs-2xs); line-height: 1.6; color: var(--text-muted); }
 
 /* The browser: an ordinary Chrome window, in the colors Chrome draws its own frame in, light or
@@ -19904,8 +19978,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .wb-tap { display: grid; grid-template-columns: 26px 1fr auto; align-items: center; gap: 10px; padding: 9px 10px; border-radius: var(--radius-sm); border: 1px solid var(--line-soft); background: var(--bg-primary); }
 .wb-tap svg { width: 22px; height: 22px; fill: none; stroke: var(--text-secondary); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .wb-tap b { font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
-.wb-mini .da-act, .wb-tap .da-act { padding: 5px 9px; font-size: var(--fs-2xs); --c-green: #679B55; --c-green-subtle: rgba(103, 155, 85, 0.14); --c-green-strong: #48733A; }
-[data-theme="dark"] .wb-tap .da-act { --c-green: #8FBF7C; --c-green-subtle: rgba(143, 191, 124, 0.16); --c-green-strong: #8FBF7C; }
+/* One answer on its own, outside the window, so it is the bar with one cell: the same wash, rule
+   and corner, with the app's own green, because the site's is not the app's. */
+.wb-mini .da-act, .wb-tap .da-act { min-height: 0; padding: 5px 9px; font-size: var(--fs-2xs); border: 1px solid color-mix(in srgb, var(--bg-card) 78%, var(--text-primary)); border-radius: var(--radius-sm); --c-green: #679B55; --c-green-strong: #416934; --options-go: color-mix(in srgb, var(--bg-card) 86%, var(--c-green)); }
+[data-theme="dark"] .wb-tap .da-act { --c-green: #8FBF7C; --c-green-strong: #8FBF7C; }
 .wb-nevers { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 280px; }
 .wb-nevers span { position: relative; padding: 7px 14px; border-radius: 999px; border: 1px solid var(--field-border-strong); font-size: var(--fs-sm); font-weight: 600; color: var(--text-muted); }
 .wb-nevers span::after { content: ""; position: absolute; left: 8px; right: 8px; top: 50%; border-top: 1.5px solid var(--text-muted); transform: rotate(-8deg); }

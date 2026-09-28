@@ -2523,7 +2523,7 @@ owner's never-open list, a list of host suffixes that cannot fence a subnet. tru
 carries both since 2026-09-27; it had said Archie listens on no port and cannot reach inside a
 network.
 
-### 🚧 The video library: YouTube behind a press, and an AI voice (decided 2026-09-28, NOT LIVE)
+### 🚧 The video library: YouTube behind a press, and Jack's voice (decided 2026-09-28, NOT LIVE)
 
 **Not live until the first video page ships.** Nothing below may appear on a page before then, and
 the website entry that follows stays exactly as it is until the same commit that adds the first
@@ -2543,11 +2543,18 @@ that play." The privacy policy's list of outside resources names YouTube the sam
 - ⛔ **Never say the nocookie domain means YouTube keeps nothing.** It defers cookies until play; it
   does not stop YouTube measuring the play.
 
-**Approved wording for the disclosure under each video (changed 2026-09-28):** "The voice is made by
-AI; Jett and Jack checked every word of the script." It said "wrote and checked" until the same day,
-when the library's scripts turned out to be drafted by AI (the plan and its corrections both), which
-made "wrote" the half that was not true; Jett chose "checked". True only while it is, so a video
-whose script one of us has not read line by line does not ship under it.
+**Approved wording for the line under each video (changed twice on 2026-09-28):** "Read by Jack."
+The library was planned with an AI voice under "The voice is made by AI; Jett and Jack checked every
+word of the script." The same evening Jett moved it to Jack reading every script and every Archie
+screen drawn from the app mockup, and chose to name the voice and not the drawings. True only while
+it is: a video Jack did not read does not ship under it.
+- **The screens are drawings, and a drawing makes claims.** A video plays Archie's screens from the
+  app mockup and never records a real computer, so every button, word and state it draws has to be
+  one the release has, checked against the app and not only against the mockup. A mockup that has
+  drifted from the app puts its mistakes in the video; each video's mockup file says in its first
+  comment where in the code each thing it draws comes from.
+- ⛔ **Never draw another company's screen.** Google's and Microsoft's sign-in pages, the Claude
+  Console, Telegram and the Mac and Windows install boxes are real recordings on a demo account.
 
 **Figures stay out of the audio.** `check-facts.py` reads HTML, JS and CSS only, so a price or count
 spoken in a narration, drawn in a frame or written in a caption file is checked by nothing. Each page

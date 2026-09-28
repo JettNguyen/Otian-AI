@@ -3068,12 +3068,12 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   composing fresh email from scratch until that ships.
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
-### 🚧 Inbox drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad on main), not yet in a release
+### 🚧 Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen, on main), not yet in a release
 
 **Approved wording, once it is in a release:** "Turn on Write like me and give it some of your own
-writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat
-or to mail that just arrived, it writes it the way you write. You still read every draft before it
-goes."
+writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat,
+to mail that just arrived, or to a text, it writes it the way you write, and a text still reads like
+a text. You still read every draft before it goes."
 
 **Why it's true:** the inbox drafter's prompt (`email/replies/triage.rs`, `triage_system`) carries
 the owner's style note when Write like me is on and a note has been read, resolved by
@@ -3083,18 +3083,34 @@ so Email Manager's row under "Which skills write like me" decides it. The chat h
 (2026-08-19). Reading the Sent folder needs its own dated consent (`WritingStyleConfig::sent_consent_at`)
 and is refused on the starter credits. What reaches a prompt is a note of at most 1,200 characters
 plus at most five passages of 400, never the samples themselves (`writing_style::limits`). Tests in
-`email/replies/tests.rs`.
+`email/replies/tests.rs`. **Texts** go through the same gate: `owner_text_style` and `triage_system`
+in `texts/replies/triage.rs`, so Text Replies' row decides it. The owner's own texts still set length,
+capitals, punctuation and emoji and win where the two disagree; the note lends word choice and warmth,
+never an email's greeting, sign-off or length. About 510 more input tokens a text read on Fast and 670
+on Balanced, roughly $0.15 to $0.38 a month at 9.6 texts a day. Tests in `texts/replies/tests.rs`.
+
+**What is kept, approved now:** "If you let Archie read your sent mail, it keeps the parts you wrote
+and a short description on this computer, and in backups you make, until you clear them"
+(`writing_style_gather_sent`, `docs/BACKUP-FORMAT.md`). ⛔ Never "only a description is kept": the
+0.3.0 consent screen says "Archie keeps those lines, not the messages", **which is false in the
+released app** (samples.json keeps up to 64,000 characters of what the owner wrote). Main says what is
+kept, and that the description goes to the AI account each time an add-on set to write like the owner
+does its work; it reaches people with 0.3.1.
 
 **Boundaries:**
-- ⛔ **Never "every draft sounds like you."** Only with Write like me on, a note read, and Email
-  Manager not set to Not like me. Warmer, briefer and more formal under Other versions do not use it,
-  and how formal a reply is still follows the email being answered.
-- ⛔ **Never say text-message replies use it.** Text Replies learns from the owner's own texts.
+- ⛔ **Never "every draft sounds like you."** Only with Write like me on, a note read, and that
+  add-on (Email Manager, or Text Replies) not set to Not like me. Warmer, briefer and more formal do
+  not use it, nor does Text Replies' redraft after a lookup or Rewrite it for me, and how formal a
+  reply is still follows the person being answered.
+- ⚠️ **Texts use it on main only.** Until a release carries it, text replies learn from the owner's
+  own texts and nothing else, and no page may say otherwise.
 - ⛔ **On Archie for Business, never say a teammate's drafts are in their style.** A teammate's
   mailbox gets nobody's style, because the note belongs to the agent's owner.
 - ⚠️ **What leaves the computer:** the note and its passages, which are verbatim lines of the owner's
-  own writing, go to the owner's AI company with every email the agent reads in auto-draft mode, and
-  all the samples go once when the Sent folder is read. Never say the passages stay on the computer.
+  own writing, go to the owner's AI company with every email the agent reads in auto-draft mode, every
+  text Text Replies reads that could get a draft, and every chat turn routed to an add-on set to write
+  like the owner. The samples go each time the owner presses Read my writing, not once. Never say the
+  passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
 
 ### 🚧 Acuity Scheduling, read by your agent: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a on main), not yet in a release
@@ -3250,6 +3266,10 @@ to."
 - ⛔ Never write "it only reads the conversation it is replying to" while the switch is on.
 - ⛔ Never say the switch stops Archie reading texts in general: the chat agent's own
   `texts_sent_recent` tool, which runs when the owner asks in chat, is a separate lane.
+- ⚠️ **The switch does not cover Write like me** (on main, Archie bd9dab5d). When Text Replies writes
+  like the owner, the short description of how they write, read from writing they handed over and
+  never from Messages, still goes with each text read that could get a draft. "Not like me" on Text
+  Replies stops it.
 
 **Approved wording, what leaves the computer:** "The text of a message leaves your computer in
 two ways. It goes to the AI account you connected, directly, on your key, so it can be judged

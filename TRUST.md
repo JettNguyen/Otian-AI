@@ -3143,6 +3143,55 @@ same filter as `install_companion_routines`.
   the first press.
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
+### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a and 8d2085ef on main), not yet in a release
+
+Jett decided on 2026-09-28 to build it, cron jobs included, because a competitor imports OpenClaw
+automatically. Its review screen has read one real OpenClaw folder; the step that makes the agent
+has run only on sample folders. Nothing here is said in the present tense on the site until a
+release carries it.
+
+**Approved wording, once it ships:** "Bring an agent over from OpenClaw. Archie reads its folder on
+your computer and shows you what it would make before it makes anything. Its personality, what it
+knows about you, its notes, its skills and its scheduled jobs become the new agent's, and anything
+that cannot come over is listed with the reason. Bringing it over sends nothing anywhere and
+changes nothing of OpenClaw's, and none of OpenClaw's keys or passwords come over."
+
+**Why it's true:** the screens are `src/app/openclaw-import.tsx`, on the "Where should it start?"
+screen that opens when you add an agent. Find reads only whether OpenClaw's usual folder exists,
+Review is a plan from `openclaw_scan`, which writes nothing, and the button on Review is the one
+write. The folder is read by `crates/archie-runtime/src/openclaw.rs`: `IDENTITY.md`, `SOUL.md`, and
+`AGENTS.md` only when its box is ticked, into the personality; `USER.md` into what it knows about
+you; `MEMORY.md` and the dated notes into the Notes half of memory, newest first up to
+`memory::IMPORT_NOTES_BYTES`, with what does not fit listed; each `skills/*/SKILL.md` through
+`skill_from_md`. The jobs are read by `crates/archie-core/src/openclaw.rs` from
+`state/openclaw.sqlite`, opened read-only, querying only `cron_jobs` and leaving a command job's
+`payload_message` (its command, folder and environment) out of the query, or on an older OpenClaw
+from `cron/jobs.json`. `openclaw.json`, where OpenClaw keeps its model keys and chat-app tokens, is
+never opened. The rules are pure functions in `crates/archie-domain/src/openclaw.rs`:
+`routine_for_job` makes a routine only when the schedule means exactly what a routine can mean, and
+`skill_from_md` refuses a skill that needs a program, is a list of commands, holds more than 50
+files or 5 MB, or matches the shapes of the 2026 registry incidents.
+
+**Boundaries:**
+- ⛔ **Never "it never reads OpenClaw's keys", "never sees them" or "never opens a file with a key
+  in it."** Say none of them come over. The jobs database also holds OpenClaw's sign-in and device
+  tokens (the query touches only the jobs table), and an older `cron/jobs.json` is read whole, a
+  command job's environment included, which is dropped as it is parsed and never kept. The app's
+  own screen said "does not read" until 8d2085ef.
+- ⛔ **Never "everything comes over" or "your agent, exactly as it was."** A skill that needs a
+  program stays behind, and so does a job that runs one or whose schedule a routine cannot say
+  exactly (9:00 and 17:00 is never rounded to 9:00), and notes past the limit. OpenClaw's chat apps,
+  tools and plugins do not come over. The review screen lists each with the reason.
+- ⛔ **OpenClaw only, and one way.** No other assistant's folder is read, and nothing goes from
+  Archie to OpenClaw. The backup entry's "never a portability claim" still holds.
+- ⚠️ **Routines run on the owner's AI account.** A job that ran every five minutes in OpenClaw does
+  the same here, and the review flags anything more often than hourly (`OFTEN_SECONDS`).
+- ⚠️ **Skills and routines keep OpenClaw's words.** One that names a tool only OpenClaw has needs
+  editing on the Skills or Routines tab, and the review screen says so.
+- ⚠️ **"Sends nothing" is about bringing it over.** Once the agent works, what it reads goes to the
+  AI company the owner connected, like any agent. Keep that sentence wherever this one appears.
+- ⚠️ No OpenClaw logo (BRAND-MARKS.md), and nothing implying the OpenClaw Foundation endorses Archie.
+
 ### ✅ Text Replies: it reads your texts on your Mac, and only you can send one — SHIPPED 2026-08-21
 
 The one feature that reads messages **other people** wrote, so every sentence about it is held

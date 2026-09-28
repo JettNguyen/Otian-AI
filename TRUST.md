@@ -2190,31 +2190,34 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
-### 🚧 One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b on main, archie-mobile 8f9ae08), not yet in a release
+### 🚧 One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), not yet in a release
 
 Jett asked on 2026-09-28 why a routine could not run at 9:00 and 5:00, and decided it should, for
-everyone rather than only for jobs brought over from OpenClaw.
+everyone rather than only for jobs brought over from OpenClaw. The same day he set the cap at 24 (the
+recommendation was 12) and had chat set several times too.
 
-**Approved wording, once it ships:** "A routine can run at several set times a day, up to 12, like
-9:00 in the morning and 5:00 in the afternoon. Each time it runs counts as a job, like any other."
+**Approved wording, once it ships:** "A routine can run at several set times a day, up to 24, like
+9:00 in the morning and 5:00 in the afternoon, and you can set them in chat or on the Routines tab.
+Each time it runs counts as a job, like any other."
 
 **Why it's true:** `DailyAt` and `DaysOfWeek` in `crates/archie-domain/src/routine.rs` keep the first
 time in `hour` and `minute` and the rest in `also_at`, which is left out of the file when empty, so
-every routine already on disk and every catalog file reads unchanged. At most `MAX_TIMES_A_DAY` (12),
-checked in `validate_times`. The scheduler (`gateway/routines.rs`) waits for the nearest time, and
+every routine already on disk and every catalog file reads unchanged. At most `MAX_TIMES_A_DAY` (24),
+checked in `validate_times`; more than four at an even gap are said as their pattern ("every weekday,
+every hour from 9:00am to 5:00pm"). Chat's routine draft takes several times, a change that leaves the
+time empty keeps them all, and one that names its times says on the card which it drops. The scheduler (`gateway/routines.rs`) waits for the nearest time, and
 after the computer sleeps through several it runs only the latest, once. The Routines tab adds and
 removes times (`src/app/routines.tsx`, `schedule-parse.ts`); the phone shows every time and moves any
 one (archie-mobile `src/schedule.ts` and `screens/Manage.tsx`, `set_routine_time` in
-`src-tauri/src/phone.rs`). `runs_often` counts every time in a day.
+`src-tauri/src/phone.rs`). `runs_often` counts every time in a day and flags hourly or more often.
 
 **Boundaries:**
-- ⛔ **Never "as often as you like."** Up to 12 set times a day. More often is an interval ("every 30
+- ⛔ **Never "as often as you like."** Up to 24 set times a day. More often is an interval ("every 30
   minutes"), which counts from when it starts, not from the clock.
+- ⚠️ **Each time is a job on the free tier's 20 a day**, so a routine at 24 times uses more than a free
+  day on its own. Say the count beside the cap wherever the cap is sold.
 - ⛔ **Never "it catches up on every run it missed."** After the computer sleeps through several of a
   day's times, it runs the latest one, once.
-- ⚠️ **Chat sets one time.** Until the chat's routine draft takes several, a routine with several times
-  is set on the Routines tab, and a chat revision of one would save a single time, which its card
-  shows.
 - ⚠️ **Waking for the second time of a day has not been watched on a real machine**, the same caution
   the waking entry carries.
 - ⚠️ An older phone that does not say which time moves the first and keeps the rest.
@@ -3303,7 +3306,8 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
   program stays behind, and so does a job that runs one or whose schedule a routine cannot say
   exactly, and OpenClaw's dream reports in `memory/dreaming/`, whose keepers are already in
   MEMORY.md. A notes file over 2 MB, or one that is not plain text, is named with the reason. A job at 9:00 and 17:00 comes over as one routine at both times
-  (Archie 2dbcd9b9); more than 12 times a day, or several times on a day of the month, stays behind. OpenClaw's chat apps,
+  (Archie 2dbcd9b9), and so does an hourly job; more than 24 times a day, or several times on a day of
+  the month, stays behind. OpenClaw's chat apps,
   tools and plugins do not come over. The review screen lists each with the reason.
 - ⛔ **OpenClaw only, and one way.** No other assistant's folder is read, and nothing goes from
   Archie to OpenClaw. The backup entry's "never a portability claim" still holds.
@@ -3313,7 +3317,7 @@ files or 5 MB, or matches the shapes of the 2026 registry incidents.
 - ⛔ **Never "no secrets come over."** Notes and skills come over word for word, so anything the owner
   wrote into them comes too; only OpenClaw's own keys and passwords stay behind.
 - ⚠️ **Routines run on the owner's AI account.** A job that ran every five minutes in OpenClaw does
-  the same here, and the review flags anything more often than hourly (`OFTEN_SECONDS`).
+  the same here, and the review flags anything hourly or more often (`OFTEN_SECONDS`).
 - ⚠️ **Skills and routines keep OpenClaw's words.** One that names a tool only OpenClaw has needs
   editing on the Skills or Routines tab, and the review screen says so.
 - ⚠️ **"Sends nothing" is about bringing it over.** Once the agent works, what it reads goes to the

@@ -1037,6 +1037,15 @@ thing any more.
   **Google is extending developer verification to sideloaded apps**: 2026-09-30 in Brazil,
   Indonesia, Singapore and Thailand, and 2027 everywhere. Say nothing on the site that implies the
   direct download is permanent.
+- **Found 2026-09-28: nobody outside the team can pair yet.** In 0.3.0 and on main, the Set up a
+  phone button that shows the pairing code renders only for staff (`src/app/settings.tsx`, behind
+  `isAdmin`, commented "Staff only, until a store lists Archie Mobile"), and the chat-app picker's
+  Archie Mobile row is disabled for non-staff ("our own app, not out yet"). The APK is a file rather
+  than a store listing, so that gate's condition is never met, and `archie/install/`'s "scan the code
+  Archie shows on your computer" cannot be completed by a customer. **Decided 2026-09-28 (Jett): the
+  gate comes off for Android in the next release**, and the Android download stays on the install
+  page meanwhile. Until that release ships, present tense for Android is true of the download and
+  not of the pairing, so no new page may tell a reader to pair a phone.
 
 **The one thing to say in the same breath as an Android download.** A person installing from a file
 rather than a store has to pass two warnings, and a page that hands them the file owes them both, in
@@ -2523,13 +2532,24 @@ that play." The privacy policy's list of outside resources names YouTube the sam
 - ⛔ **Never say the nocookie domain means YouTube keeps nothing.** It defers cookies until play; it
   does not stop YouTube measuring the play.
 
-**Approved wording for the disclosure under each video:** "The voice is made by AI; Jett and Jack
-wrote and checked the script." True only while both halves are, so a video whose script one of us
-did not read does not ship under it.
+**Approved wording for the disclosure under each video (changed 2026-09-28):** "The voice is made by
+AI; Jett and Jack checked every word of the script." It said "wrote and checked" until the same day,
+when the library's scripts turned out to be drafted by AI (the plan and its corrections both), which
+made "wrote" the half that was not true; Jett chose "checked". True only while it is, so a video
+whose script one of us has not read line by line does not ship under it.
 
 **Figures stay out of the audio.** `check-facts.py` reads HTML, JS and CSS only, so a price or count
 spoken in a narration, drawn in a frame or written in a caption file is checked by nothing. Each page
 carries a "current details" box instead, and only FACTS.md figures go in it.
+
+**The free tier in the narration, decided 2026-09-28 (Jett).** The rule above and the free-tier
+entry's "the number goes in the same sentence" collide, because the free tier cannot be named in the
+audio with its number. Resolved this way: the voice may say Archie is free on an AI account of your
+own "with a daily limit, and the number is right below this video", and the current-details box
+directly under the player carries the FACTS.md figure. For this rule only, that box counts as the
+same sentence. It holds only while the box is on the same page, directly under the player, and says
+the number. ⛔ A cut posted anywhere without the box, such as a 9:16 clip on social, does not
+mention the free tier at all.
 
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 

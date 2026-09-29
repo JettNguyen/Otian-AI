@@ -127,8 +127,8 @@ homepage phone showing "Q3 kickoff prep" was talking to somebody else, and becam
    directly. A plain negative fact is fine when the absence is the claim: "No email goes out until
    you send it or set a time."
 2. **No aphorism formulas.** A heading is one sentence that says one thing. "Your agent does the
-   work. You say the word." fails; "Replies, calendar moves and changes to your lists wait for your
-   yes." passes. No "That's the point", "Here's the thing", "The catch?", three-word staccato runs,
+   work. You say the word." fails; "Replies and calendar moves wait for your yes."
+   passes. No "That's the point", "Here's the thing", "The catch?", three-word staccato runs,
    or "No X. No Y." **The tagline h1 is the one exception**, by Jett's decision the same day.
 3. **No generic openers:** Imagine, Meet, Welcome to, Whether you're, In today's, Ready to, Tired
    of, Here's why.

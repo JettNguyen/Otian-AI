@@ -348,7 +348,7 @@ MAP = [
     # compare/symphony/ merged into compare/cloud-agents/ on 2026-09-18 and is a redirect stub.
     ("How we compare", ["compare/", "compare/chat-apps/", "compare/cloud-agents/",
                         "compare/automation-tools/", "compare/building-it-yourself/",
-                        "compare/hiring-an-assistant/"]),
+                        "compare/hiring-an-assistant/", "compare/questions-to-ask/"]),
     ("About us", ["our-story/", "standard/", "contact/", "testimonials/"]),
     ("Learning", ["ai-explained/", "faq/", "blog/", "help/"]),
 ]

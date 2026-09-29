@@ -61,6 +61,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Archie vs Zapier, Make and n8n](https://otianai.com/compare/automation-tools/): Automation tools do exactly what their diagram says. An agent is told the job in a sentence and works out the steps. Prices, tradeoffs, and four reasons to keep your automations.
 - [Archie vs OpenClaw, Hermes, Vellum and Building It Yourself](https://otianai.com/compare/building-it-yourself/): OpenClaw, Hermes and Vellum publish their code and can run on your own computer, as Archie runs on yours. What Archie sells is the connections, the approval before an email or calendar change, and the updates, already built, with an...
 - [Archie vs Hiring an Assistant](https://otianai.com/compare/hiring-an-assistant/): A person handles judgment and an agent handles repetition. A comparison of Archie and a part-time assistant, including four things Archie does not do.
+- [Four Questions to Ask the AI Agent You Already Have](https://otianai.com/compare/questions-to-ask/): Four questions to ask any AI agent: whose computer it works on, what it can send without you, whether the asking can be turned off, and what happens to the bill. Where to look for each, and Archie’s answers.
 
 ## About us
 

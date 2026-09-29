@@ -16714,6 +16714,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    ones inside the phone and wrong for a paragraph that should simply be on the page. */
 @media (min-width: 971px) {
   .day-cap[data-act="0"] .day-beat { opacity: 1; transform: none; }
+  /* The hero's side doors (2026-09-29). Jett: "homepage looks too busy now under the join
+     waitlist button". `.day-cap > p` below outranks `.hm-hero-alt` and `.hm-hero-micro`, so on a
+     wide screen every line under the button came out at body size, 14px apart and 40ch wide: four
+     links of one weight, the fourth wrapping. The one-person route stays the one large link, and
+     the team, the reader who already has an agent, and the availability line sit under it as one
+     small block of footnotes. Narrow screens already set these small, further down. */
+  .day-cap > p.hm-hero-alt, .day-cap > p.hm-hero-micro { margin-top: 4px; font-size: var(--fs-sm); max-width: none; color: var(--text-muted); }
+  .day-cap > p.hm-hero-fork + p.hm-hero-alt { margin-top: 18px; }
 }
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .day-cap h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }

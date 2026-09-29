@@ -663,7 +663,7 @@ sizes are on the page at rest, and the pick only lights one.
   the whole market is not. How the site speaks to that reader:
   - **Help with the agent they have before selling ours.** The door is `compare/questions-to-ask/`:
     four questions, where to look for the answer on any agent, and Archie's answers on cards that
-    turn over. It is reached from the hero's third line ("Already have an AI agent?"), the Learn
+    turn over. It is reached from a hero footnote ("Already have an agent? Check it here"), the Learn
     menu, the compare hub's hero and first card, and three FAQ questions under The basics.
   - **The difference is one question anyone can answer without knowing any AI**: whose computer is
     your agent on, and can it send without you? Say that. Never "custody", "bring your own key" or

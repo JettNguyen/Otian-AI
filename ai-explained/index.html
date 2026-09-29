@@ -163,13 +163,19 @@
       <div class="container">
         <!-- How an AI agent works, as the loop it is: five stops on a ring, one token going round,
              the plain step on each stop and the term under it. Redrawn 2026-09-11 from a five-card
-             figure of 46 shapes. The style block serves both variants. -->
+             figure of 46 shapes. The style block serves both variants. Resized 2026-09-29, when Jett
+             found the labels spilling out: every pill was 124 wide and the longest step is about 170
+             at 12px, so each pill is now its label's measured width plus 32, the ring is wider so the
+             two bottom pills clear each other, and the term sits inside its pill as a second line
+             rather than floating across the ring. The dot's dimming was re-sampled for the new pills. -->
         <figure class="explain-figure fade-up delay-1">
-          <svg class="explain-svg--desktop" viewBox="0 0 600 290" role="img" aria-labelledby="ai-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 270" role="img" aria-labelledby="ai-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
             <title id="ai-t">How an AI agent works, in five steps around a ring. One: you ask, and that request is the prompt. Two: it reads what it knows, which is its context window. Three: it works out what to do, using the model. Four: it can pause for your OK, a human-in-the-loop checkpoint. Five: it does the job in your tools. Then the result comes back to you, at the top of the ring.</title>
             <style>
               .ai-ring{fill:none;stroke:currentColor;stroke-width:1.5;opacity:.4}
               .ai-stop{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              /* the tint is see-through, so an opaque card sits under it or the ring shows through the first step */
+              .ai-stop-base{fill:var(--bg-card)}
               .ai-stop--you{fill:rgba(224,138,91,.06);stroke:var(--accent);stroke-width:1.8}
               .ai-name{fill:currentColor;font-size:12px;font-weight:650;text-anchor:middle}
               .ai-term{fill:var(--accent-ink);font-size:10.5px;font-weight:600;text-anchor:middle}
@@ -182,18 +188,18 @@
                   @keyframes aiRing{from{offset-distance:0%}to{offset-distance:100%}}
                   .ai-d{animation-name:aiRingD}
                   /* the dot dims while its centre is inside a step, so it reads as passing through rather than over */
-                  @keyframes aiRingD{0%{offset-distance:0%;opacity:.28}7.6%{opacity:.28}9.3%{opacity:1}17.2%{opacity:1}18.9%{opacity:.28}22.5%{opacity:.28}24.1%{opacity:1}33.8%{opacity:1}35.5%{opacity:.28}45.5%{opacity:.28}47.2%{opacity:1}52.8%{opacity:1}54.5%{opacity:.28}64.5%{opacity:.28}66.2%{opacity:1}75.9%{opacity:1}77.5%{opacity:.28}81.1%{opacity:.28}82.8%{opacity:1}90.8%{opacity:1}92.5%{opacity:.28}100%{offset-distance:100%;opacity:.28}}
+                  @keyframes aiRingD{0%{offset-distance:0%;opacity:.28}6.4%{opacity:.28}8.1%{opacity:1}17.4%{opacity:1}19.1%{opacity:.28}24.7%{opacity:.28}26.4%{opacity:1}30.9%{opacity:1}32.6%{opacity:.28}47.2%{opacity:.28}48.9%{opacity:1}50.6%{opacity:1}52.3%{opacity:.28}67.4%{opacity:.28}69.1%{opacity:1}73.6%{opacity:1}75.3%{opacity:.28}80.9%{opacity:.28}82.6%{opacity:1}91.9%{opacity:1}93.6%{opacity:.28}100%{offset-distance:100%;opacity:.28}}
                 }
               }
             </style>
-            <ellipse class="ai-ring" cx="300" cy="142" rx="130" ry="95"/>
-            <rect class="ai-stop ai-stop--you" x="238" y="30" width="124" height="34" rx="17"/><text class="ai-name" x="300" y="52">1 &middot; You ask</text><text class="ai-term" x="300" y="80">the prompt</text>
-            <rect class="ai-stop" x="362" y="96" width="124" height="34" rx="17"/><text class="ai-name" x="424" y="118">2 &middot; It reads what it knows</text><text class="ai-term" x="424" y="146">the context window</text>
-            <rect class="ai-stop" x="314" y="202" width="124" height="34" rx="17"/><text class="ai-name" x="376" y="224">3 &middot; It works out what to do</text><text class="ai-term" x="376" y="252">the model</text>
-            <rect class="ai-stop" x="162" y="202" width="124" height="34" rx="17"/><text class="ai-name" x="224" y="224">4 &middot; It can pause for your OK</text><text class="ai-term" x="224" y="252">human-in-the-loop</text>
-            <rect class="ai-stop" x="114" y="96" width="124" height="34" rx="17"/><text class="ai-name" x="176" y="118">5 &middot; It does the job</text><text class="ai-term" x="176" y="146">in your tools</text>
-            <text class="ai-n" x="300" y="152">the result comes back to you</text>
-            <circle class="ai-dot ai-d" r="6" style="offset-path:path('M300,47 A130,95 0 1 1 299.9,47')"/>
+            <ellipse class="ai-ring" cx="300" cy="145" rx="200" ry="100"/>
+            <rect class="ai-stop-base" x="238" y="22" width="124" height="46" rx="23"/><rect class="ai-stop ai-stop--you" x="238" y="22" width="124" height="46" rx="23"/><text class="ai-name" x="300" y="42">1 &middot; You ask</text><text class="ai-term" x="300" y="59">the prompt</text>
+            <rect class="ai-stop" x="400" y="96" width="186" height="46" rx="23"/><text class="ai-name" x="493" y="116">2 &middot; It reads what it knows</text><text class="ai-term" x="493" y="133">the context window</text>
+            <rect class="ai-stop" x="319" y="204" width="192" height="46" rx="23"/><text class="ai-name" x="415" y="224">3 &middot; It works out what to do</text><text class="ai-term" x="415" y="241">the model</text>
+            <rect class="ai-stop" x="84" y="204" width="202" height="46" rx="23"/><text class="ai-name" x="185" y="224">4 &middot; It can pause for your OK</text><text class="ai-term" x="185" y="241">human-in-the-loop</text>
+            <rect class="ai-stop" x="37" y="96" width="140" height="46" rx="23"/><text class="ai-name" x="107" y="116">5 &middot; It does the job</text><text class="ai-term" x="107" y="133">in your tools</text>
+            <text class="ai-n" x="300" y="150">the result comes back to you</text>
+            <circle class="ai-dot ai-d" r="6" style="offset-path:path('M300,45 A200,100 0 1 1 299.9,45')"/>
           </svg>
           <svg class="explain-svg--mobile" viewBox="0 0 340 360" role="img" aria-labelledby="aim-t" xmlns="http://www.w3.org/2000/svg">
             <title id="aim-t">How an AI agent works, in five steps around a ring. One: you ask, and that request is the prompt. Two: it reads what it knows, which is its context window. Three: it works out what to do, using the model. Four: it can pause for your OK, a human-in-the-loop checkpoint. Five: it does the job in your tools. Then the result comes back to you, at the top of the ring.</title>

@@ -405,10 +405,13 @@ is still no Sentry, PostHog, Amplitude, Mixpanel, Segment or GA in `Cargo.lock` 
 `package-lock.json`, the Tauri log plugin is a no-op stub, and the webview CSP still makes
 frontend network calls impossible.
 
-**Amended 2026-08-07: there is now an off switch, and it is real.** The app's Settings page
-("This computer"), under Crash reports, carries the switch and the full list of what is in one.
+**Amended 2026-08-07: there is now an off switch, and it is real.** The app's Settings page, under
+Privacy, carries the switch and the full list of what is in one.
 *(Corrected 2026-08-21: this said Account, and the pages were split; a claims file wrong about
-which screen of our own app holds a switch is the cheapest kind of wrong to fix.)* Off stops the
+which screen of our own app holds a switch is the cheapest kind of wrong to fix.)*
+*(Corrected 2026-09-28: the Crash reports section became the first card of Privacy when Settings
+went from seven sections to five, and the in-app list names error reports now as well, so it counts
+three things, as this entry has since 2026-09-27.)* Off stops the
 heartbeat, stops the upload, and stops the queue being written at all; anything already
 queued is deleted when the switch is thrown (`telemetry::set_off`, and `is_off` is read at
 all three entry points). It is a marker file in the data directory rather than a setting in
@@ -1439,7 +1442,7 @@ back exactly as you left it." The Terms say the same about our side: your agent,
 files and your keys are on your own computer, we have no access to them, and we do not delete them.
 
 **The catch, and it ships in the same breath every time:** `PaywallScreen` replaces the whole app,
-not part of it, so the Account page's **Moving and backups** section (`src/app/moving.tsx`) is not
+not part of it, so the Account page's **Backups** section (`src/app/moving.tsx`) is not
 reachable while a plan is lapsed and no key is saved. The files are all still on the computer and
 nothing has been lost, but the one-file backup is written from inside Archie, so **the honest
 instruction is to write the backup before you stop, not after.** Any page describing the ending has
@@ -1609,7 +1612,7 @@ workspaces, which add-ons each one has, the access record) and the `workspaces/`
 every agent bundle (persona, skills with their setup answers, routines with their schedules and
 timezones, records, memory, writing style, chat history, documents). The person picks the
 destination; `AUTO_KEEP` is 3 and the weekly writer keeps that many. The section is on the
-Account page under **Moving and backups** (`src/app/moving.tsx`).
+Account page under **Backups** (`src/app/moving.tsx`).
 
 **The key claim, and it is the one worth checking.** `saved_keys` in the manifest is
 `db.all_credential_refs().len()`, a **count**, and no value is read out of the credential store

@@ -4920,6 +4920,14 @@ photo on them is a credited stock photo of a phone on a table whose blank screen
 exchange, retyped word for word; two earlier picks (a building at night, then a keyboard) were dropped
 the same day as ominous or meaningless.
 
+**Superseded 2026-09-29 for the social posts.** At Jett's direction they became a made-up example
+that names nobody (a bike sold over texts, one yes at noon, "Coming down now!" sent while you are
+out), labeled "A made-up example" on the images and in every caption, and they quote none of the
+above. Muse is not in them either: a real product beside an invented story reads as that product's
+incident. Archie's slide is the texts lane's own card (`texts/replies/card.rs`: "Text from", "Your
+reply (sends as you, to ...)", Send / Edit it / Dismiss), and the posts point to the July post. The
+blog post above is now the only place the Marketplace story is told.
+
 ⛔ **What no page may say:**
 - That Muse sent anything without permission, stated as fact. Matt says the price was one "I never
   approved"; Meta says similar reports turned out to be approved. Nobody has published the record.

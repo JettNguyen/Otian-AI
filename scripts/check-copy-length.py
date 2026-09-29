@@ -122,7 +122,10 @@ BUDGETS = {
     # a guided-setup call that the page had already offered, under a button that asks for the
     # one thing we want. The headroom is deliberately 21 words: this is the page a sentence
     # gets added to, and now one has to come off for it.
-    "index.html": 1090,   # raised 2026-09-28 from 1050 by Jett: the price band grew 1047 to 1089 (+42) to say the AI is a separate company with its own bill and what a job is, which is the question Jack had to ask twice; before that, raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
+    # Raised 2026-09-29 from 1090 to 1100 by Jett's direction to speak to the reader who already has
+    # an agent: one hero line, "Already have an AI agent? Check the agent you have", ten words. Every
+    # other door to that page (the Learn menu, the hub, the FAQ) is chrome or another page.
+    "index.html": 1100,   # raised 2026-09-28 from 1050 by Jett: the price band grew 1047 to 1089 (+42) to say the AI is a separate company with its own bill and what a job is, which is the question Jack had to ask twice; before that, raised 2026-09-11 from 1280: the recording's index under the demo, six moments as buttons, is 28 words counted as body because it is HTML rather than SVG, and six moments do not index in fewer
     # How It Works is a procedure. A reader following along needs every step.
     # Raised 2026-09-11 from 1400, because the page absorbed archie/see-it-work/
     # rather than growing: that page was a second explanation of the same journey

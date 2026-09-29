@@ -16720,7 +16720,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      links of one weight, the fourth wrapping. The one-person route stays the one large link, and
      the team, the reader who already has an agent, and the availability line sit under it as one
      small block of footnotes. Narrow screens already set these small, further down. */
-  .day-cap > p.hm-hero-alt, .day-cap > p.hm-hero-micro { margin-top: 4px; font-size: var(--fs-sm); max-width: none; color: var(--text-muted); }
+  .day-cap > p.hm-hero-alt { margin-top: 4px; font-size: var(--fs-sm); max-width: none; color: var(--text-muted); }
   .day-cap > p.hm-hero-fork + p.hm-hero-alt { margin-top: 18px; }
 }
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
@@ -16730,7 +16730,17 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-cap > p { margin: 14px 0 0; font-size: var(--fs-md); max-width: 40ch; color: var(--text-secondary); text-wrap: pretty; }
 .day-cap > p strong { color: var(--text-primary); font-weight: 600; }
 .day-cap .day-catch { margin-top: 14px; padding-left: 12px; border-left: 2px solid var(--accent-line); font-size: var(--fs-sm); color: var(--text-muted); max-width: 42ch; }
-.day-cap .hm-actions { justify-content: flex-start; margin-top: 26px; }
+.day-cap .hm-actions { justify-content: flex-start; align-items: center; margin-top: 26px; }
+/* "Archie is in testing" stands beside the button rather than at the foot of the routes (Jett,
+   2026-09-29: "it still feels like there's too much on the screen"). Two short lines, no taller
+   than the button, so the row holds the one thing to do and the one thing to know before doing
+   it, and the stack under it loses a line. Its own class, not .hm-hero-micro, because nav.js
+   shapes that one as centered prose on other pages. */
+.hm-hero-status { margin: 0; font-size: var(--fs-sm); line-height: 1.35; color: var(--text-muted); text-align: left; }
+.hm-hero-status a { display: block; color: var(--c-blue-ink); font-weight: 600; text-decoration: none; }
+.hm-hero-status a:hover { color: var(--c-blue); text-decoration: underline; }
+@media (max-width: 970px) { .hm-hero-status { font-size: var(--fs-xs); } }
+@media (max-width: 970px) and (max-height: 700px) { .hm-hero-status { font-size: var(--fs-2xs); } }
 .day-cap .hm-hero-fork { justify-content: flex-start; }
 .day-cap .hm-hero-alt, .day-cap .hm-hero-micro { text-align: left; }
 /* Links inside the captions read as links, like every other text link on the site: base `a`

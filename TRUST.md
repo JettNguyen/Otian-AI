@@ -1663,6 +1663,38 @@ have. The swap happens at the next launch, before the database is opened.
   `transfer.rs`. Publishing it is for looking inside your own file. It changes nothing above: it
   still opens in Archie and nothing else, and the page says so.
 
+### ✅ What Reset Archie erases, and what it leaves behind (entry written 2026-09-29)
+
+**Approved wording:** "Reset Archie erases your agents and your saved keys from this computer."
+And wherever that is said to someone leaving, the leftovers go with it, in the list or the
+paragraph beside it: the phone mailbox on our server (press **Disconnect every phone** first),
+the setting that wakes the computer for routines, and, on Windows, the uninstaller's box
+"Also remove my Archie data, agents, and settings".
+
+**Why it's true** (`app_factory_reset`, `src-tauri/src/auth.rs:1579`, 0.3.1 `09c5cb5e`, unchanged
+on main): it deletes every credential the database lists from the Keychain or Credential Manager
+(the AI key, account keys, app passwords, chat tokens), the sign-in keys in `SESSION_KEYS`, every
+agent folder, `archie.db` and the crash logs, then restarts. The Account page's Resetting Archie
+section asks you to type "reset" first (`account.tsx`).
+
+**What it leaves, and why each matters:**
+- **The phone mailbox on our server.** Reset never calls the relay's `wipe`, so the sealed
+  snapshot of the recent conversation stays until **Disconnect every phone** (`phone_disable`,
+  which does wipe it) or the account is deleted (`stripe-webhook/index.js`). Sealed, so we still
+  cannot read it; it is still there.
+- **Two app keys in the password store:** `vault_key_v1` and `phone_pairing_key` are not in
+  `SESSION_KEYS`. Neither is an account's key, which is why "your saved keys" stays true.
+- **The wake setup.** Reset leaves no routines, so nothing wakes the computer, but the Mac helper
+  (`/Library/PrivilegedHelperTools/archie-wake` and its LaunchDaemon; `archie-wake --uninstall`
+  removes it) and the Windows task `\Archie\Wake` stay installed.
+- **Open Archie at login**, a login item the autostart plugin owns, stays as it was set.
+- **Downloaded models** (`assets/`, deliberately, since they are ours and say nothing about anyone),
+  the `telemetry-off` marker (deliberately, since deleting it would switch reports back on), and
+  any `replaced-*` copies of agents from a restored backup (`commands/transfer.rs`).
+
+⛔ Never "erases everything" or "leaves nothing behind". Found by the Learning Library check of
+2026-09-29, which is what 3.3's script was waiting on.
+
 ### ✅ What your agent can write to disk
 
 **Approved wording:** "Your agent writes the actual file and tells you where it put it. It can
@@ -3732,7 +3764,7 @@ shops you pick, only up to a limit you set."** Where there is room for one more 
 "when ember is allowed to buy, it should still be gated by a tap from the user in archie apps or
 chat apps", and "when the user says to buy something, the agent should still ask, before it does
 the final order confirmation; never just do it." The first version released a purchase inside the
-limits with nobody asked. The Archie repo's `860589da` made the tap the release: the switch and
+limits with nobody asked. The Archie repo's `860589da` made the tap the release (it shipped in **0.3.1**, not 0.3.0: in 0.3.0 an order inside the limits is still pressed with nobody asked, so a sentence about the tap is true from 0.3.1 on; checked 2026-09-29): the switch and
 the limits decide whether a tap is offered at all, and the tap decides whether the press happens.
 Asking for the purchase in chat ("buy it", "yes") releases nothing: only the card's own button, or
 "press it" typed on a chat app that has no buttons, and only after the card has gone out

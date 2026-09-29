@@ -663,7 +663,7 @@ sizes are on the page at rest, and the pick only lights one.
   the whole market is not. How the site speaks to that reader:
   - **Help with the agent they have before selling ours.** The door is `compare/questions-to-ask/`:
     four questions, where to look for the answer on any agent, and Archie's answers on cards that
-    turn over. It is reached from a hero footnote ("Already have an agent? Check it here"), the Learn
+    turn over. It is reached from the hero's small line ("Check the agent you have"), the Learn
     menu, the compare hub's hero and first card, and three FAQ questions under The basics.
   - **The difference is one question anyone can answer without knowing any AI**: whose computer is
     your agent on, and can it send without you? Say that. Never "custody", "bring your own key" or
@@ -675,7 +675,7 @@ sizes are on the page at rest, and the pick only lights one.
   - **No reader quotes until real ones exist.** The questions stay plain until discovery calls
     supply the sentences people actually say, and then those become the openers, with permission.
   - "Already have an AI agent?" is a starting point, not a third audience: it sits on the hero's
-    muted lines under the team route, and it never gets an edition, a price or a sorting chip.
+    small line beside the team edition's link, and it never gets an edition, a price or a sorting chip.
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is
   deliberate:** `js/catalog.js` and `js/marketplace.js` map the `subagents` collection to

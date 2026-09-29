@@ -1051,7 +1051,11 @@ thing any more.
   not of the pairing, so no new page may tell a reader to pair a phone. **Built the same day**
   (Archie `c434a385`, on main): Set up a phone and the Archie Mobile row in the chat-app list are
   open to everybody, and the row reads "our own app; on Android now, and on iPhone once Apple
-  approves it", with no Recommended tag until the iPhone app is approved.
+  approves it", with no Recommended tag until the iPhone app is approved. **Later the same day the
+  Set up a phone button went, with the Settings section it sat on (Your phone).** The pairing code
+  is now only on that row, on an agent's Setup tab under Chat app, behind Show the code; Disconnect
+  every phone sits under it, and the row says "on" while phone access is. A page that says where
+  to find the code names that row, never Settings.
 
 **The one thing to say in the same breath as an Android download.** A person installing from a file
 rather than a store has to pass two warnings, and a page that hands them the file owes them both, in

@@ -1152,6 +1152,11 @@ values (not even the last four of one), and the screenshots a job took. The audi
 files inside the owner's conversation travel only when somebody on the phone presses to hear, see
 or open one, sealed like everything else (added 2026-09-25; before that they never travelled).
 
+⚠️ **On main, three more for the talk screen** (Archie `e7f6e128`, not in a release): `talk_ready`
+only asks whether this computer can hear and speak and whether the agent talks back, `talk_download`
+starts those two downloads, and `set_voice_mode` lets one agent answer out loud. None reaches a
+secret, a file or anybody else's conversation. See the talk screen's own entry.
+
 **What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
 the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
 because a permission prompt is the one piece of this product a person reads before they trust it.
@@ -1168,6 +1173,15 @@ All three were checked against the client on that date.
 > - **The microphone**, only while you are recording something to say to an agent. You start that by
 >   pressing the talk button, you can throw the recording away instead of sending it, and it stops
 >   on its own if you leave the app.
+
+⚠️ **On main, the talk screen changes the microphone line** (archie-mobile `cf0b115`, not in a
+release). There the microphone stays open between turns until Done, is closed while the agent
+answers, and is closed when the app goes to the background, and nothing is thrown away by a press:
+what is said is sent when the speaker stops. At that release the line above becomes: "**The
+microphone**, only while you are recording something to say to an agent, or while the talk screen is
+open. On the talk screen it listens between turns until you press Done, and it stops on its own if
+you leave the app." The app's own permission text says "only when you press the talk button" and
+moves with the next store build (see Archie's `docs/OPEN-THREADS.md`).
 
 **Why it's true**, all paths in `/Users/Games/Desktop/Code/archie-mobile`:
 
@@ -1303,6 +1317,65 @@ when that is the clearer shape."
 - ⚠️ **On Android, a file the agent sends opens where the phone has something that opens it.** The
   app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
   kind says so rather than opening it.
+
+### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, not yet in a release
+
+**Entry written 2026-09-29.** The window's half shipped in 0.3.0 (Archie `080c3726`, built September
+15) with no entry, which under this file's rule meant it did not exist to anybody reading here. It is
+written now, with the phone's half, and it stays 🚧 until a person has held a conversation with
+either: the four things only a voice can settle are in Archie's `docs/OPEN-THREADS.md`, under "The
+talk screen has never been talked to" and the phone's entry after it.
+
+**Approved wording, once a person has used it and the phone's half is in a release:** "Talk to your
+agent out loud and hear it answer, back and forth, without pressing anything between turns. It is
+the button beside the microphone, in Archie on your computer and in Archie Mobile. What you say is
+turned into words on your computer, and the answer is read out by a voice that runs there too."
+
+**Why it's true:**
+- **The window.** `src/app/talk.tsx` is the screen, `src/app/talk-mic.ts` decides from loudness when
+  somebody started and stopped, and `src-tauri/src/talk.rs` holds what is being said while it is
+  read. Each turn goes as a voice note, and a voice note is answered out loud unless the agent is set
+  to answer in writing (`agent_voice_mode_get`, `crates/archie-runtime/src/speech.rs`).
+- **Hearing and speaking run on the computer.** Whisper (`whisper-model-base.en`) turns speech into
+  words and Kokoro (`sherpa-onnx-offline-tts`, `kokoro-en`) reads the answer, both downloaded once
+  from our asset store with builds for Mac and Windows (`HEARING_ASSET_REFS` and
+  `VOICE_ASSET_REFS` in `src-tauri/src/assets.rs`; about 195 MB and 148 MB).
+- **The phone** (Archie `e7f6e128`; archie-mobile `cf0b115`). `src/screens/Talk.tsx` and
+  `src/talk.ts` in archie-mobile listen until somebody stops, send it as an ordinary voice note
+  (`put_file`), and fetch the spoken answer the way the play button on a message does (`spoken`).
+  The computer answers three new ops in `src-tauri/src/phone.rs`: `talk_ready` (only asks whether
+  both downloads are there and whether this agent talks back), `talk_download` (starts both), and
+  `set_voice_mode` (lets this agent answer out loud, after the screen says what that changes). It
+  also says when a turn is over (`answering` on the conversation, `phone::answering`). The button
+  appears only where the computer says it can do all of that (`talk_screen`).
+- **The phone's microphone is open only on that screen.** It is closed while the agent answers,
+  closed by Done, and closed when the app goes to the background; the screen stays lit while it is
+  open, because a locked phone would close it anyway.
+
+**The boundaries:**
+- ⛔ **Never "real time", "instant", "like a phone call" or "a natural conversation".** Measured at
+  the computer on 2026-09-15: about eight seconds from the end of what you say to the start of the
+  answer, most of it the AI thinking. From the phone every step is a trip through the mailbox, so
+  expect more; nothing there is measured yet.
+- ⛔ **Never "your phone understands you" or "it runs on your phone".** The phone records and plays.
+  The computer hears and speaks, so it has to be on, running Archie, and the agent has to be
+  started. The phone entries above govern how to say that.
+- ⛔ **Never "nothing leaves your computer" or "a private voice assistant".** The recording is turned
+  into words on the computer and is never uploaded for transcription, but the words then go to the
+  owner's AI company as an ordinary message, exactly as if they had been typed. From the phone, the
+  recording crosses our mailbox sealed on its way to the computer, and the answer's audio comes back
+  the same way: custody without access, as above.
+- ⛔ **Never "interrupt it any time".** On the phone a tap cuts it off; talking over it does not,
+  because a phone's speaker is an inch from its microphone. At the computer, talking over it is
+  meant to cut it off and depends on the webview's echo canceler, which nobody has tested.
+- ⚠️ **English only.** The hearing model is `base.en`. No other language may be claimed.
+- ⚠️ **A long answer is written, not read out.** Past about 1,200 characters (`MAX_SPOKEN_CHARS` in
+  `crates/archie-runtime/src/speech.rs`) the screen says the answer was too long to read out and
+  shows it instead.
+- ⚠️ **It needs a one-time download on the computer, about 340 MB**, which either screen starts, and
+  which the phone's screen follows until it is done.
+- ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
+  turning speech on changes, and change it only when the owner presses Let it talk.
 
 ### ✅ It works while you sleep
 

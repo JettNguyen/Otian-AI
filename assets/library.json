@@ -23,7 +23,7 @@
       "title": "Getting Your Computer Ready",
       "lede": "Jack introduces Level 0: eight short videos that make sure your computer is ready to run your agent.",
       "youtube": "",
-      "seconds": 18,
+      "seconds": 16,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -39,7 +39,7 @@
       "title": "Will Archie Work on My Computer?",
       "lede": "Archie runs on a Mac or a Windows computer. How to tell which one you have, and what else it needs.",
       "youtube": "",
-      "seconds": 55,
+      "seconds": 53,
       "notes_heading": "Which Macs and Windows computers run Archie",
       "notes": [
         "Mac: macOS 12 Monterey or later, on Apple silicon or Intel.",
@@ -64,7 +64,7 @@
       "title": "Why Your Computer Needs to Stay On",
       "lede": "Your agent works only while the computer is on, awake and running Archie. How to keep it that way.",
       "youtube": "",
-      "seconds": 69,
+      "seconds": 63,
       "notes_heading": "How to keep a Mac or Windows computer awake while it is plugged in",
       "notes": [
         "On a Mac, open System Settings, then Battery, then Options, and turn on <strong>Prevent automatic sleeping on power adapter when the display is off</strong>. On a desktop Mac, it is under Energy Saver.",
@@ -90,7 +90,7 @@
       "title": "What Sleep, Shut Down, and Restart Mean",
       "lede": "What sleep, shut down and restart each do to your agent, and how Archie can wake the computer for a routine.",
       "youtube": "",
-      "seconds": 77,
+      "seconds": 75,
       "notes_heading": "How to set up Archie to wake your computer for a routine",
       "notes": [
         "On a Mac, setting it up asks for your password once, because only an administrator of a Mac may schedule a wake. The Mac asks for it in its own box: Archie never sees what you type.",
@@ -118,7 +118,7 @@
       "title": "How to Download and Install an App",
       "lede": "The difference between downloading an app and installing it, and where to get apps safely.",
       "youtube": "",
-      "seconds": 51,
+      "seconds": 48,
       "notes_heading": "Where to download Archie",
       "notes": [
         "Archie&rsquo;s own download page is <a href=\"../../archie/install/\">otianai.com/archie/install</a>. Type the address into your browser yourself."
@@ -142,7 +142,7 @@
       "title": "Why Your Computer Asks for Permission",
       "lede": "Why your computer asks before it opens an app or lets one use your files, and how to tell a normal question from one to refuse.",
       "youtube": "",
-      "seconds": 43,
+      "seconds": 40,
       "notes_heading": "What Windows shows the first time you open Archie",
       "notes": [
         "Windows shows a box that says <strong>Windows protected your PC</strong>. <a href=\"../../archie/install/#warning-heading\">The install page shows it and says what to check before you continue</a>."
@@ -165,7 +165,7 @@
       "title": "Where Your Passwords and Account Keys Are Stored",
       "lede": "Where Archie keeps the keys that reach your accounts: your computer&rsquo;s own password store, which Otian cannot read.",
       "youtube": "",
-      "seconds": 51,
+      "seconds": 49,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -185,7 +185,7 @@
       "title": "What It Means to Connect an Account",
       "lede": "What you agree to when you connect your email, how to take that access back, and why connecting sends nothing.",
       "youtube": "",
-      "seconds": 67,
+      "seconds": 64,
       "notes_heading": "Where to take Archie&rsquo;s access back",
       "notes": [
         "Google: <a href=\"https://myaccount.google.com/permissions\">myaccount.google.com/permissions</a>.",
@@ -212,7 +212,7 @@
       "title": "Talking to Your Agent From Your Phone",
       "lede": "How to message your agent from a chat app on your phone, and the path each message takes.",
       "youtube": "",
-      "seconds": 58,
+      "seconds": 55,
       "notes_heading": "The chat apps Archie works with",
       "notes": [
         "Telegram, Discord, Slack, Matrix, and on a Mac, iMessage, in the thread you have with yourself.",

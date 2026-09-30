@@ -706,9 +706,11 @@
       "lede": "What our servers keep about you, what they never hold, and the three reports Archie can send, which you can turn off.",
       "youtube": "",
       "seconds": 85,
-      "notes_heading": "The full list, and how to check it yourself",
+      "notes_heading": "The full list, how long the phone mailbox keeps things, and how to check",
       "notes": [
         "<a href=\"../../trust/#what-we-hold\">The complete list of what we hold</a>.",
+        "The phone deletes a message once it has read it. One it never came back for is cleared by your computer a day after it was answered, the next time Archie is running.",
+        "The sealed picture of your agent that the phone shows is replaced as it changes, and removed when you press Disconnect every phone or delete your account.",
         "You can check our claims yourself with a network monitor in about 10 minutes. <a href=\"../../trust/\">The Trust page</a> shows how."
       ],
       "words": [
@@ -735,7 +737,8 @@
       "notes_heading": "The last steps, and what Reset leaves behind",
       "notes": [
         "A full refund within 14 days of first starting a plan, by email. Guided sessions are not refunded.",
-        "If you use the Archie phone app, press <strong>Disconnect every phone</strong> before you reset. Reset leaves the phone mailbox on our server, sealed, until you do or until you delete your account.",
+        "If you use the Archie phone app, press <strong>Disconnect every phone</strong> before you reset. It is on your agent&rsquo;s Setup tab, under Chat app, on the Archie Mobile row.",
+        "Reset leaves the phone mailbox on our server, sealed, until you press Disconnect every phone or delete your account.",
         "On a Mac, to leave nothing of Archie behind: after Reset, turn off <strong>Open Archie at login</strong> in Settings, quit, and drag Archie to the Trash. Then delete <code>~/Library/Application Support/com.archie.app</code>, which the Trash leaves.",
         "Two small items of Archie&rsquo;s stay in Keychain Access on a Mac, under com.archie.app. Delete them there too.",
         "If you set up waking on a Mac, first run <code>sudo /Library/PrivilegedHelperTools/archie-wake --uninstall</code> in Terminal.",

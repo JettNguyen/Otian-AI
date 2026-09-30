@@ -12,6 +12,14 @@
     {
       "n": 2,
       "title": "How Your Agent Works"
+    },
+    {
+      "n": 3,
+      "title": "Privacy and Trust"
+    },
+    {
+      "n": 4,
+      "title": "You and Archie"
     }
   ],
   "sections": [
@@ -533,6 +541,423 @@
         "Start with a few routines. Add more as you learn what helps you.",
         "Your agent's Jobs tab lists the jobs it has run.",
         "Next: how add-ons give your agent instructions for more tasks."
+      ]
+    },
+    {
+      "id": "L2-02",
+      "n": "2.2",
+      "level": 2,
+      "slug": "how-add-ons-help-your-agent",
+      "title": "How Add-ons Help Your Agent",
+      "lede": "What an add-on is, where to find more of them, and how your agent writes a new one only after you approve it.",
+      "youtube": "",
+      "seconds": 69,
+      "notes_heading": "Every add-on in the Marketplace",
+      "notes": [
+        "Archie&rsquo;s Marketplace has 160 add-ons, and every one is included with Archie.",
+        "<a href=\"../../skills-marketplace/browse/\">Browse every add-on</a> on our website."
+      ],
+      "words": [
+        "How does my agent learn to track bills or organize receipts?",
+        "It uses add-ons. An add-on is a set of written instructions for a task. Think of it as a recipe your agent follows.",
+        "For example, an add-on might explain how to track your subscriptions or watch for return deadlines.",
+        "Your agent starts with a few add-ons. You can find more in Archie's Marketplace. Every add-on is included with Archie.",
+        "An add-on is a text file your agent reads. It does not give your agent a way to run a program on your computer.",
+        "Not sure which add-on to choose? Ask your agent. It searches for one that fits your request.",
+        "If none fits, it can write new instructions, called a skill. It shows you what it plans to add and waits for your approval.",
+        "Next: connecting your email and calendar."
+      ]
+    },
+    {
+      "id": "L2-03",
+      "n": "2.3",
+      "level": 2,
+      "slug": "connecting-your-email-and-calendar",
+      "title": "Connecting Your Email and Calendar",
+      "lede": "How to connect a Google, Outlook or iCloud account in four steps, and how to take that access back.",
+      "youtube": "",
+      "seconds": 116,
+      "notes_heading": "Which accounts connect, and what Google shows first",
+      "notes": [
+        "Google and Outlook (Outlook.com, Hotmail, Live and Office 365) open their own sign-in page in your browser.",
+        "iCloud, Fastmail, Yahoo, AOL, Zoho Mail and GMX connect with an app password you make on that service&rsquo;s website. A calendar connects when Archie finds one as you connect. AOL and GMX have none.",
+        "Until Google verifies Archie, connecting a Google account first shows a screen saying Google hasn&rsquo;t verified this app. It names Otian AI, the company that makes Archie.",
+        "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
+        "Email needs an AI account of your own. The free starter credits and the plan with the AI included will not run it.",
+        "Where to take access back at Google, Microsoft and Apple: <a href=\"../what-it-means-to-connect-an-account/\">0.7</a>."
+      ],
+      "words": [
+        "Let's connect your email and calendar.",
+        "First, an important limit: your agent can read email only when you use your own AI account.",
+        "Email is off when you use our free credits or a plan with AI included. With those options, the emails other people sent you would pass through our server. They did not agree to that.",
+        "Step one. Open your agent in Archie. Go to Connections. Under Email, calendar, files, select Connect an account.",
+        "Step two. Choose your service, such as Google, Outlook, or iCloud. Before you press Google or Outlook, open Choose exactly what it may do. Find Let it send replies. This switch starts on.",
+        "Turn it off to let your agent write drafts for you to send yourself. Even when it is on, a reply waits until you send it or choose a time to send it.",
+        "Step three. For Google or Outlook, the company's sign-in page opens in your browser. It may name Otian AI, the company that makes Archie. Read the list of permissions before you agree. It tells you what Archie will be allowed to access. If a warning shows first, the list below this video says what to do.",
+        "For iCloud and some other services, create an app password on that service's website. Then paste it into Archie.",
+        "Step four. Return to Archie. Your account appears in the list. For most services, the calendar connects along with the account.",
+        "To remove an account later, select Remove, shown as a trash can beside the account.",
+        "You can also remove permission in your Google or Microsoft account settings.",
+        "Next: why Archie waits for your approval."
+      ]
+    },
+    {
+      "id": "L2-04",
+      "n": "2.4",
+      "level": 2,
+      "slug": "the-approval-gate",
+      "title": "The Approval Gate: Why Archie Waits for You",
+      "lede": "Why replies and calendar changes wait for your approval, and what a routine running at night does instead.",
+      "youtube": "",
+      "seconds": 68,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "Will my agent send emails without asking me?",
+        "No. Replies and calendar changes need your approval.",
+        "Your agent can read your email and calendar and prepare a suggestion. An email reply appears as a card in your chat. You can send it, edit it, choose a time to send it, or dismiss it.",
+        "A calendar change also appears for you to review and approve.",
+        "Why does Archie wait? Your agent only has the information you have shared. It may not know about a decision you made or a detail you left out.",
+        "A routine running on its own at night cannot send a reply or change your calendar. It tells you what it would have done instead.",
+        "Read each card before you approve it. Approval only helps when you check the details.",
+        "There is no setting that turns this approval step off.",
+        "Next: the things your agent cannot do."
+      ]
+    },
+    {
+      "id": "L2-05",
+      "n": "2.5",
+      "level": 2,
+      "slug": "what-your-agent-cannot-do",
+      "title": "What Your Agent Cannot Do",
+      "lede": "What your agent will not do on a website, how buying works if you switch it on, and how to stop your agent.",
+      "youtube": "",
+      "seconds": 95,
+      "notes_heading": "Buying, and a hard limit on what your agent spends",
+      "notes": [
+        "Buying is off until you switch it on, under Websites on the Connections tab. When you do, the limit for one order starts at $50, and you can change it.",
+        "Your agent never types a card number, so your card has to be saved at the shop already.",
+        "The limit is checked against the price your agent reads on the page. For a ceiling nobody can get past, use a card from your bank that works at one shop, with its own limit."
+      ],
+      "words": [
+        "Are there things my agent cannot do?",
+        "Yes. Some limits are built into Archie.",
+        "Your agent cannot run a program on your computer. It cannot make a phone call or send a text on its own.",
+        "If you let it use websites, it will not type a password, card number, or sign-in code. It stops and lets you take over.",
+        "You must handle bank transfers and contract signatures yourself. Do not ask your agent to do them.",
+        "Buying is off unless you turn it on. If you turn it on, you choose the stores it may buy from. You also set a limit for each order and a limit for each week or month.",
+        "Even with it turned on, your agent still asks before each order.",
+        "The spending check uses the price your agent reads on the page. If the store adds a charge at the last step, the final price can be higher than your limit.",
+        "For a hard limit, use a card from your bank that only works at one store and stops at an amount you pick.",
+        "These limits do not stop AI from making mistakes. You still need to review its drafts.",
+        "To stop your agent, quit Archie. There is nowhere else it is running.",
+        "That is the end of Level 2. Next: where your information goes."
+      ]
+    },
+    {
+      "id": "L3-00",
+      "n": "3.0",
+      "level": 3,
+      "slug": "privacy-and-trust",
+      "title": "Privacy and Trust",
+      "lede": "Jack introduces Level 3: where your messages go, what information Otian keeps, and how to stop using Archie and keep what you built.",
+      "youtube": "",
+      "seconds": 13,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "These three videos explain where your messages go, what information Otian keeps, and how to stop using Archie while keeping a copy of what you've built."
+      ]
+    },
+    {
+      "id": "L3-01",
+      "n": "3.1",
+      "level": 3,
+      "slug": "where-your-messages-go",
+      "title": "Where Your Messages Go",
+      "lede": "The path a message takes from your phone to your computer, on to the AI company and back, and the two cases where it passes through our server.",
+      "youtube": "",
+      "seconds": 106,
+      "notes_heading": "Every connection Archie makes",
+      "notes": [
+        "<a href=\"../../trust/\">The Trust page</a> lists every connection Archie makes and what each one carries.",
+        "Our one server, for the free credits and the plan with the AI included, is archie-4f35.onrender.com."
+      ],
+      "words": [
+        "Where does my message go when I talk to my agent?",
+        "Let's follow a message sent through Telegram.",
+        "First, it passes through Telegram's computers. These are called servers. Then it reaches your computer, where your agent runs.",
+        "When your agent needs AI help, it sends your words to the AI company you chose, such as Anthropic or OpenAI. If it searches the web, that search happens at the AI company, too.",
+        "The answer returns to your computer. Your agent sends the reply back through Telegram to your phone.",
+        "When you use your own AI account, the connection from your computer to the AI company goes directly to that company. Otian is not in the middle of that connection.",
+        "There are two cases where your messages pass through Otian's server.",
+        "First, when you use our free credits or a plan with AI included, your messages pass through our server on their way to Anthropic. We record the cost of each request. We do not keep a record of its contents or keep a copy.",
+        "Second, if you use the Archie phone app on an Android phone, messages between it and your computer wait on our server in a locked form. We never receive the key that opens them.",
+        "We can see when a message was left there, which version of Archie left it, and whether it was picked up, but we cannot read it. This phone access stays off unless you turn it on.",
+        "Next: what information Otian keeps."
+      ]
+    },
+    {
+      "id": "L3-02",
+      "n": "3.2",
+      "level": 3,
+      "slug": "what-information-otian-keeps",
+      "title": "What Information Otian Keeps",
+      "lede": "What our servers keep about you, what they never hold, and the three reports Archie can send, which you can turn off.",
+      "youtube": "",
+      "seconds": 85,
+      "notes_heading": "The full list, and how to check it yourself",
+      "notes": [
+        "<a href=\"../../trust/#what-we-hold\">The complete list of what we hold</a>.",
+        "You can check our claims yourself with a network monitor in about 10 minutes. <a href=\"../../trust/\">The Trust page</a> shows how."
+      ],
+      "words": [
+        "What information does Otian keep about me?",
+        "Our servers keep your email address and whether you have a plan. We also keep which version of Archie you run, and reports about crashes and errors.",
+        "If you use the Archie phone app on an Android phone, we also hold the messages between your phone and computer, until you turn phone access off. Those messages are locked with a key we never receive.",
+        "We do not keep conversations in a form we can read. We do not keep your emails, calendar, or files.",
+        "Your account keys are stored in your computer's password store. We cannot read the keys stored there.",
+        "Archie does not use an analytics service, a service that tracks how people use an app.",
+        "It can send three kinds of reports: a check-in with your app version, a crash report, and an error report. These are linked to your account ID. They do not include anything you wrote, and you can turn them off in Settings.",
+        "Our Trust page has the full list. It also shows where Archie connects and how you can check those connections yourself.",
+        "Next: how to stop using Archie and save your work."
+      ]
+    },
+    {
+      "id": "L3-03",
+      "n": "3.3",
+      "level": 3,
+      "slug": "how-to-stop-using-archie",
+      "title": "How to Stop Using Archie and Save Your Work",
+      "lede": "Five steps, in order: save a backup, end your plan, take back account access, reset Archie, and remove the app.",
+      "youtube": "",
+      "seconds": 124,
+      "notes_heading": "The last steps, and what Reset leaves behind",
+      "notes": [
+        "A full refund within 14 days of first starting a plan, by email. Guided sessions are not refunded.",
+        "If you use the Archie phone app, press <strong>Disconnect every phone</strong> before you reset. Reset leaves the phone mailbox on our server, sealed, until you do or until you delete your account.",
+        "On a Mac, to leave nothing of Archie behind: after Reset, turn off <strong>Open Archie at login</strong> in Settings, quit, and drag Archie to the Trash. Then delete <code>~/Library/Application Support/com.archie.app</code>, which the Trash leaves.",
+        "Two small items of Archie&rsquo;s stay in Keychain Access on a Mac, under com.archie.app. Delete them there too.",
+        "If you set up waking on a Mac, first run <code>sudo /Library/PrivilegedHelperTools/archie-wake --uninstall</code> in Terminal.",
+        "On Windows, reset first. The uninstaller&rsquo;s box, &ldquo;Also remove my Archie data, agents, and settings&rdquo;, removes Archie&rsquo;s folders and keeps your saved keys. A scheduled task named Archie\\Wake may stay: delete it in Task Scheduler.",
+        "Your weekly backups and the Downloads/Archie folder stay where they are.",
+        "Every step, and what happens after a plan ends: <a href=\"../../trust/if-you-want-to-stop/\">If You Want to Stop</a>."
+      ],
+      "words": [
+        "What happens if I decide to stop using Archie?",
+        "You can stop and keep a copy of what you built. Follow these steps in order.",
+        "Step one. Save a backup before removing anything. Open Account and find Backups. Archie can save what you built into one file.",
+        "You need Archie open to make this backup. It is an ordinary file, with no password on it. Keep it somewhere private and safe, like a tax document.",
+        "Step two. If you have a plan, open Account, find Your plan, and select Manage plan to cancel. The plan lasts until the end of the time you paid for.",
+        "If you cancel soon after starting, you can email us to ask for a full refund. The refund time limit is below this video.",
+        "Step three. Remove your connected accounts on the Connections tab. If you paired a phone, press Disconnect every phone there, too. That empties its mailbox on our server. For Google or Microsoft, you can also remove access in that company's account settings.",
+        "Step four. To erase your agents and saved keys from this computer, open Resetting Archie on the Account page and select Reset Archie. You must type reset to confirm.",
+        "If you set up the computer to wake for routines, or want nothing of Archie left on this computer, the list below this video has the last steps.",
+        "Step five. Quit Archie and remove the app. On a Mac, drag the app to the Trash. On Windows, open Settings, then Apps, and uninstall Archie. Check the box to remove your Archie data.",
+        "Ending a plan does not delete anything from your computer. When your plan has ended, you can also delete your Otian account on our website's account page.",
+        "That is the end of Level 3. Next: setting up your agent."
+      ]
+    },
+    {
+      "id": "L4-00",
+      "n": "4.0",
+      "level": 4,
+      "slug": "you-and-archie",
+      "title": "You and Archie",
+      "lede": "Jack introduces Level 4: set up your agent, try your first conversation, and make a morning summary of your day.",
+      "youtube": "",
+      "seconds": 9,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "Let's set up your agent, try your first conversation, and make a morning summary of your day."
+      ]
+    },
+    {
+      "id": "L4-01a",
+      "n": "4.1",
+      "level": 4,
+      "slug": "setting-up-choose-your-computer",
+      "title": "Setting Up, Clip 1: Choose Your Computer",
+      "lede": "Step one of setting up: the computer that will run your agent, one you can leave plugged in and awake.",
+      "youtube": "",
+      "seconds": 16,
+      "notes_heading": "How long setup takes",
+      "notes": [
+        "About five to ten minutes, once. That is our estimate: about five on the free credits, and about ten on an AI account of your own.",
+        "How to keep a computer awake while it is plugged in: <a href=\"../why-your-computer-needs-to-stay-on/\">0.2</a>."
+      ],
+      "words": [
+        "Step one. Choose the computer that will run your agent.",
+        "For the best results, use one you can leave plugged in and awake.",
+        "For help choosing, watch \"Why Your Computer Needs to Stay On\" in Level 0."
+      ]
+    },
+    {
+      "id": "L4-01b",
+      "n": "4.1",
+      "level": 4,
+      "slug": "setting-up-install-archie",
+      "title": "Setting Up, Clip 2: Install Archie",
+      "lede": "Step two: download Archie from our install page, open it, and what a Mac and Windows show the first time.",
+      "youtube": "",
+      "seconds": 51,
+      "notes_heading": "Where to download Archie, and what Windows shows",
+      "notes": [
+        "Archie&rsquo;s download page is <a href=\"../../archie/install/\">otianai.com/archie/install</a>. Type the address into your browser yourself.",
+        "Windows shows a box that says <strong>Windows protected your PC</strong>. <a href=\"../../archie/install/#warning-heading\">The install page shows it and says what to check before you continue</a>."
+      ],
+      "words": [
+        "Step two. Type the address of our download page into your browser's address bar. The address is below this video. Download Archie and open the file. On a Mac, drag Archie into the Applications folder, then open it from there.",
+        "On a Mac, you may see a message asking whether you want to open Archie. This is a normal check for an app downloaded from the internet.",
+        "On Windows, you may see a blue message that says Windows protected your PC.",
+        "Select More info. Check that the app name starts with Archie. If it names a different app, stop.",
+        "After checking the name, select Run anyway.",
+        "The information below this video explains why Windows shows this message."
+      ]
+    },
+    {
+      "id": "L4-01c",
+      "n": "4.1",
+      "level": 4,
+      "slug": "setting-up-choose-how-to-pay-for-the-ai",
+      "title": "Setting Up, Clip 3: Choose How to Pay for the AI",
+      "lede": "Step three: the three ways to pay for the AI your agent uses, and what needs an AI account of your own.",
+      "youtube": "",
+      "seconds": 54,
+      "notes_heading": "Your three choices, and what each costs",
+      "notes": [
+        "Free credits: no card needed. They last 14 days or until they are spent, whichever comes first.",
+        "An AI account of your own, with no plan: Archie is free for 20 jobs a day. A job is one piece of work: a reply to you, a routine running, or an email it reacts to.",
+        "A plan: $30 a month or $299 a year.",
+        "A plan with the AI included: $59 a month or $599 a year, with $25 of Claude use each month.",
+        "That $25 refills each paid month and nothing carries over. When it is used up, your agent pauses until the next month, or until you connect an AI account of your own.",
+        "Email features and the text watch need an AI account of your own. The free starter credits and the plan with the AI included will not run them."
+      ],
+      "words": [
+        "Step three. Choose how to pay for the AI your agent uses.",
+        "On a new install, you can start with our free credits. Sign in to claim them. You do not need a payment card.",
+        "Alternatively, you can connect your own AI account. Select Set up an AI account at the bottom of Archie's window. With your own account, Archie is free, with a daily job limit. The current limit is below this video.",
+        "You can also buy a plan, which takes the daily limit off. The plan with AI included also pays for the AI. Select Get a plan at the bottom of Archie's window.",
+        "Email and texts require your own AI account. Right now, they do not work with our free credits or a plan with AI included."
+      ]
+    },
+    {
+      "id": "L4-01d",
+      "n": "4.1",
+      "level": 4,
+      "slug": "setting-up-get-to-know-your-agent",
+      "title": "Setting Up, Clip 4: Get to Know Your Agent",
+      "lede": "Step four: your agent&rsquo;s first questions, the add-ons it may install, and where to read the notes it keeps about you.",
+      "youtube": "",
+      "seconds": 43,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "Step four. Your agent is already set up with a name, a picture, and a few add-ons.",
+        "When it asks you whether you want to chat from your phone, select Keep chatting here. Then it asks you a few questions. These include your age, what your days are like, and how you want it to talk to you.",
+        "Your agent uses these answers to set itself up. It may also install a few add-ons that fit your needs.",
+        "Your agent keeps notes about what it learns on the Knowledge tab. You can read those notes. You can also change your agent's name and personality later."
+      ]
+    },
+    {
+      "id": "L4-01e",
+      "n": "4.1",
+      "level": 4,
+      "slug": "setting-up-connect-your-phone",
+      "title": "Setting Up, Clip 5: Connect Your Phone",
+      "lede": "The optional last step: connect Telegram so you can message your agent from your phone, and the claim code that makes you its owner.",
+      "youtube": "",
+      "seconds": 56,
+      "notes_heading": "The other chat apps",
+      "notes": [
+        "Archie&rsquo;s guides for the other chat apps are inside the app. Discord and Slack need an app of your own, Matrix needs its own account, and iMessage works on a Mac.",
+        "Every chat app Archie works with: <a href=\"../talking-to-your-agent-from-your-phone/\">0.8</a>."
+      ],
+      "words": [
+        "Step five is optional. Connect a chat app so you can message your agent from your phone. Open your agent's Setup tab and select Chat app. This example uses Telegram.",
+        "In Telegram, message BotFather to create a bot for your agent. A bot is the special chat contact you will talk to.",
+        "BotFather gives you a token, a code that connects the bot to Archie. Paste that token into Archie.",
+        "Archie then shows you a different code, called a claim code. Open the chat with your new bot and send it that code.",
+        "Send the claim code to your new bot. BotFather is a different chat.",
+        "The first person to send the claim code becomes the owner. Send it yourself right away.",
+        "Your phone connection is now set up."
+      ]
+    },
+    {
+      "id": "L4-02",
+      "n": "4.2",
+      "level": 4,
+      "slug": "your-first-conversation",
+      "title": "Your First Conversation",
+      "lede": "Three things to try first: a question about your calendar, a change you approve, and a reminder.",
+      "youtube": "",
+      "seconds": 85,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "Your agent is ready. What should you say first?",
+        "Try these three things.",
+        "First, ask a simple question. For example, \"What can I cook with eggs, spinach, and rice?\" Your agent answers in the same chat.",
+        "Second, give it a task. If your calendar is connected, ask, \"What is on my calendar tomorrow?\"",
+        "Then try, \"Move my three o'clock appointment to Thursday.\" Your agent shows you the change. It waits for your approval before changing the calendar. If it can only read your calendar, it tells you how to let it make changes.",
+        "Third, ask for a reminder. For example, \"Remind me on the fourteenth to pay the internet bill.\" Your agent sends you that reminder on that day. If you do not give a time, it picks nine in the morning and tells you.",
+        "For bills that repeat each month, add Bills & Subscriptions from the Marketplace. It keeps a list of your bills and reminds you before each one is due. When you pay one, tell your agent, so it can move to the next date.",
+        "Use everyday words. Check important details, and tell your agent when something is wrong.",
+        "Next: setting up your morning summary."
+      ]
+    },
+    {
+      "id": "L4-03",
+      "n": "4.3",
+      "level": 4,
+      "slug": "your-first-morning-brief",
+      "title": "Your First Morning Brief",
+      "lede": "How to add Morning Brief from the Marketplace, change its time and topics, and avoid getting the same news twice.",
+      "youtube": "",
+      "seconds": 82,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "Would you like a summary of your day each morning?",
+        "Morning Brief is a routine you can add from the Marketplace.",
+        "It needs the Calendar Manager add-on. Install that first. If you connected your calendar during setup, you already have it.",
+        "Open your agent's Routines tab. Select Browse the Marketplace, then install Morning Brief. It starts turned on.",
+        "Each morning, it can send your appointments, tasks that are due, upcoming birthdays, and bills due soon. Each section appears only when you have the add-on it needs.",
+        "To change the time or the information in the message, open Morning Brief on the Routines tab and select Edit.",
+        "Change the schedule under Change the time or days. Change the message topics in What it sends.",
+        "You can ask your agent in chat to turn Morning Brief on or off. To change what it includes, use the Routines tab.",
+        "Your agent may already send other morning messages, such as Today's Calendar or your task checklist. Turn those off on the Routines tab to avoid getting the same news twice.",
+        "Next: what to check when something goes wrong."
+      ]
+    },
+    {
+      "id": "L4-04",
+      "n": "4.4",
+      "level": 4,
+      "slug": "what-to-check-when-something-goes-wrong",
+      "title": "What to Check When Something Goes Wrong",
+      "lede": "Four things to check when your agent goes quiet, and how to reach a person if none of them fixes it.",
+      "youtube": "",
+      "seconds": 100,
+      "notes_heading": "Help, and how fast we answer",
+      "notes": [
+        "Every message gets a reply from a person within one business day, even when the reply is only that we are working on it. That is the sundown rule in <a href=\"../../standard/\">the Otian Standard</a>.",
+        "More fixes: <a href=\"../../help/\">Is My Agent Broken?</a> To write to us: <a href=\"../../contact/\">the contact page</a>."
+      ],
+      "words": [
+        "Your agent is quiet, or something does not look right. Here are four things to check.",
+        "First, is your computer awake with Archie open?",
+        "Your agent stops when the computer sleeps or shuts down, or when you close Archie. Opening Archie starts your agent again, unless you pressed Stop on your agent's page.",
+        "Second, did your agent decide that no message was needed?",
+        "Sometimes your agent reads an email and leaves it alone. That can be normal. Archie lists those emails and explains why it took no action.",
+        "Third, does a connected account need you to sign in again?",
+        "Open your agent's Connections tab. If an account says Not opening, select Reconnect and sign in again.",
+        "Fourth, have you run out of AI credit or daily jobs?",
+        "If your own AI account runs out of credit, your agent tells you in chat and gives you a link to add more. If our free credits run out, it tells you how to keep going.",
+        "On the free tier, Archie warns you when you are near the daily job limit. It saves the last few jobs for requests you make directly.",
+        "For more help, open our troubleshooting page, Is my agent broken? If you cannot find the answer there, email us. A person reads every message. Our response time is below this video.",
+        "That is the end of the course. You are ready to start."
       ]
     }
   ]

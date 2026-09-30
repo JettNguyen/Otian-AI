@@ -2636,11 +2636,12 @@ owner's never-open list, a list of host suffixes that cannot fence a subnet. tru
 carries both since 2026-09-27; it had said Archie listens on no port and cannot reach inside a
 network.
 
-### 🚧 The video library: YouTube behind a press, and Jack's voice (decided 2026-09-28, NOT LIVE)
+### ✅ The video library: YouTube behind a press, and Jack's voice (decided 2026-09-28, LIVE 2026-09-30)
 
-**Not live until the first video page ships.** Nothing below may appear on a page before then, and
-the website entry that follows stays exactly as it is until the same commit that adds the first
-player. Written now so the pages are built to it.
+**Live since 2026-09-30, with Level 0.** Jett uploaded 0.0 to 0.8 to YouTube that morning and the
+nine pages went up in the same commit that added the YouTube sentence to the website entry below and
+named YouTube in the privacy policy. Until then this entry read "NOT LIVE" and nothing in it could
+appear on a page.
 
 **Jett's decisions (2026-09-28):** the library lives at `learn/<slug>/`, one page per video, and the
 videos are hosted on YouTube, embedded **click to load** on `youtube-nocookie.com`. Each page shows
@@ -2708,7 +2709,13 @@ ad pixel. It never has. What it does ask your browser for, besides its own files
 typeface from Google Fonts and Firebase's sign-in code, which the account menu in the top bar
 runs. Those see your address the way any host sees the address of whoever asks it for a file.
 The site is served by GitHub Pages, so GitHub sees the request for the page itself, for the
-same reason."
+same reason. Pressing play on a video in the library loads YouTube's player, and YouTube counts
+that play."
+
+**The last sentence is new on 2026-09-30**, the day the Learning Library's first pages went up
+(`learn/<slug>/`, the video library entry above). "It never has" is still about us: YouTube's
+count is YouTube's, it happens only after a press, and no page loads the player before one
+(`js/library.js`; `gen-csp.py` allows the nocookie host in `frame-src` on the library pages only).
 
 **Why it's true:** no page carries an external `<script src>` at all, and the only
 cross-origin things any page pulls are the Google Fonts stylesheet and font files, the
@@ -2723,9 +2730,10 @@ our intentions.
 
 **Boundaries — do not overclaim:**
 - ⛔ Never "we do not track you" as an unscoped sentence. Three third parties receive a request
-  and therefore an IP address, and one of them is Google twice. Name them, as the approved
-  wording does.
-- ⛔ Never say the site "makes no third-party requests". It makes four kinds, listed above.
+  and therefore an IP address, and one of them is Google twice; a fourth, YouTube, does once a
+  reader presses play in the library. Name them, as the approved wording does.
+- ⛔ Never say the site "makes no third-party requests". It makes four kinds, listed above, and a
+  fifth, YouTube's player, on a library page after a press.
 - ⚠️ The honest strong form is about **what we collect**, not about what nobody can see: we run
   no measurement of any kind on this site, and the hosts that see a request see it because they
   are serving a file.

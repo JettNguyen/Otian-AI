@@ -20113,11 +20113,10 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .da-shot .tot { font-size: var(--fs-3xs); font-weight: 600; }
 .da-shot .b { align-self: flex-start; padding: 5px 12px; border-radius: 999px; background: #202124; color: #FFFFFF; font-size: var(--fs-3xs); font-weight: 600; }
 .da-composer { display: flex; flex-direction: column; border-top: 1px solid var(--line-soft); padding-top: 12px; }
-.da-composer .row { display: flex; align-items: center; gap: 8px; }
-.da-iconbtn { display: flex; width: 42px; height: 42px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); color: var(--text-secondary); }
+.da-composer .row { display: flex; align-items: flex-end; gap: 6px; border-radius: 16px; border: 1px solid var(--field-border); background: var(--bg-card); padding: 5px; }
+.da-iconbtn { display: flex; width: 42px; height: 42px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: var(--radius); color: var(--text-secondary); }
 .da-iconbtn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; }
-.da-box { flex: 1; min-width: 0; height: 42px; display: flex; align-items: center; border-radius: var(--radius); border: 1px solid var(--field-border); background: var(--bg-card); padding: 0 12px; font-size: var(--fs-base); color: var(--text-muted); white-space: nowrap; overflow: hidden; }
-.da-sendbtn { display: flex; height: 42px; align-items: center; border-radius: 999px; background: var(--accent); padding: 0 16px; font-size: var(--fs-base); font-weight: 600; color: var(--text-on-accent); }
+.da-box { flex: 1; min-width: 0; height: 42px; display: flex; align-items: center; padding: 0 8px; font-size: var(--fs-base); color: var(--text-muted); white-space: nowrap; overflow: hidden; }
 .da-composer .cap { margin-top: 8px; text-align: center; font-size: var(--fs-2xs); line-height: 1.6; color: var(--text-muted); }
 
 /* The browser: an ordinary Chrome window, in the colors Chrome draws its own frame in, light or

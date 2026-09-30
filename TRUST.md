@@ -1152,10 +1152,13 @@ values (not even the last four of one), and the screenshots a job took. The audi
 files inside the owner's conversation travel only when somebody on the phone presses to hear, see
 or open one, sealed like everything else (added 2026-09-25; before that they never travelled).
 
-⚠️ **On main, three more for the talk screen** (Archie `e7f6e128`, not in a release): `talk_ready`
-only asks whether this computer can hear and speak and whether the agent talks back, `talk_download`
-starts those two downloads, and `set_voice_mode` lets one agent answer out loud. None reaches a
-secret, a file or anybody else's conversation. See the talk screen's own entry.
+✅ **In 0.3.2, three more for the talk screen, on the computer's side only** (Archie `e7f6e128`, an
+ancestor of 0.3.2's `94f85315`; checked 2026-09-30): `talk_ready` only asks whether this computer can
+hear and speak and whether the agent talks back, `talk_download` starts those two downloads, and
+`set_voice_mode` sets whether one agent answers out loud (`src-tauri/src/phone.rs:1639`, `:2575` and
+`:2592` at `94f85315`). None reaches a secret, a file or anybody else's conversation. **No released
+phone asks them yet.** The phone's talk screen is archie-mobile `cf0b115`, not in a release, so this
+list of ops is true of 0.3.2 and still says nothing the phone can do. See the talk screen's own entry.
 
 ⚠️ **On main, one more op, and the first list whose rows travel** (Archie `8fb5705d`, archie-mobile
 `817e099`, not in a release). The open items on the owner's to-do list (the Task Manager skill's
@@ -1327,13 +1330,96 @@ when that is the clearer shape."
   app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
   kind says so rather than opening it.
 
-### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, not yet in a release
+### ✅ A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30
+
+*Released, checked 2026-09-30 against 0.3.2's `94f85315`. The microphone has been in the window since
+August (Archie `167c924b`) and Talk out loud since 0.3.0 (`080c3726`); 0.3.2 moved both into Send's
+place while the box is empty, and its release notes say so: "While the message box is empty, the
+microphone and talk buttons sit where Send goes." (`docs/releases/0.3.2.md`, `archie/releases.json`).
+This entry approves what the window shows and where the words go. It approves nothing about how the
+talk screen behaves, because nobody has held a conversation with it yet, so the entry below keeps its
+gate. The phone's half is in no release.*
+
+**Approved wording:** "Beside the message box in Archie are two buttons: a microphone, to say a message
+instead of typing it, and Talk out loud, which opens a screen for talking with your agent out loud.
+What you say is turned into words on your computer, and only the words go to your AI company, the
+same way a typed message does. The microphone is on only while you are recording, or while that
+screen is open."
+
+**Why it's true**, all at `94f85315`:
+
+- **The bar.** `src/app/conversation.tsx`: Add (`:2712`), the box, whose hint is "Message {name}, or /
+  for commands" (`:2759`), the microphone, "Say it instead of typing" (`:2898`), and Talk out loud
+  (`:2945`), which gives its place to Send the moment there is anything to send (`sendInSlot`,
+  `:2093`). Under the bar: "Archie can get things wrong. Check before you act on it." (`:2974`). The
+  two voice buttons appear only while the agent is running; a stopped agent shows Start there.
+- **The microphone.** A press records until Done, five minutes at most (`MAX_SECONDS`,
+  `src/app/recorder.ts:48`), then offers Put it in the box, Send as a voice note, or throw it away.
+  Put it in the box turns the recording into words and sends nothing (`inapp_dictate`,
+  `src-tauri/src/inapp.rs:1785`).
+- **Turned into words on the computer.** Both buttons use the local Whisper: `said_to_words`
+  (`inapp.rs:1584`) calls `transcribe_media` (`crates/archie-runtime/src/media.rs:515`, at
+  `inapp.rs:1624`), and the talk screen calls `media::transcribe` (`src-tauri/src/talk.rs:125`). The
+  tools are `ffmpeg`, `whisper` and `whisper-model-base.en` (`HEARING_ASSET_REFS`,
+  `src-tauri/src/assets.rs:210`), run as programs on the computer. No speech service is called.
+- **Only the words go.** A voice note and each turn on the talk screen go through `deliver_spoken`
+  (`inapp.rs:1840`; the talk screen's `talk_send` calls it at `talk.rs:246`), which hands the gateway
+  the words alone (`spoke_to`, `inapp.rs:1872`; `ChannelEvent::Spoken` carries text,
+  `crates/archie-net/src/inapp.rs:373`). The gateway adds " [heard, not typed]" so the agent reads
+  names and numbers back (`HEARD_NOT_TYPED`, `crates/archie-runtime/src/gateway/worker.rs:1998`), and
+  from there it is an ordinary message to the owner's AI company.
+- **The microphone is opened in two places and let go on the way out of both.** `getUserMedia` is
+  called only at `src/app/recorder.ts:125` and `src/app/talk-mic.ts:357`. The recorder lets go on
+  Done, on throwing it away, at the five-minute ceiling, and when the conversation closes (`release`,
+  `recorder.ts:103`, `:111`). The talk screen is mounted only while it is open
+  (`conversation.tsx:2991`) and lets go when it unmounts (`talk-mic.ts:299`, `:314`). The Mac's own
+  permission text says it too: "What you say is turned into words on this computer and is never
+  uploaded for transcription." (`src-tauri/Info.plist:18-19`).
+- **The answer out loud is made on the computer as well**: Kokoro through `sherpa-onnx-offline-tts`
+  (`speak`, `crates/archie-runtime/src/speech.rs:636`; `VOICE_ASSET_REFS`, `assets.rs:173`). This is a
+  fact about where audio is made, not approved wording; the entry below holds that.
+
+**Required clauses:**
+
+- ⚠️ **It needs a one-time download from us, and the app says so first.** The microphone needs the
+  hearing tools, about 195 MB. Talk out loud needs those and the voice, about 585 MB in all on a Mac
+  and 540 MB on Windows, less whatever is already there (`data/marketplace/assets/*.json`; the public
+  catalog carried the same sizes on 2026-09-30). The app names the size before it starts. It is a
+  plain file request to `assets.otianai.com` with no account on it (`install`,
+  `crates/archie-core/src/assets.rs:167-169`), checked against a SHA-256 before use (`:235`, `:339`).
+  Never "works out of the box".
+- ⚠️ **English only.** The hearing model is `base.en`.
+- ⚠️ **A person has used the microphone on a Mac and never on Windows.** Archie's
+  `docs/OPEN-THREADS.md`, "The microphone works on macOS and has never run on Windows", still open on
+  main at `189dc289`. No page says or shows it working on Windows until that closes.
+- ⚠️ **A recording that is sent is kept.** A voice note, and every turn on the talk screen, keeps its
+  recording on the message, in the agent's folder on the computer, so it can be played back
+  (`write_spoken`, `inapp.rs:1850`). Only Put it in the box keeps nothing. Never "recordings are not
+  kept". What a paired phone may fetch is governed by the phone entries above.
+
+**Boundaries:**
+
+- ⛔ **Never say how Talk out loud goes.** Not "hands-free", "back and forth", "without pressing
+  anything", how quickly it answers, or that it can be interrupted. Name the button and the screen it
+  opens; the entry below holds the rest and its gate.
+- ⛔ **Never "nothing leaves your computer", "offline" or "a private voice assistant".** The words go
+  to the AI company. "Only the words go" is the true half, and it is the stronger one.
+- ⛔ **Never on the phone.** Archie Mobile's talk screen is in no release, and its microphone line
+  stays as the phone entries have it.
+
+### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in no release
 
 **Entry written 2026-09-29.** The window's half shipped in 0.3.0 (Archie `080c3726`, built September
 15) with no entry, which under this file's rule meant it did not exist to anybody reading here. It is
 written now, with the phone's half, and it stays 🚧 until a person has held a conversation with
 either: the four things only a voice can settle are in Archie's `docs/OPEN-THREADS.md`, under "The
 talk screen has never been talked to" and the phone's entry after it.
+
+**Checked against 0.3.2 on 2026-09-30.** The computer's half of the phone's screen (Archie
+`e7f6e128`) is in 0.3.2, and the window's button now stands beside the box. Neither condition on the
+wording below is met by that: both threads are still open on main at `189dc289`, and archie-mobile
+`cf0b115` is in no release. The window's two buttons, and where what you say goes, are approved on
+their own in the entry above.
 
 **Approved wording, once a person has used it and the phone's half is in a release:** "Talk to your
 agent out loud and hear it answer, back and forth, without pressing anything between turns. It is
@@ -1348,8 +1434,10 @@ turned into words on your computer, and the answer is read out by a voice that r
 - **Hearing and speaking run on the computer.** Whisper (`whisper-model-base.en`) turns speech into
   words and Kokoro (`sherpa-onnx-offline-tts`, `kokoro-en`) reads the answer, both downloaded once
   from our asset store with builds for Mac and Windows (`HEARING_ASSET_REFS` and
-  `VOICE_ASSET_REFS` in `src-tauri/src/assets.rs`; about 195 MB and 148 MB).
-- **The phone** (Archie `e7f6e128`; archie-mobile `cf0b115`). `src/screens/Talk.tsx` and
+  `VOICE_ASSET_REFS` in `src-tauri/src/assets.rs`; about 195 MB, and for the voice about 390 MB on a
+  Mac and 343 MB on Windows). *Corrected 2026-09-30: this said 148 MB for the voice, which is the
+  hearing model's size. `kokoro-en` 1.0 alone is 335.6 MB, in the manifests since August.*
+- **The phone** (Archie `e7f6e128`, in 0.3.2; archie-mobile `cf0b115`, in no release). `src/screens/Talk.tsx` and
   `src/talk.ts` in archie-mobile listen until somebody stops, send it as an ordinary voice note
   (`put_file`), and fetch the spoken answer the way the play button on a message does (`spoken`).
   The computer answers three new ops in `src-tauri/src/phone.rs`: `talk_ready` (only asks whether
@@ -1381,7 +1469,8 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **A long answer is written, not read out.** Past about 1,200 characters (`MAX_SPOKEN_CHARS` in
   `crates/archie-runtime/src/speech.rs`) the screen says the answer was too long to read out and
   shows it instead.
-- ⚠️ **It needs a one-time download on the computer, about 340 MB**, which either screen starts, and
+- ⚠️ **It needs a one-time download on the computer, about 585 MB on a Mac and 540 MB on Windows**
+  (corrected 2026-09-30 from 340 MB; see the voice's size above), which either screen starts, and
   which the phone's screen follows until it is done.
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.

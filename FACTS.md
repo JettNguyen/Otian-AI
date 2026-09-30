@@ -106,9 +106,9 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$20` | Claude Pro, billed monthly | `https://claude.com/pricing`, "$20" on the Pro card | Checked: 2026-08-19 |
 | `$17` | Claude Pro, billed annually | Same page, "$17" per month with the annual subscription | Checked: 2026-08-19 |
 | `$100` | Claude Max, the entry tier | Same page, "From $100" | Checked: 2026-08-19 |
-| `$20` | ChatGPT Plus, billed monthly | `https://chatgpt.com/pricing`, "$20 / month" on the Plus card. Read in a browser, not fetched: see the note below | Checked: 2026-08-19 |
-| `$8` | ChatGPT Go, billed monthly | Same page, "$8 / month". Same caveat | Checked: 2026-08-19 |
-| `$100` | ChatGPT Pro, the entry tier | Same page, "From $100 / month". Same caveat | Checked: 2026-08-19 |
+| `$20` | ChatGPT Plus, billed monthly | `https://chatgpt.com/pricing`, "$20 / month" on the Plus card. Not fetched directly: see the note below | Checked: 2026-09-30 |
+| `$8` | ChatGPT Go, billed monthly | Same page, "$8 / month". Same caveat | Checked: 2026-09-30 |
+| `$100` | ChatGPT Pro, the entry tier, and since 2026-09-29 the cheapest plan that carries OpenAI's Dots: the Pro card lists "Dot, your always-on agent" and Free, Go and Plus do not. **No figure for Pro's two higher tiers prints**: the card says "Your choice of 3 usage tiers" and prices only the first | Same page, "From $100 / month". Same caveat | Checked: 2026-09-30 |
 | `$300` | SuperGrok Heavy, billed monthly. The xAI plan that carries Grok Bot | Grok Bot plan cards, "$300 / month". Read in a browser: `x.ai` refuses fetches. See the note below | Checked: 2026-08-20 |
 | `$200` | Cursor Ultra, billed monthly. The Cursor plan that carries Grok Bot | Same cards, "$200 / month". Same caveat | Checked: 2026-08-20 |
 | `$120` | Cursor Teams Premium, per seat, billed monthly. Also carries Grok Bot; printed only in the sources fold | Same cards, "$120 / seat / month". Same caveat | Checked: 2026-08-20 |
@@ -165,6 +165,12 @@ re-confirm it, and the 90-day staleness check will come due against a page we ca
 is still the company's own page rather than a search result or an aggregator, and any reader
 can open the same URL and see the same cards. When the date comes due, someone opens the page
 again. A fetch that fails must not quietly become a figure that rots.
+
+**Re-read 2026-09-30 through a reader service**, for OpenAI's Dots: `https://r.jina.ai/https://chatgpt.com/pricing`
+fetches the page and returns its text, and all three cards matched. That is the company's own
+page, not a summary of it, so it has the standing of a browser read, and it can be re-run by a
+script when the date comes due. If the reader ever returns a block page or a summary instead of
+the cards, fall back to a person with a browser.
 
 **On the Grok Bot rows.** Same story as ChatGPT above: the plan cards were read in a browser
 and transcribed on 2026-08-20, because `x.ai` returns 403 to any fetch. Claude Cowork needs

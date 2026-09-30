@@ -752,8 +752,8 @@ key), not the size of the job, and the note says so.
 **Bans.** Never "cheaper than X" as a flat sentence; the reader does the comparison, in units the
 page has explained. Never a figure from a search snippet, an aggregator, or a vendor's blog about a
 competitor (Kilo's OpenClaw page and Lindy's Devin page were read and left out for that reason).
-Never a per-task figure a company does not publish: Symphony, Manus, Genspark, Grok Bot and
-Perplexity's Computer publish none that survive their own caveats, so their rows say "not
+Never a per-task figure a company does not publish: Symphony, Manus, Genspark, Grok Bot,
+Perplexity's Computer and, since 2026-09-30, OpenAI's Dots publish none that survive their own caveats, so their rows say "not
 published" or do not exist.
 
 ### ✅ What "own" means in "Don't rent your agent. Own it." (entry written 2026-09-28)
@@ -4735,6 +4735,16 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | Microsoft&rsquo;s earlier Scout post: &ldquo;Sensitive actions can require a human to sign off before they proceed&rdquo;, and access &ldquo;requires Frontier enrollment, Intune policy configuration, and an opt-in attestation&rdquo;. &ldquo;Can require&rdquo; is an organization&rsquo;s policy, so never print it as Autopilot asking first | Microsoft | `https://www.microsoft.com/en-us/copilot/blog/2026/06/02/introducing-microsoft-scout-your-always-on-personal-agent/` | 2026-09-29 |
 | OpenClaw&rsquo;s blog says Autopilot&rsquo;s &ldquo;foundation is OpenClaw&rdquo;, quoting Omar Shahine, &ldquo;who leads the team building it&rdquo;: &ldquo;We are building Autopilot on @openclaw, working with @steipete and the OpenClaw Foundation to make it a fantastic enterprise grade runtime.&rdquo; **Microsoft&rsquo;s own post does not mention OpenClaw**, so print this as OpenClaw&rsquo;s blog saying it | OpenClaw | `https://openclaw.ai/blog/microsoft-autopilot-openclaw` | 2026-09-29 |
 | OpenClaw&rsquo;s Windows app, in the same post: the Foundation and Microsoft&rsquo;s Windows team are working &ldquo;to make Windows a premier platform for OpenClaw&rdquo;; Scott Hanselman&rsquo;s contributions &ldquo;include a guided setup experience&rdquo;, and R&eacute;gis Brid &ldquo;contributed native WinUI chat and inline command approvals&rdquo;. The post does not say the default approval mode changed, so the exec-approvals rows above still stand | OpenClaw | `https://openclaw.ai/blog/microsoft-autopilot-openclaw` | 2026-09-29 |
+| Dots are OpenAI&rsquo;s &ldquo;always-on agents&rdquo;, announced at DevDay on 2026-09-29 and &ldquo;Powered by GPT&#8209;6 Astra&rdquo;: &ldquo;Each dot works on its own cloud computer, while your computer and its contents stay separate unless you choose to connect it.&rdquo; **This is the row that puts Dots on the their-servers side of the compare chart** | OpenAI | `https://openai.com/index/introducing-dots/` | 2026-09-30 |
+| &ldquo;Your dot has its own cloud computer. Access to your local computer is optional and starts turned off.&rdquo; Connected, &ldquo;your dot can access files and work on that computer&rdquo;, and &ldquo;Your computer must be online with the ChatGPT app open for your dot to use it.&rdquo; Connecting yours does not move a dot onto it: the dot&rsquo;s own computer stays in the cloud, and yours is a place it can reach while it is on | OpenAI | `https://help.openai.com/en/articles/20001530-getting-started-with-your-dot`, `https://learn.chatgpt.com/docs/dots` | 2026-09-30 |
+| A dot works with your computer off: &ldquo;You can reach it and it can keep working even when your computer is off&rdquo;, and &ldquo;Cloud work can continue while your devices are off.&rdquo; | OpenAI | `https://learn.chatgpt.com/docs/dots` | 2026-09-30 |
+| Dots ask for some actions by default and a rule can stop the asking: &ldquo;Dots start with built-in rules for when to act independently and when to ask for approval. Custom Rules let you allow specific actions, require approval, or block them.&rdquo; Before an action that &ldquo;could affect your accounts or share information&rdquo;, an automatic review &ldquo;determines whether the action can proceed, needs your approval, or includes a step you must do yourself&rdquo;, and one of the four custom rules is &ldquo;Take action without asking&rdquo;. **This is the row that puts Dots a short way below the top, beside Cowork and Muse** | OpenAI | `https://openai.com/index/introducing-dots/`, `https://learn.chatgpt.com/docs/dots/controls` | 2026-09-30 |
+| A dot is a sign-in: &ldquo;Create your dot in the ChatGPT desktop app or in ChatGPT on desktop web&rdquo;, and &ldquo;You cannot currently create a dot on mobile, and dots are not supported on mobile web.&rdquo; After setup it can be reached &ldquo;in the ChatGPT mobile app when mobile access is available&rdquo;. The sign-in level, beside Cowork, which is reached the same way | OpenAI | `https://help.openai.com/en/articles/20001530-getting-started-with-your-dot`, `https://learn.chatgpt.com/docs/dots/getting-started` | 2026-09-30 |
+| &ldquo;You reach the same dot in ChatGPT, Slack, Teams, or a call.&rdquo; &ldquo;Your dot cannot initiate calls to you at launch.&rdquo; Texting is &ldquo;coming soon&rdquo; in OpenAI&rsquo;s announcement and may not be printed as present | OpenAI | `https://learn.chatgpt.com/docs/dots`, `https://help.openai.com/en/articles/20001530-getting-started-with-your-dot`, `https://openai.com/index/introducing-dots/` | 2026-09-30 |
+| &ldquo;Your first dot is included in your Pro or Business Premium plan at no extra cost.&rdquo; Pro users get it &ldquo;in markets excluding the European Economic Area, Switzerland, and the UK&rdquo;, and &ldquo;Dots are rolling out gradually. Access may take several days to reach your account.&rdquo; ChatGPT&rsquo;s pricing page lists &ldquo;Dot, your always-on agent&rdquo; on the Pro card, &ldquo;From $100 / month&rdquo;, and not on Free, Go or Plus | OpenAI | `https://help.openai.com/en/articles/20001530-getting-started-with-your-dot`, `https://chatgpt.com/pricing` | 2026-09-30 |
+| &ldquo;Conversations with your dot don&rsquo;t count toward your ChatGPT usage limits&rdquo;, and &ldquo;Your plan also includes an allowance for deeper work, with extended limits for the first month after launch.&rdquo; No per-task figure is published, so none is printed | OpenAI | `https://openai.com/index/introducing-dots/` | 2026-09-30 |
+| On training: &ldquo;We don&rsquo;t use content from ChatGPT Business, Enterprise, or Edu workspaces to improve our models by default. On personal ChatGPT plans, you can control whether dots&rsquo; conversations and work are used to improve our models.&rdquo; And &ldquo;We don&rsquo;t train directly on proactive research or your dot&rsquo;s notes to itself.&rdquo; Recorded because it cuts against us, as Meta&rsquo;s Muse commitment does | OpenAI | `https://openai.com/index/introducing-dots/` | 2026-09-30 |
+| Signing in to websites happens in the dot&rsquo;s own browser: &ldquo;Your credentials go to the browser outside the conversation&rdquo;, &ldquo;The cloud browser has its own sessions, separate from the browser on your computer&rdquo;, and &ldquo;dots can use saved passwords without exposing them to the model&rdquo; | OpenAI | `https://learn.chatgpt.com/docs/dots`, `https://openai.com/index/introducing-dots/` | 2026-09-30 |
 
 **Manus Cue and Microsoft Autopilot, 2026-09-29.** Both came in from the competitive watch. Jett
 chose where they go, as a choice: **Cue joins `compare/cloud-agents/` beside Muse**, and the hub
@@ -4748,6 +4758,36 @@ recorded and not printed. Archie&rsquo;s own routines also start on things other
 in `crates/archie-domain/src/routine.rs`), and **no entry here approves that yet**, so the site
 still says only &ldquo;a schedule you set&rdquo; and the inbox watch. A trigger row is the
 missing piece, and it is our claim, so it goes under our own capabilities, not in this table.
+
+**OpenAI Dots, 2026-09-30.** Announced at OpenAI&rsquo;s DevDay the day before, and Jett chose
+where it goes: **both pages**. The hub goes to eleven, and Dots joins `compare/cloud-agents/`
+beside Muse and Cue. That is the opposite of Cue&rsquo;s call a day earlier, and the reason is who
+reads the page: Dots comes with ChatGPT, the app most readers who arrive with an agent already
+have, so it is the one they look for on the board. It leaves at the sieve&rsquo;s first question and
+changes nothing in the h1 but the count. Cue is still not on the hub.
+
+How it was read. `openai.com`, `chatgpt.com` and `help.openai.com` return 403 to scripts, so
+those three were read through a reader service (`https://r.jina.ai/<url>`), which fetches the
+page and returns its text. That is the company&rsquo;s own page, with the same standing as reading
+it in a browser, and unlike a browser read it can be re-run when the date comes due.
+`learn.chatgpt.com` serves scripts directly. Where the rows above put it: their servers, asking
+by default until you change a setting (beside Cowork and Muse), and sign in.
+
+- &#9940; Never say a dot acts without asking by default, and never say it always asks. Its built-in
+  rules ask for some actions and not others, and OpenAI does not publish the list.
+- &#9940; Never say a dot runs on your computer. Connecting yours is optional and starts off, and
+  work there &ldquo;runs in separate tasks&rdquo;.
+- &#9940; Never print texting as present: it is &ldquo;coming soon&rdquo;.
+- &#9940; Never print a price for Pro&rsquo;s higher tiers. The Learn page names &ldquo;Pro 100, Pro 200,
+  and Pro 500&rdquo; and the pricing page shows only &ldquo;From $100&rdquo; with &ldquo;Your choice of 3
+  usage tiers&rdquo;. A tier&rsquo;s name is not its price, so $100 is the one figure that prints.
+- The name. OpenAI writes &ldquo;dots&rdquo; in lowercase and &ldquo;your dot&rdquo; for one agent. The
+  site writes Dots, capitalized as a product name, and &ldquo;OpenAI Dots&rdquo; on the chart beside
+  Meta Muse and Claude Cowork, because a lowercase &ldquo;dots&rdquo; in a sentence reads as the common
+  word. Quotes keep OpenAI&rsquo;s spelling. The chart&rsquo;s letter is D.
+- &#9888;&#65039; What cuts against us, and is printed: a dot keeps working with your computer off,
+  you can reach it in Slack, Teams or a call, and OpenAI makes a training commitment for work
+  accounts and offers a control on personal ones.
 
 **Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was
 mislabelled, and for the two marks that came onto the chart.**

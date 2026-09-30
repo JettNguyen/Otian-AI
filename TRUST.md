@@ -3522,14 +3522,16 @@ does its work; it reaches people with 0.3.1.
   passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
 
-### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move, on main), not yet in a release
+### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move), IN THE CATALOG for Archie 0.3.1 and later, never run against a real account
 
 **Never run against a real Acuity account yet, reads or changes** (`docs/OPEN-THREADS.md`). Jett
 chose on 2026-09-28 to add cancel and move without a live test. Unproven until a Premium account
 tries them: the appointment fields the card is built from, the encoded `ignoreAppointmentIDs[]`,
 whether `admin=true` lifts the client limits, whether Acuity still tells the client in admin mode
-and carries the cancel note, and a cancel of an appointment already canceled. Nothing here is said
-in the present tense on the site until a release carries it and one live read has worked.
+and carries the cancel note, and a cancel of an appointment already canceled. The connection is in
+every build from 0.3.1 (September 29) on, and the add-on is in the published catalog, so an owner
+can install it today. Nothing here is said in the present tense on the site until one live read has
+worked. A tester who books on Acuity is the likeliest first one.
 
 **Approved wording, once it ships:** "Connect Acuity Scheduling with your User ID and API key, and
 your agent reads your real appointments: who is booked, what they wrote in your intake form, and

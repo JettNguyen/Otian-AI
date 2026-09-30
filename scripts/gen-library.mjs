@@ -83,6 +83,15 @@ const intro = (s) => s.n.endsWith(".0");
 const num = (s) => (intro(s) ? "Intro" : s.n);
 const named = (s) => (intro(s) ? `Level ${s.level}: ${s.title}` : `${s.n} ${s.title}`);
 
+/* The pictures in the page's own UI (Jett, 2026-09-30: "more visuals and iconography"): line icons
+   from assets/learn/icons/, drawn as masks in the text color like the menu's, one per level. A mask
+   rather than inline SVG, so a label's text is still the first thing in it for check-pronouns. */
+const LEVEL_ICON = { 0: "laptop", 1: "spark", 2: "steps", 3: "shield", 4: "chat" };
+const ICONS = ["laptop", "spark", "steps", "shield", "chat", "clock", "play", "played", "arrow-left", "arrow-right", "notes", "quote", "book"];
+const ico = (name, cls = "") => `<span class="lib-i lib-i-${name}${cls ? " " + cls : ""}" aria-hidden="true"></span>`;
+/* A row's length, rounded like length() so a trim in the edit does not make it wrong. */
+const short = (s) => { const sec = s.seconds || 60; return sec < 45 ? "Under 1 min" : `${Math.round(sec / 60)} min`; };
+
 function page(s, all, levels, C, preview) {
   const lv = levels.find((l) => l.n === s.level);
   const i = all.indexOf(s);
@@ -100,10 +109,11 @@ function page(s, all, levels, C, preview) {
   const index = levels
     .filter((l) => all.some((x) => x.level === l.n))
     .map((l) => {
-      const items = all.filter((x) => x.level === l.n).map((x) =>
-        `<li><a href="../${x.slug}/"${x === s ? ' aria-current="page"' : ""}><span class="lib-n">${esc(num(x))}</span><span>${x.title}</span></a></li>`).join("\n              ");
+      const mine = all.filter((x) => x.level === l.n);
+      const items = mine.map((x) =>
+        `<li><a href="../${x.slug}/" data-slug="${x.slug}"${x === s ? ' aria-current="page"' : ""}>${ico("play", "lib-row-i")}<span class="lib-n">${esc(num(x))}</span><span class="lib-row-t">${x.title}</span><span class="lib-row-len">${short(x)}</span></a></li>`).join("\n              ");
       return `<details class="lib-level"${l.n === s.level ? " open" : ""}>
-            <summary>Level ${l.n}: ${esc(l.title)}</summary>
+            <summary>${ico(LEVEL_ICON[l.n], "lib-lv-i")}<span class="lib-lv-t">Level ${l.n}: ${esc(l.title)}<span class="lib-lv-count">${mine.length} ${mine.length === 1 ? "video" : "videos"}</span></span></summary>
             <ol>
               ${items}
             </ol>
@@ -111,13 +121,17 @@ function page(s, all, levels, C, preview) {
     }).join("\n          ");
 
   const step = (x, rel, word) => x
-    ? `<a class="lib-step-${rel}" rel="${rel}" href="../${x.slug}/"><span class="lib-step-w">${word}</span><span class="lib-step-t">${named(x)}</span></a>`
+    ? `<a class="lib-step-${rel}" rel="${rel}" href="../${x.slug}/" data-slug="${x.slug}"><img class="lib-step-img" src="../../assets/learn/${x.slug}.jpg" width="1280" height="720" alt="" loading="lazy" /><span class="lib-step-txt"><span class="lib-step-w">${rel === "prev" ? ico("arrow-left") : ""}${word}${rel === "next" ? ico("arrow-right") : ""}</span><span class="lib-step-t">${named(x)}</span></span></a>`
     : "";
+  /* This level's videos as a row of numbered stops: where you are, and every other one a press away. */
+  const mates = all.filter((x) => x.level === s.level);
+  const dots = mates.map((x, k) =>
+    `<li><a href="../${x.slug}/" data-slug="${x.slug}" title="${attr(named(x))}" aria-label="${attr(named(x))}"${x === s ? ' aria-current="page"' : ""}>${k + 1}</a></li>`).join("\n            ");
 
   const notes = s.notes && s.notes.length
     ? `
         <section class="lib-notes" aria-labelledby="lib-notes-h">
-          <h2 id="lib-notes-h">${s.notes_heading}</h2>
+          <h2 id="lib-notes-h"><span class="lib-badge">${ico("notes")}</span><span>${s.notes_heading}</span></h2>
           <ul>
             ${s.notes.map((n) => `<li>${n}</li>`).join("\n            ")}
           </ul>
@@ -131,7 +145,7 @@ function page(s, all, levels, C, preview) {
     ${BANNER}
     <div class="lib-wrap">
       <article class="lib-main">
-        <p class="section-label">Learning Library &middot; Level ${s.level}: ${esc(lv.title)}</p>
+        <p class="section-label lib-kicker lib-kicker-${LEVEL_ICON[s.level]}">Learning Library &middot; Level ${s.level}: ${esc(lv.title)}</p>
         <h1 class="lib-h1"><span class="lib-h1-n">${intro(s) ? `Level ${s.level}:` : s.n}</span> ${s.title}</h1>
 
         <figure class="lib-player">
@@ -140,20 +154,29 @@ function page(s, all, levels, C, preview) {
               <a class="lib-play" href="https://www.youtube.com/watch?v=${esc(id)}" data-yt="${esc(id)}" data-title="${attr(s.title)}" aria-label="${attr(playLabel)}">
                 <img src="../../assets/learn/${s.slug}.jpg" width="1280" height="720" alt="" />
                 <span class="lib-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+                <span class="lib-play-len" aria-hidden="true">${ico("clock")}${short(s)}</span>
               </a>
             </div>
           </div>
-          <figcaption>Read by Jack. Pressing play on a video in the library loads YouTube&rsquo;s player, and YouTube counts that play.</figcaption>
+          <figcaption class="lib-cap"><img class="lib-jack" src="../../assets/learn/jack.jpg" width="96" height="96" alt="" /><span>Read by Jack. Pressing play on a video in the library loads YouTube&rsquo;s player, and YouTube counts that play.</span></figcaption>
         </figure>
         <p class="lib-lede">${s.lede}</p>
 ${notes}
-        <nav class="lib-step" aria-label="Previous and next video">
-          ${step(prev, "prev", "Previous")}
-          ${step(next, "next", "Next")}
-        </nav>
+        <div class="lib-go">
+          <nav class="lib-path" aria-label="The videos in Level ${s.level}">
+            <p class="lib-path-t">${ico(LEVEL_ICON[s.level])}<span>Level ${s.level}, video ${mates.indexOf(s) + 1} of ${mates.length}</span></p>
+            <ol class="lib-dots">
+            ${dots}
+            </ol>
+          </nav>
+          <nav class="lib-step" aria-label="Previous and next video">
+            ${step(prev, "prev", "Previous")}
+            ${step(next, "next", "Next")}
+          </nav>
+        </div>
 
         <details class="lib-words">
-          <summary>Read what Jack says in ${intro(s) ? `the Level ${s.level} intro` : s.n}</summary>
+          <summary><span class="lib-badge">${ico("quote")}</span><span>Read what Jack says in ${intro(s) ? `the Level ${s.level} intro` : s.n}</span></summary>
           <blockquote class="lib-words-body">
             ${words}
           </blockquote>
@@ -161,7 +184,7 @@ ${notes}
       </article>
 
       <nav class="lib-index" aria-label="Learning Library">
-        <p class="lib-index-t">Learning Library</p>
+        <p class="lib-index-t">${ico("book")}Learning Library</p>
           ${index}
       </nav>
     </div>
@@ -175,8 +198,13 @@ ${notes}
 const STYLE = `  <style>
     /* ── The Learning Library (learn/<slug>/, 2026-09-30), written by scripts/gen-library.mjs ── */
     .lib { padding-block: calc(var(--nav-height) + 28px) 72px; }
-    .lib-wrap { width: min(1180px, 100% - 32px); margin-inline: auto; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+    .lib-wrap { width: min(1180px, 100% - 32px); margin-inline: auto; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) 320px; align-items: start; }
     .lib-main { min-width: 0; display: grid; gap: 18px; }
+    /* Icons: masks over the text color, the way the menu draws its own (.nav-row-ico). */
+    .lib-i { display: inline-block; flex: none; width: 1.15em; height: 1.15em; background-color: currentColor; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+${ICONS.map((n) => `    .lib-i-${n}, .lib-kicker-${n}::before { --ico: url("../../assets/learn/icons/${n}.svg"); }`).join("\n")}
+    .lib-kicker { display: flex; align-items: center; gap: 10px; margin: 0; }
+    .lib-kicker::before { content: ""; flex: none; width: 1.6em; height: 1.6em; background-color: currentColor; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
     .lib-h1 { margin: 0; font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.75rem); line-height: 1.15; text-wrap: balance; }
     .lib-h1-n { color: var(--accent); font-variant-numeric: tabular-nums; }
     .lib-lede { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: var(--fs-xl); }
@@ -200,29 +228,63 @@ const STYLE = `  <style>
     .lib-play-mark svg { width: 38px; height: 38px; margin-left: 4px; }
     .lib-play:hover .lib-play-mark, .lib-play:focus-visible .lib-play-mark { transform: scale(1.08); }
     .lib-play:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    .lib-player figcaption { font-size: var(--fs-base); color: var(--text-secondary); }
+    .lib-play-len { position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(20, 18, 16, 0.74); color: #fff; font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .lib-cap { display: flex; align-items: center; gap: 12px; font-size: var(--fs-base); color: var(--text-secondary); }
+    .lib-jack { flex: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-subtle); }
     .lib-notes { padding: 22px 24px; border-radius: 14px; background: var(--bg-card, #fff); border: 1px solid var(--border, rgba(68, 64, 59, 0.12)); }
-    .lib-notes h2 { margin: 0 0 10px; font-size: var(--fs-2xl); line-height: 1.3; }
-    .lib-notes ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; list-style: disc; }
-    .lib-notes li { line-height: 1.5; }
+    .lib-notes h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font-size: var(--fs-2xl); line-height: 1.3; }
+    .lib-badge { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--radius); background: var(--accent-subtle); color: var(--accent); }
+    .lib-badge .lib-i { width: 24px; height: 24px; }
+    .lib-notes ul { margin: 0; padding: 0; display: grid; gap: 10px; list-style: none; }
+    .lib-notes li { position: relative; padding-left: 24px; line-height: 1.5; }
+    .lib-notes li::before { content: ""; position: absolute; left: 4px; top: 0.62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    /* Where this video sits in its level, and the way to the ones either side of it. */
+    .lib-go { display: grid; gap: 18px; padding: 20px; border-radius: 14px; border: 1px solid var(--border, rgba(68, 64, 59, 0.12)); }
+    .lib-path { display: grid; gap: 12px; }
+    .lib-path-t { display: flex; align-items: center; gap: 8px; margin: 0; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary); }
+    .lib-path-t .lib-i { color: var(--accent); width: 1.4em; height: 1.4em; }
+    .lib-dots { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; }
+    .lib-dots li { position: relative; flex: 1 1 0; display: flex; justify-content: center; }
+    .lib-dots li + li::before { content: ""; position: absolute; top: 50%; right: 50%; width: calc(100% + 8px); height: 2px; margin-top: -1px; background: var(--border, rgba(68, 64, 59, 0.16)); }
+    .lib-dots a { position: relative; z-index: 1; display: grid; place-items: center; width: min(38px, 100%); aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--border, rgba(68, 64, 59, 0.16)); background: var(--bg-primary); color: var(--text-secondary); font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: none; }
+    .lib-dots a:hover { border-color: var(--accent); color: var(--accent); }
+    .lib-dots a.is-played { border-color: var(--accent); color: var(--accent); }
+    .lib-dots a[aria-current="page"] { border-color: var(--accent); background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); }
     .lib-step { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .lib-step a { display: grid; gap: 2px; padding: 14px 16px; border-radius: var(--radius); border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); text-decoration: none; color: inherit; }
+    .lib-step a { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; gap: 14px; padding: 10px; border-radius: var(--radius); border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); text-decoration: none; color: inherit; }
     .lib-step a:hover { border-color: var(--accent); }
-    .lib-step-next { grid-column: 2; text-align: right; }
+    .lib-step-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius-sm); }
+    .lib-step-txt { display: grid; gap: 2px; min-width: 0; }
+    .lib-step a.lib-step-next { grid-column: 2; grid-template-columns: minmax(0, 1fr) 112px; text-align: right; }
+    .lib-step-next .lib-step-img { order: 2; }
+    .lib-step-w .lib-i { vertical-align: -0.2em; margin: 0 6px; }
     .lib-step-w { font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
     .lib-step-t { font-weight: 600; line-height: 1.3; }
-    .lib-words summary { cursor: pointer; font-weight: 600; }
+    .lib-words { border-radius: 14px; border: 1px solid var(--border, rgba(68, 64, 59, 0.12)); padding: 14px 20px 14px 14px; }
+    .lib-words summary { display: flex; align-items: center; gap: 14px; cursor: pointer; font-weight: 600; list-style: none; }
+    .lib-words summary::-webkit-details-marker { display: none; }
+    .lib-words summary::after, .lib-level summary::after { content: ""; flex: none; width: 7px; height: 7px; margin: 0 4px 4px auto; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); opacity: 0.55; }
+    .lib-words[open] summary::after, .lib-level[open] summary::after { margin-bottom: 0; transform: rotate(-135deg); }
     /* Jack's words, quoted: a quote is his voice and not the page's, which check-voice.py honors. */
-    .lib-words-body { max-width: 66ch; margin: 0; padding: 8px 0 0; border: 0; color: var(--text-secondary); font-style: normal; }
+    .lib-words-body { max-width: 66ch; margin: 0; padding: 16px 0 2px 4px; border: 0; color: var(--text-secondary); font-style: normal; }
     .lib-words-body p { margin: 0 0 10px; }
     .lib-index { position: sticky; top: 96px; display: grid; gap: 6px; padding: 18px; border-radius: 14px; border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); max-height: calc(100vh - 120px); overflow: auto; }
-    .lib-index-t { margin: 0 0 4px; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
-    .lib-level summary { cursor: pointer; padding: 6px 0; font-weight: 600; }
+    .lib-index-t .lib-i { color: var(--accent); width: 1.3em; height: 1.3em; }
+    .lib-index-t { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+    .lib-level summary { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 8px 0; font-weight: 600; list-style: none; }
+    .lib-level summary::-webkit-details-marker { display: none; }
+    .lib-lv-i { color: var(--accent); width: 1.5em; height: 1.5em; }
+    .lib-lv-t { display: grid; line-height: 1.3; }
+    .lib-lv-count { font-size: var(--fs-sm); font-weight: 500; color: var(--text-secondary); }
     .lib-level ol { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 2px; }
-    .lib-level a { display: grid; grid-template-columns: 3em 1fr; gap: 6px; padding: 7px 8px; border-radius: var(--radius-sm); text-decoration: none; color: inherit; font-size: var(--fs-md); line-height: 1.3; }
+    .lib-level a { display: grid; grid-template-columns: 1.15em 2.6em minmax(0, 1fr) auto; align-items: start; gap: 8px; padding: 7px 8px; border-radius: var(--radius-sm); text-decoration: none; color: inherit; font-size: var(--fs-md); line-height: 1.3; }
     .lib-level a:hover { background: var(--surface-hover, rgba(68, 64, 59, 0.06)); }
     .lib-level a[aria-current="page"] { background: var(--accent-subtle); box-shadow: inset 3px 0 0 var(--accent); font-weight: 600; }
     .lib-n { font-variant-numeric: tabular-nums; opacity: 0.8; }
+    .lib-row-i { margin-top: 0.08em; color: var(--text-secondary); }
+    .lib-level a[aria-current="page"] .lib-row-i, .lib-level a.is-played .lib-row-i { color: var(--accent); }
+    .lib-level a.is-played .lib-i-play { --ico: url("../../assets/learn/icons/played.svg"); }
+    .lib-row-len { font-size: var(--fs-sm); color: var(--text-secondary); white-space: nowrap; font-variant-numeric: tabular-nums; }
     @media (max-width: 900px) {
       .lib-wrap { grid-template-columns: minmax(0, 1fr); }
       .lib-index { position: static; max-height: none; }
@@ -232,7 +294,11 @@ const STYLE = `  <style>
     }
     @media (max-width: 560px) {
       .lib-step { grid-template-columns: minmax(0, 1fr); }
-      .lib-step-next { grid-column: auto; }
+      .lib-step a, .lib-step a.lib-step-next { grid-column: auto; grid-template-columns: 96px minmax(0, 1fr); text-align: left; }
+      .lib-step-next .lib-step-img { order: 0; }
+      .lib-dots { gap: 4px; }
+      .lib-dots li + li::before { width: calc(100% + 4px); }
+      .lib-go { padding: 16px; }
       .lib-play-mark { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
       .lib-play-mark svg { width: 26px; height: 26px; }
     }

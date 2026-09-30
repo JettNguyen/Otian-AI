@@ -14,6 +14,29 @@
   "use strict";
   var DOCK_BELOW = 0.4; // dock once less than this much of the player's place is on screen
 
+  /* The side list and the level's row of stops tick the videos this reader has pressed play on.
+   * The list lives in this browser's own storage and nothing reads it but this script: it is never
+   * sent anywhere, like the theme choice in js/nav.js. A private window forgets it, which is fine. */
+  var PLAYED = "otian-library-played";
+  function played() {
+    try { return JSON.parse(localStorage.getItem(PLAYED) || "[]"); } catch (e) { return []; }
+  }
+  function tick() {
+    var list = played();
+    document.querySelectorAll(".lib-level a[data-slug], .lib-dots a[data-slug]").forEach(function (a) {
+      a.classList.toggle("is-played", list.indexOf(a.dataset.slug) >= 0);
+    });
+  }
+  function remember() {
+    var slug = location.pathname.split("/").filter(Boolean).pop();
+    var list = played();
+    if (!slug || list.indexOf(slug) >= 0) return;
+    list.push(slug);
+    try { localStorage.setItem(PLAYED, JSON.stringify(list)); } catch (e) { /* storage off: no tick, nothing else changes */ }
+    tick();
+  }
+  tick();
+
   document.querySelectorAll(".lib-play[data-yt]").forEach(function (link) {
     link.addEventListener("click", function (e) {
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // a new tab is theirs to open
@@ -27,6 +50,7 @@
       frame.allowFullscreen = true;
       link.replaceWith(frame);
       frame.focus();
+      remember();
       dockWhenScrolledPast(frame);
     });
   });

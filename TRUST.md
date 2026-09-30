@@ -1755,6 +1755,11 @@ section asks you to type "reset" first (`account.tsx`).
   snapshot of the recent conversation stays until **Disconnect every phone** (`phone_disable`,
   which does wipe it) or the account is deleted (`stripe-webhook/index.js`). Sealed, so we still
   cannot read it; it is still there.
+- **On Windows, the uninstaller's box is not a reset.** "Also remove my Archie data, agents, and
+  settings" deletes the app's two data folders (`RmDir /r "$APPDATA\${BUNDLEID}"` and the same under
+  `$LOCALAPPDATA`, `src-tauri/installer/installer.nsi`) and leaves every saved key in Credential
+  Manager, the wake task and the mailbox. The privacy policy said it "does the same" as Reset until
+  2026-09-30; say reset first.
 - **Two app keys in the password store:** `vault_key_v1` and `phone_pairing_key` are not in
   `SESSION_KEYS`. Neither is an account's key, which is why "your saved keys" stays true.
 - **The wake setup.** Reset leaves no routines, so nothing wakes the computer, but the Mac helper
@@ -1767,6 +1772,28 @@ section asks you to type "reset" first (`account.tsx`).
 
 ⛔ Never "erases everything" or "leaves nothing behind". Found by the Learning Library check of
 2026-09-29, which is what 3.3's script was waiting on.
+
+### ✅ How long the phone mailbox keeps things (entry written 2026-09-30)
+
+**Approved wording:** "The phone deletes a message once it has read it. One it never came back for
+is cleared by your computer a day after it was answered, the next time Archie is running. The sealed
+picture of your agent that the phone shows is replaced as it changes, and removed when you press
+Disconnect every phone or delete your account."
+
+**Why it's true:** commands and their answers are documents in `users/{uid}/phone_commands`; the phone
+deletes what it has read, and the computer sweeps answered ones older than `SWEEP_AFTER_SECS` (24
+hours), once an hour while phone access runs (`src-tauri/src/phone.rs`, `delete_command` and
+`stale_command_ids` in `crates/archie-core/src/phone.rs`). The snapshot is one state document,
+overwritten by `publish_state` and deleted by `wipe`, which Disconnect every phone calls
+(`phone_disable`) and account deletion removes with the account (`stripe-webhook/index.js`).
+
+**Boundaries:**
+- ⛔ **Never a fixed limit in days.** The privacy policy said "at most 30 days" until this entry, and
+  no code enforced it: the sweep needs the computer on and Archie running, so a message can outlive a
+  day by as long as the computer is off.
+- ⚠️ **Reset does not remove the snapshot in 0.3.1**, which is why the privacy policy and the Reset
+  entry above say press Disconnect every phone first. Jett decided on 2026-09-30 that Reset should
+  empty it; when that ships in a release, the leftover comes off both.
 
 ### ✅ What your agent can write to disk
 

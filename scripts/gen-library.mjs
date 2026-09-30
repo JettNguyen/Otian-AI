@@ -133,15 +133,19 @@ function page(s, all, levels, C, preview) {
       <article class="lib-main">
         <p class="section-label">Learning Library &middot; Level ${s.level}: ${esc(lv.title)}</p>
         <h1 class="lib-h1"><span class="lib-h1-n">${intro(s) ? `Level ${s.level}:` : s.n}</span> ${s.title}</h1>
-        <p class="lib-lede">${s.lede}</p>
 
         <figure class="lib-player">
-          <a class="lib-play" href="https://www.youtube.com/watch?v=${esc(id)}" data-yt="${esc(id)}" data-title="${attr(s.title)}" aria-label="${attr(playLabel)}">
-            <img src="../../assets/learn/${s.slug}.jpg" width="1280" height="720" alt="" />
-            <span class="lib-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
-          </a>
+          <div class="lib-slot">
+            <div class="lib-screen">
+              <a class="lib-play" href="https://www.youtube.com/watch?v=${esc(id)}" data-yt="${esc(id)}" data-title="${attr(s.title)}" aria-label="${attr(playLabel)}">
+                <img src="../../assets/learn/${s.slug}.jpg" width="1280" height="720" alt="" />
+                <span class="lib-play-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+              </a>
+            </div>
+          </div>
           <figcaption>Read by Jack. Pressing play on a video in the library loads YouTube&rsquo;s player, and YouTube counts that play.</figcaption>
         </figure>
+        <p class="lib-lede">${s.lede}</p>
 ${notes}
         <nav class="lib-step" aria-label="Previous and next video">
           ${step(prev, "prev", "Previous")}
@@ -170,14 +174,27 @@ ${notes}
    needs the whole site's asset stamp moved. Colors are the site's tokens only. */
 const STYLE = `  <style>
     /* ── The Learning Library (learn/<slug>/, 2026-09-30), written by scripts/gen-library.mjs ── */
-    .lib { padding-block: clamp(96px, 12vw, 132px) 72px; }
+    .lib { padding-block: calc(var(--nav-height) + 28px) 72px; }
     .lib-wrap { width: min(1180px, 100% - 32px); margin-inline: auto; display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
-    .lib-main { min-width: 0; display: grid; gap: 20px; }
+    .lib-main { min-width: 0; display: grid; gap: 18px; }
     .lib-h1 { margin: 0; font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.75rem); line-height: 1.15; text-wrap: balance; }
     .lib-h1-n { color: var(--accent); font-variant-numeric: tabular-nums; }
     .lib-lede { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: var(--fs-xl); }
-    .lib-player { margin: 8px 0 0; display: grid; gap: 10px; }
-    .lib-play, .lib-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; overflow: hidden; background: #1c1916; box-shadow: var(--shadow-md); }
+    .lib-player { margin: 0; display: grid; gap: 10px; }
+    /* The player comes straight after the title and is never taller than the window has room for,
+       so a reader arriving from the side list or Next sees the whole video without scrolling (Jett,
+       2026-09-30). The slot keeps the player's place when it docks, so the page never jumps. */
+    .lib-slot { width: min(100%, max(60%, calc((100svh - var(--nav-height) - 240px) * 16 / 9))); aspect-ratio: 16 / 9; }
+    .lib-screen { position: relative; width: 100%; height: 100%; }
+    .lib-play, .lib-frame { position: relative; display: block; width: 100%; height: 100%; border: 0; border-radius: 16px; overflow: hidden; background: #1c1916; box-shadow: var(--shadow-md); }
+    /* Playing and scrolled past, the player docks in the corner above the theme button, and across
+       the bottom on a phone. Only after the press (js/library.js), so it is YouTube's player or nothing. */
+    .lib-screen.is-docked { position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 52px); width: clamp(320px, 34vw, 480px); height: auto; aspect-ratio: 16 / 9; }
+    .lib-screen.is-docked .lib-frame { border-radius: var(--radius); box-shadow: var(--shadow-lg); }
+    .lib-dock-bar { position: absolute; right: 0; bottom: 100%; display: flex; gap: 6px; padding-bottom: 8px; }
+    .lib-dock-bar button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); background: var(--bg-card, #fff); color: var(--text-primary); box-shadow: var(--shadow-sm); font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; }
+    .lib-dock-bar button:hover { border-color: var(--accent); }
+    .lib-dock-bar button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
     .lib-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
     .lib-play-mark { position: absolute; left: 50%; top: 80%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
     .lib-play-mark svg { width: 38px; height: 38px; margin-left: 4px; }
@@ -209,6 +226,9 @@ const STYLE = `  <style>
     @media (max-width: 900px) {
       .lib-wrap { grid-template-columns: minmax(0, 1fr); }
       .lib-index { position: static; max-height: none; }
+    }
+    @media (max-width: 700px) {
+      .lib-screen.is-docked { left: max(12px, env(safe-area-inset-left)); right: max(12px, env(safe-area-inset-right)); width: auto; }
     }
     @media (max-width: 560px) {
       .lib-step { grid-template-columns: minmax(0, 1fr); }

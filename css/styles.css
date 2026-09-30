@@ -11067,6 +11067,21 @@ html[data-theme="dark"] .booking-container iframe {
 .hm-micro a, .hm-hero-micro a { color: var(--c-blue-ink); font-weight: 600; }
 .hm-micro a:hover, .hm-hero-micro a:hover { color: var(--c-blue); text-decoration: underline; }
 
+/* The door from "Questions, too" into the Learning Library (Jett, 2026-09-30: the section "is not
+   doing a whole lot right now"). Two videos as their own posters, written by scripts/gen-library.mjs
+   and only once each is published, so the homepage never points at a page that is not up. A card
+   opens the library page and never YouTube: the player there is still behind its own press. */
+.hm-door { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; max-width: 620px; margin: 28px auto 0; text-align: left; }
+.hm-door-card { display: grid; grid-template-rows: auto 1fr auto; align-items: start; gap: 4px; padding: 10px 10px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); box-shadow: var(--shadow-xs); color: inherit; text-decoration: none; transition: border-color 0.2s ease, transform 0.2s ease; }
+.hm-door-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.hm-door-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.hm-door-shot { position: relative; display: block; margin-bottom: 6px; border-radius: var(--radius-sm); overflow: hidden; background: #1c1916; }
+.hm-door-shot img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.hm-door-play { position: absolute; left: 50%; top: 80%; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; background: var(--accent); box-shadow: var(--shadow-sm); }
+.hm-door-play::after { content: ""; position: absolute; left: 16px; top: 12px; border-left: 13px solid #fff; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.hm-door-t { font-weight: 600; line-height: 1.3; }
+.hm-door-m { font-size: var(--fs-sm); color: var(--text-muted); }
+
 /* Hero */
 /* Two columns from 900px: the promise on the left, the promise happening on the right.
    Centred stayed for the stacked layout, where a lone column of left-ragged type under a

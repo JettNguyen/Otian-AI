@@ -92,6 +92,25 @@ const ico = (name, cls = "") => `<span class="lib-i lib-i-${name}${cls ? " " + c
 /* A row's length, rounded like length() so a trim in the edit does not make it wrong. */
 const short = (s) => { const sec = s.seconds || 60; return sec < 45 ? "Under 1 min" : `${Math.round(sec / 60)} min`; };
 
+/* The homepage's door into the library, in its "Questions, too" section (Jett, 2026-09-30: the
+   section "is not doing a whole lot right now"). 4.2 is first because Jack asks the agent what to
+   cook with what is in the fridge, which is the section's own example; 1.2 is the catch in the note
+   under it. The cards carry no section number and a short length because the homepage is at its
+   word budget (1,093 of 1,090 with the longer cards). A card is written only for a published section, so the homepage never links to a page
+   that is not up, and the door is empty until one is. It opens the library page, never YouTube. */
+const DOOR = ["L4-02", "L1-02"];
+const HOME = path.join(ROOT, "index.html");
+const DOOR_RE = /(<!-- LIBRARY DOOR: [^\n]*-->\n)([\s\S]*?)([ \t]*<!-- \/LIBRARY DOOR -->)/;
+function door(all) {
+  const cards = DOOR.map((id) => all.find((s) => s.id === id)).filter(Boolean).map((s) =>
+    `          <a class="hm-door-card" href="learn/${s.slug}/">
+            <span class="hm-door-shot"><img src="assets/learn/${s.slug}.jpg" width="1280" height="720" alt="" loading="lazy" /><span class="hm-door-play" aria-hidden="true"></span></span>
+            <span class="hm-door-t">${s.title}</span>
+            <span class="hm-door-m">Read by Jack &middot; ${short(s)}</span>
+          </a>`);
+  return cards.length ? `        <div class="hm-door fade-up">\n${cards.join("\n")}\n        </div>\n` : "";
+}
+
 function page(s, all, levels, C, preview) {
   const lv = levels.find((l) => l.n === s.level);
   const i = all.indexOf(s);
@@ -352,6 +371,16 @@ function main() {
     if (check) { console.log("  not published, still on disk: learn/" + slug + "/"); bad++; continue; }
     fs.rmSync(path.join(OUT, slug), { recursive: true });
     console.log("  removed learn/" + slug + "/");
+  }
+  if (!preview) {
+    const home = fs.readFileSync(HOME, "utf8");
+    const m = home.match(DOOR_RE);
+    if (!m) throw new Error("index.html has lost its LIBRARY DOOR markers");
+    const want = door(all);
+    if (m[2] !== want) {
+      if (check) { console.log("  out of date: the homepage's library door"); bad++; }
+      else { fs.writeFileSync(HOME, home.replace(DOOR_RE, (_, open, __, close) => open + want + close)); console.log("  wrote the homepage's library door"); }
+    }
   }
   const held = sections.filter((s) => s.hold).map((s) => `${s.n} (${s.hold})`);
   const waiting = sections.filter((s) => !s.youtube && !s.hold).length;

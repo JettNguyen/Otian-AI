@@ -114,6 +114,16 @@ PAGE_SOURCES = {
 }
 
 
+# Extra sources for every page of the Learning Library (learn/<slug>/index.html, written by
+# scripts/gen-library.mjs), and for no other page, learn/index.html included. Each one plays a video
+# from YouTube, and only after the reader presses play: js/library.js puts the youtube-nocookie
+# player in the page on that press, so a page view reaches nobody (TRUST.md, the video library).
+LIBRARY_PAGE = re.compile(r"^learn/[^/]+/index\.html$")
+LIBRARY_SOURCES = {
+    "frame-src": ["https://www.youtube-nocookie.com"],
+}
+
+
 def page_files():
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
@@ -137,7 +147,11 @@ def script_hashes():
 def policy(rel=None):
     """The policy for one page. `rel` selects that page's PAGE_SOURCES entry, if it has one."""
     hashes = script_hashes()
-    extra = PAGE_SOURCES.get(rel.replace(os.sep, "/"), {}) if rel else {}
+    key = rel.replace(os.sep, "/") if rel else ""
+    extra = dict(PAGE_SOURCES.get(key, {}))
+    if LIBRARY_PAGE.match(key):
+        for name, values in LIBRARY_SOURCES.items():
+            extra[name] = extra.get(name, []) + values
     parts = []
     parts.append("default-src 'self'")
     for name, values in SOURCES.items():

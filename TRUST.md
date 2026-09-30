@@ -2646,6 +2646,20 @@ player. Written now so the pages are built to it.
 videos are hosted on YouTube, embedded **click to load** on `youtube-nocookie.com`. Each page shows
 our own poster image and makes no request to YouTube until the reader presses play.
 
+**One video per section, and the pages are built (2026-09-30).** Jett moved the library from one
+video per level back to one per section the same day it was joined, and set the page: the section's
+video from YouTube, its notes under it, and a way to move through the library from any page.
+`scripts/gen-library.mjs` writes the pages from `assets/library.json`; `js/library.js` swaps our
+poster (a plain link to the video on youtube.com) for the nocookie player on the press;
+`gen-csp.py`'s `LIBRARY_SOURCES` opens `frame-src` to the nocookie host on `learn/<slug>/` pages and no
+other. **A section is published only once it has a YouTube id and no hold**, and the generator
+refuses to publish anything until this file's website entry carries the sentence below and the
+privacy policy names YouTube, so the first player cannot ship ahead of either. Two sections are
+held in the data: 1.9, whose narration promises which choices to pick when making the key and that
+answer is untested (a key tied to no workspace may be refused), and 1.8, until Jett rules on the
+free tier's number being drawn in the frame. 0.7's notes leave out Google's unverified-app warning,
+because nothing in this file approves wording for it yet.
+
 **What that does to the no-analytics sentence below, on the day it ships:** "It never has" stays
 true only for the pages without a player. The website entry's approved wording gains one sentence,
 in this form: "Pressing play on a video in the library loads YouTube's player, and YouTube counts

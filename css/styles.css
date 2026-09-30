@@ -16904,13 +16904,22 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
    The clean-fraction rule that used to hold here (.4375 times 1.143 is exactly a half) is gone and
    was already gone: the fit multiplies everything by a number between .92 and 1.45 now, so nothing
-   in this chain lands on a half and the hairlines take their chances either way. */
+   in this chain lands on a half and the hairlines take their chances either way.
+
+   AND 800 TALL SINCE 0.3.2 (2026-09-30), the same move a second time and for the same reason: the
+   page got longer and the answer is more room for it, never smaller type. 0.3.2's Dashboard opens
+   on its own heading and blurb, and by day it carries the gold panel with the reply to Sam drawn
+   whole, which is about 160 pixels of the app's own layout that 640 did not have: Recent jobs,
+   the list the whole night act is about, started exactly on the window's bottom edge. 820 by 800
+   is still a window somebody runs on a laptop, it holds the day's three jobs with the bottom
+   padding to spare, and the type is the size it was. The layer grew with it, 448 to 560, and
+   stays centered, so every pose and mark is where it was relative to the window's middle. */
 /* --dz is the whole scale this mockup is shown at, so its box, its zoom and anything measured
    in its own space are laid out at that size and js/home.js takes the same number back out of
    the transform. See the comment on dz() there. It is 1 without the driver, which is the size
    these were always laid out at. */
-.day-win { --dz: 1; width: calc(574px * var(--dz)); height: calc(448px * var(--dz)); margin: calc(-224px * var(--dz)) 0 0 calc(-287px * var(--dz)); }
-.day-win .da-app { width: 820px; height: 640px; zoom: calc(.70 * var(--dz, 1)); }
+.day-win { --dz: 1; width: calc(574px * var(--dz)); height: calc(560px * var(--dz)); margin: calc(-280px * var(--dz)) 0 0 calc(-287px * var(--dz)); }
+.day-win .da-app { width: 820px; height: 800px; zoom: calc(.70 * var(--dz, 1)); }
 @supports not (zoom: 1) { .day-win .da-app { transform: scale(calc(.70 * var(--dz, 1))); transform-origin: 0 0; } }
 /* The sidebar is shut here, so it has no width of its own to bring in: see the rail block below
    .da-pair, and data-rail on the window's own .da-app in index.html. It came in to 196 from 232
@@ -16944,8 +16953,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --surface-soft: rgba(68, 64, 59, 0.025); --surface-soft-strong: rgba(68, 64, 59, 0.08);
   --c-green: #679B55; --c-green-subtle: rgba(103, 155, 85, 0.14); --c-green-strong: #416934; --c-green-fill: #46723A;
   --c-gold: #BB8C33; --c-gold-subtle: rgba(187, 140, 51, 0.14); --c-gold-strong: #7D5C1B; --c-gold-fill: #9A6820; --text-on-gold: #FFFFFF;
+  --c-gold-line: #BB8C3366;
   --c-plum: #996FBE; --c-plum-subtle: rgba(153, 111, 190, 0.13); --c-plum-strong: #705094;
   --c-teal: #3E9A92; --c-teal-subtle: rgba(62, 154, 146, 0.13); --c-teal-strong: #2B6B65;
+  --c-blue-subtle: rgba(89, 136, 203, 0.13); --c-blue-strong: #365E94;
   --c-red-fill: #A8463B;
   /* The Mac's own: the pane's tint, hairline and cast, the switch's empty track and its knob, and
      the open row's pill on Personality and Routines, which the app gets by rebinding --accent. */
@@ -16966,6 +16977,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --options-go: color-mix(in srgb, var(--bg-card) 86%, var(--c-green));
   --options-go-press: color-mix(in srgb, var(--bg-card) 76%, var(--c-green));
   --options-plain: color-mix(in srgb, var(--bg-card) 86%, var(--accent));
+  --options-amend: color-mix(in srgb, var(--bg-card) 86%, var(--c-gold));
   --options-rule: color-mix(in srgb, var(--bg-card) 78%, var(--text-primary));
   position: relative; display: flex; flex-direction: column; isolation: isolate;
   /* SF Pro, the Mac's own face. Georgia stays for the headings that name it. */
@@ -16986,8 +16998,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   --surface-soft: rgba(243, 240, 237, 0.03); --surface-soft-strong: rgba(243, 240, 237, 0.1);
   --c-green: #8FBF7C; --c-green-subtle: rgba(143, 191, 124, 0.16); --c-green-strong: #8FBF7C; --c-green-fill: #4E7440;
   --c-gold: #DCAF57; --c-gold-subtle: rgba(220, 175, 87, 0.16); --c-gold-strong: #DCAF57; --c-gold-fill: #9E6B21;
+  --c-gold-line: #DCAF5766;
   --c-plum: #BE9BDD; --c-plum-subtle: rgba(190, 155, 221, 0.16); --c-plum-strong: #BE9BDD;
   --c-teal: #6FC4BC; --c-teal-subtle: rgba(111, 196, 188, 0.16); --c-teal-strong: #6FC4BC;
+  --c-blue-subtle: rgba(134, 174, 228, 0.16); --c-blue-strong: #86AEE4;
   --c-red-fill: #B0503F;
   --mac-glass: rgba(38, 38, 36, 0.63); --mac-edge: rgba(243, 240, 237, 0.08);
   --shadow-pane: 0 1px 2px rgba(0, 0, 0, 0.35), 0 10px 28px rgba(0, 0, 0, 0.3);
@@ -17012,6 +17026,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-brand-btn svg { width: 48px; height: 48px; flex-shrink: 0; }
 .da-brand-word { font-family: Georgia, "Times New Roman", serif; font-size: var(--fs-6xl); font-weight: 700; line-height: 1; transform: translateY(7px); margin-left: -8px; padding-right: 8px; background-image: linear-gradient(to bottom, #EFA97E, #C36A3D); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .da-brand-tag { margin-top: 2px; padding-left: 8px; font-size: var(--fs-3xs); font-weight: 500; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); }
+/* The release stage beside the tagline, the app's ReleaseBadge (shared.tsx) and the mockup's
+   .brand-tag .release. Nine of the tag's ten, so it is said in em. The rail hides the tag, so a
+   window with the sidebar shut carries it and does not show it. */
+.da-brand-tag:has(.da-release) { display: flex; align-items: center; gap: 6px; }
+.da-release { display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid var(--accent); padding: 1px 6px; font-size: 0.9em; font-weight: 600; letter-spacing: 0.12em; line-height: 1.2; color: var(--accent-strong); }
 .da-picker { margin-top: 12px; display: flex; width: 100%; align-items: center; gap: 10px; border: 1px solid var(--line-soft); border-radius: var(--radius); background: var(--bg-card); padding: 8px 10px; }
 .da-picker .da-who { display: flex; min-width: 0; flex-direction: column; line-height: 1.25; }
 .da-picker .da-n { font-size: var(--fs-base); font-weight: 600; }
@@ -17035,6 +17054,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-app .da-row.on[data-kind="personality"] { background: var(--pill-plum); color: var(--pill-ink); }
 .da-app .da-row.on[data-kind="routines"] { background: var(--pill-teal); color: var(--pill-ink); }
 .da-row .da-label { transform: translateY(1px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Setup's fold, the mockup's .row .tail: Setup opens a tree of its own nine rows. */
+.da-row .da-tail { margin-left: auto; display: flex; align-items: center; flex-shrink: 0; }
+.da-row .da-tail svg { width: 16px; height: 16px; color: var(--text-muted); fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 /* No tile behind a mark on the Mac, open or shut: the mark keeps its kind's ink and the pane's
    glass runs behind it, as in the mockup's Apple block. */
 .da-glyph { display: grid; place-items: center; width: 28px; height: 28px; border-radius: var(--radius-sm); flex-shrink: 0; }
@@ -17097,7 +17119,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-sections { -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to bottom, #000 calc(100% - 28px), transparent); }
 .da-app[data-rail="shut"] .da-nav { align-items: center; padding-right: 4px; }
 .da-app[data-rail="shut"] .da-row { position: relative; width: 40px; height: 40px; justify-content: center; padding-right: 0; border-radius: var(--radius); }
-.da-app[data-rail="shut"] .da-row .da-label { display: none; }
+.da-app[data-rail="shut"] .da-row .da-label, .da-app[data-rail="shut"] .da-row .da-tail { display: none; }
 /* The drawing keeps its share of its own tile, so shutting the sidebar changes the size of the
    column and not the size of the picture in it. */
 .da-app[data-rail="shut"] .da-glyph { width: 40px; height: 40px; border-radius: var(--radius); }
@@ -17139,12 +17161,69 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-nowhead .s.mut { color: var(--text-muted); }
 .da-nowhead .night, .day-win.is-night .da-nowhead .day { display: none; }
 .day-win.is-night .da-nowhead .night { display: block; }
+/* ---- the Dashboard as 0.3.2 draws it (2026-09-30) --------------------------------------------
+   The Now pane of src/app/agent-detail.tsx at Archie's release commit 94f85315, through the
+   mockup's data-page="now": the tab's heading and blurb, the status lines, the gold panel when
+   something waits and the muted line when nothing does, the kind cards with their chevrons, and
+   Recent jobs newest first. Scoped to the homepage's window where a rule would otherwise reach
+   the other pages that draw this window (the Setup pages' own tabhead, the cloud-agents laptop):
+   those are ports of their own and move when they are brought up, not as a side effect of this.
+
+   THE LINE HEIGHTS ARE THE APP'S. These are <p>s, and the site's own p rule sets 1.8, which the
+   window was inheriting: the status lines came out a third taller than the app draws them. The
+   app sets the headline at 15 on the body's 1.5 and the two lines under it text-xs, 12 on 16. */
+.day-win .da-nowhead .h { line-height: 1.5; }
+.day-win .da-nowhead .s { line-height: 16px; }
+/* The tab's own head (TabHead): a rail, the title in the name's face one size under the name, and
+   the blurb. Every tab but Chat has one, and Dashboard gained its own in 0.3.2. */
+.day-win .da-tabhead { display: flex; align-items: flex-start; gap: 12px; }
+.day-win .da-tabhead .rail { width: 4px; flex-shrink: 0; align-self: stretch; border-radius: 999px; background: var(--line-muted); }
+.day-win .da-tabhead .tx { min-width: 0; flex: 1; }
+.day-win .da-tabhead h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: var(--fs-3xl); font-weight: 600; line-height: 28px; letter-spacing: normal; color: var(--text-primary); }
+.day-win .da-tabhead p { margin-top: 4px; max-width: 42rem; font-size: var(--fs-xs); line-height: 1.6; color: var(--text-secondary); }
+/* What needs you: the gold region, and inside it a card with a draft on it drawn whole, which is
+   WaitingCard: how long it has waited in small muted type, the card's own words, and its answers
+   as the bar along its bottom (ActionRow, the same bar the conversation draws). */
+.da-goldpanel { border-radius: 16px; border: 1px solid var(--c-gold-line); background: var(--c-gold-subtle); padding: 16px; }
+.da-goldpanel h3 { font-family: inherit; font-size: var(--fs-base); font-weight: 600; line-height: 20px; letter-spacing: normal; color: var(--c-gold-strong); }
+.da-needs { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; }
+.da-waitcard { border-radius: var(--radius); border: 1px solid var(--c-gold-line); background: var(--bg-card); padding: 12px; }
+.da-waitcard .da-waited { margin-bottom: 6px; font-size: var(--fs-xs); line-height: 16px; color: var(--text-muted); }
+.da-waitcard .da-md { display: flex; flex-direction: column; gap: 8px; font-size: var(--fs-base); }
+.da-waitcard .da-md p { line-height: 20px; color: var(--text-primary); }
+.da-waitcard .da-md b { font-weight: 600; }
+.da-waitcard .da-actions { display: flex; flex-wrap: wrap; gap: 1px; margin: 12px -2px -2px; border: 1px solid var(--options-rule); border-radius: var(--radius); background: var(--options-rule); overflow: hidden; }
+.da-act.amend { background: var(--options-amend); color: var(--c-gold-strong); }
+/* Nothing waiting is a line, not the panel with nothing in it: the app keeps the words and drops
+   the box, the heading and the color, because gold on this screen means something is wrong. */
+.da-noneed { font-size: var(--fs-xs); line-height: 1.625; color: var(--text-muted); }
+.da-pane > .night, .day-win.is-night .da-pane > .day { display: none; }
+.day-win.is-night .da-pane > .night { display: block; }
+/* And by day once the phone's Send has answered the card (is-sent, set by js/home.js): the same
+   empty line, and the reply's row reads Done. */
+.da-badge.sent, .day-win.is-sent .da-badge.unsent, .day-win.is-sent .da-goldpanel { display: none; }
+.day-win.is-sent .da-noneed, .day-win.is-sent .da-badge.sent { display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .day-win.is-sent .da-noneed, .day-win.is-sent .da-badge.sent { animation: da-swap-in .3s ease both; }
+}
+/* THE CAPTIONS' NIGHT INK STOPS AT THE WINDOW'S EDGE. `.day-stage.is-night p` turns the captions to
+   light ink at two in the morning, and it reached every <p> on the stage, the window's included, so
+   the agent's purpose and the status lines came out pale cream on the app's own light page (the
+   status lines had been doing it since they were written, and nobody could read the one line that
+   says what is running). The window keeps its own inks: it is a lit screen in a dark room, not a
+   caption. */
+.day-stage.is-night .day-win .da-app p { color: var(--text-secondary); }
+.day-stage.is-night .day-win .da-app .da-nowhead .h, .day-stage.is-night .day-win .da-app .da-tabhead h2 { color: var(--text-primary); }
+.day-stage.is-night .day-win .da-app .da-nowhead .mut, .day-stage.is-night .day-win .da-app .da-noneed { color: var(--text-muted); }
 .da-kindcards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .da-kindcard { border-radius: var(--radius); border: 1px solid var(--line-soft); border-top-width: 3px; background: var(--bg-card); padding: 12px; box-shadow: var(--shadow-sm); min-width: 0; }
 .da-kindcard.plum { border-top-color: var(--c-plum); } .da-kindcard.plum .k { color: var(--c-plum-strong); }
 .da-kindcard.skill { border-top-color: var(--accent); } .da-kindcard.skill .k { color: var(--accent-strong); }
 .da-kindcard.teal { border-top-color: var(--c-teal); } .da-kindcard.teal .k { color: var(--c-teal-strong); }
 .da-kindcard .k { display: flex; height: 20px; align-items: center; font-size: var(--fs-3xs); font-weight: 600; text-transform: uppercase; letter-spacing: 0.03em; }
+/* The card is a door to its tab, and the chevron is the one mark that says so while nothing is
+   touching it. Muted, so the kind's color stays on the cap. */
+.da-kindcard .k .go { margin-left: auto; width: 14px; height: 14px; flex-shrink: 0; color: var(--text-muted); fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .da-kindcard .v { margin-top: 4px; font-size: var(--fs-3xl); font-weight: 600; line-height: 28px; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .da-kindcard .s { margin-top: 2px; font-size: var(--fs-2xs); line-height: 16px; color: var(--text-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .da-recent { overflow: hidden; border-radius: var(--radius); background: var(--bg-card); box-shadow: inset 0 0 0 1px var(--line-soft); }
@@ -17157,19 +17236,27 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-badge { flex-shrink: 0; border-radius: 999px; padding: 2px 8px; font-size: var(--fs-2xs); font-weight: 600; }
 .da-badge.green { background: var(--c-green-subtle); color: var(--c-green-strong); }
 .da-badge.gold { background: var(--c-gold-subtle); color: var(--c-gold-strong); }
+.da-badge.blue { background: var(--c-blue-subtle); color: var(--c-blue-strong); }
 .da-recent .r.night, .day-win.is-night .da-recent .r.day { display: none; }
 /* THE LIST GROWS, the same way the phone's Lately card does (Jett, 2026-09-17). A night row that
    has not landed is out of the layout, so Recent jobs is as tall as the work that has happened
    rather than as tall as the work that will. The narrowing sits inside no-preference so the resting
    state is the whole night, and the landing is a keyframe because a row cannot transition out of
    display:none. Nothing needed doing about the separators: every .r already carries its own top
-   border, and the rows land in order, so the first visible one is always the one under the header
-   and no hidden row can leave a hairline hanging under the last visible one. */
+   border.
+
+   NEWEST FIRST SINCE 0.3.2, so a row lands on top of the one before it, and the first row is on
+   from the act's first frame: Return Window Watch is the job running as the night opens, and it
+   finishes where it stands, its Working badge giving way to Done and its time gaining how long it
+   took, which is the app's own "changes its mind in place". The status lines over the cards swap on
+   the same beats. A swap is a fade, because the words change and the place does not. */
 .day-win.is-night .da-recent .r.night { display: flex; }
 @media (prefers-reduced-motion: no-preference) {
-  .day-win.is-night .da-recent .r.night:not(.is-on) { display: none; }
-  .day-win.is-night .da-recent .r.night.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .day-win.is-night .da-recent .day-beat:not(.is-on), .day-win.is-night .da-nowhead .day-beat:not(.is-on) { display: none; }
+  .day-win.is-night .da-recent .r.day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .day-win.is-night .da-recent .r .day-beat.is-on, .day-win.is-night .da-nowhead .day-beat.is-on { animation: da-swap-in .3s ease both; }
 }
+@keyframes da-swap-in { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---- the phone: the phone kit's own device and conversation, drawn at the size it is shown ---- */
 .day-phone { --dz: 1; width: calc(256px * var(--dz)); height: calc(546px * var(--dz)); margin: calc(-273px * var(--dz)) 0 0 calc(-128px * var(--dz)); }

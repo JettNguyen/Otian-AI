@@ -309,8 +309,12 @@
        two acts claim is on it; the hours in between and the brief that opens the next morning are
        the phone's, because that is where the reader is, and it reads as leaving the desk and coming
        back to it rather than as a camera that cannot make up its mind. */
+    /* THE WINDOW IS 800 TALL SINCE 2026-09-30 (0.3.2's Dashboard; see .day-win in the stylesheet),
+       and its layer grew from its middle, so a pose that stood the old window just under the clock
+       stood the new one's top edge in it. W2 and the night pose come down by the height the clock
+       needs and no more; the hero's W already had the room above it and is where it was. */
     var W = { x: -86, y: -4, z: 0, ry: 10, s: .94, o: 1 }, PH = { x: 232, y: 2, z: -90, ry: -13, s: .96, o: 1 };
-    var W2 = { x: -126, y: -14, z: -190, ry: 16, s: 1.06, o: .5 }, PH2 = { x: 186, y: 2, z: 110, ry: -12, s: .90, o: 1 };
+    var W2 = { x: -126, y: 26, z: -190, ry: 16, s: 1.06, o: .5 }, PH2 = { x: 186, y: 2, z: 110, ry: -12, s: .90, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
        down in the hero; the phone alone and centered while a scene plays on it; the window alone
        at night. Every extent stays inside the box, which is what lets SC do the fitting. */
@@ -321,7 +325,7 @@
        act where the window and the phone stand side by side, so nothing else in the story reads
        the same way and nothing else moved. */
     var NW = { x: -126, y: -142, z: -300, ry: 14, s: 0.523, o: 1 }, NP = { x: 82, y: 44, z: 40, ry: -12, s: .86, o: 1 };
-    var NW2 = { x: -150, y: -200, z: -420, ry: 24, s: 0.555, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
+    var NW2 = { x: -150, y: -180, z: -420, ry: 24, s: 0.555, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
@@ -379,10 +383,14 @@
            the top eighth of the phone's box, so the box may stand well inside the window while the
            phone itself starts at its bottom rule, and the run this was set at leaves 27px between
            the box's top and the bottom of the finished Bill Reminders row, which is what the act is
-           claiming. Take more and the claim goes under the phone. Ember moves with this: it stands
-           on the phone at a mark measured off the phone's own bottom (m-night in the stylesheet,
-           inside the narrow block), so the two are solved together. */
-        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
+           claiming. Take more and the claim goes under the phone. SINCE 0.3.2 THE LAST ROW IS RETURN
+           WINDOW WATCH, because Recent jobs lists newest first, and the window grew to 800 from its
+           middle on 2026-09-30 while its night content gained the Dashboard's heading and empty-queue
+           line; the two moved the list by about the same amount, and it still ends 27px above the
+           phone's box at 390 by 844 (42 at 768 by 1024), so this pose did not move. Ember moves with
+           this: it stands on the phone at a mark measured off the phone's own bottom (m-night in the
+           stylesheet, inside the narrow block), so the two are solved together. */
+        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: copy(W, { x: -78, y: 18, z: 24, s: .98 }), phone: copy(PH, { x: 262, z: -150, s: .70 }), night: 1, fc: 0, fs: 0 },
         narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: { x: -41, y: -115, z: -320, ry: 16, s: 0.793, o: .9 }, phone: { x: 30, y: 185, z: 40, ry: -6, s: 0.98, o: 1 }, night: 1, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 6,
         /* The exhale, added 2026-09-18. The day had six acts of an agent doing things and no
@@ -1134,6 +1142,10 @@
       if (busyT[key]) { clearTimeout(busyT[key]); busyT[key] = 0; }
       scr.classList.add('is-done');
       if (!quiet && !still) scr.classList.add('is-noticed');
+      /* The window is the same agent, so the sent reply leaves its gold panel too (2026-09-30):
+         the card the Dashboard was holding is answered, the panel gives way to the app's empty
+         line, and the job's row reads Done, which is what 0.3.2 resolves an answered card to. */
+      if (key === 2) win.classList.add('is-sent');
     }
     /* `how` is what runs the wait: 'now' settles on the spot, 'clock' waits BUSY_MS because a
        hand pressed it, and 'hold' stays busy until the scroll reaches the card's `done`. */
@@ -1148,6 +1160,7 @@
       if (!scr) return;
       if (busyT[key]) { clearTimeout(busyT[key]); busyT[key] = 0; }
       scr.classList.remove('is-pressed', 'is-done', 'is-noticed');
+      if (key === 2) win.classList.remove('is-sent');
     }
     $$('[data-press]').forEach(function (btn) {
       btn.addEventListener('click', function () {

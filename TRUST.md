@@ -3428,10 +3428,14 @@ Every other write to Acuity, booking, notes and no-shows included, is refused (`
 - ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
   the provider sentence: what the agent reads goes to the AI company the owner connected.
 
-### 🚧 Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone, c942bc60..de6e9f32 for a new agent's Researcher; archie-mobile 3d279a3 and 6817d41), not yet in a release
+### ✅ Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone, c942bc60..de6e9f32 for a new agent's Researcher; archie-mobile 3d279a3 and 6817d41), SHIPPED in Archie 0.3.2 on 2026-09-30
 
-**Approved wording, once it ships:** "Whenever you add an add-on, anywhere in Archie or on Archie
-Mobile, Archie asks first. It shows the add-on, the agent it is going on, and what it will use, says
+*Released, checked 2026-09-30: every Archie commit above is an ancestor of 0.3.2's `94f85315`
+(`archie/releases.json`). This heading still said "not yet in a release" that day, and the Learning
+Library's 2.2 was drawn against it. The phone half is not: archie-mobile has no release on record, so
+"on Archie Mobile" stays out of the wording below until one is.*
+
+**Approved wording:** "Whenever you add an add-on, anywhere in Archie, Archie asks first. It shows the add-on, the agent it is going on, and what it will use, says
 which of those accounts that agent already has connected, and names anything that comes with it, such
 as another add-on it is built on, a routine that starts on a schedule, or a download. Then you press
 Install, or Cancel."

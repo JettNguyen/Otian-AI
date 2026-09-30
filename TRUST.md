@@ -2655,11 +2655,11 @@ poster (a plain link to the video on youtube.com) for the nocookie player on the
 `gen-csp.py`'s `LIBRARY_SOURCES` opens `frame-src` to the nocookie host on `learn/<slug>/` pages and no
 other. **A section is published only once it has a YouTube id and no hold**, and the generator
 refuses to publish anything until this file's website entry carries the sentence below and the
-privacy policy names YouTube, so the first player cannot ship ahead of either. Two sections are
+privacy policy names YouTube, so the first player cannot ship ahead of either. One section is
 held in the data: 1.9, whose narration promises which choices to pick when making the key and that
-answer is untested (a key tied to no workspace may be refused), and 1.8, until Jett rules on the
-free tier's number being drawn in the frame. 0.7's notes leave out Google's unverified-app warning,
-because nothing in this file approves wording for it yet.
+answer is untested (a key tied to no workspace may be refused). 1.8 was held too until Jett approved
+its drawn number the same day (below). 0.7's notes carry Google's unverified-app screen since
+its own entry below was written the same day.
 
 **What that does to the no-analytics sentence below, on the day it ships:** "It never has" stays
 true only for the pages without a player. The website entry's approved wording gains one sentence,
@@ -2688,6 +2688,13 @@ it is: a video Jack did not read does not ship under it.
 spoken in a narration, drawn in a frame or written in a caption file is checked by nothing. Each page
 carries a "current details" box instead, and only FACTS.md figures go in it.
 
+**One figure drawn in a frame, approved by Jett on 2026-09-30: 1.8's "20 jobs a day".** The video
+draws the free tier's number while the voice says "a daily limit", and it may, on three conditions
+that all hold today: the figure is a FACTS.md row (which now names this frame, so a change there
+means re-rendering 1.8), the notes box directly under the player on 1.8's page states the same
+number, and the YouTube description carries the notes, so the cut is never posted without them.
+Any other figure in a frame needs its own approval here; this is not a general licence.
+
 **The free tier in the narration, decided 2026-09-28 (Jett).** The rule above and the free-tier
 entry's "the number goes in the same sentence" collide, because the free tier cannot be named in the
 audio with its number. Resolved this way: the voice may say Archie is free on an AI account of your
@@ -2696,6 +2703,36 @@ directly under the player carries the FACTS.md figure. For this rule only, that 
 same sentence. It holds only while the box is on the same page, directly under the player, and says
 the number. ⛔ A cut posted anywhere without the box, such as a 9:16 clip on social, does not
 mention the free tier at all.
+
+### ✅ Google's "unverified app" screen before its permission page (added 2026-09-30)
+
+**Approved wording:** "Until Google verifies Archie, connecting a Google account first shows a
+screen saying Google hasn't verified this app. It names Otian AI, the company that makes Archie. To
+go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified
+the app." A shorter form where space is tight: "Until Google verifies Archie, Google shows an
+unverified-app screen before its permission page."
+
+**Why it's true:** Archie ships one Google sign-in client for every user (`resolve_google_client`,
+loaded from `resources/`), so the app being reviewed is Otian's, and its consent screens name Otian
+AI, the publisher (Archie repo, `docs/GOOGLE-SUBMISSION.md`, the App name step). The project is In
+production and External and not yet verified (`docs/GOOGLE-SUBMISSION.md` step 5; all 25 steps were
+unticked on 2026-09-30), and three of its Gmail scopes are restricted (`docs/BEFORE-SHIP.md`), so
+Google shows its unverified-app screen on every connect until verification and the CASA assessment
+both pass. The first page to carry it is the Learning Library's 0.7, in its notes.
+
+**Boundaries:**
+- ⛔ **Never say Google has reviewed, approved or is reviewing Archie.** The submission had not
+  been made on the day this was written. Change the wording the day it is, and take the sentence off
+  every page the day Google verifies the app.
+- ⛔ **Never tell a reader the screen is nothing to worry about.** It is Google's own caution, and
+  the honest move is to say why it is there and what to press, then let them decide.
+- ⚠️ **The same unverified status caps Google connections at 100 accounts in total** until
+  verification passes, and each account that connects keeps its place for good (about 94 were left
+  on 2026-09-28, `docs/OAUTH-DEMO-SCRIPT.md`). That is a capacity fact for Otian, not copy: no page
+  prints the count, because a shrinking number on a page is urgency, which the Otian Standard bans.
+  If the cap is ever reached, the site has to say Google connections are paused, the same day.
+- ⚠️ Microsoft's and Apple's connections are not covered here; nothing checked what Microsoft's
+  consent page says about the publisher, so say nothing about it until someone does.
 
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 

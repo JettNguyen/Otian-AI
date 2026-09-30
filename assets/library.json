@@ -186,8 +186,10 @@
       "lede": "What you agree to when you connect your email, how to take that access back, and why connecting sends nothing.",
       "youtube": "Xub4rM6Q29Y",
       "seconds": 64,
-      "notes_heading": "Where to take Archie&rsquo;s access back",
+      "notes_heading": "What Google shows first, and where to take access back",
       "notes": [
+        "Until Google verifies Archie, connecting a Google account first shows a screen saying Google hasn&rsquo;t verified this app. It names Otian AI, the company that makes Archie.",
+        "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
         "Google: <a href=\"https://myaccount.google.com/permissions\">myaccount.google.com/permissions</a>.",
         "Microsoft: <a href=\"https://account.microsoft.com/\">account.microsoft.com</a>, under the apps you have given access.",
         "Apple: an app-specific password is cancelled at <a href=\"https://account.apple.com/\">account.apple.com</a>, under Sign-In and Security."
@@ -409,7 +411,6 @@
       "lede": "Why a ChatGPT or Claude subscription cannot run Archie, and the three ways to give your agent its AI.",
       "youtube": "",
       "seconds": 69,
-      "hold": "Waiting on Jett: the video draws the free tier's number on screen, and TRUST.md keeps figures out of the frames.",
       "notes_heading": "Your three choices, and what each costs",
       "notes": [
         "Free credits: no card needed. They last 14 days or until they are spent, whichever comes first.",

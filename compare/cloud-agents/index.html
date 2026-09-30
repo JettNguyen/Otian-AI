@@ -35,7 +35,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20260930-5" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20260930-6" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -231,7 +231,7 @@
                         <svg viewBox="0 0 1024 1024" aria-hidden="true"><polygon fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" points="328,887 512,727 696,887"/><path fill="url(#dayArchieGrad)" stroke="url(#dayArchieGrad)" stroke-width="34" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" d="M 512,85 L 824,850 L 512,712 L 200,850 Z M 512,272 L 384,616 L 640,616 Z"/></svg>
                         <span class="da-brand-word">rchie</span>
                       </div>
-                      <span class="da-brand-tag">by Otian AI</span>
+                      <span class="da-brand-tag">by Otian AI <span class="da-release">Beta</span></span>
                     </div>
                     <div class="da-picker">
                       <span class="da-face"><span class="da-avatar md"><span data-ember="terracotta.peak.pill.none"></span></span><span class="da-dot"></span></span>
@@ -254,7 +254,7 @@
                         <div class="da-row"><span class="da-glyph teal"><svg><use href="#g-routines"/></svg></span><span class="da-label">Routines</span></div>
                         <div class="da-row"><span class="da-glyph"><svg><use href="#g-documents"/></svg></span><span class="da-label">Knowledge</span></div>
                         <div class="da-row"><span class="da-glyph"><svg><use href="#g-connections"/></svg></span><span class="da-label">Connections</span></div>
-                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-settings"/></svg></span><span class="da-label">Setup</span></div>
+                        <div class="da-row"><span class="da-glyph"><svg><use href="#g-settings"/></svg></span><span class="da-label">Setup</span><span class="da-tail"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span></div>
                       </div>
                     </div>
                     <div class="da-places">
@@ -281,27 +281,51 @@
                           <span class="da-runbtn">Stop</span>
                         </div>
                       </div>
+                      <!-- The homepage's Dashboard by day, as Archie 0.3.2 draws it (the Now pane of
+                           src/app/agent-detail.tsx at 94f85315; the port and its reasons are in
+                           index.html): the tab's heading, the status lines, the reply to Sam
+                           waiting in the gold panel, the kind cards, and Recent jobs newest first.
+                           THE SCREEN KEEPS ITS SIZE. The homepage window grew to 820 by 800 for this
+                           Dashboard, and the laptop's panel, base and lid did not move for it: the
+                           window stays 1040 by 660 at the zoom the screen had, which is a laptop's
+                           proportion, and it does what a shorter window does, which is clip the
+                           pane. That keeps the heading, the status lines, the whole gold panel and
+                           the kind cards on the screen, and Recent jobs is scrolled out of view at
+                           the bottom edge (its rows stay in the markup, as the app's would). The
+                           night rows are gone: nothing here turns the laptop's window to night. -->
                       <div class="da-pane">
+                        <div class="da-tabhead">
+                          <span class="rail"></span>
+                          <div class="tx">
+                            <h2>Dashboard</h2>
+                            <p>What Ember is doing this minute, anything waiting on you, and what it is made of. Every block here opens the tab that changes it.</p>
+                          </div>
+                        </div>
                         <div class="da-nowhead">
-                          <p class="h day">Nothing running right now.</p>
-                          <p class="s day">Everything is set up, and the next routine is the morning brief at 7:00 AM.</p>
-                          <p class="h night">Running Bill Reminders.</p>
-                          <p class="s night">Started 12:06 AM. The morning brief is next, at 7:00 AM.</p>
+                          <p class="h">Nothing running right now.</p>
+                          <p class="s">Last finished: Drafted a reply to Sam, 2 minutes ago.</p>
                           <p class="s mut">Thinking with Claude (by Anthropic). Reachable on Archie Mobile.</p>
                         </div>
+                        <div class="da-goldpanel">
+                          <h3>One thing needs you</h3>
+                          <div class="da-needs">
+                            <div class="da-waitcard">
+                              <p class="da-waited">Waiting 2 minutes</p>
+                              <div class="da-md"><p>&#128231; <b>New email</b> from Sam<br><i>Can we move the roof estimate to Friday?</i></p><p><b>Draft reply</b> (to Sam):<br>Friday works. I&rsquo;ll be home from 10:00 on.</p></div>
+                              <div class="da-actions"><span class="da-act go">&#9989;&nbsp;&nbsp;Send</span><span class="da-act amend">&#9999;&#65039;&nbsp;&nbsp;Edit it</span><span class="da-act plain">&#9200;&nbsp;&nbsp;Send later</span><span class="da-act stop">&#10005;&nbsp;&nbsp;Dismiss</span></div>
+                            </div>
+                          </div>
+                        </div>
                         <div class="da-kindcards">
-                          <div class="da-kindcard plum"><div class="k">Personality</div><div class="v">One Step Ahead</div><div class="s">Arrives with the work done and one question</div></div>
-                          <div class="da-kindcard skill"><div class="k">Skills</div><div class="v">12</div><div class="s">What it knows how to do</div></div>
-                          <div class="da-kindcard teal"><div class="k">Routines</div><div class="v">13</div><div class="s">What it does on a schedule</div></div>
+                          <div class="da-kindcard plum"><div class="k">Personality<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></div><div class="v">One Step Ahead</div><div class="s">Arrives with the work already done and one question.</div></div>
+                          <div class="da-kindcard skill"><div class="k">Skills<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></div><div class="v">12</div><div class="s">What it knows how to do</div></div>
+                          <div class="da-kindcard teal"><div class="k">Routines<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></div><div class="v">13</div><div class="s">What it does on a schedule</div></div>
                         </div>
                         <div class="da-recent">
                           <div class="hd"><span class="l">Recent jobs</span><span class="o">Open Jobs</span></div>
-                          <div class="r day"><span class="t">Morning brief</span><span class="w">Today, 7:00 AM, 41 s</span><span class="da-badge green">Done</span></div>
-                          <div class="r day"><span class="t">Drafted a reply to Sam</span><span class="w">Today, 1:40 PM, 12 s</span><span class="da-badge gold">Waiting for you</span></div>
-                          <div class="r day"><span class="t">Filed 14 receipts into Expenses</span><span class="w">Yesterday, 4:12 PM, 2 min 6 s</span><span class="da-badge green">Done</span></div>
-                          <div class="r night"><span class="t">Return Window Watch</span><span class="w">11:58 PM, 12 s</span><span class="da-badge green">Done</span></div>
-                          <div class="r night"><span class="t">Bill Reminders</span><span class="w">12:06 AM, 9 s</span><span class="da-badge green">Done</span></div>
-                          <div class="r night"><span class="t">Morning Brief</span><span class="w">Next, 7:00 AM</span><span class="da-badge gold">Scheduled</span></div>
+                          <div class="r"><span class="t">Drafted a reply to Sam</span><span class="w">Today, 1:40 PM, 12 s</span><span class="da-badge gold">Waiting for you</span></div>
+                          <div class="r"><span class="t">Morning brief</span><span class="w">Today, 7:00 AM, 41 s</span><span class="da-badge green">Done</span></div>
+                          <div class="r"><span class="t">file this week&rsquo;s receipts into Expenses</span><span class="w">Yesterday, 4:12 PM, 2 min 6 s</span><span class="da-badge green">Done</span></div>
                         </div>
                       </div>
                     </div>
@@ -765,10 +789,10 @@ cited in place. Jett's direction of September 12, 2026.
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20260930-5"></script>
-  <script type="module" src="../../js/account-nav.js?v=20260930-5"></script>
-  <script src="../../js/demo-player.js?v=20260930-5"></script>
-  <script src="../../js/ember.js?v=20260930-5" defer></script>
-  <script src="../../js/desk-scene.js?v=20260930-5" defer></script>
+  <script src="../../js/nav.js?v=20260930-6"></script>
+  <script type="module" src="../../js/account-nav.js?v=20260930-6"></script>
+  <script src="../../js/demo-player.js?v=20260930-6"></script>
+  <script src="../../js/ember.js?v=20260930-6" defer></script>
+  <script src="../../js/desk-scene.js?v=20260930-6" defer></script>
 </body>
 </html>

@@ -68,7 +68,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie: the story behind Otian AI, and the two people who build it.
 - [The Otian Standard](https://otianai.com/standard/): How Otian AI intends to behave: the promises we hold ourselves to on service, honesty, privacy and pricing, written down so you can point at a line and tell us we fell short.
 - [Contact](https://otianai.com/contact/): Write to Jett or Jack, the two people who build Archie, about a question, an add-on you need or a setup that stopped working. A reply within one business day.
-- [Testimonials](https://otianai.com/testimonials/): Patrick West's testimonial, word for word, and four jobs an Archie agent can take over, with the add-on that does each.
+- [Testimonials](https://otianai.com/testimonials/): Testimonials from Jehan Ramadan of Best of Hue and Patrick West, and four jobs an Archie agent can take over, with the add-on that does each.
 
 ## Learning
 

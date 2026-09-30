@@ -9275,6 +9275,24 @@ html[data-theme="dark"] .booking-container iframe {
   padding-left: 21px;
 }
 
+/* The second quote (2026-09-30). The row takes the indent the bare name had, so the photo
+   lines up under the words rather than under the rule, and the name inside it gives the
+   indent back. The gap between the two quotes is wider than the gap above the first, so the
+   pair reads as two people and not as one quote that runs on. */
+.hm-quoteblock + .hm-quoteblock {
+  margin-top: 32px;
+}
+
+.day-testimonial .tm-by {
+  margin-top: 12px;
+  padding-left: 21px;
+}
+
+.day-testimonial .tm-by .tm-attrib {
+  margin: 0;
+  padding-left: 0;
+}
+
 /* His own two headings, kept because they are his. Small and lettered so they read as
    the writer's own divisions and not as ours: a section heading in the page's own type
    would put our voice inside somebody else's quote. */
@@ -9285,6 +9303,56 @@ html[data-theme="dark"] .booking-container iframe {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
+}
+
+/* Who is speaking, when we have their face and their mark. A row rather than a line: the
+   photo, the name, then the business's own logo, wrapping under the name on a phone. Both
+   images are alt="" because the name beside them already says everything they would.
+
+   THE LOGO SITS ON WHITE IN BOTH THEMES, ON PURPOSE. Best of Hue's mark is black type on a
+   white ground with five coloured dots, and the file we were given has that ground baked in.
+   Inverting it for the dark theme would recolour somebody else's trademark, which their
+   permission to show it did not cover, so it keeps its own paper and the tile is that paper.
+   The hairline is there for the light theme, where the card is white too and the tile would
+   otherwise have no edge at all. */
+.tm-by {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 14px;
+  margin-top: 18px;
+}
+
+/* 9rem is what lets the name share a line with the photo in a phone's card, with the logo
+   wrapping under them both, rather than the three stacking one to a line. */
+.tm-by .tm-attrib {
+  margin: 0;
+  flex: 1 1 9rem;
+}
+
+.tm-face {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.tm-logo {
+  height: 34px;
+  width: auto;
+  flex: none;
+  padding: 6px 10px;
+  box-sizing: content-box;
+  background: #FFFFFF;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.tm-attrib a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ==============================

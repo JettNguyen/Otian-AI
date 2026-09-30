@@ -280,7 +280,8 @@ re-counts it rather than trusting this file.
   Westway Site Services), 60 days in, wrote his own testimonial and it is published in full on
   `/testimonials/`: "I would estimate that I am saving two to three hours per day on ordinary
   tasks that Coleman now handles for me". The same sentence is quoted on the homepage under the
-  heading "Patrick gets two to three hours back, every day."
+  heading "What Patrick and Jehan use an agent for." (it named Patrick alone, with the
+  hours in it, until the second testimonial arrived on 2026-09-30).
 
   **It ran unsigned from 2026-09-18 to 2026-09-21, and the order is worth keeping.** He sent
   the words and we published them the same day; the name, the companies and even the trade came
@@ -308,6 +309,15 @@ re-counts it rather than trusting this file.
   voice, invented, with no record behind them. His is in his voice, sent to us in writing, and
   the record is the testimonial itself. A quote we hold the source of is a different
   thing from a figure nobody can trace, and the difference is that we can produce the source.
+
+  **The second, 2026-09-30: Jehan Ramadan (Best of Hue Color Analysis).** She wrote her own
+  testimonial and it is published word for word on `/testimonials/`: "What used to take me 2-3
+  hours a day is now done in minutes and more effectively." The same rule holds: her sentence,
+  with her name on it, and nothing else, and that covers "done in minutes" as much as the hours.
+  **Two estimates of the same size are two stories, not a finding.** No "both our customers", no
+  "customers report", no range drawn from the pair, and the homepage quotes a different line of
+  hers for that reason. The source is the message she sent it in, so keep it: it is what we
+  produce if the quote is ever questioned.
 - **Every hardware price, on `/how-it-works/#what-to-run-it-on` and anywhere else.** Added 2026-08-26 with the page that section came from (`/equipment/`, merged into How It Works 2026-09-14).
   A hardware price is a third-party figure under the rules above, so it would need a row in
   "Other companies' prices" with the maker's own store as its source and a 90-day re-read. It

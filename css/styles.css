@@ -1146,6 +1146,48 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   vertical-align: -0.22em;
 }
 
+/* Every other row in the two menus carries an icon (2026-09-30, Jett: "icons for each page"). They
+   are outline icons in the row's own color, so they follow the theme and the hover and never
+   compete with the two edition marks above them, which stay the only color in the menu. Same
+   box and gap as .nav-row-mark so the labels line up in one column. The drawing is a mask over
+   currentColor, which is how one file serves light and dark; the files are assets/nav/, 24 on a
+   side, drawn for this and nothing else. Decorative, like the marks: aria-hidden, the row says
+   the name. The footer stays plain, as it did for the marks (2026-09-22). */
+.nav-row-ico {
+  display: inline-block;
+  width: 1.15em;
+  height: 1.15em;
+  margin-right: 9px;
+  flex-shrink: 0;
+  vertical-align: -0.22em;
+  background-color: currentColor;
+  opacity: 0.75;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.nav-ico-phone { -webkit-mask-image: url(../assets/nav/phone.svg); mask-image: url(../assets/nav/phone.svg); }
+.nav-ico-steps { -webkit-mask-image: url(../assets/nav/steps.svg); mask-image: url(../assets/nav/steps.svg); }
+.nav-ico-tag { -webkit-mask-image: url(../assets/nav/tag.svg); mask-image: url(../assets/nav/tag.svg); }
+.nav-ico-grid { -webkit-mask-image: url(../assets/nav/grid.svg); mask-image: url(../assets/nav/grid.svg); }
+.nav-ico-search { -webkit-mask-image: url(../assets/nav/search.svg); mask-image: url(../assets/nav/search.svg); }
+.nav-ico-eye { -webkit-mask-image: url(../assets/nav/eye.svg); mask-image: url(../assets/nav/eye.svg); }
+.nav-ico-check { -webkit-mask-image: url(../assets/nav/check.svg); mask-image: url(../assets/nav/check.svg); }
+.nav-ico-power { -webkit-mask-image: url(../assets/nav/power.svg); mask-image: url(../assets/nav/power.svg); }
+.nav-ico-scale { -webkit-mask-image: url(../assets/nav/scale.svg); mask-image: url(../assets/nav/scale.svg); }
+.nav-ico-question { -webkit-mask-image: url(../assets/nav/question.svg); mask-image: url(../assets/nav/question.svg); }
+.nav-ico-chat { -webkit-mask-image: url(../assets/nav/chat.svg); mask-image: url(../assets/nav/chat.svg); }
+.nav-ico-doc { -webkit-mask-image: url(../assets/nav/doc.svg); mask-image: url(../assets/nav/doc.svg); }
+.nav-ico-book { -webkit-mask-image: url(../assets/nav/book.svg); mask-image: url(../assets/nav/book.svg); }
+.nav-ico-play { -webkit-mask-image: url(../assets/nav/play.svg); mask-image: url(../assets/nav/play.svg); }
+.nav-ico-people { -webkit-mask-image: url(../assets/nav/people.svg); mask-image: url(../assets/nav/people.svg); }
+.nav-ico-quote { -webkit-mask-image: url(../assets/nav/quote.svg); mask-image: url(../assets/nav/quote.svg); }
+.nav-ico-briefcase { -webkit-mask-image: url(../assets/nav/briefcase.svg); mask-image: url(../assets/nav/briefcase.svg); }
+.nav-ico-mail { -webkit-mask-image: url(../assets/nav/mail.svg); mask-image: url(../assets/nav/mail.svg); }
+
 /* A dropdown is as wide as its wordiest entry, so the width is really a budget on the labels.
    The ceiling is set just past the longest one we keep ("What We Can and Can't See"), which
    means a new entry that overruns wraps to two lines in the menu rather than quietly stretching

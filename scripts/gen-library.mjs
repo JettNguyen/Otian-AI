@@ -175,34 +175,34 @@ const STYLE = `  <style>
     .lib-main { min-width: 0; display: grid; gap: 20px; }
     .lib-h1 { margin: 0; font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.75rem); line-height: 1.15; text-wrap: balance; }
     .lib-h1-n { color: var(--accent); font-variant-numeric: tabular-nums; }
-    .lib-lede { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: 1.0625rem; }
+    .lib-lede { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: var(--fs-xl); }
     .lib-player { margin: 8px 0 0; display: grid; gap: 10px; }
-    .lib-play, .lib-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; overflow: hidden; background: #1c1916; box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.45); }
+    .lib-play, .lib-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 16px; overflow: hidden; background: #1c1916; box-shadow: var(--shadow-md); }
     .lib-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .lib-play-mark { position: absolute; left: 50%; top: 80%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); transition: transform 0.2s ease; }
+    .lib-play-mark { position: absolute; left: 50%; top: 80%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
     .lib-play-mark svg { width: 38px; height: 38px; margin-left: 4px; }
     .lib-play:hover .lib-play-mark, .lib-play:focus-visible .lib-play-mark { transform: scale(1.08); }
     .lib-play:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-    .lib-player figcaption { font-size: 0.875rem; color: var(--text-secondary); }
+    .lib-player figcaption { font-size: var(--fs-base); color: var(--text-secondary); }
     .lib-notes { padding: 22px 24px; border-radius: 14px; background: var(--bg-card, #fff); border: 1px solid var(--border, rgba(68, 64, 59, 0.12)); }
-    .lib-notes h2 { margin: 0 0 10px; font-size: 1.125rem; line-height: 1.3; }
+    .lib-notes h2 { margin: 0 0 10px; font-size: var(--fs-2xl); line-height: 1.3; }
     .lib-notes ul { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; list-style: disc; }
     .lib-notes li { line-height: 1.5; }
     .lib-step { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .lib-step a { display: grid; gap: 2px; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); text-decoration: none; color: inherit; }
+    .lib-step a { display: grid; gap: 2px; padding: 14px 16px; border-radius: var(--radius); border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); text-decoration: none; color: inherit; }
     .lib-step a:hover { border-color: var(--accent); }
     .lib-step-next { grid-column: 2; text-align: right; }
-    .lib-step-w { font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+    .lib-step-w { font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
     .lib-step-t { font-weight: 600; line-height: 1.3; }
     .lib-words summary { cursor: pointer; font-weight: 600; }
     /* Jack's words, quoted: a quote is his voice and not the page's, which check-voice.py honors. */
     .lib-words-body { max-width: 66ch; margin: 0; padding: 8px 0 0; border: 0; color: var(--text-secondary); font-style: normal; }
     .lib-words-body p { margin: 0 0 10px; }
     .lib-index { position: sticky; top: 96px; display: grid; gap: 6px; padding: 18px; border-radius: 14px; border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); max-height: calc(100vh - 120px); overflow: auto; }
-    .lib-index-t { margin: 0 0 4px; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
+    .lib-index-t { margin: 0 0 4px; font-size: var(--fs-sm); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-secondary); }
     .lib-level summary { cursor: pointer; padding: 6px 0; font-weight: 600; }
     .lib-level ol { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 2px; }
-    .lib-level a { display: grid; grid-template-columns: 3em 1fr; gap: 6px; padding: 7px 8px; border-radius: 8px; text-decoration: none; color: inherit; font-size: 0.9375rem; line-height: 1.3; }
+    .lib-level a { display: grid; grid-template-columns: 3em 1fr; gap: 6px; padding: 7px 8px; border-radius: var(--radius-sm); text-decoration: none; color: inherit; font-size: var(--fs-md); line-height: 1.3; }
     .lib-level a:hover { background: var(--surface-hover, rgba(68, 64, 59, 0.06)); }
     .lib-level a[aria-current="page"] { background: var(--accent-subtle); box-shadow: inset 3px 0 0 var(--accent); font-weight: 600; }
     .lib-n { font-variant-numeric: tabular-nums; opacity: 0.8; }

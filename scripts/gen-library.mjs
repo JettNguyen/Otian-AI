@@ -67,9 +67,13 @@ function chrome() {
   return { head, top, tail, stamp };
 }
 
-function minutes(s) {
-  const m = Math.max(1, Math.round((s.seconds || 60) / 60));
-  return m === 1 ? "1 minute" : `${m} minutes`;
+/* The length as a person says it: an intro is "under a minute", the rest "about 1 minute" and up.
+   Rounded, so a trim in the edit does not make it wrong. */
+function length(s) {
+  const sec = s.seconds || 60;
+  if (sec < 45) return "under a minute";
+  const m = Math.round(sec / 60);
+  return m === 1 ? "about 1 minute" : `about ${m} minutes`;
 }
 
 /* How a section is named: "0.1" in the list's number column and before its title elsewhere; a
@@ -121,7 +125,7 @@ function page(s, all, levels, C, preview) {
     : "";
 
   const words = s.words.map((p) => `<p>${esc(p)}</p>`).join("\n            ");
-  const playLabel = `Play the video: ${plain(s.title)}, about ${minutes(s)}`;
+  const playLabel = `Play the video: ${plain(s.title)}, ${length(s)}`;
 
   const main = `  <main id="main" class="lib">
     ${BANNER}

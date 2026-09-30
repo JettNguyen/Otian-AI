@@ -23,6 +23,7 @@
       "title": "Getting Your Computer Ready",
       "lede": "Jack introduces Level 0: eight short videos that make sure your computer is ready to run your agent.",
       "youtube": "",
+      "seconds": 18,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -38,6 +39,7 @@
       "title": "Will Archie Work on My Computer?",
       "lede": "Archie runs on a Mac or a Windows computer. How to tell which one you have, and what else it needs.",
       "youtube": "",
+      "seconds": 55,
       "notes_heading": "Which Macs and Windows computers run Archie",
       "notes": [
         "Mac: macOS 12 Monterey or later, on Apple silicon or Intel.",
@@ -62,6 +64,7 @@
       "title": "Why Your Computer Needs to Stay On",
       "lede": "Your agent works only while the computer is on, awake and running Archie. How to keep it that way.",
       "youtube": "",
+      "seconds": 69,
       "notes_heading": "How to keep a Mac or Windows computer awake while it is plugged in",
       "notes": [
         "On a Mac, open System Settings, then Battery, then Options, and turn on <strong>Prevent automatic sleeping on power adapter when the display is off</strong>. On a desktop Mac, it is under Energy Saver.",
@@ -87,6 +90,7 @@
       "title": "What Sleep, Shut Down, and Restart Mean",
       "lede": "What sleep, shut down and restart each do to your agent, and how Archie can wake the computer for a routine.",
       "youtube": "",
+      "seconds": 77,
       "notes_heading": "How to set up Archie to wake your computer for a routine",
       "notes": [
         "On a Mac, setting it up asks for your password once, because only an administrator of a Mac may schedule a wake. The Mac asks for it in its own box: Archie never sees what you type.",
@@ -114,6 +118,7 @@
       "title": "How to Download and Install an App",
       "lede": "The difference between downloading an app and installing it, and where to get apps safely.",
       "youtube": "",
+      "seconds": 51,
       "notes_heading": "Where to download Archie",
       "notes": [
         "Archie&rsquo;s own download page is <a href=\"../../archie/install/\">otianai.com/archie/install</a>. Type the address into your browser yourself."
@@ -137,6 +142,7 @@
       "title": "Why Your Computer Asks for Permission",
       "lede": "Why your computer asks before it opens an app or lets one use your files, and how to tell a normal question from one to refuse.",
       "youtube": "",
+      "seconds": 43,
       "notes_heading": "What Windows shows the first time you open Archie",
       "notes": [
         "Windows shows a box that says <strong>Windows protected your PC</strong>. <a href=\"../../archie/install/#warning-heading\">The install page shows it and says what to check before you continue</a>."
@@ -159,6 +165,7 @@
       "title": "Where Your Passwords and Account Keys Are Stored",
       "lede": "Where Archie keeps the keys that reach your accounts: your computer&rsquo;s own password store, which Otian cannot read.",
       "youtube": "",
+      "seconds": 51,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -178,6 +185,7 @@
       "title": "What It Means to Connect an Account",
       "lede": "What you agree to when you connect your email, how to take that access back, and why connecting sends nothing.",
       "youtube": "",
+      "seconds": 67,
       "notes_heading": "Where to take Archie&rsquo;s access back",
       "notes": [
         "Google: <a href=\"https://myaccount.google.com/permissions\">myaccount.google.com/permissions</a>.",
@@ -204,6 +212,7 @@
       "title": "Talking to Your Agent From Your Phone",
       "lede": "How to message your agent from a chat app on your phone, and the path each message takes.",
       "youtube": "",
+      "seconds": 58,
       "notes_heading": "The chat apps Archie works with",
       "notes": [
         "Telegram, Discord, Slack, Matrix, and on a Mac, iMessage, in the thread you have with yourself.",
@@ -228,6 +237,7 @@
       "title": "What AI Is and Is Not",
       "lede": "What AI is, where you already use it, and what it cannot know about you.",
       "youtube": "",
+      "seconds": 48,
       "notes_heading": "More AI words, in plain English",
       "notes": [
         "<a href=\"../../ai-explained/\">AI Explained</a>, our glossary, defines each one in a sentence or two."
@@ -249,6 +259,7 @@
       "title": "Why AI Sometimes Gets Things Wrong",
       "lede": "Why AI sometimes writes something wrong and sounds sure of it, and three habits that catch it.",
       "youtube": "",
+      "seconds": 66,
       "notes_heading": "Hallucination, in plain English",
       "notes": [
         "<a href=\"../../ai-explained/#hallucination\">The AI Explained entry for hallucination</a>."
@@ -276,6 +287,7 @@
       "title": "What a Prompt Is",
       "lede": "What a prompt is, and how saying who, what and how gets you a better answer.",
       "youtube": "",
+      "seconds": 43,
       "notes_heading": "Prompt, in plain English",
       "notes": [
         "<a href=\"../../ai-explained/#prompt\">The AI Explained entry for prompt</a>."
@@ -300,6 +312,7 @@
       "title": "What AI Remembers",
       "lede": "What AI keeps from one chat to the next, and the notes your agent keeps about you.",
       "youtube": "",
+      "seconds": 55,
       "notes_heading": "Context window, in plain English",
       "notes": [
         "<a href=\"../../ai-explained/#context-window\">The AI Explained entry for context window</a>."
@@ -323,6 +336,7 @@
       "title": "Chatbot or Agent: What Is the Difference?",
       "lede": "How a chatbot and an agent differ, and why replies and calendar moves wait for your yes in Archie.",
       "youtube": "",
+      "seconds": 49,
       "notes_heading": "Chatbot and agent, in plain English",
       "notes": [
         "The AI Explained entries for <a href=\"../../ai-explained/#chatbot\">chatbot</a> and <a href=\"../../ai-explained/#ai-agent\">AI agent</a>."
@@ -345,6 +359,7 @@
       "title": "Where Archie Gets Its AI",
       "lede": "Which companies build the AI Archie uses, how you pick one, and where the free credits send your messages.",
       "youtube": "",
+      "seconds": 60,
       "notes_heading": "The seven AI companies Archie works with",
       "notes": [
         "Anthropic, OpenAI, Google, Groq, xAI, DeepSeek and Mistral. Another provider, the eighth choice, is for any service that works like OpenAI&rsquo;s.",
@@ -369,6 +384,7 @@
       "title": "Why Using AI Costs Money",
       "lede": "What tokens are, why AI companies charge for them, and what makes a month cost more.",
       "youtube": "",
+      "seconds": 56,
       "notes_heading": "Tokens, and what a month costs",
       "notes": [
         "<a href=\"../../ai-explained/#token\">The AI Explained entry for token</a>.",
@@ -392,6 +408,8 @@
       "title": "Why Your ChatGPT Plan Does Not Cover Archie",
       "lede": "Why a ChatGPT or Claude subscription cannot run Archie, and the three ways to give your agent its AI.",
       "youtube": "",
+      "seconds": 69,
+      "hold": "Waiting on Jett: the video draws the free tier's number on screen, and TRUST.md keeps figures out of the frames.",
       "notes_heading": "Your three choices, and what each costs",
       "notes": [
         "Free credits: no card needed. They last 14 days or until they are spent, whichever comes first.",
@@ -411,8 +429,7 @@
         "You can connect your own pay-as-you-go AI account. With your own account, Archie is free, with a daily limit on jobs. A job is one task your agent runs. The current limit is below this video.",
         "Or you can choose a plan with some AI use included each month. When that runs out, your agent pauses until the next month. Some jobs, like reading your email, need your own AI account. The list below this video says which.",
         "Next: how to open your own AI account."
-      ],
-      "hold": "Waiting on Jett: the video draws the free tier's number on screen, and TRUST.md keeps figures out of the frames."
+      ]
     },
     {
       "id": "L1-09",
@@ -422,6 +439,8 @@
       "title": "How to Open Your AI Account",
       "lede": "Step by step: open an Anthropic account, buy credit, and make the key Archie needs.",
       "youtube": "",
+      "seconds": 101,
+      "hold": "The narration promises the key's choices below the video, and which to pick is not tested yet (a key tied to no workspace may be refused).",
       "notes_heading": "The Claude Console, and the choices to make in it",
       "notes": [
         "The Claude Console: <a href=\"https://platform.claude.com/settings/keys\">API keys</a> and <a href=\"https://platform.claude.com/settings/billing\">billing</a>.",
@@ -442,8 +461,7 @@
         "Step five. Copy the key into Archie when asked. Archie checks whether it works.",
         "Keep this key private, like a password. Do not email it or share it.",
         "Next: what a month of AI use may cost."
-      ],
-      "hold": "The narration promises the key's choices below the video, and which to pick is not tested yet (a key tied to no workspace may be refused)."
+      ]
     },
     {
       "id": "L1-10",
@@ -453,6 +471,7 @@
       "title": "What a Month of AI Use May Cost",
       "lede": "Three example months of AI use, measured, and the two things that move your bill most.",
       "youtube": "",
+      "seconds": 68,
       "notes_heading": "What three example months cost, measured",
       "notes": [
         "AI cost for one agent, per month, at Anthropic&rsquo;s prices of September 12, 2026. Economy and Balanced are Archie&rsquo;s two quality settings.",
@@ -482,6 +501,7 @@
       "title": "How Your Agent Works",
       "lede": "Jack introduces Level 2: jobs, routines, add-ons, connected accounts, what waits for your approval, and what your agent cannot do.",
       "youtube": "",
+      "seconds": 15,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -496,6 +516,7 @@
       "title": "Jobs and Routines",
       "lede": "What a job is, the three ways one starts, and how a routine runs on a schedule.",
       "youtube": "",
+      "seconds": 71,
       "notes_heading": "How many jobs a day Archie does for free",
       "notes": [
         "On an AI account of your own with no plan, Archie does 20 jobs a day. Routines and the mail and text watches stop at 15, so the last 5 are kept for what you ask it yourself."

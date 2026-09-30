@@ -1157,6 +1157,15 @@ only asks whether this computer can hear and speak and whether the agent talks b
 starts those two downloads, and `set_voice_mode` lets one agent answer out loud. None reaches a
 secret, a file or anybody else's conversation. See the talk screen's own entry.
 
+⚠️ **On main, one more op, and the first list whose rows travel** (Archie `8fb5705d`, archie-mobile
+`817e099`, not in a release). The open items on the owner's to-do list (the Task Manager skill's
+`tasks` list) now ride the snapshot, up to thirty, each as a title, a date, a priority and a status
+(`tasks_of` in `phone.rs`). `task_done` ticks one off or puts it back. Every other list still sends
+a count and nothing else. From that release, the list above of what never travels reads "the rows
+inside the agent's lists, apart from the open items on its to-do list". The items are sealed like the
+conversation they already appeared in as the agent's checklist, so "sealed with a key we never
+receive" covers them and "never leaves your computer" does not. See the to-do list's own entry.
+
 **What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
 the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
 because a permission prompt is the one piece of this product a person reads before they trust it.
@@ -1376,6 +1385,46 @@ turned into words on your computer, and the answer is read out by a voice that r
   which the phone's screen follows until it is done.
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
+
+### 🚧 Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: BUILT 2026-09-30, not yet in a release
+
+**Approved wording, once it is in a release:** "Your to-do list is the first thing on your agent's
+Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without
+asking your agent or scrolling back through the chat."
+
+**Why it's true** (Archie `d34189e5` for the desk, `8fb5705d` for what the phone is sent;
+archie-mobile `817e099`):
+
+- **The desk.** `TasksCard` in `src/app/tasks-card.tsx` reads the Task Manager skill's `tasks` list
+  every time the Dashboard opens and draws every open item, grouped Overdue, Today, Coming up and No
+  date, in the order the agent's own checklist in chat uses (`openTasks` in `src/app/open-tasks.ts`,
+  kept line for line with `crates/archie-runtime/src/tasks.rs`). A tick writes status Done, and
+  today's date where the list has that column, through the same record write the Lists table uses;
+  Undo puts back the status it had. The box at the bottom adds a row with a title and nothing else.
+- **The phone.** The computer sends the open items in the sealed snapshot (see the phone-app entry
+  above), and `TodoCard` in `src/screens/Todo.tsx` draws them with the desk's words and order. It
+  ticks with `task_done` and adds with `add_row`, both on the fixed op list.
+- **Placement.** First on the Dashboard on both, unless something is waiting on the owner (a draft
+  to send, a change to approve), which goes above it. Jett's order, September 30, 2026.
+- **Knowledge.** The Knowledge tab is a tree now: Documents (files it reads and never changes, in
+  folders), Lists (lists it keeps up to date as you chat, which you can edit too), Memory and How
+  you write (`KnowledgeBrowser` in `src/app/knowledge.tsx`). The phone groups documents by the same
+  folders. This is a layout and a set of words, not a capability.
+
+**The boundaries.**
+
+- ⚠️ **Only on an agent with the Task Manager skill.** An agent whose to-do list lives in Todoist or
+  Google Tasks shows no card: nothing from those is mirrored into Archie. Never "your to-do list,
+  wherever you keep it".
+- ⚠️ **The phone ticks and adds, and that is all.** A date or a priority is changed by telling the
+  agent, or at the computer in the Lists table.
+- ⚠️ **The to-do list is the one list whose items reach the phone.** Every other list sends a count.
+  Say "sealed", never "never leaves your computer", about the to-do list.
+- ⚠️ **A checklist the agent already posted in chat is not redrawn** when an item is ticked on the
+  Dashboard, on either app, until the agent next touches the list. Do not say ticking anywhere
+  updates everywhere at once.
+- **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
+  are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
 
 ### ✅ It works while you sleep
 
@@ -3772,7 +3821,7 @@ Archie runs on"*.
 
 Archie for Business lets an owner say what their company is called and add a logo, on the Company
 page. Both are written into `structure.json` at the root of the workspace directory, beside the
-shared record lists, by `set_company_name` and `set_logo` in
+shared lists, by `set_company_name` and `set_logo` in
 `crates/archie-core/src/bundle/structure.rs`. The logo's bytes are written next to that file as
 `logo.png` or `logo.jpg` and nowhere else.
 
@@ -4329,8 +4378,9 @@ reader finding `"now"` in that repo has not found a straggler.
 - **Do not read this as a new capability.** There is no "dashboard" feature. The tab shows what it
   always showed: what the agent is doing this minute and what is waiting on the owner.
 - **Jobs is not the to-do list, and the two must never be described as one.** A person's to-do
-  items live in the Task Manager skill's own record collection, reachable under Records, and
-  nothing on this site may imply the Jobs tab holds them. The whole reason for the second rename
+  items live in the Task Manager skill's own list, on the Knowledge tab under Lists (called Records
+  until September 30, 2026), and on main they also sit at the top of the Dashboard tab. Nothing on
+  this site may imply the Jobs tab holds them. The whole reason for the second rename
   was to keep those two apart on screen.
 
 ### Business Tier — what an admin can see

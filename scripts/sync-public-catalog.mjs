@@ -1,5 +1,8 @@
 // Snapshot only the publicly queryable store fields used by the website renderer.
-// Run after publishing the app catalog, then run gen-marketplace and gen-discovery.
+// Run after publishing the app catalog, then run gen-catalog-index, gen-marketplace and
+// gen-discovery. All three read this snapshot, and the deploy refuses the site while any one is
+// stale: on September 30, 2026 a refresh that skipped gen-catalog-index held Archie 0.3.3's
+// update files off the site for forty minutes.
 import fs from 'node:fs';
 import { COLLECTIONS, normalize } from '../js/addon-card.js';
 

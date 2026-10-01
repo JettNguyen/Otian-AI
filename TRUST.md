@@ -3568,6 +3568,77 @@ Every other write to Acuity, booking, notes and no-shows included, is refused (`
 - ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
   the provider sentence: what the agent reads goes to the AI company the owner connected.
 
+### 🚧 Square: your agent reads it, drafts an invoice, and sends one or refunds a payment when you say yes: BUILT 2026-09-30 (Archie 8661c63c, on main), not yet in a release
+
+**Never run against a real Square account yet** (`docs/OPEN-THREADS.md`). Nothing here is said in
+the present tense on the site until a release carries it and one live read has worked. Unproven: the
+draft invoice's fields the card is built from, a publish with only a version and a key, the derived
+refund key, and the pinned `Square-Version`.
+
+**Approved wording, once it ships:** "Connect Square with an access token, and your agent reads your
+real payments, invoices, customers and payouts: what came in this week, who hasn't paid, and when
+your money lands. Ask it to invoice somebody and it drafts the invoice in your Square, then shows you
+who it goes to, the amount, the due date and the email address. Nothing is sent until you say yes. A
+refund works the same way: whose payment, how much, and which card it goes back to, first."
+
+**Why it's true:** the `square` row in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`),
+bound to `connect.squareup.com`, with `Square-Version` pinned; `connector_connect` checks the token
+against `GET /merchants/me`, which reads no payment and no customer. GET requests and six searches
+that only read run at once. `crates/archie-runtime/src/square.rs` decides every write: drafting an
+order, a draft invoice or a customer runs at once (a draft reaches nobody and moves no money);
+sending an invoice, deleting a draft and refunding a payment are each a card built from Square's own
+record and checked again at the yes (`prepare`, `still_true`); everything else is refused, including
+charging a card, an invoice that would charge a card on file, canceling a sent invoice, and every
+booking change. A refund's idempotency key is derived from the payment, the amount and what was
+refunded before, so one card cannot become two refunds. The skill is
+`data/marketplace/skills/square-keeper.json` (1.0.0, `min_app_version` 0.3.4).
+
+**Boundaries:**
+- ⛔ Never "it charges cards" or "it takes payments". It sends invoices the customer pays.
+- ⛔ Never without the owner's yes, for a sent invoice or a refund. Drafting is the one thing that
+  runs at once, and only a draft.
+- ⛔ Never say the token can be narrowed. Square's own word for it is "full-access (unscoped)", and
+  the connect screen says so.
+- ⛔ Never that it changes bookings, even Square Appointments ones.
+- ⛔ No Square logo, and nothing implying Square endorses Archie.
+- ⚠️ The token goes only to connect.squareup.com and no Otian server is involved. Keep the provider
+  sentence: what the agent reads goes to the AI company the owner connected.
+
+### 🚧 Posting to Instagram, through Zernio, when you say yes: BUILT 2026-09-30 (Archie f577198e, on main), not yet in a release
+
+**Never run against a real Zernio account, and has never posted anything** (`docs/OPEN-THREADS.md`).
+Nothing here is said in the present tense on the site until a release carries it and one real post
+has gone out.
+
+**Approved wording, once it ships:** "Link your Instagram to Zernio, paste Zernio's key into Archie,
+and send your agent a photo with what to say. It writes the caption, shows you the post, which
+account and when, and posts it when you say yes, now or at a time you pick. A scheduled post goes
+out even if your computer is off. Instagram only lets a business or creator account post this way."
+
+**Why it's true:** the `zernio` row in `KNOWN_SERVICES` (`crates/archie-domain/src/connectors.rs`),
+bound to `zernio.com`. `crates/archie-runtime/src/zernio.rs` builds the only post a model may ask for
+and refuses every other change but canceling a post that has not gone out; the card names the
+account, the time, each picture by name and the whole caption, and is read again at the yes. The
+pictures are uploaded only after the yes (`apply_zernio` in `connectors.rs`), to the upload address
+Zernio hands back, with no key on it (`put_file` in `crates/archie-net/src/http.rs`). A post may
+carry only a picture the owner sent or the agent made, from one folder, checked on the real path.
+The skill is `data/marketplace/skills/social-posting.json` (1.0.0, `min_app_version` 0.3.4).
+
+**Boundaries:**
+- ⛔ Never "Archie connects to Instagram" on its own. Zernio, a separate service, holds the Instagram
+  sign-in and sees what is posted. Say Zernio every time.
+- ⛔ Never "free" without the condition. Zernio is free for two linked accounts; past that it charges
+  per account.
+- ⛔ Never that a post can be taken back. Once it is live on Instagram it can't be taken down from
+  Archie, and the card says so before the yes.
+- ⛔ Never likes, views, comments, followers, Stories, Reels or video. It posts pictures and words.
+- ⛔ Never without the owner's yes, and never on a routine with nobody there.
+- ⚠️ **Photos are kept now, on an agent that can post.** With Zernio connected, a photo sent in chat
+  (and a picture the agent makes) is kept on the computer, newest 30, so a post can carry it. Any
+  sentence saying Archie keeps no copy of a photo you send has to carve this out. Every other agent
+  keeps nothing, as before.
+- ⛔ No Instagram, Meta or Zernio logo, and nothing implying any of them endorses Archie.
+
 ### ✅ Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone, c942bc60..de6e9f32 for a new agent's Researcher; archie-mobile 3d279a3 and 6817d41), SHIPPED in Archie 0.3.2 on 2026-09-30
 
 *Released, checked 2026-09-30: every Archie commit above is an ancestor of 0.3.2's `94f85315`

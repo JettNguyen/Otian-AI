@@ -1944,6 +1944,12 @@ overwritten by `publish_state` and deleted by `wipe`, which Disconnect every pho
 write eleven kinds: `.pdf`, `.pptx`, `.xlsx`, `.csv`, `.docx`, `.md`, `.txt`, `.json`, `.html`,
 `.ics` and `.vcf`. It chooses the filename. It never chooses the folder."
 
+**Short location wording, verified 2026-10-01 against released 0.3.2 (`94f85315`):** "Files
+land in Downloads, in the Archie folder. Your agent chooses the filename and tells you where to
+find it." `src-tauri/src/commands/gateway_lifecycle.rs`, `export_dir`, binds the destination to
+`app.path().download_dir().ok().map(|d| d.join("Archie"))`. No Downloads folder means the tool is
+unavailable. This is the folder on the computer running Archie, not a promise of cloud syncing.
+
 **Why it's true:** `crates/archie-runtime/src/export.rs` holds an `ALLOWED` table of exactly those
 eleven extensions, and the module comment states the design rule: the tool takes "the name, never
 the location", files land in one folder the user was told about, and a copy is kept in their
@@ -3980,6 +3986,13 @@ calendar, files.
   and archie/pricing/ said the default form until 2026-09-27, found by the claims audit that day.
 - ❌ Never imply the stores that are not accounts are kept per person: the same screen says every
   guest can read them.
+
+**Short shared-knowledge wording, verified 2026-10-01 against released 0.3.2 (`94f85315`):**
+"A shared agent's guests can read its documents, lists and reminders. Keep confidential context
+off shared agents." `src/app/access.tsx` names those stores and the connected Google Docs and
+Sheets beside them, and says there is no per-person setting on any of them. This is distinct
+from marking a mailbox as one person's; never imply that marking the mailbox also restricts
+the agent's knowledge.
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

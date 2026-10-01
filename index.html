@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Otian AI: Don&rsquo;t Rent Your AI Agent. Own It.</title>
-  <meta name="description" content="Archie runs an AI agent on your own computer for your email, bills and paperwork. It drafts replies for you to send, reminds you before bills are due, and answers on your phone." />
+  <title>Archie: Email, Calendar and Bills on Your Computer | Otian AI</title>
+  <meta name="description" content="Archie runs your AI agent on your computer. It drafts replies, proposes calendar changes and reminds you before bills are due. Your chosen AI company does the thinking." />
   <meta property="og:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
   <meta property="og:image:alt" content="Otian AI logo" />
   <meta name="twitter:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
@@ -17,8 +17,8 @@
   <meta name="twitter:card" content="summary" />
   <meta name="application-name" content="Otian AI" />
   <meta property="og:site_name" content="Otian AI" />
-  <meta property="og:title" content="Otian AI: Don&rsquo;t Rent Your AI Agent. Own It." />
-  <meta property="og:description" content="Archie runs an AI agent on your own computer for your email, bills and paperwork. It drafts replies for you to send, reminds you before bills are due, and answers on your phone." />
+  <meta property="og:title" content="Archie: Email, Calendar and Bills on Your Computer | Otian AI" />
+  <meta property="og:description" content="Archie runs your AI agent on your computer. It drafts replies, proposes calendar changes and reminds you before bills are due. Your chosen AI company does the thinking." />
   <meta property="og:url" content="https://otianai.com/" />
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://otianai.com/" />
@@ -76,7 +76,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261001-3" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261001-4" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -300,27 +300,14 @@
 
         <div class="day-caps">
 
-          <!-- Act 0, 7:00 am. Rewritten 2026-09-27 for the one reader Jett named that day, one
-               person buried in their own life admin: the lede leads with what they get (their
-               email, bills and paperwork, handled) before what it is, and answers the first
-               objection (will it send something without me) before the button. The price is its
-               own line so neither runs past three lines on a phone. The tagline h1 stays, by
-               Jett's call the same day. -->
+          <!-- Act 0, 7:00 am. Lead with the reader's jobs, then the price and approval gate. -->
           <article class="day-cap is-on" data-act="0">
             <span class="section-label">Otian AI &middot; Archie</span>
-            <!-- "Own it." is the one link in the h1 (2026-10-01): the tagline said "own" and nothing
-             in the hero said what it covers, which is what Jack was asked. It goes to the section
-             that already says it, in TRUST.md's approved terms, rather than to a new page or more
-             words on a screen trimmed for being too full. -->
-            <h1>Don&rsquo;t rent your agent. <a class="hm-own" href="compare/cloud-agents/#owning-heading"><em>Own it.</em></a><span class="tm" aria-hidden="true">&trade;</span> Yours to shape &amp; yours to keep.</h1>
-            <p class="day-beat is-on" data-act="0" data-at="0"><strong>Your email, bills and paperwork, handled by an AI agent on your own computer.</strong></p>
-            <!-- One paragraph since 2026-09-29 (Jett: "too much on the screen"), in the positioning's
-                 order: the line above says what it does and where, this one what it costs and what
-                 it will not do without you, and the button is what to do next. "It drafts replies,
-                 reminds you before bills are due, and walks you through forms" went, because the line
-                 above already names email, bills and paperwork. "Pay-as-you-go" stays: it is the
-                 answer to what "your own AI account" means, which Jack had to ask. -->
-            <p class="day-beat is-on" data-act="0" data-at="0.34">Free on your own pay-as-you-go AI account, from a company like Claude, at 20 jobs a day. No email goes out until you send it or set a time.</p>
+            <!-- The outcome leads; ownership is explained beside the price below. -->
+            <h1>Your email, calendar and bills, <em>handled.</em></h1>
+            <p class="day-beat is-on" data-act="0" data-at="0">Archie runs your AI agent on your computer. It drafts replies, proposes calendar changes and reminds you before bills are due.</p>
+            <p class="day-beat is-on" data-act="0" data-at="0">Free for 20 jobs a day with your own pay-as-you-go AI account. <a href="archie/pricing/">Plans from $30 a month</a>. Your AI company does the thinking and bills separately.</p>
+            <p class="day-beat is-on" data-act="0" data-at="0">Replies and calendar changes wait for your approval.</p>
             <div class="hm-actions">
               <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
               <p class="hm-hero-status">Archie is in testing. <a href="archie/personal/#status">Where it stands&nbsp;&rarr;</a></p>
@@ -1662,24 +1649,22 @@
     <section class="section day-price" aria-labelledby="price-heading">
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Pricing</span>
-        <!-- The heading answers "why pay" as well as "how much" (2026-10-01): what the $30 buys is
-             the first thing a reader asks of a free tier, and it was only on the card. The AI
-             company's bill stays in the heading, because the lede below exists to define it. -->
-        <h2 id="price-heading" class="fade-up">Free for 20 jobs a day, or $30 a month for up to 10 agents, plus your AI company&rsquo;s own bill.</h2>
-        <p class="hm-lede fade-up">Your agent does its thinking with an AI company you pick, like the makers of Claude, ChatGPT or Gemini. You open a pay-as-you-go account with them, and they bill you. We add nothing to that bill.</p>
+        <h2 id="price-heading" class="fade-up">Free for 20 jobs a day, with paid plans from $30 a month.</h2>
+        <p class="hm-lede fade-up">A paid plan adds more agents, removes the daily job count and includes Archie Mobile. Your chosen AI company does the thinking and <a href="archie/pricing/#ai-cost">bills you separately</a>.</p>
         <div class="hm-plans fade-up">
           <article class="hm-plan">
             <span class="hm-plan-label">Free</span>
             <div class="hm-plan-price hm-plan-price--words">Free<span>one agent</span></div>
             <p class="hm-plan-second">+ your AI company&rsquo;s bill</p>
-            <p>20 jobs a day for as long as you like. A job is one piece of work: a reply to you, a routine running, or an email it reacts to. Or 14 days on our AI credits, with no AI account and no card.</p>
+            <p>20 jobs a day on your own AI account. A job is a reply to you, a routine running, or an email it reacts to. Archie Mobile needs a plan or live trial.</p>
+            <p>Or try 14 days on our AI credits, with no AI account and no card.</p>
           </article>
           <article class="hm-plan hm-plan--lead">
             <span class="plan-flag">Our pick</span>
             <span class="hm-plan-label">Archie</span>
             <div class="hm-plan-price">$30<span>a month</span></div>
             <p class="hm-plan-second">+ $1 to $5 a month to your AI company<small>a handful of tasks a day</small></p>
-            <p>Up to 10 agents, and every one of the 168 add-ons. $299 for the year.</p>
+            <p>Up to 10 agents, no daily job limit, and Archie Mobile. All 168 add-ons included. $299 for the year.</p>
           </article>
           <article class="hm-plan">
             <span class="hm-plan-label">Archie for Business</span>
@@ -1688,12 +1673,7 @@
             <p>Up to 50 agents, and any of them can answer your whole team. $999 for the year.</p>
           </article>
         </div>
-        <!-- Our own meter, then the plan where the second bill is ours. The first sentence is a
-             contrast a reader is actually shopping on: platforms in this category commonly bill
-             a subscription and then meter the work on top of it, so "the number above is the
-             number" is worth saying out loud, and the measured range is one link away rather
-             than an estimate we invented. -->
-        <p class="hm-plan-note fade-up">On a plan, nothing is counted per job, and ten agents cost the same as one. <a class="marketplace-text-link" href="archie/pricing/#ai-cost">See what the AI costs, measured&nbsp;&rarr;</a></p>
+        <p class="hm-plan-note fade-up">Your agent&rsquo;s setup and memory stay on your computer. <a class="marketplace-text-link" href="archie/pricing/#why-paid">See what stays yours when a plan ends&nbsp;&rarr;</a></p>
         <p class="hm-plan-note hm-plan-note--alt fade-up">Don&rsquo;t want a second account? <a href="archie/pricing/#ai-included">$59 a month and we buy the AI for you</a>: $25 of usage each month, and your agent waits for next month if that runs out. Email and text replies need an AI account of your own.</p>
         <p class="calm-note calm-note--center fade-up"><a href="archie/pricing/">See full pricing and how the trials work &rarr;</a></p>
       </div>
@@ -1820,10 +1800,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261001-3"></script>
-  <script src="js/ember.js?v=20261001-3" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261001-3"></script>
-  <script src="js/home.js?v=20261001-3" defer></script>
+  <script src="js/nav.js?v=20261001-4"></script>
+  <script src="js/ember.js?v=20261001-4" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261001-4"></script>
+  <script src="js/home.js?v=20261001-4" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

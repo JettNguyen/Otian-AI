@@ -38,7 +38,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261001-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261001-4" />
   <style>
     /* Page-scoped: the running-cost grid is three items, not the two the shared
        .price-grid assumes, and the honesty notes need room under it. */
@@ -278,7 +278,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Plans</span>
           <h2 id="plans-heading" class="fade-up delay-1">Pick an edition, then pick who pays for the AI.</h2>
-          <p>Personal agents answer one person, and Personal is free on an AI account of your own at 20 jobs a day. Business agents can answer a team, and Business is a plan from the start. Plans are on sale now, while Archie is in testing.</p>
+          <p>Personal agents answer one person, and Personal is free on an AI account of your own at 20 jobs a day. Business agents can answer a team, and Business is a plan from the start.</p>
         </div>
 
         <div class="mt-48 plan-grid fade-up delay-1">
@@ -372,92 +372,58 @@
       </div>
     </section>
 
-    <!-- ==============================
-    Why the plan costs anything
-
-    Jett, 2026-09-22, after two earlier attempts: "i feel like the visuals and explanation still
-    doesn't justify the pricing." Both earlier figures argued about OUR COSTS, which is the wrong
-    argument: the marginal cost of a tenth agent is nothing and a reader can work that out, so a
-    page defending the price by listing costs is defending it on the one ground it loses.
-
-    The argument that holds is the CHOICE OF BUSINESS MODEL, not the size of the bill. There are
-    about five ways software gets paid for, four of them send a bill the reader cannot see, and
-    picking the visible one is the only claim here a competitor cannot print unchanged. So the
-    figure is the five ways with ours lit, and it replaced the flat-bar chart that stood here
-    (three identical $30 bars) because that one answered "does the price go up" and never
-    answered "why is there a price".
-
-    THE SAME SPINE RUNS ON compare/building-it-yourself/#why-paid with the four products placed on
-    the rows. Same object, two cuts: here the reader is holding our price list, there they are
-    holding three free agents. The "take your data" row is nobody's on either page and stays, so
-    the menu is the whole menu rather than the four options that flatter us.
-
-    WHAT IS NOT CLAIMED. Not that the other models are dishonest: each row is a real way to run a
-    business and the caption calls them bills, not tricks. And nothing here says we never earn
-    from usage, because the $59 plan does; that plan pauses rather than billing more, which is a
-    difference worth keeping but not one to lean on in a figure.
-    ============================== -->
+    <!-- A reference comparison: the agent's belongings beside the paid app's capacity. -->
     <section class="section section-alt" id="why-paid" aria-labelledby="why-paid-heading">
       <div class="container">
         <div class="section-header">
-          <span class="section-label fade-up">Why the plan costs anything</span>
-          <h2 id="why-paid-heading" class="fade-up delay-1">We charge a flat price for the app, and your AI bill is yours at cost.</h2>
+          <span class="section-label fade-up">Your agent and your subscription</span>
+          <h2 id="why-paid-heading" class="fade-up delay-1">A plan buys more jobs, more agents and Archie Mobile.</h2>
         </div>
 
-        <figure class="explain-figure mt-40 fade-up delay-1" id="fiveWays">
-          <svg class="explain-svg--desktop" viewBox="0 0 600 260" role="img" aria-labelledby="fiveWays-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
-            <title id="fiveWays-t">Five ways an app gets paid for. Charge per use, and the bill moves with how much it helps. Rent you a computer, and your work runs on theirs. Take your data, and the bill is your data. Let someone else pay, and it lasts as long as they keep paying. Or charge for the app, which is ours: $30 a month, or free at 20 jobs a day.</title>
+        <figure class="explain-figure mt-40 fade-up delay-1" id="agentAndPlan">
+          <svg class="explain-svg--desktop" viewBox="0 0 600 230" role="img" aria-labelledby="agentAndPlan-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
+            <title id="agentAndPlan-t">Your personal agent's setup, memory and files live on your computer. A paid Archie plan adds up to ten agents, no daily job limit and Archie Mobile for $30 a month. Your chosen AI company does the thinking.</title>
             <style>
-              .ways-row{fill:currentColor;opacity:.035}
-              .ways-row--ours{fill:var(--accent);opacity:.1}
-              .ways-way{fill:currentColor;opacity:.72;font-size:13px;font-weight:650}
-              .ways-way--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
-              .ways-cost{fill:currentColor;opacity:.55;font-size:12px}
-              .ways-cost--ours{opacity:.85}
-              .ways-who{fill:currentColor;opacity:.62;font-size:12.5px;font-weight:650;text-anchor:end}
-              .ways-who--ours{fill:var(--accent-ink);opacity:1;font-weight:700}
-              .explain-svg--mobile .ways-way{font-size:11px}
-              .explain-svg--mobile .ways-cost{font-size:10.5px}
-              .explain-svg--mobile .ways-who{font-size:11px}
+              .pay-pane{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
+              .pay-pane--plan{fill:var(--accent);fill-opacity:.06;stroke:var(--accent)}
+              .pay-head{fill:currentColor;font-size:18px;font-weight:700}
+              .pay-head--plan{fill:var(--accent-ink)}
+              .pay-item{fill:currentColor;font-size:14px;opacity:.85}
+              .pay-note{fill:currentColor;font-size:12px;opacity:.65}
             </style>
-            <rect class="ways-row" x="6" y="14" width="588" height="40" rx="10"/>
-            <text class="ways-way" x="24" y="39">Charge per use</text>
-            <text class="ways-cost" x="190" y="39">the bill moves with how much it helps</text>
-            <rect class="ways-row" x="6" y="62" width="588" height="40" rx="10"/>
-            <text class="ways-way" x="24" y="87">Rent you a computer</text>
-            <text class="ways-cost" x="190" y="87">your work runs on theirs, not yours</text>
-            <rect class="ways-row" x="6" y="110" width="588" height="40" rx="10"/>
-            <text class="ways-way" x="24" y="135">Take your data</text>
-            <text class="ways-cost" x="190" y="135">the bill is your data</text>
-            <rect class="ways-row" x="6" y="158" width="588" height="40" rx="10"/>
-            <text class="ways-way" x="24" y="183">Someone else pays</text>
-            <text class="ways-cost" x="190" y="183">lasts as long as they keep paying</text>
-            <rect class="ways-row ways-row--ours" x="6" y="206" width="588" height="40" rx="10"/>
-            <text class="ways-way ways-way--ours" x="24" y="231">Charge for the app</text>
-            <text class="ways-cost ways-cost--ours" x="190" y="231">$30 a month, or free at 20 jobs a day</text>
+            <rect class="pay-pane" x="12" y="12" width="276" height="202" rx="14"/>
+            <text class="pay-head" x="36" y="47">What stays yours</text>
+            <text class="pay-item" x="36" y="85">Your agent's setup</text>
+            <text class="pay-item" x="36" y="115">Its memory</text>
+            <text class="pay-item" x="36" y="145">Your files</text>
+            <text class="pay-note" x="36" y="187">On your computer</text>
+            <rect class="pay-pane pay-pane--plan" x="312" y="12" width="276" height="202" rx="14"/>
+            <text class="pay-head pay-head--plan" x="336" y="47">What paid Archie adds</text>
+            <text class="pay-item" x="336" y="85">Up to 10 agents</text>
+            <text class="pay-item" x="336" y="115">No daily job limit</text>
+            <text class="pay-item" x="336" y="145">Archie Mobile</text>
+            <text class="pay-note" x="336" y="187">Personal: $30 a month</text>
           </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 316" role="img" aria-labelledby="fiveWays-tm" xmlns="http://www.w3.org/2000/svg">
-            <title id="fiveWays-tm">Five ways an app gets paid for. Charge per use, and the bill moves with how much it helps. Rent you a computer, and your work runs on theirs. Take your data, and the bill is your data. Let someone else pay, and it lasts as long as they keep paying. Or charge for the app, which is ours: $30 a month, or free at 20 jobs a day.</title>
-            <rect class="ways-row" x="4" y="12" width="332" height="52" rx="10"/>
-            <text class="ways-way" x="20" y="34">Charge per use</text>
-            <text class="ways-cost" x="20" y="53">the bill moves with how much it helps</text>
-            <rect class="ways-row" x="4" y="72" width="332" height="52" rx="10"/>
-            <text class="ways-way" x="20" y="94">Rent you a computer</text>
-            <text class="ways-cost" x="20" y="113">your work runs on theirs, not yours</text>
-            <rect class="ways-row" x="4" y="132" width="332" height="52" rx="10"/>
-            <text class="ways-way" x="20" y="154">Take your data</text>
-            <text class="ways-cost" x="20" y="173">the bill is your data</text>
-            <rect class="ways-row" x="4" y="192" width="332" height="52" rx="10"/>
-            <text class="ways-way" x="20" y="214">Someone else pays</text>
-            <text class="ways-cost" x="20" y="233">lasts as long as they keep paying</text>
-            <rect class="ways-row ways-row--ours" x="4" y="252" width="332" height="52" rx="10"/>
-            <text class="ways-way ways-way--ours" x="20" y="274">Charge for the app</text>
-            <text class="ways-cost ways-cost--ours" x="20" y="293">$30 a month, or free at 20 jobs a day</text>
+          <svg class="explain-svg--mobile" viewBox="0 0 340 414" role="img" aria-labelledby="agentAndPlan-tm" xmlns="http://www.w3.org/2000/svg">
+            <title id="agentAndPlan-tm">Your personal agent's setup, memory and files live on your computer. A paid Archie plan adds up to ten agents, no daily job limit and Archie Mobile for $30 a month. Your chosen AI company does the thinking.</title>
+            <rect class="pay-pane" x="8" y="8" width="324" height="190" rx="14"/>
+            <text class="pay-head" x="32" y="42">What stays yours</text>
+            <text class="pay-item" x="32" y="77">Your agent's setup</text>
+            <text class="pay-item" x="32" y="105">Its memory</text>
+            <text class="pay-item" x="32" y="133">Your files</text>
+            <text class="pay-note" x="32" y="173">On your computer</text>
+            <rect class="pay-pane pay-pane--plan" x="8" y="214" width="324" height="190" rx="14"/>
+            <text class="pay-head pay-head--plan" x="32" y="248">What paid Archie adds</text>
+            <text class="pay-item" x="32" y="283">Up to 10 agents</text>
+            <text class="pay-item" x="32" y="311">No daily job limit</text>
+            <text class="pay-item" x="32" y="339">Archie Mobile</text>
+            <text class="pay-note" x="32" y="379">Personal: $30 a month</text>
           </svg>
-          <figcaption>Every app gets paid somehow: per use, by renting you a computer, with your data, by a sponsor, or with a flat price for the app, which is how Archie is paid for.</figcaption>
+          <figcaption>Your agent's requests go to your chosen AI company. On our free credits or included AI, they pass through our server. On your own AI account, that company bills you separately.</figcaption>
         </figure>
 
-        <p class="price-note">Lifting the free limit costs us nothing, and ten agents cost the same as one. <a href="../../compare/building-it-yourself/#why-paid">See who pays, each way&nbsp;&rarr;</a></p>
+        <p class="price-note">After a Personal plan ends, existing agents keep working at 20 jobs a day with your own AI account. Business needs a plan; Archie Mobile needs a plan or live trial.</p>
+        <p class="price-note">Nothing on your computer is deleted. Write your backup before you stop; it is an ordinary file, so keep it somewhere you would keep a tax return. <a href="../../trust/if-you-want-to-stop/">Check how a plan ends&nbsp;&rarr;</a></p>
       </div>
     </section>
 
@@ -466,7 +432,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Running Archie yourself</span>
           <h2 id="run-heading" class="fade-up delay-1">Your plan, plus your AI usage.</h2>
-          <p>On a plan with an AI account of your own, you pay Otian for the app and that company for the AI. Add-ons are included. Connected services may charge their own fees.</p>
+          <p>Connected services may charge their own fees.</p>
         </div>
 
         <div class="mt-48 price-grid price-grid--one fade-up delay-1">
@@ -926,8 +892,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261001-3"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261001-3"></script>
-  <script src="../../js/demo-player.js?v=20261001-3"></script>
+  <script src="../../js/nav.js?v=20261001-4"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261001-4"></script>
+  <script src="../../js/demo-player.js?v=20261001-4"></script>
 </body>
 </html>

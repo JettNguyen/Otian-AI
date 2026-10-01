@@ -17989,7 +17989,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      overflows out of view"). With no floor the scene gives the room up instead, which is the right
      way round: a scene drawn small still says what it is, and a sentence with its last line cut
      off says nothing. The fit's own floor came down with it (js/home.js, the narrow clamp). */
-  .day-stage { --clock-row: 38px; grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
+  .day-stage { --clock-row: 38px; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; gap: 0; padding: calc(var(--nav-height) + 12px) 0 0; align-items: stretch; min-height: 0; }
   /* The clock badge is a row of its own here rather than a float: over the scene it sat on the
      phone's top edge. The row stays while the badge is dark (the two floors), so the scene is the
      same size in every act; the scene slides up over half of it then, so it is centered in the

@@ -122,6 +122,9 @@ function page(s, all, levels, C, preview) {
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${attr(desc)}" />`)
     .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="https://otianai.com/assets/learn/${s.slug}.jpg" />`)
+    .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${attr(plain(s.title))}" />`)
+    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="https://otianai.com/assets/learn/${s.slug}.jpg" />`)
+    .replace(/<meta name="twitter:image:alt" content="[^"]*" \/>/, `<meta name="twitter:image:alt" content="${attr(plain(s.title))}" />`)
     .replace(/<meta name="twitter:card" content="[^"]*" \/>/, `<meta name="twitter:card" content="summary_large_image" />`);
   if (preview) head = head.replace("<head>", '<head>\n  <meta name="robots" content="noindex" />');
 

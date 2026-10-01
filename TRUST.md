@@ -4827,6 +4827,17 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 
 | Claim as printed | About | Source | Checked |
 |---|---|---|---|
+| Lindy covers inbox management and workflows; Plus is $29.99 per user a month. Its pricing page says actions with outside impact, including sending email, wait for approval | Lindy | `https://www.lindy.ai/pricing` | 2026-10-01 |
+| alfred_ covers email, calendars and tasks at $29.99 a month, on a single plan | alfred_ | `https://get-alfred.ai/docs/account/plans-pricing` | 2026-10-01 |
+| alfred_ stores email content, memory entries and conversation history on US infrastructure, using Supabase for storage | alfred_ | `https://get-alfred.ai/docs/account/privacy-security` | 2026-10-01 |
+| alfred_ says every email draft waits for the user to review and tap Send | alfred_ | `https://get-alfred.ai/docs/resources/faq` | 2026-10-01 |
+| Martin works through text, calls, email and Slack | Martin | `https://www.trymartin.com/` | 2026-10-01 |
+| Claude Pro is $20 billed monthly | Anthropic | `https://claude.com/pricing` | 2026-10-01 |
+| Google AI Pro includes Gemini and costs $19.99 a month in the US | Google | `https://one.google.com/about/google-ai-plans/?hl=en-US` | 2026-10-01 |
+| ChatGPT offers chat, research and agent features across its subscription plans; inclusion varies by plan | OpenAI | `https://chatgpt.com/pricing/` | 2026-10-01 |
+| Reclaim focuses on calendar scheduling, with tasks, habits and meetings | Reclaim | `https://reclaim.ai/` | 2026-10-01 |
+| Motion also covers projects, documents, notes and workflows, beyond calendars | Motion | `https://www.usemotion.com/` | 2026-10-01 |
+| OpenClaw runs on the user's computer, supports local models, has no software subscription, publishes its source and offers desktop apps that install its gateway, chat and setup. Calling it exclusively for technical users would omit its desktop setup | OpenClaw | `https://openclaw.ai/` | 2026-10-01 |
 | Claude Pro is $20 a month, or $17 on the annual plan | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
 | Claude Max starts at $100 a month | Anthropic | `https://claude.com/pricing` | 2026-08-19 |
 | ChatGPT Plus is $20 a month | OpenAI | `https://chatgpt.com/pricing` | 2026-08-19 |
@@ -5449,6 +5460,13 @@ own conclusion from their own words. The banned form is any sentence asserting w
 paid plan executes.
 
 ---
+
+**The hub leads with a short ownership overview, 2026-10-01.** At the user's request, the opening
+now says "Own your agent without writing code", followed by four groups of alternatives.
+The existing eleven-agent binary, its full claim, scoped approval explanation and default
+provider-egress clause remain together in the expandable detailed comparison. Its count and
+egress clause still supply `check-claim-drift.py`; the ownership overview does not claim that
+Archie's software license becomes perpetual when a subscription ends.
 
 **The hub was cut to the binary, 2026-09-18.** Jett's direction: cut every sentence another
 of the nine could say unchanged, put the one line all nine fail where the reader lands first,

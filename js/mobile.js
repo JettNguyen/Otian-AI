@@ -176,7 +176,14 @@
   }
 
   var wasNarrow = null;
+  // The phone's progress follows input; it does not need a perpetual render loop.
+  var raf = 0;
+  function wake() {
+    if (!raf && !document.hidden) raf = requestAnimationFrame(frame);
+  }
   function frame() {
+    raf = 0;
+    if (document.hidden) return;
     var r = story.getBoundingClientRect();
     var vh = window.innerHeight;
     var total = story.offsetHeight - vh;
@@ -218,7 +225,14 @@
       msg.classList.remove('is-sealed', 'is-under');
       [nodePc, nodeBox, nodePh].forEach(function (n) { if (n) n.classList.remove('is-lit'); });
     }
-    requestAnimationFrame(frame);
   }
-  requestAnimationFrame(frame);
+  window.addEventListener('scroll', wake, { passive: true });
+  window.addEventListener('resize', wake, { passive: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { cancelAnimationFrame(raf); raf = 0; }
+    else wake();
+  });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(wake);
+  if (window.ResizeObserver) new ResizeObserver(wake).observe(wrap);
+  wake();
 })();

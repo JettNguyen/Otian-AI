@@ -16718,29 +16718,17 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 }
 @keyframes day-twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .42; } }
 
-/* ---- the two screens dim with the room ---- */
-/* At two in the morning the window and the phone are the only lit things in the scene, and at
-   full brightness they read as two daylight objects laid on a dark ground rather than as screens
-   in a dark room. The phone going light with the page made it plainer, because a cream rectangle
-   is the brightest thing on the stage at the hour the act is about. Both turn down on --night,
-   continuously, so there is no frame where they change; brightness() and nothing else, because a
-   screen at night is the same screen turned down, not a different colour.
-   IT GOES ON THE TWO DISPLAY SURFACES, not on .day-win and .day-phone, because a filter flattens
-   transform-style: preserve-3d and those two are the 3D layers. The phone's rim really does sit at
-   a depth (.dp-edge) and is a sibling of the screen, so it keeps its metal, which is right anyway:
-   a dark room dims what is lit, not what is reflecting. Scoped to the stage because
-   archie/mobile/ draws a .dp-ph too, and that one has no night to dim with.
-
-   IT ONLY EXISTS WHILE THERE IS NIGHT TO APPLY, and that is not a micro-optimisation. A filter of
-   any value, brightness(1) included, makes an element a filter root: it is drawn into a buffer of
-   its own and the buffer is then scaled by the 3D chain, instead of the contents being drawn at
-   the size they are finally shown. Everything on both screens was going through that in all seven
-   acts, and the first thing a resampled buffer shows is the finest mark on it, which is the phone's
-   wordmark, a serif set at 730 units and shown about eleven pixels tall (Jett, 2026-09-19:
-   "sometimes the archie logo on the phone gets distorted", and sometimes is what a compositor
-   picking a raster scale looks like). has-night comes on with the first frame that has any night in
-   it, so six of the seven acts now have no filter at all. */
-.day-stage.has-night .da-app, .day-stage.has-night .dp-ph { filter: brightness(calc(1 - var(--night, 0) * .26)); }
+/* Screen shading preserves the 3D rims without filtering large animated buffers. */
+.day-stage .da-app::after, .day-stage .dp-ph::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #000;
+  opacity: calc(var(--night, 0) * .26);
+  pointer-events: none;
+  z-index: 20;
+}
 
 /* ---- and the screens light the air around them ---- */
 /* Jett, 2026-09-18: the displays should look like they are lighting up the air around the screen.
@@ -20309,6 +20297,38 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .wb-mini-art { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 250px; padding: 18px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg-card); }
 .wb-mini figcaption, .wb-stopfig figcaption { margin-top: 12px; text-align: center; font-size: var(--fs-sm); line-height: 1.5; color: var(--text-muted); }
 .wb-foldapp--flat { width: 100%; max-width: 290px; zoom: 1; box-shadow: var(--shadow-sm); }
+
+/* Offscreen sections and hidden tabs retain their animation position without rendering laps. */
+.motion-paused,
+.motion-paused *,
+.motion-paused *::before,
+.motion-paused *::after,
+.motion-paused::before,
+.motion-paused::after { animation-play-state: paused !important; }
+
+/* When scrolling cannot keep up, keep the screens and controls with lighter surfaces. */
+.low-power .nav {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: var(--nav-glass-solid);
+}
+.low-power .day-scene-wrap { perspective: none; }
+.low-power .day-scene,
+.low-power .day-win,
+.low-power .day-phone { transform-style: flat; }
+.low-power .day-stage .dp-edge { display: none; }
+.low-power .day-stage *,
+.low-power .day-stage *::before,
+.low-power .day-stage *::after,
+.low-power .mb-stage *,
+.low-power .mb-stage *::before,
+.low-power .mb-stage *::after,
+.low-power .hm-stage *,
+.low-power .hm-stage *::before,
+.low-power .hm-stage *::after {
+  box-shadow: none !important;
+  filter: none !important;
+}
 .wb-sw.is-on { background: var(--accent); }
 .wb-sw.is-on i { left: 15px; }
 .wb-fpair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }

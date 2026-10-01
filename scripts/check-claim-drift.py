@@ -202,7 +202,7 @@ for name, role in TITLES.items():
 # ---------------------------------------------------------------------------
 # 5. The binary: how many agents, whose computer, and whether the asking has an off switch.
 #
-# `compare/` is the source. Its h1 is the one sentence none of the other nine can print, and
+# `compare/` is the source. Its detailed comparison carries the sentence none of the other agents can print, and
 # every placement behind it is read off that company's own page and dated on `compare/` itself.
 # On 2026-09-21 the claim moved onto three selling pages, which makes four copies of one fact:
 # the exact shape the header of this file describes, and the reason the first two incidents
@@ -245,7 +245,7 @@ binary = re.search(
 )
 require(
     binary is not None,
-    "compare/ no longer opens on the binary in any form this check reads "
+    "compare/ no longer states the binary in any form this check reads "
     "('Of <N> agents, only Archie works on your own computer...', '<N> agents. Only Archie works "
     "on your own computer...' or '<N> agents. Archie is the only one that works on your own "
     "computer...'). "

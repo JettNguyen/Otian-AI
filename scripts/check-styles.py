@@ -137,7 +137,8 @@ def check(path):
                 yield line_of(m.start()), prop, val, "not a rung of the type ladder in :root"
 
         elif prop == "box-shadow":
-            if any(rx.match(val) for rx, _ in SHADOW_OK) or val in SHADOW_EXCEPTIONS:
+            shadow = re.sub(r'\s*!important\s*$', '', val)
+            if any(rx.match(shadow) for rx, _ in SHADOW_OK) or shadow in SHADOW_EXCEPTIONS:
                 continue
             yield line_of(m.start()), prop, val, "an elevation that is not a --shadow-* token"
 

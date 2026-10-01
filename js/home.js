@@ -11,11 +11,20 @@
 
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Rewriting inherited scene variables dirties the whole mockup, even at rest.
+  var renderedStyles = new WeakMap();
+  function styleValue(el, name, value) {
+    value = String(value);
+    var values = renderedStyles.get(el);
+    if (!values) { values = {}; renderedStyles.set(el, values); }
+    if (values[name] !== value) { el.style.setProperty(name, value); values[name] = value; }
+  }
+
   /* Day-spine draw: the line's height follows scroll through the section,
      kept slightly ahead of the reader so the tip never lags down-screen. */
   var spine = document.querySelector('.hm-spine');
   if (spine && !still) {
-    spine.style.setProperty('--hm-draw', 0);
+    styleValue(spine, '--hm-draw', 0);
     /* Scroll sets a target; the line eases toward it each frame instead of
        jumping. A slow scroll keeps the tip pinned about two thirds down the
        viewport; a fast flick leaves the line behind for a beat and you watch
@@ -29,7 +38,7 @@
       spRaf = null;
       spCur += (spTarget - spCur) * 0.14;
       if (Math.abs(spTarget - spCur) < 0.002) spCur = spTarget;
-      spine.style.setProperty('--hm-draw', spCur);
+      styleValue(spine, '--hm-draw', spCur);
       if (spCur !== spTarget) spRaf = requestAnimationFrame(settle);
     };
     var measure = function () {
@@ -469,9 +478,10 @@
       window.addEventListener('pointermove', function (e) {
         tilt.tx = (e.clientX / window.innerWidth - 0.5) * 6;
         tilt.ty = (0.5 - e.clientY / window.innerHeight) * 4;
+        wake();
       }, { passive: true });
     }
-    /* SC: the design box fitted to the stage, read every frame so a phone's browser bar coming
+    /* SC: the design box fitted to the stage, updated on input so a phone's browser bar coming
        and going, or a window being resized, never leaves an object cut off. Wide, the box may
        spill 100px past its column, which the caption column's own margin absorbs; narrow, it takes
        the stage's full width and the row the captions leave it.
@@ -526,7 +536,7 @@
       var key = Math.round(w) + 'x' + Math.round(h);
       if (key === measuredAt || !heroBeats.length) return;
       measuredAt = key;
-      heroBeats.forEach(function (el) { el.style.setProperty('--beat-h', el.scrollHeight + 'px'); });
+      heroBeats.forEach(function (el) { styleValue(el, '--beat-h', el.scrollHeight + 'px'); });
     }
 
     var HINT_BAND = 80;
@@ -640,7 +650,7 @@
       else SC += (scTarget - SC) * EASE_SC;
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
          the same pool whatever the fit came out at. */
-      stage.style.setProperty('--sc', SC.toFixed(3));
+      styleValue(stage, '--sc', SC.toFixed(3));
     }
 
     /* THE SCENE HAS TO BE ABLE TO STOP, OR IT IS NEVER DRAWN SHARP. A 3D layer is rasterized once
@@ -696,7 +706,7 @@
       var v = SC * s * (PERSP / (PERSP - z));
       return Math.min(2, Math.max(1, Math.ceil(v * 10) / 10));
     }
-    function zoomTo(el, key, v) { if (lastZ[key] !== v) { el.style.setProperty('--dz', v.toFixed(3)); lastZ[key] = v; } }
+    function zoomTo(el, key, v) { if (lastZ[key] !== v) { styleValue(el, '--dz', v.toFixed(3)); lastZ[key] = v; } }
     function applyPose(p) {
       put(scene, 'scene', 'scale(' + SC.toFixed(4) + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')');
       var wz = dz(p.cam.s * p.win.s, p.win.z);
@@ -732,13 +742,13 @@
          stops. */
       var yaw = p.cam.ry + tilt.x + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
       var pitch = p.cam.rx + tilt.y, sp = Math.sin(pitch * Math.PI / 180);
-      phone.style.setProperty('--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
-      phone.style.setProperty('--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
-      phone.style.setProperty('--edge-t', clamp(0.21 + 0.9 * sp, 0.05, 0.45).toFixed(3));
-      phone.style.setProperty('--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
-      phone.style.setProperty('--lit', (-yaw * 0.7).toFixed(1) + 'deg');
-      phone.style.setProperty('--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
-      phone.style.setProperty('--rim-a', clamp(Math.abs(sy) * 0.43, 0, 0.22).toFixed(3));
+      styleValue(phone, '--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
+      styleValue(phone, '--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
+      styleValue(phone, '--edge-t', clamp(0.21 + 0.9 * sp, 0.05, 0.45).toFixed(3));
+      styleValue(phone, '--edge-b', clamp(0.13 - 0.9 * sp, 0.03, 0.4).toFixed(3));
+      styleValue(phone, '--lit', (-yaw * 0.7).toFixed(1) + 'deg');
+      styleValue(phone, '--rim-x', clamp(50 - 100 * sy, 6, 94).toFixed(1) + '%');
+      styleValue(phone, '--rim-a', clamp(Math.abs(sy) * 0.43, 0, 0.22).toFixed(3));
       /* AND THE CHAMFER'S TWO SIDES, NARROW (see --bezel-chamfer in the stylesheet). The chamfer
          is a conic round the bezel, so it is brightest at the corners, and a slice of a phone has
          none: those angles land a quarter of the way down it, in a light band across the part that
@@ -746,8 +756,8 @@
          read where a whole phone's long sides are, 90 and 270 degrees, which is 130 and 310 into a
          gradient that starts at -40 and has been turned by --lit. So the slice is the middle of
          the same phone, and it still turns with it. Wide, the conic is drawn and these go unread. */
-      phone.style.setProperty('--chm-l', String(chamfer(310 + yaw * 0.7)));
-      phone.style.setProperty('--chm-r', String(chamfer(130 + yaw * 0.7)));
+      styleValue(phone, '--chm-l', String(chamfer(310 + yaw * 0.7)));
+      styleValue(phone, '--chm-r', String(chamfer(130 + yaw * 0.7)));
       /* AND WHICH SIDE THE WALL STANDS ON, NARROW. A box shows at most one of its two side faces,
          and a positive yaw turns the phone's front to face right, so its LEFT side is the one
          toward the camera; negative brings the right one out. The stylesheet multiplies --wall by
@@ -756,24 +766,19 @@
          than a switch at zero, so the crossing inside the mail act's settle reads as a phone
          turning through face on rather than as a jump; the pointer tilt is 3 degrees and cannot
          flip an act on its own. */
-      phone.style.setProperty('--wlf', clamp(yaw / 6, 0, 1).toFixed(3));
-      phone.style.setProperty('--wrf', clamp(-yaw / 6, 0, 1).toFixed(3));
-      floorC.style.setProperty('--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
-      floorS.style.setProperty('--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
-      stage.style.setProperty('--night', p.night.toFixed(3));
+      styleValue(phone, '--wlf', clamp(yaw / 6, 0, 1).toFixed(3));
+      styleValue(phone, '--wrf', clamp(-yaw / 6, 0, 1).toFixed(3));
+      styleValue(floorC, '--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
+      styleValue(floorS, '--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
+      styleValue(stage, '--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
-      /* AND A SECOND ONE THAT TURNS ON THE MOMENT THERE IS ANY NIGHT, which is what carries the
-         screens' dimming filter. is-night is a look, at the half-way mark; this is a switch, so the
-         filter exists in the one act that needs it and in no other. See the note on the filter in
-         the stylesheet for why an idle filter is not free. */
-      stage.classList.toggle('has-night', p.night > 0);
       /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The root
          carries the same number and the stylesheet dims the bar with it (Jett, 2026-09-18: in light
          mode a cream bar sat over the dark room for the whole overnight act). A NUMBER AND NOT A
          CLASS, because a class flips at one scroll notch and the snap back on the way out is the
          flash he asked not to have. Written only when it moves, since this runs every frame. */
       var nq = p.night.toFixed(3);
-      if (nq !== lastNight) { document.documentElement.style.setProperty('--day-night', nq); lastNight = nq; }
+      if (nq !== lastNight) { styleValue(document.documentElement, '--day-night', nq); lastNight = nq; }
     }
 
     /* THE CUSTODY LAP IN FLOOR COORDINATES: [time, x, y]. Wide the road runs across the floor at
@@ -830,12 +835,12 @@
       galleryOn = true;
       steps.forEach(function (s, j) {
         var d = j - fs, a = Math.min(1, Math.abs(d)), far = Math.max(0, Math.abs(d) - 1), sg = d < 0 ? -1 : 1;
-        s.style.setProperty('--gx', (d * 174).toFixed(1) + 'px');
-        s.style.setProperty('--gy', (a * 24).toFixed(1) + 'px');
-        s.style.setProperty('--gz', (-a * 90 - far * 40).toFixed(1) + 'px');
-        s.style.setProperty('--gr', (-sg * a * 32).toFixed(1) + 'deg');
-        s.style.setProperty('--gs', (1 - a * 0.14).toFixed(3));
-        s.style.setProperty('--dim', Math.max(0.2, 1 - a * 0.45 - far * 0.15).toFixed(3));
+        styleValue(s, '--gx', (d * 174).toFixed(1) + 'px');
+        styleValue(s, '--gy', (a * 24).toFixed(1) + 'px');
+        styleValue(s, '--gz', (-a * 90 - far * 40).toFixed(1) + 'px');
+        styleValue(s, '--gr', (-sg * a * 32).toFixed(1) + 'deg');
+        styleValue(s, '--gs', (1 - a * 0.14).toFixed(3));
+        styleValue(s, '--dim', Math.max(0.2, 1 - a * 0.45 - far * 0.15).toFixed(3));
       });
     }
 
@@ -860,7 +865,7 @@
         buildOn = false; return;
       }
       buildOn = true;
-      for (j = 0; j < 5; j++) buildEl.style.setProperty('--d' + j, clamp((bp - j) / DRAW, 0, 1).toFixed(3));
+      for (j = 0; j < 5; j++) styleValue(buildEl, '--d' + j, clamp((bp - j) / DRAW, 0, 1).toFixed(3));
     }
 
     /* A growing thread moves like a thread. A bubble that lands is kept out of the layout until
@@ -915,9 +920,20 @@
       window.Ember.set(ember, ACTS[i].state);
     }
 
-    function frame() {
+    // Scroll and input wake the scene; easing gets a short tail, then it rests.
+    var dayRaf = 0, settleUntil = 0;
+    function wake() {
+      if (document.hidden) return;
+      settleUntil = performance.now() + 700;
+      if (!dayRaf) dayRaf = requestAnimationFrame(frame);
+    }
+    function frame(now) {
+      dayRaf = 0;
+      if (document.hidden) return;
       var r = story.getBoundingClientRect();
       var vh = window.innerHeight;
+      // Once Ember has moved to the closing button, the offscreen story needs no work.
+      if (r.bottom < 0 && markName === 'm-cta') return;
       var total = story.offsetHeight - vh;
       var p = still ? 0 : clamp(-r.top / (total || 1), 0, 1);
       var u = p * TOT, i = N - 1;
@@ -1035,7 +1051,7 @@
           s.classList.toggle('is-cur', j === k);
         });
         if (mins) mins.textContent = MINUTES[k];
-        if (pie) pie.style.setProperty('--pie', tp.toFixed(3));
+        if (pie) styleValue(pie, '--pie', tp.toFixed(3));
         gallery(narrow ? fs : -1);
         build(narrow ? -1 : bp);
       } else { gallery(-1); build(-1); }
@@ -1062,9 +1078,13 @@
         }
         var k2 = (first || still) ? 1 : 0.16, wasX = ex;
         ex += (tx - ex) * k2; ey += (ty - ey) * k2; es += (size - es) * k2;
+        if (Math.abs(tx - ex) < 0.1) ex = tx;
+        if (Math.abs(ty - ey) < 0.1) ey = ty;
+        if (Math.abs(size - es) < 0.1) es = size;
         first = false;
-        ember.style.width = es.toFixed(1) + 'px'; ember.style.height = es.toFixed(1) + 'px';
-        ember.style.transform = 'translate(' + ex.toFixed(1) + 'px,' + ey.toFixed(1) + 'px)';
+        styleValue(ember, 'width', es.toFixed(1) + 'px');
+        styleValue(ember, 'height', es.toFixed(1) + 'px');
+        styleValue(ember, 'transform', 'translate(' + ex.toFixed(1) + 'px,' + ey.toFixed(1) + 'px)');
         /* Ember leans into its own walk, not into the page's scroll: on a pinned stage the scroll
            lean read as a wobble on every wheel notch. */
         window.Ember.walk(ember, ex - wasX);
@@ -1116,9 +1136,20 @@
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
       else window.Ember.look(ember, null);
       if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
-      requestAnimationFrame(frame);
+      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || Math.abs(scTarget - SC) > 0.002;
+      if (!still && r.bottom > 0 && (now < settleUntil || easing)) dayRaf = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    window.addEventListener('scroll', wake, { passive: true });
+    window.addEventListener('resize', wake, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { cancelAnimationFrame(dayRaf); dayRaf = 0; }
+      else wake();
+    });
+    if (window.ResizeObserver) {
+      new ResizeObserver(wake).observe(wrap);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(wake);
+    wake();
 
     /* The two real buttons on the phone. The composer's send knob posts the typed yes, and only
        while it is typed; Send on the mail card stays lit and busy until the computer answers, the
@@ -1146,6 +1177,7 @@
          the card the Dashboard was holding is answered, the panel gives way to the app's empty
          line, and the job's row reads Done, which is what 0.3.2 resolves an answered card to. */
       if (key === 2) win.classList.add('is-sent');
+      wake();
     }
     /* `how` is what runs the wait: 'now' settles on the spot, 'clock' waits BUSY_MS because a
        hand pressed it, and 'hold' stays busy until the scroll reaches the card's `done`. */
@@ -1168,6 +1200,7 @@
         var scr = kind === 'confirm' ? scr1 : btn.closest('.dp-scr');
         if (kind === 'confirm' && !(ph && ph.classList.contains('is-typed'))) return;
         press(scr, kind === 'confirm' ? 1 : 2, 'clock');
+        wake();
       });
     });
     /* The own-key / starter-credits control on the custody act. */
@@ -1177,6 +1210,7 @@
         $$('.day-seg button[data-mode]').forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
         floorC.setAttribute('data-mode', mode);
         caps[3].classList.toggle('mode-credits', mode === 'credits');
+        wake();
       });
     });
   })();

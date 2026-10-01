@@ -248,9 +248,28 @@
   var scrollVel = 0;
   var lastScrollY = 0;
   var raf = 0;
+  var wakeTimer = 0, listening = false;
   var last = 0;
   var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var STATE_CLASS = { idle: "", working: "st-working", done: "st-done", oops: "st-oops", sleep: "st-sleep" };
+  var viewObserver = window.IntersectionObserver ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var rig = rigOf(entry.target);
+      if (!rig) return;
+      rig.inView = entry.isIntersecting;
+      rig.host.classList.toggle('motion-paused', !rig.inView);
+      rig.rectAt = -1e9;
+      if (!rig.inView) rig.visible = false;
+    });
+    start();
+  }) : null;
+
+  var renderedStyles = new WeakMap();
+  function writeStyle(el, name, value) {
+    var values = renderedStyles.get(el);
+    if (!values) { values = {}; renderedStyles.set(el, values); }
+    if (values[name] !== value) { el.style.setProperty(name, value); values[name] = value; }
+  }
 
   /* How often they do something unprompted, and how soon after arriving in view. The idle
      gap was 14 to 30 seconds until 2026-09-15, which is long enough that a reader who scrolls
@@ -459,6 +478,7 @@
     pointer.x = e.clientX;
     pointer.y = e.clientY;
     pointer.moved = performance.now();
+    start();
   }
 
   /* How fast the page is moving, so Ember can lean into a scroll and settle out of it. Read in
@@ -468,6 +488,8 @@
     var y = window.scrollY || window.pageYOffset || 0;
     scrollVel = y - lastScrollY;
     lastScrollY = y;
+    for (var i = 0; i < rigs.length; i++) rigs[i].rectAt = -1e9;
+    start();
   }
 
   /* Anything the reader could press. Hovering one turns every Ember on the page toward it. */
@@ -478,46 +500,73 @@
     attend.x = r.left + r.width / 2;
     attend.y = r.top + r.height / 2;
     attend.until = performance.now() + 1400;
+    start();
   }
 
   function start() {
-    if (raf) return;
-    window.addEventListener("pointermove", onMove, { passive: true });
-    window.addEventListener("pointerover", onOver, { passive: true });
-    window.addEventListener("scroll", onScroll, { passive: true });
-    lastScrollY = window.scrollY || window.pageYOffset || 0;
+    if (!listening) {
+      window.addEventListener("pointermove", onMove, { passive: true });
+      window.addEventListener("pointerover", onOver, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
+      lastScrollY = window.scrollY || window.pageYOffset || 0;
+      listening = true;
+    }
+    if (raf || document.hidden || REDUCED) return;
+    clearTimeout(wakeTimer);
+    wakeTimer = 0;
     last = performance.now();
     raf = requestAnimationFrame(frame);
   }
 
   function frame(now) {
+    raf = 0;
+    if (document.hidden || REDUCED) return;
     var dt = Math.min(0.05, (now - last) / 1000);
     last = now;
     scrollVel *= Math.exp(-dt * 6);
-    for (var i = 0; i < rigs.length; i++) update(rigs[i], now, dt);
-    if (rigs.length) {
-      raf = requestAnimationFrame(frame);
-    } else {
-      raf = 0;
-      window.removeEventListener("pointermove", onMove);
-      window.removeEventListener("pointerover", onOver);
-      window.removeEventListener("scroll", onScroll);
+    var moving = false, next = Infinity;
+    // Read visible geometry together, before changing any SVG transforms.
+    for (var i = 0; i < rigs.length; i++) {
+      var rig = rigs[i];
+      if (rig.faceOnly) continue;
+      if (viewObserver && !rig.inView) continue;
+      if (now - rig.rectAt > 400) {
+        rig.rect = rig.svg.getBoundingClientRect();
+        rig.rectAt = now;
+      }
+    }
+    for (i = 0; i < rigs.length; i++) {
+      rig = rigs[i];
+      if (rig.faceOnly) continue;
+      if (viewObserver && !rig.inView) continue;
+      moving = update(rig, now, dt) || moving;
+      if (!rig.visible) continue;
+      if (rig.state !== 'sleep') next = Math.min(next, rig.nextBlink);
+      if (rig.state === 'idle') next = Math.min(next, rig.flourish);
+      if (rig.nudgeAt) next = Math.min(next, rig.nudgeAt);
+      if (!rig.look && rig.state !== 'sleep') {
+        next = Math.min(next, Math.max(pointer.moved + 4000, rig.wander.next));
+        if (attend.until > now) next = Math.min(next, attend.until);
+      }
+    }
+    if (!raf) {
+      if (moving) raf = requestAnimationFrame(frame);
+      else if (Number.isFinite(next)) wakeTimer = setTimeout(start, Math.max(20, next - now));
+      else if (!viewObserver && rigs.length) wakeTimer = setTimeout(start, 400);
     }
   }
 
   function setState(rig, state) {
+    if (rig.state === state) return;
     for (var k in STATE_CLASS) {
       if (STATE_CLASS[k]) rig.svg.classList.remove(STATE_CLASS[k]);
     }
     if (STATE_CLASS[state]) rig.svg.classList.add(STATE_CLASS[state]);
     rig.state = state;
+    start();
   }
 
   function update(rig, now, dt) {
-    if (now - rig.rectAt > 400) {
-      rig.rect = rig.svg.getBoundingClientRect();
-      rig.rectAt = now;
-    }
     var r = rig.rect;
     /* A hidden variant (the mobile drawing at desktop width, and the reverse) measures zero
        wide, so it counts as off-screen and never acts into a display:none box. */
@@ -601,7 +650,7 @@
        on a stage pinned to the screen the scroll lean read as a wobble on every wheel notch. */
     var sway = rig.walk != null ? rig.walk * 0.9 : scrollVel * 0.22;
     var tilt = (dx / len) * reach * 3 + Math.max(-7, Math.min(7, sway));
-    if (rig.lean) rig.lean.style.transform = "rotate(" + tilt.toFixed(2) + "deg)";
+    if (rig.lean) writeStyle(rig.lean, 'transform', "rotate(" + tilt.toFixed(2) + "deg)");
 
     /* Every so often, unprompted, they do something. Only while idle and only when the reader can
        see them, so nothing plays to an empty screen or interrupts a state that means something. */
@@ -611,9 +660,11 @@
     }
     for (var i = 0; i < rig.eyes.length; i++) {
       var e = rig.eyes[i];
-      e.g.style.transform = "translate(" + (e.bx + rig.gx) + "px," + (e.by + rig.gy) + "px)";
-      e.open.style.transform = "scaleY(" + open.toFixed(3) + ")";
+      writeStyle(e.g, 'transform', "translate(" + (e.bx + rig.gx).toFixed(2) + "px," + (e.by + rig.gy).toFixed(2) + "px)");
+      writeStyle(e.open, 'transform', "scaleY(" + open.toFixed(3) + ")");
     }
+    return rig.blinkT >= 0 || Math.abs((dx / len) * shift - rig.gx) > 0.02 ||
+      Math.abs((dy / len) * shift - rig.gy) > 0.02 || Math.abs(lidTarget - rig.lid) > 0.002 || Math.abs(scrollVel) > 0.1;
   }
 
   function mount(host, opts) {
@@ -635,6 +686,9 @@
       wander: { x: 0, y: 0, next: 0 },
       flourish: performance.now() + IDLE_MIN + Math.random() * IDLE_SPREAD,
       visible: false,
+      inView: !viewObserver,
+      // Faces inside app mockups are pictures of the UI, not separate pointer followers.
+      faceOnly: !!host.closest('.da-avatar, .dp-face'),
       lastActAt: -1e9,
       acting: false,
       lastAct: "",
@@ -652,6 +706,10 @@
       });
     }
     rigs.push(rig);
+    if (viewObserver) {
+      host.classList.add('motion-paused');
+      viewObserver.observe(host);
+    }
     /* `play` is a state that runs once and settles; `state` is one that stays on. The 404 wants
        the first (a wince, then a face looking at you) and would otherwise need an inline script,
        which this site's CSP hashes one by one. A data attribute costs nothing and no hash. */
@@ -763,14 +821,24 @@
   }
   function lookNamed(host, pt) {
     var rig = rigOf(host);
-    if (rig) rig.look = pt || null;
+    if (rig) { rig.look = pt || null; start(); }
   }
   /* walk(host, dx): the page moved them dx pixels this frame, so they lean into that and not into
      the scroll. walk(host, null) hands the lean back to the scroll. */
   function walkNamed(host, dx) {
     var rig = rigOf(host);
-    if (rig) rig.walk = dx == null ? null : dx;
+    if (rig) { rig.walk = dx == null ? null : dx; rig.rectAt = -1e9; start(); }
   }
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      cancelAnimationFrame(raf); raf = 0;
+      clearTimeout(wakeTimer); wakeTimer = 0;
+    } else {
+      for (var i = 0; i < rigs.length; i++) rigs[i].rectAt = -1e9;
+      start();
+    }
+  });
 
   window.Ember = {
     mount: mount, auto: auto, react: react, act: actNamed, set: setNamed, look: lookNamed,

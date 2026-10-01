@@ -434,6 +434,48 @@
   });
 
   /* ── Scroll-triggered fade-up (IntersectionObserver) ── */
+  // CSS loops should run only in the section the reader can actually see.
+  function pausePageMotion() {
+    document.documentElement.classList.toggle('motion-paused', document.hidden);
+  }
+  document.addEventListener('visibilitychange', pausePageMotion);
+  pausePageMotion();
+  // Software rendering can struggle with the layered mockups even on a fast computer.
+  // Sample only during scrolling, and simplify effects after sustained slow frames.
+  let budgetRaf = 0, budgetLast = 0, budgetUntil = 0, slowFrames = 0;
+  function sampleRenderBudget(now) {
+    budgetRaf = 0;
+    if (document.hidden) { budgetLast = 0; slowFrames = 0; return; }
+    const gap = budgetLast ? now - budgetLast : 0;
+    budgetLast = now;
+    if (gap > 50 && gap < 500) slowFrames++;
+    else slowFrames = Math.max(0, slowFrames - 1);
+    if (slowFrames >= 6) {
+      document.documentElement.classList.add('low-power');
+      return;
+    }
+    if (now < budgetUntil) budgetRaf = requestAnimationFrame(sampleRenderBudget);
+  }
+  window.addEventListener('scroll', function () {
+    if (document.hidden || document.documentElement.classList.contains('low-power')) return;
+    budgetUntil = performance.now() + 1200;
+    if (!budgetRaf) { budgetLast = 0; budgetRaf = requestAnimationFrame(sampleRenderBudget); }
+  }, { passive: true });
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) { cancelAnimationFrame(budgetRaf); budgetRaf = 0; budgetLast = 0; slowFrames = 0; }
+  });
+  if ('IntersectionObserver' in window) {
+    const motionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle('motion-paused', !entry.isIntersecting);
+      });
+    });
+    document.querySelectorAll('main > section, .day-stage, .mb-stage, .hm-stage, .explain-figure').forEach(function (el) {
+      el.classList.add('motion-paused');
+      motionObserver.observe(el);
+    });
+  }
+
   const fadeEls = document.querySelectorAll('.fade-up');
 
   if ('IntersectionObserver' in window && fadeEls.length) {

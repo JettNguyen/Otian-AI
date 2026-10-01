@@ -103,7 +103,7 @@ Currencies are printed as the company prints them. A converted figure is not a f
 
 | Figure | What it is | Source | Checked |
 |---|---|---|---|
-| `$20` | Claude Pro, billed monthly | `https://claude.com/pricing`, "$20" on the Pro card | Checked: 2026-08-19 |
+| `$20` | Claude Pro, billed monthly | `https://claude.com/pricing`, "$20" on the Pro card | Checked: 2026-10-01 |
 | `$17` | Claude Pro, billed annually | Same page, "$17" per month with the annual subscription | Checked: 2026-08-19 |
 | `$100` | Claude Max, the entry tier | Same page, "From $100" | Checked: 2026-08-19 |
 | `$20` | ChatGPT Plus, billed monthly | `https://chatgpt.com/pricing`, "$20 / month" on the Plus card. Not fetched directly: see the note below | Checked: 2026-09-30 |
@@ -124,7 +124,9 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$64` | Symphony Max, billed annually | Same page | Checked: 2026-09-11 |
 | `20€` | n8n Starter, billed annually. Printed in euros because n8n prices in euros | `https://n8n.io/pricing/`, "20€/mo, billed annually" | Checked: 2026-08-19 |
 | `50€` | n8n Pro, billed annually | Same page, "50€/mo, billed annually" | Checked: 2026-08-19 |
-| `$29.99` | Lindy Plus, per user, billed monthly, at 3,000 credits a month. The same figure as Zapier Professional above by coincidence | `https://www.lindy.ai/pricing`, "$ 29.99 /mo per user" and "3k credits / user / mo" | Checked: 2026-09-12 |
+| `$29.99` | Lindy Plus, per user, billed monthly, at 3,000 credits a month. The same figure as Zapier Professional above by coincidence | `https://www.lindy.ai/pricing`, "$ 29.99 /mo per user" and "3k credits / user / mo" | Checked: 2026-10-01 |
+| `$29.99` | alfred_, single plan, billed monthly, with email, calendar, tasks and its other features included. Supersedes the $24.99 figure in older blog posts | `https://get-alfred.ai/docs/account/plans-pricing`, "$29.99/month" | Checked: 2026-10-01 |
+| `$19.99` | Google AI Pro, US monthly plan, including Gemini. No introductory discount used | `https://one.google.com/about/google-ai-plans/?hl=en-US`, "Monthly ($19.99)" and "Google AI Pro bundle $19.99/mo" | Checked: 2026-10-01 |
 | `$0.02` | Two things by arithmetic: Lindy's cheapest "everyday ask" (2 credits at a cent each), and one Zapier Agents activity ($400 a year over twelve months of 1,500 is 2.2 cents) | Lindy's pricing page, "Everyday Asks 2-250 Credits"; `https://zapier.com/l/agents-pricing` | Checked: 2026-09-12 |
 | `$2.50` | Lindy: an everyday ask at its top, 250 credits, which is also where "Deep work 250-1,000 Credits" starts. Our arithmetic at a cent a credit | `https://www.lindy.ai/pricing` | Checked: 2026-09-12 |
 | `$10` | Lindy: deep work at 1,000 credits, our arithmetic. Also Lindy's top-up price per 1,000 credits on `https://docs.lindy.ai/account-billing/credits`, which is not printed | `https://www.lindy.ai/pricing` | Checked: 2026-09-12 |

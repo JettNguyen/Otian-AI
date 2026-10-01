@@ -1026,23 +1026,60 @@
     }
   }
 
+  /* A heading under a section label lands with its label, so the place is named when the scroll
+     stops. Aimed at the heading alone, the label sat behind the fixed nav. */
+  function landingOf(el) {
+    return (el.closest && el.closest('.section-header')) || el;
+  }
+
+  /* A section that has not faded in yet is drawn 28px below where it ends up, and the browser
+     aims at where it is drawn, so the heading finished its rise under the nav (2026-10-01, a
+     link from the homepage to compare/cloud-agents/#owning-heading). Put the landing in its
+     final place first and let it fade without moving. */
+  function settle(land) {
+    var els = [land].concat(Array.prototype.slice.call(land.querySelectorAll('.fade-up')))
+      .filter(function (n) { return n.classList.contains('fade-up') && !n.classList.contains('visible'); });
+    els.forEach(function (n) { n.style.transition = 'opacity 0.65s ease'; n.classList.add('visible'); });
+  }
+
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     /* Same document only: a link to another page's section is that page's business. */
     if (!a || !a.hash || a.pathname !== window.location.pathname || a.search !== window.location.search) return;
     var el = targetOf(a.hash);
-    if (el) openFoldsTo(el);
+    if (!el) return;
+    openFoldsTo(el);
+    var land = landingOf(el);
+    settle(land);
+    if (land === el || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    /* pushState fires no hashchange, and the menu's highlight listens for one. */
+    if (window.location.hash !== a.hash) { history.pushState(null, '', a.hash); window.dispatchEvent(new Event('hashchange')); }
+    else land.scrollIntoView();
+  });
+
+  /* The browser jumps on arrival before this runs, and again as the page above finishes loading,
+     so aim once now and once on load, unless the reader has scrolled on their own by then. */
+  var readerMoved = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(function (t) {
+    window.addEventListener(t, function () { readerMoved = true; }, { once: true, passive: true });
   });
 
   function onArrival() {
     var el = targetOf(window.location.hash);
-    /* Opening a fold moves the page under the browser's own scroll, which has already happened by
-       now, so put the target back in view afterwards. Unnamed behavior, so the stylesheet decides
-       whether that is a scroll or a cut. */
-    if (el && openFoldsTo(el) && el.scrollIntoView) el.scrollIntoView();
+    if (!el) return;
+    openFoldsTo(el);
+    var land = landingOf(el);
+    settle(land);
+    /* Unnamed behavior, so the stylesheet decides whether that is a scroll or a cut. */
+    if (land.scrollIntoView) land.scrollIntoView();
   }
 
   window.addEventListener('hashchange', onArrival);
+  window.addEventListener('load', function () {
+    var el = targetOf(window.location.hash);
+    if (el && !readerMoved) landingOf(el).scrollIntoView({ behavior: 'instant' });
+  });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', onArrival);
   else onArrival();
 })();

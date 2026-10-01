@@ -15063,6 +15063,10 @@ html[data-theme="dark"] .booking-container iframe {
   color: var(--text-secondary);
 }
 .faq-find-none a { color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: 2px; }
+/* The "more" link that ends an answer, the one with the arrow. Body links here inherit the
+   answer's gray, which left the next step looking like part of the sentence. */
+.accordion-body-inner a.faq-more { color: var(--c-blue-ink); font-weight: 600; }
+.accordion-body-inner a.faq-more:hover { color: var(--c-blue); text-decoration: underline; }
 /* What the finder hides. A class rather than the hidden attribute, because the accordion item
    and the group both carry display rules of their own that an attribute would lose to. */
 .faq-group.is-hidden,

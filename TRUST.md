@@ -779,9 +779,14 @@ license note that makes it matter is "The subscription gate is fail-open".
 **Boundaries:**
 - ⛔ **Never "you own Archie" or "Archie is yours".** The app is sold as a plan. The word covers
   **your agent and what you built**, never the software license.
-- ⛔ **"Own" never covers the thinking.** Every agent thinks through an AI company's account, so
-  wherever "own it" sits near "on your computer", the arrow to the AI company stays in the same
-  sentence or the same figure, as the custody entry requires.
+- ⛔ **"Own" never covers the thinking.** An agent thinks through an AI company's account unless
+  a model on the person's own computer is bound, and that is neither the default nor the trial
+  ("A model on your own computer" above, whose catch travels with any mention of it). So wherever
+  "own it" sits near "on your computer", the arrow to the AI company stays in the same sentence or
+  the same figure, as the custody entry requires. *[Corrected 2026-10-01: this line said "every
+  agent", which local models made false in 0.2.2. Even with one bound, "own" never stretches to
+  "nothing leaves your computer": connected accounts, web lookups and the license check still go
+  out, and "your data never leaves your device" stays banned.]*
 - ⛔ **Never a portability claim.** The file restores into Archie and nothing else reads it
   ("Your whole agent in one file" says why). "Yours to keep" means you can leave us; it never
   means you can take the agent to another assistant.

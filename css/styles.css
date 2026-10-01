@@ -16838,6 +16838,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 }
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
 .day-cap h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }
+/* "Own it." links to what it covers. A faint underline says it is a link without making
+   the tagline read as a menu; it firms up on hover and focus. */
+.day-cap h1 .hm-own { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.14em; text-decoration-color: color-mix(in srgb, var(--accent-ink) 35%, transparent); }
+.day-cap h1 .hm-own:hover, .day-cap h1 .hm-own:focus-visible { text-decoration-color: var(--accent-ink); }
 .day-cap h2 { font-size: clamp(1.55rem, 2.3vw, 2.05rem); margin: 0; }
 .day-cap .section-label { margin-bottom: 12px; }
 .day-cap > p { margin: 14px 0 0; font-size: var(--fs-md); max-width: 40ch; color: var(--text-secondary); text-wrap: pretty; }

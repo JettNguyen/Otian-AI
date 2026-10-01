@@ -170,6 +170,15 @@
     .stack { display: flex; flex-direction: column; gap: 8px; }
     .row { display: flex; gap: 8px; }
     .grow { flex: 1; }
+    /* Google's own "Sign in with Google" art, the light and dark pills from signin-assets.zip,
+       unaltered: the one form Google's branding rules grant without asking. Same rules as the
+       login page. Never recolor, crop or redraw these files. */
+    .g-signin { display: block; margin: 0 auto; align-self: center; padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; border-radius: 999px; }
+    .g-signin img { display: block; }
+    .g-signin .g-signin-dark { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-light { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-dark { display: block; }
+    .g-signin:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
   </style>
 </head>
 <body>
@@ -184,7 +193,10 @@
     <!-- SIGN-IN VIEW (shown until authenticated) -->
     <div id="signin-view" class="stack hidden">
       <p class="sub">Sign in to manage your security settings.</p>
-      <button class="btn btn-primary" id="btn-google">Continue with Google</button>
+      <button class="g-signin" id="btn-google" type="button" aria-label="Sign in with Google">
+        <img class="g-signin-light" src="../assets/google-signin-light.png" srcset="../assets/google-signin-light.png 1x, ../assets/google-signin-light@2x.png 2x" width="180" height="40" alt="" />
+        <img class="g-signin-dark" src="../assets/google-signin-dark.png" srcset="../assets/google-signin-dark.png 1x, ../assets/google-signin-dark@2x.png 2x" width="180" height="40" alt="" />
+      </button>
       <div class="fields">
         <input type="email" id="email" aria-label="Email address" placeholder="Email address" autocomplete="email" />
         <input type="password" id="password" aria-label="Password" placeholder="Password" autocomplete="current-password" />

@@ -39,6 +39,17 @@
     })();
   </script>
   <link rel="stylesheet" href="../../../css/styles.css?v=20261001-4" />
+  <style>
+    /* Google's own "Sign in with Google" art, the light and dark pills from signin-assets.zip,
+       unaltered: the one form Google's branding rules grant without asking. Same rules as the
+       login page. Never recolor, crop or redraw these files. */
+    .g-signin { display: block; margin: 0 auto; padding: 0; border: 0; background: none; cursor: pointer; line-height: 0; border-radius: 999px; }
+    .g-signin img { display: block; }
+    .g-signin .g-signin-dark { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-light { display: none; }
+    html[data-theme="dark"] .g-signin .g-signin-dark { display: block; }
+    .g-signin:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -181,7 +192,10 @@
         <div id="signinGate" class="cta-banner fade-up">
           <h2>Sign in to submit</h2>
           <p>Submissions are linked to your account so we can credit you and follow up during review.</p>
-          <button id="btnSignIn" class="btn btn-primary btn-lg" type="button">Sign in with Google</button>
+          <button class="g-signin" id="btnSignIn" type="button" aria-label="Sign in with Google">
+            <img class="g-signin-light" src="../../../assets/google-signin-light.png" srcset="../../../assets/google-signin-light.png 1x, ../../../assets/google-signin-light@2x.png 2x" width="180" height="40" alt="" />
+            <img class="g-signin-dark" src="../../../assets/google-signin-dark.png" srcset="../../../assets/google-signin-dark.png 1x, ../../../assets/google-signin-dark@2x.png 2x" width="180" height="40" alt="" />
+          </button>
           <p id="signinError" style="display:none; color:var(--danger); margin-top:0.75rem;"></p>
         </div>
 

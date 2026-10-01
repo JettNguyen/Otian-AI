@@ -41,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20261001-4" />
+  <link rel="stylesheet" href="../css/styles.css?v=20261001-5" />
   <style>
     /* Trust: the "in their own words" provider-quote block. Scoped to this page. */
     .trust-quotes { margin-top: 52px; }
@@ -208,52 +208,53 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">What the AI company receives</span>
-          <h2 id="the-question" class="fade-up delay-1">&ldquo;You say my data stays with me, but my agent sends my email to an AI company, so they see it.&rdquo;</h2>
+          <h2 id="the-question" class="fade-up delay-1">Your AI company receives the text it works on.</h2>
         </div>
 
         <div class="trust-prose fade-up delay-2">
-          <p><strong>Yes.</strong> To summarize an email, your agent sends its text to an AI model. The model needs that text to process your request.</p>
-
-          <p>The next questions are <strong>whose account it uses, and who handles the request.</strong> Three answers:</p>
+          <p>To summarize an email, your agent sends its text to an AI model.</p>
         </div>
 
         <div class="trust-answers fade-up delay-3">
           <div class="trust-answer">
             <span class="trust-answer-num">1</span>
             <div>
-              <h3>Your email goes under <em>your</em> account, on <em>your</em> key.</h3>
-              <p>You open an AI account of your own and paste its key into Archie, so your agent connects as you. Its requests are billed to you and governed by your own agreement with that company, which makes you their customer. Which company, and what each does with your words, is further down.</p>
+              <h3>Your own AI account</h3>
+              <p>Your agent uses your account. That company bills you, under your agreement with it.</p>
             </div>
           </div>
           <div class="trust-answer">
             <span class="trust-answer-num">2</span>
             <div>
-              <h3>We are not in the middle of it.</h3>
-              <p>On an AI account of your own, Archie calls the AI company <strong>directly from your computer</strong>. There is no Otian server in that path, so there is nothing on our side that <em>could</em> read it.</p>
-              <p>On the free credits and on the plan with the AI included we are the ones paying, so those requests do pass through a server of ours. It writes down what each request cost and never what it said, and it drops out from each agent&rsquo;s next start once you connect an account of your own.</p>
+              <h3>Your own account connects directly</h3>
+              <p>Archie calls your AI company directly from your computer. There is no Otian server in that path.</p>
+              <p>Free credits and included AI pass through our server to Anthropic. We record usage costs, never conversation content. Your own AI account bypasses that route from each agent&rsquo;s next start.</p>
             </div>
           </div>
           <div class="trust-answer">
             <span class="trust-answer-num">3</span>
             <div>
-              <h3>Some AI companies don&rsquo;t train on what you send, and one of them does.</h3>
-              <p>Of the seven, three say that what you send through the API is not used to train their models: Anthropic, OpenAI and Groq. Two say it of their paid tier only, so which answer applies to you depends on your own billing with them. One we have not been able to verify. And one trains on it and says so in its own policy.</p>
-              <p>Those are <em>their</em> commitments, and only they can make them, so don&rsquo;t take our word for it: each one&rsquo;s own words and a link to its source are below.</p>
+              <h3>Check your AI company&rsquo;s training policy</h3>
+              <p>Anthropic, OpenAI and Groq say API content is not used for training by default. Google and Mistral say that only of paid usage. DeepSeek trains on it; we could not verify xAI&rsquo;s API terms.</p>
+              <p>Check the company&rsquo;s own policy below before connecting it.</p>
             </div>
           </div>
         </div>
 
         <div class="trust-prose fade-up delay-4">
-          <p><strong>One exception, and it is ours.</strong> Starter credits and the plan with AI included use our Anthropic account, so conversation content passes through our server on the way there. We keep no copy and use none of it. Your agent reads no email or texts on either one.</p>
+          <p>Email and text reading need your own AI account. Our starter credits and included AI do not run them.</p>
 
-          <p>The server records your account ID, token counts, amount, time and call count so it can enforce the allowance, never the message or reply. Connect an AI account of your own and this route disappears from each agent&rsquo;s next start (setup restarts it for you).</p>
+          <p><a href="#what-we-hold">See the operational records we keep</a>.</p>
 
-          <p>What running on your own computer buys you, then, is this: your life does not <em>also</em> pile up on a server of ours. We keep no copy of your conversations that we can read, so there is no such copy to breach, subpoena, sell in an acquisition, or repurpose when our business model changes.</p>
+          <p>We keep no copy of your conversations that we can read.</p>
 
-          <p class="trust-aside"><strong>One more thing you didn&rsquo;t ask.</strong> If your agent searches the web, that search runs on the AI company&rsquo;s own servers, so your search query reaches their search backend as well as their model. On an account of your own it is billed to your key and never touches us.</p>
+          <p class="trust-aside">Web searches also reach your AI company&rsquo;s search service. On your own AI account they never pass through us.</p>
         </div>
 
-        <div class="trust-quotes fade-up" id="providers">
+        <details class="fold">
+          <summary>Read each AI company&rsquo;s policy and source</summary>
+          <div class="fold-body">
+          <div class="trust-quotes fade-up" id="providers">
           <h3>In their own words</h3>
           <p class="trust-quotes-lead">What your AI company does with what you send it is the one part of this that is not in our hands. So: every company Archie connects to, on the record about training on what goes through its API, quoted where we can quote and linked either way. All checked in August 2026.</p>
           <ul class="trust-quote-list">
@@ -296,6 +297,8 @@
             </li>
           </ul>
         </div>
+          </div>
+        </details>
       </div>
     </section>
 
@@ -1170,9 +1173,9 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20261001-4"></script>
-  <script src="../js/proof.js?v=20261001-4" defer></script>
-  <script type="module" src="../js/account-nav.js?v=20261001-4"></script>
-  <script src="../js/packet-map.js?v=20261001-4" defer></script>
+  <script src="../js/nav.js?v=20261001-5"></script>
+  <script src="../js/proof.js?v=20261001-5" defer></script>
+  <script type="module" src="../js/account-nav.js?v=20261001-5"></script>
+  <script src="../js/packet-map.js?v=20261001-5" defer></script>
 </body>
 </html>

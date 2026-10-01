@@ -76,7 +76,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261001-4" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261001-5" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -304,9 +304,9 @@
           <article class="day-cap is-on" data-act="0">
             <span class="section-label">Otian AI &middot; Archie</span>
             <!-- The outcome leads; ownership is explained beside the price below. -->
-            <h1>Your email, calendar and bills, <em>handled.</em></h1>
-            <p class="day-beat is-on" data-act="0" data-at="0">Archie runs your AI agent on your computer. It drafts replies, proposes calendar changes and reminds you before bills are due.</p>
-            <p class="day-beat is-on" data-act="0" data-at="0">Free for 20 jobs a day with your own pay-as-you-go AI account. <a href="archie/pricing/">Plans from $30 a month</a>. Your AI company does the thinking and bills separately.</p>
+            <h1>An AI agent for your email, calendar and <em>bills.</em></h1>
+            <p class="day-beat is-on" data-act="0" data-at="0">Archie runs your agent on your computer, using an AI company you choose.</p>
+            <p class="day-beat is-on" data-act="0" data-at="0">Free for 20 jobs a day on your own AI account. <a href="archie/pricing/">Plans from $30 a month</a>, plus your AI company&rsquo;s bill.</p>
             <p class="day-beat is-on" data-act="0" data-at="0">Replies and calendar changes wait for your approval.</p>
             <div class="hm-actions">
               <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
@@ -331,8 +331,8 @@
                first, applied after your yes in a later message, and a button answers for you. -->
           <article class="day-cap" data-act="1">
             <span class="section-label">Calendar Manager &middot; 9:12 am</span>
-            <h2>Ask your agent to move an appointment, and it waits for your yes.</h2>
-            <p>Your agent reads your calendar without asking, but it proposes any change and makes it only after you approve it in a later message.</p>
+            <h2>Move an appointment after you approve it.</h2>
+            <p>It reads your calendar, proposes a change and waits for your approval in a later message.</p>
             <p class="day-catch">A routine running on its own can only report the change it would make.</p>
           </article>
 
@@ -380,7 +380,7 @@
                and Archie writes the routine" is the link two lines below it, in other words. -->
           <article class="day-cap" data-act="4">
             <span class="section-label">Off your plate &middot; 4:15 pm</span>
-            <h2>Your agent remembers what you promised, what you pay for, and what the doctor said.</h2>
+            <h2>Track promises, bills, paperwork and doctor&rsquo;s notes.</h2>
             <p>Four of the 168 add-ons, all included.</p>
             <div class="day-chips">
               <span class="day-chip"><i></i>Buys only if you switch it on, at shops you pick, up to a limit you set</span>
@@ -395,7 +395,7 @@
           <article class="day-cap" data-act="5">
             <span class="section-label">Overnight &middot; 2:00 am</span>
             <h2>Archie works while you sleep.</h2>
-            <p>A routine set for seven in the morning arrives at seven, even if the computer was asleep. Archie asks the computer to wake a few minutes before, runs it, and lets it go back to sleep.</p>
+            <p>Archie can wake your computer for a scheduled routine, then let it sleep again. A shut-down computer stays off.</p>
           </article>
 
           <!-- Act 6, the exhale, added 2026-09-18. Six acts of capability and nothing the reader
@@ -423,7 +423,7 @@
                count climbs 1, 3, 7, 9, 10, the marks FACTS.md records for the track. -->
           <article class="day-cap" data-act="7">
             <span class="section-label">Setup &middot; Estimated</span>
-            <h2>Set up in five steps and five to ten minutes, with no code to write.</h2>
+            <h2>Set up Archie in five steps, without code.</h2>
             <div class="day-minutes"><i class="day-pie" id="dayPie" aria-hidden="true"></i><small>Estimated</small><b id="dayMinutes">1</b><span>min so far</span></div>
             <p>Estimates: about five minutes on our free credits, and ten if you open an AI account first.</p>
             <a class="day-more" href="how-it-works/#what-you-need">See the full list of what you need&nbsp;&rarr;</a>
@@ -432,7 +432,7 @@
         </div>
 
         <div class="day-scene-wrap">
-          <div class="day-scene" role="img" aria-label="One day with an agent on your computer, drawn on the Archie window and a phone: the morning brief arrives at seven, a calendar move is proposed and waits for your yes, a mail draft waits for your Send, the message laps from your phone to your computer to the AI company you picked and back, with our server on the path only for free credits or the plan with the AI included, and nothing kept, four more jobs get their add-on by name, the routines run at two in the morning on a computer left on, the brief at seven the next morning says what was finished while you slept and what is drafted and waiting, and the five setup steps draw the phone, the computer and the AI company one piece at a time, with the minutes counted.">
+          <div class="day-scene" role="img" aria-label="Archie runs an agent on your computer. A phone shows an email draft waiting for Send, a calendar change waiting for approval, bill and paperwork reminders, and a morning report. Your chosen AI company processes requests. Free credits and included AI route through Otian's server, which records usage costs without conversation content. Scheduled routines can wake a sleeping computer; a shut-down computer stays off. Five setup steps finish the scene.">
 
             <!-- THE ARCHIE WINDOW. archie-app-mockup.html's chrome, sidebar, agent header and Now
                  pane, class for class, at half size. The app's own tokens are scoped under
@@ -620,7 +620,12 @@
 
                     <div class="dp-scr is-on" data-scr="0">
                       <div class="dp-said">
-                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Morning brief.</b></p><ul><li><span>8:15 school drop-off</span></li><li><span>3:00 dentist, Dr. Miller</span></li><li><span>Internet bill Thursday. Dad&rsquo;s birthday Saturday.</span></li></ul></div></div>
+                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>.</p><p>Can we move the roof estimate to Friday?</p><p><b>Draft reply</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
+                          <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></div>
+                          <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                          <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                          <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                        </div></div></div>
                         <p class="dp-stamp">7:00 AM</p>
                       </div>
                     </div>
@@ -925,11 +930,9 @@
              2px strip, which is the right amount of nothing for decoration. -->
         <div class="day-rail" aria-hidden="true"></div>
 
-        <!-- Ember, the one constant. Inside the stage, so it rides the stage's own scroll instead of
-             chasing it from a fixed box a frame behind; js/home.js walks it between the marks on
-             the objects, and past the story lifts it into the mark beside the closing button. The
-             greeting is Ember's own line (js/ember.js, invitation), shown once per browser. -->
-        <span class="day-ember" data-ember="terracotta.peak.pill.none" data-ember-nudge></span>
+        <!-- Ember rides the stage's scroll and moves beside the closing button after the story.
+             The greeting bubble is omitted here so it cannot cover the first screen's words. -->
+        <span class="day-ember" data-ember="terracotta.peak.pill.none"></span>
       </div>
     </section>
 
@@ -956,10 +959,10 @@
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Questions, too</span>
         <h2 id="asking-heading" class="fade-up">Ask your agent what you would ask any AI chat.</h2>
-        <p class="fade-up">Ask how to word a hard email, or what to cook with what&rsquo;s in the fridge, and it answers like any AI chat, in the same conversation as your jobs.</p>
+        <p class="fade-up">Ask about an email or tonight&rsquo;s dinner in the same chat as your jobs.</p>
         <!-- LIBRARY DOOR: written by scripts/gen-library.mjs from assets/library.json, a card for each video that is published. Do not hand-edit. -->
         <!-- /LIBRARY DOOR -->
-        <p class="calm-note calm-note--center fade-up">Like any AI, it is sometimes wrong, and the app says so under the box you type in.</p>
+        <p class="calm-note calm-note--center fade-up">AI can be wrong. Check its answers.</p>
       </div>
     </section>
 
@@ -1106,7 +1109,7 @@
 
             <circle class="mn-dot" r="5" style="offset-path:path('M170,150 L170,188')"/>
           </svg>
-          <figcaption>Your agent works from what you have given it, and it can&rsquo;t know a decision you never wrote down. So the reply and the calendar move both wait for your yes.</figcaption>
+          <figcaption>Your agent may miss context you never gave it. Replies and calendar changes wait for your approval.</figcaption>
         </figure>
         <!-- The one thing this section did not say, added 2026-09-21. The gate above is drawn
              and captioned; what a reader cannot tell from a drawing is whether it is a default
@@ -1150,7 +1153,7 @@
       <div class="container">
         <div class="ww-band-head">
           <span class="section-label">Connections</span>
-          <h2 id="works-with-heading" class="ww-band-line">Works with Gmail, Outlook, iCloud and the other accounts you already have.</h2>
+          <h2 id="works-with-heading" class="ww-band-line">Connect your email, calendar and other accounts.</h2>
         </div>
         <!-- THE SHAPE OF THE BAND, BEFORE THE NAMES SCROLL PAST.
              This was two rows of logos and a note, and a competitor teardown had it exactly
@@ -1706,7 +1709,7 @@
          ============================== -->
     <section class="section section-alt hm-cta" aria-label="Call to action">
       <div class="hm-wrap hm-head">
-        <h2 class="fade-up">What would you never do again?</h2>
+        <h2 class="fade-up">Get an email when Archie is ready.</h2>
         <p class="fade-up">Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
         <div class="day-cta-row fade-up">
           <span class="day-cta-mark" aria-hidden="true"><i class="day-mark" data-mark="m-cta" data-size="72" style="left:50%;bottom:0"></i></span>
@@ -1800,10 +1803,10 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261001-4"></script>
-  <script src="js/ember.js?v=20261001-4" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261001-4"></script>
-  <script src="js/home.js?v=20261001-4" defer></script>
+  <script src="js/nav.js?v=20261001-5"></script>
+  <script src="js/ember.js?v=20261001-5" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261001-5"></script>
+  <script src="js/home.js?v=20261001-5" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

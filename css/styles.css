@@ -10032,6 +10032,20 @@ html[data-theme="dark"] .booking-container iframe {
   gap: 32px 40px;
 }
 
+/* Edition choices and call outcomes are short objects to compare at a glance. */
+.edition-choices, .service-outcomes { gap: 20px; }
+.edition-choices.calm-list--ruled .calm-list-item,
+.service-outcomes.calm-list--ruled .calm-list-item {
+  padding: 24px;
+  border: 1px solid var(--line-muted);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+}
+.edition-choices .calm-list-label { color: var(--accent-ink); }
+.edition-choices .calm-list-item > p,
+.service-outcomes .calm-list-item > p { font-size: var(--fs-sm); }
+.plan-terms { max-width: 940px; margin: 24px auto 0; }
+
 .calm-list-item > p {
   font-size: var(--fs-md);
   margin: 0;
@@ -16631,12 +16645,9 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    and light mode stops well short of it, because a reader who picked the cream page did not ask
    for the darkest thing on the site halfway down it. */
 
-/* One act is 100vh of scrolling, the hero is 0.6 of one, and the camera already moves through the
-   hero (PRE in js/home.js), so the first pixel of scroll moves something. Setup is 1.5, because it
-   is the one act with six things in it. LEN in js/home.js is the same list and must agree, and the
-   sum here is that list's. The extra 100vh is the stage's own height, which the sticky needs to
-   unpin at the end. */
-.day-story { position: relative; height: calc(8.4 * 100vh + 100vh); }
+/* The scroll matches the 6.9-screen sum of LEN in js/home.js. The extra 100vh holds
+   the sticky stage until the last act ends. */
+.day-story { position: relative; height: calc(6.9 * 100vh + 100vh); }
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which

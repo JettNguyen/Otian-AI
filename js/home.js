@@ -261,27 +261,10 @@
        between .25 and .3 of the act, which is what a reader reads as the camera not having
        arrived. */
     var SETTLE = 0.2;
-    /* Act 0 was 0.25 of a screen and is 0.6 since 2026-09-18, so getting past the hero takes real
-       scrolling now that the hero has something to reveal (Jett: "make the scroll last a bit
-       longer for the first section"). The rest of it lands together at 0.34 of the act, which is
-       about 172px of scroll, and it used to be 21px. `.day-story`'s height in the stylesheet is
-       this list's sum plus one and must be changed with it.
-
-       Act 6 is 0.8 since 2026-09-19. Its brief stood finished from the act's first frame, so a
-       full act of scroll moved nothing (Jett: "nothing happens during the next morning section
-       visual-wise and it takes a bit to scroll through it"); the brief lands line by line now,
-       four lines on the even grid, with one gap at the end for reading the finished brief. That
-       last hold is 120px on a phone where it used to be 208, which is the right direction for the
-       complaint that started it: the dead scroll was at the end.
-
-       THE ACT LENGTHS ARE NOT SET FROM THE STEP COUNTS, so a step is even inside an act and not
-       across them. At 390 by 844 a step is 104px in the calendar act, 193px in the mail act and
-       the overnight one, 75px in the four-rows act (1.5 long since 2026-09-24, so its thirteen steps
-       keep about the length its eight had), 120px in the brief and 169px in setup. Evening
-       those would mean sizing every act by how many things happen in it, and an act also has to be
-       long enough to read its caption, which is a trade worth making on purpose rather than by
-       arithmetic. */
-    var LEN = [0.6, 1, 1, 1, 1.5, 1, 0.8, 1.5], CUM = [0], TOT = 0;
+    /* Keep the first screen long enough to read, then move through the examples with less
+       scroll. These lengths total 6.9 screens; .day-story adds one screen for the sticky stage.
+       Each act still holds its finished result, and the reader's scroll controls every beat. */
+    var LEN = [0.6, 0.9, 0.9, 0.8, 1.2, 0.8, 0.5, 1.2], CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must
@@ -308,20 +291,9 @@
     /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
        each is rastered near the size it is seen. */
-    /* WHICH ONE IS IN FRONT CHANGES ACROSS THE DAY (2026-09-19). The window sat behind the phone in
-       every act, at a negative z in all seven, so the same diorama was photographed seven times and
-       the computer was always the thing at the back (Jett: "cycle between which mockups get the
-       front/bigger when each of them hold equal value in the shot"). Now the desk is shot from two
-       sides. W/PH is the computer's side of the day: the window near the camera and nearly its own
-       size, the phone clear of it and a little behind. W2/PH2 is the phone's: the phone forward and
-       the window back and turned. The morning and the night are the computer's, because what those
-       two acts claim is on it; the hours in between and the brief that opens the next morning are
-       the phone's, because that is where the reader is, and it reads as leaving the desk and coming
-       back to it rather than as a camera that cannot make up its mind. */
-    /* THE WINDOW IS 800 TALL SINCE 2026-09-30 (0.3.2's Dashboard; see .day-win in the stylesheet),
-       and its layer grew from its middle, so a pose that stood the old window just under the clock
-       stood the new one's top edge in it. W2 and the night pose come down by the height the clock
-       needs and no more; the hero's W already had the room above it and is where it was. */
+    /* W/PH brings the computer forward; W2/PH2 brings the phone forward. The opening
+       shows a readable email draft on the phone, the daytime acts show its replies,
+       and the night brings the computer forward to show it waking for a routine. */
     var W = { x: -86, y: -4, z: 0, ry: 10, s: .94, o: 1 }, PH = { x: 232, y: 2, z: -90, ry: -13, s: .96, o: 1 };
     var W2 = { x: -126, y: 26, z: -190, ry: 16, s: 1.06, o: .5 }, PH2 = { x: 186, y: 2, z: 110, ry: -12, s: .90, o: 1 };
     /* The narrow set, for the 400 by 560 box: the window behind and up, the phone in front and
@@ -338,8 +310,8 @@
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
       { mark: 'm-hero', state: 'idle', clock: '7:00 am', phone: '7:00', scr: 0,
-        pose: { cam: { rx: 5, ry: -12, s: 1 }, win: W, phone: PH, night: 0, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 4, ry: -8, s: 1 }, win: NW, phone: NP, night: 0, fc: 0, fs: 0 } },
+        pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: copy(W2, { x: -155, o: .35 }), phone: copy(PH2, { x: 156, y: 24, ry: -6, s: .94 }), night: 0, fc: 0, fs: 0 },
+        narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '9:12 am', phone: '9:12', scr: 1,
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },

@@ -38,22 +38,11 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261001-4" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261001-5" />
   <style>
-    /* Page-scoped: the running-cost grid is three items, not the two the shared
-       .price-grid assumes, and the honesty notes need room under it. */
+    /* Three plans share one row on a wide screen. */
     .price-grid--three {
       grid-template-columns: repeat(3, 1fr);
-    }
-
-    /* One card, not two. The plan's own price is stated once, in the cards above, so this
-       grid has a single child and the shared two-column rule left a hole beside it: the card
-       sat in the left half looking like something had failed to load. */
-    .price-grid--one {
-      grid-template-columns: 1fr;
-      max-width: 620px;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     .price-note {
@@ -277,70 +266,54 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Plans</span>
-          <h2 id="plans-heading" class="fade-up delay-1">Pick an edition, then pick who pays for the AI.</h2>
-          <p>Personal agents answer one person, and Personal is free on an AI account of your own at 20 jobs a day. Business agents can answer a team, and Business is a plan from the start.</p>
+          <h2 id="plans-heading" class="fade-up delay-1">Choose one person or a team.</h2>
+          <p>Personal agents answer only you. Business agents can answer your team. All run on your computer.</p>
         </div>
 
         <div class="mt-48 plan-grid fade-up delay-1">
           <article class="plan-card">
-            <span class="price-card-label">Free</span>
-            <div class="price-card-amount price-card-amount--words">Free<span>no card</span></div>
-            <p class="plan-card-line">Two separate offers, neither asking for a card.</p>
+            <span class="price-card-label">Free Personal</span>
+            <div class="price-card-amount price-card-amount--words">Free<span>20 jobs a day</span></div>
+            <p class="plan-card-line">No Archie plan needed; connect your own AI account.</p>
             <ul class="plan-list">
-              <li>One agent, which is the one the app arrives with, answering you and nobody else</li>
-              <li><strong>14 days on our AI credits, with everything but email and text reading.</strong> Your agent thinks on our Claude account, so it works before you have an AI account of your own. It ends after the 14 days or when the credits run out</li>
-              <li><strong>Or 20 jobs a day, with no end date.</strong> Paste the key an AI company gives you when you open an account there, and Archie is free for as long as you like. Take it after the 14 days or instead of them. Personal only</li>
-              <li>Every add-on and every chat app, and <strong>email and text reading need an AI account of your own</strong>. On our funded usage those reads are off; connect an account and restart the agent to use them</li>
-              <li>Phone access needs a plan or a live trial: your phone reaches the computer through our server, the part we pay for per message</li>
+              <li>One agent answering only you</li>
+              <li>Every add-on and all 5 chat apps</li>
             </ul>
-            <!-- Not ticks. A checkmark beside "the credits can be refused" reads as a benefit,
-                 and these are the conditions on the offer above. They stay in the card
-                 rather than moving down the page, because TRUST.md requires the proxy
-                 disclosure in the same breath as the offer of the credits.
-
-                 The daily number is in the card and not only here, because TRUST.md's entry on
-                 the free tier forbids offering one without its limit in the same sentence. -->
-            <p class="plan-fine">While we are paying, your messages pass through our server on the way to Anthropic. An AI account of your own bypasses that route from each agent&rsquo;s next start. The credits are limited per computer and can be refused.</p>
-            <a class="btn btn-secondary plan-cta" href="#try-heading">How the free tier works</a>
+            <p class="plan-fine">Your AI company bills separately. A job is a reply, a routine running or an email it reacts to. Archie Mobile needs a plan or live trial.</p>
+            <a class="btn btn-secondary plan-cta" href="#try-heading">Compare the free offers</a>
           </article>
 
           <article class="plan-card plan-card--lead">
             <span class="plan-flag">Our pick</span>
             <span class="price-card-label">For Personal</span>
             <div class="price-card-amount">$30<span>a month</span></div>
-            <p class="plan-card-line">Or $299 a year, which works out at $24.92 a month and saves you $61.</p>
-            <p class="plan-card-line">Or <a href="#ai-included">with the AI included, $59 a month</a>.</p>
+            <p class="plan-card-line">Or $299 a year, plus your AI company&rsquo;s bill.</p>
             <ul class="plan-list">
-              <li>Up to 10 agents on your own computer, each one answering you and nobody else</li>
-              <li>They run while that computer is on and online. A routine set for a time of day wakes a sleeping computer first, and a computer that is shut down stays off</li>
-              <li>On the plain plan, your own AI account bills you directly, so the money never passes through us. Your conversations go straight to the AI company you picked, with no Otian server in the path</li>
-              <li>Every add-on in the store: skills, routines and personalities</li>
-              <li>All 5 chat apps: Telegram, Discord, Slack, Matrix, and iMessage on a Mac</li>
-              <li>Any of 7 AI companies, or another AI service that speaks the OpenAI format</li>
-              <li>If we disappear, Archie runs on its last license note for up to 60 days, and our Terms oblige us to publish a final version requiring no license check within 30 days of shutting down</li>
-              <li>14 days from first starting a plan to request a full refund</li>
+              <li>Up to 10 agents, each answering only you</li>
+              <li>No daily job limit and Archie Mobile</li>
+              <li>Every add-on and all 5 chat apps</li>
             </ul>
-            <p class="plan-fine">Cancel any time. A plan runs to the end of the period you have already paid for, and nothing on your computer is deleted. Write your backup before you stop.</p>
+            <p class="plan-fine">Runs while your computer is awake and online. On your own AI account, conversations go straight to your chosen AI company. Replies and calendar changes wait for your approval.</p>
             <a class="btn btn-primary plan-cta" href="../../questionnaire/">Join the Waitlist</a>
           </article>
 
           <article class="plan-card">
             <span class="price-card-label">For Business</span>
             <div class="price-card-amount">$99<span>a month</span></div>
-            <p class="plan-card-line">Or $999 a year, which works out at $83.25 a month and saves you $189.</p>
+            <p class="plan-card-line">Or $999 a year, plus your AI company&rsquo;s bill.</p>
             <ul class="plan-list">
-              <li><strong>A separate app and a separate plan</strong>: Archie for Business installs beside Archie with its own data and its own keys, and you buy whichever one fits</li>
-              <li><strong>Any agent can answer your whole team</strong>, where a personal agent answers only its owner. There is no seat count and no per-person price</li>
-              <li>Add-ons built for a team, in this edition&rsquo;s store only: a handoff ledger kept from the team&rsquo;s own chat, a watch on what customers are still owed, and a morning standup of both</li>
-              <li>Only that person is answered from a mailbox marked as theirs, and one left shared can answer everyone you let in</li>
-              <li>The owner decides who is in, with invite codes that expire in a day; anyone else is turned away before the agent reads a word</li>
-              <li>A guest can ask anything and read what the agent knows, shared mail included, and acts for the owner only if the owner turns that on</li>
-              <li>Up to 50 agents instead of 10, so a department can have its own and still share the ones everybody uses</li>
+              <li>Up to 50 agents that can answer your team</li>
+              <li>No seat count or per-person price</li>
+              <li>Team add-ons in the Business store</li>
             </ul>
-            <p class="plan-fine">Cancel any time. A plan runs to the end of the period you have already paid for, and nothing on your computer is deleted. Write your backup before you stop.</p>
+            <p class="plan-fine">A separate app and plan, with its own data and keys. Guests can read a shared agent&rsquo;s documents, lists and reminders. Keep confidential context off shared agents.</p>
             <a class="btn btn-business plan-cta" href="../../questionnaire/">Join the Business Waitlist</a>
           </article>
         </div>
+
+        <p class="plan-fine plan-terms fade-up">Cancel any time; your plan runs through the period you paid for. Nothing on your computer is deleted. Write your backup before you stop. Request a full refund within 14 days of first starting a plan, under our <a href="../../terms-of-service/">Terms</a>.</p>
+
+        <p class="plan-fine plan-terms fade-up">Plans are on sale while Archie is in testing. They are not offered in the EEA, UK or Switzerland yet. Connected services may charge their own fees.</p>
 
         <!-- The plan with the AI included, as a band under the three plans rather than a fourth
              column or an inset. It is the For Personal plan with one more thing inside, so it
@@ -353,13 +326,13 @@
           <div class="plan-band-price">
             <span class="price-card-label" id="ai-included-label">For Personal, with the AI included</span>
             <div class="price-card-amount">$59<span>a month</span></div>
-            <p class="plan-card-line">Or $599 a year. The plan above, plus $25 of Claude Sonnet usage every month, so there is no AI account to open and no second bill.</p>
+            <p class="plan-card-line">Or $599 a year. Includes $25 of Claude Sonnet usage each month, with no separate AI account or bill.</p>
             <a class="btn btn-primary plan-cta" href="../../questionnaire/">Join the Waitlist</a>
           </div>
           <div class="plan-band-body">
-            <p><strong>Where it runs.</strong> On our Anthropic account, so what you write passes through our server. We keep no conversation content. Email and text reading need an AI account of your own, which also bypasses our conversation route from each agent&rsquo;s next start.</p>
-            <p><strong>When the $25 is used.</strong> Your agent pauses until next month refills it; nothing rolls over. Connect an AI account of your own at any point and it carries on from there, with nothing to switch.</p>
-            <p><strong>Is $25 enough?</strong> <a href="#ai-cost">Measured against real use</a>: a light month fits several times over, a moderate month fits at the low end of its range, not the high, and a heavy month does not fit.</p>
+            <p><strong>Where it runs.</strong> Your words pass through our server to Anthropic. We keep no conversation content. Email and text reading need your own AI account; that skips our server from each agent&rsquo;s next start.</p>
+            <p><strong>When the $25 is used.</strong> Your agent pauses until next month; unused credit does not roll over. Connect your own AI account to keep working.</p>
+            <p><strong>Is $25 enough?</strong> <a href="#ai-cost">Measured against real use</a>: light use fits, moderate use fits only at the low end, and heavy use exceeds $25.</p>
           </div>
         </article>
 
@@ -427,49 +400,7 @@
       </div>
     </section>
 
-    <section class="section" aria-labelledby="run-heading">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-label fade-up">Running Archie yourself</span>
-          <h2 id="run-heading" class="fade-up delay-1">Your plan, plus your AI usage.</h2>
-          <p>Connected services may charge their own fees.</p>
-        </div>
 
-        <div class="mt-48 price-grid price-grid--one fade-up delay-1">
-          <article class="price-card">
-            <span class="price-card-label">The AI Itself</span>
-            <div class="price-card-amount price-card-amount--words">Pay as you go</div>
-            <p>Your own account with Anthropic, OpenAI, Google, Groq, xAI, DeepSeek or Mistral. It bills you directly, and the money never passes through us. Groq&rsquo;s free tier can&rsquo;t run Archie.</p>
-            <a href="#ai-cost" class="price-card-link">What that comes to &rarr;</a>
-          </article>
-        </div>
-
-        
-
-        <!-- Where we sell, said before anyone reaches a payment screen rather than at it.
-             Two jobs: it is the fair warning a European reader is owed, and it is the public
-             statement that we do not offer Archie into the EEA, which is the thing GDPR Article
-             3(2) actually turns on. Recital 23 says a site being reachable from Europe is not an
-             offer; what makes it one is evidence of intent, so stating the opposite plainly is the
-             single highest-value sentence on this page for that purpose.
-             Kept factual and time-bound. This is a paperwork gap we intend to close, not a
-             position, and writing it as permanent would be both unfriendly and untrue. -->
-        <p class="price-note"><strong>Plans are on sale now, while Archie is in testing.</strong> They are not offered in the EEA, UK or Switzerland yet. <a href="../../questionnaire/">Join the waitlist</a> for launch news.</p>
-        <p class="price-note">A few add-ons work with another service you have an account with, and that service&rsquo;s own prices apply.</p>
-        <p class="price-note">If Archie can&rsquo;t do something you need, <a href="../../services/#commission">we can scope an add-on for it</a> and quote a price before any work starts. It then joins the marketplace, included for everyone after you.</p>
-
-        <div class="pay-methods fade-up delay-3" aria-label="Accepted payment methods">
-          <span class="pay-methods-label">Secure checkout, powered by Stripe</span>
-          <ul class="pay-methods-list">
-            <li><svg viewBox="0 0 46 30" role="img" aria-label="Visa"><rect width="46" height="30" rx="5" fill="#fff"/><text x="23" y="20" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700" font-style="italic" letter-spacing="0.5" fill="#1434CB">VISA</text></svg></li>
-            <li><svg viewBox="0 0 46 30" role="img" aria-label="Mastercard"><rect width="46" height="30" rx="5" fill="#fff"/><circle cx="19" cy="15" r="7" fill="#EB001B"/><circle cx="27" cy="15" r="7" fill="#F79E1B"/><path d="M23 9.26A7 7 0 0 1 23 20.74 7 7 0 0 1 23 9.26Z" fill="#FF5F00"/></svg></li>
-            <li><svg viewBox="0 0 46 30" role="img" aria-label="American Express"><rect width="46" height="30" rx="5" fill="#1F72CD"/><text x="23" y="18" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" letter-spacing="0.3" fill="#fff">AMEX</text></svg></li>
-            <li><svg viewBox="0 0 46 30" role="img" aria-label="Apple Pay"><rect width="46" height="30" rx="5" fill="#fff"/><path transform="translate(5.31 7.69) scale(0.604)" fill="#000" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/><text x="19.5" y="19.6" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="600" fill="#000">Pay</text></svg></li>
-            <li><svg viewBox="0 0 46 30" role="img" aria-label="Google Pay"><rect width="46" height="30" rx="5" fill="#fff"/><g transform="translate(5.455 8.455) scale(0.545)"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></g><text x="20" y="19.3" font-family="Arial, Helvetica, sans-serif" font-size="10.5" font-weight="600" fill="#5F6368">Pay</text></svg></li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
     <!-- ==============================
          Two ways to try it, on the page where the money question is being decided.
@@ -495,8 +426,8 @@
       <div class="container">
         <div class="section-header">
           <span class="section-label fade-up">Before you pay</span>
-          <h2 id="try-heading" class="fade-up delay-1">Two ways to use Archie for free.</h2>
-          <p>Neither one asks for a card, and the second one does not run out.</p>
+          <h2 id="try-heading" class="fade-up delay-1">Try AI credits or use your own AI account.</h2>
+          <p>Neither needs a card. Both are Personal only.</p>
         </div>
 
         <!-- The two paths, drawn the way trust/ draws them, 2026-09-11. Two prose cards carried two bold
@@ -567,9 +498,9 @@
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Our Account</span>
             <div class="price-card-amount price-card-amount--words">Free credits<span>to start</span></div>
-            <p>Everything but email and text reading, with nothing counted. Eligible accounts receive $2 of starter AI usage on our Claude account, expiring 14 days after the grant or when spent, whichever is first. Switching to your own key does not restart that clock.</p>
+            <p>Eligible accounts get $2 of AI usage for 14 days or until spent. Email and text reading are off. Switching to your own AI account does not restart the clock.</p>
             <p><strong>We are paying, so we are in the path:</strong> the top lane above.</p>
-            <p>They are given per account, need a confirmed email address, are limited per computer, and can be refused.</p>
+            <p>Credits need a confirmed email, are limited per computer and can be refused.</p>
           </article>
           <article class="price-card price-card--prose">
             <span class="price-card-label">On Your Own Account</span>
@@ -578,11 +509,11 @@
             <p>Free means 20 jobs a day, starting again at midnight. A job is one piece of work: a reply to you, a routine running, or an email it reacts to.</p>
             <p>Five of the 20 are kept for what you ask yourself, so an overnight routine can&rsquo;t use up the day before you sit down.</p>
             <p><strong>Your key is paying, so we are not in the path:</strong> the bottom lane.</p>
-            <p>You cover your own AI bill, which is why we can offer it. The measured costs below show what that runs.</p>
+            <p>You pay your AI company. Check the measured costs below.</p>
           </article>
         </div>
 
-        <p class="price-note">Which of the two you are on is on screen in the app, and every host is drawn on the <a href="../../trust/">Trust page</a>.</p>
+        <p class="price-note">Archie shows which account pays. Every connection is drawn on the <a href="../../trust/">Trust page</a>.</p>
       </div>
     </section>
 
@@ -600,7 +531,7 @@
         <div class="section-header">
           <span class="section-label fade-up">The third cost, in numbers</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">What running the AI costs, measured.</h2>
-          <p>The AI account is yours, and we take no cut of it. This is what one agent costs for a month, measured on real agents at Anthropic&rsquo;s rates as of September 12, 2026.</p>
+          <p>Monthly AI costs for one agent, measured at Anthropic&rsquo;s September 12, 2026 rates. We take no cut.</p>
         </div>
 
         <!-- One choice, one number. The bands are the claim; the full table and the workings sit
@@ -641,7 +572,7 @@
           </div>
         </div>
 
-        <p class="cost-note cost-note--lead"><strong>Your agent spends in three places, and only one is you typing.</strong></p>
+        <p class="cost-note cost-note--lead"><strong>Messages, scheduled routines and email reading all use AI.</strong></p>
           <ul class="cost-note-list">
             <li><strong>The messages you send:</strong> two thirds to nine tenths of the bill.</li>
             <li><strong>Reports it runs on a schedule:</strong> a tenth to a third. A dozen add-ons with their routines left on fire about 320 times a month.</li>
@@ -892,8 +823,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261001-4"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261001-4"></script>
-  <script src="../../js/demo-player.js?v=20261001-4"></script>
+  <script src="../../js/nav.js?v=20261001-5"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261001-5"></script>
+  <script src="../../js/demo-player.js?v=20261001-5"></script>
 </body>
 </html>

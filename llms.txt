@@ -55,7 +55,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## How we compare
 
-- [Compare Archie to the Other AI Agents](https://otianai.com/compare/): Compare hosted agents, AI subscriptions, planners and open-source tools. See how Archie pairs local ownership with a five-step setup, plus honest tradeoffs and dated sources.
+- [Compare Archie to the Other AI Agents](https://otianai.com/compare/): Compare AI agents, chat apps, automation tools and hiring help for email and calendar jobs. Check costs, setup, approval rules and where the work runs.
 - [Archie vs ChatGPT and Claude](https://otianai.com/compare/chat-apps/): A chat app answers in its own window, on its company’s servers. Archie runs an agent on your own computer that thinks with the same AI companies’ models, on your own accounts, on a schedule you set. A side-by-side, including what a chat...
 - [Archie vs OpenAI Dots, Claude Cowork, Grok Bot, Symphony, Meta Muse and Manus Cue](https://otianai.com/compare/cloud-agents/): OpenAI Dots, Claude Cowork, Grok Bot and Meta Muse work on a computer their company runs, Wix does not say where Symphony’s agents do, and Manus gives each Cue agent a computer of its own. Archie runs an agent you own, on your own...
 - [Archie vs Zapier, Make and n8n](https://otianai.com/compare/automation-tools/): Automation tools do exactly what their diagram says. An agent is told the job in a sentence and works out the steps. Prices, tradeoffs, and four reasons to keep your automations.

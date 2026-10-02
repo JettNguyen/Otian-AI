@@ -31,13 +31,14 @@ real screens carry a real person's mail.
 
 THE LOOK IS THE IPHONE'S. The styling was first brought to the shipping app's on 2026-09-14,
 from screenshots. On September 28, 2026 the screens were brought to the iPhone look as
-archie-screen-kit.html draws it (Jett's kit in Downloads, which copies iosLight and iosDark
-from the app's src/theme.ts and its primitives from src/ui.tsx): the cream ground with white
-cards on it and no outline anywhere, SF Pro with Georgia for titles, a large title on a tab
-and a bar with a round glass back button over a pushed screen, the floating glass tab bar, a
-card's answers as a rounded bar inside the message, and Skills as a grid of tiles. Where this
-file and the kit disagree, the kit is right and this file is the one to change; the numbers
-below carry the kit's names so a value can be found in both.
+archie-screen-kit.html draws it (the kit in the shared drive's Brand Assets folder, which
+copies iosLight and iosDark from the app's src/theme.ts and its primitives from src/ui.tsx):
+the cream ground with white cards on it and no outline anywhere, SF Pro with Georgia for
+titles, a large title on a tab and a bar with a round glass back button over a pushed
+screen, the floating glass tab bar, a card's answers as a rounded bar inside the message,
+and Skills as a grid of tiles. Where this file and the kit disagree, the kit is right and
+this file is the one to change; the numbers below carry the kit's names so a value can be
+found in both.
 
 WIDTHS ARE MEASURED, NOT GUESSED. Anything drawn around a string is sized from the string,
 through tw() and the advance tables under it, and every line that wraps is wrapped by wrap(),

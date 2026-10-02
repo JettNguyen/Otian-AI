@@ -467,8 +467,10 @@ sizes are on the page at rest, and the pick only lights one.
   `index.html` is a sticky `.day-story` the scroll moves through: seven acts across one day, captions in one column, and one Ember inside the stage that
   `js/home.js` walks between marks on the objects. The window (`.da-*`) and the phone (`.dp-*`) in css/styles.css section 49 are
   class-for-class ports of `archie-app-mockup.html` and `archie-screen-kit.html`, two
-  hand-editable mockups Jett keeps in his Downloads folder, which copy the Archie repo's
-  tokens value for value. **They are not in any repo.** Since 2026-09-28 the mockups draw the
+  hand-editable mockups that copy the Archie repo's tokens value for value. **They are not in any
+  repo: they live in the shared Google Drive, in `06 - Marketing/Brand Assets`, and that copy is the
+  one to change** (Jett, 2026-10-02, after copies in Downloads ran two weeks ahead of it). Copies
+  in Downloads or on the Desktop are old snapshots; never edit or port from one. Since 2026-09-28 the mockups draw the
   app two ways, the Mac and iPhone look and the Windows and Android one (the phone's second look is
   its own file, `archie-screen-kit-android.html`), and **the ports draw the Apple pair**: the window
   as a Mac draws it, with its sidebar a pane of plain gray glass, and the phone as an iPhone does,
@@ -489,7 +491,7 @@ sizes are on the page at rest, and the pick only lights one.
   answers (`InlineActions` in archie-mobile's `ui.tsx`, since its commit 8533dae of 2026-09-18; it
   lit for a 700ms beat and retired before that, and so did the site until the same evening), and
   the answer also arrives as a notice over the screen in the computer's own words, "Sent ✅", which
-  leaves on its own. The kit in Downloads carries both states as "Chat · Send pressed" and "Chat ·
+  leaves on its own. The kit carries both states as "Chat · Send pressed" and "Chat ·
   Sent". **The scroll runs the wait too, and that is not a detail** (2026-09-18): the busy beat ran on a
   900ms timer, so it resolved whether or not anybody scrolled and the sent card arrived with almost
   none of the act left. `at` starts the spinner and `done` settles it, both in scroll. A press by
@@ -502,7 +504,7 @@ sizes are on the page at rest, and the pick only lights one.
   Before drawing a control on either mockup, find it in the app. The mockups are laid out at the size they are shown
   (`zoom`, never `transform: scale()`; the section's comment says why hairlines shimmered), and the
   window's agent card says "On Archie Mobile" at Jett's direction, and since 2026-09-17 so does
-  the app mockup in Downloads, which read "Running on Telegram" until then (its setup pane still
+  the app mockup, which read "Running on Telegram" until then (its setup pane still
   connects Telegram, and that is not a contradiction: the same agent answers in both, as that
   pane says). The phone kit was behind the same way and was brought up to the port on the same
   day: the thinner bezel wall (7 against the kit's old 12, which is why the device is 407 by 866

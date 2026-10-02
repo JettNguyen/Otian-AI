@@ -3783,10 +3783,13 @@ Every other write to Acuity, booking, notes and no-shows included, is refused (`
 - ⚠️ The key goes only to acuityscheduling.com and no Otian server is involved. When saying so, keep
   the provider sentence: what the agent reads goes to the AI company the owner connected.
 
-### 🚧 Square: your agent reads it, drafts an invoice, and sends one or refunds a payment when you say yes: BUILT 2026-09-30 (Archie 8661c63c, on main), not yet in a release
+### 🚧 Square: your agent reads it, drafts an invoice, and sends one or refunds a payment when you say yes: BUILT 2026-09-30 (Archie 8661c63c), in 0.3.4 (released 2026-10-02), never yet run against a real account
 
 **Never run against a real Square account yet** (`docs/OPEN-THREADS.md`). Nothing here is said in
-the present tense on the site until a release carries it and one live read has worked. Unproven: the
+the present tense on the site until a release carries it and one live read has worked. 0.3.4 carries
+it (October 2, 2026), so the store lists Square Keeper, in the app and on the site's generated store
+page, and its release note names it; the live read is what is left before any page of the site's own
+may describe it. Unproven: the
 draft invoice's fields the card is built from, a publish with only a version and a key, the derived
 refund key, and the pinned `Square-Version`.
 
@@ -3819,11 +3822,13 @@ refunded before, so one card cannot become two refunds. The skill is
 - ⚠️ The token goes only to connect.squareup.com and no Otian server is involved. Keep the provider
   sentence: what the agent reads goes to the AI company the owner connected.
 
-### 🚧 Posting to Instagram, through Zernio, when you say yes: BUILT 2026-09-30 (Archie f577198e, on main), not yet in a release
+### 🚧 Posting to Instagram, through Zernio, when you say yes: BUILT 2026-09-30 (Archie f577198e), in 0.3.4 (released 2026-10-02), never yet run against a real account
 
 **Never run against a real Zernio account, and has never posted anything** (`docs/OPEN-THREADS.md`).
 Nothing here is said in the present tense on the site until a release carries it and one real post
-has gone out.
+has gone out. 0.3.4 carries it (October 2, 2026), so the store lists Social Posting, in the app and on
+the site's generated store page, and its release note names it; the real post is what is left before
+any page of the site's own may describe it.
 
 **Approved wording, once it ships:** "Link your Instagram to Zernio, paste Zernio's key into Archie,
 and send your agent a photo with what to say. It writes the caption, shows you the post, which

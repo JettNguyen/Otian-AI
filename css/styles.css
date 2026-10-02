@@ -16861,6 +16861,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-cap .section-label { margin-bottom: 12px; }
 .day-cap > p { margin: 14px 0 0; font-size: var(--fs-md); max-width: 40ch; color: var(--text-secondary); text-wrap: pretty; }
 .day-cap > p strong { color: var(--text-primary); font-weight: 600; }
+.day-cap .hm-price-link { color: var(--c-blue-ink); font-weight: 600; text-decoration: underline; text-underline-offset: .18em; }
 .day-cap .day-catch { margin-top: 14px; padding-left: 12px; border-left: 2px solid var(--accent-line); font-size: var(--fs-sm); color: var(--text-muted); max-width: 42ch; }
 .day-cap .hm-actions { justify-content: flex-start; align-items: center; margin-top: 26px; }
 /* "Archie is in testing" stands beside the button rather than at the foot of the routes (Jett,

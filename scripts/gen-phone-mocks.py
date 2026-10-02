@@ -367,40 +367,71 @@ def glass_shadow():
 
 
 # ── the Ember faces, lifted from the app's own marks ──────────────────────────────────────
-# A face is drawn in a 200x200 space and scaled into a circle of radius r, so the call site
-# only says where and how big. Colors and accessories per agent, the way the app deals them
-# from the agent itself, so two agents never look like twins.
+# Each face is the app's own drawing (src/app/ember-gen.ts in the Archie repo), parts and light
+# alike, drawn in its 200-unit space and framed through the app's window: a square 182 across at
+# (9, 15), which is what puts Ember the size in his circle that he is in the app. Brought up to the
+# app's drawing on October 2, 2026: the light from the upper left (a sheen and a rim shade on the
+# ball, a highlight on each foot, two catchlights per eye), one pink for the cheeks, the curved
+# antenna, and the tighter window. Colors and pieces per agent, the way the app deals them from the
+# agent itself, so two agents never look like twins.
 FACES = {
-    "ember":  dict(hi="#F0AB80", mid="#E28D5E", lo="#C36A3D", eyes="oval", extra="hat"),
+    "ember":  dict(hi="#F0AB80", mid="#E28D5E", lo="#C36A3D", eyes="pill", extra="peak"),
     "teal":   dict(hi="#63B2A9", mid="#3E9A92", lo="#2E7C75", eyes="round", extra="glasses"),
-    "gold":   dict(hi="#D3A855", mid="#BB8C33", lo="#9A7226", eyes="oval", extra="antenna"),
+    "gold":   dict(hi="#D3A855", mid="#BB8C33", lo="#9A7226", eyes="pill", extra="antenna"),
 }
+# The app's window onto the drawing (`FRAME` in ember-gen.ts), and how far a face wearing
+# something on its head sits lower in it (`TOPPED_DROP`).
+WINDOW_X, WINDOW_Y, WINDOW = 9, 15, 182
+TOPPED_DROP = 4
+BLUSH = "#EE7C86"
 
 
 def face_body(kind):
     c = FACES[kind]
-    g = uid("em")
+    g, sh, rim, bl, sd = uid("em"), uid("es"), uid("er"), uid("eb"), uid("ed")
     o = ['<defs><linearGradient id="%s" x1="0" y1="0.18" x2="0" y2="1">'
          '<stop offset="0" stop-color="%s"/><stop offset="0.55" stop-color="%s"/>'
-         '<stop offset="1" stop-color="%s"/></linearGradient></defs>' % (g, c["hi"], c["mid"], c["lo"])]
+         '<stop offset="1" stop-color="%s"/></linearGradient>' % (g, c["hi"], c["mid"], c["lo"]),
+         '<radialGradient id="%s" cx="0.35" cy="0.27" r="0.55"><stop offset="0" stop-color="#FFFFFF"'
+         ' stop-opacity=".34"/><stop offset="0.5" stop-color="#FFFFFF" stop-opacity=".08"/>'
+         '<stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>' % sh,
+         '<radialGradient id="%s" cx="0.42" cy="0.38" r="0.68"><stop offset="0.68" stop-color="%s"'
+         ' stop-opacity="0"/><stop offset="1" stop-color="%s" stop-opacity=".42"/></radialGradient>'
+         % (rim, c["lo"], c["lo"]),
+         '<radialGradient id="%s"><stop offset="0" stop-color="%s" stop-opacity=".55"/>'
+         '<stop offset="1" stop-color="%s" stop-opacity="0"/></radialGradient>' % (bl, BLUSH, BLUSH),
+         '<radialGradient id="%s"><stop offset="0" stop-color="#44403B" stop-opacity=".2"/>'
+         '<stop offset="0.6" stop-color="#44403B" stop-opacity=".1"/><stop offset="1"'
+         ' stop-color="#44403B" stop-opacity="0"/></radialGradient></defs>' % sd]
+    topped = c["extra"] in ("peak", "antenna")
+    if topped:
+        o.append('<g transform="translate(0 %d)">' % TOPPED_DROP)
+    o.append('<ellipse cx="100" cy="177" rx="40" ry="7" fill="url(#%s)"/>' % sd)
     o.append('<ellipse cx="82" cy="169" rx="10" ry="7.5" fill="%s"/>' % c["lo"])
     o.append('<ellipse cx="118" cy="169" rx="10" ry="7.5" fill="%s"/>' % c["lo"])
-    if c["extra"] == "hat":
+    o.append('<ellipse cx="80" cy="166.8" rx="4.6" ry="2.2" fill="#FFFFFF" opacity=".16"/>')
+    o.append('<ellipse cx="116" cy="166.8" rx="4.6" ry="2.2" fill="#FFFFFF" opacity=".16"/>')
+    if c["extra"] == "peak":
         o.append('<path d="M100 30 L87 58 L113 58 Z" fill="%s" stroke="%s" stroke-width="8"'
                  ' stroke-linejoin="round"/>' % (c["lo"], c["lo"]))
     if c["extra"] == "antenna":
-        o.append('<path d="M100 52 L100 34" stroke="%s" stroke-width="7" stroke-linecap="round"/>' % c["lo"])
-        o.append('<circle cx="100" cy="27" r="9" fill="%s"/>' % c["lo"])
+        o.append('<path d="M100 52 Q98 36 104 28" stroke="%s" stroke-width="6" fill="none"'
+                 ' stroke-linecap="round"/>' % c["lo"])
+        o.append('<circle cx="105" cy="24" r="8" fill="%s"/>' % c["lo"])
     o.append('<circle cx="100" cy="108" r="60" fill="url(#%s)"/>' % g)
-    o.append('<ellipse cx="65" cy="125" rx="8.5" ry="5" fill="%s" opacity=".38"/>' % c["lo"])
-    o.append('<ellipse cx="135" cy="125" rx="8.5" ry="5" fill="%s" opacity=".38"/>' % c["lo"])
+    o.append('<circle cx="100" cy="108" r="60" fill="url(#%s)"/>' % sh)
+    o.append('<circle cx="100" cy="108" r="60" fill="url(#%s)"/>' % rim)
+    o.append('<ellipse cx="65" cy="125" rx="10.5" ry="6.5" fill="url(#%s)"/>' % bl)
+    o.append('<ellipse cx="135" cy="125" rx="10.5" ry="6.5" fill="url(#%s)"/>' % bl)
     for ex in (78, 122):
-        if c["eyes"] == "oval":
+        if c["eyes"] == "pill":
             eye = ('<rect x="-7" y="-14" width="14" height="28" rx="7" fill="#2A2521"/>'
-                   '<circle cx="-2.5" cy="-7" r="2.5" fill="#FFF" opacity=".85"/>')
+                   '<circle cx="-2.5" cy="-7" r="2.5" fill="#FFF" opacity=".85"/>'
+                   '<circle cx="2.4" cy="6" r="1.4" fill="#FFF" opacity=".5"/>')
         else:
             eye = ('<circle cx="0" cy="0" r="10" fill="#2A2521"/>'
-                   '<circle cx="-3" cy="-3.5" r="3" fill="#FFF" opacity=".85"/>')
+                   '<circle cx="-3" cy="-3.5" r="3" fill="#FFF" opacity=".85"/>'
+                   '<circle cx="3.2" cy="4" r="1.5" fill="#FFF" opacity=".5"/>')
         o.append('<g transform="translate(%d,103)">%s</g>' % (ex, eye))
     o.append('<path d="M93 132 Q100 138 107 132" stroke="#2A2521" stroke-width="3.2" fill="none"'
              ' stroke-linecap="round"/>')
@@ -413,20 +444,23 @@ def face_body(kind):
                  '<circle cx="68" cy="126" r="2.6"/><circle cx="56" cy="130" r="2.6"/>'
                  '<circle cx="140" cy="118" r="2.6"/><circle cx="132" cy="126" r="2.6"/>'
                  '<circle cx="144" cy="130" r="2.6"/></g>' % c["lo"])
+    if topped:
+        o.append("</g>")
     return "".join(o)
 
 
 def avatar(x, y, size, kind, dot=False):
     """A face in a `size` circle whose top left is (x, y), on the terracotta wash the app hands
-    every face (--face-ground)."""
+    every face (--face-ground). The drawing goes in through the app's window, so the face is
+    the size in its circle that it is in the app."""
     r = size / 2.0
     cx, cy = x + r, y + r
     cid = uid("fc")
     o = ['<defs><clipPath id="%s"><circle cx="%s" cy="%s" r="%s"/></clipPath></defs>' % (
         cid, f(cx), f(cy), f(r))]
     o.append(circle(cx, cy, r, "var(--face-ground)"))
-    o.append('<g clip-path="url(#%s)"><g transform="translate(%s,%s) scale(%s)">%s</g></g>' % (
-        cid, f(x), f(y), "%.4f" % (r / 100.0), face_body(kind)))
+    o.append('<g clip-path="url(#%s)"><g transform="translate(%s,%s) scale(%s) translate(%d %d)">%s</g></g>' % (
+        cid, f(x), f(y), "%.4f" % (size / float(WINDOW)), -WINDOW_X, -WINDOW_Y, face_body(kind)))
     if dot:
         # The running dot on the face in the bar (facewrap .dot): 30% of the face, one point past
         # its corner, ringed in the page's own ground. It is the one place "running" is stated

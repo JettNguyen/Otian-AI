@@ -20469,22 +20469,13 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .install-details { padding: 0 16px; }
 }
 
-/* The opening has its own order: pitch, dinner preview, then the free action.
-   The same scene returns to the stage's column for the rest of the day. */
-.day-stage.is-hero { display: block; padding: calc(var(--nav-height) + 16px) 16px 16px; }
-.day-stage.is-hero .day-caps { display: block; height: auto; max-width: 1000px; margin: 0 auto; padding: 0; }
-.day-stage.is-hero .day-cap[data-act="0"] { position: relative; inset: auto; height: calc(100dvh - var(--nav-height) - 32px); padding: 0; align-items: center; text-align: center; justify-content: flex-start; }
-.day-stage.is-hero .day-cap:not([data-act="0"]) { display: none; }
-.day-stage.is-hero .day-cap > p { flex: none; max-width: 64ch; }
-.day-stage.is-hero .day-cap .section-label { flex: none; margin-bottom: 6px; }
-.day-stage.is-hero .day-cap h1 { flex: none; }
-.day-stage.is-hero .day-clock, .day-stage.is-hero .day-hint { display: none; }
+/* The dinner navigator sits above the free action; the mockup stays in its scene column. */
+.day-stage.is-hero .day-clock { display: none; }
 .day-stage:not(.is-hero) .hm-evening { display: none; }
-.hm-evening { display: flex; flex-direction: column; align-items: center; flex: 1; min-height: 0; width: 100%; margin-top: 14px; }
-.hm-evening > p { flex: none; margin: 0; font-size: var(--fs-sm); font-weight: 400; line-height: 1.4; }
+.hm-evening { margin-top: 18px; }
+.hm-evening > p { margin: 0; font-size: var(--fs-sm); font-weight: 400; line-height: 1.4; }
 .hm-evening .hm-dinner-outcome { color: var(--accent-ink); font-weight: 600; }
-.day-stage.is-hero .hm-evening .day-scene-wrap { flex: 1; width: 100%; height: auto; min-height: 0; margin: 12px 0 8px; padding: 0; transform: none; }
-.hm-dinner-controls { position: relative; z-index: 50; display: flex; flex: none; justify-content: center; align-items: center; gap: 4px; }
+.hm-dinner-controls { display: flex; justify-content: flex-start; align-items: center; gap: 4px; margin-top: 8px; }
 .hm-dinner-controls button { min-width: 36px; min-height: 36px; padding: 4px 8px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-card); color: var(--text-secondary); font: inherit; font-size: var(--fs-xs); cursor: pointer; }
 .hm-dinner-controls button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg-primary); }
 .hm-dinner-controls button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; }
@@ -20492,27 +20483,22 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .hm-evening .hm-dinner-note { font-size: var(--fs-2xs); color: var(--text-muted); margin-top: 4px; }
 .hm-dinner-job { display: none; }
 .hm-dinner-job.is-on { display: block; }
-.day-stage.is-hero .hm-actions { flex: none; justify-content: center; margin-top: 12px; }
+.day-cap .hm-actions { margin-top: 14px; }
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }
-.day-cap > p.hm-hero-status { max-width: none; margin-top: 8px; font-size: var(--fs-xs); text-align: center; }
-.day-cap > p.hm-trust-strip { max-width: 70ch; margin-top: 8px; color: var(--text-muted); font-size: var(--fs-xs); line-height: 1.65; }
+.day-cap > p.hm-hero-status { max-width: none; margin-top: 8px; font-size: var(--fs-xs); }
+.day-cap > p.hm-trust-strip { max-width: 48ch; margin-top: 8px; color: var(--text-muted); font-size: var(--fs-xs); line-height: 1.65; }
 @media (max-width: 970px) {
+  .hm-dinner-controls { justify-content: center; }
   .hm-dinner-controls button { min-width: 44px; min-height: 44px; }
-  .day-stage.is-hero .day-cap > p.hm-trust-strip { max-width: calc(100% - 90px); }
+  .day-cap > p.hm-hero-status { text-align: center; }
+  .day-cap > p.hm-trust-strip { max-width: calc(100% - 90px); }
 }
 @media (max-width: 970px) and (max-height: 700px) {
-  .day-stage.is-hero { padding-top: calc(var(--nav-height) + 8px); }
-  .day-stage.is-hero .day-cap[data-act="0"] { height: calc(100dvh - var(--nav-height) - 24px); }
   .hm-evening { margin-top: 8px; }
   .hm-evening > p { font-size: var(--fs-xs); }
-  .day-stage.is-hero .day-cap > p.hm-trust-strip { max-width: calc(100% - 90px); font-size: var(--fs-2xs); margin-top: 5px; }
-  .day-cap > p.hm-hero-status { font-size: var(--fs-2xs); margin-top: 5px; }
+  .hm-dinner-controls { margin-top: 4px; }
+  .day-cap > p.hm-hero-status, .day-cap > p.hm-trust-strip { font-size: var(--fs-2xs); margin-top: 5px; }
 }
 @media (prefers-reduced-motion: no-preference) {
   .hm-dinner-job.is-on { animation: hm-fade-up-in .35s ease; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .day-stage.is-hero .day-cap[data-act="0"] { height: auto; }
-  .day-stage.is-hero .day-cap:not([data-act="0"]) { display: flex; }
-  .day-stage.is-hero .hm-evening .day-scene-wrap { flex: none; height: 360px; }
 }

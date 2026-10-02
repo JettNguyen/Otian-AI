@@ -210,7 +210,6 @@
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
-    var dinner = $('.hm-evening'), sceneHome = $('#daySceneHome');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
@@ -563,7 +562,7 @@
     }
     function capsFit() {
       if (!capsEl || !caps.length) return;
-      if (!narrow || still || cur === 0) {
+      if (!narrow || still) {
         if (capQ) { capsEl.style.height = ''; capQ = ''; capH = 0; }
         return;
       }
@@ -595,7 +594,7 @@
       /* The band the scroll hint stands in, which the scene may not grow into: see the comment on
          .day-scene-wrap in the stylesheet, whose padding-bottom is this same number and must stay
          it. Zero where there is no hint drawn, which is narrow and reduced motion. */
-      var band = (narrow || still || cur === 0) ? 0 : HINT_BAND;
+      var band = (narrow || still) ? 0 : HINT_BAND;
       /* The narrow floor is 0.1 and not 0.3: the scene's row has no floor either (see .day-stage in
          the stylesheet), so on a short phone the row can come down to almost nothing, and a scene
          held at 0.3 in a row of 80 would be drawn straight over the caption it just gave the room
@@ -609,7 +608,7 @@
          place, and it is a margin in screen pixels rather than a bigger divisor because that is
          what a gutter is. */
       scTarget = narrow ? clamp(Math.min((sr.width - EDGE * 2) / 400, wr.height / NARROW_H), 0.1, 1.45)
-                        : clamp(Math.min(byW, (wr.height - band) / (cur === 0 ? 650 : 560)), cur === 0 ? 0.1 : 0.4, 1.45);
+                        : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the
          page open by growing into itself. That is not hypothetical. `setAct` returns early while
@@ -888,11 +887,6 @@
       clock.classList.toggle('is-on', !!ACTS[i].clock);
       stage.classList.toggle('is-timed', !!ACTS[i].clock);
       stage.classList.toggle('is-hero', i === 0);
-      // The opening preview sits above its action; later acts use the stage's scene column.
-      if (dinner && sceneHome) {
-        if (i === 0) dinner.insertBefore(wrap, dinner.querySelector('.hm-dinner-controls'));
-        else stage.insertBefore(wrap, sceneHome);
-      }
       if (ACTS[i].clock) clock.querySelector('.day-clock-time > span').textContent = ACTS[i].clock;
       if (phoneClock) phoneClock.textContent = ACTS[i].phone;
       if (prev >= 0 && !still) window.Ember.act(ember, 'hop');
@@ -960,9 +954,8 @@
 
          The clock goes with them. It is the scene's own label, and a time floating over an empty
          stage is a caption for a picture that is not there. */
-      // The inline dinner preview keeps its own row above the free action.
       var heroHide = 0;
-      if (narrow && !still && i === 0 && !dinner) {
+      if (narrow && !still && i === 0) {
         heroHide = ramp(t, 0.22, 0.40) * (1 - ramp(t, 0.74, 0.96));
         if (heroHide > 0.001) {
           pose = copy(pose, {

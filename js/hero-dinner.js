@@ -43,7 +43,6 @@
   function show(index) {
     var prev = current;
     current = index;
-    preview.style.setProperty('--dinner-i', index);
     jobs.forEach(function (job, i) {
       job.classList.toggle('is-on', i === index);
       // The one leaving lifts away; the rest wait below for their turn to rise.

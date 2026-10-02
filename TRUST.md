@@ -2025,6 +2025,12 @@ settings. It cannot run code on your computer, because Archie has nowhere to run
 A Skill is written instructions plus settings. It cannot run code on your computer, because Archie
 has nowhere to run it." The same claim without the contrast; the browse page's caption uses it.
 
+**Amended 2026-10-02, when Computer control shipped:** both captions now say "It cannot run code or a
+command on your computer, because Archie has nowhere to run one", and the figure beside them labels
+the struck-out block "Code" where it said "A program". On a Mac the agent can now open an application
+the owner allowed, so a struck-out program would read as untrue; an add-on still brings no code and
+Archie still has nowhere to run any.
+
 **Why it's true (reworded 2026-08-21):** No shell, no `dlopen`/`libloading`, no WASM, no JS
 `eval` anywhere in `crates/` or `src-tauri/`. Process spawning does exist, and the old "no
 `std::process::Command` anywhere" claim was flatly untrue: the crates spawn our own
@@ -2272,8 +2278,8 @@ capability with no row in this file reads to everyone downstream as one we do no
 **Approved wording:** "When there is no direct connection to a site, your agent can use the site
 itself, the same way you would: it reads the page, it clicks, it types. It works in a browser window
 on your own computer, and you can watch it. You sign in yourself, once, in that window. It never
-types a password, a card number or a sign-in code, and where one of those is asked for it stops and
-hands you the window. Before it presses anything that sends, submits or finalizes something, it
+types a password, a card you pay with or a sign-in code, and where one of those is asked for it stops
+and hands you the window. Before it presses anything that sends, submits or finalizes something, it
 stops and sends you the page. Tap Press it for me, from Archie, your phone or your chat app, and it
 presses that one button; or finish it yourself, in the window on the computer, or in the shop's
 own app on your phone if your cart shows up there. A purchase also needs buying switched
@@ -2288,8 +2294,14 @@ owner's tap on the card releases that one press, by its name and its site, once
 (`PendingPress` in `screen/tools.rs`, rechecked against `guard::click_can_be_tapped` at the moment
 of the click). A guest cannot give it and a routine never receives one (`turn.rs`, owner only).
 
-**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and shipping in
-0.3.4** (Archie `9549aefc` and `b498fdf4`). Jett first chose a fix-only 0.3.4, then the same day
+**Amended 2026-10-02: "a card number" became "a card you pay with"** in the wording above, the form
+Jett approved for Computer control the same day. Both halves type through one guard
+(`guard::typing_stop`), and since his call a gift card, library card, loyalty or membership number
+is typed there (`guard::names_a_card_that_is_not_payment`), so "never types a card number" stopped
+being true on a website too.
+
+**Amended 2026-10-02: two defects in every release through 0.3.3, fixed in 0.3.4, released
+October 2, 2026** (Archie `9549aefc` and `b498fdf4`). Jett first chose a fix-only 0.3.4, then the same day
 chose to release main with everything in it, since `release.sh` ships only from main. Found while
 building the applications half (below), by mapping the tool layer before building on it. Both make a sentence in the approved wording above untrue in one case, so the copy is safe
 only for a release that carries the fixes:
@@ -2307,7 +2319,9 @@ only for a release that carries the fixes:
 
 **Jett's call, 2026-10-02: close it with the patch release rather than a disclosure.** Until 0.3.4
 is out and installed, "before it presses anything that sends, submits or finalizes something, it
-stops" has the exception in item 1 on every installed copy; from 0.3.4 it does not.
+stops" has the exception in item 1 on every installed copy; from 0.3.4 it does not. 0.3.4 shipped the
+same day, and a copy updates itself when Archie is next opened, so the exception lasts on a computer
+only until then.
 
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
@@ -2315,9 +2329,9 @@ it: releasing it decided that the choice exists, not what anyone chose.
 **Why it's true:** `crates/archie-runtime/src/screen/` in the Archie repo.
 `SITES_AND_APPS_RELEASED` in `crates/archie-domain/src/screen.rs` is `true`, and so is its twin in
 `src/app/vocab.ts`; a test fails if only one of them moves. The app calls it **Websites**, on the
-Connections tab, since 2026-08-19, and that is the name copy uses for every release before the one
-carrying Archie `3ff8fee9`. From that release the entry is called **Computer control** (see the 🚧
-entry below), and every "under Websites" on the site becomes "under Computer control".
+Connections tab, from 2026-08-19 through 0.3.3. From 0.3.4 (October 2, 2026, carrying Archie
+`3ff8fee9`) the entry is called **Computer control** (see its entry below), and the site says "under
+Computer control" everywhere it used to say "under Websites", changed the same day.
 
 - **It is a browser on the person's computer, not a hidden one.** `screen/browser.rs` launches
   Chrome, Edge or Brave headful and unfocused, never headless, in a profile of the agent's own
@@ -2382,9 +2396,9 @@ names the button by its own name on the page, the computer running Archie and th
   required clauses.
 - ❌ Never "it fills in the whole form". It fills what is not a password, a card or a code, and
   stops at the ones that are.
-- ❌ Never describe it driving other **applications**. That half is built on a Mac since 2026-10-02
-  and is in no release, and nothing has been run by a model in it: the 🚧 entry below is where its
-  wording waits. Websites are the whole of what ships.
+- ❌ Never describe this entry as driving **applications**. Since 0.3.4 a Mac's applications are
+  the other half of Computer control, which has its own entry below with its own wording and its own
+  boundaries: say them from there. On Windows, websites are the whole of it.
 - ❌ **Never put a cost figure on it, and never recommend it to someone choosing on price.** One
   page serialized to about 6,000 tokens in the only measurement that exists, a job is many reads,
   and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
@@ -2450,19 +2464,21 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `54040e99`), in 0.3.4, not yet released
+### ✅ Computer control: the agent using the apps you allow on a Mac, in the background: SHIPPED 2026-10-02 in 0.3.4 (Archie `9549aefc` to `7f77cd5d`)
 
 **Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
 row above went a month without one, and a capability with no row reads downstream as one we do not
-have. One real job has run in an application (below); nothing here may be said in the present
-tense on the site until 0.3.4 is out.
+have. **It shipped the same day, in 0.3.4**, and the site's pages changed with it (listed at the
+end of this entry).
 
 **What the first real jobs showed (2026-10-02, `scripts/live-app-job.sh`, a real model through
 the whole gateway):** asked to start a new project in Premiere Pro, the agent asked to use it, was
 allowed by a tap, and worked through File, New, Project with Premiere behind another application.
-Premiere's name box ignored its typing, and the agent said so and asked the person to type the name;
-it did not press Create. In TextEdit it typed a line at the end of a new document and read it back.
-Neither application came forward. Three defects found on the way were fixed the same day.
+Premiere's name box ignored its typing at first, and the agent said so and asked the person to type
+the name; it did not press Create. With key presses added as the last resort (below), the same job
+typed the name, Archie Test, and again stopped before Create. Started fresh, Premiere brought itself
+forward for under half a second before it was hidden. In TextEdit it typed a line at the end of a new
+document and read it back. Five defects found on the way were fixed the same day.
 
 **What has not happened yet**, and each is a reason for a boundary below:
 
@@ -2470,8 +2486,10 @@ Neither application came forward. Three defects found on the way were fixed the 
   belonged to the editor that ran it.
 - Nobody knows yet whether it works while the Mac is locked, which is the shape of every request
   from a phone.
+- The pointer has been seen in a real browser window on a test page (`tests/screen_live.rs`), not
+  yet on a real site.
 
-**Wording, approved by Jett 2026-10-02 ("approve as written"), for the day it ships:** "On a Mac,
+**Wording, approved by Jett 2026-10-02 ("approve as written"):** "On a Mac,
 your agent can also use the apps you allow, such as Numbers or Preview, the same careful way it uses
 a website. It presses buttons and fills in boxes inside the app's window without moving your
 pointer, so you can keep working, and if you start using that app it waits for you. macOS asks you
@@ -2483,13 +2501,17 @@ pay with, and anything it could not undo waits for you."
 pay with", because he had chosen to let a gift card, library card, loyalty or membership number be
 typed, and "never types a card number" would no longer have been true as written.
 
+*Where it is on the site (2026-10-02):* `archie/websites/`, in a section headed "On a Mac", as three
+points with every clause kept. The last sentence is split at "and the same stops apply", because the
+site's limit is 35 words a sentence.
+
 *Short form, proposed:* "Uses the apps you allow on your Mac, in the background, and stops before
 anything it can't undo."
 
 **The name, approved by Jett 2026-10-02:** websites and applications are one capability on screen,
 **Computer control**, with the line "Your agent clicks and types in websites and apps on this
 computer, the way you would. It stops before anything it can't undo." (Windows reads it without "and
-apps".) It replaces **Websites** as the Connections entry from the release that carries it.
+apps".) It replaced **Websites** as the Connections entry in 0.3.4.
 
 **One switch, one list (Jett, 2026-10-02):** "to a normal person, they do the same thing, they just
 work a bit differently behind the curtain." The panel opens on asking in the chat, holds websites and
@@ -2545,7 +2567,8 @@ the picture in the approval card shows which button it means.
   `screen/mod.rs` draws it in a closed shadow root, `aria-hidden`, taking no pointer events, so the
   agent's read and its presses pass through it; `tests/screen_live.rs` asserts the read is unchanged
   with it on the page. Nothing is drawn in an application.
-- **The phone can run the panel**, from the next Archie Mobile: the snapshot carries each agent's
+- **The phone can run the panel**, from the next Archie Mobile (no phone build carries it yet; the
+  desktop half shipped in 0.3.4): the snapshot carries each agent's
   Computer control (`computer_at` in `src-tauri/src/phone.rs`) and nine relay ops change it through
   the window's own commands. Sign-ins and the macOS permission still happen on the Mac.
 - **Mac only.** `ScreenSurface::Apps.available_here()` is false off macOS, so the store lists no
@@ -2560,8 +2583,9 @@ the picture in the approval card shows which button it means.
 - ⚠️ **The never list**, or at least that it never uses a terminal, a password keeper or their
   email app, because those are the three a careful reader asks about.
 - ⚠️ **An app that does not describe its window cannot be used yet**, and the agent says so.
-- ⚠️ **An app that draws its own boxes may not take its typing** (Premiere Pro's project name did
-  not), and the agent asks the person to type that part.
+- ⚠️ **An app that draws its own boxes may not take its typing**, and the agent says so and asks
+  the person to type that part. Premiere Pro's project name took it only as key presses, the last
+  resort.
 
 **Boundaries:**
 - ❌ **Never "takes over your computer", "controls your mouse" or "types for you" as if it were a
@@ -2575,7 +2599,8 @@ the picture in the approval card shows which button it means.
   window at 185 to 400 tokens.
 - ❌ **Never "works while your Mac is locked"** until it has been tried.
 - ❌ **Never name an application as supported.** One real job ran in Premiere Pro, through its menus
-  and not its typing, and one in TextEdit. That is two jobs, not a list.
+  and its name box by key presses, and one in TextEdit. That is two jobs, not a list.
+- ❌ **Never say the phone can run it** until an Archie Mobile build carrying the panel is out.
 - ❌ **Never say it moves your mouse or puts a cursor on your screen.** The pointer is drawn inside
   the agent's own browser window, and in an application nothing is drawn at all.
 - ❌ **Never "never types a card number" without "you pay with".** A gift card, library card,
@@ -2584,20 +2609,25 @@ the picture in the approval card shows which button it means.
   application's boxes ignore everything else. Say what is true: it never moves your pointer, and
   while you are using the app it is working in, it waits for you.
 
-**What changes elsewhere in this file the day it ships**, because each says something this makes
-untrue:
-- "It cannot run a program on your computer" (the positioning under "What it structurally cannot
-  do", its table row "No program execution on the owner's machine", and the add-on lines "It cannot
-  run code on your computer"). Proposed: "It cannot run code or a command on your computer. On a Mac
-  it can use the apps you allow, and never a terminal."
-- The Websites entry's boundary about applications, above, which this entry replaces.
-- Every list of the macOS permissions Archie asks for: Accessibility joins Full Disk Access,
-  Automation, Local Network and the administrator password.
-- Pages to change with it: `faq/index.html:552`, `blog/ai-built-my-workout-program/index.html:188`,
-  `trust/index.html:1063`, `skills-marketplace/browse/index.html:1373` and `:838`,
-  `archie/websites/index.html:178`, `how-it-works/index.html:451` and `:487`,
-  `trust/it-review/index.html:282` (the list of system prompts it triggers), and
-  `help/index.html:470` (the permissions walk-through).
+**What changed on ship day (2026-10-02)**, because each said something this made untrue:
+- "It cannot run a program on your computer" became "It cannot run code or a command on your
+  computer. On a Mac it can use the apps you allow, and never a terminal." in the positioning under
+  "What it structurally cannot do" and its table row, and the add-on lines became "code or a
+  command" (both below). Archie's own guide `what-it-will-not-do` says the same from 0.3.4 (Archie
+  `7f77cd5d`).
+- The Websites entry's boundary about applications points here.
+- The macOS permissions: `trust/it-review/` now says, beside the document, that it describes 0.2.3
+  and that a Mac has asked for two more since: the administrator password for waking, and
+  Accessibility for Computer control. The document itself lists neither and is a revision away.
+- "A card number" became "a card you pay with" everywhere the site says the agent never types one,
+  **except the privacy policy and the terms of service**, which are legal text and wait for Jett.
+- The pages: `archie/websites/` (the label, the Buying fold's drawings and caption, the stops figure,
+  a section headed "On a Mac", the next step in 0.3.4's words, and the agent's pointer drawn as the
+  Archie mark it is), `how-it-works/` (the caption names the apps), `faq/`, `trust/` (and its add-on
+  figure, now "Code" where it said "A program"), `trust/it-review/`, `skills-marketplace/browse/`
+  with `js/addon-card.js`, which writes each card's sentence, `help/` (a row for the Mac's
+  permission), the workout post, and two Learning Library sections not yet published
+  (`assets/library.json`).
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
@@ -2924,7 +2954,8 @@ privacy question and the privacy answers do not touch it, so it gets a claim of 
 programs talking to each other with nobody in the middle. Archie is one agent, and the only
 conversation it is in is the one with you. It is not awake between messages: it runs when you write
 to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
-runs in between. It cannot run a program on your computer. It cannot call or text, and it presses
+runs in between. It cannot run code or a command on your computer. On a Mac it can use the apps
+you allow, and never a terminal. It cannot call or text, and it presses
 nothing that finishes something, on a website or anywhere else, unless you switched on buying and
 the order is inside your limits; drafts wait for your Send. And you can quit the app, because there
 is nowhere else it is running."
@@ -2935,7 +2966,7 @@ is nowhere else it is running."
 | --- | --- |
 | One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
 | Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
-| No program execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
+| No code or command execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. **On a Mac, Computer control (0.3.4) can open and use an application the owner allowed.** It refuses Terminal and the other terminals, script editors, Automator, Shortcuts, Xcode and the code editors on its list, whatever the owner says (`REFUSED_APPS` in `screen/guard.rs`, application ids, so an unknown app is not on it), and it never presses Return, nor sends a line break as a key press (`macos::type_by_keys`), which is how a terminal runs what is typed. "It cannot run a program" became this row's wording that day, because opening an allowed application is running one. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
 | No calls, texts, or finalizing presses, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry) |
 | No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
 | Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |
@@ -4339,7 +4370,7 @@ Asking for the purchase in chat ("buy it", "yes") releases nothing: only the car
 
 **What was actually built** (the Archie repo, 2026-09-21, commits `8d3d95d2` through `09571777`, all
 of them in 0.3.0, released September 22):
-a switch on the Websites panel, off by default, that lets the agent press a button that completes a
+a switch on the Websites panel (called Computer control from 0.3.4), off by default, that lets the agent press a button that completes a
 purchase. Everything about it is in `archie_domain::SpendPolicy`, `crates/archie-runtime/src/screen/
 guard.rs` and `.../screen/spend.rs`, and documented in that repo's `docs/SITES-AND-APPS.md`.
 

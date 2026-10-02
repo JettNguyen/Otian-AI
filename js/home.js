@@ -507,6 +507,7 @@
        An earlier fix pinned the caption row so the scene could not move at all. It did stop the
        snap, and it also threw away the effect this is for. */
     var EASE_SC = 0.12, scTarget = 1, lastWrapH = 0, capsEl = $('.day-caps');
+    var heroCap = $('.day-cap[data-act="0"]'), heroLift = '';
 
     /* THE HEIGHT EACH HERO BEAT OPENS TO, measured rather than guessed. `max-height` is what
        animates the room open (see the stylesheet beside `.day-beat`), and it needs a real number
@@ -955,34 +956,39 @@
       if (Math.abs(tilt.tx - tilt.x) < 0.01) tilt.x = tilt.tx;
       if (Math.abs(tilt.ty - tilt.y) < 0.01) tilt.y = tilt.ty;
       /* ── THE HERO'S SECOND BEAT: THE MOCKUPS STEP OUT ──────────────────────────────────────
-         Narrow only, and act 0 only. The hero opens as a picture with a headline on it, and then
-         the description arrives and there is no longer room on a phone for both: whichever one
-         the reader is looking at, the other is in the way. So the picture leaves while the words
-         are being read, and comes back on its way into the day (Jett, 2026-09-19).
+         Narrow only. The hero opens as a picture with a headline on it, and then the description
+         arrives and there is no longer room on a phone for both: whichever one the reader is
+         looking at, the other is in the way. So the picture leaves while the words are read
+         (Jett, 2026-09-19).
 
-         Three phases over act 0's own progress, not three acts, because an act is a claim with a
-         scene and this is one claim seen twice. The mockups fade from 0.10 to 0.26, and the
-         details land at 0.16 (index.html's data-at), halfway through; they stay gone while those
-         are read; and they come back from 0.80 to 0.97, as the details fold at 0.80 (data-until),
-         whole again before act 1 takes over the pose. Moved earlier on 2026-10-02, when the first
-         screen became the mockups and the essentials alone (Jett): a push should bring the rest.
+         Mockups with the few words that matter, then every word and no mockups, then 9:12 am with
+         its mockups (Jett, 2026-10-02: "mockups with minimal text > full detail no mockups > next
+         section (9:12am) with mockups"). The mockups fade from 0.10 to 0.26 of act 0 and the
+         details land at 0.16 (index.html's data-at), halfway through. Nothing comes back inside
+         act 0: until the same day the mockups returned from 0.80 and the details folded to let
+         them, which played the short hero a second time on the way out. They come back with act 1
+         now, over its first eighth, while its caption arrives.
 
-         The caption rides up as they go, by a share of the row they vacate, or the words would be
-         read at the bottom of a screen with nothing in the top half of it. A transform, not a
-         layout change: the row is still there, and nothing reflows while somebody is reading.
+         ONE AFTER THE OTHER, NOT TOGETHER. The mockups are gone before the words start up into
+         their room: both on one curve put the headline over a half-faded phone with Ember
+         standing on it. `gone` is the mockups' share of the curve and `rise` the caption's.
 
-         The clock goes with them. It is the scene's own label, and a time floating over an empty
-         stage is a caption for a picture that is not there. */
-      var heroHide = 0;
-      /* ONE AFTER THE OTHER, NOT TOGETHER (2026-10-02). The mockups are gone before the words
-         start up into their room, and on the way back the words are down before the mockups
-         return: both on one curve put the headline over a half-faded phone with Ember standing on
-         it. `gone` is the mockups' share of the curve and `rise` the caption's. */
+         The hero's caption rides up by a share of the row the mockups vacate, or the words would
+         be read at the bottom of a screen with nothing in the top half of it. A translate, not a
+         layout change, so nothing reflows while somebody is reading, and `translate` rather than
+         `transform`, because .day-cap eases its transform over half a second and this has to
+         follow the scroll. Past act 0 it holds where it was while it fades out, so the hand-over
+         to 9:12 am is a fade and not a drop.
+
+         The clock and Ember go with the mockups. The clock is the scene's own label, and a time
+         floating over an empty stage is a caption for a picture that is not there. */
       var gone = 0, rise = 0;
-      if (narrow && !still && i === 0) {
-        heroHide = ramp(t, 0.10, 0.26) * (1 - ramp(t, 0.80, 0.97));
-        gone = ramp(heroHide, 0, 0.55);
-        rise = ramp(heroHide, 0.45, 1);
+      if (narrow && !still) {
+        if (i === 0) {
+          var heroHide = ramp(t, 0.10, 0.26);
+          gone = ramp(heroHide, 0, 0.55);
+          rise = ramp(heroHide, 0.45, 1);
+        } else if (i === 1) gone = 1 - ramp(t, 0, 0.12);
         if (gone > 0.001) {
           pose = copy(pose, {
             win: copy(pose.win, { o: pose.win.o * (1 - gone) }),
@@ -990,10 +996,10 @@
           });
         }
       }
-      if (capsEl) {
-        var lift = rise > 0.001 ? (-rise * lastWrapH * 0.45).toFixed(1) + 'px' : '';
-        var want = lift ? 'translateY(' + lift + ')' : '';
-        if (capsEl.style.transform !== want) capsEl.style.transform = want;
+      if (heroCap && (i === 0 || !narrow || still)) {
+        heroLift = rise > 0.001 ? (-rise * lastWrapH * 0.45).toFixed(1) + 'px' : '';
+        var want = heroLift ? '0 ' + heroLift : '';
+        if (heroCap.style.translate !== want) heroCap.style.translate = want;
       }
       if (clock) clock.style.opacity = gone > 0.001 ? (1 - gone).toFixed(3) : '';
       /* Ember goes with them, and has to. Ember stands on a mark, every mark in this act is on the

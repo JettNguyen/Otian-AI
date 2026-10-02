@@ -76,7 +76,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261002-4" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261002-5" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -305,14 +305,36 @@
             <span class="section-label">Otian AI &middot; Archie</span>
             <h1>Don&rsquo;t rent your agent. <em>Own it.</em></h1>
             <p class="day-beat is-on" data-act="0" data-at="0">Hand Archie the busywork you keep putting off. Your agent gets it done your way, on your computer with the AI you choose.</p>
+            <!-- A control for the phone, so it is drawn as one and not as a paragraph. Each row wears
+                 the face of the add-on that did the job (js/faces.js: Email Manager's mail on the
+                 skill field, Bill Reminders' money and Return Window Watch's parcel on the routine
+                 one), copied by hand with no data-face, which gen-marketplace.mjs would claim. -->
             <div class="hm-evening" role="group" aria-label="Illustrative jobs while you are at dinner">
-              <p><em>While you were at dinner, Archie&hellip;</em></p>
-              <p class="hm-dinner-outcome">drafted Sam&rsquo;s reply.</p>
-              <div class="hm-dinner-controls">
-                <button type="button" data-dinner-pick="0" aria-label="See the reply draft" aria-pressed="true">1</button>
-                <button type="button" data-dinner-pick="1" aria-label="See the bill reminder" aria-pressed="false">2</button>
-                <button type="button" data-dinner-pick="2" aria-label="See the return deadline" aria-pressed="false">3</button>
-                <button type="button" class="hm-dinner-pause" aria-label="Pause dinner examples" aria-pressed="false">Pause</button>
+              <div class="hm-dinner-head">
+                <svg class="hm-dinner-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.2 8.2 0 1 1 9.4 4a6.6 6.6 0 0 0 10.6 10.6z"/></svg>
+                <p>While you were at dinner, Archie&hellip;</p>
+                <button type="button" class="hm-dinner-pause" aria-label="Pause dinner examples">
+                  <svg class="hm-dinner-ic-pause" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx="1"/><rect x="7.4" y="1.5" width="2.6" height="9" rx="1"/></svg>
+                  <svg class="hm-dinner-ic-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.2 1.9v8.2a.8.8 0 0 0 1.2.7l6.6-4.1a.8.8 0 0 0 0-1.4L4.4 1.2a.8.8 0 0 0-1.2.7z"/></svg>
+                </button>
+              </div>
+              <div class="hm-dinner-list">
+                <span class="hm-dinner-glide" aria-hidden="true"></span>
+                <button type="button" class="hm-dinner-pick" data-dinner-pick="0" aria-pressed="true">
+                  <span class="mp-face mp-face--row" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="m3.5 7.5 8.5 6 8.5-6"/></svg></span>
+                  <span class="hm-dinner-text"><span>drafted Sam&rsquo;s reply</span></span>
+                  <span class="hm-dinner-bar" aria-hidden="true"><i></i></span>
+                </button>
+                <button type="button" class="hm-dinner-pick" data-dinner-pick="1" aria-pressed="false">
+                  <span class="mp-face mp-face--row mp-face--routine" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2z"/><path d="M2 11h20"/><path d="M6 14.5h4"/></svg></span>
+                  <span class="hm-dinner-text"><span>flagged your next bill</span></span>
+                  <span class="hm-dinner-bar" aria-hidden="true"><i></i></span>
+                </button>
+                <button type="button" class="hm-dinner-pick" data-dinner-pick="2" aria-pressed="false">
+                  <span class="mp-face mp-face--row mp-face--routine" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5"/><path d="M12 12v9"/></svg></span>
+                  <span class="hm-dinner-text"><span>caught a return deadline</span></span>
+                  <span class="hm-dinner-bar" aria-hidden="true"><i></i></span>
+                </button>
               </div>
               <p class="hm-dinner-note">With mail watch and routines set up.</p>
             </div>
@@ -619,23 +641,25 @@
                   <div class="dp-transcript">
 
                     <div class="dp-scr is-on" data-scr="0">
-                      <div class="hm-dinner-job is-on" data-dinner-job="0"><div class="dp-said">
-                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>.</p><p>Can we move the roof estimate to Friday?</p><p><b>Draft reply</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
-                          <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></div>
-                          <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
-                          <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
-                          <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
-                        </div></div></div>
-                        <p class="dp-stamp">7:00 PM</p>
-                      </div></div>
-                      <div class="hm-dinner-job" data-dinner-job="1"><div class="dp-said">
-                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Bill Reminders</b></p><p>Your electric bill is due Monday, in three days.</p><p>It isn&rsquo;t on autopay.</p></div></div>
-                        <p class="dp-stamp">7:00 PM</p>
-                      </div></div>
-                      <div class="hm-dinner-job" data-dinner-job="2"><div class="dp-said">
-                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Return Window Watch</b></p><p>You have one week left to return the shoes.</p><p>The return window closes next Friday.</p></div></div>
-                        <p class="dp-stamp">7:00 PM</p>
-                      </div></div>
+                      <div class="hm-dinner-stack">
+                        <div class="hm-dinner-job is-on" data-dinner-job="0"><div class="dp-said">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>.</p><p>Can we move the roof estimate to Friday?</p><p><b>Draft reply</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
+                            <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></div>
+                            <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
+                            <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
+                            <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
+                          </div></div></div>
+                          <p class="dp-stamp">7:00 PM</p>
+                        </div></div>
+                        <div class="hm-dinner-job" data-dinner-job="1"><div class="dp-said">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><b>Bill Reminders</b></p><p>Your electric bill is due Monday, in three days.</p><p>It isn&rsquo;t on autopay.</p></div></div>
+                          <p class="dp-stamp">7:00 PM</p>
+                        </div></div>
+                        <div class="hm-dinner-job" data-dinner-job="2"><div class="dp-said">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><b>Return Window Watch</b></p><p>You have one week left to return the shoes.</p><p>The return window closes next Friday.</p></div></div>
+                          <p class="dp-stamp">7:00 PM</p>
+                        </div></div>
+                      </div>
                     </div>
 
                     <!-- THIS THREAD GROWS FROM THE COMPOSER UP, which is what dp-scr--grow buys and
@@ -1818,11 +1842,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261002-4"></script>
-  <script src="js/ember.js?v=20261002-4" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261002-4"></script>
-  <script src="js/home.js?v=20261002-4" defer></script>
-  <script src="js/hero-dinner.js?v=20261002-4" defer></script>
+  <script src="js/nav.js?v=20261002-5"></script>
+  <script src="js/ember.js?v=20261002-5" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261002-5"></script>
+  <script src="js/home.js?v=20261002-5" defer></script>
+  <script src="js/hero-dinner.js?v=20261002-5" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

@@ -33,6 +33,18 @@
   };
   var HUE_IDS = ["terracotta", "plum", "teal", "green", "gold", "blue", "iris"];
 
+  /* THE COLORS A WORN THING IS PAINTED IN, and why none of them is the hue's own. The scarf was
+     the hue's dark first, which is the shade the feet are painted in, so on every color it read as
+     a shadow across the body rather than as something worn. Anything tied on, pinned on or growing
+     out of Ember is one of these instead, each chosen to separate from all seven hues and from
+     each other. The hue's dark stays on as a hairline so a pale fill has an edge. Same values as
+     the app's ember-gen.ts. */
+  var ROSE = "#F0A3AA";   /* the bow, the bow tie, the heart, the inside of a bunny ear */
+  var LEAF = "#5FA659";   /* the sprout */
+  var GOLD = "#F0C45A";   /* the crown and the sparkles */
+  var CREAM = "#FBF1E4";  /* the scarf */
+  var BLUSH = "#EE7C86";  /* the cheeks, one pink for every hue */
+
   var TOPPERS = {
     peak: function (d) {
       return '<path d="M100 30 L87 58 L113 58 Z" fill="' + d + '" stroke="' + d +
@@ -64,33 +76,110 @@
     cap: function (d, m) {
       return '<path d="M56 74 A46 46 0 0 1 144 74 Z" fill="' + d + '"/>' +
         '<rect x="52" y="70" width="96" height="11" rx="5.5" fill="' + m + '"/>';
+    },
+    /* The five below were added on October 2, 2026, when Jett asked for more of Ember and cuter
+       ones. Each is a different silhouette from the six above, which is the only kind of
+       difference that survives a small drawing. Same geometry as the app's ember-gen.ts. */
+    /* Tied on the upper right of the head, turned to lie along the curve there (the tangent at
+       that point is 27 degrees). The lower half of the knot is under the body like the base of
+       every other topper, so the bow sits on the head rather than beside it. Worn tight: no sway. */
+    bow: function (d) {
+      return '<g transform="translate(124 52) rotate(27) scale(1.3)" fill="' + ROSE +
+        '" stroke="' + d + '" stroke-width="1.6" stroke-linejoin="round">' +
+        '<path d="M0 0 C-5 -12 -20 -13 -19 -3 C-20 6 -6 7 0 0 Z"/>' +
+        '<path d="M0 0 C5 -12 20 -13 19 -3 C20 6 6 7 0 0 Z"/>' +
+        '<circle r="4.2"/></g>';
+    },
+    /* A stem out of the crown with a leaf each side. Bends like the tuft, about where it leaves
+       the head. */
+    sprout: function () {
+      return '<g class="sway" style="transform-origin:100px 48px" fill="' + LEAF + '">' +
+        '<path d="M100 56 C99 46 98 38 102 30" stroke="' + LEAF +
+        '" stroke-width="4.5" fill="none" stroke-linecap="round"/>' +
+        '<path d="M99.5 42 C90 42 84 36 84 27 C93 27 99 33 99.5 42 Z"/>' +
+        '<path d="M101 35 C110 35 117 28 117 19 C108 19 101 26 101 35 Z"/></g>';
+    },
+    /* Two tall ears, pink inside, each bending from its own root. */
+    bunny: function (d) {
+      return '<g class="sway" style="transform-origin:85px 44px">' +
+        '<ellipse cx="82" cy="38" rx="8.5" ry="22" transform="rotate(-10 82 38)" fill="' + d + '"/>' +
+        '<ellipse cx="82" cy="40" rx="4" ry="14" transform="rotate(-10 82 40)" fill="' + ROSE + '" opacity=".9"/></g>' +
+        '<g class="sway" style="transform-origin:115px 44px">' +
+        '<ellipse cx="118" cy="38" rx="8.5" ry="22" transform="rotate(10 118 38)" fill="' + d + '"/>' +
+        '<ellipse cx="118" cy="40" rx="4" ry="14" transform="rotate(10 118 40)" fill="' + ROSE + '" opacity=".9"/></g>';
+    },
+    /* A band over the crown and a cup pressed to each side. The band runs behind the body like
+       every topper, so it shows above the head; the cups show by sticking out past the
+       silhouette, and the lighter pad on each is the outside of the cup. */
+    headphones: function (d, m) {
+      return '<path d="M46 100 Q46 43 100 43 Q154 43 154 100" stroke="' + d +
+        '" stroke-width="8" fill="none"/>' +
+        '<rect x="30" y="80" width="22" height="34" rx="10" fill="' + d + '"/>' +
+        '<rect x="148" y="80" width="22" height="34" rx="10" fill="' + d + '"/>' +
+        '<rect x="33" y="85" width="7" height="24" rx="3.5" fill="' + m + '"/>' +
+        '<rect x="160" y="85" width="7" height="24" rx="3.5" fill="' + m + '"/>';
+    },
+    /* Five points, the middle one on the wordmark's own apex. */
+    crown: function () {
+      return '<path d="M74 64 L77 36 L88 48 L100 30 L112 48 L123 36 L126 64 Z" fill="' + GOLD +
+        '" stroke="#B98B2C" stroke-width="2" stroke-linejoin="round"/>';
     }
   };
-  var TOPPER_IDS = ["peak", "none", "antenna", "ears", "tuft", "cap"];
+  var TOPPER_IDS = ["peak", "none", "antenna", "ears", "tuft", "cap", "bow", "sprout", "bunny", "headphones", "crown"];
+
+  /* The two catchlights every eye carries: a large one up and to the left, where the light that
+     puts the sheen on the body comes from, and a small faint one down and to the right, the
+     reflection of the ground. Two is what makes a flat disc read as a wet, round eye, and it is
+     the whole of how the eyes got more real on October 2, 2026: no whites, no iris, no outline.
+     Both carry class `glint`, which the pleased state hides. */
+  function glints(bx, by, br, sx, sy, sr, strong) {
+    return '<circle class="glint" cx="' + bx + '" cy="' + by + '" r="' + br +
+      '" fill="#FFFFFF" opacity="' + (strong || 0.85) + '"/>' +
+      '<circle class="glint" cx="' + sx + '" cy="' + sy + '" r="' + sr +
+      '" fill="#FFFFFF" opacity=".5"/>';
+  }
 
   var EYES = {
     pill: {
       shape: '<rect class="pill" x="-7" y="-14" width="14" height="28" rx="7" fill="#2A2521"/>',
-      glint: '<circle class="glint" cx="-2.5" cy="-7" r="2.5" fill="#FFFFFF" opacity=".85"/>'
+      glint: glints(-2.5, -7, 2.5, 2.4, 6, 1.4)
     },
     round: {
       shape: '<circle class="pill" cx="0" cy="0" r="10" fill="#2A2521"/>',
-      glint: '<circle class="glint" cx="-3" cy="-3.5" r="3" fill="#FFFFFF" opacity=".85"/>'
+      glint: glints(-3, -3.5, 3, 3.2, 4, 1.5)
     },
     wide: {
       shape: '<circle class="pill" cx="0" cy="0" r="13" fill="#2A2521"/>',
-      glint: '<circle class="glint" cx="-4" cy="-4.5" r="4.2" fill="#FFFFFF" opacity=".9"/>'
+      glint: glints(-4, -4.5, 4.2, 4.4, 5.2, 2, 0.9)
     },
     bead: {
       shape: '<circle class="pill" cx="0" cy="0" r="6" fill="#2A2521"/>',
-      glint: '<circle class="glint" cx="-1.8" cy="-2" r="1.8" fill="#FFFFFF" opacity=".8"/>'
+      glint: glints(-1.8, -2, 1.8, 1.9, 2.2, 0.9, 0.8)
     },
     sleepy: {
       shape: '<rect class="pill" x="-8" y="-6" width="16" height="12" rx="6" fill="#2A2521"/>',
-      glint: '<circle class="glint" cx="-2.5" cy="-2" r="2" fill="#FFFFFF" opacity=".8"/>'
+      glint: glints(-2.5, -2, 2, 3.5, 2.2, 1.1, 0.8)
+    },
+    /* The three below were added on October 2, 2026, with the toppers and extras of the same day. */
+    oval: {
+      shape: '<ellipse class="pill" cx="0" cy="0" rx="9" ry="12.5" fill="#2A2521"/>',
+      glint: glints(-3, -5.5, 3, 3, 5, 1.5)
+    },
+    /* Lashes straight up rather than off the outer corner, because one shape serves both eyes and
+       an outer corner is a different side on each. They carry class `pill` too, so they go with
+       the eye when the happy arc takes over. */
+    lashes: {
+      shape: '<circle class="pill" cx="0" cy="0" r="10" fill="#2A2521"/>' +
+        '<path class="pill" d="M-5.5 -9.5 L-8.5 -14.5 M0 -11 L0 -16.5 M5.5 -9.5 L8.5 -14.5" ' +
+        'stroke="#2A2521" stroke-width="2.6" stroke-linecap="round" fill="none"/>',
+      glint: glints(-3, -3.5, 3, 3.2, 4, 1.5)
+    },
+    shine: {
+      shape: '<circle class="pill" cx="0" cy="0" r="11.5" fill="#2A2521"/>',
+      glint: glints(-3.6, -4.2, 4.3, 3.8, 4.6, 2.3, 0.95)
     }
   };
-  var EYE_IDS = ["pill", "round", "wide", "bead", "sleepy"];
+  var EYE_IDS = ["pill", "round", "wide", "bead", "sleepy", "oval", "lashes", "shine"];
 
   var EXTRAS = {
     none: function () { return ""; },
@@ -117,15 +206,48 @@
       return '<g stroke="' + d + '" stroke-width="2.2" stroke-linejoin="round">' +
         '<g class="tail" style="transform-origin:123.5px 153px">' +
         '<path d="M128 157 L138 178 q-7 3 -13 1 L119 161 Z" fill="#F2E2CE"/></g>' +
-        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="#FBF1E4"/></g>';
+        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="' + CREAM + '"/></g>';
+    },
+    /* The four below were added on October 2, 2026. Each sits somewhere nothing else does, so any
+       of them can be worn with glasses, a scarf and any hat without two things landing on one
+       spot: the bow tie takes the middle of the chest, the bandage the lower left, the heart the
+       lower right, and the sparkles the air beside the head. Same geometry as the app's. */
+    bowtie: function (d) {
+      return '<g transform="translate(100 152)" fill="' + ROSE + '" stroke="' + d +
+        '" stroke-width="2" stroke-linejoin="round">' +
+        '<path d="M-3 0 L-15 -7.5 Q-18.5 0 -15 7.5 Z"/>' +
+        '<path d="M3 0 L15 -7.5 Q18.5 0 15 7.5 Z"/>' +
+        '<rect x="-4" y="-4.5" width="8" height="9" rx="2.5"/></g>';
+    },
+    bandage: function (d) {
+      return '<g transform="translate(66 142) rotate(-28) scale(1.2)">' +
+        '<rect x="-9" y="-3.6" width="18" height="7.2" rx="3.4" fill="#F3DFC6" stroke="' + d +
+        '" stroke-width="1.4"/>' +
+        '<rect x="-3.2" y="-2.2" width="6.4" height="4.4" rx="1" fill="#E4C19C"/></g>';
+    },
+    heart: function (d) {
+      return '<path transform="translate(133 141) scale(1.4)" ' +
+        'd="M0 5.5 L-6.8 -1.5 A4 4 0 0 1 0 -5.2 A4 4 0 0 1 6.8 -1.5 Z" fill="' + ROSE +
+        '" stroke="' + d + '" stroke-width="1.3" stroke-linejoin="round"/>';
+    },
+    /* Placed to miss the headphone cups (x=30 and x=170, y=80 to 114) and the z's, which leave
+       the head at (146,74) and drift up. */
+    sparkles: function () {
+      var star = 'd="M0 -7 Q1.2 -1.2 7 0 Q1.2 1.2 0 7 Q-1.2 1.2 -7 0 Q-1.2 -1.2 0 -7 Z"';
+      return '<g fill="' + GOLD + '">' +
+        '<path transform="translate(36 62) scale(1.2)" ' + star + '/>' +
+        '<path transform="translate(167 124) scale(1)" ' + star + '/>' +
+        '<path transform="translate(157 144) scale(.6)" ' + star + '/></g>';
     }
   };
-  var EXTRA_IDS = ["none", "glasses", "freckles", "scarf"];
-  /* Where each extra is worn, which only matters once they can turn around. Glasses and freckles
-     are on their face and go wherever their face goes. A scarf is a band around them: it is there
-     from every side, so a turn leaves it alone and only a flip moves it, the same way it moves
-     their feet. Anything added here belongs in one of the two. */
-  var EXTRAS_ON_BODY = { scarf: true };
+  var EXTRA_IDS = ["none", "glasses", "freckles", "scarf", "bowtie", "bandage", "heart", "sparkles"];
+  /* Where each extra is worn, which only matters once they can turn around. Glasses, freckles, a
+     bow tie, a bandage and a heart are on their front and go wherever their face goes. A scarf is
+     a band around them: it is there from every side, so a turn leaves it alone and only a flip
+     moves it, the same way it moves their feet. Sparkles are in the air beside them and belong to
+     neither; they ride with the band, which a turn leaves alone, and a flip carries them round.
+     Anything added here belongs in one of the two. */
+  var EXTRAS_ON_BODY = { scarf: true, sparkles: true };
 
   var uidCounter = 0;
 
@@ -176,6 +298,23 @@
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
       '<stop offset="0.55" stop-color="' + hue.mid + '"/>' +
       '<stop offset="1" stop-color="' + hue.dark + '"/></linearGradient>' +
+      /* The light, as four gradients: a sheen high on the left of the ball, a shade deepening
+         toward its lower right, the cheeks, and the shadow on the ground. See the notes on the
+         body below. Same four as the app's ember-gen.ts, added October 2, 2026. */
+      '<radialGradient id="sheen-' + uid + '" cx="0.35" cy="0.27" r="0.55">' +
+      '<stop offset="0" stop-color="#FFFFFF" stop-opacity=".34"/>' +
+      '<stop offset="0.5" stop-color="#FFFFFF" stop-opacity=".08"/>' +
+      '<stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>' +
+      '<radialGradient id="rim-' + uid + '" cx="0.42" cy="0.38" r="0.68">' +
+      '<stop offset="0.68" stop-color="' + hue.dark + '" stop-opacity="0"/>' +
+      '<stop offset="1" stop-color="' + hue.dark + '" stop-opacity=".42"/></radialGradient>' +
+      '<radialGradient id="blush-' + uid + '">' +
+      '<stop offset="0" stop-color="' + BLUSH + '" stop-opacity=".55"/>' +
+      '<stop offset="1" stop-color="' + BLUSH + '" stop-opacity="0"/></radialGradient>' +
+      '<radialGradient id="shade-' + uid + '">' +
+      '<stop offset="0" stop-color="#44403B" stop-opacity=".2"/>' +
+      '<stop offset="0.6" stop-color="#44403B" stop-opacity=".1"/>' +
+      '<stop offset="1" stop-color="#44403B" stop-opacity="0"/></radialGradient>' +
       /* The lip, as a clip. The tongue swings about where it leaves the mouth, and a shape
          rotating about its own top edge lifts its far corner above that edge: 22 degrees puts
          about two units of it over the lip, which at the sizes Ember is drawn is a pink nub on
@@ -185,7 +324,10 @@
          transform origins in styles.css use. */
       '<clipPath id="lip-' + uid + '"><rect x="84" y="134" width="32" height="34"/></clipPath>' +
       '</defs>' +
-      '<ellipse cx="100" cy="177" rx="37" ry="6" fill="rgba(68,64,59,.12)"/>' +
+      /* Soft at its edge rather than a flat tint: the first of the four touches of light. All
+         four are gradients and none is a new shape, because a gradient reads as the same drawing
+         with light on it at any size, and a new shape reads as a new thing to decode. */
+      '<ellipse cx="100" cy="177" rx="40" ry="7" fill="url(#shade-' + uid + ')"/>' +
       '<g class="anim"><g class="lean">' +
       /* FOUR PARTS, AND THE REASON THERE ARE FOUR.
          EMBER IS A BALL, AND A BALL LOOKS THE SAME FROM EVERY SIDE, so the only parts that
@@ -197,16 +339,30 @@
       '<g class="feet">' +
       '<ellipse cx="82" cy="169" rx="10" ry="7.5" fill="' + hue.dark + '"/>' +
       '<ellipse cx="118" cy="169" rx="10" ry="7.5" fill="' + hue.dark + '"/>' +
+      /* A touch of the same light on the top of each foot, so they are round things under the
+         body rather than two dark marks. */
+      '<ellipse cx="80" cy="166.8" rx="4.6" ry="2.2" fill="#FFFFFF" opacity=".16"/>' +
+      '<ellipse cx="116" cy="166.8" rx="4.6" ry="2.2" fill="#FFFFFF" opacity=".16"/>' +
       '</g>' +
       '<g class="top">' + (TOPPERS[look.topper] || TOPPERS.peak)(hue.dark, hue.mid) + '</g>' +
       '<circle cx="100" cy="108" r="60" fill="url(#ember-' + uid + ')"/>' +
+      /* THE BALL IS LIT FROM THE UPPER LEFT, and these two circles are the whole of that: a soft
+         white sheen high on the left, and a shade that deepens toward the lower right edge.
+         Between them a disc with a top-to-bottom gradient becomes a sphere. Drawn on the ball
+         and not in any of the turning groups, because the light is in the room and not on
+         Ember: a sphere turning under a lamp keeps its highlight where the lamp is. */
+      '<circle cx="100" cy="108" r="60" fill="url(#sheen-' + uid + ')"/>' +
+      '<circle cx="100" cy="108" r="60" fill="url(#rim-' + uid + ')"/>' +
       '<g class="face">' +
       /* The face sits two units lower in the body than the app's ember-gen.ts draws it (eyes
          105 not 103, blush 127, mouth 134): a pixel at the sizes the site shows them, asked for
          on 2026-09-11 because they read as looking up out of their own circle. If the app takes
          the same nudge, this note goes. */
-      '<ellipse cx="65" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
-      '<ellipse cx="135" cy="127" rx="8.5" ry="5" fill="' + hue.dark + '" opacity=".38"/>' +
+      /* The cheeks were the hue's dark at 38%, all but invisible on the cooler hues and a flat
+         oval with an edge on every one. One pink for all seven, fading to nothing at its own
+         rim, is a flush rather than a sticker. */
+      '<ellipse cx="65" cy="127" rx="10.5" ry="6.5" fill="url(#blush-' + uid + ')"/>' +
+      '<ellipse cx="135" cy="127" rx="10.5" ry="6.5" fill="url(#blush-' + uid + ')"/>' +
       eye(78, 105, eyes) + eye(122, 105, eyes) +
       '<path class="mouth mouth-smile" d="M93 134 Q100 140 107 134" stroke="#2A2521" ' +
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +

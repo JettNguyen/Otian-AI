@@ -469,12 +469,20 @@ export const CATALOG_INDEX = [
     "name": "Sharp Advisor"
   },
   {
+    "key": "skill:social-posting",
+    "name": "Social Posting"
+  },
+  {
     "key": "skill:splitwise-keeper",
     "name": "Splitwise Keeper"
   },
   {
     "key": "skill:sports-follow",
     "name": "Sports Follow"
+  },
+  {
+    "key": "skill:square-keeper",
+    "name": "Square Keeper"
   },
   {
     "key": "skill:statement-collector",

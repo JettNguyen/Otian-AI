@@ -3212,6 +3212,8 @@ summary,
   transition: border-color var(--transition);
   box-shadow: var(--lift-sm);
 }
+/* The comparison hub places this fold between padded sections. */
+#detailed-comparison { margin: 20px auto; }
 .fold[open] { border-color: rgba(224, 138, 91, 0.3); }
 .fold > summary {
   display: flex;
@@ -16941,6 +16943,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
+.day-phone [data-mark="m-hero"] { --mx: -54px; --my: 120px; }
 /* The badge and the hint share the scene's grid cell and sit at its top and bottom: grid items of
    the stage, never children of the scene wrap, which is a flex row and would stand them beside the
    scene (that shifted the scene left by half the badge's width, for every act, on 2026-09-16). */
@@ -18388,6 +18391,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      left half, below its bottom edge and left of the phone. js/home.js keeps it inside the
      stage on a screen too narrow for the room. */
   .day-phone .day-mark { --mx: -40px; --my: 44px; }
+  .day-phone [data-mark="m-hero"] { --mx: 20px; --my: 24px; }
   /* AND TWO IN THE MORNING IS ITS OWN MARK, WHICH HAS TO SIT BELOW THE LINE ABOVE (2026-09-19).
      This block is the only place m-night is ever used, because the swap to it happens narrow. It
      was written in the wide section on a selector of the same weight as the line above, and equal

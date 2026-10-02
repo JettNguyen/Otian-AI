@@ -990,9 +990,7 @@
       });
 
       var mark = ACTS[i].mark;
-      /* Narrow, the hero's Ember stands beside the phone, where the phone acts put it, rather
-         than on the window's corner, which the phone covers there. */
-      if (narrow && mark === 'm-hero') mark = 'm-phone';
+      /* The hero has its own phone mark at both widths; later phone acts keep theirs. */
       /* Two in the morning is the one act whose objects swap places narrow: the window fills the
          top and the phone shows only its masked top half under it, so Ember stands off the
          phone's lower left rather than on the window. Act 5 is the only user of m-window. */

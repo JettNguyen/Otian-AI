@@ -2450,7 +2450,7 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `98e2b06f`), in 0.3.4, not yet released
+### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `54040e99`), in 0.3.4, not yet released
 
 **Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
 row above went a month without one, and a capability with no row reads downstream as one we do not
@@ -2479,9 +2479,9 @@ once to allow it. It never uses Terminal, password keepers, System Settings, Mai
 Calendar, or your web browsers, and the same stops apply: it never types a password or a card you
 pay with, and anything it could not undo waits for you."
 
-*One change since his approval, for his OK:* "a card number" became "a card you pay with", because
-the same day he chose to let a gift card, library card, loyalty or membership number be typed, and
-"never types a card number" would no longer be true as written.
+*One change since his approval, approved by him the same day:* "a card number" became "a card you
+pay with", because he had chosen to let a gift card, library card, loyalty or membership number be
+typed, and "never types a card number" would no longer have been true as written.
 
 *Short form, proposed:* "Uses the apps you allow on your Mac, in the background, and stops before
 anything it can't undo."
@@ -2501,12 +2501,16 @@ the picture in the approval card shows which button it means.
 
 **Why it's true:** in the Archie repo.
 
-- **It never moves the pointer and never brings an application forward.**
+- **It never moves the pointer and keeps applications out of the person's way.**
   `crates/archie-runtime/src/screen/app/macos.rs` presses through `AXPress` (or `AXPick`, or selects
-  a row), and types by setting `AXValue` or, in a document, `AXSelectedText` at the end; there is no
-  synthetic mouse or keyboard input anywhere in the tier, and the one Core Graphics call reads how
-  long since anybody touched the computer. An application is started with
-  `NSWorkspaceOpenConfiguration.activates` off.
+  a row), and types by setting `AXValue` or, in a document, `AXSelectedText` at the end. There is no
+  synthetic mouse input anywhere in the tier. **Key presses, only as a last resort (Jett's call,
+  2026-10-02):** when a box keeps its old text through both accessibility ways (Premiere Pro's
+  project name), the words go as key presses addressed to that application's own process
+  (`type_by_keys`), never to the application in front, never into a secure box, never with a line
+  break. An application is started with `NSWorkspaceOpenConfiguration.activates` off, and one that
+  brings itself forward anyway while it starts is hidden at once, which hands the front back
+  (`settle_after_launch`; Premiere held the front for under half a second, where it had kept it).
 - **It waits for the person.** `AppWindow::wait_for_person` (`screen/app/mod.rs`) holds every press
   and every word typed while that application is in front and somebody has touched the keyboard or
   pointer in the last three seconds, up to twelve seconds, then says so and asks.
@@ -2576,6 +2580,9 @@ the picture in the approval card shows which button it means.
   the agent's own browser window, and in an application nothing is drawn at all.
 - ❌ **Never "never types a card number" without "you pay with".** A gift card, library card,
   loyalty or membership number is typed.
+- ❌ **Never "it never sends key presses".** It can, to the one application it is using, when that
+  application's boxes ignore everything else. Say what is true: it never moves your pointer, and
+  while you are using the app it is working in, it waits for you.
 
 **What changes elsewhere in this file the day it ships**, because each says something this makes
 untrue:

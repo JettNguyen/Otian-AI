@@ -2450,12 +2450,13 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `54040e99`), in 0.3.4, not yet released
+### ✅ Computer control: the agent using the apps you allow on a Mac, in the background: SHIPPED 2026-10-02, Archie 0.3.4 (`9549aefc` to `54040e99`)
 
-**Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
-row above went a month without one, and a capability with no row reads downstream as one we do not
-have. One real job has run in an application (below); nothing here may be said in the present
-tense on the site until 0.3.4 is out.
+**Release verified October 2, 2026:** [Archie v0.3.4](https://github.com/JettNguyen/archie-releases/releases/tag/v0.3.4)
+is published, and its first release note names Mac app control, the allowed apps, and the stops
+below. The release gate is satisfied; the approved wording may now be used in the present tense.
+The Websites row above went a month without an entry, so this one was recorded on the day it was
+built. One real job has run in an application (below).
 
 **What the first real jobs showed (2026-10-02, `scripts/live-app-job.sh`, a real model through
 the whole gateway):** asked to start a new project in Premiere Pro, the agent asked to use it, was
@@ -2471,7 +2472,7 @@ Neither application came forward. Three defects found on the way were fixed the 
 - Nobody knows yet whether it works while the Mac is locked, which is the shape of every request
   from a phone.
 
-**Wording, approved by Jett 2026-10-02 ("approve as written"), for the day it ships:** "On a Mac,
+**Wording, approved by Jett 2026-10-02 ("approve as written"), shipped in 0.3.4:** "On a Mac,
 your agent can also use the apps you allow, such as Numbers or Preview, the same careful way it uses
 a website. It presses buttons and fills in boxes inside the app's window without moving your
 pointer, so you can keep working, and if you start using that app it waits for you. macOS asks you

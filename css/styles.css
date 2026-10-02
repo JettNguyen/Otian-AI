@@ -16618,6 +16618,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 /* The scroll matches the 6.9-screen sum of LEN in js/home.js. The extra 100vh holds
    the sticky stage until the last act ends. */
 .day-story { position: relative; height: calc(6.9 * 100vh + 100vh); }
+/* Narrow the hero gets a whole screen, for its two halves, so the sum there is 7.3. */
+@media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
+  .day-story { height: calc(7.3 * 100vh + 100vh); }
+}
 .day-stage {
   --night: 0;
   /* Light mode's night is a lamp-lit room, not a blackout. It was #14120F until 2026-09-18, which
@@ -16804,8 +16808,21 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 @media (max-width: 970px) {
   .day-cap[data-act="0"] .day-beat { overflow: hidden; max-height: var(--beat-h, 24rem); }
   .day-cap[data-act="0"] .day-beat:not(.is-on) { max-height: 0; margin-top: 0; }
+  /* The label folds from its foot too, or its margin stays behind as a gap over the headline. */
+  .day-cap[data-act="0"] .section-label.day-beat:not(.is-on) { margin-bottom: 0; }
+  /* The button row wraps the one-person link onto a line of its own, and a flex row's gap stays
+     when the link folds, so the gap is the link's own margin here and folds with it. */
+  .day-cap[data-act="0"] .hm-actions { row-gap: 0; }
+  .day-cap[data-act="0"] .hm-hero-story.day-beat.is-on { margin-top: 10px; }
+  /* The dinner card's beat is a slot around it, and the slot is wider and deeper than the card by
+     the reach of its shadow, which the beat's overflow would otherwise cut off. The negative
+     margins give that room back, so open or folded the slot costs exactly the card. */
+  .hm-evening-slot { margin: 10px -16px -18px; padding: 0 16px 18px; }
+  /* Centered by margin, in a plain block: a card centered by alignment overflows upward as the
+     slot folds, and the slot's open height is measured off scrollHeight, which never counts that. */
+  .hm-evening-slot > .hm-evening { margin: 0 auto; }
   @media (prefers-reduced-motion: no-preference) {
-    .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.2, .8, .3, 1), margin-top .5s cubic-bezier(.2, .8, .3, 1); }
+    .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.2, .8, .3, 1), margin-top .5s cubic-bezier(.2, .8, .3, 1), margin-bottom .5s cubic-bezier(.2, .8, .3, 1), opacity .3s ease, transform .4s cubic-bezier(.2, .8, .3, 1); }
   }
 }
 /* The stock `.day-beat` pair fades every beat in the story from nothing, which is right for the
@@ -18095,7 +18112,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      there is one change, in one direction, and the cue's 65px goes straight to the paragraph
      replacing it instead of coming out of the scene's row. Worth 0.55 against 0.44 in the drawn
      scale, which is the difference between "shrinks a bit" and "shrinks by a third". */
-  .day-cap[data-act="0"] .day-beat.is-on ~ .day-hint--flow { display: none; }
+  /* Since 2026-10-02 the cue is a beat of the first screen itself (index.html, data-until), so it
+     folds as the details open, in the same movement, and stays folded on the way back. */
   /* The clock's own badge, deliberately: the two are a pair, one at the top of the scene saying
      what time it is and one at the bottom saying the time will move. It also solves the reading
      problem, since a filled pill is legible over anything the scene puts behind it. The arrow
@@ -20517,7 +20535,8 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-cap > p.hm-trust-strip { max-width: calc(100% - 90px); }
 }
 @media (max-width: 970px) and (max-height: 700px) {
-  .hm-evening { margin-top: 6px; padding: 4px 4px 3px; }
+  .hm-evening { padding: 4px 4px 3px; }
+  .hm-evening-slot { margin-top: 6px; }
   .day-cap .hm-evening > .hm-dinner-head { font-size: var(--fs-xs); }
   .hm-dinner-pause { width: 24px; height: 24px; }
   .hm-dinner-pause::after { inset: -10px; }

@@ -247,7 +247,8 @@
                  { el: scr2, key: 2, act: 2, from: step(0, 3), at: step(1, 3), done: step(2, 3) }];
     if (!stage || !scene || !win || !phone || !ember) return;
     var beats = $$('.day-beat').map(function (el) {
-      return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9 };
+      return { el: el, act: +el.getAttribute('data-act'), at: +el.getAttribute('data-at'), until: el.hasAttribute('data-until') ? +el.getAttribute('data-until') : 9,
+        away: el.classList.contains('day-beat--away') };
     });
     var marks = {};
     $$('[data-mark]').forEach(function (el) { marks[el.getAttribute('data-mark')] = el; });
@@ -263,8 +264,14 @@
     var SETTLE = 0.2;
     /* Keep the first screen long enough to read, then move through the examples with less
        scroll. These lengths total 6.9 screens; .day-story adds one screen for the sticky stage.
-       Each act still holds its finished result, and the reader's scroll controls every beat. */
-    var LEN = [0.6, 0.9, 0.9, 0.8, 1.2, 0.8, 0.5, 1.2], CUM = [0], TOT = 0;
+       Each act still holds its finished result, and the reader's scroll controls every beat.
+       NARROW THE HERO IS A SCREEN, not six tenths of one, and the story is 7.3 (the stylesheet's
+       narrow .day-story says the same): there it is two screens in one act, the mockups and then
+       the details without them, and at 0.6 the details had under two hundred pixels of scroll, which
+       one flick of a thumb goes straight past. */
+    var LEN_WIDE = [0.6, 0.9, 0.9, 0.8, 1.2, 0.8, 0.5, 1.2];
+    var LEN_NARROW = [1].concat(LEN_WIDE.slice(1));
+    var LEN = LEN_WIDE, CUM = [0], TOT = 0;
     /* The act count is LEN's own length. It was a separate literal until 2026-09-18, and adding
        the seventh act moved one of the two and not the other, which lands the last act's scroll
        on the act before it: the setup track never lit and nothing threw. Two numbers that must
@@ -273,7 +280,8 @@
     /* The hero starts moving on the first pixel of scroll: through its own act the camera goes
        this far toward the calendar pose, and the calendar act's settle finishes the trip. */
     var PRE = 0.5;
-    LEN.forEach(function (l) { TOT += l; CUM.push(TOT); });
+    function sumLen() { CUM = [0]; TOT = 0; LEN.forEach(function (l) { TOT += l; CUM.push(TOT); }); }
+    sumLen();
     /* THE RAIL IS BUILT FROM LEN, which is the whole reason it is built here rather than written
        into index.html: the act count and the act lengths are already in this array, and a rail
        typed out beside it is the pair of numbers that must agree which took the setup track out
@@ -288,6 +296,13 @@
       seg.style.flexGrow = l;
       rail.appendChild(seg); segs.push(seg); segF.push(-1);
     });
+    /* Which lengths the story runs on, and the rail's segments with them, so a tick still falls
+       where an act does. Called once the narrow query exists, and again whenever it flips. */
+    function useLen(isNarrow) {
+      LEN = isNarrow ? LEN_NARROW : LEN_WIDE;
+      sumLen();
+      segs.forEach(function (seg, k) { seg.style.flexGrow = LEN[k]; });
+    }
     /* The layers' scales fold in the mockups' zoom (styles.css section 49): the app is drawn at
        .4375 and shown at 1.143 of that, the phone at .63 and shown at .857 and .943 of that, so
        each is rastered near the size it is seen. */
@@ -473,6 +488,8 @@
        wrap is 660 and both read 1, so nothing jumps as the window is dragged wider. */
     var SC = 1, narrow = false, wrap = $('.day-scene-wrap');
     var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
+    useLen(!!(narrowQ && narrowQ.matches));
+    if (narrowQ && narrowQ.addEventListener) narrowQ.addEventListener('change', function () { useLen(narrowQ.matches); });
 
     /* THE SCENE IS MEANT TO BREATHE, AND THE EASE IS WHAT MAKES IT READ AS BREATHING. Narrow, the
        stage is one screen of rows and the scene's is the `1fr`, so the scene is drawn at whatever
@@ -944,9 +961,11 @@
          are being read, and comes back on its way into the day (Jett, 2026-09-19).
 
          Three phases over act 0's own progress, not three acts, because an act is a claim with a
-         scene and this is one claim seen twice. The mockups fade from 0.22 to 0.40, which is
-         where the whole of the rest of the hero lands; they stay gone while it is read; and they
-         come back from 0.74 to 0.96, whole again before act 1 takes over the pose.
+         scene and this is one claim seen twice. The mockups fade from 0.10 to 0.26, and the
+         details land at 0.16 (index.html's data-at), halfway through; they stay gone while those
+         are read; and they come back from 0.80 to 0.97, as the details fold at 0.80 (data-until),
+         whole again before act 1 takes over the pose. Moved earlier on 2026-10-02, when the first
+         screen became the mockups and the essentials alone (Jett): a push should bring the rest.
 
          The caption rides up as they go, by a share of the row they vacate, or the words would be
          read at the bottom of a screen with nothing in the top half of it. A transform, not a
@@ -955,25 +974,32 @@
          The clock goes with them. It is the scene's own label, and a time floating over an empty
          stage is a caption for a picture that is not there. */
       var heroHide = 0;
+      /* ONE AFTER THE OTHER, NOT TOGETHER (2026-10-02). The mockups are gone before the words
+         start up into their room, and on the way back the words are down before the mockups
+         return: both on one curve put the headline over a half-faded phone with Ember standing on
+         it. `gone` is the mockups' share of the curve and `rise` the caption's. */
+      var gone = 0, rise = 0;
       if (narrow && !still && i === 0) {
-        heroHide = ramp(t, 0.22, 0.40) * (1 - ramp(t, 0.74, 0.96));
-        if (heroHide > 0.001) {
+        heroHide = ramp(t, 0.10, 0.26) * (1 - ramp(t, 0.80, 0.97));
+        gone = ramp(heroHide, 0, 0.55);
+        rise = ramp(heroHide, 0.45, 1);
+        if (gone > 0.001) {
           pose = copy(pose, {
-            win: copy(pose.win, { o: pose.win.o * (1 - heroHide) }),
-            phone: copy(pose.phone, { o: pose.phone.o * (1 - heroHide) })
+            win: copy(pose.win, { o: pose.win.o * (1 - gone) }),
+            phone: copy(pose.phone, { o: pose.phone.o * (1 - gone) })
           });
         }
       }
       if (capsEl) {
-        var lift = heroHide > 0.001 ? (-heroHide * lastWrapH * 0.45).toFixed(1) + 'px' : '';
+        var lift = rise > 0.001 ? (-rise * lastWrapH * 0.45).toFixed(1) + 'px' : '';
         var want = lift ? 'translateY(' + lift + ')' : '';
         if (capsEl.style.transform !== want) capsEl.style.transform = want;
       }
-      if (clock) clock.style.opacity = heroHide > 0.001 ? (1 - heroHide).toFixed(3) : '';
+      if (clock) clock.style.opacity = gone > 0.001 ? (1 - gone).toFixed(3) : '';
       /* Ember goes with them, and has to. Ember stands on a mark, every mark in this act is on the
          phone or the window, and a mascot standing on an object that has faded out is a mascot
          standing on the headline. */
-      if (ember) ember.style.opacity = heroHide > 0.001 ? (1 - heroHide).toFixed(3) : '';
+      if (ember) ember.style.opacity = gone > 0.001 ? (1 - gone).toFixed(3) : '';
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
@@ -986,6 +1012,12 @@
       var was = thread ? firstOn(thread) : null, wasTop = was ? was.offsetTop : null;
       beats.forEach(function (b) {
         var on = b.act === i ? (tp >= b.at && tp < b.until) : (b.act < i && b.until > 1);
+        /* An away beat is the other way round: there except in its window. The dinner card is
+           one, standing aside while the hero's details have the screen. */
+        if (b.away) on = !(b.act === i && tp >= b.at && tp < b.until);
+        /* Held still, the hero is the whole hero: still pins the act at its end, which is past
+           the details' window, and a reader with motion off would lose them. */
+        if (still && b.act === 0) on = true;
         if (b.el.classList.contains('is-on') === on) return;
         b.el.classList.toggle('is-on', on);
       });

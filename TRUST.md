@@ -2464,7 +2464,7 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### ✅ Computer control: the agent using the apps you allow on a Mac, in the background: SHIPPED 2026-10-02 in 0.3.4 (Archie `9549aefc` to `7f77cd5d`)
+### ✅ Computer control: the agent using the apps you allow on a Mac, in the background: SHIPPED 2026-10-02 in 0.3.4 (Archie `9549aefc` to `2454cd4f`)
 
 **Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
 row above went a month without one, and a capability with no row reads downstream as one we do not
@@ -2613,8 +2613,9 @@ the picture in the approval card shows which button it means.
 - "It cannot run a program on your computer" became "It cannot run code or a command on your
   computer. On a Mac it can use the apps you allow, and never a terminal." in the positioning under
   "What it structurally cannot do" and its table row, and the add-on lines became "code or a
-  command" (both below). Archie's own guide `what-it-will-not-do` says the same from 0.3.4 (Archie
-  `7f77cd5d`).
+  command" (both below). Archie's own guide `what-it-will-not-do` says it in its own words from
+  0.3.4 (Archie `7f77cd5d` and `2454cd4f`): no code, command or script; websites, and on a Mac the
+  apps you allow, once Computer control is on; never a terminal, on a Mac or on Windows.
 - The Websites entry's boundary about applications points here.
 - The macOS permissions: `trust/it-review/` now says, beside the document, that it describes 0.2.3
   and that a Mac has asked for two more since: the administrator password for waking, and

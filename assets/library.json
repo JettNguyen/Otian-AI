@@ -562,7 +562,7 @@
         "It uses add-ons. An add-on is a set of written instructions for a task. Think of it as a recipe your agent follows.",
         "For example, an add-on might explain how to track your subscriptions or watch for return deadlines.",
         "Your agent starts with a few add-ons. You can find more in Archie's Marketplace. Every add-on is included with Archie.",
-        "An add-on is a text file your agent reads. It does not give your agent a way to run a program on your computer.",
+        "An add-on is a text file your agent reads. It does not give your agent a way to run code or a command on your computer.",
         "Not sure which add-on to choose? Ask your agent. It searches for one that fits your request.",
         "If none fits, it can write new instructions, called a skill. It shows you what it plans to add and waits for your approval.",
         "Next: connecting your email and calendar."
@@ -635,15 +635,15 @@
       "seconds": 95,
       "notes_heading": "Buying, and a hard limit on what your agent spends",
       "notes": [
-        "Buying is off until you switch it on, under Websites on the Connections tab. When you do, the limit for one order starts at $50, and you can change it.",
-        "Your agent never types a card number, so your card has to be saved at the shop already.",
+        "Buying is off until you switch it on, under Computer control on the Connections tab. When you do, the limit for one order starts at $50, and you can change it.",
+        "Your agent never types a card you pay with, so your card has to be saved at the shop already.",
         "The limit is checked against the price your agent reads on the page. For a ceiling nobody can get past, use a card from your bank that works at one shop, with its own limit."
       ],
       "words": [
         "Are there things my agent cannot do?",
         "Yes. Some limits are built into Archie.",
-        "Your agent cannot run a program on your computer. It cannot make a phone call or send a text on its own.",
-        "If you let it use websites, it will not type a password, card number, or sign-in code. It stops and lets you take over.",
+        "Your agent cannot run code or a command on your computer. It cannot make a phone call or send a text on its own.",
+        "If you let it use websites, it will not type a password, a card you pay with, or a sign-in code. It stops and lets you take over.",
         "You must handle bank transfers and contract signatures yourself. Do not ask your agent to do them.",
         "Buying is off unless you turn it on. If you turn it on, you choose the stores it may buy from. You also set a limit for each order and a limit for each week or month.",
         "Even with it turned on, your agent still asks before each order.",

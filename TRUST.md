@@ -2288,13 +2288,36 @@ owner's tap on the card releases that one press, by its name and its site, once
 (`PendingPress` in `screen/tools.rs`, rechecked against `guard::click_can_be_tapped` at the moment
 of the click). A guest cannot give it and a routine never receives one (`turn.rs`, owner only).
 
+**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and in no release
+yet.** Found while building the applications half (below), by mapping the tool layer before building
+on it. Both make a sentence in the approved wording above untrue in one case, so the copy is safe
+only for a release that carries the fixes:
+
+1. **A press the owner approved once could be pressed again without asking.** The remembered route
+   (`screen/routes.rs`) recorded every click that landed, including a Submit or a Place order the
+   owner had tapped Press it for me on, and replay pressed every recorded step with no stop at all.
+   So the next run of the same errand on the same site could press Place order with no card, no tap
+   and no line on the spending ledger. Fixed in Archie `b498fdf4`: an approved press is never
+   recorded, and replay checks every remembered click against stop 3 and the never-list, because a
+   route file written before the fix is still on somebody's disk.
+2. **A guest could read the owner's browser.** On a shared agent, `screen_read`, `screen_choose` and
+   `screen_ask` were not owner-only, and a guest's ask sent a picture of the owner's signed-in
+   browser into the guest's chat. Fixed in Archie `9549aefc`: every screen tool is the owner's.
+
+**Whether either goes on `/trust/` as a known weakness, or is closed by a patch release before
+anybody needs telling, is Jett's call.** Until one of those happens, "before it presses anything
+that sends, submits or finalizes something, it stops" has the exception in item 1 on every
+installed copy.
+
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
 
 **Why it's true:** `crates/archie-runtime/src/screen/` in the Archie repo.
 `SITES_AND_APPS_RELEASED` in `crates/archie-domain/src/screen.rs` is `true`, and so is its twin in
 `src/app/vocab.ts`; a test fails if only one of them moves. The app calls it **Websites**, on the
-Connections tab, since 2026-08-19, and that is the name copy uses.
+Connections tab, since 2026-08-19, and that is the name copy uses for every release before the one
+carrying Archie `3ff8fee9`. From that release the entry is called **Computer control** (see the 🚧
+entry below), and every "under Websites" on the site becomes "under Computer control".
 
 - **It is a browser on the person's computer, not a hidden one.** `screen/browser.rs` launches
   Chrome, Edge or Brave headful and unfocused, never headless, in a profile of the agent's own
@@ -2359,8 +2382,9 @@ names the button by its own name on the page, the computer running Archie and th
   required clauses.
 - ❌ Never "it fills in the whole form". It fills what is not a password, a card or a code, and
   stops at the ones that are.
-- ❌ Never describe it driving other **applications**. That half is not built on either platform.
-  Websites are the whole of what ships.
+- ❌ Never describe it driving other **applications**. That half is built on a Mac since 2026-10-02
+  and is in no release, and nothing has been run by a model in it: the 🚧 entry below is where its
+  wording waits. Websites are the whole of what ships.
 - ❌ **Never put a cost figure on it, and never recommend it to someone choosing on price.** One
   page serialized to about 6,000 tokens in the only measurement that exists, a job is many reads,
   and the owner pays for every one on their own key. Nothing measures a whole job yet, so there is
@@ -2425,6 +2449,117 @@ on the site on September 24. Buying is an opt-in switch with limits the owner se
 a switch the owner turns on"), so the answer to a benchmark is that Archie buys when its owner has
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
+
+### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `46c3f1ed`, on main), not yet in a release
+
+**Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
+row above went a month without one, and a capability with no row reads downstream as one we do not
+have. Nothing here may be said in the present tense on the site until a release carries it and one
+real job has run in an application.
+
+**What has not happened yet**, and each item is a reason the wording below waits:
+
+- No model has done a job in an application. The adapter was driven by hand (Calculator's buttons
+  and a menu item, Font Book's search field), with another application in front and its owner using
+  the mouse, and the stops are tested against a stub.
+- Typing at the end of a document has not run against a real one.
+- The macOS permission prompt has not been seen from a signed build; in development the permission
+  belonged to the editor that ran it.
+- Nobody knows yet whether it works while the Mac is locked, which is the shape of every request
+  from a phone.
+
+**Wording proposed for Jett's approval, once it ships:** "On a Mac, your agent can also use the
+apps you allow, such as Numbers or Preview, the same careful way it uses a website. It presses
+buttons and fills in boxes inside the app's window without moving your pointer, so you can keep
+working, and if you start using that app it waits for you. macOS asks you once to allow it. It never
+uses Terminal, password keepers, System Settings, Mail, Messages, Calendar, or your web browsers, and
+the same stops apply: it never types a password or a card number, and anything it could not undo
+waits for you."
+
+*Short form, proposed:* "Uses the apps you allow on your Mac, in the background, and stops before
+anything it can't undo."
+
+**The name, approved by Jett 2026-10-02:** websites and applications are one capability on screen,
+**Computer control**, with the line "Your agent clicks and types in websites and apps on this
+computer, the way you would. It stops before anything it can't undo." (Windows reads it without "and
+apps".) It replaces **Websites** as the Connections entry from the release that carries it.
+
+**Why it's true:** in the Archie repo.
+
+- **It never moves the pointer and never brings an application forward.**
+  `crates/archie-runtime/src/screen/app/macos.rs` presses through `AXPress` (or `AXPick`, or selects
+  a row), and types by setting `AXValue` or, in a document, `AXSelectedText` at the end; there is no
+  synthetic mouse or keyboard input anywhere in the tier, and the one Core Graphics call reads how
+  long since anybody touched the computer. An application is started with
+  `NSWorkspaceOpenConfiguration.activates` off.
+- **It waits for the person.** `AppWindow::wait_for_person` (`screen/app/mod.rs`) holds every press
+  and every word typed while that application is in front and somebody has touched the keyboard or
+  pointer in the last three seconds, up to twelve seconds, then says so and asks.
+- **Only the applications the owner allows**, an allowlist where empty means none
+  (`guard::app_allowed`), checked when a job opens one and again before every action. An
+  application the agent has not been allowed becomes a question with two buttons, and the yes is
+  read from the owner's own next message (`turn.rs`), never from anything the model or a window
+  wrote. Routines and guests cannot grant one.
+- **Some it never uses, whatever the owner says** (`guard::app_refused`): Archie itself; anything
+  that runs commands (terminals, script editors, code editors with a terminal in them); password
+  keepers; System Settings, installers and the App Store; Mail, Outlook, Messages and Calendar,
+  because each has a lane where nothing goes out without a press and driving the app would get
+  around it; every web browser, because the owner's sign-ins are in it; and anything that reaches
+  another computer, a phone or a call.
+- **The same stops as a website.** A field macOS marks as secure arrives at stop 2 as a password,
+  and a card field is known by its name (`guard::typing_stop`, which also closed the same gap on the
+  web). Stop 3 adds an application's own words for the irreversible: Empty Trash, Move to Trash,
+  Delete Immediately, Don't Save, Erase, Shut Down, Restart, Log Out, Force Quit, and Replace,
+  Overwrite, Discard, Revert, Quit, Print, Share and AirDrop when a name starts with them
+  (`guard::app_click_is_final`). The Return key is never pressed, because a message app sends on it.
+- **A number from an old read cannot press something else.** Every action follows the element's
+  path again and refuses it unless its role and name are still what the read printed
+  (`macos::find`).
+- **Owner only.** Every screen tool is withheld from a guest (`acts_as_owner` in `turn.rs`, and the
+  test `a_guest_is_offered_no_screen_tool_at_all`).
+- **Off until switched on, twice.** Computer control's own switch, then a second one for
+  applications (`ScreenSettings.apps`, default off), then the macOS Accessibility permission, which
+  the person grants in System Settings.
+- **Mac only.** `ScreenSurface::Apps.available_here()` is false off macOS, so the store lists no
+  application add-on on Windows and the panel draws no applications section there.
+- **It reads text, not pictures.** A window is read through the same accessibility tree a screen
+  reader uses. No screenshot of an application is taken, so none leaves the computer or reaches the
+  phone.
+
+**Required clauses, once there is copy:**
+- ⚠️ **Mac only**, and say what Windows does: websites.
+- ⚠️ **Off until they turn it on, and only the apps they allow.**
+- ⚠️ **The never list**, or at least that it never uses a terminal, a password keeper or their
+  email app, because those are the three a careful reader asks about.
+- ⚠️ **An app that does not describe its window cannot be used yet**, and the agent says so.
+
+**Boundaries:**
+- ❌ **Never "takes over your computer", "controls your mouse" or "types for you" as if it were a
+  person at the keyboard.** It does the opposite on purpose, and the difference is the claim.
+- ❌ **Never "anything on your computer".** It uses the apps the owner allowed, refuses the list
+  above, and cannot run a command.
+- ❌ **Never say it sends email or texts through Mail or Messages.** Both are refused; the email
+  lane's rule that nothing is sent without a press stands unchanged.
+- ❌ **Never a cost figure**, for the Websites entry's reason: nothing measures a whole job yet. What
+  is measured: about 40 tokens of tools with applications switched on, and a look at a small app's
+  window at 185 to 400 tokens.
+- ❌ **Never "works while your Mac is locked"** until it has been tried.
+- ❌ Never "tested" or "proven" until one real job has run.
+
+**What changes elsewhere in this file the day it ships**, because each says something this makes
+untrue:
+- "It cannot run a program on your computer" (the positioning under "What it structurally cannot
+  do", its table row "No program execution on the owner's machine", and the add-on lines "It cannot
+  run code on your computer"). Proposed: "It cannot run code or a command on your computer. On a Mac
+  it can use the apps you allow, and never a terminal."
+- The Websites entry's boundary about applications, above, which this entry replaces.
+- Every list of the macOS permissions Archie asks for: Accessibility joins Full Disk Access,
+  Automation, Local Network and the administrator password.
+- Pages to change with it: `faq/index.html:552`, `blog/ai-built-my-workout-program/index.html:188`,
+  `trust/index.html:1063`, `skills-marketplace/browse/index.html:1373` and `:838`,
+  `archie/websites/index.html:178`, `how-it-works/index.html:451` and `:487`,
+  `trust/it-review/index.html:282` (the list of system prompts it triggers), and
+  `help/index.html:470` (the permissions walk-through).
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 

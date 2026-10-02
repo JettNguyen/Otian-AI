@@ -33,16 +33,17 @@
   };
   var HUE_IDS = ["terracotta", "plum", "teal", "green", "gold", "blue", "iris"];
 
-  /* THE COLORS A WORN THING IS PAINTED IN, and why none of them is the hue's own. The scarf was
-     the hue's dark first, which is the shade the feet are painted in, so on every color it read as
-     a shadow across the body rather than as something worn. Anything tied on, pinned on or growing
+  /* THE COLORS A WORN THING IS PAINTED IN, and why none of them is the hue's own. The first scarf
+     was the hue's dark, the shade the feet are painted in, so on every color it read as a shadow
+     across the body rather than as something worn, and the headphones made the same mistake in
+     Ember's own colors on their first day. Anything tied on, pinned on or growing
      out of Ember is one of these instead, each chosen to separate from all seven hues and from
      each other. The hue's dark stays on as a hairline so a pale fill has an edge. Same values as
      the app's ember-gen.ts. */
-  var ROSE = "#F0A3AA";   /* the bow, the bow tie, the heart, the inside of a bunny ear */
+  var ROSE = "#F0A3AA";   /* the bow, the bow tie, the heart, the inside of a bunny ear, the headphone pads */
   var LEAF = "#5FA659";   /* the sprout */
   var GOLD = "#F0C45A";   /* the crown and the sparkles */
-  var CREAM = "#FBF1E4";  /* the scarf */
+  var GRAPHITE = "#45403B";  /* the headphones */
   var BLUSH = "#EE7C86";  /* the cheeks, one pink for every hue */
 
   var TOPPERS = {
@@ -110,14 +111,15 @@
     },
     /* A band over the crown and a cup pressed to each side. The band runs behind the body like
        every topper, so it shows above the head; the cups show by sticking out past the
-       silhouette, and the lighter pad on each is the outside of the cup. */
-    headphones: function (d, m) {
-      return '<path d="M46 100 Q46 43 100 43 Q154 43 154 100" stroke="' + d +
+       silhouette, and the pad on each is the outside of the cup. Graphite with pink pads, never
+       the body's own colors: in those, their first version, they read as part of the head. */
+    headphones: function () {
+      return '<path d="M46 100 Q46 43 100 43 Q154 43 154 100" stroke="' + GRAPHITE +
         '" stroke-width="8" fill="none"/>' +
-        '<rect x="30" y="80" width="22" height="34" rx="10" fill="' + d + '"/>' +
-        '<rect x="148" y="80" width="22" height="34" rx="10" fill="' + d + '"/>' +
-        '<rect x="33" y="85" width="7" height="24" rx="3.5" fill="' + m + '"/>' +
-        '<rect x="160" y="85" width="7" height="24" rx="3.5" fill="' + m + '"/>';
+        '<rect x="30" y="80" width="22" height="34" rx="10" fill="' + GRAPHITE + '"/>' +
+        '<rect x="148" y="80" width="22" height="34" rx="10" fill="' + GRAPHITE + '"/>' +
+        '<rect x="33" y="85" width="7" height="24" rx="3.5" fill="' + ROSE + '"/>' +
+        '<rect x="160" y="85" width="7" height="24" rx="3.5" fill="' + ROSE + '"/>';
     },
     /* Five points, the middle one on the wordmark's own apex. */
     crown: function () {
@@ -194,24 +196,11 @@
         '<circle cx="56" cy="130" r="2.6"/><circle cx="140" cy="118" r="2.6"/>' +
         '<circle cx="132" cy="126" r="2.6"/><circle cx="144" cy="130" r="2.6"/></g>';
     },
-    /* Cream, not the body's own dark: as `hue.dark` it read as a shadow across the body rather
-       than as something worn. The hairline keeps the cream from floating on a pale hue. */
-    /* The tail is drawn BEFORE the band now, not after, and that one swap is what lets it swing.
-       Its top edge was always inside the band's eight units of thickness; drawn over the band it
-       showed as a line across it, and turning about a join that is on top of what it hangs from
-       opens a notch of skin at the corner. Underneath, the band covers the join at every angle it
-       reaches, and the tail's top edge is a unit lower so a hard swing cannot lift a corner past
-       the band's upper edge. It turns about the middle of that hidden edge. */
-    scarf: function (d) {
-      return '<g stroke="' + d + '" stroke-width="2.2" stroke-linejoin="round">' +
-        '<g class="tail" style="transform-origin:123.5px 153px">' +
-        '<path d="M128 157 L138 178 q-7 3 -13 1 L119 161 Z" fill="#F2E2CE"/></g>' +
-        '<path d="M62 150 Q100 168 138 150 L138 158 Q100 176 62 158 Z" fill="' + CREAM + '"/></g>';
-    },
-    /* The four below were added on October 2, 2026. Each sits somewhere nothing else does, so any
-       of them can be worn with glasses, a scarf and any hat without two things landing on one
-       spot: the bow tie takes the middle of the chest, the bandage the lower left, the heart the
-       lower right, and the sparkles the air beside the head. Same geometry as the app's. */
+    /* A scarf was here until October 2, 2026, when Jett retired it: a cream band low on a round
+       body read as a diaper. A look that names it falls back to no extra in `lookFromKey`.
+       The four below were added the same day, each clear of every hat: the bow tie on the middle
+       of the chest, the bandage on the lower left, the heart on the lower right, and the sparkles
+       in the air beside the head. Same geometry as the app's. */
     bowtie: function (d) {
       return '<g transform="translate(100 152)" fill="' + ROSE + '" stroke="' + d +
         '" stroke-width="2" stroke-linejoin="round">' +
@@ -240,14 +229,13 @@
         '<path transform="translate(157 144) scale(.6)" ' + star + '/></g>';
     }
   };
-  var EXTRA_IDS = ["none", "glasses", "freckles", "scarf", "bowtie", "bandage", "heart", "sparkles"];
+  var EXTRA_IDS = ["none", "glasses", "freckles", "bowtie", "bandage", "heart", "sparkles"];
   /* Where each extra is worn, which only matters once they can turn around. Glasses, freckles, a
-     bow tie, a bandage and a heart are on their front and go wherever their face goes. A scarf is
-     a band around them: it is there from every side, so a turn leaves it alone and only a flip
-     moves it, the same way it moves their feet. Sparkles are in the air beside them and belong to
-     neither; they ride with the band, which a turn leaves alone, and a flip carries them round.
-     Anything added here belongs in one of the two. */
-  var EXTRAS_ON_BODY = { scarf: true, sparkles: true };
+     bow tie, a bandage and a heart are on their front and go wherever their face goes. Sparkles
+     are in the air beside them, so they ride the `wrap` group (made for a scarf, since retired),
+     which a turn leaves alone and a flip carries round. Anything added here belongs in one of
+     the two. */
+  var EXTRAS_ON_BODY = { sparkles: true };
 
   var uidCounter = 0;
 

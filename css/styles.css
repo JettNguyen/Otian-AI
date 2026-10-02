@@ -12213,12 +12213,13 @@ html[data-theme="dark"] .booking-container iframe {
      the hat   sits above the center, so it does the same as the feet in the other direction. Its
                scale is signed rather than absolute, which is what mirrors a cap's brim when you
                come round behind it.
-     a scarf   is a band right around them, so it is there from every side: a turn leaves it
+     the wrap  holds what is around them or beside them rather than on their front (the
+               sparkles; it was made for a scarf, retired October 2, 2026), so a turn leaves it
                alone, and only a flip moves it, on the same rule as the feet.
 
    The numbers in the keyframes below are that arithmetic worked out, not eyeballed, which is
    why they run to two decimal places. They are generated; if the geometry in js/ember.js ever
-   moves, the four radii to change are 60 (face), 61 (feet), 60 (hat) and 50 (scarf).
+   moves, the four radii to change are 60 (face), 61 (feet), 60 (hat) and 50 (the wrap).
 
    The transform origins are in view-box units and the view box starts at y=6, so every y here
    is the drawing's own y minus six: the ball's center at 108 is written 102. Same rule as
@@ -12251,18 +12252,19 @@ html[data-theme="dark"] .booking-container iframe {
 
 /* ── WHAT EMBER WEARS HAS WEIGHT TOO ───────────────────────────────────────────────────────
 
-   Two parts bend when the body under them moves: the antenna's stalk (with its ball on the end,
-   which is most of why it bends) and the tuft, both turning about their own root on the head, and
-   a scarf's tail, hanging off the band. The peak and the ears are drawn into the body and a cap is
-   worn tight, so none of them moves: a hat sliding about on the head reads as a bug rather than as
-   weight, which is the whole difference between follow-through and a glitch.
+   Four things on the head bend when the body under them moves: the antenna's stalk (with its ball
+   on the end, which is most of why it bends), the tuft, the sprout and each bunny ear, all turning
+   about their own root on the head and sharing the antenna's springs. The peak, the round ears,
+   the bow, the headphones and the crown are drawn into the body or worn tight, so none of them
+   moves: a hat sliding about on the head reads as a bug rather than as weight, which is the whole
+   difference between follow-through and a glitch. (A scarf's tail swung too, until the scarf was
+   retired on October 2, 2026.)
 
    Same method as the tongue, tuned down: a damped spring per part, driven by where its own root
    actually goes when the body plays an act (its scale, then its rotation about the ground, then
    its travel), integrated at a tenth of a millisecond and thinned to the fewest stops that hold
-   the curve inside a degree. The antenna and the tuft answer sideways drive by turning and up-and-
-   down drive by squashing along their own length; the scarf's tail only turns, because cloth does
-   not stretch. One gain per part across every act, so the acts stay honest against each other: a
+   the curve inside a degree. Each answers sideways drive by turning and up-and-down drive by
+   squashing along its own length. One gain per part across every act, so the acts stay honest against each other: a
    wiggle whips the antenna and a nod barely troubles it, and that is the numbers rather than taste.
 
    **The acts that are not here are the ones the arithmetic ruled out.** A hop and a groove squash
@@ -12275,16 +12277,13 @@ html[data-theme="dark"] .booking-container iframe {
    Each curve is faded to rest over its last eighth. The act's class comes off on the final frame,
    so a part still mid-swing would snap straight, and a jerk on the way out is worse than no
    follow-through at all. */
-.ember .sway,
-.ember .tail { transform-box: view-box; }
+.ember .sway { transform-box: view-box; }
 .ember svg.st-act-wiggle .sway { animation: ember-sway-wiggle 0.7s linear 1; }
 .ember svg.st-act-nod .sway { animation: ember-sway-nod 0.75s linear 1; }
 .ember svg.st-act-shimmy .sway { animation: ember-sway-shimmy 0.9s linear 1; }
 .ember svg.st-act-hop .sway,
 /* The same landing, because `done` IS the hop: see the state rules at the top of this section. */
 .ember svg.st-done .sway { animation: ember-sway-hop 0.9s linear 1; }
-.ember svg.st-act-shimmy .tail { animation: ember-tail-shimmy 0.9s linear 1; }
-.ember svg.st-act-squish .tail { animation: ember-tail-squish 0.6s linear 1; }
 
 @keyframes ember-sway-hop {
   0% { transform: scaleY(1); }
@@ -12341,36 +12340,6 @@ html[data-theme="dark"] .booking-container iframe {
   60% { transform: rotate(3.2deg); }
   78% { transform: rotate(-3.9deg); }
   90% { transform: rotate(2.8deg); }
-  100% { transform: rotate(0deg); }
-}
-@keyframes ember-tail-shimmy {
-  0% { transform: rotate(0deg); }
-  11% { transform: rotate(-1.2deg); }
-  18% { transform: rotate(0.8deg); }
-  23% { transform: rotate(7.7deg); }
-  28.5% { transform: rotate(6.8deg); }
-  36% { transform: rotate(-1.9deg); }
-  40% { transform: rotate(-11.4deg); }
-  42.5% { transform: rotate(-13.5deg); }
-  46% { transform: rotate(-10.9deg); }
-  54% { transform: rotate(2.5deg); }
-  58% { transform: rotate(13.5deg); }
-  60.5% { transform: rotate(15deg); }
-  64% { transform: rotate(12deg); }
-  76% { transform: rotate(-12.8deg); }
-  78% { transform: rotate(-14.2deg); }
-  82% { transform: rotate(-11.3deg); }
-  89.5% { transform: rotate(3.4deg); }
-  93% { transform: rotate(5.8deg); }
-  100% { transform: rotate(0deg); }
-}
-@keyframes ember-tail-squish {
-  0% { transform: rotate(0deg); }
-  29.5% { transform: rotate(-0.2deg); }
-  40.5% { transform: rotate(-2.6deg); }
-  70.5% { transform: rotate(3.6deg); }
-  86.5% { transform: rotate(-2.2deg); }
-  99.5% { transform: rotate(0deg); }
   100% { transform: rotate(0deg); }
 }
 /* ONE IN A HUNDRED: the tongue comes out and the head goes side to side.
@@ -12787,7 +12756,6 @@ html[data-theme="dark"] .booking-container iframe {
   .ember svg[class*="st-act-"] .top,
   .ember svg[class*="st-act-"] .wrap,
   .ember svg[class*="st-act-"] .sway,
-  .ember svg[class*="st-act-"] .tail,
   .ember svg.st-done .sway { animation: none; }
   /* The giggle is information (they like it), so the face still changes; only the squirm goes. */
   .ember-spark { display: none; }

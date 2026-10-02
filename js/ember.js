@@ -277,11 +277,14 @@
     var hue = HUES[look.hue] || HUES.terracotta;
     var uid = "e" + (uidCounter += 1);
     var eyes = EYES[look.eyes] || EYES.pill;
-    /* The viewBox starts at y=6, not y=0: that is the whole of Ember's framing, and it is a window
-       offset rather than moved coordinates so every part above stays positioned against the body.
-       `.ember`'s transform-origin in styles.css is measured from this corner, so the two move
-       together (this y plus that origin's 170 is 176, the ground between their feet). */
-    return '<svg viewBox="0 6 200 200" aria-hidden="true" focusable="false">' +
+    /* The window: a square 182 across, centered on (100, 106), the same as the app's `FRAME` in
+       ember-gen.ts. It was 200 across from y=6 until October 2, 2026, when Jett asked for Ember to
+       fill more of the circle; 182 makes them 10% bigger. The transform origins in styles.css did
+       not move with it, because a `transform-box: view-box` origin is measured from the drawing's
+       zero and not from the window's corner (tested in WebKit and Chrome that day). That also
+       means each origin there sits 6 units above the part its comment names; the app's repo has
+       the details in docs/OPEN-THREADS.md. */
+    return '<svg viewBox="9 15 182 182" aria-hidden="true" focusable="false">' +
       '<defs><linearGradient id="ember-' + uid + '" x1="0" y1="0.18" x2="0" y2="1">' +
       '<stop offset="0" stop-color="' + hue.light + '"/>' +
       '<stop offset="0.55" stop-color="' + hue.mid + '"/>' +

@@ -1,5 +1,5 @@
 /* Plain word matching. Queries stay in the tab. Names come from the generated public catalog. */
-import { CATALOG_INDEX } from './catalog-index.js?v=20261002-7';
+import { CATALOG_INDEX } from './catalog-index.js?v=20261002-8';
 const byKey = new Map(CATALOG_INDEX.map(item => [item.key, item]));
 
 var JOBS = [

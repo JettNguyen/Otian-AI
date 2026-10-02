@@ -25,7 +25,7 @@
    the page wiring still lives. Same reason js/catalog.js was extracted before it.
    ======================================== */
 
-import { faceHtml } from "./faces.js?v=20261002-7";
+import { faceHtml } from "./faces.js?v=20261002-8";
 
 /* Render order = the order the user asked for: Personalities, Skills, Routines.
    `coll` is the Firestore subcollection name; `kind` is what the catalog document calls itself.
@@ -113,7 +113,9 @@ export function normalize(kind, id, data) {
 
 /* What an owner has to switch on before an add-on can run, said as a sentence.
  *
- * Wording is TRUST.md's, from the "Websites" entry: the switch is off until they turn it on, the
+ * Wording is TRUST.md's, from the "Websites" entry, under the name the app gives the switch from
+ * 0.3.4 ("Computer control"), with the card wording Jett approved once a gift, library, loyalty or
+ * membership number could be typed ("a card you pay with"): the switch is off until they turn it on, the
  * browser is theirs and watchable, and the two things the agent will never do on a site belong in
  * the same breath as the thing it will. The site's rule is that a limitation is published beside
  * the capability rather than lower down, and a card is where a reader meets this one.
@@ -121,14 +123,14 @@ export function normalize(kind, id, data) {
  * The heading names the add-on rather than saying "What it needs", because check-pronouns.py
  * reads every label cold and a card heading has no menu around it to lend "it" a subject.
  *
- * An unknown value renders nothing. Driving other applications is not built on either platform, so
- * there is no sentence for it yet and inventing one here would put a capability on the shelf that
- * does not exist.
+ * An unknown value renders nothing. Using a Mac's applications is built from 0.3.4 (TRUST.md,
+ * "Computer control"), but no add-on asks for it yet, so there is no sentence for it until one does;
+ * writing one ahead would describe a card nobody can see.
  */
 var SCREEN_NEEDS = {
-  sites: "Needs Websites turned on, which is off until you switch it on. Your agent works the " +
-         "site in a browser window on your own computer, and you can watch it. It never types a " +
-         "password or a card number, and it asks before pressing anything that finalizes.",
+  sites: "Needs Computer control turned on, which is off until you switch it on. Your agent works " +
+         "the site in a browser window on your own computer, and you can watch it. It never types a " +
+         "password or a card you pay with, and it asks before pressing anything that finalizes.",
 };
 
 /* ── Card rendering ─────────────────────────────────────────────────────── */

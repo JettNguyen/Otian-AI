@@ -2380,7 +2380,7 @@ names the button by its own name on the page, the computer running Archie and th
 "if your cart shows up there", because not every shop keeps a cart across devices; since Archie
 `9d13a9ac`, September 28, 2026, when "that one button" on the card was too vague for Jett), and that
   is the actual claim. Not that the agent is careful: that the part which could hurt them waits for
-  them. Passwords, card numbers and codes are still never typed, tap or not.
+  them. Passwords, cards you pay with and sign-in codes are still never typed, tap or not.
 - ⚠️ **Three add-ons use it today**, Statement Collector, Form Filler and Flight Check-In
   (`required_screen` in the Archie repo's `data/marketplace/skills/`, and that grep is the count).
   Flight Check-In joined on 2026-09-16 and this clause was not updated in the same pass, while the
@@ -2389,7 +2389,7 @@ names the button by its own name on the page, the computer running Archie and th
 
 **Boundaries — do not cross:**
 - ❌ **Never say Archie buys, books, or checks out without the switch and the limits in the same
-  sentence.** It cannot type a card number at all, and with the Buying switch off, which is how it
+  sentence.** It cannot type a card you pay with at all, and with the Buying switch off, which is how it
   ships, the press that finalizes an order comes back to the person as a question. Switched on, it
   may press Place order inside the owner's limits. **Rewritten 2026-09-24**, when Jett approved
   buying for copy: see "Buying, as a switch the owner turns on" below for the wording and its
@@ -2447,7 +2447,7 @@ check-in cannot finish without paying, it stops and tells you what is being aske
   `data/marketplace/routines/check-in-window.json` in the Archie repo, on the browser lane above,
   which is what enforces every sentence of it in code rather than in the skill's own words.
 - ❌ **This does not soften the claim above it.** It checks in; it does not book, change or cancel
-  anything, and it cannot type a card number. With buying switched on and the airline on the shop
+  anything, and it cannot type a card you pay with. With buying switched on and the airline on the shop
   list, the code would release a Pay press, so "it buys nothing" rests on the add-on's own
   instructions in that one case. A page that lists this beside "books your travel" has
   broken the strongest claim in this file to advertise the weaker half of a feature.
@@ -4354,7 +4354,7 @@ off until you do. You choose the shops it may buy from, the most it may spend on
 most over a week or a month. Even then it asks before every order: it stops at Place order and
 sends you the page, and it presses the button only after you tap Press it for me, in Archie, on
 your phone or in your chat app. Anything outside your limits it will not press at all. It never
-types a card number, so your card has to be saved at the shop already. A subscription or free
+types a card you pay with, so your card has to be saved at the shop already. A subscription or free
 trial works the same way, and the card says what it will charge each time and when. The limit is checked against the price it reads on the page, so a
 shop that adds a charge at the last step can take it over. For a ceiling nobody can get past, give
 it a card from your bank that works at one shop, with its own limit."
@@ -4387,11 +4387,13 @@ intention:
    the fold gets the code that shipped before this existed, including the same sentence in the
    system prompt. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
    (`the_shipped_state_buys_nothing`) holds it there.
-2. **It still cannot type a card number, ever, switch or no switch.** `guard::typing_stop` refuses
-   any field whose `autocomplete` is a `cc-` value and hands the window to the person, and buying
-   does not touch it. The card has to already be saved at the shop or in the browser profile the
-   agent drives. **Archie never holds a card number** remains true and is now the strongest thing
-   in this area.
+2. **It still cannot type a card you pay with, ever, switch or no switch.** `guard::typing_stop`
+   refuses any field whose `autocomplete` is a `cc-` value, and any whose name says card, and hands
+   the window to the person; buying does not touch it. Since 2026-10-02 a name that says gift card,
+   library card, loyalty or membership is typed into (`names_a_card_that_is_not_payment`, Jett's
+   call), unless the page marks the field `cc-`. The card has to already be saved at the shop or in
+   the browser profile the agent drives. **Archie never holds a card you pay with** remains true and
+   is now the strongest thing in this area.
 3. **Only presses that buy are released.** `click_needs_approval` still catches Submit, Send,
    Delete account, Unsubscribe and Cancel subscription, and a second classifier
    (`click_is_purchase`) decides which of those the switch may release. *Amended 2026-09-24:*
@@ -4421,8 +4423,10 @@ rest of it is.
   sentence, or its short form's promise of a limit the owner sets, is dishonest copy**, however true
   the rest of it is. On a page with room for one more sentence, the bank card is the remedy, and the
   Standard's rule is that a published limitation gets its remedy beside it.
-- ⚠️ **It never types a card number.** This is the strongest sentence in the area and it survives
-  the switch unchanged: `guard::typing_stop` is untouched by buying.
+- ⚠️ **It never types a card you pay with.** This is the strongest sentence in the area and it
+  survives the switch unchanged: `guard::typing_stop` is untouched by buying. It said "a card
+  number" until 2026-10-02, when gift, library, loyalty and membership numbers began to be typed;
+  "a card you pay with" is the form Jett approved that day.
 
 **Boundaries, do not cross:**
 

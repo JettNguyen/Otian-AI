@@ -2288,8 +2288,9 @@ owner's tap on the card releases that one press, by its name and its site, once
 (`PendingPress` in `screen/tools.rs`, rechecked against `guard::click_can_be_tapped` at the moment
 of the click). A guest cannot give it and a routine never receives one (`turn.rs`, owner only).
 
-**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and in no release
-yet.** Found while building the applications half (below), by mapping the tool layer before building
+**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and, for release,
+on the fix-only branch `release-0.3.4` (Archie `bf9eaa95` and `5ddeb630`, from the 0.3.3 commit),
+which Jett chose to ship with nothing else in it.** Found while building the applications half (below), by mapping the tool layer before building
 on it. Both make a sentence in the approved wording above untrue in one case, so the copy is safe
 only for a release that carries the fixes:
 
@@ -2304,10 +2305,9 @@ only for a release that carries the fixes:
    `screen_ask` were not owner-only, and a guest's ask sent a picture of the owner's signed-in
    browser into the guest's chat. Fixed in Archie `9549aefc`: every screen tool is the owner's.
 
-**Whether either goes on `/trust/` as a known weakness, or is closed by a patch release before
-anybody needs telling, is Jett's call.** Until one of those happens, "before it presses anything
-that sends, submits or finalizes something, it stops" has the exception in item 1 on every
-installed copy.
+**Jett's call, 2026-10-02: close it with the patch release rather than a disclosure.** Until 0.3.4
+is out and installed, "before it presses anything that sends, submits or finalizes something, it
+stops" has the exception in item 1 on every installed copy; from 0.3.4 it does not.
 
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
@@ -2450,7 +2450,7 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `46c3f1ed`, on main), not yet in a release
+### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `0ed093b3`, on main), not yet in a release
 
 **Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
 row above went a month without one, and a capability with no row reads downstream as one we do not

@@ -2288,10 +2288,10 @@ owner's tap on the card releases that one press, by its name and its site, once
 (`PendingPress` in `screen/tools.rs`, rechecked against `guard::click_can_be_tapped` at the moment
 of the click). A guest cannot give it and a routine never receives one (`turn.rs`, owner only).
 
-**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and, for release,
-on the fix-only branch `release-0.3.4` (Archie `bf9eaa95` and `5ddeb630`, from the 0.3.3 commit),
-which Jett chose to ship with nothing else in it.** Found while building the applications half (below), by mapping the tool layer before building
-on it. Both make a sentence in the approved wording above untrue in one case, so the copy is safe
+**Amended 2026-10-02: two defects in every release through 0.3.3, fixed on main and shipping in
+0.3.4** (Archie `9549aefc` and `b498fdf4`). Jett first chose a fix-only 0.3.4, then the same day
+chose to release main with everything in it, since `release.sh` ships only from main. Found while
+building the applications half (below), by mapping the tool layer before building on it. Both make a sentence in the approved wording above untrue in one case, so the copy is safe
 only for a release that carries the fixes:
 
 1. **A press the owner approved once could be pressed again without asking.** The remembered route
@@ -2450,31 +2450,38 @@ a switch the owner turns on"), so the answer to a benchmark is that Archie buys 
 said it may, where and up to what they said. Booking a trip end to end is still not a claim: a
 Book now press is released like a purchase, but nothing plans and books travel as one job.
 
-### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `0ed093b3`, on main), not yet in a release
+### 🚧 Computer control: the agent using the apps you allow on a Mac, in the background: BUILT 2026-10-02 (Archie `9549aefc` to `98e2b06f`), in 0.3.4, not yet released
 
 **Recorded the day it was built**, so the row exists before anybody is asked about it: the Websites
 row above went a month without one, and a capability with no row reads downstream as one we do not
-have. Nothing here may be said in the present tense on the site until a release carries it and one
-real job has run in an application.
+have. One real job has run in an application (below); nothing here may be said in the present
+tense on the site until 0.3.4 is out.
 
-**What has not happened yet**, and each item is a reason the wording below waits:
+**What the first real jobs showed (2026-10-02, `scripts/live-app-job.sh`, a real model through
+the whole gateway):** asked to start a new project in Premiere Pro, the agent asked to use it, was
+allowed by a tap, and worked through File, New, Project with Premiere behind another application.
+Premiere's name box ignored its typing, and the agent said so and asked the person to type the name;
+it did not press Create. In TextEdit it typed a line at the end of a new document and read it back.
+Neither application came forward. Three defects found on the way were fixed the same day.
 
-- No model has done a job in an application. The adapter was driven by hand (Calculator's buttons
-  and a menu item, Font Book's search field), with another application in front and its owner using
-  the mouse, and the stops are tested against a stub.
-- Typing at the end of a document has not run against a real one.
+**What has not happened yet**, and each is a reason for a boundary below:
+
 - The macOS permission prompt has not been seen from a signed build; in development the permission
   belonged to the editor that ran it.
 - Nobody knows yet whether it works while the Mac is locked, which is the shape of every request
   from a phone.
 
-**Wording proposed for Jett's approval, once it ships:** "On a Mac, your agent can also use the
-apps you allow, such as Numbers or Preview, the same careful way it uses a website. It presses
-buttons and fills in boxes inside the app's window without moving your pointer, so you can keep
-working, and if you start using that app it waits for you. macOS asks you once to allow it. It never
-uses Terminal, password keepers, System Settings, Mail, Messages, Calendar, or your web browsers, and
-the same stops apply: it never types a password or a card number, and anything it could not undo
-waits for you."
+**Wording, approved by Jett 2026-10-02 ("approve as written"), for the day it ships:** "On a Mac,
+your agent can also use the apps you allow, such as Numbers or Preview, the same careful way it uses
+a website. It presses buttons and fills in boxes inside the app's window without moving your
+pointer, so you can keep working, and if you start using that app it waits for you. macOS asks you
+once to allow it. It never uses Terminal, password keepers, System Settings, Mail, Messages,
+Calendar, or your web browsers, and the same stops apply: it never types a password or a card you
+pay with, and anything it could not undo waits for you."
+
+*One change since his approval, for his OK:* "a card number" became "a card you pay with", because
+the same day he chose to let a gift card, library card, loyalty or membership number be typed, and
+"never types a card number" would no longer be true as written.
 
 *Short form, proposed:* "Uses the apps you allow on your Mac, in the background, and stops before
 anything it can't undo."
@@ -2483,6 +2490,14 @@ anything it can't undo."
 **Computer control**, with the line "Your agent clicks and types in websites and apps on this
 computer, the way you would. It stops before anything it can't undo." (Windows reads it without "and
 apps".) It replaces **Websites** as the Connections entry from the release that carries it.
+
+**One switch, one list (Jett, 2026-10-02):** "to a normal person, they do the same thing, they just
+work a bit differently behind the curtain." The panel opens on asking in the chat, holds websites and
+apps in one list, and adds either from one box. There is no second switch for apps any more.
+
+**The pointer people can see (Jett, 2026-10-02):** the Archie mark, tilted like a cursor, moves to
+each button the agent presses in its own browser window and rests on a press waiting for a tap, so
+the picture in the approval card shows which button it means.
 
 **Why it's true:** in the Archie repo.
 
@@ -2508,7 +2523,8 @@ apps".) It replaces **Websites** as the Connections entry from the release that 
   another computer, a phone or a call.
 - **The same stops as a website.** A field macOS marks as secure arrives at stop 2 as a password,
   and a card field is known by its name (`guard::typing_stop`, which also closed the same gap on the
-  web). Stop 3 adds an application's own words for the irreversible: Empty Trash, Move to Trash,
+  web), except a gift card, library card, loyalty or membership number, which is not a way to pay
+  and is typed (`guard::names_a_card_that_is_not_payment`, Jett's call). Stop 3 adds an application's own words for the irreversible: Empty Trash, Move to Trash,
   Delete Immediately, Don't Save, Erase, Shut Down, Restart, Log Out, Force Quit, and Replace,
   Overwrite, Discard, Revert, Quit, Print, Share and AirDrop when a name starts with them
   (`guard::app_click_is_final`). The Return key is never pressed, because a message app sends on it.
@@ -2517,9 +2533,17 @@ apps".) It replaces **Websites** as the Connections entry from the release that 
   (`macos::find`).
 - **Owner only.** Every screen tool is withheld from a guest (`acts_as_owner` in `turn.rs`, and the
   test `a_guest_is_offered_no_screen_tool_at_all`).
-- **Off until switched on, twice.** Computer control's own switch, then a second one for
-  applications (`ScreenSettings.apps`, default off), then the macOS Accessibility permission, which
-  the person grants in System Settings.
+- **Off until switched on, and only the apps the owner allows.** Computer control's own switch
+  (since the merge there is no second one for applications; `tools_screen::apps_switched_on`), an
+  allowlist that starts empty and grows only by the owner's yes, then the macOS Accessibility
+  permission, which the person grants in System Settings.
+- **The pointer is a picture inside the agent's own browser window.** `POINTER_JS` in
+  `screen/mod.rs` draws it in a closed shadow root, `aria-hidden`, taking no pointer events, so the
+  agent's read and its presses pass through it; `tests/screen_live.rs` asserts the read is unchanged
+  with it on the page. Nothing is drawn in an application.
+- **The phone can run the panel**, from the next Archie Mobile: the snapshot carries each agent's
+  Computer control (`computer_at` in `src-tauri/src/phone.rs`) and nine relay ops change it through
+  the window's own commands. Sign-ins and the macOS permission still happen on the Mac.
 - **Mac only.** `ScreenSurface::Apps.available_here()` is false off macOS, so the store lists no
   application add-on on Windows and the panel draws no applications section there.
 - **It reads text, not pictures.** A window is read through the same accessibility tree a screen
@@ -2532,6 +2556,8 @@ apps".) It replaces **Websites** as the Connections entry from the release that 
 - ⚠️ **The never list**, or at least that it never uses a terminal, a password keeper or their
   email app, because those are the three a careful reader asks about.
 - ⚠️ **An app that does not describe its window cannot be used yet**, and the agent says so.
+- ⚠️ **An app that draws its own boxes may not take its typing** (Premiere Pro's project name did
+  not), and the agent asks the person to type that part.
 
 **Boundaries:**
 - ❌ **Never "takes over your computer", "controls your mouse" or "types for you" as if it were a
@@ -2544,7 +2570,12 @@ apps".) It replaces **Websites** as the Connections entry from the release that 
   is measured: about 40 tokens of tools with applications switched on, and a look at a small app's
   window at 185 to 400 tokens.
 - ❌ **Never "works while your Mac is locked"** until it has been tried.
-- ❌ Never "tested" or "proven" until one real job has run.
+- ❌ **Never name an application as supported.** One real job ran in Premiere Pro, through its menus
+  and not its typing, and one in TextEdit. That is two jobs, not a list.
+- ❌ **Never say it moves your mouse or puts a cursor on your screen.** The pointer is drawn inside
+  the agent's own browser window, and in an application nothing is drawn at all.
+- ❌ **Never "never types a card number" without "you pay with".** A gift card, library card,
+  loyalty or membership number is typed.
 
 **What changes elsewhere in this file the day it ships**, because each says something this makes
 untrue:

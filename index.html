@@ -76,7 +76,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261002-2" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261002-3" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -269,7 +269,7 @@
     </svg>
 
     <section class="day-story" aria-label="One day with Archie">
-      <div class="day-stage">
+      <div class="day-stage is-hero">
 
         <!-- THE SKY. Scenery for the overnight act and nothing else: the field is drawn once,
              here, and the stylesheet fades it in off the same --night the room is painted with, so
@@ -300,136 +300,16 @@
 
         <div class="day-caps">
 
-          <!-- Act 0, 7:00 am. Ownership, concrete jobs, price and the scoped approval gate. -->
+          <!-- Act 0: hand off the work, then see three examples from dinner. -->
           <article class="day-cap is-on" data-act="0">
             <span class="section-label">Otian AI &middot; Archie</span>
-            <!-- Lead with the work the reader hands off; ownership is scoped before the price. -->
             <h1>Don&rsquo;t rent your agent. <em>Own it.</em></h1>
-            <p class="day-beat is-on" data-act="0" data-at="0">Tell your agent what you want off your plate. It does the work on your computer, with the AI you choose.</p>
-            <p class="day-beat is-on" data-act="0" data-at="0">Your agent&rsquo;s memory stays yours after you cancel.</p>
-            <p class="day-beat is-on" data-act="0" data-at="0">20 jobs a day free. <a href="archie/pricing/" class="hm-price-link">See plans from $30/month&nbsp;&rarr;</a>, plus AI usage.</p>
-            <div class="hm-actions">
-              <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
-              <p class="hm-hero-status">Archie is in testing. <a href="archie/personal/#status">Where it stands&nbsp;&rarr;</a></p>
-            </div>
-            <p class="day-catch day-beat is-on" data-act="0" data-at="0">You approve replies and calendar changes.</p>
-            <p class="hm-hero-fork day-beat is-on" data-act="0" data-at="0.34"><a href="archie/personal/">See what it does for one person&nbsp;&rarr;</a></p>
-            <!-- The team edition and agent-check routes sit in the pricing band below, so the
-                 opening has one main action and one route into the personal story. -->
-            <!-- The phone's scroll cue. A SECOND one, and the duplication is the point: the wide
-                 cue stands under the scene in the stage's own grid, and there is no way to put one
-                 element both there and inside this caption, which is where "under the button" is.
-                 Each is hidden at the other's width. Both are aria-hidden, so a screen reader hears
-                 neither twice, and js/home.js dims every .day-hint together. -->
-            <div class="day-hint day-hint--flow" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
-          </article>
-
-          <!-- Act 1, 9:12 am. TRUST.md "Calendar changes require your confirmation": proposed
-               first, applied after your yes in a later message, and a button answers for you. -->
-          <article class="day-cap" data-act="1">
-            <span class="section-label">Calendar Manager &middot; 9:12 am</span>
-            <h2>Move an appointment after you approve it.</h2>
-            <p>It reads your calendar, proposes a change and waits for your approval in a later message.</p>
-            <p class="day-catch">A routine running on its own can only report the change it would make.</p>
-          </article>
-
-          <!-- Act 2, 1:40 pm. The product's own sentence for the send gate, and the starter-credits
-               refusal beside it, because the limitation sits with the capability. -->
-          <article class="day-cap" data-act="2">
-            <span class="section-label">Email Manager &middot; 1:40 pm</span>
-            <h2>Replies drafted for you, waiting for your Send.</h2>
-            <p>Nothing leaves your account until you send it or set a time.</p>
-            <p class="day-catch">Email features need an AI account of your own. The free starter credits will not run them.</p>
-          </article>
-
-          <!-- Act 3. Both captions are the sentences this page already carried for the custody
-               figure, so the floor makes no new claim. The toggle redraws the lap for starter
-               credits, which is the one case where our server is in the path.
-
-               TRIMMED 2026-09-19, on a phone this was the tallest caption in the story and the
-               scene was paying for it. What went is "and waits for you", which the next sentence
-               and the drawing both already say, and four words across two chips. What did not go
-               is the gate's scope: "anything heading for your mail or calendar" is the scoped
-               form TRUST.md requires, and the unscoped short version is a banned phrasing. The
-               paragraph still runs to three lines at 375px and can only lose the third by
-               loosening that scope, so it keeps it. -->
-          <article class="day-cap" data-act="3">
-            <span class="section-label">Where your words go</span>
-            <h2>Your conversations go to your AI company, and we keep no copy we can read.</h2>
-            <p class="day-main">A message goes from your chat app to your agent to the AI company you picked, and back. Anything heading for your mail or calendar stops at the gate.</p>
-            <p class="day-alt">Free credits and included AI reach Anthropic through our server without being kept. An AI account of your own skips our server from each agent&rsquo;s next start.</p>
-            <div class="day-seg" role="group" aria-label="Which AI account the lap uses">
-              <button type="button" data-mode="key" aria-pressed="true">Your own AI account</button>
-              <button type="button" data-mode="credits" aria-pressed="false">AI included</button>
-            </div>
-            <div class="day-chips">
-              <span class="day-chip"><i></i>Keys in your computer&rsquo;s password store</span>
-              <span class="day-chip"><i></i>No analytics in the app</span>
-              <span class="day-chip"><i></i>Add-ons are text files</span>
-              <span class="day-chip"><i></i>Connects to your accounts only when you do</span>
-            </div>
-            <a class="day-more" href="trust/">Check what Archie connects to, in 10 minutes&nbsp;&rarr;</a>
-          </article>
-
-          <!-- Act 4, 4:15 pm. The coverage grid's four questions, on the phone, each answered by the
-               add-on that does it under its real name. The dashed chips are the rows still blank.
-               The paragraph's second sentence went on 2026-09-19: "say the next job in a sentence
-               and Archie writes the routine" is the link two lines below it, in other words. -->
-          <article class="day-cap" data-act="4">
-            <span class="section-label">Off your plate &middot; 4:15 pm</span>
-            <h2>Track promises, bills, paperwork and doctor&rsquo;s notes.</h2>
-            <p>Four of the 168 add-ons, all included.</p>
-            <div class="day-chips">
-              <span class="day-chip"><i></i>Buys only if you switch it on, at shops you pick, up to a limit you set</span>
-              <span class="day-chip day-chip--no"><i></i>Never makes a bank transfer</span>
-            </div>
-            <p class="day-catch">Routines run on their own schedule and add to the AI bill. <a href="archie/pricing/#ai-cost">See what that costs, measured&nbsp;&rarr;</a></p>
-            <a class="day-more" href="skills-marketplace/find/">Say the job in your own words and see which one does it&nbsp;&rarr;</a>
-          </article>
-
-          <!-- Act 5, 2:00 am. "It works while you sleep" is the canonical claim; the wake sentence
-               is TRUST.md's approved wording for the helper that shipped on 2026-09-16. -->
-          <article class="day-cap" data-act="5">
-            <span class="section-label">Overnight &middot; 2:00 am</span>
-            <h2>Archie works while you sleep.</h2>
-            <p>Archie can wake your computer for a scheduled routine, then let it sleep again. A shut-down computer stays off.</p>
-          </article>
-
-          <!-- Act 6, the exhale, added 2026-09-18. Six acts of capability and nothing the reader
-               FEELS: a survey found the homepage carried no instance of "hours" or "time back",
-               and the best relief copy on the site was on testimonials/. This is the beat that
-               was missing, and it is deliberately not a new claim: every line is something an
-               earlier act already showed, said back in the past tense. Relief is an absence, so
-               the act adds a feeling and no capability.
-
-               WHY 7:00 AM AND NOT AN EVENING. Chronologically an evening beat has to interrupt
-               the arc into the 2:00 am act, and that act already ends on "Morning Brief, Next,
-               7:00 AM". This is that brief arriving, so the day closes its own loop on the hour
-               it opened. The hero's brief at 7:00 is what is coming; this one is what is done,
-               and the two being the same hour is the whole point.
-
-               Setup still follows, so the page still ends on the most useful thing a reader can
-               do next. Feel it, then learn how to get it. -->
-          <article class="day-cap" data-act="6">
-            <span class="section-label">The next morning &middot; 7:00 am</span>
-            <h2>You wake up to what your agent already did.</h2>
-            <p>The morning brief lists what got done overnight, and anything that needs you is drafted and waiting.</p>
-          </article>
-
-          <!-- Act 7. The five steps stand on the floor and Ember hops one to the next; the minute
-               count climbs 1, 3, 7, 9, 10, the marks FACTS.md records for the track. -->
-          <article class="day-cap" data-act="7">
-            <span class="section-label">Setup &middot; Estimated</span>
-            <h2>Set up Archie in five steps, without code.</h2>
-            <div class="day-minutes"><i class="day-pie" id="dayPie" aria-hidden="true"></i><small>Estimated</small><b id="dayMinutes">1</b><span>min so far</span></div>
-            <p>Estimates: about five minutes on our free credits, and ten if you open an AI account first.</p>
-            <a class="day-more" href="how-it-works/#what-you-need">See the full list of what you need&nbsp;&rarr;</a>
-          </article>
-
-        </div>
-
+            <p class="day-beat is-on" data-act="0" data-at="0">Hand Archie the busywork you keep putting off. Your agent gets it done your way, on your computer with the AI you choose.</p>
+          <div class="hm-evening" role="group" aria-label="Illustrative jobs while you are at dinner">
+            <p><em>While you were at dinner, Archie&hellip;</em></p>
+            <p class="hm-dinner-outcome">drafted Sam&rsquo;s reply.</p>
         <div class="day-scene-wrap">
-          <div class="day-scene" role="img" aria-label="Archie runs an agent on your computer. A phone shows an email draft waiting for Send, a calendar change waiting for approval, bill and paperwork reminders, and a morning report. Your chosen AI company processes requests. Free credits and included AI route through Otian's server, which records usage costs without conversation content. Scheduled routines can wake a sleeping computer; a shut-down computer stays off. Five setup steps finish the scene.">
+          <div class="day-scene" role="img" aria-label="Archie runs an agent on your computer. While you are at dinner, the phone cycles through an email draft waiting for Send, a bill due in three days, and a return window closing in a week. These are illustrative examples; mail watch and scheduled routines need to be set up. The rest of the day shows a calendar change waiting for approval, paperwork reminders, and a morning report. Your chosen AI company processes requests. Free credits and included AI route through Otian's server, which records usage costs without conversation content. Scheduled routines can wake a sleeping computer; a shut-down computer stays off. Five setup steps finish the scene.">
 
             <!-- THE ARCHIE WINDOW. archie-app-mockup.html's chrome, sidebar, agent header and Now
                  pane, class for class, at half size. The app's own tokens are scoped under
@@ -614,15 +494,23 @@
                   <div class="dp-transcript">
 
                     <div class="dp-scr is-on" data-scr="0">
-                      <div class="dp-said">
+                      <div class="hm-dinner-job is-on" data-dinner-job="0"><div class="dp-said">
                         <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>.</p><p>Can we move the roof estimate to Friday?</p><p><b>Draft reply</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
                           <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></div>
                           <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                           <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                           <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                         </div></div></div>
-                        <p class="dp-stamp">7:00 AM</p>
-                      </div>
+                        <p class="dp-stamp">7:00 PM</p>
+                      </div></div>
+                      <div class="hm-dinner-job" data-dinner-job="1"><div class="dp-said">
+                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Bill Reminders</b></p><p>Your electric bill is due Monday, in three days.</p><p>It isn&rsquo;t on autopay.</p></div></div>
+                        <p class="dp-stamp">7:00 PM</p>
+                      </div></div>
+                      <div class="hm-dinner-job" data-dinner-job="2"><div class="dp-said">
+                        <div class="dp-bub theirs"><div class="dp-md"><p><b>Return Window Watch</b></p><p>You have one week left to return the shoes.</p><p>The return window closes next Friday.</p></div></div>
+                        <p class="dp-stamp">7:00 PM</p>
+                      </div></div>
                     </div>
 
                     <!-- THIS THREAD GROWS FROM THE COMPOSER UP, which is what dp-scr--grow buys and
@@ -909,10 +797,139 @@
 
           </div>
         </div>
+            <div class="hm-dinner-controls">
+              <button type="button" data-dinner-pick="0" aria-label="See the reply draft" aria-pressed="true">1</button>
+              <button type="button" data-dinner-pick="1" aria-label="See the bill reminder" aria-pressed="false">2</button>
+              <button type="button" data-dinner-pick="2" aria-label="See the return deadline" aria-pressed="false">3</button>
+              <button type="button" class="hm-dinner-pause" aria-label="Pause dinner examples" aria-pressed="false">Pause</button>
+            </div>
+            <p class="hm-dinner-note">With mail watch and routines set up.</p>
+          </div>
+            <div class="hm-actions">
+              <a href="archie/install/" class="btn btn-primary btn-lg">Try it free: 20 jobs a day</a>
+              <a href="archie/personal/" class="hm-hero-story">See what it does for one person&nbsp;&rarr;</a>
+            </div>
+            <p class="hm-hero-status">Use your own AI account. AI charges are separate. Testing build.</p>
+            <p class="hm-trust-strip">Memory stays yours after you cancel &middot; Your AI, your choice &middot; Replies and calendar changes wait for your yes.</p>
+            <!-- The team edition and agent-check routes sit in the pricing band below, so the
+                 opening has one main action and one route into the personal story. -->
+            <!-- The phone's scroll cue. A SECOND one, and the duplication is the point: the wide
+                 cue stands under the scene in the stage's own grid, and there is no way to put one
+                 element both there and inside this caption, which is where "under the button" is.
+                 Each is hidden at the other's width. Both are aria-hidden, so a screen reader hears
+                 neither twice, and js/home.js dims every .day-hint together. -->
+            <div class="day-hint day-hint--flow" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
+          </article>
+
+          <!-- Act 1, 9:12 am. TRUST.md "Calendar changes require your confirmation": proposed
+               first, applied after your yes in a later message, and a button answers for you. -->
+          <article class="day-cap" data-act="1">
+            <span class="section-label">Calendar Manager &middot; 9:12 am</span>
+            <h2>Move an appointment after you approve it.</h2>
+            <p>It reads your calendar, proposes a change and waits for your approval in a later message.</p>
+            <p class="day-catch">A routine running on its own can only report the change it would make.</p>
+          </article>
+
+          <!-- Act 2, 1:40 pm. The product's own sentence for the send gate, and the starter-credits
+               refusal beside it, because the limitation sits with the capability. -->
+          <article class="day-cap" data-act="2">
+            <span class="section-label">Email Manager &middot; 1:40 pm</span>
+            <h2>Replies drafted for you, waiting for your Send.</h2>
+            <p>Nothing leaves your account until you send it or set a time.</p>
+            <p class="day-catch">Email features need an AI account of your own. The free starter credits will not run them.</p>
+          </article>
+
+          <!-- Act 3. Both captions are the sentences this page already carried for the custody
+               figure, so the floor makes no new claim. The toggle redraws the lap for starter
+               credits, which is the one case where our server is in the path.
+
+               TRIMMED 2026-09-19, on a phone this was the tallest caption in the story and the
+               scene was paying for it. What went is "and waits for you", which the next sentence
+               and the drawing both already say, and four words across two chips. What did not go
+               is the gate's scope: "anything heading for your mail or calendar" is the scoped
+               form TRUST.md requires, and the unscoped short version is a banned phrasing. The
+               paragraph still runs to three lines at 375px and can only lose the third by
+               loosening that scope, so it keeps it. -->
+          <article class="day-cap" data-act="3">
+            <span class="section-label">Where your words go</span>
+            <h2>Your conversations go to your AI company, and we keep no copy we can read.</h2>
+            <p class="day-main">A message goes from your chat app to your agent to the AI company you picked, and back. Anything heading for your mail or calendar stops at the gate.</p>
+            <p class="day-alt">Free credits and included AI reach Anthropic through our server without being kept. An AI account of your own skips our server from each agent&rsquo;s next start.</p>
+            <div class="day-seg" role="group" aria-label="Which AI account the lap uses">
+              <button type="button" data-mode="key" aria-pressed="true">Your own AI account</button>
+              <button type="button" data-mode="credits" aria-pressed="false">AI included</button>
+            </div>
+            <div class="day-chips">
+              <span class="day-chip"><i></i>Keys in your computer&rsquo;s password store</span>
+              <span class="day-chip"><i></i>No analytics in the app</span>
+              <span class="day-chip"><i></i>Add-ons are text files</span>
+              <span class="day-chip"><i></i>Connects to your accounts only when you do</span>
+            </div>
+            <a class="day-more" href="trust/">Check what Archie connects to, in 10 minutes&nbsp;&rarr;</a>
+          </article>
+
+          <!-- Act 4, 4:15 pm. The coverage grid's four questions, on the phone, each answered by the
+               add-on that does it under its real name. The dashed chips are the rows still blank.
+               The paragraph's second sentence went on 2026-09-19: "say the next job in a sentence
+               and Archie writes the routine" is the link two lines below it, in other words. -->
+          <article class="day-cap" data-act="4">
+            <span class="section-label">Off your plate &middot; 4:15 pm</span>
+            <h2>Track promises, bills, paperwork and doctor&rsquo;s notes.</h2>
+            <p>Four of the 168 add-ons, all included.</p>
+            <div class="day-chips">
+              <span class="day-chip"><i></i>Buys only if you switch it on, at shops you pick, up to a limit you set</span>
+              <span class="day-chip day-chip--no"><i></i>Never makes a bank transfer</span>
+            </div>
+            <p class="day-catch">Routines run on their own schedule and add to the AI bill. <a href="archie/pricing/#ai-cost">See what that costs, measured&nbsp;&rarr;</a></p>
+            <a class="day-more" href="skills-marketplace/find/">Say the job in your own words and see which one does it&nbsp;&rarr;</a>
+          </article>
+
+          <!-- Act 5, 2:00 am. "It works while you sleep" is the canonical claim; the wake sentence
+               is TRUST.md's approved wording for the helper that shipped on 2026-09-16. -->
+          <article class="day-cap" data-act="5">
+            <span class="section-label">Overnight &middot; 2:00 am</span>
+            <h2>Archie works while you sleep.</h2>
+            <p>Archie can wake your computer for a scheduled routine, then let it sleep again. A shut-down computer stays off.</p>
+          </article>
+
+          <!-- Act 6, the exhale, added 2026-09-18. Six acts of capability and nothing the reader
+               FEELS: a survey found the homepage carried no instance of "hours" or "time back",
+               and the best relief copy on the site was on testimonials/. This is the beat that
+               was missing, and it is deliberately not a new claim: every line is something an
+               earlier act already showed, said back in the past tense. Relief is an absence, so
+               the act adds a feeling and no capability.
+
+               The opening dinner preview stands outside the day's timeline. This 7:00 AM
+               brief closes the overnight act, which ends on "Morning Brief, Next, 7:00 AM".
+
+               Setup still follows, so the page still ends on the most useful thing a reader can
+               do next. Feel it, then learn how to get it. -->
+          <article class="day-cap" data-act="6">
+            <span class="section-label">The next morning &middot; 7:00 am</span>
+            <h2>You wake up to what your agent already did.</h2>
+            <p>The morning brief lists what got done overnight, and anything that needs you is drafted and waiting.</p>
+          </article>
+
+          <!-- Act 7. The five steps stand on the floor and Ember hops one to the next; the minute
+               count climbs 1, 3, 7, 9, 10, the marks FACTS.md records for the track. -->
+          <article class="day-cap" data-act="7">
+            <span class="section-label">Setup &middot; Estimated</span>
+            <h2>Set up Archie in five steps, without code.</h2>
+            <div class="day-minutes"><i class="day-pie" id="dayPie" aria-hidden="true"></i><small>Estimated</small><b id="dayMinutes">1</b><span>min so far</span></div>
+            <p>Estimates: about five minutes on our free credits, and ten if you open an AI account first.</p>
+            <a class="day-more" href="how-it-works/#what-you-need">See the full list of what you need&nbsp;&rarr;</a>
+          </article>
+
+        </div>
+
+        <span id="daySceneHome" hidden></span>
         <!-- The clock badge and the scroll hint are the stage's own, placed in the scene's grid cell,
              not the scene wrap's children: the wrap is a flex row, and a badge inside it stood beside
              the scene and pushed it sideways by half its own width (found 2026-09-16). -->
-        <div class="day-clock is-on" aria-hidden="true"><i></i><span>7:00 am</span></div>
+        <div class="day-clock is-on">
+          <span class="day-clock-time" aria-hidden="true"><i></i><span>7:00 pm</span></span>
+
+        </div>
         <div class="day-hint" aria-hidden="true"><span>Scroll through one day</span><svg viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></svg></div>
 
         <!-- Where you are in the day, as a line under the nav. Asked for by Jett on 2026-09-18: a
@@ -1651,7 +1668,7 @@
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Pricing</span>
         <h2 id="price-heading" class="fade-up">Free for 20 jobs a day, with paid plans from $30 a month.</h2>
-        <p class="hm-lede fade-up">A paid plan adds more agents, removes the daily job count and includes Archie Mobile. Your chosen AI company does the thinking and <a href="archie/pricing/#ai-cost">bills you separately</a>.</p>
+        <p class="hm-lede fade-up">Paid plans include Archie Mobile. Your AI company <a href="archie/pricing/#ai-cost">bills you separately</a>.</p>
         <div class="hm-plans fade-up">
           <article class="hm-plan">
             <span class="hm-plan-label">Free</span>
@@ -1674,7 +1691,7 @@
             <p>Up to 50 agents, and any of them can answer your whole team. $999 for the year.</p>
           </article>
         </div>
-        <p class="hm-plan-note fade-up">Your agent&rsquo;s setup and memory stay on your computer. <a class="marketplace-text-link" href="archie/pricing/#why-paid">See what stays yours when a plan ends&nbsp;&rarr;</a></p>
+        <p class="hm-plan-note fade-up"><a class="marketplace-text-link" href="archie/pricing/#why-paid">See what stays yours when a plan ends&nbsp;&rarr;</a></p>
         <p class="hm-plan-note hm-plan-note--alt fade-up">Don&rsquo;t want a second account? <a href="archie/pricing/#ai-included">$59 a month and we buy the AI for you</a>: $25 of usage each month, and your agent waits for next month if that runs out. Email and text replies need an AI account of your own.</p>
         <p class="calm-note calm-note--center fade-up"><a href="archie/pricing/">See full pricing and how the trials work &rarr;</a></p>
         <p class="hm-plan-note fade-up"><a class="marketplace-text-link" href="archie/business/">Archie for Business&nbsp;&rarr;</a><span class="hm-hero-sep" aria-hidden="true"></span><a class="marketplace-text-link" href="compare/questions-to-ask/">Check the agent you have&nbsp;&rarr;</a></p>
@@ -1802,10 +1819,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261002-2"></script>
-  <script src="js/ember.js?v=20261002-2" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261002-2"></script>
-  <script src="js/home.js?v=20261002-2" defer></script>
+  <script src="js/nav.js?v=20261002-3"></script>
+  <script src="js/ember.js?v=20261002-3" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261002-3"></script>
+  <script src="js/home.js?v=20261002-3" defer></script>
+  <script src="js/hero-dinner.js?v=20261002-3" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

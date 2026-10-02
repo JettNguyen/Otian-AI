@@ -64,6 +64,8 @@ ALLOW = {
     # The app's own section title, drawn inside the window on how-it-works/ and quoted by
     # TRUST.md's approved wording. Renaming it here would draw a screen the app does not have.
     "what it can do",
+    # Jett's requested homepage action, 2026-10-02. It stays with the Archie hero.
+    "try it free: 20 jobs a day",
     "in their words", "in their words.", "in their own words",
     # "it" answered inside the same sentence, by a word too ordinary to list as a noun.
     "what you saw, and what it means",

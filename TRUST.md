@@ -1279,6 +1279,57 @@ app is built for any other reason.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
+### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, not yet in a release
+
+**Approved wording, once both halves are in a release:** "When an update for Archie is ready,
+Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and
+restarts, and your agents start again on their own. From the phone you can also run a routine now,
+pick a skill's response quality, and switch a skill's scheduled messages off and on."
+
+**Why it's true** (Archie `1cf5b5df` for the update and the new phone actions, `623d1850` and
+`6880e0b3` for what the phone is sent, `862f5790` and `50d9cb96` for the rows on the computer;
+archie-mobile `04da3b6`):
+
+- **One update status for both screens.** `src-tauri/src/app_update.rs` checks the address the
+  window always checked (an hour apart and when the window comes forward, never closer than 15
+  minutes), holds what it found, and sends it both to the window and, in the sealed snapshot, to the
+  phone: the version, its notes, and whether it is installing (`update` in `build_core`,
+  `src-tauri/src/phone.rs`).
+- **Update on the phone** sends `update_install`, one of the fixed actions the computer accepts
+  from a phone (`dispatch_words` in `phone.rs`). The computer writes its answer to the phone first
+  and only then starts the install (`start_queued`), so the restart cannot leave the request waiting
+  to run a second time. Archie restarts itself, and a restart no longer stops to ask whether to quit
+  (`src-tauri/src/lib.rs`, `RESTART_EXIT_CODE`).
+- **Run now, Response quality and the schedule switch** are `routine_run_now`, `set_skill_tier` and
+  `skill_schedule_enabled`, which run the same code as the computer's own buttons.
+- **The phone's side** is `src/update.ts` and `src/screens/Update.tsx` in archie-mobile: the card
+  on Settings and at the top of the agent list, which asks before it starts, says the agents pause
+  for about a minute, and waits for the computer to come back with the new version.
+- **The rows open in place on both apps, with the same words.** The design and the list of what the
+  phone is sent are `docs/SKILL-ROUTINE-CONTROLS.md` in the Archie repo. Response quality is
+  Economy, Balanced or Best, the words the computer uses.
+
+**The boundaries.**
+
+- ⚠️ **The computer has to be on, awake, and running Archie.** The phone asks; the computer does
+  the work. Never "update Archie from anywhere" without that condition beside it, and never
+  "automatically": somebody presses Update.
+- ⚠️ **Some Macs say no.** When the account signed in on the Mac cannot change the Archie app
+  (it was installed from another administrator account), installing asks for an administrator's
+  password, so the phone refuses and says to update at the computer. Never "always" or "on any
+  computer".
+- ⚠️ **Nobody has watched it happen yet.** It needs a release build (a development build never
+  checks for updates), and no release carries it. Until one has been watched on a Mac and on
+  Windows, this stays 🚧 and no page may make the claim.
+- ⚠️ **Both halves have to ship, computer first.** A phone that is newer than its computer hides
+  these controls rather than sending an action the computer would not know. A page may say this
+  once a computer release and the phone update that carry it are both out.
+- ⚠️ **The phone still cannot connect an account or paste a key.** No secret travels through the
+  mailbox, so a skill waiting on an account says to connect it at the computer.
+- **The update check itself is unchanged.** It is the same plain request to the same address (see
+  "The update check tells us nothing about you"). Moving it into the app's own process changed when
+  it runs, not what it sends.
+
 ### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
 
 **Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video, a

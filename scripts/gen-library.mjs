@@ -230,7 +230,7 @@ ${ICONS.map((n) => `    .lib-i-${n}, .lib-kicker-${n}::before { --ico: url("../.
     .lib-h1 { margin: 0; font-size: clamp(1.9rem, 1.2rem + 2.2vw, 2.75rem); line-height: 1.15; text-wrap: balance; }
     .lib-h1-n { color: var(--accent); font-variant-numeric: tabular-nums; }
     .lib-lede { margin: 0; max-width: 62ch; color: var(--text-secondary); font-size: var(--fs-xl); }
-    .lib-player { margin: 0; display: grid; gap: 10px; }
+    .lib-player { margin: 0; display: grid; gap: 16px; }
     /* The player comes straight after the title and is never taller than the window has room for,
        so a reader arriving from the side list or Next sees the whole video without scrolling (Jett,
        2026-09-30). The slot keeps the player's place when it docks, so the page never jumps. */
@@ -242,6 +242,9 @@ ${ICONS.map((n) => `    .lib-i-${n}, .lib-kicker-${n}::before { --ico: url("../.
     .lib-screen.is-docked { position: fixed; z-index: 70; right: max(16px, env(safe-area-inset-right)); bottom: calc(max(20px, env(safe-area-inset-bottom)) + 52px); width: clamp(320px, 34vw, 480px); height: auto; aspect-ratio: 16 / 9; }
     .lib-screen.is-docked .lib-frame { border-radius: var(--radius); box-shadow: var(--shadow-lg); }
     .lib-dock-bar { position: absolute; right: 0; bottom: 100%; display: flex; gap: 6px; padding-bottom: 8px; }
+    /* display: flex above beats the browser's own [hidden] rule, so without this the two buttons
+       stood over the player in its place too, not only while it was docked. */
+    .lib-dock-bar[hidden] { display: none; }
     .lib-dock-bar button { padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border, rgba(68, 64, 59, 0.16)); background: var(--bg-card, #fff); color: var(--text-primary); box-shadow: var(--shadow-sm); font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; }
     .lib-dock-bar button:hover { border-color: var(--accent); }
     .lib-dock-bar button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
@@ -251,7 +254,9 @@ ${ICONS.map((n) => `    .lib-i-${n}, .lib-kicker-${n}::before { --ico: url("../.
     .lib-play:hover .lib-play-mark, .lib-play:focus-visible .lib-play-mark { transform: scale(1.08); }
     .lib-play:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
     .lib-play-len { position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; background: rgba(20, 18, 16, 0.74); color: #fff; font-size: var(--fs-sm); font-weight: 600; font-variant-numeric: tabular-nums; }
-    .lib-cap { display: flex; align-items: center; gap: 12px; font-size: var(--fs-base); color: var(--text-secondary); }
+    /* Its own layer: the player is positioned, so its shadow paints over anything in the flow, and
+       the caption under it was being drawn beneath that shadow. */
+    .lib-cap { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; font-size: var(--fs-base); color: var(--text-secondary); }
     .lib-jack { flex: none; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-subtle); }
     .lib-notes { padding: 22px 24px; border-radius: 14px; background: var(--bg-card, #fff); border: 1px solid var(--border, rgba(68, 64, 59, 0.12)); }
     .lib-notes h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font-size: var(--fs-2xl); line-height: 1.3; }

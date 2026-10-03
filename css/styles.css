@@ -1247,6 +1247,39 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   flex-shrink: 0;
 }
 
+/* The download mark on the top bar's Download Archie button, in the drawer too. Two mask layers,
+   the arrow and its tray, so the arrow can move while the tray stays put: on hover it drops into
+   the tray, which is the one thing the button does. Drawn in the button's own ink. */
+.nav-cta::before,
+.nav-drawer a.nav-drawer-cta::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  -webkit-mask-image: url(../assets/nav/download-arrow.svg), url(../assets/nav/download-tray.svg);
+  mask-image: url(../assets/nav/download-arrow.svg), url(../assets/nav/download-tray.svg);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 0 -1px, 0 0;
+  mask-position: 0 -1px, 0 0;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .nav-cta::before {
+    transition: -webkit-mask-position 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                mask-position 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .nav-cta:hover::before,
+  .nav-cta:focus-visible::before {
+    -webkit-mask-position: 0 2px, 0 0;
+    mask-position: 0 2px, 0 0;
+  }
+}
+
 /* An icon button, not a switch: the icon shows the theme that's ON,
    sun while light, moon while dark. nav.js swaps aria-label per state. */
 .theme-toggle {
@@ -20374,6 +20407,37 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .install-ver:empty { display: none; }
 #ed-personal:checked ~ .install-version [data-ed="business"],
 #ed-business:checked ~ .install-version [data-ed="personal"] { display: none; }
+/* Archie for Business picked: the page wears the business app's slate blue, the constants
+   .btn-business already carries, and the heading's wordmark becomes the business file (the same
+   drawing in blue). Set as the accent tokens on main, so everything the page paints in the accent
+   follows at once: the download button, the picked option, the links, the step numbers. The site's
+   chrome keeps the terracotta, because the nav and footer sit outside main and belong to Otian
+   rather than to either app. :has() because the heading stands above the radio pair. Ink and focus
+   ring were deepened to the same bars as the terracotta's: 4.9:1 for --accent-ink on its own tint,
+   and over 3:1 for the ring on every ground here. */
+main:has(#ed-business:checked) {
+  --accent: #7AA1D8;
+  --accent-hover: #668EC6;
+  --accent-subtle: #DDE8F7;
+  --accent-line: rgba(122, 161, 216, 0.4);
+  --accent-ink: #3A649B;
+  --focus-ring: #4A77B4;
+  --text-on-accent: #242629;
+  --lift-key: var(--lift-key-biz);
+  --lift-keyhover: var(--lift-key-biz-hover);
+}
+[data-theme="dark"] main:has(#ed-business:checked) {
+  --accent: #93B6E5;
+  --accent-hover: #A8C4EB;
+  --accent-subtle: #29323F;
+  --accent-line: rgba(147, 182, 229, 0.45);
+  --accent-ink: #93B6E5;
+  --focus-ring: #93B6E5;
+  --text-on-accent: #262728;
+}
+.install-wordmark[data-ed="business"],
+main:has(#ed-business:checked) .install-wordmark[data-ed="personal"] { display: none; }
+main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: inline-block; }
 /* the explainers, folded. A reader who is not on Windows, or not adding a phone, should not meet
    a figure and five steps on the way down a page they opened to get a file. */
 .install-details {

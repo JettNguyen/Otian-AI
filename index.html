@@ -76,7 +76,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261002-10" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261003-1" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -95,6 +95,7 @@
             <a href="archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+            <a href="archie/install/" role="menuitem"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -133,7 +134,7 @@
           </div>
         </div>
       </div>
-      <a href="questionnaire/" class="btn btn-primary btn-sm nav-cta">Join the Waitlist</a>
+      <a href="archie/install/" class="btn btn-primary btn-sm nav-cta">Download Archie</a>
       <div class="nav-account" id="navAccount">
         <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
           <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
@@ -156,7 +157,7 @@
 
 
 
-    <a href="questionnaire/" class="btn btn-primary nav-drawer-cta">Join the Waitlist</a>
+    <a href="archie/install/" class="btn btn-primary nav-drawer-cta">Download Archie</a>
   </nav>
 
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
@@ -170,6 +171,7 @@
       <a href="archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+      <a href="archie/install/"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="skills-marketplace/browse/"><span class="nav-row-ico nav-ico-grid" aria-hidden="true"></span>Browse All</a>
@@ -350,7 +352,7 @@
               <a href="archie/install/" class="btn btn-primary btn-lg">Try it free: 20 jobs a day</a>
               <a href="archie/personal/" class="hm-hero-story day-beat is-on" data-act="0" data-at="0.16">See what it does for one person&nbsp;&rarr;</a>
             </div>
-            <p class="hm-hero-status">Use your own AI account. AI charges are separate. Testing build.</p>
+            <p class="hm-hero-status">In beta on Mac and Windows. Use your own AI account. AI charges are separate.</p>
             <p class="hm-trust-strip day-beat is-on" data-act="0" data-at="0.16">Memory stays yours after you cancel &middot; Your AI, your choice &middot; Replies and calendar changes wait for your yes.</p>
             <!-- The team edition and agent-check routes sit in the pricing band below, so the
                  opening has one main action and one route into the personal story. -->
@@ -1743,10 +1745,9 @@
          with his name on it and forbids exactly the averaged version. So the heading asks and
          claims nothing, and the reader's own answer is the argument.
 
-         THE LINE UNDER IT SAYS WHAT JOINING IS, since 2026-09-27. It said "Tell us the first job
-         you would hand off", and the waitlist never asks: its path is an email and a computer
-         (PATHS.waitlist in js/questionnaire.js). A reader who clicked expecting to name the job
-         met two other questions, so the line now says what the button does and what comes back.
+         THE LINE UNDER IT SAYS WHAT THE BUTTON DOES. Until launch day (2026-10-03) this was the
+         waitlist, and the line said what joining was: an email and a computer, nothing more. Now
+         the button is the download, so the line says the three steps and what the free tier gives.
 
          AND IT NAMES NO JOB. It read "the time the paperwork takes" for an hour on the same day,
          which Jett cut as too specific for this page: the homepage sells one person's whole admin
@@ -1757,11 +1758,11 @@
          ============================== -->
     <section class="section section-alt hm-cta" aria-label="Call to action">
       <div class="hm-wrap hm-head">
-        <h2 class="fade-up">Get an email when Archie is ready.</h2>
-        <p class="fade-up">Join the waitlist in a few quick questions, and we&rsquo;ll email you when Archie is ready for you.</p>
+        <h2 class="fade-up">Archie is free to start on your own Mac or Windows computer.</h2>
+        <p class="fade-up">Download Archie, connect your AI account, and your agent takes up to 20 jobs a day without a plan.</p>
         <div class="day-cta-row fade-up">
           <span class="day-cta-mark" aria-hidden="true"><i class="day-mark" data-mark="m-cta" data-size="72" style="left:50%;bottom:0"></i></span>
-          <a href="questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>
+          <a href="archie/install/" class="btn btn-primary btn-lg">Download Archie</a>
         </div>
         <p class="hm-micro fade-up">Jett or Jack replies to every question within one business day. <a href="compare/#where-archie-fits">Compare ownership, setup and cost&nbsp;&rarr;</a></p>
       </div>
@@ -1794,6 +1795,7 @@
             <a href="archie/mobile/">Archie Mobile</a>
             <a href="how-it-works/">How It Works</a>
             <a href="archie/pricing/">Pricing</a>
+            <a href="archie/install/">Download Archie</a>
           </nav>
         </div>
         <div>
@@ -1851,11 +1853,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261002-10"></script>
-  <script src="js/ember.js?v=20261002-10" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261002-10"></script>
-  <script src="js/home.js?v=20261002-10" defer></script>
-  <script src="js/hero-dinner.js?v=20261002-10" defer></script>
+  <script src="js/nav.js?v=20261003-1"></script>
+  <script src="js/ember.js?v=20261003-1" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261003-1"></script>
+  <script src="js/home.js?v=20261003-1" defer></script>
+  <script src="js/hero-dinner.js?v=20261003-1" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

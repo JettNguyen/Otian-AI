@@ -9,14 +9,10 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>Install Archie | Otian AI</title>
-  <meta name="description" content="How installing Archie will work when it ships, and an honest account of what to expect the first time you open it." />
-  <!-- Off the menus and out of search while Archie is still in testing: a page of install steps
-       for something nobody can download yet answers a question no visitor has, and reads as
-       shipped. The page stays live at this URL rather than being deleted, because trust/it-review/
-       links into its Windows code-signing passage as the answer to a question asked there, and
-       that answer is the remedy that has to sit beside the limitation. Put it back in the Archie
-       menu on release day. `follow`, so the links out of it still count. -->
-  <meta name="robots" content="noindex, follow" />
+  <meta name="description" content="Download Archie for Mac or Windows, and the Android app for your phone, with an honest account of what to expect the first time you open it." />
+  <!-- Off the menus and out of search until launch day, 2026-10-03, when it went back in the Archie
+       menu and became where the top bar's Download Archie button goes. trust/it-review/ sends a
+       work computer's IT reviewer here for the Windows code-signing passage. -->
   <meta property="og:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
   <meta property="og:image:alt" content="Otian AI logo" />
   <meta name="twitter:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
@@ -45,7 +41,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261002-10" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261003-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -65,6 +61,7 @@
             <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+            <a href="../../archie/install/" role="menuitem"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
           </div>
         </div>
         <div class="nav-more" id="navAddons">
@@ -103,7 +100,7 @@
           </div>
         </div>
       </div>
-      <a href="../../questionnaire/" class="btn btn-primary btn-sm nav-cta">Join the Waitlist</a>
+      <a href="../../archie/install/" class="btn btn-primary btn-sm nav-cta">Download Archie</a>
       <div class="nav-account" id="navAccount">
         <button class="nav-account-btn" id="navAccountBtn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Account">
           <span class="nav-account-avatar" id="navAccountAvatar" aria-hidden="true"></span>
@@ -125,7 +122,7 @@
       <button class="nav-drawer-cat" type="button" data-drawer-target="navDrawerFlyoutCompany" aria-expanded="false" aria-controls="navDrawerFlyout">About</button>
 
 
-    <a href="../../questionnaire/" class="btn btn-primary nav-drawer-cta">Join the Waitlist</a>
+    <a href="../../archie/install/" class="btn btn-primary nav-drawer-cta">Download Archie</a>
   </nav>
 
   <div class="nav-drawer-flyout" id="navDrawerFlyout" aria-hidden="true">
@@ -139,6 +136,7 @@
       <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
+      <a href="../../archie/install/"><span class="nav-row-ico nav-ico-download" aria-hidden="true"></span>Download Archie</a>
     </div>
     <div class="nav-drawer-flyout-links" id="navDrawerFlyoutAddons">
       <a href="../../skills-marketplace/browse/"><span class="nav-row-ico nav-ico-grid" aria-hidden="true"></span>Browse All</a>
@@ -190,7 +188,7 @@
         <!-- The caveat leads, since 2026-09-22. It used to sit under the download pair, where it read
              as a footnote to those two buttons rather than as the frame for the page: somebody who
              was just handed this link should know what they are downloading before they download it. -->
-        <p class="install-testing fade-up"><strong>Archie is in testing</strong> (<a href="../personal/#status">where it stands</a>), and these are testing builds. You can start free, and plans can be bought now. <a href="../../questionnaire/">Join the waitlist</a> for launch news.</p>
+        <p class="install-testing fade-up"><strong>Archie is in beta</strong> until version 1.0 (<a href="../personal/#status">where it stands</a>). You can start free, and plans can be bought now.</p>
 
         <!-- The wordmark stands in for the word: its "rchie" is Georgia bold at 590 of the file's
              900 units, the same face as the heading, so at 900/590 em the letters match the type
@@ -304,7 +302,7 @@
           <p class="download-note" id="download-note-android" role="status" aria-live="polite"></p>
         </div>
       </div>
-      <p class="install-req">On iPhone it is with Apple for review. That is Apple&rsquo;s clock, so we will not guess at a date. <a href="../../questionnaire/">Join the waitlist</a> to hear when it opens.</p>
+      <p class="install-req">On iPhone it is with Apple for review. That is Apple&rsquo;s clock, so we will not guess at a date. Until then, an iPhone reaches your agent through a chat app.</p>
 
       <details class="install-details mt-40 fade-up delay-3">
         <summary>Every screen Android shows, in order</summary>
@@ -512,6 +510,7 @@
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/pricing/">Pricing</a>
+            <a href="../../archie/install/">Download Archie</a>
           </nav>
         </div>
         <div>
@@ -569,9 +568,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261002-10"></script>
-  <script src="../../js/download-feedback.js?v=20261002-10"></script>
-  <script src="../../js/demo-player.js?v=20261002-10"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261002-10"></script>
+  <script src="../../js/nav.js?v=20261003-1"></script>
+  <script src="../../js/download-feedback.js?v=20261003-1"></script>
+  <script src="../../js/demo-player.js?v=20261003-1"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261003-1"></script>
 </body>
 </html>

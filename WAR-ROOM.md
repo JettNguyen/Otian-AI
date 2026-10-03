@@ -282,6 +282,27 @@ Three passes, each one shippable on its own.
 
 ## Launch day: the pre-release copy that has to flip
 
+**Swept on 2026-10-03, and the answer to "beta or released" was beta.** Jett: Archie stays
+"in beta" until a 1.0 comes out, the way the app's own badge says (`RELEASE_LABEL` in Archie's
+`src/app/edition.ts`). So the sweep opened the doors and kept the label:
+
+- **A (status):** every "in testing" became "in beta", linked to `archie/personal/#status`, which
+  defines it once: beta until version 1.0, and anyone can download, start free and buy a plan.
+- **B (waitlist):** retired everywhere, by Jett's choice. The top bar's button and every closing
+  call to action say Download Archie and go to `archie/install/`, which came out of noindex and
+  joined the Archie menu, the sitemap and `llms.txt`. The questionnaire lost its waitlist path
+  (and with it the hand-credited "who sent you" question), and the marketplace lost its form.
+- **C (marketplace):** the banner is gone; the badge says "In Beta: See Status".
+- **D (Terms):** untouched on purpose. "Plans are on sale while Archie is in testing" is still
+  true of a beta, and a new Terms version also needs the app's `TERMS_VERSION` bumped and
+  released, so it waits for the next real Terms change.
+- **Kept:** the "Beta" pill on every window mockup, because the app draws it; the two competitor
+  "beta" strings on `compare/cloud-agents/`; and the Standard says "Archie is in beta and our
+  website says so". **When 1.0 ships, this is the sweep again**: grep "in beta" and `da-release`,
+  and clear `RELEASE_LABEL` in the app first.
+
+What follows is the original audit, kept for the extent it recorded.
+
 Audited 2026-09-15 against the 2026-10-03 soft launch. Every sentence below is **true today**,
 which is why none of it has been touched: TRUST.md's tense rule forbids describing an unshipped
 state in the present tense, and it forbids it in both directions. This is a launch-day commit,

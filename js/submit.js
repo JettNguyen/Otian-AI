@@ -42,8 +42,8 @@ import {
   getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-import { ADDON_SPEC } from "./addon-fields.js?v=20261002-10";
-import { decideAccess } from "./access.js?v=20261002-10";
+import { ADDON_SPEC } from "./addon-fields.js?v=20261003-1";
+import { decideAccess } from "./access.js?v=20261003-1";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -597,10 +597,10 @@ const subGate = document.createElement("div");
 subGate.className = "cta-banner fade-up";
 subGate.style.display = "none";
 subGate.innerHTML =
-  "<h2>You need an Archie account with app access to submit</h2>" +
+  "<h2>Submitting an add-on needs an Archie plan</h2>" +
   "<p>Add-ons are only listed once they've been built and tested inside Archie, so submitting one " +
-  'requires an active account. Signed in as <strong id="subGateEmail"></strong>.</p>' +
-  '<a href="../../../questionnaire/" class="btn btn-primary btn-lg">Join the Waitlist</a>' +
+  'needs an active plan. Signed in as <strong id="subGateEmail"></strong>.</p>' +
+  '<a href="../../../archie/pricing/" class="btn btn-primary btn-lg">See the Plans</a>' +
   '<p style="margin-top:0.9rem; font-size:0.9rem;"><a href="#" id="subGateSignOut">Use a different account</a></p>';
 form.parentNode.insertBefore(subGate, form);
 subGate.querySelector("#subGateSignOut").addEventListener("click", (e) => {

@@ -7,13 +7,14 @@
    chips or one inline field, and each answer echoes back as the reader's own
    bubble with an edit control that rewinds the thread to that question.
 
-   Three doors, all shown to everyone: the Archie waitlist (short path), the
-   guided-setup intake, or the consulting intake, whose questions adapt to whether
-   the opening answer said business or "just me" (the setup they describe is what
-   consulting sorts on, not their headcount). The fork decides which sequence of
-   questions runs, and every path ends
-   in the same Formspree submission; the waitlist and guided paths kept the field
-   names the old form used, so the inbox side of those did not change.
+   Two doors, both shown to everyone: the guided-setup intake, or the consulting
+   intake, whose questions adapt to whether the opening answer said business or
+   "just me" (the setup they describe is what consulting sorts on, not their
+   headcount). The fork decides which sequence of questions runs, and both paths
+   end in the same Formspree submission; the guided path kept the field names the
+   old form used, so the inbox side of it did not change. A third door, the Archie
+   waitlist, closed on launch day (2026-10-03): Archie is a download now, so the
+   fork points anyone who wants to set it up alone at the install page instead.
    ======================================== */
 
 (function () {
@@ -66,7 +67,10 @@
 
     intent: {
       section: 'Get started',
-      bot: ['And what would you like to do today?'],
+      bot: [
+        'And what would you like help with?',
+        'Setting Archie up on your own? <a href="../archie/install/">Download Archie</a>, free to start.'
+      ],
       type: 'choice',
       cards: true,
       name: 'intent',
@@ -77,11 +81,6 @@
          a rental and side projects. The gate would have routed him away from it. */
       options: function (answers) {
         var opts = [
-          {
-            value: 'waitlist',
-            label: 'Put me on the Archie waitlist',
-            desc: 'Archie is our desktop app for building personal AI agents that run on your own computer. The waitlist hears the moment it lands.'
-          },
           {
             value: 'guided',
             label: 'I want help setting up an agent',
@@ -97,91 +96,9 @@
       },
       setPath: function (value) { return PATHS[value] ? value : 'guided'; },
       next: function (value) {
-        if (value === 'waitlist') return 'wlEmail';
         if (value === 'consulting') return 'bzName';
         return 'gName';
       }
-    },
-
-    /* ── Waitlist path ── */
-
-    wlEmail: {
-      section: 'Join the waitlist',
-      bot: ['Happy to have you. Four questions and you’re on the list. What email should the invite go to?'],
-      type: 'email',
-      name: 'waitlistEmail',
-      placeholder: 'your@email.com',
-      autocomplete: 'email',
-      next: 'wlPlatform'
-    },
-
-    wlPlatform: {
-      section: 'Join the waitlist',
-      bot: [
-        'And which computer would your agent run on?',
-        /* Straight at the section, not at archie/, which is a redirect stub and drops the
-           hash on the way through. A stub is for other people's links, never for ours. */
-        'Wondering where Archie stands today? <a href="../archie/personal/#status">Where Archie stands</a>.'
-      ],
-      type: 'choice',
-      name: 'platform',
-      /* The third option exists so a reader on Linux is not made to pick a false answer, and so
-         we learn how many of them there are. Matches `gPlatform` on the guided path. */
-      options: [
-        { value: 'mac', label: 'Mac' },
-        { value: 'windows', label: 'Windows' },
-        { value: 'other', label: 'Something else, or not sure' }
-      ],
-      ack: function (value) {
-        if (value === 'other') {
-          return 'Thanks for saying. Archie is Mac and Windows today; we’ll tell you if that changes.';
-        }
-        return null;
-      },
-      next: 'wlMail'
-    },
-
-    /* Which mailbox, because Google caps an app under review at 100 Google accounts for its
-       lifetime, and knowing how many on the list read Gmail is how we let them in fairly. */
-    wlMail: {
-      section: 'Join the waitlist',
-      bot: ['Which email would your agent read? It helps us plan around a limit Google puts on Gmail while it reviews Archie.'],
-      type: 'choice',
-      name: 'emailService',
-      options: [
-        { value: 'gmail', label: 'Gmail' },
-        { value: 'google-workspace', label: 'Gmail at work (Google Workspace)' },
-        { value: 'outlook', label: 'Outlook or Microsoft 365' },
-        { value: 'icloud', label: 'iCloud' },
-        { value: 'other', label: 'Something else' }
-      ],
-      next: 'wlRef'
-    },
-
-    /* The referral program's first version (2026-09-28): who sent them, typed or carried in on a
-       ?ref= link, and credited by hand. Nothing is counted anywhere else. */
-    wlRef: {
-      section: 'Join the waitlist',
-      bot: ['Did someone send you? Tell us who, and we’ll thank them.'],
-      type: 'text',
-      name: 'referredBy',
-      optional: true,
-      skipLabel: 'Nobody, I found it myself',
-      placeholder: 'Their name or email',
-      prefill: function () {
-        try {
-          var ref = new URLSearchParams(window.location.search).get('ref') || '';
-          return ref.replace(/[^\w .@+-]/g, '').slice(0, 60);
-        } catch (e) { return ''; }
-      },
-      next: 'wlConfirm'
-    },
-
-    wlConfirm: {
-      section: 'Join the waitlist',
-      bot: ['That’s everything. We’ll email you the moment Archie is ready for you.'],
-      type: 'confirm',
-      label: 'Join the Waitlist'
     },
 
     /* ── Guided-setup path ── */
@@ -261,10 +178,10 @@
       next: 'gPlatform'
     },
 
-    /* The one question that decides whether we can help at all, and until 2026-08-27 only the
-       waitlist path asked it. A guided lead arriving on Linux or wanting the agent to live on a
-       NAS is a conversation we should have before the call, not twelve minutes into it. Same
-       field name as `wlPlatform` so both paths land in one column of the inbox. */
+    /* The one question that decides whether we can help at all. A guided lead arriving on Linux
+       or wanting the agent to live on a NAS is a conversation we should have before the call, not
+       twelve minutes into it. Same field name the retired waitlist path used, so the inbox keeps
+       one column for it. */
     gPlatform: {
       section: 'Your setup',
       bot: ['Which computer would the agent run on? It works from your own computer, so it needs one that can stay on.'],
@@ -511,7 +428,6 @@
 
   /* ── Question order per path, for the progress bar ── */
   var PATHS = {
-    waitlist: ['audience', 'intent', 'wlEmail', 'wlPlatform', 'wlMail', 'wlRef', 'wlConfirm'],
     guided: ['audience', 'intent', 'gName', 'gEmail', 'gWork', 'gTask', 'gTime', 'gPlatform', 'gApproval', 'gTech', 'gAI', 'gExtra', 'gConfirm'],
     consulting: ['audience', 'intent', 'bzName', 'bzEmail', 'bzCompany', 'bzWhat', 'bzSize', 'bzPain', 'bzTools', 'bzConfirm']
   };
@@ -904,21 +820,17 @@
     var intent = answers.intent;
     var guidedBlock = document.getElementById('thankyouGuided');
     var consultingBlock = document.getElementById('thankyouConsulting');
-    var waitlistBlock = document.getElementById('thankyouWaitlist');
     var bookingSection = document.getElementById('bookingSection');
     if (guidedBlock) guidedBlock.hidden = intent !== 'guided';
     if (consultingBlock) consultingBlock.hidden = intent !== 'consulting';
-    if (waitlistBlock) waitlistBlock.hidden = intent !== 'waitlist';
-    /* Both consult paths book the same free discovery call; only the waitlist has nothing to book. */
-    if (bookingSection) bookingSection.hidden = intent === 'waitlist';
+    /* Both paths book the same free discovery call. */
+    if (bookingSection) bookingSection.hidden = false;
 
-    if (intent !== 'waitlist') {
-      var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
-      var nameEl = document.getElementById('thankyouName');
-      var nameElConsulting = document.getElementById('thankyouNameConsulting');
-      if (nameEl) nameEl.textContent = firstName;
-      if (nameElConsulting) nameElConsulting.textContent = firstName;
-    }
+    var firstName = String(answers.fullName || '').trim().split(' ')[0] || 'there';
+    var nameEl = document.getElementById('thankyouName');
+    var nameElConsulting = document.getElementById('thankyouNameConsulting');
+    if (nameEl) nameEl.textContent = firstName;
+    if (nameElConsulting) nameElConsulting.textContent = firstName;
 
     if (formEl) formEl.style.display = 'none';
     if (progressWrap) progressWrap.style.display = 'none';

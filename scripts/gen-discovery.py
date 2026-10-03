@@ -292,7 +292,7 @@ QUESTIONS = [
      "$30 a month, or $299 a year. Archie for Business is $99 a month or $999 a year. The AI "
      "itself is billed by your AI provider, to you, at their price: we add nothing to it. "
      "There is a plan with the AI included at $59 a month or $599 a year, which carries $25 of "
-     "usage a month; email and text reading need your own AI key. Plans are on sale now, while Archie is in testing. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan."),
+     "usage a month; email and text reading need your own AI key. Archie is in beta, and plans are on sale now. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan."),
     ("Do I need to know how to code?",
      "No. Add-ons are written in plain words, not code, and you install one by picking it. "
      "Setting up an agent is answering a few questions about what it is for."),
@@ -334,8 +334,9 @@ MAP = [
     # /archie/ merged into archie/personal/ later the same day, and /equipment/ into
     # how-it-works/, so neither is a destination any more. Both are redirect stubs, which this
     # script already skips; they are off this list so nobody re-adds them from here.
+    # archie/install/ joined on launch day, 2026-10-03, when it came out of noindex.
     ("The product", ["archie/personal/", "archie/business/", "how-it-works/",
-                     "archie/pricing/", "archie/mobile/"]),
+                     "archie/pricing/", "archie/install/", "archie/mobile/"]),
     # Guided setup and consulting are two halves of one page as of 2026-09-14.
     ("Services we offer", ["services/"]),
     # what-is-an-add-on/ merged into the browse hero on 2026-09-21 and is a redirect stub;

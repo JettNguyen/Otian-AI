@@ -40,6 +40,14 @@
     return "";
   }
 
+  /* ── Which app, from the link ─────────────────────────────────────────────────────────── */
+  /* A link that means Archie for Business says so with #business, and the page opens on that
+     edition. #business-heading is the older form: the page had a heading by that id until the two
+     editions became one radio pair on 2026-09-22, and the account page, the activity page and the
+     old business install stub still send it. */
+  var bizIn = document.getElementById("ed-business");
+  if (bizIn && /^#business(-heading)?$/.test(location.hash)) bizIn.checked = true;
+
   /* ── This computer's button ───────────────────────────────────────────────────────────── */
   /* Every block on the page, not the first one by id: the install page carries one for Archie and
      one for Archie for Business, and each folds away the platform this computer is not. Scoped to

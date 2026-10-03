@@ -16,7 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261002-10";
+import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261003-1";
 /* The card renderer and the manifest shape live in their own module so that
    scripts/gen-marketplace.mjs can call the very same code through Node and write the
    public catalog into the page as static HTML. Before that the grid was an empty div,
@@ -25,7 +25,7 @@ import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261002-10"
 import {
   COLLECTIONS, shelfKind, escapeHtml, titleCase, formatIntegration,
   normalize, detailHtml, cardHtml,
-} from "./addon-card.js?v=20261002-10";
+} from "./addon-card.js?v=20261003-1";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -501,81 +501,3 @@ if (grid) {
     });
   });
 }
-
-/* ── Waitlist form ──────────────────────────────────────────────────────── */
-(function () {
-  var form = document.getElementById("marketplaceWaitlistForm");
-  var confirmation = document.getElementById("marketplaceConfirmationMessage");
-  if (!form) return;
-
-  function showError(input, msg) {
-    input.classList.add("field-error");
-    var errEl = input.parentElement.querySelector(".form-error-msg");
-    if (errEl) { errEl.textContent = msg; errEl.classList.add("visible"); }
-  }
-  function clearError(input) {
-    input.classList.remove("field-error");
-    var errEl = input.parentElement.querySelector(".form-error-msg");
-    if (errEl) errEl.classList.remove("visible");
-  }
-  function isValidEmail(val) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val); }
-
-  form.querySelectorAll(".form-input").forEach(function (el) {
-    el.addEventListener("input", function () { clearError(el); });
-    el.addEventListener("change", function () { clearError(el); });
-  });
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var nameEl = document.getElementById("waitlistName");
-    var emailEl = document.getElementById("waitlistEmail");
-    var interestEl = document.getElementById("waitlistInterest");
-    var valid = true;
-
-    if (nameEl && !nameEl.value.trim()) { showError(nameEl, "Please enter your name."); valid = false; }
-    if (emailEl) {
-      if (!emailEl.value.trim()) { showError(emailEl, "Please enter your email address."); valid = false; }
-      else if (!isValidEmail(emailEl.value.trim())) { showError(emailEl, "Please enter a valid email address."); valid = false; }
-    }
-    if (interestEl && !interestEl.value) { showError(interestEl, "Please choose an option."); valid = false; }
-    if (!valid) return;
-
-    // This used to hide the form and thank the reader without posting anything anywhere.
-    // Same Formspree inbox as the questionnaire, tagged with its source.
-    var submitBtn = form.querySelector('button[type="submit"]');
-    var idleLabel = submitBtn ? submitBtn.textContent : "";
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Joining\u2026";
-    }
-
-    var data = new FormData(form);
-    data.append("form", "marketplace-waitlist");
-
-    fetch("https://formspree.io/f/mgobddpy", {
-      method: "POST",
-      body: data,
-      headers: { Accept: "application/json" }
-    })
-    .then(function (res) {
-      if (!res.ok) throw new Error("send failed");
-      form.style.display = "none";
-      if (confirmation) confirmation.classList.add("visible");
-    })
-    .catch(function () {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = idleLabel;
-      }
-      var el = form.querySelector(".form-error-msg--form");
-      if (!el) {
-        el = document.createElement("p");
-        el.className = "form-error-msg form-error-msg--form visible";
-        el.setAttribute("role", "alert");
-        form.insertBefore(el, form.querySelector('button[type="submit"]'));
-      }
-      el.textContent = "Something went wrong and you were not added. Please try again, or email us at questions@otianai.com.";
-      el.classList.add("visible");
-    });
-  });
-})();

@@ -4051,6 +4051,25 @@ fieldset .checkbox-group {
   padding: 40px 24px 96px;
 }
 
+/* The way past the questions, above them (2026-10-04): one quiet line, so the chat still leads
+   for anyone who wants it. Not .chat-skip, which is the chat's own skip-this-question button. */
+.chat-book-first {
+  margin: 0 0 28px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.chat-book-first a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .chat-thread {
   display: flex;
   flex-direction: column;
@@ -20407,6 +20426,14 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .install-ver:empty { display: none; }
 #ed-personal:checked ~ .install-version [data-ed="business"],
 #ed-business:checked ~ .install-version [data-ed="personal"] { display: none; }
+/* A phone (2026-10-04): the one button that works there, above the desktop downloads it steps
+   back. Out of the layout until js/download-feedback.js unhides it; the [hidden] rule is spelled
+   out because the display: grid on the class would otherwise beat the attribute. */
+.install-phone { display: grid; justify-items: center; gap: 14px; margin: 32px 0 0; text-align: center; }
+.install-phone[hidden] { display: none; }
+.install-phone-lead { margin: 0; color: var(--text-secondary); }
+.install-phone .download-note { margin: 0; }
+.install-phone:not([hidden]) + .install-actions { margin-top: 28px; }
 /* Archie for Business picked: the page wears the business app's slate blue, the constants
    .btn-business already carries, and the heading's wordmark becomes the business file (the same
    drawing in blue). Set as the accent tokens on main, so everything the page paints in the accent
@@ -20426,14 +20453,6 @@ main:has(#ed-business:checked) {
   --lift-key: var(--lift-key-biz);
   --lift-keyhover: var(--lift-key-biz-hover);
 }
-/* A phone (2026-10-04): the one button that works there, above the desktop downloads it steps
-   back. Out of the layout until js/download-feedback.js unhides it; the [hidden] rule is spelled
-   out because the display: grid on the class would otherwise beat the attribute. */
-.install-phone { display: grid; justify-items: center; gap: 14px; margin: 32px 0 0; text-align: center; }
-.install-phone[hidden] { display: none; }
-.install-phone-lead { margin: 0; color: var(--text-secondary); }
-.install-phone .download-note { margin: 0; }
-.install-phone:not([hidden]) + .install-actions { margin-top: 28px; }
 [data-theme="dark"] main:has(#ed-business:checked) {
   --accent: #93B6E5;
   --accent-hover: #A8C4EB;

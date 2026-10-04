@@ -197,6 +197,13 @@
       <!-- Formspree honeypot -- bots fill this, humans don't, keeps spam out -->
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="chat-flow">
+        <!-- The calendar, before the questions (2026-10-04). Every "Book Your Free Call" on the site
+             lands here, and until this line the only way to a time was through about a dozen
+             questions, so the most decided reader on the site met the longest form on it. The link
+             is the same schedule the thank-you screen embeds, opened on its own page; Google's
+             booking asks for a name and an email, and the questions below stay for anyone who
+             would rather tell us first. -->
+        <p class="chat-book-first">Know you want a call already? <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3J_UEhWgB7rc7sbaw7tn9eHOdcM2drCLefkU9aXnzft0BZz4Rlal6NMFQfTSH0JcXst_rQHMrp" target="_blank" rel="noopener">Pick a time now</a> and skip the questions.</p>
         <!-- questionnaire.js runs the conversation here: Ember asks, the reader answers with
              chips or a short inline field, and every answer can be edited to rewind the thread. -->
         <div class="chat-thread" id="chatThread" role="log" aria-live="polite"></div>

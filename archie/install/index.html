@@ -43,7 +43,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261003-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261004-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -217,6 +217,19 @@
           </div>
         </div>
 
+        <!-- A phone cannot install Archie, and until 2026-10-04 this page offered one the two desktop
+             downloads and nothing else: a tap saved an installer to the phone, where it does
+             nothing, and there was no way to carry the page to the computer that can use it. Most
+             people who arrive from a post arrive on a phone. js/download-feedback.js unhides this on
+             a phone and steps the desktop buttons back to secondary. The button hands the page to the
+             phone's own share sheet (Mail, Messages, AirDrop, Notes), so nothing passes through us;
+             a browser with no share sheet follows the href and opens a blank email instead. -->
+        <div class="install-phone fade-up delay-2" hidden>
+          <p class="install-phone-lead">Archie installs on a Mac or Windows computer.</p>
+          <a class="btn btn-primary btn-lg install-phone-send" href="mailto:?subject=Install%20Archie&amp;body=https%3A%2F%2Fotianai.com%2Farchie%2Finstall%2F"><span>Send This Page to Yourself</span></a>
+          <p class="download-note" role="status" aria-live="polite"></p>
+        </div>
+
         <div class="install-actions fade-up delay-2">
           <div class="install-platform" data-os="mac">
             <a class="btn btn-primary btn-lg" data-ed="personal" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.dmg" data-download-note="download-note-mac"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download Archie &middot; Mac</span></a>
@@ -349,8 +362,7 @@
       <div class="section-header">
         <span class="section-label fade-up">Windows</span>
         <h2 id="warning-heading" class="fade-up delay-1">&ldquo;Windows protected your PC&rdquo;</h2>
-        <p>Windows shows a blue box with that heading, and the only obvious button says <em>Don&rsquo;t run</em>. Nothing is wrong with the file.</p>
-        <p>Below is how to get past it and why it happens, because you shouldn&rsquo;t click through a security warning just because someone told you to.</p>
+        <p>Nothing is wrong with the file.</p>
       </div>
 
       <!-- Folded away since 2026-09-22: a Mac reader met this whole explainer, figure and all,
@@ -444,6 +456,25 @@
 
 
   <!-- ==============================
+       Google's screen, the second warning a new user meets (2026-10-04). Connecting Gmail or
+       Google Calendar shows Google's unverified-app page, and the app said nothing about it
+       before then, so the first anybody heard of it was a page telling them to stop. Both
+       sentences are TRUST.md's approved wording ("Google's 'unverified app' screen before its
+       permission page"): the short form, then what to press. Never say Google has reviewed or is
+       reviewing Archie, never say the screen is nothing to worry about, and take this section off
+       the day Google verifies the app.
+       ============================== -->
+  <section class="section" aria-labelledby="google-heading">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label fade-up">Gmail and Google Calendar</span>
+        <h2 id="google-heading" class="fade-up delay-1">&ldquo;Google hasn&rsquo;t verified this app&rdquo;</h2>
+        <p>Until Google verifies Archie, Google shows an unverified-app screen before its permission page. To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================
        What we can and can't see
        ============================== -->
   <section class="section section-alt" aria-labelledby="keys-heading">
@@ -478,7 +509,7 @@
       <div class="section-header">
         <span class="section-label fade-up">Stuck?</span>
         <h2 id="help-heading" class="fade-up delay-1">We&rsquo;ll walk you through the install.</h2>
-        <p>You&rsquo;ll be one of Archie&rsquo;s first users. If anything here doesn&rsquo;t match what you&rsquo;re seeing, tell us and we&rsquo;ll get on a call with you.</p>
+        <p>If anything here doesn&rsquo;t match what you&rsquo;re seeing, tell us and we&rsquo;ll get on a call with you.</p>
         <p class="" style="margin-top: 24px;">
           <a class="btn btn-primary btn-lg" href="mailto:questions@otianai.com">Email us</a>
           <a class="btn btn-secondary btn-lg" href="../../faq/">Read the FAQ</a>
@@ -572,9 +603,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261003-2"></script>
-  <script src="../../js/download-feedback.js?v=20261003-2"></script>
-  <script src="../../js/demo-player.js?v=20261003-2"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261003-2"></script>
+  <script src="../../js/nav.js?v=20261004-1"></script>
+  <script src="../../js/download-feedback.js?v=20261004-1"></script>
+  <script src="../../js/demo-player.js?v=20261004-1"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261004-1"></script>
 </body>
 </html>

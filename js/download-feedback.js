@@ -101,6 +101,39 @@
     });
   }
 
+  /* ── A phone ──────────────────────────────────────────────────────────────────────────── */
+  /* Archie cannot be installed here, so the button that leads is the one that carries this page
+     to a computer that can. The share sheet is the phone's own, so the page goes wherever the
+     reader sends it and nothing passes through us. Where there is no share sheet the click is left
+     alone and the href opens a blank email with the page in it; the edition picked above rides
+     along as #business either way, which is how this page knows to open on it. The desktop
+     buttons stay for someone who means to move the file across themselves, one step back. */
+  var phone = isMobile ? document.querySelector(".install-phone") : null;
+  if (phone) {
+    phone.hidden = false;
+    Array.prototype.forEach.call(document.querySelectorAll(".install-platform[data-os] .btn-primary"), function (b) {
+      b.classList.remove("btn-primary");
+      b.classList.add("btn-secondary");
+    });
+    var send = phone.querySelector(".install-phone-send");
+    var sentNote = phone.querySelector(".download-note");
+    var pageUrl = function () {
+      var base = /^https?:$/.test(location.protocol) ? location.origin + location.pathname : "https://otianai.com/archie/install/";
+      return base + (bizIn && bizIn.checked ? "#business" : "");
+    };
+    send.addEventListener("click", function (e) {
+      var url = pageUrl();
+      if (!navigator.share) {
+        send.href = "mailto:?subject=" + encodeURIComponent("Install Archie") + "&body=" + encodeURIComponent(url);
+        return;
+      }
+      e.preventDefault();
+      navigator.share({ title: "Install Archie", url: url }).then(function () {
+        sentNote.textContent = "Sent. Open it on your computer to download Archie.";
+      }, function () { /* closed without sending: nothing to say */ });
+    });
+  }
+
   /* ── What the click says ──────────────────────────────────────────────────────────────── */
 
   /* Order matters: Edge and Opera carry "Chrome" in their string, and everything on iOS carries
@@ -119,11 +152,17 @@
 
   var RELEASES = "https://github.com/JettNguyen/archie-releases/releases/latest";
 
-  function fillNote(note) {
+  /* The Android button is the one download meant for a phone, so it must not get the phone's
+     "this is a desktop app" line: until 2026-10-04 it did, under the button for the phone app. */
+  function fillNote(note, btn) {
     note.textContent = "";
     var lead = document.createElement("strong");
     lead.textContent = "Your download has started.";
-    var hint = document.createTextNode(" " + browserHint() + " If nothing happened, ");
+    var forPhone = /\.apk$/.test(btn.getAttribute("href") || "");
+    var said = forPhone
+      ? "Open it from the download notification. Android stops you twice on the way, and every screen is listed below."
+      : browserHint();
+    var hint = document.createTextNode(" " + said + " If nothing happened, ");
     var link = document.createElement("a");
     link.href = RELEASES;
     link.textContent = "get it from the releases page";
@@ -138,7 +177,7 @@
     var label = labelEl.textContent;
     var timer = null;
     btn.addEventListener("click", function () {
-      if (note) fillNote(note);
+      if (note) fillNote(note, btn);
       labelEl.textContent = "Download started";
       btn.classList.add("is-started");
       if (timer) clearTimeout(timer);

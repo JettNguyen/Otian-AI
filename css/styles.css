@@ -20426,6 +20426,14 @@ main:has(#ed-business:checked) {
   --lift-key: var(--lift-key-biz);
   --lift-keyhover: var(--lift-key-biz-hover);
 }
+/* A phone (2026-10-04): the one button that works there, above the desktop downloads it steps
+   back. Out of the layout until js/download-feedback.js unhides it; the [hidden] rule is spelled
+   out because the display: grid on the class would otherwise beat the attribute. */
+.install-phone { display: grid; justify-items: center; gap: 14px; margin: 32px 0 0; text-align: center; }
+.install-phone[hidden] { display: none; }
+.install-phone-lead { margin: 0; color: var(--text-secondary); }
+.install-phone .download-note { margin: 0; }
+.install-phone:not([hidden]) + .install-actions { margin-top: 28px; }
 [data-theme="dark"] main:has(#ed-business:checked) {
   --accent: #93B6E5;
   --accent-hover: #A8C4EB;

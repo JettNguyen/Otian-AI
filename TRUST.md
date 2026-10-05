@@ -568,6 +568,14 @@ name, the same path as any other OpenAI-format endpoint a person supplies.
   to have pulled. Any sentence offering this carries that sentence too.
 - ⛔ **No number, of any kind.** No minimum model, no size, no speed, no quality comparison against
   a hosted provider. Nobody has benchmarked one for the agent lane.
+- **What the app itself got wrong, until October 5, 2026** (the reviewer pass, fixed and not yet in
+  a release). The local card said "Nothing leaves this computer, and there is no bill" and "around
+  20B or larger", breaking both boundaries above, while the agent on that same binding was told
+  everything typed went "over the internet to Another provider" on a bill that does not exist. The
+  card now says what you type goes to the model instead of an AI company and that mail, calendar,
+  web pages and Archie's own checks still use the internet; the agent names the model and the
+  runner and says the same; an Ollama model whose id ends in "-cloud" is said to run on Ollama's
+  servers; and a closed runner is named instead of the WiFi.
 - ⚠️ **Not the default and not the trial.** It is bound inside the "Another provider" panel, which
   is the only place it can be bound. Never draw it as the way Archie normally runs.
 - ⚠️ **Three products on the compare board publish something similar** and two of them explicitly:
@@ -1075,6 +1083,9 @@ anyone but the account owner, and the seal means owning the row is not reading i
 - ❌ Never imply the encryption protects against a compromised phone. Whoever holds the phone holds
   the key. That is what the Unpair button and key rotation are for.
 - ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
+- ❌ **Never say Archie Mobile buzzes, rings or notifies.** It shows what the agent posted when it is
+  opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from the
+  release after 0.3.4).
 
 ### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID
 
@@ -1330,6 +1341,40 @@ app is built for any other reason.
   computer has everything.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
+
+### 🚧 Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: BUILT 2026-10-05, not yet in a release
+
+Found by the reviewer pass on October 5, 2026: a reviewer who texts the agent from the phone typed
+"stop" while it worked, and it finished the job and then answered "stop" as a new request; and a
+message sent while the computer slept showed "Not delivered, try again", and was then answered hours
+later as if just sent, once for every retry.
+
+**Approved wording, once it ships:** "Changed your mind while your agent is working? Type stop, or
+press Stop, in Archie or in Archie Mobile. What it already finished stays done, and nothing more
+happens." And: "Send a message from your phone while your computer is asleep and it waits for the
+computer, says so, and your agent answers it when the computer wakes, knowing it was sent earlier.
+Until then, Remove it takes it back."
+
+**Why it's true** (Archie branch merged October 5, 2026; archie-mobile `721791f`):
+- **A bare stop.** `crates/archie-runtime/src/gateway/worker.rs`: from the owner, while a reply is
+  being written, a message that is only "stop" (any case, a trailing period or exclamation mark
+  allowed) fires the same stop as `/stop` and is not sent to the AI. With nothing running it is an
+  ordinary message. Tested in `a_bare_stop_calls_off_a_running_turn_and_is_a_message_otherwise`.
+- **The Stop button.** `src/app/conversation.tsx` (while the conversation is working) and
+  archie-mobile `src/screens/Chat.tsx` (while the agent is answering and the phone's copy is fresh).
+- **The waiting message.** The computer reads the relay's own receive time for each command
+  (`crates/archie-core/src/phone.rs`) and passes it through to the conversation, so a message that
+  waited arrives held (`ChannelEvent::held_since` in `crates/archie-net/src/channel.rs`). The phone
+  says "Waiting for your computer" instead of "Not delivered", and Remove it deletes the waiting
+  command only if the computer has not taken it yet.
+
+**Boundaries:**
+- ⛔ **Never "undo".** Stopping keeps what was already done: a row written or a draft made stays.
+- ⚠️ **"cancel" is not a stop.** It answers reminder cards and staged changes, so it was left out.
+- ⚠️ **Only the owner's stop.** On a shared agent a guest's "stop" is an ordinary message.
+- ⚠️ **The computer still has to wake.** Never "your phone runs your agent". A message from the
+  phone waits until the computer running Archie is on and Archie is open.
+- ⚠️ **Not yet pressed on a real phone against a sleeping computer.** Tested in code on both sides.
 
 ### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, not yet in a release
 
@@ -2910,6 +2955,52 @@ Archie tells you it did."
 - ⚠️ **Not yet watched on a real mailbox.** The join is tested both halves and end to end in unit
   tests; nobody has set a conditional reminder and had a real person answer it. Copy may describe
   what it does and may not call it proven.
+- ❌ **Never say Archie Mobile notifies you or makes your phone buzz.** It has no notifications and
+  no push. With no chat app connected (and messaged once), a reminder waits in the conversation
+  until it is opened. "At that minute" is when it is posted, not when anybody hears it. A chat app
+  such as Telegram is what buzzes a phone. Found by the reviewer pass on October 5, 2026; since then
+  (built, not yet in a release) the agent says so when it sets one on an agent no phone hears, and
+  the computer shows an alert when the agent posts something on its own (see "An alert on this
+  computer" below).
+
+### 🚧 An alert on this computer when the agent posts on its own: BUILT 2026-10-05, not yet in a release
+
+Found by the reviewer pass on October 5, 2026: a reminder or a routine's report on an agent with no
+chat app landed in Archie's window with no sound, so "remind me at 7 to take my pill" was learned at
+9, while the agent had been told a reminder is the thing that interrupts.
+
+**Approved wording, once it ships:** "When your agent posts something on its own (a reminder, a
+routine's report, a card about new mail), your computer shows an alert with the agent's name and
+the first line, while Archie is open behind your other windows. Turn it off in Settings, General."
+
+**Why it's true** (Archie branch merged October 5, 2026):
+- **Which messages.** `src-tauri/src/alert.rs` (`OwnerTurn`) marks a message for an alert when it is
+  new, in the owner's own conversation, and not inside a turn the owner started. That turn ends when
+  the reply settles or after 60 quiet seconds. A reply to something the owner just said raises none.
+- **One event with the badge.** The mark rides on the same `inapp:message` event the sidebar's count
+  is drawn from (`src-tauri/src/inapp.rs`), so an alert never fires for something the count missed.
+- **Only in the background.** `src/app/alerts.ts` shows it only when Archie's window is not in front,
+  asks the computer for permission at the first alert and never at launch, and reads the switch in
+  Settings, General ("Show alerts on this computer", on by default, kept per account).
+- **The plugin's three calls only.** `src-tauri/capabilities/default.json` grants checking
+  permission, asking for it, and showing one; scheduling and listeners stay closed.
+
+**Boundaries:**
+- ❌ **Never say your phone buzzes.** This is the computer only. Archie Mobile has no notifications
+  and no push; a chat app such as Telegram is what buzzes a phone (see the boundary on Reminders
+  above).
+- ⛔ **Never "even when Archie is closed".** It needs the computer on, awake, and Archie open. With
+  Archie shut, nothing posts and nothing alerts.
+- ⛔ **Never "click it to open the conversation".** The plugin has no click handler on a desktop in
+  this version, so a click at most brings Archie forward, and nobody has checked even that.
+- ⚠️ **Archie cannot tell that the computer refused alerts.** On a desktop the plugin answers
+  "allowed" without asking, so the Settings row always says where the computer's own switch is.
+- ⚠️ **Two quiet cases.** On an agent with a chat app, a reminder that fires within 60 seconds of a
+  conversation ending raises no alert; and Archie's own notes on an agent's behalf (a restart, an
+  add-on arriving) raise none.
+- ⚠️ **Not yet seen on a real Mac or Windows computer.** Tested in code. Nobody has watched macOS ask
+  for permission, an alert appear behind another window, or a Windows alert show Archie's name. Copy
+  may describe it and may not call it proven.
 
 ### ✅ Finding places on the map — SHIPPED 2026-09-16
 
@@ -3128,7 +3219,9 @@ the same line as the sentence that says it can be asked for almost anything.
 - ❌ Never let this imply the gate stops prompt injection. It does not, and the Known Weaknesses
   section says so. The honest relationship is the other way round: these walls are what make an
   injected instruction survivable, because the worst a talked-into agent can reach is a draft
-  somebody has to press Send on.
+  somebody has to press Send on (or press a time on), from the release after 0.3.4. In 0.3.4 and
+  earlier a timed send armed on a turn the owner typed could go unpressed; see the timed-send
+  paragraph under the email entry.
 - ❌ Never "it has no internet access". It searches the web, fetches pages, and with Websites on
   it drives a browser. The limit is what it may finish, not what it may read.
 - ❌ Never claim anything about the AI model's own training, alignment or safety work. We do not
@@ -3663,7 +3756,8 @@ time is already taken."
   (`busy::describe`). The card under the draft says "Checked first: your calendar". There is no
   setting: "Check before writing" no longer covers the calendar, in either skill.
 - **Booking from chat.** Before a create or a move is put to the person, `tools_calendar.rs`
-  (`lands_on`) reads that slot on every calendar the asker can see, and the sentence they approve
+  (`lands_on`) reads that slot on one calendar on each connected account the asker can see (its
+  main calendar, or the one the calendar skill's settings name), and the sentence they approve
   ends with what it overlaps, for example: It overlaps "Dentist" (Mon Oct 5, 3:00pm to 4:00pm).
 - **The "Offer to update your calendar" card.** `arrange.rs` (`taken_line`) adds "That time is
   already taken" with what is there, and says what to press.
@@ -3682,6 +3776,12 @@ time is already taken."
   clash. A reply's drafter is told about all-day entries, without their titles.
 - ⚠️ **Your calendars, never the other person's.** It cannot tell whether the person you are
   replying to is free.
+- ❌ **One calendar on each connected account, never "every calendar".** Holidays, birthdays and
+  calendars shared into a Google or Outlook account are not read, and on iCloud it is the first
+  calendar the server lists. This entry said "every calendar the asker can see" until the reviewer
+  pass on October 5, 2026 found it was one; the agent now says it sees the main calendar of each
+  account and never calls a day clear (built, not yet in a release). Reading the others needs a
+  further Google permission, which Jett chose to add after Google verifies Archie.
 - ⚠️ **What the drafter is told.** When you are busy, and never what with, except meetings the
   person being answered is on themselves. Do not say "the person you reply to never learns your
   schedule": a draft can still say "I'm busy Thursday afternoon", which is the point of it.
@@ -3853,12 +3953,21 @@ until you send it or set a time." Also approved: "it cannot send on its own: eve
 draft you read first", and, where the schedule is the point, "a reply set to go later calls
 itself off if they write back first."
 
-**What is still absolute, and may still be said that way.** The agent **cannot arm a timed send
-by itself**: `timed_send_needs_a_person` (`email/replies/draft.rs:154`) rejects `send_at` unless
-a person typed that turn, so a routine firing on a schedule and an arriving email can both draft
-and neither can schedule. So "your agent cannot send email on its own" stays true, and every
-send is still a person's instruction. What is **not** true is that a person presses a button at
-the moment mail leaves.
+**What is still absolute, and may still be said that way, from the release after 0.3.4.** The agent
+**cannot arm a timed send**: a time it puts on a draft is only offered on the card, as a button
+(`schedule::offer`, `email/replies/draft.rs`), and a person sets it with a press (or the words, on
+a chat app with no buttons). So "your agent cannot send email on its own" holds on every turn,
+including one where it read a hostile email. What is **not** true is that a person presses a button
+at the moment mail leaves.
+
+**What this said before, and why it was wrong.** It said `timed_send_needs_a_person` made the
+absolute true because a routine and an arriving email cannot schedule. The gate asked whether a
+person typed the turn, not whether they named the time, so on a turn the owner typed ("summarize my
+latest emails") an instruction inside one of those emails could have the agent queue a new email
+with a time ten minutes out, and it went unless somebody pressed Back to draft. Found by the
+reviewer pass on October 5, 2026; Jett chose to make every agent-picked time a press. In 0.3.4 and
+earlier the old behavior stands, so until the next release this paragraph's absolute may not be
+said.
 
 **Added 2026-09-28: one Send sends one reply.** Approved form: "Each Send sends the one reply on
 its card." Why it's true: the button carries its card's action id (`parse_callback` in
@@ -4583,8 +4692,14 @@ guard.rs` and `.../screen/spend.rs`, and documented in that repo's `docs/SITES-A
 intention:
 
 1. **Off by default, and off is the product the whole site describes.** An owner who never opens
-   the fold gets the code that shipped before this existed, including the same sentence in the
-   system prompt. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
+   the fold gets the code that shipped before this existed. Not the same sentence in the system
+   prompt any more, from the release after 0.3.4: asked to cancel, order or book on a website with
+   Computer control off, the agent used to say it never pays for anything and name no route, which a
+   reviewer scores as an agent that cannot. Jett reversed that on October 5, 2026. The off-state
+   line now says it needs Computer control, and Buying under it, switched on in Archie on the
+   computer, on the agent's Connections tab, and that even then a purchase waits for the owner's tap,
+   only at shops they list, within limits they set (`NEVER_LINE_OFF` in the gateway's `prompt.rs`).
+   It names the computer only, per the boundary on the phone below. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
    (`the_shipped_state_buys_nothing`) holds it there.
 2. **It still cannot type a card you pay with, ever, switch or no switch.** `guard::typing_stop`
    refuses any field whose `autocomplete` is a `cc-` value, and any whose name says card, and hands
@@ -4796,7 +4911,8 @@ to close what can be closed. Nothing here is said in the present tense on the si
 carries it, and until then the trust page's "Where we fall short" leak paragraph stays as it is.
 
 **Approved wording, once it ships:** "Your agent opens a web page on its own only when the address
-came from you, from a page it already opened, or from a site you named in your message. An address
+came from you, from a page it already opened, or from a site you named in your message, until your
+agent has read something somebody else wrote in that job. An address
 it came up with itself, it shows you first and waits for your yes." And: "A skill that searches the
 web is given only the task: none of your memory, your profile, your files or the rest of the chat.
 After your agent has read an email, a page or a file in a job, it asks you before handing a search to
@@ -4834,7 +4950,10 @@ one."
   page that is already open goes wherever that page sends it; and an MCP server the owner connected
   can have a fetch tool of its own.
 - ⛔ **"Came from you" is any address in your messages in this conversation**, plus any page on a site
-  you named in the message being answered. Never "only addresses you typed into this message".
+  you named in the message being answered, until the agent has read something somebody else wrote in
+  that job. Never "only addresses you typed into this message". The named-site half used to hold
+  after a page had been read, so a hostile page on a site the person named could have the agent build
+  an address on that same site carrying their data; closed before any release carried the gate.
 - ⚠️ **The agent judges whether your next message was a yes**, as it does for a calendar change; the
   code makes it a later, separate message from a person. Never "the app checks that you said yes".
 - ⚠️ **A search still sends its words to the AI company's search service.** What changed is that the

@@ -3609,6 +3609,54 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 - Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
   wherever this claim anchors a section.
 
+### 🚧 Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), not yet in a release
+
+**Wording, once it is in a release (Jett's to approve):** "When a text or an email asks about a
+time, your agent looks at your calendar before it writes the reply, so the draft won't say yes to a
+time you're already booked. When it offers to put something on your calendar, it tells you if that
+time is already taken."
+
+**Why it's true** (Archie `fc1b47f5`):
+
+- **Replies.** `crates/archie-runtime/src/busy.rs` decides whether a message is about a time
+  (`mentions_a_time`: weekdays, clock times like 3pm or 10:30, dates like 10/12, and words like
+  free, lunch and call; plain code, no AI). When it is, the text drafter
+  (`texts/replies/triage.rs`, `triage`) and the email drafter (`email/replies/triage.rs`, `triage`)
+  read the next 14 days of calendar before the one drafting call and hand it over as busy times
+  (`busy::describe`). The card under the draft says "Checked first: your calendar". There is no
+  setting: "Check before writing" no longer covers the calendar, in either skill.
+- **Booking from chat.** Before a create or a move is put to the person, `tools_calendar.rs`
+  (`lands_on`) reads that slot on every calendar the asker can see, and the sentence they approve
+  ends with what it overlaps, for example: It overlaps "Dentist" (Mon Oct 5, 3:00pm to 4:00pm).
+- **The "Offer to update your calendar" card.** `arrange.rs` (`taken_line`) adds "That time is
+  already taken" with what is there, and says what to press.
+- Tested in `busy.rs` (what counts as a time, what a reply is told, real overlaps only),
+  `texts/replies/tests.rs` and `tools_calendar.rs`.
+
+**The boundaries.**
+
+- ⚠️ **Only a message that says a time in words it recognizes.** A message about a time written
+  with none of them ("are you around later?") is drafted without the calendar. Never "every reply
+  checks your calendar".
+- ⚠️ **The next 14 days.** A reply about a date further out is not checked.
+- ⚠️ **It warns; it does not stop you.** A booking that overlaps can still be approved, and a
+  draft can still be edited to say yes. Never "it can't double-book you".
+- ⚠️ **Timed events only, for bookings.** An all-day entry (a trip, a birthday) is not called a
+  clash. A reply's drafter is told about all-day entries, without their titles.
+- ⚠️ **Your calendars, never the other person's.** It cannot tell whether the person you are
+  replying to is free.
+- ⚠️ **What the drafter is told.** When you are busy, and never what with, except meetings the
+  person being answered is on themselves. Do not say "the person you reply to never learns your
+  schedule": a draft can still say "I'm busy Thursday afternoon", which is the point of it.
+- ⚠️ **A teammate's mailbox** on Archie for Business is checked against that teammate's calendars
+  and the business's shared ones, the same calendars they see when they ask the agent.
+- ⚠️ **Text Replies needs a Mac**, because it reads the Messages app.
+- **What the earlier version got wrong.** Until this build the calendar was checked only with
+  "Check before writing" switched on, which was off by default, and the settings box for your own
+  rules suggested typing "Never agree to a call without checking my calendar first" yourself. That
+  version also handed the drafter every title, guest and description for two weeks. Do not
+  describe the calendar check as a setting, or as something you ask for.
+
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 
 **Approved wording:** "Ask what the invoice says and your agent opens the attachment and tells you.

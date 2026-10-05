@@ -240,6 +240,21 @@
       ]
     },
     {
+      "id": "L1-00",
+      "n": "1.0",
+      "level": 1,
+      "slug": "ai-basics",
+      "title": "AI Basics",
+      "lede": "Jack introduces Level 1: what AI does, how to ask it for help, why it makes mistakes, and how you pay for it.",
+      "youtube": "",
+      "seconds": 13,
+      "notes_heading": null,
+      "notes": [],
+      "words": [
+        "You may have heard a lot about AI. These videos explain what it does, how to ask it for help, why it makes mistakes, and how you pay for it."
+      ]
+    },
+    {
       "id": "L1-01",
       "n": "1.1",
       "level": 1,

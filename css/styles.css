@@ -16928,6 +16928,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   .day-cap > p.hm-hero-fork + p.hm-hero-alt { margin-top: 18px; }
 }
 .day-cap h1 { font-size: clamp(2rem, 2.9vw, 2.6rem); line-height: 1.1; letter-spacing: -0.015em; margin: 0; text-wrap: balance; }
+/* The opening line is a headline, the others are captions (2026-10-05). Jack, after three reference
+   sites: big headers, and nothing under them longer than two lines. The wide hero's h1 had been sized
+   with the other acts' captions, 42 pixels at most, beside headlines of 56 to 96 on the sites he
+   picked; it now fills its 440 column on two lines. Narrow sizes are set further down and untouched. */
+@media (min-width: 971px) {
+  .day-cap[data-act="0"] h1 { font-size: clamp(2.4rem, 3.9vw, 3.5rem); line-height: 1.04; letter-spacing: -0.02em; }
+  .day-cap[data-act="0"] h1 + p { max-width: 44ch; }
+}
 .day-cap h1 em { font-style: italic; color: var(--accent-ink); white-space: nowrap; }
 /* "Own it." links to what it covers. A faint underline says it is a link without making
    the tagline read as a menu; it firms up on hover and focus. */

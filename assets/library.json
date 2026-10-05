@@ -247,8 +247,7 @@
       "title": "AI Basics",
       "lede": "Jack introduces Level 1: what AI does, how to ask it for help, why it makes mistakes, and how you pay for it.",
       "youtube": "",
-      "hold": "Waiting on Jack's retake: the October 5 take sounds far from the mic. Publish the render made after it.",
-      "seconds": 13,
+      "seconds": 12,
       "notes_heading": null,
       "notes": [],
       "words": [
@@ -541,7 +540,6 @@
       "title": "Jobs and Routines",
       "lede": "What a job is, the three ways one starts, and how a routine runs on a schedule.",
       "youtube": "",
-      "hold": "Waiting on Jack's retake: the take says the Jobs tab lists the jobs it \"has to run\" where the script says \"has run\". Publish the render made after it.",
       "seconds": 71,
       "notes_heading": "How many jobs a day Archie does for free",
       "notes": [
@@ -750,7 +748,7 @@
       "title": "How to Stop Using Archie and Save Your Work",
       "lede": "Five steps, in order: save a backup, end your plan, take back account access, reset Archie, and remove the app.",
       "youtube": "",
-      "seconds": 124,
+      "seconds": 116,
       "notes_heading": "The last steps, and what Reset leaves behind",
       "notes": [
         "A full refund within 14 days of first starting a plan, by email. Guided sessions are not refunded.",
@@ -776,8 +774,7 @@
         "Step five. Quit Archie and remove the app. On a Mac, drag the app to the Trash. On Windows, open Settings, then Apps, and uninstall Archie. Check the box to remove your Archie data.",
         "Ending a plan does not delete anything from your computer. When your plan has ended, you can also delete your Otian account on our website's account page.",
         "That is the end of Level 3. Next: setting up your agent."
-      ],
-      "hold": "Waiting on Jack's one-line pickup: the take names the Connections tab for Disconnect every phone, which is on the Setup tab under Chat app. Publish the render made after it."
+      ]
     },
     {
       "id": "L4-00",

@@ -16794,10 +16794,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 
 /* The tile is drawn 1440 by 210 and shown at --bank-h tall, so --bank-w is one tile at that height and
    the strip slides by exactly that. The bank stands lower under the scene than at the edges, by a
-   fade on the box that holds it, because in the middle it is only seen through the window. */
-.day-bank { --bank-h: 168px; --bank-w: calc(var(--bank-h) * 1440 / 210); position: absolute; left: 0; bottom: 0; width: 100%; height: var(--bank-h); translate: calc(var(--sky-p) * -360px) 0;
+   fade on the box that holds it, because in the middle it is only seen through the window.
+   THE SCROLL'S SHARE RIDES THE STRIP, NOT THE BOX. It was on the box until Jett scrolled and saw the
+   bank end on the right (2026-10-05): a mask paints only inside its own box, so sliding the box
+   slid the fade's right edge onto the screen and cut off everything past it. The box stays put
+   and the strip is the screen plus one tile plus the scroll's whole travel, so no width runs out. */
+.day-bank { --bank-h: 168px; --bank-w: calc(var(--bank-h) * 1440 / 210); position: absolute; left: 0; bottom: 0; width: 100%; height: var(--bank-h);
   mask-image: linear-gradient(90deg, rgb(0 0 0 / .8), rgb(0 0 0 / .8) 24%, rgb(0 0 0 / .38) 46%, rgb(0 0 0 / .38) 66%, #000 90%); }
-.day-bank-strip { position: absolute; left: 0; bottom: 0; width: calc(var(--bank-w) * 4); height: 100%; }
+.day-bank-strip { position: absolute; left: 0; bottom: 0; width: calc(100% + var(--bank-w) + 360px); height: 100%; translate: calc(var(--sky-p) * -360px) 0; }
 .day-bank-strip i { mask-repeat: repeat-x; mask-size: var(--bank-w) 100%; mask-position: left bottom; }
 .day-bank .sk-lit { mask-image: url("../assets/stipple-bank-lit.png"); }
 .day-bank .sk-shade { mask-image: url("../assets/stipple-bank-shade.png"); }
@@ -16825,7 +16829,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 /* A phone's stage is the scene over a caption band, and the band is where the bank stands, so the
    bank is lower there and the high clouds, which would only stand behind the phone, are not drawn. */
 @media (max-width: 970px) {
-  .day-bank { --bank-h: 110px; mask-image: none; }
+  /* 112 and not 110: a tile of 768 is a whole pixel, so the loop's jump back lands on the same dots. */
+  .day-bank { --bank-h: 112px; mask-image: none; }
   .day-cloud { display: none; }
 }
 @media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
@@ -20837,6 +20842,25 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .hm-evening .hm-dinner-note { margin-top: 2px; padding: 0 7px; }
 }
 .day-cap .hm-actions { margin-top: 14px; }
+/* WIDE, THE CARD STANDS OVER THE PHONE IT DRIVES (2026-10-05). Jett: move it "to the right side on
+   desktop views as a more minimal graphic on top of the mockups", which is Jack's two lines under
+   a heading too: the column keeps the headline, one line, the button and the fine print, and the
+   control floats beside the screen it changes, its right end over the phone's left edge and its
+   foot just above the message it picks. It stays in the caption's markup, so reading order, the
+   page without a script, a phone's layout and reduced motion are all as they were. js/home.js
+   reads where the glass and the message stand (--dn-x, --dn-y, in .day-caps' own pixels), because
+   the fit and the slide move the phone by different amounts at every screen size. The width is
+   set and not fitted, so a longer label opens into the card instead of moving its left edge. The
+   caption stands over the scene for this act alone, or the card is drawn behind the phone for the
+   half second the act fades; and the card fades with its caption instead of vanishing the moment
+   the act changes. */
+@media (min-width: 971px) and (prefers-reduced-motion: no-preference) {
+  .day-stage.is-driven .day-cap[data-act="0"] { z-index: 3; }
+  .day-stage.is-driven:not(.is-hero) .hm-evening { display: grid; }
+  .day-stage.is-driven .hm-evening { position: absolute; left: calc(var(--dn-x, 0px) + 40px); top: calc(var(--dn-y, 0px) - 18px); translate: -100% -100%; width: 20.5rem; max-width: none; margin: 0; padding: 9px 8px 7px; border-color: color-mix(in srgb, var(--border) 70%, transparent); border-radius: 16px; background: color-mix(in srgb, var(--bg-card) 86%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); box-shadow: var(--lift-md); }
+  .day-stage.is-driven .day-cap .hm-evening > .hm-dinner-head { margin-bottom: 4px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+  .day-stage.is-driven .day-cap[data-act="0"] .hm-actions { margin-top: 26px; }
+}
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }
 /* The line under the button and the three promises under it (2026-10-05). Both were small gray
    type, the promises one run of middle dots, and together they read as the small print a reader

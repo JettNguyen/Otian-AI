@@ -211,6 +211,8 @@
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var sky = $('.day-stipple');
+    /* Wide, the dinner card floats over the phone it drives, so the fit tells it where the phone is. */
+    var dinnerAt = $('.hm-dinner-stack'), capsBox = $('.day-caps');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
@@ -658,6 +660,10 @@
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var reach = (narrow || still) ? null : reachOf(wr);
+      /* Where the hero phone's glass and its message stand, for the dinner card: see .hm-evening's
+         wide rule in the stylesheet. Read with the other rects, written with --sc below. */
+      var dn = (!narrow && !still && cur === 0 && ph && dinnerAt && capsBox)
+        ? [ph.getBoundingClientRect(), dinnerAt.getBoundingClientRect(), capsBox.getBoundingClientRect()] : null;
       lastWrapH = wr.height;
       /* Read here, with the two rects, and written below with --sc: everything this frame reads
          is read before anything is written, or the browser lays the page out twice per frame. The
@@ -713,6 +719,10 @@
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
          the same pool whatever the fit came out at. */
       styleValue(stage, '--sc', SC.toFixed(3));
+      if (dn) {
+        styleValue(stage, '--dn-x', Math.round(dn[0].left - dn[2].left) + 'px');
+        styleValue(stage, '--dn-y', Math.round(dn[1].top - dn[2].top) + 'px');
+      }
     }
 
     /* THE SCENE HAS TO BE ABLE TO STOP, OR IT IS NEVER DRAWN SHARP. A 3D layer is rasterized once

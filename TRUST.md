@@ -836,6 +836,11 @@ is "What happens when a plan ends" (the free tier, `own_ai_key`). The final vers
 own sentence (`terms-of-service/index.html`, "If Otian AI ceases operations"), and the 60-day
 license note that makes it matter is "The subscription gate is fail-open".
 
+**Where it ships (2026-10-05):** the first two items under `compare/cloud-agents/#owning-heading`,
+"What owning your agent means" and "If you stop paying, or we close", which is where the homepage
+h1's "Own it." links. The egress clause sits in the first item beside "on your computer", as the
+boundary below requires. If this wording changes, that section changes with it.
+
 **Boundaries:**
 - ⛔ **Never "you own Archie" or "Archie is yours".** The app is sold as a plan. The word covers
   **your agent and what you built**, never the software license.

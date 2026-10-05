@@ -25,8 +25,10 @@ nearly every heading on the homepage was one:
                person buried in their own life admin.
   BUTTON       A button that says "Learn more" or "Get started" names no outcome. A button
                says what you do and what you get.
-  BLOCK        A paragraph a skimming reader will not start. 45 words on a selling page, 70 on
-               a reference page, and a sentence over 35 on either.
+  BLOCK        A paragraph a skimming reader will not start. 35 words on a selling page, which is
+               two lines at the site's usual measure (Jack, 2026-10-05: "at most they only have
+               their writing go two lines"), 40 for a caption, 45 on a page whose words come from
+               somewhere else, 70 on a reference page, and a sentence over 35 on any.
 
 The tagline h1 is the one allowed aphorism, by Jett's decision on 2026-09-27 ("keep the tagline
 h1"): it is the company's line, not a sentence of copy, and it is listed below with that reason.
@@ -66,9 +68,35 @@ SKIP_PREFIXES = (
 
 # Reference pages: their job is completeness, so they get the longer block ceiling. The same
 # split check-copy-length.py makes for its word budget.
-REFERENCE_PREFIXES = ("trust/", "compare/", "blog/", "ai-explained/", "faq/", "help/", "our-story/")
+# Three pages joined them on 2026-10-05, when the selling cap came down to 35, and each for a reason
+# that was already on record: archie/pricing/ and archie/mobile/ run long on measured costs and on
+# other companies' published words with their sources beside them, which Jett ruled on 2026-09-14
+# cannot be cut without dropping a citation, and archie/install/ is a set of steps somebody follows
+# with the installer open, whose Windows signing passage CLAUDE.md names as the model.
+REFERENCE_PREFIXES = ("trust/", "compare/", "blog/", "ai-explained/", "faq/", "help/", "our-story/",
+                      "archie/pricing/", "archie/mobile/", "archie/install/")
 
-BLOCK_MAX = 45            # words in one paragraph on a selling page
+# Pages whose words are written somewhere else and generated here: the Learning Library from
+# assets/library.json by scripts/gen-library.mjs, and each add-on's own page from the catalog the
+# Archie repo authors. They keep the old 45 until the two-line pass reaches their sources, because
+# a cut made here would be undone by the next run of the generator. The browse page itself is
+# hand-written around its generated block, so it is held to the selling cap like any other page.
+SOURCED_PREFIXES = ("learn/",)
+
+
+def sourced(rel):
+    return rel.startswith(SOURCED_PREFIXES) or (
+        rel.startswith("skills-marketplace/browse/") and rel != "skills-marketplace/browse/index.html")
+
+
+# 35 is two lines at the measure most selling paragraphs run at, and was 45 until 2026-10-05: Jack
+# asked for big headers with nothing longer than two lines under them, after three reference sites
+# whose first screens carry 21 to 55 words to our 111. Measured rather than guessed: across the 51
+# selling pages at 1440 wide, nine in ten two-line paragraphs held 33 words or fewer. A caption keeps
+# 40, the cap check-copy-length.py already gives it, because it carries its figure's limitation.
+BLOCK_MAX = 35            # words in one paragraph on a selling page
+BLOCK_MAX_CAPTION = 40    # a figcaption on a selling page
+BLOCK_MAX_SOURCED = 45    # a page generated from words written elsewhere
 BLOCK_MAX_REFERENCE = 70  # and on a reference page
 SENTENCE_MAX = 35         # words in one sentence, anywhere
 
@@ -261,7 +289,7 @@ def scan(rel, src, soft=False):
     p.feed(src)
     p._flush()
     reference = rel.startswith(REFERENCE_PREFIXES)
-    cap = BLOCK_MAX_REFERENCE if reference else BLOCK_MAX
+    cap = BLOCK_MAX_REFERENCE if reference else BLOCK_MAX_SOURCED if sourced(rel) else BLOCK_MAX
     hits = []
 
     blocks = list(p.out)
@@ -289,8 +317,9 @@ def scan(rel, src, soft=False):
             if run >= 3 and not allowed(rel, "staccato", text):
                 hits.append(("APHORISM", "staccato", tag, text))
                 break
-        if tag in PROSE and words(text) > cap and not allowed(rel, "block", text):
-            hits.append(("BLOCK", f"block-over-{cap}", tag, text))
+        tag_cap = max(cap, BLOCK_MAX_CAPTION) if tag == "figcaption" else cap
+        if tag in PROSE and words(text) > tag_cap and not allowed(rel, "block", text):
+            hits.append(("BLOCK", f"block-over-{tag_cap}", tag, text))
         for s in ss:
             if words(s) > SENTENCE_MAX and not allowed(rel, "long-sentence", s):
                 hits.append(("BLOCK", f"sentence-over-{SENTENCE_MAX}", tag, s))

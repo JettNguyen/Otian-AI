@@ -137,8 +137,12 @@ homepage phone showing "Q3 kickoff prep" was talking to somebody else, and becam
 5. **No copy written to everybody:** "whether you are", "no matter who".
 6. **A button is a verb and an outcome:** "See where it stands", "Book Your Free Call". Never
    "Learn more", "Get started", "Click here".
-7. **Break up blocks:** 45 words a paragraph on a selling page, 70 on a reference page, and 35 a
-   sentence anywhere.
+7. **Break up blocks:** 35 words a paragraph on a selling page, 70 on a reference page, and 35 a
+   sentence anywhere. It was 45 until 2026-10-05, when Jack asked for big headers with nothing
+   longer than two lines under them, and 35 is two lines at the usual measure (measured, not
+   guessed). A caption keeps 40; the Learning Library and the add-on pages keep 45 until their
+   generators' sources get the same pass; archie/pricing/, archie/mobile/ and archie/install/
+   count as reference for the reasons in the script.
 
 **What a person reads for:**
 - **No fabricated claims.** Nothing about "people", "most people" or "customers" that we have not

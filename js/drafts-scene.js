@@ -60,7 +60,7 @@
   }
   function hold(n) {
     if (reduced) return;
-    later(function () { press(cards[n]); }, HOLD_MS);
+    later(function () { press(cards[n], true); }, HOLD_MS);
   }
   function land(n) {
     i = n;
@@ -68,16 +68,19 @@
     roll(n, function () { cards[n].classList.add("is-in"); hold(n); });
   }
   function reset() {
-    cards.forEach(function (c) { c.classList.remove("is-in", "is-pressed", "is-done"); });
+    cards.forEach(function (c) { c.classList.remove("is-in", "is-pressed", "is-done", "is-tapped"); });
     sts.forEach(function (s) { s.classList.remove("is-lit", "is-done"); });
     chips.forEach(function (c) { c.classList.remove("is-lit", "is-done"); });
     if (scr) scr.classList.remove("is-noticed");
     land(0);
   }
-  function press(card) {
+  /* `auto` is the scene's own press, which shows a fingertip on Send (is-tapped, in the stylesheet)
+     so the send still reads as yours; a press by hand has the reader's finger already. */
+  function press(card, auto) {
     if (!card || card.classList.contains("is-pressed")) return;
     cancel();
     card.classList.add("is-pressed");
+    if (auto && !reduced) card.classList.add("is-tapped");
     later(function () {
       card.classList.add("is-done");
       if (scr) { scr.classList.remove("is-noticed"); void scr.offsetWidth; scr.classList.add("is-noticed"); }

@@ -1248,6 +1248,10 @@
     function press(scr, key, how) {
       if (!scr || scr.classList.contains('is-pressed')) return;
       scr.classList.add('is-pressed');
+      /* The scroll's press shows a fingertip on the button, because the claim is that the reader's
+         press sends it; a hand press has the reader's own finger, and 'now' is a screen that was
+         settled before anyone got here. The ring is the stylesheet's (is-tapped). */
+      if (how === 'hold' && !still) scr.classList.add('is-tapped');
       if (how === 'now' || still) answer(scr, key, true);
       else if (how === 'clock') busyT[key] = setTimeout(function () { answer(scr, key); }, BUSY_MS);
       if (!still) window.Ember.act(ember, 'hop');
@@ -1255,7 +1259,7 @@
     function unpress(scr, key) {
       if (!scr) return;
       if (busyT[key]) { clearTimeout(busyT[key]); busyT[key] = 0; }
-      scr.classList.remove('is-pressed', 'is-done', 'is-noticed');
+      scr.classList.remove('is-pressed', 'is-done', 'is-noticed', 'is-tapped');
       if (key === 2) win.classList.remove('is-sent');
     }
     $$('[data-press]').forEach(function (btn) {

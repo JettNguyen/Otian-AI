@@ -368,6 +368,58 @@ page still carrying it is describing a product we do not sell.)*
 - ✅ The `ai_included` flag on the user document exists for support and is not a holding that
   changes the What We Hold list: it is part of "whether you have a current plan".
 
+### ✅ On the two lanes that run on our AI account, each person's calls carry a tag, and we can turn that AI off for one person
+
+**Added 2026-10-04. Built in the Archie repo and not yet deployed; nothing on the site says it yet.**
+
+**The claim**, as somebody would say it: "When you use the free credits or the plan with the AI
+included, each request carries a code that stands for your account, so Anthropic can tell people
+apart when it checks for misuse. If somebody breaks the rules on those plans, we can turn off the AI
+on our account for that one person, without touching their license or the rest of Archie."
+
+**Why it's true** (Archie repo):
+
+- `stripe-webhook/credits.js`, `rewriteForTrial`: sets Anthropic's `metadata.user_id` from a tag
+  the relay chose. `metadata` is not in `FORWARDED_FIELDS`, so a client cannot set it or forge
+  somebody else's. Metadata is not prompt text and costs no tokens.
+- `stripe-webhook/index.js`, the `/trial/v1/messages` route: the tag is `trialHash("user:" + uid)`,
+  the same salted, truncated sha256 as the device and IP stamps. It is kept on `credits/{uid}` as
+  `relay_tag`, written inside the hold transaction the call already makes, so a tag Anthropic reports
+  can be found. The same route refuses with `ai_stopped` when `credits.isStopped` reads
+  `ai_stopped_at_ms`, and the message says why, where to write, and how to keep going on an AI
+  account of their own.
+- `setAiStopped` and the `stop` and `restart` actions on `/admin/credits/plan`, pressed from either
+  staff console (`admin/tiers/index.html` here, `src/app/admin.tsx` in the app). `renewPlanLedger`
+  and `endPlanLedger` spread the old ledger, so a monthly refill cannot undo a stop, and
+  `stripe-webhook/credits.test.js` pins that.
+- The runbook is `docs/MISUSE.md`.
+
+**Required clauses, before anything public says it:**
+
+- The privacy policy's free-credits paragraph gets one sentence about the tag (drafted in the Archie
+  repo, `docs/drafts/HARMFUL-USE-TERMS.draft.md`, section 5). It lists exactly what that server
+  records, so it is wrong the day the relay deploys without it.
+- `trust/#what-we-hold` names "the ledger's device and IP stamps". The account tag is a third stamp
+  of the same kind and the list has to say so, since that page is the one allowed to claim it is
+  complete.
+
+**Boundaries, do not cross:**
+
+- ❌ Never "we monitor for misuse" or "we watch for abuse". The relay logs no request and no reply,
+  and nothing in Archie lets us see what anybody does. What we act on is a report, or Anthropic
+  writing to us about a tag.
+- ❌ Never "anonymous". The tag is a stand-in Anthropic cannot turn into an account, and we can, on
+  purpose: that is what makes a letter from Anthropic something we can act on. "Anthropic cannot tell
+  who you are from it" is the true shape.
+- ❌ Never imply the stop reaches an AI account of the customer's own, their license, or anything on
+  their computer. It covers the two lanes on our account and nothing else. Ending a license is a
+  separate step.
+- ❌ Never "we can remove a harmful add-on from your agent". Setting an add-on private takes it out of
+  the store; nothing reaches a copy already installed (open thread in Archie's
+  `docs/OPEN-THREADS.md`).
+- ❌ Never claim the tag or the stop for somebody on their own AI account. Their calls never touch
+  our server.
+
 ### ✅ No analytics, and two small things that are not analytics
 
 > **Corrected 2026-08-06.** This entry said "no telemetry of any kind. Not opt-out, absent",

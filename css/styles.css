@@ -16859,8 +16859,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   .day-cap[data-act="0"] .hm-hero-story.day-beat.is-on { margin-top: 10px; }
   /* The dinner card's beat is a slot around it, and the slot is wider and deeper than the card by
      the reach of its shadow, which the beat's overflow would otherwise cut off. The negative
-     margins give that room back, so open or folded the slot costs exactly the card. */
-  .hm-evening-slot { margin: 10px -16px -18px; padding: 0 16px 18px; }
+     margins give that room back, so open or folded the slot costs exactly the card. The 16 on top
+     is the pause button's: its target reaches up past the card's edge, and the beat clips at the
+     slot's padding box, so without it the target was 19 tall on a phone (2026-10-05). */
+  .hm-evening-slot { margin: -6px -16px -18px; padding: 16px 16px 18px; }
+  .day-cap[data-act="0"] .hm-evening-slot.day-beat:not(.is-on) { margin-top: -16px; }
   /* Centered by margin, in a plain block: a card centered by alignment overflows upward as the
      slot folds, and the slot's open height is measured off scrollHeight, which never counts that. */
   .hm-evening-slot > .hm-evening { margin: 0 auto; }
@@ -18101,7 +18104,11 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      gap cannot be closed by making the phone bigger. Taking it off the top instead would push the
      mockups back down toward the clock badge, which is the change above this one. So 36 under the
      words becomes 46, and the words sit 10 nearer the thing they are captioning. */
-  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 36px; margin: -10px 0 10px; }
+  /* Above the scene for a tap, since 2026-10-05. The scene's row is the one before this, and the
+     drawing runs past its foot under the caption (the phone fades out there, but a faded element
+     still takes the tap), so the top of the dinner card, and of its pause button, went to the
+     scene. The band itself lets taps through, so only the caption on screen takes them. */
+  .day-caps { grid-column: 1; grid-row: 3; display: grid; grid-template-rows: minmax(0, 1fr); height: auto; padding: 6px 16px 36px; margin: -10px 0 10px; z-index: 1; pointer-events: none; }
   /* The band is one grid cell with every caption stacked in it, so it is always as tall as the
      longest one (act 3, which carries a control) and a short caption floats in the leftover. Sitting
      them in the middle of the band puts the words under the scene without either a hole below them
@@ -20553,10 +20560,10 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
 .day-stage:not(.is-hero) .hm-evening { display: none; }
 .hm-evening { --dinner-row: 36px; --dinner-face: 26px; --dinner-pad: 5px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "head head" "list pause"; align-items: center; column-gap: 8px; align-self: stretch; width: 100%; max-width: 21.5rem; margin-top: 18px; padding: 10px 8px 8px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card); text-align: left; }
 .day-cap .hm-evening > .hm-dinner-head { grid-area: head; display: flex; align-items: center; gap: 7px; max-width: none; margin: 0 0 6px; padding-left: 6px; font-size: var(--fs-sm); font-weight: 500; line-height: 1.3; color: var(--text-secondary); }
-.hm-dinner-pause { grid-area: pause; position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: var(--text-muted); cursor: pointer; transition: background var(--transition-quick), color var(--transition-quick); }
+.hm-dinner-pause { grid-area: pause; position: relative; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: color-mix(in srgb, var(--text-primary) 7%, transparent); color: var(--text-secondary); cursor: pointer; transition: background var(--transition-quick), color var(--transition-quick); }
 /* A 44 target around a 28 drawing. */
 .hm-dinner-pause::after { content: ""; position: absolute; inset: -8px; }
-.hm-dinner-pause:hover { color: var(--text-primary); }
+.hm-dinner-pause:hover { background: color-mix(in srgb, var(--text-primary) 13%, transparent); color: var(--text-primary); }
 .hm-dinner-pause svg { width: 10px; height: 10px; fill: currentColor; }
 .hm-dinner-ic-play, .hm-evening.is-paused .hm-dinner-ic-pause { display: none; }
 .hm-evening.is-paused .hm-dinner-ic-play { display: block; }
@@ -20606,7 +20613,7 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .hm-evening { --dinner-row: 44px; --dinner-face: 30px; --dinner-pad: 6px; grid-template-areas: "head pause" "list list"; align-self: center; max-width: 23rem; margin-top: 10px; padding: 5px 5px 4px; }
   .day-cap .hm-evening > .hm-dinner-head { margin: 0 0 2px; padding-left: 7px; }
   .hm-dinner-pause { width: 26px; height: 26px; }
-  .hm-dinner-pause::after { inset: -9px; }
+  .hm-dinner-pause::after { inset: -17px -9px -4px; }
   .hm-dinner-pick .mp-face svg { width: 17px; height: 17px; }
   .hm-evening .hm-dinner-note { margin-top: 2px; padding: 0 7px; }
 }
@@ -20635,10 +20642,10 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
 }
 @media (max-width: 970px) and (max-height: 700px) {
   .hm-evening { padding: 4px 4px 3px; }
-  .hm-evening-slot { margin-top: 6px; }
+  .hm-evening-slot { margin-top: -10px; }
   .day-cap .hm-evening > .hm-dinner-head { font-size: var(--fs-xs); }
   .hm-dinner-pause { width: 24px; height: 24px; }
-  .hm-dinner-pause::after { inset: -10px; }
+  .hm-dinner-pause::after { inset: -19px -10px -4px; }
   .hm-evening .hm-dinner-note { margin-top: 1px; }
   .day-cap > p.hm-hero-status, .hm-promises li { font-size: var(--fs-2xs); }
   .day-cap > p.hm-hero-status, .hm-promises { margin-top: 5px; }

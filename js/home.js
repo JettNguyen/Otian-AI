@@ -529,7 +529,7 @@
        An earlier fix pinned the caption row so the scene could not move at all. It did stop the
        snap, and it also threw away the effect this is for. */
     var EASE_SC = 0.12, scTarget = 1, lastWrapH = 0, capsEl = $('.day-caps');
-    var heroCap = $('.day-cap[data-act="0"]'), heroLift = '';
+    var heroCap = $('.day-cap[data-act="0"]'), heroLift = '', liftNow = 0, heroMid = 0, STAGE_TOP = 0;
 
     /* THE HEIGHT EACH HERO BEAT OPENS TO, measured rather than guessed. `max-height` is what
        animates the room open (see the stylesheet beside `.day-beat`), and it needs a real number
@@ -599,6 +599,7 @@
       capPadAt = key;
       var cs = window.getComputedStyle(capsEl);
       CAPS_PAD = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+      STAGE_TOP = parseFloat(window.getComputedStyle(stage).paddingTop) || 0;
     }
     function capsFit() {
       if (!capsEl || !caps.length) return;
@@ -666,6 +667,13 @@
       /* Where the hero's window and phone stand, for the dinner card, and the box it is placed in,
          which is its own caption: see .hm-evening's two rules in the stylesheet. Read with the
          other rects, written with --sc below. */
+      /* How far the hero's words have to rise to stand in the middle of the screen under the menu
+         once the mockups have gone, from where they stand without the lift. Read here, with the
+         other rects; the frame below spends it as the mockups leave. */
+      if (narrow && !still && cur === 0 && heroCap) {
+        var hc = heroCap.getBoundingClientRect(), top = sr.top + STAGE_TOP;
+        heroMid = Math.max(0, (hc.top - liftNow + hc.height / 2) - (top + sr.bottom) / 2);
+      }
       var dnBox = dinner && dinner.offsetParent;
       var dn = (!still && cur === 0 && dnBox)
         ? [win.getBoundingClientRect(), dnBox.getBoundingClientRect(), dinner.offsetHeight, phone.getBoundingClientRect()] : null;
@@ -1081,8 +1089,8 @@
          their room: both on one curve put the headline over a half-faded phone with Ember
          standing on it. `gone` is the mockups' share of the curve and `rise` the caption's.
 
-         The hero's caption rides up by a share of the row the mockups vacate, or the words would
-         be read at the bottom of a screen with nothing in the top half of it. A translate, not a
+         The hero's caption rides up into the middle of the room the mockups vacate, or the words
+         would be read at the bottom of a screen with nothing in the top half of it. A translate, not a
          layout change, so nothing reflows while somebody is reading, and `translate` rather than
          `transform`, because .day-cap eases its transform over half a second and this has to
          follow the scroll. Past act 0 it holds where it was while it fades out, so the hand-over
@@ -1105,7 +1113,11 @@
         }
       }
       if (heroCap && (i === 0 || !narrow || still)) {
-        heroLift = rise > 0.001 ? (-rise * lastWrapH * 0.45).toFixed(1) + 'px' : '';
+        /* Narrow it rises to the middle of what is left (heroMid, measured in the fit), because a
+           fixed share of the scene's row left it low on a tall screen with the top half empty
+           (Jett, 2026-10-05: "the content should be more centered"). */
+        liftNow = rise > 0.001 ? -rise * (narrow ? heroMid : lastWrapH * 0.45) : 0;
+        heroLift = liftNow ? liftNow.toFixed(1) + 'px' : '';
         var want = heroLift ? '0 ' + heroLift : '';
         if (heroCap.style.translate !== want) heroCap.style.translate = want;
       }

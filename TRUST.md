@@ -1382,6 +1382,43 @@ archie-mobile `04da3b6`):
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
 
+### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, 🚧 from Archie Mobile BUILT 2026-10-05, not yet in a release
+
+**Approved wording:** "Archie picks a model for each of Economy, Balanced and Best. You can pick your
+own for any of them, from the list your AI company publishes, and that setting runs it everywhere:
+in replies, in your skills, and in anything on a schedule. Put any of them back to Archie's choice
+in one press. On the computer it is under Response quality; on the phone, under Response quality in
+More."
+
+**Why it's true** (Archie `9a067256` for the computer, `0d61132b` for the phone's ops; archie-mobile
+`51629d7` for the phone's screen):
+
+- **One stored choice per setting, per AI company.** `TierModelChoice` and
+  `AgentBundleManifest.tier_models` in `crates/archie-domain/src/skill.rs`, written by
+  `agent_tier_model_set` and cleared by `agent_tier_models_reset` in
+  `src-tauri/src/commands/mod.rs`. `base_model_for_tier` in
+  `crates/archie-runtime/src/gateway/routing.rs` uses a picked model for every reply, skill and
+  routine that lands on that setting.
+- **The list is the AI company's own**, asked on the owner's key: `list_models` in
+  `crates/archie-net/src/llm/mod.rs`, behind `provider_models_list`.
+- **The phone runs the same code.** `set_tier_model`, `reset_tier_models` and `models` in
+  `src-tauri/src/phone.rs` call those same commands, and the provider is read off the agent on the
+  computer, never taken from the phone. The phone's picker is `ModelChoice` in
+  `src/screens/Manage.tsx` in archie-mobile.
+
+**The boundaries.**
+- ⚠️ **Only with an AI account of the owner's own.** On the starter credits or the plan's allowance
+  there is one model and nothing to pick; both screens say so instead of drawing a picker.
+- ⚠️ **Not on the Custom connection**, which runs the one model typed on its card at every setting.
+- ⚠️ **Some AI companies publish no list** (xAI does not, to most keys). Then a model's name is typed
+  in, copied from the company's own site. Never write "choose from every model".
+- ⛔ **Never claim a picked model thinks the way Archie's own choice does.** A picked model runs
+  with extended thinking off unless it is the very model Archie would have used
+  (`pinned_model` in `routing.rs`), because the right thinking settings differ by model and
+  guessing them wrong fails the request.
+- ⛔ **Never "your agent picks the model".** The owner picks it; the agent never changes it on its
+  own. A change restarts the agent, which takes a few seconds.
+
 ### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
 
 **Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video, a

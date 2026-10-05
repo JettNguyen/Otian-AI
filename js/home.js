@@ -210,6 +210,7 @@
     var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
+    var sky = $('.day-stipple');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
@@ -411,6 +412,22 @@
         narrow: { cam: { rx: 0, ry: 0, s: 1 }, win: copy(NW, { o: 0 }), phone: copy(NP, { o: 0 }), night: 0, fc: 0, fs: 1 } }
     ];
     function poseOf(i) { return narrow ? ACTS[i].narrow : ACTS[i].pose; }
+    /* THE CLOUDS' HOUR, ONE ROW PER ACT: the lit colour, the shaded colour, and how strong the pair
+       is. The hours are the act clocks above: dusk for the 7:00 pm hero, gold for 9:12, a pale
+       midday for 1:40 and the custody floor that follows it at the same hour, amber for 4:15,
+       moonlit grey for 2:00 am, pink for the 7:00 am brief, and nothing over the setup drawing.
+       A palette per theme, because the dark page wants the same hours at a fraction of the light.
+       Carried on the poses as numbers so lerpPose eases them with everything else. */
+    var SKY_LIGHT = [['#F0A57C', '#A99BD8', .62], ['#EFC064', '#E3B9A0', .5], ['#EED9AE', '#B9C6D6', .42], ['#EED9AE', '#B9C6D6', .3],
+                     ['#EEAE5C', '#D9958A', .55], ['#77749C', '#4A4766', .6], ['#F3A99E', '#B4A3D8', .6], ['#F3A99E', '#B4A3D8', 0]];
+    var SKY_DARK = [['#9A6247', '#5A4F7E', .55], ['#957641', '#6E5446', .45], ['#7E705A', '#4C5664', .4], ['#7E705A', '#4C5664', .3],
+                    ['#94683A', '#7A4E47', .5], ['#4F4D6E', '#33324A', .6], ['#97605A', '#5B4E7C', .55], ['#97605A', '#5B4E7C', 0]];
+    function rgbOf(hx) { return { r: parseInt(hx.slice(1, 3), 16), g: parseInt(hx.slice(3, 5), 16), b: parseInt(hx.slice(5, 7), 16) }; }
+    ACTS.forEach(function (a, k) {
+      var l = SKY_LIGHT[k], d = SKY_DARK[k];
+      var sk = { lit: rgbOf(l[0]), shade: rgbOf(l[1]), o: l[2], dlit: rgbOf(d[0]), dshade: rgbOf(d[1]), od: d[2] };
+      a.pose.sky = sk; a.narrow.sky = sk;
+    });
     /* The five minute marks, from FACTS.md: what the clock over the setup track reaches as each
        step is lit. Estimates, and the caption says so. */
     var MINUTES = [1, 3, 7, 9, 10];
@@ -815,6 +832,15 @@
       styleValue(phone, '--wrf', clamp(-yaw / 6, 0, 1).toFixed(3));
       styleValue(floorC, '--fo', p.fc.toFixed(3)); floorC.classList.toggle('is-on', p.fc > 0.5);
       styleValue(floorS, '--fo', p.fs.toFixed(3)); floorS.classList.toggle('is-on', p.fs > 0.5);
+      /* The clouds' hour (SKY above). The theme is read here rather than cached, because the toggle
+         can change it between two frames; the observer below wakes the loop when it does. */
+      if (sky && p.sky) {
+        var dk = document.documentElement.getAttribute('data-theme') === 'dark';
+        var rgb = function (c) { return 'rgb(' + Math.round(c.r) + ' ' + Math.round(c.g) + ' ' + Math.round(c.b) + ')'; };
+        styleValue(sky, '--sky-lit', rgb(dk ? p.sky.dlit : p.sky.lit));
+        styleValue(sky, '--sky-shade', rgb(dk ? p.sky.dshade : p.sky.shade));
+        styleValue(sky, '--sky-o', (dk ? p.sky.od : p.sky.o).toFixed(3));
+      }
       styleValue(stage, '--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
       /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The root
@@ -1213,6 +1239,8 @@
       new ResizeObserver(wake).observe(wrap);
     }
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(wake);
+    /* The clouds have a palette per theme, so a flip of the toggle repaints them on the spot. */
+    if (window.MutationObserver) new MutationObserver(wake).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
     wake();
 
     /* The two real buttons on the phone. The composer's send knob posts the typed yes, and only

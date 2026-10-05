@@ -16749,6 +16749,26 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-sky svg { display: block; width: 100%; height: 100%; }
 .day-sky circle { fill: #F3F0ED; }
 
+/* ---- the clouds: the hour, in dots ---- */
+/* A bank of clouds along the foot of the stage and two small ones high up, drawn in dots, coloured by
+   the hour on the act's clock (2026-10-05). Jack picked trajectory.ai as one of three sites to borrow
+   from, and what it owns is that texture; this stage already runs a day with a clock on every act, so
+   the clouds are where the hour shows: peach over lavender at 7:00 pm, gold at 9:12, moonlit grey at
+   2:00 am. Their only motion is the colour, and the colour moves only with the scroll that turns the
+   clock, which is what lets it stand on a page where motion has to carry a claim.
+
+   Two masks from scripts/gen-stipple.py, each painted one flat colour: the dots on top of each cloud
+   are --sky-lit and the ones underneath --sky-shade, so one pair of files is every hour of the day.
+   js/home.js writes the three properties from SKY, eased between acts like every other pose value,
+   with a palette for each theme. Unprefixed mask properties only: the -webkit- pair beside them made
+   Chrome draw nothing at all. Off under reduced motion, like the stars, because the acts stand in a
+   stack there and there is no hour to follow. */
+.day-stipple { --sky-lit: #F0A57C; --sky-shade: #A99BD8; --sky-o: .62; position: absolute; inset: 0; pointer-events: none; opacity: var(--sky-o); }
+.day-stipple i { position: absolute; inset: 0; mask-size: cover; mask-position: center bottom; mask-repeat: no-repeat; }
+.day-stipple-lit { background: var(--sky-lit); mask-image: url("../assets/stipple-lit.png"); }
+.day-stipple-shade { background: var(--sky-shade); mask-image: url("../assets/stipple-shade.png"); }
+@media (prefers-reduced-motion: reduce) { .day-stipple { display: none; } }
+
 @media (prefers-reduced-motion: no-preference) {
   /* ALL OF THIS HANGS OFF .is-night, which js/home.js turns on at the same half-way mark the sky
      fades in at, so nothing here runs through the other seven acts. An invisible element's

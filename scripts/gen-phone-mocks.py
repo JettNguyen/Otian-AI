@@ -51,9 +51,13 @@ narrower than the two lines inside it, which ran out the side.
     python3 scripts/gen-phone-mocks.py --check   fail if the page is out of date
 """
 
+import base64
+import math
 import os
 import re
+import struct
 import sys
+import zlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PAGE = os.path.join(ROOT, "archie", "mobile", "index.html")
@@ -358,12 +362,86 @@ def sym(name, x, y, size, color):
 
 
 def glass_shadow():
-    """The soft cast under glass (--glass-cast). A browser cannot bend light, so glass in a still
-    picture is a frosted fill, a bright rim and this."""
+    """The soft cast under glass (--glass-cast), under the bend (lens) and the rim."""
     return doc_def("glass", lambda i: (
         '<filter id="%s" x="-20%%" y="-60%%" width="140%%" height="240%%">'
         '<feDropShadow dx="0" dy="5" stdDeviation="9" style="flood-color:var(--glass-cast)"/>'
         "</filter>" % i))
+
+
+# ── the bend ──────────────────────────────────────────────────────────────────────────────
+# Liquid Glass is told from frosted plastic by its rim: whatever is under it bends there, pulled
+# in from further inside and folded over at the very edge, so a line of type running under a tab
+# bar kinks as it reaches the curve. A page in a browser cannot do that to what is behind it (the
+# one way is an SVG filter in backdrop-filter, which Safari ignores), but a drawing can, because a
+# drawing knows what is under its glass: the screen's own content, drawn a second time inside the
+# glass's outline and pushed through a displacement map shaped like the glass. That works in every
+# browser, which is why it is done here rather than in CSS. Jett asked for the bend on October 4,
+# 2026, after the glass had been "a frosted fill, a bright rim and a soft cast" since September.
+
+LENS_BEZEL = 18.0   # how far in from the rim the bend reaches
+LENS_PULL = 18.0    # how far the rim reaches inward for what it shows; past half the bezel it folds
+LENS_SCALE = 2      # map pixels per point; the bend is smooth, so two is plenty
+
+
+def png(w, h, rgb_rows):
+    """A PNG from rows of RGB bytes, with nothing but the standard library."""
+    def chunk(kind, data):
+        return (struct.pack(">I", len(data)) + kind + data
+                + struct.pack(">I", zlib.crc32(kind + data) & 0xFFFFFFFF))
+    raw = b"".join(b"\x00" + row for row in rgb_rows)
+    return (b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", w, h, 8, 2, 0, 0, 0))
+            + chunk(b"IDAT", zlib.compress(raw, 9)) + chunk(b"IEND", b""))
+
+
+def lens_map(w, h, r):
+    """The displacement map for a w by h rounded rectangle of corner r, as a data URI: red and
+    green are how far across and down to look for what shows at each point, 0.5 being nowhere.
+    Inside the bezel the look is along the inward normal, strongest at the rim and fading as the
+    square of the distance in, which is the slope of a convex edge."""
+    mw, mh = int(round(w * LENS_SCALE)), int(round(h * LENS_SCALE))
+    hx, hy = w / 2.0, h / 2.0
+    rows = []
+    for j in range(mh):
+        y = (j + 0.5) / LENS_SCALE
+        row = bytearray()
+        for i in range(mw):
+            x = (i + 0.5) / LENS_SCALE
+            qx, qy = abs(x - hx) - (hx - r), abs(y - hy) - (hy - r)
+            sx, sy = (1 if x >= hx else -1), (1 if y >= hy else -1)
+            if qx > 0 and qy > 0:
+                ln = math.hypot(qx, qy)
+                inside = r - ln
+                nx, ny = -sx * qx / ln, -sy * qy / ln
+            elif qx > qy:
+                inside, nx, ny = r - qx, -sx, 0.0
+            else:
+                inside, nx, ny = r - qy, 0.0, -sy
+            t = inside / LENS_BEZEL
+            m = LENS_PULL * (1 - t) ** 2 if 0 <= t < 1 else 0.0
+            row += bytes((int(round(255 * (0.5 + nx * m / (2 * LENS_PULL)))),
+                          int(round(255 * (0.5 + ny * m / (2 * LENS_PULL)))), 128))
+        rows.append(bytes(row))
+    return "data:image/png;base64," + base64.b64encode(png(mw, mh, rows)).decode()
+
+
+def lens(under, x, y, w, h, r):
+    """The bend: `under` (the id of the content the glass lies on) drawn again inside the glass's
+    outline, bent at the rim, lightly frosted and a little richer, the way Liquid Glass shows what
+    it covers. Drawn under the glass's own fill, which thins it to glass."""
+    key = "lens-%s-%s-%s-%s-%s" % (f(x), f(y), f(w), f(h), f(r))
+    box = 'x="%s" y="%s" width="%s" height="%s"' % (f(x), f(y), f(w), f(h))
+    fid = doc_def(key, lambda i: (
+        '<filter id="%s" filterUnits="userSpaceOnUse" %s color-interpolation-filters="sRGB">'
+        '<feImage href="%s" %s preserveAspectRatio="none" result="map"/>'
+        '<feDisplacementMap in="SourceGraphic" in2="map" scale="%s" xChannelSelector="R"'
+        ' yChannelSelector="G" result="bent"/>'
+        '<feGaussianBlur in="bent" stdDeviation="1.4"/>'
+        '<feColorMatrix type="saturate" values="1.4"/></filter>'
+        % (i, box, lens_map(w, h, r), box, f(2 * LENS_PULL))))
+    cid = doc_def(key + "-clip", lambda i: (
+        '<clipPath id="%s">%s</clipPath>' % (i, rect(x, y, w, h, r, "#000"))))
+    return ('<g clip-path="url(#%s)"><use href="#%s" filter="url(#%s)"/></g>' % (cid, under, fid))
 
 
 # ── the Ember faces, lifted from the app's own marks ──────────────────────────────────────
@@ -378,6 +456,7 @@ FACES = {
     "ember":  dict(hi="#F0AB80", mid="#E28D5E", lo="#C36A3D", eyes="pill", extra="peak"),
     "teal":   dict(hi="#63B2A9", mid="#3E9A92", lo="#2E7C75", eyes="round", extra="glasses"),
     "gold":   dict(hi="#D3A855", mid="#BB8C33", lo="#9A7226", eyes="pill", extra="antenna"),
+    "plum":   dict(hi="#B48CD9", mid="#996FBE", lo="#7B549E", eyes="round", extra="peak"),
 }
 # The app's window onto the drawing (`FRAME` in ember-gen.ts), and how far a face wearing
 # something on its head sits lower in it (`TOPPED_DROP`).
@@ -509,8 +588,12 @@ def status_bar(clock="7:00"):
 
 
 def glass_circle(cx, cy, r):
-    """A bar button (barbtn glass): a 44 circle of frosted glass with a bright rim."""
-    return (circle(cx, cy, r, "var(--glass)", extra=' filter="url(#%s)"' % glass_shadow())
+    """A bar button (barbtn glass): a 44 circle of glass with a bright rim. The cast is thrown by
+    a disc of the page's ground under the glass rather than by the glass, which is half clear and
+    would show its own shadow through itself. Nothing reaches it to bend: the bar it sits in
+    paints its own ground, in the app as here."""
+    return (circle(cx, cy, r, "var(--bg)", extra=' filter="url(#%s)"' % glass_shadow())
+            + circle(cx, cy, r, "var(--glass)")
             + circle(cx, cy, r - 0.25, "none", "var(--glass-rim)", 0.5)
             + circle(cx, cy, r + 0.375, "none", "var(--glass-edge)", 0.75))
 
@@ -544,16 +627,19 @@ AGENT_TABS = [("Dashboard", "grid"), ("Chat", "bubble"), ("Skills", "sparkles"),
               ("Routines", "clockfill"), ("More", "morefill")]
 
 
-def tab_bar(tabs, active, marked=None):
+def tab_bar(tabs, active, marked=None, under=None):
     """The tab bar as iOS 26 draws it (FloatingTabs): a 62 capsule of glass 21 off the bottom,
     a filled symbol over a 10 point word, the chosen tab in the accent over a gray lens and the
     rest in the ink. `marked` puts the green dot on a tab's symbol, which says something is in
-    flight behind it."""
+    flight behind it. `under` is the id of what the bar lies over, when anything reaches it, and
+    draws the bend at its rim (lens)."""
     x0, w = MARGIN, W - 2 * MARGIN
     cell = (w - 8) / len(tabs)
     at = [t for t, _ in tabs].index(active)
-    o = [rect(x0, TABBAR_Y, w, TABBAR_H, TABBAR_H / 2, "var(--glass)",
+    o = [rect(x0, TABBAR_Y, w, TABBAR_H, TABBAR_H / 2, "var(--bg)",
               extra=' filter="url(#%s)"' % glass_shadow()),
+         lens(under, x0, TABBAR_Y, w, TABBAR_H, TABBAR_H / 2) if under else "",
+         rect(x0, TABBAR_Y, w, TABBAR_H, TABBAR_H / 2, "var(--glass)"),
          rect(x0 + 0.25, TABBAR_Y + 0.25, w - 0.5, TABBAR_H - 0.5, TABBAR_H / 2 - 0.25, "none", "var(--glass-rim)", 0.5),
          rect(x0 - 0.375, TABBAR_Y - 0.375, w + 0.75, TABBAR_H + 0.75, TABBAR_H / 2 + 0.375, "none", "var(--glass-edge)", 0.75),
          rect(x0 + 4 + at * cell, TABBAR_Y + 4, cell, 54, 27, "var(--lens)")]
@@ -605,6 +691,12 @@ AGENTS = [
          said="The car insurance expires in three weeks. Worth looking at now rather than later.",
          when="9 hours ago", skills=1, routines=2),
 ]
+# The list goes on past the bottom of the screen, the way a list of four does on a phone, so the
+# fourth card runs under the tab bar and the bar has something to bend at its rim (lens). It is
+# the only thing on the three screens that reaches the glass, and it is there for that reason.
+UNDER_BAR = dict(name="Errands", kind="plum", running=False,
+                 said="Your library books are due Thursday. I set a reminder for Wednesday evening.",
+                 when="2 days ago", skills=1, routines=1)
 
 
 def count(n, word):
@@ -623,7 +715,11 @@ def screen_agents():
     right = W - 2 * MARGIN
     inner = W - 4 * MARGIN
     name_x = 2 * MARGIN + 44 + 12
-    for a in AGENTS:
+    for n, a in enumerate(AGENTS + [UNDER_BAR]):
+        if n == len(AGENTS):
+            # y is the last card's foot and the 12 after it, which is the least room left over the
+            # bar: the three that are read end above it, and only the one after them runs under.
+            assert y <= TABBAR_Y, "the agent cards run under the tab bar: drop a line from one"
         # The first agent is the one the next two screens are inside, so its count is read off
         # the skills screen rather than typed twice. A specialist counts as a skill, the way the
         # app counts one (madeOf in Agents.tsx), so Writer makes it five.
@@ -653,10 +749,9 @@ def screen_agents():
         c.append(text(2 * MARGIN + pw + 8, baseline(py + 0.5, 20, 13), meta, 13, "var(--muted)"))
         o.append("".join(c))
         y += ch + 12
-    # y is the last card's foot and the 12 after it, which is the least room left over the bar
-    assert y <= TABBAR_Y, "the agent cards run under the tab bar: drop a line from one"
-    o.append(tab_bar(APP_TABS, "Agents"))
-    return "".join(o)
+    under = uid("under")
+    return ('<g id="%s">%s</g>' % (under, "".join(o))
+            + tab_bar(APP_TABS, "Agents", under=under))
 
 
 # ── screen 2: the conversation, and what a draft offers ──────────────────────────────────
@@ -1013,7 +1108,7 @@ LIGHT = {"bg": "#F5F1EB", "card": "#FFFFFF", "text": "#44403B", "text2": "#615C5
          "green": "#416934", "green-sub": "rgba(103,155,85,0.16)", "green-hue": "#679B55",
          "green-fill": "#46723A", "red-fill": "#A8463B", "on-fill": "#FFFFFF",
          "gold": "#7D5C1B", "gold-hue": "#BB8C33", "soft": "rgba(120,112,100,0.13)",
-         "lens": "rgba(68,64,59,0.08)", "glass": "rgba(252,250,246,0.8)",
+         "lens": "rgba(68,64,59,0.08)", "glass": "rgba(252,250,246,0.5)",
          "glass-rim": "rgba(255,255,255,0.95)", "glass-edge": "rgba(68,64,59,0.24)",
          "glass-cast": "rgba(42,37,33,0.08)", "face-ground": "#FBE4D3", "t-skills": "#C0673A",
          "status-ink": "#000000"}
@@ -1022,7 +1117,7 @@ DARK = {"bg": "#1A1A19", "card": "#2B2B29", "text": "#F3F0ED", "text2": "#AEACA6
         "green": "#8FBF7C", "green-sub": "rgba(143,191,124,0.16)", "green-hue": "#8FBF7C",
         "green-fill": "#4E7440", "red-fill": "#B0503F", "on-fill": "#FFFFFF",
         "gold": "#DCAF57", "gold-hue": "#DCAF57", "soft": "rgba(243,240,237,0.1)",
-        "lens": "rgba(243,240,237,0.12)", "glass": "rgba(62,62,60,0.8)",
+        "lens": "rgba(243,240,237,0.12)", "glass": "rgba(62,62,60,0.55)",
         "glass-rim": "rgba(255,255,255,0.16)", "glass-edge": "rgba(0,0,0,0.55)",
         "glass-cast": "rgba(0,0,0,0.45)", "face-ground": "#453629", "t-skills": "#C0673A",
         "status-ink": "#FFFFFF"}

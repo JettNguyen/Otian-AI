@@ -56,7 +56,9 @@ def main():
     for rel, html in sorted(pages.items()):
         base = os.path.dirname(rel)
         for href in sorted(set(HREF.findall(html))):
-            if href.startswith(("http://", "https://", "mailto:", "tel:", "#", "javascript:")):
+            # data: is a picture carried inside the page (the phone mockups' glass bends what is
+            # under it through one), not an address anything has to answer at.
+            if href.startswith(("http://", "https://", "mailto:", "tel:", "#", "javascript:", "data:")):
                 continue
             path = href.split("#")[0].split("?")[0]
             if not path:

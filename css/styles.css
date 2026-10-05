@@ -13805,8 +13805,22 @@ html[data-theme="dark"] .booking-container iframe {
   border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
 }
 
+/* WIDER THAN THE HEADING ABOVE IT, AND BULLETS (2026-10-05). The band sat in the homepage's 680
+   column, which made each card 163 wide inside its padding, so a one-sentence card ran to six lines.
+   Jack, after three reference sites: big headers and nothing longer than two lines under them, in
+   short bullets. So the three cards stand 960 wide, past the heading's measure on both sides, and
+   each card's sentence is a ticked list in the pricing page's own tick (.plan-list). Same facts, same
+   figures from FACTS.md; the definition of a job and the Mobile limitation stay on the free card. */
+.day-price .hm-plans { margin-inline: min(0px, calc((100% - min(960px, 100vw - 48px)) / 2)); }
+.hm-plan .hm-plan-points { margin: 2px 0 0; gap: 7px; }
+.hm-plan .hm-plan-points li { font-size: var(--fs-sm); line-height: 1.45; padding-left: 23px; }
+.hm-plan .hm-plan-points li::before { width: 14px; height: 14px; top: 0.12em; }
+.hm-plan .hm-plan-points + p { margin-top: 12px; }
+.day-price .hm-plan-note--alt { max-width: 100ch; }
+
 @media (max-width: 860px) {
   .hm-plans { grid-template-columns: 1fr; gap: 14px; }
+  .day-price .hm-plans { margin-inline: 0; }
   /* Stacked, the lead card is no longer in the middle, so the border is doing nothing but
      making one card look different for no reason a phone reader can see. The order is what
      carries the emphasis instead: the plan people buy is already second. */

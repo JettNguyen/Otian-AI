@@ -17652,7 +17652,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      day, and the Mac and the iPhone are one style, so the two objects on the stage agree. */
   --bg: #F5F1EB; --bg2: #FFFFFF; --card: #FFFFFF; --accent: #A95425; --accent-sub: #FBE4D3; --accent-strong: #984C21;
   --text: #44403B; --text2: #615C55; --muted: #6C655E; --on-accent: #FFFFFF; --border: #E3DED6;
-  --line: rgba(68, 64, 59, 0.16); --soft: rgba(120, 112, 100, 0.13);
+  --line: rgba(68, 64, 59, 0.16); --soft: rgba(120, 112, 100, 0.13); --bar: #ECE6DC;
   --green: #416934; --green-sub: rgba(103, 155, 85, 0.16); --green-hue: #679B55; --gold: #7D5C1B; --gold-sub: rgba(187, 140, 51, 0.18); --gold-hue: #BB8C33;
   --teal: #2B6B65; --teal-sub: rgba(62, 154, 146, 0.14); --hair: 0.5px;
   /* The gray an answer sits on, and the soft rule between answers (answerRule in src/ui.tsx). */
@@ -17693,7 +17693,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 [data-theme="dark"] .dp-ph {
   --bg: #1A1A19; --bg2: #2B2B29; --card: #2B2B29; --accent: #EDA277; --accent-sub: #453629; --accent-strong: #F0B18D;
   --text: #FFFFFF; --text2: #AEACA6; --muted: #A6A29C; --on-accent: #292624; --border: #3F3E3A;
-  --line: rgba(243, 240, 237, 0.14); --soft: rgba(243, 240, 237, 0.1);
+  --line: rgba(243, 240, 237, 0.14); --soft: rgba(243, 240, 237, 0.1); --bar: #242423;
   --green: #8FBF7C; --green-sub: rgba(143, 191, 124, 0.16); --green-hue: #8FBF7C; --gold: #DCAF57; --gold-sub: rgba(220, 175, 87, 0.16); --gold-hue: #DCAF57;
   --teal: #6FC4BC; --teal-sub: rgba(111, 196, 188, 0.16);
   /* The gray and the rule mix the app's own ink, not the lifted white above, so they stay the app's. */
@@ -17721,6 +17721,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-barbtn { width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: var(--text); background: var(--glass); box-shadow: inset 0 1px 0 var(--glass-rim), inset 0 0 0 .5px var(--glass-rim), 0 0 0 .75px var(--glass-edge), var(--lift-phone-glass); }
 .dp-barbtn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .dp-bartitle { font-family: Georgia, "Times New Roman", serif; font-size: var(--fs-2xl); line-height: 22px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* chevron.down after the name, which the app draws once there is more than one agent to switch to. */
+.dp-chev { width: 14px; height: 14px; flex: none; fill: none; stroke: var(--muted); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 .dp-facewrap { position: relative; flex: none; display: block; }
 .dp-face { border-radius: 50%; overflow: hidden; background: var(--accent-sub); flex: none; display: block; }
 .dp-face.s30 { width: 30px; height: 30px; }
@@ -17762,6 +17764,16 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .dp-md b { font-weight: 700; }
 .dp-md svg { display: inline-block; width: 1.02em; height: 1.02em; vertical-align: -.14em; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .dp-stamp { font-size: var(--fs-xs); line-height: 16px; color: var(--muted); }
+/* A stamp stands at the foot of a run. The app drops it from a message when the one under it reads
+   the same (Chat.tsx), and the app's words are "just now" and "8 minutes ago", never a clock time
+   (when.ts). data-run marks a message whose next one reads the same, and its stamp goes once that
+   one is on screen, by whichever switch shows it in that scene. */
+.dp-scr > [data-run]:has(~ :is(.dp-said, .dp-mine).day-beat.is-on) > .dp-stamp,
+.dp-scr.is-pressed > [data-run]:has(~ .dp-sent) > .dp-stamp,
+.dp-scr.is-done > [data-run]:has(~ .dp-after) > .dp-stamp,
+.dp-scr > [data-run]:has(~ .pd-card.is-in) > .dp-stamp,
+.bz-scene.is-live .dp-scr > [data-run]:has(~ .bz-msg.is-in) > .dp-stamp,
+.bz-scene:not(.is-live) .dp-scr > [data-run] > .dp-stamp { display: none; }
 /* The answers to a card (InlineActions), as a rounded bar along its bottom, like an alert's buttons:
    set 10 in from the card's sides and bottom, 14 round, with soft rules between cells each filled
    and its words colored by what it answers. A yes is a green wash with heavier words, a change a
@@ -17885,6 +17897,7 @@ button.dp-act { cursor: pointer; }
 .dp-after { display: none; }
 .dp-scr.is-done .dp-after { display: flex; }
 .dp-scr.is-done p.dp-after { display: block; }
+.dp-scr.is-done span.dp-after { display: inline; }
 .dp-scr.is-done .dp-before { display: none; }
 /* THE PRESS AND THE ANSWER ARE TWO THINGS, and on the calendar screen they are two messages
    (2026-09-22). A card that edits itself in place has one state to show, so is-done carries the
@@ -17909,13 +17922,23 @@ button.dp-act { cursor: pointer; }
    trick as .dp-fold, and for the same reason, which is that nothing here knows how tall it comes
    out. See .dp-ph.is-page, where it is used. Every composer on the site holds exactly one .line,
    so this lays out the same as the flex column it replaced. */
-/* The message box sits on the page itself, the way Messages sets its field on the conversation. */
-.dp-composer { background: var(--bg); padding: 12px 12px 42px; display: grid; grid-template-rows: 1fr; overflow: hidden; position: relative; z-index: 2; }
+/* The bar is a shade off the page with a hairline along its top, and the white box stands on that
+   (bgBar in theme.ts, Chat.tsx). It sat on the page itself, the way Messages does it, until the app
+   changed on 2026-10-05: Jett found the box "read as part of the chat rather than a separate place". */
+.dp-composer { background: var(--bar); border-top: var(--hair) solid var(--line); padding: 12px 12px 42px; display: grid; grid-template-rows: 1fr; overflow: hidden; position: relative; z-index: 2; }
 .dp-composer .line { min-height: 0; display: flex; align-items: flex-end; gap: 8px; }
 .dp-knob { width: 44px; height: 44px; border-radius: 22px; background: var(--soft); display: flex; align-items: center; justify-content: center; flex: none; color: var(--muted); font-size: var(--fs-4xl); line-height: 26px; }
 /* Gray on an empty box and lit once there is something in it to send, as the iPhone draws it. */
 .dp-knob.hot { font-weight: 700; }
 .dp-ph.is-typed .dp-knob.hot { background: var(--accent); color: var(--on-accent); }
+/* With nothing typed the end of the bar is the microphone, for a voice note, where the computer can
+   turn speech into words (Chat.tsx), and the arrow comes up with the first character. The app puts
+   Talk out loud beside the microphone too; that screen is in no release of the phone app, so
+   TRUST.md keeps it off every drawing of the phone. */
+.dp-knob svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.dp-knob .k-up { display: none; }
+.dp-ph.is-typed .dp-knob.hot .k-mic { display: none; }
+.dp-ph.is-typed .dp-knob.hot .k-up { display: inline; }
 .dp-msgbox { flex: 1; min-width: 0; background: var(--card); border-radius: 20px; padding: 11px 16px; font-size: var(--fs-xl); line-height: 22px; color: var(--muted); }
 /* The typed yes of the calendar act: js/home.js turns it on once the proposal has landed and off
    again when it is sent, and the send knob is a real button only then.
@@ -19192,6 +19215,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .pd-card.is-done .dp-fold > .dp-actions { opacity: 0; pointer-events: none; }
 .pd-card.is-done .dp-after { display: flex; }
 .pd-card.is-done p.dp-after { display: block; }
+.pd-card.is-done span.dp-after { display: inline; }
 .pd-card.is-done .dp-before { display: none; }
 .pd-figure figcaption { margin-top: 14px; text-align: center; font-size: var(--fs-sm); color: var(--text-muted); }
 @media (prefers-reduced-motion: no-preference) {

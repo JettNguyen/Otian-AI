@@ -337,6 +337,7 @@ SYMBOLS = {
         for x in ("7.6", "9.8", "12", "14.2", "16.4")[:xs]) + "</g>",
     "card": '<rect x="2.6" y="5" width="18.8" height="14" rx="2.6" fill="currentColor" mask="url(#{m:card})"/>',
     "pencil": '<path d="M4.9 19.1l.9-3.5L16 5.4c.7-.7 1.8-.7 2.5 0l.1.1c.7.7.7 1.8 0 2.5L8.4 18.2z" fill="currentColor" mask="url(#{m:pencil})"/>',
+    "mic": '<g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3.3" width="6" height="11.4" rx="3"/><path d="M5.9 11.3c0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1M12 17.4v3.3"/></g>',
     "plus": '<path d="M12 5.2v13.6M5.2 12h13.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
     "hammer": '<g fill="currentColor" transform="rotate(45 12 12)"><rect x="10.85" y="9.2" width="2.3" height="12.4" rx="1.15"/><path d="M8.3 3.6h8.2c.6 0 1.1.5 1.1 1.1v2.8c0 .6-.5 1.1-1.1 1.1H9.9L6.6 7.2c-.6-.2-.6-1 0-1.2z"/></g>',
     # the buttons and the bars
@@ -951,8 +952,13 @@ def screen_chat():
         "chat thread runs to %.0f and the composer starts at %.0f: shorten a message "
         "or drop one" % (y + TRANSCRIPT_PAD, COMPOSER_Y))
 
-    # the message box, on the page itself the way Messages sets its field on the conversation:
-    # a gray knob for attaching, the box, and a gray knob with the arrow, quiet while it is empty
+    # the message bar, a shade off the page with a hairline along its top, running on down behind
+    # the tab bar (bgBar in theme.ts, Chat.tsx, since 2026-10-05): a gray knob for attaching, the
+    # box, and the microphone, which is what an empty box ends in where the computer can turn
+    # speech into words. The arrow comes up once there is something typed. The app puts Talk out
+    # loud beside the microphone too, and TRUST.md keeps it off the phone until it is in a release.
+    o.append(rect(0, COMPOSER_Y, W, H - COMPOSER_Y, 0, "var(--bar)"))
+    o.append(rect(0, COMPOSER_Y, W, 0.5, 0, "var(--line)"))
     ky = COMPOSER_Y + 12
     o.append(circle(12 + 22, ky + 22, 22, "var(--soft)"))
     o.append(sym("plus", 12 + 11, ky + 11, 22, "var(--text2)"))
@@ -960,7 +966,7 @@ def screen_chat():
     o.append(rect(bx, ky, bw, 44, 20, "var(--card)"))
     o.append(text(bx + 16, baseline(ky + 11, 22, 17), "Message " + AGENT_NAME, 17, "var(--muted)"))
     o.append(circle(W - 12 - 22, ky + 22, 22, "var(--soft)"))
-    o.append(sym("arrowup", W - 12 - 33, ky + 11, 22, "var(--muted)"))
+    o.append(sym("mic", W - 12 - 33, ky + 11, 22, "var(--muted)"))
     o.append(top_bar(AGENT_NAME, "ember"))
     o.append(status_bar())
     # The draft is a job waiting on you, which is something in flight, so Dashboard wears the dot.
@@ -1111,7 +1117,7 @@ LIGHT = {"bg": "#F5F1EB", "card": "#FFFFFF", "text": "#44403B", "text2": "#615C5
          "lens": "rgba(68,64,59,0.08)", "glass": "rgba(252,250,246,0.5)",
          "glass-rim": "rgba(255,255,255,0.95)", "glass-edge": "rgba(68,64,59,0.24)",
          "glass-cast": "rgba(42,37,33,0.08)", "face-ground": "#FBE4D3", "t-skills": "#C0673A",
-         "status-ink": "#000000"}
+         "status-ink": "#000000", "bar": "#ECE6DC", "line": "rgba(68,64,59,0.16)"}
 DARK = {"bg": "#1A1A19", "card": "#2B2B29", "text": "#F3F0ED", "text2": "#AEACA6", "muted": "#A6A29C",
         "accent": "#EDA277", "accent-sub": "#453629", "accent-strong": "#F0B18D",
         "green": "#8FBF7C", "green-sub": "rgba(143,191,124,0.16)", "green-hue": "#8FBF7C",
@@ -1120,7 +1126,7 @@ DARK = {"bg": "#1A1A19", "card": "#2B2B29", "text": "#F3F0ED", "text2": "#AEACA6
         "lens": "rgba(243,240,237,0.12)", "glass": "rgba(62,62,60,0.55)",
         "glass-rim": "rgba(255,255,255,0.16)", "glass-edge": "rgba(0,0,0,0.55)",
         "glass-cast": "rgba(0,0,0,0.45)", "face-ground": "#453629", "t-skills": "#C0673A",
-        "status-ink": "#FFFFFF"}
+        "status-ink": "#FFFFFF", "bar": "#242423", "line": "rgba(243,240,237,0.14)"}
 # The metal around the stills' screens, which is the site's phone and not the app's.
 SHELL_LIGHT = {"shell": "#2E2C29", "shell-hi": "#5A5753", "shell-lo": "#171614", "edge": "rgba(255,255,255,.18)"}
 SHELL_DARK = {"shell": "#3A3936", "shell-hi": "#6E6B66", "shell-lo": "#1A1918", "edge": "rgba(255,255,255,.22)"}

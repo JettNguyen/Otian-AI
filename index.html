@@ -78,7 +78,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261005-13" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261005-14" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -672,7 +672,7 @@
                     <div class="side"><span class="dp-barbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></span></div>
                     <div class="mid">
                       <span class="dp-facewrap"><span class="dp-face s30"><span data-ember="terracotta.peak.pill.none"></span></span><span class="dot"></span></span>
-                      <span class="dp-bartitle">Ember</span>
+                      <span class="dp-bartitle">Ember</span><svg class="dp-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9.5 6 6 6-6"/></svg>
                     </div>
                     <div class="side right"></div>
                   </div>
@@ -681,21 +681,21 @@
                     <div class="dp-scr is-on" data-scr="0">
                       <div class="hm-dinner-stack">
                         <div class="hm-dinner-job is-on" data-dinner-job="0"><div class="dp-said">
-                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>.</p><p>Can we move the roof estimate to Friday?</p><p><b>Draft reply</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
+                          <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from Sam<br><i>Can we move the roof estimate to Friday?</i></p><p><b>Draft reply</b> (to Sam):<br>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
                             <div class="dp-act go"><span class="lbl-ic"><span class="em">&#9989;</span><span>Send</span></span></div>
                             <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                             <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                             <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                           </div></div></div>
-                          <p class="dp-stamp">7:00 PM</p>
+                          <p class="dp-stamp">2 minutes ago</p>
                         </div></div>
                         <div class="hm-dinner-job" data-dinner-job="1"><div class="dp-said">
                           <div class="dp-bub theirs"><div class="dp-md"><p><b>Bill Reminders</b></p><p>Your electric bill is due Monday, in three days.</p><p>It isn&rsquo;t on autopay.</p></div></div>
-                          <p class="dp-stamp">7:00 PM</p>
+                          <p class="dp-stamp">18 minutes ago</p>
                         </div></div>
                         <div class="hm-dinner-job" data-dinner-job="2"><div class="dp-said">
                           <div class="dp-bub theirs"><div class="dp-md"><p><b>Return Window Watch</b></p><p>You have one week left to return the shoes.</p><p>The return window closes next Friday.</p></div></div>
-                          <p class="dp-stamp">7:00 PM</p>
+                          <p class="dp-stamp">31 minutes ago</p>
                         </div></div>
                       </div>
                     </div>
@@ -720,21 +720,21 @@
                          the instant the knob is pressed; dp-waiting is the agent working, the same
                          row as the first one; dp-after is the answer. -->
                     <div class="dp-scr dp-scr--grow" data-scr="1">
-                      <div class="dp-mine day-beat" data-act="1" data-at="0.077">
+                      <div class="dp-mine day-beat" data-act="1" data-at="0.077" data-run>
                         <div class="dp-bub yours"><div class="dp-md"><p>Can you move my 3 o&rsquo;clock to Thursday?</p></div></div>
-                        <p class="dp-stamp">9:12 AM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
                       <div class="dp-thinking day-beat" data-act="1" data-at="0.231" data-until="0.385">
                         <span class="t">Ember is working</span>
                         <span class="dp-dots"><i></i><i></i><i></i></span>
                       </div>
-                      <div class="dp-said day-beat" data-act="1" data-at="0.385">
+                      <div class="dp-said day-beat" data-act="1" data-at="0.385" data-run>
                         <div class="dp-bub theirs"><div class="dp-md"><p>Thursday at 10:00 AM is open. Move the dentist there?</p></div></div>
-                        <p class="dp-stamp">9:12 AM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
-                      <div class="dp-mine dp-sent">
+                      <div class="dp-mine dp-sent" data-run>
                         <div class="dp-bub yours"><div class="dp-md"><p>Yes, that works.</p></div></div>
-                        <p class="dp-stamp">9:13 AM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
                       <div class="dp-thinking dp-waiting">
                         <span class="t">Ember is working</span>
@@ -742,7 +742,7 @@
                       </div>
                       <div class="dp-said dp-after">
                         <div class="dp-bub theirs"><div class="dp-md"><p>Moved. Thursday, 10:00 AM.</p></div></div>
-                        <p class="dp-stamp">9:13 AM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
                     </div>
 
@@ -775,14 +775,14 @@
                              and the time were given beats of their own and he saw it). The beats
                              in the other screens are messages, which do arrive one after another;
                              this is one message with a control row and a time on it. -->
-                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from <i>Sam</i>. <i>Can we move the roof estimate to Friday?</i></p><p class="dp-before"><b>Draft reply</b> (to Sam):</p><p class="dp-after">&#9989; <b>Sent</b> (to Sam):</p><p>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
+                        <div class="dp-bub theirs"><div class="dp-md"><p><svg aria-hidden="true"><use href="#g-mail"/></svg> <b>New email</b> from Sam<br><i>Can we move the roof estimate to Friday?</i></p><p><span class="dp-before"><b>Draft reply</b> (to Sam):</span><span class="dp-after">&#9989; <b>Sent</b> (to Sam):</span><br>Friday works. I&rsquo;ll be home from 10:00 on.</p></div><div class="dp-fold"><div class="dp-actions two">
                           <button type="button" class="dp-act go" data-press="send"><span class="lbl-ic"><span class="em">&#9989;</span><span class="dp-spin" aria-hidden="true"></span><span>Send</span></span></button>
                           <div class="dp-act amend"><span class="lbl-ic"><span class="em">&#9999;&#65039;</span><span>Edit it</span></span></div>
                           <div class="dp-act plain"><span class="lbl-ic"><span class="em">&#9200;</span><span>Send later</span></span></div>
                           <div class="dp-act quiet"><span class="lbl-ic"><span class="em">&#10005;</span><span>Dismiss</span></span></div>
                         </div></div></div>
                         
-                        <p class="dp-stamp">1:40 PM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
                       <!-- The computer's answer to the press, over the screen, in its own words. Played by
                            the stylesheet on is-noticed, which js/home.js adds only when a press settles
@@ -842,7 +842,7 @@
                     <div class="dp-scr" data-scr="6">
                       <div class="dp-said day-beat" data-act="6" data-at="0.111">
                         <div class="dp-bub theirs"><div class="dp-md"><p><b>Overnight.</b></p><ul><li class="day-beat" data-act="6" data-at="0.333"><span>Return window on the monitor closes today. Draft ready.</span></li><li class="day-beat" data-act="6" data-at="0.556"><span>Internet bill Thursday, on your list.</span></li></ul><p class="day-beat" data-act="6" data-at="0.778">Nothing else needs you.</p></div></div>
-                        <p class="dp-stamp">7:00 AM</p>
+                        <p class="dp-stamp">just now</p>
                       </div>
                     </div>
 
@@ -868,7 +868,7 @@
                        the yes sits typed in the box once the proposal lands and the send knob is the
                        real button. The scroll types it a character at a time, off the whole sentence
                        here, so this is still what a reader with reduced motion and a crawler get. -->
-                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="typed">Yes, that works.</span><i class="dp-caret"></i><span class="ph">Message Ember</span></div><button type="button" class="dp-knob hot" data-press="confirm">&uarr;</button></div></div>
+                  <div class="dp-composer"><div class="line"><div class="dp-knob">+</div><div class="dp-msgbox"><span class="typed">Yes, that works.</span><i class="dp-caret"></i><span class="ph">Message Ember</span></div><button type="button" class="dp-knob hot" data-press="confirm"><svg class="k-mic" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3.3" width="6" height="11.4" rx="3"/><path d="M5.9 11.3c0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1M12 17.4v3.3"/></svg><span class="k-up">&uarr;</span></button></div></div>
                 </div>
               </div>
               <!-- The hero brings Ember beside the draft, larger and closer to the phone.
@@ -1901,11 +1901,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261005-13"></script>
-  <script src="js/ember.js?v=20261005-13" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261005-13"></script>
-  <script src="js/home.js?v=20261005-13" defer></script>
-  <script src="js/hero-dinner.js?v=20261005-13" defer></script>
+  <script src="js/nav.js?v=20261005-14"></script>
+  <script src="js/ember.js?v=20261005-14" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261005-14"></script>
+  <script src="js/home.js?v=20261005-14" defer></script>
+  <script src="js/hero-dinner.js?v=20261005-14" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

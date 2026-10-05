@@ -78,7 +78,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261005-8" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261005-9" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -280,10 +280,17 @@
              the reader's scroll is what brings it up and takes it away. Sliced to cover, so it
              reads as a sky at any shape of screen instead of a grid that reflows. -->
         <!-- The day's clouds (2026-10-05), drawn in dots after trajectory.ai, one of the three sites
-             Jack picked to borrow from. scripts/gen-stipple.py says where the dots go; the colour is
-             each act's hour, from SKY in js/home.js. Behind the stars, so the night sky stands in
-             front of its own clouds. -->
-        <div class="day-stipple" aria-hidden="true"><i class="day-stipple-shade"></i><i class="day-stipple-lit"></i></div>
+             Jack picked to borrow from. Objects rather than one picture: a bank along the foot that
+             slides forever and three high clouds that drift, so the sky is alive at rest and stays on
+             screen at any width (Jett's first look). scripts/gen-stipple.py draws the dots; the
+             colour is each act's hour, from SKY in js/home.js. Behind the stars, so the night sky
+             stands in front of its own clouds. -->
+        <div class="day-stipple" aria-hidden="true">
+          <div class="day-cloud day-cloud--a"><div class="day-cloud-in"><i class="sk-shade"></i><i class="sk-lit"></i></div></div>
+          <div class="day-cloud day-cloud--b"><div class="day-cloud-in"><i class="sk-shade"></i><i class="sk-lit"></i></div></div>
+          <div class="day-cloud day-cloud--c"><div class="day-cloud-in"><i class="sk-shade"></i><i class="sk-lit"></i></div></div>
+          <div class="day-bank"><div class="day-bank-strip"><i class="sk-shade"></i><i class="sk-lit"></i></div></div>
+        </div>
         <div class="day-sky" aria-hidden="true">
           <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
             <!-- Two depths, so the field swims rather than slides: the small stars are the far
@@ -1880,11 +1887,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261005-8"></script>
-  <script src="js/ember.js?v=20261005-8" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261005-8"></script>
-  <script src="js/home.js?v=20261005-8" defer></script>
-  <script src="js/hero-dinner.js?v=20261005-8" defer></script>
+  <script src="js/nav.js?v=20261005-9"></script>
+  <script src="js/ember.js?v=20261005-9" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261005-9"></script>
+  <script src="js/home.js?v=20261005-9" defer></script>
+  <script src="js/hero-dinner.js?v=20261005-9" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

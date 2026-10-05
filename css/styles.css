@@ -16750,23 +16750,73 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-sky circle { fill: #F3F0ED; }
 
 /* ---- the clouds: the hour, in dots ---- */
-/* A bank of clouds along the foot of the stage and two small ones high up, drawn in dots, coloured by
-   the hour on the act's clock (2026-10-05). Jack picked trajectory.ai as one of three sites to borrow
-   from, and what it owns is that texture; this stage already runs a day with a clock on every act, so
-   the clouds are where the hour shows: peach over lavender at 7:00 pm, gold at 9:12, moonlit grey at
-   2:00 am. Their only motion is the colour, and the colour moves only with the scroll that turns the
-   clock, which is what lets it stand on a page where motion has to carry a claim.
+/* A bank of clouds along the foot of the stage and three small ones high up, drawn in dots, coloured
+   by the hour on the act's clock (2026-10-05). Jack picked trajectory.ai as one of three sites to
+   borrow from, and what it owns is that texture; this stage already runs a day with a clock on every
+   act, so the clouds are where the hour shows: peach over lavender at 7:00 pm, gold at 9:12, moonlit
+   grey at 2:00 am. js/home.js writes the colours from SKY, eased between acts like every other pose
+   value, with a palette for each theme.
 
-   Two masks from scripts/gen-stipple.py, each painted one flat colour: the dots on top of each cloud
-   are --sky-lit and the ones underneath --sky-shade, so one pair of files is every hour of the day.
-   js/home.js writes the three properties from SKY, eased between acts like every other pose value,
-   with a palette for each theme. Unprefixed mask properties only: the -webkit- pair beside them made
-   Chrome draw nothing at all. Off under reduced motion, like the stars, because the acts stand in a
-   stack there and there is no hour to follow. */
-.day-stipple { --sky-lit: #F0A57C; --sky-shade: #A99BD8; --sky-o: .62; position: absolute; inset: 0; pointer-events: none; opacity: var(--sky-o); }
-.day-stipple i { position: absolute; inset: 0; mask-size: cover; mask-position: center bottom; mask-repeat: no-repeat; }
-.day-stipple-lit { background: var(--sky-lit); mask-image: url("../assets/stipple-lit.png"); }
-.day-stipple-shade { background: var(--sky-shade); mask-image: url("../assets/stipple-shade.png"); }
+   OBJECTS, NOT A PICTURE, AND THEY MOVE. The first version was one stage-sized image, and Jett's
+   first look the same day found both of its faults: covering a wide window cropped it from the top,
+   so the high cloud left the screen, and it "feels a bit too stagnant/static". So each cloud is its
+   own box, placed off the menu bar and the stage's own width, and each moves: the bank slides left
+   forever (a strip of four tiles that steps back by exactly one, 1440 wide as scripts/gen-stipple.py
+   draws it, so the loop has no seam), every high cloud drifts on a loop of its own length, and the
+   scroll carries all of them a little further (--sky-p, the story's progress), so the day passing
+   moves the sky too. Like the stars, this is motion Jett asked for in his own words and not motion
+   carrying a claim, and it runs at the speed his star note sets: fast enough that somebody who stops
+   and looks for a few seconds sees it go. Transforms only, on boxes whose masks never change, so it
+   is the compositor's work and not a repaint.
+
+   Two masks per shape, each painted one flat colour: the dots on top of a cloud are --sky-lit and
+   the ones underneath --sky-shade. Unprefixed mask properties only: the -webkit- pair beside them
+   made Chrome draw nothing at all. Off under reduced motion, like the stars, because the acts stand
+   in a stack there and there is no hour to follow. */
+.day-stipple { --sky-lit: #F0A57C; --sky-shade: #A99BD8; --sky-o: .62; --sky-p: 0; position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: var(--sky-o); }
+.day-stipple i { position: absolute; inset: 0; mask-repeat: no-repeat; mask-size: 100% 100%; }
+.day-stipple .sk-lit { background: var(--sky-lit); }
+.day-stipple .sk-shade { background: var(--sky-shade); }
+
+/* The tile is drawn 1440 by 210 and shown at --bank-h tall, so --bank-w is one tile at that height and
+   the strip slides by exactly that. The bank stands lower under the scene than at the edges, by a
+   fade on the box that holds it, because in the middle it is only seen through the window. */
+.day-bank { --bank-h: 168px; --bank-w: calc(var(--bank-h) * 1440 / 210); position: absolute; left: 0; bottom: 0; width: 100%; height: var(--bank-h); translate: calc(var(--sky-p) * -360px) 0;
+  mask-image: linear-gradient(90deg, rgb(0 0 0 / .8), rgb(0 0 0 / .8) 24%, rgb(0 0 0 / .38) 46%, rgb(0 0 0 / .38) 66%, #000 90%); }
+.day-bank-strip { position: absolute; left: 0; bottom: 0; width: calc(var(--bank-w) * 4); height: 100%; }
+.day-bank-strip i { mask-repeat: repeat-x; mask-size: var(--bank-w) 100%; mask-position: left bottom; }
+.day-bank .sk-lit { mask-image: url("../assets/stipple-bank-lit.png"); }
+.day-bank .sk-shade { mask-image: url("../assets/stipple-bank-shade.png"); }
+
+.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 110; translate: calc(var(--sky-p) * 260px) 0; }
+.day-cloud-in { position: absolute; inset: 0; }
+.day-cloud .sk-lit { mask-image: url("../assets/stipple-cloud-lit.png"); }
+.day-cloud .sk-shade { mask-image: url("../assets/stipple-cloud-shade.png"); }
+/* Over the caption column, in the gap between the menu and the first line; over the window's top
+   edge, smaller and so further away; and off the right edge beside the phone, turned round. */
+.day-cloud--a { left: 13%; top: calc(var(--nav-height) + 6px); }
+.day-cloud--b { left: 55%; top: var(--nav-height); width: 170px; }
+.day-cloud--c { right: -70px; top: 41%; width: 230px; }
+.day-cloud--c i { transform: scaleX(-1); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .day-bank-strip { animation: day-bank 150s linear infinite; }
+  .day-cloud-in { animation: day-cloud 19s ease-in-out infinite alternate; }
+  .day-cloud--b .day-cloud-in { animation-duration: 26s; animation-delay: -9s; }
+  .day-cloud--c .day-cloud-in { animation-duration: 23s; animation-delay: -15s; }
+}
+@keyframes day-bank { to { transform: translateX(calc(-1 * var(--bank-w))); } }
+@keyframes day-cloud { from { transform: translateX(-48px); } to { transform: translateX(48px); } }
+
+/* A phone's stage is the scene over a caption band, and the band is where the bank stands, so the
+   bank is lower there and the high clouds, which would only stand behind the phone, are not drawn. */
+@media (max-width: 970px) {
+  .day-bank { --bank-h: 110px; mask-image: none; }
+  .day-cloud { display: none; }
+}
+@media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
+  .day-bank-strip { animation-duration: 110s; }
+}
 @media (prefers-reduced-motion: reduce) { .day-stipple { display: none; } }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -19702,7 +19752,56 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   outline-offset: 2px;
 }
 
-.uc-panels { margin-top: 28px; }
+/* THE PANEL STANDS ON A FIELD, AND THE FIELD REPAINTS WITH THE CHIP (2026-10-05). From usecontour.ai,
+   one of three sites Jack picked to borrow from, where each tab over the product swaps the screen and
+   repaints the ground under it in that tab's own colour, so a change of tab reads at a glance before a
+   word of it is read. Here the ground takes one of six tints, one per chip, and carries the homepage's
+   cloud bank along its foot in that tint: the same two dot masks scripts/gen-stipple.py draws for the
+   day, so the texture is the brand's and not this section's. The list stays the white card it was.
+   Pure CSS like the rest of the picker, so both edition pages change together and stay mirrored; the
+   business page uses the first four tints. No window chrome around the card, because the list is
+   the site's summary of three add-ons and not a screen the app draws. */
+.uc-panels {
+  --uc-ground: #F6E4D7; --uc-lit: #E9A27C; --uc-shade: #C38DA6;
+  margin-top: 28px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 18px;
+  padding: 28px 28px 96px;
+  background: var(--uc-ground);
+}
+.uc-panels::before, .uc-panels::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  mask-size: auto 128px;
+  mask-position: left bottom;
+  mask-repeat: repeat-x;
+}
+.uc-panels::before { background: var(--uc-shade); mask-image: url("../assets/stipple-bank-shade.png"); opacity: .7; }
+.uc-panels::after { background: var(--uc-lit); mask-image: url("../assets/stipple-bank-lit.png"); opacity: .9; }
+#uc-2:checked ~ .uc-panels { --uc-ground: #F4EBD3; --uc-lit: #E2B65C; --uc-shade: #CF9C7E; }
+#uc-3:checked ~ .uc-panels { --uc-ground: #EEE6F2; --uc-lit: #B9A2D8; --uc-shade: #D59DB0; }
+#uc-4:checked ~ .uc-panels { --uc-ground: #E0EEEA; --uc-lit: #86C1B6; --uc-shade: #8AA6C0; }
+#uc-5:checked ~ .uc-panels { --uc-ground: #E8ECDC; --uc-lit: #B3C488; --uc-shade: #99AE9D; }
+#uc-6:checked ~ .uc-panels { --uc-ground: #E2E9F3; --uc-lit: #99B5DC; --uc-shade: #A79ED1; }
+[data-theme="dark"] .uc-panels { --uc-ground: #2E2521; --uc-lit: #8E5E46; --uc-shade: #5E4A5E; }
+[data-theme="dark"] #uc-2:checked ~ .uc-panels { --uc-ground: #2D2A20; --uc-lit: #87703F; --uc-shade: #6E5244; }
+[data-theme="dark"] #uc-3:checked ~ .uc-panels { --uc-ground: #29252F; --uc-lit: #64587E; --uc-shade: #6C4C5A; }
+[data-theme="dark"] #uc-4:checked ~ .uc-panels { --uc-ground: #1F2B29; --uc-lit: #426F67; --uc-shade: #415468; }
+[data-theme="dark"] #uc-5:checked ~ .uc-panels { --uc-ground: #252A20; --uc-lit: #637048; --uc-shade: #4B5C4F; }
+[data-theme="dark"] #uc-6:checked ~ .uc-panels { --uc-ground: #20262F; --uc-lit: #4E6587; --uc-shade: #574E7A; }
+.uc-panels .uc-panel { box-shadow: var(--lift-sm); }
+@media (prefers-reduced-motion: no-preference) {
+  .uc-panels, .uc-panels::before, .uc-panels::after { transition: background-color .45s ease; }
+}
+@media (max-width: 640px) {
+  .uc-panels { padding: 16px 16px 64px; border-radius: 14px; }
+  .uc-panels::before, .uc-panels::after { mask-size: auto 84px; }
+}
 
 /* Hidden rather than removed: the markup carries all twelve either way, and `display: none` is
    what keeps a hidden panel out of the tab order and out of a screen reader's path. */

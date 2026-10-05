@@ -1025,6 +1025,8 @@
       }
 
       var settle = i === 0 ? 1 : smooth(t / SETTLE);
+      /* The clouds drift on their own loops, and the day passing carries them a little further. */
+      if (sky && !still) styleValue(sky, '--sky-p', p.toFixed(4));
       fit(p > 0);
       var pose;
       if (still) pose = poseOf(0);

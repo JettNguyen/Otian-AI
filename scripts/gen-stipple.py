@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the homepage sky's clouds into assets/: two masks of dots, stipple-lit.png and stipple-shade.png.
+"""Draw the homepage sky's clouds into assets/ as masks of dots: a bank that tiles, and one high cloud.
 
 WHY STIPPLE. On 2026-10-05 Jack picked trajectory.ai as one of three sites to borrow from, and the
 thing that site owns is a texture: every cloud on it is drawn in dots. The homepage already runs one
@@ -7,20 +7,24 @@ day, with a clock on each act (7:00 pm, 9:12 am, 1:40 pm, 4:15 pm, 2:00 am, 7:00
 clouds take their colour from that clock: dusk is peach over lavender, the small hours are moonlit
 grey, the morning is gold. The colour is CSS and js/home.js; this script only says where the dots go.
 
-WHY TWO MASKS AND NOT ONE PICTURE. A cloud is lit from above and shaded underneath, so every dot is
-drawn into one of two masks, by how high it sits in its own cloud: the top of a cloud is mostly lit
-dots and the base mostly shaded ones, with the two mixed in between. Each mask is painted one flat
-colour by the stylesheet (`.day-stipple`), so the same dots can be any hour of the day without a
-second file.
+WHY OBJECTS AND NOT ONE PICTURE. The first version drew the whole sky as one stage-sized image, and
+Jett's first look found both of its faults on the same day: covering a wide window cropped the image
+from the top, so the high cloud left the screen, and a picture of a sky "feels a bit too stagnant".
+So the bank is a strip that repeats sideways without a seam, which the stylesheet slides along
+forever, and the high cloud is one small image the stylesheet places and drifts as often as it likes.
+
+WHY TWO MASKS PER SHAPE. A cloud is lit from above and shaded underneath, so every dot is drawn into
+one of two masks by how high it sits in its cloud. Each mask is painted one flat colour by the
+stylesheet (`.day-stipple`), so the same dots can be any hour of the day without another file.
 
 WHY 1-BIT. The dots are on or off, so each mask is a two-entry palette PNG with the first entry
-transparent: about 30KB each at twice the 1440 by 900 stage they are drawn for. Anti-aliased dots
-in an alpha channel came to six times that and looked no different once the browser scaled them.
+transparent, drawn at twice the size it is shown. Anti-aliased dots in an alpha channel came to six
+times the bytes and looked no different once the browser scaled them.
 
 Deterministic: fixed seeds, so a rerun writes the same bytes and a diff means the shapes changed.
 
 Usage:
-  python3 scripts/gen-stipple.py            rewrite both masks
+  python3 scripts/gen-stipple.py            rewrite the masks
   python3 scripts/gen-stipple.py --check    exit 1 if the committed masks differ from a fresh draw
 """
 
@@ -33,13 +37,14 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = {"lit": ROOT / "assets" / "stipple-lit.png", "shade": ROOT / "assets" / "stipple-shade.png"}
+ASSETS = ROOT / "assets"
+X2 = 2            # drawn at twice the CSS size it is shown at
+STEP, R = 2.5, 1.0  # in CSS pixels: a jittered grid of cells, a dot of about this radius per filled cell
 
-# Twice the stage's design size, so a dot stays crisp on a 2x screen. The stylesheet covers the
-# stage with it from the bottom edge, so the bank always sits on the floor of the screen.
-W, H = 2880, 1800
-ASP = W / H
-STEP, R = 5, 2.0   # a jittered grid of 5px cells, a dot of about 2px radius in each cell it fills
+# THE SIZES THE STYLESHEET ASSUMES. `.day-bank` tiles the bank mask at 1440 by 210 and slides it by
+# exactly one tile, and `.day-cloud` keeps the cloud's 360 by 110 shape. Change one here, change it there.
+BANK_W, BANK_H = 1440, 210
+CLOUD_W, CLOUD_H = 360, 110
 
 
 def smooth(a, b, x):
@@ -47,67 +52,64 @@ def smooth(a, b, x):
     return t * t * (3 - 2 * t)
 
 
-def bank():
-    """Puffs along the bottom edge, rising higher toward the sides than in the middle, where the
-    scene stands and a tall cloud would only be hidden behind it."""
+def bank_puffs():
+    """Two rows of puffs across one tile, in CSS pixels, with tops between about 70 and 150 above
+    the foot. Placed on a circle of the tile's width, so the strip has no seam where it repeats."""
     rnd = random.Random(3)
-    puffs, x = [], -0.05
-    while x < 1.06:
-        side = abs(x - 0.55) / 0.55
-        r = 0.04 + 0.045 * side + rnd.random() * 0.025
-        top = 0.975 - 0.12 * side ** 1.3 - rnd.random() * 0.03
+    puffs, x = [], 0.0
+    while x < BANK_W:
+        r = 44 + rnd.random() * 38
+        top = 62 + rnd.random() * 78
         puffs.append((x, top + r, r))
-        puffs.append((x + r * 0.6, top + r * 1.9, r * 1.25))
-        x += r * 1.15
-    return {"puffs": puffs, "base": 1.2}
+        puffs.append((x + r * 0.7, top + r * 1.9, r * 1.3))
+        x += r * 1.25
+    return puffs
 
 
-def cloud(cx, cy, s):
-    """A small high cloud: a row of puffs, biggest in the middle, cut flat along its base."""
-    shape = [(-0.075, 0.006, 0.026), (-0.045, -0.006, 0.034), (-0.012, -0.02, 0.042), (0.028, -0.016, 0.04),
-             (0.062, -0.002, 0.03), (0.088, 0.008, 0.02), (0.0, 0.008, 0.036), (-0.035, 0.012, 0.03), (0.045, 0.012, 0.028)]
-    return {"puffs": [(cx + px * s, cy + py * s, pr * s) for px, py, pr in shape], "base": cy + 0.02 * s}
+def cloud_puffs():
+    """One high cloud in CSS pixels: a crown of big puffs over a row of small ones, cut flat along
+    CLOUD_BASE so it has the level underside a fair-weather cloud has."""
+    return [(70, 80, 22), (100, 66, 32), (140, 52, 40), (185, 48, 44), (228, 58, 36), (262, 72, 26),
+            (292, 82, 16), (120, 82, 26), (165, 80, 30), (210, 82, 28), (245, 84, 22)]
 
 
-# The bank, one cloud in the gap between the menu and the caption column's first line, and one
-# standing off the right edge beside the phone. Neither crosses a caption or the window.
-CLOUDS = [bank(), cloud(0.255, 0.125, 0.9), cloud(0.985, 0.43, 0.85)]
-for c in CLOUDS:
-    c["top"] = min(cy - r for _, cy, r in c["puffs"])
-    # Lit from the top of the cloud down to its base, or the bottom of the screen if the base is
-    # below it, so the part of the bank anybody sees still has a shaded underside.
-    c["bottom"] = min(c["base"], max(cy + r for _, cy, r in c["puffs"]), 1.0)
+CLOUD_BASE = 92
 
 
-def sample(u, v):
-    """How likely a dot is here, and how likely that dot is lit."""
-    best, lit = 0.0, 0.0
-    for c in CLOUDS:
-        if v > c["base"]:
-            continue
-        for cx, cy, r in c["puffs"]:
-            d = math.hypot((u - cx) * ASP, v - cy) / r
-            if d < 1 and 1 - d > best:
-                best = 1 - d
-                height = smooth(c["bottom"], c["top"], v)            # 0 at the base, 1 at the top
-                ridge = smooth(0.2, -0.8, (v - cy) / r)              # each puff's own crown
-                lit = 0.05 + 0.75 * height + 0.2 * ridge
-    if best <= 0:
-        return 0.0, 0.0
-    return 0.9 * smooth(0.0, 0.45, best) ** 1.3, min(1.0, lit)
-
-
-def draw():
-    rnd = random.Random(19)
-    masks = {k: Image.new("P", (W, H), 0) for k in OUT}
+def draw(w, h, puffs, base, wrap, seed, dense):
+    top = min(cy - r for _, cy, r in puffs)
+    foot = min(base, h)
+    rnd = random.Random(seed)
+    masks = {k: Image.new("P", (w * X2, h * X2), 0) for k in ("lit", "shade")}
     pens = {k: ImageDraw.Draw(m) for k, m in masks.items()}
-    for gy in range(0, H, STEP):
-        for gx in range(0, W, STEP):
+    gy = 0.0
+    while gy < h:
+        gx = 0.0
+        while gx < w:
             x, y = gx + rnd.random() * STEP, gy + rnd.random() * STEP
-            dens, lit = sample(x / W, y / H)
-            if dens and rnd.random() < dens:
-                r = R * (0.75 + rnd.random() * 0.5)
-                pens["lit" if rnd.random() < lit else "shade"].ellipse((x - r, y - r, x + r, y + r), fill=1)
+            best, lit = 0.0, 0.0
+            if y <= base:
+                for cx, cy, r in puffs:
+                    dx = abs(x - cx)
+                    if wrap:
+                        dx = min(dx, w - dx)
+                    d = math.hypot(dx, y - cy) / r
+                    if d < 1 and 1 - d > best:
+                        best = 1 - d
+                        height = smooth(foot, top, y)                 # 0 at the foot, 1 at the top
+                        crown = smooth(0.2, -0.8, (y - cy) / r)       # each puff's own crown
+                        lit = 0.05 + 0.75 * height + 0.2 * crown
+            if best > 0 and rnd.random() < dense * smooth(0.0, 0.45, best) ** 1.3:
+                rr = R * X2 * (0.75 + rnd.random() * 0.5)
+                px, py = x * X2, y * X2
+                kind = "lit" if rnd.random() < lit else "shade"
+                pens[kind].ellipse((px - rr, py - rr, px + rr, py + rr), fill=1)
+                if wrap and px < rr:            # a dot across the seam is drawn on both edges
+                    pens[kind].ellipse((px + w * X2 - rr, py - rr, px + w * X2 + rr, py + rr), fill=1)
+                if wrap and px > w * X2 - rr:
+                    pens[kind].ellipse((px - w * X2 - rr, py - rr, px - w * X2 + rr, py + rr), fill=1)
+            gx += STEP
+        gy += STEP
     out = {}
     for k, m in masks.items():
         m.putpalette([0, 0, 0, 255, 255, 255])
@@ -117,18 +119,27 @@ def draw():
     return out
 
 
+def all_masks():
+    # The bank is thinner than the cloud: it is a hundred and more pixels of solid body along
+    # the foot of every act, and at the cloud's density it read as a wall rather than a sky.
+    bank = draw(BANK_W, BANK_H, bank_puffs(), BANK_H + 40, True, 19, 0.72)
+    cloud = draw(CLOUD_W, CLOUD_H, cloud_puffs(), CLOUD_BASE, False, 23, 0.9)
+    return {ASSETS / "stipple-bank-lit.png": bank["lit"], ASSETS / "stipple-bank-shade.png": bank["shade"],
+            ASSETS / "stipple-cloud-lit.png": cloud["lit"], ASSETS / "stipple-cloud-shade.png": cloud["shade"]}
+
+
 def main():
-    fresh = draw()
+    fresh = all_masks()
     if "--check" in sys.argv:
-        stale = [k for k, b in fresh.items() if not OUT[k].exists() or OUT[k].read_bytes() != b]
+        stale = [p for p, b in fresh.items() if not p.exists() or p.read_bytes() != b]
         if stale:
-            print("gen-stipple: out of date: " + ", ".join(str(OUT[k].relative_to(ROOT)) for k in stale))
+            print("gen-stipple: out of date: " + ", ".join(str(p.relative_to(ROOT)) for p in stale))
             sys.exit(1)
         print("gen-stipple: clean.")
         return
-    for k, b in fresh.items():
-        OUT[k].write_bytes(b)
-        print(f"gen-stipple: wrote {OUT[k].relative_to(ROOT)} ({len(b) // 1024} KB)")
+    for p, b in fresh.items():
+        p.write_bytes(b)
+        print(f"gen-stipple: wrote {p.relative_to(ROOT)} ({len(b) // 1024} KB)")
 
 
 if __name__ == "__main__":

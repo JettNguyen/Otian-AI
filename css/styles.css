@@ -20887,6 +20887,20 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .day-stage.is-driven .hm-evening-slot:not(.is-on) > .hm-evening { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
   .day-stage.is-driven .day-cap[data-act="0"] .hm-actions { margin-top: 26px; }
 }
+/* NARROW, IT STANDS ABOVE THE MOCKUPS TOO (Jett, the same evening: "the dinner section should be on
+   top of the mockups in mobile view too", and nothing should "sneak up into the header"). The hero
+   hides the clock badge, so its row was empty and the scene slid up over half of it, which put the
+   window's top under the menu. Now the hero gives that row the card's own height and 12 more
+   (--dn-row, from js/home.js), the scene stays in its row, and the card stands in the row above it
+   (--dn-y, in its caption's own pixels). It still leaves with the mockups when the details open,
+   because it is still that beat. */
+@media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
+  .day-stage.is-driven.is-hero { grid-template-rows: var(--dn-row, auto) minmax(0, 1fr) auto; }
+  .day-stage.is-driven.is-hero .day-scene-wrap { transform: none; }
+  .day-stage.is-driven .hm-evening-slot { margin: 0; padding: 0; }
+  .day-stage.is-driven .day-cap[data-act="0"] .hm-evening-slot.day-beat:not(.is-on) { margin-top: 0; }
+  .day-stage.is-driven .hm-evening { position: absolute; left: 50%; top: var(--dn-y, 0px); translate: -50% 0; margin: 0; }
+}
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }
 /* The line under the button and the three promises under it (2026-10-05). Both were small gray
    type, the promises one run of middle dots, and together they read as the small print a reader

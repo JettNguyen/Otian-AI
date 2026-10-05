@@ -211,8 +211,8 @@
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var sky = $('.day-stipple');
-    /* Wide, the dinner card is drawn above the window, so the fit tells it where the window is. */
-    var dinner = $('.hm-evening'), capsBox = $('.day-caps');
+    /* The dinner card is drawn above the mockups, so the fit tells it where they are. */
+    var dinner = $('.hm-evening');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
@@ -332,7 +332,7 @@
          sends the card away early in the act, and the window rises into the band after it. */
       { mark: 'm-hero', state: 'idle', clock: '7:00 pm', phone: '7:00', scr: 0,
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: copy(W2, { x: -175, y: 66, s: .86, o: .35 }), phone: copy(PH2, { x: 156, y: 24, ry: -6, s: .94 }), night: 0, fc: 0, fs: 0 },
-        narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
+        narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: copy(NW2, { y: -110 }), phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '9:12 am', phone: '9:12', scr: 1,
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
@@ -663,10 +663,12 @@
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var reach = (narrow || still) ? null : reachOf(wr);
-      /* Where the hero's window stands, for the dinner card: see .hm-evening's wide rule in the
-         stylesheet. Read with the other rects, written with --sc below. */
-      var dn = (!narrow && !still && cur === 0 && dinner && capsBox)
-        ? [win.getBoundingClientRect(), capsBox.getBoundingClientRect(), dinner.offsetHeight, phone.getBoundingClientRect()] : null;
+      /* Where the hero's window and phone stand, for the dinner card, and the box it is placed in,
+         which is its own caption: see .hm-evening's two rules in the stylesheet. Read with the
+         other rects, written with --sc below. */
+      var dnBox = dinner && dinner.offsetParent;
+      var dn = (!still && cur === 0 && dnBox)
+        ? [win.getBoundingClientRect(), dnBox.getBoundingClientRect(), dinner.offsetHeight, phone.getBoundingClientRect()] : null;
       lastWrapH = wr.height;
       /* Read here, with the two rects, and written below with --sc: everything this frame reads
          is read before anything is written, or the browser lays the page out twice per frame. The
@@ -725,10 +727,16 @@
       /* Its left edge on the window's, its foot 16 above the window's top but never higher than 6
          under the menu (on a tall screen the window stands well down and the drawing goes with
          it), and no wider than the room before the phone, which just over 970 is all it needs. */
-      if (dn) {
+      if (dn && !narrow) {
         styleValue(stage, '--dn-x', Math.round(dn[0].left - dn[1].left) + 'px');
         styleValue(stage, '--dn-y', Math.max(6, Math.round(dn[0].top - dn[1].top - 16 - dn[2])) + 'px');
         styleValue(stage, '--dn-w', Math.floor(dn[3].left - dn[0].left - 10) + 'px');
+      }
+      /* Narrow it has the clock's row, which the hero leaves empty: the row is the card's height
+         and 12 under it, and the card stands in it, so the scene's row starts below both. */
+      if (dn && narrow) {
+        styleValue(stage, '--dn-row', (dn[2] + 12) + 'px');
+        styleValue(stage, '--dn-y', Math.round(wr.top - 12 - dn[2] - dn[1].top) + 'px');
       }
     }
 

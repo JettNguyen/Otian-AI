@@ -10,9 +10,9 @@ Yours to shape & yours to keep. Never ours.
 [![Live site](https://img.shields.io/badge/otianai.com-live-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com)
 [![Deploy](https://img.shields.io/github/actions/workflow/status/JettNguyen/Otian-AI/deploy.yml?branch=main&style=flat-square&label=pages%20deploy&labelColor=2A211C&color=E08A5B)](https://github.com/JettNguyen/Otian-AI/actions/workflows/deploy.yml)
 [![Build step](https://img.shields.io/badge/build_step-none-8C7A6B?style=flat-square&labelColor=2A211C)](#running-the-site-locally)
-[![Archie](https://img.shields.io/badge/Archie-in_testing-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com/archie/#status)
+[![Archie](https://img.shields.io/badge/Archie-in_beta-E08A5B?style=flat-square&labelColor=2A211C)](https://otianai.com/archie/personal/#status)
 
-[**otianai.com**](https://otianai.com) · [What Is Archie?](https://otianai.com/archie/) · [Add-ons](https://otianai.com/skills-marketplace/browse/) · [Pricing](https://otianai.com/archie/pricing/) · [Trust](https://otianai.com/trust/)
+[**otianai.com**](https://otianai.com) · [What Is Archie?](https://otianai.com/archie/personal/) · [Add-ons](https://otianai.com/skills-marketplace/browse/) · [Pricing](https://otianai.com/archie/pricing/) · [Trust](https://otianai.com/trust/)
 
 </div>
 
@@ -27,9 +27,8 @@ chat apps you already use.
 No terminal. No code. No middleman. No ceiling.
 
 > [!NOTE]
-> **Archie is in testing.** Nothing on the site is for sale yet, and the marketplace opens with
-> Archie's launch. The prices below are the ones it will launch with, told now so there are no
-> surprises later. [See where it stands](https://otianai.com/archie/#status).
+> **Archie is in beta on Mac and Windows.** Anyone can download it and start free at 20 jobs a
+> day on their own AI account, and plans are on sale. [Download Archie](https://otianai.com/archie/install/).
 
 ### A chatbot answers. An agent works.
 

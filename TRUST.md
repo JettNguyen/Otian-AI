@@ -5311,8 +5311,9 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
   read a number at its source (ChatGPT's prices, assistant wages), the page says so in prose
   and the `Sources` fold carries an unnumbered entry explaining the omission. Never invent a
   citation to fill the pattern.
-- The availability sentence and the `archie/#status` link appear on every one of these pages,
-  same as everywhere else.
+- The availability sentence ("Archie is in beta.") appears on every one of these pages as
+  fine print, same as everywhere else. Since 2026-10-05 it carries no "Where it stands" link:
+  Jett read the link and the box it opened as a warning.
 
 ### The table
 

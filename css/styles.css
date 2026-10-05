@@ -2527,6 +2527,14 @@ summary,
   color: var(--text-muted);
 }
 
+/* Fine print for what is not out yet, so a beta line reads as a footnote and not a warning
+   (Jett, 2026-10-05). */
+.page-hero p.page-hero-fine {
+  margin-top: 14px;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
 .page-hero p {
   font-size: var(--fs-2xl);
 }
@@ -20416,12 +20424,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    screen. With no script and no OS detected the resting state is both platforms for the checked
    edition, which is the honest default and what a crawler sees. */
 .install-testing {
-  margin: 0 0 20px;
-  font-size: var(--fs-sm);
-  line-height: 1.6;
-  color: var(--text-secondary);
+  margin: 4px 0 0;
+  font-size: var(--fs-2xs);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--text-muted);
 }
-.install-testing strong { color: var(--text-primary); }
 .install-ed-in { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); border: 0; white-space: nowrap; }
 .install-ed-wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; margin: 32px 0 0; }
 .install-ed-lead { font-size: var(--fs-sm); color: var(--text-muted); font-weight: 600; }

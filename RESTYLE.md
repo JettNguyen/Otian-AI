@@ -65,10 +65,11 @@ One scale each, and a component is either on the scale or it is a documented exc
   idiom and the card radius would make them read as cards.
 - **Type roles.** Georgia serif for display headings and stat numerals; Inter for
   everything else; uppercase 650-weight letterspaced for labels and stamps. No new pairings.
-- **Availability wording.** The canonical sentence is
-  "Archie is in testing and not for sale yet." followed by a "See where it stands"
-  link to `archie/#status`, which stays the single home of the underlying facts. No page
-  restates platform detail, and no page invents a variant phrasing.
+- **Availability wording.** The canonical sentence is "Archie is in beta.", set as fine
+  print, with no link after it (2026-10-05: the "See where it stands" link and the tinted
+  box it pointed at read as a warning, and Jett asked for anything not out yet to be short
+  fine print). `archie/personal/#status` keeps the platform detail under its Download
+  button. No other page restates platform detail, and no page invents a variant phrasing.
 - **Closing CTA.** Every page closes on the quiet `hm-cta` band
   (`.hm-wrap.hm-head.hm-cta`: serif h2, button or `.hm-actions` pair, `.hm-micro` line),
   never the old `.cta-banner` card. The one place `.cta-banner` legitimately survives is

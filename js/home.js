@@ -596,11 +596,51 @@
       var q = Math.round(capH) + 'px';
       if (capQ !== q) { capsEl.style.height = q; capQ = q; }
     }
+    /* THE OBJECTS STAY OUT OF THE CAPTIONS' COLUMN (2026-10-05). The fit sizes a 760 by 560 box,
+       and the objects do not stay inside it: the hero's window stands at x -155, so its left edge
+       reaches 435 units from the middle with the pointer to the right and 408 with it to the
+       left, against the box's 380, and the 100px spill lets the box itself cross the gap. From
+       about 1440 wide down the window ran under the hero's paragraph, the 4:15 pm chips and,
+       fading, the custody act's chips (Jett: "the text on the left slightly overlaps the
+       mockups"). Every pose and the tilt move that reach, so it is read rather than typed: the
+       two objects' projected boxes as the last frame left them, in design units.
+
+       A SLIDE FIRST, A SHRINK ONLY WHEN THE SLIDE RUNS OUT OF ROOM. The scene moves right until
+       its leftmost object stands at the wrap's own left edge, which is the captions' column plus
+       the grid's gap, and the scale comes down only if that would put the phone closer than EDGE
+       to the stage's right edge. The slide is `translate` on the wrap, after the projection, so it
+       changes nothing about how the scene is drawn and the reach it is worked out from does not
+       move with it. The clock and the hint are centered on the scene and ride the same slide. It
+       is written on those three and not as a variable on the stage, because a variable there is
+       inherited by every element of both mockups and the tilt can change it every frame (see
+       styleValue).
+
+       Weighted by the brighter object's opacity, which is the phone's: 1 in every act that shows
+       them, falling to 0 with them on the way into the two floors, which keep the box's own
+       framing. So the slide eases away over the scroll the objects fade over rather than snapping
+       once they are gone. And half a unit of slack, because the reach leans a little on the scale
+       through the perspective, and a number chasing its own output to the fourth decimal is a
+       scene that never rests (see `put`). Wide only: narrow has its own composition. */
+    var keepL = 0, keepR = 0, keepMoved = false, dxNow = 0;
+    var slid = [wrap, clock, $('.day-stage > .day-hint')].filter(Boolean);
+    function reachOf(wr) {
+      var cx = wr.left + wr.width / 2, L = 0, R = 0, o = 0;
+      [win, phone].forEach(function (el) {
+        var op = +el.style.opacity || 0;
+        if (op < 0.01) return;
+        var b = el.getBoundingClientRect();
+        L = Math.max(L, (cx - b.left) / SC);
+        R = Math.max(R, (b.right - cx) / SC);
+        o = Math.max(o, op);
+      });
+      return o ? { L: L, R: R, o: Math.min(1, o) } : null;
+    }
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+      var reach = (narrow || still) ? null : reachOf(wr);
       lastWrapH = wr.height;
       /* Read here, with the two rects, and written below with --sc: everything this frame reads
          is read before anything is written, or the browser lays the page out twice per frame. The
@@ -627,6 +667,21 @@
          what a gutter is. */
       scTarget = narrow ? clamp(Math.min((sr.width - EDGE * 2) / 400, wr.height / NARROW_H), 0.1, 1.45)
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
+      var dx = 0;
+      keepMoved = false;
+      if (reach) {
+        if (Math.abs(reach.L - keepL) > 0.5 || Math.abs(reach.R - keepR) > 0.5) { keepL = reach.L; keepR = reach.R; keepMoved = true; }
+        var cellL = wr.left - dxNow, cc = cellL + wr.width / 2, limR = sr.right - EDGE;
+        var scKeep = Math.min(scTarget, (limR - cellL) / (keepL + keepR));
+        var lo = cellL + keepL * scKeep - cc, hi = limR - keepR * scKeep - cc;
+        scTarget += (scKeep - scTarget) * reach.o;
+        dx = Math.min(Math.max(0, lo), hi) * reach.o;
+      }
+      dx = +dx.toFixed(1);
+      if (dx !== dxNow) {
+        dxNow = dx;
+        slid.forEach(function (el) { el.style.translate = dx ? dx + 'px 0' : ''; });
+      }
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the
          page open by growing into itself. That is not hypothetical. `setAct` returns early while
@@ -1145,7 +1200,7 @@
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
       else window.Ember.look(ember, null);
       if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
-      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || Math.abs(scTarget - SC) > 0.002;
+      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || Math.abs(scTarget - SC) > 0.002 || keepMoved;
       if (!still && r.bottom > 0 && (now < settleUntil || easing)) dayRaf = requestAnimationFrame(frame);
     }
     window.addEventListener('scroll', wake, { passive: true });

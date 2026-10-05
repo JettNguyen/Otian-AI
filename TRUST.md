@@ -4789,7 +4789,67 @@ action on a draft card, not a model capability — and the chat adapters now car
 buttons for exactly this flow (`telegram.rs:672-729,917-925`). The sequencing constraint the
 07-15 entry demanded (gate lands fail-closed before send) was honored.
 
+### 🚧 An address your agent wrote itself waits for your yes, and a skill that searches holds only its task: BUILT 2026-10-05 (Archie `200982ab`, on main), not yet in a release
+
+Jett asked on 2026-10-05 whether the leak this file admits below could be prevented at all, and chose
+to close what can be closed. Nothing here is said in the present tense on the site until a release
+carries it, and until then the trust page's "Where we fall short" leak paragraph stays as it is.
+
+**Approved wording, once it ships:** "Your agent opens a web page on its own only when the address
+came from you, from a page it already opened, or from a site you named in your message. An address
+it came up with itself, it shows you first and waits for your yes." And: "A skill that searches the
+web is given only the task: none of your memory, your profile, your files or the rest of the chat.
+After your agent has read an email, a page or a file in a job, it asks you before handing a search to
+one."
+
+**Why it's true:**
+- **Where an address may come from.** `crates/archie-runtime/src/outbound.rs`, `TurnGuard`. It reads
+  addresses only from user-role messages (the agent's own replies are left out, and a late button
+  tap's quote of the agent's card is cut by `without_quoted_card`), from the final address and links
+  of each page opened (`connectors::web_fetch_for_turn`, `outbound::links_in_html`), and site names
+  written without `https://` only from the message a person typed this turn. `allows` compares a
+  tidied form of the address (`key`), so a trailing slash or `www.` does not change the answer.
+- **The three tools that open an address.** `gateway/outbound_gate.rs`, `opening_needs_yes`, runs in
+  `gateway/turn.rs`'s dispatch before `web_fetch`, before `screen_open` given an http(s) address, and
+  before `video_ingest` given one. An address it does not allow is held in `OutboundState`, per chat
+  and in memory only, and the reply carries Open it and Don't open it (`decide::outbound_choices`).
+  On a routine, with no `ConfirmCtx`, it is refused instead.
+- **The yes comes from a person.** `turn.rs` claims what is waiting only when `person_typed`, so a
+  watcher's wake can neither answer the question nor use it up. An unanswered question expires
+  after the next typed message, like every staged change.
+- **Search.** `gateway/tools_specialist.rs`, `isolated_system_prompt`: a searching skill's prompt is
+  built with no persona, profile, memory or knowledge list, and its one message is the task
+  (`search_on_its_own`), on the delegated path and on the direct route alike (`answer_from_the_web`,
+  the early return in `run_target_attributed`). `outbound_gate::search_needs_yes` holds a delegation
+  to a searching skill once the turn has read outside text: after any round whose tools are not
+  `remember`, `forget` or `offer_choices`, on a watcher's wake, and in a routine started by an
+  event's context (`outbound::STARTS_WITH_OUTSIDE_TEXT`).
+- **Tests:** `outbound::tests`, `gateway::outbound_gate::tests`, and
+  `tools_specialist::tests::a_searching_specialist_holds_nothing_of_the_persons`.
+
+**Boundaries:**
+- ⛔ **Never "your agent can't leak" or "prompt injection is solved".** Three ways remain, and any page
+  making the claim above names them in the same place: a note an injected instruction saved into
+  memory on an earlier turn can still steer a later turn that has read nothing; text typed into a
+  page that is already open goes wherever that page sends it; and an MCP server the owner connected
+  can have a fetch tool of its own.
+- ⛔ **"Came from you" is any address in your messages in this conversation**, plus any page on a site
+  you named in the message being answered. Never "only addresses you typed into this message".
+- ⚠️ **The agent judges whether your next message was a yes**, as it does for a calendar change; the
+  code makes it a later, separate message from a person. Never "the app checks that you said yes".
+- ⚠️ **A search still sends its words to the AI company's search service.** What changed is that the
+  words can only come from the task. Never "searches are private".
+- ⚠️ **What it costs the person, said wherever the claim is:** a page the agent wants to open on its
+  own judgment now asks first, and a follow-up to the Researcher needs its subject named, because it
+  no longer sees earlier messages.
+- A connected service's own requests (`http_request`) were already bound to that service's host and
+  are not part of this entry.
+
 ### ⛔ The gate does not stop exfiltration — never imply it does
+
+**Narrowed on Archie main on 2026-10-05, in no release yet:** see the entry above. This entry and the
+trust page's paragraph stay true and unchanged until a release carries that one, and the ways it does
+not cover stay here after it does.
 
 The gate stops **mutation**, not **leakage**. A prompt injection can still make the model issue
 an Anthropic server-side web search (`gateway.rs:2263`) or a `delegate_to_specialist` web-search call

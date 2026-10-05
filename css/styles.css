@@ -16813,7 +16813,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 /* Over the caption column, in the gap between the menu and the first line; over the window's top
    edge, smaller and so further away; and off the right edge beside the phone, turned round. */
 .day-cloud--a { left: 13%; top: calc(var(--nav-height) + 6px); }
-.day-cloud--b { left: 55%; top: var(--nav-height); width: 170px; }
+.day-cloud--b { left: 64%; top: var(--nav-height); width: 170px; }
 .day-cloud--c { right: -70px; top: 41%; width: 230px; }
 .day-cloud--c i { transform: scaleX(-1); }
 
@@ -20842,23 +20842,31 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .hm-evening .hm-dinner-note { margin-top: 2px; padding: 0 7px; }
 }
 .day-cap .hm-actions { margin-top: 14px; }
-/* WIDE, THE CARD STANDS OVER THE PHONE IT DRIVES (2026-10-05). Jett: move it "to the right side on
-   desktop views as a more minimal graphic on top of the mockups", which is Jack's two lines under
-   a heading too: the column keeps the headline, one line, the button and the fine print, and the
-   control floats beside the screen it changes, its right end over the phone's left edge and its
-   foot just above the message it picks. It stays in the caption's markup, so reading order, the
-   page without a script, a phone's layout and reduced motion are all as they were. js/home.js
-   reads where the glass and the message stand (--dn-x, --dn-y, in .day-caps' own pixels), because
-   the fit and the slide move the phone by different amounts at every screen size. The width is
-   set and not fitted, so a longer label opens into the card instead of moving its left edge. The
-   caption stands over the scene for this act alone, or the card is drawn behind the phone for the
-   half second the act fades; and the card fades with its caption instead of vanishing the moment
-   the act changes. */
+/* WIDE, THE CARD IS A HAIRLINE DRAWING ABOVE THE MOCKUPS (2026-10-05). Jett first asked for it "to
+   the right side on desktop views as a more minimal graphic on top of the mockups", and a glass
+   card laid over the window was not it: "a hairline type of graphic above the mockups". So no
+   ground, no box and no shadow: a line of small type, the three faces in hairline rings standing on
+   one hairline rule, and the tour's clock is that rule turning terracotta under the picked job. It
+   stands at the window's left edge and just above its top, which js/home.js measures (--dn-x,
+   --dn-y, in .day-caps' own pixels), and the hero's window stands a little lower and smaller than
+   it did to give it the room (ACTS[0] in js/home.js). It leaves after a short scroll, as it does on
+   a phone, because the window rises back into that room on the way to the next act. It stays in
+   the caption's markup, so reading order, the page without a script, a phone's layout and reduced
+   motion are as they were; and the caption stands over the scene for this act alone. */
 @media (min-width: 971px) and (prefers-reduced-motion: no-preference) {
   .day-stage.is-driven .day-cap[data-act="0"] { z-index: 3; }
-  .day-stage.is-driven:not(.is-hero) .hm-evening { display: grid; }
-  .day-stage.is-driven .hm-evening { position: absolute; left: calc(var(--dn-x, 0px) + 40px); top: calc(var(--dn-y, 0px) - 18px); translate: -100% -100%; width: 20.5rem; max-width: none; margin: 0; padding: 9px 8px 7px; border-color: color-mix(in srgb, var(--border) 70%, transparent); border-radius: 16px; background: color-mix(in srgb, var(--bg-card) 86%, transparent); -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3); box-shadow: var(--lift-md); }
-  .day-stage.is-driven .day-cap .hm-evening > .hm-dinner-head { margin-bottom: 4px; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); }
+  .day-stage.is-driven .hm-evening { --dinner-row: 32px; --dinner-face: 26px; --dinner-pad: 0px; position: absolute; left: var(--dn-x, 0px); top: var(--dn-y, 0px); grid-template-areas: "head pause" "list list"; column-gap: 12px; width: min(20rem, var(--dn-w, 20rem)); max-width: none; margin: 0; padding: 0; border: 0; border-radius: 0; background: none; transition: opacity .3s ease, visibility 0s; }
+  .day-stage.is-driven .hm-evening-slot:not(.is-on) > .hm-evening { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
+  .day-stage.is-driven .day-cap .hm-evening > .hm-dinner-head { margin: 0; padding: 0; font-size: var(--fs-xs); line-height: 1.2; font-weight: 600; letter-spacing: .02em; color: var(--text-muted); }
+  .day-stage.is-driven .hm-dinner-pause { width: 24px; height: 24px; background: none; box-shadow: inset 0 0 0 1px var(--border); }
+  .day-stage.is-driven .hm-dinner-pause:hover { background: none; box-shadow: inset 0 0 0 1px var(--text-muted); }
+  .day-stage.is-driven .hm-dinner-pause svg { width: 9px; height: 9px; }
+  .day-stage.is-driven .hm-dinner-list { gap: 10px; margin-top: 4px; border-bottom: 1px solid var(--border); }
+  .day-stage.is-driven .hm-dinner-pick .mp-face { box-shadow: inset 0 0 0 1px var(--border); }
+  .day-stage.is-driven .hm-dinner-pick[aria-pressed="true"] .mp-face { box-shadow: inset 0 0 0 1px var(--accent-line); }
+  .day-stage.is-driven .hm-dinner-pick[aria-pressed="true"] { padding-right: 0; }
+  .day-stage.is-driven .hm-dinner-bar { left: 0; right: 0; bottom: -1px; height: 1px; border-radius: 0; background: none; }
+  .day-stage.is-driven .hm-evening .hm-dinner-note { margin-top: 5px; padding: 0; line-height: 1.3; }
   .day-stage.is-driven .day-cap[data-act="0"] .hm-actions { margin-top: 26px; }
 }
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }

@@ -211,8 +211,8 @@
     var stage = $('.day-stage'), scene = $('.day-scene'), win = $('.day-win'), phone = $('.day-phone');
     var floorC = $('#dayFloorCustody'), floorS = $('#dayFloorSetup'), dot = $('#dayDot'), gate = $('#dayGate');
     var sky = $('.day-stipple');
-    /* Wide, the dinner card floats over the phone it drives, so the fit tells it where the phone is. */
-    var dinnerAt = $('.hm-dinner-stack'), capsBox = $('.day-caps');
+    /* Wide, the dinner card is drawn above the window, so the fit tells it where the window is. */
+    var dinner = $('.hm-evening'), capsBox = $('.day-caps');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
     var rail = $('.day-rail'), lastNight = '';
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
@@ -327,8 +327,11 @@
     var NW2 = { x: -150, y: -180, z: -420, ry: 24, s: 0.555, o: .3 }, NP2 = { x: 0, y: 0, z: 60, ry: -8, s: 1.22, o: 1 };
     function copy(o, over) { var r = {}, k; for (k in o) r[k] = o[k]; for (k in (over || {})) r[k] = over[k]; return r; }
     var ACTS = [
+      /* The hero's window stands lower and smaller than act 1's, faded behind the phone, so the
+         dinner card has a band above it to be drawn in (see .hm-evening's wide rule). The scroll
+         sends the card away early in the act, and the window rises into the band after it. */
       { mark: 'm-hero', state: 'idle', clock: '7:00 pm', phone: '7:00', scr: 0,
-        pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: copy(W2, { x: -155, o: .35 }), phone: copy(PH2, { x: 156, y: 24, ry: -6, s: .94 }), night: 0, fc: 0, fs: 0 },
+        pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: copy(W2, { x: -175, y: 66, s: .86, o: .35 }), phone: copy(PH2, { x: 156, y: 24, ry: -6, s: .94 }), night: 0, fc: 0, fs: 0 },
         narrow: { cam: { rx: 2, ry: -4, s: 1 }, win: NW2, phone: NP2, night: 0, fc: 0, fs: 0 } },
       { mark: 'm-phone', state: 'idle', clock: '9:12 am', phone: '9:12', scr: 1,
         pose: { cam: { rx: 2, ry: -5, s: 1.05 }, win: W2, phone: PH2, night: 0, fc: 0, fs: 0 },
@@ -660,10 +663,10 @@
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
       var reach = (narrow || still) ? null : reachOf(wr);
-      /* Where the hero phone's glass and its message stand, for the dinner card: see .hm-evening's
-         wide rule in the stylesheet. Read with the other rects, written with --sc below. */
-      var dn = (!narrow && !still && cur === 0 && ph && dinnerAt && capsBox)
-        ? [ph.getBoundingClientRect(), dinnerAt.getBoundingClientRect(), capsBox.getBoundingClientRect()] : null;
+      /* Where the hero's window stands, for the dinner card: see .hm-evening's wide rule in the
+         stylesheet. Read with the other rects, written with --sc below. */
+      var dn = (!narrow && !still && cur === 0 && dinner && capsBox)
+        ? [win.getBoundingClientRect(), capsBox.getBoundingClientRect(), dinner.offsetHeight, phone.getBoundingClientRect()] : null;
       lastWrapH = wr.height;
       /* Read here, with the two rects, and written below with --sc: everything this frame reads
          is read before anything is written, or the browser lays the page out twice per frame. The
@@ -719,9 +722,13 @@
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
          the same pool whatever the fit came out at. */
       styleValue(stage, '--sc', SC.toFixed(3));
+      /* Its left edge on the window's, its foot 16 above the window's top but never higher than 6
+         under the menu (on a tall screen the window stands well down and the drawing goes with
+         it), and no wider than the room before the phone, which just over 970 is all it needs. */
       if (dn) {
-        styleValue(stage, '--dn-x', Math.round(dn[0].left - dn[2].left) + 'px');
-        styleValue(stage, '--dn-y', Math.round(dn[1].top - dn[2].top) + 'px');
+        styleValue(stage, '--dn-x', Math.round(dn[0].left - dn[1].left) + 'px');
+        styleValue(stage, '--dn-y', Math.max(6, Math.round(dn[0].top - dn[1].top - 16 - dn[2])) + 'px');
+        styleValue(stage, '--dn-w', Math.floor(dn[3].left - dn[0].left - 10) + 'px');
       }
     }
 

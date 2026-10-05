@@ -4214,7 +4214,15 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
   a run", up to 20 searches; never "a few cents".
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
-### 🚧 Bring an agent over from OpenClaw, scheduled jobs included: BUILT 2026-09-28 (Archie 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the trial, on main), not yet in a release
+### ✅ Bring an agent over from OpenClaw, scheduled jobs included: SHIPPED in Archie 0.3.1 (2026-09-29; built 2026-09-28 as 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the free version)
+
+**Status corrected 2026-10-05.** This heading said "not yet in a release" for a week after 0.3.1
+(release commit 09c5cb5e) carried every commit above; 0.3.4 carries them unchanged, and no release
+note mentioned it. It is on the site since 2026-10-05 as `archie/moving-from-openclaw/`, linked
+from `compare/building-it-yourself/` and the compare hub's OpenClaw card. **"On the free trial"
+became "on the free version"** in the approved wording the same day: the code's test is the free
+allowance of one agent (`agent_allowance(&license) == Some(FREE_AGENTS)` in `room`), and the second
+card stopped being a trial and became the free tier on 2026-09-17.
 
 Jett decided on 2026-09-28 to build it, cron jobs included, because a competitor imports OpenClaw
 automatically. Its review screen has read one real OpenClaw folder; the step that makes the agent
@@ -4227,8 +4235,8 @@ knows about you, its notes, its skills, the OpenClaw skills shared by all its ag
 ticked, and its scheduled jobs become the new agent's. Its newest notes go into its memory and the
 rest into older memory, which it checks when you mention something in them, and anything that cannot come over is
 listed with the reason. Bringing it over sends nothing anywhere and changes nothing of OpenClaw's,
-and none of OpenClaw's keys or passwords come over. On the free trial it can take the place of an
-agent nobody has used yet, and says so first."
+and none of OpenClaw's keys or passwords come over. On the free version, which has one agent, it can
+take the place of an agent nobody has used yet, and says so first."
 
 **Why it's true:** the screens are `src/app/openclaw-import.tsx`, on the "Where should it start?"
 screen that opens when you add an agent. Find reads only whether OpenClaw's usual folder exists,

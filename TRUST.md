@@ -3154,7 +3154,14 @@ AI, the publisher (Archie repo, `docs/GOOGLE-SUBMISSION.md`, the App name step).
 production and External and not yet verified (`docs/GOOGLE-SUBMISSION.md` step 5; all 25 steps were
 unticked on 2026-09-30), and three of its Gmail scopes are restricted (`docs/BEFORE-SHIP.md`), so
 Google shows its unverified-app screen on every connect until verification and the CASA assessment
-both pass. The first page to carry it is the Learning Library's 0.7, in its notes.
+both pass. The first page to carry it is the Learning Library's 0.7, in its notes. Since
+2026-10-04 the short form, with the long form's last sentence on what to press, stands on
+`archie/install/` ("Gmail and Google Calendar"), and **the app shows the long form** just before
+every button that connects a Google account: the first run's "Which email?" and "Which
+calendar?", the Connections tab's chooser, and a skill's calendar and tasks boxes (Archie repo
+`335faa4c`, `GOOGLE_UNVERIFIED_NOTE` in `src/app/vocab.ts`, drawn by `GoogleUnverifiedNote`).
+The day Google verifies the app, that constant goes to `null`, the install page's section comes
+off, and this entry is rewritten, all in the same pass.
 
 **Boundaries:**
 - ⛔ **Never say Google has reviewed, approved or is reviewing Archie.** The submission had not

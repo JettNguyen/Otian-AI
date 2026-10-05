@@ -13,6 +13,15 @@ Three files, one walk of the repo, because they answer three versions of the sam
   robots.txt   which of them are for reading, and where the map is (search crawlers)
   llms.txt     what we sell and what is true about it              (answer engines)
 
+**robots.txt is not the last word on who reads the site; Cloudflare is.** On 2026-10-05 a check
+found Cloudflare answering 403 to the AI training crawlers (GPTBot, ClaudeBot, CCBot, Bytespider,
+Amazonbot) while robots.txt allowed everything, and nothing recorded the block as a decision. It
+kept the site out of Common Crawl and kept those crawlers from reading llms.txt. Jett chose the
+same day to allow them on the public pages, which hold marketing copy and no one's data; the
+signed-in pages keep their Disallow lines and their noindex. The switch is in the Cloudflare
+dashboard, not in this repo, so check it after any change there with
+`curl -s -o /dev/null -w '%{http_code}' -A GPTBot https://otianai.com/llms.txt`, which should say 200.
+
 **Why llms.txt is generated and not hand-written.** It is the one file whose whole job is
 to be quoted back to somebody by a machine that will not check it. A hand-maintained copy
 of the site's claims is a second place for those claims to live, and the second copy is

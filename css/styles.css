@@ -256,6 +256,19 @@
      than the highlight, because on a page lit from above the underside is in shade rather than in
      shadow. */
   --edge-under: inset 0 -1px 0 rgba(68, 64, 59, 0.09);
+  /* THE RIM GLASS CATCHES LIGHT ALONG. Liquid Glass is told from frosted plastic mostly by its
+     edge: a bright line where light catches the top and a faint bright ring just inside the
+     outline. Its other half, the bend it gives whatever is under it at the rim, is an SVG filter in
+     backdrop-filter, which Safari ignores and Chrome alone draws, so the site does what apple.com
+     does: blur for the body, and this for the edge. The same two lines as the Mac app's menus
+     (`--mac-menu-rim` in the Archie repo), so the site's glass and the app's catch light alike.
+     --edge-glass is a round or rounded piece; --edge-glassbar is a bar along the top of the
+     window, whose only edge in view is its bottom; --edge-glassdark is glass laid over a picture,
+     which is dark in either theme, so it has no dark-theme value of its own. Jett chose blur and
+     rim over a Chrome-only lens on October 4, 2026. */
+  --edge-glass: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  --edge-glassbar: inset 0 -1px 0 rgba(255, 255, 255, 0.7);
+  --edge-glassdark: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 
   /* AN OBJECT, AT A HEIGHT. This is the one to reach for, and the four above are its parts.
 
@@ -426,6 +439,8 @@
      reason the contact shadow does: there is no value left below a dark ground for a wide blur to
      darken, so the object has to be given its edges rather than its air. */
   --edge-under: inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  --edge-glass: inset 0 1px 0 rgba(255, 255, 255, 0.13), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --edge-glassbar: inset 0 -1px 0 rgba(255, 255, 255, 0.07);
   --lift-xs: var(--edge-top), var(--edge-under), var(--shadow-xs);
   --lift-sm: var(--edge-top), var(--edge-under), var(--shadow-sm);
   --lift-md: var(--edge-top), var(--edge-under), var(--shadow-md);
@@ -864,15 +879,18 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
     background var(--transition),
     backdrop-filter var(--transition),
     -webkit-backdrop-filter var(--transition),
-    border-color var(--transition);
+    border-color var(--transition),
+    box-shadow var(--transition);
 }
 
+/* The glass, with its rim: the bar's bottom edge lit just inside the hairline (--edge-glassbar). */
 .nav.scrolled,
 .nav.drawer-open {
   background: var(--nav-glass-scrolled);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
   border-bottom-color: var(--nav-line);
+  box-shadow: var(--edge-glassbar);
 }
 
 /* The glass runs at an alpha that assumes a blur behind it. Without backdrop-filter that alpha is
@@ -911,6 +929,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   --nav-line: color-mix(in srgb, #3F3E3A var(--nav-night), #E3DED6);
   --nav-glass-scrolled: color-mix(in srgb, rgba(26, 26, 25, 0.82) var(--nav-night), rgba(252, 250, 248, 0.85));
   --nav-glass-solid: color-mix(in srgb, rgba(26, 26, 25, 0.96) var(--nav-night), rgba(252, 250, 248, 0.97));
+  --edge-glassbar: inset 0 -1px 0 color-mix(in srgb, rgba(255, 255, 255, 0.07) var(--nav-night), rgba(255, 255, 255, 0.7));
 }
 
 .nav-inner {
@@ -1330,7 +1349,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
   min-height: 40px;
   opacity: 0.72;
   background: var(--bg-card);
-  box-shadow: var(--lift-quiet-raised);
+  box-shadow: var(--edge-glass), var(--lift-quiet-raised);
   backdrop-filter: blur(7px);
   transition: opacity var(--transition), transform var(--transition),
               border-color var(--transition), background var(--transition), color var(--transition);
@@ -8629,6 +8648,7 @@ html[data-theme="dark"] .booking-container iframe {
   background: rgba(20, 14, 10, 0.5);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
+  box-shadow: var(--edge-glassdark);
   opacity: 0;
   transform: translateY(4px);
   transition: opacity var(--transition), transform var(--transition), background var(--transition);

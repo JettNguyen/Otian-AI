@@ -82,7 +82,9 @@ SHADOW_OK = [
     # sitting on it. Inset, so the `^inset` rule below would pass it anyway once resolved; named
     # here so the reason is written down beside the others.
     (re.compile(r'^var\(--well\)$'), "a field cut into the page, not raised off it"),
-    (re.compile(r'^var\(--(?:shadow|edge)-[a-z]+\)(?:\s*,\s*var\(--(?:shadow|edge)-[a-z]+\))+$'),
+    # A lift can close a stack as well as an elevation can: `var(--edge-glass), var(--lift-quiet-raised)`
+    # is a glass rim in front of an object at a height, every part of it named (2026-10-04).
+    (re.compile(r'^var\(--(?:shadow|edge)-[a-z]+\)(?:\s*,\s*var\(--(?:shadow-[a-z]+|edge-[a-z]+|lift-[a-z][a-z-]*)\))+$'),
      "named tokens stacked"),
     (re.compile(r'^none$'), "removes one"),
     (re.compile(r'^inset\b'), "an inset rule, not an elevation"),

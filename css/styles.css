@@ -20805,81 +20805,67 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .install-details { padding: 0 16px; }
 }
 
-/* THE DINNER CARD (2026-10-02). It is a control for the phone beside it, so it is drawn as one: a
-   raised card, each button wearing the face of the add-on that did the job, where it used to be an
-   italic line, an orange line and four gray number buttons that read as more of the paragraph
-   above them (Jett: "it needs to stand out more from the copy because it really isnt copy").
-   The faces stand in one row and only the picked one opens to say what it did. Wide, that row
-   was a three-line list for a few hours, and it stood 213 high where the block it replaced stood
-   100 (Jett: "it needs to be more compact"), so every width folds now and the pause button
-   stands at the row's end, in a card as wide as the longest label needs. The line under the
-   picked job is the tour's clock (js/hero-dinner.js): it fills and the next job comes up, so a
-   pause stops the line. QUIETER SINCE 2026-10-05 (Jett: "a bit too busy"), and LATER THE SAME DAY
-   A HAIRLINE DRAWING AND NOT A CARD, at every width ("a hairline type of graphic", then "more
-   minimal on mobile view too"): no ground and no box, a line of small type, the faces in hairline
-   rings standing on one hairline rule, and the clock is that rule turning terracotta under the
-   picked job. Where it stands on a wide screen is the rule after the next. */
+/* THE DINNER CARD (2026-10-02). It is a control for the phone beside it: the job on the phone is
+   the one it names, and the tour's clock (js/hero-dinner.js) brings the next one up. It was a raised
+   card of buttons wearing the add-ons' faces at first, because an italic line read as more of the
+   paragraph above it (Jett: "it really isnt copy"). Then it got quieter in steps, all on
+   2026-10-05: one hairline card and one accent ("a bit too busy"), a hairline drawing with no box
+   ("a hairline type of graphic above the mockups"), shorter, and then THIS, after "still too busy.
+   it can be more minimal": one sentence whose last words are the job on the phone, and under it
+   three short hairlines, one per job, the picked one filling with the tour's clock. A hairline is a
+   button you can press to pick that job, the pause is a mark with no ring, and the note says what
+   it takes, on the same line. The faces went with the rest. Where it stands is the rule after the
+   next, wide and narrow. */
 .day-stage.is-hero .day-clock { display: none; }
 .day-stage:not(.is-hero) .hm-evening { display: none; }
-.hm-evening { --dinner-row: 28px; --dinner-face: 22px; --dinner-pad: 0px; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "head head" "list pause"; align-items: center; column-gap: 10px; align-self: stretch; width: 100%; max-width: 17.5rem; margin-top: 18px; text-align: left; }
-.day-cap .hm-evening > .hm-dinner-head { grid-area: head; display: flex; align-items: center; gap: 7px; max-width: none; margin: 0; padding: 0; font-size: var(--fs-2xs); font-weight: 600; letter-spacing: .02em; line-height: 1.2; color: var(--text-muted); }
-.hm-dinner-pause { grid-area: pause; position: relative; display: grid; place-items: center; width: 20px; height: 20px; padding: 0; border: 0; border-radius: 50%; background: none; box-shadow: inset 0 0 0 1px var(--border); color: var(--text-secondary); cursor: pointer; transition: box-shadow var(--transition-quick), color var(--transition-quick); }
-/* A 44 target around a 20 drawing. */
-.hm-dinner-pause::after { content: ""; position: absolute; inset: -12px; }
-.hm-dinner-pause:hover { box-shadow: inset 0 0 0 1px var(--text-muted); color: var(--text-primary); }
-.hm-dinner-pause svg { width: 8px; height: 8px; fill: currentColor; }
+.hm-evening { display: grid; grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "head head head" "list pause note"; align-items: center; column-gap: 10px; row-gap: 5px; align-self: stretch; width: 100%; max-width: 21rem; margin-top: 18px; text-align: left; }
+.day-cap .hm-evening > .hm-dinner-head { grid-area: head; max-width: none; margin: 0; padding: 0; font-size: var(--fs-xs); font-weight: 500; line-height: 1.35; color: var(--text-secondary); }
+/* The three endings stand in one cell, so the sentence keeps the width of its longest and a change
+   is a fade in place. The ones not shown are hidden, so a screen reader reads one sentence. */
+.hm-dinner-says { display: inline-grid; vertical-align: top; }
+.hm-dinner-says > span { grid-area: 1 / 1; justify-self: start; text-align: left; font-weight: 600; color: var(--text-primary); opacity: 0; visibility: hidden; }
+.hm-evening:has([data-dinner-pick="0"][aria-pressed="true"]) [data-dinner-line="0"],
+.hm-evening:has([data-dinner-pick="1"][aria-pressed="true"]) [data-dinner-line="1"],
+.hm-evening:has([data-dinner-pick="2"][aria-pressed="true"]) [data-dinner-line="2"] { opacity: 1; visibility: visible; }
+.hm-dinner-list { grid-area: list; display: flex; gap: 4px; }
+.hm-dinner-pick { position: relative; display: block; width: 22px; height: 12px; padding: 0; border: 0; background: none; cursor: pointer; }
+/* A 44 target around a 12 drawing, and the three meet without overlapping. */
+.hm-dinner-pick::before { content: ""; position: absolute; inset: -16px -2px; }
+.hm-dinner-bar { position: absolute; left: 0; right: 0; top: 50%; height: 2px; margin-top: -1px; border-radius: 1px; background: var(--border); overflow: hidden; }
+.hm-dinner-pick:hover .hm-dinner-bar { background: var(--text-muted); }
+.hm-dinner-bar i { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
+.hm-dinner-pause { grid-area: pause; position: relative; display: grid; place-items: center; width: 14px; height: 14px; padding: 0; border: 0; background: none; color: var(--text-muted); cursor: pointer; transition: color var(--transition-quick); }
+.hm-dinner-pause::after { content: ""; position: absolute; inset: -15px; }
+.hm-dinner-pause:hover { color: var(--text-primary); }
+.hm-dinner-pause svg { width: 9px; height: 9px; fill: currentColor; }
 .hm-dinner-ic-play, .hm-evening.is-paused .hm-dinner-ic-pause { display: none; }
 .hm-evening.is-paused .hm-dinner-ic-play { display: block; }
 .hm-dinner-pause[hidden] { display: none; }
-.hm-dinner-list { grid-area: list; display: flex; gap: 8px; min-width: 0; margin-top: 2px; border-bottom: 1px solid var(--border); }
-.hm-dinner-pick { position: relative; flex: 0 1 auto; display: flex; align-items: center; gap: 0; height: var(--dinner-row); min-width: 0; padding: 0 var(--dinner-pad); border: 0; border-radius: 999px; background: transparent; color: var(--text-secondary); font: inherit; font-size: var(--fs-xs); line-height: 1.2; text-align: left; cursor: pointer; }
-.hm-dinner-pick:not([aria-pressed="true"]) { flex-shrink: 0; }
-.hm-dinner-pick:not([aria-pressed="true"]):hover, .hm-dinner-pick:not([aria-pressed="true"]):hover .mp-face { color: var(--text-primary); }
-.hm-dinner-pick[aria-pressed="true"] { gap: 7px; color: var(--text-primary); }
-.hm-dinner-pick:focus-visible, .hm-dinner-pause:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
-.hm-dinner-pick .mp-face { width: var(--dinner-face); height: var(--dinner-face); border-radius: 50%; background: transparent; box-shadow: inset 0 0 0 1px var(--border); color: var(--text-muted); }
-.hm-dinner-pick[aria-pressed="true"] .mp-face { box-shadow: inset 0 0 0 1px var(--accent-line); color: var(--accent-ink); }
-.hm-dinner-pick .mp-face svg { width: 13px; height: 13px; }
-.hm-dinner-pick:not([aria-pressed="true"]) .mp-face { transform: scale(.9); }
-/* The label is a one-track grid so it can fold to nothing and open to its own width (0fr to 1fr),
-   the same trick .dp-fold uses for height. */
-.hm-dinner-text { display: grid; grid-template-columns: 1fr; min-width: 0; font-weight: 600; }
-.hm-dinner-pick:not([aria-pressed="true"]) .hm-dinner-text { grid-template-columns: 0fr; opacity: 0; }
-.hm-dinner-text > span { min-width: 0; overflow: hidden; white-space: nowrap; }
-.hm-dinner-bar { position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; opacity: 0; overflow: hidden; transition: opacity .3s ease; }
-.hm-dinner-bar i { display: block; height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: 0 50%; }
-.hm-dinner-pick[aria-pressed="true"] .hm-dinner-bar { opacity: 1; }
-.hm-evening .hm-dinner-note { grid-column: 1 / -1; max-width: none; margin: 3px 0 0; padding: 0; font-size: var(--fs-2xs); line-height: 1.2; color: var(--text-muted); }
+.hm-dinner-pick:focus-visible, .hm-dinner-pause:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.hm-evening .hm-dinner-note { grid-area: note; max-width: none; margin: 0; padding: 0; font-size: var(--fs-2xs); line-height: 1.3; color: var(--text-muted); }
 /* The phone's three jobs share one cell, foot to foot, so the screen keeps one height and a change
    is a crossfade rather than a cut: the old card lifts away and the new one rises into its place. */
 .hm-dinner-stack { display: grid; }
 .hm-dinner-job { grid-area: 1 / 1; align-self: end; opacity: 0; visibility: hidden; transform: translateY(16px) scale(.97); transform-origin: 0 100%; }
 .hm-dinner-job.is-out { transform: translateY(-14px) scale(.98); }
 .hm-dinner-job.is-on { opacity: 1; visibility: visible; transform: none; }
-/* The picked label eases open over the same half second the old one eases shut, so the row trades
-   width rather than jumping. */
 @media (prefers-reduced-motion: no-preference) {
-  .hm-dinner-pick { transition: gap .5s cubic-bezier(.2, .8, .3, 1), padding .5s cubic-bezier(.2, .8, .3, 1), background .3s ease, color var(--transition-quick); }
-  .hm-dinner-text { transition: grid-template-columns .5s cubic-bezier(.2, .8, .3, 1), opacity .35s ease; }
-  .hm-dinner-pick .mp-face { transition: transform .4s cubic-bezier(.2, .8, .3, 1); }
+  .hm-dinner-says > span { transition: opacity .3s ease, visibility 0s linear .3s; }
+  .hm-evening:has([data-dinner-pick="0"][aria-pressed="true"]) [data-dinner-line="0"],
+  .hm-evening:has([data-dinner-pick="1"][aria-pressed="true"]) [data-dinner-line="1"],
+  .hm-evening:has([data-dinner-pick="2"][aria-pressed="true"]) [data-dinner-line="2"] { transition: opacity .4s ease .15s, visibility 0s; }
   .hm-dinner-job { transition: opacity .3s ease, transform .45s cubic-bezier(.4, 0, .6, 1), visibility 0s linear .45s; }
   .hm-dinner-job.is-on { transition: opacity .45s ease .15s, transform .65s cubic-bezier(.2, .8, .3, 1) .15s, visibility 0s; }
 }
-/* No clock without motion: the jobs are picked by hand, so there is no line to fill. */
+/* No clock without motion: the jobs are picked by hand, so the picked line is simply lit. */
 @media (prefers-reduced-motion: reduce) {
-  .hm-dinner-bar { display: none; }
+  .hm-dinner-pick[aria-pressed="true"] .hm-dinner-bar { background: var(--accent); }
 }
-/* A phone's scene is drawn at whatever height the caption leaves it (js/home.js), so every pixel
-   of this card is a pixel off the drawing. A thumb needs the 44 row, and the row needs the width
-   a 360 screen has for the longest label, so the pause button goes up beside the heading. */
+/* A phone centers its caption, so the two lines are centered as well: a row that wraps, with the
+   sentence a line of its own, since a grid spreads the second line to the sentence's width. */
 @media (max-width: 970px) {
-  .hm-evening { --dinner-row: 30px; --dinner-face: 24px; align-self: center; width: 17.5rem; max-width: 100%; margin-top: 10px; }
-  .hm-dinner-pause { width: 22px; height: 22px; }
-  .hm-dinner-pause::after { inset: -11px; }
-  /* A thumb still gets 44: the row is drawn 30 and each button's target reaches 7 past it. */
-  .hm-dinner-pick::before { content: ""; position: absolute; inset: -7px 0; }
-  .hm-dinner-pick .mp-face svg { width: 14px; height: 14px; }
-  .hm-evening .hm-dinner-note { margin-top: 4px; }
+  .hm-evening { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; column-gap: 10px; row-gap: 5px; align-self: center; width: auto; max-width: 100%; margin-top: 10px; text-align: center; }
+  .day-cap .hm-evening > .hm-dinner-head { flex: 0 0 100%; }
 }
 .day-cap .hm-actions { margin-top: 14px; }
 /* WIDE, THE CARD STANDS ABOVE THE MOCKUPS (2026-10-05). Jett asked for it "to the right side on
@@ -20893,7 +20879,7 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
    motion are as they were; and the caption stands over the scene for this act alone. */
 @media (min-width: 971px) and (prefers-reduced-motion: no-preference) {
   .day-stage.is-driven .day-cap[data-act="0"] { z-index: 3; }
-  .day-stage.is-driven .hm-evening { position: absolute; left: var(--dn-x, 0px); top: var(--dn-y, 0px); width: min(17.5rem, var(--dn-w, 17.5rem)); max-width: none; margin: 0; transition: opacity .3s ease, visibility 0s; }
+  .day-stage.is-driven .hm-evening { position: absolute; left: var(--dn-x, 0px); top: var(--dn-y, 0px); width: min(21rem, var(--dn-w, 21rem)); max-width: none; margin: 0; transition: opacity .3s ease, visibility 0s; }
   .day-stage.is-driven .hm-evening-slot:not(.is-on) > .hm-evening { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .3s ease, visibility 0s linear .3s; }
   .day-stage.is-driven .day-cap[data-act="0"] .hm-actions { margin-top: 26px; }
 }
@@ -20911,7 +20897,7 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
      the card is placed in, which folded the card to no width for as long as the slot was off. */
   .day-stage.is-driven .hm-evening-slot { margin: 0; padding: 0; transform: none; }
   .day-stage.is-driven .day-cap[data-act="0"] .hm-evening-slot.day-beat:not(.is-on) { margin-top: 0; }
-  .day-stage.is-driven .hm-evening { position: absolute; left: 50%; top: var(--dn-y, 0px); translate: -50% 0; margin: 0; }
+  .day-stage.is-driven .hm-evening { position: absolute; left: 0; right: 0; top: var(--dn-y, 0px); width: fit-content; max-width: 100%; margin: 0 auto; }
 }
 .day-cap .hm-hero-story { font-size: var(--fs-sm); font-weight: 600; color: var(--c-blue-ink); text-decoration: underline; text-underline-offset: .18em; }
 /* The line under the button and the three promises under it (2026-10-05). Both were small gray

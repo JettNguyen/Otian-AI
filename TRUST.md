@@ -485,6 +485,37 @@ means nothing further is sent and anything waiting to be sent is deleted."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
 
+### 🚧 "How did you hear about Archie?" at the end of setup: BUILT 2026-10-05 (Archie b2f2c7fc), not yet in a release, and its route is not deployed
+
+Built at Jett's ask, from the spec in Archie's `docs/GIVE-A-FRIEND-A-MONTH.md`, because nothing
+before sign-in is counted and nobody can tell which channel brought someone. **Two gates before
+any page says it:** a release has to carry it, and the billing service has to be deployed with
+its route, which waits on the CASA freeze (the service "is frozen until the assessor signs off",
+`stripe-webhook/index.js`). A release before the deploy would show every new person a question
+whose answer fails to save. The privacy policy gains its line in the same pass as the deploy.
+
+**Approved wording, once it ships:** "At the end of setup Archie asks how you heard about it.
+Answering is optional: nothing is sent unless you press an answer, and then only that answer,
+kept on your account."
+
+**Why it's true:** `HeardFromQuestion` (`src/app/intro.tsx`) sends only from a button press,
+through `account_heard_from` (`src-tauri/src/commands/market.rs`) and `record_heard_from`
+(`crates/archie-core/src/purchases.rs`) to `POST /account/heard-from`
+(`stripe-webhook/index.js`), which takes the uid from the verified token, accepts only the seven
+ids in `stripe-webhook/heard-from.js`, and writes the one field `heard_from` on `users/{uid}`
+with `update`. No free text, no device, no timestamp field. `/account/delete` removes it with the
+account. Staff see counts only (`tallyHeardFrom` in `/admin/summary`).
+
+**Boundaries:**
+- ⛔ **Never "anonymous".** The answer is on the account, and anyone with console access can read it.
+- ⛔ **Never "asked of everyone".** It is on the send-off that ends the first walk, so anyone who
+  presses Skip on the walk, or set up before this shipped, is never asked.
+- ⛔ **Never "nothing else is sent".** The request carries the sign-in token and arrives from the
+  computer's address, like every request.
+- ⚠️ **The no-analytics entry above counts what goes out.** Once this ships, a page that counts
+  those things names this one too, as sent only when you press an answer, and never files it under
+  the crash-reports switch, which does not govern it.
+
 ### ✅ Which AI company it talks to is your choice, and the trial is Anthropic
 
 **Approved wording (amended 2026-08-21):** "Archie runs on an AI account you connect:

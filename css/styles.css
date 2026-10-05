@@ -346,6 +346,9 @@
   /* Thrown from the left, not below: the hero's player sits at an angle to the page and a
      symmetrical shadow reads as a sticker on it. Art-directed, used by that one frame. */
   --shadow-drop: -28px 34px 74px -34px rgba(68, 64, 59, 0.42);
+  /* The name at the foot of every page: the top of its letters, which fade into the footer's
+     own ground (--bg-secondary) toward the page's bottom edge. Sand with the terracotta in it. */
+  --footer-mark: #DCC8B5;
 }
 
 [data-theme="dark"] {
@@ -460,6 +463,7 @@
   --lift-quiet: 0 1px 2px rgba(0, 0, 0, 0.35);
   --lift-quiet-raised: 0 1px 2px rgba(0, 0, 0, 0.4), 0 4px 10px -3px rgba(0, 0, 0, 0.5);
   --shadow-drop: -28px 34px 74px -34px rgba(0, 0, 0, 0.6);
+  --footer-mark: #3B312A;
 }
 
 /* Skip link: hidden until keyboard focus, then a small pinned card over the nav. */
@@ -2324,6 +2328,45 @@ summary,
   .footer-bottom {
     row-gap: 8px;
   }
+}
+
+/* The name at the foot of every page (2026-10-05). Two of the three sites Jack picked for
+   inspiration, trajectory.ai and usecontour.ai, end on their own name set as wide as the screen,
+   and it is the part of each page a reader carries away: the "memorable" test, which no script
+   checks. Drawn here as generated content so that ~72 pages carry it without a line of markup.
+
+   The empty text after the slash is its alternative text, so a screen reader skips a word that
+   is decoration; the first declaration is for a browser that cannot parse that form and drops
+   it, where the cost is one spoken "Otian". The letters fade from --footer-mark toward the
+   footer's own ground and the page edge cuts their feet, so the name rises out of the footer
+   rather than sitting in it as a second logo. clip and not hidden: the footer must not become a
+   scroll container, and nothing else in it reaches its edges. */
+.footer {
+  overflow: clip;
+}
+
+.footer::after {
+  content: "Otian";
+  content: "Otian" / "";
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 600;
+  font-size: clamp(6.5rem, 30vw, 28rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-align: center;
+  margin-top: 8px;
+  /* Georgia's caps run from about .16em to .85em in a 1em line, so this cuts the bottom fifth
+     of the letters off at the page edge. */
+  margin-bottom: -0.3em;
+  color: var(--footer-mark);
+  /* Fades most of the way, never all of it, so the cut at the page edge still shows. */
+  background: linear-gradient(180deg, var(--footer-mark) 25%, color-mix(in srgb, var(--footer-mark) 40%, var(--bg-secondary)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* Social links (footer + contact page)

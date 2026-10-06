@@ -25,8 +25,8 @@
    the page wiring still lives. Same reason js/catalog.js was extracted before it.
    ======================================== */
 
-import { faceHtml } from "./faces.js?v=20261006-3";
-import { storeLine } from "./store-lines.js?v=20261006-3";
+import { faceHtml } from "./faces.js?v=20261006-4";
+import { storeLine } from "./store-lines.js?v=20261006-4";
 
 /* Render order = the order the user asked for: Personalities, Skills, Routines.
    `coll` is the Firestore subcollection name; `kind` is what the catalog document calls itself.

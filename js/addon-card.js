@@ -25,7 +25,8 @@
    the page wiring still lives. Same reason js/catalog.js was extracted before it.
    ======================================== */
 
-import { faceHtml } from "./faces.js?v=20261005-21";
+import { faceHtml } from "./faces.js?v=20261006-1";
+import { storeLine } from "./store-lines.js?v=20261006-1";
 
 /* Render order = the order the user asked for: Personalities, Skills, Routines.
    `coll` is the Firestore subcollection name; `kind` is what the catalog document calls itself.
@@ -138,8 +139,13 @@ var SCREEN_NEEDS = {
 export function detailHtml(item) {
   var parts = [];
 
-  if (item.long_description && item.long_description !== item.description) {
-    item.long_description.split(/\n{2,}/).forEach(function (para) {
+  // The card leads with the store line (js/store-lines.js), so the detail is where the longer
+  // writing goes: the long description where there is one, and the short description where it is
+  // all there is and says more than the line on the card.
+  var more = item.long_description ||
+    (item.description !== storeLine(item) ? item.description : "");
+  if (more) {
+    more.split(/\n{2,}/).forEach(function (para) {
       if (para.trim()) parts.push("<p>" + escapeHtml(para.trim()) + "</p>");
     });
   }
@@ -188,8 +194,8 @@ export function detailHtml(item) {
 export function cardHtml(item) {
   var kindLabel = COLLECTIONS.filter(function (c) { return c.kind === item.kind; })[0].label;
   var isPrivate = item.visibility === "private";
-  var searchBlob = [item.name, item.description, item.long_description, item.tagline, item.category,
-    item.role, item.tone].concat(item.triggers).join(" ").toLowerCase();
+  var searchBlob = [item.name, storeLine(item), item.description, item.long_description, item.tagline,
+    item.category, item.role, item.tone].concat(item.triggers).join(" ").toLowerCase();
   var detail = detailHtml(item);
 
   var html = "";
@@ -210,10 +216,9 @@ export function cardHtml(item) {
   if (item.category) html += '<span class="mp-category-badge">' + escapeHtml(item.category) + "</span>";
   html += "</div></div></div>";
 
-  if (item.kind === "personality" && item.tagline) {
-    html += '<p class="mp-card-tagline">' + escapeHtml(item.tagline) + "</p>";
-  }
-  html += '<p class="mp-card-desc">' + escapeHtml(item.description) + "</p>";
+  // One line, the app's: what the add-on takes off your plate, or a personality's tagline. The
+  // product description it replaced (2026-10-06) ran to three clamped lines on every card.
+  html += '<p class="mp-card-desc">' + escapeHtml(storeLine(item)) + "</p>";
 
   if (detail) html += '<div class="mp-card-detail" hidden>' + detail + "</div>";
 

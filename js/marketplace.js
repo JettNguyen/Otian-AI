@@ -16,7 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261005-21";
+import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261006-1";
 /* The card renderer and the manifest shape live in their own module so that
    scripts/gen-marketplace.mjs can call the very same code through Node and write the
    public catalog into the page as static HTML. Before that the grid was an empty div,
@@ -25,7 +25,7 @@ import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261005-21"
 import {
   COLLECTIONS, shelfKind, escapeHtml, titleCase, formatIntegration,
   normalize, detailHtml, cardHtml,
-} from "./addon-card.js?v=20261005-21";
+} from "./addon-card.js?v=20261006-1";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -78,52 +78,52 @@ var PACK_FACE = {
 };
 
 var PACKS = [
-  { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A bit of everything, so you find what you’ll actually use", accent: "accent", recommended: true,
-    description: "Your agent keeps your to-do list and a private journal, can research anything on the live web, and greets you in a warm, friendly voice. Useful from the first message, with nothing to set up.",
+  { id: "everyday-assistant", name: "Everyday Assistant", tagline: "A bit of everything to try", accent: "accent", recommended: true,
+    description: "A to-do list, a private journal, web lookups, and the Friendly personality. Nothing to set up.",
     example: "add “call the dentist” to my to-do list",
     items: [["skill","task-manager"],["skill","personal-journal"],["specialist","researcher"],["personality","friendly"]] },
-  { id: "personal-organizer", name: "Personal Organizer", tagline: "One place for tasks and habits, with a nudge before anything slips", accent: "blue",
-    description: "A real task list and a habit tracker your agent keeps for you, a digest each morning of what is due, and a look back at the week each Sunday.",
+  { id: "personal-organizer", name: "Personal Organizer", tagline: "Tasks and habits, with a nudge before anything slips", accent: "blue",
+    description: "A task list and habit tracker, a morning list of what’s due, and a Sunday look back at the week.",
     example: "what have I got on today?",
     items: [["skill","task-manager"],["skill","habit-tracker"],["routine","daily-task-digest"],["routine","weekly-review"]] },
-  { id: "mind-wellness", name: "Mind & Wellness", tagline: "Reflect and build good habits, for a calmer, steadier day", accent: "teal",
-    description: "A calmer corner of your day. One dated entry holds your journal, your mood and the good things, and Habit Tracker keeps your streaks honest, with one gentle evening nudge that files all of it from a single reply.",
+  { id: "mind-wellness", name: "Mind & Wellness", tagline: "Journal, mood, and streaks, from one reply a night", accent: "teal",
+    description: "Your journal, mood, and streaks, filed from one reply to an evening nudge.",
     example: "I had a good day today, here’s why…",
     items: [["skill","personal-journal"],["skill","habit-tracker"],["routine","evening-reflection"],["routine","habit-check-in"]] },
-  { id: "creators-desk", name: "Creator’s Desk", tagline: "Write, learn, and stay inspired, so the blank page stops winning", accent: "plum",
-    description: "A writing skill that drafts and sharpens your words, a learning coach for the craft you are picking up, a saved reading list, and a bright, imaginative voice to bounce ideas off.",
+  { id: "creators-desk", name: "Creator’s Desk", tagline: "Drafts, flashcards, and a reading list", accent: "plum",
+    description: "A writer that drafts and sharpens, a coach for what you’re learning, a reading list, and a personality with ideas first, judgment later.",
     example: "help me write an opening line for this post",
     items: [["specialist","writer"],["skill","learning-coach"],["skill","reading-list"],["personality","creative-muse"]] },
-  { id: "student", name: "Student", tagline: "Flashcards, quizzes, and sources that make studying stick", accent: "gold",
-    description: "A study partner that sticks. The learning coach makes flashcards and quizzes you with spaced repetition, the researcher digs up sources on the live web, and the study-partner voice keeps you focused and encouraged.",
+  { id: "student", name: "Self-Study", tagline: "Flashcards, quizzes, and sources that make it stick", accent: "gold",
+    description: "For learning on your own. Flashcards that bring back what you keep missing, sources from the live web with where each came from, and a study-partner personality that keeps you at it.",
     example: "quiz me on what I studied yesterday",
     items: [["skill","learning-coach"],["specialist","researcher"],["personality","study-partner"]] },
-  { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, and trips handled, so the week runs itself", accent: "green",
-    description: "The everyday-life bundle. Plan meals around your tastes (or around what’s already in your fridge), keep on top of what repeats and what you spend, plan trips, and hold one list of everything you want to read and watch. These are saved tools your agent remembers between chats.",
+  { id: "home-kitchen", name: "Home & Life", tagline: "Meals, money, trips, and a reading list", accent: "green",
+    description: "Meals from your fridge, spending, trips, and one list to read and watch. Saved between chats.",
     example: "what can I make with chicken, rice and half a lemon?",
     items: [["skill","meal-planner"],["skill","bill-tracker"],["skill","money-in-out"],["skill","trip-planner"],["skill","reading-list"]] },
-  { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already up to date, without opening a single app", accent: "blue",
-    description: "Your morning catch-up, handled. Each day your agent pulls the news that matters to you, a market snapshot, and your teams' scores, gathered from the live web while you sleep.",
+  { id: "daily-briefing", name: "Daily Briefing", tagline: "Wake up already caught up", accent: "blue",
+    description: "Your news, markets, and team scores, gathered from the live web overnight.",
     example: "what happened in the news overnight?",
     items: [["specialist","researcher"],["skill","news-briefing"],["skill","market-digest"],["skill","sports-follow"],["routine","morning-news"],["routine","market-morning"],["routine","sports-digest"]] },
-  { id: "life-admin", name: "Life Admin", tagline: "The paperwork side of being a person, held for you", accent: "gold",
-    description: "For the parts of life that arrive as documents and appointments. Ask your own lease, policy or handbook a question and get the clause quoted back, keep a long application moving without reloading it in your head, remember what the doctor actually said, and hand the whole house over to a sitter in one note. Nothing to connect.",
+  { id: "life-admin", name: "Life Admin", tagline: "Paperwork and appointments, held for you", accent: "gold",
+    description: "Get the clause from your lease or policy, keep long forms moving, remember what the doctor said, and leave a sitter one note. Nothing to connect.",
     example: "does my lease let me have a dog?",
     items: [["skill","my-documents"],["skill","paperwork"],["skill","health-record"],["skill","the-handover"],["specialist","researcher"]] },
   { id: "home-errands", name: "Home & Errands", tagline: "Every renewal date, remembered for you", accent: "gold",
-    description: "The dates nobody writes down. Bills and subscriptions before they lapse, the filter and the service due on the house and the car, a warranty before its return window shuts, the plants and the pets, and the price on something you are waiting to buy.",
+    description: "Keeps track of bills, the house, the car, return windows, plants, pets, and prices you’re watching.",
     example: "my car insurance renews in March, remind me",
     items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["routine","return-window-watch"]] },
-  { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Remember the people who matter, so you’re never the one who forgot", accent: "plum",
-    description: "Your agent keeps birthdays and the people you mean to stay in touch with, nudges you before it’s too late, and helps you write the card, note, or reply.",
+  { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Remember the people who matter", accent: "plum",
+    description: "Birthdays and people to keep up with, a nudge before it’s too late, and help writing the card or reply.",
     example: "remind me about mom’s birthday next month",
     items: [["skill","birthday-keeper"],["skill","stay-in-touch"],["skill","reply-helper"],["routine","birthday-heads-up"],["routine","stay-in-touch-nudge"]] },
   { id: "healthy-active", name: "Healthy & Active", tagline: "A workout you can start now, and medications on time", accent: "green",
-    description: "Home workouts you can do anywhere, with a nudge to actually do them, and a daily reminder that keeps your medications on schedule.",
+    description: "Home workouts with a nudge to do them, and a daily medication reminder.",
     example: "give me a 20 minute workout I can do at home",
     items: [["skill","home-workout"],["skill","medication-reminder"],["routine","workout-nudge"],["routine","med-reminders"]] },
-  { id: "fun-curious", name: "Fun & Curious", tagline: "A little delight every day, for when you need a lighter minute", accent: "accent",
-    description: "Learn a new word and a piece of trivia each day, and keep one list of everything you want to read and watch, with a confident pick when you can’t decide what to put on. The word and the trivia arrive on their own each day.",
+  { id: "fun-curious", name: "Fun & Curious", tagline: "A word, a trivia question, and a pick for tonight", accent: "accent",
+    description: "A new word and a trivia question each day, on their own, plus one list to read and watch with a pick when you can’t decide.",
     example: "what should I watch tonight?",
     items: [["skill","word-of-the-day"],["skill","daily-trivia"],["skill","reading-list"],["routine","daily-word"],["routine","trivia-time"]] },
 ];
@@ -282,7 +282,9 @@ function packHtml(pack, index) {
       '</span><span class="mp-pack-item-name">' + escapeHtml(it.name) + "</span></li>";
   }).join("");
 
-  var detail = "";
+  // The description sits in here with the list, and the card itself is the name and the tagline:
+  // a dozen cards of two to four lines each was the first thing a visitor met (2026-10-06).
+  var detail = '<p class="mp-pack-desc">' + escapeHtml(pack.description) + "</p>";
   if (itemsHtml) detail += '<ul class="mp-pack-items">' + itemsHtml + "</ul>";
   if (hiddenCount > 0) {
     detail += '<p class="mp-pack-note">+ ' + hiddenCount + " private add-on" + (hiddenCount === 1 ? "" : "s") +
@@ -300,7 +302,6 @@ function packHtml(pack, index) {
   if (pack.recommended) html += '<span class="mp-pack-ribbon">Recommended</span>';
   html += "</div>";
   html += '<p class="mp-pack-tagline">' + escapeHtml(pack.tagline) + "</p>";
-  html += '<p class="mp-pack-desc">' + escapeHtml(pack.description) + "</p>";
   html += '<div class="mp-pack-bottom">';
   html += '<span class="mp-pack-count">' + pack.items.length + " add-on" + (pack.items.length === 1 ? "" : "s") + "</span>";
   html += '<button type="button" class="mp-card-link mp-card-expand" aria-expanded="false">See what&rsquo;s inside &rarr;</button>';

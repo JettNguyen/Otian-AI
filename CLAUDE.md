@@ -717,6 +717,11 @@ sizes are on the page at rest, and the pick only lights one.
   lists, phone-page rows, and detail pages read the way the app's store does. Do not draw new
   marks or reassign one here: change it in the Archie repo's `src/app/faces.ts`, then copy.
   `scripts/check-faces.py` fails when the two drift, and lists live catalog ids the map lacks.
+- **An add-on card leads with the app's store line, copied (2026-10-06).** Jett asked for the
+  marketplace in "a few words", so a card shows one line from the app's `STORE_LINE`
+  (`src/app/store-copy.ts`) and the longer description sits behind View Details. Change a line
+  in the app, then run `python3 scripts/gen-store-lines.py`, which writes `js/store-lines.js`;
+  its `--check` fails on drift. Pack cards are the name and tagline, with the description inside.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally. Enforced, with the rest of the visual-first
   rules above, by `python3 scripts/check-figures.py`: **run it before you commit**,

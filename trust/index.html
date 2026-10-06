@@ -642,8 +642,10 @@
           <div class="trust-limit">
             <h3>Untrusted text can reach your agent, and the gate won&rsquo;t fully fix it.</h3>
             <p>If your agent reads a Slack attachment, a meeting transcript or a web page, a hostile message hidden in it could try to talk your agent into something you never asked for. The approval gate stops that from changing anything in your connected accounts that is not easily reversible.</p>
-            <p>It does <strong>not</strong> stop everything. An injected instruction can still add items and write a note into your agent&rsquo;s memory. Worst of the three, the instruction can <em>leak</em> something, by having your agent fetch a web address or run a search whose text carries information from your conversation.</p>
-            <p>We don&rsquo;t have a complete answer to that yet. <a href="details/#untrusted-text">The full version &rarr;</a></p>
+            <p>It does <strong>not</strong> stop everything. An injected instruction can still add items to your lists and write a note into your agent&rsquo;s memory, and a note like that can steer a later job.</p>
+            <p>The worst case is a <em>leak</em>: a web address or a search whose text carries something from your conversation. Since Archie 0.3.5, your agent shows you any address it came up with itself and waits for your yes. A skill that searches is given only its task, never your memory or files.</p>
+            <p>We know of three ways out that remain. An email read in one job can shape a search in your next. Text typed into a page already open goes wherever that page sends it. And a service you connect through its address for AI assistants can open pages on its own.</p>
+            <p>Asking first has a cost: a page your agent wants to open on its own judgment now waits for you. Archie for Business gets this in its next release. <a href="details/#untrusted-text">The full version &rarr;</a></p>
           </div>
 
           <div class="trust-limit">
@@ -799,7 +801,7 @@
 
           <div class="trust-limit">
             <h3>We keep no list of which add-ons are yours.</h3>
-            <p>Every add-on is included with Archie. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, and the running total is all we keep. That also means <strong>nothing on our side can put your add-ons back on a new computer</strong>: you add them again there.</p>
+            <p>Every add-on is included with Archie. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, and the running total is all we keep. So moving your add-ons to a new computer is your backup file&rsquo;s job: it holds every add-on on each agent, with your setup answers and each routine&rsquo;s times. Without a backup, you add them again there.</p>
           </div>
 
           <div class="trust-limit">

@@ -220,8 +220,14 @@
           <div class="trust-limit" id="untrusted-text">
             <h3>Untrusted text can reach your agent, and the gate won&rsquo;t fully fix it.</h3>
             <p>If your agent reads a Slack attachment, a meeting transcript, or a web page, that text lands in front of it. A hostile message in it could try to talk your agent into something you never asked for. This is a real class of attack against AI agents, and ours is not exempt.</p>
-            <p>The approval gate stops such an attack from changing anything in your connected accounts that is not easily reversible. It does <strong>not</strong> stop everything. An injected instruction can still add items and write a note into your agent&rsquo;s memory, where it would persist.</p>
-            <p>Worst of all, an injected instruction can <em>leak</em> something, by having your agent fetch a web address or run a search whose text carries information from your conversation. We don&rsquo;t have a complete answer to that yet, and we&rsquo;d rather write that sentence than let you assume we&rsquo;d solved it.</p>
+            <p>The approval gate stops such an attack from changing anything in your connected accounts that is not easily reversible. It does <strong>not</strong> stop everything. An injected instruction can still add items to your lists and write a note into your agent&rsquo;s memory, where it would persist and could steer a later job.</p>
+            <p>Worst of all, an injected instruction can try to <em>leak</em> something, by having your agent open a web address or run a search whose text carries information from your conversation. Since Archie 0.3.5 that is narrower.</p>
+            <p>Your agent opens a page on its own only when the address came from you, from a page it already opened, or from a site you named. That holds until it reads something somebody else wrote in that job. An address it came up with itself, it shows you first and waits for your yes.</p>
+            <p>A skill that searches the web is given only the task: none of your memory, your profile, your files or the rest of the chat. After your agent has read an email, a page or a file in a job, it asks you before handing a search to one.</p>
+            <p>Here is what that does not cover, as far as we know. A note in memory, or an email read in an earlier job, is still there in the next job you start. That job begins as if nothing outside had been read, so it can still hand a search on without asking.</p>
+            <p>Text typed into a page that is already open goes wherever that page sends it. A service you connect through its address for AI assistants can have a way of opening pages of its own.</p>
+            <p>One more is fixed for the release after 0.3.5. On Telegram and Slack, a link in your agent&rsquo;s &ldquo;Opening&hellip;&rdquo; line could be previewed by the chat app&rsquo;s own servers before your agent asked you. And a search still sends its words to the AI company&rsquo;s search service; only the task can supply them now.</p>
+            <p>Asking first has a cost. A page your agent wants to open on its own judgment now waits for you. A follow-up to the Researcher needs its subject named, because it no longer sees earlier messages. Archie for Business gets all of this in its next release; until then it works the way the first two paragraphs describe.</p>
           </div>
 
           <div class="trust-limit" id="license-check">
@@ -230,7 +236,8 @@
             <p>So what happens if you stop paying? Your plan runs to the end of the period you have already paid for. After that, on Personal with a key from an AI company saved, Archie keeps opening on the free tier, at 20 jobs a day. Without a saved key it asks for one, and Archie for Business asks for a plan.</p>
             <p>Nothing on your computer is deleted. Write your backup before you stop, because it is made from inside Archie. Picking your plan back up from Archie, rather than through a fresh checkout, puts everything back the way you left it; if anything looks stuck, write to us.</p>
             <p>There is a limit on how long Archie will run without hearing from us, and we would rather tell you the number than let you find it. When you sign in, our server hands the app a signed note saying what your account can open, and that note is good for <strong>60 days</strong>. Every launch that can reach us replaces it, so in ordinary use you will never see this.</p>
-            <p>But an Archie kept offline for two months will ask you to sign in again before it carries on. The note is signed because the alternative was a plain switch inside the app, which anyone could flip; making it unforgeable is what gives it an expiry date at all.</p>
+            <p>Kept offline for two months, the note runs out. On Personal with a key from an AI company saved, Archie carries on at the free tier&rsquo;s 20 jobs a day. Anything more, and Archie for Business, asks you to connect to the internet and sign in before it carries on.</p>
+            <p>The note is signed because the alternative was a plain switch inside the app, which anyone could flip; making it unforgeable is what gives it an expiry date at all.</p>
             <p>The other scenario is the one we have committed to in writing. <strong>If <em>we</em> disappear, Archie keeps working</strong>: on its last license note for up to 60 days, then on the final version the Terms oblige us to publish. The <a href="../../terms-of-service/">Terms</a> put it in these words: &ldquo;If Otian AI ceases operations, we will publish a final version of Archie that requires no license check, within 30 days of shutting down.&rdquo;</p>
             <p>That is a term of the agreement, so you don&rsquo;t have to trust us for it. The two numbers are deliberate: the note lasts twice as long as the deadline for that final version, so the promise has a month of room rather than landing exactly as your copy stops.</p>
             <p>What you&rsquo;d lose if we vanished is updates, the marketplace, support, phone access, and any AI we were paying for, until you connect an account of your own. You would not lose the agent you built. It&rsquo;s on your disk, and it was never ours.</p>
@@ -239,7 +246,7 @@
 
           <div class="trust-limit" id="add-on-receipts">
             <h3>We keep no list of which add-ons are yours.</h3>
-            <p>Every add-on is included with Archie. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, and the running total is all we keep. That also means <strong>nothing on our side can put your add-ons back on a new computer</strong>: you add them again there.</p>
+            <p>Every add-on is included with Archie. Adding one bumps its public install count, signed in as you so the tally can&rsquo;t be gamed, and the running total is all we keep. So moving your add-ons to a new computer is your backup file&rsquo;s job: it holds every add-on on each agent, with your setup answers and each routine&rsquo;s times. Without a backup, you add them again there.</p>
           </div>
 
           <div class="trust-limit" id="no-audit">

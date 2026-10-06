@@ -1401,6 +1401,28 @@ the words go to the AI company your agent uses." "Locked" rather than "sealed", 
 permission prompt is on-screen copy. The transcription half is `transcribe_voice_note` in Archie's
 `gateway/turn.rs`: the bundled Whisper, audio deleted when it returns.
 
+**Changed again on archie-mobile main the same day (`fc8d1fb`), also in no store build yet,** because
+the prompts named photos and a held talk button while the app picks and films videos
+(`mediaTypes: ["images", "videos"]` in `src/attach.ts`) and Talk out loud listens hands-free. Camera:
+"...and to take a photo or video when you want to show one of your agents something." Photos:
+"Archie sees only the photos or video you pick to show an agent. What you pick goes to the computer
+running Archie, locked so we cannot open it on the way. When your agent looks at it, the AI company
+your agent uses sees it too, the same as anything you type." Microphone: "Archie uses the microphone
+only while you record a voice note or a video for an agent, or while you have Talk out loud open."
+then the same two sentences as before. For a video the AI company sees up to ten stills and the
+words, never the file (`KEYFRAME_BUDGET` and the local Whisper in Archie's
+`crates/archie-runtime/src/video.rs`), so "sees it too" says more than happens, which is the safe
+direction. The privacy policy's phone section was brought to the same facts the same day.
+
+**The phone's name crosses unsealed at pairing.** `deviceLabel()` in archie-mobile's
+`src/screens/Pair.tsx` sent `Device.deviceName` to `POST /phone/pair`, which stores it as
+`device_label` beside the pairing ticket (`stripe-webhook/phone-pair.js`). On iOS 16 and later that
+is the word "iPhone" for every app without Apple's naming entitlement, but on Android it is the name
+in the phone's settings, often the owner's. The privacy policy now says so. From `fc8d1fb` the app
+sends only `Device.modelName` ("iPhone 15 Pro", "Pixel 7"). **When a phone build carrying it ships
+on both platforms**, change the policy's sentence to "we also keep its model, such as &ldquo;iPhone
+15 Pro&rdquo;", and not before, because copies paired from older builds keep the name they sent.
+
 **Required clauses. Do not drop them:**
 
 - ⚠️ **Name the platform, because they are no longer in the same state.** Android is downloadable,

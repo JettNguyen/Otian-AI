@@ -238,22 +238,27 @@ def visible(*parts):
 compare_text = visible("compare", "index.html")
 # A third form since 2026-09-27, "Of ten agents, only Archie works...": Jett's rules of that day
 # fail a heading of two sentences, and "Ten agents." standing alone was one. Same claim, same count.
+# A fourth since 2026-10-06, when the hub was cut to about half its words (312e122ca): the heading
+# says "Eleven agents, two questions" and the line under it "Only Archie passes both questions",
+# with the two questions, whose computer and whether it asks first, drawn as the chart's axes
+# right below. The count is in the heading, and the egress clause below still has to be on the page.
 binary = re.search(
     r"(?:(\w+) agents\. (?:Archie is the only one that works|Only Archie works)|Of (\w+) agents, only Archie works)"
-    r" on your own computer",
+    r" on your own computer"
+    r"|(\w+) agents, two questions\s+Only Archie passes both questions",
     compare_text,
 )
 require(
     binary is not None,
     "compare/ no longer states the binary in any form this check reads "
     "('Of <N> agents, only Archie works on your own computer...', '<N> agents. Only Archie works "
-    "on your own computer...' or '<N> agents. Archie is the only one that works on your own "
-    "computer...'). "
+    "on your own computer...', '<N> agents. Archie is the only one that works on your own "
+    "computer...' or '<N> agents, two questions' over 'Only Archie passes both questions'). "
     "Fix the reader here before trusting this check again.",
 )
 
 if binary:
-    count = binary.group(1) or binary.group(2)
+    count = binary.group(1) or binary.group(2) or binary.group(3)
     egress = f"All {count.lower()} send your words to an AI company's computers by default."
     for page in BINARY_PAGES:
         where = "/".join(page)
@@ -262,6 +267,7 @@ if binary:
         carries = (
             "archie is the only one that works on your own computer" in low
             or "only archie works on your own computer" in low
+            or "only archie passes both questions" in low
         )
         if not carries:
             continue

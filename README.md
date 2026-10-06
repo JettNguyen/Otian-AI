@@ -197,9 +197,10 @@ with a date, or they are absent.
 
 ## Who makes Archie
 
-Otian AI is two people, **Jack Raney** (Co-Founder and Chief Executive Officer) and **Jett Nguyen**
-(Co-Founder and Chief Technology Officer). We set up AI agents by hand, one person at a time, and
-built Archie from what that taught us. [Read our story](https://otianai.com/our-story/).
+Otian AI is two people:
+**Jack Raney**, Co-Founder and Chief Executive Officer, and
+**Jett Nguyen**, Co-Founder and Chief Technology Officer. We set up AI agents by hand, one person at
+a time, and built Archie from what that taught us. [Read our story](https://otianai.com/our-story/).
 
 ---
 

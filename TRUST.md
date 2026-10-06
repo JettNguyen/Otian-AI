@@ -2520,6 +2520,12 @@ alone.
 Connections tab, press Something else, give it a name, the web address of its API, and the key that
 service gave you. Then write a skill that uses it and tell your agent which addresses to call."
 
+⚠️ **Never run against a real service** (Archie `docs/OPEN-THREADS.md`, "A key you added by hand
+now reaches a skill, and nothing has been connected that way"; noted October 6, 2026). The heading's
+"connected and used" names what the code allows, not something anyone has done. The approved
+wording above says how to do it and stays; do not add "people use it to" or any sentence that
+reports it working until `docs/TEST-DAY.md` item 30 has passed.
+
 **Why it's true:** `connector_connect` (`src-tauri/src/commands/integrations.rs`) accepts a service
 id that is not in `KNOWN_SERVICES` and builds the connection out of the address and the key the
 person typed. The key goes into the Keychain bound to that one host, exactly like a catalog one, and
@@ -2592,6 +2598,13 @@ and the request never leaves your network."
   sentence may say Archie keeps it home.
 - What the agent learns from a light (its name, on or off) goes to the AI provider like any other
   tool result. Say so wherever the local lane is described; the privacy policy does.
+- **Google Drive is per file, and the privacy policy did not name it until October 6, 2026.** The
+  connect screen's "Files (Google Drive)" box asks for `drive.file` (`SCOPE_DRIVE_FILE`, Archie
+  `src-tauri/src/commands/integrations.rs`), so the agent sees only the Sheets and Docs the owner
+  picks in Google's picker; a spreadsheet change is staged (`ProposalKind::Drive`) and applies on a
+  later message. `drive_read` and `drive_write` run on the starter credits and the plan with the AI
+  included (`tool_policy::credit_policy`), so picked files ride the proxy there like calendar data.
+  Never "it can read your Drive".
 
 ### ✅ Websites: the agent using a site itself, when there is no connector — SHIPPED 2026-08-18
 
@@ -3178,6 +3191,11 @@ for that day. It says what it checked and what it did not."
 - ❌ Never imply prices or ratings. Not "cheap eats", not "highly rated".
 - ⚠️ Hours are the map's, and the map is sometimes out of date. The phone number ships in every
   reply for exactly that reason, and copy should not promise the hours are right.
+- ⚠️ **The places tool has never read the real map** (Archie `docs/OPEN-THREADS.md`, "The places
+  tool has never met the real map"; noted October 6, 2026). Every field it reads is parsed from a
+  fixture written from TomTom's documentation, so a renamed field would drop silently. The approved
+  wording stays; `cargo test -p archie-runtime --test places_live -- --ignored` with the drive
+  check's key settles it (`docs/TEST-DAY.md` item 31).
 
 ### ✅ Prices at Shopify stores, for Price Watch: BUILT 2026-09-24 (Archie `b67a6576`), SHIPPED in Archie 0.3.1 on September 29, 2026
 

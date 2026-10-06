@@ -190,8 +190,8 @@
       <div class="page-hero-inner">
         <a class="page-back" href="../"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>Trust</a>
         <span class="section-label fade-up">Trust</span>
-        <h1 class="fade-up delay-1">Installing Archie on a work computer.</h1>
-        <p>If somebody has to sign off on software before it goes on your computer, this is the page to send them. It answers what a review asks, and the full document is at the bottom, ready to attach to a ticket.</p>
+        <h1 class="fade-up delay-1">Archie for an IT review.</h1>
+        <p>For whoever signs off on software at your work. The full document to attach to a ticket is at the bottom.</p>
       </div>
     </section>
 
@@ -204,8 +204,7 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">The Short Version</span>
-          <h2 id="answers" class="fade-up delay-1">Twelve answers, before the document.</h2>
-          <p>Everything below is checkable against a running copy, and the last section tells you how to check it rather than take our word.</p>
+          <h2 id="answers" class="fade-up delay-1">Twelve answers for a review.</h2>
         </div>
 
         <div class="trust-table-wrap fade-up delay-2">
@@ -220,7 +219,7 @@
             <tbody>
               <tr>
                 <td data-label="The question"><strong>What is it?</strong></td>
-                <td data-label="The answer">A desktop app installed on one computer. The agent is a process on that computer, so closing Archie stops it. There is no Archie server somewhere running it for you.</td>
+                <td data-label="The answer">A desktop app on one computer. The agent is a process on that computer, so closing Archie stops it. No Archie server runs it for you.</td>
               </tr>
               <tr>
                 <td data-label="The question"><strong>Does it accept connections?</strong></td>
@@ -228,11 +227,11 @@
               </tr>
               <tr>
                 <td data-label="The question"><strong>Does it need admin rights?</strong></td>
-                <td data-label="The answer">Not to install or run it: the Windows installer writes to the user&rsquo;s own profile. One optional feature asks for more on a Mac: waking the computer for a routine installs a helper that runs as root, after an administrator&rsquo;s password. On Windows the same feature is a scheduled task under the user&rsquo;s own account. No driver or kernel extension, and nothing runs at startup unless you turn it on.</td>
+                <td data-label="The answer">Not to install or run it: the Windows installer writes to the user&rsquo;s own profile. One optional feature, waking the computer for a routine, asks for more. On a Mac it installs a helper that runs as root, after an administrator&rsquo;s password; on Windows it is a scheduled task under the user&rsquo;s own account. No driver or kernel extension; nothing runs at startup unless you turn it on.</td>
               </tr>
               <tr class="is-content">
                 <td data-label="The question"><strong>Where does the work go?</strong></td>
-                <td data-label="The answer">When your agent thinks, it talks to your AI company directly from your computer, on your account, with your key, and we keep no copy. Two exceptions run through our server: the free starter credits and the plan with the AI included. On either, your agent <strong>reads no email or texts</strong>; both work on an AI account of your own.</td>
+                <td data-label="The answer">Straight from your computer to your AI company, on your account, with your key, and we keep no copy. Two exceptions run through our server: the free starter credits and the plan with the AI included. On either, your agent <strong>reads no email or texts</strong>; both work on an AI account of your own.</td>
               </tr>
               <tr class="is-content">
                 <td data-label="The question"><strong>Can a hostile email or web page hijack it?</strong></td>
@@ -240,7 +239,7 @@
               </tr>
               <tr>
                 <td data-label="The question"><strong>Where do its messages go?</strong></td>
-                <td data-label="The answer">To Archie&rsquo;s own window, to a chat app only if one is connected, and to your phone if phone access is on, sealed in a mailbox on our servers. A chat app is worth a decision, because it holds what it carries: Telegram&rsquo;s cloud chats are not end-to-end encrypted, and Slack and Discord keep content under their own terms. Using none, or Matrix on a homeserver you run, both work.</td>
+                <td data-label="The answer">Archie&rsquo;s own window; a chat app, only if one is connected; and your phone, if phone access is on, sealed in a mailbox on our servers. A chat app holds what it carries: Telegram&rsquo;s cloud chats are not end-to-end encrypted, and Slack and Discord keep content under their own terms. No chat app, or Matrix on a homeserver you run, also works.</td>
               </tr>
               <tr>
                 <td data-label="The question"><strong>What do your servers hold?</strong></td>
@@ -248,11 +247,11 @@
               </tr>
               <tr>
                 <td data-label="The question"><strong>Is there analytics?</strong></td>
-                <td data-label="The answer">No. Nothing records what you do in Archie and nothing counts what you use. Once every six hours it says which version it is and whether it runs on Mac or Windows. If it quits unexpectedly, the next launch sends the tail of the crash, and repeated failures send their error line. All of it can be switched off in Settings, under Privacy.</td>
+                <td data-label="The answer">No. Nothing records what you do in Archie or counts what you use. Once every six hours it reports its version and whether it runs on Mac or Windows. After an unexpected quit, the next launch sends the tail of the crash, and repeated failures send their error line. All of it switches off in Settings, under Privacy.</td>
               </tr>
               <tr>
                 <td data-label="The question"><strong>Can it run commands?</strong></td>
-                <td data-label="The answer">No. There is no tool that runs a shell command, evaluates code, or loads a plugin, and model output is never turned into a command line. The built-in tools are a fixed list in the source. A person can add a remote server&rsquo;s tools by connecting its address, and anything it does not mark read-only waits for their approval.</td>
+                <td data-label="The answer">No. No tool runs a shell command, evaluates code or loads a plugin, and model output never becomes a command line. The built-in tools are a fixed list in the source. A person can add a remote server&rsquo;s tools by connecting its address; anything it does not mark read-only waits for their approval.</td>
               </tr>
               <tr>
                 <td data-label="The question"><strong>Can it reach inside our network?</strong></td>
@@ -260,17 +259,16 @@
               </tr>
               <tr>
                 <td data-label="The question"><strong>Is it signed?</strong></td>
-                <td data-label="The answer">On macOS, yes: an Apple Developer ID certificate, notarized by Apple and stapled, so Gatekeeper opens it without a warning. <strong>On Windows, no.</strong> The installer is unsigned and SmartScreen warns on first launch. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../../archie/install/">Why, and what to check instead &rarr;</a></td>
+                <td data-label="The answer">macOS: yes, with an Apple Developer ID certificate, notarized by Apple and stapled, so Gatekeeper opens it without a warning. <strong>Windows: no.</strong> The installer is unsigned and SmartScreen warns on first launch. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../../archie/install/">Why, and what to check instead &rarr;</a></td>
               </tr>
               <tr>
                 <td data-label="The question"><strong>What about our mailboxes?</strong></td>
-                <td data-label="The answer">Google and Microsoft mail connect through OAuth in your own browser, and somebody who wants calendar only never grants mail. An app password connects iCloud, Fastmail, Yahoo, AOL, Zoho and GMX instead. A drafted reply goes out when a person sends it or sets a time for it, and the agent cannot set that time itself.</td>
+                <td data-label="The answer">Google and Microsoft mail connect through OAuth in your own browser; someone who wants only the calendar never grants mail. iCloud, Fastmail, Yahoo, AOL, Zoho and GMX use an app password. A drafted reply goes out when a person sends it or sets a time for it, and the agent cannot set that time itself.</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <p class="trust-table-note">Several of those rows describe a limit rather than a feature, and they are in the table rather than under it on purpose. If you find Archie doing something this page does not describe, we want to know. <a style="color:var(--accent);text-decoration:underline;text-underline-offset:2px" href="../../contact/">Tell us</a>, publicly, if you like.</p>
       </div>
     </section>
 
@@ -279,16 +277,24 @@
          ============================== -->
     <section class="section section-alt" aria-labelledby="document">
       <div class="container container-narrow">
-        <div class="section-header">
+        <div class="section-header section-header--solo">
           <span class="section-label fade-up">The Full Review</span>
           <h2 id="document" class="fade-up delay-1">The document, for the ticket.</h2>
-          <p>Thirty-three pages, written for whoever has to approve this rather than for whoever wants it. It opens with a threat model saying what Archie does and does not defend against.</p>
-          <p>Then it covers the hosts Archie connects to, the file paths it creates, every OAuth permission it can request and the operating system prompts it triggers. It also covers what each AI provider does with what you send, and how an API key compares with an enterprise agreement.</p>
-          <p>It describes version 0.2.3, and since then a Mac asks for two more things. Setting routines to wake the computer asks for an administrator&rsquo;s password once, in macOS&rsquo;s own box. Computer control asks for Accessibility, in System Settings, before your agent can use the apps you allow.</p>
-          <p>It ends with twenty open points and a list of the review artifacts we do and do not have, including the ones we have not built.</p>
+          <p>Written for whoever has to approve Archie. What it covers:</p>
         </div>
 
-        <div class="fade-up delay-2" style="text-align:center">
+        <div class="trust-prose fade-up delay-2">
+          <ul class="trust-hosts">
+            <li>A threat model: what Archie does and does not defend against.</li>
+            <li>The hosts Archie connects to and the file paths it creates.</li>
+            <li>Every OAuth permission it can request, and the operating system prompts it triggers.</li>
+            <li>What each AI provider does with what you send, and an API key compared with an enterprise agreement.</li>
+            <li>Twenty open points, and the review artifacts we do and do not have, including ones we have not built.</li>
+          </ul>
+          <p class="trust-aside">Since 0.2.3, a Mac also asks for an administrator&rsquo;s password once, to let routines wake the computer, and for Accessibility, in System Settings, before your agent can use the apps you allow with Computer control.</p>
+        </div>
+
+        <div class="fade-up delay-2 mt-40" style="text-align:center">
           <a class="btn btn-primary btn-lg" href="../../assets/Archie-Overview-Public.pdf" download>Download the review document (PDF)</a>
           <p class="trust-table-note" style="margin-top:1rem">Revision 5, September 3, 2026, covering Archie 0.2.3 &middot; 33 pages. Where it and this page differ, this page and the Trust page are current.</p>
         </div>
@@ -302,8 +308,8 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">Better Than Taking Our Word</span>
-          <h2 id="check" class="fade-up delay-1">Check these claims with a packet sniffer.</h2>
-          <p>Most of this page is about network behavior, which you can check yourself in about ten minutes. Install a network monitor, use Archie properly, and compare what you see with the list of hostnames we publish. Then, on an AI account of your own, block us at the firewall and watch the agent keep working.</p>
+          <h2 id="check" class="fade-up delay-1">Check us with a packet sniffer.</h2>
+          <p>About ten minutes: install a network monitor, use Archie properly, and compare what you see with the hostnames we publish. Then, on an AI account of your own, block us at the firewall and watch the agent keep working.</p>
         </div>
         <div class="fade-up delay-2" style="text-align:center">
           <a class="btn btn-secondary btn-lg" href="../details/#verify-long">The exact steps, and the hostnames to expect &rarr;</a>
@@ -318,8 +324,8 @@
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">Next</span>
-          <h2 id="next" class="fade-up delay-1">If something here is not enough.</h2>
-          <p>If your review stops on one row, write to us and say which. We will answer with what the code does, and if the answer is that Archie cannot satisfy your policy, we will say that instead of talking around it.</p>
+          <h2 id="next" class="fade-up delay-1">When one row stops your review.</h2>
+          <p>Tell us which, or anything Archie does that this page does not describe, publicly if you like. We will answer with what the code does, and say so plainly if Archie cannot satisfy your policy.</p>
         </div>
         <div class="fade-up delay-2" style="text-align:center">
           <a class="btn btn-primary btn-lg" href="../../contact/">Ask us the specific question</a>

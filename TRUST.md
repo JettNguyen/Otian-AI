@@ -4860,7 +4860,7 @@ also says nothing about the agent's own picture, which is a different file in a 
 write that Archie "knows your brand" or anything that implies the logo is used in what the agent
 produces: it is drawn on two screens in the app and used nowhere else.
 
-### 🚧 A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, and the fourteen places it does NOT change
+### 🚧 A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, FOR COPY WITH 0.3.6, and the fourteen places it does NOT change
 
 **The code landed on 2026-09-21** (the Archie repo, commit `11f7d864`). What follows is what was
 actually built, checked against the code rather than against the plan this entry used to hold.
@@ -4873,7 +4873,7 @@ a routine coming due at the limit and the two watches meeting new mail and texts
 tests, the pipeline test `a_routine_at_the_monthly_limit_does_not_run_and_says_so_once` and
 `a_watch_stops_reading_at_the_owners_monthly_limit`, and both fixes are on main, not in a release.
 Still owed: November 1's comparison of October's counted figure with the AI company's invoice, the
-only check of the "close, not exact" boundary below. The ban at the bottom stands until Jett lifts it.
+only check of the estimate boundary below. The ban at the bottom lifts with 0.3.6, by Jett's decision.
 
 **The three conditions this entry set before a word could change were all met.** The cap is
 **opt-in** (`MonthOfSpend::enabled` is `false` by default, and a test,
@@ -4927,8 +4927,10 @@ going off was read as the limit not working.
    the provider's bill from an ordinary API key. The number counted is token counts times a local
    price table (`src-tauri/src/usage.rs`), which is the same number the Spending page has always
    shown. It leans high on purpose, so the bill lands under the ceiling rather than over it. **Any
-   copy that says "you will never be charged more than X" is false copy.** The app says "close,
-   not exact" in those words.
+   copy that says "you will never be charged more than X" is false copy.** The Spending page says
+   the figure is "an estimate from how much your agents read and wrote" and that "the exact figure
+   is on your AI company's own billing page". It said "close, not exact" until Archie `b56b81be`
+   simplified the page, and this entry quoted that phrase until October 6, 2026.
 2. **One AI account is invisible to it.** A Custom endpoint is an address the owner typed, and
    nobody here knows what is charged at it, so those calls are counted in tokens and in no dollar
    figure at all. A ceiling set by an owner on a Custom endpoint never fills. The panel says so.
@@ -4994,15 +4996,43 @@ drift backwards.
 owner sets on what the **AI company** charges, which is a different sentence from "it can buy
 things". Do not let the two merge. The honest form, on the day anything is said at all, is: "This
 is a limit on what it spends on thinking, which is a different thing from what it can buy." The
-app itself carries that sentence on the panel, in those words, so the site has a shipped wording
-to match rather than a fresh one to invent.
+app says it its own way, under the limit on the Spending page: "Not a limit on buying.", then where
+the buying switch is and that it has its own limits (`MonthlyLimit` in Archie `src/app/account.tsx`).
+This entry said until October 6, 2026 that the panel carried the sentence above in those words. It
+never did.
 
-**⛔ One ban, until it is lifted in writing here.** No page may mention a spending limit yet. The
-condition this ban set, a month of real calls adding up to a real ceiling on somebody's computer,
-was met on October 6, 2026 (above), so what holds it now is the rest of this paragraph. Lifting it is also a decision about whether to
-sell on it at all, which is Jett's and has not been made. When it is lifted, the sentence goes on
-a page about **what the app costs to run**, never beside the buying sentences, because a limit and
-a purchase in one paragraph is exactly the merge this entry exists to prevent.
+**⛔ The ban lifts with 0.3.6, by Jett's decision of October 6, 2026.** Until the release that
+carries Archie `f8d2dcab` and `a060d5d7` is the one the site's download gives, no page may mention a
+spending limit. Asked when the pricing page should mention it, Jett chose the day 0.3.6 ships over
+today and over never: 0.3.6 is the first release where a routine at the limit stays quiet and new
+mail and texts stop being read too, so it is the first release the sentence below is true of in
+full. That is also his decision to sell on it, which this paragraph used to say had not been made.
+
+**Approved wording, for 0.3.6 and later.** It goes on `archie/pricing/`, in "The AI bill,
+measured", after where the bill goes, and never in a paragraph that also says buy, shop or order:
+
+"You can set one monthly limit on what your agents spend on thinking, all of them together. When
+the month reaches it, routines and reading new mail and texts pause until the first. Your agent
+still answers when you ask, and reminders still go off. The figure is an estimate, and the exact
+one is on your AI company's own billing page."
+
+Where there is room for one more sentence, it is boundary 2: "A custom AI address you typed in
+yourself is not counted." The short form, for a table cell or a chip: **"A monthly limit on what
+it spends on thinking, if you set one."**
+
+What makes each clause true: the switch, the number and the note, `MonthlyLimit` in Archie
+`src/app/account.tsx`. One limit for all agents, `archie_runtime::ai_limit` (one record for the
+computer) and `src-tauri/src/usage.rs` (the only writer of the total). Routines pause,
+`handle_routine_message` and `run_target`, `f8d2dcab`. Mail and texts pause,
+`watch_budget::under_monthly_limit`, `a060d5d7`. Until the first, `ai_limit::this_month`, in local
+time. Still answers, `ai_limit::check` returning early for `Asker::You`. Reminders, whose delivery
+calls no AI.
+
+- ❌ **Never "it stops spending at your limit."** The owner's own conversation keeps spending, on
+  purpose, so the month can go past the number.
+- ❌ **Never "you will never be charged more than your limit"**, for that reason and boundary 1's.
+- ❌ **Never on 0.3.5 or older.** There a routine at the limit posts the limit's sentence every time
+  it is due, and the mail and text watches keep reading.
 
 ### ✅ Buying, as a switch the owner turns on: SHIPPED 2026-09-22 (0.3.0), APPROVED FOR COPY 2026-09-24
 

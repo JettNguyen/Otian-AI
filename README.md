@@ -115,7 +115,7 @@ The AI bill runs from $1 to $5 a month for a light agent, up to $139 for a heavy
 | **Archie** | [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
 | **Services** | [Work With Us](https://otianai.com/services/) · [Commission an Add-on](https://otianai.com/services/#commission) |
-| **Learn** | [Learning Library](https://otianai.com/learn/ai-basics/) · [Compare](https://otianai.com/compare/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
+| **Learn** | [Learning Library](https://otianai.com/learn/getting-your-computer-ready/) · [Compare](https://otianai.com/compare/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
 
 ---

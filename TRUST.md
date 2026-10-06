@@ -4860,12 +4860,20 @@ also says nothing about the agent's own picture, which is a different file in a 
 write that Archie "knows your brand" or anything that implies the logo is used in what the agent
 produces: it is drawn on two screens in the app and used nowhere else.
 
-### 🚧 A user-set spending cap: BUILT 2026-09-21, NEVER RUN, and the fourteen places it does NOT change
+### 🚧 A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, and the fourteen places it does NOT change
 
-**The code landed on 2026-09-21** (the Archie repo, commit `11f7d864`). It has never stopped a
-real routine on a real computer, so this entry stays 🚧 and the ban at the bottom stands. What
-follows is what was actually built, checked against the code rather than against the plan this
-entry used to hold.
+**The code landed on 2026-09-21** (the Archie repo, commit `11f7d864`). What follows is what was
+actually built, checked against the code rather than against the plan this entry used to hold.
+
+**It ran on a real computer on October 6, 2026**, and Jett called the test done that day (Archie
+`docs/TEST-DAY.md` item 3). A month of his own calls, about $1.53 counted, passed a one-cent limit
+on his Mac. Run by hand: chat kept answering, the first answer after the line ended with the limit's
+sentence once and the next did not (Archie main), and a reminder still went off. **Not run by hand:**
+a routine coming due at the limit and the two watches meeting new mail and texts. Those rest on
+tests, the pipeline test `a_routine_at_the_monthly_limit_does_not_run_and_says_so_once` and
+`a_watch_stops_reading_at_the_owners_monthly_limit`, and both fixes are on main, not in a release.
+Still owed: November 1's comparison of October's counted figure with the AI company's invoice, the
+only check of the "close, not exact" boundary below. The ban at the bottom stands until Jett lifts it.
 
 **The three conditions this entry set before a word could change were all met.** The cap is
 **opt-in** (`MonthOfSpend::enabled` is `false` by default, and a test,
@@ -4990,9 +4998,8 @@ app itself carries that sentence on the panel, in those words, so the site has a
 to match rather than a fresh one to invent.
 
 **⛔ One ban, until it is lifted in writing here.** No page may mention a spending limit yet. The
-code has never stopped a real routine: the arithmetic and the refusal are unit-tested, and the
-thing that has not happened is a month of real calls adding up to a real ceiling on somebody's
-computer. Lift this when one has, and not before. Lifting it is also a decision about whether to
+condition this ban set, a month of real calls adding up to a real ceiling on somebody's computer,
+was met on October 6, 2026 (above), so what holds it now is the rest of this paragraph. Lifting it is also a decision about whether to
 sell on it at all, which is Jett's and has not been made. When it is lifted, the sentence goes on
 a page about **what the app costs to run**, never beside the buying sentences, because a limit and
 a purchase in one paragraph is exactly the merge this entry exists to prevent.

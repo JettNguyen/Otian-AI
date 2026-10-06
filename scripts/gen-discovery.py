@@ -288,11 +288,14 @@ QUESTIONS = [
      "on a Mac. It is not a chatbot you open and type into: it runs on a schedule and comes "
      "back when it has something."),
     ("Does Otian AI see my conversations?",
-     "No. When your agent thinks, it talks to Anthropic or OpenAI directly from your computer, "
-     "on your account, with your key. We are not in the middle of it, and we keep no copy. "
-     "What we do hold is your email address, your plan, and the operational records listed at "
-     "https://otianai.com/trust/#what-we-hold. Your prompts still go to your AI provider, who "
-     "is a third party; the claim is about Otian custody, not about secrecy from everyone."),
+     "We hold none we can read. On an AI account of your own, your agent's thinking goes "
+     "straight from your computer to that AI company, and we are not in the middle of it. The "
+     "free starter credits, and the plan with the AI included, run through a server of ours, "
+     "which measures spend without recording what was said. What we do hold is your email "
+     "address, your plan, the operational records listed at "
+     "https://otianai.com/trust/#what-we-hold, and, if phone access is on, sealed messages we "
+     "cannot read. Your prompts still go to your AI company, a third party, so this is a claim "
+     "about what Otian holds."),
     ("Where does it run?",
      "On a computer you own and leave on. There is no Otian server running your agent, which "
      "is why there is no Otian copy of what it reads. A hosted agent platform cannot make that "

@@ -304,9 +304,30 @@
     </section>
 
     <!-- ==============================
+         Deleting the account with us (added 2026-10-06). Last, because Archie signs in with
+         this account and the backup needs a signed-in Archie. Deleting also removes the Stripe
+         customer (/account/delete in Archie's stripe-webhook), so the plan step comes first.
+         What it removes is the account page's own list; what outlives it is the privacy
+         policy's. The button lands on the account page with the confirm box open (#delete).
+         ============================== -->
+    <section class="section section-alt" aria-labelledby="delete">
+      <div class="container container-narrow">
+        <div class="section-header">
+          <span class="section-label fade-up">Your Otian Account</span>
+          <h2 id="delete" class="fade-up delay-1">Delete your account last.</h2>
+          <p>Archie signs in with this account, so write your backup and stop your plan first. Deleting removes your sign-in, account record, billing and security data. A few records outlive it, none holding anything you wrote; the <a href="../../privacy-policy/">privacy policy</a> lists them.</p>
+        </div>
+        <div class="fade-up delay-2" style="text-align:center">
+          <a class="btn btn-secondary btn-lg" href="../../account/#delete">Delete your Otian account</a>
+          <p class="trust-table-note" style="margin-top:1rem">You sign in, then type your email to confirm.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
          The ending that is ours. Publishing your own failure case is the part nobody copies.
          ============================== -->
-    <section class="section section-alt" aria-labelledby="us">
+    <section class="section" aria-labelledby="us">
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">If We Stop</span>
@@ -324,7 +345,7 @@
          Last line of the page. Most people reading this have not started yet, which is
          the whole reason it exists; the useful next thing is the door, not a form.
          ============================== -->
-    <section class="section" aria-labelledby="next">
+    <section class="section section-alt" aria-labelledby="next">
       <div class="container container-narrow">
         <div class="section-header">
           <span class="section-label fade-up">Next</span>

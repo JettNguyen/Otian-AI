@@ -254,6 +254,10 @@
                 <td data-label="The answer">No. No tool runs a shell command, evaluates code or loads a plugin, and model output never becomes a command line. The built-in tools are a fixed list in the source. A person can add a remote server&rsquo;s tools by connecting its address; anything it does not mark read-only waits for their approval.</td>
               </tr>
               <tr>
+                <td data-label="The question"><strong>Can it use other apps on the computer?</strong></td>
+                <td data-label="The answer">On a Mac, only once Computer control is on, and only the apps the person allows. It never uses a terminal, password keepers, System Settings, Mail, Messages, Calendar or web browsers, whatever the person says. It never types a password or a card you pay with, and anything it could not undo waits for a person. On Windows, Computer control uses websites only.</td>
+              </tr>
+              <tr>
                 <td data-label="The question"><strong>Can it reach inside our network?</strong></td>
                 <td data-label="The answer">Only where the person using it points it. The web tools refuse private, loopback and carrier-grade NAT addresses, checked inside the HTTP client&rsquo;s own name resolver. Three things can reach local addresses: lights added on the local wifi, an AI model on this computer, and the Computer control browser. That browser is off until turned on, and can then open a local address.</td>
               </tr>

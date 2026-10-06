@@ -1062,7 +1062,12 @@ is ever started. Cite the file, not a line: lines move.
   paid kind). Never "now free", "no longer sold", "for the beta": it is a standing fact.
 - ⛔ **"Add-ons sync automatically, no reinstalling per device"** (caught 2026-08-24 on
   `skills-marketplace/browse/`) stays banned. There is no per-user record of any add-on to sync
-  from, so a new computer adds them again. Say that.
+  from, so a new computer adds them again. Say that, **and say the backup file in the same breath**
+  (added October 6, 2026): it carries every add-on on each agent, with the setup answers and each
+  routine's times (Archie `docs/BACKUP-FORMAT.md`, the `workspaces/` table; see "Your whole agent in
+  one file"). `trust/` and `trust/details/` used to say "nothing on our side can put your add-ons
+  back on a new computer: you add them again there", which was true of us and left the reader
+  thinking nothing could. "Without a backup, you add them again" is the true form of the old line.
 - ⛔ The retired claim "Anything you buy is tied to your Otian account, so another computer can
   add it again without paying twice" must not return: there is nothing bought to tie.
 
@@ -1170,7 +1175,9 @@ thing any more.
 - **Android is downloadable today**, as an APK from the `archie-releases` repo, linked from
   `archie/install/`. Anyone can install it. **Present tense is correct for Android**, and for
   Android only.
-- **iPhone is still with Apple.** Build 10 has sat in review since 2026-09-17. In review is not
+- **iPhone is still with Apple.** First submitted 2026-09-17; rejected 2026-09-23 and 2026-09-29
+  (archie-mobile `docs/STORE-LISTING.md`), and build 16 has waited for review since 2026-09-29 (App
+  Store Connect, read October 6, 2026). In review is not
   approved: nobody outside the team can install it and it is in no store listing anyone can reach.
   **Future tense still holds for iPhone**, and **no page may carry a date for it**, because a
   rejection is an ordinary outcome and we do not control the clock.
@@ -1369,6 +1376,18 @@ the way, sealed, and this document bans "it never touches our servers" for exact
 It is not an App Store problem and Apple will not reject it. It is ours. **Prefer "it goes to the
 computer running Archie, sealed, and we cannot read it"** and change the strings the next time that
 app is built for any other reason.
+
+**Changed on archie-mobile main, October 6, 2026 (`23a21a3`), in no store build yet.** "Nowhere else"
+was false a second way too: the agent shows a photo to its AI company when it looks at it, and the
+words of a recording go there once the computer has turned it into words. The prompts now read:
+"It goes to the computer running Archie, locked so we cannot open it on the way. Your agent then
+shows it to the AI company it uses, the same as anything you type." And for the microphone, with
+the talk screen's line from the entry above: "Archie uses the microphone only while you record
+something to say to an agent, or while the talk screen is open. What you say goes to the computer
+running Archie, locked so we cannot open it on the way. That computer turns it into words, and only
+the words go to the AI company your agent uses." "Locked" rather than "sealed", because a
+permission prompt is on-screen copy. The transcription half is `transcribe_voice_note` in Archie's
+`gateway/turn.rs`: the bundled Whisper, audio deleted when it returns.
 
 **Required clauses. Do not drop them:**
 
@@ -2189,9 +2208,10 @@ have. The swap happens at the next launch, before the database is opened.
 
 **Approved wording:** "Reset Archie erases your agents and your saved keys from this computer."
 And wherever that is said to someone leaving, the leftovers go with it, in the list or the
-paragraph beside it: the phone mailbox on our server (press **Disconnect every phone** first),
-the setting that wakes the computer for routines, and, on Windows, the uninstaller's box
-"Also remove my Archie data, agents, and settings".
+paragraph beside it: the setting that wakes the computer for routines, and, on Windows, the
+uninstaller's box "Also remove my Archie data, agents, and settings". *[The phone mailbox came off
+this list on October 6, 2026: Reset empties it from 0.3.3 on (Archie `be864a76`), and every edition
+is past that. "Resetting also disconnects every phone and empties its sealed mailbox" may be said.]*
 
 **Why it's true** (`app_factory_reset`, `src-tauri/src/auth.rs:1579`, 0.3.1 `09c5cb5e`, unchanged
 on main): it deletes every credential the database lists from the Keychain or Credential Manager
@@ -2200,10 +2220,11 @@ agent folder, `archie.db` and the crash logs, then restarts. The Account page's 
 section asks you to type "reset" first (`account.tsx`).
 
 **What it leaves, and why each matters:**
-- **The phone mailbox on our server.** Reset never calls the relay's `wipe`, so the sealed
-  snapshot of the recent conversation stays until **Disconnect every phone** (`phone_disable`,
-  which does wipe it) or the account is deleted (`stripe-webhook/index.js`). Sealed, so we still
-  cannot read it; it is still there.
+- **The phone mailbox on our server, through 0.3.2 only.** Reset did not call the relay's `wipe`,
+  so the sealed snapshot stayed until **Disconnect every phone** or the account was deleted. From
+  0.3.3 (`be864a76`, September 30, 2026) `app_factory_reset` calls `phone::disconnect_every_phone`
+  first, best effort: a relay that cannot be reached is logged and the reset carries on, and the
+  pairing key goes either way, so what a failed wipe leaves is ciphertext nobody holds a key to.
 - **On Windows, the uninstaller's box is not a reset.** "Also remove my Archie data, agents, and
   settings" deletes the app's two data folders (`RmDir /r "$APPDATA\${BUNDLEID}"` and the same under
   `$LOCALAPPDATA`, `src-tauri/installer/installer.nsi`) and leaves every saved key in Credential
@@ -2240,9 +2261,8 @@ overwritten by `publish_state` and deleted by `wipe`, which Disconnect every pho
 - ⛔ **Never a fixed limit in days.** The privacy policy said "at most 30 days" until this entry, and
   no code enforced it: the sweep needs the computer on and Archie running, so a message can outlive a
   day by as long as the computer is off.
-- ⚠️ **Reset does not remove the snapshot in 0.3.1**, which is why the privacy policy and the Reset
-  entry above say press Disconnect every phone first. Jett decided on 2026-09-30 that Reset should
-  empty it; when that ships in a release, the leftover comes off both.
+- **Reset removes the snapshot from 0.3.3 on** (`be864a76`), as Jett decided on 2026-09-30. The
+  leftover came off the Reset entry above and off the privacy policy on October 6, 2026.
 
 ### ✅ What your agent can write to disk
 
@@ -3630,7 +3650,7 @@ Stripe webhook's per-item purchase writer (`stripe-webhook/index.js` →
 
 **Amended 2026-08-21: the core is not the whole holdings, and this file must carry the whole
 list even where a page carries the short form.** The backend's own collections also hold, where
-they apply: the version heartbeat (version, platform, edition, last seen), opt-in crash tails,
+they apply: the version heartbeat (version, platform, edition, last seen), crash tails (on until turned off),
 the trial-credit ledger and its spend history (token counts and amounts, with salted device and
 IP hashes; never message content), second-factor records, guided-session invoices,
 refused-checkout records (uid, country, amount), and sealed phone messages we cannot open plus
@@ -4139,7 +4159,12 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
 
 **Boundaries — do not overclaim:**
 - Sends are **replies threaded onto an existing message** (`google.rs:277-303`). No claim of
-  composing fresh email from scratch until that ships.
+  composing fresh email from scratch until that ships. *[Stale, found October 6, 2026: a new email
+  to an address shipped in 0.3.0 (Archie `1b8bc044`, `inbox_draft_new_email`). It arrives as the same
+  card with the same Send, Edit and Dismiss, and goes when the person sends it or sets a time
+  (`email/replies/draft.rs`, "A new email to {to} is drafted and waiting on a card with buttons to
+  send it"). It needs an entry of its own, with the address-checking boundary, before a page says
+  it; "replies only" is no longer a limit to repeat.]*
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
 ### ✅ Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen), SHIPPED in Archie 0.3.1 on September 29, 2026
@@ -4715,8 +4740,16 @@ branch for it (`archie_runtime::ai_limit`, where the `Option<&Path>` is the whol
 **A person typing is never refused.** That is deliberate, not a gap: the case a ceiling exists for
 is a loop running while nobody is watching, and locking the owner out of the conversation would
 lock them out of the one screen where the number can be raised. It is enforced in `run_target`
-(`crates/archie-runtime/src/gateway/turn.rs`), the single point every job passes through, off
-`Asker`, the same argument the free tier's daily count already reads.
+(`crates/archie-runtime/src/gateway/turn.rs`), the point every job passes through, off `Asker`, the
+same argument the free tier's daily count already reads.
+
+⚠️ **Through 0.3.5 the two watches did not stop, though the app's panel said they did.** Found
+October 6, 2026: the mail and text watches spend through their own quarantined reads
+(`email::quarantined_email_read`, `texts/replies/triage.rs` `quarantined_read`) and never reach
+`run_target`, so only routines stopped. Archie `a060d5d7` (on main, not in a release) has both ask
+`watch_budget::under_monthly_limit` before every unattended read. Until the release that carries it,
+"routines stop" is the true half and "the mail watch stops, the text watch stops" is not; the page
+ban below keeps that off the site either way.
 
 **Two boundaries, and neither is flattering.**
 
@@ -5102,11 +5135,41 @@ one."
   `tools_specialist::tests::a_searching_specialist_holds_nothing_of_the_persons`.
 
 **Boundaries:**
-- ⛔ **Never "your agent can't leak" or "prompt injection is solved".** Three ways remain, and any page
+- ⛔ **Never "your agent can't leak" or "prompt injection is solved".** Four ways remain, and any page
   making the claim above names them in the same place: a note an injected instruction saved into
-  memory on an earlier turn can still steer a later turn that has read nothing; text typed into a
-  page that is already open goes wherever that page sends it; and an MCP server the owner connected
-  can have a fetch tool of its own.
+  memory on an earlier turn can still steer a later turn that has read nothing; **an email or message
+  read in an earlier job is still in the conversation, and the next job a person starts begins as if
+  nothing outside had been read** (`TurnGuard::new` in `outbound.rs` takes `outside_already` from the
+  wake alone and does not look for `ARRIVED_NOT_TYPED` entries in the history, so that job can hand a
+  search on, or open a page on a site the person named, without asking; found October 6, 2026); text
+  typed into a page that is already open goes wherever that page sends it; and an MCP server the
+  owner connected can have a fetch tool of its own.
+- ⚠️ **A fifth, in 0.3.5 and earlier only: a chat app's link preview.** Telegram's plain sends and
+  edits went out with previews on, and the progress line names the site the agent is opening
+  ("Opening {site}…", up to 60 characters of the model's own words) before `opening_needs_yes` runs,
+  so Telegram's servers could fetch an address the person was about to be asked about. Slack posted
+  with its default unfurling. Found in the code October 6, 2026 and not watched live; Archie
+  `4a5eeff3` (on main, not in a release) turns previews off on every Telegram send and unfurling off
+  on every Slack post. Discord already suppressed embeds. Name it on `trust/details/` while a release
+  carries it.
+- **Approved for `trust/`'s "Where we fall short", from 0.3.5 (written October 6, 2026).** Scoped to
+  Archie, because Archie for Business is on 0.3.4 until its next release:
+  > It does **not** stop everything. An injected instruction can still add items to your lists and
+  > write a note into your agent's memory, and a note like that can steer a later job.
+  >
+  > The worst case is a *leak*: a web address or a search whose text carries something from your
+  > conversation. Since Archie 0.3.5, your agent shows you any address it came up with itself and
+  > waits for your yes. A skill that searches is given only its task, never your memory or files.
+  >
+  > We know of three ways out that remain. An email read in one job can shape a search in your next.
+  > Text typed into a page already open goes wherever that page sends it. And a service you connect
+  > through its address for AI assistants can open pages on its own.
+  >
+  > Asking first has a cost: a page your agent wants to open on its own judgment now waits for you.
+  > Archie for Business gets this in its next release.
+
+  The memory way is in the first paragraph, which is why the third names three. The preview is on
+  `trust/details/` only, because it is fixed on main and the summary names what lasts.
 - ⛔ **"Came from you" is any address in your messages in this conversation**, plus any page on a site
   you named in the message being answered, until the agent has read something somebody else wrote in
   that job. Never "only addresses you typed into this message". The named-site half used to hold
@@ -5220,6 +5283,17 @@ cannot produce. Three consequences for this file:
 ⛔ **Never claim the app runs indefinitely without us.** It runs for 60 days, and then the Terms
 commitment is the thing that has to hold. That is a stronger promise than the accident was, because
 it is written down, but it is a different one and must not be described as the old one.
+
+⚠️ **One exception the rule above was written before, checked October 6, 2026: Personal with an AI
+key saved.** That is the free tier's door, and it does not read the note at all: `require_access`
+(Archie `src-tauri/src/commands/gateway_lifecycle.rs`) lets an agent start on
+`FREE_TIER_EXISTS && own_ai_key`, and `own_ai_key` (`src-tauri/src/auth.rs`) is a local query for a
+saved key. So on day 61 with no contact, that install carries on at 20 jobs a day for as long as the
+sign-in token stays in the Keychain; everything beyond the free tier, and all of Archie for
+Business, gets `Refusal::Expired` ("Connect to the internet and sign in"). `trust/details/` said
+"will ask you to sign in again" of every install until this date. **Still never "runs forever without
+us"**: it holds only for that tier, it rests on a saved sign-in nobody promised to keep, and the
+app's own update and connector checks still use the internet.
 
 ⛔ **Never claim a "30-day grace period" for an unreachable server.** No such timer exists.
 ✅ **Do claim (reworded 2026-08-21):** "If you leave, the app stops. If we disappear, it runs

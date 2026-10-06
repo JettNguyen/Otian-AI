@@ -409,8 +409,11 @@ def build_llms(pages):
         "## What we do not claim",
         "",
         "- Archie buys only if its owner switches that on, only at shops they pick, and only up to a limit they set.",
-        "- It connects to no bank. The add-ons that track bills and spending keep the list you",
-        "  give them.",
+        # It said "It connects to no bank" until October 6, 2026, while Mercury sat on the homepage's
+        # connection list and Mercury Watch on the shelf. Mercury is a key-connected service under
+        # TRUST.md's "What you can connect"; the read-only token is the catalog card's own setup.
+        "- It reads one bank, Mercury, and only through the Mercury Watch add-on, on a read-only token",
+        "  you make. The add-ons that track bills and spending keep the list you give them.",
         "- We are not a compliance certification. Your content still flows to a cloud AI",
         "  provider under your own account, so nothing here makes a deployment HIPAA or GDPR",
         "  compliant on its own.",

@@ -201,8 +201,12 @@
      (SENDS below). The custody toggle redraws the lap for starter credits, in TRUST.md's own
      sentence.
 
-     Under reduced motion the stage is unpinned by the stylesheet and this only places Ember on
-     the hero mark, snapped rather than eased, so the page reads as a stack of stills.
+     Under reduced motion the stage is unpinned by the stylesheet: the captions stand in a stack
+     and the scene is sticky beside them (above them on a phone). The act is whichever caption the
+     reader is on, held at its end, and a change of act is a cut with Ember snapped rather than
+     walked, so every act still shows its picture and nothing on the page moves by itself. That was
+     a stack of words with one picture of the hero under the last of them until 2026-10-05, which
+     put the mockups 2,500px down the page for anyone with Windows' animation effects off (Jett).
      ============================================================================================== */
   var story = document.querySelector('.day-story');
   if (story && window.Ember) (function () {
@@ -664,7 +668,7 @@
       measureBeats(window.innerWidth, window.innerHeight);
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
-      var reach = (narrow || still) ? null : reachOf(wr);
+      var reach = narrow ? null : reachOf(wr);
       /* Where the hero's window and phone stand, for the dinner card, and the box it is placed in,
          which is its own caption: see .hm-evening's two rules in the stylesheet. Read with the
          other rects, written with --sc below. */
@@ -688,8 +692,9 @@
       if (byW > 1) byW = Math.max(1, wr.width / 760);
       /* The band the scroll hint stands in, which the scene may not grow into: see the comment on
          .day-scene-wrap in the stylesheet, whose padding-bottom is this same number and must stay
-         it. Zero where there is no hint drawn, which is narrow and reduced motion. */
-      var band = (narrow || still) ? 0 : HINT_BAND;
+         it. Zero narrow, where there is no hint drawn. Reduced motion draws none either and keeps
+         the band, which is the room the phone's foot runs into. */
+      var band = narrow ? 0 : HINT_BAND;
       /* The narrow floor is 0.1 and not 0.3: the scene's row has no floor either (see .day-stage in
          the stylesheet), so on a short phone the row can come down to almost nothing, and a scene
          held at 0.3 in a row of 80 would be drawn straight over the caption it just gave the room
@@ -1027,6 +1032,17 @@
       window.Ember.set(ember, ACTS[i].state);
     }
 
+    /* WHICH ACT A READER WITH MOTION OFF IS ON: the caption across the middle of what they can read.
+       Wide that is the middle of the screen; narrow the scene stands over the top half, so it is the
+       middle of the half under it. The captions are a stack of blocks with their words centered in
+       each, so the change lands halfway between one caption's words and the next one's. */
+    function stillAct(vh) {
+      var line = narrowQ && narrowQ.matches ? (wrap.getBoundingClientRect().bottom + vh) / 2 : vh / 2;
+      var k = 0;
+      for (var j = 1; j < caps.length && j < N; j++) if (caps[j].getBoundingClientRect().top < line) k = j;
+      return k;
+    }
+
     // Scroll and input wake the scene; easing gets a short tail, then it rests.
     var dayRaf = 0, settleUntil = 0;
     function wake() {
@@ -1046,7 +1062,7 @@
       var u = p * TOT, i = N - 1;
       for (var a = 0; a < N; a++) { if (u < CUM[a + 1]) { i = a; break; } }
       var t = clamp((u - CUM[i]) / LEN[i], 0, 1);
-      if (still) { i = 0; t = 1; }
+      if (still) { i = stillAct(vh); t = 1; }
       setAct(i);
       hints.forEach(function (h) { h.classList.toggle('is-off', p > 0.02); });
       /* Where the day is, as a fraction of the act it is in: full behind, empty ahead, and the one
@@ -1064,7 +1080,10 @@
       if (sky && !still) styleValue(sky, '--sky-p', p.toFixed(4));
       fit(p > 0);
       var pose;
-      if (still) pose = poseOf(0);
+      /* Held still, the room stays lit at 2:00 am. The stage is the whole stack here, so a dark room
+         would be every caption on the screen turning over at one scroll notch; the window still
+         wears its own night. */
+      if (still) pose = copy(poseOf(i), { night: 0 });
       else if (i === 0) pose = lerpPose(poseOf(0), poseOf(1), smooth(t) * PRE);
       else if (i === 1) pose = lerpPose(lerpPose(poseOf(0), poseOf(1), PRE), poseOf(1), settle);
       else pose = lerpPose(poseOf(i - 1), poseOf(i), settle);
@@ -1190,16 +1209,19 @@
       var m = marks[mark];
       if (m) {
         /* The box Ember is absolute in: the stage while the story plays, the mark's own box beside
-           the closing button after it. Moving between them is a snap under a hop. */
-        var box = mark === 'm-cta' && ctaBox ? ctaBox : stage;
+           the closing button after it. Moving between them is a snap under a hop. Held still, the
+           stage is the whole stack and only the scene is sticky, so Ember rides the scene's own box
+           instead, or it would be a frame behind the sticky scene on every scroll. */
+        var home = still ? wrap : stage;
+        var box = mark === 'm-cta' && ctaBox ? ctaBox : home;
         if (ember.parentNode !== box) { box.appendChild(ember); first = true; }
         var size = (narrow && +m.getAttribute('data-size-narrow')) || +m.getAttribute('data-size') || 96;
-        if (box === stage) size *= SC;  /* the scene is scaled on small screens, so Ember is too */
+        if (box === home) size *= SC;  /* the scene is scaled on small screens, so Ember is too */
         var mr = m.getBoundingClientRect(), br = box.getBoundingClientRect();
         var tx = mr.left - br.left + mr.width / 2 - size / 2;
         /* Never off the stage's sides: on a screen too narrow for the room beside the phone, Ember
            gives up its clearance rather than its edge. */
-        if (box === stage) tx = clamp(tx, 4, br.width - size - 4);
+        if (box === home) tx = clamp(tx, 4, br.width - size - 4);
         /* 0.85: the ground between Ember's feet is 85% of the way down the drawing's box (viewBox
            y 6 to 206, feet at 176), so this puts the feet on the mark rather than the box. */
         var ty = mr.top - br.top + mr.height / 2 - size * 0.85;
@@ -1268,7 +1290,9 @@
       else window.Ember.look(ember, null);
       if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
       var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || Math.abs(scTarget - SC) > 0.002 || keepMoved;
-      if (!still && r.bottom > 0 && (now < settleUntil || easing)) dayRaf = requestAnimationFrame(frame);
+      /* Held still there is no tail, but the slide that keeps the scene out of the captions reads
+         the frame before, so it runs until it rests. */
+      if (r.bottom > 0 && (easing || (!still && now < settleUntil))) dayRaf = requestAnimationFrame(frame);
     }
     window.addEventListener('scroll', wake, { passive: true });
     window.addEventListener('resize', wake, { passive: true });

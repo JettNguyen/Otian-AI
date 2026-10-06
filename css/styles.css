@@ -17106,8 +17106,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    and HINT_BAND there is this number: they must agree, and scratchpad/hint.py is what solved for it.
    80 and not the hint's own 59, because the hero's phone projects about 5px past the box's bottom
    edge at z 70 and a band that only matches the hint leaves the two touching; this leaves 15px of
-   air in the tightest window and costs three hundredths of the fit there. Zero where there is no hint, which is narrow
-   and reduced motion, so neither gives up the room. */
+   air in the tightest window and costs three hundredths of the fit there. Zero narrow, where there
+   is no hint, so the scene does not give up the room. Reduced motion draws no hint either and keeps
+   the band anyway, because the phone's foot runs into it: without it, 649 tall, the foot went 45px
+   off the bottom of the screen. */
 .day-stage { --hint-band: 80px; }
 .day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; padding-bottom: var(--hint-band); display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
 .day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(calc((660px + var(--night, 0) * 230px) * var(--sc, 1)), 126%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) calc(18% + var(--night, 0) * 9%), transparent), transparent); pointer-events: none; }
@@ -18200,23 +18202,36 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .day-cta-row { display: flex; align-items: center; justify-content: center; gap: 18px; }
 .day-cta-mark { position: relative; width: 72px; height: 72px; flex: none; }
 
-/* ---- reduced motion: the story unpins and every claim stands still, in words ---- */
+/* ---- reduced motion: the story unpins, the captions stack, and the scene stays beside them ---- */
+/* THE PICTURE STAYS ON SCREEN (2026-10-05). This was a flex column until then: eight captions and
+   then the scene, so with Windows' animation effects off (which is what Chrome reads as reduced
+   motion) the first screen was the hero's words beside nothing and the mockups stood 2,500px down
+   the page, posed as the hero whatever the caption above them said (Jett: the mockups "don't
+   show"). Now it is the wide grid it always was, unpinned: the captions run down the first column
+   at about a screen each, the scene is sticky in the second, and js/home.js cuts it to the act
+   whose caption the reader is on. The stage clips with `overflow: clip` and not `hidden`, because
+   `hidden` makes it a scroll box and the sticky scene would have nothing to stick to. */
 @media (prefers-reduced-motion: reduce) {
   .day-story { height: auto; }
-  .day-stage { position: relative; height: auto; min-height: 0; display: flex; flex-direction: column; gap: 32px; padding-top: calc(var(--nav-height) + 40px); overflow: clip; }
+  .day-stage { position: relative; height: auto; min-height: 0; grid-template-rows: auto; align-items: start; overflow: clip; }
   .day-caps { height: auto; }
-  .day-cap { position: relative; opacity: 1; transform: none; pointer-events: auto; padding: 28px 0; border-top: 1px solid var(--border); }
-  .day-cap:first-child { border-top: 0; }
-  .day-scene-wrap { height: 620px; }
+  .day-cap { position: relative; inset: auto; min-height: 75vh; opacity: 1; transform: none; pointer-events: auto; padding: 24px 0; }
+  .day-cap[data-act="0"] { min-height: calc(100vh - var(--nav-height) - 32px); }
+  /* The last one is a whole screen, so the scene is still stuck while its words are in the middle
+     and only leaves with the end of the story. */
+  .day-cap:last-child { min-height: 100vh; }
+  .day-scene-wrap { position: sticky; top: calc(var(--nav-height) + 8px); align-self: start; height: calc(100vh - var(--nav-height) - 8px); }
   /* The story is unpinned here, so the scroll is the page's own and the browser's scrollbar is
      already the honest indicator. A rail tracking acts that now stand in a stack would be reporting
      on a story that is not being told. */
   .day-clock, .day-hint, .day-rail { display: none; }
-  .day-stage { --hint-band: 0px; }
-  /* The acts stand in a stack here and the pose never reaches the overnight one, so the room
-     never darkens and a sky would be pale dots over a cream page for the whole story. */
+  /* The room stays lit through the overnight act here (js/home.js holds --night at 0, because the
+     stage is the whole stack), so a sky would be pale dots over a cream page. */
   .day-sky { display: none; }
-  .day-beat { opacity: 1; transform: none; }
+  /* Nothing slides in. A caption shows every line it has, and the scene shows what the driver
+     says, which is each act as it stands at its end. */
+  .day-beat { transform: none; }
+  .day-cap .day-beat { opacity: 1; }
 }
 
 /* ---- narrow screens (under 971px): the scene on top, a caption band under it ---- */
@@ -18767,10 +18782,20 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .day-scene-wrap { transition: transform .45s cubic-bezier(.2, .8, .3, 1); }
 }
 /* Under reduced motion every caption is shown, so they stack instead of sharing a cell, and the
-   scene has no badge to make room for. */
+   scene has no badge to make room for. The scene is sticky over the top half of the screen and the
+   captions run under it, which is the phone's own split of picture over words, held still. The two
+   share one cell, because a sticky box only sticks inside its own grid area, and the captions start
+   one scene-height down. Opaque, so a caption passing under it is gone and not drawn through the
+   phone; clipped, so the phone's faded foot does not lie over the words below; and faded at its
+   foot, so the words go under an edge rather than a cut. */
 @media (max-width: 970px) and (prefers-reduced-motion: reduce) {
-  .day-cap { grid-area: auto; }
-  .day-scene-wrap { transform: none; }
+  .day-stage { --still-h: 50vh; grid-template-rows: auto; padding-top: var(--nav-height); }
+  @supports (height: 1svh) { .day-stage { --still-h: 50svh; } }
+  .day-scene-wrap, .day-stage.is-timed .day-scene-wrap { transform: none; }
+  .day-scene-wrap { grid-area: 1 / 1; top: var(--nav-height); z-index: 2; height: var(--still-h); overflow: clip; background: var(--bg-primary); -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent); mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent); }
+  .day-caps { grid-area: 1 / 1; margin: 0; padding: calc(var(--still-h) + 4px) 16px 36px; }
+  .day-cap, .day-cap:last-child { grid-area: auto; min-height: calc(100vh - var(--still-h) - var(--nav-height)); justify-content: center; }
+  .day-cap[data-act="0"] { min-height: 0; padding-top: 12px; }
 }
 
 /* A GROWING SCREEN IS ONE WHERE A MESSAGE THAT HAS NOT ARRIVED TAKES NO ROOM. The four-rows screen
@@ -20817,7 +20842,11 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
    it takes, on the same line. The faces went with the rest. Where it stands is the rule after the
    next, wide and narrow. */
 .day-stage.is-hero .day-clock { display: none; }
-.day-stage:not(.is-hero) .hm-evening { display: none; }
+/* Under reduced motion the hero's caption stays in the stack while other acts are shown, and a card
+   leaving it would move every caption under it. */
+@media (prefers-reduced-motion: no-preference) {
+  .day-stage:not(.is-hero) .hm-evening { display: none; }
+}
 .hm-evening { display: grid; grid-template-columns: auto auto minmax(0, 1fr); grid-template-areas: "head head head" "list pause note"; align-items: center; column-gap: 10px; row-gap: 5px; align-self: stretch; width: 100%; max-width: 21rem; margin-top: 18px; text-align: left; }
 .day-cap .hm-evening > .hm-dinner-head { grid-area: head; max-width: none; margin: 0; padding: 0; font-size: var(--fs-xs); font-weight: 500; line-height: 1.35; color: var(--text-secondary); }
 /* The three endings stand in one cell, so the sentence keeps the width of its longest and a change

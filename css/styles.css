@@ -16844,10 +16844,10 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-bank .sk-lit { mask-image: url("../assets/stipple-bank-lit.png"); }
 .day-bank .sk-shade { mask-image: url("../assets/stipple-bank-shade.png"); }
 
-.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 110; translate: calc(var(--sky-p) * var(--cp, 260px)) 0; opacity: var(--cd, 1); }
+.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 120; translate: calc(var(--sky-p) * var(--cp, 260px)) 0; opacity: var(--cd, 1); }
 .day-cloud-in { position: absolute; inset: 0; }
-.day-cloud .sk-lit { mask-image: url("../assets/stipple-cloud-lit.png"); }
-.day-cloud .sk-shade { mask-image: url("../assets/stipple-cloud-shade.png"); }
+.day-cloud .sk-lit { mask-image: url("../assets/stipple-c1-lit.png"); }
+.day-cloud .sk-shade { mask-image: url("../assets/stipple-c1-shade.png"); }
 .day-cloud--a { left: 12%; top: calc(var(--nav-height) + 4px); }
 
 /* NINE CLOUDS, NINE SHAPES, THREE DEPTHS (2026-10-06). Jack asked for more clouds and more variety,
@@ -16859,30 +16859,30 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    its width, --cd for how faint it is, and --cp for how far the day's scroll carries it, so a far one
    also moves least. Same rule as before: none stands behind a word, so they keep to the band under
    the menu and the right-hand edge, behind the window and the phone where they pass. */
-.day-cloud.is-s2 { aspect-ratio: 320 / 120; }
-.day-cloud.is-s2 .sk-lit { mask-image: url("../assets/stipple-s2-lit.png"); }
-.day-cloud.is-s2 .sk-shade { mask-image: url("../assets/stipple-s2-shade.png"); }
-.day-cloud.is-s3 { aspect-ratio: 280 / 100; }
-.day-cloud.is-s3 .sk-lit { mask-image: url("../assets/stipple-s3-lit.png"); }
-.day-cloud.is-s3 .sk-shade { mask-image: url("../assets/stipple-s3-shade.png"); }
-.day-cloud.is-s4 { aspect-ratio: 260 / 130; }
-.day-cloud.is-s4 .sk-lit { mask-image: url("../assets/stipple-s4-lit.png"); }
-.day-cloud.is-s4 .sk-shade { mask-image: url("../assets/stipple-s4-shade.png"); }
-.day-cloud.is-s5 { aspect-ratio: 240 / 90; }
-.day-cloud.is-s5 .sk-lit { mask-image: url("../assets/stipple-s5-lit.png"); }
-.day-cloud.is-s5 .sk-shade { mask-image: url("../assets/stipple-s5-shade.png"); }
-.day-cloud.is-s6 { aspect-ratio: 220 / 80; }
-.day-cloud.is-s6 .sk-lit { mask-image: url("../assets/stipple-s6-lit.png"); }
-.day-cloud.is-s6 .sk-shade { mask-image: url("../assets/stipple-s6-shade.png"); }
-.day-cloud.is-s7 { aspect-ratio: 200 / 80; }
-.day-cloud.is-s7 .sk-lit { mask-image: url("../assets/stipple-s7-lit.png"); }
-.day-cloud.is-s7 .sk-shade { mask-image: url("../assets/stipple-s7-shade.png"); }
-.day-cloud.is-s8 { aspect-ratio: 180 / 70; }
-.day-cloud.is-s8 .sk-lit { mask-image: url("../assets/stipple-s8-lit.png"); }
-.day-cloud.is-s8 .sk-shade { mask-image: url("../assets/stipple-s8-shade.png"); }
-.day-cloud.is-s9 { aspect-ratio: 160 / 64; }
-.day-cloud.is-s9 .sk-lit { mask-image: url("../assets/stipple-s9-lit.png"); }
-.day-cloud.is-s9 .sk-shade { mask-image: url("../assets/stipple-s9-shade.png"); }
+.day-cloud.is-c2 { aspect-ratio: 320 / 120; }
+.day-cloud.is-c2 .sk-lit { mask-image: url("../assets/stipple-c2-lit.png"); }
+.day-cloud.is-c2 .sk-shade { mask-image: url("../assets/stipple-c2-shade.png"); }
+.day-cloud.is-c3 { aspect-ratio: 280 / 104; }
+.day-cloud.is-c3 .sk-lit { mask-image: url("../assets/stipple-c3-lit.png"); }
+.day-cloud.is-c3 .sk-shade { mask-image: url("../assets/stipple-c3-shade.png"); }
+.day-cloud.is-c4 { aspect-ratio: 260 / 124; }
+.day-cloud.is-c4 .sk-lit { mask-image: url("../assets/stipple-c4-lit.png"); }
+.day-cloud.is-c4 .sk-shade { mask-image: url("../assets/stipple-c4-shade.png"); }
+.day-cloud.is-c5 { aspect-ratio: 240 / 92; }
+.day-cloud.is-c5 .sk-lit { mask-image: url("../assets/stipple-c5-lit.png"); }
+.day-cloud.is-c5 .sk-shade { mask-image: url("../assets/stipple-c5-shade.png"); }
+.day-cloud.is-c6 { aspect-ratio: 220 / 84; }
+.day-cloud.is-c6 .sk-lit { mask-image: url("../assets/stipple-c6-lit.png"); }
+.day-cloud.is-c6 .sk-shade { mask-image: url("../assets/stipple-c6-shade.png"); }
+.day-cloud.is-c7 { aspect-ratio: 200 / 80; }
+.day-cloud.is-c7 .sk-lit { mask-image: url("../assets/stipple-c7-lit.png"); }
+.day-cloud.is-c7 .sk-shade { mask-image: url("../assets/stipple-c7-shade.png"); }
+.day-cloud.is-c8 { aspect-ratio: 180 / 72; }
+.day-cloud.is-c8 .sk-lit { mask-image: url("../assets/stipple-c8-lit.png"); }
+.day-cloud.is-c8 .sk-shade { mask-image: url("../assets/stipple-c8-shade.png"); }
+.day-cloud.is-c9 { aspect-ratio: 160 / 66; }
+.day-cloud.is-c9 .sk-lit { mask-image: url("../assets/stipple-c9-lit.png"); }
+.day-cloud.is-c9 .sk-shade { mask-image: url("../assets/stipple-c9-shade.png"); }
 /* Near: the first cloud over the caption column, and a wide one over the window's top edge. */
 .day-cloud--b { left: 61%; top: var(--nav-height); width: 240px; --cp: 240px; }
 /* Middle: one over the gap between the captions and the window, one between the two near ones, and a

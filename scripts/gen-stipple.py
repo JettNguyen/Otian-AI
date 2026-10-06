@@ -23,9 +23,15 @@ times the bytes and looked no different once the browser scaled them.
 
 NINE SHAPES, NOT ONE STAMPED NINE TIMES (2026-10-06). Jack asked for more clouds and more variety,
 and Jett's rule for it was that no two clouds may look copied and that depth shows as size and
-fade. So the first high cloud keeps its hand-placed puffs and eight more are grown from seeds by
-`cumulus()`: a flat-bottomed row of small puffs with crowns of different heights over it. A seed was
-kept only when its crowns sat on its base (none floating) and it read as a cloud at a glance.
+fade. So all nine high clouds are grown from seeds by `cumulus()`, and a seed was kept only when it
+read as one cloud at a glance, with no lobe floating loose.
+
+ROUND UNDERNEATH, AND SOLID (the same day). Jett's next look: "some cloud shapes look too broken and
+flat on the bottom". Two causes, both fixed here. A dot used to be placed by its NEAREST puff alone,
+so where two puffs met the cover thinned to a seam of sparse dots; `draw_soft()` sums every puff's
+falloff, so meeting puffs fill in. And each cloud was cut along a straight base line; the lobes now
+hang free, so the underside is a row of rounded bottoms that rises toward both ends. The bank keeps
+the old `draw()`: its foot is the bottom of the screen, where flat is right.
 
 Deterministic: fixed seeds, so a rerun writes the same bytes and a diff means the shapes changed.
 
@@ -48,13 +54,16 @@ X2 = 2            # drawn at twice the CSS size it is shown at
 STEP, R = 2.5, 1.0  # in CSS pixels: a jittered grid of cells, a dot of about this radius per filled cell
 
 # THE SIZES THE STYLESHEET ASSUMES. `.day-bank` tiles the bank mask at 1440 by 210 and slides it by
-# exactly one tile, and `.day-cloud` keeps the cloud's 360 by 110 shape. Change one here, change it there.
+# exactly one tile. Change it here, change it there.
 BANK_W, BANK_H = 1440, 210
-CLOUD_W, CLOUD_H = 360, 110
-# The grown clouds: name, box in CSS pixels, how many crowns, and the seed that was kept. Each is shown
-# at its own aspect ratio by the class that places it (`.day-cloud.is-s2` and on).
-GROWN = [("s2", 320, 120, 3, 1), ("s3", 280, 100, 2, 2), ("s4", 260, 130, 2, 3), ("s5", 240, 90, 2, 2),
-         ("s6", 220, 80, 3, 2), ("s7", 200, 80, 1, 0), ("s8", 180, 70, 2, 1), ("s9", 160, 64, 2, 2)]
+
+# The high clouds: file name, box in CSS pixels, how many crowns, and the seed that was kept. Each is
+# shown at its own aspect ratio by the class that places it (`.day-cloud`, then `.is-c2` and on).
+GROWN = [("c1", 360, 120, 3, 0), ("c2", 320, 120, 3, 4), ("c3", 280, 104, 2, 3), ("c4", 260, 124, 2, 3),
+         ("c5", 240, 92, 2, 4), ("c6", 220, 84, 3, 0), ("c7", 200, 80, 1, 3), ("c8", 180, 72, 2, 2),
+         ("c9", 160, 66, 2, 1)]
+# New names rather than new pixels under old ones: these masks are not under the css/js version
+# stamp, so a cached "stipple-cloud-lit.png" would keep drawing the old flat-bottomed cloud for hours.
 
 
 def smooth(a, b, x):
@@ -76,36 +85,75 @@ def bank_puffs():
     return puffs
 
 
-def cloud_puffs():
-    """One high cloud in CSS pixels: a crown of big puffs over a row of small ones, cut flat along
-    CLOUD_BASE so it has the level underside a fair-weather cloud has."""
-    return [(70, 80, 22), (100, 66, 32), (140, 52, 40), (185, 48, 44), (228, 58, 36), (262, 72, 26),
-            (292, 82, 16), (120, 82, 26), (165, 80, 30), (210, 82, 28), (245, 84, 22)]
-
-
-CLOUD_BASE = 92
-
-
 def cumulus(seed, w, h, crowns):
-    """A fair-weather cloud from a seed: a flat-bottomed row of small puffs, and `crowns` crowns of
-    different heights over it, each with a shoulder either side so it sits on the base."""
+    """A cloud from a seed, round all the way round: a row of base lobes whose bottoms make a soft
+    scalloped underside that rises toward both ends, crowns of different heights over it, and a body
+    puff under each crown so no crown floats free of the base."""
     rnd = random.Random(seed)
-    base = h * 0.86
+    foot = h * 0.9
     puffs = []
-    x = w * 0.13
-    while x < w * 0.87:
-        r = h * (0.13 + rnd.random() * 0.07)
-        puffs.append((x, base - r * 0.5, r))
-        x += r * 1.15
+    n = max(4, int(w / (h * 0.32)))
+    for i in range(n):
+        t = (i + 0.5) / n
+        edge = math.sin(math.pi * t)                     # 0 at the ends, 1 in the middle
+        r = h * (0.13 + 0.09 * edge + rnd.random() * 0.04)
+        x = w * (0.1 + 0.8 * t)
+        cy = foot - r - h * 0.12 * (1 - edge) - rnd.random() * h * 0.03
+        puffs.append((x, cy, r))
     for i in range(crowns):
-        cx = w * (0.24 + 0.52 * (i + 0.5) / crowns) + (rnd.random() - 0.5) * w * 0.1
-        hr = h * (0.2 + rnd.random() * 0.16)
-        top = h * (0.04 + rnd.random() * 0.3)
-        cy = max(top + hr, hr + 2)
+        cx = w * (0.26 + 0.48 * (i + 0.5) / crowns) + (rnd.random() - 0.5) * w * 0.08
+        hr = h * (0.22 + rnd.random() * 0.13)
+        top = h * (0.05 + rnd.random() * 0.22)
+        cy = max(top + hr, hr + 3)
         puffs.append((cx, cy, hr))
-        puffs.append((cx - hr * 0.85, cy + hr * 0.38, hr * (0.55 + rnd.random() * 0.2)))
-        puffs.append((cx + hr * 0.85, cy + hr * 0.42, hr * (0.5 + rnd.random() * 0.2)))
-    return puffs, base
+        puffs.append((cx, (cy + foot - h * 0.2) / 2 + hr * 0.2, hr * 1.05))
+        puffs.append((cx - hr * 0.9, cy + hr * 0.45, hr * (0.6 + rnd.random() * 0.15)))
+        puffs.append((cx + hr * 0.9, cy + hr * 0.5, hr * (0.55 + rnd.random() * 0.15)))
+    return puffs
+
+
+def to_png(masks):
+    out = {}
+    for k, m in masks.items():
+        m.putpalette([0, 0, 0, 255, 255, 255])
+        buf = io.BytesIO()
+        m.save(buf, format="PNG", transparency=0, bits=1, optimize=True)
+        out[k] = buf.getvalue()
+    return out
+
+
+def draw_soft(w, h, puffs, seed, dense):
+    """Like draw(), but a dot's chance comes from the SUM of every puff's falloff rather than the
+    nearest puff's alone, so two puffs that meet fill the seam between them, and nothing cuts the
+    underside flat."""
+    top = min(cy - r for _, cy, r in puffs)
+    foot = max(cy + r for _, cy, r in puffs)
+    rnd = random.Random(seed)
+    masks = {k: Image.new("P", (w * X2, h * X2), 0) for k in ("lit", "shade")}
+    pens = {k: ImageDraw.Draw(m) for k, m in masks.items()}
+    gy = 0.0
+    while gy < h:
+        gx = 0.0
+        while gx < w:
+            x, y = gx + rnd.random() * STEP, gy + rnd.random() * STEP
+            field, best, crown = 0.0, 0.0, 0.0
+            for cx, cy, r in puffs:
+                d = math.hypot(x - cx, y - cy) / r
+                if d < 1:
+                    f = (1 - d) ** 1.4
+                    field += f
+                    if f > best:
+                        best, crown = f, smooth(0.2, -0.8, (y - cy) / r)
+            cover = min(1.0, field * 1.6)
+            if cover > 0 and rnd.random() < dense * smooth(0.0, 0.5, cover) ** 1.2:
+                lit = 0.05 + 0.75 * smooth(foot, top, y) + 0.2 * crown
+                rr = R * X2 * (0.75 + rnd.random() * 0.5)
+                px, py = x * X2, y * X2
+                kind = "lit" if rnd.random() < lit else "shade"
+                pens[kind].ellipse((px - rr, py - rr, px + rr, py + rr), fill=1)
+            gx += STEP
+        gy += STEP
+    return to_png(masks)
 
 
 def draw(w, h, puffs, base, wrap, seed, dense):
@@ -152,15 +200,12 @@ def draw(w, h, puffs, base, wrap, seed, dense):
 
 
 def all_masks():
-    # The bank is thinner than the cloud: it is a hundred and more pixels of solid body along
-    # the foot of every act, and at the cloud's density it read as a wall rather than a sky.
+    # The bank is thinner than a high cloud: it is a hundred and more pixels of solid body along
+    # the foot of every act, and at a high cloud's density it read as a wall rather than a sky.
     bank = draw(BANK_W, BANK_H, bank_puffs(), BANK_H + 40, True, 19, 0.72)
-    cloud = draw(CLOUD_W, CLOUD_H, cloud_puffs(), CLOUD_BASE, False, 23, 0.9)
-    out = {ASSETS / "stipple-bank-lit.png": bank["lit"], ASSETS / "stipple-bank-shade.png": bank["shade"],
-           ASSETS / "stipple-cloud-lit.png": cloud["lit"], ASSETS / "stipple-cloud-shade.png": cloud["shade"]}
+    out = {ASSETS / "stipple-bank-lit.png": bank["lit"], ASSETS / "stipple-bank-shade.png": bank["shade"]}
     for name, w, h, crowns, seed in GROWN:
-        puffs, base = cumulus(seed * 97 + w, w, h, crowns)
-        m = draw(w, h, puffs, base, False, 50 + seed, 0.9)
+        m = draw_soft(w, h, cumulus(seed * 131 + w, w, h, crowns), 70 + seed, 0.9)
         out[ASSETS / f"stipple-{name}-lit.png"] = m["lit"]
         out[ASSETS / f"stipple-{name}-shade.png"] = m["shade"]
     return out

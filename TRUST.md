@@ -893,6 +893,18 @@ boundary below requires. If this wording changes, that section changes with it.
 - ⚠️ **The shutdown term is with a lawyer** (Jett's direction of 2026-09-28: keep it firm, add a
   court-or-law exception, and build the no-license switch now). If its wording changes, the last
   sentence of the approved wording changes with it, the same day.
+- **The no-license switch is built (Archie `0b8e7644`, October 6, 2026), and no binary of it
+  exists.** `--features final-build` (`FINAL_BUILD` in `src-tauri/src/auth.rs`) answers yes to every
+  access decision, reads the license as `lifetime`, makes no call to verify, and adopts the account
+  that owns the oldest workspace when nobody is signed in; `FINAL=1 ./scripts/release-macos.sh` and
+  the Windows workflow's **final** box build it. Procedure: Archie `docs/FINAL-BUILD.md`. It type-checks
+  and its owner rule is tested; it has never been built and opened (`docs/TEST-DAY.md` item 26b).
+  **Say nothing new on the site about it yet.** The approved wording already promises the final
+  version; "it's already built" is a claim about readiness that waits on 26b, and on who can build it
+  if Jett cannot, which is undecided. ⚠️ **One dependency found building it:** installed copies find
+  updates through `https://otianai.com/archie/b/<id>/latest.json`, so the final version reaches them
+  automatically only while the domain is registered. A closing that lets the domain lapse strands
+  every copy that has not updated, at 60 days.
 
 ### ✅ Venice works through "Another provider" (entry written 2026-09-28; the guide shipped in 0.3.0)
 

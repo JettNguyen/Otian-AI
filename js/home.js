@@ -420,13 +420,14 @@
     /* THE CLOUDS' HOUR, ONE ROW PER ACT: the lit colour, the shaded colour, and how strong the pair
        is. The hours are the act clocks above: dusk for the 7:00 pm hero, gold for 9:12, a pale
        midday for 1:40 and the custody floor that follows it at the same hour, amber for 4:15,
-       moonlit grey for 2:00 am, pink for the 7:00 am brief, and nothing over the setup drawing.
+       moonlit grey for 2:00 am, pink for the 7:00 am brief, and the same morning a little fainter
+       over the setup drawing (it was empty until Jett asked for the clouds to carry on into it).
        A palette per theme, because the dark page wants the same hours at a fraction of the light.
        Carried on the poses as numbers so lerpPose eases them with everything else. */
     var SKY_LIGHT = [['#F0A57C', '#A99BD8', .62], ['#EFC064', '#E3B9A0', .5], ['#EED9AE', '#B9C6D6', .42], ['#EED9AE', '#B9C6D6', .3],
-                     ['#EEAE5C', '#D9958A', .55], ['#77749C', '#4A4766', .6], ['#F3A99E', '#B4A3D8', .6], ['#F3A99E', '#B4A3D8', 0]];
+                     ['#EEAE5C', '#D9958A', .55], ['#77749C', '#4A4766', .6], ['#F3A99E', '#B4A3D8', .6], ['#F3A99E', '#B4A3D8', .48]];
     var SKY_DARK = [['#9A6247', '#5A4F7E', .55], ['#957641', '#6E5446', .45], ['#7E705A', '#4C5664', .4], ['#7E705A', '#4C5664', .3],
-                    ['#94683A', '#7A4E47', .5], ['#4F4D6E', '#33324A', .6], ['#97605A', '#5B4E7C', .55], ['#97605A', '#5B4E7C', 0]];
+                    ['#94683A', '#7A4E47', .5], ['#4F4D6E', '#33324A', .6], ['#97605A', '#5B4E7C', .55], ['#97605A', '#5B4E7C', .44]];
     function rgbOf(hx) { return { r: parseInt(hx.slice(1, 3), 16), g: parseInt(hx.slice(3, 5), 16), b: parseInt(hx.slice(5, 7), 16) }; }
     ACTS.forEach(function (a, k) {
       var l = SKY_LIGHT[k], d = SKY_DARK[k];

@@ -1561,7 +1561,7 @@ More."
 - ⛔ **Never "your agent picks the model".** The owner picks it; the agent never changes it on its
   own. A change restarts the agent, which takes a few seconds.
 
-### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half not marked shipped
+### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.1's `09c5cb5e`, and
 every release since carries them. The app's half (the archie-mobile commits below) is not marked
@@ -2993,7 +2993,7 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
-### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half not marked shipped
+### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
 
 *Released, checked October 6, 2026: every Archie commit above is an ancestor of 0.3.1's `09c5cb5e`,
 and every release since carries them. The approved wording names chat and the Routines tab, both on

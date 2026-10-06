@@ -1123,6 +1123,38 @@ anyone but the account owner, and the seal means owning the row is not reading i
   opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from the
   release after 0.3.4).
 
+### 🚧 Texting your agent on iMessage like a contact, on an Apple ID of its own: BUILT 2026-10-06, not yet in a release
+
+Raised by Jett on October 6, 2026: on iMessage the agent lived only in the owner's conversation
+with themselves, which Messages draws with every message as the owner's and often twice, so texting
+the agent read as your own words echoing back.
+
+**Approved wording, once it ships:** "On a Mac, your agent can answer in iMessage two ways. In the
+conversation you have with yourself, on any Mac, its replies start with its name. Or give it an
+Apple ID of its own on a spare Mac, and text it like any contact: nothing shows twice."
+
+**Why it's true** (Archie branch `imessage-own-account`, October 6, 2026):
+- **Two ways, chosen on the Chat app card.** `SignedInAs` in `crates/archie-net/src/imessage.rs`:
+  `Owner` is the message-yourself thread, `Agent` is an Apple ID of the agent's own. The choice is
+  `imessage_own_account` on the agent's manifest, read at start (`gateway_lifecycle.rs`).
+- **No echo on its own Apple ID.** The conversation is the direct chat with the owner's handle,
+  found exactly as the self-chat is; everything sent from that Mac is the agent's own and is never
+  answered, by `is_from_me` rather than by memory (`on_its_own_apple_id_only_what_arrives_is_the_owners`).
+- **Its name on its replies in the self-chat.** Every text and caption starts with the agent's name,
+  and a line starting with it is never answered as the owner's
+  (`in_the_self_chat_the_agents_words_carry_its_name`).
+
+**Boundaries:**
+- ⛔ **Never "no account to make" for the second way.** It needs an Apple ID made for the agent, and
+  the Mac's Messages signed into it instead of the owner's.
+- ⚠️ **It takes the owner's own texts off that Mac's Messages**, because Messages is signed into one
+  Apple ID at a time; and Text Replies then reads the agent's account, not the owner's. Say "a spare
+  Mac" or "a Mac you can give to your agent".
+- ⚠️ **The doubling in the self-chat is Apple's drawing and still happens.** The name only makes the
+  agent's half readable. Never "fixed the echo" for the first way.
+- ⚠️ **Not yet tried on a real Mac signed into a second Apple ID.** Tested in code against the
+  watch's own message shape.
+
 ### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID
 
 **Which build Android has, 2026-10-05.** The APK on the latest release (`Archie-latest.apk` on

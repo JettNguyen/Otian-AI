@@ -4898,6 +4898,21 @@ owner's first answer after the line is crossed with one sentence saying so
 (`ai_limit::tell_in_an_answer`, `reached_while_you_asked`), once a month, sharing one marker with the
 turn-away so whichever comes first is the only one. A guest on a shared agent never hears it.
 
+⚠️ **Through 0.3.5 a routine at the limit posts the limit's sentence instead of stopping
+quietly.** Found October 6, 2026, while checking why Jett read the limit as failing: `run_target`
+turns a routine away by handing back the sentence as its answer, and the routine runner, which had
+no check of its own, delivered it as the routine's report every time it came due and recorded each
+run as a success. No AI is spent on those runs, so "routines stop" was true of the bill and not of
+the chat. Archie main `f8d2dcab` (not in a release) skips the routine before anything runs, as the
+free tier's day already did, and covers a watcher's wake the same way; the pipeline test
+`a_routine_at_the_monthly_limit_does_not_run_and_says_so_once` holds it.
+
+**Reminders are not stopped, and the copy says so.** A reminder is one time and its delivery calls
+no AI, so the limit has nothing to save by holding it; anything repeating is a routine, and the card
+that makes one calls it that. Main (`c8c7afcf`) adds "reminders you set still go off, since they
+cost nothing" to both limit sentences and "reminders still go off" to the panel, after a reminder
+going off was read as the limit not working.
+
 **Two boundaries, and neither is flattering.**
 
 1. **It is a ceiling on an estimate, not on an invoice.** Archie is BYOK and nobody here can read

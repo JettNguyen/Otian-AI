@@ -1929,6 +1929,15 @@ setting Archie up does not cost a day.
   anybody willing to edit it can have more, exactly like the agent cap (`archie_core::plan` says so
   in as many words). Never describe it as enforcement, and never imply the app is defending itself
   against its owner.
+- ✅ **The Terms carry it from October 6, 2026** (version `2026-10-06`, live once pushed). Until
+  then they said "Access to the app ends at that point" and never named the free tier, which was the
+  contract promising less than the product. Now the section "Archie for free on an AI account of
+  your own" says the 20, the held-back 5, Personal only and no Archie Mobile, and the license, plan
+  and trial paragraphs say where a plan's end lands. Jett approved the text himself on October 6
+  (no counsel is retained yet) as a smaller update under "Changes to These Terms", since it gives
+  more and takes nothing, so no 30-day notice. The app's `TERMS_VERSION` moved with it, so a sign-in
+  from the next release records the new version. The draft and its reasoning are in the Archie repo,
+  `docs/drafts/FREE-TIER-TERMS.draft.md`.
 
 ### ✅ Your plan is on your Otian account, not on the computer (entry written 2026-09-21)
 

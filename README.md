@@ -18,36 +18,24 @@ Yours to shape & yours to keep. Never ours.
 
 ---
 
-## An AI agent that's actually yours
+## Archie runs an AI agent on your own computer for your email, calendar and bills
 
-**Archie** is a desktop app that gives you your own AI agent. It handles the busywork in your
-inbox and calendar, keeps track of the bills, the refills and the birthdays, and works from the
-chat apps you already use.
-
-No terminal. No code. No middleman. No ceiling.
+**Archie**, by Otian AI, is a desktop app for Mac and Windows. The agent it runs drafts your
+email replies, keeps track of the bills, the refills and the birthdays, and answers you from your
+phone or the chat app you already use.
 
 > [!NOTE]
-> **Archie is in beta on Mac and Windows.** Anyone can download it and start free at 20 jobs a
-> day on their own AI account, and plans are on sale. [Download Archie](https://otianai.com/archie/install/).
+> **Archie is in beta on Mac and Windows.** It is free on an AI account of your own at 20 jobs a
+> day, and plans are on sale. [Download Archie](https://otianai.com/archie/install/).
 
-### A chatbot answers. An agent works.
-
-|  | What you get |
-|---|---|
-| **A chatbot** | Answers when you sit down to ask. When you close the tab, the work is still yours to do. |
-| **Your agent** | Runs on a schedule, remembers what you tell it, and messages you first when it finishes something. |
-
-Most people don't go looking for an AI agent. They just have a week that looks like this:
+### A week of small jobs, handed off
 
 | The moment | What your agent does |
 |---|---|
-| **Monday, 9 a.m.** | Reads back last week's meeting transcripts while you pour your coffee. |
 | **The reply you keep meaning to send** | Writes the draft and drops it in your chat with a Send button. |
+| **The bill due on the 15th** | Keeps track of it and reminds you before it is due. |
 | **The 3 o'clock that has to move** | Proposes the exact calendar change and makes it after you approve. |
 | **The thing you swore you'd remember** | Holds onto it, then messages you first when the time comes. |
-
-None of it is an emergency. That's the point: it's the small, steady tax on your attention, and
-an agent is what quietly pays it down.
 
 <div align="center">
 <img src="assets/home-sample.png" alt="Archie sending an email draft to a phone chat, with a Send button" width="280">
@@ -55,121 +43,80 @@ an agent is what quietly pays it down.
 
 ---
 
-## Yours in ways most AI isn't
+## Your agent lives on your computer, and you hold the switches
 
-Most AI assistants live on someone else's servers, on a monthly bill. Archie is built the other
-way around.
+**Your agent's files and chat history live on your computer.** On an AI account of your own, its
+thinking goes straight from your computer to that AI company (Anthropic or OpenAI, for example),
+and we keep no copy we can read. The free starter credits, and the plan with the AI included, run
+through a server of ours, which measures spend without recording what was said.
 
-**Your work stays yours.** Your conversations and files live on your own computer and go straight
-to your AI provider (the AI company, like Anthropic or OpenAI) on your own account, with your own
-key. They never pass through an Otian server, so there is nothing on our side to leak or lose.
+**What we hold** is your email address, your plan, a handful of operational records, and, if phone
+access is on, sealed messages we cannot read. We keep no per-person record of the add-ons you
+install.
 
-**Our servers know two things about you:** your email address and whether you have a current plan.
-Not your prompts, not your files, not your calendar, not a single conversation. We keep no
-per-person record of the add-ons you install.
+**Email waits for you.** Your agent drafts a reply and brings it to your chat with Send, Edit and
+Dismiss buttons, and no email goes out until you send it or set a time. A calendar change applies
+only after you approve it. Buying is off until you switch it on, and then it works only at shops
+you pick, up to limits you set.
 
-**You hold the switches on the parts that matter.** Archie can draft an email reply, but it
-cannot send one on its own: the draft comes to your chat with Send, Edit and Dismiss buttons, and
-nothing leaves your account until you send it or set a time. It asks before it changes anything in your calendar.
-And it buys nothing unless its owner switches buying on, and then only at shops they list and up to limits they set.
+**Routines run on the schedule you set,** overnight included, and report back to your chat. Your
+computer needs to be on and Archie open.
 
-**It works while you sleep.** Routines run on a schedule, unattended, and report back to your
-chat when they're done.
+**Web searches go to your AI company too.** When your agent searches the web, the search runs at
+the AI company, so the words of the search reach their search service as well as their AI.
 
-**One more thing you didn't ask.** If your agent searches the web, that search runs on the AI
-provider's infrastructure and is billed to your key, so the query reaches their search backend,
-not just their model. Still not us.
-
-> The whole list, including the parts that don't flatter us, is on the
+> The whole list, including what we have not solved, is on the
 > [Trust page](https://otianai.com/trust/): every outbound connection Archie makes, what is in
 > it, and who receives it.
 
 ---
 
-## Agents, shaped by Add-ons
+## 170 add-ons give your agent its jobs
 
-Add-ons are ready-made upgrades from the built-in marketplace, installed in a click. More than
-eighty are built and waiting for launch, in four kinds.
+Add-ons are ready-made jobs from the marketplace inside Archie, installed in a click, in three
+kinds.
 
 | Kind | What it is |
 |---|---|
-| **Skills** | The things your agent can do. Inbox triage, calendar management, meeting notes. |
-| **Specialists** | Specialists your agent hands work to (a researcher, a writer), each focused on one thing. |
-| **Routines** | Things it does on its own, on a schedule. A briefing every morning, a report every Friday. |
+| **Skills** | The things your agent can do. Inbox triage, bills and subscriptions, meeting notes. |
+| **Routines** | Things it does on a schedule. A briefing every morning, a bill reminder before the due date. |
 | **Personalities** | How your agent talks to you. Warm and chatty, or brief and to the point. |
 
-An add-on is a text file, not a program. A Skill is markdown plus settings. It cannot run code on
-your computer, because Archie has nowhere to run it.
+An add-on is a text file your agent reads. A Skill is written instructions plus settings. It
+cannot run code or a command on your computer, because Archie has nowhere to run one.
 
-If Archie can't do something you need, [we'll build the add-on](https://otianai.com/skills-marketplace/commission/),
-and it joins the marketplace for everyone.
-
----
-
-## What it will cost
-
-Three costs. One of them is ours. The other two are yours, paid straight to the people providing
-them, and we never take a cut of either.
-
-| | Price | |
-|---|---|---|
-| **The app** | **$30** a month, or **$299** a year | A year is $61 less than twelve months bought one at a time. Change or stop it any time. |
-| **Add-ons** | **Included** | Every add-on comes with Archie. Every catalog entry is `price_cents: 0`; the field stays because removing it is a migration, and the idle purchase path in the Archie repo (`require_owned_if_paid`) with it. |
-| **The AI itself** | **Pay as you go** | Your own account with Anthropic, OpenAI, Google, Groq or xAI. It bills you directly. |
-
-The third cost is the one that varies, so the [pricing page](https://otianai.com/archie/pricing/)
-works it out for three levels of use, with the modelling shown.
-
-**Guided setup** is there if you would rather not do it alone: $250 a session, one hour each,
-starting with a free 30-minute call.
+If the job you need is missing, [we can build the add-on for you](https://otianai.com/services/#commission),
+on a quote per add-on.
 
 ---
 
-## The site, page by page
+## What Archie costs
 
-| Section | Pages |
+| | Price |
 |---|---|
+| **Free** | On an AI account of your own, at 20 jobs a day. The count starts again at midnight. |
+| **A plan** | **$30** a month, or **$299** a year. Takes the limit off, up to 10 agents, with every add-on. |
+| **The AI itself** | Billed to you by the AI company you pick, at their price. We add nothing to it. |
+| **The AI included** | **$59** a month, or **$599** a year, with $25 of AI use a month. Email and text reading need your own AI account. |
+| **Archie for Business** | **$99** a month, or **$999** a year. |
 
-The top bar is five menus and a call to action: **Archie** (the product), **Add-ons**
-(the shelf), **Services** (our time: guided setup, consulting, an add-on built to order),
-**Learn** (AI Explained, Comparisons, Blog, FAQ, Troubleshooting) and **About**. The footer
-carries the same five columns. Compare stopped being its own menu on 2026-09-14 and became
-one row inside Learn pointing at `compare/`, which lists all six comparisons.
+The AI bill runs from $1 to $5 a month for a light agent, up to $139 for a heavy one. The
+[pricing page](https://otianai.com/archie/pricing/) shows the working. Plans can be refunded within
+14 days of first starting one.
 
+**Guided setup** is $250 for an hour, with us, over Zoom. It starts with a free call.
+
+---
+
+## The site's main pages
+
+| | Pages |
+|---|---|
 | **Archie** | [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
-| **Services** | [Working With Us](https://otianai.com/services/) |
-| **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [Commission One](https://otianai.com/skills-marketplace/commission/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
-| **Learn** | [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
+| **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
+| **Services** | [Work With Us](https://otianai.com/services/) · [Commission an Add-on](https://otianai.com/services/#commission) |
+| **Learn** | [Learning Library](https://otianai.com/learn/ai-basics/) · [Compare](https://otianai.com/compare/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
-
-**The two editions live under `archie/`, and that is deliberate.** Archie for Business is an
-edition of the app rather than a service we sell, so `archie/business/` sits beside
-`archie/personal/` and both are reachable from the Archie menu. It was filed under Services until
-2026-09-14, which left a reader to work out for themselves that the two are the same app; the
-pages now open with the same two-row fork pointing at each other. Old URLs stay alive as
-redirect stubs: `business/` to `archie/business/`, and `individuals/` to `services/#guided`. The
-stubs carry a `<meta http-equiv="refresh">`, which is what keeps `gen-discovery.py` from listing
-them in the sitemap.
-
-**Four merges on 2026-09-14, in the same pass.** The nav had grown to seven items under Archie
-and two under Services, which was the symptom; the cause was pages that existed because an
-earlier page had been split rather than because a reader needed them. What merged, and why:
-
-| Gone | Into | Why |
-|---|---|---|
-| `archie/` | `archie/personal/` | "What Archie Is" and "For Personal" sat next to each other in one menu and no reader could tell them apart. One page per edition now. `#status` moved with it, and it is still the only place Archie's availability and platform facts live. |
-| `guided-setup/` + `consulting/` | `services/` | Each opened with the same "Which one is this?" list whose only job was sending the reader to the other page. The sort is the spine of the merged page instead. |
-| `equipment/` | `how-it-works/#what-to-run-it-on` | It elaborated a requirement that page already carried, and the kit figure was a copy of the one already there. The figure now exists once; the picker moved to sit under it. |
-| `learn/` | `ai-explained/` | Four cards pointing at pages the footer already listed. A page of navigation duplicating navigation, with no inbound link from any page body. |
-
-Net: four fewer pages, the Archie menu down from seven to five, and Services down from a
-dropdown to a single link. Every old URL is a redirect stub. Internal links were repointed at
-the destinations rather than left bouncing through the stubs, so the stubs exist for bookmarks
-and search results, not for the site's own navigation.
-
-`individuals/` was a URL that read like an audience and a page that sold a setup session. Its
-session half is now the guided half of `services/`; the half about what an agent actually does
-day to day was always product copy and is in `archie/personal/`.
 
 ---
 
@@ -215,13 +162,14 @@ js/                     one small module per page that needs one
   nav.js                shared: theme, nav, drawer, loaded everywhere
   catalog.js            reads the live add-on catalog from Firestore
 assets/                 logos, screenshots, demo video, diagrams
-data/public-catalog.json a snapshot of the 148 public Firestore add-ons used by CI and static HTML
+data/public-catalog.json a snapshot of the public Firestore add-ons used by CI and static HTML
 TRUST.md                every privacy claim we are allowed to make, with code pointers
 CLAUDE.md               the house rules below, in full
 ```
 
-There is no templating, so the nav is duplicated in every page (twice per page: desktop nav and
-mobile drawer). Nav changes have to be scripted across all pages rather than edited by hand.
+There is no templating, so the nav is written out three times in every page (the desktop
+dropdown, the mobile drawer and the footer column). Nav changes have to be scripted across all
+pages and checked with `python3 scripts/check-nav.py`.
 
 ### If you edit copy
 
@@ -235,8 +183,8 @@ Four rules carry most of the weight. [CLAUDE.md](CLAUDE.md) has the rest.
 2. **No em dashes.** Not the character, not the entity, not anywhere in a served file. Restructure
    with a colon, comma, semicolon, period or parentheses. Check with
    `git grep -P '\x{2014}|mdash'` before committing (the escape keeps the check itself clean).
-3. **"Add-on" is the umbrella noun**; Skills, Specialists, Routines and Personalities are its
-   kinds. Never "add an add-on".
+3. **"Add-on" is the umbrella noun**; Skills, Routines and Personalities are the kinds a reader
+   sees. Never "add an add-on".
 4. **Plain words, and never talk down.** Write so a first-time, non-technical reader understands
    without feeling stupid. Define a term the first time it appears, keep one name per concept
    across the whole site, and never state a problem without the next step. Show ease by being
@@ -247,24 +195,19 @@ with a date, or they are absent.
 
 ---
 
-## Who we are
+## Who makes Archie
 
-A two-person team. We set up agents by hand, one person at a time, until we knew where every ounce
-of friction lived. Archie is what we learned, compiled.
-
-**Jack Raney**, Co-Founder and Chief Executive Officer · **Jett Nguyen**, Co-Founder and Chief Technology Officer
-
-Our mission: to give ordinary people an AI agent they actually own, one that removes the friction
-from daily life and puts real leverage back in their hands.
-[Read our story](https://otianai.com/our-story/).
+Otian AI is two people, **Jack Raney** (Co-Founder and Chief Executive Officer) and **Jett Nguyen**
+(Co-Founder and Chief Technology Officer). We set up AI agents by hand, one person at a time, and
+built Archie from what that taught us. [Read our story](https://otianai.com/our-story/).
 
 ---
 
 <div align="center">
 
-**Ready to get your time back?** Your first discovery call is free.
+**Try Archie free on an AI account of your own, or talk it through with us first.**
 
-[**Get started**](https://otianai.com/questionnaire/) · [Contact us](https://otianai.com/contact/)
+[**Download Archie**](https://otianai.com/archie/install/) · [Book a free call](https://otianai.com/services/)
 
 <sub>Site copy, brand marks and product screenshots © Otian AI. No open-source license is granted.</sub>
 

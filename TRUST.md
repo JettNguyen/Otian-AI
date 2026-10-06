@@ -2003,6 +2003,16 @@ instruction is to write the backup before you stop, not after.** Any page descri
 to carry that sentence, per the limitation-beside-capability rule. Telling somebody their data is
 safe and letting them discover they cannot package it is the shape this entry exists to prevent.
 
+**Closed on Archie main, October 6, 2026 (`075a8e18`), in no release yet.** `PaywallScreen` now
+carries **Save a backup of your agents**, beside "Already paid? Check again". It runs the same save
+dialog and `transfer_save` as the Backups section (`pickBackupPath`, `savedBackupNote` in
+`src/app/moving.tsx`), and `transfer_save` asks only that somebody is signed in, which anybody on that
+screen is. **Until the release that carries it, the sentence above stays on every page that has
+it.** From that release the approved form is: "Nothing on your computer is deleted, and the screen
+that asks for a plan has a button that saves a backup of your agents." Never "you can always get
+your agents out": a computer signed out of every account still reaches neither the button nor the
+Backups section.
+
 **Boundaries — do not cross:**
 - ⛔ **Never write the three cases as one.** "Archie keeps working after you stop paying" is false
   for Business and false for a Personal computer with no key saved. Three sentences, three cases,

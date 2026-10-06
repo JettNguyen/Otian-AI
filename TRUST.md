@@ -5159,7 +5159,8 @@ one."
   read in an earlier job is still in the conversation, and the next job a person starts begins as if
   nothing outside had been read** (`TurnGuard::new` in `outbound.rs` takes `outside_already` from the
   wake alone and does not look for `ARRIVED_NOT_TYPED` entries in the history, so that job can hand a
-  search on, or open a page on a site the person named, without asking; found October 6, 2026); text
+  search on, or open a page on a site the person named, without asking; found October 6, 2026, and
+  **closed on Archie main the same day**, in no release yet: see the note below); text
   typed into a page that is already open goes wherever that page sends it; and an MCP server the
   owner connected can have a fetch tool of its own.
 - ⚠️ **A fifth, in 0.3.5 and earlier only: a chat app's link preview.** Telegram's plain sends and
@@ -5170,6 +5171,14 @@ one."
   `4a5eeff3` (on main, not in a release) turns previews off on every Telegram send and unfurling off
   on every Slack post. Discord already suppressed embeds. Name it on `trust/details/` while a release
   carries it.
+- **The earlier-job route, closed on Archie main October 6, 2026 (`49e1853d`), in no release yet.**
+  `outbound::history_holds_outside_text` starts a typed turn outside when any user entry still in
+  the history the model reads (`MAX_HISTORY`, 20 entries) ends with the wake's or the room's marker
+  (`tools_memory::arrived_not_typed`). Test: `outbound::tests::a_wake_still_in_the_history_starts_the_
+  next_typed_turn_outside`. **The cost, said wherever the claim is:** for about ten exchanges after a
+  watch wakes the agent, a search it hands on and a site named in passing wait for a yes. At the
+  release that carries it, the trust page's sentence "An email read in one job can shape a search in
+  your next" comes off, and the third paragraph names two ways out.
 - **Approved for `trust/`'s "Where we fall short", from 0.3.5 (written October 6, 2026).** Scoped to
   Archie, because Archie for Business is on 0.3.4 until its next release:
   > It does **not** stop everything. An injected instruction can still add items to your lists and

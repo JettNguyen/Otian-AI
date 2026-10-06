@@ -19079,16 +19079,32 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 
 /* ---- the store tiles: where the app will be, and that it is not there yet ---- */
 /* Dashed while the tile is not a link, the way .day-chip--no is dashed for a thing that is not
-   so; solid the day it is. A state pill rather than a greyed badge, because the store badges may
-   not be shown before the app is available (the comment beside the tiles in the page). */
+   so. The store badges may not be shown before the app is available (the comment beside the
+   tiles in the page), so a live tile is this page's main button instead (2026-10-06): the solid
+   border it had until then was the only thing telling it from the dashed one, and neither read as
+   something to press. It takes .btn-primary's fill, sheen, lift and press, and its "Get it" is a
+   light pill the way a store's own Get button is. */
 .mb-stores { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
 .mb-store { display: inline-flex; align-items: center; gap: 12px; padding: 10px 14px 10px 12px; border-radius: var(--radius); border: 1px dashed var(--border); background: var(--bg-card); color: var(--text-secondary); text-decoration: none; min-width: 210px; }
-.mb-store[data-state="live"] { border-style: solid; }
 .mb-store-ic { width: 26px; height: 26px; flex: none; fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .mb-store-txt { display: flex; flex-direction: column; line-height: 1.2; }
 .mb-store-txt b { font-size: var(--fs-sm); color: var(--text-primary); font-weight: 600; }
 .mb-store-txt span { font-size: var(--fs-2xs); color: var(--text-muted); }
-.mb-store-state { margin-left: auto; padding: 3px 8px; border-radius: 999px; font-size: var(--fs-3xs); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; background: var(--accent-subtle); color: var(--accent-ink); white-space: nowrap; }
+.mb-store-state { margin-left: auto; padding: 3px 10px; border-radius: 999px; font-size: var(--fs-3xs); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+.mb-store[data-state="live"] { border: 1px solid transparent; background-color: var(--accent); background-image: var(--sheen); color: var(--text-on-accent); box-shadow: var(--lift-key); cursor: pointer; transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition); }
+.mb-store[data-state="live"]:hover { background-color: var(--accent-hover); }
+.mb-store[data-state="live"]:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.mb-store[data-state="live"]:active { transform: translateY(1px); box-shadow: var(--lift-keydown); opacity: 1; transition: transform var(--transition-press), box-shadow var(--transition-press); }
+.mb-store[data-state="live"] .mb-store-ic { stroke: currentColor; }
+.mb-store[data-state="live"] .mb-store-txt b,
+.mb-store[data-state="live"] .mb-store-txt span { color: inherit; }
+.mb-store[data-state="live"] .mb-store-txt span { opacity: .78; }
+.mb-store[data-state="live"] .mb-store-state { background: var(--bg-card); color: var(--accent-ink); }
+@media (hover: hover) and (pointer: fine) {
+  .mb-store[data-state="live"]:hover { transform: translateY(-1px); box-shadow: var(--lift-keyhover); }
+}
+.mb-store[data-state="soon"] { background: transparent; }
+.mb-store[data-state="soon"] .mb-store-ic { stroke: var(--text-muted); }
 
 /* ---- the three clear fields and the lost phone, under the sealed caption ---- */
 .mb-clear { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-width: 42ch; }

@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261006-5" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261006-6" />
   <style>
     /* The small-screen variant of the phone mocks is the how-it-works hero's marquee
        (js/screenshot-gallery.js) rather than a tall stack: three screens scrolling
@@ -239,12 +239,15 @@
                  **Google's badge artwork is still not ours to show** for the same reason, so the
                  drawn glyph stays until we are actually in the store. The iPhone tile is unchanged
                  and carries no date, because that is Apple's clock. TRUST.md moved to SHIPPED ON
-                 ANDROID in the same commit, which is what licenses the present tense above. -->
+                 ANDROID in the same commit, which is what licenses the present tense above.
+                 **Since 2026-10-06 the Android tile is this page's main button** (Jett: neither tile
+                 read as clickable, and Download Archie outranked them on a page about the phone), so
+                 it wears .btn-primary's fill, and the iPhone tile carries its review as plain muted
+                 text with no pill, because anything not out yet is fine print. -->
             <div class="mb-stores" role="group" aria-label="Where Archie Mobile is">
               <div class="mb-store" data-state="soon">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
-                <span class="mb-store-txt"><b>iPhone</b><span>App Store</span></span>
-                <span class="mb-store-state">With Apple</span>
+                <span class="mb-store-txt"><b>iPhone</b><span>In App Store review</span></span>
               </div>
               <a class="mb-store" data-state="live" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
@@ -252,9 +255,7 @@
                 <span class="mb-store-state">Get it</span>
               </a>
             </div>
-            <div class="hm-actions">
-              <a href="../install/" class="btn btn-primary btn-lg">Download Archie</a>
-            </div>
+            <a class="day-more" href="../install/">Download Archie for your computer&nbsp;&rarr;</a>
             <p class="hm-hero-micro">Phone access needs a plan or a live trial. Android installs from a file and stops you twice: <a href="../install/#phone-heading">see the steps</a>. The iPhone app has been with Apple since September 17, 2026.</p>
           </article>
 
@@ -627,8 +628,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261006-5"></script>
-  <script src="../../js/mobile.js?v=20261006-5"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261006-5"></script>
+  <script src="../../js/nav.js?v=20261006-6"></script>
+  <script src="../../js/mobile.js?v=20261006-6"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261006-6"></script>
 </body>
 </html>

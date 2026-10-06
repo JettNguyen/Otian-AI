@@ -1273,9 +1273,9 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
 > rename it, change its face, read what it has been doing, and talk to it.
 
 ⚠️ **From 0.3.1, a routine can run at several set times a day** (Archie b7c15696, in 0.3.1;
-archie-mobile 8f9ae08, the phone's half, not marked shipped here), and the phone moves any one of
-them. Once the phone's half is marked shipped, the sentence above can say "move any of the times it
-runs"; until then it stays as written, which is true of a phone without that half.
+archie-mobile 8f9ae08, the phone's half, in v0.3.5's Android download and not yet on iPhone), and the phone moves any
+one of them. Of Android the sentence above can say "move any of the times it runs"; of the iPhone,
+still in App Store review, it stays as written.
 
 **Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
 `match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
@@ -1304,7 +1304,7 @@ phone asks them yet.** The phone's talk screen is archie-mobile `cf0b115`, not i
 list of ops is true of 0.3.2 and still says nothing the phone can do. See the talk screen's own entry.
 
 ⚠️ **From 0.3.3, one more op, and the first list whose rows travel** (Archie `8fb5705d`, in 0.3.3,
-released September 30, 2026; the phone's side is archie-mobile `817e099`, not marked shipped here).
+released September 30, 2026; the phone's side is archie-mobile `817e099`, in v0.3.5's Android download and not yet on iPhone).
 The open items on the owner's to-do list (the Task Manager skill's
 `tasks` list) now ride the snapshot, up to thirty, each as a title, a date, a priority and a status
 (`tasks_of` in `phone.rs`). `task_done` ticks one off or puts it back. Every other list still sends
@@ -1418,15 +1418,15 @@ app is built for any other reason.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### 🚧 Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: BUILT 2026-10-05, the computer's half SHIPPED in Archie 0.3.5 on October 5, 2026, the Archie Mobile half not marked shipped
+### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; iPhone still in App Store review
 
 *Released on the computer, checked October 6, 2026: Archie `389c0b4e` (the bare stop and the Stop
 button) and `e24a5005` (the computer reading the relay's receive time) are ancestors of 0.3.5's
 `2afe4589`, and 0.3.5's release note says "Type stop, or press Stop, while your agent is working."
 Archie for Business follows; its 0.3.5 is not out yet. The phone's half (archie-mobile `721791f`) is
-not marked shipped here: the iPhone app is still in App Store review, and for Android see "Which
-build Android has" above. Both approved sentences below name the phone, so until that half is
-marked, a page may describe stopping in Archie on the computer only.*
+in v0.3.5's Android download (built from `e742a48`, see "Which build Android has" above) and not on iPhone, which is
+still in App Store review. Both approved sentences below name the phone, so a page that uses them
+says Archie Mobile on Android until the iPhone app is out.*
 
 Found by the reviewer pass on October 5, 2026: a reviewer who texts the agent from the phone typed
 "stop" while it worked, and it finished the job and then answered "stop" as a new request; and a
@@ -1460,13 +1460,13 @@ Until then, Remove it takes it back."
   phone waits until the computer running Archie is on and Archie is open.
 - ⚠️ **Not yet pressed on a real phone against a sleeping computer.** Tested in code on both sides.
 
-### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half not marked shipped, and never watched
+### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (iPhone in App Store review), and never watched
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.5's `2afe4589`, and
 0.3.5's release note says "A skill or a routine opens where it sits". Archie for Business follows;
-its 0.3.5 is not out yet. The phone's half (archie-mobile `04da3b6`) is not marked shipped here: the
-iPhone app is still in App Store review, and for Android see "Which build Android has" above. The
-wording below waits for both halves, and for the watch the boundaries ask for.*
+its 0.3.5 is not out yet. The phone's half (archie-mobile `04da3b6`) is in v0.3.5's Android download (see "Which
+build Android has" above) and not on iPhone, which is still in App Store review. The wording below
+still waits for the watch the boundaries ask for, and names Android only until the iPhone app is out.*
 
 **Approved wording, once both halves are in a release:** "When an update for Archie is ready,
 Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and
@@ -1518,13 +1518,13 @@ archie-mobile `04da3b6`):
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
 
-### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, 🚧 from Archie Mobile BUILT 2026-10-05, its computer side in Archie 0.3.5 (released October 5, 2026), the app's side not marked shipped
+### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release; iPhone still in App Store review
 
 *Checked October 6, 2026: Archie `0d61132b`, the computer's side of the phone's picker, is an
 ancestor of 0.3.5's `2afe4589` (Archie for Business follows; its 0.3.5 is not out yet). The phone's
-screen (archie-mobile `51629d7`) is not marked shipped here: the iPhone app is still in App Store
-review, and for Android see "Which build Android has" above. Until it is, the wording's last clause,
-"on the phone, under Response quality in More", stays off the site.*
+screen (archie-mobile `51629d7`) is in v0.3.5's Android download (see "Which build Android has" above) and not on
+iPhone, which is still in App Store review. So the wording's last clause, "on the phone, under
+Response quality in More", may be said of Android, and of the iPhone once its app is out.*
 
 **Approved wording:** "Archie picks a model for each of Economy, Balanced and Best. You can pick your
 own for any of them, from the list your AI company publishes, and that setting runs it everywhere:
@@ -1777,14 +1777,13 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
 
-### 🚧 Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: BUILT 2026-09-30, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half not marked shipped
+### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
 
 *Checked October 6, 2026: Archie `d34189e5` and `8fb5705d` are in 0.3.3, whose release note says
 "Your to-do list is the first card on the Dashboard" and "Knowledge opens like folders", and every
-release since carries them. The phone's half (archie-mobile `817e099`) is not marked shipped here:
-the iPhone app is still in App Store review, and for Android see "Which build Android has" above.
-The wording below says "and on your phone", so until that half is marked, a page may describe the
-card in Archie on the computer only.*
+release since carries them. The phone's half (archie-mobile `817e099`) is in v0.3.5's Android download (see "Which build
+Android has" above) and not on iPhone, which is still in App Store review. The wording below says
+"and on your phone", so a page says it of Android until the iPhone app is out.*
 
 **Approved wording, once it is in a release:** "Your to-do list is the first thing on your agent's
 Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without

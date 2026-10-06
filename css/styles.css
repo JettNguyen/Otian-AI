@@ -16806,23 +16806,72 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-bank .sk-lit { mask-image: url("../assets/stipple-bank-lit.png"); }
 .day-bank .sk-shade { mask-image: url("../assets/stipple-bank-shade.png"); }
 
-.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 110; translate: calc(var(--sky-p) * 260px) 0; }
+.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 110; translate: calc(var(--sky-p) * var(--cp, 260px)) 0; opacity: var(--cd, 1); }
 .day-cloud-in { position: absolute; inset: 0; }
 .day-cloud .sk-lit { mask-image: url("../assets/stipple-cloud-lit.png"); }
 .day-cloud .sk-shade { mask-image: url("../assets/stipple-cloud-shade.png"); }
-/* Over the caption column, in the gap between the menu and the first line; over the window's top
-   edge, smaller and so further away; and off the right edge beside the phone, turned round. */
-.day-cloud--a { left: 13%; top: calc(var(--nav-height) + 6px); }
-.day-cloud--b { left: 64%; top: var(--nav-height); width: 170px; }
-.day-cloud--c { right: -70px; top: 41%; width: 230px; }
-.day-cloud--c i { transform: scaleX(-1); }
+.day-cloud--a { left: 12%; top: calc(var(--nav-height) + 4px); }
+
+/* NINE CLOUDS, NINE SHAPES, THREE DEPTHS (2026-10-06). Jack asked for more clouds and more variety,
+   and Jett's direction for it was that no two may look copied and that depth shows: a further cloud
+   is smaller and fainter. So each cloud wears its own shape (scripts/gen-stipple.py grows eight from
+   seeds beside the first), and the sky is three rows by height, the way clouds at one altitude look
+   from the ground: the near ones high on the screen, large and full; a middle row a little lower; and
+   the far ones lowest, toward the bank on the horizon, small and pale. Depth is three numbers on each:
+   its width, --cd for how faint it is, and --cp for how far the day's scroll carries it, so a far one
+   also moves least. Same rule as before: none stands behind a word, so they keep to the band under
+   the menu and the right-hand edge, behind the window and the phone where they pass. */
+.day-cloud.is-s2 { aspect-ratio: 320 / 120; }
+.day-cloud.is-s2 .sk-lit { mask-image: url("../assets/stipple-s2-lit.png"); }
+.day-cloud.is-s2 .sk-shade { mask-image: url("../assets/stipple-s2-shade.png"); }
+.day-cloud.is-s3 { aspect-ratio: 280 / 100; }
+.day-cloud.is-s3 .sk-lit { mask-image: url("../assets/stipple-s3-lit.png"); }
+.day-cloud.is-s3 .sk-shade { mask-image: url("../assets/stipple-s3-shade.png"); }
+.day-cloud.is-s4 { aspect-ratio: 260 / 130; }
+.day-cloud.is-s4 .sk-lit { mask-image: url("../assets/stipple-s4-lit.png"); }
+.day-cloud.is-s4 .sk-shade { mask-image: url("../assets/stipple-s4-shade.png"); }
+.day-cloud.is-s5 { aspect-ratio: 240 / 90; }
+.day-cloud.is-s5 .sk-lit { mask-image: url("../assets/stipple-s5-lit.png"); }
+.day-cloud.is-s5 .sk-shade { mask-image: url("../assets/stipple-s5-shade.png"); }
+.day-cloud.is-s6 { aspect-ratio: 220 / 80; }
+.day-cloud.is-s6 .sk-lit { mask-image: url("../assets/stipple-s6-lit.png"); }
+.day-cloud.is-s6 .sk-shade { mask-image: url("../assets/stipple-s6-shade.png"); }
+.day-cloud.is-s7 { aspect-ratio: 200 / 80; }
+.day-cloud.is-s7 .sk-lit { mask-image: url("../assets/stipple-s7-lit.png"); }
+.day-cloud.is-s7 .sk-shade { mask-image: url("../assets/stipple-s7-shade.png"); }
+.day-cloud.is-s8 { aspect-ratio: 180 / 70; }
+.day-cloud.is-s8 .sk-lit { mask-image: url("../assets/stipple-s8-lit.png"); }
+.day-cloud.is-s8 .sk-shade { mask-image: url("../assets/stipple-s8-shade.png"); }
+.day-cloud.is-s9 { aspect-ratio: 160 / 64; }
+.day-cloud.is-s9 .sk-lit { mask-image: url("../assets/stipple-s9-lit.png"); }
+.day-cloud.is-s9 .sk-shade { mask-image: url("../assets/stipple-s9-shade.png"); }
+/* Near: the first cloud over the caption column, and a wide one over the window's top edge. */
+.day-cloud--b { left: 61%; top: var(--nav-height); width: 240px; --cp: 240px; }
+/* Middle: one over the gap between the captions and the window, one between the two near ones, and a
+   tall one behind the phone's shoulder. */
+.day-cloud--c { right: 2%; top: calc(var(--nav-height) + 28px); width: 170px; --cd: .8; --cp: 200px; }
+.day-cloud--d { left: 33%; top: calc(var(--nav-height) + 40px); width: 165px; --cd: .75; --cp: 180px; }
+.day-cloud--e { left: 46%; top: calc(var(--nav-height) + 20px); width: 128px; --cd: .7; --cp: 160px; }
+/* Far: low over the left margin and right of the label, and two down the right edge beside the phone. */
+.day-cloud--f { left: 2%; top: calc(var(--nav-height) + 92px); width: 104px; --cd: .5; --cp: 120px; }
+.day-cloud--i { left: 24%; top: calc(var(--nav-height) + 118px); width: 72px; --cd: .4; --cp: 100px; }
+.day-cloud--g { right: 1%; top: 40%; width: 96px; --cd: .45; --cp: 110px; }
+.day-cloud--h { right: 3%; top: 58%; width: 74px; --cd: .35; --cp: 90px; }
+.day-cloud--g i, .day-cloud--i i { transform: scaleX(-1); }
 
 @media (prefers-reduced-motion: no-preference) {
   .day-bank-strip { animation: day-bank 150s linear infinite; }
   .day-cloud-in { animation: day-cloud 19s ease-in-out infinite alternate; }
   .day-cloud--b .day-cloud-in { animation-duration: 26s; animation-delay: -9s; }
   .day-cloud--c .day-cloud-in { animation-duration: 23s; animation-delay: -15s; }
+  .day-cloud--d .day-cloud-in { animation-duration: 28s; animation-delay: -4s; }
+  .day-cloud--e .day-cloud-in { animation-duration: 31s; animation-delay: -21s; }
+  .day-cloud--f .day-cloud-in { animation: day-cloud-far 37s ease-in-out -12s infinite alternate; }
+  .day-cloud--g .day-cloud-in { animation: day-cloud-far 33s ease-in-out -6s infinite alternate; }
+  .day-cloud--h .day-cloud-in { animation: day-cloud-far 41s ease-in-out -27s infinite alternate; }
+  .day-cloud--i .day-cloud-in { animation: day-cloud-far 39s ease-in-out -17s infinite alternate; }
 }
+@keyframes day-cloud-far { from { transform: translateX(-26px); } to { transform: translateX(26px); } }
 @keyframes day-bank { to { transform: translateX(calc(-1 * var(--bank-w))); } }
 @keyframes day-cloud { from { transform: translateX(-48px); } to { transform: translateX(48px); } }
 @keyframes day-cloud-near { from { transform: translateX(-18px); } to { transform: translateX(18px); } }
@@ -16837,8 +16886,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   .day-bank { --bank-h: 112px; mask-image: none; }
   .day-cloud { width: 150px; }
   .day-cloud--a { left: -54px; top: calc(var(--nav-height) + 96px); }
-  .day-cloud--b { left: auto; right: -44px; top: 34%; width: 124px; }
-  .day-cloud--c { right: -56px; top: 60%; width: 150px; }
+  /* Narrow, five of the nine, all from the two edges since the band under the menu is the dinner
+     card here, and still near to far going down: the first cloud high on the left, a middle one off
+     the right, and three far ones lower and smaller. */
+  .day-cloud--b { left: auto; right: -44px; top: 30%; width: 124px; --cd: .85; }
+  .day-cloud--f { left: -26px; top: 44%; width: 86px; }
+  .day-cloud--g { right: -18px; top: 50%; width: 70px; }
+  .day-cloud--h { right: 10px; top: 59%; width: 52px; }
+  .day-cloud--c, .day-cloud--d, .day-cloud--e, .day-cloud--i { display: none; }
 }
 @media (max-width: 970px) and (prefers-reduced-motion: no-preference) {
   .day-bank-strip { animation-duration: 110s; }

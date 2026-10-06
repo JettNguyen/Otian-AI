@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw the homepage sky's clouds into assets/ as masks of dots: a bank that tiles, and one high cloud.
+"""Draw the homepage sky into assets/ as masks of dots: a bank that tiles, and nine different high clouds.
 
 WHY STIPPLE. On 2026-10-05 Jack picked trajectory.ai as one of three sites to borrow from, and the
 thing that site owns is a texture: every cloud on it is drawn in dots. The homepage already runs one
@@ -20,6 +20,12 @@ stylesheet (`.day-stipple`), so the same dots can be any hour of the day without
 WHY 1-BIT. The dots are on or off, so each mask is a two-entry palette PNG with the first entry
 transparent, drawn at twice the size it is shown. Anti-aliased dots in an alpha channel came to six
 times the bytes and looked no different once the browser scaled them.
+
+NINE SHAPES, NOT ONE STAMPED NINE TIMES (2026-10-06). Jack asked for more clouds and more variety,
+and Jett's rule for it was that no two clouds may look copied and that depth shows as size and
+fade. So the first high cloud keeps its hand-placed puffs and eight more are grown from seeds by
+`cumulus()`: a flat-bottomed row of small puffs with crowns of different heights over it. A seed was
+kept only when its crowns sat on its base (none floating) and it read as a cloud at a glance.
 
 Deterministic: fixed seeds, so a rerun writes the same bytes and a diff means the shapes changed.
 
@@ -45,6 +51,10 @@ STEP, R = 2.5, 1.0  # in CSS pixels: a jittered grid of cells, a dot of about th
 # exactly one tile, and `.day-cloud` keeps the cloud's 360 by 110 shape. Change one here, change it there.
 BANK_W, BANK_H = 1440, 210
 CLOUD_W, CLOUD_H = 360, 110
+# The grown clouds: name, box in CSS pixels, how many crowns, and the seed that was kept. Each is shown
+# at its own aspect ratio by the class that places it (`.day-cloud.is-s2` and on).
+GROWN = [("s2", 320, 120, 3, 1), ("s3", 280, 100, 2, 2), ("s4", 260, 130, 2, 3), ("s5", 240, 90, 2, 2),
+         ("s6", 220, 80, 3, 2), ("s7", 200, 80, 1, 0), ("s8", 180, 70, 2, 1), ("s9", 160, 64, 2, 2)]
 
 
 def smooth(a, b, x):
@@ -74,6 +84,28 @@ def cloud_puffs():
 
 
 CLOUD_BASE = 92
+
+
+def cumulus(seed, w, h, crowns):
+    """A fair-weather cloud from a seed: a flat-bottomed row of small puffs, and `crowns` crowns of
+    different heights over it, each with a shoulder either side so it sits on the base."""
+    rnd = random.Random(seed)
+    base = h * 0.86
+    puffs = []
+    x = w * 0.13
+    while x < w * 0.87:
+        r = h * (0.13 + rnd.random() * 0.07)
+        puffs.append((x, base - r * 0.5, r))
+        x += r * 1.15
+    for i in range(crowns):
+        cx = w * (0.24 + 0.52 * (i + 0.5) / crowns) + (rnd.random() - 0.5) * w * 0.1
+        hr = h * (0.2 + rnd.random() * 0.16)
+        top = h * (0.04 + rnd.random() * 0.3)
+        cy = max(top + hr, hr + 2)
+        puffs.append((cx, cy, hr))
+        puffs.append((cx - hr * 0.85, cy + hr * 0.38, hr * (0.55 + rnd.random() * 0.2)))
+        puffs.append((cx + hr * 0.85, cy + hr * 0.42, hr * (0.5 + rnd.random() * 0.2)))
+    return puffs, base
 
 
 def draw(w, h, puffs, base, wrap, seed, dense):
@@ -124,8 +156,14 @@ def all_masks():
     # the foot of every act, and at the cloud's density it read as a wall rather than a sky.
     bank = draw(BANK_W, BANK_H, bank_puffs(), BANK_H + 40, True, 19, 0.72)
     cloud = draw(CLOUD_W, CLOUD_H, cloud_puffs(), CLOUD_BASE, False, 23, 0.9)
-    return {ASSETS / "stipple-bank-lit.png": bank["lit"], ASSETS / "stipple-bank-shade.png": bank["shade"],
-            ASSETS / "stipple-cloud-lit.png": cloud["lit"], ASSETS / "stipple-cloud-shade.png": cloud["shade"]}
+    out = {ASSETS / "stipple-bank-lit.png": bank["lit"], ASSETS / "stipple-bank-shade.png": bank["shade"],
+           ASSETS / "stipple-cloud-lit.png": cloud["lit"], ASSETS / "stipple-cloud-shade.png": cloud["shade"]}
+    for name, w, h, crowns, seed in GROWN:
+        puffs, base = cumulus(seed * 97 + w, w, h, crowns)
+        m = draw(w, h, puffs, base, False, 50 + seed, 0.9)
+        out[ASSETS / f"stipple-{name}-lit.png"] = m["lit"]
+        out[ASSETS / f"stipple-{name}-shade.png"] = m["shade"]
+    return out
 
 
 def main():

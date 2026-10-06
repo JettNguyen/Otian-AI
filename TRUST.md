@@ -4850,6 +4850,14 @@ October 6, 2026: the mail and text watches spend through their own quarantined r
 "routines stop" is the true half and "the mail watch stops, the text watch stops" is not; the page
 ban below keeps that off the site either way.
 
+**How the owner hears it, and the gap that found.** Through 0.3.5 the agent says the limit was
+reached only when it turns a routine or a new message away, so a month that reaches it while
+nothing arrives says nothing anywhere but the Spending page. Jett hit that on October 6, 2026 with a
+one-cent limit and read it as the limit not working. Archie main (not in a release) also ends the
+owner's first answer after the line is crossed with one sentence saying so
+(`ai_limit::tell_in_an_answer`, `reached_while_you_asked`), once a month, sharing one marker with the
+turn-away so whichever comes first is the only one. A guest on a shared agent never hears it.
+
 **Two boundaries, and neither is flattering.**
 
 1. **It is a ceiling on an estimate, not on an invoice.** Archie is BYOK and nobody here can read

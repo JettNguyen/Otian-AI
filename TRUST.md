@@ -805,7 +805,7 @@ carries is put together per message from what that agent has installed and conne
 (`crates/archie-runtime/src/gateway/turn.rs`, where the belt is assembled), and the router only
 chooses among installed skills. The last two tools that rode every agent regardless, flights and
 video, are carried only when an installed skill uses them since Archie commit `ea957de1` (built
-2026-09-25, not yet in a release; before it, those two were the exception to this sentence). The
+2026-09-25, in 0.3.1 and every release since; before it, those two were the exception to this sentence). The
 app says the same on its own Marketplace screen (`src/app/marketplace.tsx`, Archie `c7121365`).
 
 **The boundaries:**
@@ -1120,8 +1120,8 @@ anyone but the account owner, and the seal means owning the row is not reading i
   the key. That is what the Unpair button and key rotation are for.
 - ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
 - ❌ **Never say Archie Mobile buzzes, rings or notifies.** It shows what the agent posted when it is
-  opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from the
-  release after 0.3.4).
+  opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from
+  0.3.5).
 
 ### 🚧 Texting your agent on iMessage like a contact, on an Apple ID of its own: BUILT 2026-10-06, not yet in a release
 
@@ -1191,7 +1191,7 @@ thing any more.
   gate comes off for Android in the next release**, and the Android download stays on the install
   page meanwhile. Until that release ships, present tense for Android is true of the download and
   not of the pairing, so no new page may tell a reader to pair a phone. **Built the same day**
-  (Archie `c434a385`, on main): Set up a phone and the Archie Mobile row in the chat-app list are
+  (Archie `c434a385`, in 0.3.1, released September 29, 2026): Set up a phone and the Archie Mobile row in the chat-app list are
   open to everybody, and the row reads "our own app; on Android now, and on iPhone once Apple
   approves it", with no Recommended tag until the iPhone app is approved. **Later the same day the
   Set up a phone button went, with the Settings section it sat on (Your phone).** The pairing code
@@ -1272,9 +1272,10 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
 > or take one off, finish an add-on's setup, turn a routine on and off or move the time it runs,
 > rename it, change its face, read what it has been doing, and talk to it.
 
-⚠️ **On main, a routine can run at several set times a day** (Archie b7c15696, archie-mobile 8f9ae08),
-and the phone moves any one of them. At that release the sentence above can say "move any of the
-times it runs"; until then it stays as written, which is true of 0.3.0.
+⚠️ **From 0.3.1, a routine can run at several set times a day** (Archie b7c15696, in 0.3.1;
+archie-mobile 8f9ae08, the phone's half, not marked shipped here), and the phone moves any one of
+them. Once the phone's half is marked shipped, the sentence above can say "move any of the times it
+runs"; until then it stays as written, which is true of a phone without that half.
 
 **Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
 `match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
@@ -1302,8 +1303,9 @@ hear and speak and whether the agent talks back, `talk_download` starts those tw
 phone asks them yet.** The phone's talk screen is archie-mobile `cf0b115`, not in a release, so this
 list of ops is true of 0.3.2 and still says nothing the phone can do. See the talk screen's own entry.
 
-⚠️ **On main, one more op, and the first list whose rows travel** (Archie `8fb5705d`, archie-mobile
-`817e099`, not in a release). The open items on the owner's to-do list (the Task Manager skill's
+⚠️ **From 0.3.3, one more op, and the first list whose rows travel** (Archie `8fb5705d`, in 0.3.3,
+released September 30, 2026; the phone's side is archie-mobile `817e099`, not marked shipped here).
+The open items on the owner's to-do list (the Task Manager skill's
 `tasks` list) now ride the snapshot, up to thirty, each as a title, a date, a priority and a status
 (`tasks_of` in `phone.rs`). `task_done` ticks one off or puts it back. Every other list still sends
 a count and nothing else. From that release, the list above of what never travels reads "the rows
@@ -1416,7 +1418,15 @@ app is built for any other reason.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### 🚧 Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: BUILT 2026-10-05, not yet in a release
+### 🚧 Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: BUILT 2026-10-05, the computer's half SHIPPED in Archie 0.3.5 on October 5, 2026, the Archie Mobile half not marked shipped
+
+*Released on the computer, checked October 6, 2026: Archie `389c0b4e` (the bare stop and the Stop
+button) and `e24a5005` (the computer reading the relay's receive time) are ancestors of 0.3.5's
+`2afe4589`, and 0.3.5's release note says "Type stop, or press Stop, while your agent is working."
+Archie for Business follows; its 0.3.5 is not out yet. The phone's half (archie-mobile `721791f`) is
+not marked shipped here: the iPhone app is still in App Store review, and for Android see "Which
+build Android has" above. Both approved sentences below name the phone, so until that half is
+marked, a page may describe stopping in Archie on the computer only.*
 
 Found by the reviewer pass on October 5, 2026: a reviewer who texts the agent from the phone typed
 "stop" while it worked, and it finished the job and then answered "stop" as a new request; and a
@@ -1450,7 +1460,13 @@ Until then, Remove it takes it back."
   phone waits until the computer running Archie is on and Archie is open.
 - ⚠️ **Not yet pressed on a real phone against a sleeping computer.** Tested in code on both sides.
 
-### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, not yet in a release
+### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half not marked shipped, and never watched
+
+*Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.5's `2afe4589`, and
+0.3.5's release note says "A skill or a routine opens where it sits". Archie for Business follows;
+its 0.3.5 is not out yet. The phone's half (archie-mobile `04da3b6`) is not marked shipped here: the
+iPhone app is still in App Store review, and for Android see "Which build Android has" above. The
+wording below waits for both halves, and for the watch the boundaries ask for.*
 
 **Approved wording, once both halves are in a release:** "When an update for Archie is ready,
 Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and
@@ -1490,7 +1506,8 @@ archie-mobile `04da3b6`):
   password, so the phone refuses and says to update at the computer. Never "always" or "on any
   computer".
 - ⚠️ **Nobody has watched it happen yet.** It needs a release build (a development build never
-  checks for updates), and no release carries it. Until one has been watched on a Mac and on
+  checks for updates), and the computer's half is first in 0.3.5, so the first update it can be
+  watched on is the one after 0.3.5. Until one has been watched on a Mac and on
   Windows, this stays 🚧 and no page may make the claim.
 - ⚠️ **Both halves have to ship, computer first.** A phone that is newer than its computer hides
   these controls rather than sending an action the computer would not know. A page may say this
@@ -1501,7 +1518,13 @@ archie-mobile `04da3b6`):
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
 
-### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, 🚧 from Archie Mobile BUILT 2026-10-05, not yet in a release
+### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, 🚧 from Archie Mobile BUILT 2026-10-05, its computer side in Archie 0.3.5 (released October 5, 2026), the app's side not marked shipped
+
+*Checked October 6, 2026: Archie `0d61132b`, the computer's side of the phone's picker, is an
+ancestor of 0.3.5's `2afe4589` (Archie for Business follows; its 0.3.5 is not out yet). The phone's
+screen (archie-mobile `51629d7`) is not marked shipped here: the iPhone app is still in App Store
+review, and for Android see "Which build Android has" above. Until it is, the wording's last clause,
+"on the phone, under Response quality in More", stays off the site.*
 
 **Approved wording:** "Archie picks a model for each of Economy, Balanced and Best. You can pick your
 own for any of them, from the list your AI company publishes, and that setting runs it everywhere:
@@ -1538,7 +1561,13 @@ More."
 - ⛔ **Never "your agent picks the model".** The owner picks it; the agent never changes it on its
   own. A change restarts the agent, which takes a few seconds.
 
-### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, not yet in a release
+### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half not marked shipped
+
+*Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.1's `09c5cb5e`, and
+every release since carries them. The app's half (the archie-mobile commits below) is not marked
+shipped here: the iPhone app is still in App Store review, and for Android see "Which build Android
+has" above. The wording below names the phone, so until that half is marked, a page may describe
+this in Archie on the computer only.*
 
 **Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video, a
 recording, or a document, from Archie on your computer or from the Archie app on your phone. It
@@ -1748,7 +1777,14 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
 
-### 🚧 Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: BUILT 2026-09-30, not yet in a release
+### 🚧 Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: BUILT 2026-09-30, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half not marked shipped
+
+*Checked October 6, 2026: Archie `d34189e5` and `8fb5705d` are in 0.3.3, whose release note says
+"Your to-do list is the first card on the Dashboard" and "Knowledge opens like folders", and every
+release since carries them. The phone's half (archie-mobile `817e099`) is not marked shipped here:
+the iPhone app is still in App Store review, and for Android see "Which build Android has" above.
+The wording below says "and on your phone", so until that half is marked, a page may describe the
+card in Archie on the computer only.*
 
 **Approved wording, once it is in a release:** "Your to-do list is the first thing on your agent's
 Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without
@@ -2040,7 +2076,10 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
   it and no second AI call; it is word comparison against a file, which is exactly why it costs the
   owner nothing on the turns where nothing matches.
 
-### 🚧 It can look back through your conversation for something you told it: BUILT 2026-09-25, not yet in a release
+### ✅ It can look back through your conversation for something you told it: BUILT 2026-09-25 (Archie `69b2e4ed` and `dd154236`), SHIPPED in Archie 0.3.1 on September 29, 2026
+
+*Released, checked October 6, 2026: both commits are ancestors of 0.3.1's `09c5cb5e`, and every
+release since carries them. This heading still said "not yet in a release" until that day.*
 
 **Approved wording, once it is in a release:** "Your agent keeps the last twenty messages in front of
 it. Ask about something from further back and it can search your conversation for it, the same
@@ -2955,7 +2994,13 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
-### 🚧 One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), not yet in a release
+### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half not marked shipped
+
+*Released, checked October 6, 2026: every Archie commit above is an ancestor of 0.3.1's `09c5cb5e`,
+and every release since carries them. The approved wording names chat and the Routines tab, both on
+the computer, so it applies now. The phone's half (archie-mobile `8f9ae08` and `4e22fd9`) is not
+marked shipped here: the iPhone app is still in App Store review, and for Android see "Which build
+Android has" above. Until it is, no page says the phone moves a routine's times.*
 
 Jett asked on 2026-09-28 why a routine could not run at 9:00 and 5:00, and decided it should, for
 everyone rather than only for jobs brought over from OpenClaw. The same day he set the cap at 24 (the
@@ -2982,7 +3027,7 @@ one (archie-mobile `src/schedule.ts` and `screens/Manage.tsx`, `set_routine_time
 - ⚠️ **On the free tier, no more than 15 of a routine's runs happen in a day.** Routines and the
   watches stop at 15 and keep the last 5 for the person (`FREE_JOBS_KEPT_FOR_YOU`, the free-tier
   entry), so a routine at 24 times runs at most 15 of them, and fewer if mail took some first. Say
-  that beside the cap wherever the cap is sold. On Archie main (3c8d27a9, not in 0.3.0) the Routines
+  that beside the cap wherever the cap is sold. From Archie 0.3.1 (3c8d27a9, not in 0.3.0) the Routines
   tab, chat's routine card and the OpenClaw review say so once a schedule takes more than half of
   the 15 (`free_day_line` in `archie_domain::allowance`, `freeDayLine` in `src/app/schedule.ts`).
   Nothing is blocked, and a plan or a trial sees no line.
@@ -3041,12 +3086,17 @@ Archie tells you it did."
 - ❌ **Never say Archie Mobile notifies you or makes your phone buzz.** It has no notifications and
   no push. With no chat app connected (and messaged once), a reminder waits in the conversation
   until it is opened. "At that minute" is when it is posted, not when anybody hears it. A chat app
-  such as Telegram is what buzzes a phone. Found by the reviewer pass on October 5, 2026; since then
-  (built, not yet in a release) the agent says so when it sets one on an agent no phone hears, and
+  such as Telegram is what buzzes a phone. Found by the reviewer pass on October 5, 2026; from
+  0.3.5 (Archie `eb4aea51` and `4269a5e1`) the agent says so when it sets one on an agent no phone hears, and
   the computer shows an alert when the agent posts something on its own (see "An alert on this
   computer" below).
 
-### 🚧 An alert on this computer when the agent posts on its own: BUILT 2026-10-05, not yet in a release
+### ✅ An alert on this computer when the agent posts on its own: BUILT 2026-10-05 (Archie `4269a5e1`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
+
+*Released, checked October 6, 2026: `4269a5e1` is an ancestor of 0.3.5's `2afe4589`, and 0.3.5's
+first release note says "Archie shows an alert on your computer when your agent posts something on
+its own". Archie for Business 0.3.5 is not out yet, so a page about the business edition waits for
+it. Shipping it did not test it: the last boundary below still holds.*
 
 Found by the reviewer pass on October 5, 2026: a reminder or a routine's report on an agent with no
 chat app landed in Archie's window with no sound, so "remind me at 7 to take my pill" was learned at
@@ -3110,10 +3160,13 @@ for that day. It says what it checked and what it did not."
 - ⚠️ Hours are the map's, and the map is sometimes out of date. The phone number ships in every
   reply for exactly that reason, and copy should not promise the hours are right.
 
-### 🚧 Prices at Shopify stores, for Price Watch: BUILT 2026-09-24, not yet in a release
+### ✅ Prices at Shopify stores, for Price Watch: BUILT 2026-09-24 (Archie `b67a6576`), SHIPPED in Archie 0.3.1 on September 29, 2026
 
-**Not a claim until a release carries it.** Built in the Archie repo on September 24, 2026. Until a
-release ships it, nothing here may be said in the present tense on the site.
+*Released, checked October 6, 2026: built in the Archie repo on September 24, 2026, and `b67a6576`
+is an ancestor of 0.3.1's `09c5cb5e`, so every release since carries it. Price Watch in the catalog
+is 1.3.3, with `min_app_version` 0.3.1, and the store page (`skills-marketplace/browse/`) already
+says it checks what Shopify stores charge. This heading still said "not yet in a release" until that
+day.*
 
 **Approved wording, once it ships:** "Ask Price Watch to check your prices, and your agent looks up
 what Shopify stores charge right now: the store, the price, whether it is in stock, and a link that
@@ -3302,8 +3355,9 @@ the same line as the sentence that says it can be asked for almost anything.
 - ❌ Never let this imply the gate stops prompt injection. It does not, and the Known Weaknesses
   section says so. The honest relationship is the other way round: these walls are what make an
   injected instruction survivable, because the worst a talked-into agent can reach is a draft
-  somebody has to press Send on (or press a time on), from the release after 0.3.4. In 0.3.4 and
-  earlier a timed send armed on a turn the owner typed could go unpressed; see the timed-send
+  somebody has to press Send on (or press a time on), from 0.3.5. In 0.3.4 and
+  earlier (still what Archie for Business runs, until its 0.3.5) a timed send armed on a turn the
+  owner typed could go unpressed; see the timed-send
   paragraph under the email entry.
 - ❌ Never "it has no internet access". It searches the web, fetches pages, and with Websites on
   it drives a browser. The limit is what it may finish, not what it may read.
@@ -3822,7 +3876,11 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 - Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
   wherever this claim anchors a section.
 
-### 🚧 Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), not yet in a release
+### ✅ Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
+
+*Released, checked October 6, 2026: `fc1b47f5` is an ancestor of 0.3.5's `2afe4589`. Archie for
+Business 0.3.5 is not out yet, so the teammate boundary below describes a release still to come.
+The wording below is still Jett's to approve.*
 
 **Wording, once it is in a release (Jett's to approve):** "When a text or an email asks about a
 time, your agent looks at your calendar before it writes the reply, so the draft won't say yes to a
@@ -3863,7 +3921,7 @@ time is already taken."
   calendars shared into a Google or Outlook account are not read, and on iCloud it is the first
   calendar the server lists. This entry said "every calendar the asker can see" until the reviewer
   pass on October 5, 2026 found it was one; the agent now says it sees the main calendar of each
-  account and never calls a day clear (built, not yet in a release). Reading the others needs a
+  account and never calls a day clear (from 0.3.5, Archie `472b641c`). Reading the others needs a
   further Google permission, which Jett chose to add after Google verifies Archie.
 - ⚠️ **What the drafter is told.** When you are busy, and never what with, except meetings the
   person being answered is on themselves. Do not say "the person you reply to never learns your
@@ -4036,7 +4094,7 @@ until you send it or set a time." Also approved: "it cannot send on its own: eve
 draft you read first", and, where the schedule is the point, "a reply set to go later calls
 itself off if they write back first."
 
-**What is still absolute, and may still be said that way, from the release after 0.3.4.** The agent
+**What is still absolute, and may still be said that way, from 0.3.5.** The agent
 **cannot arm a timed send**: a time it puts on a draft is only offered on the card, as a button
 (`schedule::offer`, `email/replies/draft.rs`), and a person sets it with a press (or the words, on
 a chat app with no buttons). So "your agent cannot send email on its own" holds on every turn,
@@ -4048,9 +4106,10 @@ absolute true because a routine and an arriving email cannot schedule. The gate 
 person typed the turn, not whether they named the time, so on a turn the owner typed ("summarize my
 latest emails") an instruction inside one of those emails could have the agent queue a new email
 with a time ten minutes out, and it went unless somebody pressed Back to draft. Found by the
-reviewer pass on October 5, 2026; Jett chose to make every agent-picked time a press. In 0.3.4 and
-earlier the old behavior stands, so until the next release this paragraph's absolute may not be
-said.
+reviewer pass on October 5, 2026; Jett chose to make every agent-picked time a press (Archie
+`3451af8e`). It shipped in 0.3.5 on October 5, 2026, so this paragraph's absolute may be said of
+0.3.5 and later. In 0.3.4 and earlier the old behavior stands, and that includes Archie for
+Business until its 0.3.5 is out.
 
 **Added 2026-09-28: one Send sends one reply.** Approved form: "Each Send sends the one reply on
 its card." Why it's true: the button carries its card's action id (`parse_callback` in
@@ -4084,7 +4143,11 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   composing fresh email from scratch until that ships.
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
-### 🚧 Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen, on main), not yet in a release
+### ✅ Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen), SHIPPED in Archie 0.3.1 on September 29, 2026
+
+*Released, checked October 6, 2026: `3700e1ad` and every commit from `6e7e3168` to `69c3c612`
+(texts are `bd9dab5d`) are ancestors of 0.3.1's `09c5cb5e`, and every release since carries them.
+This heading still said "not yet in a release" until that day.*
 
 **Approved wording, once it is in a release:** "Turn on Write like me and give it some of your own
 writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat,
@@ -4108,18 +4171,18 @@ on Balanced, roughly $0.15 to $0.38 a month at 9.6 texts a day. Tests in `texts/
 **What is kept, approved now:** "If you let Archie read your sent mail, it keeps the parts you wrote
 and a short description on this computer, and in backups you make, until you clear them"
 (`writing_style_gather_sent`, `docs/BACKUP-FORMAT.md`). ⛔ Never "only a description is kept": the
-0.3.0 consent screen says "Archie keeps those lines, not the messages", **which is false in the
-released app** (samples.json keeps up to 64,000 characters of what the owner wrote). Main says what is
-kept, and that the description goes to the AI account each time an add-on set to write like the owner
-does its work; it reaches people with 0.3.1.
+0.3.0 consent screen says "Archie keeps those lines, not the messages", **which is false in
+0.3.0** (samples.json keeps up to 64,000 characters of what the owner wrote). From 0.3.1 the screen
+says what is kept, and that the description goes to the AI account each time an add-on set to write
+like the owner does its work.
 
 **Boundaries:**
 - ⛔ **Never "every draft sounds like you."** Only with Write like me on, a note read, and that
   add-on (Email Manager, or Text Replies) not set to Not like me. Warmer, briefer and more formal do
   not use it, nor does Text Replies' redraft after a lookup or Rewrite it for me, and how formal a
   reply is still follows the person being answered.
-- ⚠️ **Texts use it on main only.** Until a release carries it, text replies learn from the owner's
-  own texts and nothing else, and no page may say otherwise.
+- ⚠️ **Texts use it from 0.3.1.** In 0.3.0, text replies learn from the owner's own texts and
+  nothing else.
 - ⛔ **On Archie for Business, never say a teammate's drafts are in their style.** A teammate's
   mailbox gets nobody's style, because the note belongs to the agent's owner.
 - ⚠️ **What leaves the computer:** the note and its passages, which are verbatim lines of the owner's
@@ -4400,8 +4463,9 @@ messages of that conversation, or from your other watched conversations when tha
 The other conversations pass the same filters as the watch (group chats, the ignore list and the
 allow list, since 2084b469).
 
-🚧 **A switch to turn all of it off: BUILT 2026-09-28 (Archie 74eb99bb on main), not yet in a
-release.** Nothing below ships on a page until the release that carries it. `read_earlier_messages`
+✅ **A switch to turn all of it off: BUILT 2026-09-28 (Archie 74eb99bb; the switch itself is
+c7376344 and 9690e41a), SHIPPED in Archie 0.3.1 on September 29, 2026.** All three are ancestors of
+0.3.1's `09c5cb5e` (checked October 6, 2026), and 0.3.0 has no switch. `read_earlier_messages`
 on the text watch (`automation.rs`), **on unless the owner turns it off**, shown beside Group chats
 in the app. Off, nothing earlier in any conversation is read: no thread lines, no writing sample from
 this conversation or any other, and no "further back" lookup (`read_thread`, `lookup_menu` and
@@ -4418,7 +4482,7 @@ to."
 - ⛔ Never write "it only reads the conversation it is replying to" while the switch is on.
 - ⛔ Never say the switch stops Archie reading texts in general: the chat agent's own
   `texts_sent_recent` tool, which runs when the owner asks in chat, is a separate lane.
-- ⚠️ **The switch does not cover Write like me** (on main, Archie bd9dab5d). When Text Replies writes
+- ⚠️ **The switch does not cover Write like me** (from 0.3.1, Archie bd9dab5d). When Text Replies writes
   like the owner, the short description of how they write, read from writing they handed over and
   never from Messages, still goes with each text read that could get a draft. "Not like me" on Text
   Replies stops it.
@@ -4784,7 +4848,7 @@ intention:
 
 1. **Off by default, and off is the product the whole site describes.** An owner who never opens
    the fold gets the code that shipped before this existed. Not the same sentence in the system
-   prompt any more, from the release after 0.3.4: asked to cancel, order or book on a website with
+   prompt any more, from 0.3.5: asked to cancel, order or book on a website with
    Computer control off, the agent used to say it never pays for anything and name no route, which a
    reviewer scores as an agent that cannot. Jett reversed that on October 5, 2026. The off-state
    line now says it needs Computer control, and Buying under it, switched on in Archie on the
@@ -4995,11 +5059,15 @@ action on a draft card, not a model capability — and the chat adapters now car
 buttons for exactly this flow (`telegram.rs:672-729,917-925`). The sequencing constraint the
 07-15 entry demanded (gate lands fail-closed before send) was honored.
 
-### 🚧 An address your agent wrote itself waits for your yes, and a skill that searches holds only its task: BUILT 2026-10-05 (Archie `200982ab`, on main), not yet in a release
+### ✅ An address your agent wrote itself waits for your yes, and a skill that searches holds only its task: BUILT 2026-10-05 (Archie `200982ab`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
 
 Jett asked on 2026-10-05 whether the leak this file admits below could be prevented at all, and chose
-to close what can be closed. Nothing here is said in the present tense on the site until a release
-carries it, and until then the trust page's "Where we fall short" leak paragraph stays as it is.
+to close what can be closed. *Released, checked October 6, 2026:* `200982ab` and `14001b7c` (the
+named-site fix in the boundaries below) are ancestors of 0.3.5's `2afe4589`, and 0.3.5's release
+note says "Your agent asks before opening a web address it came up with itself." So the wording
+below may be used of 0.3.5 and later. The trust page's "Where we fall short" leak paragraph waited
+for this release; 0.3.4 and earlier, and Archie for Business until its 0.3.5 is out, still behave
+the way it says.
 
 **Approved wording, once it ships:** "Your agent opens a web page on its own only when the address
 came from you, from a page it already opened, or from a site you named in your message, until your
@@ -5057,9 +5125,9 @@ one."
 
 ### ⛔ The gate does not stop exfiltration — never imply it does
 
-**Narrowed on Archie main on 2026-10-05, in no release yet:** see the entry above. This entry and the
-trust page's paragraph stay true and unchanged until a release carries that one, and the ways it does
-not cover stay here after it does.
+**Narrowed in Archie 0.3.5, released October 5, 2026 (Archie for Business follows):** see the entry
+above. This entry and the trust page's paragraph stay true of 0.3.4 and earlier, and the ways the
+narrowing does not cover stay here now that a release carries it.
 
 The gate stops **mutation**, not **leakage**. A prompt injection can still make the model issue
 an Anthropic server-side web search (`gateway.rs:2263`) or a `delegate_to_specialist` web-search call
@@ -5242,7 +5310,7 @@ reader finding `"now"` in that repo has not found a straggler.
   always showed: what the agent is doing this minute and what is waiting on the owner.
 - **Jobs is not the to-do list, and the two must never be described as one.** A person's to-do
   items live in the Task Manager skill's own list, on the Knowledge tab under Lists (called Records
-  until September 30, 2026), and on main they also sit at the top of the Dashboard tab. Nothing on
+  until September 30, 2026), and from 0.3.3 they also sit at the top of the Dashboard tab. Nothing on
   this site may imply the Jobs tab holds them. The whole reason for the second rename
   was to keep those two apart on screen.
 
@@ -5902,8 +5970,8 @@ worth restoring; the audit that judged each is the Archie repo's `docs/BRAND-MAR
 **One exception since 2026-09-28, by Jett: a sign-in button is the company's own.** Where a button
 sends the person to Google's or Microsoft's own sign-in, it is that company's published button,
 unaltered: Google's "Sign in with Google" art on the website's login page (317502ac) and in the app,
-and Microsoft's "Sign in with Microsoft" art on the app's Outlook buttons (on Archie main, not in
-0.3.0). Both companies publish those buttons for exactly this use, and Microsoft's one rule is
+and Microsoft's "Sign in with Microsoft" art on the app's Outlook buttons (from Archie 0.3.1,
+`864703c8`; not in 0.3.0). Both companies publish those buttons for exactly this use, and Microsoft's one rule is
 "DON'T alter the Microsoft logo" (learn.microsoft.com, Sign in with Microsoft branding guidelines;
 the files are byte for byte theirs). It is a door, not a roster, so the rule above still holds
 everywhere else: no product icon (Gmail, Calendar, Outlook), no bare G, nothing on a page that sells.

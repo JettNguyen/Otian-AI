@@ -1652,7 +1652,11 @@ when that is the clearer shape."
   (`src/app/markdown.tsx`; `src/text/markdown.ts` in the app, with tests). The agent is told a
   table is fine only when every screen reading the conversation draws one: talking in Archie alone,
   and the paired phone reporting it can (`reply_style` in `gateway/prompt.rs`,
-  `GatewayConfig::phone_draws_tables`).
+  `GatewayConfig::phone_draws_tables`). **Widened on Archie main October 6, 2026 (`ae4f4b2d`, not in 0.3.5):**
+  an agent connected to Telegram, Slack or Matrix may write one too, because Matrix draws it and
+  Telegram and Slack already turn it into labeled bullets on the way out (`flush_table` in
+  `archie-net`). Discord still may not: it would show the pipes. Never say a table appears in
+  Telegram or Slack; say it shows there as a list.
 
 **The boundaries:**
 - ⛔ **Never say it watches every video or listens to every recording you send.** It asks first,

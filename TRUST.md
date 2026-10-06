@@ -3557,8 +3557,11 @@ off, and this entry is rewritten, all in the same pass.
 - ⛔ **Never tell a reader the screen is nothing to worry about.** It is Google's own caution, and
   the honest move is to say why it is there and what to press, then let them decide.
 - ⚠️ **The same unverified status caps Google connections at 100 accounts in total** until
-  verification passes, and each account that connects keeps its place for good (about 94 were left
-  on 2026-09-28, `docs/OAUTH-DEMO-SCRIPT.md`). That is a capacity fact for Otian, not copy: no page
+  verification passes, and each account that connects keeps its place for good (15 of 100 used,
+  read by Jett in the console on 2026-10-06, against 5 on 2026-08-28; the "about 94 left" of
+  2026-09-28 was a projection, not a reading). The same day Google's verification page showed the
+  request submitted and every requirement met but the CASA assessment, so the Letter of Validation
+  is the one thing left (the Archie repo's `docs/GOOGLE-SUBMISSION.md`). The count is a capacity fact for Otian, not copy: no page
   prints the count, because a shrinking number on a page is urgency, which the Otian Standard bans.
   If the cap is ever reached, the site has to say Google connections are paused, the same day.
 - ⚠️ Microsoft's and Apple's connections are not covered here; nothing checked what Microsoft's
@@ -4629,7 +4632,18 @@ way to mark a message as written by an assistant. On a shared agent this is the 
   messages you" died when Text Replies shipped: a draft it wrote reaches a third party once
   the owner presses Send on it. See the Text Replies section for the approved scoping.
 - **`remember` is still ungated** — a local write; the persistence vector for an injected
-  instruction. Disclose, don't hide.
+  instruction. Disclose, don't hide. **Narrowed on Archie main 2026-10-06 (`c1891673`, not in
+  0.3.5), at Jett's pick of a label over a tap:** a note saved on a turn where text somebody else
+  wrote reached the model (the wake that started it, or any tool result but the agent's own notes)
+  is saved starting "From something you did not write:", the owner sees those words on the
+  Knowledge tab, and the system prompt tells the agent such a note is what that text said and never
+  an instruction from the owner. It is still saved without asking, so "ungated" stays true. Three
+  limits: a model told is not a model that obeys; a compaction rewrite that rewords a labeled note
+  past recognition loses the label (`memory::keep_outside_labels` restores it only by matching
+  text); and a wake left in the history from an earlier turn does not label, on purpose. **Wording
+  for the release that carries it, and not before:** "When your agent saves a note while reading
+  something you did not write, such as an email, the note says so, and your agent is told not to
+  take it as an instruction from you."
 
 | Claim | Status |
 |---|---|
@@ -5390,8 +5404,10 @@ Chat attachments (`discord.rs:377`, `slack.rs:334`), Fireflies meeting transcrip
 provider web-search results still enter the model's context. Since 2026-07-20 the calendar
 gate stands between injected content and calendar writes, and email triage is quarantined
 (no-tools call, sanitized input — `email/replies.rs`). What remains reachable by an injected
-instruction: **`remember`** (a local write — the persistence vector) and **provider-side web
-search** (the exfiltration channel — see the gate-does-not-stop-exfiltration section). A bad
+instruction: **`remember`** (a local write — the persistence vector, labeled since Archie main
+`c1891673` when outside text was read on the turn; see "`remember` is still ungated" above) and
+**provider-side web search** (the exfiltration channel — see the gate-does-not-stop-exfiltration
+section). A bad
 draft is also still possible; the Send tap is what stops it becoming a sent email.
 
 ---

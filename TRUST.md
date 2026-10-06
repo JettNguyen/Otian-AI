@@ -4942,6 +4942,20 @@ rest of it is.
   sentence, or its short form's promise of a limit the owner sets, is dishonest copy**, however true
   the rest of it is. On a page with room for one more sentence, the bank card is the remedy, and the
   Standard's rule is that a published limitation gets its remedy beside it.
+- **Narrowed on Archie main, October 6, 2026 (`33910277`), in no release yet.** The press now reads
+  the order total off the page in code (`archie_domain::order_total_on_page`, called in
+  `screen::tools::op_click`) and checks the larger of that and the agent's figure; the card says, in
+  the app's words, which total it read or that it found none; and a tap approves that figure and
+  nothing above it, so a total that went up before the press goes back to the card. Tests:
+  `screen::tests::the_order_total_is_read_off_the_page` and its two siblings in `archie-domain`, and
+  five in `screen::tools::tests` from `the_page_total_is_checked_when_it_is_higher_than_the_agents`.
+  **Until the release that carries it, the sentence above stays exactly as it is.** From that
+  release, approved: "Archie reads the order total off the last page and checks your limit against
+  it. A charge a shop adds after you place the order can still take it over, so for a ceiling
+  nobody can get past, give it a card from your bank that works at one shop." Never "Archie checks
+  the real total" without the second sentence: a total drawn as a picture and a charge added after
+  the press are both still invisible to it, and no real purchase has been made (`docs/TEST-DAY.md`
+  item 27).
 - ⚠️ **It never types a card you pay with.** This is the strongest sentence in the area and it
   survives the switch unchanged: `guard::typing_stop` is untouched by buying. It said "a card
   number" until 2026-10-02, when gift, library, loyalty and membership numbers began to be typed;

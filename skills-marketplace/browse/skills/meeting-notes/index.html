@@ -183,10 +183,10 @@
           <span class="mp-price-badge is-free">Included with Archie</span>
         </div>
 
-        <p class="mp-detail-desc">Connect Fireflies or Calendly, or let your agent read the Zoom recordings saved on your computer, and it builds a memory of the meetings those record for you. It pulls new transcripts, writes a summary with the decisions and action items, and files it away.</p>
-        <p class="mp-detail-desc">Then you can ask: what have Sarah and I talked about recently? What did we decide about pricing? What did I commit to on Tuesday&rsquo;s call?</p>
-        <p class="mp-detail-desc">Fireflies labels speakers &ldquo;Speaker 1&rdquo; on uploads, Teams and phone calls. For those, your agent works out who&rsquo;s who from the transcript and the invite, shows you its guess, and remembers your correction.</p>
-        <p class="mp-detail-desc">A transcript made from a recording on your computer names nobody, because a recording carries the words without telling voices apart. A Calendly recap can carry a summary and action items without the words themselves.</p>
+        <p class="mp-detail-desc">Your agent reads your Fireflies or Calendly meetings, or the Zoom recordings saved on your computer, and files a summary of each with its decisions and action items.</p>
+        <p class="mp-detail-desc">Then ask: what have Sarah and I talked about recently? What did we decide about pricing?</p>
+        <p class="mp-detail-desc">Fireflies labels speakers &ldquo;Speaker 1&rdquo; on uploads, Teams and phone calls, so your agent shows you its guess at who&rsquo;s who and remembers your correction.</p>
+        <p class="mp-detail-desc">A recording on your computer names no speakers. A Calendly recap can carry a summary and action items without the words themselves.</p>
 
         <div class="mp-detail-section">
           <h3>Works with</h3>
@@ -200,28 +200,20 @@
         <div class="mp-detail-section">
           <h3>Try saying</h3>
           <div class="mp-tags">
-            <span class="mp-tag">what did we discuss</span>
-            <span class="mp-tag">what did we decide</span>
             <span class="mp-tag">catch me up</span>
-            <span class="mp-tag">meeting recap</span>
-            <span class="mp-tag">meeting notes</span>
+            <span class="mp-tag">what did we decide</span>
             <span class="mp-tag">action items</span>
-            <span class="mp-tag">follow-ups</span>
-            <span class="mp-tag">call notes</span>
-            <span class="mp-tag">last call</span>
             <span class="mp-tag">who said</span>
-            <span class="mp-tag">talked about</span>
-            <span class="mp-tag">discussed with</span>
           </div>
         </div>
 
         <div class="mp-detail-section">
           <h3>Setup Steps</h3>
           <ol class="mp-numbered-list">
-            <li>On your agent&rsquo;s Connections tab, under Apps, connect at least one source: Fireflies, Calendly, or the Zoom recordings saved on your computer.</li>
-            <li>For Fireflies, go to Settings, then MCP &amp; Dev Tools, then Developer Settings in Fireflies, copy your API key, and paste it into Archie.</li>
-            <li>Set your timezone so meeting times show correctly.</li>
-            <li>Ask your agent to catch you up on your meetings, or add the routine that checks for new ones on its own.</li>
+            <li>On your agent&rsquo;s Connections tab, under Apps, connect Fireflies, Calendly, or the Zoom recordings on your computer.</li>
+            <li>For Fireflies, copy your API key from Settings, then MCP &amp; Dev Tools, then Developer Settings in Fireflies, and paste it into Archie.</li>
+            <li>Set your timezone.</li>
+            <li>Ask your agent to catch you up, or add the routine that checks for new meetings on its own.</li>
           </ol>
         </div>
 
@@ -243,8 +235,8 @@
               </tr>
               <tr>
                 <td><code>DEFAULT_LOOKBACK_DAYS</code></td>
-                <td>How far back "recent" means (days)</td>
-                <td>When you ask about recent meetings without giving dates, the agent looks back this far.</td>
+                <td>Days that count as recent</td>
+                <td>Used when you ask about recent meetings without giving dates.</td>
               </tr>
               <tr>
                 <td><code>MEETING_FOCUS</code></td>

@@ -183,11 +183,10 @@
           <span class="mp-price-badge is-free">Included with Archie</span>
         </div>
 
-        <p class="mp-detail-desc">Your agent reads your calendar, on Google or Outlook, and drafts changes to it in chat. It can tell you what&rsquo;s coming up, find open time in your own week, and write up a new event, a reschedule or a cancellation.</p>
-        <p class="mp-detail-desc">Every create, change and delete is a proposal you approve in chat first, and nothing lands on your calendar until you say yes. Reading needs no approval.</p>
-        <p class="mp-detail-desc">Two limits to know before you install it. A new or changed event carries a title, a description, a start and an end.</p>
-        <p class="mp-detail-desc">Guests, a location, a video link, all-day events and repeating events are still added in the calendar itself, and your agent tells you the one step that finishes the job.</p>
-        <p class="mp-detail-desc">And your agent sees only your own calendar, so it can find your free time but cannot tell you whether anyone else is free. A very full stretch comes back in pieces, and your agent says when a range is fuller than it could see.</p>
+        <p class="mp-detail-desc">Your agent reads your Google or Outlook calendar, finds open time in your week, and writes up new events, reschedules and cancellations in chat.</p>
+        <p class="mp-detail-desc">Every create, change and delete waits for your yes in chat before it lands on your calendar. Reading needs no approval.</p>
+        <p class="mp-detail-desc">A new or changed event carries only a title, description, start and end. Guests, a location, a video link, all-day and repeating events are added in the calendar itself, and your agent tells you how.</p>
+        <p class="mp-detail-desc">Your agent sees only your own calendar, so it cannot tell you who else is free. A very full stretch comes back in pieces, and your agent says so.</p>
 
         <div class="mp-detail-section">
           <h3>Works with</h3>
@@ -199,32 +198,19 @@
         <div class="mp-detail-section">
           <h3>Try saying</h3>
           <div class="mp-tags">
-            <span class="mp-tag">calendar</span>
-            <span class="mp-tag">schedule</span>
-            <span class="mp-tag">meeting</span>
-            <span class="mp-tag">appointment</span>
-            <span class="mp-tag">event</span>
-            <span class="mp-tag">book</span>
+            <span class="mp-tag">free time</span>
             <span class="mp-tag">reschedule</span>
             <span class="mp-tag">cancel event</span>
-            <span class="mp-tag">free time</span>
-            <span class="mp-tag">availability</span>
-            <span class="mp-tag">busy</span>
-            <span class="mp-tag">upcoming</span>
             <span class="mp-tag">block time</span>
-            <span class="mp-tag">reminder</span>
-            <span class="mp-tag">agenda</span>
-            <span class="mp-tag">outlook</span>
-            <span class="mp-tag">google calendar</span>
+            <span class="mp-tag">upcoming</span>
           </div>
         </div>
 
         <div class="mp-detail-section">
           <h3>Setup Steps</h3>
           <ol class="mp-numbered-list">
-            <li>On your agent&rsquo;s Connections tab, under Email, calendar, files, connect a Google or Outlook account with calendar access. Check Let it change events if you want your agent to propose changes.</li>
-            <li>Set your timezone.</li>
-            <li>If you like, set your working hours, a default event length and your scheduling preferences, such as &ldquo;prefer mornings for deep work&rdquo;.</li>
+            <li>On your agent&rsquo;s Connections tab, under Email, calendar, files, connect a Google or Outlook calendar. Check Let it change events so your agent can propose changes.</li>
+            <li>Set your timezone and, if you like, the settings below.</li>
           </ol>
         </div>
 
@@ -247,27 +233,27 @@
               <tr>
                 <td><code>CALENDAR_ID</code></td>
                 <td>Calendar ID</td>
-                <td>Usually 'primary' for your main calendar. For a shared calendar, use its email address.</td>
+                <td>Leave it as primary, or use a shared calendar&rsquo;s email address.</td>
               </tr>
               <tr>
                 <td><code>WORKING_HOURS_START</code></td>
                 <td>Work day starts at</td>
-                <td>Your agent won&rsquo;t schedule events before this time unless you ask.</td>
+                <td>No events before this unless you ask.</td>
               </tr>
               <tr>
                 <td><code>WORKING_HOURS_END</code></td>
                 <td>Work day ends at</td>
-                <td>Your agent won&rsquo;t schedule events after this time unless you ask.</td>
+                <td>No events after this unless you ask.</td>
               </tr>
               <tr>
                 <td><code>DEFAULT_EVENT_DURATION</code></td>
                 <td>Default event duration (minutes)</td>
-                <td>When no duration is specified, events will be created with this length.</td>
+                <td>Used when you do not say how long.</td>
               </tr>
               <tr>
                 <td><code>SCHEDULING_PREFERENCES</code></td>
                 <td>Scheduling preferences</td>
-                <td>Any personal preferences for how events should be scheduled.</td>
+                <td>Such as &ldquo;prefer mornings for deep work&rdquo;.</td>
               </tr>
             </tbody>
           </table>

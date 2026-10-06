@@ -1679,6 +1679,15 @@ when that is the clearer shape."
 - ⚠️ **On Android, a file the agent sends opens where the phone has something that opens it.** The
   app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
   kind says so rather than opening it.
+- ⛔ **Never say an iPhone sends a document until an iPhone build after archie-mobile `ca349b5` is
+  out.** Found October 6, 2026 on the iPhone test build of September 29, which is the build Apple is
+  reviewing: its files picker grays out PDFs and Office files, because iOS drops the
+  `application/*` wildcard the picker was given. Fixed on main with the types named one by one
+  (`DOCUMENT_TYPES` in `src/upload.ts`). The same build sends picked photos at once with no room for
+  words (`50c192d` holds them in the message box until Send, so words go with them) and its Share
+  in the message menu opens nothing (`d5ecab0`). The picker and Share problems are the iPhone's
+  alone (the Share fix runs on iOS only); picked photos going at once is on Android too, until an
+  APK after `50c192d`.
 
 ### ✅ A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30
 
@@ -1823,7 +1832,12 @@ turned into words on your computer, and the answer is read out by a voice that r
   the same way: custody without access, as above.
 - ⛔ **Never "interrupt it any time".** On the phone a tap cuts it off; talking over it does not,
   because a phone's speaker is an inch from its microphone. At the computer, talking over it is
-  meant to cut it off and depends on the webview's echo canceler, which nobody has tested.
+  meant to cut it off and depends on the webview's echo canceler, which nobody has tested. On Archie
+  main (October 6, 2026, `4785c10f`, not in 0.3.5) a click anywhere on the screen or the space bar
+  also cuts it off at the computer, so once a release carries it, "click or press Space to cut in"
+  may be said of the computer. The same day fixed a fade that hid the last lines of a short answer
+  (`a3c99e92`). Jett talked to the window's screen on October 6 on a dev build; the echo answer is
+  not written down yet (Archie `docs/TEST-DAY.md`, item 4), so the wording above still waits.
 - ⚠️ **English only.** The hearing model is `base.en`. No other language may be claimed.
 - ⚠️ **A long answer is written, not read out.** Past about 1,200 characters (`MAX_SPOKEN_CHARS` in
   `crates/archie-runtime/src/speech.rs`) the screen says the answer was too long to read out and
@@ -2368,8 +2382,16 @@ read one level differently. `crates/archie-runtime/src/deck.rs` writes the packa
 is a ZIP of XML with a fixed shape, so nothing is sent anywhere and nothing new ships in the app.
 **Say editable, because that is the whole point of the format**, and a deck somebody cannot change
 is worth less than the notes it came from. **Verified by opening it**, not only by tests: Keynote
-reads the file and renders every slide. Do not claim it has been opened in PowerPoint; that has not
-been tested, and the two read the same format but are not the same reader.
+reads the file and renders every slide, and **on October 6, 2026 PowerPoint 16.113 for Mac opened a
+five-slide deck from `deck.rs` with no repair prompt**, and the same deck after an agent's edit to one
+slide. `deck.rs` has not changed since 0.3.5, so this holds for the release. "Opens in PowerPoint" may
+now be said of a deck. The same run opened files the agent **edited** (`edit_document`,
+`crates/archie-domain/src/document_edit.rs`): Excel 16.113 a workbook with a row added and a figure
+changed, its total recalculated, and Word 16.113 a letter with a sentence changed and a line added,
+neither asking to repair (Archie `crates/archie-runtime/tests/office_live.rs`). ⚠️ Those were files
+Archie's own writers made. A workbook Excel itself saved carries a calculation chain and shared
+strings the edit rewrites, and that has not been tried, so never say an edited Excel file "opens
+cleanly in Excel" without that caveat until it has (Archie `docs/TEST-DAY.md`, item 11).
 
 **The stronger claim, and the reason the list is short.** `ALLOWED` is an allowlist and the
 comment says it "must stay one", because a denylist of dangerous extensions is a losing game
@@ -2465,9 +2487,18 @@ Built for Robinhood's trading server. ❌ Never name Robinhood, or any trading, 
 does: no add-on uses it yet, and a trading claim needs its own entry. ⚠️ A server that rotates its
 sign-in may ask again after Archie restarts (the Archie repo's `docs/OPEN-THREADS.md`).
 
-⚠️ **Untested against a live server, so say what it does and never call it proven.** Nothing has
-connected to a real endpoint (`docs/MCP-AND-SKILLMD.md`, and the Archie repo's own "built but
-never run live" list). Same clause as Flight Check-In.
+⚠️ **Barely tested against a live server, so say what it does and never call it proven.** Until
+October 6, 2026 nothing had connected to a real endpoint. That day Archie's client (`mcp.rs`, unchanged
+since 0.3.5) listed the four tools of GitMCP's public server and ran one read that came back with
+real text (Archie `crates/archie-runtime/tests/mcp_live.rs`). Still untested: a server that takes a
+key, and a write that waits for the owner's yes (`docs/TEST-DAY.md`, item 29). Same clause as
+Flight Check-In.
+
+⚠️ **A server that wants no key cannot be connected if it refuses one.** The connect screen will not
+save a server without a key (`connector_connect`), and the client always sends it. DeepWiki's public
+server lists its tools and then refuses every call for that reason ("Authentication is not allowed
+on the public DeepWiki endpoint"). Never say "any MCP server" without the key: say a server you
+have a key for.
 
 ⛔ **Never imply a person can extend what Archie can do, except through an MCP server.** Outside
 that one door they recombine what exists, at any depth, and a new service or ability comes from us
@@ -2653,6 +2684,15 @@ and the request never leaves your network."
   reached on the LAN. The band shows LIFX once and the privacy policy describes both.
 - The Hue bridge talks to Philips on its own. That is the bridge's traffic, not Archie's, and no
   sentence may say Archie keeps it home.
+- **Archie itself asks Philips once, to find a Hue bridge.** The Scan on the Home devices card asks
+  Philips' discovery server (`https://discovery.meethue.com/`, `hue::discover_via_cloud` in
+  `crates/archie-net/src/local/hue.rs`) which bridges have reported in from this network, the way
+  the Hue app does. The request names no light and no room; Philips sees the network's public
+  address, as any website would. Switching a light never leaves the network. So "finds them on your
+  own network" is true of WiZ and LIFX and not of Hue. Found October 6, 2026: the privacy policy said
+  it of all three until that day, and the Home Lights add-on said "Nothing about your home ever leaves
+  this computer" until Archie `9aca1535` (the site's catalog copy was corrected the same day; the live
+  store follows when Archie is pushed).
 - What the agent learns from a light (its name, on or off) goes to the AI provider like any other
   tool result. Say so wherever the local lane is described; the privacy policy does.
 - **Google Drive is per file, and the privacy policy did not name it until October 6, 2026.** The

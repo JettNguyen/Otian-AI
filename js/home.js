@@ -740,10 +740,11 @@
         styleValue(stage, '--dn-y', Math.max(6, Math.round(dn[0].top - dn[1].top - 16 - dn[2])) + 'px');
         styleValue(stage, '--dn-w', Math.floor(dn[3].left - dn[0].left - 10) + 'px');
       }
-      /* Narrow it has the clock's row, which the hero leaves empty: the row is the card's height
-         and 12 under it, and the card stands in it, so the scene's row starts below both. */
+      /* Narrow it has the clock's row, which the hero leaves empty: the row is the card's height,
+         14 over it (Jett: "more padding at top between dinner and nav") and 12 under it, and the
+         card stands at its foot, so the scene's row starts below both. */
       if (dn && narrow) {
-        styleValue(stage, '--dn-row', (dn[2] + 12) + 'px');
+        styleValue(stage, '--dn-row', (dn[2] + 26) + 'px');
         styleValue(stage, '--dn-y', Math.round(wr.top - 12 - dn[2] - dn[1].top) + 'px');
       }
     }

@@ -16,7 +16,7 @@
 import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261006-1";
+import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261006-2";
 /* The card renderer and the manifest shape live in their own module so that
    scripts/gen-marketplace.mjs can call the very same code through Node and write the
    public catalog into the page as static HTML. Before that the grid was an empty div,
@@ -25,7 +25,7 @@ import { faceHtml, categoryGlyphHtml, glyphSvg } from "./faces.js?v=20261006-1";
 import {
   COLLECTIONS, shelfKind, escapeHtml, titleCase, formatIntegration,
   normalize, detailHtml, cardHtml,
-} from "./addon-card.js?v=20261006-1";
+} from "./addon-card.js?v=20261006-2";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA46RqJV4tcJD8h4mdcSZ26dDoikA9L64M",
@@ -53,7 +53,8 @@ function kindLabel(kind) {
 /* Featured Starter Packs: curated bundles of add-ons that already exist in the catalog, referenced
    by kind + id. A copy of every pack in Archie's src/app/packs.ts that is not marked exclusive,
    regenerated from that file on 2026-09-01 (it had drifted: one pack had been added there and
-   another had become exclusive). An exclusive pack is one the app shows only to the accounts
+   another had become exclusive), and again on 2026-10-06, when College and Money at Home had been
+   missing and Student had become Self-Study. An exclusive pack is one the app shows only to the accounts
    every one of its items was shared with, so it does not belong on a public page at all. A pack
    carries no logic of its own: the page resolves each item against the loaded catalog, so a
    private item a visitor can't see simply doesn't appear in that pack (and is counted as "shared
@@ -67,11 +68,13 @@ var PACK_FACE = {
   "personal-organizer": "list",
   "mind-wellness": "leaf",
   "creators-desk": "pen",
-  "student": "book",
+  "college": "calendar",
+  "self-study": "book",
   "home-kitchen": "food",
   "daily-briefing": "news",
   "life-admin": "doc",
   "home-errands": "home",
+  "money-at-home": "money",
   "close-thoughtful": "people",
   "healthy-active": "pulse",
   "fun-curious": "spark",
@@ -94,7 +97,11 @@ var PACKS = [
     description: "A writer that drafts and sharpens, a coach for what you’re learning, a reading list, and a personality with ideas first, judgment later.",
     example: "help me write an opening line for this post",
     items: [["specialist","writer"],["skill","learning-coach"],["skill","reading-list"],["personality","creative-muse"]] },
-  { id: "student", name: "Self-Study", tagline: "Flashcards, quizzes, and sources that make it stick", accent: "gold",
+  { id: "college", name: "College", tagline: "Syllabus, deadlines, and what you need on the final", accent: "gold",
+    description: "Add each syllabus and your agent tracks due dates, grades, and school deadlines like the last day to drop. At registration it reads your degree audit and lays out what to take next. Signing up stays yours.",
+    example: "what’s due this week?",
+    items: [["skill","my-classes"],["skill","class-planner"],["skill","learning-coach"],["specialist","researcher"],["routine","class-week"],["routine","coursework-due"],["routine","term-dates"]] },
+  { id: "self-study", name: "Self-Study", tagline: "Flashcards, quizzes, and sources that make it stick", accent: "gold",
     description: "For learning on your own. Flashcards that bring back what you keep missing, sources from the live web with where each came from, and a study-partner personality that keeps you at it.",
     example: "quiz me on what I studied yesterday",
     items: [["skill","learning-coach"],["specialist","researcher"],["personality","study-partner"]] },
@@ -114,6 +121,10 @@ var PACKS = [
     description: "Keeps track of bills, the house, the car, return windows, plants, pets, and prices you’re watching.",
     example: "my car insurance renews in March, remind me",
     items: [["skill","bill-tracker"],["skill","home-maintenance"],["skill","plant-pet-care"],["skill","car-keeper"],["skill","warranty-returns"],["skill","price-watch"],["routine","bill-reminders"],["routine","home-checkup"],["routine","care-reminders"],["routine","price-check"],["routine","return-window-watch"]] },
+  { id: "money-at-home", name: "Money at Home", tagline: "Spending, bills, and savings goals", accent: "green",
+    description: "Log spending by chat, track every bill with a reminder three days ahead, save toward goals, and ask which card to use. Nothing to connect.",
+    example: "where did my money go this month?",
+    items: [["skill","money-in-out"],["skill","bill-tracker"],["skill","savings-goals"],["skill","card-rewards"],["routine","bill-reminders"],["routine","quarterly-card-categories"]] },
   { id: "close-thoughtful", name: "Close & Thoughtful", tagline: "Remember the people who matter", accent: "plum",
     description: "Birthdays and people to keep up with, a nudge before it’s too late, and help writing the card or reply.",
     example: "remind me about mom’s birthday next month",

@@ -4090,6 +4090,16 @@ starts from now. A re-added account gets a new id (`integrations.rs`).
 **Boundaries, not to cross:** never "nothing is lost" about a restart or a reconnect. An error
 line on the email triage path can carry up to 200 characters of the AI's own reply.
 
+**The gap is said to the owner from Archie main, October 6, 2026 (`03538351`, in no release yet).**
+Until then the `CursorExpired` branch wrote only an error line to the technical log. It now also
+sends the owner one message: which mailbox, the date of the last saved place, that every email is
+still in the inbox, and the words that get it read ("what came in since September 28?"), because the
+agent already searches the inbox when asked. It does **not** go back through the missed mail on its
+own: doing so would hand it to the drafter and the package tracker a second time, which is
+duplicate cards and a second AI bill, and that is a decision left open. From the release that
+carries it, the approved wording can add: "If it ever loses its place, it tells you which days it
+missed, and you can ask it to go through them."
+
 ### ✅ It can name the page an answer came from (SHIPPED 2026-09-17, in 0.3.0; entry written 2026-09-27)
 
 **Approved wording:** "Ask where a figure came from and your agent can name the page: Archie reads a

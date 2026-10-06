@@ -29,7 +29,7 @@
       "level": 0,
       "slug": "getting-your-computer-ready",
       "title": "Getting Your Computer Ready",
-      "lede": "Jack introduces Level 0: eight short videos that make sure your computer is ready to run your agent.",
+      "lede": "Eight short videos to get your computer ready for your agent.",
       "youtube": "nm7tHswQoNc",
       "seconds": 16,
       "notes_heading": null,
@@ -45,14 +45,14 @@
       "level": 0,
       "slug": "will-archie-work-on-my-computer",
       "title": "Will Archie Work on My Computer?",
-      "lede": "Archie runs on a Mac or a Windows computer. How to tell which one you have, and what else it needs.",
+      "lede": "How to check that your Mac or Windows computer can run Archie.",
       "youtube": "8eHPk3GbP2E",
       "seconds": 53,
-      "notes_heading": "Which Macs and Windows computers run Archie",
+      "notes_heading": "Which computers run Archie",
       "notes": [
         "Mac: macOS 12 Monterey or later, on Apple silicon or Intel.",
         "Windows: Windows 10 or 11, 64-bit.",
-        "Download Archie from <a href=\"../../archie/install/\">its install page</a>, which lists the rest of what it needs."
+        "The download, and what else Archie needs: <a href=\"../../archie/install/\">the install page</a>."
       ],
       "words": [
         "Will Archie work on the computer I have?",
@@ -70,14 +70,14 @@
       "level": 0,
       "slug": "why-your-computer-needs-to-stay-on",
       "title": "Why Your Computer Needs to Stay On",
-      "lede": "Your agent works only while the computer is on, awake and running Archie. How to keep it that way.",
+      "lede": "Your agent works only while your computer is on, awake and running Archie.",
       "youtube": "eJlrjFnzBIw",
       "seconds": 63,
-      "notes_heading": "How to keep a Mac or Windows computer awake while it is plugged in",
+      "notes_heading": "Keep your computer awake when plugged in",
       "notes": [
-        "On a Mac, open System Settings, then Battery, then Options, and turn on <strong>Prevent automatic sleeping on power adapter when the display is off</strong>. On a desktop Mac, it is under Energy Saver.",
-        "On Windows, open Settings, then System, then Power &amp; battery, and under <strong>Screen and sleep</strong> set sleep when plugged in to Never.",
-        "Closing Archie&rsquo;s window switches your agent off, the same as quitting. Minimize the window instead."
+        "Mac: System Settings, then Battery, then Options. Turn on <strong>Prevent automatic sleeping on power adapter when the display is off</strong> (on a desktop Mac, under Energy Saver).",
+        "Windows: Settings, then System, then Power &amp; battery. Under <strong>Screen and sleep</strong>, set sleep when plugged in to Never.",
+        "Closing Archie&rsquo;s window stops your agent. Minimize it instead."
       ],
       "words": [
         "Why does my computer need to stay on?",
@@ -96,15 +96,15 @@
       "level": 0,
       "slug": "sleep-shut-down-and-restart",
       "title": "What Sleep, Shut Down, and Restart Mean",
-      "lede": "What sleep, shut down and restart each do to your agent, and how Archie can wake the computer for a routine.",
+      "lede": "What sleep, shut down and restart each do to your agent.",
       "youtube": "GUNC3vUz2sY",
       "seconds": 75,
-      "notes_heading": "How to set up Archie to wake your computer for a routine",
+      "notes_heading": "Waking your computer for a routine",
       "notes": [
         "On a Mac, setting it up asks for your password once, because only an administrator of a Mac may schedule a wake. The Mac asks for it in its own box: Archie never sees what you type.",
-        "On Windows, setting it up is one press. Windows lets you schedule a wake for your own computer, so there is nothing to approve. On some laptops the power plan has to allow wake timers, and the Routines card names the presses that change it.",
-        "Archie wakes a sleeping computer. A computer that is shut down stays shut down.",
-        "To open Archie when you sign in: Settings, then How Archie looks and opens, then <strong>Open Archie at login</strong>. It starts off."
+        "On Windows, setting it up is one press, with nothing to approve. On some laptops the power plan must allow wake timers, and the Routines card says what to press.",
+        "A shut-down computer stays off; Archie wakes only a sleeping one.",
+        "To open Archie at sign-in: Settings, then How Archie looks and opens, then <strong>Open Archie at login</strong>. It starts off."
       ],
       "words": [
         "What happens to my agent when my computer sleeps, shuts down, or restarts?",
@@ -124,12 +124,12 @@
       "level": 0,
       "slug": "how-to-download-and-install-an-app",
       "title": "How to Download and Install an App",
-      "lede": "The difference between downloading an app and installing it, and where to get apps safely.",
+      "lede": "What downloading and installing mean, and where to get apps safely.",
       "youtube": "qjpN1Nvemo8",
       "seconds": 48,
       "notes_heading": "Where to download Archie",
       "notes": [
-        "Archie&rsquo;s own download page is <a href=\"../../archie/install/\">otianai.com/archie/install</a>. Type the address into your browser yourself."
+        "Archie&rsquo;s own download page: <a href=\"../../archie/install/\">otianai.com/archie/install</a>. Type the address in yourself."
       ],
       "words": [
         "What is the difference between downloading and installing?",
@@ -148,12 +148,12 @@
       "level": 0,
       "slug": "why-your-computer-asks-for-permission",
       "title": "Why Your Computer Asks for Permission",
-      "lede": "Why your computer asks before it opens an app or lets one use your files, and how to tell a normal question from one to refuse.",
+      "lede": "Why your computer asks before opening an app, and when to say no.",
       "youtube": "jUButGW9APk",
       "seconds": 40,
-      "notes_heading": "What Windows shows the first time you open Archie",
+      "notes_heading": "What Windows shows when you first open Archie",
       "notes": [
-        "Windows shows a box that says <strong>Windows protected your PC</strong>. <a href=\"../../archie/install/#warning-heading\">The install page shows it and says what to check before you continue</a>."
+        "Windows shows a box that says <strong>Windows protected your PC</strong>. <a href=\"../../archie/install/#warning-heading\">See what to check before you continue</a>."
       ],
       "words": [
         "Why does my computer keep asking if I'm sure?",
@@ -171,7 +171,7 @@
       "level": 0,
       "slug": "where-your-passwords-and-keys-are-stored",
       "title": "Where Your Passwords and Account Keys Are Stored",
-      "lede": "Where Archie keeps the keys that reach your accounts: your computer&rsquo;s own password store, which Otian cannot read.",
+      "lede": "Your account keys sit in your computer&rsquo;s password store, which Otian cannot read.",
       "youtube": "A3p0rCoRICs",
       "seconds": 49,
       "notes_heading": null,
@@ -191,16 +191,16 @@
       "level": 0,
       "slug": "what-it-means-to-connect-an-account",
       "title": "What It Means to Connect an Account",
-      "lede": "What you agree to when you connect your email, how to take that access back, and why connecting sends nothing.",
+      "lede": "What connecting your email allows, and how to take that access back.",
       "youtube": "Xub4rM6Q29Y",
       "seconds": 64,
-      "notes_heading": "What Google shows first, and where to take access back",
+      "notes_heading": "Google&rsquo;s first screen, and taking access back",
       "notes": [
-        "Until Google verifies Archie, connecting a Google account first shows a screen saying Google hasn&rsquo;t verified this app. It names Otian AI, the company that makes Archie.",
+        "Until Google verifies Archie, Google shows an unverified-app screen before its permission page.",
         "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
         "Google: <a href=\"https://myaccount.google.com/permissions\">myaccount.google.com/permissions</a>.",
-        "Microsoft: <a href=\"https://account.microsoft.com/\">account.microsoft.com</a>, under the apps you have given access.",
-        "Apple: an app-specific password is cancelled at <a href=\"https://account.apple.com/\">account.apple.com</a>, under Sign-In and Security."
+        "Microsoft: <a href=\"https://account.microsoft.com/\">account.microsoft.com</a>, under the apps you gave access.",
+        "Apple: cancel an app-specific password at <a href=\"https://account.apple.com/\">account.apple.com</a>, under Sign-In and Security."
       ],
       "words": [
         "What am I agreeing to when I connect my email?",
@@ -220,10 +220,10 @@
       "level": 0,
       "slug": "talking-to-your-agent-from-your-phone",
       "title": "Talking to Your Agent From Your Phone",
-      "lede": "How to message your agent from a chat app on your phone, and the path each message takes.",
+      "lede": "How to message your agent from a chat app on your phone.",
       "youtube": "hpPJPAUrTWc",
       "seconds": 55,
-      "notes_heading": "The chat apps Archie works with",
+      "notes_heading": "Chat apps Archie works with",
       "notes": [
         "Telegram, Discord, Slack, Matrix, and on a Mac, iMessage, in the thread you have with yourself.",
         "Archie does not connect to WhatsApp."
@@ -245,7 +245,7 @@
       "level": 1,
       "slug": "ai-basics",
       "title": "AI Basics",
-      "lede": "Jack introduces Level 1: what AI does, how to ask it for help, why it makes mistakes, and how you pay for it.",
+      "lede": "What AI does, how to ask it, why it gets things wrong, and what it costs.",
       "youtube": "5qQ3KMzCfvs",
       "seconds": 12,
       "notes_heading": null,
@@ -282,7 +282,7 @@
       "level": 1,
       "slug": "why-ai-gets-things-wrong",
       "title": "Why AI Sometimes Gets Things Wrong",
-      "lede": "Why AI sometimes writes something wrong and sounds sure of it, and three habits that catch it.",
+      "lede": "Why AI can be wrong and sound sure, and three habits that catch it.",
       "youtube": "n6mdZR0mlew",
       "seconds": 66,
       "notes_heading": "Hallucination, in plain English",
@@ -310,7 +310,7 @@
       "level": 1,
       "slug": "what-a-prompt-is",
       "title": "What a Prompt Is",
-      "lede": "What a prompt is, and how saying who, what and how gets you a better answer.",
+      "lede": "What a prompt is, and how to get a better answer.",
       "youtube": "gNXPQ_50n-c",
       "seconds": 43,
       "notes_heading": "Prompt, in plain English",
@@ -335,7 +335,7 @@
       "level": 1,
       "slug": "what-ai-remembers",
       "title": "What AI Remembers",
-      "lede": "What AI keeps from one chat to the next, and the notes your agent keeps about you.",
+      "lede": "What AI remembers between chats, and the notes your agent keeps about you.",
       "youtube": "7AoJ1NPJtOk",
       "seconds": 55,
       "notes_heading": "Context window, in plain English",
@@ -359,7 +359,7 @@
       "level": 1,
       "slug": "chatbot-or-agent",
       "title": "Chatbot or Agent: What Is the Difference?",
-      "lede": "How a chatbot and an agent differ, and why replies and calendar moves wait for your yes in Archie.",
+      "lede": "How a chatbot and an agent differ.",
       "youtube": "Ij_a-I9U8XE",
       "seconds": 49,
       "notes_heading": "Chatbot and agent, in plain English",
@@ -382,13 +382,13 @@
       "level": 1,
       "slug": "where-archie-gets-its-ai",
       "title": "Where Archie Gets Its AI",
-      "lede": "Which companies build the AI Archie uses, how you pick one, and where the free credits send your messages.",
+      "lede": "Which companies build the AI Archie uses, and how you pick one.",
       "youtube": "F7n4Fzk4rxw",
       "seconds": 60,
       "notes_heading": "The seven AI companies Archie works with",
       "notes": [
         "Anthropic, OpenAI, Google, Groq, xAI, DeepSeek and Mistral. Another provider, the eighth choice, is for any service that works like OpenAI&rsquo;s.",
-        "What each company says about training on what you send, in its own words: <a href=\"../../trust/#providers\">the Trust page</a>."
+        "<a href=\"../../trust/#providers\">The Trust page</a> quotes what each company says about training on what you send."
       ],
       "words": [
         "Does Archie make its own AI?",
@@ -431,17 +431,17 @@
       "level": 1,
       "slug": "why-your-chatgpt-plan-does-not-cover-archie",
       "title": "Why Your ChatGPT Plan Does Not Cover Archie",
-      "lede": "Why a ChatGPT or Claude subscription cannot run Archie, and the three ways to give your agent its AI.",
+      "lede": "Why a ChatGPT or Claude subscription cannot run Archie.",
       "youtube": "GtiPngR9Wk8",
       "seconds": 69,
       "notes_heading": "Your three choices, and what each costs",
       "notes": [
-        "Free credits: no card needed. They last 14 days or until they are spent, whichever comes first.",
-        "An AI account of your own, with no plan: Archie is free for 20 jobs a day. A job is one piece of work: a reply to you, a routine running, or an email it reacts to.",
+        "Free credits: no card needed. They last 14 days or until spent, whichever comes first.",
+        "Your own AI account, no plan: Archie is free for 20 jobs a day. A job is a reply to you, a routine running, or an email it reacts to.",
         "A plan: $30 a month or $299 a year.",
         "A plan with the AI included: $59 a month or $599 a year, with $25 of Claude use each month.",
-        "That $25 refills each paid month and nothing carries over. When it is used up, your agent pauses until the next month, or until you connect an AI account of your own.",
-        "Email features and the text watch need an AI account of your own. The free starter credits and the plan with the AI included will not run them."
+        "The $25 refills each paid month, and nothing carries over. When it runs out, your agent pauses until next month or until you connect your own AI account.",
+        "Email features and the text watch need your own AI account. Free credits and the plan with the AI included will not run them."
       ],
       "words": [
         "I already pay for ChatGPT. Can Archie use that plan?",
@@ -493,7 +493,7 @@
       "level": 1,
       "slug": "what-a-month-of-ai-use-may-cost",
       "title": "What a Month of AI Use May Cost",
-      "lede": "Three example months of AI use, measured, and the two things that move your bill most.",
+      "lede": "Three measured months of AI use, and what moves your bill most.",
       "youtube": "6W-WOFD1_1Y",
       "seconds": 68,
       "notes_heading": "What three example months cost, measured",
@@ -502,7 +502,7 @@
         "Light, a calendar and a folder, about 6 messages a day: $1 to $2 at Economy, $2 to $5 at Balanced.",
         "Moderate, calendar and inbox, about 25 messages and 80 emails a day: $21 to $42 at Economy, $22 to $41 at Balanced.",
         "Heavy, everything connected, about 70 messages and 200 emails a day: $64 to $132 at Economy, $69 to $139 at Balanced.",
-        "These are estimates. Your real bill is on your AI company&rsquo;s own billing page. How they were measured: <a href=\"../../archie/pricing/\">the pricing page</a>."
+        "These are estimates; your real bill is on your AI company&rsquo;s billing page. <a href=\"../../archie/pricing/\">See how we measured them</a>."
       ],
       "words": [
         "How much will I pay for AI each month?",
@@ -523,7 +523,7 @@
       "level": 2,
       "slug": "how-your-agent-works",
       "title": "How Your Agent Works",
-      "lede": "Jack introduces Level 2: jobs, routines, add-ons, connected accounts, what waits for your approval, and what your agent cannot do.",
+      "lede": "Jobs, routines, add-ons, accounts, approvals, and what your agent cannot do.",
       "youtube": "BpB1pG0HBJ0",
       "seconds": 15,
       "notes_heading": null,
@@ -538,12 +538,12 @@
       "level": 2,
       "slug": "jobs-and-routines",
       "title": "Jobs and Routines",
-      "lede": "What a job is, the three ways one starts, and how a routine runs on a schedule.",
+      "lede": "What a job is, and how a routine runs on a schedule.",
       "youtube": "RLmbHKHtR4k",
       "seconds": 71,
-      "notes_heading": "How many jobs a day Archie does for free",
+      "notes_heading": "How many jobs a day are free",
       "notes": [
-        "On an AI account of your own with no plan, Archie does 20 jobs a day. Routines and the mail and text watches stop at 15, so the last 5 are kept for what you ask it yourself."
+        "On your own AI account with no plan, Archie does 20 jobs a day. Routines and the mail and text watches stop at 15, so the last 5 are kept for what you ask."
       ],
       "words": [
         "How does my agent know what to do?",
@@ -589,16 +589,16 @@
       "level": 2,
       "slug": "connecting-your-email-and-calendar",
       "title": "Connecting Your Email and Calendar",
-      "lede": "How to connect a Google, Outlook or iCloud account in four steps, and how to take that access back.",
+      "lede": "How to connect a Google, Outlook or iCloud account in four steps.",
       "youtube": "XEIHq-NKLpU",
       "seconds": 116,
-      "notes_heading": "Which accounts connect, and what Google shows first",
+      "notes_heading": "Which accounts connect, and Google&rsquo;s first screen",
       "notes": [
-        "Google and Outlook (Outlook.com, Hotmail, Live and Office 365) open their own sign-in page in your browser.",
-        "iCloud, Fastmail, Yahoo, AOL, Zoho Mail and GMX connect with an app password you make on that service&rsquo;s website. A calendar connects when Archie finds one as you connect. AOL and GMX have none.",
-        "Until Google verifies Archie, connecting a Google account first shows a screen saying Google hasn&rsquo;t verified this app. It names Otian AI, the company that makes Archie.",
+        "Google and Outlook (Outlook.com, Hotmail, Live and Office 365) open their own sign-in page.",
+        "iCloud, Fastmail, Yahoo, AOL, Zoho Mail and GMX use an app password. A calendar connects if Archie finds one; AOL and GMX have none.",
+        "Until Google verifies Archie, Google shows an unverified-app screen before its permission page.",
         "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
-        "Email needs an AI account of your own. The free starter credits and the plan with the AI included will not run it.",
+        "Email needs your own AI account. Free credits and the plan with the AI included will not run it.",
         "Where to take access back at Google, Microsoft and Apple: <a href=\"../what-it-means-to-connect-an-account/\">0.7</a>."
       ],
       "words": [
@@ -622,7 +622,7 @@
       "level": 2,
       "slug": "the-approval-gate",
       "title": "The Approval Gate: Why Archie Waits for You",
-      "lede": "Why replies and calendar changes wait for your approval, and what a routine running at night does instead.",
+      "lede": "Why replies and calendar changes wait for your approval.",
       "youtube": "3bhuFFh-n7Y",
       "seconds": 68,
       "notes_heading": null,
@@ -645,12 +645,12 @@
       "level": 2,
       "slug": "what-your-agent-cannot-do",
       "title": "What Your Agent Cannot Do",
-      "lede": "What your agent will not do on a website, how buying works if you switch it on, and how to stop your agent.",
+      "lede": "The limits built into Archie, and how to stop your agent.",
       "youtube": "WX7SB_kVOXk",
       "seconds": 95,
-      "notes_heading": "Buying, and a hard limit on what your agent spends",
+      "notes_heading": "Buying and spending limits",
       "notes": [
-        "Buying is off until you switch it on, under Computer control on the Connections tab. When you do, the limit for one order starts at $50, and you can change it.",
+        "Buying is off until you switch it on, under Computer control on the Connections tab. The limit per order starts at $50, and you can change it.",
         "Your agent never types a card you pay with, so your card has to be saved at the shop already.",
         "The limit is checked against the price your agent reads on the page. For a ceiling nobody can get past, use a card from your bank that works at one shop, with its own limit."
       ],

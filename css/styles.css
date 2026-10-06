@@ -17942,14 +17942,14 @@ button.dp-act { cursor: pointer; }
 /* Gray on an empty box and lit once there is something in it to send, as the iPhone draws it. */
 .dp-knob.hot { font-weight: 700; }
 .dp-ph.is-typed .dp-knob.hot { background: var(--accent); color: var(--on-accent); }
-/* With nothing typed the end of the bar is the microphone, for a voice note, where the computer can
-   turn speech into words (Chat.tsx), and the arrow comes up with the first character. The app puts
-   Talk out loud beside the microphone too; that screen is in no release of the phone app, so
-   TRUST.md keeps it off every drawing of the phone. */
+/* With nothing typed the end of the bar is the microphone, for a voice note, and Talk out loud
+   beside it (SF Symbols' waveform, traced), where the computer can hear and speak (Chat.tsx). The
+   arrow takes both their places with the first character, so the box grows by one knob. */
 .dp-knob svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
 .dp-knob .k-up { display: none; }
 .dp-ph.is-typed .dp-knob.hot .k-mic { display: none; }
 .dp-ph.is-typed .dp-knob.hot .k-up { display: inline; }
+.dp-ph.is-typed .dp-talk { display: none; }
 .dp-msgbox { flex: 1; min-width: 0; background: var(--card); border-radius: 20px; padding: 11px 16px; font-size: var(--fs-xl); line-height: 22px; color: var(--muted); }
 /* The typed yes of the calendar act: js/home.js turns it on once the proposal has landed and off
    again when it is sent, and the send knob is a real button only then.

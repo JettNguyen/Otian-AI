@@ -338,6 +338,9 @@ SYMBOLS = {
     "card": '<rect x="2.6" y="5" width="18.8" height="14" rx="2.6" fill="currentColor" mask="url(#{m:card})"/>',
     "pencil": '<path d="M4.9 19.1l.9-3.5L16 5.4c.7-.7 1.8-.7 2.5 0l.1.1c.7.7.7 1.8 0 2.5L8.4 18.2z" fill="currentColor" mask="url(#{m:pencil})"/>',
     "mic": '<g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="9" y="3.3" width="6" height="11.4" rx="3"/><path d="M5.9 11.3c0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1M12 17.4v3.3"/></g>',
+    # Talk out loud: SF Symbols' waveform, which is what the app wears on an iPhone, traced bar
+    # for bar into the microphone's box at the microphone's stroke
+    "talk": '<path d="M4.5 10.7v2.6M7.5 7v10M10.5 3.5v17M13.5 8.2v7.6M16.5 5.4v13.2M19.5 9.9v4.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>',
     "plus": '<path d="M12 5.2v13.6M5.2 12h13.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>',
     "hammer": '<g fill="currentColor" transform="rotate(45 12 12)"><rect x="10.85" y="9.2" width="2.3" height="12.4" rx="1.15"/><path d="M8.3 3.6h8.2c.6 0 1.1.5 1.1 1.1v2.8c0 .6-.5 1.1-1.1 1.1H9.9L6.6 7.2c-.6-.2-.6-1 0-1.2z"/></g>',
     # the buttons and the bars
@@ -954,19 +957,21 @@ def screen_chat():
 
     # the message bar, a shade off the page with a hairline along its top, running on down behind
     # the tab bar (bgBar in theme.ts, Chat.tsx, since 2026-10-05): a gray knob for attaching, the
-    # box, and the microphone, which is what an empty box ends in where the computer can turn
-    # speech into words. The arrow comes up once there is something typed. The app puts Talk out
-    # loud beside the microphone too, and TRUST.md keeps it off the phone until it is in a release.
+    # box, then the microphone and Talk out loud, which is what an empty box ends in where the
+    # computer can hear and speak. The arrow takes both their places once there is something typed.
     o.append(rect(0, COMPOSER_Y, W, H - COMPOSER_Y, 0, "var(--bar)"))
     o.append(rect(0, COMPOSER_Y, W, 0.5, 0, "var(--line)"))
     ky = COMPOSER_Y + 12
     o.append(circle(12 + 22, ky + 22, 22, "var(--soft)"))
     o.append(sym("plus", 12 + 11, ky + 11, 22, "var(--text2)"))
-    bx, bw = 12 + 44 + 8, W - 2 * (12 + 44 + 8)
+    bx = 12 + 44 + 8
+    bw = W - bx - (8 + 44 + 8 + 44 + 12)
     o.append(rect(bx, ky, bw, 44, 20, "var(--card)"))
     o.append(text(bx + 16, baseline(ky + 11, 22, 17), "Message " + AGENT_NAME, 17, "var(--muted)"))
-    o.append(circle(W - 12 - 22, ky + 22, 22, "var(--soft)"))
-    o.append(sym("mic", W - 12 - 33, ky + 11, 22, "var(--muted)"))
+    for i, mark in enumerate(("mic", "talk")):
+        kx = bx + bw + 8 + i * (44 + 8)
+        o.append(circle(kx + 22, ky + 22, 22, "var(--soft)"))
+        o.append(sym(mark, kx + 11, ky + 11, 22, "var(--muted)"))
     o.append(top_bar(AGENT_NAME, "ember"))
     o.append(status_bar())
     # The draft is a job waiting on you, which is something in flight, so Dashboard wears the dot.

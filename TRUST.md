@@ -1125,6 +1125,12 @@ anyone but the account owner, and the seal means owning the row is not reading i
 
 ### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID
 
+**Which build Android has, 2026-10-05.** The APK on the latest release (`Archie-latest.apk` on
+v0.3.5, version code 8) was built on this Mac from archie-mobile `e742a48`, signed with the same key
+as the APK before it, and opened on an emulator after updating over it. The one it replaced was
+built from before September 29. So an entry below whose phone half is in archie-mobile at or before
+`e742a48` has that half in a release on Android; its computer half still needs a desktop release.
+
 **Status 2026-09-22. The tense split, and this is the deliberate pass that entry always promised.**
 Android and iPhone are no longer in the same state, so no page may talk about "the phone app" as one
 thing any more.
@@ -1630,10 +1636,12 @@ screen is open."
   opens; the entry below holds the rest and its gate.
 - ⛔ **Never "nothing leaves your computer", "offline" or "a private voice assistant".** The words go
   to the AI company. "Only the words go" is the true half, and it is the stronger one.
-- ⛔ **Never on the phone.** Archie Mobile's talk screen is in no release, and its microphone line
-  stays as the phone entries have it.
+- ⚠️ **On the phone, the button only, and on Android only.** Archie Mobile's talk screen is in the
+  Android APK put on v0.3.5 on 2026-10-05 (archie-mobile `e742a48`), and the iPhone's build is still
+  with Apple. A drawing of the phone may show the button beside the microphone, as the site's phones
+  do since that day; any sentence about the phone's screen waits on the entry below.
 
-### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in no release
+### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05
 
 **Entry written 2026-09-29.** The window's half shipped in 0.3.0 (Archie `080c3726`, built September
 15) with no entry, which under this file's rule meant it did not exist to anybody reading here. It is
@@ -1646,6 +1654,13 @@ talk screen has never been talked to" and the phone's entry after it.
 wording below is met by that: both threads are still open on main at `189dc289`, and archie-mobile
 `cf0b115` is in no release. The window's two buttons, and where what you say goes, are approved on
 their own in the entry above.
+
+**Checked 2026-10-05.** The phone's half is in a release on Android: the APK on v0.3.5 was built on
+this Mac from archie-mobile `e742a48`, and its bundle carries "Talk out loud" and `talk_screen`. The
+APK before it, uploaded the same afternoon, was built from before `cf0b115` and had neither. The
+iPhone is still with Apple. The other condition is still open, since nobody has talked to either
+screen (both threads in Archie's `docs/OPEN-THREADS.md`), so the wording below still
+waits. Drawing the button beside the microphone on the phone is allowed now, by the entry above.
 
 **Approved wording, once a person has used it and the phone's half is in a release:** "Talk to your
 agent out loud and hear it answer, back and forth, without pressing anything between turns. It is
@@ -1663,7 +1678,7 @@ turned into words on your computer, and the answer is read out by a voice that r
   `VOICE_ASSET_REFS` in `src-tauri/src/assets.rs`; about 195 MB, and for the voice about 390 MB on a
   Mac and 343 MB on Windows). *Corrected 2026-09-30: this said 148 MB for the voice, which is the
   hearing model's size. `kokoro-en` 1.0 alone is 335.6 MB, in the manifests since August.*
-- **The phone** (Archie `e7f6e128`, in 0.3.2; archie-mobile `cf0b115`, in no release). `src/screens/Talk.tsx` and
+- **The phone** (Archie `e7f6e128`, in 0.3.2; archie-mobile `cf0b115`, in the Android APK of 2026-10-05). `src/screens/Talk.tsx` and
   `src/talk.ts` in archie-mobile listen until somebody stops, send it as an ordinary voice note
   (`put_file`), and fetch the spoken answer the way the play button on a message does (`spoken`).
   The computer answers three new ops in `src-tauri/src/phone.rs`: `talk_ready` (only asks whether

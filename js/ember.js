@@ -277,6 +277,7 @@
     var hue = HUES[look.hue] || HUES.terracotta;
     var uid = "e" + (uidCounter += 1);
     var eyes = EYES[look.eyes] || EYES.pill;
+    var drop = look.topper === "none" ? 0 : 4;
     /* The window: a square 182 across, centered on (100, 106), the same as the app's `FRAME` in
        ember-gen.ts. It was 200 across from y=6 until October 2, 2026, when Jett asked for Ember to
        fill more of the circle; 182 makes them 10% bigger. The transform origins in styles.css did
@@ -318,6 +319,12 @@
       /* Soft at its edge rather than a flat tint: the first of the four touches of light. All
          four are gradients and none is a new shape, because a gradient reads as the same drawing
          with light on it at any size, and a new shape reads as a new thing to decode. */
+      /* A face wearing anything sits four units lower in the window, the app's `TOPPED_DROP` in
+         ember-gen.ts: a hat reaches well above the head while the feet stay put, so without it a
+         topped face is pressed against the top of its circle and tall ears are cut off. A bare
+         head is left where it is. Added October 7, 2026, when Playful Sidekick's ears were
+         clipped on the store's Personalities tile and the app's copy was found to have it. */
+      (drop ? '<g transform="translate(0 ' + drop + ')">' : "") +
       '<ellipse cx="100" cy="177" rx="40" ry="7" fill="url(#shade-' + uid + ')"/>' +
       '<g class="anim"><g class="lean">' +
       /* FOUR PARTS, AND THE REASON THERE ARE FOUR.
@@ -387,7 +394,7 @@
       (EXTRAS_ON_BODY[look.extra]
         ? '<g class="wrap">' + EXTRAS[look.extra](hue.dark) + "</g>"
         : "") +
-      "</g></g></svg>";
+      "</g></g>" + (drop ? "</g>" : "") + "</svg>";
   }
 
   /* ---- the rig ------------------------------------------------------------------------------ */

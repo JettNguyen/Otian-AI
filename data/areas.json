@@ -464,7 +464,8 @@
       "topper": "bunny",
       "eyes": "shine",
       "extra": "sparkles",
-      "mouth": "blep"
+      "mouth": "smile",
+      "closed": true
     },
     "professional": {
       "hue": "teal",

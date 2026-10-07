@@ -92,7 +92,10 @@ export function faces() {
     /** A <use> of one face, recording that the page needs it. `id` is a personality, or "agent". */
     use(id, look) {
       if (!used.has(id)) used.set(id, look || AGENT_LOOK);
-      return `<svg viewBox="9 15 182 182" aria-hidden="true" focusable="false"><use href="#face-${id}"/></svg>`;
+      // The window is the symbol's own (9 15 182 182); this outer box is the plain 0 0 182 182 it is
+      // fitted into. Giving both the window offset it twice: every face sat 15 units high and had
+      // its top sliced off flat, which took the tips off bunny ears and antennas (October 7, 2026).
+      return `<svg viewBox="0 0 182 182" aria-hidden="true" focusable="false"><use href="#face-${id}" width="182" height="182"/></svg>`;
     },
     /** Every face the page used, drawn once. Hidden elements (the mouths and eyes a look does not
      *  show) are dropped, since nothing animates these. */

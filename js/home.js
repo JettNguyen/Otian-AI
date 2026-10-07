@@ -218,7 +218,7 @@
     /* The dinner card is drawn above the mockups, so the fit tells it where they are. */
     var dinner = $('.hm-evening');
     var clock = $('.day-clock'), hints = $$('.day-hint'), mins = $('#dayMinutes'), pie = $('#dayPie');
-    var rail = $('.day-rail'), lastNight = '';
+    var rail = $('.day-rail'), lastNight = '', navBar = $('.nav');
     var caps = $$('.day-cap'), scrs = $$('.dp-scr'), steps = $$('#dayFloorSetup .step');
     var phoneClock = $('[data-day-clock]'), ph = $('.dp-ph'), scr1 = $('.dp-scr[data-scr="1"]');
     var ember = $('.day-ember'), ctaBox = $('.day-cta-mark'), grows = $$('.dp-scr--grow');
@@ -531,9 +531,16 @@
        settling. EASE_SC is per frame at 60fps: .12 is about a fifth of a second to close the gap,
        which is slower than a beat's own fade and therefore the thing the eye follows.
 
+       AND IT IS A FIFTH OF A SECOND AT ANY FRAME RATE (2026-10-07). It was .12 of the gap per frame
+       whatever a frame took, so a phone drawing twenty frames a second took three times as long to
+       settle, and every one of those frames resized the scene, which is what made the frames slow
+       in the first place: in Safari on a phone the scene was still settling from one act when the
+       next began, so it never rested (Jett: "the graphics are running at like 10fps"). easeK is
+       EASE_SC for the frame's real length, and frame() sets it.
+
        An earlier fix pinned the caption row so the scene could not move at all. It did stop the
        snap, and it also threw away the effect this is for. */
-    var EASE_SC = 0.12, scTarget = 1, lastWrapH = 0, capsEl = $('.day-caps');
+    var EASE_SC = 0.12, easeK = EASE_SC, frameN = 1, lastFrameAt = 0, scTarget = 1, lastWrapH = 0, capsEl = $('.day-caps');
     var heroCap = $('.day-cap[data-act="0"]'), heroLift = '', liftNow = 0, heroMid = 0, STAGE_TOP = 0;
 
     /* THE HEIGHT EACH HERO BEAT OPENS TO, measured rather than guessed. `max-height` is what
@@ -594,7 +601,7 @@
        so the band is laid out at the height this sets and painted ten higher. Measured off the caption being shown, which is why the narrow
        .day-cap is centered rather than stretched: a stretched caption reports the band's height
        back and the driver would be reading its own output. */
-    var CAPS_PAD = 18, capH = 0, capQ = '', capPadAt = '';
+    var CAPS_PAD = 18, capH = 0, capQ = '', capPadAt = '', capMoving = false;
     /* Read off .day-caps rather than typed here, because that rule's padding changes with the
        screen and a driver carrying its own copy of it is two numbers that have to agree. Keyed on
        the viewport, like the hero's beat heights: the answer only moves when a media query does. */
@@ -610,18 +617,29 @@
       if (!capsEl || !caps.length) return;
       if (!narrow || still) {
         if (capQ) { capsEl.style.height = ''; capQ = ''; capH = 0; }
+        capMoving = false;
         return;
       }
       var want = caps[cur < 0 ? 0 : cur].offsetHeight + CAPS_PAD;
       /* Eased, and for the reason the scale is eased: a caption is swapped in one frame, and a
-         row that changes height in one frame is a snap. Both ease at one rate, so the words
-         settle into their new place while the scene grows into the room they gave up. The hero
-         needs no special case: its beats open on a transition, so its caption is already a height
-         that moves, and this follows it. */
+         row that changes height in one frame is a snap. Both ease at one rate, so the scene grows
+         into the room the words gave up. The hero needs no special case: its beats open on a
+         transition, so its caption is already a height that moves, and this follows it.
+
+         THE EASE IS A NUMBER AND THE BAND IS LAID OUT ONCE (2026-10-07). This wrote the eased
+         height into the band every frame until today, and in Safari a scroll that relays out the
+         stage every frame ran at half the frame rate of one that does not, with the script itself
+         taking a millisecond: the band eased for most of a second after each act, so on a phone
+         the scene was always in that state. The band now takes the caption's height at once, and
+         capH is where it would be if it had eased: the fit sizes the scene off the row that
+         height would leave, and the wrap is moved by half the difference (capShift), which is
+         where the centre of that row would be. The scene settles exactly as it did, on a scale
+         and a translate the compositor carries, and the words are in place as they fade in. */
       if (!capQ) capH = want;
       else if (Math.abs(want - capH) < 0.5) capH = want;
-      else capH += (want - capH) * EASE_SC;
-      var q = Math.round(capH) + 'px';
+      else capH += (want - capH) * easeK;
+      capMoving = capH !== want;
+      var q = Math.round(want) + 'px';
       if (capQ !== q) { capsEl.style.height = q; capQ = q; }
     }
     /* THE OBJECTS STAY OUT OF THE CAPTIONS' COLUMN (2026-10-05). The fit sizes a 760 by 560 box,
@@ -649,7 +667,7 @@
        once they are gone. And half a unit of slack, because the reach leans a little on the scale
        through the perspective, and a number chasing its own output to the fourth decimal is a
        scene that never rests (see `put`). Wide only: narrow has its own composition. */
-    var keepL = 0, keepR = 0, keepMoved = false, dxNow = 0;
+    var keepL = 0, keepR = 0, keepMoved = false, dxNow = 0, shiftNow = 0, outOfSight = false;
     var slid = [wrap, clock, $('.day-stage > .day-hint')].filter(Boolean);
     function reachOf(wr) {
       var cx = wr.left + wr.width / 2, L = 0, R = 0, o = 0;
@@ -686,8 +704,14 @@
       /* Read here, with the two rects, and written below with --sc: everything this frame reads
          is read before anything is written, or the browser lays the page out twice per frame. The
          band it writes lands in the rect above on the next frame, which is a frame of lag on a
-         number that is already easing. */
+         number that is already easing.
+
+         The rect was measured with the band laid out at laidWas and the wrap moved by shiftNow, so
+         the row the eased band would leave is the rect's height plus the difference, and the top
+         of that row is the rect's top less the move (see capsFit). */
+      var laidWas = capQ ? parseFloat(capQ) : 0, wrTop = wr.top - shiftNow;
       capsFit();
+      var rowH = wr.height + (laidWas ? laidWas - capH : 0);
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
       /* The band the scroll hint stands in, which the scene may not grow into: see the comment on
@@ -707,7 +731,7 @@
          caption band's own side padding, so the picture and the words below it stop in the same
          place, and it is a margin in screen pixels rather than a bigger divisor because that is
          what a gutter is. */
-      scTarget = narrow ? clamp(Math.min((sr.width - EDGE * 2) / 400, wr.height / NARROW_H), 0.1, 1.45)
+      scTarget = narrow ? clamp(Math.min((sr.width - EDGE * 2) / 400, rowH / NARROW_H), 0.1, 1.45)
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       var dx = 0;
       keepMoved = false;
@@ -720,9 +744,14 @@
         dx = Math.min(Math.max(0, lo), hi) * reach.o;
       }
       dx = +dx.toFixed(1);
-      if (dx !== dxNow) {
-        dxNow = dx;
-        slid.forEach(function (el) { el.style.translate = dx ? dx + 'px 0' : ''; });
+      /* Narrow, the wrap also stands where the eased band would have centred it (capsFit). */
+      var shift = narrow && capQ ? +((parseFloat(capQ) - capH) / 2).toFixed(1) : 0;
+      if (dx !== dxNow || shift !== shiftNow) {
+        dxNow = dx; shiftNow = shift;
+        slid.forEach(function (el) {
+          var y = el === wrap ? shift : 0;
+          el.style.translate = dx || y ? dx + 'px ' + y + 'px' : '';
+        });
       }
       /* EASE ONLY ONCE THE READER IS SCROLLING. At the top of the page there is nothing to ease
          from: the scene should already be the size it is going to be, and easing there makes the
@@ -731,27 +760,39 @@
          the markup gives them for readers with no JavaScript, and the first fit measures the full
          caption. Snapping while `p` is 0 means that frame is spent and gone before anything is
          painted. Resizing a window is the same case for a different reason: the target is chasing
-         the drag, and easing behind it is lag rather than motion. */
+         the drag, and easing behind it is lag rather than motion.
+
+         AND HELD WHILE THERE IS NOTHING TO SEE (2026-10-07). Narrow, the hero's mockups leave
+         before its details open, and the details opening is the biggest change the band makes, so
+         the scene was rescaled and its mockups laid out again at new zooms the whole time nobody
+         could see them, which in Safari cost a third of the frame rate. Held, they come back with
+         the next act and ease from where they left. */
       if (!ease || !narrow) SC = scTarget;
+      else if (outOfSight) { /* held: see above */ }
       else if (Math.abs(scTarget - SC) < 0.002) SC = scTarget;
-      else SC += (scTarget - SC) * EASE_SC;
+      else SC += (scTarget - SC) * easeK;
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
-         the same pool whatever the fit came out at. */
-      styleValue(stage, '--sc', SC.toFixed(3));
+         the same pool whatever the fit came out at. ON THE WRAP, NOT THE STAGE: the wrap and its
+         pool are the only two things that read it, and a variable written on the stage is
+         inherited by every element of both mockups, so each frame of the ease restyled all
+         eleven hundred of them (see the resets beside .day-scene in the stylesheet). */
+      styleValue(wrap, '--sc', SC.toFixed(3));
       /* Its left edge on the window's, its foot 16 above the window's top but never higher than 6
          under the menu (on a tall screen the window stands well down and the drawing goes with
          it), and no wider than the room before the phone, which just over 970 is all it needs. */
+      /* Written on the card, which is the one thing that reads them, for the reason --sc is
+         written on the wrap. --dn-row stays on the stage, because the stage's own rows read it. */
       if (dn && !narrow) {
-        styleValue(stage, '--dn-x', Math.round(dn[0].left - dn[1].left) + 'px');
-        styleValue(stage, '--dn-y', Math.max(6, Math.round(dn[0].top - dn[1].top - 16 - dn[2])) + 'px');
-        styleValue(stage, '--dn-w', Math.floor(dn[3].left - dn[0].left - 10) + 'px');
+        styleValue(dinner, '--dn-x', Math.round(dn[0].left - dn[1].left) + 'px');
+        styleValue(dinner, '--dn-y', Math.max(6, Math.round(dn[0].top - dn[1].top - 16 - dn[2])) + 'px');
+        styleValue(dinner, '--dn-w', Math.floor(dn[3].left - dn[0].left - 10) + 'px');
       }
       /* Narrow it has the clock's row, which the hero leaves empty: the row is the card's height,
          14 over it (Jett: "more padding at top between dinner and nav") and 12 under it, and the
          card stands at its foot, so the scene's row starts below both. */
       if (dn && narrow) {
         styleValue(stage, '--dn-row', (dn[2] + 26) + 'px');
-        styleValue(stage, '--dn-y', Math.round(wr.top - 12 - dn[2] - dn[1].top) + 'px');
+        styleValue(dinner, '--dn-y', Math.round(wrTop - 12 - dn[2] - dn[1].top) + 'px');
       }
     }
 
@@ -815,12 +856,17 @@
       zoomTo(win, 'win', wz);
       put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + (p.win.s / wz).toFixed(4) + ')');
       win.style.opacity = p.win.o.toFixed(3);
+      /* AN OBJECT FADED TO NOTHING IS NOT DRAWN AT ALL (2026-10-07). Safari kept painting both
+         mockups at opacity 0 through the hero's details and the two floor acts, and rescaling
+         them, which is the work of drawing them with none of the picture. */
+      styleValue(win, 'visibility', p.win.o < 0.001 ? 'hidden' : '');
       var pz = dz(p.cam.s * p.phone.s, p.phone.z);
       zoomTo(phone, 'phone', pz);
       put(phone, 'phone', 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + (p.phone.s / pz).toFixed(4) + ')');
       /* On the phone, not down on its layers: see the comment above .dp-device in the stylesheet
          for why the per-layer fade was tried and taken back. */
       phone.style.opacity = p.phone.o.toFixed(3);
+      styleValue(phone, 'visibility', p.phone.o < 0.001 ? 'hidden' : '');
       /* The light on the phone's edges moves with its angle to the camera. The side turned toward
          the light blazes and the other goes nearly out; the top and bottom follow the camera's
          pitch; the bezel's bright corners slide around with the sheen; and the sliver of rim the
@@ -883,13 +929,15 @@
       }
       styleValue(stage, '--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
-      /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The root
+      /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The nav
          carries the same number and the stylesheet dims the bar with it (Jett, 2026-09-18: in light
          mode a cream bar sat over the dark room for the whole overnight act). A NUMBER AND NOT A
          CLASS, because a class flips at one scroll notch and the snap back on the way out is the
-         flash he asked not to have. Written only when it moves, since this runs every frame. */
+         flash he asked not to have. Written only when it moves, since this runs every frame, and
+         on the nav rather than the root (2026-10-07): the root's every element inherited it, so
+         each frame of the night coming in restyled the whole page for the sake of one bar. */
       var nq = p.night.toFixed(3);
-      if (nq !== lastNight) { styleValue(document.documentElement, '--day-night', nq); lastNight = nq; }
+      if (nq !== lastNight && navBar) { styleValue(navBar, '--day-night', nq); lastNight = nq; }
     }
 
     /* THE CUSTODY LAP IN FLOOR COORDINATES: [time, x, y]. Wide the road runs across the floor at
@@ -1053,6 +1101,12 @@
     function frame(now) {
       dayRaf = 0;
       if (document.hidden) return;
+      /* The eases' share of the gap for this frame's real length (see EASE_SC), capped so the first
+         frame after a rest is not read as one long frame. */
+      var dt = lastFrameAt ? clamp(now - lastFrameAt, 1, 100) : 1000 / 60;
+      lastFrameAt = now;
+      frameN = dt * 60 / 1000;
+      easeK = 1 - Math.pow(1 - EASE_SC, frameN);
       var r = story.getBoundingClientRect();
       var vh = window.innerHeight;
       // Once Ember has moved to the closing button, the offscreen story needs no work.
@@ -1142,6 +1196,8 @@
         var want = heroLift ? '0 ' + heroLift : '';
         if (heroCap.style.translate !== want) heroCap.style.translate = want;
       }
+      /* The fit reads this on the next frame (see the held case beside SC there). */
+      outOfSight = gone > 0.999;
       if (clock) clock.style.opacity = gone > 0.001 ? (1 - gone).toFixed(3) : '';
       /* Ember goes with them, and has to. Ember stands on a mark, every mark in this act is on the
          phone or the window, and a mascot standing on an object that has faded out is a mascot
@@ -1229,7 +1285,9 @@
           if (markName && !still) window.Ember.act(ember, 'hop');
           markName = mark;
         }
-        var k2 = (first || still) ? 1 : 0.16, wasX = ex;
+        /* A sixth of the gap per sixtieth of a second, so Ember keeps the same pace on a phone that
+           draws fewer frames (see EASE_SC). */
+        var k2 = (first || still) ? 1 : 1 - Math.pow(1 - 0.16, frameN), wasX = ex;
         ex += (tx - ex) * k2; ey += (ty - ey) * k2; es += (size - es) * k2;
         if (Math.abs(tx - ex) < 0.1) ex = tx;
         if (Math.abs(ty - ey) < 0.1) ey = ty;
@@ -1289,10 +1347,16 @@
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
       else window.Ember.look(ember, null);
       if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
-      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || Math.abs(scTarget - SC) > 0.002 || keepMoved;
+      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || (!outOfSight && Math.abs(scTarget - SC) > 0.002) || keepMoved || capMoving;
       /* Held still there is no tail, but the slide that keeps the scene out of the captions reads
-         the frame before, so it runs until it rests. */
-      if (r.bottom > 0 && (easing || (!still && now < settleUntil))) dayRaf = requestAnimationFrame(frame);
+         the frame before, so it runs until it rests.
+
+         ONE LOOP, AND THE !dayRaf IS WHAT KEEPS IT ONE (2026-10-07). A send landing calls wake()
+         from inside this function, after dayRaf was cleared at the top, so wake() asked for a
+         frame and this line asked for a second one over it. Both ran every frame from then on,
+         and so did both of their successors: past the 1:40 act the whole of this function ran
+         three times a frame for as long as the reader kept scrolling. */
+      if (!dayRaf && r.bottom > 0 && (easing || (!still && now < settleUntil))) dayRaf = requestAnimationFrame(frame);
     }
     window.addEventListener('scroll', wake, { passive: true });
     window.addEventListener('resize', wake, { passive: true });

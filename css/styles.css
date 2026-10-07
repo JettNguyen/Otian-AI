@@ -17265,6 +17265,26 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 /* The design box. js/home.js scales it to the stage (SC), so it is never sized by CSS to fit. */
 .day-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+/* WHERE THE SCROLL'S VARIABLES STOP (2026-10-07). js/home.js writes a few custom properties on
+   most frames of a scroll: the fit (--sc) on the wrap, the night on the stage, and the phone's
+   light and depth on the phone. A custom property is inherited, so each write restyles every
+   element under the one it lands on, and in Safari, against a stylesheet this long, that was about
+   four microseconds an element and eleven hundred elements a frame: the stage ran at ten frames a
+   second on a phone (Jett). Nothing inside the content of either mockup, the captions, the clouds
+   or the two floors reads any of them (the readers are the stage, the wrap, the two objects' own
+   boxes, the bezel, the rim and their pseudo-elements), so each of those subtrees sets them back
+   at its top. Its style then comes out the same as it was, and the browser stops there instead of
+   walking the four hundred elements below it. A NEW READER OF ONE OF THESE INSIDE A RESET SEES
+   NOTHING: move the reset below it, do not delete it. Measured in Safari: 0.08ms for a write over
+   a reset subtree against 4.5ms for the same write over an open one. */
+.day-stage .day-scene { --sc: initial; }
+.day-stage :is(.day-stipple, .day-caps, .day-ember, .day-sky > svg, .day-floor, .dp-ph > *, .da-app > *) {
+  --sc: initial; --night: initial; --dz: initial; --dn-row: initial;
+  --edge-l: initial; --edge-r: initial; --edge-t: initial; --edge-b: initial; --lit: initial;
+  --rim-x: initial; --rim-a: initial; --chm-l: initial; --chm-r: initial; --wlf: initial; --wrf: initial;
+  --wall: initial; --wl: initial; --wr: initial; --edge-cut: initial; --phone-mask: initial;
+  --shadow-bezel: initial; --bezel-face: initial; --bezel-chamfer: initial;
+}
 .day-mark { position: absolute; width: 2px; height: 2px; pointer-events: none; }
 .day-win .day-mark, .day-phone .day-mark { left: var(--mx); bottom: var(--my); }
 .day-phone [data-mark="m-hero"] { --mx: -54px; --my: 120px; }

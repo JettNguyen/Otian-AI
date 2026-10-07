@@ -6131,6 +6131,14 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | &ldquo;Conversations with your dot don&rsquo;t count toward your ChatGPT usage limits&rdquo;, and &ldquo;Your plan also includes an allowance for deeper work, with extended limits for the first month after launch.&rdquo; No per-task figure is published, so none is printed | OpenAI | `https://openai.com/index/introducing-dots/` | 2026-09-30 |
 | On training: &ldquo;We don&rsquo;t use content from ChatGPT Business, Enterprise, or Edu workspaces to improve our models by default. On personal ChatGPT plans, you can control whether dots&rsquo; conversations and work are used to improve our models.&rdquo; And &ldquo;We don&rsquo;t train directly on proactive research or your dot&rsquo;s notes to itself.&rdquo; Recorded because it cuts against us, as Meta&rsquo;s Muse commitment does | OpenAI | `https://openai.com/index/introducing-dots/` | 2026-09-30 |
 | Signing in to websites happens in the dot&rsquo;s own browser: &ldquo;Your credentials go to the browser outside the conversation&rdquo;, &ldquo;The cloud browser has its own sessions, separate from the browser on your computer&rdquo;, and &ldquo;dots can use saved passwords without exposing them to the model&rdquo; | OpenAI | `https://learn.chatgpt.com/docs/dots`, `https://openai.com/index/introducing-dots/` | 2026-09-30 |
+| &ldquo;Behind the messages, Tab has its own computer and browser.&rdquo; &ldquo;If the job takes a while, you can leave. Tab keeps going.&rdquo; | Tab (Terrasoft, Inc.) | `https://tab.bot/` | 2026-10-07 |
+| &ldquo;Nothing is paid until you approve it.&rdquo; The terms: &ldquo;Tab may pause and ask for clarification or approval when a request is ambiguous, sensitive, irreversible, unusually risky, or materially different from what you approved&rdquo;, and a request authorizes &ldquo;the steps reasonably necessary to carry out that request within the scope you provided&rdquo; | Tab | `https://tab.bot/`, `https://tab.bot/terms` | 2026-10-07 |
+| &ldquo;Tab starts in Messages&rdquo;, and the sign-up asks for &ldquo;Your number, then one required text&rdquo; under &ldquo;Join the waitlist&rdquo;; since 2026-09-12 a new user picks &ldquo;Messages or WhatsApp&rdquo;. &ldquo;Tab is in private beta&rdquo;, and no page publishes a price (`/pricing` is a 404) | Tab | `https://tab.bot/`, `https://tab.bot/updates`, `https://tab.bot/terms` | 2026-10-07 |
+| Tab names no AI company; its updates speak of &ldquo;a model provider&rdquo; and &ldquo;a second model&rdquo; | Tab | `https://tab.bot/updates` | 2026-10-07 |
+| &ldquo;Every customer runs on a dedicated, isolated instance rather than in a shared multi-tenant pool.&rdquo; &ldquo;Your data is hosted in the European Union. That is true wherever you are.&rdquo; | Eden AI Lab Inc. | `https://meeteden.ai/privacy` | 2026-10-07 |
+| &ldquo;Where an action would commit you to something, it asks you to approve it first.&rdquo; | Eden AI Lab Inc. | `https://meeteden.ai/privacy` | 2026-10-07 |
+| The homepage&rsquo;s two buttons read &ldquo;Chat on iMessage&rdquo; (a text to a US number) and &ldquo;Chat on Telegram&rdquo;, and the page says &ldquo;eden is in closed beta&rdquo; and calls Eden &ldquo;your personal 24/7 concierge&rdquo; | Eden AI Lab Inc. | `https://meeteden.ai/` | 2026-10-07 |
+| &ldquo;Eden uses third-party AI model providers to generate responses&rdquo;, and names none | Eden AI Lab Inc. | `https://meeteden.ai/privacy` | 2026-10-07 |
 
 **Manus Cue and Microsoft Autopilot, 2026-09-29.** Both came in from the competitive watch. Jett
 chose where they go, as a choice: **Cue joins `compare/cloud-agents/` beside Muse**, and the hub
@@ -6174,6 +6182,29 @@ by default until you change a setting (beside Cowork and Muse), and sign in.
 - &#9888;&#65039; What cuts against us, and is printed: a dot keeps working with your computer off,
   you can reach it in Slack, Teams or a call, and OpenAI makes a training commitment for work
   accounts and offers a control on personal ones.
+
+**Tab and Eden, 2026-10-07.** Read for Jack&rsquo;s two competitor reports, and Jett chose where
+they go: **the hub only**, which goes to thirteen; neither joins `compare/cloud-agents/`. Both
+sites serve their text to a script with a browser&rsquo;s user agent, so every row above was read
+from the page itself, the same day. Where the rows put them: their servers, both; sign in for
+Ease, both, as Instinct, because you start by texting them; and the top of Asks first, both, **as
+readings, labelled as such in the fold**. Eden by its policy&rsquo;s &ldquo;asks you to approve it
+first&rdquo; for anything that commits you, the reading that put Norton there. Tab by &ldquo;Nothing
+is paid until you approve it&rdquo; and its terms&rsquo; &ldquo;may pause and ask&rdquo;, the reading that
+put Grok Bot there on 2026-09-27. Neither approval prompt could be read, since both are behind a
+waitlist, which is the check Muse taught us to make; if either is read later, place it by the prompt.
+
+- &#9940; Never say Tab always asks. Its terms say it &ldquo;may&rdquo; pause, and a request authorizes
+  &ldquo;the steps reasonably necessary&rdquo; within it.
+- &#9940; Never print Eden&rsquo;s user count or waitlist figures. The homepage&rsquo;s &ldquo;500,000+
+  users&rdquo; stands beside &ldquo;closed beta&rdquo;, its own release of 2026-10-05 says 13,000 signed up
+  for early access, and the page&rsquo;s join notices are generated by its own script. None is a source.
+- &#9940; Never say Eden is on WhatsApp. The homepage links iMessage and Telegram; WhatsApp is in its
+  metadata and an unlinked route only.
+- &#9940; Never quote either company&rsquo;s app code, only its public pages.
+- &#9888;&#65039; What cuts against us, and is printed: both need no computer of yours and keep going
+  while yours is off. Tab also places phone calls and waits on hold; that is not on the hub.
+- The chart&rsquo;s letters are T and E, in the site&rsquo;s own type, like every other company on it.
 
 **Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was
 mislabelled, and for the two marks that came onto the chart.**

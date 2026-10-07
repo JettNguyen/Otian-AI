@@ -93,6 +93,33 @@
       }
     }
   </style>
+  <style>
+    /* The "your day" meter (js/jobs-meter.js). Page-local because nothing else draws it. */
+    .jm { max-width: 760px; margin: 2.5rem auto 0; display: grid; gap: 1.25rem; }
+    .jm-row { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+    .jm-row legend { width: 100%; font-weight: 650; color: var(--text-primary); margin-bottom: .5rem; padding: 0; }
+    .jm-row label { display: inline-flex; align-items: center; gap: .45rem; padding: .55rem .9rem; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-card); color: var(--text-primary); cursor: pointer; font-size: var(--fs-base); }
+    .jm-row label small { color: var(--text-muted); font-size: .85em; }
+    .jm-row label:has(input:checked) { border-color: var(--accent); background: var(--accent-subtle); }
+    .jm-row input { accent-color: var(--accent); margin: 0; }
+    .jm-bar { position: relative; height: 22px; border-radius: 11px; background: var(--surface-soft-strong); display: flex; overflow: visible; margin-top: 1.25rem; }
+    .jm-fill { display: block; height: 100%; }
+    .jm-fill--bg { background: var(--accent-ink); border-radius: 11px 0 0 11px; }
+    .jm-fill--you { background: var(--accent); }
+    .jm-mark { position: absolute; top: -6px; bottom: -6px; width: 2px; background: var(--text-primary); }
+    .jm-mark span { position: absolute; top: -1.5rem; left: 50%; transform: translateX(-50%); font-style: normal; font-size: var(--fs-xs); font-weight: 650; color: var(--text-secondary); }
+    .jm-key { margin: 0; display: flex; align-items: center; gap: .45rem; font-size: var(--fs-xs); color: var(--text-secondary); }
+    .jm-dot { width: .7rem; height: .7rem; border-radius: 50%; display: inline-block; }
+    .jm-dot--bg { background: var(--accent-ink); }
+    .jm-dot--you { background: var(--accent); margin-left: .9rem; }
+    .jm-line { width: 2px; height: .9rem; background: var(--text-primary); display: inline-block; margin-left: .9rem; }
+    .jm-out { margin: 0; font-size: var(--fs-3xl); color: var(--text-primary); }
+    .jm--over .jm-out b { color: var(--accent-ink); }
+    .jm-plan { margin: 0; color: var(--text-secondary); }
+    @media (prefers-reduced-motion: no-preference) {
+      .jm-fill { transition: width .35s ease; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -348,7 +375,7 @@
       </div>
     </section>
 
-    <!-- A reference comparison: the agent's belongings beside the paid app's capacity. -->
+    <!-- What a plan adds, as a meter the reader works: where one day lands against the free tier. -->
     <section class="section section-alt" id="why-paid" aria-labelledby="why-paid-heading">
       <div class="container">
         <div class="section-header">
@@ -356,47 +383,39 @@
           <h2 id="why-paid-heading" class="fade-up delay-1">What $30 a month adds</h2>
         </div>
 
-        <figure class="explain-figure mt-40 fade-up delay-1" id="agentAndPlan">
-          <svg class="explain-svg--desktop" viewBox="0 0 600 230" role="img" aria-labelledby="agentAndPlan-t" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;font-family:inherit">
-            <title id="agentAndPlan-t">Your personal agent's setup, memory and files live on your computer. A paid Archie plan adds up to ten agents, no daily job limit and Archie Mobile for $30 a month. Your chosen AI company does the thinking.</title>
-            <style>
-              .pay-pane{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
-              .pay-pane--plan{fill:var(--accent);fill-opacity:.06;stroke:var(--accent)}
-              .pay-head{fill:currentColor;font-size:18px;font-weight:700}
-              .pay-head--plan{fill:var(--accent-ink)}
-              .pay-item{fill:currentColor;font-size:14px;opacity:.85}
-              .pay-note{fill:currentColor;font-size:12px;opacity:.65}
-            </style>
-            <rect class="pay-pane" x="12" y="12" width="276" height="202" rx="14"/>
-            <text class="pay-head" x="36" y="47">What stays yours</text>
-            <text class="pay-item" x="36" y="85">Your agent's setup</text>
-            <text class="pay-item" x="36" y="115">Its memory</text>
-            <text class="pay-item" x="36" y="145">Your files</text>
-            <text class="pay-note" x="36" y="187">On your computer</text>
-            <rect class="pay-pane pay-pane--plan" x="312" y="12" width="276" height="202" rx="14"/>
-            <text class="pay-head pay-head--plan" x="336" y="47">What paid Archie adds</text>
-            <text class="pay-item" x="336" y="85">Up to 10 agents</text>
-            <text class="pay-item" x="336" y="115">No daily job limit</text>
-            <text class="pay-item" x="336" y="145">Archie Mobile</text>
-            <text class="pay-note" x="336" y="187">Personal: $30 a month</text>
-          </svg>
-          <svg class="explain-svg--mobile" viewBox="0 0 340 414" role="img" aria-labelledby="agentAndPlan-tm" xmlns="http://www.w3.org/2000/svg">
-            <title id="agentAndPlan-tm">Your personal agent's setup, memory and files live on your computer. A paid Archie plan adds up to ten agents, no daily job limit and Archie Mobile for $30 a month. Your chosen AI company does the thinking.</title>
-            <rect class="pay-pane" x="8" y="8" width="324" height="190" rx="14"/>
-            <text class="pay-head" x="32" y="42">What stays yours</text>
-            <text class="pay-item" x="32" y="77">Your agent's setup</text>
-            <text class="pay-item" x="32" y="105">Its memory</text>
-            <text class="pay-item" x="32" y="133">Your files</text>
-            <text class="pay-note" x="32" y="173">On your computer</text>
-            <rect class="pay-pane pay-pane--plan" x="8" y="214" width="324" height="190" rx="14"/>
-            <text class="pay-head pay-head--plan" x="32" y="248">What paid Archie adds</text>
-            <text class="pay-item" x="32" y="283">Up to 10 agents</text>
-            <text class="pay-item" x="32" y="311">No daily job limit</text>
-            <text class="pay-item" x="32" y="339">Archie Mobile</text>
-            <text class="pay-note" x="32" y="379">Personal: $30 a month</text>
-          </svg>
-          <figcaption>Your agent's requests go to your chosen AI company. On our free credits or included AI, they pass through our server. On your own AI account, that company bills you separately.</figcaption>
-        </figure>
+        <!-- The "your day" meter (2026-10-06), in place of a two-box drawing of what stays yours and
+             what a plan adds. The question under "$30 a month?" is "will I outgrow free?", and a
+             reader answers it here by switching on their own day rather than reading our answer.
+             Counting and both limits are the app's (js/jobs-meter.js says where). The resting state
+             below is complete without script: the default choices and the sentence they produce. -->
+        <div class="jm fade-up delay-1" data-jobs-meter>
+          <fieldset class="jm-row">
+            <legend>What you ask your agent</legend>
+            <label><input type="radio" name="jm-asks" value="5" checked /> A few things <small>5 a day</small></label>
+            <label><input type="radio" name="jm-asks" value="10" /> Often <small>10 a day</small></label>
+            <label><input type="radio" name="jm-asks" value="20" /> All day <small>20 a day</small></label>
+          </fieldset>
+          <fieldset class="jm-row">
+            <legend>Emails your agent reacts to</legend>
+            <label><input type="radio" name="jm-mail" value="0" /> None</label>
+            <label><input type="radio" name="jm-mail" value="10" checked /> A quiet inbox <small>10 a day</small></label>
+            <label><input type="radio" name="jm-mail" value="30" /> A busy inbox <small>30 a day</small></label>
+          </fieldset>
+          <fieldset class="jm-row">
+            <legend>Routines that run once a day</legend>
+            <label><input type="checkbox" name="jm-routine" value="1" checked /> Morning Brief</label>
+            <label><input type="checkbox" name="jm-routine" value="1" /> Commitment Sweep</label>
+            <label><input type="checkbox" name="jm-routine" value="1" /> Evening Reflection</label>
+          </fieldset>
+          <div class="jm-bar" aria-hidden="true">
+            <span class="jm-fill jm-fill--bg" style="width:18.33%"></span><span class="jm-fill jm-fill--you" style="width:8.33%"></span>
+            <i class="jm-mark" style="left:25%"><span>15</span></i>
+            <i class="jm-mark" style="left:33.33%"><span>20</span></i>
+          </div>
+          <p class="jm-key" aria-hidden="true"><span class="jm-dot jm-dot--bg"></span>Email and routines <span class="jm-dot jm-dot--you"></span>What you ask <span class="jm-line"></span>Where the free tier stops</p>
+          <p class="jm-out" aria-live="polite"><b>About 16 jobs a day.</b><span> That fits the free tier.</span></p>
+          <p class="jm-plan">The free tier stops email and routines at 15 jobs a day and everything at 20, then starts again at midnight. The $30 plan has no daily limit, runs up to 10 agents and adds Archie Mobile.</p>
+        </div>
 
         <p class="price-note">When a Personal plan ends, existing agents keep working at 20 jobs a day on your own AI account. Business needs a plan; Archie Mobile needs a plan or live trial.</p>
       </div>
@@ -850,5 +869,6 @@
   <script src="../../js/nav.js?v=20261006-6"></script>
   <script type="module" src="../../js/account-nav.js?v=20261006-6"></script>
   <script src="../../js/demo-player.js?v=20261006-6"></script>
+  <script src="../../js/jobs-meter.js?v=20261006-6"></script>
 </body>
 </html>

@@ -218,6 +218,36 @@ It's about custody and legal exposure, not secrecy. Lead with "no custodian," ne
 local-model tools that keep the model on-device are genuinely more private on inference; we compete
 on custody, not privacy maximalism.
 
+### ✅ We are paid by the people who use Archie, and by nobody else
+
+**Added 2026-10-06**, when the investor pitch's strongest line ("their prize is your data; ours is
+your subscription") was carried to the site without naming anybody. The site had never said how
+Otian makes money, which is the first question a reader asks about a product with a free tier.
+
+**Approved wording:** "From you, and nobody else: the plans on this page and setup help at $250 an
+hour. We run no ads, take no sponsors, and never sell, rent or broker customer data. On your own AI
+account, we add nothing to your AI bill."
+
+**Why it's true:** it is a published commitment, not a code claim, so its pointers are documents.
+`standard/index.html:428` ("We are paid by the people we serve, and by nobody else") and `:430`
+(what that forecloses: advertising of any kind, paid placement, selling, renting or brokering
+customer data); `standard/index.html:317` (no selling, renting, brokering or trading customer data,
+"Not aggregated, not anonymized"); the Terms of Service, which say the AI provider's cost "is not a
+fee we charge, collect, resell, or mark up" (FACTS.md, `0%`). The revenue lines that exist are the
+Stripe products on `archie/pricing/` (Personal, AI included, Business) and the `$250` hour on
+`services/`. The no-ads half is also true in code: "We ship no telemetry and no analytics" below.
+
+**Boundaries, do not cross:**
+- ⚠️ **"We add nothing to your AI bill" is scoped to your own AI account.** On the AI-included plan
+  and on the free credits we buy the AI, so the unscoped "we make no money on AI" is not this claim.
+- ❌ Never name another company's business model in the same breath. The reader draws that contrast;
+  the site does not draw it for them (CLAUDE.md, "Two starting points": no blame, no fear).
+- ❌ Never "we can't sell your data because we don't have it" unscoped. We hold your email and the
+  records under What We Hold; the commitment is that we sell none of it.
+- ⛔ **A partnership that pays us breaks this claim the day it is signed.** Venice, a referral
+  bounty, a sponsored add-on: any of them takes this entry down first, and the Standard says none
+  of them will happen.
+
 ### ✅ Your prompts never touch an Otian server
 
 **Approved wording:** "When your agent thinks, it talks to Anthropic or OpenAI directly

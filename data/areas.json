@@ -216,7 +216,7 @@
     "faces": [
       "dry",
       "the-cat",
-      "hype-coach"
+      "the-morning-show"
     ],
     "says": {
       "id": "dry",
@@ -361,22 +361,22 @@
   },
   "voiceLook": {
     "calm-anchor": {
-      "hue": "teal",
+      "hue": "green",
       "topper": "sprout",
       "eyes": "pill",
-      "extra": "none",
+      "extra": "heart",
       "mouth": "smile",
       "closed": true
     },
     "concise": {
-      "hue": "teal",
-      "topper": "none",
+      "hue": "blue",
+      "topper": "peak",
       "eyes": "bead",
       "extra": "none",
       "mouth": "flat"
     },
     "creative-muse": {
-      "hue": "iris",
+      "hue": "blue",
       "topper": "antenna",
       "eyes": "shine",
       "extra": "sparkles",
@@ -391,7 +391,7 @@
     },
     "exec-concierge": {
       "hue": "blue",
-      "topper": "none",
+      "topper": "crown",
       "eyes": "oval",
       "extra": "glasses",
       "mouth": "smile"
@@ -405,9 +405,9 @@
     },
     "house-manager": {
       "hue": "teal",
-      "topper": "bow",
-      "eyes": "round",
-      "extra": "none",
+      "topper": "sprout",
+      "eyes": "wide",
+      "extra": "freckles",
       "mouth": "smile"
     },
     "hype-coach": {
@@ -418,31 +418,31 @@
       "mouth": "snore"
     },
     "language-partner": {
-      "hue": "plum",
-      "topper": "tuft",
+      "hue": "gold",
+      "topper": "ears",
       "eyes": "shine",
-      "extra": "none",
+      "extra": "freckles",
       "mouth": "snore"
     },
     "new-parent": {
-      "hue": "gold",
+      "hue": "iris",
       "topper": "bunny",
       "eyes": "sleepy",
       "extra": "bandage",
       "mouth": "smile"
     },
     "noir-detective": {
-      "hue": "plum",
+      "hue": "gold",
       "topper": "cap",
       "eyes": "bead",
-      "extra": "none",
+      "extra": "bandage",
       "mouth": "flat"
     },
     "one-step-ahead": {
-      "hue": "teal",
-      "topper": "antenna",
+      "hue": "iris",
+      "topper": "peak",
       "eyes": "wide",
-      "extra": "none",
+      "extra": "sparkles",
       "mouth": "smile"
     },
     "owner-and-a-date": {
@@ -453,52 +453,52 @@
       "mouth": "smile"
     },
     "plain-and-patient": {
-      "hue": "teal",
+      "hue": "terracotta",
       "topper": "none",
       "eyes": "oval",
       "extra": "heart",
       "mouth": "smile"
     },
     "playful-sidekick": {
-      "hue": "terracotta",
-      "topper": "ears",
+      "hue": "teal",
+      "topper": "bunny",
       "eyes": "shine",
       "extra": "sparkles",
       "mouth": "blep"
     },
     "professional": {
-      "hue": "blue",
-      "topper": "none",
+      "hue": "teal",
+      "topper": "peak",
       "eyes": "pill",
       "extra": "bowtie",
       "mouth": "smile"
     },
     "second-opinion": {
-      "hue": "iris",
-      "topper": "none",
-      "eyes": "oval",
-      "extra": "none",
+      "hue": "teal",
+      "topper": "antenna",
+      "eyes": "bead",
+      "extra": "bandage",
       "mouth": "flat"
     },
     "sharp-advisor": {
-      "hue": "gold",
-      "topper": "none",
+      "hue": "iris",
+      "topper": "crown",
       "eyes": "bead",
-      "extra": "glasses",
+      "extra": "bowtie",
       "mouth": "flat"
     },
     "study-partner": {
       "hue": "gold",
-      "topper": "tuft",
+      "topper": "sprout",
       "eyes": "round",
       "extra": "glasses",
       "mouth": "smile"
     },
     "team-assistant": {
-      "hue": "blue",
+      "hue": "green",
       "topper": "headphones",
       "eyes": "pill",
-      "extra": "none",
+      "extra": "bowtie",
       "mouth": "smile"
     },
     "terminal": {
@@ -510,101 +510,101 @@
     },
     "the-bookkeeper": {
       "hue": "green",
-      "topper": "none",
+      "topper": "peak",
       "eyes": "oval",
       "extra": "glasses",
       "mouth": "flat"
     },
     "the-butler": {
-      "hue": "iris",
+      "hue": "blue",
       "topper": "none",
       "eyes": "oval",
       "extra": "bowtie",
       "mouth": "flat"
     },
     "the-careful-one": {
-      "hue": "gold",
-      "topper": "none",
+      "hue": "plum",
+      "topper": "tuft",
       "eyes": "oval",
       "extra": "none",
       "mouth": "flat"
     },
     "the-cat": {
-      "hue": "gold",
+      "hue": "terracotta",
       "topper": "ears",
       "eyes": "sleepy",
       "extra": "none",
       "mouth": "flat"
     },
     "the-editor": {
-      "hue": "plum",
-      "topper": "none",
+      "hue": "terracotta",
+      "topper": "tuft",
       "eyes": "bead",
       "extra": "glasses",
       "mouth": "flat"
     },
     "the-fixer": {
-      "hue": "terracotta",
-      "topper": "cap",
+      "hue": "green",
+      "topper": "tuft",
       "eyes": "round",
       "extra": "bandage",
       "mouth": "smile"
     },
     "the-full-picture": {
-      "hue": "teal",
+      "hue": "green",
       "topper": "none",
       "eyes": "wide",
-      "extra": "glasses",
+      "extra": "sparkles",
       "mouth": "smile"
     },
     "the-homie": {
       "hue": "green",
-      "topper": "headphones",
+      "topper": "cap",
       "eyes": "pill",
-      "extra": "none",
+      "extra": "freckles",
       "mouth": "blep"
     },
     "the-journal-keeper": {
-      "hue": "iris",
-      "topper": "sprout",
+      "hue": "gold",
+      "topper": "bunny",
       "eyes": "lashes",
-      "extra": "none",
+      "extra": "heart",
       "mouth": "smile",
       "closed": true
     },
     "the-morning-show": {
-      "hue": "blue",
-      "topper": "headphones",
+      "hue": "iris",
+      "topper": "antenna",
       "eyes": "shine",
-      "extra": "none",
+      "extra": "freckles",
       "mouth": "snore"
     },
     "the-operator": {
-      "hue": "gold",
-      "topper": "cap",
+      "hue": "terracotta",
+      "topper": "headphones",
       "eyes": "wide",
-      "extra": "none",
+      "extra": "bandage",
       "mouth": "smile"
     },
     "the-sportscaster": {
-      "hue": "green",
-      "topper": "cap",
+      "hue": "gold",
+      "topper": "headphones",
       "eyes": "wide",
       "extra": "sparkles",
       "mouth": "snore"
     },
     "the-stoic": {
-      "hue": "blue",
-      "topper": "none",
-      "eyes": "sleepy",
+      "hue": "teal",
+      "topper": "crown",
+      "eyes": "oval",
       "extra": "none",
       "mouth": "flat"
     },
     "the-travel-agent": {
-      "hue": "iris",
+      "hue": "teal",
       "topper": "cap",
       "eyes": "round",
-      "extra": "none",
+      "extra": "glasses",
       "mouth": "smile"
     },
     "warm-companion": {

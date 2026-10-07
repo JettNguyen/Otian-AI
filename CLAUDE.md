@@ -45,12 +45,12 @@ conventions, which stay below as history.
 - **The plans split by headcount, and the names follow (Jett, 2026-10-07).** The $30 plan is
   **Archie**, for one person, and it is the lead: Patrick and Jehan run their businesses alone on
   it. The $99 plan is **Archie for Teams**, for when the owner hires. The menus say "For One
-  Person" and "For a Team"; "Personal" is retired as a name (the app never used it). **The rename
-  is staged**: the app, its installer and the Stripe products still say Archie for Business until
-  Jett's next release renames them (keep the bundle identifier, or installs stop updating), so the
-  install pages say so in one line, and the pages that describe the app as it ships (trust/,
-  terms-of-service/, help/, account/, activity/, admin/) keep the old name until that release. The
-  URLs stay `archie/personal/` and `archie/business/`.
+  Person" and "For a Team"; "Personal" is retired as a name (the app never used it). **The app
+  took the name in 0.3.7**, with the bundle identifier kept so installs keep updating, and the
+  pages that describe the app as it ships (trust/, terms-of-service/, help/, account/, activity/,
+  admin/) followed the same day. On a Mac that updated in place, System Settings still lists the
+  app as Archie for Business, which help/ says. The URLs stay `archie/personal/` and
+  `archie/business/`.
 - **The main button stays Download Archie.** Jett: owners hesitate at a call when the product works
   right now. The free call (`services/`) is the second route, never the first.
 - **Patrick is the proof** (Westway Site Services, a site-services company he runs): lead with him.
@@ -702,7 +702,7 @@ sizes are on the page at rest, and the pick only lights one.
   splits by audience elsewhere (the `.card-aud` chips and the `.aud-pick` review grids on
   `testimonials/`) uses the same two phrases: **"one person"** and **"a team"**. Two registers,
   and they do not mix. *Personal* and *Business* are the **editions' names**, so they are what
-  the nav labels, the page titles and the prices say ("For Personal", "Archie for Business").
+  the nav labels, the page titles and the prices say ("For Personal", "Archie for Business", both since renamed).
   *One person* and *a team* describe the **reader**, so they are what anything sorting readers
   says: the hero fork, the chips, the review tabs, the "Which one is this?" rows. Never
   "individuals" as a reader-facing label (it was a URL that read like an audience and pointed at

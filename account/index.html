@@ -331,7 +331,7 @@
                   <button class="btn btn-secondary btn-mini" data-plan="yearly">$299 a year</button>
                 </div>
                 <div class="acct-row">
-                  <span class="acct-plan-name">Archie for Business</span>
+                  <span class="acct-plan-name">Archie for Teams</span>
                   <button class="btn btn-business btn-mini" data-plan="business-monthly">$99 a month</button>
                   <button class="btn btn-secondary btn-mini" data-plan="business-yearly">$999 a year</button>
                 </div>
@@ -499,8 +499,8 @@
     const PLAN_LINKS = {
       yearly: "https://buy.stripe.com/dRm4gydNl8Kochl0thaR203",
       monthly: "https://buy.stripe.com/4gM28qbFd5yca9d5NBaR204",
-      // Archie for Business checkout links go here when the business runbook finishes (the Stripe
-      // prices must sit on the Archie for Business product, or the webhook grants the wrong tier;
+      // Archie for Teams checkout links go here when the business runbook finishes (the Stripe
+      // prices must sit on the Archie for Teams product, or the webhook grants the wrong tier;
       // see FACTS.md). Until then the buttons fall through to the "isn't set up yet" message.
       "business-monthly": "",
       "business-yearly": "",
@@ -643,12 +643,12 @@
         // The edition they bought, not both: which app a license runs is in flux and the site
         // asserts nothing about it either way (TRUST.md), so this names the purchase and stops.
         body.innerHTML = edition === "business"
-          ? "Your plan is active. <a href=\"../archie/install/#business-heading\">Download and install Archie for Business</a> on your Mac, then sign in with this account."
+          ? "Your plan is active. <a href=\"../archie/install/#business-heading\">Download and install Archie for Teams</a> on your Mac, then sign in with this account."
           : "Your plan is active. <a href=\"../archie/install/\">Download and install Archie</a> on your Mac, then sign in with this account.";
         show("archie-actions", false);
       } else {
         setPill("archie-pill", "Not yet", false);
-        body.textContent = "Start a plan to use Archie: $30 a month or $299 a year for the personal edition, and $99 a month or $999 a year for Archie for Business, a separate app whose agents your whole team can message. They are two plans, not one with extras, and you can change or stop either whenever you like.";
+        body.textContent = "Start a plan to use Archie: $30 a month or $299 a year for the personal edition, and $99 a month or $999 a year for Archie for Teams, a separate app whose agents your whole team can message. They are two plans, not one with extras, and you can change or stop either whenever you like.";
         show("archie-actions", true);
       }
     }

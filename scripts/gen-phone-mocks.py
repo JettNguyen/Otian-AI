@@ -691,15 +691,15 @@ AGENTS = [
     dict(name="Bookkeeper", kind="teal", running=False,
          said="Four receipts filed. One from the hardware shop has no total on it, so I left it alone.",
          when="1 day ago", skills=2, routines=1),
-    dict(name="Around the House", kind="gold", running=False,
-         said="The car insurance expires in three weeks. Worth looking at now rather than later.",
+    dict(name="Leads", kind="gold", running=False,
+         said="Two new leads overnight. Dana asked about gutters, and the reply is drafted.",
          when="9 hours ago", skills=1, routines=2),
 ]
 # The list goes on past the bottom of the screen, the way a list of four does on a phone, so the
 # fourth card runs under the tab bar and the bar has something to bend at its rim (lens). It is
 # the only thing on the three screens that reaches the glass, and it is there for that reason.
-UNDER_BAR = dict(name="Errands", kind="plum", running=False,
-                 said="Your library books are due Thursday. I set a reminder for Wednesday evening.",
+UNDER_BAR = dict(name="Calendar", kind="plum", running=False,
+                 said="Thursday is full. Friday at 10 is open for the Meyer estimate.",
                  when="2 days ago", skills=1, routines=1)
 
 
@@ -819,9 +819,9 @@ def action_columns(labels):
 CHAT = [
     dict(mine=False, when="40 minutes ago",
          text="\U0001F4E7 Twelve came in overnight. Two need you, and the other ten are filed."),
-    dict(mine=True, when="8 minutes ago", text="Tell the landlord Tuesday morning works."),
+    dict(mine=True, when="8 minutes ago", text="Tell the Hendersons Tuesday morning works."),
     dict(mine=False, when="8 minutes ago", lead="\u270d\ufe0f Here is what I would send:",
-         quote="Tuesday morning works for us. Any time before noon is fine, and somebody will be in.",
+         quote="Tuesday morning works. I can be there at 9:00 to start.",
          actions=ACTIONS),
 ]
 # The first message is the resting state; the next two land as beats on the stage, so the thread
@@ -999,7 +999,7 @@ SKILLS = [
     dict(name="Email Manager", on=True),
     dict(name="Inbox Rules", on=False),
     dict(name="Calendar Manager", on=True),
-    dict(name="Bills & Subscriptions", on=True),
+    dict(name="Waiting On", on=True),
 ]
 SPECIALISTS = [
     dict(name="Writer", role="Drafts emails, posts and summaries for you to send, and never sends anything itself."),

@@ -485,7 +485,12 @@ means nothing further is sent and anything waiting to be sent is deleted."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
 
-### 🚧 "How did you hear about Archie?" at the end of setup: BUILT 2026-10-05 (Archie b2f2c7fc), not yet in a release, and its route is not deployed
+### 🚧 "How did you hear about Archie?" at the end of setup: BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, and its route is deployed
+
+*Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
+`false` in Archie `src/app/heard-from.ts` at the release commit `59a674e6`), so nobody is asked. The
+route is live: an unsigned POST to `/account/heard-from` gets 401 where a made-up route gets 404. What
+is left before any page says it: switching it on, and the privacy policy's line.*
 
 Built at Jett's ask, from the spec in Archie's `docs/GIVE-A-FRIEND-A-MONTH.md`, because nothing
 before sign-in is counted and nobody can tell which channel brought someone. **Two gates before
@@ -1140,7 +1145,12 @@ anyone but the account owner, and the seal means owning the row is not reading i
   opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from
   0.3.5).
 
-### 🚧 Texting your agent on iMessage like a contact, on an Apple ID of its own: BUILT 2026-10-06, not yet in a release
+### 🚧 Texting your agent on iMessage like a contact, on an Apple ID of its own: BUILT 2026-10-06, SHIPPED in Archie 0.3.6 on October 6, 2026, not yet tried on a real Mac
+
+*Released, checked October 6, 2026: `0bd65dc2` is an ancestor of 0.3.6's `59a674e6`, 0.3.6's release
+note says "On iMessage, your agent can have an Apple ID of its own", and the Connecting iMessage
+guide carries both ways from the same commit. No page says it yet. The last boundary below still
+holds, so a page that does says the second way is new.*
 
 Raised by Jett on October 6, 2026: on iMessage the agent lived only in the owner's conversation
 with themselves, which Messages draws with every message as the owner's and often twice, so texting
@@ -1150,7 +1160,7 @@ the agent read as your own words echoing back.
 conversation you have with yourself, on any Mac, its replies start with its name. Or give it an
 Apple ID of its own on a spare Mac, and text it like any contact: nothing shows twice."
 
-**Why it's true** (Archie branch `imessage-own-account`, October 6, 2026):
+**Why it's true** (Archie `0bd65dc2`, October 6, 2026, in 0.3.6):
 - **Two ways, chosen on the Chat app card.** `SignedInAs` in `crates/archie-net/src/imessage.rs`:
   `Owner` is the message-yourself thread, `Agent` is an Apple ID of the agent's own. The choice is
   `imessage_own_account` on the agent's manifest, read at start (`gateway_lifecycle.rs`).
@@ -1652,7 +1662,7 @@ when that is the clearer shape."
   (`src/app/markdown.tsx`; `src/text/markdown.ts` in the app, with tests). The agent is told a
   table is fine only when every screen reading the conversation draws one: talking in Archie alone,
   and the paired phone reporting it can (`reply_style` in `gateway/prompt.rs`,
-  `GatewayConfig::phone_draws_tables`). **Widened on Archie main October 6, 2026 (`ae4f4b2d`, not in 0.3.5):**
+  `GatewayConfig::phone_draws_tables`). **Widened in Archie 0.3.6, October 6, 2026 (`ae4f4b2d`):**
   an agent connected to Telegram, Slack or Matrix may write one too, because Matrix draws it and
   Telegram and Slack already turn it into labeled bullets on the way out (`flush_table` in
   `archie-net`). Discord still may not: it would show the pipes. Never say a table appears in
@@ -1832,10 +1842,10 @@ turned into words on your computer, and the answer is read out by a voice that r
   the same way: custody without access, as above.
 - ⛔ **Never "interrupt it any time".** On the phone a tap cuts it off; talking over it does not,
   because a phone's speaker is an inch from its microphone. At the computer, talking over it is
-  meant to cut it off and depends on the webview's echo canceler, which nobody has tested. On Archie
-  main (October 6, 2026, `4785c10f`, not in 0.3.5) a click anywhere on the screen or the space bar
-  also cuts it off at the computer, so once a release carries it, "click or press Space to cut in"
-  may be said of the computer. The same day fixed a fade that hid the last lines of a short answer
+  meant to cut it off and depends on the webview's echo canceler, which nobody has tested. In Archie
+  0.3.6 (October 6, 2026, `4785c10f`) a click anywhere on the screen or the space bar
+  also cuts it off at the computer, so "click or press Space to cut in" may be said of the computer
+  once the wording above is cleared. The same day fixed a fade that hid the last lines of a short answer
   (`a3c99e92`). Jett talked to the window's screen on October 6 on a dev build; the echo answer is
   not written down yet (Archie `docs/TEST-DAY.md`, item 4), so the wording above still waits.
 - ⚠️ **English only.** The hearing model is `base.en`. No other language may be claimed.
@@ -2052,12 +2062,14 @@ instruction is to write the backup before you stop, not after.** Any page descri
 to carry that sentence, per the limitation-beside-capability rule. Telling somebody their data is
 safe and letting them discover they cannot package it is the shape this entry exists to prevent.
 
-**Closed on Archie main, October 6, 2026 (`075a8e18`), in no release yet.** `PaywallScreen` now
+**Closed in Archie 0.3.6, October 6, 2026 (`075a8e18`).** `PaywallScreen` now
 carries **Save a backup of your agents**, beside "Already paid? Check again". It runs the same save
 dialog and `transfer_save` as the Backups section (`pickBackupPath`, `savedBackupNote` in
 `src/app/moving.tsx`), and `transfer_save` asks only that somebody is signed in, which anybody on that
-screen is. **Until the release that carries it, the sentence above stays on every page that has
-it.** From that release the approved form is: "Nothing on your computer is deleted, and the screen
+screen is. **The sentence above may stay on every page that has it**: it is still the safest
+advice, and Archie for Business has no button until its next release. From 0.3.6, the approved form
+for Personal is the one below, and `trust/details/` carries it since October 6, 2026, with the
+Business clause: "Nothing on your computer is deleted, and the screen
 that asks for a plan has a button that saves a backup of your agents." Never "you can always get
 your agents out": a computer signed out of every account still reaches neither the button nor the
 Backups section.
@@ -2692,7 +2704,7 @@ and the request never leaves your network."
   own network" is true of WiZ and LIFX and not of Hue. Found October 6, 2026: the privacy policy said
   it of all three until that day, and the Home Lights add-on said "Nothing about your home ever leaves
   this computer" until Archie `9aca1535` (the site's catalog copy was corrected the same day; the live
-  store follows when Archie is pushed).
+  store followed when Archie was pushed that evening).
 - What the agent learns from a light (its name, on or off) goes to the AI provider like any other
   tool result. Say so wherever the local lane is described; the privacy policy does.
 - **Google Drive is per file, and the privacy policy did not name it until October 6, 2026.** The
@@ -4168,7 +4180,7 @@ starts from now. A re-added account gets a new id (`integrations.rs`).
 **Boundaries, not to cross:** never "nothing is lost" about a restart or a reconnect. An error
 line on the email triage path can carry up to 200 characters of the AI's own reply.
 
-**The gap is said to the owner from Archie main, October 6, 2026 (`03538351`, in no release yet).**
+**The gap is said to the owner from Archie 0.3.6, October 6, 2026 (`03538351`).**
 Until then the `CursorExpired` branch wrote only an error line to the technical log. It now also
 sends the owner one message: which mailbox, the date of the last saved place, that every email is
 still in the inbox, and the words that get it read ("what came in since September 28?"), because the
@@ -4698,8 +4710,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
   messages you" died when Text Replies shipped: a draft it wrote reaches a third party once
   the owner presses Send on it. See the Text Replies section for the approved scoping.
 - **`remember` is still ungated** — a local write; the persistence vector for an injected
-  instruction. Disclose, don't hide. **Narrowed on Archie main 2026-10-06 (`c1891673`, not in
-  0.3.5), at Jett's pick of a label over a tap:** a note saved on a turn where text somebody else
+  instruction. Disclose, don't hide. **Narrowed in Archie 0.3.6, 2026-10-06 (`c1891673`), at Jett's pick of a label over a tap:** a note saved on a turn where text somebody else
   wrote reached the model (the wake that started it, or any tool result but the agent's own notes)
   is saved starting "From something you did not write:", the owner sees those words on the
   Knowledge tab, and the system prompt tells the agent such a note is what that text said and never
@@ -4860,7 +4871,7 @@ also says nothing about the agent's own picture, which is a different file in a 
 write that Archie "knows your brand" or anything that implies the logo is used in what the agent
 produces: it is drawn on two screens in the app and used nowhere else.
 
-### 🚧 A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, FOR COPY WITH 0.3.6, and the fourteen places it does NOT change
+### ✅ A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, SHIPPED IN FULL IN 0.3.6 AND ON THE PRICING PAGE, and the fourteen places it does NOT change
 
 **The code landed on 2026-09-21** (the Archie repo, commit `11f7d864`). What follows is what was
 actually built, checked against the code rather than against the plan this entry used to hold.
@@ -4868,12 +4879,12 @@ actually built, checked against the code rather than against the plan this entry
 **It ran on a real computer on October 6, 2026**, and Jett called the test done that day (Archie
 `docs/TEST-DAY.md` item 3). A month of his own calls, about $1.53 counted, passed a one-cent limit
 on his Mac. Run by hand: chat kept answering, the first answer after the line ended with the limit's
-sentence once and the next did not (Archie main), and a reminder still went off. **Not run by hand:**
+sentence once and the next did not (now in 0.3.6), and a reminder still went off. **Not run by hand:**
 a routine coming due at the limit and the two watches meeting new mail and texts. Those rest on
 tests, the pipeline test `a_routine_at_the_monthly_limit_does_not_run_and_says_so_once` and
-`a_watch_stops_reading_at_the_owners_monthly_limit`, and both fixes are on main, not in a release.
+`a_watch_stops_reading_at_the_owners_monthly_limit`, and both fixes shipped in 0.3.6.
 Still owed: November 1's comparison of October's counted figure with the AI company's invoice, the
-only check of the estimate boundary below. The ban at the bottom lifts with 0.3.6, by Jett's decision.
+only check of the estimate boundary below. The ban at the bottom lifted with 0.3.6, by Jett's decision.
 
 **The three conditions this entry set before a word could change were all met.** The cap is
 **opt-in** (`MonthOfSpend::enabled` is `false` by default, and a test,
@@ -4893,15 +4904,14 @@ same argument the free tier's daily count already reads.
 ⚠️ **Through 0.3.5 the two watches did not stop, though the app's panel said they did.** Found
 October 6, 2026: the mail and text watches spend through their own quarantined reads
 (`email::quarantined_email_read`, `texts/replies/triage.rs` `quarantined_read`) and never reach
-`run_target`, so only routines stopped. Archie `a060d5d7` (on main, not in a release) has both ask
-`watch_budget::under_monthly_limit` before every unattended read. Until the release that carries it,
-"routines stop" is the true half and "the mail watch stops, the text watch stops" is not; the page
-ban below keeps that off the site either way.
+`run_target`, so only routines stopped. Archie `a060d5d7`, in 0.3.6, has both ask
+`watch_budget::under_monthly_limit` before every unattended read. On 0.3.5 and older, "routines
+stop" is the true half and "the mail watch stops, the text watch stops" is not.
 
 **How the owner hears it, and the gap that found.** Through 0.3.5 the agent says the limit was
 reached only when it turns a routine or a new message away, so a month that reaches it while
 nothing arrives says nothing anywhere but the Spending page. Jett hit that on October 6, 2026 with a
-one-cent limit and read it as the limit not working. Archie main (not in a release) also ends the
+one-cent limit and read it as the limit not working. Archie 0.3.6 also ends the
 owner's first answer after the line is crossed with one sentence saying so
 (`ai_limit::tell_in_an_answer`, `reached_while_you_asked`), once a month, sharing one marker with the
 turn-away so whichever comes first is the only one. A guest on a shared agent never hears it.
@@ -4911,7 +4921,7 @@ quietly.** Found October 6, 2026, while checking why Jett read the limit as fail
 turns a routine away by handing back the sentence as its answer, and the routine runner, which had
 no check of its own, delivered it as the routine's report every time it came due and recorded each
 run as a success. No AI is spent on those runs, so "routines stop" was true of the bill and not of
-the chat. Archie main `f8d2dcab` (not in a release) skips the routine before anything runs, as the
+the chat. Archie 0.3.6 (`f8d2dcab`) skips the routine before anything runs, as the
 free tier's day already did, and covers a watcher's wake the same way; the pipeline test
 `a_routine_at_the_monthly_limit_does_not_run_and_says_so_once` holds it.
 
@@ -5001,9 +5011,9 @@ the buying switch is and that it has its own limits (`MonthlyLimit` in Archie `s
 This entry said until October 6, 2026 that the panel carried the sentence above in those words. It
 never did.
 
-**⛔ The ban lifts with 0.3.6, by Jett's decision of October 6, 2026.** Until the release that
-carries Archie `f8d2dcab` and `a060d5d7` is the one the site's download gives, no page may mention a
-spending limit. Asked when the pricing page should mention it, Jett chose the day 0.3.6 ships over
+**✅ The ban lifted with 0.3.6, by Jett's decision of October 6, 2026.** 0.3.6, which carries Archie
+`f8d2dcab` and `a060d5d7`, was released that evening, and the wording below went onto
+`archie/pricing/` the same night. Asked when the pricing page should mention it, Jett chose the day 0.3.6 ships over
 today and over never: 0.3.6 is the first release where a routine at the limit stays quiet and new
 mail and texts stop being read too, so it is the first release the sentence below is true of in
 full. That is also his decision to sell on it, which this paragraph used to say had not been made.
@@ -5123,15 +5133,16 @@ rest of it is.
   sentence, or its short form's promise of a limit the owner sets, is dishonest copy**, however true
   the rest of it is. On a page with room for one more sentence, the bank card is the remedy, and the
   Standard's rule is that a published limitation gets its remedy beside it.
-- **Narrowed on Archie main, October 6, 2026 (`33910277`), in no release yet.** The press now reads
+- **Narrowed in Archie 0.3.6, October 6, 2026 (`33910277`).** The press now reads
   the order total off the page in code (`archie_domain::order_total_on_page`, called in
   `screen::tools::op_click`) and checks the larger of that and the agent's figure; the card says, in
   the app's words, which total it read or that it found none; and a tap approves that figure and
   nothing above it, so a total that went up before the press goes back to the card. Tests:
   `screen::tests::the_order_total_is_read_off_the_page` and its two siblings in `archie-domain`, and
   five in `screen::tools::tests` from `the_page_total_is_checked_when_it_is_higher_than_the_agents`.
-  **Until the release that carries it, the sentence above stays exactly as it is.** From that
-  release, approved: "Archie reads the order total off the last page and checks your limit against
+  **The sentence above may stay as it is**: it is still true, Archie for Business does not read
+  the total until its next release, and it is what the legal pages say. From 0.3.6, approved for
+  Personal: "Archie reads the order total off the last page and checks your limit against
   it. A charge a shop adds after you place the order can still take it over, so for a ceiling
   nobody can get past, give it a card from your bank that works at one shop." Never "Archie checks
   the real total" without the second sentence: a total drawn as a picture and a charge added after
@@ -5355,7 +5366,7 @@ one."
   nothing outside had been read** (`TurnGuard::new` in `outbound.rs` takes `outside_already` from the
   wake alone and does not look for `ARRIVED_NOT_TYPED` entries in the history, so that job can hand a
   search on, or open a page on a site the person named, without asking; found October 6, 2026, and
-  **closed on Archie main the same day**, in no release yet: see the note below); text
+  **closed in Archie 0.3.6 the same day**: see the note below); text
   typed into a page that is already open goes wherever that page sends it; and an MCP server the
   owner connected can have a fetch tool of its own.
 - ⚠️ **A fifth, in 0.3.5 and earlier only: a chat app's link preview.** Telegram's plain sends and
@@ -5363,17 +5374,18 @@ one."
   ("Opening {site}…", up to 60 characters of the model's own words) before `opening_needs_yes` runs,
   so Telegram's servers could fetch an address the person was about to be asked about. Slack posted
   with its default unfurling. Found in the code October 6, 2026 and not watched live; Archie
-  `4a5eeff3` (on main, not in a release) turns previews off on every Telegram send and unfurling off
-  on every Slack post. Discord already suppressed embeds. Name it on `trust/details/` while a release
-  carries it.
-- **The earlier-job route, closed on Archie main October 6, 2026 (`49e1853d`), in no release yet.**
+  `4a5eeff3`, in 0.3.6, turns previews off on every Telegram send and unfurling off on every Slack
+  post. Discord already suppressed embeds. `trust/details/` names it as a 0.3.5-and-earlier problem
+  that 0.3.6 turns off, since October 6, 2026.
+- **The earlier-job route, closed in Archie 0.3.6, October 6, 2026 (`49e1853d`).**
   `outbound::history_holds_outside_text` starts a typed turn outside when any user entry still in
   the history the model reads (`MAX_HISTORY`, 20 entries) ends with the wake's or the room's marker
   (`tools_memory::arrived_not_typed`). Test: `outbound::tests::a_wake_still_in_the_history_starts_the_
   next_typed_turn_outside`. **The cost, said wherever the claim is:** for about ten exchanges after a
   watch wakes the agent, a search it hands on and a site named in passing wait for a yes. At the
-  release that carries it, the trust page's sentence "An email read in one job can shape a search in
-  your next" comes off, and the third paragraph names two ways out.
+  0.3.6 release on October 6, 2026, the trust page's sentence "An email read in one job can shape a
+  search in your next" came off, its third paragraph names two ways out, and its cost paragraph and
+  `trust/details/`'s carry this cost.
 - **Approved for `trust/`'s "Where we fall short", from 0.3.5 (written October 6, 2026).** Scoped to
   Archie, because Archie for Business is on 0.3.4 until its next release:
   > It does **not** stop everything. An injected instruction can still add items to your lists and
@@ -5383,15 +5395,18 @@ one."
   > conversation. Since Archie 0.3.5, your agent shows you any address it came up with itself and
   > waits for your yes. A skill that searches is given only its task, never your memory or files.
   >
-  > We know of three ways out that remain. An email read in one job can shape a search in your next.
-  > Text typed into a page already open goes wherever that page sends it. And a service you connect
-  > through its address for AI assistants can open pages on its own.
+  > We know of two ways out that remain. Text typed into a page already open goes wherever that
+  > page sends it. And a service you connect through its address for AI assistants can open pages on
+  > its own.
   >
   > Asking first has a cost: a page your agent wants to open on its own judgment now waits for you.
-  > Archie for Business gets this in its next release.
+  > Since Archie 0.3.6, for about ten messages after your agent reads new mail or texts for you, so
+  > does a search it hands on or a site you name in passing. Archie for Business gets this in its
+  > next release.
 
-  The memory way is in the first paragraph, which is why the third names three. The preview is on
-  `trust/details/` only, because it is fixed on main and the summary names what lasts.
+  The memory way is in the first paragraph, which is why the third names two (three until 0.3.6).
+  The preview is on `trust/details/` only, because it is fixed in 0.3.6 and the summary names what
+  lasts.
 - ⛔ **"Came from you" is any address in your messages in this conversation**, plus any page on a site
   you named in the message being answered, until the agent has read something somebody else wrote in
   that job. Never "only addresses you typed into this message". The named-site half used to hold
@@ -5530,8 +5545,8 @@ Chat attachments (`discord.rs:377`, `slack.rs:334`), Fireflies meeting transcrip
 provider web-search results still enter the model's context. Since 2026-07-20 the calendar
 gate stands between injected content and calendar writes, and email triage is quarantined
 (no-tools call, sanitized input — `email/replies.rs`). What remains reachable by an injected
-instruction: **`remember`** (a local write — the persistence vector, labeled since Archie main
-`c1891673` when outside text was read on the turn; see "`remember` is still ungated" above) and
+instruction: **`remember`** (a local write — the persistence vector, labeled since Archie 0.3.6
+(`c1891673`) when outside text was read on the turn; see "`remember` is still ungated" above) and
 **provider-side web search** (the exfiltration channel — see the gate-does-not-stop-exfiltration
 section). A bad
 draft is also still possible; the Send tap is what stops it becoming a sent email.

@@ -5783,7 +5783,10 @@ citation of the provider's own current policy, linked inline. Verification statu
 - Anthropic, Google (paid tier), Groq: **verbatim**, pulled directly from the linked policy pages.
 - OpenAI: **accurate summary, not verbatim.** Their site blocks automated fetching, so the
   wording is a paraphrase with the source linked; upgrade to a direct quote once the exact
-  sentence is confirmed from the source.
+  sentence is confirmed from the source. **Found 2026-10-07:** "By default, we don't use inputs
+  or outputs from ChatGPT Business, ChatGPT Enterprise, ChatGPT Edu, or our API to improve our
+  models", on `help.openai.com/en/articles/5722486`, read through a reader service (see the
+  competitor table's row). Confirm it in a browser before the trust page quotes it.
 - xAI: **unverified.** Every primary xAI document refuses automated readers, so what we held
   was a summary of summaries, which is not a source. The row stays candid about consumer Grok
   training by default; a person with a browser has to read the actual API terms before the
@@ -5961,8 +5964,11 @@ search snippet, an aggregator, a competitor's comparison page, or memory.
 | n8n Starter is 20€ a month billed annually, Pro 50€ | n8n | `https://n8n.io/pricing/` | 2026-08-19 |
 | n8n publishes a self-hostable Community edition on GitHub under its Fair-code licence | n8n | `https://n8n.io/pricing/` | 2026-08-19 |
 | Claude Cowork is Anthropic's knowledge work agent, included on paid Claude plans from Pro up ("Includes Claude Cowork" on the Pro card) | Anthropic | `https://claude.com/pricing` | 2026-08-20 |
-| Cowork's work "runs on Anthropic's servers, in an isolated environment, and your sessions and files are saved to your Claude account" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
+| Cowork's work "runs on Anthropic's servers, in an isolated environment, and your sessions and files are saved to your Claude account" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-10-07 |
 | Cowork has three permission modes; in Skip mode "Claude doesn't pause to ask and nothing checks its actions automatically" | Anthropic | `https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork` | 2026-08-20 |
+| Claude Free, Pro and Max users choose whether their chats are used to train Claude, and can change it "in your Privacy Settings at any time"; chats they allow are kept for "five years", 30 days otherwise; none of this applies to "API use". It is a choice made at signup or in a pop-up, so the site says "can train", never that Claude trains by default | Anthropic | `https://www.anthropic.com/news/updates-to-our-consumer-terms` | 2026-10-07 |
+| Personal ChatGPT plans can train on what you send: "When you use our services for individuals, such as ChatGPT and Codex, we may use your content to train our models." The switch is "Improve the model for everyone" under "Settings > Data controls". The page refuses scripts and was read through r.jina.ai, a method Jett has not ruled on, so open it in a browser before the 90-day re-check | OpenAI | `https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance` | 2026-10-07 |
+| "By default, we don't use inputs or outputs from ChatGPT Business, ChatGPT Enterprise, ChatGPT Edu, or our API to improve our models." Same page, same caveat; this is also the verbatim sentence the provider-training entry was waiting for | OpenAI | `https://help.openai.com/en/articles/5722486-how-your-data-is-used-to-improve-model-performance` | 2026-10-07 |
 | Grok Bot is in beta for SuperGrok Heavy, Cursor Ultra and Cursor Teams Premium subscribers, on desktop and iOS | xAI | `https://x.ai/news/introducing-grok-bot` | 2026-08-20 |
 | Each Grok Bot "runs on a persistent cloud VM with a browser, filesystem, and terminal" and signs in to your tools there; it comes back "when something needs your approval" | xAI | `https://x.ai/news/introducing-grok-bot`, `https://docs.x.ai/grok-bot/overview` | 2026-08-20 |
 | Symphony by Wix is an AI agent platform for small businesses, on iOS, Android and web, with a "mobile-first interface" | Wix | `https://www.wix.com/symphony` | 2026-09-11 |

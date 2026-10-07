@@ -82,7 +82,8 @@ only shape the checker cannot see.
 | `$20` | A standard AI subscription (Claude Pro) during a guided build | The provider's public price |
 | `$15` | Printed nowhere, and there is no add-on price to print: **every add-on is included with Archie**, for everyone, and nothing in the catalog is sold on its own. The site has no price filter, no price badge, and no price question on the submission form | Its marketplace manifest in the Archie repo, `price_cents: 0` like all 151. The field stays only because removing it is a data migration. Pages say "included", never "free to start" or "premium" |
 | `$0` | Admin balance placeholder | Not customer-facing copy |
-| `$38.40` | The example order in the buying mockups: Buddy's dog food at chewy.com, the total the agent reads off the checkout. An illustration, not a price of ours | `archie/websites/` (the checkout scene) and the homepage's 4:15 pm phone, 2026-09-24. Items `$35.99` plus tax `$2.41` makes it, so the drawn checkout adds up |
+| `$38.40` | The example order in the buying mockups: Buddy's dog food at chewy.com, the total the agent reads off the checkout. An illustration, not a price of ours | `archie/websites/` (the checkout scene), 2026-09-24; the homepage's 4:15 pm phone carried it until the trades rewrite of 2026-10-07. Items `$35.99` plus tax `$2.41` makes it, so the drawn checkout adds up |
+| `$42.80` | The example order in the homepage's 4:15 pm phone since the trades rewrite: deck screws at homedepot.com, the total the agent reads off the checkout. An illustration, not a price of ours | `index.html`, 2026-10-07. Under the app's own $50 starting limit, so the reply can name that limit unchanged |
 | `$35.99` | The same example: the dog food's price on the drawn shop page | Same |
 | `$2.41` | The same example: the tax line on the drawn checkout | Same |
 | `$12.49` | The same drawn shop page: a second item under Buy again, never ordered | Same |

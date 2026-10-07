@@ -28,7 +28,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 ## The product
 
 - [Archie for Personal](https://otianai.com/archie/personal/): AI agents on your own computer for your email, calendar and bills. Free on your own AI account at 20 jobs a day, or up to 10 agents for $30 a month.
-- [Archie for Business](https://otianai.com/archie/business/): Archie for Business runs up to 50 agents on your own computer and AI account, and anyone you let in can message them. They sort the shared inbox, chase unpaid invoices and draft replies.
+- [Archie for Business](https://otianai.com/archie/business/): Archie for Business runs up to 50 agents on your own computer for a trades or field-service business, and your crew can message them. They answer the shop's inbox, chase unpaid invoices and keep jobs on the calendar.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, set up an agent from add-ons, and message it from Telegram, Discord, Slack, Matrix or iMessage. What you need, what you can skip, and the five setup steps.
 - [Archie Pricing](https://otianai.com/archie/pricing/): Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Business is $99 a month. The AI bills you directly: $1 to $5 a month for a light agent, up to $139 for a heavy one.
 - [Install Archie](https://otianai.com/archie/install/): Download Archie for Mac or Windows, and the Android app for your phone, with an honest account of what to expect the first time you open it.
@@ -36,7 +36,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Services we offer
 
-- [Working With Us](https://otianai.com/services/): We set up Archie with you over Zoom, build a larger setup in phases, or build an add-on to order. Each starts with a free call: $250 an hour for the first two, and a quote per add-on for the third.
+- [Working With Us](https://otianai.com/services/): We set up Archie for your trades or field-service business with you over Zoom, build a larger setup in phases, or build an add-on to order. Each starts with a free call: $250 an hour for the first two, and a quote per add-on for the third.
 
 ## Add-ons
 
@@ -69,7 +69,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Our Story](https://otianai.com/our-story/): How setting up one AI agent by hand became Archie: the story behind Otian AI, and the two people who build it.
 - [The Otian Standard](https://otianai.com/standard/): How Otian AI intends to behave: the promises we hold ourselves to on service, honesty, privacy and pricing, written down so you can point at a line and tell us we fell short.
 - [Contact](https://otianai.com/contact/): Write to Jett or Jack, the two people who build Archie, about a question, an add-on you need or a setup that stopped working. A reply within one business day.
-- [Testimonials](https://otianai.com/testimonials/): Testimonials from Jehan Ramadan of Best of Hue and Patrick West, and four jobs an Archie agent can take over, with the add-on that does each.
+- [Testimonials](https://otianai.com/testimonials/): Testimonials from Patrick West of Westway Site Services and Jehan Ramadan of Best of Hue, and four jobs an Archie agent can take over, with the add-on that does each.
 
 ## Learning
 

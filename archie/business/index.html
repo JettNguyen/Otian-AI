@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>Archie for Business | Otian AI</title>
-  <meta name="description" content="Archie for Business runs up to 50 agents on your own computer and AI account, and anyone you let in can message them. They sort the shared inbox, chase unpaid invoices and draft replies." />
+  <meta name="description" content="Archie for Business runs up to 50 agents on your own computer for a trades or field-service business, and your crew can message them. They answer the shop's inbox, chase unpaid invoices and keep jobs on the calendar." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-2" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-3" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -55,8 +55,8 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
             <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
+            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
             <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -130,8 +130,8 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
       <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
+      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
       <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -173,9 +173,9 @@
              ember, because Archie for Business is slate blue everywhere (the app's accent included)
              and this page is where somebody first meets it. -->
         <img src="../../assets/archie-business.svg" width="1024" height="1024" alt="Archie for Business" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
-        <span class="section-label fade-up">For business</span>
-        <h1 class="fade-up delay-1">Shared inbox, handled.</h1>
-        <p>Agents on your own computer for the inbox and unpaid invoices. No email goes out until you approve it.</p>
+        <span class="section-label fade-up">For trades and field service</span>
+        <h1 class="fade-up delay-1">The office work, kept up while you&rsquo;re on the job.</h1>
+        <p>Agents on your own computer answer the shop&rsquo;s inbox, chase unpaid invoices and keep jobs on the calendar. No email goes out until you approve it.</p>
       </div>
     </section>
 
@@ -484,9 +484,9 @@
           <div class="uc-chips">
             <p class="uc-group">Nearest to your team</p>
             <div class="uc-row">
-              <label class="uc-chip" for="uc-1">The shared inbox</label>
+              <label class="uc-chip" for="uc-1">The shop&rsquo;s inbox</label>
               <label class="uc-chip" for="uc-2">Whoever owns the numbers</label>
-              <label class="uc-chip" for="uc-3">Selling</label>
+              <label class="uc-chip" for="uc-3">New work</label>
               <label class="uc-chip" for="uc-4">The books</label>
             </div>
           </div>
@@ -511,8 +511,8 @@
               </ul>
             </article>
 
-            <article class="uc-panel" data-uc="3" aria-label="Selling">
-              <p class="uc-day">Leads in four places, and follow-ups nobody owns.</p>
+            <article class="uc-panel" data-uc="3" aria-label="New work">
+              <p class="uc-day">Leads in four places, and quotes nobody followed up.</p>
               <ul class="uc-list">
                 <li><span class="uc-kind" data-kind="skill">Skill</span><b>Lead Desk</b> Every lead in one list, with its stage.</li>
                 <li><span class="uc-kind" data-kind="skill">Skill</span><b>Campaign Watch</b> Who replied, and which campaign went quiet.</li>
@@ -612,8 +612,8 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/business/">For Business</a>
+            <a href="../../archie/personal/">For Personal</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/pricing/">Pricing</a>
@@ -675,10 +675,10 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-2"></script>
-  <script src="../../js/switch-cycle.js?v=20261007-2" defer></script>
-  <script src="../../js/ember.js?v=20261007-2" defer></script>
-  <script src="../../js/ring-scene.js?v=20261007-2" defer></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-2"></script>
+  <script src="../../js/nav.js?v=20261007-3"></script>
+  <script src="../../js/switch-cycle.js?v=20261007-3" defer></script>
+  <script src="../../js/ember.js?v=20261007-3" defer></script>
+  <script src="../../js/ring-scene.js?v=20261007-3" defer></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-3"></script>
 </body>
 </html>

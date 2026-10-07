@@ -62,7 +62,7 @@
     paused = !paused;
     playRequested = !paused;
     preview.classList.toggle('is-paused', paused);
-    pause.setAttribute('aria-label', (paused ? 'Play' : 'Pause') + ' dinner examples');
+    pause.setAttribute('aria-label', (paused ? 'Play' : 'Pause') + ' examples');
     schedule();
   });
   preview.addEventListener('mouseenter', function () { hovering = true; playRequested = false; schedule(); });

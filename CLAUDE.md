@@ -16,6 +16,33 @@ differently. `python3 scripts/check-links.py` is the other half of the same less
 redirect stub is for other people's links, never for ours, and on 2026-09-14 ten of our own
 pages were still reaching their own content through one.
 
+## Who the site is for: trades and field service (2026-10-07)
+
+Decided by Jett on 2026-10-07, after an advisor (Peter) told both founders that privacy as the lead
+does not sell and a general-purpose agent loses to Meta and OpenAI on distribution. The site is
+written to the **owner of a trades or field-service business** (contractors, plumbers, site
+services) and whoever runs its office. This **supersedes** "The one buyer" under Sounds like a
+person, "The wedge is one person, personal admin" and "Two starting points, one buyer" under Copy
+conventions, which stay below as history. The homepage day is that owner's workday.
+
+- **Lead with the office work an agent takes off them**: new leads answered with a drafted reply,
+  quiet leads followed up, jobs moved on the calendar, unpaid invoices chased, crew handoffs kept.
+  Each is a shipped add-on (Lead Desk, Lead Sweep, Waiting On, Owed to Customers, Calendar Manager,
+  Who's Got This, Team Standup). Square and Acuity are built but never run on a real account, so
+  they are named that way or not at all.
+- **Control sells to this owner where privacy did not**: nothing goes to a customer until they say
+  yes. Privacy is a supporting line now, not a headline. **TRUST.md still governs every word**: the
+  lead changed, the truth rules did not, and a claim in a supporting line is held to the same test.
+- **The main button stays Download Archie.** Jett: owners hesitate at a call when the product works
+  right now. The free call (`services/`) is the second route, never the first.
+- **Archie for one person stays, off the lead.** A solo owner is its buyer as much as anybody's
+  personal admin, so its page, price and menu row stay. The team edition is the lead story.
+- **Patrick is the proof** (Westway Site Services, a site-services company): lead with him.
+- **Not adopted, on purpose**: the advisor's "log traces as a data moat". It reverses "No Otian
+  custodian" and every page built on it, so it is a product decision for Jett, never a copy change.
+- **The tagline stays the brand line, not the h1.** "Don't rent your agent. Own it." remains in the
+  header lockup; the homepage h1 says what the owner gets, per "Above the fold sells" below.
+
 ## Trust claims: read TRUST.md before writing copy
 
 **This site's product is trust. Privacy and safety claims are load-bearing, and a false one
@@ -116,7 +143,7 @@ followed by nineteen rules. They are below in the site's terms. `python3 scripts
 fails the seven that are patterns; the rest are read by a person or not at all. **Run it before
 you commit**, alongside `check-facts.py` and `check-copy-length.py`.
 
-**The one buyer.** Every selling page is written to one person buried in their own life admin: the
+**The one buyer** (superseded 2026-10-07 by the trades owner at the top of this file). Every selling page was written to one person buried in their own life admin: the
 email, the bills, the paperwork, the doctor (Jett's answer, 2026-09-27, chosen over "someone who
 works for themselves"). Business pages talk to the owner of a small team. No page is written to
 "whether you're a solo founder, a busy parent or a growing team", and a drawing is copy too: a
@@ -641,7 +668,7 @@ sizes are on the page at rest, and the pick only lights one.
   `how-it-works/` is 1,745 where two were 2,002. If a merge does not come out smaller than what
   went into it, the restatements have not been cut yet, and they are always there: the same
   claim in both heroes, the rate stated on both pages, two CTAs that said the same thing.
-- **The wedge is one person, personal admin, and the homepage leads on it.** Decided by Jett on
+- **The wedge was one person, personal admin (superseded 2026-10-07, see the top of this file).** Decided by Jett on
   2026-09-15, and it **supersedes the 50/50 fork** of the day before: the page used to offer
   "For one person" and "For a team" as equal choices under the hero CTA, which is not the same
   as having an audience. Leading means the hero's primary route is the one person, the team
@@ -664,7 +691,7 @@ sizes are on the page at rest, and the pick only lights one.
   says: the hero fork, the chips, the review tabs, the "Which one is this?" rows. Never
   "individuals" as a reader-facing label (it was a URL that read like an audience and pointed at
   a setup service for months), and never "enterprise", which we do not sell.
-- **Two starting points, one buyer (2026-09-29).** Jett, after Meta, Microsoft and Manus each
+- **Two starting points, one buyer (2026-09-29; the buyer changed 2026-10-07, the door stays).** Jett, after Meta, Microsoft and Manus each
   shipped an agent that runs on their own computers in the same month: "shift our marketing
   voice and strategy ... while still accommodating people that still don't have an agent." The
   buyer above does not change. Where they start does. Some have no agent yet, and the homepage's

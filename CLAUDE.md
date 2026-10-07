@@ -84,7 +84,8 @@ These govern whether a true claim is being made **decently**.
   honest "what this takes off your plate" beats an invented "saves 5 hours a week".
 - **Publish the limitation beside the capability, on the same page.** Not lower down, not in the
   FAQ, not on `/trust/` only. A reader who scans one section must meet the catch that belongs to
-  it. This is the rule the `skills-marketplace/browse/` can-and-cannot section exists to satisfy.
+  it. This is the rule the `skills-marketplace/browse/` "Before you add anything" band exists to
+  satisfy: the add-on safety claim and what that safety costs, in TRUST.md's words, side by side.
 - **The last line of a page is the one that gets remembered.** End on the most useful thing the
   reader can do next, in their words, never on a marketing flourish and never trailing off. If a
   CTA block would read the same on any other company's site, rewrite it.
@@ -434,15 +435,20 @@ sizes are on the page at rest, and the pick only lights one.
     careful with: it is quoted back to people by machines that will not check it, so every
     claim in it is TRUST.md's approved wording or a FACTS.md figure, and it is checked by
     `check-facts.py` like any served file.
-  - `node scripts/gen-marketplace.mjs` writes the public add-on catalog into
-    `skills-marketplace/browse/` as static HTML. Until 2026-09-07 that grid was an empty div a
-    script filled from Firestore, so everything that does not run JavaScript (every crawler,
-    every answer engine, every link preview) saw the site's largest asset as the words "No
-    add-ons match your filters." Firestore is still the authority and the script still
-    replaces the grid on load; the markup is a snapshot of the public shelf. **It renders
-    through `js/addon-card.js`, the same module the browser runs**, so there is one card
-    builder and not two. Run it after the Archie catalog moves, in the push order FACTS.md
-    already sets out for the count: Archie first, then here.
+  - `node scripts/gen-marketplace.mjs` writes the add-on store into `skills-marketplace/browse/`
+    as static HTML, areas first (rebuilt 2026-10-07 to the design Jett picked, the Archie repo's
+    `docs/MARKETPLACE-AREAS.md`): the front's search field and tiles, a page per area
+    (`work/`, `money/` and the rest), `personalities/`, `packs/` and `all/`. Every page also
+    carries, hidden, the sheet for each add-on it shows, which `js/store.js` opens as a dialog;
+    without scripts the icon is a link to that sheet and CSS shows it on `:target`. Until
+    2026-09-07 the browse grid was an empty div a script filled from Firestore, so everything that
+    does not run JavaScript saw no add-ons; the store shows public add-ons only now, so nothing is
+    fetched at all and the markup is the whole shelf. It draws from `data/public-catalog.json` and
+    `data/areas.json`, which `node scripts/gen-areas.mjs` copies out of the app's `areas.ts`,
+    `lives.ts`, `packs.ts`, `voice-looks.ts` and manifests (its `--check` passes, with a note, on a
+    computer without the Archie checkout). The personality faces are drawn by `js/ember.js` itself,
+    run in a sandbox, once per page as a sprite. Run both after the Archie catalog or its areas
+    move, in the push order FACTS.md already sets out for the count: Archie first, then here.
   - `python3 scripts/gen-phone-mocks.py` draws the three Archie Mobile screens into
     `archie/mobile/`, as the desktop trio and again as the under-640px gallery. Six drawings
     of three screens were hand-written SVG until 2026-09-14, which is how the two halves
@@ -684,11 +690,12 @@ sizes are on the page at rest, and the pick only lights one.
     small line beside the team edition's link, and it never gets an edition, a price or a sorting chip.
 - The marketplace umbrella noun is **"Add-on"**; Skills, Specialists, Routines, and Personalities
   are its kinds. Never "add an add-on". **But the site says three kinds, not four, and that is
-  deliberate:** `js/catalog.js` and `js/marketplace.js` map the `subagents` collection to
+  deliberate:** `js/catalog.js` and `js/addon-card.js` map the `subagents` collection to
   `kind: "specialist"` with `shelf: "skill"`, because a Specialist differs from a Skill in how it is
-  built and not in anything a shopper is choosing between. So the marketplace shows three type tabs,
-  three tab colours are defined (`--c-blue` is documented in `css/styles.css` as "no longer an add-on
-  colour"), and `skills-marketplace/what-is-an-add-on/` explains three. Four is the catalog's
+  built and not in anything a shopper is choosing between. Since the store went areas first
+  (2026-10-07) it sorts by part of life rather than by kind, so no shelf there names a kind at all;
+  outside it, three kind colors are defined (`--c-blue` is documented in `css/styles.css` as "no
+  longer an add-on colour"), and a routine is told apart by its clock badge. Four is the catalog's
   structure and the count in FACTS.md; three is the taxonomy the reader is shown. Do not "fix" the
   explainer page to four: a redirect stub said four on 2026-08-31 and it was the stub that was wrong.
 - **Four words, four levels, and they are not interchangeable. Swept 2026-09-16.** *Otian AI* is
@@ -713,15 +720,16 @@ sizes are on the page at rest, and the pick only lights one.
 - Guided sessions are **$250/hour**, one hour per session; "$250/session" and "$250/hour" are
   the same claim, not a contradiction.
 - **Add-on faces are the Archie app's, copied.** `js/faces.js` carries the app's `GLYPH_PATHS`
-  and `FACE` map (a stroked mark per add-on on a field tinted by kind) so the browse grid, pack
-  lists, phone-page rows, and detail pages read the way the app's store does. Do not draw new
+  (57 marks since 2026-10-07) and `FACE` map so the store and the detail pages read the way the
+  app's store does. Inside the store a mark sits on its area's color (the `--area-*` tokens);
+  outside it, on a field tinted by kind. Do not draw new
   marks or reassign one here: change it in the Archie repo's `src/app/faces.ts`, then copy.
   `scripts/check-faces.py` fails when the two drift, and lists live catalog ids the map lacks.
-- **An add-on card leads with the app's store line, copied (2026-10-06).** Jett asked for the
-  marketplace in "a few words", so a card shows one line from the app's `STORE_LINE`
-  (`src/app/store-copy.ts`) and the longer description sits behind View Details. Change a line
+- **An add-on's sheet leads with the app's store line, copied (2026-10-06).** Jett asked for the
+  marketplace in "a few words", so a sheet shows one line from the app's `STORE_LINE`
+  (`src/app/store-copy.ts`) and the longer description sits behind More about it. Change a line
   in the app, then run `python3 scripts/gen-store-lines.py`, which writes `js/store-lines.js`;
-  its `--check` fails on drift. Pack cards are the name and tagline, with the description inside.
+  its `--check` fails on drift. A pack is a folder of its icons and its name, with the rest inside.
 - Every explain-figure carries **paired desktop/mobile SVG variants**, swapped at 640px.
   Diagrams must never scroll horizontally. Enforced, with the rest of the visual-first
   rules above, by `python3 scripts/check-figures.py`: **run it before you commit**,

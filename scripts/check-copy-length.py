@@ -349,7 +349,11 @@ class CopyExtractor(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag == "main":
             self.depth_main += 1
-        hidden = ("aria-hidden", "true") in attrs
+        # The `hidden` attribute too, as check-voice.py already reads it (2026-10-07). The store's
+        # pages carry every add-on's sheet in the markup, hidden until a press opens it, so a
+        # crawler and a reader without scripts get the whole shelf; that is catalog copy written in
+        # the Archie repo, and none of it is on the page a reader is looking at.
+        hidden = ("aria-hidden", "true") in attrs or any(k == "hidden" for k, _ in attrs)
         if self.drop_depth or tag in self.DROP or hidden:
             if tag not in self.VOID:
                 self.drop_depth += 1

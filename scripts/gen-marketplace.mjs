@@ -1,138 +1,494 @@
-/* Write the public add-on catalog into skills-marketplace/browse/ as static HTML.
+/* Write the add-on store into skills-marketplace/browse/ as static HTML, areas first.
  *
- * THE BUG THIS FIXES. The browse page's grid was an empty <div id="mpProductGrid"></div> that
- * js/marketplace.js filled from Firestore on load. That is correct for a visitor and invisible
- * to everything else: a crawler, an answer engine, a link preview and anyone with JavaScript off
- * were served a page that announces "146 Verified Add-ons" in its stat row and then renders the
- * words "No add-ons match your filters." The largest thing this site has was, to all of them, a
- * blank page. A competitor with six integration pages was out-ranking a catalog of 146 real ones
- * because ours were not in the HTML.
+ * WHAT IT WRITES. The store Jett picked on October 6, 2026 (the Archie repo's
+ * docs/MARKETPLACE-AREAS.md): a front of tiles, one per part of life, and a page per area.
  *
- * WHAT THIS DOES NOT CHANGE. Firestore is still the authority. js/marketplace.js still fetches on
- * load and still replaces the grid wholesale, because it is the only path that can see the
- * private add-ons shared with a signed-in account, and because an install count moves without a
- * site deploy. What ships in the markup is a snapshot of the public shelf: complete, correct, and
- * knowingly a moment old.
+ *   skills-marketplace/browse/index.html      the front: the search field, the tiles and See all are
+ *                                             written between the STORE markers; the rest of the page
+ *                                             (the trust band, the download) is hand-written there
+ *   skills-marketplace/browse/<area>/          one page per area: the band, Start here, the area's
+ *                                             personality, then everything else in it as icons
+ *   skills-marketplace/browse/personalities/   every personality as its own Ember
+ *   skills-marketplace/browse/packs/           the packs, as folders, in two groups
+ *   skills-marketplace/browse/all/             everything, by area
  *
- * WHY IT IS JAVASCRIPT AND NOT PYTHON LIKE THE OTHER SCRIPTS. Both paths have to produce the same
- * card. A second implementation of cardHtml() in Python is a second thing to keep in step with
- * the first, and this repo has a file (js/faces.js) whose whole header is about what happens when
- * two copies of one thing drift. So the renderer moved to js/addon-card.js, and this script
- * imports the very code the browser runs.
+ * Every page also carries, hidden, the sheet for each add-on it shows, which is what a press opens
+ * (js/store.js copies it into the page's dialog). Hidden rather than fetched, so the whole public
+ * shelf is in the HTML for a crawler and for a reader without scripts, which is the reason this
+ * generator exists at all: until September 7, 2026 the browse page was an empty div a script filled,
+ * and everything that does not run JavaScript saw no add-ons.
+ *
+ * WHAT IT READS. data/public-catalog.json (the public store, snapshotted by sync-public-catalog.mjs),
+ * data/areas.json (the app's areas, copied by gen-areas.mjs), js/faces.js and js/store-lines.js
+ * (the app's marks and store lines), and js/ember.js (the faces). All of it is in this repo, so the
+ * --check runs on the deploy, which has no Archie checkout. Private add-ons are never in any of it.
+ *
+ * THE CHROME of the pages it writes whole (the head, the three menus, the footer) is copied from the
+ * front at generation time, one folder deeper, so a menu sweep that edits the front is carried to
+ * every area page by the next run, and --check says so if they disagree. The CSP tag is the one
+ * thing gen-csp.py writes afterwards, so --check ignores it.
  *
  * Usage:
- *   node scripts/gen-marketplace.mjs           write the grid into the page
- *   node scripts/gen-marketplace.mjs --check   exit 1 if the page is out of date
+ *   node scripts/gen-marketplace.mjs           write the pages
+ *   node scripts/gen-marketplace.mjs --check   exit 1 if any page is out of date
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { COLLECTIONS, normalize, cardHtml } from "../js/addon-card.js";
 import { faceHtml } from "../js/faces.js";
+import { escapeHtml as esc } from "../js/addon-card.js";
+import * as R from "./store-render.mjs";
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const PAGE = path.join(ROOT, "skills-marketplace", "browse", "index.html");
+const BROWSE = path.join(ROOT, "skills-marketplace", "browse");
+const FRONT = path.join(BROWSE, "index.html");
 const HOME = path.join(ROOT, "index.html");
-const SLOT = '<span class="cover-mark" data-face-slot>';
-
-// A checked-in snapshot of the deployed public store makes generation deterministic in CI.
 const CATALOG = path.join(ROOT, "data", "public-catalog.json");
+const AREAS = path.join(ROOT, "data", "areas.json");
 
-/* The markers the grid lives between. Generated content sits inside a container that says so, so
- * that a person opening this page in an editor is not left wondering why 146 articles they cannot
- * find the author of are sitting in a hand-written file. */
-const OPEN = '<div class="mp-product-grid fade-up delay-2" id="mpProductGrid">';
-const CLOSE = "</div>";
+const BANNER = "<!-- GENERATED by scripts/gen-marketplace.mjs from data/public-catalog.json and data/areas.json. Do not hand-edit. -->";
+const CSP_RE = /[ \t]*<!-- CSP: generated by scripts\/gen-csp\.py[^\n]*\n[ \t]*<meta http-equiv="Content-Security-Policy"[^>]*>\n/;
 
-/* The markers scripts/check-facts.py looks for. Inside them, a "$" is an add-on's own copy and
- * not a price this site charges: several manifests show a sample conversation ("Rent cleared
- * this morning at 6am for $1,450"), and FACTS.md governs what Otian says things cost, not the
- * illustrative figures in a product description written in another repo. Everything outside
- * these markers on this page is checked exactly as before, and the em-dash rule is not scoped
- * out at all: it applies here like it applies everywhere. */
-const START_MARK = "<!-- GENERATED-CATALOG-START -->";
-const END_MARK = "<!-- GENERATED-CATALOG-END -->";
+/* scripts/check-facts.py and check-voice.py read these. Inside them a "$" is an add-on's own copy
+ * ("Netflix, on the 3rd. $15.49.") and not a price Otian charges, and the words are the app's. */
+const START = "<!-- GENERATED-CATALOG-START -->";
+const END = "<!-- GENERATED-CATALOG-END -->";
 
-const BANNER = `
-          <!-- ==========================================================================
-               GENERATED. Do not hand-edit: run \`node scripts/gen-marketplace.mjs\`.
+/* The kind folders that already hold a page per add-on. Linked from a sheet's More about it when
+ * that add-on has a real page there; a redirect stub is not one. */
+const DEEP_FOLDER = { skill: "skills", routine: "routines", personality: "personalities", specialist: "specialists" };
 
-               The public catalog, rendered by the same js/addon-card.js the browser runs, so a
-               crawler, an answer engine and a reader with JavaScript off all see the shelf
-               instead of the empty div that used to be here. js/marketplace.js replaces every
-               card below on load with the live store, which is the authority and the only thing
-               that can see private add-ons or a current install count.
+/* The extra pages beside the areas, at these addresses. */
+const VOICES = "personalities";
+const PACKS = "packs";
+const ALL = "all";
 
-               Sorted by name. The live grid defaults to most-installed, which cannot be known
-               here: install_count is incremented by the backend and is not in the manifests.
-               ========================================================================== -->`;
+/* ── Data ───────────────────────────────────────────────────────────────────────────────────── */
 
-function readCatalog() {
+function load() {
   const { items } = JSON.parse(fs.readFileSync(CATALOG, "utf8"));
-  if (!items.length || items.some(item => item.visibility !== "public")) {
-    throw new Error("Catalog snapshot must contain public items only");
+  if (!items.length || items.some((i) => i.visibility !== "public")) throw new Error("Catalog snapshot must contain public items only");
+  const data = JSON.parse(fs.readFileSync(AREAS, "utf8"));
+  const byKey = new Map(items.map((i) => [`${i.kind}:${i.id}`, i]));
+  for (const k of [...Object.keys(data.areaOf), ...data.areas.flatMap((a) => a.start), ...data.packs.flatMap((p) => p.items)]) {
+    if (!byKey.has(k)) throw new Error(`data/areas.json names ${k}, which is not in the public catalog. Run node scripts/gen-areas.mjs`);
   }
-  return items.slice().sort((a, b) => a.name.localeCompare(b.name));
-}
-
-function render(items) {
-  const cards = items
-    .map((item) => "            " + cardHtml(item))
-    .join("\n");
-  return OPEN + BANNER + "\n          " + START_MARK + "\n" + cards +
-    "\n          " + END_MARK + "\n        " + CLOSE;
-}
-
-function currentBlock(html) {
-  const start = html.indexOf(OPEN);
-  if (start === -1) throw new Error("mpProductGrid opening tag not found in " + PAGE);
-  /* The grid holds <article> elements, which nest divs, so the first </div> after the opening tag
-   * is not the closing one. Count depth instead. */
-  let depth = 0;
-  const re = /<div\b[^>]*>|<\/div>/g;
-  re.lastIndex = start;
-  let m;
-  while ((m = re.exec(html))) {
-    depth += m[0] === "</div>" ? -1 : 1;
-    if (depth === 0) return { start, end: m.index + m[0].length };
+  for (const i of items) {
+    if (i.kind !== "personality" && !data.areaOf[`${i.kind}:${i.id}`]) {
+      throw new Error(`${i.kind}:${i.id} has no area in data/areas.json. Run node scripts/gen-areas.mjs`);
+    }
   }
-  throw new Error("mpProductGrid is never closed in " + PAGE);
+  /* Most installed first, then by name, on every surface (the spec). */
+  const order = (a, b) => (b.install_count - a.install_count) || a.name.localeCompare(b.name);
+  const deep = {};
+  for (const i of items) {
+    const rel = `skills-marketplace/browse/${DEEP_FOLDER[i.kind]}/${i.id}/`;
+    const file = path.join(ROOT, rel, "index.html");
+    if (fs.existsSync(file) && !/http-equiv="refresh"/.test(fs.readFileSync(file, "utf8"))) deep[`${i.kind}:${i.id}`] = rel;
+  }
+  return { items, data, byKey, order, deep };
 }
 
-/* The homepage's coverage grid names six real add-ons, and each of them already has a mark in
- * the app's own set. The copy stays in index.html, where it is written and edited; only the mark
- * is filled in here, keyed by the `data-face="kind:id"` on each row, so the six glyph paths are
- * not hand-copied into a third place after js/faces.js and the Archie repo. A row naming an id
- * that is not in the catalog is a mistake worth stopping for: it means the homepage is pointing
- * at an add-on nobody can install.
- *
- * Returns the page's new text, or throws. */
-function renderHomeFaces(items) {
-  const byKey = new Map(items.map((i) => [i.kind + ":" + i.id, i]));
+/** Everything a renderer needs to draw one page: where it is, and a fresh id counter. */
+function context(D, depth) {
+  const up = "../".repeat(depth);
+  let n = 0;
+  const areaById = new Map(D.data.areas.map((a) => [a.id, a]));
+  const areaOf = (item) => areaById.get(D.data.areaOf[`${item.kind}:${item.id}`]);
+  const here = depth === 2 ? "" : "../";
+  return {
+    data: D.data, byKey: D.byKey, deep: D.deep, up, faces: R.faces(),
+    uid: (seed) => `${String(seed).replace(/[^a-z0-9]/gi, "")}${++n}`,
+    hueOf: (item) => (item.kind === "personality" ? (D.data.voiceLook[item.id] || {}).hue || "terracotta" : areaOf(item).hue),
+    areaName: (item) => (item.kind === "personality" ? "Personalities" : areaOf(item).name),
+    homeOf: (item) => here + (item.kind === "personality" ? VOICES : areaOf(item).id) + "/",
+  };
+}
+
+/* ── The front's tiles ──────────────────────────────────────────────────────────────────────────
+ * The app's bentoLayout (src/app/store-layout.ts), so the site and the app fill the grid the same
+ * way: the first area big, the second wide, two more finishing row two, the rest four to a row, and a
+ * short last row stretching rather than leaving a hole. Two columns is the same idea, cells two to a
+ * row and an odd one out spanning both. A phone uses the two-column shape, as the spec's phone does. */
+function bento(ids, cols) {
+  if (!ids.length) return [];
+  const [first, second, ...rest] = ids;
+  if (ids.length === 1) return [{ id: first, w: cols, h: 2, size: "big" }];
+  const out = [{ id: first, w: 2, h: 2, size: "big" }];
+  if (cols === 2) {
+    out.push({ id: second, w: 2, h: 1, size: "wide" });
+    rest.forEach((id, i) => {
+      const odd = i === rest.length - 1 && rest.length % 2 === 1;
+      out.push({ id, w: odd ? 2 : 1, h: 1, size: odd ? "wide" : "cell" });
+    });
+    return out;
+  }
+  if (!rest.length) return [...out, { id: second, w: 2, h: 2, size: "big" }];
+  out.push({ id: second, w: 2, h: 1, size: "wide" });
+  if (rest.length === 1) return [...out, { id: rest[0], w: 2, h: 1, size: "wide" }];
+  out.push({ id: rest[0], w: 1, h: 1, size: "cell" }, { id: rest[1], w: 1, h: 1, size: "cell" });
+  const after = rest.slice(2);
+  const full = after.length - (after.length % 4);
+  after.slice(0, full).forEach((id) => out.push({ id, w: 1, h: 1, size: "cell" }));
+  const tail = after.slice(full);
+  const spans = tail.length === 1 ? [4] : tail.length === 2 ? [2, 2] : tail.length === 3 ? [2, 1, 1] : [];
+  tail.forEach((id, i) => out.push({ id, w: spans[i], h: 1, size: spans[i] > 1 ? "wide" : "cell" }));
+  return out;
+}
+
+/* Where the big tile's panes of glass float, largest first, as fractions of the tile so a phone's
+   smaller tile keeps the same picture. The mockup's three, measured on its 567 by 398 tile. */
+const PANES = [
+  { size: 108, right: 7, top: 10, turn: 8 },
+  { size: 80, right: 30, top: 21, turn: -9 },
+  { size: 64, right: 15, top: 40, turn: -3 },
+];
+
+function tileArt(area, size, ctx) {
+  const s = area.sample;
+  if (size === "big") {
+    const panes = area.marks.slice(0, 3).map((g, i) => {
+      const p = PANES[i];
+      return `<span class="sv-glass" style="--gs:${p.size};right:${p.right}%;top:${p.top}%;transform:rotate(${p.turn}deg)">${R.mark(g, 1.5)}</span>`;
+    }).join("");
+    return panes + R.chat(s.ask, s.reply, ctx.faces.use("agent"), "sv-chat--tile");
+  }
+  if (size === "wide") {
+    return `<span class="sv-tart sv-tart--ghost">${R.mark(area.marks[0], 0.9)}</span>` +
+      R.chat(s.ask, s.reply, ctx.faces.use("agent"), "sv-chat--tile sv-chat--side");
+  }
+  if (area.look === "reply") return R.chat(null, s.reply, ctx.faces.use("agent"), "sv-chat--tile sv-chat--reply");
+  if (area.look === "art") {
+    return `<span class="sv-tart sv-tart--ghost">${R.mark(area.marks[0], 0.9)}</span>` +
+      `<span class="sv-tart">${R.mark(area.marks[0], 1.4)}</span>`;
+  }
+  /* Tilted a few degrees, one way or the other, so a row of glass tiles is not one card four times. */
+  const turn = ctx.data.areas.indexOf(area) % 2 ? 7 : -7;
+  return `<span class="sv-glass sv-glass--cell" style="transform:rotate(${turn}deg)">${R.mark(area.marks[0], 1.6)}</span>`;
+}
+
+function tiles(D, ctx) {
+  /* An area with nothing public in it is not drawn. */
+  const drawn = D.data.areas.filter((a) => Object.values(D.data.areaOf).includes(a.id));
+  const ids = drawn.map((a) => a.id);
+  const four = new Map(bento(ids, 4).map((s) => [s.id, s]));
+  const two = new Map(bento(ids, 2).map((s) => [s.id, s]));
+  const out = drawn.map((area) => {
+    const a = four.get(area.id);
+    const b = two.get(area.id);
+    const cls = [`sv-t`, `sv-hue-${area.hue}`, `sv-c4-w${a.w}`, `sv-c4-h${a.h}`, `sv-c2-w${b.w}`, `sv-c2-h${b.h}`,
+      `sv-c4-${a.size}`, `sv-c2-${b.size}`];
+    const art = a.size === b.size
+      ? `<span class="sv-art">${tileArt(area, a.size, ctx)}</span>`
+      : `<span class="sv-art sv-art--c4">${tileArt(area, a.size, ctx)}</span><span class="sv-art sv-art--c2">${tileArt(area, b.size, ctx)}</span>`;
+    return `<a class="${cls.join(" ")}" href="${area.id}/"><span class="sv-tn">${esc(area.name)}</span>` +
+      `<span class="sv-tile-art" aria-hidden="true">${art}</span></a>`;
+  });
+
+  const vt = D.data.voicesTile;
+  const sayer = D.byKey.get(`personality:${vt.says.id}`);
+  const faces = vt.faces.map((id) => R.face(id, ctx)).join("");
+  out.push(`<a class="sv-t sv-t--quiet sv-t--voices sv-c4-w3 sv-c4-h1 sv-c2-w2 sv-c2-h1" href="${VOICES}/">` +
+    `<span class="sv-tn">Personalities</span><span class="sv-tile-art" aria-hidden="true">` +
+    `<span class="sv-speak"><span class="sv-speak-who">${esc(sayer.name)}</span>${esc(vt.says.line)}</span>` +
+    `<span class="sv-faces">${faces}</span></span></a>`);
+
+  /* Three icons fanned, from three areas: News & fun, Money, Health, as the spec draws them. */
+  const fan = ["fun", "money", "health"].map((id) => D.data.areas.find((a) => a.id === id)).filter(Boolean)
+    .map((a) => `<span class="sv-ai sv-hue-${a.hue}">${R.mark(a.marks[0], 1.6)}</span>`).join("");
+  out.push(`<a class="sv-t sv-t--quiet sv-t--packs sv-c4-w1 sv-c4-h1 sv-c2-w2 sv-c2-h1" href="${PACKS}/">` +
+    `<span class="sv-tn">Packs</span><span class="sv-tile-art" aria-hidden="true"><span class="sv-fan">${fan}</span></span></a>`);
+  return out.join("\n            ");
+}
+
+/* ── Shared page parts ──────────────────────────────────────────────────────────────────────── */
+
+function endBand(up, heading = "end-heading") {
+  return `
+    <section class="section sv-end" aria-labelledby="${heading}">
+      <div class="container">
+        <h2 id="${heading}">Every add-on is included with Archie</h2>
+        <a class="btn btn-primary btn-lg" href="${up}archie/install/">${R.DOWNLOAD}Download Archie</a>
+        <p>Free to download. You add them inside Archie.</p>
+        <p class="hm-micro">Routines you leave on add to your AI bill. <a class="marketplace-text-link" href="${up}archie/pricing/#ai-cost">See what a dozen add-ons with their routines cost&nbsp;&rarr;</a></p>
+      </div>
+    </section>
+`;
+}
+
+const CLOSE_X = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>';
+
+/** The one dialog a page opens its sheets in. js/store.js fills it. */
+export const DIALOG = `    <dialog class="sv-sheet" id="svSheet" aria-labelledby="svSheetTitle">
+      <div class="sv-sheet-inner">
+        <button type="button" class="sv-sheet-x" data-sheet-close aria-label="Close">${CLOSE_X}</button>
+        <div class="sv-sheet-body" id="svSheetBody"></div>
+      </div>
+    </dialog>
+`;
+
+function sources(list, ctx) {
+  return `<div class="sv-sources">\n${list.map((x) => "        " + x).join("\n")}\n      </div>`;
+}
+
+/* ── Whole pages ────────────────────────────────────────────────────────────────────────────── */
+
+/* The front's chrome, one folder deeper: everything before <main> and after </main>, with every
+   relative address given one more "../". */
+function chrome() {
+  const src = fs.readFileSync(FRONT, "utf8");
+  const mainStart = src.indexOf('  <main id="main">');
+  const mainEnd = src.indexOf("  </main>\n");
+  if (mainStart < 0 || mainEnd < 0) throw new Error("landmarks missing in skills-marketplace/browse/index.html");
+  const deeper = (t) => t.replace(/"\.\.\/\.\.\//g, '"../../../');
+  /* The front's Ember is the one in its trust band, drawn live by js/ember.js. The other pages draw
+     every face ahead of time, so they do not load it. */
+  const tail = deeper(src.slice(mainEnd + "  </main>\n".length))
+    .replace(/[ \t]*<script src="\.\.\/\.\.\/\.\.\/js\/ember\.js\?v=[^"]+"><\/script>\n/, "");
+  return { top: deeper(src.slice(0, mainStart)), tail };
+}
+
+function page(C, { title, description, body }) {
+  const top = C.top
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`)
+    .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(description)}" />`);
+  return top + `  <main id="main">\n    ${BANNER}\n` + body + DIALOG + "  </main>\n" + C.tail;
+}
+
+function back() {
+  return `<a class="sv-back" href="../">${R.CHEVRON_LEFT}Marketplace</a>`;
+}
+
+function areaPage(D, C, area) {
+  const ctx = context(D, 3);
+  const key = (i) => `${i.kind}:${i.id}`;
+  const mine = D.items.filter((i) => D.data.areaOf[key(i)] === area.id).sort(D.order);
+  const start = area.start.map((k) => D.byKey.get(k));
+  const startKeys = new Set(area.start);
+  const rest = mine.filter((i) => !startKeys.has(key(i)));
+  const voice = D.byKey.get(`personality:${area.voice.id}`);
+  const look = D.data.voiceLook[voice.id];
+
+  /* One sheet per add-on on the page, whichever area a starter item lives in. */
+  const sheets = [];
+  const seen = new Set();
+  for (const i of [...start, ...rest, voice]) {
+    if (seen.has(key(i))) continue;
+    seen.add(key(i));
+    sheets.push(R.sheet(i, ctx));
+  }
+
+  const s = area.sample;
+  const body = `    <section class="section section--top sv-page" aria-labelledby="area-heading">
+      <div class="container">
+        ${back()}
+        ${START}
+        <section class="sv-band sv-hue-${area.hue}">
+          <span class="sv-band-ghost" aria-hidden="true">${R.mark(area.marks[0], 0.8)}</span>
+          <h1 id="area-heading" class="sv-band-name">${esc(area.name)}</h1>
+          <a class="sv-band-btn" href="${ctx.up}archie/install/">${R.DOWNLOAD}Download Archie</a>
+          ${R.chat(s.ask, s.reply, ctx.faces.use("agent"), "sv-chat--band")}
+        </section>
+
+        <section class="sv-sec" aria-labelledby="start-heading">
+          <h2 id="start-heading">Start here</h2>
+          <div class="sv-cards">
+            ${start.map((i) => R.card(i, ctx, area.hue)).join("\n            ")}
+          </div>
+        </section>
+
+        <div class="sv-voice sv-hue-${area.hue}">
+          ${R.face(voice.id, ctx)}
+          <span class="sv-voice-meta"><span class="sv-voice-kicker">Personality</span><span class="sv-voice-name">${esc(voice.name)}</span></span>
+          <span class="sv-voice-line">${esc(area.voice.line)}</span>
+          <a class="sv-voice-use" href="#${R.sheetId(`personality:${voice.id}`)}" aria-haspopup="dialog">Use this</a>
+        </div>
+${rest.length ? `
+        <section class="sv-sec" aria-labelledby="more-heading">
+          <h2 id="more-heading">More for ${esc(area.name.toLowerCase())}</h2>
+          <div class="sv-icons">
+            ${rest.map((i) => R.app(i, ctx)).join("\n            ")}
+          </div>
+        </section>
+` : ""}
+        ${sources(sheets, ctx)}
+        ${ctx.faces.sprite()}
+        ${END}
+      </div>
+    </section>
+${endBand(ctx.up)}`;
+  const names = start.map((i) => i.name);
+  const list = names.length > 1 ? `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}` : names.join("");
+  return page(C, {
+    title: `${area.name} | Add-on Marketplace | Otian AI`,
+    description: `${area.name} add-ons for your agent in Archie, all included. Start with ${list}.`,
+    body,
+  });
+}
+
+function voicesPage(D, C) {
+  const ctx = context(D, 3);
+  const voices = D.items.filter((i) => i.kind === "personality").sort(D.order);
+  const body = `    <section class="section section--top sv-page" aria-labelledby="voices-heading">
+      <div class="container">
+        ${back()}
+        <h1 id="voices-heading" class="sv-title">Personalities</h1>
+        ${START}
+        <div class="sv-icons sv-icons--faces">
+          ${voices.map((i) => R.app(i, ctx)).join("\n          ")}
+        </div>
+        ${sources(voices.map((i) => R.sheet(i, ctx)), ctx)}
+        ${ctx.faces.sprite()}
+        ${END}
+      </div>
+    </section>
+${endBand(ctx.up)}`;
+  return page(C, {
+    title: "Personalities | Add-on Marketplace | Otian AI",
+    description: `All ${voices.length} personalities your agent can take on in Archie, all included. A personality is how your agent talks to you.`,
+    body,
+  });
+}
+
+function packsPage(D, C) {
+  const ctx = context(D, 3);
+  const bringsVoice = (p) => p.items.some((k) => k.startsWith("personality:"));
+  const group = (heading, id, packs) => packs.length ? `
+        <section class="sv-sec" aria-labelledby="${id}">
+          <h2 id="${id}">${heading}</h2>
+          <div class="sv-icons sv-icons--packs">
+            ${packs.map((p) => R.packApp(p, ctx)).join("\n            ")}
+          </div>
+        </section>
+` : "";
+  const body = `    <section class="section section--top sv-page" aria-labelledby="packs-heading">
+      <div class="container">
+        ${back()}
+        <h1 id="packs-heading" class="sv-title">Packs</h1>
+        ${START}${group("For one job", "one-job-heading", D.data.packs.filter((p) => !bringsVoice(p)))}${group("For a new agent", "new-agent-heading", D.data.packs.filter(bringsVoice))}
+        ${sources(D.data.packs.map((p) => R.packSheet(p, ctx)), ctx)}
+        ${ctx.faces.sprite()}
+        ${END}
+      </div>
+    </section>
+${endBand(ctx.up)}`;
+  return page(C, {
+    title: "Packs | Add-on Marketplace | Otian AI",
+    description: "Packs of Archie add-ons, each a set for one job or a set for a new agent, all included with Archie.",
+    body,
+  });
+}
+
+function allPage(D, C) {
+  const ctx = context(D, 3);
+  const sections = D.data.areas.map((area) => {
+    const mine = D.items.filter((i) => D.data.areaOf[`${i.kind}:${i.id}`] === area.id).sort(D.order);
+    if (!mine.length) return "";
+    return `
+        <section class="sv-sec" aria-labelledby="all-${area.id}">
+          <h2 id="all-${area.id}"><a href="../${area.id}/">${esc(area.name)}</a></h2>
+          <div class="sv-icons">
+            ${mine.map((i) => R.app(i, ctx)).join("\n            ")}
+          </div>
+        </section>`;
+  }).join("");
+  const voices = D.items.filter((i) => i.kind === "personality").sort(D.order);
+  const ordered = [...D.data.areas.flatMap((a) => D.items.filter((i) => D.data.areaOf[`${i.kind}:${i.id}`] === a.id).sort(D.order)), ...voices];
+  const body = `    <section class="section section--top sv-page" aria-labelledby="all-heading">
+      <div class="container">
+        ${back()}
+        <h1 id="all-heading" class="sv-title">All ${D.items.length}</h1>
+        ${START}${sections}
+        <section class="sv-sec" aria-labelledby="all-personalities">
+          <h2 id="all-personalities"><a href="../${VOICES}/">Personalities</a></h2>
+          <div class="sv-icons sv-icons--faces">
+            ${voices.map((i) => R.app(i, ctx)).join("\n            ")}
+          </div>
+        </section>
+        ${sources(ordered.map((i) => R.sheet(i, ctx)), ctx)}
+        ${ctx.faces.sprite()}
+        ${END}
+        <p class="sv-foot"><a class="marketplace-text-link" href="${ctx.up}skills-marketplace/for-developers/">Submit an add-on of your own&nbsp;&rarr;</a></p>
+      </div>
+    </section>
+${endBand(ctx.up)}`;
+  return page(C, {
+    title: "All Add-ons | Add-on Marketplace | Otian AI",
+    description: `All ${D.items.length} add-ons for Archie, sorted by part of life, all included with Archie.`,
+    body,
+  });
+}
+
+/* ── The front's two regions ────────────────────────────────────────────────────────────────── */
+
+const REGIONS = [
+  {
+    name: "STORE TILES",
+    render: (D, ctx) => {
+      const n = D.items.length;
+      return `
+        <div class="sv-search">
+          <svg class="sv-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7.5"/><path d="m20 20-3.9-3.9"/></svg>
+          <input type="search" id="svSearch" class="sv-search-input" placeholder="Search ${n} add-ons" aria-label="Search ${n} add-ons" autocomplete="off" />
+        </div>
+        <div class="sv-browse" id="svBrowse">
+          ${START}
+          <div class="sv-bento">
+            ${tiles(D, ctx)}
+          </div>
+          ${END}
+          <div class="sv-all"><a class="btn btn-secondary sv-all-btn" href="${ALL}/">See all ${n}</a></div>
+        </div>
+        `;
+    },
+  },
+  {
+    name: "STORE SHEETS",
+    render: (D, ctx) => {
+      const keyed = D.items.slice().sort(D.order);
+      return `
+        ${START}
+        ${sources([...keyed.map((i) => R.sheet(i, ctx)), ...D.data.packs.map((p) => R.packSheet(p, ctx))], ctx)}
+        ${ctx.faces.sprite()}
+        ${END}
+        `;
+    },
+  },
+];
+
+function front(D) {
+  let html = fs.readFileSync(FRONT, "utf8");
+  /* One context for both regions, so the faces the tiles use are in the sprite the sheets end with. */
+  const ctx = context(D, 2);
+  for (const region of REGIONS) {
+    const open = `<!-- ${region.name}: written by scripts/gen-marketplace.mjs -->`;
+    const close = `<!-- /${region.name} -->`;
+    const a = html.indexOf(open);
+    const b = html.indexOf(close);
+    if (a < 0 || b < a) throw new Error(`skills-marketplace/browse/index.html has lost its ${region.name} markers`);
+    html = html.slice(0, a + open.length) + region.render(D, ctx) + html.slice(b);
+  }
+  return html;
+}
+
+/* ── The homepage's coverage marks ──────────────────────────────────────────────────────────────
+ * A row on the homepage that names an add-on carries `data-face="kind:id"` and a slot for its mark,
+ * filled here so the paths are never hand-copied into a third place. None carries one today; the
+ * slot is kept because the coverage grid has had them before and the generator is where they live. */
+const SLOT = '<span class="cover-mark" data-face-slot>';
+function homeFaces(D) {
   const html = fs.readFileSync(HOME, "utf8");
   const missing = [];
   let next = "";
   let at = 0;
-  /* Counted, not asserted. Both messages below said "six marks" as a literal, and the coverage
-     grid is four rows since the homepage's "Where it starts" section took the mail and calendar
-     ones. A generator that reports a number it is not measuring is a generator that will keep
-     reporting it after the next edit too. */
-  let marks = 0;
-
   const ROW = /<li data-face="([^"]+)">/g;
   let row;
   while ((row = ROW.exec(html))) {
     const key = row[1];
-    if (!byKey.has(key)) { missing.push(key); continue; }
-
+    if (!D.byKey.has(key)) { missing.push(key); continue; }
     const slot = html.indexOf(SLOT, row.index);
     if (slot === -1) throw new Error("row " + key + " has no mark slot in index.html");
-
-    /* The mark is itself spans inside spans, so the first </span> after the slot is not the
-     * slot's own. Count depth, exactly as currentBlock() does for the grid's divs. Getting this
-     * wrong is not a crash: it is a generator that rewrites a slightly different string every
-     * run, so --check never goes green and the page churns on every commit. */
     const tags = /<span\b[^>]*>|<\/span>/g;
     tags.lastIndex = slot;
     let depth = 0;
@@ -143,67 +499,76 @@ function renderHomeFaces(items) {
       if (depth === 0) { end = m.index + m[0].length; break; }
     }
     if (end === -1) throw new Error("mark slot for " + key + " is never closed in index.html");
-
     const colon = key.indexOf(":");
-    next += html.slice(at, slot) + SLOT +
-      faceHtml(key.slice(0, colon), key.slice(colon + 1), "row") + "</span>";
+    next += html.slice(at, slot) + SLOT + faceHtml(key.slice(0, colon), key.slice(colon + 1), "row") + "</span>";
     at = end;
-    marks++;
   }
   next += html.slice(at);
-
-  if (missing.length) {
-    throw new Error("index.html names add-ons that are not in the catalog: " + missing.join(", "));
-  }
-  return { html, next, marks };
+  if (missing.length) throw new Error("index.html names add-ons that are not in the catalog: " + missing.join(", "));
+  return { have: html, want: next };
 }
+
+/* ── Main ───────────────────────────────────────────────────────────────────────────────────── */
 
 function main() {
   const check = process.argv.includes("--check");
-  const items = readCatalog();
+  const D = load();
 
-  if (items === null) {
-    console.log("gen-marketplace: the Archie catalog is not beside this repo; nothing to do.");
-    return 0;
+  const frontHtml = front(D);
+  const C = chrome();
+  const pages = new Map();
+  for (const area of D.data.areas) {
+    if (Object.values(D.data.areaOf).includes(area.id)) pages.set(area.id, areaPage(D, C, area));
+  }
+  pages.set(VOICES, voicesPage(D, C));
+  pages.set(PACKS, packsPage(D, C));
+  pages.set(ALL, allPage(D, C));
+
+  const noCsp = (t) => t.replace(CSP_RE, "");
+  let bad = 0;
+  const say = (msg) => console.log("  " + msg);
+
+  const frontHave = fs.readFileSync(FRONT, "utf8");
+  if (frontHave !== frontHtml) {
+    if (check) { say("out of date: skills-marketplace/browse/index.html"); bad++; }
+    else { fs.writeFileSync(FRONT, frontHtml); say("wrote skills-marketplace/browse/index.html"); }
   }
 
-  const html = fs.readFileSync(PAGE, "utf8");
-  const { start, end } = currentBlock(html);
-  const wanted = render(items);
-  const have = html.slice(start, end);
-
-  const changed = have !== wanted;
-  const home = renderHomeFaces(items);
-  const homeChanged = home.html !== home.next;
-
-  if (!changed && !homeChanged) {
-    console.log(`gen-marketplace: clean. ${items.length} public add-ons in the page, ` +
-      `${home.marks} marks on the homepage.`);
-    return 0;
+  for (const [slug, html] of pages) {
+    const file = path.join(BROWSE, slug, "index.html");
+    const have = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
+    if (have !== null && noCsp(have) === noCsp(html)) continue;
+    if (check) { say(`out of date: skills-marketplace/browse/${slug}/`); bad++; continue; }
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    /* Keep the CSP gen-csp.py wrote, so a regeneration does not undo it. */
+    const csp = have && have.match(CSP_RE);
+    fs.writeFileSync(file, csp ? html.replace(CSP_RE, csp[0]) : html);
+    say(`wrote skills-marketplace/browse/${slug}/`);
   }
 
-  if (check) {
-    const shipped = (have.match(/<article class="mp-product-card"/g) || []).length;
-    console.log(
-      "gen-marketplace: generated markup is out of date.\n\n" +
-      (changed
-        ? `  skills-marketplace/browse/: ${shipped} card(s) in the page, ` +
-          `${items.length} public add-on(s) in the catalog\n`
-        : "") +
-      (homeChanged ? "  index.html: the coverage grid's marks have moved\n" : "") +
-      "\nRun: node scripts/gen-marketplace.mjs"
-    );
+  /* A page this script wrote for an area that has since emptied is removed, so no page lists a
+     shelf the front no longer draws. Only pages carrying the banner are ever touched. */
+  for (const d of fs.readdirSync(BROWSE, { withFileTypes: true })) {
+    const file = path.join(BROWSE, d.name, "index.html");
+    if (!d.isDirectory() || pages.has(d.name) || !fs.existsSync(file)) continue;
+    if (!fs.readFileSync(file, "utf8").includes(BANNER)) continue;
+    if (check) { say(`no longer drawn, still on disk: skills-marketplace/browse/${d.name}/`); bad++; continue; }
+    fs.rmSync(file);
+    say(`removed skills-marketplace/browse/${d.name}/index.html`);
+  }
+
+  const home = homeFaces(D);
+  if (home.have !== home.want) {
+    if (check) { say("out of date: the homepage's coverage marks"); bad++; }
+    else { fs.writeFileSync(HOME, home.want); say("wrote the homepage's coverage marks"); }
+  }
+
+  if (check && bad) {
+    console.log(`gen-marketplace: ${bad} out of date. Run: node scripts/gen-marketplace.mjs`);
     return 1;
   }
-
-  if (changed) {
-    fs.writeFileSync(PAGE, html.slice(0, start) + wanted + html.slice(end), "utf8");
-  }
-  if (homeChanged) fs.writeFileSync(HOME, home.next, "utf8");
-  console.log(
-    `gen-marketplace: ${changed ? items.length + " add-on cards into skills-marketplace/browse/" : "browse page unchanged"}` +
-    `, ${homeChanged ? home.marks + " marks into index.html" : "homepage unchanged"}.`
-  );
+  console.log(`gen-marketplace: ${check ? "clean" : "done"}. ${D.items.length} public add-ons, ` +
+    `${pages.size - 3} area pages, ${D.data.packs.length} packs.`);
   return 0;
 }
 

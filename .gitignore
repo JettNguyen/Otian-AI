@@ -1,4 +1,6 @@
-clients/
+# A private clients/ folder at the root, never deployed. Anchored to the root on 2026-10-07: unanchored
+# it also hid skills-marketplace/browse/clients/, the store's Sales & clients page.
+/clients/
 engineer-curriculum.md
 # Internal planning docs — never deploy to the public site.
 PRICING-ONETIME-MIGRATION.md

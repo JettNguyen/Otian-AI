@@ -160,6 +160,15 @@ for (const [theme, b] of [["light", LIGHT], ["dark", DARK]]) {
   }
 }
 
+// The add-on store's areas (section 51 of css/styles.css). A tile and a band carry a white name in
+// their top corner, which is where they are painted from the area's `title` stop, and the spec
+// (the Archie repo's docs/MARKETPLACE-AREAS.md) holds white there to at least 3.4:1. The names are
+// display type, 22px serif at the smallest, so the bar is the large-text 3:1, and the spec's 3.4 is
+// what the stops were picked to clear. Art, so one set for both themes.
+for (const hue of ["blue", "green", "teal", "terracotta", "gold", "iris", "rose", "plum"]) {
+  checks.push([`areas: white on --area-${hue}-title`, ratio("#FFFFFF", token(`area-${hue}-title`, LIGHT)), 3.4]);
+}
+
 let failed = 0;
 for (const [label, got, need] of checks) {
   const ok = got >= need;

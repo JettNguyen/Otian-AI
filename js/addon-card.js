@@ -1,32 +1,21 @@
 /* ========================================
-   Otian AI | Add-on card rendering
+   Otian AI | The add-on catalog's shape
    js/addon-card.js
 
-   One add-on, rendered as the card the store shows. Pure: it takes a normalized manifest and
-   returns a string, touching no DOM, no network and no Firebase.
+   One add-on as the site reads it: `normalize()` turns a store document into a manifest with
+   every field defaulted, and the helpers below say its parts in words. Pure, with no DOM, no
+   network and no Firebase.
 
-   IT IS PURE BECAUSE TWO CALLERS NEED IT AND ONLY ONE OF THEM IS A BROWSER.
+   Two callers, both in Node. scripts/sync-public-catalog.mjs snapshots the public store THROUGH
+   normalize(), so a field missing here is a field missing from data/public-catalog.json however
+   faithfully the store holds it. scripts/store-render.mjs draws the store's pages from that
+   snapshot (scripts/gen-marketplace.mjs).
 
-   js/marketplace.js calls it with what Firestore returned, which is the live store and the only
-   authority: it alone can see the private items shared with a signed-in account, and it is what
-   a visitor ends up looking at. scripts/gen-marketplace.mjs calls it through Node with the public
-   manifests in the Archie repo, and writes the result into skills-marketplace/browse/ as static
-   HTML, because until 2026-09-07 the grid on that page was an empty <div> filled in by script
-   and everything without JavaScript saw a catalog of 146 add-ons render as the words "No add-ons
-   match your filters." That is every crawler, every answer engine, and every link preview: the
-   largest thing on this site was, to all of them, a blank.
-
-   So the page now ships the public catalog in its markup and the script replaces it on load.
-   Both paths have to produce the same card or the page visibly rewrites itself in front of
-   somebody, which is why this file exists instead of a second copy of the renderer in Python.
-   `node scripts/gen-marketplace.mjs --check` fails when the two disagree.
-
-   Extracted from js/marketplace.js on 2026-09-07, which is where all of it was written and where
-   the page wiring still lives. Same reason js/catalog.js was extracted before it.
+   Until October 7, 2026 this file also drew the browse page's card, for the generator and for the
+   browser at once, because js/marketplace.js redrew the whole grid from Firestore on every load.
+   The store shows the public shelf only now and its pages are complete as written, so the card and
+   that script are gone; their code is in the git history before the commit that removed them.
    ======================================== */
-
-import { faceHtml } from "./faces.js?v=20261006-6";
-import { storeLine } from "./store-lines.js?v=20261006-6";
 
 /* Render order = the order the user asked for: Personalities, Skills, Routines.
    `coll` is the Firestore subcollection name; `kind` is what the catalog document calls itself.
@@ -34,7 +23,7 @@ import { storeLine } from "./store-lines.js?v=20261006-6";
    `shelf` is what a shopper sees, and it is not always `kind`. The `subagents` collection is
    shown as a skill: the two differ in how the runtime calls them, which is a fact about our
    code and never a question to put to somebody at a shelf. The collection, the kind and the
-   install path are all untouched; only the word and the colour collapse. */
+   install path are all untouched; only the word and the color collapse. */
 export var COLLECTIONS = [
   { coll: "personalities", kind: "personality", shelf: "personality", label: "Personality", plural: "Personalities" },
   { coll: "skills",        kind: "skill",       shelf: "skill",       label: "Skill",       plural: "Skills" },
@@ -42,14 +31,7 @@ export var COLLECTIONS = [
   { coll: "routines",      kind: "routine",     shelf: "routine",     label: "Routine",     plural: "Routines" },
 ];
 
-/** The shelf a kind sits on. Everything user-visible sorts, counts, filters and colours by this. */
-export function shelfKind(kind) {
-  var c = COLLECTIONS.filter(function (x) { return x.kind === kind; })[0];
-  return c ? c.shelf : kind;
-}
-
-
-/* Friendly names for integration slugs, for the "Works with" hint on a card's detail.
+/* Friendly names for integration slugs, for the "Works with" list in a sheet's More about it.
    The two mail slugs are named after Google because Google was the only provider when they were
    written, and they cannot be renamed now: the slug is in every published add-on. Several
    providers serve each of them now, so the chip says what is needed rather than whose. Kept in
@@ -109,138 +91,4 @@ export function normalize(kind, id, data) {
     preview_exchanges: Array.isArray(data.preview_exchanges) ? data.preview_exchanges : [],
     visibility: data.visibility === "private" ? "private" : "public",
   };
-}
-
-
-/* What an owner has to switch on before an add-on can run, said as a sentence.
- *
- * Wording is TRUST.md's, from the "Websites" entry, under the name the app gives the switch from
- * 0.3.4 ("Computer control"), with the card wording Jett approved once a gift, library, loyalty or
- * membership number could be typed ("a card you pay with"): the switch is off until they turn it on, the
- * browser is theirs and watchable, and the two things the agent will never do on a site belong in
- * the same breath as the thing it will. The site's rule is that a limitation is published beside
- * the capability rather than lower down, and a card is where a reader meets this one.
- *
- * The heading names the add-on rather than saying "What it needs", because check-pronouns.py
- * reads every label cold and a card heading has no menu around it to lend "it" a subject.
- *
- * An unknown value renders nothing. Using a Mac's applications is built from 0.3.4 (TRUST.md,
- * "Computer control"), but no add-on asks for it yet, so there is no sentence for it until one does;
- * writing one ahead would describe a card nobody can see.
- */
-var SCREEN_NEEDS = {
-  sites: "Needs Computer control turned on, which is off until you switch it on. Your agent works " +
-         "the site in a browser window on your own computer, and you can watch it. It never types a " +
-         "password or a card you pay with, and it asks before pressing anything that finalizes.",
-};
-
-/* ── Card rendering ─────────────────────────────────────────────────────── */
-
-export function detailHtml(item) {
-  var parts = [];
-
-  // The card leads with the store line (js/store-lines.js), so the detail is where the longer
-  // writing goes: the long description where there is one, and the short description where it is
-  // all there is and says more than the line on the card.
-  var more = item.long_description ||
-    (item.description !== storeLine(item) ? item.description : "");
-  if (more) {
-    more.split(/\n{2,}/).forEach(function (para) {
-      if (para.trim()) parts.push("<p>" + escapeHtml(para.trim()) + "</p>");
-    });
-  }
-
-  if (item.kind === "personality" && item.preview_exchanges.length) {
-    var chat = item.preview_exchanges.map(function (ex) {
-      return '<div class="bubble user">' + escapeHtml(ex.user) + "</div>" +
-             '<div class="bubble bot">' + escapeHtml(ex.bot) + "</div>";
-    }).join("");
-    parts.push('<div><h4>Sample conversation</h4><div class="mp-card-chat">' + chat + "</div></div>");
-  }
-
-  var needs = item.required_screen
-    .map(function (k) { return SCREEN_NEEDS[k]; })
-    .filter(function (line) { return !!line; });
-  if (needs.length) {
-    parts.push('<div><h4>What this add-on needs</h4>' +
-      needs.map(function (line) { return "<p>" + escapeHtml(line) + "</p>"; }).join("") +
-      "</div>");
-  }
-
-  var worksWith = [];
-  item.required_integrations.forEach(function (s) { worksWith.push(formatIntegration(s)); });
-  if (item.required_skill) worksWith.push(titleCase(item.required_skill.replace(/[-_]+/g, " ")) + " skill");
-  if (worksWith.length) {
-    parts.push('<div><h4>Works with</h4><div class="mp-chip-row">' +
-      worksWith.map(function (w) { return '<span class="mp-chip">' + escapeHtml(w) + "</span>"; }).join("") +
-      "</div></div>");
-  }
-
-  if (item.triggers.length) {
-    var chips = item.triggers.slice(0, 12).map(function (t) {
-      return '<span class="mp-chip">' + escapeHtml(t) + "</span>";
-    }).join("");
-    parts.push('<div><h4>Try saying</h4><div class="mp-chip-row">' + chips + "</div></div>");
-  }
-
-  if (item.setup_steps.length) {
-    var steps = item.setup_steps.map(function (s) { return "<li>" + escapeHtml(s) + "</li>"; }).join("");
-    parts.push('<div><h4>Setup</h4><ol>' + steps + "</ol></div>");
-  }
-
-  return parts.join("");
-}
-
-export function cardHtml(item) {
-  var kindLabel = COLLECTIONS.filter(function (c) { return c.kind === item.kind; })[0].label;
-  var isPrivate = item.visibility === "private";
-  var searchBlob = [item.name, storeLine(item), item.description, item.long_description, item.tagline,
-    item.category, item.role, item.tone].concat(item.triggers).join(" ").toLowerCase();
-  var detail = detailHtml(item);
-
-  var html = "";
-  html += '<article class="mp-product-card" data-type="' + shelfKind(item.kind) + '"' +
-    ' data-category="' + escapeHtml(item.category) + '"' +
-    ' data-visibility="' + item.visibility + '"' +
-    ' data-addon="' + escapeHtml(item.kind + ':' + item.id) + '"' +
-    ' data-name="' + escapeHtml(item.name.toLowerCase()) + '"' +
-    ' data-search="' + escapeHtml(searchBlob) + '">';
-
-  // The card is laid out the way the app lays out a shelf card: the face leads and the name sits
-  // beside it, the kind and category badges hang under the name, then the one line of copy, and
-  // the footer carries who made it and how many have it. Every line answers a different
-  // question, so nothing on the card competes with the line above it.
-  html += '<div class="mp-card-top">' + faceHtml(item.kind, item.id, "card");
-  html += '<div class="mp-card-heading"><h3>' + escapeHtml(item.name) + "</h3>";
-  html += '<div class="mp-card-badges"><span class="mp-type-badge">' + escapeHtml(kindLabel) + "</span>";
-  if (item.category) html += '<span class="mp-category-badge">' + escapeHtml(item.category) + "</span>";
-  html += "</div></div></div>";
-
-  // One line, the app's: what the add-on takes off your plate, or a personality's tagline. The
-  // product description it replaced (2026-10-06) ran to three clamped lines on every card.
-  html += '<p class="mp-card-desc">' + escapeHtml(storeLine(item)) + "</p>";
-
-  if (detail) html += '<div class="mp-card-detail" hidden>' + detail + "</div>";
-
-  html += '<div class="mp-card-bottom"><div class="mp-card-meta">';
-  html += '<span class="mp-card-author">by ' + escapeHtml(item.author) + "</span>";
-  // The count the app shows, in the app's words: a download arrow and the number, hidden at zero
-  // so a new add-on does not read "0 installs".
-  if (item.install_count > 0) {
-    html += '<span class="mp-card-installs" title="Installed ' + item.install_count.toLocaleString() +
-      " time" + (item.install_count === 1 ? "" : "s") + '">' +
-      '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg>' +
-      item.install_count.toLocaleString() + " install" + (item.install_count === 1 ? "" : "s") + "</span>";
-  }
-  if (isPrivate) {
-    html += '<span class="mp-exclusive-badge" title="Shared privately with your account">' +
-      '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>' +
-      "Exclusive</span>";
-  }
-  html += "</div>";
-  if (detail) {
-    html += '<button type="button" class="mp-card-link mp-card-expand" aria-expanded="false">View Details &rarr;</button>';
-  }
-  html += "</div></article>";
-  return html;
 }

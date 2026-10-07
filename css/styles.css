@@ -138,6 +138,44 @@
   --c-gold: #BB8C33;
   --c-gold-subtle: rgba(187, 140, 51, 0.14);
   --c-gold-ink: #8C6820;
+  /* The add-on store's areas (section 51), one hue each, four stops, copied value for value from
+     the Archie app's --area-* tokens (docs/MARKETPLACE-AREAS.md, "Colors"). They are art, so they
+     are the same in both themes and the dark block does not repeat them. An icon runs light to
+     dark; a tile or a band carries a white title in its top corner, so it starts at the fourth
+     stop, `title`, where white measures at least 3.4:1. White on a `light` stop does not, which is
+     the reason the fourth stop exists. */
+  --area-blue-light: #7DA3DC;
+  --area-blue-mid: #5988CB;
+  --area-blue-dark: #436FAE;
+  --area-blue-title: #5988CB;
+  --area-green-light: #85B472;
+  --area-green-mid: #679B55;
+  --area-green-dark: #507E41;
+  --area-green-title: #659853;
+  --area-teal-light: #63B2A9;
+  --area-teal-mid: #3E9A92;
+  --area-teal-dark: #2E7C75;
+  --area-teal-title: #3E9991;
+  --area-terracotta-light: #F0AB80;
+  --area-terracotta-mid: #E28D5E;
+  --area-terracotta-dark: #C36A3D;
+  --area-terracotta-title: #CC7447;
+  --area-gold-light: #D3A855;
+  --area-gold-mid: #BB8C33;
+  --area-gold-dark: #9A7226;
+  --area-gold-title: #B0832F;
+  --area-iris-light: #9B87D9;
+  --area-iris-mid: #7A63C8;
+  --area-iris-dark: #6150A8;
+  --area-iris-title: #7A63C8;
+  --area-rose-light: #EDA3A0;
+  --area-rose-mid: #D9807C;
+  --area-rose-dark: #B45E5B;
+  --area-rose-title: #CA726F;
+  --area-plum-light: #B48CD9;
+  --area-plum-mid: #996FBE;
+  --area-plum-dark: #7B549E;
+  --area-plum-title: #996FBE;
 
   /* The two solid fills, for a button whose whole job is the colour: Start is green and Stop is
      red, and both carry white text. Copied value for value from the Archie app, because this is
@@ -239,6 +277,15 @@
                0 38px 64px -16px rgba(68, 64, 59, 0.32);
   --shadow-lg: 0 3px 7px rgba(68, 64, 59, 0.16), 0 24px 44px -10px rgba(68, 64, 59, 0.27),
                0 70px 116px -30px rgba(68, 64, 59, 0.46);
+  /* The store's painted things (section 51): a tile, an icon, a pane of glass on a tile, and a
+     bubble on one. Elevations like the rungs above, but cast by colored objects, so they are named
+     for what casts them rather than for a height. Each carries its own lit edge where it has one,
+     because a painted icon catches the light the way a key does. */
+  --shadow-tile: 0 2px 4px rgba(68, 64, 59, 0.1), 0 14px 28px -8px rgba(68, 64, 59, 0.26);
+  --shadow-icon: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+                 0 6px 14px -2px rgba(68, 64, 59, 0.24);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 12px 26px -6px rgba(0, 0, 0, 0.18);
+  --shadow-bubble: 0 8px 18px -4px rgba(0, 0, 0, 0.18);
   /* The lit top edge, and it is not an elevation: it is the face of the object catching the same
      light the shadows are cast by. One hairline of white along the top inside edge is what makes a
      rectangle read as a surface with a thickness rather than as a coloured area, and it costs
@@ -435,6 +482,9 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.45), 0 6px 14px -3px rgba(0, 0, 0, 0.55);
   --shadow-md: 0 2px 5px rgba(0, 0, 0, 0.5), 0 16px 30px -8px rgba(0, 0, 0, 0.65);
   --shadow-lg: 0 4px 10px rgba(0, 0, 0, 0.55), 0 30px 60px -14px rgba(0, 0, 0, 0.78);
+  --shadow-tile: 0 14px 30px -6px rgba(0, 0, 0, 0.42);
+  --shadow-icon: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.12),
+                 0 10px 22px -4px rgba(0, 0, 0, 0.5);
   /* A whisper. At the light theme's 0.9 this is a bright scar across the top of every card; the
      job here is only to say the surface has a top face, not to draw a line. */
   --edge-top: inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -21069,3 +21119,814 @@ main:has(#ed-business:checked) .install-wordmark[data-ed="business"] { display: 
   .day-cap > p.hm-hero-status, .hm-promises li { font-size: var(--fs-2xs); }
   .day-cap > p.hm-hero-status, .hm-promises { margin-top: 5px; }
 }
+
+/* ========================================
+   51. The add-on store, areas first (skills-marketplace/browse/)
+   ========================================
+   The design Jett picked on October 6, 2026, built for the site on October 7: the Archie repo's
+   docs/MARKETPLACE-AREAS.md, its section "The website". A front of tiles, one per part of life, a
+   page per area, and one sheet that every add-on opens into. The markup is written by
+   scripts/gen-marketplace.mjs and the sheet and the search are run by js/store.js.
+
+   **One element, one area, four variables.** A `.sv-hue-<name>` class points `--l`, `--m`, `--d`
+   and `--t` at that area's tokens in :root, and everything painted below reads only those four,
+   so a tile does not know which area it is. Icons run light to dark. Anything with a white title
+   on it starts at `--t`, because a light stop under white type is under 3:1; the light stop moves
+   into the sheen in the opposite corner instead. The area colors are art and do not change with
+   the theme; the quiet surfaces around them (the Personalities and Packs tiles, the sheet, the
+   cards) are the site's own tokens and do.
+
+   Every gradient that mixes a color is written twice, plain first: a browser without color-mix()
+   drops the whole declaration, and a tile with no background is white type on the page. */
+.sv-hue-blue { --l: var(--area-blue-light); --m: var(--area-blue-mid); --d: var(--area-blue-dark); --t: var(--area-blue-title); }
+.sv-hue-green { --l: var(--area-green-light); --m: var(--area-green-mid); --d: var(--area-green-dark); --t: var(--area-green-title); }
+.sv-hue-teal { --l: var(--area-teal-light); --m: var(--area-teal-mid); --d: var(--area-teal-dark); --t: var(--area-teal-title); }
+.sv-hue-terracotta { --l: var(--area-terracotta-light); --m: var(--area-terracotta-mid); --d: var(--area-terracotta-dark); --t: var(--area-terracotta-title); }
+.sv-hue-gold { --l: var(--area-gold-light); --m: var(--area-gold-mid); --d: var(--area-gold-dark); --t: var(--area-gold-title); }
+.sv-hue-iris { --l: var(--area-iris-light); --m: var(--area-iris-mid); --d: var(--area-iris-dark); --t: var(--area-iris-title); }
+.sv-hue-rose { --l: var(--area-rose-light); --m: var(--area-rose-mid); --d: var(--area-rose-dark); --t: var(--area-rose-title); }
+.sv-hue-plum { --l: var(--area-plum-light); --m: var(--area-plum-mid); --d: var(--area-plum-dark); --t: var(--area-plum-title); }
+
+/* ── The front ──────────────────────────────────────────────────────────────────────────────── */
+.sv-front { padding-bottom: 8px; }
+.sv-hero { text-align: center; }
+.sv-hero h1 { margin: 0; }
+.sv-search { position: relative; max-width: 560px; margin: 28px auto 0; }
+.sv-search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.sv-search-input {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px 0 48px;
+  border: 1px solid var(--field-border);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: var(--fs-md);
+  box-shadow: var(--shadow-xs);
+}
+.sv-search-input::placeholder { color: var(--text-muted); opacity: 1; }
+.sv-search-input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* The tiles. Four columns wide; two below 900px, which is also the phone's shape (the spec's phone:
+   tiles full width, one-cell tiles two to a row). Each tile carries its span in both layouts as a
+   class, worked out by the app's own layout rule in the generator, so a row is always full. */
+.sv-bento {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 190px;
+  gap: 18px;
+  margin-top: 48px;
+}
+.sv-c4-w2 { grid-column: span 2; }
+.sv-c4-w3 { grid-column: span 3; }
+.sv-c4-w4 { grid-column: span 4; }
+.sv-c4-h2 { grid-row: span 2; }
+.sv-art--c2 { display: none; }
+
+.sv-t {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 26px;
+  padding: 22px 24px;
+  color: #FFFFFF;
+  text-decoration: none;
+  background: linear-gradient(150deg, var(--t) 0%, var(--m) 50%, var(--d) 100%);
+  background:
+    radial-gradient(70% 90% at 92% 0%, color-mix(in srgb, var(--l) 70%, transparent), transparent 70%),
+    linear-gradient(150deg, var(--t) 0%, var(--m) 50%, var(--d) 100%);
+  box-shadow: var(--shadow-tile);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.sv-t:hover { color: #FFFFFF; transform: translateY(-2px); }
+.sv-t:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }
+.sv-tn {
+  position: relative;
+  z-index: 2;
+  display: block;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-4xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.sv-c4-wide .sv-tn { font-size: var(--fs-7xl); }
+.sv-c4-big .sv-tn { font-size: clamp(1.75rem, 2.6vw, 2.125rem); }
+.sv-tile-art, .sv-art { position: absolute; inset: 0; }
+
+/* A mark on a pane of glass. On the big tile the panes are placed by the generator as fractions
+   of the tile (`--gs` is the mockup's size on its 567-wide tile), so a phone draws the same picture
+   smaller rather than a different one, and never larger than the mockup drew it: a tablet's big
+   tile is wider than it is tall, and panes sized to its width overlapped. */
+.sv-glass {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: min(calc(var(--gs, 72) * 100% / 567), calc(var(--gs, 72) * 1px));
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 28%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-glass);
+}
+.sv-glass > svg { width: 50%; height: 50%; }
+.sv-glass--cell { right: 16px; bottom: 16px; width: 72px; border-radius: 21px; }
+
+/* A mark drawn large off the tile's corner, with its faint bigger twin behind it. */
+.sv-tart {
+  position: absolute;
+  right: -26px;
+  bottom: -30px;
+  width: 150px;
+  height: 150px;
+  color: rgba(255, 255, 255, 0.92);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.18));
+}
+.sv-tart > svg { width: 100%; height: 100%; }
+.sv-tart--ghost {
+  right: -60px;
+  bottom: -70px;
+  width: 230px;
+  height: 230px;
+  color: rgba(255, 255, 255, 0.12);
+  filter: none;
+  transform: rotate(-12deg);
+}
+
+/* A sample exchange: the ask on the right in dark glass, the reply on the left in white beside the
+   agent's face. On a tile or a band the colors are the art's; in a sheet they are the card's. */
+.sv-chat { display: flex; flex-direction: column; gap: 8px; }
+.sv-msg { display: flex; align-items: flex-end; gap: 8px; }
+.sv-msg--me { justify-content: flex-end; }
+.sv-av {
+  display: block;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #FBE4D3;
+  box-shadow: var(--shadow-bubble);
+}
+.sv-av > svg { display: block; width: 100%; height: 100%; }
+.sv-bub {
+  max-width: 100%;
+  padding: 9px 13px;
+  border-radius: 17px 17px 17px 5px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1F1D1B;
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1.3;
+  box-shadow: var(--shadow-bubble);
+}
+.sv-msg--me .sv-bub {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 17px 17px 5px 17px;
+  background: rgba(20, 20, 19, 0.26);
+  color: #FFFFFF;
+  box-shadow: none;
+}
+.sv-chat--tile { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 24px; }
+.sv-chat--side { left: auto; top: 50%; bottom: auto; width: min(300px, 62%); transform: translateY(-50%); }
+.sv-chat--reply { left: 16px; right: 16px; bottom: 16px; }
+.sv-chat--reply .sv-bub { font-size: var(--fs-sm); }
+
+/* The quiet tiles: somewhere else to go, so a surface rather than a part of life. */
+.sv-t--quiet {
+  border: 1px solid var(--line-soft);
+  color: var(--text-primary);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-sm);
+}
+.sv-t--quiet:hover { color: var(--text-primary); }
+.sv-t--voices {
+  background: radial-gradient(70% 120% at 85% 50%, var(--c-plum-subtle), transparent 70%), var(--bg-card);
+}
+.sv-t--packs {
+  background: radial-gradient(90% 100% at 20% 0%, var(--surface-soft-strong), transparent 60%), var(--bg-card);
+}
+.sv-faces {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  display: flex;
+  gap: 6px;
+  transform: translateY(-50%);
+}
+.sv-faces .sv-face { --s: 96px; background: none; }
+.sv-faces .sv-face > svg { width: 100%; height: 100%; margin: 0; }
+.sv-speak {
+  position: absolute;
+  right: 336px;
+  top: 50%;
+  max-width: 260px;
+  padding: 11px 15px;
+  border: 1px solid var(--line-soft);
+  border-radius: 18px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.3;
+  transform: translateY(-50%);
+  box-shadow: var(--shadow-xs);
+}
+.sv-speak::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-top: 1px solid var(--line-soft);
+  border-right: 1px solid var(--line-soft);
+  border-radius: 3px;
+  background: inherit;
+  transform: translateY(-50%) rotate(45deg);
+}
+.sv-speak-who {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--c-plum-ink);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+[data-theme="dark"] .sv-speak { border-color: transparent; background: #F3F0ED; color: #1F1D1B; }
+[data-theme="dark"] .sv-speak::after { border-color: transparent; }
+[data-theme="dark"] .sv-speak-who { color: #7B549E; }
+.sv-fan { position: absolute; right: 14px; bottom: 18px; width: 150px; height: 84px; }
+.sv-fan .sv-ai { --s: 56px; position: absolute; top: 8px; }
+.sv-fan .sv-ai:nth-child(1) { left: 4px; transform: rotate(-12deg); }
+.sv-fan .sv-ai:nth-child(2) { left: 46px; top: 0; z-index: 1; }
+.sv-fan .sv-ai:nth-child(3) { left: 88px; transform: rotate(12deg); }
+
+.sv-all { display: flex; justify-content: center; margin-top: 28px; }
+.sv-all-btn { border-radius: 999px; }
+
+/* What a search draws in place of the tiles. */
+/* The count of matches is said to a screen reader and not drawn: a browse screen carries names and
+   pictures only. */
+.sv-results { margin-top: 40px; }
+.sv-none { max-width: 560px; margin: 0 auto; text-align: center; }
+.sv-none-q {
+  margin-bottom: 10px;
+  color: var(--text-primary);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: var(--fs-4xl);
+  overflow-wrap: anywhere;
+}
+.sv-none .btn-row { margin-top: 22px; }
+
+/* Before you add anything: text into the agent, code with nowhere to run. */
+.sv-before-wrap { padding-top: 64px; padding-bottom: 0; }
+.sv-before {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+  padding: 36px 40px;
+  border: 1px solid var(--line-soft);
+  border-radius: 28px;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xs);
+}
+.sv-flow { display: flex; flex: none; align-items: center; gap: 16px; }
+.sv-flow .sv-ai { --s: 64px; }
+.sv-flow-wire {
+  width: 46px;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--line-muted) 0 6px, transparent 6px 12px);
+}
+.sv-flow-agent { width: 72px; height: 72px; }
+.sv-flow-code {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-left: 12px;
+  border: 2px dashed var(--line-muted);
+  border-radius: 19px;
+  color: var(--text-muted);
+}
+.sv-flow-code > svg { width: 30px; height: 30px; }
+.sv-flow-code::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 50%;
+  height: 2px;
+  background: var(--c-red);
+  transform: rotate(-35deg);
+}
+.sv-before-text { flex: 1 1 360px; min-width: 0; }
+.sv-before-text h2 { margin: 0; font-size: var(--fs-5xl); }
+.sv-before-text p { margin: 8px 0 0; font-size: var(--fs-md); line-height: 1.6; }
+.sv-before-text .marketplace-text-link { display: inline-block; margin-top: 12px; }
+
+/* The last thing on every store page: every add-on is included, and the download. */
+.sv-end { padding-top: 72px; text-align: center; }
+.sv-end h2 { margin: 0 0 22px; font-size: clamp(1.625rem, 3vw, 1.875rem); }
+.sv-end p { max-width: 560px; margin: 14px auto 0; }
+.sv-end .hm-micro { margin-top: 8px; }
+
+/* ── An add-on's picture ────────────────────────────────────────────────────────────────────── */
+/* Its icon: the mark in white on its area's color. `--s` is the side, and the corner keeps its
+   proportion at every size, so a 44 and a 96 read as one family. */
+.sv-ai {
+  --s: 72px;
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--s);
+  height: var(--s);
+  border-radius: calc(var(--s) * 0.29);
+  color: #FFFFFF;
+  background:
+    radial-gradient(120% 85% at 28% 10%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 55%),
+    linear-gradient(160deg, var(--l) 0%, var(--m) 55%, var(--d) 100%);
+  box-shadow: var(--shadow-icon);
+}
+.sv-ai > svg { width: 50%; height: 50%; }
+/* The clock a routine wears, cut into the icon's corner in the color of what is behind it. */
+.sv-rb {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+}
+.sv-rb > i {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+.sv-rb svg { width: 12px; height: 12px; }
+
+/* A personality's face: its own Ember on a soft round ground in its own hue. */
+.sv-face {
+  --s: 72px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--s);
+  height: var(--s);
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  background: radial-gradient(circle at 50% 42%, color-mix(in srgb, var(--l) 30%, transparent), transparent 72%), var(--bg-secondary);
+}
+.sv-face > svg { width: 84%; height: 84%; margin-top: -2%; }
+
+/* A pack: a folder of up to four of its add-ons. */
+.sv-folder {
+  display: grid;
+  grid-template-columns: repeat(2, 25px);
+  grid-auto-rows: 25px;
+  place-content: center;
+  gap: 6px;
+  width: 72px;
+  height: 72px;
+  border: 1px solid var(--line-soft);
+  border-radius: 21px;
+  background: var(--surface-soft-strong);
+  box-shadow: var(--shadow-xs);
+}
+.sv-mi {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border-radius: var(--radius-sm);
+  color: #FFFFFF;
+  background: linear-gradient(160deg, var(--l), var(--d));
+}
+.sv-mi > svg { width: 14px; height: 14px; }
+.sv-mi--face > svg { width: 25px; height: 25px; }
+
+/* One picture with its name under it: the unit every browse grid is made of. */
+.sv-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 24px 10px; }
+.sv-app {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 2px 4px;
+  border-radius: 18px;
+  color: var(--text-primary);
+  text-align: center;
+  text-decoration: none;
+  transition: transform var(--transition);
+}
+.sv-app:hover { color: var(--text-primary); transform: translateY(-2px); }
+.sv-app:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.sv-an {
+  display: -webkit-box;
+  max-width: 100%;
+  margin-top: 10px;
+  overflow: hidden;
+  font-size: var(--fs-sm);
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.sv-icons--faces .sv-face { --s: 88px; }
+
+/* ── An area's page, and the pages beside it ────────────────────────────────────────────────── */
+.sv-page { padding-bottom: 8px; }
+.sv-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+}
+.sv-back:hover { color: var(--text-primary); }
+.sv-back:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
+.sv-title { margin: 14px 0 28px; font-size: clamp(2rem, 4vw, 2.75rem); }
+.sv-sec { margin-top: 44px; }
+.sv-sec h2 { margin: 0 0 18px; font-size: var(--fs-4xl); }
+.sv-sec h2 a { color: inherit; }
+.sv-sec h2 a:hover { color: var(--accent-ink); }
+.sv-foot { margin-top: 40px; text-align: center; }
+
+/* The band: the area's name very large on its color, a light button, and its sample. */
+.sv-band {
+  position: relative;
+  display: flex;
+  min-height: 230px;
+  margin-top: 16px;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 40px;
+  border-radius: 28px;
+  color: #FFFFFF;
+  background: linear-gradient(140deg, var(--t) 0%, var(--m) 50%, var(--d) 100%);
+  background:
+    radial-gradient(60% 110% at 85% 10%, color-mix(in srgb, var(--l) 75%, transparent), transparent 65%),
+    linear-gradient(140deg, var(--t) 0%, var(--m) 50%, var(--d) 100%);
+  box-shadow: var(--shadow-tile);
+}
+.sv-band-ghost {
+  position: absolute;
+  right: -70px;
+  top: -100px;
+  width: 400px;
+  height: 400px;
+  color: rgba(255, 255, 255, 0.08);
+  transform: rotate(-12deg);
+}
+.sv-band-ghost > svg { width: 100%; height: 100%; }
+.sv-band-name {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 50%;
+  color: #FFFFFF;
+  font-size: clamp(2.25rem, 4.5vw, 2.875rem);
+  line-height: 1.05;
+}
+/* Light on the color, because an accent button on a green band is two colors arguing about which
+   one is the button. Light in both themes: it is on the art. */
+.sv-band-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: #F3F0ED;
+  color: #1A1A19;
+  font-size: var(--fs-base);
+  font-weight: 700;
+  text-decoration: none;
+}
+.sv-band-btn:hover { background: #FFFFFF; color: #1A1A19; }
+.sv-band-btn:focus-visible { outline: 3px solid #FFFFFF; outline-offset: 3px; }
+.sv-chat--band { position: absolute; z-index: 1; right: 44px; top: 50%; width: 320px; transform: translateY(-50%); }
+
+/* Start here: the starter set as art cards. */
+.sv-cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+.sv-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 20px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  text-decoration: none;
+  box-shadow: var(--shadow-xs);
+  transition: transform var(--transition);
+}
+.sv-card:hover { color: var(--text-primary); transform: translateY(-2px); }
+.sv-card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.sv-card-art {
+  position: relative;
+  display: grid;
+  aspect-ratio: 1 / 0.94;
+  overflow: hidden;
+  place-items: center;
+  background:
+    radial-gradient(90% 90% at 25% 10%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(155deg, var(--l), var(--m) 55%, var(--d));
+}
+.sv-card-bg {
+  position: absolute;
+  right: -34px;
+  bottom: -40px;
+  width: 140px;
+  height: 140px;
+  color: rgba(255, 255, 255, 0.14);
+  transform: rotate(-12deg);
+}
+.sv-card-fg { position: relative; width: 54px; height: 54px; color: #FFFFFF; filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.22)); }
+.sv-card-bg > svg, .sv-card-fg > svg { width: 100%; height: 100%; }
+.sv-card-art .sv-rb { right: 10px; bottom: 10px; background: var(--bg-card); }
+.sv-card-name { padding: 11px 14px 13px; font-size: var(--fs-sm); font-weight: 600; line-height: 1.3; }
+
+/* The area's personality: its face, its name, its line, and a way into its sheet. */
+.sv-voice {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 40px;
+  padding: 22px 26px;
+  border: 1px solid var(--line-soft);
+  border-radius: 24px;
+  background: var(--bg-card);
+  background: radial-gradient(60% 140% at 12% 50%, color-mix(in srgb, var(--l) 22%, transparent), transparent 70%), var(--bg-card);
+}
+.sv-voice .sv-face { --s: 112px; background: none; }
+.sv-voice .sv-face > svg { width: 100%; height: 100%; margin: 0; }
+.sv-voice-meta { display: flex; flex: none; flex-direction: column; }
+.sv-voice-kicker { color: var(--c-plum-ink); font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.sv-voice-name { margin-top: 3px; color: var(--text-primary); font-family: Georgia, 'Times New Roman', serif; font-size: var(--fs-5xl); font-weight: 600; }
+.sv-voice-line {
+  flex: 1;
+  min-width: 0;
+  padding: 13px 17px;
+  border: 1px solid var(--line-soft);
+  border-radius: 18px 18px 18px 5px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  line-height: 1.35;
+}
+[data-theme="dark"] .sv-voice-line { border-color: transparent; background: #F3F0ED; color: #1F1D1B; }
+.sv-voice-use {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--field-border);
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: var(--fs-base);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sv-voice-use:hover { color: var(--text-primary); background: var(--surface-hover); }
+.sv-voice-use:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* ── The sheet ──────────────────────────────────────────────────────────────────────────────── */
+/* The hidden copies a press opens. js/store.js copies one into the dialog below; without scripts
+   the press is a link to it, and it shows itself as a sheet on :target. */
+.sv-src-close { display: none; }
+html:not(.js) .sv-src:target {
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: min(560px, calc(100% - 32px));
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 30px 32px 26px;
+  border: 1px solid var(--line-soft);
+  border-radius: 30px;
+  background: var(--bg-card);
+  transform: translate(-50%, -50%);
+  box-shadow: var(--shadow-lg);
+}
+html:not(.js) .sv-src:target .sv-src-close { display: block; margin-top: 18px; text-align: center; }
+
+/* margin: auto is the browser's own way of centering a modal dialog, and the reset at the top of
+   this file takes it off every element, so it is put back here. */
+.sv-sheet {
+  width: min(560px, calc(100% - 32px));
+  max-width: none;
+  margin: auto;
+  max-height: 88vh;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 30px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg);
+}
+.sv-sheet::backdrop { background: var(--overlay-bg); }
+.sv-sheet-inner { position: relative; max-height: 88vh; overflow-y: auto; padding: 30px 32px 26px; }
+.sv-sheet-x {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  top: 18px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  background: var(--surface-soft);
+  color: var(--text-muted);
+}
+.sv-sheet-x:hover { color: var(--text-primary); }
+.sv-sheet-x:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+.sv-sheet-head { display: flex; align-items: center; gap: 20px; padding-right: 40px; }
+.sv-sheet-head .sv-ai, .sv-sheet-head .sv-face { --s: 96px; }
+.sv-sheet-title { min-width: 0; }
+.sv-sheet-title h2 { margin: 0; font-size: var(--fs-7xl); line-height: 1.15; }
+.sv-sheet-line { margin: 6px 0 0; color: var(--text-secondary); font-size: var(--fs-md); line-height: 1.5; }
+.sv-sheet .sv-rb, .sv-src .sv-rb { background: var(--bg-card); }
+
+/* A sample in a sheet sits on the card, so its bubbles take the card's colors. */
+.sv-chat--sheet { margin-top: 24px; }
+.sv-say .sv-chat--sheet { margin-top: 0; }
+.sv-chat--sheet .sv-bub { background: var(--bg-secondary); color: var(--text-primary); box-shadow: none; white-space: pre-line; }
+.sv-chat--sheet .sv-msg--me .sv-bub { border: none; background: var(--accent-subtle); color: var(--text-primary); }
+.sv-say { margin-top: 24px; }
+.sv-say-label {
+  margin: 0 0 8px;
+  color: var(--text-muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.sv-runs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 24px 0 0;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: var(--fs-base);
+  line-height: 1.45;
+}
+.sv-runs > svg { width: 20px; height: 20px; flex: none; color: var(--text-secondary); }
+.sv-get { margin-top: 24px; text-align: center; }
+.sv-get-line { margin: 0 0 10px; color: var(--text-primary); font-size: var(--fs-md); font-weight: 600; }
+.sv-get-btn { width: 100%; border-radius: 999px; }
+.sv-more { margin-top: 12px; }
+.sv-more > summary {
+  padding: 6px;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+  list-style: none;
+}
+.sv-more > summary::-webkit-details-marker { display: none; }
+.sv-more > summary:hover { color: var(--text-primary); text-decoration: underline; }
+.sv-more > summary:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; border-radius: 6px; }
+.sv-more-body { margin-top: 10px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
+.sv-more-body p { margin: 0 0 12px; font-size: var(--fs-base); line-height: 1.65; }
+.sv-more-body h3 { margin: 18px 0 8px; font-size: var(--fs-lg); }
+.sv-more-body .sv-chat--sheet { margin: 0 0 12px; }
+.sv-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.sv-chips li { padding: 4px 10px; border-radius: 999px; background: var(--surface-soft-strong); color: var(--text-primary); font-size: var(--fs-sm); }
+.sv-steps { margin: 0 0 12px; padding-left: 20px; list-style: decimal; }
+.sv-steps li { margin-bottom: 6px; color: var(--text-secondary); font-size: var(--fs-base); line-height: 1.6; }
+.sv-more-body .sv-by { color: var(--text-muted); font-size: var(--fs-sm); }
+
+.sv-pack-desc { margin: 20px 0 0; font-size: var(--fs-md); line-height: 1.6; }
+.sv-pack-items { display: grid; gap: 4px; margin-top: 20px; }
+.sv-pack-items a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px;
+  border-radius: 14px;
+  color: var(--text-primary);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  text-decoration: none;
+}
+.sv-pack-items a:hover { background: var(--surface-hover); color: var(--text-primary); }
+.sv-pack-items a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.sv-pack-items .sv-ai, .sv-pack-items .sv-face { --s: 44px; }
+.sv-pack-items .sv-rb { transform: scale(0.8); right: -6px; bottom: -6px; }
+
+/* ── Narrower ───────────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .sv-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .sv-speak { right: 300px; max-width: 220px; }
+  .sv-faces .sv-face { --s: 84px; }
+}
+@media (max-width: 899px) {
+  .sv-bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 170px; gap: 14px; }
+  .sv-bento > .sv-t { grid-column: auto; grid-row: auto; }
+  .sv-bento > .sv-c2-w2 { grid-column: span 2; }
+  .sv-bento > .sv-c2-h2 { grid-row: span 2; }
+  .sv-art--c4 { display: none; }
+  .sv-art--c2 { display: block; }
+  .sv-c4-wide .sv-tn, .sv-c4-big .sv-tn, .sv-c2-cell .sv-tn { font-size: var(--fs-4xl); }
+  .sv-c2-wide .sv-tn { font-size: var(--fs-7xl); }
+  .sv-c2-big .sv-tn { font-size: clamp(1.75rem, 5vw, 2.125rem); }
+  .sv-chat--side { left: 24px; right: 24px; top: auto; bottom: 22px; width: auto; transform: none; }
+  .sv-chat--side .sv-msg--me { margin-left: 30%; }
+  .sv-t--voices .sv-faces { right: 18px; top: 18px; transform: none; }
+  .sv-t--voices .sv-faces .sv-face { --s: 72px; }
+  .sv-speak { left: 20px; right: auto; top: auto; bottom: 18px; max-width: min(320px, calc(100% - 40px)); transform: none; }
+  .sv-speak::after { display: none; }
+  .sv-band-name { max-width: none; }
+  .sv-chat--band { position: relative; right: auto; top: auto; width: auto; max-width: 420px; margin-top: 24px; transform: none; }
+  .sv-voice { flex-wrap: wrap; }
+  .sv-voice-line { flex-basis: 100%; order: 3; }
+  .sv-voice-use { order: 4; }
+}
+@media (max-width: 640px) {
+  .sv-bento { grid-auto-rows: 150px; gap: 12px; margin-top: 36px; }
+  .sv-t { padding: 18px 18px; border-radius: 22px; }
+  .sv-chat--tile { left: 16px; right: 16px; bottom: 16px; }
+  .sv-chat--side { left: 16px; right: 16px; bottom: 14px; }
+  .sv-chat--reply { left: 12px; right: 12px; bottom: 12px; }
+  .sv-bub { padding: 8px 11px; font-size: var(--fs-sm); }
+  .sv-glass--cell { right: 12px; bottom: 12px; width: 56px; border-radius: 17px; }
+  .sv-tart { width: 116px; height: 116px; right: -20px; bottom: -24px; }
+  .sv-tart--ghost { width: 180px; height: 180px; right: -48px; bottom: -56px; }
+  .sv-bento > .sv-t--voices { grid-row: span 2; }
+  .sv-t--voices .sv-faces { left: 50%; right: auto; top: 70px; transform: translateX(-50%); }
+  .sv-t--voices .sv-speak { left: 18px; right: 18px; bottom: 20px; max-width: none; }
+  /* A one-cell tile is about 150 wide here, so its name drops a size and a reply bubble loses the
+     face beside it: a bubble three words wide under a name two lines tall was the name covered. */
+  .sv-c2-cell .sv-tn { font-size: var(--fs-2xl); }
+  .sv-chat--reply .sv-av { display: none; }
+  .sv-chat--reply .sv-bub { font-size: var(--fs-xs); }
+  .sv-t--voices .sv-faces .sv-face { --s: 88px; }
+  .sv-fan { transform: scale(0.85); transform-origin: right bottom; }
+  .sv-icons { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: 20px 6px; }
+  .sv-icons--faces .sv-face { --s: 76px; }
+  .sv-ai { --s: 64px; }
+  .sv-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .sv-band { min-height: 0; padding: 28px 22px 24px; border-radius: 24px; }
+  .sv-band-ghost { right: -110px; top: -90px; width: 300px; height: 300px; }
+  .sv-voice { gap: 14px 18px; padding: 18px; }
+  .sv-voice .sv-face { --s: 84px; }
+  .sv-before { gap: 24px; padding: 28px 22px; }
+  .sv-flow { gap: 10px; }
+  .sv-flow .sv-ai, .sv-flow-code { --s: 56px; width: 56px; height: 56px; }
+  .sv-flow-agent { width: 64px; height: 64px; }
+  .sv-flow-wire { width: 26px; }
+  .sv-flow-code { margin-left: 6px; }
+  .sv-sheet {
+    width: 100%;
+    max-height: 90vh;
+    margin: auto 0 0;
+    border-bottom: none;
+    border-radius: 26px 26px 0 0;
+  }
+  .sv-sheet-inner { max-height: 90vh; padding: 26px 20px 22px; }
+  .sv-sheet-head { gap: 16px; }
+  .sv-sheet-head .sv-ai, .sv-sheet-head .sv-face { --s: 76px; }
+  .sv-sheet-title h2 { font-size: var(--fs-5xl); }
+}
+/* The page's faces, drawn once each and used everywhere by reference (scripts/store-render.mjs). Out
+   of sight without display:none, which would stop the gradients inside it from drawing. */
+.sv-sprite { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }

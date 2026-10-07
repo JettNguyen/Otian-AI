@@ -235,7 +235,12 @@ since 2026-09-07 it also **ships all 148 cards in its markup**, written by
 `node scripts/gen-marketplace.mjs` out of the same manifests this row is counted from. So the
 catalog moving now moves the page's HTML as well as its stat row, and the generator's `--check`
 mode fails when it has not. **The generator writes the cards and not the stat row**, so the
-number beside them is still a hand edit and still has to move in the same push.
+number beside them is still a hand edit and still has to move in the same push. **The stat row
+came off on 2026-10-07**, when the store was rebuilt areas first: the browse pages print the count
+only as "Search 170 add-ons", "See all 170" and "All 170", and all three are written by
+`node scripts/gen-marketplace.mjs` from the public snapshot, so they move with a regeneration and
+are not a hand edit. They are not in the stat-row shape, so `check-facts.py` does not read them;
+the generator's `--check` is what keeps them true.
 
 Five more counts are **not** in the markup shape `check-facts.py` reads, so nothing checks them.
 Two are on the homepage since 2026-09-16 (the day stage dropped "160 on the shelf today"): "Four of 160"

@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-<title>Archie for Personal | Otian AI</title>
-  <meta name="description" content="AI agents on your own computer for your email, calendar and bills. Free on your own AI account at 20 jobs a day, or up to 10 agents for $30 a month." />
+<title>Archie for One Person | Otian AI</title>
+  <meta name="description" content="Archie runs AI agents on your own computer for a business of one: new leads, unpaid invoices, the calendar, and your own bills too. Free on your own AI account at 20 jobs a day, or up to 10 agents for $30 a month." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-4" />
   <style>
     /* Page-scoped: the #status block, where Archie's availability and platform facts live.
        Fine print under the button since 2026-10-05: it was a tinted box headed "Where Archie
@@ -156,8 +156,8 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
             <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -231,8 +231,8 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
       <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -278,10 +278,10 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <img src="../../assets/archie.svg" width="1024" height="1024" alt="Archie" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
-        <span class="section-label fade-up">For personal</span>
-        <h1 class="fade-up delay-1">Life admin, handled.</h1>
-        <p>Email, calendar and bills, on your own computer. Replies and calendar changes wait for your yes.</p>
-        <span class="ihx-line fade-up delay-2" role="img" aria-label="Your agent is sorting the inbox, checking the calendar, drafting a reply, and tracking the bills.">
+        <span class="section-label fade-up">For one person</span>
+        <h1 class="fade-up delay-1">Help for a business of one.</h1>
+        <p>New leads, unpaid invoices and the calendar, on your own computer, and your own bills too. Replies and calendar changes wait for your yes.</p>
+        <span class="ihx-line fade-up delay-2" role="img" aria-label="Your agent is drafting a reply, checking the calendar, tracking an invoice, and sorting the inbox.">
           <span class="ihx-mark" aria-hidden="true">
             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
               <circle class="ihx-ring" cx="16" cy="16" r="13"/>
@@ -294,11 +294,11 @@
           <span class="ihx-quiet" aria-hidden="true">Your agent is</span>
           <span class="ihx-cycle" aria-hidden="true">
             <span class="ihx-track">
-              <span>sorting the inbox</span>
-              <span>checking the calendar</span>
               <span>drafting a reply</span>
-              <span>tracking the bills</span>
+              <span>checking the calendar</span>
+              <span>tracking an invoice</span>
               <span>sorting the inbox</span>
+              <span>drafting a reply</span>
             </span>
           </span>
         </span>
@@ -309,7 +309,7 @@
       </div>
     </section>
 
-    <!-- The fork, and the reason this page exists. Archie for Business used to sit under
+    <!-- The fork, and the reason this page exists. Archie for Teams used to sit under
          Services, which filed an edition of the product as a service and left a reader to
          guess which of the two was theirs. Both editions now open with this same two-row
          list, pointing at each other, so whichever door somebody came through they can see
@@ -327,7 +327,7 @@
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">A team</span>
-            <p>Up to 50 agents for $99 a month or $999 a year. <a class="marketplace-text-link" href="../business/">See Archie for Business</a>.</p>
+            <p>Up to 50 agents for $99 a month or $999 a year. <a class="marketplace-text-link" href="../business/">See Archie for Teams</a>.</p>
           </div>
         </div>
       </div>
@@ -601,7 +601,7 @@
         <div class="calm-list calm-list--ruled edition-choices fade-up delay-1">
           <div class="calm-list-item">
             <span class="calm-list-label">One person per agent</span>
-            <p>Each agent answers only you. To share one, use <a href="../business/">Archie for Business</a>.</p>
+            <p>Each agent answers only you. To share one, use <a href="../business/">Archie for Teams</a>.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Your computer, your AI account</span>
@@ -650,8 +650,8 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/business/">For Business</a>
-            <a href="../../archie/personal/">For Personal</a>
+            <a href="../../archie/personal/">For One Person</a>
+            <a href="../../archie/business/">For a Team</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/pricing/">Pricing</a>
@@ -713,9 +713,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-3"></script>
-  <script src="../../js/ember.js?v=20261007-3" defer></script>
-  <script src="../../js/drafts-scene.js?v=20261007-3" defer></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-3"></script>
+  <script src="../../js/nav.js?v=20261007-4"></script>
+  <script src="../../js/ember.js?v=20261007-4" defer></script>
+  <script src="../../js/drafts-scene.js?v=20261007-4" defer></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-4"></script>
 </body>
 </html>

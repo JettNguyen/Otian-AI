@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-<title>Archie for Business | Otian AI</title>
-  <meta name="description" content="Archie for Business runs up to 50 agents on your own computer for a trades or field-service business, and your crew can message them. They answer the shop's inbox, chase unpaid invoices and keep jobs on the calendar." />
+<title>Archie for Teams | Otian AI</title>
+  <meta name="description" content="Archie for Teams runs up to 50 agents on your own computer for a trades or field-service business, and your whole crew can message them. They answer the shop's inbox, chase unpaid invoices and keep jobs on the calendar." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -55,8 +55,8 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
             <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -130,8 +130,8 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
       <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -170,19 +170,19 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <!-- The business mark: same geometry as the Archie page's hero, slate where that one is
-             ember, because Archie for Business is slate blue everywhere (the app's accent included)
+             ember, because Archie for Teams is slate blue everywhere (the app's accent included)
              and this page is where somebody first meets it. -->
-        <img src="../../assets/archie-business.svg" width="1024" height="1024" alt="Archie for Business" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
-        <span class="section-label fade-up">For trades and field service</span>
-        <h1 class="fade-up delay-1">The office work, kept up while you&rsquo;re on the job.</h1>
-        <p>Agents on your own computer answer the shop&rsquo;s inbox, chase unpaid invoices and keep jobs on the calendar. No email goes out until you approve it.</p>
+        <img src="../../assets/archie-business.svg" width="1024" height="1024" alt="Archie for Teams" class="fade-up" style="width: 84px; height: 84px; display: block; margin: 0 auto 22px;" />
+        <span class="section-label fade-up">For a team</span>
+        <h1 class="fade-up delay-1">Agents your whole crew can message.</h1>
+        <p>When the business grows past you, agents on your own computer answer the shop&rsquo;s inbox, chase unpaid invoices and keep jobs on the calendar for everyone. No email goes out until you approve it.</p>
       </div>
     </section>
 
     <!-- The mirror of the fork that opens archie/personal/: same two rows, same order, the
          "you are here" moved. Added 2026-09-14, when this page came out from under Services.
          Filing an edition of the product as a service left a reader to work out for themselves
-         that Archie and Archie for Business are the same app, and the two pages now say so to
+         that Archie and Archie for Teams are the same app, and the two pages now say so to
          each other's audience. FACTS.md carries every figure in it, including the rule that
          neither edition is ever described with "unlimited". -->
     <section class="section section--tight" aria-labelledby="fork-heading">
@@ -210,7 +210,7 @@
          archie/personal/, which lost its six-card grid the same day. -->
 
     <!-- ==============================
-         Archie for Business: agents the team can share
+         Archie for Teams: agents the team can share
 
          The heading said "One agent your whole team messages" until 2026-08-21, which described
          the edition as being a single agent. It is not: a business plan runs up to 50, and what
@@ -233,7 +233,7 @@
       <div class="container">
         <div class="section-header">
           <img src="../../assets/archie-business.svg" width="1024" height="1024" alt="" aria-hidden="true" class="fade-up" style="width: 44px; height: 44px; display: block; margin: 0 auto 14px;" />
-          <span class="section-label fade-up">Archie for Business</span>
+          <span class="section-label fade-up">Archie for Teams</span>
           <h2 id="shared-heading" class="fade-up delay-1">Agents your whole team can message.</h2>
         </div>
 
@@ -254,7 +254,7 @@
               <i>Flip it to compare.</i>
             </span>
           </label>
-          <div class="bz-scene" role="img" aria-label="An illustration of three teammates' phones, Dana in support, Sam the owner and Todd in ops, standing around one computer running Archie for Business. A message rolls from a phone to the computer and its answer rolls back to the same phone, from the mail and calendars it can use: Dana's refund went out Tuesday, Sam's two overdue invoices, a walkthrough of Todd's that can move to Thursday after his yes. With the switch on one shared agent, one agent stands at the computer and its Setup page lists all three as people who can message it, Sam as the owner. With it on an agent each, three agents with their own faces stand at the computer and the page says only Sam can message his.">
+          <div class="bz-scene" role="img" aria-label="An illustration of three teammates' phones, Dana in support, Sam the owner and Todd in ops, standing around one computer running Archie for Teams. A message rolls from a phone to the computer and its answer rolls back to the same phone, from the mail and calendars it can use: Dana's refund went out Tuesday, Sam's two overdue invoices, a walkthrough of Todd's that can move to Thursday after his yes. With the switch on one shared agent, one agent stands at the computer and its Setup page lists all three as people who can message it, Sam as the owner. With it on an agent each, three agents with their own faces stand at the computer and the page says only Sam can message his.">
             <div class="bz-box" aria-hidden="true">
               <div class="bz-floor"><div class="bz-plane">
                 <div class="bz-grid"></div>
@@ -441,7 +441,7 @@
 
         <div class="pricing-why mt-48 fade-up delay-2">
           <p class="text-center">
-            Archie for Business installs beside Archie as its own app, with its own data and keys. <a href="../../archie/pricing/">Compare both plans</a>.
+            Archie for Teams installs beside Archie as its own app, with its own data and keys. Until its next release the installer still says Archie for Business. <a href="../../archie/pricing/">Compare both plans</a>.
           </p>
         </div>
       </div>
@@ -612,8 +612,8 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/business/">For Business</a>
-            <a href="../../archie/personal/">For Personal</a>
+            <a href="../../archie/personal/">For One Person</a>
+            <a href="../../archie/business/">For a Team</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/pricing/">Pricing</a>
@@ -675,10 +675,10 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-3"></script>
-  <script src="../../js/switch-cycle.js?v=20261007-3" defer></script>
-  <script src="../../js/ember.js?v=20261007-3" defer></script>
-  <script src="../../js/ring-scene.js?v=20261007-3" defer></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-3"></script>
+  <script src="../../js/nav.js?v=20261007-4"></script>
+  <script src="../../js/switch-cycle.js?v=20261007-4" defer></script>
+  <script src="../../js/ember.js?v=20261007-4" defer></script>
+  <script src="../../js/ring-scene.js?v=20261007-4" defer></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-4"></script>
 </body>
 </html>

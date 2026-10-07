@@ -55,7 +55,7 @@
       ],
       ack: function (value) {
         if (value === 'business') {
-          return 'Got it. That points at Archie for Business later on: agents your whole team can message. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a>.';
+          return 'Got it. That points at Archie for Teams later on: agents your whole team can message. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a>.';
         }
         if (value === 'unsure') {
           return 'No problem. The plans sit side by side on the <a href="../archie/pricing/">pricing page</a> whenever you want to compare, and nothing here locks you in.';
@@ -110,10 +110,10 @@
           note: true,
           html: function () {
             var plan = answers.edition === 'business'
-              ? 'Business is $99 a month or $999 a year'
+              ? 'Archie for Teams is $99 a month or $999 a year'
               : answers.edition === 'personal'
                 ? 'Personal is $30 a month or $299 a year'
-                : 'Personal is $30 a month or $299 a year; Business is $99 a month or $999 a year';
+                : 'Archie is $30 a month or $299 a year; Archie for Teams is $99 a month or $999 a year';
             return '<strong>How pricing works:</strong> the 30-minute discovery call is free. Guided setup is $250 an hour. ' + plan + ', with AI usage billed separately on your own account, and plans can be bought now. <a href="../archie/pricing/">Every cost, in full</a>.';
           }
         },

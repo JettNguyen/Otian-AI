@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie Pricing | Otian AI</title>
-  <meta name="description" content="Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Business is $99 a month. The AI bills you directly: $1 to $5 a month for a light agent, up to $139 for a heavy one." />
+  <meta name="description" content="Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Teams is $99 a month. The AI bills you directly: $1 to $5 a month for a light agent, up to $139 for a heavy one." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-3" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-4" />
   <style>
     /* Three plans share one row on a wide screen. */
     .price-grid--three {
@@ -130,8 +130,8 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="../../archie/personal/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+            <a href="../../archie/business/" role="menuitem"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
             <a href="../../archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="../../how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="../../archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -205,8 +205,8 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="../../archie/personal/"><img class="nav-row-mark" src="../../assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+      <a href="../../archie/business/"><img class="nav-row-mark" src="../../assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
       <a href="../../archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="../../how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="../../archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -302,7 +302,7 @@
 
         <div class="mt-48 plan-grid fade-up delay-1">
           <article class="plan-card">
-            <span class="price-card-label">Free Personal</span>
+            <span class="price-card-label">Free</span>
             <div class="price-card-amount price-card-amount--words">Free<span>20 jobs a day</span></div>
             <p class="plan-card-line">On your own AI account.</p>
             <ul class="plan-list">
@@ -315,7 +315,7 @@
 
           <article class="plan-card plan-card--lead">
             <span class="plan-flag">Our pick</span>
-            <span class="price-card-label">For Personal</span>
+            <span class="price-card-label">For one person</span>
             <div class="price-card-amount">$30<span>a month</span></div>
             <p class="plan-card-line">Or $299 a year, plus your AI company&rsquo;s bill.</p>
             <ul class="plan-list">
@@ -329,16 +329,16 @@
           </article>
 
           <article class="plan-card">
-            <span class="price-card-label">For Business</span>
+            <span class="price-card-label">For a team</span>
             <div class="price-card-amount">$99<span>a month</span></div>
             <p class="plan-card-line">Or $999 a year, plus your AI company&rsquo;s bill.</p>
             <ul class="plan-list">
               <li>Up to 50 agents that can answer your team</li>
               <li>No seat count or per-person price</li>
-              <li>Team add-ons in the Business store</li>
+              <li>Team add-ons in the Teams store</li>
             </ul>
             <p class="plan-fine">A separate app and plan, with its own data and keys. Guests can read a shared agent&rsquo;s documents, lists and reminders. Keep confidential context off shared agents.</p>
-            <a class="btn btn-business plan-cta" href="../install/#business">Download Archie for Business</a>
+            <a class="btn btn-business plan-cta" href="../install/#business">Download Archie for Teams</a>
           </article>
         </div>
 
@@ -355,7 +355,7 @@
              promises one plan. -->
         <article class="plan-band fade-up delay-2" id="ai-included" aria-labelledby="ai-included-label">
           <div class="plan-band-price">
-            <span class="price-card-label" id="ai-included-label">For Personal, with the AI included</span>
+            <span class="price-card-label" id="ai-included-label">For one person, with the AI included</span>
             <div class="price-card-amount">$59<span>a month</span></div>
             <p class="plan-card-line">Or $599 a year. Includes $25 of Claude Sonnet usage each month, with no separate AI account or bill.</p>
             <a class="btn btn-primary plan-cta" href="../install/">Download Archie</a>
@@ -418,7 +418,7 @@
           <p class="jm-plan">The free tier stops email and routines at 15 jobs a day and everything at 20, then starts again at midnight. The $30 plan has no daily limit, runs up to 10 agents and adds Archie Mobile.</p>
         </div>
 
-        <p class="price-note">When a Personal plan ends, existing agents keep working at 20 jobs a day on your own AI account. Business needs a plan; Archie Mobile needs a plan or live trial.</p>
+        <p class="price-note">When an Archie plan ends, existing agents keep working at 20 jobs a day on your own AI account. Archie for Teams needs a plan; Archie Mobile needs a plan or live trial.</p>
       </div>
     </section>
 
@@ -449,7 +449,7 @@
         <div class="section-header">
           <span class="section-label fade-up">Before you pay</span>
           <h2 id="try-heading" class="fade-up delay-1">Two free ways to start</h2>
-          <p>Neither needs a card. Both are Personal only.</p>
+          <p>Neither needs a card. Both are for the one-person plans.</p>
         </div>
 
         <!-- The two paths, drawn the way trust/ draws them, 2026-09-11. Two prose cards carried two bold
@@ -672,7 +672,7 @@
               </table>
               <p class="cost-table-note">Measured over a 30-day month. The top of each range assumes every reply starts from nothing, so a real month should land inside it.</p>
               <p class="cost-table-note">The moderate row is one agent measured twice. Its add-ons pick Balanced themselves, so the dial moved only the inbox watch, and the Economy run pulled a bigger inbox, so its top end sits a dollar higher.</p>
-              <p class="cost-table-note">Best, the third quality setting, costs more and was not measured. A shared Archie for Business agent answers a whole team on one bill.</p>
+              <p class="cost-table-note">Best, the third quality setting, costs more and was not measured. A shared Archie for Teams agent answers a whole team on one bill.</p>
             </div>
 
             <div class="cost-table-wrap">
@@ -804,8 +804,8 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="../../archie/business/">For Business</a>
-            <a href="../../archie/personal/">For Personal</a>
+            <a href="../../archie/personal/">For One Person</a>
+            <a href="../../archie/business/">For a Team</a>
             <a href="../../archie/mobile/">Archie Mobile</a>
             <a href="../../how-it-works/">How It Works</a>
             <a href="../../archie/pricing/">Pricing</a>
@@ -867,9 +867,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-3"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-3"></script>
-  <script src="../../js/demo-player.js?v=20261007-3"></script>
-  <script src="../../js/jobs-meter.js?v=20261007-3"></script>
+  <script src="../../js/nav.js?v=20261007-4"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-4"></script>
+  <script src="../../js/demo-player.js?v=20261007-4"></script>
+  <script src="../../js/jobs-meter.js?v=20261007-4"></script>
 </body>
 </html>

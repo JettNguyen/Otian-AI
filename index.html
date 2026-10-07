@@ -8,8 +8,8 @@
   <!-- Address bar and task-switcher card. Kept in step with the theme by the
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
-  <title>Archie: An AI Agent for Trades and Field Service | Otian AI</title>
-  <meta name="description" content="Archie runs an AI agent on your computer for a trades or field-service business. It drafts replies to new leads, tracks unpaid invoices and moves jobs on the calendar, and waits for your yes. Your chosen AI company does the thinking." />
+  <title>Archie: An AI Employee for a Business of One | Otian AI</title>
+  <meta name="description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar, around the clock on a computer you leave on, and waits for your yes. Your chosen AI company does the thinking." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -19,8 +19,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="application-name" content="Otian AI" />
   <meta property="og:site_name" content="Otian AI" />
-  <meta property="og:title" content="Archie: An AI Agent for Trades and Field Service | Otian AI" />
-  <meta property="og:description" content="Archie runs an AI agent on your computer for a trades or field-service business. It drafts replies to new leads, tracks unpaid invoices and moves jobs on the calendar, and waits for your yes. Your chosen AI company does the thinking." />
+  <meta property="og:title" content="Archie: An AI Employee for a Business of One | Otian AI" />
+  <meta property="og:description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar, around the clock on a computer you leave on, and waits for your yes. Your chosen AI company does the thinking." />
   <meta property="og:url" content="https://otianai.com/" />
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://otianai.com/" />
@@ -78,7 +78,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261007-3" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261007-4" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -92,8 +92,8 @@
         <div class="nav-more" id="navArchie">
           <button class="nav-more-toggle" aria-expanded="false" aria-controls="navArchieMenu" type="button">Archie</button>
           <div class="nav-more-menu" id="navArchieMenu" role="menu" aria-label="Archie">
-            <a href="archie/business/" role="menuitem"><img class="nav-row-mark" src="assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-            <a href="archie/personal/" role="menuitem"><img class="nav-row-mark" src="assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+            <a href="archie/personal/" role="menuitem"><img class="nav-row-mark" src="assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+            <a href="archie/business/" role="menuitem"><img class="nav-row-mark" src="assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
             <a href="archie/mobile/" role="menuitem"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
             <a href="how-it-works/" role="menuitem"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
             <a href="archie/pricing/" role="menuitem"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -168,8 +168,8 @@
       <span id="navDrawerFlyoutTitle">Archie</span>
     </button>
     <div class="nav-drawer-flyout-links is-active" id="navDrawerFlyoutArchie">
-      <a href="archie/business/"><img class="nav-row-mark" src="assets/archie-business.svg" width="1024" height="1024" alt="" />For Business</a>
-      <a href="archie/personal/"><img class="nav-row-mark" src="assets/archie.svg" width="1024" height="1024" alt="" />For Personal</a>
+      <a href="archie/personal/"><img class="nav-row-mark" src="assets/archie.svg" width="1024" height="1024" alt="" />For One Person</a>
+      <a href="archie/business/"><img class="nav-row-mark" src="assets/archie-business.svg" width="1024" height="1024" alt="" />For a Team</a>
       <a href="archie/mobile/"><span class="nav-row-ico nav-ico-phone" aria-hidden="true"></span>Archie Mobile</a>
       <a href="how-it-works/"><span class="nav-row-ico nav-ico-steps" aria-hidden="true"></span>How It Works</a>
       <a href="archie/pricing/"><span class="nav-row-ico nav-ico-tag" aria-hidden="true"></span>Pricing</a>
@@ -336,11 +336,15 @@
           <article class="day-cap is-on" data-act="0">
             <span class="section-label day-beat is-on" data-act="0" data-at="0.16">Otian AI &middot; Archie</span>
             <!-- Written to the owner of a trades or field-service business since 2026-10-07 (the top
-                 of CLAUDE.md). The tagline that stood here until then lives in the header lockup; the
-                 h1 says what the owner gets. "Answered" is the owner's own Send, which the line under
-                 it says and the promises below carry in TRUST.md's approved words. -->
-            <h1>Every lead answered, even while you&rsquo;re <em>on a job.</em></h1>
-            <p class="day-beat is-on" data-act="0" data-at="0.16">An agent on your computer drafts the replies, chases unpaid invoices and moves jobs on the calendar. You say yes from your phone.</p>
+                 of CLAUDE.md), and to the owner who runs it alone since the same evening. The tagline
+                 that stood here until then lives in the header lockup; the h1 says what the owner
+                 gets, and the line under it says the owner still says yes, in TRUST.md's terms. No
+                 wage figure: FACTS.md publishes none until one is read at its source. The question is
+                 Jett's (2026-10-07, "want a 24/7 smart and hardworking employee?"); "smart" stayed
+                 out because every page also says AI can be wrong, and "24/7" carries TRUST.md's
+                 "around the clock on a computer you leave on" in the very next sentence. -->
+            <h1>Want an employee who works <em>24/7?</em></h1>
+            <p class="day-beat is-on" data-act="0" data-at="0.16">Archie gives you one for $30 a month: an AI agent for replies to new leads, unpaid invoices and the calendar. It works around the clock on a computer you leave on.</p>
             <!-- A control for the phone: one sentence ending in the job the phone shows, and a short
                  line per job to pick it, the picked one filling as the tour's clock. The faces it
                  wore until 2026-10-05 went when Jett asked for it more minimal. -->
@@ -361,7 +365,7 @@
             </div>
             <div class="hm-actions">
               <a href="archie/install/" class="btn btn-primary btn-lg">Try it free: 20 jobs a day</a>
-              <a href="archie/business/" class="hm-hero-story day-beat is-on" data-act="0" data-at="0.16">See it run a crew&rsquo;s office&nbsp;&rarr;</a>
+              <a href="archie/personal/" class="hm-hero-story day-beat is-on" data-act="0" data-at="0.16">See it run a business of one&nbsp;&rarr;</a>
             </div>
             <!-- One plain sentence and a list, since 2026-10-05. It was three clipped sentences and a
                  dotted run of promises, both in small gray, and Jett read the pair as "suspicious
@@ -375,7 +379,7 @@
               <li>Your agent&rsquo;s memory stays yours after you cancel</li>
             </ul>
             <!-- The team edition and agent-check routes sit in the pricing band below, so the
-                 opening has one main action and one route into the team story. -->
+                 opening has one main action and one route into the one-person story. -->
             <!-- The phone's scroll cue. A SECOND one, and the duplication is the point: the wide
                  cue stands under the scene in the stage's own grid, and there is no way to put one
                  element both there and inside this caption, which is where "under the button" is.
@@ -1728,7 +1732,7 @@
     <section class="section day-price" aria-labelledby="price-heading">
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Pricing</span>
-        <h2 id="price-heading" class="fade-up">Free to start, then $30 a month, or $99 for a crew.</h2>
+        <h2 id="price-heading" class="fade-up">Free to start, then $30 a month.</h2>
         <div class="hm-plans fade-up">
           <article class="hm-plan">
             <span class="hm-plan-label">Free</span>
@@ -1755,7 +1759,7 @@
             </ul>
           </article>
           <article class="hm-plan">
-            <span class="hm-plan-label">Archie for Business</span>
+            <span class="hm-plan-label">Archie for Teams</span>
             <div class="hm-plan-price">$99<span>a month</span></div>
             <p class="hm-plan-second">+ your team&rsquo;s bill from your AI company</p>
             <ul class="plan-list hm-plan-points">
@@ -1767,7 +1771,7 @@
         </div>
         <p class="hm-plan-note hm-plan-note--alt fade-up">No AI account? <a href="archie/pricing/#ai-included">$59 a month and we buy the AI</a>: up to $25 a month, then it waits. Email and text replies need your own AI account.</p>
         <p class="calm-note calm-note--center fade-up"><a href="archie/pricing/">See full pricing &rarr;</a></p>
-        <p class="hm-plan-note fade-up"><a class="marketplace-text-link" href="archie/business/">Archie for Business&nbsp;&rarr;</a><span class="hm-hero-sep" aria-hidden="true"></span><a class="marketplace-text-link" href="compare/questions-to-ask/">Check the agent you have&nbsp;&rarr;</a></p>
+        <p class="hm-plan-note fade-up"><a class="marketplace-text-link" href="archie/business/">Archie for Teams&nbsp;&rarr;</a><span class="hm-hero-sep" aria-hidden="true"></span><a class="marketplace-text-link" href="compare/questions-to-ask/">Check the agent you have&nbsp;&rarr;</a></p>
       </div>
     </section>
 
@@ -1829,8 +1833,8 @@
         <div>
           <h4 class="footer-col-title">Archie</h4>
           <nav class="footer-nav-links" aria-label="Archie">
-            <a href="archie/business/">For Business</a>
-            <a href="archie/personal/">For Personal</a>
+            <a href="archie/personal/">For One Person</a>
+            <a href="archie/business/">For a Team</a>
             <a href="archie/mobile/">Archie Mobile</a>
             <a href="how-it-works/">How It Works</a>
             <a href="archie/pricing/">Pricing</a>
@@ -1892,11 +1896,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261007-3"></script>
-  <script src="js/ember.js?v=20261007-3" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261007-3"></script>
-  <script src="js/home.js?v=20261007-3" defer></script>
-  <script src="js/hero-dinner.js?v=20261007-3" defer></script>
+  <script src="js/nav.js?v=20261007-4"></script>
+  <script src="js/ember.js?v=20261007-4" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261007-4"></script>
+  <script src="js/home.js?v=20261007-4" defer></script>
+  <script src="js/hero-dinner.js?v=20261007-4" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

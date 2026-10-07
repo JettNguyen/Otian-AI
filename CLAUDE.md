@@ -16,32 +16,48 @@ differently. `python3 scripts/check-links.py` is the other half of the same less
 redirect stub is for other people's links, never for ours, and on 2026-09-14 ten of our own
 pages were still reaching their own content through one.
 
-## Who the site is for: trades and field service (2026-10-07)
+## Who the site is for: the owner who runs the business alone (2026-10-07)
 
-Decided by Jett on 2026-10-07, after an advisor (Peter) told both founders that privacy as the lead
-does not sell and a general-purpose agent loses to Meta and OpenAI on distribution. The site is
-written to the **owner of a trades or field-service business** (contractors, plumbers, site
-services) and whoever runs its office. This **supersedes** "The one buyer" under Sounds like a
-person, "The wedge is one person, personal admin" and "Two starting points, one buyer" under Copy
-conventions, which stay below as history. The homepage day is that owner's workday.
+Decided by Jett on 2026-10-07, in three steps the same evening, after an advisor (Peter) told both
+founders that privacy as the lead does not sell and a general-purpose agent loses to Meta and OpenAI
+on distribution. The site is written to the **owner who runs a small business alone, with no other
+help**. Trades and field service (contractors, plumbers, site services) are the examples the
+homepage day is drawn from. Jett: "they should feel comforted with the idea that they can have an
+ai agent that can handle the busy work without having to pay another person. it's like hiring
+somebody, but for a lot less money." This **supersedes** "The one buyer" under Sounds like a person,
+"The wedge is one person, personal admin" and "Two starting points, one buyer" under Copy
+conventions, which stay below as history.
 
-- **Lead with the office work an agent takes off them**: new leads answered with a drafted reply,
-  quiet leads followed up, jobs moved on the calendar, unpaid invoices chased, crew handoffs kept.
-  Each is a shipped add-on (Lead Desk, Lead Sweep, Waiting On, Owed to Customers, Calendar Manager,
-  Who's Got This, Team Standup). Square and Acuity are built but never run on a real account, so
-  they are named that way or not at all.
-- **Control sells to this owner where privacy did not**: nothing goes to a customer until they say
-  yes. Privacy is a supporting line now, not a headline. **TRUST.md still governs every word**: the
-  lead changed, the truth rules did not, and a claim in a supporting line is held to the same test.
+- **The question the site answers is Jett's**: "want a 24/7 smart and hardworking employee?" The
+  homepage h1 asks it ("Want an employee who works 24/7?") and the next sentence answers with the
+  price and TRUST.md's limit, "around the clock on a computer you leave on". "Smart" stays out:
+  every page also says AI can be wrong. No wage figure appears beside "a lot less" until FACTS.md
+  holds one read at its source; `compare/hiring-an-assistant/` argues the comparison without one.
+- **Lead with the busy work an agent takes off them**: new leads answered with a drafted reply,
+  quiet leads followed up, jobs moved on the calendar, unpaid invoices chased, promises kept. Each
+  is a shipped add-on (Lead Desk, Lead Sweep, Waiting On, Commitment Sweep, Calendar Manager).
+  Square and Acuity are built but never run on a real account, so they are named that way or not
+  at all.
+- **Comfort, never fear.** The Otian Standard's no-fear rule governs: the reader is relieved of
+  work, never told they are behind. Control sells where privacy did not: replies and calendar
+  changes wait for their yes. Privacy is a supporting line now. **TRUST.md still governs every
+  word**: the lead changed, the truth rules did not.
+- **The plans split by headcount, and the names follow (Jett, 2026-10-07).** The $30 plan is
+  **Archie**, for one person, and it is the lead: Patrick and Jehan run their businesses alone on
+  it. The $99 plan is **Archie for Teams**, for when the owner hires. The menus say "For One
+  Person" and "For a Team"; "Personal" is retired as a name (the app never used it). **The rename
+  is staged**: the app, its installer and the Stripe products still say Archie for Business until
+  Jett's next release renames them (keep the bundle identifier, or installs stop updating), so the
+  install pages say so in one line, and the pages that describe the app as it ships (trust/,
+  terms-of-service/, help/, account/, activity/, admin/) keep the old name until that release. The
+  URLs stay `archie/personal/` and `archie/business/`.
 - **The main button stays Download Archie.** Jett: owners hesitate at a call when the product works
   right now. The free call (`services/`) is the second route, never the first.
-- **Archie for one person stays, off the lead.** A solo owner is its buyer as much as anybody's
-  personal admin, so its page, price and menu row stay. The team edition is the lead story.
-- **Patrick is the proof** (Westway Site Services, a site-services company): lead with him.
+- **Patrick is the proof** (Westway Site Services, a site-services company he runs): lead with him.
 - **Not adopted, on purpose**: the advisor's "log traces as a data moat". It reverses "No Otian
   custodian" and every page built on it, so it is a product decision for Jett, never a copy change.
 - **The tagline stays the brand line, not the h1.** "Don't rent your agent. Own it." remains in the
-  header lockup; the homepage h1 says what the owner gets, per "Above the fold sells" below.
+  header lockup; the homepage h1 asks the question above.
 
 ## Trust claims: read TRUST.md before writing copy
 
@@ -620,7 +636,7 @@ sizes are on the page at rest, and the pick only lights one.
   screen sits inside an opaque bezel where a cast shadow would never be seen. It replaced
   `--shadow-lamp`, which was the same idea on the window alone, in the room's terracotta, flipped
   on by a class at one scroll notch.
-- **Archie has two editions, and they are siblings under `archie/`.** `archie/personal/` and
+- **Archie has two editions, and they are siblings under `archie/`.** (Renamed 2026-10-07: Archie, for one person, and Archie for Teams; see the top of this file. The rest of this paragraph predates the rename.) `archie/personal/` and
   `archie/business/` are the same app with different ceilings (10 agents and one person per
   agent, against 50 agents and no seat count), so neither is the default and neither is a
   service. Business sat under the Services nav until 2026-09-14, which filed an edition of the

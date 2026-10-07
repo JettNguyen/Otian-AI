@@ -1956,6 +1956,21 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
+### ✅ Around the clock, on a computer you leave on (entry written 2026-10-07)
+
+**Approved wording:** "It works around the clock on a computer you leave on." A headline may ask
+"Want an employee who works 24/7?" only when this sentence, or one that says the same limit, is
+the very next thing the reader sees.
+
+**Why it's true:** the entry above. Routines fire on their schedule with nobody present, mail watch
+reads new mail as it arrives, and since 2026-09-16 (Mac) and 2026-09-19 (Windows) a routine can
+wake a sleeping computer ("Waking the computer for a routine", below).
+
+**Required clause, every time:** the computer has to be on and Archie open. A shut-down computer
+stays off, and the agent answers nothing while it is. ⛔ Never "24/7" alone, never "never sleeps",
+and never set beside a cloud agent as if the two were the same: `compare/cloud-agents/` draws the
+lid closing and their agent carrying on, and that difference is true.
+
 ### ✅ Archie is free on an AI account of your own, with a limit of 20 jobs a day (SHIPPED 2026-09-17)
 
 **Approved wording:** "Archie is free on an AI account of your own. Paste a key from an AI company

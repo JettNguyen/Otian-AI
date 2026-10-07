@@ -301,7 +301,7 @@ QUESTIONS = [
      "is why there is no Otian copy of what it reads. A hosted agent platform cannot make that "
      "claim, because the runtime that assembles the prompt is theirs."),
     ("What does it cost?",
-     "$30 a month, or $299 a year. Archie for Business is $99 a month or $999 a year. The AI "
+     "$30 a month, or $299 a year. Archie for Teams is $99 a month or $999 a year. The AI "
      "itself is billed by your AI provider, to you, at their price: we add nothing to it. "
      "There is a plan with the AI included at $59 a month or $599 a year, which carries $25 of "
      "usage a month; email and text reading need your own AI key. Archie is in beta, and plans are on sale now. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan."),
@@ -324,14 +324,14 @@ QUESTIONS = [
      "the key, and the provider bills you directly at their price."),
     ("How many agents and people?",
      "The plan runs 10 agents; the free trial runs 1. In the personal edition one agent answers "
-     "one person, enforced in code. Archie for Business runs 50 agents and puts no ceiling on "
+     "one person, enforced in code. Archie for Teams runs 50 agents and puts no ceiling on "
      "how many people an agent answers."),
     ("Is there a free plan?",
      "Archie is free on an AI account of your own, in the personal edition: 20 jobs a day, and "
      "the count starts again at midnight. A job is one piece of work: a reply to you, a routine "
      "running, or an email it reacts to. A plan takes the limit off for $30 a month. Separately, "
      "a new install can try Archie for up to 14 days on our starter credits, with no AI account "
-     "and no card. Archie for Business has no free tier."),
+     "and no card. Archie for Teams has no free tier."),
     ("What can I check for myself?",
      "All of it, and that is the point. https://otianai.com/trust/ lists every claim on this "
      "site with a pointer to the code that makes it true, and carries a 10-minute walkthrough "

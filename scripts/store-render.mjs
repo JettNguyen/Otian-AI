@@ -231,8 +231,8 @@ function more(item, ctx) {
 /** Where the sheet sends somebody to get the add-on, in place of the app's Add button. */
 function getIt(key, ctx) {
   if (ctx.data.businessOnly.includes(key)) {
-    return '<div class="sv-get"><p class="sv-get-line">Included with Archie for Business.</p>' +
-      `<a class="btn btn-primary sv-get-btn" href="${ctx.up}archie/business/">See Archie for Business</a></div>`;
+    return '<div class="sv-get"><p class="sv-get-line">Included with Archie for Teams.</p>' +
+      `<a class="btn btn-primary sv-get-btn" href="${ctx.up}archie/business/">See Archie for Teams</a></div>`;
   }
   return '<div class="sv-get"><p class="sv-get-line">Every add-on is included with Archie.</p>' +
     `<a class="btn btn-primary sv-get-btn" href="${ctx.up}archie/install/">${DOWNLOAD}Download Archie</a></div>`;

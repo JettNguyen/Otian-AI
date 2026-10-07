@@ -287,14 +287,14 @@
           <div class="hm-picks" role="group" aria-label="Pick a scene">
             <button class="hm-pick" type="button" style="--s:0" data-scene="0" aria-label="A spreadsheet written"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3.5h7l5 5v12H7z"/><path d="M14 3.5v5h5"/></svg><span>File</span><i aria-hidden="true"><b></b></i></button>
             <button class="hm-pick" type="button" style="--s:1" data-scene="1" aria-label="A text answered"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 6.5h16v10H9.5L5.5 20v-3.5H4z"/></svg><span>Text</span><i aria-hidden="true"><b></b></i></button>
-            <button class="hm-pick" type="button" style="--s:2" data-scene="2" aria-label="The doctor visit, read back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M9 3.5h6v3H9z"/><path d="M12 10.5v6M9 13.5h6"/></svg><span>Doctor</span><i aria-hidden="true"><b></b></i></button>
+            <button class="hm-pick" type="button" style="--s:2" data-scene="2" aria-label="The leads that went quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21 20a6 6 0 0 0-4-5.6"/></svg><span>Leads</span><i aria-hidden="true"><b></b></i></button>
             <button class="hm-pick" type="button" style="--s:3" data-scene="3" aria-label="A promise caught"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.5l2.3 2.3 4.7-5"/></svg><span>Promise</span><i aria-hidden="true"><b></b></i></button>
             <button class="hm-pick" type="button" style="--s:4" data-scene="4" aria-label="Which step you are on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></svg><span>Steps</span><i aria-hidden="true"><b></b></i></button>
             <button class="hm-pick" type="button" style="--s:5" data-scene="5" aria-label="A meeting prepped"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Prep</span><i aria-hidden="true"><b></b></i></button>
             <button class="hm-pick" type="button" style="--s:6" data-scene="6" aria-label="A website used"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.6 2.6 14.4 0 17M12 3.5c-2.6 2.6-2.6 14.4 0 17"/></svg><span>Website</span><i aria-hidden="true"><b></b></i></button>
           </div>
 
-          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You ask for your bills in a spreadsheet and it sends bills.xlsx into the chat, saying a copy is in your Archie folder. A text from Dana arrives with the reply already drafted, under Send, Edit it and Dismiss. You ask what the doctor said about your knee and it reads back the dated note. At ten to nine it says a promise is due today: the lease you told Todd you would send. You ask where you are on a passport renewal and it says step three of five and what comes next. Half an hour before a meeting with Sarah it sends the prep, including what she has asked about twice. And you ask about a table for four at Rosa&rsquo;s and it finds two times and asks before booking one.">
+          <div class="hm-pz hm-pz--hero" role="img" aria-label="An illustration of a phone chat, cycling through seven things an agent does, each captioned under the phone. You ask for your unpaid invoices in a spreadsheet and it sends unpaid-invoices.xlsx into the chat, saying a copy is in your Archie folder. A text from Dana about a leak arrives with the reply already drafted, under Send, Edit it and Dismiss. You ask which leads went quiet and it names two, with how many days each, and offers to draft a nudge. At ten to nine it says a promise is due today: the estimate you told Ellen you would send. You ask where you are on a permit and it says step three of five and what comes next. Half an hour before a meeting with Sarah it sends the prep, including what she has asked about twice. And you ask about renting a mini excavator and it finds two pickup times and asks before booking one.">
           <div class="hm-pz-head" aria-hidden="true">
             <img class="hm-pz-word" src="../assets/archie-text.svg" width="2300" height="900" alt="Archie" />
             <span class="hm-pz-agent"><span class="hm-pz-facewrap"><span class="hm-pz-face" data-ember="terracotta.peak.pill.none"></span><i class="hm-pz-dot"></i></span><b>Ember</b></span>
@@ -306,29 +306,30 @@
               <!-- 1. A spreadsheet, written and sent. export.rs writes one of eleven inert kinds (.xlsx
                  among them), sends the file into the chat, and the instructions to the model are to say
                  in one line what it is and that a copy is in the Archie folder. The list it reads is
-                 Bills &amp; Subscriptions, which is why no mail is needed. TRUST.md, "What your agent
+                 Waiting On's (its `waiting` collection, one row per invoice it found in sent mail), which
+                 is why no mail is read for the answer. Bills &amp; Subscriptions until 2026-10-07. TRUST.md, "What your agent
                  can write to disk": the name is the model's and the folder never is. The caption used
                  to end on "never a PDF", which was true until PDF and slide decks shipped on
                  2026-09-16; the figure further down the page was updated that day and this was not. -->
               <div class="hm-scene" style="--s:0">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Put my bills in a spreadsheet.</p></div>
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Put my unpaid invoices in a spreadsheet.</p></div>
                     <time>9:31 am</time>
                   </div>
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
                       <div class="hm-bubble">
-                        <div class="hm-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3.5h7l5 5v12H7z"/><path d="M14 3.5v5h5"/><path d="M9.5 13h5M9.5 16.5h5"/></svg><span><b>bills.xlsx</b><i>Spreadsheet</i></span></div>
-                        <p class="hm-mini-quote">Every bill on your list, one a row, with the next date. A copy is in your Archie folder too.</p>
+                        <div class="hm-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3.5h7l5 5v12H7z"/><path d="M14 3.5v5h5"/><path d="M9.5 13h5M9.5 16.5h5"/></svg><span><b>unpaid-invoices.xlsx</b><i>Spreadsheet</i></span></div>
+                        <p class="hm-mini-quote">Every unpaid invoice on your list, one a row, with how late it is. A copy is in your Archie folder too.</p>
                       </div>
                       <time>9:31 am</time>
                     </div>
                   </div>
                 </div>
                   <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">P</i><i style="--i:1">u</i><i style="--i:2">t</i><i style="--i:3"> </i><i style="--i:4">m</i><i style="--i:5">y</i><i style="--i:6"> </i><i style="--i:7">b</i><i style="--i:8">i</i><i style="--i:9">l</i><i style="--i:10">l</i><i style="--i:11">s</i><i style="--i:12"> </i><i style="--i:13">i</i><i style="--i:14">n</i><i style="--i:15"> </i><i style="--i:16">a</i><i style="--i:17"> </i><i style="--i:18">s</i><i style="--i:19">p</i><i style="--i:20">r</i><i style="--i:21">e</i><i style="--i:22">a</i><i style="--i:23">d</i><i style="--i:24">s</i><i style="--i:25">h</i><i style="--i:26">e</i><i style="--i:27">e</i><i style="--i:28">t</i><i style="--i:29">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">P</i><i style="--i:1">u</i><i style="--i:2">t</i><i style="--i:3"> </i><i style="--i:4">m</i><i style="--i:5">y</i><i style="--i:6"> </i><i style="--i:7">u</i><i style="--i:8">n</i><i style="--i:9">p</i><i style="--i:10">a</i><i style="--i:11">i</i><i style="--i:12">d</i><i style="--i:13"> </i><i style="--i:14">i</i><i style="--i:15">n</i><i style="--i:16">v</i><i style="--i:17">o</i><i style="--i:18">i</i><i style="--i:19">c</i><i style="--i:20">e</i><i style="--i:21">s</i><i style="--i:22"> </i><i style="--i:23">i</i><i style="--i:24">n</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27"> </i><i style="--i:28">s</i><i style="--i:29">p</i><i style="--i:30">r</i><i style="--i:31">e</i><i style="--i:32">a</i><i style="--i:33">d</i><i style="--i:34">s</i><i style="--i:35">h</i><i style="--i:36">e</i><i style="--i:37">e</i><i style="--i:38">t</i><i style="--i:39">.</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
                     <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
                 </div>
               </div>
@@ -343,10 +344,10 @@
                     <div class="hm-turn hm-in" style="--d:2">
                       <div class="hm-bubble">
                         <p class="hm-mini-quote"><b>New text</b> from Dana</p>
-                        <p class="hm-mini-quote hm-em">Still on for Saturday?</p>
+                        <p class="hm-mini-quote hm-em">Can you look at a leak under our sink today?</p>
                         <div class="hm-draft">
                           <span class="hm-draft-label"><b>Draft reply</b> (to Dana):</span>
-                          <p class="hm-mini-quote">Yes, 11 at the park. I&rsquo;ll bring the coffee.</p>
+                          <p class="hm-mini-quote">Yes, I can be there by 3. I&rsquo;ll text when I&rsquo;m on the way.</p>
                         </div>
                       </div>
                       <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Send</span><span class="hm-msg-btn">Edit it</span><span class="hm-msg-btn">Dismiss</span></div>
@@ -359,26 +360,26 @@
                     <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
                 </div>
               </div>
-              <!-- 3. The appointment you told it about, read back. Health Record saves a dated visit record
-                 and the running history of one problem; the answer here is that record and nothing
-                 else. The catalog copy sets the line the caption repeats: it is a record, not a doctor,
-                 and it never diagnoses or advises. -->
+              <!-- 3. The leads that went quiet. Lead Desk keeps every possible customer in one list, moves
+                 each along from what the mail says, and says who has gone quiet; the nudge it offers is
+                 a draft, like every reply. Until 2026-10-07 this scene was Health Record reading back a
+                 doctor's visit, which was the personal-admin reader the site was written to then. -->
               <div class="hm-scene" style="--s:2">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">What did the doctor say about my knee?</p></div>
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Which leads went quiet?</p></div>
                     <time>7:40 pm</time>
                   </div>
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Aug 14: rest it two weeks, ice at night, and back in if it swells.</p></div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Todd, the deck quote, 8 days. The Meyers, the fence, 5 days. Want a nudge drafted for each?</p></div>
                       <time>7:40 pm</time>
                     </div>
                   </div>
                 </div>
                   <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">a</i><i style="--i:3">t</i><i style="--i:4"> </i><i style="--i:5">d</i><i style="--i:6">i</i><i style="--i:7">d</i><i style="--i:8"> </i><i style="--i:9">t</i><i style="--i:10">h</i><i style="--i:11">e</i><i style="--i:12"> </i><i style="--i:13">d</i><i style="--i:14">o</i><i style="--i:15">c</i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18">r</i><i style="--i:19"> </i><i style="--i:20">s</i><i style="--i:21">a</i><i style="--i:22">y</i><i style="--i:23"> </i><i style="--i:24">a</i><i style="--i:25">b</i><i style="--i:26">o</i><i style="--i:27">u</i><i style="--i:28">t</i><i style="--i:29"> </i><i style="--i:30">m</i><i style="--i:31">y</i><i style="--i:32"> </i><i style="--i:33">k</i><i style="--i:34">n</i><i style="--i:35">e</i><i style="--i:36">e</i><i style="--i:37">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">i</i><i style="--i:3">c</i><i style="--i:4">h</i><i style="--i:5"> </i><i style="--i:6">l</i><i style="--i:7">e</i><i style="--i:8">a</i><i style="--i:9">d</i><i style="--i:10">s</i><i style="--i:11"> </i><i style="--i:12">w</i><i style="--i:13">e</i><i style="--i:14">n</i><i style="--i:15">t</i><i style="--i:16"> </i><i style="--i:17">q</i><i style="--i:18">u</i><i style="--i:19">i</i><i style="--i:20">e</i><i style="--i:21">t</i><i style="--i:22">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
                     <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
                 </div>
               </div>
@@ -393,7 +394,7 @@
                     <div class="hm-turn hm-in" style="--d:2">
                       <div class="hm-bubble">
                         <p class="hm-mini-quote"><b>Due today</b></p>
-                        <p class="hm-mini-quote">The lease to Todd. You told him Friday, on the 9th. Nothing has gone out yet.</p>
+                        <p class="hm-mini-quote">The estimate to Ellen. You told her Friday, on the 9th. Nothing has gone out yet.</p>
                       </div>
                       <time>8:50 am</time>
                     </div>
@@ -410,19 +411,19 @@
               <div class="hm-scene" style="--s:4">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Where am I on the passport renewal?</p></div>
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Where am I on the Henderson permit?</p></div>
                     <time>12:15 pm</time>
                   </div>
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Step 3 of 5. Photos done, form mailed Monday. Next: book the appointment.</p></div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Step 3 of 5. Application in, fee paid Monday. Next: send the site plan.</p></div>
                       <time>12:15 pm</time>
                     </div>
                   </div>
                 </div>
                   <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">e</i><i style="--i:5"> </i><i style="--i:6">a</i><i style="--i:7">m</i><i style="--i:8"> </i><i style="--i:9">I</i><i style="--i:10"> </i><i style="--i:11">o</i><i style="--i:12">n</i><i style="--i:13"> </i><i style="--i:14">t</i><i style="--i:15">h</i><i style="--i:16">e</i><i style="--i:17"> </i><i style="--i:18">p</i><i style="--i:19">a</i><i style="--i:20">s</i><i style="--i:21">s</i><i style="--i:22">p</i><i style="--i:23">o</i><i style="--i:24">r</i><i style="--i:25">t</i><i style="--i:26"> </i><i style="--i:27">r</i><i style="--i:28">e</i><i style="--i:29">n</i><i style="--i:30">e</i><i style="--i:31">w</i><i style="--i:32">a</i><i style="--i:33">l</i><i style="--i:34">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">W</i><i style="--i:1">h</i><i style="--i:2">e</i><i style="--i:3">r</i><i style="--i:4">e</i><i style="--i:5"> </i><i style="--i:6">a</i><i style="--i:7">m</i><i style="--i:8"> </i><i style="--i:9">I</i><i style="--i:10"> </i><i style="--i:11">o</i><i style="--i:12">n</i><i style="--i:13"> </i><i style="--i:14">t</i><i style="--i:15">h</i><i style="--i:16">e</i><i style="--i:17"> </i><i style="--i:18">H</i><i style="--i:19">e</i><i style="--i:20">n</i><i style="--i:21">d</i><i style="--i:22">e</i><i style="--i:23">r</i><i style="--i:24">s</i><i style="--i:25">o</i><i style="--i:26">n</i><i style="--i:27"> </i><i style="--i:28">p</i><i style="--i:29">e</i><i style="--i:30">r</i><i style="--i:31">m</i><i style="--i:32">i</i><i style="--i:33">t</i><i style="--i:34">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
                     <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
                 </div>
               </div>
@@ -437,7 +438,7 @@
                     <div class="hm-turn hm-in" style="--d:2">
                       <div class="hm-bubble">
                         <p class="hm-mini-quote"><b>Sarah at 2:00</b>, about the quote</p>
-                        <p class="hm-mini-quote">The revised one went out Tuesday. She has asked about delivery dates twice, so have a date ready.</p>
+                        <p class="hm-mini-quote">The revised one went out Tuesday. She has asked about a start date twice, so have one ready.</p>
                       </div>
                       <time>1:30 pm</time>
                     </div>
@@ -458,20 +459,20 @@
               <div class="hm-scene" style="--s:6">
                 <div class="hm-msg">
                   <div class="hm-turn hm-turn--out hm-fly" style="--d:6">
-                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Is there a table for four at Rosa&rsquo;s Friday at 7?</p></div>
+                    <div class="hm-bubble hm-bubble--out"><p class="hm-mini-quote">Is a mini excavator free Friday at Elm Rentals?</p></div>
                     <time>6:05 pm</time>
                   </div>
                   <div class="hm-reply">
                     <div class="hm-typing hm-type" style="--d:7"><i></i><i></i><i></i></div>
                     <div class="hm-turn hm-in" style="--d:9">
-                      <div class="hm-bubble"><p class="hm-mini-quote">Rosa&rsquo;s has 7:15 and 8:30 on Friday for four. Book the 7:15?</p></div>
+                      <div class="hm-bubble"><p class="hm-mini-quote">Elm Rentals has one Friday, for pickup at 7:00 or 1:00. Book the 7:00?</p></div>
                       <div class="hm-msg-btns"><span class="hm-msg-btn hm-msg-btn--go">Book it</span><span class="hm-msg-btn">Leave it</span></div>
                       <time>6:05 pm</time>
                     </div>
                   </div>
                 </div>
                   <div class="hm-composer" aria-hidden="true">
-                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">I</i><i style="--i:1">s</i><i style="--i:2"> </i><i style="--i:3">t</i><i style="--i:4">h</i><i style="--i:5">e</i><i style="--i:6">r</i><i style="--i:7">e</i><i style="--i:8"> </i><i style="--i:9">a</i><i style="--i:10"> </i><i style="--i:11">t</i><i style="--i:12">a</i><i style="--i:13">b</i><i style="--i:14">l</i><i style="--i:15">e</i><i style="--i:16"> </i><i style="--i:17">f</i><i style="--i:18">o</i><i style="--i:19">r</i><i style="--i:20"> </i><i style="--i:21">f</i><i style="--i:22">o</i><i style="--i:23">u</i><i style="--i:24">r</i><i style="--i:25"> </i><i style="--i:26">a</i><i style="--i:27">t</i><i style="--i:28"> </i><i style="--i:29">R</i><i style="--i:30">o</i><i style="--i:31">s</i><i style="--i:32">a</i><i style="--i:33">&rsquo;</i><i style="--i:34">s</i><i style="--i:35"> </i><i style="--i:36">F</i><i style="--i:37">r</i><i style="--i:38">i</i><i style="--i:39">d</i><i style="--i:40">a</i><i style="--i:41">y</i><i style="--i:42"> </i><i style="--i:43">a</i><i style="--i:44">t</i><i style="--i:45"> </i><i style="--i:46">7</i><i style="--i:47">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
+                    <div class="hm-composer-field"><span class="hm-typed"><i style="--i:0">I</i><i style="--i:1">s</i><i style="--i:2"> </i><i style="--i:3">a</i><i style="--i:4"> </i><i style="--i:5">m</i><i style="--i:6">i</i><i style="--i:7">n</i><i style="--i:8">i</i><i style="--i:9"> </i><i style="--i:10">e</i><i style="--i:11">x</i><i style="--i:12">c</i><i style="--i:13">a</i><i style="--i:14">v</i><i style="--i:15">a</i><i style="--i:16">t</i><i style="--i:17">o</i><i style="--i:18">r</i><i style="--i:19"> </i><i style="--i:20">f</i><i style="--i:21">r</i><i style="--i:22">e</i><i style="--i:23">e</i><i style="--i:24"> </i><i style="--i:25">F</i><i style="--i:26">r</i><i style="--i:27">i</i><i style="--i:28">d</i><i style="--i:29">a</i><i style="--i:30">y</i><i style="--i:31"> </i><i style="--i:32">a</i><i style="--i:33">t</i><i style="--i:34"> </i><i style="--i:35">E</i><i style="--i:36">l</i><i style="--i:37">m</i><i style="--i:38"> </i><i style="--i:39">R</i><i style="--i:40">e</i><i style="--i:41">n</i><i style="--i:42">t</i><i style="--i:43">a</i><i style="--i:44">l</i><i style="--i:45">s</i><i style="--i:46">?</i><b class="hm-caret" aria-hidden="true"></b></span><span class="hm-composer-hint">Message</span></div>
                     <span class="hm-send" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V6M6.5 11.5L12 6l5.5 5.5"/></svg></span>
                 </div>
               </div>
@@ -483,7 +484,7 @@
           <div class="hm-caps" aria-hidden="true">
             <p class="hm-cap" style="--s:0">Ask for a spreadsheet, a PDF or a slide deck, and it writes the real file and sends it to you. It makes eleven kinds, and none is a file your computer would run.</p>
             <p class="hm-cap" style="--s:1">On a Mac, it reads a text as it lands and writes the reply. Nothing sends until you press Send.</p>
-            <p class="hm-cap" style="--s:2">Tell it what the doctor said on the way out. It keeps a dated record and hands it back when you ask. It is a record, not a doctor.</p>
+            <p class="hm-cap" style="--s:2">It keeps every lead in one list, moved along by your mail, and tells you who has gone quiet. A nudge is a draft until you send it.</p>
             <p class="hm-cap" style="--s:3">Every morning it re-reads your sent mail for promises you made, and says which one is due. A morning with nothing owed stays quiet.</p>
             <p class="hm-cap" style="--s:4">It keeps the map of a long process: the step you are on, the papers you still need, and what comes next.</p>
             <p class="hm-cap" style="--s:5">Half an hour before a meeting, the prep arrives: who is coming, what it is about, and the one thing worth having ready.</p>

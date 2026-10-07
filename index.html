@@ -1159,8 +1159,15 @@
             <circle class="mn-dot mn-dot--b" r="5" style="offset-path:path('M248,119 L368,119')"/>
           </svg>
           <!-- =================== MOBILE =================== -->
-          <svg class="explain-svg--mobile" viewBox="0 0 340 338" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="mnm-t">Two columns with one gate between them. On the left, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move Thursday&rsquo;s two o&rsquo;clock. Each one runs along its own line to a gate, where you are standing, and stops there. On the right, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
+          <!-- The phone's drawing is the wide one turned a quarter: the two jobs above, the gate
+               across the line they come down, you standing at the gate's end, and the two results
+               below, faint. The gate stops short of you on purpose (2026-10-07): it ran to x 300
+               through your head at 272, and a line that long with a dot on it read as a slider.
+               The arrowhead is this drawing's own marker, because the wide one's sits inside an
+               svg that is display:none here, and a marker in a hidden svg is not drawn. -->
+          <svg class="explain-svg--mobile" viewBox="0 0 340 366" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
+            <title id="mnm-t">Two rows with one gate between them. Above, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move Thursday&rsquo;s two o&rsquo;clock. They run down one line to a gate, where you are standing, and stop there. Below, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
+            <defs><marker id="mnm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".55"/></marker></defs>
 
             <text class="mn-label" x="14" y="22">YOUR AGENT IS READY TO</text>
 
@@ -1171,16 +1178,18 @@
             <g class="mn-glyph" transform="translate(28,110) scale(.75)"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3,10 H21 M8,3 V7 M16,3 V7"/></g>
             <text class="mn-body" x="58" y="124">Move Thursday&rsquo;s 2:00</text>
 
-            <path class="mn-wire" d="M170,150 L170,178" marker-end="url(#mn-ah)"/>
-            <path class="mn-gate" d="M40,188 H300"/>
-            <path class="mn-wire mn-wire--past" d="M170,198 L170,272"/>
+            <path class="mn-wire" d="M170,150 L170,180" marker-end="url(#mnm-ah)"/>
+            <path class="mn-gate" d="M96,188 H244"/>
+            <path class="mn-wire mn-wire--past" d="M170,196 L170,274"/>
 
             <g class="mn-glyph"><circle cx="272" cy="188" r="11"/><path d="M253,218 a19,19 0 0 1 38,0"/></g>
             <text class="mn-name" x="272" y="240">You</text>
 
             <text class="mn-label" x="14" y="266">AFTER YOUR YES</text>
-            <rect class="mn-chip" x="12" y="278" width="316" height="40" rx="10"/>
-            <text class="mn-chiptext" x="170" y="303">Sent, moved</text>
+            <rect class="mn-chip" x="12" y="278" width="316" height="34" rx="10"/>
+            <text class="mn-chiptext" x="170" y="300">Sent</text>
+            <rect class="mn-chip" x="12" y="324" width="316" height="34" rx="10"/>
+            <text class="mn-chiptext" x="170" y="346">Moved</text>
 
             <circle class="mn-dot" r="5" style="offset-path:path('M170,150 L170,188')"/>
           </svg>

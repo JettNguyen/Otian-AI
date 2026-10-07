@@ -1,0 +1,1152 @@
+{
+  "_generated": "By scripts/gen-areas.mjs from the Archie app's src/app/areas.ts, lives.ts, packs.ts, voice-looks.ts and data/marketplace. Do not hand-edit.",
+  "areas": [
+    {
+      "id": "work",
+      "name": "Work",
+      "hue": "blue",
+      "marks": [
+        "mail",
+        "calendar",
+        "list"
+      ],
+      "start": [
+        "skill:email-manager",
+        "skill:commitment-keeper",
+        "routine:commitment-sweep",
+        "skill:waiting-on",
+        "routine:reply-watch",
+        "skill:task-manager",
+        "specialist:writer"
+      ],
+      "sample": {
+        "from": "skill:waiting-on",
+        "reply": "Dana, about the proposal. Six days now.",
+        "ask": "Who owes me a reply?"
+      },
+      "voice": {
+        "id": "exec-concierge",
+        "line": "Yes, but move it to 20 minutes."
+      },
+      "look": "glass"
+    },
+    {
+      "id": "money",
+      "name": "Money",
+      "hue": "green",
+      "marks": [
+        "money",
+        "chart"
+      ],
+      "start": [
+        "skill:bill-tracker",
+        "routine:bill-reminders",
+        "skill:money-in-out",
+        "routine:receipt-sweep",
+        "skill:card-rewards",
+        "routine:quarterly-card-categories"
+      ],
+      "sample": {
+        "from": "skill:bill-tracker",
+        "reply": "Netflix, on the 3rd. $15.49.",
+        "ask": "What’s due soon?"
+      },
+      "voice": {
+        "id": "the-bookkeeper",
+        "line": "$1,043 on food last month. $612 groceries, $431 eating out."
+      },
+      "look": "art"
+    },
+    {
+      "id": "home",
+      "name": "Home",
+      "hue": "teal",
+      "marks": [
+        "home"
+      ],
+      "start": [
+        "skill:home-maintenance",
+        "routine:home-checkup",
+        "skill:meal-planner",
+        "skill:birthday-keeper",
+        "routine:birthday-heads-up",
+        "skill:my-documents"
+      ],
+      "sample": {
+        "from": "skill:home-maintenance",
+        "reply": "The furnace filter, on Saturday.",
+        "ask": "What’s coming up?"
+      },
+      "voice": {
+        "id": "house-manager",
+        "line": "The fig wants water today."
+      },
+      "look": "glass"
+    },
+    {
+      "id": "health",
+      "name": "Health",
+      "hue": "terracotta",
+      "marks": [
+        "pulse"
+      ],
+      "start": [
+        "skill:home-workout",
+        "routine:workout-nudge",
+        "skill:habit-tracker",
+        "routine:habit-check-in"
+      ],
+      "sample": {
+        "from": "skill:habit-tracker",
+        "reply": "Logged. That’s 12 days in a row.",
+        "ask": "Did my run today"
+      },
+      "voice": {
+        "id": "hype-coach",
+        "line": "That’s the thing you’d been circling for nine days. Done."
+      },
+      "look": "art"
+    },
+    {
+      "id": "school",
+      "name": "School",
+      "hue": "gold",
+      "marks": [
+        "book"
+      ],
+      "start": [
+        "skill:my-classes",
+        "routine:class-week",
+        "routine:coursework-due",
+        "routine:term-dates",
+        "skill:class-planner",
+        "skill:learning-coach"
+      ],
+      "sample": {
+        "from": "skill:my-classes",
+        "reply": "Problem set 5, on Thursday.",
+        "ask": "What’s due this week?"
+      },
+      "voice": {
+        "id": "study-partner",
+        "line": "Okay, picture standing between two mirrors."
+      },
+      "look": "glass"
+    },
+    {
+      "id": "fun",
+      "name": "News & fun",
+      "hue": "iris",
+      "marks": [
+        "news"
+      ],
+      "start": [
+        "skill:news-briefing",
+        "routine:morning-news",
+        "skill:sports-follow",
+        "routine:sports-digest",
+        "skill:daily-trivia",
+        "skill:word-of-the-day"
+      ],
+      "sample": {
+        "from": "skill:daily-trivia",
+        "reply": "Which planet has the shortest day?",
+        "ask": "Trivia"
+      },
+      "voice": {
+        "id": "the-morning-show",
+        "line": "That’s the morning. Back at seven tomorrow."
+      },
+      "look": "reply"
+    },
+    {
+      "id": "writing",
+      "name": "Writing",
+      "hue": "rose",
+      "marks": [
+        "pen"
+      ],
+      "start": [
+        "specialist:writer",
+        "skill:writing-desk",
+        "skill:reply-helper",
+        "skill:text-replies",
+        "skill:ready-to-post",
+        "skill:social-posting"
+      ],
+      "sample": {
+        "from": "skill:text-replies",
+        "reply": "Emily asked about Saturday. A reply is ready for you to send."
+      },
+      "voice": {
+        "id": "the-editor",
+        "line": "Do not send this tonight."
+      },
+      "look": "glass"
+    },
+    {
+      "id": "clients",
+      "name": "Sales & clients",
+      "hue": "plum",
+      "marks": [
+        "chart",
+        "people"
+      ],
+      "start": [
+        "skill:lead-desk",
+        "routine:lead-sweep",
+        "skill:campaign-watch",
+        "routine:campaign-check",
+        "skill:common-questions",
+        "skill:booking-watch"
+      ],
+      "sample": {
+        "from": "skill:lead-desk",
+        "reply": "Sam, since the roof quote.",
+        "ask": "Who has gone quiet?"
+      },
+      "voice": {
+        "id": "owner-and-a-date",
+        "line": "Send Emily the invoice. You, tomorrow."
+      },
+      "look": "art"
+    }
+  ],
+  "voicesTile": {
+    "faces": [
+      "dry",
+      "the-cat",
+      "hype-coach"
+    ],
+    "says": {
+      "id": "dry",
+      "line": "You have eighteen minutes to eat."
+    }
+  },
+  "areaOf": {
+    "skill:email-manager": "work",
+    "skill:waiting-on": "work",
+    "skill:inbox-rules": "work",
+    "routine:inbox-sweep": "work",
+    "routine:reply-watch": "work",
+    "skill:calendar-management": "work",
+    "skill:find-a-time": "work",
+    "routine:scheduling-watch": "work",
+    "routine:daily-briefing": "work",
+    "skill:honest-week": "work",
+    "routine:week-check": "work",
+    "routine:weekly-review": "work",
+    "skill:task-manager": "work",
+    "skill:todoist": "work",
+    "skill:google-tasks": "work",
+    "routine:daily-task-digest": "work",
+    "skill:commitment-keeper": "work",
+    "routine:commitment-sweep": "work",
+    "skill:meeting-prep": "work",
+    "routine:meeting-briefing": "work",
+    "skill:fireflies": "work",
+    "routine:fireflies-sync": "work",
+    "skill:form-filler": "work",
+    "skill:github-keeper": "work",
+    "skill:gitlab-keeper": "work",
+    "skill:linear-keeper": "work",
+    "skill:notion-keeper": "work",
+    "skill:airtable-keeper": "work",
+    "specialist:researcher": "work",
+    "specialist:deep-researcher": "work",
+    "skill:job-hunt": "work",
+    "routine:application-sweep": "work",
+    "routine:team-standup": "work",
+    "skill:new-teammate-welcome": "work",
+    "skill:whos-got-this": "work",
+    "skill:bill-tracker": "money",
+    "routine:bill-reminders": "money",
+    "skill:money-in-out": "money",
+    "routine:receipt-sweep": "money",
+    "skill:card-rewards": "money",
+    "routine:quarterly-card-categories": "money",
+    "skill:savings-goals": "money",
+    "skill:statement-collector": "money",
+    "routine:statement-round": "money",
+    "skill:clean-books": "money",
+    "skill:warranty-returns": "money",
+    "routine:return-window-watch": "money",
+    "skill:price-watch": "money",
+    "routine:price-check": "money",
+    "skill:market-digest": "money",
+    "routine:market-morning": "money",
+    "skill:ynab-keeper": "money",
+    "skill:lunch-money-keeper": "money",
+    "skill:splitwise-keeper": "money",
+    "skill:mercury-watch": "money",
+    "skill:square-keeper": "money",
+    "skill:revenue-watch": "money",
+    "routine:revenue-digest": "money",
+    "skill:home-maintenance": "home",
+    "routine:home-checkup": "home",
+    "skill:meal-planner": "home",
+    "skill:birthday-keeper": "home",
+    "routine:birthday-heads-up": "home",
+    "skill:my-documents": "home",
+    "skill:paperwork": "home",
+    "skill:the-handover": "home",
+    "skill:plant-pet-care": "home",
+    "routine:care-reminders": "home",
+    "skill:school-family": "home",
+    "routine:school-week": "home",
+    "skill:car-keeper": "home",
+    "routine:car-checkup": "home",
+    "skill:package-tracker": "home",
+    "skill:stay-in-touch": "home",
+    "routine:stay-in-touch-nudge": "home",
+    "skill:circle-back": "home",
+    "routine:circle-back-nudge": "home",
+    "skill:home-lights": "home",
+    "skill:house-watch": "home",
+    "routine:nightly-sweep": "home",
+    "routine:morning-brief": "home",
+    "skill:trip-planner": "home",
+    "skill:flight-check-in": "home",
+    "routine:check-in-window": "home",
+    "skill:leave-time": "home",
+    "routine:leave-time-morning": "home",
+    "routine:leave-time-traffic": "home",
+    "skill:home-workout": "health",
+    "routine:workout-nudge": "health",
+    "skill:habit-tracker": "health",
+    "routine:habit-check-in": "health",
+    "routine:health-month": "health",
+    "skill:health-record": "health",
+    "skill:medication-reminder": "health",
+    "routine:med-reminders": "health",
+    "skill:personal-journal": "health",
+    "routine:evening-reflection": "health",
+    "skill:my-classes": "school",
+    "routine:class-week": "school",
+    "routine:coursework-due": "school",
+    "routine:term-dates": "school",
+    "skill:class-planner": "school",
+    "skill:learning-coach": "school",
+    "routine:study-review": "school",
+    "skill:course-companion": "school",
+    "skill:video-synthesizer": "school",
+    "skill:zotero-keeper": "school",
+    "skill:news-briefing": "fun",
+    "routine:morning-news": "fun",
+    "skill:sports-follow": "fun",
+    "routine:sports-digest": "fun",
+    "skill:daily-trivia": "fun",
+    "routine:trivia-time": "fun",
+    "skill:word-of-the-day": "fun",
+    "routine:daily-word": "fun",
+    "skill:reading-list": "fun",
+    "skill:readwise-keeper": "fun",
+    "specialist:writer": "writing",
+    "skill:writing-desk": "writing",
+    "routine:next-piece": "writing",
+    "skill:reply-helper": "writing",
+    "skill:text-replies": "writing",
+    "skill:ready-to-post": "writing",
+    "skill:social-posting": "writing",
+    "routine:queue-check": "writing",
+    "skill:lead-desk": "clients",
+    "routine:lead-sweep": "clients",
+    "skill:campaign-watch": "clients",
+    "routine:campaign-check": "clients",
+    "skill:common-questions": "clients",
+    "routine:question-sweep": "clients",
+    "skill:booking-watch": "clients",
+    "skill:acuity-keeper": "clients",
+    "skill:owed-to-customers": "clients"
+  },
+  "voiceLook": {
+    "calm-anchor": {
+      "hue": "teal",
+      "topper": "sprout",
+      "eyes": "pill",
+      "extra": "none",
+      "mouth": "smile",
+      "closed": true
+    },
+    "concise": {
+      "hue": "teal",
+      "topper": "none",
+      "eyes": "bead",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "creative-muse": {
+      "hue": "iris",
+      "topper": "antenna",
+      "eyes": "shine",
+      "extra": "sparkles",
+      "mouth": "smile"
+    },
+    "dry": {
+      "hue": "gold",
+      "topper": "none",
+      "eyes": "sleepy",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "exec-concierge": {
+      "hue": "blue",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "glasses",
+      "mouth": "smile"
+    },
+    "friendly": {
+      "hue": "terracotta",
+      "topper": "peak",
+      "eyes": "round",
+      "extra": "freckles",
+      "mouth": "smile"
+    },
+    "house-manager": {
+      "hue": "teal",
+      "topper": "bow",
+      "eyes": "round",
+      "extra": "none",
+      "mouth": "smile"
+    },
+    "hype-coach": {
+      "hue": "terracotta",
+      "topper": "cap",
+      "eyes": "wide",
+      "extra": "sparkles",
+      "mouth": "snore"
+    },
+    "language-partner": {
+      "hue": "plum",
+      "topper": "tuft",
+      "eyes": "shine",
+      "extra": "none",
+      "mouth": "snore"
+    },
+    "new-parent": {
+      "hue": "gold",
+      "topper": "bunny",
+      "eyes": "sleepy",
+      "extra": "bandage",
+      "mouth": "smile"
+    },
+    "noir-detective": {
+      "hue": "plum",
+      "topper": "cap",
+      "eyes": "bead",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "one-step-ahead": {
+      "hue": "teal",
+      "topper": "antenna",
+      "eyes": "wide",
+      "extra": "none",
+      "mouth": "smile"
+    },
+    "owner-and-a-date": {
+      "hue": "plum",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "glasses",
+      "mouth": "smile"
+    },
+    "plain-and-patient": {
+      "hue": "teal",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "heart",
+      "mouth": "smile"
+    },
+    "playful-sidekick": {
+      "hue": "terracotta",
+      "topper": "ears",
+      "eyes": "shine",
+      "extra": "sparkles",
+      "mouth": "blep"
+    },
+    "professional": {
+      "hue": "blue",
+      "topper": "none",
+      "eyes": "pill",
+      "extra": "bowtie",
+      "mouth": "smile"
+    },
+    "second-opinion": {
+      "hue": "iris",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "sharp-advisor": {
+      "hue": "gold",
+      "topper": "none",
+      "eyes": "bead",
+      "extra": "glasses",
+      "mouth": "flat"
+    },
+    "study-partner": {
+      "hue": "gold",
+      "topper": "tuft",
+      "eyes": "round",
+      "extra": "glasses",
+      "mouth": "smile"
+    },
+    "team-assistant": {
+      "hue": "blue",
+      "topper": "headphones",
+      "eyes": "pill",
+      "extra": "none",
+      "mouth": "smile"
+    },
+    "terminal": {
+      "hue": "green",
+      "topper": "antenna",
+      "eyes": "bead",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "the-bookkeeper": {
+      "hue": "green",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "glasses",
+      "mouth": "flat"
+    },
+    "the-butler": {
+      "hue": "iris",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "bowtie",
+      "mouth": "flat"
+    },
+    "the-careful-one": {
+      "hue": "gold",
+      "topper": "none",
+      "eyes": "oval",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "the-cat": {
+      "hue": "gold",
+      "topper": "ears",
+      "eyes": "sleepy",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "the-editor": {
+      "hue": "plum",
+      "topper": "none",
+      "eyes": "bead",
+      "extra": "glasses",
+      "mouth": "flat"
+    },
+    "the-fixer": {
+      "hue": "terracotta",
+      "topper": "cap",
+      "eyes": "round",
+      "extra": "bandage",
+      "mouth": "smile"
+    },
+    "the-full-picture": {
+      "hue": "teal",
+      "topper": "none",
+      "eyes": "wide",
+      "extra": "glasses",
+      "mouth": "smile"
+    },
+    "the-homie": {
+      "hue": "green",
+      "topper": "headphones",
+      "eyes": "pill",
+      "extra": "none",
+      "mouth": "blep"
+    },
+    "the-journal-keeper": {
+      "hue": "iris",
+      "topper": "sprout",
+      "eyes": "lashes",
+      "extra": "none",
+      "mouth": "smile",
+      "closed": true
+    },
+    "the-morning-show": {
+      "hue": "blue",
+      "topper": "headphones",
+      "eyes": "shine",
+      "extra": "none",
+      "mouth": "snore"
+    },
+    "the-operator": {
+      "hue": "gold",
+      "topper": "cap",
+      "eyes": "wide",
+      "extra": "none",
+      "mouth": "smile"
+    },
+    "the-sportscaster": {
+      "hue": "green",
+      "topper": "cap",
+      "eyes": "wide",
+      "extra": "sparkles",
+      "mouth": "snore"
+    },
+    "the-stoic": {
+      "hue": "blue",
+      "topper": "none",
+      "eyes": "sleepy",
+      "extra": "none",
+      "mouth": "flat"
+    },
+    "the-travel-agent": {
+      "hue": "iris",
+      "topper": "cap",
+      "eyes": "round",
+      "extra": "none",
+      "mouth": "smile"
+    },
+    "warm-companion": {
+      "hue": "plum",
+      "topper": "bow",
+      "eyes": "lashes",
+      "extra": "heart",
+      "mouth": "smile"
+    }
+  },
+  "packs": [
+    {
+      "id": "everyday-assistant",
+      "name": "Everyday Assistant",
+      "tagline": "A bit of everything to try",
+      "description": "A to-do list, a private journal, web lookups, and the Friendly personality. Nothing to set up.",
+      "example": "add “call the dentist” to my to-do list",
+      "items": [
+        "skill:task-manager",
+        "skill:personal-journal",
+        "specialist:researcher",
+        "personality:friendly"
+      ]
+    },
+    {
+      "id": "personal-organizer",
+      "name": "Personal Organizer",
+      "tagline": "Tasks and habits, with a nudge before anything slips",
+      "description": "A task list and habit tracker, a morning list of what’s due, and a Sunday look back at the week.",
+      "example": "what have I got on today?",
+      "items": [
+        "skill:task-manager",
+        "skill:habit-tracker",
+        "routine:daily-task-digest",
+        "routine:weekly-review"
+      ]
+    },
+    {
+      "id": "mind-wellness",
+      "name": "Mind & Wellness",
+      "tagline": "Journal, mood, and streaks, from one reply a night",
+      "description": "Your journal, mood, and streaks, filed from one reply to an evening nudge.",
+      "example": "I had a good day today, here’s why…",
+      "items": [
+        "skill:personal-journal",
+        "skill:habit-tracker",
+        "routine:evening-reflection",
+        "routine:habit-check-in"
+      ]
+    },
+    {
+      "id": "creators-desk",
+      "name": "Creator’s Desk",
+      "tagline": "Drafts, flashcards, and a reading list",
+      "description": "A writer that drafts and sharpens, a coach for what you’re learning, a reading list, and a personality with ideas first, judgment later.",
+      "example": "help me write an opening line for this post",
+      "items": [
+        "specialist:writer",
+        "skill:learning-coach",
+        "skill:reading-list",
+        "personality:creative-muse"
+      ]
+    },
+    {
+      "id": "college",
+      "name": "College",
+      "tagline": "Syllabus, deadlines, and what you need on the final",
+      "description": "Add each syllabus and your agent tracks due dates, grades, and school deadlines like the last day to drop. At registration it reads your degree audit and lays out what to take next. Signing up stays yours.",
+      "example": "what’s due this week?",
+      "items": [
+        "skill:my-classes",
+        "skill:class-planner",
+        "skill:learning-coach",
+        "specialist:researcher",
+        "routine:class-week",
+        "routine:coursework-due",
+        "routine:term-dates"
+      ]
+    },
+    {
+      "id": "self-study",
+      "name": "Self-Study",
+      "tagline": "Flashcards, quizzes, and sources that make it stick",
+      "description": "For learning on your own. Flashcards that bring back what you keep missing, sources from the live web with where each came from, and a study-partner personality that keeps you at it.",
+      "example": "quiz me on what I studied yesterday",
+      "items": [
+        "skill:learning-coach",
+        "specialist:researcher",
+        "personality:study-partner"
+      ]
+    },
+    {
+      "id": "home-kitchen",
+      "name": "Home & Life",
+      "tagline": "Meals, money, trips, and a reading list",
+      "description": "Meals from your fridge, spending, trips, and one list to read and watch. Saved between chats.",
+      "example": "what can I make with chicken, rice and half a lemon?",
+      "items": [
+        "skill:meal-planner",
+        "skill:bill-tracker",
+        "skill:money-in-out",
+        "skill:trip-planner",
+        "skill:reading-list"
+      ]
+    },
+    {
+      "id": "daily-briefing",
+      "name": "Daily Briefing",
+      "tagline": "Wake up already caught up",
+      "description": "Your news, markets, and team scores, gathered from the live web overnight.",
+      "example": "what happened in the news overnight?",
+      "items": [
+        "specialist:researcher",
+        "skill:news-briefing",
+        "skill:market-digest",
+        "skill:sports-follow",
+        "routine:morning-news",
+        "routine:market-morning",
+        "routine:sports-digest"
+      ]
+    },
+    {
+      "id": "life-admin",
+      "name": "Life Admin",
+      "tagline": "Paperwork and appointments, held for you",
+      "description": "Get the clause from your lease or policy, keep long forms moving, remember what the doctor said, and leave a sitter one note. Nothing to connect.",
+      "example": "does my lease let me have a dog?",
+      "items": [
+        "skill:my-documents",
+        "skill:paperwork",
+        "skill:health-record",
+        "skill:the-handover",
+        "specialist:researcher"
+      ]
+    },
+    {
+      "id": "home-errands",
+      "name": "Home & Errands",
+      "tagline": "Every renewal date, remembered for you",
+      "description": "Keeps track of bills, the house, the car, return windows, plants, pets, and prices you’re watching.",
+      "example": "my car insurance renews in March, remind me",
+      "items": [
+        "skill:bill-tracker",
+        "skill:home-maintenance",
+        "skill:plant-pet-care",
+        "skill:car-keeper",
+        "skill:warranty-returns",
+        "skill:price-watch",
+        "routine:bill-reminders",
+        "routine:home-checkup",
+        "routine:care-reminders",
+        "routine:price-check",
+        "routine:return-window-watch"
+      ]
+    },
+    {
+      "id": "money-at-home",
+      "name": "Money at Home",
+      "tagline": "Spending, bills, and savings goals",
+      "description": "Log spending by chat, track every bill with a reminder three days ahead, save toward goals, and ask which card to use. Nothing to connect.",
+      "example": "where did my money go this month?",
+      "items": [
+        "skill:money-in-out",
+        "skill:bill-tracker",
+        "skill:savings-goals",
+        "skill:card-rewards",
+        "routine:bill-reminders",
+        "routine:quarterly-card-categories"
+      ]
+    },
+    {
+      "id": "close-thoughtful",
+      "name": "Close & Thoughtful",
+      "tagline": "Remember the people who matter",
+      "description": "Birthdays and people to keep up with, a nudge before it’s too late, and help writing the card or reply.",
+      "example": "remind me about mom’s birthday next month",
+      "items": [
+        "skill:birthday-keeper",
+        "skill:stay-in-touch",
+        "skill:reply-helper",
+        "routine:birthday-heads-up",
+        "routine:stay-in-touch-nudge"
+      ]
+    },
+    {
+      "id": "healthy-active",
+      "name": "Healthy & Active",
+      "tagline": "A workout you can start now, and medications on time",
+      "description": "Home workouts with a nudge to do them, and a daily medication reminder.",
+      "example": "give me a 20 minute workout I can do at home",
+      "items": [
+        "skill:home-workout",
+        "skill:medication-reminder",
+        "routine:workout-nudge",
+        "routine:med-reminders"
+      ]
+    },
+    {
+      "id": "fun-curious",
+      "name": "Fun & Curious",
+      "tagline": "A word, a trivia question, and a pick for tonight",
+      "description": "A new word and a trivia question each day, on their own, plus one list to read and watch with a pick when you can’t decide.",
+      "example": "what should I watch tonight?",
+      "items": [
+        "skill:word-of-the-day",
+        "skill:daily-trivia",
+        "skill:reading-list",
+        "routine:daily-word",
+        "routine:trivia-time"
+      ]
+    }
+  ],
+  "say": {
+    "skill:acuity-keeper": [
+      "Who's booked tomorrow?"
+    ],
+    "skill:airtable-keeper": [
+      "What bases can you see?"
+    ],
+    "skill:bill-tracker": [
+      "Netflix is $15.49 monthly on the 3rd",
+      "What’s due soon?"
+    ],
+    "skill:birthday-keeper": [
+      "Gift idea for Dad: espresso beans",
+      "What's coming up?"
+    ],
+    "skill:booking-watch": [
+      "Who's booked with me this week?"
+    ],
+    "skill:campaign-watch": [
+      "Who replied this week?"
+    ],
+    "skill:card-rewards": [
+      "I have an Amex Gold",
+      "Which card for groceries?"
+    ],
+    "skill:circle-back": [
+      "Sarah's got her interview Thursday"
+    ],
+    "skill:class-planner": [
+      "Read my degree audit",
+      "What should I take in the spring"
+    ],
+    "skill:clean-books": [
+      "Do my books",
+      "QuickBooks csv for January"
+    ],
+    "skill:commitment-keeper": [
+      "What did I promise?",
+      "I told Dana I'd send the deck Thursday."
+    ],
+    "skill:common-questions": [
+      "Go through my mail",
+      "Draft an answer for that one"
+    ],
+    "skill:course-companion": [
+      "Add this to my course",
+      "Make cards from lecture 3"
+    ],
+    "skill:daily-trivia": [
+      "Trivia",
+      "Trivia, history"
+    ],
+    "skill:email-manager": [
+      "Reply to Dana and say I’ll have it over by Friday",
+      "Anything from Jack this week?"
+    ],
+    "skill:find-a-time": [
+      "Find a time with Sam next week, 30 minutes",
+      "Any word from Sam?"
+    ],
+    "skill:fireflies": [
+      "Catch me up on my meetings"
+    ],
+    "skill:flight-check-in": [
+      "Check me in"
+    ],
+    "skill:form-filler": [
+      "Get me a quote on this page"
+    ],
+    "skill:github-keeper": [
+      "What's waiting on me in GitHub?"
+    ],
+    "skill:gitlab-keeper": [
+      "What's waiting on me in GitLab?"
+    ],
+    "skill:google-tasks": [
+      "Add a task: call the dentist Friday",
+      "What's due today?"
+    ],
+    "skill:habit-tracker": [
+      "New habit: gym",
+      "Did my run today"
+    ],
+    "skill:health-record": [
+      "Ask the doctor about the dizziness",
+      "Prep me for Thursday"
+    ],
+    "skill:home-lights": [
+      "Turn off the desk lamp",
+      "What Govee lights do I have?"
+    ],
+    "skill:home-maintenance": [
+      "Set up my house list",
+      "Just changed the furnace filter"
+    ],
+    "skill:home-workout": [
+      "Give me a workout"
+    ],
+    "skill:honest-week": [
+      "Will next week fit?",
+      "Protect Thursday morning"
+    ],
+    "skill:house-watch": [
+      "What can you see in my house?",
+      "Turn off the kitchen lights"
+    ],
+    "skill:inbox-rules": [
+      "Tidy my inbox"
+    ],
+    "skill:job-hunt": [
+      "I applied to Figma for a product design role",
+      "Go through my mail"
+    ],
+    "skill:lead-desk": [
+      "Sam called about a new roof",
+      "Go through my mail"
+    ],
+    "skill:learning-coach": [
+      "Teach me …",
+      "Quiz me"
+    ],
+    "skill:leave-time": [
+      "When do I need to leave for the dentist?",
+      "Add twenty minutes there, parking is awful"
+    ],
+    "skill:linear-keeper": [
+      "What's assigned to me in Linear?"
+    ],
+    "skill:lunch-money-keeper": [
+      "What's uncategorized in Lunch Money?"
+    ],
+    "skill:market-digest": [
+      "How are my stocks."
+    ],
+    "skill:meal-planner": [
+      "Plan my week",
+      "What's for dinner?"
+    ],
+    "skill:medication-reminder": [
+      "I take lisinopril 10 mg every morning."
+    ],
+    "skill:meeting-prep": [
+      "Prep me for my next meeting",
+      "Who am I meeting with today?"
+    ],
+    "skill:mercury-watch": [
+      "What's my Mercury balance?"
+    ],
+    "skill:money-in-out": [
+      "$14 lunch",
+      "Spent 60 at the hardware store"
+    ],
+    "skill:my-classes": [
+      "Read my syllabuses",
+      "What's due this week"
+    ],
+    "skill:my-documents": [
+      "Can I have a dog?",
+      "What's my deductible?"
+    ],
+    "skill:new-teammate-welcome": [
+      "I'm new",
+      "Show me the ropes"
+    ],
+    "skill:news-briefing": [
+      "Brief me"
+    ],
+    "skill:notion-keeper": [
+      "What can you see in my Notion?"
+    ],
+    "skill:owed-to-customers": [
+      "Who's waiting on us?",
+      "Dana's got that one"
+    ],
+    "skill:package-tracker": [
+      "What's coming this week?"
+    ],
+    "skill:paperwork": [
+      "Renewing my passport",
+      "Applying for a resident permit"
+    ],
+    "skill:personal-journal": [
+      "Log my mood",
+      "Three good things"
+    ],
+    "skill:price-watch": [
+      "Check my prices"
+    ],
+    "skill:reading-list": [
+      "Pick something for tonight"
+    ],
+    "skill:readwise-keeper": [
+      "What have I highlighted about focus?"
+    ],
+    "skill:ready-to-post": [
+      "Top up the queue",
+      "What have I got?"
+    ],
+    "skill:reply-helper": [
+      "Help me reply",
+      "Thank you note for my neighbor who watched the dog"
+    ],
+    "skill:revenue-watch": [
+      "What needs me in Stripe?"
+    ],
+    "skill:savings-goals": [
+      "I want to save 3,000 for Japan by next June",
+      "Put 200 toward Japan"
+    ],
+    "skill:school-family": [
+      "What does Maya need this week?",
+      "Anything from school?"
+    ],
+    "skill:social-posting": [
+      "Post this"
+    ],
+    "skill:splitwise-keeper": [
+      "Who owes me on Splitwise?"
+    ],
+    "skill:sports-follow": [
+      "I follow Arsenal and the Lakers",
+      "How did my teams do?"
+    ],
+    "skill:square-keeper": [
+      "What came in this week?"
+    ],
+    "skill:statement-collector": [
+      "Collect my statements"
+    ],
+    "skill:stay-in-touch": [
+      "Mom, every two weeks",
+      "Who am I overdue with?"
+    ],
+    "skill:the-handover": [
+      "I'm away the 14th to the 21st, write the handover",
+      "Trash goes out Tuesday night"
+    ],
+    "skill:trip-planner": [
+      "Lisbon, May 10 to 17",
+      "How much are flights?"
+    ],
+    "skill:waiting-on": [
+      "Who owes me?",
+      "Who owes me a reply?"
+    ],
+    "skill:warranty-returns": [
+      "Bought a TV at Best Buy today",
+      "Is the TV still under warranty?"
+    ],
+    "skill:whos-got-this": [
+      "I'll take the Meyer quote",
+      "What's open?"
+    ],
+    "skill:word-of-the-day": [
+      "Word of the day"
+    ],
+    "skill:writing-desk": [
+      "What should I write about?",
+      "Draft this week's post"
+    ],
+    "skill:ynab-keeper": [
+      "What's uncategorized in YNAB?"
+    ],
+    "skill:zotero-keeper": [
+      "What do I have in Zotero about attention?"
+    ],
+    "specialist:deep-researcher": [
+      "Deep research: <your question>"
+    ],
+    "specialist:researcher": [
+      "What's a used 2022 Camry going for near me?"
+    ]
+  },
+  "runs": {
+    "routine:application-sweep": "every Monday at 8:30 AM",
+    "routine:bill-reminders": "when anything in bills is due, 3 days ahead, checked at 9:00 AM",
+    "routine:birthday-heads-up": "every day at 8:30 AM",
+    "routine:campaign-check": "on weekdays at 8:15 AM",
+    "routine:car-checkup": "every Sunday at 10:30 AM",
+    "routine:care-reminders": "every day at 6:00 PM",
+    "routine:check-in-window": "when anything in flights is due, a day ahead, checked at 6:30 AM",
+    "routine:circle-back-nudge": "when anything in big days is due, on the day, checked at 9:00 AM",
+    "routine:class-week": "every Sunday at 6:00 PM",
+    "routine:commitment-sweep": "every day at 8:50 AM",
+    "routine:coursework-due": "when anything in coursework is due, 4 days ahead, checked at 8:00 AM",
+    "routine:daily-briefing": "every day at 8:00 AM",
+    "routine:daily-task-digest": "every day at 8:00 AM",
+    "routine:daily-word": "every day at 8:45 AM",
+    "routine:evening-reflection": "every day at 9:30 PM",
+    "routine:fireflies-sync": "when a new meeting recording comes in",
+    "routine:habit-check-in": "every day at 8:00 PM",
+    "routine:health-month": "every month on the 1st at 9:00 AM",
+    "routine:home-checkup": "when anything in home tasks is due, 14 days ahead, checked at 10:00 AM",
+    "routine:inbox-sweep": "every day at 8:30 AM",
+    "routine:lead-sweep": "on weekdays at 8:45 AM",
+    "routine:leave-time-morning": "every day at 6:30 AM",
+    "routine:leave-time-traffic": "when the traffic changes a journey you are about to make",
+    "routine:market-morning": "every day at 7:15 AM",
+    "routine:med-reminders": "every day at 7:45 AM",
+    "routine:meeting-briefing": "30 minutes before each meeting",
+    "routine:morning-brief": "every day at 7:00 AM",
+    "routine:morning-news": "every day at 7:30 AM",
+    "routine:next-piece": "on weekdays at 9:30 AM",
+    "routine:nightly-sweep": "every day at 10:15 PM",
+    "routine:price-check": "every Monday at 10:00 AM",
+    "routine:quarterly-card-categories": "every Monday at 9:00 AM",
+    "routine:question-sweep": "every Friday at 3:30 PM",
+    "routine:queue-check": "every Monday at 10:15 AM",
+    "routine:receipt-sweep": "every Monday at 9:45 AM",
+    "routine:reply-watch": "every day at 8:40 AM",
+    "routine:return-window-watch": "when anything in purchases is due, 30 days ahead, checked at 9:15 AM",
+    "routine:revenue-digest": "every day at 6:00 PM",
+    "routine:scheduling-watch": "every day at 8:35 AM",
+    "routine:school-week": "every Sunday at 6:00 PM",
+    "routine:sports-digest": "every day at 8:15 AM",
+    "routine:statement-round": "when anything in statement schedule is due, on the day, checked at 9:00 AM",
+    "routine:stay-in-touch-nudge": "every Sunday at 4:00 PM",
+    "routine:study-review": "every day at 7:30 PM",
+    "routine:team-standup": "every day at 8:00 AM",
+    "routine:term-dates": "when anything in school dates is due, 14 days ahead, checked at 10:00 AM",
+    "routine:trivia-time": "every day at 9:30 AM",
+    "routine:week-check": "every Friday at 4:00 PM",
+    "routine:weekly-review": "every Sunday at 5:00 PM",
+    "routine:workout-nudge": "every day at 5:15 PM"
+  },
+  "businessOnly": [
+    "personality:team-assistant",
+    "routine:team-standup",
+    "skill:new-teammate-welcome",
+    "skill:owed-to-customers",
+    "skill:whos-got-this"
+  ]
+}

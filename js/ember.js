@@ -359,6 +359,12 @@
       'stroke-width="3.2" fill="none" stroke-linecap="round"/>' +
       '<path class="mouth mouth-flat" d="M93 136 L107 136" stroke="#2A2521" stroke-width="3.2" ' +
       'fill="none" stroke-linecap="round" opacity="0"/>' +
+      /* The open mouth, which nothing here animates: it is drawn for the personality faces in the
+         add-on store (scripts/gen-marketplace.mjs), where Hype Coach and The Morning Show talk with
+         theirs open, as the app's voice-looks.ts draws them. Filled, flat on top and round below, a
+         jaw dropped rather than a ring, and two units lower than the app's like the rest of the face. */
+      '<path class="mouth mouth-snore" d="M93.8 134.5 A6.2 6.2 0 0 0 106.2 134.5 Z" fill="#2A2521" ' +
+      'opacity="0"/>' +
       /* The tongue, for the one move in a hundred, and THE MOUTH HAS TO READ AS OPEN BEFORE THE
          TONGUE READS AS A TONGUE. The first version dropped a small jaw (11.2 wide, inside the
          smile's own 14) and hung the tongue off its lip, and what that drew was a pink shape with

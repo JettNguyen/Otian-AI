@@ -54,6 +54,11 @@ EM_DASH = re.compile(r"—|&mdash;|&#8212;|&#x2014;")
 # swept clean today. If one ever appears, this check should say so and the fix is in the Archie
 # repo's manifest, not here.
 GENERATED_START = "<!-- GENERATED-CATALOG-START -->"
+
+# The same reasoning for the two data files the store's pages are drawn from: the public catalog
+# snapshot, and the app's areas (scripts/gen-areas.mjs), whose sample exchanges ("Netflix, on the
+# 3rd. $15.49.") and things to say ("$14 lunch") are the add-ons' own copy from the Archie repo.
+CATALOG_COPY = {"data/public-catalog.json", "data/areas.json"}
 GENERATED_END = "<!-- GENERATED-CATALOG-END -->"
 
 # A figure in a FACTS.md table row, e.g. "| `$149` | Archie, billed yearly | ... |"
@@ -120,7 +125,7 @@ def served_files():
             if name.endswith(".html"):
                 yield rel, True
             elif name.endswith(".json") and (rel.startswith("data/") or rel.startswith("assets/")):
-                yield rel, rel != "data/public-catalog.json"
+                yield rel, rel not in CATALOG_COPY
             elif name.endswith((".js", ".css")) and (rel.startswith("js/") or rel.startswith("css/")):
                 yield rel, False
             elif name.endswith(".md") and rel.startswith("blog/"):

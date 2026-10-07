@@ -3133,7 +3133,8 @@ the picture in the approval card shows which button it means.
   and that a Mac has asked for two more since: the administrator password for waking, and
   Accessibility for Computer control. The document itself lists neither and is a revision away.
 - "A card number" became "a card you pay with" everywhere the site says the agent never types one,
-  **except the privacy policy and the terms of service**, which are legal text and wait for Jett.
+  and since 2026-10-07 in the privacy policy and the terms of service too, at Jett&rsquo;s approval
+  (Terms version 2026-10-07).
 - The pages: `archie/websites/` (the label, the Buying fold's drawings and caption, the stops figure,
   a section headed "On a Mac", the next step in 0.3.4's words, and the agent's pointer drawn as the
   Archie mark it is), `how-it-works/` (the caption names the apps), `faq/`, `trust/` (and its add-on
@@ -3735,8 +3736,8 @@ so a browser that fails to load a page may report the failure to `a.nel.cloudfla
 (`success_fraction` is 0, so a page that loads sends nothing). No analytics beacon is injected:
 checked on `/`, `trust/`, `trust/proof/` and `privacy-policy/` the same day. What our Cloudflare
 account keeps about requests was not checked, so the trust page's "hold no logs of it" came off
-in the same pass. The privacy policy still names only GitHub; it is legal text and waits for
-Jett.
+in the same pass. The privacy policy named only GitHub until the same day, when Jett approved
+Cloudflare in its own sentence and in its list of service companies (Terms version 2026-10-07).
 
 **Why it's true:** no page carries an external `<script src>` at all, and the only
 cross-origin things any page pulls are the Google Fonts stylesheet and font files, the

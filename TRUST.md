@@ -705,6 +705,11 @@ GitHub Pages, so GitHub's servers see the IP address and the timestamp, and we s
 all: we hold no logs of update checks because no machine of ours answers them. That is the
 stronger true claim; say it that way.
 
+**Narrowed 2026-10-07: the request reaches GitHub through Cloudflare** (see "This website, and
+what it asks your browser for"), so Cloudflare's servers see the IP address and the timestamp
+too. What our Cloudflare account keeps was not checked, so until it is, say that no server of
+ours answers the update check, and not that we hold no logs of it.
+
 ### ✅ The spend meter is local, and it is an estimate
 
 **Approved wording:** "Archie keeps its own running total. The Account screen shows what
@@ -2450,8 +2455,9 @@ did not write.
   neither exists) and voice notes (`crates/archie-runtime/src/speech.rs`: a spoken reply to a spoken
   message, or on request). **PDF shipped on 2026-09-16 and this bullet moved the same day**, which
   is the only reason the claim above may be made. Video would come through a connector and may not
-  be described in the present tense until it ships, and neither of the two the agent does make has a
-  ✅ entry of its own yet, so no page claims them until one is written with its clauses. Until
+  be described in the present tense until it ships. Pictures got a ✅ entry of their own on
+  2026-10-07 (the next entry); voice notes still have none, so no page claims them until one is
+  written with its clauses. Until
   2026-09-16 this line said Archie writes none of the four, and
   the homepage carried "No PDFs, pictures, audio or video" as a limitation on the strength of it;
   it was false on two of four and the chip was retired. The BetterClaw wishlist (item 7) proposed
@@ -2462,6 +2468,30 @@ did not write.
   and it is also the safer-sounding one, which is rare enough to be worth keeping.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
+
+### ✅ Your agent can make a picture (added 2026-10-07)
+
+**Approved wording:** "Your agent can make a picture and send it to you in the conversation. It
+draws with OpenAI or Google: on your own account with either one, or on a Gemini account you add
+just for pictures. With only a Claude account, it cannot draw."
+
+**Why it's true:** `crates/archie-runtime/src/imagegen.rs` is the `generate_image` tool, and
+`crates/archie-net/src/images.rs` draws with `gpt-image-1` or `gemini-2.5-flash-image`
+(`provider_makes_images` is OpenAI and Gemini only). Anyone on another provider can save a Gemini
+key for pictures alone, and the tool is not offered at all when neither key exists. The picture
+is sent into the conversation, or saved on the computer with its path reported when the chat app
+cannot take a file. Shipped in Archie 0.1.3 (`docs/releases/0.1.3.md`: "It can make pictures
+too"), built 2026-08-02 (`334be887`). Written up 2026-10-07 because `compare/chat-apps/` had
+carried the app's own picker notes ("in use makes pictures") since 2026-09-19 with no entry
+under them, which the Tab and Eden review caught.
+
+**Boundaries:**
+- ⛔ **Never "free pictures" and never on our credits.** A picture is billed to the AI account that
+  draws it, in tokens, at a rate that moves with the provider's own quality setting
+  (`images.rs`, the `usage` field). No page prints a price per picture; FACTS.md has none.
+- ⚠️ **What you ask for goes to OpenAI or Google**, whichever draws it, even when your agent
+  otherwise thinks with Claude. A page that says pictures come from your own computer is wrong.
+- ⛔ **Never video or music.** Neither exists (`video.rs` only reads a video it is sent).
 
 ### ✅ Add-ons are data, not code
 
@@ -3686,14 +3716,27 @@ they get a pointer like any other.
 ad pixel. It never has. What it does ask your browser for, besides its own files, is the
 typeface from Google Fonts and Firebase's sign-in code, which the account menu in the top bar
 runs. Those see your address the way any host sees the address of whoever asks it for a file.
-The site is served by GitHub Pages, so GitHub sees the request for the page itself, for the
-same reason. Pressing play on a video in the library loads YouTube's player, and YouTube counts
+The site is served by GitHub Pages through Cloudflare, so both see the request for the page
+itself, for the same reason, and Cloudflare adds one small script of its own that hides email
+addresses from bots. Pressing play on a video in the library loads YouTube's player, and YouTube counts
 that play."
 
 **The last sentence is new on 2026-09-30**, the day the Learning Library's first pages went up
 (`learn/<slug>/`, the video library entry above). "It never has" is still about us: YouTube's
 count is YouTube's, it happens only after a press, and no page loads the player before one
 (`js/library.js`; `gen-csp.py` allows the nocookie host in `frame-src` on the library pages only).
+
+**Corrected 2026-10-07: Cloudflare was missing.** The live site answers with `server: cloudflare`
+and a `cf-ray` header, with GitHub Pages behind it, and every page carries
+`/cdn-cgi/scripts/.../email-decode.min.js`, which Cloudflare's email obfuscation adds on the way
+out. It is same-origin and it is not in the repo, which is why a grep of the repo never found it
+and why `trust/proof/`'s live request list would. The headers also turn on Network Error Logging,
+so a browser that fails to load a page may report the failure to `a.nel.cloudflare.com`
+(`success_fraction` is 0, so a page that loads sends nothing). No analytics beacon is injected:
+checked on `/`, `trust/`, `trust/proof/` and `privacy-policy/` the same day. What our Cloudflare
+account keeps about requests was not checked, so the trust page's "hold no logs of it" came off
+in the same pass. The privacy policy still names only GitHub; it is legal text and waits for
+Jett.
 
 **Why it's true:** no page carries an external `<script src>` at all, and the only
 cross-origin things any page pulls are the Google Fonts stylesheet and font files, the
@@ -3712,6 +3755,8 @@ our intentions.
   reader presses play in the library. Name them, as the approved wording does.
 - ⛔ Never say the site "makes no third-party requests". It makes four kinds, listed above, and a
   fifth, YouTube's player, on a library page after a press.
+- ⛔ Never "we hold no logs of this site" or of the update check until someone has read what our
+  Cloudflare account keeps. Say "we run no server for it", which stays true either way.
 - ⚠️ The honest strong form is about **what we collect**, not about what nobody can see: we run
   no measurement of any kind on this site, and the hosts that see a request see it because they
   are serving a file.

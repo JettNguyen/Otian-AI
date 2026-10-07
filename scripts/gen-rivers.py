@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Space the service names in the reach figure's rivers evenly, and check they stay that way.
 
-**Why this is a script and not an edit.** The rivers hold 176 `<text>` labels across six rows, and
+**Why this is a script and not an edit.** The rivers hold 168 `<text>` labels across six rows, and
 until 2026-09-17 they sat at a fixed pitch: every name's centre the same distance from the last,
 whatever the name. That reads as uneven, because the eye measures the GAP and not the pitch. On the
 long row the gaps ran from 12.7px to 67.3px, so "Groq" and "xAI" floated in holes while "Google
 Calendar" nearly touched its neighbours. Even gaps need each name's rendered width, which needs the
-real font at the real size, which needs a browser. Nobody is doing that by hand for 176 labels.
+real font at the real size, which needs a browser. Nobody is doing that by hand for 168 labels.
 
 **The two rules the layout has to hold.**
 
@@ -174,7 +174,7 @@ def main():
             for cls, y, name, old, new in stale[:6]:
                 print("  %s y=%s  %-16s at %.1f, should be %.1f" % (cls, y, name, old, new))
             raise SystemExit("gen-rivers: %d labels are not evenly spaced. Run gen-rivers.py." % len(stale))
-        print("gen-rivers: all 176 labels evenly spaced.")
+        print("gen-rivers: all %d labels evenly spaced." % sum(len(v) for v in current.values()))
         return
     INDEX.write_text(html)
     print("gen-rivers: rewrote %d labels." % sum(len(v) for v in current.values()))

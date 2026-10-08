@@ -56,6 +56,11 @@ conventions, which stay below as history.
 - **Patrick is the proof** (Westway Site Services, a site-services company he runs): lead with him.
 - **Not adopted, on purpose**: the advisor's "log traces as a data moat". It reverses "No Otian
   custodian" and every page built on it, so it is a product decision for Jett, never a copy change.
+  Jett settled the selling half on 2026-10-07: "we will continue to not sell data."
+- **Privacy came off the homepage's lead (Jett, 2026-10-07).** The custody act's heading was "We
+  keep no copy we can read."; it is "Your agent lives on your computer." now, TRUST.md's "own"
+  wording, with the AI company still drawn in the same figure. The trust pages stay as they are,
+  because Google's verification and the security assessment point at them.
 - **The tagline stays the brand line, not the h1.** "Don't rent your agent. Own it." remains in the
   header lockup; the homepage h1 asks the question above.
 

@@ -237,6 +237,11 @@ fee we charge, collect, resell, or mark up" (FACTS.md, `0%`). The revenue lines 
 Stripe products on `archie/pricing/` (Personal, AI included, Business) and the `$250` hour on
 `services/`. The no-ads half is also true in code: "We ship no telemetry and no analytics" below.
 
+**Short form (2026-10-07):** the homepage's "Where your words go" caption carries "We never sell
+your data" as a chip, the day Jett restated the commitment ("we will continue to not sell data").
+It is the selling half of the approved wording and nothing more, so the boundary on "we don't have
+it" below still governs anything written beside it.
+
 **Boundaries, do not cross:**
 - ⚠️ **"We add nothing to your AI bill" is scoped to your own AI account.** On the AI-included plan
   and on the free credits we buy the AI, so the unscoped "we make no money on AI" is not this claim.

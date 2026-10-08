@@ -10163,6 +10163,8 @@ html[data-theme="dark"] .booking-container iframe {
    decommissioned in favor of the Archie app, and its stylesheet went with it rather than staying
    as the largest block in this file describing something no page renders. */
 .app-h2 { font-size: var(--fs-xl); font-weight: 600; margin: 0 0 10px; text-align: center; }
+/* The way to the app on this phone, moved into the panel by js/app-page.js (2026-10-07). */
+.app-get { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 20px; }
 /* ==========================================================================
    40b. Calm layout: the density pass
 
@@ -13520,18 +13522,18 @@ html[data-theme="dark"] .booking-container iframe {
   grid-template-columns: 1fr 1fr;
 }
 
-/* One download and no platform to choose between: the phone block. Two columns with a single
-   child puts that child in the first of them, which reads as a button nudged off to the left
-   rather than a centered one (Jett, 2026-09-22). */
-.install-actions--solo {
-  grid-template-columns: 1fr;
+/* The phone block: iPhone and Android side by side (2026-10-07, when the iPhone app joined; it
+   was one Android button until then). js/download-feedback.js marks every .install-actions with the
+   computer it found, and .is-mac / .is-win drops to one column, so this rule names both classes to
+   outrank that: there is no computer to choose between here. */
+.install-actions.install-actions--phone {
+  grid-template-columns: 1fr 1fr;
 }
 
-/* Centering the grid item was only half of it (Jett, 2026-09-22). .install-platform is 340 wide
-   whatever it holds, so the block was centered and the button sat at its left edge, sharing that
-   edge with the requirement text under it, which fills the 340. What reads as off-center is the
-   button against its own text rather than against the column. */
-.install-actions--solo .install-platform {
+/* Each button centers over its own requirement line. .install-platform is 340 wide whatever it
+   holds, so a left-aligned button sat at the edge of the text under it, which reads as off-center
+   (Jett, 2026-09-22, when this block held one button). */
+.install-actions--phone .install-platform {
   text-align: center;
 }
 
@@ -13709,7 +13711,8 @@ html[data-theme="dark"] .booking-container iframe {
 
 @media (max-width: 640px) {
   .install-actions,
-  .install-actions.show-both {
+  .install-actions.show-both,
+  .install-actions.install-actions--phone {
     grid-template-columns: 1fr;
   }
   .install-shot {
@@ -19173,8 +19176,6 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 @media (hover: hover) and (pointer: fine) {
   .mb-store[data-state="live"]:hover { transform: translateY(-1px); box-shadow: var(--lift-keyhover); }
 }
-.mb-store[data-state="soon"] { background: transparent; }
-.mb-store[data-state="soon"] .mb-store-ic { stroke: var(--text-muted); }
 
 /* ---- the three clear fields and the lost phone, under the sealed caption ---- */
 .mb-clear { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-width: 42ch; }

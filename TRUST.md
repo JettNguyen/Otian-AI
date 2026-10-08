@@ -1230,13 +1230,29 @@ Apple ID of its own on a spare Mac, and text it like any contact: nothing shows 
 - ⚠️ **Not yet tried on a real Mac signed into a second Apple ID.** Tested in code against the
   watch's own message shape.
 
-### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID
+### ✅ The Archie app for a phone: sealed, where a chat app is not. SHIPPED ON ANDROID AND IPHONE
 
 **Which build Android has, 2026-10-05.** The APK on the latest release (`Archie-latest.apk` on
 v0.3.5, version code 8) was built on this Mac from archie-mobile `e742a48`, signed with the same key
 as the APK before it, and opened on an emulator after updating over it. The one it replaced was
 built from before September 29. So an entry below whose phone half is in archie-mobile at or before
 `e742a48` has that half in a release on Android; its computer half still needs a desktop release.
+
+**Which build iPhone has, 2026-10-07.** Apple approved Archie Mobile 1.0 on October 7, 2026, and it
+is on the App Store, free: `https://apps.apple.com/app/archie-mobile/id6810899666` (read the same
+day through Apple's lookup API: version 1.0, iOS 16.4 or later, seller Jett Nguyen; App Store Connect
+shows the version READY_FOR_SALE with build 16 attached). Build 16 was made on this Mac and uploaded
+at 1:16 am on September 29, seven minutes after archie-mobile `a700d15`, the scene fix a build made
+here needs before it will open at all. It opens, so it has that fix, and nothing committed after it
+was there to build (`c0f54a2`, minutes later, is docs only), so its code is `a700d15`'s. **So the
+iPhone's build is older than Android's**, and Android's `e742a48` contains all of it. An entry below
+whose phone half is at or before `a700d15` is in a release on both; one after it is on Android only
+until an iPhone update carrying it is approved. Checked the same day: the routine times (`8f9ae08`,
+`4e22fd9`) and pictures, videos and files (`2e5516e` to `7453d20`) are in it; the to-do card
+(`817e099`), Stop (`721791f`), opening a skill in place and updating the computer (`04da3b6`), the
+model picker (`51629d7`), the talk screen (`cf0b115`), the model name at pairing (`fc8d1fb`) and the
+iPhone's picker and Share fixes (`ca349b5`, `50c192d`, `d5ecab0`) are not. Builds 17 and 18 (October
+4, made on EAS with the iOS 26.5 SDK) are on App Store Connect and in no release.
 
 **Status 2026-09-22. The tense split, and this is the deliberate pass that entry always promised.**
 Android and iPhone are no longer in the same state, so no page may talk about "the phone app" as one
@@ -1245,12 +1261,14 @@ thing any more.
 - **Android is downloadable today**, as an APK from the `archie-releases` repo, linked from
   `archie/install/`. Anyone can install it. **Present tense is correct for Android**, and for
   Android only.
-- **iPhone is still with Apple.** First submitted 2026-09-17; rejected 2026-09-23 and 2026-09-29
-  (archie-mobile `docs/STORE-LISTING.md`), and build 16 has waited for review since 2026-09-29 (App
-  Store Connect, read October 6, 2026). In review is not
-  approved: nobody outside the team can install it and it is in no store listing anyone can reach.
-  **Future tense still holds for iPhone**, and **no page may carry a date for it**, because a
-  rejection is an ordinary outcome and we do not control the clock.
+- **iPhone is on the App Store since 2026-10-07**, as Archie Mobile 1.0, free. First submitted
+  2026-09-17; rejected 2026-09-23 and 2026-09-29 (archie-mobile `docs/STORE-LISTING.md`); build 16
+  waited for review from 2026-09-29 and was approved October 7. **Present tense is correct for
+  iPhone now, for what build 16 has** (see "Which build iPhone has" above). A phone feature newer
+  than that build is Android's alone, so a sentence about one still names Android. Until 2026-10-07
+  this bullet held iPhone to the future tense with no date, because a rejection is an ordinary
+  outcome and Apple's clock is not ours; the next iPhone update is in the same position, so no page
+  promises a date for it either.
 - **`/phone/pair` is deployed**, since 2026-09-14 (`stripe-webhook/phone-pair.js`), along with the
   `notPhone()` rules. The freeze it was waiting behind was lifted by the assessor, who said to
   proceed with the package as it stood.
@@ -1270,7 +1288,9 @@ thing any more.
   not of the pairing, so no new page may tell a reader to pair a phone. **Built the same day**
   (Archie `c434a385`, in 0.3.1, released September 29, 2026): Set up a phone and the Archie Mobile row in the chat-app list are
   open to everybody, and the row reads "our own app; on Android now, and on iPhone once Apple
-  approves it", with no Recommended tag until the iPhone app is approved. **Later the same day the
+  approves it", with no Recommended tag until the iPhone app is approved. (Both outlived the
+  approval: on 2026-10-07 the note still says "once Apple approves it" in `src/app/connect.tsx`, and
+  the tag is still off, until a desktop release changes them.) **Later the same day the
   Set up a phone button went, with the Settings section it sat on (Your phone).** The pairing code
   is now only on that row, on an agent's Setup tab under Chat app, behind Show the code; Disconnect
   every phone sits under it, and the row says "on" while phone access is. A page that says where
@@ -1297,6 +1317,10 @@ concession stays on the page.
 > Your computer seals every message before it leaves, with a key it makes itself and gives to your
 > phone by showing it a code to scan. The key never passes through us. We hold the sealed messages
 > and cannot open them.
+
+Since 2026-10-07 the app is out on iPhone and Android, so the second sentence is "Archie Mobile, our
+phone app, does not work that way." A chat app still carries the messages of anybody who connects
+one, so the first sentence stays.
 
 **Approved wording, the comparison.** Every clause is the other company's own published position.
 Cite it that way on the page, with the link, or do not make the comparison:
@@ -1363,9 +1387,9 @@ Sources, both first-party and both checked 2026-09-11: <https://telegram.org/faq
 > rename it, change its face, read what it has been doing, and talk to it.
 
 ⚠️ **From 0.3.1, a routine can run at several set times a day** (Archie b7c15696, in 0.3.1;
-archie-mobile 8f9ae08, the phone's half, in v0.3.5's Android download and not yet on iPhone), and the phone moves any
-one of them. Of Android the sentence above can say "move any of the times it runs"; of the iPhone,
-still in App Store review, it stays as written.
+archie-mobile 8f9ae08, the phone's half, in v0.3.5's Android download and in the iPhone's 1.0), and the phone moves any
+one of them. Of either phone the sentence above can say "move any of the times it runs" (checked
+2026-10-07: `8f9ae08` is an ancestor of both `e742a48` and `a700d15`).
 
 **Why it's true.** The phone can send exactly the instructions on a fixed list, and that list is the
 `match op` arm of `dispatch_words` in `src-tauri/src/phone.rs`: ping, start, stop, install and remove
@@ -1496,11 +1520,12 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
 
 **Required clauses. Do not drop them:**
 
-- ⚠️ **Name the platform, because they are no longer in the same state.** Android is downloadable,
-  so present tense is correct for it. iPhone is in review, so it stays future tense with **no date**,
-  and "we are building" rather than "Archie has an app". A sentence about "the phone app" that does
-  not say which platform is now the failure this clause is watching for, and it was the opposite
-  failure until 2026-09-22.
+- ⚠️ **Name the platform where the two differ.** Both are out since 2026-10-07, so "Archie Mobile,
+  for iPhone and Android" is present tense on either. They differ in two ways a sentence must not
+  blur: iPhone's build is older (see "Which build iPhone has" above), so a feature newer than it is
+  named as Android's; and iPhone installs from the App Store while Android installs from a file.
+  Never "in the app stores" or "on Google Play": Android is in no store. Until 2026-10-07 this
+  clause held iPhone to the future tense, and until 2026-09-22 the failure was the opposite one.
 - ⚠️ **Say that we hold it.** Same clause as the shipped phone-access claim: this is custody without
   access. "It never touches our servers" is FALSE here and must never be written.
 - ⚠️ **Name iMessage as the exception.** The comparison is true of Telegram, Discord, Slack and
@@ -1542,15 +1567,15 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; iPhone still in App Store review
+### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0
 
 *Released on the computer, checked October 6, 2026: Archie `389c0b4e` (the bare stop and the Stop
 button) and `e24a5005` (the computer reading the relay's receive time) are ancestors of 0.3.5's
 `2afe4589`, and 0.3.5's release note says "Type stop, or press Stop, while your agent is working."
 Archie for Business follows; its 0.3.5 is not out yet. The phone's half (archie-mobile `721791f`) is
-in v0.3.5's Android download (built from `e742a48`, see "Which build Android has" above) and not on iPhone, which is
-still in App Store review. Both approved sentences below name the phone, so a page that uses them
-says Archie Mobile on Android until the iPhone app is out.*
+in v0.3.5's Android download (built from `e742a48`, see "Which build Android has" above) and not on iPhone, whose
+1.0 is older (see "Which build iPhone has"). Both approved sentences below name the phone, so a page
+that uses them says Archie Mobile on Android until an iPhone update carrying `721791f` is out.*
 
 Found by the reviewer pass on October 5, 2026: a reviewer who texts the agent from the phone typed
 "stop" while it worked, and it finished the job and then answered "stop" as a new request; and a
@@ -1584,13 +1609,14 @@ Until then, Remove it takes it back."
   phone waits until the computer running Archie is on and Archie is open.
 - ⚠️ **Not yet pressed on a real phone against a sleeping computer.** Tested in code on both sides.
 
-### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (iPhone in App Store review), and never watched
+### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (not in the iPhone's 1.0), and never watched
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.5's `2afe4589`, and
 0.3.5's release note says "A skill or a routine opens where it sits". Archie for Business follows;
 its 0.3.5 is not out yet. The phone's half (archie-mobile `04da3b6`) is in v0.3.5's Android download (see "Which
-build Android has" above) and not on iPhone, which is still in App Store review. The wording below
-still waits for the watch the boundaries ask for, and names Android only until the iPhone app is out.*
+build Android has" above) and not on iPhone, whose 1.0 is older (see "Which build iPhone has"). The
+wording below still waits for the watch the boundaries ask for, and names Android only until an
+iPhone update carrying `04da3b6` is out.*
 
 **Approved wording, once both halves are in a release:** "When an update for Archie is ready,
 Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and
@@ -1642,13 +1668,14 @@ archie-mobile `04da3b6`):
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
 
-### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release; iPhone still in App Store review
+### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release; not in the iPhone's 1.0
 
 *Checked October 6, 2026: Archie `0d61132b`, the computer's side of the phone's picker, is an
 ancestor of 0.3.5's `2afe4589` (Archie for Business follows; its 0.3.5 is not out yet). The phone's
 screen (archie-mobile `51629d7`) is in v0.3.5's Android download (see "Which build Android has" above) and not on
-iPhone, which is still in App Store review. So the wording's last clause, "on the phone, under
-Response quality in More", may be said of Android, and of the iPhone once its app is out.*
+iPhone, whose 1.0 is older (see "Which build iPhone has"). So the wording's last clause, "on the
+phone, under Response quality in More", may be said of Android, and of the iPhone once an update
+carrying `51629d7` is out.*
 
 **Approved wording:** "Archie picks a model for each of Economy, Balanced and Best. You can pick your
 own for any of them, from the list your AI company publishes, and that setting runs it everywhere:
@@ -1685,13 +1712,14 @@ More."
 - ⛔ **Never "your agent picks the model".** The owner picks it; the agent never changes it on its
   own. A change restarts the agent, which takes a few seconds.
 
-### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
+### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker cannot choose a document
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.1's `09c5cb5e`, and
-every release since carries them. The app's half (the archie-mobile commits below) is not marked
-shipped here: the iPhone app is still in App Store review, and for Android see "Which build Android
-has" above. The wording below names the phone, so until that half is marked, a page may describe
-this in Archie on the computer only.*
+every release since carries them. The app's half (the archie-mobile commits below) is in the
+iPhone's 1.0 too (checked 2026-10-07, see "Which build iPhone has" above), and for Android see "Which
+build Android has". It is not marked shipped here, because the iPhone's 1.0 grays out PDFs and Office
+files in its picker (the ⛔ below). The wording below names the phone and a document, so until that
+half is marked, a page may describe this in Archie on the computer only.*
 
 **Approved wording, once it is in a release:** "Send your agent a photo, a few at once, a video, a
 recording, or a document, from Archie on your computer or from the Archie app on your phone. It
@@ -1751,8 +1779,8 @@ when that is the clearer shape."
   app shows pictures itself; other files are handed to the phone, and a phone with nothing for that
   kind says so rather than opening it.
 - ⛔ **Never say an iPhone sends a document until an iPhone build after archie-mobile `ca349b5` is
-  out.** Found October 6, 2026 on the iPhone test build of September 29, which is the build Apple is
-  reviewing: its files picker grays out PDFs and Office files, because iOS drops the
+  out.** Found October 6, 2026 on the iPhone test build of September 29, which is build 16, the one
+  Apple approved as Archie Mobile 1.0 on October 7: its files picker grays out PDFs and Office files, because iOS drops the
   `application/*` wildcard the picker was given. Fixed on main with the types named one by one
   (`DOCUMENT_TYPES` in `src/upload.ts`). The same build sends picked photos at once with no room for
   words (`50c192d` holds them in the message box until Send, so words go with them) and its Share
@@ -1835,9 +1863,11 @@ screen is open."
 - ⛔ **Never "nothing leaves your computer", "offline" or "a private voice assistant".** The words go
   to the AI company. "Only the words go" is the true half, and it is the stronger one.
 - ⚠️ **On the phone, the button only, and on Android only.** Archie Mobile's talk screen is in the
-  Android APK put on v0.3.5 on 2026-10-05 (archie-mobile `e742a48`), and the iPhone's build is still
-  with Apple. A drawing of the phone may show the button beside the microphone, as the site's phones
-  do since that day; any sentence about the phone's screen waits on the entry below.
+  Android APK put on v0.3.5 on 2026-10-05 (archie-mobile `e742a48`), and not in the iPhone's 1.0,
+  which is from before `cf0b115`. A drawing of the phone may show the button beside the microphone,
+  as the site's phones do since that day, because the Android app has it. The site draws its phones
+  in the iPhone's look, so until an iPhone update carrying `cf0b115` is out, no sentence beside such
+  a drawing says it is an iPhone, and any sentence about the phone's screen waits on the entry below.
 
 ### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05
 
@@ -1856,7 +1886,8 @@ their own in the entry above.
 **Checked 2026-10-05.** The phone's half is in a release on Android: the APK on v0.3.5 was built on
 this Mac from archie-mobile `e742a48`, and its bundle carries "Talk out loud" and `talk_screen`. The
 APK before it, uploaded the same afternoon, was built from before `cf0b115` and had neither. The
-iPhone is still with Apple. The other condition is still open, since nobody has talked to either
+iPhone's 1.0, approved October 7, is from before `cf0b115` and has neither. The other condition is
+still open, since nobody has talked to either
 screen (both threads in Archie's `docs/OPEN-THREADS.md`), so the wording below still
 waits. Drawing the button beside the microphone on the phone is allowed now, by the entry above.
 
@@ -1919,13 +1950,14 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
 
-### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
+### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); not in the iPhone's 1.0
 
 *Checked October 6, 2026: Archie `d34189e5` and `8fb5705d` are in 0.3.3, whose release note says
 "Your to-do list is the first card on the Dashboard" and "Knowledge opens like folders", and every
 release since carries them. The phone's half (archie-mobile `817e099`) is in v0.3.5's Android download (see "Which build
-Android has" above) and not on iPhone, which is still in App Store review. The wording below says
-"and on your phone", so a page says it of Android until the iPhone app is out.*
+Android has" above) and not on iPhone, whose 1.0 is older (see "Which build iPhone has"). The
+wording below says "and on your phone", so a page says it of Android until an iPhone update carrying
+`817e099` is out.*
 
 **Approved wording, once it is in a release:** "Your to-do list is the first thing on your agent's
 Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without
@@ -3238,13 +3270,14 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
-### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half on Android in 0.3.5's download (October 5, 2026); iPhone still in App Store review
+### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in Archie Mobile 1.0 (October 7, 2026)
 
 *Released, checked October 6, 2026: every Archie commit above is an ancestor of 0.3.1's `09c5cb5e`,
 and every release since carries them. The approved wording names chat and the Routines tab, both on
-the computer, so it applies now. The phone's half (archie-mobile `8f9ae08` and `4e22fd9`) is not
-marked shipped here: the iPhone app is still in App Store review, and for Android see "Which build
-Android has" above. Until it is, no page says the phone moves a routine's times.*
+the computer, so it applies now. The phone's half (archie-mobile `8f9ae08` and `4e22fd9`) is in
+both phone releases, checked October 7, 2026: Android's from `e742a48` and the iPhone's 1.0 from
+`a700d15` (see "Which build Android has" and "Which build iPhone has" above). So a page may say the
+phone moves a routine's times, on either.*
 
 Jett asked on 2026-09-28 why a routine could not run at 9:00 and 5:00, and decided it should, for
 everyone rather than only for jobs brought over from OpenClaw. The same day he set the cap at 24 (the

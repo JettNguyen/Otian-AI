@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Pairing Code | Archie Mobile | Otian AI</title>
-  <meta name="description" content="Where a pairing code from Archie on your computer lands when a phone camera opens it instead of the app, and what to do next." />
+  <meta name="description" content="Where a code from Archie on your computer lands when a phone camera opens it: the App Store on an iPhone, the download on Android, and what to do next." />
   <meta property="og:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
   <meta property="og:image:alt" content="Otian AI logo" />
   <meta name="twitter:image" content="https://otianai.com/assets/otian-icon-rounded.png" />
@@ -39,7 +39,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20261007-4" />
+  <link rel="stylesheet" href="../css/styles.css?v=20261007-5" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -191,7 +191,7 @@
               hold the phone up to your computer&rsquo;s screen again. If the code has run out,
               press <strong>Show another code</strong> on the computer, as often as you like.
             </p>
-            <p class="acct-lead" style="margin-top:12px;">
+            <p class="acct-lead app-get-other" style="margin-top:12px;">
               No app on this phone yet?
               <a href="../archie/mobile/">Archie Mobile is here</a>.
             </p>
@@ -206,6 +206,24 @@
             <p class="acct-lead" style="margin-top:12px;">
               <a href="../archie/mobile/">What the app is, and what it will not do</a>.
             </p>
+          </div>
+
+          <!--
+            The way to the app on this phone, one block per kind of phone (2026-10-07, the day the
+            iPhone app was approved). js/app-page.js moves the one that matches into whichever panel
+            it showed, and sends the phone there on its own the first time this tab opens the page:
+            an iPhone to the App Store, an Android phone to the APK. A computer gets neither, and
+            the panel's own link to the app's page stands.
+          -->
+          <div class="app-get acct-hidden" data-os="ios">
+            <p class="acct-lead">No app on this phone yet?</p>
+            <a class="btn btn-primary btn-lg" href="https://apps.apple.com/app/archie-mobile/id6810899666">Get Archie Mobile on the App Store</a>
+            <p class="acct-lead">Phone access needs a plan or a live trial.</p>
+          </div>
+          <div class="app-get acct-hidden" data-os="android">
+            <p class="acct-lead">No app on this phone yet?</p>
+            <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk">Download Archie Mobile for Android</a>
+            <p class="acct-lead">Android stops you twice on the way: <a href="../archie/install/#phone-heading">see the steps</a>. Phone access needs a plan or a live trial.</p>
           </div>
 
         </div>
@@ -293,8 +311,8 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20261007-4"></script>
-  <script type="module" src="../js/account-nav.js?v=20261007-4"></script>
-  <script type="module" src="../js/app-page.js?v=20261007-4"></script>
+  <script src="../js/nav.js?v=20261007-5"></script>
+  <script type="module" src="../js/account-nav.js?v=20261007-5"></script>
+  <script type="module" src="../js/app-page.js?v=20261007-5"></script>
 </body>
 </html>

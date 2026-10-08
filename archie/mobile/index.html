@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie Mobile | Otian AI</title>
-  <meta name="description" content="Archie Mobile lets you check in with the agent on your computer from your phone, between jobs. You can install it on Android today; on iPhone it is with Apple for review. What it can do, and what stays on your computer." />
+  <meta name="description" content="Archie Mobile lets you check in with the agent on your computer from your phone, between jobs. Get it on the App Store for iPhone, or as a direct download for Android. What it can do, and what stays on your computer." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-4" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-5" />
   <style>
     /* The small-screen variant of the phone mocks is the how-it-works hero's marquee
        (js/screenshot-gallery.js) rather than a tall stack: three screens scrolling
@@ -213,8 +213,9 @@
          three stills between the mocks markers. The stills are what a reader with reduced
          motion or no JavaScript gets, with every caption stacked under them; the stage pins
          only once js/mobile.js has put is-live on the story. Every caption sentence is
-         TRUST.md's approved wording for the phone app (the "SHIPPED ON ANDROID" entry):
-         Android is downloadable, the iPhone app is with Apple, and no date anywhere on this page.
+         TRUST.md's approved wording for the phone app (the "SHIPPED ON ANDROID AND IPHONE"
+         entry): both are out since 2026-10-07, and the iPhone's build is the older of the two,
+         so nothing here is newer than Archie Mobile 1.0 on an iPhone.
          ============================================================================== -->
     <section class="mb-story" aria-label="Archie Mobile, screen by screen">
       <div class="mb-stage">
@@ -229,7 +230,7 @@
 
           <!-- Act 0. The hero, and the two store tiles this page exists for. -->
           <article class="day-cap is-on" data-act="0">
-            <span class="section-label">Archie Mobile &middot; On Android now</span>
+            <span class="section-label">Archie Mobile &middot; iPhone and Android</span>
             <h1>Your agent, <em>from your phone.</em></h1>
             <p><strong>Check in with your agent between jobs.</strong></p>
             <!-- THE TILES WENT HALF LIVE ON 2026-09-22, and the two halves are no longer the same
@@ -243,12 +244,16 @@
                  **Since 2026-10-06 the Android tile is this page's main button** (Jett: neither tile
                  read as clickable, and Download Archie outranked them on a page about the phone), so
                  it wears .btn-primary's fill, and the iPhone tile carries its review as plain muted
-                 text with no pill, because anything not out yet is fine print. -->
+                 text with no pill, because anything not out yet is fine print.
+                 **Since 2026-10-07 both tiles are live**: Apple approved the iPhone app, so its tile
+                 links to the App Store listing and wears the same fill. It says "App Store" in words
+                 and keeps the drawn glyph, because Apple's badge is a mark of its own with rules. -->
             <div class="mb-stores" role="group" aria-label="Where Archie Mobile is">
-              <div class="mb-store" data-state="soon">
+              <a class="mb-store" data-state="live" href="https://apps.apple.com/app/archie-mobile/id6810899666">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
-                <span class="mb-store-txt"><b>iPhone</b><span>In App Store review</span></span>
-              </div>
+                <span class="mb-store-txt"><b>iPhone</b><span>App Store</span></span>
+                <span class="mb-store-state">Get it</span>
+              </a>
               <a class="mb-store" data-state="live" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk">
                 <svg class="mb-store-ic" aria-hidden="true"><use href="#g-phone"/></svg>
                 <span class="mb-store-txt"><b>Android</b><span>Direct download</span></span>
@@ -256,7 +261,7 @@
               </a>
             </div>
             <a class="day-more" href="../install/">Download Archie for your computer&nbsp;&rarr;</a>
-            <p class="hm-hero-micro">Phone access needs a plan or a live trial. Android installs from a file and stops you twice: <a href="../install/#phone-heading">see the steps</a>. The iPhone app is with Apple for review.</p>
+            <p class="hm-hero-micro">Phone access needs a plan or a live trial. Android installs from a file and stops you twice: <a href="../install/#phone-heading">see the steps</a>.</p>
           </article>
 
           <!-- Act 1. TRUST.md's "what the app is and is not", first half: the app reaches the
@@ -538,8 +543,8 @@
 
     <section class="section hm-cta" aria-label="Call to action">
       <div class="hm-wrap hm-head">
-        <h2 class="fade-up">Use your chat app today.</h2>
-        <p class="fade-up">Connecting one is the last setup step and takes a few minutes.</p>
+        <h2 class="fade-up">Start with Archie on your computer.</h2>
+        <p class="fade-up">Then pair your phone by scanning the code Archie shows. There is no account or password on the phone.</p>
         <div class="hm-actions fade-up">
           <a href="../install/" class="btn btn-primary btn-lg">Download Archie</a>
         </div>
@@ -628,8 +633,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-4"></script>
-  <script src="../../js/mobile.js?v=20261007-4"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-4"></script>
+  <script src="../../js/nav.js?v=20261007-5"></script>
+  <script src="../../js/mobile.js?v=20261007-5"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-5"></script>
 </body>
 </html>

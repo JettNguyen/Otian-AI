@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
 <title>Install Archie | Otian AI</title>
-  <meta name="description" content="Download Archie for Mac or Windows, and the Android app for your phone, with an honest account of what to expect the first time you open it." />
+  <meta name="description" content="Download Archie for Mac or Windows, and Archie Mobile for your iPhone or Android phone, with an honest account of what to expect the first time you open it." />
   <!-- Off the menus and out of search until launch day, 2026-10-03, when it went back in the Archie
        menu and became where the top bar's Download Archie button goes. trust/it-review/ sends a
        work computer's IT reviewer here for the Windows code-signing passage. -->
@@ -43,7 +43,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261007-4" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261007-5" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -290,7 +290,7 @@
           </video>
         </div>
         <div class="demo-player-rail" data-duration="141" hidden><i></i></div>
-        <figcaption class="demo-player-caption">A walkthrough of Archie, recorded on a test build in September 2026; the iPhone app shown is still in review with Apple. <a href="../../how-it-works/">Watch it beside the steps &rarr;</a></figcaption>
+        <figcaption class="demo-player-caption">A walkthrough of Archie, recorded on a test build in September 2026. <a href="../../how-it-works/">Watch it beside the steps &rarr;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -300,7 +300,9 @@
        It is an "and", not an either/or: the two editions are a choice and this is a thing you add
        to whichever you chose, and stacking all three as siblings said they were the same kind of
        decision. Android's own stops live inside it, folded away, because a reader who is not
-       adding a phone should never meet them.
+       adding a phone should never meet them. iPhone joined Android on 2026-10-07, when Apple
+       approved the app, and the two stand side by side the way the computers do above. Its button
+       goes to the App Store listing rather than a file, so it has no download note.
        ============================== -->
   <section class="section" aria-labelledby="phone-heading">
     <div class="container container-narrow">
@@ -310,14 +312,17 @@
         <p>A remote control for the agent on your computer. It does most of what the desk does, except open your knowledge files or the rows inside a collection. <a href="../mobile/">See what the phone can do</a>.</p>
       </div>
 
-      <div class="install-actions install-actions--solo fade-up delay-2">
+      <div class="install-actions install-actions--phone fade-up delay-2">
+        <div class="install-platform">
+          <a class="btn btn-secondary btn-lg" href="https://apps.apple.com/app/archie-mobile/id6810899666"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for iPhone</span></a>
+          <p class="install-req">iOS 16.4 or later, from the App Store. Needs a plan or a live trial.</p>
+        </div>
         <div class="install-platform">
           <a class="btn btn-secondary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk" data-download-note="download-note-android"><svg class="btn-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3zm-7 16h16v2H4v-2z"/></svg><span>Download for Android</span></a>
           <p class="install-req">Android 7.0 or later. Needs a plan or a live trial. Installs from a file, so Android stops you twice.</p>
           <p class="download-note" id="download-note-android" role="status" aria-live="polite"></p>
         </div>
       </div>
-      <p class="install-req">The iPhone app is with Apple for review. Until then, an iPhone reaches your agent through a chat app.</p>
 
       <details class="install-details mt-40 fade-up delay-3">
         <summary>Every screen Android shows, in order</summary>
@@ -600,9 +605,9 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261007-4"></script>
-  <script src="../../js/download-feedback.js?v=20261007-4"></script>
-  <script src="../../js/demo-player.js?v=20261007-4"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261007-4"></script>
+  <script src="../../js/nav.js?v=20261007-5"></script>
+  <script src="../../js/download-feedback.js?v=20261007-5"></script>
+  <script src="../../js/demo-player.js?v=20261007-5"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261007-5"></script>
 </body>
 </html>

@@ -1252,7 +1252,10 @@ until an iPhone update carrying it is approved. Checked the same day: the routin
 (`817e099`), Stop (`721791f`), opening a skill in place and updating the computer (`04da3b6`), the
 model picker (`51629d7`), the talk screen (`cf0b115`), the model name at pairing (`fc8d1fb`) and the
 iPhone's picker and Share fixes (`ca349b5`, `50c192d`, `d5ecab0`) are not. Builds 17 and 18 (October
-4, made on EAS with the iOS 26.5 SDK) are on App Store Connect and in no release.
+4, made on EAS with the iOS 26.5 SDK) are on App Store Connect and in no release. **Version 1.1 went to
+Apple on October 8, 2026** with build 19, made on this Mac from archie-mobile `a871270`, which
+contains every commit named in this paragraph. Until App Store Connect shows 1.1 READY_FOR_SALE,
+everything above stands, and the gates below still name Android.
 
 **Status 2026-09-22. The tense split, and this is the deliberate pass that entry always promised.**
 Android and iPhone are no longer in the same state, so no page may talk about "the phone app" as one

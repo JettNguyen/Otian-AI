@@ -52,6 +52,11 @@ conventions, which stay below as history.
   gets something "in its next release" stay until that release is out. On a Mac that updated in
   place, System Settings still lists the app as Archie for Business, which help/ says. The URLs stay `archie/personal/` and
   `archie/business/`.
+- **Consulting has its own site (Jett, 2026-10-08): Otian AI Consulting**, at `consulting.otianai.com`,
+  repo `/Users/Games/Desktop/Code/Otian-Consulting`. Same family, its own layout, because it sells two
+  people and ends on a booked call. Every Services and Work With Us link here points there, the menu
+  row says Consulting, and `services/`, `consulting/` and `guided-setup/` are redirect stubs to it.
+  Archie claims and money figures on that site answer to this repo's TRUST.md and FACTS.md.
 - **The main button stays Download Archie.** Jett: owners hesitate at a call when the product works
   right now. The free call (`services/`) is the second route, never the first.
 - **Patrick is the proof** (Westway Site Services, a site-services company he runs): lead with him.

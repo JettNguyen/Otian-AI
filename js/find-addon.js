@@ -1,5 +1,5 @@
 /* Plain word matching. Queries stay in the tab. Names come from the generated public catalog. */
-import { CATALOG_INDEX } from './catalog-index.js?v=20261007-5';
+import { CATALOG_INDEX } from './catalog-index.js?v=20261008-1';
 const byKey = new Map(CATALOG_INDEX.map(item => [item.key, item]));
 
 var JOBS = [
@@ -122,7 +122,7 @@ function render(query) {
   if (!found.length) {
     results.innerHTML =
       '<p class="find-empty">Nothing in the catalog matches those words yet. That is worth telling us: ' +
-      '<a class="marketplace-text-link" href="../../services/#commission">say what you need</a>, ' +
+      '<a class="marketplace-text-link" href="https://consulting.otianai.com/#services">say what you need</a>, ' +
       'or <a class="marketplace-text-link" href="../browse/">look through all of them</a>.</p>';
     return;
   }
@@ -135,7 +135,7 @@ function render(query) {
     html += '<li><a class="find-hit" href="../browse/?addon=' + encodeURIComponent(item.key) + '">' +
             escapeHtml(item.name) + '</a></li>';
   });
-  html += '</ul><p class="find-more">Not it? <a class="marketplace-text-link" href="../../services/#commission">' +
+  html += '</ul><p class="find-more">Not it? <a class="marketplace-text-link" href="https://consulting.otianai.com/#services">' +
           'Tell us what you actually need&nbsp;&rarr;</a></p>';
   results.innerHTML = html;
 }

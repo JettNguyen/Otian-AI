@@ -34,10 +34,6 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [Install Archie](https://otianai.com/archie/install/): Download Archie for Mac or Windows, and Archie Mobile for your iPhone or Android phone, with an honest account of what to expect the first time you open it.
 - [Archie Mobile](https://otianai.com/archie/mobile/): Archie Mobile lets you check in with the agent on your computer from your phone, between jobs. Get it on the App Store for iPhone, or as a direct download for Android. What it can do, and what stays on your computer.
 
-## Services we offer
-
-- [Working With Us](https://otianai.com/services/): We set up Archie for your trades or field-service business with you over Zoom, build a larger setup in phases, or build an add-on to order. Each starts with a free call: $250 an hour for the first two, and a quote per add-on for the third.
-
 ## Add-ons
 
 - [Add-on Marketplace](https://otianai.com/skills-marketplace/browse/): Browse the personalities, skills and routines your agent can take on, all included with Archie. You install them inside Archie, free to download for Mac and Windows.

@@ -13,6 +13,14 @@ true, it doesn't ship, and there is no appeal to how good it sounds.
 
 **Last verified against the Archie source:** 2026-08-21 (full-file fact-check, `Archie@main`)
 
+**Archie for Business is Archie for Teams** (Jett, 2026-10-07). The site took the name that day,
+ahead of the app, which takes it in 0.3.7; until that release ships, installed copies and the
+installer still say Archie for Business, and the pages that describe them say so. Entries written
+before the rename say Archie for Business and are left as written, because they record what was
+true and when. Approved wording names the edition the new way: where an approved sentence below says Archie
+for Business, a page writes Archie for Teams. On a Mac that updated in place, System Settings still
+lists the app under the old name, and the help and permission sentences say so.
+
 **Reconciliation — 2026-08-21.** Every claim in this file and on the site was checked against the
 code in one pass: 473 claims, of which 298 held exactly. What follows is what the rest required.
 The themes, each fixed in place below and on the affected pages:
@@ -2103,8 +2111,9 @@ frightened reader is asking about, which is whether leaving is survivable.
 **Approved wording:** "You stop a plan in Archie, on the Account page, under Your plan. It runs to
 the end of the period you have already paid for. On Personal, if a key from an AI company is saved,
 Archie keeps opening after that: you land on the free tier, at 20 jobs a day, rather than at a
-wall. Every agent you have made is still there and still works. Without a saved key, Archie asks for one. Archie for Business has no
-free tier, so it asks for a plan. Nothing on your computer is deleted in any of the three cases."
+wall. Every agent you have made is still there and still works. Without a saved key, Archie asks for one. Archie for Teams has no
+free tier, so it asks for a plan. Nothing on your computer is deleted in any of the three cases." (It
+said Archie for Business until 2026-10-07, when the site renamed the edition ahead of 0.3.7.)
 
 **Why it's true:** `onFreeTier` in the Archie repo's `src/app/pricing.ts` is
 `!IS_BUSINESS && !auth.allowed && !auth.trial_active && auth.own_ai_key`, and `App.tsx` sends a
@@ -2135,8 +2144,8 @@ carries **Save a backup of your agents**, beside "Already paid? Check again". It
 dialog and `transfer_save` as the Backups section (`pickBackupPath`, `savedBackupNote` in
 `src/app/moving.tsx`), and `transfer_save` asks only that somebody is signed in, which anybody on that
 screen is. **The sentence above may stay on every page that has it**: it is still the safest
-advice, and Archie for Business has no button until its next release. From 0.3.6, the approved form
-for Personal is the one below, and `trust/details/` carries it since October 6, 2026, with the
+advice, and Archie for Teams has no button until its next release, 0.3.7. From 0.3.6 for Archie,
+and from 0.3.7 for Archie for Teams, the approved form is the one below, and `trust/details/` carries it since October 6, 2026, with the
 Business clause: "Nothing on your computer is deleted, and the screen
 that asks for a plan has a button that saves a backup of your agents." Never "you can always get
 your agents out": a computer signed out of every account still reaches neither the button nor the
@@ -4065,7 +4074,7 @@ sent at all, which means "the business store does not carry the meal planner" we
 habit to a fact about what arrives over the wire, and a fact is the kind of thing this file governs.
 
 **Approved wording:**
-- "Archie for Business's Marketplace holds the add-ons built for a team, plus everything a business
+- "Archie for Teams's Marketplace holds the add-ons built for a team, plus everything a business
   and a person can both use. The personal-life ones are not in it."
 - Naming what is out by enumeration: "no expense tracker, no meal planner, no workout log."
 
@@ -5510,8 +5519,11 @@ one."
   >
   > Asking first has a cost: a page your agent wants to open on its own judgment now waits for you.
   > Since Archie 0.3.6, for about ten messages after your agent reads new mail or texts for you, so
-  > does a search it hands on or a site you name in passing. Archie for Business gets this in its
+  > does a search it hands on or a site you name in passing. Archie for Teams gets this in its
   > next release.
+
+  The last sentence comes off the day 0.3.7 ships, which brings the business edition level. It said
+  Archie for Business until 2026-10-07, when the site renamed the edition ahead of the app.
 
   The memory way is in the first paragraph, which is why the third names two (three until 0.3.6).
   The preview is on `trust/details/` only, because it is fixed in 0.3.6 and the summary names what

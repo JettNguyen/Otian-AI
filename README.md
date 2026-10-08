@@ -98,7 +98,7 @@ on a quote per add-on.
 | **A plan** | **$30** a month, or **$299** a year. Takes the limit off, up to 10 agents, with every add-on. |
 | **The AI itself** | Billed to you by the AI company you pick, at their price. We add nothing to it. |
 | **The AI included** | **$59** a month, or **$599** a year, with $25 of AI use a month. Email and text reading need your own AI account. |
-| **Archie for Business** | **$99** a month, or **$999** a year. |
+| **Archie for Teams** | **$99** a month, or **$999** a year. |
 
 The AI bill runs from $1 to $5 a month for a light agent, up to $139 for a heavy one. The
 [pricing page](https://otianai.com/archie/pricing/) shows the working. Plans can be refunded within

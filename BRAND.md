@@ -15,7 +15,7 @@ Keep the existing Otian mark, Archie marks, Ember, and approved ownership taglin
 They are the recognizable parts of this brand. Use Ember as an agent's identity
 and an occasional guide, with room around it.
 
-Product names are **Archie**, **Archie for Business**, and **Archie Mobile**.
+Product names are **Archie**, **Archie for Teams** (Archie for Business until 0.3.7), and **Archie Mobile**.
 Otian AI is the company and account name. Platform names describe availability;
 they are not separate product brands.
 

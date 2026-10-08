@@ -32,7 +32,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 - [How It Works](https://otianai.com/how-it-works/): Install Archie on a computer you can leave on, set up an agent from add-ons, and message it from Telegram, Discord, Slack, Matrix or iMessage. What you need, what you can skip, and the five setup steps.
 - [Archie Pricing](https://otianai.com/archie/pricing/): Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Teams is $99 a month. The AI bills you directly: $1 to $5 a month for a light agent, up to $139 for a heavy one.
 - [Install Archie](https://otianai.com/archie/install/): Download Archie for Mac or Windows, and the Android app for your phone, with an honest account of what to expect the first time you open it.
-- [Archie Mobile](https://otianai.com/archie/mobile/): Archie Mobile reaches the agent on your computer from your phone, sealed on the way under a key we never receive. You can install it on Android today; on iPhone it is with Apple for review. What it can do, and what stays on your computer.
+- [Archie Mobile](https://otianai.com/archie/mobile/): Archie Mobile lets you check in with the agent on your computer from your phone, between jobs. You can install it on Android today; on iPhone it is with Apple for review. What it can do, and what stays on your computer.
 
 ## Services we offer
 

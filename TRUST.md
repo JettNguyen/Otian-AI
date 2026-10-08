@@ -2553,8 +2553,10 @@ draws with OpenAI or Google: on your own account with either one, or on a Gemini
 just for pictures. With only a Claude account, it cannot draw."
 
 **Why it's true:** `crates/archie-runtime/src/imagegen.rs` is the `generate_image` tool, and
-`crates/archie-net/src/images.rs` draws with `gpt-image-1` or `gemini-2.5-flash-image`
-(`provider_makes_images` is OpenAI and Gemini only). Anyone on another provider can save a Gemini
+`crates/archie-net/src/images.rs` draws with `gpt-image-2.5-flare` or `gemini-2.5-flash-image`
+(`provider_makes_images` is OpenAI and Gemini only). OpenAI's model was `gpt-image-1` until
+October 8, 2026, and OpenAI shuts that one down on October 23, 2026: a copy of Archie released
+before the change stops drawing on an OpenAI account that day, and Gemini pictures are unaffected. Anyone on another provider can save a Gemini
 key for pictures alone, and the tool is not offered at all when neither key exists. The picture
 is sent into the conversation, or saved on the computer with its path reported when the chat app
 cannot take a file. Shipped in Archie 0.1.3 (`docs/releases/0.1.3.md`: "It can make pictures

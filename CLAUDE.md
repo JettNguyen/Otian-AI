@@ -54,8 +54,11 @@ conventions, which stay below as history.
   `archie/business/`.
 - **Consulting has its own site (Jett, 2026-10-08): Otian AI Consulting**, at `consulting.otianai.com`,
   repo `/Users/Games/Desktop/Code/Otian-Consulting`. Same family, its own layout, because it sells two
-  people and ends on a booked call. Every Services and Work With Us link here points there, the menu
-  row says Consulting, and `services/`, `consulting/` and `guided-setup/` are redirect stubs to it.
+  people and ends on a booked call. Every Services and Work With Us link here points there, Consulting
+  is its own top-bar menu (Otian AI Consulting, Book a Free Call, Consulting Pricing; added 2026-10-08
+  so it is visible rather than a row under About, which is why the tagline under the wordmark hides
+  from 971 to 1120px), the price band carries "Have us set it up", and `services/`, `consulting/` and
+  `guided-setup/` are redirect stubs to it.
   Archie claims and money figures on that site answer to this repo's TRUST.md and FACTS.md.
 - **The main button stays Download Archie.** Jett: owners hesitate at a call when the product works
   right now. The free call (`services/`) is the second route, never the first.

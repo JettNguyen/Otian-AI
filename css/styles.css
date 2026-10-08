@@ -1654,17 +1654,20 @@ html[data-theme="dark"] .theme-toggle-icon--moon { display: block; }
 
 /* ── Nav responsive ──────────────────────────────────────────────────────────
    Three tiers, sized to what actually fits:
-   • > 1100px          full row: logo (icon + wordmark + tagline), all menus,
+   • > 1120px          full row: logo (icon + wordmark + tagline), all menus,
                        theme toggle, Get Started, avatar.
-   • 971 to 1100px     drop the wordmark + tagline to their icon so the full set
-                       of menus keeps fitting on one line; controls stay put.
+   • 971 to 1120px     drop the tagline under the wordmark so the full set of
+                       menus keeps fitting on one line; controls stay put. Six
+                       menus since Consulting got its own (2026-10-08) overflowed
+                       by up to 89px at 975 with it showing.
    • ≤ 970px           menus + Get Started move into the drawer, hamburger appears,
                        and the wordmark returns (there's room again, and it keeps
                        the company name on screen at phone widths, which Google
                        OAuth verification requires on the home page). */
-@media (max-width: 1100px) and (min-width: 971px) {
+@media (max-width: 1120px) and (min-width: 971px) {
   .nav-inner { gap: 14px; }
   .nav-links { gap: 2px; }
+  .nav-logo-subtitle { display: none; }
 }
 
 @media (max-width: 970px) {

@@ -5033,6 +5033,13 @@ change your calendar, or use the apps you connected."
 - **Which lists:** only ones the agent itself may write. The records store refuses a write to a list
   whose writers do not include this agent (`records::may_write`, the list's Audience), for a
   teammate as for anyone.
+- **On the phone** the owner picks the same three answers, in the same words, from Guests on the
+  agent's More tab in Archie Mobile (archie-mobile `c31d8b0`: `src/screens/Guests.tsx`, the words
+  in `src/guests.ts`), shown on Archie for Teams once somebody else is on the agent, which is when
+  the computer shows it too. The computer sends the setting with the agent (`guests_of` in the
+  Archie repo's `src-tauri/src/phone.rs`, `d449531b`) and saves the phone's pick through the
+  window's own command (`set_guest_powers` calls `access_set_guest_powers`), checked by
+  `a_guest_setting_from_the_phone_is_saved_and_the_snapshot_reports_it`.
 
 **Boundaries:**
 - ⛔ Never that a teammate's removal waits for the owner's yes. A removal waits for a yes typed in
@@ -5046,8 +5053,9 @@ change your calendar, or use the apps you connected."
   agent can, as the shared-knowledge wording above says.
 - ⚠️ "Tasks" is two things. A task in Task Manager is a row on a list and comes with this setting; a
   task in Todoist or Google Tasks is a connected app and does not.
-- ⚠️ Not on Archie Mobile. The phone app has no screen for who can message an agent, so the owner
-  picks this setting on the computer only.
+- ⚠️ On Archie Mobile it is this choice and nothing more. Letting someone in, blocking someone and
+  taking someone off are on the computer only. It needs both apps updated, and neither release has
+  it yet: a phone paired with a computer from before October 8, 2026 shows no Guests at all.
 - What it replaced: the setting had two answers, talk or everything, and a teammate refused a row
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).

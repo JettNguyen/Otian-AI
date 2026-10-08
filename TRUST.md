@@ -4997,6 +4997,61 @@ Sheets beside them, and says there is no per-person setting on any of them. This
 from marking a mailbox as one person's; never imply that marking the mailbox also restricts
 the agent's knowledge.
 
+### 🚧 On Archie for Teams, teammates can add to an agent's lists without being handed the owner's mail or calendar: BUILT 2026-10-08 (Archie `9de4bfa4`, branch `guest-lists-only`), in no release yet, and never picked on a real agent
+
+**In no release yet, so in the present tense on no page.** Built and tested on October 8, 2026, at
+Jett's decision that day; nobody has chosen it on a real Archie for Teams agent. The tense rule
+holds until a release note names it.
+
+**Approved wording, once it ships:** "On a shared agent you choose what the people you let in can
+do: ask it things, also add to and change its lists, or everything you can. In the middle setting a
+teammate can log a delivery or add a task to the agent's lists, and still cannot send your mail,
+change your calendar, or use the apps you connected."
+
+**Why it's true:**
+- **The setting** is `GuestPowers` (talk, lists, everything) in the Archie repo's
+  `crates/archie-domain/src/access.rs`, picked on the agent's Setup tab under Who can message it,
+  What guests can do (`src/app/access.tsx`, saved by `access_set_guest_powers` in
+  `src-tauri/src/commands/access.rs`). `access.json` keeps it as two switches,
+  `guests_may_act_as_owner` and the new `guests_may_edit_lists`, so a roster saved before it reads
+  back exactly as it was picked (`guest_powers_read_back_as_they_were_picked`). Talk stays the
+  default.
+- **Each message** turns it into two flags at the gate (`gate` in
+  `crates/archie-runtime/src/access.rs`): `may_act_as_owner` and `may_edit_lists`, tested for all
+  three answers by `what_guests_can_do_reaches_the_turn_as_two_flags`.
+- **The turn** hands that guest the six row tools (add, change, remove, undo, and the yes and no on
+  a removal) and nothing else on the owner-only list: `is_list_verb` and `withheld_from` in
+  `crates/archie-runtime/src/gateway/turn.rs`, applied to the tool list and again at dispatch.
+  `talk_and_add_to_your_lists_hands_over_the_rows_and_nothing_else` checks mail, calendar, to-do
+  apps, connected services, the CRM, Drive, documents, files, memory, reminders and the screen
+  tools. `a_guest_who_may_add_to_the_lists_adds_a_row_and_reaches_nothing_else` in
+  `crates/archie-runtime/tests/pipeline.rs` drives the real gateway: the guest's row lands on the
+  list, their tool list holds none of memory, reminders, saving a file or making a list, and a call
+  to the calendar and mail tools comes back refused. It fails with the change taken out.
+- **A tick on the task checklist**, tapped or typed as a number, follows the same flag (`worker.rs`,
+  `tasks::try_consume_number`).
+- **Which lists:** only ones the agent itself may write. The records store refuses a write to a list
+  whose writers do not include this agent (`records::may_write`, the list's Audience), for a
+  teammate as for anyone.
+
+**Boundaries:**
+- ⛔ Never that a teammate's removal waits for the owner's yes. A removal waits for a yes typed in
+  a later message by whoever is in that chat, which in a teammate's own chat is the teammate. It is
+  the owner's mechanism, not the owner's approval.
+- ⛔ Never that teammates' changes wait for approval at all. Adding and changing a row happen at once
+  with an undo, exactly as they do for the owner.
+- ⛔ Never that teammates can set up lists. Making a new list and adding a column stay the owner's
+  (`records_new_list`, `records_add_field`).
+- ⛔ Never imply lists become private per person. Every guest on every setting reads every list the
+  agent can, as the shared-knowledge wording above says.
+- ⚠️ "Tasks" is two things. A task in Task Manager is a row on a list and comes with this setting; a
+  task in Todoist or Google Tasks is a connected app and does not.
+- ⚠️ Not on Archie Mobile. The phone app has no screen for who can message an agent, so the owner
+  picks this setting on the computer only.
+- What it replaced: the setting had two answers, talk or everything, and a teammate refused a row
+  was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
+  The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
+
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 
 **Approved wording:** *"put your company's name and logo on it"*, *"they stay on the computer
@@ -5882,8 +5937,10 @@ reading the page.
 
 **Decided 2026-08-24.** BetterClaw's Intern / Specialist / Lead ladder (wishlist item 3) is not
 being adopted. Archie already made this call once, in a different place and for the same reason:
-`crates/archie-domain/src/access.rs` gives a guest one switch rather than per-tool permissions,
-because "per-tool permissions would be a screen nobody finishes reading."
+`crates/archie-domain/src/access.rs` gives a guest one setting rather than per-tool permissions,
+because "per-tool permissions would be a screen nobody finishes reading." (It had two answers
+until October 8, 2026, and three since: talk, add to the lists, everything. Still one setting,
+and still no per-tool list.)
 
 Ranking three abstractions before you know what any of them do is a worse ask of a non-technical
 buyer than one switch per add-on that says whether it checks with you first. If a per-add-on

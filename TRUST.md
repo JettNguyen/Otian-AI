@@ -1430,6 +1430,13 @@ inside the agent's lists, apart from the open items on its to-do list". The item
 conversation they already appeared in as the agent's checklist, so "sealed with a key we never
 receive" covers them and "never leaves your computer" does not. See the to-do list's own entry.
 
+⚠️ **Not in a release yet: a count per step, on a list that shows its steps** (Archie `3a9a3b21`,
+archie-mobile `9bd3647`, both on main October 9, 2026; Jett's call that day). Such a list also sends
+how many rows sit at each step, under the step names its own form set, and its place in the
+computer's sidebar. Still never a row. Once a release carries it, "Every other list still sends a
+count and nothing else" reads "Every other list sends a count, and a count per step when it shows
+its steps". See the stages entry.
+
 **What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
 the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
 because a permission prompt is the one piece of this product a person reads before they trust it.
@@ -1999,6 +2006,49 @@ archie-mobile `817e099`):
   updates everywhere at once.
 - **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
   are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
+
+### 🚧 A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, in no release yet
+
+*Archie `3a9a3b21` and archie-mobile `9bd3647`, both on main and in no release. Nothing below may be
+said on a page until a release carries them; then the wording says "and on your phone" of whichever
+phone build carries `9bd3647`.*
+
+**Approved wording, once it is in a release:** "A list can show its steps: Quoted, Booked, Out,
+Picked up. Each row wears its step in color, the list opens on how many are at each one, and the
+lists you use most can sit in the sidebar, right under Jobs. Your phone shows the same counts."
+
+**Why it's true** (Archie `3a9a3b21`; archie-mobile `9bd3647`):
+
+- **The setting.** `stage_field` on `CollectionSchema` (`crates/archie-domain/src/records.rs`) names
+  a choice column with at least two choices, and its choices in order are the steps. A person sets
+  it under Stages on the list's own form (`CollectionBuilder` in `src/app/records.tsx`), or an
+  add-on's manifest does. An add-on update brings its stages only to a list nobody changed.
+- **The table.** The step column is drawn as colored pills (`STAGE_PILL` and `stageHue` in
+  `src/app/pinned-lists.ts`), and above the rows is a count for every step, zero included, which
+  narrows the table to that step when pressed.
+- **The sidebar.** `sidebar_lists` in the agent's own `agent.json` (`AgentBundleManifest`), at most
+  six, set by Keep in the sidebar on the list. The rows are drawn after Jobs in both widths of the
+  sidebar (`src/app/App.tsx`) and open the list on a page of its own.
+- **The phone.** The snapshot sends each list's place in the sidebar and its count per step
+  (`build_core` in `src-tauri/src/phone.rs`, `stage_counts` in the domain crate). Archie Mobile lists
+  the kept lists after Jobs on More and draws the counts on Lists, in the same colors
+  (`src/screens/Manage.tsx`, `src/stages.ts`).
+- **Cost.** Nothing on any turn. A step is the value of a choice column the agent already writes, so
+  it has no new tool, and the text that tells the model about a list's columns does not mention the
+  setting.
+
+**The boundaries.**
+
+- ⚠️ **The phone gets counts, never rows.** How many are Out travels; which rentals are out does
+  not. Never say the phone shows what is in a list, apart from the to-do list.
+- ⚠️ **A kept list on the phone opens Lists, not the list**, because the phone has no rows to show.
+- ⚠️ **Steps are drawn, not enforced.** A row can skip a step or go back one, and no step starts
+  anything by itself. Never say moving a row to a step sends a message or runs a routine.
+- ⚠️ **The pin is each agent's own.** On Archie for Teams, keeping a shared list in one agent's
+  sidebar puts it in nobody else's.
+- ⚠️ **The interview does not set any of this yet.** Matching a business to a starting setup that
+  turns steps on is step 2 of Archie's `docs/LINE-OF-WORK.md`, and not built. Never say Archie sets
+  itself up for your line of work.
 
 ### ✅ It works while you sleep
 

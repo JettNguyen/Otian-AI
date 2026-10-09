@@ -14,8 +14,8 @@ true, it doesn't ship, and there is no appeal to how good it sounds.
 **Last verified against the Archie source:** 2026-08-21 (full-file fact-check, `Archie@main`)
 
 **Archie for Business is Archie for Teams** (Jett, 2026-10-07). The site took the name that day,
-ahead of the app, which takes it in 0.3.7; until that release ships, installed copies and the
-installer still say Archie for Business, and the pages that describe them say so. Entries written
+ahead of the app, which took it in 0.3.7 on October 8, 2026, so the app, its installer and its
+receipts say Archie for Teams now (Stripe's product is "Archie For Teams"). Entries written
 before the rename say Archie for Business and are left as written, because they record what was
 true and when. Approved wording names the edition the new way: where an approved sentence below says Archie
 for Business, a page writes Archie for Teams. On a Mac that updated in place, System Settings still
@@ -2179,8 +2179,8 @@ carries **Save a backup of your agents**, beside "Already paid? Check again". It
 dialog and `transfer_save` as the Backups section (`pickBackupPath`, `savedBackupNote` in
 `src/app/moving.tsx`), and `transfer_save` asks only that somebody is signed in, which anybody on that
 screen is. **The sentence above may stay on every page that has it**: it is still the safest
-advice, and Archie for Teams has no button until its next release, 0.3.7. From 0.3.6 for Archie,
-and from 0.3.7 for Archie for Teams, the approved form is the one below, and `trust/details/` carries it since October 6, 2026, with the
+advice. From 0.3.6 for Archie, and from 0.3.7 (out October 8, 2026) for Archie for Teams, the
+approved form is the one below, and `trust/details/` carries it since October 6, 2026, with the
 Business clause: "Nothing on your computer is deleted, and the screen
 that asks for a plan has a button that saves a backup of your agents." Never "you can always get
 your agents out": a computer signed out of every account still reaches neither the button nor the
@@ -4889,7 +4889,7 @@ way to mark a message as written by an assistant. On a shared agent this is the 
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
 | **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 | **"Replies and calendar moves wait for your yes."** | ✅ **True now (0.3.1), and the homepage heading (`#mine-heading`) since 2026-09-29**, narrowed from the lists form below the same day at Jett's ruling. A reply that reaches somebody else waits: the row above holds the code pointers. A calendar move waits: the Calendar changes entry above (`tools_calendar.rs`, staged on the turn that proposes it and applied only on a later one). The figure under the heading draws those two lanes and no third, and the line under it, "No setting turns that asking off", is scoped by this heading and says nothing without it. The four blog posts that carried the lists form now carry this one (`your-ai-agents-messages-go-out-under-your-name`, `say-maybe-to-your-ai-and-it-hears-do-it`, `your-ai-agent-should-bother-you-more-not-less`, `ai-built-my-workout-program`). ⛔ Never shorten it to "everything waits for your yes", and never let it stand for a purchase, which the Buying entry says it must never cover. The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." |
-| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo; removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). **On no page yet**: the homepage heading stays "Replies and calendar moves wait for your yes." until Jett decides whether removals join it. "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; in code, ships in 0.3.7. ⛔ Until 0.3.7 is out, never say an email cannot approve a change other than a calendar move. |
+| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo; removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). **On no page yet**: the homepage heading stays "Replies and calendar moves wait for your yes." until Jett decides whether removals join it. "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
 
@@ -4997,13 +4997,14 @@ Sheets beside them, and says there is no per-person setting on any of them. This
 from marking a mailbox as one person's; never imply that marking the mailbox also restricts
 the agent's knowledge.
 
-### 🚧 On Archie for Teams, teammates can add to an agent's lists without being handed the owner's mail or calendar: BUILT 2026-10-08 (Archie `9de4bfa4`, branch `guest-lists-only`), in no release yet, and never picked on a real agent
+### ✅ On Archie for Teams, teammates can add to an agent's lists without being handed the owner's mail or calendar: RELEASED in 0.3.7, 2026-10-08 (Archie `9de4bfa4`), never yet picked on a real agent
 
-**In no release yet, so in the present tense on no page.** Built and tested on October 8, 2026, at
-Jett's decision that day; nobody has chosen it on a real Archie for Teams agent. The tense rule
-holds until a release note names it.
+**Released in 0.3.7 on October 8, 2026, and named in its notes.** Built and tested the same day, at
+Jett's decision; nobody has chosen it on a real Archie for Teams agent yet, so say what it allows and
+never that teams use it. Archie Mobile's chooser for it is in 1.2, which is with Apple for review,
+so no page says the phone can pick it until 1.2 is on the App Store.
 
-**Approved wording, once it ships:** "On a shared agent you choose what the people you let in can
+**Approved wording:** "On a shared agent you choose what the people you let in can
 do: ask it things, also add to and change its lists, or everything you can. In the middle setting a
 teammate can log a delivery or add a task to the agent's lists, and still cannot send your mail,
 change your calendar, or use the apps you connected."
@@ -5359,9 +5360,8 @@ rest of it is.
   nothing above it, so a total that went up before the press goes back to the card. Tests:
   `screen::tests::the_order_total_is_read_off_the_page` and its two siblings in `archie-domain`, and
   five in `screen::tools::tests` from `the_page_total_is_checked_when_it_is_higher_than_the_agents`.
-  **The sentence above may stay as it is**: it is still true, Archie for Business does not read
-  the total until its next release, and it is what the legal pages say. From 0.3.6, approved for
-  Personal: "Archie reads the order total off the last page and checks your limit against
+  **The sentence above may stay as it is**: it is still true, and it is what the legal pages say.
+  From 0.3.6 for Archie and 0.3.7 (October 8, 2026) for Archie for Teams, approved: "Archie reads the order total off the last page and checks your limit against
   it. A charge a shop adds after you place the order can still take it over, so for a ceiling
   nobody can get past, give it a card from your bank that works at one shop." Never "Archie checks
   the real total" without the second sentence: a total drawn as a picture and a charge added after
@@ -5605,8 +5605,8 @@ one."
   0.3.6 release on October 6, 2026, the trust page's sentence "An email read in one job can shape a
   search in your next" came off, its third paragraph names two ways out, and its cost paragraph and
   `trust/details/`'s carry this cost.
-- **Approved for `trust/`'s "Where we fall short", from 0.3.5 (written October 6, 2026).** Scoped to
-  Archie, because Archie for Business is on 0.3.4 until its next release:
+- **Approved for `trust/`'s "Where we fall short", from 0.3.5 (written October 6, 2026).** Both
+  editions since 0.3.7 (October 8, 2026), which brought Archie for Teams level:
   > It does **not** stop everything. An injected instruction can still add items to your lists and
   > write a note into your agent's memory, and a note like that can steer a later job.
   >
@@ -5619,12 +5619,12 @@ one."
   > its own.
   >
   > Asking first has a cost: a page your agent wants to open on its own judgment now waits for you.
-  > Since Archie 0.3.6, for about ten messages after your agent reads new mail or texts for you, so
-  > does a search it hands on or a site you name in passing. Archie for Teams gets this in its
-  > next release.
+  > For about ten messages after your agent reads new mail or texts for you, so does a search it
+  > hands on or a site you name in passing.
 
-  The last sentence comes off the day 0.3.7 ships, which brings the business edition level. It said
-  Archie for Business until 2026-10-07, when the site renamed the edition ahead of the app.
+  It opened "Since Archie 0.3.6" and ended "Archie for Teams gets this in its next release" until
+  0.3.7 shipped on October 8, 2026, which put both editions on it (and said Archie for Business
+  before 2026-10-07).
 
   The memory way is in the first paragraph, which is why the third names two (three until 0.3.6).
   The preview is on `trust/details/` only, because it is fixed in 0.3.6 and the summary names what

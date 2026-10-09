@@ -46,11 +46,11 @@ conventions, which stay below as history.
   **Archie**, for one person, and it is the lead: Patrick and Jehan run their businesses alone on
   it. The $99 plan is **Archie for Teams**, for when the owner hires. The menus say "For One
   Person" and "For a Team"; "Personal" is retired as a name (the app never used it). **The site
-  took the name on 2026-10-07, ahead of the app** (Jett: "change everything now"), Terms included.
-  The app and its installer say Archie for Business until 0.3.7 ships (the bundle identifier stays,
-  or installs stop updating), so the install pages say so in one line, and the lines saying Teams
-  gets something "in its next release" stay until that release is out. On a Mac that updated in
-  place, System Settings still lists the app as Archie for Business, which help/ says. The URLs stay `archie/personal/` and
+  took the name on 2026-10-07, ahead of the app** (Jett: "change everything now"), Terms included,
+  and **the app followed in 0.3.7 on 2026-10-08**, both editions the same day, with Stripe's product
+  renamed "Archie For Teams" (the bundle identifier stays, or installs stop updating). The
+  install-page note and the "in its next release" lines came off that night. On a Mac that updated
+  in place, System Settings still lists the app as Archie for Business, which help/ says. The URLs stay `archie/personal/` and
   `archie/business/`.
 - **Consulting has its own site (Jett, 2026-10-08): Otian AI Consulting**, at `consulting.otianai.com`,
   repo `/Users/Games/Desktop/Code/Otian-Consulting`. Same family, its own layout, because it sells two

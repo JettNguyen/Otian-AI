@@ -2009,13 +2009,15 @@ archie-mobile `817e099`):
 
 ### 🚧 A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, in no release yet
 
-*Archie `3a9a3b21` and archie-mobile `9bd3647`, both on main and in no release. Nothing below may be
-said on a page until a release carries them; then the wording says "and on your phone" of whichever
-phone build carries `9bd3647`.*
+*Archie `3a9a3b21` and `84240f2b`, and archie-mobile `9bd3647`, all on main and in no release.
+Nothing below may be said on a page until a release carries them; then the wording says "and on
+your phone" of whichever phone build carries `9bd3647`.*
 
-**Approved wording, once it is in a release:** "A list can show its steps: Quoted, Booked, Out,
-Picked up. Each row wears its step in color, the list opens on how many are at each one, and the
-lists you use most can sit in the sidebar, right under Jobs. Your phone shows the same counts."
+**Approved wording, once it is in a release:** "Tell Archie about your work when you first set it
+up, and the lists it runs on are waiting for you: your rentals or your deals, with their steps,
+Quoted, Booked, Out, Picked up. Each row wears its step in color, the list opens on how many are at
+each one, and the lists you use most sit in the sidebar, right under Jobs. Ask your agent to change
+any of it. Your phone shows the same counts."
 
 **Why it's true** (Archie `3a9a3b21`; archie-mobile `9bd3647`):
 
@@ -2033,9 +2035,18 @@ lists you use most can sit in the sidebar, right under Jobs. Your phone shows th
   (`build_core` in `src-tauri/src/phone.rs`, `stage_counts` in the domain crate). Archie Mobile lists
   the kept lists after Jobs on More and draws the counts on Lists, in the same colors
   (`src/screens/Manage.tsx`, `src/stages.ts`).
-- **Cost.** Nothing on any turn. A step is the value of a choice column the agent already writes, so
-  it has no new tool, and the text that tells the model about a list's columns does not mention the
-  setting.
+- **Without anybody setting it** (Archie `84240f2b`). The first interview drafts up to three lists
+  from what the owner said, in the call that already picks the starter add-ons
+  (`pick_starters` in `crates/archie-runtime/src/gateway/onboarding.rs`), and makes them with the
+  same code as a list made in chat. A list the agent makes, or an add-on installs, shows its steps
+  when it has a choice column keyed for them (`guess_stage_field` in the domain crate), and a list
+  the agent makes goes into the sidebar (`set_in_sidebar`). The Dashboard card that names what the
+  interview set up names the lists.
+- **From chat.** `records_arrange_list` turns steps on or off and puts a list in the sidebar or
+  takes it out, at the owner's word. A guest cannot use it (`acts_as_owner` in `turn.rs`).
+- **Cost.** About 168 tokens of tool on each chat turn of an agent that has a list, read at the
+  cached price on a warm turn, and nothing for the steps themselves (Archie's
+  `docs/COST-MEASURED.md` section 22).
 
 **The boundaries.**
 
@@ -2046,9 +2057,11 @@ lists you use most can sit in the sidebar, right under Jobs. Your phone shows th
   anything by itself. Never say moving a row to a step sends a message or runs a routine.
 - ⚠️ **The pin is each agent's own.** On Archie for Teams, keeping a shared list in one agent's
   sidebar puts it in nobody else's.
-- ⚠️ **The interview does not set any of this yet.** Matching a business to a starting setup that
-  turns steps on is step 2 of Archie's `docs/LINE-OF-WORK.md`, and not built. Never say Archie sets
-  itself up for your line of work.
+- ⚠️ **The interview drafts lists from what the owner said, and only that.** It does not know a
+  line of work it was not told about, and there are no written setups for particular trades yet.
+  Say "from what you tell it", never "built for your industry" or "set up for plumbers".
+- ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
+  that does gets none, and that is the intended answer.
 
 ### ✅ It works while you sleep
 

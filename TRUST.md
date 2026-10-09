@@ -4240,6 +4240,69 @@ time is already taken."
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
 
+### 🚧 Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), in no release yet
+
+*Built, not released. None of it is in 0.3.7 or in any Archie Mobile build in the stores. The
+wording below is Jett's to approve.*
+
+**Wording, once it is in a release (Jett's to approve):** "Press Edit it on a draft and you see the
+message it's answering, with three ways to change it: type it your way, tell your agent what to
+change, or have it write three more. Ask it to mention something it can look up, like an earlier
+email or a time on your calendar, and it looks before it rewrites."
+
+**Why it's true** (Archie, unless it says Archie Mobile):
+
+- **The pop-up.** The Edit it button on an email or text draft carries everything the pop-up shows
+  (`archie-net` `channel.rs`, `EditSheet`; built in `email/replies/card.rs` and
+  `texts/replies/card.rs`, `edit_sheet`). The window opens it without asking the agent
+  (`src/app/edit-sheet.tsx`), and so does the phone (Archie Mobile `src/screens/EditDraft.tsx`).
+  A text's own words are on the card already; an email is read from the mailbox when the pop-up
+  opens (`email/replies/store.rs`, `read_answered`; `src-tauri/src/inapp.rs`, `draft_original`)
+  and is never kept.
+- **Changing it in place.** What is chosen goes back as one press carrying the words
+  (`ChannelEvent::Action`, `words`), and the card is redrawn where it is (`revise_in_place` in
+  both reply lanes). Nothing is said in the conversation; the window's transcript keeps a card
+  redrawn by its own buttons in its place (`src-tauri/src/inapp.rs`, `rewrite`).
+- **Rewrite it for me.** An empty box writes a fresh version. Words that carry the change (add
+  this, take that out, it's 1pm) are made in one call. Words that point at something the call
+  cannot see make it ask for a lookup (`look_up` in both lanes' `rewrite_to_order`), and only then
+  does the agent run one turn with its own tools to find it (`crates/archie-runtime/src/draft_lookup.rs`),
+  told only the owner's words and who the draft is to. The agent's own notes go with every
+  rewrite. Measured October 9, 2026 on Sonnet 5.5 and Haiku 5.5, eleven instructions each
+  (`email/replies/tests.rs`, `live_a_rewrite_keeps_what_the_owner_adds`): all eleven right on both.
+- **What a press says as you.** In the window and the phone, a pressed choice (Confirm, Add it,
+  Go ahead) now shows as the sentence the agent was handed, not the button's label
+  (`decide.rs`, `as_the_person`).
+
+**The boundaries.**
+
+- ⚠️ **Archie and Archie Mobile only.** On Telegram, Discord, Slack, Signal and iMessage, Edit it
+  still opens the card with the three choices on it, and a change you type comes back as a new
+  card.
+- ⚠️ **It may not find what you pointed at.** When it cannot, it says so ("Rewritten, but I
+  couldn't find the invoice you sent her") and leaves it out. Never "it always knows what you
+  mean", and never say it can look anywhere: it looks where the agent can, with what is connected.
+- ⚠️ **The lookup turn has not been run against a real mailbox yet.** The rewrite that asks for it
+  and the rewrite that uses what was found are measured; the turn in between is the ordinary
+  agent with its tools, and has only been run in tests.
+- ⚠️ **The email shown is read when the pop-up opens.** If the mailbox cannot be reached, the
+  pop-up shows the card's one-line summary and says why. Nothing is stored.
+- ⚠️ **Saving is not sending.** Send on the card is still the only thing that sends. Do not let a
+  sentence about the pop-up imply otherwise.
+- ⚠️ **Cost, internal only, never on the site.** A rewrite that looks something up costs about one
+  ordinary agent turn more (about $0.03 on Balanced, `docs/COST-MEASURED.md` section 21). Every
+  rewrite also carries the agent's notes, up to about a thousand tokens. An ordinary chat turn is
+  unchanged.
+- ⚠️ **Older pieces keep the old way.** A card drawn before this build, an older phone app, or a
+  phone paired with an older computer gets the old Edit it until both sides have this build.
+- ⚠️ **Rewrite it for me still does not use Write like me.** See that entry above.
+- **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
+  which the window then showed at the bottom as a new message, and Use my words sent your whole
+  edited reply into the chat as if you had typed it to the agent, then posted the changed draft as
+  a second card under it. Rewrite it for me could not see anything but the draft and the one
+  message, so "mention the invoice I sent her" came back as "did you get a chance to look at the
+  invoice?" with nothing from the invoice in it.
+
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 
 **Approved wording:** "Ask what the invoice says and your agent opens the attachment and tells you.

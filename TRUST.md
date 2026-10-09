@@ -3395,6 +3395,11 @@ Archie tells you it did."
   than delivered, and the drop is logged.
 - **Quiet hours do not hold one.** That is deliberate: the minute was named by the person being
   interrupted.
+- **It arrives with buttons, where the chat app draws them.** Done checks off the to-do filed with
+  it; Remind me later offers in an hour, this evening, tomorrow morning, or another time you type;
+  and when a to-do stands behind it, Leave it on my list closes the reminder and keeps the to-do.
+  The press is handled without an AI call. `crates/archie-runtime/src/gateway/reminder_card.rs`
+  (button set from October 9, 2026). Never say a reminder repeats: a repeating one is a routine.
 - **The condition is visible before the day comes.** It is printed beside the reminder on the work
   board and in the list, because one that stands down leaves the list the moment the answer arrives.
 

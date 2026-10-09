@@ -2009,7 +2009,8 @@ archie-mobile `817e099`):
 
 ### 🚧 A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, in no release yet
 
-*Archie `3a9a3b21` and `84240f2b`, and archie-mobile `9bd3647`, all on main and in no release.
+*Archie `3a9a3b21`, `84240f2b` and `346624af`, and archie-mobile `9bd3647` and `f4b20e4`, all on
+main and in no release.
 Nothing below may be said on a page until a release carries them; then the wording says "and on
 your phone" of whichever phone build carries `9bd3647`.*
 
@@ -2031,6 +2032,9 @@ any of it. Your phone shows the same counts."
 - **The sidebar.** `sidebar_lists` in the agent's own `agent.json` (`AgentBundleManifest`), at most
   six, set by Keep in the sidebar on the list. The rows are drawn after Jobs in both widths of the
   sidebar (`src/app/App.tsx`) and open the list on a page of its own.
+- **The Dashboard.** Every list in the sidebar is a tile after the to-do list, with its row count
+  and a bar of each step's share (`src/app/list-tiles.tsx`, `agent_list_tiles` in Rust; archie-mobile
+  `src/screens/ListTiles.tsx`). Nothing to arrange: the tiles follow the sidebar.
 - **The phone.** The snapshot sends each list's place in the sidebar and its count per step
   (`build_core` in `src-tauri/src/phone.rs`, `stage_counts` in the domain crate). Archie Mobile lists
   the kept lists after Jobs on More and draws the counts on Lists, in the same colors

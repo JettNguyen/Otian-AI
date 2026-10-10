@@ -2045,7 +2045,10 @@ any of it. Your phone shows the same counts."
   same code as a list made in chat. A list the agent makes, or an add-on installs, shows its steps
   when it has a choice column keyed for them (`guess_stage_field` in the domain crate), and a list
   the agent makes goes into the sidebar (`set_in_sidebar`). The Dashboard card that names what the
-  interview set up names the lists. Lists made before October 9, 2026 get the same guess once, on
+  interview set up names the lists. The draft waits until the owner has said what they do
+  (`knows_their_work`, Archie `1d23ce75`); before that, Archie's interview ran it on the answer to
+  "how old are you?" and drafted nothing, which the line-of-work personas found the day it was
+  built. Lists made before October 9, 2026 get the same guess once, on
   the first start of a build that has it (`Bundle::guess_list_stages_once`, Archie `0a0091a3`), and
   never again, so steps somebody turns off stay off.
 - **From chat.** `records_arrange_list` turns steps on or off and puts a list in the sidebar or
@@ -2117,8 +2120,8 @@ lists, their routines and their memory. You reconnect your accounts once, from a
 
 ### 🚧 Written setups for three lines of work: portable restrooms, home trades, and real estate: BUILT 2026-10-09, in no release yet
 
-*Archie `f948867d`, on main and in no release. Nothing below may be said on a page until a release
-carries it.*
+*Archie `f948867d`, `1d23ce75`, `cef24e70` and `0fd0f068`, on main and in no release. Nothing
+below may be said on a page until a release carries it.*
 
 **Approved wording, once it is in a release:** "Tell Archie you rent out portable toilets, run a
 plumbing or heating company, or sell homes, and it starts with the lists that work runs on:
@@ -2135,18 +2138,23 @@ sheet. Change any of it by asking."
   `crates/archie-runtime/src/gateway/onboarding.rs`) is shown one line per setup and names one when
   the owner's work is plainly that line of work. Its lists are made instead of drafted ones, by the
   same code as a list made in chat, so each is in the sidebar and shows its steps. An id the build
-  has no setup for counts as no match (`with_setup`). Live on the cheapest model: a portable toilet
-  rental company, a solo realtor and a plumbing and heating company each matched theirs, and a
-  mobile dog groomer matched none and got a drafted list.
+  has no setup for counts as no match (`with_setup`). The match waits until the owner has said what
+  they do (`knows_their_work`). Tested through the real interview on the Economy tier with four
+  simulated owners (`scripts/agent-sim/l01` to `l04` in the Archie repo, October 9, 2026): the
+  portable restroom company, the plumbing office and the solo realtor each matched theirs and used
+  its lists for the day's work, and the mobile dog groomer matched none and got a drafted list.
 - **The rules.** Written under the business profile (`user.md`) headed "Rules of the work:"
   (`profile_with_rules`), which is on the Personality tab under Who this agent serves, where the
-  owner can change or remove them. The agent reads the profile on every turn.
+  owner can change or remove them. The agent reads the profile on every turn. In the simulated
+  runs the realtor's agent declined to text a lead who had not agreed to texts and to state a
+  home's value, and, once the fair housing rule said it holds when the owner asks (`0fd0f068`),
+  declined to call a town "a great family neighborhood with good schools" in three runs of three.
 - **The card.** The Dashboard card that names what the interview set up says which setup, and has
   a row that opens the rules (`StarterArrival` in `src/app/agent-detail.tsx`).
 - **Checks.** A test makes every list of every setup through the chat code and checks its steps
   (`every_setup_list_is_made_and_shows_its_stages`), and another refuses the word job anywhere in a
   setup, since the Jobs tab means the agent's own work (`no_setup_calls_the_work_a_job`).
-- **Cost.** About 178 tokens more on the interview's starter call, once per agent, and 97 to 117
+- **Cost.** About 178 tokens more on the interview's starter call, once per agent, and 96 to 145
   tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
   turn (Archie's `docs/COST-MEASURED.md` section 23).
 
@@ -2157,6 +2165,8 @@ sheet. Change any of it by asking."
   drafted from what the owner said (the entry above).
 - ⚠️ **Home trades is one setup** for plumbing, heating and cooling, electrical and handyman work.
   Never claim a setup of its own for HVAC, electricians or any single trade.
+- ⚠️ **The simulated runs are a sample, not a rate.** Never quote them as a pass rate or say the
+  agent "always" follows a rule.
 - ⚠️ **The rules are what the agent is told, not compliance.** Never say Archie makes an agent fair
   housing compliant, follows the law for you, or keeps a disposal log: the fair housing rule shapes
   what the agent writes, and the owner is still responsible for it. The disposal rule tells the

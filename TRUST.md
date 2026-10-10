@@ -2220,11 +2220,11 @@ lid closing and their agent carrying on, and that difference is true. ⛔ Never 
 "a computer you leave on" or "an always-on computer" as something the reader must have: say what the
 agent does while the computer is on.
 
-**Not yet changed, and Jett's call:** the Learning Library's video 0.2 is titled "Why Your Computer
-Needs to Stay On", in its page title, on YouTube, and in the narration of clip 4.1. Its words say
-the true thing ("Your agent can work only while your computer is on, awake, and running Archie"),
-but the title is the requirement this entry retires. Renaming it means the YouTube title and a new
-take of 4.1's last line, so it waits for him.
+**Video 0.2, retitled on the site 2026-10-09 (Jett's pick):** the Learning Library page is now "Your
+Agent Works While Your Computer Is On", at the same URL, with a new poster in the old one's style.
+Its words already said the true thing ("Your agent can work only while your computer is on, awake,
+and running Archie"). Still saying the old name, and Jett's to change: the YouTube title, the title
+card inside the video, and clip 4.1's spoken line "watch 'Why Your Computer Needs to Stay On'".
 
 ### ✅ Archie is free on an AI account of your own, with a limit of 20 jobs a day (SHIPPED 2026-09-17)
 

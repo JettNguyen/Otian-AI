@@ -2045,8 +2045,8 @@ any of it. Your phone shows the same counts."
   same code as a list made in chat. A list the agent makes, or an add-on installs, shows its steps
   when it has a choice column keyed for them (`guess_stage_field` in the domain crate), and a list
   the agent makes goes into the sidebar (`set_in_sidebar`). The Dashboard card that names what the
-  interview set up names the lists. The draft waits until the owner has said what they do
-  (`knows_their_work`, Archie `1d23ce75`); before that, Archie's interview ran it on the answer to
+  interview set up names the lists. The draft waits until the owner has said what they do and
+  answered twice (`knows_their_work`, Archie `1d23ce75` and `c0a00083`); before that, Archie's interview ran it on the answer to
   "how old are you?" and drafted nothing, which the line-of-work personas found the day it was
   built. Lists made before October 9, 2026 get the same guess once, on
   the first start of a build that has it (`Bundle::guess_list_stages_once`, Archie `0a0091a3`), and
@@ -2139,7 +2139,7 @@ sheet. Change any of it by asking."
   the owner's work is plainly that line of work. Its lists are made instead of drafted ones, by the
   same code as a list made in chat, so each is in the sidebar and shows its steps. An id the build
   has no setup for counts as no match (`with_setup`). The match waits until the owner has said what
-  they do (`knows_their_work`). Tested through the real interview on the Economy tier with four
+  they do and answered twice (`knows_their_work`). Tested through the real interview on the Economy tier with four
   simulated owners (`scripts/agent-sim/l01` to `l04` in the Archie repo, October 9, 2026): the
   portable restroom company, the plumbing office and the solo realtor each matched theirs and used
   its lists for the day's work, and the mobile dog groomer matched none and got a drafted list.

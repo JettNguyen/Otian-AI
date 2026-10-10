@@ -2142,10 +2142,10 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
-### ✅ It works whenever your computer is on, for the hours you choose (entry written 2026-10-07, reworded 2026-10-09)
+### ✅ It works the hours your computer is on, around the clock if you like (entry written 2026-10-07, reworded 2026-10-09)
 
-**Approved wording:** "It works whenever your computer is on, around the clock or only the hours
-you choose." A headline may ask "Want an employee who works 24/7?" only when this sentence, or one
+**Approved wording:** "It works the hours your computer is on, around the clock if you like." A
+headline may ask "Want an employee who works 24/7?" only when this sentence, or one
 that says the same limit, is the very next thing the reader sees.
 
 **Reworded 2026-10-09, at Jett's ask:** the site must never say the computer has to be on 24/7. The
@@ -2160,9 +2160,12 @@ wake a sleeping computer ("Waking the computer for a routine", below). A compute
 reads the mail that arrived while it was off, within the limit the restart entry sets ("how far
 back a restart reads mail", below).
 
-**"The hours you choose" is not a setting.** The owner chooses them by when the computer is on and
-Archie is open. Archie has no working-hours switch, so never "set its hours" or "give it a
-schedule" as if it had one. A routine's own times are a different thing and are said as such.
+**"The hours your computer is on" are not a setting.** The owner chooses them by when the computer
+is on and Archie is open. Archie has no working-hours setting, so never "set its hours" or "give it a
+schedule" as if it had one. Two nearby things are different and are said as themselves: a routine's
+own times, and quiet hours (the `/quiet` command, `crates/archie-runtime/src/quiet.rs` in the
+Archie repo), which holds back messages nobody asked for, for up to a day, while the agent keeps
+working and the inbox waits.
 
 **Required clause, every time:** the computer has to be on and Archie open. A shut-down computer
 stays off, and the agent answers nothing while it is. ⛔ Never "24/7" alone, never "never sleeps",

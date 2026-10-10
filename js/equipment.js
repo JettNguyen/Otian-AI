@@ -450,7 +450,7 @@
     if (m === 'laptop-spare') {
       return {
         title: 'The computer: that laptop, plugged in',
-        body: '<p>A laptop that stays home is a fine always-on machine, and it is free. Leave it on power: on battery it will sleep, and a sleeping computer is an agent that is not answering. It needs <strong>' + os + '</strong>.</p>'
+        body: '<p>A laptop that stays home is a fine computer for this, and it is free. Keep it on power for the hours you want it working: on battery it will sleep, and a sleeping computer is an agent that is not answering. It needs <strong>' + os + '</strong>.</p>'
       };
     }
 
@@ -502,7 +502,7 @@
     if (answers.place === 'elsewhere') {
       return {
         title: 'The network: Wi-Fi works, wired is steadier',
-        body: '<p>What to watch for on an always-on machine is not speed, it is the drop that happens at the same time every night while nobody is awake. If a cable is possible, it is worth more than a faster router. Otherwise put it where the signal is good rather than where it is tidy.</p>'
+        body: '<p>If you leave the computer on overnight, watch for the Wi-Fi drop that happens at the same time every night while nobody is awake. If a cable is possible, it is worth more than a faster router. Otherwise put it where the signal is good rather than where it is tidy.</p>'
       };
     }
     return {

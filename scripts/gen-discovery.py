@@ -297,7 +297,7 @@ QUESTIONS = [
      "cannot read. Your prompts still go to your AI company, a third party, so this is a claim "
      "about what Otian holds."),
     ("Where does it run?",
-     "On a computer you own and leave on. There is no Otian server running your agent, which "
+     "On a computer you own, during the hours it is on. There is no Otian server running your agent, which "
      "is why there is no Otian copy of what it reads. A hosted agent platform cannot make that "
      "claim, because the runtime that assembles the prompt is theirs."),
     ("What does it cost?",

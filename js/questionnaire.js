@@ -184,7 +184,7 @@
        one column for it. */
     gPlatform: {
       section: 'Your setup',
-      bot: ['Which computer would the agent run on? It works from your own computer, so it needs one that can stay on.'],
+      bot: ['Which computer would the agent run on? It works from your own computer, during the hours that computer is on.'],
       type: 'choice',
       name: 'platform',
       options: [

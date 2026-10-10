@@ -30,7 +30,8 @@ conventions, which stay below as history.
 
 - **The question the site answers is Jett's**: "want a 24/7 smart and hardworking employee?" The
   homepage h1 asks it ("Want an employee who works 24/7?") and the next sentence answers with the
-  price and TRUST.md's limit, "around the clock on a computer you leave on". "Smart" stays out:
+  price and TRUST.md's limit, "the hours your computer is on, around the clock if you like". Jett, 2026-10-09: the site never says the computer has to be on 24/7, only that the
+  agent works while it is on, so "a computer you leave on" is retired as a requirement. "Smart" stays out:
   every page also says AI can be wrong. No wage figure appears beside "a lot less" until FACTS.md
   holds one read at its source; `compare/hiring-an-assistant/` argues the comparison without one.
 - **Lead with the busy work an agent takes off them**: new leads answered with a drafted reply,

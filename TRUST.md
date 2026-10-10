@@ -3542,9 +3542,19 @@ Archie tells you it did."
   interrupted.
 - **It arrives with buttons, where the chat app draws them.** Done checks off the to-do filed with
   it; Remind me later offers in an hour, this evening, tomorrow morning, or another time you type;
-  and when a to-do stands behind it, Leave it on my list closes the reminder and keeps the to-do.
-  The press is handled without an AI call. `crates/archie-runtime/src/gateway/reminder_card.rs`
-  (button set from October 9, 2026). Never say a reminder repeats: a repeating one is a routine.
+  and when a to-do stands behind it, Leave it on my list closes the reminder and keeps the to-do,
+  and Delete takes both away. The press is handled without an AI call.
+  `crates/archie-runtime/src/gateway/reminder_card.rs` (button set from October 9, 2026). Never say
+  a reminder repeats: a repeating one is a routine.
+- **It goes on the to-do list too, and the two stay one thing.** On an agent with the To-Do List,
+  every reminder is also a to-do, filed in code with no AI call (`tasks::file_for_reminder`).
+  Checking the to-do off or deleting it before the time means the reminder is not sent, and Undo
+  brings it back (`reminders::still_wanted`). Never say this for an agent without the To-Do List:
+  its reminders are not on any list.
+- **Delete is everywhere a reminder shows.** Under the reply that set one, on the card when it goes
+  off, on the work board and the Calendar in Archie, and on the phone's Calendar; the to-do list
+  has Delete too (a swipe on the phone). The lists carry Undo. A reply that set two reminders has no
+  Delete under it; each still has its own on the work board and the Calendar.
 - **The condition is visible before the day comes.** It is printed beside the reminder on the work
   board and in the list, because one that stands down leaves the list the moment the answer arrives.
 

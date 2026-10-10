@@ -6420,6 +6420,59 @@ Calendar and Jobs say whose each reminder is."
   any on the Calendar.
 - ⚠️ The personal edition still says guest.
 
+### 🚧 On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, in no release yet
+
+*Archie `07aefec1` and archie-mobile `b8b893c`, on their `journey-fixes` branches, not on main and in
+no release. Nothing below may be said on a page until a release carries them.*
+
+**Proposed wording, Jett's to approve:** "On Archie for Teams, your agent's Dashboard lists your
+team: what each person does, how many messages they sent the agent this week and how many jobs those
+started, and when they last wrote. Press a name to read what they said. Archie Mobile shows the same
+counts. Ask the agent what your team has been doing and it tells you the same."
+
+**Why it's true:**
+- **The counts.** `team_activity_in` in the Archie repo's `src-tauri/src/inapp.rs` reads two records
+  the app already kept: the conversation log written for every chat that is not the owner's (one
+  message per line, with who sent it and when) and the journal, where a job a teammate's message
+  started carries their name. One row per person on the roster, a quiet one included. Test:
+  `team_activity_counts_each_persons_questions_and_changes`.
+- **The card.** "Your team this week" on the agent's Dashboard (`TeamCard` in `src/app/team-card.tsx`),
+  under the lists, on Archie for Teams with somebody else on the agent and nowhere else. A row reads
+  "Jason Pratt · buyer agent" beside "14 messages and 3 jobs this week. Last message today at
+  3:15 PM." (`activityLine` in `src/app/team.ts`). A press opens that person's conversation with the
+  agent, read only. Recent jobs on the same tab says whose each job was: "Jason Pratt asked today,
+  3:15 PM" (`src/app/journal-panel.tsx`).
+- **The phone.** `team_of` in `src-tauri/src/phone.rs` sends each person's name, what they do, the
+  two counts and the time of their last message, and nothing else: no words, no chat ids (test
+  `the_team_travels_as_counts_and_times_and_never_words`). archie-mobile `src/screens/TeamWeek.tsx`
+  draws the same card under the lists on Now, in the same words (`activityLine` in `src/guests.ts`),
+  and says the conversations are on the computer's Dashboard.
+- **The agent.** When the owner asks what the team has been doing, the `work_recent` tool
+  (`crates/archie-runtime/src/gateway/tools_work.rs`) adds one sentence to the jobs: how many
+  messages each teammate sent in the same days, and that what they said is the owner's to read on the
+  computer, not the agent's to quote. A teammate asking hears only their own jobs. Test:
+  `the_owner_hears_how_much_each_teammate_asked_and_a_teammate_does_not`.
+
+**Boundaries:**
+- ⛔ Never that the phone shows what teammates said. It shows counts and times; the conversations
+  are read on the computer.
+- ⛔ Never that the agent reports or sums up what a teammate said. It is given counts, and told the
+  words are not for quoting.
+- ⛔ Never that teammates see this. The card is on the owner's computer and the owner's phone, and the
+  agent adds the team's counts only when the owner asks.
+- ⚠️ A message is any message a teammate sent the agent, a thank-you included, and only ones the
+  agent received. One sent while this computer was asleep never reached the agent and is not
+  counted, as the Access screen already says.
+- ⚠️ A job is work their message started that changed something, as the Jobs tab lists it, among the
+  agent's last 500. A job started under a name the owner has since changed is not counted, so the
+  number can be low and is never someone else's.
+- ⚠️ "This week" is the last seven days, not a calendar week.
+- ⚠️ On the phone the counts can be up to ten minutes behind. A message that starts a job arrives at
+  once; a plain question waits for the next snapshot.
+- What it replaced: the Jobs tab counted asks in a row of chips, and a teammate's conversation was two
+  screens away under Setup. A team lead in the October 10 journey run could not find the team's
+  activity at all (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
+
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 
 **Approved wording:** *"put your company's name and logo on it"*, *"they stay on the computer

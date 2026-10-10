@@ -2072,6 +2072,41 @@ any of it. Your phone shows the same counts."
 - ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
   that does gets none, and that is the intended answer.
 
+### 🚧 Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, in no release yet
+
+*Archie `8458f1d7` and archie-mobile `d350c03`, both on main and in no release. Nothing below may be
+said on a page until a release carries them, and the phone half needs both: an Archie Mobile build
+with `d350c03` and an Archie on the computer with `8458f1d7`.*
+
+**Proposed wording, Jett's to approve:** "Right-click an agent in Archie, or hold it on your phone,
+to open it, start or stop it, rename it, change how it looks, or delete it. Deleting asks you to
+type its name first, on either screen, because nothing about it comes back."
+
+**Why it's true:**
+
+- **The computer.** A right-click on an agent in the sidebar's list of agents, on the agent you are
+  in, or on its card on the Company page opens `AgentMenu` (`src/app/agent-menu.tsx`), wired in
+  `src/app/App.tsx`. Rename opens `RenameAgentDialog`, Change how it looks opens the face chooser
+  (`AvatarStudio`), and Delete opens the box that asks for the name, unchanged.
+- **The phone.** Holding an agent's card on the Agents screen opens the same rows in the same order
+  (`src/screens/AgentMenu.tsx` in archie-mobile). Rename and Change how it looks open the agent's
+  own Name and face pages; Delete asks for the name inside the same pop-up.
+- **The delete from the phone is the computer's own delete.** The phone sends `agent_delete` with
+  the name typed (`src-tauri/src/phone.rs`), which runs the same `agent_delete` command the window's
+  Delete runs, and that command refuses anything but the agent's exact name. The window then moves
+  off that agent the way it does after its own delete.
+
+**The boundaries.**
+
+- ⚠️ **Nothing is undone.** There is no Undo, archive or trash for an agent, on either screen. Never
+  say a deleted agent can be brought back.
+- ⚠️ **The phone deletes it from the computer**, which has to be on and reachable, as for every other
+  change from the phone. Never say the phone works without the computer.
+- ⚠️ **The keys stay.** Deleting an agent leaves the accounts and keys it used where they were, for
+  other agents. Never say deleting an agent disconnects anything.
+- ⚠️ **On the phone, only from the Agents screen.** Not from the agent switcher at the top of an
+  agent's own pages.
+
 ### 🚧 Moving your agents into Archie for Teams when you hire: BUILT 2026-10-09, in no release yet
 
 *Archie `1371e3fa`, on main and in no release. Nothing below may be said on a page until a release

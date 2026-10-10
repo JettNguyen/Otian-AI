@@ -2532,6 +2532,44 @@ connects directly."
   app-password providers.** The guide adds one, on the evidence above. Bring the trust rows to the
   same footing the next time that table is edited.
 
+### 🚧 A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, in no release yet
+
+*Archie `0aa95be1`, on its `journey-fixes` branch, not on main and in no release. Nothing below may
+be said on a page until a release carries it.*
+
+**Proposed wording, Jett's to approve:** "When your agent tells you your calendar isn't connected
+yet, a Connect my calendar button sits right under its reply. Press it and Archie opens the
+Connections tab with the sign-in ready."
+
+**Why it's true:**
+- **Chosen by code, never by the AI.** The turn notes a button for each thing it found missing
+  (`could_open` in the Archie repo's `crates/archie-runtime/src/gateway/kept.rs`, called in
+  `gateway/turn.rs` beside `unbacked_integrations` and the three fixed answers: no calendar, no
+  mailbox, and a mailbox that never allowed reading). After the reply is delivered, `opens_for`
+  puts the one the reply names under it, and only when the reply names the Connections tab (test
+  `a_reply_that_names_the_connections_tab_gets_the_button_for_what_it_names`). It costs no tokens.
+- **What it opens.** For a calendar or email, Email, calendar, files with the chooser already open:
+  Reconnect on an account that has not given what was asked for, or Connect an account when none
+  is there (`ask` on `GoogleConnect` in `src/app/connect.tsx`, wired in `src/app/agent-detail.tsx`).
+  Fireflies, GoHighLevel and the other apps open Apps; lights open Home devices.
+- **The owner's own conversation, in the window** (`offer_screen` in
+  `crates/archie-net/src/inapp.rs` and `mirror.rs`; the button is drawn in
+  `src/app/conversation.tsx`).
+
+**Boundaries:**
+- ⛔ Never that Archie Mobile has it. The phone draws nothing for it, because a phone cannot connect
+  an account; the reply's words still say where to go on the computer.
+- ⛔ Never that a chat app has it. Telegram and the rest get the words only.
+- ⚠️ Only under a reply that names the Connections tab and the thing that is missing. A reply about
+  something else gets no button, whatever is missing.
+- ⚠️ No button for a to-do list: Todoist is under Apps and Google Tasks under Email, calendar,
+  files, and the turn cannot tell which was meant.
+- ⚠️ It opens the screen. Signing in is still the owner's, in the browser, with the boxes they tick.
+- What it replaced: directions naming the tab, the section and the button, which owners read as
+  "homework", and one was told to "open Archie" while in it (the Archie repo's
+  `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 20). Those directions now read "In
+  Archie, on the Connections tab", in the agent's fixed answers and the instructions it is given.
+
 ### 🚧 New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), in no release yet
 
 *Archie `cda94ed1` is on the `journey-fixes` branch and in no release; nothing below may be said on a

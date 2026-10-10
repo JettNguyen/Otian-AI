@@ -2009,8 +2009,8 @@ archie-mobile `817e099`):
 
 ### 🚧 A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, in no release yet
 
-*Archie `3a9a3b21`, `84240f2b` and `346624af`, and archie-mobile `9bd3647` and `f4b20e4`, all on
-main and in no release.
+*Archie `3a9a3b21`, `84240f2b`, `346624af` and `0a0091a3`, and archie-mobile `9bd3647` and
+`f4b20e4`, all on main and in no release.
 Nothing below may be said on a page until a release carries them; then the wording says "and on
 your phone" of whichever phone build carries `9bd3647`.*
 
@@ -2045,7 +2045,9 @@ any of it. Your phone shows the same counts."
   same code as a list made in chat. A list the agent makes, or an add-on installs, shows its steps
   when it has a choice column keyed for them (`guess_stage_field` in the domain crate), and a list
   the agent makes goes into the sidebar (`set_in_sidebar`). The Dashboard card that names what the
-  interview set up names the lists.
+  interview set up names the lists. Lists made before October 9, 2026 get the same guess once, on
+  the first start of a build that has it (`Bundle::guess_list_stages_once`, Archie `0a0091a3`), and
+  never again, so steps somebody turns off stay off.
 - **From chat.** `records_arrange_list` turns steps on or off and puts a list in the sidebar or
   takes it out, at the owner's word. A guest cannot use it (`acts_as_owner` in `turn.rs`).
 - **Cost.** About 168 tokens of tool on each chat turn of an agent that has a list, read at the
@@ -2062,10 +2064,66 @@ any of it. Your phone shows the same counts."
 - ⚠️ **The pin is each agent's own.** On Archie for Teams, keeping a shared list in one agent's
   sidebar puts it in nobody else's.
 - ⚠️ **The interview drafts lists from what the owner said, and only that.** It does not know a
-  line of work it was not told about, and there are no written setups for particular trades yet.
-  Say "from what you tell it", never "built for your industry" or "set up for plumbers".
+  line of work it was not told about. Three lines of work have written setups (the entry below);
+  every other one gets drafted lists. Say "from what you tell it", never "built for your industry".
 - ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
   that does gets none, and that is the intended answer.
+
+### 🚧 Written setups for three lines of work: portable restrooms, home trades, and real estate: BUILT 2026-10-09, in no release yet
+
+*Archie `f948867d`, on main and in no release. Nothing below may be said on a page until a release
+carries it.*
+
+**Approved wording, once it is in a release:** "Tell Archie you rent out portable toilets, run a
+plumbing or heating company, or sell homes, and it starts with the lists that work runs on:
+Rentals, Units and Stops; Work orders, Estimates and Customers; or People, Deals and Listings. It
+also starts with a few rules a new hire would hear on day one, like pricing only from your price
+sheet. Change any of it by asking."
+
+**Why it's true** (Archie `f948867d`):
+
+- **The setups.** One file per line of work in `data/setups/` (`portable-restrooms.json`,
+  `home-trades.json`, `real-estate.json`), compiled in by `crates/archie-domain/src/setup.rs`. Each
+  holds three lists with their columns and steps, and up to three rules of the work.
+- **The match.** The first interview's starter call (`pick_starters` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`) is shown one line per setup and names one when
+  the owner's work is plainly that line of work. Its lists are made instead of drafted ones, by the
+  same code as a list made in chat, so each is in the sidebar and shows its steps. An id the build
+  has no setup for counts as no match (`with_setup`). Live on the cheapest model: a portable toilet
+  rental company, a solo realtor and a plumbing and heating company each matched theirs, and a
+  mobile dog groomer matched none and got a drafted list.
+- **The rules.** Written under the business profile (`user.md`) headed "Rules of the work:"
+  (`profile_with_rules`), which is on the Personality tab under Who this agent serves, where the
+  owner can change or remove them. The agent reads the profile on every turn.
+- **The card.** The Dashboard card that names what the interview set up says which setup, and has
+  a row that opens the rules (`StarterArrival` in `src/app/agent-detail.tsx`).
+- **Checks.** A test makes every list of every setup through the chat code and checks its steps
+  (`every_setup_list_is_made_and_shows_its_stages`), and another refuses the word job anywhere in a
+  setup, since the Jobs tab means the agent's own work (`no_setup_calls_the_work_a_job`).
+- **Cost.** About 178 tokens more on the interview's starter call, once per agent, and 97 to 117
+  tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
+  turn (Archie's `docs/COST-MEASURED.md` section 23).
+
+**The boundaries.**
+
+- ⚠️ **Three lines of work, by name, and no others.** Never "setups for every trade", "templates
+  for your industry", or a list of industries beyond these three. Every other business gets lists
+  drafted from what the owner said (the entry above).
+- ⚠️ **Home trades is one setup** for plumbing, heating and cooling, electrical and handyman work.
+  Never claim a setup of its own for HVAC, electricians or any single trade.
+- ⚠️ **The rules are what the agent is told, not compliance.** Never say Archie makes an agent fair
+  housing compliant, follows the law for you, or keeps a disposal log: the fair housing rule shapes
+  what the agent writes, and the owner is still responsible for it. The disposal rule tells the
+  agent to log loads where the county asks; there is no disposal log list.
+- ⚠️ **No connection to the software these businesses use.** Never claim it works with
+  ServiceCore, Jobber, Housecall Pro, Follow Up Boss or an MLS. The lists start empty and fill from
+  chat, email the agent reads, and the owner's own entries.
+- ⚠️ **Only at the first interview.** An agent set up before a release with setups does not get one
+  by itself; redoing the introduction can match one. The match is the model reading the answer and
+  can miss, in which case the lists are drafted instead.
+- ⚠️ **The phone shows the lists, not the card.** Archie Mobile shows the lists in the sidebar and
+  their counts, but not the card that names the setup, so never say the phone shows what the
+  interview set up.
 
 ### ✅ It works while you sleep
 
@@ -2084,20 +2142,40 @@ capability claim. And note the honest tension: the unattended path is exactly wh
 agent is most exposed to prompt injection (see the gate section). The claim is true; the risk it
 implies is the reason the gate is being built.
 
-### ✅ Around the clock, on a computer you leave on (entry written 2026-10-07)
+### ✅ It works whenever your computer is on, for the hours you choose (entry written 2026-10-07, reworded 2026-10-09)
 
-**Approved wording:** "It works around the clock on a computer you leave on." A headline may ask
-"Want an employee who works 24/7?" only when this sentence, or one that says the same limit, is
-the very next thing the reader sees.
+**Approved wording:** "It works whenever your computer is on, around the clock or only the hours
+you choose." A headline may ask "Want an employee who works 24/7?" only when this sentence, or one
+that says the same limit, is the very next thing the reader sees.
+
+**Reworded 2026-10-09, at Jett's ask:** the site must never say the computer has to be on 24/7. The
+agent works for whatever hours the owner wants, as long as the computer is on. The wording it
+replaces, "It works around the clock on a computer you leave on", read as a requirement, and so did
+"a computer you can leave on" in the How It Works description, the FAQ's "Yes to both" and the
+equipment picker's "always-on machine". All of those were changed the same day.
 
 **Why it's true:** the entry above. Routines fire on their schedule with nobody present, mail watch
 reads new mail as it arrives, and since 2026-09-16 (Mac) and 2026-09-19 (Windows) a routine can
-wake a sleeping computer ("Waking the computer for a routine", below).
+wake a sleeping computer ("Waking the computer for a routine", below). A computer switched on again
+reads the mail that arrived while it was off, within the limit the restart entry sets ("how far
+back a restart reads mail", below).
+
+**"The hours you choose" is not a setting.** The owner chooses them by when the computer is on and
+Archie is open. Archie has no working-hours switch, so never "set its hours" or "give it a
+schedule" as if it had one. A routine's own times are a different thing and are said as such.
 
 **Required clause, every time:** the computer has to be on and Archie open. A shut-down computer
 stays off, and the agent answers nothing while it is. ⛔ Never "24/7" alone, never "never sleeps",
 and never set beside a cloud agent as if the two were the same: `compare/cloud-agents/` draws the
-lid closing and their agent carrying on, and that difference is true.
+lid closing and their agent carrying on, and that difference is true. ⛔ Never "needs to stay on",
+"a computer you leave on" or "an always-on computer" as something the reader must have: say what the
+agent does while the computer is on.
+
+**Not yet changed, and Jett's call:** the Learning Library's video 0.2 is titled "Why Your Computer
+Needs to Stay On", in its page title, on YouTube, and in the narration of clip 4.1. Its words say
+the true thing ("Your agent can work only while your computer is on, awake, and running Archie"),
+but the title is the requirement this entry retires. Renaming it means the YouTube title and a new
+take of 4.1's last line, so it waits for him.
 
 ### ✅ Archie is free on an AI account of your own, with a limit of 20 jobs a day (SHIPPED 2026-09-17)
 

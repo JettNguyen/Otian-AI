@@ -200,9 +200,11 @@ async function build() {
   for (const [id, look] of Object.entries(looks)) if (pub.has(`personality:${id}`)) voiceLook[id] = look;
 
   /* A pack the app hides from anyone who cannot see all of it is not a public pack, and neither is
-     one left with fewer than two public items once the private ones are taken out. */
+     one left with fewer than two public items once the private ones are taken out. Nor is a pack the
+     app shows only in Archie for Teams (`teamsOnly`, the Team Starter of October 10, 2026): the
+     personal store does not list it, and this site's store is that one. */
   const packs = packsTs.PACKS
-    .filter((p) => !p.exclusive)
+    .filter((p) => !p.exclusive && !p.teamsOnly)
     .map((p) => ({ id: p.id, name: p.name, tagline: p.tagline, description: p.description, example: p.example,
       items: p.items.map(key).filter((k) => pub.has(k)) }))
     .filter((p) => p.items.length >= 2);

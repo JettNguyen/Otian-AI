@@ -3550,7 +3550,9 @@ Archie tells you it did."
   every reminder is also a to-do, filed in code with no AI call (`tasks::file_for_reminder`).
   Checking the to-do off or deleting it before the time means the reminder is not sent, and Undo
   brings it back (`reminders::still_wanted`). Never say this for an agent without the To-Do List:
-  its reminders are not on any list.
+  its reminders are not on any list. Promises from Commitment Keeper show on the same to-do list,
+  marked with who they are for, and are ticked, deleted and put back from there; a promise caught
+  from a text is one row, not one on each list (`tasks::COMMITMENTS_SLUG`).
 - **Delete is everywhere a reminder shows.** Under the reply that set one, on the card when it goes
   off, on the work board and the Calendar in Archie, and on the phone's Calendar; the to-do list
   has Delete too (a swipe on the phone). The lists carry Undo. A reply that set several reminders
@@ -5109,6 +5111,11 @@ alone" since 2026-08-25, which is in 0.3.0; help/ says so now, and this wording 
 day.)* " The internal draft record is deleted within a day, on a
 sweep that runs whether or not anything arrives. The card your agent posted stays in your chat
 like any message there, and a commitment it caught lives on as a reminder until it fires."
+*(Says less than is true since October 9, 2026: a caught commitment is also a row, on the
+Commitments list when Commitment Keeper is on and on the to-do list otherwise, drawn on the to-do
+list either way, until it is checked off or deleted. Proposed, for Jett to approve: "...and a
+commitment it caught lives on as a reminder until it fires, and on your to-do list until you check
+it off or delete it." The privacy page says the same and needs the same change.)*
 
 **Approved wording, sending:** "Nothing sends without you. There is no tool the model can call
 to send a text: the transport's send function is named in exactly one place in the lane, the

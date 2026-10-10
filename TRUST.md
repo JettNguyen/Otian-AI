@@ -6322,7 +6322,9 @@ change your calendar, or use the apps you connected."
 - ⛔ Never that teammates can set up lists. Making a new list and adding a column stay the owner's
   (`records_new_list`, `records_add_field`).
 - ⛔ Never imply lists become private per person. Every guest on every setting reads every list the
-  agent can, as the shared-knowledge wording above says.
+  agent can, as the shared-knowledge wording above says. From Archie `be50b989` (in no release yet)
+  a teammate's answers leave out the rows a list names somebody else on, which keeps the answer to
+  their own work and is still not privacy (see "a teammate asking about the work" below).
 - ⚠️ "Tasks" is two things. A task in Task Manager is a row on a list and comes with this setting; a
   task in Todoist or Google Tasks is a connected app and does not.
 - ⚠️ On Archie Mobile it is this choice and nothing more. Letting someone in, blocking someone and
@@ -6539,6 +6541,57 @@ follows. Archie Mobile shows the same for everyone on the team."
 - What it replaced: the owner worked it out from the "Whose is this?" choice on every account and two
   paragraphs about the settings (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`,
   finding 10).
+
+### 🚧 On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, in no release yet
+
+*Archie `be50b989` and archie-mobile `247d8af`, on their `journey-fixes` branches, not on main and
+in no release. Nothing below may be said on a page until a release carries them.*
+
+**Proposed wording, Jett's to approve:** "On Archie for Teams, when a teammate asks your agent about a
+list that says whose each row is, they hear about their own rows and the ones with nobody named, and
+a row they add is theirs. You still see every row. Set up for real estate, People, Deals and
+Listings come with an Agent column for this."
+
+**Why it's true:**
+- **Whose a row is** comes from a column found by its name: Agent, Assigned to, Assignee, Driver,
+  Tech or Technician, alone or at the end of a longer name, or one called exactly Owner
+  (`person_field` in the Archie repo's `crates/archie-domain/src/records.rs`, test
+  `the_whose_row_column_is_found_by_name`).
+- **The scope.** `RowScope` in `crates/archie-runtime/src/records.rs` leaves a row out only when
+  that column names somebody else on the team: by the name the owner wrote on their row, its first
+  word when nobody else on the team shares it, or their chat handle. Rows naming nobody, or somebody
+  not on the team, stay. `records_query` and `records_count` leave those rows out and say how many
+  (`not_shown`), and `records_get` refuses one
+  (`a_teammate_sees_their_own_rows_and_unassigned_ones`). The owner, routines and every personal
+  agent get no scope.
+- **What they add is theirs.** A row a teammate adds with the column empty gets their name
+  (`theirs_by_default` in `crates/archie-runtime/src/gateway/tools_records.rs`, test
+  `a_row_a_teammate_adds_is_theirs_unless_they_name_someone`).
+- **The column on Teams.** The real estate setup's People, Deals and Listings get an Agent column on
+  Archie for Teams (`with_agent_column` in `crates/archie-runtime/src/gateway/onboarding.rs`, test
+  `teams_lists_say_whose_each_row_is`).
+- **The reply.** A teammate's note tells the agent to answer about their own work rather than the
+  whole business unless asked: 31 tokens on a teammate's turn, measured on Sonnet 5.5 and Haiku 5.5,
+  above the cache line in the note that already differs between the owner and a teammate
+  (`shared_agent_note` in `gateway/prompt.rs`).
+- **What Dana can see** counts the rows each teammate sees, "Deals (3 of 9)", on both apps (Archie
+  `src-tauri/src/teammate_view.rs`; archie-mobile `src/guests.ts`).
+
+**Boundaries:**
+- ⛔ Never call it a lock or private rows. It keeps a teammate's answers to their own work. In a group
+  chat where several people speak in one burst the agent cannot tell whose turn it is and sees every
+  row, a change to a row by its id is not scoped, and what the agent remembers or a document says is
+  not scoped at all.
+- ⛔ Never that every list is scoped. Only a list with a column named as above; any other list is
+  read in full by every teammate, as the shared-knowledge wording says.
+- ⚠️ The owner is on the team too. A row with the owner's name on it is the owner's, and a teammate
+  does not see it.
+- ⚠️ Names are matched as written. "J. Pratt" in the column is nobody on the team and hides nothing.
+- ⚠️ Only the real estate setup gets the column by itself. Another list gets the scope once it has a
+  column of one of those names.
+- What it replaced: a teammate asking how things stood got the whole office's pipeline. Tony got "a
+  whole rundown that sounds like it was written for Sam", the owner (the Archie repo's
+  `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

@@ -3553,8 +3553,8 @@ Archie tells you it did."
   its reminders are not on any list.
 - **Delete is everywhere a reminder shows.** Under the reply that set one, on the card when it goes
   off, on the work board and the Calendar in Archie, and on the phone's Calendar; the to-do list
-  has Delete too (a swipe on the phone). The lists carry Undo. A reply that set two reminders has no
-  Delete under it; each still has its own on the work board and the Calendar.
+  has Delete too (a swipe on the phone). The lists carry Undo. A reply that set several reminders
+  has a Delete for each, naming its words, up to five.
 - **The condition is visible before the day comes.** It is printed beside the reminder on the work
   board and in the list, because one that stands down leaves the list the moment the answer arrives.
 

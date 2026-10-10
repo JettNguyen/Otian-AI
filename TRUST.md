@@ -2069,6 +2069,52 @@ any of it. Your phone shows the same counts."
 - ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
   that does gets none, and that is the intended answer.
 
+### 🚧 Moving your agents into Archie for Teams when you hire: BUILT 2026-10-09, in no release yet
+
+*Archie `1371e3fa`, on main and in no release. Nothing below may be said on a page until a release
+of both apps carries it.*
+
+**Approved wording, once it is in a release:** "When you hire, your agents come with you. Save a
+backup in Archie, open it in Archie for Teams, and your agents arrive with what they know, their
+lists, their routines and their memory. You reconnect your accounts once, from a list."
+
+**Why it's true** (Archie `1371e3fa`):
+
+- **The rule.** `into_teams` in `crates/archie-domain/src/transfer.rs` lets a backup written by
+  Archie through `refusal()` in Archie for Teams. The other way is still refused, with a sentence
+  saying to open it in Archie for Teams.
+- **Nothing new to migrate.** The two apps' databases and agent folders are the same shape. The
+  start that finishes a restore already moves each agent's lists into the team's shared folder
+  (`migrate_records` in `src-tauri/src/commands/knowledge_records.rs`) and checks each agent's
+  people against the edition's limit (`migrate_rosters`). A test follows a list from an Archie
+  backup into the team's folder (`an_archie_agents_lists_land_in_the_teams_shared_folder` in
+  `crates/archie-core/src/transfer.rs`, run in the business build).
+- **What the confirm screen says before anything happens** (`notes()`): the agents become the
+  team's and each list stays its agent's own until shared on the Knowledge tab, under Lists; two
+  lists with one name cannot both keep it, so the second is renamed and its agent's page says so;
+  Archie keeps its own copy, to be stopped there; and keys come back through the reconnect list.
+- **Where it starts.** Archie's Backups card says to open the file in Archie for Teams when you
+  hire, and the first run of Archie for Teams asks "Have you used Archie before?" with Open a
+  backup (`src/app/moving.tsx`).
+
+**The boundaries.**
+
+- ⚠️ **Keys and tokens do not come across, even on the same computer.** The two apps keep their
+  keys apart. Never say it is "one click" or that nothing needs reconnecting: say "you reconnect
+  your accounts once, from a list."
+- ⚠️ **One way only.** Never say you can move back to Archie from Archie for Teams.
+- ⚠️ **Archie keeps its copy.** The move does not stop or remove the agents in Archie; the screen
+  says to press Stop on each one there. Never say the move "transfers" in the sense that the old
+  ones are gone.
+- ⚠️ **It replaces what is in Archie for Teams.** Opening a backup there over agents already made
+  moves those aside (they are kept in a folder and can be put back). Never say it merges into an
+  existing team.
+- ⚠️ **On the same computer, website sign-ins stay and a Signal link does not**: Signal is linked
+  again in Archie for Teams, because one link cannot be in two apps. On another computer, the
+  backup entry's list of what does not travel applies as written.
+- ⚠️ **The person's plan is a separate matter.** This entry says nothing about billing or what
+  happens to an Archie plan when someone moves to Archie for Teams; pricing pages say that.
+
 ### 🚧 Written setups for three lines of work: portable restrooms, home trades, and real estate: BUILT 2026-10-09, in no release yet
 
 *Archie `f948867d`, on main and in no release. Nothing below may be said on a page until a release
@@ -2539,9 +2585,10 @@ have. The swap happens at the next launch, before the database is opened.
 - ⛔ **Never use this to revive "you own Archie."** That claim is retired (see the 2026-07 note at
   the top of this file) and this entry does not bring it back. This is ownership of **what you
   built**, not of a software licence. Write "your agent is yours", never "Archie is yours".
-- ⚠️ **A restore is refused across accounts and across editions**, and refused when the backup was
-  made by a newer Archie than the one reading it (`refusal()`). Do not write "restore it anywhere";
-  write "restore it on a computer signed in as you."
+- ⚠️ **A restore is refused across accounts, and from Archie for Teams into Archie**, and refused
+  when the backup was made by a newer Archie than the one reading it (`refusal()`). The one crossing
+  allowed is Archie into Archie for Teams (the entry "Moving your agents into Archie for Teams").
+  Do not write "restore it anywhere"; write "restore it on a computer signed in as you."
 - ✅ **The layout is published, since 2026-09-28** (Jett's call): `trust/details/#backup-long` for
   readers, and the Archie repo's `docs/BACKUP-FORMAT.md` for the full field list, both read from
   `transfer.rs`. Publishing it is for looking inside your own file. It changes nothing above: it

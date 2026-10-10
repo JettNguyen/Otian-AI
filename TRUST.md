@@ -6294,7 +6294,9 @@ change your calendar, or use the apps you connected."
   whose writers do not include this agent (`records::may_write`, the list's Audience), for a
   teammate as for anyone.
 - **On the phone** the owner picks the same three answers, in the same words, from Guests on the
-  agent's More tab in Archie Mobile (archie-mobile `c31d8b0`: `src/screens/Guests.tsx`, the words
+  agent's More tab in Archie Mobile (called Teammates from archie-mobile `55eea97`, on its
+  `journey-fixes` branch, with the people listed above the three answers; see the entry below)
+  (archie-mobile `c31d8b0`: `src/screens/Guests.tsx`, the words
   in `src/guests.ts`), shown on Archie for Teams once somebody else is on the agent, which is when
   the computer shows it too. The computer sends the setting with the agent (`guests_of` in the
   Archie repo's `src-tauri/src/phone.rs`, `d449531b`) and saves the phone's pick through the
@@ -6319,6 +6321,104 @@ change your calendar, or use the apps you connected."
 - What it replaced: the setting had two answers, talk or everything, and a teammate refused a row
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
+
+### 🚧 On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, in no release yet
+
+*Archie `309919b2` and archie-mobile `55eea97`, both on their `journey-fixes` branches, not on main
+and in no release. Nothing below may be said on a page until a release carries them.*
+
+**Proposed wording, Jett's to approve:** "When you add someone, write down their name and what they
+do, and an email or phone number if you like. Your agent knows who is on the team, so asked to write
+to Dana it already has her address. Everyone on the agent sees names and what each person does; only
+you are told the emails and phone numbers. Archie gives you a message to send with their code."
+
+**Why it's true:**
+- **What is written down.** `PersonCard` (name, title, email, phone) on each `Member` in the Archie
+  repo's `crates/archie-domain/src/access.rs`, empty by default, so a roster saved before it reads
+  back unchanged. `invite_person` records who an invite is for (`AccessRoster::invite_for`), and
+  `try_join` puts that card on whoever redeems the code; `set_card` edits anybody's, the owner's
+  included. Tests: `a_named_invite_arrives_on_whoever_joins_with_it`,
+  `a_cancelled_or_replaced_invite_forgets_who_it_was_for`,
+  `the_owner_edits_anybodys_card_and_nobody_elses_id`.
+- **The screen.** Add someone, on the agent's Setup tab under Who can message it, asks "Who are you
+  adding?" (Name, What they do, Email, Phone, all optional) before it makes the code, then shows "A
+  message you can send them" with Copy message: the person's first name, the code, the chat app and
+  the agent's handle there, and how long the code lasts (`inviteMessage` in `src/app/team.ts`,
+  `src/app/access.tsx`). Each row shows what the person does and has Edit (`access_member_set` in
+  `src-tauri/src/commands/access.rs`).
+- **The agent.** `team_line` in `crates/archie-runtime/src/gateway/prompt.rs` adds one line to the
+  note a shared agent is given. On the owner's turns: everyone else, with what they do, their email
+  and phone, and an instruction not to ask the owner for anything written there. On a teammate's
+  turns: everyone, the owner first, by name and what they do, with no email or phone. A dozen people
+  at most, and nothing at all while nobody's card has anything on it. Test:
+  `the_team_is_named_with_contact_details_only_for_the_owner`.
+- **One name for one person.** A teammate's messages reach the agent under the name the owner wrote,
+  before the handle their chat app sent (`speaker_label` in `crates/archie-runtime/src/access.rs`,
+  through `Member::name`), and the Jobs tab, the conversations list and the account pickers use the
+  same order (`memberName` in `src/app/team.ts`).
+- **On the phone**, Teammates on the agent's More tab (it said Guests) lists each person by name and
+  what they do above the three answers (archie-mobile `src/screens/Guests.tsx`, `teamPeople` in
+  `src/guests.ts`). The computer sends names and jobs only (`guests_in` in the Archie repo's
+  `src-tauri/src/phone.rs`, checked by `a_guest_setting_from_the_phone_is_saved_and_the_snapshot_reports_it`):
+  chat ids, emails and phone numbers stay on the computer.
+
+**Boundaries:**
+- ⛔ Never that teammates can get each other's emails or phone numbers from the agent. Those are
+  written into the owner's turns only, and shown on the computer's rows to the owner.
+- ⛔ Never that Archie sends the invite. It shows a message to copy, and the owner sends it however
+  they like.
+- ⛔ Never that the phone adds people or edits what is written about them. Letting someone in,
+  taking someone off and Edit are on the computer, and the phone's page says so.
+- ⚠️ Adding someone still needs a chat app on the agent (Telegram, Slack, Discord, Signal or Matrix),
+  because that is where a teammate messages it. An agent that talks only in Archie's own window
+  cannot be shared, and the screen says so.
+- ⚠️ "Knows its team" means it is told the names, jobs and, on the owner's turns, contact details
+  written on the rows. It does not search mail or contacts for anybody, and a person nobody wrote
+  anything about is known by their chat handle at most.
+- ⚠️ Like everything the agent is told, the line goes to the AI company with the owner's turns.
+- What it replaced: a teammate was a chat app's id and handle, and an owner's agent asked him for his
+  wife's email with her on the team (the Archie repo's
+  `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
+
+### 🚧 On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, in no release yet
+
+*Archie `fa238558`, `d2f7d60b` and `cdf669b8`, and archie-mobile `77c92e9`, `55eea97` and
+`6ea0e9d`, on their `journey-fixes` branches, not on main and in no release.*
+
+**Proposed wording, Jett's to approve:** "On Archie for Teams the people you add are teammates. A
+teammate can ask the agent to remind them of something, and it reminds them in the chat they asked
+in, never on your to-do list. They can cancel their own reminders and nobody else's, and your
+Calendar and Jobs say whose each reminder is."
+
+**Why it's true:**
+- **The word.** `GUEST`, `GUESTS` and `GUEST_TITLE` in the Archie repo's `src/app/vocab.ts` read
+  teammate under `IS_BUSINESS`, and guest on the personal edition, which has no way to add anybody;
+  the agent's refusal to a teammate uses the same word (`guest_refusal` in
+  `crates/archie-runtime/src/gateway/turn.rs`). On the phone: archie-mobile `77c92e9`, and `55eea97`
+  names the More tab's tile Teammates.
+- **Their reminders.** A teammate's `reminder_set` is kept with `Reminder::for_person` (their roster
+  id, the chat they asked in, the name they go by) in `crates/archie-runtime/src/reminders.rs`, is
+  never filed on the owner's to-do list, and is delivered to that chat in plain words (the
+  `for_person` branch in `gateway/worker.rs`), never on the owner's reminder card or phone. A
+  teammate's `reminder_cancel` cancels only reminders they set (`tools_reminders::dispatch`). Test:
+  `a_teammate_sets_and_cancels_their_own_reminder_and_not_the_owners`, which also checks the list.
+- **Whose it is.** The agent's list says "(for Jason Pratt, who set it)" (`whose_of` in
+  `tools_reminders.rs`), the Calendar tab "For Jason Pratt, who set it" and Jobs "Reminder Jason
+  Pratt asked for" (`WaitingReminder::for_name` in `src-tauri/src/commands/routine.rs`); the
+  phone's Calendar says the same (archie-mobile `6ea0e9d`).
+- **When something fails,** a teammate is told what happened and who can fix it ("only Megan Doyle
+  can fix, and my page in Archie shows what it is"), not the owner's steps; the owner's own sentence
+  goes on the agent's page (`teammate_facing_error` in `turn.rs`, test
+  `a_teammate_is_told_who_can_fix_it_and_never_the_owners_steps`).
+
+**Boundaries:**
+- ⛔ Never that a teammate's reminders are private. Everyone on the agent can read every reminder, as
+  the shared-knowledge wording says; the list now says whose each one is.
+- ⛔ Never that a teammate's reminder reaches them as a notification from Archie. It is a message in
+  the chat app they set it in.
+- ⛔ Never that the owner cannot cancel a teammate's reminder. The owner can cancel any, and delete
+  any on the Calendar.
+- ⚠️ The personal edition still says guest.
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

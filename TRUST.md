@@ -5464,6 +5464,14 @@ email or a time on your calendar, and it looks before it rewrites."
 - **What a press says as you.** In the window and the phone, a pressed choice (Confirm, Add it,
   Go ahead) now shows as the sentence the agent was handed, not the button's label
   (`decide.rs`, `as_the_person`).
+  **Amended 2026-10-10: until Archie `7e019ba1` (in no release yet) that held only on an agent with
+  no chat app connected.** With one connected (every Archie for Teams agent with a teammate on it,
+  among others), the chat app's rule stood for every press, so the owner's bubble showed the bare
+  label and the card had the label written on it as well. Each press is now answered by where it
+  was made (`tap_reads_as_the_person` in the Archie repo's `crates/archie-net/src/channel.rs` and
+  `mirror.rs`, test `a_press_in_the_window_reads_as_the_person_whatever_chat_app_is_connected`).
+  A press on the chat app itself still writes the pick onto the card, because a bot cannot post as
+  the person there.
 
 **The boundaries.**
 

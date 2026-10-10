@@ -6256,6 +6256,16 @@ Sheets beside them, and says there is no per-person setting on any of them. This
 from marking a mailbox as one person's; never imply that marking the mailbox also restricts
 the agent's knowledge.
 
+**Amended 2026-10-10: the wording above leaves out memory, and that was true of every release.** The
+agent's memory (About you and Notes, on the Knowledge tab) and Who this agent serves go to the AI with
+every message, a guest's too (`build_system_prompt` in the Archie repo's
+`crates/archie-runtime/src/gateway/prompt.rs` is handed both whoever is speaking), so a guest can be
+told what they say. Found while building "What Dana can see" (see the entry for it below); the Access
+screen names memory from Archie `b783f843`, in no release yet. **Proposed wording, Jett's to
+approve:** "A shared agent's guests can read its documents, lists, reminders and what it remembers
+about you. Keep confidential context off shared agents."
+- ⛔ Never say or imply that a guest cannot learn what the agent remembers about the owner.
+
 ### ✅ On Archie for Teams, teammates can add to an agent's lists without being handed the owner's mail or calendar: RELEASED in 0.3.7, 2026-10-08 (Archie `9de4bfa4`), never yet picked on a real agent
 
 **Released in 0.3.7 on October 8, 2026, and named in its notes.** Built and tested the same day, at
@@ -6472,6 +6482,63 @@ counts. Ask the agent what your team has been doing and it tells you the same."
 - What it replaced: the Jobs tab counted asks in a row of chips, and a teammate's conversation was two
   screens away under Setup. A team lead in the October 10 journey run could not find the team's
   activity at all (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
+
+### 🚧 On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, in no release yet
+
+*Archie `b783f843` and archie-mobile `57512fe`, on their `journey-fixes` branches, not on main and
+in no release. Nothing below may be said on a page until a release carries them.*
+
+**Proposed wording, Jett's to approve:** "On Archie for Teams, press What Dana can see beside anyone
+you added. Archie lists the mailboxes, calendars and apps your agent can use for them, what it keeps
+that they can ask about, and what they can change, worked out from the same rules your agent
+follows. Archie Mobile shows the same for everyone on the team."
+
+**Why it's true:**
+- **One rule, asked rather than described.** `teammate_view_in` in the Archie repo's
+  `src-tauri/src/teammate_view.rs` asks `archie_runtime::access::reaches` which connections reach a
+  person, the predicate `for_speaker`, `fireflies_for_speaker`, `zoom_for_speaker` and
+  `connectors_for_speaker` in `crates/archie-runtime/src/accounts.rs` now all apply (their tests,
+  `a_speaker_reaches_their_own_accounts_and_the_businesss_but_no_one_elses` among them, pass
+  unchanged). What they may change is `gateway::teammate_may_use`, the belt's own filter
+  (`withheld_from` in `gateway/turn.rs`), asked about one tool per kind of change
+  (`what_a_teammate_may_use_follows_the_setting_and_their_own_accounts`); which services survive
+  the setting is `gateway::service_open_to`, the filter `connectors_for_powers` uses.
+- **What it lists:** mailboxes, calendars (a calendar opened to everyone included), meeting
+  recorders and connected apps, each with whose it is and whether they can change things through it;
+  anything handed to somebody else, by that person's name; the lists with their row counts, uploaded
+  documents, shared Docs and Sheets, waiting reminders, and how much the agent remembers about the
+  owner; and what they can and can't change. Test:
+  `a_teammate_sees_theirs_and_everyones_and_never_a_colleagues`.
+- **On the computer:** What Dana can see on each teammate's row, on the agent's Setup tab under Who
+  can message it (`src/app/teammate-view.tsx`, words in `src/app/team.ts`).
+- **On the phone:** What each of them can see on the Teammates page (archie-mobile
+  `src/screens/TeamSee.tsx`), asked for when pressed through the `team_view` command and never
+  carried in the snapshot, in the computer's words (`src/guests.ts`, tested in `guests.test.ts`).
+
+**What building it showed, and what changed on the screens because of it:**
+- **Memory reaches teammates, and the screens never said so.** The agent's memory (both sections,
+  About you included) and Who this agent serves go to the AI with every message, a teammate's too
+  (`build_system_prompt` is handed both whoever is speaking). The Access screen's list of what any
+  teammate can read named four stores; it names five now, memory included, on both apps.
+- **"Everything you can" hands over more than accounts.** Under it a teammate also gets Computer
+  control in the owner's signed-in browser and apps, the texts the owner sent (read from Messages on
+  a Mac), and their lights, wherever those are set up: the belt filter lets everything through on
+  that setting. Its blurb said only "your accounts"; it names all three now, on both apps.
+
+**Boundaries:**
+- ⛔ Never that the page controls anything. It shows; the controls are where they were (Whose is
+  this? on the Connections tab, the Knowledge tab, What teammates can do).
+- ⛔ Never that a teammate can't learn what the agent remembers about the owner. It goes with every
+  message they send, and the agent can repeat it.
+- ⛔ Never that "Everything you can" stops at accounts, or that teammates can never use Computer
+  control, texts or lights. On that setting they can, where those are set up.
+- ⚠️ "Can use" is access, not activity. A connected app is listed because the rules let the agent
+  use it for that person; whether it does depends on what they ask and on an add-on that uses it.
+- ⚠️ On the phone the addresses of connected accounts travel when the page is opened, sealed like
+  every phone command, and are not kept there.
+- What it replaced: the owner worked it out from the "Whose is this?" choice on every account and two
+  paragraphs about the settings (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`,
+  finding 10).
 
 ### ✅ A company's name and logo never leave the computer: VERIFIED 2026-09-16
 

@@ -404,7 +404,10 @@ page still carrying it is describing a product we do not sell.)*
   one: nothing writes it down, no copy is kept, none of it is used. All three are true today and
   the third follows from the second.
 - ❌ Never "unlimited" or "all the AI you need". It is $25 at list price, and the pricing page
-  says which of the three measured bands fit inside it.
+  says which of the three measured bands fit inside it. *(Not true until the billing service is
+  deployed with Archie `4336c4e9`, October 11, 2026: before it, every call was metered at $3 / $15
+  while Sonnet 5's list price is $2 / $10, so $25 bought about $16.67 of Claude at list price. From
+  that deploy each model is metered at its own list price, on the plan and the free credits alike.)*
 - ❌ The plain plan's "no Otian server in the path" is now scoped to the plain plan on every page
   that also mentions this one. An unscoped version beside a plan that is sold with the proxy
   inside is false for that plan.

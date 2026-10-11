@@ -2613,6 +2613,54 @@ stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
   stopped the company map's restart from starting agents the owner had stopped: it took any answer
   from Stop as "it was running".
 
+### 🚧 New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, in no release yet
+
+*Archie `f97d3d5a` and Archie Mobile `0c47ac8`, both on their `journey-fixes` branches, not on main
+and in no release. Nothing below may be said on a page until a release carries it.*
+
+**Proposed wording, Jett's to approve:** "Press New chat and your agent starts fresh. It forgets the
+conversation and keeps what it has learned about you."
+
+**Why it's true:**
+- **The button.** In Archie, New chat beside Copy chat at the top of an agent's Chat (the Archie
+  repo's `src/app/agent-detail.tsx`); in Archie Mobile, the page-and-pencil button at the top right
+  of the Chat tab (`src/screens/Agent.tsx`). Both ask first, in the same words (`newChatWords` in
+  each): the agent "will not remember what you were just talking about. Any change it offered that
+  you have not said yes to is dropped. What it has learned about you is kept."
+- **What it does.** It sends `/new` without putting the word in the owner's mouth (`inapp_new_chat`
+  in `src-tauri/src/inapp.rs`, and the phone's `new_chat` op in `src-tauri/src/phone.rs`). `/new`
+  was already the command: `reset_chat` in `crates/archie-runtime/src/gateway/worker.rs` clears the
+  conversation's history, the decisions waiting in it and the changes it offered, and leaves the
+  memory file alone.
+- **Where it began.** The agent's "Conversation cleared." is marked (`fresh`, from
+  `archie_runtime::CONVERSATION_CLEARED`) and both apps draw "New chat" above it. The buttons above
+  it that only the cleared conversation could answer come off (`clear_decisions`, test
+  `a_new_chat_takes_the_decision_buttons_above_it_off`).
+- **Day lines on the phone.** Archie Mobile's chat draws the day between messages in the window's
+  words: Today, Yesterday, "Tuesday, Oct 6", "Oct 2" (`chatDay` in `src/when.ts`, test "the chat's
+  day line reads the way the desktop's does").
+
+**Boundaries:**
+- ⛔ Never that New chat erases the conversation. The messages stay on screen to scroll back
+  through; it is the agent that forgets them.
+- ⛔ Never that it wipes what the agent has learned about you. Its memory is kept, and the question
+  says so.
+- ⚠️ Only while the agent is running, on both apps. A stopped agent shows no button.
+- ⚠️ Archie Mobile shows it only when paired with a computer running this release (`new_chat` on
+  the snapshot).
+- ⚠️ The owner's own conversation only: not the workshop where a skill is built, not a room, and
+  never a teammate (`/new` refuses anybody but the owner).
+- ⚠️ No chat app has the button. Typing `/new` there does the same thing, as it always has.
+- ⚠️ Email drafts, reminders and to-do ticks keep their buttons through a new chat, because none of
+  them is kept per conversation.
+- What it replaced: no way to start over but a `/new` nobody knew about. Owners in the October 10,
+  2026 journey run came back to yesterday's messages mixed in with today's and nothing marking where
+  either began (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 27). The
+  same commits fixed two things that run turned up: a retired email card stays where it was instead
+  of dropping to the bottom with a new time, and a button that can only refuse (past its day, or
+  held by a run that has since restarted) comes off in the window, on the Now pane and on the phone
+  alike (`drop_dead_buttons` in `src-tauri/src/inapp.rs`).
+
 ### 🚧 New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), in no release yet
 
 *Archie `cda94ed1` is on the `journey-fixes` branch and in no release; nothing below may be said on a

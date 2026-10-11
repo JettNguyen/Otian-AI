@@ -2534,8 +2534,9 @@ connects directly."
 
 ### 🚧 A plan with no AI in it asks for your AI account right after you buy it: BUILT 2026-10-11, in no release yet
 
-*Archie `54e2115a` (Archie for Teams) and `69e3b242` (Archie), on the `journey-fixes` branch, not on
-main and in no release. Nothing below may be said on a page until a release carries them.*
+*Archie `54e2115a` (Archie for Teams), `69e3b242` (Archie) and `431e3e65` (free credits), on the
+`journey-fixes` branch, not on main and in no release. Nothing below may be said on a page until a
+release carries them.*
 
 **Proposed wording, Jett's to approve:** "Buy a plan without the AI, on Archie or Archie for Teams,
 and Archie asks for your AI account next, in the same box the free plan uses, so your first agent
@@ -2546,10 +2547,13 @@ it opens."
 - **When it opens.** Between the purchase and the app, when the account has a plan, the plan has no
   AI in it, and no AI account is saved on this computer (`App` in the Archie repo's
   `src/app/App.tsx`, and `PlanKeyScreen` in `src/app/auth.tsx`). Archie for Teams never includes the
-  AI. On Archie the screen first reads the AI allowance's own record, twice and 2.5 seconds apart,
-  because the billing service writes the plan a moment before the AI's record (`renewPlan` after
-  `addTiers` in `stripe-webhook/index.js`), and a plan with the AI in it, spendable or used up for
-  the month, goes straight in. A local model counts as an AI account: `own_ai_key` in
+  AI. The screen first reads the AI allowance's own record, and two kinds of account go straight in:
+  one whose free credits are still live (sign-in claims them, and they outlast a purchase, so the
+  agent goes on thinking on them), and on Archie a plan with the AI in it, spendable or used up for
+  the month. Archie reads twice, 2.5 seconds apart, because the billing service writes the plan a
+  moment before the AI's record (`renewPlan` after `addTiers` in `stripe-webhook/index.js`). A plan
+  bought from inside the app (the trial strip's Get a plan) never brings the box, because without a
+  plan the app is only open on live credits or a key. A local model counts as an AI account: `own_ai_key` in
   `src-tauri/src/auth.rs` counts every saved one, and the Setup tab saves a local model as one.
 - **What it is.** The paywall's key box (`OwnKeyTrial`, with `onPlan`) on the paywall's own
   background: "Add your AI account", "Your Archie plan is active" (on Archie for Teams, "Your Archie
@@ -2572,6 +2576,8 @@ it opens."
   the left sidebar, then Saved keys.
 - ⚠️ Somebody offline right after buying Archie with the AI finds no record of it, and the box asks
   for a key anyway. Their agents could not reach the AI offline either.
+- ⚠️ Somebody who buys while on free credits is asked at the first launch after the credits run out,
+  not when they run out with Archie open.
 - ⚠️ On the computer only. Archie Mobile has no checkout, so there is nothing on the phone to follow.
 - ⚠️ Not yet seen after a real purchase: the harness pretends the checkout.
 - What it replaced: the owner met a stopped agent and learned why only by sending it a message (the

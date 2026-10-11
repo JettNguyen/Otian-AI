@@ -2570,6 +2570,49 @@ Connections tab with the sign-in ready."
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 20). Those directions now read "In
   Archie, on the Connections tab", in the agent's fixed answers and the instructions it is given.
 
+### 🚧 A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, in no release yet
+
+*Archie `7e720869` and Archie Mobile `68cd478`, both on their `journey-fixes` branches, not on main
+and in no release. Nothing below may be said on a page until a release carries it.*
+
+**Proposed wording, Jett's to approve:** "A stopped agent says who stopped it and when, like "You
+stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
+
+**Why it's true:**
+- **Written down when the stop happens.** A stop writes what made it and when into the agent's own
+  folder, and the next start wipes it (`set_stopped` and `StoppedBy` in the Archie repo's
+  `crates/archie-core/src/bundle/mod.rs`, test `a_stop_says_who_made_it_until_the_next_start`).
+  Four stops write one: Stop on the agent's page or in the sidebar's menu (`gateway_stop` with
+  `owner_pressed`, in `src-tauri/src/commands/gateway_lifecycle.rs`), Stop in Archie Mobile
+  (`agent_stop` in `src-tauri/src/phone.rs`), the free trial running out while Archie is open
+  (`close_expired_trial` in `src-tauri/src/session.rs`), and Stop the agents here, offered after a
+  backup is saved for a move (`transfer_stop_agents_here` in `src-tauri/src/commands/transfer.rs`).
+- **The same words on both apps.** `stoppedClause` in Archie's `src/app/schedule.ts` and in Archie
+  Mobile's `src/when.ts` (test `a stopped agent says who stopped it and when, in the desktop's
+  words`). The computer reads it from `gateway_status` and shows it on the Dashboard and in Chat
+  beside Start; the phone reads it from the agent row it is sent and shows it on its Now card and
+  in its chat beside Start.
+- **The four lines:** "You stopped Ember yesterday at 11:34 PM", "You stopped Ember from your phone
+  today at 8:00 AM", "Ember stopped when the free trial ended on Wednesday at 9:00 AM", and "You
+  stopped Ember on Oct 1 after saving a backup to move it".
+
+**Boundaries:**
+- ⛔ Never that it says why. It says who and when; why somebody pressed Stop is theirs to know.
+- ⚠️ A restart leaves no line. When Archie stops an agent to start it again with a change (a skill
+  installed, an account connected, a move on Archie for Teams' company map), nothing is written.
+  If that start fails, the agent shows as stopped with no line, and pressing Start says why.
+- ⚠️ An agent that stopped without anybody asking (it could not start, or it crashed) has no line.
+- ⚠️ "From your phone" means any phone paired with that computer, not the one being read.
+- ⚠️ Never quote the trial line as an example: whether any account can reach a free trial today is
+  the open question in an earlier entry that says "The credits line may show to nobody".
+- ⚠️ A stop made before this release has no line, because nothing wrote it down.
+- What it replaced: "Ember is stopped, so it cannot answer", with no who or when. An owner in the
+  October 10, 2026 journey run "did not know why the assistant was stopped" (the Archie repo's
+  `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 26). The same commit made the sidebar's
+  dot change as soon as Start or Stop finishes, instead of at its next check five seconds on, and
+  stopped the company map's restart from starting agents the owner had stopped: it took any answer
+  from Stop as "it was running".
+
 ### 🚧 New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), in no release yet
 
 *Archie `cda94ed1` is on the `journey-fixes` branch and in no release; nothing below may be said on a

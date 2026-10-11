@@ -2532,32 +2532,37 @@ connects directly."
   app-password providers.** The guide adds one, on the evidence above. Bring the trust rows to the
   same footing the next time that table is edited.
 
-### 🚧 Archie for Teams asks for your AI account right after you buy it: BUILT 2026-10-11, in no release yet
+### 🚧 A plan with no AI in it asks for your AI account right after you buy it: BUILT 2026-10-11, in no release yet
 
-*Archie `54e2115a`, on the `journey-fixes` branch, not on main and in no release. Nothing below may
-be said on a page until a release carries it.*
+*Archie `54e2115a` (Archie for Teams) and `69e3b242` (Archie), on the `journey-fixes` branch, not on
+main and in no release. Nothing below may be said on a page until a release carries them.*
 
-**Proposed wording, Jett's to approve:** "Buy Archie for Teams and Archie asks for your AI account
-next, in the same box the free plan uses, so your first agent starts as soon as it is made. Not now
-lets you in without one, and Archie asks again the next time it opens."
+**Proposed wording, Jett's to approve:** "Buy a plan without the AI, on Archie or Archie for Teams,
+and Archie asks for your AI account next, in the same box the free plan uses, so your first agent
+starts as soon as it is made. Not now lets you in without one, and Archie asks again the next time
+it opens."
 
 **Why it's true:**
 - **When it opens.** Between the purchase and the app, when the account has a plan, the plan has no
   AI in it, and no AI account is saved on this computer (`App` in the Archie repo's
-  `src/app/App.tsx`). Archie for Teams never includes the AI, so that is everybody who has just
-  bought it without one. A local model counts as one: `own_ai_key` in `src-tauri/src/auth.rs` counts
-  every saved AI account, and the Setup tab saves a local model as one.
-- **What it is.** The personal paywall's key box (`OwnKeyTrial` in `src/app/auth.tsx`, with
-  `onPlan`) on the paywall's own background (`PlanKeyScreen`): "Add your AI account", "Your Archie
-  for Teams plan is active", "Your agents answer with an AI account of your own, and the AI company
-  bills you for what they use", the same Show me how steps and company buttons, Save and open Archie,
-  and Not now. It tests the key with the company, saves it and hands it to any agents already there.
-  It asks our server for nothing.
+  `src/app/App.tsx`, and `PlanKeyScreen` in `src/app/auth.tsx`). Archie for Teams never includes the
+  AI. On Archie the screen first reads the AI allowance's own record, twice and 2.5 seconds apart,
+  because the billing service writes the plan a moment before the AI's record (`renewPlan` after
+  `addTiers` in `stripe-webhook/index.js`), and a plan with the AI in it, spendable or used up for
+  the month, goes straight in. A local model counts as an AI account: `own_ai_key` in
+  `src-tauri/src/auth.rs` counts every saved one, and the Setup tab saves a local model as one.
+- **What it is.** The paywall's key box (`OwnKeyTrial`, with `onPlan`) on the paywall's own
+  background: "Add your AI account", "Your Archie plan is active" (on Archie for Teams, "Your Archie
+  for Teams plan is active"), "Your agents answer with an AI account of your own, and the AI company
+  bills you for what they use", the same Show me how steps and company buttons, Save and open
+  Archie, and Not now. It tests the key with the company, saves it and hands it to any agents
+  already there. It asks our server for nothing but the AI allowance's record.
 - **Why it comes before the app.** The app waits behind the box, so the first agent is made after
   the key exists, takes it, and starts. Made before, its start was refused and it sat stopped.
-- **Checked** on the journey harness on October 11, 2026: buying the plan opened the box, a pasted
-  key opened the app, and the first agent read "Running here"; Not now opened the app at its first
-  screen.
+- **Checked** on the journey harness on October 11, 2026. Archie for Teams: buying the plan opened
+  the box, a pasted key opened the app, and the first agent read "Running here"; Not now opened the
+  app at its first screen. Archie: the plan without the AI opened the box; the plan with it went
+  straight to the app.
 
 **Boundaries:**
 - ⛔ Never that Archie for Teams includes the AI, or that the box gets you an AI account. It saves one
@@ -2565,9 +2570,8 @@ lets you in without one, and Archie asks again the next time it opens."
 - ⛔ Never that the agents work without one. Not now lets you in, and the box's last line says the
   agents can't answer anybody until one is saved, and where to add it later: Settings at the bottom of
   the left sidebar, then Saved keys.
-- ⚠️ Archie for Teams only. The personal plan bought without the AI does not ask yet: there the same
-  facts also describe a plan whose included AI has run out for the month, which needs its own words
-  (the Archie repo's `docs/OPEN-THREADS.md`).
+- ⚠️ Somebody offline right after buying Archie with the AI finds no record of it, and the box asks
+  for a key anyway. Their agents could not reach the AI offline either.
 - ⚠️ On the computer only. Archie Mobile has no checkout, so there is nothing on the phone to follow.
 - ⚠️ Not yet seen after a real purchase: the harness pretends the checkout.
 - What it replaced: the owner met a stopped agent and learned why only by sending it a message (the

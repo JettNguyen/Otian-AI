@@ -2532,6 +2532,47 @@ connects directly."
   app-password providers.** The guide adds one, on the evidence above. Bring the trust rows to the
   same footing the next time that table is edited.
 
+### 🚧 Archie for Teams asks for your AI account right after you buy it: BUILT 2026-10-11, in no release yet
+
+*Archie `54e2115a`, on the `journey-fixes` branch, not on main and in no release. Nothing below may
+be said on a page until a release carries it.*
+
+**Proposed wording, Jett's to approve:** "Buy Archie for Teams and Archie asks for your AI account
+next, in the same box the free plan uses, so your first agent starts as soon as it is made. Not now
+lets you in without one, and Archie asks again the next time it opens."
+
+**Why it's true:**
+- **When it opens.** Between the purchase and the app, when the account has a plan, the plan has no
+  AI in it, and no AI account is saved on this computer (`App` in the Archie repo's
+  `src/app/App.tsx`). Archie for Teams never includes the AI, so that is everybody who has just
+  bought it without one. A local model counts as one: `own_ai_key` in `src-tauri/src/auth.rs` counts
+  every saved AI account, and the Setup tab saves a local model as one.
+- **What it is.** The personal paywall's key box (`OwnKeyTrial` in `src/app/auth.tsx`, with
+  `onPlan`) on the paywall's own background (`PlanKeyScreen`): "Add your AI account", "Your Archie
+  for Teams plan is active", "Your agents answer with an AI account of your own, and the AI company
+  bills you for what they use", the same Show me how steps and company buttons, Save and open Archie,
+  and Not now. It tests the key with the company, saves it and hands it to any agents already there.
+  It asks our server for nothing.
+- **Why it comes before the app.** The app waits behind the box, so the first agent is made after
+  the key exists, takes it, and starts. Made before, its start was refused and it sat stopped.
+- **Checked** on the journey harness on October 11, 2026: buying the plan opened the box, a pasted
+  key opened the app, and the first agent read "Running here"; Not now opened the app at its first
+  screen.
+
+**Boundaries:**
+- ⛔ Never that Archie for Teams includes the AI, or that the box gets you an AI account. It saves one
+  you have, and Show me how walks you through getting one from the company.
+- ⛔ Never that the agents work without one. Not now lets you in, and the box's last line says the
+  agents can't answer anybody until one is saved, and where to add it later: Settings at the bottom of
+  the left sidebar, then Saved keys.
+- ⚠️ Archie for Teams only. The personal plan bought without the AI does not ask yet: there the same
+  facts also describe a plan whose included AI has run out for the month, which needs its own words
+  (the Archie repo's `docs/OPEN-THREADS.md`).
+- ⚠️ On the computer only. Archie Mobile has no checkout, so there is nothing on the phone to follow.
+- ⚠️ Not yet seen after a real purchase: the harness pretends the checkout.
+- What it replaced: the owner met a stopped agent and learned why only by sending it a message (the
+  October 10 note in the Archie repo's `docs/OPEN-THREADS.md`).
+
 ### 🚧 A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, in no release yet
 
 *Archie `0aa95be1`, on its `journey-fixes` branch, not on main and in no release. Nothing below may
@@ -2615,8 +2656,9 @@ stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
 
 ### 🚧 New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, in no release yet
 
-*Archie `f97d3d5a` and Archie Mobile `0c47ac8`, both on their `journey-fixes` branches, not on main
-and in no release. Nothing below may be said on a page until a release carries it.*
+*Archie `f97d3d5a` and Archie Mobile `0c47ac8`, amended by Archie `f4cb40a2` (2026-10-11), all on
+their `journey-fixes` branches, not on main and in no release. Nothing below may be said on a page
+until a release carries it.*
 
 **Proposed wording, Jett's to approve:** "Press New chat and your agent starts fresh. It forgets the
 conversation and keeps what it has learned about you."
@@ -2653,6 +2695,9 @@ conversation and keeps what it has learned about you."
 - ⚠️ No chat app has the button. Typing `/new` there does the same thing, as it always has.
 - ⚠️ Email drafts, reminders and to-do ticks keep their buttons through a new chat, because none of
   them is kept per conversation.
+- ⚠️ Two weeks is the longest a question card answers, not a promise for every one. A conversation
+  keeps its twenty newest (`MAX_LIVE_CARDS`); a press on an older one gets "That's no longer
+  current. Just tell me what you'd like."
 - What it replaced: no way to start over but a `/new` nobody knew about. Owners in the October 10,
   2026 journey run came back to yesterday's messages mixed in with today's and nothing marking where
   either began (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 27). The
@@ -2660,6 +2705,16 @@ conversation and keeps what it has learned about you."
   of dropping to the bottom with a new time, and a button that can only refuse (past its day, or
   held by a run that has since restarted) comes off in the window, on the Now pane and on the phone
   alike (`drop_dead_buttons` in `src-tauri/src/inapp.rs`).
+- **Amended 2026-10-11, Jett's call of October 10: an agent's question cards keep their buttons for
+  two weeks, through a restart.** The cards where the agent offers choices in the chat are kept in
+  the agent's folder (`memory/decisions.json`, `DecisionStore` in the Archie repo's
+  `crates/archie-runtime/src/decide.rs`; tests `a_card_outlives_a_restart` and
+  `a_taken_card_stays_taken_across_a_restart`), for the same two weeks the change behind a card is
+  kept (`proposals::MAX_AGE_MS`), so a card from Friday still answers on Monday. A reply draft's
+  buttons last a day, as before. Two offers still come off at a restart, because what they hold is
+  not kept: watching a video somebody sent, and importing a file dropped in the chat. A press on one
+  while the agent is stopped says starting it will not bring the button back, and what to do
+  instead (`absence_reads_as` in `src-tauri/src/inapp.rs`).
 
 ### 🚧 New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), in no release yet
 
@@ -6624,13 +6679,14 @@ counts. Ask the agent what your team has been doing and it tells you the same."
 
 ### 🚧 On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, in no release yet
 
-*Archie `b783f843` and archie-mobile `57512fe`, on their `journey-fixes` branches, not on main and
-in no release. Nothing below may be said on a page until a release carries them.*
+*Archie `b783f843` and archie-mobile `57512fe`, amended by Archie `d54534db` and archie-mobile
+`865bdf7` (2026-10-11), on their `journey-fixes` branches, not on main and in no release. Nothing
+below may be said on a page until a release carries them.*
 
 **Proposed wording, Jett's to approve:** "On Archie for Teams, press What Dana can see beside anyone
 you added. Archie lists the mailboxes, calendars and apps your agent can use for them, what it keeps
-that they can ask about, and what they can change, worked out from the same rules your agent
-follows. Archie Mobile shows the same for everyone on the team."
+that they can ask about, what they can change, and what stays yours on every setting, worked out
+from the same rules your agent follows. Archie Mobile shows the same for everyone on the team."
 
 **Why it's true:**
 - **One rule, asked rather than described.** `teammate_view_in` in the Archie repo's
@@ -6645,8 +6701,8 @@ follows. Archie Mobile shows the same for everyone on the team."
 - **What it lists:** mailboxes, calendars (a calendar opened to everyone included), meeting
   recorders and connected apps, each with whose it is and whether they can change things through it;
   anything handed to somebody else, by that person's name; the lists with their row counts, uploaded
-  documents, shared Docs and Sheets, waiting reminders, and how much the agent remembers about the
-  owner; and what they can and can't change. Test:
+  documents, shared Docs and Sheets, waiting reminders, and how many of the agent's Notes go with
+  their messages; what they can and can't change; and what stays the owner's on every setting. Test:
   `a_teammate_sees_theirs_and_everyones_and_never_a_colleagues`.
 - **On the computer:** What Dana can see on each teammate's row, on the agent's Setup tab under Who
   can message it (`src/app/teammate-view.tsx`, words in `src/app/team.ts`).
@@ -6655,22 +6711,41 @@ follows. Archie Mobile shows the same for everyone on the team."
   carried in the snapshot, in the computer's words (`src/guests.ts`, tested in `guests.test.ts`).
 
 **What building it showed, and what changed on the screens because of it:**
-- **Memory reaches teammates, and the screens never said so.** The agent's memory (both sections,
-  About you included) and Who this agent serves go to the AI with every message, a teammate's too
+- **Memory reached teammates, and the screens never said so.** The agent's memory (both sections,
+  About you included) and Who this agent serves went to the AI with every message, a teammate's too
   (`build_system_prompt` is handed both whoever is speaking). The Access screen's list of what any
-  teammate can read named four stores; it names five now, memory included, on both apps.
-- **"Everything you can" hands over more than accounts.** Under it a teammate also gets Computer
+  teammate can read named four stores; it names five now, on both apps.
+  **Amended 2026-10-11, Jett's call of October 10: About you goes with the owner's own messages
+  only.** A teammate's message carries the Notes and Who this agent serves, and never About you
+  (`notes_only` in the Archie repo's `crates/archie-runtime/src/memory.rs`, applied in
+  `gateway/turn.rs` whenever a teammate typed; test
+  `a_teammates_copy_keeps_notes_and_drops_about_you`). Facts moved out of About you into the archive
+  are never recalled on a teammate's turn either. The Access screen names the Notes and says About
+  you stays with the owner's messages, and What Dana can see counts the Notes alone, on both apps.
+- **"Everything you can" handed over more than accounts.** Under it a teammate also got Computer
   control in the owner's signed-in browser and apps, the texts the owner sent (read from Messages on
-  a Mac), and their lights, wherever those are set up: the belt filter lets everything through on
-  that setting. Its blurb said only "your accounts"; it names all three now, on both apps.
+  a Mac), and their lights, wherever those were set up: the belt filter let everything through on
+  that setting. Its blurb said only "your accounts".
+  **Reversed 2026-10-11, Jett's call of October 10: those three stay the owner's on every
+  setting.** They are off a teammate's tools and refused if asked for anyway (`owners_alone` in
+  `gateway/turn.rs`, test `the_owners_browser_texts_and_lights_stay_theirs_on_every_setting`), and a
+  home service connected as an app, such as Home Assistant, is the owner's alone the same way
+  (`service_open_to`). The blurb says they stay the owner's, and What Dana can see lists the ones set
+  up under "Yours alone on every setting" (`kept_yours` in `src-tauri/src/teammate_view.rs`), on
+  both apps.
 
 **Boundaries:**
 - ⛔ Never that the page controls anything. It shows; the controls are where they were (Whose is
   this? on the Connections tab, the Knowledge tab, What teammates can do).
-- ⛔ Never that a teammate can't learn what the agent remembers about the owner. It goes with every
-  message they send, and the agent can repeat it.
-- ⛔ Never that "Everything you can" stops at accounts, or that teammates can never use Computer
-  control, texts or lights. On that setting they can, where those are set up.
+- ⛔ Never that a teammate can't learn anything the agent remembers. Its Notes go with every message
+  they send, and the agent can repeat them. Only About you stays with the owner's own messages, and
+  a fact the agent already said in a teammate's chat stays said.
+- ⛔ Never that "Everything you can" stops at the owner's accounts in every sense: on it a teammate
+  acts on the owner's mail, calendar, tasks, lists, documents and connected services. What it never
+  hands over is Computer control, the texts the owner sent, their lights and a home service.
+- ⚠️ "Stays yours" is what the agent will do for a teammate. Asked anyway, the agent is told the tool
+  is the owner's alone on every setting and not to suggest changing one (`guest_refusal` in
+  `gateway/turn.rs`); the words it then uses are the model's own.
 - ⚠️ "Can use" is access, not activity. A connected app is listed because the rules let the agent
   use it for that person; whether it does depends on what they ask and on an add-on that uses it.
 - ⚠️ On the phone the addresses of connected accounts travel when the page is opened, sealed like

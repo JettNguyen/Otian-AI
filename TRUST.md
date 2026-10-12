@@ -3817,7 +3817,10 @@ The same day (Archie `e89564db`, archie-mobile `da5a596`): the empty-list senten
 the turn saved to, and a save raises the count a read before it carried, so a list the reply had just
 filled is never called empty; a list named for whose it is keeps one "Your" ("Your leads list is
 empty"); and the who-owes, deposit, not-billed and who-to-call notes name the lists they read in the
-same line (`looked_by_note` in `kept.rs`, `reads_of` in `records.rs`), where before they named none.
+same line (`looked_by_note` in `kept.rs`, `reads_of` in `records.rs`), where before they named none. Saves
+past the line's six are counted, not dropped (Archie `0502b7cc`, archie-mobile `e7b3690`): more to a
+list already named is "T6, and 3 more" beside its last one, and a list not named yet still gets its
+own line. The Undo beside it takes back the one named; the rest are taken back on the Jobs tab.
 
 **Amended October 11, 2026:** on the October 11 journeys agents answered from empty lists as if they
 were whole: owners with nothing entered were told nothing was due. What changed, all in code:

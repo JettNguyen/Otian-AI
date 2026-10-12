@@ -3813,6 +3813,11 @@ out says "Rentals, the entries you see" in place of "all". A date column the age
 nothing the owner said or it read gave is marked beside the saved entry: "Closing is my reading".
 Tests: `a_turn_says_what_it_saved_and_read`, and archie-mobile's `src/kept.test.ts`. The two
 bullets below that quote "Rentals: 1 of 14" and "Bookings: 2 of 40" describe the line before this.
+The same day (Archie `e89564db`, archie-mobile `da5a596`): the empty-list sentence leaves out any list
+the turn saved to, and a save raises the count a read before it carried, so a list the reply had just
+filled is never called empty; a list named for whose it is keeps one "Your" ("Your leads list is
+empty"); and the who-owes, deposit, not-billed and who-to-call notes name the lists they read in the
+same line (`looked_by_note` in `kept.rs`, `reads_of` in `records.rs`), where before they named none.
 
 **Amended October 11, 2026:** on the October 11 journeys agents answered from empty lists as if they
 were whole: owners with nothing entered were told nothing was due. What changed, all in code:

@@ -4346,6 +4346,13 @@ them as somebody new."
   fourteen, "a couple of days" is two), and is 7 days when it says none; the note says the length it
   used. Tests: the end of `the_call_list_is_worked_out_from_people_and_deals`, and
   `the_quiet_length_comes_from_the_message`.
+- **Amended October 12, 2026: clients are not cold leads** (Archie `5defc406`, in no release yet). An
+  open lead with a deal not at Closed (by Deals' Client, a person on People or a name) or a listing
+  not at Sold (by Listings' Seller, a name) is said under "Clients with a deal or listing in
+  progress", with the deal's stage or the listing's address and the days since contact, and not
+  among the cold leads. Closing anniversaries look back three days as well as fourteen ahead
+  ("October 8, 2 days ago"). Listings (the slug `listings`) is read for this. Test: the end of
+  `the_call_list_is_worked_out_from_people_and_deals`.
 - **Amended October 12, 2026: maybe already there** (Archie `72183ff9`, in no release yet). A shared
   name word no longer names a row when both the new row and the other carry a phone or an email,
   since those already answered; a row with neither is still matched on its name. The note to the
@@ -4363,8 +4370,10 @@ them as somebody new."
   group, and the real estate setup's rule tells the agent to text a lead only after they said it is
   fine. Nothing in code stops a text draft to them. Never "Archie enforces texting consent", "TCPA
   compliant", or "it won't text somebody who opted out".
-- ⚠️ **Only lists called People, Deals and Your leads** (the slugs `people` and `deals`, which the
-  real estate setup makes, and `leads`, which Lead Desk makes; the last since Archie `3c4ab109`).
+- ⚠️ **Only lists called People, Deals, Your leads and Listings** (the slugs `people`, `deals` and
+  `listings`, which the real estate setup makes, and `leads`, which Lead Desk makes; `leads` since
+  Archie `3c4ab109` and `listings`, read only to tell a client from a lead, since `5defc406`). A
+  seller is matched by name as written.
   Every other agent gets no call list, and a client list under another name is not read. Two leads
   are the same lead only when their names are written the same way.
 - ⚠️ **It knows what was written down.** No Last contact reads as "no contact written down", not as

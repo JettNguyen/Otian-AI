@@ -2751,6 +2751,15 @@ came and whether you opened it, and that no AI is asked."
 - ⚠️ **Name the condition, not "the free trial".** The trial on your own AI account never passes
   through us; the plan with the AI included does. "Until you connect an AI account of your own" is
   the true scope.
+- **Amended October 12, 2026 (Archie `6953a9d3`, in no release yet): a run that connected nothing offers it once.** When the
+  opening screen's press needed no connection and the agent has no mailbox or calendar, the first
+  run shows "Connect your email or calendar?" with Connect my email, Connect my calendar and Not now
+  before it goes on, and each opens the same panel the opening asks open, with the words above
+  (`Doors` in `src/app/setup-flow.tsx`). Typing a message instead goes past it.
+  - ⚠️ **Archie on the computer only.** Archie Mobile has no first run; an agent is made on the
+    computer.
+  - ⚠️ **Once.** Not now ends the offer; the Connections tab is where to do it after, and the offer
+    says so.
 
 ### ✅ What Archie costs, said where people look: the trial strip, the AI account panel, and a Your plan row: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -3423,6 +3432,18 @@ it is answering."
   first, with tools, and the first question goes under the answer. A job asked for later gets an
   offer to stop the questions, and asking again lets them go (`handle_message_attributed` in
   `crates/archie-runtime/src/gateway/turn.rs`)."
+- **Amended October 12, 2026 (Archie `6953a9d3`, in no release yet): a question of theirs ends the questions.** A message from
+  the owner that ends in a question mark, after the first one, ends the interview before the agent
+  writes its next question: what was said so far is kept by the same pass every interview turn
+  runs, and the question is answered with tools in the same turn (`asks_a_question` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`, read in `turn.rs`; test
+  `a_question_from_the_owner_ends_the_interview`). The opening message still works as above: a job
+  or a question there is answered first and the first question goes under it.
+  - ⚠️ **A question mark is the whole test.** "Mostly work?" ends it too, and a question asked
+    without one does not; the agent's own judgment still covers that case, as above.
+  - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
+    Sam asked the agent something mid-interview on all three passes, was answered with its next
+    question, and had to press Stop the questions to get an answer.
 
 ### ✅ The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -3652,6 +3673,16 @@ name] or [Phone], Archie fills them in, and when the first questions are done it
 saved and where to change it. They are kept on your computer with the rest of what your agent knows
 about you, which you can read and edit on its Personality tab, under Who this agent serves, and like
 the rest of it they go to your AI company with your messages."
+
+**Amended October 12, 2026 (Archie `6953a9d3`, in no release yet): the first questions no longer ask for them.** Neither edition's
+interview asks for prices, a phone number, or a sign-off (`PERSONAL_STEPS` and `BUSINESS_STEPS` in
+`crates/archie-runtime/src/gateway/onboarding.rs`). Anything the owner says of their own accord is
+still kept by the interview's pass, and the rest is kept where it is first needed: a draft leaves a
+blank, and Keep for every draft on its card keeps what was typed into it. So the proposed wording
+above is wrong from this build: its first sentence should read "Tell your agent your business's
+name, what you charge, the number customers call, or how you sign your messages, in the first
+questions or on a draft, and it keeps them." On round three of the journey tests a realtor asked
+for commission in the first minute answered "I did not come to hand that over".
 
 **Why it's true:**
 

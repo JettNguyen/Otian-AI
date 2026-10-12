@@ -4415,6 +4415,14 @@ your reminders, and your agent's routines. Press one on the computer and that li
   typed (`person_typed: !woken` in `gateway/worker.rs`), so neither gets one. Test:
   `the_days_asked_about_are_read_off_the_words` ("Is Sam coming Saturday?" and "What's the weather
   tomorrow?" get none).
+- **Amended October 12, 2026: today's own name** (Archie `fd2701ab`, in no release yet). "Monday"
+  said bare on a Monday (no next, this or last in front, and no today or written date in the
+  message: `bare_today` in `schedule.rs`) gets both today and a week out, and the agent is told a
+  day's name can mean two dates and to say which it answered for. On a write, the same reading
+  holds a call that would put in the date a week out, once a turn, and tells the agent to ask with
+  "Today, October 12" and "Monday, October 19" as buttons (`which_day` in `gateway/turn.rs`, for
+  list entries, reminders, calendar events and to-dos). Tests: `todays_own_name_said_bare_is_both_days`
+  and `a_week_out_for_todays_own_name_is_asked_about`.
 - **What it reads.** `schedule_note`: every list the agent may read (`list_collections` in
   `crates/archie-runtime/src/records.rs`) that has a date looking ahead or coming round every year
   (`days_of`). A column's own name decides first: one with a word for what already happened

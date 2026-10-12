@@ -7008,6 +7008,33 @@ the picture in the approval card shows which button it means.
   permission), the workout post, and two Learning Library sections not yet published
   (`assets/library.json`).
 
+### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`, in no release yet)
+
+On round three of the journey tests an owner closed the window at the end of the day and learned the
+next morning that nothing had run; the dialog that used to appear could only warn. Jett called it
+for before round four (the fix plan after round three, E.2).
+
+**Approved wording, once it ships:** "Close Archie's window and your agent keeps working: Archie
+stays running in the Dock on a Mac, or by the clock on Windows. Only quitting Archie switches it off.
+Archie also opens by itself when you sign in to your computer, with no window, so your agent is
+answering again after a restart. You can turn that off in Settings."
+
+**Why it's true:** while an agent is running, `CloseGuard` in `src/app/chrome.tsx` hides the window
+instead of closing it, and the first time on a computer it says where Archie went and how to quit.
+⌘Q, the Archie menu's Quit and Quit on the Windows icon still ask first while an agent runs. A Mac
+brings the window back when Archie is clicked in the Dock (`RunEvent::Reopen` in
+`src-tauri/src/lib.rs`); Windows has an icon by the clock that opens it or quits (`tray_icon`).
+Opening at login is turned on once, the first time this version runs (`open_at_login_once`), and
+starts Archie with `--at-login`, which opens it with no window. Settings, General, "Open Archie at
+login" turns it off, and it stays off.
+
+**Boundaries:**
+- ⛔ Never "your agent runs when your computer is off" or "after you quit". It runs while Archie is
+  running and the computer is awake.
+- ⛔ Never "nothing to set up" on the first run after an update: opening at login is turned on for
+  everyone once, including an owner who had switched it off before (nothing recorded that choice).
+- ⚠️ Not yet seen on a built app on either platform, and the Windows icon has never been drawn.
+
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
 **Approved wording:** "A routine set for seven in the morning arrives at seven, even if the

@@ -282,6 +282,16 @@
               </div>
             </div>
 
+            <div class="acct-section acct-hidden" id="adm-help">
+              <div class="acct-section-title">Help plan: Archie covered</div>
+              <p class="act-sub" style="margin-top:6px;">For a one-person owner paying for our help plan with Archie in it. Each press covers Archie through the month they paid for, plus a week in case a payment is late. When it ends, the app shows them their edition&rsquo;s usual price. Teams owners keep paying for Archie for Teams.</p>
+              <p class="act-sub" id="adm-help-now" style="margin-top:10px;"></p>
+              <div class="acct-row">
+                <button class="btn btn-primary btn-mini" id="btn-help-cover">Cover a month</button>
+                <button class="btn btn-secondary btn-mini acct-hidden" id="btn-help-end">End after today</button>
+              </div>
+            </div>
+
             <div class="acct-section">
               <div class="acct-section-title">Set access</div>
               <p class="act-sub" style="margin-top:6px;">The license is the one thing that decides whether this account can run Archie. Everything else here is a record, not a permission.</p>
@@ -710,8 +720,71 @@
       $("adm-account-sub").innerHTML = '<span class="adm-uid">' + escapeHtml(d.uid) + "</span><br />" +
         accessNotes(d).join(" &middot; ");
       show("adm-account", true);
+      renderHelp(d);
     }
+
+    /* The help plan with Archie in it. Nothing new on the server: a covered owner is a granted
+       license with an end date and the client label, written through the same /admin/tier/license
+       the form below uses. The date is the whole mechanism. When it passes, `decide` in
+       archie-core/src/auth.rs stops honoring the grant and the app shows the paywall its own
+       edition shows, so stopping the plan needs no second step. Each press moves the end a month
+       from where it was, so it stays "the paid month plus a week" however late the press is. */
+    const HELP_GRACE_DAYS = 7;
+    let helpAccount = null;
+    function addMonth(ms) {
+      const d = new Date(ms), day = d.getDate();
+      d.setMonth(d.getMonth() + 1);
+      if (d.getDate() !== day) d.setDate(0); // January 31 plus a month is the last day of February
+      return d.getTime();
+    }
+    function endOfDayOf(ms) { const d = new Date(ms); d.setHours(23, 59, 59, 999); return d.getTime(); }
+    function helpState(d) {
+      if (!d || d.license !== "granted") return { covered: false };
+      if (d.license_until == null) return { covered: false, open: true };
+      return { covered: d.license_until > Date.now(), until: d.license_until };
+    }
+    function renderHelp(d) {
+      helpAccount = d && !d.pending ? d : null;
+      show("adm-help", !!helpAccount);
+      if (!helpAccount) return;
+      const st = helpState(helpAccount);
+      const paying = (helpAccount.license === "plan" || helpAccount.license === "plan_business") &&
+        ["active", "trialing", "past_due"].indexOf(helpAccount.subscription_status) !== -1;
+      let line;
+      if (st.covered) line = "Covered through " + formatDay(st.until) + ".";
+      else if (st.open) line = "Granted with no end date, as a tester or somebody we carry. Covering gives it one.";
+      else if (helpAccount.license === "granted") line = "Coverage ended " + formatDay(st.until) + ". The app shows them their edition's usual price.";
+      else line = "Not covered.";
+      if (paying) line += " They also pay for Archie through Stripe. Cancel that subscription in Stripe so they do not pay twice.";
+      $("adm-help-now").textContent = line;
+      $("btn-help-cover").textContent = st.covered ? "Add a month" : "Cover a month";
+      show("btn-help-end", st.covered);
+    }
+    async function writeHelp(until, done) {
+      const email = helpAccount && helpAccount.email;
+      if (!email) { setStatus("Search for the account first.", "error"); return; }
+      const labels = Array.from(new Set([...(helpAccount.labels || []), "client"]));
+      setStatus("Saving…");
+      try {
+        await api("/admin/tier/license", { method: "POST", body: { email, license: "granted", until, labels } });
+        setStatus(done(email), "ok");
+        try { await lookup(email); } catch (e) { /* the write landed; refresh is best-effort */ }
+      } catch (e) { setStatus(e.message, "error"); }
+    }
+    $("btn-help-cover").addEventListener("click", () => busy($("btn-help-cover"), async () => {
+      const st = helpState(helpAccount);
+      const until = st.covered
+        ? addMonth(st.until)
+        : endOfDayOf(addMonth(Date.now()) + HELP_GRACE_DAYS * 86400000);
+      await writeHelp(until, (email) => "Covered " + email + " through " + formatDay(until) + ".");
+    }));
+    $("btn-help-end").addEventListener("click", () => busy($("btn-help-end"), async () => {
+      const until = endOfDayOf(Date.now());
+      await writeHelp(until, (email) => "Coverage for " + email + " ends tonight. Tomorrow the app shows them their edition's usual price.");
+    }));
+
     function renderNoAccount(email, data) {
+      renderHelp(null);
       $("adm-account-title").textContent = email;
       const pill = $("adm-account-pill");
       pill.textContent = "No account yet"; pill.className = "pill pill-off";

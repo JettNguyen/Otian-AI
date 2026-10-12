@@ -3294,11 +3294,28 @@ The comment above it records why: on the October 10 journey run a broker's agent
 teammate to forward a title company's "new" instructions to the buyers, answered that email had to
 be connected first (finding 11 in `docs/agent-ux/journeys/2026-10-10-findings.md`).
 
+**Amended October 12, 2026: a typed request is answered in code** (Archie `66ccd76d`, on the
+`journey-fixes` branch, in no release yet; nothing here may be said on a page until a release
+carries it). On round three of the journey tests the same request got "Ask Sam to connect one"
+first, from the shortcut that answers when no mailbox is connected, which runs before the model
+reads the prompt. Now a message a person typed that names wiring instructions or details, a routing
+or account number, or a changed or new bank, together with forward, send, pass, share, relay or
+give, is answered with a fixed sentence before the shortcuts, a direct search and the model, whatever
+is connected: "I won't pass on new wiring instructions. Call the title company (or whoever sent
+them) at a number you already have, not one from the email, and check the details with them by voice
+before anyone sends money. Changed bank details in an email are the most common way this money gets
+stolen." (`passes_on_payment_details` and `WIRING_HELD` in
+`crates/archie-runtime/src/gateway/turn.rs`; tests `a_request_to_pass_on_new_payment_details_is_caught`
+and the pipeline test `new_wiring_instructions_get_the_warning_first`). A message that opens as a
+question (did, has, is, what, when and the like) is left to the agent and the prompt rule, and so is
+"wire" alone, which is somebody paying, not passing details on. The sentence is Jett's to edit.
+
 **The boundaries.**
 
 - ⛔ **Never "nothing moves money"**, "Archie stops wire fraud", "it cannot be tricked" or "Archie
-  blocks payment changes". It is prompt text, not a check in code: a model told is not a model that
-  obeys, which is the crisis floor's own limit.
+  blocks payment changes". Outside the typed request the code check matches by its words, it is
+  prompt text: a model told is not a model that obeys, which is the crisis floor's own limit. The
+  code check is a word match, so a request worded another way reaches the model.
 - ⚠️ **In "What your agent will never do" it goes with an exception.** That guide opens by saying its
   items are limits in Archie itself; this one is not, so the guide's first sentence changes in the
   same edit.

@@ -2825,6 +2825,17 @@ know: on the strip under every page during the trial, and on the Account page un
   quote the panel's line on a page as something a reader will see.
 - ⚠️ **A price change is three edits, not one:** Stripe, `pricing.ts`, and FACTS.md. The strip and
   the row read only `pricing.ts`.
+- **Amended October 12, 2026 (Archie `3138d2aa` and archie-mobile `980fd63`, in no release yet).**
+  The prices now live in `data/prices.json`, which `pricing.ts` reads and the agent's own answer to
+  "what does this cost" reads too, so a price change is Stripe, `data/prices.json`, archie-mobile's
+  `src/money.ts`, and FACTS.md. And the strip's "about N more answers" divides by what the owner's
+  own last ten messages took off the balance (`credits_left` in
+  `crates/archie-runtime/src/gateway/credits_left.rs`), read off the balance the service sends back
+  on every answer, where it divided by the ledger's count of answers, which counts the router and
+  background calls too and promised about 2.25 times what was left on round three of the journey
+  tests. Until a message has been measured since the app started, it falls back to the ledger.
+  - ⚠️ **Still a forecast.** One long document read costs ten short questions; never "you have
+    exactly N answers".
 
 ### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -2926,6 +2937,20 @@ calendar work the whole time."
 - What it replaced: on the October 11, 2026 money journeys every message after the money ran out
   got the same line, with no prices, and what the owner sent was thrown away (Archie
   `docs/agent-ux/journeys/2026-10-11-findings.md`, Money).
+- **Amended October 12, 2026 (Archie `3138d2aa`, in no release yet): money questions are answered,
+  and a warning comes first.** A short question from the owner about what Archie costs, the
+  cheapest way to keep going, the free credits, or (while the AI is out) why it stopped, is answered
+  in code with no AI call: what ran out, how many messages are kept, and the prices from
+  `data/prices.json`, on Archie for Teams with "no seat count" and the up-to-50-agents line
+  (`money_answer` in `crates/archie-runtime/src/gateway/money_answer.rs`). Such a question is never
+  kept for later. And at about three answers left, one line under a reply says so, once until the
+  balance goes up (`credits_left::low_line`).
+  - ⚠️ **The match is narrow on purpose.** It needs the question to be about Archie, the AI, or the
+    plan; "what do we charge for a unit?" is the owner's own price list and goes to the agent.
+    Never "ask your agent anything about billing".
+  - ⚠️ **The owner only, typed.** A teammate's question about the plan goes to the agent as before.
+  - ⚠️ **The refill day is not in the code answer.** A plan's refusal names it on the card; the code
+    answer says the month's AI is used up without the day.
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

@@ -2963,6 +2963,27 @@ calendar work the whole time."
   - ⚠️ **The owner only, typed.** A teammate's question about the plan goes to the agent as before.
   - ⚠️ **The refill day is not in the code answer.** A plan's refusal names it on the card; the code
     answer says the month's AI is used up without the day.
+- **Amended October 12, 2026 (Archie `c04ee588`, archie-mobile `7aa9315`, in no release yet): the
+  plan's month says nothing more is charged, and a dated message can be added by hand.** On the plan
+  with the AI included, the reply now opens "This month's AI on your plan is used up. Nothing more is
+  charged for it, and it comes back by itself on October 30.", and the card's one way out is headed
+  "Only if it can't wait", with what an AI account of your own costs (`what_ran_out` in
+  `crates/archie-runtime/src/gateway/money_out.rs`, `moneyWays` in `src/app/money-words.ts`). On round
+  three of the journey tests that way, alone on the card, read as "why am I paying again". A message
+  kept while the AI is out that names a day before the AI is back ("Terrell wants 2 more units
+  Friday", with the refill the next week) is answered "Nothing was added yet, and Friday, October 16
+  comes before the AI is back on October 18.", and the card gets an Add it yourself now row whose
+  button opens that list's Add row form with the message in it (`unadded`). When the AI is back the
+  agent is told to look before adding anything kept, since the owner may have added it by hand.
+  And a turn the plan stops between two steps no longer says "leave it out, or it will happen twice":
+  it says what was done, to ask only for the rest, and that the Jobs tab has Undo on each step.
+  - ⚠️ **Only the plan's month and the day's pause.** The two that come back on a known day. A dated
+    message on the free credits gets the plain "Saved." line, as before.
+  - ⚠️ **The row adds a row on the computer only.** The phone's row says where, and opens the list
+    on the phone to look at. The form is filled with the words as written, in the list's notes
+    column or its naming column; nothing is sorted into the other columns.
+  - ⚠️ **Which list is a narrow guess:** the agent's only list, or the one list whose name the
+    message says. Otherwise the button opens the lists. Never "Archie knows which list it goes on".
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

@@ -3121,6 +3121,12 @@ release carries it).
   signing in is the owner's, in the browser.
 - ⚠️ **Setup's last step is skipped** by both new ways out: putting the agent on the phone or a chat
   app is then on the agent's page, not in setup.
+- **An agent with lists answers from them** (Archie `e078fa4b`). Asked about the week with no
+  calendar connected, an agent that keeps lists no longer gets only "No calendar is connected yet":
+  the turn runs with its lists, says the calendar is missing, and puts Connect my calendar under the
+  reply (`turn.rs`; a calendar skill is also left off the router there, `waits_on_a_calendar` in
+  `gateway/routing.rs`; test `an_agent_with_lists_answers_a_calendar_question_without_a_calendar`).
+  An agent with no lists keeps the fixed answer. The AI writes that reply, so its words vary.
 
 ### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
@@ -8199,6 +8205,13 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
 - ⛔ **Never "nothing goes on without your yes."** The first agent's starter pack, Researcher included,
   goes on unasked. Every agent after it is offered the Researcher through the step (`useResearcherOffer`
   in `src/app/new-agent.ts`), Jett's choice of 2026-09-28.
+  The first questions also fit up to two add-ons unasked (`install_starters` in
+  `crates/archie-runtime/src/gateway/onboarding.rs`). Amended October 12, 2026: from the release
+  that carries Archie `e078fa4b`, only ones that work that day. An add-on that works off an account
+  nobody has connected (mail, a calendar, an app's key), a routine whose skill is missing, and one
+  the free credits cannot run are left off what the interview may choose (`installable_starters`,
+  test `starters_need_nothing_nobody_connected`), and a pick the install refuses no longer leaves
+  its slot empty. Never say setup adds what you will need for your email or calendar.
 - ⛔ **The phone connects nothing.** It says where to connect on the computer.
 - ⚠️ A phone paired with an older Archie shows no account line rather than a wrong "not connected".
 - ⚠️ **A search is "about 2 to 4 cents", counting the pages it brings back** (FACTS.md; measured 1.6 to

@@ -2447,9 +2447,12 @@ sheet. Change any of it by asking."
   what the agent writes, and the owner is still responsible for it. The disposal rule tells the
   agent to log loads where the county asks. There is no disposal log until the owner says yes to the
   one the agent offers, and never say a log kept in Archie satisfies a county or a state.
-- ⚠️ **The rules reach the agent, not the web researcher.** The researcher reads only the message it
-  is handed, with no business profile, so the rules written there do not shape its answer
-  (`isolated_system_prompt` in `crates/archie-runtime/src/gateway/tools_specialist.rs`). The check
+- ⚠️ **The setup's rules reach the web researcher; the owner's changes to them do not** (amended
+  October 12, 2026, Archie `4374d11c`, in no release yet; before it, no rule reached the
+  researcher). The researcher reads only the message it is handed and no business profile, and on an
+  agent a setup matched, that setup's rules as `data/setups/` writes them (`rules_of_the_work` in
+  `crates/archie-runtime/src/gateway/tools_specialist.rs`). A rule the owner added or reworded in
+  the profile shapes the agent's answers only. The check
   that keeps the owner's own work off it (the web researcher entry) leaves a teammate's "my buyer asked
   if pleasant lea elementary is a good school what do i say" with the researcher when the router picks
   it. Never say a setup's rules, the fair housing rule included, hold for every answer.
@@ -9626,7 +9629,11 @@ one."
   watcher's wake can neither answer the question nor use it up. An unanswered question expires
   after the next typed message, like every staged change.
 - **Search.** `gateway/tools_specialist.rs`, `isolated_system_prompt`: a searching skill's prompt is
-  built with no persona, profile, memory or knowledge list, and its one message is the task
+  built with no persona, profile, memory or knowledge list, and its one message is the task. From
+  Archie `4374d11c` (October 12, 2026, in no release yet) it also carries the rules of the work of
+  the setup the agent matched, in the setup's own words from `data/setups/`, which are the same for
+  every agent in that line of work; never the owner's copy in the profile, which they may have
+  edited (`rules_of_the_work`; test `a_searching_specialist_carries_the_setups_rules_and_not_the_owners`)
   (`search_on_its_own`), on the delegated path and on the direct route alike (`answer_from_the_web`,
   the early return in `run_target_attributed`). `outbound_gate::search_needs_yes` holds a delegation
   to a searching skill once the turn has read outside text: after any round whose tools are not
@@ -9750,6 +9757,13 @@ instead. A question with none of those can still reach the researcher."
   chat (`answer_from_the_web` and `isolated_system_prompt` in
   `crates/archie-runtime/src/gateway/tools_specialist.rs`, already approved in the entry "An address
   your agent wrote itself waits for your yes, and a skill that searches holds only its task").
+  Amended October 12, 2026 (Archie `4374d11c`, in no release yet): on an agent a setup matched, it
+  also carries that setup's rules of the work, in the setup's words, so the fair housing rule
+  reaches the researcher on a real estate agent. And the researcher's own instructions (2.1.10) now
+  say that asked whether a school, street or neighborhood is good, it links where the official
+  numbers are kept and never quotes a score, rating or ranking or calls one good or strong. Round
+  three of the journey tests sent all twelve school questions to the researcher, and all twelve
+  answers quoted scores.
 - **Measured on the October 10 journey run's own messages, before the check in code** (`cf255232`'s
   commit message, Haiku 5.5): the owner's questions sent to the researcher fell from 54 of 66 to 8
   of 66, 42 of 44 web questions still went there, and the existing gate cases went from 93.4% to
@@ -9770,6 +9784,9 @@ instead. A question with none of those can still reach the researcher."
   (`delegate_to_specialist`). No rate has been measured with the check.
 - ⚠️ **It changes how often, not what.** When a question does reach the researcher, its words are
   what the search is built from, as the web-search clause says.
+- ⚠️ **No school answer has been seen since the October 12 change.** The sentence and the rules are
+  what the researcher is told; nothing checks its answer for a score. Never "Archie never quotes a
+  school rating" or "it keeps you fair housing compliant".
 - ⚠️ **Not measured on other tiers or providers,** and the gate's baseline has not been re-recorded.
 - ⚠️ **Said in the address entry too.** The "What it costs the person" boundary of "An address your
   agent wrote itself waits for your yes, and a skill that searches holds only its task" says which

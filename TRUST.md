@@ -7008,6 +7008,33 @@ the picture in the approval card shows which button it means.
   permission), the workout post, and two Learning Library sections not yet published
   (`assets/library.json`).
 
+### ✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`, in no release yet)
+
+The retention plan's 3.3, built before round four (the fix plan after round three, E.3 and E.4).
+
+**Approved wording, once it ships:** "Each morning your agent sends you what is on today, from your
+own lists: for a restroom company, today's stops by driver, the rentals past their end date, and
+who has not been billed. It is put together without asking an AI anything, so it costs nothing and
+cannot make anything up. A morning with nothing on, it says nothing. There is a Stop button on it."
+
+**Why it's true:** `crates/archie-runtime/src/morning.rs` builds it from the line of work's lists
+and the owner's reminders and to-dos, with no model call; `gateway/morning_list.rs` sends it once,
+at the time the setup names (`morning` in each `data/setups/*.json`: restrooms 6:00am, trades
+6:30am, trailers 7:00am, real estate 7:30am), until noon, held by quiet hours. Trades hear today's
+work orders by tech and the estimates sent a week ago with no answer; realtors the closings and
+deadlines in the next week and who to call (the same reading as the agent's own call list,
+`records::call_list`); event trailer companies today's and tomorrow's bookings, the deposits still
+owed and the trailers that need pumping. Stop works by button or by saying "stop the morning list",
+and "send me the morning list" brings it back and shows today's. The interview's goodbye says when
+the first one comes, from the same setup time.
+
+**Boundaries:**
+- ⛔ Only for the four lines of work Archie has a setup for, and only once the interview matched
+  one. Never "every agent sends a morning list".
+- ⛔ Never "your team gets theirs" or "on your phone's lock screen": it goes to the owner's own chat
+  with the agent, and needs Archie running and the computer awake at that time, like a routine.
+- ⚠️ The time is fixed per line of work for now; the owner can stop it, not move it.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`, in no release yet)
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the

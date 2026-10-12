@@ -404,6 +404,17 @@ agent's Setup tab, under AI account (`Mail::Walled` in `gateway/prompt.rs`, pinn
 the backstop. Do not claim from this that the agent "explains" the plan's limits generally: it says
 this one, about mail.)*
 
+*(Amended October 12, 2026, Archie `aaaf9779`, archie-mobile `068acf6`, not in a release yet: the
+wall is one message with a card under it. When mail or texts are switched on while the agent thinks
+on the credits or this plan, the owner gets one message saying why, and a card whose button opens
+the agent's AI account, with a rough cost: "About $9 a month if you send your agent 5 messages a
+day, or $14 at 10, paid to that company" (`walled_card` in
+`crates/archie-runtime/src/gateway/money_out.rs`, `own_ai` in `data/prices.json`). The Email and
+Texts settings say the same, with the same button. The prompt now names "an AI account of their
+own, like Claude or ChatGPT" where it said "their own Anthropic account". Those figures are an
+estimate from the journey tests' measured cost per turn, said as one: never "it costs $9", never a
+promise of a monthly bill, and never on a page without the words "about" and "a month".)*
+
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
 write to your agent passes through our server on the way to Anthropic. It writes down what each
 request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it

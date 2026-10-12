@@ -3056,6 +3056,43 @@ Connections tab with the sign-in ready."
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 20). Those directions now read "In
   Archie, on the Connections tab", in the agent's fixed answers and the instructions it is given.
 
+**Amended October 12, 2026: connecting a calendar from where the owner is** (Archie `be575136` and
+archie-mobile `0e65a6e`, in no release or build; nothing in this paragraph may be said until a
+release carries it).
+
+- **The fixed answers name the button.** Where the button is drawn right under the reply (the
+  owner's conversation in Archie's own window, `draws_screen_offer` in
+  `crates/archie-net/src/channel.rs`), the three fixed answers say "Press Connect my calendar, just
+  below.", "Press Connect my email, just below." and "Press Reconnect my email, just below, and leave
+  Email checked when you sign in again, because whatever you uncheck is taken away." in place of
+  the directions (`gateway/turn.rs`). A reply that names a button by its label gets that button
+  (`pick` in `kept.rs`, test `a_reply_that_names_the_button_gets_it`). A reply the AI writes still
+  gives the directions, and a conversation also read on a chat app keeps them in the fixed answers
+  too, because the button is not under them there.
+- **During the first questions,** a press on Connect my calendar or Connect my email ends setup and
+  opens the agent's Connections tab with the chooser up (`onConnect` in `src/app/setup-flow.tsx`,
+  wired in `src/app/App.tsx`; `connect-google-calendar` in `src/app/agent-detail.tsx`). This
+  replaces "a calendar or mailbox button is still not drawn there" above, from the release that
+  carries it.
+- **The chooser ticks only what was pressed.** Opened by Connect my calendar on a fresh account, it
+  has Calendar and changing events ticked and Email unticked; Connect my email ticks Email and
+  sending and not Calendar (`connectNew` in `src/app/connect.tsx`). Before, both ticked all of
+  them, so Google asked for mail on a calendar press. Every box can still be changed before signing
+  in, and an account that already exists still opens with everything it has ticked, because a
+  reconnect replaces what it was given.
+- **A finished setup ends at the next launch.** When Archie opens with setup still on screen from
+  an earlier sitting and that agent's first questions are over, setup ends and the agent's page
+  shows (`launchRunChecked` in `src/app/App.tsx`). A setup begun in the same sitting is never ended
+  this way.
+- **The phone names the computer.** Its line reads "Connect my calendar on the computer running
+  Archie, on this agent's Connections tab, under Email, calendar, files." (`onTheComputer` in
+  archie-mobile `src/words.ts`). Before archie-mobile `ff5692b` the chat dropped that line, so it
+  was never seen on a phone (the entry on where you keep your work says so).
+- ⚠️ **Still not signed in for them.** The press opens the chooser; choosing Google or Microsoft and
+  signing in is the owner's, in the browser.
+- ⚠️ **Setup's last step is skipped** by both new ways out: putting the agent on the phone or a chat
+  app is then on the agent's page, not in setup.
+
 ### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

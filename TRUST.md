@@ -382,6 +382,18 @@ and both have to be said wherever the plan is described:
   on either proxy sentinel, with a test pinning both. So on this plan the agent thinks through the
   proxy and reads neither mail nor texts.
 
+*(Amended October 12, 2026, Archie `ef9b94a1`, not in a release yet. What is read did not change;
+what the agent offers did. Before it, the inbox tools stayed in the agent's tool list on the credits
+and the plan, and the dispatch refused each call with `credit_policy` in
+`crates/archie-runtime/src/tool_policy.rs`, so an owner who asked about their mail was told "Opening
+your email..." and then a refusal. Now `gateway/turn.rs` leaves off every tool that policy refuses
+whenever the agent runs on somebody else's credits, and the prompt says once, in place of the mail
+paragraph, that mail is read only on an AI account of the owner's own and that one goes on the
+agent's Setup tab, under AI account (`Mail::Walled` in `gateway/prompt.rs`, pinned by
+`a_mailbox_the_credits_may_not_read_is_said_once_and_not_offered`). The dispatch refusal stays as
+the backstop. Do not claim from this that the agent "explains" the plan's limits generally: it says
+this one, about mail.)*
+
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
 write to your agent passes through our server on the way to Anthropic. It writes down what each
 request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it

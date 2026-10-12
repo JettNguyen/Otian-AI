@@ -4480,7 +4480,10 @@ them as somebody new."
 - ⛔ **Texting consent advises and never blocks.** Said stop puts a person in the call or email
   group, and the real estate setup's rule tells the agent to text a lead only after they said it is
   fine. Nothing in code stops a text draft to them. Never "Archie enforces texting consent", "TCPA
-  compliant", or "it won't text somebody who opted out".
+  compliant", or "it won't text somebody who opted out". Amended October 12, 2026 (Archie
+  `db585c3e`, in no release yet): the first-text tool writes no text and draws no button for
+  somebody whose Texting says Said stop (the entry "A first text to a lead"), but the agent can
+  still write one in words, and Archie sends no text either way.
 - ⚠️ **Only lists called People, Deals, Your leads and Listings** (the slugs `people`, `deals` and
   `listings`, which the real estate setup makes, and `leads`, which Lead Desk makes; `leads` since
   Archie `3c4ab109` and `listings`, read only to tell a client from a lead, since `5defc406`). A
@@ -4510,6 +4513,58 @@ them as somebody new."
   empty to them (`call_list_note`, through `ListRead::seen` and `partly_entered`). The sentence is
   tested on the money note (`a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`); no
   test builds this note for a teammate.
+
+### 🚧 A first text to a lead, written for you to send from your own phone, with whether they agreed to texts: BUILT 2026-10-12, in no release
+
+*Archie `db585c3e` and archie-mobile `f90899e`, on the `journey-fixes` branches, in no release.
+Nothing below may be said on a page until a release carries them. The phone half has not been
+pressed on a phone.*
+
+**Proposed wording, Jett's to approve:** "Ask your agent to text a lead and it writes the text,
+says whether they told you texts are fine, and puts a button under it: Copy the text on your
+computer, or Open in Messages on your phone, which opens Messages to their number with the words
+typed in. You press Send. If they said stop, it won't write one."
+
+**Why it's true:**
+
+- **The tool.** `texts_write_first` (`crates/archie-runtime/src/gateway/first_text.rs`) finds the
+  person by name on a list that keeps a phone number and a Texting column (`rows_named`), and reads
+  both. It is on the agent's tools only where such a list exists, which today is the real estate
+  setup's People (`offered`), and only on a turn somebody is reading.
+- **What the reply says about consent comes off the list.** OK to text: "Jenna said texts are fine
+  (People, Texting: OK to text)." Not asked or blank: "Nobody has written down that Mike said texts
+  are fine (People, Texting: Not asked). Ask first, by phone or email, and then send it." Said stop:
+  "Ellen said stop to texts (People, Texting: Said stop), so I won't write one.", with no text and
+  no button, and the agent is told to offer an email or a call. The agent is told to say the line as
+  written. Test: `a_first_text_says_what_the_list_says_about_consent`.
+- **The button.** Code puts it under the reply (`Opens::text` in
+  `crates/archie-runtime/src/gateway/kept.rs`, carried as the `text` door with the number on
+  `ScreenOffer::to`). Archie's window draws Copy the text and copies the words
+  (`src/app/conversation.tsx`). The phone gets it as `texts` (`src-tauri/src/phone.rs`) and draws
+  Open in Messages, which opens the phone's own Messages to that number with the words typed in
+  (`smsLink` in archie-mobile `src/sms.ts`, `src/screens/Chat.tsx`). No number on the list, no
+  button. Pipeline test: `a_first_text_comes_with_a_button_and_what_the_list_says`.
+- **Why it was built.** Round three of the journey tests (October 12, 2026): realtors asked for a
+  text to a lead and got an email every time, because a text Archie drafts was only ever a reply to
+  a text that came in.
+- **The rule beside it.** The real estate setup's texting rule now reads "Send a lead a text only
+  after they have said it is fine; asked to write one, write it and say whether they have." An
+  agent set up earlier gets the new words once, where the old ones still stand
+  (`profile_with_rule_changes`, the setups entry).
+- **Cost.** About 130 tokens on the tools of an agent with such a list, cached, and 12 more in the
+  real estate rules; the button and the consent line are code (Archie's `docs/COST-MEASURED.md`
+  section 28, B.16).
+
+**The boundaries.**
+
+- ⛔ **Archie sends no text.** The owner presses Send in Messages on their own phone, or pastes it.
+  Never "your agent texts your leads".
+- ⛔ **Never "it enforces consent" or "TCPA compliant".** It reads what the Texting column says,
+  which somebody wrote down; it cannot know whether that is true, and outside this tool the agent
+  can still write a text in words.
+- ⚠️ **Only where a list keeps a Texting column,** which is the real estate setup's People today. A
+  chat app gets the words and no button.
+- ⚠️ **The consent line is the agent saying the tool's sentence,** so it can come out reworded.
 
 ### ✅ Ask what's on, what's due, or what's free on some days, and Archie hands your agent your lists, calendar, and reminders for those days first; your agent hears when a booking it saves puts a trailer or a unit in two places; and the Calendar shows the dates on your lists: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

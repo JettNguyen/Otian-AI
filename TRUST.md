@@ -2984,6 +2984,22 @@ calendar work the whole time."
     column or its naming column; nothing is sorted into the other columns.
   - ⚠️ **Which list is a narrow guess:** the agent's only list, or the one list whose name the
     message says. Otherwise the button opens the lists. Never "Archie knows which list it goes on".
+- **Amended October 12, 2026 (Archie `4e0fb9fe`, in no release yet): a teammate who runs out is
+  kept, and the owner is told who.** On a shared agent (Archie for Teams, or an agent with guests), a
+  teammate's message that meets the owner's AI running out used to get "my page in Archie shows what
+  it is", a page they cannot open, and was dropped. Now the teammate is told "I kept your message and
+  let Megan know, and I'll answer it once the AI is back"; the owner gets one line in their own
+  conversation ("Dana wrote to me, and I could not answer. Your free credits are used up.") with the
+  card under it, which raises an alert on the computer while Archie is in the background; and the
+  message is answered by a turn of the teammate's own when the AI is back, with what they may do
+  asked of the roster again (`teammate_said`, `owner_told` in
+  `crates/archie-runtime/src/gateway/money_out.rs`, `standing` in `crates/archie-runtime/src/access.rs`).
+  A teammate's kept messages are never in the owner's note or count, nor the owner's in theirs.
+  - ⚠️ **No push to the owner's phone yet.** The line reaches Archie Mobile as a message in the
+    conversation; a phone notification waits for the phone's push work.
+  - ⚠️ **A teammate removed before the AI is back is not answered**, and what they sent goes.
+  - ⚠️ **A turn that runs out part way keeps nothing**, for a teammate as for the owner: it asks
+    them to tell the owner and send it again.
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

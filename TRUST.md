@@ -2660,8 +2660,8 @@ and when, where that goes, what it never does, and how to switch it off."
   and goes to the agent.
 - ⚠️ **The every-few-minutes reading needs one of those two add-ons.** Never say Archie watches every
   inbox it is connected to.
-- ⚠️ **"Never deletes" is about the agent.** Filing (the tidy box) moves mail between folders, and
-  never say it can undo something the owner deletes themselves.
+- ⚠️ **"Never deletes" is about the agent, and filing is not deleting.** With the tidy box checked it
+  moves mail between folders; never say it leaves the mailbox exactly as it found it.
 
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

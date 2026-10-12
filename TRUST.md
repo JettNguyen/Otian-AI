@@ -4428,9 +4428,13 @@ your reminders, and your agent's routines. Press one on the computer and that li
   the Calendar tab said "Nothing on" under a Saturday full of bookings, because it drew only calendars
   (the module note in `schedule.rs` and the header of `src/app/calendar.tsx`).
 
-### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11
+### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, in no release yet
 
-**Released in 0.3.8 on October 11, 2026, and named in its notes.**
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Amended October 12, 2026 (Archie
+`56308306`, archie-mobile `93348cd`, in no release yet): the chat card's Add shows the rows before
+adding them, the card names the columns the list has no place for, the agent can put a dropped file
+on the card itself, and Archie Mobile's empty-list line has Import. Until a release carries those,
+say only what 0.3.8 does: Add on the chat card adds at once.
 
 *Archie `8be34a0a`, with `cd10e1a2` and `e9b7e7c8` for the two boundaries they changed, and
 `623cec79`, `8dce19af`, `574ce7d4`, and `de7f3197` (merged as `973eedd0`), `e7957b0c`,
@@ -4447,6 +4451,11 @@ the file, such as the same unit number whatever its case, spaces, or hyphens, th
 the same phone or email, or the same address on the same date, saying which and why. A cell it
 cannot read, like "next Tues" in a date column, is left blank and pointed out for you to fill in,
 and one Undo takes back everything it added."
+
+**Proposed addition for the release that carries `56308306`, Jett's to approve:** "Dropped in the
+chat, the rows come up on a card first, so you can look them over, change one, or leave one off
+before Add. If the file has columns your list has no place for, the card says which, and Make a new
+list keeps them all."
 
 **Why it's true:**
 
@@ -4537,6 +4546,29 @@ and one Undo takes back everything it added."
   `the_added_line_names_what_was_left_out_and_left_blank`, `a_new_list_from_a_file_takes_a_free_name`,
   `a_list_made_from_a_sheet_is_named_after_the_file_not_sheet1`, and
   `a_teammates_import_is_their_job`.
+- **The chat card shows the rows before adding them** (amended October 12, 2026, Archie
+  `56308306`). Add on the card no longer writes the rows: it puts them on the card of drafted
+  entries (the entry "Entries your agent reads off a photo"), where the first 8 show with Show all,
+  any can be changed or left off, and that card's Add adds them as one job with one Undo
+  (`add_or_check` in `import_offer.rs`, through `bring_in::land`); the import card then says "They
+  are on the card below. Look them over, then press Add." A file with more to add than one card
+  holds (200, `drafted::MAX_ROWS`) is still added at once, as before. Test:
+  `an_import_cards_add_shows_the_rows_before_adding_them`.
+- **Columns with no place are said before Add, not after** (Archie `56308306`). When the list has
+  no column for some of the file's, the card says so ("Units has a place for 2 of its 3 columns, so
+  Gate code would be left out unless you make a new list from it.") and its first two buttons count
+  what each keeps: "Add to Units (2 of 3 columns)" and "Make a new list (all 3 columns)". A file
+  every column of which fits keeps Add 64 and Make a new list from it.
+- **The agent can put a dropped file on the card itself** (Archie `56308306`). `records_bring_in`
+  takes a spreadsheet anybody gave the agent in a chat, by its file name past case
+  (`import_offer::dropped`), reads it with the same `read_sheet`, and puts its rows on the card by
+  code, so the rows never pass through what the AI writes; an import card still up for that file
+  closes with "They are on the card below." (`close_for_file`). The tool names that source only on an
+  agent holding a spreadsheet (`holds_a_spreadsheet`), and while an import card is up, the agent is
+  told so below the cache line and told never to type its rows into a tool (`waiting_note`). Before
+  this, an agent asked to add a dropped file typed its rows into a tool call, which the free credits'
+  2,048-token reply limit cut off every time (round three of the journey tests, October 12, 2026).
+  Test: `a_spreadsheet_given_in_a_chat_goes_on_the_card_by_code`.
 - **From an answer about an empty list.** When every list a reply read was empty, the line under it
   says "Your Rentals list is empty, so this is not from your records." with Add and Import, which
   open that list on its add form or its file picker (`emptyListsLine` and `askListTo` in
@@ -4544,8 +4576,9 @@ and one Undo takes back everything it added."
   `574ce7d4` the press also works on a list already open on its own tab, which never loaded again
   and so never heard it: every press is counted (`subscribeListAsks`, `listAskCount`), only the
   list on screen answers (`RecordsPanel`), and a press older than ten seconds is dropped
-  (`takeListAsk` in `src/app/lists.ts`). The computer only; Archie Mobile's line has Open and no Add
-  or Import.
+  (`takeListAsk` in `src/app/lists.ts`). On the computer. Archie Mobile's line has Open, and since
+  archie-mobile `93348cd` (October 12, 2026, in no build yet) Import, which opens the phone's file
+  picker and puts the spreadsheet in the message box to send (`KeptLine` in `src/kept.tsx`); no Add.
 - **Never the same unit twice.** `FieldDef::unique` in `crates/archie-domain/src/records.rs`,
   compared without case, spaces or hyphens (`unique_form` in `import.rs`: S-31, s31 and S 31 are one
   unit). `unique_clash` refuses a write and names the row that already has the value, wherever a row
@@ -4563,7 +4596,10 @@ and one Undo takes back everything it added."
   what it sees of any list or document: the rows the agent reads to answer a later message, and the
   file's name, kind and size in the list of documents the agent is shown on every message
   (`render_manifest` in `crates/archie-runtime/src/knowledge.rs`).
-- **Cost.** No AI call and no tokens, for an import or for its card. A file sent with words that
+- **Cost.** No AI call and no tokens, for an import or for its card, or for the card of rows its
+  Add puts up. The agent's own read of a dropped file is one tool call with a short result, and the
+  tool's description grows by about 18 tokens on an agent holding a spreadsheet; the note that an
+  import card is up is about 70 tokens on those turns only (Archie `docs/COST-MEASURED.md`, 28). A file sent with words that
   only ask for it to come in no longer starts a turn, which it did until October 11; any other
   words start the same turn they always did.
 
@@ -4633,10 +4669,15 @@ and one Undo takes back everything it added."
 - ⚠️ **On Archie for Teams,** only the owner and teammates allowed to add to the lists get the chat
   card, and a press from anybody else is refused: "Only somebody who can change the lists can bring a
   spreadsheet into one."
-- ⚠️ **Phone:** Archie Mobile has no Import (it shows a list's counts, never its rows). A spreadsheet
-  sent from Archie Mobile, alone or with words, carries the same sentence (`withFiles` in
-  archie-mobile `src/attach.ts`), so by the code it gets the same card, but nobody has tried it.
-  Never say the phone imports until somebody has.
+- ⚠️ **Phone:** Archie Mobile has no Lists screen Import (it shows a list's counts, never its rows).
+  Its empty-list line's Import (archie-mobile `93348cd`, in no build yet) only picks the file to
+  send. A spreadsheet sent from Archie Mobile, alone or with words, carries the same sentence
+  (`withFiles` in archie-mobile `src/attach.ts`), so by the code it gets the same card, but nobody
+  has tried it. Never say the phone imports until somebody has.
+- ⚠️ **What the agent's own read shows the AI.** Brought in by `records_bring_in`, the rows go on
+  the card by code, and the AI is told how many and onto which list, plus up to five entries that
+  need a look, each named by its title and why. Never "the AI never sees your file": it may also
+  open the file to answer a question, as the boundary above says.
 
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

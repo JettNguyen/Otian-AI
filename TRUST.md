@@ -9180,6 +9180,17 @@ teammate's own chat with the agent (`teammate_named` in `gateway/tools_reminders
   they have, nothing is set and the agent says why.
 - ⛔ Never "assign a to-do to a teammate". A to-do stays on the owner's list.
 
+**Amended October 12, 2026 (Archie `edd5231f`, in no release yet): the people named in the interview
+get an Add button each, and a code each.** On Archie for Teams the first-run interview keeps the
+people the owner says work with them (only names from the owner's own lines), and its goodbye has
+an "Add Jason" button for each one not already on the list. A press makes that person's own code,
+named with what they do; an earlier code for somebody else stays live beside it, where before each
+new code replaced the last (`answer_add` in `gateway/onboarding.rs`, `earlier_invites` in
+`archie-domain/src/access.rs`).
+- ⛔ Never "your team gets in from the interview". A teammate still joins by sending the code to
+  the agent in a chat app; on an agent that only talks in Archie's window, the button says to
+  connect one first.
+
 ### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

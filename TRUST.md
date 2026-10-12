@@ -7061,6 +7061,18 @@ same appointments, worked out by the same code.
   Windows half additionally has three facts read off Microsoft's documentation rather than a
   machine, listed in this repo's counterpart thread in `docs/OPEN-THREADS.md`.
 
+**Amended October 12, 2026 (Archie `1860ff9f`, in no release yet): a slot slept through is caught
+when the computer wakes, and a routine that never ran says it missed one.** Without the wake set up,
+a routine whose time passed while the computer slept used to be looked at again only when Archie
+restarted; now the scheduler notices the time went by and the catch-up decides, by the same windows
+as before (until noon for a morning, 6:00 PM for an afternoon, midnight for an evening), whether to
+run it late or record it as missed (`wait_until_due` and `missed_slot` in `gateway/routines.rs`). A
+routine that has never run is shown as missed on its row, on the computer and the phone, once it
+was set up before the time it missed (`scheduled_since_ms`); one set up this afternoon is never
+blamed for this morning.
+- ⛔ Never "it never misses a routine". Past its window a slot is recorded as missed, not run.
+- ⚠️ Not yet watched across a real sleep, the same caution as the rest of this entry.
+
 ### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in Archie Mobile 1.0 (October 7, 2026)
 
 *Released, checked October 6, 2026: every Archie commit above is an ancestor of 0.3.1's `09c5cb5e`,

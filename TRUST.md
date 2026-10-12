@@ -2371,6 +2371,28 @@ sheet. Change any of it by asking." What changed:
   range below has not been measured again (Archie's `docs/COST-MEASURED.md` section 25, which counts
   the October 10 round's other costs, leaves the rules out).
 
+**Amended October 12, 2026: rules reworded, and a list added** (Archie `968ec6b2`, on the
+`journey-fixes` branch, in no release yet; nothing here may be said on a page until a release
+carries it):
+
+- **Real estate's third rule** now ends "An ad names the brokerage, which is not the team: leave
+  [Brokerage] until the owner says which." (about 22 tokens more on every turn of a real estate
+  agent, cached). The business details entry says how a brokerage gets kept.
+- **The event trailer setup has a Prices list** (What it is, Price, Per: Event, Extra day, Mile or
+  Each, and Notes), and its first rule now reads "Prices come from the Prices list. When a price is
+  not on it, ask the owner and add it there, rather than estimating one." The list starts empty.
+  The restroom setup has no Prices list: it is at the three-list ceiling, and its prices stay in the
+  profile's Prices line (Archie's `docs/OPEN-THREADS.md`).
+- **An agent set up earlier catches up once.** At its next start, a reworded rule takes the place of
+  the old words in its profile where they still stand word for word, so a rule the owner changed or
+  removed is left as they made it (`profile_with_rule_changes` in `setup.rs`, `Setup::rule_changes`;
+  test `a_reworded_rule_reaches_an_older_profile_once`), and a list the setup gained is made once,
+  never again after the owner deletes it (`Setup::new_lists` and `records::catch_up_with_setup`;
+  test `a_setups_new_list_is_made_once`). The record of what has been offered is the agent's
+  `setup-seen.json`.
+- ⚠️ **Never say the rule makes ads compliant.** It is what the agent is told, like the fair housing
+  rule; the owner checks the ad.
+
 **Approved wording, once it is in a release:** "Tell Archie you rent out portable toilets, run a
 plumbing or heating company, or sell homes, and it starts with the lists that work runs on:
 Rentals, Units and Stops; Work orders, Estimates and Customers; or People, Deals and Listings. It
@@ -3594,6 +3616,15 @@ agent's page) and `6d39352d` (the details in the phone's snapshot), and archie-m
 `cab000e` (the same row on the phone), in no release yet. Nothing below may be said on a page until
 a release carries them.*
 
+*Amended October 12, 2026 for the brokerage and Keep for every draft (Archie `968ec6b2` and
+archie-mobile `4ec6a61`, on the `journey-fixes` branches, in no release yet). Nothing about either
+may be said on a page until a release carries it.*
+
+**Proposed addition, Jett's to approve, once a release carries it:** "When you type your brokerage,
+phone number, or business name into a blank on an email draft, the card offers Keep for every draft,
+and every draft after that is filled in with it. A blank for your brokerage is never filled with
+your team's name."
+
 **Proposed wording, Jett's to approve:** "Among its first questions, your agent asks once for your
 business's name, what you charge, the number customers call and how you sign your messages. It keeps
 a price or a phone number only when you typed that number yourself. Where a draft would say [Your
@@ -3604,9 +3635,10 @@ the rest of it they go to your AI company with your messages."
 
 **Why it's true:**
 
-- **The block.** `BusinessDetails` in `crates/archie-domain/src/setup.rs`: four lines under
+- **The block.** `BusinessDetails` in `crates/archie-domain/src/setup.rs`: up to five lines under
   "Business details:" (`DETAILS_HEADING`) at the end of the agent's `user.md`, labeled Business name,
-  Prices, Phone customers call and Signs messages as, each one line of at most 160 characters
+  Prices, Phone customers call, Signs messages as and (from Archie `968ec6b2`) Brokerage, each one
+  line of at most 160 characters
   (`DETAIL_MAX`). `profile_with_details` merges field by field, so the interview's rewrite of the
   whole profile cannot drop the block, and a field said later replaces the one said before. Test:
   `the_details_survive_a_rewrite_and_merge_per_field`.
@@ -3624,8 +3656,25 @@ the rest of it they go to your AI company with your messages."
   memory pass that reviews messages as they leave the last twenty (`remember_from_dropped`) labels
   them `BUSINESS:` and writes them into the same block.
 - **Filled in by code.** `fill_placeholders` (`setup.rs`) replaces [Your name] (the account's name,
-  or the kept sign-off when the account has none), [Phone] and its variants, and [Business name],
-  [Company] and [Brokerage] and their variants; anything it has no value for stays in brackets. It
+  or the kept sign-off when the account has none), [Phone] and its variants, [Business name] and
+  [Company] and their variants, and [Brokerage] and its variants from the kept brokerage; anything it
+  has no value for stays in brackets. Until Archie `968ec6b2` (October 12, 2026), [Brokerage] was
+  filled with the business name, which for a realtor on a team is the team's: round three of the
+  journey tests had an ad say "Listed by Doyle Group". It now has its own field and is filled only
+  from that (`detail_for_blank`; test `the_brokerage_is_never_the_team`).
+- **Keep for every draft** (Archie `968ec6b2`). When the owner's words on an email card fill one of
+  their own blanks (Edit it, or a rewrite whose instruction holds the words), code reads what went
+  in by the three words either side of the blank (`filled_details` in `setup.rs`), keeps it only if
+  `grounded_in` the owner's words and not already kept, and only on the owner's own address
+  (`keepable` in `crates/archie-runtime/src/email/replies/actions.rs`). The card then says "You
+  filled in your brokerage (Keller Williams Realty). Press Keep for every draft and it goes in by
+  itself from now on." with a Keep for every draft button (`render_card` and `pending_buttons` in
+  `email/replies/card.rs`); a chat app with no buttons takes the typed words. The press writes the
+  block through the same merge as the memory pass (`keep_owner_details` in
+  `crates/archie-runtime/src/gateway/tools_memory.rs`) and says where to change it. Test:
+  `a_brokerage_typed_into_a_draft_is_kept_for_every_draft`. The memory pass also labels a
+  brokerage the owner states in chat (`BUSINESS: brokerage:`). Archie Mobile draws the card's words
+  and buttons as sent, and shows a kept brokerage on its arrival row (archie-mobile `4ec6a61`). It
   runs after the model has finished, on the owner's own chat turns (`handle_chat_text` in
   `crates/archie-runtime/src/gateway/worker.rs`) and on email drafts from the owner's own address
   (`finish_draft` and `owners_address` in `crates/archie-runtime/src/email/replies/draft.rs`). An
@@ -3669,13 +3718,19 @@ the rest of it they go to your AI company with your messages."
   our server on the way only where every prompt does (the free credits and the plan with the AI
   included, per "Your prompts never touch an Otian server"). Never "it stays on your computer"
   without that sentence beside it.
-- ⚠️ **Four things in your words, nothing more.** Prices is one line of text as you said it, not a
+- ⚠️ **Five things in your words, nothing more.** Prices is one line of text as you said it, not a
   price list, and nothing quotes from it by code. Never "it learns your pricing" or "it knows your
-  price sheet".
+  price sheet". The event trailer setup's Prices list (the setups entry, amended October 12, 2026)
+  is a list the owner fills, and starts empty.
 - ⚠️ **The check is on numbers and words, not meaning.** A price you said can be kept beside the
   wrong item, which is why the goodbye reads it back. Never "it never gets a price wrong".
-- ⚠️ **Three blanks, and never the other person's.** Your name, your phone and your business's name.
-  [Name] (the person being written to), [Email], [Address] and prices stay as they are. Text replies
+- ⚠️ **Four blanks, and never the other person's** (three before Archie `968ec6b2`). Your name, your
+  phone, your business's name and your brokerage, the last only once one is kept. [Name] (the person
+  being written to), [Email], [Address] and prices stay as they are.
+- ⚠️ **Keep for every draft is on email cards only** (amended October 12, 2026). A text draft is
+  never filled, and an ad written into the chat to copy has no card to press it on. The words around
+  the blank have to be left as they were for the filled-in part to be found; when they were changed
+  too, no button appears. Never "Archie learns your details from your edits". Text replies
   are not filled. From Archie `0e9fd5ca` (October 11, 2026, in no release yet), a blank still on an
   email or text card stops Send until somebody fills it with Edit it, so a [Your name] on a text
   reply or in a teammate's mailbox, neither of which is filled, waits too (see "A draft leaves a

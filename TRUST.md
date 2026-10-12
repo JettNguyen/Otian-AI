@@ -796,9 +796,8 @@ keep. Never write "Archie tracks your exact spend" or "see your bill in Archie".
 
 **Approved wording:** "An add-on can pick its own response quality and ignore the dial, and many
 do, so on an agent with several add-ons installed the dial alone barely changes the bill. The
-checkbox under it, 'Use this for every skill', overrides them. Measured in August 2026 on an agent
-with 12 add-ons and priced at today's rates, that checkbox takes about two thirds off the monthly
-cost."
+checkbox under it, 'Use this for every skill', overrides them. Measured in October 2026 on sixteen
+test agents, that checkbox takes about nine tenths off what a reply costs."
 
 **Why it's true:** `resolve_for` (`crates/archie-runtime/src/gateway.rs:711-718`) is the single
 place the model is chosen for a reply. With the flag off it calls `resolve_model`, which lets a
@@ -808,13 +807,28 @@ dial for every target. The flag is `AgentBundleManifest::force_model_tier`, writ
 checkbox in `src/app/agent-detail.tsx`. Web search is bumped to Balanced rather than broken
 (`resolve_model_forced`, same file line 699).
 
-**The two thirds is measured, not modelled:** `crates/archie-runtime/examples/cost_bench.rs`
-run with `--live --force-fast` against a twelve-skill agent on 2026-08-10. Forced Economy came to
-18% of forced Balanced on a warm turn and 21% on a cold one at the price sheet of that day. On
-September 12, 2026 Anthropic made Claude Sonnet 5's launch price the standard price instead of
-raising it, and the same measured tokens at that sheet come to 27% and 32%, which is the "about two
-thirds off" (it was "four fifths" until that day). The unforced dial on the same agent saved 4% to
-7%. Figures and the full dataset: `docs/COST-MEASURED.md` in the Archie repo, sections 3 and 14.
+**The nine tenths is measured, not modelled:** Archie `docs/COST-MEASURED.md` section 21.6. Sixteen
+test agents (thirteen one-person, three Archie for Teams with guests), each used by a simulated
+person over several sessions on a real key, with every agent forced to Economy, averaged $0.0033 a
+reply on Claude Haiku 5.5. The same sixteen on Balanced as shipped averaged $0.0330 on Sonnet 5 and
+$0.0320 on Sonnet 5.5 (section 21.5), so a forced Economy reply is about a tenth of a Balanced one.
+That includes the web searches the checkbox cannot move off Balanced, which were 47% of the
+Economy bill. Economy runs Haiku 5.5 and Balanced Sonnet 5.5 from Archie `7f1014d6` (2026-10-08),
+**which was in no release when this was written**, so the wording waited on a branch for the
+release that carries it.
+
+**What it said before, and why it moved.** "About two thirds off the monthly cost", from
+`crates/archie-runtime/examples/cost_bench.rs` run with `--live --force-fast` against a
+twelve-skill agent on 2026-08-10: forced Economy on Claude Haiku 4.5 came to 27% of forced Balanced
+on a warm turn and 32% on a cold one at the 2026-09-12 sheet (18% and 21% at the sheet of the day,
+"four fifths" until 2026-09-12). Haiku 5.5 costs about a quarter of what Haiku 4.5 did per reply,
+so that figure undersold the checkbox once Economy moved. The unforced dial on that agent saved 4%
+to 7% on Haiku 4.5, and still saves little on an agent whose add-ons pick Balanced: the pricing
+page's moderate row is $20 to $41 at Economy against $22 to $41 at Balanced.
+
+**Do not drop the trade either:** on the same runs Economy still graded below Balanced on honesty
+(3.7 against 4.1 out of 10). Nothing requires a page to print that, but never write that the
+checkbox costs nothing in quality.
 
 **Required clause, do not drop it:** say that the checkbox also takes the add-ons off the level
 they chose. A saving quoted without its trade is a claim we cannot defend.
@@ -885,6 +899,10 @@ every published figure is read from. The figures on the pricing page move only o
 which is the standing rule on that page since 2026-08-26. On the evening of 2026-09-12 the rows
 moved for the scheduled reports and the inbox watch, on a price read off the provider's own sheet
 and one live run, and the page says nothing about why: the method is the part that is withheld.
+On 2026-10-08 the Economy column moved again, when Economy began running a newer model in Archie
+`7f1014d6`, on two measured runs of sixteen test agents (`docs/COST-MEASURED.md` 21.6 and 21.7),
+and the Balanced column did not, because Balanced's newer model measured the same per reply. The
+page says the figures were measured again in October, and which models run is not a method.
 
 **Required clauses, and one ban.** Say that we do not publish how, and say what moves the table.
 **Never describe a mechanism on the site**: not what is kept between replies, not how the tool
@@ -932,7 +950,10 @@ table.
 the date in FACTS.md; the derived ones (a Copilot reply that takes two actions, a Zapier activity,
 a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. Ours is
 `docs/COST-MEASURED.md` section 14.5 in the Archie repo: the twelve-add-on bench shape, warm and
-cold-and-writes, at Anthropic's sheet of 2026-09-12.
+cold-and-writes, at Anthropic's sheet of 2026-09-12. Balanced runs Claude Sonnet 5.5 from Archie
+`7f1014d6` (2026-10-08): the same tokens at its published rates come to $0.0088 warm (computed,
+still $0.01 printed) and the same $0.1063 cold, and a reply measured the same on it (section 21.7),
+so both figures stand.
 
 **Required clauses, do not drop them.** (1) Say the units are different sizes of work: a credit,
 an action and a reply are not the same thing, and the companies say so. (2) Beside the $0.11, say
@@ -7529,7 +7550,9 @@ plus at most five passages of 400, never the samples themselves (`writing_style:
 in `texts/replies/triage.rs`, so Text Replies' row decides it. The owner's own texts still set length,
 capitals, punctuation and emoji and win where the two disagree; the note lends word choice and warmth,
 never an email's greeting, sign-off or length. About 510 more input tokens a text read on Fast and 670
-on Balanced, roughly $0.15 to $0.38 a month at 9.6 texts a day. Tests in `texts/replies/tests.rs`.
+on Balanced, roughly $0.15 to $0.38 a month at 9.6 texts a day on Haiku 4.5 and Sonnet 5; from Archie
+`7f1014d6`, where Economy runs Haiku 5.5, the Fast end is about $0.02 (computed: 1.3 times the tokens
+at a tenth of the price). Tests in `texts/replies/tests.rs`.
 
 **What is kept, approved now:** "If you let Archie read your sent mail, it keeps the parts you wrote
 and a short description on this computer, and in backups you make, until you clear them"

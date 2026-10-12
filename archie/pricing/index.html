@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie Pricing | Otian AI</title>
-  <meta name="description" content="Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Teams is $99 a month. The AI bills you directly: $1 to $5 a month for a light agent, up to $139 for a heavy one." />
+  <meta name="description" content="Archie is free on your own AI account at 20 jobs a day, or $30 a month for up to 10 agents with every add-on. Archie for Teams is $99 a month. The AI bills you directly: up to $5 a month for a light agent, up to $139 for a heavy one." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -582,7 +582,7 @@
         <div class="section-header">
           <span class="section-label fade-up">AI costs</span>
           <h2 id="ai-cost-heading" class="fade-up delay-1">The AI bill, measured</h2>
-          <p>One agent, per month, at Anthropic&rsquo;s September 12, 2026 rates. We take no cut.</p>
+          <p>One agent, per month, at Anthropic&rsquo;s October 7, 2026 rates. We take no cut.</p>
         </div>
 
         <!-- One choice, one number. The bands are the claim; the full table and the workings sit
@@ -592,7 +592,7 @@
              to follow the picker are in the fold, so the section reads as a number, a paragraph,
              a fold and a closing line. Since 2026-09-18 the three rows are also the drawing: each
              carries its span on one shared scale to $140 a month (the FAQ's three spans, both
-             quality settings together: $1 to $5, $21 to $42, $64 to $139), so all three sizes are
+             quality settings together: up to $5, $20 to $41, $60 to $139), so all three sizes are
              on the page at rest and picking one lights it. The bars and the axis are aria-hidden
              because the words are already in the row and the band. --lo and --hi are percent of
              $140. -->
@@ -601,22 +601,22 @@
           <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-moderate" />
           <input class="cost-pick-radio" type="radio" name="cost-pick" id="cp-heavy" />
           <div class="cost-pick-tabs" role="group" aria-label="How hard you will work it">
-            <label class="cost-pick-tab" for="cp-light"><b>Light</b><span>calendar and a folder, about 6 messages a day</span><i class="cost-pick-bar" style="--lo:0.7;--hi:3.6" aria-hidden="true"></i></label>
-            <label class="cost-pick-tab" for="cp-moderate"><b>Moderate</b><span>calendar and inbox, about 25 messages and 80 emails a day</span><i class="cost-pick-bar" style="--lo:15;--hi:30" aria-hidden="true"></i></label>
-            <label class="cost-pick-tab" for="cp-heavy"><b>Heavy</b><span>everything connected, about 70 messages and 200 emails a day</span><i class="cost-pick-bar" style="--lo:45.7;--hi:99.3" aria-hidden="true"></i></label>
+            <label class="cost-pick-tab" for="cp-light"><b>Light</b><span>calendar and a folder, about 6 messages a day</span><i class="cost-pick-bar" style="--lo:0.2;--hi:3.6" aria-hidden="true"></i></label>
+            <label class="cost-pick-tab" for="cp-moderate"><b>Moderate</b><span>calendar and inbox, about 25 messages and 80 emails a day</span><i class="cost-pick-bar" style="--lo:14.3;--hi:29.3" aria-hidden="true"></i></label>
+            <label class="cost-pick-tab" for="cp-heavy"><b>Heavy</b><span>everything connected, about 70 messages and 200 emails a day</span><i class="cost-pick-bar" style="--lo:42.9;--hi:99.3" aria-hidden="true"></i></label>
           </div>
           <p class="cost-pick-axis" aria-hidden="true"><span>$140 a month</span></p>
           <div class="cost-pick-out" aria-live="polite">
             <div class="cost-pick-band" data-pick="light">
-              <p class="cost-pick-num">$1 to $2</p>
+              <p class="cost-pick-num">under $1</p>
               <p class="cost-pick-line">a month at Economy, or <b>$2 to $5</b> at Balanced</p>
             </div>
             <div class="cost-pick-band" data-pick="moderate">
-              <p class="cost-pick-num">$21 to $42</p>
+              <p class="cost-pick-num">$20 to $41</p>
               <p class="cost-pick-line">a month at Economy, or <b>$22 to $41</b> at Balanced</p>
             </div>
             <div class="cost-pick-band" data-pick="heavy">
-              <p class="cost-pick-num">$64 to $132</p>
+              <p class="cost-pick-num">$60 to $127</p>
               <p class="cost-pick-line">a month at Economy, or <b>$69 to $139</b> at Balanced</p>
             </div>
             <p class="cost-pick-note">An estimate. Besides message count, two things move it: sending in sittings or spread across the day, and the quality setting.</p>
@@ -632,7 +632,7 @@
           <!-- The one-inbox figure (2026-10-04). The homepage sells help with an inbox, and the rows
                above go from no email at all to 80 a day, so the reader who wants one inbox watched
                had no number of their own. These are FACTS.md's 30-a-day inbox watch rows. -->
-          <p class="cost-note">Watching one inbox of about 30 emails a day costs $0.69 to $1.10 a month at Economy, or $3.73 to $6.43 at Balanced with draft replies on.</p>
+          <p class="cost-note">Watching one inbox of about 30 emails a day costs $0.10 to $0.15 a month at Economy, or $3.73 to $6.43 at Balanced with draft replies on.</p>
           <p class="cost-note">Connections add cost: each is described on every reply, so the same question costs about 2.8 times as much on a fully connected agent as on a bare one.</p>
           <!-- The monthly limit (2026-10-06, Archie 0.3.6). TRUST.md's spending cap entry: the
                approved wording, word for word, on the page about what the app costs to run and
@@ -661,7 +661,7 @@
                     <td data-label="What it's connected to">A calendar and a folder of documents</td>
                     <td data-label="Messages sent a day"><span class="cost-num">about 6</span></td>
                     <td data-label="Emails a day"><span class="cost-num">none</span></td>
-                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$1 to $2</span></td>
+                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">under $1</span></td>
                     <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$2 to $5</span></td>
                   </tr>
                   <tr>
@@ -669,7 +669,7 @@
                     <td data-label="What it's connected to">Calendar, email, a to-do list, and its own lists of people and projects</td>
                     <td data-label="Messages sent a day"><span class="cost-num">about 25</span></td>
                     <td data-label="Emails a day"><span class="cost-num">about 80</span></td>
-                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$21 to $42</span></td>
+                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$20 to $41</span></td>
                     <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$22 to $41</span></td>
                   </tr>
                   <tr>
@@ -677,13 +677,13 @@
                     <td data-label="What it's connected to">All of those, plus about as many connections again</td>
                     <td data-label="Messages sent a day"><span class="cost-num">about 70</span></td>
                     <td data-label="Emails a day"><span class="cost-num">about 200</span></td>
-                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$64 to $132</span></td>
+                    <td data-label="Per month at Economy"><span class="cost-num cost-num--total">$60 to $127</span></td>
                     <td data-label="Per month at Balanced"><span class="cost-num cost-num--total">$69 to $139</span></td>
                   </tr>
                 </tbody>
               </table>
               <p class="cost-table-note">Measured over a 30-day month. The top of each range assumes every reply starts from nothing, so a real month should land inside it.</p>
-              <p class="cost-table-note">The moderate row is one agent measured twice. Its add-ons pick Balanced themselves, so the dial moved only the inbox watch, and the Economy run pulled a bigger inbox, so its top end sits a dollar higher.</p>
+              <p class="cost-table-note">The moderate row is one agent measured twice. Its add-ons pick Balanced themselves, so the dial moved only the inbox watch, and the Economy run pulled a bigger inbox, so the two top ends meet.</p>
               <p class="cost-table-note">Best, the third quality setting, costs more and was not measured. A shared Archie for Teams agent answers a whole team on one bill.</p>
             </div>
 
@@ -701,19 +701,19 @@
                 <tbody>
                   <tr>
                     <td data-label="Emails reaching your agent">30 a day</td>
-                    <td data-label="At Economy"><span class="cost-num">$0.69 to $1.10</span></td>
+                    <td data-label="At Economy"><span class="cost-num">$0.10 to $0.15</span></td>
                     <td data-label="At Balanced"><span class="cost-num">$1.39 to $2.20</span></td>
                     <td data-label="At Balanced, writing drafts"><span class="cost-num">$3.73 to $6.43</span></td>
                   </tr>
                   <tr>
                     <td data-label="Emails reaching your agent">80 a day</td>
-                    <td data-label="At Economy"><span class="cost-num">$1.85 to $2.93</span></td>
+                    <td data-label="At Economy"><span class="cost-num">$0.25 to $0.39</span></td>
                     <td data-label="At Balanced"><span class="cost-num">$3.70 to $5.86</span></td>
                     <td data-label="At Balanced, writing drafts"><span class="cost-num">$9.94 to $17.14</span></td>
                   </tr>
                   <tr>
                     <td data-label="Emails reaching your agent">200 a day</td>
-                    <td data-label="At Economy"><span class="cost-num">$4.62 to $7.32</span></td>
+                    <td data-label="At Economy"><span class="cost-num">$0.61 to $0.96</span></td>
                     <td data-label="At Balanced"><span class="cost-num">$9.24 to $14.64</span></td>
                     <td data-label="At Balanced, writing drafts"><span class="cost-num">$24.84 to $42.84</span></td>
                   </tr>
@@ -726,19 +726,19 @@
             <div class="calm-list calm-list--ruled">
               <div class="calm-list-item">
                 <span class="calm-list-label">The quality dial matters most on a simple agent</span>
-                <p><strong>An add-on can pick its own quality and ignore the dial</strong>, and most capable ones do. So the dial is the whole difference between $1 and $5 on the light row, and under a tenth on the heavy row.</p>
-                <p>The checkbox under the dial, &ldquo;Use this for every skill&rdquo;, overrides the add-ons: on an agent with 12 add-ons, it took about two thirds off the monthly cost.</p>
+                <p><strong>An add-on can pick its own quality and ignore the dial</strong>, and most capable ones do. So the dial takes the light row from $2 to $5 down to under $1, and the heavy row down by about a tenth.</p>
+                <p>The checkbox under the dial, &ldquo;Use this for every skill&rdquo;, overrides the add-ons: on sixteen test agents in October 2026, it took about nine tenths off what a reply costs.</p>
               </div>
             </div>
 
             <div class="cost-trust">
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p><strong>The figures.</strong> Five test runs in August 2026: four agent shapes, both quality settings, eight scripted turns each, on a real Anthropic key, calendar and inbox, with every call&rsquo;s bill read back.</p>
+                <p><strong>The figures.</strong> Five test runs in August 2026: four agent shapes, both quality settings, eight scripted turns each, on a real Anthropic key, calendar and inbox, with every call&rsquo;s bill read back. In October 2026, sixteen test agents measured the models each setting runs now: Balanced came out the same per reply, and the Economy column is scaled to what its model measured.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Measured</span>
-                <p><strong>The prices.</strong> Anthropic&rsquo;s own price sheet, read on September 12, 2026.</p>
+                <p><strong>The prices.</strong> Anthropic&rsquo;s own price sheet, read on October 7, 2026.</p>
               </div>
               <div class="cost-trust-row">
                 <span class="cost-trust-tag cost-trust-tag--measured">Checked</span>

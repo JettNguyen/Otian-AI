@@ -9191,6 +9191,15 @@ new code replaced the last (`answer_add` in `gateway/onboarding.rs`, `earlier_in
   the agent in a chat app; on an agent that only talks in Archie's window, the button says to
   connect one first.
 
+**Amended October 12, 2026 (Archie `d5a6cfcb`, in no release yet): on Telegram the invite is a
+link.** The message the owner copies from the Access screen carries `https://t.me/<bot>?start=<code>`
+when the agent is on Telegram, and the agent reads `/start <code>` as the code, so the teammate
+presses Start rather than typing six digits (`inviteMessage` in `src/app/team.ts`, `inbound_identity`
+in `gateway/worker.rs`). Only six digits after `/start` count, against the same codes and guess
+budget.
+- ⛔ Never "a link on every chat app". Discord, Slack and the rest still send the code.
+- ⛔ Never "no login": the teammate still needs their own Telegram account.
+
 ### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

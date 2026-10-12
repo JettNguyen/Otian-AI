@@ -343,6 +343,10 @@
                   <button class="btn btn-secondary btn-mini" data-plan="yearly">$299 a year</button>
                 </div>
                 <div class="acct-row">
+                  <span class="acct-plan-name">Archie with our help plan</span>
+                  <button class="btn btn-secondary btn-mini" data-plan="help-monthly">$179 a month</button>
+                </div>
+                <div class="acct-row">
                   <span class="acct-plan-name">Archie for Teams</span>
                   <button class="btn btn-business btn-mini" data-plan="business-monthly">$99 a month</button>
                   <button class="btn btn-secondary btn-mini" data-plan="business-yearly">$999 a year</button>
@@ -514,6 +518,14 @@
       // Archie for Teams checkout links go here when the business runbook finishes (the Stripe
       // prices must sit on the Archie for Teams product, or the webhook grants the wrong tier;
       // see FACTS.md). Until then the buttons fall through to the "isn't set up yet" message.
+      // The help plan with Archie in it, sold by Otian AI Consulting: our time each month plus the
+      // one-person plan, as its own Stripe product. The webhook needs no id for it, because
+      // `tierForPrice` reads any product that is not Archie for Teams as the personal plan, so
+      // paying it runs Archie and canceling it stops Archie, which is the whole design (Jett,
+      // 2026-10-12). One subscription per customer, though: `customer.subscription.deleted` removes
+      // both subscription tiers, so somebody holding this AND the $30 plan loses Archie when
+      // either ends. Move an existing subscriber by changing their subscription's price in Stripe.
+      "help-monthly": "",
       "business-monthly": "",
       "business-yearly": "",
     };

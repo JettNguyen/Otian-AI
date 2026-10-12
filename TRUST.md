@@ -2961,9 +2961,13 @@ it opens."
 - What it replaced: the owner met a stopped agent and learned why only by sending it a message (the
   October 10 note in the Archie repo's `docs/OPEN-THREADS.md`).
 
-### ✅ A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+### ✅ A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, in no release yet
 
-**Released in 0.3.8 on October 11, 2026, and named in its notes.**
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Amended October 12, 2026
+(Archie `202f0b89`, archie-mobile `36b27f1`, in no release yet): a reply that names an app nobody
+connected gets that app's Connect button, the first questions answer it inside setup, and Archie
+Mobile says where on the computer to press it. Until a release carries those, the boundaries below
+as first written still hold.
 
 *Archie `0aa95be1`, in no release yet. Nothing below may be said on a page until a release carries
 it.*
@@ -2986,13 +2990,31 @@ Connections tab with the sign-in ready."
 - **The owner's own conversation, in the window** (`offer_screen` in
   `crates/archie-net/src/inapp.rs` and `mirror.rs`; the button is drawn in
   `src/app/conversation.tsx`).
+- **An app named by its own name** (amended October 12, 2026, Archie `202f0b89`). Every app in the
+  catalog this agent has not connected is noted as a button (`Opens::app_named` in `kept.rs`), and a
+  reply that names one in the app's own capitals, as a word of its own, gets its Connect button
+  whether or not it names the Connections tab: "I'll update Ashley's last contact in Follow Up
+  Boss" now has Connect Follow Up Boss under it (test
+  `a_reply_that_names_an_unconnected_app_gets_its_button`). A Connections tab line still wins. On
+  round three of the journey tests replies named Follow Up Boss with nothing to press, and one
+  claimed a write nothing on that agent could do.
+- **During the first questions** (Archie `202f0b89`). The first-run window draws an app's Connect
+  button, and a press opens that app's own form there, in place of setup's panel, with Back to
+  setup under it (`appAsk` in `src/app/setup-flow.tsx`); the agent restarts when it is connected.
+  A calendar or mailbox button is still not drawn there, since setup connects those through its own
+  steps (`opensDoors` on `Conversation`).
 
 **Boundaries:**
-- ⛔ Never that Archie Mobile has it. The phone draws nothing for it, because a phone cannot connect
-  an account; the reply's words still say where to go on the computer.
+- ⛔ Never that Archie Mobile has the button. A phone cannot connect an account. From archie-mobile
+  `36b27f1` (in no build yet) it shows a line in its place saying where on the computer to press it
+  ("Connect Follow Up Boss on your computer: in Archie, on this agent's Connections tab, under
+  Apps.", `onTheComputer` in archie-mobile `src/words.ts`, sent as `on_the_computer` by `phone.rs`);
+  before that it drew nothing, and the reply's words were all it had.
 - ⛔ Never that a chat app has it. Telegram and the rest get the words only.
-- ⚠️ Only under a reply that names the Connections tab and the thing that is missing. A reply about
-  something else gets no button, whatever is missing.
+- ⚠️ Only under a reply that names the Connections tab and the thing that is missing, or, from
+  Archie `202f0b89`, an unconnected app by its own name. Square, Linear and Mercury keep the first
+  rule only, because each is also a word that starts a sentence ("Square footage is 2,150"). A reply
+  about something else gets no button, whatever is missing.
 - ⚠️ No button for a to-do list: Todoist is under Apps and Google Tasks under Email, calendar,
   files, and the turn cannot tell which was meant.
 - ⚠️ It opens the screen. Signing in is still the owner's, in the browser, with the boxes they tick.
@@ -3395,8 +3417,13 @@ Up Boss, the goodbye offers to connect it, and your agent brings your people in 
   `the_way_in_follows_where_the_work_is_kept` in `gateway/onboarding.rs`.
 - ⚠️ **The first-run window draws no Connect Follow Up Boss button**, for the reason it draws no
   Connect my calendar: that window has no Connections tab to open. The goodbye's words say where.
+  Amended October 12, 2026: from Archie `202f0b89` (in no release yet) it does draw it, and a press
+  opens Follow Up Boss's own form inside the setup window (the entry "A reply that says your
+  calendar or email is not connected"). Until a release carries that, this boundary stands.
 - ⚠️ **On the phone, no Connect button either.** Connecting an app means pasting its key on the
-  computer, so the phone shows the goodbye's words only, as it does for a calendar.
+  computer, so the phone shows the goodbye's words only, as it does for a calendar. From
+  archie-mobile `36b27f1` (in no build yet) it also shows a line saying where on the computer to
+  press it.
 - ⚠️ **A name it does not recognize gets the export button.** A misspelling, or a product with
   another name, is offered Add the exported file as before, and somewhere else with no Follow Up
   Boss named still gets no way in.

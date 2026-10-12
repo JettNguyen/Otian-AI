@@ -4079,6 +4079,40 @@ your lists, each with Undo."
     "tap Open on your phone to see the entry".
   - ⚠️ **The row has to still be there.** One taken back, or deleted since, opens the list with
     nothing tinted.
+- **Amended October 12, 2026 (Archie `50dd4c1c`, in no release yet): an Undo is told to the agent.**
+  Pressing Undo under a reply, in Archie or on Archie Mobile, writes what was taken back into Archie's
+  own conversation's history (`ApproveRequest::Undone`, sent from `undo` in `src-tauri/src/journal.rs`),
+  so the next turn knows it is gone. It used to stamp only the job's record.
+  - ⚠️ **Only while the agent is running,** since a stopped one has no conversation open to write
+    into; the Undo itself works either way.
+  - ⚠️ **Archie's own conversation.** An Undo is pressed there or on the phone, which mirrors it; a
+    chat app's conversation is not told.
+
+### 🚧 When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, in no release
+
+*Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
+page until a release carries it.*
+
+**Proposed wording, Jett's to approve, once a release carries it:** "The first time your agent
+checks your mail, it tells you in the chat which inboxes it is reading and how often, with a Stop
+watching button under it."
+
+**Why it's true:** `say_the_inbox_is_watched` in `crates/archie-runtime/src/email/poller.rs` runs
+before the first read, once (a marker file beside the watch's cursor, written before the message is
+sent), and names the chosen inboxes and the interval. Stop watching (`STOP_WATCHING`) is answered in
+code by `stop_watching` in `crates/archie-runtime/src/email/replies/actions.rs`, which turns off
+Watch my inbox (the switch on the agent's Skills tab, under Email Manager); the watch reads that
+setting every cycle, so it stops at the next one. Test `stop_watching_turns_the_inbox_watch_off`.
+
+- ⚠️ **Once per agent.** Switching the watch off and on again does not say it again.
+- ⚠️ **Only the owner can stop it** from the button; a teammate's press is refused with a sentence.
+- ⚠️ **Not on the free credits or the plan with the AI included,** where mail is not read at all and
+  the agent says that instead (the entry on that plan's proxy).
+- ⚠️ **Never "it tells you everything it reads".** It says once that it is reading; what it tells
+  you after that is what Email Manager's settings say is worth a message.
+- **What the earlier version got wrong.** The watch began in silence: turning on a skill that reads
+  mail started it, and nothing in the conversation said an inbox was now being read or how to stop
+  it (the fix plan after round three, B.22).
 
 ### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

@@ -4039,6 +4039,15 @@ your lists, each with Undo."
   back as it was before a change or a removal (`reversal_for` in `crates/archie-domain/src/journal.rs`:
   `records_delete`, `records_restore`). Entries added from a card or by an import are not in it;
   their Undo is the job's on the Jobs tab.
+- **Amended October 12, 2026 (Archie `0acacbdc` and archie-mobile `0cec3b5`, in no release yet): Open goes to what was saved.** In Archie on the computer, a
+  "Saved in" or "Changed in" line's Open opens that list at that row, with any search or step filter
+  cleared, and tints the row for a moment (`showRow` in `src/app/records.tsx`, passed from
+  `onOpenList` in `src/app/agent-detail.tsx`). In Archie Mobile it opens Lists scrolled to that list
+  and tints it (`SectionFocus` `list:` in archie-mobile `src/screens/Manage.tsx`).
+  - ⚠️ **The phone stops at the list.** It is sent counts, never rows, so it cannot open one. Never
+    "tap Open on your phone to see the entry".
+  - ⚠️ **The row has to still be there.** One taken back, or deleted since, opens the list with
+    nothing tinted.
 
 ### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -8002,6 +8011,25 @@ email or a time on your calendar, and it looks before it rewrites."
   `revise_waiting`, the draft that was there becomes what Put the old one back restores, and one
   set to send itself, or asking when to send, is still refused (test
   `a_waiting_reply_is_rewritten_in_place`).
+- **Amended October 12, 2026 (Archie `0acacbdc` and archie-mobile `0cec3b5`, in no release yet): what is waiting to send is said where you look.** A draft
+  card's first line under its heading is "Not sent yet." (`render_card` in
+  `crates/archie-runtime/src/email/replies/card.rs`). Over the message box, both apps say "1 waiting
+  to send" or "2 waiting to send" while a conversation holds an email or text card whose Send is
+  still on it, and a press scrolls to the oldest (`waitingToSend` in `src/app/conversation.tsx` and
+  archie-mobile `src/screens/Chat.tsx`). Asked what is unsent, pending or promised, the agent is told
+  to count the email drafts waiting on cards in that conversation, which it was already handed
+  every turn one waits (`waiting_drafts_note` in
+  `crates/archie-runtime/src/email/replies/draft.rs`).
+  - ⚠️ **One conversation's count.** The line counts the cards in the conversation on screen. A
+    draft waiting in another chat app, or one the mail watch made on the Dashboard, is not in it.
+  - ⚠️ **The agent's count is email only.** The note the agent reads lists email drafts, the newest five; a waiting
+    text card is counted by the line over the box, not by what the agent is told. Never "ask Archie
+    what's unsent and it lists every text".
+  - ⚠️ **Archie and Archie Mobile only.** A chat app shows the card's words, "Not sent yet." included,
+    and has no line over its box.
+  - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
+    an owner asked what was still unsent and was told nothing, while two drafts waited in the same
+    chat, and in sixty runs nobody opened the Dashboard, where they were listed.
 - **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
   which the window then showed at the bottom as a new message, and Use my words sent your whole
   edited reply into the chat as if you had typed it to the agent, then posted the changed draft as

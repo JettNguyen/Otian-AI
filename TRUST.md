@@ -2634,6 +2634,35 @@ account." Both doors find the account an address has or make one (`SignInScreen`
 - ⛔ Never "your data never leaves your computer", "fully private" or "nothing goes to us" beside
   either.
 
+**Amended October 12, 2026: what connecting email means, said where it is decided** (Archie
+`b570fb4a`, in no release; the guide's lines go live with the next push to Archie's main, and the
+chooser's copy and the answer in code arrive with the release that carries them).
+
+**Proposed wording, Jett's to approve:** "Before you connect your email, Archie says what it reads
+and when, where that goes, what it never does, and how to switch it off."
+
+- **Four lines, in the connect-email guide,** under "What it reads, and how to switch it off"
+  (`data/marketplace/resources/connect-email-account.json`): it reads the messages a question is
+  about when asked; with Email Manager or Package Tracker added, it reads new inbox mail every few
+  minutes, skipping newsletters, promotions, and no-reply senders before the AI sees them
+  (`should_skip` in `crates/archie-runtime/src/email/poller.rs`); what it reads goes to the AI
+  company the agent uses, through our server only on our AI, which keeps no copy; it never deletes
+  mail or sends an email that was not approved, and sends only with Let it send replies checked; and
+  the trash can on its row on the Connections tab switches it off.
+- **On the chooser,** folded under "What it reads, and how to switch it off", before the sign-in
+  buttons (`MAIL_PLAINLY` in `src/app/vocab.ts`, held to the guide's words by
+  `the_chooser_shows_the_guides_lines`).
+- **Asked in the chat,** "What does it read if I connect my email?" or "How do I disconnect my
+  email?" is answered with those lines and where the guide is, by code with no AI call, for the
+  owner (`asks_what_mail_it_reads` and `mail_answer` in
+  `crates/archie-runtime/src/gateway/privacy.rs`; test
+  `a_question_about_what_connecting_email_means_is_taken`). "What do you see in my inbox?" is a job
+  and goes to the agent.
+- ⚠️ **The every-few-minutes reading needs one of those two add-ons.** Never say Archie watches every
+  inbox it is connected to.
+- ⚠️ **"Never deletes" is about the agent.** Filing (the tidy box) moves mail between folders, and
+  never say it can undo something the owner deletes themselves.
+
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026.** Its notes do not name it.

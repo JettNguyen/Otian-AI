@@ -3974,18 +3974,26 @@ your lists, each with Undo."
 answer to a press, so its Send says the same thing. Nothing below may be said on a page until a
 release carries them.*
 
+*Amended October 12, 2026 for what a draft adds (Archie `48631f80` on the `journey-fixes` branch, in
+no release yet): the rule's wording, the "Check before sending" line, and the boundaries marked
+below. Nothing about that line may be said on a page until a release carries it.*
+
 **Proposed wording, Jett's to approve:** "When your agent writes something for you to send, it is
 told not to put in any fact about a person that isn't in your conversation or in what it keeps about
 you, and to leave a blank in square brackets there, like [her school]. An email or text reply with a
 blank still in it won't send. Press Send and Archie names the blank and asks you to press Edit it,
 fill it in, and then send it."
 
+**Proposed addition, Jett's to approve, once a release carries it:** "On an email your agent drafts,
+a price, a day, or a time that wasn't in your conversation, the email it answers, or what your agent
+keeps about you is listed under the draft as Check before sending."
+
 **Why it's true:**
 
 - **The rule.** The recall rule in `build_system_prompt`
   (`crates/archie-runtime/src/gateway/prompt.rs`) now reads "NEVER say you remember something, or
-  that the user told you something, or put a fact about anyone in a draft for them to send, unless
-  it is in the User context or Memory sections of this prompt or in the messages of this
+  that the user told you something, or put a fact, reason, or promise in a draft for them to send,
+  unless it is in the User context or Memory sections of this prompt or in the messages of this
   conversation", and adds "a draft leaves a blank like [her school] for any detail they do not
   hold". It is folded into the sentence that was already there, as the cost rule asks. Test:
   `the_agent_is_told_not_to_invent_a_recollection`. The live probe `draftblank` in
@@ -3995,6 +4003,21 @@ fill it in, and then send it."
   the old sentence or the new one, 12 drafts each; what changed is that Sonnet twice in three said it
   had kept the note general and asked where she is going (Archie's `docs/COST-MEASURED.md`, the
   paragraph on 1.4, Archie `df34c9d1`).
+  Until October 12, 2026 it said "a fact about anyone", which left out reasons, promises and terms:
+  round three of the journey tests had drafts saying "Thursday the 15th is a little tight on our end"
+  and "well within our service area", which nobody had said (Archie `48631f80`).
+- **What a draft added, named under it.** Both draft tools, `inbox_draft_reply` and
+  `inbox_draft_new_email` (`email/replies/draft.rs`), take an `added` list in which the agent names
+  what it put in that nobody gave it. Code then reads the draft's own words, before the signature,
+  for a dollar amount, a single day, or a time of day that appears nowhere in the owner's messages in
+  that conversation, what was read that turn, the email being answered, the profile, or the memory
+  (`added_by_code` in `crates/archie-runtime/src/email/replies/added.rs`). Both go on the card, the
+  agent's first and five at most, as "_Check before sending: $450 and Thu Oct 15._"
+  (`render_card` in `email/replies/card.rs`). A change to the words on the card (Edit it, a
+  rewrite, another version, Put the old one back) clears the line, because the words are no longer
+  the ones it was about (`email/replies/actions.rs`). Tests: the five in `added.rs`, and
+  `a_draft_names_what_nobody_gave_it` in `email/replies/tests.rs`. Archie Mobile draws the card's
+  own words, so the line is on the phone with no change there.
 - **What counts as a blank.** `open_blanks` in `crates/archie-domain/src/setup.rs`: words in square
   brackets, 40 characters or fewer, with at least one letter. A link written `[words](address)`, a
   box `[ ]` or `[x]`, and a footnote `[1]` are not blanks, and longer bracketed text is read as an
@@ -4040,14 +4063,24 @@ fill it in, and then send it."
   Send. It fills them in the owner's chat replies too, which have no Send.
 - **Cost.** 42 tokens in the core prompt, above the cache line, on every turn of every agent, read
   from the cache after the first (Archie's `docs/COST-MEASURED.md`, section 27.1, item 1.4). The
-  check on Send is code and costs nothing, and cutting the signature off adds nothing.
+  check on Send is code and costs nothing, and cutting the signature off adds nothing. The October 12
+  wording adds about 3 tokens to that sentence, and `added` about 120 cached tokens across the two
+  draft tools on an agent with a mailbox that can send (section 28, B.12); the check under the draft
+  is code.
 
 **The boundaries.**
 
 - ⛔ **Never "your agent never makes anything up" or "every fact in a draft is checked."** The blank
-  is a sentence in the prompt, and a model can still write a guess as if it were known; nothing
-  reads a draft's facts. What code guarantees is narrower: a blank in square brackets on an email or
-  text card stops Send.
+  is a sentence in the prompt, and a model can still write a guess as if it were known. What code
+  guarantees is narrower: a blank in square brackets on an email or text card stops Send, and on an
+  email card, an amount, a single day, or a time nothing given holds is named under the draft.
+- ⛔ **Never "Archie flags anything your agent made up" (amended October 12, 2026).** Code reads
+  only amounts, days, and times. A reason, a promise, or a term is on the line only when the agent
+  lists it in `added`, and nobody has yet seen whether it does (Archie's `docs/OPEN-THREADS.md`).
+  The line names; it never holds Send.
+- ⚠️ **"Check before sending" is on email cards the agent drafts in chat only.** Not on texts, not
+  on drafts the mail watch writes on arrival, and not in a message written into the chat to copy.
+  A number that appears anywhere in what was given counts as given, so "$5" is rarely named.
 - ⛔ **Never say the sentence was shown to stop invented details.** The live probe found no invented
   school in 12 drafts under either the old sentence or the new one, so it shows no difference in
   that.

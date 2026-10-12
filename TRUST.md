@@ -7172,6 +7172,22 @@ off, and this entry is rewritten, all in the same pass.
 - ⚠️ Microsoft's and Apple's connections are not covered here; nothing checked what Microsoft's
   consent page says about the publisher, so say nothing about it until someone does.
 
+**Amended October 12, 2026: a way out of the wait, and Otian AI named at sign-in** (Archie
+`435e2fc7`, in no release; nothing in this paragraph may be said until a release carries it).
+
+- **Start over.** While the Connections tab waits on Google's or Microsoft's page, it says "Google's
+  page is open in your web browser. If you closed it or pressed Back to safety, press Start over."
+  (for Microsoft, "If you closed it"), with a Start over button that puts the chooser back
+  (`signIn` and `startOver` on `GoogleConnect` in `src/app/connect.tsx`). The attempt let go of
+  still times out on its own after five minutes, and if it is finished after all, the account it
+  connected is kept. The wait itself is still five minutes, so "the app's wait ends after five
+  minutes" above stays true for a tab nobody comes back to.
+- **Sign-in names the company.** The sign-in screen says "If you are new, this makes your Archie
+  account. Otian AI is the company that makes Archie, and Google's pages use that name." (Archie for
+  Teams in its own edition; `src/app/auth.tsx`). It said "this makes your Otian AI account" before.
+- ⚠️ **The warning itself stays** until Google verifies the app; neither change touches what
+  Google shows.
+
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 
 **Why this is here at all.** Every other claim in this file is about the app. `trust/proof/`

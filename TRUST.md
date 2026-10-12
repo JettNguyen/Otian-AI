@@ -382,6 +382,16 @@ and both have to be said wherever the plan is described:
   on either proxy sentinel, with a test pinning both. So on this plan the agent thinks through the
   proxy and reads neither mail nor texts.
 
+*(Amended October 12, 2026, Archie `6f4b4d4c`, not in a release yet: free credits left over end
+when this plan starts, and the plan screen says so, beside both prices and what the difference buys
+("$59 a month instead of $30. The $29 between them buys $25 of Claude each month"), in
+`src/app/auth.tsx`. This was already how the billing service behaved (`renewPlanLedger` sets the
+balance and does not add to it); before this nothing said it, and on round three of the journey
+tests an owner's leftover credits were gone with no word. The same pass starts again, within a
+minute, every agent the trial's end had stopped once a plan comes through
+(`reopen_after_plan` in `src-tauri/src/session.rs`); agents the owner switched off stay off. Never
+"your credits carry over" and never "your unused credits are added to your plan".)*
+
 *(Amended October 12, 2026, Archie `ef9b94a1`, not in a release yet. What is read did not change;
 what the agent offers did. Before it, the inbox tools stayed in the agent's tool list on the credits
 and the plan, and the dispatch refused each call with `credit_policy` in

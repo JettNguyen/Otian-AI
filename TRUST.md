@@ -531,7 +531,7 @@ means nothing further is sent and anything waiting to be sent is deleted."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
 
-### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in no release yet), and its route is deployed
+### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), and its route is deployed
 
 *Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
 `false` in Archie `src/app/heard-from.ts` at the release commit `59a674e6`), so nobody is asked. The
@@ -2076,7 +2076,77 @@ archie-mobile `817e099`):
 - **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
   are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
 
-### 🚧 A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, in no release yet
+### ✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes:** "Every reminder shows on your
+to-do list, and deleting it in either place takes it off both. When a reminder goes off, Remind me
+later lets you pick any time, and each button says what it does." Archie `71779b60`, `2599c51b`,
+`fdfa454f`, `eb4fbbaf` and `2c28d394`, all October 9, 2026. This entry was written the day it
+shipped, because it shipped with none, and a capability with no entry is one nobody selling knows
+exists. Archie Mobile's half (archie-mobile `81b5466`) is in build 24 of 1.3, on TestFlight and not
+submitted for review, so no page says the phone does it until 1.3 is on the App Store.
+
+**Proposed wording, Jett's to approve:** "Ask your agent to remind you of something and it goes on
+your to-do list too. Tick the to-do off and the reminder is not said. Delete it from under the reply
+that set it, from the Dashboard, from the Calendar, or from the card when it goes off, and both go,
+with Undo on the lists. When a reminder goes off, Remind me later offers in an hour, this evening or
+tomorrow, each with its time on the button, or Another time in your own words, and Back if you
+pressed it by mistake."
+
+**Why it's true:**
+
+- **One reminder, one to-do.** `Reminder::task` (`crates/archie-runtime/src/reminders.rs`)
+  remembers the row a reminder put on the to-do list (`crates/archie-runtime/src/tasks.rs`). Ticking
+  that row or deleting it hides the reminder from every list and drops it at its time
+  (`reminders::still_wanted`), and Undo on the to-do brings it back. The reminders file's lock is
+  keyed by the file (`reminders::lock_for`), so the window, the phone and the agent take the same
+  one.
+- **Delete in four places, with one word.** ✕ Delete on the card when a reminder beside a to-do goes
+  off; ✕ Delete the reminder under the reply that set it, one per reminder and naming its words when
+  a reply set more than one (`delete_buttons` in `crates/archie-runtime/src/gateway/reminder_card.rs`,
+  Archie `fdfa454f`); Delete on the Dashboard's work board and on the Calendar
+  (`src/app/work-board.tsx`, `src/app/calendar.tsx`); and Delete on the to-do list
+  (`src/app/tasks-card.tsx`). The list Deletes carry Undo.
+- **Remind me later.** `later_row` in `reminder_card.rs` (Archie `2599c51b`): In an hour, This
+  evening and Tomorrow, each labeled with the time it resolves to, then Another time, which asks for
+  a time in words, and Back. The press is handled in code, never by the AI.
+- **Old cards lose their buttons** (Archie `eb4fbbaf`). A card whose send to a chat app failed loses
+  its buttons in the window, a new card retires the old one whatever its age, and a press on a card
+  the agent no longer has takes that card's buttons off and says so.
+- **Promises, on an agent with Commitment Keeper and the To-Do List** (Archie `2c28d394`). A promise
+  caught from a text is one row on Commitments, drawn on the to-do list marked with who it is for,
+  and ticking, Delete and Undo there reach it (`tasks::COMMITMENTS_SLUG`, `src/app/open-tasks.ts`).
+
+**The boundaries.**
+
+- ⚠️ **Only on an agent that keeps a to-do list.** An agent without the To-Do List has no list to put
+  a reminder on, and its reminders work as before. Promises on the list need both Commitment Keeper
+  and the To-Do List.
+- ⚠️ **Tested in code and through the agent with a real model, and never watched in the window**
+  (`examples/reminder_todo_live.rs`, on Economy and Balanced). Say what it does, never that anybody
+  has seen it, until somebody has said "remind me to call the plumber in five minutes", seen the row
+  appear on the Dashboard, pressed ✕ Delete the reminder, and seen both go.
+- ⚠️ **The phone's half** (a swipe left to delete on the to-do list, Delete on the Calendar) was
+  watched in the iPhone simulator on the sample, never on a phone with a finger, and is in no store
+  release.
+- ⚠️ **The checklist the agent posts in a chat still lists to-dos only**, not promises.
+- ⚠️ **The approved retention wording elsewhere in this file says a caught commitment "lives on as a
+  reminder until it fires"**, which now says less than is true, and so does the same sentence on the
+  privacy page. Both are Jett's to change (Archie `docs/OPEN-THREADS.md`, "Reminders on the to-do
+  list").
+
+### ✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
+
+⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
+questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
+(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
+first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
+not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+billing note under the retention build).
 
 *Archie `3a9a3b21`, `84240f2b`, `346624af` and `0a0091a3`, and archie-mobile `9bd3647` and
 `f4b20e4`, all on main and in no release.
@@ -2144,7 +2214,11 @@ shows the same counts."
 - ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
   that does gets none, and that is the intended answer.
 
-### 🚧 Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, in no release yet
+### ✅ Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `8458f1d7` and archie-mobile `d350c03`, both on main and in no release. Nothing below may be
 said on a page until a release carries them, and the phone half needs both: an Archie Mobile build
@@ -2179,7 +2253,9 @@ type its name first, on either screen, because nothing about it comes back."
 - ⚠️ **On the phone, only from the Agents screen.** Not from the agent switcher at the top of an
   agent's own pages.
 
-### 🚧 Moving your agents into Archie for Teams when you hire: BUILT 2026-10-09, in no release yet
+### ✅ Moving your agents into Archie for Teams when you hire: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `1371e3fa`, on main and in no release. Nothing below may be said on a page until a release
 of both apps carries it.*
@@ -2225,7 +2301,18 @@ lists, their routines and their memory. You reconnect your accounts once, from a
 - ⚠️ **The person's plan is a separate matter.** This entry says nothing about billing or what
   happens to an Archie plan when someone moves to Archie for Teams; pricing pages say that.
 
-### 🚧 Written setups for four lines of work: portable restrooms, restroom trailers for events, home trades, and real estate: BUILT 2026-10-09 and 2026-10-10, in no release yet
+### ✅ Written setups for four lines of work: portable restrooms, restroom trailers for events, home trades, and real estate: BUILT 2026-10-09 and 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
+
+⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
+questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
+(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
+first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
+not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+billing note under the retention build).
 
 *Archie `f948867d`, `1d23ce75`, `cef24e70` and `0fd0f068`, on main and in no release. Nothing
 below may be said on a page until a release carries it.*
@@ -2362,7 +2449,9 @@ sheet. Change any of it by asking."
   saved details included (`ArrivalCard` in archie-mobile `src/screens/Arrival.tsx`), its Rules and
   Saved rows pointing to the computer's Personality tab. Rewrite this bullet in that pass.
 
-### 🚧 Where your information goes: a guide in Archie, and the same page on this site to print: BUILT 2026-10-10, in no release yet
+### ✅ Where your information goes: a guide in Archie, and the same page on this site to print: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `f6a3c5e7` (the guide) and `9041737e` (the links to it), in no release yet; the page is
 `trust/where-your-information-goes/` here. Two clocks, and they differ: the page is live the day it
@@ -2512,7 +2601,9 @@ account." Both doors find the account an address has or make one (`SignInScreen`
 - ⛔ Never "your data never leaves your computer", "fully private" or "nothing goes to us" beside
   either.
 
-### 🚧 What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, in no release yet
+### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026.** Its notes do not name it.
 
 *Archie `f6a3c5e7` (the words) and `9041737e` (the guide link under them), in no release yet.
 Nothing below may be said on a page until a release carries them.*
@@ -2574,7 +2665,9 @@ came and whether you opened it, and that no AI is asked."
   through us; the plan with the AI included does. "Until you connect an AI account of your own" is
   the true scope.
 
-### 🚧 What Archie costs, said where people look: the trial strip, the AI account panel, and a Your plan row: BUILT 2026-10-10, in no release yet
+### ✅ What Archie costs, said where people look: the trial strip, the AI account panel, and a Your plan row: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `f6a3c5e7` (the trial strip) and `9041737e` (the AI account panel's first line, the Account
 page's Your plan row, and one plan chooser shared by all three), in no release yet.*
@@ -2637,7 +2730,11 @@ know: on the strip under every page during the trial, and on the Account page un
 - ⚠️ **A price change is three edits, not one:** Stripe, `pricing.ts`, and FACTS.md. The strip and
   the row read only `pricing.ts`.
 
-### 🚧 When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, in no release yet
+### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `756ea25b`, with `92526419` for the week of tries after a plan is bought, and archie-mobile
 `79ce0fc` (the card on the phone) and `241cc0b` (the phone's chat drawing it), in no release yet.
@@ -2734,7 +2831,16 @@ calendar work the whole time."
   got the same line, with no prices, and what the owner sent was thrown away (Archie
   `docs/agent-ux/journeys/2026-10-11-findings.md`, Money).
 
-### 🚧 What Archie connects to, as a guide, and Follow Up Boss named as not supported: BUILT 2026-10-10, in no release yet
+### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
+
+**Amended October 11, 2026: the guide's Follow Up Boss line went in with the push after 0.3.8
+shipped** (Archie `7ffc1380`). It now says Follow Up Boss connects with a key, where to make one,
+that what comes in arrives on a card and nothing is added until Add is pressed, and that nothing in
+Follow Up Boss is changed; the line after it adds Follow Up Boss to the ones not yet tried on a real
+account. "No Follow Up Boss" under Why it's true is history now. The ⛔ on "works with Follow Up
+Boss" stands until it has run against a real account.
 
 *Archie `f6a3c5e7`, the guide `data/marketplace/resources/what-archie-connects-to.json` (619 words,
 registered in `builtin_resources`), in no release yet. Like every guide, it reaches installed apps
@@ -2802,7 +2908,9 @@ read that it has one; the proposed wording above changes with it, to name Follow
 connected and not yet tried on a real account. The ban on "works with Follow Up Boss" stands until
 it has been.
 
-### 🚧 A plan with no AI in it asks for your AI account right after you buy it: BUILT 2026-10-11, in no release yet
+### ✅ A plan with no AI in it asks for your AI account right after you buy it: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `54e2115a` (Archie for Teams), `69e3b242` (Archie) and `431e3e65` (free credits), in no
 release yet. Nothing below may be said on a page until a release carries them.*
@@ -2853,7 +2961,9 @@ it opens."
 - What it replaced: the owner met a stopped agent and learned why only by sending it a message (the
   October 10 note in the Archie repo's `docs/OPEN-THREADS.md`).
 
-### 🚧 A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, in no release yet
+### ✅ A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `0aa95be1`, in no release yet. Nothing below may be said on a page until a release carries
 it.*
@@ -2891,7 +3001,11 @@ Connections tab with the sign-in ready."
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 20). Those directions now read "In
   Archie, on the Connections tab", in the agent's fixed answers and the instructions it is given.
 
-### 🚧 A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, in no release yet
+### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `7e720869` and Archie Mobile `68cd478`, in no release yet. Nothing below may be said on a
 page until a release carries it.*
@@ -2934,7 +3048,11 @@ stopped Ember yesterday at 11:34 PM", on your computer and on your phone."
   stopped the company map's restart from starting agents the owner had stopped: it took any answer
   from Stop as "it was running".
 
-### 🚧 New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, in no release yet
+### ✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `f97d3d5a` and Archie Mobile `0c47ac8`, amended by Archie `f4cb40a2` (2026-10-11), in no
 release yet. Nothing below may be said on a page until a release carries it.*
@@ -2995,7 +3113,14 @@ conversation and keeps what it has learned about you."
   while the agent is stopped says starting it will not bring the button back, and what to do
   instead (`absence_reads_as` in `src-tauri/src/inapp.rs`).
 
-### 🚧 New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), in no release yet
+### ✅ New or changed payment instructions are never passed on, even when the owner asks: BUILT 2026-10-10 (Archie `cda94ed1`), RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
+
+**The guide block went in with the push after 0.3.8 shipped** (Archie `7ffc1380`): What your agent
+will never do now has a heading, Payment and wiring instructions, with the words of the proposed
+wording below and the serial comma added, and its first line says the other limits are in Archie
+itself apart from this one.
 
 *Archie `cda94ed1` is on the `journey-fixes` branch and in no release; nothing below may be said on a
 page until a release carries it. The block in the guide "What your agent will never do" that
@@ -3031,7 +3156,11 @@ be connected first (finding 11 in `docs/agent-ux/journeys/2026-10-10-findings.md
 - ⚠️ **Buying is a separate switch** and unaffected; never let this read as "your agent cannot pay
   anything".
 
-### 🚧 Your agent's first questions start with the first thing you say, and Archie for Teams starts with a pack of its own: BUILT 2026-10-10, in no release yet
+### ✅ Your agent's first questions start with the first thing you say, and Archie for Teams starts with a pack of its own: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `9f9fe8fd`, and archie-mobile `1585610` for Team Starter in the phone's store, in no release
 yet. Nothing below may be said on a page until a release carries them. TRUST.md has no entry on the
@@ -3126,7 +3255,18 @@ it is answering."
   offer to stop the questions, and asking again lets them go (`handle_message_attributed` in
   `crates/archie-runtime/src/gateway/turn.rs`)."
 
-### 🚧 The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, in no release yet
+### ✅ The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
+
+⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
+questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
+(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
+first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
+not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+billing note under the retention build).
 
 *Archie `c7792c43`, and archie-mobile `241cc0b` (the phone drawing cards that carry no words) and
 `f0f8940` (the way in on the phone), in no release yet. Nothing below may be said on a page until a
@@ -3263,7 +3403,18 @@ Up Boss, the goodbye offers to connect it, and your agent brings your people in 
 - ⚠️ **It opens the form; it does not connect anything.** The owner makes the key in Follow Up Boss
   and pastes it, and everything the Follow Up Boss entry says it is not holds here too.
 
-### 🚧 Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, in no release yet
+### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
+
+⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
+questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
+(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
+first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
+not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+billing note under the retention build).
 
 *Archie `f008628c` (keeping them, filling drafts, the "Saved:" line), `475d8fa2` (the row on the
 agent's page) and `6d39352d` (the details in the phone's snapshot), and archie-mobile `1585610` and
@@ -3369,7 +3520,9 @@ the rest of it they go to your AI company with your messages."
   where on the computer it is changed (archie-mobile `cab000e`). Never say telling the agent changes
   them; the memory pass may pick a correction up later, once that message has left the last twenty.
 
-### 🚧 Ask who owes you money, and your agent answers from your lists, the chat and its notes: BUILT 2026-10-10, in no release yet
+### ✅ Ask who owes you money, and your agent answers from your lists, the chat and its notes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `5fe8abe2` and `cd10e1a2`, in no release yet. Nothing below may be said on a page until a
 release carries it.*
@@ -3461,7 +3614,11 @@ handed those entries instead."
   `partly_entered`). Test: `a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`.
 - ⚠️ **Nothing new on either screen.** The answer reaches the phone like any reply.
 
-### 🚧 Under a reply, what your agent saved and what it read, with Open and Undo, and What it keeps at the top of Knowledge: BUILT 2026-10-10, in no release yet
+### ✅ Under a reply, what your agent saved and what it read, with Open and Undo, and What it keeps at the top of Knowledge: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `607ad305` (the line under a reply), `1c5836ab` (the card) and `6d39352d` (both sent to the
 phone, with an Undo op), and `cd10e1a2` (the window's line with a chat app connected), and
@@ -3614,7 +3771,9 @@ your lists, each with Undo."
   `records_delete`, `records_restore`). Entries added from a card or by an import are not in it;
   their Undo is the job's on the Jobs tab.
 
-### 🚧 A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, in no release yet
+### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `0e9fd5ca`, and `7a08a7b1` (merged as `41d94175`) for a signature with brackets in it, and
 `72671e3d` for the notice on a card asking when, in no release yet. Archie Mobile has no commit for it: the phone already shows the computer's own
@@ -3722,7 +3881,9 @@ fill it in, and then send it."
   pressing Edit it fills a blank. Never "Archie fills in the details for you."
 - ⚠️ **Cost, internal only, never on the site.**
 
-### 🚧 When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, in no release yet
+### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `5c47aef8`, with `7b53f54b` and `0795b7df` (merged as `41d94175`) for which messages get Try
 again, and `779f355d` for what a failed wake says, in no release yet. Archie Mobile has no commit for
@@ -3851,7 +4012,9 @@ sends your message again, so you don't have to type it again."
   shows it was not checked.
 - ⚠️ **Cost, internal only, never on the site.**
 
-### 🚧 A reply that says it saved something to your lists when nothing was saved is corrected under it, with Save it, and a new list takes its first entries at once: BUILT 2026-10-11, in no release yet
+### ✅ A reply that says it saved something to your lists when nothing was saved is corrected under it, with Save it, and a new list takes its first entries at once: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `bd8d9848`, and `92912cfa` (merged as `41d94175`) for which claims are corrected, in no
 release yet. Archie Mobile has no commit for it: the correction is part of the reply's words, and
@@ -3934,7 +4097,9 @@ it in the same reply."
   `acts_as_owner`).
 - ⚠️ **Cost, internal only, never on the site.**
 
-### 🚧 Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, in no release yet
+### ✅ Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `1250604c`, in no release yet. Nothing below may be said on a page until a release carries
 it.*
@@ -4015,7 +4180,11 @@ them as somebody new."
   tested on the money note (`a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`); no
   test builds this note for a teammate.
 
-### 🚧 Ask what's on, what's due, or what's free on some days, and Archie hands your agent your lists, calendar, and reminders for those days first; your agent hears when a booking it saves puts a trailer or a unit in two places; and the Calendar shows the dates on your lists: BUILT 2026-10-11, in no release yet
+### ✅ Ask what's on, what's due, or what's free on some days, and Archie hands your agent your lists, calendar, and reminders for those days first; your agent hears when a booking it saves puts a trailer or a unit in two places; and the Calendar shows the dates on your lists: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `b73f277c` (the two notes, the double-booking check, the Calendar tab's list dates, and what
 the computer sends the phone), `090901e7` (a teammate's own entries, which dates count, and the empty
@@ -4259,7 +4428,9 @@ your reminders, and your agent's routines. Press one on the computer and that li
   the Calendar tab said "Nothing on" under a Saturday full of bookings, because it drew only calendars
   (the module note in `schedule.rs` and the header of `src/app/calendar.tsx`).
 
-### 🚧 Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, in no release yet
+### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `8be34a0a`, with `cd10e1a2` and `e9b7e7c8` for the two boundaries they changed, and
 `623cec79`, `8dce19af`, `574ce7d4`, and `de7f3197` (merged as `973eedd0`), `e7957b0c`,
@@ -4467,7 +4638,11 @@ and one Undo takes back everything it added."
   archie-mobile `src/attach.ts`), so by the code it gets the same card, but nobody has tried it.
   Never say the phone imports until somebody has.
 
-### 🚧 Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, in no release yet
+### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `70831b8a` (the tool, the card, and the add), `a22cab8d` (a card waiting is not a change on
 the Jobs tab), `e7957b0c` (the card's notes read off the import's own report), and `91372059` and
@@ -4706,7 +4881,12 @@ list as one job that one Undo takes back."
   there and that this agent may write. It cannot make a list or add a column; on Archie for Teams
   making a list stays the owner's (`records_new_list` in `acts_as_owner`).
 
-### 🚧 Your agent brings your Follow Up Boss people, deals and open tasks onto your lists, on a card you check first: BUILT 2026-10-11, in no release yet
+### ✅ Your agent brings your Follow Up Boss people, deals and open tasks onto your lists, on a card you check first: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11, never yet run against a real Follow Up Boss account
+
+**Released in 0.3.8 on October 11, 2026.** Its notes do not name it, because it has never run
+against a real Follow Up Boss account, and the first boundary below still holds. The connections
+guide's line saying how it connects went in with the push after the release (Archie `7ffc1380`), and
+says it has not been tried on a real account.
 
 *Archie `e0727953` and `f545284f`, merged as `3ce9f598`, with `66ae7acc` for the stage note and
 `a896535f` for a deal's name, in no release yet. Nothing below may be said on a page until a release carries them, and nothing that rests
@@ -4834,7 +5014,9 @@ say yes. Your agent reads Follow Up Boss; it does not change anything there."
   reaches installed apps when Archie's main is pushed, with no release, so the new line is written
   and held in Archie's `docs/OPEN-THREADS.md` for that push (Archie `436f314c`).
 
-### 🚧 A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, in no release yet
+### ✅ A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026.** Its notes do not name it.
 
 *Archie `e0727953`, merged as `3ce9f598`, and `698c4cfb` for a tab past 5,000 rows, in no release
 yet. Nothing below may be said on a page until a release carries it.*
@@ -4889,7 +5071,11 @@ added until you press Add or say yes."
 - ⚠️ **On Archie Mobile** the card is drawn and answered (the card entry's phone boundary holds here
   too); sharing a Sheet is done on the computer.
 
-### 🚧 A list says how far along it is, finds unit 31 by its number, folds a unit listed twice into one, and says who a unit is rented to: BUILT 2026-10-10, in no release yet
+### ✅ A list says how far along it is, finds unit 31 by its number, folds a unit listed twice into one, and says who a unit is rented to: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `e9b7e7c8`, and archie-mobile `9bedab4` for the count on the phone, in no release yet.
 Nothing below may be said on a page until a release carries them. All four come from finding 28 of
@@ -7278,7 +7464,9 @@ neither may be said until a release carries it.
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
 
-### 🚧 Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), in no release yet
+### ✅ Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Built, not released. None of it is in 0.3.7 or in any Archie Mobile build in the stores. The
 wording below is Jett's to approve.*
@@ -8209,7 +8397,11 @@ change your calendar, or use the apps you connected."
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
 
-### 🚧 On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, in no release yet
+### ✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `309919b2` and archie-mobile `55eea97`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -8267,7 +8459,11 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
   wife's email with her on the team (the Archie repo's
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
 
-### 🚧 On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, in no release yet
+### ✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `fa238558`, `d2f7d60b` and `cdf669b8`, and archie-mobile `77c92e9`, `55eea97` and `6ea0e9d`,
 in no release yet.*
@@ -8307,7 +8503,11 @@ Calendar and Jobs say whose each reminder is."
   any on the Calendar.
 - ⚠️ The personal edition still says guest.
 
-### 🚧 On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, in no release yet
+### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `07aefec1` and archie-mobile `b8b893c`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -8360,7 +8560,11 @@ counts. Ask the agent what your team has been doing and it tells you the same."
   screens away under Setup. A team lead in the October 10 journey run could not find the team's
   activity at all (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
 
-### 🚧 On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, in no release yet
+### ✅ On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `b783f843` and archie-mobile `57512fe`, amended by Archie `d54534db` and archie-mobile
 `865bdf7` (2026-10-11), in no release yet. Nothing below may be said on a page until a release
@@ -8437,7 +8641,11 @@ from the same rules your agent follows. Archie Mobile shows the same for everyon
   paragraphs about the settings (the Archie repo's `docs/agent-ux/journeys/2026-10-10-findings.md`,
   finding 10).
 
-### 🚧 On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, in no release yet
+### ✅ On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
+archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
+review, so no page says the phone does it until 1.3 is on the App Store.
 
 *Archie `be50b989` and archie-mobile `247d8af`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -9094,7 +9302,9 @@ one."
 - A connected service's own requests (`http_request`) were already bound to that service's host and
   are not part of this entry.
 
-### 🚧 Fewer of your own questions handed to the web researcher, which reads only the one message it gets: BUILT 2026-10-10, in no release yet
+### ✅ Fewer of your own questions handed to the web researcher, which reads only the one message it gets: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
+
+**Released in 0.3.8 on October 11, 2026, and named in its notes.**
 
 *Archie `cf255232`, and `fc5d5e63` for the check in code (October 11, 2026), in no release yet. The
 router's baseline has not been recorded again since (`check-router-accuracy.py --record`, a paid run

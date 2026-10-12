@@ -3487,6 +3487,23 @@ inspection and appraisal dates."
   stopped, on either screen.
 - **Cost.** None until it is sent, and then the owner's own words. Internal, never on the site.
 
+**Amended October 12, 2026: a spreadsheet somebody else keeps has an answer** (Archie `0637d8da`, in
+no release; nothing in this paragraph may be said until a release carries it).
+
+- **The button.** When the owner keeps their work in a spreadsheet, the goodbye also has "Someone
+  else has it" (`someone_else_has_it` in `crates/archie-runtime/src/gateway/onboarding.rs`, put
+  there in `gateway/turn.rs` when the agent offered no buttons of its own). Pressed, it says "Someone
+  else has the spreadsheet. How do I get it to you?" as the owner, and code answers with no AI call:
+  ask them to email it, save the file from the email, press + beside the message box, choose it and
+  press Send, or in Archie Mobile press + and then Choose a file; nothing goes on a list until Add is
+  pressed (`answers_someone_else_has_it`). The phone draws the button as it draws any other. Tests:
+  `someone_else_having_the_spreadsheet_is_answered_in_code`, and the pipeline test above now presses
+  it.
+- ⚠️ **It says how, it does not fetch.** Nothing reads the owner's email for the file, and nothing
+  reaches the other person. Never "Archie gets the spreadsheet from your assistant".
+- ⚠️ **Only the button's own words are answered in code.** The same question typed in their own
+  words goes to the AI like any message.
+
 ### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

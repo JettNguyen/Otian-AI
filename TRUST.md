@@ -3801,6 +3801,19 @@ may be said until a release carries them.*
 *Amended October 11, 2026 for Archie `387c76c0`, `b73f277c`, `5fe1a548`, `574ce7d4`, `756ea25b` and
 `090901e7`, and archie-mobile `2b7dc96` and `241cc0b`, in no release yet.*
 
+**Amended October 12, 2026: what was checked, and what matched** (Archie `eb8a8725` and `dcc0ae03`,
+archie-mobile `c2d50ea` and `0747d37`, in no release yet). "Rentals: 10 of 14" read to owners as ten
+looked at and four skipped. A list read now says what was checked and what came of it, in Archie and
+Archie Mobile alike (`lookedLabel` in `src/app/lists.ts` and archie-mobile's `src/words.ts`, from
+`matched`, `on_days`, `entry`, `sum` and `partial` on `LookedAt`): "Looked at: all 14 rentals (10
+matched)", "(12 matched, 10 shown)" when a page was cut, "all 40 bookings (none on these days)" from
+the what's-on note, "Jenna Holt in People" for one entry opened, "Rentals (nothing on it yet)", and a
+count's sum as code added it ("8 matched; Units adds up to 35"). A teammate's read that left entries
+out says "Rentals, the entries you see" in place of "all". A date column the agent filled with a day
+nothing the owner said or it read gave is marked beside the saved entry: "Closing is my reading".
+Tests: `a_turn_says_what_it_saved_and_read`, and archie-mobile's `src/kept.test.ts`. The two
+bullets below that quote "Rentals: 1 of 14" and "Bookings: 2 of 40" describe the line before this.
+
 **Amended October 11, 2026:** on the October 11 journeys agents answered from empty lists as if they
 were whole: owners with nothing entered were told nothing was due. What changed, all in code:
 

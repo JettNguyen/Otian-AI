@@ -2794,7 +2794,9 @@ people, deals and open tasks onto a card (the entry "Your agent brings your Foll
 deals and open tasks onto your lists"), so "No Follow Up Boss" above, and the guide's line "Follow
 Up Boss is not on the list. Archie has no connection to it.", stop being true with the release that
 carries it. The guide (`data/marketplace/resources/what-archie-connects-to.json`) was not changed
-by that commit and still says it. A guide reaches installed apps from main with no release, so its
+by that commit and still says it, on purpose: its new line is written and held in Archie's
+`docs/OPEN-THREADS.md` (under the journey fix branch's push order, Archie `436f314c`) for the push
+that carries the release with Follow Up Boss. A guide reaches installed apps from main with no release, so its
 line has to change when that release ships and not before, or an app without the connection would
 read that it has one; the proposed wording above changes with it, to name Follow Up Boss as
 connected and not yet tried on a real account. The ban on "works with Follow Up Boss" stands until
@@ -3614,8 +3616,8 @@ your lists, each with Undo."
 
 ### 🚧 A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, in no release yet
 
-*Archie `0e9fd5ca`, and `7a08a7b1` (merged as `41d94175`) for a signature with brackets in it, in
-no release yet. Archie Mobile has no commit for it: the phone already shows the computer's own
+*Archie `0e9fd5ca`, and `7a08a7b1` (merged as `41d94175`) for a signature with brackets in it, and
+`72671e3d` for the notice on a card asking when, in no release yet. Archie Mobile has no commit for it: the phone already shows the computer's own
 answer to a press, so its Send says the same thing. Nothing below may be said on a page until a
 release carries them.*
 
@@ -3666,7 +3668,11 @@ fill it in, and then send it."
   school]. Press Edit it, put in what goes there, then send it." With more than one: "This draft
   still has 2 blanks to fill in: [Name], [Price]." On a chat app with no buttons the last sentence is
   "Reply edit it to change it, fill the blank in, then send it.", and a typed "edit it" opens the
-  same choices the button does (`typed_verb` in both lanes).
+  same choices the button does (`typed_verb` in both lanes). On an email card asking when, or waiting
+  for its time, which has Back to draft and no Edit it, it says "Press Back to draft, then Edit it,
+  put in what goes there, then send it." (or "Reply back to draft, then reply edit it, ...") (the
+  `edit_shown` argument, set from the card's state in `email/replies/actions.rs`, Archie
+  `72671e3d`).
 - **On both apps.** The answer to the press goes back as a refusal. Archie's window shows it as a
   notice (`InAppUpdate::Acked` with `must_show`, sent on as `inapp:notice` in
   `src-tauri/src/inapp.rs`). Archie Mobile hears it as the answer to its `tap` op
@@ -3695,11 +3701,12 @@ fill it in, and then send it."
 - ⚠️ **Email and text cards only.** A message the agent writes into the chat for you to copy has no
   Send to hold, and a message through a connected CRM (`ghl_message_send`), or anything else approved
   with Confirm, is not checked.
-- ⚠️ **On a card asking when, or waiting for its time, Edit it is behind Back to draft, and the
-  notice does not say so.** A card the agent drafts with a time starts out asking when, and a card
-  waiting for its time is scheduled; neither has an Edit it button or takes a typed "edit it"
-  (`schedule_buttons` and `scheduled_buttons` in `email/replies/card.rs`, `live_verbs` in
-  `email/replies/actions.rs`), while the notice still says to press Edit it.
+- ⚠️ **On a card asking when, or waiting for its time, Edit it is behind Back to draft.** A card the
+  agent drafts with a time starts out asking when, and a card waiting for its time is scheduled;
+  neither has an Edit it button or takes a typed "edit it" (`schedule_buttons` and
+  `scheduled_buttons` in `email/replies/card.rs`, `live_verbs` in `email/replies/actions.rs`). The
+  notice names Back to draft first there (Archie `72671e3d`); before that commit it told the owner to
+  press Edit it, a button those cards do not have.
 - ⚠️ **The drafters that work unasked keep their own rules.** The mail watch's drafter is told "No
   placeholders like [Name] unless the information is truly unknown" and the text drafter "No
   placeholders in square brackets" (`triage.rs` in each lane), so they leave blanks less often than
@@ -4013,15 +4020,17 @@ them as somebody new."
 *Archie `b73f277c` (the two notes, the double-booking check, the Calendar tab's list dates, and what
 the computer sends the phone), `090901e7` (a teammate's own entries, which dates count, and the empty
 answers reaching an agent), `57147dfc` (the journey harness only) and `92526419` (a teammate's own
-add or change, and a list of birthdays named), and archie-mobile `347decf` (the phone's Calendar), in
-no release yet. Nothing below may be said on a page until a release carries them.*
+add or change, and a list of birthdays named), `698c4cfb` (a card's Add and the chat's import card)
+and `cf8ab818` (the Lists screen's own add, change, and import), and archie-mobile `347decf` (the
+phone's Calendar), in no release yet. Nothing below may be said on a page until a release carries them.*
 
 **Proposed wording, Jett's to approve:** "Ask your agent what's on Saturday, what's due this week,
 or which trailers are free next weekend, and Archie gathers what your lists, your calendar, and your
 reminders hold for those days and puts it in front of your agent before it answers. When your agent
 saves a booking that puts a trailer or a unit in two places at once, the booking is saved as you
-asked, and your agent is told which booking it runs into and to ask you which one should change. The
-Calendar tab, in Archie and in Archie Mobile, shows the dates on your lists beside your calendar,
+asked, and your agent is told which booking it runs into and to ask you which one should change. A
+booking you type on the Lists tab, or that comes in from a spreadsheet or a card of entries, is
+checked the same way, and Archie tells you which booking it runs into. The Calendar tab, in Archie and in Archie Mobile, shows the dates on your lists beside your calendar,
 your reminders, and your agent's routines. Press one on the computer and that list opens."
 
 **Why it's true** (the Archie repo unless it says archie-mobile; both editions):
@@ -4120,6 +4129,21 @@ your reminders, and your agent's routines. Press one on the computer and that li
   (Archie `92526419`). Tests: `a_trailer_on_two_bookings_the_same_day_is_flagged_by_the_write`,
   `units_moved_or_short_are_flagged_by_the_write`, and the end of
   `a_teammate_hears_their_own_days_and_a_count_of_the_rest`.
+- **Booked twice from a card, an import, or the Lists screen** (Archie `698c4cfb` and `cf8ab818`).
+  The same `clashes` runs on the other ways a row goes on a list in Archie. A card's Add (`add` in
+  `gateway/drafted.rs`) and the chat's import card (`import_into` in `gateway/import_offer.rs`) ask
+  `records::clashes_of` about the entries they added, each clash said once, and end their sentence
+  with three at most: "Something here is in two places at once. T2 is already on "Smith wedding"
+  (Booked, Sat Oct 17). Everything was added as written; to change one, open the list in Archie, on
+  my Knowledge tab, under Lists." (`clash_sentence` in `records.rs`). More than 200 at once
+  (`CLASH_CHECK_MAX`) are not checked, and the sentence says to look over the busy days on the
+  Calendar tab instead. A row typed on the Lists screen (`records_record_create`, and
+  `records_record_update`, checked against the row as it was) and a file imported there
+  (`records_import_apply`), all in `src-tauri/src/commands/knowledge_records.rs`, answer with the
+  same sentences, and the screen says them: after "Added" or "Saved" in a toast held open for half
+  a minute, as one that asks something of the owner is, and in the import's done line (`clashLine` in `src/app/clashes.ts`). Tests:
+  `a_bulk_add_is_checked_for_double_bookings` in `schedule.rs` and
+  `a_booking_saved_by_hand_says_what_it_puts_in_two_places` in `knowledge_records.rs`.
 - **The Calendar tab.** The `list_dates` command (`src-tauri/src/commands/routine.rs`, registered in
   `src-tauri/src/lib.rs`) answers with `schedule::list_dates`, the same reading as the note, so the
   screen and the agent agree about a day: dates that look ahead and birthdays, with a finished row off
@@ -4162,17 +4186,15 @@ your reminders, and your agent's routines. Press one on the computer and that li
 **The boundaries.**
 
 - ⛔ **Never "it can't double-book you", "no double bookings", or "prevents double booking".** The
-  check runs after the save, on the agent's side: the booking stays as asked, and the owner hears about
-  it only if the agent's reply says so. Nothing on a screen marks it: not the Lists tab, the Calendar,
-  or the Saved in line under the reply.
-- ⛔ **Never "every booking is checked".** Only the agent's own add or change of one row. A booking
-  typed on the Lists tab (`records_record_create` and `records_record_update` in
-  `src-tauri/src/commands/knowledge_records.rs`, which write through `create_record` and
-  `update_record` in `crates/archie-core/src/bundle/records.rs`), one brought in from a spreadsheet
-  (`records_import_apply`, or `import_rows` for the chat's import card), and entries added from a card
-  of entries the agent drafted (`gateway/drafted.rs`, also `import_rows`, whether Add is pressed on the
-  computer or on the phone) are not checked. Archie's `docs/OPEN-THREADS.md` carries the Lists tab
-  half.
+  check runs after the save, and nothing stops one: the booking stays as asked or as typed. For the
+  agent's own add or change, the owner hears about it only if the agent's reply says so; a card's
+  Add, the chat's import card, and the Lists screen say it themselves (Archie `698c4cfb` and
+  `cf8ab818`). Nothing marks it on the Calendar or in the Saved in line under the reply.
+- ⛔ **Never "every booking is checked".** The agent's own add or change, a card's Add (on the
+  computer or the phone, since the computer adds it), the chat's import card, and the Lists screen's
+  add, change, and import are. More than 200 added at once are not, and the sentence says so. Before
+  Archie `698c4cfb` and `cf8ab818` only the agent's own add or change of one row was checked, and a
+  card or an import could put a trailer on two bookings without a word.
 - ⚠️ **On Archie for Teams the check reads every booking, and names one the teammate does not see
   only as a teammate's.** A trailer on a colleague's job is not free for anybody, so a teammate
   adding or moving a booking still hears that it is taken, as "a teammate's booking" (`clashes` with
@@ -4240,8 +4262,10 @@ your reminders, and your agent's routines. Press one on the computer and that li
 ### 🚧 Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, in no release yet
 
 *Archie `8be34a0a`, with `cd10e1a2` and `e9b7e7c8` for the two boundaries they changed, and
-`623cec79`, `8dce19af`, `574ce7d4`, and `de7f3197` (merged as `973eedd0`), `e7957b0c`, and
-`84719937` for what was amended on October 11, 2026, in no release yet. Nothing below may be said on
+`623cec79`, `8dce19af`, `574ce7d4`, and `de7f3197` (merged as `973eedd0`), `e7957b0c`,
+`84719937`, `698c4cfb` (the chat card's cut, a phone against an email, and the double-booking
+check), and `cf8ab818` (that check on the Lists screen's import) for what was amended on October 11,
+2026, in no release yet. Nothing below may be said on
 a page until a release carries it.*
 
 **Proposed wording, Jett's to approve (amended October 11, 2026):** "Keep your units, customers,
@@ -4258,7 +4282,10 @@ and one Undo takes back everything it added."
 - **One reader.** `crates/archie-domain/src/import.rs`: `read_sheet` reads a .csv, .tsv, .xlsx,
   .xlsm, .xls, or .ods file (workbooks through calamine), takes the first sheet with anything on it
   and its first row with anything in it as the header, and stops at 5,000 rows (`MAX_ROWS`); the
-  Lists screen says the file was cut, and the chat card does not. A sheet the spreadsheet app named
+  Lists screen says the file was cut, and so does the chat card, on the card and in what it says
+  once added: "This file has more than 5,000 rows. The first 5,000 are read; send the rest as a
+  second file." (`cut_sentence` in `import_offer.rs`, Archie `698c4cfb`; test
+  `a_file_cut_at_the_limit_says_so`). A sheet the spreadsheet app named
   itself ("Sheet1", "Table 1") takes the file's name instead (`generic_sheet_name`). `guess_columns`
   matches columns by name, then by what the four lines of work's own exports call a column
   (`ALSO_CALLED`, read off `data/setups/`: "Unit #" is Unit number, "Rate" is Price, "Close date" is
@@ -4286,7 +4313,9 @@ and one Undo takes back everything it added."
   `import.rs`, Archie `623cec79`). A row is one already seen, on the list or higher in the file,
   when it has the same address on the same date, on a list that keeps both and does not name a
   different person or thing there; failing that, the same name with the same phone or email,
-  however either is written; and where neither can be told, when every value it has is the same,
+  however either is written, where both sides have a phone, or both an email, to compare (a phone on
+  one side and only an email on the other leaves it to the name, Archie `698c4cfb`); and where
+  neither can be told, when every value it has is the same,
   or, on a list with one entry each (no date that says which entry a row is), when it has the same
   name and no value that differs. Case, spaces, and punctuation never count, a phone is its digits,
   an email is lowercase, and an address takes the usual short forms (Street is St). A column that
@@ -4401,9 +4430,12 @@ and one Undo takes back everything it added."
   under is a real date the other way round, so 3/10/2026 meant as October 3 is read as March 10
   without a word.
 - ⚠️ **A repeat is judged by the list's shape, so it can miss and it can catch.** The address and
-  date test needs a list that keeps both. The phone or email test is made whenever both sides have a
-  name and either one, and decides alone, so a Dana Miller with only a phone on the list and only an
-  email in the file comes in as a second Dana Miller. Otherwise a row must match in every value it
+  date test needs a list that keeps both. The phone or email test is made when both sides have a
+  name and the same kind of contact, and then decides alone, so a Dana Miller with a different phone
+  comes in as a second Dana Miller. A phone on one side and only an email on the other decides
+  nothing, and the rules that follow decide instead (Archie `698c4cfb`, test
+  `a_phone_on_one_side_and_an_email_on_the_other_leaves_it_to_the_name`); before that commit it
+  decided alone, and that Dana Miller came in as a second one. Otherwise a row must match in every value it
   has, or, on a list with one entry each, share the name with no value that differs. So two
   different people with the same name, no phone or email, and nothing else that differs, on a list
   with one entry each such as People, are taken for one and the second is left out (and named, so it
@@ -4418,9 +4450,9 @@ and one Undo takes back everything it added."
   deletes rows only), and the screen says so, naming the column and the pencil that removes it
   (`RecordsImportDialog`, `cd10e1a2`).
 - ⚠️ **Limits:** the first sheet only, 5,000 rows, 20 MB from the Lists screen, and 10 MB dropped in
-  the chat, where it is filed as a document first (`KNOWLEDGE_MAX_FILE_SIZE`). A file sent in the
-  chat is cut at 5,000 rows without a word: the chat card never reads the sheet's `cut`
-  (`import_offer.rs`), where the Lists screen says so.
+  the chat, where it is filed as a document first (`KNOWLEDGE_MAX_FILE_SIZE`). Past 5,000 rows the
+  rest is not read, and both the Lists screen and the chat card say so; before Archie `698c4cfb` the
+  chat card cut it without a word.
 - ⚠️ **An import leaves out a repeat on any list, but only a unique column stops one anywhere
   else.** The agent's own add and the Lists screen's add refuse only a value a unique column
   already holds (`unique_clash`); the agent's add names a likely match and asks after (the entry
@@ -4440,9 +4472,11 @@ and one Undo takes back everything it added."
 *Archie `70831b8a` (the tool, the card, and the add), `a22cab8d` (a card waiting is not a change on
 the Jobs tab), `e7957b0c` (the card's notes read off the import's own report), and `91372059` and
 `d37d59a5` (merged as `ae286d28`: Approve on the Jobs tab, a number in a yes, a yes the agent hears,
-its undo, a teammate's card, and an entry on a card not added on its own), and archie-mobile
-`593ae48` (the phone's card), `241cc0b` (the phone's chat drawing it), `efa1f16` (its Needs you item)
-and `cf33823` (that item's label), in no release yet. Nothing below may be said on a page until a
+its undo, a teammate's card, and an entry on a card not added on its own), `698c4cfb` (the
+double-booking check on Add), `c0f5533b` (a card left off with the agent stopped), and `0ad0380d`
+(which chat a card is in, for the phone), and archie-mobile `593ae48` (the phone's card), `241cc0b`
+(the phone's chat drawing it), `efa1f16` (its Needs you item), `cf33823` (that item's label), and
+`9442bc1` (a card in another conversation), in no release yet. Nothing below may be said on a page until a
 release carries them, and nothing about the phone until the first boundary allows it.*
 
 **Proposed wording, Jett's to approve:** "Hand your agent a photo of a page or a list you pasted, or
@@ -4632,17 +4666,27 @@ list as one job that one Undo takes back."
   adds and changes (`note` in `gateway/kept.rs`), and Saved lately reads `records_create`,
   `records_update`, and `records_apply_pending_change` steps only (`agent_recent_saves` in
   `src-tauri/src/commands/screen.rs`). A card's entries are named on the card and as its job.
-- ⚠️ **A card gets neither check a single add gets.** The look across the agent's other lists for
-  the same person or thing (`also_on_your_lists` in `do_create_scoped`) is not run on a card's
-  entries, which `import_rows` writes, and nor is the double-booking check (`schedule::clashes`), so
-  a card can put a trailer on two bookings without a word.
+- ⚠️ **A card gets one of the two checks a single add gets.** What its Add puts in two places at
+  once is said at the end of the card's sentence, three at most: "Something here is in two places at
+  once. T2 is already on "Smith wedding" (Booked, Sat Oct 17). Everything was added as written; to
+  change one, open the list in Archie, on my Knowledge tab, under Lists." (`records::clashes_of` and
+  `clash_sentence`, called from `add` in `drafted.rs`, with a teammate's card naming a booking they
+  do not see only as a teammate's; Archie `698c4cfb`). Before that commit a card could put a trailer
+  on two bookings without a word. The look across the agent's other lists for the same person or
+  thing (`also_on_your_lists` in `do_create_scoped`) is still not run on a card's entries, which
+  `import_rows` writes.
 - ⚠️ **A change made on the card lives only on the screen it was made on until Add.** The
   computer's and the phone's changes are not shared, and Approve on the Jobs tab adds the entries as
   the agent drafted them.
 - ⚠️ **Add needs the agent running, and a card does not wait forever.** On a stopped agent Add says
   "This agent isn't running, so it can't add these yet. Start it from its page, then press Add
-  again." No thanks on the Jobs tab with the agent stopped drops the card there, and the card in the
-  chat keeps its buttons until one is pressed. A card waits two weeks at most (`MAX_AGE_MS` in
+  again." Not now on the card, and No thanks on the Jobs tab, work on a stopped agent: the card is
+  left off and says "Left off. Nothing was added to Rentals." in Archie's window and on Archie
+  Mobile (`left_off_here` in `src-tauri/src/commands/routine.rs`, which finds the card by the
+  proposal it shows; Archie `c0f5533b`). A copy of the card on Telegram or another chat app keeps
+  its buttons until the agent runs again, and a press there then says the card is no longer
+  waiting. Before `c0f5533b`, No thanks left the card in the chat with its buttons up, and Not now
+  answered with the sentence about Add. A card waits two weeks at most (`MAX_AGE_MS` in
   `proposals.rs`), and sooner when more than 50 things are waiting (`MAX_KEPT`), and it goes with New
   chat (`clear_chat`); after any of those, or after a corrected card replaces it, the old card stays
   on screen and its Add says "That card is no longer waiting. Ask for the entries again and a new
@@ -4651,18 +4695,21 @@ list as one job that one Undo takes back."
   teammate's card to the chat app alone (`propose_rows` in `mirror.rs`), so a teammate can add or
   leave off the whole card but cannot change an entry, and the card's line pointing to Archie and
   Archie Mobile does not hold for them.
-- ⚠️ **The phone's Needs you can point at a chat that does not hold the card.** It lists every card
-  waiting on the agent (`phone.rs`), but its chat carries only the owner's own conversation
-  (`build_chat`), so a teammate's card, or one put up in a skill's workshop chat, still says "The
-  card is in the chat: press Add or Not now on it", and opening the chat finds no card there.
+- ⚠️ **The phone answers a card only in the owner's own conversation.** Its chat carries only that
+  one (`build_chat` in `phone.rs`). A card put up in a teammate's conversation or a skill's workshop
+  chat is listed in the phone's Needs you with "The card is in another conversation." and the way to
+  answer it on the computer, Approve or No thanks on the agent's Jobs tab (`in_owner_chat` in the
+  staged list `phone.rs` sends, Archie `0ad0380d`; `inThisChat` in archie-mobile
+  `src/screens/Now.tsx`, `9442bc1`). Before those commits it said "The card is in the chat: press
+  Add or Not now on it", and opening the chat found no card there.
 - ⚠️ **One list that already exists, with its own columns.** A card fills a list that is already
   there and that this agent may write. It cannot make a list or add a column; on Archie for Teams
   making a list stays the owner's (`records_new_list` in `acts_as_owner`).
 
 ### 🚧 Your agent brings your Follow Up Boss people, deals and open tasks onto your lists, on a card you check first: BUILT 2026-10-11, in no release yet
 
-*Archie `e0727953` and `f545284f`, merged as `3ce9f598`, with `66ae7acc` for the stage note, in no
-release yet. Nothing below may be said on a page until a release carries them, and nothing that rests
+*Archie `e0727953` and `f545284f`, merged as `3ce9f598`, with `66ae7acc` for the stage note and
+`a896535f` for a deal's name, in no release yet. Nothing below may be said on a page until a release carries them, and nothing that rests
 on it working until it has run against a real Follow Up Boss account (the first boundary).*
 
 **Proposed wording, Jett's to approve:** "Connect Follow Up Boss on your agent's Connections tab,
@@ -4769,8 +4816,11 @@ say yes. Your agent reads Follow Up Boss; it does not change anything there."
   selling, price, first address; deals: name, people, price, projected closing date, stage; tasks:
   title with the person, due date. Notes, custom fields, commissions and history do not. On the
   real estate setup's People list, price and address have no column and are left out, and its Deals
-  list has no column for a deal's name, so a deal not named like a street address arrives with no
-  name.
+  list has no column for a deal's name. A deal not named like a street address comes in with Address
+  blank, and the card names it in the entry's note: "Follow Up Boss calls this deal “Miller buyer
+  search”, which is not an address, so Address would be left blank" (`unplaced_deal_note` in
+  `follow_up_boss.rs`, Archie `a896535f`). Once added, the entry keeps its Client, price, date, and
+  stage, and no name of its own. Before `a896535f` the card did not say it.
 - ⚠️ **Most stages are left for the owner.** Only Lead and Closed are put in the list's words. A
   stage the list does not have (Nurture, Sphere) is marked on the card and left blank unless the
   owner picks one there. Archived deals and finished tasks are not read, and neither is Follow Up
@@ -4780,12 +4830,14 @@ say yes. Your agent reads Follow Up Boss; it does not change anything there."
   only on the computer, because the relay never carries one.
 - ⚠️ **What Archie connects to says otherwise until it changes.** That guide's line "Follow Up Boss is
   not on the list. Archie has no connection to it." is not changed by these commits, so it has to
-  change in the release that carries them (the entry "What Archie connects to, as a guide").
+  change in the release that carries them (the entry "What Archie connects to, as a guide"). A guide
+  reaches installed apps when Archie's main is pushed, with no release, so the new line is written
+  and held in Archie's `docs/OPEN-THREADS.md` for that push (Archie `436f314c`).
 
 ### 🚧 A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, in no release yet
 
-*Archie `e0727953`, merged as `3ce9f598`, in no release yet. Nothing below may be said on a page
-until a release carries it.*
+*Archie `e0727953`, merged as `3ce9f598`, and `698c4cfb` for a tab past 5,000 rows, in no release
+yet. Nothing below may be said on a page until a release carries it.*
 
 **Proposed wording, Jett's to approve:** "Share a Google Sheet with your agent on its Connections
 tab, then ask it to bring the sheet into one of your lists. What is on it comes in on a card,
@@ -4821,8 +4873,11 @@ added until you press Add or say yes."
   picker on the Connections tab.
 - ⚠️ **One tab at a time:** the first, or the one the owner names. The agent is told the others'
   names.
-- ⚠️ **A tab past 5,000 rows is cut without a word.** The table is cut at 5,000 rows, and the
-  bring-in does not say so (`sheet_from_grid` marks the cut; `bring_in.rs` never reads it).
+- ⚠️ **A tab past 5,000 rows is cut, and the agent is told.** The table is cut at 5,000 rows
+  (`sheet_from_grid` marks it), and the bring-in tells the agent so and what brings the rest in: put
+  them on a second tab and ask for that tab (`result` in `bring_in.rs`, with
+  `read_only_the_first_rows`; Archie `698c4cfb`, test `a_tab_cut_at_the_limit_is_said`). The owner
+  hears it only in the agent's reply. Before that commit the cut was not said at all.
 - ⚠️ **Columns are matched by their names, and the card cannot change the match.** The import
   screen for a dropped file lets the owner change which column goes where; the card does not. A
   column the list has no match for is left out and named to the agent, and an entry can still be

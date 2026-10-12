@@ -2449,6 +2449,39 @@ sheet. Change any of it by asking."
   saved details included (`ArrivalCard` in archie-mobile `src/screens/Arrival.tsx`), its Rules and
   Saved rows pointing to the computer's Personality tab. Rewrite this bullet in that pass.
 
+**Amended October 12, 2026: a real estate deal carries its inspection, appraisal and loan approval
+dates, and a list made from a setup gets what the setup gained** (Archie `72697038`, on the
+`journey-fixes` branch and in no release; nothing in this paragraph may be said until a release
+carries it).
+
+**Proposed addition to the wording, Jett's to approve:** "A deal keeps its closing, inspection,
+appraisal and loan approval dates."
+
+- **The columns.** Deals in `data/setups/real-estate.json` gained Inspection date, Appraisal date
+  and Loan approval date, after the closing date, and People's Lead stage gained Showing, between
+  Following up and Active. Round three of the journey tests had realtors whose deals turned on those
+  dates with nowhere to keep them (Archie `docs/agent-ux/journeys/2026-10-12-fix-plan.md`, A.5).
+- **Older lists catch up, once.** When an agent starts, `catch_up_with_setup`
+  (`crates/archie-runtime/src/gateway/onboarding.rs`, called from `run_loop` in `gateway/worker.rs`,
+  doing the work in `crates/archie-runtime/src/records.rs`) gives each list its setup made any
+  column or choice the setup has and the list lacks. A new column is optional; a new choice goes
+  after the one the setup puts before it. Nothing is renamed, retyped, removed or reordered, and a
+  list another agent owns is left alone. Each column and choice is offered once (`setup-seen.json`
+  in the agent's folder), so one the owner takes off stays off. This replaces "a list made before
+  keeps its columns" above, from the release that carries it. Test:
+  `a_setups_new_columns_and_choices_reach_its_older_lists_once`.
+- **Blanks are filled on the card.** A card of entries the agent drafted for a list now has every
+  date column of that list, filled or not, so a missing inspection date can be put in under Change
+  before Add (`draft` in `crates/archie-runtime/src/gateway/drafted.rs`). An empty column shows on no
+  entry's line. Test: `every_date_column_is_on_the_card`. The phone's card reads the same columns.
+- **Cost.** About 17 tokens more in the lists' columns, cached, on an agent with the real estate
+  lists (Archie's `docs/COST-MEASURED.md` section 28). Internal, never on the site.
+- ⚠️ **Dates, not reminders.** Nothing watches these dates or warns before one. Never say Archie
+  tracks contingency deadlines or tells you when an inspection is due; the agent answers about them
+  when asked, from the list.
+- ⚠️ **Follow Up Boss deals bring no such dates.** A deal brought in from Follow Up Boss fills the
+  columns its read has words for, and these three are not among them.
+
 ### ✅ Where your information goes: a guide in Archie, and the same page on this site to print: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -3422,13 +3455,37 @@ Up Boss, the goodbye offers to connect it, and your agent brings your people in 
   calendar or email is not connected"). Until a release carries that, this boundary stands.
 - ⚠️ **On the phone, no Connect button either.** Connecting an app means pasting its key on the
   computer, so the phone shows the goodbye's words only, as it does for a calendar. From
-  archie-mobile `36b27f1` (in no build yet) it also shows a line saying where on the computer to
-  press it.
+  archie-mobile `36b27f1` and `ff5692b` together (in no build yet) it also shows a line saying where
+  on the computer to press it. `36b27f1` alone wrote the line and the chat dropped it, because
+  `shows` in archie-mobile `src/shows.ts` left out any entry with no words it did not know.
 - ⚠️ **A name it does not recognize gets the export button.** A misspelling, or a product with
   another name, is offered Add the exported file as before, and somewhere else with no Follow Up
   Boss named still gets no way in.
 - ⚠️ **It opens the form; it does not connect anything.** The owner makes the key in Follow Up Boss
   and pastes it, and everything the Follow Up Boss entry says it is not holds here too.
+
+**Amended October 12, 2026: a realtor who keeps their deals in their head is handed a line to fill
+in** (Archie `72697038` and archie-mobile `ff5692b`, in no release or build; nothing in this paragraph
+may be said until a release carries it).
+
+**Proposed addition to the wording, Jett's to approve:** "If your deals are in your head, the
+goodbye puts a line in the message box naming what to tell it: address, client, and the closing,
+inspection and appraisal dates."
+
+- **The button.** When the interview matched the real estate setup and the owner keeps their work
+  in their head, `way_in` gives "Tell me your open deals" (the setup's `typed_in`, in
+  `data/setups/real-estate.json` and `crates/archie-domain/src/setup.rs`). A press puts "My open
+  deals (address, client, closing, inspection, appraisal): " in the message box after anything
+  already typed, with the cursor at its end, and sends nothing (`typeIn` in
+  `src/app/conversation.tsx`; on the phone, `typeIn` in archie-mobile `src/screens/Chat.tsx`, which
+  the computer sends as `fills` from `src-tauri/src/phone.rs`). What they type goes to the agent
+  like any message, and entries it drafts go on the card first (the entry on bringing a spreadsheet
+  into a list). Test: `work_kept_in_their_head_gets_the_setups_line_to_fill_in`.
+- ⚠️ **Real estate only.** The other three setups have no such line, so in their head there is still
+  no button for them, as the boundary above says. Never "it asks every business for its open work".
+- ⚠️ **Not in a chat app,** for the reason the boundary above gives, and not while the agent is
+  stopped, on either screen.
+- **Cost.** None until it is sent, and then the owner's own words. Internal, never on the site.
 
 ### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

@@ -4318,6 +4318,22 @@ them as somebody new."
   them or bring in a spreadsheet (`empty_lists_note`). A list with fewer than its owner's count ends
   the note with the same "Only ... are entered" sentence (`partly_entered`). Test:
   `who_to_call_on_empty_lists_says_they_are_empty`.
+- **Amended October 12, 2026: every lead list, more ways to ask, and the quiet length from the
+  message** (Archie `3c4ab109`, in no release yet). `asks_who_to_call` also matches followed up,
+  following up, heard back, hear back, get back to, gone quiet, went quiet, lead and leads. The note
+  also reads Lead Desk's own list (Your leads, the slug `leads`), where open means New, Contacted,
+  Talking or Proposal and the days since contact come from Last moved; a lead on People and on Your
+  leads with the same name is said once, at the more recent contact. How long counts as cold comes
+  from the message when it says a length (`quiet_after`: "in 24 hrs" is one day, "two weeks" is
+  fourteen, "a couple of days" is two), and is 7 days when it says none; the note says the length it
+  used. Tests: the end of `the_call_list_is_worked_out_from_people_and_deals`, and
+  `the_quiet_length_comes_from_the_message`.
+- **Amended October 12, 2026: maybe already there** (Archie `72183ff9`, in no release yet). A shared
+  name word no longer names a row when both the new row and the other carry a phone or an email,
+  since those already answered; a row with neither is still matched on its name. The note to the
+  agent says what to ask, in one sentence, naming the one it may be and its list ("Is this the Dana
+  Miller already on People?"), and to say nothing about checking. Test: the end of
+  `a_new_row_names_who_it_may_already_be`.
 - **Cost.** Nothing on any other message. About 150 tokens with every group empty, plus about 12 a
   name, below the cache line on a message about calls (270 with ten names, counted October 10, 2026;
   Archie's `docs/COST-MEASURED.md` section 25 and the comment on `call_list_note`). Since Archie
@@ -4329,9 +4345,10 @@ them as somebody new."
   group, and the real estate setup's rule tells the agent to text a lead only after they said it is
   fine. Nothing in code stops a text draft to them. Never "Archie enforces texting consent", "TCPA
   compliant", or "it won't text somebody who opted out".
-- ⚠️ **Only lists called People and Deals** (the slugs `people` and `deals`, which the real estate
-  setup makes). Every other agent gets no call list, and a client list under another name is not
-  read.
+- ⚠️ **Only lists called People, Deals and Your leads** (the slugs `people` and `deals`, which the
+  real estate setup makes, and `leads`, which Lead Desk makes; the last since Archie `3c4ab109`).
+  Every other agent gets no call list, and a client list under another name is not read. Two leads
+  are the same lead only when their names are written the same way.
 - ⚠️ **It knows what was written down.** No Last contact reads as "no contact written down", not as
   proof of silence, and an anniversary needs the deal at Closed with its closing date.
 - ⚠️ **Only an email reply sent through Archie stamps Last contact.** A text, a call, or mail sent
@@ -4340,10 +4357,13 @@ them as somebody new."
 - ⚠️ **"Maybe already there" adds first and asks after.** The row is already on the list when the
   check runs; nothing is merged or refused; a shared last name is enough to be named; and only rows
   the agent adds one at a time are checked, not rows added on the Lists screen, by an import, or from
-  a card of entries the agent drafted (Archie `70831b8a`, in no release yet). Never "it prevents
-  duplicate contacts".
+  a card of entries the agent drafted (Archie `70831b8a`, in no release yet). Since Archie
+  `72183ff9`, a shared last name alone is enough only when one of the two rows has no phone and no
+  email. Never "it prevents duplicate contacts".
 - ⚠️ **7 and 90 days are a default the fix plan left open** for Jett ("cold means 7 days and a past
-  client is due after 90"). The note tells the agent "Cold means 7 days or more with no contact".
+  client is due after 90"). The note tells the agent "Cold means 7 days or more with no contact",
+  or the length the message asked for (since Archie `3c4ab109`). The 90 days and the birthday and
+  anniversary windows do not move with the message.
 - ⚠️ **Word-matched,** like the money note. Nothing new on either screen; the answer reaches the
   phone like any reply.
 - ⚠️ **On Archie for Teams a teammate hears their own people and deals** (Archie `090901e7`, in no
@@ -4440,6 +4460,18 @@ your reminders, and your agent's routines. Press one on the computer and that li
   no reminder waiting, it is told to say nothing here keeps days rather than calling the days open.
   The note sits below the cache line, so it is paid for on that turn only. Test:
   `an_empty_answer_says_why_it_is_empty`.
+- **Amended October 12, 2026: what is under way, and what has no date** (Archie `3c4ab109`, in no
+  release yet). On a question about today or later, the note adds two sections after the days.
+  "Still running on these days": a row on a list with a start and an end (`days_of`'s pair, such as
+  Starts and Ends) that began before the first day asked about and has not ended by it, or has no end
+  written down, with since and until in words. "Open with no date written down": a row on a list with
+  a stage column and a date that looks ahead, whose stage is set and not over, not tentative, and
+  that has none of those dates filled in, such as a deal at Offer with no closing (`list_lines` in
+  `schedule.rs`, `running_into`). Five a section, then how many more (`MORE_AFTER`). To-dos with no
+  due date are not in it. When nothing has a date on the days but either section has something,
+  the note says "Nothing has a date on these days." and gives the sections. A row in the first
+  counts toward the list's number on the line under the reply. Test:
+  `what_is_on_names_what_is_under_way_and_what_has_no_date`.
 - **What is free.** When the question also asks what is free (`asks_what_is_free`: free, available,
   open, spare, left, unbooked, not booked, can I book, do I have a, and more) and names a list of
   things that get booked, or one of them by name, `free_note` works it out from the bookings. A list of
@@ -8776,6 +8808,14 @@ counts. Ask the agent what your team has been doing and it tells you the same."
   messages each teammate sent in the same days, and that what they said is the owner's to read on the
   computer, not the agent's to quote. A teammate asking hears only their own jobs. Test:
   `the_owner_hears_how_much_each_teammate_asked_and_a_teammate_does_not`.
+- **Amended October 12, 2026: a teammate by name** (Archie `3c4ab109`, in no release yet). When the
+  owner's typed message names someone on the team by first name beside a word that asks what they
+  did (from, did, done, doing, today, yesterday, week, heard, been, anything, work, jobs, stops,
+  finished, busy, up), the turn carries that teammate's recorded jobs from the last two days before
+  the agent answers, with the same sentence `work_recent` says when there are none: that questions
+  and look-ups are not in the record and are not evidence either way (`teammate_note` in
+  `tools_work.rs`, called from `run_target_attributed`). Test:
+  `the_owner_asking_about_a_teammate_gets_their_record`.
 
 **Boundaries:**
 - ⛔ Never that the phone shows what teammates said. It shows counts and times; the conversations

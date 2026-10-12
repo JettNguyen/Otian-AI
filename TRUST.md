@@ -9170,6 +9170,16 @@ Calendar and Jobs say whose each reminder is."
   any on the Calendar.
 - ⚠️ The personal edition still says guest.
 
+**Amended October 12, 2026 (Archie `dd6ab291`, in no release yet).** The agent's instructions said
+until now that a teammate could not set a reminder, so on round three of the journey tests a
+teammate asking for one was told "Only Megan can" on all three passes, although the tool would
+have set it; the line now says they can (`REMINDERS_LINE_GUEST` in `gateway/prompt.rs`). And the
+owner can set one for a teammate by name ("remind Jason at 3 to call Ellen"): it goes to that
+teammate's own chat with the agent (`teammate_named` in `gateway/tools_reminders.rs`).
+- ⛔ Never that the owner can remind a teammate who has not messaged the agent privately. Until
+  they have, nothing is set and the agent says why.
+- ⛔ Never "assign a to-do to a teammate". A to-do stays on the owner's list.
+
 ### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

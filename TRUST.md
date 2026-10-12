@@ -7993,6 +7993,15 @@ email or a time on your calendar, and it looks before it rewrites."
 - ⚠️ **Older pieces keep the old way.** A card drawn before this build, an older phone app, or a
   phone paired with an older computer gets the old Edit it until both sides have this build.
 - ⚠️ **Rewrite it for me still does not use Write like me.** See that entry above.
+- **Amended October 12, 2026 (Archie `0af4ef73` and archie-mobile `8471c16`, in no release yet):**
+  both pop-ups have Clear beside "It goes out exactly as you type it.", which empties the box for
+  somebody starting over (`src/app/edit-sheet.tsx`, archie-mobile `src/screens/EditDraft.tsx`). And
+  asking the agent in chat to change a reply that is waiting on its card changes that card, the
+  way a new email already was, where it used to answer that a second draft could not be made:
+  `execute_draft_reply` in `crates/archie-runtime/src/email/replies/draft.rs` hands it to
+  `revise_waiting`, the draft that was there becomes what Put the old one back restores, and one
+  set to send itself, or asking when to send, is still refused (test
+  `a_waiting_reply_is_rewritten_in_place`).
 - **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
   which the window then showed at the bottom as a new message, and Use my words sent your whole
   edited reply into the chat as if you had typed it to the agent, then posted the changed draft as

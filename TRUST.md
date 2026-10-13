@@ -4639,6 +4639,20 @@ them as somebody new."
   agent says what to ask, in one sentence, naming the one it may be and its list ("Is this the Dana
   Miller already on People?"), and to say nothing about checking. Test: the end of
   `a_new_row_names_who_it_may_already_be`.
+- **Amended October 12, 2026: the same person is said, not asked, and Lead Desk is not fitted to a
+  realtor** (Archie `6f0add50` and `961b65d7`, in no release yet). A new row with the same phone, the
+  same email, or the same full name of two words or more as a row on another list is the same
+  person, and the agent is told to say so as a fact ("Jenna Holt is already on People.") and ask
+  nothing; two different numbers still say otherwise. Lead Desk is not offered on an agent the
+  interview set up for real estate, whose People list already keeps every lead with its stage: the
+  interview leaves it off, the agent never suggests it, the install refuses with "Ember does not need
+  Lead Desk: its People list already keeps every lead and the stage each has reached. Ask it who to
+  call.", and the computer's store grays that agent out before the press (`Setup::covers`,
+  `covered_on_agent`). Tests: the end of `a_new_row_names_who_it_may_already_be`,
+  `a_covered_add_on_is_real_and_said_whole`, `a_line_of_work_is_not_fitted_what_its_lists_already_do`.
+  ⚠️ An agent that already had Lead Desk keeps it, and a lead lands on both lists there. Archie
+  Mobile's store shows the refusal only once Install is pressed. Never "Lead Desk works for every
+  business".
 - **Cost.** Nothing on any other message. About 150 tokens with every group empty, plus about 12 a
   name, below the cache line on a message about calls (270 with ten names, counted October 10, 2026;
   Archie's `docs/COST-MEASURED.md` section 25 and the comment on `call_list_note`). Since Archie

@@ -415,6 +415,15 @@ own, like Claude or ChatGPT" where it said "their own Anthropic account". Those 
 estimate from the journey tests' measured cost per turn, said as one: never "it costs $9", never a
 promise of a monthly bill, and never on a page without the words "about" and "a month".)*
 
+*(Amended later October 12, 2026, Archie `7e8ef3f8`, archie-mobile `9317e3b`, not in a release yet:
+one range everywhere, by Jett's call. The card, the connect panel, every money card, the agent's own
+price answer and wall message, and two guides say "usually $5 to $15 a month, depending on how much
+you message it" (`own_ai` in `data/prices.json` now holds the two ends). The measured figures under
+it are still about $9 at 5 messages a day and $14 at 10; the ends are a judgment for lighter and
+heavier use. Never "it costs $5" or "under $15": it is what usually happens, never a cap, and never
+on a page without "usually" and "a month". The pricing page's own measured table is a separate claim
+and stays as it is.)*
+
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
 write to your agent passes through our server on the way to Anthropic. It writes down what each
 request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it

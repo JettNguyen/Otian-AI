@@ -424,6 +424,22 @@ heavier use. Never "it costs $5" or "under $15": it is what usually happens, nev
 on a page without "usually" and "a month". The pricing page's own measured table is a separate claim
 and stays as it is.)*
 
+*(Amended October 13, 2026, by Jett's call: the range is "usually $13 to $31 a month, depending on
+how much you message it", in the app (`own_ai` in `data/prices.json`, which the Archie side moves in
+the same pass) and on every page of this site that gives one typical figure rather than the table:
+the homepage price band, how-it-works, the compare pages, the pricing page's description and
+`llms.txt`. **Why it moved.** The $9 and $14 were chat alone: round three's cost note
+says in its own words that "routines and the inbox watch are not in these journeys and come on top"
+(`~/agent-journeys/2026-10-12-round-three/cost.md`, summarized in Archie's
+`docs/agent-ux/journeys/2026-10-12-findings.md`), and the card is shown exactly when an owner turns
+mail or texts on. Its cold-start price ($0.0964) also averaged in two turns that were only partly
+cold; replies that start from nothing measured a median of $0.14. The new ends are the light row's
+floor at Balanced ($13) and 10 messages a day on an agent with email and lists, with its scheduled
+tasks and an inbox watched at the 24 emails a day our own agent averaged ($30.16, rounded up to $31).
+The arithmetic is Archie's `docs/COST-MEASURED.md` section 29 and FACTS.md's `$13` and `$31` rows.
+Never "it costs $13", never "under $31", and never on a page without "usually" and "a month". The
+pricing page's table was rebuilt on the same measurements the same day, so the two now agree.)*
+
 **Approved wording, replaced 2026-09-03:** "That usage runs on our Anthropic account, so what you
 write to your agent passes through our server on the way to Anthropic. It writes down what each
 request cost and never what it said, we keep no copy, and we use none of it for anything. Email and text replies are the two things it
@@ -702,7 +718,12 @@ about five first evenings instead of about four and a half.
   5's rates** (FACTS.md, the `$25` row). The October 11 turns priced at Sonnet 5.5's rates, with the
   router on Haiku 5.5, came out cheaper (a mean of $0.0307 a turn against $0.0352), but those turns
   ran on Sonnet 5, and Sonnet 5.5 may write more or less for the same turn; round three of the
-  journeys measures it. Measure again before quoting a new number.
+  journeys measures it. Measure again before quoting a new number. *(Amended October 13, 2026:
+  round three measured it, and the pricing page's rows were rebuilt on Sonnet 5.5's own turns
+  (Archie's `docs/COST-MEASURED.md` section 29). "Is $25 enough?" now reads "light use fits, and
+  moderate and heavy use exceed $25": the light row is $13 to $22 at Balanced, and moderate use
+  passes $25 on its replies and scheduled tasks alone, before any mail, which the plan does not
+  read.)*
 
 ### ✅ A model on your own computer, found and checked before anything binds to it (SHIPPED 2026-09-01, Archie 0.2.2)
 
@@ -867,8 +888,17 @@ twelve-skill agent on 2026-08-10: forced Economy on Claude Haiku 4.5 came to 27%
 on a warm turn and 32% on a cold one at the 2026-09-12 sheet (18% and 21% at the sheet of the day,
 "four fifths" until 2026-09-12). Haiku 5.5 costs about a quarter of what Haiku 4.5 did per reply,
 so that figure undersold the checkbox once Economy moved. The unforced dial on that agent saved 4%
-to 7% on Haiku 4.5, and still saves little on an agent whose add-ons pick Balanced: the pricing
-page's moderate row is $20 to $41 at Economy against $22 to $41 at Balanced.
+to 7% on Haiku 4.5, and still saves little on an agent whose add-ons pick Balanced. *(Amended
+October 13, 2026: the pricing page's Economy column no longer prices the dial alone. It said $20 to
+$41 at Economy against $22 to $41 at Balanced for moderate use, which was the dial alone; it now
+says $1 to $2, $4 to $7 and $11 to $15, an estimate, and says those need "Use this for every skill"
+ticked, because most skills in the store pick Balanced for themselves: 85 of the 90 skill
+manifests in the Archie repo's `data/marketplace/skills/` declare `"tier": "balanced"`, counted
+that day. The page's own sentence is "most skills in the store pick Balanced". With only the dial
+on Economy those skills stay on Balanced, and what that costs has not been measured, so no page
+prints a figure for it. The inbox watch is the exception: it runs on the dial itself (`on_the_owners_dial` in
+Archie's `crates/archie-runtime/src/email/mod.rs`), so its Economy figure needs no checkbox. Archie
+`docs/COST-MEASURED.md` section 29.)*
 
 **Do not drop the trade either:** on the same runs Economy still graded below Balanced on honesty
 (3.7 against 4.1 out of 10). Nothing requires a page to print that, but never write that the
@@ -947,6 +977,13 @@ On 2026-10-08 the Economy column moved again, when Economy began running a newer
 `7f1014d6`, on two measured runs of sixteen test agents (`docs/COST-MEASURED.md` 21.6 and 21.7),
 and the Balanced column did not, because Balanced's newer model measured the same per reply. The
 page says the figures were measured again in October, and which models run is not a method.
+*(Amended October 13, 2026: the whole table moved, on measurements made on the models each setting
+runs now: 648 replies from the October 11 and 12 journey rounds, 8 scheduled tasks and 162 emails
+from our own agent's usage log, and the October 7 simulator's sixteen test agents for the light row
+and the Economy column, which the page calls estimates. The August bench, which the rows had been
+scaled from, priced a reply that follows another closely at a third of what October measured.
+Archie `docs/COST-MEASURED.md` section 29. The page says what was measured and what is an
+estimate; it still says nothing about why a reply costs what it does.)*
 
 **Required clauses, and one ban.** Say that we do not publish how, and say what moves the table.
 **Never describe a mechanism on the site**: not what is kept between replies, not how the tool
@@ -985,10 +1022,16 @@ app says the same on its own Marketplace screen (`src/app/marketplace.tsx`, Arch
 
 **Approved shape:** a table on `compare/cloud-agents/` (and one row on the automation
 comparison; the Symphony page merged into `compare/cloud-agents/` on 2026-09-18) that prints each company's own unit at its own price, with a numbered
-`.src-cite` on every figure, beside our measured cost per reply: "$0.01 when it follows another
-closely, up to $0.11 when it starts from nothing, measured on an agent with twelve add-ons and
-everything connected, at Balanced." The pricing page carries one sentence of it and links to the
-table.
+`.src-cite` on every figure, beside our measured cost per reply: "About $0.04 when it follows
+another closely, $0.13 to $0.19 when it starts from nothing, measured on agents with email, lists,
+and several add-ons, at Balanced." The pricing page carries one sentence of it and links to the
+table. *(Amended October 13, 2026. It read "$0.01 when it follows another closely, up to $0.11 when
+it starts from nothing, measured on an agent with twelve add-ons and everything connected" from the
+August bench. Measured on Sonnet 5.5 in the October 11 and 12 journey rounds, a reply that follows
+another averaged $0.036 over 648 replies, and of the 11 replies that started from nothing on agents
+over 30,000 tokens, 10 cost $0.126 to $0.184 and one $0.27. Archie `docs/COST-MEASURED.md` section
+29; FACTS.md's `$0.04`, `$0.13` and `$0.19` rows. The compare pages' note now says Archie was
+measured in October 2026.)*
 
 **Why it's true:** every third-party figure is the company's own published price or rate, read on
 the date in FACTS.md; the derived ones (a Copilot reply that takes two actions, a Zapier activity,
@@ -997,10 +1040,10 @@ a Lindy ask) show their arithmetic in the page's Sources fold and in FACTS.md. O
 cold-and-writes, at Anthropic's sheet of 2026-09-12. Balanced runs Claude Sonnet 5.5 from Archie
 `7f1014d6` (2026-10-08): the same tokens at its published rates come to $0.0088 warm (computed,
 still $0.01 printed) and the same $0.1063 cold, and a reply measured the same on it (section 21.7),
-so both figures stand.
+so both figures stood until October 13, 2026, when the amendment above replaced them.
 
 **Required clauses, do not drop them.** (1) Say the units are different sizes of work: a credit,
-an action and a reply are not the same thing, and the companies say so. (2) Beside the $0.11, say
+an action and a reply are not the same thing, and the companies say so. (2) Beside the figure for a reply from nothing, say
 that a reply that delegates to a specialist or uses the Deep setting costs more; the tester's agent
 averaged $0.155 a turn with both in the mix. (3) Call the OpenClaw figures one person's log, never
 "what OpenClaw costs". (4) Claude Code is on the page for the shape of the bill (an agent on a

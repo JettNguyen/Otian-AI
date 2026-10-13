@@ -2519,24 +2519,27 @@ sheet. Change any of it by asking."
   tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
   turn (Archie's `docs/COST-MEASURED.md` section 23).
 
-**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5` and `594d1d35`,
+**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, `594d1d35` and `f51a371d`,
 on main and in no release; nothing about it may be said on a page until a release carries it). One
-setup for every way a business makes money from leads: buying and reselling them, generating its
+setup for every way a business makes money selling leads: buying and reselling them, generating its
 own with ads, a site or a call center, selling calls, or setting appointments for clients on a
 retainer (`data/setups/lead-generation.json`, `FILES` is 5). Clients, with how each one pays (per
-lead, per call, per appointment, per signed case, or a monthly retainer) and a Client stage of
+lead, per call, per appointment, per signed case, a monthly retainer, or a retainer plus a fee per
+appointment) and a Client stage of
 Prospect, Call booked, Proposal sent, Client, Paused, and Lost; Sources, where leads come from, of
 six kinds (our ads, our website, our call center, a supplier, a publisher, or a referral partner),
 each with a monthly spend and a cost per lead and optionally run for one client; and Orders, what
 each client is owed (form fills, live transfers, calls, appointments, or signed cases), with
 ordered and delivered counts, the price and cost of each, links to the client and the source, and
-an Order stage of Ordered, Delivering, Delivered, and Paid. Its rules: a person's details go to a
-client, and a person is called or texted, only when their lead record shows they agreed to be
-contacted; every marketing email names the business and carries its postal address and a way to
-stop getting them; and a client is never promised how many sales, cases, or appointments their
-leads will turn into, only real past numbers with where they came from. Its rules are inside the
+an Order stage of Ordered, Delivering, Delivered, and Paid. Its rules: a lead's details go to a
+client, and a lead is called or texted, only when there is a record that they agreed to be
+contacted; every marketing email, cold ones included, names the business and carries its postal
+address and a way to stop getting them; and a client is never promised how many sales, cases, or
+appointments their leads will turn into, only past numbers with whose they are, the owner's own
+numbers counting as a source. Its rules are inside the
 96 to 145 tokens above. Tested by three personas, one per model (`scripts/agent-sim/l05-lead-gen`,
-`l06-lead-gen-ads`, `l07-lead-gen-appointments`). Written from how the work runs in general, never
+`l06-lead-gen-ads`, `l07-lead-gen-appointments`), and by five that must not match it: a lawyer and
+a roofer who buy leads, a sales rep, a social media agency, and a household (`l08` to `l11`, `p26`). Written from how the work runs in general, never
 from any one client's business.
 
 **The boundaries.**
@@ -2545,7 +2548,9 @@ from any one client's business.
   above). Never "setups for every trade", "templates for your industry", or a list of industries
   beyond these, and restroom trailers for events is its own setup: never "for every rental
   business". Lead generation is not "for every agency" or "for marketing agencies": it is for
-  businesses whose product is leads, calls, or booked appointments, however they get them. Every other business gets lists drafted from what
+  businesses whose product is leads, calls, or booked appointments, however they get them. Never
+  for a business that buys leads for itself: a law firm or a contractor buying leads is matched to
+  no setup, and before `f51a371d` a law firm was matched to this one. Every other business gets lists drafted from what
   the owner said (the entry above).
 - ⚠️ **Nobody has seen the trailers match work.** Matching a trailer business to its setup is the
   model reading the answer; its only check is a live test case that is ignored by default

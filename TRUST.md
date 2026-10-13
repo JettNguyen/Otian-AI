@@ -4054,6 +4054,13 @@ same line (`looked_by_note` in `kept.rs`, `reads_of` in `records.rs`), where bef
 past the line's six are counted, not dropped (Archie `0502b7cc`, archie-mobile `e7b3690`): more to a
 list already named is "T6, and 3 more" beside its last one, and a list not named yet still gets its
 own line. The Undo beside it takes back the one named; the rest are taken back on the Jobs tab.
+Since Archie `096c6091` and archie-mobile `2b2f203` (later October 12, in no release yet), the
+counted ones keep their steps (`more_steps`), and both apps put "Undo all 9" under the saves, which
+takes back every save the line stands for and nothing else the turn did (`journal_undo_steps`, the
+phone's `undo_steps`; tests `a_replys_undo_all_takes_back_its_saves_and_nothing_else`,
+`saves_past_six_are_counted_not_dropped`, and the phone's "undo all takes back every save the line
+stands for"). Never "Undo all takes back everything the agent did": filed mail, a sent draft or a
+reminder from the same turn stay as they are. Not pressed on a real window or phone yet.
 
 **Amended October 11, 2026:** on the October 11 journeys agents answered from empty lists as if they
 were whole: owners with nothing entered were told nothing was due. What changed, all in code:

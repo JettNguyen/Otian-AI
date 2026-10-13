@@ -593,10 +593,12 @@ setup. The question is now on the Account page, under Sign-in, below who you are
 Built at Jett's ask, from the spec in Archie's `docs/GIVE-A-FRIEND-A-MONTH.md`, because nothing
 before sign-in is counted and nobody can tell which channel brought someone. **Two gates before
 any page says it:** a release has to carry it, and the billing service has to be deployed with
-its route, which waits on the CASA freeze (the service "is frozen until the assessor signs off",
-`stripe-webhook/index.js`). A release before the deploy would show everybody who opens the Account
-page a question whose answer fails to save. The privacy policy gains its line in the same pass as
-the deploy.
+its route. A release before the deploy would show everybody who opens the Account page a question
+whose answer fails to save. *Amended October 13, 2026:* the CASA freeze that held the route is over,
+and the route has been on main since October 5, so it is live whenever that push deployed. **Jett's
+call that day: the question stays switched off, and the privacy policy unchanged, until Google
+approves the app**, since Google is still reviewing the policy it read. Then the policy line, this
+entry and the switch change in one pass.
 
 **Approved wording, once it ships (the place changed on October 11, 2026, so Jett's to approve
 again):** "On the Account page, Archie asks how you heard about it. Answering is optional: nothing is
@@ -2184,10 +2186,12 @@ archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not 
 review, so no page says the phone does it until 1.3 is on the App Store.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
-questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
-(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
-first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
-not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+questions' answers fails until the billing service is deployed**, which waited for the CASA
+assessor (Jett's call, October 11, 2026). The letter was issued October 13, so nothing waits on CASA
+now, but whether the fix is live is a question for Render's deploy list: a push to main deploys
+the billing service by itself, and the fix reached main with the October 11 push. Until that list
+shows it, no profile, business details, or lists come out of the first questions for somebody on
+either, so never say they do to those owners; the 0.3.8 notes do not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
 billing note under the retention build).
 
 *Archie `3a9a3b21`, `84240f2b`, `346624af` and `0a0091a3`, and archie-mobile `9bd3647` and
@@ -2350,10 +2354,12 @@ archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not 
 review, so no page says the phone does it until 1.3 is on the App Store.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
-questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
-(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
-first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
-not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+questions' answers fails until the billing service is deployed**, which waited for the CASA
+assessor (Jett's call, October 11, 2026). The letter was issued October 13, so nothing waits on CASA
+now, but whether the fix is live is a question for Render's deploy list: a push to main deploys
+the billing service by itself, and the fix reached main with the October 11 push. Until that list
+shows it, no profile, business details, or lists come out of the first questions for somebody on
+either, so never say they do to those owners; the 0.3.8 notes do not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
 billing note under the retention build).
 
 *Archie `f948867d`, `1d23ce75`, `cef24e70` and `0fd0f068`, on main and in no release. Nothing
@@ -3562,10 +3568,12 @@ archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not 
 review, so no page says the phone does it until 1.3 is on the App Store.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
-questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
-(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
-first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
-not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+questions' answers fails until the billing service is deployed**, which waited for the CASA
+assessor (Jett's call, October 11, 2026). The letter was issued October 13, so nothing waits on CASA
+now, but whether the fix is live is a question for Render's deploy list: a push to main deploys
+the billing service by itself, and the fix reached main with the October 11 push. Until that list
+shows it, no profile, business details, or lists come out of the first questions for somebody on
+either, so never say they do to those owners; the 0.3.8 notes do not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
 billing note under the retention build).
 
 *Archie `c7792c43`, and archie-mobile `241cc0b` (the phone drawing cards that carry no words) and
@@ -3779,10 +3787,12 @@ archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not 
 review, so no page says the phone does it until 1.3 is on the App Store.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
-questions' answers fails until the billing service is deployed**, which waits for the CASA assessor
-(Jett's call, October 11, 2026). Until then no profile, business details, or lists come out of the
-first questions for somebody on either, so never say they do to those owners; the 0.3.8 notes do
-not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
+questions' answers fails until the billing service is deployed**, which waited for the CASA
+assessor (Jett's call, October 11, 2026). The letter was issued October 13, so nothing waits on CASA
+now, but whether the fix is live is a question for Render's deploy list: a push to main deploys
+the billing service by itself, and the fix reached main with the October 11 push. Until that list
+shows it, no profile, business details, or lists come out of the first questions for somebody on
+either, so never say they do to those owners; the 0.3.8 notes do not. An owner on an AI account of their own is not affected (Archie `docs/OPEN-THREADS.md`, the
 billing note under the retention build).
 
 *Archie `f008628c` (keeping them, filling drafts, the "Saved:" line), `475d8fa2` (the row on the

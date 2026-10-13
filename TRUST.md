@@ -2778,6 +2778,17 @@ and when, where that goes, what it never does, and how to switch it off."
   inbox it is connected to.
 - ⚠️ **"Never deletes" is about the agent, and filing is not deleting.** With the tidy box checked it
   moves mail between folders; never say it leaves the mailbox exactly as it found it.
+- ⚠️ **"Sends only with Let it send replies checked" was not true on Gmail with the tidy box checked,
+  until the release carrying Archie `b81264b1` (October 13, 2026; not released yet).** The tidy box
+  asks Google for `gmail.modify`, which covers sending, and the scopes were all Archie looked at, so
+  Send worked with sending unchecked (reviewer finding p19 J). The account now keeps the owner's
+  answer and every send path asks it first (`GoogleAccount::sends` in
+  `crates/archie-domain/src/automation.rs`, `can_send` in `crates/archie-runtime/src/email/mod.rs`,
+  the check in `send_reply`; tests `sending_left_off_makes_no_send_card_where_tidying_would_allow_one`
+  and `reconnecting_keeps_the_signature_the_shared_calendar_and_the_send_choice`). Two limits to keep
+  in the sentence: a Gmail account connected before that release with tidying on and sending off
+  can still send until it is reconnected once, and a send still always waits for the owner's press.
+  Outlook was never affected, because its send permission is asked for only when the box is checked.
 
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

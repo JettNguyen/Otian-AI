@@ -3734,6 +3734,29 @@ no release; nothing in this paragraph may be said until a release carries it).
 - ⚠️ **Only the button's own words are answered in code.** The same question typed in their own
   words goes to the AI like any message.
 
+**Amended later October 12, 2026: where the agent reads the owner's mail, it can bring the emailed
+file in** (Archie `8f162301`, in no release; nothing here may be said until a release carries it).
+
+- **The claim.** When somebody emails the owner a spreadsheet, the owner can say "bring in the
+  spreadsheet Dana emailed", and the agent finds the email, opens the file, and puts its rows on the
+  same import card a spreadsheet sent in the chat gets, with nothing added until a button is pressed.
+- **Why it's true.** Opening a file on an email (`inbox_read` with `attachment`, `open_attachment` in
+  `crates/archie-runtime/src/email/inbox.rs`) saves it beside what the agent writes. When the file is
+  a spreadsheet and the person who typed the message may add to the lists, the turn files that copy
+  with the documents the agent was given and raises the import card
+  (`import_offer::offer_opened_from_mail`, called from `gateway/turn.rs`), so the rows go on a list
+  by code. "Someone else has it" answers with that way in where the agent reads the owner's mail
+  (`answers_someone_else_has_it`, `turn::reads_their_mail`), and with the save-and-send steps
+  everywhere else. Tests: `a_spreadsheet_opened_from_mail_gets_the_import_card`,
+  `someone_else_having_the_spreadsheet_is_answered_in_code`.
+- ⚠️ **Only on the owner's own AI account with mail connected.** On the free credits and the
+  included plan the agent does not read mail at all (the entry on what mail it reads), so there the
+  answer stays "save the file and send it". The paragraph above, "it says how, it does not fetch", is
+  still exactly true there. Never "Archie gets the spreadsheet from your assistant": the owner still
+  has to be sent it, and the agent still never writes to the other person.
+- ⚠️ **Never opened from a real mailbox yet.** The test drives a saved file; Gmail and Outlook
+  handing one over has not been seen.
+
 ### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

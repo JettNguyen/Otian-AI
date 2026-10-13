@@ -2519,20 +2519,24 @@ sheet. Change any of it by asking."
   tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
   turn (Archie's `docs/COST-MEASURED.md` section 23).
 
-**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, on main and in no
-release; nothing about it may be said on a page until a release carries it). For a business that
-buys leads from suppliers and resells them to law firms or insurance agents
-(`data/setups/lead-generation.json`, `FILES` is 5): Clients, with a Client stage of Prospect, Call
-booked, Proposal sent, Client, Paused and Lost, and columns for whether a firm has bought leads
-before and takes live transfers; Suppliers, with a Status of Testing, Active and Paused; and Orders,
-with a Product (Form fills, Live transfers, Signed cases), leads ordered and delivered, price and
-cost per lead, links to the client and supplier, and an Order stage of Ordered, Delivering,
-Delivered and Paid. Its rules: a person's details go to a client, and a person is called or
-texted, only when their lead record shows they agreed to be contacted; every marketing email to a
-prospect carries the business's postal address and a way to stop getting them; and a client is
-never promised how many cases or policies their leads will turn into, only the supplier's own
-numbers with where they came from. Its rules are 425 characters, inside the 96 to 145 tokens above.
-Tested by `scripts/agent-sim/l05-lead-gen.json`. Written from how the work runs in general, never
+**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5` and `594d1d35`,
+on main and in no release; nothing about it may be said on a page until a release carries it). One
+setup for every way a business makes money from leads: buying and reselling them, generating its
+own with ads, a site or a call center, selling calls, or setting appointments for clients on a
+retainer (`data/setups/lead-generation.json`, `FILES` is 5). Clients, with how each one pays (per
+lead, per call, per appointment, per signed case, or a monthly retainer) and a Client stage of
+Prospect, Call booked, Proposal sent, Client, Paused, and Lost; Sources, where leads come from, of
+six kinds (our ads, our website, our call center, a supplier, a publisher, or a referral partner),
+each with a monthly spend and a cost per lead and optionally run for one client; and Orders, what
+each client is owed (form fills, live transfers, calls, appointments, or signed cases), with
+ordered and delivered counts, the price and cost of each, links to the client and the source, and
+an Order stage of Ordered, Delivering, Delivered, and Paid. Its rules: a person's details go to a
+client, and a person is called or texted, only when their lead record shows they agreed to be
+contacted; every marketing email names the business and carries its postal address and a way to
+stop getting them; and a client is never promised how many sales, cases, or appointments their
+leads will turn into, only real past numbers with where they came from. Its rules are inside the
+96 to 145 tokens above. Tested by three personas, one per model (`scripts/agent-sim/l05-lead-gen`,
+`l06-lead-gen-ads`, `l07-lead-gen-appointments`). Written from how the work runs in general, never
 from any one client's business.
 
 **The boundaries.**

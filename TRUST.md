@@ -4307,6 +4307,36 @@ setting every cycle, so it stops at the next one. Test `stop_watching_turns_the_
   mail started it, and nothing in the conversation said an inbox was now being read or how to stop
   it (the fix plan after round three, B.22).
 
+### 🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), in no release, never run on a real inbox
+
+**Approved wording, once a release carries it:** "Mail from someone you've written to in the last
+two weeks is read as soon as Archie sees it. Other mail can take a few minutes longer to show up,
+which keeps what your AI account is charged down. To know who you've written to, Archie keeps the
+addresses you sent mail to in the last two weeks, on this computer."
+
+**Why it's true:** each check of a mailbox splits its new mail in two (`split_by_who_waits` in
+`crates/archie-runtime/src/email/poller.rs`). Mail from an address in the owner's recent list is
+read at once; the rest is read together after one shared wait of up to about five minutes, then
+handled in arrival order as before (`email::sort_ahead`). The list is `email/wrote-to.json` in the
+agent's folder (`email/correspondents.rs`): each address the owner wrote to and when, from replies
+sent off a card on any account and from the Sent copies the Gmail watch already receives, skipping
+messages to more than 10 people, dropping entries after 14 days, at most 500 addresses. Nothing in
+it leaves the computer. Jett's call, October 13, 2026 ("batch, but not urgent mail").
+
+**Boundaries:**
+- ⛔ **Never "Archie knows which mail matters to you"** or "important mail first". It knows one
+  thing: whether you wrote to the sender in the last 14 days.
+- ⛔ **Never say it sees every reply you send.** Replies sent from Archie's cards count on any
+  account; on Gmail the Sent copies count too. A reply sent from Outlook or another mail app on a
+  Microsoft or app-password account is not seen.
+- ⛔ **Never "every card arrives right away."** Most mail now waits a few minutes on purpose.
+- ⚠️ **Kept on this computer and in backups you make**, since backups carry the agent's `email/`
+  folder (Archie `docs/BACKUP-FORMAT.md`). Never "Archie keeps nothing about who you email".
+- ⚠️ **A stop or restart during that wait loses that check's cards.** The mail stays in the inbox,
+  but the agent does not come back to it (Archie `docs/OPEN-THREADS.md`, the mail watch note).
+- ⚠️ Only for an AI account of the owner's own with Anthropic. On any other company's account,
+  mail is read as it always was.
+
 ### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**

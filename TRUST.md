@@ -7112,6 +7112,12 @@ login" turns it off, and it stays off.
   running and the computer is awake.
 - ⛔ Never "nothing to set up" on the first run after an update: opening at login is turned on for
   everyone once, including an owner who had switched it off before (nothing recorded that choice).
+  Since Archie `d72b0b6e` (in no release yet), that owner is told once: a computer that already had
+  an agent and did not have it on gets a card, "Archie now opens when you log in", naming Settings,
+  General, and the switch, kept until Open Settings or Keep it on is pressed (`LoginItemNews` in
+  `src/app/update-banners.tsx`, `has_an_agent` in `src-tauri/src/lib.rs`, tested by
+  `an_update_is_told_from_a_new_install_by_its_agents`). A new install is not told. Never "Archie
+  asks before opening at login": it turns it on, then says so.
 - ⚠️ Not yet seen on a built app on either platform, and the Windows icon has never been drawn.
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)

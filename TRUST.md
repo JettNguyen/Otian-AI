@@ -4650,8 +4650,14 @@ them as somebody new."
   call.", and the computer's store grays that agent out before the press (`Setup::covers`,
   `covered_on_agent`). Tests: the end of `a_new_row_names_who_it_may_already_be`,
   `a_covered_add_on_is_real_and_said_whole`, `a_line_of_work_is_not_fitted_what_its_lists_already_do`.
-  ⚠️ An agent that already had Lead Desk keeps it, and a lead lands on both lists there. Archie
-  Mobile's store shows the refusal only once Install is pressed. Never "Lead Desk works for every
+  Later the same day (Archie `44db6ec3`, Archie Mobile `789316d`), Lead Sweep, which runs Lead
+  Desk, follows the same rule with the same reason, and both stores, Archie Mobile's included, gray
+  that agent out and leave the two out of the Sales & clients starter set before the press
+  (`market::not_needed_on`, sent in the phone's snapshot). Tests:
+  `the_phone_hears_what_a_realtors_agent_does_not_need_in_the_installs_words`, and Archie Mobile's
+  "an add-on the line of work already does is not needed". ⚠️ An agent that already had Lead Desk
+  keeps it, and a lead lands on both lists there (Jett's call: leave those agents as they are).
+  Archie Mobile's gray chip has not been seen on a phone. Never "Lead Desk works for every
   business".
 - **Cost.** Nothing on any other message. About 150 tokens with every group empty, plus about 12 a
   name, below the cache line on a message about calls (270 with ten names, counted October 10, 2026;

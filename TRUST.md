@@ -2519,11 +2519,29 @@ sheet. Change any of it by asking."
   tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
   turn (Archie's `docs/COST-MEASURED.md` section 23).
 
+**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, on main and in no
+release; nothing about it may be said on a page until a release carries it). For a business that
+buys leads from suppliers and resells them to law firms or insurance agents
+(`data/setups/lead-generation.json`, `FILES` is 5): Clients, with a Client stage of Prospect, Call
+booked, Proposal sent, Client, Paused and Lost, and columns for whether a firm has bought leads
+before and takes live transfers; Suppliers, with a Status of Testing, Active and Paused; and Orders,
+with a Product (Form fills, Live transfers, Signed cases), leads ordered and delivered, price and
+cost per lead, links to the client and supplier, and an Order stage of Ordered, Delivering,
+Delivered and Paid. Its rules: a person's details go to a client, and a person is called or
+texted, only when their lead record shows they agreed to be contacted; every marketing email to a
+prospect carries the business's postal address and a way to stop getting them; and a client is
+never promised how many cases or policies their leads will turn into, only the supplier's own
+numbers with where they came from. Its rules are 425 characters, inside the 96 to 145 tokens above.
+Tested by `scripts/agent-sim/l05-lead-gen.json`. Written from how the work runs in general, never
+from any one client's business.
+
 **The boundaries.**
 
-- ⚠️ **Four lines of work, by name, and no others.** Never "setups for every trade", "templates
-  for your industry", or a list of industries beyond these four, and restroom trailers for events is
-  its own setup: never "for every rental business". Every other business gets lists drafted from what
+- ⚠️ **Four lines of work, by name, and no others** (five once a release carries lead generation,
+  above). Never "setups for every trade", "templates for your industry", or a list of industries
+  beyond these, and restroom trailers for events is its own setup: never "for every rental
+  business". Lead generation is not "for every agency" or "for marketing agencies": it is for
+  businesses that sell leads. Every other business gets lists drafted from what
   the owner said (the entry above).
 - ⚠️ **Nobody has seen the trailers match work.** Matching a trailer business to its setup is the
   model reading the answer; its only check is a live test case that is ignored by default

@@ -3009,9 +3009,15 @@ calendar work the whole time."
   it says what was done, to ask only for the rest, and that the Jobs tab has Undo on each step.
   - ⚠️ **Only the plan's month and the day's pause.** The two that come back on a known day. A dated
     message on the free credits gets the plain "Saved." line, as before.
-  - ⚠️ **The row adds a row on the computer only.** The phone's row says where, and opens the list
-    on the phone to look at. The form is filled with the words as written, in the list's notes
-    column or its naming column; nothing is sorted into the other columns.
+  - ⚠️ **The phone adds it too (amended October 12, 2026, Archie `020a9a0c`, archie-mobile
+    `f79a0ec`, in no release yet).** The phone's row used to say where on the computer and open the
+    list to look at. Now its button reads "Add it to" and the list's name, and opens an Add row sheet
+    with the same words in the same column, adding through the computer form's own write (`list_form`
+    and `add_row` in `src-tauri/src/phone.rs`, `src/screens/AddRow.tsx` in archie-mobile). The form
+    is filled with the words as written, in the list's notes column or its naming column; nothing is
+    sorted into the other columns. A date column on the phone is the coming week and a box for any
+    other day, not a calendar. Never "your lists' rows are on your phone": the sheet is sent a
+    list's columns, never its rows.
   - ⚠️ **Which list is a narrow guess:** the agent's only list, or the one list whose name the
     message says. Otherwise the button opens the lists. Never "Archie knows which list it goes on".
 - **Amended October 12, 2026 (Archie `4e0fb9fe`, in no release yet): a teammate who runs out is

@@ -2545,7 +2545,7 @@ from any one client's business.
   above). Never "setups for every trade", "templates for your industry", or a list of industries
   beyond these, and restroom trailers for events is its own setup: never "for every rental
   business". Lead generation is not "for every agency" or "for marketing agencies": it is for
-  businesses that sell leads. Every other business gets lists drafted from what
+  businesses whose product is leads, calls, or booked appointments, however they get them. Every other business gets lists drafted from what
   the owner said (the entry above).
 - ⚠️ **Nobody has seen the trailers match work.** Matching a trailer business to its setup is the
   model reading the answer; its only check is a live test case that is ignored by default

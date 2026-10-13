@@ -7750,7 +7750,10 @@ off, and this entry is rewritten, all in the same pass.
   read by Jett in the console on 2026-10-06, against 5 on 2026-08-28; the "about 94 left" of
   2026-09-28 was a projection, not a reading). The same day Google's verification page showed the
   request submitted and every requirement met but the CASA assessment, so the Letter of Validation
-  is the one thing left (the Archie repo's `docs/GOOGLE-SUBMISSION.md`). The count is a capacity fact for Otian, not copy: no page
+  is the one thing left (the Archie repo's `docs/GOOGLE-SUBMISSION.md`). *Amended October 13, 2026:*
+  the letter was issued that day and the lab sent it to Google itself (the entry below). Google
+  acknowledges in 4 to 5 working days, so by October 20, and verifies the app after that. Until it
+  does, everything in this entry stands, the screen and the cap included. The count is a capacity fact for Otian, not copy: no page
   prints the count, because a shrinking number on a page is urgency, which the Otian Standard bans.
   If the cap is ever reached, the site has to say Google connections are paused, the same day.
 - ⚠️ Microsoft's and Apple's connections are not covered here; nothing checked what Microsoft's
@@ -7771,6 +7774,55 @@ off, and this entry is rewritten, all in the same pass.
   Teams in its own edition; `src/app/auth.tsx`). It said "this makes your Otian AI account" before.
 - ⚠️ **The warning itself stays** until Google verifies the app; neither change touches what
   Google shows.
+
+### ✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, ON NO PAGE until Google verifies the app
+
+**Approved wording, once Google has verified the app:** "Archie passed the security assessment
+Google requires of apps that can read Gmail. An independent lab authorized by the App Defense
+Alliance checked it against twenty security requirements in October 2026, and it passed every one.
+The result holds until October 14, 2027, and the assessment is repeated every year." A shorter form
+where space is tight: "Passed an independent CASA security assessment, October 2026."
+
+**Why it's true:** the Letter of Validation is in the Archie repo at
+`docs/casa/2026/CASA-LoV-Archie.pdf`: "Assessment Performed by NST Cyber", application Archie,
+certification `e563ecde`, assessment type "AL1 (Lab Tested - Lab Verified)", status Complete, issued
+October 13, 2026, expiring October 14, 2027. Its Statement of Validation says Otian AI LLC "has
+successfully completed a Cloud Application Security Assessment (CASA)", and names NST Cyber as an
+independent lab authorized by the App Defense Alliance to run them. Twenty requirement lines,
+every one PASS: Authentication 1.1 to 1.3, Session Management 2.1 to 2.4, Access Control 3.1 to
+3.3, Communications 4.1, Data Validation and Sanitization 5.1 and 5.2, Configuration 6.1 to 6.7.
+The tester installed the desktop build and scanned the billing service's production API, signed in
+(Archie repo `docs/OPEN-THREADS.md`, the CASA note). The runbook, every answer and what went wrong
+is `docs/CASA-QUESTIONNAIRE.md` there, section 8 for the outcome. The lab sent the letter to Google
+itself.
+
+**Why no page says it yet (Jett's call, October 13, 2026):** Google has not verified the app, so
+every Google connect still shows Google's unverified-app screen (the entry above). A page that
+says Archie passed Google's security assessment, beside a Google screen saying it is unverified,
+reads as a contradiction, and a reader can take "passed" for "Google approved". The day Google
+verifies the app, this entry and the one above are rewritten in the same pass, and the wording
+above may go on a page.
+
+**Boundaries:**
+- ⛔ **Never say Google audited, certified, verified or approved Archie's security.** The lab
+  assessed it against the App Defense Alliance's requirements. Google's own verification is a
+  separate step, and until it is done the entry above holds.
+- ⛔ **Never call it an audit, a penetration test, a code review, a certification of the whole
+  company, SOC 2, or "certified secure".** AL1 is the level where, in the letter's own words, "the
+  developer provides evidence and statements of compliance to each audit test case" and the lab
+  "reviews the evidence against the requirements or performs the necessary testing when
+  applicable". AL2 is the level where the lab evaluates each case directly. No lab read the source.
+- ⛔ **Never extend it to Archie Mobile.** The letter names the application Archie. The phone app
+  asks for no Google permission and was not assessed (its own entry: "Not a compliance claim, and
+  never near the CASA assessment").
+- ⚠️ **It describes what was assessed in September and October 2026, not every version since.**
+  Never say nothing changed while it ran: two routes reached the live service on September 14,
+  mid-assessment, through an ordinary deploy, and were disclosed to the lab the next day (Archie
+  `docs/CASA-QUESTIONNAIRE.md`, "It did not hold"). The service has changed since, as any service
+  does, and the next assessment covers what is there then.
+- ⚠️ **It expires October 14, 2027.** By then it is renewed, or every page that says it changes.
+  The two reports behind it are password protected and never published; the certification ID may
+  be given to anyone who asks.
 
 ### ✅ This website, and what it asks your browser for (added 2026-09-16)
 

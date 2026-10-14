@@ -9545,7 +9545,8 @@ counts. Ask the agent what your team has been doing and it tells you the same."
   (`crates/archie-runtime/src/gateway/tools_work.rs`) adds one sentence to the jobs: how many
   messages each teammate sent in the same days, and that what they said is the owner's to read on the
   computer, not the agent's to quote. A teammate asking hears only their own jobs. Test:
-  `the_owner_hears_how_much_each_teammate_asked_and_a_teammate_does_not`.
+  `the_owner_hears_how_much_each_teammate_asked_and_a_teammate_does_not` (renamed with the amendment
+  below).
 - **Amended October 12, 2026: a teammate by name** (Archie `3c4ab109`, in no release yet). When the
   owner's typed message names someone on the team by first name beside a word that asks what they
   did (from, did, done, doing, today, yesterday, week, heard, been, anything, work, jobs, stops,
@@ -9554,12 +9555,22 @@ counts. Ask the agent what your team has been doing and it tells you the same."
   and look-ups are not in the record and are not evidence either way (`teammate_note` in
   `tools_work.rs`, called from `run_target_attributed`). Test:
   `the_owner_asking_about_a_teammate_gets_their_record`.
+- **Amended October 13, 2026: what each asked** (Archie `45f529f2` on main and `e03ab00c` on
+  journey-fixes, in no release yet; Jett's call that day). When the owner asks what the team has
+  been doing, `work_recent` gives each teammate's own messages from those days, oldest first, at
+  most ten each and 160 characters of each, instead of a count and a pointer to the computer. When
+  the owner names one teammate, the turn carries what that teammate asked in the last two days as
+  well as their jobs. The owner already reads those conversations under Who can message it, and
+  every teammate is told so. Tests: `the_owner_hears_what_each_teammate_asked_and_a_teammate_does_not`
+  and `the_owner_asking_about_a_teammate_gets_their_record`.
 
 **Boundaries:**
 - ⛔ Never that the phone shows what teammates said. It shows counts and times; the conversations
   are read on the computer.
-- ⛔ Never that the agent reports or sums up what a teammate said. It is given counts, and told the
-  words are not for quoting.
+- ⛔ Until a release carries `45f529f2`, never that the agent reports or sums up what a teammate
+  said: 0.3.8 gives it counts and tells it the words are not for quoting. After that, only to the
+  owner. Never that one teammate can ask the agent what another said; a teammate hears only their
+  own jobs.
 - ⛔ Never that teammates see this. The card is on the owner's computer and the owner's phone, and the
   agent adds the team's counts only when the owner asks.
 - ⚠️ A message is any message a teammate sent the agent, a thank-you included, and only ones the

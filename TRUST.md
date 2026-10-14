@@ -9442,8 +9442,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 *Archie `0e581b2c`, `2ed18dca`, `217a1630`, `c4fc6313` and `6f20212d` on `journey-fixes`, and
 archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be said on a page until a
 release of Archie carries them, and the phone's half until an Archie Mobile build with it is on the
-App Store. The `/phone/join` route and the `firestore.rules` block go live when that branch reaches
-main and deploys; neither has run against the real project.*
+App Store. The `/phone/join` route and the `firestore.rules` block are live (deployed October 14,
+2026); no phone has joined through them yet.*
 
 **Proposed wording, Jett's to approve:** "Add someone to your agent without asking them to set up
 Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They
@@ -9510,8 +9510,7 @@ any more."
   name replaces the old one.
 - ⚠️ Somebody already on the agent through a chat app cannot be moved to a phone yet; a link is for
   somebody new.
-- ⚠️ Never watched end to end on real phones, and the rules block has never been compiled (there is
-  no emulator on the build Mac); it compiles when it deploys.
+- ⚠️ Never watched end to end on real phones.
 - What it replaced: adding someone needed a chat app on the agent, so an agent kept in the window
   could not be shared at all (the ⚠️ in the entry above).
 

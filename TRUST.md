@@ -9443,7 +9443,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be said on a page until a
 release of Archie carries them, and the phone's half until an Archie Mobile build with it is on the
 App Store. The `/phone/join` route and the `firestore.rules` block are live (deployed October 14,
-2026); no phone has joined through them yet.*
+2026), and Jett joined a second phone through them on October 14, 2026: the two-phone test (join,
+ask, press a button, take them off and see the phone refused) passed.*
 
 **Proposed wording, Jett's to approve:** "Add someone to your agent without asking them to set up
 Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They

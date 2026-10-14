@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
         with:
           # Discovery dates come from each page's last commit, so the generator needs history.
           fetch-depth: 0

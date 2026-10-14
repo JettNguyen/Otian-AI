@@ -9487,13 +9487,20 @@ any more."
   owner's AI account, as every teammate's are.
 - **Where a tapped link lands.** `app/index.html` and `js/app-page.js` in this repo show "This link
   goes into Archie Mobile" with the steps for a `t1` link, take the link out of the address bar, and
-  do not send the reader to the store before they have read the steps.
+  do not send the reader to the store before they have read the steps. The page is published because
+  `app` is in `PAGES` in `scripts/stage-site.py`, and `scripts/check-publication.py` fails the
+  deploy if any page folder is left out. Until October 14, 2026 it was left out: the folder was made
+  September 18 and never added, so otianai.com/app was a 404 on the live site.
 - **The owner's phone** says On Archie Mobile under that person, as the window's row does
   (`guests_in` in `src-tauri/src/phone.rs`; archie-mobile `src/screens/Guests.tsx`).
 
 **Boundaries:**
 - ⛔ Archie for Teams only. The personal edition answers one person per agent (`PEOPLE_PER_AGENT` in
   `crates/archie-core/src/plan.rs`).
+- ⛔ Never that Archie Mobile is on Google Play, here or in the message the owner sends. Android is a
+  download from this site. The message names no store: it says to open the link on the phone, whose
+  page shows the App Store on an iPhone and the download on Android (`phoneInviteMessage` in the
+  Archie repo's `src/app/team.ts`). It said "the App Store or Google Play" until October 14, 2026.
 - ⛔ Never that a teammate's phone gets notifications. It does not yet: they open Archie Mobile to see
   a reply, and the phone's About page says so.
 - ⛔ Never that a teammate can do anything on the phone but talk to the agent and press the buttons on

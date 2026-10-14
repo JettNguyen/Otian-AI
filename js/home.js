@@ -698,8 +698,19 @@
       measureBeats(window.innerWidth, window.innerHeight);
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
+      /* MEASURED WITHOUT THE POINTER'S TILT (2026-10-14). The tilt turns the scene a few degrees
+         toward the cursor, which moves the window's and the phone's edges a few pixels, and the
+         fit read those edges as they stood, so every move of the mouse changed the scene's scale:
+         0.784 to 0.792 on one sweep at 1288 by 677. Safari redraws a 3D layer whose scale changes,
+         and Eric saw the phone strobe as he moved his cursor. So the edges are read with the scene
+         put back to its pose for the length of the read, and the scale follows the scroll and the
+         window and nothing else. The swap is one style on one element, and it is undone before
+         anything is painted. */
+      var tilted = !narrow && sceneFlat && (tilt.x || tilt.y);
+      if (tilted) scene.style.transform = sceneFlat;
       var scr = narrow ? null : scene.getBoundingClientRect();
       var reach = narrow ? null : reachOf(wr, scr.top + scr.height / 2);
+      if (tilted) scene.style.transform = lastT.scene;
       var hintTop = !narrow && stageHint ? stageHint.getBoundingClientRect().top : 0;
       /* Where the hero's window and phone stand, for the dinner card, and the box it is placed in,
          which is its own caption: see .hm-evening's two rules in the stylesheet. Read with the
@@ -826,7 +837,7 @@
        after i put my cursor on the site", because a few degrees of tilt is a big enough change to
        force the re-draw that standing still never asked for. Round, snap, and write only what
        changed, and the scene reaches a state it can be drawn at. */
-    var lastT = { scene: '', win: '', phone: '' };
+    var lastT = { scene: '', win: '', phone: '' }, sceneFlat = '';
     function put(el, key, v) { if (lastT[key] !== v) { el.style.transform = v; lastT[key] = v; } }
     /* AND A MOCKUP IS LAID OUT AT THE SIZE IT IS SHOWN, WHICH IS WHERE ITS TYPE COMES FROM
        (2026-09-21). The stylesheet's rule has always been zoom and never transform: scale, because
@@ -871,6 +882,7 @@
     function zoomTo(el, key, v) { if (lastZ[key] !== v) { styleValue(el, '--dz', v.toFixed(3)); lastZ[key] = v; } }
     function applyPose(p) {
       put(scene, 'scene', 'scale(' + SC.toFixed(4) + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')');
+      sceneFlat = 'scale(' + SC.toFixed(4) + ') rotateX(' + p.cam.rx.toFixed(2) + 'deg) rotateY(' + p.cam.ry.toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')';
       var wz = dz(p.cam.s * p.win.s, p.win.z);
       zoomTo(win, 'win', wz);
       put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + (p.win.s / wz).toFixed(4) + ')');
@@ -900,15 +912,20 @@
          of the glass (Jett, 2026-09-17: "the glass glare is also a bit too harsh"). Scaling them
          to the yaw the poses actually use fixed the pinning and went too far the other way (Jett,
          same day: "bring back some of the glare"), so they sit between the two now. The rule that
-         survives both passes: PRINT THESE FOR EVERY ACT AND CHECK NOTHING SITS ON ITS CEILING,
-         including at the ends of the pointer tilt, which is 3 degrees of yaw and 2 of pitch. The
+         survives both passes: PRINT THESE FOR EVERY ACT AND CHECK NOTHING SITS ON ITS CEILING. The
          floors are a different thing and are meant to be reached: the side turned away goes out
          and stays out at .02, which is ambient and not a highlight. As they stand the lit side
          runs .21 to .40 across the story and the rim's line .04 to .21, both moving the whole way.
          A highlight that never changes is not read as metal, and neither is one that never
-         stops. */
-      var yaw = p.cam.ry + tilt.x + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
-      var pitch = p.cam.rx + tilt.y, sp = Math.sin(pitch * Math.PI / 180);
+         stops.
+
+         THE LIGHT FOLLOWS THE POSE AND NOT THE POINTER (2026-10-14). It took the pointer's tilt
+         too, which meant every move of the mouse rewrote eleven variables on the phone, and the
+         phone's whole screen inherits them, so it was restyled and repainted on every frame the
+         cursor moved. Eric saw the screen strobe in Safari as he moved his cursor. The scroll still
+         turns the light through every act; the tilt now moves the scene and nothing inside it. */
+      var yaw = p.cam.ry + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
+      var pitch = p.cam.rx, sp = Math.sin(pitch * Math.PI / 180);
       styleValue(phone, '--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
       styleValue(phone, '--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
       styleValue(phone, '--edge-t', clamp(0.21 + 0.9 * sp, 0.05, 0.45).toFixed(3));

@@ -667,26 +667,40 @@
        once they are gone. And half a unit of slack, because the reach leans a little on the scale
        through the perspective, and a number chasing its own output to the fourth decimal is a
        scene that never rests (see `put`). Wide only: narrow has its own composition. */
-    var keepL = 0, keepR = 0, keepMoved = false, dxNow = 0, shiftNow = 0, outOfSight = false;
-    var slid = [wrap, clock, $('.day-stage > .day-hint')].filter(Boolean);
-    function reachOf(wr) {
-      var cx = wr.left + wr.width / 2, L = 0, R = 0, o = 0;
+    var keepL = 0, keepR = 0, keepB = 0, keepMoved = false, dxNow = 0, shiftNow = 0, outOfSight = false;
+    var stageHint = $('.day-stage > .day-hint');
+    var slid = [wrap, clock, stageHint].filter(Boolean);
+    function reachOf(wr, cy) {
+      var cx = wr.left + wr.width / 2, L = 0, R = 0, B = 0, o = 0;
       [win, phone].forEach(function (el) {
         var op = +el.style.opacity || 0;
         if (op < 0.01) return;
         var b = el.getBoundingClientRect();
         L = Math.max(L, (cx - b.left) / SC);
         R = Math.max(R, (b.right - cx) / SC);
+        B = Math.max(B, (b.bottom - cy) / SC);
         o = Math.max(o, op);
       });
-      return o ? { L: L, R: R, o: Math.min(1, o) } : null;
+      return o ? { L: L, R: R, B: B, o: Math.min(1, o) } : null;
     }
+    /* THE BAND IS ENFORCED, NOT ONLY RESERVED (2026-10-14). The band below kept the scene clear of
+       "Scroll through one day" while the hero's phone stood with its foot about 5px past the box's
+       bottom edge, which is what scratchpad/hint.py solved 80 for. The hero has been re-posed since,
+       and its phone now stands 18 to 34px into the hint on every laptop size measured (1280 by 720 to
+       1512 by 860), so the words ran across the phone's foot (Jett, from Eric's Mac). So the fit now
+       reads where the window and the phone actually end, as it already did for their sides, and
+       holds the scale where the lower of the two stops HINT_GAP above the hint's words. Measured
+       against the hint even after it fades, because wide the scale is not eased and a limit that
+       let go on the first scroll would make the scene jump. */
+    var HINT_GAP = 12;
     function fit(ease) {
       narrow = !!(narrowQ && narrowQ.matches);
       measureBeats(window.innerWidth, window.innerHeight);
       capsPad(window.innerWidth, window.innerHeight);
       var wr = wrap.getBoundingClientRect(), sr = stage.getBoundingClientRect();
-      var reach = narrow ? null : reachOf(wr);
+      var scr = narrow ? null : scene.getBoundingClientRect();
+      var reach = narrow ? null : reachOf(wr, scr.top + scr.height / 2);
+      var hintTop = !narrow && stageHint ? stageHint.getBoundingClientRect().top : 0;
       /* Where the hero's window and phone stand, for the dinner card, and the box it is placed in,
          which is its own caption: see .hm-evening's two rules in the stylesheet. Read with the
          other rects, written with --sc below. */
@@ -735,6 +749,11 @@
                         : clamp(Math.min(byW, (wr.height - band) / 560), 0.4, 1.45);
       var dx = 0;
       keepMoved = false;
+      if (reach && band && hintTop) {
+        if (Math.abs(reach.B - keepB) > 0.5) { keepB = reach.B; keepMoved = true; }
+        var room = hintTop - HINT_GAP - (scr.top + scr.height / 2);
+        if (keepB > 0 && room > 0) scTarget += (Math.min(scTarget, room / keepB) - scTarget) * reach.o;
+      }
       if (reach) {
         if (Math.abs(reach.L - keepL) > 0.5 || Math.abs(reach.R - keepR) > 0.5) { keepL = reach.L; keepR = reach.R; keepMoved = true; }
         var cellL = wr.left - dxNow, cc = cellL + wr.width / 2, limR = sr.right - EDGE;

@@ -139,9 +139,14 @@
 
   var links = document.querySelectorAll('.nav-links a, .nav-drawer a, .nav-drawer-flyout a');
 
+  /* A link to another site is never where you are. The Consulting menu's rows point at
+     consulting.otianai.com, whose home page has the path "/" too, so comparing paths alone lit
+     Consulting on our own homepage (Jett, 2026-10-14). */
   var pathOf = function (link) {
     try {
-      return new URL(link.href).pathname.replace(/\/+$/, '') || '/';
+      var u = new URL(link.href);
+      if (u.origin !== window.location.origin) return null;
+      return u.pathname.replace(/\/+$/, '') || '/';
     } catch (e) {
       return null; /* non-navigable href */
     }

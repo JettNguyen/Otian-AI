@@ -513,7 +513,7 @@
        drops it the moment the spill would push the box past its own design size, so a scene that
        is growing never crosses into the caption column. The two agree at the crossover, where the
        wrap is 660 and both read 1, so nothing jumps as the window is dragged wider. */
-    var SC = 1, narrow = false, wrap = $('.day-scene-wrap');
+    var SC = 1, scV = 0, narrow = false, wrap = $('.day-scene-wrap');
     var narrowQ = window.matchMedia ? window.matchMedia('(max-width: 970px)') : null;
     useLen(!!(narrowQ && narrowQ.matches));
     if (narrowQ && narrowQ.addEventListener) narrowQ.addEventListener('change', function () { useLen(narrowQ.matches); });
@@ -601,7 +601,7 @@
        so the band is laid out at the height this sets and painted ten higher. Measured off the caption being shown, which is why the narrow
        .day-cap is centered rather than stretched: a stretched caption reports the band's height
        back and the driver would be reading its own output. */
-    var CAPS_PAD = 18, capH = 0, capQ = '', capPadAt = '', capMoving = false;
+    var CAPS_PAD = 18, CAPS_PB = 0, capH = 0, capV = 0, capNowH = 0, capQ = '', capPadAt = '', capMoving = false;
     /* Read off .day-caps rather than typed here, because that rule's padding changes with the
        screen and a driver carrying its own copy of it is two numbers that have to agree. Keyed on
        the viewport, like the hero's beat heights: the answer only moves when a media query does. */
@@ -610,7 +610,8 @@
       if (key === capPadAt || !capsEl) return;
       capPadAt = key;
       var cs = window.getComputedStyle(capsEl);
-      CAPS_PAD = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
+      CAPS_PB = parseFloat(cs.paddingBottom) || 0;
+      CAPS_PAD = (parseFloat(cs.paddingTop) || 0) + CAPS_PB;
       STAGE_TOP = parseFloat(window.getComputedStyle(stage).paddingTop) || 0;
     }
     function capsFit() {
@@ -620,7 +621,8 @@
         capMoving = false;
         return;
       }
-      var want = caps[cur < 0 ? 0 : cur].offsetHeight + CAPS_PAD;
+      capNowH = caps[cur < 0 ? 0 : cur].offsetHeight;
+      var want = capNowH + CAPS_PAD;
       /* Eased, and for the reason the scale is eased: a caption is swapped in one frame, and a
          row that changes height in one frame is a snap. Both ease at one rate, so the scene grows
          into the room the words gave up. The hero needs no special case: its beats open on a
@@ -635,9 +637,12 @@
          height would leave, and the wrap is moved by half the difference (capShift), which is
          where the centre of that row would be. The scene settles exactly as it did, on a scale
          and a translate the compositor carries, and the words are in place as they fade in. */
-      if (!capQ) capH = want;
-      else if (Math.abs(want - capH) < 0.5) capH = want;
-      else capH += (want - capH) * easeK;
+      /* On the objects' spring since 2026-10-14, so the band, the scale and the poses set off and
+         come in together: an ease that starts at full speed jolted against the ones that start
+         from rest, at every act. */
+      if (!capQ) { capH = want; capV = 0; }
+      else if (Math.abs(want - capH) < 0.5 && Math.abs(capV) < 5) { capH = want; capV = 0; }
+      else { springAt(capH, capV, want, frameH); capH = SPR[0]; capV = SPR[1]; }
       capMoving = capH !== want;
       var q = Math.round(want) + 'px';
       if (capQ !== q) { capsEl.style.height = q; capQ = q; }
@@ -668,6 +673,8 @@
        through the perspective, and a number chasing its own output to the fourth decimal is a
        scene that never rests (see `put`). Wide only: narrow has its own composition. */
     var keepL = 0, keepR = 0, keepB = 0, keepMoved = false, dxNow = 0, shiftNow = 0, outOfSight = false;
+    var heroB = 0, heroRoom = 0, riseNow = 0, stageHWas = 0, stageWWas = 0;
+    var capsOff = 0, capsOffV = 0, capsOffNow = 0, wrapOff = 0, wrapOffV = 0;
     var stageHint = $('.day-stage > .day-hint');
     var slid = [wrap, clock, stageHint].filter(Boolean);
     function reachOf(wr, cy) {
@@ -718,10 +725,44 @@
       /* How far the hero's words have to rise to stand in the middle of the screen under the menu
          once the mockups have gone, from where they stand without the lift. Read here, with the
          other rects; the frame below spends it as the mockups leave. */
-      if (narrow && !still && cur === 0 && heroCap) {
-        var hc = heroCap.getBoundingClientRect(), top = sr.top + STAGE_TOP;
-        heroMid = Math.max(0, (hc.top - liftNow + hc.height / 2) - (top + sr.bottom) / 2);
+      /* MEASURED FROM THE CAPTION'S FOOT AND THIS FRAME'S HEIGHT (2026-10-14). It was the centre of
+         the box as the last frame left it, but the hero's details open on a height transition and
+         the band follows them every frame, so the centre had moved by the time the lift used it and
+         the words shook as they rose (Jett: "it's like it jumps around"). The band sits on the
+         stage's floor, so the caption's foot holds still while it grows: the foot is the band's
+         own, less its padding (the caption is centred in the band and lags it by a frame, the band
+         does not), and the height comes from capsFit below, after the band has taken this frame's. */
+      heroB = 0;
+      if (narrow && !still && cur === 0 && heroCap && capsEl) {
+        var top = sr.top + STAGE_TOP;
+        heroB = capsEl.getBoundingClientRect().bottom - capsOffNow - CAPS_PB;
+        heroRoom = (top + sr.bottom) / 2;
       }
+      /* WHEN SAFARI'S TOOLBAR COMES AND GOES, NOTHING JUMPS (2026-10-14). The stage is the screen's
+         height, and on a phone the screen gets about a hundred pixels taller the moment the toolbar
+         folds away, which is the first thing that happens when anybody scrolls from the top. The
+         captions stand on the stage's floor, so they dropped that far in one frame, the scene's
+         middle half as far, and the hero's rise was aimed at a middle that had just moved. A change
+         of height with the same width is that and nothing else, so the captions and the scene are
+         held where they were and glide to where the new height puts them, on the objects' spring.
+         The hero's caption moves by less, because its lift takes back half the change as it rises. */
+      var stH = sr.height, stW = window.innerWidth;
+      if (narrow && !still && stageHWas && stW === stageWWas && Math.abs(stH - stageHWas) >= 1 && Math.abs(stH - stageHWas) < 240) {
+        var dH = stH - stageHWas;
+        capsOff -= dH - (cur === 0 ? riseNow * dH / 2 : 0);
+        wrapOff -= dH / 2;
+      }
+      stageHWas = stH; stageWWas = stW;
+      if (capsOff || capsOffV) {
+        springAt(capsOff, capsOffV, 0, frameH); capsOff = SPR[0]; capsOffV = SPR[1];
+        if (Math.abs(capsOff) < 0.3 && Math.abs(capsOffV) < 3) { capsOff = 0; capsOffV = 0; }
+      }
+      if (wrapOff || wrapOffV) {
+        springAt(wrapOff, wrapOffV, 0, frameH); wrapOff = SPR[0]; wrapOffV = SPR[1];
+        if (Math.abs(wrapOff) < 0.3 && Math.abs(wrapOffV) < 3) { wrapOff = 0; wrapOffV = 0; }
+      }
+      var cOff = +capsOff.toFixed(1);
+      if (cOff !== capsOffNow && capsEl) { capsEl.style.translate = cOff ? '0 ' + cOff + 'px' : ''; capsOffNow = cOff; }
       var dnBox = dinner && dinner.offsetParent;
       var dn = (!still && cur === 0 && dnBox)
         ? [win.getBoundingClientRect(), dnBox.getBoundingClientRect(), dinner.offsetHeight, phone.getBoundingClientRect()] : null;
@@ -736,6 +777,7 @@
          of that row is the rect's top less the move (see capsFit). */
       var laidWas = capQ ? parseFloat(capQ) : 0, wrTop = wr.top - shiftNow;
       capsFit();
+      if (heroB) heroMid = Math.max(0, heroB - capNowH / 2 - heroRoom);
       var rowH = wr.height + (laidWas ? laidWas - capH : 0);
       var byW = (wr.width + 100) / 760;
       if (byW > 1) byW = Math.max(1, wr.width / 760);
@@ -775,7 +817,7 @@
       }
       dx = +dx.toFixed(1);
       /* Narrow, the wrap also stands where the eased band would have centred it (capsFit). */
-      var shift = narrow && capQ ? +((parseFloat(capQ) - capH) / 2).toFixed(1) : 0;
+      var shift = narrow ? +((capQ ? (parseFloat(capQ) - capH) / 2 : 0) + wrapOff).toFixed(1) : 0;
       if (dx !== dxNow || shift !== shiftNow) {
         dxNow = dx; shiftNow = shift;
         slid.forEach(function (el) {
@@ -797,10 +839,10 @@
          the scene was rescaled and its mockups laid out again at new zooms the whole time nobody
          could see them, which in Safari cost a third of the frame rate. Held, they come back with
          the next act and ease from where they left. */
-      if (!ease || !narrow) SC = scTarget;
+      if (!ease || !narrow) { SC = scTarget; scV = 0; }
       else if (outOfSight) { /* held: see above */ }
-      else if (Math.abs(scTarget - SC) < 0.002) SC = scTarget;
-      else SC += (scTarget - SC) * easeK;
+      else if (Math.abs(scTarget - SC) < 0.002 && Math.abs(scV) < 0.02) { SC = scTarget; scV = 0; }
+      else { springAt(SC, scV, scTarget, frameH); SC = SPR[0]; scV = SPR[1]; }
       /* The pool of light under the scene is sized off the scene and not off the wrap, so it stays
          the same pool whatever the fit came out at. ON THE WRAP, NOT THE STAGE: the wrap and its
          pool are the only two things that read it, and a variable written on the stage is
@@ -879,11 +921,22 @@
       var v = SC * s * (PERSP / (PERSP - z));
       return Math.min(2, Math.max(1, Math.ceil(v * 10) / 10));
     }
+    /* AND IT CHANGES WHILE THE SCENE IS STILL, NOT WHILE IT MOVES (2026-10-14). A new zoom lays the
+       whole mockup out again and redraws every pixel of it, which is a dropped frame, and the poses
+       cross a tenth two or three times in one move: a hitch in the middle of a glide, the frame
+       the eye is following. So while the story is easing, the scale changes or the captions'
+       band moves, each mockup keeps the zoom it has and the transform makes up the difference,
+       which is a texture drawn a little large or small for a third of a second, and the new zoom lands
+       on the frame it comes to rest. Not past three tenths, because a texture stretched further
+       than that softens visibly even in motion. */
+    var skyLast = { lit: null, shade: null, dk: null };
+    function skyFar(c, was) { return !was || Math.max(Math.abs(c.r - was.r), Math.abs(c.g - was.g), Math.abs(c.b - was.b)) >= 6; }
+    function held(v, was) { return zoomHeld && was && Math.abs(v - was) <= 0.3 ? was : v; }
     function zoomTo(el, key, v) { if (lastZ[key] !== v) { styleValue(el, '--dz', v.toFixed(3)); lastZ[key] = v; } }
     function applyPose(p) {
       put(scene, 'scene', 'scale(' + SC.toFixed(4) + ') rotateX(' + (p.cam.rx + tilt.y).toFixed(2) + 'deg) rotateY(' + (p.cam.ry + tilt.x).toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')');
       sceneFlat = 'scale(' + SC.toFixed(4) + ') rotateX(' + p.cam.rx.toFixed(2) + 'deg) rotateY(' + p.cam.ry.toFixed(2) + 'deg) scale(' + p.cam.s.toFixed(3) + ')';
-      var wz = dz(p.cam.s * p.win.s, p.win.z);
+      var wz = held(dz(p.cam.s * p.win.s, p.win.z), lastZ.win);
       zoomTo(win, 'win', wz);
       put(win, 'win', 'translate3d(' + p.win.x.toFixed(1) + 'px,' + p.win.y.toFixed(1) + 'px,' + p.win.z.toFixed(1) + 'px) rotateY(' + p.win.ry.toFixed(2) + 'deg) scale(' + (p.win.s / wz).toFixed(4) + ')');
       win.style.opacity = p.win.o.toFixed(3);
@@ -891,7 +944,7 @@
          mockups at opacity 0 through the hero's details and the two floor acts, and rescaling
          them, which is the work of drawing them with none of the picture. */
       styleValue(win, 'visibility', p.win.o < 0.001 ? 'hidden' : '');
-      var pz = dz(p.cam.s * p.phone.s, p.phone.z);
+      var pz = held(dz(p.cam.s * p.phone.s, p.phone.z), lastZ.phone);
       zoomTo(phone, 'phone', pz);
       put(phone, 'phone', 'translate3d(' + p.phone.x.toFixed(1) + 'px,' + p.phone.y.toFixed(1) + 'px,' + p.phone.z.toFixed(1) + 'px) rotateY(' + p.phone.ry.toFixed(2) + 'deg) scale(' + (p.phone.s / pz).toFixed(4) + ')');
       /* On the phone, not down on its layers: see the comment above .dp-device in the stylesheet
@@ -923,9 +976,17 @@
          too, which meant every move of the mouse rewrote eleven variables on the phone, and the
          phone's whole screen inherits them, so it was restyled and repainted on every frame the
          cursor moved. Eric saw the screen strobe in Safari as he moved his cursor. The scroll still
-         turns the light through every act; the tilt now moves the scene and nothing inside it. */
-      var yaw = p.cam.ry + p.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
-      var pitch = p.cam.rx, sp = Math.sin(pitch * Math.PI / 180);
+         turns the light through every act; the tilt now moves the scene and nothing inside it.
+
+         AND ON A PHONE IT TAKES WHERE THE MOVE IS GOING, ONCE (2026-10-14). Each new value repaints
+         the whole phone, and since the objects glide on springs a move is thirty frames rather
+         than four, so a light that followed the turn repainted the phone thirty times a move, and
+         the page's own frame count never showed the cost (Jett: "still a bit choppy"). Narrow, the light is read off the pose the move is heading
+         for, so it changes once, as the move sets off, when the spring is barely moving. Wide keeps
+         the light turning with the phone, where a computer draws it without dropping frames. */
+      var lp = lightFrom || p;
+      var yaw = lp.cam.ry + lp.phone.ry, sy = Math.sin(yaw * Math.PI / 180);
+      var pitch = lp.cam.rx, sp = Math.sin(pitch * Math.PI / 180);
       styleValue(phone, '--edge-l', clamp(0.13 + 0.55 * sy, 0.02, 0.42).toFixed(3));
       styleValue(phone, '--edge-r', clamp(0.13 - 0.55 * sy, 0.02, 0.42).toFixed(3));
       styleValue(phone, '--edge-t', clamp(0.21 + 0.9 * sp, 0.05, 0.45).toFixed(3));
@@ -959,12 +1020,25 @@
       if (sky && p.sky) {
         var dk = document.documentElement.getAttribute('data-theme') === 'dark';
         var rgb = function (c) { return 'rgb(' + Math.round(c.r) + ' ' + Math.round(c.g) + ' ' + Math.round(c.b) + ')'; };
-        styleValue(sky, '--sky-lit', rgb(dk ? p.sky.dlit : p.sky.lit));
-        styleValue(sky, '--sky-shade', rgb(dk ? p.sky.dshade : p.sky.shade));
+        /* IN STEPS WHILE THE POSE IS MOVING, EXACT WHEN IT LANDS (2026-10-14). A new colour repaints
+           every cloud, and the bank along the foot is a strip wider than three screens, so a colour
+           eased frame by frame over a half-second move was thirty repaints of it per act. A step
+           of six in a channel is under what a dot at this opacity shows, and the move's last frame
+           writes the exact colour. The opacity is free, so it is written every frame. */
+        var lit = dk ? p.sky.dlit : p.sky.lit, shade = dk ? p.sky.dshade : p.sky.shade;
+        if (!poseMoving || skyFar(lit, skyLast.lit) || skyFar(shade, skyLast.shade) || skyLast.dk !== dk) {
+          styleValue(sky, '--sky-lit', rgb(lit));
+          styleValue(sky, '--sky-shade', rgb(shade));
+          skyLast = { lit: { r: lit.r, g: lit.g, b: lit.b }, shade: { r: shade.r, g: shade.g, b: shade.b }, dk: dk };
+        }
         styleValue(sky, '--sky-o', (dk ? p.sky.od : p.sky.o).toFixed(3));
       }
       styleValue(stage, '--night', p.night.toFixed(3));
       stage.classList.toggle('is-night', p.night > 0.5);
+      /* Night's own layers (the room's dark, the lamp, the halos, the screens' shading) are out of
+         the page until the night begins, because a layer standing at nothing inside a mockup still
+         makes every fade of that mockup a drawing off screen (styles.css, .is-dusk). */
+      stage.classList.toggle('is-dusk', p.night > 0.001);
       /* The nav is fixed and lives outside the stage, so it cannot read --night off it. The nav
          carries the same number and the stylesheet dims the bar with it (Jett, 2026-09-18: in light
          mode a cream bar sat over the dark room for the whole overnight act). A NUMBER AND NOT A
@@ -1050,6 +1124,7 @@
        step never stopped moving, and a drawing nobody is given a moment to look at is the same
        problem as a row of cards nobody is given a reason to scroll through. */
     var DRAW = 0.6;
+    var galFs = 0, galV = null;
     var buildEl = $('.day-build'), buildOn = false;
     function build(bp) {
       var j;
@@ -1129,6 +1204,83 @@
 
     // Scroll and input wake the scene; easing gets a short tail, then it rests.
     var dayRaf = 0, settleUntil = 0;
+    /* THE STORY EASES AFTER THE SCROLL, IT DOES NOT FOLLOW IT FRAME FOR FRAME (2026-10-14). Every
+       move in the day was the scroll position put straight through a pose, so a move was exactly
+       as smooth as the scroll driving it. Each act's move is its first fifth (SETTLE), about 150px
+       on a phone, and a thumb's flick crosses that in four or five frames: the phone jumped across
+       the screen in steps, which read on Jett's iPhone 15 Pro Max as "10 fps" while the page was
+       drawing 57 frames a second (a hand scroll measured on that phone the same day). Jett: "i
+       never wanted frame by frame animations. it needed to be eased more and smooth all the way
+       through."
+
+       So the story runs on a critically damped spring pulled toward the scroll. It sets off from
+       rest gently, never overshoots and comes in gently, at any speed of scroll, so a flick plays
+       a move over a third of a second instead of four frames. FOLLOW is the spring's rate in
+       radians a second: at 20 it trails a steady scroll by a tenth of a second. It was 10, and then
+       12, and both read as too much ease (Jett, the same day: "the ease is too much too"). Each frame is solved exactly for its own length rather than
+       stepped, so a slow frame lands where a fast one would have; the first frame after a rest
+       counts as one ordinary frame, or the time the loop spent asleep would be read as a jolt.
+
+       Not under reduced motion, which has no scroll-driven motion to ease. Off screen, and on the
+       first frame, it lands where the scroll is, because there is nothing to watch. */
+    var FOLLOW = 20, yShown = -1, yAtWas = -1, yVel = 0, zoomHeld = false, offStage = true;
+    /* AND BETWEEN SAFARI'S REPORTS, THE SCROLL IS CARRIED ON AT ITS OWN SPEED (2026-10-14). A scroll
+       that starts at the top of the page, while the iPhone's toolbar folds away, is told to the page
+       ten times a second for its first two thirds of a second, and every frame after that: seven
+       recordings of Jett's thumb on his 15 Pro Max all show it (jumps of 141, 112, 92, 77px a tenth
+       of a second apart, then 26, 23, 23 a frame apart). Nowhere else in the story does it happen.
+       The spring smoothed each jump and then sat still until the next, so the hero's words climbed in
+       ten steps a second, which is the first screen "jumping around" however cheap it was to draw.
+       So while the reports come that far apart, where the scroll is going is taken as where it was
+       plus its last speed for the time since, slowing as it was slowing, never further than one
+       report ahead, and dropped once a report is overdue. The next report lands about where the guess
+       had got to, and the spring takes up whatever difference is left. */
+    var ySeen = -1, ySeenAt = 0, yRate = 0, yKeep = 1, yGap = 0;
+    /* AND THE OBJECTS GLIDE TO THEIR POSES ON SPRINGS OF THEIR OWN. Easing the scroll alone was not
+       enough, and the reason is the shape of the story rather than the speed of anybody's thumb:
+       each act's move is packed into a fifth of its scroll and then held, so even an eased scroll
+       crosses a move in two or three frames when it is coming fast (measured the same day: the
+       phone went 173, 96, 20, 0 px on three consecutive frames). So the scroll now only says where
+       everything should be, and every number in the pose (each object's place, turn, size and
+       fade, the camera, the night, the floors and the sky's colours) springs there on its own,
+       critically damped, at POSE_RATE radians a second: a move that arrives all at once plays over
+       about a third of a second, starting and ending gently (it was 7, half a second, which Jett
+       found too slow). Ember, standing on marks on these objects,
+       rides with them; the captions, the beats and the sends still change with the scroll, and
+       each of those has its own CSS ease. A new composition (crossing 970px) or a stage that was
+       off screen lands at once, because there is nothing to glide from. */
+    var lightFrom = null;
+    var POSE_RATE = 12, poseShown = null, poseVel = null, poseNarrow = null, poseMoving = false, frameH = 1 / 60;
+    /* One value on the same spring, for the few numbers that are not in the pose: the scale, the
+       caption band, the gallery. Its answer lands in SPR, position then velocity. */
+    var SPR = [0, 0];
+    function springAt(x, v, to, h) {
+      var g = x - to, c = v + POSE_RATE * g, d = Math.exp(-POSE_RATE * h);
+      SPR[0] = to + (g + c * h) * d; SPR[1] = (v - POSE_RATE * c * h) * d;
+    }
+    function zeroOf(o) { var z = {}, k; for (k in o) z[k] = typeof o[k] === 'number' ? 0 : zeroOf(o[k]); return z; }
+    function deepCopy(o) { var z = {}, k; for (k in o) z[k] = typeof o[k] === 'number' ? o[k] : deepCopy(o[k]); return z; }
+    function springTo(sh, vel, to, h) {
+      var moving = false, dk = Math.exp(-POSE_RATE * h), k;
+      for (k in to) {
+        if (typeof to[k] !== 'number') { if (springTo(sh[k], vel[k], to[k], h)) moving = true; continue; }
+        var g = sh[k] - to[k], c = vel[k] + POSE_RATE * g;
+        sh[k] = to[k] + (g + c * h) * dk;
+        vel[k] = (vel[k] - POSE_RATE * c * h) * dk;
+        /* Done once it is under what the writes can show: a tenth of a pixel is printed to one
+           decimal, a colour channel is rounded, and everything else is a fraction or a degree. */
+        var eps = k === 'x' || k === 'y' || k === 'z' ? 0.05 : k === 'r' || k === 'g' || k === 'b' ? 0.5 : 0.0005;
+        if (Math.abs(sh[k] - to[k]) < eps && Math.abs(vel[k]) < eps * POSE_RATE * 2) { sh[k] = to[k]; vel[k] = 0; }
+        else moving = true;
+      }
+      return moving;
+    }
+    function followPose(to, h) {
+      if (still || offStage || !poseShown || poseNarrow !== narrow) {
+        poseShown = deepCopy(to); poseVel = zeroOf(to); poseNarrow = narrow; poseMoving = false;
+      } else poseMoving = springTo(poseShown, poseVel, to, h);
+      return poseShown;
+    }
     function wake() {
       if (document.hidden) return;
       settleUntil = performance.now() + 700;
@@ -1139,6 +1291,7 @@
       if (document.hidden) return;
       /* The eases' share of the gap for this frame's real length (see EASE_SC), capped so the first
          frame after a rest is not read as one long frame. */
+      var rested = !lastFrameAt || now - lastFrameAt > 70;
       var dt = lastFrameAt ? clamp(now - lastFrameAt, 1, 100) : 1000 / 60;
       lastFrameAt = now;
       frameN = dt * 60 / 1000;
@@ -1148,7 +1301,31 @@
       // Once Ember has moved to the closing button, the offscreen story needs no work.
       if (r.bottom < 0 && markName === 'm-cta') return;
       var total = story.offsetHeight - vh;
-      var p = still ? 0 : clamp(-r.top / (total || 1), 0, 1);
+      /* The spring above: yAt is where the scroll is, yShown where the story is drawn. */
+      var yAt = clamp(-r.top, 0, Math.max(total, 0)), stepH = rested ? 1 / 60 : dt / 1000;
+      frameH = stepH;
+      /* A jump of more than a screen and a half between two frames is not a thumb, which moves a
+         hundred and fifty pixels a frame at a hard flick: it is a link, a key or the browser putting
+         the page back where it was, and gliding there would play every act in between. */
+      offStage = r.top > vh || r.bottom < 0 || (yAtWas >= 0 && Math.abs(yAt - yAtWas) > vh * 1.5);
+      yAtWas = yAt;
+      if (yAt !== ySeen) {
+        var yGot = now - ySeenAt, rate = yGot ? (yAt - ySeen) / yGot : 0;
+        if (ySeen >= 0 && yGot > 40 && yGot < 200 && !offStage && !still) {
+          yKeep = yGap && rate * yRate > 0 ? clamp(rate / yRate, 0.5, 1) : 1;
+          yRate = rate; yGap = yGot;
+        } else { yRate = 0; yGap = 0; yKeep = 1; }
+        ySeen = yAt; ySeenAt = now;
+      } else if (yGap && now - ySeenAt > yGap * 1.5) { yRate = 0; yGap = 0; yKeep = 1; }
+      var yTo = yGap ? clamp(yAt + yRate * yKeep * Math.min(now - ySeenAt, yGap), 0, Math.max(total, 0)) : yAt;
+      if (still || yShown < 0 || offStage) { yShown = yAt; yVel = 0; }
+      else {
+        var sg = yShown - yTo, sc0 = yVel + FOLLOW * sg, sdec = Math.exp(-FOLLOW * stepH);
+        yShown = yTo + (sg + sc0 * stepH) * sdec;
+        yVel = (yVel - FOLLOW * sc0 * stepH) * sdec;
+        if (Math.abs(yShown - yTo) < 0.5 && Math.abs(yVel) < 2) { yShown = yTo; yVel = 0; }
+      }
+      var p = still ? 0 : clamp(yShown / (total || 1), 0, 1);
       var u = p * TOT, i = N - 1;
       for (var a = 0; a < N; a++) { if (u < CUM[a + 1]) { i = a; break; } }
       var t = clamp((u - CUM[i]) / LEN[i], 0, 1);
@@ -1223,6 +1400,11 @@
           });
         }
       }
+      /* The hero's two fades ride the pose, so they ease with the objects they belong to. */
+      var poseTo = copy(pose, { gone: gone, rise: rise });
+      pose = followPose(poseTo, stepH);
+      lightFrom = narrow ? poseTo : null;
+      gone = pose.gone; rise = pose.rise; riseNow = rise;
       if (heroCap && (i === 0 || !narrow || still)) {
         /* Narrow it rises to the middle of what is left (heroMid, measured in the fit), because a
            fixed share of the scene's row left it low on a tall screen with the top half empty
@@ -1239,6 +1421,7 @@
          phone or the window, and a mascot standing on an object that has faded out is a mascot
          standing on the headline. */
       if (ember) ember.style.opacity = gone > 0.001 ? (1 - gone).toFixed(3) : '';
+      zoomHeld = poseMoving || yShown !== yTo || !!yGap || (!outOfSight && Math.abs(scTarget - SC) > 0.002) || capMoving;
       applyPose(pose);
 
       var tp = i === 0 ? t : clamp((t - SETTLE) / (1 - SETTLE), 0, 1);
@@ -1285,6 +1468,15 @@
            draw, and the sixth of the act left at the end holds the finished picture, which is
            the thing the whole act was drawing toward. */
         var f = Math.min(4, tp * 5.4), kf = Math.floor(f), fs = kf + smooth((f - kf - 0.3) / 0.4);
+        /* Each card's slide is two fifths of a step, about seventy pixels of scroll on a phone, so a
+           flick crossed it in two frames. The cards glide to where the scroll puts them, on the
+           objects' spring (2026-10-14). */
+        if (narrow && !still) {
+          if (galV === null) { galFs = fs; galV = 0; }
+          else if (Math.abs(galFs - fs) < 0.002 && Math.abs(galV) < 0.01) { galFs = fs; galV = 0; }
+          else { springAt(galFs, galV, fs, frameH); galFs = SPR[0]; galV = SPR[1]; }
+          fs = galFs;
+        }
         var bp = Math.min(5, tp * 6);
         var k = narrow ? Math.round(fs) : Math.min(4, Math.floor(bp));
         mark = (narrow ? 'm-g' : 'm-s') + k;
@@ -1296,7 +1488,7 @@
         if (pie) styleValue(pie, '--pie', tp.toFixed(3));
         gallery(narrow ? fs : -1);
         build(narrow ? -1 : bp);
-      } else { gallery(-1); build(-1); }
+      } else { gallery(-1); build(-1); galV = null; }
       if (r.bottom < vh * 0.55) mark = 'm-cta';
       var m = marks[mark];
       if (m) {
@@ -1383,7 +1575,7 @@
       else if (i === 3) { var dr = dot.getBoundingClientRect(); window.Ember.look(ember, { x: dr.left + 8, y: dr.top + 8 }); }
       else window.Ember.look(ember, null);
       if (!stage.classList.contains('is-driven')) stage.classList.add('is-driven');
-      var easing = Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || (!outOfSight && Math.abs(scTarget - SC) > 0.002) || keepMoved || capMoving;
+      var easing = poseMoving || yShown !== yTo || !!yGap || !!galV || !!capsOff || !!wrapOff || Math.abs(tilt.tx - tilt.x) > 0.01 || Math.abs(tilt.ty - tilt.y) > 0.01 || (!outOfSight && Math.abs(scTarget - SC) > 0.002) || keepMoved || capMoving;
       /* Held still there is no tail, but the slide that keeps the scene out of the captions reads
          the frame before, so it runs until it rests.
 

@@ -16830,9 +16830,30 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   display: grid; grid-template-columns: minmax(300px, 440px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); gap: 24px; align-items: center;
   padding: calc(var(--nav-height) + 8px) 40px 24px;
   overflow: hidden;
-  background: color-mix(in srgb, var(--day-night-ground) calc(var(--night) * 100%), var(--bg-primary));
+  background: var(--bg-primary);
 }
 [data-theme="dark"] .day-stage { --day-night-ground: #0E0D0C; }
+/* THE ROOM DARKENS BY A LAYER FADING IN, NOT BY REPAINTING IT (2026-10-14). The stage's own
+   background was a mix toward the night ground on --night, which is the same colour as this layer
+   at that opacity over the day's page, to the pixel, because a mix in sRGB is what laying one
+   colour over another does. The difference is the work: a new background colour is a repaint of
+   the whole stage, every frame the night moves, and the objects now spring through the night over
+   half a second rather than four frames, so that was thirty full-screen repaints a crossing on a
+   phone. An opacity on its own layer is the compositor's, and costs nothing. Every child of the
+   stage is positioned and comes after this in the markup, so it sits under all of them. */
+.day-stage::before { content: ""; position: absolute; inset: 0; background: var(--day-night-ground); opacity: var(--night); pointer-events: none; will-change: opacity; }
+/* NIGHT'S LAYERS EXIST ONLY ONCE NIGHT IS COMING (2026-10-14). The room's dark, the night's lamp,
+   the screens' halos and their shading are each a layer of their own so the night can fade them
+   without a repaint, and by day every one of them stands at nothing. A layer at nothing is still a
+   layer: inside a mockup it turns the mockup into a stack, and a stack can only be faded by drawing
+   it off screen first, which the window pays on every frame of the acts where it stands at .3 and
+   both pay through the hero's fade. js/home.js sets .is-dusk from the first hundredth of night. */
+.day-stage:not(.is-dusk)::before,
+.day-stage:not(.is-dusk) .day-scene-wrap::after,
+.day-stage:not(.is-dusk) .day-win::before,
+.day-stage:not(.is-dusk) .day-phone::before,
+.day-stage:not(.is-dusk) .da-app::after,
+.day-stage:not(.is-dusk) .dp-ph::after { display: none; }
 
 /* ---- the sky: stars, for as long as the room is dark ---- */
 /* A sparse field over the whole stage, behind the captions and behind the scene, so the lamp
@@ -16853,8 +16874,11 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    The twinkle animates opacity and the two multiply, so the field keeps its own range instead of
    pulsing between one brightness and another; and a CSS `opacity` on .day-sky circle would beat
    the presentation attribute and flatten all 58 of them to the same star. */
-.day-sky { position: absolute; inset: 0; pointer-events: none; opacity: calc((var(--night, 0) - .5) * 2.4); }
-.day-sky svg { display: block; width: 100%; height: 100%; }
+.day-sky { position: absolute; inset: 0; pointer-events: none; opacity: calc((var(--night, 0) - .5) * 2.4); will-change: opacity; }
+/* Out of the picture until the room is dark enough for it: its opacity is 0 below .5 anyway, and a
+   layer at 0 is still a screen-sized texture held in memory on a phone. */
+.day-stage:not(.is-night) .day-sky { visibility: hidden; }
+.day-sky svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
 .day-sky circle { fill: #F3F0ED; }
 
 /* ---- the clouds: the hour, in dots ---- */
@@ -16881,7 +16905,14 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    the ones underneath --sky-shade. Unprefixed mask properties only: the -webkit- pair beside them
    made Chrome draw nothing at all. Off under reduced motion, like the stars, because the acts stand
    in a stack there and there is no hour to follow. */
-.day-stipple { --sky-lit: #F0A57C; --sky-shade: #A99BD8; --sky-o: .62; --sky-p: 0; position: absolute; inset: 0; overflow: hidden; pointer-events: none; opacity: var(--sky-o); }
+.day-stipple { --sky-lit: #F0A57C; --sky-shade: #A99BD8; --sky-o: .62; --sky-p: 0; position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* THE SKY'S STRENGTH IS ON EACH CLOUD'S OWN LAYER, NOT ON THE SKY (2026-10-14). An opacity on a box
+   holding moving layers is a group, and a group is drawn off screen first: the sky is the size of
+   the screen and its clouds never stop, so that was a whole screen drawn twice on every frame of the
+   page. On .day-cloud-in and the bank's strip, each a single moving layer, it is a number the
+   compositor applies. */
+.day-cloud-in { opacity: calc(var(--cd, 1) * var(--sky-o)); }
+.day-bank-strip { opacity: var(--sky-o); }
 .day-stipple i { position: absolute; inset: 0; mask-repeat: no-repeat; mask-size: 100% 100%; }
 .day-stipple .sk-lit { background: var(--sky-lit); }
 .day-stipple .sk-shade { background: var(--sky-shade); }
@@ -16900,7 +16931,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-bank .sk-lit { mask-image: url("../assets/stipple-bank-lit.png"); }
 .day-bank .sk-shade { mask-image: url("../assets/stipple-bank-shade.png"); }
 
-.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 120; translate: calc(var(--sky-p) * var(--cp, 260px)) 0; opacity: var(--cd, 1); }
+.day-cloud { position: absolute; width: 270px; aspect-ratio: 360 / 120; translate: calc(var(--sky-p) * var(--cp, 260px)) 0; }
 .day-cloud-in { position: absolute; inset: 0; }
 .day-cloud .sk-lit { mask-image: url("../assets/stipple-c1-lit.png"); }
 .day-cloud .sk-shade { mask-image: url("../assets/stipple-c1-shade.png"); }
@@ -17049,6 +17080,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
   opacity: calc(var(--night, 0) * .26);
   pointer-events: none;
   z-index: 20;
+  /* Its own layer, so the night moving fades it instead of repainting the screen under it. */
+  will-change: opacity;
 }
 
 /* ---- and the screens light the air around them ---- */
@@ -17076,15 +17109,18 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    notch. */
 .day-win::before, .day-phone::before {
   content: ""; position: absolute; inset: 0; pointer-events: none; transform: translateZ(-1px);
-  --shadow-screen: 0 0 38px -6px rgba(255, 247, 237, calc(var(--night, 0) * .27)), 0 0 112px 16px rgba(252, 234, 216, calc(var(--night, 0) * .13));
+  --shadow-screen: 0 0 38px -6px rgba(255, 247, 237, .27), 0 0 112px 16px rgba(252, 234, 216, .13);
   box-shadow: var(--shadow-screen);
+  /* The glow is drawn once at full strength and faded in with the room: an alpha that rode --night
+     redrew two wide blurs every frame the night moved (2026-10-14). */
+  opacity: var(--night, 0);
 }
 .day-win::before { border-radius: 11px; }
 .day-phone::before { border-radius: 38px; }
 /* A dark screen throws less light than a cream one, and in the dark theme both mockups are on the
    app's dark palette, so the cream halo would ring something that is not itself lit. */
 [data-theme="dark"] .day-win::before, [data-theme="dark"] .day-phone::before {
-  --shadow-screen: 0 0 24px -2px rgba(226, 233, 242, calc(var(--night, 0) * .17)), 0 0 88px 12px rgba(213, 222, 233, calc(var(--night, 0) * .07));
+  --shadow-screen: 0 0 24px -2px rgba(226, 233, 242, .17), 0 0 88px 12px rgba(213, 222, 233, .07);
 }
 
 /* ---- the captions: one column, one act lit at a time ---- */
@@ -17157,7 +17193,20 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
      slot folds, and the slot's open height is measured off scrollHeight, which never counts that. */
   .hm-evening-slot > .hm-evening { margin: 0 auto; }
   @media (prefers-reduced-motion: no-preference) {
-    .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.2, .8, .3, 1), margin-top .5s cubic-bezier(.2, .8, .3, 1), margin-bottom .5s cubic-bezier(.2, .8, .3, 1), opacity .3s ease, transform .4s cubic-bezier(.2, .8, .3, 1); }
+    /* THE DETAILS OPEN FROM REST (2026-10-14). The band stands on the stage's floor, so the words
+       above the details rise by however much the details grow, and the curve here was one that sets
+       off at four times its average speed: 16px in the first frame, out of a standstill, every time
+       the hero's details opened. Every other move in the story starts gently on its spring, so this
+       was the one place the words lurched. In and out, it starts and ends at rest, and its fastest
+       frame is two thirds of what the old curve's first one was. */
+    .day-stage.is-driven .day-cap[data-act="0"] .day-beat { transition: max-height .5s cubic-bezier(.4, 0, .2, 1), margin-top .5s cubic-bezier(.4, 0, .2, 1), margin-bottom .5s cubic-bezier(.4, 0, .2, 1), opacity .3s ease, transform .4s cubic-bezier(.2, .8, .3, 1); }
+    /* The hero's words rise into the room the mockups leave, a few pixels every frame (js/home.js,
+       heroLift). On a layer of their own that is the compositor moving a picture; without one it
+       was the whole block of text drawn again on every frame of the rise (2026-10-14). */
+    .day-cap[data-act="0"] { will-change: transform; }
+    /* The band glides back into place when Safari's toolbar changes the stage's height (js/home.js,
+       capsOff), so it is a layer too. */
+    .day-caps { will-change: transform; }
   }
 }
 /* The stock `.day-beat` pair fades every beat in the story from nothing, which is right for the
@@ -17261,13 +17310,23 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
    off the bottom of the screen. */
 .day-stage { --hint-band: 80px; }
 .day-scene-wrap { position: relative; grid-column: 2; grid-row: 1; height: 100%; padding-bottom: var(--hint-band); display: flex; align-items: center; justify-content: center; perspective: 1400px; perspective-origin: 50% 45%; }
-.day-scene-wrap::before { content: ""; position: absolute; left: 50%; top: 48%; width: min(calc((660px + var(--night, 0) * 230px) * var(--sc, 1)), 126%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) calc(18% + var(--night, 0) * 9%), transparent), transparent); pointer-events: none; }
+.day-scene-wrap::before, .day-scene-wrap::after { content: ""; position: absolute; left: 50%; top: 48%; width: min(calc(660px * var(--sc, 1)), 126%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); pointer-events: none; opacity: calc(1 - var(--night, 0)); will-change: opacity; }
+.day-scene-wrap::after { width: min(calc(890px * var(--sc, 1)), 126%); background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 27%, transparent), transparent); opacity: var(--night, 0); }
+/* Both behind the scene: ::after comes after it in paint order, so it would light the mockups from
+   the front. The isolation keeps the -1 inside the wrap even where low-power drops its perspective,
+   which is what made the wrap a stacking context. */
+.day-scene-wrap { isolation: isolate; }
+.day-scene-wrap::before, .day-scene-wrap::after { z-index: -1; }
 /* The lamp behind the objects grows and warms with the room instead of being turned down for it.
    It used to drop to 9% on .is-night, which left the two mockups cut out of a dark ground with
    nothing under them, and the phone going light with the page made that plainer. Both the size and
    the mix ride --night, so it blooms across the act and is gone by the end of it, with no frame
    where it arrives. Jett asked for the glow and for no flash on the way out; those are one
-   requirement. */
+   requirement.
+   AS TWO GLOWS, THE DAY'S AND THE NIGHT'S, CROSSING OVER (2026-10-14). It was one glow whose size
+   and strength rode --night, which redrew a radial gradient the size of the stage on every frame
+   the night moved. Each glow is drawn once now and only their opacities move, which is the same
+   bloom to the eye and none of the work. */
 /* The design box. js/home.js scales it to the stage (SC), so it is never sized by CSS to fit. */
 .day-scene { position: relative; width: 760px; height: 560px; flex: none; transform-style: preserve-3d; }
 .day-layer { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
@@ -17645,7 +17704,7 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .da-badge.sent, .day-win.is-sent .da-badge.unsent, .day-win.is-sent .da-goldpanel { display: none; }
 .day-win.is-sent .da-noneed, .day-win.is-sent .da-badge.sent { display: block; }
 @media (prefers-reduced-motion: no-preference) {
-  .day-win.is-sent .da-noneed, .day-win.is-sent .da-badge.sent { animation: da-swap-in .3s ease both; }
+  .day-win.is-sent .da-noneed, .day-win.is-sent .da-badge.sent { animation: da-swap-in .3s ease backwards; }
 }
 /* THE CAPTIONS' NIGHT INK STOPS AT THE WINDOW'S EDGE. `.day-stage.is-night p` turns the captions to
    light ink at two in the morning, and it reached every <p> on the stage, the window's included, so
@@ -17694,8 +17753,8 @@ button.pf-fp:focus-visible { outline: 2px solid var(--accent-ink); outline-offse
 .day-win.is-night .da-recent .r.night { display: flex; }
 @media (prefers-reduced-motion: no-preference) {
   .day-win.is-night .da-recent .day-beat:not(.is-on), .day-win.is-night .da-nowhead .day-beat:not(.is-on) { display: none; }
-  .day-win.is-night .da-recent .r.day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
-  .day-win.is-night .da-recent .r .day-beat.is-on, .day-win.is-night .da-nowhead .day-beat.is-on { animation: da-swap-in .3s ease both; }
+  .day-win.is-night .da-recent .r.day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) backwards; }
+  .day-win.is-night .da-recent .r .day-beat.is-on, .day-win.is-night .da-nowhead .day-beat.is-on { animation: da-swap-in .3s ease backwards; }
 }
 @keyframes da-swap-in { from { opacity: 0; } to { opacity: 1; } }
 
@@ -18185,7 +18244,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
 .dp-jump .chev { width: 16px; height: 16px; }
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr--page .day-beat:not(.is-on) { display: none; }
-  .dp-scr--page .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr--page .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) backwards; }
 }
 /* The next morning's brief lands the same way, a line at a time, so the bubble grows through the
    act instead of standing finished from its first frame (2026-09-19, see the screen in index.html).
@@ -18194,7 +18253,7 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
    rule shows every line, so the resting state is the whole brief. */
 @media (prefers-reduced-motion: no-preference) {
   .dp-scr[data-scr="6"] .day-beat:not(.is-on) { display: none; }
-  .dp-scr[data-scr="6"] .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr[data-scr="6"] .day-beat.is-on { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) backwards; }
 }
 .dp-lrow .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .dp-lrow .lbl { font-size: var(--fs-lg); font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -18812,9 +18871,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
      stop where the screen does. Left at 14% it lit a phone-shaped patch of room a third of the way
      past the end of the phone, over the caption, which is the same fault this inset exists to fix
      and the one act where it is worst: the room is dark, so the only light down there was coming
-     from nothing. It rides --night with the mask above, for the same reason and to the same 46%,
-     or the light would let go of the phone's end on the way in and out. */
-  .day-phone::before { inset: 8% 0 calc(14% + var(--night, 0) * 32%); border-radius: 34px; }
+     from nothing. It rode --night with the mask above, to the same 46%, until 2026-10-14, when the
+     halo became a fade (see .day-win::before): it is invisible by day now, so it stands at the
+     night's length throughout, and changing its length redrew a wide blur on every frame of the
+     crossing. On the way in and out it can only be shorter than the lit phone, never longer,
+     which is the side of this rule that matters. */
+  .day-phone::before { inset: 8% 0 46%; border-radius: 34px; }
   /* Ember stands clear of everything here (Jett, 2026-09-16). Beside the phone it is wholly to
      the phone's left, in the room between the phone and the screen's edge, and a rung smaller
      (data-size-narrow) so that room holds it; the hero uses the phone's mark too, since the
@@ -18988,8 +19050,12 @@ button.dp-knob { border: 0; padding: 0; font: inherit; font-size: var(--fs-4xl);
   .dp-scr--grow .day-beat.is-on,
   .dp-scr--grow.is-pressed .dp-sent,
   .dp-scr--grow.is-pressed:not(.is-done) .dp-waiting,
-  .dp-scr--grow.is-done .dp-after { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) both; }
+  .dp-scr--grow.is-done .dp-after { animation: day-land-in .42s cubic-bezier(.2, .8, .3, 1) backwards; }
 }
+/* EVERY LANDING ON THE STAGE FILLS BACKWARDS, NOT BOTH (2026-10-14). Each one ends on the row's own
+   resting style, so filling forwards changed nothing anybody could see, and it kept the finished
+   animation alive: in Safari a row with a live transform stays a layer of its own, and a mockup
+   with layers inside it can only be faded by drawing it off screen first. */
 @keyframes day-land-in {
   from { opacity: 0; transform: translateY(14px) scale(.96); }
   to { opacity: 1; transform: none; }

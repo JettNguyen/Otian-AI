@@ -78,7 +78,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261014-3" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261014-4" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -310,12 +310,16 @@
           <div class="day-bank"><div class="day-bank-strip"><i class="sk-shade"></i><i class="sk-lit"></i></div></div>
         </div>
         <div class="day-sky" aria-hidden="true">
-          <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
-            <!-- Two depths, so the field swims rather than slides: the small stars are the far
-                 ones and drift least, the big ones are nearer and drift about twice as far, on a
-                 slower loop of their own. Brightness is fill-opacity and not opacity, because the
-                 stylesheet animates opacity for the twinkle and the two have to multiply. -->
-            <g class="day-sky-far">
+          <!-- Two depths, so the field swims rather than slides: the small stars are the far
+               ones and drift least, the big ones are nearer and drift about twice as far, on a
+               slower loop of their own. Brightness is fill-opacity and not opacity, because the
+               stylesheet animates opacity for the twinkle and the two have to multiply.
+               ONE SVG PER DEPTH, and the drift moves the svg rather than a group inside it
+               (2026-10-14): Safari cannot move part of an svg as a layer, so a drifting group
+               repainted the whole sky on every frame of the night act, and a whole svg it
+               moves on the compositor for nothing. -->
+          <svg class="day-sky-far" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <g>
               <circle cx="60" cy="172" r="1.1" fill-opacity=".40"/><circle cx="156" cy="96" r="1" fill-opacity=".40"/><circle cx="214" cy="44" r="1" fill-opacity=".38"/><circle cx="126" cy="208" r="1.1" fill-opacity=".42"/><circle cx="240" cy="132" r="1" fill-opacity=".38"/><circle cx="330" cy="244" r="1.1" fill-opacity=".42"/>
               <circle cx="408" cy="196" r="1" fill-opacity=".36"/><circle cx="452" cy="232" r="1" fill-opacity=".36"/><circle cx="466" cy="158" r="1" fill-opacity=".38"/><circle cx="618" cy="152" r="1" fill-opacity=".38"/><circle cx="628" cy="40" r="1" fill-opacity=".38"/><circle cx="742" cy="258" r="1.1" fill-opacity=".40"/>
               <circle cx="796" cy="92" r="1.1" fill-opacity=".42"/><circle cx="868" cy="244" r="1" fill-opacity=".36"/><circle cx="890" cy="168" r="1" fill-opacity=".38"/><circle cx="1004" cy="208" r="1.1" fill-opacity=".40"/><circle cx="1118" cy="214" r="1" fill-opacity=".36"/><circle cx="1152" cy="46" r="1" fill-opacity=".38"/>
@@ -324,7 +328,9 @@
               <circle cx="1232" cy="512" r="1" fill-opacity=".34"/><circle cx="1386" cy="604" r="1.1" fill-opacity=".38"/><circle cx="246" cy="566" r="1" fill-opacity=".34"/><circle cx="300" cy="634" r="1" fill-opacity=".34"/><circle cx="140" cy="856" r="1" fill-opacity=".34"/><circle cx="372" cy="702" r="1" fill-opacity=".34"/>
               <circle cx="508" cy="812" r="1.1" fill-opacity=".38"/><circle cx="656" cy="736" r="1" fill-opacity=".34"/><circle cx="968" cy="744" r="1" fill-opacity=".34"/><circle cx="1128" cy="830" r="1.1" fill-opacity=".38"/><circle cx="1288" cy="706" r="1" fill-opacity=".34"/>
             </g>
-            <g class="day-sky-near">
+          </svg>
+          <svg class="day-sky-near" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+            <g>
               <circle cx="72" cy="96" r="1.4" fill-opacity=".58"/><circle cx="296" cy="156" r="1.6" fill-opacity=".68"/><circle cx="392" cy="62" r="1.2" fill-opacity=".48"/><circle cx="538" cy="118" r="1.3" fill-opacity=".52"/><circle cx="702" cy="196" r="1.7" fill-opacity=".70"/><circle cx="950" cy="138" r="1.4" fill-opacity=".58"/>
               <circle cx="1042" cy="56" r="1.2" fill-opacity=".48"/><circle cx="1206" cy="108" r="1.5" fill-opacity=".62"/><circle cx="1378" cy="178" r="1.2" fill-opacity=".48"/><circle cx="664" cy="404" r="1.2" fill-opacity=".45"/><circle cx="884" cy="388" r="1.5" fill-opacity=".60"/><circle cx="1342" cy="398" r="1.3" fill-opacity=".50"/>
               <circle cx="1064" cy="592" r="1.3" fill-opacity=".50"/><circle cx="96" cy="640" r="1.2" fill-opacity=".42"/><circle cx="178" cy="764" r="1.4" fill-opacity=".55"/><circle cx="812" cy="828" r="1.2" fill-opacity=".42"/><circle cx="1404" cy="830" r="1.2" fill-opacity=".42"/>
@@ -1918,11 +1924,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261014-3"></script>
-  <script src="js/ember.js?v=20261014-3" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261014-3"></script>
-  <script src="js/home.js?v=20261014-3" defer></script>
-  <script src="js/hero-dinner.js?v=20261014-3" defer></script>
+  <script src="js/nav.js?v=20261014-4"></script>
+  <script src="js/ember.js?v=20261014-4" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261014-4"></script>
+  <script src="js/home.js?v=20261014-4" defer></script>
+  <script src="js/hero-dinner.js?v=20261014-4" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

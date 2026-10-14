@@ -2,9 +2,10 @@
  * /app/: the page a code from Archie on the computer lands on when a phone's camera opens it
  * instead of Archie Mobile.
  *
- * Two codes land here. The pairing code carries a key after the `#`; the code for getting the app
- * (`app_download_url` in the Archie repo's `src-tauri/src/phone.rs`, from 0.3.7) carries nothing.
- * The script shows one of two panels, and on a phone it also sends the reader to where the app
+ * Three things land here. The pairing code carries a key after the `#`; the code for getting the
+ * app (`app_download_url` in the Archie repo's `src-tauri/src/phone.rs`, from 0.3.7) carries
+ * nothing; and a teammate's link (`teammate_link` in `src-tauri/src/team_phone.rs`, from 0.3.9)
+ * carries a key for one person's box and a ticket good once. The script shows one of three panels, and on a phone it also sends the reader to where the app
  * comes from: an iPhone to the App Store, an Android phone to the APK (2026-10-07, the day Apple
  * approved the iPhone app, at Jett's ask). What it must not do is more important than what it
  * does, and that is the rest of this comment.
@@ -38,6 +39,8 @@
 
 /** The format marker the desktop writes, matching `PREFIX` in the app's `src/relay/pairing.ts`. */
 const PAIRING_PREFIX = "a1.";
+/** A teammate's link, matching `JOIN_PREFIX` in the app's `src/relay/join-link.ts`. */
+const JOIN_PREFIX = "t1.";
 
 /** Where each phone gets the app. The same two addresses as archie/install/ and archie/mobile/. */
 const STORE = {
@@ -58,9 +61,19 @@ function phoneKind() {
 
 const fragment = window.location.hash.replace(/^#/, "").trim();
 const paired = fragment.startsWith(PAIRING_PREFIX);
-const panel = document.getElementById(paired ? "app-paired" : "app-plain");
+const joining = fragment.startsWith(JOIN_PREFIX);
+const panel = document.getElementById(paired ? "app-paired" : joining ? "app-team" : "app-plain");
 if (panel) panel.classList.remove("acct-hidden");
-if (paired) history.replaceState(null, "", window.location.pathname + window.location.search);
+// Nobody scanned anything: the link was tapped in a message, so the heading says that instead.
+if (joining) {
+  const title = document.getElementById("app-title");
+  const subtitle = document.getElementById("app-subtitle");
+  if (title) title.textContent = "You Were Sent a Link";
+  if (subtitle) subtitle.textContent = "Your phone opened it here instead of in the app.";
+}
+// A teammate's link is as live a secret as a pairing code, so it leaves the address bar the same
+// way. The reader still has it in the message it came in, which is where the panel sends them.
+if (paired || joining) history.replaceState(null, "", window.location.pathname + window.location.search);
 
 const kind = phoneKind();
 const get = kind ? document.querySelector('.app-get[data-os="' + kind + '"]') : null;
@@ -69,12 +82,19 @@ if (panel && get) {
   get.classList.remove("acct-hidden");
   const other = panel.querySelector(".app-get-other");
   if (other) other.hidden = true;
+  // A teammate needs no plan of their own: the owner's covers their box.
+  if (joining) get.querySelectorAll(".app-get-plan").forEach((line) => { line.hidden = true; });
 }
 
 /* Off to the store once per tab, so coming back to this page, or reloading it, leaves the reader
    here with the button rather than sending them away again. Storage can throw (a private window, or
-   blocked site data); then the reader is simply sent each time, which is the lesser fault. */
-if (kind) {
+   blocked site data); then the reader is simply sent each time, which is the lesser fault.
+
+   Not for a teammate's link. A pairing code is still on the computer's screen when the app is
+   installed, but this link has to be copied out of a message and pasted afterwards, and the steps
+   that say so are on this page; sent straight to the store, the reader never sees them. The store
+   button is in the panel. */
+if (kind && !joining) {
   let sent = false;
   try {
     sent = sessionStorage.getItem("archie-app-store-sent") === "1";

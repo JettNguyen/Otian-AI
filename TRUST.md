@@ -1593,6 +1593,18 @@ computer's sidebar. Still never a row. Once a release carries it, "Every other l
 count and nothing else" reads "Every other list sends a count, and a count per step when it shows
 its steps". See the stages entry.
 
+⚠️ **Not in a release yet: a list's rows travel when somebody opens it on the phone** (Archie
+`52aff399` and `47d7fb4f`, archie-mobile `f557f28`, October 14, 2026). Jett's call that night was
+for teammates first (their phone shows the lists as far as they may see them, and lets them change
+rows), and the parity rule brought the owner's phone along. Pressing a list under Lists asks the
+computer for its rows (`list_rows`, `list_rows_of` in `phone.rs`): the newest 300 at most, about
+200 KB at most, in the answer to that one request, sealed like every answer and never in the
+snapshot, which still carries counts. Three more ops change a row from that page (`row_update`,
+`row_delete`, `row_restore`), each through the desk table's own write. Once a release and a phone
+build carry it, what never travels reads "the rows inside the agent's lists, apart from the open
+items on its to-do list and the rows of a list somebody opens on the phone", and "Every other list
+sends a count" gains "until somebody opens it".
+
 **What the phone app asks for on the phone, and the approved wording.** Added 2026-09-17, because
 the App Store makes us write a purpose string for each one and a policy a reviewer can open, and
 because a permission prompt is the one piece of this product a person reads before they trust it.
@@ -2291,8 +2303,13 @@ shows the same counts."
 - ⚠️ **The phone gets counts, never rows.** How many are Out travels; which rentals are out does
   not. Never say the phone shows what is in a list, apart from the to-do list. Amended October 11,
   2026: from the release that carries Archie `70831b8a`, one exception travels, a card of entries
-  the agent drafted for a list, sent whole on its chat entry (the entry on cards).
+  the agent drafted for a list, sent whole on its chat entry (the entry on cards). Amended October
+  14, 2026: from the release and phone build that carry Archie `52aff399` and archie-mobile
+  `f557f28`, pressing a list under Lists opens its rows, with each row's step in its color, and a
+  row can be added, changed or deleted there (the phone entry's October 14 note). Until then this
+  bullet stands as written.
 - ⚠️ **A kept list on the phone opens Lists, not the list**, because the phone has no rows to show.
+  From the same release, Lists is one press from the list's own rows.
 - ⚠️ **Steps are drawn, not enforced.** A row can skip a step or go back one, and no step starts
   anything by itself. Never say moving a row to a step sends a message or runs a routine.
 - ⚠️ **The pin is each agent's own.** On Archie for Teams, keeping a shared list in one agent's
@@ -4307,7 +4324,9 @@ your lists, each with Undo."
   `onOpenList` in `src/app/agent-detail.tsx`). In Archie Mobile it opens Lists scrolled to that list
   and tints it (`SectionFocus` `list:` in archie-mobile `src/screens/Manage.tsx`).
   - ⚠️ **The phone stops at the list.** It is sent counts, never rows, so it cannot open one. Never
-    "tap Open on your phone to see the entry".
+    "tap Open on your phone to see the entry". Still true of where Open lands after October 14,
+    2026: it scrolls to the list, and pressing the list then opens its rows (archie-mobile
+    `f557f28`, in no build yet), but nothing finds or tints the entry among them.
   - ⚠️ **The row has to still be there.** One taken back, or deleted since, opens the list with
     nothing tinted.
 - **Amended October 12, 2026 (Archie `50dd4c1c`, in no release yet): an Undo is told to the agent.**
@@ -5430,7 +5449,8 @@ list keeps them all."
 - ⚠️ **On Archie for Teams,** only the owner and teammates allowed to add to the lists get the chat
   card, and a press from anybody else is refused: "Only somebody who can change the lists can bring a
   spreadsheet into one."
-- ⚠️ **Phone:** Archie Mobile has no Lists screen Import (it shows a list's counts, never its rows).
+- ⚠️ **Phone:** Archie Mobile has no Lists screen Import (it showed a list's counts, never its rows;
+  from archie-mobile `f557f28`, in no build yet, a list opens into its rows, still with no Import).
   Its empty-list line's Import (archie-mobile `93348cd`, in no build yet) only picks the file to
   send. A spreadsheet sent from Archie Mobile, alone or with words, carries the same sentence
   (`withFiles` in archie-mobile `src/attach.ts`), so by the code it gets the same card, but nobody
@@ -9445,15 +9465,17 @@ release of Archie carries them, and the phone's half until an Archie Mobile buil
 App Store. The `/phone/join` route and the `firestore.rules` block are live (deployed October 14,
 2026), and Jett joined a second phone through them on October 14, 2026: the two-phone test (join,
 ask, press a button, take them off and see the phone refused) passed. Their Dashboard came the night
-after (Archie `c0f53a35`, `6a7ac62e` and `1f0b5736`, archie-mobile `59744ba`), in no release and
-on no real phone yet.*
+after (Archie `c0f53a35`, `6a7ac62e` and `1f0b5736`, archie-mobile `59744ba`), and a Lists tab
+whose lists open into the rows they may see (Archie `52aff399` and `47d7fb4f`, archie-mobile
+`f557f28`), in no release and on no real phone yet.*
 
 **Proposed wording, Jett's to approve:** "Add someone to your agent without asking them to set up
 Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They
 get Archie Mobile, paste the link, and talk to the agent from their own phone, with no account to
 make. Your plan covers them. Take them off on your computer, and their phone can't read the agent
 any more." And, once the Dashboard ships: "Their phone has a Dashboard of its own: the team's to-do
-list, the reminders they set, and the jobs they asked for."
+list, the reminders they set, and the jobs they asked for. Their lists show the rows that are
+theirs and the ones nobody is named on."
 
 **Why it's true:**
 - **The link.** `team_phone_invite` in the Archie repo's `src-tauri/src/team_phone.rs` makes a key for
@@ -9473,11 +9495,13 @@ list, the reminders they set, and the jobs they asked for."
   signed-in account to the owner's. The billing service refuses it at every route meant for a person
   (`isMailboxToken`, `verifyPersonToken` in `stripe-webhook/index.js`).
 - **What it can do.** `dispatch` in `src-tauri/src/team_phone.rs` answers three things (be there,
-  say something, press a button), plus four for the to-do card on their Dashboard (tick, delete, put
-  back, add), and refuses the rest in words. The four pass `todo_gate` first: refused unless the
-  owner picked Talk and add to your lists or Everything you can, and refused for any row the person
-  does not see, including a row Undo would write or write over (test
-  `a_teammate_changes_only_the_todos_they_see_and_only_when_allowed`). A message reaches the agent as that
+  say something, press a button), reads a list's rows as the agent would show them (`read_list`,
+  test `a_list_page_gets_the_rows_its_person_sees`), and changes rows on the to-do card and a
+  list's page (`change_list`), and refuses the rest in words. A change passes `list_gate` first:
+  refused unless the owner picked Talk and add to your lists or Everything you can, and refused
+  for any row the person does not see, including a row Undo would write or write over; a row they
+  add carries their name where the list keeps one (test
+  `a_teammate_changes_only_the_rows_they_see_and_only_when_allowed`). A message reaches the agent as that
   person, a Guest, in a conversation of their own (`say_as_teammate` in
   `crates/archie-net/src/inapp.rs`, test `a_teammate_arrives_as_themselves_and_never_as_this_computer`),
   and never in the owner's chat app (`stays_here` in `crates/archie-net/src/mirror.rs`, test
@@ -9517,8 +9541,8 @@ list, the reminders they set, and the jobs they asked for."
   a reply, and the phone's Settings tab says so.
 - ⛔ Never that a teammate can do anything on the phone but talk to the agent, press the buttons on
   what it sends them, read their Dashboard, and (when the owner lets teammates change the lists)
-  tick off, add and delete to-dos. No pictures or files, no voice, no settings, no other agents.
-  Opening a list's rows on the phone is not built yet.
+  tick off, add and delete to-dos and add, change and delete rows on the lists. No pictures or
+  files, no voice, no settings, no other agents.
 - ⛔ Never that a teammate's Dashboard shows only their own work. It shows their rows and every row
   naming nobody, and the usual to-do list has no column naming a person, so every open to-do on it,
   the owner's included, is on each teammate's Dashboard. That is what the agent would read them if they

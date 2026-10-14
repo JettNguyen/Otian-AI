@@ -9815,8 +9815,11 @@ for this."
 **Boundaries:**
 - ⛔ Never call it a lock or private rows. It keeps a teammate's answers to their own work. In a group
   chat where several people speak in one burst the agent cannot tell whose turn it is and sees every
-  row, a change to a row by its id is not scoped, and what the agent remembers or a document says is
-  not scoped at all.
+  row, and what the agent remembers or a document says is not scoped at all. A change or removal of
+  a row by its id is checked against the scope since Archie `c0f53a35` (October 14, 2026, refused in
+  the words a read is, before a removal's question describes the row; test
+  `a_teammate_cannot_change_or_remove_a_row_they_do_not_see`), in no release yet. Until a release
+  carries it, a change by id is not scoped.
 - ⛔ Never that every list is scoped. Only a list with a column named as above; any other list is
   read in full by every teammate, as the shared-knowledge wording says.
 - ⚠️ The owner is on the team too. A row with the owner's name on it is the owner's, and a teammate

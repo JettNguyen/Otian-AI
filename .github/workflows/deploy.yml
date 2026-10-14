@@ -105,6 +105,10 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: ${{ runner.temp }}/otian-site
+          # From v4 on, the upload leaves out files whose names start with a dot unless told
+          # otherwise, and the staged site carries .well-known/ (security.txt and Microsoft's
+          # identity file), which stage-site.py includes on purpose.
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deploy

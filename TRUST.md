@@ -9444,13 +9444,16 @@ archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be s
 release of Archie carries them, and the phone's half until an Archie Mobile build with it is on the
 App Store. The `/phone/join` route and the `firestore.rules` block are live (deployed October 14,
 2026), and Jett joined a second phone through them on October 14, 2026: the two-phone test (join,
-ask, press a button, take them off and see the phone refused) passed.*
+ask, press a button, take them off and see the phone refused) passed. Their Dashboard came the night
+after (Archie `c0f53a35`, `6a7ac62e` and `1f0b5736`, archie-mobile `59744ba`), in no release and
+on no real phone yet.*
 
 **Proposed wording, Jett's to approve:** "Add someone to your agent without asking them to set up
 Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They
 get Archie Mobile, paste the link, and talk to the agent from their own phone, with no account to
 make. Your plan covers them. Take them off on your computer, and their phone can't read the agent
-any more."
+any more." And, once the Dashboard ships: "Their phone has a Dashboard of its own: the team's to-do
+list, the reminders they set, and the jobs they asked for."
 
 **Why it's true:**
 - **The link.** `team_phone_invite` in the Archie repo's `src-tauri/src/team_phone.rs` makes a key for
@@ -9470,16 +9473,24 @@ any more."
   signed-in account to the owner's. The billing service refuses it at every route meant for a person
   (`isMailboxToken`, `verifyPersonToken` in `stripe-webhook/index.js`).
 - **What it can do.** `dispatch` in `src-tauri/src/team_phone.rs` answers three things (be there,
-  say something, press a button) and refuses the rest in words. A message reaches the agent as that
+  say something, press a button), plus four for the to-do card on their Dashboard (tick, delete, put
+  back, add), and refuses the rest in words. The four pass `todo_gate` first: refused unless the
+  owner picked Talk and add to your lists or Everything you can, and refused for any row the person
+  does not see, including a row Undo would write or write over (test
+  `a_teammate_changes_only_the_todos_they_see_and_only_when_allowed`). A message reaches the agent as that
   person, a Guest, in a conversation of their own (`say_as_teammate` in
   `crates/archie-net/src/inapp.rs`, test `a_teammate_arrives_as_themselves_and_never_as_this_computer`),
   and never in the owner's chat app (`stays_here` in `crates/archie-net/src/mirror.rs`, test
   `a_teammates_phone_conversation_never_reaches_the_chat_app`). What they may do with the owner's
   accounts is the same three answers every teammate gets.
 - **What the phone is sent.** `snapshot` in `src-tauri/src/team_phone.rs`: the agent's name, face and
-  whether it is running, and that person's own conversation, sealed with their key. Drawn by the
-  owner's own conversation screen with the owner's controls left off (archie-mobile
-  `src/screens/Teammate.tsx`, `fromTeammate` in `src/teammate.ts`).
+  whether it is running, that person's own conversation, and their Dashboard, sealed with their
+  key. The Dashboard is the open to-dos and each list's counts as that person sees them
+  (`RowScope::for_speaker`, the rule the agent's list tools keep), the reminders set for them, and
+  the jobs they asked for without the step line under each (test
+  `a_teammates_dashboard_is_their_own_rows_reminders_and_jobs`). Built again every minute and
+  published only when it changed. Drawn by the owner's own screens with the owner's controls left
+  off (archie-mobile `src/screens/Teammate.tsx`, `fromTeammate` in `src/teammate.ts`).
 - **Taking someone off.** Remove or Block on their row, or starting the agent's sharing over, deletes
   the box (`close_box`, from `src-tauri/src/commands/access.rs`) and the key. The rules compare the
   box's device id to the phone's on every read, so the phone's next read is refused.
@@ -9503,9 +9514,15 @@ any more."
   page shows the App Store on an iPhone and the download on Android (`phoneInviteMessage` in the
   Archie repo's `src/app/team.ts`). It said "the App Store or Google Play" until October 14, 2026.
 - ⛔ Never that a teammate's phone gets notifications. It does not yet: they open Archie Mobile to see
-  a reply, and the phone's About page says so.
-- ⛔ Never that a teammate can do anything on the phone but talk to the agent and press the buttons on
-  what it sends them. No pictures or files, no voice, no settings, no other agents.
+  a reply, and the phone's Settings tab says so.
+- ⛔ Never that a teammate can do anything on the phone but talk to the agent, press the buttons on
+  what it sends them, read their Dashboard, and (when the owner lets teammates change the lists)
+  tick off, add and delete to-dos. No pictures or files, no voice, no settings, no other agents.
+  Opening a list's rows on the phone is not built yet.
+- ⛔ Never that a teammate's Dashboard shows only their own work. It shows their rows and every row
+  naming nobody, and the usual to-do list has no column naming a person, so every open to-do on it,
+  the owner's included, is on each teammate's Dashboard. That is what the agent would read them if they
+  asked; a to-do meant for one person belongs on a list with an Assigned to column.
 - ⛔ Never that the conversation is private from the owner. It is kept on the owner's computer, and the
   owner can ask the agent what each teammate asked; the phone says that too.
 - ⛔ Never "nothing passes through Otian". The link is spent at Otian's server, and the messages cross
@@ -9518,7 +9535,8 @@ any more."
   name replaces the old one.
 - ⚠️ Somebody already on the agent through a chat app cannot be moved to a phone yet; a link is for
   somebody new.
-- ⚠️ Never watched end to end on real phones.
+- ⚠️ Watched end to end on two real phones on October 14, 2026: join, ask, press a button, take
+  them off and see the phone refused. The Dashboard has not been on a real phone.
 - What it replaced: adding someone needed a chat app on the agent, so an agent kept in the window
   could not be shared at all (the ⚠️ in the entry above).
 

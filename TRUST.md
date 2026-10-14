@@ -2519,7 +2519,7 @@ sheet. Change any of it by asking."
   tokens of rules on every turn of an agent a setup matched, read at the cached price on a warm
   turn (Archie's `docs/COST-MEASURED.md` section 23).
 
-**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, `594d1d35` and `f51a371d`,
+**Amended October 13, 2026: a fifth setup, lead generation** (Archie `b5634dc5`, `594d1d35`, `f51a371d` and `60ba7d48`,
 on main and in no release; nothing about it may be said on a page until a release carries it). One
 setup for every way a business makes money selling leads: buying and reselling them, generating its
 own with ads, a site or a call center, selling calls, or setting appointments for clients on a
@@ -2533,8 +2533,8 @@ each client is owed (form fills, live transfers, calls, appointments, or signed 
 ordered and delivered counts, the price and cost of each, links to the client and the source, and
 an Order stage of Ordered, Delivering, Delivered, and Paid. Its rules: a lead's details go to a
 client, and a lead is called or texted, only when there is a record that they agreed to be
-contacted; every marketing email, cold ones included, names the business and carries its postal
-address and a way to stop getting them; and a client is never promised how many sales, cases, or
+contacted; cold email to a business needs no agreement first, but every marketing email names the
+business and carries its postal address and a way to stop getting them; and a client is never promised how many sales, cases, or
 appointments their leads will turn into, only past numbers with whose they are, the owner's own
 numbers counting as a source. Its rules are inside the
 96 to 145 tokens above. Tested by three personas, one per model (`scripts/agent-sim/l05-lead-gen`,

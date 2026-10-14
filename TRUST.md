@@ -1345,9 +1345,9 @@ anyone but the account owner, and the seal means owning the row is not reading i
 - ❌ Never imply the encryption protects against a compromised phone. Whoever holds the phone holds
   the key. That is what the Unpair button and key rotation are for.
 - ❌ Not a compliance claim. See the boundaries on "No Otian custodian" above; the same limits apply.
-- ❌ **Never say Archie Mobile buzzes, rings or notifies.** It shows what the agent posted when it is
-  opened. The pairing screen and Settings say "It does not buzz or show notifications yet" (from
-  0.3.5).
+- ⚠️ **Archie Mobile notifies only once its owner turns notifications on**, and only from Archie
+  0.3.9 with Archie Mobile 1.3 (October 14, 2026). Before that, and on a teammate's phone, it shows
+  what the agent posted when it is opened. See "Archie Mobile notifications" below.
 
 ### 🚧 Texting your agent on iMessage like a contact, on an Apple ID of its own: BUILT 2026-10-06, SHIPPED in Archie 0.3.6 on October 6, 2026, not yet tried on a real Mac
 
@@ -1744,6 +1744,42 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
   computer has everything.
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
+
+### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3 (build 32)
+
+**The claim:** "Turn on notifications in Archie Mobile and your phone shows a reminder, a report, new
+mail, or a reply to something you sent from it, even when the app is closed. What each one says is
+locked on your computer and opened only on your phone, so we pass it along without being able to
+read it, and so do Apple and Google."
+
+**Why it's true:** when an agent posts something on its own (the messages that raise an alert on the
+computer), or answers something the owner sent from the phone, the computer seals a preview (the
+agent's name and up to 240 characters of the message) with the pairing key and hands it to the
+billing service's `/phone/push`, which passes it to Apple or Google (Archie
+`src-tauri/src/phone_push.rs` and the drain in `inapp.rs`; `stripe-webhook/push.js`). The phone opens
+it with its own copy of the key (archie-mobile `src/push/`, with a notification service extension
+on an iPhone). The phone files where it can be reached at `/phone/push-address` with the id of the
+key it holds; a preview goes only to addresses with the same key id, and every other one is
+deleted. That address (the platform, the address Apple or Google issued, Apple's host, the key id,
+and when it was written) is the one thing stored, under the account in a collection no client can
+read, and the privacy policy says so with a row in its retention table. Previews are never stored.
+`docs/MOBILE-APP.md` section 4.3 is the contract the three codebases share.
+
+**Boundaries:**
+- ⛔ **Never "even when your computer is off".** The computer sends them, so it has to be on, awake,
+  and running Archie. Its window may be closed (see "Archie keeps running when its window is
+  closed").
+- ⛔ **The owner's phone only.** A teammate's Archie Mobile shows no notifications.
+- ⛔ **Never on by default.** The owner turns them on in Archie Mobile, under Settings, and the phone
+  asks first.
+- ⚠️ **Needs both halves:** Archie 0.3.9 on the computer and Archie Mobile 1.3 on the phone (in App
+  Review on October 14, 2026; TestFlight builds 30 and later carry it).
+- ⚠️ **Not yet watched on a real lock screen** as of October 14, 2026. Every test fakes Apple, Google
+  and Firestore, with sealing vectors checked on all three ends. Copy may describe what it does and
+  may not call it proven.
+- ⚠️ **On an agent with a chat app connected, a reply's notification goes about 15 seconds after the
+  agent goes quiet**, so never "instantly".
+- ❌ Never "end-to-end encrypted" without the boundaries on "Archie on your phone" above.
 
 ### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0
 
@@ -3135,8 +3171,9 @@ calendar work the whole time."
   asked of the roster again (`teammate_said`, `owner_told` in
   `crates/archie-runtime/src/gateway/money_out.rs`, `standing` in `crates/archie-runtime/src/access.rs`).
   A teammate's kept messages are never in the owner's note or count, nor the owner's in theirs.
-  - ⚠️ **No push to the owner's phone yet.** The line reaches Archie Mobile as a message in the
-    conversation; a phone notification waits for the phone's push work.
+  - ⚠️ **A notification on the owner's phone only if they turned notifications on** in Archie
+    Mobile, under Settings (from 0.3.9 with Archie Mobile 1.3). Otherwise the line waits in the
+    conversation until Archie Mobile is opened.
   - ⚠️ **A teammate removed before the AI is back is not answered**, and what they sent goes.
   - ⚠️ **A turn that runs out part way keeps nothing**, for a teammate as for the owner: it asks
     them to tell the owner and send it again.
@@ -3271,7 +3308,7 @@ it opens."
 - What it replaced: the owner met a stopped agent and learned why only by sending it a message (the
   October 10 note in the Archie repo's `docs/OPEN-THREADS.md`).
 
-### ✅ A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, in no release yet
+### ✅ A reply that says your calendar or email is not connected has a button under it that opens where to connect it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Amended October 12, 2026
 (Archie `202f0b89`, archie-mobile `36b27f1`, in no release yet): a reply that names an app nobody
@@ -4338,7 +4375,7 @@ your lists, each with Undo."
   - ⚠️ **Archie's own conversation.** An Undo is pressed there or on the phone, which mirrors it; a
     chat app's conversation is not told.
 
-### 🚧 When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, in no release
+### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 *Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
 page until a release carries it.*
@@ -4364,7 +4401,7 @@ setting every cycle, so it stops at the next one. Test `stop_watching_turns_the_
   mail started it, and nothing in the conversation said an inbox was now being read or how to stop
   it (the fix plan after round three, B.22).
 
-### 🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), in no release, never run on a real inbox
+### 🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), RELEASED in 0.3.9, 2026-10-14, never run on a real inbox
 
 **Approved wording, once a release carries it:** "Mail from someone you've written to in the last
 two weeks is read as soon as Archie sees it. Other mail can take a few minutes longer to show up,
@@ -4888,7 +4925,7 @@ them as somebody new."
   tested on the money note (`a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`); no
   test builds this note for a teammate.
 
-### 🚧 A first text to a lead, written for you to send from your own phone, with whether they agreed to texts: BUILT 2026-10-12, in no release
+### 🚧 A first text to a lead, written for you to send from your own phone, with whether they agreed to texts: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 *Archie `db585c3e` and archie-mobile `f90899e`, on the `journey-fixes` branches, in no release.
 Nothing below may be said on a page until a release carries them. The phone half has not been
@@ -5208,7 +5245,7 @@ your reminders, and your agent's routines. Press one on the computer and that li
   the Calendar tab said "Nothing on" under a Saturday full of bookings, because it drew only calendars
   (the module note in `schedule.rs` and the header of `src/app/calendar.tsx`).
 
-### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, in no release yet
+### ✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Amended October 12, 2026 (Archie
 `56308306`, archie-mobile `93348cd`, in no release yet): the chat card's Add shows the rows before
@@ -7214,7 +7251,7 @@ the picture in the approval card shows which button it means.
   permission), the workout post, and two Learning Library sections not yet published
   (`assets/library.json`).
 
-### ✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`, in no release yet)
+### ✅ A morning list for each line of work, with no AI in it: BUILT 2026-10-12 (Archie `bf185428`), RELEASED in 0.3.9, 2026-10-14
 
 The retention plan's 3.3, built before round four (the fix plan after round three, E.3 and E.4).
 
@@ -7241,13 +7278,13 @@ the first one comes, from the same setup time.
   with the agent, and needs Archie running and the computer awake at that time, like a routine.
 - ⚠️ The time is fixed per line of work for now; the owner can stop it, not move it.
 
-### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`, in no release yet)
+### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
 next morning that nothing had run; the dialog that used to appear could only warn. Jett called it
 for before round four (the fix plan after round three, E.2).
 
-**Approved wording, once it ships:** "Close Archie's window and your agent keeps working: Archie
+**Approved wording:** "Close Archie's window and your agent keeps working: Archie
 stays running in the Dock on a Mac, or by the clock on Windows. Only quitting Archie switches it off.
 Archie also opens by itself when you sign in to your computer, with no window, so your agent is
 answering again after a restart. You can turn that off in Settings."
@@ -7452,13 +7489,14 @@ Archie tells you it did."
 - ⚠️ **Not yet watched on a real mailbox.** The join is tested both halves and end to end in unit
   tests; nobody has set a conditional reminder and had a real person answer it. Copy may describe
   what it does and may not call it proven.
-- ❌ **Never say Archie Mobile notifies you or makes your phone buzz.** It has no notifications and
-  no push. With no chat app connected (and messaged once), a reminder waits in the conversation
-  until it is opened. "At that minute" is when it is posted, not when anybody hears it. A chat app
-  such as Telegram is what buzzes a phone. Found by the reviewer pass on October 5, 2026; from
-  0.3.5 (Archie `eb4aea51` and `4269a5e1`) the agent says so when it sets one on an agent no phone hears, and
-  the computer shows an alert when the agent posts something on its own (see "An alert on this
-  computer" below).
+- ❌ **Never say Archie Mobile always notifies you.** It does only on the owner's phone, only once
+  notifications are on in its Settings, and only from Archie 0.3.9 with Archie Mobile 1.3. Without
+  that, or with no chat app connected (and messaged once), a reminder waits in the conversation
+  until it is opened. "At that minute" is when it is posted, not when anybody hears it. Found by
+  the reviewer pass on October 5, 2026; the agent says where it lands when it sets one on an agent
+  no chat app reaches (Archie `eb4aea51`, `4269a5e1`, and from 0.3.9 naming the phone's switch),
+  and the computer shows an alert when the agent posts something on its own (see "An alert on
+  this computer" below).
 - ⚠️ **Any number in the message passes the when-check,** so never "it never guesses a time".
 
 ### ✅ An alert on this computer when the agent posts on its own: BUILT 2026-10-05 (Archie `4269a5e1`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
@@ -7489,9 +7527,8 @@ the first line, while Archie is open behind your other windows. Turn it off in S
   permission, asking for it, and showing one; scheduling and listeners stay closed.
 
 **Boundaries:**
-- ❌ **Never say your phone buzzes.** This is the computer only. Archie Mobile has no notifications
-  and no push; a chat app such as Telegram is what buzzes a phone (see the boundary on Reminders
-  above).
+- ❌ **Never say this alert buzzes your phone.** This one is the computer only. The phone has its
+  own, once its owner turns them on (see "Archie Mobile notifications").
 - ⛔ **Never "even when Archie is closed".** It needs the computer on, awake, and Archie open. With
   Archie shut, nothing posts and nothing alerts.
 - ⛔ **Never "click it to open the conversation".** The plugin has no click handler on a desktop in
@@ -9394,7 +9431,7 @@ change your calendar, or use the apps you connected."
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
 
-### 🚧 Adding and editing people from the owner's phone: BUILT October 14, 2026, in no release
+### ✅ Adding and editing people from the owner's phone: BUILT October 14, 2026, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3
 
 **Proposed wording:** "In Archie Mobile, open your agent's More tab, then Teammates. Add someone,
 edit their name and contact details, remove them, or stop a waiting invite. Copy or share the
@@ -9498,7 +9535,7 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
   wife's email with her on the team (the Archie repo's
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
 
-### 🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, in no release
+### 🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3
 
 *Archie `0e581b2c`, `2ed18dca`, `217a1630`, `c4fc6313` and `6f20212d` on `journey-fixes`, and
 archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be said on a page until a

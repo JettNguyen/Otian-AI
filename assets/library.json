@@ -77,7 +77,7 @@
       "notes": [
         "Mac: System Settings, then Battery, then Options. Turn on <strong>Prevent automatic sleeping on power adapter when the display is off</strong> (on a desktop Mac, under Energy Saver).",
         "Windows: Settings, then System, then Power &amp; battery. Under <strong>Screen and sleep</strong>, set sleep when plugged in to Never.",
-        "Closing Archie&rsquo;s window stops your agent. Minimize it instead."
+        "Since Archie 0.3.9, closing Archie&rsquo;s window leaves your agent working, though the video says otherwise. Only quitting Archie switches it off."
       ],
       "words": [
         "Why does my computer need to stay on?",

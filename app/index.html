@@ -39,7 +39,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20261009-1" />
+  <link rel="stylesheet" href="../css/styles.css?v=20261014-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -177,8 +177,8 @@
     <section class="page-hero" aria-label="Page introduction">
       <div class="page-hero-inner">
         <span class="section-label fade-up">Archie Mobile</span>
-        <h1 class="fade-up delay-1">You Scanned a Code</h1>
-        <p>Your camera opened this page instead of the app.</p>
+        <h1 class="fade-up delay-1" id="app-title">You Scanned a Code</h1>
+        <p id="app-subtitle">Your camera opened this page instead of the app.</p>
       </div>
     </section>
 
@@ -209,6 +209,31 @@
             </p>
           </div>
 
+          <!--
+            A teammate's link (from 0.3.9): the owner made it on the agent's Access tab and sent it
+            in a message, and the reader tapped it. It goes into the app, pasted, so the panel is
+            the steps rather than a trip to the store, and no plan is asked of them: the owner's
+            covers it.
+          -->
+          <div id="app-team" class="acct-card acct-hidden">
+            <h2 class="app-h2">This link goes into Archie Mobile</h2>
+            <p class="acct-lead">
+              Somebody added you to their agent. Get <strong>Archie Mobile</strong> on this phone
+              and open it.
+            </p>
+            <p class="acct-lead" style="margin-top:12px;">
+              Then go back to the message this link came in, touch and hold the link, copy it, and
+              paste it into the box under <strong>Joining a team</strong>.
+            </p>
+            <p class="acct-lead" style="margin-top:12px;">
+              The link works once, for 7 days. If it has run out, ask the person who sent it for a
+              new one. You don&rsquo;t need an Archie plan of your own.
+            </p>
+            <p class="acct-lead app-get-other" style="margin-top:12px;">
+              <a href="../archie/mobile/">Archie Mobile is here</a>.
+            </p>
+          </div>
+
           <div id="app-plain" class="acct-card acct-hidden">
             <h2 class="app-h2">Archie Mobile</h2>
             <p class="acct-lead">
@@ -230,12 +255,13 @@
           <div class="app-get acct-hidden" data-os="ios">
             <p class="acct-lead">No app on this phone yet?</p>
             <a class="btn btn-primary btn-lg" href="https://apps.apple.com/app/archie-mobile/id6810899666">Get Archie Mobile on the App Store</a>
-            <p class="acct-lead">Phone access needs a plan or a live trial.</p>
+            <p class="acct-lead app-get-plan">Phone access needs a plan or a live trial.</p>
           </div>
           <div class="app-get acct-hidden" data-os="android">
             <p class="acct-lead">No app on this phone yet?</p>
             <a class="btn btn-primary btn-lg" href="https://github.com/JettNguyen/archie-releases/releases/latest/download/Archie-latest.apk">Download Archie Mobile for Android</a>
-            <p class="acct-lead">Android stops you twice on the way: <a href="../archie/install/#phone-heading">see the steps</a>. Phone access needs a plan or a live trial.</p>
+            <p class="acct-lead">Android stops you twice on the way: <a href="../archie/install/#phone-heading">see the steps</a>.</p>
+            <p class="acct-lead app-get-plan">Phone access needs a plan or a live trial.</p>
           </div>
 
         </div>
@@ -323,8 +349,8 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20261009-1"></script>
-  <script type="module" src="../js/account-nav.js?v=20261009-1"></script>
-  <script type="module" src="../js/app-page.js?v=20261009-1"></script>
+  <script src="../js/nav.js?v=20261014-1"></script>
+  <script type="module" src="../js/account-nav.js?v=20261014-1"></script>
+  <script type="module" src="../js/app-page.js?v=20261014-1"></script>
 </body>
 </html>

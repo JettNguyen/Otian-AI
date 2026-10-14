@@ -9427,7 +9427,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
   taking someone off and Edit are on the computer, and the phone's page says so.
 - ⚠️ Adding someone still needs a chat app on the agent (Telegram, Slack, Discord, Signal or Matrix),
   because that is where a teammate messages it. An agent that talks only in Archie's own window
-  cannot be shared, and the screen says so.
+  cannot be shared, and the screen says so. (True of every release. An Archie Mobile link instead,
+  on any agent, is BUILT 2026-10-13 and in no release: see the entry after this one.)
 - ⚠️ "Knows its team" means it is told the names, jobs and, on the owner's turns, contact details
   written on the rows. It does not search mail or contacts for anybody, and a person nobody wrote
   anything about is known by their chat handle at most.
@@ -9435,6 +9436,84 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 - What it replaced: a teammate was a chat app's id and handle, and an owner's agent asked him for his
   wife's email with her on the team (the Archie repo's
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
+
+### 🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, in no release
+
+*Archie `0e581b2c`, `2ed18dca`, `217a1630`, `c4fc6313` and `6f20212d` on `journey-fixes`, and
+archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be said on a page until a
+release of Archie carries them, and the phone's half until an Archie Mobile build with it is on the
+App Store. The `/phone/join` route and the `firestore.rules` block go live when that branch reaches
+main and deploys; neither has run against the real project.*
+
+**Proposed wording, Jett's to approve:** "Add someone to your agent without asking them to set up
+Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They
+get Archie Mobile, paste the link, and talk to the agent from their own phone, with no account to
+make. Your plan covers them. Take them off on your computer, and their phone can't read the agent
+any more."
+
+**Why it's true:**
+- **The link.** `team_phone_invite` in the Archie repo's `src-tauri/src/team_phone.rs` makes a key for
+  that one person (kept in the Keychain as `phone_team_<box>`), and `TeamBox::mint_link` in
+  `crates/archie-core/src/phone.rs` writes a ticket good once, for 7 days (`TEAMMATE_LINK_LIFE_MS`).
+  The link is `https://otianai.com/app/#t1.<key>.<ticket>`; a browser never sends what follows the
+  `#` to a server. On screen: Add someone, on the agent's Setup tab under Who can message it, then
+  Make an Archie Mobile link, with a message to copy (`src/app/access.tsx`, `phoneInviteMessage` in
+  `src/app/team.ts`). It works on an agent kept in Archie's own window too.
+- **Joining.** The box under Joining a team on archie-mobile's pairing screen
+  (`src/screens/Pair.tsx`); `join` in `src/relay/pairing.ts` spends the ticket at `/phone/join`
+  (`teammateJoinHandler` in the Archie repo's `stripe-webhook/phone-pair.js`, six tests in
+  `phone-pair.test.js`), which signs the phone in as an account of its own, `teammate-<box>`, never the
+  owner's. The link format is checked in archie-mobile `src/relay/join-link.test.ts`.
+- **What that account reaches.** `firestore.rules`, `match /users/{uid}/team_phone/{box}`: it reads its
+  one box and leaves commands under it, and nothing else, because every other rule compares the
+  signed-in account to the owner's. The billing service refuses it at every route meant for a person
+  (`isMailboxToken`, `verifyPersonToken` in `stripe-webhook/index.js`).
+- **What it can do.** `dispatch` in `src-tauri/src/team_phone.rs` answers three things (be there,
+  say something, press a button) and refuses the rest in words. A message reaches the agent as that
+  person, a Guest, in a conversation of their own (`say_as_teammate` in
+  `crates/archie-net/src/inapp.rs`, test `a_teammate_arrives_as_themselves_and_never_as_this_computer`),
+  and never in the owner's chat app (`stays_here` in `crates/archie-net/src/mirror.rs`, test
+  `a_teammates_phone_conversation_never_reaches_the_chat_app`). What they may do with the owner's
+  accounts is the same three answers every teammate gets.
+- **What the phone is sent.** `snapshot` in `src-tauri/src/team_phone.rs`: the agent's name, face and
+  whether it is running, and that person's own conversation, sealed with their key. Drawn by the
+  owner's own conversation screen with the owner's controls left off (archie-mobile
+  `src/screens/Teammate.tsx`, `fromTeammate` in `src/teammate.ts`).
+- **Taking someone off.** Remove or Block on their row, or starting the agent's sharing over, deletes
+  the box (`close_box`, from `src-tauri/src/commands/access.rs`) and the key. The rules compare the
+  box's device id to the phone's on every read, so the phone's next read is refused.
+- **Who pays.** The box opens only while the owner's plan or live trial is good (`ownerMayRelay` in
+  `firestore.rules`); the teammate has no account and no plan. The agent's AI calls are on the
+  owner's AI account, as every teammate's are.
+- **Where a tapped link lands.** `app/index.html` and `js/app-page.js` in this repo show "This link
+  goes into Archie Mobile" with the steps for a `t1` link, take the link out of the address bar, and
+  do not send the reader to the store before they have read the steps.
+- **The owner's phone** says On Archie Mobile under that person, as the window's row does
+  (`guests_in` in `src-tauri/src/phone.rs`; archie-mobile `src/screens/Guests.tsx`).
+
+**Boundaries:**
+- ⛔ Archie for Teams only. The personal edition answers one person per agent (`PEOPLE_PER_AGENT` in
+  `crates/archie-core/src/plan.rs`).
+- ⛔ Never that a teammate's phone gets notifications. It does not yet: they open Archie Mobile to see
+  a reply, and the phone's About page says so.
+- ⛔ Never that a teammate can do anything on the phone but talk to the agent and press the buttons on
+  what it sends them. No pictures or files, no voice, no settings, no other agents.
+- ⛔ Never that the conversation is private from the owner. It is kept on the owner's computer, and the
+  owner can ask the agent what each teammate asked; the phone says that too.
+- ⛔ Never "nothing passes through Otian". The link is spent at Otian's server, and the messages cross
+  the same sealed mailbox the owner's phone uses, which Otian holds and cannot read.
+- ⚠️ The agent answers only while the owner's computer is awake with Archie open, as for the owner's
+  own phone.
+- ⚠️ Leave, on the phone, forgets the link on that phone only. The owner still sees the person until
+  they take them off, and the question before Leave says so.
+- ⚠️ One phone per link. A second phone opening the same link is refused, and a new link for the same
+  name replaces the old one.
+- ⚠️ Somebody already on the agent through a chat app cannot be moved to a phone yet; a link is for
+  somebody new.
+- ⚠️ Never watched end to end on real phones, and the rules block has never been compiled (there is
+  no emulator on the build Mac); it compiles when it deploys.
+- What it replaced: adding someone needed a chat app on the agent, so an agent kept in the window
+  could not be shared at all (the ⚠️ in the entry above).
 
 ### ✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

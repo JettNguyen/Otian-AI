@@ -9394,6 +9394,47 @@ change your calendar, or use the apps you connected."
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
 
+### 🚧 Adding and editing people from the owner's phone: BUILT October 14, 2026, in no release
+
+**Proposed wording:** "In Archie Mobile, open your agent's More tab, then Teammates. Add someone,
+edit their name and contact details, remove them, or stop a waiting invite. Copy or share the
+invite message from your phone."
+
+**Why it is true in the new code:**
+- Archie `src-tauri/src/phone/people.rs` maps the owner's phone operations to `access_member_set`,
+  `access_invite`, `access_revoke`, `access_invite_cancel`, `team_phone_invite`, and
+  `team_phone_cancel`. These are the computer's own handlers, with the same account ownership,
+  claimed-owner, edition limits, card cleaning, and audit rules.
+- Archie Mobile `src/screens/People.tsx` draws the roster and its add/edit/send sheets.
+  `src/people.ts` reads the response defensively and copies the computer's invite messages.
+  `Guests.manage` makes Teammates available even before anyone else joins; older computers retain
+  the existing page and its directions to the computer.
+- Contact details are fetched on demand, encrypted for the owner's phone. The regular snapshot
+  still carries names and jobs, plus a capability flag and roster-write timestamp, never email,
+  phone numbers, invite links, or keys (`guests_of`, `guests_in` in Archie's `phone.rs`).
+- A newly made link is returned in `data`, sealed under the owner's pairing key by the existing
+  relay loop. It is never an unencrypted Firestore field or an audit value. The phone deletes the
+  completed command after reading it (`runCommand` in `src/relay/firestore.ts`). The invite key
+  cannot be read back by any operation here; replacement makes a new one.
+- The teammate dispatcher refuses these operations before any handler
+  (`team_phone::teammate_may_run`, checked by `roster_management_never_reaches_a_teammates_handler`).
+  Roster shape, missing owners, card bounds, malformed phone responses, and invite-message actions
+  have local tests. There is no new AI call and no added text in an agent's ordinary turn.
+
+**Boundaries:**
+- Never describe this as released until both apps carry it. Existing phone and computer releases
+  still require adding and editing people on the computer. This closes that gap in the code.
+- Never that a teammate's phone can invite, edit, or remove people. Only the owner's phone can.
+- Never that Archie sends the invitation. The owner chooses where to paste or share the message.
+- Never that an invite makes somebody the owner, or lifts the edition's person limit.
+- Never that this reveals existing account credentials or pairing keys. The sole key-bearing
+  response is a newly created teammate invite, encrypted for the paired owner.
+- The computer still runs the commands and must be awake, connected to the internet, and running
+  Archie. Reset access, blocking, and approving chat-app requests remain computer-only.
+- The earlier notes below that the phone cannot add/edit describe the existing releases, not this
+  new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
+  restrictive: responses already have end-to-end encryption under the owner's pairing key.
+
 ### ✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the

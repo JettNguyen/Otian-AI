@@ -6617,6 +6617,58 @@ why they are listed by range.
 - The caveat in "What your agent can write to disk" still holds: an edited workbook has been opened
   cleanly in Excel only when Archie made the file, never yet one that Excel saved.
 
+### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, in no release yet
+
+**Proposed wording, Jett's to approve:** "Drop in the connections file LinkedIn emails you, zip and
+all, and Job Hunt shows where the people you know work now, the biggest groups first, then asks
+which of those places you'd want. Ask who you know at one and it says who to write to first and
+drafts the note. When somebody offers to introduce you, it keeps the offer and the date. It never
+sends anything."
+
+**Why it's true:** all in the Archie repo.
+- Job Hunt (`data/marketplace/skills/job-hunt.json`, 1.1.0) keeps two more lists beside the
+  applications: Job Contacts and Job Companies.
+- LinkedIn's file is read by `crates/archie-domain/src/import.rs`. `sheet_from_grid` passes over the
+  "Notes:" lines LinkedIn puts above the header, `to_date` reads its "12 Mar 2024" dates, and
+  `spreadsheet_in_zip` takes `Connections.csv` out of the zip LinkedIn sends, from the Archie window
+  (`src-tauri/src/commands/knowledge_records.rs`, `knowledge_add`), Archie Mobile
+  (`knowledge_add_bytes`, and `filedName` in archie-mobile's `src/upload.ts`) and a chat app
+  (`crates/archie-runtime/src/knowledge.rs`, `save_chat_document`). Every column lands on Job
+  Contacts by name (test `a_linkedin_export_fits_job_contacts`).
+- Dropping the file brings up the import card (`crates/archie-runtime/src/gateway/import_offer.rs`).
+  More than 200 people are added at the Add press, with an Undo on the Jobs tab, and the card then
+  offers "See where they work", which the list itself names (`after_import` on `CollectionSchema`,
+  `crates/archie-domain/src/records.rs`). 200 or fewer go on the card the owner looks over first,
+  which ends with the same next step in words.
+- "Where they work" is a count by company. Past forty companies the count lists the largest first
+  (`MAX_GROUPS_SHOWN`, `crates/archie-runtime/src/records.rs`).
+- Who to write to first is somebody the owner has written to before, found in their sent mail. A
+  note to somebody with an email address is a draft with a Send button only the owner can press
+  (`inbox_draft_new_email`); anyone else's note is in the reply, to paste into LinkedIn.
+- Once a week Application Sweep (1.0.4) reads the week's sent mail for who was written to and the
+  inbox for offers to introduce, and names at most one person to write to, with the note drafted.
+  It also says once, three weeks after the last application, that the hunt has gone quiet.
+
+**What it costs:** Job Hunt's instructions grew from 6,874 to 10,620 characters, about 1,150 tokens
+on a turn that is answered with Job Hunt and nothing on any other turn. Bringing the file in makes
+no AI call.
+
+**Boundaries:**
+- ⛔ **Never say it reads, connects to, or keeps up with LinkedIn.** It reads a file the owner
+  downloads and drops in. A newer file adds the new connections and leaves everybody already on the
+  list as they were, so somebody who changed jobs keeps the old company until it is changed by hand.
+- ⛔ **Never say it knows who used to work somewhere.** The file has each person's current employer
+  and title only.
+- ⛔ **Never say it sends a note, on LinkedIn or anywhere.** It drafts. An email draft goes when the
+  owner presses Send; a LinkedIn note is pasted by the owner.
+- Most people in the file have no email address, because LinkedIn leaves it out unless that person
+  allowed it.
+- A zip is opened for one spreadsheet only: `Connections.csv` by name, or the only spreadsheet in
+  it. Anything else asks the owner to open the zip and send the file from inside.
+- The file's shape was taken from two published guides and a constructed copy. No real export has
+  been brought in yet.
+- Personal edition only, like the rest of Job Hunt.
+
 ### ✅ Your agent can make a picture (added 2026-10-07)
 
 **Approved wording:** "Your agent can make a picture and send it to you in the conversation. It

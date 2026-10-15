@@ -49,7 +49,7 @@ export var STORE_LINE = {
   "skill:home-maintenance": "The house tells you what it needs, before it’s a repair.",
   "skill:home-workout": "A workout for the time you actually have, no equipment.",
   "skill:honest-week": "Find out the week won’t fit before it starts.",
-  "skill:job-hunt": "Every application, moved along by your own inbox.",
+  "skill:job-hunt": "Every application from your inbox, and who you know at each company.",
   "skill:lead-desk": "Every lead in one list, moved along by your mail.",
   "skill:lead-gen-playbook": "Your own playbooks, read back as angles you can run.",
   "skill:house-watch": "The house answers when you ask what’s still on.",

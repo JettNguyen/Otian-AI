@@ -6575,47 +6575,73 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
-### 🚧 It reads a spreadsheet's formulas and cell addresses, and changes the cell it names: BUILT 2026-10-15, in no release yet
+### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, in no release yet
 
-**Proposed wording, Jett's to approve:** "Give your agent a spreadsheet and it reads the formulas
-as well as the numbers, so it can tell you how a total is worked out. Ask it to change a figure and
-it shows you the change first. When you press Confirm it changes that cell in its copy of the file
-and leaves the rest of the workbook as it was. No other program is opened to do it."
+**Proposed wording, Jett's to approve:** "Give your agent a spreadsheet, a Word document, a
+PowerPoint deck or a text file and ask it to change something: a figure, a sentence, a new expense,
+another bullet. It shows you the change first. When you press Confirm it changes its copy of the
+file and sends it back, and a new row or bullet looks like the ones around it. It reads a
+spreadsheet's formulas as well as its numbers, so it can tell you how a total is worked out. No
+other program is opened to do it."
 
-**Why it's true:** `crates/archie-domain/src/documents.rs`, `xlsx_text`, turns a workbook (.xlsx,
-.xls or .ods) into the text the agent reads. Every row starts with its own row number and each sheet
-has a line of column letters, so an address like C7 is read off the page rather than counted. Before
-this, blank rows were dropped and a table started at its first filled cell, so on a sheet with a
-spacer row the agent could aim an edit at the wrong cell. Formulas are listed above each sheet, one
-line per range a formula was filled across (`C5:M8 =B5*(1+$B$2)`), and `filled_ranges` is what
-groups them. A spreadsheet is read again from the workbook each time the agent opens it
-(`crates/archie-runtime/src/gateway/tools_knowledge.rs`), so files added before this change read
-the new way too. The change itself is `edit_document`: `crates/archie-domain/src/document_edit.rs`
-rewrites only the cells named and copies everything else in the file across untouched. A formula it
-writes stays a formula, and the workbook is marked to recalculate when it is next opened. The
-Confirm step is `crates/archie-runtime/src/gateway/tools_document.rs`. All of it runs inside Archie.
-No Python, no LibreOffice, and nothing is opened on the screen.
+**Why it's true, reading:** `crates/archie-domain/src/documents.rs`, `xlsx_text`, turns a workbook
+(.xlsx, .xls or .ods) into the text the agent reads. Every row starts with its own row number and
+each sheet has a line of column letters, so an address like C7 is read off the page rather than
+counted. Formulas are listed above each sheet, one line per range a formula was filled across
+(`C5:M8 =B5*(1+$B$2)`). A spreadsheet is read again from the workbook each time the agent opens it
+(`crates/archie-runtime/src/gateway/tools_knowledge.rs`), so files added before this read the new
+way too.
 
-**What it costs, measured October 15, 2026:** reading a plain list of 80 expenses went from 2,235
-tokens to 2,410 (8% more, the row numbers). A twelve-month plan made mostly of formulas went from
-1,037 to 1,306 (26% more). Writing the formula into each cell instead tripled that plan, which is
-why they are listed by range.
+**Why it's true, changing:** `edit_document`, in `crates/archie-domain/src/document_edit.rs`,
+rewrites only what the change names and copies the rest of the file across untouched, after the
+owner presses Confirm (`crates/archie-runtime/src/gateway/tools_document.rs`). In a workbook, a row
+added under a list takes the formatting of the row above it; a total row in the way moves down and
+keeps adding up the right cells; a date typed in is stored as a date and an amount as a number, in
+the column's own format; a formula filled down a column keeps working when one of its cells is
+changed; and a total that a formula works out cannot be typed over by hand in the same change, so a
+model's arithmetic never replaces Excel's. In Word and PowerPoint a sentence is found even when it
+is split across bold, italic, a tab, a line break or a table cell, and a new line becomes a new
+paragraph, or a new bullet in a list, in the same style. A Pages, Numbers or Keynote file, an older
+.doc or .ppt, or one with macros is answered with how to export one it can open
+(`cannot_open` in `documents.rs`), the moment it arrives in a chat app and whenever the agent tries
+to read it.
+
+**Measured October 15, 2026, on the live models:** Archie `scripts/file-lanes/run.py` hands a fresh
+agent real files and checks the bytes it sends back, never a model's grade: 17 cases, 44 checks,
+covering a figure changed, a row added, a formula read, a sentence, a bullet and a table cell in
+Word, a price and a bullet on a slide, a line added to a .csv, .md and .json, a PDF and an .xls
+read, a Numbers file refused, and five files made and sent. Balanced (Sonnet 5.5) passed 44 of 44.
+Economy (Haiku 5.5) passed 38 of 44; its three failing cases were fixed in code and passed all 24
+checks on two reruns. Reading costs a little more: a plain list of 80 expenses went from 2,235
+tokens to 2,410 (the row numbers), and a twelve-month plan made mostly of formulas from 1,037 to
+1,306.
 
 **Boundaries:**
 - ⛔ **Never say it edits the file on your computer, or in your folders.** Adding a file to an agent
   copies it into Archie (`crates/archie-core/src/bundle/knowledge.rs`, `add_knowledge_file`), and
-  the edit changes that copy. The original stays where it was. To get the changed one back, the
-  agent sends it in the chat or saves it to the Archie folder in Downloads (`save_file` with a
-  `file_id`). "Never syncs with your spreadsheet" (the Lists entry) applies here as well.
+  the edit changes that copy. The original stays where it was. The agent sends the changed one back
+  in the chat, or saves it to the Archie folder in Downloads (`save_file` with a `file_id`). "Never
+  syncs with your spreadsheet" (the Lists entry) applies here as well.
 - ⛔ **Never say a total it reads back after an edit is up to date.** A formula's value is the one
-  the file was last saved with. After Archie changes a cell, the totals that depend on it are
-  worked out again only when the file is next opened in Excel, so until then the agent reads the
-  old total. Open thread in Archie's `docs/OPEN-THREADS.md`.
-- Only an .xlsx can be changed. An .xls or .ods is read the same way and cannot be edited.
+  the file was last saved with. The totals that depend on a changed cell are worked out again when
+  the file is next opened in Excel, so until then the agent reads the old total. The file itself is
+  right. Open thread in Archie's `docs/OPEN-THREADS.md`.
+- ⛔ **Never say it inserts a row in the middle of a list, or adds a slide.** A row goes at the end of
+  a list (a total under it moves down), and a slide's lines can change and gain bullets, but a new
+  slide cannot be added.
+- ⛔ **Never say it edits a PDF.** A PDF, an .xls and an .ods are read, not changed. What can be
+  changed: .xlsx, .docx, .pptx, and text files (.csv, .md, .txt, .json).
 - **A Google Sheet shared with the agent shows values only.** That one is read through Google
-  (`crates/archie-net/src/drive.rs`, `FORMATTED_VALUE`) and this change does not touch it.
-- The caveat in "What your agent can write to disk" still holds: an edited workbook has been opened
-  cleanly in Excel only when Archie made the file, never yet one that Excel saved.
+  (`crates/archie-net/src/drive.rs`, `FORMATTED_VALUE`) and none of this touches it.
+- **Signal sends and receives no files** (`crates/archie-net/src/signal.rs`). The other chat apps
+  and Archie's own window do.
+- The caveat in "What your agent can write to disk" still holds: a changed workbook has been opened
+  in Excel only when Archie made the file. The test files are built to look like what Excel saves
+  (shared strings, styles, shared formulas, a calculation chain), but no file Excel itself saved has
+  been changed and opened again in Excel.
+- **What the first version of this entry said:** only "changes the cell it names" (`aafe51510`,
+  the same day). Adding rows and bullets, keeping a file's style, and refusing hand-typed totals
+  came in the pass after.
 
 ### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, in no release yet
 

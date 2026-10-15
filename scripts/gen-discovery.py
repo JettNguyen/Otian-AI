@@ -136,16 +136,71 @@ def uncommitted():
     return paths
 
 
-def last_changed(rel, pending):
-    """The date a page last changed, or None when git has never seen it.
+# What a page says, without what every page carries. The menus above <main>, the footer, the
+# asset stamp and the CSP's script hashes are written into all ~100 pages at once, so a commit
+# that only touched those changed no page's content. Until 2026-10-15 lastmod was the page's
+# last commit of any kind, and an asset bump touches every page most days: 97 of 98 entries
+# said 10/14, Search Console had 75 pages "discovered, not indexed", and a sitemap whose
+# dates all move together teaches Google to stop reading its dates.
+CHROME = (
+    re.compile(r"<body.*?(?=<main)", re.S),
+    re.compile(r"<footer.*?</footer>", re.S),
+    re.compile(r'<meta http-equiv="Content-Security-Policy"[^>]*>'),
+    re.compile(r"\?v=[\w.-]+"),
+)
 
-    Author date, not commit date: a rebase should not tell the world every page changed.
+
+def content_of(html):
+    for pattern in CHROME:
+        html = pattern.sub("", html)
+    return html
+
+
+class Blobs:
+    """One `git cat-file --batch` for every revision this run reads, instead of a process each."""
+
+    def __init__(self):
+        self.proc = subprocess.Popen(["git", "cat-file", "--batch"], cwd=ROOT,
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+
+    def read(self, spec):
+        self.proc.stdin.write(spec.encode() + b"\n")
+        self.proc.stdin.flush()
+        header = self.proc.stdout.readline().split()
+        if len(header) < 3 or header[1] == b"missing":
+            return None
+        body = self.proc.stdout.read(int(header[2]))
+        self.proc.stdout.read(1)
+        return body.decode("utf-8", errors="ignore")
+
+
+_blobs = None
+
+
+def last_changed(rel, pending):
+    """The date a page's own content last changed, or None when git has never seen it.
+
+    Walks the page's commits newest first and stops at the first one whose content differs
+    from its parent's once the chrome is taken out. Author date, not commit date: a rebase
+    should not tell the world every page changed.
     """
+    global _blobs
+    if _blobs is None:
+        _blobs = Blobs()
     if rel in pending:
-        return datetime.date.today().isoformat()
-    out = _git("log", "-1", "--format=%as", "--", rel)
-    stamp = (out or "").strip()
-    return stamp if re.fullmatch(r"\d{4}-\d{2}-\d{2}", stamp) else None
+        with open(os.path.join(ROOT, rel), encoding="utf-8", errors="ignore") as fh:
+            now = fh.read()
+        before = _blobs.read("HEAD:" + rel)
+        if before is None or content_of(before) != content_of(now):
+            return datetime.date.today().isoformat()
+    log = _git("log", "--format=%H %as", "--", rel) or ""
+    commits = [line.split() for line in log.splitlines() if len(line.split()) == 2]
+    for sha, stamp in commits:
+        after = _blobs.read("%s:%s" % (sha, rel))
+        before = _blobs.read("%s^:%s" % (sha, rel))
+        if after is None or before is None or content_of(after) != content_of(before):
+            return stamp if re.fullmatch(r"\d{4}-\d{2}-\d{2}", stamp) else None
+    return commits[-1][1] if commits else None
 
 
 def url_for(rel):

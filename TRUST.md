@@ -6626,7 +6626,7 @@ drafts the note. When somebody offers to introduce you, it keeps the offer and t
 sends anything."
 
 **Why it's true:** all in the Archie repo.
-- Job Hunt (`data/marketplace/skills/job-hunt.json`, 1.1.0) keeps two more lists beside the
+- Job Hunt (`data/marketplace/skills/job-hunt.json`, 1.1.1) keeps two more lists beside the
   applications: Job Contacts and Job Companies.
 - LinkedIn's file is read by `crates/archie-domain/src/import.rs`. `sheet_from_grid` passes over the
   "Notes:" lines LinkedIn puts above the header, `to_date` reads its "12 Mar 2024" dates, and

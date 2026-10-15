@@ -6575,6 +6575,48 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
+### 🚧 It reads a spreadsheet's formulas and cell addresses, and changes the cell it names: BUILT 2026-10-15, in no release yet
+
+**Proposed wording, Jett's to approve:** "Give your agent a spreadsheet and it reads the formulas
+as well as the numbers, so it can tell you how a total is worked out. Ask it to change a figure and
+it shows you the change first. When you press Confirm it changes that cell in its copy of the file
+and leaves the rest of the workbook as it was. No other program is opened to do it."
+
+**Why it's true:** `crates/archie-domain/src/documents.rs`, `xlsx_text`, turns a workbook (.xlsx,
+.xls or .ods) into the text the agent reads. Every row starts with its own row number and each sheet
+has a line of column letters, so an address like C7 is read off the page rather than counted. Before
+this, blank rows were dropped and a table started at its first filled cell, so on a sheet with a
+spacer row the agent could aim an edit at the wrong cell. Formulas are listed above each sheet, one
+line per range a formula was filled across (`C5:M8 =B5*(1+$B$2)`), and `filled_ranges` is what
+groups them. A spreadsheet is read again from the workbook each time the agent opens it
+(`crates/archie-runtime/src/gateway/tools_knowledge.rs`), so files added before this change read
+the new way too. The change itself is `edit_document`: `crates/archie-domain/src/document_edit.rs`
+rewrites only the cells named and copies everything else in the file across untouched. A formula it
+writes stays a formula, and the workbook is marked to recalculate when it is next opened. The
+Confirm step is `crates/archie-runtime/src/gateway/tools_document.rs`. All of it runs inside Archie.
+No Python, no LibreOffice, and nothing is opened on the screen.
+
+**What it costs, measured October 15, 2026:** reading a plain list of 80 expenses went from 2,235
+tokens to 2,410 (8% more, the row numbers). A twelve-month plan made mostly of formulas went from
+1,037 to 1,306 (26% more). Writing the formula into each cell instead tripled that plan, which is
+why they are listed by range.
+
+**Boundaries:**
+- ⛔ **Never say it edits the file on your computer, or in your folders.** Adding a file to an agent
+  copies it into Archie (`crates/archie-core/src/bundle/knowledge.rs`, `add_knowledge_file`), and
+  the edit changes that copy. The original stays where it was. To get the changed one back, the
+  agent sends it in the chat or saves it to the Archie folder in Downloads (`save_file` with a
+  `file_id`). "Never syncs with your spreadsheet" (the Lists entry) applies here as well.
+- ⛔ **Never say a total it reads back after an edit is up to date.** A formula's value is the one
+  the file was last saved with. After Archie changes a cell, the totals that depend on it are
+  worked out again only when the file is next opened in Excel, so until then the agent reads the
+  old total. Open thread in Archie's `docs/OPEN-THREADS.md`.
+- Only an .xlsx can be changed. An .xls or .ods is read the same way and cannot be edited.
+- **A Google Sheet shared with the agent shows values only.** That one is read through Google
+  (`crates/archie-net/src/drive.rs`, `FORMATTED_VALUE`) and this change does not touch it.
+- The caveat in "What your agent can write to disk" still holds: an edited workbook has been opened
+  cleanly in Excel only when Archie made the file, never yet one that Excel saved.
+
 ### ✅ Your agent can make a picture (added 2026-10-07)
 
 **Approved wording:** "Your agent can make a picture and send it to you in the conversation. It

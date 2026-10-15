@@ -9462,6 +9462,9 @@ invite message from your phone."
 - Never describe this as released until both apps carry it. Existing phone and computer releases
   still require adding and editing people on the computer. This closes that gap in the code.
 - Never that a teammate's phone can invite, edit, or remove people. Only the owner's phone can.
+  (Amended October 14, 2026: from Archie `0987862b` and archie-mobile `e48bbb6`, in no release yet,
+  a teammate made an admin can, on their own phone. See the roles entry below. A teammate who is
+  not an admin still cannot.)
 - Never that Archie sends the invitation. The owner chooses where to paste or share the message.
 - Never that an invite makes somebody the owner, or lifts the edition's person limit.
 - Never that this reveals existing account credentials or pairing keys. The sole key-bearing
@@ -9471,6 +9474,73 @@ invite message from your phone."
 - The earlier notes below that the phone cannot add/edit describe the existing releases, not this
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
+
+### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, in no release yet
+
+**Built October 14, 2026, at Jett's decision, and in no release yet.** Say nothing about it on a page
+until a release carries it (both apps for the phone half). Nobody has used it on a real agent.
+
+**Why it exists, in one line:** on a team the person who sets Archie up on a computer is often not
+the person the agent works for (an IT person sets it up for the boss), and before this whoever
+claimed an agent was its owner for good.
+
+**Proposed wording:** "On Archie for Teams, everybody on an agent has a role. The owner is who the
+agent works for, and its routines report to them. An admin can change the agent and decide who is
+on it, the same as the owner. A teammate uses it, and you choose what each teammate can do. Whoever
+set it up can make the right person the owner, and the old owner stays on as an admin. You also
+choose who sits at the computer Archie runs on, so what they type there is from them and they see
+their own email there."
+
+**Why it's true:**
+- **The roles** are `Role::Owner`, `Role::Admin` and `Role::Guest` (shown as Teammate) in the Archie
+  repo's `crates/archie-domain/src/access.rs`. An admin is a teammate with `Member::admin` set, and
+  `Role::may_reconfigure` is true for the owner and every admin. `AccessRoster::set_role` makes the
+  changes; making somebody the owner moves the old owner to the teammate list as an admin, so the
+  agent always has exactly one owner and nobody loses access (`an_admin_is_not_the_owner_and_can_be_handed_it`).
+  The owner's own role cannot be set directly; somebody else becomes the owner instead.
+- **Per-person powers:** `Member::powers` holds one teammate's own answer to What teammates can do,
+  or nothing to follow the team's. `AccessRoster::powers_of` gives the owner and admins everything
+  and a teammate their own answer or the team's (`one_teammate_can_have_their_own_powers`). The
+  gate turns it into the turn's two flags (`powers` in `crates/archie-runtime/src/access.rs`).
+- **Who sits at the computer:** `AccessRoster::window_person`. The window is admitted as that
+  person's role, speaks as them (their name on the message, their mailbox through `member_id` on
+  `Gate::Admit`), and is the owner when nobody is named, which is every agent from before this
+  (`the_window_speaks_as_whoever_an_admin_named`, `the_window_speaks_as_the_person_an_admin_named`).
+- **This computer's own things** (Computer control, the texts sent from its Messages, the lights on
+  its wifi) now go to the person at this computer rather than to the owner by title
+  (`access::at_this_computer`, read into `owners_turn` in `crates/archie-runtime/src/gateway/turn.rs`).
+  With nobody named that is the owner, so nothing changes for an agent run by the person it works for.
+- **The hand-over** (`access_set_role` in `src-tauri/src/commands/access.rs`) sends both people a
+  message in their own chat when it can reach them, forgets where routines report so it is learned
+  from the new owner's next private message, and restarts a running agent. Only the owner's own
+  replies count as answering a routine (`role.is_owner()` in `gateway/worker.rs`).
+- **The agent** tells an admin they are an admin, not the owner, and the team line names each
+  person's role and any teammate's own setting (`shared_agent_note` and `team_line` in
+  `gateway/prompt.rs`, `an_admin_is_told_they_are_an_admin_and_not_the_owner`).
+- **Screens:** on the computer, each teammate's row on Who can message it has a Role picker
+  (Teammate, Admin, Owner, the last asking first) and a Can picker, with This computer is under the
+  list (`src/app/access.tsx`). On the owner's phone the same three are in Edit on a person
+  (archie-mobile `src/screens/People.tsx`, relay ops `people_role`, `people_powers` and
+  `people_window` in Archie's `src-tauri/src/phone/people.rs`). An admin on their own Archie Mobile
+  gets the same People panel on their Settings tab; the computer checks they are an admin on every
+  call (`team_phone::dispatch`).
+
+**Boundaries:**
+- ⛔ Never that a teammate can make themselves an admin. Only an admin or the owner can, from the
+  computer or their own phone.
+- ⛔ Never that anybody at the computer is held to their role on the computer's own screens. The People
+  screen on that computer is not gated by role, so it can always undo a mistake. Roles bind what the
+  agent does for each person, and what their phones can change.
+- ⛔ Never that the old owner is told every time. Both are told in their own chat when Archie has a
+  private chat on record for them; somebody on Archie Mobile only, or who has only ever written in a
+  group, sees it on the People screen instead.
+- ⛔ Never that an admin reads the owner's own mail. An admin acts on the business's accounts and
+  their own, like a teammate on Everything you can; an account marked as somebody's stays theirs.
+- ⚠️ Routines report to the new owner only after they send the agent a private message. Until then
+  they land in Archie's own Chat tab on the computer.
+- ⚠️ Archie for Teams only on screen. The personal edition has one person and shows no roles.
+- What it replaced: there was no hand-over at all. Reset access was the only way, and it wipes the
+  owner and every teammate.
 
 ### ✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

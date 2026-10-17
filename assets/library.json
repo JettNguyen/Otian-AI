@@ -196,8 +196,6 @@
       "seconds": 64,
       "notes_heading": "Google&rsquo;s first screen, and taking access back",
       "notes": [
-        "Until Google verifies Archie, Google shows an unverified-app screen before its permission page.",
-        "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
         "Google: <a href=\"https://myaccount.google.com/permissions\">myaccount.google.com/permissions</a>.",
         "Microsoft: <a href=\"https://account.microsoft.com/\">account.microsoft.com</a>, under the apps you gave access.",
         "Apple: cancel an app-specific password at <a href=\"https://account.apple.com/\">account.apple.com</a>, under Sign-In and Security."
@@ -597,8 +595,6 @@
       "notes": [
         "Google and Outlook (Outlook.com, Hotmail, Live and Office 365) open their own sign-in page.",
         "iCloud, Fastmail, Yahoo, AOL, Zoho Mail and GMX use an app password. A calendar connects if Archie finds one; AOL and GMX have none.",
-        "Until Google verifies Archie, Google shows an unverified-app screen before its permission page.",
-        "To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it has verified the app.",
         "Email needs your own AI account. Free credits and the plan with the AI included will not run it.",
         "Where to take access back at Google, Microsoft and Apple: <a href=\"../what-it-means-to-connect-an-account/\">0.7</a>."
       ],

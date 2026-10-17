@@ -7991,9 +7991,34 @@ same sentence. It holds only while the box is on the same page, directly under t
 the number. ⛔ A cut posted anywhere without the box, such as a 9:16 clip on social, does not
 mention the free tier at all.
 
-### ✅ Google's "unverified app" screen before its permission page (added 2026-09-30)
+### ⛔ RETIRED 2026-10-16: Google's "unverified app" screen before its permission page (added 2026-09-30)
 
-**Approved wording (long form replaced 2026-10-10):** "Google will show a page saying it hasn't
+**Google verified Archie on October 16, 2026**, for project `516396797258`, and the screen this
+entry existed to explain no longer appears. **Nothing below may be said on any page.** Saying a
+warning is coming that never arrives is its own kind of wrong: it makes people brace for something,
+and the ones who brace hardest are the ones who were already unsure.
+
+**What came off the same day:**
+
+| Where | What |
+| --- | --- |
+| Archie `src/app/vocab.ts` | `GOOGLE_UNVERIFIED_NOTE` set to `null`, which blanks it on four screens at once |
+| Archie `crates/archie-core/src/oauth.rs` | The Google arm of `access_denied`, which said a refusal might be Google stopping Archie, and named the 100 account cap |
+| `archie/install/` | The "Gmail and Google Calendar" section's short form |
+| `learn/connecting-your-email-and-calendar/`, `learn/what-it-means-to-connect-an-account/` | The same, in their own words |
+
+**The 100 account cap went with it.** It was never a cap on paying customers, it was a cap on the
+unverified client, and verification is what lifted it. 15 of 100 were used as of October 6, 2026. No
+page ever printed the count and none should start.
+
+**The claim that replaces it is the CASA entry below**, which was held off every page until this day
+and is now publishable.
+
+**Kept rather than deleted, because this comes back.** Verification is annual and is also lost by
+adding a scope or changing the consent screen's own configuration. On any of those days the screen
+returns, and so does everything under here.
+
+*The retired wording, for the day it is needed again:* "Google will show a page saying it hasn't
 verified this app, because it has not verified Archie yet. That page names Otian AI, the company that
 makes Archie. To go on, press Advanced, then the link to Otian AI, which Google marks unsafe until it
 verifies Archie. You can stop on that page, and nothing is connected." A shorter form where space is
@@ -8063,9 +8088,12 @@ off, and this entry is rewritten, all in the same pass.
 - ⚠️ **The warning itself stays** until Google verifies the app; neither change touches what
   Google shows.
 
-### ✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, ON NO PAGE until Google verifies the app
+### ✅ Archie passed the security assessment Google requires (CASA): CLEARED FOR EVERY PAGE 2026-10-16
 
-**Approved wording, once Google has verified the app:** "Archie passed the security assessment
+**Google verified the app on October 16, 2026**, which was the one condition this entry waited on.
+The wording below may now be used anywhere.
+
+**Approved wording:** "Archie passed the security assessment
 Google requires of apps that can read Gmail. An independent lab authorized by the App Defense
 Alliance checked it against twenty security requirements in October 2026, and it passed every one.
 The result holds until October 14, 2027, and the assessment is repeated every year." A shorter form
@@ -8093,8 +8121,15 @@ above may go on a page.
 
 **Boundaries:**
 - ⛔ **Never say Google audited, certified, verified or approved Archie's security.** The lab
-  assessed it against the App Defense Alliance's requirements. Google's own verification is a
-  separate step, and until it is done the entry above holds.
+  assessed it against the App Defense Alliance's requirements. Google's own step finished on
+  October 16, 2026, and it is a different thing: **Google verified the OAuth request**, which is a
+  check that the app asking for Gmail and Calendar is who it says it is and asks only for what it
+  needs. That is not a review of how Archie is built, and nobody at Google read the code.
+  "Google-verified" on its own invites the wrong reading, so say which of the two is meant.
+- ⚠️ **What may be said about the verification itself**, kept narrow on purpose: "Google has
+  verified Archie's Google connection", or "Archie is a verified Google app". Both describe the
+  OAuth client. Neither says Google endorses the product, and neither may stand next to a security
+  word.
 - ⛔ **Never call it an audit, a penetration test, a code review, a certification of the whole
   company, SOC 2, or "certified secure".** AL1 is the level where, in the letter's own words, "the
   developer provides evidence and statements of compliance to each audit test case" and the lab

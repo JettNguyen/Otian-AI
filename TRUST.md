@@ -588,8 +588,11 @@ means nothing further is sent and anything waiting to be sent is deleted."
   version, and the platform. It carries nothing you wrote, received, or asked for."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
+- ⚠️ **One more thing goes out only when you press it:** from the release after Archie
+  `918676a1`, the answer to "How did you hear about Archie?" on the Account page (the entry
+  below). It is not telemetry and the crash-reports switch does not govern it.
 
-### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), and its route is deployed
+### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), its route deployed, SWITCHED ON 2026-10-17 (Archie `918676a1`, in no release yet)
 
 *Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
 `false` in Archie `src/app/heard-from.ts` at the release commit `59a674e6`), so nobody is asked. The
@@ -613,8 +616,10 @@ its route. A release before the deploy would show everybody who opens the Accoun
 whose answer fails to save. *Amended October 13, 2026:* the CASA freeze that held the route is over,
 and the route is live, deployed with the billing service on October 13. **Jett's
 call that day: the question stays switched off, and the privacy policy unchanged, until Google
-approves the app**, since Google is still reviewing the policy it read. Then the policy line, this
-entry and the switch change in one pass.
+approves the app**, since Google is still reviewing the policy it read. *Amended October 17, 2026:*
+Google verified the app on October 16, and Jett turned the question on the next day (Archie
+`918676a1`), with the privacy policy's line (under what we hold for the app) in the same pass. It
+reaches people with the first release after that commit.
 
 **Approved wording, once it ships (the place changed on October 11, 2026, so Jett's to approve
 again):** "On the Account page, Archie asks how you heard about it. Answering is optional: nothing is
@@ -642,9 +647,9 @@ account. Staff see counts only (`tallyHeardFrom` in `/admin/summary`).
   it has no Account page.
 - ⛔ **Never "nothing else is sent".** The request carries the sign-in token and arrives from the
   computer's address, like every request.
-- ⚠️ **The no-analytics entry above counts what goes out.** Once this ships, a page that counts
-  those things names this one too, as sent only when you press an answer, and never files it under
-  the crash-reports switch, which does not govern it.
+- ⚠️ **The no-analytics entry above counts what goes out.** A page that counts those things names
+  this one too, as sent only when you press an answer, and never files it under the crash-reports
+  switch, which does not govern it.
 
 ### ✅ Which AI company it talks to is your choice, and the trial is Anthropic
 

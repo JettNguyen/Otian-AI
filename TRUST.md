@@ -588,11 +588,10 @@ means nothing further is sent and anything waiting to be sent is deleted."
   version, and the platform. It carries nothing you wrote, received, or asked for."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
-- ⚠️ **One more thing goes out only when you press it:** from the release after Archie
-  `918676a1`, the answer to "How did you hear about Archie?" on the Account page (the entry
+- ⚠️ **One more thing goes out only when you press it:** from 0.3.10, the answer to "How did you hear about Archie?" on the Account page (the entry
   below). It is not telemetry and the crash-reports switch does not govern it.
 
-### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), its route deployed, SWITCHED ON 2026-10-17 (Archie `918676a1`, in no release yet)
+### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), its route deployed, SWITCHED ON 2026-10-17 (Archie `918676a1`), RELEASED in 0.3.10, 2026-10-17
 
 *Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
 `false` in Archie `src/app/heard-from.ts` at the release commit `59a674e6`), so nobody is asked. The
@@ -619,7 +618,7 @@ call that day: the question stays switched off, and the privacy policy unchanged
 approves the app**, since Google is still reviewing the policy it read. *Amended October 17, 2026:*
 Google verified the app on October 16, and Jett turned the question on the next day (Archie
 `918676a1`), with the privacy policy's line (under what we hold for the app) in the same pass. It
-reaches people with the first release after that commit.
+reached people in 0.3.10, released the same day.
 
 **Approved wording, once it ships (the place changed on October 11, 2026, so Jett's to approve
 again):** "On the Account page, Archie asks how you heard about it. Answering is optional: nothing is
@@ -6580,7 +6579,7 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
-### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, in no release yet
+### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
 **Proposed wording, Jett's to approve:** "Give your agent a spreadsheet, a Word document, a
 PowerPoint deck or a text file and ask it to change something: a figure, a sentence, a new expense,
@@ -6648,7 +6647,7 @@ tokens to 2,410 (the row numbers), and a twelve-month plan made mostly of formul
   the same day). Adding rows and bullets, keeping a file's style, and refusing hand-typed totals
   came in the pass after.
 
-### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, in no release yet
+### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
 **Proposed wording, Jett's to approve:** "Drop in the connections file LinkedIn emails you, zip and
 all, and Job Hunt shows where the people you know work now, the biggest groups first, then asks
@@ -8002,8 +8001,8 @@ mention the free tier at all.
 appears before Google's permission page, and the 100-account cap below is lifted. Never use the
 wording below again; it stays as a record. The install page's section and 0.7's two notes came off
 the site on October 17. In the app, the note went quiet (Archie `7e9920d0`) and a Google refusal
-stopped blaming verification (`89aa072b`), both on main and in no release yet, so Archie 0.3.9
-still shows the old note until the next release. Verification is renewed every year, and is lost
+stopped blaming verification (`89aa072b`), both released in 0.3.10 on October 17, 2026; 0.3.9 and
+earlier still show the old note until they update. Verification is renewed every year, and is lost
 by adding a Google permission or changing the consent screen; on any of those days this entry
 comes back.
 
@@ -9609,7 +9608,7 @@ invite message from your phone."
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
 
-### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, in no release yet
+### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, RELEASED in 0.3.10, 2026-10-17
 
 **Built October 14, 2026, at Jett's decision, and in no release yet.** Say nothing about it on a page
 until a release carries it (both apps for the phone half). Nobody has used it on a real agent.

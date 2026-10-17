@@ -7945,8 +7945,8 @@ refuses to publish anything until this file's website entry carries the sentence
 privacy policy names YouTube, so the first player cannot ship ahead of either. One section is
 held in the data: 1.9, whose narration promises which choices to pick when making the key and that
 answer is untested (a key tied to no workspace may be refused). 1.8 was held too until Jett approved
-its drawn number the same day (below). 0.7's notes carry Google's unverified-app screen since
-its own entry below was written the same day.
+its drawn number the same day (below). 0.7's notes carried Google's unverified-app screen from
+the day its own entry below was written until October 17, 2026, after Google verified the app.
 
 **What that does to the no-analytics sentence below, on the day it ships:** "It never has" stays
 true only for the pages without a player. The website entry's approved wording gains one sentence,
@@ -7991,7 +7991,16 @@ same sentence. It holds only while the box is on the same page, directly under t
 the number. ⛔ A cut posted anywhere without the box, such as a 9:16 clip on social, does not
 mention the free tier at all.
 
-### ✅ Google's "unverified app" screen before its permission page (added 2026-09-30)
+### ⛔ RETIRED October 16, 2026: Google's "unverified app" screen before its permission page (added 2026-09-30)
+
+**Retired: Google verified Archie on October 16, 2026**, so its unverified-app screen no longer
+appears before Google's permission page, and the 100-account cap below is lifted. Never use the
+wording below again; it stays as a record. The install page's section and 0.7's two notes came off
+the site on October 17. In the app, the note went quiet (Archie `7e9920d0`) and a Google refusal
+stopped blaming verification (`89aa072b`), both on main and in no release yet, so Archie 0.3.9
+still shows the old note until the next release. Verification is renewed every year, and is lost
+by adding a Google permission or changing the consent screen; on any of those days this entry
+comes back.
 
 **Approved wording (long form replaced 2026-10-10):** "Google will show a page saying it hasn't
 verified this app, because it has not verified Archie yet. That page names Otian AI, the company that
@@ -8063,9 +8072,9 @@ off, and this entry is rewritten, all in the same pass.
 - ⚠️ **The warning itself stays** until Google verifies the app; neither change touches what
   Google shows.
 
-### ✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, ON NO PAGE until Google verifies the app
+### ✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, MAY GO ON A PAGE since Google verified the app on October 16, 2026
 
-**Approved wording, once Google has verified the app:** "Archie passed the security assessment
+**Approved wording:** "Archie passed the security assessment
 Google requires of apps that can read Gmail. An independent lab authorized by the App Defense
 Alliance checked it against twenty security requirements in October 2026, and it passed every one.
 The result holds until October 14, 2027, and the assessment is repeated every year." A shorter form
@@ -8084,12 +8093,12 @@ The tester installed the desktop build and scanned the billing service's product
 is `docs/CASA-QUESTIONNAIRE.md` there, section 8 for the outcome. The lab sent the letter to Google
 itself.
 
-**Why no page says it yet (Jett's call, October 13, 2026):** Google has not verified the app, so
-every Google connect still shows Google's unverified-app screen (the entry above). A page that
+**Why it waited until October 16 (Jett's call, October 13, 2026):** Google had not verified the app, so
+every Google connect still showed Google's unverified-app screen (the entry above). A page that
 says Archie passed Google's security assessment, beside a Google screen saying it is unverified,
-reads as a contradiction, and a reader can take "passed" for "Google approved". The day Google
-verifies the app, this entry and the one above are rewritten in the same pass, and the wording
-above may go on a page.
+reads as a contradiction, and a reader can take "passed" for "Google approved". Google verified
+the app on October 16, 2026, the entry above is retired, and the wording above may go on a page.
+No page carries it yet.
 
 **Boundaries:**
 - ⛔ **Never say Google audited, certified, verified or approved Archie's security.** The lab

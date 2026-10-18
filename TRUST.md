@@ -5078,6 +5078,22 @@ that answer used, with Show all to see the rest."
 - ⚠️ **"Matches bookings.xlsx" means the last look at the file matched,** not that the file was reread this second.
 - **What the earlier wording got wrong.** "Your 70 bookings" was read as a count of the owner's bookings, not of what Archie checked. It replaces the "Looked at: all 14 rentals" wording quoted above.
 
+### 🚧 A line over the message box says what changed and what went out today: BUILT 2026-10-18 (Archie `ee4e8260`, `5a7ffc8c`, `7cd3a478`; archie-mobile `e6a171f`, `6fc955a`, merged as `63c427a`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Over the message box, on the computer and on Archie Mobile, one line says what changed and what went out today: "Today: 4 changes, 1 sent". Press it for the list: each change with Open and Undo, each time a list changed to match your spreadsheet, each email or text that went out with when you pressed Send, and what Archie did on its own (your morning list, mail it read and left alone, a routine's changes). When nothing went out, it says "Nothing has gone out today."" An approved change reads "Changed ..." in that list.
+
+**Why it's true:**
+- `crates/archie-runtime/src/today.rs` and `crates/archie-domain/src/today.rs`; `today_record` in `src-tauri/src/commands/screen.rs`; `today` in `src-tauri/src/phone.rs`; `src/app/today.tsx` and `src/app/conversation.tsx`; archie-mobile `src/today.ts`, `src/today-list.tsx` and `src/screens/Chat.tsx`. No AI call.
+
+**Boundaries:**
+- ⛔ **Never "everything that happened today".** It lists what Archie recorded: changes made through Archie (a chat, a card, an import, a routine, a teammate's turn). Not edits typed into the Lists screen by hand, and not mail sent from the owner's own mail app.
+- ⚠️ **Today on the computer's clock.** Sends are Archie's own email and text cards; a GoHighLevel message or other approved change is a job on the Jobs tab, not a "sent" line.
+- ⚠️ **Past 25 in a part, the rest are on the Jobs tab.** Undo is offered only where the Jobs tab offers it.
+- ⚠️ **A teammate's phone does not show the line.** On the phone, Open goes to the list, not the entry, and Show on a send works only while its card is still on this computer.
+- ⚠️ **Not yet seen by simulated owners:** the journey harness does not answer it.
+
 ### 🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, in no release yet
 
 *Archie `e716864f`, merged into main as `b65729ea` (with `ffd8d224` for Added on), and archie-mobile
@@ -10621,6 +10637,12 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   it; "replies only" is no longer a limit to repeat.]*
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
 
+**Amended October 18, 2026: every send is recorded with when Send was pressed and who pressed it** (Archie `1a1c2546` through `2aec2291`, merged as `ee4e8260`, in no release yet). **Claim:** "Every email or text you send from an Archie card is recorded with when you pressed Send and who pressed it, on the Jobs tab, and Archie can tell you what went out when you ask."
+- **Why it's true:** `record_sent` and `sent_said` in `crates/archie-runtime/src/journal.rs`; `file_the_send` in `email/replies/actions.rs` (both send paths) and `texts/replies/actions.rs`; `line` in `gateway/tools_work.rs`.
+- ⚠️ **Sends from October 18, 2026 on.** A send set for later is recorded when it goes, as "the time you picked". Nothing is sent without a press (unchanged).
+- ⚠️ **One job per send on the Jobs tab,** so its week bars, "you asked" count and a teammate's changes count include sends.
+- **What the earlier version got wrong.** The drafting job kept saying "Drafted a reply for you to send" with no trace of the send.
+
 ### ✅ Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen), SHIPPED in Archie 0.3.1 on September 29, 2026
 
 *Released, checked October 6, 2026: `3700e1ad` and every commit from `6e7e3168` to `69c3c612`
@@ -10675,6 +10697,7 @@ like the owner does its work.
 **Amended October 18, 2026: Write like me is offered on the card, and the card words show on the How you write tab** (Archie `765d8dfe`, merged as `b9d3bec9`; `36197b91` and `0dcd20be`, in no release yet). **Claim:** "After you write your own words on a second draft, the card offers Write like me; one press turns it on and Archie drafts the way you wrote those replies. The replies it learned from are listed on the How you write tab."
 - **Why it's true:** `wrote_by_hand` and `turn_on_from_cards` in `crates/archie-runtime/src/writing_style.rs`; the `likeme` arms in `email/replies/actions.rs` and `texts/replies/actions.rs`; `offer_style` in `crates/archie-domain/src/automation.rs`. The card words are written to the samples file and drawn in `src/app/writing-style.tsx`.
 - ⛔ **Offered once, and only on an agent whose writing has never been read.** Only the agent's owner can press it. It never reads the Sent folder; that still asks on the Knowledge tab.
+- ⚠️ **When Archie reads your Sent folder to learn how you write, it skips only what it drafted for you,** never words you put on a card with Use my words (`mark_as_drafted` in `email/replies/actions.rs`, `record_drafted` in `writing_style.rs`; Archie `5a7ffc8c` area, in no release yet). A rewrite you asked for is still Archie's wording and is still skipped.
 - ⚠️ **It starts from the drafts you wrote in Archie, word for word,** and the press restarts the agent, so a turn running on that agent in another chat is cut off. A skill set to "Its own" or "Off" under Which skills write like me ignores the note.
 
 ### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move), IN THE CATALOG for Archie 0.3.1 and later, never run against a real account

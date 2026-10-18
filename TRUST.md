@@ -4683,6 +4683,10 @@ brokerage and it saves it, drafts and ads use it from then on. A real estate age
 - ⚠️ **It depends on the agent saving the note.** The keep runs inside the memory tool; an agent
   that answers without saving anything keeps nothing.
 
+**Amended October 18, 2026: the sign-off follows how you last closed** (Archie `765d8dfe`, in no release yet). **Claim:** "Drafts sign off the way you last did when you wrote an email yourself in Archie ("Warmly,", "Thank you,"), not with a fixed "Best,"."
+- **Why it's true:** `closing_for` and `keep_closing` in `crates/archie-runtime/src/email/replies/draft.rs`, `closing_in` in `triage.rs`.
+- ⛔ **Learned only from emails you wrote on a draft card and sent.** Never from your Sent folder. Until then it is "Best,".
+
 ### ✅ Ask who owes you money, and your agent answers from your lists, the chat and its notes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -5068,6 +5072,12 @@ that answer used, with Show all to see the rest."
   the whole list.
 - ⚠️ **The phone's half has never been seen on a phone.**
 
+**Amended October 18, 2026: the line names entries, says all of a list was checked, and says if it matches your file** (Archie `edfee5d7`, merged as `442ab1f0`; archie-mobile `afa0dca`, merged as `37a4a2b`, in no release yet). **Claim:** "Under every answer, Archie names what it read: the entries themselves when it found three or fewer ("Bookings: Laura Henderson"), or that it checked the whole list ("all 70 entries on Bookings"), and whether that list matches your spreadsheet ("matches bookings.xlsx")."
+- **Why it's true:** `note`, `titles_of`, `matched_file` and `keep_read` in `crates/archie-runtime/src/gateway/kept.rs`; `LookedAt` in `crates/archie-net/src/channel.rs`; `lookedLabel` in `src/app/lists.ts` and archie-mobile `src/words.ts`, so both apps say the same words. Reads are separated by "; ", and one entry opened by its id reads "People: Jenna Holt", the same shape as the named ones.
+- ⛔ **Not a citation of each sentence.** It names what this turn's tools and Archie's own notes read, at most 8 reads. A fact from memory or from the conversation is not on it.
+- ⚠️ **"Matches bookings.xlsx" means the last look at the file matched,** not that the file was reread this second.
+- **What the earlier wording got wrong.** "Your 70 bookings" was read as a count of the owner's bookings, not of what Archie checked. It replaces the "Looked at: all 14 rentals" wording quoted above.
+
 ### 🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, in no release yet
 
 *Archie `e716864f`, merged into main as `b65729ea` (with `ffd8d224` for Added on), and archie-mobile
@@ -5125,6 +5135,10 @@ puts it on a card to add with one press instead of adding it."
   message that is a question, is made as before, with Undo. Only a new entry and a watch wait.
 - ⚠️ **A question is a question mark.** "Can you add Dana to my people" typed with no question mark
   is a request and adds her.
+
+**Amended October 18, 2026: Archie keeps your answer about what a month means** (Archie `e137a969`, merged as `442ab1f0`, in no release yet). **Claim:** "Tell Archie once what "a month" means for your rentals (4 weeks, or the same date next month) and it stops asking."
+- **Why it's true:** `crates/archie-runtime/src/month_means.rs` keeps the answer in a file beside the agent's memory, and `which_length` in `gateway/turn.rs` reads it before it holds a write; the writes beside a told month are made again at once (`1d842056`).
+- ⚠️ **The owner's answer only, per agent.** A teammate cannot set it. "Monday" said on a Monday is still asked every time. An agent with no memory folder never keeps an answer.
 
 ### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to ask first, in no release yet
 
@@ -5536,6 +5550,12 @@ write on a card yourself go out as you wrote them, signed once."
 - ⚠️ **The sign-off stripper reads the shape of a line,** a name and a title, the business name, or
   the brokerage. An unusual sign-off can still stay in, with the signature added after it.
 
+**Amended October 18, 2026: a stock reason is sent back, promises are named, and a send time needs your word** (Archie `765d8dfe`, merged as `b9d3bec9`, in no release yet). **Claim:** "Before a draft reaches you, Archie sends it back once if it gave a stock excuse you never gave ("something has come up on our end"), and has it written without one. A promise, price, day or time you did not give is listed under the draft as Check before sending, with where it came from. Archie only offers a send time on a draft when you named a day or time yourself."
+- **Why it's true:** `send_back`, `STOCK_REASONS`, `PROMISES` and `added_by_code` in `crates/archie-runtime/src/email/replies/added.rs`; `added_here` in `email/replies/draft.rs`; `timed_send_needs_a_person` in `draft.rs` and `names_a_time` in `added.rs`. Code reads amounts, days, times, ten kinds of stock reason and six kinds of promise.
+- ⛔ **Never "nothing invented reaches a draft".** The send-back happens once a turn, and a reason kept on the retry is named on the line, never removed. Promises are named, never removed or refused. Anything else on the line depends on the model naming it.
+- ⚠️ **Email drafts only.** Text drafts have no Check before sending line. The send-time check reads that your words name a day or a time, not that the time was meant for sending; nothing is set until you press the time on the card.
+- **What the earlier version got wrong.** From October 17 the model almost never named its own additions, because the `added` field told it they were rare. Code now names what it can read.
+
 ### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -5789,6 +5809,23 @@ the owner read the correction as Archie losing it (the notes in
   still not undone, keeps the correction off (`saved_lately`, reading the record of jobs).
 - ⚠️ **"The last hour" is by the record of jobs, which carries no chat,** so a save the same person
   asked for elsewhere in that hour also keeps it quiet. It errs toward saying nothing.
+
+**Amended October 18, 2026: a take-back that rests on nothing is cut** (Archie `e137a969` through `442ab1f0`, in no release yet). **Claim:** "When Archie takes back an earlier answer without anything it read saying otherwise, the take-back is removed before you see it, and you get the answer to what you asked." It replaces the send-back above for that case, and it is checked on the retry's reply too.
+- **Why it's true:** `shaky_take_back`, `without_take_back` and `held_note` in `crates/archie-runtime/src/gateway/turn.rs`, with `gateway/kept.rs`.
+- ⛔ **A correction that rests on something read this turn still goes out** (Jett's call). Never "Archie never corrects itself", and never that its earlier answers are right: only that a retraction nothing supports is not sent.
+
+### 🚧 A web link Archie could not have read is cut back to the site's front page: BUILT 2026-10-18 (Archie `851dd5eb`, merged as `442ab1f0`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "If a reply holds a web link Archie never read or found in a search, it is cut back to the site's front page."
+
+**Why it's true:**
+- `unread_links_to_sites` in `crates/archie-runtime/src/outbound.rs`, called through `read_behind` in `gateway/turn.rs`, with no AI call.
+
+**Boundaries:**
+- ⛔ **It checks the site, not the page.** A deep link on a site that appeared in a search or a page read stays whole even if that exact page was not opened. It does not check that the site exists. Never "every link Archie sends works".
+- ⚠️ **A short host name that appears in unrelated text keeps its path.** The check errs toward leaving a link alone.
 
 ### ✅ Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -6348,6 +6385,26 @@ out, and how many are free on the busiest day of that booking."
   dated for it.
 - ⚠️ **Only lists with a start and an end.** A rental with one date, or a list with no end column, is
   never past its end in this sense.
+
+**Amended October 18, 2026: one free figure after a write, and rentals still out under their own heading** (Archie `ea630860`, in no release yet). **Claim:** "After the agent adds or changes a booking, or changes one of the things booked (marks a unit for repair), it is handed how many can go out and how many are free that day, counted by code, and both kinds of change give the same figure." And: "A booking kept by one date whose trailer or unit is still out from before the days asked about is listed under "Out since before these days and not marked back", with the day it went out."
+- **Why it's true:** `counts_after_on`, `taken_on`, `booked_by`, `free_that_day` and `can_go_out` in `crates/archie-runtime/src/schedule.rs`, and `say_counts` in `records.rs` (the result's `counted_now`). The heading comes from `list_lines` and `schedule_note` in `schedule.rs` (`out_since`, `still_out`, `booked_days`); test `a_booking_still_out_holds_its_trailer_until_it_is_back`.
+- ⚠️ **Bookings that say how many do not say which.** "Free" is how many can go out minus what open bookings take that day. A unit back in the yard while its rental is still open counts as out until the rental is marked picked up. A thing marked as needing work is never counted free. The day is this computer's today.
+- ⛔ **One date says when a thing went out, never when it is due back.** Archie does not call such a booking overdue, and never "catches overdue pickups". "Still running on these days" still covers rows with a start and an end; the October 17 replay had put one-date bookings there too, and this undoes that.
+- **What the earlier version got wrong.** A write to Units said only "87 can go out", counting units already on jobs, beside "76 free today" from a Rentals write. A trailer both booked and needing work was counted out twice.
+
+### 🚧 When two or more entries match a lookup, code adds up the number columns: BUILT 2026-10-18 (Archie `ea630860`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When Archie looks up entries on one of your lists and two or more match, code adds up the number columns (units, price) and hands the totals to the agent, so it does not add them itself."
+
+**Why it's true:**
+- `added_up`, `adds_up` and `NOT_AN_AMOUNT` in `crates/archie-runtime/src/records.rs`, with `group_sum` in `archie-domain`. No AI call, and the tool description is unchanged, so no turn costs more.
+
+**Boundaries:**
+- ⚠️ **Only when every match is in the result** (up to 200 by default), never on a page that left some out.
+- ⚠️ **Number columns only, and never an id, phone, ZIP, year, stop number, score or per-unit rate.** That is decided by the column's name, so a number column with an odd name for an id could still be added. A total some rows leave blank says how many rows it is from.
+- ⛔ **Never "Archie never gets a total wrong" or "every number is checked".** The agent is handed the total and can still say another number. The total is not on the Read line under the reply.
 
 ### 🚧 Moving a stop to a day its truck or driver is busy, or a day the job already has a stop, is held and named first: BUILT 2026-10-17, in no release yet
 
@@ -8857,6 +8914,13 @@ saying so, or on the Routines tab."
   empty note, and left the agent unaware the list existed, so it could take the goodbye's promise
   back.
 
+**Amended October 18, 2026: what needs a decision comes first, and a line under the list says what it read** (Archie `d08fe03b`, `960c7b27`, `73563b76`, merged as `cbe43370`; `faf3c7f4` for a pickup on the same day as a service; in no release yet). **Claim:** "The morning list starts with what needs your decision: a rental past its end date with no pickup booked, a bill unpaid more than 60 days, and today's work nobody has yet. Then the route and your calendar, then the rest of the money. Under the list, one line says what it read ("Read all 21 rentals and 13 stops, and your calendar."), that each list kept matched to your spreadsheet matches the file as you last saved it, and what changed since yesterday's list."
+- **Why it's true, with no AI call:** `crates/archie-runtime/src/morning.rs` (`Tier`, `billing`, `past_end`, `pickup_of`, `unclaimed`, `closing`, `since_said`, `matched` through `follow::view`); `gateway/morning_list.rs` rereads every matched list first (`check_lists`) and keeps what the last list read; `Channel::send_with_line` in `archie-net` puts the line under the list in Archie and Archie Mobile and as the last line of the message on a chat app. A pickup booked the same day as a service now counts as the pickup (`faf3c7f4`, `next_for` in `schedule.rs`).
+- ⛔ **Never "it books the pickups" or "it chases the bills".** It says which have none and how old they are, by days since billing, with the amount and the invoice number where the list keeps one.
+- ⛔ **"Nobody has it yet" reads only Who has what** (an add-on) and stops with no driver. Never "it knows everything nobody has picked up". "Needs repair" is only what is marked so on a list. The pickup is found by the same matching as the what's-on note, so a stop written for a different site name is missed by both.
+- ⛔ **Never "the agent remembers what the list read".** The line is kept out of its history on purpose. "Matches" is as of the last read of the file, just before the list; a file that could not be read says so, with what to press. "What changed" is counts of entries added, changed and taken off, not which.
+- ⚠️ **The boundary above that the owner can stop it but not move it is out of date since October 17, 2026:** Another time and "send me the morning list at 7am" move it.
+
 ### 🚧 Today's Calendar sends nothing on a day with nothing on your calendar, decided without AI: BUILT 2026-10-17, in no release yet
 
 *Archie `3d805aa4` (with the routine's manifest at version 1.1.6), merged into main as `ec88be1c`, in
@@ -10589,6 +10653,11 @@ like the owner does its work.
   like the owner. The samples go each time the owner presses Read my writing, not once. Never say the
   passages stay on the computer.
 - ⚠️ **Never "learns as you go."** It learns only when the owner presses Read my writing.
+
+**Amended October 18, 2026: Write like me is offered on the card, and the card words show on the How you write tab** (Archie `765d8dfe`, merged as `b9d3bec9`; `36197b91` and `0dcd20be`, in no release yet). **Claim:** "After you write your own words on a second draft, the card offers Write like me; one press turns it on and Archie drafts the way you wrote those replies. The replies it learned from are listed on the How you write tab."
+- **Why it's true:** `wrote_by_hand` and `turn_on_from_cards` in `crates/archie-runtime/src/writing_style.rs`; the `likeme` arms in `email/replies/actions.rs` and `texts/replies/actions.rs`; `offer_style` in `crates/archie-domain/src/automation.rs`. The card words are written to the samples file and drawn in `src/app/writing-style.tsx`.
+- ⛔ **Offered once, and only on an agent whose writing has never been read.** Only the agent's owner can press it. It never reads the Sent folder; that still asks on the Knowledge tab.
+- ⚠️ **It starts from the drafts you wrote in Archie, word for word,** and the press restarts the agent, so a turn running on that agent in another chat is cut off. A skill set to "Its own" or "Off" under Which skills write like me ignores the note.
 
 ### 🚧 Acuity Scheduling: your agent reads it, and cancels or moves an appointment when you say yes: BUILT 2026-09-28 (Archie 62167b8c..12aedc2a for reading, 769eed7d..5417c884 for cancel and move), IN THE CATALOG for Archie 0.3.1 and later, never run against a real account
 

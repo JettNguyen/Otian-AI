@@ -5092,7 +5092,8 @@ that answer used, with Show all to see the rest."
 - ⚠️ **Today on the computer's clock.** Sends are Archie's own email and text cards; a GoHighLevel message or other approved change is a job on the Jobs tab, not a "sent" line.
 - ⚠️ **Past 25 in a part, the rest are on the Jobs tab.** Undo is offered only where the Jobs tab offers it.
 - ⚠️ **A teammate's phone does not show the line.** On the phone, Open goes to the list, not the entry, and Show on a send works only while its card is still on this computer.
-- ⚠️ **Not yet seen by simulated owners:** the journey harness does not answer it.
+- ⚠️ **Seen by simulated owners on the computer only.** The journey harness reads it through the same `today_record` since Archie `0f4621d2`, and the October 18 night replay ran with it. The phone list's Open, Undo and Show are not pressed there.
+- **A list matched to a spreadsheet from the import screen counts once** on its first match (Archie `284aaf70`, test `a_first_match_is_one_change` in `today.rs`): before, the import and its first reread were two changes for one press.
 
 ### 🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, in no release yet
 
@@ -5226,7 +5227,9 @@ Watch my inbox switch on the agent's Skills tab, under Email Manager, starts it 
   and `a_mailbox_given_to_someone_is_not_promised_as_only_yours` in `poller.rs`;
   `the_asking_card_is_answered_in_code_by_the_owner` and
   `the_asking_cards_words_answer_it_only_while_it_waits` in `email/replies/tests.rs`;
-  `a_cursor_is_what_says_mail_was_read_before` in archie-core.
+  `a_cursor_is_what_says_mail_was_read_before` in archie-core; `a_fresh_agent_is_asked_on_the_first_poll`
+  in `poller.rs` (Archie `aaf067a8`: `ask_to_watch` makes the `email` folder before writing its mark,
+  so a new agent is asked on the first check rather than one check later).
 - **What is kept, and where.** The answer is one more setting, `agreed`, in the agent's
   `email/watcher.json` beside the other watch settings and written the same way, with no mail in
   it. The card's marker, `email/watch-asked.json`, holds a chat id and a message id. Nothing new

@@ -1,6 +1,6 @@
 # Otian AI
 
-> Archie is a desktop app that runs your own AI agent on your own computer. You tell the agent a job in plain words, and it does that job on the schedule you set. It works on your computer and answers on your phone. Otian AI is the two-person company that makes it.
+> Archie is a desktop app that runs your own AI agent on your own computer, for the owner who runs a small business alone. The agent drafts replies to new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and replies and calendar changes wait for your yes. It answers on your phone. Otian AI is the two-person company that makes it.
 
 This file is a curated map for answer engines. The full machine index is
 https://otianai.com/sitemap.xml.
@@ -12,7 +12,7 @@ a mistake and we want to hear about it: questions@otianai.com.
 
 ## Common questions
 
-- **What is Archie?** A desktop app that runs an AI agent on your own computer. It handles mail, calendar, and recurring jobs, and you reach it from Telegram, Discord, Slack, Matrix, or iMessage on a Mac. It is not a chatbot you open and type into: it runs on a schedule and comes back when it has something.
+- **What is Archie?** A desktop app that runs an AI agent on your own computer, made for a business you run alone. It handles new leads, unpaid invoices, mail, the calendar and recurring jobs, and you reach it from Archie Mobile, Telegram, Discord, Slack, Matrix, or iMessage on a Mac. It is not a chatbot you open and type into: it runs on a schedule and comes back when it has something.
 - **Does Otian AI see my conversations?** We hold none we can read. On an AI account of your own, your agent's thinking goes straight from your computer to that AI company, and we are not in the middle of it. The free starter credits, and the plan with the AI included, run through a server of ours, which measures spend without recording what was said. What we do hold is your email address, your plan, the operational records listed at https://otianai.com/trust/#what-we-hold, and, if phone access is on, sealed messages we cannot read. Your prompts still go to your AI company, a third party, so this is a claim about what Otian holds.
 - **Where does it run?** On a computer you own, during the hours it is on. There is no Otian server running your agent, which is why there is no Otian copy of what it reads. A hosted agent platform cannot make that claim, because the runtime that assembles the prompt is theirs.
 - **What does it cost?** $30 a month, or $299 a year. Archie for Teams is $99 a month or $999 a year. The AI itself is billed by your AI provider, to you, at their price: we add nothing to it. There is a plan with the AI included at $59 a month or $599 a year, which carries $25 of usage a month; email and text reading need your own AI key. Archie is in beta, and plans are on sale now. Guided setup is $250 for an hour. App refunds within 14 days of first starting a plan.

@@ -18,24 +18,26 @@ Yours to shape & yours to keep. Never ours.
 
 ---
 
-## Archie runs an AI agent on your own computer for your email, calendar and bills
+## Archie runs an AI agent on your computer for a business you run alone
 
-**Archie**, by Otian AI, is a desktop app for Mac and Windows. The agent it runs drafts your
-email replies, keeps track of the bills, the refills and the birthdays, and answers you from your
-phone or the chat app you already use.
+**Archie**, by Otian AI, is a desktop app for Mac and Windows. The agent it runs drafts replies to
+new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and waits
+for your yes. You message it from your phone or the chat app you already use. Your chosen AI
+company does the thinking.
 
 > [!NOTE]
 > **Archie is in beta on Mac and Windows.** It is free on an AI account of your own at 20 jobs a
 > day, and plans are on sale. [Download Archie](https://otianai.com/archie/install/).
 
-### A week of small jobs, handed off
+### The busy work, handed off while you are on a job
 
 | The moment | What your agent does |
 |---|---|
-| **The reply you keep meaning to send** | Writes the draft and drops it in your chat with a Send button. |
-| **The bill due on the 15th** | Keeps track of it and reminds you before it is due. |
-| **The 3 o'clock that has to move** | Proposes the exact calendar change and makes it after you approve. |
-| **The thing you swore you'd remember** | Holds onto it, then messages you first when the time comes. |
+| **A new lead emails about a roof** | Writes the reply and drops it in your chat with a Send button. |
+| **Todd went quiet on the deck quote** | Notices, tells you, and offers to draft a nudge. |
+| **Two invoices are still unpaid** | Keeps track of who owes you and for how long. |
+| **The walkthrough has to move to Thursday** | Proposes the exact calendar change and makes it after you approve. |
+| **You promised Dana the estimate by Friday** | Holds onto it, then messages you first when the time comes. |
 
 <div align="center">
 <img src="assets/home-sample.png" alt="Archie sending an email draft to a phone chat, with a Send button" width="280">
@@ -78,14 +80,14 @@ kinds.
 
 | Kind | What it is |
 |---|---|
-| **Skills** | The things your agent can do. Inbox triage, bills and subscriptions, meeting notes. |
-| **Routines** | Things it does on a schedule. A briefing every morning, a bill reminder before the due date. |
+| **Skills** | The things your agent can do. New leads, unpaid invoices, the calendar. |
+| **Routines** | Things it does on a schedule. A morning brief, a sweep for quiet leads. |
 | **Personalities** | How your agent talks to you. Warm and chatty, or brief and to the point. |
 
 An add-on is a text file your agent reads. A Skill is written instructions plus settings. It
 cannot run code or a command on your computer, because Archie has nowhere to run one.
 
-If the job you need is missing, [we can build the add-on for you](https://otianai.com/services/#commission),
+If the job you need is missing, [we can build the add-on for you](https://consulting.otianai.com/#services),
 on a quote per add-on.
 
 ---
@@ -95,16 +97,17 @@ on a quote per add-on.
 | | Price |
 |---|---|
 | **Free** | On an AI account of your own, at 20 jobs a day. The count starts again at midnight. |
-| **A plan** | **$30** a month, or **$299** a year. Takes the limit off, up to 10 agents, with every add-on. |
+| **Archie, for one person** | **$30** a month, or **$299** a year. Takes the limit off, up to 10 agents, with every add-on. |
 | **The AI itself** | Billed to you by the AI company you pick, at their price. We add nothing to it. |
 | **The AI included** | **$59** a month, or **$599** a year, with $25 of AI use a month. Email and text reading need your own AI account. |
-| **Archie for Teams** | **$99** a month, or **$999** a year. |
+| **Archie for Teams** | **$99** a month, or **$999** a year, for when you hire. |
 
 The AI bill is usually $13 to $31 a month, and up to $206 for a heavy agent. The
 [pricing page](https://otianai.com/archie/pricing/) shows the working. Plans can be refunded within
 14 days of first starting one.
 
-**Guided setup** is $250 for an hour, with us, over Zoom. It starts with a free call.
+**Guided setup** is $250 for an hour, with us, over Zoom. It starts with a
+[free call](https://consulting.otianai.com/).
 
 ---
 
@@ -112,9 +115,9 @@ The AI bill is usually $13 to $31 a month, and up to $206 for a heavy agent. The
 
 | | Pages |
 |---|---|
-| **Archie** | [For Personal](https://otianai.com/archie/personal/) · [For Business](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
+| **Archie** | [For One Person](https://otianai.com/archie/personal/) · [For a Team](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
 | **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
-| **Services** | [Work With Us](https://otianai.com/services/) · [Commission an Add-on](https://otianai.com/services/#commission) |
+| **Consulting** | [Otian AI Consulting](https://consulting.otianai.com/) · [Consulting Pricing](https://consulting.otianai.com/#pricing) |
 | **Learn** | [Learning Library](https://otianai.com/learn/getting-your-computer-ready/) · [Compare](https://otianai.com/compare/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
 | **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
 
@@ -208,7 +211,7 @@ a time, and built Archie from what that taught us. [Read our story](https://otia
 
 **Try Archie free on an AI account of your own, or talk it through with us first.**
 
-[**Download Archie**](https://otianai.com/archie/install/) · [Book a free call](https://otianai.com/services/)
+[**Download Archie**](https://otianai.com/archie/install/) · [Book a free call](https://consulting.otianai.com/)
 
 <sub>Site copy, brand marks and product screenshots © Otian AI. No open-source license is granted.</sub>
 

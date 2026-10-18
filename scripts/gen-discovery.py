@@ -328,9 +328,10 @@ def build_robots():
 # it, what does it cost, what is true about the data, what can it not do.
 # ---------------------------------------------------------------------------
 
-SUMMARY = """Archie is a desktop app that runs your own AI agent on your own computer. You
-tell the agent a job in plain words, and it does that job on the schedule you set. It works
-on your computer and answers on your phone. Otian AI is the two-person company that makes
+SUMMARY = """Archie is a desktop app that runs your own AI agent on your own computer, for the
+owner who runs a small business alone. The agent drafts replies to new leads, tracks unpaid
+invoices and keeps the calendar whenever your computer is on, and replies and calendar changes
+wait for your yes. It answers on your phone. Otian AI is the two-person company that makes
 it."""
 
 # The block that answers the question an answer engine is usually being asked. Each pair is
@@ -338,8 +339,9 @@ it."""
 # breath rather than in a later sentence that will be cut off.
 QUESTIONS = [
     ("What is Archie?",
-     "A desktop app that runs an AI agent on your own computer. It handles mail, calendar, "
-     "and recurring jobs, and you reach it from Telegram, Discord, Slack, Matrix, or iMessage "
+     "A desktop app that runs an AI agent on your own computer, made for a business you run "
+     "alone. It handles new leads, unpaid invoices, mail, the calendar and recurring jobs, and "
+     "you reach it from Archie Mobile, Telegram, Discord, Slack, Matrix, or iMessage "
      "on a Mac. It is not a chatbot you open and type into: it runs on a schedule and comes "
      "back when it has something."),
     ("Does Otian AI see my conversations?",

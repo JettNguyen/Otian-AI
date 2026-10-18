@@ -5063,7 +5063,12 @@ puts it on a card to add with one press instead of adding it."
   or the turn read gives is taken out of a new entry (`without_unsaid_dates`), and the agent is told
   to say "Left Last contact blank: nothing said when." (`mark_left_blank`). The line under the reply
   says the same (the entry on what the line under a reply says). Added on, which the create fills
-  with today by design, is not counted (`still_blank`).
+  with today by design, is not counted (`still_blank`). **Amended October 17, 2026** (Archie `cda478ef`, in no release
+  yet): that blank holds for the rest of the turn. An update in the same turn that tries to fill it
+  with a day nothing gave is held the same way (`left_blank_here` and `still_left_blank` in
+  `gateway/turn.rs`; pipeline test `a_day_left_blank_stays_blank_for_the_turn`), because on the
+  replay after round four the agent left Ends blank and then filled it one step later with its own
+  guess. A later turn, or a day something read since gives, can still fill it.
 - **A question adds nothing on its own.** On a message that ends in a question mark
   (`asks_a_question`), a new entry goes on the same card a photo's entries do, from "your message",
   and one press adds it; a watch for someone's answer is offered with Watch for their answer and No
@@ -5393,9 +5398,15 @@ keeps about you is listed under the draft as Check before sending."
   is a sentence in the prompt, and a model can still write a guess as if it were known. What code
   guarantees is narrower: a blank in square brackets on an email or text card stops Send, and on an
   email card, an amount, a single day, or a time nothing given holds is named under the draft.
-- ⛔ **Never "Archie flags anything your agent made up" (amended October 12, 2026).** Code reads
-  only amounts, days, and times. A reason, a promise, or a term is on the line only when the agent
-  lists it in `added`, and nobody has yet seen whether it does (Archie's `docs/OPEN-THREADS.md`).
+- ⛔ **Never "Archie flags anything your agent made up" (amended October 12 and October 17, 2026).**
+  Code reads amounts, days and times, and since October 17 (Archie `cda478ef`, in no release yet) a
+  short list of stock reasons when nothing given holds their words: something came up, on our end, a
+  conflict, a change of plans, unforeseen circumstances, short-staffed, running behind, an emergency,
+  under the weather, and a few more. It reads them on any email draft, a vendor's as much as a
+  customer's (`STOCK_REASONS` and `reasons_in` in `crates/archie-runtime/src/email/replies/added.rs`),
+  because on the replay after round four a note to a septic company said "Something has come up on
+  our end" and the line was empty. Any other reason, promise or term is on the line only when the
+  agent lists it in `added`, and nobody has yet seen whether it does (Archie's `docs/OPEN-THREADS.md`).
   The line names; it never holds Send.
 - ⚠️ **"Check before sending" is on email cards the agent drafts in chat only.** Not on texts, not
   on drafts the mail watch writes on arrival, and not in a message written into the chat to copy.
@@ -6019,6 +6030,15 @@ your reminders, and your agent's routines. Press one on the computer and that li
   "Today, October 12" and "Monday, October 19" as buttons (`which_day` in `gateway/turn.rs`, for
   list entries, reminders, calendar events and to-dos). Tests: `todays_own_name_said_bare_is_both_days`
   and `a_week_out_for_todays_own_name_is_asked_about`.
+- **Amended October 17, 2026: a length** (Archie `cda478ef`, in no release yet). On a list entry with
+  a start and an end column, a length said with the start ("for 3 weeks", "10 days") counts as giving
+  the end, so the end that many days or weeks on is written. "For a month" or "for 2 months" has two
+  readings, so the write is held once a turn and the agent is told to ask with three buttons spelled
+  in code: "4 weeks, to November 13", "A month, to November 16" and "No end date yet" (`length_said`
+  and `range_keys` in `schedule.rs`; `which_length` and `dates_nobody_gave` in `gateway/turn.rs`).
+  Only list entries, on a message a person typed: not calendar events, reminders or to-dos. The start
+  has to be one the person gave or the entry had, and after the one hold a new entry's end is left
+  blank. Never "Archie always asks about dates".
 - **What it reads.** `schedule_note`: every list the agent may read (`list_collections` in
   `crates/archie-runtime/src/records.rs`) that has a date looking ahead or coming round every year
   (`days_of`). A column's own name decides first: one with a word for what already happened
@@ -6185,11 +6205,19 @@ your reminders, and your agent's routines. Press one on the computer and that li
 - ⚠️ **A trailer booking is one day, its Event date.** The trailer setup's Bookings keep that one
   date and no delivery or pickup day, so two bookings clash only when they share the date. Never pair
   the setup's rule "A trailer holds one booking at a time, from delivery to pickup" with this as if
-  code held it. Rentals, with Starts and Ends, are compared over the whole stretch.
+  code held it. Rentals, with Starts and Ends, are compared over the whole stretch. **Amended October 17,
+  2026** (Archie `cda478ef`, in no release yet): a booking whose stage says the thing is still out
+  (Delivered, Out, On site, Pickup due, In use and the like) holds it from its date until it is
+  marked Picked up or Returned, when it has no end or its end has passed. So a long-term rental
+  marked Delivered is not free next month (`still_out` and `booked_days` in `schedule.rs`). A Booked
+  trailer booking is still one day, so never "a trailer is held from delivery to pickup" for one
+  nobody has marked Delivered.
 - ⚠️ **Free is worked out from bookings, not from where a thing is.** A trailer whose Status says Out
   at an event, but that no booking names on those days, counts as free (the test's T5); only a status
   that says it needs work is set apart. Where bookings give a count, it is how many and not which
-  ones, and a quoted booking is not in the count.
+  ones, and a quoted booking is not in the count. Since October 17, 2026 the what-is-free note, the double-booking
+  check, the counts a write hands back, the what's-on note and the restroom morning list all read a
+  still-out booking the same way (above).
 - ⚠️ **What is free needs a day and the thing's name.** "Which trailers are free?" with no day gets no
   note at all, and "What's free Saturday?" names no list of things, so it gets the what's-on note
   without the what-is-free part.
@@ -7538,6 +7566,21 @@ conversation you can scroll back through in Archie."
   "has been dropped and you cannot read it", which was true of what it could see and false of what
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
+
+**Amended October 17, 2026: each of those twenty messages carries its day** (Archie `b802f511`, in
+no release yet). **Claim:** "Your agent knows which day each recent message was said, so "Friday" in
+last week's message means last week's Friday."
+- **Why it's true:** `crates/archie-runtime/src/gateway/worker.rs` stores when each entry was said,
+  and `crates/archie-net/src/llm/said_on.rs` (run inside `past_calls::on_the_wire`) puts the day,
+  spelled like the day table the agent gets on every turn, on its own line above the owner's message
+  whenever the conversation moved to a new day. On the replay after round four, an agent read "I put
+  a pickup for Friday on the route" from the week before as this Friday, found nothing, and told the
+  owner it had never added a stop that was there.
+- ⚠️ **Only the twenty messages in front of it, and only ones written by this version or later.**
+  Older messages carry no day. The search above already hands back each message with its day and
+  time.
+- ⛔ **Never "Archie remembers when you said everything",** and never that it checks the dates in old
+  messages against your lists. It is told the day; what it makes of it is the model's reading.
 
 **Amended October 17, 2026: the line in the conversation sits where the agent's memory starts**
 (Archie `63a2528e` and archie-mobile `481d46d`, merged into main as Archie `150e66ef` and

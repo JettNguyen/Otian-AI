@@ -5571,6 +5571,9 @@ write on a card yourself go out as you wrote them, signed once."
 - ⛔ **Never "nothing invented reaches a draft".** The send-back happens once a turn, and a reason kept on the retry is named on the line, never removed. Promises are named, never removed or refused. Anything else on the line depends on the model naming it.
 - ⚠️ **Email drafts only.** Text drafts have no Check before sending line. The send-time check reads that your words name a day or a time, not that the time was meant for sending; nothing is set until you press the time on the card.
 - **What the earlier version got wrong.** From October 17 the model almost never named its own additions, because the `added` field told it they were rare. Code now names what it can read.
+- **Since tonight (Archie `f3d5a9ed` area, merged as `47b1ff7b`, in no release yet): Take out what you added cuts only what nothing Archie read says.** A price from your price sheet or a day from your lists stays (`to_take_out` in `email/replies/added.rs`, `take_out_instruction` in `actions.rs`, the button in `card.rs`). The line keeps a caveat over a source.
+- ⛔ **Never "Take out removes everything Archie made up".** It reads the agent's own label on each item, so an item the agent wrongly says came from your price sheet stays. Five items at most, code's finds first, and facts with a source fall off first.
+- **What that got wrong before.** On the finished replay the press sent the whole line back and cut a real pickup day.
 
 ### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -5829,6 +5832,8 @@ the owner read the correction as Archie losing it (the notes in
 **Amended October 18, 2026: a take-back that rests on nothing is cut** (Archie `4ef02832`, merged as `442ab1f0`, in no release yet). **Claim:** "When Archie takes back an earlier answer without anything it read saying otherwise, the take-back is removed before you see it, and you get the answer to what you asked." It replaces the send-back above for that case, and it is checked on the retry's reply too.
 - **Why it's true:** `shaky_take_back`, `without_take_back` and `held_note` in `crates/archie-runtime/src/gateway/turn.rs`, with `gateway/kept.rs`.
 - ⛔ **A correction that rests on something read this turn still goes out** (Jett's call). Never "Archie never corrects itself", and never that its earlier answers are right: only that a retraction nothing supports is not sent.
+- **Since tonight (Archie `0b69c487` and `197422df`, merged as `1cffd325`, in no release yet):** it also covers a reply with buttons under it, and the buttons go too when they would act on the cut take-back. Each take-back in a reply is judged on its own, so a correction that rests on something read stays even when another one beside it is removed (`take_back_fate`, `rests_on_nothing_at`, `acts_on_the_cut` and `still_asks` in `gateway/turn.rs`).
+- ⛔ **Take-backs are recognized by their wording, so not every one is caught.** Never "Archie never takes back a right answer". A "not on the list" take-back is still removed even when the whole list was read, because absence is not treated as evidence.
 
 ### 🚧 A web link Archie could not have read is cut back to the site's front page: BUILT 2026-10-18 (Archie `851dd5eb`, merged as `442ab1f0`), in no release yet
 
@@ -5842,6 +5847,19 @@ the owner read the correction as Archie losing it (the notes in
 **Boundaries:**
 - ⛔ **It checks the site, not the page.** A deep link on a site that appeared in a search or a page read stays whole even if that exact page was not opened. It does not check that the site exists. Never "every link Archie sends works".
 - ⚠️ **A short host name that appears in unrelated text keeps its path.** The check errs toward leaving a link alone.
+
+### 🚧 Archie asks about a late pickup at most once a day per rental in a chat: BUILT 2026-10-18 (Archie `1cffd325`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Archie asks you about a late pickup for a rental at most once a day in the same chat, unless you bring that rental up."
+
+**Why it's true:**
+- `pickup_once` in `gateway/turn.rs`, with `pickup_asks` and `late_rows` in `crates/archie-runtime/src/gateway/asked.rs`.
+
+**Boundaries:**
+- ⚠️ **One chat and one day on this computer's clock.** It applies only to rentals past their end date whose stage says the units are still out, and the rental must be named by customer or site (or pointed back to right after being named).
+- ⚠️ **The statement that a rental is late still goes out.** Never "Archie never repeats a question".
 
 ### ✅ Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -10296,8 +10314,8 @@ email or a time on your calendar, and it looks before it rewrites."
   card's first line under its heading is "Not sent yet." (`render_card` in
   `crates/archie-runtime/src/email/replies/card.rs`). Over the message box, both apps say "1 waiting
   to send" or "2 waiting to send" while a conversation holds an email or text card whose Send is
-  still on it, and a press scrolls to the oldest (`waitingToSend` in `src/app/conversation.tsx` and
-  archie-mobile `src/screens/Chat.tsx`). Asked what is unsent, pending or promised, the agent is told
+  still on it, and a press opens the list (`waitingToSend` in `src/app/conversation.tsx` and
+  archie-mobile `src/screens/Chat.tsx`). **Corrected October 18, 2026:** "a press scrolls to the oldest" has been wrong since October 17. Both apps count the drafts waiting on their Send in that conversation, one each however many times /pending posted it, and a press opens the list; Show takes you to the newest card of each (`waitingDrafts` in `src/app/waiting.ts` and archie-mobile `src/waiting.ts`; Archie `47b1ff7b`, archie-mobile `a57c888`, in no release yet). Never that the list shows drafts in other conversations. Asked what is unsent, pending or promised, the agent is told
   to count the email drafts waiting on cards in that conversation, which it was already handed
   every turn one waits (`waiting_drafts_note` in
   `crates/archie-runtime/src/email/replies/draft.rs`).
@@ -10365,6 +10383,19 @@ email or a time on your calendar, and it looks before it rewrites."
   - ⛔ **It never moves anything on its own,** and it checks nothing else in the letter. The line and
     the button show only when words sit under the sign-off, and Save works either way.
   - ⚠️ **The phone's half has never been seen on a phone.**
+
+### 🚧 /pending moves a waiting card to the bottom instead of copying it: BUILT 2026-10-18 (Archie `47b1ff7b`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Type /pending and everything still waiting on you is posted again at the bottom. The earlier copy says it was replaced by the newest card, and its buttons go."
+
+**Why it's true:**
+- `retire_old_copy` and `post_again` in `crates/archie-runtime/src/decide.rs`, called by every lane /pending posts: email drafts and new emails (`resend_open_cards` in `email/replies/actions.rs`), text drafts, catch-up lists (`resend_open` in `catchup.rs`), proposed row changes (`email/upkeep.rs`) and questions with buttons (`gateway/worker.rs`). Tests such as `pending_retires_the_old_card_and_an_old_press_does_not_send_twice`.
+
+**Boundaries:**
+- ⚠️ **Not on Signal or iMessage, which cannot edit,** nor in the window when its chat app is one of those. There the old copy stays and a press on it is answered once.
+- ⛔ **Never "a draft can never be sent twice" as a general claim.** What holds is that every copy of a draft is one record, and a sent record answers "Already handled.".
 
 ### 🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), in no release yet
 

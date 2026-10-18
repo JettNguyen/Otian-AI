@@ -7567,13 +7567,16 @@ conversation you can scroll back through in Archie."
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
 
-**Amended October 17, 2026: each of those twenty messages carries its day** (Archie `b802f511`, in
-no release yet). **Claim:** "Your agent knows which day each recent message was said, so "Friday" in
+**Amended October 17, 2026: each of those twenty messages carries its day** (Archie `b802f511`, and
+`3794ac84` for where the day goes; in no release yet). **Claim:** "Your agent knows which day each recent message was said, so "Friday" in
 last week's message means last week's Friday."
 - **Why it's true:** `crates/archie-runtime/src/gateway/worker.rs` stores when each entry was said,
   and `crates/archie-net/src/llm/said_on.rs` (run inside `past_calls::on_the_wire`) puts the day,
-  spelled like the day table the agent gets on every turn, on its own line above the owner's message
-  whenever the conversation moved to a new day. On the replay after round four, an agent read "I put
+  spelled like the day table the agent gets on every turn, after the owner's earlier message
+  whenever the conversation moved to a new day, in the shape of the sent-at stamp: "(Sent Friday,
+  October 9)". The latest message carries only its stamp. A day above the latest message made Sonnet
+  5.5 drop a change waiting for the owner's yes, 7 times in 7, in `scripts/prompt-layout-ab.py`;
+  after the words of earlier messages it changed nothing the probe measures. On the replay after round four, an agent read "I put
   a pickup for Friday on the route" from the week before as this Friday, found nothing, and told the
   owner it had never added a stop that was there.
 - ⚠️ **Only the twenty messages in front of it, and only ones written by this version or later.**

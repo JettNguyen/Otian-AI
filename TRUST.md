@@ -3538,6 +3538,109 @@ what the card was offering."
 - ⚠️ **What the card offered is dropped,** with anything else staged in that chat, as the agent's own
   turn would drop it. Never "nothing changes when you press Not now".
 
+### 🚧 A press shows as the button you pressed, over a line of the card it answered, and Confirm names the change: BUILT 2026-10-17, not yet merged into main, in no release yet
+
+*Archie `67e0ebaf` and `5bb63ccb` and archie-mobile `8708e35`, on the `r4-chat` branches, which are
+being merged into main now; in no release or build. Nothing below may be said on a page until a
+release carries it.*
+
+A press goes to the agent as a sentence in the owner's name, and on round four of the journey tests
+that sentence read as words the owner never typed: "I never saw that proposal" (the comment in
+`src/app/conversation.tsx`; the fix plan after round four, F.2). Jett's rule since October 9, 2026 is
+that a press shows as a press.
+
+**Proposed wording, Jett's to approve:** "A button you press shows in your side of the conversation
+as that button, pressed, over the first words of the card it answered, with what it told your agent
+underneath. Confirm says the change it confirms, in the words of the card."
+
+**Why it's true:**
+- **Confirm names the change.** `confirm_sentence` in `crates/archie-runtime/src/decide.rs`, used by
+  `approval_choices`, sends "Yes, " and the change's own summary ("Yes, SMS to Dana Miller: running
+  late." in its test). With no summary, or one over 150 characters (`CONFIRM_SUMMARY_CHARS`), it
+  says "Yes, go ahead and apply the {kind} you proposed." as before.
+- **The window remembers the press.** Which button was pressed on which card is noted before the
+  press is delivered (`note_press` in `src-tauri/src/inapp.rs`), and the sentence it becomes carries
+  the card's first words and the button's label (`press_answered`, `ReplyingTo::pressed`). Archie
+  draws "Pressed" and the button in its own color over a one-line quote of the card, with the
+  sentence under it (`src/app/conversation.tsx`); Archie Mobile draws the same with `PressedButton`
+  in archie-mobile `src/ui.tsx`.
+- **A button cannot add a second request.** A button whose sentence carries a second thing to do
+  that its label does not say ("Book the 5 pickups" sending "Book the 5 pickups and text Dana the
+  route") is refused when the agent offers it (`claim_in_send` and `extra_clause` in `decide.rs`),
+  as a plan in the first person already was.
+- **Cost.** About 15 to 30 tokens more in the owner's message on a Confirm press, then in history.
+  Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **Archie and Archie Mobile only.** A chat app shows the sentence alone.
+- ⚠️ **The second-request check matches words,** so a label that rewords its own second clause could
+  be refused, and a second request worded with the label's words could pass. It is tested on the
+  round four cases.
+- ⚠️ **The phone's half has never been seen on a phone.**
+
+### 🚧 Your agent's words for its own parts: "Who has what" for Who's Got This's list, the names on your columns, and no "skill" or "specialist" in replies: BUILT 2026-10-17, not yet merged into main, in no release yet
+
+*Archie `91bcf0f3`, on the `r4-chat` branch, which is being merged into main now; in no release.
+Nothing below may be said on a page until a release carries it.*
+
+On round four of the journey tests replies carried words from inside Archie: "Handoffs", "for_who
+is now Dana", "skill" and "specialist" (the fix plan after round four, F.4).
+
+**Proposed wording, Jett's to approve:** "Who's Got This keeps its list as Who has what. When a list
+is renamed in Archie's store, your agent's copy takes the new name too, unless you renamed it
+yourself."
+
+**Why it's true:**
+- **The list.** Who's Got This (`data/marketplace/skills/whos-got-this.json`, version 1.0.4) names
+  its list Who has what; the list's key stays `handoffs`, so nothing on it moves.
+- **A store rename reaches an agent.** When an add-on's new version renames a list,
+  `apply_skill_refresh` in `crates/archie-core/src/bundle/skills.rs` renames the agent's copy if it
+  still has the name it was installed with, and leaves a name the owner gave it alone (test
+  `a_catalog_rename_reaches_a_list_its_owner_never_renamed`). Before, no list was ever renamed by an
+  update, so this now applies to any add-on whose list name changes.
+- **Changes are named by the column's label.** A change to an entry hands the agent what changed by
+  the names on the list's own columns, `"changed": {"For": "Dana"}`, so the reply says For and never
+  the key `for_who` (`crates/archie-runtime/src/records.rs`, test
+  `an_update_names_what_changed_by_the_columns_label`).
+- **No "skill" or "specialist".** The agent is told to say what a specialist did ("I looked it up
+  online") and never its name or either word (`gateway/tools_specialist.rs` and `gateway/turn.rs`),
+  where it used to be told to say "skill".
+- **Cost.** About 26 tokens fewer on agents with specialists, about 6 more on Who's Got This's
+  turns, and 10 to 20 in each update's result. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **"No skill or specialist" is what the agent is told,** not a filter on what it writes. Never
+  "Archie never uses technical words".
+- ⚠️ **A list the owner renamed keeps their name,** and a list whose columns they changed but whose
+  name they did not is still renamed.
+
+### 🚧 Messages sent from a phone get short answers, first line first: BUILT 2026-10-17, not yet merged into main, in no release yet
+
+*Archie `d3355764`, on the `r4-chat` branch, which is being merged into main now; in no release.
+Nothing below may be said on a page until a release carries it.*
+
+On round four of the journey tests replies were too long for the car or the cab: "If it keeps being
+that wordy on a phone with one bar I'd give up" (Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed wording, Jett's to approve:** "Text your agent from your phone and it answers in the
+first line and keeps it to about three short lines."
+
+**Why it's true:** on a message a person typed from a phone, the agent is told "They are on a phone.
+Answer in the first line and keep the whole reply to about three short lines; no headings."
+(`PHONE_NOTE` in `crates/archie-runtime/src/gateway/turn.rs`). Which messages count is answered by
+where the message came from: Archie Mobile, a teammate's phone, or a chat app (`on_a_phone` in
+`crates/archie-net/src/inapp.rs` and `mirror.rs`). The Operator personality (1.0.3) no longer ends
+every report with an ordering line when nothing needs ordering ("If nothing does, leave the line
+out."). About 28 tokens on phone turns only, below the cache line. Internal, never on the site.
+
+**Boundaries:**
+- ⛔ **An instruction, not a limit.** Nothing cuts a reply, so never "phone answers are three lines".
+  Say "keeps it short".
+- ⚠️ **Typed messages only,** not a press, a routine or a watch. Messages typed at the desk are
+  answered as before.
+- ⚠️ **A chat app counts as a phone,** because the app cannot tell where it is being read.
+
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -4905,6 +5008,34 @@ under its reply says so, with Open beside it, and the list is on the agent's pag
 - ⚠️ **The phone's half is in no build yet,** so never say Archie Mobile shows either line until a
   build carrying `8ae9a3f` and `97d1c15` is out.
 
+**Amended October 17, 2026: "Read:" opens what was read** (Archie `bad77446` and archie-mobile
+`974f9da`, on the `r4-chat` branches, which are being merged into main now; in no release or build,
+so nothing here may be said on a page until a release carries it). On round four of the journey
+tests the Looked at line read as jargon or did not tie out: "I do not know what those counts are
+for", a file name like how-i-work.md "means nothing to me", and "36 matched" under a 33-account
+answer with no way to see which (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "Under a reply, Read: names the lists and
+files your agent looked at and what it looked for. Press a list and it opens on just the entries
+that answer used, with Show all to see the rest."
+
+- **The words.** "Looked at:" is now "Read:", and a list says what was asked of it: "your 4 deals (1
+  fit the question)", "your 69 rentals (36 with Rate 95)", "your file How I work", and for a list
+  barely started, "the 1 entry on Bookings, the only one entered so far" (`lookedLabel` in
+  `src/app/lists.ts` and archie-mobile `src/words.ts`; the filter in words from `filter_said`, a
+  file's name from `file_said`, and `only_so_far`, all in `crates/archie-runtime/src/gateway/kept.rs`).
+- **The press.** A list opens on the matched entries alone, under "The 36 rentals Ember read for
+  this answer." with Show all (`readForThis` in `lists.ts`, `showOnly` in `src/app/records.tsx`);
+  Archie Mobile opens its Lists on the same entries (`kept.tsx`, `ListPage.tsx`). A file opens on
+  Knowledge. The ids travel on the line (`LookedAt` in `crates/archie-net/src/channel.rs`), at most
+  50 (`LOOKED_IDS`): past that the opened list says "50 of the 64 rentals Ember read for this
+  answer."
+- ⚠️ **What a read matched, not what the AI weighed.** The entries are the ones the agent's search
+  returned; never "shows exactly what the AI used to answer".
+- ⚠️ **On the phone, only entries the phone has can show.** A read that matched the whole list opens
+  the whole list.
+- ⚠️ **The phone's half has never been seen on a phone.**
+
 ### 🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, in no release yet
 
 *Archie `e716864f`, merged into main as `b65729ea` (with `ffd8d224` for Added on), and archie-mobile
@@ -5090,6 +5221,38 @@ answering you."
   teammate's, does not hold it.
 - ⛔ Never "it never interrupts you". It waits for an answer to finish; it still arrives unasked,
   and a reminder can land mid-answer.
+
+### 🚧 A message your agent sends on its own says so, and what it is: BUILT 2026-10-17, not yet merged into main, in no release yet
+
+*Archie `63a2528e` and archie-mobile `481d46d`, on the `r4-chat` branches, which are being merged into
+main now; in no release or build. Nothing below may be said on a page until a release carries it.*
+
+A routine's report otherwise arrived looking like an answer to whatever was said last (the note on
+`Channel::sent_on_its_own` in `crates/archie-net/src/channel.rs`; the fix plan after round four,
+F.6).
+
+**Proposed wording, Jett's to approve:** "When your agent sends something without being asked, a
+line over it says so and what it is: "Sent on its own at 6:30 AM: your morning list.""
+
+**Why it's true:**
+- **Which messages.** A new message in the owner's own conversation that is not part of an answer
+  to something they said (`record_agent` in `src-tauri/src/inapp.rs`, the same test the alert on
+  the computer already used) is stored as sent on its own (`Entry::on_its_own`).
+- **What it is called.** Just before the send, the runtime names it (`Channel::sent_on_its_own`): a
+  routine by its name (`gateway/routines.rs`), "your morning list", or "a reminder you set"
+  (`gateway/worker.rs`). Anything else gets the line with no name: "Sent on its own at 9:14 AM."
+- **Drawn on both,** over the first message of a run sent on its own (`onItsOwnLine` in
+  `src/app/conversation.tsx`, and in archie-mobile `src/when.ts`, carried to the phone by
+  `src-tauri/src/phone.rs`). Test `a_message_sent_on_its_own_says_so_and_what_for`.
+- **Cost.** None: no AI and no prompt words. Internal, never on the site.
+
+**Boundaries:**
+- ⚠️ **A card from the mail or text watch, and a cost note, carry no name,** only "Sent on its own".
+- ⚠️ **The owner's own conversation in Archie and Archie Mobile.** A chat app has no such line, and
+  a teammate's conversation is not marked.
+- ⚠️ **A name not used within 60 seconds is dropped** (`ON_ITS_OWN_FOR`), so it cannot land on a
+  later message; that message then gets the line with no name.
+- ⚠️ **The phone's half has never been seen on a phone.**
 
 ### 🚧 Mail from people you write to is read first, and other mail can take a few minutes: BUILT 2026-10-13 (Archie `9a99e47e`), RELEASED in 0.3.9, 2026-10-14, never run on a real inbox
 
@@ -5567,6 +5730,21 @@ stronger one.
   still end in a wrong correction that names an item.
 - ⚠️ **It costs one more model call when it fires,** and a correction about something with no
   number and no capitalized name ("the pickup was wrong") goes back once even after a read.
+
+**Amended October 17, 2026: the button names the list, and a save from earlier in the hour counts**
+(Archie `67e0ebaf`, on the `r4-chat` branch, which is being merged into main now; in no release, so
+nothing here may be said on a page until a release carries it). On round four of the journey tests
+an owner was told the people waiting on her were saved, pressed Save it, and "Save that to my lists
+now." put a task on Tasks; another reply was corrected about a save made one message earlier, and
+the owner read the correction as Archie losing it (the notes in
+`crates/archie-runtime/src/gateway/claimed.rs`).
+- **The button says where.** When the claim named a list, the correction and its button name it:
+  "Press Save to People to save it now.", and the press sends "Save that to my People list now."
+  (`save_it` and `correction`). With no list named it is Save it, as before.
+- **An earlier save counts.** A list write in a job the same person asked for in the last hour,
+  still not undone, keeps the correction off (`saved_lately`, reading the record of jobs).
+- ⚠️ **"The last hour" is by the record of jobs, which carries no chat,** so a save the same person
+  asked for elsewhere in that hour also keeps it quiet. It errs toward saying nothing.
 
 ### ✅ Who to call, worked out from People and Deals, and a word when somebody may already be on a list: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -7360,6 +7538,37 @@ conversation you can scroll back through in Archie."
   "has been dropped and you cannot read it", which was true of what it could see and false of what
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
+
+**Amended October 17, 2026: the line in the conversation sits where the agent's memory starts**
+(Archie `63a2528e` and archie-mobile `481d46d`, on the `r4-chat` branches, which are being merged
+into main now; in no release or build, so nothing here may be said on a page until a release
+carries it). The window drew "To keep replies quick, Ember reads only newer messages" twenty bubbles
+up, and a bubble is not what the agent holds: a card or a "Saved in" line is a bubble, and a
+routine's report is two entries in its history, so on round four the line landed somewhere the
+agent's memory did not start, in a different place on every screen (the notes on `held_words` in
+`crates/archie-runtime/src/gateway/worker.rs`; Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+
+**Proposed addition to the wording, Jett's to approve:** "A line in the conversation shows where
+your agent's memory of it starts: Ember rereads the messages below it, and can always look at your
+lists, notes, and files."
+
+- **Read off the history the agent is handed.** `held_words` reads what the agent still rereads of
+  that conversation from its own history, the shell lines those words up with the conversation on
+  screen (`remembers_from` and `oldest_held` in `src-tauri/src/inapp.rs`), and the line is drawn over
+  the oldest message it still holds. Archie asks for it when the conversation opens and after each
+  turn (`inapp_memory_edge`); Archie Mobile draws it from a `remembers_from` mark in what the
+  computer sends it (`src-tauri/src/phone.rs`).
+- **The words,** the same on both: "Ember rereads the messages below this line, and can always look
+  at your lists, notes, and files." (`memoryLine` in `src/app/conversation.tsx` and archie-mobile
+  `src/words.ts`). "Can always look at" rather than "always reads", because lists and files are read
+  when a question needs them, not on every turn.
+- ⛔ **Never "the agent forgets everything above the line".** Its notes, lists and files are still
+  there, and the search in this entry reaches further back.
+- ⚠️ **Drawn only once the history is full,** that is, once something has dropped out of what the
+  agent rereads; before that there is no line.
+- ⚠️ **Placed by matching words,** a short way at a time, so a message not on screen is passed over.
+- ⚠️ **On Archie Mobile, the owner's conversation only.** A teammate's phone gets no line.
+- ⚠️ **The phone's half has never been seen on a phone.**
 
 ### 🚧 When you ask about something, Archie checks your small files for lines that mention it, with no extra AI call: BUILT 2026-10-17, in no release yet
 
@@ -9849,6 +10058,42 @@ email or a time on your calendar, and it looks before it rewrites."
   - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
     an owner asked what was still unsent and was told nothing, while two drafts waited in the same
     chat, and in sixty runs nobody opened the Dashboard, where they were listed.
+- **Amended October 17, 2026 (Archie `eadd88e3` and `7ce81a86`, archie-mobile `b52a2a8` and
+  `5a4a9d6`, on the `r4-chat` branches, not yet merged into main and in no release or build; nothing
+  here may be said on a page until a release carries it): "waiting to send" opens a list, and words
+  about a draft that changed go gray.** On round four of the journey tests "2 waiting to send" would
+  not open, or jumped to one draft: "I will not use a tool where I cannot see and control that"
+  (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`). This replaces "a press scrolls to the
+  oldest" above.
+  - **The list.** A press opens a list over the message box, headed "Waiting for you to press Send.
+    Nothing has gone out.", one line per draft saying who it is to and what about ("Reply to Beth
+    Morris: Files missing documents"), with the card's own Send and a Show that scrolls to the card
+    (`waitingToSend`, `waitingHeading` and `waitingLabel` in `src/app/conversation.tsx`; the same
+    words in archie-mobile `src/words.ts`, drawn in `src/screens/Chat.tsx`). Send is the card's own
+    action, so it does exactly what Send on the card does.
+  - **A draft set for a time** says so: its line ends ", goes out on its own at its time", and the
+    heading becomes "Nothing has gone out yet. Each one waits for you to press Send, unless it says
+    it goes out on its own." (`SET_FOR_LATER`, a card offering Send now and Back to draft).
+  - **Words that no longer hold go gray.** When a draft is changed and then sent, or dismissed, the
+    agent's words from the turn that first showed it are grayed out under "Out of date: you changed
+    this draft and sent it. The card below shows what went." ("above" when the card sits higher) or
+    "Out of date: you dismissed this draft." (`Channel::draft_ended` and `DraftEnd` in
+    `crates/archie-net/src/channel.rs`; `was_changed` and `words_out_of_date` in
+    `crates/archie-runtime/src/email/replies/actions.rs` and the text lane's
+    `texts/replies/actions.rs`; `words_about` and `outdated_line` in `src-tauri/src/inapp.rs`; test
+    `a_draft_that_ends_changed_grays_the_words_about_it`). Archie Mobile grays the same bubble.
+  - ⛔ **Never "nothing is ever sent without a press".** A draft set for a time goes out at that time;
+    the list marks it.
+  - ⚠️ **Email and text reply drafts in the conversation on screen,** in Archie and Archie Mobile;
+    the one-conversation boundary above still holds.
+  - ⚠️ **A draft sent as written is not grayed,** since what was said about it is still true. A
+    change taken back with Put the old one back counts as unchanged.
+  - ⚠️ **Which words go gray is worked out by position:** the run of the agent's messages around the
+    card that first showed the draft, with no pause longer than three minutes, stopping at the
+    owner's own messages. Cards from before this build carry no mark tying a draft to its first
+    card, so a draft posted again after a change grays only the words beside the card that was
+    pressed.
+  - ⚠️ **The phone's half has never been seen on a phone.**
 - **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
   which the window then showed at the bottom as a new message, and Use my words sent your whole
   edited reply into the chat as if you had typed it to the agent, then posted the changed draft as

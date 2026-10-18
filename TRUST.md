@@ -6038,7 +6038,9 @@ your reminders, and your agent's routines. Press one on the computer and that li
   and `range_keys` in `schedule.rs`; `which_length` and `dates_nobody_gave` in `gateway/turn.rs`).
   Only list entries, on a message a person typed: not calendar events, reminders or to-dos. The start
   has to be one the person gave or the entry had, and after the one hold a new entry's end is left
-  blank. Never "Archie always asks about dates".
+  blank. The other list writes in the same step wait with it (Archie `dab34fe0`, `month_held_in`), so
+  nothing is half saved while the owner picks; a second try at them later in the same turn is not
+  held. Never "Archie always asks about dates".
 - **What it reads.** `schedule_note`: every list the agent may read (`list_collections` in
   `crates/archie-runtime/src/records.rs`) that has a date looking ahead or coming round every year
   (`days_of`). A column's own name decides first: one with a word for what already happened

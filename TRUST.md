@@ -6593,7 +6593,8 @@ list keeps them all."
   never used to change that entry. Imported again after an entry was changed on the list (a new
   stage, say), a row comes back in as a second entry unless it still matches by a unique column, by
   address and date, or by a name with the same phone or email. Never "merges" or "updates your
-  list".
+  list". Since October 18, 2026 (in no release yet) a list can instead be kept matched to the file,
+  which does update it: the entry "A list can stay matched to the spreadsheet you keep".
 - ⚠️ **A cell that does not fit is left blank, and named.** A word in a number column ("call"), a
   date that is not a real date (a day-first date such as 15/10/2026 is one), or a choice the list
   does not offer is left blank on a row that still comes in, and named by row and column: up to 50
@@ -6680,6 +6681,69 @@ make a new list that keeps every column, and still offers the closest list."
   holding the same kind of entry still leads, losses named.
 - ⚠️ **The card's Make a new list has no Open under it,** because the card is edited in place; the
   sentence names the place.
+
+### 🚧 A list can stay matched to the spreadsheet you keep, on this computer or in a shared Google Sheet: BUILT 2026-10-18 (Archie `0836722c` through `46829a4b`, archie-mobile `df83b5a` through `2bdde7a`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Keep your own spreadsheet. When you bring it into a list, leave Keep Units matched to
+units.xlsx checked, and Archie changes the list whenever you save the file. It works for a file on
+your computer and for a Google Sheet you've shared with your agent. Archie never changes your file,
+never takes an entry off the list without asking, and your agent knows the list is the whole list."
+
+**Why it's true:**
+- The rules are code with no AI call: `crates/archie-domain/src/follow.rs` (`plan` and `apply`: a
+  cell is written only when the file's cell changed since the last read, so an edit made in Archie
+  stays until that cell changes in the file; a row gone from the file is marked, never deleted;
+  rows added in Archie are never touched; two rows with one key, a blank key or a clash are held
+  and said), and `crates/archie-core/src/bundle/records.rs` (`match_record_collection`,
+  `set_record_collection_follows`).
+- When it reads: `crates/archie-runtime/src/follow.rs` (`check_all`, `reread`: the file's saved
+  time and size first, parsed only when either moved), on the minute tick in `gateway/worker.rs`,
+  at the start of every turn in `gateway/turn.rs` (files on this computer only), before the morning
+  list in `gateway/morning_list.rs`; a Google Sheet's modified time every 15 minutes
+  (`archie-net/src/drive.rs`, `modifiedTime`), its values only when that moved.
+- Turning it on: the import dialog (`src/app/records-import.tsx`: "Where is the spreadsheet?",
+  the box checked by default, "Archie tells the rows apart by"), with `src-tauri/src/commands/follow.rs`
+  (`start_matching`, `read_shared_sheet`) and `commands/knowledge_records.rs`
+  (`records_import_apply`); and the chat's button after rows land (`gateway/follow_offer.rs`), for a
+  file given in Archie's window or a shared Google Sheet's rows added from the card.
+- On the list: `src/app/records.tsx` and archie-mobile `src/screens/ListPage.tsx` draw one view
+  (`FollowView`), so the computer and the phone say the same sentences: what it matches and when it
+  was saved, the last change, "Changed here. units.xlsx still says Booked.", the entries no longer
+  in the file with Take them off and Keep them (Undo on the Jobs tab from either, `journal.rs`
+  `records_unfollow`, `settle_gone_recorded`), and a problem with the press that fixes it
+  (`FollowProblem::fix`).
+- What the agent is told: `say_list_size`, `partly_entered`, `do_update_scoped` and
+  `mark_not_in_their_file` in `crates/archie-runtime/src/records.rs`. Built after the
+  complete-records test (October 18, 2026): simulated owners with every list full said yes after the
+  first morning three times as often, and the reason they gave for maybe was keeping their own sheet
+  beside Archie.
+
+**Boundaries:**
+- ⛔ **Never "syncs", "two-way", "real time" or "instant".** Archie only reads the file. A file on
+  this computer is looked at every minute and at each turn while the agent runs; a Google Sheet every
+  15 minutes, before the morning list, and on Read it again or opening the list. With the agent
+  stopped the checks pause, and nothing happens while the computer running Archie is off.
+- ⛔ **Never "Archie works out how your rows match".** Code picks a column that tells rows apart;
+  the owner can pick another, or pick a row's place in the file, which comes with a warning. Two rows
+  with the same value are left out and said, never merged.
+- ⛔ **Never "any sheet in your Drive".** Only Google Sheets the owner picked on the Connections tab
+  (Add files). Never claim Follow Up Boss here: it is left out until a real account has been tried
+  and Archie is registered with it.
+- ⚠️ **The phone shows a matched list and acts on it, but cannot turn matching on** (that needs the
+  computer's file picker), find a moved file, or match the columns again. Its Take them off has the
+  same Undo as the computer's. On a teammate's phone the file's place is the owner's ("on Sam's
+  Desktop"); never claim a teammate can open or fix the file.
+- ⚠️ **Only the owner and admins can stop matching,** on the computer or a phone (Jett, October 18).
+- ⚠️ **One tab of a workbook is read** (the owner picks which; a renamed tab falls back to the
+  first). Files past 5,000 rows are read to 5,000, and then nothing is marked missing. A file over
+  20 MB is not read.
+- ⚠️ **The chat's button never appears for a file sent from the phone or a chat app** (it needs the
+  file's place on this computer), and asking in words never turns matching on: the button is the
+  way, and the agent is not told it is there.
+- ⚠️ **Not tried on a real Windows file system,** where Excel can hold a file open, nor on a file in
+  OneDrive or iCloud Drive not downloaded to this computer. Never seen with a real Google account.
 
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

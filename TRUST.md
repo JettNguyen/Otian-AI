@@ -588,8 +588,10 @@ means nothing further is sent and anything waiting to be sent is deleted."
   version, and the platform. It carries nothing you wrote, received, or asked for."
 - The in-app page and this claim are one list. `crates/archie-core/src/telemetry.rs` is the
   source; if a field is added there, both change or the page is a lie.
+- ⚠️ **One more thing goes out only when you press it:** from 0.3.10, the answer to "How did you hear about Archie?" on the Account page (the entry
+  below). It is not telemetry and the crash-reports switch does not govern it.
 
-### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), and its route is deployed
+### 🚧 "How did you hear about Archie?" on the Account page (at the end of setup in 0.3.6 and 0.3.7): BUILT 2026-10-05 (Archie b2f2c7fc), IN 0.3.6 BUT SWITCHED OFF, MOVED 2026-10-11 (Archie 708d8f82, in 0.3.8), its route deployed, SWITCHED ON 2026-10-17 (Archie `918676a1`), RELEASED in 0.3.10, 2026-10-17
 
 *Checked October 6, 2026, at the 0.3.6 release: the question ships switched off (`HEARD_FROM_LIVE` is
 `false` in Archie `src/app/heard-from.ts` at the release commit `59a674e6`), so nobody is asked. The
@@ -613,8 +615,10 @@ its route. A release before the deploy would show everybody who opens the Accoun
 whose answer fails to save. *Amended October 13, 2026:* the CASA freeze that held the route is over,
 and the route is live, deployed with the billing service on October 13. **Jett's
 call that day: the question stays switched off, and the privacy policy unchanged, until Google
-approves the app**, since Google is still reviewing the policy it read. Then the policy line, this
-entry and the switch change in one pass.
+approves the app**, since Google is still reviewing the policy it read. *Amended October 17, 2026:*
+Google verified the app on October 16, and Jett turned the question on the next day (Archie
+`918676a1`), with the privacy policy's line (under what we hold for the app) in the same pass. It
+reached people in 0.3.10, released the same day.
 
 **Approved wording, once it ships (the place changed on October 11, 2026, so Jett's to approve
 again):** "On the Account page, Archie asks how you heard about it. Answering is optional: nothing is
@@ -642,9 +646,9 @@ account. Staff see counts only (`tallyHeardFrom` in `/admin/summary`).
   it has no Account page.
 - ⛔ **Never "nothing else is sent".** The request carries the sign-in token and arrives from the
   computer's address, like every request.
-- ⚠️ **The no-analytics entry above counts what goes out.** Once this ships, a page that counts
-  those things names this one too, as sent only when you press an answer, and never files it under
-  the crash-reports switch, which does not govern it.
+- ⚠️ **The no-analytics entry above counts what goes out.** A page that counts those things names
+  this one too, as sent only when you press an answer, and never files it under the crash-reports
+  switch, which does not govern it.
 
 ### ✅ Which AI company it talks to is your choice, and the trial is Anthropic
 
@@ -6575,7 +6579,7 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
-### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, in no release yet
+### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
 **Proposed wording, Jett's to approve:** "Give your agent a spreadsheet, a Word document, a
 PowerPoint deck or a text file and ask it to change something: a figure, a sentence, a new expense,
@@ -6643,7 +6647,7 @@ tokens to 2,410 (the row numbers), and a twelve-month plan made mostly of formul
   the same day). Adding rows and bullets, keeping a file's style, and refusing hand-typed totals
   came in the pass after.
 
-### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, in no release yet
+### 🚧 Job Hunt shows where the people you know work, from your LinkedIn connections, and drafts the note to the right one: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
 **Proposed wording, Jett's to approve:** "Drop in the connections file LinkedIn emails you, zip and
 all, and Job Hunt shows where the people you know work now, the biggest groups first, then asks
@@ -7945,8 +7949,8 @@ refuses to publish anything until this file's website entry carries the sentence
 privacy policy names YouTube, so the first player cannot ship ahead of either. One section is
 held in the data: 1.9, whose narration promises which choices to pick when making the key and that
 answer is untested (a key tied to no workspace may be refused). 1.8 was held too until Jett approved
-its drawn number the same day (below). 0.7's notes carry Google's unverified-app screen since
-its own entry below was written the same day.
+its drawn number the same day (below). 0.7's notes carried Google's unverified-app screen from
+the day its own entry below was written until October 17, 2026, after Google verified the app.
 
 **What that does to the no-analytics sentence below, on the day it ships:** "It never has" stays
 true only for the pages without a player. The website entry's approved wording gains one sentence,
@@ -7997,6 +8001,10 @@ mention the free tier at all.
 entry existed to explain no longer appears. **Nothing below may be said on any page.** Saying a
 warning is coming that never arrives is its own kind of wrong: it makes people brace for something,
 and the ones who brace hardest are the ones who were already unsure.
+
+**In the app, the note went quiet (Archie `7e9920d0`) and a Google refusal stopped blaming verification
+(`89aa072b`), both released in 0.3.10 on October 17, 2026; 0.3.9 and earlier still show the old note
+until they update.** The install page's section and 0.7's two notes came off the live site on October 17.
 
 **What came off the same day:**
 
@@ -8088,7 +8096,7 @@ off, and this entry is rewritten, all in the same pass.
 - ⚠️ **The warning itself stays** until Google verifies the app; neither change touches what
   Google shows.
 
-### ✅ Archie passed the security assessment Google requires (CASA): CLEARED FOR EVERY PAGE 2026-10-16
+### ✅ Archie passed the security assessment Google requires (CASA): LETTER ISSUED 2026-10-13, CLEARED FOR EVERY PAGE 2026-10-16
 
 **Google verified the app on October 16, 2026**, which was the one condition this entry waited on.
 The wording below may now be used anywhere.
@@ -8112,12 +8120,12 @@ The tester installed the desktop build and scanned the billing service's product
 is `docs/CASA-QUESTIONNAIRE.md` there, section 8 for the outcome. The lab sent the letter to Google
 itself.
 
-**Why no page says it yet (Jett's call, October 13, 2026):** Google has not verified the app, so
-every Google connect still shows Google's unverified-app screen (the entry above). A page that
+**Why it waited until October 16 (Jett's call, October 13, 2026):** Google had not verified the app, so
+every Google connect still showed Google's unverified-app screen (the entry above). A page that
 says Archie passed Google's security assessment, beside a Google screen saying it is unverified,
-reads as a contradiction, and a reader can take "passed" for "Google approved". The day Google
-verifies the app, this entry and the one above are rewritten in the same pass, and the wording
-above may go on a page.
+reads as a contradiction, and a reader can take "passed" for "Google approved". Google verified
+the app on October 16, 2026, the entry above is retired, and the wording above may go on a page.
+No page carries it yet.
 
 **Boundaries:**
 - ⛔ **Never say Google audited, certified, verified or approved Archie's security.** The lab
@@ -9630,7 +9638,7 @@ invite message from your phone."
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
 
-### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, in no release yet
+### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, RELEASED in 0.3.10, 2026-10-17
 
 **Built October 14, 2026, at Jett's decision, and in no release yet.** Say nothing about it on a page
 until a release carries it (both apps for the phone half). Nobody has used it on a real agent.

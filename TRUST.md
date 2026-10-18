@@ -5810,7 +5810,7 @@ the owner read the correction as Archie losing it (the notes in
 - ⚠️ **"The last hour" is by the record of jobs, which carries no chat,** so a save the same person
   asked for elsewhere in that hour also keeps it quiet. It errs toward saying nothing.
 
-**Amended October 18, 2026: a take-back that rests on nothing is cut** (Archie `e137a969` through `442ab1f0`, in no release yet). **Claim:** "When Archie takes back an earlier answer without anything it read saying otherwise, the take-back is removed before you see it, and you get the answer to what you asked." It replaces the send-back above for that case, and it is checked on the retry's reply too.
+**Amended October 18, 2026: a take-back that rests on nothing is cut** (Archie `4ef02832`, merged as `442ab1f0`, in no release yet). **Claim:** "When Archie takes back an earlier answer without anything it read saying otherwise, the take-back is removed before you see it, and you get the answer to what you asked." It replaces the send-back above for that case, and it is checked on the retry's reply too.
 - **Why it's true:** `shaky_take_back`, `without_take_back` and `held_note` in `crates/archie-runtime/src/gateway/turn.rs`, with `gateway/kept.rs`.
 - ⛔ **A correction that rests on something read this turn still goes out** (Jett's call). Never "Archie never corrects itself", and never that its earlier answers are right: only that a retraction nothing supports is not sent.
 

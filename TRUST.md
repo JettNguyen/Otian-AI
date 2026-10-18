@@ -2971,10 +2971,9 @@ and when, where that goes, what it never does, and how to switch it off."
   inbox it is connected to. *Amended October 17, 2026 (Archie `a1f7b7c3`, in no release yet):* it
   also needs the owner's yes, given on the card that asks or with the Watch my inbox switch (the
   entry "When your agent starts reading your mail"); an agent that was reading before that release
-  counts as having said yes. The guide's line and `MAIL_PLAINLY` in `src/app/vocab.ts` were not
-  changed in that commit and still say the add-on alone starts it. That understates the gate rather
-  than overstating it, but a page uses this file's words, and the two lines want "once you say yes"
-  in the release that carries it.
+  counts as having said yes. The guide's line and `MAIL_PLAINLY` in `src/app/vocab.ts` now say it
+  too: "If you add Email Manager or Package Tracker and press Start reading my mail when your agent
+  asks, it also reads new mail in your inbox every few minutes" (Archie `fd01377b`).
 - ⚠️ **"Never deletes" is about the agent, and filing is not deleting.** With the tidy box checked it
   moves mail between folders; never say it leaves the mailbox exactly as it found it.
 - ⚠️ **"Sends only with Let it send replies checked" was not true on Gmail with the tidy box checked,

@@ -3594,8 +3594,8 @@ Discord the button you pressed stays on the card with a tick."
   than when I first saw it".
 - ⚠️ **The agent's own question cards only.** Cards Archie writes in code (a reminder, a time to
   move, drafted entries, an email or text draft) still change their own status line when pressed, and
-  a sent draft adds a line under the message that came with it (the entry "A sent draft's message
-  says it went").
+  a sent draft says a line under the message that came with it, without changing that message (the
+  entry "A sent draft says it went, beside the agent's message").
 - ⚠️ **On Telegram and Slack the ticked button can still be pressed;** it says so and does nothing.
   Signal, iMessage and Matrix have no buttons. Never seen on a real chat app or phone.
 
@@ -10204,34 +10204,43 @@ email or a time on your calendar, and it looks before it rewrites."
     the button show only when words sit under the sign-off, and Save works either way.
   - ⚠️ **The phone's half has never been seen on a phone.**
 
-### 🚧 A sent draft's message says it went: BUILT 2026-10-17 (Archie `97a4935f`), in no release yet
+### 🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), in no release yet
 
-**Claim:** "When you press Send on an email your agent drafted, the message it wrote with the draft
-gets a line saying who it went to and when: "Sent to Ace Septic at 8:01am.""
+**Claim:** "When you press Send on an email your agent drafted, Archie says it went, under the message
+your agent wrote with the draft: "Sent to Ace Septic at 8:01am." Your agent's own words are never
+changed. On Telegram, Slack, Discord and Matrix it comes as a short message of its own."
 
 **Why it's true:**
 - Each draft card shown in a turn is tied to the reply that came with it
-  (`crates/archie-runtime/src/gateway/card_reply.rs`, saved on the card as `said_with`). Sending it,
-  by a press anywhere or by Send later firing, adds one line under that reply (`say_it_went` and
-  `sent_line` in `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From
-  name when it had one, and its time spelled by `clock_face`, with the day when the send comes on a
-  later day.
-- In the Archie window the line goes in place, keeping the reply's spot and buttons
-  (`add_line` in `crates/archie-net/src/channel.rs` and `src-tauri/src/inapp.rs`). Archie Mobile
-  shows it from the next copy of the conversation this computer writes. Telegram, Discord, Slack and
-  Matrix get the message edited when they can edit it.
+  (`crates/archie-runtime/src/gateway/card_reply.rs`). Sending it, by a press anywhere or by Send
+  later firing, writes one line (`say_it_went` and `sent_line` in
+  `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From name when it had
+  one, its time spelled by `clock_face`, with the day when the send comes on a later day.
+- Archie keeps the line beside the message, never in it (`Entry.under` in `src-tauri/src/inapp.rs`),
+  and draws it under the bubble in the out-of-date line's ink (`src/app/conversation.tsx`). Archie
+  Mobile gets it on its own (`src-tauri/src/phone.rs`, `team_phone.rs`) and draws it the same way
+  (archie-mobile `src/screens/Chat.tsx`). A chat app gets a new message (`Channel::add_line` in
+  `crates/archie-net/src/channel.rs`, routed by `mirror.rs`). A test checks the agent's message stays
+  byte-identical, on screen and in the history the agent rereads.
 - On the replay after round four the card turned to Sent while the message beside it still said the
-  draft was ready to send, and the owner could not tell whether it went.
+  draft was ready to send. On the second replay owners noticed a message they had already read
+  changing under them, which is why Jett had the line moved out of the message on October 18.
 
 **Boundaries:**
+- ⛔ **Never say the agent's message updates or changes to say it was sent.** The October 17 version
+  of this entry did: it said the line goes in the message and that chat apps get the message edited.
+  Neither is true now.
 - ⛔ **Never "Archie confirms it arrived".** The line says Archie sent it, not that it was delivered
   or read.
-- ⚠️ **Not everywhere.** Not for drafts the mail watch wrote on its own (no message came with them),
-  not on Signal or iMessage (a sent message cannot be edited there), and not on a chat app when
-  buttons went under that message or it was too long for one message. A card made before this
-  version, or an email with no name on it, names the address.
-- ⚠️ **The history the agent rereads does not change.** The line is for the owner; the agent already
-  has "an email reply went out" in its own record.
+- ⚠️ **Email drafts shown in a chat turn only.** A text (iMessage) draft card, a draft the mail watch
+  wrote on its own, and a catch-up list line get no such line.
+- ⚠️ **Signal and iMessage get no extra line,** because the sent card itself arrives there as a new
+  message saying Sent.
+- ⚠️ **On Slack, Discord and Matrix the line can make the phone buzz** (only Telegram sends it
+  silently), including for a send that went at a time the owner picked.
+- ⚠️ **The line is for the owner and never goes into the agent's history.** The agent keeps "an
+  email reply went out" for a pressed or typed Send, not for one that went at a scheduled time.
+- ⚠️ **Never seen on a real chat app or a real phone.**
 
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 

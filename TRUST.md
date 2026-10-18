@@ -10144,6 +10144,47 @@ email or a time on your calendar, and it looks before it rewrites."
   a second card under it. Rewrite it for me could not see anything but the draft and the one
   message, so "mention the invoice I sent her" came back as "did you get a chance to look at the
   invoice?" with nothing from the invoice in it.
+- **Amended October 17, 2026: the cursor opens above your name** (Archie `82bc74ac`, Archie Mobile
+  `4139018`, in no release or build yet). **Claim:** "When you edit a draft, the cursor starts at the
+  end of the letter, above your name, and if some of your words end up under your name, a button
+  moves them up." On the computer the box opens on the whole letter and grows to fit it. Why it's
+  true: `src/app/sign-off.ts` and `src/app/edit-sheet.tsx` in Archie, `src/sign-off.ts` and
+  `src/screens/EditDraft.tsx` in Archie Mobile, the same rule copied in both and kept to the closing
+  words the runtime strips (`CLOSINGS` in `crates/archie-runtime/src/email/replies/triage.rs`; a test
+  fails if they drift). On the replay after round four the box opened partway down with the cursor
+  after the signature, and the owner's sentence went under her name on a note to a bride.
+  - ⛔ **It never moves anything on its own,** and it checks nothing else in the letter. The line and
+    the button show only when words sit under the sign-off, and Save works either way.
+  - ⚠️ **The phone's half has never been seen on a phone.**
+
+### 🚧 A sent draft's message says it went: BUILT 2026-10-17 (Archie `97a4935f`), in no release yet
+
+**Claim:** "When you press Send on an email your agent drafted, the message it wrote with the draft
+gets a line saying who it went to and when: "Sent to Ace Septic at 8:01am.""
+
+**Why it's true:**
+- Each draft card shown in a turn is tied to the reply that came with it
+  (`crates/archie-runtime/src/gateway/card_reply.rs`, saved on the card as `said_with`). Sending it,
+  by a press anywhere or by Send later firing, adds one line under that reply (`say_it_went` and
+  `sent_line` in `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From
+  name when it had one, and its time spelled by `clock_face`, with the day when the send comes on a
+  later day.
+- In the Archie window the line goes in place, keeping the reply's spot and buttons
+  (`add_line` in `crates/archie-net/src/channel.rs` and `src-tauri/src/inapp.rs`). Archie Mobile
+  shows it from the next copy of the conversation this computer writes. Telegram, Discord, Slack and
+  Matrix get the message edited when they can edit it.
+- On the replay after round four the card turned to Sent while the message beside it still said the
+  draft was ready to send, and the owner could not tell whether it went.
+
+**Boundaries:**
+- ⛔ **Never "Archie confirms it arrived".** The line says Archie sent it, not that it was delivered
+  or read.
+- ⚠️ **Not everywhere.** Not for drafts the mail watch wrote on its own (no message came with them),
+  not on Signal or iMessage (a sent message cannot be edited there), and not on a chat app when
+  buttons went under that message or it was too long for one message. A card made before this
+  version, or an email with no name on it, names the address.
+- ⚠️ **The history the agent rereads does not change.** The line is for the owner; the agent already
+  has "an email reply went out" in its own record.
 
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 

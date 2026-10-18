@@ -6443,6 +6443,25 @@ out, and how many are free on the busiest day of that booking."
 - ⚠️ **Number columns only, and never an id, phone, ZIP, year, stop number, score or per-unit rate.** That is decided by the column's name, so a number column with an odd name for an id could still be added. A total some rows leave blank says how many rows it is from.
 - ⛔ **Never "Archie never gets a total wrong" or "every number is checked".** The agent is handed the total and can still say another number. The total is not on the Read line under the reply.
 
+### 🚧 When the agent looks up units that are out, code sets them against the rentals at each place: BUILT 2026-10-18 (Archie `62fd174f`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When Archie looks up the units you have out, code counts them place by place against the rentals running there today and hands that to the agent: where the two lists agree, where they differ and by how many, and a rental starting at one of those places in the next two weeks, so the agent does not line the lists up itself."
+
+**Why it's true:**
+- `by_place`, `place_key` and `same_place` in `crates/archie-runtime/src/schedule.rs` (on the same `pools`, `booked_days` and `still_out` the free count uses), and `say_by_place` in `crates/archie-runtime/src/records.rs`, which adds it to a lookup and to a count grouped by place as `counted_by_place`. No AI call, and no tool or prompt text changed.
+- Tests: `units_out_are_counted_against_the_rentals_running_at_each_place` and `a_place_no_rental_names_is_said_and_a_list_with_no_status_still_counts` in `schedule.rs`; `a_read_of_units_out_says_them_place_by_place` in `records.rs`.
+- Why it exists: on the October 18 replay a simulated restroom owner was told two units at a job site were early, when they were from an older rental running there; the second rental at that place started that Friday.
+
+**Boundaries:**
+- ⚠️ **Only lists that count things and keep where they are:** a list of things (Units) with a place column, and a dated list (Rentals) with a number column counting them and its own place column. Trailers booked by name are not counted this way.
+- ⚠️ **Only on a lookup of two or more with one of them out,** or a count grouped by place. A look at the yard or at one unit adds nothing.
+- ⚠️ **Places match by the words typed,** with case and spacing aside. "Oak Hollow #12" and "Oak Hollow lot 12" are two places, and a unit at the first is said as out at a place no rental names.
+- ⚠️ **Bookings that say how many do not say which.** It compares counts, never unit numbers, and a delivery does not put unit numbers on Units. A difference says the lists disagree; it does not say which one is right.
+- ⚠️ **A teammate on Archie for Teams who sees only some rows does not get it.** The day is this computer's today.
+- ⛔ **Never "Archie keeps track of where every unit is" or "Archie catches every unit in the wrong place".** The agent is handed the counts and can still say something else.
+
 ### 🚧 Moving a stop to a day its truck or driver is busy, or a day the job already has a stop, is held and named first: BUILT 2026-10-17, in no release yet
 
 *Archie `fd747fc8`, merged into main as `b65729ea`, in no release yet. Nothing below may be said on

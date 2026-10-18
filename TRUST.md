@@ -3538,11 +3538,11 @@ what the card was offering."
 - ⚠️ **What the card offered is dropped,** with anything else staged in that chat, as the agent's own
   turn would drop it. Never "nothing changes when you press Not now".
 
-### 🚧 A press shows as the button you pressed, over a line of the card it answered, and Confirm names the change: BUILT 2026-10-17, not yet merged into main, in no release yet
+### 🚧 A press shows as the button you pressed, over a line of the card it answered, and Confirm names the change: BUILT 2026-10-17, in no release yet
 
-*Archie `67e0ebaf` and `5bb63ccb` and archie-mobile `8708e35`, on the `r4-chat` branches, which are
-being merged into main now; in no release or build. Nothing below may be said on a page until a
-release carries it.*
+*Archie `67e0ebaf` and `5bb63ccb` and archie-mobile `8708e35`, merged into main as Archie
+`150e66ef` and archie-mobile `c461cdb`; in no release or build. Nothing below may be said on a
+page until a release carries it.*
 
 A press goes to the agent as a sentence in the owner's name, and on round four of the journey tests
 that sentence read as words the owner never typed: "I never saw that proposal" (the comment in
@@ -3578,9 +3578,9 @@ underneath. Confirm says the change it confirms, in the words of the card."
   round four cases.
 - ⚠️ **The phone's half has never been seen on a phone.**
 
-### 🚧 Your agent's words for its own parts: "Who has what" for Who's Got This's list, the names on your columns, and no "skill" or "specialist" in replies: BUILT 2026-10-17, not yet merged into main, in no release yet
+### 🚧 Your agent's words for its own parts: "Who has what" for Who's Got This's list, the names on your columns, and no "skill" or "specialist" in replies: BUILT 2026-10-17, in no release yet
 
-*Archie `91bcf0f3`, on the `r4-chat` branch, which is being merged into main now; in no release.
+*Archie `91bcf0f3`, merged into main as `150e66ef`; in no release.
 Nothing below may be said on a page until a release carries it.*
 
 On round four of the journey tests replies carried words from inside Archie: "Handoffs", "for_who
@@ -3614,9 +3614,9 @@ yourself."
 - ⚠️ **A list the owner renamed keeps their name,** and a list whose columns they changed but whose
   name they did not is still renamed.
 
-### 🚧 Messages sent from a phone get short answers, first line first: BUILT 2026-10-17, not yet merged into main, in no release yet
+### 🚧 Messages sent from a phone get short answers, first line first: BUILT 2026-10-17, in no release yet
 
-*Archie `d3355764`, on the `r4-chat` branch, which is being merged into main now; in no release.
+*Archie `d3355764`, merged into main as `150e66ef`; in no release.
 Nothing below may be said on a page until a release carries it.*
 
 On round four of the journey tests replies were too long for the car or the cab: "If it keeps being
@@ -5009,7 +5009,7 @@ under its reply says so, with Open beside it, and the list is on the agent's pag
   build carrying `8ae9a3f` and `97d1c15` is out.
 
 **Amended October 17, 2026: "Read:" opens what was read** (Archie `bad77446` and archie-mobile
-`974f9da`, on the `r4-chat` branches, which are being merged into main now; in no release or build,
+`974f9da`, merged into main as Archie `150e66ef` and archie-mobile `c461cdb`; in no release or build,
 so nothing here may be said on a page until a release carries it). On round four of the journey
 tests the Looked at line read as jargon or did not tie out: "I do not know what those counts are
 for", a file name like how-i-work.md "means nothing to me", and "36 matched" under a 33-account
@@ -5222,10 +5222,11 @@ answering you."
 - ⛔ Never "it never interrupts you". It waits for an answer to finish; it still arrives unasked,
   and a reminder can land mid-answer.
 
-### 🚧 A message your agent sends on its own says so, and what it is: BUILT 2026-10-17, not yet merged into main, in no release yet
+### 🚧 A message your agent sends on its own says so, and what it is: BUILT 2026-10-17, in no release yet
 
-*Archie `63a2528e` and archie-mobile `481d46d`, on the `r4-chat` branches, which are being merged into
-main now; in no release or build. Nothing below may be said on a page until a release carries it.*
+*Archie `63a2528e` and archie-mobile `481d46d`, merged into main as Archie `150e66ef` and
+archie-mobile `c461cdb`; in no release or build. Nothing below may be said on a page until a
+release carries it.*
 
 A routine's report otherwise arrived looking like an answer to whatever was said last (the note on
 `Channel::sent_on_its_own` in `crates/archie-net/src/channel.rs`; the fix plan after round four,
@@ -5732,7 +5733,7 @@ stronger one.
   number and no capitalized name ("the pickup was wrong") goes back once even after a read.
 
 **Amended October 17, 2026: the button names the list, and a save from earlier in the hour counts**
-(Archie `67e0ebaf`, on the `r4-chat` branch, which is being merged into main now; in no release, so
+(Archie `67e0ebaf`, merged into main as `150e66ef`; in no release, so
 nothing here may be said on a page until a release carries it). On round four of the journey tests
 an owner was told the people waiting on her were saved, pressed Save it, and "Save that to my lists
 now." put a task on Tasks; another reply was corrected about a save made one message earlier, and
@@ -7540,13 +7541,14 @@ conversation you can scroll back through in Archie."
   that was found.
 
 **Amended October 17, 2026: the line in the conversation sits where the agent's memory starts**
-(Archie `63a2528e` and archie-mobile `481d46d`, on the `r4-chat` branches, which are being merged
-into main now; in no release or build, so nothing here may be said on a page until a release
-carries it). The window drew "To keep replies quick, Ember reads only newer messages" twenty bubbles
-up, and a bubble is not what the agent holds: a card or a "Saved in" line is a bubble, and a
-routine's report is two entries in its history, so on round four the line landed somewhere the
-agent's memory did not start, in a different place on every screen (the notes on `held_words` in
-`crates/archie-runtime/src/gateway/worker.rs`; Archie `docs/agent-ux/journeys/2026-10-17-findings.md`).
+(Archie `63a2528e` and archie-mobile `481d46d`, merged into main as Archie `150e66ef` and
+archie-mobile `c461cdb`; in no release or build, so nothing here may be said on a page until a
+release carries it). The window drew "To keep replies quick, Ember reads only newer messages"
+twenty bubbles up, and a bubble is not what the agent holds: a card or a "Saved in" line is a
+bubble, and a routine's report is two entries in its history, so on round four the line landed
+somewhere the agent's memory did not start, in a different place on every screen (the notes on
+`held_words` in `crates/archie-runtime/src/gateway/worker.rs`; Archie
+`docs/agent-ux/journeys/2026-10-17-findings.md`).
 
 **Proposed addition to the wording, Jett's to approve:** "A line in the conversation shows where
 your agent's memory of it starts: Ember rereads the messages below it, and can always look at your
@@ -10059,9 +10061,9 @@ email or a time on your calendar, and it looks before it rewrites."
     an owner asked what was still unsent and was told nothing, while two drafts waited in the same
     chat, and in sixty runs nobody opened the Dashboard, where they were listed.
 - **Amended October 17, 2026 (Archie `eadd88e3` and `7ce81a86`, archie-mobile `b52a2a8` and
-  `5a4a9d6`, on the `r4-chat` branches, not yet merged into main and in no release or build; nothing
-  here may be said on a page until a release carries it): "waiting to send" opens a list, and words
-  about a draft that changed go gray.** On round four of the journey tests "2 waiting to send" would
+  `5a4a9d6`, merged into main as Archie `150e66ef` and archie-mobile `c461cdb`, in no release or
+  build; nothing here may be said on a page until a release carries it): "waiting to send" opens a
+  list, and words about a draft that changed go gray.** On round four of the journey tests "2 waiting to send" would
   not open, or jumped to one draft: "I will not use a tool where I cannot see and control that"
   (Archie `docs/agent-ux/journeys/2026-10-17-findings.md`). This replaces "a press scrolls to the
   oldest" above.

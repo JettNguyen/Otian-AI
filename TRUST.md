@@ -3571,11 +3571,33 @@ underneath. Confirm says the change it confirms, in the words of the card."
   Internal, never on the site.
 
 **Boundaries:**
-- ⚠️ **Archie and Archie Mobile only.** A chat app shows the sentence alone.
+- ⚠️ **What a chat app shows (corrected October 17, 2026).** This said a chat app shows the sentence
+  alone. It also wrote "→ " and the label into the agent's own message, which an owner read as the
+  agent's words changing after she had read them. See the amendment below.
 - ⚠️ **The second-request check matches words,** so a label that rewords its own second clause could
   be refused, and a second request worded with the label's words could pass. It is tested on the
   round four cases.
 - ⚠️ **The phone's half has never been seen on a phone.**
+
+**Amended October 17, 2026: a press never changes your agent's words** (Archie `49769623`, in no
+release yet). **Claim:** "Pressing a button never changes the words of your agent's message. In
+Archie and Archie Mobile your press shows on your side of the conversation; on Telegram, Slack and
+Discord the button you pressed stays on the card with a tick."
+- **Why it's true:** `Channel::card_pressed` and `MsgAction::held` in
+  `crates/archie-net/src/channel.rs` put the card's words back exactly as drawn; the mirror's
+  `card_pressed` and `InAppChannel::heard_press` (`mirror.rs`, `inapp.rs`) and `pressed_elsewhere`
+  (`src-tauri/src/inapp.rs`) draw a press made on a chat app in Archie and Archie Mobile as the
+  owner's, the button pressed over the card. Tests: `a_press_leaves_the_cards_words_exactly_as_they_were`,
+  `a_press_leaves_the_agents_words_as_they_were_on_both_surfaces`,
+  `a_press_keeps_the_cards_words_and_holds_the_button_pressed` (pipeline). On the second replay after
+  round four a teammate pressed Set it to 4 and said "a message further up now reads differently
+  than when I first saw it".
+- ⚠️ **The agent's own question cards only.** Cards Archie writes in code (a reminder, a time to
+  move, drafted entries, an email or text draft) still change their own status line when pressed, and
+  a sent draft adds a line under the message that came with it (the entry "A sent draft's message
+  says it went").
+- ⚠️ **On Telegram and Slack the ticked button can still be pressed;** it says so and does nothing.
+  Signal, iMessage and Matrix have no buttons. Never seen on a real chat app or phone.
 
 ### 🚧 Your agent's words for its own parts: "Who has what" for Who's Got This's list, the names on your columns, and no "skill" or "specialist" in replies: BUILT 2026-10-17, in no release yet
 
@@ -3639,6 +3661,17 @@ out."). About 28 tokens on phone turns only, below the cache line. Internal, nev
 - ⚠️ **Typed messages only,** not a press, a routine or a watch. Messages typed at the desk are
   answered as before.
 - ⚠️ **A chat app counts as a phone,** because the app cannot tell where it is being read.
+
+**Amended October 17, 2026 (late): every route, and the answer before the hello** (Archie `b677ab9b`
+and `de6df52f`, in no release yet). The note did not reach a specialist that answers the person
+itself, so the researcher's school answer to a teammate in the car ran 219 words; it does now
+(`phone_note_for` in `gateway/turn.rs`, `answer_from_the_web` in `gateway/tools_specialist.rs`). A
+teammate's first answer used to open with "I'm Ember, Megan's assistant in Archie."; the answer leads
+and that line goes under it (`signed` in `gateway/worker.rs`). The wording is unchanged: a longer
+one was sent to Haiku 5.5 and Sonnet 5.5 beside it and made answers longer, not shorter.
+- ⛔ **No number about how short phone answers are, yet.** Neither replay after round four carried
+  the note (the test's simulator never said a message came from a phone; it does now), so nothing
+  has measured it on a journey.
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -9924,6 +9957,15 @@ The unattended routine path returns
 `blocked_needs_user_confirmation` (`tools_calendar.rs:488-494`) — the 3am-delete exploit chain
 this file used to document is closed. Guarded by test (`tools_calendar.rs:691`). *(Pointers
 refreshed 2026-08-21 after the gateway split; the behavior re-verified unchanged.)*
+
+**Amended October 17, 2026: a thank-you is not your approval** (Archie `a4d71a07`, in no release
+yet). A typed message that is only thanks ("thanks", "great, thanks", "perfect, thanks") neither
+applies nor cancels a change waiting for your word, in any of the ten places a change waits
+(calendar, to-dos, lists and the rest), and the change stays waiting (`only_thanks` and `approves`
+in `crates/archie-runtime/src/decide.rs`, `held_for_their_word` in `gateway/turn.rs`). "Ok",
+"okay" and "sounds good" on their own still approve, because after "Want me to go ahead?" that is
+what they mean. Measured before the fix: Haiku 5.5 applied a waiting to-do on a bare "thanks!" 4
+times in 4, and Sonnet 5.5 canceled it 4 times in 4 (`scripts/prompt-layout-ab.py`).
 
 **Amended 2026-08-16: the proposal carries buttons, and a tap counts as your later message.**
 Approved wording: "the proposal arrives with Confirm, Change something, and Cancel buttons; a

@@ -11384,7 +11384,8 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 - **The agent.** `team_line` in `crates/archie-runtime/src/gateway/prompt.rs` adds one line to the
   note a shared agent is given. On the owner's turns: everyone else, with what they do, their email
   and phone, and an instruction not to ask the owner for anything written there. On a teammate's
-  turns: everyone, the owner first, by name and what they do, with no email or phone. A dozen people
+  turns: everyone, the owner first, by name and what they do, with no email or phone (their own
+  are added by `own_details_note`, see the boundaries). A dozen people
   at most, and nothing at all while nobody's card has anything on it. Test:
   `the_team_is_named_with_contact_details_only_for_the_owner`.
 - **One name for one person.** A teammate's messages reach the agent under the name the owner wrote,
@@ -11399,7 +11400,12 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
 
 **Boundaries:**
 - ⛔ Never that teammates can get each other's emails or phone numbers from the agent. Those are
-  written into the owner's turns only, and shown on the computer's rows to the owner.
+  written into the owner's turns only, and shown on the computer's rows to the owner. Since October 18, 2026
+  (Archie `940605c9` and `54593f0d`, merged as `d9ae56a2`, in no release yet) a teammate's own phone
+  and email are also told to the agent on that teammate's own turns (`own_details_note` in
+  `gateway/prompt.rs`, added in `gateway/turn.rs`, below the cache line, so `team_line` still carries
+  none), and on theirs alone. Never anyone else's: the agent still gives one teammate nothing of
+  another's.
 - ⛔ Never that Archie sends the invite. It shows a message to copy, and the owner sends it however
   they like.
 - ⛔ Never that the phone adds people or edits what is written about them. Letting someone in,
@@ -11563,6 +11569,21 @@ talk to your agent there. There's no account or password to make."
   The link is made in Archie's window or on the owner's phone.
 - ⚠️ **"They see the team's lists" includes every row naming nobody,** unless the owner sets that
   teammate to only rows with their name (the own-rows entry's October 17 amendment).
+
+### 🚧 On Archie for Teams, the owner hears what a teammate saved, and a teammate's phone gets the text button and the card: BUILT 2026-10-18 (Archie `9c347a52` and `4d8e389a`, merged as `d9ae56a2`; archie-mobile `9f6a317`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "When someone on your team tells Archie something that adds to or changes one of your lists, you get a message saying what they saved, on your computer and your phone, and under the teammate's reply they see "Mike gets a notice about this."" And: "A teammate on Archie Mobile gets the same button to copy a text or open it in Messages, and the same card for list rows Archie drafted, that the owner gets."
+
+**Why it's true:**
+- The notice: `crates/archie-runtime/src/gateway/told.rs` and `gateway/worker.rs`; the line under the reply is drawn from `crates/archie-net/src/{channel,inapp,mirror}.rs`; the alert and push are the existing unprompted path in src-tauri.
+- The phone: `buttons_and_cards` and `card_gate` in `src-tauri/src/team_phone.rs`; archie-mobile `src/teammate.ts` and `src/drafted.tsx`.
+
+**Boundaries:**
+- ⛔ **List saves only** (rows a turn kept), never mail, drafts or calendar changes, and never about the owner's own turns. Only when the teammate's reply was delivered.
+- ⛔ **A notice after the fact, not an approval step.** Never that the owner can undo from the notice.
+- ⚠️ **The teammate's card has no Undo.** A teammate answers only a card from their own conversation, and only if they are allowed to change lists. On a chat app there is no button, and Archie now says so instead of promising one (062721ba; an earlier reply promised a button that never came).
 
 ### ✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

@@ -8920,6 +8920,24 @@ saying so, or on the Routines tab."
 - ⛔ **"Nobody has it yet" reads only Who has what** (an add-on) and stops with no driver. Never "it knows everything nobody has picked up". "Needs repair" is only what is marked so on a list. The pickup is found by the same matching as the what's-on note, so a stop written for a different site name is missed by both.
 - ⛔ **Never "the agent remembers what the list read".** The line is kept out of its history on purpose. "Matches" is as of the last read of the file, just before the list; a file that could not be read says so, with what to press. "What changed" is counts of entries added, changed and taken off, not which.
 - ⚠️ **The boundary above that the owner can stop it but not move it is out of date since October 17, 2026:** Another time and "send me the morning list at 7am" move it.
+- On an event trailer agent it also compares Bookings with the owner's calendar: see the entry "The morning list and the agent say where Bookings and your calendar differ".
+
+### 🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), in no release yet
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "On an event trailer agent, the morning list compares your Bookings list with your calendar for today and the next two weeks, and says where one has a booking the other does not, so you can say which is right. Asked what is on a day, Archie says the same."
+
+**Why it's true:**
+- `crates/archie-runtime/src/schedule/crosscheck.rs` (`differences`, `AHEAD`, `NEAR`) compares in code, with no AI call. The morning list says it first among what needs a decision (`crates/archie-runtime/src/morning.rs`), from the morning's one calendar read (`gateway/morning_list.rs`). The agent reads the same on the owner's turns in the note for the days asked (`schedule_note` in `schedule.rs`, `gateway/turn.rs`), from that turn's one calendar read, so there is no extra calendar request.
+
+**Boundaries:**
+- ⛔ **Never "catches every scheduling mistake" or "keeps your calendar in sync".** It only reads. It changes neither Bookings nor the calendar, and the owner decides which is right.
+- ⛔ **Only clear differences are said.** Silent on anything unsure: part of a name, an entry over several days, anything within two days of a booking (its delivery and pickup), done or canceled bookings, a calendar that did not answer or was cut short, and a calendar that holds none of the bookings. So an owner whose only booking moved hears nothing.
+- ⛔ **The calendar side needs the customer's whole name.** An entry titled by last name alone ("Henderson wedding") is never said. The Bookings side is still said ("Bookings has Laura Henderson on Saturday, October 24; nothing on your calendar that day has that name").
+- ⚠️ **Only a list called Bookings with a Customer column and one date a row** (the event trailers setup). Stops against a calendar is not built, nor any other list.
+- ⚠️ **Today and the next 14 days, the owner's calendar only,** and on the owner's own turns; never a teammate's calendar.
+- ⚠️ **It does not change what the agent counts as free.** A calendar hold that names nobody still does not make a trailer taken.
 
 ### 🚧 Today's Calendar sends nothing on a day with nothing on your calendar, decided without AI: BUILT 2026-10-17, in no release yet
 

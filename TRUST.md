@@ -6721,6 +6721,21 @@ gets the figures written out rather than the picture, because Word takes a drawi
 making one would mean shipping a font file to put labels on it. Do not say "charts in documents";
 say PDF.
 
+**Amended October 18, 2026 (Archie `2234ec0c`, archie-mobile `cfb2bf9`, in no release yet): a
+chart is drawn in the conversation too.** Once a release carries it, "Charts are a PDF thing"
+reads: a chart is drawn in a PDF and in the conversation, in Archie and in Archie Mobile, and
+nowhere else; a chat app gets its numbers as a list. Until then the sentence stays as written,
+because it is true of every released version. Files do not change: a `.docx` still gets the
+figures written out, and "Do not say 'charts in documents'; say PDF" still holds. The entry
+after this one is the claim.
+
+**Corrected October 18, 2026: what a PDF pie does with a number at or below zero.** "A pie refuses
+to draw a negative slice, listing the numbers instead" is true only of a pie with nothing above
+zero. A pie with some slices above zero is drawn with every slice at or below zero left out of the
+picture and out of the list beside it (`draw_pie` in `crates/archie-runtime/src/export.rs`, which
+has worked this way since it was written on September 16, 2026). Never say a PDF pie lists every
+number.
+
 **Slide decks, shipped 2026-09-16.** Approved wording: "Ask for a deck and you get a real
 PowerPoint file, not a PDF of slides: you can open it and change it." A heading starts a slide and
 what follows is that slide's body, which is the Markdown the agent already writes for a document
@@ -6767,6 +6782,105 @@ did not write.
   and it is also the safer-sounding one, which is rare enough to be worth keeping.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
+
+### 🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), in no release
+
+*Archie `94631403`, `bd771612`, `5bb5e0a2`, `d935d148` and `6cde6711` on the branch `parity-p4`,
+merged into main as `2234ec0c`, and archie-mobile `041b4ec` and `1e97706`, merged as `cfb2bf9`;
+all on main and in no release, with Archie `251cfe13`, which sends an older phone the numbers.
+Nothing here may be said on a page until the computer's half is in a release, and nothing about
+the phone until an Archie Mobile build with it is out. It sits beside "Charts in a PDF" in the
+entry above, and beside the tables entry ("Pictures, videos, recordings, and documents both ways,
+and replies with tables").*
+
+**Approved wording, once it is in a release:** "Ask for a chart and your agent draws it in the
+conversation: bars, a line or a pie, with the numbers on it. It shows the same in Archie on your
+computer and in Archie Mobile on your phone. On a chat app like Telegram it sends the same numbers
+as a short list."
+
+**Why it's true** (Archie `parity-p4`: `94631403`, `bd771612`, `5bb5e0a2`, `d935d148`, `6cde6711`;
+archie-mobile `parity-p4`: `041b4ec`, `1e97706`):
+- **One block, read one way everywhere.** The agent writes the same fenced ```chart block a PDF
+  already drew: a first line naming the kind and a title (`bar: Revenue by quarter`), then one
+  `label, value` line a row. `crates/archie-net/src/chart.rs` reads it for the PDF
+  (`crates/archie-runtime/src/export.rs`, which used to hold its own copy) and for every chat app.
+  The window's reader is `src/app/chart.ts` and the phone's is `src/text/chart.ts` in archie-mobile,
+  a copy of the window's. All three are tested against one file of cases,
+  `crates/archie-net/src/chart-cases.json` (copied into the phone repo), so they cannot disagree
+  about a block without a test failing.
+- **Drawn in the window.** `src/app/markdown.tsx` turns the block into a picture
+  (`src/app/chart-view.tsx`): bars, a line, or a pie drawn as a ring with its list beside it, in the
+  app's own colors, light or dark, the Mac look, and Archie for Teams's slate blue. Every bar and every
+  slice carries its figure; a crowded line prints its first, last, highest and lowest figures and
+  shows the rest when the pointer rests on a point.
+- **Drawn on the phone.** `src/markdown.tsx` and `src/chart.tsx` in archie-mobile draw the same
+  layout with the same arithmetic (`layoutChart`, copied whole), so a label is cut at the same letter
+  on both. A phone on this build says so with renderer level 3 (`RENDERS` in `src/text/markdown.ts`).
+  Seen on the iOS 27 simulator on October 18, 2026, in light and dark.
+- **A screen reader hears every number.** The picture is one image whose label is the chart said
+  out loud: its kind, its title, and each row's name and figure (`chartSpoken`). Copy gives the same
+  numbers as a list, on both (`spellOutCharts`, through `plainTextFromMarkdown` in the window and
+  `copyableText` in the app).
+- **A chat app gets a list.** Telegram, Slack, Discord, Matrix and iMessage cannot draw a picture in
+  a message, so each adapter turns the block into its title and one bullet a row before sending
+  (`spell_out_charts` in `crates/archie-net/src/chart.rs`, called in `telegram.rs`, `slack.rs`,
+  `discord.rs`, `matrix.rs` and `plain.rs`), and the list arrives in that app's own bullets and bold.
+  A pie's bullets carry each slice's share. `plain.rs` is also what a phone alert's text is made
+  from, so an alert for a reply with a chart reads as the numbers too.
+- **The agent is told in the sentence that already taught the block**, in `save_file`'s
+  description (`ALLOWED` in `export.rs`): "For a chart, in a reply too". It was worded so the whole
+  request counts the same as before on Sonnet 5.5, Haiku 5.5 and Opus 5.
+- **A line that is not a number is not dropped.** "Q2, not in yet" is printed under the picture and
+  carried in the list, rather than leaving a quarter missing with nothing to say so.
+
+**The boundaries:**
+- ⛔ **Three kinds: bars, a line, and a pie.** One set of numbers per chart. Never say stacked bars,
+  two lines on one chart, scatter plots, maps, or "any chart".
+- ⚠️ **A pie is drawn as a ring, and as bars when it would mislead.** A pie with more than five slices,
+  or with a number at or below zero in it, is drawn as bars in the conversation, so a loss is on the
+  picture. A PDF draws the same pie with that slice left out, so the two can differ. Bars lie on
+  their side in the conversation, where the PDF stands them up, because a reply is about three inches
+  wide.
+- ⛔ **Never say a chart appears in Telegram, Slack, Discord, Matrix or iMessage.** It shows there
+  as a list of its numbers. Same rule as tables.
+- ⛔ **Never say it draws charts from your data by itself.** The agent writes the numbers into the
+  block, so a chart is as right as the numbers it was given or worked out, and the "math in code"
+  claims for lists (`records_count`) do not extend to a chart's figures.
+- ⛔ **Never say the charts are interactive.** On the computer the pointer shows a hidden figure on a
+  crowded line, and that is all; on the phone there is nothing to press. No zooming, no filtering, no
+  changing a chart in place.
+- ⛔ **Never say a chart can be saved as a picture.** Copy gives the numbers. A chart in a file is the
+  PDF, which is the existing claim; a Word document still gets the figures written out, not a
+  picture ("Do not say charts in documents; say PDF" still holds for files).
+- ⚠️ **"Charts are a PDF thing" in the PDF entry is no longer true once this ships.** That sentence
+  should change to say a chart is drawn in a PDF and in the conversation, and nowhere else. The
+  entry above carries that as an amendment, dated October 18, 2026, for when a release carries this.
+- ⚠️ **An agent that cannot save files is not told about the block.** The sentence lives in
+  `save_file`'s description, and a guest's conversation, onboarding, and an agent with saving files
+  turned off do not carry that tool. Such an agent may still write one, and it draws, but it will not
+  offer one. Never say every conversation offers charts.
+- ⚠️ **An older phone gets the numbers, or a block of code text.** An owner's phone on an Archie
+  Mobile build from before this says a drawing level below 3, or none, and the computer sends it
+  each chart spelled out as its title and one bullet a row, the way a chat app gets it
+  (`markdown_for_phone` and `RENDERS_CHARTS` in `src-tauri/src/phone.rs`, tested by
+  `an_older_phone_gets_a_chart_as_its_numbers`). A teammate's phone sends no drawing level, so the
+  computer sends it the block as written (`team_phone.rs`), and a teammate on an older build sees
+  the block's lines as a block of code, which still carries every number. Never say a teammate's
+  older phone gets the list. Say "in Archie Mobile" only once a build with level 3 is out.
+- ⛔ **Never say a chart costs nothing.** The instruction adds nothing to a turn, but the agent still
+  writes the numbers as part of its reply, about what the same numbers cost as a list.
+- ⚠️ **Not yet heard through a real screen reader.** The labels are written and tested as text;
+  nobody has listened with VoiceOver on a Mac or an iPhone. Say "a screen reader hears every number"
+  only after somebody has.
+
+**Tables, amended in the same pass.** The tables claim (the entry "Pictures, videos, recordings,
+and documents both ways, and replies with tables") did not change, but how they look did:
+in the window a table or a block of code is now as wide as it needs, up to the bubble, where it used
+to be squeezed to the width of the sentence above it and a reply that was only a table was a bubble
+a few letters wide (`Room` in `src/app/markdown.tsx`). On the phone a table and a block of code are
+now as tall as what they hold; on the simulator a three-row table had been drawn with most of a
+screen of empty border under it (`flexGrow: 0` in archie-mobile's `src/markdown.tsx`). Neither
+changes what may be claimed.
 
 ### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 

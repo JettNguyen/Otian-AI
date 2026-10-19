@@ -2175,7 +2175,13 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
 
-### 🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), in no release, and no person has talked over it yet
+### 🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build, and no person has talked over it yet
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `c1622841`
+is an ancestor of the release commit `a016d540`. Archie Mobile's part (archie-mobile `d22db43`) waits
+for the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the
+App Store. Nobody has talked over it yet, so the wording below still waits, as the line under this
+one says.
 
 *Archie `bfdca0ac` and `c664c138` on the branch `parity-p9`, merged into main as `c1622841`, and
 archie-mobile `2ea2158`, merged as `d22db43`; all on main and in no release. Tested only on
@@ -6453,7 +6459,13 @@ line in a box, and the new words take the old one's place in the same section an
 written, because it is true of every released version. The next entry is the rest of that build:
 bringing in what ChatGPT, Claude or Gemini knows.
 
-### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), in no release
+### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `9c02805f`
+and `360e031c` are ancestors of the release commit `a016d540`, so the approved wording below may be
+said of Archie on the computer. Archie Mobile's part (archie-mobile `1c250d9`) waits for
+the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the App
+Store. No real owner has used either half yet.
 
 *Archie `981acfe7` to `f1eca93d` on the branch `parity-p1`, merged into main as `9c02805f`, and
 `54089688`, which names Change this beside Forget this in the memory sentence the agent is given.
@@ -6610,7 +6622,13 @@ conversation you can scroll back through in Archie."
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
 
-### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), in no release
+### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `e35220a1`
+is an ancestor of the release commit `a016d540`. Archie Mobile's part (archie-mobile `434bc3d`) waits
+for the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the
+App Store, and the wording's sentence that names Archie Mobile waits with it. The wording is still
+Jett's to approve.
 
 *Archie `1e712073` and `fbdd3ae9` on the branch `parity-p5`, merged into main as `e35220a1`, and
 archie-mobile `03fd5fe`, merged as `434bc3d`; all on main and in no release. Nothing below may be
@@ -6922,7 +6940,13 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
-### 🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), in no release
+### 🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `2234ec0c`
+and `251cfe13` are ancestors of the release commit `a016d540`. Archie Mobile's part (archie-mobile
+`cfb2bf9`) waits for the Archie Mobile build now being submitted, so no page says the phone draws a
+chart until that build is on the App Store, and the approved wording's sentence that names Archie
+Mobile waits with it. Until then a phone gets the numbers as a list (`251cfe13`).
 
 *Archie `94631403`, `bd771612`, `5bb5e0a2`, `d935d148` and `6cde6711` on the branch `parity-p4`,
 merged into main as `2234ec0c`, and archie-mobile `041b4ec` and `1e97706`, merged as `cfb2bf9`;
@@ -7894,7 +7918,12 @@ screen", `src/app/chrome.tsx`, also in `013ea140`). The approved wording and "Wh
 above name the Dock alone, which is true of every released version, so they stay as written until a
 release carries the icon. The next entry is the claim.
 
-### 🚧 Open Archie from any app with a few keys, and from its icon in the Mac menu bar: BUILT 2026-10-18 (Archie `013ea140`), in no release, never pressed on a built app
+### 🚧 Open Archie from any app with a few keys, and from its icon in the Mac menu bar: BUILT 2026-10-18 (Archie `013ea140`), RELEASED in 0.3.11, 2026-10-19, never pressed on a built app
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `013ea140`
+is an ancestor of the release commit `a016d540`. On the computer only, as the line under this one
+says. Nobody has pressed the keys on a built app yet, so copy may describe it and may not call it
+proven.
 
 *Archie `649bbbb0` (the key press and the menu bar icon), `ef377ead` (the Settings row and the chat
 it opens) and `5157f93d` (starting the key press so that a computer refusing it never stops Archie
@@ -8065,7 +8094,12 @@ blamed for this morning.
 - ⛔ Never "it never misses a routine". Past its window a slot is recorded as missed, not run.
 - ⚠️ Not yet watched across a real sleep, the same caution as the rest of this entry.
 
-### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), in no release
+### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `4359e871`
+is an ancestor of the release commit `a016d540`. Archie Mobile's line (archie-mobile `7f564d0`) waits
+for the Archie Mobile build now being submitted, so no page says the phone shows it until that build is on the
+App Store.
 
 *Archie `86cf4e2b` (the line, and a late run no longer called skipped), `22e90d1b` (the wake check
 runbook, `docs/WAKE-CHECK.md`) and `fc17fc9f`, on the branch `parity-p7`, merged into main as
@@ -9304,7 +9338,14 @@ neither may be said until a release carries it.
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
 
-### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), in no release
+### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `7d102231`
+and the free/busy permission's merge `91bc6d75` are ancestors of the release commit `a016d540`.
+Archie Mobile's part (archie-mobile `1dc53da`, the waiting change's whole sentence on the phone)
+waits for the Archie Mobile build now being submitted, so no page says the phone shows the guests until
+that build is on the App Store. It has still never run against a real Google, Outlook or iCloud
+account, and the wording is still Jett's to approve.
 
 *Archie `475b629c` on the branch `parity-p3`, merged into main as `7d102231`, and archie-mobile
 `a967c09`, merged as `1dc53da`; all on main and in no release, and never run against a real
@@ -11373,7 +11414,15 @@ direction. And Flight Check-In's "It buys nothing" stays true, but it is now the
 instructions holding it rather than the code alone: with buying on and an airline on the shop list,
 the code would release a Pay press there.
 
-### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), in no release, and no real call has been placed
+### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), RELEASED in 0.3.11, 2026-10-19, off until the owner switches it on, the Archie Mobile half waiting on its build, and no real call has been placed
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes, off until an owner switches Call
+businesses on.** Jett chose on October 19 to ship it in this release. Checked the same day:
+`6e8e5549` and the calling hours' merge `ccdb459b` are ancestors of the release commit `a016d540`.
+Archie Mobile's part (archie-mobile `7cf627e`, how a call's cards and buttons look on the phone)
+waits for the Archie Mobile build now being submitted, so no page says the phone shows a call until that
+build is on the App Store. No real call has been placed, the wording is still Jett's to approve,
+and counsel has not answered the questions in the boundaries.
 
 *Archie `0a22673a` to `116aee7f` on the branch `parity-p10`, merged into main as `6e8e5549`, then the
 calling hours on the business's own clock (`calls-hours`, merged as `ccdb459b`), and archie-mobile

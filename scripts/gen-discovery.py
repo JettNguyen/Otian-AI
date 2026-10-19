@@ -330,8 +330,8 @@ def build_robots():
 
 SUMMARY = """Archie is a desktop app that runs your own AI agent on your own computer, for the
 owner who runs a small business alone. The agent drafts replies to new leads, tracks unpaid
-invoices and keeps the calendar whenever your computer is on, and replies and calendar changes
-wait for your yes. It answers on your phone. Otian AI is the two-person company that makes
+invoices and keeps the calendar whenever your computer is on, and nothing goes out in your name
+until you say yes. It answers on your phone. Otian AI is the two-person company that makes
 it."""
 
 # The block that answers the question an answer engine is usually being asked. Each pair is
@@ -369,8 +369,9 @@ QUESTIONS = [
      f"One job you hand the agent. The public catalog has {len(json.load(open(os.path.join(ROOT, 'data/public-catalog.json'), encoding='utf-8'))['items'])} add-ons, "
      "included with Archie: Skills, Routines, and Personalities."),
     ("Can it send email or change my calendar on its own?",
-     "Mail goes out when you tap Send or set a time for it, and a calendar change is proposed "
-     "and waits for your confirmation. It buys only if you switch that on, at shops you pick, up to a limit you set. It reads your "
+     "Mail goes out when you tap Send or set a time for it, and no setting changes that. "
+     "Deleting an event, or changing one other people are on, waits for your yes, and a routine "
+     "running on its own can't change your calendar at all. It buys only if you switch that on, at shops you pick, up to a limit you set. It reads your "
      "calendar and answers chat messages without asking each time, which is the same door "
      "being useful, and is worth knowing before you connect either."),
     ("What can it connect to?",

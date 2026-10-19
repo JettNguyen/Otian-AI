@@ -36,7 +36,7 @@ company does the thinking.
 | **A new lead emails about a roof** | Writes the reply and drops it in your chat with a Send button. |
 | **Todd went quiet on the deck quote** | Notices, tells you, and offers to draft a nudge. |
 | **Two invoices are still unpaid** | Keeps track of who owes you and for how long. |
-| **The walkthrough has to move to Thursday** | Proposes the exact calendar change and makes it after you approve. |
+| **The walkthrough has to move to Thursday** | Finds an open time and moves it when you say so. |
 | **You promised Dana the estimate by Friday** | Holds onto it, then messages you first when the time comes. |
 
 <div align="center">

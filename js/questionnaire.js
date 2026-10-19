@@ -214,7 +214,7 @@
          where the money conversation belongs; do not delete that note without moving the
          disclosure here, or this line is left standing alone as an absolute. */
       bot: [
-        'Two things can’t be switched off: email stays a draft until you send it or set a time, and calendar changes wait for your approval. It buys nothing unless you switch buying on, and then only at shops you pick, up to a limit you set.',
+        'Two things can’t be switched off: email stays a draft until you send it or set a time, and deleting an event, or changing one other people are on, waits for your approval. It buys nothing unless you switch buying on, and then only at shops you pick, up to a limit you set.',
         'The rest (sorting, reminders, lists, lookups) just happens and you read the results. How does that sit with you?'
       ],
       type: 'choice',

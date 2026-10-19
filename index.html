@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie: An AI Employee for a Business of One | Otian AI</title>
-  <meta name="description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and waits for your yes. Your chosen AI company does the thinking." />
+  <meta name="description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and nothing goes out in your name until you say yes. Your chosen AI company does the thinking." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,7 +20,7 @@
   <meta name="application-name" content="Otian AI" />
   <meta property="og:site_name" content="Otian AI" />
   <meta property="og:title" content="Archie: An AI Employee for a Business of One | Otian AI" />
-  <meta property="og:description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and waits for your yes. Your chosen AI company does the thinking." />
+  <meta property="og:description" content="Archie runs an AI agent on your computer for a business you run alone. It drafts replies to new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and nothing goes out in your name until you say yes. Your chosen AI company does the thinking." />
   <meta property="og:url" content="https://otianai.com/" />
   <meta property="og:type" content="website" />
   <link rel="canonical" href="https://otianai.com/" />
@@ -78,7 +78,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=20261014-4" /></head>
+  <link rel="stylesheet" href="css/styles.css?v=20261019-1" /></head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -395,7 +395,7 @@
                  and the list lost "You pick the AI company", which the line under the h1 says. -->
             <p class="hm-hero-status">In beta on Mac and Windows. Your AI company bills you separately.</p>
             <ul class="hm-promises day-beat is-on" data-act="0" data-at="0.16">
-              <li>Replies and calendar changes wait for your yes</li>
+              <li>Nothing goes out in your name without your yes</li>
               <li>Your agent&rsquo;s memory stays yours after you cancel</li>
             </ul>
             <!-- The team edition and agent-check routes sit in the pricing band below, so the
@@ -410,11 +410,15 @@
           </article>
 
           <!-- Act 1, 9:12 am. TRUST.md "Calendar changes require your confirmation": proposed
-               first, applied after your yes in a later message, and a button answers for you. -->
+               first, applied after your yes in a later message, and a button answers for you.
+               The caption says "when you say so" rather than "waits for your yes" since October
+               19, 2026: Archie bad38c32 (in no release) lets an owner stop the asking for changes
+               on their own calendar, and this sentence has to be true the day that ships. The
+               scene still draws the default, a proposal and a typed yes. -->
           <article class="day-cap" data-act="1">
             <span class="section-label">Calendar Manager &middot; 9:12 am</span>
             <h2>Reschedule by asking.</h2>
-            <p>Your agent proposes the change and waits for your yes.</p>
+            <p>Your agent finds an open time and moves it when you say so.</p>
             <p class="day-catch">A scheduled routine only reports the change.</p>
           </article>
 
@@ -1127,17 +1131,26 @@
          edit wait, and when a release carries it the lane comes back with the heading
          TRUST.md approves for that release. Adding a row never waits, so the lane draws a
          check-off and never an add.
+
+         SAM AND DANA SINCE 2026-10-19. The heading was "Replies and moves wait for you." and the
+         second lane moved "Thursday's 2:00". Archie bad38c32, on main and in no release, lets an
+         owner press Yes, and stop asking, after which a move on their own calendar that nobody
+         else is on happens at once; so on the day a release carries it, a bare move would no
+         longer wait and "No setting turns this off" under it would be false. The lane is now an
+         event Dana is on, which can never skip the asking, and the heading names the two people
+         who hear nothing first (TRUST.md, the in-your-name row and the Calendar changes entry's
+         amendment). Nothing here describes the switch: it is in no release.
          ============================================================== -->
     <section class="section" aria-labelledby="mine-heading">
       <div class="container">
         <div class="hm-wrap hm-head">
           <span class="section-label fade-up">Your approval</span>
-          <h2 id="mine-heading" class="fade-up">Replies and moves wait for you.</h2>
+          <h2 id="mine-heading" class="fade-up">Sam and Dana hear nothing before your yes.</h2>
         </div>
         <figure class="explain-figure mn-figure fade-up delay-1">
           <!-- =================== DESKTOP =================== -->
           <svg class="explain-svg--desktop" viewBox="0 0 600 218" role="img" aria-labelledby="mn-t" xmlns="http://www.w3.org/2000/svg" style="max-width:640px;font-family:inherit">
-            <title id="mn-t">Two columns with one gate between them. On the left, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move Thursday&rsquo;s two o&rsquo;clock. Each one runs along its own line to a gate, where you are standing, and stops there. On the right, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
+            <title id="mn-t">Two columns with one gate between them. On the left, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move the two o&rsquo;clock with Dana. Each one runs along its own line to a gate, where you are standing, and stops there. On the right, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
             <style>
               .mn-label{fill:currentColor;opacity:.6;font-size:10px;font-weight:650;letter-spacing:.1em}
               .mn-card{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
@@ -1169,7 +1182,7 @@
             <text class="mn-body" x="58" y="62">Reply to Sam Whitaker</text>
             <rect class="mn-card" x="12" y="96" width="236" height="46" rx="10"/>
             <g class="mn-glyph" transform="translate(28,110) scale(.75)"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3,10 H21 M8,3 V7 M16,3 V7"/></g>
-            <text class="mn-body" x="58" y="124">Move Thursday&rsquo;s 2:00</text>
+            <text class="mn-body" x="58" y="124">Move the 2:00 with Dana</text>
 
             <path class="mn-wire" d="M248,57 L360,57" marker-end="url(#mn-ah)"/>
             <path class="mn-wire" d="M248,119 L360,119" marker-end="url(#mn-ah)"/>
@@ -1197,7 +1210,7 @@
                The arrowhead is this drawing's own marker, because the wide one's sits inside an
                svg that is display:none here, and a marker in a hidden svg is not drawn. -->
           <svg class="explain-svg--mobile" viewBox="0 0 340 366" role="img" aria-labelledby="mnm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="mnm-t">Two rows with one gate between them. Above, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move Thursday&rsquo;s two o&rsquo;clock. They run down one line to a gate, where you are standing, and stop there. Below, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
+            <title id="mnm-t">Two rows with one gate between them. Above, under the words your agent is ready to, two things it has prepared: reply to Sam Whitaker, and move the two o&rsquo;clock with Dana. They run down one line to a gate, where you are standing, and stop there. Below, under the words after your yes, the same two waiting faint and not yet reached: sent, moved.</title>
             <defs><marker id="mnm-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".55"/></marker></defs>
 
             <text class="mn-label" x="14" y="22">YOUR AGENT IS READY TO</text>
@@ -1207,7 +1220,7 @@
             <text class="mn-body" x="58" y="62">Reply to Sam Whitaker</text>
             <rect class="mn-card" x="12" y="96" width="316" height="46" rx="10"/>
             <g class="mn-glyph" transform="translate(28,110) scale(.75)"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3,10 H21 M8,3 V7 M16,3 V7"/></g>
-            <text class="mn-body" x="58" y="124">Move Thursday&rsquo;s 2:00</text>
+            <text class="mn-body" x="58" y="124">Move the 2:00 with Dana</text>
 
             <path class="mn-wire" d="M170,150 L170,180" marker-end="url(#mnm-ah)"/>
             <path class="mn-gate" d="M96,188 H244"/>
@@ -1235,7 +1248,8 @@
              computer"; act 3 carries the page's custody claim with its own.
              On 2026-09-29 this link opened the four questions for a few hours, and went back to
              compare/ once the hero carried that door, because this was the homepage's one body
-             link to the hub. -->
+             link to the hub. Still true from the release that carries Archie bad38c32, because
+             the heading it is scoped by names only a reply and an event somebody else is on. -->
         <p class="calm-note calm-note--center fade-up">No setting turns this off. <a href="compare/">Compare other agents&nbsp;&rarr;</a></p>
       </div>
     </section>
@@ -1924,11 +1938,11 @@
     </div>
   </footer>
 
-  <script src="js/nav.js?v=20261014-4"></script>
-  <script src="js/ember.js?v=20261014-4" defer></script>
-  <script type="module" src="js/account-nav.js?v=20261014-4"></script>
-  <script src="js/home.js?v=20261014-4" defer></script>
-  <script src="js/hero-dinner.js?v=20261014-4" defer></script>
+  <script src="js/nav.js?v=20261019-1"></script>
+  <script src="js/ember.js?v=20261019-1" defer></script>
+  <script type="module" src="js/account-nav.js?v=20261019-1"></script>
+  <script src="js/home.js?v=20261019-1" defer></script>
+  <script src="js/hero-dinner.js?v=20261019-1" defer></script>
   <script>
     // Acknowledge an account deletion (login/account -> /account/delete redirects here with ?deleted=1).
     (function () {

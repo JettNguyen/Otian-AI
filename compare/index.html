@@ -43,7 +43,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../css/styles.css?v=20261014-4" />
+  <link rel="stylesheet" href="../css/styles.css?v=20261019-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -183,7 +183,7 @@
       <div class="hm-wrap hm-head">
         <span class="section-label fade-up">Compare</span>
         <h1 class="fade-up delay-1">Compare AI agents.</h1>
-        <p class="hm-lede fade-up delay-1">Archie drafts replies and proposes calendar changes. Both wait for your approval, and no setting turns that off<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a>.</p>
+        <p class="hm-lede fade-up delay-1">Archie drafts your replies and keeps your calendar. Nothing goes out in your name until you approve it, and no setting turns that off<a class="src-cite" href="../trust/"><span class="sr-only">Source </span>1</a>.</p>
         <div class="hm-actions fade-up delay-2">
           <a href="../archie/install/" class="btn btn-primary">Download Archie</a>
           <a href="../how-it-works/" class="btn btn-secondary">See It Work&nbsp;&rarr;</a>
@@ -297,6 +297,18 @@
          connectors, because ten lines crossing was the hatched cross-tab again. Symphony's place
          on the their-servers side is a reading of Wix's pages, not a quote, and the accessible
          name and the fold both say so.
+
+         THE SECOND QUESTION NARROWED, 2026-10-19. It asked whether asking your permission is a
+         setting, with "can be turned off" and "no off switch" under it. Archie bad38c32 (on main,
+         in no release) lets an owner stop the asking for changes on their own calendar that
+         nobody else is on, so on the day a release carries it Archie would have an off switch for
+         one kind of step and the old question would sort it with the three. Jett chose to ship it
+         and narrow the claim to what still has no off switch, so the question is now "Can it be
+         set to send or invite without asking?", answered "can be set to" or "cannot be". The three
+         were read again for that question on October 19 (the fold and TRUST.md): Vellum's
+         messaging docs ("set that preference explicitly"), OpenClaw's starting instructions
+         ("Do freely ... including sending messages, emails, or posts"), and Hermes by a reading of
+         its skills, labeled as one. Archie's answer is the same in 0.3.10 and in that release.
          ============================== -->
     <section class="section" aria-labelledby="sort-heading">
       <div class="container">
@@ -307,7 +319,7 @@
 
         <figure class="explain-figure mt-40 fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 640 310" role="img" aria-labelledby="sv-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="sv-t">Thirteen agents sorted by two yes-or-no questions. A row of thirteen marks at the top: Archie, Claude Cowork, Eden, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenAI Dots, OpenClaw, Tab, Vellum and Wix Symphony. Under the first question, does the work happen on your own computer, nine move left and dim under the label their servers: Claude Cowork, Grok Bot, Meta Muse, Instinct, OpenAI Dots, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, Norton Family Assistant, Tab and Eden. Four stay on the right under your computer: Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, three move left and dim under can be turned off: Vellum, Hermes and OpenClaw. Archie stands alone on the right under no off switch, drawn larger, with a soft halo and its name in the color of this site.</title>
+            <title id="sv-t">Thirteen agents sorted by two yes-or-no questions. A row of thirteen marks at the top: Archie, Claude Cowork, Eden, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenAI Dots, OpenClaw, Tab, Vellum and Wix Symphony. Under the first question, does the work happen on your own computer, nine move left and dim under the label their servers: Claude Cowork, Grok Bot, Meta Muse, Instinct, OpenAI Dots, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, Norton Family Assistant, Tab and Eden. Four stay on the right under your computer: Vellum, Hermes, OpenClaw and Archie. Under the second question, can it be set to send or invite without asking, three move left and dim under can be set to: Vellum, Hermes and OpenClaw. Archie stands alone on the right under cannot be, drawn larger, with a soft halo and its name in the color of this site.</title>
             <style>
               .explain-svg--desktop .sv-q{fill:currentColor;font-size:12.5px;font-weight:650}
               .explain-svg--desktop .sv-rule{stroke:var(--line-muted);stroke-width:1.4;fill:none}
@@ -372,10 +384,10 @@
             <g transform="translate(598,142)"><circle class="sv-mark-us" r="13"/><use href="#lg-archie" x="-9.1" y="-9.1" width="18.2" height="18.2"/><text class="sv-name" y="27">Archie</text></g>
 
             <!-- Question 2, asked only of the four on your computer -->
-            <text class="sv-q" x="8" y="202">Is asking your permission a setting?</text>
+            <text class="sv-q" x="8" y="202">Can it be set to send or invite without asking?</text>
             <path class="sv-rule" d="M8 210 H632"/>
-            <text class="sv-lab" x="466" y="232">Can be turned off</text>
-            <text class="sv-lab sv-lab-us" x="594" y="232">No off switch</text>
+            <text class="sv-lab" x="466" y="232">Can be set to</text>
+            <text class="sv-lab sv-lab-us" x="594" y="232">Cannot be</text>
             <path class="sv-split" d="M570 242 V300"/>
             <g class="sv-out">
               <g transform="translate(430,258)"><circle class="sv-mark" r="13"/><text class="sv-init" y="5">V</text><text class="sv-name" y="27">Vellum</text></g>
@@ -393,7 +405,7 @@
           </svg>
 
           <svg class="explain-svg--mobile" viewBox="0 0 340 472" role="img" aria-labelledby="svm-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="svm-t">Thirteen agents sorted by two yes-or-no questions, stacked for a narrow screen. A row of thirteen marks at the top: Archie, Claude Cowork, Eden, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenAI Dots, OpenClaw, Tab, Vellum and Wix Symphony, with the shorter names Cowork, Muse, Norton, Dots and Symphony used below. Under the first question, does the work happen on your own computer, two dimmed rows labelled their servers hold Claude Cowork, Grok Bot, Meta Muse, Instinct, OpenAI Dots, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, Norton Family Assistant, Tab and Eden; a row labelled your computer holds Vellum, Hermes, OpenClaw and Archie. Under the second question, is asking your permission a setting, a dimmed row labelled can be turned off holds Vellum, Hermes and OpenClaw, and under no off switch Archie stands alone, drawn larger with a soft halo and its name in the color of this site.</title>
+            <title id="svm-t">Thirteen agents sorted by two yes-or-no questions, stacked for a narrow screen. A row of thirteen marks at the top: Archie, Claude Cowork, Eden, Grok Bot, Hermes, Instinct, Meta Muse, Norton Family Assistant, OpenAI Dots, OpenClaw, Tab, Vellum and Wix Symphony, with the shorter names Cowork, Muse, Norton, Dots and Symphony used below. Under the first question, does the work happen on your own computer, two dimmed rows labeled their servers hold Claude Cowork, Grok Bot, Meta Muse, Instinct, OpenAI Dots, Wix Symphony, placed there by a reading of Wix&rsquo;s pages, Norton Family Assistant, Tab and Eden; a row labeled your computer holds Vellum, Hermes, OpenClaw and Archie. Under the second question, can it be set to send or invite without asking, a dimmed row labeled can be set to holds Vellum, Hermes and OpenClaw, and under cannot be Archie stands alone, drawn larger with a soft halo and its name in the color of this site.</title>
             <style>
               .explain-svg--mobile .sv-q{fill:currentColor;font-size:11.5px;font-weight:650}
               .explain-svg--mobile .sv-rule{stroke:var(--line-muted);stroke-width:1.4;fill:none}
@@ -445,15 +457,15 @@
             <g transform="translate(144,246)"><circle class="sv-mark" r="11"/><text class="sv-init" y="4.3">O</text><text class="sv-name" y="25">OpenClaw</text></g>
             <g transform="translate(196,246)"><circle class="sv-mark-us" r="11"/><use href="#lg-archie" x="-7.7" y="-7.7" width="15.4" height="15.4"/><text class="sv-name" y="25">Archie</text></g>
 
-            <text class="sv-q" x="8" y="304">Is asking your permission a setting?</text>
+            <text class="sv-q" x="8" y="304">Can it be set to send or invite without asking?</text>
             <path class="sv-rule" d="M8 312 H332"/>
-            <text class="sv-lab" x="8" y="332">Can be turned off</text>
+            <text class="sv-lab" x="8" y="332">Can be set to</text>
             <g class="sv-out">
               <g transform="translate(40,356)"><circle class="sv-mark" r="11"/><text class="sv-init" y="4.3">V</text><text class="sv-name" y="25">Vellum</text></g>
               <g transform="translate(92,356)"><circle class="sv-mark" r="11"/><text class="sv-init" y="4.3">H</text><text class="sv-name" y="25">Hermes</text></g>
               <g transform="translate(144,356)"><circle class="sv-mark" r="11"/><text class="sv-init" y="4.3">O</text><text class="sv-name" y="25">OpenClaw</text></g>
             </g>
-            <text class="sv-lab sv-lab-us" x="8" y="408">No off switch</text>
+            <text class="sv-lab sv-lab-us" x="8" y="408">Cannot be</text>
             <g transform="translate(44,440)">
               <circle class="sv-halo" r="26"/>
               <circle class="sv-halo-in" r="22"/>
@@ -463,7 +475,7 @@
             </g>
 
           </svg>
-          <figcaption>For Archie, asking means calendar changes are confirmed, email waits until you send it or set a time, and it stops before an order is final. All thirteen send your words to an AI company&rsquo;s computers by default.</figcaption>
+          <figcaption>For Archie, nothing goes out in your name until you say yes, and it stops before an order is final. All thirteen send your words to an AI company&rsquo;s computers by default.</figcaption>
         </figure>
       </div>
     </section>
@@ -696,7 +708,15 @@
              back "when something needs your approval"; neither row supports "unless set to ask". MOVED BACK 2026-09-28, Muse only: the same help
              page offers "Always allow" when it asks, which lets it take "this type of action for
              this Connector in the future without asking again", so Muse sits beside Cowork again
-             (TRUST.md, "Muse, re-read 2026-09-28"). Grok Bot stays at the top. The chart no longer writes those three steps down. Jett read the labelled
+             (TRUST.md, "Muse, re-read 2026-09-28"). Grok Bot stays at the top. MOVED 2026-10-19,
+             Grok Bot and the top's own words: xAI's approvals page, read that day, offers "Always
+             allow" and "Allow automatically" rules, so Grok Bot sits beside Cowork, Muse and Dots
+             (x 160 wide and 134 narrow in both views, its name above it narrow, chosen by hand to
+             clear Cowork, Muse, Dots, Tab and Instinct by the generator's gaps and checked in a
+             render, since its old x had no free spot in that level).
+             And the top end now reads "Anything sent in your name" where it read "Every step that
+             matters", because Archie bad38c32 (in no release) can let one kind of calendar step
+             skip the asking, and the top is what still never can. The chart no longer writes those three steps down. Jett read the labeled
              version as too many tiers and too much text, and he was right: three labelled bands
              with rules between them is a table wearing a chart's clothes. Height still carries the
              same sourced fact and a reader gets it from position, higher up asks more. The steps
@@ -756,7 +776,7 @@
             </div>
           </div>
           <svg class="explain-svg--desktop" viewBox="0 0 640 538" role="img" aria-labelledby="fq-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fq-t">A chart with two axes and a selector bar above it. Across, where it runs: their servers on the left, your computer on the right, the same in every view. The bar chooses what runs up the chart. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the color of this site, and Wix Symphony, Norton Family Assistant, Grok Bot, Tab and Eden on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork, Meta Muse and OpenAI Dots on the their-servers side; along the bottom, acting on their own by default, OpenClaw on the your-computer side, which can be set to ask, and Instinct on the their-servers side. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, OpenAI Dots, Instinct, Wix Symphony, Norton Family Assistant, Tab and Eden, all on the their-servers side; a short way below, a desktop app you download, Archie, Vellum and Hermes on the your-computer side and Grok Bot on the other; at the bottom, installed and configured from a terminal, OpenClaw alone. Archie&rsquo;s circle carries its own mark and the other twelve carry a letter, and every one has its name beside it. A dashed line leaves for a band reading that all thirteen send your words to an AI company&rsquo;s computers by default.</title>
+            <title id="fq-t">A chart with two axes and a selector bar above it. Across, where it runs: their servers on the left, your computer on the right, the same in every view. The bar chooses what runs up the chart. Asks first, the resting view: at the top, asking before anything goes out in your name with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the color of this site, and Wix Symphony, Norton Family Assistant, Tab and Eden on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork, Meta Muse, OpenAI Dots and Grok Bot on the their-servers side; along the bottom, acting on their own by default, OpenClaw on the your-computer side, which can be set to ask, and Instinct on the their-servers side. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, OpenAI Dots, Instinct, Wix Symphony, Norton Family Assistant, Tab and Eden, all on the their-servers side; a short way below, a desktop app you download, Archie, Vellum and Hermes on the your-computer side and Grok Bot on the other; at the bottom, installed and configured from a terminal, OpenClaw alone. Archie&rsquo;s circle carries its own mark and the other twelve carry a letter, and every one has its name beside it. A dashed line leaves for a band reading that all thirteen send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--desktop .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--desktop .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
@@ -779,7 +799,7 @@
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-openclaw{transform:translate(511px,352px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-cowork{transform:translate(237px,90px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-muse{transform:translate(277px,90px)}
-              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(263px,150.4px)}
+              #fq-ease:checked ~ .explain-svg--desktop .fq-m-grok{transform:translate(160px,150.4px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-instinct{transform:translate(197px,90px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-symphony{transform:translate(306px,63px)}
               #fq-ease:checked ~ .explain-svg--desktop .fq-m-norton{transform:translate(169px,63px)}
@@ -807,7 +827,7 @@
             <text class="fq-title" x="364" y="452" text-anchor="middle">Where it runs &rarr;</text>
             <g class="fq-v-asks">
               <text class="fq-title" transform="rotate(-90 12 209)" x="12" y="209" text-anchor="middle">Asks first &rarr;</text>
-              <text class="fq-end" x="102" y="22" text-anchor="end">Every step<tspan x="102" dy="12">that matters</tspan></text>
+              <text class="fq-end" x="102" y="22" text-anchor="end">Anything sent<tspan x="102" dy="12">in your name</tspan></text>
               <text class="fq-end" x="102" y="400" text-anchor="end">Not by default</text>
             </g>
             <g class="fq-v-ease">
@@ -848,7 +868,7 @@
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(263,63)">
+            <g class="fq-m fq-m-grok" transform="translate(160,150.4)">
               <text class="fq-name" x="0" y="33.5">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="16"/>
               <text class="fq-init" x="0" y="5.95">G</text>
@@ -890,7 +910,7 @@
           </svg>
 
           <svg class="explain-svg--mobile" viewBox="0 0 340 616" role="img" aria-labelledby="fqm-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="fqm-t">The same chart, taller for a narrow screen, with the same selector bar above it and the names shortened to fit: Cowork for Claude Cowork, Muse for Meta Muse, Dots for OpenAI Dots, Symphony for Wix Symphony and Norton for Norton Family Assistant. Across, where it runs: their servers on the left, your computer on the right, in every view. Asks first, the resting view: at the top, asking before every step that matters with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the color of this site, and Wix Symphony, Norton Family Assistant, Grok Bot, Tab and Eden on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork, Meta Muse and OpenAI Dots on the other; on the floor, acting on their own by default, OpenClaw on the your-computer side, which can be set to ask, and Instinct on the other. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, OpenAI Dots, Instinct, Wix Symphony, Norton Family Assistant, Tab and Eden, all on the their-servers side; below, a desktop app you download, Archie, Vellum, Hermes and Grok Bot; at the bottom, from a terminal, OpenClaw. A dashed line leaves for a band reading that all thirteen send your words to an AI company&rsquo;s computers by default.</title>
+            <title id="fqm-t">The same chart, taller for a narrow screen, with the same selector bar above it and the names shortened to fit: Cowork for Claude Cowork, Muse for Meta Muse, Dots for OpenAI Dots, Symphony for Wix Symphony and Norton for Norton Family Assistant. Across, where it runs: their servers on the left, your computer on the right, in every view. Asks first, the resting view: at the top, asking before anything goes out in your name with no setting to stop it, Archie on the your-computer side, set apart by a larger circle, a soft halo and a name in the color of this site, and Wix Symphony, Norton Family Assistant, Tab and Eden on the their-servers side; a short way below, asking by default until you change a setting, Vellum and Hermes on the your-computer side and Claude Cowork, Meta Muse, OpenAI Dots and Grok Bot on the other; on the floor, acting on their own by default, OpenClaw on the your-computer side, which can be set to ask, and Instinct on the other. Ease: at the top, sign in and it is there, Claude Cowork, Meta Muse, OpenAI Dots, Instinct, Wix Symphony, Norton Family Assistant, Tab and Eden, all on the their-servers side; below, a desktop app you download, Archie, Vellum, Hermes and Grok Bot; at the bottom, from a terminal, OpenClaw. A dashed line leaves for a band reading that all thirteen send your words to an AI company&rsquo;s computers by default.</title>
             <style>
               .explain-svg--mobile .fq-axis{stroke:var(--line-muted);stroke-width:1.4;fill:none}
               .explain-svg--mobile .fq-split{stroke:var(--line-muted);stroke-width:1;stroke-dasharray:1.5 4;opacity:.5;fill:none}
@@ -913,7 +933,7 @@
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-openclaw{transform:translate(290px,424px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-cowork{transform:translate(156px,86px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-muse{transform:translate(106px,59px)}
-              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(169px,167.68px)}
+              #fq-ease:checked ~ .explain-svg--mobile .fq-m-grok{transform:translate(134px,167.68px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-instinct{transform:translate(158px,59px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-symphony{transform:translate(211px,86px)}
               #fq-ease:checked ~ .explain-svg--mobile .fq-m-norton{transform:translate(210px,59px)}
@@ -941,7 +961,7 @@
             <text class="fq-title" x="211" y="514" text-anchor="middle">Where it runs &rarr;</text>
             <g class="fq-v-asks">
               <text class="fq-title" transform="rotate(-90 9 242)" x="9" y="242" text-anchor="middle">Asks first &rarr;</text>
-              <text class="fq-end" x="80" y="22" text-anchor="end">Every step<tspan x="80" dy="11">that matters</tspan></text>
+              <text class="fq-end" x="80" y="22" text-anchor="end">Anything sent<tspan x="80" dy="11">in your name</tspan></text>
               <text class="fq-end" x="80" y="468" text-anchor="end">Not by default</text>
             </g>
             <g class="fq-v-ease">
@@ -982,8 +1002,8 @@
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">M</text>
             </g>
-            <g class="fq-m fq-m-grok" transform="translate(169,68)">
-              <text class="fq-name" x="0" y="26.5">Grok Bot</text>
+            <g class="fq-m fq-m-grok" transform="translate(134,158.68)">
+              <text class="fq-name" x="0" y="-21">Grok Bot</text>
               <circle class="fq-mark" cx="0" cy="0" r="12"/>
               <text class="fq-init" x="0" y="4.9">G</text>
             </g>
@@ -1024,7 +1044,7 @@
             <text class="fq-band-t" x="211" y="591">company&rsquo;s computers by default.</text>
           </svg>
 
-          <figcaption>For Archie, asks first means calendar changes are confirmed, email waits until you send it or set a time, and it stops before an order is final. By default all thirteen send your words to an AI company&rsquo;s computers.</figcaption>
+          <figcaption>For Archie, asks first means nothing goes out in your name until you say yes, and it stops before an order is final. By default all thirteen send your words to an AI company&rsquo;s computers.</figcaption>
         </figure>
       </div>
     </section>
@@ -1079,38 +1099,46 @@
                 <p><a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a>, read September 16, 2026. &ldquo;By default, your assistant runs locally.&rdquo; And: &ldquo;High-stakes actions like sending emails to new contacts, modifying important files, or spending credits require explicit approval until you mark them as trusted.&rdquo;</p>
                 <p>Read September 18: its permissions docs give four modes, from Strict, &ldquo;Everything: every action requires explicit approval&rdquo;, to Full access, &ldquo;your assistant never asks for permission&rdquo;. Its download page offers &ldquo;Vellum for Mac: Native Mac app with computer use&rdquo; and &ldquo;Vellum for Windows: Desktop app for Windows PCs&rdquo;, the app row, and lists the App Store and Google Play. Its homepage says Vellum is open source.</p>
                 <p>Its <a href="https://www.vellum.ai/pricing" rel="nofollow noopener" target="_blank">pricing page</a>: &ldquo;Vellum is free to download and start.&rdquo;</p>
+                <p>Read October 19, 2026, for the second question in the sort above. Its <a href="https://www.vellum.ai/docs/skills-reference/messaging" rel="nofollow noopener" target="_blank">messaging docs</a> say &ldquo;Your assistant will confirm before sending messages on your behalf&rdquo;, and &ldquo;If you want it to send without asking, set that preference explicitly&rdquo;. Its <a href="https://www.vellum.ai/docs/help/faq" rel="nofollow noopener" target="_blank">FAQ</a> says sending from Gmail &ldquo;always requires your explicit approval&rdquo;, so its own pages differ on email, and we place it by the messaging docs.</p>
               </div>
               <div class="calm-list-item" id="src-3">
                 <span class="calm-list-label"><span class="src-n">3</span>OpenClaw: on your computer, free, and acting on its own by default</span>
                 <p><a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>, read September 16, 2026 and October 1: &ldquo;Mac, Windows, or Linux. Bring hosted, subscription-backed, gateway, or local models. State lives on your machine, not a vendor cloud.&rdquo; It has no subscription, no hosted tier and no token, and is MIT licensed.</p>
                 <p>Its docs on <a href="https://docs.openclaw.ai/gateway/security/tool-permissions" rel="nofollow noopener" target="_blank">tool and agent permissions</a>, read September 16: &ldquo;Full Access, including Default (Full Access), authorizes permitted changes without an approval prompt; restricted runs require human approval&rdquo;. So by default it acts on its own, and you can make it ask.</p>
                 <p>Read September 18: its <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a> give five modes, &ldquo;deny&rdquo;, &ldquo;allowlist&rdquo;, &ldquo;ask&rdquo;, &ldquo;auto&rdquo; and &ldquo;full&rdquo;, an &ldquo;ask: always&rdquo; that &ldquo;keeps prompting&rdquo;, and per-command allow lists: the most control on this board. It starts with a shell command, &ldquo;Try it in one command&rdquo;, the terminal row, and also offers &ldquo;Desktop Apps: Full apps that install everything for you&rdquo;.</p>
+                <p>Read October 19, 2026, for the second question in the sort above. Its <a href="https://docs.openclaw.ai/reference/templates/AGENTS" rel="nofollow noopener" target="_blank">starting instructions</a>: &ldquo;Do freely: anything the user asked for, including sending messages, emails, or posts on their behalf&rdquo;, and &ldquo;Ask first: public or outbound actions the user did not request.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-4">
                 <span class="calm-list-label"><span class="src-n">4</span>Hermes: a desktop app, free and MIT, and asking by default</span>
                 <p><a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a>, the Nous Research page, read September 16, 2026: a desktop app for macOS and Windows, the app row, plus a terminal install that also covers Linux and &ldquo;Deploy to the cloud&rdquo; through Nous Portal. It is &ldquo;free and open source under the MIT license&rdquo;.</p>
                 <p>Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>, read the same day: &ldquo;Before executing any command, Hermes checks it against a curated list of dangerous patterns. If a match is found, the user must explicitly approve it&rdquo;, in three modes, &ldquo;smart | manual | off&rdquo;.</p>
+                <p>Read October 19, 2026, for the second question in the sort above, and its place there is our reading. Those approvals cover commands, and that page says nothing about a message or an email. Asking before a send is written into its skills instead.</p>
+                <p>Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/skills/bundled/productivity/productivity-google-workspace" rel="nofollow noopener" target="_blank">Google Workspace skill</a> says &ldquo;Never send email, create/delete calendar events, delete Drive files, share files, or modify Docs/Sheets without confirming with the user first&rdquo;. Its <a href="https://hermes-agent.nousresearch.com/docs/user-guide/skills/bundled/email/email-email-inbox-triage" rel="nofollow noopener" target="_blank">inbox skill</a> settles the &ldquo;allowed actions&rdquo; for each job and says &ldquo;Default to read + draft, not send/delete&rdquo;, so we read sending as an action you can allow. That places Hermes with the agents that can be set to send.</p>
               </div>
               <div class="calm-list-item" id="src-5">
                 <span class="calm-list-label"><span class="src-n">5</span>Claude Cowork: Anthropic&rsquo;s servers, and a mode that does not ask</span>
                 <p><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" rel="nofollow noopener" target="_blank">Anthropic&rsquo;s Cowork guide</a>, read August 20, 2026. &ldquo;Open Claude on the web at claude.ai, in the Claude Desktop app, or in the Claude mobile app&rdquo;, choose Cowork, and &ldquo;describe the task you want Claude to complete&rdquo;, the sign-in row. Its work &ldquo;runs on Anthropic&rsquo;s servers, in an isolated environment, and your sessions and files are saved to your Claude account&rdquo;.</p>
                 <p>Re-read September 16: the mode selector &ldquo;offers Auto and Manual (default)&rdquo;, and in Manual &ldquo;Claude pauses and asks for approval for actions&rdquo;. In Skip mode, &ldquo;Claude doesn&rsquo;t pause to ask and nothing checks its actions automatically&rdquo;.</p>
+                <p>Re-read October 18, 2026: the same words, and its permission table approves a connector tool marked &ldquo;Always allow&rdquo; without asking, even in Manual mode. The guide&rsquo;s own advice names &ldquo;messages sent as you&rdquo; as work with real consequences.</p>
               </div>
               <div class="calm-list-item" id="src-6">
-                <span class="calm-list-label"><span class="src-n">6</span>Grok Bot: a persistent cloud VM, and it comes back for your approval</span>
-                <p><a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview, read August 20, 2026 and September 16. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo;, and &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;. That puts it at the top.</p>
+                <span class="calm-list-label"><span class="src-n">6</span>Grok Bot: a persistent cloud VM, and asking until you save a rule</span>
+                <p><a href="https://x.ai/news/introducing-grok-bot" rel="nofollow noopener" target="_blank">x.ai/news/introducing-grok-bot</a> and the Grok Bot overview, read August 20, 2026 and September 16. Each Grok Bot &ldquo;runs on a persistent cloud VM with a browser, filesystem, and terminal&rdquo;, and &ldquo;They finish jobs end to end, and only come back when something needs your approval&rdquo;.</p>
+                <p>Its <a href="https://docs.x.ai/grok-bot/approvals-security-and-privacy" rel="nofollow noopener" target="_blank">approvals page</a>, read October 19, 2026, says &ldquo;Always allow can save a matching rule&rdquo;. Rules set to allow automatically &ldquo;let matching actions proceed only when the automated review does not identify another reason to stop&rdquo;. So it asks until you save a rule, and sits just below the top with Cowork, Muse and Dots. It sat at the top until that day, when nobody had read this page.</p>
                 <p>&ldquo;Download the app, create your first teammate, and start handing off work&rdquo;, with a Download for macOS button: the app row.</p>
               </div>
               <div class="calm-list-item" id="src-7">
                 <span class="calm-list-label"><span class="src-n">7</span>Meta Muse: a dedicated cloud computer, free for most</span>
                 <p><a href="https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/" rel="nofollow noopener" target="_blank">Meta&rsquo;s announcement</a>, read September 15, 2026: Muse &ldquo;runs on its own dedicated computer in the cloud, contained so no one else&rsquo;s agent can reach it&rdquo;. It is &ldquo;free for most of what people need, with subscription plans for people who want to do more&rdquo;, and &ldquo;rolling out in the US on iOS, Android, and muse.ai&rdquo;, the sign-in row.</p>
                 <p>Its <a href="https://www.meta.com/help/artificial-intelligence/1385290430137537/" rel="nofollow noopener" target="_blank">permissions</a>, read September 18 and 28, are one of two settings: &ldquo;Always ask&rdquo;, or &ldquo;Ask for some actions&rdquo;, which asks &ldquo;before every write action and important read actions&rdquo;. Its prompt offers &ldquo;Always allow&rdquo;, which lets it take &ldquo;this type of action for this Connector in the future without asking again&rdquo;, so Muse sits a short way below the top, beside Cowork.</p>
+                <p>Re-read October 18, 2026: the same words, with the approval choices now on the permissions page itself. Meta&rsquo;s <a href="https://www.meta.com/help/artificial-intelligence/1687253048996149/" rel="nofollow noopener" target="_blank">Connectors page</a> adds &ldquo;You can change when Muse asks for your approval in your Settings.&rdquo;</p>
               </div>
               <div class="calm-list-item" id="src-8">
                 <span class="calm-list-label"><span class="src-n">8</span>Wix Symphony: how you reach it, and where the work happens</span>
                 <p><a href="https://www.wix.com/symphony" rel="nofollow noopener" target="_blank">wix.com/symphony</a>, read September 11, 2026. Symphony is used with a Wix account, in a browser or its iOS and Android apps, and Wix publishes no program you run on your own computer: the sign-in row. <a href="https://support.wix.com/en/article/symphony-an-overview" rel="nofollow noopener" target="_blank">Wix&rsquo;s overview</a> says it &ldquo;checks with you first before your agents act, so nothing important happens without your approval&rdquo;.</p>
                 <p>Re-read September 18: &ldquo;Your agents connect to the suite of tools you already use and can work on their own, 24/7&rdquo;, and &ldquo;your agents&rsquo; background work uses AI credits&rdquo;. Wix publishes no sentence saying where that work runs.</p>
                 <p>Because the agents work while you are away and Wix ships only a phone app and a browser, we place Symphony on the their-servers side. That is our reading, and if Wix publishes the sentence either way we will cite it.</p>
+                <p>Re-read October 19, 2026: the overview still says it &ldquo;checks with you first&rdquo;, and no Wix page we could find describes a setting that stops it, so Symphony stays at the top.</p>
                 <p>Its <a href="https://www.wix.com/symphony/pricing" rel="nofollow noopener" target="_blank">pricing page</a>, read September 11: a free plan, &ldquo;no credit card needed&rdquo;, whose credits &ldquo;reset monthly&rdquo;.</p>
               </div>
               <div class="calm-list-item" id="src-9">
@@ -1121,23 +1149,25 @@
                 <span class="calm-list-label"><span class="src-n">10</span>Norton Family Assistant: asks first, and runs in the cloud</span>
                 <p><a href="https://us.norton.com/products/family-assistant" rel="nofollow noopener" target="_blank">us.norton.com/products/family-assistant</a>, read September 16, 2026: &ldquo;Asks first, acts after&rdquo;. Its <a href="https://support.norton.com/sp/en/us/home/current/solutions/v20260604215951281" rel="nofollow noopener" target="_blank">support FAQ</a>, read September 18, says where it runs: &ldquo;your family graph, connected-account tokens, agent context, and chat history all live inside your own dedicated instance in the cloud, isolated from other users&rdquo;.</p>
                 <p>That puts it on the their-servers side. It &ldquo;works on any PCs that run in browsers such as Norton Neo, Chrome, and Firefox&rdquo; or as an iPhone app, the sign-in row.</p>
+                <p>Its <a href="https://us.norton.com/products/family-assistant/faq" rel="nofollow noopener" target="_blank">FAQ</a>, read October 19, 2026: &ldquo;the agent will not message, purchase, or move money on your behalf without an explicit confirmation step&rdquo;. No page describes a setting that changes that, so it stays at the top.</p>
               </div>
               <div class="calm-list-item" id="src-11">
                 <span class="calm-list-label"><span class="src-n">11</span>OpenAI Dots: a cloud computer of its own, asking by rules you can change</span>
                 <p><a href="https://openai.com/index/introducing-dots/" rel="nofollow noopener" target="_blank">OpenAI&rsquo;s announcement</a>, read September 30, 2026: each dot &ldquo;works on its own cloud computer, while your computer and its contents stay separate unless you choose to connect it&rdquo;. Its <a href="https://help.openai.com/en/articles/20001530-getting-started-with-your-dot" rel="nofollow noopener" target="_blank">help center</a>: access to your own computer &ldquo;is optional and starts turned off&rdquo;. <a href="https://learn.chatgpt.com/docs/dots" rel="nofollow noopener" target="_blank">ChatGPT&rsquo;s guide</a>: a dot &ldquo;can keep working even when your computer is off&rdquo;. So it sits on the their-servers side.</p>
                 <p>Dots &ldquo;start with built-in rules for when to act independently and when to ask for approval&rdquo;. One rule you can add, on its <a href="https://learn.chatgpt.com/docs/dots/controls" rel="nofollow noopener" target="_blank">controls page</a>, is &ldquo;Take action without asking&rdquo;, so it sits a short way below the top, beside Cowork and Muse.</p>
+                <p>Re-read October 18, 2026, on the same controls page: &ldquo;Take action without asking&rdquo; is still one of the four rules. Its example is &ldquo;you could choose Ask before taking action for sending messages to customers&rdquo;.</p>
                 <p>&ldquo;Create your dot in the ChatGPT desktop app or in ChatGPT on desktop web&rdquo;: the sign-in row. It comes with ChatGPT Pro and Business Premium. OpenAI&rsquo;s pages refuse scripts, so we read them through a service that returns a page&rsquo;s own text.</p>
               </div>
               <div class="calm-list-item" id="src-12">
                 <span class="calm-list-label"><span class="src-n">12</span>Tab: its own computer, your approval before it pays, and a text to start</span>
                 <p><a href="https://tab.bot/" rel="nofollow noopener" target="_blank">tab.bot</a>, read October 7, 2026: &ldquo;Behind the messages, Tab has its own computer and browser&rdquo;, so it sits on the their-servers side. &ldquo;If the job takes a while, you can leave. Tab keeps going.&rdquo;</p>
-                <p>Its homepage says &ldquo;Nothing is paid until you approve it&rdquo;. Its <a href="https://tab.bot/terms" rel="nofollow noopener" target="_blank">terms</a> add that Tab &ldquo;may pause and ask for clarification or approval&rdquo; when a request is &ldquo;ambiguous, sensitive, irreversible, unusually risky&rdquo;, or differs from what you approved. We read that as asking first, as with Grok Bot, so it sits at the top.</p>
+                <p>Its homepage says &ldquo;Nothing is paid until you approve it&rdquo;. Its <a href="https://tab.bot/terms" rel="nofollow noopener" target="_blank">terms</a> add that Tab &ldquo;may pause and ask for clarification or approval&rdquo; when a request is &ldquo;ambiguous, sensitive, irreversible, unusually risky&rdquo;, or differs from what you approved. We read that as asking first, and Tab publishes no setting that stops it, so it sits at the top. Re-read October 19, 2026: the same words.</p>
                 <p>&ldquo;Tab starts in Messages&rdquo;, and joining takes &ldquo;Your number, then one required text&rdquo;: the sign-in row. It is in private beta, from a waitlist, and publishes no price.</p>
               </div>
               <div class="calm-list-item" id="src-13">
                 <span class="calm-list-label"><span class="src-n">13</span>Eden: an instance of its own in the cloud, approval before it commits you, and a chat to start</span>
                 <p>Eden&rsquo;s <a href="https://meeteden.ai/privacy" rel="nofollow noopener" target="_blank">privacy policy</a>, read October 7, 2026: &ldquo;Every customer runs on a dedicated, isolated instance rather than in a shared multi-tenant pool&rdquo;. It adds: &ldquo;Your data is hosted in the European Union&rdquo;. So it sits on the their-servers side.</p>
-                <p>&ldquo;Where an action would commit you to something, it asks you to approve it first.&rdquo; That puts it at the top, the reading that put Norton there.</p>
+                <p>&ldquo;Where an action would commit you to something, it asks you to approve it first.&rdquo; That puts it at the top, the reading that put Norton there. Re-read October 19, 2026: the same policy adds &ldquo;It never sends or deletes anything on its own initiative, only when you ask it to.&rdquo;</p>
                 <p><a href="https://meeteden.ai/" rel="nofollow noopener" target="_blank">meeteden.ai</a> offers &ldquo;Chat on iMessage&rdquo; and &ldquo;Chat on Telegram&rdquo;: the sign-in row. The same page says &ldquo;eden is in closed beta&rdquo;.</p>
               </div>
               <div class="calm-list-item" id="src-14">
@@ -1324,7 +1354,7 @@
     </div>
   </footer>
 
-  <script src="../js/nav.js?v=20261014-4"></script>
-  <script type="module" src="../js/account-nav.js?v=20261014-4"></script>
+  <script src="../js/nav.js?v=20261019-1"></script>
+  <script type="module" src="../js/account-nav.js?v=20261019-1"></script>
 </body>
 </html>

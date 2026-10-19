@@ -9,7 +9,7 @@
        pre-paint script below and by applyTheme() in js/nav.js. -->
   <meta name="theme-color" content="#FCFAF8" />
   <title>Archie vs OpenClaw, Hermes, Vellum and Building It Yourself | Otian AI</title>
-  <meta name="description" content="OpenClaw, Hermes and Vellum publish their code and can run on your own computer, as Archie runs on yours. What Archie sells is the connections, the approval before an email or calendar change, and the updates, already built, with an approval that has no off switch." />
+  <meta name="description" content="OpenClaw, Hermes and Vellum publish their code and can run on your own computer, as Archie runs on yours. What Archie sells is the connections, the asking before anything goes out in your name (with no setting that turns it off), and the updates, already built." />
   <meta property="og:image" content="https://otianai.com/assets/og-card.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -40,7 +40,7 @@
       } catch (e) { /* default light */ }
     })();
   </script>
-  <link rel="stylesheet" href="../../css/styles.css?v=20261014-4" />
+  <link rel="stylesheet" href="../../css/styles.css?v=20261019-1" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -198,7 +198,7 @@
         </div>
         <figure class="explain-figure cs-figure mt-40 fade-up delay-1">
           <svg class="explain-svg--desktop" viewBox="0 0 640 330" role="img" aria-labelledby="by-t" xmlns="http://www.w3.org/2000/svg" style="font-family:inherit">
-            <title id="by-t">Two rows, drawn the same way, and the box is the same in both: your computer, on your own AI account, with a line to the AI you picked. In the top row, your own build, the three chips inside are drawn with dashed edges and each is tagged yours to write: calendar, mail and files connected; the approval gate; kept running as services change. In the bottom row, Archie, the same three chips are solid and tagged built in, built in with no off switch, and updates arrive.</title>
+            <title id="by-t">Two rows, drawn the same way, and the box is the same in both: your computer, on your own AI account, with a line to the AI you picked. In the top row, your own build, the three chips inside are drawn with dashed edges and each is tagged yours to write: calendar, mail and files connected; asking before sending; kept running as services change. In the bottom row, Archie, the same three chips are solid and tagged built in, built in with no off switch, and updates arrive.</title>
             <style>
               .cs-head{fill:currentColor;font-size:12.5px;font-weight:650}
               .cs-box-them{fill:var(--bg-card);stroke:var(--line-muted);stroke-width:1.5}
@@ -247,7 +247,7 @@
             <text class="cs-chiptext" x="176" y="85">Calendar, mail and files connected</text>
             <text class="cs-tag cs-tag--us" x="440" y="85">yours to write</text>
             <rect class="cs-chip cs-chip--open" x="164" y="96" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="111">The approval gate</text>
+            <text class="cs-chiptext" x="176" y="111">Asking before sending</text>
             <text class="cs-tag cs-tag--us" x="440" y="111">yours to write</text>
             <rect class="cs-chip cs-chip--open" x="164" y="122" width="286" height="22" rx="7"/>
             <text class="cs-chiptext" x="176" y="137">Kept running as services change</text>
@@ -271,7 +271,7 @@
             <text class="cs-chiptext" x="176" y="247">Calendar, mail and files connected</text>
             <text class="cs-tag cs-tag--us" x="440" y="247">built in</text>
             <rect class="cs-chip" x="164" y="258" width="286" height="22" rx="7"/>
-            <text class="cs-chiptext" x="176" y="273">The approval gate</text>
+            <text class="cs-chiptext" x="176" y="273">Asking before sending</text>
             <text class="cs-tag cs-tag--us" x="440" y="273">built in, no off switch</text>
             <rect class="cs-chip" x="164" y="284" width="286" height="22" rx="7"/>
             <text class="cs-chiptext" x="176" y="299">Kept running as services change</text>
@@ -284,7 +284,7 @@
           </svg>
 
           <svg class="explain-svg--mobile" viewBox="0 0 340 514" role="img" aria-labelledby="bym-t" xmlns="http://www.w3.org/2000/svg">
-            <title id="bym-t">Two rows, stacked, and the box is the same in both: your computer, on your own AI account, with a line down to the AI you picked. On top, your own build: the three chips inside have dashed edges and are tagged yours to write: calendar, mail and files connected; the approval gate; kept running as services change. Below, Archie: the same three chips, solid, tagged built in, built in with no off switch, and updates arrive.</title>
+            <title id="bym-t">Two rows, stacked, and the box is the same in both: your computer, on your own AI account, with a line down to the AI you picked. On top, your own build: the three chips inside have dashed edges and are tagged yours to write: calendar, mail and files connected; asking before sending; kept running as services change. Below, Archie: the same three chips, solid, tagged built in, built in with no off switch, and updates arrive.</title>
             <text class="cs-head" x="8" y="16">Your own build</text>
             <circle class="cs-mark" cx="30" cy="36" r="8"/>
             <path class="cs-mark" d="M14,60 a16,16 0 0 1 32,0"/>
@@ -299,7 +299,7 @@
             <text class="cs-chiptext" x="31" y="133">Calendar, mail and files connected</text>
             <text class="cs-tag cs-tag--us" x="311" y="133">yours to write</text>
             <rect class="cs-chip cs-chip--open" x="19" y="144" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="159">The approval gate</text>
+            <text class="cs-chiptext" x="31" y="159">Asking before sending</text>
             <text class="cs-tag cs-tag--us" x="311" y="159">yours to write</text>
             <rect class="cs-chip cs-chip--open" x="19" y="170" width="302" height="22" rx="7"/>
             <text class="cs-chiptext" x="31" y="185">Kept running as services change</text>
@@ -322,7 +322,7 @@
             <text class="cs-chiptext" x="31" y="387">Calendar, mail and files connected</text>
             <text class="cs-tag cs-tag--us" x="311" y="387">built in</text>
             <rect class="cs-chip" x="19" y="398" width="302" height="22" rx="7"/>
-            <text class="cs-chiptext" x="31" y="413">The approval gate</text>
+            <text class="cs-chiptext" x="31" y="413">Asking before sending</text>
             <text class="cs-tag cs-tag--us" x="311" y="413">built in, no off switch</text>
             <rect class="cs-chip" x="19" y="424" width="302" height="22" rx="7"/>
             <text class="cs-chiptext" x="31" y="439">Kept running as services change</text>
@@ -350,7 +350,7 @@
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Keep approval built in</span>
-            <p>Emails wait until you send them or set a time; calendar changes wait for your yes. Neither can be turned off<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a>. Read each before you approve.</p>
+            <p>Emails wait until you send them or set a time. Deleting an event, or changing one other people are on, waits for your yes. No setting turns either off<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a>. Read each before you approve.</p>
           </div>
           <div class="calm-list-item">
             <span class="calm-list-label">Shape your agent with add-ons</span>
@@ -489,9 +489,9 @@
                 <td data-label="OpenClaw, Hermes, Vellum, or yours">Each one&rsquo;s own channels, skills and plugins<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. On your own build, yours to write and keep safe</td>
               </tr>
               <tr>
-                <td data-label="">Approval before email or calendar changes</td>
+                <td data-label="">Asking before anything goes out in your name</td>
                 <td data-label="Archie" class="is-archie">Built in, and it cannot be skipped<a class="src-cite" href="../../trust/"><span class="sr-only">Source </span>5</a></td>
-                <td data-label="OpenClaw, Hermes, Vellum, or yours">A setting on all three, with off as one option<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. On your own build, yours to write</td>
+                <td data-label="OpenClaw, Hermes, Vellum, or yours">All three can send without asking: OpenClaw by default, Hermes and Vellum once you allow it<a class="src-cite" href="#src-open"><span class="sr-only">Source </span>1</a>. On your own build, yours to write</td>
               </tr>
               <tr>
                 <td data-label="">Keeping it running</td>
@@ -527,6 +527,8 @@
                 <span class="calm-list-label" id="src-open"><span class="src-n">1</span>OpenClaw, Hermes and Vellum, from their own pages</span>
                 <p>Read September 16 and 18, 2026, from <a href="https://openclaw.ai/" rel="nofollow noopener" target="_blank">openclaw.ai</a>, <a href="https://hermes-agent.nousresearch.com/" rel="nofollow noopener" target="_blank">hermes-agent.nousresearch.com</a> and <a href="https://www.vellum.ai/" rel="nofollow noopener" target="_blank">vellum.ai</a>. All three are MIT licensed. Hermes and Vellum lead with a desktop download; OpenClaw ships desktop apps and a terminal path, <code>npx openclaw@latest</code> (<a href="https://docs.openclaw.ai/start/getting-started" rel="nofollow noopener" target="_blank">its docs</a>).</p>
                 <p>Approval is a setting on each. OpenClaw&rsquo;s <a href="https://docs.openclaw.ai/tools/exec-approvals" rel="nofollow noopener" target="_blank">exec approvals</a> govern commands, from <code>deny</code> to <code>full</code>, and the default &ldquo;authorizes permitted changes without an approval prompt&rdquo;. Hermes checks commands against &ldquo;a curated list of dangerous patterns&rdquo; with <code>approvals.mode</code> smart, manual or off (<a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" rel="nofollow noopener" target="_blank">security docs</a>). Vellum runs from Strict to Full access, where &ldquo;your assistant never asks for permission&rdquo; (<a href="https://www.vellum.ai/docs/trust-security/the-permissions-model" rel="nofollow noopener" target="_blank">its docs</a>).</p>
+                <p>Read October 19, 2026, for what each may send in your name. OpenClaw&rsquo;s <a href="https://docs.openclaw.ai/reference/templates/AGENTS" rel="nofollow noopener" target="_blank">starting instructions</a> say &ldquo;Do freely: anything the user asked for, including sending messages, emails, or posts on their behalf&rdquo;. Vellum&rsquo;s <a href="https://www.vellum.ai/docs/skills-reference/messaging" rel="nofollow noopener" target="_blank">messaging docs</a> say &ldquo;If you want it to send without asking, set that preference explicitly&rdquo;.</p>
+                <p>Hermes&rsquo;s <a href="https://hermes-agent.nousresearch.com/docs/user-guide/skills/bundled/email/email-email-inbox-triage" rel="nofollow noopener" target="_blank">inbox skill</a> settles the &ldquo;allowed actions&rdquo; for each job and says &ldquo;Default to read + draft, not send/delete&rdquo;, which we read as sending being one of the actions you can allow.</p>
                 <p>Each has a shelf of skills or plugins on top of its open code, and each reaches you on chat channels of its own. Vellum&rsquo;s docs say a skill it writes bundles &ldquo;any reference notes and scripts the workflow needs&rdquo; (<a href="https://www.vellum.ai/docs/getting-started/your-first-skill.md" rel="nofollow noopener" target="_blank">its docs</a>).</p>
               </div>
               <div class="calm-list-item" id="src-2">
@@ -542,7 +544,7 @@
                 <p>Our price, and the AI usage on top of it, on our <a href="../../archie/pricing/">pricing page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-5">
-                <span class="calm-list-label"><span class="src-n">5</span>Approval before an email or a calendar change goes out</span>
+                <span class="calm-list-label"><span class="src-n">5</span>Approval before anything goes out in your name</span>
                 <p>How the hold works, and its honest limit, are on our <a href="../../trust/">Trust page</a>.</p>
               </div>
               <div class="calm-list-item" id="src-6">
@@ -665,8 +667,8 @@
     </div>
   </footer>
 
-  <script src="../../js/nav.js?v=20261014-4"></script>
-  <script type="module" src="../../js/account-nav.js?v=20261014-4"></script>
-  <script src="../../js/demo-player.js?v=20261014-4"></script>
+  <script src="../../js/nav.js?v=20261019-1"></script>
+  <script type="module" src="../../js/account-nav.js?v=20261019-1"></script>
+  <script src="../../js/demo-player.js?v=20261019-1"></script>
 </body>
 </html>

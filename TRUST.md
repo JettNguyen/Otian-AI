@@ -6055,6 +6055,14 @@ lid closing and their agent carrying on, and that difference is true. ⛔ Never 
 "a computer you leave on" or "an always-on computer" as something the reader must have: say what the
 agent does while the computer is on.
 
+**Which audience this rule governs, added October 18, 2026.** The ⛔ on "needs to stay on" governs
+selling copy on this site, written for somebody deciding whether to get Archie. It does not govern
+what Archie says inside the app to an owner who already has it: from Archie `4359e871` (in no
+release yet), the Routines tab tells that owner to "leave it on and plugged in" (the entry "The
+Routines tab says routines come from this computer", beside "Waking the computer for a routine").
+That is an instruction about their own computer, not a requirement put to a buyer, and neither
+entry loosens the other.
+
 **Video 0.2, retitled on the site 2026-10-09 (Jett's pick):** the Learning Library page is now "Your
 Agent Works While Your Computer Is On", at the same URL, with a new poster in the old one's style.
 Its words already said the true thing ("Your agent can work only while your computer is on, awake,
@@ -6321,6 +6329,98 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
   it and no second AI call; it is word comparison against a file, which is exactly why it costs the
   owner nothing on the turns where nothing matches.
 
+**Amended October 18, 2026 (Archie `9c02805f`, in no release yet): a line can be changed in place.**
+Once a release carries it, the approved wording above reads "read every line of it, add one, change
+one, or delete one", and "Why it's true" adds `agent_memory_edit` (`src-tauri/src/commands/access.rs`)
+to the three commands it names: Change this, a pencil beside each line's cross on Memory, opens the
+line in a box, and the new words take the old one's place in the same section and position
+(`change_note` in `crates/archie-runtime/src/memory.rs`). Until then the wording above stays as
+written, because it is true of every released version. The next entry is the rest of that build:
+bringing in what ChatGPT, Claude or Gemini knows.
+
+### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers: BUILT 2026-10-18 (Archie `9c02805f`), in no release
+
+*Archie `981acfe7` to `f1eca93d` on the branch `parity-p1`, merged into main as `9c02805f`, and
+`54089688`, which names Change this beside Forget this in the memory sentence the agent is given;
+all on main and in no release. Nothing here is said in the present tense on the site until a
+release carries it. A phone half is being built as its own package; until a release carries it,
+the "Not on Archie Mobile" boundary below stands as written.*
+
+Neither half has been used by a real owner, and the paste has been tried only on answers written to
+look like what ChatGPT, Claude and Gemini send.
+
+**Approved wording, once it ships:** "Already told ChatGPT, Claude or Gemini about yourself? Archie
+gives you one sentence to send it, you paste its answer back, and you tick the lines your agent
+keeps. Nothing is saved until you choose, and a line with a password or a card number in it is never
+kept. Any line your agent remembers can be changed in place, as well as added or deleted."
+
+**Why it's true** (Archie repo):
+- **The screen** is `src/app/bring-in-dialog.tsx`, opened from Memory on the agent's Knowledge tab
+  ("Used ChatGPT, Claude or Gemini before? Bring in what it knows about you", in
+  `src/app/agent-detail.tsx`), and, in Archie only, from the card "Bring in what ChatGPT knows" on
+  the first screen of setup (`ASKS` in `src/app/setup-flow.tsx`). The sentence it gives the owner is
+  `BRING_IN_ASK` in `src/app/bring-in.ts`: list everything you remember about me, one fact per line,
+  only facts about me, and leave out passwords and any card or account numbers.
+- **Nothing is written before the press.** "Show me the lines" calls `agent_memory_bring_in_read`
+  (`src-tauri/src/commands/access.rs`), which reads the paste and the memory file and writes nothing.
+  "Remember these" calls `agent_memory_bring_in_keep` with only the ticked lines.
+- **The reading is code, never a model**: `crates/archie-runtime/src/other_assistant.rs`. A list
+  splits on its lines, bullets and numbers; headings, rules and the other assistant's opening and
+  closing words are dropped; a block of writing is cut at the end of each sentence, and a sentence
+  opening on "He", "It" or "They" stays with the one before it. No line is reworded, and no AI call
+  is made at any step.
+- **Never kept:** a line holding a value after a word like password, PIN, passcode, account number or
+  Social Security (`secret_value_at`), the shape of a Social Security number (`has_id_number`), a run
+  of 13 to 19 digits that passes the check every card number carries (`has_card_number`, Luhn's), or
+  anything the app's log scrubber would hide (`archie_net::redact`). The line is shown under "left
+  out" with the secret replaced by dots (`masked`), and `keep` checks every line again on the way in,
+  because a line can be changed before it is kept.
+- **Where kept lines go:** About you, dated this month, while they fit in three quarters of that
+  section's budget (`ROOM_BYTES` in `other_assistant.rs`, 1,536 bytes, counted with what is already there); the first line
+  that does not fit sends it and the rest to older memory, word for word, appended
+  (`append_older` in `access.rs`). The screen draws the line where the room runs out before anything
+  is written, with the same walk (`fitCount` in `src/app/bring-in.ts`).
+- **Changing a line:** a pencil beside each line on Memory, next to the cross, opens it in a box.
+  `agent_memory_edit` (`access.rs`) puts the new words in the old one's place, in the same section and
+  the same position (`change_note` in `crates/archie-runtime/src/memory.rs`), dates an About you
+  line this month, and takes the old words out of older memory so they do not come back. The notice
+  that says it changed has Undo.
+- Tests: `other_assistant::tests` (twelve, among them `secrets_and_card_numbers_are_left_out_and_never_shown`,
+  `a_line_about_somebody_else_starts_unticked` and `what_does_not_fit_goes_to_older_memory_in_order`),
+  `memory::tests::a_fact_changes_in_place_and_keeps_its_lane` and two more beside it,
+  `commands::access::memory_tests` (four, on the files each command writes), and
+  `src/app/bring-in.test.mjs`.
+
+**The boundaries:**
+- ⛔ **Never "connects to ChatGPT", "imports your ChatGPT memory", "syncs" or "reads your ChatGPT
+  account."** Archie never talks to ChatGPT, Claude or Gemini. It reads text the owner pastes, once,
+  and nothing goes back the other way.
+- ⛔ **Never "everything comes over."** About you holds about three quarters of its budget from a
+  paste, roughly 25 to 30 short facts. The rest goes to older memory, which the agent looks at only
+  when a message's words match a line, at most three lines a turn. The screen says which lines go
+  where before the press.
+- ⛔ **Never "removes anything sensitive" or "filters private information."** It refuses passwords
+  and other secrets written with their value, Social Security and account numbers, keys, and card
+  numbers. A health detail, an address or a phone number comes over if it is ticked.
+- ⛔ **Never "uses AI to understand" or "organizes your memories."** It splits text in code. A block
+  of writing is cut at its sentences and can come out as awkward lines, which the screen says.
+- ⚠️ **"About someone else" is a guess from the words.** A line that never mentions the owner and
+  opens on another person ("Dana is going through a divorce") starts unticked, with a sentence saying
+  why, and the owner can tick it. It is not a privacy guarantee about third parties.
+- ⚠️ **"Saves nothing" is about the screen.** Once kept, About you lines go to the AI company the
+  owner connected with every one of their messages, as everything in memory does. Keep that sentence
+  wherever this one appears.
+- ⚠️ **Archie only on the first screen.** Archie for Teams has it on Memory alone, because its first
+  screen has no room for another card.
+- ⚠️ **Not on Archie Mobile.** The phone shows how many things the agent remembers and has no screen
+  listing them, so it can neither bring lines in nor change one.
+
+**Amending the memory entry above.** Its approved wording says "you can read every line of it, add
+one, or delete one". Once this is in a release, it reads "read every line of it, add one, change one,
+or delete one", and its "Why it's true" adds `agent_memory_edit` to the three commands it names.
+Written into that entry on October 18, 2026, as an amendment that applies once a release carries
+this.
+
 ### ✅ It can look back through your conversation for something you told it: BUILT 2026-09-25 (Archie `69b2e4ed` and `dd154236`), SHIPPED in Archie 0.3.1 on September 29, 2026
 
 *Released, checked October 6, 2026: both commits are ancestors of 0.3.1's `09c5cb5e`, and every
@@ -6354,7 +6454,10 @@ conversation you can scroll back through in Archie."
   (`turn::may_search_conversation`): the owner's messages, and a message a watcher delivers into
   that conversation. It is refused at dispatch anywhere else. A guest on a shared agent never gets
   it, including a guest allowed to act as the owner, and it never reads another person's
-  conversation with the agent.
+  conversation with the agent. *Added October 18, 2026:* this is about the agent's search. A
+  search box the person types in is built on main (Archie `e35220a1`, in no release), and on a
+  team each person's box searches only their own conversation; it is the next entry, and this
+  line stays as written for the agent.
 - ⛔ **Never say it understands what you meant.** It matches words. A question worded differently
   from what was said can miss, and the agent is told to say it no longer has it rather than guess.
 - ⛔ **Do not merge this with the memory claim above.** The memory is what the agent carries on every
@@ -6367,6 +6470,92 @@ conversation you can scroll back through in Archie."
   "has been dropped and you cannot read it", which was true of what it could see and false of what
   the owner could scroll back to. The Archie repo's `docs/CHAT-UX-REVIEW.md`, finding 2.5, is where
   that was found.
+
+### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), in no release
+
+*Archie `1e712073` and `fbdd3ae9` on the branch `parity-p5`, merged into main as `e35220a1`, and
+archie-mobile `03fd5fe`, merged as `434bc3d`; all on main and in no release. Nothing below may be
+said on a page until a release carries them, and the phone half needs both: an Archie Mobile build
+with `434bc3d` and an Archie on the computer with `e35220a1`. Recommended: a line on the features
+page once it ships, not a headline.*
+
+*Not the entry above.* That one is the agent searching the conversation for itself; this is a box
+the person types in. On the owner's own conversation both read the same record, and neither
+reaches anybody else's conversation.
+
+**Proposed wording, Jett's to approve:** "Search your chat with an agent for anything either of you
+said. Type a word or a name and Archie shows every message that has all of them, newest first, with
+the day it was said. Press one and the chat goes to it. It works the same on Archie Mobile, and on a
+team, each person's search covers only their own chat."
+
+**Why it's true:**
+
+- **One search, in code, for every screen.** `src-tauri/src/chat_search.rs` reads the conversation
+  the window already shows (the same file `crate::inapp::read_transcript` reads, through the vault),
+  turns each message into plain words (`archie_net::plain::to_plain_text`, so Markdown, bold and
+  links do not get in the way), and keeps the messages that have every word typed, ignoring case
+  and curly quotes, newest first. It returns at most 50 matches to the window and 30 to a phone,
+  with the total, a short piece of each message around the words that matched, and who said it and
+  when. Tests in that file: `a_message_is_found_by_a_word_in_it`,
+  `every_word_must_match_and_the_newest_comes_first`,
+  `only_the_newest_come_back_and_the_count_says_how_many_matched`,
+  `case_quotes_punctuation_and_markdown_do_not_get_in_the_way`,
+  `too_little_to_search_by_asks_for_a_word`, `a_long_message_shows_the_part_that_matched`,
+  `a_full_conversation_says_how_far_back_it_goes`, `the_file_is_read_again_when_it_changes`.
+- **No AI call, and nothing added to a turn.** The search is string matching on this computer. It
+  sends nothing to any AI provider, spends no credits, and changes nothing the agent is sent.
+- **Fast.** Timed in a debug build on 5,000 messages, ten times what a chat keeps: the first search
+  took 101.5 ms (reading, unsealing and preparing the file) and each one after it about 4.7 ms,
+  because the prepared words are kept until the file changes (`how_long_a_search_takes`, run with
+  `--ignored`). The release app was not timed and is faster.
+- **On the computer:** a Search button in the Chat header and Command F (Control F on Windows)
+  open "Search this chat" (`src/app/chat-search-box.tsx`, words in `src/app/chat-search.ts`, wired
+  in `src/app/conversation.tsx` and `src/app/agent-detail.tsx`). Pressing a match scrolls the chat to
+  it and lights it with the ring the app already uses for "here is the one you asked for". The
+  command is `inapp_search`.
+- **On the phone:** the same box from a magnifying glass beside New chat on the Chat tab, on the
+  owner's phone and a teammate's (`src/screens/ChatSearch.tsx`, words in `src/search.ts`, in the
+  archie-mobile repo). The phone asks the computer through the sealed relay (`search` in
+  `src-tauri/src/phone.rs` and `src-tauri/src/team_phone.rs`), so both apps find the same messages.
+  A match among the newest messages the phone holds (about forty) closes the box and goes to it in
+  the chat, lit up. An older one opens whole in the box, with the day it was said and a line saying
+  it is older than what the phone shows. Tests: `a_search_from_the_phone_changes_nothing_on_the_window`
+  (phone.rs), and `src/search.test.ts` in archie-mobile.
+- **Each person searches only their own chat.** The computer decides which conversation is
+  searched, never the phone. The owner's phone always searches the owner's own conversation with
+  that agent (`for_owners_phone`), whatever thread or teammate the phone names. A teammate's phone
+  searches the conversation worked out from their own pairing (`search_theirs` in `team_phone.rs`,
+  through `for_teammates_phone`), never the owner's or another teammate's, and only once they have
+  joined. Tests: `the_phones_search_is_the_owners_conversation_and_nobody_elses` (phone.rs) and
+  `a_teammates_search_is_their_own_conversation_whatever_the_phone_names` (team_phone.rs).
+
+**The boundaries.**
+
+- ⛔ **Never "search everything you have ever said to Archie".** A chat keeps its newest 500
+  messages (`MAX_ENTRIES` in `src-tauri/src/inapp.rs`), and the search covers what is kept. When the
+  chat is full and nothing matches, the box says how far back it goes ("This chat only goes back to
+  September 3, so anything said before then is not here."). New chat does not empty it; earlier
+  chats stay searchable until they pass the 500.
+- ⛔ **Never "search your email, files or chat apps".** It searches the conversation in Archie's
+  window (and the phone's copy of it), and never reaches into a chat app. What the owner said to
+  the agent on their own chat app is found, because the window keeps that half of the one
+  conversation too (`inapp/transcript.json`, merged by `crates/archie-net/src/mirror.rs`; see the
+  entry above). A guest's or a teammate's chat-app conversation, and the workshop where an add-on
+  is built, are not searched. *Corrected October 18, 2026, while merging: the builder's line said
+  messages in a chat app such as Telegram or Slack are not searched, which is wrong for the
+  owner's own chat.*
+- ⛔ **Never "the owner can search a teammate's chat" or the reverse.** Nobody's search reaches
+  anybody else's conversation, on either app.
+- ⚠️ **It matches words, not meaning.** "plumber" does not find "the guy who fixed the sink", and an
+  accented letter (é) is not matched by a plain one (e). The box says to try a different word for
+  the same thing.
+- ⚠️ **On a phone, an older match opens in the box rather than in the chat**, because the phone is
+  sent only the newest messages and the ones around an older match are on the computer.
+- ⚠️ **The phone needs the computer.** Like everything on Archie Mobile, a search is answered by the
+  computer running Archie, and a phone paired with a computer on an earlier version shows no Search
+  button at all (the snapshot's `search` flag).
+- ⚠️ **Not in a release yet**, and the phone screen has not been seen on a real phone or the
+  simulator. The computer's box was checked by screenshot in the journey harness, in light and dark.
 
 ### ✅ Your whole agent in one file, and no key is in it (SHIPPED 2026-09-02 in Archie 0.2.2; entry written 2026-09-21)
 
@@ -7399,7 +7588,10 @@ the first one comes, from the same setup time.
 - ⛔ Only for the four lines of work Archie has a setup for, and only once the interview matched
   one. Never "every agent sends a morning list".
 - ⛔ Never "your team gets theirs" or "on your phone's lock screen": it goes to the owner's own chat
-  with the agent, and needs Archie running and the computer awake at that time, like a routine.
+  with the agent, and needs Archie running and the computer awake at some point between its time
+  and noon. It goes out any time in that window, and a computer asleep until after noon gets none
+  that day (`LAST_HOUR` in `gateway/morning_list.rs`). Corrected October 18, 2026: this said "awake
+  at that time", which was wrong.
 - ⚠️ The time is fixed per line of work for now; the owner can stop it, not move it.
 
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
@@ -7435,11 +7627,124 @@ login" turns it off, and it stays off.
   asks before opening at login": it turns it on, then says so.
 - ⚠️ Not yet seen on a built app on either platform, and the Windows icon has never been drawn.
 
+**Amended October 18, 2026 (Archie `013ea140`, in no release yet): a second way back on a Mac.**
+Archie now has an icon in the Mac menu bar, at the top of the screen, that opens it or quits it,
+and the close dialog says so ("click Archie in the Dock, or its icon at the top right of the
+screen", `src/app/chrome.tsx`, also in `013ea140`). The approved wording and "Why it's true"
+above name the Dock alone, which is true of every released version, so they stay as written until a
+release carries the icon. The next entry is the claim.
+
+### 🚧 Open Archie from any app with a few keys, and from its icon in the Mac menu bar: BUILT 2026-10-18 (Archie `013ea140`), in no release, never pressed on a built app
+
+*Archie `649bbbb0` (the key press and the menu bar icon), `ef377ead` (the Settings row and the chat
+it opens) and `5157f93d` (starting the key press so that a computer refusing it never stops Archie
+opening), on the branch `parity-p2`, merged into main as `013ea140`, in no release. Nothing below
+may be said on a page until a release carries them. On the computer only: Archie Mobile has no
+half, and the boundaries say why.*
+
+Claude, Gemini, Copilot and Siri each open from wherever somebody is with one press, and until this
+Archie had to be found in the Dock or by the clock first (the Archie repo's
+`docs/CAPABILITY-PARITY.md`, row 2).
+
+**Approved wording, once it ships:** "Press Control, Shift, and Space on a Mac, or Ctrl, Alt, and
+Space on Windows, in any app, and Archie comes forward on the chat you last used, with the cursor in
+the message box, ready to type. Pick other keys, or turn it off, in Settings, General. On a Mac,
+Archie also has an icon in the menu bar at the top of the screen that opens it or quits it."
+
+**A second approved form, for a privacy page:** "The key press asks for no permission. Your computer
+tells Archie when those keys are pressed and nothing else you type."
+
+**Why it's true:**
+- **The press.** `src-tauri/src/shortcut.rs` registers one key combination through
+  `tauri-plugin-global-shortcut` 2.3 (`src-tauri/Cargo.toml`), which is a Carbon hot key on a Mac
+  (`RegisterEventHotKey`) and `RegisterHotKey` on Windows. Both deliver that one combination and no
+  other key, which is why neither computer asks for Accessibility or Input Monitoring. The one kind
+  of key that would need a permission on a Mac is a media key (the plugin watches those with an
+  event tap), and `parse_keys` refuses media keys for that reason. The window is given no access to
+  the plugin's own commands (`src-tauri/capabilities/default.json` is unchanged).
+- **What a press does.** The handler `shortcut::start` installs calls `shortcut::summon`, which brings
+  the window forward (`bring_to_front`: shown, unminimized, focused, also when it was hidden by
+  closing it or by opening at login) and tells the window. `useSummoned` in `src/app/App.tsx` moves
+  to the Chat tab of the agent last viewed (or keeps a room, when a room was the last conversation),
+  and `useMessageBoxAsk` (`src/app/summon.ts`, used by `src/app/conversation.tsx` and
+  `src/app/room.tsx`) puts the cursor in its message box. A press with no agent yet only brings the
+  window forward.
+- **The defaults, and why.** `DEFAULT_KEYS` in `shortcut.rs`: Control, Shift, and Space on a Mac;
+  Ctrl, Alt, and Space on Windows. The comment there lists what each one avoids: Option and Space
+  (Gemini, ChatGPT, Raycast, Alfred), Option twice (Claude), Command, Shift, and Space (Siri), the
+  Mac's own Spotlight, Finder search, emoji and keyboard-language presses, VoiceOver's Control and
+  Option, Alt and Space (every Windows program's window menu, and Copilot's), and Word's Ctrl, Shift,
+  and Space. Tested by `the_default_is_none_of_the_other_assistants_presses`.
+- **Changing it.** Settings, General, "Open Archie from any app" (`OpenKeysRow` in
+  `src/app/settings.tsx`): a switch, the keys drawn as keys with the names printed on them
+  (`keyCaps` in `src/app/open-keys.ts`: Control, Option, Command on a Mac; Ctrl, Alt on Windows),
+  Change keys (press the new ones), and a way back to the defaults. A press without Control, Option
+  or Command (Ctrl or Alt on Windows) is refused, because Shift and a letter is typing; so are
+  Escape, Tab, Return, Delete and Backspace, which every app already uses with a modifier. Both sides
+  check (`parse_keys` in Rust, `readPress` in TypeScript), tested in `shortcut.rs` and
+  `src/app/open-keys.test.mjs`.
+- **Saved on this computer, not on the account.** `open_shortcut.json` in Archie's data folder, read
+  at launch (`shortcut::start`). A missing or damaged file means the defaults, switched on. The
+  plugin is started there too rather than on the app's builder, so a computer that refuses it
+  leaves Archie opening normally without the key press.
+- **When another program holds the keys.** New keys another program holds change nothing: the old
+  keys are taken back and the row says why (`open_shortcut_set`). Saved keys the computer will not
+  take at launch leave the row saying "Another program on this computer is already using …, so
+  pressing them does not open Archie. Press Change keys and pick different ones."
+- **The menu bar icon.** `tray_icon` in `src-tauri/src/lib.rs` now builds on a Mac as well as on
+  Windows. On a Mac it is a template picture (`src-tauri/icons/menu-bar.png`, the A taken from the
+  app icon's own shape, which macOS draws dark on a light menu bar and light on a dark one), and a
+  click opens its menu: Open Archie, then Quit Archie, which asks first while an agent runs, as ⌘Q
+  does. Windows keeps its icon by the clock, opened by a click. On both, the keys are written beside
+  Open (`show_keys_in_tray`), so the menu also teaches them.
+- **Nothing reaches an agent.** No prompt text, tool or AI call changed. The press moves a window and
+  a cursor; what the owner then types costs what any message costs.
+
+**Boundaries:**
+- ⛔ **Never "Archie watches your keyboard", and never the reverse stretched past this feature.** It
+  hears one key combination. Do not turn the privacy form into "Archie never asks for permissions":
+  computer control, Text Replies and waking the computer each ask for one.
+- ⛔ **Never "even when Archie is closed".** The keys work while Archie is running, which includes a
+  closed window and opening at login, and not after quitting.
+- ⛔ **Never one set of keys for both computers.** A Mac's are Control, Shift, and Space; Windows' are
+  Ctrl, Alt, and Space; and either can be changed, so copy that names keys says "by default".
+- ⛔ **Never "a quick box" or "a small window".** Unlike Claude's Quick Entry or ChatGPT's companion
+  window, this brings Archie's own window forward on the chat. There is no floating box.
+- ⛔ **Never on the phone.** Archie Mobile is unchanged: a phone has no keys to press from another app,
+  and the parity rule leaves a difference the platform decides.
+- ⛔ **Never "hide the menu bar icon".** There is no switch for it in this version; it is there
+  whenever Archie runs on a Mac.
+- ⚠️ **A Mac may not notice that another app has the same keys.** Carbon hot keys are not exclusive,
+  so a press another app registered first can go to that app while Archie's row still reads as
+  working. The row's "Nothing happens when you press them?" says what to do. Windows reports it.
+- ⚠️ **Not yet seen on a built, signed app on either computer.** Tested in code, and the Settings row
+  was looked at in a browser with a stand-in backend. Nobody has pressed the keys in a signed,
+  notarized Archie, watched a recent macOS bring it forward from another app (macOS can decline to
+  bring an app forward), seen the menu bar icon in a real menu bar, or run any of it on Windows.
+  Copy may describe it once it ships and may not call it proven.
+- ⚠️ **What other assistants' keys are is background here, not a sourced claim.** The sentence
+  above about Claude, Gemini, Copilot and Siri, and the presses `DEFAULT_KEYS` was picked to avoid,
+  come from the Archie repo's parity notes and the comment in `shortcut.rs`, not from a row in the
+  competitor table. No page names another company's keys, or how its assistant opens, until that
+  table has a row read off the company's own page.
+- 📝 **The entry it extends needs one line.** "Archie keeps running when its window is closed" says a
+  Mac brings the window back from the Dock; once this ships, the menu bar icon is a second way, and
+  the close dialog already says so ("click Archie in the Dock, or its icon at the top right of the
+  screen", `src/app/chrome.tsx`). Written into that entry on October 18, 2026, as an amendment
+  that applies once a release carries this.
+
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
 **Approved wording:** "A routine set for seven in the morning arrives at seven, even if the
 computer was asleep. Archie asks the computer to wake a few minutes before, runs it, and lets it go
 back to sleep. The screen stays off."
+
+**Unproven until a whole night is watched, added October 18, 2026.** "Arrives at seven, even if
+the computer was asleep" and "The screen stays off" have never been seen on a real machine. The
+Archie repo's `docs/WAKE-CHECK.md` (Archie `22e90d1b`, merged as `4359e871`) is the runbook that
+proves or breaks them. Its test D, a whole night with a real 7:00 AM routine on a sleeping Mac, is
+the one this wording stands on, and every test there also writes down whether the screen lit up.
+Until test D passes on a real Mac, copy may describe the wake and may not call it proven.
 
 **And the setup sentence, which is different on each and must match the reader's machine:** on a
 Mac, "Setting it up asks for your password once, because only an administrator of a Mac may
@@ -7499,6 +7804,46 @@ was set up before the time it missed (`scheduled_since_ms`); one set up this aft
 blamed for this morning.
 - ⛔ Never "it never misses a routine". Past its window a slot is recorded as missed, not run.
 - ⚠️ Not yet watched across a real sleep, the same caution as the rest of this entry.
+
+### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), in no release
+
+*Archie `86cf4e2b` (the line, and a late run no longer called skipped), `22e90d1b` (the wake check
+runbook, `docs/WAKE-CHECK.md`) and `fc17fc9f`, on the branch `parity-p7`, merged into main as
+`4359e871`; archie-mobile `ebb7ac0` and `04f7c16`, merged as `7f564d0`. All on main and in no
+release. Nothing below may be said on a page until a release carries them, and the phone's line
+needs an Archie Mobile build with `7f564d0`.*
+
+**The claim:** "Archie tells you where your routines come from before anything is missed. The
+Routines tab, on the computer and in Archie Mobile, says: routines come from this computer, so
+leave it on and plugged in; one due while it is asleep runs when it wakes, as long as that is the
+same morning, afternoon, or evening."
+
+**Why it's true:**
+- The sentence is `ROUTINES_RUN_HERE` in `src/app/vocab.ts`, shown under the Routines tab's title
+  in `src/app/agent-detail.tsx`, and `routinesRunFrom` in archie-mobile's `src/steps.ts`, shown at
+  the top of `src/screens/Routines.tsx` with the computer's own name ("your Mac", "your PC").
+  archie-mobile's `src/steps.test.ts` holds the two to the same words.
+- "Runs when it wakes, as long as that is the same morning, afternoon, or evening" is
+  `missed_slot` and `catch_up_deadline_ms` in `crates/archie-runtime/src/gateway/routines.rs`:
+  noon for a morning, 6:00 PM for an afternoon, midnight for an evening, and never less than two
+  hours. The morning list uses the same window (`gateway/morning_list.rs`, until noon).
+- Three nearby sentences changed with it. The wake panel adds that a shut-down computer stays off
+  and to choose Sleep instead of Shut Down (`WAKE_NOT_FROM_OFF`). The reminders switch says a
+  reminder comes when the computer wakes if it was asleep (`reminders::message`'s late note). The
+  work board's line no longer says a missed routine is "skipped, not run late", which had been false
+  since the catch-up began running when Archie opens and when the computer wakes.
+
+**The boundaries:**
+- ⛔ Never "it never misses a routine". Past the window it is missed, and the row says so.
+- ⛔ The waking entry's approved wording ("arrives at seven, even if the computer was asleep", "The
+  screen stays off") is still unproven. `docs/WAKE-CHECK.md` is the runbook that proves or breaks
+  it; until test D there passes, copy may describe the wake and not call it proven.
+- ⚠️ **This entry governs what Archie says to an owner inside the app, not selling copy.** "Leave
+  it on and plugged in" is said to an owner, inside the app, about their own computer. The site
+  rule in "It works the hours your computer is on" ("never 'needs to stay on' ... as something the
+  reader must have") is about selling copy, and this entry does not loosen it. Each entry now says
+  which audience it governs, so the two do not read as contradicting.
+- ⚠️ The phone has no reminders switch, so the reminders sentence is on the computer only.
 
 ### ✅ One routine at several set times a day: BUILT 2026-09-28 (Archie b7c15696..8e30221b, then 6ec9c78a and 36e4b6e0 for 24 a day and chat; archie-mobile 8f9ae08 and 4e22fd9), SHIPPED in Archie 0.3.1 on September 29, 2026, the phone's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in Archie Mobile 1.0 (October 7, 2026)
 
@@ -8608,6 +8953,11 @@ neither may be said until a release carries it.
   clash. A reply's drafter is told about all-day entries, without their titles.
 - ⚠️ **Your calendars, never the other person's.** It cannot tell whether the person you are
   replying to is free.
+  *Added October 18, 2026:* still true of drafted replies, and it stays true after the next
+  release too. What is built on main (Archie `7d102231`, in no release) is a different lane: when
+  the agent works out a meeting time from chat, it can see other people's busy times on a work or
+  school Outlook account, or on a Google account connected to look only (the entry "Your agent can
+  put a place on an event and invite people to it", next). Never carry that over to drafted replies.
 - ❌ **One calendar on each connected account, never "every calendar".** Holidays, birthdays and
   calendars shared into a Google or Outlook account are not read, and on iCloud it is the first
   calendar the server lists. This entry said "every calendar the asker can see" until the reviewer
@@ -8625,6 +8975,135 @@ neither may be said until a release carries it.
   rules suggested typing "Never agree to a call without checking my calendar first" yourself. That
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
+
+### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), in no release
+
+*Archie `475b629c` on the branch `parity-p3`, merged into main as `7d102231`, and archie-mobile
+`a967c09`, merged as `1dc53da`; all on main and in no release, and never run against a real
+Google, Outlook or iCloud account. Nothing below may be said on a page until a release carries it,
+and the phone's whole sentence needs an Archie Mobile build with `1dc53da`. The wording is Jett's
+to approve.*
+
+**The claim, in the words somebody would say:**
+
+> When your agent sets up a meeting, it can put the place on it and invite people. Before anything
+> happens it shows you the change, with everyone who will get an invitation from your calendar,
+> by name and email address. Nobody hears anything until you say yes. If your agent wrote an
+> address it did not find in your mail, your lists, or what you told it, the proposal asks you to
+> check that address first. On a work or school Outlook account, your agent can also see when people
+> in your organization are busy and pick a time that suits everyone. Where it cannot see somebody's
+> calendar, it says so and offers you times to send them instead.
+
+**Why it's true**, all paths in the Archie repo unless named otherwise:
+
+- **A place and guests on every calendar Archie connects.** `NewEvent` carries `location` and
+  `attendees`, and `EventPatch` carries `location` and `add_attendees`
+  (`crates/archie-net/src/calendar/mod.rs`). Each provider writes them in its own words:
+  - Google (`calendar/google.rs`): `new_event_to_json` and `patch_to_json` write `location` and
+    `attendees`, and `send_updates` adds `sendUpdates=all` to the request only when somebody is
+    being invited, because Google sends no invitation unless it is told to.
+  - Outlook (`calendar/microsoft.rs`): `new_event_to_json` and `patch_to_json` write
+    `location.displayName` and each guest as a required attendee. Graph sends the invitation itself.
+  - iCloud and the other app-password calendars (`calendar/caldav.rs`): `render_new` and
+    `apply_patch` write `LOCATION`, the account's own address as `ORGANIZER`
+    (`CalDavCalendar::with_organizer`, set from the connected address in
+    `gateway/tools_calendar.rs` and `crates/archie-runtime/src/calendar.rs`), and each guest as an
+    `ATTENDEE` asked to reply. The calendar server sends the invitation.
+- **Adding a guest never drops one.** On a change, Google and Outlook take the whole guest list, so
+  each provider reads the event first and sends everyone already invited back with the new person
+  (Google keeps their answers exactly as Google gave them; Graph keeps its own). Somebody already
+  invited is not invited twice (`guests_to_add` in `calendar/mod.rs`). Nothing in this build
+  removes a guest.
+- **Nobody is invited before the owner's yes.** A create or a change with guests goes through the
+  same gate as every calendar change: `dispatch_calendar_tool` in
+  `crates/archie-runtime/src/gateway/tools_calendar.rs` stages it and touches no calendar, and
+  only `calendar_apply_pending_change`, on a later message a person typed, sends it. An unattended
+  routine gets `blocked_needs_user_confirmation`. See the entry "Calendar changes require your
+  confirmation"; this build adds no new way past it.
+- **The proposal names who and where.** `describe_calendar_mutation` writes the place ("The place
+  is Acme office, 12 Main St.") and `invite_sentence` writes "Dana Miller (dana@acme.test) and
+  mike@acme.test will get an invitation from your calendar." into the sentence the owner approves,
+  which is the sentence the Jobs tab and the phone show (the Confirm press quotes it too when it is
+  150 characters or fewer, `confirm_sentence` in `decide.rs`). On a change it names
+  only the people who will hear something new. The agent is told to say who, by name and address,
+  in the same message.
+- **An address the agent wrote itself is pointed out.** `emails_nobody_gave` in
+  `crates/archie-runtime/src/outbound.rs` checks each guest's address, as a whole address, against
+  what the person typed, what the turn has read (mail, lists, the calendar) and the notes Archie
+  wrote for that turn (`invite_sources` in `gateway/turn.rs`), and against the owner's own records:
+  every address on one of the agent's lists, the people the owner has written to in the last two
+  weeks (`email/correspondents.rs`), and the owner's connected accounts (`addresses_on_record` in
+  `tools_calendar.rs`). One found nowhere gets "Check ops@acme.test before you say yes: it is not in
+  your mail, your lists, or this conversation, so your agent may have guessed it." on the proposal
+  (`unsourced_note`). A second proposal on the same turn keeps the line, even though the first
+  proposal's own answer now quotes the address. A guest written as a name with no address is
+  refused before anything is proposed.
+- **Other people's busy times.** `CalendarProvider::busy` (`calendar/mod.rs`) answers busy or
+  could not see, per person, and never what the person is doing. Outlook asks Graph's
+  `getSchedule`, which the `Calendars.Read` and `Calendars.ReadWrite` permissions Archie already
+  asks for cover (`schedule_body`, `schedule_from_json`). Google asks `freeBusy` only under a scope
+  Google accepts for it (`FREE_BUSY_SCOPES`, `may_ask_free_busy`), and Archie's look-only Google
+  connect asks for one of them, `calendar.readonly`. The `people` field on `calendar_list_events`
+  appears only where the connected calendar can answer (`sees_others`), and an answer with anybody
+  unseen tells the agent never to call them free and to offer the owner times to send instead
+  (`others_busy`).
+- **The phone shows the same sentence whole.** Archie Mobile draws a waiting change's sentence with
+  no line limit, as the computer's Jobs tab does (`WHOLE_SENTENCE` in archie-mobile
+  `src/screens/Now.tsx`), so the guests are not cut off on the phone.
+- **Tests.** In `calendar/google.rs`, `calendar/microsoft.rs` and `calendar/caldav.rs`: each
+  provider's create and change bodies with a place and guests, guests already invited kept, Google's
+  `sendUpdates` only when inviting, the free/busy request and a recorded answer on each side
+  (busy, unseen and missing people told apart). In `tools_calendar.rs`: the proposal's exact words
+  with a place and guests, the serial comma, a bare name refused, the flagged address and its
+  second-proposal case, the busy answer in the owner's own time zone, and `people` only where it
+  can work. In `outbound.rs`: an address found only whole. In `sim.rs`: the harness calendar keeps a
+  place and guests.
+
+**The boundaries.**
+
+- ⛔ **Never "your agent sends invitations".** It proposes them. The calendar service sends each
+  one after the owner says yes in a later message, and an unattended routine cannot send one at all.
+  Say "invites people once you say yes".
+- ⛔ **Never "it checks the addresses" or "it won't invite the wrong person".** The check only says
+  where an address came from. An address found in mail or on a list can still be the wrong Dana,
+  and an address a stranger's email names ("please also invite sam@...") is not pointed out,
+  because it was read rather than made up. The owner reading the proposal is the check.
+- ⛔ **Never "finds a time that works for everyone" on Google.** Google does not let the scope Archie
+  asks for when it may change events (`calendar.events`) look up anyone's busy times. A Google
+  account connected to look only (`calendar.readonly`) can, and that account cannot make the
+  invitation. Giving accounts that change events a free/busy lookup means asking Google for one
+  more scope, which is a change to the app Google verified on October 16, 2026, and Jett's call.
+- ⚠️ **Outlook: work and school accounts, and the people their organization shares.** Graph refuses
+  the lookup on a personal Outlook.com account, and the agent then says it could not see anyone.
+  Somebody outside the organization is usually "could not see" too.
+- ⚠️ **Busy, never what.** It learns when somebody is busy, not what with. Tentative holds count as
+  busy, so a slot somebody penciled in is not offered.
+- ⚠️ **iCloud and the other app-password calendars invite through the calendar server**, which
+  iCloud and Fastmail do. A server without that stores the guests and tells nobody, and nothing here
+  can tell the difference first. No app-password calendar has been tried with guests. Never promise
+  an iCloud invitation until one has been sent and received.
+- ⚠️ **Adding someone to an existing meeting also tells the people already on it.** Google is told
+  to send updates to all guests on that change, and Outlook sends them itself. A change that adds
+  nobody behaves exactly as it did before this build.
+- ⚠️ **Still by hand:** taking somebody off an invitation, a video link, answering an invitation, and
+  an all-day or repeating event. The agent says so and names the calendar app to open.
+- ⚠️ **Drafted replies are unchanged.** The calendar check behind a drafted text or email reply
+  still reads only the owner's own calendars (the entry "Your calendar is checked before a reply or
+  a booking about a time"); its boundary "your calendars, never the other person's" still holds.
+- ⚠️ **The store's words can go out before the app does.** Calendar Manager 1.3.7 carries the new
+  store words and goes out with the next catalog push from Archie's main, and
+  `calendar-management.json` has no `min_app_version`, so nothing holds it back from 0.3.10, which
+  cannot invite anybody. If that push comes before a release carrying `7d102231`, the store says
+  something the app cannot do, and this site's store pages follow at the next
+  `scripts/sync-public-catalog.mjs`. Until a release carries the build, the old words on those pages
+  are the true ones. (Find a Time 1.4.8, in the same push, changes only what the agent is told, not
+  its store page.)
+- **What earlier claims got wrong, and what this replaces.** Until this build the Calendar Manager's
+  store page said a new or changed event "carries a title, a description, a start, and an end, and
+  nothing else", that guests and a location were "something you add in the calendar itself", and
+  that it "cannot tell you whether anyone else is free". All three were true then and are replaced
+  in Calendar Manager 1.3.7. Any page that repeats them goes stale with the release that carries
+  this build, and so does any claim that Archie cannot invite people.
 
 ### ✅ Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), RELEASED in 0.3.8, 2026-10-11
 

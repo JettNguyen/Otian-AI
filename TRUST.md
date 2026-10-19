@@ -11650,6 +11650,22 @@ All paths are in the Archie repo.
 - **The same on the phone.** The card and its buttons, and the after-call card, reach Archie Mobile
   through the sealed relay like every card, and a press there is the owner's press. The phone
   cannot switch calls on.
+- **What Bland is sent, and what comes back.** `call_request` in
+  `crates/archie-runtime/src/calls/bland.rs` is the whole body: the number, the voice's instructions
+  (`task`, with the card's questions and the owner's business name), the opening (`first_sentence`,
+  from the names typed beside the switch), the voicemail message, `record: false`, a summary prompt
+  and the card's id. What is read back (`report`) is how the call ended, its length and price, the
+  summary and the transcript, and the after-call card brings them into the chat, where the agent
+  reads them like the rest of the conversation. What Bland keeps is under Bland's terms. The key
+  is in the operating system's Keychain (`calls_connect` in `src-tauri/src/commands/calls.rs`).
+- **Not on the free starter credits, and on the plan with the AI included like everything else.**
+  `call_business` is `OwnKeyOnly` in `crates/archie-runtime/src/tool_policy.rs`, refused with
+  `calls::NEEDS_YOUR_OWN_KEY` and left off the belt on the trial (`on_someone_elses_credits` in
+  `crates/archie-runtime/src/email/poller.rs`). Unlike mail, it is not refused on the plan with the
+  AI included (`runs_through_otian` gates mail and texts only), so on that plan what the agent reads
+  from a call rides its AI requests through our server, unlogged. ⛔ Never say calls need an AI
+  account of your own. The privacy policy says both, and what Bland is sent, from October 19, 2026,
+  under "Phone calls to businesses, if you switch them on".
 
 **The boundaries:**
 - ⛔ Never "calls anyone", "calls your customers", "calls people for you", or any example of a call

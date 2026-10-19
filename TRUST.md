@@ -2158,8 +2158,10 @@ turned into words on your computer, and the answer is read out by a voice that r
   once the wording above is cleared. The same day fixed a fade that hid the last lines of a short answer
   (`a3c99e92`). Jett talked to the window's screen on October 6 on a dev build; the echo answer is
   not written down yet (Archie `docs/TEST-DAY.md`, item 4), so the wording above still waits.
-  *Added October 19, 2026, in no release yet:* talking over the agent is built on main (Archie
-  `c1622841`, archie-mobile `d22db43`), tested on recorded sound only. Once a person has used it,
+  *Added October 19, 2026, and amended the same day at the 0.3.11 release:* talking over the agent
+  is in 0.3.11 on the computer (Archie `c1622841`), its phone half (archie-mobile `d22db43`) waits
+  for the Archie Mobile build now being submitted, and it is tested on recorded sound only. Once a
+  person has used it,
   and not before, "On the phone a tap cuts it off; talking over it does not" becomes: "On the
   computer, talking over it cuts it off, and so does a click or the space bar. On the phone,
   talking over it does where the computer is new enough (`talk_cut_in`), and needs a raised
@@ -6428,7 +6430,7 @@ outcome, not an edge case.
 ### ✅ What your agent remembers about you, and what it lets go of (SHIPPED; entry written 2026-09-16)
 
 **Approved wording:** "Your agent keeps a short list of what it has learned about you, and you can
-read every line of it, add one, or delete one. It carries only what has come up lately; the rest is
+read every line of it, add one, change one, or delete one. It carries only what has come up lately; the rest is
 kept in a file it can look back at when something you say touches it."
 
 **Why it's true:** `crates/archie-runtime/src/memory.rs` holds two lanes in one small Markdown file,
@@ -6437,8 +6439,9 @@ lane is full, drops the oldest, which is a rule that can be said out loud: Archi
 you have not brought up in a long time. Since 2026-09-16 what it drops is written to an archive file
 beside it rather than destroyed, and a fact comes back into a conversation when a word in what you
 said matches it. The Memory panel on the agent's Knowledge tab shows every line with its month, has
-a cross on each to delete it, a Clear all, and a box to add one by hand
-(`agent_memory_add`, `agent_memory_remove`, `agent_memory_clear`).
+a cross on each to delete it, a pencil beside it that changes the line in place (from 0.3.11), a
+Clear all, and a box to add one by hand (`agent_memory_add`, `agent_memory_edit`,
+`agent_memory_remove`, `agent_memory_clear`).
 
 **The boundaries:**
 - ⛔ **Never say it remembers everything.** The carried lane is deliberately small, because it is
@@ -6450,13 +6453,13 @@ a cross on each to delete it, a Clear all, and a box to add one by hand
   it and no second AI call; it is word comparison against a file, which is exactly why it costs the
   owner nothing on the turns where nothing matches.
 
-**Amended October 18, 2026 (Archie `9c02805f`, in no release yet): a line can be changed in place.**
-Once a release carries it, the approved wording above reads "read every line of it, add one, change
-one, or delete one", and "Why it's true" adds `agent_memory_edit` (`src-tauri/src/commands/access.rs`)
-to the three commands it names: Change this, a pencil beside each line's cross on Memory, opens the
-line in a box, and the new words take the old one's place in the same section and position
-(`change_note` in `crates/archie-runtime/src/memory.rs`). Until then the wording above stays as
-written, because it is true of every released version. The next entry is the rest of that build:
+**Amended October 18, 2026 (Archie `9c02805f`), and applied October 19, 2026, at the 0.3.11 release
+that carries it: a line can be changed in place.** The approved wording above now reads "read every
+line of it, add one, change one, or delete one", and "Why it's true" names `agent_memory_edit`
+(`src-tauri/src/commands/access.rs`) beside the three commands it named: Change this, a pencil
+beside each line's cross on Memory, opens the line in a box, and the new words take the old one's
+place in the same section and position (`change_note` in `crates/archie-runtime/src/memory.rs`).
+Through 0.3.10 a line could only be added or deleted. The next entry is the rest of that build:
 bringing in what ChatGPT, Claude or Gemini knows.
 
 ### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
@@ -6542,8 +6545,9 @@ kept. Any line your agent remembers can be changed in place, as well as added or
 - ⚠️ **Archie only on the first screen.** Archie for Teams has it on Memory alone, because its first
   screen has no room for another card.
 - ⚠️ **On Archie Mobile, the owner's phone only, and only through the computer.** Built October 18,
-  2026 on the branch `parity-p1-phone` in both repos and merged (Archie `360e031c`, archie-mobile
-  `1c250d9`), in no release, and never yet opened on a real phone. Memory on the phone is reached
+  2026 on the branch `parity-p1-phone` in both repos and merged (Archie `360e031c`, in 0.3.11;
+  archie-mobile `1c250d9`, waiting for the Archie Mobile build now being submitted), and never yet
+  opened on a real phone. Memory on the phone is reached
   from the Memory row under the count on Documents (`src/screens/Manage.tsx` in archie-mobile) and
   is `src/screens/Memory.tsx` there: the same two sections, Change this and Forget this beside each
   line with Undo after either, Clear all, the box that adds a fact, and the same bring-in screen (the
@@ -6566,11 +6570,11 @@ kept. Any line your agent remembers can be changed in place, as well as added or
   simulator and never on a real phone against a real computer running Archie. Copy may describe it
   once it ships and may not call it proven.
 
-**Amending the memory entry above.** Its approved wording says "you can read every line of it, add
-one, or delete one". Once this is in a release, it reads "read every line of it, add one, change one,
-or delete one", and its "Why it's true" adds `agent_memory_edit` to the three commands it names.
-Written into that entry on October 18, 2026, as an amendment that applies once a release carries
-this.
+**Amending the memory entry above.** Its approved wording said "you can read every line of it, add
+one, or delete one". From 0.3.11 it reads "read every line of it, add one, change one, or delete
+one", and its "Why it's true" names `agent_memory_edit` beside the three commands it named. Written
+into that entry on October 18, 2026, as an amendment, and applied there on October 19, 2026, at the
+0.3.11 release.
 
 ### ✅ It can look back through your conversation for something you told it: BUILT 2026-09-25 (Archie `69b2e4ed` and `dd154236`), SHIPPED in Archie 0.3.1 on September 29, 2026
 
@@ -6606,7 +6610,7 @@ conversation you can scroll back through in Archie."
   that conversation. It is refused at dispatch anywhere else. A guest on a shared agent never gets
   it, including a guest allowed to act as the owner, and it never reads another person's
   conversation with the agent. *Added October 18, 2026:* this is about the agent's search. A
-  search box the person types in is built on main (Archie `e35220a1`, in no release), and on a
+  search box the person types in is in 0.3.11 (Archie `e35220a1`), and on a
   team each person's box searches only their own conversation; it is the next entry, and this
   line stays as written for the agent.
 - ⛔ **Never say it understands what you meant.** It matches words. A question worded differently
@@ -6873,18 +6877,20 @@ shapes, in the app's own colors. Drawn rather than pasted in: it stays sharp at 
 properly, and adds nothing to the app's size. Two honest constraints are in the code and may be
 described: a bar chart always has zero on it, because a bar's length is the value and a chart that
 starts somewhere else draws a 1% difference as a bar twice the height of its neighbor; and a pie
-refuses to draw a negative slice, listing the numbers instead. **Charts are a PDF thing.** A `.docx`
+refuses to draw a negative slice, listing the numbers instead. **A chart is drawn in a PDF and in the
+conversation, and nowhere else** (the conversation from 0.3.11: in Archie on the computer, and in
+Archie Mobile once a build with archie-mobile `cfb2bf9` is out; a chat app gets its numbers as a
+list). Until 0.3.11 this sentence read "Charts are a PDF thing." A `.docx`
 gets the figures written out rather than the picture, because Word takes a drawing as an image and
 making one would mean shipping a font file to put labels on it. Do not say "charts in documents";
 say PDF.
 
-**Amended October 18, 2026 (Archie `2234ec0c`, archie-mobile `cfb2bf9`, in no release yet): a
-chart is drawn in the conversation too.** Once a release carries it, "Charts are a PDF thing"
-reads: a chart is drawn in a PDF and in the conversation, in Archie and in Archie Mobile, and
-nowhere else; a chat app gets its numbers as a list. Until then the sentence stays as written,
-because it is true of every released version. Files do not change: a `.docx` still gets the
-figures written out, and "Do not say 'charts in documents'; say PDF" still holds. The entry
-after this one is the claim.
+**Amended October 18, 2026 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), and applied October 19,
+2026, at the 0.3.11 release: a chart is drawn in the conversation too.** "Charts are a PDF thing"
+above now says a chart is drawn in a PDF and in the conversation, and nowhere else; a chat app gets
+its numbers as a list. The phone's half waits for the Archie Mobile build now being submitted.
+Files do not change: a `.docx` still gets the figures written out, and "Do not say 'charts in
+documents'; say PDF" still holds. The entry after this one is the claim.
 
 **Corrected October 18, 2026: what a PDF pie does with a number at or below zero.** "A pie refuses
 to draw a negative slice, listing the numbers instead" is true only of a pie with nothing above
@@ -7015,9 +7021,9 @@ archie-mobile `parity-p4`: `041b4ec`, `1e97706`):
 - ⛔ **Never say a chart can be saved as a picture.** Copy gives the numbers. A chart in a file is the
   PDF, which is the existing claim; a Word document still gets the figures written out, not a
   picture ("Do not say charts in documents; say PDF" still holds for files).
-- ⚠️ **"Charts are a PDF thing" in the PDF entry is no longer true once this ships.** That sentence
-  should change to say a chart is drawn in a PDF and in the conversation, and nowhere else. The
-  entry above carries that as an amendment, dated October 18, 2026, for when a release carries this.
+- ⚠️ **"Charts are a PDF thing" in the PDF entry stopped being true with 0.3.11.** That sentence
+  now says a chart is drawn in a PDF and in the conversation, and nowhere else. The entry above
+  carries the amendment, dated October 18, 2026, and applied at the 0.3.11 release.
 - ⚠️ **An agent that cannot save files is not told about the block.** The sentence lives in
   `save_file`'s description, and a guest's conversation, onboarding, and an agent with saving files
   turned off do not carry that tool. Such an agent may still write one, and it draws, but it will not
@@ -7568,17 +7574,14 @@ Computer control" everywhere it used to say "under Websites", changed the same d
      backstop that matters most.
   5. **Two-factor is always a handover.** Every time, no code stored, no exceptions.
 - **The prompt says it as well, whatever is installed.** `NEVER_LINE` in
-  `crates/archie-runtime/src/gateway/prompt.rs` sits in every system prompt: the agent never makes
-  phone calls, sends texts of its own, pays for anything, or presses a button that finalizes a
-  purchase, booking or application. An agent with buying switched on gets `NEVER_LINE_BUYING` in
-  its place, which releases a purchase inside the owner's limits and nothing else.
-  *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
-  this becomes: "the agent never sends texts of its own, pays for anything, or presses a button
-  that finalizes a purchase, booking or application, and phones nobody but a business, from a card
-  the owner presses, on an agent with Call businesses switched on. An agent with buying switched on
-  gets `NEVER_LINE_BUYING` in its place, which releases a purchase inside the owner's limits and
-  nothing else; each line also says where calls stand (`Calls` in the same file)." Until then it
-  stays as written, because it is true of every released version.
+  `crates/archie-runtime/src/gateway/prompt.rs` sits in every system prompt: the agent never sends
+  texts of its own, pays for anything, or presses a button that finalizes a purchase, booking or
+  application, and phones nobody but a business, from a card the owner presses, on an agent with
+  Call businesses switched on. An agent with buying switched on gets `NEVER_LINE_BUYING` in its
+  place, which releases a purchase inside the owner's limits and nothing else; each line also says
+  where calls stand (`Calls` in the same file). *Applied October 19, 2026, at the 0.3.11 release,
+  which carries calls (Archie `6e8e5549`), from a note added the same day. Through 0.3.10 the line
+  said the agent never makes phone calls at all.*
 - **What it learns stays with the person.** `screen/routes.rs` records the click path that worked as
   role and accessible name, never selectors and never coordinates, learned per person and never
   shipped inside an add-on. **Only clicks are recorded, never typing**, because typed values are
@@ -7893,7 +7896,8 @@ answering again after a restart. You can turn that off in Settings."
 instead of closing it, and the first time on a computer it says where Archie went and how to quit.
 ⌘Q, the Archie menu's Quit and Quit on the Windows icon still ask first while an agent runs. A Mac
 brings the window back when Archie is clicked in the Dock (`RunEvent::Reopen` in
-`src-tauri/src/lib.rs`); Windows has an icon by the clock that opens it or quits (`tray_icon`).
+`src-tauri/src/lib.rs`), and from 0.3.11 from its icon in the menu bar too (`013ea140`, the next
+entry); Windows has an icon by the clock that opens it or quits (`tray_icon`).
 Opening at login is turned on once, the first time this version runs (`open_at_login_once`), and
 starts Archie with `--at-login`, which opens it with no window. Settings, General, "Open Archie at
 login" turns it off, and it stays off.
@@ -7911,12 +7915,12 @@ login" turns it off, and it stays off.
   asks before opening at login": it turns it on, then says so.
 - ⚠️ Not yet seen on a built app on either platform, and the Windows icon has never been drawn.
 
-**Amended October 18, 2026 (Archie `013ea140`, in no release yet): a second way back on a Mac.**
-Archie now has an icon in the Mac menu bar, at the top of the screen, that opens it or quits it,
-and the close dialog says so ("click Archie in the Dock, or its icon at the top right of the
-screen", `src/app/chrome.tsx`, also in `013ea140`). The approved wording and "Why it's true"
-above name the Dock alone, which is true of every released version, so they stay as written until a
-release carries the icon. The next entry is the claim.
+**Amended October 18, 2026 (Archie `013ea140`), and applied October 19, 2026, at the 0.3.11
+release: a second way back on a Mac.** From 0.3.11 Archie has an icon in the Mac menu bar, at the
+top of the screen, that opens it or quits it, and the close dialog says so ("click Archie in the
+Dock, or its icon at the top right of the screen", `src/app/chrome.tsx`, also in `013ea140`).
+"Why it's true" above names the icon now. The approved wording names the Dock alone, which is still
+true, so it stays as written; the next entry is the claim for the second way.
 
 ### 🚧 Open Archie from any app with a few keys, and from its icon in the Mac menu bar: BUILT 2026-10-18 (Archie `013ea140`), RELEASED in 0.3.11, 2026-10-19, never pressed on a built app
 
@@ -8016,11 +8020,11 @@ tells Archie when those keys are pressed and nothing else you type."
   come from the Archie repo's parity notes and the comment in `shortcut.rs`, not from a row in the
   competitor table. No page names another company's keys, or how its assistant opens, until that
   table has a row read off the company's own page.
-- 📝 **The entry it extends needs one line.** "Archie keeps running when its window is closed" says a
-  Mac brings the window back from the Dock; once this ships, the menu bar icon is a second way, and
-  the close dialog already says so ("click Archie in the Dock, or its icon at the top right of the
-  screen", `src/app/chrome.tsx`). Written into that entry on October 18, 2026, as an amendment
-  that applies once a release carries this.
+- 📝 **The entry it extends got one line.** "Archie keeps running when its window is closed" says a
+  Mac brings the window back from the Dock; from 0.3.11 the menu bar icon is a second way, and the
+  close dialog says so ("click Archie in the Dock, or its icon at the top right of the screen",
+  `src/app/chrome.tsx`). Written into that entry on October 18, 2026, as an amendment, and applied
+  there on October 19, 2026, at the 0.3.11 release.
 
 ### ✅ Waking the computer for a routine — SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)
 
@@ -8502,19 +8506,16 @@ programs talking to each other with nobody in the middle. Archie is one agent, a
 conversation it is in is the one with you. It is not awake between messages: it runs when you write
 to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
 runs in between. It cannot run code or a command on your computer. On a Mac it can use the apps
-you allow, and never a terminal. It cannot call or text, and it presses
-nothing that finishes something, on a website or anywhere else, unless you switched on buying and
-the order is inside your limits; drafts wait for your Send. And you can quit the app, because there
-is nowhere else it is running."
+you allow, and never a terminal. It cannot text, and it phones only a business, when you switched
+calls on and pressed Place the call. It presses nothing that finishes something, on a website or
+anywhere else, unless you switched on buying and the order is inside your limits; drafts wait for
+your Send. And you can quit the app, because there is nowhere else it is running."
 
-*Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
-and only on Jett's yes at that release, because this is approved wording: "It cannot call or text,
-and it presses nothing that finishes something, on a website or anywhere else, unless you switched
-on buying and the order is inside your limits; drafts wait for your Send." becomes "It cannot
-text, and it phones only a business, when you switched calls on and pressed Place the call. It
-presses nothing that finishes something, on a website or anywhere else, unless you switched on
-buying and the order is inside your limits; drafts wait for your Send." Until then the approved
-wording stays as written: it is true of every released version.
+*Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it (Archie
+`6e8e5549`), from a note added the same day.* Through 0.3.10 the sentence read "It cannot call or
+text, and it presses nothing that finishes something, on a website or anywhere else, unless you
+switched on buying and the order is inside your limits; drafts wait for your Send." A page that
+quotes it that way is stale from 0.3.11.
 
 **Why it's true, item by item:**
 
@@ -8523,7 +8524,7 @@ wording stays as written: it is true of every released version.
 | One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
 | Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
 | No code or command execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. **On a Mac, Computer control (0.3.4) can open and use an application the owner allowed.** It refuses Terminal and the other terminals, script editors, Automator, Shortcuts, Xcode and the code editors on its list, whatever the owner says (`REFUSED_APPS` in `screen/guard.rs`, application ids, so an unknown app is not on it), and it never presses Return, nor sends a line break as a key press (`macos::type_by_keys`), which is how a terminal runs what is typed. "It cannot run a program" became this row's wording that day, because opening an allowed application is running one. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
-| No calls, texts, or finalizing presses, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry). *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`), the claim cell becomes "No texts or finalizing presses, calls only to a business after a press, and purchases only when switched on", and this cell adds: "A call is placed only by the press on a `call_business` card, on an agent with Call businesses switched on (`calls::press`, the one function that dials, held there by `only_the_press_can_dial`), and only to a number `calls::business::may_call` accepts." Until then this row stays as written |
+| No texts or finalizing presses, calls only to a business after a press, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry). A call is placed only by the press on a `call_business` card, on an agent with Call businesses switched on (`calls::press`, the one function that dials, held there by `only_the_press_can_dial`), and only to a number `calls::business::may_call` accepts. *Applied October 19, 2026, at the 0.3.11 release, which carries calls (Archie `6e8e5549`); through 0.3.10 the claim cell read "No calls, texts, or finalizing presses, and purchases only when switched on".* |
 | No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
 | Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |
 | The switch is the owner's | Start and Stop per agent, and the app quits. It answers only while the computer is awake, Archie is open and the agent is started |
@@ -9181,13 +9182,23 @@ habit to a fact about what arrives over the wire, and a fact is the kind of thin
 
 ### ✅ Calendar changes require your confirmation — SHIPPED, enforced in code (was ⛔ until 2026-07-20)
 
-**Approved wording:** "When your agent wants to change a calendar you've connected — create,
-move, or delete an event — it proposes the exact change and applies it only after you approve
-it in a later message. Unattended routines can't apply calendar changes at all — they report
-what they would make instead of making it."
+**Approved wording, from 0.3.11** (applied October 19, 2026, from the amendment below): "When your
+agent wants to change a calendar you've connected (create, move, or delete an event), it proposes
+the exact change and applies it only after you approve it in a later message, unless you have
+pressed Yes, and stop asking: then it adds and moves events on your own calendar that nobody else
+is on without asking, tells you each one, and puts each on the Today line with Undo. Deleting an
+event, inviting someone, and changing an event other people are on always wait. Unattended
+routines can't apply calendar changes at all; they report what they would make instead of making
+it." Through 0.3.10 it read: "When your agent wants to change a calendar you've connected (create,
+move, or delete an event), it proposes the exact change and applies it only after you approve it
+in a later message. Unattended routines can't apply calendar changes at all; they report what they
+would make instead of making it."
 
 **Why it's true:** every calendar write is staged, never executed, on the turn that proposes
 it (`crates/archie-runtime/src/gateway/tools_calendar.rs:432-548`, staging and verbatim apply).
+The one exception, from 0.3.11, is a change covered by a kind the owner turned on (the entry on
+changes to your own calendar without asking, after this one), which is made on that turn and
+journaled with its undo.
 The apply/discard tools are only added to the tool set on a turn
 where a proposal is already pending, so the model *cannot* apply a change in the same message
 that proposed it (`tools_calendar.rs:311-327`; the prior-turn snapshot rule in
@@ -9217,10 +9228,11 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 - Keep the Trust page's honest-limit paragraph (an approval only protects you if you read it)
   wherever this claim anchors a section.
 
-**Amended October 19, 2026: a build in no release can stop the asking for one kind of change, so
-the pages carry a narrower claim from today.** Archie `bad38c32` (merged from the branch
-`parity-p8`, built as `18d19a2b` and `852ccc89`) and archie-mobile `c335b43` are on main, in no
-release, and have never run against a real Google, Outlook or iCloud account. After the owner has
+**Amended October 19, 2026: a build can stop the asking for one kind of change, so the pages carry
+a narrower claim from that day. Released in 0.3.11 the same day.** Archie `bad38c32` (merged from
+the branch `parity-p8`, built as `18d19a2b` and `852ccc89`) is in 0.3.11, archie-mobile `c335b43`
+waits for the Archie Mobile build now being submitted, and neither has run against a real Google,
+Outlook or iCloud account. After the owner has
 said yes to three changes on their own calendar, the next card carries a second yes, "Yes, and stop
 asking". Once the owner (or, on Archie for Teams, an admin) presses it, the agent adds and moves
 events on the owner's own main calendar at once, on a message the owner typed, when nobody else is
@@ -9230,21 +9242,14 @@ that clashes with another event, and a time whose zone is unclear all still wait
 and `lane` in `crates/archie-runtime/src/always_allow.rs`, tests
 `a_change_to_the_owners_own_calendar_that_invites_nobody_is_covered` and
 `everything_the_plan_excludes_still_asks`; the builder's full write-up is `docs/trust-entries/p8.md`
-in the Archie repo). The capability's own entry is not in this file yet. ⛔ **Until it is, and until
-a release carries the build, nothing about it may be said on a page.**
+in the Archie repo). The capability's own entry is the next one, written at the release; a page
+says it in that entry's words or not at all.
 
-- **From the release that carries `bad38c32`, the approved wording above is false as written**,
-  because a covered change is made on the turn that asks for it. The wording for that release, and
-  not before: "When your agent wants to change a calendar you've connected (create, move, or delete
-  an event), it proposes the exact change and applies it only after you approve it in a later
-  message, unless you have pressed Yes, and stop asking: then it adds and moves events on your own
-  calendar that nobody else is on without asking, tells you each one, and puts each on the Today
-  line with Undo. Deleting an event, inviting someone, and changing an event other people are on
-  always wait. Unattended routines can't apply calendar changes at all; they report what they would
-  make instead of making it." Its "Why it's true" then gains, after its first sentence: "The one
-  exception is a change covered by a kind the owner turned on (the entry on changes to your own
-  calendar without asking), which is made on that turn and journaled with its undo."
-- **What a page says now, true of 0.3.10 (which has no such switch) and of that release alike.**
+- **Applied at the 0.3.11 release, October 19, 2026.** The approved wording above was false as
+  written from that release, because a covered change is made on the turn that asks for it, so it
+  now carries the form this amendment set for that release, with the 0.3.10 form beside it, and its
+  "Why it's true" names the exception after its first sentence.
+- **What a page says, true of 0.3.10 (which has no such switch) and of 0.3.11 alike.**
   Jett's decision of October 18, 2026 was to ship the build and narrow the claim to what still has
   no off switch, and to change the site before the release. Where a page names the calendar:
   "Deleting an event, or changing one other people are on, waits for your yes." Where it says why
@@ -9252,17 +9257,140 @@ a release carries the build, nothing about it may be said on a page.**
   page shows the agent moving an event without naming who else is on it (the homepage's first act,
   and the walkthrough row in `README.md`), it says "Your agent finds an open time and moves it when
   you say so.", which is true of both builds: in 0.3.10 the saying is the yes on the proposal, and in
-  that release it is that yes or, once the owner has pressed Yes, and stop asking, the typed ask. A page that needs the move to wait for a yes names an event
+  0.3.11 it is that yes or, once the owner has pressed Yes, and stop asking, the typed ask. A page that needs the move to wait for a yes names an event
   somebody else is on, the way the homepage's approval figure moves the 2:00 with Dana. The
   routine sentence above ("Unattended routines can't apply calendar changes at all") is untouched
   and stays usable as it is.
-- ⛔ **Retired from the site on October 19, 2026, ahead of that release:** "calendar changes wait
+- ⛔ **Retired from the site on October 19, 2026, ahead of the 0.3.11 release:** "calendar changes wait
   for your yes" or "a calendar change applies only after you approve it" as a standing rule, and
   above all with "no setting turns that off", "neither can be turned off" or "no off switch" beside
   it. Both are true of 0.3.10 and false the day the release ships, and the site changes first.
 - ⚠️ **The narrowed form understates 0.3.10**, where every calendar change waits. That is the price
   of a sentence that is still true the day after the release, and it was chosen on purpose. Never
   "only deleted and shared events wait" either: that would be false today.
+
+### 🚧 Your agent can stop asking about changes to your own calendar, once you press Yes, and stop asking: BUILT 2026-10-18 (Archie `bad38c32`, archie-mobile `c335b43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build, never run against a real calendar account
+
+**Released in 0.3.11 on October 19, 2026, and named in its notes** ("Stop asking about your own
+calendar"). Checked the same day: `bad38c32` is an ancestor of the release commit `a016d540`.
+Archie Mobile's part (archie-mobile `c335b43`, the switch under More and the same button on a
+phone's card) waits for the Archie Mobile build now being submitted, so no page says the phone does
+it until that build is on the App Store. Written at the release from the builder's entry
+(`docs/trust-entries/p8.md` in the Archie repo), without its decision, which Jett made on October
+18, 2026 (ship it, and narrow the site's claim to what still has no off switch), and without its
+list of passages, which were changed before the release (the Calendar changes entry's amendment,
+the in-your-name row in the claims table, and the compare hub entry). The privacy policy says what
+it does to the Change your calendar permission from the same day.
+
+*Archie `18d19a2b` and `852ccc89` on the branch `parity-p8`, merged into main as `bad38c32`, and
+archie-mobile `228f270`, merged as `c335b43`. Every test fakes the calendar: it has never run
+against a real Google, Outlook or iCloud account.*
+
+**The claim, in the words somebody would say, Jett's to approve:**
+
+> After you have said yes to three changes on your own calendar, the card for the next one has a
+> second yes: Yes, and stop asking. Press it, and from then on your agent adds and moves events on
+> your own calendar without asking first, as long as nobody else is invited and nobody else is on the
+> event. It tells you each one, and each one is on the Today line with Undo, in Archie and in Archie
+> Mobile. Deleting an event, inviting someone, or changing an event somebody else is on still waits
+> for your yes, and so does every reply. To have it ask again, turn off Changes to your own calendar
+> under What it can do: on the agent's Setup tab in Archie, and under More in Archie Mobile. Nothing
+> turns this on by itself, and on Archie for Teams only the owner or an admin can press it.
+
+**Why it's true**, all paths in the Archie repo unless named otherwise:
+
+- **Which kinds there are, in one place.** `crates/archie-domain/src/always_allow.rs` holds
+  `AllowKind`, with one kind, `OwnCalendar`, and the words both apps draw. Which staged change a kind
+  could ever cover is `lane` in `crates/archie-runtime/src/always_allow.rs`: a match over every
+  `ProposalKind` with no catch-all arm, so a new kind of staged change does not compile until
+  somebody decides it. The calendar lane is the only one that may be covered; to-dos, lists and rows
+  (removing waits; adding and editing already happen at once), the CRM, connected services over
+  HTTP, add-ons, Drive and documents each say why not in the code. Test
+  `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`.
+- **To-dos needed no switch.** Adding a to-do and checking one off already happen at once with an
+  Undo on Todoist, Google Tasks and Task Manager (`ALREADY_AT_ONCE`, held true by test
+  `the_to_do_changes_the_plan_allows_already_happen_at_once`). Deleting one still waits.
+- **What a covered change is.** `calendar_kind` (runtime `always_allow.rs`) gives `OwnCalendar` only
+  when all of these hold: it adds or changes an event, never deletes one; the owner asked for it on a
+  message they typed (`owner_asked` in `crates/archie-runtime/src/gateway/tools_calendar.rs`: a
+  person typed it, the asker may change the agent's setup, and the asker is the owner); it names no
+  guest; nobody else is already on the event (`others_on` in `crates/archie-runtime/src/calendar.rs`,
+  read from the event itself, so an event that cannot be read is not covered); it is on the owner's
+  own main calendar, not a teammate's account, a shared account or another calendar inside the
+  account (`own_main_calendar`); it does not overlap another event; and the time it was given leaves
+  no doubt about the time zone (`zone_unsure`). Tests
+  `a_change_to_the_owners_own_calendar_that_invites_nobody_is_covered` and
+  `everything_the_plan_excludes_still_asks`.
+- **Nothing turns on by itself.** A yes to a covered change is counted (`note_yes`, called from
+  `calendar_apply_pending_change` only when every change in the batch was covered and the owner
+  asked), and the count does one thing: from the third, the card carries the button (`offer`,
+  `OFFER_AFTER = 3`). Turning it on is `press`, run in the gateway's tap handler
+  (`crates/archie-runtime/src/gateway/worker.rs`) on a press of the one button whose `allows` field
+  is set, and only code sets it (`stop_asking_choice` in `crates/archie-runtime/src/decide.rs`; the
+  model's own buttons are read by `parse_offer`, which ignores the field, test
+  `stop_asking_is_a_yes_that_only_code_can_put_on_a_card`). Typing "yes, and stop asking" says yes to
+  that change and turns nothing on. A file that cannot be read turns nothing on. Tests
+  `the_card_offers_to_stop_asking_after_three_yeses_and_nothing_turns_on_by_itself` and
+  `a_damaged_file_turns_nothing_on`. The switch on both screens only turns off.
+- **Who can press it.** `press` refuses anyone who may not change the agent's setup (the owner and
+  admins may, `may_reconfigure`), puts the card back, and says "Only the owner or an admin can stop
+  the asking. Confirm says yes to this one change." A teammate's own request is never covered, so it
+  is staged and waits as before even with the switch on, and so is an admin's (`owner_asked`). Tests
+  `only_the_owner_or_an_admin_can_turn_one_on` and
+  `a_teammates_request_still_waits_with_the_permission_on`.
+- **Made at once, with an Undo.** With the switch on, `made_at_once` in `tools_calendar.rs` makes the
+  change on that turn and keeps how to put it back: a new event is taken off (`calendar_take_off`),
+  and a changed one gets back the fields it had (`calendar_put_back`). The turn files it on the
+  journal as `calendar_change_made` (`crates/archie-domain/src/journal.rs`: `effect_of`, `describe`
+  as "Calendar: ...", and `reversal_for`, which accepts those two undos and nothing else), from the
+  hook in `crates/archie-runtime/src/gateway/turn.rs`, so it is on the Today line
+  (`crates/archie-runtime/src/today.rs`) and in the Jobs tab. Undo runs through
+  `src-tauri/src/journal.rs` (`calendar_for_undo`) into `undo_step` in
+  `crates/archie-runtime/src/calendar.rs`, which reads the event first and refuses if somebody else
+  is on it by then, rather than send them a cancellation. Archie Mobile's Undo sends the same
+  `undo_step` op. Tests `an_allowed_change_is_made_at_once_and_is_on_today_with_an_undo` and
+  `an_allowed_move_goes_back_as_it_was`.
+- **The reply says it.** The tool's answer tells the agent the change is done and to say in one
+  sentence what it changed, and the record the next turn reads says "Made without asking: ..."
+  (`crates/archie-runtime/src/gateway/ran.rs`). The undo itself is kept out of what the agent reads
+  (`split_made`, test `the_undo_stays_out_of_what_the_model_reads`).
+- **Taking it back.** What it can do on the agent's Setup tab has a Done without asking group with
+  one switch per kind (`src/app/agent-detail.tsx`, from `agent_without_asking_get` and
+  `agent_without_asking_stop` in `src-tauri/src/commands/mod.rs`, which writes the audit event
+  `agent.without_asking_stopped`). Archie Mobile has the same group under More
+  (`src/screens/WithoutAsking.tsx` in archie-mobile), over the relay ops `without_asking` and
+  `without_asking_stop` (`src-tauri/src/phone.rs`, capability flag `without_asking`). Turning one off
+  asks first again from the very next change and starts the count over (`take_back`, test
+  `taking_one_back_asks_again_and_starts_the_count_over`).
+- **Unattended work is untouched.** A routine gets no `ConfirmCtx`, so its calendar write is still
+  blocked and reported, switch or no switch. A turn that arriving mail starts is one nobody typed, so
+  `owner_asked` is false and its change waits for a yes as before.
+- **No cost on an ordinary turn.** Nothing here is prompt text. The lines said under a reply about
+  the switch are added after the reply is stored, so the agent never reads them.
+
+**The boundaries:**
+
+- ⛔ **Never "always allow", "auto-approve" or "trust mode"** as a description. It is one kind of
+  change, on the owner's own calendar, with nobody else on it.
+- ⛔ **Never "you can turn off the asking"** unscoped. Invitations, deletions, events other people
+  are on, replies, texts, the CRM, purchases and add-ons all still wait, and no setting changes that.
+- ⛔ **Never "it learns what you approve" or "it decides when to stop asking."** Code counts three yeses
+  and offers a button; only the press turns it on.
+- ⛔ **Never "on every calendar."** The owner's own main calendar only: not a second calendar inside
+  the account, not a shared account, not a teammate's.
+- ⛔ **Never "a teammate can let it stop asking."** Only the owner or an admin can press it, and a
+  teammate's request always waits.
+- ⚠️ **It is per agent.** Turning it on for one agent changes nothing for the others.
+- ⚠️ **A change that overlaps another event, or whose time zone is unclear, still asks**, so "every
+  change to your own calendar" is wrong even with the switch on.
+- ⚠️ **Undo can refuse.** If somebody has been added to the event since, Undo says to change it in
+  the calendar instead, so never "Undo always puts it back".
+- ⚠️ **Not run on a real account.** Every test fakes the calendar.
+- ⚠️ **The phone's half waits for its build.** Until the Archie Mobile build now being submitted is
+  on the App Store, the switch that makes it ask again is on the computer only, and copy names the
+  Setup tab alone.
+- ⚠️ **"The Today line" is the line over the message box**, which is what the 0.3.11 notes call it
+  ("with Undo over the message box").
 
 ### ✅ Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
 
@@ -9315,11 +9443,12 @@ neither may be said until a release carries it.
   clash. A reply's drafter is told about all-day entries, without their titles.
 - ⚠️ **Your calendars, never the other person's.** It cannot tell whether the person you are
   replying to is free.
-  *Added October 18, 2026:* still true of drafted replies, and it stays true after the next
-  release too. What is built on main (Archie `7d102231`, in no release) is a different lane: when
-  the agent works out a meeting time from chat, it can see other people's busy times on a work or
-  school Outlook account, or on a Google account connected to look only (the entry "Your agent can
-  put a place on an event and invite people to it", next). Never carry that over to drafted replies.
+  *Added October 18, 2026:* still true of drafted replies, and still true in 0.3.11. What 0.3.11
+  carries (Archie `7d102231`) is a different lane: when the agent works out a meeting time from
+  chat, it can see other people's busy times on a work or school Outlook account, on a Google
+  account connected to look only, or on a Google account connected to change events since 0.3.11
+  (the entry "Your agent can put a place on an event and invite people to it"). Never carry that
+  over to drafted replies.
 - ❌ **One calendar on each connected account, never "every calendar".** Holidays, birthdays and
   calendars shared into a Google or Outlook account are not read, and on iCloud it is the first
   calendar the server lists. This entry said "every calendar the asker can see" until the reviewer
@@ -9388,8 +9517,8 @@ to approve.*
   `crates/archie-runtime/src/gateway/tools_calendar.rs` stages it and touches no calendar, and
   only `calendar_apply_pending_change`, on a later message a person typed, sends it. An unattended
   routine gets `blocked_needs_user_confirmation`. See the entry "Calendar changes require your
-  confirmation"; this build adds no new way past it. (October 19, 2026: Archie `bad38c32`, on main
-  and in no release, lets the owner press Yes, and stop asking for changes to their own calendar.
+  confirmation"; this build adds no new way past it. (October 19, 2026: Archie `bad38c32`, in
+  0.3.11, lets the owner press Yes, and stop asking for changes to their own calendar.
   It does not change this. A change that names a guest, or touches an event somebody else is on,
   is never covered (`calendar_kind` in `crates/archie-runtime/src/always_allow.rs`), so a guest
   always means a yes.)
@@ -9415,8 +9544,10 @@ to approve.*
   could not see, per person, and never what the person is doing. Outlook asks Graph's
   `getSchedule`, which the `Calendars.Read` and `Calendars.ReadWrite` permissions Archie already
   asks for cover (`schedule_body`, `schedule_from_json`). Google asks `freeBusy` only under a scope
-  Google accepts for it (`FREE_BUSY_SCOPES`, `may_ask_free_busy`), and Archie's look-only Google
-  connect asks for one of them, `calendar.readonly`. The `people` field on `calendar_list_events`
+  Google accepts for it (`FREE_BUSY_SCOPES`, `may_ask_free_busy`): the look-only Google connect asks
+  for one of them, `calendar.readonly`, and from 0.3.11 (merge `91bc6d75`) a connect that can change
+  events asks for `calendar.events.freebusy` beside `calendar.events` (`google_calendar_scopes` in
+  `crates/archie-domain/src/automation.rs`). The `people` field on `calendar_list_events`
   appears only where the connected calendar can answer (`sees_others`), and an answer with anybody
   unseen tells the agent never to call them free and to offer the owner times to send instead
   (`others_busy`).
@@ -9441,26 +9572,25 @@ to approve.*
   where an address came from. An address found in mail or on a list can still be the wrong Dana,
   and an address a stranger's email names ("please also invite sam@...") is not pointed out,
   because it was read rather than made up. The owner reading the proposal is the check.
-- ⛔ **Never "finds a time that works for everyone" on Google.** Google does not let the scope Archie
-  asks for when it may change events (`calendar.events`) look up anyone's busy times. A Google
-  account connected to look only (`calendar.readonly`) can, and that account cannot make the
-  invitation. Giving accounts that change events a free/busy lookup means asking Google for one
-  more scope, which is a change to the app Google verified on October 16, 2026, and Jett's call.
-  **Amended October 19, 2026, in no release yet:** Jett made that call. Archie `d45f9adc`, merged into main
-  as `91bc6d75` on October 18, 2026, has a Google connect that may change events ask for
-  `calendar.events.freebusy` as well as `calendar.events` (`google_calendar_scopes` in
-  `crates/archie-domain/src/automation.rs`, test
+- ⛔ **Never "finds a time that works for everyone" on Google for an account connected before
+  0.3.11.** `calendar.events` alone does not let Google look up anyone's busy times. Jett added
+  `calendar.events.freebusy` to the verified app, and from 0.3.11 a Google connect that may change
+  events asks for it beside `calendar.events`; an account connected earlier sees others' busy times
+  only after the owner reconnects it (on the Connections tab, under Email, calendar, files, press
+  Reconnect, as the 0.3.11 notes say). It shows busy or free, never what anyone's events are, and
+  only where Google shows that person. The claim is "on a Google account connected or reconnected
+  since this update", never "on any Google account". A Google account connected to look only
+  (`calendar.readonly`) could already ask and cannot make the invitation; it asks for nothing new.
+  *Applied October 19, 2026, at the 0.3.11 release, from an amendment of the same day:* Archie
+  `d45f9adc`, merged into main as `91bc6d75` on October 18, 2026, has a Google connect that may
+  change events ask for `calendar.events.freebusy` as well as `calendar.events`
+  (`google_calendar_scopes` in `crates/archie-domain/src/automation.rs`, test
   `a_google_connect_that_changes_events_can_also_see_who_is_busy`; the build plan held the merge
-  for Jett's check in Google's Cloud console that the scope does not reopen that verification).
-  It is the narrowest scope Google accepts for the lookup, and `FREE_BUSY_SCOPES` in
-  `crates/archie-net/src/calendar/google.rs` already counts it. So from the release that carries
-  `91bc6d75`, a Google account connected to change events can see when other people are busy,
-  **once the owner connects it again**: an account connected before that release keeps the grant it
-  was given, which cannot do the lookup, until it is reconnected. Until that release the boundary
-  above stands as written. ⚠️ For that release the claim is "on a Google account connected or
-  reconnected since this update", never "on any Google account". The look-only connect asks for
-  nothing new. The other boundaries still hold: busy, never what, and "could not see" for anybody
-  whose calendar Google will not show.
+  for Jett's check in Google's Cloud console that the scope does not reopen that verification). It
+  is the narrowest scope Google accepts for the lookup, and `FREE_BUSY_SCOPES` in
+  `crates/archie-net/src/calendar/google.rs` already counts it. Through 0.3.10 this boundary read
+  "Never 'finds a time that works for everyone' on Google", because an account that could change
+  events could not do the lookup at all. The privacy policy names the permission from the same day.
 - ⚠️ **Outlook: work and school accounts, and the people their organization shares.** Graph refuses
   the lookup on a personal Outlook.com account, and the agent then says it could not see anyone.
   Somebody outside the organization is usually "could not see" too.
@@ -9478,20 +9608,28 @@ to approve.*
 - ⚠️ **Drafted replies are unchanged.** The calendar check behind a drafted text or email reply
   still reads only the owner's own calendars (the entry "Your calendar is checked before a reply or
   a booking about a time"); its boundary "your calendars, never the other person's" still holds.
-- ⚠️ **The store's words can go out before the app does.** Calendar Manager 1.3.7 carries the new
-  store words and goes out with the next catalog push from Archie's main, and
-  `calendar-management.json` has no `min_app_version`, so nothing holds it back from 0.3.10, which
-  cannot invite anybody. If that push comes before a release carrying `7d102231`, the store says
-  something the app cannot do, and this site's store pages follow at the next
-  `scripts/sync-public-catalog.mjs`. Until a release carries the build, the old words on those pages
-  are the true ones. (Find a Time 1.4.8, in the same push, changes only what the agent is told, not
-  its store page.)
+- ⚠️ **The store's words went out with the release.** Archie `3870ddf5` held Calendar Manager's
+  invitation words back (1.3.8 carried the 0.3.10 text), and 0.3.11's own commit put them back as
+  Calendar Manager 1.3.9 (`a016d540`). This site's store pages were synced from the public catalog
+  on October 19, 2026 and carry 1.3.9's words, and the hand-written page at
+  `skills-marketplace/browse/skills/calendar-management/` was rewritten the same day in this entry's
+  words and the Calendar changes entry's. `calendar-management.json` has no `min_app_version`, so a
+  computer still on 0.3.10 shows the same words for a skill that cannot invite anybody there until
+  it updates. (Find a Time 1.4.8 changes only what the agent is told, not its store page.)
+- ⚠️ **Two of 1.3.9's sentences are not right for 0.3.11, and they are fixed in the Archie repo, then
+  synced, never on a generated page here.** "Every create, update, and delete is a proposal you
+  approve in chat first; nothing lands on your calendar until you say yes", and the short
+  description's "every create, change, or delete is written up for you to approve before it
+  happens", are the standing rule retired on October 19, false once the owner presses Yes, and stop
+  asking. "A Google account connected to change events cannot see anyone's" is false of an account
+  connected or reconnected since 0.3.11. Found at the October 19 sync; open until a Calendar
+  Manager after 1.3.9 is published.
 - **What earlier claims got wrong, and what this replaces.** Until this build the Calendar Manager's
   store page said a new or changed event "carries a title, a description, a start, and an end, and
   nothing else", that guests and a location were "something you add in the calendar itself", and
   that it "cannot tell you whether anyone else is free". All three were true then and are replaced
-  in Calendar Manager 1.3.7. Any page that repeats them goes stale with the release that carries
-  this build, and so does any claim that Archie cannot invite people.
+  in Calendar Manager 1.3.7, which went out as 1.3.9 with 0.3.11. Any page that repeats them is stale
+  from that release, and so is any claim that Archie cannot invite people.
 
 ### ✅ Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), RELEASED in 0.3.8, 2026-10-11
 
@@ -10263,16 +10401,16 @@ add: "A reply with a blank still in it won't send until you fill it in."
 
 | Claim | Status |
 |---|---|
-| "Archie asks before it changes anything in your calendar." | ✅ **True now** (two-turn gate). ⛔ **False unscoped from the release that carries Archie `bad38c32`** (on main October 19, 2026, in no release yet), where a change on the owner's own calendar that nobody else is on is made at once once the owner presses Yes, and stop asking; see the Calendar changes entry's amendment. Off the site from October 19, 2026, ahead of that release. Use "Archie asks before it deletes an event or changes one somebody else is on", true now and then. |
+| "Archie asks before it changes anything in your calendar." | ✅ **True of 0.3.10 and earlier** (two-turn gate). ⛔ **False unscoped from 0.3.11** (released October 19, 2026, carrying Archie `bad38c32`), where a change on the owner's own calendar that nobody else is on is made at once once the owner presses Yes, and stop asking; see the Calendar changes entry and the entry after it. Off the site from October 19, 2026, ahead of that release. Use "Archie asks before it deletes an event or changes one somebody else is on", true of both. |
 | "Nothing reaches Gmail until you tap Send." | ⛔ **Banned 2026-08-31.** A scheduled send leaves with no tap. Use "nothing leaves your account until you send it or set a time." |
 | "Nothing leaves your account until you send it or set a time." | ✅ **True now** (single-caller send path; a timed send cannot be armed by the agent) |
 | "Archie cannot spend your money." | ⛔ **Retired 2026-09-24.** Buying is a switch the owner can turn on, and the site now says so. Use the Buying entry's wording: "Buys only if you switch it on, only at shops you pick, only up to a limit you set." |
 | "Works while you sleep. Checks in before it acts." | ✅ Defensible now: unattended writes are blocked, reported instead |
 | "Every Skill tells you what it can do before you install it — including what it can delete." | 🚧 Still Phase 3 |
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
-| **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) (⚠️ October 19, 2026: calendar changes too, once the owner turns it on. From the release that carries Archie `bad38c32`, in no release yet, a new or moved event on the owner's own main calendar that nobody else is on happens at once, with an undo, after the owner presses Yes, and stop asking. This row's own scope, a reply that reaches somebody else, is untouched, because a covered change reaches nobody.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
+| **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) (⚠️ October 19, 2026: calendar changes too, once the owner turns it on. From 0.3.11, which carries Archie `bad38c32`, a new or moved event on the owner's own main calendar that nobody else is on happens at once, with an undo, after the owner presses Yes, and stop asking. This row's own scope, a reply that reaches somebody else, is untouched, because a covered change reaches nobody.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 | **"Replies and calendar moves wait for your yes."** | ✅ **True now (0.3.1), and the homepage heading (`#mine-heading`) since 2026-09-29**, narrowed from the lists form below the same day at Jett's ruling. A reply that reaches somebody else waits: the row above holds the code pointers. A calendar move waits: the Calendar changes entry above (`tools_calendar.rs`, staged on the turn that proposes it and applied only on a later one). The figure under the heading draws those two lanes and no third, and the line under it, "No setting turns that asking off", is scoped by this heading and says nothing without it. The four blog posts that carried the lists form now carry this one (`your-ai-agents-messages-go-out-under-your-name`, `say-maybe-to-your-ai-and-it-hears-do-it`, `your-ai-agent-should-bother-you-more-not-less`, `ai-built-my-workout-program`). ⛔ Never shorten it to "everything waits for your yes", and never let it stand for a purchase, which the Buying entry says it must never cover. The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." ⛔ **Retired from the site October 19, 2026**, ahead of the release that carries Archie `bad38c32`, in which a calendar move on the owner's own calendar can stop waiting, so the heading and "No setting turns that asking off" under it would both be false that day. The homepage, the personal edition page, the four blog posts and every other page that carried this form or its "calendar changes" twin now carry the row below. |
-| **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true now (0.3.10), and true from the release that carries Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); and, on the calendar, deleting an event or changing one somebody else is on (the Calendar changes entry). **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one built since, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in that build reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from the release that carries `7d102231` and not before**, because 0.3.10 cannot invite anybody, an invitation may join the list: "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking, and never describe the switch: it is in no release, and its own entry is not written. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; three narrations wait on Jack, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`), a call fits this claim: the voice says it is calling for the owner, and nothing dials until the owner presses Place the call on its card, which no setting skips (`calls::press`, held by `only_the_press_can_dial`; `always_allow.rs` has no lane for calls). Until that release no form above names a call, and a call joins "What waits" only then, on Jett's yes. |
+| **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true of 0.3.10, and true of 0.3.11, released the same day with Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); on the calendar, deleting an event, inviting anyone (from 0.3.11, the first release that can invite), or changing one somebody else is on (the Calendar changes entry); and, from 0.3.11 on an agent with Call businesses switched on, a phone call to a business, which dials only when the owner presses Place the call on its card. **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one 0.3.11 carries, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in 0.3.11 reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from 0.3.11, which carries `7d102231`**, an invitation may join the list (0.3.10 cannot invite anybody, so a page that names 0.3.10 leaves it out): "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking. The switch is described only in its own entry's words ("Your agent can stop asking about changes to your own calendar", after the Calendar changes entry), written at the 0.3.11 release. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; three narrations wait on Jack, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. *Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it, from a note added the same day:* a call fits this claim. The voice says it is calling for the owner, and nothing dials until the owner presses Place the call on its card, which no setting skips (`calls::press`, held by `only_the_press_can_dial`; `always_allow.rs` has no lane for calls), so a call is in "What waits" above. No form above names a call; a page that wants to say so uses the calls entry's own words. |
 | **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
@@ -11306,14 +11444,13 @@ intention:
    line now says it needs Computer control, and Buying under it, switched on in Archie on the
    computer, on the agent's Connections tab, and that even then a purchase waits for the owner's tap,
    only at shops they list, within limits they set (`NEVER_LINE_OFF` in the gateway's `prompt.rs`).
+   With calls off as well, the same sentence names Call businesses on the Setup tab beside it
+   (`NEVER_LINE_OFF_CALLS_OFF`), and says both are switched on on the computer.
    It names the computer only, per the boundary on the phone below. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
    (`the_shipped_state_buys_nothing`) holds it there.
-   *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
-   add after "(`NEVER_LINE_OFF` in the gateway's `prompt.rs`)": "With calls off as well, the same
-   sentence names Call businesses on the Setup tab beside it (`NEVER_LINE_OFF_CALLS_OFF`), and says
-   both are switched on on the computer." The sentence "in Archie on the computer, on the agent's
-   Connections tab" stays true of the line an agent reads with calls on. Until then this stays as
-   written.
+   *Applied October 19, 2026, at the 0.3.11 release, which carries calls (Archie `6e8e5549`), from
+   a note added the same day:* the sentence on calls off is new in that release. "In Archie on the
+   computer, on the agent's Connections tab" stays true of the line an agent reads with calls on.
 2. **It still cannot type a card you pay with, ever, switch or no switch.** `guard::typing_stop`
    refuses any field whose `autocomplete` is a `cc-` value, and any whose name says card, and hands
    the window to the person; buying does not touch it. Since 2026-10-02 a name that says gift card,
@@ -11545,13 +11682,14 @@ All paths are in the Archie repo.
   with `data/calls/time-zones-by-area-code.txt`). When neither says (a toll-free number, say), a call
   waits for an hour that is inside 8:00am to 9:00pm in every US and Canada zone at once, Hawaii to
   Newfoundland (`EVERYWHERE` in `zone.rs`), which is 2:00pm to 7:30pm Eastern from March to November
-  and 1:00pm to 7:30pm the rest of the year. Archie `ccdb459b`, on main and in no release.
-- ⚠️ **Two in-app guides go out before the app does.** "What your agent will never do"
-  (`what-it-will-not-do.json`) and "What Archie connects to" (`what-archie-connects-to.json`) were
-  changed with the code, and a guide reaches installed apps with the next push to Archie's main, with
-  no release (the entry "Where your information goes" says why). Neither has a `min_app_version`, so
-  after that push 0.3.10 tells its owners about a Call businesses switch it does not have. Until a
-  release carries `6e8e5549`, the old guide words are the true ones.
+  and 1:00pm to 7:30pm the rest of the year. Archie `ccdb459b`, in 0.3.11.
+- ⚠️ **Two in-app guides reach every installed Archie, 0.3.10 included.** "What your agent will
+  never do" (`what-it-will-not-do.json`) and "What Archie connects to"
+  (`what-archie-connects-to.json`) were changed with the code, held at the 0.3.10 text (Archie
+  `d8f59c58`), and put back by 0.3.11's own commit (`a016d540`). A guide reaches installed apps with
+  the push to Archie's main, with no release (the entry "Where your information goes" says why), and
+  neither has a `min_app_version`, so a computer still on 0.3.10 reads about a Call businesses switch
+  it does not have until it updates. Updated October 19, 2026, at the release.
 - ⚠️ **Never seen on a real call.** The first real call should be Jett's, to a business that knows
   it is coming, with the after-call card checked against what was said.
 - ⚠️ The Bland steps on the panel (make an account, add credit, copy the key from Settings) are
@@ -11562,14 +11700,13 @@ All paths are in the Archie repo.
   only if it is a business's line". Say "businesses only", never "it can tell a business from a
   person".
 
-**What earlier versions of the claim got wrong.** Every page and entry below says Archie never makes
-calls, which stops being true once this ships. They are true of every agent with calls off, which is
-the default, so none of them is wrong today; each needs the replacement in the same release as the
-switch.
+**What earlier versions of the claim got wrong.** Every page and entry below said Archie never makes
+calls, which stopped being true with 0.3.11. They were true of every agent with calls off, which is
+the default, and each took its replacement at that release.
 
-**Replacements for passages that promise no calls.** Each is a dated note at its passage, applied
-at the release that carries calls and not before, because the passage is true of every released
-version:
+**Replacements for passages that promised no calls.** Each was a dated note at its passage, and
+each was applied on October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it,
+which is also the yes item 2 needed:
 1. "Websites: the agent using a site itself", the bullet on the prompt (`NEVER_LINE`).
 2. "What it structurally cannot do", the approved positioning wording ("It cannot call or
    text"). This one is approved wording, so its replacement needs Jett's yes.
@@ -11583,17 +11720,24 @@ The `faq/index.html:461` sentence "It cannot call, text, spend, or press a butto
 cap entry's list, is no longer on the page (the FAQ was rewritten since), so that record stands as
 history and needs no change.
 
-**On the site, outside TRUST.md.** Read, not edited, October 18, 2026, and checked again October
-19, 2026 at the same lines; each changes at the release, not before:
+**On the site, outside TRUST.md.** Read October 18, 2026, checked again October 19, 2026 at the
+same lines, and changed on October 19, 2026, at the 0.3.11 release:
 
 - `faq/index.html:231`: "A person still does what an agent cannot: phone calls, judgment calls,
-  and anything that needs hands." Suggest: "A person still does what an agent cannot: the calls
-  that need a person, judgment calls, and anything that needs hands."
+  and anything that needs hands." Now: "A person still does what an agent cannot: the calls that
+  need a person, judgment calls, and anything that needs hands."
 - `compare/hiring-an-assistant/index.html:279`: "Archie makes no calls and opens no doors."
-  Suggest: "Archie calls a business only to ask a question you approved, and opens no doors."
+  Now: "Archie calls a business only to ask a question you approved, and opens no doors."
 - `compare/hiring-an-assistant/index.html:317`, the row "Phone calls and difficult people", Archie
-  "No". Suggest "Questions to a business, after you press Place the call. Never a person, never a
+  "No". Now: "Questions to a business, after you press Place the call. Never a person, never a
   difficult conversation."
+- Two more, found at the release by a search of the site and changed in the same pass:
+  `faq/index.html:607`, "It cannot run code or a command on your computer, or make calls and
+  texts.", now "It cannot run code or a command on your computer, or send texts. It phones only a
+  business, when you switch calls on and press Place the call." (item 2's form); and
+  `compare/cloud-agents/index.html:398`, under "Take calls through your agent", "Archie makes no
+  phone calls.", now "Archie answers no calls, and phones a business only after you switch calls
+  on and press Place the call."
 - `EXPECTATIONS.md` in the Archie repo, rows 4 and 14, were changed with the code.
 - The in-app guides "What your agent will never do" and "What Archie connects to" were changed with
   the code (`data/marketplace/resources/`).
@@ -11985,7 +12129,7 @@ it admits. Three findings.
    the sort figure's caption, scoped to the three shipped gates and to the claim that none of
    them is a setting. So there is nothing for the tracked-false section here, which
    is worth writing down: the sections of this file that stay empty are evidence too.
-   (October 19, 2026: both scoped sentences would be false from the release that carries Archie
+   (October 19, 2026: both scoped sentences would be false from 0.3.11, which carries Archie
    `bad38c32`, where one kind of calendar change can be set to skip the asking, so both changed
    that day. `compare/cloud-agents/` says "Email replies, deleted events and changes to events
    other people are on are held until you approve, and no setting turns that off", and `compare/`
@@ -12105,7 +12249,7 @@ draft is also still possible; the Send tap is what stops it becoming a sent emai
 | "We never hold your data" (unscoped) | Unscoped "your data" is false; we hold email + plan status. Scope to content: "We never hold your conversations." Caught 2026-07-20 on the homepage proof chip, and again 2026-08-03 as the `business/` feature-card **heading**: the body underneath stated everything we hold, but a heading is what gets scanned and the correction sat four sentences down. Check headings, not just body copy. |
 | "It asks before it acts" / "acts only with your approval" (unscoped) | Same umbrella as "nothing sends without your OK": chat replies, provider web search, `remember`, and calendar reads act without asking. Use the scoped Send-tap / calendar-changes forms. |
 | "Your agent's data stays on your computer" (once phone access ships) | **False** with phone access on. Installed add-ons and their settings are mirrored to our servers, encrypted. The true claim is custody without access: "we hold the messages and cannot read them." |
-| "Calendar changes wait for your yes" / "Replies and calendar changes wait for your approval" (as a standing rule, and above all beside a line saying no setting turns it off) | **Retired October 19, 2026**, true of 0.3.10 and false from the release that carries Archie `bad38c32`, where a change on the owner's own calendar that nobody else is on can be set to skip the asking. Use the in-your-name row in the claims table, and for the calendar the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes." |
+| "Calendar changes wait for your yes" / "Replies and calendar changes wait for your approval" (as a standing rule, and above all beside a line saying no setting turns it off) | **Retired October 19, 2026**, true of 0.3.10 and false from 0.3.11, which carries Archie `bad38c32`, where a change on the owner's own calendar that nobody else is on can be set to skip the asking. Use the in-your-name row in the claims table, and for the calendar the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes." |
 | "Phone access never touches our servers" | **False**, and backwards. The mechanism *is* our servers, holding sealed messages. Claiming absence throws away the honest, checkable claim in exchange for one that is trivially disprovable. |
 
 ---
@@ -12679,11 +12823,11 @@ waitlist, which is the check Muse taught us to make; if either is read later, pl
   metadata and an unlinked route only.
 - &#9940; Never quote either company&rsquo;s app code, only its public pages.
 - &#9888;&#65039; What cuts against us, and is printed: both need no computer of yours and keep going
-  while yours is off. Tab also places phone calls and waits on hold; that is not on the hub.
-  *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
-  this becomes: "Tab also places phone calls and waits on hold. Archie phones a business only when
-  calls are switched on and the owner presses Place the call, and does not wait on hold; neither is
-  on the hub." Until then it stays as written.
+  while yours is off. Tab also places phone calls and waits on hold. Archie phones a business only
+  when calls are switched on and the owner presses Place the call, and does not wait on hold;
+  neither is on the hub. *Applied October 19, 2026, at the 0.3.11 release, which carries calls
+  (Archie `6e8e5549`); through 0.3.10 it read "Tab also places phone calls and waits on hold; that
+  is not on the hub."*
 - The chart&rsquo;s letters are T and E, in the site&rsquo;s own type, like every other company on it.
 
 **Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was
@@ -13185,7 +13329,7 @@ with no egress clause anywhere on it is the banned claim in pictures, whichever 
 carries it.
 
 **The second question narrowed, October 19, 2026, before the release that needed it.** Archie
-`bad38c32` (on main, in no release) lets an owner press Yes, and stop asking, after which a change
+`bad38c32` (in 0.3.11, released the same day) lets an owner press Yes, and stop asking, after which a change
 on their own calendar that nobody else is on is made at once (the Calendar changes entry's
 amendment). By this section's own rule, the one that moved Muse on September 28, that is "asking by
 default until you change a setting" for one kind of step, so on the day a release carries it the
@@ -13200,11 +13344,11 @@ still has no off switch. So:
   you approve it, and no setting turns that off".
 - **The second question** is "Can it be set to send or invite without asking?", answered "Can be set
   to" or "Cannot be", in both drawings and both accessible names. It is still asked only of the four
-  on your computer. Archie's answer is No in 0.3.10, which has no such switch, and in the release
-  that carries `bad38c32`, whose switch never covers a send, an invitation, a deletion, or an event
-  somebody else is on (the in-your-name row in the claims table). "Invite" is in the question
-  because the question is about any agent; no page says Archie invites anybody until a release
-  carries `7d102231`.
+  on your computer. Archie's answer is No in 0.3.10, which has no such switch, and in 0.3.11,
+  whose switch never covers a send, an invitation, a deletion, or an event somebody else is on (the
+  in-your-name row in the claims table). "Invite" is in the question because the question is about
+  any agent. From 0.3.11, which carries `7d102231`, a page may say Archie invites people once you
+  say yes, in the invitations entry's words and not before Jett approves them.
 - **The three on your computer were read again for that question**, rows dated 2026-10-19: Vellum
   can be set to, by its messaging docs, though its FAQ says Gmail sending always waits and the fold
   says the two differ; OpenClaw sends what you asked for by default, by its starting instructions;

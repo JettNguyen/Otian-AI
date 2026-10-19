@@ -283,6 +283,7 @@
       "lede": "Why AI can be wrong and sound sure, and three habits that catch it.",
       "youtube": "n6mdZR0mlew",
       "seconds": 66,
+      "hold": "Waiting on Jack's re-recording: the narration says \"Replies and calendar changes wait for your approval\", which is untrue of some calendar changes since 0.3.11 added Yes, and stop asking. Publish the render made after it, in the in-your-name form (TRUST.md, the video library's October 19 note).",
       "notes_heading": "Hallucination, in plain English",
       "notes": [
         "<a href=\"../../ai-explained/#hallucination\">The AI Explained entry for hallucination</a>."
@@ -360,6 +361,7 @@
       "lede": "How a chatbot and an agent differ.",
       "youtube": "Ij_a-I9U8XE",
       "seconds": 49,
+      "hold": "Waiting on Jack's re-recording: the narration says \"Calendar changes also need your approval\", which is untrue of some calendar changes since 0.3.11 added Yes, and stop asking. Publish the render made after it, in the in-your-name form (TRUST.md, the video library's October 19 note).",
       "notes_heading": "Chatbot and agent, in plain English",
       "notes": [
         "The AI Explained entries for <a href=\"../../ai-explained/#chatbot\">chatbot</a> and <a href=\"../../ai-explained/#ai-agent\">AI agent</a>."
@@ -622,6 +624,7 @@
       "lede": "Why nothing goes out in your name until you approve it.",
       "youtube": "3bhuFFh-n7Y",
       "seconds": 68,
+      "hold": "Waiting on Jack's re-recording: the narration says \"Replies and calendar changes need your approval\" and \"There is no setting that turns this approval step off\", which are untrue of some calendar changes since 0.3.11 added Yes, and stop asking. Publish the render made after it, in the in-your-name form (TRUST.md, the video library's October 19 note).",
       "notes_heading": null,
       "notes": [],
       "words": [

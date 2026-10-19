@@ -2158,6 +2158,13 @@ turned into words on your computer, and the answer is read out by a voice that r
   once the wording above is cleared. The same day fixed a fade that hid the last lines of a short answer
   (`a3c99e92`). Jett talked to the window's screen on October 6 on a dev build; the echo answer is
   not written down yet (Archie `docs/TEST-DAY.md`, item 4), so the wording above still waits.
+  *Added October 19, 2026, in no release yet:* talking over the agent is built on main (Archie
+  `c1622841`, archie-mobile `d22db43`), tested on recorded sound only. Once a person has used it,
+  and not before, "On the phone a tap cuts it off; talking over it does not" becomes: "On the
+  computer, talking over it cuts it off, and so does a click or the space bar. On the phone,
+  talking over it does where the computer is new enough (`talk_cut_in`), and needs a raised
+  voice; a tap always does." Until then this boundary stands as written, and after that only that
+  sentence changes. The next entry is the claim.
 - ⚠️ **English only.** The hearing model is `base.en`. No other language may be claimed.
 - ⚠️ **A long answer is written, not read out.** Past about 1,200 characters (`MAX_SPOKEN_CHARS` in
   `crates/archie-runtime/src/speech.rs`) the screen says the answer was too long to read out and
@@ -2167,6 +2174,114 @@ turned into words on your computer, and the answer is read out by a voice that r
   which the phone's screen follows until it is done.
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
+
+### 🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), in no release, and no person has talked over it yet
+
+*Archie `bfdca0ac` and `c664c138` on the branch `parity-p9`, merged into main as `c1622841`, and
+archie-mobile `2ea2158`, merged as `d22db43`; all on main and in no release. Tested only on
+recorded and made-up sound, never with a person in a room, on a real Mac or a real phone. Until
+somebody has, this stays 🚧 and the wording below waits, exactly as the talk screen's own entry
+does. Nothing about the phone until an Archie Mobile build with `d22db43` is out and the computer
+runs an Archie with `c1622841`.*
+
+**Proposed wording, once a person has used it, Jett's to approve:** "While your agent is reading an
+answer out loud, start talking and it stops to listen. A cough or a door closing does not stop it.
+You can also click anywhere or press Space on the computer, or tap anywhere on the phone. The part
+it did not get to read out stays written in the chat, under a line that says where you cut in."
+
+**Why it's true:**
+
+- **The microphone stays open while the answer plays, and the decision is made in code on the
+  device.** On the computer, `src/app/talk-hear.ts` decides what each 32 ms of microphone means
+  (`createHearing`, `:445`) and `src/app/talk-mic.ts` feeds it (`:294`). Three rules, each against
+  a different impostor:
+  - *The agent's own voice coming back out of the speakers.* `src-tauri/src/talk.rs` measures how
+    loud the answer is at every 32 ms of its recording, on the computer, with ffmpeg
+    (`levels_for`, `:348`; the window asks through `talk_levels`, `:376`). The screen learns, in the
+    first 400 ms of each answer, how much of that reaches the microphone, then holds it, and a sound
+    has to be twice as loud as the agent's own voice at that moment to count (`createEchoJudge`,
+    `talk-hear.ts:265`). The webview's echo canceler still runs; this is what keeps a canceler that
+    leaks, or one that is missing, from letting the agent cut itself off.
+  - *A cough, a door, a clap.* A sound has to carry a voice (it repeats at a speaking pitch,
+    `voicing`, `:134`) before it can stop the agent, and a short word has to hold its loudness the
+    way a vowel does, which a thump does not (`MIN_WORD_TICKS`, `:83`).
+  - *How long.* The rule the screen already had: about a quarter of a second of sound
+    (`MIN_SPEECH_TICKS`, `:72`), or a short voiced word like "Stop".
+- **Its voice drops while a sound is checked, then stops or comes back.** Both screens turn the
+  answer down to a quarter while they decide (`DUCKED` in `src/app/talk.tsx`, and in archie-mobile's
+  `src/talk.ts`), stop it when the sound is a person, and bring it back up when it was not.
+- **The phone does the same, with the computer's numbers.** archie-mobile `src/talk.ts` holds the
+  same rules in milliseconds (`createEchoJudge`, `:271`; `createHearing`, `:351`), and the computer
+  sends an answer's loudness with its first piece when the phone asks (`levels` on the `spoken` op,
+  `src-tauri/src/phone.rs:3216`). The phone's recorder reports only a loudness, not the sound, so it
+  cannot hear the voice in a word: over the agent a sound has to go on for about half a second
+  (`MIN_CUT_IN_MS`, `src/talk.ts:322`). The phone records through the answer and sends where the
+  person's words start (`from_ms`, archie-mobile `src/screens/Talk.tsx:495`), and the computer reads
+  and keeps only the part after it (`recorded_from`, `talk.rs:393`; `said_from`, `phone.rs:3238`).
+  The phone listens over the agent only where the computer says it can (`talk_cut_in`,
+  `phone.rs:1571`); paired with an older computer it keeps its microphone closed and a tap is the
+  way, as before.
+- **The place it stopped is marked in the chat, in code.** How far through the recording the voice
+  got becomes a place in the words (`cut_point`, `talk.rs:430`): the start of the word it was
+  saying, never inside bold, a code span, a link or a table row, and counting a link as one word
+  and a full stop as a pause, the way the voice says them. It is saved on the message
+  (`Entry::cut_at`, `src-tauri/src/inapp.rs:479`, written by `Conversation::cut`, `:1604`), for the
+  window (`talk_cut`, `talk.rs:579`) and the phone (the `talk_cut` op, `phone.rs:4291`) alike. Both
+  chats draw the words read out, the line "You cut in here. The rest was not read out.", and the
+  rest a step quieter (`CutAnswer` in `src/app/conversation.tsx:4537`; `CutLine` in archie-mobile's
+  `src/screens/Talk.tsx`, used in `src/screens/Chat.tsx`). A revision with new words drops the mark.
+- **A short hint, once.** The first answer read out on the talk screen says, under the microphone
+  line: "{name} stops when you talk over it, and a cough or a door closing will not stop it. What it
+  did not get to read out stays written in the conversation." Remembered per computer
+  (`CUT_IN_HINT_KEY`, `talk.tsx:78`) and per phone (`cutInHintSeen` in archie-mobile `src/seen.ts`).
+- **Nothing is added to what a turn costs, and nothing is sent to an AI company.** The listening,
+  the loudness and the mark are all worked out on the device and the computer. No prompt text
+  changed and no AI call was added. The phone stops fetching the pieces of an answer nobody is still
+  waiting for (`fetchPieces`, archie-mobile `src/spoken-pieces.ts:58`); an answer is made whole by
+  the voice before it is delivered, so there are no pieces of speech left to stop making on the
+  computer.
+- **Tested without a person.** `src/app/talk-hear.test.mjs` replays recorded scenes from
+  `src/app/talk-hear.fixtures.json` (Kokoro answers, macOS voices for the person, a room, an echo,
+  made-up coughs, a door, a clap and keys; made by `scripts/talk-fixtures.mjs`): over a working, a
+  leaky and a missing echo canceler the agent never cuts itself off, with the player's clock off by
+  up to 150 ms either way; Sarah, Todd and a one-word "Stop" cut in; a cough, a door and a clap do
+  not. The rule the screen had before fails six of those checks. archie-mobile `src/talk.test.ts`
+  replays the phone's scenes, including a speaker running up to 300 ms behind the clock. The Rust
+  tests for the mark are in `talk.rs` and `inapp.rs` (`a_cut_*`).
+
+**The boundaries:**
+
+- ⛔ **Nobody has talked over it yet: tested on recorded sound only.** Not on a Mac, not on
+  Windows, not on a phone. Nothing here may be said, shown in a video, or put on a page until a
+  person has, and the threads that would settle it are in Archie's `docs/OPEN-THREADS.md` under the
+  talk screen.
+- ⛔ **Never "real time", "instant", "like a phone call", "a natural conversation" or "interrupt it
+  any time".** The talk screen's own entry measured about eight seconds from the end of what you say
+  to the start of the answer, and that has not changed. It takes about a fifth to two fifths of a
+  second of talking, on the recordings, for the computer to stop.
+- ⛔ **Never "it hears every word" or "just say Stop" of the phone.** On a phone the agent's voice
+  comes out an inch from the microphone. Talking over it there takes a raised voice, a single word
+  like "Stop" is too short, and a speaker that runs late (Bluetooth) can hide a person altogether.
+  A tap always works. On the computer, "Stop" alone cut in on the recordings.
+- ⛔ **Never "nothing leaves your computer".** The words someone says after cutting in go to their
+  AI company like any other message. From the phone, the recording made while the agent talked
+  crosses the mailbox sealed, as every voice note does, and the computer keeps only the part after
+  the person started.
+- ⚠️ **English only.** The hearing model is `base.en`.
+- ⚠️ **The speech is all done on the computer.** The phone records, plays, and measures how loud
+  its microphone is; the computer turns speech into words, reads the answer out, measures it, and
+  marks where it stopped. The computer has to be on, running Archie, with the agent started.
+- ⚠️ **On iPhone, the answer may sound quieter** while the microphone is open under it, because the
+  phone then plays through its recording mode. Nobody has listened to it yet.
+
+**What this changes in the talk screen's entry** ("A conversation out loud", the boundary that
+starts "Never 'interrupt it any time'"), once a person has used it: "On the phone a tap cuts it
+off; talking over it does not" stops being true on a phone paired with a computer that has
+`c1622841`. Replace that sentence with: "On the computer, talking over it cuts it off, and so does
+a click or the space bar. On the phone, talking over it does where the computer is new enough
+(`talk_cut_in`), and needs a raised voice; a tap always does." The rest of that boundary stands.
+That entry carries this as a dated note, not applied: until a person has talked over it, the
+boundary stands as written.
 
 ### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); not in the iPhone's 1.0
 
@@ -7433,6 +7548,13 @@ Computer control" everywhere it used to say "under Websites", changed the same d
   phone calls, sends texts of its own, pays for anything, or presses a button that finalizes a
   purchase, booking or application. An agent with buying switched on gets `NEVER_LINE_BUYING` in
   its place, which releases a purchase inside the owner's limits and nothing else.
+  *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
+  this becomes: "the agent never sends texts of its own, pays for anything, or presses a button
+  that finalizes a purchase, booking or application, and phones nobody but a business, from a card
+  the owner presses, on an agent with Call businesses switched on. An agent with buying switched on
+  gets `NEVER_LINE_BUYING` in its place, which releases a purchase inside the owner's limits and
+  nothing else; each line also says where calls stand (`Calls` in the same file)." Until then it
+  stays as written, because it is true of every released version.
 - **What it learns stays with the person.** `screen/routes.rs` records the click path that worked as
   role and accessible name, never selectors and never coordinates, learned per person and never
   shipped inside an add-on. **Only clicks are recorded, never typing**, because typed values are
@@ -8351,6 +8473,15 @@ nothing that finishes something, on a website or anywhere else, unless you switc
 the order is inside your limits; drafts wait for your Send. And you can quit the app, because there
 is nowhere else it is running."
 
+*Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
+and only on Jett's yes at that release, because this is approved wording: "It cannot call or text,
+and it presses nothing that finishes something, on a website or anywhere else, unless you switched
+on buying and the order is inside your limits; drafts wait for your Send." becomes "It cannot
+text, and it phones only a business, when you switched calls on and pressed Place the call. It
+presses nothing that finishes something, on a website or anywhere else, unless you switched on
+buying and the order is inside your limits; drafts wait for your Send." Until then the approved
+wording stays as written: it is true of every released version.
+
 **Why it's true, item by item:**
 
 | Claim | What makes it true |
@@ -8358,7 +8489,7 @@ is nowhere else it is running."
 | One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
 | Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
 | No code or command execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. **On a Mac, Computer control (0.3.4) can open and use an application the owner allowed.** It refuses Terminal and the other terminals, script editors, Automator, Shortcuts, Xcode and the code editors on its list, whatever the owner says (`REFUSED_APPS` in `screen/guard.rs`, application ids, so an unknown app is not on it), and it never presses Return, nor sends a line break as a key press (`macos::type_by_keys`), which is how a terminal runs what is typed. "It cannot run a program" became this row's wording that day, because opening an allowed application is running one. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
-| No calls, texts, or finalizing presses, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry) |
+| No calls, texts, or finalizing presses, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry). *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`), the claim cell becomes "No texts or finalizing presses, calls only to a business after a press, and purchases only when switched on", and this cell adds: "A call is placed only by the press on a `call_business` card, on an agent with Call businesses switched on (`calls::press`, the one function that dials, held there by `only_the_press_can_dial`), and only to a number `calls::business::may_call` accepts." Until then this row stays as written |
 | No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
 | Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |
 | The switch is the owner's | Start and Stop per agent, and the app quits. It answers only while the computer is awake, Archie is open and the agent is started |
@@ -10100,7 +10231,7 @@ add: "A reply with a blank still in it won't send until you fill it in."
 | **"Nothing sends without your OK"** (unscoped) | ⛔ **Still banned.** Chat replies and provider web-search queries leave without a per-item OK. Use the scoped calendar/Send-tap wordings above. |
 | **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) (⚠️ October 19, 2026: calendar changes too, once the owner turns it on. From the release that carries Archie `bad38c32`, in no release yet, a new or moved event on the owner's own main calendar that nobody else is on happens at once, with an undo, after the owner presses Yes, and stop asking. This row's own scope, a reply that reaches somebody else, is untouched, because a covered change reaches nobody.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 | **"Replies and calendar moves wait for your yes."** | ✅ **True now (0.3.1), and the homepage heading (`#mine-heading`) since 2026-09-29**, narrowed from the lists form below the same day at Jett's ruling. A reply that reaches somebody else waits: the row above holds the code pointers. A calendar move waits: the Calendar changes entry above (`tools_calendar.rs`, staged on the turn that proposes it and applied only on a later one). The figure under the heading draws those two lanes and no third, and the line under it, "No setting turns that asking off", is scoped by this heading and says nothing without it. The four blog posts that carried the lists form now carry this one (`your-ai-agents-messages-go-out-under-your-name`, `say-maybe-to-your-ai-and-it-hears-do-it`, `your-ai-agent-should-bother-you-more-not-less`, `ai-built-my-workout-program`). ⛔ Never shorten it to "everything waits for your yes", and never let it stand for a purchase, which the Buying entry says it must never cover. The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." ⛔ **Retired from the site October 19, 2026**, ahead of the release that carries Archie `bad38c32`, in which a calendar move on the owner's own calendar can stop waiting, so the heading and "No setting turns that asking off" under it would both be false that day. The homepage, the personal edition page, the four blog posts and every other page that carried this form or its "calendar changes" twin now carry the row below. |
-| **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true now (0.3.10), and true from the release that carries Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); and, on the calendar, deleting an event or changing one somebody else is on (the Calendar changes entry). **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one built since, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in that build reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from the release that carries `7d102231` and not before**, because 0.3.10 cannot invite anybody, an invitation may join the list: "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking, and never describe the switch: it is in no release, and its own entry is not written. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; three narrations wait on Jack, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. |
+| **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true now (0.3.10), and true from the release that carries Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); and, on the calendar, deleting an event or changing one somebody else is on (the Calendar changes entry). **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one built since, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in that build reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from the release that carries `7d102231` and not before**, because 0.3.10 cannot invite anybody, an invitation may join the list: "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking, and never describe the switch: it is in no release, and its own entry is not written. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; three narrations wait on Jack, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`), a call fits this claim: the voice says it is calling for the owner, and nothing dials until the owner presses Place the call on its card, which no setting skips (`calls::press`, held by `only_the_press_can_dial`; `always_allow.rs` has no lane for calls). Until that release no form above names a call, and a call joins "What waits" only then, on Jett's yes. |
 | **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
@@ -11136,6 +11267,12 @@ intention:
    only at shops they list, within limits they set (`NEVER_LINE_OFF` in the gateway's `prompt.rs`).
    It names the computer only, per the boundary on the phone below. `SpendPolicy::default()` is `enabled: false` with zero limits, and a test
    (`the_shipped_state_buys_nothing`) holds it there.
+   *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
+   add after "(`NEVER_LINE_OFF` in the gateway's `prompt.rs`)": "With calls off as well, the same
+   sentence names Call businesses on the Setup tab beside it (`NEVER_LINE_OFF_CALLS_OFF`), and says
+   both are switched on on the computer." The sentence "in Archie on the computer, on the agent's
+   Connections tab" stays true of the line an agent reads with calls on. Until then this stays as
+   written.
 2. **It still cannot type a card you pay with, ever, switch or no switch.** `guard::typing_stop`
    refuses any field whose `autocomplete` is a `cc-` value, and any whose name says card, and hands
    the window to the person; buying does not touch it. Since 2026-10-02 a name that says gift card,
@@ -11235,6 +11372,219 @@ does not move, because a purchase is not a reply; do not widen it to cover buyin
 direction. And Flight Check-In's "It buys nothing" stays true, but it is now the add-on's own
 instructions holding it rather than the code alone: with buying on and an airline on the shop list,
 the code would release a Pay press there.
+
+### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), in no release, and no real call has been placed
+
+*Archie `0a22673a` to `116aee7f` on the branch `parity-p10`, merged into main as `6e8e5549`, then the
+calling hours on the business's own clock (`calls-hours`, merged as `ccdb459b`), and archie-mobile
+`832df9b`, merged as `7cf627e`; all on main and in no release. No real call has been
+placed, and no Bland account was made: every test runs against Bland's documented request and
+response shapes. Nothing below may be said on a page until a release carries it. The wording, and
+every replacement listed at the end, is Jett's to approve at that release.*
+
+**The claim, once it is in a release:** "With Call businesses switched on, your agent can phone a
+business for you, to ask its hours or prices or whether it can fit you in. It shows you the call
+first, on a card: who it is calling, the number and where it found it, what the voice will say, and
+what it will ask. Nothing dials until you press Place the call, and it calls only from 8:00am to
+9:00pm in the business's own time zone. The voice says it is an AI assistant calling for you and
+that the call is transcribed. It never agrees to buy, book, or pay, and never gives card or account details. It
+calls businesses only, never a person, on your own Bland account, which bills you by the minute.
+When the call ends you get what was said and a short summary, in the chat."
+
+Short form, for a list of abilities: "Phones a business for you, after you press Place the call,
+when you switch it on."
+
+**Why it's true:**
+
+All paths are in the Archie repo.
+
+- **Off until the owner turns it on, per agent.** `AgentAbilities::place_calls` in
+  `crates/archie-domain/src/skill.rs` is the one field of that struct that defaults to false, so an
+  older `agent.json` with no field reads as off (`calls_are_off_until_switched_on_and_never_count_as_switched_off`).
+  The row is **Call businesses** on the agent's Setup tab, under What it can do
+  (`src/app/calls-panel.tsx`).
+- **The only door that turns it on checks the owner's own key first.** `calls_connect` in
+  `src-tauri/src/commands/calls.rs` asks Bland's account endpoint (`GET /v1/me`, which places
+  nothing) and stores nothing unless Bland accepts the key; a check that cannot reach Bland is a
+  refusal too. `agent_abilities_set` in `src-tauri/src/commands/mod.rs` keeps whatever
+  `place_calls` is stored, so no other save can switch calls on. `calls_off` turns them off and
+  deletes the key.
+- **The key is the owner's and goes nowhere else.** It is a credential under `CALLS_BLAND`, with no
+  connection entry, so `http_request` never carries it, and a calling host is refused by
+  `http_request` (`resolve_url` in `crates/archie-runtime/src/connectors.rs`,
+  `a_calling_account_is_never_reached_by_a_request`) and by `connector_connect`
+  (`src-tauri/src/commands/integrations.rs`). Archie never has a calling account of its own.
+- **Businesses only, decided in code, not by the model.** `may_call` in
+  `crates/archie-runtime/src/calls/business.rs`. A number counts only where code saw it published
+  by a business in the last day (`calls/seen.rs`): on a map listing `places_search` returned, on a
+  page `web_fetch` read (not a people-search or social site), or in an email `inbox_read` opened
+  from a business address (not a free mail service), or when the owner typed it themselves and the
+  card asks them to press only for a business's line. It refuses, whatever the source, any number
+  on any of the agent's lists, on a teammate's card, in the Mac's Messages list (anybody the owner
+  texts), or on the agent's do-not-call list, and any number outside the US and Canada, premium
+  (900, 976) or a service code (911 and the other N11s) (`calls/number.rs`). Toll-free is allowed
+  only with a source. Each source and each refusal has a test in `business.rs`.
+- **The words first, and nothing dials without the press.** `call_business` (`calls/mod.rs`,
+  `execute`) only puts a card in the chat: the business, the number and where it came from, the
+  exact opening, the questions, the voicemail, what it never does, and "Call 1 of 3 today". Only the
+  press on that card's **✅ Place the call**, by the owner or an admin, reaches `press`, the one
+  function that dials, and it checks the switch, the number, the day's count and the hours again
+  first. No tool dials and no typed yes can: `only_the_press_can_dial` scans the source for any
+  other call site, and `a_typed_yes_cannot_dial`, `a_teammate_press_places_nothing`,
+  `a_press_from_another_chat_places_nothing` and `the_switch_off_places_nothing_even_from_a_card`
+  hold the rest.
+- **The disclosure is code's, and first.** `bland::opening` writes "Hi, this is an AI assistant
+  calling for Sam at Miller Bakery. This call is transcribed." from the names the owner typed
+  beside the switch, and it is sent as the call's first sentence; the model never writes it.
+- **What a call may do.** The voice's instructions are fixed in `bland::task`: ask the card's
+  questions, check availability, hours and prices, leave a message; never agree to buy, book,
+  reserve, schedule, sign up, or pay, never give a card, bank or account number, an address, a date
+  of birth or anything personal, and end the call with "Sam will confirm that themselves" if asked.
+  Afterward `calls/after.rs` reads what the voice said for a commitment ("book it", "go ahead and
+  book", "my card number") and puts a warning at the top of the after-call card
+  (`a_commitment_on_the_call_is_flagged_on_its_card`).
+- **After the call.** The after-call card says answered, voicemail, no answer, would not take the
+  call, or did not go through, with the summary, the transcript, the length and the price Bland
+  reports. The call is a finished job on the Jobs tab and the phone's Activity
+  (`journal::record_sent` with `CALL_PLACED`, final, no Undo) and counts on the Today line
+  (`today.rs`). A business that says not to call again goes on the agent's do-not-call list and is
+  never called again.
+- **Limits.** Three calls a day unless the owner sets 1 to 10, retries counted, written down before
+  each dial (`placed_today`, `the_day_cap_stops_the_fourth_call`); never before 8:00am or from
+  9:00pm on the business's own clock, and never while a map listing says the place is shut
+  (`hours_allow`). The business's clock is the time zone its map listing gives, otherwise its area
+  code's, from libphonenumber's data (`calls/zone.rs`, `data/calls/time-zones-by-area-code.txt`),
+  inside the window in every zone when an area code covers more than one; a toll-free number or an
+  area code the data lacks waits until it is 8:00am to 9:00pm everywhere from Hawaii to
+  Newfoundland (`an_east_coast_owner_at_nine_does_not_reach_a_west_coast_business_at_six`,
+  `a_listing_zone_wins_over_the_area_code`, `the_press_reads_the_business_clock_again`,
+  `daylight_saving_moves_the_window_and_arizona_does_not`); one retry at most, offered only on a
+  call that reached nobody (`no_answer_offers_one_more_try_and_only_one`); ten minutes at most; one
+  call at a time.
+- **The same on the phone.** The card and its buttons, and the after-call card, reach Archie Mobile
+  through the sealed relay like every card, and a press there is the owner's press. The phone
+  cannot switch calls on.
+
+**The boundaries:**
+- ⛔ Never "calls anyone", "calls your customers", "calls people for you", or any example of a call
+  to a person. It refuses every number on the agent's lists, and calls to consumers were ruled out
+  on purpose (below).
+- ⛔ Never "books an appointment by phone", "makes reservations", "orders by phone" or "handles it
+  for you". It asks; the owner books.
+- ⛔ Never say a call goes out without a press, or "just ask and it calls". Every call is a card
+  first.
+- ⛔ Never "free calls" or "included". Calls are billed by Bland to the owner, per minute (Bland's
+  pricing page: a per-minute rate by plan and a $0.015 minimum per outbound attempt, read October
+  18, 2026; quote neither on the site without reading it again).
+- ⛔ Never say it waits on hold, works phone menus well, or calls back. Nobody has seen it do any of
+  them, and a voicemail it leaves names no number to call back, because the call comes from one of
+  Bland's numbers.
+- ⛔ Never say it can be switched on from Archie Mobile.
+- ⛔ Never "calls during business hours" or "only when they're open" as a promise. A map listing's
+  published hours are honored when the listing has them; otherwise the only limit is 8:00am to
+  9:00pm on the business's clock, and that clock is a best reading: an area code says where a
+  number was issued, not where the business is today. Say "never before 8:00am or after 9:00pm
+  where the business is".
+- ⛔ **Never describe calls as compliant with any law.** Five questions are with counsel, filed in
+  the shared Drive at `10 - Legal/Policies & Compliance/Legal - Questions_On_AI_Phone_Calls_For_Counsel - Claude - 20261019.md`:
+  AI voices and consent, recording and transcripts, who the caller is, calling hours, and Canada.
+  Until counsel has answered and Jett has approved wording, no page says calls are compliant with
+  the TCPA, a state's recording or bot-disclosure law, or any other law, or that they are legal
+  where the reader is.
+- ⚠️ **Calling hours are the business's own: 8:00am to 9:00pm in its time zone.** The zone comes
+  from the business's map listing first, then its area code (`crates/archie-runtime/src/calls/zone.rs`,
+  with `data/calls/time-zones-by-area-code.txt`). When neither says (a toll-free number, say), a call
+  waits for an hour that is inside 8:00am to 9:00pm in every US and Canada zone at once, Hawaii to
+  Newfoundland (`EVERYWHERE` in `zone.rs`), which is 2:00pm to 7:30pm Eastern from March to November
+  and 1:00pm to 7:30pm the rest of the year. Archie `ccdb459b`, on main and in no release.
+- ⚠️ **Two in-app guides go out before the app does.** "What your agent will never do"
+  (`what-it-will-not-do.json`) and "What Archie connects to" (`what-archie-connects-to.json`) were
+  changed with the code, and a guide reaches installed apps with the next push to Archie's main, with
+  no release (the entry "Where your information goes" says why). Neither has a `min_app_version`, so
+  after that push 0.3.10 tells its owners about a Call businesses switch it does not have. Until a
+  release carries `6e8e5549`, the old guide words are the true ones.
+- ⚠️ **Never seen on a real call.** The first real call should be Jett's, to a business that knows
+  it is coming, with the after-call card checked against what was said.
+- ⚠️ The Bland steps on the panel (make an account, add credit, copy the key from Settings) are
+  from Bland's documentation, not from a real account.
+- ⚠️ The numbers the check refuses are what the agent can see: its own lists, teammates' cards, the
+  Mac's Messages list, and its do-not-call list. A person whose number is on none of those and is
+  typed in by the owner is refused only by the owner reading the card's line "press Place the call
+  only if it is a business's line". Say "businesses only", never "it can tell a business from a
+  person".
+
+**What earlier versions of the claim got wrong.** Every page and entry below says Archie never makes
+calls, which stops being true once this ships. They are true of every agent with calls off, which is
+the default, so none of them is wrong today; each needs the replacement in the same release as the
+switch.
+
+**Replacements for passages that promise no calls.** Each is a dated note at its passage, applied
+at the release that carries calls and not before, because the passage is true of every released
+version:
+1. "Websites: the agent using a site itself", the bullet on the prompt (`NEVER_LINE`).
+2. "What it structurally cannot do", the approved positioning wording ("It cannot call or
+   text"). This one is approved wording, so its replacement needs Jett's yes.
+3. The same entry's table row, "No calls, texts, or finalizing presses".
+4. The Buying entry's description of the off-state line (`NEVER_LINE_OFF`).
+5. The Tab and Eden compare note ("Tab also places phone calls and waits on hold").
+6. The asking claim's row, "Nothing goes out in your name until you say yes", which a call fits
+   and which names no call until that release.
+
+The `faq/index.html:461` sentence "It cannot call, text, spend, or press a button", recorded in the
+cap entry's list, is no longer on the page (the FAQ was rewritten since), so that record stands as
+history and needs no change.
+
+**On the site, outside TRUST.md.** Read, not edited, October 18, 2026, and checked again October
+19, 2026 at the same lines; each changes at the release, not before:
+
+- `faq/index.html:231`: "A person still does what an agent cannot: phone calls, judgment calls,
+  and anything that needs hands." Suggest: "A person still does what an agent cannot: the calls
+  that need a person, judgment calls, and anything that needs hands."
+- `compare/hiring-an-assistant/index.html:279`: "Archie makes no calls and opens no doors."
+  Suggest: "Archie calls a business only to ask a question you approved, and opens no doors."
+- `compare/hiring-an-assistant/index.html:317`, the row "Phone calls and difficult people", Archie
+  "No". Suggest "Questions to a business, after you press Place the call. Never a person, never a
+  difficult conversation."
+- `EXPECTATIONS.md` in the Archie repo, rows 4 and 14, were changed with the code.
+- The in-app guides "What your agent will never do" and "What Archie connects to" were changed with
+  the code (`data/marketplace/resources/`).
+
+**The legal points, named.** Not legal advice; these are the questions counsel should answer before
+a release. The five put to counsel are in the Drive file named in the boundaries, and where this
+list and that file differ, the file is what counsel was asked.
+
+1. **Businesses only, because of the TCPA.** The FCC's declaratory ruling of February 8, 2024 (FCC
+   24-17) put AI-generated voices under the TCPA's "artificial or prerecorded voice" rule, which
+   needs the called party's prior express consent for a call to a mobile number, and for a call to
+   a residential line. That is why calls to consumers are out. **The open question is a business's
+   own mobile number.** The mobile-number rule does not exempt businesses, and many small
+   businesses publish a cell phone on their listing. The FCC's 1992 order treats a number knowingly
+   given out as permission to be called about the matter it was given for, and these calls are a
+   prospective customer's questions, never sales, but that reading of a number published on a map
+   listing, for an AI-voiced call, is not settled. Archie cannot tell a mobile line from a landline
+   without a carrier lookup, which it does not do.
+2. **The AI disclosure.** Said first on every call, by code. Some states have bot-disclosure laws
+   (California's covers online bots selling or influencing votes); none found requires more than
+   what is said, but the list changes, and counsel should check it.
+3. **The transcription notice.** "This call is transcribed" is said first. About a dozen states
+   (among them California, Florida, Illinois, Maryland, Massachusetts, Montana, New Hampshire,
+   Pennsylvania, and Washington) need every party's consent to record; Bland is asked not to keep a
+   recording (`record: false`), but it does transcribe. Notice at the start with the other side
+   going on is generally treated as consent, and California's courts have been the strictest about
+   it.
+4. **Whose call it is.** Every call is placed on the owner's own Bland account, under Bland's terms,
+   which make the account holder responsible for how calls are used, and billed to the owner.
+   Otian AI never holds a calling account, never pays for a call and never sees one. The terms of
+   service should say the owner is the caller.
+5. **Hours.** 8:00am to 9:00pm is the TCPA's window for telephone solicitations, kept here though
+   these are not solicitations, on the business's own clock: its map listing's time zone, else its
+   area code's, else (a toll-free number, or an area code the data does not have) a window that is
+   inside 8 to 9 in every zone from Hawaii to Newfoundland. The TCPA reads the window at the called
+   party's location, and an area code is only evidence of it, so a business whose number came from
+   somewhere else can still be reached outside its own 8 to 9 when no listing says where it is. A
+   map listing's hours, when it has them, narrow it further.
+6. **Do not call.** The national registry covers solicitations to residential lines, which these
+   are not. A business that asks not to be called again goes on that agent's own list for good.
 
 ### 🚧 Group-chat messaging + a "who it may message" UI — ROADMAP, NOT SHIPPED
 
@@ -12281,6 +12631,10 @@ waitlist, which is the check Muse taught us to make; if either is read later, pl
 - &#9940; Never quote either company&rsquo;s app code, only its public pages.
 - &#9888;&#65039; What cuts against us, and is printed: both need no computer of yours and keep going
   while yours is off. Tab also places phone calls and waits on hold; that is not on the hub.
+  *Added October 19, 2026, in no release yet:* when a release carries calls (Archie `6e8e5549`),
+  this becomes: "Tab also places phone calls and waits on hold. Archie phones a business only when
+  calls are switched on and the owner presses Place the call, and does not wait on hold; neither is
+  on the hub." Until then it stays as written.
 - The chart&rsquo;s letters are T and E, in the site&rsquo;s own type, like every other company on it.
 
 **Re-read 2026-09-18 for the compare chart&rsquo;s second and third views, for the axis that was

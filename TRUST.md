@@ -6338,13 +6338,15 @@ line in a box, and the new words take the old one's place in the same section an
 written, because it is true of every released version. The next entry is the rest of that build:
 bringing in what ChatGPT, Claude or Gemini knows.
 
-### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers: BUILT 2026-10-18 (Archie `9c02805f`), in no release
+### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), in no release
 
 *Archie `981acfe7` to `f1eca93d` on the branch `parity-p1`, merged into main as `9c02805f`, and
-`54089688`, which names Change this beside Forget this in the memory sentence the agent is given;
-all on main and in no release. Nothing here is said in the present tense on the site until a
-release carries it. A phone half is being built as its own package; until a release carries it,
-the "Not on Archie Mobile" boundary below stands as written.*
+`54089688`, which names Change this beside Forget this in the memory sentence the agent is given.
+The phone half is Archie `b1ab5b40` and `3bf2311e` on the branch `parity-p1-phone`, merged as
+`360e031c`, and archie-mobile `a66994d`, merged as `1c250d9`. All on main and in no release.
+Nothing here is said in the present tense on the site until a release carries it, and nothing
+about the phone until an Archie Mobile build with `1c250d9` is out and the computer runs an Archie
+with `360e031c`.*
 
 Neither half has been used by a real owner, and the paste has been tried only on answers written to
 look like what ChatGPT, Claude and Gemini send.
@@ -6412,8 +6414,30 @@ kept. Any line your agent remembers can be changed in place, as well as added or
   wherever this one appears.
 - ⚠️ **Archie only on the first screen.** Archie for Teams has it on Memory alone, because its first
   screen has no room for another card.
-- ⚠️ **Not on Archie Mobile.** The phone shows how many things the agent remembers and has no screen
-  listing them, so it can neither bring lines in nor change one.
+- ⚠️ **On Archie Mobile, the owner's phone only, and only through the computer.** Built October 18,
+  2026 on the branch `parity-p1-phone` in both repos and merged (Archie `360e031c`, archie-mobile
+  `1c250d9`), in no release, and never yet opened on a real phone. Memory on the phone is reached
+  from the Memory row under the count on Documents (`src/screens/Manage.tsx` in archie-mobile) and
+  is `src/screens/Memory.tsx` there: the same two sections, Change this and Forget this beside each
+  line with Undo after either, Clear all, the box that adds a fact, and the same bring-in screen (the
+  same sentence to copy, the same ticks, the same line where the room runs out, the left-out lines
+  with their reason, nothing saved before the keep press). Its words and its room walk are copied
+  from the window's in `src/memory.ts` there, tested in `src/memory.test.ts`. Every press is a relay
+  op the computer answers with the window's own command past the window's own check
+  (`src-tauri/src/phone/memory.rs` in the Archie repo, calling the `memory_*_in` halves of the
+  commands in `src-tauri/src/commands/access.rs`), so the reading of a paste is still code on the
+  computer and the phone never reads the memory file itself. The row is drawn only where the
+  computer says it answers (`memory_screen` on the snapshot). Never say the phone works without the
+  computer: with the computer asleep or off, the screen cannot open. Tests: `phone::memory::tests`
+  (six).
+- ⛔ **A teammate's phone is refused every memory op, an admin's included.** A teammate's phone
+  cannot run any of it (`teammate_may_run` in `src-tauri/src/team_phone.rs` names none of the ops,
+  and none is an admin op; held by
+  `team_phone::tests::the_owners_memory_never_reaches_a_teammates_phone`), so never say a teammate
+  can see or change the owner's memory from a phone.
+- ⚠️ **Seen on the iOS simulator only.** The phone's Memory screen has been looked at on the iOS
+  simulator and never on a real phone against a real computer running Archie. Copy may describe it
+  once it ships and may not call it proven.
 
 **Amending the memory entry above.** Its approved wording says "you can read every line of it, add
 one, or delete one". Once this is in a release, it reads "read every line of it, add one, change one,

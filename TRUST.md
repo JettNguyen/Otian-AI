@@ -455,6 +455,16 @@ already said in its own table; the approved sentence now says the same.)*
 our server. That was true for six weeks and is now false in the one direction that matters, so any
 page still carrying it is describing a product we do not sell.)*
 
+*(Note, October 19, 2026: from 0.3.11 a call to a business runs on this plan, and its summary and
+transcript are a business's words crossing our server when the agent reads them. The approved
+sentence stays true, since email and text replies are still the two things this plan refuses, but
+its reason no longer separates them from everything else: a business on a call was told, not asked.
+What separates them is Jett's rule of the same day, that other people's words cross our server only
+when those people were told an AI is on the line, which the opening of every call does and nothing
+about a text or an email does (the phone calls entry, Archie `bebc62fa`). No page gives a new reason
+beside this sentence until Jett approves one, and that entry's boundaries say why the rule itself
+is never a promise about everybody's words.)*
+
 **Boundaries, do not cross:**
 - ❌ Never "we cannot see it" or "we technically cannot read it" for this plan, for the same
   reason as the free credits above: the reply is buffered in memory to read the `usage` block,
@@ -11565,6 +11575,12 @@ waits for the Archie Mobile build now being submitted, so no page says the phone
 build is on the App Store. No real call has been placed, the wording is still Jett's to approve,
 and counsel has not answered the questions in the boundaries.
 
+*(Added October 19, 2026, from Jett's decision the same day: which AI accounts calls run on, and
+why a call may cross our server when a text may not, in the last three bullets of Why it's true and
+the first four boundaries. Archie `bebc62fa`, on main and in no release, writes the rule into the
+code's comments and `docs/CALLS.md`; the one thing it changes in the app is the free credits'
+refusal.)*
+
 *Archie `0a22673a` to `116aee7f` on the branch `parity-p10`, merged into main as `6e8e5549`, then the
 calling hours on the business's own clock (`calls-hours`, merged as `ccdb459b`), and archie-mobile
 `832df9b`, merged as `7cf627e`; all on main and in no release. No real call has been
@@ -11666,12 +11682,48 @@ All paths are in the Archie repo.
   `call_business` is `OwnKeyOnly` in `crates/archie-runtime/src/tool_policy.rs`, refused with
   `calls::NEEDS_YOUR_OWN_KEY` and left off the belt on the trial (`on_someone_elses_credits` in
   `crates/archie-runtime/src/email/poller.rs`). Unlike mail, it is not refused on the plan with the
-  AI included (`runs_through_otian` gates mail and texts only), so on that plan what the agent reads
-  from a call rides its AI requests through our server, unlogged. ⛔ Never say calls need an AI
-  account of your own. The privacy policy says both, and what Bland is sent, from October 19, 2026,
-  under "Phone calls to businesses, if you switch them on".
+  AI included (`runs_through_otian` gates mail and texts only), so on that plan a call's summary and
+  transcript cross our server when the agent reads them, with the rest of its AI requests. The
+  server notes what each request cost and never what it said, and keeps no copy (the plan's entry).
+  ⛔ Never say calls need an AI account of your own. The privacy policy says both, and what Bland is
+  sent, from October 19, 2026, under "Phone calls to businesses, if you switch them on".
+- **Why a call may cross our server when a text may not: Jett's rule of October 19, 2026.** Other
+  people's words cross Otian's server only when those people were told an AI is on the line. A
+  business on a call is told before it says anything: the opening, which `bland::opening` writes,
+  says an AI assistant is calling and that the call is transcribed. Nobody who texts or emails the
+  owner is told anything of the kind, so Text Replies and the mail tools stay off the free credits
+  and the plan (texts for good, by the September 3, 2026 decision in the plan's entry). The Archie
+  repo says so in the `runs_through_otian` doc comment (its Calls paragraph), at
+  `NEEDS_YOUR_OWN_KEY` in `crates/archie-runtime/src/calls/mod.rs`, and in `docs/CALLS.md`, section
+  1, "Which AI accounts calls run on" (Archie `bebc62fa`).
+- **The free credits leave calls out as a product line, not by that rule.** From the release after
+  0.3.11, the refusal says only that: "Phone calls aren't part of Archie's free credits. Connect
+  your own AI account on my Setup tab, under AI account, and calls will work." 0.3.11's own refusal
+  still gives the old consent reason: "I can't make phone calls while I'm running on Archie's own
+  AI: what a business says on the call would pass through Otian's servers, and they never agreed to
+  that." The tool is not offered on the free credits at all (`gateway/turn.rs`), so either sentence
+  reaches an owner only when the agent names the tool anyway and passes the refusal on.
 
 **The boundaries:**
+- ⛔ **Never say or imply that calls never touch our servers**, in any form: not "no call passes
+  through Otian", not "nothing from a call reaches a server of ours", not "what a business says
+  stays between you and Bland". On the plan with the AI included, a call's summary and transcript
+  cross our server when the agent reads them, and with phone access on, a call's cards reach Archie
+  Mobile through the sealed relay on any AI account. The privacy policy's "no call goes through a
+  server of ours" is about placing the call, which Bland does on the owner's own account, and it
+  stands only in its paragraph, whose last sentence names the plan. Never quote it alone.
+- ⛔ **Never give the rule as a promise about everybody's words**, such as "other people's words
+  never pass through our server unless they were told". Calls, texts and mail are held to it.
+  Meeting transcripts and a connected CRM's contact records are not yet: they run on the free
+  credits and the plan as shipped (`tool_policy.rs`, the arms for `meetings_*` and `ghl_*`),
+  and the Calls paragraph of `runs_through_otian` names meeting transcripts as the open case.
+- ⛔ **Never say a business agreed to Otian, or consented to anything.** It hears first that an AI
+  assistant is calling and that the call is transcribed, and nothing about Otian. Whether hearing
+  that and going on counts as consent under any law is with counsel (the boundary on law below).
+- ⛔ **Never give a privacy reason for the free credits leaving calls out**, and never quote
+  0.3.11's refusal. Its reason, that a business never agreed to its words crossing Otian's servers,
+  would describe the plan with the AI included too, where those words do cross them. A page says the
+  privacy policy's "Calls do not work on the free starter credits" and stops there.
 - ⛔ Never "calls anyone", "calls your customers", "calls people for you", or any example of a call
   to a person. It refuses every number on the agent's lists, and calls to consumers were ruled out
   on purpose (below).

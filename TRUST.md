@@ -9610,20 +9610,24 @@ to approve.*
   a booking about a time"); its boundary "your calendars, never the other person's" still holds.
 - ⚠️ **The store's words went out with the release.** Archie `3870ddf5` held Calendar Manager's
   invitation words back (1.3.8 carried the 0.3.10 text), and 0.3.11's own commit put them back as
-  Calendar Manager 1.3.9 (`a016d540`). This site's store pages were synced from the public catalog
-  on October 19, 2026 and carry 1.3.9's words, and the hand-written page at
-  `skills-marketplace/browse/skills/calendar-management/` was rewritten the same day in this entry's
-  words and the Calendar changes entry's. `calendar-management.json` has no `min_app_version`, so a
+  Calendar Manager 1.3.9 (`a016d540`), and 1.3.10 (`2de3a91d`) corrected two of its sentences the
+  same day (the next bullet). This site's store pages were synced from the public catalog on October
+  19, 2026 and carry 1.3.10's words, and the hand-written page at
+  `skills-marketplace/browse/skills/calendar-management/` was rewritten the same day to match them. `calendar-management.json` has no `min_app_version`, so a
   computer still on 0.3.10 shows the same words for a skill that cannot invite anybody there until
   it updates. (Find a Time 1.4.8 changes only what the agent is told, not its store page.)
-- ⚠️ **Two of 1.3.9's sentences are not right for 0.3.11, and they are fixed in the Archie repo, then
-  synced, never on a generated page here.** "Every create, update, and delete is a proposal you
-  approve in chat first; nothing lands on your calendar until you say yes", and the short
-  description's "every create, change, or delete is written up for you to approve before it
-  happens", are the standing rule retired on October 19, false once the owner presses Yes, and stop
-  asking. "A Google account connected to change events cannot see anyone's" is false of an account
-  connected or reconnected since 0.3.11. Found at the October 19 sync; open until a Calendar
-  Manager after 1.3.9 is published.
+- ⚠️ **Two of 1.3.9's sentences were not right for 0.3.11, and were fixed in Calendar Manager 1.3.10**
+  (Archie `2de3a91d`, October 19, 2026), in the Archie repo and then synced, never on a generated
+  page here. Its long description said "Every create, update, and delete is a proposal you approve
+  in chat first; nothing lands on your calendar until you say yes", the standing rule retired on
+  October 19, and now names the one exception (after three yeses, Yes, and stop asking; then adding
+  or moving an event only the owner is on, on their own main calendar, happens at once, with Undo;
+  invitations always wait). It said "a Google account connected to change events cannot see
+  anyone's", and now says such an account sees the people Google lets it see, after a reconnect for
+  one connected before 0.3.11. ⚠️ **Still open:** 1.3.10 left the short description unchanged, and
+  its "every create, change, or delete is written up for you to approve before it happens" is the
+  same retired rule. On this site it is only in the store pages' search text (`data-search` on the
+  front, Work and All pages), not shown on a sheet, and it changes in the Archie repo, then a sync.
 - **What earlier claims got wrong, and what this replaces.** Until this build the Calendar Manager's
   store page said a new or changed event "carries a title, a description, a start, and an end, and
   nothing else", that guests and a location were "something you add in the calendar itself", and

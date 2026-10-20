@@ -2982,8 +2982,8 @@ and when, where that goes, what it never does, and how to switch it off."
   company the agent uses, through our server only on our AI, which keeps no copy; it never deletes
   mail or sends an email that was not approved, and sends only with Let it send replies checked; and
   the trash can on its row on the Connections tab switches it off.
-- **On the chooser,** folded under "What it reads, and how to switch it off", before the sign-in
-  buttons (`MAIL_PLAINLY` in `src/app/vocab.ts`, held to the guide's words by
+- **On the chooser,** folded under "What Archie reads", before the sign-in buttons (label shortened
+  October 20, 2026; `MAIL_PLAINLY` in `src/app/vocab.ts`, held to the guide's words by
   `the_chooser_shows_the_guides_lines`).
 - **Asked in the chat,** "What does it read if I connect my email?" or "How do I disconnect my
   email?" is answered with those lines and where the guide is, by code with no AI call, for the
@@ -3006,6 +3006,31 @@ and when, where that goes, what it never does, and how to switch it off."
   in the sentence: a Gmail account connected before that release with tidying on and sending off
   can still send until it is reconnected once, and a send still always waits for the owner's press.
   Outlook was never affected, because its send permission is asked for only when the box is checked.
+
+### Account choices stay visible, and Google Drive has its own waiting state: BUILT October 20, 2026, not released yet
+
+**Claim:** "Choose what your agent may use before you sign in. Once your account is connected,
+choosing Google Drive files is a separate step that you can leave for later."
+
+**Why it is true:** `GoogleConnect` in Archie's `src/app/connect.tsx` shows Google, Outlook, and
+other email providers first, then the relevant permission checkboxes without an expander. Sending,
+filing mail, and changing calendar events stay visible when their parent choice is off. App-password
+providers are shown as choices rather than a dropdown. The descriptions are shorter; the complete
+mail privacy explanation remains under What Archie reads.
+
+`signIn` refreshes the connected accounts and clears Finish in browser before `chooseFiles`
+starts the Drive picker. File selection shows Choosing files on the account and says that sign-in
+is complete. Choose files later clears that waiting state without removing the account. Add files
+opens the picker again. A late result from an older picker cannot clear the newer picker's status.
+
+**Boundaries:** this changes the computer's account setup. Archie Mobile cannot sign in to these
+accounts through its relay and still sends the owner to the computer. File access covers only the
+Sheets and Docs the owner selects. Calendar changes follow the existing approval rules, including
+the owner's choice to stop asking for adding or moving events with nobody else on them. Choose
+files later stops Archie waiting; it does not close the browser window or cancel Google's picker. Never claim that sign-in shares all of Google Drive.
+Previously, one Finish in browser state covered both account sign-in and file selection, making a
+connected account look unfinished until the picker answered. These changes need a desktop release
+before the site can describe them as available.
 
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 

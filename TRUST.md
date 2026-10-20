@@ -3051,6 +3051,32 @@ Previously, one Finish in browser state covered both account sign-in and file se
 connected account look unfinished until the picker answered. These changes need a desktop release
 before the site can describe them as available.
 
+
+### Main pages use shorter copy and visual groups: BUILT October 20, 2026, not released yet
+
+**Claim:** "The main pages put actions beside the things they change, with less repeated explanation."
+
+**Why it is true:** Archie's `src/app/agent-detail.tsx` gives the main sections their existing
+navigation icons beside their names and counts. Generic page descriptions are removed where the
+content already explains the section. Empty Skills and Routines pages offer one set of actions,
+with an icon and a short example. Personality pairs its tone/rules and profile editors where the
+pane is wide enough; their autosave behavior is unchanged. What it can do groups related switches
+in columns where they fit and keeps the web and calling boundaries visible.
+
+Knowledge has colored section icons, visual counts for Lists, Documents, and Memory, and navigation
+that moves above the content in a narrow pane (`src/app/knowledge.tsx` and `what-it-keeps.tsx`). Its
+permission tags remain. Memory edit and forget actions are visible without hovering. File details,
+routine delivery, sleep limits, errors, and destructive confirmations retain their meaning.
+`settings.tsx`, `account.tsx`, `resources.tsx`, and `work-board.tsx` cut repeated or generic helpers.
+The phone matches Knowledge's counts, shorter document and memory explanations, and illustrated
+empty Skills and Routines states (`archie-mobile/src/screens/Manage.tsx`, `Skills.tsx`, `Routines.tsx`,
+`src/ui.tsx`, `memory.ts`, and `steps.ts`).
+
+**Boundaries:** this is a layout and copy pass, with no new AI calls or account permissions. It does
+not add phone controls for desktop-only configuration or replace the phone's native page layout.
+Tab names, navigation ids, and the rules behind approvals stay the same. It needs desktop and phone
+releases before the website may describe these screen changes as available.
+
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026.** Its notes do not name it.

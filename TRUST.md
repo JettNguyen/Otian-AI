@@ -3018,12 +3018,6 @@ filing mail, and changing calendar events stay visible when their parent choice 
 providers are shown as choices rather than a dropdown. The descriptions are shorter; the complete
 mail privacy explanation remains under What Archie reads.
 
-The Connections tabs are Accounts, Apps, Devices, and Computer. Accounts includes email, calendar,
-and selected Google Drive files. Computer opens the existing Computer control panel. Directions
-in Archie, its guides, add-ons, and Archie Mobile name those shorter tabs. The internal ids and the
-panes each tab opens are unchanged. Earlier directions naming Email, calendar, files, Home devices,
-or the Computer control tab refer to these same panes under their previous labels.
-
 `signIn` refreshes the connected accounts and clears Finish in browser before `chooseFiles`
 starts the Drive picker. File selection shows Choosing files on the account and says that sign-in
 is complete. Choose files later clears that waiting state without removing the account. Add files

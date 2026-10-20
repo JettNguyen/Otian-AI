@@ -3023,6 +3023,17 @@ starts the Drive picker. File selection shows Choosing files on the account and 
 is complete. Choose files later clears that waiting state without removing the account. Add files
 opens the picker again. A late result from an older picker cannot clear the newer picker's status.
 
+**Panel contents simplified October 20, 2026:** the tab names remain Email, calendar, files;
+Apps; Home devices; and Computer control. The Apps catalog stays visible after connecting an app,
+with names and icons on the tiles and setup details after choosing one (`ServicePicker` and
+`ServicesConnect` in `src/app/connect.tsx`). The manual Hue bridge address is visible before a
+scan in `LocalDevicesConnect`. Computer control's Limits fields and Buying switch no longer need
+an expander (`src/app/screen-panel.tsx` and archie-mobile's `src/screens/Computer.tsx`). The buying
+agreement still appears before enabling purchases; its required shop list, amounts, and approval
+rules are unchanged. The feature's main switch still controls when its settings are available.
+The phone uses the same shorter explanations and visible Computer control settings. App connection
+and local device discovery remain computer-only because the phone relay has no operations for them.
+
 **Boundaries:** this changes the computer's account setup. Archie Mobile cannot sign in to these
 accounts through its relay and still sends the owner to the computer. File access covers only the
 Sheets and Docs the owner selects. Calendar changes follow the existing approval rules, including

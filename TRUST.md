@@ -3031,8 +3031,16 @@ scan in `LocalDevicesConnect`. Computer control's Limits fields and Buying switc
 an expander (`src/app/screen-panel.tsx` and archie-mobile's `src/screens/Computer.tsx`). The buying
 agreement still appears before enabling purchases; its required shop list, amounts, and approval
 rules are unchanged. The feature's main switch still controls when its settings are available.
-The phone uses the same shorter explanations and visible Computer control settings. App connection
-and local device discovery remain computer-only because the phone relay has no operations for them.
+Account rows show owner and calendar-sharing choices beside each other, without repeating the
+privacy explanation under every selection (`GoogleConnect`). A shared account explicitly shows
+its calendar as visible to Everyone. Missing-permission, failed-sign-in, and waiting-for-private-chat
+instructions remain. Account ownership and calendar sharing use the same backend operations.
+Computer control shows blocked sites and job duration in aligned setting rows; the Buy switch has
+one approval reminder. Chat examples no longer precede the settings, and the blocked-app list
+appears when adding an app. The full purchase explanation, including subscriptions and free trials,
+appears in the required buying agreement. The phone uses the same shorter explanations and visible
+Computer control settings. Account ownership, calendar sharing, app connection, and local device
+discovery remain computer-only because the phone relay has no operations for them.
 
 **Boundaries:** this changes the computer's account setup. Archie Mobile cannot sign in to these
 accounts through its relay and still sends the owner to the computer. File access covers only the

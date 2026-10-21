@@ -3077,6 +3077,18 @@ not add phone controls for desktop-only configuration or replace the phone's nat
 Tab names, navigation ids, and the rules behind approvals stay the same. It needs desktop and phone
 releases before the website may describe these screen changes as available.
 
+**October 20 follow-up, conversation formatting:** the read-only guest transcripts under Who can
+message it and on the Teams Dashboard use the existing safe Markdown renderer (`src/app/access.tsx`
+and `team-card.tsx`). Their conversation list previews become plain text before the 140-character
+cut, so clipping cannot leave half a Markdown marker (`src-tauri/src/inapp.rs`). The same file keeps
+the owner's Build a skill workshop out of guest logs, lists, and counts, including copies left by
+older runs, without deleting its history. Tests: `the_workshop_is_not_another_persons_conversation`
+and `other_conversation_previews_strip_markdown_before_clipping`. Marketplace sample replies also
+render their formatting on both apps (`src/app/store-sheet.tsx` and archie-mobile
+`src/screens/StoreSheet.tsx`). This does not add a phone view of other people's conversations or
+make the desktop transcripts writable. Both editions share the formatting fix; the team Dashboard
+remains specific to Archie for Teams. These fixes are built and not released yet.
+
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026.** Its notes do not name it.

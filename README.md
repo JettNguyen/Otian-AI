@@ -85,7 +85,7 @@ kinds.
 | **Personalities** | How your agent talks to you. Warm and chatty, or brief and to the point. |
 
 An add-on is a text file your agent reads. A Skill is written instructions plus settings. It
-cannot run code or a command on your computer, because Archie has nowhere to run one.
+brings no code of its own, and nothing in it runs as a program.
 
 If the job you need is missing, [we can build the add-on for you](https://consulting.otianai.com/#services),
 on a quote per add-on.

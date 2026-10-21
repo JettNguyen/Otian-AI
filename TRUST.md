@@ -3089,6 +3089,18 @@ render their formatting on both apps (`src/app/store-sheet.tsx` and archie-mobil
 make the desktop transcripts writable. Both editions share the formatting fix; the team Dashboard
 remains specific to Archie for Teams. These fixes are built and not released yet.
 
+**October 20 follow-up, visible close buttons:** desktop dialogs have a visible way out near the
+heading, including read-only conversations, editing and confirmation dialogs, setup help, and image
+and video previews. `DialogClose` and `DialogHeading` in Archie's `src/app/shared.tsx` share the
+control; `access.tsx` keeps the conversation heading and X outside the scrolling transcript and
+opens that transcript at its beginning. Close controls use the same guarded callbacks as Escape
+and the backdrop, so saving and installing still wait until the write ends. The required-update
+screen's X closes the window without dismissing the update requirement (`update-banners.tsx`).
+Phone menus, agent pickers, computer-control and install sheets, the attachment chooser, and Talk
+also have visible close controls with 44-point touch targets (`archie-mobile/src/ui.tsx` and the
+corresponding screens). Existing Close, Cancel, and Done controls remain. This changes neither
+approval rules nor what an add-on may do. Built in both editions, not released yet.
+
 ### ✅ What the first run says before you connect a calendar or a mailbox: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026.** Its notes do not name it.

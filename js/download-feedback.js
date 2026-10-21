@@ -61,6 +61,13 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (d) {
         if (!d || !d.version) return;
+        /* A release can leave one platform on the version before it. The feed then names the new
+           version with no entry for that platform, and that platform's button still serves the
+           release before, so the number is said only to a computer the feed has a build for. */
+        var keys = Object.keys(d.platforms || {});
+        var here = detectOs();
+        if (here === "win" && !keys.some(function (k) { return /^windows-/.test(k); })) return;
+        if (here === "mac" && !keys.some(function (k) { return /^darwin-/.test(k); })) return;
         var out = "Version " + d.version;
         var when = d.pub_date ? new Date(d.pub_date) : null;
         if (when && !isNaN(when)) {

@@ -8622,7 +8622,7 @@ conversation it is in is the one with you. It is not awake between messages: it 
 to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
 runs in between. It cannot run a command or use a terminal on your computer. The only code it
 writes is a short Python program it runs inside Archie, with no internet, seeing only copies of
-files you gave it. Archie shows you that program under its answer. On a Mac it can use the apps you
+files you gave it. Archie and Archie Mobile show you that program under its answer. On a Mac it can use the apps you
 allow. It cannot text, and it phones only a business, when you switched
 calls on and pressed Place the call. It presses nothing that finishes something, on a website or
 anywhere else, unless you switched on buying and the order is inside your limits; drafts wait for
@@ -8631,7 +8631,11 @@ your Send. And you can quit the app, because there is nowhere else it is running
 *Applied at the release that carries Python (P13), on Jett's October 21, 2026 approval of the
 "only code it writes" form, split into three sentences for the site's 35-word sentence limit with
 its meaning unchanged.* Until then the sentence read "It cannot run code or a command on your
-computer. On a Mac it can use the apps you allow, and never a terminal."
+computer. On a Mac it can use the apps you allow, and never a terminal." The approved form said
+"Archie shows you that program under its answer"; it was narrowed the same night to "Archie and
+Archie Mobile show you", because a chat app (Telegram, Discord, Slack, Matrix, iMessage) gets the
+answer without the program (Archie `docs/trust-entries/p13.md`). ⛔ Never say the program is shown
+wherever you talk to your agent.
 
 *Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it (Archie
 `6e8e5549`), from a note added the same day.* Through 0.3.10 the sentence read "It cannot call or

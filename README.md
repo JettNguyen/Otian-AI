@@ -21,9 +21,9 @@ Yours to shape & yours to keep. Never ours.
 ## Archie runs an AI agent on your computer for a business you run alone
 
 **Archie**, by Otian AI, is a desktop app for Mac and Windows. The agent it runs drafts replies to
-new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and waits
-for your yes. You message it from your phone or the chat app you already use. Your chosen AI
-company does the thinking.
+new leads, tracks unpaid invoices and keeps the calendar whenever your computer is on, and nothing
+goes out in your name until you say yes. You message it from your phone or the chat app you already
+use. Your chosen AI company does the thinking.
 
 > [!NOTE]
 > **Archie is in beta on Mac and Windows.** It is free on an AI account of your own at 20 jobs a
@@ -56,13 +56,15 @@ through a server of ours, which measures spend without recording what was said.
 access is on, sealed messages we cannot read. We keep no per-person record of the add-ons you
 install.
 
-**Email waits for you.** Your agent drafts a reply and brings it to your chat with Send, Edit and
-Dismiss buttons, and no email goes out until you send it or set a time. A calendar change applies
-only after you approve it. Buying is off until you switch it on, and then it works only at shops
-you pick, up to limits you set.
+**Nothing goes out in your name until you say yes.** Your agent drafts a reply and brings it to
+your chat with Send, Edit and Dismiss buttons, and no email goes out until you send it or set a
+time. Deleting an event, or changing one other people are on, waits for your yes. It phones only a
+business, when you switch calls on and press Place the call. Buying is off until you switch it on,
+and then it works only at shops you pick, up to limits you set.
 
 **Routines run on the schedule you set,** overnight included, and report back to your chat. Your
-computer needs to be on and Archie open.
+computer needs to be on. Close Archie's window and your agent keeps working; only quitting Archie
+switches it off.
 
 **Web searches go to your AI company too.** When your agent searches the web, the search runs at
 the AI company, so the words of the search reach their search service as well as their AI.
@@ -115,11 +117,12 @@ The AI bill is usually $13 to $31 a month, and up to $206 for a heavy agent. The
 
 | | Pages |
 |---|---|
-| **Archie** | [For One Person](https://otianai.com/archie/personal/) · [For a Team](https://otianai.com/archie/business/) · [How It Works](https://otianai.com/how-it-works/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [Pricing](https://otianai.com/archie/pricing/) |
-| **Add-ons** | [What's an Add-on?](https://otianai.com/skills-marketplace/what-is-an-add-on/) · [Browse](https://otianai.com/skills-marketplace/browse/) · [For Developers](https://otianai.com/skills-marketplace/for-developers/) |
-| **Consulting** | [Otian AI Consulting](https://consulting.otianai.com/) · [Consulting Pricing](https://consulting.otianai.com/#pricing) |
-| **Learn** | [Learning Library](https://otianai.com/learn/getting-your-computer-ready/) · [Compare](https://otianai.com/compare/) · [AI Explained](https://otianai.com/ai-explained/) · [Blog](https://otianai.com/blog/) · [FAQ](https://otianai.com/faq/) · [Troubleshooting](https://otianai.com/help/) |
-| **Company** | [Our Story](https://otianai.com/our-story/) · [Reviews](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) · [Trust](https://otianai.com/trust/) |
+| **Archie** | [For One Person](https://otianai.com/archie/personal/) · [For a Team](https://otianai.com/archie/business/) · [Archie Mobile](https://otianai.com/archie/mobile/) · [How It Works](https://otianai.com/how-it-works/) · [Pricing](https://otianai.com/archie/pricing/) · [Download Archie](https://otianai.com/archie/install/) |
+| **Add-ons** | [Browse All](https://otianai.com/skills-marketplace/browse/) · [Find an Add-on](https://otianai.com/skills-marketplace/find/) · [Build an Add-on](https://otianai.com/skills-marketplace/for-developers/) |
+| **Trust** | [What We Can and Can't See](https://otianai.com/trust/) · [Run the Checks Yourself](https://otianai.com/trust/proof/) · [If You Want to Stop](https://otianai.com/trust/if-you-want-to-stop/) |
+| **Learn** | [Comparisons](https://otianai.com/compare/) · [Check the Agent You Have](https://otianai.com/compare/questions-to-ask/) · [FAQ](https://otianai.com/faq/) · [Blog](https://otianai.com/blog/) · [AI Explained](https://otianai.com/ai-explained/) · [Learning Library](https://otianai.com/learn/getting-your-computer-ready/) · [Troubleshooting](https://otianai.com/help/) |
+| **Consulting** | [Otian AI Consulting](https://consulting.otianai.com/) · [Book a Free Call](https://otianai.com/questionnaire/) · [Consulting Pricing](https://consulting.otianai.com/#pricing) |
+| **About** | [Our Story](https://otianai.com/our-story/) · [Testimonials](https://otianai.com/testimonials/) · [Contact](https://otianai.com/contact/) |
 
 ---
 
@@ -163,16 +166,23 @@ index.html              the homepage
 css/styles.css          the single stylesheet for the whole site
 js/                     one small module per page that needs one
   nav.js                shared: theme, nav, drawer, loaded everywhere
-  catalog.js            reads the live add-on catalog from Firestore
+  store.js              opens an add-on's sheet in the store
 assets/                 logos, screenshots, demo video, diagrams
-data/public-catalog.json a snapshot of the public Firestore add-ons used by CI and static HTML
+data/public-catalog.json the public add-ons the store pages are written from
+scripts/                the checks (check-*) and the generators (gen-*)
 TRUST.md                every privacy claim we are allowed to make, with code pointers
+FACTS.md                every money figure and count on the site, with its source
 CLAUDE.md               the house rules below, in full
 ```
 
 There is no templating, so the nav is written out three times in every page (the desktop
 dropdown, the mobile drawer and the footer column). Nav changes have to be scripted across all
 pages and checked with `python3 scripts/check-nav.py`.
+
+A few parts are generated and committed: the add-on store (`gen-marketplace.mjs`), the blog
+(`gen-blog.mjs`), the AI Explained glossary (`gen-glossary.mjs`), the Archie Mobile drawings
+(`gen-phone-mocks.py`) and `sitemap.xml`, `robots.txt` and `llms.txt` (`gen-discovery.py`). Each
+has a `--check` mode, and the deploy fails when a committed copy has drifted from its source.
 
 ### If you edit copy
 
@@ -184,8 +194,8 @@ Four rules carry most of the weight. [CLAUDE.md](CLAUDE.md) has the rest.
    there, it does not ship until it is verified and added. The test: could you defend this exact
    sentence to a hostile engineer with a packet sniffer, using only what ships today?
 2. **No em dashes.** Not the character, not the entity, not anywhere in a served file. Restructure
-   with a colon, comma, semicolon, period or parentheses. Check with
-   `git grep -P '\x{2014}|mdash'` before committing (the escape keeps the check itself clean).
+   with a colon, comma, semicolon, period or parentheses. `python3 scripts/check-facts.py` checks
+   it, along with every figure against FACTS.md.
 3. **"Add-on" is the umbrella noun**; Skills, Routines and Personalities are the kinds a reader
    sees. Never "add an add-on".
 4. **Plain words, and never talk down.** Write so a first-time, non-technical reader understands
@@ -195,6 +205,16 @@ Four rules carry most of the weight. [CLAUDE.md](CLAUDE.md) has the rest.
 
 Never describe an unshipped feature in the present tense. Roadmap items are labelled as roadmap,
 with a date, or they are absent.
+
+Before you commit a copy change, run the checks the deploy will run anyway, plus the voice check,
+which it does not:
+
+```bash
+python3 scripts/check-facts.py        # figures, counts and em dashes
+python3 scripts/check-claim-drift.py  # claims that have drifted from TRUST.md
+python3 scripts/check-copy-length.py  # each page's word budget
+python3 scripts/check-voice.py        # the patterns that make copy sound written by a machine
+```
 
 ---
 

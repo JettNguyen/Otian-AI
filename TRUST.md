@@ -1169,6 +1169,14 @@ can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer t
 (`secrets.rs:62-67`, `gateway.rs:46`). Never imply it isn't. "We have no way to read it" is
 true and sufficient.
 
+**Amended October 23, 2026, for a key pasted on the phone** (Archie `359a7ca5`, archie-mobile
+`2dc8e55`, in no release and no phone build yet). A key typed into Archie Mobile reaches the computer
+inside a command sealed under the owner's pairing key, so it crosses Otian's phone mailbox on the way,
+sealed with a key we never receive, and is then stored in the Keychain like any other. "Sent to the
+provider and nowhere else" is not true of that key; "we have no way to read it" still is. Once a
+build carries it, a page that says where keys go says "sealed on the way from your phone, and we
+cannot open it", never "it never leaves your computer".
+
 **Plain-language form, approved 2026-08-03:** marketing pages may say "your computer's
 built-in password store" instead of "Keychain", with no parenthetical gloss. This is the same
 claim, not a weaker one: the load-bearing half is custody ("where we have no way to read
@@ -1891,7 +1899,11 @@ archie-mobile `04da3b6`):
   these controls rather than sending an action the computer would not know. A page may say this
   once a computer release and the phone update that carry it are both out.
 - ⚠️ **The phone still cannot connect an account or paste a key.** No secret travels through the
-  mailbox, so a skill waiting on an account says to connect it at the computer.
+  mailbox, so a skill waiting on an account says to connect it at the computer. (Amended October 23,
+  2026: from Archie `359a7ca5` and archie-mobile `2dc8e55` and `4446f38`, in no release and no phone
+  build yet, the owner's phone can paste an AI account's key and the Bland key for calls, sealed like
+  every command. Signing in to an account still happens at the computer. See "More of an agent's
+  setup from the owner's phone".)
 - **The update check itself is unchanged.** It is the same plain request to the same address (see
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
@@ -10814,10 +10826,72 @@ invite message from your phone."
 - Never that this reveals existing account credentials or pairing keys. The sole key-bearing
   response is a newly created teammate invite, encrypted for the paired owner.
 - The computer still runs the commands and must be awake, connected to the internet, and running
-  Archie. Reset access, blocking, and approving chat-app requests remain computer-only.
+  Archie. Reset access, blocking, and approving chat-app requests remain computer-only. (Amended
+  October 23, 2026: from Archie `c8b2a4fb` and archie-mobile `d0a156a`, in no release and no phone
+  build yet, letting people in, Not now, blocking and unblocking are on the owner's phone too, on
+  Archie for Teams. Reset access stays at the computer.)
 - The earlier notes below that the phone cannot add/edit describe the existing releases, not this
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
+
+### 🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), in no release and no phone build
+
+**Why it was built.** Jett, October 23, 2026: most of the time the owner is not at the computer the
+agent runs on, and these were the settings the agent kept sending them back to it for. The same day
+he decided the four edges below: sign-ins stay at the computer, keys may be pasted on the phone,
+letting in and blocking move to the phone, and Signal's files and voice wait for a real phone.
+
+**Proposed wording, once both apps carry it:** "From Archie Mobile you can let in someone who
+messaged your agent, or block them, turn on phone calls to businesses, paste your AI account's key,
+change what Email Manager and Text Replies watch for, and say whose each mail account is. Signing in
+to Google or Microsoft still happens on the computer."
+
+**Why it is true in the new code:**
+- **Every press is the window's own command.** `src-tauri/src/phone/people.rs` maps `people_let_in`,
+  `people_not_now`, `people_block` and `people_unblock` to `access_approve`,
+  `access_request_dismiss`, `access_block` and `access_unblock`, and the `people` answer carries who
+  is waiting and who is blocked. `src-tauri/src/phone/setup.rs` (new) maps the calls ops to
+  `calls_get`, `calls_connect`, `calls_set` and `calls_off`; `ai_key` to `llm_key_test`, then
+  `agent_add_secret` and `env_var_upsert`; the watch ops to `email_watcher_get/set` and
+  `text_watcher_get/set`; and the mailbox ops to `mailboxes_list`, `mailbox_assign` and
+  `calendar_share`. So the edition's person limit, the audit lines and the checks are the computer's.
+- **A key is checked before it is kept.** The Bland key goes to Bland's account check and the AI key
+  to the provider's, exactly as the window's Connect does, and a key that fails is not stored. Both
+  reach the computer inside a command sealed under the owner's pairing key and are never sent back.
+- **Turning on calls is the same agreement.** The phone shows the calls note above Turn on calls
+  (archie-mobile `src/screens/Calls.tsx`), and withholds the button when its copy of the note is
+  older than the computer's.
+- **A broken mailbox says which press helps.** The watcher now keeps whether a failure was the
+  account's sign-in (`MailWatchState::sign_in`, set in `email/poller.rs`), so both apps say Reconnect
+  only when signing in again is the fix. The snapshot carries each mailbox that stopped opening
+  (`mail_trouble_of` in `phone.rs`) for the phone's Connections row.
+- **An agent that ends on its own says so.** It used to stay listed as running, so the phone showed
+  it as Live and Switch on answered "already running". It now leaves the running list, records
+  `StoppedBy::OnItsOwn` (`gateway_lifecycle.rs`, `bundle/mod.rs`), and both apps say "Sam stopped on
+  its own" beside Switch on, which works.
+- **The agent names both apps** where it sends the owner to these settings (Archie `683d483d`).
+- **Tests:** `phone::people::tests` and `phone::setup::tests` in Archie, and archie-mobile
+  `src/people.test.ts`, `src/calls.test.ts`, `src/ai-account.test.ts`, `src/watches.test.ts`,
+  `src/mailboxes.test.ts` and `src/steps.test.ts`. `cargo test --workspace --lib`, `npm run check`
+  and `npm test` pass in both repos. Nothing was run on a real phone or drawn on a simulator.
+
+**Boundaries:**
+- ⛔ Never say any of it works from the phone until a release of Archie and an Archie Mobile build
+  both carry it. A phone newer than its computer says to update Archie on the computer.
+- ⛔ Never that the phone signs in to Google, Microsoft or Zoom, or reconnects an account. It shows
+  which account stopped opening and says where on the computer to press Reconnect.
+- ⛔ Never that a key "never leaves your computer" or "never touches our servers". One pasted on the
+  phone crosses our phone mailbox sealed, and we cannot open it (the Keychain entry's amendment).
+- ⛔ Never that the phone switches on Watch my texts, gives the Mac its permission to read Messages,
+  or sets up "Another provider" (an address and a model). Those stay on the computer, and the phone
+  says so.
+- ⚠️ **Archie for Teams only, for letting people in.** The personal edition sends no Teammates page
+  to the phone, so its owner lets in and blocks at the computer, and the agent's notice says so.
+- ⚠️ The phone changes only the rows named here. The rest of the Email Manager and Text Replies
+  panels (what earns a message, drafts, how often, how many) stays on the computer, and the phone
+  says where.
+- ⚠️ The computer runs every one of these and must be awake, connected to the internet, and running
+  Archie.
 
 ### 🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, RELEASED in 0.3.10, 2026-10-17
 
@@ -11911,7 +11985,11 @@ All paths are in the Archie repo.
 - ⛔ Never say it waits on hold, works phone menus well, or calls back. Nobody has seen it do any of
   them, and a voicemail it leaves names no number to call back, because the call comes from one of
   Bland's numbers.
-- ⛔ Never say it can be switched on from Archie Mobile.
+- ⛔ Never say it can be switched on from Archie Mobile. (Amended October 23, 2026: from Archie
+  `359a7ca5` and archie-mobile `4446f38`, in no release and no phone build yet, it can, with the
+  calls note above Turn on calls and the key checked with Bland first, as on the computer. This line
+  stands until a release and a phone build both carry it. See "More of an agent's setup from the
+  owner's phone".)
 - ⛔ Never "calls during business hours" or "only when they're open" as a promise. A map listing's
   published hours are honored when the listing has them; otherwise the only limit is 8:00am to
   9:00pm on the business's clock, and that clock is a best reading: an area code says where a

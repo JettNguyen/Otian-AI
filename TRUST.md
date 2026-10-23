@@ -1972,9 +1972,11 @@ when that is the clearer shape."
   videos too) and the files picker (`src/attach.ts`, `src/screens/Chat.tsx` in archie-mobile). Files
   cross in sealed pieces, several at a time, up to 5 MB for a picture, 10 MB for a document and 25 MB
   for a video (`upload_cap` in `src-tauri/src/phone.rs`, `FILE_MAX` in the app's `src/upload.ts`).
-- **Files back.** The agent sends a file it made or one from its documents (`save_file`, with a
-  `file_id` for a document it holds, `crates/archie-runtime/src/export.rs`). The app shows the
-  agent's pictures and opens its files when somebody presses them (`media`, `src/shown.tsx`).
+- **Files back.** The agent sends a file it made, one from its documents, or one it just opened on
+  an email (`save_file`, with a `file_id` for a document it holds or the `mail/` one the mail tool
+  names, `crates/archie-runtime/src/export.rs`). A routine sends what it made to the chat its report
+  goes to (`files_go_to` in `gateway/routines.rs`, Archie `a354749a`). The app shows the agent's
+  pictures and opens its files when somebody presses them (`media`, `src/shown.tsx`).
 - **Tables.** The window and the app draw tables, checklists, links and code
   (`src/app/markdown.tsx`; `src/text/markdown.ts` in the app, with tests). The agent is told a
   table is fine only when every screen reading the conversation draws one: talking in Archie alone,
@@ -9924,6 +9926,14 @@ rather than inside it.
 - A file over 25 MB coming in, or 15 MB going out, is refused with a sentence rather than
   attempted. Both numbers sit under what mail servers accept, because base64 makes an attachment a
   third larger on the wire.
+- **It can also hand the file to you, in the chat** (Archie `13291d7e`, October 23, 2026, in the next
+  release after 0.3.11). Asked "send me that invoice", it sends the file it opened into the
+  conversation you are in: a chat app, the Archie window, or Archie Mobile. That is a file to you,
+  not an email, so the boundary above is untouched (`offer_from_mail` and `send_from_mail` in
+  `export.rs`). Only from the conversation that opened it, within the hour, and only kinds that do
+  not run when opened (documents, sheets, PDFs, pictures). Anything else stays in the email and the
+  agent says so. ⛔ Never say it forwards your email attachments to anyone, or on its own.
+  Signal still gets no files.
 
 ### ✅ A PDF that is a picture of a page, read — SHIPPED 2026-09-17, off until switched on
 

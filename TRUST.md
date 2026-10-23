@@ -7933,10 +7933,12 @@ the picture in the approval card shows which button it means.
   `screen/mod.rs` draws it in a closed shadow root, `aria-hidden`, taking no pointer events, so the
   agent's read and its presses pass through it; `tests/screen_live.rs` asserts the read is unchanged
   with it on the page. Nothing is drawn in an application.
-- **The phone can run the panel**, from the next Archie Mobile (no phone build carries it yet; the
-  desktop half shipped in 0.3.4): the snapshot carries each agent's
-  Computer control (`computer_at` in `src-tauri/src/phone.rs`) and nine relay ops change it through
-  the window's own commands. Sign-ins and the macOS permission still happen on the Mac.
+- **The phone can run the panel**, in Archie Mobile 1.3 on the App Store and the Android download
+  (both carry archie-mobile `ebdc5c5`; the desktop half shipped in 0.3.4): the snapshot carries
+  each agent's Computer control (`computer_at` in `src-tauri/src/phone.rs`) and nine relay ops
+  change it through the window's own commands. Sign-ins and the macOS permission still happen on
+  the Mac. Since Archie `0e7f2db1` the agent names both places when the switch is off ("on this
+  agent's Connections tab in Archie or Archie Mobile", `NEVER_LINE_OFF` in `gateway/prompt.rs`).
 - **Mac only.** `ScreenSurface::Apps.available_here()` is false off macOS, so the store lists no
   application add-on on Windows and the panel draws no applications section there.
 - **It reads text, not pictures.** A window is read through the same accessibility tree a screen
@@ -7966,7 +7968,10 @@ the picture in the approval card shows which button it means.
 - ❌ **Never "works while your Mac is locked"** until it has been tried.
 - ❌ **Never name an application as supported.** One real job ran in Premiere Pro, through its menus
   and its name box by key presses, and one in TextEdit. That is two jobs, not a list.
-- ❌ **Never say the phone can run it** until an Archie Mobile build carrying the panel is out.
+- ❌ **Never say the phone can sign in to a site or grant the macOS permission.** Switching
+  Computer control, Buying, sites and apps on or off works from the phone; signing in and the
+  Accessibility switch happen at the Mac. (Until October 23, 2026 this line said never to claim the
+  phone can run the panel at all, which stopped being true when 1.3 shipped with it.)
 - ❌ **Never say it moves your mouse or puts a cursor on your screen.** The pointer is drawn inside
   the agent's own browser window, and in an application nothing is drawn at all.
 - ❌ **Never "never types a card number" without "you pay with".** A gift card, library card,

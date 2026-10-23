@@ -7639,6 +7639,43 @@ stops" has the exception in item 1 on every installed copy; from 0.3.4 it does n
 same day, and a copy updates itself when Archie is next opened, so the exception lasts on a computer
 only until then.
 
+**Amended 2026-10-23: a teammate can have the agent use websites too, in a window of its own. BUILT
+(Archie `c85b7a9b`, archie-mobile `636e792`), in no release yet**, so nothing may say it of the
+download until the next release carries it. Cristina asked the Conduit agent from Slack to search
+the Meta Ad Library and was told the browser was not hers; Jett: the agent should be able to work on
+things even if it isn't their computer. Item 2 above was closed by keeping every screen tool from a
+guest. It stays closed a different way now: a teammate's job runs in a second browser window with a
+profile of its own (`screen/guest-profile`), signed in to nothing, so no page the owner's job left
+open and nothing the owner signed in to can reach a teammate's chat.
+
+- **Proposed wording, waiting on Jett's yes:** "On a shared agent, a teammate you let do everything
+  can have it use websites too, in a separate browser window that isn't signed in to anything. Your
+  own window, what you're signed in to there, your apps and buying stay yours."
+- **Why it's true:** `tools_screen::lane` in the Archie repo's `crates/archie-runtime/src/gateway/`
+  picks the window from the turn's `owners_turn` (the person at this computer, a routine or a
+  watcher's wake); every other turn gets `guest_screen_state` and `guest-profile`, and the sign-in
+  window only ever opens the owner's profile. `dispatch_screen_tool` leaves applications off a
+  teammate's turn and `may_spend` refuses a teammate's purchase, and the belt says neither exists
+  for them. The screen tools stay on `acts_as_owner`, so only a teammate on Everything you can gets
+  them. A finalizing press refused in the teammates' window ends the job with what is ready and on
+  which site (`not_in_this_window` in `ask_on`), because a teammate's tap releases nothing: a press
+  approval is read on the owner's turn only (`turn.rs`). Tests: `a_teammate_works_in_its_own_window_and_never_the_owners`,
+  `a_teammate_never_reaches_an_application`, `a_teammates_belt_is_websites_signed_in_to_nothing`,
+  `a_press_refused_in_the_teammates_window_ends_the_job_rather_than_asking`, and
+  `only_a_teammate_on_everything_is_offered_the_screen_tools`.
+- ⛔ Never that a teammate can use the owner's sign-ins, accounts or saved sessions through the
+  browser. The teammates' window is signed in to nothing, and nobody can sign it in from a chat.
+- ⛔ Never that a teammate can approve a press that sends, submits, buys or finalizes something.
+  The job stops and tells them where to finish it in their own browser.
+- ⛔ Never that a teammate can have it use apps on the computer. Applications are the owner's on
+  every setting.
+- ⚠️ Only on Everything you can. On Talk to your agent and Talk and add to your lists a teammate
+  gets no browser at all.
+- ⚠️ Not yet run on a real agent, and whether the Meta Ad Library answers a browser signed in to
+  nothing is unchecked (the Archie repo's `docs/OPEN-THREADS.md`). Say "can", never that it found
+  something, until it has.
+- ⚠️ One teammates' window per agent: two teammates' jobs take turns in it.
+
 **It is off until the owner turns it on**, per agent. That clause travels with every description of
 it: releasing it decided that the choice exists, not what anyone chose.
 
@@ -7881,8 +7918,11 @@ the picture in the approval card shows which button it means.
 - **A number from an old read cannot press something else.** Every action follows the element's
   path again and refuses it unless its role and name are still what the read printed
   (`macos::find`).
-- **Owner only.** Every screen tool is withheld from a guest (`acts_as_owner` in `turn.rs`, and the
-  test `a_guest_is_offered_no_screen_tool_at_all`).
+- **Owner only.** Applications are the computer's: a teammate's turn carries websites alone, in a
+  window of its own, and `dispatch_screen_tool` refuses an application off the owner's turn (test
+  `a_teammate_never_reaches_an_application`; until October 23, 2026 every screen tool was withheld
+  from a guest, test `a_guest_is_offered_no_screen_tool_at_all`; see the Websites entry's amendment
+  of that date).
 - **Off until switched on, and only the apps the owner allows.** Computer control's own switch
   (since the merge there is no second one for applications; `tools_screen::apps_switched_on`), an
   allowlist that starts empty and grows only by the owner's yes, then the macOS Accessibility
@@ -11211,6 +11251,16 @@ from the same rules your agent follows. Archie Mobile shows the same for everyon
   (`service_open_to`). The blurb says they stay the owner's, and What Dana can see lists the ones set
   up under "Yours alone on every setting" (`kept_yours` in `src-tauri/src/teammate_view.rs`), on
   both apps.
+  **Amended 2026-10-23, Jett's call that day: websites go to a teammate on Everything you can, in a
+  window of their own** (the Websites entry's amendment of that date). The owner's own window, what
+  is signed in there, and the applications stay the owner's on every setting, with the texts and
+  the lights; the browser left `owners_alone` (test now
+  `the_owners_texts_and_lights_stay_theirs_on_every_setting`). The blurb reads "...and use websites
+  in a browser window that isn't signed in to anything. Can't use your signed-in browser, your apps,
+  Messages, lights, or agent settings.", and What Dana can see lists "Websites, in a browser window
+  that isn't signed in to anything" for somebody who has it, with Only you can use naming the
+  owner's browser window and the apps (`TeammateChanges::websites`, `kept_yours`), on both apps
+  (Archie Mobile from its next build).
 
 **Boundaries:**
 - ⛔ Never that the page controls anything. It shows; the controls are where they were (Whose is
@@ -11219,8 +11269,11 @@ from the same rules your agent follows. Archie Mobile shows the same for everyon
   they send, and the agent can repeat them. Only About you stays with the owner's own messages, and
   a fact the agent already said in a teammate's chat stays said.
 - ⛔ Never that "Everything you can" stops at the owner's accounts in every sense: on it a teammate
-  acts on the owner's mail, calendar, tasks, lists, documents and connected services. What it never
-  hands over is Computer control, the texts the owner sent, their lights and a home service.
+  acts on the owner's mail, calendar, tasks, lists, documents and connected services, and from the
+  release after 0.3.11 uses websites in a window signed in to nothing. What it never hands over is
+  the owner's own browser window and what is signed in there, the applications, the texts the owner
+  sent, their lights and a home service. An earlier form of this line said Computer control as a
+  whole; that stopped being true on October 23, 2026.
 - ⚠️ "Stays yours" is what the agent will do for a teammate. Asked anyway, the agent is told the tool
   is the owner's alone on every setting and not to suggest changing one (`guest_refusal` in
   `gateway/turn.rs`); the words it then uses are the model's own.

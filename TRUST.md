@@ -4620,8 +4620,9 @@ your lists, each with Undo."
   - ⚠️ **Archie's own conversation.** An Undo is pressed there or on the phone, which mirrors it; a
     chat app's conversation is not told.
 
-*Amended October 26, 2026 (Archie `c83c00ca` and `4b18ea01`, archie-mobile `c33fb26`, in no
-release yet): a note the agent kept in its memory is named too.* A turn whose `remember` call
+*Amended October 26, 2026 (Archie `c83c00ca` and `4b18ea01`, archie-mobile `c33fb26`; RELEASED in
+0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11 and the Archie Mobile half waiting
+on its build): a note the agent kept in its memory is named too.* A turn whose `remember` call
 succeeded gets a line under its reply, in Archie and in Archie Mobile: "Saved to memory: prefers
 texts after 6pm", with Open (Memory on the agent's Knowledge tab; on the phone, the Memory screen
 over Documents) and Undo. It is written by code from the call itself (`keep_note` in
@@ -6607,7 +6608,8 @@ place in the same section and position (`change_note` in `crates/archie-runtime/
 Through 0.3.10 a line could only be added or deleted. The next entry is the rest of that build:
 bringing in what ChatGPT, Claude or Gemini knows.
 
-*Amended October 26, 2026 (Archie `a6853e5e`, archie-mobile `c33fb26`, `078ec08` and `26ca867`, in no release yet): Who
+*Amended October 26, 2026 (Archie `a6853e5e`, archie-mobile `c33fb26`, `078ec08` and `26ca867`; RELEASED in 0.3.12 on a Mac, October 26, 2026,
+with Windows still on 0.3.11 and the Archie Mobile half waiting on its build): Who
 this agent serves can be changed from the phone.* The profile the first-evening interview writes
 (`user.md`), which Archie on the computer edits on the agent's Personality tab, is in Archie
 Mobile's Personality section under the same heading, Who this agent serves, below the personality

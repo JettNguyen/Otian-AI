@@ -7374,8 +7374,20 @@ the struck-out block "Code" where it said "A program". On a Mac the agent can no
 the owner allowed, so a struck-out program would read as untrue; an add-on still brings no code and
 Archie still has nowhere to run any.
 
-**Why it's true (reworded 2026-08-21):** No shell, no `dlopen`/`libloading`, no WASM, no JS
-`eval` anywhere in `crates/` or `src-tauri/`. Process spawning does exist, and the old "no
+**Amended at the release that carries Python (P13; Jett's wording of October 21, 2026):** both
+captions now say "It brings no code of its own, and nothing in it runs as a program." Archie now runs
+one kind of code on a Mac, the short Python an agent writes to work something out, in a window
+with no internet and no way into the app (see "Working something out with Python"), so "Archie has
+nowhere to run it" stopped being true. Windows stays on the version before it until Python has been
+run there. An add-on still brings none, and nothing in an add-on runs as a
+program.
+
+**Why it's true (reworded 2026-08-21, and again at the release that carries Python):** No shell
+and no `dlopen`/`libloading` in `crates/` or `src-tauri/`. One WebAssembly runtime, Pyodide, runs the
+Python an agent writes to work something out, in a worker with no network and no way into the app
+(`src-tauri/src/python.rs`), and that worker allows `eval` for Pyodide's own JavaScript. An add-on's
+text can ask the agent to work something out, as the owner can, and the code then runs inside the
+same fence. Process spawning does exist, and the old "no
 `std::process::Command` anywhere" claim was flatly untrue: the crates spawn our own
 hash-verified sidecars (ffmpeg, whisper, yt-dlp, the `imsg` tool), the screen lane's browser,
 and the OS's device-id readers, each with an explicit argument list. What carries the claim is
@@ -8712,11 +8724,24 @@ privacy question and the privacy answers do not touch it, so it gets a claim of 
 programs talking to each other with nobody in the middle. Archie is one agent, and the only
 conversation it is in is the one with you. It is not awake between messages: it runs when you write
 to it, when a clock reaches a time you set, or when it checks a mailbox you connected, and nothing
-runs in between. It cannot run code or a command on your computer. On a Mac it can use the apps
-you allow, and never a terminal. It cannot text, and it phones only a business, when you switched
+runs in between. It cannot run a command or use a terminal on your computer. The only code it
+writes is a short Python program it runs inside Archie on a Mac, with no internet, seeing only
+copies of files you gave it. Archie and Archie Mobile show you that program under its answer. On a Mac it can use the apps you
+allow. It cannot text, and it phones only a business, when you switched
 calls on and pressed Place the call. It presses nothing that finishes something, on a website or
 anywhere else, unless you switched on buying and the order is inside your limits; drafts wait for
 your Send. And you can quit the app, because there is nowhere else it is running."
+
+*Applied at the release that carries Python (P13), on Jett's October 21, 2026 approval of the
+"only code it writes" form, split into three sentences for the site's 35-word sentence limit with
+its meaning unchanged.* Until then the sentence read "It cannot run code or a command on your
+computer. On a Mac it can use the apps you allow, and never a terminal." The approved form said
+"Archie shows you that program under its answer"; it was narrowed the same night to "Archie and
+Archie Mobile show you", because a chat app (Telegram, Discord, Slack, Matrix, iMessage) gets the
+answer without the program (Archie `docs/trust-entries/p13.md`). ⛔ Never say the program is shown
+wherever you talk to your agent. "On a Mac" was added the same night, when Jett held Windows back
+until Python has been run there, and it comes out when Windows gets Python. ⛔ Until then, never say
+Archie on Windows runs it.
 
 *Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it (Archie
 `6e8e5549`), from a note added the same day.* Through 0.3.10 the sentence read "It cannot call or
@@ -8730,7 +8755,7 @@ quotes it that way is stale from 0.3.11.
 | --- | --- |
 | One agent, no agent-to-agent conversation | Delegation to a specialist is offered only when the current target is not itself a specialist, so a helper cannot hand the job on: `crates/archie-runtime/src/gateway/tools_specialist.rs`. There is no channel between agents, and a specialist's run returns text to the agent that called it |
 | Not awake in between | Three wake sources and no others: an inbound message, a routine's clock, and the mail poller. Nothing schedules the model to think on its own |
-| No code or command execution on the owner's machine | There is no shell tool and no code-execution tool on the belt. **On a Mac, Computer control (0.3.4) can open and use an application the owner allowed.** It refuses Terminal and the other terminals, script editors, Automator, Shortcuts, Xcode and the code editors on its list, whatever the owner says (`REFUSED_APPS` in `screen/guard.rs`, application ids, so an unknown app is not on it), and it never presses Return, nor sends a line break as a key press (`macos::type_by_keys`), which is how a terminal runs what is typed. "It cannot run a program" became this row's wording that day, because opening an allowed application is running one. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
+| No command execution on the owner's machine, and code only inside Archie's Python window | There is no shell tool on the belt. `run_python` runs code the agent wrote in a worker with no network, no way into the app and none of the computer's files, on copies of documents it was given, for 30 seconds and 1 GB at most (`src-tauri/src/python.rs`; reworded at the release that carries Python, Jett's wording of October 21, 2026), on a Mac only until Windows has run it. **On a Mac, Computer control (0.3.4) can open and use an application the owner allowed.** It refuses Terminal and the other terminals, script editors, Automator, Shortcuts, Xcode and the code editors on its list, whatever the owner says (`REFUSED_APPS` in `screen/guard.rs`, application ids, so an unknown app is not on it), and it never presses Return, nor sends a line break as a key press (`macos::type_by_keys`), which is how a terminal runs what is typed. "It cannot run a program" became this row's wording that day, because opening an allowed application is running one. Programmatic tool calling exists (`gateway/programmatic.rs`), runs **Archie's own read tools inside the provider's container** rather than anything on the owner's computer, and is off unless `ARCHIE_PROGRAMMATIC_TOOLS` is set, which is not a setting any owner can reach |
 | No texts or finalizing presses, calls only to a business after a press, and purchases only when switched on | `NEVER_LINE` in `gateway/prompt.rs` is in every system prompt whatever is installed; on a website `screen/guard.rs` refuses submit, pay, buy, book, order, sign up, subscribe, delete and cancel by accessible name and role, biased toward asking. With buying on, `click_is_purchase` releases a purchase press inside `SpendPolicy`'s limits and nothing else (see the Buying entry). A call is placed only by the press on a `call_business` card, on an agent with Call businesses switched on (`calls::press`, the one function that dials, held there by `only_the_press_can_dial`), and only to a number `calls::business::may_call` accepts. *Applied October 19, 2026, at the 0.3.11 release, which carries calls (Archie `6e8e5549`); through 0.3.10 the claim cell read "No calls, texts, or finalizing presses, and purchases only when switched on".* |
 | No locks, thermostats or cameras | `crates/archie-runtime/src/local_devices.rs`: the device list the owner built by hand is the fence, and lights and plugs are the whole of what may enter |
 | Nothing else on the owner's network | The SSRF guard refuses private, loopback and CGNAT addresses on the model's own lane |

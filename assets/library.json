@@ -645,6 +645,7 @@
       "n": "2.5",
       "level": 2,
       "slug": "what-your-agent-cannot-do",
+      "hold": "Waiting on Jack's re-recording: the narration says \"Your agent cannot run code or a command on your computer\", which is untrue since the release that added Python. Publish the render made after it, saying instead \"Your agent cannot run a command or use a terminal on your computer. The only code it writes and runs is a short Python program, inside Archie, with no internet, and Archie shows you that program under its answer.\" (TRUST.md, What it structurally cannot do, Jett's wording of October 21, 2026).",
       "title": "What Your Agent Cannot Do",
       "lede": "The limits built into Archie, and how to stop your agent.",
       "youtube": "WX7SB_kVOXk",

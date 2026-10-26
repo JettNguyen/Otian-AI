@@ -2829,6 +2829,18 @@ appraisal and loan approval dates."
 - ⚠️ **Follow Up Boss deals bring no such dates.** A deal brought in from Follow Up Boss fills the
   columns its read has words for, and these three are not among them.
 
+*Amended October 26, 2026 (Archie `32a61822`, in no release yet).* Two bullets of this entry change.
+
+- **Three buttons under the goodbye.** The morning list's offer now takes their place under the
+  goodbye, and the three starters come under the answer to it instead, once (`starters_after_the_goodbye`
+  in `crates/archie-runtime/src/gateway/morning_list.rs`), unless the answer carries Keep both. Where
+  the owner keeps their work somewhere the goodbye brings in, the way in still comes first and the
+  starters were not shown anyway.
+- **No evening journal question for a business** stays true, and is now true for everyone at first,
+  from the release that carries these commits: the starter pack no longer brings Evening Reflection
+  there (the next entry), so there is nothing for `put_away_the_journal_question` to take off a new
+  agent. It still takes one off an agent set up on an older Archie, which still brings it.
+
 ### ✅ Where your information goes: a guide in Archie, and the same page on this site to print: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -3940,6 +3952,23 @@ it is answering."
   - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
     Sam asked the agent something mid-interview on all three passes, was answered with its next
     question, and had to press Stop the questions to get an answer.
+
+*Amended October 26, 2026 (Archie `32a61822` and `7ebc5374`, in no release yet): the first evening
+ends on the morning list's offer.* Whichever way the interview ends, with its goodbye or by letting go
+on a question of the owner's own, Stop the questions, a job or the turn cap, that last reply carries
+the offer of the morning list with its time (the first entry above). On Archie, the starter pack
+(Everyday Assistant) still installs the journal, and the journal no longer brings Evening Reflection,
+the 9:30pm question, so a new personal agent sends nothing unasked on its first night. A day after the
+morning list was offered where the interview ended, an owner with the journal and no line of work is
+offered the evening question once, in code (never an agent set up before, which had it brought with
+the journal, so one without it took it off): "Want one question about your day, here at 9:30pm each evening? Your answer
+goes in your journal. Each one uses a little of your AI.", with Yes, at 9:30pm and No thanks. Yes adds
+it through the same install as any chat install (`evening_offer` and `evening_yes` in
+`crates/archie-runtime/src/gateway/morning_list.rs`). Test:
+`the_evening_question_is_offered_once_on_a_later_day`.
+
+- ⚠️ **Personal edition only.** Archie for Teams has no journal and is never offered it.
+- ⚠️ **Evening Reflection is an AI call each evening**, and the offer says so. Never "free" for it.
 
 ### ✅ The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -8124,6 +8153,102 @@ the first one comes, from the same setup time.
   at that time", which was wrong.
 - ⚠️ The time is fixed per line of work for now; the owner can stop it, not move it.
 
+*Amended October 26, 2026 (Archie `32a61822`, `7ebc5374` and `c67d4aed`, in no release yet): every
+agent has one, and every owner is offered it on the first evening.*
+
+**Proposed wording, Jett's to approve:** "At the end of your first evening, your agent offers to send
+you a list each morning: today's calendar and reminders, your to-dos, and any email replies waiting
+on you to press Send, at 7:00am. For a restroom company it is today's stops by driver, the rentals
+past their end date, and who has not been billed. It is put together without asking an AI anything,
+so it costs nothing and cannot make anything up. It comes only once you say yes, and a morning with
+nothing on, it says nothing. There is a Stop button on it."
+
+**Why it's true:** `crates/archie-runtime/src/gateway/morning_list.rs` gives every agent a list
+(`Which`): its line of work's, from the setup's `morning` block as before, or the list everyone has,
+at 7:00am (`EVERYONE_AT`), for an agent with no line of work, one whose line of work has none (lead
+generation), or an interview that matched nothing. `crates/archie-runtime/src/morning.rs` builds the
+second from the parts every list already had (the calendar, today's reminders, open to-dos, and the
+team's work nobody has claimed) and one new part for every list, Email waiting on you: the email
+cards in the owner's chat still waiting on Send, or on Draft a reply or Dismiss
+(`waiting_for_the_morning` in `crates/archie-runtime/src/email/replies/draft.rs`), read from the cards
+on disk. Still no model call anywhere in it.
+
+- **Offered, never on by itself.** Since `72e3bd2a` (October 17, 2026), which this entry never
+  recorded, a new interview writes a line of work's list down as not on and offers it once. The list
+  everyone has reads as off with no file at all (`is_on`): only a yes turns it on. Test:
+  `no_agent_is_ever_sent_a_morning_list_it_was_not_asked_for`, which runs every kind of agent through
+  never offered, offered and passed over, Another time, asked about, declined and stopped, each with
+  something due that morning.
+- **Offered under the goodbye, with its time.** "Tomorrow at 7:00am, and each morning after, I can
+  send you a list here of today's calendar and reminders, your to-dos, and any email replies waiting
+  on you. It is built from your lists, uses none of your AI, and comes only on mornings with
+  something on it. Want it?", with Yes, at 7:00am, Another time and No thanks, written in code under
+  the AI's goodbye (`under_the_goodbye`, called from `handle_message_attributed` in
+  `crates/archie-runtime/src/gateway/turn.rs`). A trade's says its own words and time. Where the
+  interview lets go before its goodbye (a question of the owner's own, Stop the questions, a job,
+  the turn cap), the same offer goes under that answer (`under_the_last_interview_reply`). Where the
+  buttons do not fit, it says "To have it, say "send me the morning list"". An agent set up before
+  this and never asked is still offered it under a reply once its list has something on it
+  (`offer_under`). Tests: `the_goodbye_offers_it_with_its_time_once`,
+  `the_offer_goes_under_the_answer_when_the_interview_lets_go_early`.
+- **What turns it on, and only that.** A press of Yes or a time under the offer; the owner's own
+  words with "morning list" in them that ask for it to come ("send me the morning list", "yes, do the
+  morning list", "morning list every morning please", "can I have the morning list?", and "at 6:30am"
+  moves it); the owner's next message after the offer, or after being told what it would bring, when
+  every word of it is a yes or about the list ("send me this every morning", "yes please", "sure", "I
+  want it"); and the switch on a Routines screen. Never a question that names it ("what's on my
+  morning list?", "how do I turn on the morning list?": a question word first), asking to see it
+  ("show me my morning list"), a mention ("remind me to read the morning list"), or "ok" and "thanks"
+  alone, which may only be answering the goodbye. Test: `asking_in_words_turns_it_on_and_a_question_never_does`.
+- **It takes the place of the AI's morning checklist.** Yes, pressed or said, pauses the store's
+  Morning Task Checklist when it is on, through the same switch as "pause the checklist" in chat, and
+  says so: "I paused your 8:00am Morning Task Checklist too. This list has your to-dos on it and uses
+  none of your AI, and the checklist used some every morning. To have both, press Keep both." Keep
+  both turns it back on (`replace_the_checklist`, `keep_both`). Test:
+  `yes_pauses_the_morning_checklist_and_keep_both_puts_it_back`. **A screen never pauses it by
+  itself:** switched on from a Routines tab, the list leaves the checklist on, and the row says "Your
+  morning list has your to-dos in it too." under the switch, with Pause the 8:00am checklist (at the
+  checklist's own time), which pauses it through the checklist's own switch. The computer sends those
+  words (`ShownChecklist`), so the computer and the phone say the same thing. Test:
+  `a_screen_switching_it_on_leaves_the_checklist_and_offers_to_pause_it` (and archie-mobile `5917040`).
+- **On Archie's own AI, the first list says once that email is not on it**, why, and where to
+  connect an AI account of the owner's own: "on the Setup tab in Archie or Response quality in Archie
+  Mobile, under AI account: pick one, paste its key, and press Connect (Save, on the phone)", with
+  the Connections tab named too when no mailbox is connected (`mail_note`). It is said under the
+  list, so it never rides the agent's history. Test:
+  `on_archies_own_ai_the_first_list_says_once_that_email_is_not_read`.
+- **Every agent has the row** on the Routines tab, on the computer (`MorningListRow` in
+  `src/app/routines.tsx`) and in Archie Mobile (`MorningListRow` in `src/screens/Routines.tsx`), with
+  the same words and the same switch.
+
+**Boundaries:**
+- ⛔ **"Only for the four lines of work Archie has a setup for" is now wrong**, from the release that
+  carries these commits. Every agent has one. Still never "every agent sends a morning list" or
+  "Archie messages you each morning": it is offered, and sent only after a yes.
+- ⛔ **"The interview's goodbye says when the first one comes" has been wrong since October 17,**
+  when the list stopped being promised. Now the goodbye offers it, with its time; it is a promise only
+  after Yes. Never "your agent will message you tomorrow" without "if you say yes".
+- ⛔ **"The time is fixed per line of work; the owner can stop it, not move it" has been wrong since
+  October 17**: Another time picks one before noon, and "send me the morning list at 6:30am" moves
+  it. The screens still only switch it on and off.
+- ⛔ **Never "it reads your inbox overnight" or "it triages your email".** The email part names the
+  cards already waiting on the owner's press, from the last day (cards are swept a day after they are
+  made). On the free credits and the plan with the AI included it has no email part at all, because
+  the inbox is never read there.
+- ⛔ **Never "it replaces your checklist" without the rest.** A yes in the chat pauses the Morning Task
+  Checklist and offers Keep both; switching the list on from the Routines tab leaves it on and offers
+  to pause it. Archie Mobile shows that offer from its next release; an older phone switches the list
+  on and says nothing about the checklist. The list has no check button per to-do, which the
+  checklist has.
+- ⚠️ **The email part is on every list,** a trade's too: Email waiting on you comes after the trade's
+  own parts, on a morning with cards waiting.
+- ⚠️ **The list everyone has is told to the agent as its time and its Stop button only.** A question
+  that names the morning list is answered in code with the list itself; a question that does not may
+  get a vaguer answer about what is on it.
+- ⚠️ **Skipped with the window's Skip button, the interview ends with no reply**, so there is no
+  goodbye to put the offer under; that owner is offered it under a later reply, once something is on
+  the list.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
@@ -10570,6 +10695,15 @@ each account line says "Connected on Ember." or "Not connected on Ember yet." wi
   a run", up to 20 searches; never "a few cents".
 - ⚠️ An agent proposing an add-on in chat is a separate gate with its own entry, unchanged.
 
+*Amended October 26, 2026 (Archie `32a61822` and `cc03c915`, in no release yet):* Evening Reflection 1.1.5 is offered after setup (`"offered_after_setup": true` in
+`data/marketplace/routines/evening-reflection.json`, read through `arrives_with_its_skill` in
+`crates/archie-domain/src/routine.rs`), so on an Archie with these commits adding the Journal skill,
+in the store or through a pack, no longer brings it, and the install step no longer lists it under the
+journal, on the computer or the phone. It is still a companion in the catalog, so an older Archie still
+brings it and lists it. Mind & Wellness still lists it by name and still installs it. The ⛔ "Never "nothing goes on without your
+yes."" stays: the starter pack, the Researcher and the Morning Task Checklist that comes with the
+to-do list still go on unasked.
+
 ### ✅ Bring an agent over from OpenClaw, scheduled jobs included: SHIPPED in Archie 0.3.1 (2026-09-29; built 2026-09-28 as 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the free version)
 
 **Status corrected 2026-10-05.** This heading said "not yet in a release" for a week after 0.3.1
@@ -12920,6 +13054,19 @@ reading the page.
   between the two and it is the reason to connect a key.
 - Do not frame connecting a key as an upsell. It costs us nothing and it is the step that turns
   email on.
+
+*Amended October 26, 2026 (Archie `32a61822`, in no release yet):* the owner is now also told by the
+first morning list on the credits or on the plan with the AI included, once, under the list: "Your
+email is not on this list yet. While I run on Archie's own AI I don't read mail, because it would
+pass through Otian's servers, and the people who write to you never agreed to that. To change that,
+connect an AI account of your own on the Setup tab in Archie or Response quality in Archie Mobile,
+under AI account: pick one, paste its key, and press Connect (Save, on the phone)." (`MAIL_NOT_READ`
+in `crates/archie-runtime/src/gateway/morning_list.rs`; with no mailbox connected it also names the
+Connections tab, under Email, calendar, files). The rule itself is unchanged (`runs_through_otian` in
+`crates/archie-runtime/src/email/poller.rs`).
+
+- ⚠️ **Only once a list goes out**, which needs a yes and a morning with something on it. The
+  in-chat notice that Email Manager sends once is unchanged.
 
 ### Add-on permissions: one setting, not three levels
 

@@ -4745,6 +4745,47 @@ it leaves the computer. Jett's call, October 13, 2026 ("batch, but not urgent ma
 - ⚠️ Only for an AI account of the owner's own with Anthropic. On any other company's account,
   mail is read as it always was.
 
+*Amended October 26, 2026 (Archie `inbox-catches`, in no release yet): the watch now knows the people
+on your lists and on your agent too. That changes how their mail is read, not when.*
+
+**Proposed wording, Jett's to approve:** "Before your agent reads an email, Archie checks whether you
+have the sender written down: on one of your lists, on your agent, or as someone you've written to
+lately. If you do, your agent reads it knowing who they are, and a Gmail tab like Promotions never
+keeps it from being read."
+
+**Why it's true:** before any AI reads an email, the watch matches its sender in code
+(`Senders::who` in `crates/archie-runtime/src/email/known.rs`) against three things the owner
+already keeps: a row on one of their lists that holds the sender's address, has the sender's full
+name as the whole of one column, or is named for the company the sender's address belongs to
+(`accounts@tylerlumber.example` is Tyler Lumber's; never a free mail service like Gmail); a teammate
+on the agent, by the address on their card; and the two-week list of addresses the owner wrote to,
+as before. The match rides into the read as one sentence from the owner's records ("The sender, from
+the user's records: Billing, writing from Tyler Lumber's address, on their Customers list."), so the
+AI reads a customer's email as that customer's. That sentence is 26 to 42 tokens, and only matched
+mail carries it. A matched sender's mail in Promotions, Social or Forums is read like any other
+(`should_skip_for` in `crates/archie-runtime/src/email/poller.rs`). Tests:
+`a_customer_writing_from_the_company_address_is_known_as_that_customer`,
+`news_from_the_people_an_owner_keeps_reaches_the_morning_list`,
+`a_known_sender_in_a_gmail_tab_is_still_read`.
+
+- ⛔ **Never "mail from your customers is read first"** or "the people on your lists skip the wait".
+  Only somebody the owner wrote to in the last 14 days is read first, as before. Everybody else the
+  watch knows shares the wait of a few minutes (`a_customer_on_a_list_shares_the_half_price_wait`).
+  Sending them ahead was built, measured and turned down on cost (Archie `docs/COST-MEASURED.md`
+  section 44).
+- ⛔ **The boundary "It knows one thing: whether you wrote to the sender in the last 14 days" is now
+  true of the wait only.** For how the email is read, the watch also knows the owner's lists and
+  team. Still never "Archie knows which mail matters to you" or "important mail first": it knows
+  whether the sender is written down somewhere the owner keeps, and nothing about what they wrote.
+- ⚠️ **A match by name can be wrong.** Somebody else with the customer's full name, or anybody else
+  writing from that company's address, is matched as that row. What that costs is a sentence in one
+  read and a line in the morning list; it never sends anything.
+- ⚠️ **One-word names are never matched**, so mail signed "Sam" is matched only by its address.
+- ⚠️ **A Gmail tab no longer drops a known sender's mail unread.** From anybody else it is still set
+  aside for free. Bulk mail, no-reply senders and the ignore list still apply to everybody. Each
+  email the tab rule lets through is one more read on the owner's AI account, where it used to cost
+  nothing.
+
 ### ✅ A draft leaves a blank for a detail nobody gave, and an email or text with a blank in it will not send: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.**
@@ -8266,6 +8307,40 @@ sent twice (`morning_list::slept_through` and `now_for` in `gateway/morning_list
 - ⚠️ **Today's only.** A list is about one day, so Saturday's is not offered on Monday; a wake on
   Monday morning before noon gets Monday's list by itself and no message about the weekend's.
 
+*Amended October 26, 2026 (Archie `inbox-catches`, in no release yet): the list names the emails the
+watch read and was not sure about.*
+
+**Proposed wording, Jett's to approve:** "When your agent reads an email that needs no reply but was
+written by a person, or comes from someone on your lists, it does not just drop it. Your next morning
+list names it, under "2 emails I was not sure about", with who it was from and what it was about."
+
+**Why it's true:** where the Email Manager setting leaves an email alone (by default, any email
+nobody is waiting on a reply to), the watch keeps it for the morning instead of only binning it when
+a person wrote it or its sender is matched (`worth_keeping` and `keep` in
+`crates/archie-runtime/src/email/not_sure.rs`, called from `on_email` and `on_email_for_catchup` in
+`crates/archie-runtime/src/email/replies/mod.rs`). The morning list gives them a part of their own
+after Email waiting on you, a line each: "From Todd Baker, about "Matt signed"", or "From Sam Hart,
+an address I don't know, about "Invoice 4471"" (`not_sure_part` in
+`crates/archie-runtime/src/morning.rs`). Built from files, with no AI call. That part is news on its
+own, so a morning with only that on it still sends a list. Tests:
+`news_from_the_people_an_owner_keeps_reaches_the_morning_list`,
+`the_email_the_watch_was_not_sure_about_has_its_own_part`,
+`kept_once_named_once_and_only_in_its_own_chat`.
+
+- ⛔ **Never "Archie never misses an email"** or "it tells you about everything". Mail sent
+  automatically by somebody the owner has not written down (a newsletter, a receipt, an alert) is
+  still only binned, as are bulk and no-reply mail, the ignore list, and anything the watch never
+  read.
+- ⚠️ **Only where the inbox is watched**: an AI account of the owner's own, Email Manager on, and the
+  owner's yes to reading their mail. Never on the free credits or the plan with the AI included.
+- ⚠️ **Named once, on the first list after it was read**, and kept three days for a list that did not
+  go out. An email a card or a proposed change to a row has already spoken about is left out.
+- ⚠️ **Only the owner's own mail.** A mailbox assigned to a teammate on Archie for Teams keeps its
+  unsure mail for that teammate's chat, where no morning list goes, so it is never named anywhere.
+- ⚠️ **"Not sure" is the code's word, not the AI's.** The AI judged that nobody is waiting on a
+  reply; the list says the watch cannot tell whether the owner needs to know. Never describe it as
+  the AI flagging uncertainty.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
@@ -10431,6 +10506,10 @@ duplicate cards and a second AI bill, and that is a decision left open. From the
 carries it, the approved wording can add: "If it ever loses its place, it tells you which days it
 missed, and you can ask it to go through them."
 
+*Amended October 26, 2026 (Archie `inbox-catches`, in no release yet).* The line for an email read
+and left alone also says how its sender was known, as a list's name and how ("on Customers, by
+name"), and whether it was kept for the morning list. Still no email's full text.
+
 ### ✅ It can name the page an answer came from (SHIPPED 2026-09-17, in 0.3.0; entry written 2026-09-27)
 
 **Approved wording:** "Ask where a figure came from and your agent can name the page: Archie reads a
@@ -10557,6 +10636,21 @@ read-only (test `gmail_requests_readonly_only`, `builtins.rs:673-679`).
   send it"). It needs an entry of its own, with the address-checking boundary, before a page says
   it; "replies only" is no longer a limit to repeat.]*
 - "Sequencing constraint" from the 07-15 entry was honored: the gate landed before/with send.
+
+*Amended October 26, 2026 (Archie `inbox-catches`, in no release yet): a name with no email behind it
+is looked for through the owner's lists.* When the agent drafts a new email to a person by name and
+no From or To line in the mailbox names them, it looks on the owner's lists for a row where that
+person is the contact, and takes the address from that company's email that names them
+(`addresses_through_lists` in `crates/archie-runtime/src/email/replies/draft.rs`). This is what told
+a week-run owner "I have no address for her" while her email, sent from her company's accounts
+address and signed with her name, sat in his inbox. Test:
+`a_contact_who_writes_from_her_company_s_address_is_found_through_the_list`.
+
+- ⚠️ **Still only addresses already in the mailbox.** The list gives a company's name; the address
+  comes from mail that company sent that names the person. Mail from somebody else that only
+  mentions them is never taken as theirs, and nothing reaches a directory or the internet.
+- ⚠️ **It can be a shared address**, like an accounts inbox, and the agent is told to say where it
+  came from. The card shows the address in full before anybody presses Send.
 
 ### ✅ Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen), SHIPPED in Archie 0.3.1 on September 29, 2026
 

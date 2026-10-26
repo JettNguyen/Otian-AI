@@ -4620,6 +4620,33 @@ your lists, each with Undo."
   - ⚠️ **Archie's own conversation.** An Undo is pressed there or on the phone, which mirrors it; a
     chat app's conversation is not told.
 
+*Amended October 26, 2026 (Archie `c83c00ca` and `4b18ea01`, archie-mobile `c33fb26`, in no
+release yet): a note the agent kept in its memory is named too.* A turn whose `remember` call
+succeeded gets a line under its reply, in Archie and in Archie Mobile: "Saved to memory: prefers
+texts after 6pm", with Open (Memory on the agent's Knowledge tab; on the phone, the Memory screen
+over Documents) and Undo. It is written by code from the call itself (`keep_note` in
+`crates/archie-runtime/src/gateway/kept.rs`), costs no tokens and no AI call, and names the note in
+the words memory holds, with "From something you did not write:" in front when the turn had read
+somebody else's writing. Undo takes the note out through the journal (`memory_unsave` in
+`src-tauri/src/journal.rs`, `unsave` in `crates/archie-runtime/src/memory.rs`), the same Undo the
+Jobs tab and the Today list now offer for it. Tests: `a_note_saved_to_memory_is_named_with_its_undo`,
+`a_saved_note_is_said_under_the_reply_and_its_undo_takes_it_out`,
+`a_save_is_taken_back_only_while_it_reads_as_saved`.
+
+- ⛔ **The boundary "It does not name memory notes" is now half wrong.** It names notes saved on
+  that turn. It still does not name what the pass over older messages keeps
+  (`remember_from_dropped`), which runs after the turn with no reply to sit under; those show on
+  Memory as before, an About you line with its month. Never "Archie tells you everything it
+  remembers" or "you see every fact it saves".
+- ⚠️ **Undo takes out the line only while it still reads as saved.** Memory tidies itself when it
+  fills, and a tidy can reword a note or fold it into another line; then Undo takes nothing out and
+  says to find the note under Memory and press Forget this. It never takes out a longer line that
+  holds the note, since that line holds other facts too. Never "Undo always takes it back".
+- ⚠️ **Undo takes out the note, not what the save set off.** A tidy that the save started stays
+  done, and a brokerage the note named stays in the business details, where drafts read it.
+- ⚠️ **Not on a chat app**, as the rest of the line: Telegram, Slack, Discord, Matrix and iMessage
+  draw none of it.
+
 ### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 *Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
@@ -6579,6 +6606,23 @@ beside each line's cross on Memory, opens the line in a box, and the new words t
 place in the same section and position (`change_note` in `crates/archie-runtime/src/memory.rs`).
 Through 0.3.10 a line could only be added or deleted. The next entry is the rest of that build:
 bringing in what ChatGPT, Claude or Gemini knows.
+
+*Amended October 26, 2026 (Archie `a6853e5e`, archie-mobile `c33fb26`, `078ec08` and `26ca867`, in no release yet): Who
+this agent serves can be changed from the phone.* The profile the first-evening interview writes
+(`user.md`), which Archie on the computer edits on the agent's Personality tab, is in Archie
+Mobile's Personality section under the same heading, Who this agent serves, below the personality
+as on the computer, with Change, Save and an Undo that puts the old words back
+(`src/screens/WhoItServes.tsx` in archie-mobile; `profile_change` in
+`src-tauri/src/phone/memory.rs`, the body of the window's
+`user_context_set`, behind the same access and ownership checks as the other memory ops). Test:
+`the_phone_reads_and_changes_the_interviews_profile`.
+
+- ⚠️ **The owner's phone only.** A teammate's phone runs none of the memory ops, an admin's
+  included (`the_owners_memory_never_reaches_a_teammates_phone`).
+- ⚠️ **Not while the interview is writing it.** The phone shows it closed then, as the computer's
+  box is read-only, and the computer refuses a change that arrives anyway.
+- ⚠️ **Saving restarts a running agent** so it reads the new words, as the computer's editor does,
+  and says so.
 
 ### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
 

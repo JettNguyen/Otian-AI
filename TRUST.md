@@ -4648,6 +4648,18 @@ Jobs tab and the Today list now offer for it. Tests: `a_note_saved_to_memory_is_
 - ⚠️ **Not on a chat app**, as the rest of the line: Telegram, Slack, Discord, Matrix and iMessage
   draw none of it.
 
+*Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in no release yet): what it
+read is folded.* The "Read:" line is now a fold, "What I looked at", that names what was read
+("Bookings and your file rates.pdf"); opened, it says "I looked at" and each read as before, with
+the same presses to open each list or file (`src/app/read-words.ts`, drawn in `KeptLine` in
+`src/app/conversation.tsx`; `ReadFold` in archie-mobile `src/kept.tsx`, words in `src/words.ts`). A
+list that held nothing is left out of it when anything else was read; when every list read was
+empty, the sentence saying so is shown as before. Tests: `src/app/read-words.test.mjs` and
+archie-mobile's `src/kept.test.ts`. What the line says it saved, and its Undo, are unchanged.
+
+- ⚠️ **Shut by default.** Anybody describing the line should say what it read is one press away,
+  not that every read is listed under every answer.
+
 ### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14
 
 *Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
@@ -4846,6 +4858,16 @@ keeps about you is listed under the draft as Check before sending."
 - ⚠️ **It names the blank and fills nothing.** Beyond the owner's own three, only the person
   pressing Edit it fills a blank. Never "Archie fills in the details for you."
 - ⚠️ **Cost, internal only, never on the site.**
+
+*Amended October 26, 2026 (Archie `b7bdeb53`, archie-mobile `a60f01e`, in no release yet): the
+"Check before sending" line has new words.* An email card now ends "**Check these before you send
+it.** I put them in myself:" with one short bullet for each thing (`render_card` in
+`crates/archie-runtime/src/email/replies/card.rs`), where it said "_Check before sending: $450 and
+Thu Oct 15._" on one line, which an owner called long and technical. Quote the new words, never the
+old. Archie Mobile keeps the bullets in view under a long draft's cut (`cardNotes` in archie-mobile
+`src/card-notes.ts`), so the line "Archie Mobile draws the card's own words, so the line is on the
+phone with no change there" is no longer the whole story. What it names and its boundaries are
+unchanged.
 
 ### ✅ When the AI company fails, Archie asks it once more, says whether anything was saved or sent, and puts Try again under the reply: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
@@ -9713,6 +9735,10 @@ neither may be said until a release carries it.
   version also handed the drafter every title, guest and description for two weeks. Do not
   describe the calendar check as a setting, or as something you ask for.
 
+*Amended October 26, 2026 (Archie `b7bdeb53`, in no release yet).* The card under the draft says
+"I looked at your calendar before writing this." where it said "Checked first: your calendar", on
+email and text cards alike (`render_card` in both lanes' `card.rs`). Quote the new words.
+
 ### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `7d102231`
@@ -9975,12 +10001,112 @@ email or a time on your calendar, and it looks before it rewrites."
   - **What the earlier version got wrong.** On round three of the journey tests (October 12, 2026)
     an owner asked what was still unsent and was told nothing, while two drafts waited in the same
     chat, and in sixty runs nobody opened the Dashboard, where they were listed.
+  - **Amended October 26, 2026 (Archie `792109e8`, archie-mobile `a60f01e`, in no release yet): counted by
+    draft everywhere.** "2 waiting to send" over the message box, the Now tab in Archie, Now and its
+    Needs you in Archie Mobile, and the Chat badge in the sidebar count one per draft, whatever version
+    of it is showing (`draftOf` in `src/app/waiting.ts` and archie-mobile `src/waiting.ts`;
+    `oneCardPerDraft` there; `one_per_draft` in `src-tauri/src/inapp.rs`, behind `inapp_waiting`; a
+    folded card left out of `unread_in` in the same file). Tests: `two versions of one draft are one
+    thing waiting to send` in both apps' `waiting` tests, `the_waiting_list_holds_one_card_per_draft`,
+    `unread_is_what_arrived_since_the_owner_last_answered_or_looked`. The boundary "One conversation's
+    count" still holds.
 - **What the earlier version got wrong.** Pressing Edit it swapped the card for a card of three,
   which the window then showed at the bottom as a new message, and Use my words sent your whole
   edited reply into the chat as if you had typed it to the agent, then posted the changed draft as
   a second card under it. Rewrite it for me could not see anything but the draft and the one
   message, so "mention the invoice I sent her" came back as "did you get a chance to look at the
   invoice?" with nothing from the invoice in it.
+
+*Amended October 26, 2026 (Archie `b7bdeb53`, `792109e8`, `85282adb` and `37b512e0`, archie-mobile
+`a60f01e`, in no release yet): one draft, one card.*
+
+**Proposed wording, Jett's to approve:** "However a draft changes (you edit it, your agent rewrites
+it because you asked, or they write again on the same email), you see one card with Send on it: the
+current version, with a short line saying what changed. The card it replaced folds to one line
+saying nothing was sent, and its Send, anywhere it still shows, sends nothing."
+
+**Why it's true:**
+
+- **Every button names the version it was drawn on.** A draft's button ids end in a mark of what
+  Send would send (`eml:send:pea_x.9f3c01d2`): the subject, the words, reply-to-all and the
+  attachments on an email, the words on a text (`callback` and `words_mark` in
+  `crates/archie-domain/src/automation.rs`). A press whose mark is not the current one's is
+  answered before anything else runs, and nothing is sent: "That card is an earlier version of
+  the reply to Mike, so nothing was sent. The current version is below it, with Send on it."
+  (`stale_press` in `crates/archie-runtime/src/email/replies/actions.rs` and
+  `texts/replies/actions.rs`; the words in `crates/archie-runtime/src/draft_change.rs`). Code
+  only. Tests: `the_words_mark_follows_what_send_would_send`,
+  `send_on_an_earlier_version_sends_nothing_and_points_at_the_current_one`,
+  `an_earlier_text_card_folds_and_its_send_sends_nothing`.
+- **The earlier card folds.** Where a newer card takes over (a change typed on a chat app, /pending
+  posting a draft again, a text the person added to, a newer email on the thread), the old card is
+  changed to one line with no buttons (`fold_card` in `crates/archie-net/src/channel.rs` and
+  `mirror.rs`). Archie keeps its words behind Show it (`InAppUpdate::Folded` and `folded` in
+  `src-tauri/src/inapp.rs`, drawn in `src/app/conversation.tsx`), and Archie Mobile draws the same
+  (`Folds` in archie-mobile `src/screens/Chat.tsx`). Every other card a newer one replaces folds
+  the same way, where it used to be rewritten: a Show me once offer, an import card, a video card,
+  an offer to keep a list matched to its file, and a reminder (`show_offer.rs`, `import_offer.rs`,
+  `video_offer.rs`, `follow_offer.rs` and `reminder_card.rs` in `crates/archie-runtime/src/gateway/`).
+  Tests: `a_card_a_newer_one_took_over_folds_and_keeps_its_words`,
+  `a_folded_card_reaches_the_phone_folded`, `a_typed_change_folds_the_old_card_and_says_what_changed`,
+  `a_newer_offer_folds_the_old_one_and_a_chat_app_that_cannot_edit_gets_no_stray_line`.
+- **What changed, said on the card.** "_Changed: shorter, and the price taken out._" under "Not
+  sent yet." (`what_changed` and `changed_line` in `draft_change.rs`, set in both lanes'
+  `revise_in_place`, the version pick, Put the old one back, a typed change, and a change asked for
+  in chat through `revise_waiting` in `email/replies/draft.rs`). Code compares the two versions for
+  length, prices, days and times; anything else is "the wording". A picked version says "the
+  warmer version", Put the old one back says "back to the version before", the owner's own words
+  say "now in your own words". Tests: the seven in `draft_change.rs`,
+  `a_picked_version_and_the_way_back_each_say_what_changed`.
+- **A newer email on the thread takes over the waiting reply.** When an email arrives on a thread
+  where the agent's own reply is still waiting, that reply is marked replaced
+  (`EmailActionStatus::Superseded`; `taken_over` and `supersede` in
+  `crates/archie-runtime/src/email/replies/card.rs`), its card folds to "Earlier draft of the reply
+  to Mike. Nothing was sent. They wrote again, and the newer card below answers their newest
+  email.", and the new card says "Changed: they wrote again, so this answers their newest email."
+  Texts already did this when the person said more; their old card now folds the same way. Tests:
+  `a_newer_email_on_the_thread_replaces_the_waiting_draft`,
+  `a_newer_email_takes_over_only_the_agents_own_waiting_draft_on_its_thread`,
+  `a_draft_a_newer_email_took_over_answers_every_press_the_same_way`.
+- **The owner's own earlier reply on the thread stays, and the newer card names it.** One the owner
+  wrote, one held for a detail, and one on a catch-up list are theirs, so a newer email does not
+  fold them (`kept_on_thread` in `card.rs`). The newer card says, under "Not sent yet.", "_You also
+  have an earlier reply to Mike waiting, from Tuesday._" ("from earlier today", "from yesterday", a
+  weekday inside a week, "from October 12" past one), with a Show the earlier reply press that puts
+  that reply's own card, Send and all, at the bottom of the chat; the copy it had folds to "Moved to
+  the bottom of this chat" (`show_earlier` in `email/replies/actions.rs`). The press then goes from
+  the newer card. When the earlier reply is sent or dismissed, the line comes off the newer card
+  (`no_longer_waiting`). The same words on Archie, Archie Mobile, and every chat app (typed "show
+  the earlier reply" where there are no buttons). Tests: `the_earlier_reply_is_named_by_who_and_when`,
+  `a_newer_email_names_the_owners_own_earlier_reply_and_shows_it`.
+- **Edit it on the Dashboard opens the pop-up there.** On the agent's Now tab in Archie, it used to
+  change the tab to Chat; it opens the same pop-up over Now (`editWaiting` in
+  `src/app/agent-detail.tsx`). Archie Mobile's Now already did.
+- **Cost.** No AI call and no prompt text. A job reading back a replaced draft's state is told
+  "they wrote again and a newer draft replaced it, nothing was sent", about 12 tokens, only then
+  (`draft_now` in `crates/archie-runtime/src/gateway/tools_work.rs`).
+
+**The boundaries.**
+
+- ⚠️ **Signal and iMessage cannot change a message once it is sent.** There the earlier card stays
+  as it was, buttons and all. Its Send sends nothing and the answer says it is an earlier version.
+  Never "the old card disappears" without naming where.
+- ⚠️ **One card per draft, not one draft per thread.** A newer email takes over only the agent's
+  own waiting reply on that thread. A reply you wrote yourself, one held for something you still
+  have to fill in, and one on a catch-up list stay as they are, and the newer card names the newest
+  of them that has words on it; one set to go at a time calls itself off when they write back, as before. So two cards
+  on one thread can both have Send, and the newer one says so. Never "never two cards with Send".
+- ⚠️ **"Changed" is code reading length, prices, days and times.** Any other change is said as "the
+  wording". Never "it tells you exactly what changed".
+- ⚠️ **Older pieces keep the old way.** A card drawn before this build has no mark on its buttons, so
+  a press on it is checked by the draft alone, as before. An older Archie Mobile shows a folded
+  card grayed, with its words and no buttons.
+- **What the earlier version got wrong.** On the week run of October 19, 2026, a change posted a
+  new card and rewrote the old one where it sat to "Your version is on the newest card"; three of
+  five simulated owners lost track of which draft was current ("I had to scroll to find the real
+  draft"), and the waiting count was kept by message rather than by draft. On iMessage and Signal,
+  which cannot change a sent message, that line was sent as a new message of its own (found while
+  building this).
 
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 

@@ -8249,6 +8249,23 @@ on disk. Still no model call anywhere in it.
   goodbye to put the offer under; that owner is offered it under a later reply, once something is on
   the list.
 
+*Amended October 26, 2026 (Archie `3e814e76`, in no release yet): a list slept through until after
+noon is named in that message, with Send the morning list now.*
+
+The list is still never sent late by itself. What changes is that it is no longer silent: on a wake
+after noon, today's list is named in the one message, and Send the morning list now sends today's
+whatever the hour, as the list goes out on its own (its Stop button, its closing line), so it is not
+sent twice (`morning_list::slept_through` and `now_for` in `gateway/morning_list.rs`). Tests:
+`a_list_slept_through_past_noon_is_named_and_sent_on_a_press`,
+`a_list_nobody_said_yes_to_is_never_named`.
+
+- ⛔ **The boundary "a computer asleep until after noon gets none that day" is now half wrong.** It
+  gets none by itself; it gets a line saying so, and one press sends it.
+- ⚠️ **Only a list that is on and would have had something on it**: never one nobody said yes to,
+  never one stopped, never one that would have gone out empty.
+- ⚠️ **Today's only.** A list is about one day, so Saturday's is not offered on Monday; a wake on
+  Monday morning before noon gets Monday's list by itself and no message about the weekend's.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the
@@ -8466,6 +8483,59 @@ blamed for this morning.
 - ⛔ Never "it never misses a routine". Past its window a slot is recorded as missed, not run.
 - ⚠️ Not yet watched across a real sleep, the same caution as the rest of this entry.
 
+*Amended October 26, 2026 (Archie `3e814e76`, `c806f7b3` and `97f959ad`, in no release yet): a routine whose
+time passed while the computer was asleep or off, too long ago to run late, is now said in the chat
+once the computer is back, with a button that runs it.*
+
+**Proposed wording, Jett's to approve:** "If your computer was asleep or off when something was due
+and it is too late to send by itself, Archie says so in your chat when it is back: what did not go
+out, why, and a button to get it now. 'The computer running Archie was asleep from 6:10pm Friday to
+1:15pm Monday, so your morning list and 2 routines did not go out: Weekly sales recap and Plant
+watering. Press to get any of them now.'"
+
+**Why it's true:** `crates/archie-runtime/src/gateway/slept_through.rs` writes the message in code,
+with no AI call, and once it went `worker.rs` writes it into the agent's history as something the
+agent said on its own (`SLEPT_THROUGH_LABEL`), so a question about it afterward is answered by an
+agent that read it. It knows a
+sleep by the same two-clock test as the shell's `sleepwatch.rs` (`Watch::tick`, on the gateway's own
+minute) and the time Archie was closed or the computer was off by the time since this agent was last
+seen running (`Watch::start`), and it names only what the scheduler already gave up on and wrote down
+(`missed_slot` and `record_routine_missed` in `gateway/routines.rs`) and only what is still on, from
+its file (`routines::slept_through`). The message goes where the reports go (the owner's own
+conversation, `worker.rs`, the morning list's minute), held by quiet hours and by a turn running
+there. Run it now asks for the routine on the same lane as the Routines tab's Run now. Tests:
+`a_weekend_asleep_reads_the_way_the_research_wrote_it`,
+`one_wake_sends_one_message_and_never_names_a_slot_twice`,
+`nothing_the_owner_did_not_have_on_is_ever_named`, `a_press_runs_its_routine_and_leaves_the_others`,
+`what_a_sleep_kept_back_is_said_once_on_the_loops_own_minute`,
+`the_turn_after_the_wake_message_is_handed_it`.
+
+- ⛔ **Never "Archie never misses anything" or "it catches up on everything".** A routine past its
+  window is still not run by itself. It is named, and it runs when the owner presses. The Routines
+  tab still says it missed.
+- ⛔ **Never "it works while your computer is off".** This is what it says after, not what it does
+  during.
+- ⛔ **Never "it costs nothing".** The message makes no AI call, but it sits in the agent's history
+  like anything the agent said, so the turns after it carry it (74 to 135 tokens, until it ages out;
+  the Archie repo's `docs/COST-MEASURED.md` section 43).
+- ⚠️ **Only what the owner had on, and would have heard from**: a routine that is on and sends a
+  message. A Silent routine is never named, a due-date routine with nothing due now is not named,
+  and a routine that ran late on wake (inside its morning, afternoon or evening) is not named,
+  because it went out.
+- ⚠️ **One message per wake, naming up to three things.** The rest are counted, and a routine
+  counted rather than named is sent to Run now on the Routines tab, in Archie or Archie Mobile.
+  Pressing Run it now spends what a run spends, on the owner's AI.
+- ⚠️ **It says what it can prove.** "Asleep" is measured only while Archie was running. When Archie
+  starts again after being away it cannot tell a computer that was off from Archie being closed, so
+  it says both ("Archie was closed, or the computer running it was off, from about..."). A stretch
+  with the agent stopped with Stop, or one that ended on its own, gets no message at all.
+- ⚠️ **On Windows, "asleep" may never be said.** The clock it measures against stops during a sleep
+  on a Mac; whether it does on Windows is not known (`docs/OPEN-THREADS.md`). The "closed or off" half
+  works on both.
+- ⚠️ **Never seen across a real sleep, and its phone notification never seen.** Test E in the Archie
+  repo's `docs/WAKE-CHECK.md` is the check; until it passes, copy may describe the message and not
+  call it proven.
+
 ### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `4359e871`
@@ -8633,6 +8703,20 @@ Archie tells you it did."
   and the computer shows an alert when the agent posts something on its own (see "An alert on
   this computer" below).
 - ⚠️ **Any number in the message passes the when-check,** so never "it never guesses a time".
+
+*Amended October 26, 2026 (Archie `3e814e76`, in no release yet): a reminder dropped for being a
+week late is given in its own words in that message.*
+
+"Past a week it is dropped rather than delivered, and the drop is logged" is still true, and now it
+is also said: when the stretch that kept it back is known, the message names it in its words
+("your reminder 'Call the dentist'"), since those are the only copy left. A teammate's goes to the
+teammate and is not named to the owner, and one whose to-do was checked off first is not named.
+
+- ⚠️ **Named ahead of any routine**, because its words are the only copy left, and one of the three
+  things the message names: past the morning list and two reminders, a third reminder is counted
+  rather than quoted, and its words are lost as they are today.
+- ⚠️ **A reminder under a week late is unchanged**: it arrives late, saying when it was for, and is
+  not part of this message.
 
 ### ✅ An alert on this computer when the agent posts on its own: BUILT 2026-10-05 (Archie `4269a5e1`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)
 

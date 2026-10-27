@@ -3781,6 +3781,54 @@ calendar work the whole time."
     money card and the chat-app words moved to "Archie itself costs nothing on it". The rest were
     left as they are on October 17, because each names the AI account beside it.
 
+*Amended October 27, 2026 (Archie `b5c6e57b`, `30821825`, `3ba19e57` and `afaf0a8d`, archie-mobile
+`9370d36`, in no release yet).*
+
+- **The line under the ways now names the reminders and the morning list.** "Without the AI, the
+  reminders you set still go off, the morning list still comes if you have it on, and your lists and
+  calendar still work." with Lists and Calendar, on the computer and the phone (`WITHOUT_AI` in
+  `src/app/money-words.ts`, built from `STILL_WORKS` so the strip says the same, and archie-mobile
+  `src/money.ts`). The proposed wording's last sentence becomes "Your reminders, your morning list,
+  and your lists and calendar work the whole time."
+- **"Not every ending shows the card" no longer holds for a free trial.** A trial that runs out by
+  its days while Archie is open leaves the agents running, and the next message meets the card,
+  refused on the computer before anything is sent. It still holds for a plan that ended.
+- **In a chat app the ways may name a web page.** For Archie's plans on an AI account of the owner's
+  own, a chat app's reply says "For no daily limit, open otianai.com/account on your phone, sign in,
+  and pick a plan" (`for_a_chat_app` in `crates/archie-runtime/src/gateway/money_out.rs`, and
+  `WHERE_TWINS` in `money_answer.rs` for the price answer). The window and Archie Mobile never do.
+  After the trial, the place to set up an AI account is named on the computer alone, because Archie
+  Mobile's Response quality cannot reach the computer then.
+- **One more code, `no_ai_account`.** A plan bought with no AI account of the owner's own behind it
+  yet used to leave every agent unable to start. Now the agents run what needs no AI, and a message
+  meets "Your plan thinks with an AI account of your own, and none is set up yet." with one way on,
+  Set up an AI account (`no_ai_refusal` in `src-tauri/src/auth.rs`).
+
+*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, archie-mobile `fb3f42f` and
+`8c3804a`, in no release yet).*
+
+- **On Archie for Teams the line under the ways is not shown after the trial's end or a plan's.**
+  After `trial_exhausted`, `trial_expired`, `no_trial` or `plan_lapsed` the card says nothing about
+  what still works, and has no Lists or Calendar button, on the computer and in Archie Mobile
+  (`stillWorksAfter` in `src/app/trial-end-words.ts`, read by `src/app/money-card.tsx`, and its copy
+  in archie-mobile's `src/money.ts`, tested in `src/money.test.ts`). The proposed wording's last
+  sentence, "Your reminders, your morning list, and your lists and calendar work the whole time.", is
+  Archie's alone after either end. Asked what happens when the AI runs out, a Teams agent says "When
+  it runs out, I stop answering until there is a plan. At the end of the free trial your agents stop
+  until there is one, and the reminders you set stop with them. Nothing is deleted, and a plan starts
+  them again." (`crates/archie-runtime/src/gateway/money_answer.rs`).
+- **"Not every ending shows the card" no longer holds in Archie for a plan that ended either.** The
+  agents keep running, and the next message meets the card, refused on the computer before anything
+  is sent, with this computer's own code `plan_lapsed`: "Not done yet. Your plan has ended. I kept
+  your message ..." with the trial's ways on, the computer's alone, since Archie Mobile cannot reach
+  the computer then (`no_ai_refusal` in `src-tauri/src/auth.rs`, `money_out.rs`, test
+  `a_plan_that_ended_says_so_with_the_trials_ways_on`). A routine skipped then says "Your plan has
+  ended." in place of the trial's words (`waits_for_the_ai` in
+  `crates/archie-runtime/src/gateway/routines.rs`). On Archie for Teams it holds for both ends, since
+  the agents stop.
+- **"A trial that runs out by its days while Archie is open leaves the agents running"** is Archie's
+  alone. On Archie for Teams the deadline stops them.
+
 ### 🚧 Pressing Not now under an offer is answered at once, with no AI, and what it offered is dropped: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19
 
 **Released in 0.3.11 on October 19, 2026.** Its notes do not name it. Checked October 27, 2026:
@@ -3970,54 +4018,6 @@ one was sent to Haiku 5.5 and Sonnet 5.5 beside it and made answers longer, not 
 - ⛔ **No number about how short phone answers are, yet.** Neither replay after round four carried
   the note (the test's simulator never said a message came from a phone; it does now), so nothing
   has measured it on a journey.
-
-*Amended October 27, 2026 (Archie `b5c6e57b`, `30821825`, `3ba19e57` and `afaf0a8d`, archie-mobile
-`9370d36`, in no release yet).*
-
-- **The line under the ways now names the reminders and the morning list.** "Without the AI, the
-  reminders you set still go off, the morning list still comes if you have it on, and your lists and
-  calendar still work." with Lists and Calendar, on the computer and the phone (`WITHOUT_AI` in
-  `src/app/money-words.ts`, built from `STILL_WORKS` so the strip says the same, and archie-mobile
-  `src/money.ts`). The proposed wording's last sentence becomes "Your reminders, your morning list,
-  and your lists and calendar work the whole time."
-- **"Not every ending shows the card" no longer holds for a free trial.** A trial that runs out by
-  its days while Archie is open leaves the agents running, and the next message meets the card,
-  refused on the computer before anything is sent. It still holds for a plan that ended.
-- **In a chat app the ways may name a web page.** For Archie's plans on an AI account of the owner's
-  own, a chat app's reply says "For no daily limit, open otianai.com/account on your phone, sign in,
-  and pick a plan" (`for_a_chat_app` in `crates/archie-runtime/src/gateway/money_out.rs`, and
-  `WHERE_TWINS` in `money_answer.rs` for the price answer). The window and Archie Mobile never do.
-  After the trial, the place to set up an AI account is named on the computer alone, because Archie
-  Mobile's Response quality cannot reach the computer then.
-- **One more code, `no_ai_account`.** A plan bought with no AI account of the owner's own behind it
-  yet used to leave every agent unable to start. Now the agents run what needs no AI, and a message
-  meets "Your plan thinks with an AI account of your own, and none is set up yet." with one way on,
-  Set up an AI account (`no_ai_refusal` in `src-tauri/src/auth.rs`).
-
-*Amended October 27, 2026 (Archie `23ee5291` and `8fea0270`, archie-mobile `fb3f42f` and
-`8c3804a`, in no release yet).*
-
-- **On Archie for Teams the line under the ways is not shown after the trial's end or a plan's.**
-  After `trial_exhausted`, `trial_expired`, `no_trial` or `plan_lapsed` the card says nothing about
-  what still works, and has no Lists or Calendar button, on the computer and in Archie Mobile
-  (`stillWorksAfter` in `src/app/trial-end-words.ts`, read by `src/app/money-card.tsx`, and its copy
-  in archie-mobile's `src/money.ts`, tested in `src/money.test.ts`). The proposed wording's last
-  sentence, "Your reminders, your morning list, and your lists and calendar work the whole time.", is
-  Archie's alone after either end. Asked what happens when the AI runs out, a Teams agent says "When
-  it runs out, I stop answering until there is a plan. At the end of the free trial your agents stop
-  until there is one, and the reminders you set stop with them. Nothing is deleted, and a plan starts
-  them again." (`crates/archie-runtime/src/gateway/money_answer.rs`).
-- **"Not every ending shows the card" no longer holds in Archie for a plan that ended either.** The
-  agents keep running, and the next message meets the card, refused on the computer before anything
-  is sent, with this computer's own code `plan_lapsed`: "Not done yet. Your plan has ended. I kept
-  your message ..." with the trial's ways on, the computer's alone, since Archie Mobile cannot reach
-  the computer then (`no_ai_refusal` in `src-tauri/src/auth.rs`, `money_out.rs`, test
-  `a_plan_that_ended_says_so_with_the_trials_ways_on`). A routine skipped then says "Your plan has
-  ended." in place of the trial's words (`waits_for_the_ai` in
-  `crates/archie-runtime/src/gateway/routines.rs`). On Archie for Teams it holds for both ends, since
-  the agents stop.
-- **"A trial that runs out by its days while Archie is open leaves the agents running"** is Archie's
-  alone. On Archie for Teams the deadline stops them.
 
 ### ✅ What Archie connects to, as a guide, with Follow Up Boss by a key and not yet tried on a real account: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
@@ -12667,66 +12667,6 @@ email or a time on your calendar, and it looks before it rewrites."
     the button show only when words sit under the sign-off, and Save works either way.
   - ⚠️ **The phone's half has never been seen on a phone.**
 
-### 🚧 /pending moves a waiting card to the bottom instead of copying it: BUILT 2026-10-18 (Archie `47b1ff7b`), RELEASED in 0.3.11, 2026-10-19
-
-**Released in 0.3.11 on October 19, 2026.** Its notes do not name it. Checked October 27, 2026:
-`47b1ff7b` is an ancestor of the release commit `a016d540`.
-
-**Nothing below may be said on a page until a release carries it.**
-
-**Claim:** "Type /pending and everything still waiting on you is posted again at the bottom. The earlier copy says it was replaced by the newest card, and its buttons go."
-
-**Why it's true:**
-- `retire_old_copy` and `post_again` in `crates/archie-runtime/src/decide.rs`, called by every lane /pending posts: email drafts and new emails (`resend_open_cards` in `email/replies/actions.rs`), text drafts, catch-up lists (`resend_open` in `catchup.rs`), proposed row changes (`email/upkeep.rs`) and questions with buttons (`gateway/worker.rs`). Tests such as `pending_retires_the_old_card_and_an_old_press_does_not_send_twice`.
-
-**Boundaries:**
-- ⚠️ **Not on Signal or iMessage, which cannot edit,** nor in the window when its chat app is one of those. There the old copy stays and a press on it is answered once.
-- ⛔ **Never "a draft can never be sent twice" as a general claim.** What holds is that every copy of a draft is one record, and a sent record answers "Already handled.".
-
-### 🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4
-
-**Released in 0.3.11 on October 19, 2026.** Its notes do not name it. Checked October 27, 2026:
-`97a4935f` and `8a6ce92a` are ancestors of the release commit `a016d540`. Archie Mobile's part
-(archie-mobile `42501d7`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
-`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
-build.
-
-**Claim:** "When you press Send on an email your agent drafted, Archie says it went, under the message
-your agent wrote with the draft: "Sent to Ace Septic at 8:01am." Your agent's own words are never
-changed. On Telegram, Slack, Discord and Matrix it comes as a short message of its own."
-
-**Why it's true:**
-- Each draft card shown in a turn is tied to the reply that came with it
-  (`crates/archie-runtime/src/gateway/card_reply.rs`). Sending it, by a press anywhere or by Send
-  later firing, writes one line (`say_it_went` and `sent_line` in
-  `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From name when it had
-  one, its time spelled by `clock_face`, with the day when the send comes on a later day.
-- Archie keeps the line beside the message, never in it (`Entry.under` in `src-tauri/src/inapp.rs`),
-  and draws it under the bubble in the out-of-date line's ink (`src/app/conversation.tsx`). Archie
-  Mobile gets it on its own (`src-tauri/src/phone.rs`, `team_phone.rs`) and draws it the same way
-  (archie-mobile `src/screens/Chat.tsx`). A chat app gets a new message (`Channel::add_line` in
-  `crates/archie-net/src/channel.rs`, routed by `mirror.rs`). A test checks the agent's message stays
-  byte-identical, on screen and in the history the agent rereads.
-- On the replay after round four the card turned to Sent while the message beside it still said the
-  draft was ready to send. On the second replay owners noticed a message they had already read
-  changing under them, which is why Jett had the line moved out of the message on October 18.
-
-**Boundaries:**
-- ⛔ **Never say the agent's message updates or changes to say it was sent.** The October 17 version
-  of this entry did: it said the line goes in the message and that chat apps get the message edited.
-  Neither is true now.
-- ⛔ **Never "Archie confirms it arrived".** The line says Archie sent it, not that it was delivered
-  or read.
-- ⚠️ **Email drafts shown in a chat turn only.** A text (iMessage) draft card, a draft the mail watch
-  wrote on its own, and a catch-up list line get no such line.
-- ⚠️ **Signal and iMessage get no extra line,** because the sent card itself arrives there as a new
-  message saying Sent.
-- ⚠️ **On Slack, Discord and Matrix the line can make the phone buzz** (only Telegram sends it
-  silently), including for a send that went at a time the owner picked.
-- ⚠️ **The line is for the owner and never goes into the agent's history.** The agent keeps "an
-  email reply went out" for a pressed or typed Send, not for one that went at a scheduled time.
-- ⚠️ **Never seen on a real chat app or a real phone.**
-
 *Amended October 26, 2026 (Archie `b7bdeb53`, `792109e8`, `85282adb` and `37b512e0`, archie-mobile
 `a60f01e`, in no release yet): one draft, one card.*
 
@@ -12817,6 +12757,66 @@ saying nothing was sent, and its Send, anywhere it still shows, sends nothing."
   draft"), and the waiting count was kept by message rather than by draft. On iMessage and Signal,
   which cannot change a sent message, that line was sent as a new message of its own (found while
   building this).
+
+### 🚧 /pending moves a waiting card to the bottom instead of copying it: BUILT 2026-10-18 (Archie `47b1ff7b`), RELEASED in 0.3.11, 2026-10-19
+
+**Released in 0.3.11 on October 19, 2026.** Its notes do not name it. Checked October 27, 2026:
+`47b1ff7b` is an ancestor of the release commit `a016d540`.
+
+**Nothing below may be said on a page until a release carries it.**
+
+**Claim:** "Type /pending and everything still waiting on you is posted again at the bottom. The earlier copy says it was replaced by the newest card, and its buttons go."
+
+**Why it's true:**
+- `retire_old_copy` and `post_again` in `crates/archie-runtime/src/decide.rs`, called by every lane /pending posts: email drafts and new emails (`resend_open_cards` in `email/replies/actions.rs`), text drafts, catch-up lists (`resend_open` in `catchup.rs`), proposed row changes (`email/upkeep.rs`) and questions with buttons (`gateway/worker.rs`). Tests such as `pending_retires_the_old_card_and_an_old_press_does_not_send_twice`.
+
+**Boundaries:**
+- ⚠️ **Not on Signal or iMessage, which cannot edit,** nor in the window when its chat app is one of those. There the old copy stays and a press on it is answered once.
+- ⛔ **Never "a draft can never be sent twice" as a general claim.** What holds is that every copy of a draft is one record, and a sent record answers "Already handled.".
+
+### 🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4
+
+**Released in 0.3.11 on October 19, 2026.** Its notes do not name it. Checked October 27, 2026:
+`97a4935f` and `8a6ce92a` are ancestors of the release commit `a016d540`. Archie Mobile's part
+(archie-mobile `42501d7`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
+`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
+build.
+
+**Claim:** "When you press Send on an email your agent drafted, Archie says it went, under the message
+your agent wrote with the draft: "Sent to Ace Septic at 8:01am." Your agent's own words are never
+changed. On Telegram, Slack, Discord and Matrix it comes as a short message of its own."
+
+**Why it's true:**
+- Each draft card shown in a turn is tied to the reply that came with it
+  (`crates/archie-runtime/src/gateway/card_reply.rs`). Sending it, by a press anywhere or by Send
+  later firing, writes one line (`say_it_went` and `sent_line` in
+  `crates/archie-runtime/src/email/replies/actions.rs`), named from the email's From name when it had
+  one, its time spelled by `clock_face`, with the day when the send comes on a later day.
+- Archie keeps the line beside the message, never in it (`Entry.under` in `src-tauri/src/inapp.rs`),
+  and draws it under the bubble in the out-of-date line's ink (`src/app/conversation.tsx`). Archie
+  Mobile gets it on its own (`src-tauri/src/phone.rs`, `team_phone.rs`) and draws it the same way
+  (archie-mobile `src/screens/Chat.tsx`). A chat app gets a new message (`Channel::add_line` in
+  `crates/archie-net/src/channel.rs`, routed by `mirror.rs`). A test checks the agent's message stays
+  byte-identical, on screen and in the history the agent rereads.
+- On the replay after round four the card turned to Sent while the message beside it still said the
+  draft was ready to send. On the second replay owners noticed a message they had already read
+  changing under them, which is why Jett had the line moved out of the message on October 18.
+
+**Boundaries:**
+- ⛔ **Never say the agent's message updates or changes to say it was sent.** The October 17 version
+  of this entry did: it said the line goes in the message and that chat apps get the message edited.
+  Neither is true now.
+- ⛔ **Never "Archie confirms it arrived".** The line says Archie sent it, not that it was delivered
+  or read.
+- ⚠️ **Email drafts shown in a chat turn only.** A text (iMessage) draft card, a draft the mail watch
+  wrote on its own, and a catch-up list line get no such line.
+- ⚠️ **Signal and iMessage get no extra line,** because the sent card itself arrives there as a new
+  message saying Sent.
+- ⚠️ **On Slack, Discord and Matrix the line can make the phone buzz** (only Telegram sends it
+  silently), including for a send that went at a time the owner picked.
+- ⚠️ **The line is for the owner and never goes into the agent's history.** The agent keeps "an
+  email reply went out" for a pressed or typed Send, not for one that went at a scheduled time.
+- ⚠️ **Never seen on a real chat app or a real phone.**
 
 ### ✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)
 

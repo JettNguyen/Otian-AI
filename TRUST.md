@@ -1730,7 +1730,8 @@ It is not an App Store problem and Apple will not reject it. It is ours. **Prefe
 computer running Archie, sealed, and we cannot read it"** and change the strings the next time that
 app is built for any other reason.
 
-**Changed on archie-mobile main, October 6, 2026 (`23a21a3`), in no store build yet.** "Nowhere else"
+**Changed on archie-mobile main, October 6, 2026 (`23a21a3`), on iPhone from 1.1 and not on Android
+yet, whose download (version code 8) still asks in the old words.** "Nowhere else"
 was false a second way too: the agent shows a photo to its AI company when it looks at it, and the
 words of a recording go there once the computer has turned it into words. The prompts now read:
 "It goes to the computer running Archie, locked so we cannot open it on the way. Your agent then

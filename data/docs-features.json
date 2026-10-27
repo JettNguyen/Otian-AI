@@ -22,7 +22,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0"
+        "✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release and on iPhone in 1.1"
       ],
       "wording": "Changed your mind while your agent is working? Type stop, or press Stop, in Archie or in Archie Mobile. What it already finished stays done, and nothing more happens.",
       "guide": ""
@@ -45,7 +45,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker cannot choose a document"
+        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker could not choose a document until 1.1"
       ],
       "wording": "Send your agent a photo, a few at once, a video, a recording, or a document, from Archie on your computer or from the Archie app on your phone. It looks at the pictures, asks before it watches a video or listens to a recording, and reads the document. It sends files back the same way, and in Archie it can answer with a table or a checklist when that is the clearer shape.",
       "guide": ""
@@ -74,7 +74,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Press New chat and your agent starts fresh. It forgets the conversation and keeps what it has learned about you.",
       "guide": "",
@@ -100,7 +100,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "",
       "guide": "",
@@ -208,7 +208,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build"
+        "🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)"
       ],
       "wording": "Search your chat with an agent for anything either of you said. Type a word or a name and Archie shows every message that has all of them, newest first, with the day it was said. Press one and the chat goes to it. It works the same on Archie Mobile, and on a team, each person's search covers only their own chat.",
       "guide": "",
@@ -236,7 +236,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build",
+        "🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)",
         "✅ What your agent can write to disk"
       ],
       "wording": "Ask for a chart and your agent draws it in the conversation: bars, a line or a pie, with the numbers on it. It shows the same in Archie on your computer and in Archie Mobile on your phone. On a chat app like Telegram it sends the same numbers as a short list.",
@@ -683,7 +683,7 @@
       "unwatched": true,
       "trust": [
         "✅ A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30",
-        "🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05"
+        "🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05 and on iPhone in 1.1"
       ],
       "wording": "Talk to your agent out loud and hear it answer, back and forth, without pressing anything between turns. It is the button beside the microphone, in Archie on your computer and in Archie Mobile. What you say is turned into words on your computer, and the answer is read out by a voice that runs there too.",
       "guide": ""
@@ -709,7 +709,7 @@
       "hold": "The entry says nothing may be said until a person has talked over it, and the proposed wording is Jett's to approve.",
       "unwatched": true,
       "trust": [
-        "🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build, and no person has talked over it yet"
+        "🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet), and no person has talked over it yet"
       ],
       "wording": "While your agent is reading an answer out loud, start talking and it stops to listen. A cough or a door closing does not stop it. You can also click anywhere or press Space on the computer, or tap anywhere on the phone. The part it did not get to read out stays written in the chat, under a line that says where you cut in.",
       "guide": ""
@@ -847,7 +847,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3 (build 32)"
+        "✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (build 32, not on Android yet)"
       ],
       "wording": "Turn on notifications in Archie Mobile and your phone shows a reminder, a report, new mail, or a reply to something you sent from it, even when the app is closed. What each one says is locked on your computer and opened only on your phone, so we pass it along without being able to read it, and so do Apple and Google.",
       "guide": ""
@@ -873,7 +873,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0"
+        "✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release and on iPhone in 1.1"
       ],
       "wording": "Send a message from your phone while your computer is asleep and it waits for the computer, says so, and your agent answers it when the computer wakes, knowing it was sent earlier. Until then, Remove it takes it back.",
       "guide": ""
@@ -900,7 +900,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (not in the iPhone's 1.0), and never watched"
+        "🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release and on iPhone in 1.1, and never watched"
       ],
       "wording": "When an update for Archie is ready, Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and restarts, and your agents start again on their own. From the phone you can also run a routine now, pick a skill's response quality, and switch a skill's scheduled messages off and on.",
       "guide": ""
@@ -927,7 +927,7 @@
       "hold": "The entry says no page may make the claim until an update has been watched on a Mac and on Windows.",
       "unwatched": true,
       "trust": [
-        "🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (not in the iPhone's 1.0), and never watched"
+        "🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release and on iPhone in 1.1, and never watched"
       ],
       "wording": "When an update for Archie is ready, Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and restarts, and your agents start again on their own. From the phone you can also run a routine now, pick a skill's response quality, and switch a skill's scheduled messages off and on.",
       "guide": "updating-archie"
@@ -954,7 +954,7 @@
       "hold": "The entry has not marked the phone half shipped (the iPhone's 1.0 picker could not choose a document), and says pages describe this on the computer only until it is.",
       "unwatched": false,
       "trust": [
-        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker cannot choose a document"
+        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker could not choose a document until 1.1"
       ],
       "wording": "Send your agent a photo, a few at once, a video, a recording, or a document, from Archie on your computer or from the Archie app on your phone. It looks at the pictures, asks before it watches a video or listens to a recording, and reads the document. It sends files back the same way, and in Archie it can answer with a table or a checklist when that is the clearer shape.",
       "guide": ""
@@ -1643,7 +1643,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); not in the iPhone's 1.0"
+        "✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.1"
       ],
       "wording": "Your to-do list is the first thing on your agent's Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without asking your agent or scrolling back through the chat.",
       "guide": ""
@@ -1669,7 +1669,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Tell Archie about your work when you first set it up, and the lists it runs on are waiting for you: your rentals or your deals, with their steps, Quoted, Booked, Out, Picked up. Each entry wears its step in color, the list opens on how many are at each one, and the lists you use most sit in the sidebar, right under Jobs. Ask your agent to change any of it. Your phone shows the same counts.",
       "guide": ""
@@ -1695,7 +1695,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Tell Archie about your work when you first set it up, and the lists it runs on are waiting for you: your rentals or your deals, with their steps, Quoted, Booked, Out, Picked up. Each entry wears its step in color, the list opens on how many are at each one, and the lists you use most sit in the sidebar, right under Jobs. Ask your agent to change any of it. Your phone shows the same counts.",
       "guide": ""
@@ -1721,7 +1721,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Tell Archie about your work when you first set it up, and the lists it runs on are waiting for you: your rentals or your deals, with their steps, Quoted, Booked, Out, Picked up. Each entry wears its step in color, the list opens on how many are at each one, and the lists you use most sit in the sidebar, right under Jobs. Ask your agent to change any of it. Your phone shows the same counts.",
       "guide": ""
@@ -2450,7 +2450,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on TestFlight only"
+        "✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Ask your agent to remind you of something and it goes on your to-do list too. Tick the to-do off and the reminder is not said. Delete it from under the reply that set it, from the Dashboard, from the Calendar, or from the card when it goes off, and both go, with Undo on the lists. When a reminder goes off, Remind me later offers in an hour, this evening or tomorrow, each with its time on the button, or Another time in your own words, and Back if you pressed it by mistake.",
       "guide": "",
@@ -2476,7 +2476,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on TestFlight only"
+        "✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Ask your agent to remind you of something and it goes on your to-do list too. Tick the to-do off and the reminder is not said. Delete it from under the reply that set it, from the Dashboard, from the Calendar, or from the card when it goes off, and both go, with Undo on the lists. When a reminder goes off, Remind me later offers in an hour, this evening or tomorrow, each with its time on the button, or Another time in your own words, and Back if you pressed it by mistake.",
       "guide": "",
@@ -2587,7 +2587,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build",
+        "🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)",
         "✅ Waking the computer for a routine \u2014 SHIPPED 2026-09-16 (Mac), 2026-09-19 (Windows)"
       ],
       "wording": "Archie tells you where your routines come from before anything is missed. The Routines tab, on the computer and in Archie Mobile, says: routines come from this computer, so leave it on and plugged in; one due while it is asleep runs when it wakes, as long as that is the same morning, afternoon, or evening.",
@@ -2967,7 +2967,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); not in the iPhone's 1.0"
+        "✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.1"
       ],
       "wording": "",
       "guide": "knowledge"
@@ -3055,7 +3055,7 @@
       "unwatched": false,
       "trust": [
         "✅ What your agent remembers about you, and what it lets go of (SHIPPED; entry written 2026-09-16)",
-        "🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build"
+        "🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)"
       ],
       "wording": "Your agent keeps a short list of what it has learned about you, and you can read every line of it, add one, change one, or delete one. It carries only what has come up lately; the rest is kept in a file it can look back at when something you say touches it.",
       "guide": "memory"
@@ -3085,7 +3085,7 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build"
+        "🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)"
       ],
       "wording": "Already told ChatGPT, Claude or Gemini about yourself? Archie gives you one sentence to send it, you paste its answer back, and you tick the lines your agent keeps. Nothing is saved until you choose, and a line with a password or a card number in it is never kept. Any line your agent remembers can be changed in place, as well as added or deleted.",
       "guide": ""
@@ -3268,7 +3268,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker cannot choose a document"
+        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker could not choose a document until 1.1"
       ],
       "wording": "Send your agent a photo, a few at once, a video, a recording, or a document, from Archie on your computer or from the Archie app on your phone. It looks at the pictures, asks before it watches a video or listens to a recording, and reads the document. It sends files back the same way, and in Archie it can answer with a table or a checklist when that is the clearer shape.",
       "guide": ""
@@ -4412,7 +4412,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release; not in the iPhone's 1.0"
+        "Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release, and on iPhone in 1.1"
       ],
       "wording": "Archie picks a model for each of Economy, Balanced and Best. You can pick your own for any of them, from the list your AI company publishes, and that setting runs it everywhere: in replies, in your skills, and in anything on a schedule. Put any of them back to Archie's choice in one press. On the computer it is under Response quality; on the phone, under Response quality in More.",
       "guide": "response-quality"
@@ -4735,7 +4735,7 @@
       "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
       "unwatched": false,
       "trust": [
-        "✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "A stopped agent says who stopped it and when, like \"You stopped Ember yesterday at 11:34 PM\", on your computer and on your phone.",
       "guide": "when-it-goes-quiet"
@@ -5658,7 +5658,7 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only"
+        "✅ Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
       ],
       "wording": "Right-click an agent in Archie, or hold it on your phone, to open it, start or stop it, rename it, change how it looks, or delete it. Deleting asks you to type its name first, on either screen, because nothing about it comes back.",
       "guide": "",

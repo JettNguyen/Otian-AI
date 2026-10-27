@@ -1208,9 +1208,10 @@ can reach it. The key is transmitted only as `x-api-key` to Anthropic / bearer t
 true and sufficient.
 
 **Amended October 23, 2026, for a key pasted on the phone** (Archie `359a7ca5`, archie-mobile
-`2dc8e55`, in no release and no phone build yet). A key typed into Archie Mobile reaches the computer
-inside a command sealed under the owner's pairing key, so it crosses Otian's phone mailbox on the way,
-sealed with a key we never receive, and is then stored in the Keychain like any other. "Sent to the
+`2dc8e55`, in no release of Archie yet but in Archie Mobile 1.5 on iPhone). A key typed into Archie
+Mobile reaches the computer inside a command sealed under the owner's pairing key, so it crosses
+Otian's phone mailbox on the way, sealed with a key we never receive, and is then stored in the
+Keychain like any other. "Sent to the
 provider and nowhere else" is not true of that key; "we have no way to read it" still is. Once a
 build carries it, a page that says where keys go says "sealed on the way from your phone, and we
 cannot open it", never "it never leaves your computer".
@@ -1805,7 +1806,7 @@ on both platforms**, change the policy's sentence to "we also keep its model, su
 - ❌ Not a compliance claim, and never near the CASA assessment. The app requests no Google scopes
   and holds no OAuth client, which is a fact about our engagement, not a security feature to sell.
 
-### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3 (build 32)
+### ✅ Archie Mobile notifications: reminders, reports, new mail and replies, sealed on the way: RELEASED in Archie 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (build 32, not on Android yet)
 
 **The claim:** "Turn on notifications in Archie Mobile and your phone shows a reminder, a report, new
 mail, or a reply to something you sent from it, even when the app is closed. What each one says is
@@ -1832,8 +1833,9 @@ read, and the privacy policy says so with a row in its retention table. Previews
 - ⛔ **The owner's phone only.** A teammate's Archie Mobile shows no notifications.
 - ⛔ **Never on by default.** The owner turns them on in Archie Mobile, under Settings, and the phone
   asks first.
-- ⚠️ **Needs both halves:** Archie 0.3.9 on the computer and Archie Mobile 1.3 on the phone (in App
-  Review on October 14, 2026; TestFlight builds 30 and later carry it).
+- ⚠️ **Needs both halves:** Archie 0.3.9 on the computer and Archie Mobile 1.3 on the phone (on the
+  App Store by October 19, 2026, with build 32; TestFlight builds 30 and later carry it). The Android
+  download is still the October 5 build, so never say an Android phone shows them.
 - ⚠️ **Not yet watched on a real lock screen** as of October 14, 2026. Every test fakes Apple, Google
   and Firestore, with sealing vectors checked on all three ends. Copy may describe what it does and
   may not call it proven.
@@ -1843,15 +1845,16 @@ read, and the privacy policy says so with a row in its retention table. Previews
 
 *Amended October 27, 2026 (Archie `2276639d`, in no release yet).* A reply to a voice note sent from the phone notifies in the reply's plain sentences instead of its words; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
-### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0
+### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release and on iPhone in 1.1
 
 *Released on the computer, checked October 6, 2026: Archie `389c0b4e` (the bare stop and the Stop
 button) and `e24a5005` (the computer reading the relay's receive time) are ancestors of 0.3.5's
 `2afe4589`, and 0.3.5's release note says "Type stop, or press Stop, while your agent is working."
 Archie for Business follows; its 0.3.5 is not out yet. The phone's half (archie-mobile `721791f`) is
-in v0.3.5's Android download (built from `e742a48`, see "Which build Android has" above) and not on iPhone, whose
-1.0 is older (see "Which build iPhone has"). Both approved sentences below name the phone, so a page
-that uses them says Archie Mobile on Android until an iPhone update carrying `721791f` is out.*
+in v0.3.5's Android download (built from `e742a48`, see "Which build Android has" above) and, checked October
+27, 2026, in Archie Mobile 1.1 on iPhone, whose build 19 was made from archie-mobile `a871270` and
+was on the App Store by October 8, 2026. Both approved sentences below name the phone, and both
+phones carry `721791f`.*
 
 Found by the reviewer pass on October 5, 2026: a reviewer who texts the agent from the phone typed
 "stop" while it worked, and it finished the job and then answered "stop" as a new request; and a
@@ -1896,14 +1899,14 @@ running, so it needed no change.
 - ⚠️ **Not watched in a window yet,** and the findings could not say how much of the report was the
   screen capture rather than the app. Never "Working always clears" until someone has watched it.
 
-### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release (not in the iPhone's 1.0), and never watched
+### 🚧 Updating Archie on the computer from Archie Mobile, and running or tuning a skill or routine from the phone: BUILT 2026-10-02, the computer's half in Archie 0.3.5 (released October 5, 2026), the Archie Mobile half on Android in the same release and on iPhone in 1.1, and never watched
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.5's `2afe4589`, and
 0.3.5's release note says "A skill or a routine opens where it sits". Archie for Business follows;
 its 0.3.5 is not out yet. The phone's half (archie-mobile `04da3b6`) is in v0.3.5's Android download (see "Which
-build Android has" above) and not on iPhone, whose 1.0 is older (see "Which build iPhone has"). The
-wording below still waits for the watch the boundaries ask for, and names Android only until an
-iPhone update carrying `04da3b6` is out.*
+build Android has" above) and, checked October 27, 2026, in Archie Mobile 1.1 on iPhone, whose build
+19 was made from archie-mobile `a871270` and was on the App Store by October 8, 2026. The wording
+below still waits for the watch the boundaries ask for.*
 
 **Approved wording, once both halves are in a release:** "When an update for Archie is ready,
 Archie Mobile shows it with what's new. Press Update and Archie on your computer installs it and
@@ -1951,22 +1954,22 @@ archie-mobile `04da3b6`):
   once a computer release and the phone update that carry it are both out.
 - ⚠️ **The phone still cannot connect an account or paste a key.** No secret travels through the
   mailbox, so a skill waiting on an account says to connect it at the computer. (Amended October 23,
-  2026: from Archie `359a7ca5` and archie-mobile `2dc8e55` and `4446f38`, in no release and no phone
-  build yet, the owner's phone can paste an AI account's key and the Bland key for calls, sealed like
-  every command. Signing in to an account still happens at the computer. See "More of an agent's
-  setup from the owner's phone".)
+  2026: from Archie `359a7ca5` and archie-mobile `2dc8e55` and `4446f38`, in no release of Archie yet
+  but in Archie Mobile 1.5 on iPhone, the owner's phone can paste an AI account's key and the Bland
+  key for calls, sealed like every command. Signing in to an account still happens at the computer.
+  See "More of an agent's setup from the owner's phone".)
 - **The update check itself is unchanged.** It is the same plain request to the same address (see
   "The update check tells us nothing about you"). Moving it into the app's own process changed when
   it runs, not what it sends.
 
-### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release; not in the iPhone's 1.0
+### Choosing the exact model behind each Response quality setting: on the computer since 2026-08-29, from Archie Mobile SHIPPED in Archie 0.3.5 (released October 5, 2026) and on Android in the same release, and on iPhone in 1.1
 
 *Checked October 6, 2026: Archie `0d61132b`, the computer's side of the phone's picker, is an
 ancestor of 0.3.5's `2afe4589` (Archie for Business follows; its 0.3.5 is not out yet). The phone's
-screen (archie-mobile `51629d7`) is in v0.3.5's Android download (see "Which build Android has" above) and not on
-iPhone, whose 1.0 is older (see "Which build iPhone has"). So the wording's last clause, "on the
-phone, under Response quality in More", may be said of Android, and of the iPhone once an update
-carrying `51629d7` is out.*
+screen (archie-mobile `51629d7`) is in v0.3.5's Android download (see "Which build Android has" above) and,
+checked October 27, 2026, in Archie Mobile 1.1 on iPhone, whose build 19 was made from archie-mobile
+`a871270` and was on the App Store by October 8, 2026. So the wording's last clause, "on the phone,
+under Response quality in More", may be said of Android and of the iPhone.*
 
 **Approved wording:** "Archie picks a model for each of Economy, Balanced and Best. You can pick your
 own for any of them, from the list your AI company publishes, and that setting runs it everywhere:
@@ -2003,7 +2006,7 @@ More."
 - ⛔ **Never "your agent picks the model".** The owner picks it; the agent never changes it on its
   own. A change restarts the agent, which takes a few seconds.
 
-### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker cannot choose a document
+### 🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker could not choose a document until 1.1
 
 *Checked October 6, 2026: every Archie commit named below is an ancestor of 0.3.1's `09c5cb5e`, and
 every release since carries them. The app's half (the archie-mobile commits below) is in the
@@ -2157,14 +2160,15 @@ screen is open."
   opens; the entry below holds the rest and its gate.
 - ⛔ **Never "nothing leaves your computer", "offline" or "a private voice assistant".** The words go
   to the AI company. "Only the words go" is the true half, and it is the stronger one.
-- ⚠️ **On the phone, the button only, and on Android only.** Archie Mobile's talk screen is in the
-  Android APK put on v0.3.5 on 2026-10-05 (archie-mobile `e742a48`), and not in the iPhone's 1.0,
-  which is from before `cf0b115`. A drawing of the phone may show the button beside the microphone,
-  as the site's phones do since that day, because the Android app has it. The site draws its phones
-  in the iPhone's look, so until an iPhone update carrying `cf0b115` is out, no sentence beside such
-  a drawing says it is an iPhone, and any sentence about the phone's screen waits on the entry below.
+- ⚠️ **On the phone, the button only.** Archie Mobile's talk screen is in the Android APK put on
+  v0.3.5 on 2026-10-05 (archie-mobile `e742a48`), and on iPhone from 1.1, on the App Store by October
+  8, 2026, though not in the iPhone's 1.0, which is from before `cf0b115` (checked October 27, 2026).
+  A drawing of the phone may show the button beside the microphone, as the site's phones do since
+  October 5, because both apps have it. The site draws its phones in the iPhone's look, and an iPhone
+  update carrying `cf0b115` is out, so a sentence beside such a drawing may say it is an iPhone; any
+  sentence about the phone's screen waits on the entry below.
 
-### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05
+### 🚧 A conversation out loud, in Archie and in Archie Mobile: the window's IN 0.3.0 and never talked to; the phone's BUILT 2026-09-29, its computer half IN 0.3.2 and its app half in the Android APK of 2026-10-05 and on iPhone in 1.1
 
 **Entry written 2026-09-29.** The window's half shipped in 0.3.0 (Archie `080c3726`, built September
 15) with no entry, which under this file's rule meant it did not exist to anybody reading here. It is
@@ -2181,7 +2185,8 @@ their own in the entry above.
 **Checked 2026-10-05.** The phone's half is in a release on Android: the APK on v0.3.5 was built on
 this Mac from archie-mobile `e742a48`, and its bundle carries "Talk out loud" and `talk_screen`. The
 APK before it, uploaded the same afternoon, was built from before `cf0b115` and had neither. The
-iPhone's 1.0, approved October 7, is from before `cf0b115` and has neither. The other condition is
+iPhone's 1.0, approved October 7, is from before `cf0b115` and has neither; 1.1, on the App Store
+by October 8, 2026, carries it (checked October 27, 2026). The other condition is
 still open, since nobody has talked to either
 screen (both threads in Archie's `docs/OPEN-THREADS.md`), so the wording below still
 waits. Drawing the button beside the microphone on the phone is allowed now, by the entry above.
@@ -2202,7 +2207,7 @@ turned into words on your computer, and the answer is read out by a voice that r
   `VOICE_ASSET_REFS` in `src-tauri/src/assets.rs`; about 195 MB, and for the voice about 390 MB on a
   Mac and 343 MB on Windows). *Corrected 2026-09-30: this said 148 MB for the voice, which is the
   hearing model's size. `kokoro-en` 1.0 alone is 335.6 MB, in the manifests since August.*
-- **The phone** (Archie `e7f6e128`, in 0.3.2; archie-mobile `cf0b115`, in the Android APK of 2026-10-05). `src/screens/Talk.tsx` and
+- **The phone** (Archie `e7f6e128`, in 0.3.2; archie-mobile `cf0b115`, in the Android APK of 2026-10-05 and on iPhone from 1.1). `src/screens/Talk.tsx` and
   `src/talk.ts` in archie-mobile listen until somebody stops, send it as an ordinary voice note
   (`put_file`), and fetch the spoken answer the way the play button on a message does (`spoken`).
   The computer answers three new ops in `src-tauri/src/phone.rs`: `talk_ready` (only asks whether
@@ -2236,8 +2241,8 @@ turned into words on your computer, and the answer is read out by a voice that r
   (`a3c99e92`). Jett talked to the window's screen on October 6 on a dev build; the echo answer is
   not written down yet (Archie `docs/TEST-DAY.md`, item 4), so the wording above still waits.
   *Added October 19, 2026, and amended the same day at the 0.3.11 release:* talking over the agent
-  is in 0.3.11 on the computer (Archie `c1622841`), its phone half (archie-mobile `d22db43`) waits
-  for the Archie Mobile build now being submitted, and it is tested on recorded sound only. Once a
+  is in 0.3.11 on the computer (Archie `c1622841`), its phone half (archie-mobile `d22db43`) is in
+  Archie Mobile 1.4 on iPhone and not on Android yet, and it is tested on recorded sound only. Once a
   person has used it,
   and not before, "On the phone a tap cuts it off; talking over it does not" becomes: "On the
   computer, talking over it cuts it off, and so does a click or the space bar. On the phone,
@@ -2254,12 +2259,13 @@ turned into words on your computer, and the answer is read out by a voice that r
 - ⚠️ **An agent set to answer in writing is asked about, not overruled.** Both screens say what
   turning speech on changes, and change it only when the owner presses Let it talk.
 
-### 🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build, and no person has talked over it yet
+### 🚧 Talk over the agent to stop it, on the computer and the phone, with the place it stopped marked in the chat: BUILT 2026-10-18 (Archie `c1622841`, archie-mobile `d22db43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet), and no person has talked over it yet
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `c1622841`
-is an ancestor of the release commit `a016d540`. Archie Mobile's part (archie-mobile `d22db43`) waits
-for the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the
-App Store. Nobody has talked over it yet, so the wording below still waits, as the line under this
+is an ancestor of the release commit `a016d540`. Checked October 27, 2026: Archie Mobile's part
+(archie-mobile `d22db43`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
+`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
+build. Nobody has talked over it yet, so the wording below still waits, as the line under this
 one says.
 
 *Archie `bfdca0ac` and `c664c138` on the branch `parity-p9`, merged into main as `c1622841`, and
@@ -2368,14 +2374,14 @@ a click or the space bar. On the phone, talking over it does where the computer 
 That entry carries this as a dated note, not applied: until a person has talked over it, the
 boundary stands as written.
 
-### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026); not in the iPhone's 1.0
+### ✅ Your to-do list at the top of the Dashboard, in Archie and in Archie Mobile, and Knowledge as folders: SHIPPED, the computer's half in Archie 0.3.3 (released September 30, 2026), the Archie Mobile half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.1
 
 *Checked October 6, 2026: Archie `d34189e5` and `8fb5705d` are in 0.3.3, whose release note says
 "Your to-do list is the first card on the Dashboard" and "Knowledge opens like folders", and every
 release since carries them. The phone's half (archie-mobile `817e099`) is in v0.3.5's Android download (see "Which build
-Android has" above) and not on iPhone, whose 1.0 is older (see "Which build iPhone has"). The
-wording below says "and on your phone", so a page says it of Android until an iPhone update carrying
-`817e099` is out.*
+Android has" above) and, checked October 27, 2026, in Archie Mobile 1.1 on iPhone, whose build 19 was
+made from archie-mobile `a871270` and was on the App Store by October 8, 2026. The wording below says
+"and on your phone", so a page may say it of either phone.*
 
 **Approved wording, once it is in a release:** "Your to-do list is the first thing on your agent's
 Dashboard, in Archie and on your phone. Tick something off, or add something, right there, without
@@ -2415,15 +2421,16 @@ archie-mobile `817e099`):
 - **Words.** The agent keeps **lists** and a document is in a **folder**. "Records" and "category"
   are gone from both apps' screens; any page describing the Knowledge tab says Documents and Lists.
 
-### ✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on TestFlight only
+### ✅ Every reminder on the to-do list, Delete wherever one shows, and Remind me later at any time: RELEASED in 0.3.8, 2026-10-11 (Archie `71779b60`), never yet watched in the window, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes:** "Every reminder shows on your
 to-do list, and deleting it in either place takes it off both. When a reminder goes off, Remind me
 later lets you pick any time, and each button says what it does." Archie `71779b60`, `2599c51b`,
 `fdfa454f`, `eb4fbbaf` and `2c28d394`, all October 9, 2026. This entry was written the day it
 shipped, because it shipped with none, and a capability with no entry is one nobody selling knows
-exists. Archie Mobile's half (archie-mobile `81b5466`) is in build 24 of 1.3, on TestFlight and not
-submitted for review, so no page says the phone does it until 1.3 is on the App Store.
+exists. Archie Mobile's half (archie-mobile `81b5466`) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 **Proposed wording, Jett's to approve:** "Ask your agent to remind you of something and it goes on
 your to-do list too. Tick the to-do off and the reminder is not said. Delete it from under the reply
@@ -2466,19 +2473,20 @@ pressed it by mistake."
   has seen it, until somebody has said "remind me to call the plumber in five minutes", seen the row
   appear on the Dashboard, pressed ✕ Delete the reminder, and seen both go.
 - ⚠️ **The phone's half** (a swipe left to delete on the to-do list, Delete on the Calendar) was
-  watched in the iPhone simulator on the sample, never on a phone with a finger, and is in no store
-  release.
+  watched in the iPhone simulator on the sample, never on a phone with a finger. It is in Archie
+  Mobile 1.3 on iPhone and not on Android yet.
 - ⚠️ **The checklist the agent posts in a chat still lists to-dos only**, not promises.
 - ⚠️ **The approved retention wording elsewhere in this file says a caught commitment "lives on as a
   reminder until it fires"**, which now says less than is true, and so does the same sentence on the
   privacy page. Both are Jett's to change (Archie `docs/OPEN-THREADS.md`, "Reminders on the to-do
   list").
 
-### ✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+### ✅ A list's stages, and lists kept in the agent's sidebar, in Archie and in Archie Mobile: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
 questions' answers fails until the billing service is deployed**, which waited for the CASA
@@ -2558,11 +2566,12 @@ shows the same counts."
 - ⚠️ **Up to three lists, only when the answer comes in rows.** Somebody who describes no work
   that does gets none, and that is the intended answer.
 
-### ✅ Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+### ✅ Doing things to an agent from a menu: right-click in Archie, hold in Archie Mobile, deleting included: BUILT 2026-10-09, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `8458f1d7` and archie-mobile `d350c03`, both on main and in no release. Nothing below may be
 said on a page until a release carries them, and the phone half needs both: an Archie Mobile build
@@ -2648,8 +2657,9 @@ lists, their routines and their memory. You reconnect your accounts once, from a
 ### ✅ Written setups for four lines of work: portable restrooms, restroom trailers for events, home trades, and real estate: BUILT 2026-10-09 and 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
 questions' answers fails until the billing service is deployed**, which waited for the CASA
@@ -3567,8 +3577,9 @@ service is deployed with `c97eecbb`): what the plan chooser's button opens.*
 ### ✅ When the AI your agent thinks with runs out, it says so once, with the ways to keep going, and keeps what you send until the AI is back: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `756ea25b`, with `92526419` for the week of tries after a plan is bought, and archie-mobile
 `79ce0fc` (the card on the phone) and `241cc0b` (the phone's chat drawing it), in no release yet.
@@ -4311,11 +4322,12 @@ calendar, or when the reply says no calendar is connected yet."
   the computer to press, a chat app gets words, and the owner still signs in.
 - ⚠️ **A calendar named with no app** ("my calendar") is left to the reply's words.
 
-### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+### ✅ A stopped agent says who stopped it and when, in Archie and in Archie Mobile: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `7e720869` and Archie Mobile `68cd478`, in no release yet. Nothing below may be said on a
 page until a release carries it.*
@@ -4371,11 +4383,12 @@ plan with the AI included, which used to stop the agents under that same line, k
 too (`deadline_stops_every_agent` in `src-tauri/src/session.rs`). The ⚠️ "Never quote the trial line
 as an example" stands.
 
-### ✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+### ✅ New chat: starting over with one press, in Archie and in Archie Mobile, with a line where each day and each new chat begins: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `f97d3d5a` and Archie Mobile `0c47ac8`, amended by Archie `f4cb40a2` (2026-10-11), in no
 release yet. Nothing below may be said on a page until a release carries it.*
@@ -4499,8 +4512,9 @@ question (did, has, is, what, when and the like) is left to the agent and the pr
 ### ✅ Your agent's first questions start with the first thing you say, and Archie for Teams starts with a pack of its own: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `9f9fe8fd`, and archie-mobile `1585610` for Team Starter in the phone's store, in no release
 yet. Nothing below may be said on a page until a release carries them. TRUST.md has no entry on the
@@ -4627,8 +4641,9 @@ it through the same install as any chat install (`evening_offer` and `evening_ye
 ### ✅ The first questions end by asking where you keep your work, and the goodbye brings it in: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
 questions' answers fails until the billing service is deployed**, which waited for the CASA
@@ -4891,8 +4906,9 @@ calendar. If your spreadsheet is on another computer, a button tells you how to 
 ### ✅ Your business's name, prices, phone number and sign-off, kept and used in what your agent writes: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 ⚠️ **On the free credits, and on a plan with the AI included, the step that reads the first
 questions' answers fails until the billing service is deployed**, which waited for the CASA
@@ -5205,8 +5221,9 @@ named as exactly that."
 ### ✅ Under a reply, what your agent saved and what it read, with Open and Undo, and What it keeps at the top of Knowledge: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `607ad305` (the line under a reply), `1c5836ab` (the card) and `6d39352d` (both sent to the
 phone, with an Undo op), and `cd10e1a2` (the window's line with a chat app connected), and
@@ -6628,8 +6645,9 @@ ask them first, and offers to add them to your list."
 ### ✅ Ask what's on, what's due, or what's free on some days, and Archie hands your agent your lists, calendar, and reminders for those days first; your agent hears when a booking it saves puts a trailer or a unit in two places; and the Calendar shows the dates on your lists: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `b73f277c` (the two notes, the double-booking check, the Calendar tab's list dates, and what
 the computer sends the phone), `090901e7` (a teammate's own entries, which dates count, and the empty
@@ -7511,8 +7529,9 @@ yet).*
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `70831b8a` (the tool, the card, and the add), `a22cab8d` (a card waiting is not a change on
 the Jobs tab), `e7957b0c` (the card's notes read off the import's own report), and `91372059` and
@@ -7984,8 +8003,9 @@ added until you press Add or say yes."
 ### ✅ A list says how far along it is, finds unit 31 by its number, folds a unit listed twice into one, and says who a unit is rented to: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `e9b7e7c8`, and archie-mobile `9bedab4` for the count on the phone, in no release yet.
 Nothing below may be said on a page until a release carries them. All four come from finding 28 of
@@ -8582,13 +8602,14 @@ as on the computer, with Change, Save and an Undo that puts the old words back
 - ⚠️ **Saving restarts a running agent** so it reads the new words, as the computer's editor does,
   and says so.
 
-### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+### 🚧 Bring in what ChatGPT, Claude or Gemini knows about you, and change any line your agent remembers, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `9c02805f` and `360e031c`, archie-mobile `1c250d9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `9c02805f`
 and `360e031c` are ancestors of the release commit `a016d540`, so the approved wording below may be
-said of Archie on the computer. Archie Mobile's part (archie-mobile `1c250d9`) waits for
-the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the App
-Store. No real owner has used either half yet.
+said of Archie on the computer. Checked October 27, 2026: Archie Mobile's part (archie-mobile
+`1c250d9`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile `4ce557a` and was on
+the App Store by October 24, 2026; the Android download is still the October 5 build. No real owner
+has used either half yet.
 
 *Archie `981acfe7` to `f1eca93d` on the branch `parity-p1`, merged into main as `9c02805f`, and
 `54089688`, which names Change this beside Forget this in the memory sentence the agent is given.
@@ -8666,7 +8687,7 @@ kept. Any line your agent remembers can be changed in place, as well as added or
   screen has no room for another card.
 - ⚠️ **On Archie Mobile, the owner's phone only, and only through the computer.** Built October 18,
   2026 on the branch `parity-p1-phone` in both repos and merged (Archie `360e031c`, in 0.3.11;
-  archie-mobile `1c250d9`, waiting for the Archie Mobile build now being submitted), and never yet
+  archie-mobile `1c250d9`, in Archie Mobile 1.4 on iPhone and not on Android yet), and never yet
   opened on a real phone. Memory on the phone is reached
   from the Memory row under the count on Documents (`src/screens/Manage.tsx` in archie-mobile) and
   is `src/screens/Memory.tsx` there: the same two sections, Change this and Forget this beside each
@@ -8795,13 +8816,14 @@ lists, notes, and files."
 - ⚠️ **On Archie Mobile, the owner's conversation only.** A teammate's phone gets no line.
 - ⚠️ **The phone's half has never been seen on a phone.**
 
-### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+### 🚧 Search this chat, on the computer and the phone, done in code with no AI: BUILT 2026-10-18 (Archie `e35220a1`, archie-mobile `434bc3d`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `e35220a1`
-is an ancestor of the release commit `a016d540`. Archie Mobile's part (archie-mobile `434bc3d`) waits
-for the Archie Mobile build now being submitted, so no page says the phone does it until that build is on the
-App Store, and the wording's sentence that names Archie Mobile waits with it. The wording is still
-Jett's to approve.
+is an ancestor of the release commit `a016d540`. Checked October 27, 2026: Archie Mobile's part
+(archie-mobile `434bc3d`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
+`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
+build, so the wording's sentence that names Archie Mobile is true of an iPhone only. The wording is
+still Jett's to approve.
 
 *Archie `1e712073` and `fbdd3ae9` on the branch `parity-p5`, merged into main as `e35220a1`, and
 archie-mobile `03fd5fe`, merged as `434bc3d`; all on main and in no release. Nothing below may be
@@ -8884,8 +8906,9 @@ team, each person's search covers only their own chat."
 - ⚠️ **The phone needs the computer.** Like everything on Archie Mobile, a search is answered by the
   computer running Archie, and a phone paired with a computer on an earlier version shows no Search
   button at all (the snapshot's `search` flag).
-- ⚠️ **Not in a release yet**, and the phone screen has not been seen on a real phone or the
-  simulator. The computer's box was checked by screenshot in the journey harness, in light and dark.
+- ⚠️ **The phone's half is in Archie Mobile 1.4 on iPhone and not on Android yet**, and the phone
+  screen has not been seen on a real phone or the simulator. The computer's box was checked by
+  screenshot in the journey harness, in light and dark.
 
 ### 🚧 When you ask about something, Archie checks your small files for lines that mention it, with no extra AI call: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19
 
@@ -9089,8 +9112,8 @@ described: a bar chart always has zero on it, because a bar's length is the valu
 starts somewhere else draws a 1% difference as a bar twice the height of its neighbor; and a pie
 refuses to draw a negative slice, listing the numbers instead. **A chart is drawn in a PDF and in the
 conversation, and nowhere else** (the conversation from 0.3.11: in Archie on the computer, and in
-Archie Mobile once a build with archie-mobile `cfb2bf9` is out; a chat app gets its numbers as a
-list). Until 0.3.11 this sentence read "Charts are a PDF thing." A `.docx`
+Archie Mobile on iPhone from 1.4, whose build carries archie-mobile `cfb2bf9`; a chat app gets its
+numbers as a list). Until 0.3.11 this sentence read "Charts are a PDF thing." A `.docx`
 gets the figures written out rather than the picture, because Word takes a drawing as an image and
 making one would mean shipping a font file to put labels on it. Do not say "charts in documents";
 say PDF.
@@ -9098,7 +9121,7 @@ say PDF.
 **Amended October 18, 2026 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), and applied October 19,
 2026, at the 0.3.11 release: a chart is drawn in the conversation too.** "Charts are a PDF thing"
 above now says a chart is drawn in a PDF and in the conversation, and nowhere else; a chat app gets
-its numbers as a list. The phone's half waits for the Archie Mobile build now being submitted.
+its numbers as a list. The phone's half is in Archie Mobile 1.4 on iPhone and not on Android yet.
 Files do not change: a `.docx` still gets the figures written out, and "Do not say 'charts in
 documents'; say PDF" still holds. The entry after this one is the claim.
 
@@ -9156,13 +9179,15 @@ did not write.
 - The eleven are what the *export tool* writes. This row says nothing about what an add-on or a
   connected account may read, which is a separate question with its own answers.
 
-### 🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+### 🚧 Charts drawn in the conversation, in Archie and in Archie Mobile, and the same numbers as a list on a chat app: BUILT 2026-10-18 (Archie `2234ec0c`, archie-mobile `cfb2bf9`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `2234ec0c`
-and `251cfe13` are ancestors of the release commit `a016d540`. Archie Mobile's part (archie-mobile
-`cfb2bf9`) waits for the Archie Mobile build now being submitted, so no page says the phone draws a
-chart until that build is on the App Store, and the approved wording's sentence that names Archie
-Mobile waits with it. Until then a phone gets the numbers as a list (`251cfe13`).
+and `251cfe13` are ancestors of the release commit `a016d540`. Checked October 27, 2026: Archie
+Mobile's part (archie-mobile `cfb2bf9`) is in Archie Mobile 1.4, whose build 33 was made from
+archie-mobile `4ce557a` and was on the App Store by October 24, 2026; the Android download is still
+the October 5 build, so the approved wording's sentence that names Archie Mobile is true of an
+iPhone only. An older phone, which includes the Android download, gets the numbers as a list
+(`251cfe13`).
 
 *Archie `94631403`, `bd771612`, `5bb5e0a2`, `d935d148` and `6cde6711` on the branch `parity-p4`,
 merged into main as `2234ec0c`, and archie-mobile `041b4ec` and `1e97706`, merged as `cfb2bf9`;
@@ -10988,12 +11013,13 @@ there. Run it now asks for the routine on the same lane as the Routines tab's Ru
   repo's `docs/WAKE-CHECK.md` is the check; until it passes, copy may describe the message and not
   call it proven.
 
-### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+### 🚧 The Routines tab says routines come from this computer, so leave it on and plugged in, in Archie and in Archie Mobile: BUILT 2026-10-18 (Archie `4359e871`, archie-mobile `7f564d0`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `4359e871`
-is an ancestor of the release commit `a016d540`. Archie Mobile's line (archie-mobile `7f564d0`) waits
-for the Archie Mobile build now being submitted, so no page says the phone shows it until that build is on the
-App Store.
+is an ancestor of the release commit `a016d540`. Checked October 27, 2026: Archie Mobile's line
+(archie-mobile `7f564d0`) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
+`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
+build.
 
 *Archie `86cf4e2b` (the line, and a late run no longer called skipped), `22e90d1b` (the wake check
 runbook, `docs/WAKE-CHECK.md`) and `fc17fc9f`, on the branch `parity-p7`, merged into main as
@@ -12204,7 +12230,7 @@ delete the two-turn property, and a button that sends "yes" preserves it exactly
 **Amended October 19, 2026: a build can stop the asking for one kind of change, so the pages carry
 a narrower claim from that day. Released in 0.3.11 the same day.** Archie `bad38c32` (merged from
 the branch `parity-p8`, built as `18d19a2b` and `852ccc89`) is in 0.3.11, archie-mobile `c335b43`
-waits for the Archie Mobile build now being submitted, and neither has run against a real Google,
+is in Archie Mobile 1.4 on iPhone and not on Android yet, and neither has run against a real Google,
 Outlook or iCloud account. After the owner has
 said yes to three changes on their own calendar, the next card carries a second yes, "Yes, and stop
 asking". Once the owner (or, on Archie for Teams, an admin) presses it, the agent adds and moves
@@ -12242,13 +12268,14 @@ says it in that entry's words or not at all.
   of a sentence that is still true the day after the release, and it was chosen on purpose. Never
   "only deleted and shared events wait" either: that would be false today.
 
-### 🚧 Your agent can stop asking about changes to your own calendar, once you press Yes, and stop asking: BUILT 2026-10-18 (Archie `bad38c32`, archie-mobile `c335b43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build, never run against a real calendar account
+### 🚧 Your agent can stop asking about changes to your own calendar, once you press Yes, and stop asking: BUILT 2026-10-18 (Archie `bad38c32`, archie-mobile `c335b43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet), never run against a real calendar account
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes** ("Stop asking about your own
 calendar"). Checked the same day: `bad38c32` is an ancestor of the release commit `a016d540`.
-Archie Mobile's part (archie-mobile `c335b43`, the switch under More and the same button on a
-phone's card) waits for the Archie Mobile build now being submitted, so no page says the phone does
-it until that build is on the App Store. Written at the release from the builder's entry
+Checked October 27, 2026: Archie Mobile's part (archie-mobile `c335b43`, the switch under More and
+the same button on a phone's card) is in Archie Mobile 1.4, whose build 33 was made from
+archie-mobile `4ce557a` and was on the App Store by October 24, 2026; the Android download is still
+the October 5 build. Written at the release from the builder's entry
 (`docs/trust-entries/p8.md` in the Archie repo), without its decision, which Jett made on October
 18, 2026 (ship it, and narrow the site's claim to what still has no off switch), and without its
 list of passages, which were changed before the release (the Calendar changes entry's amendment,
@@ -12359,9 +12386,9 @@ against a real Google, Outlook or iCloud account.*
 - ⚠️ **Undo can refuse.** If somebody has been added to the event since, Undo says to change it in
   the calendar instead, so never "Undo always puts it back".
 - ⚠️ **Not run on a real account.** Every test fakes the calendar.
-- ⚠️ **The phone's half waits for its build.** Until the Archie Mobile build now being submitted is
-  on the App Store, the switch that makes it ask again is on the computer only, and copy names the
-  Setup tab alone.
+- ⚠️ **The phone's half is in Archie Mobile 1.4 on iPhone,** whose build carries `c335b43`. The
+  Android download is still the October 5 build, so never say an Android phone has the switch that
+  makes it ask again.
 - ⚠️ **"The Today line" is the line over the message box**, which is what the 0.3.11 notes call it
   ("with Undo over the message box").
 
@@ -12450,13 +12477,14 @@ neither may be said until a release carries it.
 "I looked at your calendar before writing this." where it said "Checked first: your calendar", on
 email and text cards alike (`render_card` in both lanes' `card.rs`). Quote the new words.
 
-### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half waiting on its build
+### 🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked the same day: `7d102231`
 and the free/busy permission's merge `91bc6d75` are ancestors of the release commit `a016d540`.
-Archie Mobile's part (archie-mobile `1dc53da`, the waiting change's whole sentence on the phone)
-waits for the Archie Mobile build now being submitted, so no page says the phone shows the guests until
-that build is on the App Store. It has still never run against a real Google, Outlook or iCloud
+Checked October 27, 2026: Archie Mobile's part (archie-mobile `1dc53da`, the waiting change's whole
+sentence on the phone) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile `4ce557a`
+and was on the App Store by October 24, 2026; the Android download is still the October 5 build. It
+has still never run against a real Google, Outlook or iCloud
 account, and the wording is still Jett's to approve.
 
 *Archie `475b629c` on the branch `parity-p3`, merged into main as `7d102231`, and archie-mobile
@@ -13791,8 +13819,9 @@ about you. Keep confidential context off shared agents."
 
 **Released in 0.3.7 on October 8, 2026, and named in its notes.** Built and tested the same day, at
 Jett's decision; nobody has chosen it on a real Archie for Teams agent yet, so say what it allows and
-never that teams use it. Archie Mobile's chooser for it is in 1.2, which is with Apple for review,
-so no page says the phone can pick it until 1.2 is on the App Store.
+never that teams use it. Archie Mobile's chooser for it is in 1.2, whose build 21 was made
+from archie-mobile `523d512` and was on the App Store by October 9, 2026; the Android download is
+still the October 5 build.
 
 **Approved wording:** "On a shared agent you choose what the people you let in can
 do: ask it things, also add to and change its lists, or everything you can. In the middle setting a
@@ -13858,7 +13887,7 @@ change your calendar, or use the apps you connected."
   was told to ask for "Everything you can", which hands over the owner's mailbox and calendar too.
   The refusal now names the narrowest setting that allows the call (`guest_refusal` in `turn.rs`).
 
-### ✅ Adding and editing people from the owner's phone: BUILT October 14, 2026, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3
+### ✅ Adding and editing people from the owner's phone: BUILT October 14, 2026, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Proposed wording:** "In Archie Mobile, open your agent's More tab, then Teammates. Add someone,
 edit their name and contact details, remove them, or stop a waiting invite. Copy or share the
@@ -13886,8 +13915,9 @@ invite message from your phone."
   have local tests. There is no new AI call and no added text in an agent's ordinary turn.
 
 **Boundaries:**
-- Never describe this as released until both apps carry it. Existing phone and computer releases
-  still require adding and editing people on the computer. This closes that gap in the code.
+- Never describe this as released until both apps carry it. Archie 0.3.9 and Archie Mobile 1.3 on
+  iPhone do; the Android download is still the October 5 build, where adding and editing people
+  still happens on the computer.
 - Never that a teammate's phone can invite, edit, or remove people. Only the owner's phone can.
   (Amended October 14, 2026: from Archie `0987862b` and archie-mobile `e48bbb6`, in no release yet,
   a teammate made an admin can, on their own phone. See the roles entry below. A teammate who is
@@ -13898,14 +13928,14 @@ invite message from your phone."
   response is a newly created teammate invite, encrypted for the paired owner.
 - The computer still runs the commands and must be awake, connected to the internet, and running
   Archie. Reset access, blocking, and approving chat-app requests remain computer-only. (Amended
-  October 23, 2026: from Archie `c8b2a4fb` and archie-mobile `d0a156a`, in no release and no phone
-  build yet, letting people in, Not now, blocking and unblocking are on the owner's phone too, on
-  Archie for Teams. Reset access stays at the computer.)
+  October 23, 2026: from Archie `c8b2a4fb` and archie-mobile `d0a156a`, in no release of Archie yet
+  but in Archie Mobile 1.5 on iPhone, letting people in, Not now, blocking and unblocking are on the
+  owner's phone too, on Archie for Teams. Reset access stays at the computer.)
 - The earlier notes below that the phone cannot add/edit describe the existing releases, not this
   new code. The earlier OPEN-THREADS claim that a key could not travel in a relay response was too
   restrictive: responses already have end-to-end encryption under the owner's pairing key.
 
-### 🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), in no release and no phone build
+### 🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), in no release, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
 
 **Why it was built.** Jett, October 23, 2026: most of the time the owner is not at the computer the
 agent runs on, and these were the settings the agent kept sending them back to it for. The same day
@@ -14050,8 +14080,9 @@ their own email there."
 ### ✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `309919b2` and archie-mobile `55eea97`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -14116,7 +14147,7 @@ you are told the emails and phone numbers. Archie gives you a message to send wi
   wife's email with her on the team (the Archie repo's
   `docs/agent-ux/journeys/2026-10-10-findings.md`, finding 10).
 
-### 🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half in review as 1.3
+### 🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 *Archie `0e581b2c`, `2ed18dca`, `217a1630`, `c4fc6313` and `6f20212d` on `journey-fixes`, and
 archie-mobile `5087ab1` and `7c9f987`, in no release yet. Nothing below may be said on a page until a
@@ -14286,8 +14317,9 @@ the App Store by October 24, 2026; the Android download is still the October 5 b
 ### ✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `fa238558`, `d2f7d60b` and `cdf669b8`, and archie-mobile `77c92e9`, `55eea97` and `6ea0e9d`,
 in no release yet.*
@@ -14384,11 +14416,12 @@ and it holds the reminder for them. Until they join, it comes to you."
 - ⚠️ **A name nobody here goes by is refused.** The agent is told nobody by that name can message
   the agent, to say so, and to offer to set it for the owner instead.
 
-### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on TestFlight only
+### ✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `07aefec1` and archie-mobile `b8b893c`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -14476,8 +14509,9 @@ counts. Ask the agent what your team has been doing and it tells you the same."
 ### ✅ On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `b783f843` and archie-mobile `57512fe`, amended by Archie `d54534db` and archie-mobile
 `865bdf7` (2026-10-11), in no release yet. Nothing below may be said on a page until a release
@@ -14602,8 +14636,9 @@ Afterward it is one press from your team on the Dashboard, on your computer or y
 ### ✅ On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11
 
 **Released in 0.3.8 on October 11, 2026, and named in its notes.** Archie Mobile's part (the
-archie-mobile commits named below) is in build 24 of 1.3, on TestFlight and not submitted for
-review, so no page says the phone does it until 1.3 is on the App Store.
+archie-mobile commits named below) is in Archie Mobile 1.3, whose build 32 was made from
+archie-mobile `2f0000a` and was on the App Store by October 19, 2026; the Android download is still
+the October 5 build.
 
 *Archie `be50b989` and archie-mobile `247d8af`, in no release yet. Nothing below may be said on a
 page until a release carries them.*
@@ -15068,14 +15103,15 @@ direction. And Flight Check-In's "It buys nothing" stays true, but it is now the
 instructions holding it rather than the code alone: with buying on and an airline on the shop list,
 the code would release a Pay press there.
 
-### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), RELEASED in 0.3.11, 2026-10-19, off until the owner switches it on, the Archie Mobile half waiting on its build, and no real call has been placed
+### 🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), RELEASED in 0.3.11, 2026-10-19, off until the owner switches it on, the Archie Mobile half on iPhone in 1.4 (not on Android yet), and no real call has been placed
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes, off until an owner switches Call
 businesses on.** Jett chose on October 19 to ship it in this release. Checked the same day:
 `6e8e5549` and the calling hours' merge `ccdb459b` are ancestors of the release commit `a016d540`.
-Archie Mobile's part (archie-mobile `7cf627e`, how a call's cards and buttons look on the phone)
-waits for the Archie Mobile build now being submitted, so no page says the phone shows a call until that
-build is on the App Store. No real call has been placed, the wording is still Jett's to approve,
+Checked October 27, 2026: Archie Mobile's part (archie-mobile `7cf627e`, how a call's cards and
+buttons look on the phone) is in Archie Mobile 1.4, whose build 33 was made from archie-mobile
+`4ce557a` and was on the App Store by October 24, 2026; the Android download is still the October 5
+build. No real call has been placed, the wording is still Jett's to approve,
 and counsel has not answered the questions in the boundaries.
 
 *(Added October 19, 2026, from Jett's decision the same day: which AI accounts calls run on, and
@@ -15241,8 +15277,9 @@ All paths are in the Archie repo.
   them, and a voicemail it leaves names no number to call back, because the call comes from one of
   Bland's numbers.
 - ⛔ Never say it can be switched on from Archie Mobile. (Amended October 23, 2026: from Archie
-  `359a7ca5` and archie-mobile `4446f38`, in no release and no phone build yet, it can, with the
-  calls note above Turn on calls and the key checked with Bland first, as on the computer. This line
+  `359a7ca5` and archie-mobile `4446f38`, in no release of Archie yet but in Archie Mobile 1.5 on
+  iPhone, it can, with the calls note above Turn on calls and the key checked with Bland first, as on
+  the computer. This line
   stands until a release and a phone build both carry it. See "More of an agent's setup from the
   owner's phone".)
 - ⛔ Never "calls during business hours" or "only when they're open" as a promise. A map listing's

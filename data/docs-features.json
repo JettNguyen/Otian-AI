@@ -110,7 +110,7 @@
       "id": "saved-and-looked-at-line",
       "name": "What your agent saved and looked at",
       "area": "chat",
-      "summary": "Under a reply, Archie says what your agent saved to your lists, with Open and Undo, and what it looked at to answer.",
+      "summary": "Under a reply, Archie says what your agent saved to your lists, with Open and Undo, and what it read to answer.",
       "where": "Under your agent's reply in Chat.",
       "how": [
         "Press Open to see the list at that entry.",
@@ -119,7 +119,7 @@
       "limits": [
         "It names saves to your lists, and reads of lists, documents, the calendar, mail, and Drive. Mail and Drive are named only by count.",
         "It does not name reminders it set, calendar changes, mail it drafted or sent, or web searches. The Jobs tab is the full record.",
-        "Looked at names what each read returned, whether or not the answer used it.",
+        "The Read line names what each read returned, whether or not the answer used it. Press a list on it to open that list on just those entries.",
         "When every list it read is empty, it says the answer is not from your records."
       ],
       "phone": "Archie Mobile shows the same line with Undo, and its Open goes to Lists. Chat apps show none of it.",
@@ -1016,7 +1016,7 @@
       "id": "stop-watching-mail",
       "name": "Stop watching your inbox",
       "area": "email",
-      "summary": "The first time your agent checks your mail, it says in the chat which inboxes it reads and how often, with a Stop watching button.",
+      "summary": "When your agent starts reading your mail, it says in the chat which inboxes it reads and how often, with a Stop watching button.",
       "where": "In your agent's chat. The switch it turns off is Watch my inbox, on the agent's Skills tab, under Email Manager.",
       "how": [
         "Press Stop watching under the message, or switch off Watch my inbox under Email Manager on the Skills tab."
@@ -1100,9 +1100,11 @@
       "area": "email",
       "summary": "On an email your agent drafts in chat, a price, a day, or a time that nobody gave it is listed under the draft for you to check.",
       "where": "Under the draft on an email card.",
-      "how": [],
+      "how": [
+        "Press Take out what you added to have Archie rewrite the draft without them."
+      ],
       "limits": [
-        "Only amounts, days, and times are read for this. A reason or a promise is listed only when your agent names it.",
+        "Code reads amounts, days, times, stock excuses like \"something has come up on our end\", and a few kinds of promise. Anything else is listed only when your agent names it.",
         "It lists them. It does not stop Send.",
         "Not on texts, and not on drafts the mail watch writes when mail arrives.",
         "A number that appears anywhere in what you gave counts as given, and editing the card's words clears the list."
@@ -1728,10 +1730,10 @@
       "id": "where-you-keep-your-work",
       "name": "Where you keep your work",
       "area": "lists",
-      "summary": "The last of your agent's first questions is where you keep your work today, and its goodbye offers one way to bring that in.",
-      "where": "Under the goodbye in your agent's chat: Add the spreadsheet, Add the exported file, Add a photo of a page, Connect my calendar, or Connect Follow Up Boss.",
+      "summary": "The last of your agent's first questions is where you keep your work today, with a button for each place, and its goodbye offers a way to bring in each of the first two.",
+      "where": "Under the goodbye in your agent's chat: Add the spreadsheet, It's on another computer, Add the exported file, Add a photo of a page, Connect my calendar, or Connect Follow Up Boss.",
       "how": [
-        "Answer where you keep your work.",
+        "Press each place you keep your work, then press That's all when you are done.",
         "Press the button under the goodbye and pick the file or photo.",
         "Press Send, then press Add on the card when the entries look right."
       ],
@@ -1739,7 +1741,7 @@
         "It opens a picker. You choose and send the file, and nothing is added until you press a button on its card.",
         "In your head, somewhere else, or a skipped answer gets no button, except a realtor's Tell me your open deals.",
         "Other software means an exported file, unless you named Follow Up Boss.",
-        "The AI words the question and reads your answer, so a roundabout answer can be misread."
+        "Two ways in at most. A third place gets no button under the goodbye."
       ],
       "phone": "In Archie Mobile, the file and photo buttons open the phone's file picker or camera. There is no calendar button there, and chat apps show no button.",
       "editions": "both",
@@ -1759,7 +1761,7 @@
       "name": "Bring in a spreadsheet someone emailed",
       "area": "lists",
       "summary": "Say \"bring in the spreadsheet Dana emailed\", and your agent finds the email, opens the file, and puts its rows on a card for you to add.",
-      "where": "In your agent's chat. When your work is in a spreadsheet, the goodbye of the first questions also has Someone else has it.",
+      "where": "In your agent's chat. When your work is in a spreadsheet, the goodbye of the first questions also has It's on another computer.",
       "how": [
         "Ask your agent to bring in the spreadsheet somebody emailed you.",
         "Look over the rows on the card, then press its button to add them."
@@ -1794,7 +1796,7 @@
       "limits": [
         "It reads your own lists. It does not connect to QuickBooks or any accounting app.",
         "It knows what was written down: an entry counts as owed because its billing says Billed.",
-        "A deposit is a step on a booking. Nothing records the money arriving.",
+        "A deposit is read from a booking's stage and its Deposit column. Nothing records the money arriving.",
         "It answers this way only when the question uses words like owe, unpaid, overdue, or invoice."
       ],
       "phone": "Ask from Archie Mobile or a chat app, and the answer arrives like any reply.",
@@ -1817,7 +1819,7 @@
       "summary": "If a reply says it put something on your lists and nothing was saved, Archie adds a line saying so, with Save it to save it now.",
       "where": "Under your agent's reply in Chat.",
       "how": [
-        "Press Save it, or reply \"save it\" where there is no button."
+        "Press Save it, or Save to and the list's name, or reply \"save it\" where there is no button."
       ],
       "limits": [
         "It catches certain words in a sentence about a list. A claim worded another way passes.",
@@ -1951,15 +1953,15 @@
       "where": "On your agent's Knowledge tab, under Lists, open a list and press Import beside Add row. An empty list also says Have a spreadsheet of these already? Import it.",
       "how": [
         "Open the list on your agent's Knowledge tab, under Lists.",
-        "Press Import and pick the file.",
+        "Press Import, then pick a file on this computer or a Google Sheet shared with your agent.",
         "Under Match your columns, give each column of the file a place on the list, Leave it out, or Add it as a new column.",
-        "Read what will be added and what will be left out, then press Add.",
+        "Read what will be added and what will be left out, then press Add, or Match while the box to keep it matched is checked.",
         "To take it all back, press Undo, here or on the job on the Jobs tab."
       ],
       "limits": [
-        "It is a copy taken once. Later changes to the file never reach the list, and changes to the list never reach the file.",
-        "It adds and never updates. A row that repeats an entry is left out and never used to change it.",
-        "The first sheet only, up to 5,000 rows and 20 MB. A Google Sheet has to be downloaded as a file first, and a Numbers file saved as Excel or CSV.",
+        "The box to keep the list matched to the file starts checked. Uncheck it and the list is a copy taken once. Archie never changes your file.",
+        "Taken as a copy, it adds and never updates. A row that repeats an entry is left out and never used to change it.",
+        "One tab, up to 5,000 rows and 20 MB. A Numbers file has to be saved as Excel or CSV first.",
         "Dates are read month first, so 3/10/2026 meant as October 3 comes in as March 10."
       ],
       "phone": "",
@@ -1969,7 +1971,8 @@
       "hold": "",
       "unwatched": false,
       "trust": [
-        "✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14"
+        "✅ Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named: BUILT 2026-10-10, amended 2026-10-11, in Archie on the computer, RELEASED in 0.3.8, 2026-10-11; amended 2026-10-12, RELEASED in 0.3.9, 2026-10-14",
+        "🚧 A list can stay matched to the spreadsheet you keep, on this computer or in a shared Google Sheet: BUILT 2026-10-18 (Archie `0836722c` through `46829a4b`, archie-mobile `df83b5a` through `2bdde7a`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
       ],
       "wording": "Keep your units, customers, or rentals in a spreadsheet? Bring it into a list: press Import on the list in Archie, or drop the file into the chat, with or without a few words. Archie matches the file's columns to the list's, puts First name and Last name together, and leaves out anything already on the list or higher in the file, such as the same unit number whatever its case, spaces, or hyphens, the same name with the same phone or email, or the same address on the same date, saying which and why. A cell it cannot read, like \"next Tues\" in a date column, is left blank and pointed out for you to fill in, and one Undo takes back everything it added.",
       "guide": "",
@@ -2048,7 +2051,7 @@
         "Check the card, then press Add or say yes."
       ],
       "limits": [
-        "It is a copy taken when you ask. Nothing is written to the sheet, and the two are never kept in step.",
+        "It is a copy taken when you ask, unless you press the button that offers to keep the list matched to the Sheet. Nothing is ever written to the Sheet.",
         "Only a Sheet you picked, one tab at a time, up to 5,000 rows.",
         "Columns are matched by their names, and the card cannot change the match.",
         "It has not yet been run against a live Google account."
@@ -2060,7 +2063,8 @@
       "hold": "",
       "unwatched": true,
       "trust": [
-        "✅ A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11"
+        "✅ A Google Sheet you shared with your agent can be brought into one of your lists, on the same card: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11",
+        "🚧 A list can stay matched to the spreadsheet you keep, on this computer or in a shared Google Sheet: BUILT 2026-10-18 (Archie `0836722c` through `46829a4b`, archie-mobile `df83b5a` through `2bdde7a`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
       ],
       "wording": "Share a Google Sheet with your agent on its Connections tab, then ask it to bring the sheet into one of your lists. What is on it comes in on a card, matched to the list's columns the same way a spreadsheet you drop into the chat is, and nothing is added until you press Add or say yes.",
       "guide": "",
@@ -4059,7 +4063,7 @@
         "Pick your account and sign in, in your browser, with the boxes you want checked."
       ],
       "limits": [
-        "It shows only under a reply that names the Connections tab, or an unconnected app by its own name.",
+        "It shows under a reply that names the Connections tab or an unconnected app. With no calendar connected, it also shows when you name your calendar app or the reply says none is connected.",
         "There is no button for a to-do list, since Todoist and Google Tasks are in different places.",
         "It opens the screen. Signing in is still yours to do.",
         "Chat apps get the words only."
@@ -4449,7 +4453,7 @@
       "where": "A card under the reply in your agent's chat, with Set up an AI account, See the plans, or Open the Account page, and Lists and Calendar.",
       "how": [
         "Press the way you want on the card.",
-        "Keep typing if you like. Each message gets Saved, and your agent answers it once the AI is back."
+        "Keep typing if you like. Each message is kept, and your agent answers it once the AI is back."
       ],
       "limits": [
         "Only your own messages are kept: the newest 20, each cut at 600 characters, and a photo only as its caption.",
@@ -5286,7 +5290,7 @@
       "limits": [
         "The question has to be about Archie, the AI, or your plan. \"What do we charge for a unit?\" goes to your agent as usual.",
         "Only your own typed question. A teammate's question goes to the agent.",
-        "The answer does not name the day a plan's AI comes back. The card does.",
+        "Asked how much is left, it says the count and the day, never a price.",
         "At about three answers left on the free credits, one line under a reply says so, once until the balance goes up."
       ],
       "phone": "Ask from Archie Mobile or a chat app, and the answer arrives like any reply.",

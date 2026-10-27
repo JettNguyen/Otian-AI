@@ -2834,8 +2834,8 @@ appraisal and loan approval dates."
 - **Three buttons under the goodbye.** The morning list's offer now takes their place under the
   goodbye, and the three starters come under the answer to it instead, once (`starters_after_the_goodbye`
   in `crates/archie-runtime/src/gateway/morning_list.rs`), unless the answer carries Keep both. Where
-  the owner keeps their work somewhere the goodbye brings in, the way in still comes first and the
-  starters were not shown anyway.
+  the owner keeps their work somewhere the goodbye brings in, the way in is the goodbye's one
+  question, the morning list's offer waits for the next reply, and the starters are not shown.
 - **No evening journal question for a business** stays true, and is now true for everyone at first,
   from the release that carries these commits: the starter pack no longer brings Evening Reflection
   there (the next entry), so there is nothing for `put_away_the_journal_question` to take off a new
@@ -3956,7 +3956,9 @@ it is answering."
 *Amended October 26, 2026 (Archie `32a61822` and `7ebc5374`, in no release yet): the first evening
 ends on the morning list's offer.* Whichever way the interview ends, with its goodbye or by letting go
 on a question of the owner's own, Stop the questions, a job or the turn cap, that last reply carries
-the offer of the morning list with its time (the first entry above). On Archie, the starter pack
+the offer of the morning list with its time (the first entry above), except a goodbye that already
+offers a way in to where their work is kept: then the offer comes under the owner's next reply, so
+each message asks one thing. On Archie, the starter pack
 (Everyday Assistant) still installs the journal, and the journal no longer brings Evening Reflection,
 the 9:30pm question, so a new personal agent sends nothing unasked on its first night. A day after the
 morning list was offered where the interview ended, an owner with the journal and no line of work is
@@ -8291,8 +8293,14 @@ on disk. Still no model call anywhere in it.
   the turn cap), the same offer goes under that answer (`under_the_last_interview_reply`). Where the
   buttons do not fit, it says "To have it, say "send me the morning list"". An agent set up before
   this and never asked is still offered it under a reply once its list has something on it
-  (`offer_under`). Tests: `the_goodbye_offers_it_with_its_time_once`,
-  `the_offer_goes_under_the_answer_when_the_interview_lets_go_early`.
+  (`offer_under`). **One question per message:** when the goodbye already offers a way in to where
+  their work is kept (a button to send the file, or It's on another computer), the offer waits and
+  goes under the owner's next reply that has room for it, in the same words, once
+  (`after_the_way_in`, then `offer_under`). Tests: `the_goodbye_offers_it_with_its_time_once`,
+  `the_offer_goes_under_the_answer_when_the_interview_lets_go_early`,
+  `beside_a_way_in_the_offer_waits_for_the_next_reply_and_comes_once`, and in
+  `crates/archie-runtime/tests/pipeline.rs`, `the_interview_ends_with_the_way_in_to_where_their_work_is_kept`
+  and `beside_the_way_in_the_morning_list_is_offered_under_the_next_reply_once`.
 - **What turns it on, and only that.** A press of Yes or a time under the offer; the owner's own
   words with "morning list" in them that ask for it to come ("send me the morning list", "yes, do the
   morning list", "morning list every morning please", "can I have the morning list?", and "at 6:30am"

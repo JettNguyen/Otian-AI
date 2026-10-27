@@ -291,6 +291,7 @@ EXEMPT_PREFIXES = (
     "blog/",        # posts keep their own voice and length
     "compare/",     # side-by-side arguments need both sides in full
     "ai-explained/",  # explainer for a reader who wants the long answer
+    "docs/",        # Archie Docs: every guide and feature, looked up rather than read through
 )
 
 EXEMPT_FILES = {

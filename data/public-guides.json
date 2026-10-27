@@ -1,0 +1,3459 @@
+{
+  "source": "public Firestore marketplace",
+  "guides": [
+    {
+      "id": "a-computer-that-stays-home",
+      "title": "Give your agent a computer that stays home",
+      "summary": "Move Archie to a computer that never leaves the house, so your agent answers while your laptop is shut.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-10-20",
+      "updated_at": "2026-10-20",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Your agent runs on the computer Archie is on, so it pauses whenever that computer sleeps, shuts down, or goes in a bag. If you have a computer that can stay plugged in at home (a desktop, or an older Mac or PC you no longer carry), Archie can live there instead, and your agent answers all day and night."
+        },
+        {
+          "type": "heading",
+          "text": "What still works from there"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Your phone, through Archie Mobile, wherever you are.",
+            "Your chat app: Telegram, Discord, Slack, or Matrix, and iMessage when the home computer is a Mac.",
+            "Routines and reminders, at their times, without waking anything.",
+            "Your email, calendar, and files, once you connect them again on that computer."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Archie on your laptop can't reach an agent that lives on another computer. Once it moves, talk to it from your phone or your chat app, or sit at the home computer."
+        },
+        {
+          "type": "heading",
+          "text": "Move your agent there"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "On the computer you use now, open the Account page, then Backups in the left sidebar, and press Save a backup. Save it somewhere the other computer can open, like a USB stick or your cloud drive.",
+            "Archie then asks whether you are moving. Press Switch off the agents here, so the two computers never both answer the same message.",
+            "Install Archie on the home computer and sign in. If it asks whether you have used Archie on another computer, press Open a backup to pick the file. If it doesn't ask, open the Account page, then Backups, and under Restore a backup press Choose a file.",
+            "Press Restore and restart Archie. Your agents come back with their memory, skills, routines, and documents.",
+            "Archie then lists what to connect again, because a backup never holds passwords or keys: your own AI account if you use one, your chat app, your email, your calendar, and any website your agent was signed in to. Go down the list one row at a time.",
+            "Connect your phone again: on your agent's Setup tab, under Chat app, press Archie Mobile, then Show the code, and scan it from Archie Mobile.",
+            "On a Mac, allow anything macOS asks for again (reading Messages, notifications, and the microphone), because those permissions belong to each computer."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Keep it on"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Stop it sleeping while plugged in. The guide \"Your agent stopped replying\" has the steps for a Mac and for Windows. Only the computer has to stay awake; the screen can go dark.",
+            "Leave Open Archie at login switched on (it is on unless you turned it off) in Archie's Settings, so a restart doesn't stop your agent.",
+            "After an update restarts the computer, someone has to sign in to it before Archie opens again. Check on it after a big system update.",
+            "A cable from your router is steadier than Wi-Fi, and a spot with some air around it keeps it cool."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "claim-your-agent",
+      "title": "Claim your agent",
+      "summary": "Send your agent a six-digit code in your chat app to become its owner. About a minute.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-19",
+      "section": "bring_agent_online",
+      "setup_key": "",
+      "video": "claim-agent.mp4",
+      "read_minutes": 2,
+      "series": "getting-people-on",
+      "part": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "Starting your agent makes this computer its owner, so the Chat tab works right away. In a chat app, where strangers can find a bot, it answers nobody until someone sends the six-digit code shown only inside Archie."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An AI account, or the free credits. Without one, the box says “One thing first” and offers a button that takes you there.",
+            "Your agent started. The code stays hidden until then.",
+            "Your chat app open on your phone or computer."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Send the claim code"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "In Archie, open your agent’s Setup tab and pick Who can message it on the left.",
+            "Not live yet? Press Start agent in that box. The six digits appear once it’s running.",
+            "In your chat app, open a chat with your agent: the bot you made, under the name you gave it.",
+            "Send the six digits like any other message.",
+            "Your agent writes back. You own it now."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "On Telegram, send the code to your own bot, not @BotFather, which only hands out tokens. Tap the t.me/… link BotFather sent you, or search Telegram for the username you chose."
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Your agent writes back and asks a few questions about you; answering helps it fit your life. In Archie, the claim box becomes a check, with your name under who can message it. From then on it replies whenever it’s started and Archie is open on this computer."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "No code showing: the agent isn’t started, or the AI account or chat app isn’t connected. Archie says which in that box.",
+            "No reply to the code: check the agent is still switched on (the button at the top of its page reads Switch off). On Telegram, check you sent it to your own bot.",
+            "Even the right code is refused: after five wrong guesses in a row, claiming locks for fifteen minutes. Wait, then send it again.",
+            "“This agent isn’t answering anyone”, in red: the list of approved people couldn’t be read, so your agent turns everyone away to be safe. Press Reset access and make a new claim code, then claim it again."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-anthropic",
+      "title": "Connecting your Anthropic (Claude) account",
+      "summary": "Paste an Anthropic API key into Archie: about 10 minutes, a card, and a few dollars of credit.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-13",
+      "section": "connect_ai_account",
+      "setup_key": "provider:anthropic",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Claude account. You can make one on the way.",
+            "A card and a few dollars of prepaid credit.",
+            "Somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open the Claude Console on this computer and sign in.",
+              "copy": "https://platform.claude.com/settings/keys",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself.",
+              "shot": "anthropic-1-keys.png"
+            },
+            {
+              "text": "Add credit. With an empty prepaid balance, your agent can’t answer.",
+              "copy": "https://platform.claude.com/settings/billing",
+              "note": "Most people running one agent spend $13 to $31 a month, so $10 of credit lasts about one to three weeks."
+            },
+            {
+              "text": "Set a spending limit, so a runaway loop can’t cost more than you meant.",
+              "copy": "https://platform.claude.com/settings/limits"
+            },
+            {
+              "text": "Back on the API keys page, click Create Key and give it a name.",
+              "copy": "{agentName}",
+              "shot": "anthropic-2-create.png"
+            },
+            {
+              "text": "When it asks when the key should expire, choose Never or the longest option.",
+              "note": "An expired key stops your agent replying, with no warning."
+            },
+            {
+              "text": "Copy the key. It starts with sk-ant-.",
+              "shot": "anthropic-3-copy.png"
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads “✓ Claude (by Anthropic)” in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again, from sk-ant- to the last character.",
+            "Saved, but no answers: the balance is empty, which Archie can’t check. Add credit in the Console.",
+            "Went quiet after weeks: the key probably expired. Make a new one set to Never, and paste it in."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "A Claude Pro subscription doesn’t include an API key or pay for one."
+        }
+      ]
+    },
+    {
+      "id": "connect-custom",
+      "title": "Connecting another provider",
+      "summary": "Connect an AI provider that isn't listed, using the address, model name and key from its own docs.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-15",
+      "updated_at": "2026-09-16",
+      "section": "connect_ai_account",
+      "setup_key": "provider:custom",
+      "video": "api-key.mp4",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "This row works for a provider that takes requests the way OpenAI does; their docs will say \"OpenAI-compatible\" if so. Your key sits in your computer's own password vault, and can only ever be sent to the address you put in."
+        },
+        {
+          "type": "text",
+          "text": "Example: Venice's address is https://api.venice.ai/api/v1, its keys are in the API settings on its site, and the model name is any from its model list, copied exactly."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An account with the provider, with billing set up if they need it.",
+            "Their docs open, usually a page called API, Developers, or Quickstart.",
+            "About 10 minutes."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open their docs on this computer, find the API address, and copy it into the Address box above, exactly as written.",
+              "note": "It usually starts with https:// and ends with /v1. If their example ends in /chat/completions, leave that part off; Archie adds it."
+            },
+            {
+              "text": "Find the model you want and copy its exact name into the Model box.",
+              "note": "Use the technical id from their code examples, not the marketing name."
+            },
+            {
+              "text": "Make an API key on their site, usually under API Keys, and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy the key. Many providers show it only once."
+            },
+            {
+              "text": "Paste it in the key box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You'll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Archie tests the key at that address before saving anything, so a typo in any of the three boxes shows up right here."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: check the address first. It must be the API address from the docs, including the version part (usually /v1), not the provider's homepage.",
+            "The key works but replies mention the model: copy the model name again, with every dash and dot.",
+            "Saved, but no answers: the account may have no credit, which Archie can't check. Add credit on their site."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Web search and reading photos are off on this row, because Archie can't know what an unlisted provider supports; the free Google key under Pictures covers photos. For a model on this computer, open this panel with Ollama, LM Studio or llama.cpp running: Archie lists your models and connects the one you pick, after checking it can use Archie's tools."
+        }
+      ]
+    },
+    {
+      "id": "connect-deepseek",
+      "title": "Connecting your DeepSeek account",
+      "summary": "Paste a DeepSeek API key into Archie: about 10 minutes, a card, and a few dollars that last a long time.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-15",
+      "updated_at": "2026-08-24",
+      "section": "connect_ai_account",
+      "setup_key": "provider:deepseek",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "DeepSeek is based in China, and your agent's messages travel to their servers there. If that matters for what you discuss, pick a different account."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A DeepSeek platform account. Sign up with email or Google.",
+            "A card and a small prepaid top-up.",
+            "Somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open the DeepSeek platform on this computer, and sign in or sign up.",
+              "copy": "https://platform.deepseek.com",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself."
+            },
+            {
+              "text": "Add a small top-up under Billing.",
+              "note": "The DeepSeek chat app is separate. Using it free doesn't fund the platform."
+            },
+            {
+              "text": "Create an API key under API Keys and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy the key. It starts with sk-."
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You'll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads \"✓ DeepSeek\" in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again, from sk- to the last character.",
+            "Saved, but no answers: the balance is empty, which Archie can't check. Top up under Billing.",
+            "Worked, then went quiet: check the balance. A prepaid account stops the moment it runs dry, without warning."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Web search and reading photos don't run on DeepSeek; your agent answers from what it knows. For photos, the free Google key under Pictures takes two minutes."
+        }
+      ]
+    },
+    {
+      "id": "connect-discord",
+      "title": "Connecting Discord",
+      "summary": "Create a Discord app, turn on the switch that lets it read messages, and invite it to your server.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-19",
+      "section": "connect_messaging_app",
+      "setup_key": "channel:discord",
+      "video": "channel-discord.mp4",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Your agent joins your Discord server as a bot, and you message it in a channel there."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Discord account and a server. No server? The first two steps make one, free.",
+            "About 10 minutes.",
+            "Somewhere safe for the bot token. Anyone who has it controls your bot, so paste it only into Archie."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Do all of this on the computer Archie is on. No server yet? In Discord, click the + on the left sidebar and choose “Create My Own” → “For me and my friends”.",
+              "note": "Discord also runs in a browser at https://discord.com/app. Doing this here puts the token straight into Archie."
+            },
+            {
+              "text": "Give the server any name, for example:",
+              "copy": "{agentName}’s Server"
+            },
+            {
+              "text": "Open the Discord Developer Portal:",
+              "copy": "https://discord.com/developers/applications"
+            },
+            {
+              "text": "Click New Application (top right). When it asks for a name, use your agent’s name:",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Open the Bot tab (left sidebar), click Reset Token, confirm, and copy the token. Paste it into the token box on Archie’s Chat app card."
+            },
+            {
+              "text": "On that same Bot tab, turn ON “Message Content Intent” (under Privileged Gateway Intents). Without it, your bot never comes online."
+            },
+            {
+              "text": "Still on the Bot tab, under Bot Permissions, check: View Channels, Send Messages, Read Message History, Embed Links, Attach Files, and Add Reactions."
+            },
+            {
+              "text": "Open OAuth2 → URL Generator, check just the “bot” box, open the link it builds at the bottom, pick your server, and click Authorize."
+            },
+            {
+              "text": "Now message your agent in any text channel on that server. (It only replies while Archie is running on your computer.)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "The Discord row on Archie’s Chat app card says connected in green, and your bot is in the server’s member list. Your agent won’t answer until you claim it: message it, and it asks for the six-digit code Archie shows once the agent is started. The Claim your agent guide covers this."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The bot stays offline in the member list: “Message Content Intent” is off. Turn it on in the Developer Portal, save, and Archie reconnects.",
+            "The bot never joined the server: redo the OAuth2 → URL Generator step for a fresh link, open it, pick your server, and click Authorize.",
+            "The bot replies to nothing: Archie has to be open on your computer and the agent switched on. Check the button at the top of its page in Archie: it reads Switch off while the agent is on.",
+            "Archie rejects the token: it was probably reset after you copied it. Click Reset Token on the Bot tab and paste the new one."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-email-account",
+      "title": "Connecting your email and calendar",
+      "summary": "Connect Gmail or Outlook, get a work account approved, and fix one that has stopped working.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-24",
+      "updated_at": "2026-10-17",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 4,
+      "body": [
+        {
+          "type": "text",
+          "text": "Archie works with Gmail and Outlook (Outlook.com, Hotmail, Live, or a workplace's Office 365 account). Your calendar comes from the same account, so connecting once covers both."
+        },
+        {
+          "type": "heading",
+          "text": "What it reads, and how to switch it off"
+        },
+        {
+          "type": "list",
+          "items": [
+            "What it reads: when you ask about your mail, the messages your question is about. If you add Email Manager or Package Tracker and press Start reading my mail when your agent asks, it also reads new mail in your inbox every few minutes, skipping newsletters, promotions, and mail from no-reply addresses before the AI sees them.",
+            "Where it goes: from this computer straight to the AI company on your own AI account, the way everything it thinks about does. On our AI (free credits, or a plan with the AI included) it reads none of your mail, so none of it reaches our server.",
+            "What it never does: delete your mail, or send an email you have not approved. It sends one only after you approve its draft, and only if you checked Let it send replies.",
+            "To switch it off: on this agent's Connections tab, under Email, calendar, files, press the trash can on its row. Your mail stays where it is, and your agent stops reading it."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Connect an email account"
+        },
+        {
+          "type": "list",
+          "items": [
+            "In the left sidebar, click your agent's name, then Connections under it, then Email, calendar, files.",
+            "Click Connect an account.",
+            "Check the boxes for what your agent may do; each is explained on screen, and only what you check is asked for. Whatever you check, it never deletes mail, and it always asks before changing a calendar event.",
+            "Click Sign in with Google for Gmail, or Sign in with Microsoft for Outlook.",
+            "In the browser that opens, sign in as the address you want Archie to read (any other address connects instead), and accept the permissions it lists.",
+            "Back in Archie, the account appears as a row with your address on it."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Work account needs admin approval"
+        },
+        {
+          "type": "text",
+          "text": "Some workplaces don't let people approve outside apps. Then Microsoft's sign-in page says “Need admin approval” and has no Accept button, and nothing on this computer can change that. Send whoever runs your workplace's Microsoft accounts either of these:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Turn on “Allow user consent for apps”: in the Microsoft Entra admin center at entra.microsoft.com, under Enterprise applications, then Consent and permissions, then User consent settings. Each person then approves Archie for their own mailbox.",
+            "Or grant admin consent once, for everybody: in the same admin center, under Enterprise applications, open the app named Archie, from Otian AI, id 4e7ff117-4f18-44e9-92ed-0e8507ba69ca, then Permissions, and press Grant admin consent."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Meanwhile, a personal Outlook.com, Hotmail or Live address connects with nobody's approval."
+        },
+        {
+          "type": "heading",
+          "text": "Add Email Manager and Calendar Manager"
+        },
+        {
+          "type": "text",
+          "text": "Connecting gives permission; the abilities come from add-ons. For email, click Marketplace at the bottom of the left sidebar, type email into the search box at the top, press Email Manager, and press Add on what opens. For the calendar, add Calendar Manager the same way."
+        },
+        {
+          "type": "note",
+          "text": "Email Manager needs an AI account of your own connected first. On Archie's free starter credits, every message your agent thinks about passes through our server on its way to the AI company, and the people who wrote to you never agreed to that. With your own AI account, your mail goes straight to the provider and never comes near us."
+        },
+        {
+          "type": "heading",
+          "text": "Giving your agent more access"
+        },
+        {
+          "type": "text",
+          "text": "Go to Connections, then Email, calendar, files. If your account could do more, a line under its row says so, beside a Reconnect button. Press Reconnect, check the extra permission, and sign in again as the same address."
+        },
+        {
+          "type": "note",
+          "text": "Signing in again replaces your agent's permissions, so keep the boxes it already has checked. Anything you uncheck is taken away."
+        },
+        {
+          "type": "heading",
+          "text": "If an account stops working"
+        },
+        {
+          "type": "text",
+          "text": "Sign-ins expire, and workplaces can withdraw them. Your agent then says the account was refused, and names the address."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Go to Connections, then Email, calendar, files, and find the row with that address.",
+            "Reconnect button there? Press it and sign in again as the same address.",
+            "No Reconnect button? Click Remove on that row and connect the account again as above. Removing loses no email; it only stops your agent reading it.",
+            "If the browser says an administrator has to approve Archie, see Work account needs admin approval, above."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-gemini",
+      "title": "Connecting your Google (Gemini) account",
+      "summary": "Paste a Gemini API key from Google AI Studio into Archie: about 5 minutes, and in most countries no card.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-24",
+      "section": "connect_ai_account",
+      "setup_key": "provider:gemini",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "The key sits in your computer’s own password vault (the Keychain on a Mac, Credential Manager on Windows), where we have no way to read it."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Google account. Your Gmail one is fine.",
+            "No card in most countries: there’s a free tier.",
+            "In the EEA, the UK and Switzerland, Google wants billing on even for the free tier, so add a payment method in AI Studio first."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open Google AI Studio’s API keys page on this computer and sign in with your Google account.",
+              "copy": "https://aistudio.google.com/app/apikey"
+            },
+            {
+              "text": "Click Create API key. If it asks which Google Cloud project to use, any is fine, or let it make one."
+            },
+            {
+              "text": "Copy the key. It starts with AIza."
+            },
+            {
+              "text": "Paste it in the box above. Treat it like a password: it can spend money once billing is on."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads “✓ Gemini (by Google)” in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again, from AIza to the last character.",
+            "Create API key does nothing: accept the Gemini API terms first. Check the box AI Studio shows you, then try again.",
+            "A valid key is rejected in the EEA, the UK or Switzerland: switch billing on in AI Studio, wait a minute, and paste it again.",
+            "Lost the key: Google lets you look it up. Open the same API keys page, sign in, and copy it again."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "The Gemini chat app, at gemini.google.com, can’t make a key."
+        }
+      ]
+    },
+    {
+      "id": "connect-groq",
+      "title": "Connecting your Groq account",
+      "summary": "Make a Groq API key, turn on billing (the free tier is too small), and paste the key into Archie.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-29",
+      "section": "connect_ai_account",
+      "setup_key": "provider:groq",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "Groq is very cheap to run. The key sits in your computer’s own password vault (the Keychain on a Mac, Credential Manager on Windows), where we have no way to read it."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An email address, or a Google or GitHub login.",
+            "A payment method.",
+            "About 5 minutes, and somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open the Groq console keys page on this computer, and sign in or sign up.",
+              "copy": "https://console.groq.com/keys",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself."
+            },
+            {
+              "text": "Open Groq’s billing page and add a payment method.",
+              "copy": "https://console.groq.com/settings/billing",
+              "note": "Skip this and the key goes green, then fails on every message: the free tier is too small for even one. Groq bills for what you use."
+            },
+            {
+              "text": "Click Create API Key and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy the key. It starts with gsk_."
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads “✓ Groq” in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Every message says your plan is too small: billing is off. Add a payment method at https://console.groq.com/settings/billing, signed in as the account the key came from. The key itself is fine.",
+            "Refused right away: copy the whole key again, from gsk_ to the last character.",
+            "Closed the dialog before copying the key: it can’t be shown again. Make another and delete the old one."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Groq (with a q) is unrelated to Grok (with a k), xAI’s chatbot, which needs its own account."
+        }
+      ]
+    },
+    {
+      "id": "connect-imessage",
+      "title": "Connecting iMessage",
+      "summary": "Your agent answers in Messages on this Mac, in your note-to-self thread or on an Apple ID of its own. It takes a small download and two macOS permissions.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-16",
+      "updated_at": "2026-10-19",
+      "section": "connect_messaging_app",
+      "setup_key": "channel:imessage",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "You text yourself, and your agent answers in that thread, on every device signed into your Apple ID. It reads and sends through Messages on this Mac, so it works while this Mac is awake with Archie running."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Mac signed into Messages with your Apple ID. If you can text yourself, you're ready.",
+            "About 5 minutes. Archie does the download for you."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Pick iMessage on Archie’s Chat app card and press Get it. Archie fetches the small tool it reads and sends Messages through, and checks it against a known fingerprint before running it.",
+              "note": "Already have the tool? Archie finds it and downloads nothing."
+            },
+            {
+              "text": "Give Archie permission to read Messages: System Settings → Privacy & Security → Full Disk Access, press +, and add Archie.",
+              "note": "This is the permission that lets anything read the Messages history on a Mac."
+            },
+            {
+              "text": "Type your own phone number or Apple ID email into the field on Archie’s Chat app card, then press Connect. To see which one Messages uses: in Messages, click Messages in the menu bar, then Settings, then iMessage, and look under You can be reached for messages at."
+            },
+            {
+              "text": "In Messages, send yourself a hi at that number or email. That creates the thread your agent will live in.",
+              "note": "Already have a note-to-self thread? Skip this."
+            },
+            {
+              "text": "Switch on your agent, at the top of its page. The first time it answers, macOS asks whether Archie may control Messages; click Allow.",
+              "note": "Clicked Don't Allow by mistake? System Settings → Privacy & Security → Automation, find Archie, and switch Messages on."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You'll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "The iMessage row on Archie’s Chat app card says connected in green. Your agent won't answer until you claim it: switch it on, then send the six-digit code Archie shows you in that thread."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The agent can't read Messages: switch Archie on in System Settings → Privacy & Security → Full Disk Access, then quit and reopen Archie.",
+            "The agent reads but never sends: switch on System Settings → Privacy & Security → Automation → Archie → Messages.",
+            "No conversation with your handle was found: text yourself once in Messages, and enter the number or email exactly as Messages shows it.",
+            "Texts from your phone get no answer: this Mac has to be awake with Archie running.",
+            "Every message shows twice on your phone (once gray, once blue): that's normal for a conversation with yourself, and your agent's replies start with its name. To stop the doubling, give your agent an Apple ID of its own (below).",
+            "Messages came to the front by itself: that's Archie sending through it."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Texting it like a contact, on an Apple ID of its own"
+        },
+        {
+          "type": "text",
+          "text": "If the Mac running Archie can be your agent's, such as a spare Mac or a Mac mini, sign its Messages into an Apple ID made for your agent. You text it like any contact, so nothing shows twice. Messages is signed into one Apple ID at a time, so your own texts stop showing on that Mac."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Make an Apple ID for your agent at account.apple.com. On the Mac running Archie, open Messages, click Messages in the menu bar, then Settings, then iMessage, sign out of yours and sign in with the new one.",
+            "On Archie’s Chat app card, pick iMessage, choose An Apple ID of its own, and type the phone number or email you'll text it from. Press Connect.",
+            "Text your agent's Apple ID once from your phone. Then switch on your agent and send the six-digit code in that conversation.",
+            "Text Replies reads whichever Apple ID Messages on this Mac is signed into, so on this setup it reads your agent's texts, not yours."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Text and pictures work both ways; voice notes and documents come in. No tapback reactions, editing sent messages, or typing dots: those need macOS security changes Archie will never ask you to make. Your agent talks only in your own thread. It never reads or answers anyone else's messages to you."
+        }
+      ]
+    },
+    {
+      "id": "connect-matrix",
+      "title": "Connecting Matrix",
+      "summary": "Make a free Matrix account for your agent, make a room with encryption off, and sign in.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-19",
+      "section": "connect_messaging_app",
+      "setup_key": "channel:matrix",
+      "video": "",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "Matrix is an open chat network, a bit like email. Your agent gets its own free account, with no bot to register."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "About 10 minutes, and no credit card or approval wait.",
+            "Element, the most common Matrix app, free at https://element.io.",
+            "A password for your agent’s new account, kept in a password manager."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Turn encryption off"
+        },
+        {
+          "type": "text",
+          "text": "Element encrypts every direct message end to end, and Archie isn’t one of the devices holding the keys, so your agent couldn’t read a word."
+        },
+        {
+          "type": "note",
+          "text": "So don’t start a direct message with your agent. Make a room, and turn encryption OFF before anyone joins. It can never be switched back off, so the fix for a mistake is a new room."
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "On the computer Archie is on, open Element in your browser and choose “Create Account”. If you already use Matrix, sign out first: this account is for your agent.",
+              "copy": "https://app.element.io",
+              "note": "Doing it here saves sending the address and password from a phone."
+            },
+            {
+              "text": "Sign up on matrix.org (the default) with a username for your agent, like this one. Save the password in your password manager.",
+              "copy": "{botHandle}"
+            },
+            {
+              "text": "Click your avatar at the top left, then All settings. Your agent’s full address is at the top of the General tab, like @{botHandle}:matrix.org, with the username you chose."
+            },
+            {
+              "text": "Paste that address and the password into the two boxes on Archie’s Chat app card, then press Connect. Archie signs in once and keeps only a login token, so your password isn’t stored."
+            },
+            {
+              "text": "Sign out of Element and sign back in as YOURSELF (your own Matrix account, or a new one), so you can invite your agent."
+            },
+            {
+              "text": "Create a room: the + beside Rooms → New room. Name it anything; “{agentName}” works."
+            },
+            {
+              "text": "Before you create it, turn OFF “Enable end-to-end encryption”. This can’t be undone later."
+            },
+            {
+              "text": "In the new room, choose Invite and enter your agent’s address, the same one you pasted into Archie."
+            },
+            {
+              "text": "Switch on your agent in Archie. It accepts the invitation on its own; then say hi in the room."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "The Matrix row on Archie’s Chat app card says connected in green, and your agent is in the room’s member list, no longer “invited”. Your agent won’t answer until you claim it: say hi and it asks for a six-digit code. The Claim your agent guide covers this."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "“Your homeserver rejected that sign-in”: nearly always the address. Use all of it, @name:matrix.org, with the @ and the server after the colon. Otherwise it’s the password: sign in to Element with it to check.",
+            "Your agent says it can’t read the room: the room is encrypted for good. Make a new one with encryption off and invite your agent there.",
+            "Nothing happens when you write: check the agent is switched on in Archie and has joined the room.",
+            "Buttons aren’t tappable: Matrix has none, so your agent lists the choices and you type one back."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Removing Archie’s access"
+        },
+        {
+          "type": "text",
+          "text": "Sign in to Element as your agent, open Settings → Sessions, and sign out the session named “Archie”."
+        }
+      ]
+    },
+    {
+      "id": "connect-mistral",
+      "title": "Connecting your Mistral account",
+      "summary": "Paste a Mistral API key into Archie: about 10 minutes and a card.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-15",
+      "updated_at": "2026-08-24",
+      "section": "connect_ai_account",
+      "setup_key": "provider:mistral",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "Mistral is based in France, so your agent's messages stay with a company under EU rules."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Mistral account. Sign up with email, Google, or Microsoft.",
+            "A card for pay-as-you-go billing. Any free tier has tight limits.",
+            "Somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open Mistral's console on this computer, and sign in or sign up.",
+              "copy": "https://console.mistral.ai",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself."
+            },
+            {
+              "text": "Pick a plan under Billing and add a card."
+            },
+            {
+              "text": "Create an API key under API Keys and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy all of the key. It has no telltale prefix."
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You'll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads \"✓ Mistral\" in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again. With no prefix to check, a missing character reads as a wrong key.",
+            "Saved, but no answers: billing isn't active, or the free tier's limits are in the way. Check the plan under Billing in the console.",
+            "Worked, then went quiet: check your usage against the plan's limits in the console."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Web search and reading photos don't run on Mistral; your agent answers from what it knows. For photos, the free Google key under Pictures takes two minutes."
+        }
+      ]
+    },
+    {
+      "id": "connect-openai",
+      "title": "Connecting your OpenAI (ChatGPT) account",
+      "summary": "Paste an OpenAI API key into Archie: about 10 minutes, a card, and a few dollars of prepaid credit.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-24",
+      "section": "connect_ai_account",
+      "setup_key": "provider:openai",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "GPT is the family of models behind ChatGPT."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An OpenAI login. Your ChatGPT account works.",
+            "A card. $5 of prepaid credit is the usual minimum.",
+            "Your phone, in case OpenAI texts a code to confirm your number.",
+            "Somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open the OpenAI API keys page on this computer and sign in.",
+              "copy": "https://platform.openai.com/api-keys",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself."
+            },
+            {
+              "text": "Add a payment method under Settings → Billing, and set a monthly limit.",
+              "note": "ChatGPT Plus doesn’t include an API key or any API credit. The API bills separately."
+            },
+            {
+              "text": "Click Create new secret key and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy the key. It starts with sk-."
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads “✓ ChatGPT (by OpenAI)” in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again, from sk- to the last character.",
+            "Replies mention quota or billing: a card on file doesn’t put money on the account. Add an amount under Settings → Billing.",
+            "Worked, then went quiet: you may have reached your monthly limit. Raise it, or wait for next month."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-slack",
+      "title": "Connecting Slack",
+      "summary": "Create a Slack app, switch on what Slack needs, install it in your workspace, and paste its two tokens into Archie.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-09-21",
+      "section": "connect_messaging_app",
+      "setup_key": "channel:slack",
+      "video": "channel-slack.mp4",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Slack workspace that lets you add apps. Many need an admin to approve a new app, so ask first.",
+            "About 15 minutes, all on one Slack settings site.",
+            "Somewhere safe for the two tokens. Anyone who has them can message as your app."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "On the computer Archie is on, open the Slack apps page in a browser and click Create New App:",
+              "copy": "https://api.slack.com/apps",
+              "note": "It hands you two long tokens for Archie, so setting it up on a phone means mailing both to yourself."
+            },
+            {
+              "text": "Choose Blank app, then click Continue."
+            },
+            {
+              "text": "Give the app your agent’s name, pick its workspace (or create one), then click Create.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Open Settings → Socket Mode and turn it on. It asks you to name a token, then makes an xapp- token: copy that into the App-level token box on Archie’s Chat app card (the top one). Any name works, like this:",
+              "copy": "{agentName} socket"
+            },
+            {
+              "text": "Open Features → App Home, scroll to Show Tabs, turn ON the Messages Tab, and check “Allow users to send Slash commands and messages from the messages tab”. Without this, Slack won’t let you message the bot."
+            },
+            {
+              "text": "Open Features → Interactivity & Shortcuts and turn it on (no URL needed). This lets you tap your agent’s buttons instead of typing."
+            },
+            {
+              "text": "Open Features → Event Subscriptions and enable it. Expand “Subscribe to bot events”, click Add Bot User Event, add message.channels, message.groups, message.im, and message.mpim (leave one out and it can’t hear you there), then click Save Changes (bottom right)."
+            },
+            {
+              "text": "Open Features → OAuth & Permissions, scroll to Scopes → Bot Token Scopes, click Add an OAuth Scope, and add each of these: chat:write, channels:history, groups:history, im:history, mpim:history, files:read, files:write, users:read.",
+              "note": "The four history scopes are the places it can be spoken to: public channels, private channels, direct messages, and group messages. files:write lets a file it makes arrive in Slack; users:read lets it call you by name."
+            },
+            {
+              "text": "Scroll back to the top of that page, click Install to Workspace, then Allow. Copy the Bot User OAuth Token (it starts with xoxb-) into the Bot token box on Archie’s Chat app card."
+            },
+            {
+              "text": "Message your agent: open a direct message to it, or type /invite @your-bot in a channel and message it there. (It only replies while Archie is running on your computer.)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "The Slack row on Archie’s Chat app card says connected in green, and your app appears in Slack under Apps. Your agent won’t answer until you claim it: send it a direct message and it asks for a six-digit code. The Claim your agent guide covers this."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The message box is missing or grayed out: in Features → App Home, turn ON the Messages Tab and check “Allow users to send Slash commands and messages from the messages tab”. Slack needs both.",
+            "Archie rejects a token: the xapp- token goes in the App-level box, the xoxb- one in the Bot token box. The xoxp- token is your personal one; it saves but never replies.",
+            "You show as Unnamed, or replies stopped after a settings change: a scope counts only after you reinstall the app, which issues a new bot token. Paste both tokens into Archie again.",
+            "Nothing replies: Archie has to be open on your computer and the agent started. In a channel, the app also has to be invited with /invite."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-telegram",
+      "title": "Connecting Telegram",
+      "summary": "Make a Telegram bot with BotFather and paste its token into Archie. About 5 minutes, mostly in one chat.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-19",
+      "section": "connect_messaging_app",
+      "setup_key": "channel:telegram",
+      "video": "channel-telegram.mp4",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "A bot is a second Telegram account your agent speaks through. You make it in a chat with BotFather, Telegram’s helper."
+        },
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A free Telegram account, open on this computer as well as your phone.",
+            "Somewhere safe for the token. Anyone who has it can message as your bot, so paste it only into Archie."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Start on the computer Archie is on. If Telegram is only on your phone, open it in this computer’s browser and sign in:",
+              "copy": "https://web.telegram.org",
+              "note": "It shows a QR code: in Telegram on your phone, go to Settings, then Devices, then Link Desktop Device, and scan it. There’s also a desktop app at https://desktop.telegram.org. New to Telegram? Sign up on your phone first (it needs a phone number), then link this computer."
+            },
+            {
+              "text": "In Telegram on this computer, type @BotFather into the search box at the top of the chat list, and open the one with the blue checkmark.",
+              "note": "Your phone works too: it’s the same chat on both."
+            },
+            {
+              "text": "Send BotFather this message:",
+              "copy": "/newbot"
+            },
+            {
+              "text": "When it asks for a name, use your agent’s name:",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Pick a username. It has to end in “bot”, so try this one:",
+              "copy": "{botHandle}",
+              "note": "Taken? Put a number before the underscore, like my_agent2_bot. A number on the very end (my_agent_bot2) gets rejected."
+            },
+            {
+              "text": "Your token is the long code on its own line, just under “Use this token to access the HTTP API” in BotFather’s reply. Copy it into the token box on Archie’s Chat app card.",
+              "note": "It looks like 123456789:AAEuLB9R2lkni4… Copy all of it, including the part before the colon. Made the bot on your phone? Don’t retype it: open BotFather on this computer and copy it from the same message."
+            },
+            {
+              "text": "Near the top of that reply, BotFather says “You will find it at t.me/…”. Click it to open your bot’s chat.",
+              "note": "Messages to BotFather never reach your agent. Scrolled past the link? Search Telegram for the username you chose."
+            },
+            {
+              "text": "Say hi there to start. (Your agent only replies while Archie is running on your computer.)"
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "The Telegram row on Archie’s Chat app card says connected in green. Your agent won’t answer until you claim it: say hi, and it asks for the six-digit code Archie shows once the agent is started. The Claim your agent guide covers this."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "No reply to the claim code: you may have sent it to BotFather, which ignores it. Search Telegram for your bot’s username and send it there.",
+            "Archie won’t accept the token: copy the whole line again, colon included. To see it again, send /token to BotFather.",
+            "The bot never replies: Archie has to be open on your computer and the agent switched on. Check the button at the top of its page in Archie: it reads Switch off while the agent is on.",
+            "The token leaked, or you want a fresh one: send /revoke to BotFather, then paste the new token into the token box on Archie’s Chat app card and press Save."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connect-xai",
+      "title": "Connecting your xAI (Grok) account",
+      "summary": "Paste an xAI (Grok) API key into Archie: about 10 minutes, a card, and a few dollars of credit.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-24",
+      "section": "connect_ai_account",
+      "setup_key": "provider:xai",
+      "video": "api-key.mp4",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "heading",
+          "text": "Before you start"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An xAI account. Sign in with email, an X account, or Google.",
+            "A card. $5 of prepaid credit is plenty to start.",
+            "Somewhere safe for the key."
+          ]
+        },
+        {
+          "type": "setup_steps",
+          "items": [
+            {
+              "text": "Open the xAI console on this computer, and sign in or sign up.",
+              "copy": "https://console.x.ai",
+              "note": "The key is shown only once, so one made on a phone has to be mailed to yourself."
+            },
+            {
+              "text": "Add credit under Billing, and set a spending limit.",
+              "note": "SuperGrok, X Premium and other X subscriptions don’t include an API key, and paying for them doesn’t fund this account."
+            },
+            {
+              "text": "Create an API key and give it a name.",
+              "copy": "{agentName}"
+            },
+            {
+              "text": "Copy the key. It starts with xai-."
+            },
+            {
+              "text": "Paste it in the box above."
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "You’ll know it worked when"
+        },
+        {
+          "type": "text",
+          "text": "Within seconds, the AI account row reads “✓ Grok (by xAI)” in green."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Refused right away: copy the whole key again, from xai- to the last character.",
+            "Saved, but no answers: the balance is empty, which Archie can’t check. Open Billing and add credit.",
+            "Worked, then went quiet: check the balance and your spending limit. Either one stops answers without warning."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "how-api-keys-work",
+      "title": "How API keys work",
+      "summary": "What an API key is, why your agent needs one, who you pay, and where the key is kept.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-29",
+      "section": "getting_started",
+      "setup_key": "",
+      "video": "api-key.mp4",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "heading",
+          "text": "What an API key is"
+        },
+        {
+          "type": "text",
+          "text": "Your agent sends what you say to an AI company, which sends the answer back. The API key tells that company which account to bill. Anyone who has it can spend from that account, so keep it in a password manager and never paste it into a chat or email."
+        },
+        {
+          "type": "text",
+          "text": "Keys start with sk-ant- (Anthropic), sk- (OpenAI), AIza (Google), gsk_ (Groq) or xai- (xAI)."
+        },
+        {
+          "type": "heading",
+          "text": "Why Archie needs one"
+        },
+        {
+          "type": "text",
+          "text": "Once you connect a key, your agent talks to the AI company straight from this computer, on your account, with your key, and no server of ours is in the path. Before that, on the free credits, Archie thinks on our account, so those messages do pass through our server on the way to the AI company."
+        },
+        {
+          "type": "heading",
+          "text": "Who you pay"
+        },
+        {
+          "type": "text",
+          "text": "You make the key on the AI company’s website in about ten minutes: Anthropic, OpenAI, Google, Groq, xAI, DeepSeek, Mistral, or one you name. There is no Otian key. Replies are billed to your account there, at its prices, and we never handle that money or take a cut."
+        },
+        {
+          "type": "text",
+          "text": "With Archie’s starting credits, you need no AI account at first. When you connect one, expect to add a card and a small prepaid balance. Groq’s free tier is too small for even one message."
+        },
+        {
+          "type": "heading",
+          "text": "Where the key lives"
+        },
+        {
+          "type": "text",
+          "text": "Archie checks a pasted key with the AI company, then hands it to your computer’s own password vault: the Keychain on a Mac, Credential Manager on Windows. It isn’t written into a file, and Archie’s own records keep only a label and the last four characters."
+        },
+        {
+          "type": "note",
+          "text": "The key does leave your computer: it travels to the AI company on every request your agent makes, which is how they know it’s you. It never goes anywhere near Otian."
+        },
+        {
+          "type": "heading",
+          "text": "Subscriptions don’t include a key"
+        },
+        {
+          "type": "text",
+          "text": "Claude Pro, ChatGPT Plus, SuperGrok and X Premium don’t include an API key, and paying for one doesn’t fund the other."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "",
+            "A subscription",
+            "An API key"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "What you pay",
+                "A flat fee every month",
+                "Only for what you use"
+              ]
+            },
+            {
+              "cells": [
+                "Where you use it",
+                "Their own website or app",
+                "In Archie, on your computer"
+              ]
+            },
+            {
+              "cells": [
+                "Works in Archie",
+                "✕",
+                "✓"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "If someone else may have seen your key, delete it on the company’s site and make a new one."
+        }
+      ]
+    },
+    {
+      "id": "knowledge",
+      "title": "Giving your agent things to read",
+      "summary": "Add files your agent can read, and learn which kinds work and when it opens them.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-11",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Put what you keep pasting into the chat here once: prices, policies, a handbook, meeting notes. Your agent reads a file when a question needs it, and changes one only when you ask and say yes."
+        },
+        {
+          "type": "heading",
+          "text": "Documents and Lists"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Documents: files kept as they are, in folders. Your agent reads them and never changes one on its own.",
+            "Lists: tables it keeps up to date as you chat, like customers or orders. It adds and changes entries without asking, since you can undo any of it, and you can edit them too."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "A price list can be either. As a spreadsheet under Documents, your agent changes a cell only when you ask. Under Lists, it adds prices after every call on its own."
+        },
+        {
+          "type": "text",
+          "text": "The Knowledge tab also has Memory (its own guide) and How you write (a few things you wrote, so drafts sound like you)."
+        },
+        {
+          "type": "heading",
+          "text": "Documents you can add"
+        },
+        {
+          "type": "text",
+          "text": "PDFs, Word, Excel, PowerPoint, text, Markdown, CSV, and other plain-text formats such as JSON, HTML and YAML. Up to 10 MB each, and as many as you like. Files added without a folder go in General."
+        },
+        {
+          "type": "text",
+          "text": "The words are pulled out when you add a file; open it in the list to see what came through. The older .doc, .xls and .ppt can’t be opened, so Save As the newer kind first."
+        },
+        {
+          "type": "heading",
+          "text": "When your agent changes a file"
+        },
+        {
+          "type": "text",
+          "text": "It says in one line what it would change, and waits for your yes. Then it sends the file back in the chat and keeps the old version beside it. It changes only what you asked, so formatting and formulas survive. It can’t change a PDF; ask for a new file instead."
+        },
+        {
+          "type": "heading",
+          "text": "When your agent opens a file"
+        },
+        {
+          "type": "text",
+          "text": "It never reads them all. It opens a file only when a question calls for it, choosing by filename, folder and description, so name them clearly. It reads from the top and stops after a while, so put what matters first, or split a long file."
+        },
+        {
+          "type": "note",
+          "text": "Your agent keeps the 40 newest files in mind. It opens an older one only if you name it. To bring one back to the front, remove it and add it again."
+        },
+        {
+          "type": "heading",
+          "text": "Files that arrive on their own"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Documents you send in your chat app go to the chat-inbox folder. Past 50, your agent clears the oldest and tells you. Files you added yourself are never touched.",
+            "Meeting transcripts and video notes land in the meetings and videos folders when a skill makes them."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Test with one document"
+        },
+        {
+          "type": "text",
+          "text": "Add a document and ask something it answers. A good reply quotes the detail back. If it’s vague, rename the file to something a stranger would guess, and ask again."
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "What your agent remembers and forgets",
+      "summary": "See and delete the notes your agent keeps about you, and why it reads only your newer messages.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-11",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Memory, on your agent’s Knowledge tab, lists every note it has kept, in plain sentences, with nothing hidden behind it."
+        },
+        {
+          "type": "heading",
+          "text": "Notes your agent writes itself"
+        },
+        {
+          "type": "text",
+          "text": "Your agent can write itself a one-line note mid-conversation, and keeps up to three things from old messages as they drop off. It’s told to save facts about you and how you like things done, decisions made, questions settled, and mistakes not to repeat."
+        },
+        {
+          "type": "text",
+          "text": "That’s a judgment call, so it may keep something throwaway or miss something obvious. Every note is visible and can be deleted."
+        },
+        {
+          "type": "heading",
+          "text": "Telling your agent to remember"
+        },
+        {
+          "type": "text",
+          "text": "Say it in the chat, like “Remember that I don’t work Fridays.” The note is written right away and carried into every later conversation."
+        },
+        {
+          "type": "note",
+          "text": "If your agent only notes down a change you asked for to a document, calendar entry or record, nothing has changed. If a reply sounds that way, ask whether the change was made."
+        },
+        {
+          "type": "heading",
+          "text": "What your agent forgets"
+        },
+        {
+          "type": "text",
+          "text": "Memory stays about a page long, because all of it is handed to your agent with every message. Past that, your agent rewrites it shorter, dropping repeats and anything out of date."
+        },
+        {
+          "type": "text",
+          "text": "To keep replies quick, your agent reads only the last 20 messages of each conversation, counting both sides. Older ones stay on screen for you, and anything worth a note survives as one."
+        },
+        {
+          "type": "heading",
+          "text": "Removing a note"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Open your agent’s Knowledge tab, then Memory.",
+            "Hover a note and press the ✕ at the end of the line.",
+            "Or press Clear all to wipe every note. That can’t be undone."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Removing one note takes effect on the next message. Clearing everything restarts your agent."
+        },
+        {
+          "type": "heading",
+          "text": "What memory survives"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Restarting your agent or your computer: memory is a file kept with your agent.",
+            "Changing personality: only the voice changes.",
+            "Switching chat app.",
+            "Deleting the agent is the one thing that erases its memory."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Memory belongs to one agent; a second agent starts with none of it. On an agent shared with other people, everyone writes into the same notes, so what one person tells it to remember, the others benefit from, and see."
+        }
+      ]
+    },
+    {
+      "id": "password-manager",
+      "title": "Why you want a password manager",
+      "summary": "Your key is already safe; these three accounts are where a password manager matters.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-09-28",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "heading",
+          "text": "Your key is already looked after"
+        },
+        {
+          "type": "text",
+          "text": "The key you pasted goes into your computer’s own password vault (the Keychain on a Mac, Credential Manager on Windows), where we have no way to read it. The vault is unlocked whenever your computer is, so lock the screen when you walk away."
+        },
+        {
+          "type": "text",
+          "text": "Keep your own copy: Archie never shows a saved key again, and most AI companies show it only once. If you lose it, make a fresh key."
+        },
+        {
+          "type": "heading",
+          "text": "What a password manager is"
+        },
+        {
+          "type": "text",
+          "text": "An app that keeps your passwords behind one you remember, and makes up a different one for each account. Then a leak at one company cannot open your email."
+        },
+        {
+          "type": "heading",
+          "text": "Three accounts to protect"
+        },
+        {
+          "type": "text",
+          "text": "Your agent works through these accounts:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The chat app you talk to it in. Anyone who can message as you can ask your agent to do anything you can.",
+            "Your AI company account. Whoever gets in can make keys and spend your balance; a spending limit caps that.",
+            "Anything else you connected, such as Google. Archie cannot add security to those for you."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Turn on two-factor"
+        },
+        {
+          "type": "text",
+          "text": "Two-factor asks for a code from your phone after the password, so a stolen password is not enough. Turn it on for those three, about two minutes each. In Archie, the Settings page has a checklist under Privacy that links to each one."
+        },
+        {
+          "type": "heading",
+          "text": "Picking a password manager"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The one built into your browser, phone, or computer: free, and it fills in, makes up, and syncs passwords.",
+            "A dedicated app: worth paying for if you mix phone and computer brands, share passwords with a partner, or want leak alerts."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Setting up a password manager"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Pick one; install it on the computer and phone you use most.",
+            "Choose its one password: a long phrase you can remember.",
+            "Print its recovery code and keep it in a drawer: your way back in.",
+            "Change the three accounts’ passwords, letting the manager make each one.",
+            "Turn on two-factor for those three while you’re there.",
+            "Add everything else as you sign in over the next few weeks."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Most managers can’t reset that one password for you, so write it on paper and keep it somewhere safe."
+        }
+      ]
+    },
+    {
+      "id": "personality",
+      "title": "Giving your agent a personality",
+      "summary": "Set your agent’s tone, reply length, and what it does when unsure.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-04",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "Personality sets how your agent sounds. What it can do stays the same."
+        },
+        {
+          "type": "heading",
+          "text": "Two ways to set a personality"
+        },
+        {
+          "type": "text",
+          "text": "Both are on your agent’s Personality tab, one at a time:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Add a ready-made one from the Marketplace; press one to see a real exchange first. Calm Anchor brings up one thing at a time; Concise uses as few words as it can.",
+            "Or write your own in the box, in plain sentences."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "A ready-made one replaces your written one and hides the box. Remove it and your text comes back as you left it."
+        },
+        {
+          "type": "heading",
+          "text": "Writing your own personality"
+        },
+        {
+          "type": "text",
+          "text": "Write it as instructions to your agent, so “you” means the agent. For example: “Friendly and brief. Always confirm dates before scheduling. If it can’t help with something, say so instead of guessing.”"
+        },
+        {
+          "type": "text",
+          "text": "Stuck? Press “Not sure what to write?” above the box. Answer four short questions, and a draft lands in the box for you to edit before saving."
+        },
+        {
+          "type": "heading",
+          "text": "Adjusting a ready-made personality"
+        },
+        {
+          "type": "text",
+          "text": "Add rules in its “Your rules (optional)” box, like “keep replies under three sentences”. They take priority, and the personality’s own wording stays private and untouched."
+        },
+        {
+          "type": "heading",
+          "text": "After you save"
+        },
+        {
+          "type": "text",
+          "text": "Your agent restarts and answers in the new voice from the next message. Switching loses nothing: your conversation, skills, knowledge, memory, and settings stay as they were."
+        },
+        {
+          "type": "note",
+          "text": "Facts about you, like your name and your work, belong in the Who this agent serves section, or you’ll keep the same details in two places."
+        }
+      ]
+    },
+    {
+      "id": "picking-your-ai-account",
+      "title": "Picking your AI account",
+      "summary": "What's free, what needs a card, and what each AI account can do.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-13",
+      "section": "getting_started",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Connect one of these seven AI companies with a key, or another through the Another provider row. Your agent thinks with it."
+        },
+        {
+          "type": "heading",
+          "text": "The same on every account"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The whole catalog of skills, routines, personalities, and knowledge.",
+            "Your key sits in your computer’s own password vault (the Keychain on a Mac, Credential Manager on Windows), where we have no way to read it. You pay the AI company directly; Otian never takes a cut.",
+            "Switching later keeps your agent’s memory, skills, and settings."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "How the accounts differ"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "AI account",
+            "Free to start",
+            "Searches today’s web",
+            "Reads images",
+            "Setup"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "[Anthropic (Claude)](https://claude.com/pricing#api)",
+                "✕",
+                "✓",
+                "✓",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "[Google (Gemini)](https://ai.google.dev/gemini-api/docs/pricing)",
+                "Most countries",
+                "✕",
+                "✓",
+                "~5 min"
+              ]
+            },
+            {
+              "cells": [
+                "[Groq](https://console.groq.com/docs/models)",
+                "✕",
+                "✓",
+                "✕",
+                "~5 min"
+              ]
+            },
+            {
+              "cells": [
+                "[OpenAI (ChatGPT)](https://openai.com/api/pricing/)",
+                "✕",
+                "✓",
+                "✓",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "[xAI (Grok)](https://docs.x.ai/developers/models)",
+                "✕",
+                "✓",
+                "✕",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "[DeepSeek](https://api-docs.deepseek.com/quick_start/pricing)",
+                "✕",
+                "✕",
+                "✕",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "[Mistral](https://mistral.ai/pricing/api)",
+                "✕",
+                "✕",
+                "✕",
+                "~10 min"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Each name links to current prices. Without web search, answers come from what the model already knows; without images, video notes use the spoken words alone."
+        },
+        {
+          "type": "note",
+          "text": "On accounts marked ✕ for images, add the free Google key under Pictures (two minutes) to read photos sent in chat. A photo sent as a file goes into its knowledge base instead."
+        },
+        {
+          "type": "heading",
+          "text": "Which accounts need a card"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Groq: very cheap, but needs a card; its free tier is too small for Archie.",
+            "Google (Gemini): free, no card in most countries. In the EEA, UK, and Switzerland, Google requires billing on even for the free tier.",
+            "Anthropic, OpenAI, xAI, DeepSeek, and Mistral: a card and a small prepaid balance. $5 is plenty to start.",
+            "DeepSeek: very low cost per message. The company is based in China, so that is where your messages travel.",
+            "Mistral: French, the only EU company here."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Costs after setup"
+        },
+        {
+          "type": "text",
+          "text": "Each bills per message from your own account, usually $13 to $31 a month for one agent, depending on how much you message it. Response quality is the biggest lever within one company. Anthropic, OpenAI, and xAI let you cap a key monthly; do it during setup."
+        },
+        {
+          "type": "heading",
+          "text": "Which account to pick"
+        },
+        {
+          "type": "list",
+          "items": [
+            "No card yet? Archie includes credits for your first stretch, so you need none of these on day one.",
+            "Already have an account with one? Use it; you can switch later."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Paying for Claude, ChatGPT, or X Premium? Those don’t include an API key; that is a separate pay-as-you-go account with the same company."
+        }
+      ]
+    },
+    {
+      "id": "picking-your-chat-app",
+      "title": "Picking your chat app",
+      "summary": "Telegram, Discord, Slack, Matrix, and iMessage: what each needs, and how long setup takes.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-14",
+      "section": "getting_started",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Your agent answers in Archie’s Chat tab. A chat app reaches you away from the computer while Archie keeps running there, and only people you approve can use it."
+        },
+        {
+          "type": "heading",
+          "text": "How the chat apps differ"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Chat app",
+            "You need",
+            "Your agent lives in",
+            "Setup"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Telegram",
+                "A free Telegram account",
+                "A private chat with you",
+                "~5 min"
+              ]
+            },
+            {
+              "cells": [
+                "Discord",
+                "A Discord account and a server (free to create)",
+                "A channel on your server",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "Slack",
+                "A workspace that lets you add apps",
+                "A DM or channel",
+                "~15 min"
+              ]
+            },
+            {
+              "cells": [
+                "Matrix",
+                "A free account for your agent (element.io)",
+                "A room you make and invite it to",
+                "~10 min"
+              ]
+            },
+            {
+              "cells": [
+                "iMessage (Mac only)",
+                "A Mac signed into Messages, plus a small free tool",
+                "Your chat with yourself",
+                "~5 min"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Which chat app to pick"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Already open one every day? Use that one.",
+            "Never used any? Telegram has the fewest steps.",
+            "Always texting, on a Mac? With iMessage, text your own number and the Mac at home replies: only to you, and only while it is awake with Archie running.",
+            "Sharing one agent? Discord or Slack, where others already are; each new person still needs your approval.",
+            "At work? Slack, if your workspace lets you add apps (ask your admin if needed).",
+            "Rather not register with a company? Matrix: your agent gets a free account on an open network."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "What setup involves"
+        },
+        {
+          "type": "text",
+          "text": "Do setup on this computer, since most apps give you a long code to paste into Archie, which walks you through each app click by click."
+        },
+        {
+          "type": "text",
+          "text": "Telegram, Discord, and Slack each need a bot made on their side. Matrix gives your agent an ordinary account you invite to a room. iMessage needs a small download Archie does for you, and two macOS permissions."
+        },
+        {
+          "type": "note",
+          "text": "Switching apps later keeps your agent’s memory, skills, and settings, but you send the claim code again and re-approve anyone you’d added."
+        },
+        {
+          "type": "heading",
+          "text": "Catches with Matrix and iMessage"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Matrix rooms need encryption off, since your agent can’t read encrypted rooms and Matrix turns it on for direct messages. The Matrix guide shows the one checkbox, which can’t be changed later.",
+            "iMessage needs a Mac, so on Windows the option does not appear."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "removing-things",
+      "title": "Removing an add-on, agent, or everything",
+      "summary": "What removing an add-on, deleting an agent, or resetting Archie takes with it.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-28",
+      "updated_at": "2026-09-28",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "heading",
+          "text": "Removing an add-on"
+        },
+        {
+          "type": "text",
+          "text": "On the agent's page, open the add-on's tab, open its row, and press Remove. It stays in the Marketplace, but what it knew goes, such as a skill's lists and your answers in its panel."
+        },
+        {
+          "type": "note",
+          "text": "Removing a skill switches off any routine that ran it. Your agent says which; put the skill back to switch them on again."
+        },
+        {
+          "type": "heading",
+          "text": "Pausing a routine instead"
+        },
+        {
+          "type": "text",
+          "text": "To just stop the messages, switch the routine off on the agent's Routines tab, or say \"pause the morning brief\" in the chat. It keeps its schedule."
+        },
+        {
+          "type": "heading",
+          "text": "Deleting one agent"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Open the agent, then its Setup tab.",
+            "In the list on the left, click Delete, the last row.",
+            "Type the agent's name exactly as shown, then press Delete agent."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "This deletes its conversation, everything it remembered about you, its lists, uploaded files, and schedules. Your other agents and your account are untouched."
+        },
+        {
+          "type": "heading",
+          "text": "Erasing everything on this computer"
+        },
+        {
+          "type": "text",
+          "text": "On the Account page, under Resetting Archie, press Reset Archie, type the word reset, then press Erase and restart. It deletes every agent, signs you out, and removes every saved key and password, including those in the Keychain on a Mac or Credential Manager on Windows. Open Archie at login and waking this computer for routines stay as they were."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Your mail and calendar events stay in your accounts.",
+            "If you switched crash reporting off, it stays off.",
+            "The speech and video tools (about 150 MB) stay, so no new download. They say nothing about you."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "A reset cannot be undone, and there is no copy anywhere else. To keep your lists or your agent's memory, save a backup first: Account page, left sidebar, Backups."
+        }
+      ]
+    },
+    {
+      "id": "response-quality",
+      "title": "Choosing your response quality",
+      "summary": "What Economy, Balanced, and Best change, and which one to use.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-29",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Response quality, on your agent’s Setup tab, sets how hard it thinks before answering, and is the biggest cost lever within one AI company."
+        },
+        {
+          "type": "heading",
+          "text": "What the three settings change"
+        },
+        {
+          "type": "text",
+          "text": "All three use the same AI account, skills, memory, and routines. Only the work put into each reply changes."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Setting",
+            "Cost",
+            "What it suits"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Economy",
+                "$",
+                "Reminders, quick questions, tidying a list"
+              ]
+            },
+            {
+              "cells": [
+                "Balanced",
+                "$$",
+                "Drafting, planning, summing up something long"
+              ]
+            },
+            {
+              "cells": [
+                "Best",
+                "$$$",
+                "Several steps that depend on each other, where a wrong answer is slow to spot"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Which setting to use"
+        },
+        {
+          "type": "text",
+          "text": "A new agent starts on Economy, to keep your first week cheap. Once you use it for real, move to Balanced. Stay on Economy if it mostly does small, repetitive jobs."
+        },
+        {
+          "type": "heading",
+          "text": "When Best is worth it"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Several steps, each depending on the one before.",
+            "You want it to weigh things up.",
+            "It’s writing something you’ll send to someone.",
+            "Balanced already tried and missed the point."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Use Best for an afternoon, then switch back. If one skill needs it, set just that skill to Best, using its own Response quality setting."
+        },
+        {
+          "type": "heading",
+          "text": "Skills that pick their own quality"
+        },
+        {
+          "type": "text",
+          "text": "Nearly every Marketplace skill uses a quality its author chose, so this setting mostly governs ordinary conversation; the line under the buttons counts them. Check “Use this for every skill” to override them, though a skill that searches the web moves up to Balanced if you picked Economy."
+        },
+        {
+          "type": "heading",
+          "text": "Effect on your bill"
+        },
+        {
+          "type": "text",
+          "text": "On most AI accounts, each step up costs more per reply. With “Use this for every skill” checked and Best picked, routines run at Best every time too, whether or not you read them. To cap spending, see the guide What your agent costs to run."
+        },
+        {
+          "type": "note",
+          "text": "On some AI accounts the top two settings run the same model, so Best may change little or nothing. If you can’t tell any difference, stay on Balanced."
+        },
+        {
+          "type": "heading",
+          "text": "Choosing the models yourself"
+        },
+        {
+          "type": "text",
+          "text": "Know which model you want? Open Choose the models yourself under the buttons and name one for any setting; it runs everywhere at that setting, schedules included. Empty boxes stay Archie’s pick. The list shows what your AI account can reach."
+        },
+        {
+          "type": "heading",
+          "text": "Changing response quality"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Open your agent’s page, go to Setup, and pick Response quality in the list on the left.",
+            "Tap Economy, Balanced, or Best.",
+            "If the agent is running, Archie restarts it so the new setting takes hold."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Best will not fix a wrong fact. If your agent got a date, a price, or a name wrong, check its knowledge, its memory, or whether it can search the web."
+        }
+      ]
+    },
+    {
+      "id": "skills-specialists-routines",
+      "title": "Skills: what your agent can do",
+      "summary": "Skill, routine, or personality: which one you want, and how skills work.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-08-07",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "add-ons.mp4",
+      "read_minutes": 1,
+      "series": "skills-specialists-routines",
+      "part": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "Your agent’s page has a tab for each kind of add-on:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A skill is one thing your agent can do, like reading your calendar, used whenever a message calls for it.",
+            "A routine runs a skill on a schedule and sends the result to the one chat your agent posts in.",
+            "A personality is how your agent talks: its manner, and the rules it always follows."
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Add-on",
+            "What sets it off",
+            "Works while you’re away",
+            "Needs something else first"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Skill",
+                "Something you say",
+                "Only when a routine runs it",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Routine",
+                "The clock",
+                "✓",
+                "A skill for it to run"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Personality is on for every reply, so it has no row. A routine runs with nobody watching, so it is the one that can spend money while you sleep."
+        },
+        {
+          "type": "heading",
+          "text": "What a skill is"
+        },
+        {
+          "type": "text",
+          "text": "Start with skills. Your agent picks the one that fits your message, so you never name one or turn it on. Leave the Backup words box empty; it only matters if that fails."
+        },
+        {
+          "type": "text",
+          "text": "Marketplace skills keep their instructions private, but each has an Anything else box for your own rules. To write your own, open Build a skill on the left of the Skills tab."
+        },
+        {
+          "type": "note",
+          "text": "Some skills need an account first, such as Google for a calendar skill. The Skills tab warns at the top when a skill waits on Google or Fireflies, and shows “Waiting on…” on the row for anything else."
+        },
+        {
+          "type": "heading",
+          "text": "If a skill never steps in"
+        },
+        {
+          "type": "text",
+          "text": "Check it’s on the Skills tab, then ask for the thing itself: “What have I got on Thursday?” works better than “can you manage my calendar?”"
+        }
+      ]
+    },
+    {
+      "id": "updating-archie",
+      "title": "Updating Archie",
+      "summary": "Where the update button is, and what an update does to your agents.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-24",
+      "updated_at": "2026-08-24",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "heading",
+          "text": "The update card"
+        },
+        {
+          "type": "text",
+          "text": "When an update is ready, a card at the top of the window says so, like “Archie v0.1.6 is ready”. Press Later, or Update & restart: it takes about a minute, and your agents, keys, add-ons, and conversations stay as they were."
+        },
+        {
+          "type": "note",
+          "text": "Nothing installs until you press the button, and never while you are in the middle of something. After Later, the card comes back."
+        },
+        {
+          "type": "heading",
+          "text": "Checking for updates yourself"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Click the gear at the bottom of the left sidebar. That is Settings.",
+            "In the list on the left, under “The app”, click Updates.",
+            "The heading of the card is your version, like “Archie v0.1.5”; under it is “Up to date.” or a ready version.",
+            "The button says Check now, or Update & restart when one is waiting."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Your version also shows beside Updates; tell that to anyone helping you."
+        },
+        {
+          "type": "heading",
+          "text": "How often Archie checks"
+        },
+        {
+          "type": "text",
+          "text": "Archie checks when it opens, hourly after that, and when you come back to its window, if this computer is connected to the internet. Otherwise the card shows only your version."
+        },
+        {
+          "type": "heading",
+          "text": "If the update does not work"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Check that this computer is connected to the internet, then press Check now again.",
+            "If Update & restart does nothing, quit Archie completely, open it again, and try once more.",
+            "Still stuck? Download a fresh copy from otianai.com and install it over the top. Your agents and settings are kept separately, so nothing is lost."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Rarely, a screen you cannot dismiss says Archie must update to keep going, because that version has a serious problem. Its only button updates."
+        }
+      ]
+    },
+    {
+      "id": "using-routines",
+      "title": "Routines: running skills on a schedule",
+      "summary": "Run a skill on a schedule, so the answer arrives without you asking.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-14",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "series": "skills-specialists-routines",
+      "part": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "A routine asks your agent for you and messages you the answer, like a morning briefing."
+        },
+        {
+          "type": "heading",
+          "text": "What a routine is made of"
+        },
+        {
+          "type": "text",
+          "text": "One or more of your skills, plus a Message sent to your agent each time. Schedules: Daily, On certain days, Monthly, Every few minutes, or Before each meeting once a calendar is connected."
+        },
+        {
+          "type": "text",
+          "text": "Skills with a routine attached show a switch: “Messages you on a schedule” or “Not messaging you on a schedule”."
+        },
+        {
+          "type": "note",
+          "text": "Routines run only while your agent is running on this computer. If the computer is asleep or Archie has been quit when one is due, it runs once they are back, unless it is too late to be worth it, and the Routines tab says when one was missed. It also offers to wake the computer a few minutes before each."
+        },
+        {
+          "type": "heading",
+          "text": "If a routine goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Results arrive in the wrong chat: they go to the first chat that ever messaged your agent, usually where you claimed it. Only switching chat app or pasting a new connection code moves them.",
+            "A routine only describes calendar changes, on purpose, since nobody is there to approve them. Ask in the chat instead and confirm there."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "The one-week test"
+        },
+        {
+          "type": "text",
+          "text": "After a week, name one thing you stopped checking yourself. If you can’t, turn on one routine and give it a few days."
+        }
+      ]
+    },
+    {
+      "id": "using-specialists",
+      "title": "Skills that search the live web",
+      "summary": "What a searching skill does, what it costs, and which AI accounts can search.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-09-28",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "series": "skills-specialists-routines",
+      "part": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Your agent knows only what its AI model learned, up to a date, so it may answer last night's score from old memory. A searching skill goes and looks."
+        },
+        {
+          "type": "heading",
+          "text": "How a searching skill works"
+        },
+        {
+          "type": "text",
+          "text": "It sees only the question, without your conversation, which is what lets it reach the web. A long chat cannot pull it off course, and several can run at once. The catch: your agent must pack in what it needs, and sometimes packs too little."
+        },
+        {
+          "type": "heading",
+          "text": "What a search costs"
+        },
+        {
+          "type": "text",
+          "text": "About 2 to 4 cents a search, billed to your AI account, with no separate subscription. At most five searches a job unless a skill's page says otherwise; Deep Research asks for twenty, so it is slower and costs more than the Researcher."
+        },
+        {
+          "type": "note",
+          "text": "Only Anthropic, OpenAI, xAI, and Groq can search; Gemini, DeepSeek, Mistral, and Another provider cannot search through Archie. Groq decides how many searches a question needs, so it has no cap; the others stop at the skill's limit."
+        },
+        {
+          "type": "heading",
+          "text": "When today's news comes back wrong"
+        },
+        {
+          "type": "text",
+          "text": "Nothing installed could look it up. Add the Researcher for quick facts, or Deep Research for something you will act on."
+        }
+      ]
+    },
+    {
+      "id": "websites",
+      "title": "Your agent on websites and apps",
+      "summary": "Turn on Computer control, and know where your agent stops and hands the job back to you.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-08-19",
+      "updated_at": "2026-10-02",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "Where there is no connection on the Apps list, such as the utility company or city hall, your agent can work the website itself. Two Marketplace skills are built on this: Statement Collector, for monthly statements, and Form Filler, for long forms (it stops at Submit)."
+        },
+        {
+          "type": "heading",
+          "text": "A browser window of its own"
+        },
+        {
+          "type": "text",
+          "text": "It uses Chrome, Edge, or Brave; if you have none, install Chrome. The window has its own sign-ins: your agent never touches your tabs or logins, and is signed in only where you signed in yourself. Watch it, and step in by clicking in the window."
+        },
+        {
+          "type": "note",
+          "text": "Archie has to be open on the computer it is installed on, and the window opens there, even when you ask from your phone."
+        },
+        {
+          "type": "heading",
+          "text": "Turning on Computer control"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "On your agent’s Connections tab, find Computer control.",
+            "Switch on \"Let this agent click and type for you\".",
+            "Ask in the chat, like \"Pay my Riverbend bill\". The first time a job needs a sign-in, your agent asks you to sign in yourself.",
+            "Or press Add and paste a site’s address, such as riverbend.com.",
+            "Archie checks the address is real and fills in a name you can change.",
+            "In the browser window that opens, sign in yourself, then close it."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Your password is never shown to your agent or saved by Archie; only the session the site gives that window is kept, on your computer, so you sign in once. When a site signs you out, press Sign in beside it."
+        },
+        {
+          "type": "note",
+          "text": "Your sites list only holds sign-ins and blocks nothing. To keep your agent off a site, such as your bank, add it to Never on these sites, under Limits; that holds even after a redirect."
+        },
+        {
+          "type": "heading",
+          "text": "Where your agent stops"
+        },
+        {
+          "type": "text",
+          "text": "These are built into how it works, so your agent cannot talk its way past them:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A site on your Never on these sites list.",
+            "Password fields: it hands you the window and waits.",
+            "Sign-in codes from a text or an app: always yours.",
+            "Any press it could not undo (submit, send, pay, delete): it shows you the page and waits for your tap. Moving money and signing a contract are always yours to press.",
+            "A job that goes in circles ends after ten minutes, unless you change that under Limits."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "When your agent asks you"
+        },
+        {
+          "type": "text",
+          "text": "You get a chat message with a picture of the page and three answers: go ahead, you do this bit (in the window), or stop. At a final button, tap Press it for me, or press it yourself."
+        },
+        {
+          "type": "text",
+          "text": "Files the site hands over land in your Archie folder and are sent to you in the chat; for one too big to send, you get its exact path."
+        },
+        {
+          "type": "heading",
+          "text": "Apps on a Mac"
+        },
+        {
+          "type": "text",
+          "text": "On a Mac, your agent can also work in apps you allow, such as Numbers or Excel, without moving your pointer, and waits if you start using that app."
+        },
+        {
+          "type": "text",
+          "text": "Ask in the chat and say yes when it asks, or press Add and type the app's name. macOS asks once: in System Settings, under Privacy & Security, then Accessibility, switch Archie on."
+        },
+        {
+          "type": "text",
+          "text": "The same stops apply, plus no cards you pay with, and Delete, Empty Trash, or Don't Save wait for you. If an app won't take its typing, it asks you to type that part."
+        },
+        {
+          "type": "note",
+          "text": "It never uses Terminal, password keepers, System Settings, Mail, Messages, Calendar, or your web browsers. On Windows, websites are what it can use for now."
+        }
+      ]
+    },
+    {
+      "id": "what-archie-connects-to",
+      "title": "What Archie connects to",
+      "summary": "Which apps and services your agent can work with, grouped by job, and where to connect each one.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-10-10",
+      "updated_at": "2026-10-18",
+      "section": "getting_started",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "Archie reaches each of these from this computer, on your own account where there is one. Archie Mobile is the one that goes through our servers, locked so we cannot read it. What your agent reads goes to the AI company that answers you, as the guide called Where your information goes explains."
+        },
+        {
+          "type": "heading",
+          "text": "Mail and calendar"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Gmail and Google Calendar.",
+            "Outlook mail and calendar: Outlook.com, Hotmail, Live, or a work or school account.",
+            "iCloud, Fastmail, Yahoo, AOL, Zoho Mail, and GMX, with an app password you make on that provider's website: mail, plus the calendar where the provider has one. These have not yet been tried on a real account."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Connect them on your agent's Connections tab, under Email, calendar, files. Email features need an AI account of your own: they do not run on the free trial's credits or a plan with the AI included."
+        },
+        {
+          "type": "heading",
+          "text": "Files"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Google Drive, but only the Sheets and Docs you pick in Google's own picker.",
+            "Files you add on your agent's Knowledge tab, which stay on this computer.",
+            "A file attached to an email your agent reads."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "To-do lists and meetings"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Todoist, and Google Tasks through a Google account.",
+            "Fireflies, the meeting recorder.",
+            "Zoom recordings saved on this computer. Archie has no connection to a Zoom account."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Chat apps"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Telegram, Discord, Slack, and Matrix.",
+            "iMessage, on a Mac only. Windows has no iMessage.",
+            "Archie Mobile, our own phone app: from the App Store on iPhone, or as a download on Android. It needs a plan or a free trial."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Pick one on your agent's Setup tab, under Chat app. With none, your agent answers in the Archie window."
+        },
+        {
+          "type": "heading",
+          "text": "Business tools"
+        },
+        {
+          "type": "text",
+          "text": "Follow Up Boss connects with a key. In Follow Up Boss, open Admin, then API, press Create API Key, and paste the key on the Connections tab, under Apps. Then ask your agent to bring in your people, deals, or tasks. They come in on a card you look over, nothing is added to your lists until you press Add, and nothing in Follow Up Boss is changed. GoHighLevel connects directly. Make a token for it in your GoHighLevel sub-account's Settings, under Private Integrations, and paste it on the Connections tab, under Apps."
+        },
+        {
+          "type": "text",
+          "text": "Square, Acuity Scheduling, and Instagram posts through Zernio are in the store, and have not yet been tried on a real account. Neither has Follow Up Boss."
+        },
+        {
+          "type": "heading",
+          "text": "Texting"
+        },
+        {
+          "type": "text",
+          "text": "Texting works only on a Mac, through its Messages app; Windows has no texting. The Text Replies add-on reads the texts that arrive there and writes a reply to each one that needs it, and nothing goes out until you press Send. It needs an AI account of your own, so it does not run on the free trial's credits or a plan with the AI included. Phone calls are a switch of their own: with Call businesses on, on the Setup tab under What it can do, your agent can phone a business on your own Bland account, after you press Place the call."
+        },
+        {
+          "type": "heading",
+          "text": "Lights at home"
+        },
+        {
+          "type": "text",
+          "text": "Your agent can switch Philips Hue, WiZ and LIFX lights and plugs on your own wifi, once you add each one on the Connections tab, under Home devices. These have not yet been tried with real lights."
+        },
+        {
+          "type": "heading",
+          "text": "Websites and apps"
+        },
+        {
+          "type": "text",
+          "text": "For a website with no connection of its own, Computer control lets your agent open the site and use it itself, on a Mac or Windows, and on a Mac the apps you allow. It is off until you turn it on, on the Connections tab, under Computer control."
+        },
+        {
+          "type": "heading",
+          "text": "Something not on the list"
+        },
+        {
+          "type": "text",
+          "text": "The Apps list on the Connections tab has more, with a search box. Most of those were built from each company's published instructions and have not yet been tried on a real account. For an app that is not there, press Something else, give it a name, the web address of its API and the key that app gave you, then write a skill that uses it. This works only with an app that hands out a key."
+        },
+        {
+          "type": "note",
+          "text": "If something here does not work the first time, write to questions@otianai.com and say which one."
+        }
+      ]
+    },
+    {
+      "id": "what-it-costs",
+      "title": "What your agent costs to run",
+      "summary": "Who you pay, what costs more, and how to cap it.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-09-28",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "heading",
+          "text": "You pay the AI company directly"
+        },
+        {
+          "type": "text",
+          "text": "Your agent uses a key to your own AI account, and every reply is charged there at that company’s prices. Nothing routes through us, which is also why we can’t see what you say to it. One catch: web searches run on your AI company’s own computers and are billed to your key, so the search text reaches them. Still not us."
+        },
+        {
+          "type": "heading",
+          "text": "What each thing costs"
+        },
+        {
+          "type": "list",
+          "items": [
+            "An ordinary reply: a fraction of a cent.",
+            "A web search with the Researcher skill: about 2 to 4 cents, at most five per task on Anthropic, OpenAI, and xAI. Groq charges per search but sets its own number, so it has no cap. Gemini, DeepSeek, and Mistral have no live search.",
+            "A routine: the same as asking yourself.",
+            "A long document costs more, because it goes in with the question."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "A routine every 15 minutes runs 96 times a day. Pick the slowest schedule that still tells you in time."
+        },
+        {
+          "type": "heading",
+          "text": "Set a monthly limit"
+        },
+        {
+          "type": "text",
+          "text": "Anthropic, OpenAI, and xAI let you cap a key’s monthly spend, in about a minute. Groq and Gemini have no such cap, and Groq needs billing on before Archie works, so check its limits at setup."
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Open your provider’s console and find billing or limits.",
+            "Set a monthly cap you’d be fine seeing on a statement.",
+            "Set the warning lower, so you hear before you hit it."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "In Archie, the Account page’s Spending section shows what your agents spent per AI account."
+        },
+        {
+          "type": "heading",
+          "text": "If a bill surprises you"
+        },
+        {
+          "type": "text",
+          "text": "Check routines and Email Manager first: they spend with nobody watching. Turn a routine off with the switch on its skill’s card. For Email Manager, open its row on the Skills tab and set Tell me about at most … emails an hour."
+        }
+      ]
+    },
+    {
+      "id": "what-it-will-not-do",
+      "title": "What your agent will never do",
+      "summary": "What your agent cannot do, and the limit in Archie that stops each one.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-09-09",
+      "updated_at": "2026-10-21",
+      "section": "getting_started",
+      "read_minutes": 3,
+      "body": [
+        {
+          "type": "text",
+          "text": "Apart from the one about payment instructions, these are limits in Archie itself, so they hold whichever AI company you connect and whatever anybody types at it."
+        },
+        {
+          "type": "heading",
+          "text": "No conversations with other AIs"
+        },
+        {
+          "type": "text",
+          "text": "The only conversation your agent is in is the one with you. It can hand one job to a helper, such as a researcher, and read the answer; that helper cannot pass the job on. There is no group of AIs and nowhere for them to post."
+        },
+        {
+          "type": "heading",
+          "text": "Idle until something starts it"
+        },
+        {
+          "type": "text",
+          "text": "Three things start your agent: you writing to it, a time you set, and a check of a mailbox you connected. Quitting Archie stops all three, and so does the computer going to sleep."
+        },
+        {
+          "type": "heading",
+          "text": "No commands or scripts"
+        },
+        {
+          "type": "text",
+          "text": "Your agent cannot run a command or a script on this computer. It has a fixed list of actions, like reading a file you added or writing a draft. The only code it writes is a short Python program it runs inside Archie on a Mac, with no internet, seeing only copies of files you gave it, and the program is under its answer. With Computer control on, it can also use websites, and on a Mac the apps you allow. It never uses a terminal or any app that runs commands, on a Mac or Windows, and none can be added."
+        },
+        {
+          "type": "heading",
+          "text": "Nothing costly gets finished without you"
+        },
+        {
+          "type": "list",
+          "items": [
+            "No text messages of its own, and no phone calls unless you switch Call businesses on, on the Setup tab under What it can do: then only to businesses, on your own Bland account, after you press Place the call on a card that shows the words first.",
+            "No spending unless you switch Buying on, under Computer control: then only at shops you list, up to amounts you set, after you tap Press it for me. Every add-on is included, so nothing inside Archie is for sale.",
+            "No sending on its own. An email or text reply goes out when you press Send, or at a time you set.",
+            "On a website, it stops before any press it could not undo (submit, pay, book, order, sign up, delete, cancel) and shows you the page. Tap Press it for me, or press it in the window.",
+            "No locks, thermostats, or cameras. It can switch only the lights and plugs you added to its list yourself."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Payment and wiring instructions"
+        },
+        {
+          "type": "text",
+          "text": "If an email, document, or message gives new or changed payment or wiring instructions, your agent is told never to pass them on, forward them, or act on them, even if you ask, and to tell you to confirm by phone at a number you already have, such as the title company's. Unlike the other limits here, this one is an instruction the AI follows, and an AI can get it wrong, so read anything about moving money yourself."
+        },
+        {
+          "type": "heading",
+          "text": "No looking around your network"
+        },
+        {
+          "type": "text",
+          "text": "Anything else on your home or office network (a storage drive, a server, another computer) is refused by address before the request leaves. Lights and plugs are reached only through the list you built."
+        },
+        {
+          "type": "heading",
+          "text": "The off switch is yours"
+        },
+        {
+          "type": "text",
+          "text": "Every agent has Switch on and Switch off at the top of its own page. Quit Archie and nothing runs: your agent is on this computer and on no other."
+        },
+        {
+          "type": "note",
+          "text": "Ask for one of these and your agent says so in one line and offers the nearest thing it can do."
+        }
+      ]
+    },
+    {
+      "id": "what-to-ask-for",
+      "title": "What to say to your agent",
+      "summary": "First messages that get your agent doing something useful.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-07-27",
+      "section": "bring_agent_online",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "“Hi” gets a friendly hello back and nothing more, because nothing was asked. Try these instead."
+        },
+        {
+          "type": "heading",
+          "text": "Start with a fact"
+        },
+        {
+          "type": "text",
+          "text": "Skills that keep a list start empty: Sports Follow with no teams has nothing to report. Tell it once:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "“Follow Arsenal and the Warriors.”",
+            "“Netflix is 15.49 a month, next due on the 8th.”",
+            "“I take metformin twice a day, refill due the 20th.”",
+            "“My mom’s birthday is March 3.”"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Ask for the thing itself"
+        },
+        {
+          "type": "text",
+          "text": "“Can you manage my calendar?” gets you a yes. “What have I got on Thursday?” gets you Thursday."
+        },
+        {
+          "type": "heading",
+          "text": "Say how to talk to you"
+        },
+        {
+          "type": "text",
+          "text": "Tell it once, like “Keep answers to two sentences unless I ask for more” or “Tell me when you’re not sure instead of guessing”."
+        },
+        {
+          "type": "note",
+          "text": "If a reply is wrong or badly pitched, say so in the chat; that’s faster than editing anything in Archie."
+        },
+        {
+          "type": "heading",
+          "text": "Hand over one list"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "Give it one list to keep: tasks, bills, whatever you hold in your head.",
+            "That skill already messages you on a schedule; change the time or turn it off with the switch on its card.",
+            "After a week, ask yourself whether you stopped checking something."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "what-you-need-to-run-archie",
+      "title": "What you need to run Archie",
+      "summary": "Everything your agent needs to answer, including a computer that stays on.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-19",
+      "section": "getting_started",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "heading",
+          "text": "What you need"
+        },
+        {
+          "type": "list",
+          "items": [
+            "A Mac or Windows computer that stays on and plugged in. Your agent answers only while it is awake; the guide \"Your agent stopped replying\" shows how to stop it sleeping.",
+            "An Otian account and a plan, signed in through a browser window: $30 a month or $299 a year, or $59 a month or $599 a year with the AI included (then skip the next item). Switch or stop any time. New accounts start on free credits. That account is the only one on our side, and it holds your email address and which plan you're on. Never a conversation we can read.",
+            "An AI account with a key, from a company in the guide Picking your AI account. Your agent thinks with it, and you pay that company directly. With the free credits you need none on your first day. Groq is very cheap after that, but needs a card.",
+            "Internet on that computer: every reply is a round trip to the AI company. A cable from your router is steadier than Wi-Fi.",
+            "Optional: a chat app (Telegram, Discord, Slack, or Matrix; on a Mac, iMessage needs no account), to reach you on your phone. Without one, your agent answers in Archie's Chat tab."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "When your agent can answer"
+        },
+        {
+          "type": "text",
+          "text": "Your agent runs on this computer, inside Archie. It answers only while the computer is awake, Archie is running, and the agent is started. Closing Archie’s window is fine; quitting Archie stops it. Nothing is lost while it is asleep."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Your computer",
+            "Archie",
+            "Does your agent answer?"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Awake",
+                "Open, agent started",
+                "✓"
+              ]
+            },
+            {
+              "cells": [
+                "Awake",
+                "Open, agent stopped",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Awake",
+                "Closed",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Asleep",
+                "Open, agent started",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Shut down",
+                "Not running",
+                "✕"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "What you don’t need"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Any coding, or a terminal. Chat apps connect by pasting or scanning a code.",
+            "A server, or a cloud account of any kind.",
+            "A second computer, as long as yours can stay on.",
+            "Claude Pro or ChatGPT Plus. Neither includes the key Archie asks for."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Checking that everything works"
+        },
+        {
+          "type": "text",
+          "text": "On your agent's Setup tab, the AI account row names your provider and the top button reads Switch off. Send a message in the Chat tab and an answer comes back."
+        }
+      ]
+    },
+    {
+      "id": "when-it-goes-quiet",
+      "title": "Your agent stopped replying",
+      "summary": "Five reasons an agent goes quiet, in the order to check them.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-20",
+      "section": "good_to_know",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "body": [
+        {
+          "type": "heading",
+          "text": "1. The computer is off or asleep"
+        },
+        {
+          "type": "text",
+          "text": "Your agent pauses when Archie closes or the computer sleeps. Nothing is lost, but a 7:30am briefing needs the computer awake then, or, after a routine was missed while it slept, the Wake this computer button on that routine's row, which wakes it before each routine from then on."
+        },
+        {
+          "type": "text",
+          "text": "Only the computer has to stay awake; the screen can go dark. Change this once:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "On a Mac: plug it in, open System Settings, then Battery, then Options, and turn on \"Prevent automatic sleeping on power adapter when the display is off\".",
+            "On Windows: plug it in, open Settings, then System, then Power & battery. Set the screen to turn off after a few minutes, and sleep to Never while plugged in."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Closing a laptop lid sleeps it by default, which is a separate setting:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "On Windows: open Control Panel, then Power Options, then \"Choose what closing the lid does\", and set \"When I close the lid\" to \"Do nothing\" for Plugged in.",
+            "On a Mac: a closed lid sleeps it unless it is plugged in with an external display connected (clamshell mode). Otherwise macOS has no supported way to keep it awake shut, so leave the lid open.",
+            "Either way, leave it where it can shed heat, not in a drawer or under a cushion."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "If this computer goes everywhere with you, the guide \"Give your agent a computer that stays home\" shows how to move your agent to one that doesn't."
+        },
+        {
+          "type": "heading",
+          "text": "2. The agent is switched off"
+        },
+        {
+          "type": "text",
+          "text": "Agents you left running come back with Archie, but one you stopped stays stopped and hears nothing. Check the button at the top of its page: it reads Switch on while the agent is off."
+        },
+        {
+          "type": "heading",
+          "text": "3. Your AI credit ran out"
+        },
+        {
+          "type": "text",
+          "text": "Your agent says the account is out of credit. Top up where you made the key; your AI account’s guide has the billing link."
+        },
+        {
+          "type": "heading",
+          "text": "4. Nobody has claimed the agent"
+        },
+        {
+          "type": "text",
+          "text": "A new agent replies only by asking for the six-digit claim code shown in Archie. Send that code in the chat and it’s yours."
+        },
+        {
+          "type": "heading",
+          "text": "5. Two agents share one bot"
+        },
+        {
+          "type": "text",
+          "text": "Archie won’t switch on a second agent on the same bot, since they would split the conversation. If Switch on fails with a message that mentions another agent, this is why."
+        },
+        {
+          "type": "note",
+          "text": "Still quiet? Press Switch off and then Switch on at the top of its page, so it picks up any change made while it was running."
+        }
+      ]
+    },
+    {
+      "id": "where-your-information-goes",
+      "title": "Where your information goes",
+      "summary": "What stays on this computer, what goes to your AI company and to us, and how to turn each off.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-10-10",
+      "updated_at": "2026-10-17",
+      "section": "getting_started",
+      "read_minutes": 4,
+      "body": [
+        {
+          "type": "heading",
+          "text": "What stays on this computer"
+        },
+        {
+          "type": "text",
+          "text": "Your agents, what they know about you, your conversations, files, notes and lists are kept in Archie's folder here. Keys you paste sit in this computer's password store (Keychain on a Mac, Credential Manager on Windows), where we have no way to read them; each goes only to its own company."
+        },
+        {
+          "type": "heading",
+          "text": "What goes to your AI company"
+        },
+        {
+          "type": "text",
+          "text": "To answer you, your agent sends the AI company you connected your message, the recent conversation, what it knows about you, and what it read for you, such as an email, straight from this computer on your account. Web searches run on that company's servers."
+        },
+        {
+          "type": "text",
+          "text": "Until you connect an AI account of your own, the AI is ours (the free trial's credits, or a plan with the AI included): each request passes through our server, which writes down what it cost, never what it said, keeps no copy, and sends it on to Anthropic. Your agent reads no email or texts on our AI. Connecting your own account stops this from your agent's next start."
+        },
+        {
+          "type": "heading",
+          "text": "What each AI company says about training"
+        },
+        {
+          "type": "text",
+          "text": "As of August 2026, in their own terms:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Anthropic (Claude), OpenAI (ChatGPT) and Groq say what Archie sends them is not used for training.",
+            "Google (Gemini) and Mistral say the same of their paid tiers only. Their free tiers train on what you send.",
+            "xAI (Grok): we could not check its terms, so read them before you connect it.",
+            "DeepSeek's privacy policy says it trains on personal data and stores it in China."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Each policy is linked at https://otianai.com/trust/#providers"
+        },
+        {
+          "type": "heading",
+          "text": "What Otian AI holds"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Your email address, and whether you have a current plan.",
+            "Which version of the Terms you agreed to, and when.",
+            "Your Archie version and edition, Mac or Windows, and when it last checked in: one record, rewritten at most every six hours.",
+            "Crash and error reports: where our code broke, the error line, and for an add-on, its name and failing tool. Never what you wrote.",
+            "On our AI, what each request cost, and a scrambled one-way stamp of the computer and internet address that claimed free credits.",
+            "Second-factor sign-in records, invoices for any guided session, and any refused checkout (the account, the country, the amount).",
+            "Your address on our weekly letter's list, and whether it is switched on.",
+            "With phone access on, the messages between your computer and phone, sealed with a key we never receive. Unsealed: when each was left, which version of Archie left it, whether it was picked up, and your phone's name from pairing.",
+            "How many times each add-on was added, but not by whom."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Our trust page keeps the current list: https://otianai.com/trust/#what-we-hold"
+        },
+        {
+          "type": "text",
+          "text": "How long: your phone deletes each message once it reads it; your computer clears any it never came back for a day after the answer, the next time Archie runs. The rest are in the privacy policy: https://otianai.com/privacy-policy/#data-retention"
+        },
+        {
+          "type": "heading",
+          "text": "Chat apps and your phone"
+        },
+        {
+          "type": "text",
+          "text": "In Telegram, Discord, Slack, or Matrix, what your agent says crosses that company's servers like any message there. iMessage (on a Mac only; Windows has none) is encrypted end to end by Apple. Archie Mobile, our phone app, locks each message with a key only your computer and phone hold, so we hold those messages and cannot read them. Phone access is off until you turn it on."
+        },
+        {
+          "type": "heading",
+          "text": "How to turn each one off"
+        },
+        {
+          "type": "text",
+          "text": "Settings and Account are at the bottom of the left sidebar."
+        },
+        {
+          "type": "list",
+          "items": [
+            "An account or app: on your agent's Connections tab, under Email, calendar, files, or under Apps, press the trash can beside it. Its sign-in or key stays in Settings, under Saved keys, until you remove it there.",
+            "A chat app: remove its token in Settings, under Saved keys. Your agent still answers in the Archie window.",
+            "Your AI company: change it on your agent's Setup tab, under AI account.",
+            "Crash and error reports and the version check-in: in Settings, under Privacy, turn off Send crash reports.",
+            "Your phone, or a lost one: on your agent's Setup tab, under Chat app, press Archie Mobile, then Disconnect every phone. That empties the sealed mailbox too.",
+            "This computer: on the Account page, under Resetting Archie, press Reset Archie, then type reset. Your agents and saved keys are erased and every phone disconnected; Open Archie at login and waking this computer for routines stay.",
+            "Your Otian AI account, or the weekly letter: sign in at https://otianai.com/account/"
+          ]
+        },
+        {
+          "type": "note",
+          "text": "This says what Archie does. It is not a compliance certification, and does not make Archie HIPAA or GDPR compliant: what you send still goes to an AI company."
+        },
+        {
+          "type": "text",
+          "text": "A copy to print or send to someone: https://otianai.com/trust/where-your-information-goes/"
+        }
+      ]
+    },
+    {
+      "id": "who-can-message",
+      "title": "Letting other people in",
+      "summary": "Approve someone to message your agent, and know what they can do.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-10-14",
+      "section": "bring_agent_online",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 2,
+      "series": "getting-people-on",
+      "part": 2,
+      "body": [
+        {
+          "type": "text",
+          "text": "Once claimed, your agent answers only you. Anyone else is told to ask you for access, and their message is dropped before it costs anything."
+        },
+        {
+          "type": "heading",
+          "text": "Two ways to let someone in"
+        },
+        {
+          "type": "steps",
+          "items": [
+            "They message your agent, appear in Archie under “People waiting to message your agent”, and you press Approve.",
+            "Or press Add someone, and they send the code Archie shows to your agent in the chat app."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Either way they join as a Guest, with a Remove button beside them. An invite code works once, expires after a day, and Stop accepting this code ends it early."
+        },
+        {
+          "type": "note",
+          "text": "Your agent tells you the first time someone new writes, once per person. Not now clears them and they can write again; Block silences them, even against an invite code."
+        },
+        {
+          "type": "heading",
+          "text": "What an approved person can do"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Can they…",
+            "Owner",
+            "Guest"
+          ],
+          "rows": [
+            {
+              "cells": [
+                "Message the agent and get answers",
+                "✓",
+                "✓"
+              ]
+            },
+            {
+              "cells": [
+                "Read its memory, files, and records",
+                "✓",
+                "✓"
+              ]
+            },
+            {
+              "cells": [
+                "Add to and change its lists (on “Talk and add to your lists” or “Everything you can”)",
+                "✓",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Act through it: send drafts, approve calendar changes (only on “Everything you can”)",
+                "✓",
+                "✕"
+              ]
+            },
+            {
+              "cells": [
+                "Change how it works, or approve other people",
+                "✓",
+                "✕"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Guests start on “Talk to your agent”, which cannot act on your accounts. On any of the three settings they read everything it holds, so approve people you would trust with that."
+        },
+        {
+          "type": "heading",
+          "text": "If something goes wrong"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Each chat app keeps its own approved list. Only two things reset one: pasting a different connection code for that app, or removing its saved code on the Settings page, under Saved keys (which resets every agent using it).",
+            "Someone got no reply: they are told once that they aren’t approved, then your agent stays quiet for about an hour. Approve them and ask them to write again.",
+            "Reset access makes the agent forget its owner and every guest, and issues a new code. It answers nobody until it is claimed again."
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Your agent only replies while it’s started and Archie is running on this computer, so a silent agent is more often a closed laptop than a permissions problem."
+        }
+      ]
+    },
+    {
+      "id": "who-it-serves",
+      "title": "Telling your agent who it serves",
+      "summary": "Tell your agent your name, your work, and your house rules, with help if you’re stuck.",
+      "category": "productivity",
+      "author": "Otian AI",
+      "visibility": "public",
+      "created_at": "2026-07-27",
+      "updated_at": "2026-07-27",
+      "section": "set_up_what_agent_does",
+      "setup_key": "",
+      "video": "",
+      "read_minutes": 1,
+      "body": [
+        {
+          "type": "text",
+          "text": "An agent that knows nothing about you asks who Sam is every time and books the Friday you never work. Fix that once in the Who this agent serves box, on your agent’s Personality tab."
+        },
+        {
+          "type": "heading",
+          "text": "What to put in the box"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Your name, and what you do.",
+            "What takes up most of your time.",
+            "Who it will hear about often: family, colleagues, clients.",
+            "House rules: anything it should always or never do.",
+            "For a business: the key people, and what matters most in how you work."
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Help filling in the box"
+        },
+        {
+          "type": "text",
+          "text": "Press “Not sure what to write?” above the box, answer up to five short questions, and a draft lands in the box for you to change. Or let your agent ask: a newly claimed agent interviews you over chat and fills this in. “Redo introduction”, at the bottom of the Personality tab, starts that again."
+        },
+        {
+          "type": "heading",
+          "text": "Where this box ends up"
+        },
+        {
+          "type": "text",
+          "text": "It is handed to your agent with every message, and to every skill it hands work to. It saves as you type, and a running agent restarts a couple of seconds later to pick up the change."
+        },
+        {
+          "type": "note",
+          "text": "Redo introduction replaces this box entirely, so copy anything you wrote by hand first. Memory is the other place facts live: what your agent worked out as you talked."
+        }
+      ]
+    }
+  ]
+}

@@ -64,6 +64,7 @@ SKIP_PREFIXES = (
     "standard/",   # Jett and Jack's signed principles, published whole
     "admin/", "account/", "app/", "app-auth/", "auth-action/", "billing/", "activity/",
     "login/", "unsubscribe/", "cp7/", "cp8/", "ucp/",  # signed-in surfaces and app strings
+    "docs/whats-new/",  # the notes Archie showed when each release installed, published as a record
 )
 
 # Reference pages: their job is completeness, so they get the longer block ceiling. The same
@@ -74,7 +75,11 @@ SKIP_PREFIXES = (
 # cannot be cut without dropping a citation, and archie/install/ is a set of steps somebody follows
 # with the installer open, whose Windows signing passage CLAUDE.md names as the model.
 REFERENCE_PREFIXES = ("trust/", "compare/", "blog/", "ai-explained/", "faq/", "help/", "our-story/",
-                      "archie/pricing/", "archie/mobile/", "archie/install/")
+                      "archie/pricing/", "archie/mobile/", "archie/install/",
+                      # Archie Docs (scripts/gen-docs.mjs), added 2026-10-27: somebody looking a
+                      # thing up, with the guide or the feature already open. The guides' own words
+                      # are the Archie repo's, so a fix to one is made there and snapshotted here.
+                      "docs/")
 
 # Pages whose words are written somewhere else and generated here: the Learning Library from
 # assets/library.json by scripts/gen-library.mjs, and each add-on's own page from the catalog the

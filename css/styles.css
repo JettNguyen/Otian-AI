@@ -1255,6 +1255,7 @@ p, li, figcaption, dt, dd, blockquote { text-wrap: pretty; }
 .nav-ico-question { -webkit-mask-image: url(../assets/nav/question.svg); mask-image: url(../assets/nav/question.svg); }
 .nav-ico-chat { -webkit-mask-image: url(../assets/nav/chat.svg); mask-image: url(../assets/nav/chat.svg); }
 .nav-ico-doc { -webkit-mask-image: url(../assets/nav/doc.svg); mask-image: url(../assets/nav/doc.svg); }
+.nav-ico-contents { -webkit-mask-image: url(../assets/nav/contents.svg); mask-image: url(../assets/nav/contents.svg); }
 .nav-ico-book { -webkit-mask-image: url(../assets/nav/book.svg); mask-image: url(../assets/nav/book.svg); }
 .nav-ico-play { -webkit-mask-image: url(../assets/nav/play.svg); mask-image: url(../assets/nav/play.svg); }
 .nav-ico-people { -webkit-mask-image: url(../assets/nav/people.svg); mask-image: url(../assets/nav/people.svg); }

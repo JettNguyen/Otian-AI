@@ -38,6 +38,9 @@ SKIP_FILES = {
     "README.md",
     "PRICING-ONETIME-MIGRATION.md",
     "preview.html",
+    # Archie Docs' feature inventory. Each feature carries its TRUST.md entry's wording, quoted for
+    # whoever edits it and never printed; the pages it writes into docs/ are checked like any other.
+    "docs-features.json",
 }
 
 MONEY = re.compile(r"\$\d[\d,]*(?:\.\d+)?")

@@ -484,7 +484,7 @@ sizes are on the page at rest, and the pick only lights one.
   no symptom to chase: the CSS is right there in the inspector. The check covers the third
   place this hides too, a module inside `js/` importing `"./faces.js"` bare from a versioned
   entry point, which pulls a stale module through a fresh one.
-- **Five parts of this site are generated, and each has a `--check` mode. Run them before you
+- **Six parts of this site are generated, and each has a `--check` mode. Run them before you
   commit.** There is still no build step: these write into the repo, the result is committed,
   and the check is what stops the committed copy drifting from what it was made from.
   - `python3 scripts/gen-discovery.py` writes `sitemap.xml`, `robots.txt` and `llms.txt` from
@@ -530,6 +530,16 @@ sizes are on the page at rest, and the pick only lights one.
     `js/glossary.js` imports too. A glossary page is the one page on this site whose whole job
     is being quoted by something that is not a browser, so check it after any edit to the
     markdown.
+  - `node scripts/gen-docs.mjs` writes Archie Docs into `docs/` (October 27, 2026): the 39 guides
+    from Archie's Resources page, every released feature by area, and What's new, with a search
+    box that reads `docs/search.json`. **Nothing in `docs/` is written by hand.** A guide is fixed
+    in the Archie repo's `data/marketplace/resources/`, pushed there, then snapshotted here by
+    `sync-public-catalog.mjs`. A feature is a row in `data/docs-features.json` that names its TRUST.md
+    headings, and the run fails while one is missing. Jett's rule for which rows print is in
+    TRUST.md's "Archie Docs" entry: released means printed, unless the entry says to say nothing
+    yet, or it is privacy or safety wording he has not approved. Held rows stay in the file with
+    their reason, so `node scripts/gen-docs.mjs --report` is the whole feature list, published
+    and not. **When a feature ships, its row goes in with its TRUST.md entry, in the same pass.**
 
 - **The homepage is one stage, and its two objects are the app's own mockups (2026-09-16).**
   `index.html` is a sticky `.day-story` the scroll moves through: seven acts across one day, captions in one column, and one Ember inside the stage that

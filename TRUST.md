@@ -9879,6 +9879,41 @@ winning the argument. Published on `trust/` on 2026-09-17.
 - ⚠️ If the floor is ever moved out of `prompt.rs`, or a personality is allowed to
   override it, the Trust page section is wrong the same day.
 
+### Archie Docs: the guides inside Archie and every released feature, on one site: BUILT October 27, 2026, in no push yet
+
+*`docs/` here, written by `scripts/gen-docs.mjs`. Nothing in Archie changed.*
+
+**Proposed wording, Jett's to approve:** "Archie Docs has the same guides Archie shows on its
+Resources page, every feature that is in a release with where it is and its limits, and the notes
+from each release."
+
+**Why it's true:**
+
+- **The guides are Archie's, word for word.** `scripts/sync-public-catalog.mjs` snapshots the public
+  `resources` collection into `data/public-guides.json`, the copy installed apps show because the
+  catalog's copy wins over the built-in one (the Archie repo's `data/marketplace/RESOURCE-TEMPLATE.md`).
+  The generator adds nothing to a guide but links: an address, a named link, and a guide naming
+  another ("The Claim your agent guide"). `{agentName}` reads My Agent, as on the Resources page.
+- **Every feature names its entry in this file.** `data/docs-features.json` lists each feature with
+  the headings it rests on, and the generator refuses to run while one of them is missing here.
+- **Which features are printed (Jett, October 27, 2026):** every feature that is in a release, in
+  plain words from its entry's checked facts, including entries whose wording is still his to
+  approve, because nothing is live before he reads the docs and pushes them. Three kinds stay
+  held, each with its reason in the file: a feature in no release; one whose entry says to say
+  nothing yet (until a person has tried it, until a phone half ships); and a privacy or safety
+  feature whose wording is not approved. A feature with no entry here is held too, so the file is
+  the whole inventory and `node scripts/gen-docs.mjs --report` prints it, held lines marked H.
+- **The release notes** are `archie/releases.json`, the notes each update showed, from 0.3.0 on.
+
+**Boundaries:**
+
+- Never say the docs list every feature Archie has. They list every one this file allows; the
+  rest are held, about 80 on the day it was built, 60 of them for want of an entry here.
+- A guide fixed in the Archie repo reaches the docs only after Archie's push seeds the catalog and
+  `sync-public-catalog.mjs` and `gen-docs.mjs` run here. Push Archie first.
+- "Last checked" on a guide is the guide's own `updated_at`: when its facts were last checked
+  against the other company's site, never when it was copied here.
+
 ## What We Hold — state the whole list, always
 
 **The account core:** "Our servers know your email address and whether you have a current plan.

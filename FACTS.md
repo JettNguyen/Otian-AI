@@ -132,6 +132,7 @@ Currencies are printed as the company prints them. A converted figure is not a f
 | `$0.12` | The same 12 credits pay as you go, at $0.01 each | Microsoft Learn rate table above | Checked: 2026-09-12 |
 | `$2` | Salesforce Agentforce, per conversation. The `$2` in the Money table is our starter credits; this row is theirs | `https://www.salesforce.com/agentforce/pricing/`, "$2 USD per conversation" | Checked: 2026-09-12 |
 | `$500` | Agentforce Flex Credits, per 100,000 | Same page, "$500 USD per 100,000 Credits" | Checked: 2026-09-12 |
+| `$5` | The prepaid credit an AI company asks for before its key works: the usual minimum at OpenAI and xAI, and "plenty to start" at Anthropic, DeepSeek and Mistral. Printed by the Archie guides that docs/ copies word for word (connect-openai, connect-xai, picking-your-ai-account), so a change is made in those guides | Each company's billing page, as the Archie repo's `data/marketplace/resources/connect-*.json` give it; the guides were last checked on August 24, 2026 (OpenAI, xAI) and October 13, 2026 (Picking your AI account) | Checked: 2026-10-27, against the guides |
 | `$13` | Claude Code, per developer per active day, Anthropic's own average across enterprise deployments | `https://code.claude.com/docs/en/costs` | Checked: 2026-09-12 |
 | `$150` | Claude Code, per developer per month, the bottom of Anthropic's own range | Same page, "$150-250 per developer per month" | Checked: 2026-09-12 |
 | `$250` | Claude Code, per developer per month, the top of that range | Same page | Checked: 2026-09-12 |

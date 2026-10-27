@@ -1810,6 +1810,8 @@ read, and the privacy policy says so with a row in its retention table. Previews
   agent goes quiet**, so never "instantly".
 - ❌ Never "end-to-end encrypted" without the boundaries on "Archie on your phone" above.
 
+*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* A reply to a voice note sent from the phone notifies in the reply's plain sentences instead of its words; see the entry headed "A voice note answered in writing is written for a phone to read out".
+
 ### ✅ Stopping a reply partway by typing stop or pressing Stop, in Archie and in Archie Mobile, and a phone message that waits for a sleeping computer: SHIPPED in Archie 0.3.5 on October 5, 2026, and in Archie Mobile on Android in the same release; not in the iPhone's 1.0
 
 *Released on the computer, checked October 6, 2026: Archie `389c0b4e` (the bare stop and the Stop
@@ -2036,6 +2038,8 @@ when that is the clearer shape."
   in the message menu opens nothing (`d5ecab0`). The picker and Share problems are the iPhone's
   alone (the Share fix runs on iOS only); picked photos going at once is on Android too, until an
   APK after `50c192d`.
+
+*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* On a chat app, a reply to a voice note says a table as sentences, one a row, instead of labeled bullets; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
 ### ✅ A microphone and Talk out loud beside Archie's message box, and where what you say goes: the window only, SHIPPED in Archie 0.3.2 on 2026-09-30
 
@@ -7443,6 +7447,8 @@ a few letters wide (`Room` in `src/app/markdown.tsx`). On the phone a table and 
 now as tall as what they hold; on the simulator a three-row table had been drawn with most of a
 screen of empty border under it (`flexGrow: 0` in archie-mobile's `src/markdown.tsx`). Neither
 changes what may be claimed.
+
+*Amended October 27, 2026 (Archie `2276639d`, in no release yet).* A reply to a voice note says a chart's numbers as sentences instead of a list, on the chat app and in Archie Mobile's notification; see the entry headed "A voice note answered in writing is written for a phone to read out".
 
 ### 🚧 It changes the spreadsheets, Word files, decks and text files you give it, in their own style, and reads a spreadsheet's formulas: BUILT 2026-10-15, RELEASED in 0.3.10, 2026-10-17
 
@@ -13733,6 +13739,109 @@ back on their own once you have one."
   the window, lists and calendar with it (`close_expired_trial`, which stays for the switch turned
   off and for the plan with the AI included). An owner on a phone heard nothing until a message their
   agent could not answer.
+
+### 🚧 A voice note answered in writing is written for a phone to read out, on a chat app and in Archie Mobile's notification: BUILT 2026-10-27, in no release yet, not yet heard in a car
+
+*Built October 27, 2026 (Archie `2276639d`; in no release yet).*
+
+**Proposed wording, Jett's to approve:** "Send your agent a voice note on a chat app like Telegram,
+and the answer it writes back is made for your phone to read out to you: a table comes as one
+sentence a row, a list as sentences, with every name, amount and date kept, and a link's address
+goes after the answer instead of being read out in the middle of it. Send one from Archie Mobile
+and the notification says the same sentences, while the conversation keeps the answer as your agent
+wrote it."
+
+As a chat app is sent it, for an agent that answered "who still owes me?" with a table, a list and
+a link:
+
+> Who still owes you.
+>
+> Dana Miller, Amount: $340, Due: Thursday.
+> Todd Baker, Amount: $1,200.50, Due: October 30.
+>
+> Ellen paid on Monday.
+> Mike's check is pending.
+>
+> Open the invoices to send a nudge.
+>
+> Link:
+> Open the invoices: https://example.com/invoices?view=open
+
+where the agent wrote a heading, a three-column table with Todd's name in bold, two bullets with
+Monday in bold and "pending" set as code, and "[Open the invoices](...) to send a nudge."
+
+**Why it's true:**
+
+- **One cleaner for every answer to a voice note.** `heard` in
+  `crates/archie-runtime/src/speech.rs` makes a reply plain: a table is a sentence a row, its first
+  cell as it is and each other cell after its column's heading; a heading, a bullet, a quote or a
+  checked box is its words as a sentence; a chart is its numbers; the emphasis and code marks go
+  where they are marks and stay where they are part of a name (`Q3_Report_final.xlsx`); a line of
+  code is kept exactly as written; a link keeps its words and its address moves to the end, and a
+  bare address is said as "(link)" and moves there too. The spoken answer to a voice note
+  (`speakable`) and the written one (`written_to_be_heard`) both start from it, so the two cannot
+  drift apart, and the spoken one now says a table as sentences too. It is done in code, the same
+  way every time, on the words the agent wrote.
+- **Only when the message it answers was a voice note.** `HeardWords` in
+  `crates/archie-runtime/src/gateway/worker.rs` is made only for a turn that arrived spoken
+  (`Medium::Aloud`, which is also `/voice <message>`), and only when the reply goes out in writing:
+  no voices downloaded, an answer too long to read out, voice replies switched off, a chat that
+  cannot carry audio, or buttons that cannot ride a voice note. A typed message gets its reply as
+  before, byte for byte.
+- **Each place gets its own copy.** `Channel::send_to_be_heard` and `ToBeHeard` in
+  `crates/archie-net/src/channel.rs` carry the reply as written and as sentences. A chat app is sent
+  the sentences; Archie's window and Archie Mobile's conversation keep the reply as written, tables
+  and links and all (`InAppChannel` in `crates/archie-net/src/inapp.rs`), and the mirror that
+  carries a chat app beside the window gives each its own (`crates/archie-net/src/mirror.rs`).
+- **A message of its own, not an edit.** A phone reads out a new message and never an edit, so on a
+  chat app that edits messages (Telegram, Slack, Discord, Matrix) a turn answering a voice note in
+  writing posts no "Searching your email" line first for the answer to be edited into
+  (`answered_in_writing_on_an_app` in `worker.rs`).
+- **Archie Mobile's notification.** The window's copy carries its sentences beside it
+  (`InAppUpdate::Said`'s `notify_as`), the computer holds them by message (`heard_as` in
+  `src-tauri/src/inapp.rs`), and the notification for the reply says them in place of its words
+  (`preview_said` in `src-tauri/src/phone_push.rs`), with no address in it: pressing it opens the
+  conversation, which has every one.
+- **Buttons stay.** Send, Undo, a reminder's Delete and the agent's choices go out under the plain
+  copy, and a press redraws each copy in its own words: the chat app's in the sentences, the
+  window's as written (`app_words` in `mirror.rs`).
+- **Both editions**, for the owner and for anyone else talking to the agent on a chat app.
+- **Tests:** in `speech.rs`, `a_reply_to_a_voice_note_is_written_as_sentences`,
+  `nothing_a_reply_to_a_voice_note_says_is_lost`,
+  `a_links_address_goes_after_the_answer_and_its_words_stay`,
+  `a_name_keeps_its_underscores_and_code_keeps_its_spelling` and
+  `the_spoken_and_the_written_answer_share_one_cleaner`; in `crates/archie-runtime/tests/pipeline.rs`,
+  `a_reply_to_a_voice_note_is_written_to_be_heard`, `a_typed_message_gets_its_reply_as_written` and
+  `a_reply_to_a_voice_note_keeps_its_buttons`; in `mirror.rs`,
+  `a_reply_to_a_voice_note_is_plain_on_the_chat_app_and_as_written_in_the_window` and
+  `a_press_redraws_a_reply_to_a_voice_note_in_each_places_own_words`; in `inapp.rs` beside it,
+  `a_reply_to_a_voice_note_is_kept_as_written_with_its_sentences_beside_it`; and
+  `a_reply_to_a_voice_note_says_its_plain_sentences` and
+  `a_reply_to_a_voice_note_from_the_phone_notifies_in_plain_sentences` in the shell.
+
+**The boundaries.**
+
+- ⛔ **Archie does not control how a phone or a car reads a message.** It changes only how the reply
+  is written. Whether CarPlay, Android Auto or Siri reads a message out, in what voice, and how much
+  of it, is up to the phone and the car. Never "Archie reads your answers to you in the car".
+- ⛔ **Never claim from this entry that Archie answers a voice note out loud.** Spoken replies have
+  no entry of their own (see the export entry's boundary on voice notes), and this one is about the
+  written answer.
+- ⛔ **A typed message is answered as before.** Tables, bold and links reach the chat app as they
+  always did. Never "Archie writes everything for the car".
+- ⚠️ **Not yet heard in a car.** Every part was checked by tests that read the words. Nobody has had
+  one read out by CarPlay, Android Auto or Siri yet, so copy may say how the answer is written and
+  may not say how it sounds.
+- ⚠️ **The address is still read, at the end.** It goes after the answer, under "Link:" or "Links:",
+  where it can be pressed later. A phone that reads the whole message reads that part last.
+- ⚠️ **What Archie posts on its own is not an answer to the voice note** and goes as before: a
+  reminder going off, the morning list, a card about new mail. Only the reply and the lines under it
+  are made plain.
+- ⚠️ **The notification half needs Archie Mobile's notifications on**, with the boundaries of the
+  entry on them, and like every notification it carries the first 240 characters.
+- ⚠️ **After Archie restarts, a press on an older card redraws it on the chat app in the words the
+  agent wrote.** The two copies are kept only while Archie runs (the Archie repo's
+  `docs/OPEN-THREADS.md`).
 
 ## Known Weaknesses — disclose, don't hide
 

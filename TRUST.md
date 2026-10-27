@@ -8598,6 +8598,102 @@ there and has something new to say. There is no model call anywhere in it, and n
 - ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
   turns, or how Archie keeps that down.
 
+*Amended October 27, 2026 (Archie `dd17497b`, in no release yet): when the list has something on it
+already, the first evening's offer shows the list it would send instead of describing it.*
+
+**Proposed wording, Jett's to approve:** "At the end of your first evening, if your lists and
+calendar already have something for the morning list to say, your agent shows you the list it would
+send, as things stand right then, before you decide whether you want it. Nothing is set up until you
+say yes."
+
+As Archie says it, under the AI's goodbye, for an owner with a bills list, an invoice list and a
+calendar, at 8:00pm on a Tuesday:
+
+> Tomorrow at 7:00am, and each morning after, I can send you a list here. Tomorrow's list would say:
+>
+> **Wednesday, October 28**
+>
+> **Overlapping on your calendar**
+> - Today: Team lunch (12:00pm to 1:00pm) overlaps Site visit with Dana (12:30pm to 1:30pm)
+>
+> **On your calendar today**
+> - 12:00pm to 1:00pm: Team lunch
+> - 12:30pm to 1:30pm: Site visit with Dana
+>
+> **Bills due**
+> - Water, $40.50, was due Mon Oct 26
+> - Electric, $84, due Fri Oct 30
+>
+> **Owed to you**
+> - Sam Hart: $1,120, invoice 4471, billed September 30, due October 15 (13 days late)
+>
+> It is built from your lists, uses none of your AI, and comes only on mornings with something on
+> it. Want it?
+
+with Yes, at 7:00am, Another time and No thanks under it, as before.
+
+**Why it's true:**
+
+- **The real list, built the way a morning builds it.** `preview` in
+  `crates/archie-runtime/src/gateway/morning_list.rs` calls the same `build` a list that goes out
+  calls (`crates/archie-runtime/src/morning.rs`), for the day it would next go out (this morning's
+  before its time, tomorrow's after, worked out in `offer_at_the_end` as `offer` works it out), with
+  the catches, the email cards waiting in that chat, the reminders, and the calendar. There is no
+  model call anywhere in it, and no prompt text.
+- **Over a list that would be empty, the October 26 words, word for word.** The list is shown only
+  when it has something on it (`Morning::List`). An agent with no rows yet, or only a to-do five
+  weeks out, hears the sentence that says what the list brings, unchanged. Test:
+  `the_goodbye_offers_it_with_its_time_once`.
+- **Cut to six lines.** The list's first six lines, in its own order (what needs a decision first),
+  with their headings and its day, and "Tomorrow's list has 6 more." (or "This morning's") when it
+  has more (`PREVIEW_LINES`, and `Listed::first` in `morning.rs`). A line that already counts the
+  rest of its part ("and 5 more on your to-do list") counts as that many. Tests:
+  `the_list_shown_at_the_goodbye_is_cut_to_six_lines`,
+  `a_list_shown_shorter_counts_what_it_leaves_out`.
+- **Wherever the offer is made.** Under the goodbye (`under_the_goodbye`), under the answer when the
+  interview lets go before its goodbye (`under_the_last_interview_reply`), and under the owner's next
+  reply when the goodbye held the offer back for a way in to their work (`offer_under`): the same
+  buttons, or, where they do not fit, "To have it, say "send me the morning list"" after the list.
+  Tests: `the_goodbye_shows_tomorrows_list_with_the_same_three_buttons`,
+  `the_owed_offer_and_the_last_interview_reply_show_the_list_too`, and in
+  `crates/archie-runtime/tests/pipeline.rs`,
+  `the_morning_list_offer_shows_the_list_and_the_history_keeps_its_words`.
+- **Shown, not sent.** Nothing in it is written down as said: not in what the lists named before
+  (`Named`), not as a list that went out, and not in Bill Reminders' own ledger. So the first list
+  that goes out still says every bill, debt and overlap the goodbye showed, and Bill Reminders still
+  has its bills to say. Test: `the_goodbye_shows_tomorrows_list_with_the_same_three_buttons`, which
+  also sends that first list and finds each line in it.
+- **The calendar answers within two seconds or is left out.** One read of the owner's calendars,
+  given two seconds (`PREVIEW_WAIT`); past that, or on any failure, the list is shown without its
+  calendar part and the goodbye is not held up. An agent with no calendar connected makes no
+  request. Test: `a_calendar_that_does_not_answer_leaves_the_list_shown_without_it`.
+- **One offer, one yes, as before.** The offer is written down as made the moment it is made, so it
+  is never made twice, and Yes turns the list on exactly as it did: "Done. It comes here each morning
+  at 7:00am, starting tomorrow, whenever there is something on it. Each one has a Stop button." No
+  new step, screen or button. On Archie for Teams it reads the agent's lists and the owner's own
+  calendar, as the list itself does.
+
+**Boundaries:**
+
+- ⛔ **The offer the October 26 amendment quotes is now what an owner hears only when their next
+  list would be empty.** An owner with something on it sees the list instead. Never quote that
+  sentence as what everybody hears.
+- ⛔ **Never "your first list comes tonight" or "Archie sent you your first list".** It is shown in
+  the goodbye, not sent: nothing is on until Yes, and the first list that goes out is still the first
+  one, with every catch in it.
+- ⛔ **Never "this is exactly what you'll get tomorrow".** It is the list as the lists and calendar
+  stand at the goodbye. Anything added, done or moved before the morning changes the list that comes,
+  and a list kept matched to a spreadsheet is read again before a list goes out, not before the
+  goodbye.
+- ⚠️ **Six lines at most**, with how many more the whole list has. The whole list comes in the
+  morning.
+- ⚠️ **A calendar slower than two seconds is left out of what is shown**, never out of the morning's
+  list, which gives it longer.
+- ⚠️ **On Archie Mobile a long goodbye is folded** behind Read all of it, the way any long message is,
+  with the buttons in view under it.
+- ⚠️ **It asks no AI to make it.** Say that much and stop: nothing about what its words cost on later
+  turns, or how Archie keeps that down.
+
 ### ✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14
 
 On round three of the journey tests an owner closed the window at the end of the day and learned the

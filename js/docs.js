@@ -165,6 +165,15 @@
     });
   }
 
+  /* ---------- a link to a folded release opens it ----------
+     What's new folds its older releases shut, and a search result can point at one of them. */
+  var unfold = function () {
+    var t = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (t && t.tagName === "DETAILS" && !t.open) { t.open = true; t.scrollIntoView(); }
+  };
+  unfold();
+  window.addEventListener("hashchange", unfold);
+
   /* ---------- every feature ---------- */
   var form = document.querySelector("[data-filter]");
   if (form) {

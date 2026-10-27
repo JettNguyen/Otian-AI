@@ -7377,7 +7377,8 @@ on."
 - ⛔ **A file from the phone is never kept matched.** It arrives as a copy taken once, so the
   window's box is not drawn, and the screen says where it would be: "A file from this phone comes in
   as a copy, so Units will not change when the file does." with what to do instead. Only a Google
-  Sheet shared with the agent can be kept matched from a phone (the next amendment).
+  Sheet shared with the agent can be kept matched from a phone (the amendment at the end of "A list
+  can stay matched to the spreadsheet you keep", below).
 - ⚠️ **Limits:** 10 MB from Archie Mobile, not the Lists screen's 20 MB, and the phone says where to
   bring a bigger one in: "That spreadsheet is too big to send from a phone. Up to 10 MB comes
   through. For a bigger one, open Archie on the computer running it, and on this agent's Knowledge
@@ -7459,6 +7460,22 @@ never takes an entry off the list without asking, and your agent knows the list 
   way, and the agent is not told it is there.
 - ⚠️ **Not tried on a real Windows file system,** where Excel can hold a file open, nor on a file in
   OneDrive or iCloud Drive not downloaded to this computer. Never seen with a real Google account.
+
+*Amended October 27, 2026 (Archie `e76af7e1` and `e60180d5`, archie-mobile `b875a84`, in no release
+yet).*
+
+- **The owner's phone can turn matching on for a Google Sheet shared with the agent**, from Import:
+  the box "Keep Units matched to Units 2026." starts checked, "Archie tells the rows apart by" with
+  the computer's pick and the others it offers, and the press "Match Units to Units 2026", through
+  the window's own `apply_import` (test `a_google_sheet_can_be_kept_matched_and_a_file_from_the_phone_cannot`).
+  Stop matching's question on the phone now says where it starts again: "To match it again, press
+  Import on Units and pick the sheet." for a Google Sheet, and the computer for a file kept there
+  (the list's page now says which kind it matches, `from` in `src-tauri/src/phone/matched.rs`).
+- The boundary "The phone shows a matched list and acts on it, but cannot turn matching on" becomes:
+  ⚠️ **The phone turns matching on only for a shared Google Sheet, and only on the owner's phone.**
+  A file sent from a phone is a copy and is never kept matched; a teammate is told "Only Sam can keep
+  Units matched to Units 2026. Add brings its rows in once."; and the phone still cannot find a moved
+  file or match the columns again.
 
 ### ✅ Entries your agent reads off a photo, a page, or your calendar go on one card you check, and Add puts them on the list as one job with one Undo: BUILT 2026-10-11, RELEASED in 0.3.8, 2026-10-11
 

@@ -2044,6 +2044,20 @@ when that is the clearer shape."
   names, `crates/archie-runtime/src/export.rs`). A routine sends what it made to the chat its report
   goes to (`files_go_to` in `gateway/routines.rs`, Archie `a354749a`). The app shows the agent's
   pictures and opens its files when somebody presses them (`media`, `src/shown.tsx`).
+- *Amended October 27, 2026, recorded late (Archie `dd742cf2`, October 23, 2026, RELEASED in 0.3.12
+  on a Mac, October 26, 2026, with Windows still on 0.3.11):* a file the agent sends as it is, from
+  its documents or from an email it opened, goes out as big as the chat app takes, where it was 25
+  MB on every app: 50 MB on Telegram and on Matrix (the usual homeserver's limit; a smaller one
+  refuses, and the file falls back to Archie's window), 100 MB on Slack and on iMessage, and 25 MB
+  on Discord and on an agent with no chat app. Discord keeps 25 MB although it takes 10, because a
+  file Discord refuses falls back to Archie's window and the reply says so on Discord
+  (`max_file_bytes` on each chat app in `crates/archie-net/`, the default `DEFAULT_FILE_BYTES` in
+  `channel.rs`, read by `max_send_bytes` in `crates/archie-runtime/src/export.rs`). A file opened
+  from an email is 25 MB at most in any case, the most the agent opens (`MAX_ATTACHMENT_BYTES` in
+  `crates/archie-net/src/mail/mod.rs`). A website's download goes out at what the chat app takes or
+  20 MB, whichever is more, where it was 20 MB (`sendable_bytes` in `gateway/tools_screen.rs`). Past
+  it the file stays on the computer, or in the email, and the reply says where. Signal still gets no
+  files. Nobody has sent a file that size on a real phone yet.
 - **Tables.** The window and the app draw tables, checklists, links and code
   (`src/app/markdown.tsx`; `src/text/markdown.ts` in the app, with tests). The agent is told a
   table is fine only when every screen reading the conversation draws one: talking in Archie alone,
@@ -13058,14 +13072,14 @@ rather than inside it.
 - A file over 25 MB coming in, or 15 MB going out, is refused with a sentence rather than
   attempted. Both numbers sit under what mail servers accept, because base64 makes an attachment a
   third larger on the wire.
-- **It can also hand the file to you, in the chat** (Archie `13291d7e`, October 23, 2026, in the next
-  release after 0.3.11). Asked "send me that invoice", it sends the file it opened into the
-  conversation you are in: a chat app, the Archie window, or Archie Mobile. That is a file to you,
-  not an email, so the boundary above is untouched (`offer_from_mail` and `send_from_mail` in
-  `export.rs`). Only from the conversation that opened it, within the hour, and only kinds that do
-  not run when opened (documents, sheets, PDFs, pictures). Anything else stays in the email and the
-  agent says so. ⛔ Never say it forwards your email attachments to anyone, or on its own.
-  Signal still gets no files.
+- **It can also hand the file to you, in the chat** (Archie `13291d7e`, October 23, 2026, RELEASED
+  in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11). Asked "send me that invoice",
+  it sends the file it opened into the conversation you are in: a chat app, the Archie window, or
+  Archie Mobile. That is a file to you, not an email, so the boundary above is untouched
+  (`offer_from_mail` and `send_from_mail` in `export.rs`). Only from the conversation that opened
+  it, within the hour, and only kinds that do not run when opened (documents, sheets, PDFs,
+  pictures). Anything else stays in the email and the agent says so. ⛔ Never say it forwards your
+  email attachments to anyone, or on its own. Signal still gets no files.
 
 ### ✅ A PDF that is a picture of a page, read — SHIPPED 2026-09-17, off until switched on
 
@@ -17229,6 +17243,129 @@ the same answer, so the words cannot differ between them.
 - ⚠️ Only an empty chat, and the chat-app welcome, where they are lines to type, because a welcome
   on a chat app carries no buttons. Archie Mobile shows them from its first build after 1.5
   (archie-mobile `81c3bce`, in no phone build yet); 1.5 shows the empty chat it always did.
+
+### 🚧 When your chat app stops reaching your agent, Archie says so in Archie and in Archie Mobile: BUILT 2026-10-23 (Archie `70282983`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11
+
+*Archie `70282983` (October 23, 2026), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows
+still on 0.3.11. Archie Mobile has no commit for it: the notice is a message in the owner's
+conversation in Archie, which Archie Mobile shows and notifies for like anything else the agent says
+on its own. Built in the pass for people away from the computer (Archie `docs/OPEN-THREADS.md`,
+"Where somebody away from the computer still gets stuck"), which ran both repos' tests and nothing
+on a real phone.*
+
+**Proposed wording, Jett's to approve:** "If your chat app stops reaching your agent for more than
+half an hour, Archie tells you in Archie, and so on Archie Mobile: what happened, what to do on the
+computer running Archie, and that you can talk to your agent there in the meantime. When your
+messages get through again, it says so."
+
+As Archie says it, for an agent on Telegram:
+
+> Messages on Telegram have not reached me for over half an hour, so I cannot answer you there. If
+> the computer running Archie is on and connected to the internet, Telegram may need connecting
+> again: in Archie on the computer, open this agent's Setup tab and, under Chat app, connect
+> Telegram again. Until then, you can talk to me here.
+
+When something else is reading the same Telegram bot:
+
+> Messages on Telegram have not reached me for over half an hour, because something else is using
+> the same Telegram bot, and only one thing can use a bot at a time. On the computer running
+> Archie, look for a second agent set up with this bot or a second copy of Archie open, and check
+> the bot is not in use on another computer. Until then, you can talk to me here.
+
+And once a message gets through again: "Messages on Telegram reach me again."
+
+**Why it's true:**
+
+- **After half an hour, once.** A chat app's connection reports each failure to the gateway
+  (`ChannelEvent::TransportError`, handled in `run_loop` in
+  `crates/archie-runtime/src/gateway/worker.rs`). Once failures have gone on for half an hour
+  (`TELL_AFTER_MS` in `crates/archie-runtime/src/watch_trouble.rs`, long enough that a closed lid or
+  a short outage passes without a word), `watch_trouble::chat_app_failing` says it, with the words
+  from `chat_app_down` in `crates/archie-runtime/src/gateway/mod.rs`. A run of failures is kept on
+  disk, so a restart neither starts the half hour again nor says it twice, and quiet hours hold it
+  until they lift.
+- **In Archie, never on the chat app.** It goes to Archie's own conversation and nowhere else
+  (`Channel::say_in_archie_only` in `crates/archie-net/src/channel.rs`, which the mirror between a
+  chat app and the window answers by posting to the window, in `crates/archie-net/src/mirror.rs`),
+  because the chat app is the connection that is down. It is posted by the agent on its own, so it
+  raises an alert on the computer (`src-tauri/src/alert.rs`) and goes to Archie Mobile's
+  notifications (`src-tauri/src/phone_push.rs`), and Archie Mobile shows it in the conversation.
+- **Two causes named.** Telegram's own error for a bot read by two things at once ("terminated by
+  other getUpdates") gets the second message above; every other failure gets the first.
+- **When it works again.** The first message that arrives afterwards proves the chat app works, and
+  when the owner was told, Archie's conversation says it reaches the agent again
+  (`clear_transport_health` in `gateway/mod.rs`, `was_told` in `watch_trouble.rs`).
+- **What it replaced.** Until October 23, 2026 the owner got only a badge on the agent in Archie's
+  window: the chat app was the only way anything reached them, so an agent whose bot token was
+  revoked went silent on every chat while its owner, away from the computer, kept writing to it.
+- **Tests:** `a_chat_app_that_is_down_is_said_in_archie_and_not_on_it` and
+  `the_words_for_a_chat_app_that_is_down_say_where_to_go` in `watch_trouble.rs`.
+- **What reaches us is unchanged.** The same half hour queues an error report with the chat app's
+  name and its error line, as it did before this change. It is one of the error reports in the entry
+  headed "No analytics, and two small things that are not analytics", and the same switch turns it
+  off.
+
+**The boundaries.**
+
+- ⛔ **Never "Archie tells you the moment something breaks."** It waits half an hour, says it once,
+  and only while the computer running Archie is on, awake and running Archie, because that computer
+  is the one that notices.
+- ⛔ **Never that the chat app carries the notice.** It is in Archie and Archie Mobile, because the
+  chat app is what stopped.
+- ⚠️ **The phone hears it only through Archie Mobile:** in its conversation, and as a notification
+  when Archie Mobile's notifications are on, with the boundaries of the entry on them (an iPhone on
+  1.3 or later; not on Android yet). Somebody with neither Archie Mobile nor Archie's window in front
+  of them finds it the next time they look.
+- ⚠️ **"May need connecting again" is a guess, and it says so.** An outage at the chat app's end
+  reads the same as a revoked token. Only the second cause, two things reading one Telegram bot, is
+  named for certain.
+- ⚠️ **The fix is at the computer.** Connecting a chat app again happens on the agent's Setup tab,
+  in Archie on the computer.
+- ⚠️ **Nobody has seen it on a real phone yet.** Its tests read the words and where they went.
+
+### 🚧 On iMessage, a spoken reply arrives as an audio message in the thread: BUILT 2026-10-23 (Archie `dddea95a`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, and not yet played on a real iPhone
+
+*Archie `dddea95a` (October 23, 2026), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows
+still on 0.3.11; iMessage needs a Mac in any case. Built in the same pass as the entry above, which
+ran the tests and nothing on a real phone. Spoken replies themselves have no entry of their own, so
+this one says when a reply is spoken, for iMessage, as well as the form it now takes there.*
+
+**Proposed wording, Jett's to approve:** "On iMessage, when your agent answers out loud, the answer
+arrives as an audio message in the Messages thread, instead of a file to open somewhere else. It
+answers out loud when you sent it a voice message or asked it to read something out, once its voices
+are downloaded."
+
+**Why it's true:**
+
+- **The format Messages plays.** `speech` on `IMessageChannel` in `crates/archie-net/src/imessage.rs`
+  answers `Speech::Playable`: AAC in an MP4 container, the same file Archie's window plays. Through
+  0.3.11 iMessage took the chat apps' default, OGG/Opus, which Messages shows as a file named
+  `reply.ogg` to open in another app (the Archie repo's `docs/CHAT-UX-REVIEW.md`, section 6.6). Test:
+  `a_spoken_reply_is_made_in_the_format_messages_plays`.
+- **When a reply is spoken, unchanged, and decided in code from the owner's own message, never by
+  the AI** (`should_speak` and `decide` in `crates/archie-runtime/src/speech.rs`). A voice message
+  gets a spoken answer and a typed one gets a written answer; "read that out" and the other phrases
+  in `asks_for_audio` ask for one; and the setting named for the agent on its Personality tab (When
+  Sam speaks, for an agent called Sam) is When you speak to it, the default, or Every time, or Never.
+  An answer to a voice message longer than 1,200 characters, about two minutes of speech, comes in
+  writing with a line saying why, unless the owner asked for it out loud. The words of an email or a
+  text a watch read never count as asking for it (`asked_aloud` in
+  `crates/archie-runtime/src/gateway/worker.rs`), whatever they say.
+- **Made on the computer.** The voice is Kokoro, a voice pack downloaded once to the computer running
+  Archie (`VOICE_ASSET_ID` in `speech.rs`), and the audio is made there. A computer without it keeps
+  answering in writing. The file goes out through Messages on that Mac, as every iMessage reply does.
+
+**The boundaries.**
+
+- ⛔ **Never claim from this entry that Archie answers out loud on other chat apps,** or describe
+  spoken replies beyond iMessage. Spoken replies have no entry of their own (see the export entry's
+  boundary on voice notes), and this one covers iMessage only.
+- ⛔ **Never "it reads every reply to you".** A typed message gets a written answer unless the setting
+  is Every time or the owner asks.
+- ⛔ **Never say how it sounds, or how Messages plays it, until somebody has played one on an
+  iPhone.** Archie sends the format Messages plays; nobody has pressed play on one yet.
+- ⚠️ **Once the voices are downloaded.** Until then, and for a long answer, the answer comes in
+  writing.
 
 ## Known Weaknesses — disclose, don't hide
 

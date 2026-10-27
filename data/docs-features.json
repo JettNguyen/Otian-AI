@@ -767,6 +767,36 @@
       "guide": ""
     },
     {
+      "id": "spoken-replies-on-imessage-as-audio-messages",
+      "name": "Spoken replies on iMessage come as audio messages",
+      "area": "voice",
+      "summary": "On iMessage, when your agent answers out loud, the answer comes as an audio message in the Messages thread, instead of a file to open somewhere else.",
+      "where": "In Messages, in your conversation with your agent on iMessage.",
+      "how": [
+        "Send your agent a voice message on iMessage, or ask it to read something out.",
+        "To choose when it answers out loud, open your agent's Personality tab and pick When you speak to it, Every time, or Never."
+      ],
+      "limits": [
+        "iMessage needs a Mac, so this is on a Mac only.",
+        "Its voices are a one-time download to the computer running Archie. Until they are there, it answers in writing.",
+        "An answer to a voice message that would take more than about two minutes to say comes in writing, with a line saying why, unless you asked for it out loud.",
+        "A typed message gets a written answer, unless the setting is Every time or you ask.",
+        "Nobody has played one on a real iPhone yet."
+      ],
+      "phone": "Send the voice message from Messages on your iPhone, and the answer comes back in the same thread.",
+      "editions": "both",
+      "released": "0.3.12",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 On iMessage, a spoken reply arrives as an audio message in the thread: BUILT 2026-10-23 (Archie `dddea95a`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, and not yet played on a real iPhone"
+      ],
+      "wording": "On iMessage, when your agent answers out loud, the answer arrives as an audio message in the Messages thread, instead of a file to open somewhere else. It answers out loud when you sent it a voice message or asked it to read something out, once its voices are downloaded.",
+      "guide": "connect-imessage",
+      "wording_pending": true
+    },
+    {
       "id": "archie-mobile",
       "name": "Archie Mobile",
       "area": "phone",
@@ -985,6 +1015,34 @@
       ],
       "wording": "Text your agent from your phone and it answers in the first line and keeps it to about three short lines.",
       "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "chat-app-stops-reaching-your-agent",
+      "name": "When your chat app stops reaching your agent",
+      "area": "phone",
+      "summary": "If messages on your chat app stop reaching your agent for more than half an hour, Archie tells you in Archie, and so on Archie Mobile, with what to do on the computer. It says so again once they get through.",
+      "where": "In your conversation with your agent in Archie, and on Archie Mobile. Never on the chat app itself, since that is what stopped.",
+      "how": [],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "It waits half an hour, so a closed lid or a short outage passes without a word, and it says so once.",
+        "The computer running Archie has to be on, awake and running Archie, because that computer is the one that notices.",
+        "That the chat app may need connecting again is its best guess. The one cause it names for certain is two things using the same Telegram bot.",
+        "The fix happens at the computer: in Archie, on the agent's Setup tab, under Chat app, connect it again.",
+        "Nobody has seen it on a real phone yet."
+      ],
+      "phone": "Archie Mobile shows it in your conversation, and on iPhone, from 1.3, as a notification when its notifications are on.",
+      "editions": "both",
+      "released": "0.3.12",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 When your chat app stops reaching your agent, Archie says so in Archie and in Archie Mobile: BUILT 2026-10-23 (Archie `70282983`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11"
+      ],
+      "wording": "If your chat app stops reaching your agent for more than half an hour, Archie tells you in Archie, and so on Archie Mobile: what happened, what to do on the computer running Archie, and that you can talk to your agent there in the meantime. When your messages get through again, it says so.",
+      "guide": "when-it-goes-quiet",
       "wording_pending": true
     },
     {
@@ -1277,10 +1335,10 @@
     },
     {
       "id": "notice-when-the-inbox-messages-or-a-chat-app-stops-working",
-      "name": "Notice when the inbox, Messages or a chat app stops working",
+      "name": "Notice when the inbox or Messages stops working",
       "area": "email",
-      "summary": "If Archie cannot read your mail or texts for more than half an hour, or your chat app stops reaching the agent, the agent says so once with what to do and again when it works; a mailbox that lost its place names which mail went unread.",
-      "where": "Chat, and in Archie and Archie Mobile for the chat app notice",
+      "summary": "If Archie cannot read your mail or texts for more than half an hour, the agent says so once with what to do and again when it works; a mailbox that lost its place names which mail went unread.",
+      "where": "Chat",
       "how": [],
       "limits": [],
       "phone": "",
@@ -3472,24 +3530,34 @@
       "id": "a-file-opened-from-an-email-comes-into-the-chat",
       "name": "A file opened from an email comes into the chat",
       "area": "files",
-      "summary": "When the agent opens a file attached to an email, the file itself comes into the chat, and files go out as big as each chat app takes.",
-      "where": "Chat",
-      "how": [],
-      "limits": [],
-      "phone": "",
+      "summary": "After your agent opens a file attached to an email, ask for it, like \"send me that invoice\", and the file itself comes into the conversation you are in. Files your agent sends go out as big as each chat app takes.",
+      "where": "In the conversation you are in: a chat app, the Archie window, or Archie Mobile.",
+      "how": [
+        "Ask your agent what a file on an email says, so it opens it.",
+        "Then ask for the file, for example \"Send me that invoice.\""
+      ],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "Only in the conversation that opened the file, and within an hour of opening it.",
+        "Only kinds that do not run when opened, like documents, spreadsheets, PDFs and pictures. Any other kind stays in the email, and your agent says so.",
+        "It comes to you, in your conversation. A file sent to somebody else goes with an email reply, which waits for you to press Send.",
+        "A file can be 50 MB on Telegram and Matrix, 100 MB on Slack and iMessage, and 25 MB on Discord and in Archie alone. One opened from an email is 25 MB at most.",
+        "Discord takes 10 MB, so a bigger file comes into Archie's window instead, and the reply on Discord says so.",
+        "Signal gets no files."
+      ],
+      "phone": "Ask from a chat app or from Archie Mobile, and the file comes into that conversation.",
       "editions": "both",
       "released": "0.3.12",
-      "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
-      "unwatched": false,
-      "trust": [],
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "✅ It can open the file on an email, and send one back (SHIPPED 2026-09-16)",
+        "🚧 Pictures, videos, recordings, and documents both ways, and replies with tables, in Archie and in the app: BUILT 2026-09-25, the computer's half in Archie 0.3.1 (released September 29, 2026), the app's half on Android in 0.3.5's download (October 5, 2026) and on iPhone in 1.0 (October 7, 2026), whose picker could not choose a document until 1.1"
+      ],
       "wording": "",
       "guide": "",
-      "code": [
-        "crates/archie-runtime/src/export.rs",
-        "crates/archie-runtime/src/email/inbox.rs"
-      ],
-      "near": "It can open the file on an email, and send one back"
+      "wording_pending": true
     },
     {
       "id": "websites",

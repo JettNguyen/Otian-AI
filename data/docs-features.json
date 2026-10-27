@@ -243,6 +243,212 @@
       "guide": ""
     },
     {
+      "id": "the-today-line-over-the-message-box",
+      "name": "The Today line over the message box",
+      "area": "chat",
+      "summary": "One line over the message box says what changed and what went out today, like \"Today: 4 changes, 1 sent\". Press it for the list, each change with Open and Undo.",
+      "where": "Over the message box, in your chat with your agent.",
+      "how": [
+        "Press the line to open the list.",
+        "Press Open to see a change on its list, or Undo to take it back."
+      ],
+      "limits": [
+        "It lists what Archie recorded: changes made through Archie, by a chat, a card, an import, a routine or a teammate. Edits you type on the Lists screen yourself, and mail you send from your own mail app, are not on it.",
+        "Today is the day on the computer's clock.",
+        "Past 25 in one part, the rest are on the Jobs tab. Undo shows only where the Jobs tab has it.",
+        "A teammate's phone does not show the line."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows the same line. There, Open goes to the list rather than the entry, and Show on a send works only while its card is still on the computer.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A line over the message box says what changed and what went out today: BUILT 2026-10-18 (Archie `ee4e8260`, `5a7ffc8c`, `7cd3a478`; archie-mobile `e6a171f`, `6fc955a`, merged as `63c427a`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "Over the message box, on the computer and on Archie Mobile, one line says what changed and what went out today: \"Today: 4 changes, 1 sent\". Press it for the list: each change with Open and Undo, each time a list changed to match your spreadsheet, each email or text that went out with when you pressed Send, and what Archie did on its own (your morning list, mail it read and left alone, a routine's changes). When nothing went out, it says \"Nothing has gone out today.\"",
+      "guide": ""
+    },
+    {
+      "id": "not-now-answered-at-once",
+      "name": "Not now, answered at once",
+      "area": "chat",
+      "summary": "Press Not now, No thanks, Skip or Cancel under something your agent offered, and Archie answers \"Okay, left it.\" right away, without asking the AI, and drops what the card offered.",
+      "where": "Under a card or a question your agent sent, in your chat with it.",
+      "how": [
+        "Press Not now, No thanks, Skip or Cancel under the offer."
+      ],
+      "limits": [
+        "Only a press that just says no. A plain No that answers a question, or a no with more in it, like \"Not now, remind me Friday\", still goes to your agent.",
+        "Anything else waiting for your yes in that chat is dropped too, as your agent's own reply would drop it.",
+        "Any other button is a message like one you typed, and your agent answers it.",
+        "Not during your agent's first questions, whose buttons are answers about you."
+      ],
+      "phone": "A press in Archie Mobile is answered the same way by the computer, and the answer reaches your phone like any reply.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Pressing Not now under an offer is answered at once, with no AI, and what it offered is dropped: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Press Not now, No thanks, Skip or Cancel under something your agent offered, and Archie answers \"Okay, left it.\" on the spot, without asking the AI, and drops what the card was offering.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "your-presses-shown-as-presses",
+      "name": "Your presses, shown as presses",
+      "area": "chat",
+      "summary": "A button you press shows on your side of the chat as that button, pressed, over the first words of the card it answered. Confirm says the change it confirms, and a press never changes your agent's words.",
+      "where": "On your side of the conversation, in your chat with your agent.",
+      "how": [],
+      "limits": [
+        "Cards Archie writes itself, like a reminder, a time to move, or an email or text draft, still change their own status line when pressed.",
+        "When a change has no short summary, Confirm says only what kind of change it applies.",
+        "A button that would ask for a second thing its label does not say is not offered. This matches words, so it can miss one.",
+        "On Telegram and Slack a ticked button can still be pressed. It says so and does nothing. Signal, iMessage and Matrix have no buttons."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows your press the same way. On Telegram, Slack and Discord the button you pressed stays on the card with a tick.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A press shows as the button you pressed, over a line of the card it answered, and Confirm names the change: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "A button you press shows in your side of the conversation as that button, pressed, over the first words of the card it answered, with what it told your agent underneath. Confirm says the change it confirms, in the words of the card.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "replies-use-the-names-on-your-lists",
+      "name": "Replies in your lists' own words",
+      "area": "chat",
+      "summary": "Your agent names a change by the column's name on your list, like For. It says what it did, like \"I looked it up online\", and leaves out Archie's own words, such as skill and specialist. Who's Got This keeps its list as Who has what.",
+      "where": "In your agent's replies, and on the Who has what list that Who's Got This keeps.",
+      "how": [],
+      "limits": [
+        "Leaving out \"skill\" and \"specialist\" is what your agent is told. Nothing filters what it writes.",
+        "When a list is renamed in Archie's store, your copy takes the new name, unless you renamed it yourself.",
+        "A list whose columns you changed, but not its name, is still renamed."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Your agent's words for its own parts: \"Who has what\" for Who's Got This's list, the names on your columns, and no \"skill\" or \"specialist\" in replies: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Who's Got This keeps its list as Who has what. When a list is renamed in Archie's store, your agent's copy takes the new name too, unless you renamed it yourself.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "unasked-messages-wait-for-the-answer",
+      "name": "Unasked messages wait for the answer",
+      "area": "chat",
+      "summary": "Messages your agent sends without being asked, like the morning list, a card about new mail or a routine's report, wait until it has finished answering you.",
+      "where": "In your chat with your agent.",
+      "how": [],
+      "limits": [
+        "A message written once waits five minutes at most, then goes.",
+        "Reminders you set and replies you scheduled are not held. They go at the minute you asked for.",
+        "It waits only for an answer in the same chat.",
+        "It still arrives unasked, and a reminder can land in the middle of an answer."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 What your agent sends on its own waits until it has finished answering you: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Messages your agent sends without being asked, like the morning list, a card about new mail or a text, or a routine's report, wait until it has finished answering you.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "unasked-messages-say-so",
+      "name": "Unasked messages say so",
+      "area": "chat",
+      "summary": "When your agent sends something without being asked, a line over it says so and what it is, like \"Sent on its own at 6:30 AM: your morning list.\"",
+      "where": "Over the message, in your own chat with your agent.",
+      "how": [],
+      "limits": [
+        "A routine is named by its name, and a reminder as \"a reminder you set\". A card from the mail or text watch says only \"Sent on its own\".",
+        "Your own chat in Archie and Archie Mobile only. A chat app has no such line, and a teammate's chat is not marked."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows the same line.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A message your agent sends on its own says so, and what it is: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "When your agent sends something without being asked, a line over it says so and what it is: \"Sent on its own at 6:30 AM: your morning list.\"",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "links-archie-never-read-are-cut-back",
+      "name": "Links Archie never read are cut back",
+      "area": "chat",
+      "summary": "If a reply holds a web link to a site Archie never read or found in a search, the link is cut back to the site's front page.",
+      "where": "In your agent's replies.",
+      "how": [],
+      "limits": [
+        "It checks the site only. A link deep in a site that came up in a search or a page it read stays whole, even if that page was never opened.",
+        "It does not check that the site exists, so a link can still fail to open.",
+        "When unsure it leaves a link alone, so a short site name mentioned elsewhere keeps its whole link."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A web link Archie could not have read is cut back to the site's front page: BUILT 2026-10-18 (Archie `851dd5eb`, merged as `442ab1f0`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "If a reply holds a web link Archie never read or found in a search, it is cut back to the site's front page.",
+      "guide": ""
+    },
+    {
+      "id": "pending-moves-waiting-cards-down",
+      "name": "/pending moves waiting cards down",
+      "area": "chat",
+      "summary": "Type /pending and everything still waiting on you is posted again at the bottom of the chat. The earlier copy says the newest card replaced it, and its buttons go.",
+      "where": "Type /pending in your chat with your agent.",
+      "how": [
+        "Type /pending and send it."
+      ],
+      "limits": [
+        "Not on Signal or iMessage, which cannot change a message once it is sent. There the old copy stays, and a press on it is answered once.",
+        "Every copy of a draft is the same draft, so one already sent answers \"Already handled.\""
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 /pending moves a waiting card to the bottom instead of copying it: BUILT 2026-10-18 (Archie `47b1ff7b`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Type /pending and everything still waiting on you is posted again at the bottom. The earlier copy says it was replaced by the newest card, and its buttons go.",
+      "guide": ""
+    },
+    {
       "id": "rooms-several-of-your-agents-in-one-conversation",
       "name": "Rooms: several of your agents in one conversation",
       "area": "chat",
@@ -287,30 +493,6 @@
         "src/app/conversation.tsx"
       ],
       "near": ""
-    },
-    {
-      "id": "the-today-line-over-the-message-box",
-      "name": "The Today line over the message box",
-      "area": "chat",
-      "summary": "A line over the message box says what changed and what went out today, with Undo on changes made without asking.",
-      "where": "Chat: the line over the message box",
-      "how": [],
-      "limits": [],
-      "phone": "",
-      "editions": "both",
-      "released": "0.3.11",
-      "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
-      "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "src/app/today.tsx",
-        "src/app/today-read.ts",
-        "crates/archie-runtime/src/today.rs"
-      ],
-      "near": "Your agent can stop asking about changes to your own calendar, once you press Yes, and stop asking"
     },
     {
       "id": "suggested-asks-in-an-empty-chat",
@@ -778,6 +960,31 @@
       "guide": ""
     },
     {
+      "id": "short-answers-on-your-phone",
+      "name": "Short answers on your phone",
+      "area": "phone",
+      "summary": "Text your agent from your phone and it answers in the first line and keeps the reply short, with no headings.",
+      "where": "Messages you type in Archie Mobile or a chat app, and on a teammate's phone.",
+      "how": [],
+      "limits": [
+        "It is what your agent is told. Nothing cuts a reply short.",
+        "Typed messages only. A press, a routine or a watch is answered as before, and so is a message typed at the computer.",
+        "A chat app counts as a phone, because Archie cannot tell where it is being read."
+      ],
+      "phone": "It works for messages from Archie Mobile, a teammate's phone, or a chat app.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Messages sent from a phone get short answers, first line first: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Text your agent from your phone and it answers in the first line and keeps it to about three short lines.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
       "id": "keep-for-every-draft",
       "name": "Keep for every draft",
       "area": "email",
@@ -1157,6 +1364,59 @@
       "guide": ""
     },
     {
+      "id": "a-sent-draft-says-it-went",
+      "name": "A sent draft says it went",
+      "area": "email",
+      "summary": "Your agent's own words are never changed. When you press Send on an email it drafted, Archie says it went under the message that came with the draft: \"Sent to Ace Septic at 8:01am.\"",
+      "where": "Under your agent's message, in your chat with it.",
+      "how": [],
+      "limits": [
+        "It says Archie sent it. It does not say it arrived or was read.",
+        "Email drafts shown in the chat only. A text draft, a draft the mail watch wrote on its own, and a catch-up list get no such line.",
+        "On Telegram, Slack, Discord and Matrix it comes as a short message of its own, which can make your phone buzz on all but Telegram. Signal and iMessage get no extra line.",
+        "Your agent is told a reply went out when you pressed or typed Send, and is not told when one went at a time you set."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows the same line under the message.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A sent draft says it went, beside the agent's message: BUILT 2026-10-17 (Archie `97a4935f`), CHANGED 2026-10-18 (Archie `8a6ce92a`, archie-mobile `42501d7`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "When you press Send on an email your agent drafted, Archie says it went, under the message your agent wrote with the draft: \"Sent to Ace Septic at 8:01am.\" Your agent's own words are never changed. On Telegram, Slack, Discord and Matrix it comes as a short message of its own.",
+      "guide": ""
+    },
+    {
+      "id": "asks-before-reading-your-mail",
+      "name": "Asks before reading your mail",
+      "area": "email",
+      "summary": "Your agent reads your mail only after you say yes. With an email account and a skill that reads mail, it asks once in the chat, with Start reading my mail and Not now.",
+      "where": "In your agent's chat. Later, the Watch my inbox switch on the agent's Skills tab, under Email Manager.",
+      "how": [
+        "Press Start reading my mail, or Not now.",
+        "To start later, switch on Watch my inbox under Email Manager on the Skills tab."
+      ],
+      "limits": [
+        "An agent that was reading your mail before this goes on reading, and is not asked.",
+        "Adding Email Manager or Package Tracker is not a yes on its own.",
+        "It asks once. After Not now, the switch is the way back.",
+        "Not on the free credits or a plan with the AI included, where your mail is not read."
+      ],
+      "phone": "The question arrives like any message, so you can answer it in Archie Mobile.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": false,
+      "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to ask first, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Your agent reads your mail only after you say yes. When it has an email account and a skill that reads mail, it asks once in the chat, with Start reading my mail and Not now under it. Say yes and that message turns into the one that says which inboxes it is reading and how often, with Stop watching. If you said Not now, the Watch my inbox switch on the agent's Skills tab, under Email Manager, starts it later.",
+      "guide": "connect-email-account"
+    },
+    {
       "id": "mail-filed-away-and-put-back",
       "name": "Mail filed away, and put back",
       "area": "email",
@@ -1259,6 +1519,59 @@
       "wording": "",
       "guide": "",
       "wording_pending": true
+    },
+    {
+      "id": "a-stop-moved-onto-a-busy-day",
+      "name": "A stop moved onto a busy day",
+      "area": "calendar",
+      "summary": "Move a stop to a day its truck or driver is on your calendar for something else, or a day that job already has a stop. Your agent tells you what is there and asks before moving it.",
+      "where": "In your chat with your agent, with Move it anyway and Pick another day under its question.",
+      "how": [
+        "Press Move it anyway, or Pick another day."
+      ],
+      "limits": [
+        "Only lists with a Driver or Truck column, and only when a stop's day moves.",
+        "It looks for the driver's or truck's name in your calendar's event titles. \"Mike out\" names Mike; \"Dentist, 9am\" does not.",
+        "A driver's working hours, and other stops that day, are not checked.",
+        "Only on a message you typed. A routine moving a stop is not held."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Moving a stop to a day its truck or driver is busy, or a day the job already has a stop, is held and named first: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Move a stop to a day its truck or driver is on your calendar for something else, or a day that job already has a stop, and your agent tells you what is there and asks before moving it.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "where-bookings-and-your-calendar-differ",
+      "name": "Where Bookings and your calendar differ",
+      "area": "calendar",
+      "summary": "On an event trailer agent, the morning list compares your Bookings list with your calendar for today and the next two weeks, and says where one has a booking the other does not. Ask what is on a day and your agent says the same.",
+      "where": "In the morning list, and in your agent's answers about a day.",
+      "how": [],
+      "limits": [
+        "It only reads. It changes neither Bookings nor your calendar, and you decide which is right.",
+        "Only clear differences are said. Anything within two days of a booking, part of a name, or a calendar that did not answer is left out.",
+        "The calendar side needs the customer's whole name, or the booking's event name with their last name.",
+        "Only the event trailer setup's Bookings list, and only your own calendar."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "On an event trailer agent, the morning list compares your Bookings list with your calendar for today and the next two weeks, and says where one has a booking the other does not, so you can say which is right. Asked what is on a day, Archie says the same.",
+      "guide": ""
     },
     {
       "id": "a-message-that-settles-a-new-time-becomes-a-calendar-change",
@@ -1870,25 +2183,132 @@
       "id": "keep-a-list-matched-to-its-spreadsheet",
       "name": "Keep a list matched to its spreadsheet",
       "area": "lists",
-      "summary": "A list brought in from a spreadsheet or a Google Sheet shared with your agent can be kept matched to that file; Archie checks it every minute and before the morning list, and says which entries are no longer in the file.",
-      "where": "Knowledge tab, Lists, Import: keep it matched; the line under the list's name",
-      "how": [],
-      "limits": [],
-      "phone": "",
+      "summary": "Keep your own spreadsheet, and the list you brought in from it stays matched: Archie changes the list when you save the file, never changes your file, and asks before taking an entry off.",
+      "where": "On your agent's Knowledge tab, under Lists, when you import a spreadsheet: the box Keep Units matched to units.xlsx, with your list's and file's names. The list's page then says what it matches.",
+      "how": [
+        "Import a file on this computer, or a Google Sheet shared with your agent, into a list.",
+        "Leave the box to keep it matched checked, and press Match.",
+        "Save the file as you always do. The list changes to match.",
+        "When entries are no longer in the file, press Take them off or Keep them on the list's page."
+      ],
+      "limits": [
+        "Archie only reads the file. A file on this computer is looked at every minute while your agent runs; a Google Sheet every 15 minutes and before the morning list.",
+        "Nothing is checked while your agent is stopped or the computer running Archie is off.",
+        "Only Google Sheets you picked on the Connections tab, under Add files.",
+        "One tab of a workbook, up to 5,000 rows. A file over 20 MB is not read."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows a matched list and can take entries off with the same Undo. Matching is turned on at the computer.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 A list can stay matched to the spreadsheet you keep, on this computer or in a shared Google Sheet: BUILT 2026-10-18 (Archie `0836722c` through `46829a4b`, archie-mobile `df83b5a` through `2bdde7a`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "Keep your own spreadsheet. When you bring it into a list, leave Keep Units matched to units.xlsx checked, and Archie changes the list whenever you save the file. It works for a file on your computer and for a Google Sheet you've shared with your agent. Archie never changes your file, never takes an entry off the list without asking, and your agent knows the list is the whole list.",
+      "guide": ""
+    },
+    {
+      "id": "asks-before-clearing-what-is-filled-in",
+      "name": "Asks before clearing what is filled in",
+      "area": "lists",
+      "summary": "Your agent asks before it clears something already filled in on your lists, leaves a new entry's date blank when nothing you said gives one, and puts an entry you only asked about on a card to add with one press.",
+      "where": "In your chat with your agent, with Clear it and Keep under its question, and in the line under its reply.",
+      "how": [
+        "Press Clear it or Keep under the question."
+      ],
+      "limits": [
+        "Only on a message you typed. A routine, a mail or text watch, or a file read on its own is not held this way.",
+        "A blank date on an entry already on your list can still be filled on your agent's reading, and the line under the reply calls it \"my reading\".",
+        "A question needs its question mark. \"Can you add Dana to my people\" typed without one adds her.",
+        "Tell it once what \"a month\" means for your rentals and it stops asking. \"Monday\" said on a Monday is still asked every time."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows the same line under the reply.",
       "editions": "both",
       "released": "0.3.11",
       "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
+      "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
       "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "crates/archie-runtime/src/follow.rs",
-        "src/app/follow-words.ts",
-        "docs/SHEET-MATCH.md"
+      "trust": [
+        "🚧 Your agent asks before it clears something already filled in, leaves a new entry's date blank rather than guess one, and a question adds nothing on its own: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
       ],
-      "near": "Bring a spreadsheet into a list, from the Lists screen or by dropping it in the chat, never the same unit twice, and the cells it could not read named"
+      "wording": "Your agent asks before it clears something already filled in on your lists. When it adds an entry and nothing you said gives a date, it leaves that date blank and says so, rather than guess. And asking about an entry, like \"can you add Dana to my people?\", puts it on a card to add with one press instead of adding it.",
+      "guide": ""
+    },
+    {
+      "id": "a-late-pickup-is-asked-about-once-a-day",
+      "name": "A late pickup, asked about once a day",
+      "area": "lists",
+      "summary": "Archie asks you about a late pickup for a rental at most once a day in the same chat, unless you bring that rental up.",
+      "where": "In your chat with your agent, for rentals past their end date.",
+      "how": [],
+      "limits": [
+        "Only rentals past their end date whose stage says the units are still out.",
+        "One chat, and one day on the computer's clock.",
+        "It still says the rental is late. Only the question is not asked again."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Archie asks about a late pickup at most once a day per rental in a chat: BUILT 2026-10-18 (Archie `1cffd325`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "Archie asks you about a late pickup for a rental at most once a day in the same chat, unless you bring that rental up.",
+      "guide": ""
+    },
+    {
+      "id": "matching-entries-added-up-in-code",
+      "name": "Matching entries, added up in code",
+      "area": "lists",
+      "summary": "When Archie looks up entries on one of your lists and two or more match, code adds up the number columns, like units and price. Your agent gets the totals, so it does not add them itself.",
+      "where": "In your agent's answers about your lists.",
+      "how": [],
+      "limits": [
+        "Only when every match is in the result, up to 200. A lookup that left some out is not added up.",
+        "Number columns only, judged by the column's name. An id, phone number, ZIP code, year, stop number, score or rate per unit is never added.",
+        "A total that some entries leave blank says how many entries it is from.",
+        "Your agent can still say another number, and the total is not on the Read line under the reply."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 When two or more entries match a lookup, code adds up the number columns: BUILT 2026-10-18 (Archie `ea630860`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "When Archie looks up entries on one of your lists and two or more match, code adds up the number columns (units, price) and hands the totals to the agent, so it does not add them itself.",
+      "guide": ""
+    },
+    {
+      "id": "units-out-counted-place-by-place",
+      "name": "Units out, counted place by place",
+      "area": "lists",
+      "summary": "When Archie looks up the units you have out, code counts them place by place against the rentals running there today. Your agent hears where your two lists agree, where they differ, and by how many.",
+      "where": "In your agent's answers about your units and rentals.",
+      "how": [],
+      "limits": [
+        "Only for a list of units with a place column and a dated list of rentals with a count and a place of its own. Trailers booked by name are not counted this way.",
+        "Places match by the words typed, so \"Oak Hollow #12\" and \"Oak Hollow lot 12\" are two places.",
+        "It compares counts, never unit numbers, and it does not say which list is right.",
+        "A teammate who sees only some rows does not get it."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 When the agent looks up units that are out, code sets them against the rentals at each place: BUILT 2026-10-18 (Archie `62fd174f`), RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "When Archie looks up the units you have out, code counts them place by place against the rentals running there today and hands that to the agent: where the two lists agree, where they differ and by how many, and a rental starting at one of those places in the next two weeks, so the agent does not line the lists up itself.",
+      "guide": ""
     },
     {
       "id": "export-a-list-as-a-spreadsheet",
@@ -2387,6 +2807,31 @@
       "guide": ""
     },
     {
+      "id": "todays-calendar-skips-an-empty-day",
+      "name": "Today's Calendar skips an empty day",
+      "area": "routines",
+      "summary": "On a morning with nothing on your calendar, the store's Today's Calendar routine sends nothing and uses none of your AI. Press Run now and it still answers.",
+      "where": "The Today's Calendar routine, on your agent's Routines tab.",
+      "how": [],
+      "limits": [
+        "Only Today's Calendar as the store ships it. One you wrote with the same name, or one set to do more than read the calendar, runs as before.",
+        "A calendar that cannot be read within 20 seconds is not an empty day, and the routine runs.",
+        "Other routines do not skip empty days."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 Today's Calendar sends nothing on a day with nothing on your calendar, decided without AI: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "On a morning with nothing on your calendar, Today's Calendar sends nothing and uses none of your AI. Press Run now and it still answers.",
+      "guide": "using-routines",
+      "wording_pending": true
+    },
+    {
       "id": "routines-that-run-when-a-date-on-your-lists-comes-due",
       "name": "Routines that run when a date on your lists comes due",
       "area": "routines",
@@ -2722,6 +3167,32 @@
       ],
       "wording": "",
       "guide": "who-it-serves"
+    },
+    {
+      "id": "your-small-files-checked-for-what-you-ask",
+      "name": "Your small files, checked for what you ask",
+      "area": "memory",
+      "summary": "When you ask about something, Archie looks through your small files, like a price sheet or a page of notes, for lines that mention it, and hands them to your agent before it answers. No extra AI call is made.",
+      "where": "Nothing to switch on. It reads the files on your agent's Knowledge tab.",
+      "how": [],
+      "limits": [
+        "Only small files, about 24 KB of text or less and the 20 newest, and at most three lines a message. A longer document is your agent's to open.",
+        "It compares words, so a line worded differently from your question is missed.",
+        "What it finds goes to your AI company with your message, like everything else in it.",
+        "Your agent is told to open the file before saying something is not in it, and it can still skip that."
+      ],
+      "phone": "It works on messages from your phone too, because the files are read on the computer.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 When you ask about something, Archie checks your small files for lines that mention it, with no extra AI call: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19"
+      ],
+      "wording": "When you ask about something, Archie looks through your small files, like a price sheet or a page of notes, for lines that mention it, and hands them to your agent before it answers. No extra AI call is made to do it.",
+      "guide": "knowledge",
+      "wording_pending": true
     },
     {
       "id": "who-this-agent-serves-the-profile-written-for-you-or-by-you",
@@ -5069,6 +5540,31 @@
       "guide": "websites"
     },
     {
+      "id": "what-a-teammate-saved-told-to-you",
+      "name": "What a teammate saved, told to you",
+      "area": "teams",
+      "summary": "When someone on your team tells your agent something that adds to or changes one of your lists, you get a message saying what they saved. Under their reply, they see that you are told.",
+      "where": "In your own chat with the agent, on the computer and your phone.",
+      "how": [],
+      "limits": [
+        "List saves only. Mail, drafts and calendar changes are not told, and neither are your own.",
+        "It is a notice after the fact. Nothing waits for your yes.",
+        "A teammate's card of drafted entries has no Undo.",
+        "On a chat app a teammate gets no button, and Archie says so."
+      ],
+      "phone": "A teammate on Archie Mobile on an iPhone gets the same button to copy a text or open it in Messages, and the same card for entries Archie drafted, that you get.",
+      "editions": "teams",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 On Archie for Teams, the owner hears what a teammate saved, and a teammate's phone gets the text button and the card: BUILT 2026-10-18 (Archie `9c347a52` and `4d8e389a`, merged as `d9ae56a2`; archie-mobile `9f6a317`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "When someone on your team tells Archie something that adds to or changes one of your lists, you get a message saying what they saved, on your computer and your phone, and under the teammate's reply they see \"Mike gets a notice about this.\" A teammate on Archie Mobile gets the same button to copy a text or open it in Messages, and the same card for list rows Archie drafted, that the owner gets.",
+      "guide": ""
+    },
+    {
       "id": "the-owner-can-read-what-a-shared-agent-said-to-everybody-els",
       "name": "The owner can read what a shared agent said to everybody else",
       "area": "teams",
@@ -5431,6 +5927,33 @@
       ],
       "wording": "If you use VoiceOver, TalkBack or another screen reader, Archie says when your agent starts working and what it is doing first, then reads the answer as soon as it is done. Every button has a name, and buttons like Send and Undo can be reached and pressed without seeing the screen.",
       "guide": ""
+    },
+    {
+      "id": "when-archie-is-slow-to-open",
+      "name": "When Archie is slow to open",
+      "area": "app",
+      "summary": "If Archie takes longer than usual to open, it says so. After a minute it offers Try again and Get help, and Get help starts an email to us with what it saw.",
+      "where": "On the screen Archie shows while it starts.",
+      "how": [
+        "Press Try again.",
+        "If it still does not open, quit Archie and open it again, or press Get help."
+      ],
+      "limits": [
+        "It says what to do. It does not fix the start.",
+        "The line after 15 seconds is on the computer only."
+      ],
+      "phone": "On an iPhone, Archie Mobile says the same after a minute of \"Getting your agents\", with Try again and Get help.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 If Archie takes too long to open, it says so and offers Try again and Get help, on the computer and in Archie Mobile: BUILT 2026-10-17, RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4"
+      ],
+      "wording": "If Archie takes longer than usual to open, it says so. After a minute it offers Try again and Get help, which starts an email to us with what it saw. Archie Mobile does the same when it cannot get your agents.",
+      "guide": "",
+      "wording_pending": true
     },
     {
       "id": "opening-archie-again-brings-the-open-copy-forward-on-windows",

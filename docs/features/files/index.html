@@ -413,7 +413,7 @@
           <h1>Files and pictures</h1>
           <p class="dx-lede">Sending pictures and documents both ways, and the files your agent makes.</p>
         </header>
-        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#send-files-to-your-agent">Send files to your agent, and get files back</a></li><li><a href="#backup-file">Your whole agent in one backup file</a></li><li><a href="#save-files">Your agent saves real files</a></li><li><a href="#pdf-reports-with-charts">PDF reports with charts</a></li><li><a href="#powerpoint-decks">PowerPoint decks you can change</a></li><li><a href="#change-office-files">Change a spreadsheet, Word file or deck you give it</a></li><li><a href="#make-a-picture">Your agent makes pictures</a></li><li><a href="#a-file-opened-from-an-email-comes-into-the-chat">A file opened from an email comes into the chat</a></li></ul></details>
+        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#send-files-to-your-agent">Send files to your agent, and get files back</a></li><li><a href="#read-pdfs-that-are-scans">Read PDFs that are scans</a></li><li><a href="#the-page-an-answer-came-from">The page an answer came from</a></li><li><a href="#backup-file">Your whole agent in one backup file</a></li><li><a href="#save-files">Your agent saves real files</a></li><li><a href="#pdf-reports-with-charts">PDF reports with charts</a></li><li><a href="#powerpoint-decks">PowerPoint decks you can change</a></li><li><a href="#change-office-files">Change a spreadsheet, Word file or deck you give it</a></li><li><a href="#make-a-picture">Your agent makes pictures</a></li><li><a href="#a-file-opened-from-an-email-comes-into-the-chat">A file opened from an email comes into the chat</a></li></ul></details>
         <section class="dx-feat" id="send-files-to-your-agent" aria-labelledby="send-files-to-your-agent-h">
           <h2 id="send-files-to-your-agent-h">Send files to your agent, and get files back<a class="dx-hash" href="#send-files-to-your-agent" aria-label="Link to Send files to your agent, and get files back">#</a></h2>
           <p class="dx-feat-sum">Send your agent photos, a video, a recording or a document in Archie, and it sends files it made back the same way.</p>
@@ -422,6 +422,26 @@
             <div><dt>Where it is</dt><dd>In the chat, with the Add button beside the message box, or by dropping files on the conversation.</dd></div>
             <div><dt>How to use it</dt><dd><ol><li>Press Add beside the message box, or drag files onto the conversation.</li><li>Send the message.</li><li>For a video or a recording, press Watch it or Listen to it on the card, or Skip.</li></ol></dd></div>
             <div><dt>Limits</dt><dd><ul><li>Up to four pictures and one video or recording per message.</li><li>It asks before it watches a video or listens to a recording, and needs the Video Synthesizer add-on to do either.</li><li>A document you send is kept under General on the Knowledge tab until you remove it.</li><li>A recording sent through a chat app such as Telegram is heard as you talking and answered, with no notes made.</li></ul></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="read-pdfs-that-are-scans" aria-labelledby="read-pdfs-that-are-scans-h">
+          <h2 id="read-pdfs-that-are-scans-h">Read PDFs that are scans<a class="dx-hash" href="#read-pdfs-that-are-scans" aria-label="Link to Read PDFs that are scans">#</a></h2>
+          <p class="dx-feat-sum">Some PDFs are photographs of a page, such as a scanned statement, a signed contract or a fax, so the file holds no words to read. Switch this on and Archie looks at the pages and writes out what is on them.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li>Since 0.3.0</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>On the agent's Setup tab, under Response quality: Read PDFs that are scans.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>On the agent's Setup tab, open Response quality.</li><li>Check Read PDFs that are scans.</li><li>Ask about a scanned PDF on an email, or one you added to your agent's Knowledge.</li></ol></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It is off until you switch it on, and works only with Claude, by Anthropic. On another AI account the switch does nothing, and the screen says so.</li><li>Each file costs about a cent or two on your AI account. It reads up to ten pages and 16 MB.</li><li>It copies what is printed and never guesses. A figure it can't read is written as [unreadable].</li><li>With the switch off, your agent says the file is a scan and asks for the original.</li><li>The pages go to your AI company, the same place your mail goes when you ask about it. Nothing on this computer reads the page.</li></ul></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="the-page-an-answer-came-from" aria-labelledby="the-page-an-answer-came-from-h">
+          <h2 id="the-page-an-answer-came-from-h">The page an answer came from<a class="dx-hash" href="#the-page-an-answer-came-from" aria-label="Link to The page an answer came from">#</a></h2>
+          <p class="dx-feat-sum">Ask where a figure came from and your agent can name the page: Archie reads a PDF you gave it as numbered pages, so you can open that page yourself.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li>Since 0.3.0</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>In the chat, when you ask about a PDF you sent your agent or added to its Knowledge.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>Ask your agent where a figure or a sentence in a PDF came from.</li><li>Open that page of the file to check it yourself.</li></ol></dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Your agent decides whether to name a page, so some answers name none.</li><li>Page 7 is the file's seventh page, counting any empty pages.</li><li>A scanned PDF has no text to point to until Read PDFs that are scans is on.</li><li>What it reads still goes to your AI company, on the account in use.</li></ul></dd></div>
           </dl>
         </section>
         <section class="dx-feat" id="backup-file" aria-labelledby="backup-file-h">
@@ -500,7 +520,7 @@
           <a class="dx-step-next" rel="next" href="../web/"><span class="dx-step-w">Next<span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/arrow-right.svg&quot;)" aria-hidden="true"></span></span><span class="dx-step-t">Websites and apps</span></a>
         </nav>
       </article>
-      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#send-files-to-your-agent">Send files to your agent, and get files back</a></li><li><a href="#backup-file">Your whole agent in one backup file</a></li><li><a href="#save-files">Your agent saves real files</a></li><li><a href="#pdf-reports-with-charts">PDF reports with charts</a></li><li><a href="#powerpoint-decks">PowerPoint decks you can change</a></li><li><a href="#change-office-files">Change a spreadsheet, Word file or deck you give it</a></li><li><a href="#make-a-picture">Your agent makes pictures</a></li><li><a href="#a-file-opened-from-an-email-comes-into-the-chat">A file opened from an email comes into the chat</a></li></ul></nav>
+      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#send-files-to-your-agent">Send files to your agent, and get files back</a></li><li><a href="#read-pdfs-that-are-scans">Read PDFs that are scans</a></li><li><a href="#the-page-an-answer-came-from">The page an answer came from</a></li><li><a href="#backup-file">Your whole agent in one backup file</a></li><li><a href="#save-files">Your agent saves real files</a></li><li><a href="#pdf-reports-with-charts">PDF reports with charts</a></li><li><a href="#powerpoint-decks">PowerPoint decks you can change</a></li><li><a href="#change-office-files">Change a spreadsheet, Word file or deck you give it</a></li><li><a href="#make-a-picture">Your agent makes pictures</a></li><li><a href="#a-file-opened-from-an-email-comes-into-the-chat">A file opened from an email comes into the chat</a></li></ul></nav>
       <nav class="dx-side" id="dx-side" aria-label="Archie Docs">
         <ul>
           <li><a href="../../"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span>Docs home</a></li>
@@ -517,25 +537,25 @@
         </ul>
         <p class="dx-side-t">Features</p>
         <ul>
-          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">150</span></a></li>
+          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">175</span></a></li>
           <li><a href="../../features/chat/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/chat.svg&quot;)" aria-hidden="true"></span><span>Talking to your agent</span><span class="dx-n">18</span></a></li>
           <li><a href="../../features/voice/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/mic.svg&quot;)" aria-hidden="true"></span><span>Voice</span><span class="dx-n">2</span></a></li>
-          <li><a href="../../features/phone/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span><span>Your phone</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">4</span></a></li>
+          <li><a href="../../features/phone/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span><span>Your phone</span><span class="dx-n">8</span></a></li>
+          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">12</span></a></li>
+          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">7</span></a></li>
           <li><a href="../../features/lists/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span><span>Lists and to-dos</span><span class="dx-n">23</span></a></li>
           <li><a href="../../features/routines/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span><span>Routines and reminders</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/memory/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/notes.svg&quot;)" aria-hidden="true"></span><span>Memory and knowledge</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/files/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/web/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">6</span></a></li>
-          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/files/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/web/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">8</span></a></li>
+          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/connections/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/plug.svg&quot;)" aria-hidden="true"></span><span>Connections</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/control/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/check.svg&quot;)" aria-hidden="true"></span><span>Staying in control</span><span class="dx-n">3</span></a></li>
-          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/plans/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/tag.svg&quot;)" aria-hidden="true"></span><span>Plans</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">3</span></a></li>
-          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">6</span></a></li>
+          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">11</span></a></li>
+          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">7</span></a></li>
         </ul>
         <p class="dx-side-t">More help</p>
         <ul>

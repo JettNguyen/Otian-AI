@@ -413,7 +413,7 @@
           <h1>Websites and apps</h1>
           <p class="dx-lede">Your agent using a website or a Mac app for you, maps, and prices.</p>
         </header>
-        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#websites">Your agent uses websites</a></li><li><a href="#practice-runs">Practice runs on a website</a></li><li><a href="#flight-check-in">Flight check-in</a></li><li><a href="#computer-control-mac-apps">Your agent uses apps on a Mac</a></li><li><a href="#places-on-the-map">Finding places on the map</a></li><li><a href="#shopify-prices">Prices at Shopify stores</a></li></ul></details>
+        <details class="dx-toc-m"><summary>On this page</summary><ul><li><a href="#websites">Your agent uses websites</a></li><li><a href="#practice-runs">Practice runs on a website</a></li><li><a href="#flight-check-in">Flight check-in</a></li><li><a href="#computer-control-mac-apps">Your agent uses apps on a Mac</a></li><li><a href="#buying-on-a-website">Buying on a website</a></li><li><a href="#call-businesses">Your agent phones a business</a></li><li><a href="#places-on-the-map">Finding places on the map</a></li><li><a href="#shopify-prices">Prices at Shopify stores</a></li></ul></details>
         <section class="dx-feat" id="websites" aria-labelledby="websites-h">
           <h2 id="websites-h">Your agent uses websites<a class="dx-hash" href="#websites" aria-label="Link to Your agent uses websites">#</a></h2>
           <p class="dx-feat-sum">With no direct connection, your agent can use a website itself in a browser window on your computer: it reads, clicks and types, and you can watch.</p>
@@ -460,6 +460,29 @@
             <div><dt>Guide</dt><dd><a href="../../guides/websites/">Your agent on websites and apps</a></dd></div>
           </dl>
         </section>
+        <section class="dx-feat" id="buying-on-a-website" aria-labelledby="buying-on-a-website-h">
+          <h2 id="buying-on-a-website-h">Buying on a website<a class="dx-hash" href="#buying-on-a-website" aria-label="Link to Buying on a website">#</a></h2>
+          <p class="dx-feat-sum">Your agent can buy things for you on a website, if you switch that on. It is off until you do. You choose the shops it may buy from, the most it may spend on one order, and the most in total over 1, 7, 14 or 30 days. The limit is checked against the price it reads on the page.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.0</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>On the agent's Connections tab, under Computer control, in Buying.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>On the agent's Connections tab, open Computer control and find Buying.</li><li>Turn on the switch that lets your agent press Buy, read Before you switch this on, and press I understand, switch it on.</li><li>Add the shops it may buy from, then set Most for one purchase, Most in total, and how many days the total counts.</li><li>Ask for the purchase in the chat. At Place order your agent stops and sends you the page, and it presses only after you tap Press it for me.</li></ol></dd></div>
+            <div><dt>From your phone</dt><dd>Tap Press it for me in Archie Mobile or your chat app. On a chat app with no buttons, type press it.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>Every order waits for your tap. Saying buy it or yes in the chat releases nothing.</li><li>Archie reads the order total off the last page and checks your limit against it. A charge a shop adds after you place the order can still take it over.</li><li>For a ceiling nobody can get past, give it a card from your bank that works at one shop.</li><li>It never types a card you pay with, so your card has to be saved at the shop already.</li><li>A subscription or free trial works the same way, and the card says what it will charge each time and when.</li><li>Anything outside your limits it will not press at all.</li><li>It never moves money or signs a contract, tap or not. Shared checkout pages such as PayPal, Shop Pay and Square are refused.</li><li>Closing or deleting an account can be tapped too, and its card says &quot;This can't be undone.&quot;</li><li>A teammate on a shared agent never buys. A routine can bring you the card, and the tap is still yours.</li><li>No real purchase has been completed yet.</li></ul></dd></div>
+            <div><dt>Guide</dt><dd><a href="../../guides/websites/">Your agent on websites and apps</a></dd></div>
+          </dl>
+        </section>
+        <section class="dx-feat" id="call-businesses" aria-labelledby="call-businesses-h">
+          <h2 id="call-businesses-h">Your agent phones a business<a class="dx-hash" href="#call-businesses" aria-label="Link to Your agent phones a business">#</a></h2>
+          <p class="dx-feat-sum">With Call businesses switched on, your agent can phone a business for you, to ask its hours or prices or whether it can fit you in. It shows you the call first, on a card, and nothing dials until you press Place the call.</p>
+          <ul class="dx-tags" aria-label="Where it works"><li><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span>On your computer</li><li><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span>From your phone</li><li>Since 0.3.11</li></ul>
+          <dl class="dx-dl">
+            <div><dt>Where it is</dt><dd>On the agent's Setup tab, under What it can do: Call businesses. Each call comes as a card in the chat with Place the call.</dd></div>
+            <div><dt>How to use it</dt><dd><ol><li>Make an account at Bland, add credit, and copy your key from its Settings.</li><li>On the agent's Setup tab, under What it can do, open Call businesses.</li><li>Type your first name and your business's name, paste the Bland key, and press Turn on calls.</li><li>Ask your agent to call a business. Read the card, then press Place the call.</li></ol></dd></div>
+            <div><dt>From your phone</dt><dd>On an iPhone, from Archie Mobile 1.4, the call's cards and Place the call work from the phone. From Archie Mobile 1.5 you can also turn calls on there, with Archie 0.3.12 on a Mac. Archie on Windows is still on 0.3.11, without it.</dd></div>
+            <div><dt>Limits</dt><dd><ul><li>It calls businesses only, never a person, and refuses any number on your agent's lists, on a teammate's card, or in your Mac's Messages. For a number you type yourself, the card asks you to press only if it is a business's line.</li><li>The voice says first that it is an AI assistant calling for you and that the call is transcribed.</li><li>It never agrees to buy, book or pay, and never gives card or account details. It asks, and you book.</li><li>Calls are on your own Bland account, which bills you by the minute.</li><li>It never calls before 8:00am or after 9:00pm where the business is. It makes three calls a day unless you set 1 to 10, and a call lasts ten minutes at most.</li><li>Calls do not work on the free starter credits.</li><li>A business that says not to call again is never called again.</li><li>No real call has been placed yet.</li></ul></dd></div>
+          </dl>
+        </section>
         <section class="dx-feat" id="places-on-the-map" aria-labelledby="places-on-the-map-h">
           <h2 id="places-on-the-map-h">Finding places on the map<a class="dx-hash" href="#places-on-the-map" aria-label="Link to Finding places on the map">#</a></h2>
           <p class="dx-feat-sum">Ask for somewhere to eat near the office open at eight, and your agent looks it up on the map: name, street, distance, phone number and hours.</p>
@@ -486,7 +509,7 @@
           <a class="dx-step-next" rel="next" href="../addons/"><span class="dx-step-w">Next<span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/arrow-right.svg&quot;)" aria-hidden="true"></span></span><span class="dx-step-t">Skills and the store</span></a>
         </nav>
       </article>
-      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#websites">Your agent uses websites</a></li><li><a href="#practice-runs">Practice runs on a website</a></li><li><a href="#flight-check-in">Flight check-in</a></li><li><a href="#computer-control-mac-apps">Your agent uses apps on a Mac</a></li><li><a href="#places-on-the-map">Finding places on the map</a></li><li><a href="#shopify-prices">Prices at Shopify stores</a></li></ul></nav>
+      <nav class="dx-toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#websites">Your agent uses websites</a></li><li><a href="#practice-runs">Practice runs on a website</a></li><li><a href="#flight-check-in">Flight check-in</a></li><li><a href="#computer-control-mac-apps">Your agent uses apps on a Mac</a></li><li><a href="#buying-on-a-website">Buying on a website</a></li><li><a href="#call-businesses">Your agent phones a business</a></li><li><a href="#places-on-the-map">Finding places on the map</a></li><li><a href="#shopify-prices">Prices at Shopify stores</a></li></ul></nav>
       <nav class="dx-side" id="dx-side" aria-label="Archie Docs">
         <ul>
           <li><a href="../../"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span>Docs home</a></li>
@@ -503,25 +526,25 @@
         </ul>
         <p class="dx-side-t">Features</p>
         <ul>
-          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">150</span></a></li>
+          <li><a href="../../features/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Every feature</span><span class="dx-n">175</span></a></li>
           <li><a href="../../features/chat/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/chat.svg&quot;)" aria-hidden="true"></span><span>Talking to your agent</span><span class="dx-n">18</span></a></li>
           <li><a href="../../features/voice/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/mic.svg&quot;)" aria-hidden="true"></span><span>Voice</span><span class="dx-n">2</span></a></li>
-          <li><a href="../../features/phone/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span><span>Your phone</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">4</span></a></li>
+          <li><a href="../../features/phone/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/phone.svg&quot;)" aria-hidden="true"></span><span>Your phone</span><span class="dx-n">8</span></a></li>
+          <li><a href="../../features/email/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/mail.svg&quot;)" aria-hidden="true"></span><span>Email</span><span class="dx-n">12</span></a></li>
+          <li><a href="../../features/calendar/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/calendar.svg&quot;)" aria-hidden="true"></span><span>Calendar</span><span class="dx-n">7</span></a></li>
           <li><a href="../../features/lists/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/contents.svg&quot;)" aria-hidden="true"></span><span>Lists and to-dos</span><span class="dx-n">23</span></a></li>
           <li><a href="../../features/routines/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/clock.svg&quot;)" aria-hidden="true"></span><span>Routines and reminders</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/memory/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/notes.svg&quot;)" aria-hidden="true"></span><span>Memory and knowledge</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/files/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/web/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">6</span></a></li>
-          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/files/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/doc.svg&quot;)" aria-hidden="true"></span><span>Files and pictures</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/web/" aria-current="page"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/globe.svg&quot;)" aria-hidden="true"></span><span>Websites and apps</span><span class="dx-n">8</span></a></li>
+          <li><a href="../../features/addons/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/grid.svg&quot;)" aria-hidden="true"></span><span>Skills and the store</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/connections/"><span class="dx-i" style="--ico:url(&quot;../../../assets/docs/plug.svg&quot;)" aria-hidden="true"></span><span>Connections</span><span class="dx-n">7</span></a></li>
-          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/ai/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/spark.svg&quot;)" aria-hidden="true"></span><span>Your AI account and cost</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/control/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/check.svg&quot;)" aria-hidden="true"></span><span>Staying in control</span><span class="dx-n">3</span></a></li>
-          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">10</span></a></li>
+          <li><a href="../../features/privacy/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/shield.svg&quot;)" aria-hidden="true"></span><span>Privacy and security</span><span class="dx-n">11</span></a></li>
           <li><a href="../../features/plans/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/tag.svg&quot;)" aria-hidden="true"></span><span>Plans</span><span class="dx-n">8</span></a></li>
-          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">3</span></a></li>
-          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">6</span></a></li>
+          <li><a href="../../features/teams/"><span class="dx-i" style="--ico:url(&quot;../../../assets/nav/people.svg&quot;)" aria-hidden="true"></span><span>Archie for Teams</span><span class="dx-n">11</span></a></li>
+          <li><a href="../../features/app/"><span class="dx-i" style="--ico:url(&quot;../../../assets/learn/icons/laptop.svg&quot;)" aria-hidden="true"></span><span>Archie on your computer</span><span class="dx-n">7</span></a></li>
         </ul>
         <p class="dx-side-t">More help</p>
         <ul>

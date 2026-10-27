@@ -939,6 +939,42 @@
       "guide": ""
     },
     {
+      "id": "more-setup-from-your-phone",
+      "name": "More of your agent's setup from your phone",
+      "area": "phone",
+      "summary": "From Archie Mobile you can let in or block someone who messaged your agent, turn on calls to businesses, and paste your AI account's key. You can also change what Email Manager and Text Replies watch for, and say whose each mail account is.",
+      "where": "In Archie Mobile on an iPhone, under More and on the Skills tab.",
+      "how": [
+        "To let someone in or block them, open More, then Teammates, and press Let them in, Not now, or Block.",
+        "To turn on calls, open More, then What it can do, then Call businesses.",
+        "To paste your AI account's key, open More, then Response quality, and use AI account at the top.",
+        "To change what Email Manager or Text Replies watches for, open it on the Skills tab.",
+        "To say whose a mail account is, open More, then Connections, and pick under Whose is this?"
+      ],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "Letting people in and blocking them from the phone works on Archie for Teams only.",
+        "Signing in to Google, Microsoft or Zoom, and Reconnect, stay at the computer. The phone shows which account stopped opening and where to press Reconnect.",
+        "Watch my texts, the Mac's permission to read Messages, and Another provider are set up at the computer.",
+        "A key you paste is checked with that company before it is kept. It travels to your computer through our phone mailbox, locked so we can't open it.",
+        "The rest of the Email Manager and Text Replies settings stay on the computer, and the phone says where.",
+        "The computer running Archie does each of these, so it has to be awake, connected to the internet, and running Archie.",
+        "Nobody has tried it on a real phone yet."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.5. The Android download does not have it.",
+      "editions": "both",
+      "released": "0.3.12",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 More of an agent's setup from the owner's phone: letting people in, Call businesses, the AI account's key, the two watches, and whose each mailbox is: BUILT October 23, 2026 (Archie `c8b2a4fb` to `dec642f6`, archie-mobile `d0a156a` to `ae9a0b8`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)"
+      ],
+      "wording": "From Archie Mobile you can let in someone who messaged your agent, or block them, turn on phone calls to businesses, paste your AI account's key, change what Email Manager and Text Replies watch for, and say whose each mail account is. Signing in to Google or Microsoft still happens on the computer.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
       "id": "update-archie-from-phone",
       "name": "Update Archie from Archie Mobile",
       "area": "phone",
@@ -1044,6 +1080,168 @@
       "wording": "If your chat app stops reaching your agent for more than half an hour, Archie tells you in Archie, and so on Archie Mobile: what happened, what to do on the computer running Archie, and that you can talk to your agent there in the meantime. When your messages get through again, it says so.",
       "guide": "when-it-goes-quiet",
       "wording_pending": true
+    },
+    {
+      "id": "email-goes-when-you-send-it",
+      "name": "Email goes out when you send it or set a time",
+      "area": "email",
+      "summary": "Your agent drafts email replies and can't send one on its own. Each draft comes to your chat as a card with Send on it, and nothing leaves your account until you send it or set a time for it.",
+      "where": "On an email draft card in your chat: Send, Edit it, Send later and Dismiss.",
+      "how": [
+        "Read the draft on its card.",
+        "Press Send, or Send later and pick a time. Press Edit it to change it first, or Dismiss.",
+        "On a chat app with no buttons, reply send."
+      ],
+      "limits": [
+        "A reply set for a time goes out then with nobody pressing anything, and calls itself off if they write back first.",
+        "Only your press sets a time. Your agent can suggest one on the card, and you press it.",
+        "Each Send sends the one reply on its card.",
+        "A draft with a blank still in it won't send until you fill it in.",
+        "Gmail and Outlook stay read-only unless you check Let it send replies when you connect them.",
+        "Every send is recorded on the Jobs tab, with when Send was pressed and who pressed it."
+      ],
+      "phone": "The card and its buttons reach Archie Mobile and chat apps with buttons. Where there are no buttons, reply send.",
+      "editions": "both",
+      "released": "0.1.1",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Email goes out only when you send it or set a time \u2014 SHIPPED (was 🚧 roadmap until 2026-07-20)"
+      ],
+      "wording": "Archie can draft email replies, but it cannot send one on its own. The draft comes to your chat as a card with Send / Edit / Dismiss buttons, and nothing leaves your account until you send it or set a time for it.",
+      "guide": "connect-email-account"
+    },
+    {
+      "id": "edit-a-draft",
+      "name": "Edit a draft in a pop-up",
+      "area": "email",
+      "summary": "Press Edit it on an email or text draft and a pop-up shows the message it answers. It has three ways to change the draft: type it your way, tell your agent what to change, or have it write three more.",
+      "where": "On an email or text draft card, press Edit it. The pop-up has Use my words, Rewrite it for me, and Other versions.",
+      "how": [
+        "Press Edit it on the draft.",
+        "Pick Use my words to type it yourself, Rewrite it for me to say what should change, or Other versions for three more.",
+        "In Rewrite it for me, you can point at something your agent can look up, like an earlier email or your calendar, and it looks before it rewrites.",
+        "Press Save, Rewrite it, or Write three. In Use my words, Clear empties the box to start over."
+      ],
+      "limits": [
+        "Saving changes the draft and sends nothing. Send on the card is still what sends it.",
+        "If your agent can't find what you pointed at, it says so and leaves it out. It looks only where it can, with what you connected.",
+        "Looking something up for a rewrite has not been tried on a real mailbox yet.",
+        "The email it answers is read from your mailbox when the pop-up opens, and none of it is kept. If the mailbox can't be reached, the pop-up shows the card's one-line summary and says why.",
+        "The cursor starts at the end of the letter, above your name. When some of your words sit under your name, Move them above it moves them up, and nothing moves on its own.",
+        "Rewrite it for me doesn't use Write like me.",
+        "On Telegram, Discord, Slack, Signal and iMessage, Edit it shows the three choices on the card, and a change you type comes back as a new card."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.3, Edit it opens the same pop-up. The Android download shows the three choices on the card.",
+      "editions": "both",
+      "released": "0.3.8",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "Press Edit it on a draft and you see the message it's answering, with three ways to change it: type it your way, tell your agent what to change, or have it write three more. Ask it to mention something it can look up, like an earlier email or a time on your calendar, and it looks before it rewrites.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "drafts-waiting-for-send",
+      "name": "Drafts waiting for you to press Send",
+      "area": "email",
+      "summary": "Every draft card says \"Not sent yet.\" while it waits. Over the message box, a line such as \"2 waiting to send\" counts the drafts in this conversation, and pressing it opens the list.",
+      "where": "On each draft card, and over the message box in your chat with your agent.",
+      "how": [
+        "Press the line over the message box that says how many are waiting to send.",
+        "In the list, press Send to send one, or Show to go to its card."
+      ],
+      "limits": [
+        "It counts the drafts in the conversation on screen. A draft in another chat app, or one the mail watch made on the Dashboard, is left out.",
+        "A draft set for a time says so in the list, and goes out on its own at that time.",
+        "When you change a draft and send it, or dismiss it, what your agent said about it goes gray, marked Out of date.",
+        "Ask your agent what is unsent and it counts the email drafts waiting in that conversation. Text drafts are counted only by the line over the box.",
+        "A chat app shows the card's words, \"Not sent yet.\" included, with no line over the box."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows the same line from 1.3, and the list and the grayed words from 1.4.",
+      "editions": "both",
+      "released": "0.3.9",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up: BUILT 2026-10-09 (Archie `2f078ffb`, `eae0640e`, `e057292a`; Archie Mobile `0c392e1`), RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "write-like-me",
+      "name": "Write like me",
+      "area": "email",
+      "summary": "Turn on Write like me and give it some of your own writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat, to mail that just arrived, or to a text, it writes it the way you write, and a text still reads like a text. You still read every draft before it goes.",
+      "where": "On the Knowledge tab, under How you write.",
+      "how": [
+        "On the Knowledge tab, open How you write and switch on Write like me.",
+        "Add your writing with Read my sent mail, Paste something, or Add documents.",
+        "Press Read my writing.",
+        "Under Which skills write like me, pick Like me, Its own writing, or Not like me for each skill.",
+        "Or, after you write your own words on a second draft, press Write like me on its card."
+      ],
+      "limits": [
+        "It learns only when you press Read my writing.",
+        "Drafts use it only with Write like me on, your writing read, and that skill not set to Not like me. Warmer, briefer and more formal versions don't use it, and neither does Rewrite it for me.",
+        "If you let Archie read your sent mail, it keeps the parts you wrote and a short description on this computer, and in backups you make, until you clear them.",
+        "The description and a few lines of your own writing go to your AI company each time a skill set to write like you does its work. Your samples go each time you press Read my writing.",
+        "Reading your sent mail asks you first, and can't be done on the free starter credits.",
+        "The card offers Write like me once, only on an agent whose writing has never been read, and only the owner can press it.",
+        "On Archie for Teams, a teammate's mailbox gets nobody's style."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.1",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Inbox and text drafts can be written the way you write: BUILT 2026-09-28 (Archie 3700e1ad for mail, 6e7e3168..69c3c612 for texts and the consent screen), SHIPPED in Archie 0.3.1 on September 29, 2026"
+      ],
+      "wording": "Turn on Write like me and give it some of your own writing: your sent mail, a document, or something you paste. When your agent drafts a reply, in chat, to mail that just arrived, or to a text, it writes it the way you write, and a text still reads like a text. You still read every draft before it goes.",
+      "guide": ""
+    },
+    {
+      "id": "text-replies",
+      "name": "Text Replies on a Mac",
+      "area": "email",
+      "summary": "On a Mac, your agent reads texts as they arrive in Messages and offers a reply on a card when one needs an answer. Nothing sends until you press Send, and a reply goes out from your own number, as if you had typed it.",
+      "where": "On your agent's Skills tab, under Text Replies: Watch my texts and Open Full Disk Access.",
+      "how": [
+        "Add Text Replies to your agent, then open it on the Skills tab.",
+        "Switch on Watch my texts.",
+        "Press Open Full Disk Access and allow Archie in the Mac's System Settings.",
+        "When a reply card arrives, press Send, Edit it, or Dismiss."
+      ],
+      "limits": [
+        "It works only on a Mac, and never on the free starter credits.",
+        "It starts when you switch it on and never reads your history on its own. When a new text arrives, it also reads the last 12 messages of that conversation and up to 8 of your own earlier texts, and they go to your AI account with it.",
+        "To stop that, switch off Read the earlier messages in the conversation. Then a reply can miss what a message refers to.",
+        "Verification codes, short-code senders, and messages carrying opt-out phrasing like \"reply STOP\" are dropped on this computer before any AI reads them. Group chats are off until you turn them on.",
+        "The reply card quotes the message, so it crosses your chat app's servers like anything else you read there.",
+        "On a shared agent, only the owner can send a reply. A reply with a blank still in it won't send until you fill it in.",
+        "Archie reads your address book on this computer to turn a number into the name you saved. The name then shows on the card and goes to your AI account with the text."
+      ],
+      "phone": "The reply card arrives in the chat app your agent uses, so you can press Send from your phone.",
+      "editions": "both",
+      "released": "0.1.4",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Text Replies: it reads your texts on your Mac, and only you can send one \u2014 SHIPPED 2026-08-21"
+      ],
+      "wording": "When a new text arrives it also reads earlier messages, which can include ones from before you switched it on: the last 12 of that one conversation, so the reply fits the thread, and up to 8 of your own earlier texts, so the reply sounds like you. Those come from that conversation, or from your other watched conversations when it has too few, and they go to your AI account with the new text. A switch in the app, on unless you turn it off, stops all of it: then only the new messages waiting on an answer are read, and a reply can miss what a message refers to. Verification codes, short-code senders, and messages carrying opt-out phrasing like 'reply STOP' are dropped on this computer before any AI reads them. Group chats are off until you turn them on; your ignore list and only-from list are honored the same way.",
+      "guide": ""
     },
     {
       "id": "keep-for-every-draft",
@@ -1523,6 +1721,137 @@
         "crates/archie-runtime/src/draft_change.rs"
       ],
       "near": "Editing a draft in a pop-up that shows what it answers, and Rewrite it for me that looks things up"
+    },
+    {
+      "id": "approve-a-calendar-change",
+      "name": "Approve a calendar change",
+      "area": "calendar",
+      "summary": "When your agent wants to add, move or delete an event on a calendar you connected, it shows you the exact change and makes it only after you approve it in a later message. The exception is Yes, and stop asking, for some changes to your own calendar.",
+      "where": "In your chat with your agent, on the card that shows the change, with Confirm, Change something and Cancel.",
+      "how": [
+        "Ask your agent for the change, such as \"Move my 2:00 with Dana to Thursday.\"",
+        "Read the change on the card.",
+        "Press Confirm, or say yes in your own words. Press Change something to say what should be different, or Cancel."
+      ],
+      "limits": [
+        "A routine running on its own can't change your calendar at all. It reports the change it would have made instead.",
+        "After you press Yes, and stop asking, your agent adds and moves events on your own calendar that nobody else is on without asking. It tells you each one, with Undo on the line over the message box.",
+        "Deleting an event, inviting someone, and changing an event other people are on always wait for your yes.",
+        "A message that only says thanks leaves the change waiting. Ok, okay or sounds good on its own approves it.",
+        "Your agent judges whether your reply was a yes. Archie makes sure the yes comes in a later message than the change.",
+        "Reading your calendar needs no approval.",
+        "An approval protects you only if you read the change before you approve it."
+      ],
+      "phone": "The same card reaches Archie Mobile and chat apps with buttons, and a press there approves the same way. On Signal, iMessage and Matrix, reply in words.",
+      "editions": "both",
+      "released": "0.1.1",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Calendar changes require your confirmation \u2014 SHIPPED, enforced in code (was ⛔ until 2026-07-20)"
+      ],
+      "wording": "When your agent wants to change a calendar you've connected (create, move, or delete an event), it proposes the exact change and applies it only after you approve it in a later message, unless you have pressed Yes, and stop asking: then it adds and moves events on your own calendar that nobody else is on without asking, tells you each one, and puts each on the Today line with Undo. Deleting an event, inviting someone, and changing an event other people are on always wait. Unattended routines can't apply calendar changes at all; they report what they would make instead of making it.",
+      "guide": ""
+    },
+    {
+      "id": "stop-asking-about-your-own-calendar",
+      "name": "Stop asking about your own calendar",
+      "area": "calendar",
+      "summary": "After you have said yes to three changes on your own calendar, the next card offers Yes, and stop asking. Press it and your agent adds and moves events on your own calendar that nobody else is on without asking first.",
+      "where": "On a calendar card, beside Confirm. To turn it off, on the agent's Setup tab, under What it can do, switch off Changes to your own calendar in Done without asking.",
+      "how": [
+        "Say yes to three changes on your own calendar.",
+        "On the next calendar card, press Yes, and stop asking.",
+        "To have it ask again, switch off Changes to your own calendar under What it can do on the agent's Setup tab."
+      ],
+      "limits": [
+        "Deleting an event, inviting anyone, changing an event somebody else is on, a change that overlaps another event, and a time with an unclear time zone still wait, and so does every reply.",
+        "Your own main calendar only, never a second calendar inside the account, a shared account, or a teammate's.",
+        "Each agent has its own switch, so turning it on for one changes nothing for the others.",
+        "On Archie for Teams, only the owner or an admin can press it, and a teammate's request always waits.",
+        "Typing yes, and stop asking approves that one change and turns nothing on.",
+        "Undo refuses if somebody has been added to the event since. Then change it in your calendar app.",
+        "A routine running on its own still can't change your calendar.",
+        "It has never been run against a real Google, Outlook or iCloud calendar."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.4, the card has the same button, and the switch is under More, then What it can do. The Android download does not have it yet.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": false,
+      "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Your agent can stop asking about changes to your own calendar, once you press Yes, and stop asking: BUILT 2026-10-18 (Archie `bad38c32`, archie-mobile `c335b43`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet), never run against a real calendar account"
+      ],
+      "wording": "After you have said yes to three changes on your own calendar, the card for the next one has a second yes: Yes, and stop asking. Press it, and from then on your agent adds and moves events on your own calendar without asking first, as long as nobody else is invited and nobody else is on the event. It tells you each one, and each one is on the Today line with Undo, in Archie and in Archie Mobile. Deleting an event, inviting someone, or changing an event somebody else is on still waits for your yes, and so does every reply. To have it ask again, turn off Changes to your own calendar under What it can do: on the agent's Setup tab in Archie, and under More in Archie Mobile. Nothing turns this on by itself, and on Archie for Teams only the owner or an admin can press it.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "calendar-checked-before-a-reply",
+      "name": "Your calendar is checked before a reply about a time",
+      "area": "calendar",
+      "summary": "When a text or an email asks about a time, your agent looks at your calendar before it writes the reply, so the draft won't say yes to a time you're already booked. When it offers to put something on your calendar, it tells you if that time is already taken.",
+      "where": "There is no switch. The draft's card says your calendar was checked first, and a booking your agent proposes says if it overlaps something.",
+      "how": [],
+      "limits": [
+        "Only a message that names a time in words it recognizes, such as a weekday, 3pm, 10/12, lunch or a call. \"Are you around later?\" is drafted without your calendar.",
+        "Only the next 14 days are checked.",
+        "It warns and stops nothing. A booking that overlaps can still be approved, and a draft can still be changed to say yes.",
+        "It reads one calendar on each connected account, usually the main one, and never the other person's. Holidays, birthdays and calendars shared into your account are left out.",
+        "The draft is written knowing when you are busy, never what the event is, unless the person you are answering is on it.",
+        "For a booking, an all-day entry such as a trip or a birthday does not count as a clash.",
+        "On Archie for Teams, a teammate's mailbox is checked against that teammate's calendars and the business's shared ones.",
+        "Text Replies needs a Mac, because it reads the Messages app."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.5",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Your calendar is checked before a reply or a booking about a time: BUILT 2026-10-04 (Archie `fc1b47f5`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)"
+      ],
+      "wording": "When a text or an email asks about a time, your agent looks at your calendar before it writes the reply, so the draft won't say yes to a time you're already booked. When it offers to put something on your calendar, it tells you if that time is already taken.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "invitations-and-a-place-on-an-event",
+      "name": "Invitations and a place on an event",
+      "area": "calendar",
+      "summary": "When your agent sets up a meeting, it can put the place on it and invite people once you say yes. The change it shows you first names everyone who will get an invitation, by name and email address.",
+      "where": "In your chat with your agent, on the calendar change it proposes. Once you say yes, your calendar sends the invitations.",
+      "how": [
+        "Ask your agent to set up a meeting, and say where it is and who should come.",
+        "Read the place and the guests on the change, and check any address it points out.",
+        "Press Confirm, or say yes."
+      ],
+      "limits": [
+        "Nobody is invited before your yes, and a routine running on its own can't invite anyone. Inviting someone always waits, even after Yes, and stop asking.",
+        "If your agent wrote an address it did not find in your mail, your lists, or what you told it, the change asks you to check that address first. An address found in your mail can still belong to the wrong person.",
+        "Your agent sees when other people are busy, never what they are doing. That works on a work or school Outlook account, and on a Google account connected or reconnected since Archie 0.3.11 or connected to look only.",
+        "To reconnect a Google account, on the Connections tab, under Email, calendar, files, press Reconnect. Where your agent can't see someone, it says so and offers you times to send them.",
+        "A personal Outlook.com account can't look, and people outside your organization usually can't be seen.",
+        "Adding someone to an existing meeting also tells the people already on it.",
+        "Still done in your calendar app: taking someone off, a video link, answering an invitation, and an all-day or repeating event.",
+        "No invitation has been tried yet on iCloud or another calendar connected with an app password.",
+        "It has never been run against a real Google, Outlook or iCloud account."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.4, the waiting change shows its whole sentence, so every guest is listed. The Android download is older and lacks this.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 Your agent can put a place on an event and invite people to it, and sees when other people are busy where your account is allowed to look: BUILT 2026-10-18 (Archie `7d102231`, archie-mobile `1dc53da`), RELEASED in 0.3.11, 2026-10-19, the Archie Mobile half on iPhone in 1.4 (not on Android yet)"
+      ],
+      "wording": "When your agent sets up a meeting, it can put the place on it and invite people. Before anything happens it shows you the change, with everyone who will get an invitation from your calendar, by name and email address. Nobody hears anything until you say yes. If your agent wrote an address it did not find in your mail, your lists, or what you told it, the proposal asks you to check that address first. On a work or school Outlook account, your agent can also see when people in your organization are busy and pick a time that suits everyone. Where it cannot see somebody's calendar, it says so and offers you times to send them instead.",
+      "guide": "connect-email-account",
+      "wording_pending": true
     },
     {
       "id": "whats-on-and-whats-free",
@@ -3340,6 +3669,64 @@
       "guide": ""
     },
     {
+      "id": "read-pdfs-that-are-scans",
+      "name": "Read PDFs that are scans",
+      "area": "files",
+      "summary": "Some PDFs are photographs of a page, such as a scanned statement, a signed contract or a fax, so the file holds no words to read. Switch this on and Archie looks at the pages and writes out what is on them.",
+      "where": "On the agent's Setup tab, under Response quality: Read PDFs that are scans.",
+      "how": [
+        "On the agent's Setup tab, open Response quality.",
+        "Check Read PDFs that are scans.",
+        "Ask about a scanned PDF on an email, or one you added to your agent's Knowledge."
+      ],
+      "limits": [
+        "It is off until you switch it on, and works only with Claude, by Anthropic. On another AI account the switch does nothing, and the screen says so.",
+        "Each file costs about a cent or two on your AI account. It reads up to ten pages and 16 MB.",
+        "It copies what is printed and never guesses. A figure it can't read is written as [unreadable].",
+        "With the switch off, your agent says the file is a scan and asks for the original.",
+        "The pages go to your AI company, the same place your mail goes when you ask about it. Nothing on this computer reads the page."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.0",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ A PDF that is a picture of a page, read \u2014 SHIPPED 2026-09-17, off until switched on"
+      ],
+      "wording": "Some PDFs are photographs of a page, so there are no words in the file to read: a scanned statement, a signed contract, a fax. Archie can look at the pages and write out what is on them. It is off until you switch it on, under Response quality, because it costs a cent or two each time and it needs an Anthropic account.",
+      "guide": ""
+    },
+    {
+      "id": "the-page-an-answer-came-from",
+      "name": "The page an answer came from",
+      "area": "files",
+      "summary": "Ask where a figure came from and your agent can name the page: Archie reads a PDF you gave it as numbered pages, so you can open that page yourself.",
+      "where": "In the chat, when you ask about a PDF you sent your agent or added to its Knowledge.",
+      "how": [
+        "Ask your agent where a figure or a sentence in a PDF came from.",
+        "Open that page of the file to check it yourself."
+      ],
+      "limits": [
+        "Your agent decides whether to name a page, so some answers name none.",
+        "Page 7 is the file's seventh page, counting any empty pages.",
+        "A scanned PDF has no text to point to until Read PDFs that are scans is on.",
+        "What it reads still goes to your AI company, on the account in use."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.0",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ It can name the page an answer came from (SHIPPED 2026-09-17, in 0.3.0; entry written 2026-09-27)"
+      ],
+      "wording": "Ask where a figure came from and your agent can name the page: Archie reads a PDF you gave it as numbered pages, so you can open that page yourself.",
+      "guide": ""
+    },
+    {
       "id": "backup-file",
       "name": "Your whole agent in one backup file",
       "area": "files",
@@ -3679,6 +4066,77 @@
       "guide": "websites"
     },
     {
+      "id": "buying-on-a-website",
+      "name": "Buying on a website",
+      "area": "web",
+      "summary": "Your agent can buy things for you on a website, if you switch that on. It is off until you do. You choose the shops it may buy from, the most it may spend on one order, and the most in total over 1, 7, 14 or 30 days. The limit is checked against the price it reads on the page.",
+      "where": "On the agent's Connections tab, under Computer control, in Buying.",
+      "how": [
+        "On the agent's Connections tab, open Computer control and find Buying.",
+        "Turn on the switch that lets your agent press Buy, read Before you switch this on, and press I understand, switch it on.",
+        "Add the shops it may buy from, then set Most for one purchase, Most in total, and how many days the total counts.",
+        "Ask for the purchase in the chat. At Place order your agent stops and sends you the page, and it presses only after you tap Press it for me."
+      ],
+      "limits": [
+        "Every order waits for your tap. Saying buy it or yes in the chat releases nothing.",
+        "Archie reads the order total off the last page and checks your limit against it. A charge a shop adds after you place the order can still take it over.",
+        "For a ceiling nobody can get past, give it a card from your bank that works at one shop.",
+        "It never types a card you pay with, so your card has to be saved at the shop already.",
+        "A subscription or free trial works the same way, and the card says what it will charge each time and when.",
+        "Anything outside your limits it will not press at all.",
+        "It never moves money or signs a contract, tap or not. Shared checkout pages such as PayPal, Shop Pay and Square are refused.",
+        "Closing or deleting an account can be tapped too, and its card says \"This can't be undone.\"",
+        "A teammate on a shared agent never buys. A routine can bring you the card, and the tap is still yours.",
+        "No real purchase has been completed yet."
+      ],
+      "phone": "Tap Press it for me in Archie Mobile or your chat app. On a chat app with no buttons, type press it.",
+      "editions": "both",
+      "released": "0.3.0",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "✅ Buying, as a switch the owner turns on: SHIPPED 2026-09-22 (0.3.0), APPROVED FOR COPY 2026-09-24"
+      ],
+      "wording": "Your agent can buy things for you on a website, if you switch that on. It is off until you do. You choose the shops it may buy from, the most it may spend on one order, and the most over a week or a month. Even then it asks before every order: it stops at Place order and sends you the page, and it presses the button only after you tap Press it for me, in Archie, on your phone or in your chat app. Anything outside your limits it will not press at all. It never types a card you pay with, so your card has to be saved at the shop already. A subscription or free trial works the same way, and the card says what it will charge each time and when. The limit is checked against the price it reads on the page, so a shop that adds a charge at the last step can take it over. For a ceiling nobody can get past, give it a card from your bank that works at one shop, with its own limit.",
+      "guide": "websites"
+    },
+    {
+      "id": "call-businesses",
+      "name": "Your agent phones a business",
+      "area": "web",
+      "summary": "With Call businesses switched on, your agent can phone a business for you, to ask its hours or prices or whether it can fit you in. It shows you the call first, on a card, and nothing dials until you press Place the call.",
+      "where": "On the agent's Setup tab, under What it can do: Call businesses. Each call comes as a card in the chat with Place the call.",
+      "how": [
+        "Make an account at Bland, add credit, and copy your key from its Settings.",
+        "On the agent's Setup tab, under What it can do, open Call businesses.",
+        "Type your first name and your business's name, paste the Bland key, and press Turn on calls.",
+        "Ask your agent to call a business. Read the card, then press Place the call."
+      ],
+      "limits": [
+        "It calls businesses only, never a person, and refuses any number on your agent's lists, on a teammate's card, or in your Mac's Messages. For a number you type yourself, the card asks you to press only if it is a business's line.",
+        "The voice says first that it is an AI assistant calling for you and that the call is transcribed.",
+        "It never agrees to buy, book or pay, and never gives card or account details. It asks, and you book.",
+        "Calls are on your own Bland account, which bills you by the minute.",
+        "It never calls before 8:00am or after 9:00pm where the business is. It makes three calls a day unless you set 1 to 10, and a call lasts ten minutes at most.",
+        "Calls do not work on the free starter credits.",
+        "A business that says not to call again is never called again.",
+        "No real call has been placed yet."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.4, the call's cards and Place the call work from the phone. From Archie Mobile 1.5 you can also turn calls on there, with Archie 0.3.12 on a Mac. Archie on Windows is still on 0.3.11, without it.",
+      "editions": "both",
+      "released": "0.3.11",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 Your agent phones a business for you, after you press Place the call, when you switch Call businesses on: BUILT 2026-10-18 (Archie `6e8e5549`, archie-mobile `7cf627e`), RELEASED in 0.3.11, 2026-10-19, off until the owner switches it on, the Archie Mobile half on iPhone in 1.4 (not on Android yet), and no real call has been placed"
+      ],
+      "wording": "With Call businesses switched on, your agent can phone a business for you, to ask its hours or prices or whether it can fit you in. It shows you the call first, on a card: who it is calling, the number and where it found it, what the voice will say, and what it will ask. Nothing dials until you press Place the call, and it calls only from 8:00am to 9:00pm in the business's own time zone. The voice says it is an AI assistant calling for you and that the call is transcribed. It never agrees to buy, book, or pay, and never gives card or account details. It calls businesses only, never a person, on your own Bland account, which bills you by the minute. When the call ends you get what was said and a short summary, in the chat.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
       "id": "places-on-the-map",
       "name": "Finding places on the map",
       "area": "web",
@@ -3779,6 +4237,34 @@
         "⛔ No add-on is sold, so there is no purchase, no receipt, and no per-person add-on list"
       ],
       "wording": "Every add-on is included with Archie",
+      "guide": ""
+    },
+    {
+      "id": "asks-before-an-add-on-goes-on",
+      "name": "Archie asks before an add-on goes on",
+      "area": "addons",
+      "summary": "Whenever you add an add-on, anywhere in Archie, Archie asks first. It shows the add-on, the agent it is going on, what it will use, and which of those accounts that agent already has connected. Then you press Install, or Cancel.",
+      "where": "In the step that opens whenever you add an add-on, from the Marketplace or anywhere else in Archie.",
+      "how": [
+        "Add an add-on from the Marketplace, the Connections tab, or a suggestion on your agent's page.",
+        "Read what it will use and what comes with it, such as another add-on it is built on, a routine that starts on a schedule, or a download.",
+        "Press Install, or Cancel."
+      ],
+      "limits": [
+        "It lists what the add-on declares. Mail tools come with your email connection, and Computer control is a switch for the whole agent, so an add-on that lists neither can still use them.",
+        "Installing connects nothing. Connecting an account is its own step.",
+        "Your first agent's starter pack, the Researcher included, goes on without this step, and so do up to two add-ons your first answers pick."
+      ],
+      "phone": "In Archie Mobile, on iPhone and Android, Add shows the same step first. The phone connects nothing, and says where to connect on the computer.",
+      "editions": "both",
+      "released": "0.3.2",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Archie asks before an add-on goes on, and says what it will use: BUILT 2026-09-28 (Archie 734c71bb..13cc20f6 for the Marketplace, 717d3056..eb969acf for every other door and the phone, c942bc60..de6e9f32 for a new agent's Researcher; archie-mobile 3d279a3 and 6817d41), SHIPPED in Archie 0.3.2 on 2026-09-30"
+      ],
+      "wording": "Whenever you add an add-on, anywhere in Archie, Archie asks first. It shows the add-on, the agent it is going on, and what it will use, says which of those accounts that agent already has connected, and names anything that comes with it, such as another add-on it is built on, a routine that starts on a schedule, or a download. Then you press Install, or Cancel.",
       "guide": ""
     },
     {
@@ -4329,6 +4815,69 @@
       "guide": "what-archie-connects-to"
     },
     {
+      "id": "square",
+      "name": "Square: payments, invoices and refunds",
+      "area": "connections",
+      "summary": "Connect Square and your agent reads your real payments, invoices, customers and payouts. Ask it to invoice somebody and it drafts the invoice in your Square, then shows it to you, and nothing is sent until you say yes.",
+      "where": "On your agent's Connections tab, under Apps, with a token you make in Square. The skill is Square Keeper, in the Marketplace.",
+      "how": [
+        "In Square's developer site, make an application named Archie, open Credentials, pick Production, and copy the Production access token.",
+        "On your agent's Connections tab, under Apps, connect Square with that token.",
+        "Add Square Keeper from the Marketplace.",
+        "Ask what came in this week or who hasn't paid, or ask it to invoice somebody. Say yes on the card to send an invoice or a refund."
+      ],
+      "limits": [
+        "It has never been run against a real Square account.",
+        "It sends invoices the customer pays. It never charges a card, cancels a sent invoice, or changes a booking.",
+        "Drafting an invoice or adding a customer happens at once, since nobody else sees a draft. Sending an invoice, refunding a payment, or deleting a draft waits for your yes.",
+        "Square's token covers your whole account and can't be narrowed. It goes only to Square, and what your agent reads goes to your AI company."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.4",
+      "claimable": false,
+      "hold": "Never run against a real Square account, and the entry says no page of the site's own may describe it until one live read has worked.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Square: your agent reads it, drafts an invoice, and sends one or refunds a payment when you say yes: BUILT 2026-09-30 (Archie 8661c63c), in 0.3.4 (released 2026-10-02), never yet run against a real account"
+      ],
+      "wording": "Connect Square with an access token, and your agent reads your real payments, invoices, customers and payouts: what came in this week, who hasn't paid, and when your money lands. Ask it to invoice somebody and it drafts the invoice in your Square, then shows you who it goes to, the amount, the due date and the email address. Nothing is sent until you say yes. A refund works the same way: whose payment, how much, and which card it goes back to, first.",
+      "guide": "what-archie-connects-to"
+    },
+    {
+      "id": "instagram-through-zernio",
+      "name": "Posting to Instagram through Zernio",
+      "area": "connections",
+      "summary": "Link your Instagram to Zernio, paste Zernio's key into Archie, and send your agent a photo with what to say. It writes the caption, shows you the post, which account and when, and posts it when you say yes.",
+      "where": "On your agent's Connections tab, under Apps, with a key you make in Zernio. The skill is Social Posting, in the Marketplace.",
+      "how": [
+        "Make a free Zernio account and link your Instagram on its Accounts page.",
+        "In Zernio, open API keys, press Create API key, name it Archie, and copy the key.",
+        "On your agent's Connections tab, under Apps, connect Zernio with that key, and add Social Posting from the Marketplace.",
+        "Send your agent a photo and what the post should say. Say yes on the card, to post now or at a time you pick."
+      ],
+      "limits": [
+        "It has never posted anything.",
+        "Instagram only lets a business or creator account post this way.",
+        "Zernio, a separate service, holds your Instagram sign-in and sees what is posted. It is free for two linked accounts and charges per account past that.",
+        "Once a post is live on Instagram, it can't be taken down from Archie.",
+        "It posts pictures and words, and nothing else: no likes, comments, followers, Stories, Reels or video.",
+        "A scheduled post goes out even if your computer is off. A routine with nobody there can't post.",
+        "With Zernio connected, photos you send in chat and pictures your agent makes are kept on this computer, the newest 30, so a post can carry them."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.4",
+      "claimable": false,
+      "hold": "Never posted anything, and the entry says no page of the site's own may describe it until one real post has gone out.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Posting to Instagram, through Zernio, when you say yes: BUILT 2026-09-30 (Archie f577198e), in 0.3.4 (released 2026-10-02), never yet run against a real account"
+      ],
+      "wording": "Link your Instagram to Zernio, paste Zernio's key into Archie, and send your agent a photo with what to say. It writes the caption, shows you the post, which account and when, and posts it when you say yes, now or at a time you pick. A scheduled post goes out even if your computer is off. Instagram only lets a business or creator account post this way.",
+      "guide": "what-archie-connects-to"
+    },
+    {
       "id": "choose-your-ai-company",
       "name": "Choose your AI company",
       "area": "ai",
@@ -4436,6 +4985,36 @@
         "✅ The spend meter is local, and it is an estimate"
       ],
       "wording": "Archie keeps its own running total. The Account screen shows what you've spent this month and all time, broken down by provider and by agent, counted from what every reply hands back. That figure is an estimate from a price table inside the app rather than the provider's invoice, and it says so on the screen. The authoritative bill is on the provider's own dashboard.",
+      "guide": "what-it-costs"
+    },
+    {
+      "id": "monthly-limit-on-ai-spending",
+      "name": "A monthly limit on AI spending",
+      "area": "ai",
+      "summary": "You can set one monthly limit on what your agents spend on thinking, all of them together. When the month reaches it, routines and reading new mail and texts pause until the first. Your agent still answers when you ask, and reminders still go off.",
+      "where": "On the Account page, under Spending: Monthly limit.",
+      "how": [
+        "Open the Account page and choose Spending.",
+        "Switch on Monthly limit.",
+        "Type an amount in whole dollars under Limit for one month, then press Save."
+      ],
+      "limits": [
+        "Your own conversation keeps going past the limit, so a month can end above the number.",
+        "The figure is an estimate, and the exact one is on your AI company's own billing page.",
+        "A custom AI address you typed in yourself is not counted.",
+        "It is off until you switch it on.",
+        "It limits what your agents spend on thinking. Buying on a website has its own switch and limits, on the Connections tab under Computer control."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.6",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ A user-set spending cap: BUILT 2026-09-21, FIRST RUN 2026-10-06, SHIPPED IN FULL IN 0.3.6 AND ON THE PRICING PAGE, and the fourteen places it does NOT change"
+      ],
+      "wording": "You can set one monthly limit on what your agents spend on thinking, all of them together. When the month reaches it, routines and reading new mail and texts pause until the first. Your agent still answers when you ask, and reminders still go off. The figure is an estimate, and the exact one is on your AI company's own billing page.",
       "guide": "what-it-costs"
     },
     {
@@ -5134,6 +5713,40 @@
       "guide": ""
     },
     {
+      "id": "addresses-your-agent-came-up-with",
+      "name": "An address your agent came up with waits for your yes",
+      "area": "privacy",
+      "summary": "Your agent opens a web page on its own only when the address came from you, from a page it already opened, or from a site you named in your message. An address it came up with itself, it shows you first and waits for your yes.",
+      "where": "In your chat with your agent, on a card with Open it and Don't open it. A search it wants to hand on asks with Go ahead and Don't.",
+      "how": [
+        "Press Open it, or Don't open it.",
+        "When your agent asks before handing a search on, press Go ahead, or Don't."
+      ],
+      "limits": [
+        "After your agent reads an email, a page or a file in a job, it asks before handing a search on, and a site you named waits for your yes too.",
+        "Asking first has a cost: a page your agent wants to open on its own judgment waits for you. For about ten messages after it reads new mail or texts for you, so does a search it hands on or a site you name in passing.",
+        "A skill that searches the web is given only the task: none of your memory, your profile, your files or the rest of the chat.",
+        "A skill that searches the web reads only the one message it is handed, so name the subject when you follow up. Some questions about your own work still go to it, and it answers those without your lists.",
+        "It does not stop everything. An instruction hidden in an email or a page can still add to your lists or save a note to your agent's memory, and that note can steer a later job.",
+        "Two ways out remain. Text typed into a page already open goes wherever that page sends it, and a service you connected through its address for AI assistants can open pages on its own.",
+        "A search still sends its words to your AI company's search service.",
+        "Your agent judges whether your reply was a yes. Archie makes sure it comes in a later message from you.",
+        "A routine running on its own is refused instead of asking."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.5",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ An address your agent wrote itself waits for your yes, and a skill that searches holds only its task: BUILT 2026-10-05 (Archie `200982ab`), SHIPPED in Archie 0.3.5 on October 5, 2026 (Archie for Business follows)",
+        "✅ Fewer of your own questions handed to the web researcher, which reads only the one message it gets: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "Your agent opens a web page on its own only when the address came from you, from a page it already opened, or from a site you named in your message, until your agent has read something somebody else wrote in that job. An address it came up with itself, it shows you first and waits for your yes. A skill that searches the web is given only the task: none of your memory, your profile, your files or the rest of the chat. After your agent has read an email, a page or a file in a job, it asks you before handing a search to one.",
+      "guide": "using-specialists"
+    },
+    {
       "id": "how-did-you-hear",
       "name": "How did you hear about Archie",
       "area": "privacy",
@@ -5613,6 +6226,288 @@
       "wording_pending": true
     },
     {
+      "id": "who-each-teammate-is",
+      "name": "Write down who each teammate is",
+      "area": "teams",
+      "summary": "When you add someone, write down their name and what they do, and an email or phone number if you like. Your agent then knows who is on the team, so asked to write to Dana it already has her address.",
+      "where": "On the agent's Setup tab, under Who can message it. Add someone asks Who are you adding?, and each person's row has Edit.",
+      "how": [
+        "On the agent's Setup tab, under Who can message it, press Add someone.",
+        "Under Who are you adding?, write their name and what they do, and an email or phone number if you like.",
+        "Make their link or code, press Copy message, and send it to them yourself.",
+        "To change what is written later, press Edit on their row."
+      ],
+      "limits": [
+        "Your agent knows only what is written on the rows, and never searches your mail or contacts for anyone.",
+        "Everyone on the agent sees names and what each person does. Your agent is told the emails and phone numbers on your messages, and on a teammate's messages only that teammate's own.",
+        "Archie doesn't send the invite. You copy the message and send it however you like.",
+        "Like everything your agent is told, what is written goes to your AI company."
+      ],
+      "phone": "On an iPhone, Archie Mobile lists each person by name and what they do, under More, then Teammates.",
+      "editions": "teams",
+      "released": "0.3.8",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ On Archie for Teams, the owner writes down who each teammate is and what they do, and the agent knows its team: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "When you add someone, write down their name and what they do, and an email or phone number if you like. Your agent knows who is on the team, so asked to write to Dana it already has her address. Everyone on the agent sees names and what each person does; only you are told the emails and phone numbers. Archie gives you a message to send with their code.",
+      "guide": "who-can-message",
+      "wording_pending": true
+    },
+    {
+      "id": "teammate-on-archie-mobile",
+      "name": "A teammate on Archie Mobile, with no chat app",
+      "area": "teams",
+      "summary": "Add someone to your agent without asking them to set up Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They get Archie Mobile, paste the link, and talk to your agent from their own phone, with no account to make.",
+      "where": "On the agent's Setup tab, under Who can message it: Add someone, then Archie Mobile link. The teammate pastes it in Archie Mobile under Joining a team.",
+      "how": [
+        "On the agent's Setup tab, under Who can message it, press Add someone and write their name.",
+        "Press Archie Mobile link, then Copy message, and send it to them.",
+        "They open the link on their phone, which shows how to get Archie Mobile, then paste it under Joining a team and press Join.",
+        "To take them off, press Remove or Block on their row. Their phone can't read the agent after that."
+      ],
+      "limits": [
+        "Your plan covers them, and your agent's AI use for them is on your AI account.",
+        "On the phone they can talk to the agent, press the buttons on what it sends, read their Dashboard, and, if you let teammates change the lists, change to-dos and entries. They can't send pictures, files or voice, or change settings.",
+        "Their Dashboard shows their own entries and every entry naming nobody, which on the usual to-do list is every open to-do, yours included.",
+        "Their conversation is kept on your computer, where you can read it and ask your agent what they asked. Their phone says so.",
+        "Their phone gets no notifications yet, so they open Archie Mobile to see a reply.",
+        "Your agent answers only while your computer is awake with Archie open.",
+        "One phone per link, and a link lasts 7 days. Someone already on the agent through a chat app can't move to a phone yet.",
+        "The link is checked once by our server, and messages pass through the same locked phone mailbox your own phone uses, which we can't read."
+      ],
+      "phone": "Their phone needs Archie Mobile on an iPhone, from 1.3. The Android download does not have it yet.",
+      "editions": "teams",
+      "released": "0.3.9",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "🚧 On Archie for Teams, a teammate can talk to the agent from Archie Mobile, with no chat app and no account: BUILT 2026-10-13, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
+      ],
+      "wording": "Add someone to your agent without asking them to set up Telegram or Slack. Archie makes a link for that one person, and you send it however you like. They get Archie Mobile, paste the link, and talk to the agent from their own phone, with no account to make. Your plan covers them. Take them off on your computer, and their phone can't read the agent any more. Their phone has a Dashboard of its own: the team's to-do list, the reminders they set, and the jobs they asked for. Their lists show the rows that are theirs and the ones nobody is named on.",
+      "guide": "who-can-message",
+      "wording_pending": true
+    },
+    {
+      "id": "what-teammates-can-do",
+      "name": "Choose what teammates can do",
+      "area": "teams",
+      "summary": "On a shared agent you choose what the people you let in can do: ask it things, also add to and change its lists, or everything you can. In the middle setting a teammate can log a delivery or add a task to the agent's lists, and still cannot send your mail, change your calendar, or use the apps you connected.",
+      "where": "On the agent's Setup tab, under Who can message it, in What teammates can do, once someone else is on the agent.",
+      "how": [
+        "On the agent's Setup tab, open Who can message it.",
+        "Under What teammates can do, pick Talk to your agent, Talk and add to your lists, or Everything you can."
+      ],
+      "limits": [
+        "Talk to your agent is the default.",
+        "A teammate's adds and changes to entries happen at once, with an undo, as yours do. Removing an entry waits for a yes in their own chat, from them.",
+        "Making a new list or adding a column stays yours.",
+        "On every setting, a teammate reads every list the agent can. On a list that says whose each entry is, their answers keep to their own work.",
+        "A task in Todoist or Google Tasks is a connected app, so the middle setting leaves it out. A task in Task Manager is an entry on a list, so it is in.",
+        "Nobody has picked it on a real agent yet."
+      ],
+      "phone": "On an iPhone, Archie Mobile has the same three answers under More, then Teammates.",
+      "editions": "teams",
+      "released": "0.3.7",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "✅ On Archie for Teams, teammates can add to an agent's lists without being handed the owner's mail or calendar: RELEASED in 0.3.7, 2026-10-08 (Archie `9de4bfa4`), never yet picked on a real agent"
+      ],
+      "wording": "On a shared agent you choose what the people you let in can do: ask it things, also add to and change its lists, or everything you can. In the middle setting a teammate can log a delivery or add a task to the agent's lists, and still cannot send your mail, change your calendar, or use the apps you connected.",
+      "guide": "who-can-message"
+    },
+    {
+      "id": "roles-on-a-team",
+      "name": "Owner, admins and teammates",
+      "area": "teams",
+      "summary": "Everybody on an agent has a role. The owner is who the agent works for, and its routines report to them. An admin can change the agent and decide who is on it, the same as the owner, and whoever set it up can make the right person the owner.",
+      "where": "On the agent's Setup tab, under Who can message it: Role and Can on each person's row, and This computer is under the list.",
+      "how": [
+        "On the agent's Setup tab, open Who can message it.",
+        "On a person's row, pick Teammate, Admin or Owner under Role. For a teammate, pick what they can do under Can.",
+        "Picking Owner asks first, then hands the agent over.",
+        "Under the list, pick who This computer is, so what they type there is from them and they see their own email there."
+      ],
+      "limits": [
+        "The old owner stays on as an admin, so nobody loses access.",
+        "Routines report to the new owner only after they send the agent a private message. Until then, reports land in Archie's own chat on the computer.",
+        "A teammate can't make themselves an admin. Only an admin or the owner can.",
+        "An admin never reads the owner's own mail. An account marked as somebody's stays theirs.",
+        "Whoever sits at the computer can change people there, whatever their role, so a mistake can always be undone.",
+        "Both people are told about a hand-over in their own chat when Archie has one on record for them. Otherwise they see it on the list.",
+        "Nobody has used it on a real agent yet."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.4, the same choices are on a person under More, then Teammates. An admin gets the same page on their own phone, under Settings.",
+      "editions": "teams",
+      "released": "0.3.10",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "🚧 On Archie for Teams, people have roles: the owner, admins, and teammates, and the owner can be handed over: BUILT 2026-10-14, RELEASED in 0.3.10, 2026-10-17"
+      ],
+      "wording": "On Archie for Teams, everybody on an agent has a role. The owner is who the agent works for, and its routines report to them. An admin can change the agent and decide who is on it, the same as the owner. A teammate uses it, and you choose what each teammate can do. Whoever set it up can make the right person the owner, and the old owner stays on as an admin. You also choose who sits at the computer Archie runs on, so what they type there is from them and they see their own email there.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "add-people-from-your-phone",
+      "name": "Add and edit people from your phone",
+      "area": "teams",
+      "summary": "In Archie Mobile, under More, then Teammates, you can add someone, edit their name and contact details, take them off, or stop a waiting invite. You copy or share the invite message from your phone.",
+      "where": "In Archie Mobile, under More, then Teammates.",
+      "how": [
+        "In Archie Mobile, open More, then Teammates.",
+        "Press Add someone, or open a person to edit or remove them.",
+        "Press Copy message or Share message, and send it to them however you like."
+      ],
+      "limits": [
+        "Only the owner's phone can, and an admin's own phone. A teammate who is not an admin can't.",
+        "Archie doesn't send the invite. You choose where to paste or share the message.",
+        "An invite makes nobody the owner, and it doesn't lift your plan's limit on people.",
+        "The computer running Archie does the work, so it has to be awake, connected to the internet, and running Archie.",
+        "Reset access stays at the computer."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.3. The Android download does not have it yet, so adding people there happens at the computer.",
+      "editions": "teams",
+      "released": "0.3.9",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ Adding and editing people from the owner's phone: BUILT October 14, 2026, RELEASED in 0.3.9, 2026-10-14, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
+      ],
+      "wording": "In Archie Mobile, open your agent's More tab, then Teammates. Add someone, edit their name and contact details, remove them, or stop a waiting invite. Copy or share the invite message from your phone.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "teammates-set-their-own-reminders",
+      "name": "Teammates set and cancel reminders for themselves",
+      "area": "teams",
+      "summary": "A teammate can ask your agent to remind them of something, and it reminds them in the chat they asked in, never on your to-do list. They can cancel their own reminders and nobody else's.",
+      "where": "In the chat with your agent. Your Calendar tab says whose each reminder is, such as \"For Dana Miller, who set it\", and so does Jobs.",
+      "how": [
+        "A teammate asks your agent, such as \"Remind me at 3 to call Ellen.\"",
+        "To remind a teammate yourself, name them, such as \"Remind Todd at 3 to call Ellen.\""
+      ],
+      "limits": [
+        "Everyone on the agent can read every reminder, and the list says whose each one is.",
+        "A teammate's reminder arrives as a message in the chat they set it in, with no notification from Archie.",
+        "You can cancel any reminder, and delete any on the Calendar.",
+        "A reminder for someone who hasn't joined yet is held for them. Until they join and write to your agent, it comes to you.",
+        "Your agent refuses a name nobody on the agent goes by, and offers to set it for you instead.",
+        "To-dos stay on your list, and there is no giving one to a teammate."
+      ],
+      "phone": "On an iPhone, Archie Mobile's Calendar says whose each reminder is.",
+      "editions": "teams",
+      "released": "0.3.8",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ On Archie for Teams, the people you add are teammates, and each can set and cancel their own reminders: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "On Archie for Teams the people you add are teammates. A teammate can ask the agent to remind them of something, and it reminds them in the chat they asked in, never on your to-do list. They can cancel their own reminders and nobody else's, and your Calendar and Jobs say whose each reminder is.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "your-team-this-week",
+      "name": "Your team this week",
+      "area": "teams",
+      "summary": "Your agent's Dashboard lists your team: what each person does, how many messages they sent the agent this week and how many jobs those started, and when they last wrote. Press a name to read what they said.",
+      "where": "On the agent's Dashboard, in Your team this week.",
+      "how": [
+        "Open your agent's Dashboard and find Your team this week.",
+        "Press a name to read that person's conversation with your agent.",
+        "Or ask your agent what your team has been doing, or what one of them asked today, and it tells you, with the time of each message."
+      ],
+      "limits": [
+        "The card is on your computer and your phone, and teammates don't see it.",
+        "This week means the last seven days. A message is any message a teammate sent your agent, a thank-you included, and one sent while this computer was asleep is not counted.",
+        "A job is work their message started that changed something, as the Jobs tab lists it.",
+        "Your agent quotes what teammates asked to you alone. A teammate asking hears only about their own jobs.",
+        "On the phone the counts can be up to ten minutes behind."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.3, the Dashboard shows the same card with counts and times only. What anyone said is read on the computer.",
+      "editions": "teams",
+      "released": "0.3.8",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ On Archie for Teams, the owner sees what each teammate did this week, on the computer and the phone, and the agent can say it: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11, the Archie Mobile half on iPhone in 1.3 (not on Android yet)"
+      ],
+      "wording": "On Archie for Teams, your agent's Dashboard lists your team: what each person does, how many messages they sent the agent this week and how many jobs those started, and when they last wrote. Press a name to read what they said. Archie Mobile shows the same counts. Ask the agent what your team has been doing and it tells you the same.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "what-a-teammate-can-see",
+      "name": "See what a teammate can see",
+      "area": "teams",
+      "summary": "Press What Dana can see beside anyone you added. Archie lists the mailboxes, calendars and apps your agent can use for them, what it keeps that they can ask about, and what they can change.",
+      "where": "On the agent's Setup tab, under Who can message it, on each teammate's row. Also on each row of Your team this week on the Dashboard, and in Add someone before you add them.",
+      "how": [
+        "On the agent's Setup tab, under Who can message it, press What Dana can see on Dana's row.",
+        "Before you add someone, press What they'll see in Add someone."
+      ],
+      "limits": [
+        "It shows what the rules allow and changes nothing. The settings are Whose is this? on the Connections tab, the Knowledge tab, and What teammates can do.",
+        "Your agent's Notes go with every message a teammate sends, and your agent can repeat them. About you stays with your own messages.",
+        "Can use means the rules let your agent use it for them. Whether it does depends on what they ask.",
+        "Your own signed-in browser window, your apps, the texts you sent, and your lights stay yours on every setting."
+      ],
+      "phone": "On an iPhone, from Archie Mobile 1.3, under More, then Teammates.",
+      "editions": "teams",
+      "released": "0.3.8",
+      "claimable": false,
+      "hold": "A privacy or safety feature, so the docs wait for its wording to be approved (Jett, October 27, 2026). Proposed wording is still Jett's to approve.",
+      "unwatched": false,
+      "trust": [
+        "✅ On Archie for Teams, the owner can see what each teammate can see and change: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "On Archie for Teams, press What Dana can see beside anyone you added. Archie lists the mailboxes, calendars and apps your agent can use for them, what it keeps that they can ask about, what they can change, and what stays yours on every setting, worked out from the same rules your agent follows. Archie Mobile shows the same for everyone on the team.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
+      "id": "a-teammates-own-entries",
+      "name": "A teammate asking about the work gets their own entries",
+      "area": "teams",
+      "summary": "When a teammate asks your agent about a list that says whose each entry is, they hear about their own entries and the ones with nobody named, and an entry they add is theirs. You still see every entry.",
+      "where": "On a list with a column named Agent, Assigned to, Assignee, Driver, Tech, Technician or Owner. To narrow one teammate further, use Sees under their role on the Setup tab, under Who can message it.",
+      "how": [
+        "Give the list a column that says whose each entry is, such as Assigned to.",
+        "To have a teammate see only entries with their name, set Sees to Only rows with their name under their role."
+      ],
+      "limits": [
+        "This keeps a teammate's answers to their own work. Documents, shared files and what your agent remembers are not narrowed, and every teammate reads a list with no such column in full.",
+        "In a group chat where several people speak at once, your agent can't tell whose turn it is and sees every entry.",
+        "Names are matched as written, so \"D. Miller\" in the column names nobody on the team.",
+        "An entry with your name on it is yours, so a teammate doesn't see it. You and admins see every entry, whatever Sees says.",
+        "Only the real estate setup gets the column by itself: People, Deals and Listings come with an Agent column."
+      ],
+      "phone": "A teammate on Archie Mobile sees the same entries on their phone. On an iPhone, from Archie Mobile 1.4, you can set Sees for a person under More, then Teammates.",
+      "editions": "teams",
+      "released": "0.3.8",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ On Archie for Teams, a teammate asking about the work gets their own rows and the ones nobody is named on: BUILT 2026-10-10, RELEASED in 0.3.8, 2026-10-11"
+      ],
+      "wording": "On Archie for Teams, when a teammate asks your agent about a list that says whose each entry is, they hear about their own entries and the ones with nobody named, and an entry they add is theirs. You still see every entry. Set up for real estate, People, Deals and Listings come with an Agent column for this.",
+      "guide": "",
+      "wording_pending": true
+    },
+    {
       "id": "teammate-websites",
       "name": "Websites for a teammate",
       "area": "teams",
@@ -5838,6 +6733,41 @@
         "✅ Archie keeps running when its window is closed, and opens at login: BUILT 2026-10-12 (Archie `1436d15a`), RELEASED in 0.3.9, 2026-10-14"
       ],
       "wording": "On a Mac, Archie also has an icon in the menu bar at the top of the screen that opens it or quits it.",
+      "guide": ""
+    },
+    {
+      "id": "bring-an-agent-from-openclaw",
+      "name": "Bring an agent over from OpenClaw",
+      "area": "app",
+      "summary": "Archie reads your OpenClaw agent's folder on this computer and shows you what it would make before it makes anything. Its personality, what it knows about you, its notes, its skills and its scheduled jobs become the new agent's.",
+      "where": "Press New agent in the sidebar, then Bring one over from OpenClaw under Where should it start?",
+      "how": [
+        "Press New agent in the sidebar, then Bring one over from OpenClaw.",
+        "Press See what is in it, or Choose the folder if Archie did not find it.",
+        "Read Here is what Archie will make, with what stays behind and why.",
+        "Press the button at the bottom that makes the agent."
+      ],
+      "limits": [
+        "Bringing it over sends nothing anywhere and changes nothing of OpenClaw's, and none of OpenClaw's keys or passwords come over.",
+        "Notes and skills come over word for word, so anything you wrote into them comes too.",
+        "A skill that needs a program stays behind, and so does a job that runs one or whose schedule a routine can't say exactly. OpenClaw's chat apps, tools and plugins stay behind too.",
+        "Its newest notes go into memory and the rest into older memory, which your agent looks at only when what you say matches a note.",
+        "On the free version, which has one agent, it can take the place of an agent nobody has used yet, and says so first.",
+        "Routines run on your AI account, so a job that ran every five minutes in OpenClaw does the same here. The review points out anything hourly or more often.",
+        "Once the agent works, what it reads goes to your AI company, like any agent.",
+        "It reads OpenClaw only, and nothing goes back to OpenClaw from Archie.",
+        "The step that makes the agent has been run on sample folders only."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.3.1",
+      "claimable": true,
+      "hold": "",
+      "unwatched": true,
+      "trust": [
+        "✅ Bring an agent over from OpenClaw, scheduled jobs included: SHIPPED in Archie 0.3.1 (2026-09-29; built 2026-09-28 as 63fc6731..2aeeae0a, 8d2085ef, and 5db10191..89070c28 for older memory, shared skills and the free version)"
+      ],
+      "wording": "Bring an agent over from OpenClaw. Archie reads its folder on your computer and shows you what it would make before it makes anything. Its personality, what it knows about you, its notes, its skills, the OpenClaw skills shared by all its agents that you keep ticked, and its scheduled jobs become the new agent's. Its newest notes go into its memory and the rest into older memory, which it checks when you mention something in them, and anything that cannot come over is listed with the reason. Bringing it over sends nothing anywhere and changes nothing of OpenClaw's, and none of OpenClaw's keys or passwords come over. On the free version, which has one agent, it can take the place of an agent nobody has used yet, and says so first.",
       "guide": ""
     },
     {

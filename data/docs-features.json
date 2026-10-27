@@ -6227,6 +6227,36 @@
       "near": "The spend meter is local, and it is an estimate"
     },
     {
+      "id": "archie-and-archie-for-teams-on-one-computer",
+      "name": "Archie and Archie for Teams on one computer",
+      "area": "teams",
+      "summary": "Archie for Teams installs beside Archie as its own app, with its own data and its own keys, so one computer can run both.",
+      "where": "Each is its own app on this computer: Archie, and Archie for Teams.",
+      "how": [
+        "Install Archie for Teams. Archie stays as it is, with its own agents."
+      ],
+      "limits": [
+        "The two don't share agents, lists or connected accounts. To bring your agents across, save a backup in Archie and open it in Archie for Teams.",
+        "Keys and sign-ins are kept apart too, so you connect your accounts in each one."
+      ],
+      "phone": "",
+      "editions": "both",
+      "released": "0.2.5",
+      "claimable": true,
+      "hold": "",
+      "unwatched": false,
+      "trust": [
+        "✅ The two editions are two apps on one computer: VERIFIED IN THE SHIPPED BINARIES 2026-09-16"
+      ],
+      "wording": "Archie for Teams installs beside Archie as its own app, with its own data and its own keys. One computer can run both.",
+      "guide": "",
+      "code": [
+        "src-tauri/tauri.conf.json",
+        "src-tauri/tauri.business.conf.json",
+        "src-tauri/tests/editions.rs"
+      ]
+    },
+    {
       "id": "move-agents-to-teams",
       "name": "Move your agents into Archie for Teams",
       "area": "teams",

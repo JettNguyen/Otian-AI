@@ -10743,6 +10743,31 @@ the list instead, as the `dd17497b` amendment says. Tests:
 - ⚠️ **The clause names what the list can say, not what every morning says.** Each part comes only
   from a list the owner keeps, and only when it has something new, as the `823a77cc` amendment says.
 
+*Amended October 27, 2026 (Archie `086f372b` and `5ba8131a`, Archie Mobile `f13adad`, in no release
+yet): the list starts with what is ready for one press.*
+
+**Proposed wording, Jett's to approve:** "Your morning list starts with what is ready for one press:
+replies your agent already drafted for your email and texts, each with Send, Fix and Skip, what is
+due on your Waiting On list, and tomorrow's appointments with your last note on that person and
+anything they owe you."
+
+**Why it's true:** `crates/archie-runtime/src/morning.rs` puts the part headed "Ready for your press"
+first, under the day, from what `crates/archie-runtime/src/gateway/tray/mod.rs` gathers when the list
+is built. An email draft on it is not listed again under Email waiting on you, and a Waiting On ask on
+it is not said again under Owed to you. Everything else about it is in the entry headed "Your morning
+list starts with what is ready for one press, and once you say yes your agent writes drafts for it
+overnight". Tests: `a_watch_draft_waits_on_the_tray_and_only_send_sends_it`,
+`each_item_is_on_one_tray_only`.
+
+- ⛔ **The October 26 boundary's "cards are swept a day after they are made" is now true only of cards
+  not on the list.** A draft on it can be pressed until the next morning's list, three days at the
+  most.
+- ⚠️ **"It is built from your lists, uses none of your AI" is still true of the list,** and the offer
+  still says it. The drafts on it were written by the email and text watches, or overnight once the
+  owner said yes, with the owner's own AI account. Never say the drafts were made without AI.
+- ⚠️ **On the free credits or the plan with the AI included** the part holds Waiting On and tomorrow's
+  appointments only, since the mail and the texts are not read there.
+
 ### 🚧 The morning list and the agent say where Bookings and your calendar differ, decided without AI: BUILT 2026-10-18 (Archie `49965c01`, merged as `4ac7579f`), RELEASED in 0.3.11, 2026-10-19
 
 **Released in 0.3.11 on October 19, 2026, and named in its notes.** Checked October 27, 2026:
@@ -17366,6 +17391,190 @@ are downloaded."
   iPhone.** Archie sends the format Messages plays; nobody has pressed play on one yet.
 - ⚠️ **Once the voices are downloaded.** Until then, and for a long answer, the answer comes in
   writing.
+
+### 🚧 Your morning list starts with what is ready for one press, and once you say yes your agent writes drafts for it overnight: BUILT 2026-10-27, in no release yet, never run on a real inbox, a real Mac's Messages or a real night
+
+*Built October 27, 2026 (Archie `086f372b` and `5ba8131a`; Archie Mobile `f13adad`; in no release
+yet).*
+
+**Proposed wording, Jett's to approve:** "Your morning list starts with what is ready for one press.
+Replies your agent already drafted for your email and texts come first, each with Send, Fix and
+Skip. Under them: what is due on your Waiting On list, and tomorrow's appointments with your last
+note on that person and anything they owe you. If you say yes, your agent also writes up to five
+drafts a night for it, using your own AI account: a follow-up for what is due on Waiting On, and a
+reply to a text from someone new. Nothing is sent until you press Send."
+
+As Archie says it, in the Archie window, for an owner with Email Manager, Text Replies and a Waiting
+On list:
+
+> **Tuesday, October 27**
+>
+> **Ready for your press**
+> **1.** Your reply to Dana Miller about "Deck estimate", by email:
+> > Hi Dana,
+> >
+> > Thursday at 9 works. I will bring the composite samples.
+>
+> **2.** Your reply to Jake Turner, by text, answering "Hi, is the 20 foot trailer still free this
+> Saturday?":
+> > Yes, it is free Saturday. $85 for the day, pick up after 8.
+>
+> - Waiting on Ellen Park for $900 of $1,800 about "the lawn mower": due October 1, 26 days late.
+> - Waiting on Mike Brooks about "the contract": asked October 22, 5 days with no answer.
+> - Tomorrow, 2:00pm to 3:00pm: Site visit with Todd Baker. Your last note on Todd Baker: wants the
+>   gate on the side yard. Todd Baker owes you $340.
+
+with the rest of the list under it, and Send 1, Fix 1, Skip 1, Send 2, Fix 2, Skip 2 and Stop the
+morning list under that. In a chat app with no buttons, the list ends "Reply with one of these
+words: Send 1, Fix 1, Skip 1, Send 2, Fix 2, Skip 2, or Stop the morning list." On a morning when the
+computer slept and nothing is ready, the part says:
+
+> - The computer running Archie was asleep from 11:02pm to 6:48am, so nothing was drafted for you
+>   overnight. What came in then is being read now. To find it ready here in the morning, leave that
+>   computer plugged in and awake overnight.
+
+The offer, made once, under the first morning list that a night would have written something for:
+
+> **Jake Turner texted you and is waiting on an answer.** They are not in your contacts.
+>
+> I can write a draft for something like this overnight, so it is waiting on your morning list for
+> one press. Each night I would write at most five, using your own AI account: a follow-up for what
+> is due on Waiting On, and a reply to a text from someone new. Nothing is sent until you press Send.
+> Want me to?
+
+with Yes, write them overnight and No thanks under it. Either press changes the offer in place:
+"Turned on. Each night I write at most five drafts for your morning list, and nothing goes until you
+press Send. To stop, open this agent's Routines tab in Archie or Archie Mobile, and under Morning
+list, turn off Write drafts overnight." (or "Left off. To turn it on later, ..., turn on Write drafts
+overnight.").
+
+**Why it's true:**
+
+- **What is ready, read in code, for everyone whose morning list is on.** `gather` in
+  `crates/archie-runtime/src/gateway/tray/mod.rs` reads it when the list is built (`build` in
+  `crates/archie-runtime/src/gateway/morning_list.rs`), and `crates/archie-runtime/src/morning.rs`
+  puts it first under the day, headed "Ready for your press" (`TRAY_HEAD`), only when it has
+  something in it. The drafts are the reply cards Email Manager and Text Replies wrote that are still
+  waiting on Send in the owner's chat (`tray_drafts` in
+  `crates/archie-runtime/src/email/replies/tray.rs` and
+  `crates/archie-runtime/src/texts/replies/tray.rs`), oldest first, five at most, each numbered with
+  its words under it. An email draft on it is not listed again under Email waiting on you. Waiting
+  On's asks are due by that add-on's own rules (`waiting_due`): an answer asked for three days ago or
+  more, or money past its Due on, money first. Tomorrow's appointments are timed entries on the
+  calendar the list already reads, with somebody on the owner's lists whose name the entry or a
+  guest's name holds whole, with that record's last note and anything they owe (`tomorrow`). Eight
+  lines at most, with the rest counted and said on the next list. No AI is asked anything for it.
+  Tests: `a_watch_draft_waits_on_the_tray_and_only_send_sends_it`,
+  `waiting_on_lists_what_is_due_money_first`,
+  `tomorrows_appointment_carries_the_last_note_and_the_balance`.
+- **Send, Fix and Skip are the card's own presses.** Each button carries its card's own press
+  (`Lane::callback`), so the card's lane answers it exactly as it answers a press on the card, with
+  every check that press passes. Send sends; Fix opens the draft to change, in the card's edit sheet
+  in Archie and Archie Mobile and, in a chat app, as the card posted at the bottom of the chat open to
+  change; Skip sets it aside the way Dismiss does. Building and sending the list send nothing. After a
+  press the list is drawn again with that press held down, and a second press says what already
+  happened ("That one was already sent."). Only the owner can press them; anybody else is told it is
+  the owner's to answer, and nothing is sent. Tests:
+  `a_watch_draft_waits_on_the_tray_and_only_send_sends_it`,
+  `skip_sets_one_draft_aside_and_leaves_the_rest`,
+  `fix_changes_the_draft_and_the_tray_shows_the_new_words`,
+  `somebody_else_pressing_the_tray_sends_nothing`.
+- **Each item once, and only once the list went.** What the part said is written down with the rest
+  of the list's (`Named`, by `key_of`) only once the list reached the owner (`send_morning_list` in
+  `crates/archie-runtime/src/gateway/worker.rs`, then `went_out` in `tray/mod.rs`), so a list that
+  failed to send, was held by quiet hours, or was skipped leaves its items for the next one. A
+  Waiting On ask on it is not said again under Owed to you. Tests: `each_item_is_on_one_tray_only`,
+  `a_morning_list_that_failed_to_send_leaves_its_tray_for_the_next`.
+- **Its buttons outlive the night.** A card is put away a day after it was written (`CARD_TTL_MS` in
+  `crates/archie-runtime/src/lib.rs`). One on the list is kept until the next morning's list takes
+  its place, three days at the most (`held` and `LIFE_MS` in `tray/mod.rs`, kept by both lanes' sweeps
+  and, for the buttons in Archie and Archie Mobile, by `keeps_card` and `lasts` in
+  `src-tauri/src/inapp.rs`). The next list takes the old one's buttons off, and a press on an older
+  list sends nothing and says so: "That was on an earlier morning list, so nothing was sent and its
+  buttons are off now. Anything still waiting is on your newest morning list, or ask me here what is
+  waiting on you." Test: `a_tray_card_outlives_its_day_and_one_past_that_says_so`.
+- **A night the computer slept through says so.** On a morning with no draft ready, on an agent where
+  something writes drafts while nobody is looking (Email Manager, Text Replies, or the overnight
+  drafts), a computer asleep or off for two hours or more since 10:00pm the evening before gets the
+  line above, which opens with the sentence the message on waking up uses (`away_overnight` in
+  `crates/archie-runtime/src/gateway/slept_through.rs`). That line alone never sends a list. Test:
+  `a_night_the_computer_slept_through_says_so`.
+- **The overnight drafts write only what code picked.** `crates/archie-runtime/src/gateway/tray/night.rs`.
+  Code picks (`picks`): a text from somebody new (not in the owner's contacts, in a conversation of
+  two, as the watches' catches judge it) that Text Replies marked as wanting an answer and has no
+  reply written, then Waiting On's due asks, money first, each only where Archie already keeps that
+  person's email address (in the name on Waiting On, or the watch Waiting On keeps for the ask:
+  `address_for` in `crates/archie-runtime/src/email/watches.rs`) and no draft to that address is
+  waiting. Nothing a night already wrote for is picked again. The AI only writes the words: a
+  follow-up, in the tone Waiting On's own rule 9 sets for how late it is, never with a threat,
+  interest, a late fee or legal steps, finished with the owner's sign-off and signature, written the
+  way the owner writes when Write like me is set up and following what they typed into Email Manager;
+  and a reply, written the way Text Replies writes one. At most five a night (`MOST_DRAFTS`), once a
+  night, between 1:00am and an hour before the list's time (`tick`), and none at the monthly AI limit
+  the owner set (`turn::room_under_the_ceiling`). A follow-up is a new card on the owner's own mailbox
+  that can send, which nobody sees until the list shows it; a reply is written onto the text's own
+  card. Both wait on Send. Tests: `the_night_writes_only_what_code_picked_at_most_five_and_only_once_on`,
+  `a_night_at_the_owners_monthly_limit_writes_nothing`.
+- **Off until the owner says yes, and offered once.** `offer_under_the_list` makes the offer under the
+  first morning list a night would have written something for, naming one example, with Yes and No
+  thanks. It is written down as made before it is sent, and taken back if the send fails, so a later
+  list makes it. It is never made on Otian's AI, once the owner answered it or used the switch,
+  twice, in a chat app that draws no buttons, or while what is said unprompted is held. Only the owner
+  answers it, and the answer is written in code (`handle_offer`). Test:
+  `the_night_is_offered_once_and_yes_is_the_switch`.
+- **One switch, in the same words on both screens.** Write drafts overnight, on the Routines tab under
+  Morning list, on the computer (`src/app/routines.tsx`, through `morning_overnight_set` in
+  `src-tauri/src/commands/routine.rs`) and in Archie Mobile (`src/screens/Routines.tsx` there,
+  through the phone op `morning_overnight_on` in `src-tauri/src/phone.rs`). The line under it and the
+  sentence after a change come from the computer (`OVERNIGHT_LINE`, `OVERNIGHT_ON_SAID` and
+  `OVERNIGHT_OFF_SAID` in `gateway/morning_list.rs`): "Each night your agent writes up to five drafts
+  for the top of this list: a follow-up for anything due on your Waiting On list, and a reply to a
+  text from someone new. That part uses your own AI account, and nothing is sent until you press
+  Send." It shows only with the morning list on and an AI account of the owner's own (`shown_for`).
+- **Only on the owner's own AI account.** Where the AI runs through Otian (`runs_through_otian` in
+  `crates/archie-runtime/src/email/poller.rs`), the mail and the texts are not read, so the part holds
+  no drafts, and the overnight drafts are never run, offered or shown. Turning them on from a screen
+  without an AI account of the owner's own is refused with where to connect one. Tests:
+  `on_otians_ai_the_tray_holds_no_drafts_and_offers_no_night`, `the_night_never_runs_on_otians_ai`.
+- **On Archie for Teams.** The owner's list holds drafts in the owner's own chat from a mailbox no
+  teammate was given; a teammate's draft is posted to the teammate's own chat and is never on the
+  owner's list. Texts are the owner's on any agent, and the lists are read as the owner reads them.
+  Test: `a_teammates_draft_is_never_on_the_owners_tray`.
+- **In a chat app with no buttons**, every draft is numbered and the list ends with the words to
+  type, which press the list as the buttons do (`try_consume_words`); a word with no number is still
+  the card's. Test: `on_a_chat_app_with_no_buttons_the_typed_words_press_the_tray`.
+- **Dates** come from `crates/archie-runtime/src/clock.rs`.
+
+**The boundaries.**
+
+- ⛔ **Nothing is ever sent without a press.** Never "it answers for you", "it follows up for you",
+  "it chases your invoices" or "it replies while you sleep". A night writes drafts, and the owner
+  presses Send.
+- ⛔ **The overnight drafts are off until the owner says yes.** Never "it writes your replies
+  overnight" without "once you turn it on".
+- ⛔ **Only on an AI account of the owner's own.** On the free credits or the plan with the AI
+  included, the part has no drafts and there are no overnight drafts, and nothing may suggest either
+  exists there. What is due on Waiting On and tomorrow's appointments still come there.
+- ⛔ **At most five a night, and only two kinds**: a follow-up for what is due on Waiting On, and a
+  reply to a text from someone new. Never "it drafts replies to all your mail overnight".
+- ⛔ **A follow-up only where Archie already has the person's email address.** It never guesses one,
+  so an ask with no address kept gets no follow-up, and is still listed as due.
+- ⛔ **It needs the computer on overnight.** Drafts are written on the computer running Archie, between
+  1:00am and an hour before the list, so a computer asleep or off then has none, and the list says
+  so. Never "ready for you every morning".
+- ⚠️ **Someone new has a narrow meaning:** not in this Mac's contacts, in a conversation of two, and
+  marked by Text Replies as wanting an answer.
+- ⚠️ **Buttons work until the next morning's list**, three days at the most. After that a press sends
+  nothing and says so.
+- ⚠️ **Tomorrow's appointments are named only with somebody on the owner's lists** whose record has a
+  note or a balance. Everything else on tomorrow's calendar is left to tomorrow's own list.
+- ⚠️ **The offer is made only where the chat shows buttons.** On Signal, iMessage or Matrix it is not
+  made, and the switch is the way to turn it on.
+- ⚠️ **At the monthly AI limit the owner set**, nothing is written overnight until the month turns.
+- ⚠️ **On Archie for Teams** the part goes only to the owner's chat, with the owner's own drafts.
+- ⚠️ **The list itself still asks no AI to make it.** Say that much and stop. The drafts on it were
+  written by the email and text watches, or overnight once the owner said yes, with the owner's own
+  AI account.
 
 ## Known Weaknesses — disclose, don't hide
 

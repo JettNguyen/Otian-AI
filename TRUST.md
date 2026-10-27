@@ -5614,6 +5614,51 @@ puts it on a card to add with one press instead of adding it."
 - **Why it's true:** `crates/archie-runtime/src/month_means.rs` keeps the answer in a file beside the agent's memory, and `which_length` in `gateway/turn.rs` reads it before it holds a write; the writes beside a told month are made again at once (`1d842056`).
 - ⚠️ **The owner's answer only, per agent.** A teammate cannot set it. "Monday" said on a Monday is still asked every time. An agent with no memory folder never keeps an answer.
 
+*Amended October 21, 2026 (Archie `87f5dcca` and `a7968927`, RELEASED in 0.3.12 on a Mac, October
+26, 2026, with Windows still on 0.3.11).* On a new entry, a day nothing gave is left blank and the
+reply says so (since October 17), except in a column the list will not save blank, such as an
+expense's Date: there the day is written and the reply and the line under it say it is the agent's
+reading (`must_have_a_day` in `gateway/turn.rs`). Until then Ellen's paint could not be logged at
+all: the day was taken out, the list refused the entry for having no Date, and the retry failed the
+same way until the turn gave up. A month and day said with no year now counts as given in any year
+and in any capitals ("march 3", for a birthday kept with its year unknown), and a year that was
+written is that year (`names_day` and `month_days` in `schedule.rs`). ⛔ Still never "your agent
+never guesses a date". Tests: `a_day_the_list_needs_is_kept_as_a_reading` in `tests/pipeline.rs`,
+and `a_month_and_day_said_any_way_names_that_day_in_any_year_unless_one_is_written` in
+`schedule.rs`.
+
+*Amended October 21, 2026 (Archie `af5e6ba0`, `3dce6857`, `3e5d9511` and `632c70ad`, RELEASED in
+0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11):* what the guards held that was
+worked out rather than guessed is now written without asking. A due date moved on by the entry's own
+repeat column (a Frequency, Every, How often or Cadence such as "Monthly", "3 months" or "every 2
+weeks"): one period on from its own date, to the first one after today, or one period on from
+another date on the entry such as Last done (`rolled_forward`, with `every_said` in `schedule.rs`).
+Today, on an entry already there, in a column for when something happened (Last done, Last contact,
+Last moved, Applied on, Done on), when the message reports something rather than asks and names no
+earlier day (`happened` and `reports_it`). Today, on a new entry, in a column for the day the entry
+was made (Introduced, Added, Created, Logged; `made_on`). A day of the month said bare ("monthly,
+15th", `ordinal_days`). A message saying the entry itself was canceled, stopped or ended, by its
+name, clears its dates. And an answer to a message that asked something empties a column holding a
+question (Spending Record's Still to ask), with the Ask on day beside it; any other column still
+waits.
+
+Until then the guards held the main move of nine store add-ons: Bills & Subscriptions rolling a bill
+forward (its rule 3), Home Maintenance and Plant & Pet Care marking a job done, and Habit Tracker,
+Learning Coach, Stay in Touch and Price Watch writing today (each since 0.3.9), Spending Record
+taking an answer to its evening Purchase Check, and Word of the Day dating a word (both since
+0.3.11). Rachel, on the simulated round on the models Archie ships with, saw her three autopay bills
+held three times each until the add-on reported itself not working. A new entry still takes no day
+from a report ("add Dana Price, she's a new lead" leaves Last contact blank), a due date set to
+today is still asked about, and so is a question ("whats my next follow up"). ⛔ Never "your agent
+never changes a date on its own": a bill's date rolls forward by its own frequency, and a job marked
+done is dated today. Tests:
+`a_bill_rolls_forward_by_its_own_frequency_and_a_cancel_clears_its_date`,
+`a_job_marked_done_is_dated_today_and_its_next_one_counted_from_it` and
+`an_answered_question_is_cleared_with_its_day_to_ask` in `gateway/turn.rs`;
+`a_bare_ordinal_names_its_day_of_the_month`, `a_repeat_column_gives_one_period` and
+`an_earlier_day_is_one_that_has_gone_by` in `schedule.rs`. On Windows, which is still on 0.3.11, the
+guards still hold them.
+
 ### ✅ When your agent starts reading your mail, it says so once, with Stop watching: BUILT 2026-10-12, RELEASED in 0.3.9, 2026-10-14; amended 2026-10-17 to ask first, RELEASED in 0.3.11, 2026-10-19
 
 *Archie `61b8efde`, on the `journey-fixes` branch, in no release yet. Nothing below may be said on a
@@ -6321,6 +6366,15 @@ it in the same reply."
 - **When.** An ordinary reply (not an error) on any turn but a watcher's wake: a person's message,
   the owner's or a teammate's, and also the turn that picks up what was kept while the AI was out,
   and an approval from the Jobs tab. Not a routine, which does not run through the chat worker.
+- *Amended October 21, 2026 (Archie `8db7e796`, RELEASED in 0.3.12 on a Mac, October 26, 2026, with
+  Windows still on 0.3.11).* A reply to a message that asks where things are kept ("where does this
+  save", "where is all this stored") is never corrected: its sentences about what is saved where are
+  the answer to the question, not a claim that something was just saved
+  (`asks_where_things_are_kept` in `crates/archie-runtime/src/gateway/claimed.rs`). Donna, on a
+  simulated team, asked "where does this save"; the answer said everything is saved on the computer
+  Ray runs Archie on, in the team's lists, and it was corrected with a Save it button for nothing.
+  The same sentence after "add the Hendersons" is still corrected. Test:
+  `a_save_is_claimed_only_by_a_sentence_saying_it_happened`.
 - **Where.** The line is part of the reply's words, so it goes wherever the reply goes. Save it is
   drawn wherever buttons are: Archie's window, Archie Mobile (like any button under a reply),
   Telegram, Slack, and Discord.
@@ -6469,6 +6523,14 @@ them as somebody new."
   named to them only as "a teammate's entry, with the same phone" (or email), with no id, and never
   on a shared name word alone (`do_create_scoped`); the owner hears whose. Test:
   `a_teammates_notes_say_what_was_left_out_and_name_no_ones_else`.
+- *Amended October 21, 2026 (Archie `dfa1556c`, RELEASED in 0.3.12 on a Mac, October 26, 2026, with
+  Windows still on 0.3.11).* On a list that needs a day on every entry (Expenses, a workout log, a
+  journal), another entry on that same list with the same name on a different day is not named,
+  because a second visit to the same store is what the list holds. The same name on the same day
+  still is, since that is how a receipt goes in twice, and a list that keeps no day is read as
+  before. Ellen was asked whether $212.40 at Sherwin-Williams was one of her three earlier
+  Sherwin-Williams receipts. Test: `a_log_does_not_ask_about_the_same_store_on_another_day` in
+  `crates/archie-runtime/src/records.rs`.
 - **Amended October 11, 2026: empty lists** (Archie `387c76c0`, in no release yet). When People and
   Deals both have nobody on them, the note says the lists are empty, in place of five groups of
   none, and the agent is told to say it is not from their records and to offer to add what goes on
@@ -9457,7 +9519,10 @@ program.
 **Why it's true (reworded 2026-08-21, and again at the release that carries Python):** No shell
 and no `dlopen`/`libloading` in `crates/` or `src-tauri/`. One WebAssembly runtime, Pyodide, runs the
 Python an agent writes to work something out, in a worker with no network and no way into the app
-(`src-tauri/src/python.rs`), and that worker allows `eval` for Pyodide's own JavaScript. An add-on's
+(`src-tauri/src/python.rs`), and that worker allows WebAssembly and nothing else compiled at run
+time (`'wasm-unsafe-eval'` without `'unsafe-eval'`, `WORKER_CSP` in `src-tauri/src/python.rs`).
+*(Corrected October 27, 2026: this said the worker allows `eval` for Pyodide's own JavaScript.
+The October 21 review took that out, before any release carried Python.)* An add-on's
 text can ask the agent to work something out, as the owner can, and the code then runs inside the
 same fence. Process spawning does exist, and the old "no
 `std::process::Command` anywhere" claim was flatly untrue: the crates spawn our own
@@ -9869,6 +9934,12 @@ Computer control" everywhere it used to say "under Websites", changed the same d
   role and accessible name, never selectors and never coordinates, learned per person and never
   shipped inside an add-on. **Only clicks are recorded, never typing**, because typed values are
   often sensitive and a route file must never hold them.
+- *Amended October 27, 2026 (Archie `553cb455`, RELEASED in 0.3.12 on a Mac, October 26, 2026, with
+  Windows still on 0.3.11).* A remembered path still holds only clicks, never typing. A task the
+  owner showed (Show me once) also keeps the names of the boxes they typed in, so the agent knows
+  what to ask for; never what was typed, and nothing at all of a password or card box. See the entry
+  headed "Show your agent a website task once, and next time it does the task the way you showed
+  it", which is 🚧.
 
 **Required clauses — do not drop them:**
 - ⚠️ **Say it is off until they turn it on.** Anything else describes a computer the reader does not
@@ -13681,7 +13752,7 @@ add: "A reply with a blank still in it won't send until you fill it in."
 | **"Your agent does the work. You say the word."** | ✅ **True now, and only in this scope: a reply that reaches somebody else.** Verified 2026-09-21. No tool can send a text (`texts/replies/tests.rs`, `no_tool_can_send_a_text`); the mail send function is named once, in the private handler behind the Send action; a timed send is refused unless the person asked for it in that turn, so the agent cannot arm one alone (`email/replies/draft.rs`, `timed_send_needs_a_person`); a CRM message is staged and happens only after a later approval (`ghl.rs`, writes are "PROPOSED, never immediate"); an unattended routine gets no `ConfirmCtx`, so its write is blocked rather than staged (`gateway/tools_todo.rs`, `tools_drive.rs`, `tools_records.rs`). ⛔ **Do not widen it to "nothing goes out" or "nothing without your approval."** Those are the banned row above: the answers your agent writes *you* and the searches it runs at a provider leave with no per-item OK. Shipped on the homepage 2026-09-21 as a heading over a figure that draws the gate with three lanes, so the drawing carries the mechanism and the sentence carries who is in charge. Keep it that way: a heading in this family is a statement about authority, and it is only defensible while a figure or a caption beside it names what is actually enforced. Alone on a page it would be the unscoped claim. The words that carry the scope are **in your name**, and the sentence dies without them: they are what excludes the agent answering you and the lookups it runs at a provider, which are the two things the banned row above names. Widened 2026-09-21 from an email-only form, once the write gate was traced: it is one shared mechanism with named lanes (`WriteGateLane` in `gateway/mod.rs`, with `TODO_GATE`, `DRIVE_GATE`, `DOCUMENT_GATE`, records and the CRM), so calendar, to-do, file and record writes stage and wait exactly as a reply does. (⚠️ 2026-10-08: to-dos changed as well. Checking one off and editing one now happen at once, each with an undo that puts it back through Todoist or Google Tasks, built on Archie's `agent-sim` branch (`f0e7020a`) and in no release yet; deleting one still waits for a yes.) (⚠️ October 19, 2026: calendar changes too, once the owner turns it on. From 0.3.11, which carries Archie `bad38c32`, a new or moved event on the owner's own main calendar that nobody else is on happens at once, with an undo, after the owner presses Yes, and stop asking. This row's own scope, a reply that reaches somebody else, is untouched, because a covered change reaches nobody.) An email-only sentence was underselling a product-wide property. (⚠️ 2026-09-29: the record half of that was not true at 0.3.1, where a list edit ran at once with an undo. In 0.3.2 only removing a row waits: `5b51b70b` made edits wait and `139029ac` put them back to at once the same day. See the lists rows below.) ⚠️ **Say approve, not send.** "Only you can send it" was live for one commit on 2026-09-21 and reads as though the owner does the sending by hand, copying a draft out the way an ordinary chat app leaves you to: the agent sends it, and what waits is your say-so. Approve is also the verb the code uses for every other gated write.
 | **"Replies and calendar moves wait for your yes."** | ✅ **True now (0.3.1), and the homepage heading (`#mine-heading`) since 2026-09-29**, narrowed from the lists form below the same day at Jett's ruling. A reply that reaches somebody else waits: the row above holds the code pointers. A calendar move waits: the Calendar changes entry above (`tools_calendar.rs`, staged on the turn that proposes it and applied only on a later one). The figure under the heading draws those two lanes and no third, and the line under it, "No setting turns that asking off", is scoped by this heading and says nothing without it. The four blog posts that carried the lists form now carry this one (`your-ai-agents-messages-go-out-under-your-name`, `say-maybe-to-your-ai-and-it-hears-do-it`, `your-ai-agent-should-bother-you-more-not-less`, `ai-built-my-workout-program`). ⛔ Never shorten it to "everything waits for your yes", and never let it stand for a purchase, which the Buying entry says it must never cover. The personal edition page carries the same scope as "Replies and calendar changes wait for your approval." ⛔ **Retired from the site October 19, 2026**, ahead of the release that carries Archie `bad38c32`, in which a calendar move on the owner's own calendar can stop waiting, so the heading and "No setting turns that asking off" under it would both be false that day. The homepage, the personal edition page, the four blog posts and every other page that carried this form or its "calendar changes" twin now carry the row below. |
 | **"Nothing goes out in your name until you say yes, and no setting turns that asking off."** | ✅ **Approved October 19, 2026: true of 0.3.10, and true of 0.3.11, released the same day with Archie `bad38c32`.** Jett decided on October 18 to ship that build and narrow the site's claim to what still has no off switch; this is the claim the site used to make about "replies and calendar changes", cut to what no setting in either build can change. **What waits:** a reply, an email or a text (the "does the work" row above holds the pointers: no tool can send a text, the mail send function has one caller behind the Send action, and a timed send is refused unless the person asked for it in that turn); a message through a connected CRM (`ghl.rs`, staged); a press on a website that sends, submits or finalizes something (the Websites entry); on the calendar, deleting an event, inviting anyone (from 0.3.11, the first release that can invite), or changing one somebody else is on (the Calendar changes entry); and, from 0.3.11 on an agent with Call businesses switched on, a phone call to a business, which dials only when the owner presses Place the call on its card. **Why no setting skips it, in both builds:** 0.3.10 has no switch that skips any asking. The one 0.3.11 carries, Yes, and stop asking, covers one kind of change, `AllowKind::OwnCalendar`: `lane` in `crates/archie-runtime/src/always_allow.rs` is a match over every kind of staged change with no catch-all arm, and every lane but the calendar is never (to-dos, lists and rows, the CRM, connected services over HTTP, add-ons, Drive, documents), test `only_the_calendar_lane_may_ever_be_covered_and_every_other_says_why_not`; `calendar_kind` refuses a deletion, a guest, and an event somebody else is on, test `everything_the_plan_excludes_still_asks`. A reply, an email and a text are not staged changes at all, and nothing in 0.3.11 reaches their Send. **Forms approved for pages:** (1) this sentence, or its first half as a heading or a promise line ("Nothing goes out in your name without your yes"), on a page that also names what waits, which is the "does the work" row's own condition; (2) "No setting lets your agent send a reply, an email or a text in your name without your yes."; (3) for the calendar, the Calendar changes entry's "Deleting an event, or changing one other people are on, waits for your yes."; (4) **from 0.3.11, which carries `7d102231`**, an invitation may join the list (0.3.10 cannot invite anybody, so a page that names 0.3.10 leaves it out): "No reply, email, text or invitation goes out in your name without your yes." The compare pages say it in their own form: "only Archie works on your own computer and asks before anything goes out in your name, with no off switch" (the compare hub entry). (5) On the homepage only, the approval section's heading names the two people its figure draws, "Sam and Dana hear nothing before your yes.", over "No setting turns this off.": the figure's lanes are a reply to Sam and a move of the 2:00 that Dana is on, and both wait in either build. The heading says nothing without that figure, so it never moves to a page that does not draw it, and the figure never gets a lane for an event nobody else is on. (6) Where the question is whether the agent changes the calendar on its own (the `llms.txt` answer), the Calendar changes entry's routine sentence may sit beside (3): "a routine running on its own can't change your calendar at all". ⛔ **"In your name" carries the scope**, exactly as in the row above: never "nothing goes out without your yes", which the banned rows forbid, because the agent's answers to you and the searches it runs at an AI company leave without one. ⛔ Never say or imply that something else can be set to skip the asking. The switch is described only in its own entry's words ("Your agent can stop asking about changes to your own calendar", after the Calendar changes entry), written at the 0.3.11 release. ⚠️ It never stands for a purchase (the Buying entry), and never for a list edit, an add, or a to-do checked off, which happen at once with an undo. ⚠️ Deleting means an event here. A to-do and a row on one of the agent's lists also wait to be deleted, but never write "it never deletes anything without asking". **Live from October 19, 2026** on `index.html` (the hero line, the meta description, and the approval section's heading, figure and the line under it), `archie/personal/`, `archie/pricing/`, `archie/moving-from-openclaw/`, `how-it-works/`, `faq/`, `compare/` and its five comparison pages, `compare/questions-to-ask/`, `trust/`, `trust/details/`, `learn/the-approval-gate/` (its lede only; later that day the page was held with 1.2 and 1.5 until Jack re-records them, in the video library entry's October 19 note), the questionnaire (`js/questionnaire.js`, the How hands-on step, which takes (3) beside the email line it already had), `llms.txt` (from `scripts/gen-discovery.py`), the voice rule's example heading in `CLAUDE.md`, and six blog posts, each edited in place with its date unchanged, the way they were narrowed on September 29, 2026: the four named in the row above, plus `ai-agents-underrated` ("A good one asks before anything goes out in your name") and `you-asked-for-a-small-fix`, which takes (3). `say-maybe-to-your-ai-and-it-hears-do-it` lost its dentist example for a reply to Dana, because the dentist is the kind of event that release can move without asking. *Applied October 19, 2026, at the 0.3.11 release, on Jett's yes to ship calls in it, from a note added the same day:* a call fits this claim. The voice says it is calling for the owner, and nothing dials until the owner presses Place the call on its card, which no setting skips (`calls::press`, held by `only_the_press_can_dial`; `always_allow.rs` has no lane for calls), so a call is in "What waits" above. No form above names a call; a page that wants to say so uses the calls entry's own words. |
-| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) (Amended October 17, 2026, Archie `e716864f`, RELEASED in 0.3.11, 2026-10-19: a clear of a filled column nobody named now waits too, and asks; a new entry's date nothing gave is left blank and said, while a blank on an entry already there is still filled on the agent's reading; and on a message that is a question a new entry goes on a card. The entry "Your agent asks before it clears something already filled in". The ⛔ above still holds.) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
+| **"Removing something from one of your agent's lists waits for your yes."** | ✅ **True in 0.3.2** (`94f85315`; checked 2026-09-30). Adding a row and editing one happen at once, each with a receipt and an undo (amended October 11, 2026: from the release that carries Archie `70831b8a`, many entries the agent read off a photo, a page, or the calendar wait on one card until the owner presses Add or says yes; the entry on cards); removing a row stages through the list lane of the write gate and waits for the owner's yes, and a routine may not remove one (`gateway/tools_records.rs`, its module comment and `RECORDS_GATE`; Archie `139029ac`, Jett's line "what can easily be put back is automatic, what cannot asks first"). (Amended October 12, 2026, Archie `dcc0ae03` and archie-mobile `0747d37`, in no release yet: on a message a person typed, an edit that would write over a date already on an entry with a day that nothing they said, nothing they said yes to, and nothing read that turn gives is not made, and the agent is told to ask with "Change it to ...", "Keep ..." and "Not sure"; a blank date filled that way is written, and the line under the reply says it is the agent's reading, "Closing is my reading", in Archie and Archie Mobile (`dates_nobody_gave` in `gateway/turn.rs`, `KeptRow::my_reading`). ⛔ Never "your agent never guesses a date": it reads days off words by code (`schedule::names_day`), only dates are checked, and a blank is still filled.) (Amended October 17, 2026, Archie `e716864f`, RELEASED in 0.3.11, 2026-10-19: a clear of a filled column nobody named now waits too, and asks; a new entry's date nothing gave is left blank and said, while a blank on an entry already there is still filled on the agent's reading; and on a message that is a question a new entry goes on a card. The entry "Your agent asks before it clears something already filled in". The ⛔ above still holds.) (Amended October 21, 2026, Archie `87f5dcca`, `a7968927`, `af5e6ba0`, `3dce6857`, `3e5d9511` and `632c70ad`, RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11: a day the list cannot leave blank, such as an expense's Date, is written as the agent's reading, and a date worked out from the entry itself, a bill moved on by its own frequency or a job reported done today, is written without asking; the two October 21 amendments of the entry "Your agent asks before it clears something already filled in" say which. ⛔ Never "your agent never changes a date on its own".) **On no page yet**: the homepage heading stayed "Replies and calendar moves wait for your yes." until Jett decided whether removals join it (October 19, 2026: that heading is retired for the in-your-name row above, and removals are still on no page). "your agent's" keeps out Package Tracker, as the row below explains. ⛔ Never "edits" or "changes" to your lists: those happen at once. **Who may say the yes, found 2026-10-07:** through 0.3.6 a turn that arriving mail started (a watcher's wake, which lands in the owner's own chat) could apply a waiting removal, because only the calendar's apply tool refused a yes nobody typed (`tools_calendar.rs`). Archie `a33dd7d6` claims nothing waiting on a turn nobody typed (`answers_waiting` in `gateway/turn.rs`), for lists, to-dos, Drive, documents, the CRM, connected services and add-ons alike; **released in 0.3.7 for both editions, October 8, 2026.** Until then only a calendar move refused a yes nobody typed, so a sentence about it names 0.3.7 or says "now". Deleting a to-do waits; checking one off or editing it happens at once with an undo (Archie `f0e7020a`, also 0.3.7). |
 | ~~"Replies, calendar moves and your agent's edits to your lists wait for your yes."~~ | ⛔ **Never shipped: reversed before the release.** Found 2026-09-30: this row said it was approved "for the first release that carries Archie `5b51b70b`", and 0.3.2 carries it, but it also carries `139029ac` from the same day, which put edits back to happening at once. Published on the strength of this row, the sentence would have been false on the day it went up. What the row went on to say still explains the two words: In that build an edit to a row on one of the agent's lists, checking one off, or removing one waits for the owner's yes, and a routine that tries is refused and reports what it would have changed (`gateway/tools_records.rs`, `RECORDS_GATE`). Two limits, both ruled by Jett on 2026-09-29, and two words carry them. **"edits"** leaves out adding a row, which still happens at once (a row they did not want is one tap to remove), so never widen it to "changes to your lists" or "anything on your lists". **"your agent's"** leaves out Package Tracker, whose status updates from shipping emails are made by the app below the agent's tools (`email/packages.rs`, `on_email`) and stay automatic, because a yes on every "out for delivery" is noise; Package Tracker's own copy must say its rows update on their own. When the release ships, the homepage figure gets its third lane back (a to-do checked off, never an add) (⚠️ 2026-10-08: not a to-do checked off either, since that now happens at once with an undo; a deleted to-do is the one that still waits) and the four blog posts may take the same wording. |
 | ~~"Replies, calendar moves and changes to your lists wait for your yes."~~ | ⛔ **FALSE in 0.3.1, and retired 2026-09-29.** The homepage heading from 2026-09-27 (Jett's voice pass, replacing "Your agent does the work. You say the word.", a two-sentence aphorism) and in four blog posts until the narrowing. Found by the Learning Library claim check: at the 0.3.1 release (`09c5cb5e`) `records_update` and `records_delete` run at once with an undo and a routine may update a row unattended (`gateway/tools_records.rs`, `dispatch_records_tool`), and Task Manager, which every new agent starts with, keeps its tasks in such a list; only edits to existing Todoist or Google Tasks items were staged. Jett chose to change the app, and `5b51b70b` does, but the sentence stays false as written even then, because adding a row does not wait. Use the row above at that release. |
 
@@ -16481,6 +16552,683 @@ later, ...").
 - ⚠️ **On Archie for Teams** a teammate's mail is nudged in the teammate's chat, and the morning list
   reads only the owner's own mailboxes. Texts are the owner's alone.
 - ⚠️ **It asks no AI to make any of it.** Say that much and stop.
+
+### 🚧 Working something out with Python: your agent works the numbers out in a short program on a Mac, and shows you how: BUILT 2026-10-20 (Archie `34a29c09`, archie-mobile `8bb7e1b`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)
+
+*Built October 20, 2026 on `parity-p13` in both repos, for working through a file, widened on
+October 21 at Jett's call to any question the agent judges it useful for, and merged the same day as
+Archie `34a29c09` and archie-mobile `8bb7e1b`. RELEASED in 0.3.12 on a Mac, October 26, 2026, with
+Windows still on 0.3.11; the Archie Mobile half is on iPhone in 1.5 and not on Android yet. It ships
+on a Mac first: on October 21 Jett held Windows back until somebody has run Python there, so Archie
+on Windows stays on 0.3.11 and every sentence below says Mac until then. Jett approved the form of
+the claim that names the only code it runs on October 21, 2026, and it is the sentence in "What it
+structurally cannot do". The rest of the wording is his to approve.*
+
+**Proposed wording, Jett's to approve:** "When an answer has to be exactly right, your agent can
+work the numbers out in a short Python program it writes for the question, instead of in its head: a
+total over many numbers, a percentage, a loan payment, the date 45 days after an invoice, an
+average, a chart, or the numbers in a spreadsheet or another file you gave it. The program runs
+inside Archie on your Mac, with no internet and none of your computer's files except copies of ones
+you gave it, and your files are never changed. In Archie, under an answer worked out this way is How
+I worked it out, which opens to the programs it ran (the last four, when it ran more); Archie Mobile
+shows the same, with the first 1,200 characters of a long program and a note that the rest is in
+Archie on the computer. A chat app such as Telegram gets the answer without the program. Python is a
+one-time download of about 23 MB, which Archie fetches on its own shortly after it starts."
+
+Short form, for a list of abilities: "Works the numbers out in Python on your own Mac, instead of in
+its head, and shows you how."
+
+"Short" means at most 20,000 characters of code, which is far past any program that answers a
+question (`MAX_CODE_CHARS`). The program is usually a few lines.
+
+**Why it's true:** All paths are in the Archie repo.
+
+- **The tool, and when it is offered.** `run_python` is defined and run in
+  `crates/archie-runtime/src/python.rs`. It is on every chat turn and every routine run, in the part
+  of the tool list every lane shares (`python_offered` in
+  `crates/archie-runtime/src/gateway/turn.rs`, `on_belt` in `python.rs`), with four exceptions: the
+  first-run interview, which carries no tools at all; a computer whose download of Python failed,
+  and one where Python is here but would not start, where it stays off the list until a try works
+  and the agent answers another way (`Host::offered`, both below); and a guest or teammate on one of
+  the two narrower settings (next). The model decides whether a question is worth a run; the
+  description tells it when (`tool_definition`). One nudge is made in code: a document with eight
+  or more amounts in it (a number with a dollar sign, thousands commas or two decimal places, so a
+  date, a year, a phone number or a rate is not one), read on a turn that can run Python, comes
+  back with a line in front saying it holds more amounts than can be added up reliably by reading,
+  and to give it to `run_python` to add, compare or average them (`point_to_a_run`;
+  `python_is_theirs` keeps it from anybody the tool is off for). Adding them up by reading is where
+  Economy went wrong in the broad cases of October 21: a bank statement's seven debits, each listed
+  right, came to $110 over. Measured on that statement on Economy the same night, each try in a
+  fresh chat: with no line, no run in 6 and 4 wrong totals said; with these words, a run in 13 of
+  13 and none wrong; with a line that counted the amounts instead, 13 of 24 and 4 wrong, and a count
+  in front of a workbook was once told to the owner as the file's own note. Asked something about
+  the statement that needs no arithmetic, it made no run in 5. Held by
+  `a_document_full_of_amounts_points_to_a_run` and `python_is_the_owners_and_everything_you_cans`.
+- **Who may use it.** The owner, and somebody else the agent answers only on the widest setting
+  the owner can give them, Everything you can:
+  1. **A guest** (somebody the owner lets message the agent, in Archie) on Everything you can has
+     it. A guest on Talk to your agent or on Talk and add to your lists does not: the tool is off
+     their turns, and a call that reaches the dispatch anyway is refused with words telling the
+     agent to answer another way, to say the answer was not worked out exactly, and that the owner
+     can change the setting on the agent's Setup tab under Who can message it (`guest_refusal`).
+     The reason is the owner's, not the guest's: every run is the owner's computer for up to 30
+     seconds and a request on the owner's AI account, and a guest could tie both up with heavy
+     runs. A run reaches nothing a guest could not already read, because documents go in only
+     where reading them is allowed.
+  2. **A teammate** on a shared agent, in Archie for Teams, follows the same rule by the same code:
+     on Everything you can, yes; on the two narrower settings, no.
+
+  The rule is `acts_as_owner` in `turn.rs` (decided in review on October 21, 2026), held by
+  `python_is_the_owners_and_everything_you_cans`: nothing of their own (a mailbox, a connection)
+  makes it theirs on a narrower setting, it is never one of the things no setting hands over
+  (`owners_alone`), and somebody else's credits allow it as they allow reading. Asked again when the
+  call runs: a call on a turn that did not carry the tool runs nothing (`PYTHON_NOT_OFFERED`), and a
+  run may name a document only on a turn that reads documents (`may_read_documents`,
+  `documents_go_in_only_where_reading_them_is_allowed`). A turn sent
+  straight to a specialist carries it like any other; a task the agent hands a specialist inside a
+  turn is one AI call with no tools at all (`execute_specialist_tool` in
+  `crates/archie-runtime/src/gateway/tools_specialist.rs`), so it carries nothing.
+- **Only the documents it names.** A run with no `files` is given nothing. A run that names
+  documents, by the ids or names the agent already sees, or a file handed over in the chat, is given
+  copies of those and no others, in the shapes `read_knowledge_file` gives the same person
+  (`prepare_files`): a spreadsheet as one CSV per sheet (`documents::sheets_as_csv`, since Pyodide has
+  no Excel reader), a PDF, Word or PowerPoint file as its text, a text file as it is. A picture, a
+  zip or anything else reading refuses is refused to code in the same words, so a photo's location
+  or the inside of an archive is out of reach (`a_kind_of_file_reading_refuses_is_refused_to_code_too`).
+  Two documents with one name both go in, the second as `sales (2).csv`.
+- **Where it runs.** In a hidden window of Archie's own (`src-tauri/src/python.rs`, label
+  `python-sandbox`), whose page runs each job in a Web Worker of its own with a Python of its own:
+  Pyodide 314.0.7, which is CPython 3.14.2 built for WebAssembly, with pandas 3.0.2, NumPy 2.4.6 and
+  Matplotlib 3.10.8 (`src-tauri/python/sandbox.html`, `sandbox.js`, `worker.js`, `fence.js`).
+- **Every run starts in a Python nobody has run anything in.** The page starts a worker for each run
+  and ends it once its result is in, and a worker takes one job and never a second
+  (`createSandbox` in `sandbox.js`, `ran` in `worker.js`); the next one starts loading as soon as a
+  result is posted. A result counts only when it carries the word the page gave that worker when it
+  started it, which no code in the worker can read (`fenced`), so a result the code posts itself is
+  ignored. Measured on October 21, 2026 with Archie's real window: a value left in `builtins` was
+  gone on the next run, the same agent's or another's; a `print` wrapped to add "TAMPERED" did not
+  reach the next run; replacing the worker's `onmessage` through `import js` left the next run
+  working; a result posted by the code itself was ignored and the real one came back; and a 48 MB
+  made-up file posted the same way never reached Archie. (Since the seal of the same day, below, a
+  program cannot import `js` to try those.) A file one run wrote to `/tmp`, `/home/pyodide`, `/data`
+  or `/` was not there for the next (measured October 21). A new worker starts from what the first
+  one in its window compiled while it started (Python's WebAssembly and NumPy's and pandas's
+  Python, `compiled` and `bytecode` in `worker.js`), handed on by the page only from a worker's
+  start, before any code ran in it. Measured, a run asked for straight after another waited 1.5 to
+  1.9 seconds for its Python and one six seconds later waited none; on the paid bench, nine of the
+  fifteen runs after a window's first waited under a quarter of a second, two waited 0.6 to 0.9
+  seconds and four waited 1.6 to 6.1 seconds (the speed boundary below says why). The first run in
+  a newly opened window took 5.4 to 9.3 seconds.
+- **No internet, no storage, no channel to another page.** The worker's own policy, sent with
+  `worker.js`, is `connect-src 'none'` and `worker-src 'none'`; it is handed Python's files as bytes,
+  so it never needs to ask for any; and before any code runs it takes off itself every way out
+  (`fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource`, `WebTransport`, the font loader,
+  `importScripts`), every way to keep something past the worker (IndexedDB, the Cache API, the
+  origin's private file system behind `navigator.storage`, its file handles, the cookie store),
+  every way to reach another context (`Worker`, `SharedWorker`, `BroadcastChannel`, a service
+  worker, Web Locks, `Notification`, a peer connection), and the graphics card (WebGPU and
+  `OffscreenCanvas`), putting back a `fetch` that only hands back Python's own files by name
+  (`src-tauri/python/fence.js`, `takeAll`; `fence.test.mjs`). A worker that could not lose one of
+  them runs nothing, and the page refuses it too (`left`). Measured on October 21 on a real WebKit
+  worker under the real policy: every name on the lists there before, none after, and
+  `indexedDB.open`, `caches.open`, `new BroadcastChannel`, `navigator.storage.getDirectory` and
+  `navigator.locks.request` all refused. Measured on October 20 and again on October 21 with
+  Archie's real window in a test app of its own, with a listener on this computer's own network
+  address: from Python, a socket ("Host is unreachable"), `urllib` (the same),
+  `pyodide.http.open_url` (no `XMLHttpRequest`), `pyfetch` and `js.fetch` ("There is no internet
+  here.") all failed, and two JavaScript imports, from the internet and from the window's own job,
+  never finished and were stopped at 30 seconds. The listener saw no connection. From the page
+  itself, a request to this computer and one to the internet both failed.
+- **No way into Archie.** A worker has no window, so none of Tauri's ways into the app exist in it
+  (measured: no `__TAURI_INTERNALS__`, `__TAURI__`, `ipc`, `webkit`, `window` or `document`). The
+  page has them, because Tauri puts them in every page, and reaches nothing through them: the
+  window has no capability in `src-tauri/capabilities/`, so Tauri's own access list refuses every
+  plugin command, and `python::refuses` turns away every one of Archie's own commands that comes
+  from that window before it runs (`lib.rs` wraps the whole command list in it). Measured:
+  `event.listen`, `window.show` and opening a window refused by the list, an app command refused
+  with "The Python window cannot ask Archie for anything.", and that command never ran. A window
+  of any other label asking the `archie-python` scheme gets a 403 (`python::respond`).
+- **No JavaScript from the program.** Once a worker's Python has started, and before any code
+  runs, `import js` and `import pyodide_js` stop working and `run_js` refuses (`SEAL` in
+  `worker.js`), and the worker's policy allows WebAssembly and nothing else compiled at run time
+  (`'wasm-unsafe-eval'` without `'unsafe-eval'`), so no JavaScript can be written from Python
+  either. Measured on October 21: `import js` came back "No module named 'js': only Python runs
+  here, with no JavaScript, no internet and none of the computer's files"; `eval` and `new Function`
+  in the worker were refused by the policy; and pandas, NumPy, Matplotlib, Pillow, dateutil, pytz,
+  `asyncio.run`, `asyncio.sleep` and `time.sleep` all loaded and ran. This is not a wall around
+  JavaScript (see the memory limit below).
+- **None of the computer's files.** Python sees Emscripten's file system inside the worker and
+  nothing else (measured: `/` holds data, dev, home, lib, out, proc, share and tmp; no `/Users`, no
+  `/etc/passwd`). The owner's files are only read, by `prepare_files`. The window is private
+  (`incognito`), so nothing is kept on disk, and what a private window keeps in memory is taken off
+  the worker (above).
+- **Nothing installed, nothing started.** No `micropip`, no package index, no internet to reach one,
+  and `subprocess` answers "emscripten does not support processes" (measured). What is installed is
+  the fixed set packed by `scripts/fetch-pyodide.py`.
+- **What comes back is capped, twice.** The page caps every field of a result before it posts it,
+  and the shell caps them again before anything is decoded (`clean` in `sandbox.js`, `outcome_of` in
+  `src-tauri/src/python.rs`): 64 KB of printed text, 16 KB of an error's end, ten files, a name of 200
+  characters, 5 MB a file and 10 MB in all. A result body over 16 MB is refused before it is parsed
+  (`RESULT_BODY_MOST`). Measured: twelve files of 1.5 MB and one of 6 MB came back as six files, and
+  a 17 MB body posted to the scheme was answered 413. Every string is made whole before it is
+  sent, so a cut through an emoji cannot leave half of one, which Archie's reader refuses (`wellFormed`
+  in `fence.js`), and a body that does not read as a result is answered at once as a lost window
+  rather than left to run out the clock (`read_result`). Measured: a print and a file name cut
+  through an emoji came back. What reaches the model is at most 4,000 characters, everything in it
+  counted: the line naming the files, the frame around the printed text, the note on a cut, and the
+  lines naming the files it wrote and the ones it did not keep (`OUTPUT_CHARS`,
+  `everything_a_run_says_fits_inside_the_cap`).
+- **Limits.** 30 seconds a run (`RUN_SECONDS`; measured, a loop that never ends was stopped at 30
+  seconds and the window closed, and the next run worked in a new one), 1 GB of Python's memory
+  (written into the module before it compiles, `MEMORY_CAP_PAGES`, and a worker the cap did not go
+  into runs nothing; measured, 1.5 GB at once and 64 MB at a time both came back as MemoryError),
+  30 MB and six documents in (and a document is at most 10 MB, Archie's limit for any document; a
+  bigger one sent in a chat gets a reply saying to send it in parts under 10 MB, `too_big_to_keep`
+  in `turn.rs`; measured on October 21, 200,000 rows given as two documents of about 10 MB each
+  were counted and averaged by category in one run of 0.2 seconds), 20,000 characters of code. One
+  run at a time, from any agent, and a run's 30 seconds start when it is next, so a run waiting
+  behind another agent's is not timed out for it (`next_run`,
+  `a_run_waiting_behind_another_is_not_on_its_clock`). Memory taken as JavaScript sits outside the
+  1 GB. A program cannot import `js`, but one that goes looking can still reach a JavaScript
+  object Pyodide holds for its own use, and from any of them JavaScript's own `Array` and
+  `ArrayBuffer` are a few steps away (measured on October 21 after the seal: through
+  `pyodide.ffi.to_js`, through a function Pyodide's event loop holds, and through a callable made
+  with `pyodide.ffi`). Memory taken that way is bounded by the 30 seconds and by WebKit's own
+  limit for a web process, and it is not reliably given back when the worker ends. Measured twice,
+  before the seal: 1 GB written that way in four pieces was allowed (the window's process went
+  from about 0.8 GB to 1.8 GB); once it was still held after the next run, until the window
+  closed, and once it was back to 0.8 GB eight seconds after the next run. Measured again after
+  the seal, through the buffer of an array `to_js` made: 1.5 GB in six pieces was allowed (about
+  0.9 GB to 2.5 GB), and it was still held after the next run. So the worst a run can do to memory
+  is hold as much as WebKit lets that one hidden process have, for up to ten minutes after the
+  last run. A turn that is stopped while its run goes on closes the window with it (measured), and
+  a window that closes partway through a run is reported to the model as lost, never as slow code
+  (measured: "That was not the code").
+- **The download.** The asset `pyodide@314.0.7` (`data/marketplace/assets/pyodide.json`): 23,412,456
+  bytes, SHA-256 `84a72656804132e2ece2b8601dcbb5c1c064ec6025d97ceda2f9a25415c4fe21`, the same file
+  for a Mac and Windows, built reproducibly from the npm package (checked against its pinned
+  integrity) and each wheel (checked against the SHA-256 in Pyodide's own lock file). It downloads
+  through the asset store the voice pack uses: checked against the hash before anything is
+  unpacked or visible (measured: a copy with one byte changed was refused and nothing was
+  unpacked), and kept by every asset sweep (`referenced_asset_keys` in `src-tauri/src/assets.rs`).
+  Archie fetches it on its own 90 seconds after it starts, if it is not there yet, after any other
+  download, on a thread a Mac runs at its utility priority (`keep_downloaded` in
+  `src-tauri/src/python.rs`, `Pace::Quietly` in `assets.rs`), and tries again after a failure at 2,
+  5, 10 and 30 minutes and then every hour. A turn starts a try of its own only after one that could
+  not reach the internet, and only once that try has been over for 2 minutes; a server's answer (a
+  404) or a file that failed its check waits for the schedule, because nothing a turn does changes
+  it (`a_failed_try_waits_from_its_end_and_only_offline_is_retried_on_a_turn`). Which file to fetch
+  comes from the list built into Archie, pinned with its hash, so a turn never waits on the store's
+  catalog to find out (`pythons_asset_comes_from_the_list_built_into_archie`). A run that comes
+  before it is here waits up to 75 seconds, saying so once on the status line.
+- **When Python cannot be had, the agent still answers.** After a failed download the tool is off
+  the list until a try works. A run already under way that hears of a failure says why, and every
+  answer tells the agent to answer another way and to say plainly that the answer was not worked
+  out exactly (`not_ready`): a server that did not hand the file over is nothing for the owner to
+  fix; a computer that could not reach the internet gets "check that the computer Archie runs on is
+  connected to the internet (a website opens in its browser)"; a full disk gets how much space to
+  free. Measured on October 21 against the real asset host, which still answered 404: the run said
+  the server had not handed it over and there was nothing for the owner to fix, and the tool was
+  off the list afterwards.
+- **When Python is here but will not start, the same.** A window that could not start Python takes
+  the tool off the list until a start works (`start_failed`, `DidNotStart`): the run that found out
+  is told there is nothing for the owner to fix and to answer another way, not to try again
+  (`a_start_that_fails_is_answered_as_off_not_as_try_again`); a file handed over in a chat opens no
+  window meanwhile; after an hour a turn tries one start in the background; and starting Archie
+  again starts with the tool on (`a_failed_start_keeps_the_tool_off_until_an_hour_has_gone`). This
+  is what a computer whose web view cannot run Python at all would see. Measured on October 21 with
+  a damaged copy of Python: the first run waited out the 90-second start limit (a damaged Python
+  hangs rather than failing), the next turn's answer came at once, nothing opened when a file was
+  handed over, and the tool stayed off once the copy was put right.
+- **A file out only as a new file.** A file the program writes to `/out` (a chart, a table) is held
+  for an hour for that agent and that conversation only, and leaves only through `save_file`
+  (`send_python_output` in `crates/archie-runtime/src/export.rs`), which writes it beside the others
+  under a new name and never over one (measured: a second save was `monthly-2.png`). Only .csv,
+  .txt, .json, .md, .html and .png, at most 5 MB each. Another agent asking for it was refused. A
+  guest or teammate on Everything you can gets the file too; nobody on the narrower settings runs
+  Python at all (above).
+- **Shown with the answer.** Every run that finished is recorded for the line under the reply
+  (`note_code_run` in `crates/archie-runtime/src/gateway/kept.rs`), the last four of a turn, and
+  drawn shut as How I worked it out (`WorkedFold` in `src/app/conversation.tsx`, words in
+  `src/app/worked-words.ts`), and on the phone by Archie Mobile's `src/kept.tsx` in the same words
+  (`src/words.ts`), where "this computer" is "your computer". A routine's runs go under the report
+  it sends, and a held report's under the message it rides (`show_worked` in
+  `crates/archie-runtime/src/gateway/routines.rs`). The phone is sent the first 1,200 characters of a
+  long program and says the rest is in Archie on the computer (`kept_for_phone` in
+  `src-tauri/src/phone.rs`). The status line while it runs says "Running a program to work it out…",
+  the name the fold uses. A chat app gets the answer without the program.
+- **Running needs no approval; writing goes through the gate it always did.** `run_python` is a
+  read in the journal (`effect_of` in `crates/archie-domain/src/journal.rs`) and in the tool
+  policy (`tool_policy.rs`), because it changes nothing; `save_file` is unchanged.
+- **Tests:** `python::tests` in `crates/archie-runtime` and in `src-tauri`,
+  `src-tauri/python/sandbox.test.mjs` and `fence.test.mjs`, `python_is_the_owners_and_everything_you_cans`
+  and `a_file_too_big_to_keep_says_what_to_send_instead` in `turn.rs`,
+  `the_line_keeps_the_last_runs_not_the_first` in `kept.rs`,
+  `a_held_report_keeps_its_python_for_the_message_it_rides` in `routines.rs`, the asset keep tests in
+  `src-tauri/src/assets.rs`, `the_code_under_a_reply_reaches_the_phone_cut_to_fit`,
+  `a_workbook_becomes_one_csv_per_sheet_for_code`, `src/app/worked-words.test.mjs`, and Archie
+  Mobile's `src/kept.test.ts`.
+- **The broad cases** (October 21, 2026, in the P13 harness: the real gateway, the real window and
+  the test key). Right on Economy: a workbook's two sheets net of returns; a register export with
+  "$1,234.50", "(200)", blank and repeated header rows and three shapes of date, in all and by
+  month; a chart saved as a new file with the original untouched; a cleaned copy saved as CSV; a
+  memo's and a deck's figures; 95,000 orders (9.5 MB) by category; a semicolon file with a
+  byte-order mark, accents and decimal commas; a tip split three ways; twelve pasted bills; a loop
+  that never ends, stopped at 30 seconds with the next run working; two agents asking at once; a
+  guest on each setting, with a run only on Everything you can; a scheduled routine (536
+  seconds, one run); and a workbook question after five and a half minutes hidden, with the window
+  open and with it closed. An empty file and a header-only one were each answered as $0 with no
+  rows to add, and a broken workbook as unreadable, with what to send instead. Right on Balanced:
+  the workbook, the register export and the bills. With Python not downloaded (the asset host
+  answering 404, and offline) the agent said its answer was worked out by hand and might be off,
+  offline it said what to check, and the tool was off the next turn. Wrong, with no run made: a
+  recipe's quarter tablespoon called a teaspoon, a statement's debits (the line in front of a
+  document, above, is the fix), and a follow-up about a document refused (`docs/OPEN-THREADS.md`).
+- **Run in Archie's real window before the release.** A live check opens Archie's real Python
+  window hidden and runs one program twice (`src-tauri/tests/python_live.rs`, merged as Archie
+  `ae21e477` on October 26, 2026). It passed on a Mac on October 26. Its run on Windows
+  (`.github/workflows/python-windows-probe.yml`, started by hand) has not been made.
+
+**The boundaries.**
+
+- ⛔ **Never "installs", "pip install", "any package" or "any library".** It has pandas, NumPy and
+  Matplotlib and what they need, and nothing can be added.
+- ⛔ **Never that it can reach the internet, look anything up, or fetch data from Python.** It
+  cannot.
+- ⛔ **Never that it can open, read or change the owner's other files**, or "your computer's
+  files". It works on copies of the documents it names, in memory, and only on a turn that can
+  read them.
+- ⛔ **Never "edits your spreadsheet" or "updates your file".** It makes a new file, which goes out
+  through `save_file`.
+- ⛔ **Never "runs code on your computer" or "runs programs" without "inside Archie, with no
+  internet".** It still cannot run a command, a script on the computer, or a terminal, and an
+  add-on still brings no code of its own.
+- ⛔ **Never that the answer is always right, or "works answers out exactly".** It works the
+  numbers out in code instead of in its head, and the program can still be wrong, which is why it
+  is shown. The paid bench had an 11-cent miss: Balanced's loan interest came out $2,723.20, from 48
+  payments of the rounded $442.15, for the exact $2,723.09.
+- ⛔ **Never that a guest or a teammate on Talk to your agent or Talk and add to your lists can have
+  an answer worked out in Python.** Only the owner, and those on Everything you can.
+- ⛔ **Never "long programs".** "Short" is at most 20,000 characters of code.
+- ⛔ **Never that the phone runs it.** It runs on the computer; the phone shows the program.
+- ⛔ **Never that a chat app shows the program.** How I worked it out is drawn only in Archie's
+  window and Archie Mobile. Telegram and the other chat apps get the answer alone, which is why the
+  approved sentence says "Archie and Archie Mobile show you that program under its answer".
+- ⛔ **Never that it uses Python only for files.** Since October 21 it may reach for it on any
+  question that has to be exactly right, in a chat or a routine.
+- ⛔ **Never Excel formulas, macros or charts read from a workbook.** A workbook reaches Python as
+  the values in its cells, one CSV per sheet.
+- ⛔ **Never on Windows yet.** Jett held Windows back on October 21, 2026, until somebody has run
+  Python there, so Archie on Windows stays on 0.3.11 without it (`HOLD_WINDOWS` in
+  `scripts/release.sh`, `44c4e2bc`). The same page and worker are meant to run in WebView2, and the
+  archive is the same, but nothing has been run on Windows, and WebView2 has no switch for the
+  background throttling a Mac needed turned off (see below). If Python will not start there, the
+  tool goes off after the first try and the agent answers another way, rather than every turn
+  waiting on a start.
+- ⚠️ **A program can still reach JavaScript objects, inside the same worker.** It cannot import
+  `js` or run JavaScript, but it can use the JavaScript objects Pyodide holds for its own work, with
+  the same limits as everything else in the worker: no internet, no way into Archie, none of the
+  computer's files, 30 seconds. The one thing it gets that Python does not is memory outside the
+  1 GB (the limit above). Never "cannot touch JavaScript".
+- ⚠️ **Time zones through `pytz`, not `zoneinfo`.** `zoneinfo` has no time zone data here and says
+  so (`ZoneInfoNotFoundError`, measured on October 21); `pytz` works.
+- ⚠️ **It holds memory while it is open.** Measured on October 21, the window's web process held
+  about 650 to 800 MB while open, with the next Python already loaded beside the page. It opens
+  when a run needs it or a file is handed over in a chat, never because an ordinary turn might use
+  it, and closes ten minutes after the last run, after a run that ran out of time or stopped, and
+  after one whose Python grew past 512 MB. Memory taken through JavaScript is the exception above.
+- ⚠️ **Downloadable on a Mac.** The archive was published on October 21, 2026, and the Mac release
+  does not build until the live file matches its hash (`publish-assets.sh --check` in
+  `scripts/release-macos.sh`). A computer that cannot fetch it answers without Python and says the
+  answer was not worked out exactly.
+- ⚠️ **Slower than it could be, because the window is hidden.** Sampled with `ps` on October 21,
+  the window's process sat at macOS's background priority (4) except in the moments Archie was
+  talking to it (47), with background throttling off. A Python's start took 1.2 to 7.6 seconds in
+  one session, the slow ones while nothing was being asked of the page, which is where the bench's
+  waits of 1.6 to 6.1 seconds came from, and on the first test build a run took five times as long
+  after five minutes in the background (0.5 seconds became 2.8). In the broad cases, after five and
+  a half minutes with Archie hidden, a question about the workbook took 14.5 seconds with the window
+  still open (its second run waited 5.4 seconds for the next Python) and 15.4 seconds with it closed
+  (the first run 8.3 seconds, most of it the window and Python starting), both right. That is why the
+  limit is 30 seconds.
+
+**What earlier versions of the claim got wrong.**
+
+The approved sentences say Archie cannot run code and has nowhere to run any, and the proof names
+"no WASM" and "no JS `eval`". From this change Archie runs WebAssembly, in one place, and that
+worker's policy allows WebAssembly (`'wasm-unsafe-eval'`). Until October 21 it also allowed `eval`
+for Pyodide's own JavaScript (`'unsafe-eval'`); measured that day, nothing needed it, and it is gone.
+Every passage that said so was reworded in the release that carries Python: both approved forms
+of "Add-ons are data, not code" and its proof, the positioning sentence of "What it structurally
+cannot do" and its table row, the site's FAQ and skill captions, and the in-app
+guide What your agent will never do (Archie `469913ff` and `7ec60104`, merged as `1e9e2a37`).
+
+The October 20 draft of this entry said the tool was offered only in a chat with a person, on a
+turn whose history involved a file, never in a routine, and that every other conversation carried
+nothing for it. That stopped being true on October 21, and the draft's file heuristics are gone: the
+reviewer found the one that matched a document's name against the owner's words calling "what's the
+plan today?" a question about `plan.pdf`. The same draft said each run started fresh; until the fix
+of October 21 a run started with a fresh set of names in the same Python, and code could leave a
+wrapped `print` or a replaced `onmessage` for the next run. Now each run gets a Python of its own.
+
+The October 21 draft said a teammate on a shared agent had Python on every setting, as reading
+documents is; since the review of that day, a guest or teammate has it only on Everything you can.
+It said the 4,000 characters included the line naming the files; the lines naming the files a run
+wrote, and the ones not kept, were not counted until the same review. It said the agent "works
+answers out exactly" and that How I worked it out opens to "the program exactly as it ran"; the
+first promised more than code can, and the second was true only of a turn with four runs or fewer,
+on the computer. And it said a program could carry JavaScript through `run_js` or `js.eval`; since
+the review, neither works, though JavaScript objects can still be reached (the boundary above).
+
+### 🚧 Show your agent a website task once, and next time it does the task the way you showed it: BUILT 2026-10-20 (Archie `553cb455`, archie-mobile `92bed95`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet), and no person has used it yet
+
+*Archie `d5fc212b`, `ec3dfa87`, `32515dc8`, and `9b9452d8` (October 20, 2026) and `0da2b7f9`,
+`0a68bf1d`, and `62882cca`, the fixes from its two reviews, merged as `553cb455`, and archie-mobile
+`979ff81` and `ec22f2c`, merged as `92bed95` (October 21, 2026), RELEASED in 0.3.12 on a Mac,
+October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on
+Android yet). The fixes from its test pass on real websites were merged as Archie `879bfbc6` and
+archie-mobile `73fc3c5` (October 21, 2026), in the same release and build. Tested in real Chrome on
+a Mac, with the browser's own pointer and key events standing in for a person (the page cannot tell
+them apart): against pages served on that computer, and on real public websites, which is where the
+test pass found what it fixed (Wikipedia's search, the New York Public Library's catalog, the W3C's
+own examples of a combobox, a listbox, a radio group, a menu button, and a modal dialog, Material
+UI's dropdowns, a form in another site's frame on MDN, react.dev, and Shoelace's components; nothing
+signed in to, nothing submitted but a search, nothing bought). Asked to do two of the tasks it was
+shown, the agent opened each site by its saved name, and the remembered presses happened by
+themselves with no AI call between them: Reference, Hooks, and useState on react.dev, after which it
+answered from the useState page; and Billing and Make a payment on a bill payment page served on
+that computer, after which it asked how much, typed it, and left Pay now to that press's own card,
+the only question about paying (since Archie `200f5902`, October 21, 2026; before it, the agent
+asked first and the card asked again). Buying is switched off for that agent, so the card said to
+press Pay now in the open window, and the form was never sent. The steps were written from three of
+the real recordings (Wikipedia's search, the library's catalog, and the W3C's dialog), and each
+passed `parse`. Never by a person, never on Windows, and the phone half has only been run by its
+unit tests. Until a person has shown it a real task, this stays 🚧 and the wording below waits.*
+
+**Proposed wording, once a person has used it, Jett's to approve:** "Show your agent a website task
+once. With Computer control switched on for an agent, press Show me once beside a website, do the
+task in the window that opens the way you always do, and press Done. You can talk while you do it,
+to explain the parts that change. Archie writes the steps down for you to read, change, or throw
+away. It keeps the names of what you pressed and of the boxes you typed in, never what you typed,
+and it leaves password and card boxes out completely. Next time, ask for it and your agent does the
+task the way you showed it, and it still asks you before it presses anything that sends, pays, or
+submits. Archie Mobile lists the tasks you showed, and can start one or remove one."
+
+**Why it's true** (line numbers as of October 21, 2026, so they are location hints):
+
+
+- **It watches one window, Archie's own, and only between Show me once and Done.**
+  - The press opens a tab in the agent's own browser window, the headful one Computer control
+    already uses, after closing anything a finished job left open. It is refused while the agent is
+    using that window for a job, while another recording is running or one is waiting to be kept,
+    and on a site on the blocked list. All of that is decided while holding the window, and the
+    recording is in place before the window is let go, so a job waiting for the window finds it
+    watching and can never press in the owner's tab (`Door::start_at`,
+    `crates/archie-runtime/src/screen/showme/mod.rs:870`). The site itself is opened after that,
+    with the window let go, and the start stops waiting for it to load once the page asks a
+    question, which is the owner's to answer (`open`, `recorder.rs:563`). A live test opens a page
+    that asks as it loads, and checks the start comes back at once, with nothing holding the window
+    and the question still up.
+  - **It starts only from a press made at the computer:** Show me once on the panel, or a site's
+    button on the chat card in Archie's own window. The same button pressed in a chat app or on the
+    phone opens nothing, and answers with where to press on the computer: this agent's Connections
+    tab, under Computer control, Show me once beside the site (`show_from_the_computer`, and the
+    check in `handle_action`, `crates/archie-runtime/src/gateway/show_offer.rs:102` and `:585`). The
+    phone's press is answered before it reaches the agent, which would take it for the window's,
+    with the site's name read off the button (`show_me_at_the_computer`,
+    `src-tauri/src/phone.rs:3274`, called at `:4441`).
+  - The watching script runs in a separate world of its own inside the tab and reports through a
+    function only that world can see (`WORLD`, `BINDING` and `watch` in
+    `crates/archie-runtime/src/screen/showme/recorder.rs`, `:52` and `:519`). Only a person's own
+    presses count (`isTrusted`, `:241`). The live test checks that the page's own scripts can reach
+    neither, and that a press the page makes by itself is not recorded.
+  - **Where the owner goes in that window, the watching goes.** A tab opened in it while it watches
+    is watched like the first: one a page opens (a link that opens a new tab, a button that opens
+    one) and one the owner opens with the browser's own new tab button, because the screen tells
+    them to do the task in that window. A tab that was already open is left alone, and closing the
+    last watched tab ends the recording the way closing the window does (`run` and `follow`,
+    `recorder.rs:769` and `:717`). A page built from components (shadow DOM) is watched like any
+    other, and so is a frame from the same site, which has the script in it. A frame from another
+    site (a payment box, a sign-in box) is not watched: once the owner is in one, the screen names
+    the site it comes from, says that what they do there is not in the steps, and says they can add
+    it once they press Done (`frame_from_elsewhere`, `recorder.rs:685`; `note_unwatched`,
+    `mod.rs:376`; `unwatchedLine` in `src/app/show-me-words.ts`). Live tests check each of these,
+    on pages served on the computer (`showme_live.rs`) and on react.dev, MDN, and Shoelace's own
+    pages (`showme_sites.rs`).
+  - It ends when the owner presses Done or Stop, when they close the window, after 10 minutes with
+    nothing happening (`IDLE_MS`, `mod.rs:54`), and after 30 minutes at most (`MAX_MS`, `:58`), and
+    the screen says which (`endedLine` in `src/app/show-me-words.ts`). On a site that is on the
+    blocked list, nothing is watched at all (`elsewhere`, `recorder.rs:852`). A live test leaves a
+    recording alone for ten real minutes and checks that it ends as idle and closes its window.
+  - A recording that stops by itself closes its own window and tells the chat card that started it
+    why, with nobody looking at the panel (`stopped_by_itself`, `mod.rs:958`). A job is never handed
+    the window a recording opened: one that asks for a window while that one is still open gets one
+    of its own, with its download folder (`ScreenState::page`,
+    `crates/archie-runtime/src/screen/mod.rs:568`).
+  - While it runs, every screen tool answers that the window is the owner's until Done, and none of
+    them reaches the browser (`BUSY_FOR_TOOLS`, checked in `dispatch_screen_tool` while holding the
+    window, `crates/archie-runtime/src/gateway/tools_screen.rs:251`).
+  - **The site's own questions are the owner's.** While a recording watches a tab, Archie answers no
+    dialog in it, so a site's "Delete this statement?" stays on the screen for the owner to answer
+    (`leave_dialogs_to_the_owner`, `crates/archie-runtime/src/screen/mod.rs:984`, set by `watch`,
+    `recorder.rs:526`). A job's dialogs are answered as before. A live test checks the question is
+    still up and unanswered until the test answers it, and that the page got the test's answer.
+    Another checks that while a question raised during the recording waits, nothing holds the
+    window, the press that raised it is already written down, and Done comes back at once. While a
+    question is up, the recording waits at most a second and a half for anything it asks the
+    browser (`ASK_WAIT`, `recorder.rs:615`).
+  - A recording is never written to disk while it runs. It is held in memory (`sessions()` in
+    `mod.rs`) until Keep it or Discard, and quitting Archie forgets it.
+- **Names, never what was typed.**
+  - A press is kept as the browser's own role and accessible name, read from its accessibility tree
+    (`Accessibility.getPartialAXTree`, `recorder.rs:665`), with the site and the time: the shape of
+    a remembered path's step (`RouteStep`). Never a selector, a position or a picture. No screenshot
+    is taken. When the browser cannot be asked in time (a link that has already gone to the next
+    page), the script's own name is kept, read the way a screen reader hears it: words hidden from
+    one or not shown at all are left out, as the browser leaves them out (`textOf`,
+    `recorder.rs:96`).
+  - **Except where the browser's name would read a box out.** The browser names a tick box from its
+    label's whole text, a box's contents included, so "Other amount" with the amount box beside it
+    becomes "Other amount 250.00". When the pressed element, its label, or what labels it holds a
+    box, the script's own name is kept instead, which skips every box (`carries` and
+    `name_to_keep`, `recorder.rs:130` and `:423`).
+  - Typing is kept as "typed into" the box's name, and a dropdown as "picked an option in" it. So is
+    a list the site draws itself (a listbox and its options, or the popup a combobox opens): the
+    pick is kept by the list's name, never by the option picked, and never on the remembered path
+    (`popupOf`, `recorder.rs:171`). A button that opens a list shows the pick in its own words, so
+    it counts as the list and is not a press (`holdsValue`, `recorder.rs:77`). A dropdown a site
+    draws over a native one it keeps hidden (bootstrap-select, Chosen) is kept as the hidden one,
+    by its name: its button shows the pick, so it is not a press, and the pick is found by which of
+    the hidden one's options are chosen before the press and after it. What an option says is used
+    only to know the drawn button and menu by, in the page, and is never sent (`hiddenNear`,
+    `drawnOver` and `settle`, `recorder.rs:209`, `:221` and `:229`). The script has
+    no way to read a value (`the_script_has_no_way_to_read_what_is_typed`, `recorder.rs:952`), and
+    `note_field` (`mod.rs`) has no parameter for one.
+  - Password, card and Social Security boxes, and one-time codes, are left out entirely, name
+    included, once in the page (`SECRET` and `secret`, `recorder.rs:131` and `:144`) and again in
+    Rust (`kept_out`, `mod.rs:222`): `type=password`, any `autocomplete` that starts with `cc-` or
+    names a password or a one-time code, names such as card number, CVV, security code, SSN, "6 digit
+    code" and "the code we sent", whether the site says them in the box's label, its `aria-label`,
+    its placeholder, its `name` or its `autocomplete`, and a box whose placeholder is only the shape
+    of a card number or a Social Security number (`FORMAT`, `recorder.rs:133`, and
+    `is_a_secret_format`, `mod.rs:248`). What is left is a count, so the screen can say "Left out: 1
+    box for a password or card details." without naming the box. A live test names nineteen such
+    boxes each of those ways and checks that all nineteen are left out.
+  - The live test types a nickname, a password, a card number and a Social Security number into
+    four boxes. It checks that only the nickname box's name is kept, that none of the four values
+    and none of the other three names appears anywhere in the recording or in the two files Keep it
+    writes (the task and its remembered path), and that Pay now is marked as a press that asks
+    first. A second live test types an amount into a box inside a tick box's label and picks
+    "Checking ...1234" from a list the page draws itself; it checks that the tick box is kept as
+    "Other amount", the pick as "Pay from", and that neither the amount nor either account appears
+    anywhere in the recording. Others pick from dropdowns drawn over hidden ones, by a press, by the
+    keyboard, and as a press lets go, and check that only the hidden ones' names are kept. The test
+    that makes the paid call checks the same of the steps and the skill
+    (`crates/archie-runtime/tests/showme_live.rs`). On the real sites, the typed words and the
+    options picked are checked to be nowhere in what was kept (`showme_sites.rs`).
+- **Talking stays on the computer, and the sound is deleted once it is words.** The Talk button
+  records through the talk screen's own microphone code (`useShowMeMic` in
+  `src/app/show-me-state.ts`). The computer turns each sentence into words with Whisper
+  (`showme_hear`, `src-tauri/src/showme.rs:118`, through `talk::words_in`), and the sound file sits in
+  a folder that is removed as soon as the words come back (`media::Scratch`,
+  `crates/archie-runtime/src/media.rs:311`). Each line is put beside the press it came before, by
+  time (`transcript`, `crates/archie-runtime/src/screen/showme/steps.rs:126`). Without the speech
+  files, the box under the recording says so and offers Download speech files.
+- **One AI call writes the steps, and code checks what comes back.**
+  - `steps::write` (`steps.rs:484`) sends the site, the names and what was said, never a value
+    (there is none to send), on the agent's own AI account, and files the call on the spending page
+    as Show me once (`SPEND_LABEL`). When it fails, a key that stopped working, an account out of
+    credit, and a computer that could not reach the AI company each get their own sentence, with
+    what to do and then Write the steps down (`why_not_written`, `:519`).
+  - A box name comes back only if it was recorded, and a box the model forgot is asked for each time.
+    The steps are cut to twelve, and a dash between words is taken out (`parse`, `:200`). The owner's
+    own changes on the card are checked against the recording the same way before anything is kept
+    (`checked`, `:289`).
+- **Keep it makes a skill the agent reads only when asked for it, and a remembered path.**
+  - `prepare` (`steps.rs:355`) and `skill_body` (`:597`) write a custom skill: its name, one line
+    saying what it does, up to four ways to ask for it, and steps that say which site to open, which
+    presses happen by themselves, and which boxes to ask about each time. The site is named the way
+    it is saved, never by its address: an address the agent writes itself waits for the owner's yes
+    (`crates/archie-runtime/src/outbound.rs`), and a task's steps are not the owner's message, so the
+    first version, which wrote the address, met that question on every run. The computer
+    (`showme_keep`, `src-tauri/src/showme.rs:158`) and the chat card (`keep`, `show_offer.rs:780`)
+    both keep through it. The chat card has no box to rename a task in, so when the name is already
+    taken it offers Replace it (only for a task the owner showed before) and Keep both, which keeps
+    this one under the name with a number after it.
+  - Keep it, on the chat card or on the panel, restarts the agent to pick the skill up once nothing
+    is running that the restart would cut off: no turn in any chat, no website job, and nobody
+    showing a task or having its steps written. The restart is asked for only at that moment, so a
+    reply delivered in another chat meanwhile restarts nothing. If something is still running after
+    five minutes, the restart happens right after the agent's next delivered reply, in any chat,
+    and the chat card says so when the task is kept. Either way the agent says when it is back, in
+    the chat the task was kept from, or in its conversation in Archie's own window for the panel's
+    Keep it (`QuietRestart`, `crates/archie-runtime/src/gateway/worker.rs:1431`). The wait belongs
+    to the run it was asked of: when the agent is restarted another way meanwhile, the wait ends,
+    and the run's restart handle never restarts the run after it (`RestartHandle::belongs_to` and
+    `take`, `crates/archie-runtime/src/gateway/mod.rs:1063` and `:1094`).
+  - `route` (`steps.rs:551`) saves the presses from the start that are the same every time as a
+    remembered path marked `shown`, stopping at the first box and at the first press that finishes
+    something. A later run can only shorten that path to what still matches the site, never add its
+    own presses to it (`rewrite`, `crates/archie-runtime/src/screen/routes.rs:177`).
+  - Removing the skill anywhere removes the task and its remembered path (`skill_remove` in
+    `src-tauri/src/commands/bundle_env.rs`, through `steps::forget`).
+- **Showing a press is never permission to press it.**
+  - A press that sends, pays, submits, or finalizes something is marked while recording by the rule a
+    job uses (`guard::click_needs_approval_at`, `mod.rs:326`) and is never put on the remembered
+    path. When one was recorded, the card says "It always waits for your tap before a press that
+    finishes something, like paying or sending."
+  - Replaying the path checks every press against that rule and the blocked list again, and stops
+    before one (`replay`, `routes.rs:146`).
+  - Everything after the remembered presses is an ordinary Computer control job with every stop in
+    `screen/guard.rs`: the blocked list, never typing a password, a card you pay with or a code, a
+    finalizing press as a question, the time limit, and two-factor as a handover. Neither recording
+    nor Keep it makes the one-tap release a card gives (`PendingPress`); only a tap on a card during
+    the run does.
+- **Two ways in from the chat, both in code.**
+  - When the owner's own message says "let me show you", "watch me do it" or "show me once", with a
+    site or "how" in it, a card offers one button per saved site (`asks_to_show`,
+    `show_offer.rs:218`, checked before the agent is called, in `gateway/worker.rs`). Never for a
+    message that hands over a picture or a file: the agent answers that one as usual (`may_offer`,
+    `show_offer.rs:208`).
+  - When a website job the owner typed for ends with the agent saying it could not do it, the reply
+    is followed by the same card for that site (`reads_as_stuck` and `note_stuck`, `mod.rs:551` and
+    `:537`; `offer_after_stuck`, `show_offer.rs:304`). It goes only under the reply of the turn that
+    ended the job, and only once that reply was delivered.
+  - **One recording at a time, and its card keeps its buttons.** While a recording is watching or
+    waiting to be kept, neither card goes up: the one after a stuck job is not sent, and "let me
+    show you" is answered with where the one already going is (its card above, when this chat's
+    card started it, or else the panel, with its tab, its section, and the buttons it has there).
+    So a card waiting for Keep it is never replaced by a new one (`send_offer`,
+    `show_offer.rs:356`), and a website button refused because one is waiting names the panel the
+    same way (`CannotStart::in_chat`, `mod.rs:729`).
+  - Both are for the owner or an admin only (the access gate's `may_reconfigure`), never a guest,
+    even on an agent that lets guests use the owner's accounts, and never in a room shared with other
+    agents. The second, which nobody asked for, is also never offered when making skills is switched
+    off for the agent (`offers_after_stuck`, `show_offer.rs:250`), and never follows a practice run
+    or a job in an app. Done on the card writes the steps into the chat with Keep it, Change, and
+    Discard; Change sends the owner to the panel.
+- **The phone lists them, runs one and removes one.** The computer sends each kept task with its
+  steps in the phone's view of Computer control, inside a fixed size, and says how many more are
+  listed at the computer (`computer_at` and `SHOWN_BUDGET`, `src-tauri/src/phone.rs:802` and `:885`).
+  archie-mobile lists them in the same words (`src/show-me-words.ts`, a copy of the computer's).
+  "Do it now" sends the task's own try-it sentence as the owner's message (`doTask`,
+  `src/computer.ts:374`), and Remove asks first, then removes it through the `shown_forget` op
+  (`phone.rs:4870`). Showing a task is done at the computer, because the window is there, and a
+  site's button on a chat card pressed on the phone says where to press there instead.
+
+**The boundaries:**
+
+- ⛔ **Nobody has shown it a task yet.** No person and no Windows computer. Its tests have run it on
+  real public websites, which is not a person using it. Nothing here may be said, shown in a video
+  or put on a page until a person has.
+- ⛔ **Never "it watches your screen" or "it learns by watching you work".** It watches Archie's own
+  browser window, from Show me once until Done: the tab it opened and the tabs opened in that
+  window meanwhile, and nothing else. Not the owner's own browser, not tabs that were open before,
+  not other apps.
+- ⛔ **Never "show it from your phone" or "teach it from anywhere".** Showing a task starts only from
+  a press at the computer running Archie. From the phone or a chat app, the card's site buttons say
+  where to press on the computer, and nothing opens.
+- ⛔ **Never "it remembers what you typed" or "it fills the form in for you next time".** It keeps
+  box names and never a value. The agent asks what goes in each box, or uses what the message says.
+- ⛔ **Never "show it once and it never asks again", or "showing it is approving it".** Every stop a
+  Computer control job has applies to a task it was shown. A press that sends, pays, or submits is
+  asked about every time, and passwords, cards you pay with, and sign-in codes are still never
+  typed.
+- ⛔ **Never "it does it exactly the way you did" or "it does it without AI".** Only the presses at
+  the start that are the same every time happen by themselves. The rest is the agent reading the
+  screen and following the steps, as on any job, and when the site changes, the remembered presses
+  are cut back to what still matches.
+- ⛔ **Never "nothing leaves your computer".** The site's address, the names of what was pressed and
+  typed in, and the words said go once to the owner's AI company, in the call that writes the steps.
+  The sound of their voice does not, and nothing typed does, because it was never kept.
+- ⚠️ **Websites only,** in Archie's own browser window. Not Mac apps. Computer control has to be on
+  for the agent, with websites allowed.
+- ⚠️ **A list is known by the roles the site gives it** (a listbox and its options, or a combobox's
+  popup), or by the native dropdown a drawn one stands for. A list a site draws as plain buttons
+  reads as buttons, and a press on one is kept by its words, as any press is. So is a choice drawn
+  as tick boxes or radio buttons: an account offered as a radio button labeled "Checking ...1234"
+  is kept as those words. The owner reads every step on the card before Keep it, and can change or
+  discard it there.
+- ⚠️ **A part of a page that comes from another site is not watched** (a payment box or a sign-in
+  box in a frame). The screen says so, by the site's name, once the owner is in it. Never "it
+  watches everything you do on the page".
+- ⚠️ **The owner, or an admin on a shared agent,** can teach it a task. A guest cannot, whatever
+  the agent lets guests do.
+- ⚠️ **Talking is English only** (the hearing model is `base.en`), and is done on the computer,
+  which needs the speech files downloaded once.
+- ⚠️ **The phone cannot show a task or talk while one is shown.** It lists the tasks, opens their
+  steps, starts one and removes one. Changing the steps is done on the computer.
+- ⚠️ **A task kept while the agent is busy is not on it at once.** Keep it restarts the agent once
+  nothing is running, or, when it is still busy after five minutes, right after its next reply.
+  Until then the agent does not have the task, and it says when it is back. Never "it can do it
+  straight away".
+- ⚠️ **The card after a job it gave up on is a guess from the agent's own words** ("could not",
+  "unable", "gave up" and the like). It can miss, and it can offer after a job that only half failed.
+- ❌ **Never put a cost figure on doing a learned task, and never say a learned task costs less.** A
+  run is a Computer control job, and that entry's boundary stands.
+
+### 🚧 An empty chat offers two or three things to ask, from what your agent already has: BUILT 2026-10-26 (Archie `c8f40d47`, archie-mobile `81c3bce`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half waiting on its build
+
+**Proposed wording, Jett's to approve:** "An empty chat suggests up to three things you can ask your
+agent right now, from the skills it has and the accounts you connected. Tap one and it goes as if
+you had typed it."
+
+**Why it's true:** `first_asks` in `crates/archie-domain/src/first_asks.rs` chooses them in code,
+without asking an AI anything: at most three (`MAX_ASKS`), up to two from the line of work's own
+starters (`starters` in `data/setups/*.json`) and the rest from the `first_ask` of an installed,
+switched-on skill that has everything it needs (`has_everything`, the same gaps the skill's own row
+lists). Nothing is sent until one is pressed, and then it is an ordinary message. Archie's window
+(`src/app/conversation.tsx`), Archie Mobile through the snapshot, and the welcome on a chat app read
+the same answer, so the words cannot differ between them.
+
+**Boundaries:**
+- ⛔ Never "it suggests what to try next" or "it learns what you like." The words are fixed, one per
+  skill and per line of work, and chosen by what is installed and connected.
+- ⛔ Never that it helps you connect or install anything. No ask says to, and an agent with nothing
+  ready shows the empty chat it always did.
+- ⚠️ Only an empty chat, and the chat-app welcome, where they are lines to type, because a welcome
+  on a chat app carries no buttons. Archie Mobile shows them from its first build after 1.5
+  (archie-mobile `81c3bce`, in no phone build yet); 1.5 shows the empty chat it always did.
 
 ## Known Weaknesses — disclose, don't hide
 

@@ -498,25 +498,28 @@
       "id": "suggested-asks-in-an-empty-chat",
       "name": "Suggested asks in an empty chat",
       "area": "chat",
-      "summary": "An empty chat offers two or three things to ask, picked from the skills the agent has and the accounts you connected, and a tap sends one.",
-      "where": "Chat, when empty",
-      "how": [],
-      "limits": [],
-      "phone": "",
+      "summary": "An empty chat suggests up to three things you can ask your agent right now, picked from the skills it has and the accounts you connected. Tap one and it goes as if you had typed it.",
+      "where": "In your chat with your agent, while the chat is empty.",
+      "how": [
+        "Tap one of the suggestions in the empty chat."
+      ],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "The suggestions are fixed words, one for each skill and line of work, picked by what is installed and connected.",
+        "An agent with nothing ready shows the empty chat as before. No suggestion asks you to connect or install anything."
+      ],
+      "phone": "On a chat app, the welcome after you claim your agent lists the same asks for you to type. Archie Mobile does not show them yet.",
       "editions": "both",
       "released": "0.3.12",
-      "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "src-tauri/src/first_asks.rs",
-        "src/app/conversation.tsx",
-        "archie-mobile/src/asks.ts"
+      "trust": [
+        "🚧 An empty chat offers two or three things to ask, from what your agent already has: BUILT 2026-10-26 (Archie `c8f40d47`, archie-mobile `81c3bce`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half waiting on its build"
       ],
-      "near": ""
+      "wording": "An empty chat suggests up to three things you can ask your agent right now, from the skills it has and the accounts you connected. Tap one and it goes as if you had typed it.",
+      "guide": "",
+      "wording_pending": true
     },
     {
       "id": "commands-typed-in-the-chat",
@@ -1825,7 +1828,8 @@
         "It catches certain words in a sentence about a list. A claim worded another way passes.",
         "Only claims about lists are corrected. \"I've updated your calendar\" or a note about you gets no line.",
         "No Save it button on Signal, iMessage, or Matrix.",
-        "Save it is a request: your agent saves on that turn, with the usual Undo."
+        "Save it is a request: your agent saves on that turn, with the usual Undo.",
+        "A reply that answers where things are kept, like \"where does this save\", is not corrected (from 0.3.12 on a Mac)."
       ],
       "phone": "The line is part of the reply, and Archie Mobile, Telegram, Slack, and Discord show Save it.",
       "editions": "both",
@@ -1904,7 +1908,8 @@
       "limits": [
         "It adds first and asks after. Nothing is merged or refused.",
         "Only entries your agent adds one at a time are checked, not ones from the Lists screen, an import, or a card.",
-        "A shared last name is enough only when one of the two has no phone and no email."
+        "A shared last name is enough only when one of the two has no phone and no email.",
+        "On a list with a day on every entry, like Expenses, the same name on another day is not named, since that is a second visit (from 0.3.12 on a Mac)."
       ],
       "phone": "It works the same from Archie Mobile or a chat app.",
       "editions": "both",
@@ -2226,7 +2231,9 @@
         "Only on a message you typed. A routine, a mail or text watch, or a file read on its own is not held this way.",
         "A blank date on an entry already on your list can still be filled on your agent's reading, and the line under the reply calls it \"my reading\".",
         "A question needs its question mark. \"Can you add Dana to my people\" typed without one adds her.",
-        "Tell it once what \"a month\" means for your rentals and it stops asking. \"Monday\" said on a Monday is still asked every time."
+        "Tell it once what \"a month\" means for your rentals and it stops asking. \"Monday\" said on a Monday is still asked every time.",
+        "A date your list cannot leave blank, like an expense's Date, is filled on your agent's reading, and the reply says so (from 0.3.12 on a Mac).",
+        "A date worked out from the entry itself, like a bill moved on by its own frequency or a job you report done today, is written without asking (from 0.3.12 on a Mac)."
       ],
       "phone": "On an iPhone, Archie Mobile shows the same line under the reply.",
       "editions": "both",
@@ -4506,24 +4513,33 @@
       "id": "working-numbers-out-in-python-on-a-mac",
       "name": "Working numbers out in Python on a Mac",
       "area": "ai",
-      "summary": "On a Mac the agent writes and runs a short Python program, with no internet and without changing your files, to work out totals, percentages, loan payments, dates or a spreadsheet's figures, and shows the program under the answer.",
-      "where": "Chat, under a reply: How I worked it out",
-      "how": [],
-      "limits": [],
-      "phone": "",
+      "summary": "When an answer has to be exactly right, like a total, a loan payment or a spreadsheet's figures, your agent can work it out in a short Python program instead of in its head, and shows you the program under its answer.",
+      "where": "In your chat with your agent: How I worked it out, under an answer worked out this way.",
+      "how": [
+        "Ask something whose answer has to be exactly right, or give your agent a spreadsheet and ask about its numbers.",
+        "Press How I worked it out under the answer to see the program."
+      ],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "The program runs inside Archie with no internet, and it sees only copies of files you gave it. Your files are never changed: a chart or a cleaned copy is a new file.",
+        "It has the usual tools for numbers, tables and charts, and nothing more can be added.",
+        "The program can still be wrong, which is why it is shown.",
+        "Someone else you let message your agent, or a teammate, has it only on Everything you can.",
+        "Python is a one-time download of about 23 MB that Archie fetches on its own. Until it is here, your agent answers another way and says the answer was not worked out exactly.",
+        "A chat app like Telegram gets the answer without the program."
+      ],
+      "phone": "On an iPhone, Archie Mobile shows How I worked it out too, with the first 1,200 characters of a long program. The program runs on the computer.",
       "editions": "both",
       "released": "0.3.12",
-      "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
+      "claimable": true,
+      "hold": "",
       "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "crates/archie-runtime/src/python.rs",
-        "src/app/worked-words.ts"
+      "trust": [
+        "🚧 Working something out with Python: your agent works the numbers out in a short program on a Mac, and shows you how: BUILT 2026-10-20 (Archie `34a29c09`, archie-mobile `8bb7e1b`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet)"
       ],
-      "near": "What it structurally cannot do: the answer to \"is this the AI that ends the world\""
+      "wording": "When an answer has to be exactly right, your agent can work the numbers out in a short Python program it writes for the question, instead of in its head: a total over many numbers, a percentage, a loan payment, the date 45 days after an invoice, an average, a chart, or the numbers in a spreadsheet or another file you gave it. The program runs inside Archie on your Mac, with no internet and none of your computer's files except copies of ones you gave it, and your files are never changed. In Archie, under an answer worked out this way is How I worked it out, which opens to the programs it ran (the last four, when it ran more); Archie Mobile shows the same, with the first 1,200 characters of a long program and a note that the rest is in Archie on the computer. A chat app such as Telegram gets the answer without the program. Python is a one-time download of about 23 MB, which Archie fetches on its own shortly after it starts.",
+      "guide": "",
+      "wording_pending": true
     },
     {
       "id": "specialists-helpers-the-agent-hands-work-to-several-at-once",
@@ -4768,27 +4784,34 @@
     {
       "id": "show-me-once-teach-a-website-task-by-doing-it",
       "name": "Show me once: teach a website task by doing it",
-      "area": "control",
-      "summary": "With Computer control on, you do a website task once in Archie's own browser window, talking it through if you like, and the agent keeps the steps and does the task that way next time; what you typed is never kept.",
-      "where": "Connections tab, Computer control, Show me once; the kept tasks also show on Archie Mobile's Computer control screen",
-      "how": [],
-      "limits": [],
-      "phone": "",
+      "area": "web",
+      "summary": "With Computer control on, do a website task once in Archie's own browser window, talking it through if you like. Your agent keeps the steps and does the task that way next time, and it never keeps what you typed.",
+      "where": "On your agent's Connections tab, under Computer control: Show me once, beside a website.",
+      "how": [
+        "Press Show me once beside a website.",
+        "Do the task in the window that opens, the way you always do. You can talk while you do it.",
+        "Press Done, read the steps, and press Keep it."
+      ],
+      "limits": [
+        "On a Mac only. Archie on Windows is still on 0.3.11, without it.",
+        "Websites only, in Archie's own browser window, and only started at the computer running Archie.",
+        "It keeps the names of what you pressed and of the boxes you typed in, never what you typed. Password, card and Social Security boxes and sign-in codes are left out completely.",
+        "A press that sends, pays or submits is asked about every time.",
+        "A part of a page that comes from another site, like a payment box, is not watched.",
+        "Talking is in English, and needs the speech files downloaded once.",
+        "Only you, or an admin on a shared agent, can show it a task."
+      ],
+      "phone": "On an iPhone, Archie Mobile lists the tasks you showed, and can start one or remove one. Showing a task is done at the computer.",
       "editions": "both",
       "released": "0.3.12",
       "claimable": false,
-      "hold": "No TRUST.md entry yet, so the site may not say it.",
-      "unwatched": false,
-      "trust": [],
-      "wording": "",
-      "guide": "",
-      "code": [
-        "src/app/show-me-once.tsx",
-        "src/app/show-me-state.ts",
-        "src/app/show-me-words.ts",
-        "archie-mobile/src/show-me-words.ts"
+      "hold": "The entry says nothing may be said until a person has shown it a real task, and its proposed wording is Jett's to approve.",
+      "unwatched": true,
+      "trust": [
+        "🚧 Show your agent a website task once, and next time it does the task the way you showed it: BUILT 2026-10-20 (Archie `553cb455`, archie-mobile `92bed95`), RELEASED in 0.3.12 on a Mac, October 26, 2026, with Windows still on 0.3.11, the Archie Mobile half on iPhone in 1.5 (not on Android yet), and no person has used it yet"
       ],
-      "near": "Websites: the agent using a site itself, when there is no connector"
+      "wording": "Show your agent a website task once. With Computer control switched on for an agent, press Show me once beside a website, do the task in the window that opens the way you always do, and press Done. You can talk while you do it, to explain the parts that change. Archie writes the steps down for you to read, change, or throw away. It keeps the names of what you pressed and of the boxes you typed in, never what you typed, and it leaves password and card boxes out completely. Next time, ask for it and your agent does the task the way you showed it, and it still asks you before it presses anything that sends, pays, or submits. Archie Mobile lists the tasks you showed, and can start one or remove one.",
+      "guide": "websites"
     },
     {
       "id": "where-your-conversations-go",
